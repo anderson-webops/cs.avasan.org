@@ -123,7 +123,7 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "Standard Algorithms and Relation-Style Views",
 					content:
-						"Introduce standard algorithms as reusable operations that often communicate intent better than another hand-written loop. Cover: `find`, `count`, `sort`, `transform`, custom predicates, and when explicit loops are still clearer. Then adapt the CS236 relation idea into a practical container exercise: model rows as records and implement small `select`, `project`, `rename`, and join-style views with `vector`, `set`, and `map`."
+						"Standard algorithms are reusable operations that often communicate intent better than another hand-written loop. Cover: `find`, `count`, `sort`, `transform`, custom predicates, and when explicit loops are still clearer. Then adapt the CS236 relation idea into a practical container exercise: model rows as records and implement small `select`, `project`, `rename`, and join-style views with `vector`, `set`, and `map`."
 				},
 				{
 					title: "CPPI3 Project: Inventory Indexer",
@@ -153,7 +153,7 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "RAII and Single-Owner Resource Design",
 					content:
-						"This section covers RAII as the default modern C++ answer to cleanup: resources are acquired by objects and released automatically when those objects leave scope. Cover: destructors, scope exit, standard containers, file streams, and why this is the same lifetime principle students saw in Level 2. Introduce `std::unique_ptr` as the first smart pointer because it models single ownership clearly; practice deliberate moves and avoid treating heap allocation as the default."
+						"This section covers RAII as the default modern C++ answer to cleanup: resources are acquired by objects and released automatically when those objects leave scope. Cover: destructors, scope exit, standard containers, file streams, and why this is the same lifetime principle students saw in Level 2. `std::unique_ptr` is the first smart pointer because it models single ownership clearly; practice deliberate moves and avoid treating heap allocation as the default."
 				},
 				{
 					title: "Validation, Exceptions, and Resource Boundaries",
@@ -193,7 +193,7 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "Templates and Diagnostic Reading",
 					content:
-						"Introduce templates as a way to write type-independent code after students have used the standard library. Cover: small function templates, tiny class-template wrappers, comparison helpers, constraints State in plain language, and how to read template compiler errors by finding the first useful diagnostic instead of reacting to the full wall of output."
+						"Templates are a way to write type-independent code after the standard library is familiar. Cover: small function templates, tiny class-template wrappers, comparison helpers, constraints stated in plain language, and how to read template compiler errors by finding the first useful diagnostic instead of reacting to the full wall of output."
 				},
 				{
 					title: "CPPI5 Project: Score or Fraction Toolkit",
@@ -223,7 +223,7 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "Polymorphism, Composition, and Runtime Dispatch",
 					content:
-						"Introduce inheritance as a tool for shared interfaces and substitutable roles, not as the default way to reuse code. Cover: composition versus inheritance, virtual functions, runtime dispatch through a small collection of objects with a common interface, and how this differs from a simple `enum class` state machine. Connect the discussion directly to future design-pattern work, especially polymorphic state objects."
+						"Inheritance is a tool for shared interfaces and substitutable roles, not the default way to reuse code. Cover: composition versus inheritance, virtual functions, runtime dispatch through a small collection of objects with a common interface, and how this differs from a simple `enum class` state machine. Connect the comparison directly to future design-pattern work, especially polymorphic state objects."
 				},
 				{
 					title: "Advanced Pathways and Program Framing",
@@ -233,7 +233,7 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "CPPI6 Capstone: Saveable Command-Driven Simulation",
 					content:
-						"Build a small simulation, game, or interpreter-style command engine with saved data, explicit states, STL containers, one recursive or algorithmic subsystem, and a narrow polymorphic interface. The capstone should prove the work can organize a medium-size C++ program without jumping into a full application framework.",
+						"Build a small simulation, game, or interpreter-style command engine with saved data, explicit states, STL containers, one recursive or algorithmic subsystem, and a narrow polymorphic interface. The capstone demonstrates medium-size C++ program organization without jumping into a full application framework.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI6-Saveable-Command-Simulation/starter",
 					solutionLink:

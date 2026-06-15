@@ -46,7 +46,7 @@ export const elementaryScienceCourse: RawCourse = {
 				{
 					title: "What Makes Something Living?",
 					content:
-						"Introduce living things through needs, growth, response, reproduction, and cells at an elementary level. Compare clear examples and edge cases such as seeds, fire, robots, and viruses without requiring advanced biology vocabulary."
+						"Living things can be recognized through needs, growth, response, reproduction, and cells at an elementary level. Clear examples and edge cases such as seeds, fire, robots, and viruses help separate everyday guesses from evidence-based classification without requiring advanced biology vocabulary."
 				},
 				{
 					title: "Plants, Animals, and Survival Needs",
@@ -83,7 +83,7 @@ export const elementaryScienceCourse: RawCourse = {
 				{
 					title: "Habitats and Ecosystem Parts",
 					content:
-						"Introduce habitats as places that provide what organisms need. Separate living parts, such as plants and animals, from nonliving parts, such as sunlight, water, air, rocks, and temperature."
+						"Habitats are places that provide what organisms need. Living parts, such as plants and animals, can be separated from nonliving parts, such as sunlight, water, air, rocks, and temperature."
 				},
 				{
 					title: "Producers, Consumers, and Decomposers",
@@ -125,7 +125,7 @@ export const elementaryScienceCourse: RawCourse = {
 				{
 					title: "The Water Cycle",
 					content:
-						"This section covers evaporation, condensation, precipitation, runoff, and collection using diagrams and animation. Emphasize that water changes location and state, but the same water is recycled through the system."
+						"This section covers evaporation, condensation, precipitation, runoff, and collection using diagrams and animation. Water changes location and state, but the same water is recycled through the system."
 				},
 				{
 					title: "Guided Practice: Reading Weather Data",
@@ -157,12 +157,12 @@ export const elementaryScienceCourse: RawCourse = {
 				{
 					title: "Solids, Liquids, and Gases",
 					content:
-						"Introduce states of matter through shape, volume, and particle spacing using diagrams and simulations. Compare examples and explain why some materials are easy to classify while others are more complicated."
+						"States of matter can be described through shape, volume, and particle spacing using diagrams and simulations. Comparing examples shows why some materials are easy to classify while others are more complicated."
 				},
 				{
 					title: "Properties of Materials",
 					content:
-						"Discuss color, texture, hardness, flexibility, transparency, absorbency, magnetism, and whether a material floats or sinks. Use images and provided data instead of requiring physical supplies."
+						"Material properties include color, texture, hardness, flexibility, transparency, absorbency, magnetism, and whether a material floats or sinks. Images and provided data can replace physical supplies while still supporting evidence-based choices."
 				},
 				{
 					title: "Guided Practice: Choosing Materials for a Purpose",
@@ -194,7 +194,7 @@ export const elementaryScienceCourse: RawCourse = {
 				{
 					title: "Pushes, Pulls, Speed, and Direction",
 					content:
-						"Introduce force as a push or pull that can change motion. Use animations, short videos, and simple drawings to discuss starting, stopping, speeding up, slowing down, and changing direction."
+						"A force is a push or pull that can change motion. Animations, short videos, and simple drawings can show starting, stopping, speeding up, slowing down, and changing direction."
 				},
 				{
 					title: "Gravity, Friction, and Balanced Forces",
@@ -209,7 +209,7 @@ export const elementaryScienceCourse: RawCourse = {
 				{
 					title: "Simple Machines as Force Helpers",
 					content:
-						"Introduce levers, pulleys, wheels and axles, inclined planes, wedges, and screws as tools that make work easier by changing force or distance. Use pictures and virtual examples."
+						"Levers, pulleys, wheels and axles, inclined planes, wedges, and screws are tools that make work easier by changing force or distance. Pictures and virtual examples keep the focus on how the machine changes the task."
 				}
 			],
 			supplementalProjects: [
@@ -231,12 +231,12 @@ export const elementaryScienceCourse: RawCourse = {
 				{
 					title: "Light Travels and Interacts",
 					content:
-						"Introduce light as something that travels from a source and can be reflected, absorbed, or transmitted. Use diagrams, images, and virtual ray models instead of requiring flashlights or physical materials."
+						"Light travels from a source and can be reflected, absorbed, or transmitted. Diagrams, images, and virtual ray models can show these interactions without requiring flashlights or physical materials."
 				},
 				{
 					title: "Shadows, Reflection, and Color",
 					content:
-						"Discuss how shadows form when light is blocked and how reflection lets us see objects. Connect color to the light that reaches our eyes at an age-appropriate level."
+						"Shadows form when light is blocked, and reflection helps explain how objects become visible. Color can be connected to the light that reaches our eyes at an age-appropriate level."
 				},
 				{
 					title: "Sound as Vibration",
@@ -268,12 +268,12 @@ export const elementaryScienceCourse: RawCourse = {
 				{
 					title: "Day, Night, and Sky Patterns",
 					content:
-						"Introduce the Sun, Moon, stars, day and night, and repeating sky patterns. Use animations and diagrams to show that many sky changes are patterns caused by motion."
+						"The Sun, Moon, stars, day and night, and repeating sky patterns can be studied as observable patterns. Animations and diagrams show that many sky changes are patterns caused by motion."
 				},
 				{
 					title: "Planets and the Solar System",
 					content:
-						"Compare planets by size, distance, surface, atmosphere, and temperature at an elementary level. Emphasize that models are scaled-down tools and that no single classroom diagram shows all distances accurately."
+						"Planets can be compared by size, distance, surface, atmosphere, and temperature at an elementary level. Models are scaled-down tools, and no single classroom diagram shows all distances accurately."
 				},
 				{
 					title: "Guided Practice: Model Strengths and Limits",

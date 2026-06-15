@@ -232,7 +232,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Reachability, Controllability, Impact, and Attacker Assumptions",
 					content:
-						"This section covers exploitability triage as a disciplined decision process. Ask whether untrusted input reaches the bug, whether the attacker can shape the failing bytes or state, what the likely impact is, and what assumptions about the environment are required before a maintainers’ note should call the issue security-relevant."
+						"This section covers exploitability triage as a disciplined decision process. The triage decision checks whether untrusted input reaches the bug, whether the attacker can shape the failing bytes or state, what the likely impact is, and what assumptions about the environment are required before a maintainers' note should call the issue security-relevant."
 				},
 				{
 					title: "Crash Taxonomy for Defensive Analysis",
@@ -294,7 +294,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Saved Return Addresses, Local Buffers, and Frame Structure",
 					content:
-						"Review how local buffers and nearby frame data relate conceptually so students can reason about why unchecked writes into stack-like storage are security-relevant. Keep the work inside intentionally vulnerable local toy binaries and models so the course stays focused on understanding and hardening rather than on weaponization."
+						"Review how local buffers and nearby frame data relate conceptually so students can reason about why unchecked writes into stack-like storage are security-relevant. Keep the work inside intentionally vulnerable local toy binaries and models so the focus stays on understanding and hardening rather than on weaponization."
 				},
 				{
 					title: "Why Stack Corruption Can Become Control-Flow Risk",
@@ -366,7 +366,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Allocator Behavior at a High Level",
 					content:
-						"Introduce allocator reuse and heap metadata concepts only at the level needed for defenders to reason about risk. Leave with a mental model that reused slots and freed objects can change who a stale reference points to, without drifting into real-world exploitation kits or public-target techniques."
+						"Allocator reuse and heap metadata concepts matter at the level needed for defenders to reason about risk. The mental model is that reused slots and freed objects can change who a stale reference points to, without drifting into real-world exploitation kits or public-target techniques."
 				},
 				{
 					title: "Project: LLS15 Heap Lifetime Audit",
@@ -423,7 +423,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Why Leaked Addresses or Object Contents Matter",
 					content:
-						"Explain that leaked addresses, stale session data, or internal debug strings increase attacker knowledge and reduce uncertainty. The course should keep this defensive and local, focusing on why maintainers should prioritize disclosure and harden the boundary rather than on how to weaponize the information."
+						"Leaked addresses, stale session data, or internal debug strings increase attacker knowledge and reduce uncertainty. The course keeps this defensive and local, focusing on why maintainers should prioritize disclosure and harden the boundary rather than on how to weaponize the information."
 				},
 				{
 					title: "Harden Logs, Debug Output, and Serialization Boundaries",
@@ -491,7 +491,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "NX, ASLR, PIE, RELRO, Stack Canaries, and Hardened Allocators",
 					content:
-						"Introduce common mitigations as factors that change exploitability analysis, not as excuses to ignore the underlying bug. Key idea: What NX, ASLR, PIE, RELRO, stack canaries, and hardened allocators are trying to prevent or make harder, and how those mitigations change the confidence and wording of a triage note."
+						"Common mitigations are factors that change exploitability analysis, not excuses to ignore the underlying bug. Key idea: What NX, ASLR, PIE, RELRO, stack canaries, and hardened allocators are trying to prevent or make harder, and how those mitigations change the confidence and wording of a triage note."
 				},
 				{
 					title: "Mitigations Shrink the Attack Surface but Do Not Replace Fixes",
@@ -553,7 +553,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "High-Level Introduction to Return-Oriented Thinking",
 					content:
-						"Introduce return-oriented thinking only at a high defensive level: if corruption reaches control-relevant state, modern exploitation often chains existing code rather than injecting new code directly. The course should use this to motivate why control-flow integrity, stack protection, and safer programming models matter, not to teach offensive construction techniques."
+						"Return-oriented thinking belongs only at a high defensive level: if corruption reaches control-relevant state, modern exploitation often chains existing code rather than injecting new code directly. The concept motivates why control-flow integrity, stack protection, and safer programming models matter; it does not require offensive construction techniques."
 				},
 				{
 					title: "Why Control-Flow Integrity Matters",
@@ -693,7 +693,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Review a Larger Intentionally Flawed Toy Codebase",
 					content:
-						"The capstone should combine multiple bug classes in one local-only toy system so the work moves beyond one-bug-one-technique thinking. A strong response identifies the issues, explains the trust boundaries, and ranks the findings based on impact and attacker assumptions rather than on how dramatic the output looks."
+						"The capstone combines multiple bug classes in one local-only toy system so the work moves beyond one-bug-one-technique thinking. A strong response identifies the issues, explains the trust boundaries, and ranks the findings based on impact and attacker assumptions rather than on how dramatic the output looks."
 				},
 				{
 					title: "Rank Findings, Patch, and Verify",

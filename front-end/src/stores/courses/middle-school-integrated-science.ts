@@ -46,7 +46,7 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 				{
 					title: "Cells as the Basic Unit of Life",
 					content:
-						"Introduce cells, cell theory, and the idea that structure supports function. Use microscope images or virtual slides to compare plant, animal, and bacterial cells at an appropriate level."
+						"Cells are the basic unit of life, and cell theory connects living things to repeated evidence from observation. Microscope images or virtual slides support comparisons among plant, animal, and bacterial cells while keeping structure and function connected."
 				},
 				{
 					title: "Organelles and Cell Jobs",
@@ -83,12 +83,12 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 				{
 					title: "DNA, Genes, and Inherited Traits",
 					content:
-						"Introduce DNA and genes as instructions that influence traits. Distinguish inherited traits from learned behaviors and environmental effects without overcomplicating molecular biology."
+						"DNA and genes act as instructions that influence traits. Inherited traits should be distinguished from learned behaviors and environmental effects without overcomplicating molecular biology."
 				},
 				{
 					title: "Variation and Natural Selection",
 					content:
-						"Explain that individuals in a population vary and that some variations can affect survival and reproduction. Use simulation or card-based examples on screen rather than physical manipulatives."
+						"Individuals in a population vary, and some variations can affect survival and reproduction. Simulations or screen-based card examples can model the pattern without physical manipulatives."
 				},
 				{
 					title: "Adaptations Are Population-Level Changes",
@@ -120,12 +120,12 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 				{
 					title: "Energy Flow and Matter Cycling",
 					content:
-						"Review producers, consumers, decomposers, food webs, and energy pyramids. Emphasize that energy flows through ecosystems while matter cycles through organisms and the environment."
+						"Producers, consumers, decomposers, food webs, and energy pyramids describe how ecosystems move resources. Energy flows through ecosystems while matter cycles through organisms and the environment."
 				},
 				{
 					title: "Population Dynamics",
 					content:
-						"Discuss carrying capacity, limiting factors, competition, predation, disease, and resource availability. Use graphs and scenarios to predict population changes."
+						"Carrying capacity, limiting factors, competition, predation, disease, and resource availability all affect population size. Graphs and scenarios make it possible to predict population changes from evidence."
 				},
 				{
 					title: "Biodiversity and Ecosystem Stability",
@@ -157,7 +157,7 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 				{
 					title: "Earth as Interacting Systems",
 					content:
-						"Introduce the geosphere, hydrosphere, atmosphere, and biosphere. Use examples showing that one event, such as a wildfire, storm, or drought, affects several systems at once."
+						"The geosphere, hydrosphere, atmosphere, and biosphere are interacting Earth systems. One event, such as a wildfire, storm, or drought, can affect several systems at once."
 				},
 				{
 					title: "Weather, Air Masses, and Forecasting",
@@ -194,12 +194,12 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 				{
 					title: "Atoms, Elements, Molecules, and Compounds",
 					content:
-						"Introduce particle-level explanations for matter. Distinguish atoms, elements, molecules, compounds, mixtures, and pure substances using diagrams and formulas."
+						"Particle-level explanations connect visible matter to atoms, elements, molecules, compounds, mixtures, and pure substances. Diagrams and formulas help distinguish these categories."
 				},
 				{
 					title: "Conservation of Matter",
 					content:
-						"Explain that atoms are rearranged during physical and chemical changes, but matter is conserved in closed systems. Use balanced visual models rather than requiring physical reactions."
+						"Atoms are rearranged during physical and chemical changes, but matter is conserved in closed systems. Balanced visual models can show conservation without requiring physical reactions."
 				},
 				{
 					title: "Physical vs. Chemical Change",
@@ -231,7 +231,7 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 				{
 					title: "Forms and Transfers of Energy",
 					content:
-						"Introduce kinetic, potential, thermal, chemical, electrical, light, and sound energy. Focus on energy transfer and transformation in systems rather than memorizing isolated forms."
+						"Kinetic, potential, thermal, chemical, electrical, light, and sound energy are useful categories for tracking systems. The focus is energy transfer and transformation rather than memorizing isolated forms."
 				},
 				{
 					title: "Heat Transfer",
@@ -241,7 +241,7 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 				{
 					title: "Energy Efficiency and Constraints",
 					content:
-						"Discuss useful energy, wasted energy, efficiency, cost, reliability, safety, and environmental impact. Connect the topic to engineering decisions and tradeoffs."
+						"Useful energy, wasted energy, efficiency, cost, reliability, safety, and environmental impact all shape engineering decisions. The topic should be treated as a tradeoff analysis, not a single right answer."
 				},
 				{
 					title: "Guided Practice: Energy Flow Diagrams",
@@ -273,12 +273,12 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 				{
 					title: "Newton's Laws in Plain Language",
 					content:
-						"Introduce inertia, force causing acceleration, and action-reaction pairs. Use diagrams and scenarios rather than formal derivations."
+						"Inertia, force causing acceleration, and action-reaction pairs provide a plain-language entry point to Newton's laws. Diagrams and scenarios are more useful here than formal derivations."
 				},
 				{
 					title: "Gravity, Friction, and Normal Force",
 					content:
-						"Discuss common forces and how free-body diagrams simplify motion problems. Practice drawing force arrows and predicting whether motion will change."
+						"Common forces and free-body diagrams simplify motion problems by showing which forces act on one object. Practice should include force arrows and predictions about whether motion will change."
 				},
 				{
 					title: "Data Practice: Motion Graph Interpretation",
@@ -305,22 +305,22 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 				{
 					title: "Wave Properties",
 					content:
-						"Introduce amplitude, wavelength, frequency, and wave speed. Use simulations and diagrams to compare water waves, sound waves, light waves, and seismic waves."
+						"Amplitude, wavelength, frequency, and wave speed describe wave behavior. Simulations and diagrams can compare water waves, sound waves, light waves, and seismic waves."
 				},
 				{
 					title: "Light and Sound Interactions",
 					content:
-						"Cover reflection, absorption, transmission, refraction, echoes, pitch, and loudness. Emphasize how waves carry energy and information."
+						"Reflection, absorption, transmission, refraction, echoes, pitch, and loudness show how waves interact with matter. Waves carry energy and information, so the same vocabulary supports both science and communication examples."
 				},
 				{
 					title: "Electricity and Circuits",
 					content:
-						"Introduce charge, current, voltage, resistance, conductors, insulators, series circuits, and parallel circuits using virtual circuit builders rather than physical components."
+						"Charge, current, voltage, resistance, conductors, insulators, series circuits, and parallel circuits can be modeled with virtual circuit builders rather than physical components."
 				},
 				{
 					title: "Magnetism and Electromagnetism",
 					content:
-						"Discuss magnetic poles, fields, compasses, motors, generators, and electromagnets at a conceptual level. Use visual field models and simple cause-and-effect reasoning."
+						"Magnetic poles, fields, compasses, motors, generators, and electromagnets can be handled at a conceptual level. Visual field models and simple cause-and-effect reasoning are enough for this stage."
 				}
 			],
 			supplementalProjects: [
@@ -342,17 +342,17 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 				{
 					title: "Earth, Moon, Sun, and Gravity",
 					content:
-						"Explain day and night, seasons, Moon phases, eclipses, tides, and orbital motion using models and animations. Emphasize model limitations and common misconceptions."
+						"Day and night, seasons, Moon phases, eclipses, tides, and orbital motion can be explained with models and animations. Model limitations and common misconceptions should stay visible."
 				},
 				{
 					title: "Solar System Scale and Planetary Conditions",
 					content:
-						"Compare planets, moons, asteroids, and comets by distance, size, gravity, atmosphere, temperature, and surface conditions. Discuss why scale models are hard but useful."
+						"Planets, moons, asteroids, and comets can be compared by distance, size, gravity, atmosphere, temperature, and surface conditions. Scale models are difficult because space is enormous, but they are still useful for reasoning."
 				},
 				{
 					title: "Stars, Galaxies, and Evidence From Light",
 					content:
-						"Introduce stars, galaxies, spectra, and the idea that light carries information about distant objects. Keep the focus on evidence and scientific inference from observations."
+						"Stars, galaxies, spectra, and the idea that light carries information about distant objects connect astronomy to evidence. The focus should remain on scientific inference from observations."
 				},
 				{
 					title: "Capstone Studio: Research, Model, Explain, Revise",

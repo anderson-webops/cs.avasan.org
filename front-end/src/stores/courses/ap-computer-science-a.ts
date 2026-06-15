@@ -70,7 +70,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Course Positioning",
 					content:
-						"AP Computer Science A is a Java course built around problem solving, object-oriented design, arrays, ArrayLists, inheritance, recursion, and exam-style tracing. The course should be treated as both a real programming class and a specific AP exam prep track."
+						"AP Computer Science A is a Java course built around problem solving, object-oriented design, arrays, ArrayLists, inheritance, recursion, and exam-style tracing. It functions as both a real programming class and a specific AP exam prep track."
 				},
 				{
 					title: "Track Guide",

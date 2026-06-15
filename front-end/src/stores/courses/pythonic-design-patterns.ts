@@ -10,7 +10,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Editor, Interpreter, and Project Baseline",
 					content:
-						"Standardize on `Python 3` in either `PyCharm` or `VS Code`, verify the interpreter path, and make multi-file project navigation part of the first lesson. The course should feel like architecture work from day one rather than a sequence of isolated scripts."
+						"Standardize on `Python 3` in either `PyCharm` or `VS Code`, verify the interpreter path, and make multi-file project navigation part of the first lesson. The work should feel architectural from day one rather than like a sequence of isolated scripts."
 				},
 				{
 					title: "Packages, Virtual Environments, and Lightweight Testing",
@@ -25,7 +25,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Pattern Names as Compression, Not Decoration",
 					content:
-						"Use Refactoring.Guru's core framing that patterns are reusable solution shapes, but keep asking whether Python already offers a lighter feature such as a function, decorator, context object, or module boundary. The course should begin by normalizing restraint."
+						"Refactoring.Guru's core framing treats patterns as reusable solution shapes, but Python often offers a lighter feature such as a function, decorator, context object, or module boundary. Restraint is part of the design vocabulary from the beginning."
 				},
 				{
 					title: "PDP0 Setup and Tooling: Core Project",
@@ -92,7 +92,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "When the Textbook Form Still Helps",
 					content:
-						"Do not overcorrect into 'never use patterns in Python'. The course should make clear that explicit patterns still help when state, extension pressure, third-party integration, or team readability justify them."
+						"Do not overcorrect into 'never use patterns in Python'. Explicit patterns still help when state, extension pressure, third-party integration, or team readability justify them."
 				},
 				{
 					title: "PDP1 Why Python Changes the Design-Patterns Conversation: Core Project",
@@ -151,7 +151,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Composition over Inheritance in a Python Setting",
 					content:
-						"Use small Python examples to show why composition, delegation, and explicit collaborators scale better than eager subclass trees. The lesson should make students suspicious of inheritance used only as a habit."
+						"Small Python examples show why composition, delegation, and explicit collaborators scale better than eager subclass trees. Inheritance used only as a habit should feel suspicious."
 				},
 				{
 					title: "Protocols, ABCs, and Informal Interfaces",
@@ -227,7 +227,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Callable Objects When State Matters",
 					content:
-						"Introduce callable objects only when a strategy needs configuration, history, or bundled helper methods. This keeps the class-based form tied to a real reason instead of turning it into the default."
+						"Callable objects fit best when a strategy needs configuration, history, or bundled helper methods. This keeps the class-based form tied to a real reason instead of turning it into the default."
 				},
 				{
 					title: "Replacing Long Conditionals with Selected Behavior",
@@ -302,7 +302,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Builder for Configuration-Heavy Objects",
 					content:
-						"Introduce Builder only when object setup becomes noisy, order-sensitive, or full of optional configuration. The key question should be readability and correctness, not pattern completionism."
+						"Builder fits best when object setup becomes noisy, order-sensitive, or full of optional configuration. The key question should be readability and correctness, not pattern completionism."
 				},
 				{
 					title: "Families, Variants, and Environment Selection",
@@ -687,7 +687,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Readability and Onboarding Cost",
 					content:
-						"Explain that Template Method can obscure behavior for newer readers when hooks are scattered across subclasses. Pythonic design should make the final control flow easier to follow, not harder."
+						"Template Method can obscure behavior for newer readers when hooks are scattered across subclasses. Pythonic design should make the final control flow easier to follow, not harder."
 				},
 				{
 					title: "PDP9 Template Method versus Higher-Order Functions: Core Project",
@@ -750,7 +750,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Module-Level Singletons and Why They Feel Convenient",
 					content:
-						"This section covers module state, cached objects, and one-per-process resources as the Python forms students will actually encounter. The lesson should start from real convenience before it moves into the costs."
+						"This section covers module state, cached objects, and one-per-process resources as the Python forms students will actually encounter. The lesson starts from real convenience before it moves into the costs."
 				},
 				{
 					title: "Hidden Globals, Implicit Coupling, and Test Pain",
@@ -834,12 +834,12 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Data, Behavior, and Overgrown Objects",
 					content:
-						"Ask whether a class is carrying real behavior, merely holding data, or doing too many unrelated jobs. Python Learn to move behavior closer to the data without treating every record as an object-heavy design exercise."
+						"Class design starts by separating real behavior, plain data storage, and overloaded responsibilities. Python code can move behavior closer to the data without treating every record as an object-heavy design exercise."
 				},
 				{
 					title: "Tests and Characterization before Structural Change",
 					content:
-						"Introduce lightweight characterization tests or scripted assertions before bigger changes land. Even in Python, safe refactoring depends on evidence that the external behavior still holds."
+						"Lightweight characterization tests or scripted assertions should exist before bigger changes land. Even in Python, safe refactoring depends on evidence that the external behavior still holds."
 				},
 				{
 					title: "PDP11 Refactoring Python Code Smells: Core Project",
@@ -899,7 +899,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Choose a Messy but Salvageable App",
 					content:
-						"Use a medium-sized Python project with real duplication, mixed responsibilities, and awkward boundaries, but keep it small enough that students can still explain the whole system. The capstone should feel like rescue work, not like greenfield architecture fiction."
+						"Use a medium-sized Python project with real duplication, mixed responsibilities, and awkward boundaries, but keep it small enough that students can still explain the whole system. The capstone feels like rescue work, not greenfield architecture fiction."
 				},
 				{
 					title: "Refactor in Small, Defensible Steps",

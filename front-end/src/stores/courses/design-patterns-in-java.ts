@@ -21,7 +21,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Code Smell Survey Before Pattern Selection",
 					content:
-						"Introduce the smell categories that drive this course: bloaters, object-orientation abusers, change preventers, dispensables, and couplers. Use beginner-friendly examples such as long methods, switch statements, duplicate code, data clumps, feature envy, and shotgun surgery to show why architecture pain appears."
+						"The smell categories that drive this course are bloaters, object-orientation abusers, change preventers, dispensables, and couplers. Beginner-friendly examples such as long methods, switch statements, duplicate code, data clumps, feature envy, and shotgun surgery show why architecture pain appears."
 				},
 				{
 					title: "Worked Example Set: Why Inheritance Ages Badly",
@@ -119,7 +119,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Design Review: Favoring Explicit Package Structure",
 					content:
-						"Ask whether the package layout reveals the architecture or merely mirrors folders. Good Java design should make stable boundaries obvious in the codebase."
+						"The package layout should reveal the architecture rather than merely mirror folders. Good Java design makes stable boundaries obvious in the codebase."
 				},
 				{
 					title: "Reflection Question: What Makes a Good Seam in Java?",
@@ -284,7 +284,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Facade",
 					content:
-						"Use Facade to simplify access to a subsystem that currently exposes too much internal structure. Show the difference between a boundary-oriented facade and a bloated god object."
+						"Facade simplifies access to a subsystem that currently exposes too much internal structure. The key distinction is a boundary-oriented facade versus a bloated god object."
 				},
 				{
 					title: "Worked Example Set: Clone, Wrap, or Simplify?",
@@ -622,7 +622,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "MVC or MVVM at a Conceptual Level",
 					content:
-						"Introduce MVC or MVVM as responsibility-separation patterns that appear above the class level. The goal is conceptual clarity, not framework-specific detail."
+						"MVC and MVVM are responsibility-separation patterns that appear above the class level. The goal is conceptual clarity, not framework-specific detail."
 				},
 				{
 					title: "Repository and Service Layering",
@@ -705,7 +705,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "When Not to Use the Pattern",
 					content:
-						"Every pattern in the course should now get an explicit restraint pass. Delete abstractions, collapse hierarchies, or keep direct code when the collaboration pressure is low."
+						"Every pattern now gets an explicit restraint pass. Delete abstractions, collapse hierarchies, or keep direct code when the collaboration pressure is low."
 				},
 				{
 					title: "Design Review Exercise: Name the Tradeoff, Not Just the Pattern",
@@ -788,7 +788,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Capstone Launch: Start from a Cluttered Java Application",
 					content:
-						"Begin with a medium-sized Java program that has real design pain, such as duplicated creation logic, long conditionals, hidden dependencies, or weak package boundaries. The capstone should feel like a rescue mission, not a greenfield architecture fantasy."
+						"Begin with a medium-sized Java program that has real design pain, such as duplicated creation logic, long conditionals, hidden dependencies, or weak package boundaries. The capstone feels like a rescue mission, not a greenfield architecture fantasy."
 				},
 				{
 					title: "Problem Framing: Identify Three to Five Real Design Pressures",

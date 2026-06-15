@@ -26,7 +26,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Core Outcomes and Daily Working Habits",
 					content:
-						"Set the expectation that students will read binary and hexadecimal representations, use bitwise operators confidently, reason about layout and lifetime, and build small systems-style tools in C. Every unit should pair the abstract idea with a printed byte or memory view plus a short written explanation of why the code works."
+						"By the end of the course, learners can read binary and hexadecimal representations, use bitwise operators confidently, reason about layout and lifetime, and build small systems-style tools in C. Every unit pairs the abstract idea with a printed byte or memory view plus a short written explanation of why the code works."
 				},
 				{
 					title: "CSE0 Setup and Tooling: Core Project",
@@ -309,12 +309,12 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Stack vs Heap vs Static Storage",
 					content:
-						"Introduce the main storage regions as different lifetime stories: static data lasts for the process, stack data follows scope, and heap data follows explicit allocation and free rules. This framing pays off later when bugs are really lifetime mistakes with visible memory consequences."
+						"The main storage regions have different lifetime stories: static data lasts for the process, stack data follows scope, and heap data follows explicit allocation and free rules. This framing pays off later when bugs are really lifetime mistakes with visible memory consequences."
 				},
 				{
 					title: "Alignment, Padding, Arrays, and Struct Layout",
 					content:
-						"This section covers struct layout with `sizeof`, `offsetof`, and printed addresses so students can see where padding appears and why alignment exists. The course should avoid treating struct size as mysterious compiler behavior when it can be measured directly."
+						"This section covers struct layout with `sizeof`, `offsetof`, and printed addresses so padding and alignment can be measured directly rather than treated as mysterious compiler behavior."
 				},
 				{
 					title: "Project: Memory Visualizer for Arrays and Structs",
@@ -436,7 +436,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "FILE Pointers, Buffered I O, and Binary vs Text Modes",
 					content:
-						"Introduce `FILE *` as the basic stream handle for structured reading and writing. Key idea: When text parsing is appropriate, when binary formats are more stable, and why checking return values matters more than assuming the file behaved as expected."
+						"`FILE *` is the basic stream handle for structured reading and writing. Key idea: When text parsing is appropriate, when binary formats are more stable, and why checking return values matters more than assuming the file behaved as expected."
 				},
 				{
 					title: "Reading Structured Data One Field at a Time",
@@ -657,7 +657,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Hash Tables at a Beginner-Friendly Level",
 					content:
-						"Introduce hash tables conceptually as key-to-slot mapping with collision handling, without turning the lesson into a full algorithm course. The goal is to show why systems tools often need fast lookup and what tradeoffs that introduces in C."
+						"Hash tables can be viewed conceptually as key-to-slot mapping with collision handling, without turning the lesson into a full algorithm course. The goal is to show why systems tools often need fast lookup and what tradeoffs that introduces in C."
 				},
 				{
 					title: "Data Structure Invariants Are Part of the Design",
@@ -733,7 +733,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Numeric Error and Approximation",
 					content:
-						"Introduce the idea that some transforms are exact and some are approximations, especially when integer division or fixed-point rounding is involved. The important skill is to state the approximation clearly and bound the expected error."
+						"Some transforms are exact and some are approximations, especially when integer division or fixed-point rounding is involved. The important skill is to state the approximation clearly and bound the expected error."
 				},
 				{
 					title: "Unit 10: Engineering Math in Code: Core Project",
@@ -798,12 +798,12 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Debuggers, Sanitizers, and Evidence-Driven Diagnosis",
 					content:
-						"Use `lldb` or `gdb` plus sanitizers to show that low-level bugs become much easier to understand when the tooling points at the exact failing access or bad lifetime event. The course should reward observation and reproduction instead of guess-and-retry debugging."
+						"`lldb` or `gdb` plus sanitizers make low-level bugs easier to understand by pointing at the exact failing access or bad lifetime event. Observation and reproduction should replace guess-and-retry debugging."
 				},
 				{
 					title: "Binary Inspection with objdump and nm",
 					content:
-						"Introduce `objdump` or `llvm-objdump` and `nm` as ways to inspect the built artifact itself. Key idea: Systems engineering includes observing the binary, not only the source, especially when they want to confirm symbols, sections, or compiled layout choices."
+						"`objdump` or `llvm-objdump` and `nm` inspect the built artifact itself. Key idea: Systems engineering includes observing the binary, not only the source, especially when symbols, sections, or compiled layout choices need confirmation."
 				},
 				{
 					title: "Tooling Pass on a Real Utility",
@@ -878,7 +878,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Write Output That Another Tool Could Trust",
 					content:
-						"Produce normalized output with stable formatting, explicit derived fields, and clear handling of invalid input. The capstone should feel like a utility another engineer could actually use or extend rather than like a classroom printout."
+						"Produce normalized output with stable formatting, explicit derived fields, and clear handling of invalid input. The capstone feels like a utility another engineer could actually use or extend rather than like a classroom printout."
 				},
 				{
 					title: "Project: Capstone Telemetry Transform CLI",

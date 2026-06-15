@@ -290,7 +290,7 @@ export const pythonLevel2Course: RawCourse = {
 				{
 					title: "PS4 Supplemental Project 1: Carnival Strength Tester",
 					content:
-						"Ask how high a puck flew and print a prize tier based on the measured height.",
+						"Read how high a puck flew and print a prize tier based on the measured height.",
 					solutionLink:
 						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-Carnival-Strength-Tester",
 					mediaLink:

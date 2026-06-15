@@ -231,7 +231,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Materialize and D3 Interaction",
 					content:
-						'Introduce Materialize components; use `d3.select().on("click", func)` for a simple interaction.',
+						'Materialize components provide ready-made UI patterns; use `d3.select().on("click", func)` for a simple interaction.',
 					projectLink:
 						"https://codepen.io/junilearning/pen/81d62c84dfa32d88f17d0e012229bf0c",
 					solutionLink:
@@ -691,7 +691,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Helper Functions",
 					content:
-						"Emphasize breaking repeated logic into small reusable, well-named functions."
+						"Repeated logic belongs in small reusable, well-named functions."
 				},
 				{
 					title: "JSM7 Project 1: Refactory",

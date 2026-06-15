@@ -526,7 +526,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		sequencingNotes: [
 			"Start with code smells and refactoring before naming too many patterns.",
-			"Introduce patterns through small before/after examples before moving into larger projects.",
+			"Patterns begin with small before/after examples before moving into larger projects.",
 			"Keep Pythonic patterns idiomatic instead of forcing Java-style architecture into Python."
 		],
 		projectExpectations: [
@@ -626,7 +626,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		sequencingNotes: [
 			"Start with app structure and Xcode navigation before deeper Swift syntax.",
-			"Introduce optionals, structs/classes, protocols, persistence, async networking, and accessibility only as the app needs them.",
+			"Optionals, structs/classes, protocols, persistence, async networking, and accessibility appear only as the app needs them.",
 			"Keep product thinking tied to navigation and data decisions."
 		],
 		projectExpectations: [

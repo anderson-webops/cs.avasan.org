@@ -174,7 +174,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Header and Source Organization",
 					content:
-						"Split declarations, implementations, and stable boundaries cleanly. This course should treat file organization, include discipline, and smaller APIs as part of good architecture."
+						"Split declarations, implementations, and stable boundaries cleanly. File organization, include discipline, and smaller APIs are part of good architecture."
 				},
 				{
 					title: "Practical Move Semantics",
@@ -552,7 +552,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "State Objects versus Enum-Driven Branching",
 					content:
-						"Compare explicit State objects with large conditionals driven by enums or flags. The lesson should focus on when the branching pressure is big enough that separate state behavior is clearer and safer."
+						"Compare explicit State objects with large conditionals driven by enums or flags. The key decision is when branching pressure is big enough that separate state behavior is clearer and safer."
 				},
 				{
 					title: "Queues, Modes, and Control Flow",

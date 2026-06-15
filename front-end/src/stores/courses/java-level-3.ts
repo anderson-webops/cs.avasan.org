@@ -1775,7 +1775,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Classify the Extra Java Level 3 Folders",
 					content:
-						"Treat the remaining `Java-Level-3` folders as a mix of starter scaffolds, reference implementations, and optional advanced labs. The public course should surface the useful ones without forcing every starter and check-in into the core path."
+						"The remaining `Java-Level-3` folders are a mix of starter scaffolds, reference implementations, and optional advanced labs. The public course surfaces the useful ones without forcing every starter and check-in into the core path."
 				},
 				{
 					title: "Data-Structures Reinforcement without Clutter",
@@ -1876,7 +1876,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Positioning the Advanced Java Track",
 					content:
-						"Use this track after `C++ Level 3` when the next Java course should have real engineering weight rather than another syntax review. Prerequisite comfort: classes, data structures, recursion, file-backed command programs, parsing, and medium-size program organization. The new Java-specific goals are repeatable builds, packages, testable services, standard-library fluency, safer APIs, and capstone-scale architecture."
+						"Use this track after `C++ Level 3` when the next Java step needs real engineering weight rather than another syntax review. Prerequisite comfort: classes, data structures, recursion, file-backed command programs, parsing, and medium-size program organization. The new Java-specific goals are repeatable builds, packages, testable services, standard-library fluency, safer APIs, and capstone-scale architecture."
 				},
 				{
 					title: "Packages, Builds, and Test Boundaries",
@@ -1924,7 +1924,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Records as Immutable Data Carriers",
 					content:
-						"Introduce Java `record` types for small immutable data carriers. Cover the generated constructor, accessors, `equals`, `hashCode`, and `toString`; compact constructors for validation; records implementing interfaces; and why normal classes are still better for mutable objects, inheritance hierarchies, or behavior-heavy domain models."
+						"Java `record` types are useful for small immutable data carriers. Cover the generated constructor, accessors, `equals`, `hashCode`, and `toString`; compact constructors for validation; records implementing interfaces; and why normal classes are still better for mutable objects, inheritance hierarchies, or behavior-heavy domain models."
 				},
 				{
 					title: "AJ20 Project 1: Generic Repository and Query Filters",
@@ -1962,7 +1962,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Lambdas, Streams, and Readable Transformations",
 					content:
-						"Introduce lambdas and streams as tools for clear transformations over collections. Cover: `map`, `filter`, `sorted`, `collect`, grouping, custom comparators, and when an explicit loop is still better because the stateful logic would make a stream harder to read."
+						"Lambdas and streams are tools for clear transformations over collections. Cover: `map`, `filter`, `sorted`, `collect`, grouping, custom comparators, and when an explicit loop is still better because the stateful logic would make a stream harder to read."
 				},
 				{
 					title: "AJ21 Project 1: Log Analyzer Pipeline",
@@ -1995,7 +1995,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Executors, Tasks, and Shared-State Discipline",
 					content:
-						"Introduce concurrency through bounded task execution rather than raw thread chaos. Cover: `Runnable`, `Callable`, `ExecutorService`, futures, immutable task inputs, synchronized shared state when necessary, and why most bugs come from unclear ownership of mutable data."
+						"Concurrency is introduced through bounded task execution rather than raw thread chaos. Cover: `Runnable`, `Callable`, `ExecutorService`, futures, immutable task inputs, synchronized shared state when necessary, and why most bugs come from unclear ownership of mutable data."
 				},
 				{
 					title: "Capstone Architecture and Java-Specific Readiness",

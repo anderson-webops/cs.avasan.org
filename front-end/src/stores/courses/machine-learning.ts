@@ -27,7 +27,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Model Comparison as the Course Habit",
 					content:
-						"Set the expectation that students will compare at least two approaches on most serious datasets. The course should build the instinct that one model run is only a starting point, not the end of the reasoning."
+						"Most serious datasets should be tested with at least two approaches. One model run is only a starting point, not the end of the reasoning."
 				},
 				{
 					title: "ML0 Setup, Tooling, and Data Workflow: Core Project",

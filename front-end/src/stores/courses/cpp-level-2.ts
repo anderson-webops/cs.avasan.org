@@ -53,7 +53,7 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "Pointer Basics, Aliasing, and Failure Modes",
 					content:
-						"Introduce pointers as variables that store addresses, not regular values. Cover: `&`, `*`, `nullptr`, reading through a pointer, writing through a pointer, pointer aliasing, and how two names can change the same object. Then make failure modes explicit: uninitialized pointers, dangling pointers, null dereferences, stale observations, and why pointer bugs need evidence instead of guessing.",
+						"Pointers are variables that store addresses, not regular values. Cover: `&`, `*`, `nullptr`, reading through a pointer, writing through a pointer, pointer aliasing, and how two names can change the same object. Then make failure modes explicit: uninitialized pointers, dangling pointers, null dereferences, stale observations, and why pointer bugs need evidence instead of guessing.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM1-Pointers"
 				},
@@ -69,7 +69,7 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "CPPM1 Project 2: Pointer Error Examples",
 					content:
-						"Walk through incorrect pointer patterns and explain exactly why they fail. Skill target: Name the bug, not just observe that the program misbehaves.",
+						"Trace incorrect pointer patterns and explain exactly why they fail. Skill target: name the bug, not just observe that the program misbehaves.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM1-Pointer-Error-Examples",
 					solutionLink:

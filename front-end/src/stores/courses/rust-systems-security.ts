@@ -176,7 +176,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Lifetime Reasoning without Mysticism",
 					content:
-						"Introduce lifetime thinking through scope relationships first and explicit annotations second. The goal is practical reasoning about which reference can safely outlive which value."
+						"Lifetime thinking starts with scope relationships first and explicit annotations second. The goal is practical reasoning about which reference can safely outlive which value."
 				},
 				{
 					title: "Why Borrow Checking Matters for Security",
@@ -655,7 +655,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Threads, Channels, and Shared State",
 					content:
-						"Introduce Rust concurrency with the same comparative posture as earlier units. Visible pattern: Where Rust's ownership and trait rules make it harder to create unsafe shared-state patterns."
+						"Rust concurrency uses the same comparative posture as earlier units. Visible pattern: Where Rust's ownership and trait rules make it harder to create unsafe shared-state patterns."
 				},
 				{
 					title: "Data Races vs. Logic Races",
@@ -811,7 +811,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Port or Harden with a Clear Threat Model",
 					content:
-						"Choose a small legacy C or C++-style tool and define what can go wrong: parsing bugs, unchecked buffers, confusing state, weak error handling, or brittle ownership. The capstone should compare the old design with the Rust rewrite or hardening pass explicitly."
+						"Choose a small legacy C or C++-style tool and define what can go wrong: parsing bugs, unchecked buffers, confusing state, weak error handling, or brittle ownership. The capstone explicitly compares the old design with the Rust rewrite or hardening pass."
 				},
 				{
 					title: "Document What Rust Improved and What It Did Not",

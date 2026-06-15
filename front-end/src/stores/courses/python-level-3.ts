@@ -110,7 +110,7 @@ export const pythonLevel3Course: RawCourse = {
 				{
 					title: "Dictionaries",
 					content:
-						'Introduce dictionaries as collections of key-value pairs. Create examples such as `prices = {"soap": 2, "apple": 1, "frozen_pizza": 5}` and use `dictionary[key]` to look up values. Check whether a key exists with `if key in dictionary`, iterate with `for key in dictionary`, and explore dictionaries whose keys and values use different data types. Practice building dictionaries of squares, factorials, and letter counts for a word.'
+						'Dictionaries are collections of key-value pairs. Create examples such as `prices = {"soap": 2, "apple": 1, "frozen_pizza": 5}` and use `dictionary[key]` to look up values. Check whether a key exists with `if key in dictionary`, iterate with `for key in dictionary`, and explore dictionaries whose keys and values use different data types. Practice building dictionaries of squares, factorials, and letter counts for a word.'
 				},
 				{
 					title: "AM3 Project 1: Python Fundamentals Problem Set",

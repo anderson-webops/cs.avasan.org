@@ -161,7 +161,9 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(/\*\*Skills to strengthen:\*\*/i);
 			expect(corpus).not.toMatch(/\*\*Materials to prepare:\*\*/i);
 			expect(corpus).not.toMatch(/before starting a module/i);
-			expect(corpus).not.toMatch(/Tooling, Materials, and Source Preparation/i);
+			expect(corpus).not.toMatch(
+				/Tooling, Materials, and Source Preparation/i
+			);
 			expect(corpus).not.toMatch(/Learning Roadmap and Sequencing/i);
 			expect(corpus).not.toMatch(/Complete the linked/i);
 			expect(corpus).not.toMatch(
@@ -314,12 +316,12 @@ describe("course text quality normalization", () => {
 			expect(corpus).toContain(
 				"The lab boundary, target behavior, and evidence source are explicit"
 			);
-				expect(corpus).not.toContain(
-					"Extend the Java work with one additional method and a test or console trace that proves its contract"
-				);
-				expect(corpus).toContain(
-					"Extend the object-design task with one additional method and a test or console trace that proves its contract"
-				);
+			expect(corpus).not.toContain(
+				"Extend the Java work with one additional method and a test or console trace that proves its contract"
+			);
+			expect(corpus).toContain(
+				"Extend the object-design task with one additional method and a test or console trace that proves its contract"
+			);
 			expect(corpus).toContain(
 				"Produce **PTJ1 Functions, Parameters, and Return Types Supplemental 2** with a named Java type boundary, observable behavior, and evidence from a normal case plus a boundary case"
 			);
@@ -387,10 +389,16 @@ describe("course text quality normalization", () => {
 				/module's core concept, a concrete worked example, and a testable artifact/i
 			);
 			expect(corpus).not.toMatch(/the work should be able to describe/i);
-			expect(corpus).not.toMatch(/turn the prompt into a concrete artifact/i);
-			expect(corpus).not.toMatch(/The core vocabulary, one concrete example/i);
+			expect(corpus).not.toMatch(
+				/turn the prompt into a concrete artifact/i
+			);
+			expect(corpus).not.toMatch(
+				/The core vocabulary, one concrete example/i
+			);
 			expect(corpus).not.toMatch(/The sequence moves from vocabulary/i);
-			expect(corpus).not.toMatch(/Restate the prompt as a short checklist/i);
+			expect(corpus).not.toMatch(
+				/Restate the prompt as a short checklist/i
+			);
 			expect(corpus).not.toMatch(
 				/Normal, boundary, and awkward cases have been checked/i
 			);
@@ -451,7 +459,9 @@ describe("course text quality normalization", () => {
 		expect(corpus).toContain("Scratch game design");
 		expect(corpus).toContain("green-flag state");
 		expect(corpus).toContain("event or state logic");
-		expect(corpus).not.toMatch(/module's core concept, a concrete worked example, and a testable artifact/i);
+		expect(corpus).not.toMatch(
+			/module's core concept, a concrete worked example, and a testable artifact/i
+		);
 		expect(corpus).not.toMatch(/expected file format/i);
 		expect(corpus).not.toMatch(/malformed or missing data/i);
 	});
@@ -667,11 +677,19 @@ describe("course text quality normalization", () => {
 		const checks = [
 			{
 				title: /^GrS1 Supplemental Project 1: Turtle Recap$/,
-				required: ["personal study guide", "filled shape", "uses a comment"]
+				required: [
+					"personal study guide",
+					"filled shape",
+					"uses a comment"
+				]
 			},
 			{
 				title: /Open Ended Project - Create a Drawing/,
-				required: ["Plan the drawing", "`goto()`", "comments naming each part"]
+				required: [
+					"Plan the drawing",
+					"`goto()`",
+					"comments naming each part"
+				]
 			},
 			{
 				title: /^GrS2 Supplemental Project 7: Loops Recap$/,
@@ -679,11 +697,19 @@ describe("course text quality normalization", () => {
 			},
 			{
 				title: /^GrS3 Supplemental Project 2: Debugging Practice$/,
-				required: ["first error message", "rerun the program", "several things at once"]
+				required: [
+					"first error message",
+					"rerun the program",
+					"several things at once"
+				]
 			},
 			{
 				title: /Practice Project/,
-				required: ["turn amount", "step length", "connected intentionally"]
+				required: [
+					"turn amount",
+					"step length",
+					"connected intentionally"
+				]
 			},
 			{
 				title: /Rainbow Ninja Star/,
@@ -695,7 +721,11 @@ describe("course text quality normalization", () => {
 			},
 			{
 				title: /^GrS7 Project 1: Build a Neighborhood$/,
-				required: ["drawHouse()", "different positions or sizes", "without duplicating"]
+				required: [
+					"drawHouse()",
+					"different positions or sizes",
+					"without duplicating"
+				]
 			},
 			{
 				title: /Make Your Own Function/,
@@ -727,15 +757,27 @@ describe("course text quality normalization", () => {
 		const checks = [
 			{
 				title: /^GrS9 Project 2: More Functions$/,
-				required: ["parameter values", "different sizes", "Verify the design"]
+				required: [
+					"parameter values",
+					"different sizes",
+					"Verify the design"
+				]
 			},
 			{
 				title: /^GrS9 Project 3: Polka Dots$/,
-				required: ["mouse clicks", "click coordinates", "edges, and corners"]
+				required: [
+					"mouse clicks",
+					"click coordinates",
+					"edges, and corners"
+				]
 			},
 			{
 				title: /^GrS13 Project 3: Fluid Motion$/,
-				required: ["screen.tracer(0)", "screen.update()", "animation loop"]
+				required: [
+					"screen.tracer(0)",
+					"screen.update()",
+					"animation loop"
+				]
 			},
 			{
 				title: /^GrS13 Project 5: Turtle Collision$/,
@@ -747,7 +789,11 @@ describe("course text quality normalization", () => {
 			},
 			{
 				title: /^GrS14 Supplemental Project 5: Snake$/,
-				required: ["body list", "self-collision", "game-over conditions"]
+				required: [
+					"body list",
+					"self-collision",
+					"game-over conditions"
+				]
 			}
 		];
 
@@ -800,8 +846,12 @@ describe("course text quality normalization", () => {
 		expect(corpus).not.toMatch(
 			/Allow users to add comments to each post and display them beneath posts\./
 		);
-		expect(corpus).toContain("Use CSS Diner to practice selector precision");
-		expect(corpus).toContain("Use Flexbox Froggy as a layout reasoning drill");
+		expect(corpus).toContain(
+			"Use CSS Diner to practice selector precision"
+		);
+		expect(corpus).toContain(
+			"Use Flexbox Froggy as a layout reasoning drill"
+		);
 		expect(corpus).toContain(
 			"The key skill is separating local page state from persisted remote state"
 		);
@@ -811,7 +861,9 @@ describe("course text quality normalization", () => {
 	});
 
 	it("keeps JavaScript Level 1 prompts student-readable and concrete", async () => {
-		const course = await loadRawCourse("javascript-level-1-javascript-superstar");
+		const course = await loadRawCourse(
+			"javascript-level-1-javascript-superstar"
+		);
 		expect(course).not.toBeNull();
 		const corpus = allCourseText(course);
 
@@ -831,7 +883,10 @@ describe("course text quality normalization", () => {
 			},
 			{
 				title: /^JSS2 Project 1: Tips and Taxes$/,
-				required: ["intermediate tax and tip values", "decimal meal cost"]
+				required: [
+					"intermediate tax and tip values",
+					"decimal meal cost"
+				]
 			},
 			{
 				title: /^JSS3 Supplemental Project 2: Forgotten Math$/,
@@ -851,11 +906,18 @@ describe("course text quality normalization", () => {
 			},
 			{
 				title: /^JSS14 Project 3: Dynamic Components$/,
-				required: ["three Materialize JavaScript components", "after a page refresh"]
+				required: [
+					"three Materialize JavaScript components",
+					"after a page refresh"
+				]
 			},
 			{
 				title: /^JSS15 Supplemental Project 3: Jun-E-Commerce$/,
-				required: ["featured products", "call-to-action", "narrow screen"]
+				required: [
+					"featured products",
+					"call-to-action",
+					"narrow screen"
+				]
 			}
 		];
 
@@ -972,7 +1034,9 @@ describe("course text quality normalization", () => {
 		expect(course).not.toBeNull();
 		const corpus = allCourseText(course);
 
-		expect(corpus).not.toMatch(/Data Analysis Lab 1[1-7]: Implementation Lab/);
+		expect(corpus).not.toMatch(
+			/Data Analysis Lab 1[1-7]: Implementation Lab/
+		);
 		expect(corpus).not.toMatch(/complete build-and-review sequence/i);
 		expect(corpus).not.toMatch(/open-ended placeholder/i);
 		expect(corpus).not.toMatch(/vague enrichment/i);
@@ -989,7 +1053,9 @@ describe("course text quality normalization", () => {
 
 		for (const expectedModule of expectedModules) {
 			expect(
-				course!.modules.some(module => module.title.includes(expectedModule)),
+				course!.modules.some(module =>
+					module.title.includes(expectedModule)
+				),
 				expectedModule
 			).toBe(true);
 		}
@@ -1118,12 +1184,13 @@ describe("course text quality normalization", () => {
 
 	it("formats grouped lesson arcs as readable ordered markdown lists", async () => {
 		const store = useCoursesStore();
-		const [course, scratchCourse, machineLearning, aiLevel1] = await Promise.all([
-			store.loadCourseById("python-level-3"),
-			loadRawCourse("scratch-level-1"),
-			loadRawCourse("machine-learning"),
-			loadRawCourse("ai-level-1")
-		]);
+		const [course, scratchCourse, machineLearning, aiLevel1] =
+			await Promise.all([
+				store.loadCourseById("python-level-3"),
+				loadRawCourse("scratch-level-1"),
+				loadRawCourse("machine-learning"),
+				loadRawCourse("ai-level-1")
+			]);
 		expect(course).not.toBeNull();
 		expect(scratchCourse).not.toBeNull();
 		expect(machineLearning).not.toBeNull();
@@ -1153,7 +1220,9 @@ describe("course text quality normalization", () => {
 		expect(scratchStudio!.content).toContain(
 			"**Extension:** Debugging and Remix Studio: Add a broadcast, backdrop change, or sprite interaction that reuses the same event logic."
 		);
-		expect(scratchStudio!.content).toContain("\n\n2. **Design and Planning Map**");
+		expect(scratchStudio!.content).toContain(
+			"\n\n2. **Design and Planning Map**"
+		);
 		expect(scratchStudio!.content).not.toContain(
 			"Concept Path (GS16 Debugging and Remix Studio)"
 		);
@@ -1174,10 +1243,16 @@ describe("course text quality normalization", () => {
 		);
 
 		const aiLandscape = aiLevel1!.modules
-			.find(module => module.title === "Unit 1: AI Landscape and State Representation")
+			.find(
+				module =>
+					module.title ===
+					"Unit 1: AI Landscape and State Representation"
+			)
 			?.curriculum.find(item => item.title === "Core Concepts");
 		expect(aiLandscape).toBeDefined();
-		expect(aiLandscape!.content).toContain("The course emphasizes representations");
+		expect(aiLandscape!.content).toContain(
+			"Strong representations are easy to inspect"
+		);
 		expect(aiLandscape!.content).toContain(
 			"once the structure's required information is identified"
 		);
@@ -1186,17 +1261,13 @@ describe("course text quality normalization", () => {
 	});
 
 	it("contextualizes generated studio support without repeated generic scaffolding", async () => {
-		const [
-			dataScience,
-			scratchLevel1,
-			webDevelopment,
-			lowLevelSecurity
-		] = await Promise.all([
-			loadRawCourse("data-science-in-python"),
-			loadRawCourse("scratch-level-1"),
-			loadRawCourse("web-development-foundations"),
-			loadRawCourse("low-level-security")
-		]);
+		const [dataScience, scratchLevel1, webDevelopment, lowLevelSecurity] =
+			await Promise.all([
+				loadRawCourse("data-science-in-python"),
+				loadRawCourse("scratch-level-1"),
+				loadRawCourse("web-development-foundations"),
+				loadRawCourse("low-level-security")
+			]);
 		expect(dataScience).not.toBeNull();
 		expect(scratchLevel1).not.toBeNull();
 		expect(webDevelopment).not.toBeNull();
@@ -1245,7 +1316,9 @@ describe("course text quality normalization", () => {
 		expect(webStudio.content).toContain(
 			"Implement one Full-Stack Web Lab 15 visible behavior at a time and inspect the page, console, network panel, or local server after each change."
 		);
-		expect(webStudio.content).not.toContain("smallest the browser-visible path");
+		expect(webStudio.content).not.toContain(
+			"smallest the browser-visible path"
+		);
 		expect(webStudio.content).not.toContain(
 			"Name the Full-Stack Web Lab 15 Core Concepts route or component"
 		);
@@ -1532,9 +1605,9 @@ describe("course text quality normalization", () => {
 						"rust-systems-security"
 					].includes(courseCatalog[index].id)
 			);
-			expect(nonSecurityCourses.map(allCourseText).join("\n")).not.toMatch(
-				/authorized scope/i
-			);
+			expect(
+				nonSecurityCourses.map(allCourseText).join("\n")
+			).not.toMatch(/authorized scope/i);
 
 			const swift = await loadRawCourse("intro-to-swift-app-development");
 			expect(swift).not.toBeNull();

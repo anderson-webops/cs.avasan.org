@@ -21,7 +21,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Practical Walkthrough: Local Build vs TestFlight vs App Store",
 					content:
-						"Walk through a concrete release ladder: run in Xcode, test on simulator, test on device, archive, upload, distribute through TestFlight, and finally prepare for App Review. Skill target: Explain what changes at each step, especially around signing, metadata, and who can access the build."
+						"The release ladder is concrete: run in Xcode, test on simulator, test on device, archive, upload, distribute through TestFlight, and finally prepare for App Review. Skill target: explain what changes at each step, especially around signing, metadata, and who can access the build."
 				},
 				{
 					title: "Reflection Question: Where Does Publishing Friction Come From?",
@@ -151,7 +151,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "What Code Signing Actually Means",
 					content:
-						"Introduce code signing as proof of authorship and permission rather than as a mysterious Xcode checkbox. Explain teams, bundle identifiers, development signing, and distribution signing conceptually before students hit the errors in practice."
+						"Code signing is proof of authorship and permission rather than a mysterious Xcode checkbox. Teams, bundle identifiers, development signing, and distribution signing should be understood conceptually before the errors appear in practice."
 				},
 				{
 					title: "Practical Walkthrough: Team Selection and Bundle IDs",
@@ -235,7 +235,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Practical Walkthrough: Logs, Console Output, and Crash Clues",
 					content:
-						"Introduce console logs, build output, and the kinds of messages that matter during the first run-on-device workflow. The goal is to capture the first useful failure signal rather than chasing symptoms."
+						"Console logs, build output, and run-on-device messages provide the first useful failure signals. The goal is to capture the first useful signal rather than chasing symptoms."
 				},
 				{
 					title: "Mini Lab: First Launch Troubleshooting",
@@ -296,7 +296,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Metadata, Builds, and Reviewer Context",
 					content:
-						"Introduce App Store Connect as the operational side of app distribution: metadata, screenshots, versions, build numbers, testers, review notes, and release control. Make clear that publishing is partly a product-communication task, not only a code task."
+						"App Store Connect is the operational side of app distribution: metadata, screenshots, versions, build numbers, testers, review notes, and release control. Publishing is partly a product-communication task, not only a code task."
 				},
 				{
 					title: "Practical Walkthrough: Internal vs External Testing",
@@ -512,7 +512,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Declarative UI and View Trees",
 					content:
-						"Introduce SwiftUI as a declarative system where views describe UI state rather than imperatively drawing one widget at a time. Explain `body`, view trees, modifiers, and layout containers so students understand what SwiftUI is trying to optimize for."
+						"SwiftUI is a declarative system where views describe UI state rather than imperatively drawing one widget at a time. `body`, view trees, modifiers, and layout containers show what SwiftUI is trying to optimize for."
 				},
 				{
 					title: "Worked Example Set: Text, Stacks, and Modifiers",
@@ -649,7 +649,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Functions and Parameter Labels",
 					content:
-						"Introduce functions as named units of behavior and explain why Swift parameter labels improve call-site clarity. Use app-flavored examples such as formatting labels, choosing icons, or deriving status messages."
+						"Functions are named units of behavior, and Swift parameter labels improve call-site clarity. App-flavored examples include formatting labels, choosing icons, or deriving status messages."
 				},
 				{
 					title: "Structs as App Data and Views",
@@ -659,7 +659,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Enums for App State",
 					content:
-						"Introduce enums as a way to represent a closed set of app states or routes, such as loading, loaded, and failed or a set of tab destinations. Use them to teach stronger thinking about state than scattered booleans alone."
+						"Enums represent a closed set of app states or routes, such as loading, loaded, and failed or a set of tab destinations. They support stronger state modeling than scattered booleans alone."
 				},
 				{
 					title: "Reflection Question: Why Are Structs So Important in SwiftUI?",
@@ -791,7 +791,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Navigation Stacks, Tabs, and Sheets",
 					content:
-						"Introduce the major navigation patterns students will actually use in beginner apps: stack navigation, tab navigation, and sheet presentation. Explain when each pattern fits and how data moves across screen boundaries."
+						"The major beginner app navigation patterns are stack navigation, tab navigation, and sheet presentation. Each pattern has a different fit, and each changes how data moves across screen boundaries."
 				},
 				{
 					title: "Worked Example Set: Passing Data Between Screens",
@@ -923,7 +923,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Images, Icons, Maps, and Permissions",
 					content:
-						"Introduce richer app features through media and maps, but keep permissions and device integration at a practical high level. Explain where assets live, how SF Symbols and images differ, and why hardware-linked features add responsibility as well as excitement."
+						"Richer app features can use media and maps while keeping permissions and device integration at a practical high level. Assets, SF Symbols, images, and hardware-linked features all add responsibility as well as capability."
 				},
 				{
 					title: "Project: Media Gallery App",
@@ -1059,7 +1059,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Local Data That Survives Relaunch",
 					content:
-						"Introduce `UserDefaults`, file storage, and the idea of local persistence before mentioning larger systems like SwiftData or Core Data. Emphasize that persistence changes product expectations: a tracker that forgets everything is not the same product as one that remembers."
+						"`UserDefaults`, file storage, and local persistence come before larger systems like SwiftData or Core Data. Persistence changes product expectations: a tracker that forgets everything is not the same product as one that remembers."
 				},
 				{
 					title: "Worked Example Set: Save, Load, and Default Data",
@@ -1196,7 +1196,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Readability, Spacing, and Touch Targets",
 					content:
-						"Introduce design quality as part of app quality rather than an optional finishing layer. Cover typography, spacing, visual hierarchy, touch target sizing, dark-mode resilience, and why accessible structure makes the app better for everyone."
+						"Design quality is part of app quality rather than an optional finishing layer. Typography, spacing, visual hierarchy, touch target sizing, dark-mode resilience, and accessible structure all affect whether the app is usable."
 				},
 				{
 					title: "Worked Example Set: Polishing a Rough Screen",
@@ -1267,7 +1267,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Archive, Upload, and Release Checklists",
 					content:
-						"Walk through the final publishing path conceptually before the capstone wrap-up: archive build, upload process, App Store Connect checklists, TestFlight release, and review basics. Key idea: The release path as an ordered workflow, not a final mysterious button."
+						"The final publishing path is an ordered workflow: archive build, upload process, App Store Connect checklists, TestFlight release, and review basics. Key idea: release is not a final mysterious button."
 				},
 				{
 					title: "Practical Walkthrough: Build Metadata and Preflight Review",

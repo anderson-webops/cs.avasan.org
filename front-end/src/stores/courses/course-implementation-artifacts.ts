@@ -1091,7 +1091,7 @@ function addUnityRebuildModules(courseId: string, course: RawCourse) {
 				{
 					title: "Script Lifecycle",
 					content:
-						"Introduce Awake, Start, Update, FixedUpdate, and collision callbacks at a beginner level. Tie each callback to a specific kind of work."
+						"Awake, Start, Update, FixedUpdate, and collision callbacks each fit a specific kind of beginner Unity work."
 				},
 				{
 					title: "Inspector Variables",
@@ -1320,7 +1320,7 @@ function addCppMatrixModule(courseId: string, course: RawCourse) {
 				content: [
 					"**Learning sequence:** Use this matrix when placing students after the original C++ Level 1 material or after Python/Java prerequisites.",
 					`**Matrix:**\n${bullets(cppConceptMatrix)}`,
-					"**Completion check:** the course can identify whether the next lesson should be syntax fluency, memory reasoning, standard-library design, parser/state-machine architecture, or DS&A."
+					"**Completion check:** the next lesson direction is identifiable: syntax fluency, memory reasoning, standard-library design, parser/state-machine architecture, or DS&A."
 				].join("\n\n")
 			},
 			{
@@ -1614,7 +1614,7 @@ function addAlgebraStandardsArchitectureModule(
 			{
 				title: "Required Anchor and Extension Projects",
 				content:
-					"**Project goal:** Each algebra course should have one required anchor modeling project and one optional extension project. Anchor projects should use context, representation choice, solution, and reasonableness check; extensions should change the constraint or add a second method.\n\n**Completion checks:**\n- At least two representations are used.\n- The work includes a reasoning paragraph.\n- The project has a remediation path for prerequisite gaps."
+					"**Project goal:** Each algebra course includes one required anchor modeling project and one optional extension project. Anchor projects use context, representation choice, solution, and reasonableness check; extensions change the constraint or add a second method.\n\n**Completion checks:**\n- At least two representations are used.\n- The work includes a reasoning paragraph.\n- The project has a remediation path for prerequisite gaps."
 			},
 			{
 				title: "Practice Set Types",
@@ -1874,7 +1874,7 @@ function addJavaBridgeModernModule(courseId: string, course: RawCourse) {
 				{
 					title: "AP and Beyond",
 					content:
-						"**Learning sequence:** Keep AP CSA class/inheritance expectations visible, then add more realistic collection-backed design. Use records for transparent data carriers and interfaces for replaceable behavior when the project has a real extension point. The course should distinguish exam-essential inheritance from production-style composition, so the design choice is explained instead of copied from a pattern name.\n\n**Completion check:** The same project can be extended without rewriting the core loop."
+						"**Learning sequence:** Keep AP CSA class/inheritance expectations visible, then add more realistic collection-backed design. Use records for transparent data carriers and interfaces for replaceable behavior when the project has a real extension point. The design choice distinguishes exam-essential inheritance from production-style composition instead of copying a pattern name.\n\n**Completion check:** The same project can be extended without rewriting the core loop."
 				}
 			],
 			supplementalProjects: [
@@ -1906,7 +1906,7 @@ function addJavaBridgeModernModule(courseId: string, course: RawCourse) {
 				{
 					title: "Extension Architecture",
 					content:
-						"**Learning sequence:** Introduce ServiceLoader, explicit factories, or plugin-style registries only when the project has multiple behaviors worth swapping. Architecture is justified by the change story, not by pattern vocabulary. A useful extension point has a stable interface, at least two implementations, and a small driver that does not need to know each implementation's internals.\n\n**Completion check:** Adding a new processor, command, or report type does not require rewriting the application driver."
+						"**Learning sequence:** ServiceLoader, explicit factories, or plugin-style registries are useful only when the project has multiple behaviors worth swapping. Architecture is justified by the change story, not by pattern vocabulary. A useful extension point has a stable interface, at least two implementations, and a small driver that does not need to know each implementation's internals.\n\n**Completion check:** Adding a new processor, command, or report type does not require rewriting the application driver."
 				}
 			],
 			supplementalProjects: [
@@ -2236,7 +2236,7 @@ function addUnityFullProjectWorkflowModules(
 			{
 				title: "Build Profiles and Deployment",
 				content:
-					"**Learning sequence:** Use Build Profiles for desktop and optional Web builds. The course should teach build configuration as a repeatable artifact, not a final-session surprise. A build profile records scenes, target platform, settings, and output expectations so the same project can be tested outside the editor.\n\n**Completion check:** The work demonstrates the ability to create a local build, record the Unity editor version, and explain the target platform."
+					"**Learning sequence:** Use Build Profiles for desktop and optional Web builds. Build configuration is a repeatable artifact, not a final-session surprise. A build profile records scenes, target platform, settings, and output expectations so the same project can be tested outside the editor.\n\n**Completion check:** The work demonstrates the ability to create a local build, record the Unity editor version, and explain the target platform."
 			},
 			{
 				title: "Git LFS and Asset Attribution",

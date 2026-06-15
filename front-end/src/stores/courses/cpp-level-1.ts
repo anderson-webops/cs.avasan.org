@@ -110,7 +110,7 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "Randomness and Small Simulation Helpers",
 					content:
-						"Introduce `rand()` only after basic function calls are comfortable. Cover: seeding at the correct level, generating bounded random values, wrapping random behavior in helper functions, testing code that has random output, and separating generation logic from game or simulation output. Randomness should create a reason to decompose the program instead of writing one long `main`.",
+						"`rand()` belongs after basic function calls are comfortable. Cover: seeding at the correct level, generating bounded random values, wrapping random behavior in helper functions, testing code that has random output, and separating generation logic from game or simulation output. Randomness should create a reason to decompose the program instead of writing one long `main`.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF3-rand-Reference"
 				},
@@ -186,7 +186,7 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "Vectors as Growable Sequences and Function Inputs",
 					content:
-						"Introduce `std::vector` as the default beginner collection for ordered values that can grow over time. Cover: `push_back`, indexing, `size`, iterating with indexes and range-based loops, reading versus mutating a collection, passing vectors to functions, using `const` references for read-only access, and writing summary operations such as totals, filters, and searches.",
+						"`std::vector` is the default beginner collection for ordered values that can grow over time. Cover: `push_back`, indexing, `size`, iterating with indexes and range-based loops, reading versus mutating a collection, passing vectors to functions, using `const` references for read-only access, and writing summary operations such as totals, filters, and searches.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF5-Vectors-Reference"
 				},
@@ -243,7 +243,7 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "Structs for Small Records",
 					content:
-						"Introduce `struct` as a lightweight way to group related fields before the profile capstone. Cover: simple record shapes such as a person, transaction, or post; when a struct is clearer than parallel vectors; passing records to functions; using vectors of structs; and deciding whether a behavior belongs in a function now or in a class later.",
+						"`struct` is a lightweight way to group related fields before the profile capstone. Cover: simple record shapes such as a person, transaction, or post; when a struct is clearer than parallel vectors; passing records to functions; using vectors of structs; and deciding whether a behavior belongs in a function now or in a class later.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF6-Structs-Example"
 				},

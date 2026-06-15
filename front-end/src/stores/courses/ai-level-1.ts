@@ -82,7 +82,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "What AI Is and What It Is Not",
 					content:
-						"Introduce AI as a family of approaches: rules, search, planning, heuristics, machine learning, and modern generative systems. Key idea: This course focuses on explicit state and decision processes rather than jumping straight to model fitting."
+						"AI is a family of approaches: rules, search, planning, heuristics, machine learning, and modern generative systems. Key idea: This course focuses on explicit state and decision processes rather than jumping straight to model fitting."
 				},
 				{
 					title: "States, Actions, Goals, and Costs",
@@ -97,7 +97,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Knowledge Representation for Small Systems",
 					content:
-						"Use simple Python classes and dictionaries to represent entities, edges, metadata, and rules. The course should emphasize representations that are easy to inspect, reason about, and debug."
+						"Simple Python classes and dictionaries can represent entities, edges, metadata, and rules. Strong representations are easy to inspect, reason about, and debug."
 				},
 				{
 					title: "Unit 1: AI Landscape and State Representation: Core Project",
@@ -160,7 +160,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Why Search Needs a Frontier",
 					content:
-						"Introduce the frontier as the set of states that have been generated but not fully explored. Key idea: Search behavior is largely determined by how the frontier is organized and updated."
+						"The frontier is the set of states that have been generated but not fully explored. Key idea: Search behavior is largely determined by how the frontier is organized and updated."
 				},
 				{
 					title: "Stack Behavior and Depth-First Thinking",
@@ -312,7 +312,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Heuristics, Greedy Choice, and A*",
 					content:
-						"Introduce heuristics as informed guesses that help order the frontier. Compare greedy best-first search with A* and learn that a better-looking local move is not the same thing as a guaranteed optimal plan."
+						"Heuristics are informed guesses that help order the frontier. Compare greedy best-first search with A* and learn that a better-looking local move is not the same thing as a guaranteed optimal plan."
 				},
 				{
 					title: "Comparing Search Strategies Honestly",
@@ -375,7 +375,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Rules as Small AI",
 					content:
-						"Introduce rule-based systems as a legitimate form of AI when the domain is structured and the reasoning can be written down clearly. Not all intelligent behavior comes from statistical models."
+						"Rule-based systems are a legitimate form of AI when the domain is structured and the reasoning can be written down clearly. Not all intelligent behavior comes from statistical models."
 				},
 				{
 					title: "Decision Logic, Constraints, and State Tracking",
@@ -587,12 +587,12 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Build for Explanation, Not Just Output",
 					content:
-						"The capstone should expose its logic through traces, notes, diagrams, or evaluation summaries. The expected outcome is an explanation of why the system made a choice and how it would fail, not just a demonstration that it runs."
+						"The capstone exposes its logic through traces, notes, diagrams, or evaluation summaries. The expected outcome is an explanation of why the system made a choice and how it would fail, not just a demonstration that it runs."
 				},
 				{
 					title: "Measure Improvement over a Baseline",
 					content:
-						"Every capstone should compare itself to a simpler starting point: random play, uninformed search, fewer rules, or a shallower heuristic. The comparison is what makes the project feel like AI rather than a generic programming assignment."
+						"Every capstone compares itself to a simpler starting point: random play, uninformed search, fewer rules, or a shallower heuristic. The comparison is what makes the project feel like AI rather than a generic programming assignment."
 				},
 				{
 					title: "Reflect on the Next Course Step",

@@ -26,7 +26,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Positioning, Prerequisites, and Safe Scope",
 					content:
-						"Frame the course as defensive network security for students who are already comfortable with JavaScript fundamentals and preferably have completed `Linux Systems` and `Network Systems`. Emphasize secure services, observability, trust boundaries, and controlled local labs rather than offensive abuse."
+						"This is a defensive network security course for students who are already comfortable with JavaScript fundamentals and preferably have completed `Linux Systems` and `Network Systems`. The focus is secure services, observability, trust boundaries, and controlled local labs rather than offensive abuse."
 				},
 				{
 					title: "NSEC0 Setup and Tooling: Core Project",
@@ -101,7 +101,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Threat Modeling Small TS Services",
 					content:
-						"Walk through a lightweight threat-modeling process for a toy Node or TypeScript service. Identify assets, actors, entry points, trust boundaries, likely failures, and the first monitoring signals they would want before deployment."
+						"A lightweight threat-modeling process for a toy Node or TypeScript service identifies assets, actors, entry points, trust boundaries, likely failures, and the first monitoring signals needed before deployment."
 				},
 				{
 					title: "Unit 1: Security Model of Networked Systems: Core Project",
@@ -240,7 +240,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Authentication versus Authorization",
 					content:
-						"Use small API examples to separate identity from permission. The course should repeatedly show that a request can be authenticated correctly and still be unauthorized for the resource or action it is attempting."
+						"Small API examples separate identity from permission. A request can be authenticated correctly and still be unauthorized for the resource or action it is attempting."
 				},
 				{
 					title: "Common Mistakes in Toy APIs",
@@ -390,7 +390,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Size Limits and Resource Exhaustion",
 					content:
-						"Make body size, field count, array size, and connection cost explicit security concerns. The course should connect validation to availability by showing how oversized requests and repeated parse work can become abuse vectors."
+						"Body size, field count, array size, and connection cost are explicit security concerns. Validation connects to availability when oversized requests and repeated parse work become abuse vectors."
 				},
 				{
 					title: "Schema Validation and Safe Rejection",
@@ -541,7 +541,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Internal versus External Services",
 					content:
-						"Use concrete examples such as admin panels, metrics endpoints, worker callbacks, and app APIs to show which services should stay internal. The course should reinforce that 'works from the outside' is not the same thing as 'should be reachable from the outside'."
+						"Concrete examples such as admin panels, metrics endpoints, worker callbacks, and app APIs show which services should stay internal. 'Works from the outside' is not the same thing as 'should be reachable from the outside'."
 				},
 				{
 					title: "Trusted Proxy Headers and Real Client Identity",
@@ -617,7 +617,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Route-Level Authentication and Authorization",
 					content:
-						"Include explicit route guards, ownership checks, and admin boundaries on top of authentication. The course should keep reinforcing that each sensitive route needs a defensible authorization story."
+						"Explicit route guards, ownership checks, and admin boundaries belong on top of authentication. Each sensitive route needs a defensible authorization story."
 				},
 				{
 					title: "Unit 8: Secure Node/TypeScript Services: Core Project",
@@ -753,7 +753,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Event Validation and Message Contracts",
 					content:
-						"Include strict event schemas, allowed event names, payload limits, and per-event authorization checks. The course should show how real-time protocols become risky when they skip the structure that HTTP handlers usually make more obvious."
+						"Strict event schemas, allowed event names, payload limits, and per-event authorization checks keep real-time protocols from skipping the structure that HTTP handlers usually make more obvious."
 				},
 				{
 					title: "Abuse Handling, Backpressure, and Disconnect Policy",
@@ -974,7 +974,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Design a Small Secure Network Service",
 					content:
-						"Design a small TS service with a clear purpose, explicit actors, mapped trust boundaries, and a narrow exposed surface. The capstone should start with threat modeling and architecture before implementation begins."
+						"Design a small TS service with a clear purpose, explicit actors, mapped trust boundaries, and a narrow exposed surface. The capstone starts with threat modeling and architecture before implementation begins."
 				},
 				{
 					title: "Implement Controls and Observability Together",
@@ -1059,7 +1059,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "WAF, CDN, and Edge Controls",
 					content:
-						"Introduce WAF concepts, CDN caching risks, rate-limit policy at the edge, and request filtering as a follow-on to the reverse-proxy and logging units."
+						"WAF concepts, CDN caching risks, rate-limit policy at the edge, and request filtering extend the reverse-proxy and logging units."
 				},
 				{
 					title: "Cloud Network Security Path",

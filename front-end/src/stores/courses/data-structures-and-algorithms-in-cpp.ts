@@ -27,7 +27,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Working Habits for the Sequence",
 					content:
-						"Get used to tracing data by hand, printing intermediate structure states, and explaining asymptotic behavior in plain language. Every unit should end with at least one debugging pass that checks the shape of the structure, not just final output."
+						"Get used to tracing data by hand, printing intermediate structure states, and explaining asymptotic behavior in plain language. Every unit ends with at least one debugging pass that checks the shape of the structure, not just final output."
 				},
 				{
 					title: "DSCPP0 Setup and Positioning: Core Project",
@@ -257,7 +257,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "State Windows and Markov-Style Generation",
 					content:
-						"Introduce an n-gram or state-window model where the next output token depends on the recent history. The data-structure lesson matters more than the novelty of generated text."
+						"An n-gram or state-window model uses recent history to choose the next output token. The data-structure lesson matters more than the novelty of generated text."
 				},
 				{
 					title: "STL Containers and State Based Text Generation: Verification and Reflection",
@@ -415,7 +415,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Median of Three and Practical Pivot Choice",
 					content:
-						"Introduce median-of-three as a practical improvement rather than as ritual. The lesson is about reducing bad pivot choices on partially sorted data, not about memorizing a special case in isolation. The source quicksort lab is useful because it separates dynamic buffer ownership, pivot selection, partitioning, and recursive sorting into testable responsibilities."
+						"Median-of-three is a practical improvement rather than a ritual. The lesson is about reducing bad pivot choices on partially sorted data, not about memorizing a special case in isolation. The source quicksort lab is useful because it separates dynamic buffer ownership, pivot selection, partitioning, and recursive sorting into testable responsibilities."
 				},
 				{
 					title: "Recursive Boundaries and Base Cases",
@@ -493,7 +493,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Single-Linked Nodes and Pointer Updates",
 					content:
-						"Walk through insertion and removal one pointer change at a time. This is the point where head updates, middle insertions, and missing-target behavior must be fluent. Keep the CS235 linked-list discipline: templated list, no STL inside the implementation, clear/remove/index tests, and no leaks."
+						"Insertion and removal require one pointer change at a time. This is the point where head updates, middle insertions, and missing-target behavior must be fluent. Keep the CS235 linked-list discipline: templated list, no STL inside the implementation, clear/remove/index tests, and no leaks."
 				},
 				{
 					title: "Index Access and Structural Tradeoffs",
@@ -566,7 +566,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Ordering Invariants in Tree Form",
 					content:
-						"Introduce BSTs as ordered structure, not just as branching shape. Skill target: State the left-subtree and right-subtree invariants clearly and use those invariants to justify insertion, search, and removal behavior."
+						"BSTs are ordered structures, not just branching shapes. Skill target: State the left-subtree and right-subtree invariants clearly and use those invariants to justify insertion, search, and removal behavior."
 				},
 				{
 					title: "Recursive Insert and Search",

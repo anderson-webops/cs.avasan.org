@@ -22,7 +22,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Blocks, Braces, and Signatures",
 					content:
-						"Translate indentation-based thinking into braces and method signatures. Emphasize that typed syntax adds ceremony, but the underlying control flow is still the same."
+						"Translate indentation-based thinking into braces and method signatures. Typed syntax adds ceremony, but the underlying control flow is still the same."
 				},
 				{
 					title: "What Transfers Cleanly from Python",
@@ -263,12 +263,12 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Java Class Structure",
 					content:
-						"Introduce fields, constructors, getters, setters, and the role of access modifiers in Java. Visible pattern: Why Java looks more ceremonial while still describing a familiar object model."
+						"Fields, constructors, getters, setters, and access modifiers define the Java object model. Visible pattern: why Java looks more ceremonial while still describing a familiar object model."
 				},
 				{
 					title: "C++ Class Structure and Header/Source Separation",
 					content:
-						"Introduce class declarations in header files and method definitions in source files. Emphasize that the split exists for organization and compilation reasons, not because the class model itself is conceptually different from Python."
+						"C++ class declarations often live in header files while method definitions live in source files. The split exists for organization and compilation reasons, not because the class model itself is conceptually different from Python."
 				},
 				{
 					title: "Classes and Objects across Languages: Verification and Reflection",
@@ -428,7 +428,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Vectors, References, and Pass-by-Value Intuition",
 					content:
-						"Introduce `vector` and the difference between passing by value and by reference without jumping ahead to the full pointer-heavy part of the C++ path."
+						"`vector` and the difference between passing by value and by reference prepare for C++ collections without jumping ahead to the full pointer-heavy part of the C++ path."
 				},
 				{
 					title: "Bridge Exit to C++ Level 1",

@@ -282,7 +282,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Notebook-First and Script-First Workflow",
 					content:
-						"Set up the course so students can work in `Jupyter`, `VS Code`, `PyCharm`, or `Google Colab` without changing the learning goals. Early lessons should make it clear when exploratory notebook work is appropriate and when a script or small app structure is the better fit."
+						"`Jupyter`, `VS Code`, `PyCharm`, and `Google Colab` are all acceptable workflows when the learning goals stay the same. Early lessons distinguish exploratory notebook work from cases where a script or small app structure is the better fit."
 				},
 				{
 					title: "Python Packages for Data Work",
@@ -807,12 +807,12 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Altair for Cleaner Chart Construction",
 					content:
-						"Introduce declarative charting so students can focus on encoding, axes, color, and interaction more intentionally. Altair helps make chart structure explicit rather than buried in imperative plotting calls."
+						"Declarative charting keeps the focus on encoding, axes, color, and interaction. Altair helps make chart structure explicit rather than buried in imperative plotting calls."
 				},
 				{
 					title: "Streamlit for Interactive Exploration",
 					content:
-						"Use `Streamlit` to wrap analyses in sliders, selectors, and filtered views. The course should treat dashboards as a communication product, not just a fun extra."
+						"`Streamlit` wraps analyses in sliders, selectors, and filtered views. Dashboards are communication products, not just a fun extra."
 				},
 				{
 					title: "Designing a Useful Analytical Interface",
@@ -956,7 +956,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Clean, Analyze, and Communicate",
 					content:
-						"Include the full pipeline: loading, cleaning, validation, analysis, visualization, and explanation. The capstone should feel like a small real project rather than a disconnected set of charts."
+						"Include the full pipeline: loading, cleaning, validation, analysis, visualization, and explanation. The capstone feels like a small real project rather than a disconnected set of charts."
 				},
 				{
 					title: "Build a Dashboard or Narrative Notebook",
@@ -966,7 +966,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Reflect on Next Steps",
 					content:
-						"Use the capstone reflection to decide whether the next course should be `Machine Learning`, `AI Level 1`, `Web Development Foundations`, or a more advanced Python track. Leave with a better sense of whether they enjoy modeling, storytelling, or productizing data work."
+						"The capstone reflection helps identify a next course such as `Machine Learning`, `AI Level 1`, `Web Development Foundations`, or a more advanced Python track. The goal is a clearer sense of whether modeling, storytelling, or productizing data work is the strongest next direction."
 				},
 				{
 					title: "Module 9: Data Science Capstone: Core Project",

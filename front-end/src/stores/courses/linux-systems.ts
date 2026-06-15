@@ -26,7 +26,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Course Outcomes and Daily Operating Habits",
 					content:
-						"Set the expectation that students will finish the course able to navigate the filesystem confidently, inspect and edit configs, manage services and logs, automate routine work, and deploy a small web service. Every lesson should begin with a command-of-the-day drill and should end with a short note about what changed on the system, what was verified, and how to undo the change safely."
+						"By the end of the course, learners can navigate the filesystem confidently, inspect and edit configs, manage services and logs, automate routine work, and deploy a small web service. Each lesson begins with a command-of-the-day drill and ends with a short note about what changed on the system, what was verified, and how to undo the change safely."
 				},
 				{
 					title: "Project: Provision a Personal Linux Lab VM",
@@ -82,7 +82,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Terminal Basics, History, Pipes, Redirection, and Exit Codes",
 					content:
-						"Introduce the shell as a command runner that connects small tools together. Learn how command history reduces repeated typing, how pipes move output from one tool into another, how redirection captures output into files, and how exit codes communicate success or failure even when a command prints nothing interesting."
+						"The shell is a command runner that connects small tools together. Command history reduces repeated typing, pipes move output from one tool into another, redirection captures output into files, and exit codes communicate success or failure even when a command prints nothing interesting."
 				},
 				{
 					title: "Core Navigation and File Management Commands",
@@ -157,12 +157,12 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Read the Linux Filesystem as a Map of Intent",
 					content:
-						'Walk through `/`, `/home`, `/root`, `/etc`, `/var`, `/usr`, `/opt`, `/tmp`, `/srv`, and `/dev` with the question "what belongs here and why." Leave this lesson understanding that path choice signals meaning: configuration in one place, durable application state in another, temporary scratch data somewhere else, and service-owned content somewhere else again.'
+						'Trace `/`, `/home`, `/root`, `/etc`, `/var`, `/usr`, `/opt`, `/tmp`, `/srv`, and `/dev` with the question "what belongs here and why." Path choice signals meaning: configuration in one place, durable application state in another, temporary scratch data somewhere else, and service-owned content somewhere else again.'
 				},
 				{
 					title: "Pseudo-Filesystems: /proc and /sys",
 					content:
-						"Explain that `/proc` and `/sys` are live views into kernel and system state rather than ordinary persisted files. Use them to inspect process details, memory, mounted filesystems, or device information so students start seeing Linux as a system they can question directly."
+						"`/proc` and `/sys` are live views into kernel and system state rather than ordinary persisted files. They can inspect process details, memory, mounted filesystems, or device information so Linux becomes a system that can be questioned directly."
 				},
 				{
 					title: "Choosing Between /var, /srv, and /opt",
@@ -380,7 +380,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Signals, kill, pkill, and Process Shutdown",
 					content:
-						"Explain that `kill` sends signals rather than magically destroying processes. Compare graceful termination to forceful termination and inspect why a process is stuck before escalating to stronger signals."
+						"`kill` sends signals rather than magically destroying processes. Compare graceful termination to forceful termination and inspect why a process is stuck before escalating to stronger signals."
 				},
 				{
 					title: "Foreground Jobs, Background Jobs, nohup, and Shell Sessions",
@@ -390,7 +390,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Zombies, Orphans, and Process Ownership",
 					content:
-						"Introduce zombies and orphans as bookkeeping realities of process supervision rather than as mysterious trivia. Key idea: What it means when a parent process fails to reap a child and why proper service management is better than leaving long-lived application processes attached to random shells."
+						"Zombies and orphans are bookkeeping realities of process supervision rather than mysterious trivia. Key idea: what it means when a parent process fails to reap a child and why proper service management is better than leaving long-lived application processes attached to random shells."
 				},
 				{
 					title: "Unit 5: Processes and Job Control: Core Project",
@@ -455,7 +455,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Reading Unit Files",
 					content:
-						"Walk through the structure of a unit file by identifying the role of `[Unit]`, `[Service]`, and `[Install]` sections. Key idea: Why working directory, executable path, environment variables, user identity, and restart policy all belong in the definition instead of being left to memory."
+						"A unit file has a visible structure: `[Unit]`, `[Service]`, and `[Install]` sections each have a role. Key idea: working directory, executable path, environment variables, user identity, and restart policy all belong in the definition instead of being left to memory."
 				},
 				{
 					title: "Daily Commands: status, start, stop, restart, reload, enable, disable",
@@ -465,7 +465,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Dependencies, Startup Ordering, and Environment Overrides",
 					content:
-						"Introduce the idea that services often depend on networking, storage, or other daemons becoming ready first. Use simple examples to show why startup ordering, drop-in overrides, and environment files matter for predictable boots and maintainable operations."
+						"Services often depend on networking, storage, or other daemons becoming ready first. Simple examples show why startup ordering, drop-in overrides, and environment files matter for predictable boots and maintainable operations."
 				},
 				{
 					title: "Project: Create a systemd Service for a Toy App",
@@ -596,7 +596,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "cron and Crontab Syntax",
 					content:
-						"Introduce `cron` as the classic scheduling tool for repeatable command execution. Learn how to read the five timing fields, how to test a command manually before scheduling it, and why the command written into the crontab needs full paths and explicit assumptions."
+						"`cron` is the classic scheduling tool for repeatable command execution. The practical skills are reading the five timing fields, testing a command manually before scheduling it, and writing crontab commands with full paths and explicit assumptions."
 				},
 				{
 					title: "Cron Environment Gotchas",
@@ -667,12 +667,12 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Package Managers: apt, dnf, yum, and Related Tools",
 					content:
-						"Introduce package management as the operating system's official mechanism for installing, upgrading, and removing software with tracked dependencies. Recognize that command syntax differs across distributions, but the underlying administrative questions stay the same: what is installed, where did it come from, and how will it be updated safely later."
+						"Package management is the operating system's official mechanism for installing, upgrading, and removing software with tracked dependencies. Command syntax differs across distributions, but the underlying administrative questions stay the same: what is installed, where did it come from, and how will it be updated safely later."
 				},
 				{
 					title: "Package Install vs Source Build vs Tarball Drop",
 					content:
-						"Compare system packages, source builds, and manually unpacked tarballs in terms of traceability, maintenance burden, and filesystem placement. This lesson should make students suspicious of software that appears in production without a clear install method, owner, or upgrade path."
+						"Compare system packages, source builds, and manually unpacked tarballs in terms of traceability, maintenance burden, and filesystem placement. Software that appears in production without a clear install method, owner, or upgrade path should raise suspicion."
 				},
 				{
 					title: "Understand Where Installed Software Lives",
@@ -825,7 +825,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Apache Fundamentals",
 					content:
-						"Introduce Apache as another major hosting surface with a different configuration style but many of the same core ideas. Learners should be able to identify the Apache equivalents of document roots, virtual hosts, access and error logs, and configuration activation."
+						"Apache is another major hosting surface with a different configuration style but many of the same core ideas. Learners should be able to identify the Apache equivalents of document roots, virtual hosts, access and error logs, and configuration activation."
 				},
 				{
 					title: "Reverse Proxy vs Static File Serving",
@@ -900,7 +900,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Disks, Mounts, and Capacity with df, du, mount, and fstab",
 					content:
-						'Introduce storage management through the operator questions that come up in real systems work: what is mounted, how full is it, and what will happen on the next boot. Skill target: Distinguish device-level thinking from directory-level usage so that they can tell whether a problem is "the filesystem is full" or "one path is unexpectedly large."'
+						'Storage management starts from operator questions that come up in real systems work: what is mounted, how full is it, and what will happen on the next boot. Skill target: distinguish device-level thinking from directory-level usage so that a problem can be classified as "the filesystem is full" or "one path is unexpectedly large."'
 				},
 				{
 					title: "Backup Patterns for Small Linux Systems",

@@ -21,7 +21,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Core Tooling and Remote Access",
 					content:
-						"Verify `ssh`, `curl`, `dig`, and `traceroute` early, then add `Remote - SSH`, `Remote - WSL`, `Docker`, `YAML`, and `EditorConfig` support as needed. The course should normalize the idea that diagnostics, packet capture, firewall editing, and routing changes often happen over a remote shell instead of a local GUI."
+						"Verify `ssh`, `curl`, `dig`, and `traceroute` early, then add `Remote - SSH`, `Remote - WSL`, `Docker`, `YAML`, and `EditorConfig` support as needed. Diagnostics, packet capture, firewall editing, and routing changes often happen over a remote shell instead of a local GUI."
 				},
 				{
 					title: "Positioning, Prerequisites, and Core Outcomes",
@@ -91,7 +91,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "TCP versus UDP",
 					content:
-						"Compare TCP and UDP in terms of connection behavior, retransmission expectations, and where reliability lives. The course should keep this practical: explain why an application chose one or the other and what that choice changes about debugging."
+						"Compare TCP and UDP in terms of connection behavior, retransmission expectations, and where reliability lives. Keep the comparison practical: explain why an application chose one or the other and what that choice changes about debugging."
 				},
 				{
 					title: "Client and Server Flow",
@@ -254,7 +254,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Why Home Networks Differ from Public Servers",
 					content:
-						"Contrast a private LAN behind NAT with a public host that owns its own public address and firewall policy. The course should use this contrast repeatedly so students stop assuming that every deployment path behaves like a cloud VM or like a home router."
+						"Contrast a private LAN behind NAT with a public host that owns its own public address and firewall policy. This contrast prevents assuming that every deployment path behaves like a cloud VM or like a home router."
 				},
 				{
 					title: "Unit 3: Switches, Routers, NAT, and the Internet Edge: Core Project",
@@ -393,7 +393,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "dig, nslookup, host, and Resolver Configuration",
 					content:
-						"Use `dig`, `nslookup`, `host`, `/etc/hosts`, and resolver config files to make name resolution visible. The course should keep asking which tool is showing recursive answers, which tool is showing raw records, and what local overrides might still be in play."
+						"`dig`, `nslookup`, `host`, `/etc/hosts`, and resolver config files make name resolution visible. The key checks are which tool is showing recursive answers, which tool is showing raw records, and what local overrides might still be in play."
 				},
 				{
 					title: "Project: Compare IPv4 and IPv6 Resolution for the Same Hostname",
@@ -583,7 +583,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Global Unicast, Link-Local, and Loopback",
 					content:
-						"This section covers the practical IPv6 address categories students will actually see in diagnostics and firewall policies. The course should keep returning to the fact that link-local addresses have strictly local meaning even though they look like 'real' IPv6 addresses."
+						"This section covers the practical IPv6 address categories that appear in diagnostics and firewall policies. Link-local addresses have strictly local meaning even though they look like 'real' IPv6 addresses."
 				},
 				{
 					title: "SLAAC and DHCPv6 at a Conceptual Level",
@@ -663,7 +663,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Application Profiles, Logging, and Safe Rollout",
 					content:
-						"Use application profiles, logging, and staged rule rollout to teach firewall changes as operational changes with recovery plans. The course should normalize allowing SSH first, documenting the intended exposure, and verifying rules from another session before assuming the host is still reachable."
+						"Application profiles, logging, and staged rule rollout treat firewall changes as operational changes with recovery plans. SSH access comes first, intended exposure is documented, and rules are verified from another session before assuming the host is still reachable."
 				},
 				{
 					title: "UFW versus iptables and nftables",

@@ -489,7 +489,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Prepare for Independent Gold and Beyond",
 					content:
-						"Close by positioning the student for continued Gold training, open contest prep, or deeper systems and algorithms coursework. The course should leave them with a stronger internal map of advanced problem types."
+						"Close by positioning the student for continued Gold training, open contest prep, or deeper systems and algorithms coursework. The outcome is a stronger internal map of advanced problem types."
 				},
 				{
 					title: "Unit 7: Gold Capstone Sets: Core Project",

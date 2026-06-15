@@ -375,7 +375,7 @@ function buildStandardsModule(
 			{
 				title: `${courseLabel} Next Topics`,
 				content: [
-					`**Course focus:** These topics for ${courseLabel} mark the next areas where the course can become more complete. The topic order follows prerequisite dependency and connects each addition to a concrete project or checkpoint.`,
+					`**Course focus:** These topics for ${courseLabel} mark the next areas for deeper coverage. The topic order follows prerequisite dependency and connects each addition to a concrete project or checkpoint.`,
 					`**Expansion topics:**\n${bullets(profile.topics)}`,
 					courseUseNote(
 						courseLabel,
@@ -1498,7 +1498,7 @@ const securityProfile: ResearchExpansionProfile = {
 	sources: ["OWASP Web Security Testing Guide", "NIST AI RMF"],
 	gaps: [
 		"Define strict ethical and legal boundaries across network, low-level, and systems security.",
-		"Emphasize defense, detection, secure design, and remediation.",
+		"Defense, detection, secure design, and remediation stay central.",
 		"Use toy applications and local labs only."
 	],
 	topics: [

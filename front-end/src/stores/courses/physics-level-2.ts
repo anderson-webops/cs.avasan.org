@@ -10,7 +10,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Introductions, Tooling, and Data Workflow",
 					content:
-						"This course builds on Intro to Physics and assumes comfort with algebra, graph reading, and basic trigonometry. Refresh the modeling workflow: VS Code or PyCharm for optional Python notebooks, spreadsheets for quick data work, and browser tools like PhET and Desmos for visual reasoning. Explain that the course now expects more multi-step modeling, clearer assumptions, and stronger graph interpretation than the introductory sequence."
+						"This course builds on Intro to Physics and assumes comfort with algebra, graph reading, and basic trigonometry. The modeling workflow includes VS Code or PyCharm for optional Python notebooks, spreadsheets for quick data work, and browser tools like PhET and Desmos for visual reasoning. The course now expects more multi-step modeling, clearer assumptions, and stronger graph interpretation than the introductory sequence."
 				},
 				{
 					title: "Functions, Vectors, and Coordinate Systems",
@@ -62,7 +62,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Net Force in Real Systems",
 					content:
-						"Move beyond single-force examples and treat forces as vectors that can combine, oppose, or redirect motion. Emphasize equilibrium, acceleration, and the importance of isolating one object at a time in multi-object systems. Keep free-body diagrams central instead of treating them as a warm-up step."
+						"Forces are vectors that can combine, oppose, or redirect motion, so the course moves beyond single-force examples. Equilibrium, acceleration, and isolating one object at a time matter in multi-object systems. Free-body diagrams stay central instead of becoming a warm-up step."
 				},
 				{
 					title: "Worked Example Set: Elevators, Scales, and Connected Objects",
@@ -156,7 +156,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Momentum as a Conserved Quantity",
 					content:
-						"Introduce momentum as a vector quantity that is often more useful than force alone when analyzing short interactions. Define impulse as force applied over time and connect it to the change in momentum. Use collisions to show how conservation laws organize messy events into a solvable structure."
+						"Momentum is a vector quantity that is often more useful than force alone when analyzing short interactions. Impulse is force applied over time and connects directly to the change in momentum. Collisions show how conservation laws organize messy events into a solvable structure."
 				},
 				{
 					title: "Worked Example Set: Recoil, Bounces, and Crash Carts",
@@ -203,7 +203,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Angular Quantities and Torque",
 					content:
-						"Extend mechanics from straight-line motion to rotation by introducing angular displacement, angular velocity, angular acceleration, and torque. Use levers, doors, wrenches, and balance points to make the ideas physical before formalizing them. Emphasize that where a force acts matters just as much as how large it is."
+						"Mechanics extends from straight-line motion to rotation through angular displacement, angular velocity, angular acceleration, and torque. Levers, doors, wrenches, and balance points make the ideas physical before formalizing them. Where a force acts matters just as much as how large it is."
 				},
 				{
 					title: "Worked Example Set: Lever Arms and Rotational Equilibrium",
@@ -344,7 +344,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Heat Transfer and Model Boundaries",
 					content:
-						"Introduce temperature, internal energy, specific heat, and the three main heat-transfer pathways: conduction, convection, and radiation. Then bridge to optics and early modern-physics ideas by showing how models can shift when wave behavior, energy quantization, or light-matter interaction becomes important. This module is intentionally a bridge module: it broadens the physics map without requiring a full advanced course in each topic."
+						"Temperature, internal energy, specific heat, and the three main heat-transfer pathways (conduction, convection, and radiation) anchor the module. The module then bridges to optics and early modern-physics ideas by showing how models can shift when wave behavior, energy quantization, or light-matter interaction becomes important. This is intentionally a bridge module: it broadens the physics map without requiring a full advanced course in each topic."
 				},
 				{
 					title: "Worked Example Set: Heating Curves, Lenses, and Threshold Ideas",
@@ -391,12 +391,12 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Building a Defensible Physics Model",
 					content:
-						"Bring the course together by focusing on assumptions, approximations, uncertainty, and communication. Explain that a strong capstone does not need to be huge; it needs to be coherent, testable, and honest about limits. Prefer projects that combine at least two major themes, such as vectors with forces, collisions with momentum, or circuits with power and heat."
+						"The capstone brings the course together through assumptions, approximations, uncertainty, and communication. A strong capstone does not need to be huge; it needs to be coherent, testable, and honest about limits. Prefer projects that combine at least two major themes, such as vectors with forces, collisions with momentum, or circuits with power and heat."
 				},
 				{
 					title: "Worked Example Set: From Physical Situation to Model",
 					content:
-						"Walk through how to choose a system, state assumptions, define variables, and decide whether the right tool is forces, energy, momentum, torque, or a hybrid model. Include one example where the first chosen model is not the best one, and revise it."
+						"Model selection includes choosing a system, stating assumptions, defining variables, and deciding whether the right tool is forces, energy, momentum, torque, or a hybrid model. Include one example where the first chosen model is not the best one, then revise it."
 				},
 				{
 					title: "Graph and Data Exercise: Prediction Versus Observation",

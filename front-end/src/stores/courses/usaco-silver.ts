@@ -363,7 +363,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Compare Greedy to Search or DP Alternatives",
 					content:
-						"Ask whether a greedy plan is truly safe or whether the problem is hinting at a different family altogether. This question becomes even more important on the path to Gold."
+						"A greedy plan must be checked for safety; if the local choice is not provably safe, the problem may be hinting at a different family altogether. This distinction becomes even more important on the path to Gold."
 				},
 				{
 					title: "Unit 5: Greedy and Structured Simulation: Core Project",

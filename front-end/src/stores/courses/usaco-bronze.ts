@@ -16,7 +16,7 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Bronze-Level Problem Framing",
 					content:
-						"This section covers Bronze problems as exercises in accurate simulation, manageable brute force, careful counting, and well-structured conditionals. The course should reduce fear by showing that many Bronze tasks are approachable once the story is translated into data and steps."
+						"This section treats Bronze problems as exercises in accurate simulation, manageable brute force, careful counting, and well-structured conditionals. Many Bronze tasks become approachable once the story is translated into data and steps."
 				},
 				{
 					title: "Trace First, Optimize Second",
@@ -155,7 +155,7 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Greedy Choice with Just Enough Justification",
 					content:
-						"Introduce small greedy arguments where choosing the earliest finish, largest gap, or best local option can be justified clearly. At Bronze level, the proof should stay intuitive but still be named aloud."
+						"Small greedy arguments apply when choosing the earliest finish, largest gap, or best local option can be justified clearly. At Bronze level, the proof should stay intuitive but still be named aloud."
 				},
 				{
 					title: "Scanning Arrays for Best Answers",
@@ -215,7 +215,7 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Look for the Key Ordering",
 					content:
-						"Emphasize that sorting often reveals the decisive pattern in a Bronze problem. Once data is ordered, the main logic may shrink to a single pass or a compact window scan."
+						"Sorting often reveals the decisive pattern in a Bronze problem. Once data is ordered, the main logic may shrink to a single pass or a compact window scan."
 				},
 				{
 					title: "Explain the Metric Being Optimized",
@@ -280,7 +280,7 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Path Simulation and Reachability",
 					content:
-						"Introduce Bronze problems that feel a little more graph-like or stateful without demanding heavy graph theory. Practice target: Staying organized as the state space becomes less linear."
+						"Bronze problems can feel a little more graph-like or stateful without demanding heavy graph theory. Practice target: Staying organized as the state space becomes less linear."
 				},
 				{
 					title: "Track Structure Explicitly",

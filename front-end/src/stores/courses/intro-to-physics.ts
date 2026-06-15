@@ -10,12 +10,12 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Introductions and Setup",
 					content:
-						"Start the course by setting up a light-weight physics workflow rather than a heavy programming stack. Use VS Code or PyCharm if Python modeling will be helpful later, but keep browser tools like PhET, Desmos, and spreadsheets ready because this course should stay highly visual and experimental. Create one physics folder for lab notes, exported graphs, photos, and short simulation writeups, and explain that no CMake or large software setup is required."
+						"Start with a light-weight physics workflow rather than a heavy programming stack. Use VS Code or PyCharm if Python modeling will be helpful later, but keep browser tools like PhET, Desmos, and spreadsheets ready because the work stays highly visual and experimental. Create one physics folder for lab notes, exported graphs, photos, and short simulation writeups; no CMake or large software setup is required."
 				},
 				{
 					title: "Measurement, Units, and Significant Figures",
 					content:
-						"Introduce physics as the practice of building models from measurements, not just memorizing formulas. Review SI units, prefixes, unit conversions, significant figures, and the difference between precision and accuracy. Frame uncertainty as part of honest scientific communication: every distance, time, and mass measurement has a useful range, not a magical exact value."
+						"Physics is the practice of building models from measurements, not just memorizing formulas. SI units, prefixes, unit conversions, significant figures, and the difference between precision and accuracy create the measurement foundation. Uncertainty is part of honest scientific communication: every distance, time, and mass measurement has a useful range, not a magical exact value."
 				},
 				{
 					title: "Worked Example Set: Estimation and Uncertainty",
@@ -67,7 +67,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Worked Example Set: Reading Motion Stories",
 					content:
-						"Use short scenarios such as a track sprinter, a marathon runner, and a tossed ball to translate between a story and a position-time or velocity-time graph. Work examples where the object speeds up, slows down, stops, reverses direction, or moves at constant velocity. Emphasize slope and area reasoning rather than formula-memorization alone."
+						"Short scenarios such as a track sprinter, a marathon runner, and a tossed ball support translation between a story and a position-time or velocity-time graph. Examples should include objects speeding up, slowing down, stopping, reversing direction, or moving at constant velocity. Slope and area reasoning matter more than formula memorization alone."
 				},
 				{
 					title: "Graph and Data Exercise: Motion Graph Detective",
@@ -114,7 +114,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Forces as Interactions",
 					content:
-						"Introduce force as an interaction between objects rather than as a vague push that automatically causes motion. Develop Newton's laws with heavy emphasis on repeated free-body diagram practice, especially balanced versus unbalanced situations. Treat weight, normal force, tension, applied force, and friction as distinct ideas so later engineering problems stay organized."
+						"Force is an interaction between objects rather than a vague push that automatically causes motion. Newton's laws depend on repeated free-body diagram practice, especially balanced versus unbalanced situations. Weight, normal force, tension, applied force, and friction should stay distinct so later engineering problems stay organized."
 				},
 				{
 					title: "Worked Example Set: Free-Body Diagram Repetition",
@@ -129,7 +129,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Mini Lab: Paper Bridge or Tower Force Analysis",
 					content:
-						"Build a simple paper bridge or tower, identify likely compression and tension regions, and predict failure points before testing. Use sketches and force arrows to explain why one design is stronger than another rather than treating the challenge as pure trial and error. This is the module's main engineering tie-in."
+						"A simple paper bridge or tower can reveal compression, tension, and likely failure points before testing. Sketches and force arrows should explain why one design is stronger than another rather than treating the challenge as pure trial and error. This is the module's main engineering tie-in."
 				},
 				{
 					title: "Simulation Challenge: Runaway Train and Elevator Forces",
@@ -171,7 +171,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Worked Example Set: Ball Drops, Ramps, and Pendulums",
 					content:
-						"Work through falling objects, ramp motion, and pendulum swings to show energy changing form while the total stays interpretable. Include at least one frictionless example and one real-world example where thermal energy matters. Emphasize describing where the energy is, not just plugging numbers into formulas."
+						"Falling objects, ramp motion, and pendulum swings show energy changing form while the total stays interpretable. Include at least one frictionless example and one real-world example where thermal energy matters. The central habit is describing where the energy is, not just plugging numbers into formulas."
 				},
 				{
 					title: "Graph and Data Exercise: Height-Speed and Energy Bar Charts",
@@ -186,7 +186,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Mini Lab: Galileo's Ball Drop Revisited",
 					content:
-						"Use a ball-drop comparison to revisit gravity with better measurement and cleaner reasoning than in the opening modules. Discuss what the experiment can actually show, what air resistance changes, and why the result supports the idea of common gravitational acceleration."
+						"A ball-drop comparison revisits gravity with better measurement and cleaner reasoning than in the opening modules. The analysis should separate what the experiment can actually show, what air resistance changes, and why the result supports the idea of common gravitational acceleration."
 				},
 				{
 					title: "Reflection Question: Why Is Energy Such a Useful Idea?",
@@ -218,7 +218,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Charge, Current, Voltage, and Resistance",
 					content:
-						"Introduce electricity gently through practical circuits rather than abstract field theory first. Define charge, current, voltage, and resistance, and build the habit of describing what each quantity means physically. Use water-flow analogies carefully: helpful for intuition, but never a substitute for precise reasoning."
+						"Electricity starts with practical circuits rather than abstract field theory. Charge, current, voltage, and resistance should be tied to physical meaning. Water-flow analogies are helpful for intuition, but they are never a substitute for precise reasoning."
 				},
 				{
 					title: "Worked Example Set: Series and Parallel Circuits",
@@ -228,7 +228,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Graph and Data Exercise: Current-Voltage Tables",
 					content:
-						"Collect or simulate several current-voltage data points for the same resistor or circuit element. Graph current versus voltage, interpret the slope qualitatively, and connect the pattern to resistance. Discuss why repeated measurements matter here too, especially when contacts or batteries are imperfect."
+						"Several current-voltage data points for the same resistor or circuit element can be collected or simulated. Graph current versus voltage, interpret the slope qualitatively, and connect the pattern to resistance. Repeated measurements matter here too, especially when contacts or batteries are imperfect."
 				},
 				{
 					title: "Mini Lab: Circuit Build and Measurement Log",
@@ -270,7 +270,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Wave Behavior Across Media",
 					content:
-						"Introduce amplitude, wavelength, frequency, and wave speed through visual and auditory examples. Compare mechanical waves such as sound with electromagnetic waves such as light, while keeping the focus on shared wave ideas first. Use this module to make physics feel highly observable and pattern-based."
+						"Amplitude, wavelength, frequency, and wave speed can be developed through visual and auditory examples. Mechanical waves such as sound and electromagnetic waves such as light should be compared through shared wave ideas first. This module should make physics feel highly observable and pattern-based."
 				},
 				{
 					title: "Worked Example Set: Pitch, Color, and Wave Speed",
@@ -322,7 +322,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Designing a Fair Physics Investigation",
 					content:
-						"Bring the course together by revisiting scientific questions, variables, controls, uncertainty, and model limits. Explain that the capstone should combine conceptual understanding, graphing, experimental design, and clear communication rather than just producing a flashy result."
+						"The capstone brings the course together by revisiting scientific questions, variables, controls, uncertainty, and model limits. A strong capstone combines conceptual understanding, graphing, experimental design, and clear communication rather than just producing a flashy result."
 				},
 				{
 					title: "Worked Example Set: Turning a Question into a Testable Plan",

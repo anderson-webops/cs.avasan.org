@@ -307,7 +307,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Loop Construction and State Tracing",
 					content:
-						"Build loops from labels, compares, and jumps instead of hiding iteration in higher-level syntax. The course should repeatedly Predict the loop counter, current address, and exit condition before they run the next instruction."
+						"Loops are built from labels, compares, and jumps instead of hiding iteration in higher-level syntax. The key prediction targets are the loop counter, current address, and exit condition before the next instruction runs."
 				},
 				{
 					title: "Search and Accumulation Patterns",

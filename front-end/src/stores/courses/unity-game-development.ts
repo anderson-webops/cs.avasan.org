@@ -52,7 +52,7 @@ export const unityGameDevelopmentCourse: RawCourse = {
 				{
 					title: "GD7.1 Displaying Text",
 					content:
-						"Introduce a simple game manager and player script split for displaying game state through on-screen text.",
+						"A simple game manager and player script split can display game state through on-screen text.",
 					projectLink: repo("UGD-07-01-displaying-text")
 				},
 				{
@@ -106,7 +106,7 @@ export const unityGameDevelopmentCourse: RawCourse = {
 				{
 					title: "GD8.3 Killer Objects",
 					content:
-						"Introduce hazard objects and failure states while keeping the player script responsibilities clear.",
+						"Hazard objects and failure states should keep the player script responsibilities clear.",
 					projectLink: repo("UGD-08-03-killer-objects")
 				}
 			],

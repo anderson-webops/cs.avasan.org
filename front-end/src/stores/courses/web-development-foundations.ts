@@ -26,7 +26,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Course Workspace and Folder Structure",
 					content:
-						"Create a workspace with folders for `html-css`, `javascript`, `full-stack`, and `deployment` so the course can evolve from static front-end work to server-backed projects without losing organization. This structure also makes it concrete that front-end code, server code, deployment notes, and operational files often belong in related but distinct places."
+						"Create a workspace with folders for `html-css`, `javascript`, `full-stack`, and `deployment` so static front-end work can evolve into server-backed projects without losing organization. This structure also makes it concrete that front-end code, server code, deployment notes, and operational files often belong in related but distinct places."
 				},
 				{
 					title: "Early Module on Browser Devtools, Git, npm, and Project Structure",
@@ -101,7 +101,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Suggested Course Family and Placement",
 					content:
-						"Describe the broader family as `JavaScript Level 1`, `JavaScript Level 2`, `Web Development Foundations`, `Full-Stack Web Apps`, and optionally `Deployment and Cloud Hosting`. This course should feel like the first place where all of those later directions become visible and where front-end practice starts growing into publishing and operations work."
+						"The broader family includes `JavaScript Level 1`, `JavaScript Level 2`, `Web Development Foundations`, `Full-Stack Web Apps`, and optionally `Deployment and Cloud Hosting`. This is the first place where those later directions become visible and where front-end practice starts growing into publishing and operations work."
 				},
 				{
 					title: "Entry Expectations from JavaScript Level 1 and 2",
@@ -111,7 +111,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "What This Course Is Not",
 					content:
-						"Clarify that the course is not only about memorizing frameworks or copying tutorial steps. It is about learning repeatable workflows, strong project boundaries, debugging discipline, and enough operational understanding that students can explain how a site is built, served, configured, and observed after launch."
+						"The course is not only about memorizing frameworks or copying tutorial steps. It is about learning repeatable workflows, strong project boundaries, debugging discipline, and enough operational understanding to explain how a site is built, served, configured, and observed after launch."
 				},
 				{
 					title: "WDF1 Positioning, Goals, and Suggested Course Family: Core Project",
@@ -257,7 +257,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "npm and Package Management",
 					content:
-						"Introduce npm as the mechanism for package installation, scripts, and local tooling rather than as a magical prerequisite for frameworks. Key idea: What `package.json` is for, why dependencies and devDependencies differ, and how scripts like `dev`, `build`, and `start` capture repeatable project behavior."
+						"npm is the mechanism for package installation, scripts, and local tooling rather than a magical prerequisite for frameworks. Key idea: what `package.json` is for, why dependencies and devDependencies differ, and how scripts like `dev`, `build`, and `start` capture repeatable project behavior."
 				},
 				{
 					title: "Modules, Bundlers, and Local Dev Servers at a Gentle Level",
@@ -405,7 +405,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Node.js Runtime and Server-Side JavaScript",
 					content:
-						"Introduce Node.js as the runtime that lets JavaScript move from the browser into server work, tooling, and automation. Key idea: The same language now runs in a different environment with different APIs, different security boundaries, and a different responsibility for input handling and process lifecycle."
+						"Node.js is the runtime that lets JavaScript move from the browser into server work, tooling, and automation. Key idea: the same language now runs in a different environment with different APIs, different security boundaries, and a different responsibility for input handling and process lifecycle."
 				},
 				{
 					title: "Express or Fastify as the API Surface",
@@ -420,7 +420,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Auth Basics and Session vs Token Concepts",
 					content:
-						"Introduce authentication at a conceptual level by distinguishing identity, authorization, sessions, and tokens. A complete production auth system is not required here, but the lesson should explain why login state, cookies, bearer tokens, and protected routes change the design of both front-end and back-end code."
+						"Authentication starts conceptually by distinguishing identity, authorization, sessions, and tokens. A complete production auth system is not required here, but the material should explain why login state, cookies, bearer tokens, and protected routes change the design of both front-end and back-end code."
 				},
 				{
 					title: "WDF5 Stage 4: Back-End Basics: Core Project",
@@ -490,7 +490,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Indexes at a High Level",
 					content:
-						"Introduce indexes conceptually rather than as a deep database-internals topic. Key idea: Indexes trade extra storage and write cost for faster queries and that data shape and access patterns influence performance long before a project becomes large."
+						"Indexes should be handled conceptually rather than as a deep database-internals topic. Key idea: indexes trade extra storage and write cost for faster queries, and data shape and access patterns influence performance long before a project becomes large."
 				},
 				{
 					title: "When to Choose SQL vs NoSQL",
@@ -635,7 +635,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Cloud and Platform Ideas",
 					content:
-						"Introduce front-end deployment platforms such as Vercel or Netlify and back-end targets such as Render, Fly.io, Railway, or a VPS. At a higher level, introduce AWS ideas including EC2 for servers, S3 for static hosting, CloudFront conceptually, Route 53 for DNS, and security groups or IAM as controlled access surfaces rather than as memorization-heavy topics."
+						"Front-end deployment platforms include Vercel or Netlify, while back-end targets include Render, Fly.io, Railway, or a VPS. Higher-level AWS ideas include EC2 for servers, S3 for static hosting, CloudFront conceptually, Route 53 for DNS, and security groups or IAM as controlled access surfaces rather than memorization-heavy topics."
 				},
 				{
 					title: "Database Hosting and Recovery Basics",
@@ -645,7 +645,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Use Hosting Topics to Connect the Whole Stack",
 					content:
-						"This section should unify earlier lessons by showing how front-end bundles, Node servers, databases, domains, environment variables, and logs all meet in production. The target outcome is that students can name the likely deployment surface and operational responsibility for each layer of a small web product."
+						"This section unifies earlier lessons by showing how front-end bundles, Node servers, databases, domains, environment variables, and logs all meet in production. The target outcome is the ability to name the likely deployment surface and operational responsibility for each layer of a small web product."
 				},
 				{
 					title: "WDF8 Hosting and Operations Topics to Add: Core Project",
@@ -800,7 +800,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "TLS and Reverse Proxies",
 					content:
-						"Introduce TLS and reverse proxies at the operational level so students learn where HTTPS termination often happens, why certificates matter, and how a reverse proxy can stand between public traffic and an app process. This gives deployment architecture more meaning than a collection of copied config snippets."
+						"TLS and reverse proxies should be understood at the operational level: where HTTPS termination often happens, why certificates matter, and how a reverse proxy can stand between public traffic and an app process. This gives deployment architecture more meaning than a collection of copied config snippets."
 				},
 				{
 					title: "Backups, Environment Rotation, and Performance Basics",
@@ -810,7 +810,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Move from Deployment to Operations Thinking",
 					content:
-						"Use this advanced strand to show that deployment is the start of operational responsibility, not the end of the project. Students who complete the strand should be able to explain how they would monitor, protect, and maintain a small production system after launch."
+						"This advanced strand frames deployment as the start of operational responsibility, not the end of the project. Completion evidence should include an explanation of how to monitor, protect, and maintain a small production system after launch."
 				},
 				{
 					title: "WDF10 Suggested Advanced Strand: Core Project",
@@ -950,7 +950,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "CI/CD with GitHub Actions",
 					content:
-						"Introduce CI/CD as the automation layer that can lint, test, build, and deploy projects after the manual workflow is already clear. Visible pattern: CI/CD as a codified version of their development and deployment discipline, not as a shortcut that replaces understanding."
+						"CI/CD is the automation layer that can lint, test, build, and deploy projects after the manual workflow is already clear. Visible pattern: CI/CD as a codified version of development and deployment discipline, not as a shortcut that replaces understanding."
 				},
 				{
 					title: "Postgres as a SQL Companion Track",
