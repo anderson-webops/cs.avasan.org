@@ -5582,7 +5582,7 @@ function studioSupport(context: CourseTextContext) {
 		() =>
 			`Separate ${studioLabel} setup, core behavior, edge cases, and review notes so the finished artifact can be inspected later.`,
 		() =>
-			`Build the smallest complete ${studioLabel} artifact first, then record evidence that shows it meets the activity requirements.`,
+			`Build the smallest complete version of ${studioLabel} first, then record evidence that shows it meets the activity requirements.`,
 		() =>
 			`Use ${studioLabel} to connect prerequisite ideas to a concrete result, a testable constraint, and a visible review point.`,
 		() =>

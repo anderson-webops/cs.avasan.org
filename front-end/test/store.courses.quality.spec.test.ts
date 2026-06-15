@@ -1213,6 +1213,7 @@ describe("course text quality normalization", () => {
 			const nestedBoldStudioGoals: string[] = [];
 			const repeatedStudioTitles: string[] = [];
 			const studioParentheticalResidue: string[] = [];
+			const studioArticleGrammarResidue: string[] = [];
 			const repeatedWords: string[] = [];
 			const courses = await Promise.all(
 				courseCatalog.map(entry => loadRawCourse(entry.id))
@@ -1289,6 +1290,14 @@ describe("course text quality normalization", () => {
 									`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title}`
 								);
 							}
+							const awkwardStudioGrammar = item.content.match(
+								/\b(?:smallest complete|minimum working|complete) the (?:studio|lab)(?: artifact)?\b/i
+							);
+							if (awkwardStudioGrammar) {
+								studioArticleGrammarResidue.push(
+									`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title} / ${awkwardStudioGrammar[0]}`
+								);
+							}
 						}
 						const repeatedWordMatch =
 							item.content.match(repeatedWordPattern);
@@ -1307,11 +1316,13 @@ describe("course text quality normalization", () => {
 			expect(nestedBoldStudioGoals).toEqual([]);
 			expect(repeatedStudioTitles).toEqual([]);
 			expect(studioParentheticalResidue).toEqual([]);
+			expect(studioArticleGrammarResidue).toEqual([]);
 			expect(repeatedWords).toEqual([]);
 			expect(corpus).not.toMatch(/typical the response example/i);
 			expect(corpus).not.toMatch(/the response known values/i);
 			expect(corpus).not.toMatch(/the response answer/i);
 			expect(corpus).not.toMatch(/the response reason/i);
+			expect(corpus).not.toMatch(/\bthe A, B, C, D example\b/i);
 			expect(corpus).toContain("Work a typical example");
 			expect(corpus).toContain("Modeling or Error Analysis");
 		},
