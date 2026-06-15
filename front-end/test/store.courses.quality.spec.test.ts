@@ -1206,10 +1206,13 @@ describe("course text quality normalization", () => {
 		"keeps loaded course titles concise and generated math support grammar neutral",
 		async () => {
 			const longItemTitles: string[] = [];
+			const redundantGenericTitles: string[] = [];
 			const courses = await Promise.all(
 				courseCatalog.map(entry => loadRawCourse(entry.id))
 			);
 			const corpus = courses.map(allCourseText).join("\n");
+			const genericTitleSuffix =
+				/(?:Applied Challenge|Core Project|Debugging and Failure Modes|Diagnostic Checkpoint|Extension Challenge|Fluency Drill|Focused Practice|Modeling or Error Analysis|Open-Ended Variant|Planning and Architecture|Standards Practice Set|Supplemental(?: Project| Practice)? [23]|Verification and Reflection)$/i;
 
 			for (const [courseIndex, course] of courses.entries()) {
 				expect(course, courseCatalog[courseIndex].id).not.toBeNull();
@@ -1225,11 +1228,23 @@ describe("course text quality normalization", () => {
 								`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title}`
 							);
 						}
+						if (
+							genericTitleSuffix.test(item.title) &&
+							(item.title.startsWith(`${module.title}:`) ||
+								item.title.startsWith(
+									`${course.name}: ${module.title}`
+								))
+						) {
+							redundantGenericTitles.push(
+								`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title}`
+							);
+						}
 					}
 				}
 			}
 
 			expect(longItemTitles).toEqual([]);
+			expect(redundantGenericTitles).toEqual([]);
 			expect(corpus).not.toMatch(/typical the response example/i);
 			expect(corpus).not.toMatch(/the response known values/i);
 			expect(corpus).not.toMatch(/the response answer/i);

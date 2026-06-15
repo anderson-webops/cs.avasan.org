@@ -220,12 +220,12 @@ function genericSupplementalNeedsCourseContext(moduleTitle: string) {
 }
 
 function contextualizeGenericItemTitle(
-	courseTitle: string,
+	_courseTitle: string,
 	moduleTitle: string,
 	itemTitle: string
 ) {
 	if (itemTitle === "Diagnostic Checkpoint") {
-		return `${moduleTitle}: Diagnostic Checkpoint`;
+		return "Diagnostic Checkpoint";
 	}
 
 	const supplementalMatch = itemTitle.match(/^(.+?) Supplemental ([23])$/i);
@@ -238,10 +238,10 @@ function contextualizeGenericItemTitle(
 		sameTitle(baseTitle, moduleTitle) ||
 		genericSupplementalNeedsCourseContext(moduleTitle)
 	) {
-		return `${withCourseContext(courseTitle, moduleTitle)} Supplemental ${number}`;
+		return `Supplemental Practice ${number}`;
 	}
 
-	return `${moduleTitle}: Supplemental ${number}`;
+	return `Supplemental Practice ${number}`;
 }
 
 function normalizeDisplayTitles(course: RawCourse) {
@@ -255,6 +255,88 @@ function normalizeDisplayTitles(course: RawCourse) {
 			item.title = contextualizeGenericItemTitle(
 				course.name,
 				module.title,
+				item.title
+			);
+		}
+	}
+}
+
+function escapedRegExp(text: string) {
+	return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function conciseGenericItemTitle(suffix: string) {
+	const trimmed = suffix.trim();
+	const supplementalMatch = trimmed.match(
+		/^Supplemental(?: Project| Practice)? ([23])$/i
+	);
+
+	if (supplementalMatch) {
+		return `Supplemental Practice ${supplementalMatch[1]}`;
+	}
+
+	const genericSuffixes = new Set([
+		"Applied Challenge",
+		"Core Project",
+		"Debugging and Failure Modes",
+		"Diagnostic Checkpoint",
+		"Extension Challenge",
+		"Fluency Drill",
+		"Focused Practice",
+		"Modeling or Error Analysis",
+		"Open-Ended Variant",
+		"Planning and Architecture",
+		"Standards Practice Set",
+		"Verification and Reflection"
+	]);
+
+	return genericSuffixes.has(trimmed) ? trimmed : null;
+}
+
+function removeRedundantItemTitleContext(
+	course: RawCourse,
+	module: RawCourseModule,
+	title: string
+) {
+	const prefixes = [
+		module.title,
+		withCourseContext(course.name, module.title)
+	].filter(Boolean);
+
+	for (const prefix of prefixes) {
+		const escapedPrefix = escapedRegExp(prefix);
+		const colonMatch = title.match(
+			new RegExp(`^${escapedPrefix}:\\s*(.+)$`, "i")
+		);
+		const colonSuffix = colonMatch
+			? conciseGenericItemTitle(colonMatch[1])
+			: null;
+		if (colonSuffix) return colonSuffix;
+
+		const spacedMatch = title.match(
+			new RegExp(
+				`^${escapedPrefix}\\s+(Supplemental(?: Project| Practice)? [23])$`,
+				"i"
+			)
+		);
+		const spacedSuffix = spacedMatch
+			? conciseGenericItemTitle(spacedMatch[1])
+			: null;
+		if (spacedSuffix) return spacedSuffix;
+	}
+
+	return title;
+}
+
+function normalizeContextualItemTitles(course: RawCourse) {
+	for (const module of course.modules) {
+		for (const item of [
+			...module.curriculum,
+			...module.supplementalProjects
+		]) {
+			item.title = removeRedundantItemTitleContext(
+				course,
+				module,
 				item.title
 			);
 		}
@@ -5917,6 +5999,7 @@ export function normalizeRawCourse(id: string, rawCourse: RawCourse) {
 	applyResearchBackedExpansions(id, course);
 	applyCourseImplementationArtifacts(id, course);
 	normalizeImplementationLabLanguage(course);
+	normalizeContextualItemTitles(course);
 	formatDenseProcedureInstructions(course);
 	normalizeCourseTextQuality(course, id);
 	neutralizeStudentFacingCourseText(course);
