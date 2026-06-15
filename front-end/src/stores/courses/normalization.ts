@@ -325,6 +325,20 @@ function compactAppliedLabTitle(title: string) {
 		.trim();
 }
 
+function cleanAppliedLabDisplayTitle(title: string) {
+	return title
+		.replace(/\bPattern Applied Lab\b/g, "Pattern Lab")
+		.replace(/:\s*Applied Lab$/i, "")
+		.replace(/\s{2,}/g, " ")
+		.trim();
+}
+
+function cleanAppliedLabReferenceText(text: string) {
+	return text
+		.replace(/\bPattern Applied Lab\b/g, "Pattern Lab")
+		.replace(/(\*\*[^*\n]{1,160}?): Applied Lab(\*\*)/g, "$1$2");
+}
+
 function neutralizeLessonPointText(text: string) {
 	const hasSupportLabel =
 		/\*\*(?:Focus|Expected outcome|Verification focus|Readable output|Project goal|Concept path|Readiness check|Common pitfalls|Mastery check|Remote investigation|Science explanation|Studio focus|Build sequence|Completion checks|Evidence target|Evidence targets|Extension):?\*\*/i.test(
@@ -5393,6 +5407,7 @@ function normalizeImplementationLabLanguage(course: RawCourse) {
 		module.title = module.title
 			.replace(patternImplementationTitlePattern, "Pattern Applied Lab")
 			.replace(titlePattern, ": Applied Lab");
+		module.title = cleanAppliedLabDisplayTitle(module.title);
 
 		for (const section of ["curriculum", "supplementalProjects"] as const) {
 			for (const item of module[section]) {
@@ -5403,6 +5418,7 @@ function normalizeImplementationLabLanguage(course: RawCourse) {
 					)
 					.replace(titlePattern, ": Applied Lab")
 					.replace(implementationLabelPattern, "Applied Lab");
+				item.title = cleanAppliedLabDisplayTitle(item.title);
 				item.content = item.content
 					.replace(
 						patternImplementationTitlePattern,
@@ -5431,6 +5447,7 @@ function normalizeImplementationLabLanguage(course: RawCourse) {
 						genericSupplementalPattern,
 						"Use this supplemental task as adjacent practice. The linked repository gives a starting point; any reference link shows one complete solution path. Focus on the same core idea while handling a different input shape, constraint, or edge case."
 					);
+				item.content = cleanAppliedLabReferenceText(item.content);
 			}
 		}
 	}
