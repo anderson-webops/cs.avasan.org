@@ -12,12 +12,12 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Mu, VS Code, and PyCharm",
 					content:
-						"Compare the three main editor paths directly. Start younger or newer students in `Mu` when setup friction matters most, move most students to `VS Code` for better debugging and file management, and keep `PyCharm` as the advanced Python-specific option once the student is comfortable with a fuller IDE."
+						"Compare the three main editor paths directly. `Mu` works best when setup friction matters most, `VS Code` is the standard path for debugging and file management, and `PyCharm` is the advanced Python-specific option once a fuller IDE is useful."
 				},
 				{
 					title: "Asset Folder Layout",
 					content:
-						"Standardize the project layout early with `images`, `sounds`, `music`, and per-project files. The course should treat asset management as part of game engineering rather than a side issue students only debug after the game logic is written."
+						"Standardize the project layout early with `images`, `sounds`, `music`, and per-project files. Asset management is part of game engineering, not a side issue to debug only after the game logic is written."
 				},
 				{
 					title: "Early Debugging Habits",
@@ -91,17 +91,17 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Actors",
 					content:
-						'Define WIDTH = 400 and HEIGHT = 300 (all caps) at the top of the file to set the window size. Explain that an object groups data and functions (like the turtle object: position, color, movement functions). Introduce the Actor object for players, enemies, and collectibles; it has x, y, and an image, plus methods like draw() and collision helpers. Create an alien actor with alien = Actor("alien"). Define def draw(): and inside call screen.clear() then alien.draw(). Add an update() function that moves the alien, e.g. alien.x += 5. Experiment with changing x and y, positive vs negative values, and different speeds.'
+						'Define WIDTH = 400 and HEIGHT = 300 (all caps) at the top of the file to set the window size. An object groups data and functions, similar to a turtle object with position, color, and movement functions. The Actor object represents players, enemies, and collectibles; it has x, y, and an image, plus methods like draw() and collision helpers. Create an alien actor with alien = Actor("alien"). Define def draw(): and inside call screen.clear() then alien.draw(). Add an update() function that moves the alien, e.g. alien.x += 5. Experiment with changing x and y, positive vs negative values, and different speeds.'
 				},
 				{
 					title: "Position Keywords",
 					content:
-						"Explain that the coordinate system starts at (0, 0) in the top-left, with y increasing downward. Show position keywords like topleft, topright, bottomleft, bottomright, midtop, midleft, midright, midbottom, and center. Place the alien with alien.bottomleft = (0, HEIGHT) or other keywords and let the experiment. Improve wrapping logic so the alien fully leaves the screen before reappearing: use if alien.left > WIDTH: alien.right = 0 in update()."
+						"The coordinate system starts at (0, 0) in the top-left, with y increasing downward. Position keywords include topleft, topright, bottomleft, bottomright, midtop, midleft, midright, midbottom, and center. Place the alien with alien.bottomleft = (0, HEIGHT) or other keywords and experiment with the result. Improve wrapping logic so the alien fully leaves the screen before reappearing: use if alien.left > WIDTH: alien.right = 0 in update()."
 				},
 				{
 					title: "Global Variables & Bouncing",
 					content:
-						"Introduce global variables as those defined outside a function. Create a global speed variable, e.g. xspeed = 5, and use it in update() with alien.x += xspeed. When modifying a global inside a function, declare it with global xspeed at the top of update(). Instead of wrapping, make the alien bounce off a wall by flipping the sign of xspeed when the alien hits an edge, e.g. when alien.right >= WIDTH, set xspeed = -xspeed."
+						"Global variables are defined outside a function. Create a global speed variable, e.g. xspeed = 5, and use it in update() with alien.x += xspeed. When modifying a global inside a function, declare it with global xspeed at the top of update(). Instead of wrapping, make the alien bounce off a wall by flipping the sign of xspeed when the alien hits an edge, e.g. when alien.right >= WIDTH, set xspeed = -xspeed."
 				},
 				{
 					title: "PyG1 Project 1: Rainbow Fill",
@@ -184,7 +184,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Keyboard Events",
 					content:
-						'Introduce event listeners as code that runs when specific events happen. Show on_key_down(key) which is called when a key is pressed. First, move the alien on any key press, then restrict it with if key == keys.RIGHT: so it only moves right with the right arrow. For continuous movement, check in update() with if keyboard.right: to keep moving while the key is held. Use alien.angle = 180 when "w" is pressed, alien.angle = 0 (or similar) on "s" to reset, and alien.angle += 5 / alien.angle -= 5 on "a" and "d" to rotate left and right. Use on_key_up(key) when you need to respond to key releases, e.g. move the alien up 10 pixels when the space key is released.'
+						'Event listeners are code that runs when specific events happen. on_key_down(key) is called when a key is pressed. First, move the alien on any key press, then restrict it with if key == keys.RIGHT: so it only moves right with the right arrow. For continuous movement, check in update() with if keyboard.right: to keep moving while the key is held. Use alien.angle = 180 when "w" is pressed, alien.angle = 0 (or similar) on "s" to reset, and alien.angle += 5 / alien.angle -= 5 on "a" and "d" to rotate left and right. Use on_key_up(key) when responding to key releases, e.g. move the alien up 10 pixels when the space key is released.'
 				},
 				{
 					title: "Mouse Events",
@@ -272,7 +272,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "ZRect Class",
 					content:
-						"Explain that a ZRect object represents a rectangle with position, width, and height, and can be used to draw shapes and detect overlaps. Define WIDTH and HEIGHT, then create a rectangle with box = ZRect((100, 100), (50, 50)). In draw(), use screen.draw.rect(box, (255, 0, 0)) to draw a red rectangle. Experiment with different colors using (r, g, b) values and practice creating rectangles that cover the whole screen or only half. Show that ZRects support the same position keywords as actors (e.g. box.center, box.topleft)."
+						"A ZRect object represents a rectangle with position, width, and height, and can be used to draw shapes and detect overlaps. Define WIDTH and HEIGHT, then create a rectangle with box = ZRect((100, 100), (50, 50)). In draw(), use screen.draw.rect(box, (255, 0, 0)) to draw a red rectangle. Experiment with different colors using (r, g, b) values and practice creating rectangles that cover the whole screen or only half. ZRects support the same position keywords as actors, such as box.center and box.topleft."
 				},
 				{
 					title: "PyG3 Project 1: ZRect Art",
@@ -300,7 +300,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Dynamic Attributes",
 					content:
-						"Explain that using many global variables for per-actor data doesn't scale. Instead, create dynamic attributes on actors, such as ball.xspeed = 10 and ball.yspeed = 5, and in update() move with ball.x += ball.xspeed and ball.y += ball.yspeed. Use dynamic attributes for values tied to a single actor (speed, lives, color), and reserve globals for overall game state like score, timers, or isGameOver."
+						"Using many global variables for per-actor data does not scale. Instead, create dynamic attributes on actors, such as ball.xspeed = 10 and ball.yspeed = 5, and in update() move with ball.x += ball.xspeed and ball.y += ball.yspeed. Use dynamic attributes for values tied to a single actor (speed, lives, color), and reserve globals for overall game state like score, timers, or isGameOver."
 				},
 				{
 					title: "PyG3 Project 3: Beach Ball Chase",
@@ -455,17 +455,17 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check-In #1: ZRect and Dynamic Attributes",
 					content:
-						"ZRect-1: Ask what a ZRect is and when it is useful. ZRect-2/3/4: Create a blue ZRect of width 50 and height 50 at a random position and draw it to the screen. ZRect-5: Ask what dynamic attributes are and how they help attach data like speed or color to a specific object. ZRect-6: Use dynamic attributes to move the blue ZRect up and down the screen. ZRect-7: When the alien collides with the ZRect, change its color to a random one. ZRect-8: Discuss how program behavior changes if .colliderect() is replaced with .contains()."
+						"ZRect-1: Define what a ZRect is and when it is useful. ZRect-2/3/4: Create a blue ZRect of width 50 and height 50 at a random position and draw it to the screen. ZRect-5: Describe what dynamic attributes are and how they help attach data like speed or color to a specific object. ZRect-6: Use dynamic attributes to move the blue ZRect up and down the screen. ZRect-7: When the alien collides with the ZRect, change its color to a random one. ZRect-8: Compare how program behavior changes if .colliderect() is replaced with .contains()."
 				},
 				{
 					title: "Check-In #1: Collectibles",
 					content:
-						"Collectibles-1: Ask what happens when we want multiple boxes on screen and how lists help manage them. Collectibles-2/3: Create 10 blue ZRects, store them in a list, move them in random directions, and make them bounce off the edges of the screen. Collectibles-4: When any box collides with the alien, change its color to a random one. Collectibles-5: When boxes collide with each other, make them bounce off each other by reversing their speeds."
+						"Collectibles-1: Describe why multiple boxes on screen need a shared structure and how lists help manage them. Collectibles-2/3: Create 10 blue ZRects, store them in a list, move them in random directions, and make them bounce off the edges of the screen. Collectibles-4: When any box collides with the alien, change its color to a random one. Collectibles-5: When boxes collide with each other, make them bounce off each other by reversing their speeds."
 				},
 				{
 					title: "Check-In #1: Additional Practice Project",
 					content:
-						"Create a game where an alien collects coins. Coins increase the score by 1 when collected. Add three red blocks that move up and down the screen; if the alien touches a red block, the player loses 10 points and the alien resets to a random position. Discuss how to structure the game using actors, lists, and collision checks.",
+						"Create a game where an alien collects coins. Coins increase the score by 1 when collected. Add three red blocks that move up and down the screen; if the alien touches a red block, the player loses 10 points and the alien resets to a random position. Structure the game using actors, lists, and collision checks.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -551,7 +551,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Friction",
 					content:
-						"Introduce friction as a force that slows moving objects when they are in contact with a surface. Create a ball Actor whose bottom touches the bottom of the screen with dynamic attributes xspeed and yspeed, setting xspeed = 10 and yspeed = 0. Define a global FRICTION = 0.95 and in update() multiply ball.xspeed and ball.yspeed by FRICTION each frame before updating position. Observe that fast motion slows quickly while slow motion tapers off gently when multiplying by a value slightly less than 1. Experiment with different starting speeds and friction values, including cases where FRICTION is closer to 1 (gentle slowing), much lower (rapid stop), and greater than 1 (the ball speeds up instead of slowing down) and discuss which feels realistic for games."
+						"Friction is a force that slows moving objects when they are in contact with a surface. Create a ball Actor whose bottom touches the bottom of the screen with dynamic attributes xspeed and yspeed, setting xspeed = 10 and yspeed = 0. Define a global FRICTION = 0.95 and in update() multiply ball.xspeed and ball.yspeed by FRICTION each frame before updating position. Observe that fast motion slows quickly while slow motion tapers off gently when multiplying by a value slightly less than 1. Experiment with different starting speeds and friction values, including cases where FRICTION is closer to 1 (gentle slowing), much lower (rapid stop), and greater than 1 (the ball speeds up instead of slowing down), then decide which feels realistic for games."
 				},
 				{
 					title: "PyG5 Project 2: Golf",
@@ -623,7 +623,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Platforms with ZRect",
 					content:
-						"Introduce ZRect for solid platforms that a character can stand on. Create a floor ZRect at the bottom of the screen using floor = ZRect((0, HEIGHT - 20), (WIDTH, 20)) and draw it in draw() with screen.draw.filled_rect(floor, (255, 255, 255)). Create an alien Actor in the center with dynamic xspeed and yspeed. Add global GRAVITY and FRICTION and in update() apply gravity to yspeed, friction to xspeed, and update alien.x and alien.y so the alien falls through the floor. Then implement platform collision with if alien.colliderect(floor): alien.bottom = floor.top; alien.yspeed = 0 so the alien stands on the floor. Add keyboard.left and keyboard.right controls that adjust xspeed, and implement jumping with a space key. To prevent double jumps, create alien.onground = False, change the jump condition to if keyboard.space and alien.onground and set alien.onground = False when jumping, and set alien.onground = True inside the platform collision logic. Test that the alien can only jump when standing on the platform."
+						"ZRect can represent solid platforms that a character can stand on. Create a floor ZRect at the bottom of the screen using floor = ZRect((0, HEIGHT - 20), (WIDTH, 20)) and draw it in draw() with screen.draw.filled_rect(floor, (255, 255, 255)). Create an alien Actor in the center with dynamic xspeed and yspeed. Add global GRAVITY and FRICTION and in update() apply gravity to yspeed, friction to xspeed, and update alien.x and alien.y so the alien falls through the floor. Then implement platform collision with if alien.colliderect(floor): alien.bottom = floor.top; alien.yspeed = 0 so the alien stands on the floor. Add keyboard.left and keyboard.right controls that adjust xspeed, and implement jumping with a space key. To prevent double jumps, create alien.onground = False, change the jump condition to if keyboard.space and alien.onground and set alien.onground = False when jumping, and set alien.onground = True inside the platform collision logic. Test that the alien can only jump when standing on the platform."
 				},
 				{
 					title: "Moving Platforms",
@@ -719,7 +719,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check-In #2: Gravity (Bigfoot Game)",
 					content:
-						"Gravity-setup: Start from the Bigfoot starter game (check_in_2_starter.py) and inspect the code so the movement logic is clear before adding gravity. Gravity-1: Ask what global variables and dynamic attributes are needed to add gravity (a global gravity and a yspeed attribute on Bigfoot; xspeed is optional). Gravity-2: Add these variables to the game. Gravity-3: In update(), apply gravity to Bigfoot by increasing yspeed and updating his y position. Gravity-4: Add code to stop Bigfoot at the floor instead of letting him fall through. Gravity-5: Add an event listener so pressing the up arrow makes Bigfoot jump."
+						"Gravity-setup: Start from the Bigfoot starter game (check_in_2_starter.py) and inspect the code so the movement logic is clear before adding gravity. Gravity-1: Identify the global variables and dynamic attributes needed to add gravity, such as a global gravity value and a yspeed attribute on Bigfoot; xspeed is optional. Gravity-2: Add these variables to the game. Gravity-3: In update(), apply gravity to Bigfoot by increasing yspeed and updating his y position. Gravity-4: Add code to stop Bigfoot at the floor instead of letting him fall through. Gravity-5: Add an event listener so pressing the up arrow makes Bigfoot jump."
 				},
 				{
 					title: "Check-In #2: Friction (Shuffleboard Game)",
@@ -734,7 +734,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check-In #2: Many Platforms",
 					content:
-						"Many-1: Discuss how to store many platforms using a list. Many-setup: Make a copy of the Bigfoot game file for a version with multiple platforms. Many-2: Create a list of 10 platforms with random sizes, positions, and colors and store the color as a dynamic attribute. Many-3: Modify draw() to draw all platforms using their color attributes. Many-4: Update collision logic so Bigfoot can stand on any platform in the list, not just one."
+						"Many-1: Store many platforms using a list. Many-setup: Make a copy of the Bigfoot game file for a version with multiple platforms. Many-2: Create a list of 10 platforms with random sizes, positions, and colors and store the color as a dynamic attribute. Many-3: Modify draw() to draw all platforms using their color attributes. Many-4: Update collision logic so Bigfoot can stand on any platform in the list, not just one."
 				},
 				{
 					title: "Check-In #2: Additional Practice Project",
@@ -800,17 +800,17 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Game Screens with gameState",
 					content:
-						'Introduce the concept of multiple game screens such as start, play, pause, and end. Create an alien Actor in the center of the screen and a global string gameState = "start". In on_key_down(), when the space key is pressed, change gameState to "play". In draw(), use if/else on gameState so that when gameState is "start" you show only text like "Press Space to Play!" and when it is "play" you draw the alien and hide the start text. Discuss how this pattern can extend to pause and game-over screens later and why using a small set of string states keeps the logic organized.'
+						'Multiple game screens such as start, play, pause, and end can be represented with a state variable. Create an alien Actor in the center of the screen and a global string gameState = "start". In on_key_down(), when the space key is pressed, change gameState to "play". In draw(), use if/else on gameState so that when gameState is "start" you show only text like "Press Space to Play!" and when it is "play" you draw the alien and hide the start text. This pattern extends to pause and game-over screens later, and using a small set of string states keeps the logic organized.'
 				},
 				{
 					title: "Time Module and Pausing",
 					content:
-						"Explain that Python's time module provides utilities for working with real time. Import time at the top of the file. Modify a simple alien-running game so that when the alien reaches the right edge of the screen, the game pauses for one second before resetting the alien to the left. Use time.sleep(1) to introduce a blocking delay and discuss its limitations: it freezes the entire game loop and is only appropriate for brief transitions or very simple effects."
+						"Python's time module provides utilities for working with real time. Import time at the top of the file. Modify a simple alien-running game so that when the alien reaches the right edge of the screen, the game pauses for one second before resetting the alien to the left. Use time.sleep(1) to create a blocking delay and note its limitation: it freezes the entire game loop and is only appropriate for brief transitions or very simple effects."
 				},
 				{
 					title: "Clock Scheduling in Pygame Zero",
 					content:
-						'Show how to schedule functions without freezing the game using Pygame Zero\'s clock. Create an alien that can be clicked to change its image to a "hurt" version. Define setAlienNormal() to restore the alien\'s normal image. Replace any time.sleep calls with clock.schedule_unique(setAlienNormal, 1.0) in the click handler so the alien looks hurt for one second while the game keeps running. Next, define moveRandom() to move the alien to a random screen position and use clock.schedule_interval(moveRandom, 0.5) when the player presses space so the alien teleports every half second. Add clock.unschedule(moveRandom) when the player presses "s" to stop the movement. Emphasize that schedule_unique runs once after a delay, schedule_interval runs repeatedly, and unschedule cancels scheduled callbacks.'
+						'Pygame Zero\'s clock schedules functions without freezing the game. Create an alien that can be clicked to change its image to a "hurt" version. Define setAlienNormal() to restore the alien\'s normal image. Replace any time.sleep calls with clock.schedule_unique(setAlienNormal, 1.0) in the click handler so the alien looks hurt for one second while the game keeps running. Next, define moveRandom() to move the alien to a random screen position and use clock.schedule_interval(moveRandom, 0.5) when the player presses space so the alien teleports every half second. Add clock.unschedule(moveRandom) when the player presses "s" to stop the movement. Key distinction: schedule_unique runs once after a delay, schedule_interval runs repeatedly, and unschedule cancels scheduled callbacks.'
 				},
 				{
 					title: "PyG7 Project 1: Alien Catch",
@@ -835,12 +835,12 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Level Design Concepts",
 					content:
-						"Discuss levels as a way to keep games challenging. Explain pre-generated levels (fixed layouts, specific enemy or power-up locations, designed maps) versus randomized levels (enemies or collectibles spawn at random positions or times). Point out that many games mix both approaches, using a pre-built map with some random enemy or item spawns. Introduce a global level variable to track the current level and show how it can drive logic such as difficulty, spawn rates, and layout changes. Connect this to gameState so it's clear which screen is active versus which level is being played."
+						"Levels keep games challenging by changing layout, difficulty, or goals over time. Pre-generated levels use fixed layouts, specific enemy or power-up locations, and designed maps; randomized levels spawn enemies or collectibles at random positions or times. Many games mix both approaches by using a pre-built map with some random enemy or item spawns. A global level variable can track the current level and drive logic such as difficulty, spawn rates, and layout changes. Connect this to gameState so it is clear which screen is active versus which level is being played."
 				},
 				{
 					title: "PyG7 Project 3: Number Count",
 					content:
-						'Implement a memory and timing game that uses levels, music, and multiple screens. The finished Number Count game should make its components, interactions, and screen flow easy to explain. On the start screen, let the player select easy, medium, or hard difficulty. Initialize the player with 3 lives and 3 numbered blocks in level 1. For each level, display purple tiles that show numbers in order; after the player clicks the tile labeled "1", hide numbers on the other tiles and start a timer. Track which number the player should click next with a variable and, when they click correctly, play a chime and keep that tile\'s number visible. Use music.play("tune.mp3") for background music. When time runs out, reduce lives by one; when lives reach zero, show a game-over screen where the player can choose to play again or quit with the space and Escape keys. When the player completes all 15 levels, show a winning end screen with a congratulatory message and restart options. Explain how to store and increment the level and how to scale the number of tiles with each level.',
+						'Implement a memory and timing game that uses levels, music, and multiple screens. The finished Number Count game should make its components, interactions, and screen flow easy to explain. On the start screen, let the player select easy, medium, or hard difficulty. Initialize the player with 3 lives and 3 numbered blocks in level 1. For each level, display purple tiles that show numbers in order; after the player clicks the tile labeled "1", hide numbers on the other tiles and start a timer. Track which number the player should click next with a variable and, when they click correctly, play a chime and keep that tile\'s number visible. Use music.play("tune.mp3") for background music. When time runs out, reduce lives by one; when lives reach zero, show a game-over screen where the player can choose to play again or quit with the space and Escape keys. When the player completes all 15 levels, show a winning end screen with a congratulatory message and restart options. Store and increment the level, then scale the number of tiles with each level.',
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -1313,7 +1313,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Recap & Readiness Check",
 					content:
-						"Review what went into building Space Invaders and identify which parts of the course felt strongest and which parts still need reinforcement. Use that reflection to decide whether the student is ready to move on to Python Level 2 or should spend more time strengthening the PyGame fundamentals."
+						"Review what went into building Space Invaders and identify which parts of the course felt strongest and which parts still need reinforcement. Use that reflection to decide whether the next step should be Python Level 2 or additional PyGame fundamentals practice."
 				},
 				{
 					title: "PyG12 Project 1: Master Project",

@@ -281,7 +281,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Count Indirectly when Direct Counting Is Awkward",
 					content:
-						"Show how partial sums, difference reasoning, and transformed arrays can make a messy direct count suddenly simple. Silver problems often reward this change in perspective."
+						"Partial sums, difference reasoning, and transformed arrays can make a messy direct count suddenly simple. Silver problems often reward this change in perspective."
 				},
 				{
 					title: "Build Small Examples First",

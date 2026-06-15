@@ -495,7 +495,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "When to Choose SQL vs NoSQL",
 					content:
-						"Give students a comparison framework instead of rigid rules. Show how structured relationships, transactional needs, and reporting often push toward SQL, while flexible document shapes and certain rapid prototypes can fit NoSQL well, then stress that the right choice depends on the product's data behavior and future needs."
+						"Use a comparison framework instead of rigid rules. Structured relationships, transactional needs, and reporting often push toward SQL, while flexible document shapes and certain rapid prototypes can fit NoSQL well. The right choice depends on the product's data behavior and future needs."
 				},
 				{
 					title: "WDF6 Stage 5: Databases and Data Models: Core Project",

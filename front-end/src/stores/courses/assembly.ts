@@ -655,7 +655,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Optimization Changes the Shape, Not the Goal",
 					content:
-						"Show how unoptimized code favors readability and stack-heavy layouts while optimized code may remove frames, reuse registers aggressively, or replace obvious source structure with tighter control flow. The point is to understand what changed and what semantic goal stayed the same."
+						"Unoptimized code favors readability and stack-heavy layouts, while optimized code may remove frames, reuse registers aggressively, or replace obvious source structure with tighter control flow. The point is to understand what changed and what semantic goal stayed the same."
 				},
 				{
 					title: "C-to-Assembly Compare: Loop at O0 and O2",

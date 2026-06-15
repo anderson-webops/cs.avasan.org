@@ -449,7 +449,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "ping, traceroute, tracepath, and mtr",
 					content:
-						"This section covers the core path tools as different ways of answering different questions: basic reachability, approximate hop path, path MTU hints, and repeated latency observation. Stop treating them as interchangeable and instead ask what evidence each one is actually collecting."
+						"This section covers the core path tools as different ways of answering different questions: basic reachability, approximate hop path, path MTU hints, and repeated latency observation. Stop treating them as interchangeable and instead identify what evidence each one is actually collecting."
 				},
 				{
 					title: "curl, nc, and telnet for Service Checks",

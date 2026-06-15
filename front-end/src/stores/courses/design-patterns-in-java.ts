@@ -189,7 +189,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Abstract Factory",
 					content:
-						"Show how Abstract Factory handles product families that must vary together, such as themed UI components, environment-specific services, or game content packs. Emphasize consistency of families rather than sheer number of factory classes."
+						"Abstract Factory handles product families that must vary together, such as themed UI components, environment-specific services, or game content packs. The important design pressure is consistency across each family rather than sheer number of factory classes."
 				},
 				{
 					title: "Builder",
@@ -442,7 +442,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Strategy",
 					content:
-						"Use Strategy to replace branching behavior with swappable algorithms for pricing, movement, targeting, scoring, or validation rules. Show how this connects directly to code smells like switch statements and primitive obsession."
+						"Use Strategy to replace branching behavior with swappable algorithms for pricing, movement, targeting, scoring, or validation rules. This connects directly to code smells like switch statements and primitive obsession."
 				},
 				{
 					title: "State",

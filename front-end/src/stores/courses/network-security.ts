@@ -86,12 +86,12 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Attack Surface in Real Services",
 					content:
-						"This section covers attack surface as every externally reachable input, management path, credential boundary, and background integration a service exposes. Skill target: Name the surface area of a simple app before they talk about specific mitigations."
+						"This section covers attack surface as every externally reachable input, management path, credential boundary, and background integration a service exposes. Skill target: Name the surface area of a simple app before choosing specific mitigations."
 				},
 				{
 					title: "Trust Boundaries and Data Ownership",
 					content:
-						"Use the path from browser to proxy to app to database to show where trust changes hands. The course should keep asking which layer is making a trust decision and what evidence that layer actually has."
+						"Use the path from browser to proxy to app to database to show where trust changes hands. Keep identifying which layer is making a trust decision and what evidence that layer actually has."
 				},
 				{
 					title: "CIA Triad in Practical Service Terms",
@@ -682,7 +682,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Reusable Request Validation Helpers",
 					content:
-						"Show how the same validation logic can be turned into reusable helpers or middleware. The learning goal is to treat boundary checks as a first-class subsystem rather than scattered `if` statements."
+						"The same validation logic can be turned into reusable helpers or middleware. The learning goal is to treat boundary checks as a first-class subsystem rather than scattered `if` statements."
 				},
 				{
 					title: "Anomaly Summaries from Logs and Metadata",

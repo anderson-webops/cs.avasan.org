@@ -171,12 +171,12 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Signed vs Unsigned Integers and Two's Complement",
 					content:
-						"Show that the same 16 bits can name one unsigned value and one signed value, then connect that idea to two's complement and the meaning of the top bit. Skill target: Explain signedness as an interpretation rule rather than as a different kind of memory."
+						"The same 16 bits can name one unsigned value and one signed value. Connect that idea to two's complement and the meaning of the top bit. Skill target: Explain signedness as an interpretation rule rather than as a different kind of memory."
 				},
 				{
 					title: "Project: Hex and Binary Inspector",
 					content:
-						"Use the inspector lab to print one value in decimal, hex, and grouped binary, then compare its signed and unsigned 16-bit interpretations. The project should make two's complement visible and should force students to talk about nibbles and bytes explicitly instead of hand-waving about 'the number.'",
+						"Use the inspector lab to print one value in decimal, hex, and grouped binary, then compare its signed and unsigned 16-bit interpretations. The project should make two's complement visible and require explicit reasoning about nibbles and bytes instead of hand-waving about 'the number.'",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE1-Hex-and-Binary-Inspector/starter",
 					solutionLink:
@@ -582,7 +582,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Dispatch Tables and State Machines",
 					content:
-						"Show how a table of handlers or a small state machine can replace long chains of conditionals once a program starts reacting to modes, commands, or parsed tokens. This keeps the lesson engineering-focused and ties directly to protocol parsing or event-driven systems."
+						"A table of handlers or a small state machine can replace long chains of conditionals once a program starts reacting to modes, commands, or parsed tokens. This keeps the lesson engineering-focused and ties directly to protocol parsing or event-driven systems."
 				},
 				{
 					title: "Event-Driven Patterns at a Beginner-Friendly Scale",

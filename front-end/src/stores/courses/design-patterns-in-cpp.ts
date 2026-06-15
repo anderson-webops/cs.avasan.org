@@ -322,7 +322,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Lambdas and Function Objects",
 					content:
-						"Show how lambdas and lightweight callables often cover the same design need with less ceremony. Feel the difference between a full strategy family and a short-lived behavior injection."
+						"Lambdas and lightweight callables often cover the same design need with less ceremony. Compare the difference between a full strategy family and a short-lived behavior injection."
 				},
 				{
 					title: "Policy-Based Design with Templates",
@@ -402,7 +402,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Push versus Pull Models",
 					content:
-						"Show how an event payload can either push full data immediately or require listeners to pull details later. The better choice depends on coupling, cost, and how long the source object remains valid."
+						"An event payload can either push full data immediately or require listeners to pull details later. The better choice depends on coupling, cost, and how long the source object remains valid."
 				},
 				{
 					title: "Failure Handling and Event Hygiene",
@@ -703,7 +703,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Scoped Services and Injected Dependencies",
 					content:
-						"Show how dependency injection and well-scoped service objects often solve the same coordination problem more safely. The design improvement is not just ideological; it makes construction order and ownership explicit."
+						"Dependency injection and well-scoped service objects often solve the same coordination problem more safely. The design improvement is not just ideological; it makes construction order and ownership explicit."
 				},
 				{
 					title: "When a Global Really Is Global",

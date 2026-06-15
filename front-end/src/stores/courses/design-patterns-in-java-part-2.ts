@@ -119,7 +119,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Pattern Connection: Clear Methods Make Later Patterns Possible",
 					content:
-						"Show how Strategy, Template Method, and Command become easier to introduce after method-level mess is removed. Key idea: Patterns often fail when built on top of unreadable methods."
+						"Strategy, Template Method, and Command become easier to introduce after method-level mess is removed. Key idea: Patterns often fail when built on top of unreadable methods."
 				},
 				{
 					title: "Reflection Question: When Is Extraction Enough?",

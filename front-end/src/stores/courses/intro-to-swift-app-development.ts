@@ -230,7 +230,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Practical Walkthrough: Build and Run Destinations",
 					content:
-						"Show how to choose simulator destinations, connect a real device, trust the developer path, and verify that the correct scheme is selected. Learn the difference between an app that compiles, an app that launches, and an app that behaves correctly."
+						"Choose simulator destinations, connect a real device, trust the developer path, and verify that the correct scheme is selected. Learn the difference between an app that compiles, an app that launches, and an app that behaves correctly."
 				},
 				{
 					title: "Practical Walkthrough: Logs, Console Output, and Crash Clues",
@@ -451,7 +451,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Practical Walkthrough: Asset Catalogs and Preview Canvas",
 					content:
-						"Show how images, icons, and colors are added, and how the preview canvas supports fast SwiftUI iteration. Key idea: Why assets belong in dedicated containers instead of scattered file imports."
+						"Images, icons, and colors belong in dedicated asset containers, and the preview canvas supports fast SwiftUI iteration. Key idea: Why assets belong in dedicated containers instead of scattered file imports."
 				},
 				{
 					title: "Reflection Question: Which Xcode Areas Do You Need Every Day?",
@@ -517,7 +517,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Worked Example Set: Text, Stacks, and Modifiers",
 					content:
-						"Build up a small screen from `Text`, `VStack`, `HStack`, overlays, spacing, and background shapes. Show how small changes in modifier order affect layout and styling, because this is one of the earliest conceptual friction points in SwiftUI."
+						"Build up a small screen from `Text`, `VStack`, `HStack`, overlays, spacing, and background shapes. Small changes in modifier order affect layout and styling, which is one of the earliest conceptual friction points in SwiftUI."
 				},
 				{
 					title: "Project: Welcome Profile App",
@@ -654,7 +654,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Structs as App Data and Views",
 					content:
-						"Show how structs can represent both model data and SwiftUI views, and explain why that dual role is so common in SwiftUI architecture. Connect this directly to reusable components and structured data instead of repeating hard-coded view snippets."
+						"Structs can represent both model data and SwiftUI views, and that dual role is common in SwiftUI architecture. Connect this directly to reusable components and structured data instead of repeating hard-coded view snippets."
 				},
 				{
 					title: "Enums for App State",
@@ -857,7 +857,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Editable Lists and Forms",
 					content:
-						"Introduce lists and forms as the backbone of many practical apps. Show how add, edit, delete, and completion-style workflows turn a static SwiftUI demo into a real data-driven product."
+						"Lists and forms are the backbone of many practical apps. Add, edit, delete, and completion-style workflows turn a static SwiftUI demo into a real data-driven product."
 				},
 				{
 					title: "Worked Example Set: Add, Toggle, and Delete",

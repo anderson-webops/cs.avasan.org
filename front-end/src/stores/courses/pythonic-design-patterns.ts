@@ -377,7 +377,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Designing Event Payloads and Listener Contracts",
 					content:
-						"Show how event payload shape affects coupling. A good event system should tell subscribers enough to act without leaking the entire source object or making every listener depend on internal details."
+						"Event payload shape affects coupling. A good event system should tell subscribers enough to act without leaking the entire source object or making every listener depend on internal details."
 				},
 				{
 					title: "Unsubscribe, Ordering, and Failure Handling",
@@ -457,7 +457,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Layering Behavior without Hiding Intent",
 					content:
-						"Show how wrappers can become unreadable if they stack carelessly. A Pythonic design should still let another developer explain the actual call path without hunting through invisible magic."
+						"Wrappers can become unreadable if they stack carelessly. A Pythonic design should still let another developer explain the actual call path without hunting through invisible magic."
 				},
 				{
 					title: "Cross-Cutting Concerns without Framework Bloat",
@@ -532,7 +532,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Undo, Replay, and Action Queues",
 					content:
-						"Show how Command becomes more valuable when actions need history or delayed execution. This keeps the pattern tied to a real operational benefit rather than a naming exercise."
+						"Command becomes more valuable when actions need history or delayed execution. This keeps the pattern tied to a real operational benefit rather than a naming exercise."
 				},
 				{
 					title: "Combining State and Command Carefully",
@@ -677,7 +677,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Replacing Template Method with Callables or Composition",
 					content:
-						"Show how higher-order functions, small collaborators, or composed pipeline steps often express the same intent more cleanly in Python. Feel the tradeoff instead of being told a slogan."
+						"Higher-order functions, small collaborators, or composed pipeline steps often express the same intent more cleanly in Python. Compare the tradeoff directly instead of relying on a slogan."
 				},
 				{
 					title: "Choosing by Extension Pressure",
@@ -755,7 +755,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Hidden Globals, Implicit Coupling, and Test Pain",
 					content:
-						"Show how global state quietly spreads dependencies across functions and modules. Connect hidden global reads and writes to flaky tests, surprising behavior, and difficult refactors."
+						"Global state quietly spreads dependencies across functions and modules. Connect hidden global reads and writes to flaky tests, surprising behavior, and difficult refactors."
 				},
 				{
 					title: "Context Objects, App Factories, and Explicit Wiring",

@@ -411,7 +411,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "GM6 Supplemental Project 2: Stamping with Dotty",
 					content:
-						"Graph the absolute value function with Dotty.\n1. When the green flag is clicked, make Dotty go to the center of the screen and ask what x-coordinate she should go to.\n2. First, change her x-coordinate to the user's answer, then change her y-coordinate to the absolute value of the answer (hint: this is a mathematical operator).\n3. Make her say what her new coordinates are and then leave a stamp with the pen tool.\n4. Repeat this code 10 times to graph 10 points of the function.\n5. Next, make Dotty go to (-180, 180), put the pen down, and then repeatedly increase the x position by 1 and update the y position to be the absolute value of the x position.",
+						"Graph the absolute value function with Dotty.\n1. When the green flag is clicked, make Dotty go to the center of the screen and ask the user for an x-coordinate.\n2. First, change her x-coordinate to the user's answer, then change her y-coordinate to the absolute value of the answer (hint: this is a mathematical operator).\n3. Make her say what her new coordinates are and then leave a stamp with the pen tool.\n4. Repeat this code 10 times to graph 10 points of the function.\n5. Next, make Dotty go to (-180, 180), put the pen down, and then repeatedly increase the x position by 1 and update the y position to be the absolute value of the x position.",
 					projectLink: "https://scratch.mit.edu/projects/341759115",
 					solutionLink: "https://scratch.mit.edu/projects/338501835/"
 				},

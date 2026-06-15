@@ -93,7 +93,7 @@ export const elementaryScienceCourse: RawCourse = {
 				{
 					title: "Guided Practice: Food Web Cause and Effect",
 					content:
-						"Move from one food chain to a small food web. Ask what happens if one organism becomes more common or less common, then trace the effects through the web."
+						"Move from one food chain to a small food web. Trace what happens if one organism becomes more common or less common, then follow the effects through the web."
 				},
 				{
 					title: "Data Talk: Population Change",

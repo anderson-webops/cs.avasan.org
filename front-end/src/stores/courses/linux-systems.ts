@@ -97,7 +97,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Build Small Pipelines Before Writing Scripts",
 					content:
-						"Show how to answer concrete questions with one pipeline at a time, such as counting log lines that contain a word or finding the largest directories in a project. This frames scripting as the next step after repeatable command-line thinking instead of as a separate skill."
+						"Answer concrete questions with one pipeline at a time, such as counting log lines that contain a word or finding the largest directories in a project. This frames scripting as the next step after repeatable command-line thinking instead of as a separate skill."
 				},
 				{
 					title: "Unit 1: Shell Foundations: Core Project",
@@ -310,7 +310,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Environment Files and Service-Specific Configuration",
 					content:
-						"Show how applications often separate executable code from environment settings, secrets, or per-service overrides. Key idea: Why environment files are useful, where they are typically referenced from, and why configuration should be explicit enough that another operator can reconstruct the service later."
+						"Applications often separate executable code from environment settings, secrets, or per-service overrides. Key idea: Why environment files are useful, where they are typically referenced from, and why configuration should be explicit enough that another operator can reconstruct the service later."
 				},
 				{
 					title: "Readable Configs Beat Clever Configs",

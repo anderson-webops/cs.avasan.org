@@ -584,7 +584,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Security Logging and Failure Visibility",
 					content:
-						"Show how structured errors and explicit validation failures make later debugging and auditing easier."
+						"Structured errors and explicit validation failures make later debugging and auditing easier."
 				},
 				{
 					title: "Files, Parsers, and Secure CLI Design: Verification and Reflection",

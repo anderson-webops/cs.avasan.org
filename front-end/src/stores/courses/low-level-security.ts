@@ -215,7 +215,7 @@ export const lowLevelSecurityCourse: RawCourse = {
 				{
 					title: "Fixed-Size Storage and Why Bounds Matter",
 					content:
-						"Review arrays, character buffers, and small structs that store a limited amount of data. Show how every fixed-size object creates an implicit contract: only read initialized bytes, only write within capacity, and always preserve a valid terminator if the data is string-like. Connect off-by-one mistakes and unchecked copies to the much broader idea of memory corruption without describing weaponization."
+						"Review arrays, character buffers, and small structs that store a limited amount of data. Every fixed-size object creates an implicit contract: only read initialized bytes, only write within capacity, and always preserve a valid terminator if the data is string-like. Connect off-by-one mistakes and unchecked copies to the much broader idea of memory corruption without describing weaponization."
 				},
 				{
 					title: "Off-by-One Errors and Truncation Rules",

@@ -59,7 +59,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Object Refresh: Deck of Cards",
 					content:
-						"Review lists of objects, controlled randomness, and data modeling with a deck implementation. This gives students a concrete way to talk about state transitions before they build search trees and game logic.",
+						"Review lists of objects, controlled randomness, and data modeling with a deck implementation. The deck gives state transitions a concrete form before search trees and game logic enter the course.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI1-Deck-of-Cards"
 				},
