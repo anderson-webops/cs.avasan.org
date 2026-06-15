@@ -60,22 +60,22 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Introduction to Machine Learning",
 					content:
-						"Explain that AI is about building intelligent systems, and machine learning (ML) is the subset where systems learn patterns from data. Give everyday examples such as spam filters learning what emails to block and Netflix learning what shows to recommend based on viewing history. Briefly introduce the four main ML types: reinforcement learning (learning by reward and punishment), unsupervised learning (finding patterns without labels), supervised learning (learning from labeled examples), and semi-supervised learning (mix of labeled and unlabeled data). Emphasize that this course will focus mainly on unsupervised and supervised learning."
+						"AI is about building intelligent systems, and machine learning (ML) is the subset where systems learn patterns from data. Everyday examples include spam filters learning what emails to block and Netflix learning what shows to recommend based on viewing history. The four main ML types are reinforcement learning (learning by reward and punishment), unsupervised learning (finding patterns without labels), supervised learning (learning from labeled examples), and semi-supervised learning (mix of labeled and unlabeled data). This course focuses mainly on unsupervised and supervised learning."
 				},
 				{
 					title: "Unsupervised Learning & Clustering",
 					content:
-						"Introduce unsupervised learning as taking a dataset without labels and trying to find patterns or groupings in it. Use customer segmentation as a motivating example: a store owner can group customers by characteristics like age, income, or spending behavior to better target marketing. Define clustering as the process of finding distinct groups (clusters) of similar data points. Work through a simple 2D example with points A(1,1), B(2,1), C(3,3), and D(4,3). Plot them and visually identify that {A,B} form one cluster and {C,D} form another. Discuss why algorithms are needed when there are hundreds or thousands of points instead of just four."
+						"Unsupervised learning takes a dataset without labels and tries to find patterns or groupings in it. Customer segmentation is a motivating example: a store owner can group customers by characteristics like age, income, or spending behavior to better target marketing. Clustering is the process of finding distinct groups (clusters) of similar data points. A simple 2D example uses points A(1,1), B(2,1), C(3,3), and D(4,3). After plotting them, {A,B} visually form one cluster and {C,D} form another. Algorithms become necessary when there are hundreds or thousands of points instead of just four."
 				},
 				{
 					title: "K-Means Clustering Algorithm",
 					content:
-						"Introduce k-means clustering as a popular algorithm that partitions data into k clusters. Define a centroid as the mean of all points in a cluster, thought of as the cluster's center. Explain that each point is assigned to the cluster whose centroid it is closest to, usually using Euclidean distance sqrt((y2 - y1)^2 + (x2 - x1)^2). Use the A, B, C, D example to walk through k-means for k = 2: (1) choose k, (2) pick initial centroids (e.g., A and B), (3) assign each point to the nearest centroid, (4) recompute centroids by averaging point coordinates in each cluster, and (5) repeat until centroids stop changing. Show one or two iterations, computing distances and new centroids, and highlight that results can depend on the initial random centroids."
+						"K-means clustering is a popular algorithm that partitions data into k clusters. A centroid is the mean of all points in a cluster, thought of as the cluster's center. Each point is assigned to the cluster whose centroid it is closest to, usually using Euclidean distance sqrt((y2 - y1)^2 + (x2 - x1)^2). In the A, B, C, D example with k = 2, the steps are: choose k, pick initial centroids such as A and B, assign each point to the nearest centroid, recompute centroids by averaging point coordinates in each cluster, and repeat until centroids stop changing. One or two computed iterations make the distance calculations visible and show that results can depend on the initial random centroids."
 				},
 				{
 					title: "Google Colab Setup",
 					content:
-						"Introduce Google Colab as the main IDE for this course and note that it requires a Google account. Log in at https://colab.research.google.com, bookmark it, open the `Welcome to Colaboratory` notebook, and skim the core features together. Create a new notebook (File → New notebook), point out the left sidebar tools like Table of Contents, Find and Replace, and Files, then add code and text cells, run code, and reorder cells. Finish by creating a variable, printing it, printing a name in a second cell, and adding a short descriptive text cell before using Runtime → Restart and run all."
+						"Google Colab is the main IDE for this course and requires a Google account. Log in at https://colab.research.google.com, bookmark it, open the `Welcome to Colaboratory` notebook, and inspect the core features. Create a new notebook (File → New notebook), locate left-sidebar tools like Table of Contents, Find and Replace, and Files, then add code and text cells, run code, and reorder cells. Finish by creating a variable, printing it, printing a name in a second cell, and adding a short descriptive text cell before using Runtime → Restart and run all."
 				},
 				{
 					title: "ML1 Project 1: Customer Segmentation",
@@ -126,22 +126,22 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Introduction to Supervised Learning",
 					content:
-						"Define supervised learning as training on a dataset where both inputs and outputs (labels) are known. Explain that the algorithm learns a mapping from inputs to outputs, then uses that mapping to predict labels on new inputs where the output is unknown. Emphasize that the core steps are building feature vectors from the raw data, associating each vector with a label, training on these input–output pairs, and then evaluating the model on new data."
+						"Supervised learning trains on a dataset where both inputs and outputs (labels) are known. The algorithm learns a mapping from inputs to outputs, then uses that mapping to predict labels on new inputs where the output is unknown. The core steps are building feature vectors from the raw data, associating each vector with a label, training on these input-output pairs, and then evaluating the model on new data."
 				},
 				{
 					title: "Classification Basics",
 					content:
-						"Introduce classification as a supervised learning task where the output is a discrete category. Use spam vs. non-spam email as a simple example. Connect classification back to the customer segmentation project: the clusters discovered with k-means can be treated as categories or labels (e.g., cluster 0, cluster 1, cluster 2, etc.). Explain that once you know which cluster each customer belongs to, you can train a classifier that takes a customer's income and spending score and predicts the correct cluster for new customers."
+						"Classification is a supervised learning task where the output is a discrete category. Spam vs. non-spam email is a simple example. Classification also connects back to customer segmentation: the clusters discovered with k-means can be treated as categories or labels, such as cluster 0, cluster 1, and cluster 2. Once each customer's cluster is known, a classifier can take a customer's income and spending score and predict the correct cluster for new customers."
 				},
 				{
 					title: "K-Nearest Neighbors Algorithm",
 					content:
-						"Introduce k-nearest neighbors (KNN) as a simple classification method that labels a new input based on the majority label among its k closest neighbors in the training data. Use the sample dataset with points A(1,1; Cluster 1), B(2,1; Cluster 1), C(3,3; Cluster 2), D(4,3; Cluster 2), and an unlabeled point E(4,4). Plot the dataset and predict E's cluster visually. Then walk through the KNN algorithm: choose k (e.g., k = 2), compute Euclidean distance from E to each point, identify the k closest neighbors, and assign E to the cluster appearing most often among those neighbors. Show the distance table and highlight that E is closest to C and D, both in Cluster 2, so KNN classifies E as Cluster 2."
+						"K-nearest neighbors (KNN) is a simple classification method that labels a new input based on the majority label among its k closest neighbors in the training data. Use the sample dataset with points A(1,1; Cluster 1), B(2,1; Cluster 1), C(3,3; Cluster 2), D(4,3; Cluster 2), and an unlabeled point E(4,4). Plot the dataset and predict E's cluster visually. Then trace the KNN algorithm: choose k, such as k = 2, compute Euclidean distance from E to each point, identify the k closest neighbors, and assign E to the cluster appearing most often among those neighbors. The distance table shows that E is closest to C and D, both in Cluster 2, so KNN classifies E as Cluster 2."
 				},
 				{
 					title: "Training, Validation, and Testing Data",
 					content:
-						"Explain that to evaluate a classifier properly, the dataset is split into training, validation, and testing sets. Training data is used to fit the model; validation data is used to tune hyperparameters (like k) and check accuracy while making adjustments; and testing data is held out and used only at the end to measure final performance. For most course projects, focus on splitting into training and testing sets, using training for model fitting and testing to estimate how well the classifier generalizes to new data."
+						"To evaluate a classifier properly, the dataset is split into training, validation, and testing sets. Training data is used to fit the model; validation data is used to tune hyperparameters, such as k, and check accuracy while making adjustments; and testing data is held out and used only at the end to measure final performance. Most course projects use training and testing sets: training for model fitting and testing to estimate how well the classifier generalizes to new data."
 				},
 				{
 					title: "ML2 Project 1: KNN Customer Segment Classification",
@@ -217,12 +217,12 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Naive Bayes Overview",
 					content:
-						"Introduce Naive Bayes as a supervised classification method based on probability rules. Explain that it models the probability of each possible label given the input features and chooses the label with the highest probability. Mention that ‘naive' refers to the simplifying assumption that features are conditionally independent given the label, which makes the math easier and still works surprisingly well in many real-world problems."
+						"Naive Bayes is a supervised classification method based on probability rules. It models the probability of each possible label given the input features and chooses the label with the highest probability. The word naive refers to the simplifying assumption that features are conditionally independent given the label, which makes the math easier and still works surprisingly well in many real-world problems."
 				},
 				{
 					title: "Naive Bayes with the Iris Dataset",
 					content:
-						"Use the iris flower dataset (sepal length, sepal width, petal length, petal width, species) to explain how Naive Bayes classification works in practice. Identify the labels as the three species setosa, versicolor, and virginica, and the feature vector as [sepal_length, sepal_width, petal_length, petal_width]. Stress that the feature order is fixed. Describe the process of splitting the data into training and testing sets, using the training data to estimate probabilities (how likely each feature pattern is for each species), and then classifying new feature vectors by choosing the label with the highest conditional probability. Emphasize that accuracy improves when features are informative and when there is enough training data."
+						"The iris flower dataset (sepal length, sepal width, petal length, petal width, species) is a practical Naive Bayes classification example. The labels are the three species setosa, versicolor, and virginica, and the feature vector is [sepal_length, sepal_width, petal_length, petal_width]. Feature order is fixed. The process is: split the data into training and testing sets, use the training data to estimate probabilities for each species, and classify new feature vectors by choosing the label with the highest conditional probability. Accuracy improves when features are informative and when there is enough training data."
 				},
 				{
 					title: "ML3 Project 1: Iris Dataset Classification",
@@ -240,7 +240,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "ML3 Project 2: Email Spam Classification",
 					content:
-						"Use Naive Bayes to classify emails as spam or not spam with a realistic text dataset. In Colab, load the spam mails dataset from Kaggle and drop irrelevant columns such as messageid and label columns that aren't needed for modeling. Remove duplicate rows. Write a preprocessing function that removes punctuation, lowercases the text, and filters out common stopwords like ‘the', ‘is', and ‘and' to avoid over-emphasizing them. Use scikit-learn's CountVectorizer with your custom preprocessing function to turn each email into a bag-of-words feature vector. Build a list of labels corresponding to whether each email is spam or ham. Split the data into training and testing sets (e.g., 80% training, 20% testing), train a Naive Bayes classifier (such as MultinomialNB), and evaluate its accuracy on the test set. Discuss training time, any misclassifications, and why Naive Bayes is a good baseline for text classification. Wrap up with a short explanation of the dataset content, what you were trying to detect, your model's accuracy, and any surprising results.",
+						"Use Naive Bayes to classify emails as spam or not spam with a realistic text dataset. In Colab, load the spam mails dataset from Kaggle and drop irrelevant columns such as messageid and label columns that are not needed for modeling. Remove duplicate rows. Write a preprocessing function that removes punctuation, lowercases the text, and filters out common stopwords such as `the`, `is`, and other high-frequency function words to avoid over-emphasizing them. Use scikit-learn's CountVectorizer with your custom preprocessing function to turn each email into a bag-of-words feature vector. Build a list of labels corresponding to whether each email is spam or ham. Split the data into training and testing sets, for example 80% training and 20% testing, train a Naive Bayes classifier such as MultinomialNB, and evaluate its accuracy on the test set. Record training time, misclassifications, why Naive Bayes is a good baseline for text classification, the dataset content, the target being detected, the model's accuracy, and any surprising results.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML3-Email-Spam-Classification",
 					datasetLink:
@@ -296,7 +296,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Decision Trees as Split-Based Reasoning",
 					content:
-						"Introduce decision trees as a supervised model that repeatedly asks the most informative question available at each split. Connect this to interpretable rule-based classification, not just to another library call."
+						"Decision trees are supervised models that repeatedly ask the most informative question available at each split. This connects to interpretable rule-based classification, not just to another library call."
 				},
 				{
 					title: "Entropy, Gini, and Overfitting at an Intuitive Level",
@@ -306,7 +306,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Tree Models as a Bridge between Rules and Learned Models",
 					content:
-						"Use trees to connect early rule-based intuition with later statistical models. A tree is often easier to explain than a neural net, which makes it useful for comparison and for building confidence in model behavior."
+						"Trees connect early rule-based intuition with later statistical models. A tree is often easier to explain than a neural net, which makes it useful for comparison and for building confidence in model behavior."
 				},
 				{
 					title: "Decision Tree Lab",
@@ -395,7 +395,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "ML4 Project 2: Simple Neural Network Simulation",
 					content:
-						"Using the Neuron class from the previous project, simulate a simple neural network with two inputs, one hidden layer with two neurons, and one output neuron. Initialize input values x1, x2, and a bias b. Create two Neuron objects to represent the hidden layer, each with its own weights and activation function (for example, sigmoid). Create a third Neuron object to represent the output layer, possibly using ReLU as the activation. Feed the input (x1, x2, b) into each hidden neuron, collect their outputs, then feed these outputs and the bias into the output neuron. Print intermediate results from each neuron so the flow of data through the network is easy to follow. Discuss how changing weights or activation functions changes the final output.",
+						"Using the Neuron class from the previous project, simulate a simple neural network with two inputs, one hidden layer with two neurons, and one output neuron. Initialize input values x1, x2, and a bias b. Create two Neuron objects to represent the hidden layer, each with its own weights and activation function, for example sigmoid. Create a third Neuron object to represent the output layer, possibly using ReLU as the activation. Feed the input (x1, x2, b) into each hidden neuron, collect their outputs, then feed these outputs and the bias into the output neuron. Print intermediate results from each neuron so the flow of data through the network is easy to follow. Compare how changing weights or activation functions changes the final output.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML4-Simple-Neural-Network",
 					solutionLink:
@@ -562,12 +562,12 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Neural Networks for Regression",
 					content:
-						"Explain that neural networks can also be used for regression, not just classification. Emphasize that for nonlinear or complex relationships, neural networks can approximate a curved function that fits the data more flexibly than polynomial regression. Note the tradeoffs: networks usually require more data, take longer to train, and are harder to interpret, so they are best used when simpler models are not accurate enough."
+						"Neural networks can also be used for regression, not just classification. For nonlinear or complex relationships, neural networks can approximate a curved function that fits the data more flexibly than polynomial regression. The tradeoffs matter: networks usually require more data, take longer to train, and are harder to interpret, so they are best used when simpler models are not accurate enough."
 				},
 				{
 					title: "Evaluating Regression Models",
 					content:
-						"Introduce mean squared error (MSE) and mean absolute error (MAE) as standard metrics for regression. Both measure average prediction error: MAE averages absolute differences, while MSE averages squared differences, which penalizes large errors more heavily. Explain that a good regression model aims to minimize these values on both training and test data. Discuss overfitting: if a model fits the training data extremely well but performs poorly on new data, it has memorized rather than generalized. Reinforce the importance of train–test splits (for example, 80% training and 20% testing) to check generalization."
+						"Mean squared error (MSE) and mean absolute error (MAE) are standard metrics for regression. Both measure average prediction error: MAE averages absolute differences, while MSE averages squared differences, which penalizes large errors more heavily. A good regression model aims to minimize these values on both training and test data. Overfitting happens when a model fits the training data extremely well but performs poorly on new data; it has memorized rather than generalized. Train-test splits, such as 80% training and 20% testing, help check generalization."
 				},
 				{
 					title: "ML6 Project 1: Predicting House Prices with Neural Networks",
@@ -634,7 +634,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Image Data and Classification",
 					content:
-						"Explain that images are just arrays of pixel values, so they can be used as input to machine learning models just like numerical datasets. Each pixel can store information such as brightness or RGB color values. Describe image classification as assigning a label to each image (for example, rainy vs. sunny vs. cloudy vs. sunrise). Emphasize that modern image classifiers are typically neural networks that learn from many labeled examples how patterns in pixel data correspond to categories."
+						"Images are arrays of pixel values, so they can be used as input to machine learning models just like numerical datasets. Each pixel can store information such as brightness or RGB color values. Image classification assigns a label to each image, for example rainy, sunny, cloudy, or sunrise. Modern image classifiers are typically neural networks that learn from many labeled examples how patterns in pixel data correspond to categories."
 				},
 				{
 					title: "ML7 Project 1: Weather Image Classifier",
@@ -788,7 +788,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Master Project Planning",
 					content:
-						"Introduce the Master Project as a capstone built around a real dataset and a substantial machine learning problem. Explain that the project can be classification or regression and can use any combination of algorithms learned throughout the course (k-means, KNN, Naive Bayes, neural networks, regression, etc.). Browse suggested datasets and project ideas such as classification tasks (fake news detection, credit card fraud detection, Titanic survival prediction) or regression tasks (loan amount prediction, Bitcoin price prediction, stock price prediction, medical insurance cost), then pick one idea that genuinely fits personal interests and clearly define the problem to solve."
+						"The Master Project is a capstone built around a real dataset and a substantial machine learning problem. The project can be classification or regression and can use any combination of algorithms learned throughout the course: k-means, KNN, Naive Bayes, neural networks, regression, and related tools. Suggested directions include classification tasks such as fake news detection, credit card fraud detection, and Titanic survival prediction, or regression tasks such as loan amount prediction, Bitcoin price prediction, stock price prediction, and medical insurance cost. Pick one idea that genuinely fits personal interests and clearly define the problem to solve."
 				},
 				{
 					title: "Master Project Implementation",
@@ -805,7 +805,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Master Project Examples",
 					content:
-						"Show the example notebooks for similar projects, such as a Titanic survival predictor or a medical insurance cost predictor. Walk through how those examples are structured: data exploration, feature selection, model building, evaluation, and reflection on results. Use these examples as inspiration but ensure the project is original work and analysis, not just a copy. Discuss how techniques or visualizations from these examples might be adapted to the chosen dataset."
+						"Example notebooks for similar projects, such as a Titanic survival predictor or a medical insurance cost predictor, provide useful structure: data exploration, feature selection, model building, evaluation, and reflection on results. These examples are inspiration, not templates to copy. Adapt techniques or visualizations only when they fit the chosen dataset and problem."
 				},
 				{
 					title: "Master Project Presentation",

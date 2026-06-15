@@ -171,7 +171,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Immediate, Register, and Memory Operands",
 					content:
-						"Walk through the three core operand categories deliberately: immediate constants, register-to-register moves, and memory loads or stores. The lesson should keep returning to the question 'where is the value coming from and where is it going?'"
+						"Trace the three core operand categories deliberately: immediate constants, register-to-register moves, and memory loads or stores. The recurring question is: where is the value coming from, and where is it going?"
 				},
 				{
 					title: "Project: Integer Calculator in Assembly",
@@ -373,7 +373,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Stack Frames and Local Storage",
 					content:
-						"Introduce stack frames as a bookkeeping convention rather than a law of nature. Show the prologue and epilogue patterns, when local stack space is reserved, and why optimized code may partially remove the frame students expected to see."
+						"Stack frames are a bookkeeping convention rather than a law of nature. The important patterns are the prologue, the epilogue, when local stack space is reserved, and why optimized code may partially remove the frame that a beginner expects to see."
 				},
 				{
 					title: "Saved Registers and Stack Alignment",
@@ -795,7 +795,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Branch Cost and Predictability",
 					content:
-						"Introduce branches as potential performance costs without turning the course into premature micro-optimization. Key idea: At a high level why predictable straight-line code often behaves differently from branch-heavy code, even when the instruction count looks similar on paper."
+						"Branches can be performance costs, but the goal is not premature micro-optimization. Key idea: at a high level, predictable straight-line code often behaves differently from branch-heavy code even when the instruction count looks similar on paper."
 				},
 				{
 					title: "Memory Locality and Access Patterns",
@@ -875,7 +875,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "How Assembly Explains Low-Level Bugs",
 					content:
-						"Use buffer mistakes, stale pointers, and bad control-flow assumptions as examples of bugs that become much easier to explain once students can see the actual loads, stores, and branch decisions. Assembly should feel like a clarity tool for reliability work, not only like a language to write by hand."
+						"Buffer mistakes, stale pointers, and bad control-flow assumptions become easier to explain once the actual loads, stores, and branch decisions are visible. Assembly should feel like a clarity tool for reliability work, not only like a language to write by hand."
 				},
 				{
 					title: "Reverse Engineering as a Reliability and Security Skill",

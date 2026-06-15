@@ -541,7 +541,7 @@ function buildCurriculumSupportItem(
 	const variants = [
 		{
 			title: `${focus}: Guided Example Review`,
-			content: `Walk through one representative example from ${moduleTitle}, identify the checkpoints that matter most, and compare one correct approach to one flawed attempt.`
+			content: `Trace one representative example from ${moduleTitle}, identify the checkpoints that matter most, and compare one correct approach to one flawed attempt.`
 		},
 		{
 			title: `${focus}: Debugging and Failure Modes`,

@@ -96,7 +96,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Client and Server Flow",
 					content:
-						"Walk through a simple client/server exchange from local process to local socket, out through the interface, across the network, and back to a listening service on the destination host. The point is to make later diagnostics feel like checking a known path rather than memorizing unrelated commands."
+						"Trace a simple client/server exchange from local process to local socket, out through the interface, across the network, and back to a listening service on the destination host. The point is to make later diagnostics feel like checking a known path rather than memorizing unrelated commands."
 				},
 				{
 					title: "One Request, Many Layers",
@@ -169,17 +169,17 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Public versus Private Addressing",
 					content:
-						"Use private IPv4 ranges and public internet addresses to explain why many devices can talk locally without being directly reachable from outside. The course should connect this to NAT and to the difference between a home network and a public server."
+						"Private IPv4 ranges and public internet addresses explain why many devices can talk locally without being directly reachable from outside. This connects directly to NAT and to the difference between a home network and a public server."
 				},
 				{
 					title: "IPv6 Address Categories in Practice",
 					content:
-						"Introduce loopback, link-local, and global unicast addresses as practical address families students will actually see in diagnostics. This helps prevent the common confusion where students think every IPv6 address is globally routed in the same way."
+						"Loopback, link-local, and global unicast addresses are practical address families that show up in diagnostics. This prevents the common confusion where every IPv6 address is assumed to be globally routed in the same way."
 				},
 				{
 					title: "DNS Names versus Actual Endpoints",
 					content:
-						"Treat DNS as a naming system that maps labels to records, not as the same thing as routing or transport. Explain how the same hostname may resolve to multiple records and why resolution success does not automatically prove port reachability."
+						"DNS is a naming system that maps labels to records, not the same thing as routing or transport. The same hostname may resolve to multiple records, and resolution success does not automatically prove port reachability."
 				},
 				{
 					title: "Unit 2: Addresses and Naming: Core Project",
@@ -244,7 +244,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "How Routers Forward Traffic",
 					content:
-						"Use a simple multi-hop diagram to explain route lookup, next-hop forwarding, and the fact that each router only needs to know the next step rather than the full end-to-end path. This makes tools like `traceroute` and `mtr` more intuitive later."
+						"A simple multi-hop diagram can show route lookup, next-hop forwarding, and the fact that each router only needs to know the next step rather than the full end-to-end path. This makes tools like `traceroute` and `mtr` more intuitive later."
 				},
 				{
 					title: "NAT and Port Forwarding",
@@ -388,7 +388,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Caching and Resolver State",
 					content:
-						"Use caching to explain why DNS changes can appear inconsistent during deployment or troubleshooting. Key idea: Cached success, cached failure, and local override files all shape what a resolver returns."
+						"Caching explains why DNS changes can appear inconsistent during deployment or troubleshooting. Key idea: Cached success, cached failure, and local override files all shape what a resolver returns."
 				},
 				{
 					title: "dig, nslookup, host, and Resolver Configuration",
@@ -454,7 +454,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "curl, nc, and telnet for Service Checks",
 					content:
-						"Use `curl`, `nc`, and `telnet` as quick ways to ask whether a TCP service answers, whether the right banner or headers appear, and whether the failure looks like refusal, timeout, or reset. The important habit is to match the tool to the protocol and the question."
+						"`curl`, `nc`, and `telnet` are quick tools for checking whether a TCP service answers, whether the right banner or headers appear, and whether the failure looks like refusal, timeout, or reset. The important habit is to match the tool to the protocol and the question."
 				},
 				{
 					title: "Timeout versus Refusal versus Reset",
@@ -588,12 +588,12 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "SLAAC and DHCPv6 at a Conceptual Level",
 					content:
-						"Introduce SLAAC and DHCPv6 as two different ways a host may learn usable IPv6 configuration. Students do not need every standard detail; they need to understand why one network auto-configures differently from another and which clues show up in host diagnostics."
+						"SLAAC and DHCPv6 are two different ways a host may learn usable IPv6 configuration. The practical target is not every standard detail; it is understanding why one network auto-configures differently from another and which clues show up in host diagnostics."
 				},
 				{
 					title: "Dual-Stack Behavior",
 					content:
-						"Use dual-stack examples to explain why a hostname may resolve to both A and AAAA records and why the chosen family changes which path, firewall rules, and failure modes matter. This should feel like a real operational issue rather than a theoretical appendix."
+						"Dual-stack examples show why a hostname may resolve to both A and AAAA records and why the chosen family changes which path, firewall rules, and failure modes matter. This is a real operational issue rather than a theoretical appendix."
 				},
 				{
 					title: "Common IPv6 Admin Mistakes",
@@ -802,12 +802,12 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "SMTP and DNS as Support Protocols",
 					content:
-						"Use SMTP and DNS to show that not every important network protocol looks like interactive browsing. Skill target: Explain how name resolution and mail transport still depend on the same reachability, port, and policy concepts as the rest of the course."
+						"SMTP and DNS show that not every important network protocol looks like interactive browsing. Skill target: connect name resolution and mail transport to the same reachability, port, and policy concepts as the rest of the course."
 				},
 				{
 					title: "How TLS Changes Visibility",
 					content:
-						"Explain that TLS protects application payload visibility but does not make the existence of the connection itself invisible. Key idea: Which layers still reveal addresses, ports, and timing and which layers become opaque after encryption begins."
+						"TLS protects application payload visibility but does not make the existence of the connection itself invisible. Key idea: Which layers still reveal addresses, ports, and timing and which layers become opaque after encryption begins."
 				},
 				{
 					title: "Unit 11: Common Application Protocols: Core Project",

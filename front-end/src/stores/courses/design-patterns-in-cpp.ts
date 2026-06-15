@@ -101,7 +101,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Runtime versus Compile-Time Variation",
 					content:
-						"Introduce the idea that C++ can express flexibility through either runtime polymorphism or template-based compile-time structure. Begin spotting when a classic pattern remains useful and when a policy or value type is the cleaner fit."
+						"C++ can express flexibility through either runtime polymorphism or template-based compile-time structure. The main design skill is spotting when a classic pattern remains useful and when a policy or value type is the cleaner fit."
 				},
 				{
 					title: "DPC1 Why Patterns Look Different in Modern C++: Core Project",
@@ -327,7 +327,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Policy-Based Design with Templates",
 					content:
-						"Introduce policy-based design when the variability is known at compile time and the code benefits from avoiding runtime dispatch. The lesson should emphasize the tradeoff rather than claiming templates are always better."
+						"Policy-based design fits cases where variability is known at compile time and the code benefits from avoiding runtime dispatch. The tradeoff matters more than claiming templates are always better."
 				},
 				{
 					title: "Choosing Runtime versus Compile-Time Flexibility",
@@ -407,7 +407,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Failure Handling and Event Hygiene",
 					content:
-						"Discuss duplicate subscriptions, expired listeners, ordering, and escalation behavior. Observer should be taught as a real operational system with edge cases, not as free decoupling."
+						"Compare duplicate subscriptions, expired listeners, ordering, and escalation behavior. Observer is a real operational system with edge cases, not free decoupling."
 				},
 				{
 					title: "DPC5 Observer and Event Flow: Core Project",
@@ -781,12 +781,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Scope Guards and Cleanup Discipline",
 					content:
-						"Introduce scope guards for temporary setup and teardown cases where a dedicated wrapper would be too heavy. The point is to show how C++ often solves resource problems with small ownership tools instead of giant frameworks."
+						"Scope guards fit temporary setup and teardown cases where a dedicated wrapper would be too heavy. C++ often solves resource problems with small ownership tools instead of giant frameworks."
 				},
 				{
 					title: "Caches, Handles, and Shared Ownership Decisions",
 					content:
-						"Discuss when a resource cache should share ownership and when a move-only handle is safer. Justify the ownership graph explicitly instead of guessing at what feels convenient."
+						"Compare when a resource cache should share ownership and when a move-only handle is safer. Justify the ownership graph explicitly instead of guessing at what feels convenient."
 				},
 				{
 					title: "DPC10 Patterns for Resource Management: Core Project",

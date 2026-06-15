@@ -148,22 +148,22 @@ export const lowLevelSecurityCourse: RawCourse = {
 				{
 					title: "Security Mindset at the Systems Layer",
 					content:
-						"Define low-level security as the practice of understanding how programs use memory, process input, and fail under stress. Focus the course on defensive engineering: reading memory-related bugs, reproducing them in small local demos, explaining why they happen, and then patching them with safer code and regression tests. Emphasize three habits: model trust boundaries, assume inputs may be malformed, and prove fixes with tooling instead of intuition alone."
+						"Low-level security is the practice of understanding how programs use memory, process input, and fail under stress. The course focuses on defensive engineering: reading memory-related bugs, reproducing them in small local demos, explaining why they happen, and then patching them with safer code and regression tests. Three habits matter throughout: model trust boundaries, assume inputs may be malformed, and prove fixes with tooling instead of intuition alone."
 				},
 				{
 					title: "How a Process Uses Memory",
 					content:
-						"Introduce the usual memory regions: code/text, read-only data, global/static storage, heap allocations, and the stack. Explain why local variables often live on the stack, why dynamic allocations live on the heap, and why understanding object lifetime is a core security skill. Use diagrams to compare fast local access with long-lived heap allocations, then connect that layout to common classes of bugs such as out-of-bounds access, use-after-free, and uninitialized reads."
+						"The usual memory regions are code/text, read-only data, global/static storage, heap allocations, and the stack. Local variables often live on the stack, dynamic allocations live on the heap, and object lifetime is a core security skill. Diagrams can compare fast local access with long-lived heap allocations, then connect that layout to common classes of bugs such as out-of-bounds access, use-after-free, and uninitialized reads."
 				},
 				{
 					title: "Observing Stack, Heap, and Global Addresses",
 					content:
-						"Open a toy program and print the addresses of a stack variable, a heap allocation, a global variable, and a static variable. Discuss which addresses tend to be near each other and which are not. This lesson is about orientation, not exploitation: learners should get comfortable reading addresses, pointer values, and byte distances so later bug reports feel concrete instead of abstract."
+						"Open a toy program and print the addresses of a stack variable, a heap allocation, a global variable, and a static variable. Compare which addresses tend to be near each other and which are not. This lesson is about orientation, not exploitation: learners should get comfortable reading addresses, pointer values, and byte distances so later bug reports feel concrete instead of abstract."
 				},
 				{
 					title: "Compiler Warnings, Sanitizers, and Debuggers",
 					content:
-						"Set up a defensive toolchain with `-Wall -Wextra -Wpedantic -g` plus AddressSanitizer and UndefinedBehaviorSanitizer when available. Explain what each tool catches well and what it does not catch. Demonstrate a simple workflow: compile, reproduce the problem, read the report, isolate the failing line, add a guard, and rerun the same case."
+						"Set up a defensive toolchain with `-Wall -Wextra -Wpedantic -g` plus AddressSanitizer and UndefinedBehaviorSanitizer when available. Each tool has a clear coverage area and a clear limit. The workflow is: compile, reproduce the problem, read the report, isolate the failing line, add a guard, and rerun the same case."
 				},
 				{
 					title: "LLS1 Project 1: Memory Map Inspector",
@@ -225,7 +225,7 @@ export const lowLevelSecurityCourse: RawCourse = {
 				{
 					title: "Safer APIs for Copying and Formatting",
 					content:
-						"Prefer interfaces that accept both a destination and its capacity. Return explicit status values like ok, truncated, or invalid-input instead of silently guessing. Introduce small wrappers around `std::array<char, N>` and `std::string_view` to make intent obvious and reduce raw pointer arithmetic in beginner code."
+						"Prefer interfaces that accept both a destination and its capacity. Return explicit status values like ok, truncated, or invalid-input instead of silently guessing. Small wrappers around `std::array<char, N>` and `std::string_view` make intent obvious and reduce raw pointer arithmetic in beginner code."
 				},
 				{
 					title: "Ownership and Object Lifetime",
@@ -282,7 +282,7 @@ export const lowLevelSecurityCourse: RawCourse = {
 				{
 					title: "Trust Boundaries and Structured Input",
 					content:
-						"Treat every file, network message, clipboard payload, and command-line argument as untrusted until proven otherwise. Introduce the basic parser pattern: verify minimum length, read the header, validate lengths and tags, inspect payload bytes, and only then dispatch to deeper logic. Explain that parser security is mostly disciplined bookkeeping and explicit checks."
+						"Treat every file, network message, clipboard payload, and command-line argument as untrusted until proven otherwise. The basic parser pattern is: verify minimum length, read the header, validate lengths and tags, inspect payload bytes, and only then dispatch to deeper logic. Parser security is mostly disciplined bookkeeping and explicit checks."
 				},
 				{
 					title: "Length Fields, Magic Values, and Versioning",
@@ -426,7 +426,7 @@ export const lowLevelSecurityCourse: RawCourse = {
 				{
 					title: "Fuzzing as Structured Curiosity",
 					content:
-						"Introduce fuzzing as automated exploration of weird inputs, not as magic. Start with a valid seed, then mutate bytes, lengths, and command fields while watching for crashes, assertion failures, or unexpected states. Keep the target local, toy-sized, and instrumented with sanitizer builds."
+						"Fuzzing is automated exploration of weird inputs, not magic. Start with a valid seed, then mutate bytes, lengths, and command fields while watching for crashes, assertion failures, or unexpected states. Keep the target local, toy-sized, and instrumented with sanitizer builds."
 				},
 				{
 					title: "Corpus Management and Regression Cases",
@@ -483,7 +483,7 @@ export const lowLevelSecurityCourse: RawCourse = {
 				{
 					title: "Patch Engineering and Narrow Fixes",
 					content:
-						"A secure patch should do three things: stop the broken behavior, preserve legitimate behavior, and add a test that proves the bug stays fixed. Warn against giant rewrites when a smaller targeted repair is sufficient. Discuss the tradeoff between quick guards and deeper refactors."
+						"A secure patch should do three things: stop the broken behavior, preserve legitimate behavior, and add a test that proves the bug stays fixed. Giant rewrites are risky when a smaller targeted repair is sufficient. Compare quick guards against deeper refactors and document why the chosen fix is enough."
 				},
 				{
 					title: "Code Review Heuristics for Low-Level Safety",
