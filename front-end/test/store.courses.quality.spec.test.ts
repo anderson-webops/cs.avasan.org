@@ -323,8 +323,10 @@ describe("course text quality normalization", () => {
 				"Extend the object-design task with one additional method and a test or console trace that proves its contract"
 			);
 			expect(corpus).toContain(
-				"Produce **PTJ1 Functions, Parameters, and Return Types Supplemental 2** with a named Java type boundary, observable behavior, and evidence from a normal case plus a boundary case"
+				"Produce **PTJ1 Functions, Parameters, and Return Types Transfer Practice** with a named Java type boundary, observable behavior, and evidence from a normal case plus a boundary case"
 			);
+			expect(corpus).not.toMatch(/\bSupplemental Practice\s+[2-9]\b/i);
+			expect(corpus).not.toMatch(/\bSupplemental\s+[2-9]\b/i);
 			expect(corpus).not.toContain(
 				"Define the Project: Function Port Pack (PTJ1 Functions, Parameters, and Return Types) hosts, addresses, ports, routes, protocols, and trust boundaries before running diagnostics"
 			);

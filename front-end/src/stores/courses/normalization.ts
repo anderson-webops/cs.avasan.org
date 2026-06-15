@@ -120,6 +120,24 @@ function cleanTitleText(text: string) {
 		.trim();
 }
 
+function supplementalPurposeLabel(number: string) {
+	const labels: Record<string, string> = {
+		"2": "Transfer Practice",
+		"3": "Extension Practice",
+		"4": "Challenge Practice"
+	};
+
+	return labels[number] ?? `Practice Variant ${number}`;
+}
+
+function supplementalPurposeLabelReplacement(_match: string, number: string) {
+	return supplementalPurposeLabel(number);
+}
+
+function supplementalLabLabelReplacement(_match: string, number: string) {
+	return supplementalPurposeLabel(number).replace("Practice", "Lab");
+}
+
 function cleanDisplayTitle(text: string) {
 	return cleanTitleText(text)
 		.replace(/\bTodo\b/g, "To-Do")
@@ -228,20 +246,21 @@ function contextualizeGenericItemTitle(
 		return "Diagnostic Checkpoint";
 	}
 
-	const supplementalMatch = itemTitle.match(/^(.+?) Supplemental ([23])$/i);
+	const supplementalMatch = itemTitle.match(/^(.+?) Supplemental ([2-9])$/i);
 	if (!supplementalMatch) return itemTitle;
 
 	const baseTitle = cleanDisplayTitle(supplementalMatch[1]);
 	const number = supplementalMatch[2];
+	const label = supplementalPurposeLabel(number);
 
 	if (
 		sameTitle(baseTitle, moduleTitle) ||
 		genericSupplementalNeedsCourseContext(moduleTitle)
 	) {
-		return `Supplemental Practice ${number}`;
+		return label;
 	}
 
-	return `Supplemental Practice ${number}`;
+	return label;
 }
 
 function normalizeDisplayTitles(course: RawCourse) {
@@ -268,11 +287,11 @@ function escapedRegExp(text: string) {
 function conciseGenericItemTitle(suffix: string) {
 	const trimmed = suffix.trim();
 	const supplementalMatch = trimmed.match(
-		/^Supplemental(?: Project| Practice)? ([23])$/i
+		/^Supplemental(?: Project| Practice)? ([2-9])$/i
 	);
 
 	if (supplementalMatch) {
-		return `Supplemental Practice ${supplementalMatch[1]}`;
+		return supplementalPurposeLabel(supplementalMatch[1]);
 	}
 
 	const genericSuffixes = new Set([
@@ -291,6 +310,36 @@ function conciseGenericItemTitle(suffix: string) {
 	]);
 
 	return genericSuffixes.has(trimmed) ? trimmed : null;
+}
+
+function normalizeGeneratedSupplementalLabel(text: string) {
+	return text
+		.replace(
+			/\bSupplemental\s+([2-9])\s*:\s*(?:Implementation|Applied)\s+Lab\b/gi,
+			supplementalLabLabelReplacement
+		)
+		.replace(
+			/\bSupplemental\s+Practice\s+([2-9])\b/gi,
+			supplementalPurposeLabelReplacement
+		)
+		.replace(
+			/\bSupplemental\s+([2-9])\b/gi,
+			supplementalPurposeLabelReplacement
+		);
+}
+
+function normalizeGeneratedSupplementalLabels(course: RawCourse) {
+	for (const module of course.modules) {
+		module.title = normalizeGeneratedSupplementalLabel(module.title);
+		for (const section of ["curriculum", "supplementalProjects"] as const) {
+			for (const item of module[section]) {
+				item.title = normalizeGeneratedSupplementalLabel(item.title);
+				item.content = normalizeGeneratedSupplementalLabel(
+					item.content
+				);
+			}
+		}
+	}
 }
 
 function removeRedundantItemTitleContext(
@@ -6160,6 +6209,7 @@ export function normalizeRawCourse(id: string, rawCourse: RawCourse) {
 	formatDenseProcedureInstructions(course);
 	normalizeCourseTextQuality(course, id);
 	neutralizeStudentFacingCourseText(course);
+	normalizeGeneratedSupplementalLabels(course);
 	formatVisibleCourseMarkdown(course);
 	return course;
 }

@@ -44,6 +44,20 @@ function guidanceSubject(courseFamily: string, moduleTitle: string) {
 	return `${courseFamily} ${moduleTitle}`;
 }
 
+function supplementalPurposeLabel(number: string) {
+	const labels: Record<string, string> = {
+		"2": "Transfer Practice",
+		"3": "Extension Practice",
+		"4": "Challenge Practice"
+	};
+
+	return labels[number] ?? `Practice Variant ${number}`;
+}
+
+function supplementalPurposeLabelReplacement(_match: string, number: string) {
+	return supplementalPurposeLabel(number);
+}
+
 function escapeStringForRegExp(value: string) {
 	return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
@@ -158,6 +172,14 @@ function compactGuidanceBody(
 	].join("|");
 
 	return body
+		.replace(
+			/\bSupplemental Practice ([2-9])\b/g,
+			supplementalPurposeLabelReplacement
+		)
+		.replace(
+			/\bSupplemental ([2-9])\b/g,
+			supplementalPurposeLabelReplacement
+		)
 		.replace(new RegExp(`\\bFor ${escapedTitle}, `, "g"), "")
 		.replace(
 			new RegExp(`\\bUse ${escapedTitle} to\\b`, "g"),
@@ -578,13 +600,14 @@ function guidanceModuleTitle(moduleTitle: string, itemTitle?: string) {
 	const compactModuleTitle = compactGuidanceModuleTitle(moduleTitle);
 	const supplementalMatch = itemTitle.match(/\bsupplemental\s+(\d+)\b/i);
 	if (supplementalMatch) {
+		const label = supplementalPurposeLabel(supplementalMatch[1]);
 		if (checkInTopic) {
-			return `${checkInTopic} Supplemental ${supplementalMatch[1]}`;
+			return `${checkInTopic} ${label}`;
 		}
 		if (isCheckIn) {
-			return `${moduleTitle.replace(/^Check-In/i, "Checkpoint")} Supplemental ${supplementalMatch[1]}`;
+			return `${moduleTitle.replace(/^Check-In/i, "Checkpoint")} ${label}`;
 		}
-		return `${compactModuleTitle} Supplemental ${supplementalMatch[1]}`;
+		return `${compactModuleTitle} ${label}`;
 	}
 
 	const extensionMatch = itemTitle.match(/\bextension challenge\b/i);
