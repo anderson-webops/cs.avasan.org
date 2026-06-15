@@ -51,7 +51,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Workflow Notebook: Setup and Tooling",
 					content:
-						"Keep a running notebook for setup and tooling that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on editor setup, terminal usage, npm verification, and local server startup so students build habits that carry from local work into real hosting and operations.",
+						"Keep a running notebook for setup and tooling that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on editor setup, terminal usage, npm verification, and local server startup to build habits that carry from local work into real hosting and operations.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-05-wdf0-setup-and-tooling/starter",
 					solutionLink:
@@ -132,7 +132,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Workflow Notebook: Positioning and Goals",
 					content:
-						"Keep a running notebook for positioning and goals that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on how each new topic connects back to publishing, hosting, or operations so students build habits that carry from local work into real hosting and operations.",
+						"Keep a running notebook for positioning and goals that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on how each new topic connects back to publishing, hosting, or operations to build habits that carry from local work into real hosting and operations.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-06-wdf1-positioning-goals-and-suggested-course-family/starter",
 					solutionLink:
@@ -174,12 +174,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Keep HTML, CSS, DOM, and APIs as the Base",
 					content:
-						"Do not throw away the browser fundamentals that made the JavaScript path strong. Keep HTML, CSS, DOM work, and APIs as the technical base, but teach them inside real project folders so students practice navigation, file structure, asset management, and version control at the same time they practice browser logic."
+						"Do not throw away the browser fundamentals that made the JavaScript path strong. Keep HTML, CSS, DOM work, and APIs as the technical base, but place them inside real project folders so navigation, file structure, asset management, version control, and browser logic develop together."
 				},
 				{
 					title: "Use More File-Based Local Projects, Not Only CodePen",
 					content:
-						"Shift students toward local, file-based projects with deliberate naming, folders, and scripts. This matters because deployment, build tools, frameworks, and full-stack work all assume that learners understand what it means to create, edit, run, and organize a project on disk."
+						"Shift toward local, file-based projects with deliberate naming, folders, and scripts. This matters because deployment, build tools, frameworks, and full-stack work all assume fluency with creating, editing, running, and organizing a project on disk."
 				},
 				{
 					title: "Add Git and GitHub as Normal Workflow Tools",
@@ -210,7 +210,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Workflow Notebook: Strengthen the Existing JavaScript Courses",
 					content:
-						"Keep a running notebook for the existing JavaScript course bridge that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on Git checkpoints, local project organization, and devtools usage so students build habits that carry from local work into real hosting and operations.",
+						"Keep a running notebook for the existing JavaScript course bridge that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on Git checkpoints, local project organization, and devtools usage to build habits that carry from local work into real hosting and operations.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-07-wdf2-stage-1-strengthen-the-existing-javascript-courses/starter",
 					solutionLink:
@@ -288,7 +288,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Project: Portfolio Site with Custom Domain Preparation",
 					content:
-						"Use the portfolio lab to turn a file-based front-end project into something that is ready for a local dev server, static build, and later custom-domain deployment. This project should make students practice npm scripts, asset organization, responsive layout, and a publishing checklist instead of treating the portfolio as a throwaway page.",
+						"The portfolio lab turns a file-based front-end project into something ready for a local dev server, static build, and later custom-domain deployment. The work emphasizes npm scripts, asset organization, responsive layout, and a publishing checklist instead of treating the portfolio as a throwaway page.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF1-Portfolio-Custom-Domain/starter",
 					solutionLink:
@@ -330,7 +330,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Modern UI Composition",
 					content:
-						"Move from small DOM exercises to reusable UI composition so students start thinking in views, components, states, and boundaries. Even before a specific framework becomes central, learners should understand how modern front-end code organizes reusable parts and why that makes complex interfaces easier to debug and extend."
+						"Move from small DOM exercises to reusable UI composition through views, components, states, and boundaries. Even before a specific framework becomes central, modern front-end code should feel organized around reusable parts that make complex interfaces easier to debug and extend."
 				},
 				{
 					title: "Routing and Multi-View Thinking",
@@ -640,7 +640,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Database Hosting and Recovery Basics",
 					content:
-						"This section covers MongoDB Atlas and local MongoDB together so students can reason about development and hosted environments as related but different contexts. Add backup and restore basics so learners understand that data hosting always implies reliability planning, not just a connection string."
+						"This section covers MongoDB Atlas and local MongoDB together as related but different development and hosted contexts. Backup and restore basics frame data hosting as reliability planning, not just a connection string."
 				},
 				{
 					title: "Use Hosting Topics to Connect the Whole Stack",
@@ -666,7 +666,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Workflow Notebook: Hosting and Operations Topics",
 					content:
-						"Keep a running notebook for hosting and operations topics that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on platform choices, service ownership, log locations, and recovery planning so students build habits that carry from local work into real hosting and operations.",
+						"Keep a running notebook for hosting and operations topics that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on platform choices, service ownership, log locations, and recovery planning to build habits that carry from local work into real hosting and operations.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-08-wdf8-hosting-and-operations-topics-to-add/starter",
 					solutionLink:
@@ -735,7 +735,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Project: Real-Time Chat or Notification App",
 					content:
-						"Use a real-time project to help students reason about long-lived connections, event-driven UI updates, and the operational reality that interactive systems still need logs, deployment planning, and debugging discipline.",
+						"A real-time project connects long-lived connections, event-driven UI updates, and the operational reality that interactive systems still need logs, deployment planning, and debugging discipline.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF4-Realtime-Chat-App/starter",
 					solutionLink:
@@ -755,7 +755,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Workflow Notebook: Good Practical Projects",
 					content:
-						"Keep a running notebook for practical project work that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on how each project reinforces hosting, debugging, and stack-wide reasoning so students build habits that carry from local work into real hosting and operations.",
+						"Keep a running notebook for practical project work that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on how each project reinforces hosting, debugging, and stack-wide reasoning to build habits that carry from local work into real hosting and operations.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF1-Portfolio-Custom-Domain/starter",
 					solutionLink:
@@ -830,7 +830,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Workflow Notebook: Suggested Advanced Strand",
 					content:
-						"Keep a running notebook for the advanced operations strand that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on logs, uptime, certificate handling, backups, and environment rotation so students build habits that carry from local work into real hosting and operations.",
+						"Keep a running notebook for the advanced operations strand that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on logs, uptime, certificate handling, backups, and environment rotation to build habits that carry from local work into real hosting and operations.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-09-wdf10-suggested-advanced-strand/starter",
 					solutionLink:
@@ -905,7 +905,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Workflow Notebook: Integration with Network Topics",
 					content:
-						"Keep a running notebook for network-topic integration that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on ports, DNS, HTTPS boundaries, and network exposure differences so students build habits that carry from local work into real hosting and operations.",
+						"Keep a running notebook for network-topic integration that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on ports, DNS, HTTPS boundaries, and network exposure differences to build habits that carry from local work into real hosting and operations.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-10-wdf11-integration-with-network-topics/starter",
 					solutionLink:
@@ -945,7 +945,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Docker and Containers",
 					content:
-						"Offer Docker and containers as a follow-on topic once students understand project boundaries, servers, and deployment. Containers make more sense when students already know why reproducible environments, service boundaries, and startup configuration matter."
+						"Offer Docker and containers as a follow-on topic after project boundaries, servers, and deployment are clear. Containers make more sense once reproducible environments, service boundaries, and startup configuration have practical context."
 				},
 				{
 					title: "CI/CD with GitHub Actions",
@@ -955,7 +955,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Postgres as a SQL Companion Track",
 					content:
-						"Recommend Postgres as the natural SQL companion once students understand data modeling and the SQL-vs-NoSQL decision. This gives the broader web path a clean way to deepen relational thinking without undoing the value of earlier MongoDB work."
+						"Recommend Postgres as the natural SQL companion once data modeling and the SQL-vs-NoSQL decision are clear. This gives the broader web path a clean way to deepen relational thinking without undoing the value of earlier MongoDB work."
 				},
 				{
 					title: "Object Storage and CDN Delivery",
@@ -980,7 +980,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Workflow Notebook: Expansion Ideas and Next Steps",
 					content:
-						"Keep a running notebook for expansion ideas and next steps that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on which advanced path fits best after foundations and why so students build habits that carry from local work into real hosting and operations.",
+						"Keep a running notebook for expansion ideas and next steps that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on which advanced path fits best after foundations and why to build habits that carry from local work into real hosting and operations.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-11-wdf12-expansion-ideas-and-next-steps/starter",
 					solutionLink:

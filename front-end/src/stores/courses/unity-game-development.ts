@@ -100,7 +100,7 @@ export const unityGameDevelopmentCourse: RawCourse = {
 				{
 					title: "GD8.2 Winning and Restarting",
 					content:
-						"Connect a win condition to a restart flow so students can reason about level state and reset behavior.",
+						"Connect a win condition to a restart flow so level state and reset behavior are explicit.",
 					projectLink: repo("UGD-08-02-winning-and-restarting")
 				},
 				{

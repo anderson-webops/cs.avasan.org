@@ -1716,6 +1716,13 @@ function neutralizeStudentFacingText(text: string) {
 				.replace(/\bthe learner can ([a-z])/g, keepMatchedFirstLetter)
 				.replace(/\bso learners can ([a-z])/g, toMatchedFirstLetter)
 				.replace(/\bso learners build\b/g, "to build")
+				.replace(/\bso students build\b/g, "to build")
+				.replace(/\bso students practice\b/g, "to practice")
+				.replace(/\bso students can reason\b/g, "to reason")
+				.replace(
+					/\bso learners understand\b/g,
+					"so the concept is clear"
+				)
 				.replace(/\bbefore learners ([a-z])/g, beforeMatchedFirstLetter)
 				.replace(
 					/\bwhether learners can ([a-z])/g,

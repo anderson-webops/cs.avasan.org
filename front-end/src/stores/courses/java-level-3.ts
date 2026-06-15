@@ -1957,7 +1957,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "File-Backed Data Pipelines",
 					content:
-						"Connect Java file I/O to the parser and persistence habits students practiced in C++. Cover: reading lines, validating records, representing bad rows, writing clean output, preserving original data when import fails, and keeping parsing separate from reporting."
+						"Connect Java file I/O to prior parser and persistence habits from C++. Cover: reading lines, validating records, representing bad rows, writing clean output, preserving original data when import fails, and keeping parsing separate from reporting."
 				},
 				{
 					title: "Lambdas, Streams, and Readable Transformations",

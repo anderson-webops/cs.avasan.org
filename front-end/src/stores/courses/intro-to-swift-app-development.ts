@@ -1277,7 +1277,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Practical Walkthrough: TestFlight and Submission Basics",
 					content:
-						"Compare releasing to internal testers, preparing an external test, and sending an app to App Review. Explain what happens after upload so students understand the administrative side of shipping."
+						"Compare releasing to internal testers, preparing an external test, and sending an app to App Review. Explain what happens after upload so the administrative side of shipping is visible."
 				},
 				{
 					title: "Reflection Question: What Still Needs to Be True After the App 'Works'?",

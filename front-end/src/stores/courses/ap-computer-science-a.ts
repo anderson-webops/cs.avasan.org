@@ -102,7 +102,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Reference Pack",
 					content:
-						"Start the course with the repo-backed reference projects for variables, strings, and casting so learners build a clean notes-and-sandbox workflow from day one.",
+						"The repo-backed reference projects for variables, strings, and casting establish a clean notes-and-sandbox workflow from day one.",
 					projectLink: repo("APCS1-Variables-Reference/solution")
 				}
 			],
@@ -118,7 +118,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Casting Reference",
 					content:
-						"Use this reference build when learners need a tighter review of integer division, explicit casts, and loss-of-precision reasoning.",
+						"This reference build gives a tighter review of integer division, explicit casts, and loss-of-precision reasoning.",
 					projectLink: repo("APCS1-Casting-Reference/solution")
 				},
 				{
@@ -211,7 +211,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Project: Hospital Survey",
 					content:
-						"Use this project when learners need one more structured pass through typed input, variable naming, and console formatting.",
+						"This project gives another structured pass through typed input, variable naming, and console formatting.",
 					projectLink: repo("APCS1-Hospital-Survey/solution"),
 					mediaLink: media("apcs1-project-3-hospital-survey.mp4")
 				},

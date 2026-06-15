@@ -454,7 +454,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Exceptions, Preconditions, and API Shape",
 					content:
-						"Compare Replace Error Code with Exception and Replace Exception with Test so students understand when failure should be exceptional and when a pre-check is the cleaner API. Connect this to Java method contracts and caller expectations."
+						"Compare Replace Error Code with Exception and Replace Exception with Test to clarify when failure should be exceptional and when a pre-check is the cleaner API. Connect this to Java method contracts and caller expectations."
 				},
 				{
 					title: "Mini Lab: Reduce Call-Site Noise in a Service Layer",

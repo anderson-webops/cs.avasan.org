@@ -294,7 +294,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Saved Return Addresses, Local Buffers, and Frame Structure",
 					content:
-						"Review how local buffers and nearby frame data relate conceptually so students can reason about why unchecked writes into stack-like storage are security-relevant. Keep the work inside intentionally vulnerable local toy binaries and models so the focus stays on understanding and hardening rather than on weaponization."
+						"Review how local buffers and nearby frame data relate conceptually and why unchecked writes into stack-like storage are security-relevant. Keep the work inside intentionally vulnerable local toy binaries and models so the focus stays on understanding and hardening rather than on weaponization."
 				},
 				{
 					title: "Why Stack Corruption Can Become Control-Flow Risk",

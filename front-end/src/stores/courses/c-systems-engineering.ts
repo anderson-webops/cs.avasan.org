@@ -46,7 +46,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Engineering Notebook: Setup and Tooling",
 					content:
-						"Keep a short engineering notebook for setup and tooling that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on toolchain identity, compiler/debugger verification, and the difference between editing and building so students build the habit of explaining systems behavior instead of only trusting output.",
+						"Keep a short engineering notebook for setup and tooling that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on toolchain identity, compiler/debugger verification, and the difference between editing and building to build the habit of explaining systems behavior instead of only trusting output.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-05-cse0-setup-and-tooling/starter",
 					solutionLink:
@@ -86,7 +86,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Translation Units, Compilation, and Linking",
 					content:
-						"This section covers C as a language that becomes useful when students understand how source files become object files and how those objects are linked into a program. The goal is not linker trivia for its own sake, but a grounded model of where declarations, definitions, and build artifacts live."
+						"This section covers C as a language that becomes useful once the source-file, object-file, and linked-program path is clear. The goal is not linker trivia for its own sake, but a grounded model of where declarations, definitions, and build artifacts live."
 				},
 				{
 					title: "Runtime Model Compared to Higher-Level Languages",
@@ -121,7 +121,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Engineering Notebook: Why C for Systems Work",
 					content:
-						"Keep a short engineering notebook for why c for systems work that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on source-to-binary boundaries, declarations vs definitions, and what the runtime model exposes so students build the habit of explaining systems behavior instead of only trusting output.",
+						"Keep a short engineering notebook for why c for systems work that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on source-to-binary boundaries, declarations vs definitions, and what the runtime model exposes to build the habit of explaining systems behavior instead of only trusting output.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-06-unit-1-why-c-for-systems-work/starter",
 					solutionLink:
@@ -187,7 +187,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Engineering Notebook: Binary, Hex, and Number Representation",
 					content:
-						"Keep a short engineering notebook for binary, hex, and number representation that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on signedness, top-bit meaning, and how grouped bits map cleanly to hex digits so students build the habit of explaining systems behavior instead of only trusting output.",
+						"Keep a short engineering notebook for binary, hex, and number representation that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on signedness, top-bit meaning, and how grouped bits map cleanly to hex digits to build the habit of explaining systems behavior instead of only trusting output.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE1-Hex-and-Binary-Inspector/starter",
 					solutionLink:
@@ -264,7 +264,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Engineering Notebook: Bitwise Operations",
 					content:
-						"Keep a short engineering notebook for bitwise operations that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on mask design, packed fields, and why each operator changes the bits the way it does so students build the habit of explaining systems behavior instead of only trusting output.",
+						"Keep a short engineering notebook for bitwise operations that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on mask design, packed fields, and why each operator changes the bits the way it does to build the habit of explaining systems behavior instead of only trusting output.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE2-Bitflag-Configuration-Parser/starter",
 					solutionLink:
@@ -330,7 +330,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Engineering Notebook: Memory and Layout",
 					content:
-						"Keep a short engineering notebook for memory and layout that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on storage duration, member offsets, and why alignment changes total struct size so students build the habit of explaining systems behavior instead of only trusting output.",
+						"Keep a short engineering notebook for memory and layout that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on storage duration, member offsets, and why alignment changes total struct size to build the habit of explaining systems behavior instead of only trusting output.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE4-Memory-Visualizer/starter",
 					solutionLink:
@@ -396,7 +396,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Engineering Notebook: Strings and Byte Buffers",
 					content:
-						"Keep a short engineering notebook for strings and byte buffers that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on terminators, capacity checks, and why byte dumps tell a truer story than text output alone so students build the habit of explaining systems behavior instead of only trusting output.",
+						"Keep a short engineering notebook for strings and byte buffers that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on terminators, capacity checks, and why byte dumps tell a truer story than text output alone to build the habit of explaining systems behavior instead of only trusting output.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE5-Byte-Buffer-Workbench/starter",
 					solutionLink:
@@ -471,7 +471,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Engineering Notebook: Files, Streams, and Parsing",
 					content:
-						"Keep a short engineering notebook for files, streams, and parsing that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on record boundaries, validation order, and why bad input must be rejected before decoding proceeds so students build the habit of explaining systems behavior instead of only trusting output.",
+						"Keep a short engineering notebook for files, streams, and parsing that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on record boundaries, validation order, and why bad input must be rejected before decoding proceeds to build the habit of explaining systems behavior instead of only trusting output.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE6-Packet-Serializer-Deserializer/starter",
 					solutionLink:
@@ -537,7 +537,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Engineering Notebook: Dynamic Memory and Lifetime",
 					content:
-						"Keep a short engineering notebook for dynamic memory and lifetime that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on allocation ownership, resize rules, and what cleanup path makes the data structure safe to destroy so students build the habit of explaining systems behavior instead of only trusting output.",
+						"Keep a short engineering notebook for dynamic memory and lifetime that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on allocation ownership, resize rules, and what cleanup path makes the data structure safe to destroy to build the habit of explaining systems behavior instead of only trusting output.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE7-Dynamic-Ring-Buffer/starter",
 					solutionLink:
@@ -612,7 +612,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Engineering Notebook: Function Pointers and Dispatch",
 					content:
-						"Keep a short engineering notebook for function pointers and dispatch that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on which values select which handlers and why a dispatch table can be clearer than a giant if-else chain so students build the habit of explaining systems behavior instead of only trusting output.",
+						"Keep a short engineering notebook for function pointers and dispatch that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on which values select which handlers and why a dispatch table can be clearer than a giant if-else chain to build the habit of explaining systems behavior instead of only trusting output.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-07-unit-8-function-pointers-and-dispatch/starter",
 					solutionLink:
@@ -678,7 +678,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Engineering Notebook: Data Structures in C",
 					content:
-						"Keep a short engineering notebook for data structures in c that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on container choice, invariants, and what evidence shows the structure is preserving logical order so students build the habit of explaining systems behavior instead of only trusting output.",
+						"Keep a short engineering notebook for data structures in c that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on container choice, invariants, and what evidence shows the structure is preserving logical order to build the habit of explaining systems behavior instead of only trusting output.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE7-Dynamic-Ring-Buffer/starter",
 					solutionLink:
@@ -753,7 +753,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Engineering Notebook: Engineering Math in Code",
 					content:
-						"Keep a short engineering notebook for engineering math in code that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on scaling choices, overflow checks, and why the chosen units make the transform safer to reason about so students build the habit of explaining systems behavior instead of only trusting output.",
+						"Keep a short engineering notebook for engineering math in code that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on scaling choices, overflow checks, and why the chosen units make the transform safer to reason about to build the habit of explaining systems behavior instead of only trusting output.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-08-unit-10-engineering-math-in-code/starter",
 					solutionLink:
@@ -828,7 +828,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Engineering Notebook: Systems Tooling",
 					content:
-						"Keep a short engineering notebook for systems tooling that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on which tool produced the most useful evidence for a given bug or observation and why so students build the habit of explaining systems behavior instead of only trusting output.",
+						"Keep a short engineering notebook for systems tooling that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on which tool produced the most useful evidence for a given bug or observation and why to build the habit of explaining systems behavior instead of only trusting output.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-09-unit-11-systems-tooling/starter",
 					solutionLink:
@@ -894,7 +894,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Engineering Notebook: Capstone Engineering Utility",
 					content:
-						"Keep a short engineering notebook for capstone engineering utility that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on input validation order, derived-field logic, and why the final output format is trustworthy so students build the habit of explaining systems behavior instead of only trusting output.",
+						"Keep a short engineering notebook for capstone engineering utility that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on input validation order, derived-field logic, and why the final output format is trustworthy to build the habit of explaining systems behavior instead of only trusting output.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE9-Capstone-Telemetry-Transform-CLI/starter",
 					solutionLink:

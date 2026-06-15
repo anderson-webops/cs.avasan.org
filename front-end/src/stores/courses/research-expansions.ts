@@ -942,7 +942,7 @@ const assemblyProfile: ResearchExpansionProfile = {
 	gaps: [
 		"Choose one target architecture and toolchain instead of mixing assembly dialects.",
 		"Decide whether students mainly write assembly, read compiler output, or learn architecture through assembly.",
-		"Add trace-heavy assessment so students understand registers, stack, and memory."
+		"Add trace-heavy assessment for registers, stack, and memory."
 	],
 	topics: [
 		"Registers, addressing, stack frames, calling conventions, flags, branching, loops, functions, arrays, ABI, debugging, and compiler output.",

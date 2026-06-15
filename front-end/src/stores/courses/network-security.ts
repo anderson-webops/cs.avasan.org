@@ -677,7 +677,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Local-Only Scanners and Safe Lab Constraints",
 					content:
-						"Make the ethics and boundary conditions explicit before students build any network tool. Tools should stay local or lab-scoped, record their assumptions, and avoid normalizing broad unsolicited scanning as acceptable practice."
+						"Make the ethics and boundary conditions explicit before any network tool is built. Tools should stay local or lab-scoped, record their assumptions, and avoid normalizing broad unsolicited scanning as acceptable practice."
 				},
 				{
 					title: "Reusable Request Validation Helpers",

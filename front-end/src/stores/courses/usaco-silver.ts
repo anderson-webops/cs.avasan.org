@@ -412,7 +412,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Write Cleaner Contest Explanations",
 					content:
-						"Include a one-paragraph explanation for each finished problem that names the pattern, the key data structure, and the reason the approach fits the constraints. This is how students build a reusable mental library."
+						"Include a one-paragraph explanation for each finished problem that names the pattern, the key data structure, and the reason the approach fits the constraints. This builds a reusable mental library."
 				},
 				{
 					title: "Find the Gaps before Gold",

@@ -376,7 +376,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Sync versus Async Event Flow",
 					content:
-						"Keep async treatment conceptual but concrete enough that students can reason about when immediate callbacks are sufficient and when background event handling changes the failure model."
+						"Keep async treatment conceptual but concrete enough to distinguish when immediate callbacks are sufficient and when background event handling changes the failure model."
 				},
 				{
 					title: "PDP5 Observer, Events, and Callbacks: Core Project",

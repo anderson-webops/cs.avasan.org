@@ -42,7 +42,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Troubleshooting Notebook: Setup and Tooling",
 					content:
-						"Keep a running notebook for setup and tooling that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on environment identity, path problems, remote access, and shell confusion so students build the habit of turning one-off mistakes into reusable operating knowledge.",
+						"Keep a running notebook for setup and tooling that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on environment identity, path problems, remote access, and shell confusion to build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS1-Personal-Lab-VM/starter",
 					solutionLink:
@@ -117,7 +117,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Troubleshooting Notebook: Shell Foundations",
 					content:
-						"Keep a running notebook for shell foundations that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on working-directory mistakes, quoting issues, and broken pipelines so students build the habit of turning one-off mistakes into reusable operating knowledge.",
+						"Keep a running notebook for shell foundations that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on working-directory mistakes, quoting issues, and broken pipelines to build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-05-unit-1-shell-foundations/starter",
 					solutionLink:
@@ -183,7 +183,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Troubleshooting Notebook: Filesystem Hierarchy and Directory Purpose",
 					content:
-						"Keep a running notebook for filesystem hierarchy and directory purpose that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on missing paths, wrong ownership, and confusing service file layout so students build the habit of turning one-off mistakes into reusable operating knowledge.",
+						"Keep a running notebook for filesystem hierarchy and directory purpose that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on missing paths, wrong ownership, and confusing service file layout to build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS2-Static-Site-from-srv/starter",
 					solutionLink:
@@ -260,7 +260,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Troubleshooting Notebook: Users, Groups, and Permissions",
 					content:
-						"Keep a running notebook for users, groups, and permissions that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on permission denied errors, incorrect owners, and over-broad chmod use so students build the habit of turning one-off mistakes into reusable operating knowledge.",
+						"Keep a running notebook for users, groups, and permissions that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on permission denied errors, incorrect owners, and over-broad chmod use to build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-06-unit-3-users-groups-and-permissions/starter",
 					solutionLink:
@@ -335,7 +335,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Troubleshooting Notebook: Editing and Configuration",
 					content:
-						"Keep a running notebook for editing and configuration that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on syntax mistakes, partial edits, missing backups, and forgotten validation steps so students build the habit of turning one-off mistakes into reusable operating knowledge.",
+						"Keep a running notebook for editing and configuration that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on syntax mistakes, partial edits, missing backups, and forgotten validation steps to build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-07-unit-4-editing-and-configuration/starter",
 					solutionLink:
@@ -410,7 +410,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Troubleshooting Notebook: Processes and Job Control",
 					content:
-						"Keep a running notebook for processes and job control that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on stuck jobs, wrong PIDs, signal misuse, and shell-session surprises so students build the habit of turning one-off mistakes into reusable operating knowledge.",
+						"Keep a running notebook for processes and job control that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on stuck jobs, wrong PIDs, signal misuse, and shell-session surprises to build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-08-unit-5-processes-and-job-control/starter",
 					solutionLink:
@@ -481,7 +481,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Troubleshooting Notebook: Services and systemd",
 					content:
-						"Keep a running notebook for services and systemd that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on bad ExecStart paths, missing working directories, failed boots, and restart loops so students build the habit of turning one-off mistakes into reusable operating knowledge.",
+						"Keep a running notebook for services and systemd that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on bad ExecStart paths, missing working directories, failed boots, and restart loops to build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS5-Systemd-Toy-Service/starter",
 					solutionLink:
@@ -556,7 +556,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Troubleshooting Notebook: Logging and Observability",
 					content:
-						"Keep a running notebook for logging and observability that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on log scoping, noisy output, missing files, and crash-timeline reconstruction so students build the habit of turning one-off mistakes into reusable operating knowledge.",
+						"Keep a running notebook for logging and observability that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on log scoping, noisy output, missing files, and crash-timeline reconstruction to build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-09-unit-7-logging-and-observability/starter",
 					solutionLink:
@@ -627,7 +627,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Troubleshooting Notebook: Scheduling and Automation",
 					content:
-						"Keep a running notebook for scheduling and automation that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on missing PATH entries, silent cron failures, and timer verification so students build the habit of turning one-off mistakes into reusable operating knowledge.",
+						"Keep a running notebook for scheduling and automation that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on missing PATH entries, silent cron failures, and timer verification to build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS6-Backup-Cron-and-Timer/starter",
 					solutionLink:
@@ -703,7 +703,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Troubleshooting Notebook: Package Management and Software Layout",
 					content:
-						"Keep a running notebook for package management and software layout that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on missing commands, package-version confusion, and untracked manual installs so students build the habit of turning one-off mistakes into reusable operating knowledge.",
+						"Keep a running notebook for package management and software layout that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on missing commands, package-version confusion, and untracked manual installs to build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-10-unit-9-package-management-and-software-layout/starter",
 					solutionLink:
@@ -780,7 +780,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Troubleshooting Notebook: Networking from a Systems View",
 					content:
-						"Keep a running notebook for networking from a systems view that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on wrong bind addresses, DNS mismatches, missing routes, and dead ports so students build the habit of turning one-off mistakes into reusable operating knowledge.",
+						"Keep a running notebook for networking from a systems view that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on wrong bind addresses, DNS mismatches, missing routes, and dead ports to build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-11-unit-10-networking-from-a-systems-view/starter",
 					solutionLink:
@@ -860,7 +860,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Troubleshooting Notebook: Web Servers",
 					content:
-						"Keep a running notebook for web servers that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on syntax errors, bad roots, proxy loops, wrong ports, and reload-vs-restart mistakes so students build the habit of turning one-off mistakes into reusable operating knowledge.",
+						"Keep a running notebook for web servers that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on syntax errors, bad roots, proxy loops, wrong ports, and reload-vs-restart mistakes to build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS3-Nginx-Reverse-Proxy-App/starter",
 					solutionLink:
@@ -936,7 +936,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Troubleshooting Notebook: Storage, Backups, and Reliability",
 					content:
-						"Keep a running notebook for storage, backups, and reliability that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on full disks, bad mounts, failed backups, and rollback after broken config changes so students build the habit of turning one-off mistakes into reusable operating knowledge.",
+						"Keep a running notebook for storage, backups, and reliability that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on full disks, bad mounts, failed backups, and rollback after broken config changes to build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-12-unit-12-storage-backups-and-reliability/starter",
 					solutionLink:

@@ -383,7 +383,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Recursive and Authoritative Resolution",
 					content:
-						"This section covers the difference between recursive resolvers and authoritative servers so students understand who is answering a question and who is forwarding it. This matters when a hostname resolves differently from different locations or after a change has only partially propagated."
+						"This section covers the difference between recursive resolvers and authoritative servers: who is answering a question, and who is forwarding it. This matters when a hostname resolves differently from different locations or after a change has only partially propagated."
 				},
 				{
 					title: "Caching and Resolver State",
@@ -668,7 +668,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "UFW versus iptables and nftables",
 					content:
-						"Explain UFW as a policy layer over lower-level packet filtering instead of treating it as a completely separate system. This helps students understand what they are abstracting away without forcing them into raw packet-filter syntax too early."
+						"Explain UFW as a policy layer over lower-level packet filtering instead of treating it as a completely separate system. The abstraction should be visible without forcing raw packet-filter syntax too early."
 				},
 				{
 					title: "Project: Build and Verify a UFW Policy for a Web Server",

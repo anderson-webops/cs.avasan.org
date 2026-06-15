@@ -665,7 +665,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Choosing Channels or Shared Structures",
 					content:
-						"Compare message-passing and shared-state approaches so students can reason about design tradeoffs instead of applying concurrency tools blindly."
+						"Compare message-passing and shared-state approaches to make concurrency design tradeoffs explicit instead of applying concurrency tools blindly."
 				},
 				{
 					title: "Concurrency and Race Reduction: Verification and Reflection",
@@ -771,7 +771,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Project: Unsafe and FFI Boundary Review",
 					content:
-						"Wrap a tiny unsafe or FFI-facing boundary with documented invariants so the student practices narrowing and auditing trust assumptions.",
+						"Wrap a tiny unsafe or FFI-facing boundary with documented invariants to narrow and audit trust assumptions.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-19-rss9-unsafe-ffi-and-trusted-boundaries-supplemental-2/starter",
 					solutionLink:

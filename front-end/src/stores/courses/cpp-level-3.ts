@@ -83,7 +83,7 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "Recursion, Base Cases, and Stack Frames",
 					content:
-						"This section covers recursion through call-stack diagrams before algorithm vocabulary. Cover: the base case, the recursive step, the smaller subproblem, what data each stack frame owns, what value returns to the previous frame, and why missing or non-progressing base cases lead to infinite recursion. Start with strings, vectors, and small grids so students build control-flow confidence before linked lists or trees."
+						"This section covers recursion through call-stack diagrams before algorithm vocabulary. Cover: the base case, the recursive step, the smaller subproblem, what data each stack frame owns, what value returns to the previous frame, and why missing or non-progressing base cases lead to infinite recursion. Start with strings, vectors, and small grids to build control-flow confidence before linked lists or trees."
 				},
 				{
 					title: "Recursive Traversal and Backtracking",
