@@ -4773,7 +4773,7 @@ function diagnosticSupport(context: CourseTextContext) {
 			subject =>
 				`Start ${subject} with a short independent attempt, then compare the result with the target skill before adding support.`,
 			subject =>
-				`${subject} should reveal whether the next step is more practice, a smaller example, a concept review, or a transfer challenge.`,
+				`${subject} reveals whether the next step is more practice, a smaller example, a concept review, or a transfer challenge.`,
 			subject =>
 				`Complete the easiest part of ${subject} first, then use the missing or uncertain step to choose the next review target.`
 		])

@@ -371,7 +371,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Readiness check: distinguish heat from temperature, identify the dominant heat-transfer pathway in a scenario, and interpret a heating curve in words. If optics is included, the checkpoint should explain what a lens is doing to rays rather than merely naming the lens type."
+						"Readiness check: distinguish heat from temperature, identify the dominant heat-transfer pathway in a scenario, and interpret a heating curve in words. If optics is included, the checkpoint explains what a lens is doing to rays rather than merely naming the lens type."
 				},
 				{
 					title: "Misconception Watchlist",
