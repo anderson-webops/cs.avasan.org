@@ -1202,6 +1202,44 @@ describe("course text quality normalization", () => {
 		COURSE_SWEEP_TIMEOUT
 	);
 
+	it(
+		"keeps loaded course titles concise and generated math support grammar neutral",
+		async () => {
+			const longItemTitles: string[] = [];
+			const courses = await Promise.all(
+				courseCatalog.map(entry => loadRawCourse(entry.id))
+			);
+			const corpus = courses.map(allCourseText).join("\n");
+
+			for (const [courseIndex, course] of courses.entries()) {
+				expect(course, courseCatalog[courseIndex].id).not.toBeNull();
+				if (!course) continue;
+
+				for (const module of course.modules) {
+					for (const item of [
+						...module.curriculum,
+						...module.supplementalProjects
+					]) {
+						if (item.title.length > 105) {
+							longItemTitles.push(
+								`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title}`
+							);
+						}
+					}
+				}
+			}
+
+			expect(longItemTitles).toEqual([]);
+			expect(corpus).not.toMatch(/typical the response example/i);
+			expect(corpus).not.toMatch(/the response known values/i);
+			expect(corpus).not.toMatch(/the response answer/i);
+			expect(corpus).not.toMatch(/the response reason/i);
+			expect(corpus).toContain("Work a typical example");
+			expect(corpus).toContain("Modeling or Error Analysis");
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
+
 	it("keeps course expansion templates from regenerating instructor-action copy", () => {
 		const corpus = [
 			"src/stores/courses/course-implementation-artifacts.ts",

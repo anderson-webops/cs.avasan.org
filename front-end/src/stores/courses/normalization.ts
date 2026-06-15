@@ -3246,20 +3246,20 @@ function projectExpectations(context: CourseTextContext) {
 	}
 	if (isMathContext(context)) {
 		return variantLines(context, [
-			subject => [
-				`- State the ${subject} givens, target quantity, representation, and rule or theorem before solving.`,
-				`- Work a typical ${subject} example, then check a boundary, sign, unit, graph, or table case that could change the interpretation.`,
-				`- Keep each ${subject} algebraic or representational step justified so the final answer can be checked for reasonableness.`
+			() => [
+				"- State the givens, target quantity, representation, and rule or theorem before solving.",
+				"- Work a typical example, then check a boundary, sign, unit, graph, or table case that could change the interpretation.",
+				"- Keep each algebraic or representational step justified so the final answer can be checked for reasonableness."
 			],
-			subject => [
-				`- Identify the ${subject} known values, unknown value, and representation before choosing a method.`,
-				`- Test ${subject} with one ordinary case and one case involving sign, intercept, domain, unit, or graph behavior.`,
-				`- Explain how the ${subject} answer can be checked without simply repeating the same calculation.`
+			() => [
+				"- Identify the known values, unknown value, and representation before choosing a method.",
+				"- Test one ordinary case and one case involving sign, intercept, domain, unit, or graph behavior.",
+				"- Explain how the answer can be checked without simply repeating the same calculation."
 			],
-			subject => [
-				`- Translate ${subject} into an equation, graph, table, diagram, or verbal model before solving.`,
-				`- Check ${subject} with a substitution, estimate, graph feature, boundary value, or unit/context test.`,
-				`- Record the ${subject} reason each transformation is valid so the result is auditable.`
+			() => [
+				"- Translate the situation into an equation, graph, table, diagram, or verbal model before solving.",
+				"- Check the result with a substitution, estimate, graph feature, boundary value, or unit/context test.",
+				"- Record why each transformation is valid so the result is auditable."
 			]
 		]);
 	}

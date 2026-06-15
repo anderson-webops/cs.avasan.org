@@ -873,8 +873,8 @@ function addAlgebraSupplementalProjects(courseId: string, course: RawCourse) {
 			const next = module.supplementalProjects.length + 1;
 			const title =
 				next === 1
-					? `${module.title}: Standards Practice Set`
-					: `${module.title}: Modeling or Error-Analysis Project`;
+					? "Standards Practice Set"
+					: "Modeling or Error Analysis";
 			const standardsPracticeVariants = [
 				`**Project goal:** Convert ${module.title} into a short ${courseLabel} practice set. Include one worked example, three independent problems, one graph/table/verbal representation when appropriate, and one explain-your-reasoning prompt.\n\n**Completion checks:**\n- Each solution shows the algebraic move, representation, or rule used.\n- At least one ${courseLabel} problem asks for a reason, not just an answer.\n- The review note records one misconception or missing prerequisite to revisit before the next module.`,
 				`**Project goal:** Build a focused ${courseLabel} practice checkpoint for ${module.title}. Include a worked example, three independent attempts, and one representation change such as equation to graph, graph to table, or verbal model to equation.\n\n**Completion checks:**\n- The worked example names each transformation and why it is valid.\n- The independent problems include one routine case and one case with a sign, unit, graph, or context trap.\n- The reflection names one error pattern and the check that would catch it next time.`,
