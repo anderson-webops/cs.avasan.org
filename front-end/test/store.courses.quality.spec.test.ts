@@ -2007,6 +2007,13 @@ describe("course text quality normalization", () => {
 		);
 		expect(text).toContain("1.5 mol O₂");
 		expect(text).toContain("285.8 kJ");
+
+		const bondEnergyLesson = items.find(
+			item => item.title === "Bond Energies and Reaction Estimates"
+		);
+		expect(bondEnergyLesson?.content).toContain("| Bond | kJ/mol |");
+		expect(bondEnergyLesson?.content).toContain("**Reading the table:**");
+		expect(bondEnergyLesson?.content).not.toMatch(/\|\s*\|\s*\|/);
 	});
 
 	it("keeps Intro to Chemistry local asset fragments backed by real headings", async () => {
