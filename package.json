@@ -63,10 +63,19 @@
 		"vite": "^8.0.8",
 		"vue-router": "^5.0.4",
 		"follow-redirects": "1.16.0",
-	"@cypress/request": {
-		"uuid": "14.0.0",
-		"qs": "6.15.2"
-	}
+		"@cypress/request": {
+			"uuid": "14.0.0",
+			"qs": "6.15.2"
+		}
+	},
+	"allowScripts": {
+		"argon2@0.44.0": true,
+		"cypress@15.16.0": true,
+		"esbuild@0.28.1": true,
+		"fsevents@2.3.3": true,
+		"puppeteer@24.43.1": true,
+		"simple-git-hooks@2.13.1": true,
+		"vue-demi@0.14.10": true
 	},
 	"devDependencies": {
 		"@antfu/eslint-config": "^8.2.0",

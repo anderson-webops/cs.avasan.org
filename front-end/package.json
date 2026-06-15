@@ -36,7 +36,7 @@
 		"@vueuse/core": "^14.2.1",
 		"axios": "^1.15.2",
 		"bootstrap": "^5.3.8",
-		"dompurify": "^3.4.1",
+		"dompurify": "^3.4.10",
 		"follow-redirects": "^1.16.0",
 		"leaflet": "^1.9.4",
 		"markdown-it": "^14.1.1",
