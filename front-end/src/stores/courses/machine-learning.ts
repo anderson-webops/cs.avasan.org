@@ -858,32 +858,32 @@ export const machineLearningCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Customer Segmentation: Implementation Lab",
+			title: "Customer Segmentation Starter Build: Implementation Lab",
 			curriculum: [
 				{
-					title: "Customer Segmentation: Core Concepts",
+					title: "Customer Segmentation Starter Build: Core Concepts",
 					content: buildImplementationLabGuidance({
 						courseFamily: "machine learning",
 						moduleTitle:
-							"Customer Segmentation: Implementation Lab",
+							"Customer Segmentation Starter Build: Implementation Lab",
 						section: "concepts"
 					})
 				},
 				{
-					title: "Customer Segmentation: Guided Example",
+					title: "Customer Segmentation Starter Build: Guided Example",
 					content: buildImplementationLabGuidance({
 						courseFamily: "machine learning",
 						moduleTitle:
-							"Customer Segmentation: Implementation Lab",
+							"Customer Segmentation Starter Build: Implementation Lab",
 						section: "example"
 					})
 				},
 				{
-					title: "Customer Segmentation: Core Project",
+					title: "Customer Segmentation Starter Build: Core Project",
 					content: buildImplementationLabGuidance({
 						courseFamily: "machine learning",
 						moduleTitle:
-							"Customer Segmentation: Implementation Lab",
+							"Customer Segmentation Starter Build: Implementation Lab",
 						section: "coreProject",
 						hasReference: false
 					}),
@@ -891,22 +891,22 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation"
 				},
 				{
-					title: "Customer Segmentation: Review and Reflection",
+					title: "Customer Segmentation Starter Build: Review and Reflection",
 					content: buildImplementationLabGuidance({
 						courseFamily: "machine learning",
 						moduleTitle:
-							"Customer Segmentation: Implementation Lab",
+							"Customer Segmentation Starter Build: Implementation Lab",
 						section: "review"
 					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "Customer Segmentation: Extension Challenge",
+					title: "Customer Segmentation Starter Build: Extension Challenge",
 					content: buildImplementationLabGuidance({
 						courseFamily: "machine learning",
 						moduleTitle:
-							"Customer Segmentation: Implementation Lab",
+							"Customer Segmentation Starter Build: Implementation Lab",
 						section: "extension",
 						hasReference: false
 					}),
@@ -914,11 +914,11 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation"
 				},
 				{
-					title: "Customer Segmentation supplemental 2: Implementation Lab",
+					title: "Customer Segmentation Starter Build supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "machine learning",
 						moduleTitle:
-							"Customer Segmentation: Implementation Lab",
+							"Customer Segmentation Starter Build: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -928,11 +928,11 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-19-applied-studio-12-customer-segmentation-supplemental-2/solution"
 				},
 				{
-					title: "Customer Segmentation supplemental 3: Implementation Lab",
+					title: "Customer Segmentation Starter Build supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "machine learning",
 						moduleTitle:
-							"Customer Segmentation: Implementation Lab",
+							"Customer Segmentation Starter Build: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1116,32 +1116,32 @@ export const machineLearningCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Disney Movie Clustering: Implementation Lab",
+			title: "Disney Movie Clustering Starter Build: Implementation Lab",
 			curriculum: [
 				{
-					title: "Disney Movie Clustering: Core Concepts",
+					title: "Disney Movie Clustering Starter Build: Core Concepts",
 					content: buildImplementationLabGuidance({
 						courseFamily: "machine learning",
 						moduleTitle:
-							"Disney Movie Clustering: Implementation Lab",
+							"Disney Movie Clustering Starter Build: Implementation Lab",
 						section: "concepts"
 					})
 				},
 				{
-					title: "Disney Movie Clustering: Guided Example",
+					title: "Disney Movie Clustering Starter Build: Guided Example",
 					content: buildImplementationLabGuidance({
 						courseFamily: "machine learning",
 						moduleTitle:
-							"Disney Movie Clustering: Implementation Lab",
+							"Disney Movie Clustering Starter Build: Implementation Lab",
 						section: "example"
 					})
 				},
 				{
-					title: "Disney Movie Clustering: Core Project",
+					title: "Disney Movie Clustering Starter Build: Core Project",
 					content: buildImplementationLabGuidance({
 						courseFamily: "machine learning",
 						moduleTitle:
-							"Disney Movie Clustering: Implementation Lab",
+							"Disney Movie Clustering Starter Build: Implementation Lab",
 						section: "coreProject",
 						hasReference: false
 					}),
@@ -1149,22 +1149,22 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Disney-Movie-Clustering"
 				},
 				{
-					title: "Disney Movie Clustering: Review and Reflection",
+					title: "Disney Movie Clustering Starter Build: Review and Reflection",
 					content: buildImplementationLabGuidance({
 						courseFamily: "machine learning",
 						moduleTitle:
-							"Disney Movie Clustering: Implementation Lab",
+							"Disney Movie Clustering Starter Build: Implementation Lab",
 						section: "review"
 					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "Disney Movie Clustering: Extension Challenge",
+					title: "Disney Movie Clustering Starter Build: Extension Challenge",
 					content: buildImplementationLabGuidance({
 						courseFamily: "machine learning",
 						moduleTitle:
-							"Disney Movie Clustering: Implementation Lab",
+							"Disney Movie Clustering Starter Build: Implementation Lab",
 						section: "extension",
 						hasReference: false
 					}),
@@ -1172,11 +1172,11 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Disney-Movie-Clustering"
 				},
 				{
-					title: "Disney Movie Clustering supplemental 2: Implementation Lab",
+					title: "Disney Movie Clustering Starter Build supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "machine learning",
 						moduleTitle:
-							"Disney Movie Clustering: Implementation Lab",
+							"Disney Movie Clustering Starter Build: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1186,11 +1186,11 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-25-applied-studio-15-disney-movie-clustering-supplemental-2/solution"
 				},
 				{
-					title: "Disney Movie Clustering supplemental 3: Implementation Lab",
+					title: "Disney Movie Clustering Starter Build supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "machine learning",
 						moduleTitle:
-							"Disney Movie Clustering: Implementation Lab",
+							"Disney Movie Clustering Starter Build: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),

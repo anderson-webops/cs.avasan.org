@@ -57,17 +57,6 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 					}),
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main"
-				},
-				{
-					title: "Pythonic Design Patterns",
-					content: buildProjectGuidance({
-						courseFamily: "Python",
-						moduleTitle: "PDP0 Setup and Tooling",
-						projectKind: "core",
-						hasReference: false
-					}),
-					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main"
 				}
 			]
 		},

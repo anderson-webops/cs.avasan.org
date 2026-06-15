@@ -1149,6 +1149,59 @@ describe("course text quality normalization", () => {
 		COURSE_SWEEP_TIMEOUT
 	);
 
+	it(
+		"keeps loaded course module and item titles unique within their visible scope",
+		async () => {
+			const duplicateLabels: string[] = [];
+
+			for (const entry of courseCatalog) {
+				const course = await loadRawCourse(entry.id);
+				expect(course, entry.id).not.toBeNull();
+				if (!course) continue;
+
+				const moduleTitleCounts = new Map<string, number>();
+				for (const module of course.modules) {
+					const title = module.title.trim();
+					moduleTitleCounts.set(
+						title,
+						(moduleTitleCounts.get(title) ?? 0) + 1
+					);
+
+					const itemTitleCounts = new Map<string, number>();
+					for (const item of [
+						...module.curriculum,
+						...module.supplementalProjects
+					]) {
+						const itemTitle = item.title.trim();
+						itemTitleCounts.set(
+							itemTitle,
+							(itemTitleCounts.get(itemTitle) ?? 0) + 1
+						);
+					}
+
+					for (const [itemTitle, count] of itemTitleCounts) {
+						if (count > 1) {
+							duplicateLabels.push(
+								`${entry.id} / ${module.title} / ${itemTitle} (${count})`
+							);
+						}
+					}
+				}
+
+				for (const [moduleTitle, count] of moduleTitleCounts) {
+					if (count > 1) {
+						duplicateLabels.push(
+							`${entry.id} / ${moduleTitle} (${count})`
+						);
+					}
+				}
+			}
+
+			expect(duplicateLabels).toEqual([]);
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
+
 	it("keeps course expansion templates from regenerating instructor-action copy", () => {
 		const corpus = [
 			"src/stores/courses/course-implementation-artifacts.ts",
