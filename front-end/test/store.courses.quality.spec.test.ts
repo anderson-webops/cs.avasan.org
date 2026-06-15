@@ -1214,6 +1214,7 @@ describe("course text quality normalization", () => {
 			const repeatedStudioTitles: string[] = [];
 			const studioParentheticalResidue: string[] = [];
 			const studioArticleGrammarResidue: string[] = [];
+			const genericFocusedPracticeTitles: string[] = [];
 			const repeatedWords: string[] = [];
 			const courses = await Promise.all(
 				courseCatalog.map(entry => loadRawCourse(entry.id))
@@ -1241,12 +1242,15 @@ describe("course text quality normalization", () => {
 								`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title}`
 							);
 						}
+						if (item.title === "Focused Practice") {
+							genericFocusedPracticeTitles.push(
+								`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title}`
+							);
+						}
 						if (
 							genericTitleSuffix.test(item.title) &&
 							(item.title.startsWith(`${module.title}:`) ||
-								item.title.startsWith(
-									`${course.name}: ${module.title}`
-								))
+								item.title.startsWith(`${course.name}: ${module.title}`))
 						) {
 							redundantGenericTitles.push(
 								`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title}`
@@ -1317,7 +1321,10 @@ describe("course text quality normalization", () => {
 			expect(repeatedStudioTitles).toEqual([]);
 			expect(studioParentheticalResidue).toEqual([]);
 			expect(studioArticleGrammarResidue).toEqual([]);
+			expect(genericFocusedPracticeTitles).toEqual([]);
 			expect(repeatedWords).toEqual([]);
+			expect(corpus).not.toMatch(/focused practice checkpoint/i);
+			expect(corpus).not.toMatch(/should use the checkpoint/i);
 			expect(corpus).not.toMatch(/typical the response example/i);
 			expect(corpus).not.toMatch(/the response known values/i);
 			expect(corpus).not.toMatch(/the response answer/i);

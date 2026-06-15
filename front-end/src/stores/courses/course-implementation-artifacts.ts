@@ -2338,14 +2338,146 @@ function backfillReferenceSolutionLinks(courseId: string, course: RawCourse) {
 	}
 }
 
+function fallbackSupplementalTopic(moduleTitle: string) {
+	const cleaned = moduleTitle
+		.replace(
+			/^(?:AA|AB|ALA|ALB|AM|APCS|CHM|CPP[A-Z]?|GrS|ML|PS|UGD)\d+\s*/i,
+			""
+		)
+		.replace(/^Review:\s*/i, "")
+		.replace(/^Master Project:\s*/i, "")
+		.trim();
+
+	if (/^Master Project$/i.test(cleaned)) return moduleTitle.trim();
+
+	return cleaned || moduleTitle.trim();
+}
+
+function fallbackPracticeFocus(topic: string) {
+	const lowerTopic = topic.toLowerCase();
+
+	if (/^check-?in|review/.test(lowerTopic)) {
+		return {
+			goal: "identify which earlier skill is secure and which one needs another example.",
+			sequence: [
+				"Choose one representative problem from the review topic.",
+				"Solve a direct version, then solve a changed version with different numbers, input, or wording.",
+				"Write a short note naming the rule, strategy, or vocabulary that made the second version work."
+			],
+			checks: [
+				"The direct case and changed case are both complete.",
+				"The explanation names the skill being checked.",
+				"One likely mistake is identified with the check that would catch it."
+			]
+		};
+	}
+
+	if (
+		/search|sort|algorithm|runtime|recursion|quicksort|merge|bubble|selection|insertion/.test(
+			lowerTopic
+		)
+	) {
+		return {
+			goal: "make the algorithm visible through a trace before relying on code or a final answer.",
+			sequence: [
+				"Trace a small hand-checkable input and record each major state change.",
+				"Run or solve a second input that exposes a boundary case such as empty data, one item, duplicates, or reversed order.",
+				"Explain the stopping condition and the reason the result is correct."
+			],
+			checks: [
+				"The trace shows intermediate states, not only the final result.",
+				"At least one boundary or awkward case is checked.",
+				"The explanation connects the trace to correctness or runtime."
+			]
+		};
+	}
+
+	if (
+		/file|input|output|list|array|dictionar(?:y|ies)|data|csv|json|table/.test(
+			lowerTopic
+		)
+	) {
+		return {
+			goal: "practice moving data from input to representation to output without losing context.",
+			sequence: [
+				"Define the expected input shape and one example record or value.",
+				"Process a normal case and a case with missing, empty, repeated, or unusually ordered data.",
+				"Summarize what the output proves about the representation or data-handling choice."
+			],
+			checks: [
+				"The input assumptions are written before the solution.",
+				"Normal and awkward data cases are both handled.",
+				"The output is connected back to the representation choice."
+			]
+		};
+	}
+
+	if (
+		/class|object|method|inherit|interface|record|state|constructor/.test(
+			lowerTopic
+		)
+	) {
+		return {
+			goal: "make object responsibilities, state changes, and public behavior easy to inspect.",
+			sequence: [
+				"Name the object or type responsible for each piece of behavior.",
+				"Create one normal interaction and one interaction that changes or tests object state.",
+				"Explain which fields, methods, or contracts must stay private, public, immutable, or validated."
+			],
+			checks: [
+				"Responsibilities are divided across the correct types or methods.",
+				"One state-changing or boundary interaction is tested.",
+				"The explanation names the design boundary that keeps the code understandable."
+			]
+		};
+	}
+
+	if (
+		/game|graphics|ui|event|simulation|animation|sprite|unity|pygame|swift|app/.test(
+			lowerTopic
+		)
+	) {
+		return {
+			goal: "connect interaction, state updates, and visible feedback in a small working artifact.",
+			sequence: [
+				"Define the user action, state change, and visible response.",
+				"Build the smallest interaction first, then add one changed state or edge case.",
+				"Record how the screen, console, or app state proves the interaction works."
+			],
+			checks: [
+				"The action, state update, and feedback loop are all visible.",
+				"One repeated, invalid, or boundary interaction is tested.",
+				"The final note explains why the interaction remains predictable."
+			]
+		};
+	}
+
+	return {
+		goal: "turn the module idea into a small transfer task with a clear result and an explanation of why it works.",
+		sequence: [
+			"State the core idea from the module in one sentence.",
+			"Complete a direct case, then change one condition such as input, representation, constraint, or context.",
+			"Compare the two cases and explain what stayed the same and what changed."
+		],
+		checks: [
+			"The changed condition is explicit.",
+			"Both the direct case and transfer case have visible evidence.",
+			"The explanation connects the result back to the module idea."
+		]
+	};
+}
+
 function supplementalProjectFor(
 	module: RawCourseModule,
 	next: number
 ): RawCourseModuleItem {
 	if (next === 1) {
+		const topic = fallbackSupplementalTopic(module.title);
+		const focus = fallbackPracticeFocus(topic);
+
 		return {
-			title: `${module.title}: Focused Practice`,
-			content: `**Project goal:** Add a focused practice checkpoint for ${module.title}. Complete one direct example, one slightly changed example, and one written explanation of the main idea. Use the result as a quick readiness signal before moving into the larger module project.\n\n**Completion checks:**\n- The prerequisite concept is stated clearly.\n- The normal case is completed independently.\n- The explanation identifies one likely misconception or edge case.`
+			title: `Checkpoint: ${topic}`,
+			content: `**Project goal:** Build a topic-specific readiness checkpoint for ${topic}. The checkpoint should ${focus.goal}\n\n**Work sequence:**\n${focus.sequence.map((step, index) => `${index + 1}. ${step}`).join("\n")}\n\n**Completion checks:**\n${focus.checks.map(check => `- ${check}`).join("\n")}`
 		};
 	}
 
