@@ -3,6 +3,7 @@ import type { CourseAssetResource } from "@/modules/courseAssetPreview";
 import { computed, ref, watch } from "vue";
 import {
 	courseAssetPreviewActionLabel,
+	courseAssetViewerUrl,
 	loadCourseAssetSection,
 	previewableCourseAssetResources
 } from "@/modules/courseAssetPreview";
@@ -48,6 +49,14 @@ const previewContent = computed(() => {
 
 	return content.value;
 });
+const selectedResourceViewerUrl = computed(() =>
+	selectedResource.value
+		? courseAssetViewerUrl(
+				selectedResource.value.url,
+				selectedResource.value.label
+			)
+		: ""
+);
 
 watch(
 	resourcesForPreview,
@@ -140,7 +149,7 @@ async function handleResourceChange() {
 				<a
 					v-if="selectedResource"
 					class="course-asset-preview-open-link"
-					:href="selectedResource.url"
+					:href="selectedResourceViewerUrl"
 					rel="noreferrer"
 					target="_blank"
 				>

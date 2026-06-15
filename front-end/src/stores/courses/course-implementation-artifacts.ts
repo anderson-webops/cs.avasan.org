@@ -2203,7 +2203,7 @@ function addSystemsSpecificSafetyModule(courseId: string, course: RawCourse) {
 			},
 			{
 				title: `${courseLabel} Evidence Rubric`,
-				content: `**Readiness check:** Evaluate ${courseLabel} systems/security work on correctness, scope discipline, reproducibility, evidence quality, remediation, and communication. Raw cleverness does not compensate for unsafe scope or missing mitigation.\n\n**Evidence of proficiency:** The work demonstrates the ability to show what happened, why it mattered, how it was fixed or constrained, and how the result was verified.`
+				content: `**Readiness check:** Evaluate systems/security work for ${courseLabel} on correctness, scope discipline, reproducibility, evidence quality, remediation, and communication. Raw cleverness does not compensate for unsafe scope or missing mitigation.\n\n**Evidence of proficiency:** The work demonstrates the ability to show what happened, why it mattered, how it was fixed or constrained, and how the result was verified.`
 			}
 		],
 		supplementalProjects: [

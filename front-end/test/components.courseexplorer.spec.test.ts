@@ -163,7 +163,9 @@ describe("CourseExplorer.vue", () => {
 		expect(wrapper.find(".course-stats").text()).toContain("Modules1");
 		expect(wrapper.find(".course-stats").text()).toContain("Appendices1");
 		expect(
-			wrapper.find('[aria-label="Show appendix 2: Reference Appendix"]').exists()
+			wrapper
+				.find('[aria-label="Show appendix 2: Reference Appendix"]')
+				.exists()
 		).toBe(true);
 	});
 
@@ -311,7 +313,8 @@ describe("CourseExplorer.vue", () => {
 			course => course.id === "intro-to-chemistry"
 		);
 
-		if (!chemistryCourse) throw new Error("Expected Intro to Chemistry course.");
+		if (!chemistryCourse)
+			throw new Error("Expected Intro to Chemistry course.");
 
 		const chemistryModuleId = "chm1-chemistry-basics";
 		const chemistryItemId =
@@ -342,7 +345,8 @@ describe("CourseExplorer.vue", () => {
 							{
 								curriculum: [
 									{
-										content: "Density predicts which liquid sits on top.",
+										content:
+											"Density predicts which liquid sits on top.",
 										id: chemistryItemId,
 										title: "Mini Lab: DIY Lava Lamp and Density"
 									}
@@ -423,16 +427,20 @@ describe("CourseExplorer.vue", () => {
 		await flushPromises();
 
 		await vi.waitFor(() => {
-			expect(wrapper.find<HTMLSelectElement>("#learner-select").element.value).toBe(
-				"learner-chemistry"
+			expect(
+				wrapper.find<HTMLSelectElement>("#learner-select").element.value
+			).toBe("learner-chemistry");
+			expect(
+				wrapper.find<HTMLSelectElement>("#course-select").element.value
+			).toBe(chemistryCourse.id);
+			expect(wrapper.text()).toContain(
+				"Mini Lab: DIY Lava Lamp and Density"
 			);
-			expect(wrapper.find<HTMLSelectElement>("#course-select").element.value).toBe(
-				chemistryCourse.id
-			);
-			expect(wrapper.text()).toContain("Mini Lab: DIY Lava Lamp and Density");
 		});
 
-		expect(wrapper.text()).toContain("Showing module 1: CHM1 Chemistry Basics.");
+		expect(wrapper.text()).toContain(
+			"Showing module 1: CHM1 Chemistry Basics."
+		);
 		expect(coursesStore.loadCourseById).toHaveBeenCalledWith(
 			chemistryCourse.id
 		);
@@ -449,7 +457,8 @@ describe("CourseExplorer.vue", () => {
 			course => course.id === "intro-to-chemistry"
 		);
 
-		if (!chemistryCourse) throw new Error("Expected Intro to Chemistry course.");
+		if (!chemistryCourse)
+			throw new Error("Expected Intro to Chemistry course.");
 
 		window.history.replaceState(
 			{},
@@ -523,12 +532,12 @@ describe("CourseExplorer.vue", () => {
 		await flushPromises();
 
 		await vi.waitFor(() => {
-			expect(wrapper.find<HTMLSelectElement>("#learner-select").element.value).toBe(
-				"learner-chemistry"
-			);
-			expect(wrapper.find<HTMLSelectElement>("#course-select").element.value).toBe(
-				chemistryCourse.id
-			);
+			expect(
+				wrapper.find<HTMLSelectElement>("#learner-select").element.value
+			).toBe("learner-chemistry");
+			expect(
+				wrapper.find<HTMLSelectElement>("#course-select").element.value
+			).toBe(chemistryCourse.id);
 			expect(wrapper.text()).toContain("Chemistry Basics Lesson");
 		});
 	});
@@ -684,7 +693,8 @@ describe("CourseExplorer.vue", () => {
 			"/course-assets/chemistry/chemistry-materials-pack.md#nomenclature-practice-cards";
 		const answerKeyLink =
 			"/course-assets/chemistry/chemistry-rubrics-answer-key.md#heating-curve-key";
-		const phetLink = "https://phet.colorado.edu/en/simulations/build-an-atom";
+		const phetLink =
+			"https://phet.colorado.edu/en/simulations/build-an-atom";
 
 		vi.spyOn(coursesStore, "loadCourseById").mockResolvedValue({
 			id: assignedCourse.id,
@@ -746,6 +756,16 @@ describe("CourseExplorer.vue", () => {
 			expect(wrapper.text()).toContain("PhET simulation");
 			expect(wrapper.text()).toContain("Course asset");
 		});
+
+		for (const localAssetLink of [localMaterialLink, namingCardsLink]) {
+			const rawAssetLink = wrapper.find(
+				`a.resource-link[href="${localAssetLink}"]`
+			);
+			expect(rawAssetLink.exists()).toBe(false);
+		}
+		expect(wrapper.html()).toContain(
+			"/course-resource?asset=%2Fcourse-assets%2Fchemistry%2Fchemistry-materials-pack.md%23heating-curve-data"
+		);
 
 		expect(wrapper.text()).not.toContain("Rubric / answer key");
 		expect(wrapper.text()).not.toContain("Dataset");
@@ -828,9 +848,9 @@ describe("CourseExplorer.vue", () => {
 		});
 
 		expect(wrapper.text()).not.toContain("Rubric / answer key");
-		expect(wrapper.html().indexOf("Compare local chemistry data.")).toBeLessThan(
-			wrapper.html().indexOf("View Heating curve data")
-		);
+		expect(
+			wrapper.html().indexOf("Compare local chemistry data.")
+		).toBeLessThan(wrapper.html().indexOf("View Heating curve data"));
 
 		await wrapper.find(".course-asset-preview-toggle").trigger("click");
 		await flushPromises();
@@ -843,13 +863,23 @@ describe("CourseExplorer.vue", () => {
 			);
 		});
 
+		const fullResourceLink = wrapper.find(
+			".course-asset-preview-open-link"
+		);
+		expect(fullResourceLink.attributes("href")).toContain(
+			"/course-resource?asset=%2Fcourse-assets%2Fchemistry%2Fchemistry-materials-pack.md%23heating-curve-data"
+		);
+		expect(fullResourceLink.attributes("href")).not.toBe(materialLink);
+
 		expect(fetcher).toHaveBeenCalledWith(
 			"/course-assets/chemistry/chemistry-materials-pack.md"
 		);
 		expect(wrapper.text()).not.toContain(
 			"Measurement text that should not appear"
 		);
-		expect(wrapper.text()).not.toContain("Capstone text that should not appear");
+		expect(wrapper.text()).not.toContain(
+			"Capstone text that should not appear"
+		);
 	});
 
 	it("renders solution code preview controls for staff course context", async () => {
@@ -867,7 +897,8 @@ describe("CourseExplorer.vue", () => {
 				{
 					curriculum: [
 						{
-							content: "Compare the solution after attempting the starter.",
+							content:
+								"Compare the solution after attempting the starter.",
 							id: "starter-item",
 							projectLink:
 								"https://github.com/instruction-material/APCS/tree/main/APCS1-Mad-Libs/starter",
@@ -876,7 +907,8 @@ describe("CourseExplorer.vue", () => {
 							title: "Starter Project"
 						},
 						{
-							content: "Compare local chemistry data against the rubric.",
+							content:
+								"Compare local chemistry data against the rubric.",
 							datasetLink:
 								"/course-assets/chemistry/chemistry-materials-pack.md#heating-curve-data",
 							id: "chemistry-material",

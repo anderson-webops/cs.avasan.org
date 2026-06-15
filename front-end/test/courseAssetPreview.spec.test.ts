@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
+	courseAssetViewerUrl,
 	extractMarkdownSection,
 	loadCourseAssetSection,
 	parseCourseAssetUrl,
@@ -22,7 +23,23 @@ describe("course asset preview utilities", () => {
 			path: "/course-assets/chemistry/chemistry-materials-pack.md"
 		});
 		expect(parseCourseAssetUrl("https://example.com/file.md")).toBeNull();
-		expect(parseCourseAssetUrl("/course-assets/chemistry/image.png")).toBeNull();
+		expect(
+			parseCourseAssetUrl("/course-assets/chemistry/image.png")
+		).toBeNull();
+	});
+
+	it("builds styled viewer URLs for local Markdown course assets", () => {
+		expect(
+			courseAssetViewerUrl(
+				"/course-assets/chemistry/chemistry-materials-pack.md#measurement-tables-and-unit-conversions",
+				"Measurement tables"
+			)
+		).toBe(
+			"/course-resource?asset=%2Fcourse-assets%2Fchemistry%2Fchemistry-materials-pack.md%23measurement-tables-and-unit-conversions&label=Measurement+tables"
+		);
+		expect(courseAssetViewerUrl("https://example.com/file.md")).toBe(
+			"https://example.com/file.md"
+		);
 	});
 
 	it("uses the same heading slug style as authored chemistry asset links", () => {

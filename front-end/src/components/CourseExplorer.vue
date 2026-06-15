@@ -17,6 +17,7 @@ import {
 	watch
 } from "vue";
 import { api } from "@/api";
+import { courseAssetViewerUrl } from "@/modules/courseAssetPreview";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
 import CodePreview from "./CodePreview.vue";
@@ -1113,6 +1114,10 @@ function courseAssetPreviewResources(
 	);
 }
 
+function resourceOpenUrl(resource: ResourceLink) {
+	return courseAssetViewerUrl(resource.url, resource.label);
+}
+
 watch(selectedCourseId, value => {
 	if (!isStorageReady.value) return;
 	writeStoredValue(COURSE_SELECTION_STORAGE_KEY, value);
@@ -1622,7 +1627,7 @@ function writeStoredValue(key: string, value: string) {
 											:key="`${item.id}-${resource.kind}`"
 											class="resource-link"
 											:class="[`is-${resource.kind}`]"
-											:href="resource.url"
+											:href="resourceOpenUrl(resource)"
 											rel="noreferrer"
 											target="_blank"
 										>
@@ -1774,7 +1779,7 @@ function writeStoredValue(key: string, value: string) {
 											:key="`${item.id}-${resource.kind}`"
 											class="resource-link"
 											:class="[`is-${resource.kind}`]"
-											:href="resource.url"
+											:href="resourceOpenUrl(resource)"
 											rel="noreferrer"
 											target="_blank"
 										>

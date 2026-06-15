@@ -72,6 +72,15 @@ export function isPreviewableCourseAsset(url: string) {
 	return parseCourseAssetUrl(url) !== null;
 }
 
+export function courseAssetViewerUrl(url: string, label = "") {
+	if (!isPreviewableCourseAsset(url)) return url;
+
+	const params = new URLSearchParams({ asset: url });
+	if (label.trim()) params.set("label", label.trim());
+
+	return `/course-resource?${params.toString()}`;
+}
+
 export function previewableCourseAssetResources(
 	resources: CourseAssetResource[]
 ) {

@@ -4090,31 +4090,32 @@ function extensionPrompt(context: CourseTextContext) {
 
 function projectSupport(context: CourseTextContext) {
 	const focus = subjectFocus(context);
+	const reference = capitalizeSentence(projectSupportReference(context));
 	const goal = variantPrompt(context, [
-		subject =>
-			`**Project goal:** **${subject}** produces a visible result tied to ${focus}. Include a normal path, an edge case, and one sentence explaining the evidence.`,
-		subject =>
-			`**Project goal:** **${subject}** ends with an observable result, a checked assumption, and evidence tied to ${focus}.`,
-		subject =>
-			`**Project goal:** **${subject}** turns ${focus} into something testable: run it, inspect the output, and record what proves the idea works.`,
-		subject =>
-			`**Project goal:** **${subject}** centers on one concrete behavior, model, output, or analysis that makes ${focus} visible.`,
-		subject =>
-			`**Project goal:** **${subject}** shows ${focus} through a run, trace, model, or user interaction.`,
-		subject =>
-			`**Project goal:** **${subject}** grows from a small working case into a finished result that reflects ${focus}, with a documented assumption and a clear success check.`,
-		subject =>
-			`**Project goal:** **${subject}** applies ${focus} in a practical artifact, then compares expected behavior with the observed result.`,
-		subject =>
-			`**Project goal:** **${subject}** includes enough structure, naming, and evidence to support ${focus} without relying on memory.`,
-		subject =>
-			`**Project goal:** **${subject}** makes the central decision for ${focus} explicit, tested, and visible in the final artifact.`,
-		subject =>
-			`**Project goal:** **${subject}** demonstrates ${focus} with one ordinary case and one case that could fail if the idea is misunderstood.`,
-		subject =>
-			`**Project goal:** **${subject}** connects the prompt requirements to ${focus}, then documents the evidence that proves the connection works.`,
-		subject =>
-			`**Project goal:** **${subject}** documents the input, process, and output path, then connects the result to ${focus}.`
+		() =>
+			`**Project goal:** ${reference} produces a visible result tied to ${focus}. Include a normal path, an edge case, and one sentence explaining the evidence.`,
+		() =>
+			`**Project goal:** ${reference} ends with an observable result, a checked assumption, and evidence tied to ${focus}.`,
+		() =>
+			`**Project goal:** ${reference} turns ${focus} into something testable: run it, inspect the output, and record what proves the idea works.`,
+		() =>
+			`**Project goal:** ${reference} centers on one concrete behavior, model, output, or analysis that makes ${focus} visible.`,
+		() =>
+			`**Project goal:** ${reference} shows ${focus} through a run, trace, model, or user interaction.`,
+		() =>
+			`**Project goal:** ${reference} grows from a small working case into a finished result that reflects ${focus}, with a documented assumption and a clear success check.`,
+		() =>
+			`**Project goal:** ${reference} applies ${focus} in a practical artifact, then compares expected behavior with the observed result.`,
+		() =>
+			`**Project goal:** ${reference} includes enough structure, naming, and evidence to support ${focus} without relying on memory.`,
+		() =>
+			`**Project goal:** ${reference} makes the central decision for ${focus} explicit, tested, and visible in the final artifact.`,
+		() =>
+			`**Project goal:** ${reference} demonstrates ${focus} with one ordinary case and one case that could fail if the idea is misunderstood.`,
+		() =>
+			`**Project goal:** ${reference} connects the prompt requirements to ${focus}, then documents the evidence that proves the connection works.`,
+		() =>
+			`**Project goal:** ${reference} documents the input, process, and output path, then connects the result to ${focus}.`
 	]);
 
 	return [
@@ -4731,6 +4732,8 @@ function diagnosticSupport(context: CourseTextContext) {
 }
 
 function scienceSupport(context: CourseTextContext) {
+	const compact = (line: string) =>
+		compactGeneratedProjectSupport(context, [line])[0];
 	const remoteInvestigation = variantPrompt(context, [
 		subject =>
 			`${subject} uses shared-screen materials, notes, paper, pencil, and provided images, graphs, data, or simulations. ${subject} does not require beakers, kits, or household materials; any physical demonstration can be replaced with a diagram or data table.`,
@@ -4763,10 +4766,13 @@ function scienceSupport(context: CourseTextContext) {
 	]);
 
 	return [
-		`**Remote investigation:** ${remoteInvestigation}`,
-		`**Science explanation:** ${scienceExplanation}`,
-		`**Output:** ${output}`,
-		`**Completion checks:**\n${completionChecks(context).join("\n")}`
+		`**Remote investigation:** ${compact(remoteInvestigation)}`,
+		`**Science explanation:** ${compact(scienceExplanation)}`,
+		`**Output:** ${compact(output)}`,
+		`**Completion checks:**\n${compactGeneratedProjectSupport(
+			context,
+			completionChecks(context)
+		).join("\n")}`
 	].join("\n\n");
 }
 
@@ -5341,8 +5347,121 @@ function studioExtensionPrompt(context: CourseTextContext) {
 	]);
 }
 
-function compactStudioSupportText(text: string) {
-	return text
+function compactStudioSupportText(
+	text: string,
+	studioLabel = "",
+	reference = "the work",
+	runGenericCleanup = true
+) {
+	let compacted = text;
+
+	if (studioLabel) {
+		const escapedLabel = escapeStringForRegExp(studioLabel);
+		const capitalizedReference = capitalizeSentence(reference);
+
+		compacted = compacted
+			.replace(new RegExp(`\\bFor ${escapedLabel},\\s*`, "g"), "")
+			.replace(
+				new RegExp(`\\bUse ${escapedLabel} to\\b`, "g"),
+				`Use ${reference} to`
+			)
+			.replace(
+				new RegExp(`\\bFrame ${escapedLabel} around\\b`, "g"),
+				`Frame ${reference} around`
+			)
+			.replace(
+				new RegExp(`\\bDefine ${escapedLabel} by\\b`, "g"),
+				`Define ${reference} by`
+			)
+			.replace(
+				new RegExp(`\\bKeep ${escapedLabel}\\s+`, "g"),
+				`Keep ${reference} `
+			)
+			.replace(
+				new RegExp(`\\bName the ${escapedLabel}\\s+`, "g"),
+				"Name the "
+			)
+			.replace(
+				new RegExp(`\\bSeparate ${escapedLabel}\\s+`, "g"),
+				"Separate "
+			)
+			.replace(
+				new RegExp(`\\bStart ${escapedLabel} with\\b`, "g"),
+				"Start with"
+			)
+			.replace(
+				new RegExp(`\\bAssign each ${escapedLabel}\\s+`, "g"),
+				"Assign each "
+			)
+			.replace(
+				new RegExp(
+					`\\bComplete the smallest inspectable ${escapedLabel}\\s+`,
+					"g"
+				),
+				"Complete the smallest inspectable "
+			)
+			.replace(
+				new RegExp(`\\bCompile ${escapedLabel} after\\b`, "g"),
+				`Compile ${reference} after`
+			)
+			.replace(
+				new RegExp(`\\bVerify ${escapedLabel} with\\b`, "g"),
+				`Verify ${reference} with`
+			)
+			.replace(
+				new RegExp(`\\bCheck ${escapedLabel} against\\b`, "g"),
+				`Check ${reference} against`
+			)
+			.replace(
+				new RegExp(`\\bCompare ${escapedLabel} against\\b`, "g"),
+				`Compare ${reference} against`
+			)
+			.replace(
+				new RegExp(`\\bAfter ${escapedLabel} works\\b`, "g"),
+				"After it works"
+			)
+			.replace(
+				new RegExp(`\\bFinish ${escapedLabel} by\\b`, "g"),
+				"Finish by"
+			)
+			.replace(
+				new RegExp(`\\b${escapedLabel} demonstrates\\b`, "g"),
+				`${capitalizedReference} demonstrates`
+			)
+			.replace(
+				new RegExp(`\\b${escapedLabel} checks\\b`, "g"),
+				`${capitalizedReference} checks`
+			)
+			.replace(
+				new RegExp(`\\b${escapedLabel} includes\\b`, "g"),
+				`${capitalizedReference} includes`
+			)
+			.replace(
+				new RegExp(`\\b${escapedLabel} requirements\\b`, "g"),
+				"The requirements"
+			)
+			.replace(
+				new RegExp(`\\bThe ${escapedLabel} protected boundary\\b`, "g"),
+				"The protected boundary"
+			)
+			.replace(
+				new RegExp(`\\bThe ${escapedLabel} final note\\b`, "g"),
+				"The final note"
+			)
+			.replace(new RegExp(`^${escapedLabel}:\\s*`, "g"), "")
+			.replace(new RegExp(`\\b${escapedLabel}\\b`, "g"), reference);
+	}
+
+	if (!runGenericCleanup) return compacted;
+
+	return compacted
+		.replace(/\b(the (?:studio|lab|work)) \([^)]{3,80}\)/gi, "$1")
+		.replace(
+			/\b(one|each|every) the (?:studio|lab|work) ([a-z])/gi,
+			"$1 $2"
+		)
+		.replace(/\b(a|an) the (?:studio|lab|work) ([a-z])/gi, "$1 $2")
+		.replace(/\bthe the\b/gi, "the")
 		.replace(/\b(the|a|an) The ([A-Z])/g, "$1 $2")
 		.replace(/\b(The|A|An) The ([A-Z])/g, "$1 $2")
 		.replace(/\b(one|each|every) The ([A-Z])/g, "$1 $2")
@@ -5360,11 +5479,43 @@ function compactStudioSupportText(text: string) {
 
 function studioSupport(context: CourseTextContext) {
 	const studioLabel = studioContextLabel(context);
+	const scopedSubject = scopedItemSubject(context);
+	const itemTitle = stripLessonTitlePrefix(context.item.title);
+	const moduleTitle = stripLessonTitlePrefix(context.module.title);
+	const studioLabelAliases = [
+		studioLabel,
+		scopedSubject ? compactStudioContextTitle(scopedSubject) : "",
+		compactStudioContextTitle(`${itemTitle} (${moduleTitle})`),
+		compactStudioContextTitle(itemTitle)
+	]
+		.filter(
+			(alias, index, aliases) => alias && aliases.indexOf(alias) === index
+		)
+		.sort((a, b) => b.length - a.length);
 	const supportLabel = /applied lab|lab \d+/i.test(
 		`${context.module.title} ${context.item.title}`
 	)
 		? "Applied lab"
 		: "Applied studio";
+	const studioReference =
+		supportLabel === "Applied lab" ? "the lab" : "the studio";
+	const compactStudio = (text: string) =>
+		compactStudioSupportText(
+			studioLabelAliases.reduce(
+				(compacted, alias) =>
+					compacted.includes(alias)
+						? compactStudioSupportText(
+								compacted,
+								alias,
+								studioReference,
+								false
+							)
+						: compacted,
+				text
+			),
+			"",
+			studioReference
+		);
 	const studioFocus = variantPrompt(context, [
 		() =>
 			`For ${studioLabel}, define the artifact, prerequisite concepts, success criteria, and evidence before adding polish.`,
@@ -5375,7 +5526,7 @@ function studioSupport(context: CourseTextContext) {
 		() =>
 			`Separate ${studioLabel} setup, core behavior, edge cases, and review notes so the finished artifact can be inspected later.`,
 		() =>
-			`Start ${studioLabel} with the smallest complete artifact, then record the evidence that shows it meets the module goal.`,
+			`Build the smallest complete ${studioLabel} artifact first, then record evidence that shows it meets the activity requirements.`,
 		() =>
 			`Use ${studioLabel} to connect prerequisite ideas to a concrete result, a testable constraint, and a visible review point.`,
 		() =>
@@ -5395,18 +5546,17 @@ function studioSupport(context: CourseTextContext) {
 			`Finish ${reviewTarget} by naming one test result, one improvement made, and one remaining constraint.`
 	]);
 	const compactExtension = compactStudioSupportText(
-		studioExtensionPrompt(context)
+		compactStudio(studioExtensionPrompt(context)),
+		"",
+		studioReference
 	);
-	const extension = compactExtension.includes(studioLabel)
-		? compactExtension
-		: `${studioLabel}: ${compactExtension}`;
 
 	return [
-		`**${supportLabel}:** **${studioLabel}** produces ${studioArtifact(context)} connected to ${subjectFocus(context)}.`,
-		`**Studio focus:** ${compactStudioSupportText(studioFocus)}`,
-		`**Build sequence:**\n${compactStudioSupportText(studioBuildSequence(context).join("\n"))}\n- ${compactStudioSupportText(reviewStep)}`,
-		`**Completion checks:**\n${compactStudioSupportText(studioCompletionChecks(context).join("\n"))}`,
-		`**Extension:** ${extension}`
+		`**${supportLabel}:** ${capitalizeSentence(studioReference)} produces ${studioArtifact(context)} connected to ${subjectFocus(context)}.`,
+		`**Studio focus:** ${compactStudio(studioFocus)}`,
+		`**Build sequence:**\n${compactStudio(studioBuildSequence(context).join("\n"))}\n- ${compactStudio(reviewStep)}`,
+		`**Completion checks:**\n${compactStudio(studioCompletionChecks(context).join("\n"))}`,
+		`**Extension:** ${compactExtension}`
 	].join("\n\n");
 }
 

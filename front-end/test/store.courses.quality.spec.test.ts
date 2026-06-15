@@ -1207,12 +1207,22 @@ describe("course text quality normalization", () => {
 		async () => {
 			const longItemTitles: string[] = [];
 			const redundantGenericTitles: string[] = [];
+			const nestedBoldProjectGoals: string[] = [];
+			const nestedBoldStudioGoals: string[] = [];
+			const repeatedStudioTitles: string[] = [];
+			const studioParentheticalResidue: string[] = [];
+			const repeatedWords: string[] = [];
 			const courses = await Promise.all(
 				courseCatalog.map(entry => loadRawCourse(entry.id))
 			);
 			const corpus = courses.map(allCourseText).join("\n");
 			const genericTitleSuffix =
 				/(?:Applied Challenge|Core Project|Debugging and Failure Modes|Diagnostic Checkpoint|Extension Challenge|Fluency Drill|Focused Practice|Modeling or Error Analysis|Open-Ended Variant|Planning and Architecture|Standards Practice Set|Supplemental(?: Project| Practice)? [23]|Verification and Reflection)$/i;
+			const nestedBoldProjectGoalPattern =
+				/\*\*Project goal:\*\*\s+\*\*[^*\n]{1,180}\*\*/;
+			const nestedBoldStudioGoalPattern =
+				/\*\*(?:Applied studio|Applied lab):\*\*\s+\*\*[^*\n]{1,180}\*\*/;
+			const repeatedWordPattern = /\b([A-Za-z][A-Za-z-]{3,})\s+\1\b/i;
 
 			for (const [courseIndex, course] of courses.entries()) {
 				expect(course, courseCatalog[courseIndex].id).not.toBeNull();
@@ -1239,12 +1249,63 @@ describe("course text quality normalization", () => {
 								`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title}`
 							);
 						}
+						if (nestedBoldProjectGoalPattern.test(item.content)) {
+							nestedBoldProjectGoals.push(
+								`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title}`
+							);
+						}
+						if (nestedBoldStudioGoalPattern.test(item.content)) {
+							nestedBoldStudioGoals.push(
+								`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title}`
+							);
+						}
+						if (
+							/^\*\*(?:Applied studio|Applied lab):/i.test(
+								item.content
+							)
+						) {
+							const escapedItemTitle = item.title.replace(
+								/[.*+?^${}()|[\]\\]/g,
+								"\\$&"
+							);
+							const repeatCount = (
+								item.content.match(
+									new RegExp(escapedItemTitle, "g")
+								) ?? []
+							).length;
+							if (repeatCount > 1) {
+								repeatedStudioTitles.push(
+									`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title} (${repeatCount})`
+								);
+							}
+							if (
+								/the (?:studio|lab) \([^)]{3,80}\)/i.test(
+									item.content
+								)
+							) {
+								studioParentheticalResidue.push(
+									`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title}`
+								);
+							}
+						}
+						const repeatedWordMatch =
+							item.content.match(repeatedWordPattern);
+						if (repeatedWordMatch) {
+							repeatedWords.push(
+								`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title} / ${repeatedWordMatch[0]}`
+							);
+						}
 					}
 				}
 			}
 
 			expect(longItemTitles).toEqual([]);
 			expect(redundantGenericTitles).toEqual([]);
+			expect(nestedBoldProjectGoals).toEqual([]);
+			expect(nestedBoldStudioGoals).toEqual([]);
+			expect(repeatedStudioTitles).toEqual([]);
+			expect(studioParentheticalResidue).toEqual([]);
+			expect(repeatedWords).toEqual([]);
 			expect(corpus).not.toMatch(/typical the response example/i);
 			expect(corpus).not.toMatch(/the response known values/i);
 			expect(corpus).not.toMatch(/the response answer/i);
@@ -1328,7 +1389,7 @@ describe("course text quality normalization", () => {
 			"\n   **Completion checks:**\n   -"
 		);
 		expect(scratchStudio!.content).toContain(
-			"**Extension:** Debugging and Remix Studio: Add a broadcast, backdrop change, or sprite interaction that reuses the same event logic."
+			"**Extension:** Add a broadcast, backdrop change, or sprite interaction that reuses the same event logic."
 		);
 		expect(scratchStudio!.content).toContain(
 			"\n\n2. **Design and Planning Map**"
@@ -1395,22 +1456,21 @@ describe("course text quality normalization", () => {
 			"any larger dataset result is accepted.\n\n**Readable output:**"
 		);
 		expect(csvStudio.content).toContain(
-			"- Name the CSV Summaries and Sanity Checks dataset or search space, target question, feature or column choices, and comparison point."
+			"- Name the dataset or search space, target question, feature or column choices, and comparison point."
 		);
 		expect(csvStudio.content).not.toContain(
 			"Define the Concept Path for DSP10"
 		);
 
-		const scratchStudio = findItem(
-			scratchLevel1!,
-			/^Core Concepts$/,
-			/Debugging and Remix Studio/
+		const scratchStudio = scratchLevel1!.modules
+			.find(module => module.title === "GS16 Debugging and Remix Studio")
+			?.curriculum.find(item => item.title === "Core Concepts");
+		expect(scratchStudio).toBeDefined();
+		expect(scratchStudio.content).toContain(
+			"The studio starting position, visible state, score or timer, and reset behavior are predictable"
 		);
 		expect(scratchStudio.content).toContain(
-			"Debugging and Remix Studio starting position, visible state, score or timer, and reset behavior are predictable"
-		);
-		expect(scratchStudio.content).toContain(
-			"Compare Debugging and Remix Studio against the original goal and record at least one improvement or bug fix"
+			"Compare the studio against the original goal and record at least one improvement or bug fix"
 		);
 		expect(scratchStudio.content).not.toContain(
 			"Check Concept Path against the stated success criteria"
@@ -1421,10 +1481,10 @@ describe("course text quality normalization", () => {
 			/Full-Stack Web Lab 15: Core Concepts/
 		);
 		expect(webStudio.content).toContain(
-			"Identify the Full-Stack Web Lab 15 user interaction, state change, DOM/canvas/API output, and visible loading, empty, or error state."
+			"Identify the lab user interaction, state change, DOM/canvas/API output, and visible loading, empty, or error state."
 		);
 		expect(webStudio.content).toContain(
-			"Implement one Full-Stack Web Lab 15 visible behavior at a time and inspect the page, console, network panel, or local server after each change."
+			"Implement one visible behavior at a time and inspect the page, console, network panel, or local server after each change."
 		);
 		expect(webStudio.content).not.toContain(
 			"smallest the browser-visible path"
@@ -1438,7 +1498,7 @@ describe("course text quality normalization", () => {
 			/Low-Level Security Lab 9: Core Concepts/
 		);
 		expect(securityStudio.content).toContain(
-			"Name the Low-Level Security Lab 9 allowed target, disallowed actions, evidence source, stop condition, and defensive purpose."
+			"Name the allowed target, disallowed actions, evidence source, stop condition, and defensive purpose."
 		);
 		expect(securityStudio.content).not.toContain(
 			"For Low-Level Security Lab 9 Core Concepts, state the authorized local lab boundary"
