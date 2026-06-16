@@ -25,7 +25,7 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 		example:
 			"Trace a three-row CSV by hand before running the code. Write the expected list of values, expected total, expected count, and expected average, then compare that hand trace to the program output. Add one custom CSV with no rows or one row so the difference between normal data and boundary data is visible.",
 		project:
-			"Complete the CSV summary program so it returns accurate count, total, and average values for the provided data. The finished artifact should also handle an empty list without crashing and should include one short verification note explaining how the expected output was checked.",
+			"Complete the CSV summary program so it returns accurate count, total, and average values for the provided data. Include safe empty-list behavior and one short verification note explaining how the expected output was checked.",
 		review: "Review the result by naming the exact file, column, values used, output dictionary, and boundary case. A strong review explains why the average is valid for the loaded rows and what would need to change if the CSV column name or units changed.",
 		extension:
 			"Extend the summary with minimum, maximum, and range. Then add one intentionally surprising value and explain whether it is a valid outlier, a data-entry error, or a value that requires more context before removal.",
@@ -39,12 +39,12 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 		title: "DSP11 Applied Studio: Cleaning Missing and Invalid Rows",
 		focus: "Data validation, missing values, invalid numeric fields, cleaning logs, and the difference between dropping and repairing records.",
 		coreConcepts:
-			"Cleaning is an analytical decision, not a cosmetic step. Each missing or invalid value should be classified before it is removed, replaced, or preserved. Track how many rows are affected and why the chosen cleaning rule is reasonable for the question being asked.",
+			"Cleaning is an analytical decision, not a cosmetic step. Each missing or invalid value needs a classification before it is removed, replaced, or preserved. Track how many rows are affected and why the chosen cleaning rule is reasonable for the question being asked.",
 		example:
-			"Start with a small table containing one blank value, one nonnumeric value, one negative value, and several valid values. Predict which rows should be accepted, rejected, or flagged, then run the cleaning code and compare the counts.",
+			"Start with a small table containing one blank value, one nonnumeric value, one negative value, and several valid values. Predict which rows are accepted, rejected, or flagged, then run the cleaning code and compare the counts.",
 		project:
-			"Adapt the CSV starter into a cleaner that returns valid numeric values plus a short cleaning report. The report should include rows loaded, rows accepted, rows rejected, and at least one reason for rejection.",
-		review: "Review the cleaning rule by explaining what it protects against and what it might accidentally remove. The conclusion should mention whether the cleaned dataset is still large and representative enough for the original question.",
+			"Adapt the CSV starter into a cleaner that returns valid numeric values plus a short cleaning report. Include rows loaded, rows accepted, rows rejected, and at least one reason for rejection.",
+		review: "Review the cleaning rule by explaining what it protects against and what it might accidentally remove. The conclusion names whether the cleaned dataset is still large and representative enough for the original question.",
 		extension:
 			"Add a repair rule for one safe case, such as trimming whitespace or converting commas in numbers, while still rejecting values that cannot be justified.",
 		supplemental2:
@@ -61,7 +61,7 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 		example:
 			"Use a table with categories such as region, class period, product type, or team. Compute one overall average and then per-category averages. Compare the two outputs and identify what the overall average hides.",
 		project:
-			"Extend the starter so values can be grouped by a category column and summarized per group. Each group should report count, total, and average, and the output should be sorted or formatted so comparisons are easy to read.",
+			"Extend the starter so values can be grouped by a category column and summarized per group. Each group reports count, total, and average, with sorted or formatted output so comparisons are easy to read.",
 		review: "Review the grouping by naming the strongest comparison and the weakest comparison. The strongest comparison has enough rows and a clear category meaning; the weakest may be distorted by small sample size or inconsistent labels.",
 		extension:
 			"Add a normalization step that merges inconsistent labels such as `north`, `North`, and `NORTH`, then explain how label cleanup changes the grouped result.",
@@ -75,7 +75,7 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 		title: "DSP13 Applied Studio: Visualization Choice and Chart Integrity",
 		focus: "Selecting chart types, encoding variables honestly, labeling axes, avoiding misleading scales, and connecting visuals to a specific question.",
 		coreConcepts:
-			"A chart is an argument about what should be compared. Choose bar charts for category comparison, line charts for ordered time-like trends, scatterplots for relationships between two numeric variables, and tables when exact values matter more than visual pattern. Every chart needs labels, units, and a sentence explaining the intended comparison.",
+			"A chart is an argument about the comparison being made. Choose bar charts for category comparison, line charts for ordered time-like trends, scatterplots for relationships between two numeric variables, and tables when exact values matter more than visual pattern. Every chart needs labels, units, and a sentence explaining the intended comparison.",
 		example:
 			"Create two possible charts for the same small dataset and decide which one better answers the question. Then intentionally remove an axis label or change the scale to see how quickly a technically correct chart can become misleading.",
 		project:
@@ -93,11 +93,11 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 		title: "DSP14 Applied Studio: Reproducible Mini Reports",
 		focus: "Combining code, tables, charts, markdown conclusions, file paths, and rerun discipline into one reproducible analysis artifact.",
 		coreConcepts:
-			"A data report should let another reader rerun the analysis and understand the reasoning without asking what happened off screen. Keep imports visible, load data from a documented path, state the question, show the cleaned or summarized output, include one chart or table, and end with a conclusion plus limitation.",
+			"A data report lets another reader rerun the analysis and understand the reasoning without asking what happened off screen. Keep imports visible, load data from a documented path, state the question, show the cleaned or summarized output, include one chart or table, and end with a conclusion plus limitation.",
 		example:
 			"Take a short analysis that only prints a dictionary and convert it into a mini report: question, data source, method, result table, interpretation, limitation, and next question. Restart and rerun to confirm there is no hidden state.",
 		project:
-			"Create a mini report around the CSV starter. The report should include a question, a reproducible run path, the computed summary, one visual or formatted table, and a conclusion that does not exceed the evidence.",
+			"Create a mini report around the CSV starter. Include a question, a reproducible run path, the computed summary, one visual or formatted table, and a conclusion that does not exceed the evidence.",
 		review: "Review the report by checking whether a reader can identify the data source, rerun the code, find the main result, and understand one important caveat.",
 		extension:
 			"Add a small appendix that records package versions, file names, or command-line run instructions so the analysis can be repeated later.",
@@ -115,8 +115,8 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 		example:
 			"Start with a printed summary, then add a simple filter such as category, date range, or minimum value. Compare the all-data result to the filtered result and explain what changed.",
 		project:
-			"Build a lightweight dashboard or console menu around the CSV analysis. The artifact should let the user choose at least one filter and should update the summary output in a way that can be checked by hand on a small dataset.",
-		review: "Review the dashboard by naming the user question it supports, the filter behavior, the default state, and one case where the interface should warn that too little data remains.",
+			"Build a lightweight dashboard or console menu around the CSV analysis. The interface lets the user choose at least one filter and updates the summary output in a way that can be checked by hand on a small dataset.",
+		review: "Review the dashboard by naming the user question it supports, the filter behavior, the default state, and one case where the interface warns that too little data remains.",
 		extension:
 			"Add a second filter or a summary card that updates with the selected data. Keep the explanation close to the output so the interface does not become a pile of disconnected widgets.",
 		supplemental2:
@@ -133,7 +133,7 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 		example:
 			"Compare two possible capstone questions for the same dataset. Identify which one has clearer columns, a better analysis path, fewer hidden assumptions, and a more realistic final output.",
 		project:
-			"Create a capstone readiness brief that defines the question, dataset, columns, cleaning plan, summary or visualization plan, evidence of correctness, and final presentation format. The brief should be detailed enough to start the capstone without redesigning the whole project.",
+			"Create a capstone readiness brief that defines the question, dataset, columns, cleaning plan, summary or visualization plan, evidence of correctness, and final presentation format. The brief is detailed enough to start the capstone without redesigning the whole project.",
 		review: "Review the brief by checking whether the proposed claim can actually be supported by the dataset. If the question is too broad, revise it into a narrower comparison, trend, or relationship.",
 		extension:
 			"Build a tiny prototype using five to ten rows or a filtered slice of the dataset to prove the full capstone path is feasible.",
@@ -169,15 +169,15 @@ function dataScienceAppliedSupplementUrl(
 
 function dataScienceStudioContent(
 	lab: AppliedDataScienceLab,
-	sectionTitle: string,
+	_sectionTitle: string,
 	body: string
 ) {
 	const focus = lab.focus.replace(/[.!?]\s*$/, "");
 
 	return [
 		body,
-		`**Verification focus:** The ${lab.title} ${sectionTitle.toLowerCase()} focuses on ${focus} and should include one small hand-checkable case before any larger dataset result is accepted.`,
-		`**Readable output:** The ${lab.title} ${sectionTitle.toLowerCase()} artifact should make the question, input data, calculation or transformation, result, and limitation visible without requiring someone to infer the reasoning from code alone.`
+		`**Verification focus:** ${focus}. Include one small hand-checkable case before accepting any larger dataset result.`,
+		"**Result quality:** State the question, input data, calculation or transformation, result, and limitation clearly enough to review without reading every line of code."
 	].join("\n\n");
 }
 
@@ -287,17 +287,17 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Python Packages for Data Work",
 					content:
-						"Install and verify `pandas`, `numpy`, `matplotlib`, `altair`, `streamlit`, and `scikit-learn` at the start. The course uses these tools in stages, but the environment should be stable from the first day so setup does not interrupt the analysis flow."
+						"Install and verify `pandas`, `numpy`, `matplotlib`, `altair`, `streamlit`, and `scikit-learn` at the start. The course uses these tools in stages, and a stable environment keeps setup from interrupting the analysis flow."
 				},
 				{
 					title: "Course Positioning between Python and Machine Learning",
 					content:
-						"Frame this course as the bridge between core Python and model-centered ML. Learn how to load, clean, inspect, visualize, and communicate with data before they are expected to train predictive systems."
+						"This course bridges core Python and model-centered ML. The central work is loading, cleaning, inspecting, visualizing, and communicating with data before predictive systems enter the picture."
 				},
 				{
 					title: "Analysis Habits and Reproducibility",
 					content:
-						"Use clear file naming, saved notebooks, lightweight markdown explanations, and explicit notes about assumptions. Reproducibility should feel like part of data science itself, not an extra external requirement."
+						"Use clear file naming, saved notebooks, lightweight markdown explanations, and explicit notes about assumptions. Reproducibility is part of data science itself, not an extra external requirement."
 				},
 				{
 					title: "DSP0 Setup and Tooling: Core Project",
@@ -353,7 +353,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Questions before Calculations",
 					content:
-						"Define data science as asking answerable questions, gathering relevant evidence, and communicating what the evidence can and cannot support. Begin every project with a question that matters more than the chart they hope to make."
+						"Data science starts with answerable questions, relevant evidence, and clear communication about what the evidence can and cannot support. Begin every project with a question that matters more than the chart planned for the final output."
 				},
 				{
 					title: "Evidence, Assumptions, and Scope",
@@ -388,7 +388,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: What Data Science Is",
 					content:
-						"Keep a compact analysis log for what data science is that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about why the chosen question is worth answering with data in the first place. Practice target: Making their reasoning inspectable.",
+						"Keep a compact analysis log for what data science is that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about why the chosen question is worth answering with data in the first place. Practice target: Make the reasoning inspectable.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-08-module-1-what-data-science-is/starter",
 					solutionLink:
@@ -438,7 +438,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "When to Graduate into Scripts or Apps",
 					content:
-						"Show when a notebook has outgrown itself and should become a reusable Python module, script, or dashboard app. Key idea: That notebooks are ideal for exploration, but not always for long-term project structure."
+						"A notebook has outgrown itself when repeated analysis, reusable functions, or user-facing outputs belong in a Python module, script, or dashboard app. Key idea: Notebooks are ideal for exploration, but not always for long-term project structure."
 				},
 				{
 					title: "Versioning Small Analyses",
@@ -464,7 +464,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: Notebook Workflow and Reproducibility",
 					content:
-						"Keep a compact analysis log for notebook workflow and reproducibility that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which parts of the analysis are exploratory and which should be preserved as stable steps. Practice target: Making their reasoning inspectable.",
+						"Keep a compact analysis log for notebook workflow and reproducibility that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which parts of the analysis are exploratory and which belong in stable steps. Practice target: Make the reasoning inspectable.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-09-module-2-notebook-workflow-and-reproducibility/starter",
 					solutionLink:
@@ -511,12 +511,12 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Selecting, Filtering, and Sorting",
 					content:
-						"This section covers column selection, row filtering, sorting, and boolean masks as the basic grammar of tabular analysis. These operations should become automatic before grouping and aggregation are introduced."
+						"This section covers column selection, row filtering, sorting, and boolean masks as the basic grammar of tabular analysis. These operations become routine before grouping and aggregation are introduced."
 				},
 				{
 					title: "Grouping and Aggregation",
 					content:
-						"Use grouped summaries to answer questions about segments, categories, and trends. The goal is to move students away from manual loops when a data-frame operation expresses the intent more clearly."
+						"Use grouped summaries to answer questions about segments, categories, and trends. The goal is to replace manual loops when a data-frame operation expresses the intent more clearly."
 				},
 				{
 					title: "Derived Columns and Transformations",
@@ -541,7 +541,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: pandas Foundations",
 					content:
-						"Keep a compact analysis log for pandas foundations that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which transformations are merely helpful and which ones materially change the meaning of the dataset. Practice target: Making their reasoning inspectable.",
+						"Keep a compact analysis log for pandas foundations that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which transformations are merely helpful and which ones materially change the meaning of the dataset. Practice target: Make the reasoning inspectable.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-10-module-3-pandas-foundations/starter",
 					solutionLink:
@@ -581,7 +581,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Missing Values and Type Issues",
 					content:
-						"Inspect nulls, mixed types, empty strings, and malformed numeric data before building any chart or summary. Data cleaning should feel like evidence protection rather than tedious prep work."
+						"Inspect nulls, mixed types, empty strings, and malformed numeric data before building any chart or summary. Data cleaning protects evidence rather than serving as tedious prep work."
 				},
 				{
 					title: "Duplicates and Inconsistent Categories",
@@ -596,7 +596,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Documenting Cleaning Decisions",
 					content:
-						"Record what they dropped, changed, or imputed and why. A clean analysis includes a clean explanation of how the raw data was turned into something trustworthy enough to use."
+						"Record what was dropped, changed, or imputed and why. A clean analysis includes a clean explanation of how the raw data was turned into something trustworthy enough to use."
 				},
 				{
 					title: "Module 4: Cleaning and Validation: Core Project",
@@ -616,7 +616,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: Cleaning and Validation",
 					content:
-						"Keep a compact analysis log for cleaning and validation that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which cleaning decision had the biggest effect on the final answer. Practice target: Making their reasoning inspectable.",
+						"Keep a compact analysis log for cleaning and validation that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which cleaning decision had the biggest effect on the final answer. Practice target: Make the reasoning inspectable.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-11-module-4-cleaning-and-validation/starter",
 					solutionLink:
@@ -661,7 +661,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Misleading Scales and Weak Comparisons",
 					content:
-						"Use bad charts on purpose to show how axis choices, poor bin sizes, inconsistent baselines, and decorative clutter can mislead viewers. This gives students a stronger eye for honest presentation."
+						"Compare intentionally weak charts to show how axis choices, poor bin sizes, inconsistent baselines, and decorative clutter can mislead viewers. This builds a stronger eye for honest presentation."
 				},
 				{
 					title: "Averages, Spread, Correlation, and Outliers",
@@ -671,7 +671,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Correlation Is Not Causation",
 					content:
-						"Keep causation claims disciplined by asking what the dataset can actually support. Practice target: Writing careful conclusions that do not overstate what a pattern proves."
+						"Keep causation claims disciplined by asking what the dataset can actually support. Practice target: Write careful conclusions that do not overstate what a pattern proves."
 				},
 				{
 					title: "Module 5: Visualization and Statistics in Context: Core Project",
@@ -762,7 +762,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: Storytelling with Data",
 					content:
-						"Keep a compact analysis log for storytelling with data that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which part of the story is genuinely supported and which part is still only a hypothesis. Practice target: Making their reasoning inspectable.",
+						"Keep a compact analysis log for storytelling with data that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which part of the story is genuinely supported and which part is still only a hypothesis. Practice target: Make the reasoning inspectable.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-12-module-6-storytelling-with-data/starter",
 					solutionLink:
@@ -838,7 +838,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: Dashboards with Altair and Streamlit",
 					content:
-						"Keep a compact analysis log for dashboards with altair and streamlit that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which interactions actually help the user answer the question faster. Practice target: Making their reasoning inspectable.",
+						"Keep a compact analysis log for dashboards with Altair and Streamlit that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which interactions actually help the user answer the question faster. Practice target: Make the reasoning inspectable.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-13-module-7-dashboards-with-altair-and-streamlit/starter",
 					solutionLink:
@@ -895,7 +895,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Make the Work Portfolio-Ready",
 					content:
-						"Package the project as a notebook, short deck, or dashboard with an introduction, method, findings, and reflection. The finished artifact should be something they could show outside the class."
+						"Package the project as a notebook, short deck, or dashboard with an introduction, method, findings, and reflection. The finished artifact is clear enough to show outside the class."
 				},
 				{
 					title: "Module 8: Domain Projects: Core Project",
@@ -951,7 +951,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Question, Dataset, and Scope Lock",
 					content:
-						"Finalize a capstone question, identify the dataset, and set a scope that can be finished well. Avoid open-ended ambition and instead commit to a question they can answer clearly."
+						"Finalize a capstone question, identify the dataset, and set a scope that can be finished well. Avoid open-ended ambition and instead commit to a question with a clear answer path."
 				},
 				{
 					title: "Clean, Analyze, and Communicate",
@@ -961,7 +961,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Build a Dashboard or Narrative Notebook",
 					content:
-						"Choose the right final format for the question. Some capstones are better as a polished notebook with commentary; others should become a compact Streamlit or Altair-backed dashboard."
+						"Choose the right final format for the question. Some capstones work better as a polished notebook with commentary; others work better as a compact Streamlit or Altair-backed dashboard."
 				},
 				{
 					title: "Reflect on Next Steps",
@@ -986,7 +986,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: Data Science Capstone",
 					content:
-						"Keep a compact analysis log for data science capstone that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about what claim the project ultimately makes and what evidence best supports it. Practice target: Making their reasoning inspectable.",
+						"Keep a compact analysis log for data science capstone that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about what claim the project ultimately makes and what evidence best supports it. Practice target: Make the reasoning inspectable.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-14-module-9-data-science-capstone/starter",
 					solutionLink:

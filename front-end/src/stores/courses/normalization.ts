@@ -472,7 +472,7 @@ function cleanAppliedLabReferenceText(text: string) {
 
 function neutralizeLessonPointText(text: string) {
 	const hasSupportLabel =
-		/\*\*(?:Focus|Expected outcome|Verification focus|Readable output|Project goal|Concept path|Readiness check|Common pitfalls|Mastery check|Remote investigation|Science explanation|Studio focus|Build sequence|Completion checks|Evidence target|Evidence targets|Extension):?\*\*/i.test(
+		/\*\*(?:Focus|Expected outcome|Verification focus|Readable output|Result quality|Project goal|Concept path|Readiness check|Common pitfalls|Mastery check|Remote investigation|Science explanation|Studio focus|Build sequence|Completion checks|Evidence target|Evidence targets|Extension):?\*\*/i.test(
 			text
 		);
 	const source =
@@ -832,7 +832,7 @@ function formatInlineNumberedLists(text: string) {
 
 function formatSupportLabels(text: string) {
 	return text.replace(
-		/(\S)[ \t]+(\*\*(?:Focus|Expected outcome|Verification focus|Readable output|Project goal|Required outcome|Completion checks|Evidence target|Evidence targets|Extension|Concept path|Common pitfalls|Mastery check|Readiness check|Evidence of proficiency|If this is difficult|Remote investigation|Science explanation|Output|Practice target|Visible pattern|Key idea|Skill target):\*\*)/g,
+		/(\S)[ \t]+(\*\*(?:Focus|Expected outcome|Verification focus|Readable output|Result quality|Project goal|Required outcome|Completion checks|Evidence target|Evidence targets|Extension|Concept path|Common pitfalls|Mastery check|Readiness check|Evidence of proficiency|If this is difficult|Remote investigation|Science explanation|Output|Practice target|Visible pattern|Key idea|Skill target):\*\*)/g,
 		(_match, prefix: string, label: string, offset: number) => {
 			const lineStart = text.lastIndexOf("\n", offset) + 1;
 			const indentation =

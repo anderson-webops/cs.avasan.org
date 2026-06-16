@@ -1480,6 +1480,9 @@ describe("course text quality normalization", () => {
 			"before interpreting the average.\n\n**Expected outcome:**"
 		);
 		expect(csvStudio.content).toContain(
+			"Include one small hand-checkable case before accepting any larger dataset result.\n\n**Result quality:**"
+		);
+		expect(csvStudio.content).not.toContain(
 			"any larger dataset result is accepted.\n\n**Readable output:**"
 		);
 		expect(csvStudio.content).toContain(
