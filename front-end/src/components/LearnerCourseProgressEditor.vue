@@ -16,6 +16,9 @@ const emit = defineEmits<{
 const assignedCourseIds = computed(() =>
 	props.progress.assignedCourseIds(props.userId)
 );
+const assignedCourseGroups = computed(() =>
+	props.progress.assignedCourseGroups(props.userId)
+);
 const selectedCourseId = computed(() =>
 	props.progress.selectedProgressCourseId(props.userId)
 );
@@ -95,13 +98,19 @@ function toggleItem(item: CourseModuleItem, event: Event) {
 				@change="selectCourse"
 				@focus="loadCourse"
 			>
-				<option
-					v-for="courseID in assignedCourseIds"
-					:key="`${userId}-${courseID}`"
-					:value="courseID"
+				<optgroup
+					v-for="group in assignedCourseGroups"
+					:key="`${userId}-${group.key}`"
+					:label="group.label"
 				>
-					{{ courseLabel(courseID) }}
-				</option>
+					<option
+						v-for="courseID in group.courseIds"
+						:key="`${userId}-${courseID}`"
+						:value="courseID"
+					>
+						{{ courseLabel(courseID) }}
+					</option>
+				</optgroup>
 			</select>
 
 			<p v-if="isLoading" class="progress-helper">

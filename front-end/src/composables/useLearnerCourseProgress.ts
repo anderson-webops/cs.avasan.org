@@ -3,12 +3,39 @@ import type { CourseProgress, User } from "@/stores/app";
 import type { CourseDefinition, CourseModuleItem } from "@/stores/courses";
 import { ref, watch } from "vue";
 import { api } from "@/api";
+import { groupCoursesByLearnerStatus } from "@/modules/courseAccess";
 
 type RefreshUsers = () => Promise<void> | void;
 type LoadCourse = (courseId: string) => Promise<CourseDefinition | null>;
 
+interface AssignedCourseGroup {
+	key: "current" | "past" | "other";
+	label: string;
+	courseIds: string[];
+}
+
 function unique(values: string[]) {
 	return [...new Set(values.map(value => value.trim()).filter(Boolean))];
+}
+
+function groupedAssignedCourses(user: User | undefined): AssignedCourseGroup[] {
+	if (!user) return [];
+
+	return groupCoursesByLearnerStatus(
+		(user.courseAccess ?? []).map(courseId => ({
+			id: courseId,
+			name: courseId
+		})),
+		user
+	).map(group => ({
+		key: group.key,
+		label: group.label,
+		courseIds: group.courses.map(course => course.id)
+	}));
+}
+
+function orderedAssignedCourseIds(user: User | undefined) {
+	return groupedAssignedCourses(user).flatMap(group => group.courseIds);
 }
 
 export function useLearnerCourseProgress(
@@ -30,7 +57,7 @@ export function useLearnerCourseProgress(
 			const nextSelections = { ...selectedProgressCourseIds.value };
 
 			for (const user of value) {
-				const assignedCourseIds = user.courseAccess ?? [];
+				const assignedCourseIds = orderedAssignedCourseIds(user);
 				nextDrafts[user._id] = (user.courseProgress ?? []).map(
 					progress => ({
 						courseId: progress.courseId,
@@ -58,8 +85,14 @@ export function useLearnerCourseProgress(
 	);
 
 	function assignedCourseIds(userID: string) {
-		return (
-			users.value.find(user => user._id === userID)?.courseAccess ?? []
+		return orderedAssignedCourseIds(
+			users.value.find(user => user._id === userID)
+		);
+	}
+
+	function assignedCourseGroups(userID: string) {
+		return groupedAssignedCourses(
+			users.value.find(user => user._id === userID)
 		);
 	}
 
@@ -222,6 +255,7 @@ export function useLearnerCourseProgress(
 	}
 
 	return {
+		assignedCourseGroups,
 		assignedCourseIds,
 		isItemComplete,
 		isModuleComplete,

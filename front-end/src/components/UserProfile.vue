@@ -6,6 +6,7 @@ import ProfileFields from "@/components/ProfileFields.vue";
 import UserCommunicationPanel from "@/components/UserCommunicationPanel.vue";
 // import { useDeleteAccount } from "@/composables/useDeleteAccount";
 import { useEditable } from "@/composables/useEditable";
+import { groupCoursesByLearnerStatus } from "@/modules/courseAccess";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
 
@@ -71,11 +72,24 @@ const assignedTutorNames = computed(() => {
 /* -------------------------------------------------- */
 /*  course access text                                */
 /* -------------------------------------------------- */
-const courseAccessText = computed(() => {
+const courseAccessGroups = computed(() => {
 	const user = currentUser.value;
-	if (!user?.courseAccess?.length) return "No course access yet";
+	if (!user?.courseAccess?.length) return [];
+	return groupCoursesByLearnerStatus(courseOptions.value, user);
+});
+
+const courseAccessText = computed(() => {
+	if (courseAccessGroups.value.length === 0) return "No course access yet";
 	const names = courseNameMap.value ?? {};
-	return user.courseAccess.map(id => names[id] ?? id).join(", ");
+	return courseAccessGroups.value
+		.map(group => {
+			const groupLabel = group.key === "past" ? "Past" : "Current";
+			const courseNames = group.courses
+				.map(course => names[course.id] ?? course.name ?? course.id)
+				.join(", ");
+			return `${groupLabel}: ${courseNames}`;
+		})
+		.join(" · ");
 });
 
 const assignedTutorCount = computed(() => assignedTutorNames.value.length);
