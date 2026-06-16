@@ -66,6 +66,7 @@
 ## Task-Spawning Guardrails
 
 - Before spawning heavy tasks, check for existing work and avoid duplicate churn.
+- Use the repo-provided shared lock wrapper for dependency installs, build setup, browser installs, and other heavy local jobs: `node scripts/classes-family-heavy-task.mjs -- <command>`. For example, run clean installs as `node scripts/classes-family-heavy-task.mjs -- npm ci`, not bare `npm ci`, unless CI or the user explicitly requires the bare command.
 - Never run dependency installs concurrently across `classes.jacobdanderson.net` and `scheduler.classes.jacobdanderson.net`. Use a shared lock such as `/tmp/classes-family-dependency-install.lock` or `/tmp/classes-family-heavy-task.lock`.
 - Ignore generated/heavy directories in file watching, searches, indexing, audits, and task triggers: `node_modules`, `front-end/node_modules`, `back-end/node_modules`, `.git`, `.next`, `dist`, `build`, `coverage`, `.cache`, `.turbo`, `.vite`, `playwright-report`, and `test-results`.
 - If a task creates or refreshes dependency trees, mark generated dependency directories as non-indexable where possible: `touch node_modules/.metadata_never_index`, and do the same for `front-end/node_modules` and `back-end/node_modules` when present.
@@ -96,7 +97,7 @@ Required production/dev dependency update flow before every dependency commit:
 5. Run `npm audit` from the repository root and resolve remaining production or dev advisories before committing unless a documented upstream limitation prevents it.
 
 Required dependency verification before dependency/lockfile commits and deploy-critical clean-install checks:
-1. Run `npm ci` from the repository root through the shared classes-family install lock.
+1. Run `node scripts/classes-family-heavy-task.mjs -- npm ci` from the repository root through the shared classes-family install lock.
 2. Run `npm run lint`.
 3. Run `npm run typecheck`.
 4. Run `npm run build`.
