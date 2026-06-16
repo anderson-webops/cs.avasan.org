@@ -13,7 +13,7 @@ const DEFAULT_PROJECT_FILE = {
 	content: "print(\"Hello, Python!\")\n"
 };
 
-const projectModeSchema = z.enum(["python", "turtle"]);
+const projectModeSchema = z.enum(["pgzero", "python", "turtle"]);
 const projectFileSchema = z.object({
 	name: z
 		.string()

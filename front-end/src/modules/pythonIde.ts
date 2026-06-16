@@ -3,7 +3,7 @@ import { api } from "@/api";
 const WHITESPACE_RE = /\s+/g;
 const PYTHON_FILE_NAME_RE = /^[A-Za-z_][\w.-]*\.py$/;
 
-export type PythonIdeMode = "python" | "turtle";
+export type PythonIdeMode = "pgzero" | "python" | "turtle";
 
 export interface PythonIdeFile {
 	name: string;
@@ -51,19 +51,62 @@ for side in range(4):
 screen.listen()
 `;
 
+export const pgzeroStarterCode = `import pgzrun
+
+WIDTH = 640
+HEIGHT = 400
+
+player = Actor("student", (WIDTH / 2, HEIGHT / 2))
+player.width = 72
+player.height = 72
+
+def draw():
+\tscreen.clear()
+\tscreen.draw.text("Use the arrow keys to move.", (24, 24), color="white", fontsize=28)
+\tplayer.draw()
+
+def update():
+\tif keyboard.left:
+\t\tplayer.x -= 4
+\tif keyboard.right:
+\t\tplayer.x += 4
+\tif keyboard.up:
+\t\tplayer.y -= 4
+\tif keyboard.down:
+\t\tplayer.y += 4
+
+pgzrun.go()
+`;
+
+export function getPythonIdeModeLabel(mode: PythonIdeMode) {
+	if (mode === "pgzero") return "PyGame Zero";
+	if (mode === "turtle") return "Turtle";
+	return "Python";
+}
+
+function getStarterCode(mode: PythonIdeMode) {
+	if (mode === "pgzero") return pgzeroStarterCode;
+	if (mode === "turtle") return turtleStarterCode;
+	return pythonStarterCode;
+}
+
 export function createPythonIdeProject(
 	mode: PythonIdeMode = "python"
 ): PythonIdeProject {
 	const now = new Date().toISOString();
 	return {
 		_id: `local-${crypto.randomUUID()}`,
-		title: mode === "turtle" ? "Turtle Drawing" : "Python Practice",
+		title:
+			mode === "pgzero"
+				? "PyGame Zero Game"
+				: mode === "turtle"
+					? "Turtle Drawing"
+					: "Python Practice",
 		mode,
 		files: [
 			{
 				name: "main.py",
-				content:
-					mode === "turtle" ? turtleStarterCode : pythonStarterCode
+				content: getStarterCode(mode)
 			}
 		],
 		activeFileName: "main.py",

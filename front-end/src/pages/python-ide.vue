@@ -4,7 +4,7 @@ import type {
 	PythonIdeMode,
 	PythonIdeProject
 } from "@/modules/pythonIde";
-import type { TurtleBridge } from "@/modules/pythonIdeRuntime";
+import type { GameBridge, TurtleBridge } from "@/modules/pythonIdeRuntime";
 import { storeToRefs } from "pinia";
 import {
 	computed,
@@ -19,6 +19,7 @@ import {
 	createRemotePythonIdeProject,
 	deleteRemotePythonIdeProject,
 	fetchPythonIdeProjects,
+	getPythonIdeModeLabel,
 	isValidPythonFileName,
 	loadLocalPythonProjects,
 	normalizePythonFileName,
@@ -48,6 +49,20 @@ interface TurtleState {
 	background: string;
 }
 
+interface GameCanvasState {
+	width: number;
+	height: number;
+	background: string;
+}
+
+interface GameInputEvent {
+	type: "keydown" | "keyup" | "mousedown" | "mouseup" | "mousemove";
+	key?: string;
+	x?: number;
+	y?: number;
+	button?: "left" | "middle" | "right";
+}
+
 const app = useAppStore();
 const { currentUser } = storeToRefs(app);
 
@@ -64,10 +79,15 @@ const runMessage = ref("Ready");
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 const outputCounter = ref(0);
 const keyHandlers = new Map<string, () => void>();
+const gameKeysDown = new Set<string>();
+const gameEvents: GameInputEvent[] = [];
 
 let saveTimer: ReturnType<typeof window.setTimeout> | null = null;
 let suppressAutoSave = false;
 let resizeObserver: ResizeObserver | null = null;
+let gameAnimationFrame: number | null = null;
+let gameLoopRequested = false;
+let gameTickInFlight = false;
 
 const turtleState: TurtleState = {
 	x: 0,
@@ -78,6 +98,12 @@ const turtleState: TurtleState = {
 	fillColor: "#0f766e",
 	lineWidth: 3,
 	background: "#ffffff"
+};
+
+const gameState: GameCanvasState = {
+	width: 640,
+	height: 400,
+	background: "#111827"
 };
 
 const selectedProject = computed(
@@ -112,6 +138,21 @@ const activeFileContent = computed({
 const canSyncToAccount = computed(() => !!currentUser.value?._id);
 const storageUserID = computed(() => currentUser.value?._id ?? null);
 const sortedProjects = computed(() => [...projects.value]);
+const selectedModeLabel = computed(() =>
+	selectedProject.value
+		? getPythonIdeModeLabel(selectedProject.value.mode)
+		: "Python"
+);
+const usesDrawingCanvas = computed(
+	() =>
+		selectedProject.value?.mode === "turtle" ||
+		selectedProject.value?.mode === "pgzero"
+);
+
+function normalizeProjectMode(value: string): PythonIdeMode {
+	if (value === "pgzero" || value === "turtle") return value;
+	return "python";
+}
 
 function appendOutput(kind: OutputLine["kind"], text: string) {
 	if (!text) return;
@@ -179,7 +220,7 @@ async function loadProjects() {
 		await nextTick();
 		suppressAutoSave = false;
 		isLoading.value = false;
-		resetTurtleCanvas();
+		resetActiveCanvas();
 	}
 }
 
@@ -251,7 +292,7 @@ async function createProject(mode: PythonIdeMode) {
 	} finally {
 		suppressAutoSave = false;
 		await nextTick();
-		resetTurtleCanvas();
+		resetActiveCanvas();
 	}
 }
 
@@ -289,11 +330,10 @@ function updateProjectTitle(event: Event) {
 function updateProjectMode(event: Event) {
 	if (!selectedProject.value) return;
 	const select = event.target as HTMLSelectElement;
-	selectedProject.value.mode =
-		select.value === "turtle" ? "turtle" : "python";
+	selectedProject.value.mode = normalizeProjectMode(select.value);
 	touchSelectedProject();
 	scheduleSave();
-	void nextTick(resetTurtleCanvas);
+	void nextTick(resetActiveCanvas);
 }
 
 function selectFile(fileName: string) {
@@ -361,20 +401,27 @@ function getCanvasContext() {
 	return canvas.getContext("2d");
 }
 
-function resetTurtleCanvas() {
-	keyHandlers.clear();
+function resizeCanvasForDisplay() {
 	const canvas = canvasRef.value;
-	if (!canvas) return;
+	const context = getCanvasContext();
+	if (!canvas || !context) return null;
 
 	const rect = canvas.getBoundingClientRect();
 	const dpr = window.devicePixelRatio || 1;
 	canvas.width = Math.max(1, Math.floor(rect.width * dpr));
 	canvas.height = Math.max(1, Math.floor(rect.height * dpr));
-
-	const context = getCanvasContext();
-	if (!context) return;
 	context.setTransform(dpr, 0, 0, dpr, 0, 0);
 
+	return { context, rect };
+}
+
+function resetTurtleCanvas() {
+	keyHandlers.clear();
+	stopGameLoop();
+	const canvasContext = resizeCanvasForDisplay();
+	if (!canvasContext) return;
+
+	const { context, rect } = canvasContext;
 	turtleState.x = 0;
 	turtleState.y = 0;
 	turtleState.heading = 0;
@@ -437,15 +484,174 @@ function drawText(text: string) {
 	context.fillText(text, point.x, point.y);
 }
 
+function setGameCanvasTransform() {
+	const canvas = canvasRef.value;
+	const context = getCanvasContext();
+	if (!canvas || !context) return null;
+
+	const rect = canvas.getBoundingClientRect();
+	const dpr = window.devicePixelRatio || 1;
+	canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+	canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+	context.setTransform(
+		dpr * (rect.width / gameState.width),
+		0,
+		0,
+		dpr * (rect.height / gameState.height),
+		0,
+		0
+	);
+
+	return context;
+}
+
+function clearGameCanvas(color = gameState.background) {
+	const context = setGameCanvasTransform();
+	if (!context) return;
+
+	context.fillStyle = color;
+	context.fillRect(0, 0, gameState.width, gameState.height);
+}
+
+function resetGameCanvas(width = 640, height = 400) {
+	keyHandlers.clear();
+	gameKeysDown.clear();
+	gameEvents.length = 0;
+	gameLoopRequested = false;
+	gameTickInFlight = false;
+	gameState.width = Math.max(1, width);
+	gameState.height = Math.max(1, height);
+	gameState.background = "#111827";
+	clearGameCanvas();
+}
+
+function stopGameLoop() {
+	if (gameAnimationFrame !== null) {
+		cancelAnimationFrame(gameAnimationFrame);
+		gameAnimationFrame = null;
+	}
+	gameLoopRequested = false;
+	gameTickInFlight = false;
+}
+
+function startGameLoop(tick: () => Promise<void>) {
+	stopGameLoop();
+
+	const runFrame = () => {
+		gameAnimationFrame = requestAnimationFrame(runFrame);
+		if (gameTickInFlight) return;
+
+		gameTickInFlight = true;
+		tick()
+			.catch((error: unknown) => {
+				appendOutput(
+					"stderr",
+					error instanceof Error ? error.message : "Game loop failed."
+				);
+				stopGameLoop();
+			})
+			.finally(() => {
+				gameTickInFlight = false;
+			});
+	};
+
+	runFrame();
+}
+
+function drawGameActor(
+	image: string,
+	x: number,
+	y: number,
+	width: number,
+	height: number,
+	angle: number
+) {
+	const context = setGameCanvasTransform();
+	if (!context) return;
+
+	context.save();
+	context.translate(x, y);
+	context.rotate((angle * Math.PI) / 180);
+	context.fillStyle = "#5eead4";
+	context.strokeStyle = "#134e4a";
+	context.lineWidth = 3;
+	const left = -width / 2;
+	const top = -height / 2;
+	context.beginPath();
+	context.roundRect(left, top, width, height, 12);
+	context.fill();
+	context.stroke();
+	context.fillStyle = "#0f172a";
+	context.font = "bold 14px Avenir Next, Segoe UI, sans-serif";
+	context.textAlign = "center";
+	context.textBaseline = "middle";
+	context.fillText(image, 0, 0, Math.max(16, width - 10));
+	context.restore();
+}
+
+function drawGameText(
+	text: string,
+	x: number,
+	y: number,
+	color: string,
+	fontSize: number
+) {
+	const context = setGameCanvasTransform();
+	if (!context) return;
+
+	context.fillStyle = color;
+	context.font = `${Math.max(8, fontSize)}px Avenir Next, Segoe UI, sans-serif`;
+	context.textBaseline = "top";
+	context.fillText(text, x, y);
+}
+
+function drawGameRect(
+	x: number,
+	y: number,
+	width: number,
+	height: number,
+	color: string,
+	filled: boolean
+) {
+	const context = setGameCanvasTransform();
+	if (!context) return;
+
+	if (filled) {
+		context.fillStyle = color;
+		context.fillRect(x, y, width, height);
+		return;
+	}
+
+	context.strokeStyle = color;
+	context.lineWidth = 3;
+	context.strokeRect(x, y, width, height);
+}
+
 function normalizeKey(key: string) {
 	const keyMap: Record<string, string> = {
 		down: "arrowdown",
+		enter: "enter",
+		escape: "escape",
 		left: "arrowleft",
+		return: "enter",
 		right: "arrowright",
 		space: " ",
 		up: "arrowup"
 	};
 	return keyMap[key.toLowerCase()] ?? key.toLowerCase();
+}
+
+function pythonGameKey(key: string) {
+	const keyMap: Record<string, string> = {
+		" ": "space",
+		arrowdown: "down",
+		arrowleft: "left",
+		arrowright: "right",
+		arrowup: "up",
+		enter: "return",
+		escape: "escape"
+	};
+	return keyMap[normalizeKey(key)] ?? normalizeKey(key);
 }
 
 const turtleBridge: TurtleBridge = {
@@ -516,6 +722,47 @@ const turtleBridge: TurtleBridge = {
 	}
 };
 
+const gameBridge: GameBridge = {
+	reset: resetGameCanvas,
+	clear: () => clearGameCanvas(),
+	fill(color: string) {
+		gameState.background = color;
+		clearGameCanvas(color);
+	},
+	drawActor: drawGameActor,
+	drawText: drawGameText,
+	drawRect: drawGameRect,
+	isKeyDown(key: string) {
+		return gameKeysDown.has(normalizeKey(key));
+	},
+	popEventsJson() {
+		const events = JSON.stringify(gameEvents.splice(0));
+		return events === "[]" ? "" : events;
+	},
+	requestLoop() {
+		gameLoopRequested = true;
+	},
+	consumeLoopRequest() {
+		const requested = gameLoopRequested;
+		gameLoopRequested = false;
+		return requested;
+	},
+	startLoop: startGameLoop,
+	stopLoop: stopGameLoop,
+	log(text: string) {
+		appendOutput("system", text);
+	}
+};
+
+function resetActiveCanvas() {
+	if (selectedProject.value?.mode === "pgzero") {
+		resetGameCanvas(gameState.width, gameState.height);
+		return;
+	}
+
+	resetTurtleCanvas();
+}
+
 async function runCurrentProject() {
 	const project = selectedProject.value;
 	if (!project) return;
@@ -531,11 +778,17 @@ async function runCurrentProject() {
 			files: project.files,
 			activeFileName: project.activeFileName,
 			inputText: inputText.value,
+			mode: project.mode,
+			gameBridge,
 			turtleBridge,
 			onOutput: appendOutput
 		});
 		runMessage.value =
-			project.mode === "turtle" ? "Drawing ready" : "Run complete";
+			project.mode === "pgzero"
+				? "Game running"
+				: project.mode === "turtle"
+					? "Drawing ready"
+					: "Run complete";
 	} catch (error) {
 		const message =
 			error instanceof Error ? error.message : "Python run failed.";
@@ -548,18 +801,85 @@ async function runCurrentProject() {
 
 function handleKeyDown(event: KeyboardEvent) {
 	const handler = keyHandlers.get(normalizeKey(event.key));
-	if (!handler) return;
-	event.preventDefault();
-	try {
-		handler();
-	} catch (error) {
-		appendOutput(
-			"stderr",
-			error instanceof Error
-				? error.message
-				: "Turtle key handler failed."
-		);
+	if (handler) {
+		event.preventDefault();
+		try {
+			handler();
+		} catch (error) {
+			appendOutput(
+				"stderr",
+				error instanceof Error
+					? error.message
+					: "Turtle key handler failed."
+			);
+		}
+		return;
 	}
+
+	if (selectedProject.value?.mode !== "pgzero") return;
+
+	const normalizedKey = normalizeKey(event.key);
+	const wasDown = gameKeysDown.has(normalizedKey);
+	gameKeysDown.add(normalizedKey);
+	if (!wasDown) {
+		gameEvents.push({
+			type: "keydown",
+			key: pythonGameKey(event.key)
+		});
+	}
+
+	if (
+		[" ", "arrowdown", "arrowleft", "arrowright", "arrowup"].includes(
+			normalizedKey
+		)
+	) {
+		event.preventDefault();
+	}
+}
+
+function handleKeyUp(event: KeyboardEvent) {
+	if (selectedProject.value?.mode !== "pgzero") return;
+
+	const normalizedKey = normalizeKey(event.key);
+	gameKeysDown.delete(normalizedKey);
+	gameEvents.push({
+		type: "keyup",
+		key: pythonGameKey(event.key)
+	});
+}
+
+function gamePointerPosition(event: MouseEvent) {
+	const canvas = canvasRef.value;
+	if (!canvas) return { x: 0, y: 0 };
+
+	const rect = canvas.getBoundingClientRect();
+	return {
+		x: ((event.clientX - rect.left) / rect.width) * gameState.width,
+		y: ((event.clientY - rect.top) / rect.height) * gameState.height
+	};
+}
+
+function gameMouseButton(event: MouseEvent): GameInputEvent["button"] {
+	if (event.button === 1) return "middle";
+	if (event.button === 2) return "right";
+	return "left";
+}
+
+function queueGamePointerEvent(
+	event: MouseEvent,
+	type: GameInputEvent["type"]
+) {
+	if (selectedProject.value?.mode !== "pgzero") return;
+
+	const point = gamePointerPosition(event);
+	gameEvents.push({
+		type,
+		x: point.x,
+		y: point.y,
+		button: gameMouseButton(event)
+	});
+
+	if (type !== "mousemove") event.preventDefault();
 }
 
 watch(
@@ -570,16 +890,17 @@ watch(
 );
 
 watch(selectedProjectID, () => {
-	void nextTick(resetTurtleCanvas);
+	void nextTick(resetActiveCanvas);
 });
 
 onMounted(() => {
 	warmPythonRuntime();
 	void loadProjects();
 	window.addEventListener("keydown", handleKeyDown);
+	window.addEventListener("keyup", handleKeyUp);
 
 	if (canvasRef.value) {
-		resizeObserver = new ResizeObserver(() => resetTurtleCanvas());
+		resizeObserver = new ResizeObserver(() => resetActiveCanvas());
 		resizeObserver.observe(canvasRef.value);
 	}
 });
@@ -587,6 +908,8 @@ onMounted(() => {
 onBeforeUnmount(() => {
 	if (saveTimer) window.clearTimeout(saveTimer);
 	window.removeEventListener("keydown", handleKeyDown);
+	window.removeEventListener("keyup", handleKeyUp);
+	stopGameLoop();
 	resizeObserver?.disconnect();
 });
 </script>
@@ -600,7 +923,7 @@ onBeforeUnmount(() => {
 				<p>
 					Build multi-file Python projects, run standard Python code,
 					and use the Turtle canvas for drawing and keyboard-driven
-					lessons.
+					lessons or PyGame Zero game projects.
 				</p>
 			</div>
 			<div class="python-ide-status" aria-live="polite">
@@ -638,6 +961,14 @@ onBeforeUnmount(() => {
 							>
 								Tu
 							</button>
+							<button
+								class="icon-action"
+								title="New PyGame Zero project"
+								type="button"
+								@click="createProject('pgzero')"
+							>
+								Gm
+							</button>
 						</div>
 					</div>
 
@@ -657,7 +988,7 @@ onBeforeUnmount(() => {
 								project.title || "Untitled Project"
 							}}</span>
 							<small>{{
-								project.mode === "turtle" ? "Turtle" : "Python"
+								getPythonIdeModeLabel(project.mode)
 							}}</small>
 						</button>
 					</div>
@@ -742,6 +1073,7 @@ onBeforeUnmount(() => {
 						>
 							<option value="python">Python</option>
 							<option value="turtle">Python Turtle</option>
+							<option value="pgzero">PyGame Zero</option>
 						</select>
 					</label>
 					<button
@@ -784,8 +1116,8 @@ onBeforeUnmount(() => {
 					<section class="result-panel" aria-label="Python output">
 						<div class="panel-header">
 							<span>{{
-								selectedProject.mode === "turtle"
-									? "Turtle canvas"
+								usesDrawingCanvas
+									? `${selectedModeLabel} canvas`
 									: "Runtime"
 							}}</span>
 							<button
@@ -797,15 +1129,21 @@ onBeforeUnmount(() => {
 							</button>
 						</div>
 
-						<div
-							v-show="selectedProject.mode === 'turtle'"
-							class="canvas-shell"
-						>
+						<div v-show="usesDrawingCanvas" class="canvas-shell">
 							<canvas
 								ref="canvasRef"
-								aria-label="Turtle drawing canvas"
+								:aria-label="`${selectedModeLabel} canvas`"
 								class="turtle-canvas"
 								tabindex="0"
+								@mousedown="
+									queueGamePointerEvent($event, 'mousedown')
+								"
+								@mousemove="
+									queueGamePointerEvent($event, 'mousemove')
+								"
+								@mouseup="
+									queueGamePointerEvent($event, 'mouseup')
+								"
 							/>
 						</div>
 

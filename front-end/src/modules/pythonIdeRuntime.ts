@@ -27,9 +27,46 @@ interface LoadPyodideOptions {
 
 declare global {
 	interface Window {
+		__classesPythonIdeGame?: GameBridge;
 		loadPyodide?: (options: LoadPyodideOptions) => Promise<PyodideAPI>;
 		__classesPythonIdeTurtle?: TurtleBridge;
 	}
+}
+
+export interface GameBridge {
+	reset: (width?: number, height?: number) => void;
+	clear: () => void;
+	fill: (color: string) => void;
+	drawActor: (
+		image: string,
+		x: number,
+		y: number,
+		width: number,
+		height: number,
+		angle: number
+	) => void;
+	drawText: (
+		text: string,
+		x: number,
+		y: number,
+		color: string,
+		fontSize: number
+	) => void;
+	drawRect: (
+		x: number,
+		y: number,
+		width: number,
+		height: number,
+		color: string,
+		filled: boolean
+	) => void;
+	isKeyDown: (key: string) => boolean;
+	popEventsJson: () => string;
+	requestLoop: () => void;
+	consumeLoopRequest: () => boolean;
+	startLoop: (tick: () => Promise<void>) => void;
+	stopLoop: () => void;
+	log: (text: string) => void;
 }
 
 export interface TurtleBridge {
@@ -61,6 +98,8 @@ export interface RunPythonProjectOptions {
 	files: PythonIdeFile[];
 	activeFileName: string;
 	inputText: string;
+	mode: "pgzero" | "python" | "turtle";
+	gameBridge: GameBridge;
 	turtleBridge: TurtleBridge;
 	onOutput: (kind: "stdout" | "stderr" | "system", text: string) => void;
 }
@@ -369,6 +408,454 @@ def mainloop(): _screen.mainloop()
 def done(): _screen.mainloop()
 `;
 
+const pgzeroShim = `
+import builtins
+import inspect
+import json
+import time
+from js import window
+
+_bridge = window.__classesPythonIdeGame
+_module_globals = {}
+_scheduled = []
+
+def _number(value, fallback=0):
+    try:
+        return float(value)
+    except Exception:
+        return float(fallback)
+
+def _rect_parts(value):
+    if isinstance(value, Rect):
+        return value.x, value.y, value.width, value.height
+
+    if isinstance(value, Actor):
+        return value.left, value.top, value.width, value.height
+
+    if len(value) == 2 and len(value[0]) == 2 and len(value[1]) == 2:
+        return (
+            _number(value[0][0]),
+            _number(value[0][1]),
+            _number(value[1][0]),
+            _number(value[1][1]),
+        )
+
+    if len(value) == 4:
+        return (
+            _number(value[0]),
+            _number(value[1]),
+            _number(value[2]),
+            _number(value[3]),
+        )
+
+    raise TypeError("Expected a Rect, Actor, ((x, y), (w, h)), or (x, y, w, h).")
+
+def _normalize_color(color):
+    if isinstance(color, str):
+        return color
+    if isinstance(color, (tuple, list)) and len(color) >= 3:
+        return "rgb({}, {}, {})".format(
+            int(_number(color[0])),
+            int(_number(color[1])),
+            int(_number(color[2])),
+        )
+    return str(color)
+
+def _call_optional(name, *args):
+    callback = _module_globals.get(name)
+    if callable(callback):
+        return callback(*args)
+    return None
+
+class Rect:
+    def __init__(self, *args):
+        if len(args) == 1:
+            self.x, self.y, self.width, self.height = _rect_parts(args[0])
+        elif len(args) == 2:
+            self.x, self.y, self.width, self.height = _rect_parts((args[0], args[1]))
+        elif len(args) == 4:
+            self.x, self.y, self.width, self.height = [_number(value) for value in args]
+        else:
+            raise TypeError("Rect expects (x, y, width, height) or ((x, y), (width, height)).")
+
+    @property
+    def left(self):
+        return self.x
+
+    @left.setter
+    def left(self, value):
+        self.x = _number(value)
+
+    @property
+    def right(self):
+        return self.x + self.width
+
+    @right.setter
+    def right(self, value):
+        self.x = _number(value) - self.width
+
+    @property
+    def top(self):
+        return self.y
+
+    @top.setter
+    def top(self, value):
+        self.y = _number(value)
+
+    @property
+    def bottom(self):
+        return self.y + self.height
+
+    @bottom.setter
+    def bottom(self, value):
+        self.y = _number(value) - self.height
+
+    @property
+    def center(self):
+        return (self.x + self.width / 2, self.y + self.height / 2)
+
+    @center.setter
+    def center(self, value):
+        self.x = _number(value[0]) - self.width / 2
+        self.y = _number(value[1]) - self.height / 2
+
+    @property
+    def pos(self):
+        return (self.x, self.y)
+
+    @pos.setter
+    def pos(self, value):
+        self.x = _number(value[0])
+        self.y = _number(value[1])
+
+    @property
+    def topleft(self):
+        return (self.left, self.top)
+
+    @topleft.setter
+    def topleft(self, value):
+        self.left = value[0]
+        self.top = value[1]
+
+    def collidepoint(self, pos):
+        x = _number(pos[0])
+        y = _number(pos[1])
+        return self.left <= x <= self.right and self.top <= y <= self.bottom
+
+    def colliderect(self, other):
+        other_rect = Rect(other)
+        return not (
+            self.right < other_rect.left or
+            self.left > other_rect.right or
+            self.bottom < other_rect.top or
+            self.top > other_rect.bottom
+        )
+
+    def contains(self, other):
+        other_rect = Rect(other)
+        return (
+            self.left <= other_rect.left and
+            self.right >= other_rect.right and
+            self.top <= other_rect.top and
+            self.bottom >= other_rect.bottom
+        )
+
+    def inflate_ip(self, width, height):
+        width = _number(width)
+        height = _number(height)
+        self.x -= width / 2
+        self.y -= height / 2
+        self.width += width
+        self.height += height
+
+class ZRect(Rect):
+    pass
+
+class Actor:
+    def __init__(self, image, pos=None, **kwargs):
+        self.image = str(image)
+        self.width = _number(kwargs.pop("width", 64), 64)
+        self.height = _number(kwargs.pop("height", 64), 64)
+        self.angle = _number(kwargs.pop("angle", 0), 0)
+        self.visible = kwargs.pop("visible", True)
+
+        if pos is None:
+            self.x = _number(kwargs.pop("x", 320), 320)
+            self.y = _number(kwargs.pop("y", 200), 200)
+        else:
+            self.x = _number(pos[0], 320)
+            self.y = _number(pos[1], 200)
+
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+
+    @property
+    def pos(self):
+        return (self.x, self.y)
+
+    @pos.setter
+    def pos(self, value):
+        self.x = _number(value[0])
+        self.y = _number(value[1])
+
+    @property
+    def left(self):
+        return self.x - self.width / 2
+
+    @left.setter
+    def left(self, value):
+        self.x = _number(value) + self.width / 2
+
+    @property
+    def right(self):
+        return self.x + self.width / 2
+
+    @right.setter
+    def right(self, value):
+        self.x = _number(value) - self.width / 2
+
+    @property
+    def top(self):
+        return self.y - self.height / 2
+
+    @top.setter
+    def top(self, value):
+        self.y = _number(value) + self.height / 2
+
+    @property
+    def bottom(self):
+        return self.y + self.height / 2
+
+    @bottom.setter
+    def bottom(self, value):
+        self.y = _number(value) - self.height / 2
+
+    @property
+    def center(self):
+        return self.pos
+
+    @center.setter
+    def center(self, value):
+        self.pos = value
+
+    def _rect(self):
+        return Rect(self.left, self.top, self.width, self.height)
+
+    def draw(self):
+        if self.visible:
+            _bridge.drawActor(
+                self.image,
+                float(self.x),
+                float(self.y),
+                float(self.width),
+                float(self.height),
+                float(self.angle),
+            )
+
+    def collidepoint(self, pos):
+        return self._rect().collidepoint(pos)
+
+    def colliderect(self, other):
+        return self._rect().colliderect(other)
+
+    def contains(self, other):
+        return self._rect().contains(other)
+
+class _Keyboard:
+    def __getattr__(self, key):
+        return bool(_bridge.isKeyDown(str(key)))
+
+    def __getitem__(self, key):
+        return bool(_bridge.isKeyDown(str(key)))
+
+keyboard = _Keyboard()
+
+class _Keys:
+    LEFT = "left"
+    RIGHT = "right"
+    UP = "up"
+    DOWN = "down"
+    SPACE = "space"
+    RETURN = "return"
+    ENTER = "return"
+    ESCAPE = "escape"
+    A = "a"
+    D = "d"
+    S = "s"
+    W = "w"
+
+    def __getattr__(self, key):
+        return key.lower()
+
+keys = _Keys()
+
+class _Mouse:
+    LEFT = "left"
+    MIDDLE = "middle"
+    RIGHT = "right"
+
+mouse = _Mouse()
+
+class _ScreenDraw:
+    def text(self, text, pos=(0, 0), color="white", fontsize=24, center=None, **_kwargs):
+        if center is not None:
+            pos = center
+        _bridge.drawText(
+            str(text),
+            float(_number(pos[0])),
+            float(_number(pos[1])),
+            _normalize_color(color),
+            float(_number(fontsize, 24)),
+        )
+
+    def rect(self, rect, color):
+        x, y, width, height = _rect_parts(rect)
+        _bridge.drawRect(x, y, width, height, _normalize_color(color), False)
+
+    def filled_rect(self, rect, color):
+        x, y, width, height = _rect_parts(rect)
+        _bridge.drawRect(x, y, width, height, _normalize_color(color), True)
+
+class _Screen:
+    def __init__(self):
+        self.draw = _ScreenDraw()
+
+    def clear(self):
+        _bridge.clear()
+
+    def fill(self, color):
+        _bridge.fill(_normalize_color(color))
+
+screen = _Screen()
+
+class _Clock:
+    def schedule_unique(self, function, delay):
+        self.unschedule(function)
+        _scheduled.append({
+            "function": function,
+            "due": time.monotonic() + float(_number(delay, 0)),
+            "interval": None,
+        })
+
+    def schedule_interval(self, function, interval):
+        _scheduled.append({
+            "function": function,
+            "due": time.monotonic() + float(_number(interval, 0)),
+            "interval": float(_number(interval, 0)),
+        })
+
+    def unschedule(self, function):
+        _scheduled[:] = [
+            entry for entry in _scheduled
+            if entry["function"] is not function
+        ]
+
+clock = _Clock()
+
+class _NoopSound:
+    def play(self, *_args, **_kwargs):
+        return None
+
+    def stop(self):
+        return None
+
+class _SoundLibrary:
+    def __getattr__(self, _name):
+        return _NoopSound()
+
+sounds = _SoundLibrary()
+
+class _Music:
+    def play(self, name):
+        _bridge.log("music.play({})".format(name))
+
+    def stop(self):
+        return None
+
+music = _Music()
+
+class _Pgzrun:
+    def go(self):
+        go()
+
+pgzrun = _Pgzrun()
+
+def _run_scheduled():
+    now = time.monotonic()
+    for entry in list(_scheduled):
+        if now < entry["due"]:
+            continue
+        entry["function"]()
+        if entry["interval"] is None:
+            if entry in _scheduled:
+                _scheduled.remove(entry)
+        else:
+            entry["due"] = now + entry["interval"]
+
+def _handle_events():
+    raw_events = _bridge.popEventsJson()
+    if not raw_events:
+        return
+
+    for event in json.loads(raw_events):
+        event_type = event.get("type")
+        if event_type == "keydown":
+            _call_optional("on_key_down", event.get("key"))
+        elif event_type == "keyup":
+            _call_optional("on_key_up", event.get("key"))
+        elif event_type == "mousedown":
+            pos = (event.get("x", 0), event.get("y", 0))
+            _call_optional("on_mouse_down", pos, event.get("button", "left"))
+        elif event_type == "mouseup":
+            pos = (event.get("x", 0), event.get("y", 0))
+            _call_optional("on_mouse_up", pos, event.get("button", "left"))
+        elif event_type == "mousemove":
+            pos = (event.get("x", 0), event.get("y", 0))
+            _call_optional("on_mouse_move", pos)
+
+def install_builtins():
+    builtins.Actor = Actor
+    builtins.Rect = Rect
+    builtins.ZRect = ZRect
+    builtins.screen = screen
+    builtins.keyboard = keyboard
+    builtins.keys = keys
+    builtins.mouse = mouse
+    builtins.clock = clock
+    builtins.sounds = sounds
+    builtins.music = music
+    builtins.pgzrun = pgzrun
+
+def start(module_globals=None):
+    global _module_globals
+    if module_globals is not None:
+        _module_globals = module_globals
+    install_builtins()
+    _bridge.reset(
+        float(_number(_module_globals.get("WIDTH", 640), 640)),
+        float(_number(_module_globals.get("HEIGHT", 400), 400)),
+    )
+    _bridge.requestLoop()
+
+def go():
+    frame = inspect.currentframe()
+    if frame is not None and frame.f_back is not None:
+        start(frame.f_back.f_globals)
+    else:
+        start({})
+
+def __classes_pgzero_start(module_globals):
+    start(module_globals)
+
+def __classes_pgzero_tick():
+    _handle_events()
+    _run_scheduled()
+    _call_optional("update")
+    _call_optional("draw")
+
+install_builtins()
+`;
+
 function ensureProjectDirectory(pyodide: PyodideAPI) {
 	if (!pyodide.FS.analyzePath(PROJECT_ROOT).exists) {
 		pyodide.FS.mkdirTree(PROJECT_ROOT);
@@ -377,7 +864,12 @@ function ensureProjectDirectory(pyodide: PyodideAPI) {
 
 function packageScanCode(files: PythonIdeFile[]) {
 	const localModules = new Set([
+		"_classes_pgzero",
+		"pgzero",
+		"pgzrun",
+		"pygame",
 		"turtle",
+		"zrect",
 		...files.map(file => file.name.replace(PYTHON_EXTENSION_RE, ""))
 	]);
 
@@ -395,10 +887,45 @@ function packageScanCode(files: PythonIdeFile[]) {
 		.join("\n");
 }
 
+function writeRuntimeShims(pyodide: PyodideAPI) {
+	pyodide.FS.writeFile(`${PROJECT_ROOT}/turtle.py`, turtleShim);
+	pyodide.FS.writeFile(`${PROJECT_ROOT}/_classes_pgzero.py`, pgzeroShim);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/pgzrun.py`,
+		"from _classes_pgzero import go\n"
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/zrect.py`,
+		"from _classes_pgzero import ZRect, Rect\n"
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/pygame.py`,
+		"from _classes_pgzero import Rect\n"
+	);
+
+	if (!pyodide.FS.analyzePath(`${PROJECT_ROOT}/pgzero`).exists) {
+		pyodide.FS.mkdirTree(`${PROJECT_ROOT}/pgzero`);
+	}
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/pgzero/__init__.py`,
+		"from _classes_pgzero import *\n"
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/pgzero/builtins.py`,
+		"from _classes_pgzero import *\n"
+	);
+}
+
 export async function runPythonProject(options: RunPythonProjectOptions) {
 	const pyodide = await loadRuntime();
 	window.__classesPythonIdeTurtle = options.turtleBridge;
-	options.turtleBridge.reset();
+	window.__classesPythonIdeGame = options.gameBridge;
+	options.gameBridge.stopLoop();
+	if (options.mode === "pgzero") {
+		options.gameBridge.reset();
+	} else {
+		options.turtleBridge.reset();
+	}
 
 	if (pyodide.setStdout) {
 		pyodide.setStdout({
@@ -415,7 +942,7 @@ export async function runPythonProject(options: RunPythonProjectOptions) {
 	for (const file of options.files) {
 		pyodide.FS.writeFile(`${PROJECT_ROOT}/${file.name}`, file.content);
 	}
-	pyodide.FS.writeFile(`${PROJECT_ROOT}/turtle.py`, turtleShim);
+	writeRuntimeShims(pyodide);
 
 	const activeFile =
 		options.files.find(file => file.name === options.activeFileName) ??
@@ -432,10 +959,28 @@ os.chdir(${escapePythonString(PROJECT_ROOT)})
 if ${escapePythonString(PROJECT_ROOT)} not in sys.path:
     sys.path.insert(0, ${escapePythonString(PROJECT_ROOT)})
 ${createInputBootstrap(options.inputText)}
+if ${options.mode === "pgzero" ? "True" : "False"}:
+    import _classes_pgzero
+    _classes_pgzero.install_builtins()
 `);
 
 	await pyodide.runPythonAsync(`
 __name__ = "__main__"
 exec(compile(open(${escapePythonString(activeFile.name)}, "r", encoding="utf-8").read(), ${escapePythonString(activeFile.name)}, "exec"), globals())
 `);
+
+	if (options.mode === "pgzero") {
+		await pyodide.runPythonAsync(`
+import _classes_pgzero
+_classes_pgzero.__classes_pgzero_start(globals())
+`);
+		if (options.gameBridge.consumeLoopRequest()) {
+			options.gameBridge.startLoop(async () => {
+				await pyodide.runPythonAsync(`
+import _classes_pgzero
+_classes_pgzero.__classes_pgzero_tick()
+`);
+			});
+		}
+	}
 }
