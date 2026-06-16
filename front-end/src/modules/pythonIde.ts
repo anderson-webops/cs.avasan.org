@@ -53,7 +53,7 @@ export const pythonIdeLibrarySupport: PythonIdeLibrarySupport[] = [
 	{
 		name: "Turtle and PyGame Zero",
 		status: "shim",
-		detail: "Turtle drawing, Screen.onkey input, Actor, screen, keyboard, clock, Rect, and common PyGame Zero patterns run through course-specific browser shims."
+		detail: "Turtle drawing, Screen.onkey, Screen.onclick, Turtle.ondrag, Actor, screen, keyboard, clock, Rect, and common PyGame Zero patterns run through course-specific browser shims."
 	},
 	{
 		name: "Data science stack",
@@ -104,9 +104,13 @@ def draw_dot(x, y):
 \tpen.pendown()
 \tpen.dot(18, "coral")
 
+def drag_pen(x, y):
+\tpen.goto(x, y)
+
 screen.onkey(move_forward, "Up")
 screen.onkey(turn_left, "Left")
 screen.onclick(draw_dot)
+pen.ondrag(drag_pen)
 screen.listen()
 `;
 

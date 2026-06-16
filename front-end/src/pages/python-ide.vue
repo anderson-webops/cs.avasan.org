@@ -102,6 +102,7 @@ const artifactCounter = ref(0);
 const outputCounter = ref(0);
 const keyHandlers = new Map<string, () => void>();
 const turtleClickHandlers = new Map<string, (x: number, y: number) => void>();
+const turtleDragHandlers = new Map<string, (x: number, y: number) => void>();
 const gameKeysDown = new Set<string>();
 const gameEvents: GameInputEvent[] = [];
 
@@ -111,6 +112,7 @@ let resizeObserver: ResizeObserver | null = null;
 let gameAnimationFrame: number | null = null;
 let gameLoopRequested = false;
 let gameTickInFlight = false;
+let activeTurtleDragButton: string | null = null;
 
 const turtleState: TurtleState = {
 	x: 0,
@@ -477,6 +479,8 @@ function resizeCanvasForDisplay() {
 function resetTurtleCanvas() {
 	keyHandlers.clear();
 	turtleClickHandlers.clear();
+	turtleDragHandlers.clear();
+	activeTurtleDragButton = null;
 	stopGameLoop();
 	const canvasContext = resizeCanvasForDisplay();
 	if (!canvasContext) return;
@@ -791,6 +795,18 @@ const turtleBridge: TurtleBridge = {
 		}
 		turtleClickHandlers.set(button, callback);
 	},
+	registerDrag(
+		button: string,
+		callback: ((x: number, y: number) => void) | null
+	) {
+		if (!callback) {
+			turtleDragHandlers.delete(button);
+			if (activeTurtleDragButton === button)
+				activeTurtleDragButton = null;
+			return;
+		}
+		turtleDragHandlers.set(button, callback);
+	},
 	listen() {
 		canvasRef.value?.focus();
 	}
@@ -983,6 +999,22 @@ function queueGamePointerEvent(
 	if (type !== "mousemove") event.preventDefault();
 }
 
+function callTurtlePointerHandler(
+	handler: (x: number, y: number) => void,
+	event: MouseEvent,
+	failureMessage: string
+) {
+	const point = turtlePointerPosition(event);
+	try {
+		handler(point.x, point.y);
+	} catch (error) {
+		appendOutput(
+			"stderr",
+			error instanceof Error ? error.message : failureMessage
+		);
+	}
+}
+
 function dispatchCanvasPointerEvent(
 	event: MouseEvent,
 	type: GameInputEvent["type"]
@@ -992,25 +1024,50 @@ function dispatchCanvasPointerEvent(
 		return;
 	}
 
-	if (selectedProject.value?.mode !== "turtle" || type !== "mousedown")
+	if (selectedProject.value?.mode !== "turtle") return;
+
+	if (type === "mouseup") {
+		activeTurtleDragButton = null;
 		return;
+	}
 
-	const handler = turtleClickHandlers.get(turtleMouseButton(event));
-	if (!handler) return;
+	if (type === "mousemove") {
+		const dragHandler = activeTurtleDragButton
+			? turtleDragHandlers.get(activeTurtleDragButton)
+			: null;
+		if (!dragHandler) return;
+		callTurtlePointerHandler(
+			dragHandler,
+			event,
+			"Turtle drag handler failed."
+		);
+		event.preventDefault();
+		return;
+	}
 
-	const point = turtlePointerPosition(event);
-	try {
-		handler(point.x, point.y);
-	} catch (error) {
-		appendOutput(
-			"stderr",
-			error instanceof Error
-				? error.message
-				: "Turtle click handler failed."
+	if (type !== "mousedown") return;
+
+	const button = turtleMouseButton(event);
+	const clickHandler = turtleClickHandlers.get(button);
+	const dragHandler = turtleDragHandlers.get(button);
+
+	if (!clickHandler && !dragHandler) return;
+	activeTurtleDragButton = dragHandler ? button : null;
+
+	if (clickHandler) {
+		callTurtlePointerHandler(
+			clickHandler,
+			event,
+			"Turtle click handler failed."
 		);
 	}
+
 	event.preventDefault();
 	canvasRef.value?.focus();
+}
+
+function clearTurtleDrag() {
+	activeTurtleDragButton = null;
 }
 
 watch(
@@ -1029,6 +1086,7 @@ onMounted(() => {
 	void loadProjects();
 	window.addEventListener("keydown", handleKeyDown);
 	window.addEventListener("keyup", handleKeyUp);
+	window.addEventListener("mouseup", clearTurtleDrag);
 
 	if (canvasRef.value) {
 		resizeObserver = new ResizeObserver(() => resetActiveCanvas());
@@ -1040,6 +1098,7 @@ onBeforeUnmount(() => {
 	if (saveTimer) window.clearTimeout(saveTimer);
 	window.removeEventListener("keydown", handleKeyDown);
 	window.removeEventListener("keyup", handleKeyUp);
+	window.removeEventListener("mouseup", clearTurtleDrag);
 	stopGameLoop();
 	resizeObserver?.disconnect();
 });

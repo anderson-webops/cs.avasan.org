@@ -122,6 +122,10 @@ export interface TurtleBridge {
 		button: string,
 		callback: ((x: number, y: number) => void) | null
 	) => void;
+	registerDrag: (
+		button: string,
+		callback: ((x: number, y: number) => void) | null
+	) => void;
 	listen: () => void;
 }
 
@@ -407,6 +411,12 @@ class Turtle:
     def write(self, text, *_args, **_kwargs):
         _bridge.write(str(text))
 
+    def onclick(self, function, btn=1, add=None):
+        _bridge.registerClick(str(btn), _stored_callback("turtle-click", btn, function))
+
+    def ondrag(self, function, btn=1, add=None):
+        _bridge.registerDrag(str(btn), _stored_callback("drag", btn, function))
+
     def speed(self, *_args):
         return None
 
@@ -461,6 +471,7 @@ def onkey(function, key): _screen.onkey(function, key)
 def onkeypress(function, key=None): _screen.onkeypress(function, key)
 def onclick(function, btn=1, add=None): _screen.onclick(function, btn, add)
 def onscreenclick(function, btn=1, add=None): _screen.onscreenclick(function, btn, add)
+def ondrag(function, btn=1, add=None): _default.ondrag(function, btn, add)
 def mainloop(): _screen.mainloop()
 def done(): _screen.mainloop()
 `;

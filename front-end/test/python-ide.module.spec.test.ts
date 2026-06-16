@@ -48,6 +48,7 @@ describe("python IDE project helpers", () => {
 		expect(project.files[0]?.content).toBe(turtleStarterCode);
 		expect(project.files[0]?.content).toContain("screen.onkey");
 		expect(project.files[0]?.content).toContain("screen.onclick");
+		expect(project.files[0]?.content).toContain("pen.ondrag");
 	});
 
 	it("labels supported runtime modes", () => {
@@ -77,6 +78,13 @@ describe("python IDE project helpers", () => {
 				entry =>
 					entry.name === "PySynth song projects" &&
 					entry.status === "shim"
+			)
+		).toBe(true);
+		expect(
+			pythonIdeLibrarySupport.some(
+				entry =>
+					entry.name === "Turtle and PyGame Zero" &&
+					entry.detail.includes("Turtle.ondrag")
 			)
 		).toBe(true);
 	});
