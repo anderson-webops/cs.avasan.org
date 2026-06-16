@@ -91,7 +91,7 @@ function securityLabProjectContent(topic: string, mode: SecurityLabMode) {
 		[
 			"- The fixture, toolchain, stop condition, and reset path are documented.",
 			"- The evidence separates observed behavior from exploitability, impact, and mitigation claims.",
-			"- The final note identifies what the patch or hardening step proves and what it does not prove."
+			"- Record what the patch or hardening step proves and what it does not prove."
 		],
 		[
 			"- Baseline, failure-shaped, and post-change evidence can be rerun in the local lab.",

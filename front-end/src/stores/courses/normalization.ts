@@ -3430,7 +3430,7 @@ function completionChecks(context: CourseTextContext) {
 			subject => [
 				`- ${subject} matches the required input/output format and sample result without extra prompts or formatting.`,
 				`- A hand-traced ${subject} case, a boundary case, and a duplicate, tie, or ordering case are checked when relevant.`,
-				`- The final ${subject} note names the invariant and the complexity bound that makes the approach acceptable.`
+				`- Record the ${subject} invariant and the complexity bound that makes the approach acceptable.`
 			],
 			subject => [
 				`- ${subject} produces exactly the expected output for the sample and for at least one custom test.`,
@@ -3459,7 +3459,7 @@ function completionChecks(context: CourseTextContext) {
 			subject => [
 				`- ${subject} can be replayed without stale score, position, costume, or clone state.`,
 				`- ${subject} handles normal play and one boundary case such as timer end, collision, missed input, or repeated click.`,
-				"- The final note names the Scratch state variable or event chain most responsible for correctness."
+				"- Record the Scratch state variable or event chain most responsible for correctness."
 			]
 		]);
 	}
@@ -3467,7 +3467,7 @@ function completionChecks(context: CourseTextContext) {
 		return [
 			`- The ${subject} scene starts from a predictable state and the main interaction is visible during play mode.`,
 			`- ${subject} controls, collisions or interactions, scoring/progress, and reset or completion behavior are checked.`,
-			`- The final ${subject} note names the script, prefab, or scene setting that most directly controls the behavior.`
+			`- Record the ${subject} script, prefab, or scene setting that most directly controls the behavior.`
 		];
 	}
 	if (isPygameSource(source)) {
@@ -3487,7 +3487,7 @@ function completionChecks(context: CourseTextContext) {
 			subject => [
 				`- ${subject} has current preview, simulator, build, or device evidence for the target app path.`,
 				`- ${subject} checks one normal interaction plus one empty, invalid, layout, navigation, or accessibility condition.`,
-				`- The final ${subject} note identifies whether the issue was view code, state flow, configuration, signing, or target setup.`
+				`- Record whether the ${subject} issue was view code, state flow, configuration, signing, or target setup.`
 			],
 			subject => [
 				`- ${subject} runs from a clean launch and reaches the expected screen or app state.`,
@@ -3520,7 +3520,7 @@ function completionChecks(context: CourseTextContext) {
 			subject => [
 				`- ${subject} has a repeatable build/run command and a known starting state.`,
 				`- ${subject} evidence includes one relevant compiler, debugger, sanitizer, trace, log, register, memory, or return-code observation.`,
-				`- The final ${subject} note names the boundary or assumption that would be easiest to break.`
+				`- Record the ${subject} boundary or assumption that would be easiest to break.`
 			],
 			subject => [
 				`- ${subject} can be rebuilt from a clean checkout or shell without relying on hidden IDE state.`,
@@ -3530,7 +3530,7 @@ function completionChecks(context: CourseTextContext) {
 			subject => [
 				`- ${subject} documents the exact command, toolchain, target, or simulator state used for verification.`,
 				`- ${subject} checks expected behavior and one failure-shaped behavior with concrete output or diagnostic evidence.`,
-				`- The final ${subject} note identifies the resource, lifetime, representation, or command assumption that mattered.`
+				`- Record the ${subject} resource, lifetime, representation, or command assumption that mattered.`
 			]
 		]);
 	}
@@ -3620,7 +3620,7 @@ function completionChecks(context: CourseTextContext) {
 			subject => [
 				`- ${subject} separates setup, computation, and interpretation so a reader can trace the reasoning.`,
 				`- ${subject} includes at least one verification check such as substitution, estimation, inverse operation, graph/table comparison, or unit analysis.`,
-				`- The final ${subject} note names the condition that would make the answer invalid or incomplete.`
+				`- Record the ${subject} condition that would make the answer invalid or incomplete.`
 			]
 		]);
 	}
@@ -3731,12 +3731,12 @@ function completionChecks(context: CourseTextContext) {
 			subject => [
 				`- ${subject} runs from a clean start and the result can be reproduced with the recorded inputs.`,
 				`- ${subject} tests or explains at least one ordinary input, one minimal input, and one awkward input.`,
-				`- The final ${subject} note names the function, loop, data structure, or algorithm decision that mattered.`
+				`- Record the ${subject} function, loop, data structure, or algorithm decision that mattered.`
 			],
 			subject => [
 				`- ${subject} has a fresh run, trace, or test result for the current version of the code.`,
 				`- ${subject} is checked with representative data, smallest useful data, and one surprising or malformed input.`,
-				`- The final ${subject} note identifies the helper, branch, loop, collection, or file rule that controlled correctness.`
+				`- Record the ${subject} helper, branch, loop, collection, or file rule that controlled correctness.`
 			],
 			subject => [
 				`- ${subject} can be rerun from the documented input and produces the same observable result.`,
@@ -3746,7 +3746,7 @@ function completionChecks(context: CourseTextContext) {
 			subject => [
 				`- ${subject} includes enough labeled output or test evidence to follow the data flow.`,
 				`- ${subject} checks the intended case, a minimal case, and one case that challenges an input or state assumption.`,
-				`- The final ${subject} note names the Python construct that made the result easier to reason about.`
+				"- Record the Python construct that made the result easier to reason about."
 			],
 			subject => [
 				`- ${subject} produces reproducible evidence from the current code, not a previous interpreter run.`,
@@ -3780,7 +3780,7 @@ function completionChecks(context: CourseTextContext) {
 			subject => [
 				`- ${subject} rebuilds cleanly and shows the target behavior through a run, assertion, or trace.`,
 				`- The ${subject} checked cases include constructor setup, one method result, and a boundary or invalid input when relevant.`,
-				`- The final ${subject} note names the Java rule or type boundary that prevents the code from becoming ambiguous.`
+				`- Record the ${subject} Java rule or type boundary that prevents the code from becoming ambiguous.`
 			],
 			subject => [
 				`- ${subject} has current evidence for the expected output or return value, not stale IDE state.`,
@@ -3809,7 +3809,7 @@ function completionChecks(context: CourseTextContext) {
 			subject => [
 				`- ${subject} compiles from a clean run and records the command, target, or project configuration used.`,
 				`- ${subject} verifies a typical case, a boundary case, and one invalid or awkward case when the prompt allows it.`,
-				`- The final ${subject} note names the type, container, memory, ownership, or algorithm decision that controlled correctness.`
+				`- Record the ${subject} type, container, memory, ownership, or algorithm decision that controlled correctness.`
 			],
 			subject => [
 				`- ${subject} has current compile/run evidence rather than relying on stale IDE output.`,
@@ -3833,7 +3833,7 @@ function completionChecks(context: CourseTextContext) {
 			subject => [
 				`- ${subject} stays inside the stated authorization boundary and uses only approved local evidence.`,
 				`- The ${subject} result connects each finding to a log, trace, request, response, packet, config, or command output.`,
-				`- The final ${subject} note names the defensive control or rollback that reduces the risk.`
+				`- Record the ${subject} defensive control or rollback that reduces the risk.`
 			],
 			subject => [
 				`- ${subject} verifies the target is a provided fixture, intentionally vulnerable lab, or owned system.`,
@@ -5151,7 +5151,7 @@ function studioCompletionChecks(context: CourseTextContext) {
 			() => [
 				`- ${studioLabel} starts from a predictable green-flag state.`,
 				`- ${studioLabel} controls, events, broadcasts, variables, sprite interactions, and reset behavior are checked where they apply.`,
-				`- The ${studioLabel} final note names the Scratch state variable or event chain most responsible for correctness.`
+				"- Record the Scratch state variable or event chain most responsible for correctness."
 			],
 			() => [
 				`- ${studioLabel} starting position, visible state, score or timer, and reset behavior are predictable.`,
@@ -5170,7 +5170,7 @@ function studioCompletionChecks(context: CourseTextContext) {
 			() => [
 				"- The game starts from a predictable state and can be restarted or ended intentionally.",
 				"- Actor updates, input events, collisions, score/health changes, and draw order are verified.",
-				"- The final note names the game loop, the most important state variable, and one bug or edge case found during playtesting."
+				"- Record the game loop, the most important state variable, and one bug or edge case found during playtesting."
 			],
 			() => [
 				"- The first frame, input response, collision path, score or health update, and end state are tested.",
@@ -5265,7 +5265,7 @@ function studioCompletionChecks(context: CourseTextContext) {
 		() => [
 			`- ${studioLabel} demonstrates the module concept through observable behavior, output, tests, traces, logs, or another concrete result.`,
 			`- The ${studioLabel} protected boundary or failure case is named explicitly and is not only the provided sample.`,
-			`- The ${studioLabel} final note identifies one implementation, debugging, or reasoning choice that materially affected the result.`
+			`- Record one ${studioLabel} implementation, debugging, or reasoning choice that materially affected the result.`
 		],
 		() => [
 			`- The ${studioLabel} result is visible, runnable, inspectable, or supported by concrete evidence.`,

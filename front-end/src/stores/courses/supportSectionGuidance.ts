@@ -136,13 +136,13 @@ export function buildSupportSectionGuidance({
 		return [
 			`Finish **${title}** with a concrete verification pass.`,
 			`Compare expected and observed behavior for ${focus}.`,
-			"The final note names the main result, one meaningful edge case, one design or debugging decision, and one limitation that would guide a later revision."
+			"Record the main result, one meaningful edge case, one design or debugging decision, and one limitation that would guide a later revision."
 		].join("\n\n");
 	}
 
 	return [
 		`Extend **${title}** in ${courseFamily} by changing one meaningful constraint rather than adding unrelated features.`,
-		`The extension stresses ${focus} in the context of ${courseFamily}.`,
+		`Focus the extension on ${focus} in the context of ${courseFamily}.`,
 		`Keep the new ${courseFamily} requirement testable: define the expected behavior, run one normal case and one boundary case, and record what changed from the base version.`
 	].join("\n\n");
 }
