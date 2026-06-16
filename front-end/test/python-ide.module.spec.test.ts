@@ -11,7 +11,8 @@ import {
 	isValidPythonFileName,
 	normalizePythonFileName,
 	pythonIdeLibrarySupport,
-	pgzeroStarterCode
+	pgzeroStarterCode,
+	turtleStarterCode
 } from "../src/modules/pythonIde";
 
 describe("python IDE project helpers", () => {
@@ -38,6 +39,15 @@ describe("python IDE project helpers", () => {
 		expect(project.files[0]?.content).toBe(pgzeroStarterCode);
 		expect(project.files[0]?.content).toContain("Actor(");
 		expect(project.files[0]?.content).toContain("pgzrun.go()");
+	});
+
+	it("creates interactive Turtle starter projects", () => {
+		const project = createPythonIdeProject("turtle");
+
+		expect(project.mode).toBe("turtle");
+		expect(project.files[0]?.content).toBe(turtleStarterCode);
+		expect(project.files[0]?.content).toContain("screen.onkey");
+		expect(project.files[0]?.content).toContain("screen.onclick");
 	});
 
 	it("labels supported runtime modes", () => {

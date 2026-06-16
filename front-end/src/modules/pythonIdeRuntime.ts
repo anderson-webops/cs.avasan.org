@@ -112,7 +112,11 @@ export interface TurtleBridge {
 	circle: (radius: number) => void;
 	dot: (size: number, color?: string) => void;
 	write: (text: string) => void;
-	registerKey: (key: string, callback: () => void) => void;
+	registerKey: (key: string, callback: (() => void) | null) => void;
+	registerClick: (
+		button: string,
+		callback: ((x: number, y: number) => void) | null
+	) => void;
 	listen: () => void;
 }
 
@@ -219,8 +223,25 @@ builtins.input = __classes_input
 
 const turtleShim = `
 from js import window
+from pyodide.ffi import create_proxy
 
 _bridge = window.__classesPythonIdeTurtle
+_callback_proxies = {}
+
+def _release_proxy(proxy):
+    if proxy is not None and hasattr(proxy, "destroy"):
+        proxy.destroy()
+
+def _stored_callback(kind, key, function):
+    storage_key = (kind, str(key))
+    _release_proxy(_callback_proxies.pop(storage_key, None))
+
+    if function is None:
+        return None
+
+    proxy = create_proxy(function)
+    _callback_proxies[storage_key] = proxy
+    return proxy
 
 class _Screen:
     def bgcolor(self, color):
@@ -236,10 +257,16 @@ class _Screen:
         _bridge.listen()
 
     def onkey(self, function, key):
-        _bridge.registerKey(str(key), function)
+        _bridge.registerKey(str(key), _stored_callback("key", key, function))
 
     def onkeypress(self, function, key=None):
-        _bridge.registerKey(str(key or ""), function)
+        _bridge.registerKey(str(key or ""), _stored_callback("key", key or "", function))
+
+    def onclick(self, function, btn=1, add=None):
+        _bridge.registerClick(str(btn), _stored_callback("click", btn, function))
+
+    def onscreenclick(self, function, btn=1, add=None):
+        self.onclick(function, btn, add)
 
     def title(self, *_args):
         return None
@@ -427,6 +454,8 @@ def write(text, *args, **kwargs): _default.write(text, *args, **kwargs)
 def listen(): _screen.listen()
 def onkey(function, key): _screen.onkey(function, key)
 def onkeypress(function, key=None): _screen.onkeypress(function, key)
+def onclick(function, btn=1, add=None): _screen.onclick(function, btn, add)
+def onscreenclick(function, btn=1, add=None): _screen.onscreenclick(function, btn, add)
 def mainloop(): _screen.mainloop()
 def done(): _screen.mainloop()
 `;

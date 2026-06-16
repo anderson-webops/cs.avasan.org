@@ -87,10 +87,21 @@ pen = turtle.Turtle()
 pen.color("teal")
 pen.pensize(3)
 
-for side in range(4):
-\tpen.forward(100)
-\tpen.right(90)
+def move_forward():
+\tpen.forward(30)
 
+def turn_left():
+\tpen.left(20)
+
+def draw_dot(x, y):
+\tpen.penup()
+\tpen.goto(x, y)
+\tpen.pendown()
+\tpen.dot(18, "coral")
+
+screen.onkey(move_forward, "Up")
+screen.onkey(turn_left, "Left")
+screen.onclick(draw_dot)
 screen.listen()
 `;
 
