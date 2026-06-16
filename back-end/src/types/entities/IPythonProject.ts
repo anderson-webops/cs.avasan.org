@@ -1,6 +1,6 @@
 import type { Types } from "mongoose";
 
-export type PythonProjectMode = "pgzero" | "python" | "turtle";
+export type PythonProjectMode = "data" | "pgzero" | "python" | "turtle";
 
 export interface PythonProjectFile {
 	name: string;

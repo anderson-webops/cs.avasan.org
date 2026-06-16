@@ -3,7 +3,7 @@ import { api } from "@/api";
 const WHITESPACE_RE = /\s+/g;
 const PYTHON_FILE_NAME_RE = /^[A-Za-z_][\w.-]*\.py$/;
 
-export type PythonIdeMode = "pgzero" | "python" | "turtle";
+export type PythonIdeMode = "data" | "pgzero" | "python" | "turtle";
 
 export interface PythonIdeFile {
 	name: string;
@@ -78,13 +78,38 @@ def update():
 pgzrun.go()
 `;
 
+export const dataScienceStarterCode = `import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+scores = pd.DataFrame({
+\t"student": ["Ari", "Bao", "Cleo", "Dev"],
+\t"pre": [62, 71, 58, 80],
+\t"post": [81, 85, 76, 90],
+})
+
+scores["growth"] = scores["post"] - scores["pre"]
+print(scores)
+print()
+print("Average growth:", round(scores["growth"].mean(), 2))
+
+plt.figure(figsize=(7, 4))
+plt.bar(scores["student"], scores["growth"], color="#0f766e")
+plt.title("Growth from pre-check to post-check")
+plt.xlabel("Student")
+plt.ylabel("Point growth")
+plt.tight_layout()
+`;
+
 export function getPythonIdeModeLabel(mode: PythonIdeMode) {
+	if (mode === "data") return "Data / AI";
 	if (mode === "pgzero") return "PyGame Zero";
 	if (mode === "turtle") return "Turtle";
 	return "Python";
 }
 
 function getStarterCode(mode: PythonIdeMode) {
+	if (mode === "data") return dataScienceStarterCode;
 	if (mode === "pgzero") return pgzeroStarterCode;
 	if (mode === "turtle") return turtleStarterCode;
 	return pythonStarterCode;
@@ -97,11 +122,13 @@ export function createPythonIdeProject(
 	return {
 		_id: `local-${crypto.randomUUID()}`,
 		title:
-			mode === "pgzero"
-				? "PyGame Zero Game"
-				: mode === "turtle"
-					? "Turtle Drawing"
-					: "Python Practice",
+			mode === "data"
+				? "Data / AI Notebook"
+				: mode === "pgzero"
+					? "PyGame Zero Game"
+					: mode === "turtle"
+						? "Turtle Drawing"
+						: "Python Practice",
 		mode,
 		files: [
 			{

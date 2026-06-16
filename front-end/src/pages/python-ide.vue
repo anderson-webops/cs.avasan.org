@@ -4,7 +4,11 @@ import type {
 	PythonIdeMode,
 	PythonIdeProject
 } from "@/modules/pythonIde";
-import type { GameBridge, TurtleBridge } from "@/modules/pythonIdeRuntime";
+import type {
+	GameBridge,
+	RuntimeArtifact,
+	TurtleBridge
+} from "@/modules/pythonIdeRuntime";
 import { storeToRefs } from "pinia";
 import {
 	computed,
@@ -36,6 +40,15 @@ interface OutputLine {
 	id: number;
 	kind: "stdout" | "stderr" | "system";
 	text: string;
+}
+
+interface RuntimeArtifactView {
+	id: number;
+	title: string;
+	mimeType: string;
+	dataUrl?: string;
+	srcdoc?: string;
+	text?: string;
 }
 
 interface TurtleState {
@@ -71,12 +84,14 @@ const selectedProjectID = ref("");
 const newFileName = ref("");
 const inputText = ref("");
 const outputLines = ref<OutputLine[]>([]);
+const runtimeArtifacts = ref<RuntimeArtifactView[]>([]);
 const isLoading = ref(true);
 const isSaving = ref(false);
 const isRunning = ref(false);
 const saveMessage = ref("Loading workspace");
 const runMessage = ref("Ready");
 const canvasRef = ref<HTMLCanvasElement | null>(null);
+const artifactCounter = ref(0);
 const outputCounter = ref(0);
 const keyHandlers = new Map<string, () => void>();
 const gameKeysDown = new Set<string>();
@@ -150,7 +165,8 @@ const usesDrawingCanvas = computed(
 );
 
 function normalizeProjectMode(value: string): PythonIdeMode {
-	if (value === "pgzero" || value === "turtle") return value;
+	if (value === "data" || value === "pgzero" || value === "turtle")
+		return value;
 	return "python";
 }
 
@@ -161,6 +177,24 @@ function appendOutput(kind: OutputLine["kind"], text: string) {
 		kind,
 		text
 	});
+}
+
+function appendArtifact(artifact: RuntimeArtifact) {
+	const view: RuntimeArtifactView = {
+		id: artifactCounter.value++,
+		title: artifact.title,
+		mimeType: artifact.mimeType
+	};
+
+	if (artifact.mimeType === "image/svg+xml") {
+		view.dataUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(artifact.data)}`;
+	} else if (artifact.mimeType === "text/html") {
+		view.srcdoc = artifact.data;
+	} else {
+		view.text = artifact.data;
+	}
+
+	runtimeArtifacts.value.push(view);
 }
 
 function touchSelectedProject() {
@@ -383,6 +417,7 @@ function deleteFile(file: PythonIdeFile) {
 
 function clearOutput() {
 	outputLines.value = [];
+	runtimeArtifacts.value = [];
 }
 
 function canvasCoordinates(x: number, y: number) {
@@ -781,14 +816,17 @@ async function runCurrentProject() {
 			mode: project.mode,
 			gameBridge,
 			turtleBridge,
+			onArtifact: appendArtifact,
 			onOutput: appendOutput
 		});
 		runMessage.value =
-			project.mode === "pgzero"
-				? "Game running"
-				: project.mode === "turtle"
-					? "Drawing ready"
-					: "Run complete";
+			project.mode === "data"
+				? "Analysis ready"
+				: project.mode === "pgzero"
+					? "Game running"
+					: project.mode === "turtle"
+						? "Drawing ready"
+						: "Run complete";
 	} catch (error) {
 		const message =
 			error instanceof Error ? error.message : "Python run failed.";
@@ -923,7 +961,8 @@ onBeforeUnmount(() => {
 				<p>
 					Build multi-file Python projects, run standard Python code,
 					and use the Turtle canvas for drawing and keyboard-driven
-					lessons or PyGame Zero game projects.
+					lessons, PyGame Zero game projects, or data/AI notebooks
+					with rendered charts.
 				</p>
 			</div>
 			<div class="python-ide-status" aria-live="polite">
@@ -952,6 +991,14 @@ onBeforeUnmount(() => {
 								@click="createProject('python')"
 							>
 								Py
+							</button>
+							<button
+								class="icon-action"
+								title="New data/AI notebook"
+								type="button"
+								@click="createProject('data')"
+							>
+								Da
 							</button>
 							<button
 								class="icon-action"
@@ -1072,6 +1119,7 @@ onBeforeUnmount(() => {
 							@change="updateProjectMode"
 						>
 							<option value="python">Python</option>
+							<option value="data">Data / AI</option>
 							<option value="turtle">Python Turtle</option>
 							<option value="pgzero">PyGame Zero</option>
 						</select>
@@ -1145,6 +1193,35 @@ onBeforeUnmount(() => {
 									queueGamePointerEvent($event, 'mouseup')
 								"
 							/>
+						</div>
+
+						<div
+							v-if="runtimeArtifacts.length"
+							class="artifact-list"
+							aria-label="Rendered Python charts and reports"
+						>
+							<figure
+								v-for="artifact in runtimeArtifacts"
+								:key="artifact.id"
+								class="artifact-card"
+							>
+								<figcaption>
+									<span>{{ artifact.title }}</span>
+									<small>{{ artifact.mimeType }}</small>
+								</figcaption>
+								<img
+									v-if="artifact.dataUrl"
+									:alt="artifact.title"
+									:src="artifact.dataUrl"
+								/>
+								<iframe
+									v-else-if="artifact.srcdoc"
+									sandbox="allow-scripts"
+									:srcdoc="artifact.srcdoc"
+									:title="artifact.title"
+								/>
+								<pre v-else>{{ artifact.text }}</pre>
+							</figure>
 						</div>
 
 						<div class="input-output-grid">
@@ -1515,6 +1592,62 @@ html.dark .python-ide-status strong {
 	border: 1px solid var(--color-border);
 	border-radius: 14px;
 	background: #fff;
+}
+
+.artifact-list {
+	display: grid;
+	gap: 1rem;
+	max-height: 34rem;
+	overflow: auto;
+	padding: 1rem;
+	border-bottom: 1px solid var(--color-border);
+	background: #f8fafc;
+}
+
+.artifact-card {
+	display: grid;
+	gap: 0.75rem;
+	margin: 0;
+	padding: 0.85rem;
+	border: 1px solid var(--color-border);
+	border-radius: 14px;
+	background: #fff;
+	box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07);
+}
+
+.artifact-card figcaption {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	color: #0f172a;
+	font-weight: 800;
+}
+
+.artifact-card figcaption small {
+	color: #64748b;
+	font-size: 0.74rem;
+	font-weight: 700;
+}
+
+.artifact-card img,
+.artifact-card iframe {
+	width: 100%;
+	min-height: 18rem;
+	border: 0;
+	border-radius: 10px;
+	background: #fff;
+}
+
+.artifact-card img {
+	min-height: 0;
+	object-fit: contain;
+}
+
+.artifact-card pre {
+	max-height: 22rem;
+	margin: 0;
+	overflow: auto;
+	white-space: pre-wrap;
 }
 
 .input-output-grid {

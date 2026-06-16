@@ -1,4 +1,4 @@
-import type { PythonIdeFile } from "@/modules/pythonIde";
+import type { PythonIdeFile, PythonIdeMode } from "@/modules/pythonIde";
 
 const PYODIDE_VERSION = "314.0.0";
 const PYODIDE_INDEX_URL = `https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSION}/full/`;
@@ -7,6 +7,12 @@ const PROJECT_ROOT = "/home/pyodide/classes_project";
 const PYTHON_EXTENSION_RE = /\.py$/;
 const IMPORT_MODULE_RE = /^import\s+([A-Za-z_]\w*)/;
 const FROM_IMPORT_MODULE_RE = /^from\s+([A-Za-z_]\w*)\s+import\b/;
+const MICROPIP_PACKAGES = new Map([
+	["altair", "altair"],
+	["networkx", "networkx"],
+	["seaborn", "seaborn"]
+]);
+const BROWSER_SHIM_MODULES = new Set(["keras", "streamlit", "tensorflow"]);
 
 interface PyodideAPI {
 	FS: {
@@ -14,6 +20,7 @@ interface PyodideAPI {
 		mkdirTree: (path: string) => void;
 		writeFile: (path: string, data: string) => void;
 	};
+	loadPackage?: (packages: string | string[]) => Promise<void>;
 	loadPackagesFromImports: (code: string) => Promise<void>;
 	runPython: (code: string) => unknown;
 	runPythonAsync: (code: string) => Promise<unknown>;
@@ -27,10 +34,21 @@ interface LoadPyodideOptions {
 
 declare global {
 	interface Window {
+		__classesPythonIdeArtifacts?: ArtifactBridge;
 		__classesPythonIdeGame?: GameBridge;
 		loadPyodide?: (options: LoadPyodideOptions) => Promise<PyodideAPI>;
 		__classesPythonIdeTurtle?: TurtleBridge;
 	}
+}
+
+export interface RuntimeArtifact {
+	title: string;
+	mimeType: string;
+	data: string;
+}
+
+interface ArtifactBridge {
+	emit: (title: string, mimeType: string, data: string) => void;
 }
 
 export interface GameBridge {
@@ -98,9 +116,10 @@ export interface RunPythonProjectOptions {
 	files: PythonIdeFile[];
 	activeFileName: string;
 	inputText: string;
-	mode: "pgzero" | "python" | "turtle";
+	mode: PythonIdeMode;
 	gameBridge: GameBridge;
 	turtleBridge: TurtleBridge;
+	onArtifact: (artifact: RuntimeArtifact) => void;
 	onOutput: (kind: "stdout" | "stderr" | "system", text: string) => void;
 }
 
@@ -856,15 +875,192 @@ def __classes_pgzero_tick():
 install_builtins()
 `;
 
+const artifactShim = `
+from js import window
+import io
+import json
+
+_bridge = window.__classesPythonIdeArtifacts
+
+def emit(title, mime_type, data):
+    _bridge.emit(str(title), str(mime_type), str(data))
+
+def emit_html(title, html):
+    emit(title, "text/html", html)
+
+def emit_json(title, value):
+    emit(title, "application/json", json.dumps(value, indent=2, default=str))
+
+def emit_matplotlib_figure(fig=None, title="Matplotlib figure"):
+    if fig is None:
+        import matplotlib.pyplot as plt
+        fig = plt.gcf()
+
+    buffer = io.StringIO()
+    fig.savefig(buffer, format="svg", bbox_inches="tight")
+    emit(title, "image/svg+xml", buffer.getvalue())
+
+def emit_matplotlib_figures():
+    try:
+        import matplotlib.pyplot as plt
+    except Exception:
+        return
+
+    figure_numbers = list(plt.get_fignums())
+    for figure_number in figure_numbers:
+        figure = plt.figure(figure_number)
+        emit_matplotlib_figure(figure, "Matplotlib figure {}".format(figure_number))
+
+    if figure_numbers:
+        plt.close("all")
+
+def show_chart(chart, title="Chart"):
+    if hasattr(chart, "to_html"):
+        emit_html(title, chart.to_html())
+        return
+
+    if hasattr(chart, "to_json"):
+        emit(title, "application/json", chart.to_json())
+        return
+
+    emit(title, "text/plain", chart)
+`;
+
+const streamlitShim = `
+from _classes_artifacts import emit_html, emit_json, emit_matplotlib_figure, emit_matplotlib_figures, show_chart
+
+def write(*values, **_kwargs):
+    print(*values)
+
+def text(value=""):
+    print(value)
+
+def caption(value=""):
+    print(value)
+
+def title(value=""):
+    print(value)
+
+def header(value=""):
+    print(value)
+
+def subheader(value=""):
+    print(value)
+
+def markdown(value="", unsafe_allow_html=False, **_kwargs):
+    if unsafe_allow_html:
+        emit_html("Markdown", str(value))
+    else:
+        print(value)
+
+def dataframe(value, **_kwargs):
+    if hasattr(value, "to_html"):
+        emit_html("Dataframe", value.to_html())
+    else:
+        print(value)
+
+def table(value):
+    dataframe(value)
+
+def json(value, **_kwargs):
+    emit_json("JSON", value)
+
+def pyplot(fig=None, **_kwargs):
+    if fig is None:
+        emit_matplotlib_figures()
+    else:
+        emit_matplotlib_figure(fig)
+
+def altair_chart(chart, **_kwargs):
+    show_chart(chart, "Altair chart")
+
+def line_chart(data, **_kwargs):
+    import matplotlib.pyplot as plt
+    figure = plt.figure(figsize=(7, 4))
+    axis = figure.add_subplot(111)
+    data.plot(ax=axis)
+    emit_matplotlib_figure(figure, "Line chart")
+
+def bar_chart(data, **_kwargs):
+    import matplotlib.pyplot as plt
+    figure = plt.figure(figsize=(7, 4))
+    axis = figure.add_subplot(111)
+    data.plot(kind="bar", ax=axis)
+    emit_matplotlib_figure(figure, "Bar chart")
+
+def set_page_config(**_kwargs):
+    return None
+
+def stop():
+    raise SystemExit
+
+class _Sidebar:
+    def write(self, *values, **kwargs):
+        write(*values, **kwargs)
+
+    def markdown(self, *values, **kwargs):
+        markdown(*values, **kwargs)
+
+    def selectbox(self, _label, options, index=0, **_kwargs):
+        return list(options)[index]
+
+    def slider(self, _label, min_value=0, max_value=100, value=None, **_kwargs):
+        return value if value is not None else min_value
+
+sidebar = _Sidebar()
+`;
+
+const unavailableMlShim = `
+_MESSAGE = (
+    "TensorFlow/Keras model training is not available inside this browser IDE. "
+    "Use Google Colab or a local Python environment for neural-network lessons."
+)
+
+class _Unavailable:
+    def __getattr__(self, _name):
+        raise RuntimeError(_MESSAGE)
+
+    def __call__(self, *_args, **_kwargs):
+        raise RuntimeError(_MESSAGE)
+
+keras = _Unavailable()
+layers = _Unavailable()
+models = _Unavailable()
+optimizers = _Unavailable()
+datasets = _Unavailable()
+
+def __getattr__(_name):
+    raise RuntimeError(_MESSAGE)
+`;
+
 function ensureProjectDirectory(pyodide: PyodideAPI) {
 	if (!pyodide.FS.analyzePath(PROJECT_ROOT).exists) {
 		pyodide.FS.mkdirTree(PROJECT_ROOT);
 	}
 }
 
+function importedTopLevelModules(files: PythonIdeFile[]) {
+	const modules = new Set<string>();
+
+	for (const line of files
+		.map(file => file.content)
+		.join("\n")
+		.split("\n")) {
+		const trimmed = line.trim();
+		const importMatch = trimmed.match(IMPORT_MODULE_RE);
+		const fromMatch = trimmed.match(FROM_IMPORT_MODULE_RE);
+		const moduleName = importMatch?.[1] ?? fromMatch?.[1];
+		if (moduleName) modules.add(moduleName);
+	}
+
+	return modules;
+}
+
 function packageScanCode(files: PythonIdeFile[]) {
 	const localModules = new Set([
 		"_classes_pgzero",
+		"_classes_artifacts",
+		...BROWSER_SHIM_MODULES,
 		"pgzero",
 		"pgzrun",
 		"pygame",
@@ -882,13 +1078,64 @@ function packageScanCode(files: PythonIdeFile[]) {
 			const importMatch = trimmed.match(IMPORT_MODULE_RE);
 			const fromMatch = trimmed.match(FROM_IMPORT_MODULE_RE);
 			const moduleName = importMatch?.[1] ?? fromMatch?.[1];
-			return !moduleName || !localModules.has(moduleName);
+			return (
+				!moduleName ||
+				(!localModules.has(moduleName) &&
+					!MICROPIP_PACKAGES.has(moduleName))
+			);
 		})
 		.join("\n");
 }
 
+async function installMicropipPackages(
+	pyodide: PyodideAPI,
+	modules: Set<string>,
+	onOutput: RunPythonProjectOptions["onOutput"]
+) {
+	const packages = [...modules]
+		.map(moduleName => MICROPIP_PACKAGES.get(moduleName))
+		.filter((packageName): packageName is string => !!packageName);
+
+	if (!packages.length) return;
+
+	if (!pyodide.loadPackage) {
+		throw new Error(
+			`Python package installer is unavailable; cannot install ${packages.join(", ")}.`
+		);
+	}
+
+	onOutput("system", `Loading Python packages: ${packages.join(", ")}`);
+	await pyodide.loadPackage("micropip");
+	await pyodide.runPythonAsync(`
+import micropip
+await micropip.install(__import__("json").loads(${escapePythonString(JSON.stringify(packages))}))
+`);
+}
+
+function warnForBrowserLimitedLibraries(
+	modules: Set<string>,
+	onOutput: RunPythonProjectOptions["onOutput"]
+) {
+	if (modules.has("streamlit")) {
+		onOutput(
+			"system",
+			"Streamlit is running through a browser teaching shim: st.write/dataframe/pyplot/altair_chart render here, but a full Streamlit server still needs local Python or deployment."
+		);
+	}
+
+	if (modules.has("tensorflow") || modules.has("keras")) {
+		onOutput(
+			"system",
+			"TensorFlow/Keras neural-network training is too heavy for this browser IDE. Use Colab or local Python for those lessons; this project will fail with a clear message if TensorFlow APIs are called."
+		);
+	}
+}
+
 function writeRuntimeShims(pyodide: PyodideAPI) {
 	pyodide.FS.writeFile(`${PROJECT_ROOT}/turtle.py`, turtleShim);
+	pyodide.FS.writeFile(`${PROJECT_ROOT}/_classes_artifacts.py`, artifactShim);
+	pyodide.FS.writeFile(`${PROJECT_ROOT}/streamlit.py`, streamlitShim);
+	pyodide.FS.writeFile(`${PROJECT_ROOT}/keras.py`, unavailableMlShim);
 	pyodide.FS.writeFile(`${PROJECT_ROOT}/_classes_pgzero.py`, pgzeroShim);
 	pyodide.FS.writeFile(
 		`${PROJECT_ROOT}/pgzrun.py`,
@@ -914,12 +1161,29 @@ function writeRuntimeShims(pyodide: PyodideAPI) {
 		`${PROJECT_ROOT}/pgzero/builtins.py`,
 		"from _classes_pgzero import *\n"
 	);
+
+	if (!pyodide.FS.analyzePath(`${PROJECT_ROOT}/tensorflow`).exists) {
+		pyodide.FS.mkdirTree(`${PROJECT_ROOT}/tensorflow`);
+	}
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/tensorflow/__init__.py`,
+		unavailableMlShim
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/tensorflow/keras.py`,
+		unavailableMlShim
+	);
 }
 
 export async function runPythonProject(options: RunPythonProjectOptions) {
 	const pyodide = await loadRuntime();
 	window.__classesPythonIdeTurtle = options.turtleBridge;
 	window.__classesPythonIdeGame = options.gameBridge;
+	window.__classesPythonIdeArtifacts = {
+		emit(title: string, mimeType: string, data: string) {
+			options.onArtifact({ title, mimeType, data });
+		}
+	};
 	options.gameBridge.stopLoop();
 	if (options.mode === "pgzero") {
 		options.gameBridge.reset();
@@ -939,6 +1203,9 @@ export async function runPythonProject(options: RunPythonProjectOptions) {
 	}
 
 	ensureProjectDirectory(pyodide);
+	const importedModules = importedTopLevelModules(options.files);
+	warnForBrowserLimitedLibraries(importedModules, options.onOutput);
+
 	for (const file of options.files) {
 		pyodide.FS.writeFile(`${PROJECT_ROOT}/${file.name}`, file.content);
 	}
@@ -951,6 +1218,7 @@ export async function runPythonProject(options: RunPythonProjectOptions) {
 		throw new Error("Project does not have a runnable Python file.");
 
 	await pyodide.loadPackagesFromImports(packageScanCode(options.files));
+	await installMicropipPackages(pyodide, importedModules, options.onOutput);
 
 	pyodide.runPython(`
 import os
@@ -962,11 +1230,33 @@ ${createInputBootstrap(options.inputText)}
 if ${options.mode === "pgzero" ? "True" : "False"}:
     import _classes_pgzero
     _classes_pgzero.install_builtins()
+if ${options.mode === "data" || importedModules.has("matplotlib") ? "True" : "False"}:
+    try:
+        import matplotlib
+        matplotlib.use("Agg")
+    except Exception:
+        pass
+try:
+    import builtins
+    from _classes_artifacts import emit_matplotlib_figures, show_chart
+    builtins.show_chart = show_chart
+    builtins.show_plots = emit_matplotlib_figures
+except Exception:
+    pass
 `);
 
 	await pyodide.runPythonAsync(`
 __name__ = "__main__"
 exec(compile(open(${escapePythonString(activeFile.name)}, "r", encoding="utf-8").read(), ${escapePythonString(activeFile.name)}, "exec"), globals())
+`);
+
+	await pyodide.runPythonAsync(`
+try:
+    from _classes_artifacts import emit_matplotlib_figures
+    emit_matplotlib_figures()
+except Exception as error:
+    import sys
+    print("Could not render chart artifact: {}".format(error), file=sys.stderr)
 `);
 
 	if (options.mode === "pgzero") {

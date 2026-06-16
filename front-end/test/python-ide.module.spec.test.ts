@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
 	createPythonIdeProject,
+	dataScienceStarterCode,
 	getPythonIdeModeLabel,
 	isValidPythonFileName,
 	normalizePythonFileName,
@@ -8,6 +9,16 @@ import {
 } from "../src/modules/pythonIde";
 
 describe("python IDE project helpers", () => {
+	it("creates data/AI notebook starter projects", () => {
+		const project = createPythonIdeProject("data");
+
+		expect(project.mode).toBe("data");
+		expect(project.title).toBe("Data / AI Notebook");
+		expect(project.files[0]?.content).toBe(dataScienceStarterCode);
+		expect(project.files[0]?.content).toContain("pandas");
+		expect(project.files[0]?.content).toContain("plt.bar");
+	});
+
 	it("creates PyGame Zero starter projects", () => {
 		const project = createPythonIdeProject("pgzero");
 
@@ -19,6 +30,7 @@ describe("python IDE project helpers", () => {
 	});
 
 	it("labels supported runtime modes", () => {
+		expect(getPythonIdeModeLabel("data")).toBe("Data / AI");
 		expect(getPythonIdeModeLabel("python")).toBe("Python");
 		expect(getPythonIdeModeLabel("turtle")).toBe("Turtle");
 		expect(getPythonIdeModeLabel("pgzero")).toBe("PyGame Zero");
