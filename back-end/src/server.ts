@@ -34,8 +34,8 @@ async function main() {
 	app.set("trust proxy", 1);
 
 	// 1) parsers first (with limits)
-	app.use(bodyParser.urlencoded({ extended: false, limit: "256kb" }));
-	app.use(bodyParser.json({ limit: "256kb" }));
+	app.use(bodyParser.urlencoded({ extended: false, limit: "1mb" }));
+	app.use(bodyParser.json({ limit: "1mb" }));
 
 	// 2) sessions BEFORE any route that needs req.session
 	///   COOKIES   ///

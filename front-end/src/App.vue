@@ -9,6 +9,7 @@ const route = useRoute();
 const noindexMatchers = [
 	/^\/admin(?:\/|$)/,
 	/^\/profile(?:\/|$)/,
+	/^\/python-ide(?:\/|$)/,
 	/^\/api(?:\/|$)/
 ];
 const canonicalUrl = computed(() =>
@@ -112,6 +113,15 @@ useHead(
 				{
 					rel: "dns-prefetch",
 					href: "//scheduler.classes.jacobdanderson.net"
+				},
+				{
+					rel: "dns-prefetch",
+					href: "//cdn.jsdelivr.net"
+				},
+				{
+					rel: "preconnect",
+					href: "https://cdn.jsdelivr.net",
+					crossorigin: "anonymous"
 				},
 				{
 					rel: "canonical",

@@ -114,6 +114,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/python-ide': RouteRecordInfo<
+      '/python-ide',
+      '/python-ide',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/README': RouteRecordInfo<
       '/README',
       '/README',
@@ -238,6 +245,12 @@ declare module 'vue-router/auto-routes' {
     'src/pages/profile.vue': {
       routes:
         | '/profile'
+      views:
+        | never
+    }
+    'src/pages/python-ide.vue': {
+      routes:
+        | '/python-ide'
       views:
         | never
     }

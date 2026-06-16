@@ -3,6 +3,12 @@ import type { Router } from "express";
 import express from "express";
 import { logout as logoutUser } from "../controllers/auth/authController.js";
 import {
+	createPythonProject,
+	deletePythonProject,
+	listPythonProjects,
+	updatePythonProject
+} from "../controllers/users/pythonProjectController.js";
+import {
 	createUser,
 	getAllUsers,
 	getLoggedInUser,
@@ -84,6 +90,12 @@ router.delete("/admin/:userID", validAdmin, deleteUserAsAdmin);
 
 // Get logged in user
 router.get("/loggedin/communications", validUser, getLoggedInUserCommunications);
+
+// Persist logged-in student Python IDE projects
+router.get("/loggedin/python-projects", validUser, listPythonProjects);
+router.post("/loggedin/python-projects", validUser, createPythonProject);
+router.put("/loggedin/python-projects/:projectID", validUser, updatePythonProject);
+router.delete("/loggedin/python-projects/:projectID", validUser, deletePythonProject);
 
 // Get logged in user
 router.get("/loggedin", validUser, getLoggedInUser);

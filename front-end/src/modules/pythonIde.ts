@@ -1,0 +1,143 @@
+import { api } from "@/api";
+
+const WHITESPACE_RE = /\s+/g;
+const PYTHON_FILE_NAME_RE = /^[A-Za-z_][\w.-]*\.py$/;
+
+export type PythonIdeMode = "python" | "turtle";
+
+export interface PythonIdeFile {
+	name: string;
+	content: string;
+}
+
+export interface PythonIdeProject {
+	_id: string;
+	title: string;
+	mode: PythonIdeMode;
+	files: PythonIdeFile[];
+	activeFileName: string;
+	createdAt?: string;
+	updatedAt?: string;
+}
+
+export interface PythonIdeProjectPayload {
+	title?: string;
+	mode?: PythonIdeMode;
+	files?: PythonIdeFile[];
+	activeFileName?: string;
+}
+
+export const pythonIdeStorageNamespace = "classes-python-ide-projects";
+
+export const pythonStarterCode = `print("Hello, Python!")
+
+name = input("What is your name? ")
+print(f"Nice to meet you, {name}.")
+`;
+
+export const turtleStarterCode = `import turtle
+
+screen = turtle.Screen()
+screen.bgcolor("white")
+
+pen = turtle.Turtle()
+pen.color("teal")
+pen.pensize(3)
+
+for side in range(4):
+\tpen.forward(100)
+\tpen.right(90)
+
+screen.listen()
+`;
+
+export function createPythonIdeProject(
+	mode: PythonIdeMode = "python"
+): PythonIdeProject {
+	const now = new Date().toISOString();
+	return {
+		_id: `local-${crypto.randomUUID()}`,
+		title: mode === "turtle" ? "Turtle Drawing" : "Python Practice",
+		mode,
+		files: [
+			{
+				name: "main.py",
+				content:
+					mode === "turtle" ? turtleStarterCode : pythonStarterCode
+			}
+		],
+		activeFileName: "main.py",
+		createdAt: now,
+		updatedAt: now
+	};
+}
+
+export function pythonIdeStorageKey(userID?: string | null) {
+	return `${pythonIdeStorageNamespace}:${userID || "anonymous"}`;
+}
+
+export function normalizePythonFileName(value: string) {
+	const cleaned = value.trim().replaceAll(WHITESPACE_RE, "_");
+	if (!cleaned) return "";
+	return cleaned.endsWith(".py") ? cleaned : `${cleaned}.py`;
+}
+
+export function isValidPythonFileName(value: string) {
+	return PYTHON_FILE_NAME_RE.test(value);
+}
+
+export function loadLocalPythonProjects(userID?: string | null) {
+	if (typeof window === "undefined") return [];
+
+	try {
+		const raw = window.localStorage.getItem(pythonIdeStorageKey(userID));
+		if (!raw) return [];
+		const parsed = JSON.parse(raw) as PythonIdeProject[];
+		return Array.isArray(parsed) ? parsed : [];
+	} catch {
+		return [];
+	}
+}
+
+export function saveLocalPythonProjects(
+	projects: PythonIdeProject[],
+	userID?: string | null
+) {
+	if (typeof window === "undefined") return;
+	window.localStorage.setItem(
+		pythonIdeStorageKey(userID),
+		JSON.stringify(projects)
+	);
+}
+
+export async function fetchPythonIdeProjects() {
+	const { data } = await api.get<{ projects: PythonIdeProject[] }>(
+		"/users/loggedin/python-projects"
+	);
+	return data.projects;
+}
+
+export async function createRemotePythonIdeProject(
+	payload: PythonIdeProjectPayload
+) {
+	const { data } = await api.post<{ project: PythonIdeProject }>(
+		"/users/loggedin/python-projects",
+		payload
+	);
+	return data.project;
+}
+
+export async function updateRemotePythonIdeProject(
+	projectID: string,
+	payload: PythonIdeProjectPayload
+) {
+	const { data } = await api.put<{ project: PythonIdeProject }>(
+		`/users/loggedin/python-projects/${projectID}`,
+		payload
+	);
+	return data.project;
+}
+
+export async function deleteRemotePythonIdeProject(projectID: string) {
+	await api.delete(`/users/loggedin/python-projects/${projectID}`);
+}
