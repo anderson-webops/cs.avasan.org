@@ -58,11 +58,16 @@ const routeScenarios = [
 			: ["/admin", "/admin/mdmail", "/admin/student-management"]
 	}
 ];
-const viewportScenarios = [
-	{ height: 900, name: "mobile", width: 390 },
-	{ height: 1000, name: "tablet", width: 768 },
-	{ height: 1000, name: "desktop", width: 1280 }
-];
+const viewportScenarios = runFullMatrix
+	? [
+			{ height: 900, name: "mobile", width: 390 },
+			{ height: 1000, name: "tablet", width: 768 },
+			{ height: 1000, name: "desktop", width: 1280 }
+		]
+	: [
+			{ height: 900, name: "mobile", width: 390 },
+			{ height: 1000, name: "desktop", width: 1280 }
+		];
 const mediaScenarios = [
 	{
 		colorScheme: "light",
@@ -291,6 +296,9 @@ try {
 					const url = `${baseUrl}${route}`;
 					const page = await browser.newPage();
 					try {
+						console.log(
+							`a11y checking: ${url} (${scenario.name}, ${viewport.name}, ${media.name})`
+						);
 						page.setDefaultNavigationTimeout(15_000);
 						await page.setViewport({
 							deviceScaleFactor: 1,
