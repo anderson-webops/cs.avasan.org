@@ -273,6 +273,34 @@ function closeServer(server) {
 	return new Promise(resolve => server.close(resolve));
 }
 
+function waitForChildExit(child) {
+	return new Promise(resolve => {
+		if (child.exitCode !== null || child.signalCode) {
+			resolve();
+			return;
+		}
+		child.once("exit", resolve);
+	});
+}
+
+async function stopChild(child) {
+	if (child.exitCode !== null || child.signalCode) return;
+
+	child.kill("SIGTERM");
+	const exited = await Promise.race([
+		waitForChildExit(child).then(() => true),
+		new Promise(resolve => setTimeout(() => resolve(false), 5_000))
+	]);
+
+	if (exited) return;
+
+	child.kill("SIGKILL");
+	await Promise.race([
+		waitForChildExit(child),
+		new Promise(resolve => setTimeout(resolve, 2_000))
+	]);
+}
+
 const apiServer = createMockApiServer();
 const viteProcess = startVite();
 let browser;
@@ -380,6 +408,7 @@ try {
 	}
 } finally {
 	if (browser) await browser.close();
-	viteProcess.kill("SIGTERM");
+	await stopChild(viteProcess);
+	apiServer.closeAllConnections?.();
 	await closeServer(apiServer);
 }
