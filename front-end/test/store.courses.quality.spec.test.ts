@@ -1915,12 +1915,21 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toContain(
 				"**Output:** Complete a claim-evidence-reasoning response, a labeled diagram or data table, and one prediction about a changed condition"
 			);
+			expect(corpus).not.toContain(
+				"The activity should rely on accessible remote evidence"
+			);
+			expect(corpus).not.toContain(
+				"uses shared-screen materials, notes, paper, pencil, and"
+			);
 			expect(corpus).toMatch(
 				/No beakers, kits, or required household materials are needed|Physical supplies are optional only|shared digital resources|accessible remote evidence/
 			);
 			expect(corpus).toContain("claim-evidence-reasoning");
 			expect(corpus).not.toContain(
 				"Anchor the activity in web development workflow"
+			);
+			expect(corpus).not.toMatch(
+				/motion[^.\n]{0,120}particles, formulas, reactions|graph[^.\n]{0,120}particles, formulas, reactions/i
 			);
 		},
 		COURSE_SWEEP_TIMEOUT

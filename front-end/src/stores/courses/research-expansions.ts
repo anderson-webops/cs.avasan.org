@@ -522,7 +522,8 @@ function buildProjectModule(
 				content: [
 					`**Readiness check:** Before the ${courseLabel} capstone begins, prerequisite modules, project ladder, and assessment model are practiced on smaller artifacts.`,
 					`**Gate guidance:** The ${courseLabel} capstone is ready when it combines known skills in a larger context rather than introducing several untested ideas at once. The first version stays narrow, demonstrable, and easy to verify before optional polish is added.`,
-					`**Evidence of proficiency:** ${courseLabel} capstone work demonstrates the ability to state the goal, choose an approach, predict two risks, define tests or evidence, and explain what would count as a complete first version.`
+					`**Required gate artifact:** Write a short capstone brief that names the target user or problem, the exact deliverable, the core concept being reused from earlier modules, the minimum viable first version, and the evidence that will prove the first version works.`,
+					`**Evidence targets:**\n- The ${courseLabel} capstone has one ordinary path and one edge, failure, or misconception path.\n- The first milestone can be tested without completing every optional feature.\n- The explanation separates required behavior from polish.\n- Two risks are named with a mitigation, fallback, or narrowed scope.`
 				].join("\n\n")
 			}
 		],

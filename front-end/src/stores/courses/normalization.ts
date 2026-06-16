@@ -4787,38 +4787,107 @@ function diagnosticSupport(context: CourseTextContext) {
 	].join("\n\n");
 }
 
+function scienceCourseBand(context: CourseTextContext) {
+	if (context.courseId === "elementary-science") return "elementary science";
+	if (context.courseId === "middle-school-integrated-science")
+		return "middle-school science";
+	if (context.courseId === "intro-to-chemistry") return "chemistry";
+	if (context.courseId === "intro-to-physics") return "introductory physics";
+	if (context.courseId === "physics-level-2") return "physics modeling";
+
+	return "science";
+}
+
+function scienceTopicFocus(context: CourseTextContext) {
+	const text = moduleItemText(context);
+
+	if (/question|evidence|fair test|variable|scientist/.test(text))
+		return "questions, variables, observations, and fair comparisons";
+	if (/life|living|plant|animal|habitat|ecosystem|food chain/.test(text))
+		return "living systems, needs, habitats, and relationships";
+	if (
+		/cell|microscope|body system|genetic|trait|adapt|inherit|dna|species|population/.test(
+			text
+		)
+	) {
+		return "cells, body systems, traits, inheritance, and adaptation";
+	}
+	if (/weather|water|earth|rock|climate|hazard/.test(text))
+		return "Earth systems, weather patterns, water movement, and changing landforms";
+	if (
+		/force|motion|energy|wave|sound|light|electric|magnet|circuit/.test(
+			text
+		)
+	) {
+		return "forces, motion, energy transfer, waves, and field interactions";
+	}
+	if (/matter|solid|liquid|gas|particle|mixture|solution|density/.test(text))
+		return "matter, particle models, mixtures, solutions, and observable properties";
+	if (
+		/\batom|periodic|bond|formula|molecule|reaction|stoich|molar|mole\b|\bph\b|\bacid\b|\bbase\b/.test(
+			text
+		)
+	) {
+		return "particles, formulas, reactions, conservation, and chemical evidence";
+	}
+	if (/model|diagram|graph|data|measurement/.test(text))
+		return "models, measurements, graphs, data quality, and evidence limits";
+	if (/capstone|portfolio|master|final/.test(text))
+		return "evidence synthesis, model choice, limitations, and communication";
+
+	return "observable phenomena, models, data, vocabulary, and claim-evidence-reasoning";
+}
+
+function scienceEvidenceFormat(context: CourseTextContext) {
+	const text = moduleItemText(context);
+
+	if (/simulation|phet|model/.test(text))
+		return "simulation settings, screenshots, diagrams, and written observations";
+	if (/data|graph|measurement|table/.test(text))
+		return "provided data tables, graph features, measurements, and units";
+	if (/video|image|picture|case|detective|scenario/.test(text))
+		return "short media clips, images, scenario cards, and observation notes";
+	if (/project|challenge|capstone|portfolio/.test(text))
+		return "the provided source, a labeled model, a small data display, and a CER draft";
+
+	return "images, short readings, diagrams, public datasets, simulations, or structured notes";
+}
+
 function scienceSupport(context: CourseTextContext) {
 	const compact = (line: string) =>
 		compactGeneratedProjectSupport(context, [line])[0];
+	const band = scienceCourseBand(context);
+	const topic = scienceTopicFocus(context);
+	const evidenceFormat = scienceEvidenceFormat(context);
 	const remoteInvestigation = variantPrompt(context, [
 		subject =>
-			`${subject} uses shared-screen materials, notes, paper, pencil, and provided images, graphs, data, or simulations. ${subject} does not require beakers, kits, or household materials; any physical demonstration can be replaced with a diagram or data table.`,
+			`${subject} uses shared-screen materials and paper notes alongside ${evidenceFormat}. The ${band} work does not require beakers, kits, or household materials; any physical demonstration can be replaced with evidence from the provided resource.`,
 		subject =>
-			`${subject} is designed for a Zoom-safe workflow using provided visuals, readings, simulations, or datasets. ${subject} treats physical supplies as optional context only; the core evidence should be visible from notes, diagrams, tables, or screen-shared resources.`,
+			`${subject} is designed for a Zoom-safe ${band} workflow using ${evidenceFormat}. Physical supplies are optional only when the same question can be answered from notes, diagrams, tables, or screen-shared resources.`,
 		subject =>
-			`${subject} can be completed with a notebook, pencil, and shared digital resources. If ${subject} mentions a physical example, keep it optional and tie the required investigation to data, diagrams, models, or simulations.`,
+			`${subject} can be completed with a notebook, pencil, and shared digital resources focused on ${topic}. When a physical example appears, the required investigation still comes from data, diagrams, models, or simulations.`,
 		subject =>
-			`${subject} should rely on accessible remote evidence: images, short videos, graphs, public datasets, simulations, or structured discussion notes. Any hands-on observation must be safe, simple, and replaceable.`
+			`${subject} relies on accessible remote evidence: ${evidenceFormat}. Any hands-on observation must be safe, simple, optional, and replaceable with an equivalent source.`
 	]);
 	const output = variantPrompt(context, [
 		subject =>
-			`Complete a claim-evidence-reasoning response for ${subject}, plus a labeled diagram or data table and one prediction about a changed condition.`,
+			`Complete a claim-evidence-reasoning response for ${subject}, plus a labeled diagram or data table tied to ${topic}. Add one prediction about a changed condition.`,
 		subject =>
-			`Finish ${subject} with a labeled model or table, a short CER response, and one comparison between observation and inference.`,
+			`Finish ${subject} with a labeled model or table, a short CER response, and one comparison between observation and inference for ${topic}.`,
 		subject =>
-			`Record the evidence for ${subject}, annotate the model or data display, and write one claim that explains what the evidence supports.`,
+			`Record the evidence for ${subject}, annotate the model or data display, and write one claim about ${topic} that the evidence can support.`,
 		subject =>
-			`For ${subject}, produce a concise explanation that includes target vocabulary, evidence from the resource, and one limit or next-test idea.`
+			`For ${subject}, produce a concise explanation that includes target vocabulary, evidence from ${evidenceFormat}, and one limit or next-test idea.`
 	]);
 	const scienceExplanation = variantPrompt(context, [
 		subject =>
-			`Anchor ${subject} in ${subjectFocus(context)}. For ${subject}, record observations first, then build or annotate a model, and only then write the explanation.`,
+			`Anchor ${subject} in ${topic}. Record observations first, then build or annotate a model, and only then write the explanation.`,
 		subject =>
-			`Use ${subject} to connect the phenomenon, evidence source, model, and vocabulary before writing the final claim.`,
+			`Use ${subject} to connect the phenomenon, evidence source, model, and vocabulary for ${topic} before writing the final claim.`,
 		subject =>
-			`For ${subject}, separate what is directly observed from what the model explains, then use the evidence to support the claim.`,
+			`For ${subject}, separate what is directly observed from what the model explains, then use the evidence to support a claim about ${topic}.`,
 		subject =>
-			`Ground ${subject} in the provided data, visual, simulation, or reading, and make the model limitation visible when the explanation is written.`
+			`Ground ${subject} in ${evidenceFormat}, then make the model limitation visible when the explanation is written.`
 	]);
 
 	return [

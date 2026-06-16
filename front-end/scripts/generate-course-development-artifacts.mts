@@ -647,14 +647,14 @@ const publicPathwayAudit = courses.map(({ entry, course }) => {
 		courseName: course.name,
 		pathwayId: pathway?.id ?? "missing",
 		pathwayTitle: pathway?.title ?? "missing",
-		priority: pathway?.priority ?? "missing",
+		priority: pathway?.adminPriority ?? "missing",
 		outcomes: pathway?.outcomes.length ?? 0,
 		sequencingNotes: pathway?.sequencingNotes.length ?? 0,
 		projectExpectations: pathway?.projectExpectations.length ?? 0,
 		assessmentStyle: pathway?.assessmentStyle.length ?? 0,
 		sourceAndTooling: pathway?.sourceAndTooling.length ?? 0,
 		safetyAndAccess: pathway?.safetyAndAccess.length ?? 0,
-		expansionBacklog: pathway?.expansionBacklog.length ?? 0
+		expansionBacklog: pathway?.adminExpansionBacklog.length ?? 0
 	};
 });
 const unregisteredPathwayIds = [...coursePublicPathwayByCourseId.keys()]
@@ -665,7 +665,7 @@ writeJson("course-public-pathway-audit.json", {
 	pathways: coursePublicPathways.map(pathway => ({
 		id: pathway.id,
 		title: pathway.title,
-		priority: pathway.priority,
+		priority: pathway.adminPriority,
 		courseIds: pathway.courseIds
 	})),
 	courses: publicPathwayAudit,
