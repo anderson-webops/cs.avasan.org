@@ -257,6 +257,7 @@ function startVite() {
 			"--strictPort"
 		],
 		{
+			detached: process.platform !== "win32",
 			env: {
 				...process.env,
 				BROWSER: "none"
@@ -267,6 +268,21 @@ function startVite() {
 	child.stdout.on("data", data => writeServerLine("vite", data));
 	child.stderr.on("data", data => writeServerLine("vite", data));
 	return child;
+}
+
+function killChild(child, signal) {
+	if (!child.pid) return;
+
+	if (process.platform === "win32") {
+		child.kill(signal);
+		return;
+	}
+
+	try {
+		process.kill(-child.pid, signal);
+	} catch {
+		child.kill(signal);
+	}
 }
 
 function closeServer(server) {
@@ -286,7 +302,7 @@ function waitForChildExit(child) {
 async function stopChild(child) {
 	if (child.exitCode !== null || child.signalCode) return;
 
-	child.kill("SIGTERM");
+	killChild(child, "SIGTERM");
 	const exited = await Promise.race([
 		waitForChildExit(child).then(() => true),
 		new Promise(resolve => setTimeout(() => resolve(false), 5_000))
@@ -294,7 +310,7 @@ async function stopChild(child) {
 
 	if (exited) return;
 
-	child.kill("SIGKILL");
+	killChild(child, "SIGKILL");
 	await Promise.race([
 		waitForChildExit(child),
 		new Promise(resolve => setTimeout(resolve, 2_000))
