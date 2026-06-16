@@ -27,7 +27,41 @@ export interface PythonIdeProjectPayload {
 	activeFileName?: string;
 }
 
+export interface PythonIdeLibrarySupport {
+	name: string;
+	status: "browser" | "shim" | "local";
+	detail: string;
+}
+
 export const pythonIdeStorageNamespace = "classes-python-ide-projects";
+
+export const pythonIdeLibrarySupport: PythonIdeLibrarySupport[] = [
+	{
+		name: "Python standard library",
+		status: "browser",
+		detail: "Core course modules such as random, math, json, csv, time, pathlib, and collections run directly in the browser runtime."
+	},
+	{
+		name: "Turtle and PyGame Zero",
+		status: "shim",
+		detail: "Turtle drawing, Screen.onkey input, Actor, screen, keyboard, clock, Rect, and common PyGame Zero patterns run through course-specific browser shims."
+	},
+	{
+		name: "Data science stack",
+		status: "browser",
+		detail: "NumPy, pandas, matplotlib, and scikit-learn load through Pyodide; NetworkX, Altair, and Seaborn are installed on demand for imported projects."
+	},
+	{
+		name: "Streamlit-style reports",
+		status: "shim",
+		detail: "Common st.write, dataframe, pyplot, and altair_chart calls render as IDE output or artifacts, but full Streamlit apps still require a local/deployed server."
+	},
+	{
+		name: "TensorFlow / Keras",
+		status: "local",
+		detail: "Neural-network lessons should run in Colab or local Python. The browser IDE warns clearly when those heavy APIs are imported."
+	}
+];
 
 export const pythonStarterCode = `print("Hello, Python!")
 

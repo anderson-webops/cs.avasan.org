@@ -5,6 +5,7 @@ import {
 	getPythonIdeModeLabel,
 	isValidPythonFileName,
 	normalizePythonFileName,
+	pythonIdeLibrarySupport,
 	pgzeroStarterCode
 } from "../src/modules/pythonIde";
 
@@ -34,6 +35,23 @@ describe("python IDE project helpers", () => {
 		expect(getPythonIdeModeLabel("python")).toBe("Python");
 		expect(getPythonIdeModeLabel("turtle")).toBe("Turtle");
 		expect(getPythonIdeModeLabel("pgzero")).toBe("PyGame Zero");
+	});
+
+	it("documents browser and local course-library support", () => {
+		expect(
+			pythonIdeLibrarySupport.some(
+				entry =>
+					entry.name === "Data science stack" &&
+					entry.status === "browser"
+			)
+		).toBe(true);
+		expect(
+			pythonIdeLibrarySupport.some(
+				entry =>
+					entry.name === "TensorFlow / Keras" &&
+					entry.status === "local"
+			)
+		).toBe(true);
 	});
 
 	it("normalizes Python file names without accepting unsafe names", () => {
