@@ -1,5 +1,39 @@
-export const SCHEDULER_ORIGIN = "https://scheduler.classes.jacobdanderson.net";
+export const DEFAULT_SCHEDULER_ORIGIN =
+	"https://scheduler.classes.jacobdanderson.net";
+const httpProtocolPattern = /^https?:\/\//i;
+const protocolPattern = /^[a-z][a-z\d+.-]*:\/\//i;
+
+export function normalizeSchedulerOrigin(rawOrigin?: string) {
+	const trimmedOrigin = rawOrigin?.trim();
+	const originCandidate = trimmedOrigin || DEFAULT_SCHEDULER_ORIGIN;
+	if (
+		protocolPattern.test(originCandidate) &&
+		!httpProtocolPattern.test(originCandidate)
+	) {
+		return DEFAULT_SCHEDULER_ORIGIN;
+	}
+
+	const originWithProtocol = httpProtocolPattern.test(originCandidate)
+		? originCandidate
+		: `https://${originCandidate}`;
+
+	try {
+		const url = new URL(originWithProtocol);
+		if (url.protocol !== "http:" && url.protocol !== "https:") {
+			return DEFAULT_SCHEDULER_ORIGIN;
+		}
+
+		return url.origin;
+	} catch {
+		return DEFAULT_SCHEDULER_ORIGIN;
+	}
+}
+
+export const SCHEDULER_ORIGIN = normalizeSchedulerOrigin(
+	import.meta.env.VITE_SCHEDULER_ORIGIN
+);
 export const schedulerUrl = `${SCHEDULER_ORIGIN}/`;
+export const schedulerDnsPrefetchHref = `//${new URL(SCHEDULER_ORIGIN).host}`;
 export type SchedulerEmbedTheme = "light" | "dark";
 
 export function buildSchedulerEmbedUrl(theme?: SchedulerEmbedTheme) {
@@ -52,5 +86,6 @@ export function warmSchedulerConnections() {
 	}
 
 	schedulerWarmthApplied = true;
-	ensureHeadLink("dns-prefetch", "//scheduler.classes.jacobdanderson.net");
+	ensureHeadLink("dns-prefetch", schedulerDnsPrefetchHref);
+	ensureHeadLink("preconnect", SCHEDULER_ORIGIN);
 }

@@ -1,4 +1,9 @@
 <script lang="ts" setup>
+import {
+	SCHEDULER_ORIGIN,
+	schedulerDnsPrefetchHref
+} from "@/modules/scheduler";
+
 // https://github.com/vueuse/head
 // you can use this to manipulate the document head in any components,
 // they will be rendered correctly in the HTML results with vite-ssg
@@ -112,7 +117,11 @@ useHead(
 				},
 				{
 					rel: "dns-prefetch",
-					href: "//scheduler.classes.jacobdanderson.net"
+					href: schedulerDnsPrefetchHref
+				},
+				{
+					rel: "preconnect",
+					href: SCHEDULER_ORIGIN
 				},
 				{
 					rel: "dns-prefetch",

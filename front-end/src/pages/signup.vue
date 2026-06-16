@@ -4,6 +4,7 @@ import { isDark } from "@/composables/dark";
 import {
 	buildSchedulerEmbedUrl,
 	SCHEDULER_ORIGIN,
+	schedulerDnsPrefetchHref,
 	schedulerEmbedMessageSource,
 	schedulerEmbedResizeType,
 	schedulerEmbedThemeMessageSource,
@@ -30,7 +31,11 @@ useHead({
 	link: [
 		{
 			rel: "dns-prefetch",
-			href: "//scheduler.classes.jacobdanderson.net"
+			href: schedulerDnsPrefetchHref
+		},
+		{
+			rel: "preconnect",
+			href: SCHEDULER_ORIGIN
 		}
 	]
 });
