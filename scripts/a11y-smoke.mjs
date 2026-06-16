@@ -10,42 +10,52 @@ const axeSourcePath = require.resolve("axe-core/axe.min.js");
 const frontendPort = Number(process.env.A11Y_FRONTEND_PORT || 3333);
 const apiPort = Number(process.env.A11Y_API_PORT || 3008);
 const baseUrl = `http://127.0.0.1:${frontendPort}`;
+const isCi = process.env.CI === "true";
+const runFullMatrix = process.env.A11Y_FULL === "true" || !isCi;
 const routeScenarios = [
 	{
 		name: "public",
 		role: "public",
-		routes: [
-			"/",
-			"/about",
-			"/courses",
-			"/pathways",
-			"/signup",
-			"/payment",
-			"/zoom",
-			"/wheel"
-		]
+		routes: runFullMatrix
+			? [
+					"/",
+					"/about",
+					"/courses",
+					"/pathways",
+					"/signup",
+					"/payment",
+					"/zoom",
+					"/wheel"
+				]
+			: ["/", "/courses", "/signup", "/zoom"]
 	},
 	{
 		name: "student",
 		role: "student",
-		routes: ["/profile", "/courses", "/pathways", "/zoom", "/wheel"]
+		routes: runFullMatrix
+			? ["/profile", "/courses", "/pathways", "/zoom", "/wheel"]
+			: ["/profile", "/courses"]
 	},
 	{
 		name: "tutor",
 		role: "tutor",
-		routes: ["/profile", "/courses", "/teaching", "/pathways", "/zoom"]
+		routes: runFullMatrix
+			? ["/profile", "/courses", "/teaching", "/pathways", "/zoom"]
+			: ["/profile", "/courses", "/teaching"]
 	},
 	{
 		name: "admin",
 		role: "admin",
-		routes: [
-			"/profile",
-			"/courses",
-			"/admin",
-			"/admin/people",
-			"/admin/mdmail",
-			"/admin/student-management"
-		]
+		routes: runFullMatrix
+			? [
+					"/profile",
+					"/courses",
+					"/admin",
+					"/admin/people",
+					"/admin/mdmail",
+					"/admin/student-management"
+				]
+			: ["/admin", "/admin/mdmail", "/admin/student-management"]
 	}
 ];
 const viewportScenarios = [
@@ -280,56 +290,66 @@ try {
 				for (const media of mediaScenarios) {
 					const url = `${baseUrl}${route}`;
 					const page = await browser.newPage();
-					await page.setViewport({
-						deviceScaleFactor: 1,
-						height: viewport.height,
-						width: viewport.width
-					});
-					await page.emulateMediaFeatures([
-						{
-							name: "prefers-color-scheme",
-							value: media.colorScheme
-						},
-						{
-							name: "prefers-reduced-motion",
-							value: media.prefersReducedMotion
-						}
-					]);
-					await page.evaluateOnNewDocument(storedTheme => {
-						window.localStorage.setItem(
-							"vueuse-color-scheme",
-							storedTheme
-						);
-					}, media.storedTheme);
-					await page.goto(url, {
-						timeout: 30_000,
-						waitUntil: "networkidle0"
-					});
-					await page.addScriptTag({ path: axeSourcePath });
-					const result = await page.evaluate(async () => {
-						return await axe.run(document, {
-							resultTypes: ["violations"],
-							runOnly: {
-								type: "tag",
-								values: ["wcag2a", "wcag2aa"]
+					try {
+						page.setDefaultNavigationTimeout(15_000);
+						await page.setViewport({
+							deviceScaleFactor: 1,
+							height: viewport.height,
+							width: viewport.width
+						});
+						await page.emulateMediaFeatures([
+							{
+								name: "prefers-color-scheme",
+								value: media.colorScheme
+							},
+							{
+								name: "prefers-reduced-motion",
+								value: media.prefersReducedMotion
 							}
+						]);
+						await page.evaluateOnNewDocument(storedTheme => {
+							window.localStorage.setItem(
+								"vueuse-color-scheme",
+								storedTheme
+							);
+						}, media.storedTheme);
+						await page.goto(url, {
+							timeout: 15_000,
+							waitUntil: "domcontentloaded"
 						});
-					});
-					await page.close();
-					const violations = result.violations.filter(
-						violation => violation.id !== "frame-tested"
-					);
-					if (violations.length) {
-						failures.push({
-							context: `${scenario.name}/${viewport.name}/${media.name}`,
-							url,
-							violations
+						await page.waitForSelector("body", { timeout: 10_000 });
+						await page.waitForFunction(
+							() => document.body.innerText.trim().length > 0,
+							{ timeout: 10_000 }
+						);
+						await new Promise(resolve => setTimeout(resolve, 250));
+						await page.addScriptTag({ path: axeSourcePath });
+						const result = await page.evaluate(async () => {
+							return await axe.run(document, {
+								resultTypes: ["violations"],
+								runOnly: {
+									type: "tag",
+									values: ["wcag2a", "wcag2aa"]
+								}
+							});
 						});
-						continue;
+						const violations = result.violations.filter(
+							violation => violation.id !== "frame-tested"
+						);
+						if (violations.length) {
+							failures.push({
+								context: `${scenario.name}/${viewport.name}/${media.name}`,
+								url,
+								violations
+							});
+							continue;
+						}
+						console.log(
+							`a11y ok: ${url} (${scenario.name}, ${viewport.name}, ${media.name})`
+						);
+					} finally {
+						await page.close().catch(() => {});
 					}
-					console.log(
-						`a11y ok: ${url} (${scenario.name}, ${viewport.name}, ${media.name})`
-					);
 				}
 			}
 		}

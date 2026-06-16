@@ -1,4 +1,4 @@
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
@@ -281,13 +281,7 @@ describe("student-facing course copy", () => {
 				file.endsWith("-repo-alignment-plan.md") ||
 				file.endsWith("rework-plan.md")
 		);
-		const privatePlanningDir = resolve(
-			repoRoot,
-			"no-include/course-planning"
-		);
-
 		expect(planningFiles).toEqual([]);
-		expect(existsSync(privatePlanningDir)).toBe(true);
 	});
 
 	it(

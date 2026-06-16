@@ -15,6 +15,7 @@
 
 context("Navigation & page smoke-tests", () => {
 	beforeEach(() => {
+		cy.viewport(1440, 900);
 		cy.visit("/"); // -> Home
 	});
 
@@ -25,22 +26,22 @@ context("Navigation & page smoke-tests", () => {
 
 	it("header links work", () => {
 		// ---- About ---------------------------------------------------
-		cy.contains("About").click();
+		cy.get(".site-nav").contains("a:visible", "About").click();
 		cy.url().should("eq", `${Cypress.config().baseUrl}/about`);
-		cy.contains("Meet Jacob").should("exist");
+		cy.get("h1").contains("Focused Help").should("exist");
 
 		// ---- Book a Class --------------------------------------------------
-		cy.contains("Book a Class").click();
+		cy.get(".site-nav").contains("a:visible", "Book a Class").click();
 		cy.url().should("eq", `${Cypress.config().baseUrl}/signup`);
-		cy.contains("Schedule a Class").should("exist"); // H1 in signup.vue
+		cy.get("h1").contains("Book a Class").should("exist");
 
 		// ---- Tuition & Payment ---------------------------------------------
-		cy.contains("Tuition & Payment").click();
+		cy.get(".site-nav").contains("a:visible", "Tuition").click();
 		cy.url().should("eq", `${Cypress.config().baseUrl}/payment`);
-		cy.contains("Tuition & Payment").should("exist");
+		cy.get("h1").contains("Tuition").should("exist");
 
 		// ---- back to Home -------------------------------------------
-		cy.contains("Home").click();
+		cy.get(".site-nav").contains("a:visible", "Home").click();
 		cy.url().should("eq", `${Cypress.config().baseUrl}/`);
 	});
 

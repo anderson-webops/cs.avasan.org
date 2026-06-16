@@ -21,7 +21,7 @@ jobs:
             - name: Pin npm version
               run: |
                   npm -v
-                  npm i -g npm@11.7.0
+                  npm i -g npm@11.12.0
                   npm -v
 
             - name: Install backend deps with backend lockfile
@@ -42,7 +42,7 @@ jobs:
             - name: Pin npm version
               run: |
                   npm -v
-                  npm i -g npm@11.7.0
+                  npm i -g npm@11.12.0
                   npm -v
 
             - name: Install deps
@@ -64,7 +64,7 @@ jobs:
 
             - name: Pin npm version
               run: |
-                  npm i -g npm@11.7.0
+                  npm i -g npm@11.12.0
                   npm -v
 
             - name: Install deps
@@ -94,7 +94,7 @@ jobs:
               run: |
                   # optional guard:
                   if [ $(node -v | cut -d. -f1 | sed 's/v//') -ge 20 ]; then
-                    npm i -g npm@11.7.0
+                    npm i -g npm@11.12.0
                   fi
                   npm -v
 
@@ -115,6 +115,7 @@ jobs:
 
     accessibility:
         runs-on: ubuntu-latest
+        timeout-minutes: 15
         steps:
             - uses: actions/checkout@v4
 
@@ -136,6 +137,7 @@ jobs:
 
     test-e2e:
         runs-on: ubuntu-latest
+        timeout-minutes: 15
         steps:
             - uses: actions/checkout@v4
 
@@ -144,6 +146,31 @@ jobs:
                   node-version: 22.x
                   cache: npm
                   registry-url: https://registry.npmjs.org/
+
+            - name: Pin npm version
+              run: |
+                  npm i -g npm@11.12.0
+                  npm -v
+
+            - name: Install deps
+              run: npm ci
+
+            - uses: actions/cache@v4
+              with:
+                  path: ~/.cache/Cypress
+                  key: cypress-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+            - name: Build front-end
+              run: npm run -w front-end build
+
+            - name: Cypress
+              uses: cypress-io/github-action@v6
+              with:
+                  install: false
+                  working-directory: front-end
+                  config-file: cypress.config.ts
+                  start: npm run preview -- --port 3333
+                  wait-on: "http://localhost:3333"
 
     build:
         runs-on: ubuntu-latest
@@ -157,7 +184,7 @@ jobs:
 
             - name: Pin npm version
               run: |
-                  npm i -g npm@11.7.0
+                  npm i -g npm@11.12.0
                   npm -v
 
             - name: Install deps
@@ -165,30 +192,3 @@ jobs:
 
             - name: Build
               run: npm run build
-
-            - name: Pin npm version
-              run: |
-                  npm i -g npm@11.7.0
-                  npm -v
-
-            - name: Install deps
-              run: npm ci
-
-            # Cache Cypress binary
-            - uses: actions/cache@v4
-              with:
-                  path: ~/.cache/Cypress
-                  key: cypress-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-
-            # Build site and run preview server for Cypress to hit
-            - name: Build (front-end)
-              run: npm run -w front-end build
-
-            - name: Cypress
-              uses: cypress-io/github-action@v6
-              with:
-                  install: false # we already ran npm ci
-                  working-directory: front-end
-                  config-file: cypress.config.ts
-                  start: npm run preview -- --port 3333
-                  wait-on: "http://localhost:3333"
