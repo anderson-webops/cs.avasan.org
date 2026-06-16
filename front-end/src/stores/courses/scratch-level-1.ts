@@ -698,7 +698,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Concept Path",
 					content:
-						"This module focuses on turn a working Scratch game into a more finished experience by improving instructions, scoring, difficulty, sound, and ending screens. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
+						"This module focuses on turning a working Scratch game into a more finished experience by improving instructions, scoring, difficulty, sound, and ending screens. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
 				},
 				{
 					title: "Design and Planning Map",
@@ -745,7 +745,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Concept Path",
 					content:
-						"This module focuses on use events, broadcasts, costumes, backdrops, and variables to build a story that changes based on choices. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
+						"This module focuses on using events, broadcasts, costumes, backdrops, and variables to build a story that changes based on choices. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
 				},
 				{
 					title: "Design and Planning Map",
@@ -792,7 +792,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Concept Path",
 					content:
-						"This module focuses on diagnose Scratch projects by checking event starts, forever loops, sprite visibility, variable reset, coordinate mistakes, and broadcast timing. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
+						"This module focuses on diagnosing Scratch projects by checking event starts, forever loops, sprite visibility, variable reset, coordinate mistakes, and broadcast timing. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
 				},
 				{
 					title: "Design and Planning Map",
@@ -839,7 +839,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Concept Path",
 					content:
-						"This module focuses on connect Scratch blocks to text-code ideas such as events, loops, if statements, variables, functions, input, and coordinates. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
+						"This module focuses on connecting Scratch blocks to text-code ideas such as events, loops, if statements, variables, functions, input, and coordinates. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
 				},
 				{
 					title: "Design and Planning Map",

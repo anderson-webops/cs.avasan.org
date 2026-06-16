@@ -745,7 +745,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Concept Path",
 					content:
-						"This module focuses on combine cloning, lists, functions, broadcasts, and complex conditionals into a reusable arcade-game structure. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
+						"This module focuses on combining cloning, lists, functions, broadcasts, and complex conditionals into a reusable arcade-game structure. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
 				},
 				{
 					title: "Design and Planning Map",
@@ -792,7 +792,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Concept Path",
 					content:
-						"This module focuses on use Scratch lists and variables to model changing systems and display data over time. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
+						"This module focuses on using Scratch lists and variables to model changing systems and display data over time. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
 				},
 				{
 					title: "Design and Planning Map",
@@ -839,7 +839,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Concept Path",
 					content:
-						"This module focuses on organize larger Scratch projects with named custom blocks, consistent broadcasts, reset scripts, and testable subsystems. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
+						"This module focuses on organizing larger Scratch projects with named custom blocks, consistent broadcasts, reset scripts, and testable subsystems. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
 				},
 				{
 					title: "Design and Planning Map",
@@ -886,7 +886,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Concept Path",
 					content:
-						"This module focuses on map advanced Scratch concepts to Python readiness: lists, functions, parameters, loops, conditionals, state, and debugging traces. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
+						"This module focuses on mapping advanced Scratch concepts to Python readiness: lists, functions, parameters, loops, conditionals, state, and debugging traces. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
 				},
 				{
 					title: "Design and Planning Map",

@@ -1346,6 +1346,9 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(/the response answer/i);
 			expect(corpus).not.toMatch(/the response reason/i);
 			expect(corpus).not.toMatch(/\bthe A, B, C, D example\b/i);
+			expect(corpus).not.toMatch(
+				/\bThis module focuses on (?:combine|connect|diagnose|map|organize|turn|use)\b/i
+			);
 			expect(corpus).toContain("Work a typical example");
 			expect(corpus).toContain("Modeling or Error Analysis");
 		},
