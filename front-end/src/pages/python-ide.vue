@@ -52,6 +52,7 @@ interface RuntimeArtifactView {
 	id: number;
 	title: string;
 	mimeType: string;
+	audioUrl?: string;
 	dataUrl?: string;
 	srcdoc?: string;
 	text?: string;
@@ -195,6 +196,8 @@ function appendArtifact(artifact: RuntimeArtifact) {
 
 	if (artifact.mimeType === "image/svg+xml") {
 		view.dataUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(artifact.data)}`;
+	} else if (artifact.mimeType.startsWith("audio/")) {
+		view.audioUrl = `data:${artifact.mimeType};base64,${artifact.data}`;
 	} else if (artifact.mimeType === "text/html") {
 		view.srcdoc = artifact.data;
 	} else {
@@ -1344,6 +1347,12 @@ onBeforeUnmount(() => {
 									:alt="artifact.title"
 									:src="artifact.dataUrl"
 								/>
+								<audio
+									v-else-if="artifact.audioUrl"
+									controls
+									:src="artifact.audioUrl"
+									:title="artifact.title"
+								/>
 								<iframe
 									v-else-if="artifact.srcdoc"
 									sandbox="allow-scripts"
@@ -1818,11 +1827,16 @@ html.dark .python-ide-status strong {
 }
 
 .artifact-card img,
+.artifact-card audio,
 .artifact-card iframe {
 	width: 100%;
+	border-radius: 10px;
+}
+
+.artifact-card img,
+.artifact-card iframe {
 	min-height: 18rem;
 	border: 0;
-	border-radius: 10px;
 	background: #fff;
 }
 

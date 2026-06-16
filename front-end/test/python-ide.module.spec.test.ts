@@ -72,6 +72,13 @@ describe("python IDE project helpers", () => {
 					entry.status === "local"
 			)
 		).toBe(true);
+		expect(
+			pythonIdeLibrarySupport.some(
+				entry =>
+					entry.name === "PySynth song projects" &&
+					entry.status === "shim"
+			)
+		).toBe(true);
 	});
 
 	it("normalizes project file names without accepting unsafe names", () => {

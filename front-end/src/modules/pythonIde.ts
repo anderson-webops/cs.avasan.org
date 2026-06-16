@@ -66,6 +66,11 @@ export const pythonIdeLibrarySupport: PythonIdeLibrarySupport[] = [
 		detail: "Common st.write, dataframe, pyplot, and altair_chart calls render as IDE output or artifacts, but full Streamlit apps still require a local/deployed server."
 	},
 	{
+		name: "PySynth song projects",
+		status: "shim",
+		detail: "Python Level 2 song-generator projects can call make_wav(...) to create a playable WAV artifact in the browser output."
+	},
+	{
 		name: "TensorFlow / Keras",
 		status: "local",
 		detail: "Neural-network lessons should run in Colab or local Python. The browser IDE warns clearly when those heavy APIs are imported."
