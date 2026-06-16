@@ -780,7 +780,7 @@ export const scratchLevel2Course: RawCourse = {
 						"Look for scripts that do not reset on the green flag, messages that fire too early, variables that keep old values, clones that never delete, and forever loops that prevent the ending from appearing."
 				},
 				{
-					title: "Extension Project",
+					title: "Extension Project: Arcade Systems Game",
 					content:
 						"Complete an extension project: arcade game with reusable reset, spawn, scoring, and level systems. Include one new feature, one cleanup/refactor step, and one explanation of why the added behavior fits the original project."
 				}
@@ -827,7 +827,7 @@ export const scratchLevel2Course: RawCourse = {
 						"Look for scripts that do not reset on the green flag, messages that fire too early, variables that keep old values, clones that never delete, and forever loops that prevent the ending from appearing."
 				},
 				{
-					title: "Extension Project",
+					title: "Extension Project: Interactive Data Simulation",
 					content:
 						"Complete an extension project: interactive simulation with visible data, summary statistic, and explanation of randomness. Include one new feature, one cleanup/refactor step, and one explanation of why the added behavior fits the original project."
 				}
@@ -874,7 +874,7 @@ export const scratchLevel2Course: RawCourse = {
 						"Look for scripts that do not reset on the green flag, messages that fire too early, variables that keep old values, clones that never delete, and forever loops that prevent the ending from appearing."
 				},
 				{
-					title: "Extension Project",
+					title: "Extension Project: Refactored Scratch Project",
 					content:
 						"Complete an extension project: refactored Scratch project with a before-and-after explanation. Include one new feature, one cleanup/refactor step, and one explanation of why the added behavior fits the original project."
 				}
@@ -921,7 +921,7 @@ export const scratchLevel2Course: RawCourse = {
 						"Look for scripts that do not reset on the green flag, messages that fire too early, variables that keep old values, clones that never delete, and forever loops that prevent the ending from appearing."
 				},
 				{
-					title: "Extension Project",
+					title: "Extension Project: Scratch-to-Python Bridge Portfolio",
 					content:
 						"Complete an extension project: bridge portfolio that translates one Scratch game mechanic into pseudocode and Python-style code. Include one new feature, one cleanup/refactor step, and one explanation of why the added behavior fits the original project."
 				}

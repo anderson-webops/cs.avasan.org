@@ -733,7 +733,7 @@ export const scratchLevel1Course: RawCourse = {
 						"Look for scripts that do not reset on the green flag, messages that fire too early, variables that keep old values, clones that never delete, and forever loops that prevent the ending from appearing."
 				},
 				{
-					title: "Extension Project",
+					title: "Extension Project: Polished Mini Game",
 					content:
 						"Complete an extension project: polished version of Bug Eater, Cake Chaser, Hedgehog Race, or Asteroid Dodge. Include one new feature, one cleanup/refactor step, and one explanation of why the added behavior fits the original project."
 				}
@@ -780,7 +780,7 @@ export const scratchLevel1Course: RawCourse = {
 						"Look for scripts that do not reset on the green flag, messages that fire too early, variables that keep old values, clones that never delete, and forever loops that prevent the ending from appearing."
 				},
 				{
-					title: "Extension Project",
+					title: "Extension Project: Branching Story",
 					content:
 						"Complete an extension project: branching story with at least two meaningful choices and two endings. Include one new feature, one cleanup/refactor step, and one explanation of why the added behavior fits the original project."
 				}
@@ -827,7 +827,7 @@ export const scratchLevel1Course: RawCourse = {
 						"Look for scripts that do not reset on the green flag, messages that fire too early, variables that keep old values, clones that never delete, and forever loops that prevent the ending from appearing."
 				},
 				{
-					title: "Extension Project",
+					title: "Extension Project: Debug Log and Remix Repair",
 					content:
 						"Complete an extension project: debug log plus repaired remix of a small broken project. Include one new feature, one cleanup/refactor step, and one explanation of why the added behavior fits the original project."
 				}
@@ -874,7 +874,7 @@ export const scratchLevel1Course: RawCourse = {
 						"Look for scripts that do not reset on the green flag, messages that fire too early, variables that keep old values, clones that never delete, and forever loops that prevent the ending from appearing."
 				},
 				{
-					title: "Extension Project",
+					title: "Extension Project: Scratch-to-Python Portfolio",
 					content:
 						"Complete an extension project: Scratch-to-Python readiness portfolio with three translated scripts. Include one new feature, one cleanup/refactor step, and one explanation of why the added behavior fits the original project."
 				}

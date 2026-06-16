@@ -478,7 +478,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific advanced physics model."
 				},
 				{
-					title: "Extension Project",
+					title: "Extension Project: Motion Model Comparison",
 					content:
 						"Complete an extension project: motion-model comparison with ideal and corrected graphs. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
 				}
@@ -530,7 +530,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific advanced physics model."
 				},
 				{
-					title: "Extension Project",
+					title: "Extension Project: Measurement Audit",
 					content:
 						"Complete an extension project: measurement audit with uncertainty and revised conclusion. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
 				}
@@ -582,7 +582,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific advanced physics model."
 				},
 				{
-					title: "Extension Project",
+					title: "Extension Project: Connected System Constraint Map",
 					content:
 						"Complete an extension project: constraint map for a real connected mechanical system. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
 				}
@@ -634,7 +634,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific advanced physics model."
 				},
 				{
-					title: "Extension Project",
+					title: "Extension Project: Fluid System Case Study",
 					content:
 						"Complete an extension project: fluid-system case study with assumptions and limitation. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
 				}
@@ -686,7 +686,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific advanced physics model."
 				},
 				{
-					title: "Extension Project",
+					title: "Extension Project: Engine or Refrigerator Audit",
 					content:
 						"Complete an extension project: engine or refrigerator audit with useful-output definition. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
 				}
@@ -738,7 +738,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific advanced physics model."
 				},
 				{
-					title: "Extension Project",
+					title: "Extension Project: Sensor System Proposal",
 					content:
 						"Complete an extension project: sensor-system proposal with calibration and noise plan. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
 				}
@@ -790,7 +790,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific advanced physics model."
 				},
 				{
-					title: "Extension Project",
+					title: "Extension Project: Relativity Explainer",
 					content:
 						"Complete an extension project: relativity explainer that compares classical expectation with correction. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
 				}
@@ -842,7 +842,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific advanced physics model."
 				},
 				{
-					title: "Extension Project",
+					title: "Extension Project: Independent Physics Portfolio",
 					content:
 						"Complete an extension project: independent portfolio with question, model, evidence, graph, conclusion, and limitation. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
 				}

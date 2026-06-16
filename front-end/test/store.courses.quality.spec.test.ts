@@ -1215,6 +1215,7 @@ describe("course text quality normalization", () => {
 			const studioParentheticalResidue: string[] = [];
 			const studioArticleGrammarResidue: string[] = [];
 			const genericFocusedPracticeTitles: string[] = [];
+			const genericExtensionProjectTitles: string[] = [];
 			const repeatedWords: string[] = [];
 			const courses = await Promise.all(
 				courseCatalog.map(entry => loadRawCourse(entry.id))
@@ -1244,6 +1245,11 @@ describe("course text quality normalization", () => {
 						}
 						if (item.title === "Focused Practice") {
 							genericFocusedPracticeTitles.push(
+								`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title}`
+							);
+						}
+						if (item.title === "Extension Project") {
+							genericExtensionProjectTitles.push(
 								`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title}`
 							);
 						}
@@ -1324,6 +1330,7 @@ describe("course text quality normalization", () => {
 			expect(studioParentheticalResidue).toEqual([]);
 			expect(studioArticleGrammarResidue).toEqual([]);
 			expect(genericFocusedPracticeTitles).toEqual([]);
+			expect(genericExtensionProjectTitles).toEqual([]);
 			expect(repeatedWords).toEqual([]);
 			expect(corpus).not.toMatch(/focused practice checkpoint/i);
 			expect(corpus).not.toMatch(/should use the checkpoint/i);
