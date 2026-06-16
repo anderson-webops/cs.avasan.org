@@ -13,6 +13,13 @@ const COURSE_SWEEP_TIMEOUT = 180000;
 const forbiddenStudentFacingPatterns = [
 	/\bTeaching flow\b/i,
 	/\binstructor-led\b/i,
+	/\*\*Use this section:\*\*/i,
+	/\*\*Output:\*\*/i,
+	/\*\*Requirements:\*\*/i,
+	/\bThe final artifact should\b/i,
+	/\bthe final artifact should\b/i,
+	/\bThe final answer should\b/i,
+	/\bthe final answer should\b/i,
 	/\bInstructor Note\b/i,
 	/\bfor instructor(?:s)?\b/i,
 	/\bAsk the student\b/i,

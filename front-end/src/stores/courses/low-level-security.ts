@@ -158,7 +158,7 @@ export const lowLevelSecurityCourse: RawCourse = {
 				{
 					title: "Observing Stack, Heap, and Global Addresses",
 					content:
-						"Open a toy program and print the addresses of a stack variable, a heap allocation, a global variable, and a static variable. Compare which addresses tend to be near each other and which are not. This lesson is about orientation, not exploitation: learners should get comfortable reading addresses, pointer values, and byte distances so later bug reports feel concrete instead of abstract."
+						"Open a toy program and print the addresses of a stack variable, a heap allocation, a global variable, and a static variable. Compare which addresses tend to be near each other and which are not. This lesson is about orientation, not exploitation: build comfort reading addresses, pointer values, and byte distances so later bug reports feel concrete instead of abstract."
 				},
 				{
 					title: "Compiler Warnings, Sanitizers, and Debuggers",
@@ -235,7 +235,7 @@ export const lowLevelSecurityCourse: RawCourse = {
 				{
 					title: "LLS2 Project 2: Bounds-Checked Copy Lab",
 					content:
-						"Implement a label-copy routine for a fixed-size destination buffer. The starter code should distinguish between successful copies and truncation, always leave the destination in a valid state, and print test cases for short, exact-fit, empty, too-long, and invalid inputs. Learners should explain why explicit status codes are more secure than silent truncation and use the byte dump to confirm terminator placement.",
+						"Implement a label-copy routine for a fixed-size destination buffer. The starter code distinguishes between successful copies and truncation, always leaves the destination in a valid state, and prints test cases for short, exact-fit, empty, too-long, and invalid inputs. The final explanation compares explicit status codes with silent truncation and uses the byte dump to confirm terminator placement.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-Bounds-Checked-Copy/starter",
 					solutionLink:
@@ -302,7 +302,7 @@ export const lowLevelSecurityCourse: RawCourse = {
 				{
 					title: "LLS3 Project 3: Length-Prefixed Parser",
 					content:
-						"Write a parser for a tiny packet format where the first byte stores payload length and the second byte stores a command identifier. The secure solution should reject length mismatches, oversized payloads, unknown commands, and non-printable payload bytes. Learners should then write a short table listing which malformed cases were caught and add at least one more rejection case of their own.",
+						"Write a parser for a tiny packet format where the first byte stores payload length and the second byte stores a command identifier. The secure solution rejects length mismatches, oversized payloads, unknown commands, and non-printable payload bytes. The final table lists which malformed cases were caught and adds at least one additional rejection case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS3-Length-Prefixed-Parser/starter",
 					solutionLink:
@@ -369,7 +369,7 @@ export const lowLevelSecurityCourse: RawCourse = {
 				{
 					title: "LLS4 Project 4: Ring Buffer Guards",
 					content:
-						"Implement a tiny byte ring buffer with guarded push and pop operations. The secure solution should preserve invariants during wraparound and reject impossible requests without corrupting state. Learners should test partial fills, exact fills, over-capacity writes, wraparound reads, and confirm that failed requests leave the logical contents untouched.",
+						"Implement a tiny byte ring buffer with guarded push and pop operations. The secure solution preserves invariants during wraparound and rejects impossible requests without corrupting state. Tests cover partial fills, exact fills, over-capacity writes, wraparound reads, and the requirement that failed requests leave the logical contents untouched.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS4-Ring-Buffer-Guards/starter",
 					solutionLink:

@@ -1299,7 +1299,42 @@ function neutralizeStudentFacingText(text: string) {
 				)
 				.replace(/\*\*Teaching flow:\*\*/gi, "**Concept path:**")
 				.replace(/\*\*Learning sequence:\*\*/gi, "**Concept path:**")
+				.replace(/\*\*Use this section:\*\*/gi, "**Learning path:**")
+				.replace(/\*\*Output:\*\*/gi, "**Result:**")
+				.replace(/\*\*Requirements:\*\*/gi, "**Required elements:**")
 				.replace(/\*\*Completion check:\*\*/gi, "**Evidence target:**")
+				.replace(
+					/\bThe final artifact should name\b/g,
+					"The final artifact names"
+				)
+				.replace(
+					/\bthe final artifact should name\b/g,
+					"the final artifact names"
+				)
+				.replace(
+					/\bThe final answer should name\b/g,
+					"A complete answer names"
+				)
+				.replace(
+					/\bthe final answer should name\b/g,
+					"a complete answer names"
+				)
+				.replace(
+					/\bThe final answer should not rank\b/g,
+					"A strong answer does not rank"
+				)
+				.replace(
+					/\bthe final answer should not rank\b/g,
+					"a strong answer does not rank"
+				)
+				.replace(
+					/\bThe page should explicitly label\b/g,
+					"The page explicitly labels"
+				)
+				.replace(
+					/\bthe page should explicitly label\b/g,
+					"the page explicitly labels"
+				)
 				.replace(
 					/(\*\*Concept path:\*\*\s+)Teach\b/g,
 					"$1This section covers"

@@ -118,7 +118,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		adminPriority: "urgent",
 		courseIds: ["pygames", "unity-game-development"],
 		audience:
-			"Students who learn well through interactive projects and are ready to reason about game loops, state, input, feedback, and playtesting.",
+			"Interactive project path for learners ready to reason about game loops, state, input, feedback, and playtesting.",
 		prerequisiteSummary:
 			"PyGame Know Python functions, loops, and lists. Unity Be ready for C# scripts, scenes, prefabs, components, and editor workflow.",
 		outcomes: [

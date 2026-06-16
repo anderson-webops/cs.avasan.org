@@ -21,7 +21,7 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "CPPF1 Project 1: Mad Libs",
 					content:
-						"Build a short Mad Libs generator with string variables, prompts, and a printed story. Name their variables well, test at least two custom stories, and explain how inputs move through the program.",
+						"Build a short Mad Libs generator with string variables, prompts, and a printed story. Use clear variable names, test at least two custom stories, and explain how inputs move through the program.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF1-Mad-Libs",
 					solutionLink:

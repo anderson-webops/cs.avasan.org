@@ -825,7 +825,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Apache Fundamentals",
 					content:
-						"Apache is another major hosting surface with a different configuration style but many of the same core ideas. Learners should be able to identify the Apache equivalents of document roots, virtual hosts, access and error logs, and configuration activation."
+						"Apache is another major hosting surface with a different configuration style but many of the same core ideas. The comparison identifies the Apache equivalents of document roots, virtual hosts, access and error logs, and configuration activation."
 				},
 				{
 					title: "Reverse Proxy vs Static File Serving",
