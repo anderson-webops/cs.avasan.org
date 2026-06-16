@@ -1,6 +1,7 @@
 // src/controllers/users/userExtraController.ts
 import type { RequestHandler } from "express";
 import type { ISessionNote } from "../../types/entities/ISessionNote.js";
+import type { CourseAccessStatus } from "../../types/entities/IUser.js";
 import { Types } from "mongoose";
 import { InternalEmail } from "../../models/schemas/InternalEmail.js";
 import { ScheduledSession } from "../../models/schemas/ScheduledSession.js";
@@ -37,21 +38,42 @@ function normalizeStringArray(value: unknown): string[] | null {
 	return [...new Set(value.map(item => (typeof item === "string" ? item.trim() : "")).filter(Boolean))];
 }
 
-function tutorOwnsUser(user: { tutors?: unknown[] } | null, tutorID: string) {
-	return user?.tutors?.some((tutor) => {
-		const id
-			= tutor && typeof tutor === "object" && "_id" in tutor
-				? tutor._id
-				: tutor;
-		if (!id) return false;
-		return id.toString() === tutorID;
-	}) ?? false;
+function normalizeCourseStatusMap(value: unknown): Record<string, CourseAccessStatus> {
+	if (!value || typeof value !== "object" || Array.isArray(value)) return {};
+
+	const statusMap: Record<string, CourseAccessStatus> = {};
+	for (const [courseId, status] of Object.entries(value as Record<string, unknown>)) {
+		const normalizedCourseId = courseId.trim();
+		if (!normalizedCourseId) continue;
+		statusMap[normalizedCourseId] = status === "past" ? "past" : "current";
+	}
+	return statusMap;
 }
 
-async function findManagedUserForSessionTools(
-	req: Parameters<RequestHandler>[0],
-	res: Parameters<RequestHandler>[1]
+function courseStatusForAccess(
+	courseIds: string[],
+	requestedStatus: Record<string, CourseAccessStatus>,
+	existingStatus: Record<string, CourseAccessStatus>,
+	hasRequestedStatus: boolean
 ) {
+	const nextStatus: Record<string, CourseAccessStatus> = {};
+	for (const courseId of courseIds) {
+		nextStatus[courseId] = (hasRequestedStatus ? requestedStatus[courseId] : existingStatus[courseId]) ?? "current";
+	}
+	return nextStatus;
+}
+
+function tutorOwnsUser(user: { tutors?: unknown[] } | null, tutorID: string) {
+	return (
+		user?.tutors?.some((tutor) => {
+			const id = tutor && typeof tutor === "object" && "_id" in tutor ? tutor._id : tutor;
+			if (!id) return false;
+			return id.toString() === tutorID;
+		}) ?? false
+	);
+}
+
+async function findManagedUserForSessionTools(req: Parameters<RequestHandler>[0], res: Parameters<RequestHandler>[1]) {
 	const userID = getUserIDParam(req, res);
 	if (!userID) return null;
 
@@ -94,11 +116,7 @@ function parseDateOnly(value: unknown): Date | null {
 
 	const date = new Date(Date.UTC(year, month - 1, day, 12));
 	if (Number.isNaN(date.getTime())) return null;
-	if (
-		date.getUTCFullYear() !== year
-		|| date.getUTCMonth() !== month - 1
-		|| date.getUTCDate() !== day
-	) {
+	if (date.getUTCFullYear() !== year || date.getUTCMonth() !== month - 1 || date.getUTCDate() !== day) {
 		return null;
 	}
 	return date;
@@ -192,11 +210,8 @@ export const setUserRecipientAssociation: RequestHandler = async (req, res) => {
 	}
 
 	const rawRecipientName = req.body?.recipientName;
-	const recipientName
-		= typeof rawRecipientName === "string" ? rawRecipientName.trim() : "";
-	const recipientNameKey = recipientName
-		? normalizeRecipientName(recipientName)
-		: undefined;
+	const recipientName = typeof rawRecipientName === "string" ? rawRecipientName.trim() : "";
+	const recipientNameKey = recipientName ? normalizeRecipientName(recipientName) : undefined;
 
 	if (recipientNameKey) {
 		const existingUser = await User.findOne(
@@ -230,7 +245,10 @@ export const setUserCourseAccess: RequestHandler = async (req, res) => {
 	if (typeof userID !== "string") {
 		return res.status(400).json({ message: "Invalid user ID" });
 	}
-	const { courseIDs } = req.body as { courseIDs?: string[] };
+	const { courseIDs } = req.body as {
+		courseIDs?: string[];
+		courseStatus?: Record<string, unknown>;
+	};
 	if (!Types.ObjectId.isValid(userID)) return res.status(400).json({ message: "Invalid user ID" });
 	if (!Array.isArray(courseIDs)) return res.status(400).json({ message: "courseIDs must be an array" });
 
@@ -249,9 +267,7 @@ export const setUserCourseAccess: RequestHandler = async (req, res) => {
 
 		const tutorOwnsUser = user.tutors.some(t => t.toString() === actingTutor._id.toString());
 		if (!tutorOwnsUser) {
-			return res
-				.status(403)
-				.json({ message: "You can only assign courses for your own students" });
+			return res.status(403).json({ message: "You can only assign courses for your own students" });
 		}
 
 		const allowed = new Set(actingTutor.coursePermissions ?? []);
@@ -262,10 +278,16 @@ export const setUserCourseAccess: RequestHandler = async (req, res) => {
 	}
 
 	user.courseAccess = uniqueCourses;
+	user.courseStatus = courseStatusForAccess(
+		uniqueCourses,
+		normalizeCourseStatusMap(req.body?.courseStatus),
+		normalizeCourseStatusMap(user.courseStatus),
+		!!req.body?.courseStatus
+	);
 	const allowedCourses = new Set(uniqueCourses);
 	user.courseProgress = (user.courseProgress ?? []).filter(progress => allowedCourses.has(progress.courseId));
 	await user.save();
-	res.json({ courseAccess: user.courseAccess });
+	res.json({ courseAccess: user.courseAccess, courseStatus: user.courseStatus });
 };
 
 export const setUserCourseProgress: RequestHandler = async (req, res) => {
@@ -322,11 +344,7 @@ export const setUserCourseProgress: RequestHandler = async (req, res) => {
 			...(updatedBy ? { updatedBy } : {}),
 			updatedByRole
 		}
-	].sort(
-		(a, b) =>
-			(user.courseAccess ?? []).indexOf(a.courseId)
-			- (user.courseAccess ?? []).indexOf(b.courseId)
-	);
+	].sort((a, b) => (user.courseAccess ?? []).indexOf(a.courseId) - (user.courseAccess ?? []).indexOf(b.courseId));
 
 	await user.save();
 	res.json({ courseProgress: user.courseProgress });
@@ -491,11 +509,12 @@ export const createUserSessionNote: RequestHandler = async (req, res) => {
 		return res.status(400).json({ message: "sessionDate must be a valid date" });
 	}
 
-	const markdown = typeof req.body?.markdown === "string"
-		? req.body.markdown.trim()
-		: typeof req.body?.md === "string"
-			? req.body.md.trim()
-			: "";
+	const markdown
+		= typeof req.body?.markdown === "string"
+			? req.body.markdown.trim()
+			: typeof req.body?.md === "string"
+				? req.body.md.trim()
+				: "";
 	if (!markdown) {
 		return res.status(400).json({ message: "markdown is required" });
 	}
@@ -622,10 +641,7 @@ export const getLoggedInUserCommunications: RequestHandler = async (req, res) =>
 	const normalizedEmail = actingUser.email.trim().toLowerCase();
 	const [sessionNotes, internalEmails, scheduledSessions] = await Promise.all([
 		getRecentSessionNotesForUser(actingUser._id, normalizedEmail),
-		InternalEmail.find({ user: actingUser._id })
-			.sort({ sentAt: -1, createdAt: -1 })
-			.limit(12)
-			.lean(),
+		InternalEmail.find({ user: actingUser._id }).sort({ sentAt: -1, createdAt: -1 }).limit(12).lean(),
 		ScheduledSession.find({
 			user: actingUser._id,
 			startAt: { $gte: new Date() }

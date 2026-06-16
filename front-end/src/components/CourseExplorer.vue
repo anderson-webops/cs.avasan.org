@@ -17,6 +17,11 @@ import {
 	watch
 } from "vue";
 import { api } from "@/api";
+import {
+	courseStatusForUser,
+	groupCoursesByLearnerStatus,
+	orderedCoursesByLearnerStatus
+} from "@/modules/courseAccess";
 import { courseAssetViewerUrl } from "@/modules/courseAssetPreview";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
@@ -129,10 +134,35 @@ const permittedCourseIds = computed(() => {
 	return [];
 });
 
+const courseGroupingOwner = computed<User | null>(() => {
+	if (isStaffContext.value) return selectedLearner.value;
+	return currentUser.value;
+});
+
 const courseList = computed(() => {
 	if (props.publicCatalog) return allCourses.value;
 	const allowed = new Set(permittedCourseIds.value);
-	return allCourses.value.filter(course => allowed.has(course.id));
+	return orderedCoursesByLearnerStatus(
+		allCourses.value.filter(course => allowed.has(course.id)),
+		courseGroupingOwner.value
+	);
+});
+
+const courseGroups = computed(() => {
+	if (props.publicCatalog) {
+		return [
+			{
+				key: "other" as const,
+				label: "Course catalog",
+				courses: courseList.value
+			}
+		].filter(group => group.courses.length > 0);
+	}
+
+	return groupCoursesByLearnerStatus(
+		courseList.value,
+		courseGroupingOwner.value
+	);
 });
 
 const hasCourseAccess = computed(() => {
@@ -140,9 +170,20 @@ const hasCourseAccess = computed(() => {
 	return isStaffContext.value || courseList.value.length > 0;
 });
 
-const courseEyebrow = computed(() =>
-	props.publicCatalog ? "Course preview" : "Current course"
-);
+const selectedCourseStatus = computed(() => {
+	if (props.publicCatalog || !selectedCourseId.value) return "";
+	return courseStatusForUser(
+		courseGroupingOwner.value,
+		selectedCourseId.value
+	);
+});
+
+const courseEyebrow = computed(() => {
+	if (props.publicCatalog) return "Course preview";
+	return selectedCourseStatus.value === "past"
+		? "Past course"
+		: "Current course";
+});
 
 const courseDescription = computed(() =>
 	props.publicCatalog
@@ -1344,13 +1385,19 @@ function writeStoredValue(key: string, value: string) {
 						>
 							No assigned courses
 						</option>
-						<option
-							v-for="course in courseList"
-							:key="course.id"
-							:value="course.id"
+						<optgroup
+							v-for="group in courseGroups"
+							:key="group.key"
+							:label="group.label"
 						>
-							{{ course.name }}
-						</option>
+							<option
+								v-for="course in group.courses"
+								:key="course.id"
+								:value="course.id"
+							>
+								{{ course.name }}
+							</option>
+						</optgroup>
 					</select>
 				</label>
 

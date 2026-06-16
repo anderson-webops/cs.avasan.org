@@ -9,9 +9,13 @@ type Displayable =
 	| null
 	| undefined
 	| string[]
+	| CourseStatusMap
 	| CourseProgress[]
 	| Tutor[]
 	| (string | Tutor)[];
+
+export type CourseAccessStatus = "current" | "past";
+export type CourseStatusMap = Record<string, CourseAccessStatus>;
 
 /* ------------------------------------------------------------------ */
 /*  TypeScript interfaces                                             */
@@ -38,6 +42,7 @@ export interface User {
 	recipientName?: string;
 	tutors?: (string | Tutor)[];
 	courseAccess?: string[];
+	courseStatus?: CourseStatusMap;
 	courseProgress?: CourseProgress[];
 	editUsers: boolean;
 	saveEdit: string;

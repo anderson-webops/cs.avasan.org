@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { AdminRecipient } from "@/modules/adminRecipients";
+import type { CourseStatusMap } from "@/modules/courseAccess";
 import { storeToRefs } from "pinia";
 import { computed, onMounted, ref, watch } from "vue";
 import { api } from "@/api";
@@ -10,6 +11,10 @@ import ProfileFields from "@/components/ProfileFields.vue";
 import { useDeleteAccount } from "@/composables/useDeleteAccount";
 import { useEditable } from "@/composables/useEditable";
 import { fetchAdminRecipients } from "@/modules/adminRecipients";
+import {
+	cleanCourseStatusMap,
+	groupCoursesByLearnerStatus
+} from "@/modules/courseAccess";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
 
@@ -29,6 +34,7 @@ const userRecipientNames = ref<Record<string, string>>({});
 const tutorEditing = ref<Record<string, boolean>>({});
 const tutorCourseSelections = ref<Record<string, string[]>>({});
 const userCourseSelections = ref<Record<string, string[]>>({});
+const userCourseStatuses = ref<Record<string, CourseStatusMap>>({});
 const adminRecipients = ref<AdminRecipient[]>([]);
 const recipientListError = ref("");
 const confirmation = ref<{
@@ -57,7 +63,6 @@ const courseNameMap = computed<Record<string, string>>(
 			{} as Record<string, string>
 		) ?? {}
 );
-const courseLabel = (id: string) => courseNameMap.value[id] ?? id;
 const tutorCount = computed(() => tutors.value.length);
 const userCount = computed(() => users.value.length);
 const adminRecipientNames = computed(() =>
@@ -121,6 +126,7 @@ watch(
 		const assignments: Record<string, string[]> = {};
 		const editing: Record<string, boolean> = {};
 		const courses: Record<string, string[]> = {};
+		const courseStatuses: Record<string, CourseStatusMap> = {};
 		const recipientNames: Record<string, string> = {};
 		for (const user of value) {
 			assignments[user._id] = (user.tutors ?? []).map(t =>
@@ -128,11 +134,16 @@ watch(
 			);
 			editing[user._id] = false;
 			courses[user._id] = [...(user.courseAccess ?? [])];
+			courseStatuses[user._id] = cleanCourseStatusMap(
+				courses[user._id],
+				user.courseStatus
+			);
 			recipientNames[user._id] = user.recipientName ?? "";
 		}
 		userAssignments.value = assignments;
 		userEditing.value = editing;
 		userCourseSelections.value = courses;
+		userCourseStatuses.value = courseStatuses;
 		userRecipientNames.value = recipientNames;
 	},
 	{ immediate: true }
@@ -186,9 +197,19 @@ function tutorCourseLabels(tutorID: string) {
 	return list.map(id => names[id] ?? id);
 }
 
-function userCourseLabels(userID: string) {
-	const list = userCourseSelections.value[userID] ?? [];
-	return list.map(id => courseLabel(id));
+function userCourseGroups(userID: string, includeOther = false) {
+	return groupCoursesByLearnerStatus(
+		courseOptions.value,
+		{
+			courseAccess: userCourseSelections.value[userID] ?? [],
+			courseStatus: userCourseStatuses.value[userID] ?? {}
+		},
+		{ includeOther }
+	);
+}
+
+function userCourseStatus(userID: string, courseID: string) {
+	return userCourseStatuses.value[userID]?.[courseID] ?? "current";
 }
 
 function recipientOptionsForUser(userID: string) {
@@ -225,6 +246,13 @@ function cancelUserEdit(userID: string) {
 		userCourseSelections.value = {
 			...userCourseSelections.value,
 			[userID]: [...(user.courseAccess ?? [])]
+		};
+		userCourseStatuses.value = {
+			...userCourseStatuses.value,
+			[userID]: cleanCourseStatusMap(
+				user.courseAccess ?? [],
+				user.courseStatus
+			)
 		};
 		userRecipientNames.value = {
 			...userRecipientNames.value,
@@ -355,9 +383,33 @@ function onUserCourseToggle(
 	const existing = new Set(userCourseSelections.value[userID] ?? []);
 	if (checked) existing.add(courseID);
 	else existing.delete(courseID);
+	const nextCourses = [...existing];
+	const nextStatuses = cleanCourseStatusMap(
+		nextCourses,
+		userCourseStatuses.value[userID] ?? {}
+	);
 	userCourseSelections.value = {
 		...userCourseSelections.value,
-		[userID]: [...existing]
+		[userID]: nextCourses
+	};
+	userCourseStatuses.value = {
+		...userCourseStatuses.value,
+		[userID]: nextStatuses
+	};
+}
+
+function onUserCourseStatusChange(
+	userID: string,
+	courseID: string,
+	status: string
+) {
+	if (!(userCourseSelections.value[userID] ?? []).includes(courseID)) return;
+	userCourseStatuses.value = {
+		...userCourseStatuses.value,
+		[userID]: {
+			...(userCourseStatuses.value[userID] ?? {}),
+			[courseID]: status === "past" ? "past" : "current"
+		}
 	};
 }
 
@@ -369,6 +421,10 @@ async function saveUserEditorChanges(userID: string) {
 		const selection = (userCourseSelections.value[userID] ?? []).filter(
 			id => allowed.has(id)
 		);
+		const courseStatus = cleanCourseStatusMap(
+			selection,
+			userCourseStatuses.value[userID]
+		);
 
 		await api.put(`/users/${userID}/recipient`, {
 			recipientName: userRecipientNames.value[userID] ?? ""
@@ -377,7 +433,8 @@ async function saveUserEditorChanges(userID: string) {
 			tutorIDs: userAssignments.value[userID] ?? []
 		});
 		await api.put(`/users/${userID}/courses`, {
-			courseIDs: selection
+			courseIDs: selection,
+			courseStatus
 		});
 
 		await Promise.all([app.fetchUsers(), app.fetchTutors()]);
@@ -848,21 +905,32 @@ function confirmDeleteAdmin() {
 										Course access
 									</span>
 								</summary>
-								<ul
+								<div
 									v-if="
-										userCourseLabels(String(u._id)).length
+										userCourseGroups(String(u._id)).length
 									"
-									class="summary-list"
+									class="summary-course-groups"
 								>
-									<li
-										v-for="course in userCourseLabels(
+									<div
+										v-for="group in userCourseGroups(
 											String(u._id)
 										)"
-										:key="`${u._id}-${course}`"
+										:key="`${u._id}-${group.key}`"
+										class="summary-course-group"
 									>
-										{{ course }}
-									</li>
-								</ul>
+										<p class="summary-group-label">
+											{{ group.label }}
+										</p>
+										<ul class="summary-list">
+											<li
+												v-for="course in group.courses"
+												:key="`${u._id}-${course.id}`"
+											>
+												{{ course.name }}
+											</li>
+										</ul>
+									</div>
+								</div>
 								<p v-else class="summary-copy is-muted">
 									No course access yet
 								</p>
@@ -950,40 +1018,93 @@ function confirmDeleteAdmin() {
 									Enable courses available from the learner's
 									assigned tutors.
 								</p>
-								<div class="checkbox-grid">
-									<label
-										v-for="course in courseOptions"
-										:key="course.id"
-										:class="{
-											disabled: !userAllowedCourses[
-												String(u._id)
-											]?.has(course.id)
-										}"
+								<div class="course-access-groups">
+									<section
+										v-for="group in userCourseGroups(
+											String(u._id),
+											true
+										)"
+										:key="`${u._id}-edit-${group.key}`"
+										class="course-access-group"
 									>
-										<input
-											:checked="
-												userCourseSelections[
-													String(u._id)
-												]?.includes(course.id)
-											"
-											:disabled="
-												!userAllowedCourses[
-													String(u._id)
-												]?.has(course.id)
-											"
-											type="checkbox"
-											@change="
-												onUserCourseToggle(
-													u._id,
-													course.id,
-													(
-														$event.target as HTMLInputElement
-													).checked
-												)
-											"
-										/>
-										{{ course.name }}
-									</label>
+										<p class="course-access-group-title">
+											{{ group.label }}
+										</p>
+										<div class="checkbox-grid">
+											<div
+												v-for="course in group.courses"
+												:key="course.id"
+												class="course-choice"
+												:class="{
+													disabled:
+														!userAllowedCourses[
+															String(u._id)
+														]?.has(course.id)
+												}"
+											>
+												<label>
+													<input
+														:checked="
+															userCourseSelections[
+																String(u._id)
+															]?.includes(
+																course.id
+															)
+														"
+														:disabled="
+															!userAllowedCourses[
+																String(u._id)
+															]?.has(course.id)
+														"
+														type="checkbox"
+														@change="
+															onUserCourseToggle(
+																u._id,
+																course.id,
+																(
+																	$event.target as HTMLInputElement
+																).checked
+															)
+														"
+													/>
+													<span>{{
+														course.name
+													}}</span>
+												</label>
+												<select
+													v-if="
+														userCourseSelections[
+															String(u._id)
+														]?.includes(course.id)
+													"
+													class="course-status-select"
+													:value="
+														userCourseStatus(
+															String(u._id),
+															course.id
+														)
+													"
+													:aria-label="`Set ${course.name} status for ${u.name}`"
+													@change="
+														onUserCourseStatusChange(
+															String(u._id),
+															course.id,
+															(
+																$event.target as HTMLSelectElement
+															).value
+														)
+													"
+												>
+													<option value="current">
+														Current
+													</option>
+													<option value="past">
+														Past
+													</option>
+												</select>
+											</div>
+										</div>
+									</section>
 								</div>
 							</div>
 
@@ -1552,6 +1673,31 @@ function confirmDeleteAdmin() {
 	border-top: 1px solid rgba(203, 213, 225, 0.62);
 }
 
+.summary-course-groups,
+.course-access-groups {
+	display: grid;
+	gap: 0.9rem;
+}
+
+.summary-block.is-collapsible .summary-course-groups {
+	padding: 0 1.05rem 1rem;
+}
+
+.summary-course-group {
+	display: grid;
+	gap: 0.2rem;
+}
+
+.summary-group-label,
+.course-access-group-title {
+	margin: 0;
+	font-size: 0.76rem;
+	font-weight: 800;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: #0f766e;
+}
+
 .assignment-editor,
 .course-editor {
 	display: grid;
@@ -1586,21 +1732,44 @@ function confirmDeleteAdmin() {
 	gap: 0.65rem;
 }
 
-.checkbox-grid label {
-	display: flex;
-	gap: 0.45rem;
-	align-items: center;
+.course-choice {
+	display: grid;
+	gap: 0.55rem;
 	padding: 0.8rem 0.9rem;
 	border-radius: 16px;
 	background: rgba(248, 250, 252, 0.88);
 	box-shadow: inset 0 0 0 1px rgba(203, 213, 225, 0.72);
+}
+
+.checkbox-grid label {
+	display: flex;
+	gap: 0.45rem;
+	align-items: center;
 	font-size: 0.93rem;
 	color: #12263a;
 }
 
-.checkbox-grid label.disabled {
+.checkbox-grid > label {
+	padding: 0.8rem 0.9rem;
+	border-radius: 16px;
+	background: rgba(248, 250, 252, 0.88);
+	box-shadow: inset 0 0 0 1px rgba(203, 213, 225, 0.72);
+}
+
+.checkbox-grid label.disabled,
+.course-choice.disabled {
 	opacity: 0.5;
 	cursor: not-allowed;
+}
+
+.course-status-select {
+	width: 100%;
+	border: 1px solid rgba(148, 163, 184, 0.55);
+	border-radius: 12px;
+	padding: 0.5rem 0.65rem;
+	background: white;
+	color: #10263a;
+	font: inherit;
 }
 
 .error {

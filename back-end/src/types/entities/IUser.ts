@@ -7,12 +7,15 @@ export interface IUser extends IBaseUser {
 	state: string;
 	tutors: Types.ObjectId[];
 	courseAccess: string[];
+	courseStatus: Record<string, CourseAccessStatus>;
 	courseProgress: CourseProgress[];
 	recipientName?: string;
 	recipientNameKey?: string;
 	editUsers: boolean;
 	role: string; // e.g. "user"
 }
+
+export type CourseAccessStatus = "current" | "past";
 
 export interface CourseProgress {
 	courseId: string;

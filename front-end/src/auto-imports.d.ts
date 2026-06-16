@@ -324,7 +324,7 @@ declare global {
   export type { LearnerCourseProgressController } from './composables/useLearnerCourseProgress'
   import('./composables/useLearnerCourseProgress')
   // @ts-ignore
-  export type { Tutor, User, CourseProgress, Admin } from './stores/app'
+  export type { CourseAccessStatus, CourseStatusMap, Tutor, User, CourseProgress, Admin } from './stores/app'
   import('./stores/app')
   // @ts-ignore
   export type { SubjectGroup, Highlight, FAQ } from './stores/content'

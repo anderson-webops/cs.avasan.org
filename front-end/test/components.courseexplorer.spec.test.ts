@@ -230,6 +230,55 @@ describe("CourseExplorer.vue", () => {
 		expect(wrapper.text()).toContain("Complete");
 	});
 
+	it("groups learner course dropdown options by current and past status", async () => {
+		const pinia = createPinia();
+		setActivePinia(pinia);
+
+		const appStore = useAppStore();
+		const coursesStore = useCoursesStore();
+		const pastCourse = coursesStore.courses[0];
+		const currentCourse = coursesStore.courses[1];
+
+		appStore.setCurrentUser({
+			_id: "user-1",
+			name: "Student",
+			email: "student@example.com",
+			age: 12,
+			state: "GA",
+			courseAccess: [pastCourse.id, currentCourse.id],
+			courseStatus: {
+				[pastCourse.id]: "past",
+				[currentCourse.id]: "current"
+			},
+			courseProgress: [],
+			editUsers: false,
+			saveEdit: "Save"
+		});
+
+		const wrapper = mount(CourseExplorer, {
+			global: {
+				plugins: [pinia]
+			}
+		});
+		await flushPromises();
+
+		await vi.waitFor(() => {
+			expect(wrapper.text()).toContain(currentCourse.name);
+		});
+
+		const groups = wrapper.findAll("optgroup");
+		expect(groups.map(group => group.attributes("label"))).toEqual([
+			"Current courses",
+			"Past courses"
+		]);
+		expect(
+			wrapper.find<HTMLSelectElement>("#course-select").element.value
+		).toBe(currentCourse.id);
+		await vi.waitFor(() => {
+			expect(wrapper.text()).toContain("Current course");
+		});
+	});
+
 	it("lets staff mark selected learner progress with debounced autosave", async () => {
 		vi.useFakeTimers();
 		const pinia = createPinia();

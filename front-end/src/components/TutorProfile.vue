@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { CourseStatusMap } from "@/modules/courseAccess";
 import { storeToRefs } from "pinia";
 import { computed, onMounted, ref, watch } from "vue";
 import { api } from "@/api";
@@ -7,6 +8,10 @@ import LearnerSessionTools from "@/components/LearnerSessionTools.vue";
 import ProfileFields from "@/components/ProfileFields.vue";
 // import { useDeleteAccount } from "@/composables/useDeleteAccount";
 import { useEditable } from "@/composables/useEditable";
+import {
+	cleanCourseStatusMap,
+	groupCoursesByLearnerStatus
+} from "@/modules/courseAccess";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
 
@@ -74,6 +79,7 @@ async function onSaveTutorEdit() {
 /* users under this tutor: course editing */
 const userEditing = ref<Record<string, boolean>>({});
 const userCourseSelections = ref<Record<string, string[]>>({});
+const userCourseStatuses = ref<Record<string, CourseStatusMap>>({});
 
 const coursesStore = useCoursesStore();
 const { courses } = storeToRefs(coursesStore);
@@ -87,12 +93,6 @@ const permittedCourses = computed(() => {
 	return (courses.value ?? []).filter(course => allowed.has(course.id));
 });
 
-const courseLookup = computed(() => {
-	const map: Record<string, string> = {};
-	for (const course of courses.value ?? []) map[course.id] = course.name;
-	return map;
-});
-
 const learnerCount = computed(() => users.value.length);
 const enabledCourseCount = computed(() => permittedCourses.value.length);
 const isTeachingMode = computed(() => props.mode === "teaching");
@@ -101,13 +101,34 @@ watch(
 	users,
 	value => {
 		const selectionMap: Record<string, string[]> = {};
+		const statusMap: Record<string, CourseStatusMap> = {};
 		for (const user of value) {
 			selectionMap[user._id] = [...(user.courseAccess ?? [])];
+			statusMap[user._id] = cleanCourseStatusMap(
+				selectionMap[user._id],
+				user.courseStatus
+			);
 		}
 		userCourseSelections.value = selectionMap;
+		userCourseStatuses.value = statusMap;
 	},
 	{ immediate: true }
 );
+
+function learnerCourseGroups(userID: string, includeOther = false) {
+	return groupCoursesByLearnerStatus(
+		permittedCourses.value,
+		{
+			courseAccess: userCourseSelections.value[userID] ?? [],
+			courseStatus: userCourseStatuses.value[userID] ?? {}
+		},
+		{ includeOther }
+	);
+}
+
+function userCourseStatus(userID: string, courseID: string) {
+	return userCourseStatuses.value[userID]?.[courseID] ?? "current";
+}
 
 function toggleUserEdit(userID: string) {
 	userEditing.value = {
@@ -122,9 +143,33 @@ function onCourseToggle(userID: string, courseID: string, checked: boolean) {
 	const existing = new Set(userCourseSelections.value[userID] ?? []);
 	if (checked) existing.add(courseID);
 	else existing.delete(courseID);
+	const nextCourses = [...existing];
+	const nextStatuses = cleanCourseStatusMap(
+		nextCourses,
+		userCourseStatuses.value[userID] ?? {}
+	);
 	userCourseSelections.value = {
 		...userCourseSelections.value,
-		[userID]: [...existing]
+		[userID]: nextCourses
+	};
+	userCourseStatuses.value = {
+		...userCourseStatuses.value,
+		[userID]: nextStatuses
+	};
+}
+
+function onCourseStatusChange(
+	userID: string,
+	courseID: string,
+	status: string
+) {
+	if (!(userCourseSelections.value[userID] ?? []).includes(courseID)) return;
+	userCourseStatuses.value = {
+		...userCourseStatuses.value,
+		[userID]: {
+			...(userCourseStatuses.value[userID] ?? {}),
+			[courseID]: status === "past" ? "past" : "current"
+		}
 	};
 }
 
@@ -132,8 +177,13 @@ async function saveUserCourses(userID: string) {
 	try {
 		success.value = "";
 		error.value = "";
+		const selection = userCourseSelections.value[userID] ?? [];
 		await api.put(`/users/${userID}/courses`, {
-			courseIDs: userCourseSelections.value[userID] ?? []
+			courseIDs: selection,
+			courseStatus: cleanCourseStatusMap(
+				selection,
+				userCourseStatuses.value[userID]
+			)
 		});
 		success.value = "Saved course access.";
 		await loadUsers();
@@ -317,15 +367,29 @@ async function saveUserCourses(userID: string) {
 
 					<div class="summary-block is-inline">
 						<p class="summary-label">Course access</p>
-						<p class="summary-copy">
-							{{
-								(u.courseAccess?.length ?? 0)
-									? (u.courseAccess ?? [])
-											.map(id => courseLookup[id] ?? id)
-											.join(", ")
-									: "No course access yet"
-							}}
-						</p>
+						<div
+							v-if="learnerCourseGroups(u._id).length"
+							class="summary-course-groups"
+						>
+							<div
+								v-for="group in learnerCourseGroups(u._id)"
+								:key="`${u._id}-${group.key}`"
+								class="summary-course-group"
+							>
+								<p class="summary-group-label">
+									{{ group.label }}
+								</p>
+								<ul class="summary-list">
+									<li
+										v-for="course in group.courses"
+										:key="`${u._id}-${course.id}`"
+									>
+										{{ course.name }}
+									</li>
+								</ul>
+							</div>
+						</div>
+						<p v-else class="summary-copy">No course access yet</p>
 					</div>
 
 					<LearnerSessionTools
@@ -338,29 +402,76 @@ async function saveUserCourses(userID: string) {
 						<p v-if="permittedCourses.length === 0" class="hint">
 							Your admin hasn’t enabled course access yet.
 						</p>
-						<div v-else class="checkbox-grid">
-							<label
-								v-for="course in permittedCourses"
-								:key="course.id"
+						<div v-else class="course-access-groups">
+							<section
+								v-for="group in learnerCourseGroups(
+									u._id,
+									true
+								)"
+								:key="`${u._id}-edit-${group.key}`"
+								class="course-access-group"
 							>
-								<input
-									:checked="
-										userCourseSelections[u._id]?.includes(
-											course.id
-										)
-									"
-									type="checkbox"
-									@change="
-										onCourseToggle(
-											u._id,
-											course.id,
-											($event.target as HTMLInputElement)
-												.checked
-										)
-									"
-								/>
-								{{ course.name }}
-							</label>
+								<p class="course-access-group-title">
+									{{ group.label }}
+								</p>
+								<div class="checkbox-grid">
+									<div
+										v-for="course in group.courses"
+										:key="course.id"
+										class="course-choice"
+									>
+										<label>
+											<input
+												:checked="
+													userCourseSelections[
+														u._id
+													]?.includes(course.id)
+												"
+												type="checkbox"
+												@change="
+													onCourseToggle(
+														u._id,
+														course.id,
+														(
+															$event.target as HTMLInputElement
+														).checked
+													)
+												"
+											/>
+											<span>{{ course.name }}</span>
+										</label>
+										<select
+											v-if="
+												userCourseSelections[
+													u._id
+												]?.includes(course.id)
+											"
+											class="course-status-select"
+											:value="
+												userCourseStatus(
+													u._id,
+													course.id
+												)
+											"
+											:aria-label="`Set ${course.name} status for ${u.name}`"
+											@change="
+												onCourseStatusChange(
+													u._id,
+													course.id,
+													(
+														$event.target as HTMLSelectElement
+													).value
+												)
+											"
+										>
+											<option value="current">
+												Current
+											</option>
+											<option value="past">Past</option>
+										</select>
+									</div>
+								</div>
+							</section>
 						</div>
 						<div class="action-row">
 							<button
@@ -576,6 +687,45 @@ async function saveUserCourses(userID: string) {
 	color: #41566a;
 }
 
+.summary-course-groups,
+.course-access-groups {
+	display: grid;
+	gap: 0.9rem;
+}
+
+.summary-course-group {
+	display: grid;
+	gap: 0.2rem;
+}
+
+.summary-group-label,
+.course-access-group-title {
+	margin: 0;
+	font-size: 0.76rem;
+	font-weight: 800;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: #0f766e;
+}
+
+.summary-list {
+	display: grid;
+	gap: 0;
+	list-style: none;
+	margin: 0.45rem 0 0;
+	padding: 0;
+}
+
+.summary-list li {
+	padding: 0.45rem 0;
+	line-height: 1.55;
+	color: #10263a;
+}
+
+.summary-list li + li {
+	border-top: 1px solid rgba(203, 213, 225, 0.62);
+}
+
 .sheet-body {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -652,21 +802,43 @@ async function saveUserCourses(userID: string) {
 	gap: 0.65rem;
 }
 
-.checkbox-grid label {
-	display: flex;
-	gap: 0.45rem;
-	align-items: center;
+.course-choice {
+	display: grid;
+	gap: 0.55rem;
 	padding: 0.8rem 0.9rem;
 	border-radius: 16px;
 	background: rgba(248, 250, 252, 0.88);
 	box-shadow: inset 0 0 0 1px rgba(203, 213, 225, 0.72);
+}
+
+.checkbox-grid label {
+	display: flex;
+	gap: 0.45rem;
+	align-items: center;
 	font-size: 0.93rem;
 	color: #12263a;
+}
+
+.checkbox-grid > label {
+	padding: 0.8rem 0.9rem;
+	border-radius: 16px;
+	background: rgba(248, 250, 252, 0.88);
+	box-shadow: inset 0 0 0 1px rgba(203, 213, 225, 0.72);
 }
 
 .status {
 	color: #15803d;
 	margin-top: 0.5rem;
+}
+
+.course-status-select {
+	width: 100%;
+	border: 1px solid rgba(148, 163, 184, 0.55);
+	border-radius: 12px;
+	padding: 0.5rem 0.65rem;
+	background: white;
+	color: #10263a;
+	font: inherit;
 }
 
 .error {

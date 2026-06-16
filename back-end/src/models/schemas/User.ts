@@ -36,6 +36,10 @@ const userSchema: Schema<IUser> = new Schema(
 			type: [String],
 			default: []
 		},
+		courseStatus: {
+			type: Schema.Types.Mixed,
+			default: {}
+		},
 		courseProgress: {
 			type: [
 				{
