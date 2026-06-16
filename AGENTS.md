@@ -61,6 +61,32 @@
 - Treat the repo-root `npm ci` path as the source of truth for deploy readiness.
 - Any time `package.json`, any workspace `package.json`, dependency ranges, `package-lock.json`, or dependency update tooling changes, verify lockfile parity from the repo root before committing.
 - Do not rely on `npm install` fallback as success. A change is not deploy-ready unless root `npm ci` succeeds.
+- Do not run `npm install`, `npm update`, `npm ci`, Playwright/Cypress installs, or dependency-refresh commands automatically unless dependencies or lockfiles changed, dependencies are missing, or the user explicitly asks for a clean dependency gate.
+
+## Task-Spawning Guardrails
+
+- Before spawning heavy tasks, check for existing work and avoid duplicate churn.
+- Never run dependency installs concurrently across `classes.jacobdanderson.net` and `scheduler.classes.jacobdanderson.net`. Use a shared lock such as `/tmp/classes-family-dependency-install.lock` or `/tmp/classes-family-heavy-task.lock`.
+- Ignore generated/heavy directories in file watching, searches, indexing, audits, and task triggers: `node_modules`, `front-end/node_modules`, `back-end/node_modules`, `.git`, `.next`, `dist`, `build`, `coverage`, `.cache`, `.turbo`, `.vite`, `playwright-report`, and `test-results`.
+- If a task creates or refreshes dependency trees, mark generated dependency directories as non-indexable where possible: `touch node_modules/.metadata_never_index`, and do the same for `front-end/node_modules` and `back-end/node_modules` when present.
+- Enforce concurrency caps: max 1 dependency install across both repos, max 1 browser automation run per repo, and max 2 total heavy tasks across both repos. Queue extra tasks instead of spawning immediately. For install/setup commands, prefer a shared lock wrapper equivalent to:
+  ```sh
+  lock=/tmp/classes-family-heavy-task.lock
+  (
+    flock -n 9 || {
+      echo "Another classes/scheduler.classes heavy task is already running; skipping."
+      exit 0
+    }
+
+    npm ci
+  ) 9>"$lock"
+  ```
+  On macOS, use a Node/Python lockfile or install `flock` via Homebrew if `flock` is unavailable.
+- Every spawned process must log a clear parent task id, cwd, command, pid, start time, end time, exit code, timeout, and child-process-group cleanup on failure or cancellation.
+- Browser tasks must close pages, contexts, browser processes, and any dev servers they started in `finally`.
+- Avoid broad filesystem scans from the repo root unless filtered. Use `rg` with explicit excludes and never scan `node_modules`.
+- Do not start a dev server if the needed port is already served by a healthy process. Reuse it or fail clearly.
+- If macOS load average is already high, defer non-urgent jobs. Avoid new heavy jobs when load average is above 8, avoid dependency/file-generation jobs while `mds_stores` has high CPU, and avoid installs/builds when available disk is under 40 GB unless required.
 
 Required production/dev dependency update flow before every dependency commit:
 1. Check production and development dependency freshness from the repository root with `npm outdated --workspaces --long` or the repo's documented equivalent.
@@ -69,12 +95,14 @@ Required production/dev dependency update flow before every dependency commit:
 4. If the update is only a lockfile/security refresh, regenerate from the root with `npm install --package-lock-only --ignore-scripts --no-fund --no-audit`.
 5. Run `npm audit` from the repository root and resolve remaining production or dev advisories before committing unless a documented upstream limitation prevents it.
 
-Required dependency verification before every commit/push:
-1. Run `npm ci` from the repository root.
+Required dependency verification before dependency/lockfile commits and deploy-critical clean-install checks:
+1. Run `npm ci` from the repository root through the shared classes-family install lock.
 2. Run `npm run lint`.
 3. Run `npm run typecheck`.
 4. Run `npm run build`.
 5. If API or back-end behavior changed and the repo has a back-end workspace, run `npm run -w back-end test` or the repo's equivalent API test command.
+
+For non-dependency source or documentation changes, do not run `npm ci` automatically. Use existing dependencies for the relevant lightweight checks, and skip generated-tree churn unless dependencies are missing, lockfiles changed, or the user explicitly requests a clean dependency gate.
 
 If `npm ci` fails because `package.json` and `package-lock.json` are out of sync:
 1. Run `npm install --package-lock-only --ignore-scripts --no-fund --no-audit` from the repository root.
