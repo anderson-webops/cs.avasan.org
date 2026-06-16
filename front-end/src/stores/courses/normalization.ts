@@ -472,7 +472,7 @@ function cleanAppliedLabReferenceText(text: string) {
 
 function neutralizeLessonPointText(text: string) {
 	const hasSupportLabel =
-		/\*\*(?:Focus|Expected outcome|Verification focus|Readable output|Result quality|Project goal|Concept path|Readiness check|Common pitfalls|Mastery check|Remote investigation|Science explanation|Studio focus|Build sequence|Completion checks|Evidence target|Evidence targets|Extension):?\*\*/i.test(
+		/\*\*(?:Focus|Goal|Outcome|Expected outcome|Verification focus|Readable output|Result quality|Project goal|Concept path|Readiness check|Common pitfalls|Mastery check|Investigation|Remote investigation|Explanation|Science explanation|Studio focus|Build steps|Build sequence|Checkpoints|Completion checks|Evidence target|Evidence targets|Extension):?\*\*/i.test(
 			text
 		);
 	const source =
@@ -660,7 +660,7 @@ interface CourseTextContext {
 }
 
 const structuredSupportPattern =
-	/\*\*(?:Project goal|Teaching flow|Concept path|Learning sequence|Diagnostic guidance|Readiness check|Misconception check|Common pitfalls|Exit check|Mastery check|Remote investigation|Science explanation|Studio focus|Evidence target|Evidence targets|AP connection):?\*\*/i;
+	/\*\*(?:Goal|Project goal|Teaching flow|Concept path|Learning sequence|Diagnostic guidance|Readiness check|Misconception check|Common pitfalls|Exit check|Mastery check|Investigation|Remote investigation|Explanation|Science explanation|Studio focus|Evidence target|Evidence targets|AP connection):?\*\*/i;
 
 const placeholderContentPattern =
 	/\b(?:introduce the main goal|build the central artifact|define the success criteria|use the .* snapshot|alternate supplemental snapshot)\b/i;
@@ -832,7 +832,7 @@ function formatInlineNumberedLists(text: string) {
 
 function formatSupportLabels(text: string) {
 	return text.replace(
-		/(\S)[ \t]+(\*\*(?:Focus|Expected outcome|Verification focus|Readable output|Result quality|Project goal|Required outcome|Completion checks|Evidence target|Evidence targets|Extension|Concept path|Common pitfalls|Mastery check|Readiness check|Evidence of proficiency|If this is difficult|Remote investigation|Science explanation|Output|Practice target|Visible pattern|Key idea|Skill target):\*\*)/g,
+		/(\S)[ \t]+(\*\*(?:Focus|Goal|Outcome|Expected outcome|Verification focus|Readable output|Result quality|Project goal|Required outcome|Include|Required fields|Notes|Required notes|Steps|Work sequence|Build steps|Build sequence|Checkpoints|Completion checks|Evidence target|Evidence targets|Extension|Concept path|Common pitfalls|Mastery check|Readiness check|Evidence of proficiency|If this is difficult|Investigation|Remote investigation|Explanation|Science explanation|Output|Practice target|Visible pattern|Key idea|Skill target):\*\*)/g,
 		(_match, prefix: string, label: string, offset: number) => {
 			const lineStart = text.lastIndexOf("\n", offset) + 1;
 			const indentation =
@@ -841,6 +841,22 @@ function formatSupportLabels(text: string) {
 			return `${prefix}\n\n${indentation}${label}`;
 		}
 	);
+}
+
+function normalizeSupportLabelText(text: string) {
+	return text
+		.replace(/\*\*Project goal:\*\*/gi, "**Goal:**")
+		.replace(/\*\*Required outcome:\*\*/gi, "**Outcome:**")
+		.replace(/\*\*Required fields:\*\*/gi, "**Include:**")
+		.replace(/\*\*Required notes:\*\*/gi, "**Notes:**")
+		.replace(/\*\*Required elements:\*\*/gi, "**Include:**")
+		.replace(/\*\*Work sequence:\*\*/gi, "**Steps:**")
+		.replace(/\*\*Implementation steps:\*\*/gi, "**Steps:**")
+		.replace(/\*\*Success criteria:\*\*/gi, "**Success:**")
+		.replace(/\*\*Build sequence:\*\*/gi, "**Build steps:**")
+		.replace(/\*\*Completion checks:\*\*/gi, "**Checkpoints:**")
+		.replace(/\*\*Remote investigation:\*\*/gi, "**Investigation:**")
+		.replace(/\*\*Science explanation:\*\*/gi, "**Explanation:**");
 }
 
 function formatNamedCheckpointPrompts(text: string) {
@@ -1301,7 +1317,7 @@ function neutralizeStudentFacingText(text: string) {
 				.replace(/\*\*Learning sequence:\*\*/gi, "**Concept path:**")
 				.replace(/\*\*Use this section:\*\*/gi, "**Learning path:**")
 				.replace(/\*\*Output:\*\*/gi, "**Result:**")
-				.replace(/\*\*Requirements:\*\*/gi, "**Required elements:**")
+				.replace(/\*\*Requirements:\*\*/gi, "**Include:**")
 				.replace(/\*\*Completion check:\*\*/gi, "**Evidence target:**")
 				.replace(
 					/\bThe final artifact should name\b/g,
@@ -1891,7 +1907,9 @@ function neutralizeStudentFacingText(text: string) {
 		)
 	);
 
-	return normalizeSectionActionAgreement(neutralized);
+	return normalizeSectionActionAgreement(
+		normalizeSupportLabelText(neutralized)
+	);
 }
 
 function neutralizeStudentFacingCourseText(course: RawCourse) {

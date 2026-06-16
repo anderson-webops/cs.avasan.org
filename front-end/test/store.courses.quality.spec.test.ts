@@ -1223,7 +1223,7 @@ describe("course text quality normalization", () => {
 			const genericTitleSuffix =
 				/(?:Applied Challenge|Core Project|Debugging and Failure Modes|Diagnostic Checkpoint|Extension Challenge|Fluency Drill|Focused Practice|Modeling or Error Analysis|Open-Ended Variant|Planning and Architecture|Standards Practice Set|Supplemental(?: Project| Practice)? [23]|Verification and Reflection)$/i;
 			const nestedBoldProjectGoalPattern =
-				/\*\*Project goal:\*\*\s+\*\*[^*\n]{1,180}\*\*/;
+				/\*\*Goal:\*\*\s+\*\*[^*\n]{1,180}\*\*/;
 			const nestedBoldStudioGoalPattern =
 				/\*\*(?:Applied studio|Applied lab):\*\*\s+\*\*[^*\n]{1,180}\*\*/;
 			const repeatedWordPattern = /\b([A-Za-z][A-Za-z-]{3,})\s+\1\b/i;
@@ -1250,7 +1250,9 @@ describe("course text quality normalization", () => {
 						if (
 							genericTitleSuffix.test(item.title) &&
 							(item.title.startsWith(`${module.title}:`) ||
-								item.title.startsWith(`${course.name}: ${module.title}`))
+								item.title.startsWith(
+									`${course.name}: ${module.title}`
+								))
 						) {
 							redundantGenericTitles.push(
 								`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title}`
@@ -1362,10 +1364,10 @@ describe("course text quality normalization", () => {
 
 		const calendarMachine = findItem(course!, /Calendar Machine/);
 
-		expect(calendarMachine.content).toContain("**Project goal:**");
-		expect(calendarMachine.content).toContain("**Required outcome:**");
+		expect(calendarMachine.content).toContain("**Goal:**");
+		expect(calendarMachine.content).toContain("**Outcome:**");
 		expect(calendarMachine.content).toContain("Test zero days");
-		expect(calendarMachine.content).toContain("**Completion checks:**");
+		expect(calendarMachine.content).toContain("**Checkpoints:**");
 	});
 
 	it("preserves structured guidance after UI course-store normalization", async () => {
@@ -1375,8 +1377,8 @@ describe("course text quality normalization", () => {
 
 		const calendarMachine = findItem(course!, /Calendar Machine/);
 
-		expect(calendarMachine.content).toContain("**Project goal:**");
-		expect(calendarMachine.content).toContain("**Required outcome:**");
+		expect(calendarMachine.content).toContain("**Goal:**");
+		expect(calendarMachine.content).toContain("**Outcome:**");
 		expect(calendarMachine.content.length).toBeGreaterThan(500);
 	});
 
@@ -1412,9 +1414,7 @@ describe("course text quality normalization", () => {
 			?.curriculum.find(item => item.title === "Core Concepts");
 
 		expect(scratchStudio).toBeDefined();
-		expect(scratchStudio!.content).toContain(
-			"\n   **Completion checks:**\n   -"
-		);
+		expect(scratchStudio!.content).toContain("\n   **Checkpoints:**\n   -");
 		expect(scratchStudio!.content).toContain(
 			"**Extension:** Add a broadcast, backdrop change, or sprite interaction that reuses the same event logic."
 		);
@@ -1425,7 +1425,7 @@ describe("course text quality normalization", () => {
 			"Concept Path (GS16 Debugging and Remix Studio)"
 		);
 		expect(scratchStudio!.content).not.toMatch(
-			/\n \n\n\*\*Completion checks:\*\*/
+			/\n \n\n\*\*Checkpoints:\*\*/
 		);
 
 		const neuralNetworks = machineLearning!.modules
@@ -1562,13 +1562,11 @@ describe("course text quality normalization", () => {
 		expect(spinner.content).toContain(
 			"It's time to build a fun spinner:\n\n1. When the green flag is clicked"
 		);
-		expect(spinner.content).toContain(
-			"towards the mouse.\n\n**Project goal:**"
-		);
+		expect(spinner.content).toContain("towards the mouse.\n\n**Goal:**");
 		expect(spinner.content).toContain(
 			"enough structure, naming, and evidence to support Scratch game design"
 		);
-		expect(spinner.content).toContain("\n\n**Required outcome:**");
+		expect(spinner.content).toContain("\n\n**Outcome:**");
 		expect(spinner.content).not.toContain("Build a working result for");
 
 		const imagesReview = findItem(pygames!, /Images and Sprites: Review/);
@@ -1665,7 +1663,7 @@ describe("course text quality normalization", () => {
 		);
 		const elementaryCorpus = allCourseText(elementaryScience);
 
-		expect(scopeSheet.content).toContain("**Required fields:**");
+		expect(scopeSheet.content).toContain("**Include:**");
 		expect(scopeSheet.content).toContain("reset path");
 		expect(responsibleUse.content).toContain("possible harm");
 		expect(responsibleUse.content).toContain("human review step");
@@ -1728,10 +1726,10 @@ describe("course text quality normalization", () => {
 				/\*\*Concept focus:\*\* [^\n.]+ (?:becomes useful when|is checked by|connects the main terms to)/i
 			);
 			expect(corpus).not.toMatch(
-				/\*\*Project goal:\*\* (?:Use|Turn|Produce|Complete|Build|Implement|Develop|Create|Finish|Refine) \*\*[^*]+\*\* (?:to turn the module concept|with a stated goal|as a focused checkpoint|around one concrete behavior)/i
+				/\*\*Goal:\*\* (?:Use|Turn|Produce|Complete|Build|Implement|Develop|Create|Finish|Refine) \*\*[^*]+\*\* (?:to turn the module concept|with a stated goal|as a focused checkpoint|around one concrete behavior)/i
 			);
 			expect(corpus).not.toMatch(
-				/\*\*Project goal:\*\* \*\*[^*]+\*\* (?:makes [^\n.]+ inspectable|needs an observable result|has a clear input, process, and output path)/i
+				/\*\*Goal:\*\* \*\*[^*]+\*\* (?:makes [^\n.]+ inspectable|needs an observable result|has a clear input, process, and output path)/i
 			);
 			expect(corpus).not.toMatch(
 				/\*\*Concept path:\*\* (?:The core vocabulary for|Define the terms that matter for|[^\n.]+ makes [^\n.]+ concrete through a rule or model)/i
@@ -1740,7 +1738,7 @@ describe("course text quality normalization", () => {
 				/A complete response for [^\n.]+ names [^\n.]+, (?:identifies|explains|solves|traces|checks|shows|separates|demonstrates|records)/i
 			);
 			expect(corpus).not.toMatch(
-				/\*\*Project goal:\*\* \*\*[^*]+\*\* produces a visible result for [^\n.]+: one ordinary path/i
+				/\*\*Goal:\*\* \*\*[^*]+\*\* produces a visible result for [^\n.]+: one ordinary path/i
 			);
 			expect(corpus).not.toMatch(
 				/\*\*Concept path:\*\* [^\n.]+ starts with the relevant parts of [^\n.]+, then follows one concrete example through a changed case/i
@@ -1842,7 +1840,7 @@ describe("course text quality normalization", () => {
 		const binarySearch = findItem(
 			course!,
 			/Binary Search/,
-			/\*\*Project goal:\*\*/
+			/\*\*Goal:\*\*/
 		);
 
 		expect(binarySearch.content).toContain("AP CSA Java reasoning");
@@ -1911,7 +1909,7 @@ describe("course text quality normalization", () => {
 			]);
 			const corpus = courses.map(allCourseText).join("\n");
 
-			expect(corpus).toContain("**Remote investigation:**");
+			expect(corpus).toContain("**Investigation:**");
 			expect(corpus).not.toContain(
 				"The activity does not require beakers, kits, or household materials; any physical demonstration is optional and replaceable with a diagram or data table"
 			);
@@ -2198,8 +2196,8 @@ describe("course text quality normalization", () => {
 			])
 			.find(item => item.content.includes("**Studio focus:**"));
 
-		expect(studioItem?.content).toContain("**Build sequence:**");
-		expect(studioItem?.content).toContain("**Completion checks:**");
+		expect(studioItem?.content).toContain("**Build steps:**");
+		expect(studioItem?.content).toContain("**Checkpoints:**");
 		expect(studioItem?.content).toMatch(/authorization|authorized/i);
 		expect(studioItem?.content).toMatch(/local (lab|evidence|target)/i);
 	});
