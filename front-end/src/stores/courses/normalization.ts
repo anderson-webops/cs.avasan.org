@@ -552,8 +552,8 @@ function briefConceptAddendum(
 	}
 
 	return [
-		`**Concept focus:** ${topic} starts with the terms needed to describe a concrete example, then tests the idea with one nearby change.`,
-		`**Concept focus:** ${topic} needs one worked example, one changed condition, and a clear reason the result still follows from the idea.`,
+		`**Concept focus:** ${topic} begins with the vocabulary for one concrete example, then changes one condition to test transfer.`,
+		`**Concept focus:** ${topic} pairs a worked example with a changed condition so the reasoning can be checked, not memorized.`,
 		`**Concept focus:** ${topic} links vocabulary to evidence by naming what happens in a concrete case and what changes in a second case.`,
 		`**Concept focus:** ${topic} links definitions to practice by naming the idea, tracing one example, and checking a changed condition.`
 	][hash % 4];
@@ -4204,7 +4204,7 @@ function projectSupport(context: CourseTextContext) {
 		() =>
 			`**Project goal:** ${reference} produces a visible result tied to ${focus}. Include a normal path, an edge case, and one sentence explaining the evidence.`,
 		() =>
-			`**Project goal:** ${reference} ends with an observable result, a checked assumption, and evidence tied to ${focus}.`,
+			`**Project goal:** ${reference} states the target behavior or claim, checks one assumption, and records evidence tied to ${focus}.`,
 		() =>
 			`**Project goal:** ${reference} turns ${focus} into something testable: run it, inspect the output, and record what proves the idea works.`,
 		() =>
@@ -4218,13 +4218,13 @@ function projectSupport(context: CourseTextContext) {
 		() =>
 			`**Project goal:** ${reference} includes enough structure, naming, and evidence to support ${focus} without relying on memory.`,
 		() =>
-			`**Project goal:** ${reference} makes the central decision for ${focus} explicit, tested, and visible in the final artifact.`,
+			`**Project goal:** ${reference} names the main design or reasoning choice, tests it, and makes the result visible in the final artifact.`,
 		() =>
 			`**Project goal:** ${reference} demonstrates ${focus} with one ordinary case and one case that could fail if the idea is misunderstood.`,
 		() =>
-			`**Project goal:** ${reference} connects the prompt requirements to ${focus}, then documents the evidence that proves the connection works.`,
+			`**Project goal:** ${reference} maps the task requirements to ${focus}, then records the evidence that proves the result works.`,
 		() =>
-			`**Project goal:** ${reference} documents the input, process, and output path, then connects the result to ${focus}.`
+			`**Project goal:** ${reference} identifies the input or starting state, the main transformation, and the output or conclusion tied to ${focus}.`
 	]);
 
 	return [
@@ -4798,7 +4798,7 @@ function lessonSupport(context: CourseTextContext) {
 		subject =>
 			`**Concept path:** ${subject} shows how ${focus} appears in a concrete task: identify the state or representation, trace the example, and test a variation.`,
 		subject =>
-			`**Concept path:** ${subject} turns ${focus} into a usable model by pairing the rule with a worked example and a transfer check.`
+			`**Concept path:** ${subject} uses one worked example and one transfer check to show how ${focus} changes with the situation.`
 	]);
 
 	return [

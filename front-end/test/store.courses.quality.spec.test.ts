@@ -1754,6 +1754,27 @@ describe("course text quality normalization", () => {
 				/\*\*Concept path:\*\* [^\n.]+ starts with the relevant parts of [^\n.]+, then follows one concrete example through a changed case/i
 			);
 			expect(corpus).not.toMatch(
+				/\bmakes the central decision for\b/i
+			);
+			expect(corpus).not.toMatch(
+				/\bconnects the prompt requirements to\b/i
+			);
+			expect(corpus).not.toMatch(
+				/\bends with an observable result, a checked assumption, and evidence tied to\b/i
+			);
+			expect(corpus).not.toMatch(
+				/\bdocuments the input, process, and output path\b/i
+			);
+			expect(corpus).not.toMatch(
+				/\bturns [^\n.]{1,160} into a usable model by pairing the rule with a worked example\b/i
+			);
+			expect(corpus).not.toMatch(
+				/\*\*Concept focus:\*\* [^\n.]+ needs one worked example/i
+			);
+			expect(corpus).not.toMatch(
+				/\*\*Concept focus:\*\* [^\n.]+ starts with the terms needed/i
+			);
+			expect(corpus).not.toMatch(
 				/\bThis module focuses on (?:turn|connect|use|map|combine|organize|diagnose)\b/i
 			);
 			expect(corpus).not.toMatch(/\bThe work should make\b/i);
