@@ -4,7 +4,8 @@ import { Types } from "mongoose";
 import { z } from "zod";
 import { PythonProject } from "../../models/schemas/PythonProject.js";
 
-const PYTHON_FILE_NAME_RE = /^[A-Za-z_][\w.-]*\.py$/;
+const PROJECT_FILE_NAME_RE = /^[A-Z_][\w.-]*\.(?:csv|json|md|py|txt)$/i;
+const PYTHON_FILE_NAME_RE = /\.py$/i;
 const MAX_PROJECT_FILES = 24;
 const MAX_FILE_LENGTH = 80_000;
 const MAX_PROJECT_LENGTH = 500_000;
@@ -20,7 +21,10 @@ const projectFileSchema = z.object({
 		.trim()
 		.min(1)
 		.max(80)
-		.regex(PYTHON_FILE_NAME_RE, "Use a Python filename like main.py"),
+		.regex(
+			PROJECT_FILE_NAME_RE,
+			"Use a safe file name ending in .py, .csv, .json, .txt, or .md"
+		),
 	content: z.string().max(MAX_FILE_LENGTH)
 });
 const projectFilesSchema = z
@@ -32,6 +36,10 @@ const projectFilesSchema = z
 			files.reduce((total, file) => total + file.name.length + file.content.length, 0)
 			<= MAX_PROJECT_LENGTH,
 		`Project files must be ${MAX_PROJECT_LENGTH} characters or less in total`
+	)
+	.refine(
+		files => files.some(file => PYTHON_FILE_NAME_RE.test(file.name)),
+		"Project must include at least one Python file"
 	);
 
 const projectPayloadSchema = z.object({

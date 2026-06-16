@@ -1,10 +1,14 @@
 import type { PythonIdeFile, PythonIdeMode } from "@/modules/pythonIde";
+import {
+	getPythonIdeRunnableFile,
+	isPythonIdePythonFile
+} from "@/modules/pythonIde";
 
 const PYODIDE_VERSION = "314.0.0";
 const PYODIDE_INDEX_URL = `https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSION}/full/`;
 const PYODIDE_SCRIPT_SRC = `${PYODIDE_INDEX_URL}pyodide.js`;
 const PROJECT_ROOT = "/home/pyodide/classes_project";
-const PYTHON_EXTENSION_RE = /\.py$/;
+const PYTHON_EXTENSION_RE = /\.py$/i;
 const IMPORT_MODULE_RE = /^import\s+([A-Za-z_]\w*)/;
 const FROM_IMPORT_MODULE_RE = /^from\s+([A-Za-z_]\w*)\s+import\b/;
 const MICROPIP_PACKAGES = new Map([
@@ -1043,6 +1047,7 @@ function importedTopLevelModules(files: PythonIdeFile[]) {
 	const modules = new Set<string>();
 
 	for (const line of files
+		.filter(file => isPythonIdePythonFile(file.name))
 		.map(file => file.content)
 		.join("\n")
 		.split("\n")) {
@@ -1057,6 +1062,7 @@ function importedTopLevelModules(files: PythonIdeFile[]) {
 }
 
 function packageScanCode(files: PythonIdeFile[]) {
+	const pythonFiles = files.filter(file => isPythonIdePythonFile(file.name));
 	const localModules = new Set([
 		"_classes_pgzero",
 		"_classes_artifacts",
@@ -1066,10 +1072,10 @@ function packageScanCode(files: PythonIdeFile[]) {
 		"pygame",
 		"turtle",
 		"zrect",
-		...files.map(file => file.name.replace(PYTHON_EXTENSION_RE, ""))
+		...pythonFiles.map(file => file.name.replace(PYTHON_EXTENSION_RE, ""))
 	]);
 
-	return files
+	return pythonFiles
 		.map(file => file.content)
 		.join("\n")
 		.split("\n")
@@ -1211,9 +1217,7 @@ export async function runPythonProject(options: RunPythonProjectOptions) {
 	}
 	writeRuntimeShims(pyodide);
 
-	const activeFile =
-		options.files.find(file => file.name === options.activeFileName) ??
-		options.files[0];
+	const activeFile = getPythonIdeRunnableFile(options);
 	if (!activeFile)
 		throw new Error("Project does not have a runnable Python file.");
 

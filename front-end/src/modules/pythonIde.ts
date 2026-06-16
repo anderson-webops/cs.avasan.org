@@ -1,7 +1,9 @@
 import { api } from "@/api";
 
 const WHITESPACE_RE = /\s+/g;
-const PYTHON_FILE_NAME_RE = /^[A-Za-z_][\w.-]*\.py$/;
+const FILE_EXTENSION_RE = /\.[\dA-Z]+$/i;
+const PYTHON_EXTENSION_RE = /\.py$/i;
+const PYTHON_IDE_FILE_NAME_RE = /^[A-Z_][\w.-]*\.(?:csv|json|md|py|txt)$/i;
 
 export type PythonIdeMode = "data" | "pgzero" | "python" | "turtle";
 
@@ -34,6 +36,13 @@ export interface PythonIdeLibrarySupport {
 }
 
 export const pythonIdeStorageNamespace = "classes-python-ide-projects";
+export const pythonIdeAllowedFileExtensions = [
+	".py",
+	".csv",
+	".json",
+	".txt",
+	".md"
+] as const;
 
 export const pythonIdeLibrarySupport: PythonIdeLibrarySupport[] = [
 	{
@@ -112,15 +121,18 @@ def update():
 pgzrun.go()
 `;
 
+export const dataScienceSampleCsv = `student,pre,post
+Ari,62,81
+Bao,71,85
+Cleo,58,76
+Dev,80,90
+`;
+
 export const dataScienceStarterCode = `import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-scores = pd.DataFrame({
-\t"student": ["Ari", "Bao", "Cleo", "Dev"],
-\t"pre": [62, 71, 58, 80],
-\t"post": [81, 85, 76, 90],
-})
+scores = pd.read_csv("scores.csv")
 
 scores["growth"] = scores["post"] - scores["pre"]
 print(scores)
@@ -149,6 +161,24 @@ function getStarterCode(mode: PythonIdeMode) {
 	return pythonStarterCode;
 }
 
+function getStarterFiles(mode: PythonIdeMode): PythonIdeFile[] {
+	const files = [
+		{
+			name: "main.py",
+			content: getStarterCode(mode)
+		}
+	];
+
+	if (mode === "data") {
+		files.push({
+			name: "scores.csv",
+			content: dataScienceSampleCsv
+		});
+	}
+
+	return files;
+}
+
 export function createPythonIdeProject(
 	mode: PythonIdeMode = "python"
 ): PythonIdeProject {
@@ -164,12 +194,7 @@ export function createPythonIdeProject(
 						? "Turtle Drawing"
 						: "Python Practice",
 		mode,
-		files: [
-			{
-				name: "main.py",
-				content: getStarterCode(mode)
-			}
-		],
+		files: getStarterFiles(mode),
 		activeFileName: "main.py",
 		createdAt: now,
 		updatedAt: now
@@ -183,11 +208,51 @@ export function pythonIdeStorageKey(userID?: string | null) {
 export function normalizePythonFileName(value: string) {
 	const cleaned = value.trim().replaceAll(WHITESPACE_RE, "_");
 	if (!cleaned) return "";
-	return cleaned.endsWith(".py") ? cleaned : `${cleaned}.py`;
+	const extensionMatch = cleaned.match(FILE_EXTENSION_RE);
+	if (!extensionMatch) return `${cleaned}.py`;
+	const extension = extensionMatch[0].toLowerCase();
+	const stem = cleaned.slice(0, -extensionMatch[0].length);
+	return `${stem}${extension}`;
 }
 
 export function isValidPythonFileName(value: string) {
-	return PYTHON_FILE_NAME_RE.test(value);
+	return PYTHON_IDE_FILE_NAME_RE.test(value);
+}
+
+export function isPythonIdePythonFile(value: string) {
+	return PYTHON_EXTENSION_RE.test(value);
+}
+
+export function getPythonIdeFileKindLabel(value: string) {
+	const extension = value.match(FILE_EXTENSION_RE)?.[0]?.toLowerCase();
+	if (extension === ".csv") return "CSV";
+	if (extension === ".json") return "JSON";
+	if (extension === ".md") return "Markdown";
+	if (extension === ".txt") return "Text";
+	return "Python";
+}
+
+export function getPythonIdeDefaultFileContent(fileName: string) {
+	const extension = fileName.match(FILE_EXTENSION_RE)?.[0]?.toLowerCase();
+	if (extension === ".csv") return "name,value\nsample,1\n";
+	if (extension === ".json") return '{\n\t"items": []\n}\n';
+	if (extension === ".md") return "# Notes\n\n";
+	if (extension === ".txt") return "";
+	return "# Add your Python code here.\n";
+}
+
+export function getPythonIdeRunnableFile(
+	project: Pick<PythonIdeProject, "activeFileName" | "files">
+) {
+	return (
+		project.files.find(
+			file =>
+				file.name === project.activeFileName &&
+				isPythonIdePythonFile(file.name)
+		) ??
+		project.files.find(file => isPythonIdePythonFile(file.name)) ??
+		null
+	);
 }
 
 export function loadLocalPythonProjects(userID?: string | null) {

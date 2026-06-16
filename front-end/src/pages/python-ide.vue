@@ -23,10 +23,15 @@ import {
 	createRemotePythonIdeProject,
 	deleteRemotePythonIdeProject,
 	fetchPythonIdeProjects,
+	getPythonIdeDefaultFileContent,
+	getPythonIdeFileKindLabel,
 	getPythonIdeModeLabel,
+	getPythonIdeRunnableFile,
+	isPythonIdePythonFile,
 	isValidPythonFileName,
 	loadLocalPythonProjects,
 	normalizePythonFileName,
+	pythonIdeAllowedFileExtensions,
 	pythonIdeLibrarySupport,
 	saveLocalPythonProjects,
 	updateRemotePythonIdeProject
@@ -382,7 +387,10 @@ function addFile() {
 	if (!selectedProject.value) return;
 	const fileName = normalizePythonFileName(newFileName.value);
 	if (!isValidPythonFileName(fileName)) {
-		appendOutput("stderr", "Use a Python filename like helper.py.");
+		appendOutput(
+			"stderr",
+			`Use a safe file name ending in ${pythonIdeAllowedFileExtensions.join(", ")}.`
+		);
 		return;
 	}
 	if (selectedProject.value.files.some(file => file.name === fileName)) {
@@ -392,7 +400,7 @@ function addFile() {
 
 	selectedProject.value.files.push({
 		name: fileName,
-		content: "# Add your Python code here.\n"
+		content: getPythonIdeDefaultFileContent(fileName)
 	});
 	selectedProject.value.activeFileName = fileName;
 	newFileName.value = "";
@@ -403,15 +411,26 @@ function addFile() {
 function deleteFile(file: PythonIdeFile) {
 	const project = selectedProject.value;
 	if (!project) return;
-	if (project.files.length <= 1) {
-		appendOutput("system", "Keep at least one Python file in a project.");
+	const pythonFileCount = project.files.filter(file =>
+		isPythonIdePythonFile(file.name)
+	).length;
+	if (isPythonIdePythonFile(file.name) && pythonFileCount <= 1) {
+		appendOutput(
+			"system",
+			"Keep at least one Python file so the project can run."
+		);
 		return;
 	}
 
 	project.files = project.files.filter(
 		candidate => candidate.name !== file.name
 	);
-	project.activeFileName = project.files[0]?.name ?? "main.py";
+	if (project.activeFileName === file.name) {
+		project.activeFileName =
+			getPythonIdeRunnableFile(project)?.name ??
+			project.files[0]?.name ??
+			"main.py";
+	}
 	touchSelectedProject();
 	scheduleSave();
 }
@@ -805,14 +824,21 @@ async function runCurrentProject() {
 
 	await saveSelectedProject();
 	clearOutput();
+	const runnableFile = getPythonIdeRunnableFile(project);
+	if (!runnableFile) {
+		runMessage.value = "No Python file";
+		appendOutput("stderr", "Add a .py file before running this project.");
+		return;
+	}
+
 	isRunning.value = true;
 	runMessage.value = "Starting Python";
-	appendOutput("system", `Running ${project.activeFileName}`);
+	appendOutput("system", `Running ${runnableFile.name}`);
 
 	try {
 		await runPythonProject({
 			files: project.files,
-			activeFileName: project.activeFileName,
+			activeFileName: runnableFile.name,
 			inputText: inputText.value,
 			mode: project.mode,
 			gameBridge,
@@ -1063,6 +1089,9 @@ onBeforeUnmount(() => {
 								@click="selectFile(file.name)"
 							>
 								<span>{{ file.name }}</span>
+								<small>{{
+									getPythonIdeFileKindLabel(file.name)
+								}}</small>
 							</button>
 							<button
 								aria-label="Delete file"
@@ -1078,8 +1107,8 @@ onBeforeUnmount(() => {
 					<div class="new-file-row">
 						<input
 							v-model="newFileName"
-							aria-label="New Python file name"
-							placeholder="helper.py"
+							aria-label="New project file name"
+							placeholder="helper.py or data.csv"
 							type="text"
 							@keyup.enter="addFile"
 						/>
@@ -1175,7 +1204,8 @@ onBeforeUnmount(() => {
 						<div class="panel-header">
 							<span>{{ activeFile?.name ?? "main.py" }}</span>
 							<small
-								>Multiple files can import each other by
+								>Python files can import each other; CSV, JSON,
+								text, and Markdown files can be read by
 								filename.</small
 							>
 						</div>
@@ -1476,6 +1506,14 @@ html.dark .python-ide-status strong {
 .project-button small {
 	color: var(--color-ink-muted);
 	font-size: 0.78rem;
+}
+
+.file-button small {
+	color: #0f766e;
+	font-size: 0.68rem;
+	font-weight: 900;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
 }
 
 .file-row {
