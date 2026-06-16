@@ -53,7 +53,7 @@ export const pythonIdeLibrarySupport: PythonIdeLibrarySupport[] = [
 	{
 		name: "Turtle and PyGame Zero",
 		status: "shim",
-		detail: "Turtle drawing, Screen.onkey, Screen.onclick, Turtle.ondrag, Actor, screen, keyboard, clock, Rect, and common PyGame Zero patterns run through course-specific browser shims."
+		detail: "Turtle drawing, Screen.onkey, Screen.onclick, Turtle.ondrag, Actor, screen, keyboard, mouse handlers, clock, Rect, and common PyGame Zero patterns run through course-specific browser shims."
 	},
 	{
 		name: "Data science stack",

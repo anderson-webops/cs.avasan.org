@@ -84,7 +84,8 @@ describe("python IDE project helpers", () => {
 			pythonIdeLibrarySupport.some(
 				entry =>
 					entry.name === "Turtle and PyGame Zero" &&
-					entry.detail.includes("Turtle.ondrag")
+					entry.detail.includes("Turtle.ondrag") &&
+					entry.detail.includes("mouse handlers")
 			)
 		).toBe(true);
 	});

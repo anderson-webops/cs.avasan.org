@@ -529,11 +529,47 @@ def _normalize_color(color):
         )
     return str(color)
 
+def _callback_shape(callback):
+    try:
+        parameters = inspect.signature(callback).parameters.values()
+    except Exception:
+        return None, True
+
+    positional_count = 0
+    has_varargs = False
+    for parameter in parameters:
+        if parameter.kind == parameter.VAR_POSITIONAL:
+            has_varargs = True
+        elif parameter.kind in (parameter.POSITIONAL_ONLY, parameter.POSITIONAL_OR_KEYWORD):
+            positional_count += 1
+
+    return positional_count, has_varargs
+
+def _call_callback(callback, *args):
+    positional_count, has_varargs = _callback_shape(callback)
+    if has_varargs or positional_count is None:
+        return callback(*args)
+    return callback(*args[:positional_count])
+
 def _call_optional(name, *args):
     callback = _module_globals.get(name)
     if callable(callback):
-        return callback(*args)
+        return _call_callback(callback, *args)
     return None
+
+def _call_mouse_move(pos, rel, buttons):
+    callback = _module_globals.get("on_mouse_move")
+    if not callable(callback):
+        return None
+
+    positional_count, has_varargs = _callback_shape(callback)
+    if has_varargs or positional_count is None or positional_count >= 3:
+        return callback(pos, rel, buttons)
+    if positional_count == 2:
+        return callback(pos, buttons)
+    if positional_count == 1:
+        return callback(pos)
+    return callback()
 
 class Rect:
     def __init__(self, *args):
@@ -879,7 +915,9 @@ def _handle_events():
             _call_optional("on_mouse_up", pos, event.get("button", "left"))
         elif event_type == "mousemove":
             pos = (event.get("x", 0), event.get("y", 0))
-            _call_optional("on_mouse_move", pos)
+            rel = (event.get("relX", 0), event.get("relY", 0))
+            buttons = event.get("buttons", [])
+            _call_mouse_move(pos, rel, buttons)
 
 def install_builtins():
     builtins.Actor = Actor

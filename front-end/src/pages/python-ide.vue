@@ -81,6 +81,9 @@ interface GameInputEvent {
 	x?: number;
 	y?: number;
 	button?: "left" | "middle" | "right";
+	buttons?: ("left" | "middle" | "right")[];
+	relX?: number;
+	relY?: number;
 }
 
 const app = useAppStore();
@@ -113,6 +116,7 @@ let gameAnimationFrame: number | null = null;
 let gameLoopRequested = false;
 let gameTickInFlight = false;
 let activeTurtleDragButton: string | null = null;
+let lastGamePointerPoint: { x: number; y: number } | null = null;
 
 const turtleState: TurtleState = {
 	x: 0,
@@ -965,6 +969,14 @@ function gameMouseButton(event: MouseEvent): GameInputEvent["button"] {
 	return "left";
 }
 
+function gameMouseButtons(event: MouseEvent) {
+	const buttons: NonNullable<GameInputEvent["buttons"]> = [];
+	if (event.buttons & 1) buttons.push("left");
+	if (event.buttons & 4) buttons.push("middle");
+	if (event.buttons & 2) buttons.push("right");
+	return buttons;
+}
+
 function turtleMouseButton(event: MouseEvent) {
 	if (event.button === 1) return "2";
 	if (event.button === 2) return "3";
@@ -989,14 +1001,22 @@ function queueGamePointerEvent(
 	if (selectedProject.value?.mode !== "pgzero") return;
 
 	const point = gamePointerPosition(event);
+	const relX = lastGamePointerPoint ? point.x - lastGamePointerPoint.x : 0;
+	const relY = lastGamePointerPoint ? point.y - lastGamePointerPoint.y : 0;
+	lastGamePointerPoint = point;
+
 	gameEvents.push({
 		type,
 		x: point.x,
 		y: point.y,
-		button: gameMouseButton(event)
+		button: gameMouseButton(event),
+		buttons: gameMouseButtons(event),
+		relX,
+		relY
 	});
 
-	if (type !== "mousemove") event.preventDefault();
+	if (type === "mouseup") lastGamePointerPoint = null;
+	if (type !== "mousemove" || event.buttons) event.preventDefault();
 }
 
 function callTurtlePointerHandler(
