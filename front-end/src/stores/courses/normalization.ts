@@ -4449,32 +4449,31 @@ function extensionPrompt(context: CourseTextContext) {
 
 function projectSupport(context: CourseTextContext) {
 	const focus = subjectFocus(context);
-	const reference = capitalizeSentence(projectSupportReference(context));
 	const goal = variantPrompt(context, [
 		() =>
-			`**Project goal:** ${reference} produces a visible result tied to ${focus}. Include a normal path, an edge case, and one sentence explaining the evidence.`,
+			`**Goal:** Produce a visible result tied to ${focus}. Include a normal path, an edge case, and one sentence explaining the evidence.`,
 		() =>
-			`**Project goal:** ${reference} states the target behavior or claim, checks one assumption, and records evidence tied to ${focus}.`,
+			`**Goal:** Finish with an observable result, a checked assumption, and evidence tied to ${focus}.`,
 		() =>
-			`**Project goal:** ${reference} turns ${focus} into something testable: run it, inspect the output, and record what proves the idea works.`,
+			`**Goal:** Turn ${focus} into something testable: run it, inspect the output, and record what proves the idea works.`,
 		() =>
-			`**Project goal:** ${reference} centers on one concrete behavior, model, output, or analysis that makes ${focus} visible.`,
+			`**Goal:** Center the work on one concrete behavior, model, output, or analysis that makes ${focus} visible.`,
 		() =>
-			`**Project goal:** ${reference} shows ${focus} through a run, trace, model, or user interaction.`,
+			`**Goal:** Show ${focus} through a run, trace, model, or user interaction.`,
 		() =>
-			`**Project goal:** ${reference} grows from a small working case into a finished result that reflects ${focus}, with a documented assumption and a clear success check.`,
+			`**Goal:** Grow a small working case into a finished result that reflects ${focus}, with a documented assumption and a clear success check.`,
 		() =>
-			`**Project goal:** ${reference} applies ${focus} in a practical artifact, then compares expected behavior with the observed result.`,
+			`**Goal:** Apply ${focus} in a practical artifact, then compare expected behavior with the observed result.`,
 		() =>
-			`**Project goal:** ${reference} includes enough structure, naming, and evidence to support ${focus} without relying on memory.`,
+			`**Goal:** Include enough structure, naming, and evidence to support ${focus} without relying on memory.`,
 		() =>
-			`**Project goal:** ${reference} names the main design or reasoning choice, tests it, and makes the result visible in the final artifact.`,
+			`**Goal:** Make the central decision for ${focus} explicit, tested, and visible in the final artifact.`,
 		() =>
-			`**Project goal:** ${reference} demonstrates ${focus} with one ordinary case and one case that could fail if the idea is misunderstood.`,
+			`**Goal:** Demonstrate ${focus} with one ordinary case and one case that could fail if the idea is misunderstood.`,
 		() =>
-			`**Project goal:** ${reference} maps the task requirements to ${focus}, then records the evidence that proves the result works.`,
+			`**Goal:** Connect the prompt requirements to ${focus}, then document the evidence that proves the connection works.`,
 		() =>
-			`**Project goal:** ${reference} identifies the input or starting state, the main transformation, and the output or conclusion tied to ${focus}.`
+			`**Goal:** Document the input, process, and output path, then connect the result to ${focus}.`
 	]);
 
 	return [

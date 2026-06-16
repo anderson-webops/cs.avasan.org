@@ -1776,6 +1776,9 @@ describe("course text quality normalization", () => {
 				/\*\*Goal:\*\* \*\*[^*]+\*\* produces a visible result for [^\n.]+: one ordinary path/i
 			);
 			expect(corpus).not.toMatch(
+				/\*\*Goal:\*\* The (?:class exercise|code checkpoint|object-design task|practice build|type-model task|method-contract exercise|API checkpoint|object-state build|collection exercise|Java design task|project|activity|program|analysis|work) (?:turns|makes|shows|grows|applies|includes|demonstrates|connects|documents|produces|ends|centers)\b/i
+			);
+			expect(corpus).not.toMatch(
 				/\*\*Concept path:\*\* [^\n.]+ starts with the relevant parts of [^\n.]+, then follows one concrete example through a changed case/i
 			);
 			expect(corpus).not.toMatch(
