@@ -1727,6 +1727,8 @@ describe("course text quality normalization", () => {
 				/\bRecording Studio\b/i,
 				/\bteacher\b/i,
 				/\bportal\b/i,
+				/\b(?:ask|have|let|encourage|show|teach|tell|guide|help)\s+(?:the\s+)?(?:students?|learners?)\b/i,
+				/\b(?:students?|learners?)\s+(?:explain|write|build|practice|reason|understand|inspect|trace|identify|distinguish|compare|create|use|complete)\b/i,
 				/This lesson arc covers/i,
 				/Use this as one/i,
 				/Treat this as/i,

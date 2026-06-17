@@ -168,7 +168,7 @@ export const lowLevelSecurityCourse: RawCourse = {
 				{
 					title: "LLS1 Project 1: Memory Map Inspector",
 					content:
-						"Build a small console program that prints and compares the addresses of stack, heap, global, and static data, then records observations about layout and lifetime. Extend it by adding an array, a string, and a dynamically allocated buffer. Ask learners to write a short lab note about which values move between runs and which stay conceptually tied to storage duration. The starter now includes a guided observation table, and the review path adds byte-distance reporting plus example interpretations.",
+						"Build a small console program that prints and compares the addresses of stack, heap, global, and static data, then records observations about layout and lifetime. Extend it by adding an array, a string, and a dynamically allocated buffer. The lab note compares which values move between runs and which stay conceptually tied to storage duration. The starter now includes a guided observation table, and the review path adds byte-distance reporting plus example interpretations.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS1-Memory-Map-Inspector/starter",
 					solutionLink:

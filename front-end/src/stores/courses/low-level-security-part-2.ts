@@ -558,7 +558,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Why Control-Flow Integrity Matters",
 					content:
-						"Use the control-flow discussion to help students explain why certain corruption bugs demand urgent fixes even when a classroom demo only shows a crash or a shadow overwrite. The defensive point is that once control-relevant bytes are exposed to attacker-shaped input, integrity assumptions about future execution are weakened."
+						"Control-flow integrity explains why certain corruption bugs demand urgent fixes even when a classroom demo only shows a crash or a shadow overwrite. The defensive point is that once control-relevant bytes are exposed to attacker-shaped input, integrity assumptions about future execution are weakened."
 				},
 				{
 					title: "Why Modern Mitigations and Safer Languages Are Valuable",
