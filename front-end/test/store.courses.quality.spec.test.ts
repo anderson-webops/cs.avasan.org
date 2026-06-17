@@ -1721,6 +1721,8 @@ describe("course text quality normalization", () => {
 				/\bsession notes?\b/i,
 				/\bHQ Support\b/i,
 				/\bSlack\b/i,
+				/\bJuni\b/i,
+				/\bJunian\b/i,
 				/\bJuni whiteboard\b/i,
 				/\bRecording Studio\b/i,
 				/\bteacher\b/i,
@@ -1805,6 +1807,36 @@ describe("course text quality normalization", () => {
 		},
 		COURSE_SWEEP_TIMEOUT
 	);
+
+	it("normalizes legacy platform-branded project names in loaded copy", async () => {
+		const courses = await Promise.all([
+			loadRawCourse("python-level-2"),
+			loadRawCourse("python-level-3"),
+			loadRawCourse("data-science-in-python"),
+			loadRawCourse("ai-level-1"),
+			loadRawCourse("java-level-3"),
+			loadRawCourse("javascript-level-1-javascript-superstar"),
+			loadRawCourse("javascript-level-2-javascript-master")
+		]);
+		const corpus = courses.map(allCourseText).join("\n");
+
+		expect(corpus).not.toMatch(/\bJuni\b/i);
+		expect(corpus).not.toMatch(/\bJunian\b/i);
+		expect(corpus).not.toMatch(/single-folder Juni layout/i);
+		expect(corpus).toContain("Archery Simulator");
+		expect(corpus).toContain("Word Translator with File I/O");
+		expect(corpus).toContain("Fictional Language Verifier");
+		expect(corpus).toContain("Command Assistant");
+		expect(corpus).toContain("Theme Park Planner");
+		expect(corpus).toContain("Book Rule System");
+		expect(corpus).toContain("Bakery Model");
+		expect(corpus).toContain("Mini Search Engine");
+		expect(corpus).toContain("Restaurant Splash Page");
+		expect(corpus).toContain("News Homepage");
+		expect(corpus).toContain("Department Store Discounts");
+		expect(corpus).toContain("single-folder legacy layout");
+		expect(corpus).toContain("a word translator function");
+	});
 
 	it(
 		"keeps generated support text aligned to the course domain",

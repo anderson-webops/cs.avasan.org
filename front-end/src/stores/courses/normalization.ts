@@ -2037,6 +2037,53 @@ function neutralizeStudentFacingCourseText(course: RawCourse) {
 	}
 }
 
+const legacyBrandingReplacements: Array<[RegExp, string]> = [
+	[/\bJuni Latin with File IO\b/g, "Word Translator with File I/O"],
+	[/\bJuni Latin\b/g, "Word Translator"],
+	[/\bJuni Archery\b/g, "Archery Simulator"],
+	[/\bJuni World\b/g, "Theme Park Planner"],
+	[/\bJunian Language Verifier\b/g, "Fictional Language Verifier"],
+	[/\bJunian word\b/g, "fictional word"],
+	[/\bJunian words\b/g, "fictional words"],
+	[/\bJuni Assistant\b/g, "Command Assistant"],
+	[/\bJuni Book Rule System\b/g, "Book Rule System"],
+	[/\bJuni Bakery\b/g, "Bakery Model"],
+	[/\bJuni Search Engine\b/g, "Mini Search Engine"],
+	[/\bJuni Eatz\b/g, "Restaurant Splash Page"],
+	[/\bJuni News\b/g, "News Homepage"],
+	[/\bJuni Department Store\b/g, "Department Store Discounts"],
+	[/\ba Word Translator function\b/g, "a word translator function"],
+	[/\bsingle-folder Juni layout\b/g, "single-folder legacy layout"],
+	[
+		/\bolder single-folder Juni layout\b/g,
+		"older single-folder legacy layout"
+	],
+	[/"Juni"/g, '"Lumo"']
+];
+
+function normalizeLegacyBrandingText(text: string) {
+	return legacyBrandingReplacements.reduce(
+		(current, [pattern, replacement]) =>
+			current.replace(pattern, replacement),
+		text
+	);
+}
+
+function normalizeLegacyBranding(course: RawCourse) {
+	course.name = normalizeLegacyBrandingText(course.name);
+
+	for (const module of course.modules) {
+		module.title = normalizeLegacyBrandingText(module.title);
+
+		for (const section of ["curriculum", "supplementalProjects"] as const) {
+			for (const item of module[section]) {
+				item.title = normalizeLegacyBrandingText(item.title);
+				item.content = normalizeLegacyBrandingText(item.content);
+			}
+		}
+	}
+}
+
 function formatVisibleCourseMarkdown(course: RawCourse) {
 	for (const module of course.modules) {
 		for (const section of ["curriculum", "supplementalProjects"] as const) {
@@ -6487,6 +6534,7 @@ export function normalizeRawCourse(id: string, rawCourse: RawCourse) {
 	normalizeCourseTextQuality(course, id);
 	neutralizeStudentFacingCourseText(course);
 	normalizeGeneratedSupplementalLabels(course);
+	normalizeLegacyBranding(course);
 	formatVisibleCourseMarkdown(course);
 	return course;
 }
