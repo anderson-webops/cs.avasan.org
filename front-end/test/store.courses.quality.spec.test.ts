@@ -1393,6 +1393,9 @@ describe("course text quality normalization", () => {
 		expect(corpus).not.toMatch(/\bTeach\b/);
 		expect(corpus).not.toMatch(/Teach students/i);
 		expect(corpus).not.toMatch(/Instructor Note/i);
+		expect(corpus).not.toMatch(/\*\*Learning sequence:\*\*/i);
+		expect(corpus).not.toMatch(/\*\*Completion check:\*\*/i);
+		expect(corpus).not.toMatch(/\bUse .* supplemental projects\b/i);
 	});
 
 	it("adds project requirements and completion checks to thin legacy Python project prompts", async () => {

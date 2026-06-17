@@ -1039,9 +1039,9 @@ function addScienceResourceModule(courseId: string, course: RawCourse) {
 			{
 				title: "Curated Remote Resource Bank",
 				content: [
-					"**Remote investigation:** Use shared-screen simulations, public images, provided datasets, diagrams, and paper notes. Do not require household materials, lab kits, heat, chemicals, electricity components, or outdoor data collection.",
+					"**Remote investigation:** Shared-screen simulations, public images, provided datasets, diagrams, and paper notes provide the evidence source. Required work avoids household materials, lab kits, heat, chemicals, electricity components, and outdoor data collection.",
 					`**Resource shortlist:**\n${bullets(resources)}`,
-					"**Completion check:** Every investigation should name the phenomenon, the source of evidence, the vocabulary target, and the CER prompt."
+					"**Evidence target:** Every investigation names the phenomenon, the source of evidence, the vocabulary target, and the CER prompt."
 				].join("\n\n"),
 				mediaLink: links?.mediaLink,
 				datasetLink: links?.datasetLink
@@ -1049,17 +1049,17 @@ function addScienceResourceModule(courseId: string, course: RawCourse) {
 			{
 				title: "Module-by-Module Resource Mapping Routine",
 				content:
-					"**Learning sequence:** Each science module should connect one simulation or media source, one provided data table or graph, one model or diagram, and one CER prompt to the module question and vocabulary.\n\n**Mapping routine:** Start by naming the phenomenon and the question. Then choose the evidence source, identify the vocabulary that must be used accurately, decide which representation fits the idea, and write the claim-evidence-reasoning prompt before the activity begins. A resource is not enough by itself; the course item should say what to notice, what to record, and what explanation the evidence supports.\n\n**Evidence targets:**\n- The evidence can be accessed through Zoom or a browser.\n- The task works without physical supplies.\n- The final product is a diagram, graph, data table, CER response, or short presentation."
+					"**Concept path:** Each science module connects one simulation or media source, one provided data table or graph, one model or diagram, and one CER prompt to the module question and vocabulary.\n\n**Mapping routine:** The routine names the phenomenon and question, identifies the evidence source, states the vocabulary that must be used accurately, chooses the representation that fits the idea, and defines the claim-evidence-reasoning prompt. A resource is not enough by itself; the course item identifies what to notice, what to record, and what explanation the evidence supports.\n\n**Evidence targets:**\n- The evidence can be accessed through Zoom or a browser.\n- The task works without physical supplies.\n- The final product is a diagram, graph, data table, CER response, or short presentation."
 			},
 			{
 				title: "Remote Safety and Accessibility Check",
 				content:
-					"**Learning sequence:** Required science projects should be completable with notes, paper, a browser, and shared-screen material. Optional household observations need a fully equivalent data or simulation alternative.\n\n**Completion check:** No required project depends on beakers, kits, food, chemicals, heat, electricity, outdoor access, or parent-managed materials."
+					"**Concept path:** Required science projects are completable with notes, paper, a browser, and shared-screen material. Optional household observations need a fully equivalent data or simulation alternative.\n\n**Evidence target:** No required project depends on beakers, kits, food, chemicals, heat, electricity, outdoor access, or parent-managed materials."
 			},
 			{
 				title: "Science Notebook Evidence Routine",
 				content:
-					"**Learning sequence:** Use a consistent notebook structure: date, phenomenon, vocabulary, observations, model or graph, claim, evidence, reasoning, and changed-condition prediction. Observations should describe what is visible in the shared source; inferences should explain what the observation suggests and why.\n\n**Completion check:** The work separates observation from inference, supports claims with visible evidence, and includes one prediction about how the system would change if one variable or condition changed."
+					"**Concept path:** A consistent notebook structure includes the date, phenomenon, vocabulary, observations, model or graph, claim, evidence, reasoning, and changed-condition prediction. Observations describe what is visible in the shared source; inferences explain what the observation suggests and why.\n\n**Evidence target:** The work separates observation from inference, supports claims with visible evidence, and includes one prediction about how the system would change if one variable or condition changed."
 			}
 		],
 		supplementalProjects: [
@@ -1089,7 +1089,7 @@ function addAlgebraTaxonomyModule(courseId: string, course: RawCourse) {
 		curriculum: [
 			{
 				title: `${courseLabel} Structure Decision`,
-				content: `**Learning sequence:** Use ${courseLabel} supplemental projects for explicit practice sets, application/modeling projects, error-analysis tasks, and enrichment. Keep core curriculum items for concept instruction, worked examples, and guided practice. Existing imported module projects can remain in curriculum for continuity, but every module should also expose at least two explicit ${courseLabel} project/practice options in the project area.\n\n**Completion check:** ${courseLabel} makes it possible to distinguish required concept instruction from optional, remedial, and enrichment project work without reading the entire module.`
+				content: `**Concept path:** ${courseLabel} supplemental projects provide explicit practice sets, application/modeling projects, error-analysis tasks, and enrichment. Core curriculum items remain focused on concept instruction, worked examples, and guided practice. Existing imported module projects can remain in curriculum for continuity, and every module also exposes at least two explicit ${courseLabel} project/practice options in the project area.\n\n**Evidence target:** ${courseLabel} makes it possible to distinguish required concept instruction from optional, remedial, and enrichment project work without reading the entire module.`
 			},
 			{
 				title: `${courseLabel} Assessment Cadence`,
@@ -1097,11 +1097,11 @@ function addAlgebraTaxonomyModule(courseId: string, course: RawCourse) {
 			},
 			{
 				title: `${courseLabel} Representation Balance`,
-				content: `**Learning sequence:** Each ${courseLabel} project includes at least two representations when reasonable: equation, graph, table, verbal rule, diagram, or contextual model. The representation change is part of the concept, not a formatting step, because it shows whether the same relationship is understood from multiple angles.\n\n**Completion check:** The work demonstrates the ability to translate between ${courseLabel} representations and explain what each one reveals.`
+				content: `**Concept path:** Each ${courseLabel} project includes at least two representations when reasonable: equation, graph, table, verbal rule, diagram, or contextual model. The representation change is part of the concept, not a formatting step, because it shows whether the same relationship is understood from multiple angles.\n\n**Evidence target:** The work demonstrates the ability to translate between ${courseLabel} representations and explain what each one reveals.`
 			},
 			{
 				title: `${courseLabel} Worked Example Density`,
-				content: `**Learning sequence:** For each new ${courseLabel} skill, include one clean worked example, one flawed example to repair, and one transfer problem with changed numbers or context. The clean example models notation, the flawed example exposes a likely misconception, and the transfer example checks whether the method survives a changed surface form.\n\n**Completion check:** The work demonstrates the ability to explain the difference between ${courseLabel} procedure and reason.`
+				content: `**Concept path:** Each new ${courseLabel} skill includes one clean worked example, one flawed example to repair, and one transfer problem with changed numbers or context. The clean example models notation, the flawed example exposes a likely misconception, and the transfer example checks whether the method survives a changed surface form.\n\n**Evidence target:** The work demonstrates the ability to explain the difference between ${courseLabel} procedure and reason.`
 			}
 		],
 		supplementalProjects: [
@@ -1126,22 +1126,22 @@ function addElementaryScienceDecision(courseId: string, course: RawCourse) {
 			{
 				title: "Decision: Keep One Course with K-2 and 3-5 Paths",
 				content:
-					"**Learning sequence:** Elementary Science stays as one course, with each activity labeled by a K-2 path and a 3-5 path during activity design. K-2 emphasizes observation, drawing, sorting, oral explanation, and sentence frames. Grades 3-5 add data tables, simple graphs, variables, model critique, and fuller CER writing.\n\n**Completion check:** Every elementary science module should name the simpler path, the advanced path, and the shared phenomenon."
+					"**Concept path:** Elementary Science stays as one course, with each activity labeled by a K-2 path and a 3-5 path during activity design. K-2 emphasizes observation, drawing, sorting, oral explanation, and sentence frames. Grades 3-5 add data tables, simple graphs, variables, model critique, and fuller CER writing.\n\n**Evidence target:** Every elementary science module should name the simpler path, the advanced path, and the shared phenomenon."
 			},
 			{
 				title: "K-2 Path",
 				content:
-					"**Learning sequence:** Use short phenomena, images, drawings, sorting, matching, and oral explanation. Keep writing light and use sentence frames: I observe, I think, my evidence is, and I wonder.\n\n**Completion check:** The work demonstrates the ability to make observations, ask a question, and explain one idea with a drawing or sentence."
+					"**Concept path:** Use short phenomena, images, drawings, sorting, matching, and oral explanation. Keep writing light and use sentence frames: I observe, I think, my evidence is, and I wonder.\n\n**Evidence target:** The work demonstrates the ability to make observations, ask a question, and explain one idea with a drawing or sentence."
 			},
 			{
 				title: "Grades 3-5 Path",
 				content:
-					"**Learning sequence:** Add simple measurements, data tables, graph reading, model critique, and claim-evidence-reasoning paragraphs. Require the work to compare examples and explain what would change if one condition changed. This path should feel like a bridge toward middle-school science: evidence is still accessible, but explanations include variables, patterns, and limits of the model or dataset.\n\n**Completion check:** The work demonstrates the ability to use evidence from a shared source and connect it to a science vocabulary term."
+					"**Concept path:** Add simple measurements, data tables, graph reading, model critique, and claim-evidence-reasoning paragraphs. Require the work to compare examples and explain what would change if one condition changed. This path should feel like a bridge toward middle-school science: evidence is still accessible, but explanations include variables, patterns, and limits of the model or dataset.\n\n**Evidence target:** The work demonstrates the ability to use evidence from a shared source and connect it to a science vocabulary term."
 			},
 			{
 				title: "Shared Zoom Constraint",
 				content:
-					"**Remote investigation:** Both paths remain Zoom-first and paper/browser based. Optional household observations may be allowed only when a fully equivalent image, simulation, or data table is provided.\n\n**Completion check:** The core objective can be completed through the shared online material even when no household observation is available."
+					"**Remote investigation:** Both paths remain Zoom-first and paper/browser based. Optional household observations may be allowed only when a fully equivalent image, simulation, or data table is provided.\n\n**Evidence target:** The core objective can be completed through the shared online material even when no household observation is available."
 			}
 		],
 		supplementalProjects: [
@@ -1439,20 +1439,20 @@ function addCppMatrixModule(courseId: string, course: RawCourse) {
 			{
 				title: "Baseline and Progression Matrix",
 				content: [
-					"**Learning sequence:** This matrix helps choose the next C++ direction after the original C++ Level 1 material or after Python/Java prerequisites.",
+					"**Concept path:** This matrix helps choose the next C++ direction after the original C++ Level 1 material or after Python/Java prerequisites.",
 					`**Matrix:**\n${bullets(cppConceptMatrix)}`,
-					"**Completion check:** the next lesson direction is identifiable: syntax fluency, memory reasoning, standard-library design, parser/state-machine architecture, or DS&A."
+					"**Evidence target:** the next lesson direction is identifiable: syntax fluency, memory reasoning, standard-library design, parser/state-machine architecture, or DS&A."
 				].join("\n\n")
 			},
 			{
 				title: "CS235/CS236 Concept Extraction",
 				content:
-					"**Learning sequence:** Extract CS235-style object, container, and data-structure discipline into Level 3/DS&A, and CS236-style scanner/parser, relation, and state-machine ideas into Level 3 command architecture. Keep the projects smaller than college assignments but preserve the core reasoning: representation choices, invariants, invalid-input handling, and the difference between a convenient demo and a maintainable design.\n\n**Completion check:** The extracted idea has a smaller first build and a clear path to a deeper follow-up."
+					"**Concept path:** Extract CS235-style object, container, and data-structure discipline into Level 3/DS&A, and CS236-style scanner/parser, relation, and state-machine ideas into Level 3 command architecture. Keep the projects smaller than college assignments but preserve the core reasoning: representation choices, invariants, invalid-input handling, and the difference between a convenient demo and a maintainable design.\n\n**Evidence target:** The extracted idea has a smaller first build and a clear path to a deeper follow-up."
 			},
 			{
 				title: "No AI/ML Boundary",
 				content:
-					"**Learning sequence:** Do not use C++ Level 3 as an AI/ML course. C++ work can include parsers, command simulations, state machines, search-style architecture, and data-structure choices, but model training and ML evaluation belong in AI/Data Science/Machine Learning. This boundary keeps C++ focused on language fluency, architecture, ownership, and testable program design.\n\n**Completion check:** C++ Level 3 projects are evaluated on program structure and correctness evidence, not prediction accuracy."
+					"**Concept path:** Do not use C++ Level 3 as an AI/ML course. C++ work can include parsers, command simulations, state machines, search-style architecture, and data-structure choices, but model training and ML evaluation belong in AI/Data Science/Machine Learning. This boundary keeps C++ focused on language fluency, architecture, ownership, and testable program design.\n\n**Evidence target:** C++ Level 3 projects are evaluated on program structure and correctness evidence, not prediction accuracy."
 			},
 			{
 				title: "Placement Check",
@@ -1486,13 +1486,13 @@ function addApCsaAlignmentModule(courseId: string, course: RawCourse) {
 				content: [
 					"**AP connection:** Use the current College Board AP CSA framework as the exam-facing map for pacing and review.",
 					`**Unit map:**\n${bullets(apCsaUnitMap)}`,
-					"**Completion check:** Every AP review assignment should name the unit, Java construct, tracing skill, and likely FRQ or MCQ pattern."
+					"**Evidence target:** Every AP review assignment should name the unit, Java construct, tracing skill, and likely FRQ or MCQ pattern."
 				].join("\n\n")
 			},
 			{
 				title: "FRQ Cadence",
 				content:
-					"**Learning sequence:** Add one short FRQ-style task after class design, arrays/ArrayLists, 2D arrays, inheritance/polymorphism, and recursion. Use official-style rubrics: correctness, object state, loop bounds, method contract, and edge cases. The task should be short enough to review carefully, but close enough to exam style that tracing and rubric language become familiar.\n\n**Completion check:** The work demonstrates the ability to explain where points would be earned or lost."
+					"**Concept path:** Add one short FRQ-style task after class design, arrays/ArrayLists, 2D arrays, inheritance/polymorphism, and recursion. Use official-style rubrics: correctness, object state, loop bounds, method contract, and edge cases. The task should be short enough to review carefully, but close enough to exam style that tracing and rubric language become familiar.\n\n**Evidence target:** The work demonstrates the ability to explain where points would be earned or lost."
 			},
 			{
 				title: "MCQ Distractor Analysis",
@@ -1502,7 +1502,7 @@ function addApCsaAlignmentModule(courseId: string, course: RawCourse) {
 			{
 				title: "Answer-Check Remediation Rule",
 				content:
-					"**Learning sequence:** Any AP CSA project without an answer-check path should be paired with local review material or marked as discussion-only. Answer checks can be tests, expected output, trace tables, rubric bullets, or explanation prompts, but the project should not leave correctness completely implicit.\n\n**Remediation rule:** If a project answer cannot be checked automatically, define a human-checkable artifact: method signatures, sample trace, expected console output, object-state table, or FRQ-style rubric bullets. For algorithms, include at least one normal case and one boundary case. For class design, include one state change or method-contract explanation.\n\n**Evidence target:** Each project states whether the work is checked by tests, discussion, trace, rubric, or expected-output comparison."
+					"**Concept path:** Any AP CSA project without an answer-check path should be paired with local review material or marked as discussion-only. Answer checks can be tests, expected output, trace tables, rubric bullets, or explanation prompts, but the project should not leave correctness completely implicit.\n\n**Remediation rule:** If a project answer cannot be checked automatically, define a human-checkable artifact: method signatures, sample trace, expected console output, object-state table, or FRQ-style rubric bullets. For algorithms, include at least one normal case and one boundary case. For class design, include one state change or method-contract explanation.\n\n**Evidence target:** Each project states whether the work is checked by tests, discussion, trace, rubric, or expected-output comparison."
 			}
 		],
 		supplementalProjects: [
@@ -1530,15 +1530,15 @@ function addDataCatalogModule(courseId: string, course: RawCourse) {
 			{
 				title: "Approved Dataset and Fixture Sources",
 				content: [
-					"**Learning sequence:** Use stable, inspectable datasets before introducing heavier tooling. Every dataset should have a source, license/usage note, target question, and known caveat.",
+					"**Concept path:** Use stable, inspectable datasets before introducing heavier tooling. Every dataset should have a source, license/usage note, target question, and known caveat.",
 					`**Catalog:**\n${bullets(catalog)}`,
-					"**Completion check:** The work demonstrates the ability to name the target, features or evidence, limitation, and evaluation method before coding."
+					"**Evidence target:** The work demonstrates the ability to name the target, features or evidence, limitation, and evaluation method before coding."
 				].join("\n\n")
 			},
 			{
 				title: "Reproducibility Contract",
 				content:
-					"**Learning sequence:** Each notebook or script runs from top to bottom with fixed seeds or documented randomness, visible imports, environment notes, and clear data-loading paths. Reproducibility is part of the result: if the artifact cannot be rerun, the evidence is difficult to trust or review.\n\n**Required notes:** Record the runtime or notebook environment, package assumptions, data source path, random seed or nondeterministic step, and the exact output that should reappear. For a dataset project, this may be the cleaned row count and a graph. For an AI or ML project, this may be a baseline score, model metric, search result, or behavior trace.\n\n**Evidence target:** A fresh run reproduces the main table, graph, model metric, or AI behavior without hidden local files."
+					"**Concept path:** Each notebook or script runs from top to bottom with fixed seeds or documented randomness, visible imports, environment notes, and clear data-loading paths. Reproducibility is part of the result: if the artifact cannot be rerun, the evidence is difficult to trust or review.\n\n**Required notes:** Record the runtime or notebook environment, package assumptions, data source path, random seed or nondeterministic step, and the exact output that should reappear. For a dataset project, this may be the cleaned row count and a graph. For an AI or ML project, this may be a baseline score, model metric, search result, or behavior trace.\n\n**Evidence target:** A fresh run reproduces the main table, graph, model metric, or AI behavior without hidden local files."
 			},
 			{
 				title: "Evaluation and Limitation Notes",
@@ -1548,7 +1548,7 @@ function addDataCatalogModule(courseId: string, course: RawCourse) {
 			{
 				title: "Responsible Use Check",
 				content:
-					"**Learning sequence:** Use introductory NIST AI RMF language: intended use, risk, harm, uncertainty, mitigation, and human oversight. This check keeps technical output connected to audience and context, especially when a chart, prediction, or generated behavior could be misread as more certain than it is.\n\n**Required notes:** Identify who might use the result, what decision it should not be used for, what data or model assumption matters most, and what review step would catch a misleading output. A strong note is specific: it names a likely failure mode such as missing data, biased sampling, leakage, overfitting, hallucinated reasoning, or an overconfident chart interpretation.\n\n**Evidence target:** The work includes one limitation or risk statement for each major AI/ML/data project and one mitigation or review step."
+					"**Concept path:** Use introductory NIST AI RMF language: intended use, risk, harm, uncertainty, mitigation, and human oversight. This check keeps technical output connected to audience and context, especially when a chart, prediction, or generated behavior could be misread as more certain than it is.\n\n**Required notes:** Identify who might use the result, what decision it should not be used for, what data or model assumption matters most, and what review step would catch a misleading output. A strong note is specific: it names a likely failure mode such as missing data, biased sampling, leakage, overfitting, hallucinated reasoning, or an overconfident chart interpretation.\n\n**Evidence target:** The work includes one limitation or risk statement for each major AI/ML/data project and one mitigation or review step."
 			}
 		],
 		supplementalProjects: [
@@ -1591,20 +1591,20 @@ function addSecurityPolicyModule(courseId: string, course: RawCourse) {
 				content: [
 					`**Concept path:** Start every ${courseLabel} lab by naming scope, target, tools, and stop conditions.`,
 					`**Policy:**\n${bullets(policy)}`,
-					"**Completion check:** The work demonstrates the ability to explain why the lab is authorized and what defensive outcome it produces."
+					"**Evidence target:** The work demonstrates the ability to explain why the lab is authorized and what defensive outcome it produces."
 				].join("\n\n")
 			},
 			{
 				title: `${courseLabel} Disallowed Work`,
-				content: `**Safety boundary:** ${courseLabel} does not include scanning third-party systems, testing credentials against real services, collecting real user data, bypassing access controls, running destructive host commands, or publishing exploit steps detached from remediation. The boundary is part of the technical content: defensive work is only meaningful when the target, permission model, and recovery path are clear.\n\n**Completion check:** Any unclear target is treated as out of scope until explicitly approved, replaced with a local fixture, or rewritten as a paper analysis of an already documented vulnerability.`
+				content: `**Safety boundary:** ${courseLabel} does not include scanning third-party systems, testing credentials against real services, collecting real user data, bypassing access controls, running destructive host commands, or publishing exploit steps detached from remediation. The boundary is part of the technical content: defensive work is only meaningful when the target, permission model, and recovery path are clear.\n\n**Evidence target:** Any unclear target is treated as out of scope until explicitly approved, replaced with a local fixture, or rewritten as a paper analysis of an already documented vulnerability.`
 			},
 			{
 				title: `${courseLabel} Evidence and Remediation Format`,
-				content: `**Concept path:** ${courseLabel} findings use this format: scope, observation, reproduction in local lab, impact, fix, test proving the fix, and prevention note. The observation describes what happened; the impact explains why it matters; the fix is narrow enough to retest.\n\n**Completion check:** A lab is incomplete without a mitigation or hardening step, the command or evidence proving the fix, and a note explaining whether the same issue could reappear elsewhere.`
+				content: `**Concept path:** ${courseLabel} findings use this format: scope, observation, reproduction in local lab, impact, fix, test proving the fix, and prevention note. The observation describes what happened; the impact explains why it matters; the fix is narrow enough to retest.\n\n**Evidence target:** A lab is incomplete without a mitigation or hardening step, the command or evidence proving the fix, and a note explaining whether the same issue could reappear elsewhere.`
 			},
 			{
 				title: `${courseLabel} Tooling Setup and Recovery`,
-				content: `**Concept path:** ${courseLabel} prefers VMs, containers, local toy services, sample captures, compiler sanitizers, and reversible configuration. Recovery is not a footnote; it is the difference between a controlled lab and accidental host damage. Record the starting state, the reset command or snapshot, and which files or services can be safely changed before the lab begins.\n\n**Completion check:** The work demonstrates the ability to restore the lab to a known state and explain which evidence came from the controlled environment.`
+				content: `**Concept path:** ${courseLabel} prefers VMs, containers, local toy services, sample captures, compiler sanitizers, and reversible configuration. Recovery is not a footnote; it is the difference between a controlled lab and accidental host damage. Record the starting state, the reset command or snapshot, and which files or services can be safely changed before the lab begins.\n\n**Evidence target:** The work demonstrates the ability to restore the lab to a known state and explain which evidence came from the controlled environment.`
 			}
 		],
 		supplementalProjects: [
@@ -1633,15 +1633,15 @@ function addToolchainAssumptionsModule(courseId: string, course: RawCourse) {
 			{
 				title: `${courseLabel} Setup Assumptions`,
 				content: [
-					`**Learning sequence:** Treat ${courseLabel} setup and version expectations as part of the course material. Before a project begins, confirm the expected runtime, editor, compiler, simulator, or lab environment and record any version-specific deviation in the reproducibility notes.`,
+					`**Concept path:** Treat ${courseLabel} setup and version expectations as part of the course material. Before a project begins, confirm the expected runtime, editor, compiler, simulator, or lab environment and record any version-specific deviation in the reproducibility notes.`,
 					`**Assumptions:**\n${bullets(assumptions)}`,
-					"**Completion check:** Each project opens with a clear expected toolchain, first verification command or smoke test, and any version-specific behavior that matters."
+					"**Evidence target:** Each project opens with a clear expected toolchain, first verification command or smoke test, and any version-specific behavior that matters."
 				].join("\n\n")
 			},
 			{
 				title: `${courseLabel} Upgrade Rule`,
 				content: [
-					`**Learning sequence:** When the ${courseLabel} toolchain changes, update starter files, screenshots, setup wording, and smoke tests together. The setup should not silently rely on a local machine that already has old dependencies installed.`,
+					`**Concept path:** When the ${courseLabel} toolchain changes, update starter files, screenshots, setup wording, and smoke tests together. The setup should not silently rely on a local machine that already has old dependencies installed.`,
 					`**Update checklist:** Re-run the first project from a clean checkout, confirm the first error message or success output still matches the course text, refresh any screenshot that shows a versioned UI, and update dependency or compiler notes if defaults changed.`,
 					`**Evidence targets:**\n- The current ${familyLabel} version is named.\n- The first-run verification step is still valid.\n- Any known version-specific exception is documented.\n- A fresh setup does not depend on old global packages, cached editor settings, or unrecorded local files.`
 				].join("\n\n")
@@ -1649,15 +1649,15 @@ function addToolchainAssumptionsModule(courseId: string, course: RawCourse) {
 			{
 				title: `${courseLabel} Platform Fallbacks`,
 				content: [
-					`**Learning sequence:** If ${courseLabel} can run on multiple operating systems, name the primary path and at least one fallback. If it cannot, say so directly and explain the prerequisite. A fallback should preserve the learning objective even when the exact editor, compiler, simulator, operating system, or package version differs.`,
-					"**Completion check:** The setup notes identify whether the work requires macOS, Windows, Linux, a VM/container, browser-only tools, or an online simulation."
+					`**Concept path:** If ${courseLabel} can run on multiple operating systems, name the primary path and at least one fallback. If it cannot, say so directly and explain the prerequisite. A fallback should preserve the learning objective even when the exact editor, compiler, simulator, operating system, or package version differs.`,
+					"**Evidence target:** The setup notes identify whether the work requires macOS, Windows, Linux, a VM/container, browser-only tools, or an online simulation."
 				].join("\n\n")
 			},
 			{
 				title: `${courseLabel} Reproducibility Notes`,
 				content: [
-					`**Learning sequence:** Reusable ${courseLabel} projects should include enough setup notes that a fresh checkout or fresh browser session can reproduce the assignment. Record package versions, compiler flags, data paths, Unity/Xcode/editor versions, or lab VM assumptions when they affect the work. The notes should identify what is required, what is optional, and what can be substituted without changing the target skill.`,
-					"**Completion check:** Re-running the project does not depend on hidden local state."
+					`**Concept path:** Reusable ${courseLabel} projects should include enough setup notes that a fresh checkout or fresh browser session can reproduce the assignment. Record package versions, compiler flags, data paths, Unity/Xcode/editor versions, or lab VM assumptions when they affect the work. The notes should identify what is required, what is optional, and what can be substituted without changing the target skill.`,
+					"**Evidence target:** Re-running the project does not depend on hidden local state."
 				].join("\n\n")
 			}
 		],
@@ -1723,15 +1723,15 @@ function addAlgebraStandardsArchitectureModule(
 			{
 				title: "Course Scope Map",
 				content: [
-					"**Learning sequence:** This standards-facing course spine builds from concept explanation to worked example, guided practice, mixed practice, project application, and assessment rather than appearing as a flat worksheet list.",
+					"**Concept path:** This standards-facing course spine builds from concept explanation to worked example, guided practice, mixed practice, project application, and assessment rather than appearing as a flat worksheet list.",
 					`**Scope:**\n${bullets(scope)}`,
-					"**Completion check:** The course makes it possible to point to the topic family, representation type, and modeling role for each major module."
+					"**Evidence target:** The course makes it possible to point to the topic family, representation type, and modeling role for each major module."
 				].join("\n\n")
 			},
 			{
 				title: "Course Item Labels",
 				content:
-					"**Learning sequence:** Use clear labels such as Lesson, Practice, Check-in, Project, Remediation, Enrichment, or Assessment. The label should make the purpose of each item obvious: introducing a concept, practicing a skill, checking mastery, repairing a gap, or extending the idea.\n\n**Label rules:** A Lesson introduces vocabulary, representation, and a worked example. Practice builds fluency with near-transfer problems. A Check-in samples mastery without becoming a full unit test. A Project applies algebra to a context, model, or comparison. Remediation targets a named gap, while Enrichment changes a constraint or adds a second method.\n\n**Evidence target:** A reader can tell which items teach, which items practice, which items assess, and which items extend before opening the detailed prompt."
+					"**Concept path:** Use clear labels such as Lesson, Practice, Check-in, Project, Remediation, Enrichment, or Assessment. The label should make the purpose of each item obvious: introducing a concept, practicing a skill, checking mastery, repairing a gap, or extending the idea.\n\n**Label rules:** A Lesson introduces vocabulary, representation, and a worked example. Practice builds fluency with near-transfer problems. A Check-in samples mastery without becoming a full unit test. A Project applies algebra to a context, model, or comparison. Remediation targets a named gap, while Enrichment changes a constraint or adds a second method.\n\n**Evidence target:** A reader can tell which items teach, which items practice, which items assess, and which items extend before opening the detailed prompt."
 			},
 			{
 				title: "Required Anchor and Extension Projects",
@@ -1767,22 +1767,22 @@ function addScienceGradeBandScopeModule(courseId: string, course: RawCourse) {
 				{
 					title: "K-2 Primary Science Path",
 					content:
-						"**Remote investigation:** K-2 activities emphasize concrete observation, picture sorting, labeled drawings, short oral explanation, simple patterns, and sentence frames. Core topics include pushes and pulls, light and sound, sky patterns, material properties, habitats, local weather, plant/animal needs, and simple engineering design.\n\n**Completion check:** The work demonstrates the ability to observe, sort, sketch, and explain one pattern using simple evidence."
+						"**Remote investigation:** K-2 activities emphasize concrete observation, picture sorting, labeled drawings, short oral explanation, simple patterns, and sentence frames. Core topics include pushes and pulls, light and sound, sky patterns, material properties, habitats, local weather, plant/animal needs, and simple engineering design.\n\n**Evidence target:** The work demonstrates the ability to observe, sort, sketch, and explain one pattern using simple evidence."
 				},
 				{
 					title: "Grades 3-5 Upper Elementary Path",
 					content:
-						"**Remote investigation:** Grades 3-5 activities add fair-test reasoning, variables, data tables, bar or line graphs, model revision, cause/effect language, and fuller CER writing. Core topics include weather/climate patterns, natural hazards, forces/magnets, life cycles, fossils/adaptation, energy, waves, Earth features, particle models, ecosystems, water distribution, and sky patterns.\n\n**Completion check:** The work uses data or a shared simulation to revise a model and write a short CER response."
+						"**Remote investigation:** Grades 3-5 activities add fair-test reasoning, variables, data tables, bar or line graphs, model revision, cause/effect language, and fuller CER writing. Core topics include weather/climate patterns, natural hazards, forces/magnets, life cycles, fossils/adaptation, energy, waves, Earth features, particle models, ecosystems, water distribution, and sky patterns.\n\n**Evidence target:** The work uses data or a shared simulation to revise a model and write a short CER response."
 				},
 				{
 					title: "Engineering Every Year",
 					content:
-						"**Learning sequence:** Engineering is not a bonus unit. Every grade band should include criteria, constraints, solution comparison, revision after evidence, and a short design reflection.\n\n**Completion check:** The work demonstrates the ability to explain what problem the design solves, what tradeoff was chosen, and what evidence would improve the solution."
+						"**Concept path:** Engineering is not a bonus unit. Every grade band should include criteria, constraints, solution comparison, revision after evidence, and a short design reflection.\n\n**Evidence target:** The work demonstrates the ability to explain what problem the design solves, what tradeoff was chosen, and what evidence would improve the solution."
 				},
 				{
 					title: "Physical-Material Boundary",
 					content:
-						"**Remote investigation:** No activity requires beakers, chemicals, heat, food, kits, outdoor collection, or parent-supervised construction. Optional observations must have an equivalent image, simulation, or data table.\n\n**Completion check:** The core objective can be completed with only paper, notes, and browser/shared-screen access."
+						"**Remote investigation:** No activity requires beakers, chemicals, heat, food, kits, outdoor collection, or parent-supervised construction. Optional observations must have an equivalent image, simulation, or data table.\n\n**Evidence target:** The core objective can be completed with only paper, notes, and browser/shared-screen access."
 				}
 			],
 			supplementalProjects: [
@@ -1808,22 +1808,22 @@ function addScienceGradeBandScopeModule(courseId: string, course: RawCourse) {
 			{
 				title: "Grade 6 Theme: Systems Students Can See and Model",
 				content:
-					"**Remote investigation:** Grade 6 centers visible systems: cells and body systems, structure/function, Earth-sun-moon patterns, weather, water cycle, regional climate, hazard monitoring, and introductory engineering design.\n\n**Completion check:** The work builds a model from a shared source and explains how one part of the system affects another."
+					"**Remote investigation:** Grade 6 centers visible systems: cells and body systems, structure/function, Earth-sun-moon patterns, weather, water cycle, regional climate, hazard monitoring, and introductory engineering design.\n\n**Evidence target:** The work builds a model from a shared source and explains how one part of the system affects another."
 			},
 			{
 				title: "Grade 7 Theme: Matter Moving Through Living and Earth Systems",
 				content:
-					"**Remote investigation:** Grade 7 centers atoms and molecules, substance properties, chemical reactions, conservation of atoms, ecosystems, photosynthesis/respiration conceptually, cycling of matter and energy, Earth materials, resources, and human impacts.\n\n**Completion check:** The work traces matter or energy through a model and supports the explanation with data or simulation evidence."
+					"**Remote investigation:** Grade 7 centers atoms and molecules, substance properties, chemical reactions, conservation of atoms, ecosystems, photosynthesis/respiration conceptually, cycling of matter and energy, Earth materials, resources, and human impacts.\n\n**Evidence target:** The work traces matter or energy through a model and supports the explanation with data or simulation evidence."
 			},
 			{
 				title: "Grade 8 Theme: Forces, Waves, Heredity, and Evolutionary Change",
 				content:
-					"**Remote investigation:** Grade 8 centers one-dimensional forces and motion, collisions, fields qualitatively, energy and wave models, information transfer, inheritance and variation, mutations conceptually, natural selection, fossils, biodiversity, and human-impact solutions. The through-line is evidence comparison: different models or datasets may support different parts of the explanation.\n\n**Completion check:** The work compares multiple lines of evidence and writes a CER or model critique."
+					"**Remote investigation:** Grade 8 centers one-dimensional forces and motion, collisions, fields qualitatively, energy and wave models, information transfer, inheritance and variation, mutations conceptually, natural selection, fossils, biodiversity, and human-impact solutions. The through-line is evidence comparison: different models or datasets may support different parts of the explanation.\n\n**Evidence target:** The work compares multiple lines of evidence and writes a CER or model critique."
 			},
 			{
 				title: "6-8 Coverage Guardrail",
 				content:
-					"**Learning sequence:** Across the full sequence, verify coverage of PS1 matter, PS2 forces, PS3 energy, PS4 waves, LS1 organisms, LS2 ecosystems, LS3 heredity, LS4 evolution, ESS1 space, ESS2 Earth systems, ESS3 human impact, and ETS1 engineering.\n\n**Completion check:** No strand is skipped because it is difficult to do as a home lab."
+					"**Concept path:** Across the full sequence, verify coverage of PS1 matter, PS2 forces, PS3 energy, PS4 waves, LS1 organisms, LS2 ecosystems, LS3 heredity, LS4 evolution, ESS1 space, ESS2 Earth systems, ESS3 human impact, and ETS1 engineering.\n\n**Evidence target:** No strand is skipped because it is difficult to do as a home lab."
 			}
 		],
 		supplementalProjects: [
@@ -1868,9 +1868,9 @@ function addDataAiMlBoundaryModule(courseId: string, course: RawCourse) {
 			{
 				title: "Artifact Boundary",
 				content: [
-					"**Learning sequence:** Use the artifact boundary to prevent Data Science, AI Foundations, and Machine Learning from becoming diluted copies of one another.",
+					"**Concept path:** Use the artifact boundary to prevent Data Science, AI Foundations, and Machine Learning from becoming diluted copies of one another.",
 					`**Boundary:**\n${bullets(lines)}`,
-					"**Completion check:** The course makes it possible to explain why the project belongs in this course and not one of the adjacent data/AI/ML courses."
+					"**Evidence target:** The course makes it possible to explain why the project belongs in this course and not one of the adjacent data/AI/ML courses."
 				].join("\n\n")
 			},
 			{
@@ -1881,12 +1881,12 @@ function addDataAiMlBoundaryModule(courseId: string, course: RawCourse) {
 			{
 				title: "Reproducible Artifact Requirement",
 				content:
-					"**Learning sequence:** Every final data/AI/ML artifact includes setup notes, source or fixture details, the exact question or goal, evaluation evidence, and a short explanation of limitations. The artifact should be understandable from its own notes, because hidden local setup and undocumented assumptions make results hard to reproduce.\n\n**Artifact contents:** Include the data or fixture path, commands or notebook order, package assumptions, baseline or comparison, metric or evidence source, and one known limitation. If randomness is involved, record the seed or describe why exact repetition is not expected.\n\n**Evidence target:** Another reviewer can rerun or inspect the artifact without private context and reach the same main conclusion."
+					"**Concept path:** Every final data/AI/ML artifact includes setup notes, source or fixture details, the exact question or goal, evaluation evidence, and a short explanation of limitations. The artifact should be understandable from its own notes, because hidden local setup and undocumented assumptions make results hard to reproduce.\n\n**Artifact contents:** Include the data or fixture path, commands or notebook order, package assumptions, baseline or comparison, metric or evidence source, and one known limitation. If randomness is involved, record the seed or describe why exact repetition is not expected.\n\n**Evidence target:** Another reviewer can rerun or inspect the artifact without private context and reach the same main conclusion."
 			},
 			{
 				title: "Anti-Overlap Review",
 				content:
-					"**Learning sequence:** Before adding a new project, classify it by grading emphasis: cleaning and communication means Data Science; state representation and algorithmic reasoning means AI Foundations; generalization and model evaluation means Machine Learning. This prevents one project idea from being copied across three courses with only the title changed.\n\n**Review questions:** What is the main artifact? What skill is being assessed? What evidence would prove success? What adjacent course would use a different rubric for the same topic? A weather dataset can become a data-cleaning and visualization project, a search-planning activity, or a prediction model, but the grading target must change.\n\n**Evidence target:** The rubric matches the course identity and rejects at least one tempting but wrong placement."
+					"**Concept path:** Before adding a new project, classify it by grading emphasis: cleaning and communication means Data Science; state representation and algorithmic reasoning means AI Foundations; generalization and model evaluation means Machine Learning. This prevents one project idea from being copied across three courses with only the title changed.\n\n**Review questions:** What is the main artifact? What skill is being assessed? What evidence would prove success? What adjacent course would use a different rubric for the same topic? A weather dataset can become a data-cleaning and visualization project, a search-planning activity, or a prediction model, but the grading target must change.\n\n**Evidence target:** The rubric matches the course identity and rejects at least one tempting but wrong placement."
 			}
 		],
 		supplementalProjects: [
@@ -1913,12 +1913,12 @@ function addAdvancedPythonStudioModule(courseId: string, course: RawCourse) {
 			{
 				title: "Studio Sequence",
 				content:
-					"**Learning sequence:** Treat Python Level 3 as a 14-16 week bridge into algorithms, data structures, Java/C++ transfer, and software quality. Sequence the course through recursion and correctness, backtracking/generators/memoization, searching and indexing, sorting and ordering, runtime and memory analysis, file-backed programs, capstone proposal, implementation, optimization, and final defense.\n\n**Studio rhythm:** Each studio block should produce one runnable artifact, one trace or test file, and one short design note. Early projects emphasize correctness and clear data representation. Middle projects add complexity analysis and benchmark evidence. Later projects add file-backed data, error handling, packaging, and maintainability.\n\n**Evidence target:** The work explains correctness, data representation, asymptotic cost, and testing evidence for every major project."
+					"**Concept path:** Treat Python Level 3 as a 14-16 week bridge into algorithms, data structures, Java/C++ transfer, and software quality. Sequence the course through recursion and correctness, backtracking/generators/memoization, searching and indexing, sorting and ordering, runtime and memory analysis, file-backed programs, capstone proposal, implementation, optimization, and final defense.\n\n**Studio rhythm:** Each studio block should produce one runnable artifact, one trace or test file, and one short design note. Early projects emphasize correctness and clear data representation. Middle projects add complexity analysis and benchmark evidence. Later projects add file-backed data, error handling, packaging, and maintainability.\n\n**Evidence target:** The work explains correctness, data representation, asymptotic cost, and testing evidence for every major project."
 			},
 			{
 				title: "Required Advanced Python Topics",
 				content:
-					"**Learning sequence:** Add iterators, generators, itertools, decorators for instrumentation or memoization, context managers, type hints, dataclasses, modules/packages, pytest, timeit, cProfile, tracemalloc, heapq, bisect, deque, and pathlib/csv/json as tools that unlock algorithmic projects. Each topic should answer a practical engineering question such as how to stream data, measure cost, organize files, or make correctness easier to test.\n\n**Completion check:** Each advanced language feature is tied to a project need, not taught as isolated syntax."
+					"**Concept path:** Add iterators, generators, itertools, decorators for instrumentation or memoization, context managers, type hints, dataclasses, modules/packages, pytest, timeit, cProfile, tracemalloc, heapq, bisect, deque, and pathlib/csv/json as tools that unlock algorithmic projects. Each topic should answer a practical engineering question such as how to stream data, measure cost, organize files, or make correctness easier to test.\n\n**Evidence target:** Each advanced language feature is tied to a project need, not taught as isolated syntax."
 			},
 			{
 				title: "Project Ladder",
@@ -1954,17 +1954,17 @@ function addJavaBridgeModernModule(courseId: string, course: RawCourse) {
 				{
 					title: "Placement Gate",
 					content:
-						"**Readiness check:** Java Level 1 can move quickly through variables, conditionals, loops, and console I/O when the same ideas are already fluent in Python or C++. The non-negotiable evidence is Java-specific: method signatures, class layout, package/import habits, primitive versus reference types, and compile/run troubleshooting.\n\n**Completion check:** A complete response explains what Java requires explicitly that Python hides and what Java hides compared with C++ memory management."
+						"**Readiness check:** Java Level 1 can move quickly through variables, conditionals, loops, and console I/O when the same ideas are already fluent in Python or C++. The non-negotiable evidence is Java-specific: method signatures, class layout, package/import habits, primitive versus reference types, and compile/run troubleshooting.\n\n**Evidence target:** A complete response explains what Java requires explicitly that Python hides and what Java hides compared with C++ memory management."
 				},
 				{
 					title: "Java Object Basics",
 					content:
-						"**Learning sequence:** Use small classes, constructors, fields, methods, records where appropriate, and ArrayList practice to make Java's object model concrete. The goal is not more syntax repetition; it is being able to decide where data lives and which method owns a behavior.\n\n**Object-design checklist:** For each small class, identify its fields, constructor requirements, public methods, and invariants. Use a record when the type is mainly transparent data with named components. Use a class when behavior, validation, mutable state, or encapsulation matters. Test one object from construction through at least one method call.\n\n**Evidence target:** The work chooses between local variable, field, parameter, return value, class, and record intentionally."
+						"**Concept path:** Use small classes, constructors, fields, methods, records where appropriate, and ArrayList practice to make Java's object model concrete. The goal is not more syntax repetition; it is being able to decide where data lives and which method owns a behavior.\n\n**Object-design checklist:** For each small class, identify its fields, constructor requirements, public methods, and invariants. Use a record when the type is mainly transparent data with named components. Use a class when behavior, validation, mutable state, or encapsulation matters. Test one object from construction through at least one method call.\n\n**Evidence target:** The work chooses between local variable, field, parameter, return value, class, and record intentionally."
 				},
 				{
 					title: "AP CSA Alignment",
 					content:
-						"**Learning sequence:** Preserve the AP CSA essentials: integer division, boolean logic, method calls, class design, arrays, ArrayLists, inheritance, recursion, and sorting/searching. Acceleration should shorten familiar fundamentals, not skip AP-specific conventions or tracing style. The bridge should explicitly compare Java syntax with known Python/C++ ideas while keeping AP-style state tracing and method-contract language visible.\n\n**Completion check:** A solution can be traced in AP style and still run cleanly in a local Java toolchain."
+						"**Concept path:** Preserve the AP CSA essentials: integer division, boolean logic, method calls, class design, arrays, ArrayLists, inheritance, recursion, and sorting/searching. Acceleration should shorten familiar fundamentals, not skip AP-specific conventions or tracing style. The bridge should explicitly compare Java syntax with known Python/C++ ideas while keeping AP-style state tracing and method-contract language visible.\n\n**Evidence target:** A solution can be traced in AP style and still run cleanly in a local Java toolchain."
 				}
 			],
 			supplementalProjects: [
@@ -1991,12 +1991,12 @@ function addJavaBridgeModernModule(courseId: string, course: RawCourse) {
 				{
 					title: "Collections and Contracts",
 					content:
-						"**Learning sequence:** Practice list and map-shaped problems with clear mutability rules, equality expectations, and edge cases. Strong work includes method-level tests or compact console traces rather than only manual inspection. The key design question is not which collection is available, but what behavior the public method promises when data is missing, duplicated, invalid, or updated.\n\n**Completion check:** The implementation identifies who owns mutation, how invalid inputs are handled, and what behavior is guaranteed by each public method."
+						"**Concept path:** Practice list and map-shaped problems with clear mutability rules, equality expectations, and edge cases. Strong work includes method-level tests or compact console traces rather than only manual inspection. The key design question is not which collection is available, but what behavior the public method promises when data is missing, duplicated, invalid, or updated.\n\n**Evidence target:** The implementation identifies who owns mutation, how invalid inputs are handled, and what behavior is guaranteed by each public method."
 				},
 				{
 					title: "AP and Beyond",
 					content:
-						"**Learning sequence:** Keep AP CSA class/inheritance expectations visible, then add more realistic collection-backed design. Use records for transparent data carriers and interfaces for replaceable behavior when the project has a real extension point. The design choice distinguishes exam-essential inheritance from production-style composition instead of copying a pattern name.\n\n**Bridge examples:** An AP-style `Animal` inheritance problem can become an interface-backed simulation when behavior varies independently from data. A card or transaction record can become a Java record when it is immutable data. A collection-backed service can hide `ArrayList` details behind method contracts.\n\n**Evidence target:** The same project can be extended without rewriting the core loop or exposing unnecessary internal state."
+						"**Concept path:** Keep AP CSA class/inheritance expectations visible, then add more realistic collection-backed design. Use records for transparent data carriers and interfaces for replaceable behavior when the project has a real extension point. The design choice distinguishes exam-essential inheritance from production-style composition instead of copying a pattern name.\n\n**Bridge examples:** An AP-style `Animal` inheritance problem can become an interface-backed simulation when behavior varies independently from data. A card or transaction record can become a Java record when it is immutable data. A collection-backed service can hide `ArrayList` details behind method contracts.\n\n**Evidence target:** The same project can be extended without rewriting the core loop or exposing unnecessary internal state."
 				}
 			],
 			supplementalProjects: [
@@ -2018,17 +2018,17 @@ function addJavaBridgeModernModule(courseId: string, course: RawCourse) {
 				{
 					title: "Platform Gate",
 					content:
-						"**Readiness check:** Java Level 3 should feel like real application work: packages, NIO Path/Files, streams or well-structured loops, exceptions, tests, generics, simple concurrency boundaries, and maintainable command-line behavior. The gate is satisfied when code organization, error handling, and test fixtures are visible enough that the project could grow without becoming one large main method.\n\n**Completion check:** A project demonstrates how Java organizes a medium-size program, not just how individual syntax features work."
+						"**Readiness check:** Java Level 3 should feel like real application work: packages, NIO Path/Files, streams or well-structured loops, exceptions, tests, generics, simple concurrency boundaries, and maintainable command-line behavior. The gate is satisfied when code organization, error handling, and test fixtures are visible enough that the project could grow without becoming one large main method.\n\n**Evidence target:** A project demonstrates how Java organizes a medium-size program, not just how individual syntax features work."
 				},
 				{
 					title: "Files, Streams, and Tests",
 					content:
-						"**Learning sequence:** Use local files and deterministic fixtures to practice data loading, transformation, aggregation, and reporting. Streams are useful when they clarify the data pipeline; loops remain appropriate when they make state or error handling clearer.\n\n**Fixture routine:** Keep at least four fixtures: empty input, malformed input, normal input, and larger input. The loader should return useful errors or validation results instead of crashing deep inside the program. The transformation code should be testable without rereading files, and the report step should not mutate the parsed data unexpectedly.\n\n**Evidence target:** The implementation covers empty input, malformed input, normal input, and one larger input without changing the public API."
+						"**Concept path:** Use local files and deterministic fixtures to practice data loading, transformation, aggregation, and reporting. Streams are useful when they clarify the data pipeline; loops remain appropriate when they make state or error handling clearer.\n\n**Fixture routine:** Keep at least four fixtures: empty input, malformed input, normal input, and larger input. The loader should return useful errors or validation results instead of crashing deep inside the program. The transformation code should be testable without rereading files, and the report step should not mutate the parsed data unexpectedly.\n\n**Evidence target:** The implementation covers empty input, malformed input, normal input, and one larger input without changing the public API."
 				},
 				{
 					title: "Extension Architecture",
 					content:
-						"**Learning sequence:** ServiceLoader, explicit factories, or plugin-style registries are useful only when the project has multiple behaviors worth swapping. Architecture is justified by the change story, not by pattern vocabulary. A useful extension point has a stable interface, at least two implementations, and a small driver that does not need to know each implementation's internals.\n\n**Completion check:** Adding a new processor, command, or report type does not require rewriting the application driver."
+						"**Concept path:** ServiceLoader, explicit factories, or plugin-style registries are useful only when the project has multiple behaviors worth swapping. Architecture is justified by the change story, not by pattern vocabulary. A useful extension point has a stable interface, at least two implementations, and a small driver that does not need to know each implementation's internals.\n\n**Evidence target:** Adding a new processor, command, or report type does not require rewriting the application driver."
 				}
 			],
 			supplementalProjects: [
@@ -2050,12 +2050,12 @@ function addJavaBridgeModernModule(courseId: string, course: RawCourse) {
 				{
 					title: "Service-First Scope",
 					content:
-						"**Learning sequence:** This track keeps the UI minimal and puts effort into model-layer design, command-line workflows, file I/O, validation, tests, and maintainable package boundaries. It is a better fit when the goal is backend, tools, data processing, or AP-plus Java depth.\n\n**Scope rules:** Put business rules in services or model classes, not in terminal prompts. Keep file loaders separate from validation and reporting. Define command behavior for normal input, missing data, malformed data, and repeated operations. The CLI should expose the model; it should not be the only place where the model can run.\n\n**Evidence target:** The visible behavior can be tested without clicking through a graphical interface."
+						"**Concept path:** This track keeps the UI minimal and puts effort into model-layer design, command-line workflows, file I/O, validation, tests, and maintainable package boundaries. It is a better fit when the goal is backend, tools, data processing, or AP-plus Java depth.\n\n**Scope rules:** Put business rules in services or model classes, not in terminal prompts. Keep file loaders separate from validation and reporting. Define command behavior for normal input, missing data, malformed data, and repeated operations. The CLI should expose the model; it should not be the only place where the model can run.\n\n**Evidence target:** The visible behavior can be tested without clicking through a graphical interface."
 				},
 				{
 					title: "Persistence and Validation",
 					content:
-						"**Learning sequence:** Use records/classes for data, services for behavior, repositories or loaders for persistence, and tests for expected behavior. Keep validation close to input boundaries so the rest of the program can rely on cleaner data.\n\n**Validation path:** Parse raw text into a typed shape, validate required fields and ranges, report row-level or command-level errors, and pass only clean values into the service layer. Persistence code should preserve enough information to reload the same state and should handle missing files or corrupt rows deliberately.\n\n**Evidence target:** The same model can be exercised by tests, a CLI, or a later UI without duplicating business logic."
+						"**Concept path:** Use records/classes for data, services for behavior, repositories or loaders for persistence, and tests for expected behavior. Keep validation close to input boundaries so the rest of the program can rely on cleaner data.\n\n**Validation path:** Parse raw text into a typed shape, validate required fields and ranges, report row-level or command-level errors, and pass only clean values into the service layer. Persistence code should preserve enough information to reload the same state and should handle missing files or corrupt rows deliberately.\n\n**Evidence target:** The same model can be exercised by tests, a CLI, or a later UI without duplicating business logic."
 				}
 			],
 			supplementalProjects: [
@@ -2077,12 +2077,12 @@ function addJavaBridgeModernModule(courseId: string, course: RawCourse) {
 				{
 					title: "UI Scope",
 					content:
-						"**Learning sequence:** This track keeps shared Java fundamentals intact, then adds JavaFX scenes, controls, layout, events, observable state, background work boundaries, and persistence. Graphics are used to practice architecture and feedback loops, not to avoid core Java design.\n\n**UI architecture:** Define the model state before building controls. Keep event handlers short: read input, call model or service behavior, then render the result or error. Use observable state only where the view needs to react. Long-running or file-backed work should have a clear boundary so the interface remains predictable.\n\n**Evidence target:** UI code delegates meaningful behavior to model or service classes that can be tested separately."
+						"**Concept path:** This track keeps shared Java fundamentals intact, then adds JavaFX scenes, controls, layout, events, observable state, background work boundaries, and persistence. Graphics are used to practice architecture and feedback loops, not to avoid core Java design.\n\n**UI architecture:** Define the model state before building controls. Keep event handlers short: read input, call model or service behavior, then render the result or error. Use observable state only where the view needs to react. Long-running or file-backed work should have a clear boundary so the interface remains predictable.\n\n**Evidence target:** UI code delegates meaningful behavior to model or service classes that can be tested separately."
 				},
 				{
 					title: "Event-driven State",
 					content:
-						"**Learning sequence:** Treat each user action as a state transition. Define the starting state, user event, model change, rendered result, and error/empty state before adding visual polish. This keeps JavaFX work from becoming disconnected button wiring and makes it possible to test model behavior outside the view.\n\n**Completion check:** A normal click path, an empty/invalid path, and one persistence or refresh path are verified."
+						"**Concept path:** Treat each user action as a state transition. Define the starting state, user event, model change, rendered result, and error/empty state before adding visual polish. This keeps JavaFX work from becoming disconnected button wiring and makes it possible to test model behavior outside the view.\n\n**Evidence target:** A normal click path, an empty/invalid path, and one persistence or refresh path are verified."
 				}
 			],
 			supplementalProjects: [
@@ -2142,20 +2142,20 @@ function addCppThreeCourseSpineModule(courseId: string, course: RawCourse) {
 			{
 				title: "Level-Specific Focus",
 				content: [
-					"**Learning sequence:** Use this spine to keep the three C++ courses from collapsing into one oversized repo. Each level should have a distinct language and design responsibility.",
+					"**Concept path:** Use this spine to keep the three C++ courses from collapsing into one oversized repo. Each level should have a distinct language and design responsibility.",
 					`**Focus:**\n${bullets(levelFocus[courseId])}`,
-					"**Completion check:** The work demonstrates the ability to explain which C++ level owns the next concept and why it is not being moved into DS&A, C Systems, or AI/ML."
+					"**Evidence target:** The work demonstrates the ability to explain which C++ level owns the next concept and why it is not being moved into DS&A, C Systems, or AI/ML."
 				].join("\n\n")
 			},
 			{
 				title: "Testing and Build Bar",
 				content:
-					"**Learning sequence:** Multi-file assignments should use CMake or a documented Makefile, out-of-source or clean build guidance, warning-clean builds, and a test target or explicit run script. Manual-memory work should include sanitizer or Valgrind-style evidence when available. Build tooling is part of the course because it teaches how source files, headers, warnings, and tests become one reproducible program.\n\n**Completion check:** A fresh checkout has a repeatable build/run/test path."
+					"**Concept path:** Multi-file assignments should use CMake or a documented Makefile, out-of-source or clean build guidance, warning-clean builds, and a test target or explicit run script. Manual-memory work should include sanitizer or Valgrind-style evidence when available. Build tooling is part of the course because it teaches how source files, headers, warnings, and tests become one reproducible program.\n\n**Evidence target:** A fresh checkout has a repeatable build/run/test path."
 			},
 			{
 				title: "Manual Memory Safety Rule",
 				content:
-					"**Learning sequence:** Raw arrays and explicit new/delete are controlled contrast points, then the course returns to RAII, vector/array/span, and smart-pointer ownership. Do not normalize hidden ownership in raw pointers. Manual memory work should make allocation, ownership transfer, copy behavior, and cleanup visible before safer abstractions are reintroduced.\n\n**Completion check:** The work demonstrates the ability to draw ownership and cleanup responsibility before implementing pointer-heavy code."
+					"**Concept path:** Raw arrays and explicit new/delete are controlled contrast points, then the course returns to RAII, vector/array/span, and smart-pointer ownership. Do not normalize hidden ownership in raw pointers. Manual memory work should make allocation, ownership transfer, copy behavior, and cleanup visible before safer abstractions are reintroduced.\n\n**Evidence target:** The work demonstrates the ability to draw ownership and cleanup responsibility before implementing pointer-heavy code."
 			},
 			{
 				title: "Branch-Course Readiness",
@@ -2308,7 +2308,7 @@ function addSystemsSpecificSafetyModule(courseId: string, course: RawCourse) {
 				content: [
 					`**Concept path:** Use this ${courseLabel} baseline before starting systems or security work. Setup is part of the lesson because drift or unsafe host assumptions can invalidate the lab.`,
 					`**Environment:**\n${bullets(config.environment)}`,
-					"**Completion check:** The work demonstrates the ability to name the lab boundary, setup path, and recovery method."
+					"**Evidence target:** The work demonstrates the ability to name the lab boundary, setup path, and recovery method."
 				].join("\n\n")
 			},
 			{
@@ -2316,7 +2316,7 @@ function addSystemsSpecificSafetyModule(courseId: string, course: RawCourse) {
 				content: [
 					`**Safety boundary:** These activities are outside ${courseLabel} scope even if they are technically possible.`,
 					`**Do not do:**\n${bullets(config.prohibited)}`,
-					"**Completion check:** Any ambiguous target or action is paused until scope is narrowed."
+					"**Evidence target:** Any ambiguous target or action is paused until scope is narrowed."
 				].join("\n\n")
 			},
 			{
@@ -2353,22 +2353,22 @@ function addUnityFullProjectWorkflowModules(
 			{
 				title: "Unity Test Framework",
 				content:
-					"**Learning sequence:** Add Edit Mode tests for logic and Play Mode smoke tests for scene boot. Tests should prove score rules, state transitions, and scene loading before the capstone is considered complete.\n\n**Test targets:** Keep pure gameplay rules in small scripts that Edit Mode tests can call without opening a scene. Use Play Mode tests only for integration checks such as scene boot, player spawn, UI state, collisions, and restart flow. When a test fails, record whether the failure came from code logic, serialized scene wiring, missing package setup, or build configuration.\n\n**Evidence target:** The course makes it possible to run the smallest test set and diagnose the failure category."
+					"**Concept path:** Add Edit Mode tests for logic and Play Mode smoke tests for scene boot. Tests should prove score rules, state transitions, and scene loading before the capstone is considered complete.\n\n**Test targets:** Keep pure gameplay rules in small scripts that Edit Mode tests can call without opening a scene. Use Play Mode tests only for integration checks such as scene boot, player spawn, UI state, collisions, and restart flow. When a test fails, record whether the failure came from code logic, serialized scene wiring, missing package setup, or build configuration.\n\n**Evidence target:** The course makes it possible to run the smallest test set and diagnose the failure category."
 			},
 			{
 				title: "Build Profiles and Deployment",
 				content:
-					"**Learning sequence:** Use Build Profiles for desktop and optional Web builds. Build configuration is a repeatable artifact, not a final-session surprise. A build profile records scenes, target platform, settings, and output expectations so the same project can be tested outside the editor.\n\n**Build checklist:** Record the Unity editor version, active scenes, input settings, target platform, output folder, known warnings, and the first smoke test after launch. A local build should prove that gameplay does not depend on editor-only state, missing scene references, or assets that were present only on one machine.\n\n**Evidence target:** The work creates a local build, records the Unity editor version, and explains the target platform."
+					"**Concept path:** Use Build Profiles for desktop and optional Web builds. Build configuration is a repeatable artifact, not a final-session surprise. A build profile records scenes, target platform, settings, and output expectations so the same project can be tested outside the editor.\n\n**Build checklist:** Record the Unity editor version, active scenes, input settings, target platform, output folder, known warnings, and the first smoke test after launch. A local build should prove that gameplay does not depend on editor-only state, missing scene references, or assets that were present only on one machine.\n\n**Evidence target:** The work creates a local build, records the Unity editor version, and explains the target platform."
 			},
 			{
 				title: "Git LFS and Asset Attribution",
 				content:
-					"**Learning sequence:** Track source binaries and large media with Git LFS, commit package manifests/locks, and maintain `THIRD_PARTY_ASSETS.md` with source, license, date imported, modification note, and first branch/tag. Asset provenance is part of the build system because missing media or unclear licenses can make an otherwise working project impossible to share.\n\n**Completion check:** A clean clone has scripts, package locks, and asset provenance."
+					"**Concept path:** Track source binaries and large media with Git LFS, commit package manifests/locks, and maintain `THIRD_PARTY_ASSETS.md` with source, license, date imported, modification note, and first branch/tag. Asset provenance is part of the build system because missing media or unclear licenses can make an otherwise working project impossible to share.\n\n**Evidence target:** A clean clone has scripts, package locks, and asset provenance."
 			},
 			{
 				title: "Profiling and Bug Bash",
 				content:
-					"**Learning sequence:** Profile only concrete issues: scene boot, excessive spawning, expensive update loops, or memory-heavy assets. Keep a bug bash log with reproduction, fix, and retest. The bug bash should distinguish measured performance problems from subjective polish requests so fixes are based on evidence.\n\n**Bug bash record:** For each issue, note the scene, reproduction steps, expected behavior, observed behavior, suspected cause, fix, and retest result. For performance problems, include the measured symptom instead of only saying the game feels slow. For polish requests, state whether the change improves feedback, clarity, controls, or pacing.\n\n**Evidence target:** The work describes one measured issue and one verified fix."
+					"**Concept path:** Profile only concrete issues: scene boot, excessive spawning, expensive update loops, or memory-heavy assets. Keep a bug bash log with reproduction, fix, and retest. The bug bash should distinguish measured performance problems from subjective polish requests so fixes are based on evidence.\n\n**Bug bash record:** For each issue, note the scene, reproduction steps, expected behavior, observed behavior, suspected cause, fix, and retest result. For performance problems, include the measured symptom instead of only saying the game feels slow. For polish requests, state whether the change improves feedback, clarity, controls, or pacing.\n\n**Evidence target:** The work describes one measured issue and one verified fix."
 			}
 		],
 		supplementalProjects: [
@@ -2391,12 +2391,12 @@ function addUnityFullProjectWorkflowModules(
 			{
 				title: "Repository Shape",
 				content:
-					"**Learning sequence:** Unity modules should move toward full starter and review project repositories or tags instead of script-only snapshots. Preserve the stable course ID `unity-game-development`; the current full-project baseline is linked from this module and is the standard shape for later full-project checkpoints.\n\n**Required repository parts:** Include `ProjectSettings`, `Packages/manifest.json`, `Packages/packages-lock.json`, source scripts, scenes, prefabs or placeholder assets, tests where available, `THIRD_PARTY_ASSETS.md`, and Git LFS rules for large binary assets. The starter state should omit completed solution logic while still opening cleanly. The review state should demonstrate the intended final behavior and validation path.\n\n**Evidence target:** The linked starter state can be cloned, opened, played, tested, and built."
+					"**Concept path:** Unity modules should move toward full starter and review project repositories or tags instead of script-only snapshots. Preserve the stable course ID `unity-game-development`; the current full-project baseline is linked from this module and is the standard shape for later full-project checkpoints.\n\n**Required repository parts:** Include `ProjectSettings`, `Packages/manifest.json`, `Packages/packages-lock.json`, source scripts, scenes, prefabs or placeholder assets, tests where available, `THIRD_PARTY_ASSETS.md`, and Git LFS rules for large binary assets. The starter state should omit completed solution logic while still opening cleanly. The review state should demonstrate the intended final behavior and validation path.\n\n**Evidence target:** The linked starter state can be cloned, opened, played, tested, and built."
 			},
 			{
 				title: "Starter and Review Tag Model",
 				content:
-					"**Learning sequence:** Use module tags such as `m01-start`, `m01-checkpoint`, and `m01-review` in starter and review repos. Separate starter, checkpoint, and completed states so the project history stays easy to inspect. Tags should represent meaningful course states, not arbitrary backups, because they become the reference points for review, recovery, and future course updates.\n\n**Completion check:** The course makes it possible to compare starter and completed states without guessing which folder is current."
+					"**Concept path:** Use module tags such as `m01-start`, `m01-checkpoint`, and `m01-review` in starter and review repos. Separate starter, checkpoint, and completed states so the project history stays easy to inspect. Tags should represent meaningful course states, not arbitrary backups, because they become the reference points for review, recovery, and future course updates.\n\n**Evidence target:** The course makes it possible to compare starter and completed states without guessing which folder is current."
 			},
 			{
 				title: "Capstone Options",
@@ -2406,7 +2406,7 @@ function addUnityFullProjectWorkflowModules(
 			{
 				title: "Session Workflow",
 				content:
-					"**Learning sequence:** Use a weekly loop: prework, guided live build, independent implementation on screen, tagged checkpoint or pull request, rubric review, and reflection note. The loop keeps Unity work from turning into an untracked editor session by preserving evidence of what changed and what should happen next.\n\n**Checkpoint contents:** Record the scene or system touched, scripts changed, test or play-mode result, bug or design decision, and next action. A checkpoint can be a commit, tag, pull request, screenshot plus note, or recorded build output, but it must identify the project state clearly enough to resume later.\n\n**Evidence target:** Every session produces a visible checkpoint and next action."
+					"**Concept path:** Use a weekly loop: prework, guided live build, independent implementation on screen, tagged checkpoint or pull request, rubric review, and reflection note. The loop keeps Unity work from turning into an untracked editor session by preserving evidence of what changed and what should happen next.\n\n**Checkpoint contents:** Record the scene or system touched, scripts changed, test or play-mode result, bug or design decision, and next action. A checkpoint can be a commit, tag, pull request, screenshot plus note, or recorded build output, but it must identify the project state clearly enough to resume later.\n\n**Evidence target:** Every session produces a visible checkpoint and next action."
 			}
 		],
 		supplementalProjects: [
