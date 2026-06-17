@@ -2019,8 +2019,8 @@ function neutralizeStudentFacingText(text: string) {
 		)
 	);
 
-	return normalizeSectionActionAgreement(
-		normalizeSupportLabelText(neutralized)
+	return normalizeEvidenceSentence(
+		normalizeSectionActionAgreement(normalizeSupportLabelText(neutralized))
 	);
 }
 
@@ -2641,6 +2641,23 @@ function diagnosticCategories(context: CourseTextContext) {
 	return "vocabulary, tracing, syntax, design, or test coverage";
 }
 
+function evidenceForSubject(subject: string, details: string) {
+	const trimmed = subject.trim();
+
+	if (/^the\s/i.test(trimmed)) {
+		return `${trimmed} evidence includes ${details}`;
+	}
+
+	return `Evidence for ${trimmed} includes ${details}`;
+}
+
+function normalizeEvidenceSentence(text: string) {
+	return text.replace(
+		/\bEvidence for The ([a-z][^.?!:;]{0,100}?) includes\b/g,
+		"The $1 evidence includes"
+	);
+}
+
 function proficiencyEvidence(context: CourseTextContext) {
 	if (isScienceContext(context)) {
 		return variantPrompt(context, [
@@ -2649,7 +2666,10 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to connect one observation, one model limitation, one vocabulary term, and one evidence-based conclusion.`,
 			subject =>
-				`Evidence for ${subject} includes the phenomenon, supporting evidence, key term, and a revised claim for one changed condition.`,
+				evidenceForSubject(
+					subject,
+					"the phenomenon, supporting evidence, key term, and a revised claim for one changed condition."
+				),
 			subject =>
 				`For ${subject}, demonstrate that the model, data, units or scale, and conclusion are connected without claiming more than the evidence supports.`
 		]);
@@ -2661,7 +2681,10 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to show the representation, calculation step, reasonableness check, and one corrected error.`,
 			subject =>
-				`Evidence for ${subject} includes the target skill, a changed example, and a reasonableness explanation tied to the context.`,
+				evidenceForSubject(
+					subject,
+					"the target skill, a changed example, and a reasonableness explanation tied to the context."
+				),
 			subject =>
 				`For ${subject}, demonstrate the procedure, justify the key step, and catch one common mistake before moving on.`
 		]);
@@ -2673,7 +2696,10 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to show the path from source data or state space to result, including one intermediate check and one caveat about interpretation.`,
 			subject =>
-				`Evidence for ${subject} includes the metric or source, the processing change, and a clear separation between measured output and conclusion.`,
+				evidenceForSubject(
+					subject,
+					"the metric or source, the processing change, and a clear separation between measured output and conclusion."
+				),
 			subject =>
 				`For ${subject}, demonstrate one small hand-checkable case, one representative result, and one reason the result should not be generalized too far.`
 		]);
@@ -2685,7 +2711,10 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to show the key Java syntax or API choice, the state trace, one successful run, and one boundary case tied to AP-style reasoning.`,
 			subject =>
-				`Evidence for ${subject} includes the Java concept, a value trace, a changed input, and a reason the result follows from the code.`,
+				evidenceForSubject(
+					subject,
+					"the Java concept, a value trace, a changed input, and a reason the result follows from the code."
+				),
 			subject =>
 				`For ${subject}, demonstrate compile/run evidence, a trace table or equivalent state explanation, and one edge case that protects against a common AP mistake.`
 		]);
@@ -2697,7 +2726,10 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to show the input/output contract, a hand-traced case, the accepted sample behavior, and one boundary case that fits the constraints.`,
 			subject =>
-				`Evidence for ${subject} includes the invariant, the duplicate or tie case, and a complexity check for the largest input.`,
+				evidenceForSubject(
+					subject,
+					"the invariant, the duplicate or tie case, and a complexity check for the largest input."
+				),
 			subject =>
 				`For ${subject}, demonstrate sample correctness, one adversarial custom case, and a concise proof that the algorithm preserves the intended property.`
 		]);
@@ -2709,7 +2741,10 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to demonstrate the screen state, the user action that changes it, one simulator-verified path, and one layout or accessibility check.`,
 			subject =>
-				`Evidence for ${subject} includes the state owner, interaction result, and whether any issue comes from code, preview data, or project configuration.`,
+				evidenceForSubject(
+					subject,
+					"the state owner, interaction result, and whether any issue comes from code, preview data, or project configuration."
+				),
 			subject =>
 				`For ${subject}, verify launch behavior, one target interaction, one edge state, and the evidence that the SwiftUI view responds correctly.`
 		]);
@@ -2721,7 +2756,10 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to document the authorized boundary, baseline evidence, diagnostic output, and the mitigation or hardening check that proves the result.`,
 			subject =>
-				`Evidence for ${subject} includes the risk, relevant log or configuration, and how the final state reduces or contains it.`,
+				evidenceForSubject(
+					subject,
+					"the risk, relevant log or configuration, and how the final state reduces or contains it."
+				),
 			subject =>
 				`For ${subject}, demonstrate before-and-after evidence, the command path, the safe rollback or containment plan, and the final verification step.`
 		]);
@@ -2733,7 +2771,10 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to document setup, command path, observed output, diagnostic evidence, and the cleanup or rerun step that proves reproducibility.`,
 			subject =>
-				`Evidence for ${subject} includes the system boundary, one healthy output, one diagnostic output, and the assumption that controls the result.`,
+				evidenceForSubject(
+					subject,
+					"the system boundary, one healthy output, one diagnostic output, and the assumption that controls the result."
+				),
 			subject =>
 				`For ${subject}, demonstrate the intended behavior, one failure or edge path, and the command sequence needed to repeat the result.`
 		]);
@@ -2745,7 +2786,10 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to trace one player action through events, variables, and visible feedback, then replay the project from a clean start.`,
 			subject =>
-				`Evidence for ${subject} includes the key state variable or event chain, the expected play path, and one awkward input or boundary case.`,
+				evidenceForSubject(
+					subject,
+					"the key state variable or event chain, the expected play path, and one awkward input or boundary case."
+				),
 			subject =>
 				`For ${subject}, show the start state, the interaction that changes it, the feedback that confirms it, and one reset or replay check.`
 		]);
@@ -2757,7 +2801,10 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to demonstrate one visible interaction, the state or DOM change behind it, an empty or invalid input, and a keyboard or responsive-layout check.`,
 			subject =>
-				`Evidence for ${subject} includes the user goal, event-to-output trace, and confirmation that both normal and failure paths work.`,
+				evidenceForSubject(
+					subject,
+					"the user goal, event-to-output trace, and confirmation that both normal and failure paths work."
+				),
 			subject =>
 				`For ${subject}, verify the browser behavior with a normal action, an edge input, visible feedback, and one accessibility or screen-size check.`
 		]);
@@ -2769,7 +2816,10 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to trace the input or setup value through the main branch, loop, or helper function, then verify the output with one changed input.`,
 			subject =>
-				`Evidence for ${subject} includes the data shape, transformation step, output evidence, and one boundary case that protects the logic.`,
+				evidenceForSubject(
+					subject,
+					"the data shape, transformation step, output evidence, and one boundary case that protects the logic."
+				),
 			subject =>
 				`For ${subject}, demonstrate that the Python code is readable, runnable, and testable by showing the main path plus one case that would catch a common mistake.`
 		]);
@@ -2783,7 +2833,10 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to show how the constructor, method, field, interface, or collection choice affects the result, then verify it with a small run or test.`,
 			subject =>
-				`Evidence for ${subject} includes the API boundary, the data it protects or exposes, and proof that the behavior works.`
+				evidenceForSubject(
+					subject,
+					"the API boundary, the data it protects or exposes, and proof that the behavior works."
+				)
 		]);
 	}
 	if (/c\+\+|cpp/.test(contextText(context))) {
@@ -2793,7 +2846,10 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to show the invariant, the command that proves behavior, and one bounds, copying, lifetime, or complexity decision.`,
 			subject =>
-				`Evidence for ${subject} includes the representation, one normal trace, and one diagnostic result tied to ownership or memory behavior.`,
+				evidenceForSubject(
+					subject,
+					"the representation, one normal trace, and one diagnostic result tied to ownership or memory behavior."
+				),
 			subject =>
 				`For ${subject}, demonstrate the public behavior, one edge input, and the C++ design choice that protects correctness or performance.`
 		]);

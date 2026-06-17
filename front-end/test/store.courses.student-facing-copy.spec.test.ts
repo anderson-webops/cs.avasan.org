@@ -115,6 +115,7 @@ const forbiddenStudentFacingPatterns = [
 	/\bStart with vocabulary\b/i,
 	/\b(?:Use|Show|Walk|Stress|Teach|Demonstrate|Introduce|Cover|Review)\b[^.]{0,140}\b(?:students?|learners?)\b/i,
 	/\bUse\b[^.]{0,140}\bto teach\b/i,
+	/\bEvidence for The\b/,
 	/This lesson arc covers these sections in sequence/i,
 	/(?:^|\n|\*\*[^*]+:\*\*\s)(?:Introduce|Teach|Cover|Set expectations)\b/,
 	/\bwithout copying\b/i
