@@ -1951,6 +1951,48 @@ describe("course text quality normalization", () => {
 		COURSE_SWEEP_TIMEOUT
 	);
 
+	it(
+		"keeps generated architecture and capstone cards substantive",
+		async () => {
+			const courses = await Promise.all(
+				courseCatalog.map(entry => loadRawCourse(entry.id))
+			);
+			const terseFormulaicCards: string[] = [];
+			const corpus = courses.map(allCourseText).join("\n");
+
+			for (const [courseIndex, course] of courses.entries()) {
+				expect(course).not.toBeNull();
+
+				for (const module of course!.modules) {
+					for (const item of [
+						...module.curriculum,
+						...module.supplementalProjects
+					]) {
+						const text = item.content.replace(/\s+/g, " ").trim();
+
+						if (
+							text.length < 420 &&
+							/^\*\*(?:Goal|Concept path|Readiness map|Project goal):\*\*/i.test(
+								text
+							)
+						) {
+							terseFormulaicCards.push(
+								`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title} / ${text.length}`
+							);
+						}
+					}
+				}
+			}
+
+			expect(terseFormulaicCards).toEqual([]);
+			expect(corpus).toContain("**Anchor structure:**");
+			expect(corpus).toContain("**Data-story structure:**");
+			expect(corpus).toContain("**Gate sequence:**");
+			expect(corpus).toContain("**Option A: Relic Runner:**");
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
+
 	it("formats authored lesson setup text as neutral student-readable sections", async () => {
 		const course = await loadRawCourse("c-level-1");
 		expect(course).not.toBeNull();
