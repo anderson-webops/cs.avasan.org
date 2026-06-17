@@ -28,120 +28,70 @@ function capitalizedDefiniteLabel(label: string) {
 	return `The **${articleSafeLabel(label)}**`;
 }
 
-function sectionLabel(section: ImplementationLabSection) {
-	return {
-		concepts: "concept path",
-		example: "worked example",
-		coreProject: "core project",
-		review: "review",
-		extension: "extension"
-	}[section];
-}
-
-function familyFocus(
-	courseFamily: string,
-	moduleTitle: string,
-	section: ImplementationLabSection
-) {
+function familyFocus(courseFamily: string) {
 	const family = courseFamily.toLowerCase();
-	const label = labLabel(moduleTitle);
-	const focusLabel = articleSafeLabel(label);
-	const focusFor = (focus: string) =>
-		`${focusLabel} ${sectionLabel(section)} focus: ${focus}`;
 
 	if (family.includes("assembly")) {
-		return focusFor(
-			"register state, flags, stack layout, memory addresses, calling-convention assumptions, and debugger evidence"
-		);
+		return "register state, flags, stack layout, memory addresses, calling-convention assumptions, and debugger evidence";
 	}
 
 	if (family.includes("c systems") || family.includes("systems build")) {
-		return focusFor(
-			"byte-level representation, pointer ownership, resource lifetime, compiler warnings, sanitizer output, and reproducible command-line behavior"
-		);
+		return "byte-level representation, pointer ownership, resource lifetime, compiler warnings, sanitizer output, and reproducible command-line behavior";
 	}
 
 	if (family.includes("linux")) {
-		return focusFor(
-			"shell commands, file permissions, process state, service configuration, log evidence, and repeatable terminal workflows"
-		);
+		return "shell commands, file permissions, process state, service configuration, log evidence, and repeatable terminal workflows";
 	}
 
 	if (family.includes("network security")) {
-		return focusFor(
-			"local service boundaries, request validation, authentication or authorization assumptions, logging, rate or error behavior, and defensive evidence"
-		);
+		return "local service boundaries, request validation, authentication or authorization assumptions, logging, rate or error behavior, and defensive evidence";
 	}
 
 	if (family.includes("network")) {
-		return focusFor(
-			"protocol messages, sockets, ports, latency or failure behavior, packet/service traces, and clear client-server boundaries"
-		);
+		return "protocol messages, sockets, ports, latency or failure behavior, packet/service traces, and clear client-server boundaries";
 	}
 
 	if (family.includes("web")) {
-		return focusFor(
-			"page structure, user input, browser state, API boundaries, validation, accessibility, error handling, and deployment assumptions"
-		);
+		return "page structure, user input, browser state, API boundaries, validation, accessibility, error handling, and deployment assumptions";
 	}
 
 	if (family.includes("machine learning")) {
-		return focusFor(
-			"dataset inspection, feature choices, train/test separation, baseline comparison, model behavior, evaluation metrics, and limits of the conclusion"
-		);
+		return "dataset inspection, feature choices, train/test separation, baseline comparison, model behavior, evaluation metrics, and limits of the conclusion";
 	}
 
 	if (family.includes("data science") || family.includes("data analysis")) {
-		return focusFor(
-			"data source assumptions, column meaning, cleaning decisions, missing values, transformations, visual evidence, and a reproducible analysis note"
-		);
+		return "data source assumptions, column meaning, cleaning decisions, missing values, transformations, visual evidence, and a reproducible analysis note";
 	}
 
 	if (family.includes("ai")) {
-		return focusFor(
-			"state representation, actions, goal tests, search strategy, heuristic or scoring behavior, experiment logs, and evidence that the agent improves or behaves intentionally"
-		);
+		return "state representation, actions, goal tests, search strategy, heuristic or scoring behavior, experiment logs, and evidence that the agent improves or behaves intentionally";
 	}
 
 	if (family.includes("usaco")) {
-		return focusFor(
-			"input format, constraints, a brute-force baseline, the chosen algorithm, complexity, sample traces, hidden edge cases, and contest-style output discipline"
-		);
+		return "input format, constraints, a brute-force baseline, the chosen algorithm, complexity, sample traces, hidden edge cases, and contest-style output discipline";
 	}
 
 	if (family.includes("design pattern")) {
-		return focusFor(
-			"object roles, collaboration boundaries, before-and-after coupling, extensibility tradeoffs, and tests that prove the pattern changes behavior rather than only class names"
-		);
+		return "object roles, collaboration boundaries, before-and-after coupling, extensibility tradeoffs, and tests that prove the pattern changes behavior rather than only class names";
 	}
 
 	if (family.includes("data structures") || family.includes("algorithm")) {
-		return focusFor(
-			"data-structure invariants, input constraints, algorithm state, asymptotic complexity, memory behavior, and edge-case traces"
-		);
+		return "data-structure invariants, input constraints, algorithm state, asymptotic complexity, memory behavior, and edge-case traces";
 	}
 
 	if (family.includes("language bridge")) {
-		return focusFor(
-			"syntax translation, type differences, object and memory model differences, build/run workflow, and equivalent behavior across languages"
-		);
+		return "syntax translation, type differences, object and memory model differences, build/run workflow, and equivalent behavior across languages";
 	}
 
 	if (family.includes("pygame")) {
-		return focusFor(
-			"game-loop state, event handling, sprites or assets, collision/timing behavior, frame-by-frame debugging, and playable feedback"
-		);
+		return "game-loop state, event handling, sprites or assets, collision/timing behavior, frame-by-frame debugging, and playable feedback";
 	}
 
 	if (family.includes("java")) {
-		return focusFor(
-			"Java syntax, class design, object state, method contracts, package or import boundaries, exceptions, tests, and command-line runtime behavior"
-		);
+		return "Java syntax, class design, object state, method contracts, package or import boundaries, exceptions, tests, and command-line runtime behavior";
 	}
 
-	return focusFor(
-		"inputs, state changes, system boundaries, observable behavior, edge cases, and verification evidence"
-	);
+	return "inputs, state changes, system boundaries, observable behavior, edge cases, and verification evidence";
 }
 
 function referenceStep(label: string, artifact: string, hasReference = true) {
@@ -175,7 +125,7 @@ export function buildImplementationLabGuidance({
 	hasReference = true
 }: ImplementationLabGuidanceOptions) {
 	const label = labLabel(moduleTitle);
-	const focus = familyFocus(courseFamily, moduleTitle, section);
+	const focus = familyFocus(courseFamily);
 
 	if (section === "concepts") {
 		return [

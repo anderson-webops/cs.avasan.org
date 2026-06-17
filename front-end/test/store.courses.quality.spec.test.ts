@@ -1358,6 +1358,8 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/^Represent the module with at least one graph/im
 			);
+			expect(corpus).not.toMatch(/\bcore project focus:/i);
+			expect(corpus).not.toMatch(/\bRun the local the\b/i);
 			expect(corpus).not.toMatch(/\b(?:connectings|mappings)\b/i);
 			expect(corpus).not.toMatch(
 				/\bThis module focuses on (?:combine|connect|diagnose|map|organize|turn|use)\b/i
@@ -1370,6 +1372,9 @@ describe("course text quality normalization", () => {
 			);
 			expect(corpus).toContain(
 				"Create a representation for Momentum, Impulse, and Collisions with at least one graph"
+			);
+			expect(corpus).toContain(
+				"**Focus:** state representation, actions, goal tests, search strategy"
 			);
 			expect(corpus).toContain("Work a typical example");
 			expect(corpus).toContain("Modeling or Error Analysis");
