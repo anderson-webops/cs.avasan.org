@@ -128,9 +128,9 @@ const isGameLoopActive = ref(false);
 const activeTurtleTimerCount = ref(0);
 const showProjectMenu = ref(false);
 const showFileTools = ref(false);
-const projectActionMenuID = ref("");
 const deleteCandidateProjectID = ref("");
 const deleteConfirmText = ref("");
+const sidebarCollapsed = ref(false);
 const stopRequested = ref(false);
 const saveMessage = ref("Loading workspace");
 const runMessage = ref("Ready");
@@ -511,16 +511,12 @@ function projectLabel(project: PythonIdeProject) {
 	return project.title || "Untitled Project";
 }
 
-function toggleProjectActions(project: PythonIdeProject) {
-	projectActionMenuID.value =
-		projectActionMenuID.value === project._id ? "" : project._id;
-	deleteCandidateProjectID.value = "";
-	deleteConfirmText.value = "";
-}
-
 function requestProjectDelete(project: PythonIdeProject) {
+	if (projects.value.length <= 1) {
+		appendOutput("system", "Keep at least one project in the workspace.");
+		return;
+	}
 	selectedProjectID.value = project._id;
-	projectActionMenuID.value = "";
 	deleteCandidateProjectID.value = project._id;
 	deleteConfirmText.value = "";
 }
@@ -726,6 +722,16 @@ function deleteFile(file: PythonIdeFile) {
 	}
 	touchSelectedProject();
 	scheduleSave();
+}
+
+function canDeleteFile(file: PythonIdeFile) {
+	const project = selectedProject.value;
+	if (!project) return false;
+	if (project.files.length <= 1) return false;
+	const pythonFileCount = project.files.filter(candidate =>
+		isPythonIdePythonFile(candidate.name)
+	).length;
+	return !(isPythonIdePythonFile(file.name) && pythonFileCount <= 1);
 }
 
 function clearOutput() {
@@ -1748,8 +1754,28 @@ onBeforeUnmount(() => {
 			Loading Python workspace...
 		</div>
 
-		<div v-else class="python-ide-workspace">
+		<div
+			v-else
+			class="python-ide-workspace"
+			:class="{ 'is-sidebar-collapsed': sidebarCollapsed }"
+		>
+			<button
+				:aria-expanded="!sidebarCollapsed"
+				:aria-label="
+					sidebarCollapsed
+						? 'Expand project sidebar'
+						: 'Collapse project sidebar'
+				"
+				aria-controls="python-ide-sidebar"
+				class="sidebar-collapse-toggle"
+				title="Toggle project sidebar"
+				type="button"
+				@click="sidebarCollapsed = !sidebarCollapsed"
+			>
+				<span class="sidebar-collapse-icon" aria-hidden="true" />
+			</button>
 			<aside
+				id="python-ide-sidebar"
 				class="python-ide-sidebar"
 				aria-label="Python projects and files"
 			>
@@ -1832,31 +1858,21 @@ onBeforeUnmount(() => {
 									}}</small>
 								</button>
 								<button
-									:aria-expanded="
-										project._id === projectActionMenuID
-									"
-									:aria-label="`Project actions for ${projectLabel(project)}`"
-									class="project-action-toggle"
-									title="Project actions"
-									type="button"
-									@click="toggleProjectActions(project)"
-								>
-									...
-								</button>
-							</div>
-							<div
-								v-if="project._id === projectActionMenuID"
-								class="project-action-menu"
-								role="menu"
-							>
-								<button
-									class="project-action-delete"
+									:aria-label="`Delete project ${projectLabel(project)}`"
+									class="file-delete project-delete-trigger"
+									:class="{
+										'is-disabled': projects.length <= 1
+									}"
 									:disabled="projects.length <= 1"
-									role="menuitem"
+									:title="
+										projects.length <= 1
+											? 'Keep at least one project'
+											: `Delete project ${projectLabel(project)}`
+									"
 									type="button"
 									@click="requestProjectDelete(project)"
 								>
-									Delete this project...
+									x
 								</button>
 							</div>
 							<div
@@ -1931,6 +1947,8 @@ onBeforeUnmount(() => {
 							<button
 								aria-label="Delete file"
 								class="file-delete"
+								:class="{ 'is-disabled': !canDeleteFile(file) }"
+								:disabled="!canDeleteFile(file)"
 								title="Delete file"
 								type="button"
 								@click="deleteFile(file)"
@@ -2278,9 +2296,17 @@ html.dark .python-ide-status strong {
 
 .python-ide-workspace {
 	display: grid;
-	grid-template-columns: minmax(18rem, 24rem) minmax(0, 1fr);
+	grid-template-columns: auto minmax(18rem, 24rem) minmax(0, 1fr);
 	gap: 1rem;
 	align-items: stretch;
+}
+
+.python-ide-workspace.is-sidebar-collapsed {
+	grid-template-columns: auto minmax(0, 1fr);
+}
+
+.python-ide-workspace.is-sidebar-collapsed .python-ide-sidebar {
+	display: none;
 }
 
 .python-ide-sidebar,
@@ -2298,6 +2324,42 @@ html.dark .python-ide-status strong {
 	flex-direction: column;
 	gap: 1rem;
 	padding: 1rem;
+}
+
+.sidebar-collapse-toggle {
+	width: 2.45rem;
+	height: 2.45rem;
+	display: grid;
+	place-items: center;
+	align-self: start;
+	border: 1px solid var(--color-border);
+	border-radius: 8px;
+	background: rgba(255, 255, 255, 0.78);
+	color: var(--color-ink-muted);
+}
+
+.sidebar-collapse-icon {
+	position: relative;
+	width: 1.15rem;
+	height: 1rem;
+	border: 2px solid currentColor;
+	border-radius: 4px;
+}
+
+.sidebar-collapse-icon::before {
+	position: absolute;
+	top: 2px;
+	bottom: 2px;
+	left: 0.22rem;
+	width: 2px;
+	border-radius: 999px;
+	background: currentColor;
+	content: "";
+}
+
+.python-ide-workspace.is-sidebar-collapsed .sidebar-collapse-icon::before {
+	right: 0.22rem;
+	left: auto;
 }
 
 .sidebar-block {
@@ -2399,16 +2461,6 @@ html.dark .python-ide-status strong {
 	align-items: stretch;
 }
 
-.project-action-toggle {
-	width: 2.7rem;
-	min-height: 100%;
-	border: 1px solid var(--color-border);
-	border-radius: 10px;
-	background: rgba(248, 250, 252, 0.74);
-	color: var(--color-ink-muted);
-	font-weight: 900;
-}
-
 .project-button,
 .file-button {
 	width: 100%;
@@ -2426,33 +2478,6 @@ html.dark .python-ide-status strong {
 .file-button.is-active {
 	border-color: rgba(15, 118, 110, 0.36);
 	background: rgba(204, 251, 241, 0.34);
-}
-
-.project-action-menu {
-	justify-self: end;
-	width: min(14rem, 100%);
-	display: grid;
-	padding: 0.45rem;
-	border: 1px solid var(--color-border);
-	border-radius: 10px;
-	background: var(--color-surface-strong);
-	box-shadow: var(--shadow-soft);
-}
-
-.project-action-menu button {
-	width: 100%;
-	padding: 0.55rem 0.65rem;
-	border: 0;
-	border-radius: 8px;
-	background: rgba(254, 242, 242, 0.82);
-	color: #991b1b;
-	font-weight: 800;
-	text-align: left;
-}
-
-.project-action-menu button:disabled {
-	cursor: not-allowed;
-	opacity: 0.5;
 }
 
 .project-delete-confirm {
@@ -2513,7 +2538,7 @@ html.dark .project-create-menu button:focus-visible {
 
 html.dark .icon-action,
 html.dark .file-tool-toggle,
-html.dark .project-action-toggle {
+html.dark .sidebar-collapse-toggle {
 	border-color: rgba(148, 163, 184, 0.4);
 	background: #e2e8f0;
 	color: #0f172a;
@@ -2538,16 +2563,6 @@ html.dark .project-button small {
 
 html.dark .file-button small {
 	color: #5eead4;
-}
-
-html.dark .project-action-menu {
-	border-color: rgba(248, 113, 113, 0.24);
-	background: #101827;
-}
-
-html.dark .project-action-menu button {
-	background: #2f1f27;
-	color: #fecaca;
 }
 
 html.dark .project-delete-confirm {
@@ -2601,13 +2616,43 @@ html.dark .file-tool-toggle-icon::before {
 }
 
 .file-delete {
+	position: relative;
 	width: 2.7rem;
 	height: 100%;
 	min-height: 2.8rem;
-	border: 1px solid var(--color-border);
+	overflow: hidden;
+	border: 1px solid rgba(185, 28, 28, 0.28);
 	border-radius: 8px;
-	background: rgba(248, 250, 252, 0.74);
-	color: var(--color-ink-muted);
+	background: rgba(254, 242, 242, 0.86);
+	color: #991b1b;
+}
+
+.file-delete.is-disabled,
+.file-delete:disabled {
+	cursor: not-allowed;
+	border-color: rgba(148, 163, 184, 0.38);
+	background: #cbd5e1;
+	color: rgba(100, 116, 139, 0.78);
+}
+
+.file-delete.is-disabled::after,
+.file-delete:disabled::after {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 135%;
+	height: 2px;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.78);
+	content: "";
+	transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+html.dark .file-delete.is-disabled,
+html.dark .file-delete:disabled {
+	border-color: rgba(148, 163, 184, 0.36);
+	background: #cbd5e1;
+	color: rgba(100, 116, 139, 0.78);
 }
 
 .new-file-row {
