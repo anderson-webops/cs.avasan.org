@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import {
 	createPythonIdeProject,
 	dataScienceSampleCsv,
@@ -126,6 +128,8 @@ describe("python IDE project helpers", () => {
 			pythonIdeLibrarySupport.some(
 				entry =>
 					entry.name === "Turtle and PyGame Zero" &&
+					entry.detail.includes("begin_fill()") &&
+					entry.detail.includes("colormode()") &&
 					entry.detail.includes("independent Turtle() objects") &&
 					entry.detail.includes("xcor()") &&
 					entry.detail.includes("distance()") &&
@@ -134,6 +138,25 @@ describe("python IDE project helpers", () => {
 					entry.detail.includes("mouse handlers")
 			)
 		).toBe(true);
+	});
+
+	it("keeps Turtle fill and RGB color hooks wired in the runtime shim", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/pages/python-ide.vue"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain("beginFill: beginTurtleFill");
+		expect(pageSource).toContain("endFill: endTurtleFill");
+		expect(runtimeSource).toContain("def colormode(cmode=None)");
+		expect(runtimeSource).toContain("def _normalize_color(*values)");
+		expect(runtimeSource).toContain("def begin_fill(self):");
+		expect(runtimeSource).toContain("_bridge.beginFill()");
+		expect(runtimeSource).toContain("_bridge.endFill()");
 	});
 
 	it("normalizes project file names without accepting unsafe names", () => {

@@ -78,6 +78,12 @@ interface TurtleState {
 	background: string;
 }
 
+interface TurtleFillState {
+	active: boolean;
+	color: string;
+	points: { x: number; y: number }[];
+}
+
 interface GameCanvasState {
 	width: number;
 	height: number;
@@ -151,6 +157,12 @@ const turtleState: TurtleState = {
 	fillColor: "#0f766e",
 	lineWidth: 3,
 	background: "#ffffff"
+};
+
+const turtleFillState: TurtleFillState = {
+	active: false,
+	color: turtleState.fillColor,
+	points: []
 };
 
 const gameState: GameCanvasState = {
@@ -635,6 +647,8 @@ function resetTurtleCanvas() {
 	turtleDragHandlers.clear();
 	activeTurtleDragButton = null;
 	turtleStampCounter = 0;
+	turtleFillState.active = false;
+	turtleFillState.points = [];
 	stopGameLoop();
 	const canvasContext = resizeCanvasForDisplay();
 	if (!canvasContext) return;
@@ -652,6 +666,46 @@ function resetTurtleCanvas() {
 	context.fillRect(0, 0, rect.width, rect.height);
 }
 
+function trackTurtleFillPoint(x: number, y: number) {
+	if (!turtleFillState.active) return;
+	const previous = turtleFillState.points.at(-1);
+	if (previous && previous.x === x && previous.y === y) return;
+	turtleFillState.points.push({ x, y });
+}
+
+function beginTurtleFill() {
+	turtleFillState.active = true;
+	turtleFillState.color = turtleState.fillColor;
+	turtleFillState.points = [{ x: turtleState.x, y: turtleState.y }];
+}
+
+function endTurtleFill() {
+	const context = getCanvasContext();
+	const points = turtleFillState.points;
+	turtleFillState.active = false;
+	turtleFillState.points = [];
+	if (!context || points.length < 3) return;
+
+	const [firstPoint, ...remainingPoints] = points;
+	if (!firstPoint) return;
+
+	const firstCanvasPoint = canvasCoordinates(firstPoint.x, firstPoint.y);
+	context.fillStyle = turtleFillState.color;
+	context.beginPath();
+	context.moveTo(firstCanvasPoint.x, firstCanvasPoint.y);
+	for (const point of remainingPoints) {
+		const canvasPoint = canvasCoordinates(point.x, point.y);
+		context.lineTo(canvasPoint.x, canvasPoint.y);
+	}
+	context.closePath();
+	context.fill();
+	context.strokeStyle = turtleState.penColor;
+	context.lineWidth = turtleState.lineWidth;
+	context.lineCap = "round";
+	context.lineJoin = "round";
+	context.stroke();
+}
+
 function drawForward(distance: number) {
 	const context = getCanvasContext();
 	if (!context) return;
@@ -661,6 +715,7 @@ function drawForward(distance: number) {
 	turtleState.x += Math.cos(radians) * distance;
 	turtleState.y += Math.sin(radians) * distance;
 	const end = canvasCoordinates(turtleState.x, turtleState.y);
+	trackTurtleFillPoint(turtleState.x, turtleState.y);
 
 	if (!turtleState.penDown) return;
 	context.strokeStyle = turtleState.penColor;
@@ -680,6 +735,12 @@ function drawCircle(radius: number) {
 	context.lineWidth = turtleState.lineWidth;
 	context.beginPath();
 	context.arc(center.x, center.y, Math.abs(radius), 0, Math.PI * 2);
+	if (turtleFillState.active) {
+		context.fillStyle = turtleState.fillColor;
+		context.fill();
+		context.beginPath();
+		context.arc(center.x, center.y, Math.abs(radius), 0, Math.PI * 2);
+	}
 	context.stroke();
 }
 
@@ -1054,6 +1115,8 @@ const turtleBridge: TurtleBridge = {
 		turtleState.background = color;
 		resetTurtleCanvas();
 	},
+	beginFill: beginTurtleFill,
+	endFill: endTurtleFill,
 	forward: drawForward,
 	right(degrees: number) {
 		turtleState.heading -= degrees;
@@ -1090,6 +1153,7 @@ const turtleBridge: TurtleBridge = {
 		const end = canvasCoordinates(x, y);
 		turtleState.x = x;
 		turtleState.y = y;
+		trackTurtleFillPoint(x, y);
 		if (!context || !turtleState.penDown) return;
 		context.strokeStyle = turtleState.penColor;
 		context.lineWidth = turtleState.lineWidth;

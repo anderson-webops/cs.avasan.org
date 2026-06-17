@@ -105,6 +105,8 @@ export interface TurtleBridge {
 	reset: () => void;
 	clear: () => void;
 	bgcolor: (color: string) => void;
+	beginFill: () => void;
+	endFill: () => void;
 	forward: (distance: number) => void;
 	right: (degrees: number) => void;
 	left: (degrees: number) => void;
@@ -254,6 +256,53 @@ from pyodide.ffi import create_proxy
 
 _bridge = window.__classesPythonIdeTurtle
 _callback_proxies = {}
+_color_mode = 1.0
+
+def _is_number(value):
+    try:
+        float(value)
+        return True
+    except Exception:
+        return False
+
+def _color_channel(value):
+    number = float(value)
+    if _color_mode == 1.0 and 0 <= number <= 1:
+        number *= 255
+    return max(0, min(255, int(round(number))))
+
+def _normalize_color(*values):
+    if len(values) == 1:
+        value = values[0]
+        if isinstance(value, str):
+            return value
+        try:
+            sequence = list(value)
+        except TypeError:
+            return str(value)
+        if len(sequence) >= 3 and all(_is_number(part) for part in sequence[:3]):
+            return "rgb({}, {}, {})".format(
+                _color_channel(sequence[0]),
+                _color_channel(sequence[1]),
+                _color_channel(sequence[2]),
+            )
+        return str(value)
+
+    if len(values) >= 3 and all(_is_number(part) for part in values[:3]):
+        return "rgb({}, {}, {})".format(
+            _color_channel(values[0]),
+            _color_channel(values[1]),
+            _color_channel(values[2]),
+        )
+
+    return str(values[0]) if values else "black"
+
+def _set_color_mode(cmode=None):
+    global _color_mode
+    if cmode is None:
+        return _color_mode
+    _color_mode = float(cmode)
+    return _color_mode
 
 def _release_proxy(proxy):
     if proxy is not None and hasattr(proxy, "destroy"):
@@ -272,7 +321,7 @@ def _stored_callback(kind, key, function):
 
 class _Screen:
     def bgcolor(self, color):
-        _bridge.bgcolor(str(color))
+        _bridge.bgcolor(_normalize_color(color))
 
     def clear(self):
         _bridge.clear()
@@ -312,6 +361,9 @@ class _Screen:
 
     def exitonclick(self):
         return None
+
+    def colormode(self, cmode=None):
+        return _set_color_mode(cmode)
 
 _screen = _Screen()
 
@@ -455,27 +507,32 @@ class Turtle:
     def width(self, width=None):
         return self.pensize(width)
 
-    def pencolor(self, color=None):
-        if color is None:
+    def pencolor(self, *color):
+        if len(color) == 0:
             return self._pen_color
-        self._pen_color = str(color)
+        self._pen_color = _normalize_color(*color)
         self._sync_bridge()
 
-    def fillcolor(self, color=None):
-        if color is None:
+    def fillcolor(self, *color):
+        if len(color) == 0:
             return self._fill_color
-        self._fill_color = str(color)
+        self._fill_color = _normalize_color(*color)
         self._sync_bridge()
 
     def color(self, *colors):
         if len(colors) == 0:
             return (self._pen_color, self._fill_color)
         if len(colors) == 1:
-            self._pen_color = str(colors[0])
-            self._fill_color = str(colors[0])
+            normalized = _normalize_color(colors[0])
+            self._pen_color = normalized
+            self._fill_color = normalized
+        elif len(colors) >= 3 and all(_is_number(part) for part in colors[:3]):
+            normalized = _normalize_color(*colors)
+            self._pen_color = normalized
+            self._fill_color = normalized
         elif len(colors) >= 2:
-            self._pen_color = str(colors[0])
-            self._fill_color = str(colors[1])
+            self._pen_color = _normalize_color(colors[0])
+            self._fill_color = _normalize_color(colors[1])
         self._sync_bridge()
 
     def circle(self, radius, *_args, **_kwargs):
@@ -549,10 +606,12 @@ class Turtle:
         return None
 
     def begin_fill(self):
-        return None
+        self._sync_bridge()
+        _bridge.beginFill()
 
     def end_fill(self):
-        return None
+        self._sync_bridge()
+        _bridge.endFill()
 
 _default = Turtle()
 
@@ -587,8 +646,8 @@ def down(): _default.pendown()
 def isdown(): return _default.isdown()
 def pensize(width=None): return _default.pensize(width)
 def width(width=None): return _default.pensize(width)
-def pencolor(color=None): return _default.pencolor(color)
-def fillcolor(color=None): return _default.fillcolor(color)
+def pencolor(*color): return _default.pencolor(*color)
+def fillcolor(*color): return _default.fillcolor(*color)
 def color(*colors): return _default.color(*colors)
 def circle(radius, *args, **kwargs): _default.circle(radius, *args, **kwargs)
 def dot(size=8, color=None): _default.dot(size, color)
@@ -610,6 +669,7 @@ def begin_fill(): return _default.begin_fill()
 def end_fill(): return _default.end_fill()
 def mainloop(): _screen.mainloop()
 def done(): _screen.mainloop()
+def colormode(cmode=None): return _set_color_mode(cmode)
 `;
 
 const pgzeroShim = `
