@@ -145,6 +145,7 @@ export interface TurtleBridge {
 		button: string,
 		callback: ((x: number, y: number) => void) | null
 	) => void;
+	scheduleTimer: (delayMs: number, callback: (() => void) | null) => void;
 	listen: () => void;
 }
 
@@ -280,6 +281,7 @@ from pyodide.ffi import create_proxy
 _bridge = window.__classesPythonIdeTurtle
 _callback_proxies = {}
 _color_mode = 1.0
+_timer_counter = 0
 
 def _is_number(value):
     try:
@@ -342,6 +344,24 @@ def _stored_callback(kind, key, function):
     _callback_proxies[storage_key] = proxy
     return proxy
 
+def _timer_callback(function):
+    global _timer_counter
+    if function is None:
+        return None
+
+    _timer_counter += 1
+    storage_key = ("timer", str(_timer_counter))
+
+    def run_timer():
+        try:
+            function()
+        finally:
+            _release_proxy(_callback_proxies.pop(storage_key, None))
+
+    proxy = create_proxy(run_timer)
+    _callback_proxies[storage_key] = proxy
+    return proxy
+
 class _Screen:
     def bgcolor(self, color):
         _bridge.bgcolor(_normalize_color(color))
@@ -360,6 +380,9 @@ class _Screen:
 
     def onkeypress(self, function, key=None):
         _bridge.registerKey(str(key or ""), _stored_callback("key", key or "", function))
+
+    def ontimer(self, function, t=0):
+        _bridge.scheduleTimer(float(t), _timer_callback(function))
 
     def onclick(self, function, btn=1, add=None):
         _bridge.registerClick(str(btn), _stored_callback("click", btn, function))
@@ -683,6 +706,7 @@ def towards(x, y=None): return _default.towards(x, y)
 def listen(): _screen.listen()
 def onkey(function, key): _screen.onkey(function, key)
 def onkeypress(function, key=None): _screen.onkeypress(function, key)
+def ontimer(function, t=0): _screen.ontimer(function, t)
 def onclick(function, btn=1, add=None): _screen.onclick(function, btn, add)
 def onscreenclick(function, btn=1, add=None): _screen.onscreenclick(function, btn, add)
 def ondrag(function, btn=1, add=None): _default.ondrag(function, btn, add)

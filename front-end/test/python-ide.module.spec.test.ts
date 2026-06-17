@@ -136,6 +136,7 @@ describe("python IDE project helpers", () => {
 					entry.detail.includes("distance()") &&
 					entry.detail.includes("stamp()") &&
 					entry.detail.includes("Turtle.ondrag") &&
+					entry.detail.includes("Screen.ontimer") &&
 					entry.detail.includes("mouse handlers")
 			)
 		).toBe(true);
@@ -158,6 +159,23 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("def begin_fill(self):");
 		expect(runtimeSource).toContain("_bridge.beginFill()");
 		expect(runtimeSource).toContain("_bridge.endFill()");
+	});
+
+	it("keeps Turtle timer hooks wired in the runtime bridge", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/pages/python-ide.vue"),
+			"utf8"
+		);
+
+		expect(runtimeSource).toContain("def ontimer(self, function, t=0):");
+		expect(runtimeSource).toContain("def ontimer(function, t=0):");
+		expect(runtimeSource).toContain("_bridge.scheduleTimer");
+		expect(pageSource).toContain("scheduleTimer(delayMs: number");
+		expect(pageSource).toContain("clearTurtleTimers()");
 	});
 
 	it("normalizes local Python project module names for fresh imports", () => {

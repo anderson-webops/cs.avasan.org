@@ -132,6 +132,7 @@ const outputCounter = ref(0);
 const keyHandlers = new Map<string, () => void>();
 const turtleClickHandlers = new Map<string, (x: number, y: number) => void>();
 const turtleDragHandlers = new Map<string, (x: number, y: number) => void>();
+const turtleTimerHandles = new Set<ReturnType<typeof window.setTimeout>>();
 const gameKeysDown = new Set<string>();
 const gameEvents: GameInputEvent[] = [];
 const gameImageCache = new Map<string, CachedGameImage>();
@@ -642,6 +643,7 @@ function resizeCanvasForDisplay() {
 }
 
 function resetTurtleCanvas() {
+	clearTurtleTimers();
 	keyHandlers.clear();
 	turtleClickHandlers.clear();
 	turtleDragHandlers.clear();
@@ -664,6 +666,13 @@ function resetTurtleCanvas() {
 
 	context.fillStyle = turtleState.background;
 	context.fillRect(0, 0, rect.width, rect.height);
+}
+
+function clearTurtleTimers() {
+	for (const handle of turtleTimerHandles) {
+		window.clearTimeout(handle);
+	}
+	turtleTimerHandles.clear();
 }
 
 function trackTurtleFillPoint(x: number, y: number) {
@@ -1220,6 +1229,28 @@ const turtleBridge: TurtleBridge = {
 		}
 		turtleDragHandlers.set(button, callback);
 	},
+	scheduleTimer(delayMs: number, callback: (() => void) | null) {
+		if (!callback) return;
+
+		const handle = window.setTimeout(
+			() => {
+				turtleTimerHandles.delete(handle);
+				try {
+					callback();
+				} catch (error) {
+					appendOutput(
+						"stderr",
+						error instanceof Error
+							? error.message
+							: "Turtle timer handler failed."
+					);
+				}
+			},
+			Math.max(0, delayMs)
+		);
+
+		turtleTimerHandles.add(handle);
+	},
 	listen() {
 		canvasRef.value?.focus();
 	}
@@ -1532,6 +1563,7 @@ onBeforeUnmount(() => {
 	window.removeEventListener("keydown", handleKeyDown);
 	window.removeEventListener("keyup", handleKeyUp);
 	window.removeEventListener("mouseup", clearTurtleDrag);
+	clearTurtleTimers();
 	stopGameLoop();
 	resizeObserver?.disconnect();
 });
