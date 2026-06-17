@@ -160,6 +160,29 @@ export interface RunPythonProjectOptions {
 }
 
 let pyodidePromise: Promise<PyodideAPI> | null = null;
+let lastProjectFileNames = new Set<string>();
+
+export function pythonIdeProjectModuleNames(
+	files: Pick<PythonIdeFile, "name">[]
+) {
+	const modules = new Set<string>();
+	const packageSuffix = ".__init__";
+
+	for (const file of files) {
+		if (!isPythonIdePythonFile(file.name)) continue;
+		const moduleName = file.name
+			.replace(PYTHON_EXTENSION_RE, "")
+			.replaceAll("/", ".");
+		if (!moduleName) continue;
+		modules.add(
+			moduleName.endsWith(packageSuffix)
+				? moduleName.slice(0, -packageSuffix.length)
+				: moduleName
+		);
+	}
+
+	return [...modules];
+}
 
 function loadScript(src: string) {
 	return new Promise<void>((resolve, reject) => {
@@ -1768,6 +1791,21 @@ function writeProjectFile(pyodide: PyodideAPI, file: PythonIdeFile) {
 	);
 }
 
+function syncProjectFiles(pyodide: PyodideAPI, files: PythonIdeFile[]) {
+	const currentFileNames = new Set(files.map(file => file.name));
+
+	for (const staleFileName of lastProjectFileNames) {
+		if (currentFileNames.has(staleFileName)) continue;
+		safeUnlink(pyodide, `${PROJECT_ROOT}/${staleFileName}`);
+	}
+
+	for (const file of files) {
+		writeProjectFile(pyodide, file);
+	}
+
+	lastProjectFileNames = currentFileNames;
+}
+
 function importedTopLevelModules(files: PythonIdeFile[]) {
 	const modules = new Set<string>();
 
@@ -1797,7 +1835,7 @@ function packageScanCode(files: PythonIdeFile[]) {
 		"pygame",
 		"turtle",
 		"zrect",
-		...pythonFiles.map(file => file.name.replace(PYTHON_EXTENSION_RE, ""))
+		...pythonIdeProjectModuleNames(pythonFiles)
 	]);
 
 	return pythonFiles
@@ -2053,11 +2091,13 @@ export async function runPythonProject(options: RunPythonProjectOptions) {
 
 	ensureProjectDirectory(pyodide);
 	const importedModules = importedTopLevelModules(options.files);
+	const projectModuleNames = pythonIdeProjectModuleNames([
+		...options.files,
+		...[...lastProjectFileNames].map(name => ({ name }))
+	]);
 	warnForBrowserLimitedLibraries(importedModules, options.onOutput);
 
-	for (const file of options.files) {
-		writeProjectFile(pyodide, file);
-	}
+	syncProjectFiles(pyodide, options.files);
 	writeRuntimeShims(pyodide);
 
 	const activeFile = getPythonIdeRunnableFile(options);
@@ -2078,6 +2118,8 @@ import sys
 os.chdir(${escapePythonString(PROJECT_ROOT)})
 if ${escapePythonString(PROJECT_ROOT)} not in sys.path:
     sys.path.insert(0, ${escapePythonString(PROJECT_ROOT)})
+for __classes_module_name in __import__("json").loads(${escapePythonString(JSON.stringify(projectModuleNames))}):
+    sys.modules.pop(__classes_module_name, None)
 ${createInputBootstrap(options.inputText)}
 if ${options.mode === "pgzero" ? "True" : "False"}:
     import _classes_pgzero

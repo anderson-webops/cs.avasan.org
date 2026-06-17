@@ -24,6 +24,7 @@ import {
 	pgzeroStarterCode,
 	turtleStarterCode
 } from "../src/modules/pythonIde";
+import { pythonIdeProjectModuleNames } from "../src/modules/pythonIdeRuntime";
 
 describe("python IDE project helpers", () => {
 	it("creates data/AI notebook starter projects", () => {
@@ -157,6 +158,30 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("def begin_fill(self):");
 		expect(runtimeSource).toContain("_bridge.beginFill()");
 		expect(runtimeSource).toContain("_bridge.endFill()");
+	});
+
+	it("normalizes local Python project module names for fresh imports", () => {
+		expect(
+			pythonIdeProjectModuleNames([
+				{ name: "main.py" },
+				{ name: "helper_tools.py" },
+				{ name: "notes.md" },
+				{ name: "package/__init__.py" },
+				{ name: "package/util.py" }
+			])
+		).toEqual(["main", "helper_tools", "package", "package.util"]);
+	});
+
+	it("clears stale project files and cached modules before each run", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+
+		expect(runtimeSource).toContain("lastProjectFileNames");
+		expect(runtimeSource).toContain("function syncProjectFiles");
+		expect(runtimeSource).toContain("safeUnlink(pyodide");
+		expect(runtimeSource).toContain("sys.modules.pop(__classes_module_name, None)");
 	});
 
 	it("normalizes project file names without accepting unsafe names", () => {
