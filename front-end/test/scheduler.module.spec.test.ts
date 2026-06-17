@@ -1,12 +1,15 @@
 import { describe, expect, it } from "vitest";
 import {
 	buildSchedulerEmbedUrl,
+	buildSchedulerUrl,
 	DEFAULT_SCHEDULER_ORIGIN,
 	normalizeSchedulerOrigin,
 	SCHEDULER_ORIGIN,
 	schedulerDnsPrefetchHref,
 	schedulerEmbedThemeMessageSource,
 	schedulerEmbedThemeType,
+	schedulerManageBookingUrl,
+	schedulerPortalUrl,
 	schedulerUrl
 } from "@/modules/scheduler";
 
@@ -43,6 +46,37 @@ describe("scheduler embed helpers", () => {
 
 		expect(url.searchParams.get("embed")).toBe("1");
 		expect(url.searchParams.get("theme")).toBe("light");
+	});
+
+	it("builds explicit scheduler subpaths for portal and manage flows", () => {
+		expect(schedulerPortalUrl).toBe(`${DEFAULT_SCHEDULER_ORIGIN}/portal`);
+		expect(schedulerManageBookingUrl).toBe(
+			`${DEFAULT_SCHEDULER_ORIGIN}/booking/manage`
+		);
+		expect(buildSchedulerUrl("portal")).toBe(
+			`${DEFAULT_SCHEDULER_ORIGIN}/portal`
+		);
+	});
+
+	it("keeps scheduler URL search params on the configured scheduler origin", () => {
+		const url = new URL(
+			buildSchedulerUrl("/booking/manage", {
+				empty: "",
+				token: "abc 123"
+			})
+		);
+
+		expect(url.origin).toBe(DEFAULT_SCHEDULER_ORIGIN);
+		expect(url.pathname).toBe("/booking/manage");
+		expect(url.searchParams.get("token")).toBe("abc 123");
+		expect(url.searchParams.has("empty")).toBe(false);
+	});
+
+	it("does not allow arbitrary absolute URLs as scheduler paths", () => {
+		expect(buildSchedulerUrl("https://example.invalid/portal")).toBe(
+			schedulerUrl
+		);
+		expect(buildSchedulerUrl("//example.invalid/portal")).toBe(schedulerUrl);
 	});
 
 	it("exposes the theme message contract used by the iframe", () => {

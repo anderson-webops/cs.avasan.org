@@ -9,6 +9,7 @@ import {
 	schedulerEmbedResizeType,
 	schedulerEmbedThemeMessageSource,
 	schedulerEmbedThemeType,
+	schedulerPortalUrl,
 	schedulerUrl
 } from "@/modules/scheduler";
 
@@ -23,7 +24,7 @@ const schedulerHeight = ref(MIN_FRAME_HEIGHT);
 const schedulerFrame = ref<HTMLIFrameElement | null>(null);
 const schedulerTheme = computed(() => (isDark.value ? "dark" : "light"));
 const schedulerEmbedSrc = ref(buildSchedulerEmbedUrl(schedulerTheme.value));
-const customerPortalUrl = ref(`${schedulerUrl}portal`);
+const customerPortalUrl = ref(schedulerPortalUrl);
 const customerPortalLabel = ref("Open the customer portal");
 let schedulerLoadTimeout: number | undefined;
 

@@ -2,6 +2,10 @@ export const DEFAULT_SCHEDULER_ORIGIN =
 	"https://scheduler.classes.jacobdanderson.net";
 const httpProtocolPattern = /^https?:\/\//i;
 const protocolPattern = /^[a-z][a-z\d+.-]*:\/\//i;
+export type SchedulerUrlSearchParams = Record<
+	string,
+	boolean | number | string | null | undefined
+>;
 
 export function normalizeSchedulerOrigin(rawOrigin?: string) {
 	const trimmedOrigin = rawOrigin?.trim();
@@ -36,8 +40,42 @@ export const schedulerUrl = `${SCHEDULER_ORIGIN}/`;
 export const schedulerDnsPrefetchHref = `//${new URL(SCHEDULER_ORIGIN).host}`;
 export type SchedulerEmbedTheme = "light" | "dark";
 
-export function buildSchedulerEmbedUrl(theme?: SchedulerEmbedTheme) {
-	const url = new URL(schedulerUrl);
+function normalizeSchedulerPath(rawPath: string) {
+	const trimmedPath = rawPath.trim();
+	if (!trimmedPath || trimmedPath.startsWith("//")) return "/";
+
+	if (protocolPattern.test(trimmedPath)) {
+		try {
+			const url = new URL(trimmedPath);
+			if (url.origin !== SCHEDULER_ORIGIN) return "/";
+			return `${url.pathname}${url.search}${url.hash}`;
+		} catch {
+			return "/";
+		}
+	}
+
+	return trimmedPath.startsWith("/") ? trimmedPath : `/${trimmedPath}`;
+}
+
+export function buildSchedulerUrl(
+	path = "/",
+	searchParams: SchedulerUrlSearchParams = {}
+) {
+	const url = new URL(normalizeSchedulerPath(path), schedulerUrl);
+
+	for (const [key, value] of Object.entries(searchParams)) {
+		if (value === null || value === undefined || value === "") continue;
+		url.searchParams.set(key, String(value));
+	}
+
+	return url.toString();
+}
+
+export function buildSchedulerEmbedUrl(
+	theme?: SchedulerEmbedTheme,
+	path = "/"
+) {
+	const url = new URL(buildSchedulerUrl(path));
 	url.searchParams.set("embed", "1");
 
 	if (theme) {
@@ -48,6 +86,8 @@ export function buildSchedulerEmbedUrl(theme?: SchedulerEmbedTheme) {
 }
 
 export const schedulerEmbedUrl = buildSchedulerEmbedUrl();
+export const schedulerPortalUrl = buildSchedulerUrl("/portal");
+export const schedulerManageBookingUrl = buildSchedulerUrl("/booking/manage");
 export const schedulerEmbedMessageSource =
 	"scheduler.classes.jacobdanderson.net";
 export const schedulerEmbedResizeType = "scheduler:resize";
