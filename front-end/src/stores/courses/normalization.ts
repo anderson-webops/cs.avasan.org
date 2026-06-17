@@ -2096,6 +2096,41 @@ function needsContentSupport(context: CourseTextContext) {
 	);
 }
 
+function needsPygameProjectCompletionSupport(context: CourseTextContext) {
+	const content = context.item.content;
+	const source = contextText(context);
+
+	return (
+		isPygameSource(source) &&
+		context.courseId === "pygames" &&
+		/\bPyG\d/.test(context.module.title) &&
+		/\bProject\b/i.test(context.item.title) &&
+		!/\*\*(?:Outcome|Required outcome|Checkpoints|Completion checks|Extension):\*\*/i.test(
+			content
+		)
+	);
+}
+
+function pygameProjectCompletionSupport() {
+	const projectReference = "the project";
+
+	return [
+		[
+			"**Outcome:**",
+			"- Define the project's visible state, actor or data responsibilities, frame update rule, rendering order, and any input, collision, scoring, or reset rules that apply.",
+			`- Test ${projectReference} startup, the main animation or input behavior, and one boundary such as wraparound, reset, missed input, no-collision, or end state.`,
+			`- Keep ${projectReference} drawing, updating, event handling, and state changes separated enough to debug one layer at a time.`
+		].join("\n"),
+		[
+			"**Checkpoints:**",
+			`- ${capitalizeSentence(projectReference)} starts from a predictable state and the main visible change can be replayed.`,
+			"- The important state variable, actor position, list update, score, health, timer, or collision condition is checked where it applies.",
+			"- The final explanation names the game loop behavior, the state that changed, and one edge case found during playtesting."
+		].join("\n"),
+		`**Extension:** Add one visual state, timing, input, collision, scoring, or reset variation while keeping the same update loop readable.`
+	].join("\n\n");
+}
+
 const proceduralSentencePattern =
 	/^(?:Add|Begin|Build|Calculate|Choose|Compare|Connect|Convert|Create|Define|Design|Develop|Draw|Experiment|Give|Implement|Initialize|In |Make|Place|Program|Reuse|Run|Set|Start|Test|Then|Tweak|Use|Using|When|Write)\b/i;
 
@@ -5885,6 +5920,10 @@ function normalizeCourseTextQuality(course: RawCourse, courseId: string) {
 		for (const section of ["curriculum", "supplementalProjects"] as const) {
 			for (const item of module[section]) {
 				const context = { courseId, course, module, item, section };
+
+				if (needsPygameProjectCompletionSupport(context)) {
+					item.content = `${supportBaseContent(item.content)}\n\n${pygameProjectCompletionSupport()}`;
+				}
 
 				if (!needsContentSupport(context)) continue;
 

@@ -1594,6 +1594,18 @@ describe("course text quality normalization", () => {
 		);
 		expect(imagesReview.content).not.toContain("Scratch game design");
 
+		const rainbowFill = findItem(pygames!, /Rainbow Fill/);
+		expect(rainbowFill.content).toContain("**Outcome:**");
+		expect(rainbowFill.content).toContain(
+			"Define the project's visible state"
+		);
+		expect(rainbowFill.content).toContain("**Checkpoints:**");
+		expect(rainbowFill.content).toContain(
+			"The final explanation names the game loop behavior"
+		);
+		expect(rainbowFill.content).toContain("**Extension:**");
+		expect(rainbowFill.content).not.toContain("Define The project");
+
 		const wheel = findItem(scratchLevel2!, /Wheel of Fortune/);
 		expect(wheel.content).toContain(
 			"secret word.\n\n1. Construct a word bank"
