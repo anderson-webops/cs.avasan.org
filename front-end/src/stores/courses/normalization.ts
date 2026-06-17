@@ -460,6 +460,9 @@ function cleanAppliedLabDisplayTitle(title: string) {
 	return title
 		.replace(/\bPattern Applied Lab\b/g, "Pattern Lab")
 		.replace(/:\s*Applied Lab$/i, "")
+		.replace(/\s+Applied Lab$/i, "")
+		.replace(/:\s*Applied Studio$/i, "")
+		.replace(/\s+Applied Studio$/i, "")
 		.replace(/\s{2,}/g, " ")
 		.trim();
 }
@@ -5313,7 +5316,7 @@ function compactStudioContextTitle(title: string) {
 		const [, labName, labNumber] = labMatch;
 		const labDetail = stripped.slice(colonIndex + 1).trim();
 
-		if (/^Applied Lab$/i.test(labDetail)) {
+		if (/^(?:Applied|Implementation) (?:Lab|Studio)$/i.test(labDetail)) {
 			return `${labName} ${labNumber}`;
 		}
 
@@ -5322,7 +5325,18 @@ function compactStudioContextTitle(title: string) {
 
 	return stripped
 		.replace(/^[A-Z]{2,6}\d+\s+/, "")
-		.replace(/^(?:Applied Studio|Applied Lab):\s*/i, "")
+		.replace(
+			/^(?:(?:Applied|Implementation) Studio|(?:Applied|Implementation) Lab):\s*/i,
+			""
+		)
+		.replace(
+			/:\s*(?:(?:Applied|Implementation) Studio|(?:Applied|Implementation) Lab)$/i,
+			""
+		)
+		.replace(
+			/\s+(?:(?:Applied|Implementation) Studio|(?:Applied|Implementation) Lab)$/i,
+			""
+		)
 		.trim();
 }
 
@@ -5343,6 +5357,22 @@ function studioContextLabel(context: CourseTextContext) {
 	}
 
 	return compactStudioContextTitle(itemTitle);
+}
+
+function studioSupportSubject(context: CourseTextContext, supportNoun: string) {
+	const moduleLabel = compactStudioContextTitle(
+		stripLessonTitlePrefix(context.module.title)
+	);
+
+	if (!moduleLabel) {
+		return supportNoun === "lab" ? "This lab" : "This studio";
+	}
+
+	if (new RegExp(`\\b${supportNoun}\\b`, "i").test(moduleLabel)) {
+		return moduleLabel;
+	}
+
+	return `This ${supportNoun} for ${moduleLabel}`;
 }
 
 function studioBuildSequence(context: CourseTextContext) {
@@ -5951,8 +5981,10 @@ function studioSupport(context: CourseTextContext) {
 	)
 		? "Applied lab"
 		: "Applied studio";
+	const supportNoun = supportLabel === "Applied lab" ? "lab" : "studio";
 	const studioReference =
 		supportLabel === "Applied lab" ? "the lab" : "the studio";
+	const supportSubject = studioSupportSubject(context, supportNoun);
 	const compactStudio = (text: string) =>
 		compactStudioSupportText(
 			studioLabelAliases.reduce(
@@ -6006,7 +6038,7 @@ function studioSupport(context: CourseTextContext) {
 	);
 
 	return [
-		`**${supportLabel}:** ${capitalizeSentence(studioReference)} produces ${studioArtifact(context)} connected to ${subjectFocus(context)}.`,
+		`**${supportLabel}:** ${supportSubject} produces ${studioArtifact(context)} connected to ${subjectFocus(context)}.`,
 		`**Studio focus:** ${compactStudio(studioFocus)}`,
 		`**Build sequence:**\n${compactStudio(studioBuildSequence(context).join("\n"))}\n- ${compactStudio(reviewStep)}`,
 		`**Completion checks:**\n${compactStudio(studioCompletionChecks(context).join("\n"))}`,
@@ -6040,11 +6072,30 @@ function rewritePlaceholderCourseText(course: RawCourse, courseId: string) {
 	}
 }
 
+function contextualizeGenericRepresentationPrompt(context: CourseTextContext) {
+	if (
+		!isScienceContext(context) ||
+		!/graph|diagram|data/i.test(context.item.title)
+	) {
+		return context.item.content;
+	}
+
+	const moduleLabel = compactStudioContextTitle(context.module.title);
+	if (!moduleLabel) return context.item.content;
+
+	return context.item.content.replace(
+		/^Represent the module with at least one graph, diagram sequence, or data table\./,
+		`Create a representation for ${moduleLabel} with at least one graph, diagram sequence, or data table.`
+	);
+}
+
 function normalizeCourseTextQuality(course: RawCourse, courseId: string) {
 	for (const module of course.modules) {
 		for (const section of ["curriculum", "supplementalProjects"] as const) {
 			for (const item of module[section]) {
 				const context = { courseId, course, module, item, section };
+				item.content =
+					contextualizeGenericRepresentationPrompt(context);
 
 				if (needsPygameProjectCompletionSupport(context)) {
 					item.content = `${supportBaseContent(item.content)}\n\n${pygameProjectCompletionSupport()}`;

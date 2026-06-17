@@ -354,7 +354,7 @@ function buildStandardsModule(
 			{
 				title: `${courseLabel} Source Map`,
 				content: [
-					`**Course focus:** This section identifies the standards, documentation, and tooling references that keep ${courseLabel} aligned with current expectations. Priority is **${profile.priority}**, so these items shape pacing and practice before lower-priority enrichment.`,
+					`**Source map:** ${courseLabel} uses these standards, documentation, and tooling references to stay aligned with current expectations. Priority is **${profile.priority}**, so these items shape pacing and practice before lower-priority enrichment.`,
 					`**Authoritative sources to use:**\n${sourceBullets(profile.sources)}`,
 					standardsEvidenceNote(courseLabel),
 					`**Evidence target:** ${courseLabel} is traceable to these standards, docs, or tooling references rather than only to inherited project names.`
@@ -363,7 +363,7 @@ function buildStandardsModule(
 			{
 				title: `${courseLabel} Core Skills`,
 				content: [
-					`**Course focus:** ${courseLabel} skills benefit from focused review, clear examples, and explicit prerequisite connections before larger projects.`,
+					`**Skill focus:** ${courseLabel} skills benefit from focused review, clear examples, and explicit prerequisite connections before larger projects.`,
 					`**Core skills:**\n${bullets(profile.gaps)}`,
 					courseUseNote(
 						courseLabel,
@@ -375,7 +375,7 @@ function buildStandardsModule(
 			{
 				title: `${courseLabel} Next Topics`,
 				content: [
-					`**Course focus:** These topics for ${courseLabel} mark the next areas for deeper coverage. The topic order follows prerequisite dependency and connects each addition to a concrete project or checkpoint.`,
+					`**Topic focus:** These topics for ${courseLabel} mark the next areas for deeper coverage. The topic order follows prerequisite dependency and connects each addition to a concrete project or checkpoint.`,
 					`**Expansion topics:**\n${bullets(profile.topics)}`,
 					courseUseNote(
 						courseLabel,
@@ -387,7 +387,7 @@ function buildStandardsModule(
 			{
 				title: `${courseLabel} Boundaries`,
 				content: [
-					`**Course focus:** The priority and expansion topics clarify what belongs in ${courseLabel} and what fits better in a prerequisite, follow-up, or separate course. This keeps the course coherent instead of absorbing every adjacent topic.`,
+					`**Course boundaries:** The priority and expansion topics clarify what belongs in ${courseLabel} and what fits better in a prerequisite, follow-up, or separate course. This keeps the course coherent instead of absorbing every adjacent topic.`,
 					`**Boundary rule:** Keep a topic inside ${courseLabel} when it directly supports the projects, assessments, and expected readiness level. Move a topic elsewhere when it requires a different prerequisite chain, a different safety model, or a level of depth that would crowd out the core purpose.`,
 					`**Evidence target:** The ${courseLabel} boundary, one near-term addition, and one intentionally deferred topic are explicit.`
 				].join("\n\n")
@@ -424,7 +424,7 @@ function buildSequencingModule(
 			{
 				title: `${courseLabel} Module Options`,
 				content: [
-					`**Course focus:** These ${profile.family} additions can become full ${courseLabel} modules after the source material, examples, and assessments are clear. The order follows prerequisite dependency, not just topic popularity.`,
+					`**Module options:** These ${profile.family} additions can become full ${courseLabel} modules after the source material, examples, and assessments are clear. The order follows prerequisite dependency, not just topic popularity.`,
 					`**Suggested additions:**\n${bullets(profile.moduleAdditions)}`,
 					sequencingEvidenceNote(courseLabel),
 					`**Evidence target:** Every ${courseLabel} module states the concept, why it matters, one worked example, one practice task, one assessment checkpoint, and one extension.`
@@ -444,7 +444,7 @@ function buildSequencingModule(
 			{
 				title: `${courseLabel} Readiness Checklist`,
 				content: [
-					`**Course focus:** This checklist keeps ${courseLabel} modules concrete, sequenced, and assessable.`,
+					`**Readiness checklist:** This checklist keeps ${courseLabel} modules concrete, sequenced, and assessable.`,
 					`**Alignment test:** In a complete ${courseLabel} module, the concept, project, and assessment measure the same skill. If the assessment checks a different skill than the project practices, the module needs a clearer project target or checkpoint before it is ready.`,
 					`**Evidence targets:**\n- Each ${courseLabel} module has a named prerequisite and observable outcome.\n- Each ${courseLabel} project has required behavior, test cases, and an extension.\n- The ${courseLabel} assessment matches the subject: code trace, rubric, CER response, math justification, security report, or model evaluation.\n- Any ${courseLabel} toolchain, dataset, simulation, or source-code dependency is linked and version-aware.`
 				].join("\n\n")
@@ -494,7 +494,7 @@ function buildProjectModule(
 			{
 				title: `${courseLabel} Project Ladder`,
 				content: [
-					`**Course focus:** These ${profile.family} project types create a progression for ${courseLabel} from guided practice to independent capstone work. Every ${courseLabel} project names the artifact, required behavior, evidence of correctness, and one extension path.`,
+					`**Project progression:** These ${profile.family} project types create a progression for ${courseLabel} from guided practice to independent capstone work. Every ${courseLabel} project names the artifact, required behavior, evidence of correctness, and one extension path.`,
 					`**Project ladder:**\n${bullets(profile.projectTypes)}`,
 					projectEvidenceNote(courseLabel),
 					`**Evidence target:** Project work in ${courseLabel} is complete when the main design, model, proof, or reasoning choice is explained, not only when it runs or produces an answer.`

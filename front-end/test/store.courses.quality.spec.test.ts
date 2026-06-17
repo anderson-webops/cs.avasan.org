@@ -1351,9 +1351,25 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(/the response reason/i);
 			expect(corpus).not.toMatch(/\bthe A, B, C, D example\b/i);
 			expect(corpus).not.toMatch(/\bThis section for\b/i);
+			expect(corpus).not.toMatch(/\*\*Course focus:\*\* This section/i);
+			expect(corpus).not.toMatch(
+				/\*\*(?:Applied studio|Applied lab):\*\* The (?:studio|lab) produces/i
+			);
+			expect(corpus).not.toMatch(
+				/^Represent the module with at least one graph/im
+			);
 			expect(corpus).not.toMatch(/\b(?:connectings|mappings)\b/i);
 			expect(corpus).not.toMatch(
 				/\bThis module focuses on (?:combine|connect|diagnose|map|organize|turn|use)\b/i
+			);
+			expect(corpus).toContain(
+				"**Source map:** Scratch Level 1 uses these standards"
+			);
+			expect(corpus).toContain(
+				"**Applied studio:** Mini Game Polish Studio produces a playable Scratch project"
+			);
+			expect(corpus).toContain(
+				"Create a representation for Momentum, Impulse, and Collisions with at least one graph"
 			);
 			expect(corpus).toContain("Work a typical example");
 			expect(corpus).toContain("Modeling or Error Analysis");
