@@ -1760,21 +1760,19 @@ onBeforeUnmount(() => {
 			:class="{ 'is-sidebar-collapsed': sidebarCollapsed }"
 		>
 			<button
+				v-if="sidebarCollapsed"
 				:aria-expanded="!sidebarCollapsed"
-				:aria-label="
-					sidebarCollapsed
-						? 'Expand project sidebar'
-						: 'Collapse project sidebar'
-				"
+				aria-label="Expand project sidebar"
 				aria-controls="python-ide-sidebar"
-				class="sidebar-collapse-toggle"
-				title="Toggle project sidebar"
+				class="sidebar-collapse-toggle sidebar-collapse-toggle--rail"
+				title="Expand project sidebar"
 				type="button"
 				@click="sidebarCollapsed = !sidebarCollapsed"
 			>
 				<span class="sidebar-collapse-icon" aria-hidden="true" />
 			</button>
 			<aside
+				v-else
 				id="python-ide-sidebar"
 				class="python-ide-sidebar"
 				aria-label="Python projects and files"
@@ -1782,52 +1780,68 @@ onBeforeUnmount(() => {
 				<div class="sidebar-block">
 					<div class="sidebar-heading">
 						<span>Projects</span>
-						<div class="sidebar-actions project-create">
+						<div class="sidebar-actions">
 							<button
-								:aria-expanded="showProjectMenu"
-								aria-haspopup="menu"
-								aria-label="Create new project"
-								class="icon-action icon-action--add"
-								title="Create new project"
+								:aria-expanded="!sidebarCollapsed"
+								aria-label="Collapse project sidebar"
+								aria-controls="python-ide-sidebar"
+								class="sidebar-collapse-toggle sidebar-collapse-toggle--inline"
+								title="Collapse project sidebar"
 								type="button"
-								@click="showProjectMenu = !showProjectMenu"
+								@click="sidebarCollapsed = true"
 							>
-								+
+								<span
+									class="sidebar-collapse-icon"
+									aria-hidden="true"
+								/>
 							</button>
-							<div
-								v-if="showProjectMenu"
-								class="project-create-menu"
-								role="menu"
-							>
-								<span>New project</span>
+							<div class="project-create">
 								<button
+									:aria-expanded="showProjectMenu"
+									aria-haspopup="menu"
+									aria-label="Create new project"
+									class="icon-action icon-action--add"
+									title="Create new project"
 									type="button"
-									role="menuitem"
-									@click="createProjectFromMenu('python')"
+									@click="showProjectMenu = !showProjectMenu"
 								>
-									Python
+									+
 								</button>
-								<button
-									type="button"
-									role="menuitem"
-									@click="createProjectFromMenu('data')"
+								<div
+									v-if="showProjectMenu"
+									class="project-create-menu"
+									role="menu"
 								>
-									Data / AI notebook
-								</button>
-								<button
-									type="button"
-									role="menuitem"
-									@click="createProjectFromMenu('turtle')"
-								>
-									Python Turtle
-								</button>
-								<button
-									type="button"
-									role="menuitem"
-									@click="createProjectFromMenu('pgzero')"
-								>
-									PyGame Zero
-								</button>
+									<span>New project</span>
+									<button
+										type="button"
+										role="menuitem"
+										@click="createProjectFromMenu('python')"
+									>
+										Python
+									</button>
+									<button
+										type="button"
+										role="menuitem"
+										@click="createProjectFromMenu('data')"
+									>
+										Data / AI notebook
+									</button>
+									<button
+										type="button"
+										role="menuitem"
+										@click="createProjectFromMenu('turtle')"
+									>
+										Python Turtle
+									</button>
+									<button
+										type="button"
+										role="menuitem"
+										@click="createProjectFromMenu('pgzero')"
+									>
+										PyGame Zero
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -2296,17 +2310,13 @@ html.dark .python-ide-status strong {
 
 .python-ide-workspace {
 	display: grid;
-	grid-template-columns: auto minmax(18rem, 24rem) minmax(0, 1fr);
+	grid-template-columns: minmax(18rem, 24rem) minmax(0, 1fr);
 	gap: 1rem;
 	align-items: stretch;
 }
 
 .python-ide-workspace.is-sidebar-collapsed {
 	grid-template-columns: auto minmax(0, 1fr);
-}
-
-.python-ide-workspace.is-sidebar-collapsed .python-ide-sidebar {
-	display: none;
 }
 
 .python-ide-sidebar,
@@ -2327,8 +2337,6 @@ html.dark .python-ide-status strong {
 }
 
 .sidebar-collapse-toggle {
-	width: 2.45rem;
-	height: 2.45rem;
 	display: grid;
 	place-items: center;
 	align-self: start;
@@ -2336,6 +2344,16 @@ html.dark .python-ide-status strong {
 	border-radius: 8px;
 	background: rgba(255, 255, 255, 0.78);
 	color: var(--color-ink-muted);
+}
+
+.sidebar-collapse-toggle--inline {
+	width: 2.1rem;
+	height: 2.1rem;
+}
+
+.sidebar-collapse-toggle--rail {
+	width: 2.45rem;
+	height: 2.45rem;
 }
 
 .sidebar-collapse-icon {
@@ -3013,6 +3031,10 @@ html.dark .file-delete:disabled {
 	.python-ide-workspace,
 	.ide-grid {
 		grid-template-columns: 1fr;
+	}
+
+	.python-ide-workspace.is-sidebar-collapsed {
+		grid-template-columns: auto minmax(0, 1fr);
 	}
 
 	.python-ide-sidebar {
