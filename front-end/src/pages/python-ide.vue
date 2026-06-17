@@ -2308,6 +2308,63 @@ html.dark .python-ide-status strong {
 	background: rgba(204, 251, 241, 0.34);
 }
 
+html.dark .project-create-menu {
+	border-color: rgba(94, 234, 212, 0.22);
+	background: #0f1b2a;
+}
+
+html.dark .project-create-menu span {
+	color: #5eead4;
+}
+
+html.dark .project-create-menu button {
+	background: #172638;
+	color: #f8fafc;
+}
+
+html.dark .project-create-menu button:hover,
+html.dark .project-create-menu button:focus-visible {
+	background: #164e4b;
+}
+
+html.dark .icon-action,
+html.dark .file-tool-toggle {
+	border-color: rgba(148, 163, 184, 0.4);
+	background: #e2e8f0;
+	color: #0f172a;
+}
+
+html.dark .project-button,
+html.dark .file-button {
+	border-color: rgba(148, 163, 184, 0.18);
+	background: #172638;
+	color: #f8fafc;
+}
+
+html.dark .project-button.is-active,
+html.dark .file-button.is-active {
+	border-color: rgba(94, 234, 212, 0.5);
+	background: #164e4b;
+}
+
+html.dark .project-button small {
+	color: #b8c7d9;
+}
+
+html.dark .file-button small {
+	color: #5eead4;
+}
+
+html.dark .file-delete {
+	border-color: rgba(248, 113, 113, 0.24);
+	background: #2f1f27;
+	color: #fca5a5;
+}
+
+html.dark .file-tool-toggle-icon::before {
+	background: #e2e8f0;
+}
+
 .project-button span,
 .file-button span {
 	overflow-wrap: anywhere;
