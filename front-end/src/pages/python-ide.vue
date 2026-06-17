@@ -271,6 +271,58 @@ function appendArtifact(artifact: RuntimeArtifact) {
 	runtimeArtifacts.value.push(view);
 }
 
+function mergeRuntimeProjectFiles(
+	project: PythonIdeProject,
+	files: PythonIdeFile[]
+) {
+	if (selectedProject.value?._id !== project._id) return;
+
+	let changedCount = 0;
+	let addedCount = 0;
+
+	for (const file of files) {
+		if (
+			!isValidPythonFileName(file.name) ||
+			!isPythonIdeTextFile(file.name) ||
+			isPythonIdeBinaryAssetFile(file)
+		) {
+			continue;
+		}
+
+		const nextFile: PythonIdeFile = {
+			name: file.name,
+			content: file.content,
+			encoding: "text"
+		};
+		const existingIndex = project.files.findIndex(
+			candidate => candidate.name === file.name
+		);
+
+		if (existingIndex >= 0) {
+			const existingFile = project.files[existingIndex];
+			if (
+				existingFile?.content === nextFile.content &&
+				(existingFile.encoding ?? "text") === nextFile.encoding
+			) {
+				continue;
+			}
+			project.files.splice(existingIndex, 1, nextFile);
+		} else {
+			project.files.push(nextFile);
+			addedCount += 1;
+		}
+		changedCount += 1;
+	}
+
+	if (!changedCount) return;
+	touchSelectedProject();
+	void saveSelectedProject();
+	appendOutput(
+		"system",
+		`Saved ${changedCount} changed project file${changedCount === 1 ? "" : "s"}${addedCount ? `, including ${addedCount} new file${addedCount === 1 ? "" : "s"}` : ""}.`
+	);
+}
+
 function touchSelectedProject() {
 	if (!selectedProject.value) return;
 	selectedProject.value.updatedAt = new Date().toISOString();
@@ -1327,6 +1379,8 @@ async function runCurrentProject() {
 			gameBridge,
 			turtleBridge,
 			onArtifact: appendArtifact,
+			onProjectFilesUpdate: files =>
+				mergeRuntimeProjectFiles(project, files),
 			onOutput: appendOutput
 		});
 		runMessage.value =

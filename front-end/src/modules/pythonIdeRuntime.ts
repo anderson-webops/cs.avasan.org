@@ -1,7 +1,9 @@
 import type { PythonIdeFile, PythonIdeMode } from "@/modules/pythonIde";
 import {
 	getPythonIdeRunnableFile,
-	isPythonIdePythonFile
+	isPythonIdePythonFile,
+	isPythonIdeTextFile,
+	isValidPythonFileName
 } from "@/modules/pythonIde";
 
 const PYODIDE_VERSION = "314.0.0";
@@ -157,6 +159,7 @@ export interface RunPythonProjectOptions {
 	gameBridge: GameBridge;
 	turtleBridge: TurtleBridge;
 	onArtifact: (artifact: RuntimeArtifact) => void;
+	onProjectFilesUpdate?: (files: PythonIdeFile[]) => void;
 	onOutput: (kind: "stdout" | "stderr" | "system", text: string) => void;
 }
 
@@ -2003,6 +2006,59 @@ function syncProjectFiles(pyodide: PyodideAPI, files: PythonIdeFile[]) {
 	lastProjectFileNames = currentFileNames;
 }
 
+async function captureProjectTextFiles(pyodide: PyodideAPI) {
+	const snapshot = await pyodide.runPythonAsync(`
+import json
+from pathlib import Path
+
+__classes_project_root = Path(${escapePythonString(PROJECT_ROOT)})
+__classes_reserved_files = {
+    "_classes_artifacts.py",
+    "_classes_keras.py",
+    "_classes_pgzero.py",
+    "pgzrun.py",
+    "pygame.py",
+    "pysynth.py",
+    "streamlit.py",
+    "turtle.py",
+    "zrect.py",
+}
+__classes_reserved_dirs = {"__pycache__", "keras", "pgzero", "tensorflow"}
+__classes_text_suffixes = {".csv", ".json", ".md", ".py", ".svg", ".txt"}
+__classes_files = []
+
+for __classes_path in sorted(__classes_project_root.rglob("*")):
+    if not __classes_path.is_file():
+        continue
+    __classes_rel = __classes_path.relative_to(__classes_project_root).as_posix()
+    __classes_parts = __classes_rel.split("/")
+    if __classes_rel in __classes_reserved_files:
+        continue
+    if any(__classes_part in __classes_reserved_dirs for __classes_part in __classes_parts):
+        continue
+    if __classes_path.suffix.lower() not in __classes_text_suffixes:
+        continue
+    try:
+        __classes_content = __classes_path.read_text(encoding="utf-8")
+    except UnicodeDecodeError:
+        continue
+    __classes_files.append({
+        "name": __classes_rel,
+        "content": __classes_content,
+        "encoding": "text",
+    })
+
+json.dumps(__classes_files)
+`);
+	const files = JSON.parse(String(snapshot)) as PythonIdeFile[];
+	return files.filter(
+		file =>
+			isValidPythonFileName(file.name) &&
+			isPythonIdeTextFile(file.name) &&
+			file.encoding === "text"
+	);
+}
+
 function importedTopLevelModules(files: PythonIdeFile[]) {
 	const modules = new Set<string>();
 
@@ -2357,6 +2413,8 @@ except Exception as error:
     import sys
     print("Could not render chart artifact: {}".format(error), file=sys.stderr)
 `);
+
+	options.onProjectFilesUpdate?.(await captureProjectTextFiles(pyodide));
 
 	if (options.mode === "pgzero") {
 		await pyodide.runPythonAsync(`

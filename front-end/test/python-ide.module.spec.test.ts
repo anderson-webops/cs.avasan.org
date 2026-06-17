@@ -229,6 +229,25 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("sys.modules.pop(__classes_module_name, None)");
 	});
 
+	it("keeps generated text-file persistence wired between runtime and page", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/pages/python-ide.vue"),
+			"utf8"
+		);
+
+		expect(runtimeSource).toContain("async function captureProjectTextFiles");
+		expect(runtimeSource).toContain("__classes_reserved_files");
+		expect(runtimeSource).toContain("isValidPythonFileName(file.name)");
+		expect(runtimeSource).toContain("options.onProjectFilesUpdate?.");
+		expect(pageSource).toContain("function mergeRuntimeProjectFiles");
+		expect(pageSource).toContain("onProjectFilesUpdate: files =>");
+		expect(pageSource).toContain("void saveSelectedProject()");
+	});
+
 	it("normalizes project file names without accepting unsafe names", () => {
 		expect(normalizePythonFileName("helper tools")).toBe("helper_tools.py");
 		expect(normalizePythonFileName("helpers/math tools")).toBe(
