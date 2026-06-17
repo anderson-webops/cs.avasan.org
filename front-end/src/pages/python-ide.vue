@@ -38,6 +38,7 @@ import {
 	pythonIdeAllowedFileExtensions,
 	pythonIdeFileUploadAccept,
 	pythonIdeLibrarySupport,
+	pythonIdeProjectToPayload,
 	saveLocalPythonProjects,
 	updateRemotePythonIdeProject
 } from "@/modules/pythonIde";
@@ -275,8 +276,22 @@ async function loadProjects() {
 				return;
 			}
 
+			const localProjects = loadLocalPythonProjects(storageUserID.value);
+			if (localProjects.length) {
+				const migratedProjects = await Promise.all(
+					localProjects.map(project =>
+						createRemotePythonIdeProject(
+							pythonIdeProjectToPayload(project)
+						)
+					)
+				);
+				setProjects(migratedProjects);
+				saveMessage.value = "Synced local projects to account";
+				return;
+			}
+
 			const starter = await createRemotePythonIdeProject(
-				createPythonIdeProject("turtle")
+				pythonIdeProjectToPayload(createPythonIdeProject("turtle"))
 			);
 			setProjects([starter]);
 			saveMessage.value = "Synced to account";
@@ -355,7 +370,9 @@ async function createProject(mode: PythonIdeMode) {
 	suppressAutoSave = true;
 	try {
 		if (canSyncToAccount.value) {
-			const remoteProject = await createRemotePythonIdeProject(starter);
+			const remoteProject = await createRemotePythonIdeProject(
+				pythonIdeProjectToPayload(starter)
+			);
 			projects.value.unshift(remoteProject);
 			selectedProjectID.value = remoteProject._id;
 			saveMessage.value = "Synced to account";

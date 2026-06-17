@@ -14,6 +14,7 @@ import {
 	normalizeImportedPythonIdeFileName,
 	isValidPythonFileName,
 	normalizePythonFileName,
+	pythonIdeProjectToPayload,
 	pythonIdeLibrarySupport,
 	pgzeroStudentSvg,
 	pgzeroStarterCode,
@@ -58,6 +59,21 @@ describe("python IDE project helpers", () => {
 		expect(project.files[0]?.content).toContain("screen.onkey");
 		expect(project.files[0]?.content).toContain("screen.onclick");
 		expect(project.files[0]?.content).toContain("pen.ondrag");
+	});
+
+	it("serializes remote project create/update payloads without local metadata", () => {
+		const project = createPythonIdeProject("turtle");
+		const payload = pythonIdeProjectToPayload(project);
+
+		expect(payload).toEqual({
+			title: project.title,
+			mode: project.mode,
+			files: project.files,
+			activeFileName: project.activeFileName
+		});
+		expect(payload).not.toHaveProperty("_id");
+		expect(payload).not.toHaveProperty("createdAt");
+		expect(payload).not.toHaveProperty("updatedAt");
 	});
 
 	it("labels supported runtime modes", () => {

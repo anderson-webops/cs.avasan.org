@@ -257,6 +257,17 @@ export function createPythonIdeProject(
 	};
 }
 
+export function pythonIdeProjectToPayload(
+	project: PythonIdeProject
+): PythonIdeProjectPayload {
+	return {
+		title: project.title,
+		mode: project.mode,
+		files: project.files,
+		activeFileName: project.activeFileName
+	};
+}
+
 export function pythonIdeStorageKey(userID?: string | null) {
 	return `${pythonIdeStorageNamespace}:${userID || "anonymous"}`;
 }
