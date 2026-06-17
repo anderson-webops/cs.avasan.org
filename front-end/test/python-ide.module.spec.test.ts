@@ -93,6 +93,9 @@ describe("python IDE project helpers", () => {
 			pythonIdeLibrarySupport.some(
 				entry =>
 					entry.name === "Turtle and PyGame Zero" &&
+					entry.detail.includes("xcor()") &&
+					entry.detail.includes("distance()") &&
+					entry.detail.includes("stamp()") &&
 					entry.detail.includes("Turtle.ondrag") &&
 					entry.detail.includes("mouse handlers")
 			)

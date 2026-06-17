@@ -135,6 +135,7 @@ let gameTickInFlight = false;
 let activeTurtleDragButton: string | null = null;
 let lastGamePointerPoint: { x: number; y: number } | null = null;
 let gameMusicAudio: HTMLAudioElement | null = null;
+let turtleStampCounter = 0;
 
 const turtleState: TurtleState = {
 	x: 0,
@@ -603,6 +604,7 @@ function resetTurtleCanvas() {
 	turtleClickHandlers.clear();
 	turtleDragHandlers.clear();
 	activeTurtleDragButton = null;
+	turtleStampCounter = 0;
 	stopGameLoop();
 	const canvasContext = resizeCanvasForDisplay();
 	if (!canvasContext) return;
@@ -659,6 +661,38 @@ function drawDot(size: number, color?: string) {
 	context.beginPath();
 	context.arc(point.x, point.y, Math.max(1, size) / 2, 0, Math.PI * 2);
 	context.fill();
+}
+
+function stampTurtle() {
+	const context = getCanvasContext();
+	if (!context) return ++turtleStampCounter;
+
+	const point = canvasCoordinates(turtleState.x, turtleState.y);
+	const radians = (turtleState.heading * Math.PI) / 180;
+	const size = 14;
+	const tip = { x: Math.cos(radians) * size, y: -Math.sin(radians) * size };
+	const leftWing = {
+		x: Math.cos(radians + 2.45) * size,
+		y: -Math.sin(radians + 2.45) * size
+	};
+	const rightWing = {
+		x: Math.cos(radians - 2.45) * size,
+		y: -Math.sin(radians - 2.45) * size
+	};
+
+	context.fillStyle = turtleState.penColor;
+	context.strokeStyle = "#0f172a";
+	context.lineWidth = 1.5;
+	context.beginPath();
+	context.moveTo(point.x + tip.x, point.y + tip.y);
+	for (const nextPoint of [leftWing, rightWing]) {
+		context.lineTo(point.x + nextPoint.x, point.y + nextPoint.y);
+	}
+	context.closePath();
+	context.fill();
+	context.stroke();
+
+	return ++turtleStampCounter;
 }
 
 function drawText(text: string) {
@@ -1001,6 +1035,8 @@ const turtleBridge: TurtleBridge = {
 		turtleState.heading = degrees;
 	},
 	heading: () => turtleState.heading,
+	xcor: () => turtleState.x,
+	ycor: () => turtleState.y,
 	goto(x: number, y: number) {
 		const context = getCanvasContext();
 		const start = canvasCoordinates(turtleState.x, turtleState.y);
@@ -1042,6 +1078,7 @@ const turtleBridge: TurtleBridge = {
 	},
 	circle: drawCircle,
 	dot: drawDot,
+	stamp: stampTurtle,
 	write: drawText,
 	registerKey(key: string, callback: (() => void) | null) {
 		if (!callback) {

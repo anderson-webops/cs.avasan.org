@@ -109,6 +109,8 @@ export interface TurtleBridge {
 	left: (degrees: number) => void;
 	setheading: (degrees: number) => void;
 	heading: () => number;
+	xcor: () => number;
+	ycor: () => number;
 	goto: (x: number, y: number) => void;
 	home: () => void;
 	penup: () => void;
@@ -120,6 +122,7 @@ export interface TurtleBridge {
 	color: (primary: string, secondary?: string) => void;
 	circle: (radius: number) => void;
 	dot: (size: number, color?: string) => void;
+	stamp: () => number;
 	write: (text: string) => void;
 	registerKey: (key: string, callback: (() => void) | null) => void;
 	registerClick: (
@@ -235,6 +238,7 @@ builtins.input = __classes_input
 }
 
 const turtleShim = `
+import math
 from js import window
 from pyodide.ffi import create_proxy
 
@@ -344,6 +348,18 @@ class Turtle:
     def heading(self):
         return _bridge.heading()
 
+    def xcor(self):
+        return _bridge.xcor()
+
+    def ycor(self):
+        return _bridge.ycor()
+
+    def position(self):
+        return (self.xcor(), self.ycor())
+
+    def pos(self):
+        return self.position()
+
     def goto(self, x, y=None):
         if y is None:
             x, y = x
@@ -354,6 +370,12 @@ class Turtle:
 
     def setposition(self, x, y=None):
         self.goto(x, y)
+
+    def setx(self, x):
+        self.goto(float(x), self.ycor())
+
+    def sety(self, y):
+        self.goto(self.xcor(), float(y))
 
     def home(self):
         _bridge.home()
@@ -412,6 +434,9 @@ class Turtle:
         else:
             _bridge.dot(float(size), str(color))
 
+    def stamp(self):
+        return _bridge.stamp()
+
     def write(self, text, *_args, **_kwargs):
         _bridge.write(str(text))
 
@@ -426,6 +451,30 @@ class Turtle:
 
     def shape(self, *_args):
         return None
+
+    def clear(self):
+        _bridge.clear()
+
+    def reset(self):
+        _bridge.reset()
+
+    def distance(self, x, y=None):
+        if hasattr(x, "xcor") and hasattr(x, "ycor") and y is None:
+            target_x, target_y = x.xcor(), x.ycor()
+        elif y is None:
+            target_x, target_y = x
+        else:
+            target_x, target_y = x, y
+        return math.hypot(float(target_x) - self.xcor(), float(target_y) - self.ycor())
+
+    def towards(self, x, y=None):
+        if hasattr(x, "xcor") and hasattr(x, "ycor") and y is None:
+            target_x, target_y = x.xcor(), x.ycor()
+        elif y is None:
+            target_x, target_y = x
+        else:
+            target_x, target_y = x, y
+        return math.degrees(math.atan2(float(target_y) - self.ycor(), float(target_x) - self.xcor()))
 
     def hideturtle(self):
         return None
@@ -452,9 +501,16 @@ def left(degrees): _default.left(degrees)
 def lt(degrees): _default.left(degrees)
 def setheading(degrees): _default.setheading(degrees)
 def seth(degrees): _default.setheading(degrees)
+def heading(): return _default.heading()
+def xcor(): return _default.xcor()
+def ycor(): return _default.ycor()
+def position(): return _default.position()
+def pos(): return _default.position()
 def goto(x, y=None): _default.goto(x, y)
 def setpos(x, y=None): _default.goto(x, y)
 def setposition(x, y=None): _default.goto(x, y)
+def setx(x): _default.setx(x)
+def sety(y): _default.sety(y)
 def home(): _default.home()
 def penup(): _default.penup()
 def pu(): _default.penup()
@@ -462,6 +518,7 @@ def up(): _default.penup()
 def pendown(): _default.pendown()
 def pd(): _default.pendown()
 def down(): _default.pendown()
+def isdown(): return _default.isdown()
 def pensize(width=None): _default.pensize(width)
 def width(width=None): _default.pensize(width)
 def pencolor(color=None): _default.pencolor(color)
@@ -469,13 +526,22 @@ def fillcolor(color=None): _default.fillcolor(color)
 def color(*colors): _default.color(*colors)
 def circle(radius, *args, **kwargs): _default.circle(radius, *args, **kwargs)
 def dot(size=8, color=None): _default.dot(size, color)
+def stamp(): return _default.stamp()
 def write(text, *args, **kwargs): _default.write(text, *args, **kwargs)
+def clear(): _default.clear()
+def reset(): _default.reset()
+def distance(x, y=None): return _default.distance(x, y)
+def towards(x, y=None): return _default.towards(x, y)
 def listen(): _screen.listen()
 def onkey(function, key): _screen.onkey(function, key)
 def onkeypress(function, key=None): _screen.onkeypress(function, key)
 def onclick(function, btn=1, add=None): _screen.onclick(function, btn, add)
 def onscreenclick(function, btn=1, add=None): _screen.onscreenclick(function, btn, add)
 def ondrag(function, btn=1, add=None): _default.ondrag(function, btn, add)
+def speed(*args): return _default.speed(*args)
+def shape(*args): return _default.shape(*args)
+def begin_fill(): return _default.begin_fill()
+def end_fill(): return _default.end_fill()
 def mainloop(): _screen.mainloop()
 def done(): _screen.mainloop()
 `;
