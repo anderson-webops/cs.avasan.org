@@ -559,7 +559,7 @@ Using the equation \`y = 3x - 2\`, find and plot at least five points, then draw
 			createLesson(
 				"Linear Forms",
 				`
-The check-in asked students to move comfortably between slope-intercept, point-slope, and standard form.
+This check-in focuses on moving comfortably between slope-intercept, point-slope, and standard form.
 
 **Preserved answers**
 
@@ -750,7 +750,7 @@ Add or subtract equations so one variable disappears. If needed, multiply one or
   - \`x - y = 13\`
   - \`x = 20\`, \`y = 7\`
 
-The module ends by preparing students to continue directly into Algebra 1B.
+This module closes Algebra 1A and connects directly to the Algebra 1B sequence.
 				`.trim()
 			)
 		]),

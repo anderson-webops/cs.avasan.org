@@ -863,12 +863,133 @@ function profileFor(courseId: string) {
 	);
 }
 
+function algebraTopicFocus(moduleTitle: string) {
+	const title = moduleTitle.toLowerCase();
+
+	if (/slope|rate|linear|intercept|point-slope/.test(title)) {
+		return {
+			representation:
+				"movement between a rate table, a line graph, and a symbolic equation",
+			routine:
+				"calculating slope or intercept from two pieces of evidence and explaining what each value means",
+			trap: "a graph with a misleading scale, a reversed rate, or an intercept that is not meaningful in context",
+			model: "two pricing plans, travel patterns, or savings paths where the slope and intercept have different meanings",
+			error: "a solution that treats the y-intercept as a rate or uses two points in the wrong order",
+			check: "substituting a point, inspecting the graph scale, and stating the unit attached to the rate"
+		};
+	}
+
+	if (/inequal/.test(title)) {
+		return {
+			representation:
+				"translation between inequality notation, a number line or coordinate graph, and a verbal constraint",
+			routine:
+				"solving the inequality and justifying the boundary, shading, and inclusion or exclusion mark",
+			trap: "a boundary value, flipped inequality sign, or shaded region that contradicts the written constraint",
+			model: "a budget, capacity, distance, or eligibility constraint where many answers can be valid",
+			error: "a solution that shades the wrong side or forgets to reverse the sign after multiplying by a negative",
+			check: "testing one value inside the solution set, one outside it, and the boundary value"
+		};
+	}
+
+	if (/system/.test(title)) {
+		return {
+			representation:
+				"representation of two constraints as equations, a table of paired values, and an intersection point",
+			routine:
+				"solving a two-equation system and explaining the meaning of the intersection or no-solution case",
+			trap: "parallel lines, identical equations, or a substitution step that changes only one equation",
+			model: "two memberships, mixtures, ticket plans, or break-even situations with two unknown quantities",
+			error: "a solution that finds one variable correctly but substitutes it into the wrong original equation",
+			check: "substituting the ordered pair into both equations and interpreting the result in the original context"
+		};
+	}
+
+	if (/quadratic|parabol|factoring|factor|vertex|formula/.test(title)) {
+		return {
+			representation:
+				"connection between factored form, standard form, graph features, and zeros or vertex information",
+			routine:
+				"finding roots, vertex information, or a key value and explaining which form made that step efficient",
+			trap: "a sign error in factoring, a missing negative in the quadratic formula, or a root that is misread from the graph",
+			model: "height, area, revenue, or path data where the maximum, minimum, or zero has a real interpretation",
+			error: "a solution that reports both roots but never connects them to the question being answered",
+			check: "substituting a root or vertex value, comparing against the graph shape, and stating whether the answer is reasonable"
+		};
+	}
+
+	if (/exponential|logarithm|log\b|growth|decay/.test(title)) {
+		return {
+			representation:
+				"comparison of a table of repeated multiplication, an exponential equation, and a graph with intercept or asymptote behavior",
+			routine:
+				"identifying the starting value, growth or decay factor, and meaning of a selected input value",
+			trap: "confusing percent change with the multiplier, using a negative input without context, or treating growth as linear",
+			model: "population, depreciation, savings, temperature change, or half-life style behavior over repeated intervals",
+			error: "a solution that adds a constant amount each step instead of multiplying by a constant factor",
+			check: "verifying the first two intervals, naming the domain that makes sense, and comparing the pattern to a linear alternative"
+		};
+	}
+
+	if (/function|domain|range|composition|inverse/.test(title)) {
+		return {
+			representation:
+				"tracking inputs and outputs through notation, a table, a graph, and a verbal rule",
+			routine:
+				"evaluating, composing, or comparing functions while keeping input restrictions explicit",
+			trap: "a domain restriction, reused variable name, inverse-output mixup, or graph point that is not a function",
+			model: "a rule-based process such as scoring, pricing, conversion, or chained transformations",
+			error: "a solution that treats f(x) as multiplication or forgets which output becomes the next input",
+			check: "testing a selected input, naming any restricted input, and explaining what the output represents"
+		};
+	}
+
+	if (/radical|rational|fraction|denominator/.test(title)) {
+		return {
+			representation:
+				"showing restrictions with symbolic work, a table of safe inputs, and a graph or written domain statement",
+			routine:
+				"simplifying or solving while tracking excluded values and possible extraneous results",
+			trap: "a denominator equal to zero, a square-root domain restriction, or an extraneous solution after algebraic manipulation",
+			model: "a rate, density, geometry, or inverse-variation situation where some values are impossible",
+			error: "a solution that cancels terms illegally or keeps a value that makes the original expression undefined",
+			check: "testing candidate answers in the original expression and stating every excluded value"
+		};
+	}
+
+	if (/polynomial|sequence|series|complex|matrix/.test(title)) {
+		return {
+			representation:
+				"organization of the pattern with notation, a table, and one graph or structured calculation",
+			routine:
+				"applying the rule carefully and describing the pattern or structure that justifies each step",
+			trap: "a copied coefficient, mismatched index, arithmetic slip, or operation performed in the wrong order",
+			model: "a repeated pattern, coded message, data transformation, or structured calculation with multiple steps",
+			error: "a solution that gets a numeric answer but cannot identify which rule or structure produced it",
+			check: "verifying one small case by hand and comparing it with the general rule or calculation"
+		};
+	}
+
+	return {
+		representation:
+			"connection between symbolic work and at least one table, graph, diagram, or verbal interpretation",
+		routine:
+			"solving a direct case and explaining the rule or property used at the key step",
+		trap: "a sign, unit, scale, domain, or notation issue that could produce a plausible but wrong answer",
+		model: "a short realistic situation where the chosen algebraic representation affects the answer",
+		error: "a solution with one plausible algebraic or representation mistake that needs to be located and repaired",
+		check: "verifying the answer by substitution, estimation, graph inspection, units, or context"
+	};
+}
+
 function addAlgebraSupplementalProjects(courseId: string, course: RawCourse) {
 	if (!courseId.startsWith("algebra-")) return;
 
 	const courseLabel = course.name || courseId.replace(/-/g, " ");
 
 	for (const module of course.modules) {
+		const focus = algebraTopicFocus(module.title);
+
 		while (module.supplementalProjects.length < 2) {
 			const next = module.supplementalProjects.length + 1;
 			const title =
@@ -876,16 +997,16 @@ function addAlgebraSupplementalProjects(courseId: string, course: RawCourse) {
 					? "Standards Practice Set"
 					: "Modeling or Error Analysis";
 			const standardsPracticeVariants = [
-				`**Project goal:** Convert ${module.title} into a short ${courseLabel} practice set. Include one worked example, three independent problems, one graph/table/verbal representation when appropriate, and one explain-your-reasoning prompt.\n\n**Completion checks:**\n- Each solution shows the algebraic move, representation, or rule used.\n- At least one ${courseLabel} problem asks for a reason, not just an answer.\n- The review note records one misconception or missing prerequisite to revisit before the next module.`,
-				`**Project goal:** Build a focused ${courseLabel} practice checkpoint for ${module.title}. Include a worked example, three independent attempts, and one representation change such as equation to graph, graph to table, or verbal model to equation.\n\n**Completion checks:**\n- The worked example names each transformation and why it is valid.\n- The independent problems include one routine case and one case with a sign, unit, graph, or context trap.\n- The reflection names one error pattern and the check that would catch it next time.`,
-				`**Project goal:** Turn ${module.title} into a compact standards-aligned practice set with a model problem, fluency problems, and one reasoning prompt.\n\n**Completion checks:**\n- The work makes setup, calculation, and interpretation visible instead of jumping to an answer.\n- One problem requires explaining the method choice in words or with a diagram/table/graph.\n- The final review identifies one skill that is secure and one skill that needs another example.`,
-				`**Project goal:** Create a skill-check for ${courseLabel} ${module.title} that mixes procedural practice with explanation. Include one solved model, three new problems, and one representation or justification task.\n\n**Completion checks:**\n- Solutions include enough intermediate work to locate an arithmetic, algebra, or representation mistake.\n- At least one prompt asks for a reasonableness check, substitution check, estimate, graph check, or unit/context check.\n- The closing note names the misconception most likely to affect the next module.`
+				`**Project goal:** Build a checkpoint for ${module.title} in ${courseLabel} that moves from a labeled example to independent transfer. The practice target is ${focus.routine}.\n\n**Steps:**\n1. Write one worked example with labels for the given information, algebraic move, and answer check.\n2. Add two near-transfer problems with changed numbers or changed wording.\n3. Add one representation task requiring ${focus.representation}.\n4. End with one explanation prompt about why the method works.\n\n**Completion checks:**\n- Each answer shows the algebraic rule, representation choice, or property used.\n- One item includes ${focus.trap}.\n- The final check confirms the answer through ${focus.check}.`,
+				`**Project goal:** Create a short practice set for ${module.title} that separates procedure, representation, and interpretation. The set builds confidence with ${focus.routine} before adding a transfer case.\n\n**Steps:**\n1. Present one model problem with the setup and answer check visible.\n2. Add one routine problem, one changed-context problem, and one explanation-only prompt.\n3. Include a representation change: ${focus.representation}.\n4. Add a one-sentence reflection naming the easiest place to make an error.\n\n**Completion checks:**\n- The worked example explains the transformation instead of only listing steps.\n- The changed-context problem includes ${focus.trap}.\n- The answer key includes reasoning, not only final values.`,
+				`**Project goal:** Build a retrieval-and-transfer checkpoint for ${module.title}. The checkpoint reviews the core rule, then proves the rule still works when the representation or context changes.\n\n**Steps:**\n1. Define the target skill in one sentence using precise algebra vocabulary.\n2. Solve one direct case focused on ${focus.routine}.\n3. Convert the same idea into another form through ${focus.representation}.\n4. Add one short explanation comparing the direct case and the changed case.\n\n**Completion checks:**\n- Setup, calculation, and interpretation are visible.\n- One problem includes ${focus.trap}.\n- The review identifies one secure skill and one detail that needs another example.`,
+				`**Project goal:** Create a mixed skill-check for ${courseLabel} ${module.title}. The check combines one solved model, three new problems, and one justification task tied to ${focus.representation}.\n\n**Steps:**\n1. Name the rule, property, graph feature, or representation being practiced.\n2. Write a solved model with a visible reasonableness check.\n3. Add two routine problems and one problem containing ${focus.trap}.\n4. Add a justification question that asks why the selected method fits the problem.\n\n**Completion checks:**\n- Solutions include enough intermediate work to locate arithmetic, algebra, or representation mistakes.\n- At least one prompt requires ${focus.check}.\n- The closing note names the misconception most likely to affect the next module.`
 			];
 			const modelingProjectVariants = [
-				`**Project goal:** Apply ${module.title} in a modeling, graphing, or error-analysis context for ${courseLabel}. The work interprets a situation, chooses a representation, solves, and explains whether the answer makes sense.\n\n**Completion checks:**\n- The project contains a concrete scenario or flawed worked solution.\n- The work explains the choice of equation, graph, table, or verbal model.\n- The final answer includes a units/context check or corrected error statement.`,
-				`**Project goal:** Use ${module.title} to analyze a realistic situation or repair a flawed solution. Choose the representation, solve carefully, and explain the meaning of the result.\n\n**Completion checks:**\n- The scenario states what each quantity represents and what the answer should describe.\n- The selected equation, graph, table, or diagram is justified before calculation begins.\n- The conclusion checks context, units, domain, or the corrected mistake rather than only reporting a number.`,
-				`**Project goal:** Connect ${module.title} to a modeling or error-analysis task where the setup matters as much as the computation.\n\n**Completion checks:**\n- The response distinguishes given information, chosen representation, operations, and interpretation.\n- A flawed step, unreasonable answer, or alternate representation is discussed explicitly.\n- The final statement explains why the answer is valid for the situation or why the original work failed.`,
-				`**Project goal:** Develop an application task for ${courseLabel} ${module.title} using a context, graph, table, equation, or incorrect sample solution.\n\n**Completion checks:**\n- The project includes a real constraint such as units, domain, scale, rate, intercept, or precision.\n- The representation choice is defended and compared with at least one other possible approach.\n- The closing explanation names the mathematical reason the answer or correction is trustworthy.`
+				`**Project goal:** Use ${module.title} to analyze ${focus.model}. The result connects quantities, representation, solution, and interpretation rather than ending at a number.\n\n**Steps:**\n1. State what each quantity represents and what the answer must describe.\n2. Choose an equation, graph, table, or diagram and explain why that representation fits.\n3. Solve the problem and record the verification method: ${focus.check}.\n4. Write a conclusion that interprets the result in the original situation.\n\n**Completion checks:**\n- The scenario includes a real constraint such as unit, domain, rate, scale, boundary, or precision.\n- The selected representation is compared with one alternate approach.\n- The conclusion explains why the answer is valid for the situation.`,
+				`**Project goal:** Repair a flawed ${module.title} solution. The error begins with ${focus.error}; the finished explanation locates the failure, corrects it, and verifies the corrected result.\n\n**Steps:**\n1. Copy or summarize the flawed solution and mark the first invalid step.\n2. Explain the algebra, graph, table, or context reason that step fails.\n3. Solve the corrected version and include this check: ${focus.check}.\n4. Write a short prevention note for the same mistake in a future problem.\n\n**Completion checks:**\n- The correction identifies the exact failed assumption or algebraic move.\n- The corrected work uses ${focus.representation} when useful.\n- The final statement distinguishes the wrong answer from the repaired reasoning.`,
+				`**Project goal:** Build a model for ${module.title} using ${focus.model}. The setup matters: define the quantities, choose a representation, solve, and interpret the result with context.\n\n**Steps:**\n1. Write the known quantities, unknown quantity, and any restrictions.\n2. Choose a representation that supports ${focus.representation}.\n3. Complete the calculation or graph analysis, then use this check: ${focus.check}.\n4. Add one changed condition and predict how the answer or graph changes.\n\n**Completion checks:**\n- Given information, representation, operations, and interpretation are separated clearly.\n- A flawed step, unreasonable answer, or alternate representation is discussed explicitly.\n- The final statement explains why the answer fits the situation.`,
+				`**Project goal:** Create an error-analysis or modeling task for ${courseLabel} ${module.title}. The task uses ${focus.model} or starts from ${focus.error}.\n\n**Steps:**\n1. Define the context or flawed solution in two to four sentences.\n2. Include one representation requirement: ${focus.representation}.\n3. Solve or correct the task and document ${focus.check}.\n4. Add one comparison explaining why another representation or shortcut is weaker for this problem.\n\n**Completion checks:**\n- The task includes a meaningful constraint such as unit, domain, scale, rate, boundary, or precision.\n- The representation choice is defended and compared with another possible approach.\n- The closing explanation names the mathematical reason the answer or correction is trustworthy.`
 			];
 			const content =
 				next === 1

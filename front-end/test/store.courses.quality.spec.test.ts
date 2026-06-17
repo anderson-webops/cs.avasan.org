@@ -1903,6 +1903,54 @@ describe("course text quality normalization", () => {
 		COURSE_SWEEP_TIMEOUT
 	);
 
+	it(
+		"keeps algebra supplemental projects specific, neutral, and topic-aware",
+		async () => {
+			const courses = await Promise.all([
+				loadRawCourse("algebra-1a"),
+				loadRawCourse("algebra-1b"),
+				loadRawCourse("algebra-2a"),
+				loadRawCourse("algebra-2b")
+			]);
+			const corpus = courses.map(allCourseText).join("\n");
+			const supplementalCorpus = courses
+				.flatMap(course =>
+					course!.modules.flatMap(module =>
+						module.supplementalProjects.map(item => item.content)
+					)
+				)
+				.join("\n");
+
+			expect(corpus).not.toMatch(/Develop an application task/i);
+			expect(corpus).not.toMatch(
+				/Connect .* to a modeling or error-analysis task/i
+			);
+			expect(corpus).not.toMatch(
+				/Turn .* into a compact standards-aligned practice set/i
+			);
+			expect(corpus).not.toMatch(
+				/Apply .* in a modeling, graphing, or error-analysis context/i
+			);
+			expect(corpus).not.toMatch(/\ba Algebra/i);
+			expect(corpus).not.toMatch(/asked students to/i);
+			expect(corpus).not.toMatch(/asked learners to/i);
+			expect(corpus).not.toMatch(/preparing students to/i);
+
+			expect(supplementalCorpus).toContain("**Steps:**");
+			expect(supplementalCorpus).toContain(
+				"movement between a rate table"
+			);
+			expect(supplementalCorpus).toContain("sign error in factoring");
+			expect(supplementalCorpus).toContain(
+				"testing one value inside the solution set"
+			);
+			expect(supplementalCorpus).toContain("tracking inputs and outputs");
+			expect(supplementalCorpus).toContain("extraneous solution");
+			expect(supplementalCorpus).toContain("population, depreciation");
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
+
 	it("formats authored lesson setup text as neutral student-readable sections", async () => {
 		const course = await loadRawCourse("c-level-1");
 		expect(course).not.toBeNull();
