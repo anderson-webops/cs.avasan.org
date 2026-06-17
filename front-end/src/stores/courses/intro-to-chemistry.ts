@@ -1365,7 +1365,7 @@ export const introToChemistryCourse: RawCourse = {
 						"**Reference purpose:** This appendix collects the recurring references used throughout the course. It is not a separate content unit by default; it supports standards, safety boundaries, periodic-table reading, units, equations, and evidence practices when a lesson or project calls for them.",
 						`**Resource bank:** Use the ACS Chemistry Guidelines, NIST SI units page, NGSS appendices, OpenStax Chemistry 2e, the local materials pack, the original project source index, and this periodic-table reference set: ${PERIODIC_TABLE_REFERENCE_LINKS}.`,
 						"**Use:** These links are not separate assignments by default. They support the specific lessons and projects that cite them.",
-						"**Completion check:** Any reference used in a project should be named in the evidence log with a short note explaining what it contributed."
+						"**Evidence target:** Any reference used in a project is named in the evidence log with a short note explaining what it contributed."
 					].join("\n\n"),
 					datasetLink: REFERENCES.openStaxChemistry,
 					solutionLink: MATERIALS.answerKey
@@ -1376,7 +1376,7 @@ export const introToChemistryCourse: RawCourse = {
 						"**Reference purpose:** Use more than one periodic-table source when a task asks for evidence beyond symbol and atomic number. Different sources emphasize different details: standard names and symbols, trend tools, visual organization, element histories, or property data.",
 						`**Reference links:** ${PERIODIC_TABLE_REFERENCE_LINKS}.`,
 						"**Use:** ACS is the default classroom table, RSC is useful for interactive trends and element pages, IUPAC is useful for standard names and symbols, and Ptable is useful for fast interactive scanning. When two sources organize details differently, record what each source contributes rather than copying without context.",
-						"**Completion check:** A reference note should name the source, the element or trend checked, and the exact fact or property the source supported."
+						"**Evidence target:** A reference note names the source, the element or trend checked, and the exact fact or property the source supported."
 					].join("\n\n"),
 					datasetLink: material(
 						"periodic-table-reference-comparison"
@@ -1390,7 +1390,7 @@ export const introToChemistryCourse: RawCourse = {
 					content: [
 						"**Resource bank:** The course uses PhET simulations for atoms, states of matter, molecule shapes, balancing equations, limiting reactants, concentration, molarity, and pH. It also preserves the original PBS atom simulation, PBS periodic-table interactive, and JavaLab dissolution simulation as source links. These simulations provide controlled evidence sources when a physical lab would require materials, supervision, or safety equipment outside the scope of a remote course.",
 						"**Use:** A simulation counts as evidence only when a specific setting, observation, or screenshot is connected to a claim. A good simulation note records the variable changed, the visible result, and the particle-level interpretation.",
-						"**Completion check:** Simulation-based work should include the variable changed, what was observed, what the observation supports, and one limitation of the model."
+						"**Evidence target:** Simulation-based work includes the variable changed, what was observed, what the observation supports, and one limitation of the model."
 					].join("\n\n"),
 					mediaLink:
 						"https://phet.colorado.edu/en/simulations/filter?subjects=chemistry"
@@ -1401,7 +1401,7 @@ export const introToChemistryCourse: RawCourse = {
 						"**Resource bank:** Required work can be completed with a browser, notes, diagrams, screenshots, tables, and writing. Optional household observations are replaceable with provided evidence or simulations.",
 						"**Use:** Before a project begins, identify the phenomenon, evidence source, vocabulary target, model, and final CER prompt. If the evidence source is a simulation or table, record why that source is appropriate for the claim being made.",
 						"**Safety boundary:** Tasks may use public datasets, diagrams, readings, simulations, or simple observations that do not require handling chemicals. Anything involving beakers, kits, unknown chemicals, heat, pressure buildup, electrical components, ingestion, outdoor collection, or adult-managed supplies is replaced with a nonphysical evidence source.",
-						"**Completion check:** The task names the evidence source clearly and can be finished without acquiring or mixing materials."
+						"**Evidence target:** The task names the evidence source clearly and can be finished without acquiring or mixing materials."
 					].join("\n\n"),
 					datasetLink: material("remote-investigation-checklist"),
 					solutionLink: answerKey("general-cer-rubric")
@@ -1411,7 +1411,7 @@ export const introToChemistryCourse: RawCourse = {
 					content: [
 						"**Resource bank:** Strong explanations are assessed by claim clarity, evidence relevance, particle-model reasoning, accurate vocabulary, safe scope, and changed-condition prediction. The rubric categories are summarized here so checks stay consistent across projects.",
 						"**Use:** Apply the rubric to project drafts before final submission. A weak explanation usually needs a narrower claim, better evidence, or a clearer model. The rubric is also a diagnostic tool: it should reveal which part of the explanation is weak rather than simply assigning a score.",
-						"**Completion check:** The final work can answer: What is the claim? What evidence supports it? What particle-level model explains it? What would change under a new condition?"
+						"**Evidence target:** The final work can answer: What is the claim? What evidence supports it? What particle-level model explains it? What would change under a new condition?"
 					].join("\n\n"),
 					solutionLink: MATERIALS.answerKey
 				}

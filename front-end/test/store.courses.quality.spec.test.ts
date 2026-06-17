@@ -1358,6 +1358,7 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/^Represent the module with at least one graph/im
 			);
+			expect(corpus).not.toMatch(/\*\*Completion check:\*\*/i);
 			expect(corpus).not.toMatch(/\bcore project focus:/i);
 			expect(corpus).not.toMatch(/\bRun the local the\b/i);
 			expect(corpus).not.toMatch(/\b(?:connectings|mappings)\b/i);
