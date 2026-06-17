@@ -1876,10 +1876,6 @@ onBeforeUnmount(() => {
 					<section class="code-panel" aria-label="Code editor">
 						<div class="panel-header">
 							<span>{{ activeFile?.name ?? "main.py" }}</span>
-							<small
-								>Python files can import each other; data and
-								asset files can be read by filename.</small
-							>
 						</div>
 						<div
 							v-if="activeFileIsBinaryAsset"
