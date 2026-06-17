@@ -2204,11 +2204,14 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .python-ide-page {
-	width: min(1680px, calc(100% - 2rem));
+	width: min(1680px, calc(100% - clamp(2rem, 4vw, 4rem)));
 	gap: 1.25rem;
 }
 
-.python-ide-page,
+.python-ide-page {
+	letter-spacing: 0;
+}
+
 .python-ide-page :is(section, p, label, input, textarea, select, button) {
 	margin: 0;
 	letter-spacing: 0;
@@ -2354,6 +2357,8 @@ html.dark .python-ide-status strong {
 .sidebar-collapse-toggle--rail {
 	width: 2.45rem;
 	height: 2.45rem;
+	margin-inline-start: clamp(0.35rem, 0.8vw, 0.75rem);
+	margin-block-start: 0.15rem;
 }
 
 .sidebar-collapse-icon {
@@ -3051,7 +3056,7 @@ html.dark .file-delete:disabled::after {
 
 @media (max-width: 820px) {
 	.python-ide-page {
-		width: min(100% - 1rem, 1680px);
+		width: min(100% - 1.25rem, 1680px);
 	}
 
 	.python-ide-hero,
