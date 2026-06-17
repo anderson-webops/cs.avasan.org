@@ -66,6 +66,19 @@ function capitalizeSentence(value: string) {
 	return `${value.slice(0, 1).toUpperCase()}${value.slice(1)}`;
 }
 
+function indefiniteArticleFor(value: string) {
+	const trimmedValue = value.trim();
+	if (
+		/^(?:AI|API|AP|HTML|HTTP|IDE|I\/O|ML|MVP|SQL|SVG|XML)\b/i.test(
+			trimmedValue
+		)
+	) {
+		return "an";
+	}
+
+	return /^[aeiou]/i.test(trimmedValue) ? "an" : "a";
+}
+
 function guidanceReference(courseFamily: string, moduleTitle: string) {
 	const family = courseFamily.toLowerCase();
 
@@ -652,7 +665,7 @@ function projectGoal(
 	) {
 		return [
 			`**Project goal:** Produce the ${courseFamily} ${artifact} for **${moduleTitle}** as an evidence-backed analysis, model, or search result with a stated limitation.`,
-			`**Project goal:** Complete **${moduleTitle}** as a ${courseFamily} ${artifact} that inspects inputs, records assumptions, and verifies the output with a sanity check.`,
+			`**Project goal:** Complete **${moduleTitle}** as ${indefiniteArticleFor(courseFamily)} ${courseFamily} ${artifact} that inspects inputs, records assumptions, and verifies the output with a sanity check.`,
 			`**Project goal:** Build **${moduleTitle}** around a clear question, measurable result, baseline or trace, and limitation that affects interpretation.`,
 			`**Project goal:** Turn **${moduleTitle}** into a reproducible data/model checkpoint with visible intermediate evidence and a cautious conclusion.`
 		][index];
@@ -710,7 +723,7 @@ function projectGoal(
 
 	return [
 		`**Project goal:** Create the ${courseFamily} ${artifact} for **${moduleTitle}** with an observable result, a checked boundary case, and a short reasoning note.`,
-		`**Project goal:** Complete **${moduleTitle}** as a ${courseFamily} ${artifact} with a clear success condition and evidence that the result works.`,
+		`**Project goal:** Complete **${moduleTitle}** as ${indefiniteArticleFor(courseFamily)} ${courseFamily} ${artifact} with a clear success condition and evidence that the result works.`,
 		`**Project goal:** Build **${moduleTitle}** in small verifiable steps, then compare the expected result with the observed result.`,
 		`**Project goal:** Produce **${moduleTitle}** as a focused artifact that demonstrates the module concept and one important edge case.`
 	][index];

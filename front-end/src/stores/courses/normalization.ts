@@ -690,8 +690,31 @@ function thirdPersonVerb(value: string) {
 	return `${lower}s`;
 }
 
+function gerundToBaseVerb(value: string) {
+	const lower = value.toLowerCase();
+	const commonGerunds: Record<string, string> = {
+		analyzing: "analyze",
+		building: "build",
+		combining: "combine",
+		connecting: "connect",
+		creating: "create",
+		diagnosing: "diagnose",
+		mapping: "map",
+		modeling: "model",
+		organizing: "organize",
+		reviewing: "review",
+		turning: "turn",
+		using: "use"
+	};
+
+	if (commonGerunds[lower]) return commonGerunds[lower];
+	if (lower.endsWith("ying")) return `${lower.slice(0, -4)}y`;
+	if (lower.endsWith("ing")) return lower.slice(0, -3);
+	return lower;
+}
+
 function moduleFocusVerbReplacement(_match: string, verb: string) {
-	return `This module ${thirdPersonVerb(verb)}`;
+	return `This module ${thirdPersonVerb(gerundToBaseVerb(verb))}`;
 }
 
 function neutralizeCourseShouldPhrasing(text: string) {
@@ -4451,29 +4474,29 @@ function projectSupport(context: CourseTextContext) {
 	const focus = subjectFocus(context);
 	const goal = variantPrompt(context, [
 		() =>
-			`**Goal:** Produce a visible result tied to ${focus}. Include a normal path, an edge case, and one sentence explaining the evidence.`,
+			`**Goal:** Build a visible result tied to ${focus}. Include a normal path, an edge case, and one sentence explaining the evidence.`,
 		() =>
-			`**Goal:** Finish with an observable result, a checked assumption, and evidence tied to ${focus}.`,
+			`**Goal:** Create an observable result, verify one assumption, and tie the evidence to ${focus}.`,
 		() =>
-			`**Goal:** Turn ${focus} into something testable: run it, inspect the output, and record what proves the idea works.`,
+			`**Goal:** Make ${focus} testable with a runnable result, inspected output, and a short evidence note.`,
 		() =>
-			`**Goal:** Center the work on one concrete behavior, model, output, or analysis that makes ${focus} visible.`,
+			`**Goal:** Use one concrete behavior, model, output, or analysis to make ${focus} visible.`,
 		() =>
 			`**Goal:** Show ${focus} through a run, trace, model, or user interaction.`,
 		() =>
-			`**Goal:** Grow a small working case into a finished result that reflects ${focus}, with a documented assumption and a clear success check.`,
+			`**Goal:** Start from a small working case, then add one improvement that still reflects ${focus}.`,
 		() =>
 			`**Goal:** Apply ${focus} in a practical artifact, then compare expected behavior with the observed result.`,
 		() =>
-			`**Goal:** Include enough structure, naming, and evidence to support ${focus} without relying on memory.`,
+			`**Goal:** Use clear structure, naming, and evidence so ${focus} can be reviewed without relying on memory.`,
 		() =>
-			`**Goal:** Make the central decision for ${focus} explicit, tested, and visible in the final artifact.`,
+			`**Goal:** Make one design or reasoning choice explicit, test it, and show its effect in the final artifact.`,
 		() =>
 			`**Goal:** Demonstrate ${focus} with one ordinary case and one case that could fail if the idea is misunderstood.`,
 		() =>
-			`**Goal:** Connect the prompt requirements to ${focus}, then document the evidence that proves the connection works.`,
+			`**Goal:** Map the prompt requirements to ${focus}, then record the evidence that proves the result works.`,
 		() =>
-			`**Goal:** Document the input, process, and output path, then connect the result to ${focus}.`
+			`**Goal:** Identify the input or starting state, the main transformation, and the output or conclusion tied to ${focus}.`
 	]);
 
 	return [

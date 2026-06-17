@@ -169,6 +169,10 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/with visible behavior and verification evidence/i
 			);
+			expect(corpus).not.toMatch(
+				/\b(?:a AI|a Algebra|a object|a array|an Java|an Python|an C\+\+)\b/i
+			);
+			expect(corpus).toContain("as an AI/Python implementation checkpoint");
 			expect(corpus).toContain(
 				"Complete **PTJ0 Positioning and Workflow Translation** as a Java implementation checkpoint that exposes class responsibilities, public behavior, and one edge case"
 			);
@@ -1346,6 +1350,8 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(/the response answer/i);
 			expect(corpus).not.toMatch(/the response reason/i);
 			expect(corpus).not.toMatch(/\bthe A, B, C, D example\b/i);
+			expect(corpus).not.toMatch(/\bThis section for\b/i);
+			expect(corpus).not.toMatch(/\b(?:connectings|mappings)\b/i);
 			expect(corpus).not.toMatch(
 				/\bThis module focuses on (?:combine|connect|diagnose|map|organize|turn|use)\b/i
 			);
@@ -1439,6 +1445,24 @@ describe("course text quality normalization", () => {
 		expect(scratchStudio!.content).not.toMatch(
 			/\n \n\n\*\*Checkpoints:\*\*/
 		);
+
+		const scratchBridge = scratchCourse!.modules
+			.find(module => module.title === "GS17 Text-Based Programming Bridge")
+			?.curriculum.find(item => item.title === "Core Concepts");
+		expect(scratchBridge).toBeDefined();
+		expect(scratchBridge!.content).toContain(
+			"This module connects Scratch blocks to text-code ideas"
+		);
+		expect(scratchBridge!.content).not.toMatch(/\bconnectings\b/i);
+
+		const scratchLevel2Bridge = scratchLevel2!.modules
+			.find(module => module.title === "GM15 Text-Based Programming Bridge")
+			?.curriculum.find(item => item.title === "Core Concepts");
+		expect(scratchLevel2Bridge).toBeDefined();
+		expect(scratchLevel2Bridge!.content).toContain(
+			"This module maps advanced Scratch concepts to Python readiness"
+		);
+		expect(scratchLevel2Bridge!.content).not.toMatch(/\bmappings\b/i);
 
 		const platformerPal = findItem(scratchLevel2!, /Platformer Pal/);
 		expect(platformerPal.content).toMatch(/^1\. Inspect/m);
@@ -1583,7 +1607,7 @@ describe("course text quality normalization", () => {
 		);
 		expect(spinner.content).toContain("towards the mouse.\n\n**Goal:**");
 		expect(spinner.content).toContain(
-			"enough structure, naming, and evidence to support Scratch game design"
+			"Use clear structure, naming, and evidence so Scratch game design"
 		);
 		expect(spinner.content).toContain("\n\n**Outcome:**");
 		expect(spinner.content).not.toContain("Build a working result for");
@@ -1785,7 +1809,19 @@ describe("course text quality normalization", () => {
 				/\bmakes the central decision for\b/i
 			);
 			expect(corpus).not.toMatch(
+				/\bMake the central decision for\b/
+			);
+			expect(corpus).not.toMatch(
 				/\bconnects the prompt requirements to\b/i
+			);
+			expect(corpus).not.toMatch(
+				/\bConnect the prompt requirements to\b/
+			);
+			expect(corpus).not.toMatch(
+				/\bDocument the input, process, and output path\b/
+			);
+			expect(corpus).not.toMatch(
+				/\bFinish with an observable result\b/
 			);
 			expect(corpus).not.toMatch(
 				/\bends with an observable result, a checked assumption, and evidence tied to\b/i

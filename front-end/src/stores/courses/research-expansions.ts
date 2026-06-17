@@ -80,7 +80,7 @@ function sourceBullets(names: string[]) {
 }
 
 function courseUseNote(courseLabel: string, emphasis: string) {
-	return `**Course map:** This section for ${courseLabel} connects the reference list to concrete lesson or project focus areas and to visible evidence in the course artifact. ${emphasis}`;
+	return `**Course map:** The ${courseLabel} map connects the reference list to concrete lesson or project focus areas and to visible evidence in the course artifact. ${emphasis}`;
 }
 
 function standardsEvidenceNote(courseLabel: string) {
