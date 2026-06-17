@@ -125,6 +125,11 @@ const runtimeArtifacts = ref<RuntimeArtifactView[]>([]);
 const isLoading = ref(true);
 const isSaving = ref(false);
 const isRunning = ref(false);
+const isGameLoopActive = ref(false);
+const activeTurtleTimerCount = ref(0);
+const showProjectMenu = ref(false);
+const showFileTools = ref(false);
+const stopRequested = ref(false);
 const saveMessage = ref("Loading workspace");
 const runMessage = ref("Ready");
 const canvasRef = ref<HTMLCanvasElement | null>(null);
@@ -219,6 +224,12 @@ const activeFilePreviewKind = computed(() => {
 const canSyncToAccount = computed(() => !!currentUser.value?._id);
 const storageUserID = computed(() => currentUser.value?._id ?? null);
 const sortedProjects = computed(() => [...projects.value]);
+const runControlIsStop = computed(
+	() =>
+		isRunning.value ||
+		isGameLoopActive.value ||
+		activeTurtleTimerCount.value > 0
+);
 const selectedModeLabel = computed(() =>
 	selectedProject.value
 		? getPythonIdeModeLabel(selectedProject.value.mode)
@@ -489,6 +500,11 @@ async function createProject(mode: PythonIdeMode) {
 	}
 }
 
+async function createProjectFromMenu(mode: PythonIdeMode) {
+	showProjectMenu.value = false;
+	await createProject(mode);
+}
+
 async function deleteProject(project: PythonIdeProject) {
 	if (projects.value.length <= 1) {
 		appendOutput("system", "Keep at least one project in the workspace.");
@@ -747,6 +763,7 @@ function clearTurtleTimers() {
 		window.clearTimeout(handle);
 	}
 	turtleTimerHandles.clear();
+	activeTurtleTimerCount.value = 0;
 }
 
 function trackTurtleFillPoint(x: number, y: number) {
@@ -929,6 +946,7 @@ function stopGameLoop() {
 	}
 	gameLoopRequested = false;
 	gameTickInFlight = false;
+	isGameLoopActive.value = false;
 }
 
 function stopAllGameAudio() {
@@ -1052,6 +1070,7 @@ function stopGameMusic() {
 
 function startGameLoop(tick: () => Promise<void>) {
 	stopGameLoop();
+	isGameLoopActive.value = true;
 
 	const runTick = () => {
 		if (gameTickInFlight) return;
@@ -1309,6 +1328,7 @@ const turtleBridge: TurtleBridge = {
 		const handle = window.setTimeout(
 			() => {
 				turtleTimerHandles.delete(handle);
+				activeTurtleTimerCount.value = turtleTimerHandles.size;
 				try {
 					callback();
 				} catch (error) {
@@ -1324,6 +1344,7 @@ const turtleBridge: TurtleBridge = {
 		);
 
 		turtleTimerHandles.add(handle);
+		activeTurtleTimerCount.value = turtleTimerHandles.size;
 	},
 	listen() {
 		canvasRef.value?.focus();
@@ -1379,6 +1400,7 @@ async function runCurrentProject() {
 	const project = selectedProject.value;
 	if (!project) return;
 
+	stopRequested.value = false;
 	await saveSelectedProject();
 	clearOutput();
 	const runnableFile = getPythonIdeRunnableFile(project);
@@ -1405,20 +1427,49 @@ async function runCurrentProject() {
 				mergeRuntimeProjectFiles(project, files),
 			onOutput: appendOutput
 		});
-		runMessage.value =
-			project.mode === "data"
-				? "Analysis ready"
-				: project.mode === "pgzero"
-					? "Game running"
-					: project.mode === "turtle"
-						? "Drawing ready"
-						: "Run complete";
+		if (!stopRequested.value) {
+			runMessage.value =
+				project.mode === "data"
+					? "Analysis ready"
+					: project.mode === "pgzero"
+						? "Game running"
+						: project.mode === "turtle"
+							? "Drawing ready"
+							: "Run complete";
+		}
 	} catch (error) {
 		appendOutput("stderr", formatPythonRuntimeError(error));
 		runMessage.value = "Run failed";
 	} finally {
 		isRunning.value = false;
+		stopRequested.value = false;
 	}
+}
+
+function stopCurrentProject() {
+	if (!runControlIsStop.value) return;
+	const hadPythonRunInFlight = isRunning.value;
+	stopRequested.value = true;
+	clearTurtleTimers();
+	stopGameLoop();
+	stopAllGameAudio();
+	keyHandlers.clear();
+	gameKeysDown.clear();
+	gameEvents.length = 0;
+	turtleClickHandlers.clear();
+	turtleDragHandlers.clear();
+	activeTurtleDragButton = null;
+	runMessage.value = "Stopped";
+	appendOutput("system", "Stopped active canvas handlers.");
+	if (!hadPythonRunInFlight) stopRequested.value = false;
+}
+
+function activateRunControl() {
+	if (runControlIsStop.value) {
+		stopCurrentProject();
+		return;
+	}
+	void runCurrentProject();
 }
 
 function handleKeyDown(event: KeyboardEvent) {
@@ -1674,39 +1725,53 @@ onBeforeUnmount(() => {
 				<div class="sidebar-block">
 					<div class="sidebar-heading">
 						<span>Projects</span>
-						<div class="sidebar-actions">
+						<div class="sidebar-actions project-create">
 							<button
-								class="icon-action"
-								title="New Python project"
+								:aria-expanded="showProjectMenu"
+								aria-haspopup="menu"
+								aria-label="Create new project"
+								class="icon-action icon-action--add"
+								title="Create new project"
 								type="button"
-								@click="createProject('python')"
+								@click="showProjectMenu = !showProjectMenu"
 							>
-								Py
+								+
 							</button>
-							<button
-								class="icon-action"
-								title="New data/AI notebook"
-								type="button"
-								@click="createProject('data')"
+							<div
+								v-if="showProjectMenu"
+								class="project-create-menu"
+								role="menu"
 							>
-								Da
-							</button>
-							<button
-								class="icon-action"
-								title="New Turtle project"
-								type="button"
-								@click="createProject('turtle')"
-							>
-								Tu
-							</button>
-							<button
-								class="icon-action"
-								title="New PyGame Zero project"
-								type="button"
-								@click="createProject('pgzero')"
-							>
-								Gm
-							</button>
+								<span>New project</span>
+								<button
+									type="button"
+									role="menuitem"
+									@click="createProjectFromMenu('python')"
+								>
+									Python
+								</button>
+								<button
+									type="button"
+									role="menuitem"
+									@click="createProjectFromMenu('data')"
+								>
+									Data / AI notebook
+								</button>
+								<button
+									type="button"
+									role="menuitem"
+									@click="createProjectFromMenu('turtle')"
+								>
+									Python Turtle
+								</button>
+								<button
+									type="button"
+									role="menuitem"
+									@click="createProjectFromMenu('pgzero')"
+								>
+									PyGame Zero
+								</button>
+							</div>
 						</div>
 					</div>
 
@@ -1768,31 +1833,48 @@ onBeforeUnmount(() => {
 							</button>
 						</div>
 					</div>
-					<div class="new-file-row">
-						<input
-							v-model="newFileName"
-							aria-label="New project file name"
-							placeholder="helper.py, helpers/math_tools.py, or data.csv"
-							type="text"
-							@keyup.enter="addFile"
-						/>
+					<div class="file-tools-footer">
 						<button
-							class="site-button site-button--secondary compact-button"
+							:aria-expanded="showFileTools"
+							aria-label="Add or import project files"
+							class="file-tool-toggle"
+							title="Add or import project files"
 							type="button"
-							@click="addFile"
+							@click="showFileTools = !showFileTools"
 						>
-							Add
+							<span
+								class="file-tool-toggle-icon"
+								aria-hidden="true"
+							/>
 						</button>
 					</div>
-					<label class="file-import-row">
-						<span>Import images/audio</span>
-						<input
-							:accept="pythonIdeFileUploadAccept"
-							multiple
-							type="file"
-							@change="importProjectFiles"
-						/>
-					</label>
+					<div v-if="showFileTools" class="file-tools-panel">
+						<div class="new-file-row">
+							<input
+								v-model="newFileName"
+								aria-label="New project file name"
+								placeholder="helper.py, helpers/math_tools.py, or data.csv"
+								type="text"
+								@keyup.enter="addFile"
+							/>
+							<button
+								class="site-button site-button--secondary compact-button"
+								type="button"
+								@click="addFile"
+							>
+								Add
+							</button>
+						</div>
+						<label class="file-import-row">
+							<span>Import images/audio</span>
+							<input
+								:accept="pythonIdeFileUploadAccept"
+								multiple
+								type="file"
+								@change="importProjectFiles"
+							/>
+						</label>
+					</div>
 				</div>
 
 				<div class="sidebar-block library-support">
@@ -1863,12 +1945,13 @@ onBeforeUnmount(() => {
 						{{ isSaving ? "Saving" : "Save" }}
 					</button>
 					<button
-						class="site-button site-button--primary"
-						:disabled="isRunning"
+						class="site-button site-button--primary run-control"
+						:class="{ 'run-control--stop': runControlIsStop }"
+						:disabled="!runControlIsStop && isSaving"
 						type="button"
-						@click="runCurrentProject"
+						@click="activateRunControl"
 					>
-						{{ isRunning ? "Running" : "Run" }}
+						{{ runControlIsStop ? "Stop" : "Run" }}
 					</button>
 				</div>
 
@@ -2165,6 +2248,10 @@ html.dark .python-ide-status strong {
 	gap: 0.4rem;
 }
 
+.project-create {
+	position: relative;
+}
+
 .icon-action {
 	width: 2.1rem;
 	height: 2.1rem;
@@ -2174,6 +2261,54 @@ html.dark .python-ide-status strong {
 	color: var(--color-ink);
 	font-size: 0.72rem;
 	font-weight: 800;
+}
+
+.icon-action--add {
+	display: grid;
+	place-items: center;
+	border-radius: 999px;
+	font-size: 1.4rem;
+	line-height: 1;
+}
+
+.project-create-menu {
+	position: absolute;
+	z-index: 20;
+	top: calc(100% + 0.45rem);
+	right: 0;
+	width: 15.5rem;
+	display: grid;
+	gap: 0.35rem;
+	padding: 0.6rem;
+	border: 1px solid var(--color-border);
+	border-radius: 12px;
+	background: var(--color-surface-strong);
+	box-shadow: var(--shadow-soft);
+}
+
+.project-create-menu span {
+	padding: 0.25rem 0.45rem;
+	color: #0f766e;
+	font-size: 0.68rem;
+	font-weight: 900;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+.project-create-menu button {
+	width: 100%;
+	padding: 0.55rem 0.65rem;
+	border: 0;
+	border-radius: 8px;
+	background: rgba(248, 250, 252, 0.9);
+	color: var(--color-ink);
+	font-weight: 800;
+	text-align: left;
+}
+
+.project-create-menu button:hover,
+.project-create-menu button:focus-visible {
+	background: rgba(204, 251, 241, 0.5);
 }
 
 .project-list,
@@ -2243,6 +2378,63 @@ html.dark .python-ide-status strong {
 	gap: 0.5rem;
 }
 
+.file-tools-footer {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.file-tool-toggle {
+	width: 2.45rem;
+	height: 2.45rem;
+	display: grid;
+	place-items: center;
+	border: 1px solid var(--color-border);
+	border-radius: 10px;
+	background: rgba(255, 255, 255, 0.78);
+	color: #0f766e;
+}
+
+.file-tool-toggle-icon {
+	position: relative;
+	width: 1rem;
+	height: 1.2rem;
+	border: 2px solid currentColor;
+	border-radius: 3px;
+}
+
+.file-tool-toggle-icon::before {
+	position: absolute;
+	top: -2px;
+	right: -2px;
+	width: 0.36rem;
+	height: 0.36rem;
+	border-bottom: 2px solid currentColor;
+	border-left: 2px solid currentColor;
+	background: rgba(255, 255, 255, 0.78);
+	content: "";
+}
+
+.file-tool-toggle-icon::after {
+	position: absolute;
+	right: -0.55rem;
+	bottom: -0.55rem;
+	width: 0.9rem;
+	height: 0.9rem;
+	border-radius: 999px;
+	background: #0f766e;
+	color: #ffffff;
+	content: "+";
+	font-size: 0.75rem;
+	font-weight: 900;
+	line-height: 0.9rem;
+	text-align: center;
+}
+
+.file-tools-panel {
+	display: grid;
+	gap: 0.65rem;
+}
+
 .file-import-row {
 	display: grid;
 	gap: 0.45rem;
@@ -2283,6 +2475,23 @@ html.dark .python-ide-status strong {
 	min-height: 2.8rem;
 	padding: 0.55rem 0.75rem;
 	border-radius: 12px;
+}
+
+.run-control {
+	width: 5rem;
+	justify-content: center;
+	text-align: center;
+}
+
+.run-control--stop {
+	border-color: rgba(185, 28, 28, 0.68);
+	background: #b91c1c;
+	color: #ffffff;
+}
+
+.run-control--stop:hover,
+.run-control--stop:focus-visible {
+	background: #991b1b;
 }
 
 .delete-project-button {
