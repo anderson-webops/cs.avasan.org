@@ -3,13 +3,23 @@ import { api } from "@/api";
 const WHITESPACE_RE = /\s+/g;
 const FILE_EXTENSION_RE = /\.[\dA-Z]+$/i;
 const PYTHON_EXTENSION_RE = /\.py$/i;
-const PYTHON_IDE_FILE_NAME_RE = /^[A-Z_][\w.-]*\.(?:csv|json|md|py|txt)$/i;
+const SAFE_FILE_SEGMENT_RE = /^\w[\w.-]*$/;
+const ROOT_TEXT_FILE_RE = /^\w[\w.-]*\.(?:csv|json|md|py|txt)$/i;
+const IMAGE_FILE_RE = /^images\/\w[\w.-]*\.(?:gif|jpe?g|png|svg|webp)$/i;
+const AUDIO_FILE_RE = /^(?:music|sounds)\/\w[\w.-]*\.(?:mp3|ogg|wav)$/i;
+const TEXT_FILE_RE = /\.(?:csv|json|md|py|txt|svg)$/i;
+const IMAGE_EXTENSION_RE = /\.(?:gif|jpe?g|png|svg|webp)$/i;
+const SOUND_EXTENSION_RE = /\.wav$/i;
+const MUSIC_EXTENSION_RE = /\.(?:mp3|ogg)$/i;
+
+export type PythonIdeFileEncoding = "text" | "base64";
 
 export type PythonIdeMode = "data" | "pgzero" | "python" | "turtle";
 
 export interface PythonIdeFile {
 	name: string;
 	content: string;
+	encoding?: PythonIdeFileEncoding;
 }
 
 export interface PythonIdeProject {
@@ -41,8 +51,19 @@ export const pythonIdeAllowedFileExtensions = [
 	".csv",
 	".json",
 	".txt",
-	".md"
+	".md",
+	".png",
+	".jpg",
+	".jpeg",
+	".gif",
+	".svg",
+	".webp",
+	".wav",
+	".mp3",
+	".ogg"
 ] as const;
+export const pythonIdeFileUploadAccept =
+	pythonIdeAllowedFileExtensions.join(",");
 
 export const pythonIdeLibrarySupport: PythonIdeLibrarySupport[] = [
 	{
@@ -53,7 +74,7 @@ export const pythonIdeLibrarySupport: PythonIdeLibrarySupport[] = [
 	{
 		name: "Turtle and PyGame Zero",
 		status: "shim",
-		detail: "Turtle drawing, Screen.onkey, Screen.onclick, Turtle.ondrag, Actor, screen, keyboard, mouse handlers, clock, Rect, and common PyGame Zero patterns run through course-specific browser shims."
+		detail: "Turtle drawing, Screen.onkey, Screen.onclick, Turtle.ondrag, Actor, screen, keyboard, mouse handlers, clock, Rect, images/, sounds/, music/, and common PyGame Zero patterns run through course-specific browser shims."
 	},
 	{
 		name: "Data science stack",
@@ -141,6 +162,14 @@ def update():
 pgzrun.go()
 `;
 
+export const pgzeroStudentSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+	<rect width="120" height="120" rx="26" fill="#5eead4"/>
+	<circle cx="42" cy="48" r="8" fill="#0f172a"/>
+	<circle cx="78" cy="48" r="8" fill="#0f172a"/>
+	<path d="M36 75c13 14 35 14 48 0" fill="none" stroke="#0f172a" stroke-linecap="round" stroke-width="8"/>
+</svg>
+`;
+
 export const dataScienceSampleCsv = `student,pre,post
 Ari,62,81
 Bao,71,85
@@ -196,6 +225,13 @@ function getStarterFiles(mode: PythonIdeMode): PythonIdeFile[] {
 		});
 	}
 
+	if (mode === "pgzero") {
+		files.push({
+			name: "images/student.svg",
+			content: pgzeroStudentSvg
+		});
+	}
+
 	return files;
 }
 
@@ -226,7 +262,12 @@ export function pythonIdeStorageKey(userID?: string | null) {
 }
 
 export function normalizePythonFileName(value: string) {
-	const cleaned = value.trim().replaceAll(WHITESPACE_RE, "_");
+	const cleaned = value
+		.trim()
+		.replaceAll("\\", "/")
+		.replaceAll(WHITESPACE_RE, "_")
+		.replace(/^\.\/+/, "")
+		.replace(/\/+/g, "/");
 	if (!cleaned) return "";
 	const extensionMatch = cleaned.match(FILE_EXTENSION_RE);
 	if (!extensionMatch) return `${cleaned}.py`;
@@ -236,11 +277,73 @@ export function normalizePythonFileName(value: string) {
 }
 
 export function isValidPythonFileName(value: string) {
-	return PYTHON_IDE_FILE_NAME_RE.test(value);
+	if (!value || value.length > 80) return false;
+	if (value.startsWith("/") || value.includes("\\") || value.includes("//"))
+		return false;
+
+	const segments = value.split("/");
+	if (
+		segments.some(
+			segment =>
+				!segment ||
+				segment === "." ||
+				segment === ".." ||
+				!SAFE_FILE_SEGMENT_RE.test(segment)
+		)
+	) {
+		return false;
+	}
+
+	if (segments.length === 1) return ROOT_TEXT_FILE_RE.test(value);
+	if (segments.length !== 2) return false;
+	return IMAGE_FILE_RE.test(value) || AUDIO_FILE_RE.test(value);
 }
 
 export function isPythonIdePythonFile(value: string) {
 	return PYTHON_EXTENSION_RE.test(value);
+}
+
+export function isPythonIdeTextFile(value: string) {
+	return TEXT_FILE_RE.test(value);
+}
+
+export function isPythonIdeBinaryAssetFile(
+	file: Pick<PythonIdeFile, "encoding">
+) {
+	return file.encoding === "base64";
+}
+
+export function normalizeImportedPythonIdeFileName(value: string) {
+	const baseName = value.split(/[\\/]/).pop() ?? value;
+	const normalized = normalizePythonFileName(baseName);
+	if (IMAGE_EXTENSION_RE.test(normalized)) return `images/${normalized}`;
+	if (SOUND_EXTENSION_RE.test(normalized)) return `sounds/${normalized}`;
+	if (MUSIC_EXTENSION_RE.test(normalized)) return `music/${normalized}`;
+	return normalized;
+}
+
+export function getPythonIdeFileMimeType(value: string) {
+	const extension = value.match(FILE_EXTENSION_RE)?.[0]?.toLowerCase();
+	if (extension === ".gif") return "image/gif";
+	if (extension === ".jpg" || extension === ".jpeg") return "image/jpeg";
+	if (extension === ".mp3") return "audio/mpeg";
+	if (extension === ".ogg") return "audio/ogg";
+	if (extension === ".png") return "image/png";
+	if (extension === ".svg") return "image/svg+xml";
+	if (extension === ".wav") return "audio/wav";
+	if (extension === ".webp") return "image/webp";
+	return "";
+}
+
+export function getPythonIdeAssetDataUrl(file: PythonIdeFile) {
+	const mimeType = getPythonIdeFileMimeType(file.name);
+	if (!mimeType) return "";
+	if (file.encoding === "base64")
+		return `data:${mimeType};base64,${file.content}`;
+	if (mimeType === "image/svg+xml") {
+		return `data:${mimeType};charset=utf-8,${encodeURIComponent(file.content)}`;
+	}
+	return "";
 }
 
 export function getPythonIdeFileKindLabel(value: string) {
@@ -249,6 +352,9 @@ export function getPythonIdeFileKindLabel(value: string) {
 	if (extension === ".json") return "JSON";
 	if (extension === ".md") return "Markdown";
 	if (extension === ".txt") return "Text";
+	if (IMAGE_EXTENSION_RE.test(value)) return "Image";
+	if (value.startsWith("music/")) return "Music";
+	if (AUDIO_FILE_RE.test(value)) return "Sound";
 	return "Python";
 }
 

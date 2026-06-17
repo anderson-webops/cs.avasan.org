@@ -3,14 +3,19 @@ import {
 	createPythonIdeProject,
 	dataScienceSampleCsv,
 	dataScienceStarterCode,
+	getPythonIdeAssetDataUrl,
 	getPythonIdeDefaultFileContent,
 	getPythonIdeFileKindLabel,
 	getPythonIdeModeLabel,
 	getPythonIdeRunnableFile,
+	isPythonIdeBinaryAssetFile,
 	isPythonIdePythonFile,
+	isPythonIdeTextFile,
+	normalizeImportedPythonIdeFileName,
 	isValidPythonFileName,
 	normalizePythonFileName,
 	pythonIdeLibrarySupport,
+	pgzeroStudentSvg,
 	pgzeroStarterCode,
 	turtleStarterCode
 } from "../src/modules/pythonIde";
@@ -27,7 +32,7 @@ describe("python IDE project helpers", () => {
 			content: dataScienceSampleCsv
 		});
 		expect(project.files[0]?.content).toContain("pandas");
-		expect(project.files[0]?.content).toContain("read_csv(\"scores.csv\")");
+		expect(project.files[0]?.content).toContain('read_csv("scores.csv")');
 		expect(project.files[0]?.content).toContain("plt.bar");
 	});
 
@@ -39,6 +44,10 @@ describe("python IDE project helpers", () => {
 		expect(project.files[0]?.content).toBe(pgzeroStarterCode);
 		expect(project.files[0]?.content).toContain("Actor(");
 		expect(project.files[0]?.content).toContain("pgzrun.go()");
+		expect(project.files[1]).toEqual({
+			name: "images/student.svg",
+			content: pgzeroStudentSvg
+		});
 	});
 
 	it("creates interactive Turtle starter projects", () => {
@@ -91,30 +100,67 @@ describe("python IDE project helpers", () => {
 	});
 
 	it("normalizes project file names without accepting unsafe names", () => {
-		expect(normalizePythonFileName("helper tools")).toBe(
-			"helper_tools.py"
-		);
+		expect(normalizePythonFileName("helper tools")).toBe("helper_tools.py");
 		expect(normalizePythonFileName("lesson data.CSV")).toBe(
 			"lesson_data.csv"
 		);
 		expect(isValidPythonFileName("helper_tools.py")).toBe(true);
 		expect(isValidPythonFileName("scores.csv")).toBe(true);
 		expect(isValidPythonFileName("notes.md")).toBe(true);
+		expect(isValidPythonFileName("images/player.svg")).toBe(true);
+		expect(isValidPythonFileName("sounds/eep.wav")).toBe(true);
+		expect(isValidPythonFileName("music/theme.mp3")).toBe(true);
 		expect(isValidPythonFileName("../helper.py")).toBe(false);
+		expect(isValidPythonFileName("images/../player.svg")).toBe(false);
+		expect(isValidPythonFileName("images/player.py")).toBe(false);
 		expect(isValidPythonFileName("script.exe")).toBe(false);
 	});
 
 	it("labels file kinds and creates safe default content", () => {
 		expect(getPythonIdeFileKindLabel("scores.csv")).toBe("CSV");
 		expect(getPythonIdeFileKindLabel("notes.md")).toBe("Markdown");
+		expect(getPythonIdeFileKindLabel("images/player.png")).toBe("Image");
+		expect(getPythonIdeFileKindLabel("sounds/eep.wav")).toBe("Sound");
+		expect(getPythonIdeFileKindLabel("music/theme.mp3")).toBe("Music");
 		expect(getPythonIdeDefaultFileContent("data.json")).toContain(
-			"\"items\""
+			'"items"'
 		);
 		expect(getPythonIdeDefaultFileContent("main.py")).toContain(
 			"Python code"
 		);
 		expect(isPythonIdePythonFile("main.py")).toBe(true);
 		expect(isPythonIdePythonFile("scores.csv")).toBe(false);
+	});
+
+	it("normalizes imported course assets into PyGame Zero folders", () => {
+		expect(normalizeImportedPythonIdeFileName("player.PNG")).toBe(
+			"images/player.png"
+		);
+		expect(normalizeImportedPythonIdeFileName("eep.wav")).toBe(
+			"sounds/eep.wav"
+		);
+		expect(normalizeImportedPythonIdeFileName("theme.MP3")).toBe(
+			"music/theme.mp3"
+		);
+		expect(isPythonIdeTextFile("images/player.svg")).toBe(true);
+		expect(isPythonIdeTextFile("images/player.png")).toBe(false);
+		expect(isPythonIdeBinaryAssetFile({ encoding: "base64" })).toBe(true);
+	});
+
+	it("builds data URLs for project assets", () => {
+		expect(
+			getPythonIdeAssetDataUrl({
+				name: "images/player.svg",
+				content: "<svg></svg>"
+			})
+		).toBe("data:image/svg+xml;charset=utf-8,%3Csvg%3E%3C%2Fsvg%3E");
+		expect(
+			getPythonIdeAssetDataUrl({
+				name: "sounds/eep.wav",
+				content: "UklGRg==",
+				encoding: "base64"
+			})
+		).toBe("data:audio/wav;base64,UklGRg==");
 	});
 
 	it("runs the selected Python file or falls back from resource files", () => {

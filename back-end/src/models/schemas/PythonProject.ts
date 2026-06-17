@@ -5,7 +5,12 @@ import mongoose, { Schema } from "mongoose";
 const pythonProjectFileSchema = new Schema(
 	{
 		name: { type: String, required: true, trim: true },
-		content: { type: String, default: "" }
+		content: { type: String, default: "" },
+		encoding: {
+			type: String,
+			enum: ["text", "base64"],
+			default: "text"
+		}
 	},
 	{ _id: false }
 );

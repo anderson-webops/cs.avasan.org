@@ -27,7 +27,7 @@ interface PyodideAPI {
 	FS: {
 		analyzePath: (path: string) => { exists: boolean };
 		mkdirTree: (path: string) => void;
-		writeFile: (path: string, data: string) => void;
+		writeFile: (path: string, data: string | Uint8Array) => void;
 	};
 	loadPackage?: (packages: string | string[]) => Promise<void>;
 	loadPackagesFromImports: (code: string) => Promise<void>;
@@ -93,6 +93,10 @@ export interface GameBridge {
 	consumeLoopRequest: () => boolean;
 	startLoop: (tick: () => Promise<void>) => void;
 	stopLoop: () => void;
+	playSound: (name: string) => void;
+	stopSound: (name: string) => void;
+	playMusic: (name: string) => void;
+	stopMusic: () => void;
 	log: (text: string) => void;
 }
 
@@ -856,24 +860,30 @@ class _Clock:
 
 clock = _Clock()
 
-class _NoopSound:
+class _Sound:
+    def __init__(self, name):
+        self.name = str(name)
+
     def play(self, *_args, **_kwargs):
+        _bridge.playSound(self.name)
         return None
 
     def stop(self):
+        _bridge.stopSound(self.name)
         return None
 
 class _SoundLibrary:
-    def __getattr__(self, _name):
-        return _NoopSound()
+    def __getattr__(self, name):
+        return _Sound(name)
 
 sounds = _SoundLibrary()
 
 class _Music:
     def play(self, name):
-        _bridge.log("music.play({})".format(name))
+        _bridge.playMusic(str(name))
 
     def stop(self):
+        _bridge.stopMusic()
         return None
 
 music = _Music()
@@ -1234,6 +1244,36 @@ function ensureProjectDirectory(pyodide: PyodideAPI) {
 	}
 }
 
+function decodeBase64File(content: string) {
+	const binary = atob(content);
+	const bytes = new Uint8Array(binary.length);
+	for (let index = 0; index < binary.length; index += 1) {
+		bytes[index] = binary.charCodeAt(index);
+	}
+	return bytes;
+}
+
+function ensureProjectFileDirectory(pyodide: PyodideAPI, fileName: string) {
+	const parts = fileName.split("/");
+	const folderParts = parts.slice(0, -1);
+	if (!folderParts.length) return;
+
+	const directory = `${PROJECT_ROOT}/${folderParts.join("/")}`;
+	if (!pyodide.FS.analyzePath(directory).exists) {
+		pyodide.FS.mkdirTree(directory);
+	}
+}
+
+function writeProjectFile(pyodide: PyodideAPI, file: PythonIdeFile) {
+	ensureProjectFileDirectory(pyodide, file.name);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/${file.name}`,
+		file.encoding === "base64"
+			? decodeBase64File(file.content)
+			: file.content
+	);
+}
+
 function importedTopLevelModules(files: PythonIdeFile[]) {
 	const modules = new Set<string>();
 
@@ -1405,7 +1445,7 @@ export async function runPythonProject(options: RunPythonProjectOptions) {
 	warnForBrowserLimitedLibraries(importedModules, options.onOutput);
 
 	for (const file of options.files) {
-		pyodide.FS.writeFile(`${PROJECT_ROOT}/${file.name}`, file.content);
+		writeProjectFile(pyodide, file);
 	}
 	writeRuntimeShims(pyodide);
 
@@ -1442,9 +1482,17 @@ except Exception:
 `);
 
 	await pyodide.runPythonAsync(`
-__name__ = "__main__"
-exec(compile(open(${escapePythonString(activeFile.name)}, "r", encoding="utf-8").read(), ${escapePythonString(activeFile.name)}, "exec"), globals())
-`);
+import __main__
+__main__.__dict__["__name__"] = "__main__"
+exec(
+    compile(
+        open(${escapePythonString(activeFile.name)}, "r", encoding="utf-8").read(),
+        ${escapePythonString(activeFile.name)},
+        "exec",
+    ),
+    __main__.__dict__,
+	)
+	`);
 
 	await pyodide.runPythonAsync(`
 try:
@@ -1457,16 +1505,16 @@ except Exception as error:
 
 	if (options.mode === "pgzero") {
 		await pyodide.runPythonAsync(`
-import _classes_pgzero
-_classes_pgzero.__classes_pgzero_start(globals())
-`);
-		if (options.gameBridge.consumeLoopRequest()) {
-			options.gameBridge.startLoop(async () => {
-				await pyodide.runPythonAsync(`
-import _classes_pgzero
-_classes_pgzero.__classes_pgzero_tick()
-`);
-			});
-		}
+	import __main__
+	import _classes_pgzero
+	_classes_pgzero.__classes_pgzero_start(__main__.__dict__)
+	`);
+		options.gameBridge.consumeLoopRequest();
+		options.gameBridge.startLoop(async () => {
+			await pyodide.runPythonAsync(`
+	import _classes_pgzero
+	_classes_pgzero.__classes_pgzero_tick()
+	`);
+		});
 	}
 }

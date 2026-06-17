@@ -23,15 +23,20 @@ import {
 	createRemotePythonIdeProject,
 	deleteRemotePythonIdeProject,
 	fetchPythonIdeProjects,
+	getPythonIdeAssetDataUrl,
 	getPythonIdeDefaultFileContent,
 	getPythonIdeFileKindLabel,
 	getPythonIdeModeLabel,
 	getPythonIdeRunnableFile,
+	isPythonIdeBinaryAssetFile,
 	isPythonIdePythonFile,
+	isPythonIdeTextFile,
 	isValidPythonFileName,
 	loadLocalPythonProjects,
+	normalizeImportedPythonIdeFileName,
 	normalizePythonFileName,
 	pythonIdeAllowedFileExtensions,
+	pythonIdeFileUploadAccept,
 	pythonIdeLibrarySupport,
 	saveLocalPythonProjects,
 	updateRemotePythonIdeProject
@@ -86,6 +91,16 @@ interface GameInputEvent {
 	relY?: number;
 }
 
+interface CachedGameImage {
+	element: HTMLImageElement;
+	failed: boolean;
+	loaded: boolean;
+	src: string;
+}
+
+const imageAssetExtensions = [".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"];
+const audioAssetExtensions = [".wav", ".mp3", ".ogg"];
+
 const app = useAppStore();
 const { currentUser } = storeToRefs(app);
 
@@ -108,6 +123,8 @@ const turtleClickHandlers = new Map<string, (x: number, y: number) => void>();
 const turtleDragHandlers = new Map<string, (x: number, y: number) => void>();
 const gameKeysDown = new Set<string>();
 const gameEvents: GameInputEvent[] = [];
+const gameImageCache = new Map<string, CachedGameImage>();
+const gameSoundAudio = new Map<string, HTMLAudioElement>();
 
 let saveTimer: ReturnType<typeof window.setTimeout> | null = null;
 let suppressAutoSave = false;
@@ -117,6 +134,7 @@ let gameLoopRequested = false;
 let gameTickInFlight = false;
 let activeTurtleDragButton: string | null = null;
 let lastGamePointerPoint: { x: number; y: number } | null = null;
+let gameMusicAudio: HTMLAudioElement | null = null;
 
 const turtleState: TurtleState = {
 	x: 0,
@@ -158,10 +176,24 @@ const activeFileContent = computed({
 	get: () => activeFile.value?.content ?? "",
 	set: (content: string) => {
 		if (!activeFile.value || !selectedProject.value) return;
+		if (isPythonIdeBinaryAssetFile(activeFile.value)) return;
 		activeFile.value.content = content;
 		touchSelectedProject();
 		scheduleSave();
 	}
+});
+
+const activeFileDataUrl = computed(() =>
+	activeFile.value ? getPythonIdeAssetDataUrl(activeFile.value) : ""
+);
+const activeFileIsBinaryAsset = computed(() =>
+	activeFile.value ? isPythonIdeBinaryAssetFile(activeFile.value) : false
+);
+const activeFilePreviewKind = computed(() => {
+	if (!activeFileDataUrl.value) return "";
+	if (activeFileDataUrl.value.startsWith("data:image/")) return "image";
+	if (activeFileDataUrl.value.startsWith("data:audio/")) return "audio";
+	return "";
 });
 
 const canSyncToAccount = computed(() => !!currentUser.value?._id);
@@ -399,7 +431,7 @@ function addFile() {
 	if (!isValidPythonFileName(fileName)) {
 		appendOutput(
 			"stderr",
-			`Use a safe file name ending in ${pythonIdeAllowedFileExtensions.join(", ")}.`
+			`Use a safe root code/data file or images/, sounds/, music/ asset file ending in ${pythonIdeAllowedFileExtensions.join(", ")}.`
 		);
 		return;
 	}
@@ -416,6 +448,92 @@ function addFile() {
 	newFileName.value = "";
 	touchSelectedProject();
 	scheduleSave();
+}
+
+function readFileAsDataUrl(file: File) {
+	return new Promise<string>((resolve, reject) => {
+		const reader = new FileReader();
+		reader.addEventListener("load", () => {
+			resolve(typeof reader.result === "string" ? reader.result : "");
+		});
+		reader.addEventListener(
+			"error",
+			() => reject(new Error(`Could not import ${file.name}.`)),
+			{ once: true }
+		);
+		reader.readAsDataURL(file);
+	});
+}
+
+async function readImportedProjectFile(file: File, fileName: string) {
+	if (isPythonIdeTextFile(fileName)) {
+		return {
+			content: await file.text(),
+			encoding: "text" as const
+		};
+	}
+
+	const dataUrl = await readFileAsDataUrl(file);
+	return {
+		content: dataUrl.includes(",")
+			? (dataUrl.split(",")[1] ?? "")
+			: dataUrl,
+		encoding: "base64" as const
+	};
+}
+
+async function importProjectFiles(event: Event) {
+	const project = selectedProject.value;
+	const input = event.target as HTMLInputElement;
+	const files = [...(input.files ?? [])];
+	if (!project || !files.length) return;
+
+	const skippedFiles: string[] = [];
+	let importedCount = 0;
+
+	for (const file of files) {
+		const fileName = normalizeImportedPythonIdeFileName(file.name);
+		if (!isValidPythonFileName(fileName)) {
+			skippedFiles.push(file.name);
+			continue;
+		}
+
+		const imported = await readImportedProjectFile(file, fileName);
+		const nextFile: PythonIdeFile = {
+			name: fileName,
+			content: imported.content,
+			encoding: imported.encoding
+		};
+		const existingIndex = project.files.findIndex(
+			candidate => candidate.name === fileName
+		);
+
+		if (existingIndex >= 0) {
+			project.files.splice(existingIndex, 1, nextFile);
+		} else {
+			project.files.push(nextFile);
+		}
+
+		project.activeFileName = fileName;
+		importedCount += 1;
+	}
+
+	if (importedCount) {
+		touchSelectedProject();
+		scheduleSave();
+		appendOutput(
+			"system",
+			`Imported ${importedCount} project file${importedCount === 1 ? "" : "s"}.`
+		);
+	}
+	if (skippedFiles.length) {
+		appendOutput(
+			"stderr",
+			`Skipped unsupported file${skippedFiles.length === 1 ? "" : "s"}: ${skippedFiles.join(", ")}.`
+		);
+	}
+
+	input.value = "";
 }
 
 function deleteFile(file: PythonIdeFile) {
@@ -559,8 +677,10 @@ function setGameCanvasTransform() {
 
 	const rect = canvas.getBoundingClientRect();
 	const dpr = window.devicePixelRatio || 1;
-	canvas.width = Math.max(1, Math.floor(rect.width * dpr));
-	canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+	const nextWidth = Math.max(1, Math.floor(rect.width * dpr));
+	const nextHeight = Math.max(1, Math.floor(rect.height * dpr));
+	if (canvas.width !== nextWidth) canvas.width = nextWidth;
+	if (canvas.height !== nextHeight) canvas.height = nextHeight;
 	context.setTransform(
 		dpr * (rect.width / gameState.width),
 		0,
@@ -587,6 +707,7 @@ function resetGameCanvas(width = 640, height = 400) {
 	gameEvents.length = 0;
 	gameLoopRequested = false;
 	gameTickInFlight = false;
+	stopAllGameAudio();
 	gameState.width = Math.max(1, width);
 	gameState.height = Math.max(1, height);
 	gameState.background = "#111827";
@@ -602,11 +723,129 @@ function stopGameLoop() {
 	gameTickInFlight = false;
 }
 
+function stopAllGameAudio() {
+	for (const audio of gameSoundAudio.values()) {
+		audio.pause();
+		audio.currentTime = 0;
+	}
+	gameSoundAudio.clear();
+	stopGameMusic();
+}
+
+function assetCandidateNames(
+	folder: "images" | "music" | "sounds",
+	name: string,
+	extensions: string[]
+) {
+	const normalized = name
+		.trim()
+		.replaceAll("\\", "/")
+		.replace(/^\/+/, "")
+		.replace(/^images\/|^music\/|^sounds\//i, "");
+	if (!normalized) return [];
+	if (/\.[\dA-Z]+$/i.test(normalized)) return [`${folder}/${normalized}`];
+	return extensions.map(extension => `${folder}/${normalized}${extension}`);
+}
+
+function findProjectAssetFile(
+	folder: "images" | "music" | "sounds",
+	name: string,
+	extensions: string[]
+) {
+	const project = selectedProject.value;
+	if (!project) return null;
+	const candidateNames = new Set(
+		assetCandidateNames(folder, name, extensions)
+	);
+	return project.files.find(file => candidateNames.has(file.name)) ?? null;
+}
+
+function getGameImageEntry(file: PythonIdeFile) {
+	const src = getPythonIdeAssetDataUrl(file);
+	if (!src) return null;
+
+	const cached = gameImageCache.get(file.name);
+	if (cached?.src === src) return cached;
+
+	const entry: CachedGameImage = {
+		element: new Image(),
+		failed: false,
+		loaded: false,
+		src
+	};
+	entry.element.addEventListener("load", () => {
+		entry.loaded = true;
+	});
+	entry.element.addEventListener("error", () => {
+		entry.failed = true;
+	});
+	entry.element.src = src;
+	gameImageCache.set(file.name, entry);
+	return entry;
+}
+
+function playProjectAudio(
+	folder: "music" | "sounds",
+	name: string,
+	loop = false
+) {
+	const file = findProjectAssetFile(folder, name, audioAssetExtensions);
+	if (!file) {
+		appendOutput("system", `Missing ${folder} asset: ${name}`);
+		return null;
+	}
+
+	const src = getPythonIdeAssetDataUrl(file);
+	if (!src) {
+		appendOutput(
+			"system",
+			`Cannot play ${file.name}; import an audio file first.`
+		);
+		return null;
+	}
+
+	const audio = new Audio(src);
+	audio.loop = loop;
+	void audio.play().catch((error: unknown) => {
+		appendOutput(
+			"system",
+			error instanceof Error
+				? `Audio playback was blocked: ${error.message}`
+				: "Audio playback was blocked."
+		);
+	});
+	return audio;
+}
+
+function playGameSound(name: string) {
+	const audio = playProjectAudio("sounds", name);
+	if (audio) gameSoundAudio.set(name, audio);
+}
+
+function stopGameSound(name: string) {
+	const audio = gameSoundAudio.get(name);
+	if (!audio) return;
+	audio.pause();
+	audio.currentTime = 0;
+	gameSoundAudio.delete(name);
+}
+
+function playGameMusic(name: string) {
+	stopGameMusic();
+	gameMusicAudio = playProjectAudio("music", name, true);
+}
+
+function stopGameMusic() {
+	if (!gameMusicAudio) return;
+	gameMusicAudio.pause();
+	gameMusicAudio.currentTime = 0;
+	gameMusicAudio = null;
+}
+
 function startGameLoop(tick: () => Promise<void>) {
 	stopGameLoop();
 
-	const runFrame = () => {
-		gameAnimationFrame = requestAnimationFrame(runFrame);
+	const runTick = () => {
 		if (gameTickInFlight) return;
 
 		gameTickInFlight = true;
@@ -623,6 +862,12 @@ function startGameLoop(tick: () => Promise<void>) {
 			});
 	};
 
+	const runFrame = () => {
+		gameAnimationFrame = requestAnimationFrame(runFrame);
+		runTick();
+	};
+
+	runTick();
 	runFrame();
 }
 
@@ -636,15 +881,31 @@ function drawGameActor(
 ) {
 	const context = setGameCanvasTransform();
 	if (!context) return;
+	const assetFile = findProjectAssetFile(
+		"images",
+		image,
+		imageAssetExtensions
+	);
+	const assetImage = assetFile ? getGameImageEntry(assetFile) : null;
 
 	context.save();
 	context.translate(x, y);
 	context.rotate((angle * Math.PI) / 180);
+	const left = -width / 2;
+	const top = -height / 2;
+	if (
+		assetImage?.loaded &&
+		!assetImage.failed &&
+		assetImage.element.naturalWidth > 0
+	) {
+		context.drawImage(assetImage.element, left, top, width, height);
+		context.restore();
+		return;
+	}
+
 	context.fillStyle = "#5eead4";
 	context.strokeStyle = "#134e4a";
 	context.lineWidth = 3;
-	const left = -width / 2;
-	const top = -height / 2;
 	context.beginPath();
 	context.roundRect(left, top, width, height, 12);
 	context.fill();
@@ -843,6 +1104,10 @@ const gameBridge: GameBridge = {
 	},
 	startLoop: startGameLoop,
 	stopLoop: stopGameLoop,
+	playSound: playGameSound,
+	stopSound: stopGameSound,
+	playMusic: playGameMusic,
+	stopMusic: stopGameMusic,
 	log(text: string) {
 		appendOutput("system", text);
 	}
@@ -1265,6 +1530,15 @@ onBeforeUnmount(() => {
 							Add
 						</button>
 					</div>
+					<label class="file-import-row">
+						<span>Import images/audio</span>
+						<input
+							:accept="pythonIdeFileUploadAccept"
+							multiple
+							type="file"
+							@change="importProjectFiles"
+						/>
+					</label>
 				</div>
 
 				<div class="sidebar-block library-support">
@@ -1349,12 +1623,32 @@ onBeforeUnmount(() => {
 						<div class="panel-header">
 							<span>{{ activeFile?.name ?? "main.py" }}</span>
 							<small
-								>Python files can import each other; CSV, JSON,
-								text, and Markdown files can be read by
-								filename.</small
+								>Python files can import each other; data and
+								asset files can be read by filename.</small
 							>
 						</div>
+						<div
+							v-if="activeFileIsBinaryAsset"
+							class="asset-file-preview"
+						>
+							<img
+								v-if="activeFilePreviewKind === 'image'"
+								:alt="activeFile?.name"
+								:src="activeFileDataUrl"
+							/>
+							<audio
+								v-else-if="activeFilePreviewKind === 'audio'"
+								controls
+								:src="activeFileDataUrl"
+								:title="activeFile?.name"
+							/>
+							<p>
+								{{ activeFile?.name }} is stored as an imported
+								asset for this project.
+							</p>
+						</div>
 						<textarea
+							v-else
 							v-model="activeFileContent"
 							autocapitalize="off"
 							autocomplete="off"
@@ -1699,6 +1993,24 @@ html.dark .python-ide-status strong {
 	gap: 0.5rem;
 }
 
+.file-import-row {
+	display: grid;
+	gap: 0.45rem;
+	padding: 0.75rem;
+	border: 1px dashed rgba(15, 118, 110, 0.4);
+	border-radius: 12px;
+	background: rgba(240, 253, 250, 0.56);
+	color: var(--color-ink);
+	font-weight: 800;
+}
+
+.file-import-row input {
+	width: 100%;
+	color: var(--color-ink-muted);
+	font-size: 0.84rem;
+	font-weight: 600;
+}
+
 .new-file-row input,
 .editor-toolbar input,
 .editor-toolbar select,
@@ -1846,6 +2158,33 @@ html.dark .python-ide-status strong {
 	line-height: 1.58;
 	tab-size: 4;
 	white-space: pre;
+}
+
+.asset-file-preview {
+	min-height: 100%;
+	display: grid;
+	place-items: center;
+	gap: 1rem;
+	padding: 1.25rem;
+	background: #07111f;
+	color: #d7fbe8;
+	text-align: center;
+}
+
+.asset-file-preview img {
+	max-width: min(100%, 34rem);
+	max-height: 28rem;
+	object-fit: contain;
+}
+
+.asset-file-preview audio {
+	width: min(100%, 34rem);
+}
+
+.asset-file-preview p {
+	color: #b7d4c6;
+	font-size: 0.9rem;
+	font-weight: 700;
 }
 
 .result-panel {

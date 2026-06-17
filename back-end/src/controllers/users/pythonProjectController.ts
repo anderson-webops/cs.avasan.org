@@ -4,15 +4,41 @@ import { Types } from "mongoose";
 import { z } from "zod";
 import { PythonProject } from "../../models/schemas/PythonProject.js";
 
-const PROJECT_FILE_NAME_RE = /^[A-Z_][\w.-]*\.(?:csv|json|md|py|txt)$/i;
+const SAFE_FILE_SEGMENT_RE = /^\w[\w.-]*$/;
+const ROOT_TEXT_FILE_RE = /^\w[\w.-]*\.(?:csv|json|md|py|txt)$/i;
+const IMAGE_FILE_RE = /^images\/\w[\w.-]*\.(?:gif|jpe?g|png|svg|webp)$/i;
+const AUDIO_FILE_RE = /^(?:music|sounds)\/\w[\w.-]*\.(?:mp3|ogg|wav)$/i;
 const PYTHON_FILE_NAME_RE = /\.py$/i;
-const MAX_PROJECT_FILES = 24;
-const MAX_FILE_LENGTH = 80_000;
-const MAX_PROJECT_LENGTH = 500_000;
-const DEFAULT_PROJECT_FILE = {
+const MAX_PROJECT_FILES = 32;
+const MAX_FILE_LENGTH = 1_000_000;
+const MAX_PROJECT_LENGTH = 5_000_000;
+const DEFAULT_PROJECT_FILE: PythonProjectFile = {
 	name: "main.py",
 	content: "print(\"Hello, Python!\")\n"
 };
+
+function isSafeProjectFileName(value: string) {
+	if (!value || value.length > 80) return false;
+	if (value.startsWith("/") || value.includes("\\") || value.includes("//"))
+		return false;
+
+	const segments = value.split("/");
+	if (
+		segments.some(
+			segment =>
+				!segment
+				|| segment === "."
+				|| segment === ".."
+				|| !SAFE_FILE_SEGMENT_RE.test(segment)
+		)
+	) {
+		return false;
+	}
+
+	if (segments.length === 1) return ROOT_TEXT_FILE_RE.test(value);
+	if (segments.length !== 2) return false;
+	return IMAGE_FILE_RE.test(value) || AUDIO_FILE_RE.test(value);
+}
 
 const projectModeSchema = z.enum(["data", "pgzero", "python", "turtle"]);
 const projectFileSchema = z.object({
@@ -21,11 +47,12 @@ const projectFileSchema = z.object({
 		.trim()
 		.min(1)
 		.max(80)
-		.regex(
-			PROJECT_FILE_NAME_RE,
-			"Use a safe file name ending in .py, .csv, .json, .txt, or .md"
+		.refine(
+			isSafeProjectFileName,
+			"Use a safe root .py/.csv/.json/.txt/.md file or an images/, sounds/, or music/ asset file"
 		),
-	content: z.string().max(MAX_FILE_LENGTH)
+	content: z.string().max(MAX_FILE_LENGTH),
+	encoding: z.enum(["text", "base64"]).optional()
 });
 const projectFilesSchema = z
 	.array(projectFileSchema)
@@ -72,7 +99,8 @@ function normalizeProjectFiles(files: PythonProjectFile[] | undefined) {
 		seen.add(name);
 		cleanFiles.push({
 			name,
-			content: file.content
+			content: file.content,
+			encoding: file.encoding ?? "text"
 		});
 	}
 

@@ -1,10 +1,12 @@
 import type { Types } from "mongoose";
 
 export type PythonProjectMode = "data" | "pgzero" | "python" | "turtle";
+export type PythonProjectFileEncoding = "text" | "base64";
 
 export interface PythonProjectFile {
 	name: string;
 	content: string;
+	encoding?: PythonProjectFileEncoding;
 }
 
 export interface IPythonProject {
