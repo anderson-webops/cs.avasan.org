@@ -1394,15 +1394,17 @@ describe("course text quality normalization", () => {
 
 	it("formats grouped lesson arcs as readable ordered markdown lists", async () => {
 		const store = useCoursesStore();
-		const [course, scratchCourse, machineLearning, aiLevel1] =
+		const [course, scratchCourse, scratchLevel2, machineLearning, aiLevel1] =
 			await Promise.all([
 				store.loadCourseById("python-level-3"),
 				loadRawCourse("scratch-level-1"),
+				loadRawCourse("scratch-level-2"),
 				loadRawCourse("machine-learning"),
 				loadRawCourse("ai-level-1")
 			]);
 		expect(course).not.toBeNull();
 		expect(scratchCourse).not.toBeNull();
+		expect(scratchLevel2).not.toBeNull();
 		expect(machineLearning).not.toBeNull();
 		expect(aiLevel1).not.toBeNull();
 
@@ -1436,6 +1438,13 @@ describe("course text quality normalization", () => {
 		);
 		expect(scratchStudio!.content).not.toMatch(
 			/\n \n\n\*\*Checkpoints:\*\*/
+		);
+
+		const platformerPal = findItem(scratchLevel2!, /Platformer Pal/);
+		expect(platformerPal.content).toMatch(/^1\. Inspect/m);
+		expect(platformerPal.content).toMatch(/\n2\. When the green flag/);
+		expect(platformerPal.content).not.toMatch(
+			/1\. Inspect[^\n]+ 2\. When the green flag/
 		);
 
 		const neuralNetworks = machineLearning!.modules
@@ -2068,11 +2077,35 @@ describe("course text quality normalization", () => {
 		expect(text).toContain("Periodic Table Reference Set");
 		expect(text).toContain("Royal Society of Chemistry periodic table");
 		expect(text).toContain("IUPAC periodic table");
+		expect(text).not.toMatch(/\. the activity claim/);
+		expect(text).not.toMatch(
+			/\b(?:A complete|The final|Final) the activity (?:result|note|response|answer|explanation|work)\b/i
+		);
+		expect(text).not.toMatch(
+			/\*\*Reference purpose:\*\*[^\n]+ \*\*(?:Resource bank|Reference links|Use):\*\*/
+		);
 		expect(text).toContain(
 			"Limiting Reactants, Leftovers, and Heat Released"
 		);
 		expect(text).toContain("1.5 mol O₂");
 		expect(text).toContain("285.8 kJ");
+
+		const coreReferences = findItem(course!, /Core Chemistry References/);
+		expect(coreReferences.content).toMatch(
+			/\*\*Reference purpose:\*\*[\s\S]+?\n\n\*\*Resource bank:\*\*/
+		);
+		expect(coreReferences.content).toMatch(/\n\n\*\*Use:\*\*/);
+
+		const periodicTableReferences = findItem(
+			course!,
+			/^Periodic Table Reference Set$/
+		);
+		expect(periodicTableReferences.content).toMatch(
+			/\*\*Reference purpose:\*\*[\s\S]+?\n\n\*\*Reference links:\*\*/
+		);
+		expect(periodicTableReferences.content).toMatch(
+			/response\. The activity claim answers/
+		);
 
 		const bondEnergyLesson = items.find(
 			item => item.title === "Bond Energies and Reaction Estimates"

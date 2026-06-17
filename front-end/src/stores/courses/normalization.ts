@@ -768,7 +768,7 @@ function formatInlineNumberedLists(text: string) {
 					? text[start - 1]
 					: "";
 
-		if (/[\w.)\]"'`]/.test(previous)) continue;
+		if (/\w/.test(previous)) continue;
 
 		markers.push({
 			number: Number(match[2]),
@@ -830,9 +830,56 @@ function formatInlineNumberedLists(text: string) {
 	return `${result}${text.slice(cursor)}`;
 }
 
+const supportLabelPattern = [
+	"Focus",
+	"Goal",
+	"Outcome",
+	"Expected outcome",
+	"Verification focus",
+	"Readable output",
+	"Result quality",
+	"Project goal",
+	"Required outcome",
+	"Include",
+	"Required fields",
+	"Notes",
+	"Required notes",
+	"Steps",
+	"Work sequence",
+	"Build steps",
+	"Build sequence",
+	"Checkpoints",
+	"Completion checks",
+	"Evidence target",
+	"Evidence targets",
+	"Extension",
+	"Concept path",
+	"Common pitfalls",
+	"Mastery check",
+	"Readiness check",
+	"Evidence of proficiency",
+	"If this is difficult",
+	"Investigation",
+	"Remote investigation",
+	"Explanation",
+	"Science explanation",
+	"Output",
+	"Practice target",
+	"Visible pattern",
+	"Key idea",
+	"Skill target",
+	"Reference purpose",
+	"Resource bank",
+	"Reference links",
+	"Use"
+].join("|");
+
 function formatSupportLabels(text: string) {
 	return text.replace(
-		/(\S)[ \t]+(\*\*(?:Focus|Goal|Outcome|Expected outcome|Verification focus|Readable output|Result quality|Project goal|Required outcome|Include|Required fields|Notes|Required notes|Steps|Work sequence|Build steps|Build sequence|Checkpoints|Completion checks|Evidence target|Evidence targets|Extension|Concept path|Common pitfalls|Mastery check|Readiness check|Evidence of proficiency|If this is difficult|Investigation|Remote investigation|Explanation|Science explanation|Output|Practice target|Visible pattern|Key idea|Skill target):\*\*)/g,
+		new RegExp(
+			`(\\S)[ \\t]+(\\*\\*(?:${supportLabelPattern}):\\*\\*)`,
+			"g"
+		),
 		(_match, prefix: string, label: string, offset: number) => {
 			const lineStart = text.lastIndexOf("\n", offset) + 1;
 			const indentation =
@@ -859,6 +906,63 @@ function normalizeSupportLabelText(text: string) {
 		.replace(/\*\*Science explanation:\*\*/gi, "**Explanation:**");
 }
 
+const generatedReferencePattern = [
+	"activity",
+	"project",
+	"response",
+	"work",
+	"analysis",
+	"program",
+	"practice set",
+	"checkpoint",
+	"solution",
+	"page",
+	"lab",
+	"system check",
+	"AP Java task",
+	"AP-style exercise",
+	"Java checkpoint",
+	"traced solution",
+	"practice task",
+	"Java implementation",
+	"class exercise",
+	"code checkpoint",
+	"object-design task",
+	"practice build",
+	"type-model task",
+	"method-contract exercise",
+	"API checkpoint",
+	"object-state build",
+	"collection exercise",
+	"Java design task",
+	"systems artifact",
+	"command-line build",
+	"runtime check",
+	"diagnostic run",
+	"low-level implementation"
+].join("|");
+
+function normalizeSentenceStartReferences(text: string) {
+	return text.replace(
+		new RegExp(
+			`([.!?]\\s+)(the (?:${generatedReferencePattern})\\b)`,
+			"gi"
+		),
+		(_match, prefix: string, reference: string) =>
+			`${prefix}${capitalizeSentence(reference)}`
+	);
+}
+
+function normalizeRepeatedReferenceNouns(text: string) {
+	return text.replace(
+		new RegExp(
+			`\\b(A complete|The final|Final) the (?:${generatedReferencePattern}) (result|note|response|answer|explanation|work)\\b`,
+			"gi"
+		),
+		(_match, prefix: string, noun: string) => `${prefix} ${noun}`
+	);
+}
+
 function formatNamedCheckpointPrompts(text: string) {
 	return text
 		.replace(/\n([a-z][a-z ]*-\d+(?:,\d+)*:)\s*/gi, "\n\n- **$1** ")
@@ -870,11 +974,19 @@ function formatVisibleMarkdownStructure(text: string) {
 		formatSupportLabels(formatInlineNumberedLists(text))
 	);
 
-	if (!formatted.includes("Core topics in this module:")) return formatted;
+	if (!formatted.includes("Core topics in this module:")) {
+		return normalizeRepeatedReferenceNouns(
+			normalizeSentenceStartReferences(formatted)
+		);
+	}
 
-	return formatted.replace(
-		/\n\n(\*\*(?:Practice target|Visible pattern|Key idea|Skill target):\*\*)/g,
-		"\n\n   $1"
+	return normalizeRepeatedReferenceNouns(
+		normalizeSentenceStartReferences(
+			formatted.replace(
+				/\n\n(\*\*(?:Practice target|Visible pattern|Key idea|Skill target):\*\*)/g,
+				"\n\n   $1"
+			)
+		)
 	);
 }
 
@@ -4526,6 +4638,10 @@ function compactGeneratedProjectSupport(
 		);
 
 		return compacted
+			.replace(
+				new RegExp(`(^|[.!?]\\s+)${escapedReference}\\b`, "g"),
+				(_match, prefix: string) => `${prefix}${capitalizedReference}`
+			)
 			.replace(
 				new RegExp(`\\bthe ${escapedReference}\\b`, "g"),
 				reference
