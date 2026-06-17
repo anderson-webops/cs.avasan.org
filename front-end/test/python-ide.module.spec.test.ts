@@ -197,16 +197,20 @@ describe("python IDE project helpers", () => {
 			"utf8"
 		);
 
-		expect(runtimeSource).toContain("const LOOP_ITERATION_LIMIT");
+		expect(runtimeSource).toContain("const FOR_LOOP_ITERATION_LIMIT");
+		expect(runtimeSource).toContain("const WHILE_LOOP_ITERATION_LIMIT");
 		expect(runtimeSource).toContain("class __ClassesLoopGuardTransformer");
-		expect(runtimeSource).toContain("def __classes_loop_guard():");
+		expect(runtimeSource).toContain("def __classes_loop_guard(kind):");
+		expect(runtimeSource).toContain("__classes_loop_iteration_limits");
 		expect(runtimeSource).toContain("def __classes_sleep(_seconds=0):");
 		expect(runtimeSource).toContain("__classes_time.sleep = __classes_sleep");
 		expect(runtimeSource).toContain("__classes_compile_student_source(");
 		expect(runtimeSource).toContain("visit_While");
 		expect(runtimeSource).toContain("visit_For");
 		expect(pageSource).toContain("function formatPythonRuntimeError");
-		expect(pageSource).toContain("RuntimeError: Stopped a long-running loop");
+		expect(pageSource).toContain(
+			"RuntimeError: Stopped a long-running (?:for|while) loop"
+		);
 		expect(pageSource).toContain("formatPythonRuntimeError(error)");
 	});
 

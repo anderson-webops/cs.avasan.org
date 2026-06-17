@@ -275,7 +275,7 @@ function formatPythonRuntimeError(error: unknown) {
 	const message =
 		error instanceof Error ? error.message : "Python run failed.";
 	const loopGuardMessage = message.match(
-		/RuntimeError: Stopped a long-running loop[^\n]*/
+		/RuntimeError: Stopped a long-running (?:for|while) loop[^\n]*/
 	);
 
 	return loopGuardMessage?.[0] ?? message;

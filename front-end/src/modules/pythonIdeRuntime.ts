@@ -13,7 +13,8 @@ const PROJECT_ROOT = "/home/pyodide/classes_project";
 const PYTHON_EXTENSION_RE = /\.py$/i;
 const IMPORT_MODULE_RE = /^import\s+([A-Za-z_]\w*)/;
 const FROM_IMPORT_MODULE_RE = /^from\s+([A-Za-z_]\w*)\s+import\b/;
-const LOOP_ITERATION_LIMIT = 25000;
+const FOR_LOOP_ITERATION_LIMIT = 500000;
+const WHILE_LOOP_ITERATION_LIMIT = 25000;
 const MICROPIP_PACKAGES = new Map([
 	["altair", "altair"],
 	["networkx", "networkx"],
@@ -269,8 +270,11 @@ import ast
 import builtins
 import time as __classes_time
 __classes_input_values = iter(__import__("json").loads(${escapePythonString(JSON.stringify(inputLines))}))
-__classes_loop_iterations = 0
-__classes_loop_iteration_limit = ${LOOP_ITERATION_LIMIT}
+__classes_loop_iterations = {"for": 0, "while": 0}
+__classes_loop_iteration_limits = {
+    "for": ${FOR_LOOP_ITERATION_LIMIT},
+    "while": ${WHILE_LOOP_ITERATION_LIMIT},
+}
 
 def __classes_input(prompt=""):
     print(prompt, end="")
@@ -285,39 +289,39 @@ def __classes_sleep(_seconds=0):
 
 __classes_time.sleep = __classes_sleep
 
-def __classes_loop_guard():
-    global __classes_loop_iterations
-    __classes_loop_iterations += 1
-    if __classes_loop_iterations > __classes_loop_iteration_limit:
+def __classes_loop_guard(kind):
+    __classes_loop_iterations[kind] = __classes_loop_iterations.get(kind, 0) + 1
+    limit = __classes_loop_iteration_limits.get(kind, ${WHILE_LOOP_ITERATION_LIMIT})
+    if __classes_loop_iterations[kind] > limit:
         raise RuntimeError(
-            "Stopped a long-running loop after {} iterations. "
+            "Stopped a long-running {} loop after {} iterations. "
             "Add a break condition, or use screen.ontimer(...) for ongoing Turtle animation."
-            .format(__classes_loop_iteration_limit)
+            .format(kind, limit)
         )
 
 class __ClassesLoopGuardTransformer(ast.NodeTransformer):
-    def _guard_statement(self, node):
+    def _guard_statement(self, node, kind):
         return ast.copy_location(
             ast.Expr(
                 value=ast.Call(
                     func=ast.Name(id="__classes_loop_guard", ctx=ast.Load()),
-                    args=[],
+                    args=[ast.Constant(value=kind)],
                     keywords=[],
                 )
             ),
             node,
         )
 
-    def _guard_loop(self, node):
+    def _guard_loop(self, node, kind):
         self.generic_visit(node)
-        node.body.insert(0, self._guard_statement(node))
+        node.body.insert(0, self._guard_statement(node, kind))
         return node
 
     def visit_For(self, node):
-        return self._guard_loop(node)
+        return self._guard_loop(node, "for")
 
     def visit_While(self, node):
-        return self._guard_loop(node)
+        return self._guard_loop(node, "while")
 
 def __classes_compile_student_source(source, filename):
     tree = ast.parse(source, filename=filename, mode="exec")
