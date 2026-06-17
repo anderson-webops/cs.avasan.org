@@ -1373,8 +1373,42 @@ def make_wav(song, fn="pysynth_output.wav", bpm=120, transpose=0, pause=0.02, **
 const streamlitShim = `
 from _classes_artifacts import emit_html, emit_json, emit_matplotlib_figure, emit_matplotlib_figures, show_chart
 
+def _as_list(options):
+    if isinstance(options, str):
+        return [options]
+    try:
+        return list(options)
+    except TypeError:
+        return [options]
+
+def _bounded_index(options, index):
+    if not options:
+        return 0
+    try:
+        numeric_index = int(index)
+    except Exception:
+        numeric_index = 0
+    return max(0, min(len(options) - 1, numeric_index))
+
+def _format_value(value):
+    if value is None:
+        return ""
+    return str(value)
+
 def write(*values, **_kwargs):
     print(*values)
+
+def success(value="", **_kwargs):
+    print("Success:", value)
+
+def info(value="", **_kwargs):
+    print("Info:", value)
+
+def warning(value="", **_kwargs):
+    print("Warning:", value)
+
+def error(value="", **_kwargs):
+    print("Error:", value)
 
 def text(value=""):
     print(value)
@@ -1432,26 +1466,165 @@ def bar_chart(data, **_kwargs):
     data.plot(kind="bar", ax=axis)
     emit_matplotlib_figure(figure, "Bar chart")
 
+def selectbox(_label, options, index=0, **_kwargs):
+    values = _as_list(options)
+    if not values:
+        return None
+    return values[_bounded_index(values, index)]
+
+def radio(_label, options, index=0, **_kwargs):
+    return selectbox(_label, options, index=index, **_kwargs)
+
+def multiselect(_label, options, default=None, **_kwargs):
+    values = _as_list(options)
+    if default is None:
+        return []
+    if isinstance(default, str) or not hasattr(default, "__iter__"):
+        default_values = [default]
+    else:
+        default_values = list(default)
+    return [value for value in default_values if value in values]
+
+def slider(_label, min_value=0, max_value=100, value=None, step=None, **_kwargs):
+    if value is not None:
+        return value
+    return min_value
+
+def checkbox(_label, value=False, **_kwargs):
+    return bool(value)
+
+def toggle(_label, value=False, **_kwargs):
+    return checkbox(_label, value=value, **_kwargs)
+
+def number_input(_label, min_value=None, max_value=None, value=None, step=None, **_kwargs):
+    if value is not None:
+        return value
+    if min_value is not None:
+        return min_value
+    return 0
+
+def text_input(_label, value="", placeholder=None, **_kwargs):
+    return str(value or "")
+
+def metric(label, value, delta=None, **_kwargs):
+    line = "{}: {}".format(label, _format_value(value))
+    if delta is not None:
+        line += " ({})".format(delta)
+    print(line)
+
+def download_button(*_args, **_kwargs):
+    print("Download button requested. Use a deployed Streamlit app for real downloads.")
+    return False
+
 def set_page_config(**_kwargs):
     return None
 
 def stop():
     raise SystemExit
 
-class _Sidebar:
+def cache_data(function=None, **_kwargs):
+    def decorator(inner):
+        return inner
+    return decorator(function) if function else decorator
+
+cache_resource = cache_data
+
+class _Spinner:
+    def __init__(self, text=""):
+        self.text = text
+
+    def __enter__(self):
+        if self.text:
+            print(self.text)
+        return self
+
+    def __exit__(self, *_args):
+        return False
+
+def spinner(text=""):
+    return _Spinner(text)
+
+class _Container:
+    def __init__(self, name="Container"):
+        self.name = name
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *_args):
+        return False
+
     def write(self, *values, **kwargs):
         write(*values, **kwargs)
+
+    def text(self, *values, **kwargs):
+        text(*values, **kwargs)
 
     def markdown(self, *values, **kwargs):
         markdown(*values, **kwargs)
 
-    def selectbox(self, _label, options, index=0, **_kwargs):
-        return list(options)[index]
+    def dataframe(self, *values, **kwargs):
+        dataframe(*values, **kwargs)
 
-    def slider(self, _label, min_value=0, max_value=100, value=None, **_kwargs):
-        return value if value is not None else min_value
+    def table(self, *values, **kwargs):
+        table(*values, **kwargs)
 
-sidebar = _Sidebar()
+    def pyplot(self, *values, **kwargs):
+        pyplot(*values, **kwargs)
+
+    def altair_chart(self, *values, **kwargs):
+        altair_chart(*values, **kwargs)
+
+    def line_chart(self, *values, **kwargs):
+        line_chart(*values, **kwargs)
+
+    def bar_chart(self, *values, **kwargs):
+        bar_chart(*values, **kwargs)
+
+    def selectbox(self, *values, **kwargs):
+        return selectbox(*values, **kwargs)
+
+    def radio(self, *values, **kwargs):
+        return radio(*values, **kwargs)
+
+    def multiselect(self, *values, **kwargs):
+        return multiselect(*values, **kwargs)
+
+    def slider(self, *values, **kwargs):
+        return slider(*values, **kwargs)
+
+    def checkbox(self, *values, **kwargs):
+        return checkbox(*values, **kwargs)
+
+    def toggle(self, *values, **kwargs):
+        return toggle(*values, **kwargs)
+
+    def number_input(self, *values, **kwargs):
+        return number_input(*values, **kwargs)
+
+    def text_input(self, *values, **kwargs):
+        return text_input(*values, **kwargs)
+
+    def metric(self, *values, **kwargs):
+        metric(*values, **kwargs)
+
+def columns(spec, **_kwargs):
+    if isinstance(spec, int):
+        count = spec
+    else:
+        count = len(_as_list(spec))
+    return [_Container("Column {}".format(index + 1)) for index in range(max(1, count))]
+
+def container(**_kwargs):
+    return _Container()
+
+def expander(label, expanded=False, **_kwargs):
+    return _Container("Expander: {}".format(label))
+
+def empty():
+    return _Container("Empty")
+
+sidebar = _Container("Sidebar")
 `;
 
 const kerasShim = `
@@ -1924,7 +2097,7 @@ function warnForBrowserLimitedLibraries(
 	if (modules.has("streamlit")) {
 		onOutput(
 			"system",
-			"Streamlit is running through a browser teaching shim: st.write/dataframe/pyplot/altair_chart render here, but a full Streamlit server still needs local Python or deployment."
+			"Streamlit is running through a browser teaching shim: display calls and common dashboard widgets render here, but a full Streamlit server still needs local Python or deployment."
 		);
 	}
 

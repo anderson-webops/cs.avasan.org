@@ -140,6 +140,15 @@ describe("python IDE project helpers", () => {
 					entry.detail.includes("mouse handlers")
 			)
 		).toBe(true);
+		expect(
+			pythonIdeLibrarySupport.some(
+				entry =>
+					entry.name === "Streamlit-style reports" &&
+					entry.detail.includes("selectbox") &&
+					entry.detail.includes("slider") &&
+					entry.detail.includes("metric")
+			)
+		).toBe(true);
 	});
 
 	it("keeps Turtle fill and RGB color hooks wired in the runtime shim", () => {
@@ -176,6 +185,24 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("_bridge.scheduleTimer");
 		expect(pageSource).toContain("scheduleTimer(delayMs: number");
 		expect(pageSource).toContain("clearTurtleTimers()");
+	});
+
+	it("keeps Streamlit dashboard widget helpers wired in the runtime shim", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+
+		expect(runtimeSource).toContain("def selectbox(");
+		expect(runtimeSource).toContain("def multiselect(");
+		expect(runtimeSource).toContain("def slider(");
+		expect(runtimeSource).toContain("def checkbox(");
+		expect(runtimeSource).toContain("def number_input(");
+		expect(runtimeSource).toContain("def text_input(");
+		expect(runtimeSource).toContain("def metric(");
+		expect(runtimeSource).toContain("def columns(");
+		expect(runtimeSource).toContain("class _Container:");
+		expect(runtimeSource).toContain("sidebar = _Container");
 	});
 
 	it("normalizes local Python project module names for fresh imports", () => {

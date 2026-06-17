@@ -85,7 +85,7 @@ export const pythonIdeLibrarySupport: PythonIdeLibrarySupport[] = [
 	{
 		name: "Streamlit-style reports",
 		status: "shim",
-		detail: "Common st.write, dataframe, pyplot, and altair_chart calls render as IDE output or artifacts, but full Streamlit apps still require a local/deployed server."
+		detail: "Common st.write, dataframe, pyplot, altair_chart, selectbox, slider, checkbox, columns, and metric calls render as IDE output or deterministic browser controls, but full Streamlit apps still require a local/deployed server."
 	},
 	{
 		name: "PySynth song projects",
