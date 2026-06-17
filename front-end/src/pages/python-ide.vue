@@ -128,6 +128,9 @@ const isGameLoopActive = ref(false);
 const activeTurtleTimerCount = ref(0);
 const showProjectMenu = ref(false);
 const showFileTools = ref(false);
+const projectActionMenuID = ref("");
+const deleteCandidateProjectID = ref("");
+const deleteConfirmText = ref("");
 const stopRequested = ref(false);
 const saveMessage = ref("Loading workspace");
 const runMessage = ref("Ready");
@@ -502,6 +505,35 @@ async function createProject(mode: PythonIdeMode) {
 async function createProjectFromMenu(mode: PythonIdeMode) {
 	showProjectMenu.value = false;
 	await createProject(mode);
+}
+
+function projectLabel(project: PythonIdeProject) {
+	return project.title || "Untitled Project";
+}
+
+function toggleProjectActions(project: PythonIdeProject) {
+	projectActionMenuID.value =
+		projectActionMenuID.value === project._id ? "" : project._id;
+	deleteCandidateProjectID.value = "";
+	deleteConfirmText.value = "";
+}
+
+function requestProjectDelete(project: PythonIdeProject) {
+	selectedProjectID.value = project._id;
+	projectActionMenuID.value = "";
+	deleteCandidateProjectID.value = project._id;
+	deleteConfirmText.value = "";
+}
+
+function cancelProjectDelete() {
+	deleteCandidateProjectID.value = "";
+	deleteConfirmText.value = "";
+}
+
+async function confirmProjectDelete(project: PythonIdeProject) {
+	if (deleteConfirmText.value.trim().toLowerCase() !== "confirm") return;
+	await deleteProject(project);
+	cancelProjectDelete();
 }
 
 async function deleteProject(project: PythonIdeProject) {
@@ -1775,24 +1807,99 @@ onBeforeUnmount(() => {
 					</div>
 
 					<div class="project-list">
-						<button
+						<div
 							v-for="project in sortedProjects"
 							:key="project._id"
-							class="project-button"
+							class="project-row"
 							:class="{
-								'is-active':
-									project._id === selectedProject?._id
+								'is-confirming':
+									project._id === deleteCandidateProjectID
 							}"
-							type="button"
-							@click="selectedProjectID = project._id"
 						>
-							<span>{{
-								project.title || "Untitled Project"
-							}}</span>
-							<small>{{
-								getPythonIdeModeLabel(project.mode)
-							}}</small>
-						</button>
+							<div class="project-row-main">
+								<button
+									class="project-button"
+									:class="{
+										'is-active':
+											project._id === selectedProject?._id
+									}"
+									type="button"
+									@click="selectedProjectID = project._id"
+								>
+									<span>{{ projectLabel(project) }}</span>
+									<small>{{
+										getPythonIdeModeLabel(project.mode)
+									}}</small>
+								</button>
+								<button
+									:aria-expanded="
+										project._id === projectActionMenuID
+									"
+									:aria-label="`Project actions for ${projectLabel(project)}`"
+									class="project-action-toggle"
+									title="Project actions"
+									type="button"
+									@click="toggleProjectActions(project)"
+								>
+									...
+								</button>
+							</div>
+							<div
+								v-if="project._id === projectActionMenuID"
+								class="project-action-menu"
+								role="menu"
+							>
+								<button
+									class="project-action-delete"
+									:disabled="projects.length <= 1"
+									role="menuitem"
+									type="button"
+									@click="requestProjectDelete(project)"
+								>
+									Delete this project...
+								</button>
+							</div>
+							<div
+								v-if="
+									project._id === selectedProject?._id &&
+									project._id === deleteCandidateProjectID
+								"
+								class="project-delete-confirm"
+							>
+								<strong>
+									Delete "{{ projectLabel(project) }}"?
+								</strong>
+								<p>Type confirm to permanently delete it.</p>
+								<input
+									v-model="deleteConfirmText"
+									aria-label="Type confirm to delete project"
+									placeholder="confirm"
+									type="text"
+									@keyup.enter="confirmProjectDelete(project)"
+								/>
+								<div class="project-delete-actions">
+									<button
+										class="site-button site-button--secondary compact-button"
+										type="button"
+										@click="cancelProjectDelete"
+									>
+										Cancel
+									</button>
+									<button
+										class="site-button project-delete-final compact-button"
+										:disabled="
+											deleteConfirmText
+												.trim()
+												.toLowerCase() !== 'confirm'
+										"
+										type="button"
+										@click="confirmProjectDelete(project)"
+									>
+										Delete
+									</button>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -1875,15 +1982,6 @@ onBeforeUnmount(() => {
 						</label>
 					</div>
 				</div>
-
-				<button
-					v-if="selectedProject"
-					class="site-button site-button--ghost delete-project-button"
-					type="button"
-					@click="deleteProject(selectedProject)"
-				>
-					Delete project
-				</button>
 			</aside>
 
 			<main v-if="selectedProject" class="python-ide-main">
@@ -2289,6 +2387,28 @@ html.dark .python-ide-status strong {
 	gap: 0.55rem;
 }
 
+.project-row {
+	display: grid;
+	gap: 0.45rem;
+}
+
+.project-row-main {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	gap: 0.45rem;
+	align-items: stretch;
+}
+
+.project-action-toggle {
+	width: 2.7rem;
+	min-height: 100%;
+	border: 1px solid var(--color-border);
+	border-radius: 10px;
+	background: rgba(248, 250, 252, 0.74);
+	color: var(--color-ink-muted);
+	font-weight: 900;
+}
+
 .project-button,
 .file-button {
 	width: 100%;
@@ -2306,6 +2426,70 @@ html.dark .python-ide-status strong {
 .file-button.is-active {
 	border-color: rgba(15, 118, 110, 0.36);
 	background: rgba(204, 251, 241, 0.34);
+}
+
+.project-action-menu {
+	justify-self: end;
+	width: min(14rem, 100%);
+	display: grid;
+	padding: 0.45rem;
+	border: 1px solid var(--color-border);
+	border-radius: 10px;
+	background: var(--color-surface-strong);
+	box-shadow: var(--shadow-soft);
+}
+
+.project-action-menu button {
+	width: 100%;
+	padding: 0.55rem 0.65rem;
+	border: 0;
+	border-radius: 8px;
+	background: rgba(254, 242, 242, 0.82);
+	color: #991b1b;
+	font-weight: 800;
+	text-align: left;
+}
+
+.project-action-menu button:disabled {
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+
+.project-delete-confirm {
+	display: grid;
+	gap: 0.55rem;
+	padding: 0.75rem;
+	border: 1px solid rgba(185, 28, 28, 0.32);
+	border-radius: 12px;
+	background: rgba(254, 242, 242, 0.94);
+	color: #7f1d1d;
+}
+
+.project-delete-confirm strong {
+	color: #7f1d1d;
+}
+
+.project-delete-confirm p {
+	color: #991b1b;
+	font-size: 0.82rem;
+	line-height: 1.4;
+}
+
+.project-delete-actions {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0.5rem;
+}
+
+.project-delete-final {
+	border: 1px solid rgba(185, 28, 28, 0.58);
+	background: #b91c1c;
+	color: #ffffff;
+}
+
+.project-delete-final:disabled {
+	cursor: not-allowed;
+	opacity: 0.44;
 }
 
 html.dark .project-create-menu {
@@ -2328,7 +2512,8 @@ html.dark .project-create-menu button:focus-visible {
 }
 
 html.dark .icon-action,
-html.dark .file-tool-toggle {
+html.dark .file-tool-toggle,
+html.dark .project-action-toggle {
 	border-color: rgba(148, 163, 184, 0.4);
 	background: #e2e8f0;
 	color: #0f172a;
@@ -2353,6 +2538,30 @@ html.dark .project-button small {
 
 html.dark .file-button small {
 	color: #5eead4;
+}
+
+html.dark .project-action-menu {
+	border-color: rgba(248, 113, 113, 0.24);
+	background: #101827;
+}
+
+html.dark .project-action-menu button {
+	background: #2f1f27;
+	color: #fecaca;
+}
+
+html.dark .project-delete-confirm {
+	border-color: rgba(248, 113, 113, 0.36);
+	background: #1e151d;
+	color: #fecaca;
+}
+
+html.dark .project-delete-confirm strong {
+	color: #fee2e2;
+}
+
+html.dark .project-delete-confirm p {
+	color: #fca5a5;
 }
 
 html.dark .file-delete {
@@ -2483,6 +2692,7 @@ html.dark .file-tool-toggle-icon::before {
 }
 
 .new-file-row input,
+.project-delete-confirm input,
 .editor-toolbar input,
 .editor-toolbar select,
 .stdin-panel textarea {
@@ -2494,6 +2704,7 @@ html.dark .file-tool-toggle-icon::before {
 }
 
 .new-file-row input,
+.project-delete-confirm input,
 .editor-toolbar input,
 .editor-toolbar select {
 	min-height: 2.8rem;
@@ -2521,10 +2732,6 @@ html.dark .file-tool-toggle-icon::before {
 .run-control--stop:hover,
 .run-control--stop:focus-visible {
 	background: #991b1b;
-}
-
-.delete-project-button {
-	margin-top: auto;
 }
 
 .python-ide-main {
@@ -2767,10 +2974,6 @@ html.dark .file-tool-toggle-icon::before {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		align-items: start;
-	}
-
-	.delete-project-button {
-		grid-column: 1 / -1;
 	}
 }
 
