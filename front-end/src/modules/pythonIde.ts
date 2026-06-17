@@ -98,6 +98,32 @@ export const pythonIdeLibrarySupport: PythonIdeLibrarySupport[] = [
 	}
 ];
 
+const pythonIdeCourseModes: Record<string, PythonIdeMode> = {
+	"ai-level-1": "data",
+	"data-science-in-python": "data",
+	"machine-learning": "data",
+	pygames: "pgzero",
+	"python-level-1": "turtle",
+	"python-level-2": "python",
+	"python-level-3": "python",
+	"python-to-java-and-cpp-bridge": "python",
+	"pythonic-design-patterns": "python"
+};
+
+export function normalizePythonIdeMode(
+	value: string | null | undefined,
+	fallback: PythonIdeMode = "python"
+): PythonIdeMode {
+	if (value === "data" || value === "pgzero" || value === "turtle")
+		return value;
+	if (value === "python") return "python";
+	return fallback;
+}
+
+export function pythonIdeModeForCourseId(courseId: string | null | undefined) {
+	return courseId ? (pythonIdeCourseModes[courseId] ?? null) : null;
+}
+
 export const pythonStarterCode = `print("Hello, Python!")
 
 name = input("What is your name? ")

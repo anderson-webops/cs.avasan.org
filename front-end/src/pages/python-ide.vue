@@ -18,6 +18,7 @@ import {
 	ref,
 	watch
 } from "vue";
+import { useRoute } from "vue-router";
 import {
 	createPythonIdeProject,
 	createRemotePythonIdeProject,
@@ -35,9 +36,11 @@ import {
 	loadLocalPythonProjects,
 	normalizeImportedPythonIdeFileName,
 	normalizePythonFileName,
+	normalizePythonIdeMode,
 	pythonIdeAllowedFileExtensions,
 	pythonIdeFileUploadAccept,
 	pythonIdeLibrarySupport,
+	pythonIdeModeForCourseId,
 	pythonIdeProjectToPayload,
 	saveLocalPythonProjects,
 	updateRemotePythonIdeProject
@@ -103,6 +106,7 @@ const imageAssetExtensions = [".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"];
 const audioAssetExtensions = [".wav", ".mp3", ".ogg"];
 
 const app = useAppStore();
+const route = useRoute();
 const { currentUser } = storeToRefs(app);
 
 const projects = ref<PythonIdeProject[]>([]);
@@ -211,11 +215,18 @@ const usesDrawingCanvas = computed(
 		selectedProject.value?.mode === "turtle" ||
 		selectedProject.value?.mode === "pgzero"
 );
+const requestedCourseId = computed(() =>
+	typeof route.query.course === "string" ? route.query.course : ""
+);
+const requestedStarterMode = computed(() => {
+	const rawMode =
+		typeof route.query.mode === "string" ? route.query.mode : "";
+	const courseMode = pythonIdeModeForCourseId(requestedCourseId.value);
+	return normalizePythonIdeMode(rawMode, courseMode ?? "turtle");
+});
 
 function normalizeProjectMode(value: string): PythonIdeMode {
-	if (value === "data" || value === "pgzero" || value === "turtle")
-		return value;
-	return "python";
+	return normalizePythonIdeMode(value, "python");
 }
 
 function appendOutput(kind: OutputLine["kind"], text: string) {
@@ -291,7 +302,9 @@ async function loadProjects() {
 			}
 
 			const starter = await createRemotePythonIdeProject(
-				pythonIdeProjectToPayload(createPythonIdeProject("turtle"))
+				pythonIdeProjectToPayload(
+					createPythonIdeProject(requestedStarterMode.value)
+				)
 			);
 			setProjects([starter]);
 			saveMessage.value = "Synced to account";
@@ -302,7 +315,7 @@ async function loadProjects() {
 		setProjects(
 			localProjects.length
 				? localProjects
-				: [createPythonIdeProject("turtle")]
+				: [createPythonIdeProject(requestedStarterMode.value)]
 		);
 		persistLocalProjects();
 	} catch (error) {
@@ -310,7 +323,7 @@ async function loadProjects() {
 		setProjects(
 			localProjects.length
 				? localProjects
-				: [createPythonIdeProject("turtle")]
+				: [createPythonIdeProject(requestedStarterMode.value)]
 		);
 		saveMessage.value =
 			error instanceof Error ? error.message : "Using local workspace";

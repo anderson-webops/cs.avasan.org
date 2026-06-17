@@ -23,6 +23,10 @@ import {
 	orderedCoursesByLearnerStatus
 } from "@/modules/courseAccess";
 import { courseAssetViewerUrl } from "@/modules/courseAssetPreview";
+import {
+	getPythonIdeModeLabel,
+	pythonIdeModeForCourseId
+} from "@/modules/pythonIde";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
 import CodePreview from "./CodePreview.vue";
@@ -191,6 +195,22 @@ const courseDescription = computed(() =>
 		: isStaffContext.value
 			? "Choose a learner, open one of their assigned courses, and mark progress directly inside the syllabus."
 			: "Use the controls below to switch courses or search inside this syllabus."
+);
+const pythonIdeCourseMode = computed(() =>
+	pythonIdeModeForCourseId(selectedCourse.value?.id)
+);
+const pythonIdeCourseHref = computed(() => {
+	if (!selectedCourse.value || !pythonIdeCourseMode.value) return "";
+	const params = new URLSearchParams({
+		course: selectedCourse.value.id,
+		mode: pythonIdeCourseMode.value
+	});
+	return `/python-ide?${params.toString()}`;
+});
+const pythonIdeCourseLabel = computed(() =>
+	pythonIdeCourseMode.value
+		? `Open ${getPythonIdeModeLabel(pythonIdeCourseMode.value)} IDE`
+		: ""
 );
 
 const emptyTitle = computed(() =>
@@ -1272,6 +1292,18 @@ function writeStoredValue(key: string, value: string) {
 					<p class="course-description">
 						{{ courseDescription }}
 					</p>
+					<div v-if="pythonIdeCourseHref" class="course-ide-action">
+						<a
+							class="site-button site-button--secondary course-ide-link"
+							:href="pythonIdeCourseHref"
+						>
+							{{ pythonIdeCourseLabel }}
+						</a>
+						<span>
+							Use the browser workspace for this course's code,
+							files, and canvas projects.
+						</span>
+					</div>
 				</div>
 
 				<dl class="course-stats">
@@ -2027,6 +2059,21 @@ function writeStoredValue(key: string, value: string) {
 .course-description {
 	max-width: 46rem;
 	font-size: 0.98rem;
+}
+
+.course-ide-action {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.6rem 0.85rem;
+	margin-top: 0.15rem;
+	color: var(--course-text-soft);
+	font-size: 0.9rem;
+	line-height: 1.5;
+}
+
+.course-ide-link {
+	flex: 0 0 auto;
 }
 
 .course-stats {

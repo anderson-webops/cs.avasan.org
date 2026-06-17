@@ -12,8 +12,10 @@ import {
 	isPythonIdePythonFile,
 	isPythonIdeTextFile,
 	normalizeImportedPythonIdeFileName,
+	normalizePythonIdeMode,
 	isValidPythonFileName,
 	normalizePythonFileName,
+	pythonIdeModeForCourseId,
 	pythonIdeProjectToPayload,
 	pythonIdeLibrarySupport,
 	pgzeroStudentSvg,
@@ -81,6 +83,19 @@ describe("python IDE project helpers", () => {
 		expect(getPythonIdeModeLabel("python")).toBe("Python");
 		expect(getPythonIdeModeLabel("turtle")).toBe("Turtle");
 		expect(getPythonIdeModeLabel("pgzero")).toBe("PyGame Zero");
+	});
+
+	it("maps Python-family courses to the right IDE starter modes", () => {
+		expect(pythonIdeModeForCourseId("python-level-1")).toBe("turtle");
+		expect(pythonIdeModeForCourseId("pygames")).toBe("pgzero");
+		expect(pythonIdeModeForCourseId("data-science-in-python")).toBe(
+			"data"
+		);
+		expect(pythonIdeModeForCourseId("machine-learning")).toBe("data");
+		expect(pythonIdeModeForCourseId("python-level-3")).toBe("python");
+		expect(pythonIdeModeForCourseId("scratch-level-1")).toBeNull();
+		expect(normalizePythonIdeMode("pgzero", "turtle")).toBe("pgzero");
+		expect(normalizePythonIdeMode("unknown", "turtle")).toBe("turtle");
 	});
 
 	it("documents browser and local course-library support", () => {

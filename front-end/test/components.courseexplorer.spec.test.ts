@@ -97,6 +97,71 @@ describe("CourseExplorer.vue", () => {
 		expect(wrapper.text()).toContain("Complete");
 	});
 
+	it("links Python-family courses to the integrated Python IDE", async () => {
+		const pinia = createPinia();
+		setActivePinia(pinia);
+
+		const appStore = useAppStore();
+		const coursesStore = useCoursesStore();
+		const pythonCourse = coursesStore.courses.find(
+			course => course.id === "python-level-1"
+		);
+
+		if (!pythonCourse) throw new Error("Expected Python Level 1 course.");
+
+		vi.spyOn(coursesStore, "loadCourseById").mockResolvedValue({
+			id: pythonCourse.id,
+			name: pythonCourse.name,
+			modules: [
+				{
+					curriculum: [
+						{
+							content: "Use Turtle to draw with coordinates.",
+							id: "python-turtle-lesson",
+							title: "Turtle Coordinates"
+						}
+					],
+					id: "python-module-1",
+					supplementalProjects: [],
+					title: "Python Turtle"
+				}
+			]
+		});
+
+		appStore.setCurrentUser({
+			_id: "user-1",
+			name: "Student",
+			email: "student@example.com",
+			age: 12,
+			state: "GA",
+			courseAccess: [pythonCourse.id],
+			courseProgress: [],
+			editUsers: false,
+			saveEdit: "Save"
+		});
+
+		const wrapper = mount(CourseExplorer, {
+			global: {
+				plugins: [pinia]
+			}
+		});
+		await flushPromises();
+
+		await vi.waitFor(() => {
+			expect(wrapper.text()).toContain("Open Turtle IDE");
+		});
+
+		const link = wrapper
+			.findAll("a")
+			.find(candidate => candidate.text() === "Open Turtle IDE");
+		expect(link?.exists()).toBe(true);
+		const href = link?.attributes("href") ?? "";
+		const query = new URLSearchParams(href.split("?")[1] ?? "");
+		expect(href.startsWith("/python-ide?")).toBe(true);
+		expect(query.get("course")).toBe("python-level-1");
+		expect(query.get("mode")).toBe("turtle");
+	});
+
 	it("counts reference appendices separately from course modules", async () => {
 		const pinia = createPinia();
 		setActivePinia(pinia);
