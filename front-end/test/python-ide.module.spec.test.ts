@@ -79,7 +79,9 @@ describe("python IDE project helpers", () => {
 			pythonIdeLibrarySupport.some(
 				entry =>
 					entry.name === "TensorFlow / Keras" &&
-					entry.status === "local"
+					entry.status === "shim" &&
+					entry.detail.includes("Sequential") &&
+					entry.detail.includes("ImageDataGenerator")
 			)
 		).toBe(true);
 		expect(

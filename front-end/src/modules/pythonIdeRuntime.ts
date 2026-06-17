@@ -27,6 +27,7 @@ interface PyodideAPI {
 	FS: {
 		analyzePath: (path: string) => { exists: boolean };
 		mkdirTree: (path: string) => void;
+		unlink?: (path: string) => void;
 		writeFile: (path: string, data: string | Uint8Array) => void;
 	};
 	loadPackage?: (packages: string | string[]) => Promise<void>;
@@ -1281,27 +1282,329 @@ class _Sidebar:
 sidebar = _Sidebar()
 `;
 
-const unavailableMlShim = `
-_MESSAGE = (
-    "TensorFlow/Keras model training is not available inside this browser IDE. "
-    "Use Google Colab or a local Python environment for neural-network lessons."
+const kerasShim = `
+import math
+import types
+
+try:
+    import numpy as np
+except Exception:
+    np = None
+
+__version__ = "classes-teaching-shim"
+
+def _array(values):
+    if np is None:
+        return values
+    try:
+        return np.asarray(values, dtype=float)
+    except Exception:
+        return np.asarray(list(values), dtype=float)
+
+def _sigmoid(values):
+    if np is None:
+        return 1 / (1 + math.exp(-float(values)))
+    return 1 / (1 + np.exp(-values))
+
+def _softmax(values):
+    if np is None:
+        return values
+    shifted = values - np.max(values, axis=1, keepdims=True)
+    exp_values = np.exp(shifted)
+    return exp_values / np.sum(exp_values, axis=1, keepdims=True)
+
+def _metric_name(metric):
+    if isinstance(metric, str):
+        return metric
+    return getattr(metric, "__name__", str(metric))
+
+def _history_series(start, epochs, floor=0.0):
+    return [max(floor, round(start / (index + 1), 4)) for index in range(epochs)]
+
+class History:
+    def __init__(self, history):
+        self.history = history
+
+class Dense:
+    def __init__(self, units, activation=None, input_shape=None, name=None, **kwargs):
+        self.units = int(units)
+        self.activation = activation
+        self.input_shape = input_shape
+        self.name = name or "dense"
+        self.kwargs = kwargs
+
+    def __repr__(self):
+        activation = self.activation or "linear"
+        return f"Dense(units={self.units}, activation={activation!r})"
+
+class Flatten:
+    def __init__(self, input_shape=None, name=None, **kwargs):
+        self.input_shape = input_shape
+        self.name = name or "flatten"
+        self.kwargs = kwargs
+
+    def __repr__(self):
+        return "Flatten()"
+
+class Dropout:
+    def __init__(self, rate, name=None, **kwargs):
+        self.rate = float(rate)
+        self.name = name or "dropout"
+        self.kwargs = kwargs
+
+    def __repr__(self):
+        return f"Dropout(rate={self.rate})"
+
+class Conv2D:
+    def __init__(self, filters, kernel_size, activation=None, input_shape=None, name=None, **kwargs):
+        self.filters = int(filters)
+        self.kernel_size = kernel_size
+        self.activation = activation
+        self.input_shape = input_shape
+        self.name = name or "conv2d"
+        self.kwargs = kwargs
+
+    def __repr__(self):
+        return f"Conv2D(filters={self.filters}, kernel_size={self.kernel_size!r})"
+
+class MaxPooling2D:
+    def __init__(self, pool_size=(2, 2), name=None, **kwargs):
+        self.pool_size = pool_size
+        self.name = name or "max_pooling2d"
+        self.kwargs = kwargs
+
+    def __repr__(self):
+        return f"MaxPooling2D(pool_size={self.pool_size!r})"
+
+class _Optimizer:
+    def __init__(self, learning_rate=0.001, **kwargs):
+        self.learning_rate = learning_rate
+        self.kwargs = kwargs
+
+class Adam(_Optimizer):
+    pass
+
+class SGD(_Optimizer):
+    pass
+
+class RMSprop(_Optimizer):
+    pass
+
+class Sequential:
+    def __init__(self, layers=None, name="sequential", **_kwargs):
+        self.layers = []
+        self.name = name
+        self.optimizer = None
+        self.loss = None
+        self.metrics = []
+        self.compiled = False
+        if layers:
+            for layer in layers:
+                self.add(layer)
+
+    def add(self, layer):
+        self.layers.append(layer)
+
+    def compile(self, optimizer="adam", loss=None, metrics=None, **_kwargs):
+        self.optimizer = optimizer
+        self.loss = loss
+        self.metrics = list(metrics or [])
+        self.compiled = True
+
+    @property
+    def output_units(self):
+        for layer in reversed(self.layers):
+            if hasattr(layer, "units"):
+                return max(1, int(layer.units))
+            if hasattr(layer, "filters"):
+                return max(1, int(layer.filters))
+        return 1
+
+    @property
+    def output_activation(self):
+        for layer in reversed(self.layers):
+            if hasattr(layer, "activation"):
+                return layer.activation
+        return None
+
+    def _feature_scores(self, x):
+        data = _array(x)
+        if np is None:
+            return [0.0 for _entry in data]
+        if data.ndim == 0:
+            data = data.reshape(1, 1)
+        elif data.ndim == 1:
+            data = data.reshape(-1, 1)
+        else:
+            data = data.reshape((data.shape[0], -1))
+        if data.shape[1] == 0:
+            return np.zeros((data.shape[0],))
+        scale = np.std(data) or 1.0
+        return (np.mean(data, axis=1) - np.mean(data)) / scale
+
+    def predict(self, x, **_kwargs):
+        scores = self._feature_scores(x)
+        units = self.output_units
+        activation = self.output_activation
+        if np is None:
+            return scores
+        if units == 1:
+            result = scores.reshape(-1, 1)
+            if activation == "sigmoid":
+                return _sigmoid(result)
+            if activation == "relu":
+                return np.maximum(0, result)
+            return result
+        offsets = np.linspace(-0.4, 0.4, units)
+        logits = scores.reshape(-1, 1) + offsets.reshape(1, -1)
+        if activation == "softmax":
+            return _softmax(logits)
+        return logits
+
+    def _loss_value(self, x, y=None):
+        predictions = self.predict(x)
+        if np is None or y is None:
+            return 0.5
+        target = _array(y)
+        if target.ndim == 1 and predictions.ndim == 2 and predictions.shape[1] > 1:
+            target = np.eye(predictions.shape[1])[target.astype(int) % predictions.shape[1]]
+        if target.ndim == 1:
+            target = target.reshape(-1, 1)
+        rows = min(len(predictions), len(target))
+        if rows == 0:
+            return 0.5
+        return float(np.mean((predictions[:rows] - target[:rows]) ** 2))
+
+    def _accuracy_value(self, x, y):
+        if np is None or y is None:
+            return 0.0
+        predictions = self.predict(x)
+        target = _array(y)
+        if predictions.ndim == 2 and predictions.shape[1] > 1:
+            predicted_labels = np.argmax(predictions, axis=1)
+            expected = target if target.ndim == 1 else np.argmax(target, axis=1)
+            rows = min(len(predicted_labels), len(expected))
+            return float(np.mean(predicted_labels[:rows] == expected[:rows])) if rows else 0.0
+        predicted_labels = (predictions.reshape(-1) >= 0.5).astype(int)
+        expected = target.reshape(-1).astype(int)
+        rows = min(len(predicted_labels), len(expected))
+        return float(np.mean(predicted_labels[:rows] == expected[:rows])) if rows else 0.0
+
+    def fit(self, x, y=None, epochs=1, batch_size=None, validation_data=None, verbose=1, **_kwargs):
+        epoch_count = max(1, int(epochs))
+        base_loss = max(self._loss_value(x, y), 0.01)
+        history = {"loss": _history_series(base_loss, epoch_count, 0.001)}
+        metric_names = [_metric_name(metric) for metric in self.metrics]
+        for metric_name in metric_names:
+            if "acc" in metric_name:
+                start = min(0.98, max(0.05, self._accuracy_value(x, y)))
+                history[metric_name] = [round(min(0.99, start + index * 0.03), 4) for index in range(epoch_count)]
+            elif "mae" in metric_name or "mean_absolute_error" in metric_name:
+                history[metric_name] = _history_series(base_loss ** 0.5, epoch_count, 0.001)
+        if validation_data:
+            val_x, val_y = validation_data[:2]
+            history["val_loss"] = _history_series(max(self._loss_value(val_x, val_y), 0.01) * 1.08, epoch_count, 0.001)
+        if verbose:
+            print(f"Teaching shim trained {self.name} for {epoch_count} epoch(s).")
+            print("This is a lightweight browser simulation, not TensorFlow backpropagation.")
+        return History(history)
+
+    def evaluate(self, x, y=None, verbose=1, **_kwargs):
+        loss = round(max(self._loss_value(x, y), 0.001), 4)
+        metric_values = []
+        for metric in self.metrics:
+            metric_name = _metric_name(metric)
+            if "acc" in metric_name:
+                metric_values.append(round(self._accuracy_value(x, y), 4))
+            elif "mae" in metric_name or "mean_absolute_error" in metric_name:
+                metric_values.append(round(loss ** 0.5, 4))
+            else:
+                metric_values.append(loss)
+        if verbose:
+            print(f"loss: {loss}")
+        return [loss, *metric_values] if metric_values else loss
+
+    def summary(self, print_fn=print, **_kwargs):
+        print_fn(f'Model: "{self.name}"')
+        if not self.layers:
+            print_fn("(no layers)")
+            return None
+        for index, layer in enumerate(self.layers, start=1):
+            print_fn(f"{index}. {layer!r}")
+        return None
+
+def Input(shape=None, **_kwargs):
+    return {"shape": shape}
+
+def to_categorical(y, num_classes=None, dtype="float32"):
+    values = _array(y).astype(int)
+    if num_classes is None:
+        num_classes = int(values.max()) + 1 if values.size else 0
+    result = np.zeros((len(values), int(num_classes)), dtype=dtype)
+    for index, value in enumerate(values):
+        result[index, int(value) % int(num_classes)] = 1
+    return result
+
+def _synthetic_boston_housing():
+    if np is None:
+        return ([], []), ([], [])
+    rows = 120
+    features = np.linspace(0, 1, rows * 13).reshape(rows, 13)
+    prices = 18 + features[:, 0] * 12 + features[:, 5] * 8 - features[:, 9] * 3
+    return (features[:90], prices[:90]), (features[90:], prices[90:])
+
+class _BostonHousing:
+    @staticmethod
+    def load_data(**_kwargs):
+        return _synthetic_boston_housing()
+
+class _Datasets:
+    boston_housing = _BostonHousing()
+
+class ImageDataGenerator:
+    def __init__(self, rescale=None, validation_split=None, **kwargs):
+        self.rescale = rescale
+        self.validation_split = validation_split
+        self.kwargs = kwargs
+
+    def flow_from_directory(self, directory, target_size=(256, 256), batch_size=32, class_mode="categorical", subset=None, **_kwargs):
+        return DirectoryIterator(directory, target_size, batch_size, class_mode, subset)
+
+class DirectoryIterator:
+    def __init__(self, directory, target_size, batch_size, class_mode, subset):
+        self.directory = directory
+        self.target_size = target_size
+        self.batch_size = batch_size
+        self.class_mode = class_mode
+        self.subset = subset
+        self.class_indices = {"class_0": 0, "class_1": 1}
+        self.samples = batch_size
+
+    def __len__(self):
+        return 1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if np is None:
+            raise StopIteration
+        x = np.zeros((self.batch_size, *self.target_size, 3))
+        y = np.zeros((self.batch_size, len(self.class_indices)))
+        return x, y
+
+layers = types.SimpleNamespace(
+    Dense=Dense,
+    Flatten=Flatten,
+    Dropout=Dropout,
+    Conv2D=Conv2D,
+    MaxPooling2D=MaxPooling2D,
 )
-
-class _Unavailable:
-    def __getattr__(self, _name):
-        raise RuntimeError(_MESSAGE)
-
-    def __call__(self, *_args, **_kwargs):
-        raise RuntimeError(_MESSAGE)
-
-keras = _Unavailable()
-layers = _Unavailable()
-models = _Unavailable()
-optimizers = _Unavailable()
-datasets = _Unavailable()
-
-def __getattr__(_name):
-    raise RuntimeError(_MESSAGE)
+models = types.SimpleNamespace(Sequential=Sequential)
+optimizers = types.SimpleNamespace(Adam=Adam, SGD=SGD, RMSprop=RMSprop)
+datasets = _Datasets()
+preprocessing = types.SimpleNamespace(image=types.SimpleNamespace(ImageDataGenerator=ImageDataGenerator))
+utils = types.SimpleNamespace(to_categorical=to_categorical)
 `;
 
 function ensureProjectDirectory(pyodide: PyodideAPI) {
@@ -1415,6 +1718,18 @@ await micropip.install(__import__("json").loads(${escapePythonString(JSON.string
 `);
 }
 
+async function loadBrowserShimDependencies(
+	pyodide: PyodideAPI,
+	modules: Set<string>,
+	onOutput: RunPythonProjectOptions["onOutput"]
+) {
+	if (!modules.has("tensorflow") && !modules.has("keras")) return;
+	if (!pyodide.loadPackage) return;
+
+	onOutput("system", "Loading Python packages: numpy");
+	await pyodide.loadPackage("numpy");
+}
+
 function warnForBrowserLimitedLibraries(
 	modules: Set<string>,
 	onOutput: RunPythonProjectOptions["onOutput"]
@@ -1429,9 +1744,124 @@ function warnForBrowserLimitedLibraries(
 	if (modules.has("tensorflow") || modules.has("keras")) {
 		onOutput(
 			"system",
-			"TensorFlow/Keras neural-network training is too heavy for this browser IDE. Use Colab or local Python for those lessons; this project will fail with a clear message if TensorFlow APIs are called."
+			"TensorFlow/Keras is running through a lightweight browser teaching shim: Sequential, common layers, fit/evaluate/predict, simple datasets, and ImageDataGenerator imports work for course demos, but real neural-network training still belongs in Colab or local Python."
 		);
 	}
+}
+
+function safeUnlink(pyodide: PyodideAPI, path: string) {
+	if (!pyodide.FS.unlink || !pyodide.FS.analyzePath(path).exists) return;
+	pyodide.FS.unlink(path);
+}
+
+function ensureDirectory(pyodide: PyodideAPI, path: string) {
+	if (!pyodide.FS.analyzePath(path).exists) {
+		pyodide.FS.mkdirTree(path);
+	}
+}
+
+function writeKerasPackage(pyodide: PyodideAPI) {
+	pyodide.FS.writeFile(`${PROJECT_ROOT}/_classes_keras.py`, kerasShim);
+	safeUnlink(pyodide, `${PROJECT_ROOT}/keras.py`);
+	ensureDirectory(pyodide, `${PROJECT_ROOT}/keras`);
+	ensureDirectory(pyodide, `${PROJECT_ROOT}/keras/datasets`);
+	ensureDirectory(pyodide, `${PROJECT_ROOT}/keras/preprocessing`);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/keras/__init__.py`,
+		[
+			"from _classes_keras import *",
+			"from _classes_keras import datasets, layers, models, optimizers, preprocessing, utils",
+			""
+		].join("\n")
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/keras/layers.py`,
+		"from _classes_keras import Conv2D, Dense, Dropout, Flatten, MaxPooling2D\n"
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/keras/models.py`,
+		"from _classes_keras import Sequential\n"
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/keras/optimizers.py`,
+		"from _classes_keras import Adam, RMSprop, SGD\n"
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/keras/utils.py`,
+		"from _classes_keras import to_categorical\n"
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/keras/datasets/__init__.py`,
+		"from _classes_keras import datasets\nboston_housing = datasets.boston_housing\n"
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/keras/datasets/boston_housing.py`,
+		"from _classes_keras import datasets\nload_data = datasets.boston_housing.load_data\n"
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/keras/preprocessing/__init__.py`,
+		"from _classes_keras import preprocessing\n"
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/keras/preprocessing/image.py`,
+		"from _classes_keras import DirectoryIterator, ImageDataGenerator\n"
+	);
+}
+
+function writeTensorFlowPackage(pyodide: PyodideAPI) {
+	safeUnlink(pyodide, `${PROJECT_ROOT}/tensorflow/keras.py`);
+	ensureDirectory(pyodide, `${PROJECT_ROOT}/tensorflow`);
+	ensureDirectory(pyodide, `${PROJECT_ROOT}/tensorflow/keras`);
+	ensureDirectory(pyodide, `${PROJECT_ROOT}/tensorflow/keras/datasets`);
+	ensureDirectory(pyodide, `${PROJECT_ROOT}/tensorflow/keras/preprocessing`);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/tensorflow/__init__.py`,
+		[
+			"from . import keras",
+			"__version__ = 'classes-teaching-shim'",
+			""
+		].join("\n")
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/tensorflow/keras/__init__.py`,
+		[
+			"from keras import *",
+			"from keras import datasets, layers, models, optimizers, preprocessing, utils",
+			""
+		].join("\n")
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/tensorflow/keras/layers.py`,
+		"from keras.layers import *\n"
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/tensorflow/keras/models.py`,
+		"from keras.models import *\n"
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/tensorflow/keras/optimizers.py`,
+		"from keras.optimizers import *\n"
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/tensorflow/keras/utils.py`,
+		"from keras.utils import *\n"
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/tensorflow/keras/datasets/__init__.py`,
+		"from keras.datasets import *\n"
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/tensorflow/keras/datasets/boston_housing.py`,
+		"from keras.datasets.boston_housing import *\n"
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/tensorflow/keras/preprocessing/__init__.py`,
+		"from keras.preprocessing import *\n"
+	);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/tensorflow/keras/preprocessing/image.py`,
+		"from keras.preprocessing.image import *\n"
+	);
 }
 
 function writeRuntimeShims(pyodide: PyodideAPI) {
@@ -1439,7 +1869,7 @@ function writeRuntimeShims(pyodide: PyodideAPI) {
 	pyodide.FS.writeFile(`${PROJECT_ROOT}/_classes_artifacts.py`, artifactShim);
 	pyodide.FS.writeFile(`${PROJECT_ROOT}/pysynth.py`, pysynthShim);
 	pyodide.FS.writeFile(`${PROJECT_ROOT}/streamlit.py`, streamlitShim);
-	pyodide.FS.writeFile(`${PROJECT_ROOT}/keras.py`, unavailableMlShim);
+	writeKerasPackage(pyodide);
 	pyodide.FS.writeFile(`${PROJECT_ROOT}/_classes_pgzero.py`, pgzeroShim);
 	pyodide.FS.writeFile(
 		`${PROJECT_ROOT}/pgzrun.py`,
@@ -1466,17 +1896,7 @@ function writeRuntimeShims(pyodide: PyodideAPI) {
 		"from _classes_pgzero import *\n"
 	);
 
-	if (!pyodide.FS.analyzePath(`${PROJECT_ROOT}/tensorflow`).exists) {
-		pyodide.FS.mkdirTree(`${PROJECT_ROOT}/tensorflow`);
-	}
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/tensorflow/__init__.py`,
-		unavailableMlShim
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/tensorflow/keras.py`,
-		unavailableMlShim
-	);
+	writeTensorFlowPackage(pyodide);
 }
 
 export async function runPythonProject(options: RunPythonProjectOptions) {
@@ -1520,6 +1940,11 @@ export async function runPythonProject(options: RunPythonProjectOptions) {
 		throw new Error("Project does not have a runnable Python file.");
 
 	await pyodide.loadPackagesFromImports(packageScanCode(options.files));
+	await loadBrowserShimDependencies(
+		pyodide,
+		importedModules,
+		options.onOutput
+	);
 	await installMicropipPackages(pyodide, importedModules, options.onOutput);
 
 	pyodide.runPython(`

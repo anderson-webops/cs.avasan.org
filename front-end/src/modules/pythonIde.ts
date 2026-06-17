@@ -93,8 +93,8 @@ export const pythonIdeLibrarySupport: PythonIdeLibrarySupport[] = [
 	},
 	{
 		name: "TensorFlow / Keras",
-		status: "local",
-		detail: "Neural-network lessons should run in Colab or local Python. The browser IDE warns clearly when those heavy APIs are imported."
+		status: "shim",
+		detail: "Sequential, Dense, common layers, compile(), fit(), evaluate(), predict(), simple datasets, and ImageDataGenerator imports run through a lightweight teaching shim; real neural-network training still belongs in Colab or local Python."
 	}
 ];
 
