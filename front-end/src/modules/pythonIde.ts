@@ -7,6 +7,7 @@ const SAFE_FILE_SEGMENT_RE = /^\w[\w.-]*$/;
 const ROOT_TEXT_FILE_RE = /^\w[\w.-]*\.(?:csv|json|md|py|txt)$/i;
 const IMAGE_FILE_RE = /^images\/\w[\w.-]*\.(?:gif|jpe?g|png|svg|webp)$/i;
 const AUDIO_FILE_RE = /^(?:music|sounds)\/\w[\w.-]*\.(?:mp3|ogg|wav)$/i;
+const ASSET_DIRECTORY_NAMES = new Set(["images", "music", "sounds"]);
 const TEXT_FILE_RE = /\.(?:csv|json|md|py|txt|svg)$/i;
 const IMAGE_EXTENSION_RE = /\.(?:gif|jpe?g|png|svg|webp)$/i;
 const SOUND_EXTENSION_RE = /\.wav$/i;
@@ -302,15 +303,21 @@ export function normalizePythonFileName(value: string) {
 	const cleaned = value
 		.trim()
 		.replaceAll("\\", "/")
-		.replaceAll(WHITESPACE_RE, "_")
 		.replace(/^\.\/+/, "")
 		.replace(/\/+/g, "/");
 	if (!cleaned) return "";
-	const extensionMatch = cleaned.match(FILE_EXTENSION_RE);
-	if (!extensionMatch) return `${cleaned}.py`;
+	const segments = cleaned
+		.split("/")
+		.map(segment => segment.trim().replaceAll(WHITESPACE_RE, "_"))
+		.filter(Boolean);
+	if (!segments.length) return "";
+	const fileName = segments[segments.length - 1] ?? "";
+	const extensionMatch = fileName.match(FILE_EXTENSION_RE);
+	if (!extensionMatch) return `${segments.join("/")}.py`;
 	const extension = extensionMatch[0].toLowerCase();
-	const stem = cleaned.slice(0, -extensionMatch[0].length);
-	return `${stem}${extension}`;
+	const stem = fileName.slice(0, -extensionMatch[0].length);
+	segments[segments.length - 1] = `${stem}${extension}`;
+	return segments.join("/");
 }
 
 export function isValidPythonFileName(value: string) {
@@ -329,6 +336,11 @@ export function isValidPythonFileName(value: string) {
 		)
 	) {
 		return false;
+	}
+
+	if (PYTHON_EXTENSION_RE.test(value)) {
+		const rootDirectory = segments[0]?.toLowerCase();
+		return !rootDirectory || !ASSET_DIRECTORY_NAMES.has(rootDirectory);
 	}
 
 	if (segments.length === 1) return ROOT_TEXT_FILE_RE.test(value);

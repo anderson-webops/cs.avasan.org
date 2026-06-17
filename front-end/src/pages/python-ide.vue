@@ -1698,7 +1698,7 @@ onBeforeUnmount(() => {
 						<input
 							v-model="newFileName"
 							aria-label="New project file name"
-							placeholder="helper.py or data.csv"
+							placeholder="helper.py, helpers/math_tools.py, or data.csv"
 							type="text"
 							@keyup.enter="addFile"
 						/>

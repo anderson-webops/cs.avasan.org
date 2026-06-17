@@ -204,18 +204,34 @@ describe("python IDE project helpers", () => {
 
 	it("normalizes project file names without accepting unsafe names", () => {
 		expect(normalizePythonFileName("helper tools")).toBe("helper_tools.py");
+		expect(normalizePythonFileName("helpers/math tools")).toBe(
+			"helpers/math_tools.py"
+		);
+		expect(normalizePythonFileName("helpers / math tools")).toBe(
+			"helpers/math_tools.py"
+		);
 		expect(normalizePythonFileName("lesson data.CSV")).toBe(
 			"lesson_data.csv"
 		);
 		expect(isValidPythonFileName("helper_tools.py")).toBe(true);
+		expect(isValidPythonFileName("package/__init__.py")).toBe(true);
+		expect(isValidPythonFileName("package/util.py")).toBe(true);
+		expect(isValidPythonFileName("package/submodule/tools.py")).toBe(
+			true
+		);
 		expect(isValidPythonFileName("scores.csv")).toBe(true);
 		expect(isValidPythonFileName("notes.md")).toBe(true);
 		expect(isValidPythonFileName("images/player.svg")).toBe(true);
 		expect(isValidPythonFileName("sounds/eep.wav")).toBe(true);
 		expect(isValidPythonFileName("music/theme.mp3")).toBe(true);
 		expect(isValidPythonFileName("../helper.py")).toBe(false);
+		expect(isValidPythonFileName("package//util.py")).toBe(false);
+		expect(isValidPythonFileName("package/../util.py")).toBe(false);
+		expect(isValidPythonFileName("package/.hidden.py")).toBe(false);
 		expect(isValidPythonFileName("images/../player.svg")).toBe(false);
 		expect(isValidPythonFileName("images/player.py")).toBe(false);
+		expect(isValidPythonFileName("sounds/eep.py")).toBe(false);
+		expect(isValidPythonFileName("package/data.csv")).toBe(false);
 		expect(isValidPythonFileName("script.exe")).toBe(false);
 	});
 
