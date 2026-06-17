@@ -20,6 +20,7 @@ import {
 } from "vue";
 import { useRoute } from "vue-router";
 import {
+	clearLocalPythonProjects,
 	createPythonIdeProject,
 	createRemotePythonIdeProject,
 	deleteRemotePythonIdeProject,
@@ -372,6 +373,7 @@ async function loadProjects() {
 					)
 				);
 				setProjects(migratedProjects);
+				clearLocalPythonProjects(storageUserID.value);
 				saveMessage.value = "Synced local projects to account";
 				return;
 			}
@@ -382,6 +384,7 @@ async function loadProjects() {
 				)
 			);
 			setProjects([starter]);
+			clearLocalPythonProjects(storageUserID.value);
 			saveMessage.value = "Synced to account";
 			return;
 		}
@@ -431,6 +434,7 @@ async function saveSelectedProject() {
 			candidate => candidate._id === project._id
 		);
 		if (index >= 0) projects.value.splice(index, 1, savedProject);
+		clearLocalPythonProjects(storageUserID.value);
 		saveMessage.value = "Synced to account";
 	} catch (error) {
 		persistLocalProjects();
@@ -463,6 +467,7 @@ async function createProject(mode: PythonIdeMode) {
 			);
 			projects.value.unshift(remoteProject);
 			selectedProjectID.value = remoteProject._id;
+			clearLocalPythonProjects(storageUserID.value);
 			saveMessage.value = "Synced to account";
 		} else {
 			projects.value.unshift(starter);
@@ -491,14 +496,21 @@ async function deleteProject(project: PythonIdeProject) {
 	}
 
 	try {
-		if (canSyncToAccount.value && !project._id.startsWith("local-")) {
+		const isRemoteProject =
+			canSyncToAccount.value && !project._id.startsWith("local-");
+		if (isRemoteProject) {
 			await deleteRemotePythonIdeProject(project._id);
 		}
 		projects.value = projects.value.filter(
 			candidate => candidate._id !== project._id
 		);
 		selectedProjectID.value = projects.value[0]?._id ?? "";
-		persistLocalProjects();
+		if (isRemoteProject) {
+			clearLocalPythonProjects(storageUserID.value);
+			saveMessage.value = "Synced to account";
+		} else {
+			persistLocalProjects();
+		}
 	} catch (error) {
 		appendOutput(
 			"stderr",

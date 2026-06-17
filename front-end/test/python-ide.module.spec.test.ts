@@ -1,7 +1,8 @@
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import {
+	clearLocalPythonProjects,
 	createPythonIdeProject,
 	dataScienceSampleCsv,
 	dataScienceStarterCode,
@@ -16,10 +17,13 @@ import {
 	normalizeImportedPythonIdeFileName,
 	normalizePythonIdeMode,
 	isValidPythonFileName,
+	loadLocalPythonProjects,
 	normalizePythonFileName,
 	pythonIdeModeForCourseId,
 	pythonIdeProjectToPayload,
+	pythonIdeStorageKey,
 	pythonIdeLibrarySupport,
+	saveLocalPythonProjects,
 	pgzeroStudentSvg,
 	pgzeroStarterCode,
 	turtleStarterCode
@@ -27,6 +31,21 @@ import {
 import { pythonIdeProjectModuleNames } from "../src/modules/pythonIdeRuntime";
 
 describe("python IDE project helpers", () => {
+	beforeEach(() => {
+		const storage = new Map<string, string>();
+		Object.defineProperty(window, "localStorage", {
+			configurable: true,
+			value: {
+				clear: vi.fn(() => storage.clear()),
+				getItem: vi.fn((key: string) => storage.get(key) ?? null),
+				removeItem: vi.fn((key: string) => storage.delete(key)),
+				setItem: vi.fn((key: string, value: string) =>
+					storage.set(key, value)
+				)
+			}
+		});
+	});
+
 	it("creates data/AI notebook starter projects", () => {
 		const project = createPythonIdeProject("data");
 
@@ -79,6 +98,26 @@ describe("python IDE project helpers", () => {
 		expect(payload).not.toHaveProperty("_id");
 		expect(payload).not.toHaveProperty("createdAt");
 		expect(payload).not.toHaveProperty("updatedAt");
+	});
+
+	it("clears local Python projects for one storage user only", () => {
+		const firstProject = createPythonIdeProject("python");
+		const secondProject = createPythonIdeProject("data");
+
+		saveLocalPythonProjects([firstProject], "student-a");
+		saveLocalPythonProjects([secondProject], "student-b");
+
+		expect(
+			window.localStorage.getItem(pythonIdeStorageKey("student-a"))
+		).toContain(firstProject.title);
+
+		clearLocalPythonProjects("student-a");
+
+		expect(loadLocalPythonProjects("student-a")).toEqual([]);
+		expect(loadLocalPythonProjects("student-b")).toHaveLength(1);
+		expect(
+			window.localStorage.getItem(pythonIdeStorageKey("student-b"))
+		).toContain(secondProject.title);
 	});
 
 	it("labels supported runtime modes", () => {
@@ -273,6 +312,19 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("function mergeRuntimeProjectFiles");
 		expect(pageSource).toContain("onProjectFilesUpdate: files =>");
 		expect(pageSource).toContain("void saveSelectedProject()");
+	});
+
+	it("clears stale local account fallback after successful remote syncs", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/pages/python-ide.vue"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain(
+			"clearLocalPythonProjects(storageUserID.value);"
+		);
+		expect(pageSource).toContain("Saved locally after sync issue");
+		expect(pageSource).toContain("const isRemoteProject =");
 	});
 
 	it("normalizes project file names without accepting unsafe names", () => {

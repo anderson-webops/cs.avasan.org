@@ -454,6 +454,11 @@ export function saveLocalPythonProjects(
 	);
 }
 
+export function clearLocalPythonProjects(userID?: string | null) {
+	if (typeof window === "undefined") return;
+	window.localStorage.removeItem(pythonIdeStorageKey(userID));
+}
+
 export async function fetchPythonIdeProjects() {
 	const { data } = await api.get<{ projects: PythonIdeProject[] }>(
 		"/users/loggedin/python-projects"
