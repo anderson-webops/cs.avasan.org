@@ -271,6 +271,16 @@ function appendArtifact(artifact: RuntimeArtifact) {
 	runtimeArtifacts.value.push(view);
 }
 
+function formatPythonRuntimeError(error: unknown) {
+	const message =
+		error instanceof Error ? error.message : "Python run failed.";
+	const loopGuardMessage = message.match(
+		/RuntimeError: Stopped a long-running loop[^\n]*/
+	);
+
+	return loopGuardMessage?.[0] ?? message;
+}
+
 function mergeRuntimeProjectFiles(
 	project: PythonIdeProject,
 	files: PythonIdeFile[]
@@ -1392,9 +1402,7 @@ async function runCurrentProject() {
 						? "Drawing ready"
 						: "Run complete";
 	} catch (error) {
-		const message =
-			error instanceof Error ? error.message : "Python run failed.";
-		appendOutput("stderr", message);
+		appendOutput("stderr", formatPythonRuntimeError(error));
 		runMessage.value = "Run failed";
 	} finally {
 		isRunning.value = false;

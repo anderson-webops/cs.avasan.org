@@ -13,6 +13,7 @@ const PROJECT_ROOT = "/home/pyodide/classes_project";
 const PYTHON_EXTENSION_RE = /\.py$/i;
 const IMPORT_MODULE_RE = /^import\s+([A-Za-z_]\w*)/;
 const FROM_IMPORT_MODULE_RE = /^from\s+([A-Za-z_]\w*)\s+import\b/;
+const LOOP_ITERATION_LIMIT = 25000;
 const MICROPIP_PACKAGES = new Map([
 	["altair", "altair"],
 	["networkx", "networkx"],
@@ -264,8 +265,13 @@ function escapePythonString(value: string) {
 function createInputBootstrap(inputText: string) {
 	const inputLines = inputText.replaceAll("\r\n", "\n").split("\n");
 	return `
+import ast
 import builtins
+import time as __classes_time
 __classes_input_values = iter(__import__("json").loads(${escapePythonString(JSON.stringify(inputLines))}))
+__classes_loop_iterations = 0
+__classes_loop_iteration_limit = ${LOOP_ITERATION_LIMIT}
+
 def __classes_input(prompt=""):
     print(prompt, end="")
     try:
@@ -273,6 +279,51 @@ def __classes_input(prompt=""):
     except StopIteration:
         raise EOFError("No more input values are available in the input panel.")
 builtins.input = __classes_input
+
+def __classes_sleep(_seconds=0):
+    return None
+
+__classes_time.sleep = __classes_sleep
+
+def __classes_loop_guard():
+    global __classes_loop_iterations
+    __classes_loop_iterations += 1
+    if __classes_loop_iterations > __classes_loop_iteration_limit:
+        raise RuntimeError(
+            "Stopped a long-running loop after {} iterations. "
+            "Add a break condition, or use screen.ontimer(...) for ongoing Turtle animation."
+            .format(__classes_loop_iteration_limit)
+        )
+
+class __ClassesLoopGuardTransformer(ast.NodeTransformer):
+    def _guard_statement(self, node):
+        return ast.copy_location(
+            ast.Expr(
+                value=ast.Call(
+                    func=ast.Name(id="__classes_loop_guard", ctx=ast.Load()),
+                    args=[],
+                    keywords=[],
+                )
+            ),
+            node,
+        )
+
+    def _guard_loop(self, node):
+        self.generic_visit(node)
+        node.body.insert(0, self._guard_statement(node))
+        return node
+
+    def visit_For(self, node):
+        return self._guard_loop(node)
+
+    def visit_While(self, node):
+        return self._guard_loop(node)
+
+def __classes_compile_student_source(source, filename):
+    tree = ast.parse(source, filename=filename, mode="exec")
+    tree = __ClassesLoopGuardTransformer().visit(tree)
+    ast.fix_missing_locations(tree)
+    return compile(tree, filename, "exec")
 `;
 }
 
@@ -2396,10 +2447,9 @@ except Exception:
 import __main__
 __main__.__dict__["__name__"] = "__main__"
 exec(
-    compile(
+    __classes_compile_student_source(
         open(${escapePythonString(activeFile.name)}, "r", encoding="utf-8").read(),
         ${escapePythonString(activeFile.name)},
-        "exec",
     ),
     __main__.__dict__,
 	)

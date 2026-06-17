@@ -187,6 +187,29 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("clearTurtleTimers()");
 	});
 
+	it("guards long-running student loops before executing Python files", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/pages/python-ide.vue"),
+			"utf8"
+		);
+
+		expect(runtimeSource).toContain("const LOOP_ITERATION_LIMIT");
+		expect(runtimeSource).toContain("class __ClassesLoopGuardTransformer");
+		expect(runtimeSource).toContain("def __classes_loop_guard():");
+		expect(runtimeSource).toContain("def __classes_sleep(_seconds=0):");
+		expect(runtimeSource).toContain("__classes_time.sleep = __classes_sleep");
+		expect(runtimeSource).toContain("__classes_compile_student_source(");
+		expect(runtimeSource).toContain("visit_While");
+		expect(runtimeSource).toContain("visit_For");
+		expect(pageSource).toContain("function formatPythonRuntimeError");
+		expect(pageSource).toContain("RuntimeError: Stopped a long-running loop");
+		expect(pageSource).toContain("formatPythonRuntimeError(error)");
+	});
+
 	it("keeps Streamlit dashboard widget helpers wired in the runtime shim", () => {
 		const runtimeSource = readFileSync(
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
