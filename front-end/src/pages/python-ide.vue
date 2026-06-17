@@ -40,7 +40,6 @@ import {
 	normalizePythonIdeMode,
 	pythonIdeAllowedFileExtensions,
 	pythonIdeFileUploadAccept,
-	pythonIdeLibrarySupport,
 	pythonIdeModeForCourseId,
 	pythonIdeProjectToPayload,
 	saveLocalPythonProjects,
@@ -1877,33 +1876,6 @@ onBeforeUnmount(() => {
 					</div>
 				</div>
 
-				<div class="sidebar-block library-support">
-					<div class="sidebar-heading">
-						<span>Course libraries</span>
-					</div>
-					<div
-						v-for="entry in pythonIdeLibrarySupport"
-						:key="entry.name"
-						class="library-support-row"
-					>
-						<div>
-							<strong>{{ entry.name }}</strong>
-							<p>{{ entry.detail }}</p>
-						</div>
-						<span
-							:class="`library-status library-status--${entry.status}`"
-						>
-							{{
-								entry.status === "browser"
-									? "Browser"
-									: entry.status === "shim"
-										? "Shim"
-										: "Local"
-							}}
-						</span>
-					</div>
-				</div>
-
 				<button
 					v-if="selectedProject"
 					class="site-button site-button--ghost delete-project-button"
@@ -2496,56 +2468,6 @@ html.dark .python-ide-status strong {
 
 .delete-project-button {
 	margin-top: auto;
-}
-
-.library-support {
-	align-self: start;
-}
-
-.library-support-row {
-	display: grid;
-	grid-template-columns: minmax(0, 1fr) auto;
-	gap: 0.75rem;
-	padding: 0.85rem 0;
-	border-top: 1px solid var(--color-border);
-}
-
-.library-support-row strong {
-	display: block;
-	color: var(--color-ink-strong);
-	font-size: 0.9rem;
-}
-
-.library-support-row p {
-	margin: 0.25rem 0 0;
-	color: var(--color-ink-muted);
-	font-size: 0.78rem;
-	line-height: 1.45;
-}
-
-.library-status {
-	align-self: start;
-	padding: 0.2rem 0.5rem;
-	border-radius: 999px;
-	font-size: 0.68rem;
-	font-weight: 900;
-	letter-spacing: 0.08em;
-	text-transform: uppercase;
-}
-
-.library-status--browser {
-	background: rgba(15, 118, 110, 0.14);
-	color: #0f766e;
-}
-
-.library-status--shim {
-	background: rgba(37, 99, 235, 0.13);
-	color: #1d4ed8;
-}
-
-.library-status--local {
-	background: rgba(180, 83, 9, 0.14);
-	color: #92400e;
 }
 
 .python-ide-main {
