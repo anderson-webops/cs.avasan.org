@@ -16,12 +16,12 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Recommended Tooling on macOS",
 					content:
-						"Walk macOS learners through installing VS Code, enabling the `code` command, and preparing to work against a Linux VM, a hosted Linux box, or a remote machine over SSH. Stress that the goal is not to make macOS pretend to be Linux, but to make it easy to reach a real Linux environment and edit configuration files safely."
+						"On macOS, install VS Code, enable the `code` command, and prepare to work against a Linux VM, a hosted Linux box, or a remote machine over SSH. The goal is not to make macOS pretend to be Linux, but to make it easy to reach a real Linux environment and edit configuration files safely."
 				},
 				{
 					title: "Recommended Tooling on Windows with WSL2",
 					content:
-						"Show Windows learners how to install WSL2 with Ubuntu, connect through the `Remote - WSL` extension, and confirm that new terminals are actually opening inside Linux rather than PowerShell. This early verification matters because the rest of the course assumes that package management, paths, permissions, and process tools are being exercised in Linux itself."
+						"On Windows, install WSL2 with Ubuntu, connect through the `Remote - WSL` extension, and confirm that new terminals are actually opening inside Linux rather than PowerShell. This early verification matters because the rest of the course assumes that package management, paths, permissions, and process tools are being exercised in Linux itself."
 				},
 				{
 					title: "Course Outcomes and Daily Operating Habits",

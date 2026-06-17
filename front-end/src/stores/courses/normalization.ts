@@ -1846,7 +1846,7 @@ function neutralizeStudentFacingText(text: string) {
 				)
 				.replace(
 					/\bUse the Student Class build\b/g,
-					"Use Student Class"
+					"The Student Class build"
 				)
 				.replace(
 					/\bthe student-class build\b/gi,

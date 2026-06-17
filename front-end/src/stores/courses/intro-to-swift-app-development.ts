@@ -16,7 +16,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Apple Platforms at a High Level",
 					content:
-						"Compare iPhone, iPad, Mac, and watchOS at a high level and explain why this course focuses first on iPhone-style SwiftUI apps. Use this module to set scope expectations: students are learning a practical path to a first shipped app, not every Apple platform all at once."
+						"Compare iPhone, iPad, Mac, and watchOS at a high level and explain why this course focuses first on iPhone-style SwiftUI apps. The scope is a practical path to a first shipped app, not every Apple platform all at once."
 				},
 				{
 					title: "Practical Walkthrough: Local Build vs TestFlight vs App Store",
@@ -937,7 +937,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Project: Map Places App",
 					content:
-						"Build a places app that combines a list of locations with a map view and simple place metadata. Use this to teach map-centered UI, selection-driven detail, and the basic shape of a location feature before deeper production concerns.",
+						"Build a places app that combines a list of locations with a map view and simple place metadata. The project introduces map-centered UI, selection-driven detail, and the basic shape of a location feature before deeper production concerns.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD4-Map-Places-App/starter",
 					solutionLink:

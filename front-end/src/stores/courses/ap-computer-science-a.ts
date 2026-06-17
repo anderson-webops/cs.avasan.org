@@ -77,7 +77,7 @@ export const apComputerScienceACourse: RawCourse = {
 					content: [
 						"Use the APCS track guide as the course pacing readme. It separates the course into Slow/Supported, Medium/Standard, Fast/Quick, Hard/Challenge, and Exam-focused tracks, with concrete module decisions, project-load choices, and advancement rules for each route.",
 						"Use the placement checkpoints in the guide to choose the route from evidence: recent code, Java-specific mistakes, hand tracing, object-state explanations, and AP-style written reasoning.",
-						"**Fast-placement rule:** Use APCS1-4 mostly as diagnostics for experienced Python or C++ learners. Backfill only Java-specific gaps such as `.equals()` versus `==`, integer division, casting, `Scanner`, `Math.random()`, file/class naming, and AP-style tracing.",
+						"**Fast-placement rule:** APCS1-4 can serve mostly as diagnostics for experienced Python or C++ learners. Backfill only Java-specific gaps such as `.equals()` versus `==`, integer division, casting, `Scanner`, `Math.random()`, file/class naming, and AP-style tracing.",
 						"**Core-route rule:** Do not skip APCS5-8, APCS10-12, or APCS13-16 completely. These modules contain the AP-specific Java object model, inheritance/polymorphism, arrays/ArrayLists, wrapper constraints, recursion, runtime, searching, and sorting.",
 						"**Challenge rule:** When APCS work is too easy, keep the AP concept but upgrade the artifact: add validation, multiple classes, test cases, file input, a menu loop, edge-case writeups, or an FRQ-style explanation."
 					].join("\n\n"),
@@ -453,7 +453,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Core Project: Student Class",
 					content:
-						"Use the student-class build as the main APCS5 implementation checkpoint because it is a clean class-with-state project from the source sequence.",
+						"The Student Class build is the main APCS5 implementation checkpoint because it is a clean class-with-state project from the source sequence.",
 					projectLink: repo("APCS5-Student-Class/solution"),
 					mediaLink: media("apcs5-project-2-student-class.mp4")
 				},
@@ -905,7 +905,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Static Constants and Search Initialization",
 					content:
-						"Use `Integer.MIN_VALUE` and `Integer.MAX_VALUE` to teach sane initialization choices for min/max search problems."
+						"`Integer.MIN_VALUE` and `Integer.MAX_VALUE` support sane initialization choices for min/max search problems."
 				},
 				{
 					title: "Core Project: Suits, Decks, and Hands",

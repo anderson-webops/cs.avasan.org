@@ -953,7 +953,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Linker, Relocation, and Symbol Deep Dives",
 					content:
-						"Use a final expansion path for students who want to go deeper into object files, relocation, static versus dynamic linking, and symbol resolution. Those topics make more sense after the core course has already made functions, calls, and build artifacts concrete."
+						"A final expansion path can go deeper into object files, relocation, static versus dynamic linking, and symbol resolution. Those topics make more sense after the core course has already made functions, calls, and build artifacts concrete."
 				},
 				{
 					title: "ASM13 Expansion Ideas and Next Steps: Core Project",

@@ -294,7 +294,7 @@ function systemsSecurityPolicy() {
 		"Lab records include scope, authorization, target, allowed tools, and stop conditions.",
 		"Findings are written as evidence plus impact, followed by defensive remediation, detection, or hardening.",
 		"Work never scans, probes, exploits, or collects data from third-party systems.",
-		"Low-level exercises use sanitizers, fuzzers, and toy parsers to teach memory risk without weaponized targets."
+		"Low-level exercises use sanitizers, fuzzers, and toy parsers to expose memory risk without weaponized targets."
 	];
 }
 
@@ -1439,7 +1439,7 @@ function addCppMatrixModule(courseId: string, course: RawCourse) {
 			{
 				title: "Baseline and Progression Matrix",
 				content: [
-					"**Learning sequence:** Use this matrix when placing students after the original C++ Level 1 material or after Python/Java prerequisites.",
+					"**Learning sequence:** This matrix helps choose the next C++ direction after the original C++ Level 1 material or after Python/Java prerequisites.",
 					`**Matrix:**\n${bullets(cppConceptMatrix)}`,
 					"**Completion check:** the next lesson direction is identifiable: syntax fluency, memory reasoning, standard-library design, parser/state-machine architecture, or DS&A."
 				].join("\n\n")

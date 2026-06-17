@@ -156,7 +156,7 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "Multi-File Class Implementation",
 					content:
-						"Use small multi-file classes to teach how real C++ projects split declarations and definitions. Cover: header files, source files, include guards, method declarations versus method bodies, default and overloaded constructors, member functions that update object state, and how to compile a project with more than one `.cpp` file.",
+						"Small multi-file classes show how real C++ projects split declarations and definitions. Key topics include header files, source files, include guards, method declarations versus method bodies, default and overloaded constructors, member functions that update object state, and how to compile a project with more than one `.cpp` file.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF4-Point-Class"
 				},

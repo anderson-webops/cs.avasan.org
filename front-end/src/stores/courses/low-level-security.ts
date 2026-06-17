@@ -359,7 +359,7 @@ export const lowLevelSecurityCourse: RawCourse = {
 				{
 					title: "Designing a Ring Buffer Safely",
 					content:
-						"Use a fixed-capacity byte ring buffer to teach capacity checks, wraparound, and invariants. The key security lesson is that a data structure should guard its own correctness: reject writes that exceed free capacity, reject reads that request more bytes than are available, and leave the buffer unchanged on failure."
+						"A fixed-capacity byte ring buffer makes capacity checks, wraparound, and invariants concrete. The key security lesson is that a data structure should guard its own correctness: reject writes that exceed free capacity, reject reads that request more bytes than are available, and leave the buffer unchanged on failure."
 				},
 				{
 					title: "Assertions, Invariants, and Audit Notes",

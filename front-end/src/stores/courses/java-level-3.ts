@@ -1822,7 +1822,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Extension: Nested Classes",
 					content:
-						"Use nested classes as an optional design extension for students who want a stronger sense of how helper types can live inside larger structures.",
+						"Nested classes provide an optional design extension for understanding how helper types can live inside larger structures.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ10-Nested-Classes"
 				},
@@ -1836,7 +1836,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Extension: Separate Chaining Hash Table",
 					content:
-						"Use the separate-chaining implementation when students want one more explicit collision-handling model beyond the main hash-map work.",
+						"The separate-chaining implementation adds one more explicit collision-handling model beyond the main hash-map work.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-Separate-Chaining-Hash-Table"
 				},

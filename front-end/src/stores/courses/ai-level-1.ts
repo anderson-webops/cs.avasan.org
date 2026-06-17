@@ -651,7 +651,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "How to Use the Extra Repo Folders",
 					content:
-						"Students who want more practice should use the optional bank below for targeted reinforcement: class refresh, stack/queue mechanics, graph variants, and stronger game-AI comparisons. The point is discoverability without flooding the core syllabus."
+						"The optional bank below supports targeted reinforcement: class refresh, stack/queue mechanics, graph variants, and stronger game-AI comparisons. The point is discoverability without flooding the core syllabus."
 				},
 				{
 					title: "Unit 9: Repo Extension Bank and Canonical Variants: Verification and Reflection",
