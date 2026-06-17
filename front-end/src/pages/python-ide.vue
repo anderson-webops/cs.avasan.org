@@ -2648,9 +2648,9 @@ html.dark .file-tool-toggle-icon::before {
 .file-delete.is-disabled,
 .file-delete:disabled {
 	cursor: not-allowed;
-	border-color: rgba(148, 163, 184, 0.38);
-	background: #cbd5e1;
-	color: rgba(100, 116, 139, 0.78);
+	border-color: rgba(148, 163, 184, 0.28);
+	background: rgba(248, 250, 252, 0.42);
+	color: rgba(100, 116, 139, 0.64);
 }
 
 .file-delete.is-disabled::after,
@@ -2661,16 +2661,21 @@ html.dark .file-tool-toggle-icon::before {
 	width: 135%;
 	height: 2px;
 	border-radius: 999px;
-	background: rgba(255, 255, 255, 0.78);
+	background: rgba(100, 116, 139, 0.46);
 	content: "";
 	transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 html.dark .file-delete.is-disabled,
 html.dark .file-delete:disabled {
-	border-color: rgba(148, 163, 184, 0.36);
-	background: #cbd5e1;
-	color: rgba(100, 116, 139, 0.78);
+	border-color: rgba(148, 163, 184, 0.22);
+	background: rgba(15, 23, 42, 0.36);
+	color: rgba(148, 163, 184, 0.58);
+}
+
+html.dark .file-delete.is-disabled::after,
+html.dark .file-delete:disabled::after {
+	background: rgba(203, 213, 225, 0.42);
 }
 
 .new-file-row {
