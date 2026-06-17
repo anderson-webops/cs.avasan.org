@@ -1035,6 +1035,23 @@ const turtleBridge: TurtleBridge = {
 		turtleState.heading = degrees;
 	},
 	heading: () => turtleState.heading,
+	setState(
+		x: number,
+		y: number,
+		heading: number,
+		penDown: boolean,
+		penColor: string,
+		fillColor: string,
+		lineWidth: number
+	) {
+		turtleState.x = x;
+		turtleState.y = y;
+		turtleState.heading = heading;
+		turtleState.penDown = penDown;
+		turtleState.penColor = penColor;
+		turtleState.fillColor = fillColor;
+		turtleState.lineWidth = Math.max(1, lineWidth);
+	},
 	xcor: () => turtleState.x,
 	ycor: () => turtleState.y,
 	goto(x: number, y: number) {

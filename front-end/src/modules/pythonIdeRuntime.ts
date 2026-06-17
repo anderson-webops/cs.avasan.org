@@ -110,6 +110,15 @@ export interface TurtleBridge {
 	left: (degrees: number) => void;
 	setheading: (degrees: number) => void;
 	heading: () => number;
+	setState: (
+		x: number,
+		y: number,
+		heading: number,
+		penDown: boolean,
+		penColor: string,
+		fillColor: string,
+		lineWidth: number
+	) => void;
 	xcor: () => number;
 	ycor: () => number;
 	goto: (x: number, y: number) => void;
@@ -311,16 +320,42 @@ def Screen():
 
 class Turtle:
     def __init__(self, *_args, **_kwargs):
-        return None
+        self._x = 0.0
+        self._y = 0.0
+        self._heading = 0.0
+        self._pen_down = True
+        self._pen_color = "#0f766e"
+        self._fill_color = "#0f766e"
+        self._line_width = 3.0
+
+    def _sync_bridge(self):
+        _bridge.setState(
+            float(self._x),
+            float(self._y),
+            float(self._heading),
+            bool(self._pen_down),
+            str(self._pen_color),
+            str(self._fill_color),
+            float(self._line_width),
+        )
+
+    def _set_position(self, x, y):
+        self._x = float(x)
+        self._y = float(y)
 
     def forward(self, distance):
-        _bridge.forward(float(distance))
+        amount = float(distance)
+        self._sync_bridge()
+        _bridge.forward(amount)
+        radians = math.radians(self._heading)
+        self._x += math.cos(radians) * amount
+        self._y += math.sin(radians) * amount
 
     def fd(self, distance):
         self.forward(distance)
 
     def backward(self, distance):
-        _bridge.forward(-float(distance))
+        self.forward(-float(distance))
 
     def back(self, distance):
         self.backward(distance)
@@ -329,31 +364,34 @@ class Turtle:
         self.backward(distance)
 
     def right(self, degrees):
-        _bridge.right(float(degrees))
+        self._heading -= float(degrees)
+        self._sync_bridge()
 
     def rt(self, degrees):
         self.right(degrees)
 
     def left(self, degrees):
-        _bridge.left(float(degrees))
+        self._heading += float(degrees)
+        self._sync_bridge()
 
     def lt(self, degrees):
         self.left(degrees)
 
     def setheading(self, degrees):
-        _bridge.setheading(float(degrees))
+        self._heading = float(degrees)
+        self._sync_bridge()
 
     def seth(self, degrees):
         self.setheading(degrees)
 
     def heading(self):
-        return _bridge.heading()
+        return self._heading
 
     def xcor(self):
-        return _bridge.xcor()
+        return self._x
 
     def ycor(self):
-        return _bridge.ycor()
+        return self._y
 
     def position(self):
         return (self.xcor(), self.ycor())
@@ -364,7 +402,9 @@ class Turtle:
     def goto(self, x, y=None):
         if y is None:
             x, y = x
+        self._sync_bridge()
         _bridge.goto(float(x), float(y))
+        self._set_position(x, y)
 
     def setpos(self, x, y=None):
         self.goto(x, y)
@@ -379,10 +419,13 @@ class Turtle:
         self.goto(self.xcor(), float(y))
 
     def home(self):
-        _bridge.home()
+        self.goto(0, 0)
+        self._heading = 0.0
+        self._sync_bridge()
 
     def penup(self):
-        _bridge.penup()
+        self._pen_down = False
+        self._sync_bridge()
 
     def pu(self):
         self.penup()
@@ -391,7 +434,8 @@ class Turtle:
         self.penup()
 
     def pendown(self):
-        _bridge.pendown()
+        self._pen_down = True
+        self._sync_bridge()
 
     def pd(self):
         self.pendown()
@@ -400,51 +444,65 @@ class Turtle:
         self.pendown()
 
     def isdown(self):
-        return _bridge.isdown()
+        return self._pen_down
 
     def pensize(self, width=None):
         if width is None:
-            return None
-        _bridge.pensize(float(width))
+            return self._line_width
+        self._line_width = max(1.0, float(width))
+        self._sync_bridge()
 
     def width(self, width=None):
-        self.pensize(width)
+        return self.pensize(width)
 
     def pencolor(self, color=None):
         if color is None:
-            return None
-        _bridge.pencolor(str(color))
+            return self._pen_color
+        self._pen_color = str(color)
+        self._sync_bridge()
 
     def fillcolor(self, color=None):
         if color is None:
-            return None
-        _bridge.fillcolor(str(color))
+            return self._fill_color
+        self._fill_color = str(color)
+        self._sync_bridge()
 
     def color(self, *colors):
+        if len(colors) == 0:
+            return (self._pen_color, self._fill_color)
         if len(colors) == 1:
-            _bridge.color(str(colors[0]))
+            self._pen_color = str(colors[0])
+            self._fill_color = str(colors[0])
         elif len(colors) >= 2:
-            _bridge.color(str(colors[0]), str(colors[1]))
+            self._pen_color = str(colors[0])
+            self._fill_color = str(colors[1])
+        self._sync_bridge()
 
     def circle(self, radius, *_args, **_kwargs):
+        self._sync_bridge()
         _bridge.circle(float(radius))
 
     def dot(self, size=8, color=None):
+        self._sync_bridge()
         if color is None:
             _bridge.dot(float(size))
         else:
             _bridge.dot(float(size), str(color))
 
     def stamp(self):
+        self._sync_bridge()
         return _bridge.stamp()
 
     def write(self, text, *_args, **_kwargs):
+        self._sync_bridge()
         _bridge.write(str(text))
 
     def onclick(self, function, btn=1, add=None):
+        self._sync_bridge()
         _bridge.registerClick(str(btn), _stored_callback("turtle-click", btn, function))
 
     def ondrag(self, function, btn=1, add=None):
+        self._sync_bridge()
         _bridge.registerDrag(str(btn), _stored_callback("drag", btn, function))
 
     def speed(self, *_args):
@@ -457,6 +515,13 @@ class Turtle:
         _bridge.clear()
 
     def reset(self):
+        self._x = 0.0
+        self._y = 0.0
+        self._heading = 0.0
+        self._pen_down = True
+        self._pen_color = "#0f766e"
+        self._fill_color = "#0f766e"
+        self._line_width = 3.0
         _bridge.reset()
 
     def distance(self, x, y=None):
@@ -520,11 +585,11 @@ def pendown(): _default.pendown()
 def pd(): _default.pendown()
 def down(): _default.pendown()
 def isdown(): return _default.isdown()
-def pensize(width=None): _default.pensize(width)
-def width(width=None): _default.pensize(width)
-def pencolor(color=None): _default.pencolor(color)
-def fillcolor(color=None): _default.fillcolor(color)
-def color(*colors): _default.color(*colors)
+def pensize(width=None): return _default.pensize(width)
+def width(width=None): return _default.pensize(width)
+def pencolor(color=None): return _default.pencolor(color)
+def fillcolor(color=None): return _default.fillcolor(color)
+def color(*colors): return _default.color(*colors)
 def circle(radius, *args, **kwargs): _default.circle(radius, *args, **kwargs)
 def dot(size=8, color=None): _default.dot(size, color)
 def stamp(): return _default.stamp()
