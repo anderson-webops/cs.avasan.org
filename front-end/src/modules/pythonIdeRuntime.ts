@@ -20,6 +20,8 @@ const PYTHON_IMPORT_ALIAS_RE = /\s+as\s+/i;
 const PYTHON_MODULE_SEPARATOR_RE = /\./;
 const FOR_LOOP_ITERATION_LIMIT = 500000;
 const WHILE_LOOP_ITERATION_LIMIT = 25000;
+const TURTLE_COOPERATIVE_WHILE_LOOP_ITERATION_LIMIT = 250000;
+const TURTLE_COOPERATIVE_LOOP_DELAY_MS = 16;
 const MICROPIP_PACKAGES = new Map([
 	["altair", "altair"],
 	["networkx", "networkx"],
@@ -290,18 +292,24 @@ function escapePythonString(value: string) {
 	return JSON.stringify(value);
 }
 
-function createInputBootstrap(inputText: string) {
+function createInputBootstrap(inputText: string, mode: PythonIdeMode) {
 	const inputLines = inputText.replaceAll("\r\n", "\n").split("\n");
 	return `
 import ast
 import builtins
+import textwrap
 import time as __classes_time
 __classes_input_values = iter(__import__("json").loads(${escapePythonString(JSON.stringify(inputLines))}))
+__classes_python_ide_mode = ${escapePythonString(mode)}
 __classes_loop_iterations = {"for": 0, "while": 0}
 __classes_loop_iteration_limits = {
     "for": ${FOR_LOOP_ITERATION_LIMIT},
     "while": ${WHILE_LOOP_ITERATION_LIMIT},
+    "turtle while": ${TURTLE_COOPERATIVE_WHILE_LOOP_ITERATION_LIMIT},
 }
+__classes_turtle_loop_delay_ms = ${TURTLE_COOPERATIVE_LOOP_DELAY_MS}
+__classes_turtle_loop_counter = 0
+__classes_turtle_loop_proxies = {}
 
 def __classes_input(prompt=""):
     print(prompt, end="")
@@ -327,6 +335,12 @@ def __classes_loop_guard(kind):
         )
 
 class __ClassesLoopGuardTransformer(ast.NodeTransformer):
+    def __init__(self, source, filename, allow_turtle_cooperative=False):
+        self.source = source
+        self.filename = filename
+        self.allow_turtle_cooperative = allow_turtle_cooperative
+        super().__init__()
+
     def _guard_statement(self, node, kind):
         return ast.copy_location(
             ast.Expr(
@@ -344,17 +358,121 @@ class __ClassesLoopGuardTransformer(ast.NodeTransformer):
         node.body.insert(0, self._guard_statement(node, kind))
         return node
 
+    def _is_simple_top_level_turtle_loop(self, node):
+        if not self.allow_turtle_cooperative:
+            return False
+        if not isinstance(node, ast.While):
+            return False
+        if not isinstance(node.test, ast.Constant) or node.test.value is not True:
+            return False
+        if node.orelse:
+            return False
+        unsupported_nodes = (
+            ast.Await,
+            ast.Break,
+            ast.Continue,
+            ast.Return,
+            ast.Yield,
+            ast.YieldFrom,
+        )
+        return not any(isinstance(child, unsupported_nodes) for child in ast.walk(node))
+
+    def _loop_body_source(self, node):
+        body_segments = []
+        for statement in node.body:
+            segment = ast.get_source_segment(self.source, statement)
+            if segment is None:
+                return None
+            body_segments.append(segment)
+        body_source = textwrap.dedent("\\n".join(body_segments)).strip()
+        return "{}\\n".format(body_source) if body_source else "pass\\n"
+
+    def _turtle_loop_schedule_statement(self, node):
+        body_source = self._loop_body_source(node)
+        if body_source is None:
+            return None
+        return ast.copy_location(
+            ast.Expr(
+                value=ast.Call(
+                    func=ast.Name(id="__classes_schedule_turtle_loop", ctx=ast.Load()),
+                    args=[
+                        ast.Constant(value=body_source),
+                        ast.Constant(value=self.filename),
+                        ast.Constant(value=node.lineno),
+                    ],
+                    keywords=[],
+                )
+            ),
+            node,
+        )
+
+    def visit_Module(self, node):
+        rewritten_body = []
+        for statement in node.body:
+            if self._is_simple_top_level_turtle_loop(statement):
+                scheduled = self._turtle_loop_schedule_statement(statement)
+                if scheduled is not None:
+                    rewritten_body.append(scheduled)
+                    continue
+            rewritten_body.append(self.visit(statement))
+        node.body = rewritten_body
+        return node
+
     def visit_For(self, node):
         return self._guard_loop(node, "for")
 
     def visit_While(self, node):
         return self._guard_loop(node, "while")
 
-def __classes_compile_student_source(source, filename):
+def __classes_compile_student_source(source, filename, allow_turtle_cooperative=None):
+    if allow_turtle_cooperative is None:
+        allow_turtle_cooperative = __classes_python_ide_mode == "turtle"
     tree = ast.parse(source, filename=filename, mode="exec")
-    tree = __ClassesLoopGuardTransformer().visit(tree)
+    tree = __ClassesLoopGuardTransformer(
+        source,
+        filename,
+        allow_turtle_cooperative=allow_turtle_cooperative,
+    ).visit(tree)
     ast.fix_missing_locations(tree)
     return compile(tree, filename, "exec")
+
+def __classes_schedule_turtle_loop(body_source, filename, line_number):
+    global __classes_turtle_loop_counter
+    try:
+        from js import window as __classes_window
+        from pyodide.ffi import create_proxy as __classes_create_proxy
+    except Exception:
+        raise RuntimeError("Scheduled Turtle while loops require the browser Turtle runtime.")
+
+    __classes_turtle_loop_counter += 1
+    loop_key = str(__classes_turtle_loop_counter)
+    body_code = __classes_compile_student_source(
+        body_source,
+        "{}:while-{}".format(filename, line_number),
+        allow_turtle_cooperative=False,
+    )
+
+    def __classes_run_turtle_loop():
+        try:
+            __classes_loop_guard("turtle while")
+            exec(body_code, globals())
+            __classes_window.__classesPythonIdeTurtle.scheduleTimer(
+                __classes_turtle_loop_delay_ms,
+                __classes_turtle_loop_proxies[loop_key],
+            )
+        except Exception:
+            proxy = __classes_turtle_loop_proxies.pop(loop_key, None)
+            if proxy is not None and hasattr(proxy, "destroy"):
+                proxy.destroy()
+            raise
+
+    __classes_turtle_loop_proxies[loop_key] = __classes_create_proxy(
+        __classes_run_turtle_loop
+    )
+    __classes_window.__classesPythonIdeTurtle.scheduleTimer(
+        0,
+        __classes_turtle_loop_proxies[loop_key],
+    )
 `;
 }
 
@@ -2567,7 +2685,7 @@ if ${escapePythonString(PROJECT_ROOT)} not in sys.path:
     sys.path.insert(0, ${escapePythonString(PROJECT_ROOT)})
 for __classes_module_name in __import__("json").loads(${escapePythonString(JSON.stringify(projectModuleNames))}):
     sys.modules.pop(__classes_module_name, None)
-${createInputBootstrap(options.inputText)}
+${createInputBootstrap(options.inputText, options.mode)}
 if ${options.mode === "pgzero" ? "True" : "False"}:
     import _classes_pgzero
     _classes_pgzero.install_builtins()

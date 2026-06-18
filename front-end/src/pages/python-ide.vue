@@ -1154,7 +1154,7 @@ function interpolateTurtlePose(
 function turtleMovementDuration(fromPose: TurtlePose, toPose: TurtlePose) {
 	const distance = Math.hypot(toPose.x - fromPose.x, toPose.y - fromPose.y);
 	const headingDelta = Math.abs(toPose.heading - fromPose.heading);
-	if (distance > 0) return Math.min(900, Math.max(140, distance * 5));
+	if (distance > 0) return Math.min(900, Math.max(16, distance * 5));
 	if (headingDelta > 0)
 		return Math.min(260, Math.max(90, headingDelta * 1.5));
 	return 80;

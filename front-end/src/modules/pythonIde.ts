@@ -178,12 +178,22 @@ screen.bgcolor("white")
 pen = turtle.Turtle()
 pen.color("teal")
 pen.pensize(3)
+is_moving = True
 
 def move_forward():
 \tpen.forward(30)
 
 def turn_left():
 \tpen.left(20)
+
+def toggle_motion():
+\tglobal is_moving
+\tis_moving = not is_moving
+
+def animate():
+\tif is_moving:
+\t\tpen.forward(2)
+\tscreen.ontimer(animate, 16)
 
 def draw_dot(x, y):
 \tpen.penup()
@@ -196,8 +206,10 @@ def drag_pen(x, y):
 
 screen.onkey(move_forward, "Up")
 screen.onkey(turn_left, "Left")
+screen.onkey(toggle_motion, "space")
 screen.onclick(draw_dot)
 pen.ondrag(drag_pen)
+screen.ontimer(animate, 16)
 screen.listen()
 `;
 

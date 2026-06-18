@@ -160,6 +160,7 @@ describe("python IDE project helpers", () => {
 		expect(turtleProject.files[0]?.content).toBe(turtleStarterCode);
 		expect(turtleProject.files[0]?.content).toContain("screen.onkey");
 		expect(turtleProject.files[0]?.content).toContain("screen.onclick");
+		expect(turtleProject.files[0]?.content).toContain("screen.ontimer");
 		expect(turtleProject.files[0]?.content).toContain("pen.ondrag");
 	});
 
@@ -469,19 +470,44 @@ describe("python IDE project helpers", () => {
 
 		expect(runtimeSource).toContain("const FOR_LOOP_ITERATION_LIMIT");
 		expect(runtimeSource).toContain("const WHILE_LOOP_ITERATION_LIMIT");
+		expect(runtimeSource).toContain(
+			"const TURTLE_COOPERATIVE_WHILE_LOOP_ITERATION_LIMIT"
+		);
 		expect(runtimeSource).toContain("class __ClassesLoopGuardTransformer");
 		expect(runtimeSource).toContain("def __classes_loop_guard(kind):");
 		expect(runtimeSource).toContain("__classes_loop_iteration_limits");
+		expect(runtimeSource).toContain(
+			"def __classes_schedule_turtle_loop"
+		);
+		expect(runtimeSource).toContain(
+			"def _is_simple_top_level_turtle_loop"
+		);
 		expect(runtimeSource).toContain("def __classes_sleep(_seconds=0):");
 		expect(runtimeSource).toContain("__classes_time.sleep = __classes_sleep");
 		expect(runtimeSource).toContain("__classes_compile_student_source(");
+		expect(runtimeSource).toContain(
+			"createInputBootstrap(options.inputText, options.mode)"
+		);
 		expect(runtimeSource).toContain("visit_While");
 		expect(runtimeSource).toContain("visit_For");
+		expect(runtimeSource).toContain("visit_Module");
+		expect(runtimeSource).toContain("ast.get_source_segment");
 		expect(pageSource).toContain("function formatPythonRuntimeError");
 		expect(pageSource).toContain(
 			"RuntimeError: Stopped a long-running (?:for|while) loop"
 		);
 		expect(pageSource).toContain("formatPythonRuntimeError(error)");
+	});
+
+	it("keeps tiny Turtle animation steps responsive for continuous movement", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/pages/python-ide.vue"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain(
+			"return Math.min(900, Math.max(16, distance * 5));"
+		);
 	});
 
 	it("bounds output rendering so print-heavy runs stay responsive", () => {
