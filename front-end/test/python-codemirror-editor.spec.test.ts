@@ -139,6 +139,7 @@ describe("python IDE CodeMirror editor", () => {
 			)
 		).toEqual(
 			expect.arrayContaining([
+				"anchor",
 				"angle_to",
 				"bottomright",
 				"colliderect",
@@ -315,8 +316,10 @@ describe("python IDE CodeMirror editor", () => {
 		expect(result?.options.map(option => option.label)).toEqual(
 			expect.arrayContaining([
 				"arrow",
+				"blank",
 				"circle",
 				"classic",
+				"fancy",
 				"square",
 				"triangle",
 				"turtle"

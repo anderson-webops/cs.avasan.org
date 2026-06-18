@@ -96,7 +96,9 @@ export interface GameBridge {
 		y: number,
 		width: number,
 		height: number,
-		angle: number
+		angle: number,
+		anchorX?: number,
+		anchorY?: number
 	) => void;
 	drawImage: (
 		image: string,
@@ -780,7 +782,7 @@ _bridge = window.__classesPythonIdeTurtle
 _callback_proxies = {}
 _color_mode = 1.0
 _timer_counter = 0
-_builtin_shapes = {"arrow", "circle", "classic", "fancy", "square", "triangle", "turtle"}
+_builtin_shapes = {"arrow", "blank", "circle", "classic", "fancy", "square", "triangle", "turtle"}
 
 def _is_number(value):
     try:
@@ -1653,10 +1655,12 @@ class Actor:
         self.height = _number(kwargs.pop("height", natural_height), natural_height)
         self.angle = _number(kwargs.pop("angle", 0), 0)
         self.visible = kwargs.pop("visible", True)
+        self._anchor = ("center", "center")
+        self.anchor = kwargs.pop("anchor", self._anchor)
         initial_pos = pos if pos is not None else kwargs.pop("pos", None)
 
-        self.x = self.width / 2
-        self.y = self.height / 2
+        self.x = self._anchor_x()
+        self.y = self._anchor_y()
         if initial_pos is not None:
             self.pos = initial_pos
         if "x" in kwargs or "y" in kwargs:
@@ -1680,6 +1684,50 @@ class Actor:
             if getattr(self, "_auto_height", False):
                 self.height = natural_height
 
+    def _anchor_component(self, value, axis):
+        try:
+            numeric_value = float(value)
+            return numeric_value
+        except Exception:
+            pass
+
+        label = str(value).strip().lower()
+        if axis == "x":
+            if label == "left":
+                return 0.0
+            if label in ("center", "middle"):
+                return self.width / 2
+            if label == "right":
+                return self.width
+        else:
+            if label == "top":
+                return 0.0
+            if label in ("center", "middle"):
+                return self.height / 2
+            if label == "bottom":
+                return self.height
+        return self.width / 2 if axis == "x" else self.height / 2
+
+    def _anchor_x(self):
+        return self._anchor_component(self._anchor[0], "x")
+
+    def _anchor_y(self):
+        return self._anchor_component(self._anchor[1], "y")
+
+    @property
+    def anchor(self):
+        return self._anchor
+
+    @anchor.setter
+    def anchor(self, value):
+        if isinstance(value, str):
+            self._anchor = (value, value)
+        else:
+            try:
+                self._anchor = (value[0], value[1])
+            except Exception:
+                self._anchor = ("center", "center")
+
     @property
     def pos(self):
         return (self.x, self.y)
@@ -1691,59 +1739,61 @@ class Actor:
 
     @property
     def left(self):
-        return self.x - self.width / 2
+        return self.x - self._anchor_x()
 
     @left.setter
     def left(self, value):
-        self.x = _number(value) + self.width / 2
+        self.x = _number(value) + self._anchor_x()
 
     @property
     def right(self):
-        return self.x + self.width / 2
+        return self.left + self.width
 
     @right.setter
     def right(self, value):
-        self.x = _number(value) - self.width / 2
+        self.x = _number(value) - self.width + self._anchor_x()
 
     @property
     def top(self):
-        return self.y - self.height / 2
+        return self.y - self._anchor_y()
 
     @top.setter
     def top(self, value):
-        self.y = _number(value) + self.height / 2
+        self.y = _number(value) + self._anchor_y()
 
     @property
     def bottom(self):
-        return self.y + self.height / 2
+        return self.top + self.height
 
     @bottom.setter
     def bottom(self, value):
-        self.y = _number(value) - self.height / 2
+        self.y = _number(value) - self.height + self._anchor_y()
 
     @property
     def center(self):
-        return self.pos
+        return (self.left + self.width / 2, self.top + self.height / 2)
 
     @center.setter
     def center(self, value):
-        self.pos = value
+        x, y = _point(value, self.center)
+        self.left = x - self.width / 2
+        self.top = y - self.height / 2
 
     @property
     def centerx(self):
-        return self.x
+        return self.center[0]
 
     @centerx.setter
     def centerx(self, value):
-        self.x = _number(value, self.x)
+        self.center = (value, self.centery)
 
     @property
     def centery(self):
-        return self.y
+        return self.center[1]
 
     @centery.setter
     def centery(self, value):
-        self.y = _number(value, self.y)
+        self.center = (self.centerx, value)
 
     @property
     def w(self):
@@ -1852,6 +1902,8 @@ class Actor:
                 float(self.width),
                 float(self.height),
                 float(self.angle),
+                float(self._anchor_x()),
+                float(self._anchor_y()),
             )
 
     def collidepoint(self, pos):

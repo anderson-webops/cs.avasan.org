@@ -465,17 +465,26 @@ describe("python IDE project helpers", () => {
 		);
 		expect(pageSource).toContain("shape: defaultTurtleShape");
 		expect(pageSource).toContain("penColor: \"#000000\"");
+		expect(pageSource).toContain("const turtleOriginalShapePolygons = {");
+		expect(pageSource).toContain("classic: [");
+		expect(pageSource).toContain("[0, 0]");
+		expect(pageSource).toContain("[0, 16]");
 		expect(pageSource).toContain("function drawClassicTurtleShape");
 		expect(pageSource).toContain("function drawArrowTurtleShape");
 		expect(pageSource).toContain("function drawOriginalTurtleShape");
 		expect(pageSource).toContain("function drawFancyTurtleShape");
-		expect(markerSource).toContain("context.ellipse");
+		expect(pageSource).toContain("function drawOriginalTurtlePolygonShape");
+		expect(pageSource).toContain("context.moveTo(firstPoint[1], firstPoint[0])");
+		expect(pageSource).toContain(
+			"for (const [x, y] of remainingPoints) context.lineTo(y, x);"
+		);
 		expect(markerSource).toContain("context.rotate(-radians)");
 		expect(markerSource).toContain("case \"classic\"");
 		expect(markerSource).toContain("case \"turtle\"");
+		expect(markerSource).toContain("case \"blank\"");
 		expect(markerSource).toContain("case \"fancy\"");
 		expect(runtimeSource).toContain(
-			"_builtin_shapes = {\"arrow\", \"circle\", \"classic\", \"fancy\", \"square\", \"triangle\", \"turtle\"}"
+			"_builtin_shapes = {\"arrow\", \"blank\", \"circle\", \"classic\", \"fancy\", \"square\", \"triangle\", \"turtle\"}"
 		);
 		expect(runtimeSource).toContain("self._shape = \"classic\"");
 		expect(runtimeSource).toContain("def shape(self, *_args):");
@@ -1200,7 +1209,17 @@ describe("python IDE project helpers", () => {
 		);
 		expect(runtimeSource).toContain("def distance_to(self, target):");
 		expect(runtimeSource).toContain("def angle_to(self, target):");
-		expect(runtimeSource).toContain("self.x = self.width / 2");
+		expect(runtimeSource).toContain(
+			"self.anchor = kwargs.pop(\"anchor\", self._anchor)"
+		);
+		expect(runtimeSource).toContain(
+			"def _anchor_component(self, value, axis):"
+		);
+		expect(runtimeSource).toContain("def _anchor_x(self):");
+		expect(runtimeSource).toContain("def _anchor_y(self):");
+		expect(runtimeSource).toContain("def anchor(self):");
+		expect(runtimeSource).toContain("return self.x - self._anchor_x()");
+		expect(runtimeSource).toContain("float(self._anchor_x()),");
 		expect(runtimeSource).toContain("def topleft(self):");
 		expect(runtimeSource).toContain("def midbottom(self):");
 		expect(runtimeSource).toContain("def move_ip(self, x, y=None):");
@@ -1237,6 +1256,8 @@ describe("python IDE project helpers", () => {
 		);
 		expect(pageSource).toContain("pythonAssetCompletionName");
 		expect(pageSource).toContain("drawImage: drawGameImage");
+		expect(pageSource).toContain("anchorX = width / 2");
+		expect(pageSource).toContain("const left = -anchorX");
 		expect(pageSource).toContain("drawLine: drawGameLine");
 		expect(pageSource).toContain("drawCircle: drawGameCircle");
 		expect(pageSource).toContain("pauseMusic: pauseGameMusic");

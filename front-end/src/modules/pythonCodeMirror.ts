@@ -103,6 +103,7 @@ const turtleShapeCompletions = [
 	"classic",
 	"arrow",
 	"turtle",
+	"blank",
 	"circle",
 	"square",
 	"triangle",
@@ -220,6 +221,7 @@ const dataRuntimeCompletions = [
 const sharedMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
 	Actor: [
 		completion("image", "property", "asset name"),
+		completion("anchor", "property", "drawing anchor point"),
 		completion("pos", "property", "actor position"),
 		completion("center", "property", "actor center"),
 		completion("topleft", "property", "top-left position"),

@@ -207,6 +207,7 @@ interface GameToneHandle {
 type PythonIdeAssetFolder = "images" | "music" | "sounds";
 type TurtleShapeName =
 	| "arrow"
+	| "blank"
 	| "circle"
 	| "classic"
 	| "fancy"
@@ -224,6 +225,7 @@ const assetCompletionExtensionMap = {
 const defaultTurtleShape: TurtleShapeName = "classic";
 const supportedTurtleShapes = new Set<TurtleShapeName>([
 	"arrow",
+	"blank",
 	"circle",
 	"classic",
 	"fancy",
@@ -231,6 +233,81 @@ const supportedTurtleShapes = new Set<TurtleShapeName>([
 	"triangle",
 	"turtle"
 ]);
+const turtleOriginalShapePolygons = {
+	arrow: [
+		[-10, 0],
+		[10, 0],
+		[0, 10]
+	],
+	circle: [
+		[10, 0],
+		[9.51, 3.09],
+		[8.09, 5.88],
+		[5.88, 8.09],
+		[3.09, 9.51],
+		[0, 10],
+		[-3.09, 9.51],
+		[-5.88, 8.09],
+		[-8.09, 5.88],
+		[-9.51, 3.09],
+		[-10, 0],
+		[-9.51, -3.09],
+		[-8.09, -5.88],
+		[-5.88, -8.09],
+		[-3.09, -9.51],
+		[0, -10],
+		[3.09, -9.51],
+		[5.88, -8.09],
+		[8.09, -5.88],
+		[9.51, -3.09]
+	],
+	classic: [
+		[0, 0],
+		[-5, -9],
+		[0, -7],
+		[5, -9]
+	],
+	square: [
+		[10, -10],
+		[10, 10],
+		[-10, 10],
+		[-10, -10]
+	],
+	triangle: [
+		[10, -5.77],
+		[0, 11.55],
+		[-10, -5.77]
+	],
+	turtle: [
+		[0, 16],
+		[-2, 14],
+		[-1, 10],
+		[-4, 7],
+		[-7, 9],
+		[-9, 8],
+		[-6, 5],
+		[-7, 1],
+		[-5, -3],
+		[-8, -6],
+		[-6, -8],
+		[-4, -5],
+		[0, -7],
+		[4, -5],
+		[6, -8],
+		[8, -6],
+		[5, -3],
+		[7, 1],
+		[6, 5],
+		[9, 8],
+		[7, 9],
+		[4, 7],
+		[1, 10],
+		[2, 14]
+	]
+} satisfies Record<
+	Exclude<TurtleShapeName, "blank" | "fancy">,
+	Array<[number, number]>
+>;
 const maxPythonIdeProjectFiles = 40;
 const maxImportedTextFileBytes = 512 * 1024;
 const maxImportedBinaryFileBytes = 2 * 1024 * 1024;
@@ -1246,6 +1323,8 @@ function drawTurtleMarker(context: CanvasRenderingContext2D, pose: TurtlePose) {
 		case "arrow":
 			drawArrowTurtleShape(context);
 			break;
+		case "blank":
+			break;
 		case "circle":
 			drawCircleTurtleShape(context);
 			break;
@@ -1271,68 +1350,44 @@ function drawTurtleMarker(context: CanvasRenderingContext2D, pose: TurtlePose) {
 }
 
 function drawClassicTurtleShape(context: CanvasRenderingContext2D) {
-	context.beginPath();
-	context.moveTo(14, 0);
-	context.lineTo(-7, -6);
-	context.lineTo(-3, 0);
-	context.lineTo(-7, 6);
-	context.closePath();
-	context.fill();
+	drawOriginalTurtlePolygonShape(
+		context,
+		turtleOriginalShapePolygons.classic
+	);
 }
 
 function drawArrowTurtleShape(context: CanvasRenderingContext2D) {
-	context.beginPath();
-	context.moveTo(14, 0);
-	context.lineTo(-10, -8);
-	context.lineTo(-5, 0);
-	context.lineTo(-10, 8);
-	context.closePath();
-	context.fill();
+	drawOriginalTurtlePolygonShape(context, turtleOriginalShapePolygons.arrow);
 }
 
 function drawTriangleTurtleShape(context: CanvasRenderingContext2D) {
-	context.beginPath();
-	context.moveTo(12, 0);
-	context.lineTo(-9, -10);
-	context.lineTo(-9, 10);
-	context.closePath();
-	context.fill();
+	drawOriginalTurtlePolygonShape(
+		context,
+		turtleOriginalShapePolygons.triangle
+	);
 }
 
 function drawSquareTurtleShape(context: CanvasRenderingContext2D) {
-	context.fillRect(-9, -9, 18, 18);
+	drawOriginalTurtlePolygonShape(context, turtleOriginalShapePolygons.square);
 }
 
 function drawCircleTurtleShape(context: CanvasRenderingContext2D) {
-	context.beginPath();
-	context.arc(0, 0, 9.5, 0, Math.PI * 2);
-	context.fill();
+	drawOriginalTurtlePolygonShape(context, turtleOriginalShapePolygons.circle);
 }
 
 function drawOriginalTurtleShape(context: CanvasRenderingContext2D) {
-	context.beginPath();
-	context.ellipse(0, 0, 10.5, 7.5, 0, 0, Math.PI * 2);
-	context.fill();
+	drawOriginalTurtlePolygonShape(context, turtleOriginalShapePolygons.turtle);
+}
 
-	for (const [x, y, radiusX, radiusY, rotation] of [
-		[6.8, -7.2, 3.1, 1.8, -0.45],
-		[6.8, 7.2, 3.1, 1.8, 0.45],
-		[-6.8, -7.2, 3.1, 1.8, 0.45],
-		[-6.8, 7.2, 3.1, 1.8, -0.45]
-	] as const) {
-		context.beginPath();
-		context.ellipse(x, y, radiusX, radiusY, rotation, 0, Math.PI * 2);
-		context.fill();
-	}
-
+function drawOriginalTurtlePolygonShape(
+	context: CanvasRenderingContext2D,
+	points: Array<[number, number]>
+) {
+	const [firstPoint, ...remainingPoints] = points;
+	if (!firstPoint) return;
 	context.beginPath();
-	context.ellipse(12.8, 0, 3.2, 2.5, 0, 0, Math.PI * 2);
-	context.fill();
-
-	context.beginPath();
-	context.moveTo(-10.5, 0);
-	context.lineTo(-15, -3);
-	context.lineTo(-15, 3);
+	context.moveTo(firstPoint[1], firstPoint[0]);
+	for (const [x, y] of remainingPoints) context.lineTo(y, x);
 	context.closePath();
 	context.fill();
 }
@@ -2258,7 +2313,9 @@ function drawGameActor(
 	y: number,
 	width: number,
 	height: number,
-	angle: number
+	angle: number,
+	anchorX = width / 2,
+	anchorY = height / 2
 ) {
 	const context = setGameCanvasTransform();
 	if (!context) return;
@@ -2268,8 +2325,8 @@ function drawGameActor(
 	context.save();
 	context.translate(x, y);
 	context.rotate((angle * Math.PI) / 180);
-	const left = -width / 2;
-	const top = -height / 2;
+	const left = -anchorX;
+	const top = -anchorY;
 	if (
 		assetImage?.loaded &&
 		!assetImage.failed &&
