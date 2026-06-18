@@ -176,6 +176,8 @@ interface GameInputEvent {
 		| "mousemove"
 		| "musicended";
 	key?: string;
+	mod?: number;
+	unicode?: string;
 	x?: number;
 	y?: number;
 	button?: "left" | "middle" | "right";
@@ -318,6 +320,89 @@ const outputEntryTruncatedMessage =
 	"\n[Output truncated to keep the browser responsive.]";
 const outputHistoryTrimmedMessage =
 	"Earlier output was hidden to keep the browser responsive.";
+const keyboardKeyWhitespaceRegex = /\s+/g;
+const browserKeyboardLetterCodeRegex = /^Key([A-Z])$/;
+const browserKeyboardDigitCodeRegex = /^Digit(\d)$/;
+const browserKeyboardNumpadDigitCodeRegex = /^Numpad(\d)$/;
+const browserKeyboardFunctionCodeRegex = /^F([1-9]|1[0-5])$/;
+const browserKeyboardCodeMap: Record<string, string> = {
+	AltLeft: "lalt",
+	AltRight: "ralt",
+	ArrowDown: "down",
+	ArrowLeft: "left",
+	ArrowRight: "right",
+	ArrowUp: "up",
+	Backquote: "backquote",
+	Backslash: "backslash",
+	Backspace: "backspace",
+	BracketLeft: "leftbracket",
+	BracketRight: "rightbracket",
+	CapsLock: "capslock",
+	Comma: "comma",
+	ContextMenu: "menu",
+	ControlLeft: "lctrl",
+	ControlRight: "rctrl",
+	Delete: "delete",
+	End: "end",
+	Enter: "return",
+	Equal: "equals",
+	Escape: "escape",
+	Home: "home",
+	Insert: "insert",
+	MetaLeft: "lmeta",
+	MetaRight: "rmeta",
+	Minus: "minus",
+	NumLock: "numlock",
+	NumpadAdd: "kp_plus",
+	NumpadDecimal: "kp_period",
+	NumpadDivide: "kp_divide",
+	NumpadEnter: "kp_enter",
+	NumpadMultiply: "kp_multiply",
+	NumpadSubtract: "kp_minus",
+	PageDown: "pagedown",
+	PageUp: "pageup",
+	Pause: "pause",
+	Period: "period",
+	Quote: "quote",
+	Semicolon: "semicolon",
+	ShiftLeft: "lshift",
+	ShiftRight: "rshift",
+	Slash: "slash",
+	Space: "space",
+	Tab: "tab"
+};
+const keyboardKeyAliasMap: Record<string, string> = {
+	" ": "space",
+	arrowdown: "down",
+	arrowleft: "left",
+	arrowright: "right",
+	arrowup: "up",
+	control: "ctrl",
+	ctl: "ctrl",
+	ctrlleft: "lctrl",
+	ctrlright: "rctrl",
+	down: "down",
+	enter: "return",
+	esc: "escape",
+	escape: "escape",
+	left: "left",
+	option: "alt",
+	page_down: "pagedown",
+	page_up: "pageup",
+	pgdn: "pagedown",
+	pgup: "pageup",
+	return: "return",
+	right: "right",
+	space: "space",
+	spacebar: "space",
+	up: "up"
+};
+for (let digit = 0; digit <= 9; digit += 1) {
+	keyboardKeyAliasMap[`digit${digit}`] = String(digit);
+	keyboardKeyAliasMap[`k_${digit}`] = String(digit);
+	keyboardKeyAliasMap[`kp${digit}`] = `kp${digit}`;
+	keyboardKeyAliasMap[`numpad${digit}`] = `kp${digit}`;
+}
 
 const app = useAppStore();
 const route = useRoute();
@@ -2479,31 +2564,48 @@ function drawGameCircle(
 	context.stroke();
 }
 
-function normalizeKey(key: string) {
-	const keyMap: Record<string, string> = {
-		down: "arrowdown",
-		enter: "enter",
-		escape: "escape",
-		left: "arrowleft",
-		return: "enter",
-		right: "arrowright",
-		space: " ",
-		up: "arrowup"
-	};
-	return keyMap[key.toLowerCase()] ?? key.toLowerCase();
+function normalizeKey(key: string | null | undefined) {
+	if (!key) return "";
+	const normalized = key
+		.toLowerCase()
+		.replace(keyboardKeyWhitespaceRegex, "");
+	return keyboardKeyAliasMap[normalized] ?? normalized;
 }
 
-function pythonGameKey(key: string) {
-	const keyMap: Record<string, string> = {
-		" ": "space",
-		arrowdown: "down",
-		arrowleft: "left",
-		arrowright: "right",
-		arrowup: "up",
-		enter: "return",
-		escape: "escape"
-	};
-	return keyMap[normalizeKey(key)] ?? normalizeKey(key);
+function pythonGameKeyFromEvent(event: KeyboardEvent) {
+	const codeMatch =
+		event.code.match(browserKeyboardLetterCodeRegex) ??
+		event.code.match(browserKeyboardDigitCodeRegex);
+	if (codeMatch?.[1]) return codeMatch[1].toLowerCase();
+
+	const numpadDigitMatch = event.code.match(
+		browserKeyboardNumpadDigitCodeRegex
+	);
+	if (numpadDigitMatch?.[1]) return `kp${numpadDigitMatch[1]}`;
+
+	const functionKeyMatch = event.code.match(browserKeyboardFunctionCodeRegex);
+	if (functionKeyMatch?.[1]) return `f${functionKeyMatch[1]}`;
+
+	return browserKeyboardCodeMap[event.code] ?? normalizeKey(event.key);
+}
+
+function gameKeyModifierMask(event: KeyboardEvent) {
+	let mod = 0;
+	if (event.shiftKey)
+		mod |= event.location === 1 ? 1 : event.location === 2 ? 2 : 3;
+	if (event.ctrlKey)
+		mod |= event.location === 1 ? 4 : event.location === 2 ? 8 : 12;
+	if (event.altKey)
+		mod |= event.location === 1 ? 16 : event.location === 2 ? 32 : 48;
+	if (event.metaKey)
+		mod |= event.location === 1 ? 64 : event.location === 2 ? 128 : 192;
+	if (event.getModifierState?.("NumLock")) mod |= 256;
+	if (event.getModifierState?.("CapsLock")) mod |= 512;
+	return mod;
+}
+
+function gameKeyUnicode(event: KeyboardEvent) {
+	return event.key.length === 1 ? event.key : "";
 }
 
 const turtleBridge: TurtleBridge = {
@@ -2867,21 +2969,19 @@ function handleKeyDown(event: KeyboardEvent) {
 
 	if (selectedProject.value?.mode !== "pgzero") return;
 
-	const normalizedKey = normalizeKey(event.key);
+	const normalizedKey = normalizeKey(pythonGameKeyFromEvent(event));
 	const wasDown = gameKeysDown.has(normalizedKey);
 	gameKeysDown.add(normalizedKey);
 	if (!wasDown) {
 		gameEvents.push({
 			type: "keydown",
-			key: pythonGameKey(event.key)
+			key: normalizedKey,
+			mod: gameKeyModifierMask(event),
+			unicode: gameKeyUnicode(event)
 		});
 	}
 
-	if (
-		[" ", "arrowdown", "arrowleft", "arrowright", "arrowup"].includes(
-			normalizedKey
-		)
-	) {
+	if (["down", "left", "right", "space", "up"].includes(normalizedKey)) {
 		event.preventDefault();
 	}
 }
@@ -2890,11 +2990,12 @@ function handleKeyUp(event: KeyboardEvent) {
 	if (!canvasOwnsKeyboardEvent(event)) return;
 	if (selectedProject.value?.mode !== "pgzero") return;
 
-	const normalizedKey = normalizeKey(event.key);
+	const normalizedKey = normalizeKey(pythonGameKeyFromEvent(event));
 	gameKeysDown.delete(normalizedKey);
 	gameEvents.push({
 		type: "keyup",
-		key: pythonGameKey(event.key)
+		key: normalizedKey,
+		mod: gameKeyModifierMask(event)
 	});
 }
 

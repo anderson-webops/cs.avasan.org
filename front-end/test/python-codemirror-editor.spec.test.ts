@@ -182,7 +182,19 @@ describe("python IDE CodeMirror editor", () => {
 			pythonIdeCompletionsForMode("pgzero", "keys").map(
 				option => option.label
 			)
-		).toEqual(expect.arrayContaining(["LEFT", "SPACE", "UP"]));
+		).toEqual(
+			expect.arrayContaining([
+				"B",
+				"F12",
+				"K_1",
+				"KP_ENTER",
+				"LEFT",
+				"LSHIFT",
+				"SPACE",
+				"UP",
+				"Z"
+			])
+		);
 		expect(
 			pythonIdeCompletionsForMode("pgzero", "keymods").map(
 				option => option.label

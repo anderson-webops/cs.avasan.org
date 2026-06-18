@@ -927,9 +927,13 @@ describe("python IDE project helpers", () => {
 			)
 		).toBeLessThan(
 			pageSource.indexOf(
-				"[\" \", \"arrowdown\", \"arrowleft\", \"arrowright\", \"arrowup\"]"
+				"[\"down\", \"left\", \"right\", \"space\", \"up\"]"
 			)
 		);
+		expect(pageSource).toContain("function pythonGameKeyFromEvent");
+		expect(pageSource).toContain("function gameKeyModifierMask");
+		expect(pageSource).toContain("mod: gameKeyModifierMask(event)");
+		expect(pageSource).toContain("unicode: gameKeyUnicode(event)");
 		expect(pageSource).toContain("@blur=\"clearCanvasKeyboardState\"");
 		expect(pageSource).toContain("canvasRef.value?.focus();");
 		expect(pageSource).toContain("--python-focus-ring");
@@ -1261,6 +1265,10 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("def set_volume(self, volume):");
 		expect(runtimeSource).toContain("def get_width(self):");
 		expect(runtimeSource).toContain("def get_rect(self):");
+		expect(runtimeSource).toContain("BACKSPACE = \"backspace\"");
+		expect(runtimeSource).toContain("K_1 = \"1\"");
+		expect(runtimeSource).toContain("LSHIFT = \"lshift\"");
+		expect(runtimeSource).toContain("KP_ENTER = \"kp_enter\"");
 		expect(runtimeSource).toContain("def _call_named_callback");
 		expect(runtimeSource).toContain("def animate(obj");
 		expect(runtimeSource).toContain("class Animation:");
