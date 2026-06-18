@@ -52,6 +52,13 @@ describe("public course pathways", () => {
 		}
 	});
 
+	it("uses declarative public pathway wording instead of advisory scaffolding", () => {
+		const corpus = JSON.stringify(coursePublicPathways);
+
+		expect(corpus).not.toMatch(/\bshould\b/i);
+		expect(corpus).not.toMatch(/\bStudents entering\b/i);
+	});
+
 	it("captures the high-priority research constraints that were easy to miss", () => {
 		expect(coursePublicPathways.find(pathway => pathway.id === "scratch-early-cs")?.adminPriority).toBe("urgent");
 		expect(pathwayText("scratch-early-cs")).toMatch(/blocks-to-pseudocode|pseudocode/i);

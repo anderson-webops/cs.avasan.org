@@ -32,9 +32,9 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Present a polished project with instructions, controls, replay state, and a short explanation of one bug they fixed."
 		],
 		sequencingNotes: [
-			"Scratch Level 1 should focus on events, motion, loops, conditionals, variables, and visual debugging.",
-			"Scratch Level 2 should add broadcasts, clones, lists, multi-scene state, remix etiquette, and more formal project review.",
-			"The pathway should not treat Scratch as decoration; every project should name the computational idea being practiced."
+			"Scratch Level 1 focuses on events, motion, loops, conditionals, variables, and visual debugging.",
+			"Scratch Level 2 adds broadcasts, clones, lists, multi-scene state, remix etiquette, and more formal project review.",
+			"The pathway treats Scratch as real computer science; every project names the computational idea being practiced."
 		],
 		projectExpectations: [
 			"Maze or collector game with timer, score, and clear win/loss states.",
@@ -75,16 +75,16 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		audience:
 			"Students moving from first text programs into file-backed tools, algorithms, object design, and language transfer into Java or C++.",
 		prerequisiteSummary:
-			"Students entering Level 1 need no Python experience. Students entering Level 3 should already be comfortable with functions, loops, lists, dictionaries, and debugging console programs.",
+			"Level 1 needs no Python experience. Level 3 expects comfort with functions, loops, lists, dictionaries, and debugging console programs.",
 		outcomes: [
 			"Write clear console programs with input handling, conditionals, loops, functions, and data structures.",
 			"Use files, CSV or JSON records, exceptions, modules, command-line arguments, and lightweight tests in medium-size programs.",
 			"Explain how Python choices map to Java and C++ choices when moving into stronger typing, classes, and memory-aware programming."
 		],
 		sequencingNotes: [
-			"Level 1 should emphasize fluency and confidence with small programs.",
-			"Level 2 should turn fluency into structured projects with nested data, validation, and test cases.",
-			"Level 3 should be treated as algorithms, files, APIs, command-line tools, and object design, not just more syntax."
+			"Level 1 emphasizes fluency and confidence with small programs.",
+			"Level 2 turns fluency into structured projects with nested data, validation, and test cases.",
+			"Level 3 covers algorithms, files, APIs, command-line tools, and object design, not just more syntax."
 		],
 		projectExpectations: [
 			"JSON-backed contact book, gradebook, or flashcard trainer with normal and malformed input tests.",
@@ -127,8 +127,8 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Use playtest notes, bug reproduction steps, asset attribution, and version-control habits in every substantial game."
 		],
 		sequencingNotes: [
-			"PyGame should start with main loop, events, rectangles, sprites, collision, audio, menus, and level data.",
-			"Unity should cover setup, scenes, components, prefabs, Input System, physics, UI state, Build Profiles, and testing.",
+			"PyGame starts with main loop, events, rectangles, sprites, collision, audio, menus, and level data.",
+			"Unity covers setup, scenes, components, prefabs, Input System, physics, UI state, Build Profiles, and testing.",
 			"Do not let engine-specific clicking replace design reasoning; every project needs a state diagram or gameplay loop description."
 		],
 		projectExpectations: [
@@ -145,8 +145,8 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Use PyGame documentation for Python game-loop material.",
 			"Use Unity Learn, Unity Manual, Build Profiles, Input System, Test Framework, package locks, and Git LFS for Unity projects.",
 			"Keep THIRD_PARTY_ASSETS notes and engine version files with each Unity starter and review state.",
-			"Treat current Unity starter and review source folders as the baseline; mature modules should use checkpoint tags or equivalent history so game-growth history can be inspected over time.",
-			"Unity source packages should document editor version, package baseline, Build Profiles, Input System setup, Edit Mode or Play Mode smoke tests, and asset-license provenance."
+			"Treat current Unity starter and review source folders as the baseline; mature modules use checkpoint tags or equivalent history so game-growth history can be inspected over time.",
+			"Unity source packages document editor version, package baseline, Build Profiles, Input System setup, Edit Mode or Play Mode smoke tests, and asset-license provenance."
 		],
 		safetyAndAccess: [
 			"Use licensed or provided assets only.",
@@ -175,9 +175,9 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Train and evaluate simple ML models with train/test splits, baseline comparison, confusion matrices or error metrics, and a short model card."
 		],
 		sequencingNotes: [
-			"Data Science should come before ML when pandas, plots, missing data, and interpretation need more practice.",
-			"AI Level 1 should stay focused on search, games, rules, and responsible AI concepts rather than statistical ML.",
-			"Machine Learning should add scikit-learn evaluation, overfitting, fairness limits, and model documentation without duplicating the AI-only course."
+			"Data Science comes before ML when pandas, plots, missing data, and interpretation need more practice.",
+			"AI Level 1 stays focused on search, games, rules, and responsible AI concepts rather than statistical ML.",
+			"Machine Learning adds scikit-learn evaluation, overfitting, fairness limits, and model documentation without duplicating the AI-only course."
 		],
 		projectExpectations: [
 			"Notebook that cleans a named dataset, creates visualizations, and states two evidence-backed conclusions.",
@@ -276,9 +276,9 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Implement and analyze linked structures, trees, heaps, hashing, graphs, dynamic programming, and shortest-path style projects."
 		],
 		sequencingNotes: [
-			"Level 1 should remain the core syntax, functions, classes, vectors, references, and baseline state-machine course.",
-			"Level 2 should bridge from raw memory to safer ownership and reusable custom data structures.",
-			"Level 3 should cover command architecture, file I/O, parsers, STL containers, RAII, templates, virtual interfaces, and state machines before DS&A."
+			"Level 1 remains the core syntax, functions, classes, vectors, references, and baseline state-machine course.",
+			"Level 2 bridges from raw memory to safer ownership and reusable custom data structures.",
+			"Level 3 covers command architecture, file I/O, parsers, STL containers, RAII, templates, virtual interfaces, and state machines before DS&A."
 		],
 		projectExpectations: [
 			"CLI state-machine project with commands, validation, persistence, and transcript tests.",
@@ -327,9 +327,9 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Compare C/C++ systems risks with Rust ownership, borrowing, traits, error handling, and safe concurrency patterns."
 		],
 		sequencingNotes: [
-			"C systems and Assembly should anchor memory representation before deeper security or Rust topics.",
-			"Linux Systems should teach operational habits: commands, services, logs, configs, deployment, and rollback notes.",
-			"Network Systems should precede Network Security when routing, DNS, HTTP/TLS, NAT, firewall, and packet-capture context are not yet comfortable."
+			"C systems and Assembly anchor memory representation before deeper security or Rust topics.",
+			"Linux Systems teaches operational habits: commands, services, logs, configs, deployment, and rollback notes.",
+			"Network Systems precedes Network Security when routing, DNS, HTTP/TLS, NAT, firewall, and packet-capture context are not yet comfortable."
 		],
 		projectExpectations: [
 			"Systems CLI utility with explicit file, memory, process, or signal behavior and a verification transcript.",
@@ -350,10 +350,10 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Do not require router changes, scans of third-party hosts, or home-network reconfiguration.",
 			"Use local traffic, owned domains, or provided captures.",
 			"Keep privileged commands constrained and require rollback notes for configuration changes.",
-			"Use a simple safety matrix for each lab: allowed target, prohibited target, required evidence, rollback or cleanup step, and what should be skipped if the student lacks admin access."
+			"Use a simple safety matrix for each lab: allowed target, prohibited target, required evidence, rollback or cleanup step, and what to skip when admin access is unavailable."
 		],
 		adminExpansionBacklog: [
-			"Add a systems prerequisite matrix that shows when C, Assembly, Linux, Networking, Security, and Rust should be taken.",
+			"Add a systems prerequisite matrix that shows where C, Assembly, Linux, Networking, Security, and Rust belong in the sequence.",
 			"Add more evidence-based lab rubrics for logs, packets, service state, and rollback.",
 			"Document VM/container setup options for students without full admin access.",
 			"Add course-specific safety matrices for Linux, networking, C systems, assembly, and Rust labs."
@@ -376,13 +376,13 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Key idea: Variables, control flow, methods, arrays or ArrayLists, and basic class construction before the advanced tracks.",
 		outcomes: [
 			"Write Java classes with encapsulation, constructors, methods, inheritance, polymorphism, abstract classes, interfaces, and records where appropriate.",
-			"Choose between graphics and non-graphics tracks depending on whether the next project should emphasize visual interaction or deeper backend/model design.",
+			"Choose between graphics and non-graphics tracks depending on whether the next project emphasizes visual interaction or deeper backend/model design.",
 			"Use tests, tracing, and design explanations to show object state and method contracts."
 		],
 		sequencingNotes: [
-			"Java Level 1-3 should remain the general pathway for syntax, classes, inheritance, data structures, and project fluency.",
-			"Java without Graphics should be the post-C++ bridge for CLI tools, models, records, collections, interfaces, and robust tests.",
-			"Java with Graphics should be the visual track, but graphics should not replace object-model rigor."
+			"Java Level 1-3 remains the general pathway for syntax, classes, inheritance, data structures, and project fluency.",
+			"Java without Graphics is the post-C++ bridge for CLI tools, models, records, collections, interfaces, and robust tests.",
+			"Java with Graphics is the visual track, but graphics does not replace object-model rigor."
 		],
 		projectExpectations: [
 			"Record-backed inventory, scheduler, or catalog CLI with validation and tests.",
@@ -447,7 +447,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Guardrails to refresh each cycle: official Java subset, Bluebook-style typed and uncompiled practice, four FRQ families, AP Lab Quartet references, data ethics, text-file/dataset practice, wrapper parsing, recursion, ArrayList analysis, and 2D arrays."
 		],
 		safetyAndAccess: [
-			"Do not expose completed-state links where only starter materials should be visible.",
+			"Do not expose completed-state links where only starter materials belong.",
 			"Avoid copying proprietary textbook material into course text.",
 			"Use practice problems in a way that respects source and licensing boundaries."
 		],
@@ -474,8 +474,8 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		sequencingNotes: [
 			"Use official USACO problems and USACO Guide topics as the sequencing authority.",
-			"Bronze should emphasize careful implementation before advanced algorithms.",
-			"Silver and Gold should add topic ladders only after easier problems can be solved cleanly under time.",
+			"Bronze emphasizes careful implementation before advanced algorithms.",
+			"Silver and Gold add topic ladders only after easier problems can be solved cleanly under time.",
 			"Avoid random chronological contest browsing; choose official problems by division, topic, and slot difficulty so each assignment has a specific purpose."
 		],
 		projectExpectations: [
@@ -487,7 +487,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Check exact sample input/output, smallest case, largest reasonable case, ties, duplicates, and impossible cases.",
 			"Include time complexity, memory complexity, and proof of why the algorithm matches constraints.",
 			"Use timed practice only after the student has a repeatable untimed solution process.",
-			"Every assigned official problem should include brute-force idea, target complexity, invariant or proof note, common wrong turns, and postmortem."
+			"Every assigned official problem includes a brute-force idea, target complexity, invariant or proof note, common wrong turns, and postmortem."
 		],
 		sourceAndTooling: [
 			"Use USACO Official and USACO Guide as authoritative references.",
@@ -569,22 +569,22 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		audience:
 			"Zoom-based science students who need strong explanations, diagrams, data, simulations, and claim-evidence-reasoning without physical lab requirements.",
 		prerequisiteSummary:
-			"Elementary Science should split K-2 and grades 3-5 expectations. Middle school science assumes basic reading, graphing, and explanation readiness. Chemistry and Physics assume stronger math and model reading.",
+			"Elementary Science splits K-2 and grades 3-5 expectations. Middle school science assumes basic reading, graphing, and explanation readiness. Chemistry and Physics assume stronger math and model reading.",
 		outcomes: [
 			"Use observations, provided images, graphs, data tables, simulations, and models to explain phenomena.",
 			"Write claim-evidence-reasoning responses that distinguish observation from inference.",
 			"Connect grade-band science vocabulary to models in life science, earth/space science, physical science, chemistry, and physics."
 		],
 		sequencingNotes: [
-			"Elementary Science should stay one course but include a K-2 path and a grades 3-5 path for each investigation.",
-			"Middle School Integrated Science should align with NGSS-style practices across earth, life, physical, and engineering ideas.",
-			"Chemistry should use ACS and NGSS guidance; physics should strengthen problem solving, graphing, units, and model limits."
+			"Elementary Science stays one course with a K-2 path and a grades 3-5 path for each investigation.",
+			"Middle School Integrated Science aligns with NGSS-style practices across earth, life, physical, and engineering ideas.",
+			"Chemistry uses ACS and NGSS guidance; physics strengthens problem solving, graphing, units, and model limits."
 		],
 		projectExpectations: [
 			"Remote-safe investigation using a provided image, simulation, data table, or graph.",
 			"Labeled model or diagram paired with a CER explanation.",
 			"Prediction task where one variable changes and the expected effect is explained.",
-			"Each unit should use one shared phenomenon, one simulation or visualization, one public dataset/media source, one notebook or graphic organizer, and one CER routine."
+			"Each unit uses one shared phenomenon, one simulation or visualization, one public dataset/media source, one notebook or graphic organizer, and one CER routine."
 		],
 		assessmentStyle: [
 			"Use CER writing, vocabulary checks, graph interpretation, diagram labeling, and model critique.",
@@ -674,9 +674,9 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Explain HTTP basics, accessibility checks, security basics, OWASP-informed safe input handling, and production-readiness tradeoffs."
 		],
 		sequencingNotes: [
-			"JavaScript Level 1 should keep fundamentals visible but use more local-file structure as students are ready.",
-			"JavaScript Level 2 should strengthen DOM, async/fetch, data handling, debugging, and multi-file projects.",
-			"Web Development Foundations should bridge into full-stack and deployment without becoming a framework-only course."
+			"JavaScript Level 1 keeps fundamentals visible while adding more local-file structure as students are ready.",
+			"JavaScript Level 2 strengthens DOM, async/fetch, data handling, debugging, and multi-file projects.",
+			"Web Development Foundations bridges into full-stack and deployment without becoming a framework-only course."
 		],
 		projectExpectations: [
 			"Responsive portfolio or resource page with accessibility checks and a deployment note.",
@@ -726,9 +726,9 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Connect network, memory, binary, and systems concepts to defensive hardening, detection, and reporting."
 		],
 		sequencingNotes: [
-			"Network Systems should precede Network Security if students lack routing, DNS, HTTP/TLS, NAT, firewall, or packet-capture basics.",
-			"Low-Level Security should follow C/C++ memory and systems basics.",
-			"Part 2 should add deeper evidence, exploitation theory, mitigations, and reporting only inside the approved lab boundary."
+			"Network Systems precedes Network Security when routing, DNS, HTTP/TLS, NAT, firewall, or packet-capture basics are still developing.",
+			"Low-Level Security follows C/C++ memory and systems basics.",
+			"Part 2 adds deeper evidence, exploitation theory, mitigations, and reporting only inside the approved lab boundary."
 		],
 		projectExpectations: [
 			"Threat-model worksheet with assets, actors, boundaries, abuse cases, evidence to collect, and mitigations.",
@@ -749,7 +749,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Prohibited: scanning third-party systems, attacking real services, bypassing access controls, credential harvesting, or using another person's data.",
 			"Allowed: local fixtures, owned test systems, toy examples, provided captures, and defensive hardening.",
 			"Every lab must end with evidence, impact, and mitigation.",
-			"Every security project should state its Bloom-level goal, allowed target, prohibited activity, required artifact, and shutdown or cleanup condition before any tool is used."
+			"Every security project states its Bloom-level goal, allowed target, prohibited activity, required artifact, and shutdown or cleanup condition before any tool is used."
 		],
 		adminExpansionBacklog: [
 			"Publish a security prerequisite and course-boundary matrix.",
