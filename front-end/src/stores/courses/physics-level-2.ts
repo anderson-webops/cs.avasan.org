@@ -89,7 +89,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Readiness check: identify all external forces before solving and state whether the system is accelerating along each chosen axis. A short whiteboard checkpoint explains a scale reading without relying on intuition alone."
+						"Readiness check: identify all external forces before solving and state whether the system is accelerating along each chosen axis. A short diagram checkpoint explains a scale reading without relying on intuition alone."
 				},
 				{
 					title: "Misconception Watchlist",

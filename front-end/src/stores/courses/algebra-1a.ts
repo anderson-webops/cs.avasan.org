@@ -37,13 +37,13 @@ export const algebra1ACourse: RawCourse = {
 			createLesson(
 				"Kick-Off Overview",
 				`
-Use the kick-off sequence to find the right starting point in the course without turning the first session into a formal test.
+Use the kick-off sequence to find the right starting point in the course without turning the opening checkpoint into a formal test.
 
 - Project 1 targets early equation skills: AA1, AA2, and AA4.
 - Project 2 targets graphing skills: AA6, AA8, AA9, and AA10.
 - Project 3 targets systems of equations: AA12, AA13, and AA14.
 - If a question stalls, move straight into the matching module instead of forcing the full project in order.
-- Record the stopping point and use unfinished pieces as targeted follow-up practice when appropriate.
+- Use the stopping point to choose targeted follow-up practice when appropriate.
 				`.trim()
 			),
 			createLesson(

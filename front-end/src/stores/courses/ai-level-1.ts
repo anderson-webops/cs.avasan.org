@@ -175,7 +175,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Tracing Traversals by Hand",
 					content:
-						"Use whiteboard or notebook traces before implementation. Skill target: Follow push, pop, enqueue, dequeue, and visited-set changes step by step instead of treating search as magic recursion or copy-pasted code."
+						"Use diagram or notebook traces before implementation. Skill target: Follow push, pop, enqueue, dequeue, and visited-set changes step by step instead of treating search as magic recursion or copy-pasted code."
 				},
 				{
 					title: "Unit 2: Stacks, Queues, and Traversal Intuition: Core Project",

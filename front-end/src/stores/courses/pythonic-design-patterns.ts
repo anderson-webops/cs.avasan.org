@@ -10,7 +10,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Editor, Interpreter, and Project Baseline",
 					content:
-						"Standardize on `Python 3` in either `PyCharm` or `VS Code`, verify the interpreter path, and make multi-file project navigation part of the first lesson. The work should feel architectural from day one rather than like a sequence of isolated scripts."
+						"Standardize on `Python 3` in either `PyCharm` or `VS Code`, verify the interpreter path, and make multi-file project navigation part of the opening setup. From the beginning, the course should feel architectural rather than like a sequence of isolated scripts."
 				},
 				{
 					title: "Packages, Virtual Environments, and Lightweight Testing",

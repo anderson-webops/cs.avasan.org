@@ -163,7 +163,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Day-One Tooling and Local-Lab Boundaries",
 					content:
-						"Assume a strictly local lab-only environment and make sanitizers, debugger setup, and disassembly tools part of the first session instead of an appendix. Verify `clang`, `lldb`, `cmake`, and `llvm-objdump` or `objdump` early so later mitigation and exploitability discussions are grounded in observable local builds rather than abstract descriptions."
+						"Assume a strictly local lab-only environment and make sanitizers, debugger setup, and disassembly tools part of the opening setup instead of an appendix. Verify `clang`, `lldb`, `cmake`, and `llvm-objdump` or `objdump` early so later mitigation and exploitability discussions are grounded in observable local builds rather than abstract descriptions."
 				},
 				{
 					title: "Preferred IDEs and Platform Setup",

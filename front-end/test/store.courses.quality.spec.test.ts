@@ -734,6 +734,11 @@ describe("course text quality normalization", () => {
 			/\bThis module focuses on (?:turning|using|diagnosing|connecting|combining|organizing|mapping)\b/i
 		);
 		expect(corpus).not.toMatch(/\bThe work should make\b/i);
+		expect(corpus).not.toMatch(/\bThe work should feel\b/i);
+		expect(corpus).not.toMatch(/\bfirst (?:session|lesson)\b/i);
+		expect(corpus).not.toMatch(/\bfinal-session surprise\b/i);
+		expect(corpus).not.toMatch(/\bSession Workflow\b/i);
+		expect(corpus).not.toMatch(/\bwhiteboard\b/i);
 		expect(corpus).not.toMatch(/content:\s*""/);
 	});
 

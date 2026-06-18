@@ -146,7 +146,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Use quick whiteboard checks that start from a single sentence prompt and produce a complete free-body diagram. Each force direction should be justified before any calculations happen."
+						"Use quick diagram checks that start from a single sentence prompt and produce a complete free-body diagram. Each force direction should be justified before any calculations happen."
 				},
 				{
 					title: "Misconception Watchlist",
