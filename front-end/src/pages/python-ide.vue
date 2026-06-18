@@ -341,10 +341,6 @@ const requestedStarterMode = computed(() => {
 	return normalizePythonIdeMode(rawMode, courseMode ?? "turtle");
 });
 
-function normalizeProjectMode(value: string): PythonIdeMode {
-	return normalizePythonIdeMode(value, "python");
-}
-
 function appendOutput(kind: OutputLine["kind"], text: string) {
 	if (!text) return;
 	outputLines.value.push({
@@ -657,15 +653,6 @@ function updateProjectTitle(event: Event) {
 	selectedProject.value.title = input.value;
 	touchSelectedProject();
 	scheduleSave();
-}
-
-function updateProjectMode(event: Event) {
-	if (!selectedProject.value) return;
-	const select = event.target as HTMLSelectElement;
-	selectedProject.value.mode = normalizeProjectMode(select.value);
-	touchSelectedProject();
-	scheduleSave();
-	void nextTick(resetActiveCanvas);
 }
 
 function resetCodeEditor() {
@@ -2615,18 +2602,6 @@ onBeforeUnmount(() => {
 							@input="updateProjectTitle"
 						/>
 					</label>
-					<label>
-						<span>Mode</span>
-						<select
-							:value="selectedProject.mode"
-							@change="updateProjectMode"
-						>
-							<option value="python">Python</option>
-							<option value="data">Data / AI</option>
-							<option value="turtle">Python Turtle</option>
-							<option value="pgzero">PyGame Zero</option>
-						</select>
-					</label>
 					<button
 						class="site-button site-button--secondary"
 						:disabled="isSaving"
@@ -3411,7 +3386,6 @@ html.dark .file-delete:disabled::after {
 .new-file-row input,
 .project-delete-confirm input,
 .editor-toolbar input,
-.editor-toolbar select,
 .stdin-panel textarea {
 	width: 100%;
 	border: 1px solid var(--color-border);
@@ -3422,8 +3396,7 @@ html.dark .file-delete:disabled::after {
 
 .new-file-row input,
 .project-delete-confirm input,
-.editor-toolbar input,
-.editor-toolbar select {
+.editor-toolbar input {
 	min-height: 2.8rem;
 	padding: 0.55rem 0.75rem;
 }
@@ -3460,7 +3433,7 @@ html.dark .file-delete:disabled::after {
 
 .editor-toolbar {
 	display: grid;
-	grid-template-columns: minmax(15rem, 1fr) minmax(10rem, 14rem) auto auto;
+	grid-template-columns: minmax(15rem, 1fr) auto auto;
 	gap: 0.75rem;
 	align-items: end;
 }
