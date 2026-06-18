@@ -544,6 +544,10 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(/Pattern Applied Lab/i);
 			expect(corpus).not.toMatch(/: Applied Lab\b/i);
 			expect(corpus).not.toMatch(/\bApplied Lab\b/);
+			expect(corpus).not.toMatch(/\bstable course ID\b/i);
+			expect(corpus).not.toMatch(/\bscript-only snapshots\b/i);
+			expect(corpus).not.toMatch(/\bfuture course updates\b/i);
+			expect(corpus).not.toMatch(/\bUnity modules should move\b/i);
 			expect(corpus).toContain("Applied lab");
 			expect(corpus).toContain("applied challenge");
 			expect(corpus).toContain("Course Roadmap");

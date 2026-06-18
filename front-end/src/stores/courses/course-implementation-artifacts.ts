@@ -450,7 +450,7 @@ const boundaryOverrides: Record<string, string[]> = {
 		"Graphics is an application branch, not a substitute for modern Java core."
 	],
 	"unity-game-development": [
-		"Uses full Unity project workflow rather than script-only snapshots.",
+		"Uses full Unity project workflow with scenes, settings, packages, assets, tests, attribution, and reproducible builds.",
 		"Targets small, shippable, portfolio-friendly 2D vertical slices."
 	]
 };
@@ -2403,12 +2403,12 @@ function addUnityFullProjectWorkflowModules(
 			{
 				title: "Repository Shape",
 				content:
-					"**Concept path:** Unity modules should move toward full starter and review project repositories or tags instead of script-only snapshots. Preserve the stable course ID `unity-game-development`; the current full-project baseline is linked from this module and is the standard shape for later full-project checkpoints.\n\n**Required repository parts:** Include `ProjectSettings`, `Packages/manifest.json`, `Packages/packages-lock.json`, source scripts, scenes, prefabs or placeholder assets, tests where available, `THIRD_PARTY_ASSETS.md`, and Git LFS rules for large binary assets. The starter state should omit completed solution logic while still opening cleanly. The review state should demonstrate the intended final behavior and validation path.\n\n**Evidence target:** The linked starter state can be cloned, opened, played, tested, and built."
+					"**Concept path:** A serious Unity project needs more than loose script snippets. The starter and review states use full project structure so scenes, packages, project settings, prefabs, scripts, tests, and attribution files can be inspected together. A clean project boundary also makes it possible to compare what was provided at the start with what changed by the review state.\n\n**Repository parts:** A complete project includes `ProjectSettings`, `Packages/manifest.json`, `Packages/packages-lock.json`, source scripts, scenes, prefabs or placeholder assets, tests where available, `THIRD_PARTY_ASSETS.md`, and Git LFS rules for large binary assets. The starter state opens cleanly without completed solution logic. The review state demonstrates the intended final behavior and validation path.\n\n**Evidence target:** The linked starter state can be cloned, opened, played, tested, and built."
 			},
 			{
 				title: "Starter and Review Tag Model",
 				content:
-					"**Concept path:** Use module tags such as `m01-start`, `m01-checkpoint`, and `m01-review` in starter and review repos. Separate starter, checkpoint, and completed states so the project history stays easy to inspect. Tags should represent meaningful course states, not arbitrary backups, because they become the reference points for review, recovery, and future course updates.\n\n**Evidence target:** The course makes it possible to compare starter and completed states without guessing which folder is current."
+					"**Concept path:** Meaningful tags such as `m01-start`, `m01-checkpoint`, and `m01-review` mark stable project states. The start tag shows the provided baseline, the checkpoint tag preserves a useful midpoint, and the review tag shows the completed behavior. Tags are not arbitrary backups; they are reference points for review, recovery, and comparing design choices.\n\n**Evidence target:** Starter, checkpoint, and completed states can be compared without guessing which folder is current."
 			},
 			{
 				title: "Capstone Options",
@@ -2418,7 +2418,7 @@ function addUnityFullProjectWorkflowModules(
 			{
 				title: "Checkpoint Workflow",
 				content:
-					"**Concept path:** Use a repeating development loop: prework, implementation, tagged checkpoint or pull request, rubric review, and reflection note. The loop keeps Unity work from turning into untracked editor-only changes by preserving evidence of what changed and what should happen next.\n\n**Checkpoint contents:** Record the scene or system touched, scripts changed, test or play-mode result, bug or design decision, and next action. A checkpoint can be a commit, tag, pull request, screenshot plus note, or recorded build output, but it must identify the project state clearly enough to resume later.\n\n**Evidence target:** Each development cycle produces a visible checkpoint and next action."
+					"**Concept path:** A repeating development loop keeps Unity work from turning into untracked editor-only changes: prework, implementation, tagged checkpoint or pull request, rubric review, and reflection note. Each cycle preserves evidence of what changed, what was tested, and what the next action is.\n\n**Checkpoint contents:** The checkpoint identifies the scene or system touched, scripts changed, test or play-mode result, bug or design decision, and next action. A checkpoint can be a commit, tag, pull request, screenshot plus note, or recorded build output, but it must identify the project state clearly enough to resume later.\n\n**Evidence target:** Each development cycle produces a visible checkpoint and next action."
 			}
 		],
 		supplementalProjects: [
