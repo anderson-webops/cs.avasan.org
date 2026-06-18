@@ -1,5 +1,6 @@
 export interface PythonSyntaxToken {
 	kind:
+		| "bracket"
 		| "builtin"
 		| "comment"
 		| "decorator"
@@ -10,6 +11,8 @@ export interface PythonSyntaxToken {
 		| "plain"
 		| "property"
 		| "string";
+	bracketColor?: string;
+	bracketPair?: number;
 	text: string;
 }
 
@@ -110,12 +113,20 @@ const pythonBuiltins = new Set([
 
 const numberPattern =
 	/^(?:0x[\da-f](?:_?[\da-f])*|0b[01](?:_?[01])*|0o[0-7](?:_?[0-7])*|\d(?:_?\d)*(?:\.\d(?:_?\d)*)?(?:e[+-]?\d(?:_?\d)*)?j?|\.\d(?:_?\d)*(?:e[+-]?\d(?:_?\d)*)?j?)/i;
-const operatorPattern = /[+\-*/%=&|^~<>!:.,;()[\]{}]/;
+const operatorPattern = /[+\-*/%=&|^~<>!:.,;]/;
 const pythonStringPrefixPattern = /^[rubf]{0,2}['"]/i;
 const whitespacePattern = /\s/;
 const digitPattern = /\d/;
 const identifierStartPattern = /[a-z_]/i;
 const identifierPartPattern = /\w/;
+const bracketHueStep = 137.508;
+const closingBracketByOpeningBracket: Record<string, string> = {
+	"(": ")",
+	"[": "]",
+	"{": "}"
+};
+const openingBrackets = new Set(Object.keys(closingBracketByOpeningBracket));
+const closingBrackets = new Set(Object.values(closingBracketByOpeningBracket));
 
 export function highlightPythonCode(source: string) {
 	const lines = source.split("\n");
@@ -128,7 +139,7 @@ export function highlightPythonCode(source: string) {
 		multilineStringDelimiter = result.multilineStringDelimiter;
 	}
 
-	return highlightedLines;
+	return colorMatchedBrackets(highlightedLines);
 }
 
 export function highlightPythonCodeAsHtml(source: string) {
@@ -137,7 +148,7 @@ export function highlightPythonCodeAsHtml(source: string) {
 			line
 				.map(
 					token =>
-						`<span class="syntax-token syntax-token--${token.kind}">${escapeHtml(token.text)}</span>`
+						`<span ${syntaxTokenAttributes(token)}>${escapeHtml(token.text)}</span>`
 				)
 				.join("")
 		)
@@ -240,6 +251,12 @@ function highlightPythonLine(line: string, multilineStringDelimiter: string) {
 			continue;
 		}
 
+		if (isBracket(current)) {
+			pushToken(tokens, "bracket", current);
+			index += 1;
+			continue;
+		}
+
 		if (isOperator(current)) {
 			const next = consumeWhile(line, index, isOperator);
 			pushToken(tokens, "operator", line.slice(index, next));
@@ -254,6 +271,48 @@ function highlightPythonLine(line: string, multilineStringDelimiter: string) {
 	return { tokens, multilineStringDelimiter };
 }
 
+function colorMatchedBrackets(lines: PythonSyntaxToken[][]) {
+	const stack: Array<{
+		expectedClose: string;
+		pairId: number;
+		token: PythonSyntaxToken;
+	}> = [];
+	let nextPairId = 1;
+
+	for (const line of lines) {
+		for (const token of line) {
+			if (token.kind !== "bracket") continue;
+
+			if (isOpeningBracket(token.text)) {
+				const pairId = nextPairId;
+				nextPairId += 1;
+				stack.push({
+					expectedClose:
+						closingBracketByOpeningBracket[token.text] ?? "",
+					pairId,
+					token
+				});
+				continue;
+			}
+
+			if (isClosingBracket(token.text)) {
+				const candidate = stack.at(-1);
+				if (!candidate || candidate.expectedClose !== token.text)
+					continue;
+
+				stack.pop();
+				const color = bracketColorForPair(candidate.pairId);
+				candidate.token.bracketColor = color;
+				candidate.token.bracketPair = candidate.pairId;
+				token.bracketColor = color;
+				token.bracketPair = candidate.pairId;
+			}
+		}
+	}
+
+	return lines;
+}
+
 function pushToken(
 	tokens: PythonSyntaxToken[],
 	kind: PythonSyntaxToken["kind"],
@@ -261,11 +320,38 @@ function pushToken(
 ) {
 	if (!text) return;
 	const previous = tokens[tokens.length - 1];
-	if (previous?.kind === kind) {
+	if (kind !== "bracket" && previous?.kind === kind) {
 		previous.text += text;
 		return;
 	}
 	tokens.push({ kind, text });
+}
+
+function syntaxTokenAttributes(token: PythonSyntaxToken) {
+	const attributes = [`class="${syntaxTokenClasses(token)}"`];
+	if (token.bracketColor) {
+		attributes.push(
+			`style="--syntax-bracket-color: ${token.bracketColor}"`
+		);
+	}
+	return attributes.join(" ");
+}
+
+function syntaxTokenClasses(token: PythonSyntaxToken) {
+	const classes = ["syntax-token", `syntax-token--${token.kind}`];
+	if (token.kind === "bracket") {
+		classes.push(
+			token.bracketPair
+				? `syntax-token--bracket-matched syntax-token--bracket-pair-${token.bracketPair}`
+				: "syntax-token--bracket-unmatched"
+		);
+	}
+	return classes.join(" ");
+}
+
+function bracketColorForPair(pairId: number) {
+	const hue = (pairId * bracketHueStep) % 360;
+	return `hsl(${hue.toFixed(1)} 95% 74%)`;
 }
 
 function consumeWhile(
@@ -301,6 +387,18 @@ function isDigit(char: string) {
 
 function isOperator(char: string) {
 	return operatorPattern.test(char);
+}
+
+function isBracket(char: string) {
+	return isOpeningBracket(char) || isClosingBracket(char);
+}
+
+function isOpeningBracket(char: string) {
+	return openingBrackets.has(char);
+}
+
+function isClosingBracket(char: string) {
+	return closingBrackets.has(char);
 }
 
 function isWhitespace(char: string) {

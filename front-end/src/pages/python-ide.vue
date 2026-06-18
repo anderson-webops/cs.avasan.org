@@ -3236,6 +3236,18 @@ html.dark .file-delete:disabled::after {
 	color: #67e8f9;
 }
 
+:deep(.syntax-token--bracket) {
+	font-weight: 900;
+}
+
+:deep(.syntax-token--bracket-unmatched) {
+	color: #e2e8f0;
+}
+
+:deep(.syntax-token--bracket-matched) {
+	color: var(--syntax-bracket-color, #e2e8f0);
+}
+
 html:not(.dark) .code-editor-shell,
 html:not(.dark) .code-editor-highlight {
 	background: #0b1220;

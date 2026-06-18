@@ -10,6 +10,13 @@ function flattenedKinds(source: string) {
 		.map(token => [token.kind, token.text]);
 }
 
+function flattenedBracketPairs(source: string) {
+	return highlightPythonCode(source)
+		.flat()
+		.filter(token => token.kind === "bracket")
+		.map(token => [token.text, token.bracketPair, token.bracketColor]);
+}
+
 describe("python syntax highlighting", () => {
 	it("classifies common Python syntax groups", () => {
 		expect(
@@ -18,14 +25,15 @@ describe("python syntax highlighting", () => {
 			["keyword", "def"],
 			["plain", " "],
 			["function", "greet"],
-			["operator", "("],
+			["bracket", "("],
 			["plain", "name"],
-			["operator", "):"],
+			["bracket", ")"],
+			["operator", ":"],
 			["plain", "    "],
 			["builtin", "print"],
-			["operator", "("],
+			["bracket", "("],
 			["string", "f\"Hi {name}\""],
-			["operator", ")"],
+			["bracket", ")"],
 			["plain", "  "],
 			["comment", "# say hi"]
 		]);
@@ -39,9 +47,34 @@ describe("python syntax highlighting", () => {
 			["string", "\"\"\"hello"],
 			["string", "world\"\"\""],
 			["builtin", "print"],
-			["operator", "("],
+			["bracket", "("],
 			["plain", "text"],
-			["operator", ")"]
+			["bracket", ")"]
+		]);
+	});
+
+	it("assigns the same color class to each matched bracket pair", () => {
+		expect(flattenedBracketPairs("print(items[0])")).toEqual([
+			["(", 1, "hsl(137.5 95% 74%)"],
+			["[", 2, "hsl(275.0 95% 74%)"],
+			["]", 2, "hsl(275.0 95% 74%)"],
+			[")", 1, "hsl(137.5 95% 74%)"]
+		]);
+	});
+
+	it("uses different pair ids for nearby sibling brackets", () => {
+		expect(flattenedBracketPairs("first = (1)\nsecond = [2]")).toEqual([
+			["(", 1, "hsl(137.5 95% 74%)"],
+			[")", 1, "hsl(137.5 95% 74%)"],
+			["[", 2, "hsl(275.0 95% 74%)"],
+			["]", 2, "hsl(275.0 95% 74%)"]
+		]);
+	});
+
+	it("does not color brackets inside strings or comments as pairs", () => {
+		expect(flattenedBracketPairs("print(']')  # (")).toEqual([
+			["(", 1, "hsl(137.5 95% 74%)"],
+			[")", 1, "hsl(137.5 95% 74%)"]
 		]);
 	});
 
@@ -50,5 +83,12 @@ describe("python syntax highlighting", () => {
 			"&lt;tag&gt;"
 		);
 		expect(highlightPythonCodeAsHtml("print('&')")).toContain("&amp;");
+	});
+
+	it("renders bracket pair classes in the highlight markup", () => {
+		const html = highlightPythonCodeAsHtml("print(items[0])");
+		expect(html).toContain("syntax-token--bracket-matched");
+		expect(html).toContain("syntax-token--bracket-pair-2");
+		expect(html).toContain("--syntax-bracket-color: hsl(275.0 95% 74%)");
 	});
 });
