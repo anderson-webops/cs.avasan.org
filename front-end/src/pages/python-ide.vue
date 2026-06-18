@@ -97,6 +97,65 @@ interface TurtleFillState {
 	points: { x: number; y: number }[];
 }
 
+interface TurtlePose {
+	x: number;
+	y: number;
+	heading: number;
+	penColor: string;
+}
+
+type TurtleRenderCommand =
+	| {
+			color: string;
+			from: { x: number; y: number };
+			kind: "line";
+			to: { x: number; y: number };
+			width: number;
+	  }
+	| {
+			color: string;
+			kind: "circle";
+			radius: number;
+			width: number;
+			x: number;
+			y: number;
+	  }
+	| {
+			color: string;
+			fillColor: string;
+			kind: "fill";
+			points: { x: number; y: number }[];
+			width: number;
+	  }
+	| {
+			color: string;
+			kind: "dot";
+			size: number;
+			x: number;
+			y: number;
+	  }
+	| {
+			color: string;
+			heading: number;
+			kind: "stamp";
+			x: number;
+			y: number;
+	  }
+	| {
+			color: string;
+			kind: "text";
+			text: string;
+			x: number;
+			y: number;
+	  };
+
+interface TurtleAnimationStep {
+	command?: TurtleRenderCommand;
+	durationMs: number;
+	fromPose: TurtlePose;
+	toPose: TurtlePose;
+}
+
 interface GameCanvasState {
 	width: number;
 	height: number;
@@ -167,6 +226,11 @@ let saveTimer: ReturnType<typeof window.setTimeout> | null = null;
 let suppressAutoSave = false;
 let resizeObserver: ResizeObserver | null = null;
 let gameAnimationFrame: number | null = null;
+let turtleAnimationFrame: number | null = null;
+let activeTurtleAnimationStep: TurtleAnimationStep | null = null;
+let turtleAnimationStepStartedAt = 0;
+let turtleAnimationPromise: Promise<void> | null = null;
+let resolveTurtleAnimation: (() => void) | null = null;
 let gameLoopRequested = false;
 let gameTickInFlight = false;
 let activeTurtleDragButton: string | null = null;
@@ -174,6 +238,8 @@ let lastGamePointerPoint: { x: number; y: number } | null = null;
 let gameMusicAudio: HTMLAudioElement | null = null;
 let pendingAltClickSelections: EditorSelectionRange[] = [];
 let turtleStampCounter = 0;
+let turtleCompletedCommands: TurtleRenderCommand[] = [];
+let turtleQueuedSteps: TurtleAnimationStep[] = [];
 
 const turtleState: TurtleState = {
 	x: 0,
@@ -1019,13 +1085,306 @@ function resizeCanvasForDisplay() {
 	return { context, rect };
 }
 
+function currentTurtlePose(): TurtlePose {
+	return {
+		x: turtleState.x,
+		y: turtleState.y,
+		heading: turtleState.heading,
+		penColor: turtleState.penColor
+	};
+}
+
+function turtlePoseChanged(fromPose: TurtlePose, toPose: TurtlePose) {
+	return (
+		fromPose.x !== toPose.x ||
+		fromPose.y !== toPose.y ||
+		fromPose.heading !== toPose.heading ||
+		fromPose.penColor !== toPose.penColor
+	);
+}
+
+function lerp(start: number, end: number, progress: number) {
+	return start + (end - start) * progress;
+}
+
+function interpolateTurtlePose(
+	fromPose: TurtlePose,
+	toPose: TurtlePose,
+	progress: number
+): TurtlePose {
+	return {
+		x: lerp(fromPose.x, toPose.x, progress),
+		y: lerp(fromPose.y, toPose.y, progress),
+		heading: lerp(fromPose.heading, toPose.heading, progress),
+		penColor: progress < 1 ? fromPose.penColor : toPose.penColor
+	};
+}
+
+function turtleMovementDuration(fromPose: TurtlePose, toPose: TurtlePose) {
+	const distance = Math.hypot(toPose.x - fromPose.x, toPose.y - fromPose.y);
+	const headingDelta = Math.abs(toPose.heading - fromPose.heading);
+	if (distance > 0) return Math.min(900, Math.max(140, distance * 5));
+	if (headingDelta > 0)
+		return Math.min(260, Math.max(90, headingDelta * 1.5));
+	return 80;
+}
+
+function drawTurtleMarker(context: CanvasRenderingContext2D, pose: TurtlePose) {
+	const point = canvasCoordinates(pose.x, pose.y);
+	const radians = (pose.heading * Math.PI) / 180;
+	const size = 15;
+	const tip = { x: Math.cos(radians) * size, y: -Math.sin(radians) * size };
+	const leftWing = {
+		x: Math.cos(radians + 2.45) * size,
+		y: -Math.sin(radians + 2.45) * size
+	};
+	const rightWing = {
+		x: Math.cos(radians - 2.45) * size,
+		y: -Math.sin(radians - 2.45) * size
+	};
+
+	context.save();
+	context.fillStyle = pose.penColor;
+	context.strokeStyle = "#0f172a";
+	context.lineWidth = 1.75;
+	context.beginPath();
+	context.moveTo(point.x + tip.x, point.y + tip.y);
+	for (const nextPoint of [leftWing, rightWing]) {
+		context.lineTo(point.x + nextPoint.x, point.y + nextPoint.y);
+	}
+	context.closePath();
+	context.fill();
+	context.stroke();
+	context.fillStyle = "#f8fafc";
+	context.beginPath();
+	context.arc(point.x, point.y, 3, 0, Math.PI * 2);
+	context.fill();
+	context.restore();
+}
+
+function renderTurtleCommand(
+	context: CanvasRenderingContext2D,
+	command: TurtleRenderCommand,
+	progress = 1
+) {
+	if (command.kind === "line") {
+		const start = canvasCoordinates(command.from.x, command.from.y);
+		const partialEnd = {
+			x: lerp(command.from.x, command.to.x, progress),
+			y: lerp(command.from.y, command.to.y, progress)
+		};
+		const end = canvasCoordinates(partialEnd.x, partialEnd.y);
+		context.strokeStyle = command.color;
+		context.lineWidth = command.width;
+		context.lineCap = "round";
+		context.lineJoin = "round";
+		context.beginPath();
+		context.moveTo(start.x, start.y);
+		context.lineTo(end.x, end.y);
+		context.stroke();
+		return;
+	}
+
+	if (progress < 1) return;
+
+	if (command.kind === "circle") {
+		const center = canvasCoordinates(command.x, command.y + command.radius);
+		context.strokeStyle = command.color;
+		context.lineWidth = command.width;
+		context.beginPath();
+		context.arc(
+			center.x,
+			center.y,
+			Math.abs(command.radius),
+			0,
+			Math.PI * 2
+		);
+		context.stroke();
+		return;
+	}
+
+	if (command.kind === "dot") {
+		const point = canvasCoordinates(command.x, command.y);
+		context.fillStyle = command.color;
+		context.beginPath();
+		context.arc(
+			point.x,
+			point.y,
+			Math.max(1, command.size) / 2,
+			0,
+			Math.PI * 2
+		);
+		context.fill();
+		return;
+	}
+
+	if (command.kind === "fill") {
+		const [firstPoint, ...remainingPoints] = command.points;
+		if (!firstPoint) return;
+		const firstCanvasPoint = canvasCoordinates(firstPoint.x, firstPoint.y);
+		context.fillStyle = command.fillColor;
+		context.beginPath();
+		context.moveTo(firstCanvasPoint.x, firstCanvasPoint.y);
+		for (const point of remainingPoints) {
+			const canvasPoint = canvasCoordinates(point.x, point.y);
+			context.lineTo(canvasPoint.x, canvasPoint.y);
+		}
+		context.closePath();
+		context.fill();
+		context.strokeStyle = command.color;
+		context.lineWidth = command.width;
+		context.lineCap = "round";
+		context.lineJoin = "round";
+		context.stroke();
+		return;
+	}
+
+	if (command.kind === "stamp") {
+		drawTurtleMarker(context, {
+			x: command.x,
+			y: command.y,
+			heading: command.heading,
+			penColor: command.color
+		});
+		return;
+	}
+
+	const point = canvasCoordinates(command.x, command.y);
+	context.fillStyle = command.color;
+	context.font = "16px Avenir Next, Segoe UI, sans-serif";
+	context.fillText(command.text, point.x, point.y);
+}
+
+function renderTurtleScene(
+	markerPose = currentTurtlePose(),
+	activeCommand?: { command: TurtleRenderCommand; progress: number }
+) {
+	const canvasContext = resizeCanvasForDisplay();
+	if (!canvasContext) return;
+
+	const { context, rect } = canvasContext;
+	context.fillStyle = turtleState.background;
+	context.fillRect(0, 0, rect.width, rect.height);
+	for (const command of turtleCompletedCommands)
+		renderTurtleCommand(context, command);
+	if (activeCommand) {
+		renderTurtleCommand(
+			context,
+			activeCommand.command,
+			activeCommand.progress
+		);
+	}
+	drawTurtleMarker(context, markerPose);
+}
+
+function resolveActiveTurtleAnimation() {
+	resolveTurtleAnimation?.();
+	resolveTurtleAnimation = null;
+	turtleAnimationPromise = null;
+}
+
+function cancelTurtleAnimation() {
+	if (turtleAnimationFrame !== null) {
+		cancelAnimationFrame(turtleAnimationFrame);
+		turtleAnimationFrame = null;
+	}
+	activeTurtleAnimationStep = null;
+	turtleAnimationStepStartedAt = 0;
+	turtleQueuedSteps = [];
+	resolveActiveTurtleAnimation();
+}
+
+function runTurtleAnimationFrame(timestamp: number) {
+	if (!activeTurtleAnimationStep) {
+		activeTurtleAnimationStep = turtleQueuedSteps.shift() ?? null;
+		turtleAnimationStepStartedAt = timestamp;
+	}
+
+	const step = activeTurtleAnimationStep;
+	if (!step) {
+		turtleAnimationFrame = null;
+		renderTurtleScene();
+		resolveActiveTurtleAnimation();
+		return;
+	}
+
+	const elapsed = timestamp - turtleAnimationStepStartedAt;
+	const progress = Math.min(1, elapsed / Math.max(1, step.durationMs));
+	const markerPose = interpolateTurtlePose(
+		step.fromPose,
+		step.toPose,
+		progress
+	);
+	renderTurtleScene(
+		markerPose,
+		step.command ? { command: step.command, progress } : undefined
+	);
+
+	if (progress >= 1) {
+		if (step.command) turtleCompletedCommands.push(step.command);
+		activeTurtleAnimationStep = null;
+	}
+
+	turtleAnimationFrame = requestAnimationFrame(runTurtleAnimationFrame);
+}
+
+function scheduleTurtleAnimation() {
+	if (!turtleAnimationPromise) {
+		turtleAnimationPromise = new Promise<void>(resolve => {
+			resolveTurtleAnimation = resolve;
+		});
+	}
+	if (turtleAnimationFrame === null)
+		turtleAnimationFrame = requestAnimationFrame(runTurtleAnimationFrame);
+	return turtleAnimationPromise;
+}
+
+function queueTurtleStep(step: TurtleAnimationStep) {
+	turtleQueuedSteps.push(step);
+	void scheduleTurtleAnimation();
+}
+
+function waitForTurtleAnimation() {
+	return turtleAnimationPromise ?? Promise.resolve();
+}
+
+function setTurtleState(
+	x: number,
+	y: number,
+	heading: number,
+	penDown: boolean,
+	penColor: string,
+	fillColor: string,
+	lineWidth: number
+) {
+	const fromPose = currentTurtlePose();
+	turtleState.x = x;
+	turtleState.y = y;
+	turtleState.heading = heading;
+	turtleState.penDown = penDown;
+	turtleState.penColor = penColor;
+	turtleState.fillColor = fillColor;
+	turtleState.lineWidth = Math.max(1, lineWidth);
+	const toPose = currentTurtlePose();
+	if (turtlePoseChanged(fromPose, toPose)) {
+		queueTurtleStep({
+			durationMs: turtleMovementDuration(fromPose, toPose),
+			fromPose,
+			toPose
+		});
+	}
+}
+
 function resetTurtleCanvas() {
+	cancelTurtleAnimation();
 	clearTurtleTimers();
 	keyHandlers.clear();
 	turtleClickHandlers.clear();
 	turtleDragHandlers.clear();
 	activeTurtleDragButton = null;
 	turtleStampCounter = 0;
+	turtleCompletedCommands = [];
+	turtleQueuedSteps = [];
 	turtleFillState.active = false;
 	turtleFillState.points = [];
 	stopGameLoop();
@@ -1043,6 +1402,7 @@ function resetTurtleCanvas() {
 
 	context.fillStyle = turtleState.background;
 	context.fillRect(0, 0, rect.width, rect.height);
+	drawTurtleMarker(context, currentTurtlePose());
 }
 
 function clearTurtleTimers() {
@@ -1067,119 +1427,115 @@ function beginTurtleFill() {
 }
 
 function endTurtleFill() {
-	const context = getCanvasContext();
 	const points = turtleFillState.points;
 	turtleFillState.active = false;
 	turtleFillState.points = [];
-	if (!context || points.length < 3) return;
+	if (points.length < 3) return;
 
-	const [firstPoint, ...remainingPoints] = points;
-	if (!firstPoint) return;
-
-	const firstCanvasPoint = canvasCoordinates(firstPoint.x, firstPoint.y);
-	context.fillStyle = turtleFillState.color;
-	context.beginPath();
-	context.moveTo(firstCanvasPoint.x, firstCanvasPoint.y);
-	for (const point of remainingPoints) {
-		const canvasPoint = canvasCoordinates(point.x, point.y);
-		context.lineTo(canvasPoint.x, canvasPoint.y);
-	}
-	context.closePath();
-	context.fill();
-	context.strokeStyle = turtleState.penColor;
-	context.lineWidth = turtleState.lineWidth;
-	context.lineCap = "round";
-	context.lineJoin = "round";
-	context.stroke();
+	const pose = currentTurtlePose();
+	queueTurtleStep({
+		command: {
+			color: turtleState.penColor,
+			fillColor: turtleFillState.color,
+			kind: "fill",
+			points: [...points],
+			width: turtleState.lineWidth
+		},
+		durationMs: 120,
+		fromPose: pose,
+		toPose: pose
+	});
 }
 
 function drawForward(distance: number) {
-	const context = getCanvasContext();
-	if (!context) return;
-
-	const start = canvasCoordinates(turtleState.x, turtleState.y);
+	const fromPose = currentTurtlePose();
 	const radians = (turtleState.heading * Math.PI) / 180;
 	turtleState.x += Math.cos(radians) * distance;
 	turtleState.y += Math.sin(radians) * distance;
-	const end = canvasCoordinates(turtleState.x, turtleState.y);
+	const toPose = currentTurtlePose();
 	trackTurtleFillPoint(turtleState.x, turtleState.y);
 
-	if (!turtleState.penDown) return;
-	context.strokeStyle = turtleState.penColor;
-	context.lineWidth = turtleState.lineWidth;
-	context.lineCap = "round";
-	context.beginPath();
-	context.moveTo(start.x, start.y);
-	context.lineTo(end.x, end.y);
-	context.stroke();
+	queueTurtleStep({
+		command: turtleState.penDown
+			? {
+					color: turtleState.penColor,
+					from: { x: fromPose.x, y: fromPose.y },
+					kind: "line",
+					to: { x: toPose.x, y: toPose.y },
+					width: turtleState.lineWidth
+				}
+			: undefined,
+		durationMs: turtleMovementDuration(fromPose, toPose),
+		fromPose,
+		toPose
+	});
 }
 
 function drawCircle(radius: number) {
-	const context = getCanvasContext();
-	if (!context) return;
-	const center = canvasCoordinates(turtleState.x, turtleState.y + radius);
-	context.strokeStyle = turtleState.penColor;
-	context.lineWidth = turtleState.lineWidth;
-	context.beginPath();
-	context.arc(center.x, center.y, Math.abs(radius), 0, Math.PI * 2);
-	if (turtleFillState.active) {
-		context.fillStyle = turtleState.fillColor;
-		context.fill();
-		context.beginPath();
-		context.arc(center.x, center.y, Math.abs(radius), 0, Math.PI * 2);
-	}
-	context.stroke();
+	const pose = currentTurtlePose();
+	queueTurtleStep({
+		command: {
+			color: turtleState.penColor,
+			kind: "circle",
+			radius,
+			width: turtleState.lineWidth,
+			x: turtleState.x,
+			y: turtleState.y
+		},
+		durationMs: 120,
+		fromPose: pose,
+		toPose: pose
+	});
 }
 
 function drawDot(size: number, color?: string) {
-	const context = getCanvasContext();
-	if (!context) return;
-	const point = canvasCoordinates(turtleState.x, turtleState.y);
-	context.fillStyle = color || turtleState.penColor;
-	context.beginPath();
-	context.arc(point.x, point.y, Math.max(1, size) / 2, 0, Math.PI * 2);
-	context.fill();
+	const pose = currentTurtlePose();
+	queueTurtleStep({
+		command: {
+			color: color || turtleState.penColor,
+			kind: "dot",
+			size,
+			x: turtleState.x,
+			y: turtleState.y
+		},
+		durationMs: 90,
+		fromPose: pose,
+		toPose: pose
+	});
 }
 
 function stampTurtle() {
-	const context = getCanvasContext();
-	if (!context) return ++turtleStampCounter;
-
-	const point = canvasCoordinates(turtleState.x, turtleState.y);
-	const radians = (turtleState.heading * Math.PI) / 180;
-	const size = 14;
-	const tip = { x: Math.cos(radians) * size, y: -Math.sin(radians) * size };
-	const leftWing = {
-		x: Math.cos(radians + 2.45) * size,
-		y: -Math.sin(radians + 2.45) * size
-	};
-	const rightWing = {
-		x: Math.cos(radians - 2.45) * size,
-		y: -Math.sin(radians - 2.45) * size
-	};
-
-	context.fillStyle = turtleState.penColor;
-	context.strokeStyle = "#0f172a";
-	context.lineWidth = 1.5;
-	context.beginPath();
-	context.moveTo(point.x + tip.x, point.y + tip.y);
-	for (const nextPoint of [leftWing, rightWing]) {
-		context.lineTo(point.x + nextPoint.x, point.y + nextPoint.y);
-	}
-	context.closePath();
-	context.fill();
-	context.stroke();
+	const pose = currentTurtlePose();
+	queueTurtleStep({
+		command: {
+			color: turtleState.penColor,
+			heading: turtleState.heading,
+			kind: "stamp",
+			x: turtleState.x,
+			y: turtleState.y
+		},
+		durationMs: 90,
+		fromPose: pose,
+		toPose: pose
+	});
 
 	return ++turtleStampCounter;
 }
 
 function drawText(text: string) {
-	const context = getCanvasContext();
-	if (!context) return;
-	const point = canvasCoordinates(turtleState.x, turtleState.y);
-	context.fillStyle = turtleState.penColor;
-	context.font = "16px Avenir Next, Segoe UI, sans-serif";
-	context.fillText(text, point.x, point.y);
+	const pose = currentTurtlePose();
+	queueTurtleStep({
+		command: {
+			color: turtleState.penColor,
+			kind: "text",
+			text,
+			x: turtleState.x,
+			y: turtleState.y
+		},
+		durationMs: 90,
+		fromPose: pose,
+		toPose: pose
+	});
 }
 
 function setGameCanvasTransform() {
@@ -1508,13 +1864,40 @@ const turtleBridge: TurtleBridge = {
 	endFill: endTurtleFill,
 	forward: drawForward,
 	right(degrees: number) {
+		const fromPose = currentTurtlePose();
 		turtleState.heading -= degrees;
+		const toPose = currentTurtlePose();
+		if (turtlePoseChanged(fromPose, toPose)) {
+			queueTurtleStep({
+				durationMs: turtleMovementDuration(fromPose, toPose),
+				fromPose,
+				toPose
+			});
+		}
 	},
 	left(degrees: number) {
+		const fromPose = currentTurtlePose();
 		turtleState.heading += degrees;
+		const toPose = currentTurtlePose();
+		if (turtlePoseChanged(fromPose, toPose)) {
+			queueTurtleStep({
+				durationMs: turtleMovementDuration(fromPose, toPose),
+				fromPose,
+				toPose
+			});
+		}
 	},
 	setheading(degrees: number) {
+		const fromPose = currentTurtlePose();
 		turtleState.heading = degrees;
+		const toPose = currentTurtlePose();
+		if (turtlePoseChanged(fromPose, toPose)) {
+			queueTurtleStep({
+				durationMs: turtleMovementDuration(fromPose, toPose),
+				fromPose,
+				toPose
+			});
+		}
 	},
 	heading: () => turtleState.heading,
 	setState(
@@ -1526,31 +1909,30 @@ const turtleBridge: TurtleBridge = {
 		fillColor: string,
 		lineWidth: number
 	) {
-		turtleState.x = x;
-		turtleState.y = y;
-		turtleState.heading = heading;
-		turtleState.penDown = penDown;
-		turtleState.penColor = penColor;
-		turtleState.fillColor = fillColor;
-		turtleState.lineWidth = Math.max(1, lineWidth);
+		setTurtleState(x, y, heading, penDown, penColor, fillColor, lineWidth);
 	},
 	xcor: () => turtleState.x,
 	ycor: () => turtleState.y,
 	goto(x: number, y: number) {
-		const context = getCanvasContext();
-		const start = canvasCoordinates(turtleState.x, turtleState.y);
-		const end = canvasCoordinates(x, y);
+		const fromPose = currentTurtlePose();
 		turtleState.x = x;
 		turtleState.y = y;
+		const toPose = currentTurtlePose();
 		trackTurtleFillPoint(x, y);
-		if (!context || !turtleState.penDown) return;
-		context.strokeStyle = turtleState.penColor;
-		context.lineWidth = turtleState.lineWidth;
-		context.lineCap = "round";
-		context.beginPath();
-		context.moveTo(start.x, start.y);
-		context.lineTo(end.x, end.y);
-		context.stroke();
+		queueTurtleStep({
+			command: turtleState.penDown
+				? {
+						color: turtleState.penColor,
+						from: { x: fromPose.x, y: fromPose.y },
+						kind: "line",
+						to: { x: toPose.x, y: toPose.y },
+						width: turtleState.lineWidth
+					}
+				: undefined,
+			durationMs: turtleMovementDuration(fromPose, toPose),
+			fromPose,
+			toPose
+		});
 	},
 	home() {
 		this.goto(0, 0);
@@ -1714,6 +2096,10 @@ async function runCurrentProject() {
 				mergeRuntimeProjectFiles(project, files),
 			onOutput: appendOutput
 		});
+		if (project.mode === "turtle" && !stopRequested.value) {
+			runMessage.value = "Drawing";
+			await waitForTurtleAnimation();
+		}
 		if (!stopRequested.value) {
 			runMessage.value =
 				project.mode === "data"
@@ -1738,6 +2124,7 @@ function stopCurrentProject() {
 	const hadPythonRunInFlight = isRunning.value;
 	stopRequested.value = true;
 	clearTurtleTimers();
+	cancelTurtleAnimation();
 	stopGameLoop();
 	stopAllGameAudio();
 	keyHandlers.clear();
@@ -1986,6 +2373,7 @@ onBeforeUnmount(() => {
 	window.removeEventListener("keyup", handleKeyUp);
 	window.removeEventListener("mouseup", clearTurtleDrag);
 	clearTurtleTimers();
+	cancelTurtleAnimation();
 	stopGameLoop();
 	resizeObserver?.disconnect();
 });

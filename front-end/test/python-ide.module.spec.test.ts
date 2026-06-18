@@ -226,6 +226,22 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("clearTurtleTimers()");
 	});
 
+	it("keeps Turtle runs animated with a visible cursor marker", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/pages/python-ide.vue"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain("function drawTurtleMarker");
+		expect(pageSource).toContain("function queueTurtleStep");
+		expect(pageSource).toContain("function runTurtleAnimationFrame");
+		expect(pageSource).toContain(
+			"requestAnimationFrame(runTurtleAnimationFrame)"
+		);
+		expect(pageSource).toContain("await waitForTurtleAnimation()");
+		expect(pageSource).toContain("cancelTurtleAnimation()");
+	});
+
 	it("guards long-running student loops before executing Python files", () => {
 		const runtimeSource = readFileSync(
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
