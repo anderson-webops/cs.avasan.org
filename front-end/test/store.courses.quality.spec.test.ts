@@ -1614,10 +1614,12 @@ describe("course text quality normalization", () => {
 			/Extend the work from [^.]+ with a tighter constraint, one extra feature, or a slightly more realistic input case\./
 		);
 		expect(corpus).toContain("buildSupportSectionGuidance");
-		expect(corpus).toContain("Plan **");
-		expect(corpus).toContain("Close **");
-		expect(corpus).toContain("Verify **");
-		expect(corpus).toContain("Extend **");
+		expect(corpus).toContain("is planned as a sequence of runnable checkpoints");
+		expect(corpus).toContain("ends with a concrete verification pass");
+		expect(corpus).toContain(
+			"compares the expected result with what actually happened"
+		);
+		expect(corpus).toContain("extends the ${courseFamily} work");
 	});
 
 	it(
