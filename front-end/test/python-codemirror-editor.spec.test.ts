@@ -115,7 +115,13 @@ describe("python IDE CodeMirror editor", () => {
 				option => option.label
 			)
 		).toEqual(
-			expect.arrayContaining(["filled_rect", "line", "text"])
+			expect.arrayContaining([
+				"circle",
+				"filled_circle",
+				"filled_rect",
+				"line",
+				"text"
+			])
 		);
 		expect(
 			pythonIdeCompletionsForMode("pgzero", "player").map(
@@ -127,6 +133,30 @@ describe("python IDE CodeMirror editor", () => {
 				option => option.label
 			)
 		).toEqual(expect.arrayContaining(["bgcolor", "onkey", "ontimer"]));
+		expect(
+			pythonIdeCompletionsForMode("pgzero", "clock").map(
+				option => option.label
+			)
+		).toEqual(
+			expect.arrayContaining([
+				"schedule",
+				"schedule_interval",
+				"unschedule"
+			])
+		);
+		expect(
+			pythonIdeCompletionsForMode("pgzero", "music").map(
+				option => option.label
+			)
+		).toEqual(
+			expect.arrayContaining([
+				"pause",
+				"play",
+				"set_volume",
+				"stop",
+				"unpause"
+			])
+		);
 		expect(
 			pythonIdeCompletionsForMode("data").map(option => option.label)
 		).toEqual(

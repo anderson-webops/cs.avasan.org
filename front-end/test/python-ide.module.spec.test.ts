@@ -1158,9 +1158,25 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("def _asset_size(image");
 		expect(runtimeSource).toContain("builtins.images = images");
 		expect(runtimeSource).toContain("def blit(self, image, pos");
+		expect(runtimeSource).toContain("def line(self, start, end, color):");
+		expect(runtimeSource).toContain("def circle(self, pos, radius, color):");
+		expect(runtimeSource).toContain(
+			"def filled_circle(self, pos, radius, color):"
+		);
+		expect(runtimeSource).toContain("_bridge.drawLine(");
+		expect(runtimeSource).toContain("_bridge.drawCircle(");
+		expect(runtimeSource).toContain("def schedule(self, function, delay):");
+		expect(runtimeSource).toContain("def pause(self):");
+		expect(runtimeSource).toContain("def unpause(self):");
+		expect(runtimeSource).toContain("def set_volume(self, volume):");
 		expect(runtimeSource).toContain("def get_width(self):");
 		expect(pageSource).toContain("await ensureGameCourseAssetsLoaded()");
 		expect(pageSource).toContain("drawImage: drawGameImage");
+		expect(pageSource).toContain("drawLine: drawGameLine");
+		expect(pageSource).toContain("drawCircle: drawGameCircle");
+		expect(pageSource).toContain("pauseMusic: pauseGameMusic");
+		expect(pageSource).toContain("unpauseMusic: unpauseGameMusic");
+		expect(pageSource).toContain("setMusicVolume: setGameMusicVolume");
 		expect(pageSource).toContain("imageSizeJson: gameImageSizeJson");
 		expect(pageSource).toContain("findPythonIdeCourseAsset");
 		expect(pageSource).toContain("gameImageCache.clear()");

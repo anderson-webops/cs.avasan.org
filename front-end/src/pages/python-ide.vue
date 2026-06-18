@@ -252,6 +252,7 @@ let gameTickInFlight = false;
 let activeTurtleDragButton: string | null = null;
 let lastGamePointerPoint: { x: number; y: number } | null = null;
 let gameMusicAudio: HTMLAudioElement | null = null;
+let gameMusicVolume = 1;
 let codeEditorView: EditorView | null = null;
 let syncingCodeMirrorContent = false;
 let gameCourseAssetPack: PythonIdeCourseAssetPack | null = null;
@@ -1871,6 +1872,28 @@ function stopGameSound(name: string) {
 function playGameMusic(name: string) {
 	stopGameMusic();
 	gameMusicAudio = playProjectAudio("music", name, true);
+	if (gameMusicAudio) gameMusicAudio.volume = gameMusicVolume;
+}
+
+function pauseGameMusic() {
+	gameMusicAudio?.pause();
+}
+
+function unpauseGameMusic() {
+	if (!gameMusicAudio) return;
+	void gameMusicAudio.play().catch((error: unknown) => {
+		appendOutput(
+			"system",
+			error instanceof Error
+				? `Could not resume music: ${error.message}`
+				: "Could not resume music."
+		);
+	});
+}
+
+function setGameMusicVolume(volume: number) {
+	gameMusicVolume = Math.min(1, Math.max(0, volume));
+	if (gameMusicAudio) gameMusicAudio.volume = gameMusicVolume;
 }
 
 function stopGameMusic() {
@@ -2036,6 +2059,48 @@ function drawGameRect(
 	context.strokeStyle = color;
 	context.lineWidth = 3;
 	context.strokeRect(x, y, width, height);
+}
+
+function drawGameLine(
+	x1: number,
+	y1: number,
+	x2: number,
+	y2: number,
+	color: string
+) {
+	const context = setGameCanvasTransform();
+	if (!context) return;
+
+	context.strokeStyle = color;
+	context.lineWidth = 3;
+	context.lineCap = "round";
+	context.beginPath();
+	context.moveTo(x1, y1);
+	context.lineTo(x2, y2);
+	context.stroke();
+}
+
+function drawGameCircle(
+	x: number,
+	y: number,
+	radius: number,
+	color: string,
+	filled: boolean
+) {
+	const context = setGameCanvasTransform();
+	if (!context) return;
+
+	context.beginPath();
+	context.arc(x, y, Math.max(0, radius), 0, Math.PI * 2);
+	if (filled) {
+		context.fillStyle = color;
+		context.fill();
+		return;
+	}
+
+	context.strokeStyle = color;
+	context.lineWidth = 3;
+	context.stroke();
 }
 
 function normalizeKey(key: string) {
@@ -2243,6 +2308,8 @@ const gameBridge: GameBridge = {
 	drawImage: drawGameImage,
 	drawText: drawGameText,
 	drawRect: drawGameRect,
+	drawLine: drawGameLine,
+	drawCircle: drawGameCircle,
 	imageSizeJson: gameImageSizeJson,
 	isKeyDown(key: string) {
 		return gameKeysDown.has(normalizeKey(key));
@@ -2264,6 +2331,9 @@ const gameBridge: GameBridge = {
 	playSound: playGameSound,
 	stopSound: stopGameSound,
 	playMusic: playGameMusic,
+	pauseMusic: pauseGameMusic,
+	unpauseMusic: unpauseGameMusic,
+	setMusicVolume: setGameMusicVolume,
 	stopMusic: stopGameMusic,
 	log(text: string) {
 		appendOutput("system", text);

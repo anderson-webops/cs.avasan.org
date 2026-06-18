@@ -121,6 +121,20 @@ export interface GameBridge {
 		color: string,
 		filled: boolean
 	) => void;
+	drawLine: (
+		x1: number,
+		y1: number,
+		x2: number,
+		y2: number,
+		color: string
+	) => void;
+	drawCircle: (
+		x: number,
+		y: number,
+		radius: number,
+		color: string,
+		filled: boolean
+	) => void;
 	imageSizeJson: (name: string) => string;
 	isKeyDown: (key: string) => boolean;
 	popEventsJson: () => string;
@@ -131,6 +145,9 @@ export interface GameBridge {
 	playSound: (name: string) => void;
 	stopSound: (name: string) => void;
 	playMusic: (name: string) => void;
+	pauseMusic: () => void;
+	unpauseMusic: () => void;
+	setMusicVolume: (volume: number) => void;
 	stopMusic: () => void;
 	log: (text: string) => void;
 }
@@ -1571,6 +1588,33 @@ class _ScreenDraw:
         x, y, width, height = _rect_parts(rect)
         _bridge.drawRect(x, y, width, height, _normalize_color(color), True)
 
+    def line(self, start, end, color):
+        _bridge.drawLine(
+            float(_number(start[0])),
+            float(_number(start[1])),
+            float(_number(end[0])),
+            float(_number(end[1])),
+            _normalize_color(color),
+        )
+
+    def circle(self, pos, radius, color):
+        _bridge.drawCircle(
+            float(_number(pos[0])),
+            float(_number(pos[1])),
+            float(_number(radius)),
+            _normalize_color(color),
+            False,
+        )
+
+    def filled_circle(self, pos, radius, color):
+        _bridge.drawCircle(
+            float(_number(pos[0])),
+            float(_number(pos[1])),
+            float(_number(radius)),
+            _normalize_color(color),
+            True,
+        )
+
 class _Screen:
     def __init__(self):
         self.draw = _ScreenDraw()
@@ -1596,6 +1640,13 @@ class _Screen:
 screen = _Screen()
 
 class _Clock:
+    def schedule(self, function, delay):
+        _scheduled.append({
+            "function": function,
+            "due": time.monotonic() + float(_number(delay, 0)),
+            "interval": None,
+        })
+
     def schedule_unique(self, function, delay):
         self.unschedule(function)
         _scheduled.append({
@@ -1643,6 +1694,18 @@ sounds = _SoundLibrary()
 class _Music:
     def play(self, name):
         _bridge.playMusic(str(name))
+
+    def pause(self):
+        _bridge.pauseMusic()
+        return None
+
+    def unpause(self):
+        _bridge.unpauseMusic()
+        return None
+
+    def set_volume(self, volume):
+        _bridge.setMusicVolume(float(_number(volume, 1)))
+        return None
 
     def stop(self):
         _bridge.stopMusic()
