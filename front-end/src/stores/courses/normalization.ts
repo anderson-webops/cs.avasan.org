@@ -400,6 +400,16 @@ function contextualizeGenericDisplayTitles(course: RawCourse) {
 			...module.curriculum,
 			...module.supplementalProjects
 		]) {
+			const standaloneSupplemental = conciseGenericItemTitle(item.title);
+			if (standaloneSupplemental) {
+				item.title = contextualGenericTitle(
+					course.name,
+					module.title,
+					standaloneSupplemental
+				);
+				continue;
+			}
+
 			if (genericTitles.has(item.title)) {
 				item.title = contextualGenericTitle(
 					course.name,
@@ -5433,6 +5443,9 @@ function studioArtifact(context: CourseTextContext) {
 	if (/algorithm|data structures|cpp/.test(source)) {
 		return "a tested data-structure or algorithm implementation with visible before/after behavior";
 	}
+	if (/data science|machine learning|ai/.test(source)) {
+		return "a notebook or script that turns a defined dataset or state space into measured, interpreted output";
+	}
 	if (/physics|chemistry|science/.test(source)) {
 		return "a remote-safe investigation writeup using provided data, a diagram, or a simulation";
 	}
@@ -5441,9 +5454,6 @@ function studioArtifact(context: CourseTextContext) {
 	}
 	if (/web|full-stack/.test(source)) {
 		return "a browser-visible feature with defined UI behavior, data flow, and error handling";
-	}
-	if (/data science|machine learning|ai/.test(source)) {
-		return "a notebook or script that turns a defined dataset or state space into measured, interpreted output";
 	}
 
 	return "a working artifact with explicit requirements, test cases, and a short explanation";

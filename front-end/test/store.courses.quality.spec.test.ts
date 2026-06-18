@@ -220,14 +220,18 @@ describe("course text quality normalization", () => {
 				"Planning and Architecture",
 				"Review and Reflection",
 				"Standards Practice Set",
+				"Supplemental Project 2",
+				"Supplemental Project 3",
 				"Transfer Lab",
 				"Transfer Practice",
 				"Verification and Reflection"
 			]);
 			const repeatedSuffixPattern =
 				/^(Applied Challenge|Core Project|Debugging and Failure Modes|Diagnostic Checkpoint|Extension Challenge|Fluency Drill|Focused Practice|Modeling or Error Analysis|Open-Ended Variant|Planning and Architecture|Review|Standards Practice Set|Transfer Practice|Extension Practice|Challenge Practice|Verification Review):\s+.*:\s+(Applied Challenge|Core Project|Debugging and Failure Modes|Diagnostic Checkpoint|Extension Challenge|Fluency Drill|Focused Practice|Modeling or Error Analysis|Open-Ended Variant|Planning and Architecture|Review and Reflection|Standards Practice Set|Transfer Practice|Extension Practice|Challenge Practice|Verification and Reflection)$/i;
+			const genericSupplementalTitlePattern =
+				/^Supplemental(?: Project| Practice)?\s+[2-9]$/i;
 			const badArtifactPattern =
-				/\bSupplemental\s+[2-9]\b|\bImplementation Lab\b|:\s*(?:Core Project|Review and Reflection|Extension Challenge)\s*$|:\s*$/i;
+				/\bImplementation Lab\b|:\s*(?:Core Project|Review and Reflection|Extension Challenge)\s*$|:\s*$/i;
 			const loadedCourses = await Promise.all(
 				courseCatalog.map(async entry => ({
 					entry,
@@ -238,6 +242,7 @@ describe("course text quality normalization", () => {
 				course
 					? allCourseItemTitles(course).flatMap(item =>
 							genericStandaloneTitles.has(item.title) ||
+							genericSupplementalTitlePattern.test(item.title) ||
 							repeatedSuffixPattern.test(item.title) ||
 							badArtifactPattern.test(item.title)
 								? [
@@ -256,6 +261,12 @@ describe("course text quality normalization", () => {
 						: ""
 				)
 				.join("\n");
+			const dataScienceCourse = loadedCourses.find(
+				({ entry }) => entry.id === "data-science-in-python"
+			)?.course;
+			const dataScienceText = dataScienceCourse
+				? allCourseText(dataScienceCourse)
+				: "";
 
 			expect(badTitles).toEqual([]);
 			expect(corpus).toContain(
@@ -264,6 +275,10 @@ describe("course text quality normalization", () => {
 			expect(corpus).toContain(
 				"Review: CSV Summaries and Sanity Checks"
 			);
+			expect(corpus).toContain(
+				"Transfer Practice: CSV Summaries and Sanity Checks"
+			);
+			expect(dataScienceText).not.toContain("remote-safe investigation writeup");
 		},
 		COURSE_SWEEP_TIMEOUT
 	);
