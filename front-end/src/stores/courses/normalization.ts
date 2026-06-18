@@ -4889,6 +4889,7 @@ function compactGeneratedProjectSupport(
 	const bareReference = reference.replace(/^the\s+/i, "");
 	const escapedBareReference = escapeStringForRegExp(bareReference);
 	const escapedReference = escapeStringForRegExp(reference);
+	const escapedCourseName = escapeStringForRegExp(context.course.name);
 	const compactableFinalNouns = isJavaContext(context)
 		? "response|answer|work"
 		: "note|response|answer|explanation|work";
@@ -4898,9 +4899,15 @@ function compactGeneratedProjectSupport(
 	const supportReferenceCleanupNames = [
 		"program",
 		"analysis",
+		"checkpoint",
+		"practice set",
 		"response",
 		"project",
 		"activity",
+		"exercise",
+		"implementation",
+		"build",
+		"task",
 		"Java work",
 		"Java implementation",
 		"class exercise",
@@ -5297,6 +5304,21 @@ function compactGeneratedProjectSupport(
 			)
 			.replace(
 				new RegExp(
+					`\\b(final|Final|closing|Closing) the ([^\\n]{1,220}?) ` +
+						`(${supportReferenceCleanupNames}) ` +
+						"(note|explanation|response|answer|work|review|check|result|conclusion)\\b",
+					"g"
+				),
+				(
+					_match: string,
+					lead: string,
+					topic: string,
+					referenceName: string,
+					noun: string
+				) => `${lead} ${noun} for the ${topic} ${referenceName}`
+			)
+			.replace(
+				new RegExp(
 					`\\b(The|the) closing ${escapedReference} (note|explanation|response|answer|work|review|check)\\b`,
 					"g"
 				),
@@ -5360,8 +5382,19 @@ function compactGeneratedProjectSupport(
 				"Verify $1"
 			)
 			.replace(
-				/\b(project|checkpoint|program|exercise|implementation|build|task|lab|page|solution) \1\b/gi,
+				new RegExp(`\\b(${supportReferenceCleanupNames}) \\1\\b`, "gi"),
 				"$1"
+			)
+			.replace(
+				new RegExp(`\\b${escapedCourseName} the ([A-Z])`, "g"),
+				"the $1"
+			)
+			.replace(/\bJava Level [1-3] (?:The\s+)?the ([A-Z])/g, "the $1")
+			.replace(/\bThe the ([A-Z])/g, "The $1")
+			.replace(/\bthe the ([A-Z])/g, "the $1")
+			.replace(
+				/\ballowed the ([A-Z][^.!?\n]{1,180}? lab) target\b/g,
+				"allowed target for the $1"
 			)
 			.replace(/\bresponse answer\b/gi, "response")
 			.replace(/\bactivity work\b/gi, "activity")

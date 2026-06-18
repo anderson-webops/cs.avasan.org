@@ -62,6 +62,44 @@ function escapeStringForRegExp(value: string) {
 	return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+function cleanupReferenceNamePattern() {
+	return [
+		"program",
+		"analysis",
+		"checkpoint",
+		"practice set",
+		"response",
+		"project",
+		"activity",
+		"exercise",
+		"implementation",
+		"build",
+		"task",
+		"Java work",
+		"Java implementation",
+		"class exercise",
+		"code checkpoint",
+		"object-design task",
+		"practice build",
+		"type-model task",
+		"method-contract exercise",
+		"API checkpoint",
+		"object-state build",
+		"collection exercise",
+		"Java design task",
+		"systems artifact",
+		"command-line build",
+		"runtime check",
+		"diagnostic run",
+		"low-level implementation",
+		"lab",
+		"solution",
+		"page",
+		"feature",
+		"app path"
+	].join("|");
+}
+
 function capitalizeSentence(value: string) {
 	return `${value.slice(0, 1).toUpperCase()}${value.slice(1)}`;
 }
@@ -139,6 +177,24 @@ function guidanceReference(courseFamily: string, moduleTitle: string) {
 	return "the project";
 }
 
+function scopedGuidanceReference(reference: string, moduleTitle: string) {
+	const cleanTitle = moduleTitle.trim();
+	if (!cleanTitle) return reference;
+
+	const bareReference = reference.replace(/^the\s+/i, "");
+	const normalizedTitle = cleanTitle.toLowerCase();
+	const normalizedReference = bareReference.toLowerCase();
+	if (
+		normalizedTitle === normalizedReference ||
+		normalizedTitle.endsWith(` ${normalizedReference}`) ||
+		normalizedTitle.includes(`${normalizedReference}:`)
+	) {
+		return reference;
+	}
+
+	return `the ${cleanTitle} ${bareReference}`;
+}
+
 function compactGuidanceBody(
 	courseFamily: string,
 	moduleTitle: string,
@@ -146,43 +202,21 @@ function compactGuidanceBody(
 ) {
 	const escapedTitle = escapeStringForRegExp(moduleTitle);
 	const reference = guidanceReference(courseFamily, moduleTitle);
+	const scopedReference = scopedGuidanceReference(reference, moduleTitle);
+	const capitalizedScopedReference = capitalizeSentence(scopedReference);
+	const bareScopedReference = scopedReference.replace(/^the\s+/i, "");
 	const capitalizedReference = capitalizeSentence(reference);
 	const bareReference = reference.replace(/^the\s+/i, "");
 	const escapedCourseFamily = escapeStringForRegExp(courseFamily);
 	const escapedReference = escapeStringForRegExp(reference);
 	const escapedBareReference = escapeStringForRegExp(bareReference);
+	const escapedScopedReference = escapeStringForRegExp(scopedReference);
+	const escapedBareScopedReference =
+		escapeStringForRegExp(bareScopedReference);
 	const escapedCapitalizedReference =
 		escapeStringForRegExp(capitalizedReference);
 
-	const cleanupReferenceNames = [
-		"program",
-		"analysis",
-		"response",
-		"project",
-		"activity",
-		"Java work",
-		"Java implementation",
-		"class exercise",
-		"code checkpoint",
-		"object-design task",
-		"practice build",
-		"type-model task",
-		"method-contract exercise",
-		"API checkpoint",
-		"object-state build",
-		"collection exercise",
-		"Java design task",
-		"systems artifact",
-		"command-line build",
-		"runtime check",
-		"diagnostic run",
-		"low-level implementation",
-		"lab",
-		"solution",
-		"page",
-		"feature",
-		"app path"
-	].join("|");
+	const cleanupReferenceNames = cleanupReferenceNamePattern();
 
 	return body
 		.replace(
@@ -196,52 +230,52 @@ function compactGuidanceBody(
 		.replace(new RegExp(`\\bFor ${escapedTitle}, `, "g"), "")
 		.replace(
 			new RegExp(`\\bUse ${escapedTitle} to\\b`, "g"),
-			`Use ${reference} to`
+			`Use ${scopedReference} to`
 		)
 		.replace(
 			new RegExp(`\\bKeep ${escapedTitle}\\b`, "g"),
-			`Keep ${reference}`
+			`Keep ${scopedReference}`
 		)
 		.replace(
 			new RegExp(`\\bConnect ${escapedTitle}\\b`, "g"),
-			`Connect ${reference}`
+			`Connect ${scopedReference}`
 		)
 		.replace(
 			new RegExp(`\\bBuild ${escapedTitle}\\b`, "g"),
-			`Build ${reference}`
+			`Build ${scopedReference}`
 		)
 		.replace(
 			new RegExp(`\\bAfter ${escapedTitle}\\b`, "g"),
-			`After ${reference}`
+			`After ${scopedReference}`
 		)
 		.replace(
 			new RegExp(`\\bAfter the ${escapedTitle}\\b`, "g"),
-			`After ${reference}`
+			`After ${scopedReference}`
 		)
 		.replace(
 			new RegExp(
 				`\\bThe ${escapedTitle} (review|summary|note|closing note)\\b`,
 				"g"
 			),
-			`The ${bareReference} $1`
+			`The ${bareScopedReference} $1`
 		)
 		.replace(
 			new RegExp(
 				`\\bThe final ${escapedTitle} (review|summary|note)\\b`,
 				"g"
 			),
-			`The final ${bareReference} $1`
+			`The final ${bareScopedReference} $1`
 		)
 		.replace(
 			new RegExp(
 				`\\bThe closing ${escapedTitle} (review|summary|note)\\b`,
 				"g"
 			),
-			`The closing ${bareReference} $1`
+			`The closing ${bareScopedReference} $1`
 		)
 		.replace(
 			new RegExp(`\\bCompare ${escapedTitle}\\b`, "g"),
-			`Compare ${reference}`
+			`Compare ${scopedReference}`
 		)
 		.replace(
 			new RegExp(
@@ -295,9 +329,9 @@ function compactGuidanceBody(
 				`\\b${escapedTitle} (compiles|has|demonstrates|can|builds|includes)\\b`,
 				"g"
 			),
-			`${capitalizedReference} $1`
+			`${capitalizedScopedReference} $1`
 		)
-		.replace(new RegExp(escapedTitle, "g"), reference)
+		.replace(new RegExp(escapedTitle, "g"), scopedReference)
 		.replace(
 			/\b(After|after|Before|before|When|when|If|if|While|while|Once|once|Until|until|With|with|For|for|From|from|Against|against) The (program|project|artifact|app|lab|result|feature|pipeline)\b/g,
 			(_match: string, lead: string, item: string) =>
@@ -372,6 +406,12 @@ function compactGuidanceBody(
 		)
 		.replace(/\blocal the program version\b/g, "local version")
 		.replace(/\blocal the project version\b/g, "local version")
+		.replace(
+			/\b(program|analysis|project|lab|feature|page|solution|artifact|app|pipeline) \1\b/gi,
+			"$1"
+		)
+		.replace(/\b(the final|The final|the closing|The closing) the\b/g, "$1")
+		.replace(/\b- the\b/g, "- The")
 		.replace(
 			new RegExp(`\\bAfter ${escapedReference} page behavior\\b`, "g"),
 			"After the page behavior"
@@ -540,14 +580,28 @@ function compactGuidanceBody(
 				`\\bWrite a ${escapedReference} verification note\\b`,
 				"g"
 			),
-			"Write a verification note"
+			`Write a verification note for ${scopedReference}`
 		)
 		.replace(
 			new RegExp(
 				`\\bWrite a ${escapedBareReference} verification note\\b`,
 				"g"
 			),
-			"Write a verification note"
+			`Write a verification note for ${scopedReference}`
+		)
+		.replace(
+			new RegExp(
+				`\\bWrite a ${escapedScopedReference} verification note\\b`,
+				"g"
+			),
+			`Write a verification note for ${scopedReference}`
+		)
+		.replace(
+			new RegExp(
+				`\\bWrite a ${escapedBareScopedReference} verification note\\b`,
+				"g"
+			),
+			`Write a verification note for ${scopedReference}`
 		)
 		.replace(
 			new RegExp(
@@ -564,6 +618,40 @@ function compactGuidanceBody(
 			`the ${bareReference} $1`
 		)
 		.replace(
+			new RegExp(
+				`\\b${escapedCourseFamily} ${escapedScopedReference}\\b`,
+				"gi"
+			),
+			scopedReference
+		)
+		.replace(
+			new RegExp(
+				`\\b${escapedCourseFamily} ${escapedBareScopedReference}\\b`,
+				"gi"
+			),
+			scopedReference
+		)
+		.replace(
+			new RegExp(`\\bthe ${escapedScopedReference}\\b`, "g"),
+			scopedReference
+		)
+		.replace(new RegExp(`\\b(${cleanupReferenceNames}) \\1\\b`, "gi"), "$1")
+		.replace(/\b(the final|The final|the closing|The closing) the\b/g, "$1")
+		.replace(
+			new RegExp(
+				`\\b(final|Final|closing|Closing) ${escapedScopedReference} (note|explanation|response|answer|work|review)\\b`,
+				"g"
+			),
+			(_match: string, lead: string, noun: string) =>
+				`${lead} ${noun} for ${scopedReference}`
+		)
+		.replace(/(^|\s)- the\b/g, "$1- The")
+		.replace(
+			/\b(a|an) the ([A-Z][^.!?\n]{1,120}?)( verification note| review| summary| note)\b/g,
+			(_match: string, article: string, subject: string, noun: string) =>
+				`${article} ${noun.trim()} for the ${subject}`
+		)
+		.replace(
 			/\*\*Focus:\*\* ([a-z])/g,
 			(_, first: string) => `**Focus:** ${first.toUpperCase()}`
 		)
@@ -577,6 +665,70 @@ function compactGuidanceBody(
 			(_match, prefix: string, marker: string, first: string) =>
 				`${prefix}${marker}${first.toUpperCase()}`
 		);
+}
+
+function normalizeGeneratedGuidanceText(
+	courseFamily: string,
+	guidanceText: string
+) {
+	const cleanupReferenceNames = cleanupReferenceNamePattern();
+	const escapedCourseFamily = escapeStringForRegExp(courseFamily);
+
+	return guidanceText
+		.replace(new RegExp(`\\b(${cleanupReferenceNames}) \\1\\b`, "gi"), "$1")
+		.replace(/\b(the final|The final|the closing|The closing) the\b/g, "$1")
+		.replace(
+			new RegExp(
+				`\\b(final|Final|closing|Closing) the ([^\\n]{1,220}?) ` +
+					`(${cleanupReferenceNames}) ` +
+					"(note|explanation|response|answer|work|review|result|conclusion)\\b",
+				"g"
+			),
+			(
+				_match: string,
+				lead: string,
+				subject: string,
+				reference: string,
+				noun: string
+			) => `${lead} ${noun} for the ${subject} ${reference}`
+		)
+		.replace(
+			new RegExp(`\\b${escapedCourseFamily} the ([A-Z])`, "g"),
+			"the $1"
+		)
+		.replace(/\bJava Level [1-3] (?:The\s+)?the ([A-Z])/g, "the $1")
+		.replace(/\bThe the ([A-Z])/g, "The $1")
+		.replace(/\bthe the ([A-Z])/g, "the $1")
+		.replace(
+			/\bWrite a the ([A-Z][^.!?\n]{1,180}?) verification note\b/g,
+			"Write a verification note for the $1"
+		)
+		.replace(
+			/\b(a|an) the ([A-Z][^.!?\n]{1,120}?)( verification note| review| summary| note)\b/g,
+			(_match: string, article: string, subject: string, noun: string) =>
+				`${article} ${noun.trim()} for the ${subject}`
+		)
+		.replace(
+			new RegExp(
+				`\\b(one|each|every|a|an) the ([A-Z][^.!?\\n]{1,180}?) ` +
+					`(${cleanupReferenceNames}) ` +
+					"(example|case|input|path|run|trace|observation|boundary|" +
+					"behavior|constructor|branch|method|collection operation|" +
+					"diagnostic|data-structure|resource|control-flow change|" +
+					"variable|state transition|view|model|persistence path|" +
+					"normal case|edge case|ordinary behavior|runtime evidence|" +
+					"local lab|page behavior|simulator path)\\b",
+				"g"
+			),
+			(
+				_match: string,
+				quantifier: string,
+				subject: string,
+				reference: string,
+				noun: string
+			) => `${quantifier} ${noun} for the ${subject} ${reference}`
+		)
+		.replace(/(^|\s)- the\b/g, "$1- The");
 }
 
 function checkInDetails(moduleTitle: string) {
@@ -1793,8 +1945,10 @@ export function buildProjectGuidance({
 		).map(step => `- ${step}`)
 	].join("\n\n");
 
-	return [
-		goal,
-		compactGuidanceBody(courseFamily, scopedModuleTitle, body)
-	].join("\n\n");
+	return normalizeGeneratedGuidanceText(
+		courseFamily,
+		[goal, compactGuidanceBody(courseFamily, scopedModuleTitle, body)].join(
+			"\n\n"
+		)
+	);
 }
