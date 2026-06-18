@@ -349,7 +349,8 @@ function buildStandardsModule(
 	courseLabel: string
 ): RawCourseModule {
 	return {
-		title: `${courseLabel}: Standards and Course Map`,
+		kind: "appendix",
+		title: "Standards Map",
 		curriculum: [
 			{
 				title: `${courseLabel} Source Map`,
@@ -419,7 +420,8 @@ function buildSequencingModule(
 	courseLabel: string
 ): RawCourseModule {
 	return {
-		title: `${courseLabel}: Course Roadmap`,
+		kind: "appendix",
+		title: "Course Roadmap",
 		curriculum: [
 			{
 				title: `${courseLabel} Module Options`,
@@ -489,7 +491,8 @@ function buildProjectModule(
 	);
 
 	return {
-		title: `${courseLabel}: Project and Assessment Practice`,
+		kind: "appendix",
+		title: "Project Practice Guide",
 		curriculum: [
 			{
 				title: `${courseLabel} Project Ladder`,
@@ -1792,6 +1795,7 @@ export function applyResearchBackedExpansions(
 	const label = courseExpansionLabel(course, profile);
 	const alreadyExpanded = course.modules.some(
 		module =>
+			module.title === "Standards Map" ||
 			module.title === `${label}: Standards and Course Map` ||
 			module.title.startsWith(
 				`${profile.family}: Standards and Scope Expansion`

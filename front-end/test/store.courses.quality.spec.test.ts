@@ -419,6 +419,58 @@ describe("course text quality normalization", () => {
 	);
 
 	it(
+		"keeps generated planning and reference material in appendices",
+		async () => {
+			const generatedReferenceTitlePatterns = [
+				/^Standards Map$/,
+				/^Course Roadmap$/,
+				/^Project Practice Guide$/,
+				/^Remote Resource Bank$/,
+				/Project Taxonomy and Assessment Implementation$/,
+				/^Elementary Science Grade-Band Paths$/,
+				/^C\+\+ Levels 1-3 Concept Matrix and Placement$/,
+				/^Modern Three-Course C\+\+ Spine$/,
+				/^AP CSA Exam Alignment and FRQ Practice Map$/,
+				/^Dataset, Model, and Evaluation Catalog$/,
+				/Systems and Security Lab Safety Policy$/,
+				/Toolchain and Version Assumptions$/,
+				/^Standards-Mapped Algebra Architecture$/,
+				/^K-2 and 3-5 Zoom-Safe Science Scope Map$/,
+				/^Middle School Integrated Science 6-8 Scope Map$/,
+				/^Data Science, AI Foundations, and Machine Learning Boundary Map$/,
+				/Defensive Lab Contract$/
+			];
+			const courses = await Promise.all(
+				courseCatalog.map(async entry => ({
+					entry,
+					course: await loadRawCourse(entry.id)
+				}))
+			);
+			const generatedReferenceModules = courses.flatMap(
+				({ entry, course }) =>
+					(course?.modules ?? [])
+						.filter(module =>
+							generatedReferenceTitlePatterns.some(pattern =>
+								pattern.test(module.title)
+							)
+						)
+						.map(module => ({
+							courseId: entry.id,
+							kind: module.kind,
+							title: module.title
+						}))
+			);
+			const coreGeneratedReferences = generatedReferenceModules.filter(
+				module => module.kind !== "appendix"
+			);
+
+			expect(generatedReferenceModules.length).toBeGreaterThan(100);
+			expect(coreGeneratedReferences).toEqual([]);
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
+
+	it(
 		"uses course-family support text instead of the generic fallback",
 		async () => {
 			const courses = await Promise.all(

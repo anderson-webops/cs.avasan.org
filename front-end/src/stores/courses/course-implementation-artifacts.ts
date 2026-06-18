@@ -1034,7 +1034,8 @@ function addScienceResourceModule(courseId: string, course: RawCourse) {
 	const links = scienceResourceLinks[courseId];
 
 	appendModule(course, {
-		title: "Science Resource Shortlist and Remote Lab Bank",
+		kind: "appendix",
+		title: "Remote Resource Bank",
 		curriculum: [
 			{
 				title: "Curated Remote Resource Bank",
@@ -1085,6 +1086,7 @@ function addAlgebraTaxonomyModule(courseId: string, course: RawCourse) {
 	const courseLabel = course.name || courseId.replace(/-/g, " ");
 
 	appendModule(course, {
+		kind: "appendix",
 		title: `${courseLabel}: Project Taxonomy and Assessment Implementation`,
 		curriculum: [
 			{
@@ -1121,7 +1123,8 @@ function addElementaryScienceDecision(courseId: string, course: RawCourse) {
 	if (courseId !== "elementary-science") return;
 
 	appendModule(course, {
-		title: "Elementary Science Grade-Band Differentiation Decision",
+		kind: "appendix",
+		title: "Elementary Science Grade-Band Paths",
 		curriculum: [
 			{
 				title: "Decision: Keep One Course with K-2 and 3-5 Paths",
@@ -1434,6 +1437,7 @@ function addCppMatrixModule(courseId: string, course: RawCourse) {
 	}
 
 	appendModule(course, {
+		kind: "appendix",
 		title: "C++ Levels 1-3 Concept Matrix and Placement",
 		curriculum: [
 			{
@@ -1479,6 +1483,7 @@ function addApCsaAlignmentModule(courseId: string, course: RawCourse) {
 	if (courseId !== "ap-computer-science-a") return;
 
 	appendModule(course, {
+		kind: "appendix",
 		title: "AP CSA Exam Alignment and FRQ Practice Map",
 		curriculum: [
 			{
@@ -1525,6 +1530,7 @@ function addDataCatalogModule(courseId: string, course: RawCourse) {
 	if (!catalog) return;
 
 	appendModule(course, {
+		kind: "appendix",
 		title: "Dataset, Model, and Evaluation Catalog",
 		curriculum: [
 			{
@@ -1584,6 +1590,7 @@ function addSecurityPolicyModule(courseId: string, course: RawCourse) {
 	const policy = systemsSecurityPolicy();
 
 	appendModule(course, {
+		kind: "appendix",
 		title: `${courseLabel}: Systems and Security Lab Safety Policy`,
 		curriculum: [
 			{
@@ -1628,6 +1635,7 @@ function addToolchainAssumptionsModule(courseId: string, course: RawCourse) {
 	const familyLabel = profile?.family ?? courseLabel;
 
 	appendModule(course, {
+		kind: "appendix",
 		title: `${courseLabel}: Toolchain and Version Assumptions`,
 		curriculum: [
 			{
@@ -1718,6 +1726,7 @@ function addAlgebraStandardsArchitectureModule(
 	if (!scope) return;
 
 	appendModule(course, {
+		kind: "appendix",
 		title: "Standards-Mapped Algebra Architecture",
 		curriculum: [
 			{
@@ -1762,6 +1771,7 @@ function addAlgebraStandardsArchitectureModule(
 function addScienceGradeBandScopeModule(courseId: string, course: RawCourse) {
 	if (courseId === "elementary-science") {
 		appendModule(course, {
+			kind: "appendix",
 			title: "K-2 and 3-5 Zoom-Safe Science Scope Map",
 			curriculum: [
 				{
@@ -1803,6 +1813,7 @@ function addScienceGradeBandScopeModule(courseId: string, course: RawCourse) {
 	if (courseId !== "middle-school-integrated-science") return;
 
 	appendModule(course, {
+		kind: "appendix",
 		title: "Middle School Integrated Science 6-8 Scope Map",
 		curriculum: [
 			{
@@ -1863,6 +1874,7 @@ function addDataAiMlBoundaryModule(courseId: string, course: RawCourse) {
 	if (!lines) return;
 
 	appendModule(course, {
+		kind: "appendix",
 		title: "Data Science, AI Foundations, and Machine Learning Boundary Map",
 		curriculum: [
 			{
@@ -2137,6 +2149,7 @@ function addCppThreeCourseSpineModule(courseId: string, course: RawCourse) {
 	};
 
 	appendModule(course, {
+		kind: "appendix",
 		title: "Modern Three-Course C++ Spine",
 		curriculum: [
 			{
@@ -2301,6 +2314,7 @@ function addSystemsSpecificSafetyModule(courseId: string, course: RawCourse) {
 	const courseLabel = course.name.trim() || courseId;
 
 	appendModule(course, {
+		kind: "appendix",
 		title: `${courseLabel}: Defensive Lab Contract`,
 		curriculum: [
 			{
@@ -2620,6 +2634,8 @@ function supplementalProjectFor(
 
 function ensureSupplementalProjectFloor(course: RawCourse) {
 	for (const module of course.modules) {
+		if (module.kind === "appendix") continue;
+
 		while (module.supplementalProjects.length < 2) {
 			module.supplementalProjects.push(
 				supplementalProjectFor(
