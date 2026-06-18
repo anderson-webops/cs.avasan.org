@@ -34,6 +34,9 @@ describe("python IDE CodeMirror editor", () => {
 		expect(editorSource).toContain("insertPythonNewlineAndIndent");
 		expect(editorSource).toContain("wrapSelection");
 		expect(editorSource).toContain("closingTokenSkipKeymap");
+		expect(editorSource).toContain("pythonEditorActionKeymap");
+		expect(editorSource).toContain("Mod-s");
+		expect(editorSource).toContain("Mod-Enter");
 		expect(editorSource).toContain("canSkipExistingClosingToken");
 		expect(editorSource).toContain("syntaxHighlighting");
 		expect(editorSource).toContain("BracketPairColorPlugin");

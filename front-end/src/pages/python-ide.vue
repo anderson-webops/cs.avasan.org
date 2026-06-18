@@ -674,6 +674,10 @@ function resetCodeEditor() {
 			},
 			onCursorCountChange(count) {
 				editorCursorCount.value = count;
+			},
+			onRun: activateRunControl,
+			onSave: () => {
+				void saveSelectedProject();
 			}
 		}),
 		parent: host

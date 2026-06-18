@@ -16,6 +16,8 @@ import { basicSetup } from "codemirror";
 interface PythonCodeMirrorOptions {
 	onChange: (content: string) => void;
 	onCursorCountChange: (count: number) => void;
+	onRun?: () => void;
+	onSave?: () => void;
 }
 
 const openingBracketToClosingBracket: Record<string, string> = {
@@ -181,6 +183,27 @@ const closingTokenSkipKeymap = keymap.of(
 	}))
 );
 
+function pythonEditorActionKeymap(options: PythonCodeMirrorOptions) {
+	return keymap.of([
+		{
+			key: "Mod-s",
+			preventDefault: true,
+			run() {
+				options.onSave?.();
+				return true;
+			}
+		},
+		{
+			key: "Mod-Enter",
+			preventDefault: true,
+			run() {
+				options.onRun?.();
+				return true;
+			}
+		}
+	]);
+}
+
 class BracketPairColorPlugin {
 	decorations: DecorationSet;
 
@@ -239,6 +262,7 @@ export function createPythonCodeMirrorExtensions(
 		bracketPairColorExtension,
 		Prec.highest(closingTokenSkipKeymap),
 		Prec.highest(pythonNewlineKeymap),
+		Prec.highest(pythonEditorActionKeymap(options)),
 		Prec.highest(keymap.of([indentWithTab])),
 		Prec.high(wrapSelectionKeymap),
 		EditorView.lineWrapping,
