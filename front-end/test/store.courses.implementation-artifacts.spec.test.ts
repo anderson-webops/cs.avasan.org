@@ -330,6 +330,34 @@ describe("implemented course development artifacts", () => {
 		);
 	});
 
+	it("keeps Python Level 1 source links pointed at starter or solution folders", async () => {
+		const serializedCourse = JSON.stringify(
+			await requireCourse("python-level-1")
+		);
+		const rootOnlyLinks = [
+			...serializedCourse.matchAll(
+				/https:\/\/github\.com\/instruction-material\/Python-Level-1\/tree\/main\/([^"]+)/g
+			)
+		]
+			.map(match => match[1].replace(/\\+$/, ""))
+			.filter(
+				urlPath =>
+					!urlPath.endsWith("/starter") &&
+					!urlPath.endsWith("/solution")
+			);
+
+		expect(rootOnlyLinks).toHaveLength(0);
+		expect(serializedCourse).toContain(
+			"Python-Level-1/tree/main/GrS2-Basic-Shapes/solution"
+		);
+		expect(serializedCourse).toContain(
+			"Python-Level-1/tree/main/Reflection-Template-Updated/starter"
+		);
+		expect(serializedCourse).toContain(
+			"Python-Level-1/tree/main/GRS-Check-in-Three-Updated/solution"
+		);
+	});
+
 	it("links the Python Level 3 bubble sort project to starter and solution folders", async () => {
 		const serializedCourse = JSON.stringify(
 			await requireCourse("python-level-3")

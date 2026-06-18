@@ -6412,7 +6412,10 @@ function normalizeJavaScriptLevel2(course: RawCourse) {
 
 function normalizePythonLevel1(course: RawCourse) {
 	setItemLinks(course, "Check-In #2", "Check-In #2 Overview", {
-		solutionLink: githubTree("Python-Level-1", "GRS-Check-in-Two-Updated")
+		solutionLink: githubTree(
+			"Python-Level-1",
+			"GRS-Check-in-Two-Updated/solution"
+		)
 	});
 	setItemLinks(
 		course,
@@ -6421,16 +6424,19 @@ function normalizePythonLevel1(course: RawCourse) {
 		{
 			projectLink: githubTree(
 				"Python-Level-1",
-				"Check-in-Two-Practice-Project"
+				"Check-in-Two-Practice-Project/starter"
 			),
 			solutionLink: githubTree(
 				"Python-Level-1",
-				"Check-in-Two-Additional-Practice-ProjectUpdated"
+				"Check-in-Two-Additional-Practice-ProjectUpdated/solution"
 			)
 		}
 	);
 	setItemLinks(course, "Check-In #3", "Check-In #3 Overview", {
-		solutionLink: githubTree("Python-Level-1", "GRS-Check-in-Three-Updated")
+		solutionLink: githubTree(
+			"Python-Level-1",
+			"GRS-Check-in-Three-Updated/solution"
+		)
 	});
 }
 
