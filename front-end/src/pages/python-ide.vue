@@ -2210,7 +2210,16 @@ function activateRunControl() {
 	void runCurrentProject();
 }
 
+function canvasOwnsKeyboardEvent(event: KeyboardEvent) {
+	const canvas = canvasRef.value;
+	return Boolean(
+		canvas && (event.target === canvas || document.activeElement === canvas)
+	);
+}
+
 function handleKeyDown(event: KeyboardEvent) {
+	if (!canvasOwnsKeyboardEvent(event)) return;
+
 	const handler = keyHandlers.get(normalizeKey(event.key));
 	if (handler) {
 		event.preventDefault();
@@ -2249,6 +2258,7 @@ function handleKeyDown(event: KeyboardEvent) {
 }
 
 function handleKeyUp(event: KeyboardEvent) {
+	if (!canvasOwnsKeyboardEvent(event)) return;
 	if (selectedProject.value?.mode !== "pgzero") return;
 
 	const normalizedKey = normalizeKey(event.key);
@@ -2346,6 +2356,8 @@ function dispatchCanvasPointerEvent(
 	event: MouseEvent,
 	type: GameInputEvent["type"]
 ) {
+	if (type === "mousedown") canvasRef.value?.focus();
+
 	if (selectedProject.value?.mode === "pgzero") {
 		queueGamePointerEvent(event, type);
 		return;
@@ -2390,10 +2402,14 @@ function dispatchCanvasPointerEvent(
 	}
 
 	event.preventDefault();
-	canvasRef.value?.focus();
 }
 
 function clearTurtleDrag() {
+	activeTurtleDragButton = null;
+}
+
+function clearCanvasKeyboardState() {
+	gameKeysDown.clear();
 	activeTurtleDragButton = null;
 }
 
@@ -2823,6 +2839,7 @@ onBeforeUnmount(() => {
 								:aria-label="`${selectedModeLabel} canvas`"
 								class="turtle-canvas"
 								tabindex="0"
+								@blur="clearCanvasKeyboardState"
 								@mousedown="
 									dispatchCanvasPointerEvent(
 										$event,
@@ -2925,6 +2942,8 @@ onBeforeUnmount(() => {
 	--python-output-muted: #64748b;
 	--python-output-stderr: #b91c1c;
 	--python-output-system: #047857;
+	--python-focus-ring: rgba(16, 185, 129, 0.34);
+	--python-focus-glow: rgba(16, 185, 129, 0.16);
 	--syntax-keyword: #7c3aed;
 	--syntax-builtin: #2563eb;
 	--syntax-function: #a16207;
@@ -3046,6 +3065,8 @@ html.dark .python-ide-page {
 	--python-output-muted: #94a3b8;
 	--python-output-stderr: #fecaca;
 	--python-output-system: #a7f3d0;
+	--python-focus-ring: rgba(45, 212, 191, 0.54);
+	--python-focus-glow: rgba(45, 212, 191, 0.18);
 	--syntax-keyword: #c084fc;
 	--syntax-builtin: #60a5fa;
 	--syntax-function: #fde68a;
@@ -3588,6 +3609,15 @@ html.dark .file-delete:disabled::after {
 	gap: 0.35rem;
 }
 
+.editor-toolbar label {
+	padding: 0.2rem;
+	border: 1px solid transparent;
+	border-radius: 14px;
+	transition:
+		border-color 150ms ease,
+		box-shadow 150ms ease;
+}
+
 .ide-grid {
 	min-height: 38rem;
 	display: grid;
@@ -3626,7 +3656,21 @@ html.dark .file-delete:disabled::after {
 	position: relative;
 	min-height: 100%;
 	overflow: hidden;
+	border: 1px solid transparent;
 	background: var(--python-code-bg);
+	transition:
+		border-color 150ms ease,
+		box-shadow 150ms ease;
+}
+
+.code-editor-shell:focus-within,
+.canvas-shell:focus-within,
+.stdin-panel:focus-within,
+.editor-toolbar label:focus-within {
+	border-color: var(--python-focus-ring);
+	box-shadow:
+		0 0 0 3px var(--python-focus-glow),
+		inset 0 0 0 1px rgba(16, 185, 129, 0.12);
 }
 
 .code-editor-host {
@@ -3674,12 +3718,16 @@ html.dark .file-delete:disabled::after {
 
 .canvas-shell {
 	padding: 1rem;
-	border-bottom: 1px solid var(--color-border);
+	border: 1px solid transparent;
+	border-bottom-color: var(--color-border);
 	background:
 		linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
 		linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
 		#f8fafc;
 	background-size: 24px 24px;
+	transition:
+		border-color 150ms ease,
+		box-shadow 150ms ease;
 }
 
 .turtle-canvas {
@@ -3688,6 +3736,7 @@ html.dark .file-delete:disabled::after {
 	border: 1px solid var(--color-border);
 	border-radius: 14px;
 	background: #fff;
+	outline: none;
 }
 
 .artifact-list {
@@ -3759,7 +3808,11 @@ html.dark .file-delete:disabled::after {
 
 .stdin-panel {
 	padding: 1rem;
-	border-bottom: 1px solid var(--color-border);
+	border: 1px solid transparent;
+	border-bottom-color: var(--color-border);
+	transition:
+		border-color 150ms ease,
+		box-shadow 150ms ease;
 }
 
 .stdin-panel textarea {

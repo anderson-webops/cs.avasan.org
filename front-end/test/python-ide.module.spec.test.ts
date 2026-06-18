@@ -584,6 +584,34 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("currentProject._id = savedProject._id");
 	});
 
+	it("keeps canvas keyboard handlers separate from editor and input focus", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/pages/python-ide.vue"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain("function canvasOwnsKeyboardEvent");
+		expect(pageSource).toContain("document.activeElement === canvas");
+		expect(pageSource).toContain(
+			"if (!canvasOwnsKeyboardEvent(event)) return;"
+		);
+		expect(
+			pageSource.indexOf(
+				"if (!canvasOwnsKeyboardEvent(event)) return;"
+			)
+		).toBeLessThan(
+			pageSource.indexOf(
+				"[\" \", \"arrowdown\", \"arrowleft\", \"arrowright\", \"arrowup\"]"
+			)
+		);
+		expect(pageSource).toContain("@blur=\"clearCanvasKeyboardState\"");
+		expect(pageSource).toContain("canvasRef.value?.focus();");
+		expect(pageSource).toContain("--python-focus-ring");
+		expect(pageSource).toContain(".code-editor-shell:focus-within");
+		expect(pageSource).toContain(".canvas-shell:focus-within");
+		expect(pageSource).toContain(".stdin-panel:focus-within");
+	});
+
 	it("normalizes project file names without accepting unsafe names", () => {
 		expect(normalizePythonFileName("helper tools")).toBe("helper_tools.py");
 		expect(normalizePythonFileName("helpers/math tools")).toBe(
