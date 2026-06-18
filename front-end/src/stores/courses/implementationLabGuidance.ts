@@ -172,7 +172,7 @@ export function buildImplementationLabGuidance({
 
 	return [
 		projectGoal,
-		`**Focus:** ${focus}.`,
+		`**Focus:** In **${label}**, track ${focus}.`,
 		"**Required work:**",
 		`1. For ${definiteLabel(label)} ${artifact}, identify the concrete inputs, outputs, state changes, files, commands, services, or system boundaries involved.`,
 		`2. Build ${definiteLabel(label)} ${artifact} in small runnable steps, checking output, logs, traces, tests, or browser/runtime behavior after each meaningful change.`,
