@@ -79,8 +79,34 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "ML1 Project 1: Customer Segmentation",
-					content:
-						"Using Google Colab and the Kaggle customer segmentation dataset, build k-means clustering from scratch to group customers by annual income and spending score. First, create a dedicated folder in Google Drive for the ML projects and upload the dataset there. In Colab, mount Google Drive using the Files sidebar, then read the CSV with pandas (for example, data = pd.read_csv('/content/drive/MyDrive/MachineLearning/Mall_Customers.csv')). Examine the columns and decide which to use for clustering (annual income and spending score). Create a scatterplot of income vs. spending score before clustering and ask how many clusters are visible by eye. Initialize k (e.g., k = 5), construct a list or array of data points, and choose k random points as initial centroids. Set up data structures for centroids, old centroids, and an array holding each customer's cluster index. Implement a loop that repeats until centroids stop changing: compute distances from each point to each centroid using Euclidean distance, assign each point to the nearest centroid, copy current centroids to old centroids using deepcopy, and recompute each centroid by averaging all points in that cluster. After convergence, call draw_clustered_graph() from the starter code to plot the final clusters. Run the algorithm multiple times and observe that clusters may change slightly due to random initialization. Experiment with different k values and compare the resulting cluster structures. Wrap up with a short written or spoken summary explaining the dataset, the goal of clustering, the findings, and any surprising patterns noticed.",
+					content: `**Goal:** Build k-means clustering from scratch to group customers by annual income and spending score.
+
+**Setup:**
+- Create a dedicated Google Drive folder for machine-learning projects.
+- Upload the Kaggle customer segmentation dataset.
+- Mount Google Drive in Colab and read the CSV with pandas.
+- Inspect the columns and select annual income plus spending score as the two clustering features.
+
+**Exploration:**
+- Create a scatterplot of income versus spending score before clustering.
+- Estimate how many groups appear visually and record why that estimate might be uncertain.
+
+**Algorithm steps:**
+1. Choose \`k\`, such as \`k = 5\`.
+2. Store the data points in a list or array.
+3. Choose \`k\` random initial centroids.
+4. Store current centroids, previous centroids, and each customer's assigned cluster index.
+5. Repeat until the centroids stop changing:
+   - Compute Euclidean distance from each point to each centroid.
+   - Assign each point to the nearest centroid.
+   - Copy current centroids to previous centroids with \`deepcopy\`.
+   - Recompute each centroid by averaging all points assigned to that cluster.
+
+**Checkpoints:**
+- The final plot uses different colors for different clusters.
+- The algorithm is run more than once so random initialization is visible.
+- At least two \`k\` values are compared.
+- The written summary explains the dataset, the clustering goal, the final groups, and one surprising or uncertain pattern.`,
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation-Starter-Updated",
 					solutionLink:
@@ -92,8 +118,25 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "ML1 Project 2: Disney Movie Clustering",
-					content:
-						"Use k-means via scikit-learn to cluster Disney movies by year and inflation-adjusted revenue. In Colab, read in the Disney movie dataset from Kaggle, then extract the release year and inflation columns. Because the release date is stored as a string, build a new list or column containing just the year as an integer. Create a scatterplot of year vs. inflation-based revenue before clustering and discuss how hard it is to visually see separate groups. Set k to a few different values and use scikit-learn's k-means implementation: build a 2D feature matrix, call fit_predict() to get cluster assignments, and access cluster_centers_ for centroids. Call draw_clustered_graph() to plot the clustered scatterplot. Experiment with multiple k values and compare how cluster shapes and boundaries change. End with a short written or spoken explanation of what the dataset contains, what was investigated, and anything surprising in how the movies grouped by time and inflation.",
+					content: `**Goal:** Use scikit-learn k-means to cluster Disney movies by release year and inflation-adjusted revenue.
+
+**Data preparation:**
+- Load the Disney movie dataset in Colab.
+- Extract the release date and inflation-adjusted revenue columns.
+- Convert the release date string into a numeric release year.
+- Build a two-column feature matrix using year and inflation-adjusted revenue.
+
+**Model steps:**
+1. Plot the raw data before clustering.
+2. Choose a starting value for \`k\`.
+3. Use scikit-learn's k-means implementation and call \`fit_predict()\` to generate cluster assignments.
+4. Inspect \`cluster_centers_\` so the centroid locations are not treated as hidden magic.
+5. Plot the clustered scatterplot.
+
+**Comparison checks:**
+- Try multiple \`k\` values.
+- Compare how the cluster shapes, boundaries, and centroid positions change.
+- Explain whether the clusters reveal meaningful movie-era patterns or mainly reflect the scale of the revenue data.`,
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Disney-Movie-Clustering-Starter-Updated",
 					solutionLink:
@@ -107,8 +150,18 @@ export const machineLearningCourse: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "ML1 Supplemental Project 1: Flower Clustering",
-					content:
-						"Using the provided starter code and the iris flower dataset, implement or apply k-means clustering to group flowers by petal length and petal width. Load the iris.csv file from the given URL into your notebook. Either use scikit-learn's k-means or write the algorithm from scratch (as in the customer segmentation project). Plot the raw (unclustered) data first, then plot the clustered data with different colors for each cluster. Compare how many clusters you see visually versus the k you choose in code and discuss how the clusters relate to the three iris species.",
+					content: `**Goal:** Cluster iris flowers by petal length and petal width.
+
+**Required workflow:**
+- Load the \`iris.csv\` file into a notebook.
+- Use either scikit-learn k-means or a from-scratch implementation based on the customer segmentation project.
+- Plot the raw data before clustering.
+- Plot the clustered data with a different color for each cluster.
+
+**Reflection checks:**
+- Compare the visually estimated number of groups with the chosen value of \`k\`.
+- Explain how the clusters relate to the three iris species.
+- Name one limitation of clustering flowers without using the species labels during training.`,
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Flower-Clustering-Starter",
 					solutionLink:
@@ -145,8 +198,26 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "ML2 Project 1: KNN Customer Segment Classification",
-					content:
-						"Using the previous customer segmentation dataset and your clustering results, build a KNN classifier that predicts a customer's segment from annual income and spending score. In Colab, start from your saved segmentation work or reload the dataset and re-create the features and labels (cluster assignments). Decide on a value of k (for example, 3 or 5) and build feature vectors [income, spending score] for each customer. Split your data into training and testing sets. Implement KNN either manually (computing distances, finding nearest neighbors, and doing majority vote) or via scikit-learn's KNeighborsClassifier. Use the test set to compute accuracy and compare predictions to the original cluster labels. Create at least one new ‘fake' customer feature vector and predict its segment, then check visually against your cluster plot. Write a short explanation of how k was chosen, how well the classifier performed, and whether the classification of the new customer makes sense.",
+					content: `**Goal:** Predict a customer's cluster segment from annual income and spending score using K-nearest neighbors.
+
+**Inputs:**
+- Start from saved customer segmentation work, or reload the dataset and recreate the feature columns.
+- Use the cluster assignments from k-means as labels.
+- Build feature vectors in the form \`[income, spendingScore]\`.
+
+**Model steps:**
+1. Choose a KNN value such as \`k = 3\` or \`k = 5\`.
+2. Split the data into training and testing sets.
+3. Implement KNN manually or use scikit-learn's \`KNeighborsClassifier\`.
+4. Evaluate the test-set accuracy.
+5. Compare predicted labels with the original cluster labels.
+
+**Transfer check:**
+- Create at least one hypothetical customer feature vector.
+- Predict that customer's segment.
+- Check the result visually against the cluster plot and explain whether the prediction makes sense.
+
+**Reflection:** Explain how \`k\` was chosen, how well the classifier performed, and what might happen if the clusters from the previous project were noisy.`,
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML2-KNN-Customer-Segmentation-Classification-Updated",
 					solutionLink:
@@ -158,8 +229,30 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "ML2 Project 2: KNN Car Classification",
-					content:
-						"Build a KNN classifier to predict car ‘acceptability' using the classic car evaluation dataset. In Colab, download the dataset and inspect its documentation to identify the target label (acceptability) and the features (buying, maintenance, doors, persons, luggage boot, safety). Notice that many features are categorical strings rather than numbers; design dictionaries mapping each category value to a numeric code and use pandas.replace() to encode them. Construct feature vectors from the encoded columns and labels from the acceptability column, whose possible values are {unacc, acc, good, vgood}. Split the data into training and testing sets with train_test_split(). Use scikit-learn's KNeighborsClassifier to train the model and compute accuracy on the test set. Create your own feature vector describing a hypothetical car and classify it; discuss whether the result seems reasonable. Finish by summarizing the dataset, your feature encoding choices, model accuracy, and any surprising results.",
+					content: `**Goal:** Build a KNN classifier that predicts car acceptability from categorical car features.
+
+**Data setup:**
+- Download the classic car evaluation dataset.
+- Identify the target label: acceptability.
+- Identify the features: buying price, maintenance cost, doors, passengers, luggage boot, and safety.
+- Read the dataset documentation before encoding values.
+
+**Encoding task:**
+- Many columns are strings, so convert category values into numeric codes.
+- Use clear dictionaries for each column instead of relying on unexplained numbers.
+- Use \`pandas.replace()\` or an equivalent method to apply the replacement table.
+
+**Model steps:**
+1. Construct feature vectors from the encoded columns.
+2. Store labels from the acceptability column: \`unacc\`, \`acc\`, \`good\`, or \`vgood\`.
+3. Split the data with \`train_test_split()\`.
+4. Train scikit-learn's \`KNeighborsClassifier\`.
+5. Compute test-set accuracy.
+
+**Checkpoints:**
+- Classify one hypothetical car feature vector.
+- Explain whether the result seems reasonable.
+- Summarize encoding choices, accuracy, and one surprising result or limitation.`,
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML2-KNN-Car-Classification-Starter",
 					solutionLink:
@@ -226,8 +319,24 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "ML3 Project 1: Iris Dataset Classification",
-					content:
-						"In Colab, build a Naive Bayes classifier for the iris dataset. Load the CSV from the provided URL, then separate it into X (feature vectors) and y (labels). Use pandas.drop() to remove the species column when constructing X. Print the first few rows of X and y with head() to verify that the features and labels align (X[i] corresponds to y[i]). Split the data into training and testing sets. Use scikit-learn's MultinomialNB or another suitable Naive Bayes variant, call fit() on the training data, then call predict() on the test data and compute accuracy with accuracy_score(). Finally, create a few custom feature vectors and have the classifier predict their species, noting that these examples may not exist in the original dataset. Summarize the dataset, model accuracy, and any surprising classifications.",
+					content: `**Goal:** Build a Naive Bayes classifier for the iris dataset.
+
+**Data preparation:**
+- Load the CSV from the provided URL.
+- Separate the data into \`X\` feature vectors and \`y\` labels.
+- Use \`pandas.drop()\` to remove the species column when constructing \`X\`.
+- Print the first few rows of \`X\` and \`y\` with \`head()\` to verify that features and labels still align.
+
+**Model steps:**
+1. Split the data into training and testing sets.
+2. Choose a suitable Naive Bayes variant, such as \`MultinomialNB\` when the feature assumptions fit.
+3. Call \`fit()\` on the training data.
+4. Call \`predict()\` on the test data.
+5. Compute accuracy with \`accuracy_score()\`.
+
+**Transfer check:** Create a few custom feature vectors, predict their species, and note that these examples may not exist in the original dataset.
+
+**Reflection:** Summarize the dataset, model accuracy, and any classifications that seemed surprising or uncertain.`,
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML3-Naive-Bayes-Iris-Flowers-Classification",
 					solutionLink:
@@ -239,8 +348,31 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "ML3 Project 2: Email Spam Classification",
-					content:
-						"Use Naive Bayes to classify emails as spam or not spam with a realistic text dataset. In Colab, load the spam mails dataset from Kaggle and drop irrelevant columns such as messageid and label columns that are not needed for modeling. Remove duplicate rows. Write a preprocessing function that removes punctuation, lowercases the text, and filters out common stopwords such as `the`, `is`, and other high-frequency function words to avoid over-emphasizing them. Use scikit-learn's CountVectorizer with your custom preprocessing function to turn each email into a bag-of-words feature vector. Build a list of labels corresponding to whether each email is spam or ham. Split the data into training and testing sets, for example 80% training and 20% testing, train a Naive Bayes classifier such as MultinomialNB, and evaluate its accuracy on the test set. Record training time, misclassifications, why Naive Bayes is a good baseline for text classification, the dataset content, the target being detected, the model's accuracy, and any surprising results.",
+					content: `**Goal:** Use Naive Bayes to classify emails as spam or not spam.
+
+**Data cleaning:**
+- Load the spam mails dataset in Colab.
+- Drop irrelevant columns such as message IDs or duplicate label columns.
+- Remove duplicate rows.
+- Confirm which column contains the email text and which column contains the spam/ham label.
+
+**Text preprocessing:**
+- Remove punctuation.
+- Convert text to lowercase.
+- Filter out common stopwords such as \`the\`, \`is\`, and other high-frequency function words.
+- Use scikit-learn's \`CountVectorizer\` with the custom preprocessing function to produce bag-of-words features.
+
+**Model steps:**
+1. Build the label list for spam or ham.
+2. Split the data into training and testing sets, such as 80% training and 20% testing.
+3. Train a classifier such as \`MultinomialNB\`.
+4. Evaluate accuracy on the test set.
+5. Inspect a few misclassified examples.
+
+**Reflection checks:**
+- Record training time and model accuracy.
+- Explain why Naive Bayes is a useful baseline for text classification.
+- Name one risk of relying only on accuracy or only on word counts.`,
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML3-Email-Spam-Classification",
 					datasetLink:
@@ -373,13 +505,51 @@ export const machineLearningCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "Neurons and Activation Functions",
-					content:
-						"Another technique for classification is a neural network.\n\nA neural network is built out of neurons. A neuron is a node in a graph that takes in a specific number of inputs then produces a single output by doing some math on the inputs.\n\nA neuron contains some number of predetermined weights. The number of weights in a neuron is equivalent to the number of inputs to that neuron. For instance, the neuron above would have two weights in it (`w1` and `w2`).\n\nOnce the neuron takes an input, it calculates the output first multiplying each input by its corresponding weight: `x1*w1` and `x2*w2.`\n\nThen, the neuron adds together each of these products along with a bias value called *b*: `x1*w1 + x2*w2 + b`.\n\nFinally, the neuron passes the sum through a special function called an activation function f to turn the output into a predictable form. A sigmoid graph is useful here because the sigmoid function always returns a value between 0 and 1. Some common activation functions are sigmoid and ReLU.\n\nThe output of the activation function is the output of the neuron: `y = f(x1*w1 + x2*w2 + b)`.\n\nExample input to the neuron:\n\tlet `x1 = 0`, `x2 = 1`, `w1 = 1`, `w2 = 2`, `b = 1`, `activation function = sigmoid`\n\t`x1*w1 + x2*w2 + b = (0)(1) + (1)(2) + 1 = 3`\n\t`f(3) = 0.953` (using a sigmoid calculator online)"
+					content: `A neural network is another technique for classification and regression. The smallest useful unit is a neuron.
+
+**Neuron model:**
+- A neuron takes a fixed number of inputs and produces one output.
+- Each input has a corresponding weight.
+- The neuron also has a bias value.
+- The weighted sum is passed through an activation function.
+
+**Details:**
+- If a neuron has two inputs, it needs two weights: \`w1\` and \`w2\`.
+- The weighted input terms are \`x1*w1\` and \`x2*w2\`.
+- The bias is added after the weighted terms: \`x1*w1 + x2*w2 + b\`.
+- A sigmoid graph is useful here because the sigmoid function always returns a value between 0 and 1.
+- Common activation functions include sigmoid and ReLU.
+
+**Output formula:** \`y = f(x1*w1 + x2*w2 + b)\`
+
+**Worked example:**
+1. Let \`x1 = 0\`, \`x2 = 1\`, \`w1 = 1\`, \`w2 = 2\`, and \`b = 1\`.
+2. Use sigmoid as the activation function.
+3. Compute the weighted sum: \`(0)(1) + (1)(2) + 1 = 3\`.
+4. Apply the activation function: \`f(3) = 0.953\` using a sigmoid calculator.
+
+**Checkpoints:** Explain what changes when a weight changes, what changes when the bias changes, and why an activation function is needed at all.`
 				},
 				{
 					title: "ML4 Project 1: Build a Neuron Class",
-					content:
-						"What instance attributes should the Neuron class have? The `Neuron` class needs the weights (`w1` and `w2`) and the activation function (You may need to pass in a function as an argument).\nWhat parameters does the `run()` method need? It needs the two inputs (`x1` and `x2`) into the neuron and the bias.\nOutside the class, write a sigmoid function that takes in a single input and returns the output of the sigmoid function.\nCreate an instance of `Neuron` and pass an input into it.",
+					content: `**Goal:** Build a small \`Neuron\` class so the neuron formula becomes executable code.
+
+**Class design:**
+- Store the weights as instance attributes.
+- Store the activation function as an instance attribute.
+- Pass the activation function into the constructor so different functions can be tested later.
+
+**Method contract:**
+- The \`run()\` method should receive the two inputs, \`x1\` and \`x2\`.
+- It should also receive or use the bias value.
+- It should compute the weighted sum and return the activated output.
+
+**Support function:** Write a standalone sigmoid function that takes one numeric input and returns the sigmoid output.
+
+**Checkpoints:**
+- Create at least one \`Neuron\` instance.
+- Run the worked example from the lesson.
+- Change one weight and explain why the output changes.`,
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML4-Neuron-Implementation",
 					solutionLink:
@@ -394,8 +564,26 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "ML4 Project 2: Simple Neural Network Simulation",
-					content:
-						"Using the Neuron class from the previous project, simulate a simple neural network with two inputs, one hidden layer with two neurons, and one output neuron. Initialize input values x1, x2, and a bias b. Create two Neuron objects to represent the hidden layer, each with its own weights and activation function, for example sigmoid. Create a third Neuron object to represent the output layer, possibly using ReLU as the activation. Feed the input (x1, x2, b) into each hidden neuron, collect their outputs, then feed these outputs and the bias into the output neuron. Print intermediate results from each neuron so the flow of data through the network is easy to follow. Compare how changing weights or activation functions changes the final output.",
+					content: `**Goal:** Use the \`Neuron\` class to simulate a tiny neural network.
+
+**Network shape:**
+- Two numeric inputs.
+- One hidden layer with two neurons.
+- One output neuron.
+- A bias value used in each neuron calculation.
+
+**Build steps:**
+1. Initialize \`x1\`, \`x2\`, and \`b\`.
+2. Create two \`Neuron\` objects for the hidden layer, each with its own weights and activation function.
+3. Create a third \`Neuron\` object for the output layer.
+4. Feed the original inputs into the hidden neurons.
+5. Feed the hidden-neuron outputs into the output neuron.
+6. Print each intermediate output so the data flow is visible.
+
+**Experiments:**
+- Change one hidden-layer weight and compare the final output.
+- Change the output activation function and compare the final output.
+- Explain why this network is still a simulation, not a trained model.`,
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML4-Simple-Neural-Network",
 					solutionLink:
@@ -405,13 +593,48 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Neural Networks for Classification",
-					content:
-						"Neural networks can be used for classification tasks. Connect back to feature vectors: each feature becomes an input node in the input layer. During training, each feature vector is fed forward through the network to produce an output, which is compared to the true label using a loss function that measures how far off the prediction is. Backpropagation computes gradients of the loss with respect to the network's weights and updates those weights to reduce loss over time. Training is essentially the process of finding weights and biases that minimize loss over all training examples. Outputs of a network for classification are continuous, so classification needs a mapping from the output to discrete categories, such as rounding a single output between 0 and 1 or using softmax for multi-class problems. Keras is a high-level library that handles many implementation details for building and training neural networks."
+					content: `Neural networks can be used for classification tasks.
+
+**Feature connection:**
+- Each feature becomes an input value in the input layer.
+- During training, each feature vector is fed forward through the network.
+- The network produces an output that is compared to the true label.
+
+**Training idea:**
+- A loss function measures how far the prediction is from the true label.
+- Backpropagation computes how much each weight contributed to that error.
+- The optimizer updates weights to reduce loss over many examples.
+- Training is the search for weights and biases that generalize, not just weights that memorize the training set.
+
+**Classification output:** Neural-network outputs are continuous, so classification needs a mapping from output values to categories. A binary classifier might round a value between 0 and 1, while a multi-class classifier often uses softmax.
+
+**Tooling note:** Keras is a high-level library that handles many implementation details for building and training neural networks.`
 				},
 				{
 					title: "ML4 Project 3: Diabetes Diagnosis with Neural Networks",
-					content:
-						"In Colab, use keras to build a neural network that predicts whether patients in the Pima Indians Diabetes dataset have diabetes. Download and inspect the dataset from Kaggle, identifying which columns will serve as features and which column is the label. Upload the data to Google Drive and mount it in Colab. Read the CSV into pandas, separate it into a feature matrix X and a labels vector y, and then split into training and testing sets. Use keras (via TensorFlow) to build a suitable network architecture for binary classification (for example, one or two dense hidden layers with ReLU activations and a final output layer with sigmoid). Compile the model with an appropriate loss function and optimizer, train it on the training data, and evaluate accuracy on the test set. Experiment with different numbers of epochs and batch sizes, observing how performance and training time change. Summarize the dataset contents, your network structure, model accuracy, and any surprising patterns in the predictions.",
+					content: `**Goal:** Build a neural network that predicts whether a patient record indicates diabetes.
+
+**Data setup:**
+- Download and inspect the Pima Indians Diabetes dataset.
+- Identify which columns are features and which column is the label.
+- Upload the data to Google Drive and mount Drive in Colab.
+- Read the CSV into pandas.
+- Separate the feature matrix \`X\` from the label vector \`y\`.
+
+**Model steps:**
+1. Split the dataset into training and testing sets.
+2. Build a Keras model for binary classification.
+3. Use one or two dense hidden layers with ReLU activations as a reasonable starting point.
+4. Use a final sigmoid output layer for the binary prediction.
+5. Compile the model with an appropriate loss function and optimizer.
+6. Train on the training data and evaluate on the test data.
+
+**Experiments:**
+- Compare different epoch counts.
+- Compare different batch sizes.
+- Watch both performance and training time.
+
+**Reflection:** Summarize the dataset, network structure, accuracy, and one prediction pattern that should be interpreted cautiously.`,
 					projectLink:
 						"https://colab.research.google.com/drive/1CLK1xyg-6rvgj2Z8KtTkt2y4sGYL-dTG",
 					solutionLink:
@@ -478,8 +701,25 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "ML5 Project 1: Simple Linear Regression",
-					content:
-						"In Colab, open the starter code for simple linear regression. Plot the given x and y data as a scatterplot and decide whether the data appears to follow a roughly straight-line trend. Use scikit-learn's LinearRegression class to fit a model to the data. Extract and print the slope, y-intercept, correlation (R^2 score), and use the model to predict y for a given x. Plot the line of best fit on top of the scatterplot to visually confirm that it matches the trend. Describe whether the relationship is positive or negative and whether it appears strong, weak, or moderate based on both the graph and R^2 value. Try predictions for x values not in the original dataset and discuss whether those predictions seem reasonable.",
+					content: `**Goal:** Fit and interpret a simple linear regression model.
+
+**Graph first:**
+- Open the starter code in Colab.
+- Plot the given \`x\` and \`y\` data as a scatterplot.
+- Decide whether the data appears to follow a roughly straight-line trend.
+
+**Model steps:**
+1. Use scikit-learn's \`LinearRegression\` class.
+2. Fit the model to the data.
+3. Print the slope and y-intercept.
+4. Print the \`R^2\` score.
+5. Use the model to predict \`y\` for a chosen \`x\`.
+6. Plot the line of best fit on top of the scatterplot.
+
+**Interpretation checks:**
+- Describe whether the relationship is positive or negative.
+- Use both the graph and \`R^2\` to decide whether the relationship looks strong, weak, or moderate.
+- Try predictions for \`x\` values outside the original dataset and discuss whether those extrapolations seem reasonable.`,
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Simple-Linear-Regression-Starter",
 					solutionLink:
@@ -494,8 +734,27 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "ML5 Project 2: Simple Polynomial Regression",
-					content:
-						"Using the starter code in Colab, plot the given x and y data and discuss whether a straight line looks appropriate or whether the shape appears curved. First build a linear regression model and plot its line; evaluate how well it fits by examining residuals and the average error. Then build a polynomial regression model (for example, quadratic) using scikit-learn's PolynomialFeatures plus LinearRegression. Print the learned coefficients and intercept, and plot the resulting curve along with the data. Compare the fit quality and typical error of the linear versus polynomial models. For a chosen x value, compute predictions from both models and compare them to the actual y; discuss which model appears to capture the trend better.",
+					content: `**Goal:** Compare linear regression with polynomial regression on curved data.
+
+**Initial inspection:**
+- Plot the given \`x\` and \`y\` data.
+- Decide whether a straight line looks appropriate or whether the trend appears curved.
+
+**Linear baseline:**
+- Fit a linear regression model.
+- Plot the line over the data.
+- Examine residuals and average error.
+
+**Polynomial model:**
+1. Use scikit-learn's \`PolynomialFeatures\` with \`LinearRegression\`.
+2. Start with a quadratic model unless the data clearly needs another degree.
+3. Print the learned coefficients and intercept.
+4. Plot the curve on top of the data.
+
+**Comparison checks:**
+- Compare typical error for the linear and polynomial models.
+- Predict the same chosen \`x\` value with both models.
+- Explain which model captures the trend better and whether the extra complexity is justified.`,
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-Simple-Polynomial-Regression-Starter-Updated",
 					solutionLink:
@@ -505,8 +764,27 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "ML5 Project 3: Predicting Life Expectancy",
-					content:
-						"In Colab, use WHO life expectancy data to build and compare regression models. Upload the dataset to Google Drive, create a Colab notebook, and mount Drive. Read the CSV into pandas, identify multiple features (such as health, economic, and demographic variables) as inputs, and life expectancy as the target output. Split data into training and testing sets. Build a linear regression model using scikit-learn and measure its performance with the model's score on the test data. Then build a polynomial regression model (for example by expanding some features or using polynomial transformations) and evaluate its score as well. Compare which model fits the data better and discuss whether extra complexity is justified. Summarize which factors seem most correlated with life expectancy and which model gave more reliable predictions.",
+					content: `**Goal:** Use WHO life expectancy data to build and compare regression models.
+
+**Data setup:**
+- Upload the dataset to Google Drive.
+- Create a Colab notebook and mount Drive.
+- Read the CSV into pandas.
+- Identify input features, such as health, economic, and demographic variables.
+- Use life expectancy as the target output.
+
+**Model comparison:**
+1. Split the data into training and testing sets.
+2. Build a linear regression model.
+3. Measure test performance.
+4. Build a polynomial or feature-expanded regression model.
+5. Evaluate the second model on the same test split.
+
+**Reflection checks:**
+- Compare which model fits better.
+- Decide whether the added complexity is justified.
+- Summarize which factors seem most correlated with life expectancy.
+- Name one reason correlation in this dataset does not automatically prove causation.`,
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Predicting-Life-Expectancy",
 					datasetLink:
@@ -571,8 +849,28 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "ML6 Project 1: Predicting House Prices with Neural Networks",
-					content:
-						"In Colab, build a neural network regression model for the Boston housing dataset using keras. Create a new notebook, then load the dataset from keras and split it into training and testing sets. Use StandardScaler or a similar tool to normalize input features (so they have similar scales), which helps the network train more effectively. Design a neural network with one or more dense hidden layers suitable for regression, using an appropriate activation (such as ReLU) in hidden layers and a linear activation in the output layer. Compile the model with a loss function appropriate for regression (such as MSE) and a suitable optimizer. Train the model on the training data and record the mean absolute error over epochs; plot MAE vs. epoch to show how error decreases as training progresses. Evaluate the model on the test set, printing mean squared error to gauge performance. Finally, plot predicted vs. actual house prices for the test set on a scatterplot with the line y = x for reference; points close to this line indicate accurate predictions. Summarize how normalization, network architecture, and training epochs influence accuracy and overfitting.",
+					content: `**Goal:** Build a neural-network regression model for housing-price prediction.
+
+**Data setup:**
+- Create a new Colab notebook.
+- Load the Boston housing dataset from Keras.
+- Split the data into training and testing sets.
+- Normalize input features with \`StandardScaler\` or a similar tool so feature scales are comparable.
+
+**Model steps:**
+1. Design a dense neural network for regression.
+2. Use ReLU or a similar activation in hidden layers.
+3. Use a linear output layer for the predicted numeric price.
+4. Compile with a regression loss such as MSE and a suitable optimizer.
+5. Train on the training data.
+
+**Evaluation:**
+- Record mean absolute error over epochs.
+- Plot MAE versus epoch.
+- Evaluate on the test set and print mean squared error.
+- Plot predicted versus actual house prices with a \`y = x\` reference line.
+
+**Reflection:** Explain how normalization, network architecture, and training epochs influenced accuracy and overfitting.`,
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML6-Predicting-House-Prices",
 					datasetLink:
@@ -638,8 +936,30 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "ML7 Project 1: Weather Image Classifier",
-					content:
-						"In Colab, build a neural network to classify weather images (rainy, sunny, cloudy, sunrise). Upload the dataset to a Google Drive folder and mount Drive in Colab. Use Keras's ImageDataGenerator to define training, validation, and test image generators, handling image rescaling, batching, and directory loading. Design a neural network appropriate for image data—either a simple convolutional neural network (CNN) or a dense network after flattening the images. Compile the model with a suitable loss function for multi-class classification and train it on the training set while monitoring validation accuracy. Evaluate the trained model on the test set to estimate real-world performance. Then load individual images from an example set, run model.predict() on them, and interpret the outputs by taking the index of the largest predicted probability to determine the predicted class. Compare predictions with true labels and discuss success and failure cases. Summarize the dataset, model architecture, test accuracy, and any images where the model struggled.",
+					content: `**Goal:** Build a neural network that classifies weather images as rainy, sunny, cloudy, or sunrise.
+
+**Data setup:**
+- Upload the dataset to a Google Drive folder.
+- Mount Drive in Colab.
+- Use Keras image-loading tools to define training, validation, and test generators.
+- Handle image rescaling, batching, and directory loading explicitly.
+
+**Model choices:**
+- Use a simple convolutional neural network when the goal is image-specific learning.
+- A dense network after flattening can be used as a comparison, but it should be discussed as a weaker baseline for image structure.
+- Compile with a suitable multi-class classification loss.
+
+**Evaluation steps:**
+1. Train on the training set while monitoring validation accuracy.
+2. Evaluate on the test set.
+3. Load individual example images.
+4. Run \`model.predict()\` on those images.
+5. Interpret the largest predicted probability as the predicted class.
+
+**Reflection checks:**
+- Compare predictions with true labels.
+- Discuss both success and failure cases.
+- Summarize the dataset, model architecture, test accuracy, and any images where the model struggled.`,
 					projectLink:
 						"https://colab.research.google.com/drive/12HpOOjmQgf5sLmrTgknSFX24aSln6rT6?usp=sharing",
 					solutionLink:
@@ -787,13 +1107,45 @@ export const machineLearningCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "Master Project Planning",
-					content:
-						"The Master Project is a capstone built around a real dataset and a substantial machine learning problem. The project can be classification or regression and can use any combination of algorithms learned throughout the course: k-means, KNN, Naive Bayes, neural networks, regression, and related tools. Suggested directions include classification tasks such as fake news detection, credit card fraud detection, and Titanic survival prediction, or regression tasks such as loan amount prediction, Bitcoin price prediction, stock price prediction, and medical insurance cost. Pick one idea that genuinely fits personal interests and clearly define the problem to solve."
+					content: `The Master Project is a capstone built around a real dataset and a substantial machine-learning problem.
+
+**Allowed problem types:**
+- Classification, such as fake news detection, credit card fraud detection, or Titanic survival prediction.
+- Regression, such as loan amount prediction, Bitcoin price prediction, stock price prediction, or medical insurance cost prediction.
+- A comparison project that uses more than one course algorithm on the same dataset.
+
+**Possible algorithms:** k-means, KNN, Naive Bayes, neural networks, regression, and related evaluation tools.
+
+**Scoping checks:**
+- The dataset is accessible and understandable.
+- The target variable is clearly defined.
+- The problem fits personal interests well enough to sustain debugging and analysis.
+- The result can be evaluated with an appropriate metric.`
 				},
 				{
 					title: "Master Project Implementation",
-					content:
-						"Once the topic and dataset are chosen, scope the project. Identify the input features, target labels or regression outputs, and evaluation metrics. Decide which two algorithms to compare: for classification, perhaps Naive Bayes vs. a neural network; for regression, maybe linear/polynomial regression vs. a neural network. Set up a new Colab notebook, upload or connect to the dataset, and perform standard steps: data cleaning, feature engineering, train–test split, model training, evaluation, and comparison. Use clear code cells and explanatory text cells to document the process. Aim for a project that spans about two weeks, with substantial implementation and debugging done independently with periodic review checkpoints."
+					content: `**Goal:** Turn the scoped capstone idea into a two-week build plan.
+
+**Planning decisions:**
+- Identify input features.
+- Identify the target label or regression output.
+- Choose evaluation metrics.
+- Decide which two algorithms to compare.
+- For classification, a useful comparison might be Naive Bayes versus a neural network.
+- For regression, a useful comparison might be linear or polynomial regression versus a neural network.
+
+**Notebook workflow:**
+1. Create a new Colab notebook.
+2. Upload or connect to the dataset.
+3. Clean the data.
+4. Engineer or select features.
+5. Split the data into training and testing sets.
+6. Train the first model.
+7. Train the comparison model.
+8. Evaluate both models with the same metric.
+9. Document the process with explanatory text cells.
+
+**Checkpoint cadence:** Plan for substantial independent implementation and debugging, with periodic review checkpoints that focus on evidence, not just whether the notebook runs.`
 				},
 				{
 					title: "ML8 Project 1: Master Project Workspace",
@@ -814,8 +1166,21 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Course Recap & Next Steps",
-					content:
-						"Wrap up the course by recapping the major ideas learned: unsupervised learning and clustering, supervised learning and classification, KNN, Naive Bayes, neural networks, regression, overfitting and evaluation, and image classification. Connect those ideas to the Master Project by identifying which techniques were used, what evidence supports the results, and what limitations remain. Recommended next courses can be chosen based on interests and confidence; strong options include USACO training for advanced competitive programming, AP Computer Science, or language-specific Level 1 courses in Java, JavaScript, or C++. Treat the Master Project as a portfolio piece that demonstrates a complete data/modeling workflow."
+					content: `**Recap targets:**
+- Unsupervised learning and clustering.
+- Supervised learning and classification.
+- KNN, Naive Bayes, neural networks, regression, overfitting, evaluation, and image classification.
+- The difference between a working notebook and a justified modeling result.
+
+**Master Project connection:**
+- Identify which techniques were used.
+- State what evidence supports the results.
+- Name the strongest limitation that remains.
+- Explain what would be improved with more time, data, or compute.
+
+**Next-step options:** Strong follow-on paths include USACO training for advanced competitive programming, AP Computer Science, or language-specific Level 1 courses in Java, JavaScript, or C++.
+
+**Portfolio framing:** Treat the Master Project as evidence of a complete data/modeling workflow, including data cleaning, model selection, evaluation, comparison, and cautious interpretation.`
 				}
 			],
 			supplementalProjects: [

@@ -1932,6 +1932,65 @@ describe("course text quality normalization", () => {
 		}
 	});
 
+	it("keeps machine learning projects structured instead of wall-of-text notebook prompts", async () => {
+		const course = await loadRawCourse("machine-learning");
+		expect(course).not.toBeNull();
+
+		const source = fs.readFileSync(
+			"src/stores/courses/machine-learning.ts",
+			"utf8"
+		);
+
+		const requiredSections = [
+			"**Setup:**",
+			"**Exploration:**",
+			"**Algorithm steps:**",
+			"**Model steps:**",
+			"**Transfer check:**",
+			"**Text preprocessing:**",
+			"**Neuron model:**",
+			"**Worked example:**",
+			"**Network shape:**",
+			"**Linear baseline:**",
+			"**Polynomial model:**",
+			"**Model comparison:**",
+			"**Evaluation:**",
+			"**Model choices:**",
+			"**Scoping checks:**",
+			"**Notebook workflow:**",
+			"**Portfolio framing:**"
+		];
+
+		for (const section of requiredSections) {
+			expect(source).toContain(section);
+		}
+
+		expect(source).not.toContain(
+			"Using Google Colab and the Kaggle customer segmentation dataset, build k-means clustering from scratch"
+		);
+		expect(source).not.toContain(
+			"Use Naive Bayes to classify emails as spam or not spam with a realistic text dataset. In Colab"
+		);
+		expect(source).not.toContain(
+			"In Colab, build a neural network to classify weather images (rainy, sunny, cloudy, sunrise). Upload"
+		);
+
+		const customerSegmentation = findItem(course!, /Customer Segmentation/);
+		expect(customerSegmentation.content).toContain(
+			"The algorithm is run more than once so random initialization is visible"
+		);
+
+		const spamClassification = findItem(course!, /Email Spam/);
+		expect(spamClassification.content).toContain(
+			"Name one risk of relying only on accuracy or only on word counts"
+		);
+
+		const masterProject = findItem(course!, /Master Project Planning/);
+		expect(masterProject.content).toContain(
+			"The result can be evaluated with an appropriate metric"
+		);
+	});
+
 	it("neutralizes repetitive generated supplemental project wording", async () => {
 		const [scratchLevel1, scratchLevel2, webDevelopment] =
 			await Promise.all([
