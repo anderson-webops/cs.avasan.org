@@ -40,8 +40,10 @@ export const pythonLevel3Course: RawCourse = {
 					title: "AM1 Project 1: Mad Libs",
 					content:
 						"Build a Mad Libs program by asking for at least five words such as nouns, adjectives, and verbs. Store each answer in a variable and print a completed story using the collected inputs. After finishing, prepare a short walkthrough explaining what the project does and how the code works.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM1-Mad-Libs/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM1-Mad-Libs"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM1-Mad-Libs/solution"
 				},
 				{
 					title: "Loops",
@@ -57,15 +59,19 @@ export const pythonLevel3Course: RawCourse = {
 					title: "AM1 Project 2: Fictional Language Verifier",
 					content:
 						'Write a program that checks whether an input string is a valid fictional word. A valid word has an even number of characters, contains at least two vowels, and begins and ends with different letters. For example, `"Lumo"` is valid. After finishing, prepare a short walkthrough of the logic used to verify each rule.',
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM1-Junian-Language-Verifier/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM1-Junian-Language-Verifier"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM1-Junian-Language-Verifier/solution"
 				},
 				{
 					title: "AM1 Project 3: Command Assistant",
 					content:
 						"Create a simple assistant program that can respond to commands such as reporting the time or date, remembering a name, telling a joke, or sharing a fun fact. Use a loop so the assistant can continue accepting requests until a stopping condition is met. One possible design uses `while True`; another uses a boolean variable to control whether the program should keep running.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM1-Juni-Assistant/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM1-Juni-Assistant"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM1-Juni-Assistant/solution"
 				}
 			],
 			supplementalProjects: []
@@ -136,22 +142,28 @@ export const pythonLevel3Course: RawCourse = {
 					title: "AM4 Project 1: Recursive Factorials",
 					content:
 						"Write a recursive function that returns `n!`. Use a base case such as `1! = 1`, then define the recursive step so that `factorial(n)` returns `n * factorial(n - 1)`.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM4-Recursive-Factorials/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM4-Recursive-Factorials"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM4-Recursive-Factorials/solution"
 				},
 				{
 					title: "AM4 Project 2: Recursive Exponents",
 					content:
 						"Write a recursive function that returns `b` raised to the power `p`. For positive powers, one useful base case is `p == 1`, and the recursive step multiplies by `b` while reducing the exponent by 1 each time.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM4-Recursive-Exponents/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM4-Recursive-Exponents"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM4-Recursive-Exponents/solution"
 				},
 				{
 					title: "AM4 Project 3: Recursive Fibonacci Numbers",
 					content:
 						"Write a recursive function that returns the `n`th Fibonacci number. Since the sequence starts with 0 and 1, this project uses more than one base case. Then combine the two previous Fibonacci numbers to produce the next one.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM4-Fibonacci-Numbers/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM4-Fibonacci-Numbers"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM4-Fibonacci-Numbers/solution"
 				}
 			],
 			supplementalProjects: [
@@ -159,8 +171,10 @@ export const pythonLevel3Course: RawCourse = {
 					title: "AM4 Supplemental Project 1: Binary Converter",
 					content:
 						"Convert a number to binary both iteratively and recursively. Review how place value works in base 10 and base 2, then repeatedly divide by 2 and track remainders to build the binary representation. Compare the iterative version with a recursive version that solves the same task on `n // 2` and appends the final bit.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM4-Binary-Converter/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM4-Binary-Converter"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM4-Binary-Converter/solution"
 				}
 			]
 		},
@@ -176,15 +190,19 @@ export const pythonLevel3Course: RawCourse = {
 					title: "AM5 Project 1: Recursive Cascade",
 					content:
 						"Write a recursive `cascade()` function that prints the first character of a string, then the first two characters, and continues until the full string is printed. Then write an inverse version that prints the full string first and removes one character at a time. This project is also a good opportunity to compare head recursion and tail recursion.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM5-Recursive-Cascade/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM5-Recursive-Cascade"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM5-Recursive-Cascade/solution"
 				},
 				{
 					title: "AM5 Project 2: Recursive Palindrome Checker",
 					content:
 						"Write a recursive function that returns `True` if a string is a palindrome and `False` otherwise. Compare matching characters at the front and back of the string and continue recursively on the smaller substring in the middle.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM5-Recursive-Palindrome-Checker/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM5-Recursive-Palindrome-Checker"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM5-Recursive-Palindrome-Checker/solution"
 				},
 				{
 					title: "Stacks",
@@ -195,8 +213,10 @@ export const pythonLevel3Course: RawCourse = {
 					title: "AM5 Project 3: Parentheses Validator",
 					content:
 						"Write a program that checks whether a string of brackets could be part of a valid expression. First solve the problem iteratively with a stack and a dictionary of matching pairs. Then explore a recursive approach that removes complete bracket pairs such as `()`, `[]`, or `{}` until the string is empty or no more valid reductions are possible.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM5-Parentheses-Validator/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM5-Parentheses-Validator"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM5-Parentheses-Validator/solution"
 				}
 			],
 			supplementalProjects: [
@@ -204,15 +224,19 @@ export const pythonLevel3Course: RawCourse = {
 					title: "AM5 Supplemental Project 1: Recursive Sum and Max",
 					content:
 						"Practice recursion on lists by writing one function that sums the elements of a list and another that returns the maximum element. Use sublists to shrink the problem toward a base case.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM5-Recursive-Sum-and-Max/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM5-Recursive-Sum-and-Max"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM5-Recursive-Sum-and-Max/solution"
 				},
 				{
 					title: "AM5 Supplemental Project 2: Substring Generator",
 					content:
 						"Generate all possible substrings of a string recursively. One approach is to treat each character as either included or excluded in a recursive tree of choices, then remove duplicates by converting the results to a set and back to a list.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM5-Substring-Generator/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM5-Substring-Generator"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM5-Substring-Generator/solution"
 				}
 			]
 		},
@@ -243,8 +267,10 @@ export const pythonLevel3Course: RawCourse = {
 					title: "Check-In #1: Additional Practice Project",
 					content:
 						"Write one recursive function that prints the running sums of the first `n` elements of a list and another that prints the same sums in reverse order.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM-Check-In-1-Additional-Project/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM-Check-In-1-Additional-Project"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM-Check-In-1-Additional-Project/solution"
 				}
 			],
 			supplementalProjects: []
@@ -261,8 +287,10 @@ export const pythonLevel3Course: RawCourse = {
 					title: "AM6 Project 1: Linear Search Implementation",
 					content:
 						"Implement a linear search function that takes a list and a target value and returns `True` if the target appears in the list and `False` otherwise.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM6-Linear-Search/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM6-Linear-Search"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM6-Linear-Search/solution"
 				},
 				{
 					title: "Runtime Analysis & Big-O Notation",
@@ -274,16 +302,16 @@ export const pythonLevel3Course: RawCourse = {
 					content:
 						"Practice identifying Big-O notation from mathematical expressions such as `12n^2 + n`, `n - sqrt(n)`, `log(n) + 2`, and recursive definitions like `f(n) = 1 + f(n/2)`. Include challenge problems that compare multiple variables or use known summations such as `1 + 2 + ... + n`.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM6-Big-O-Analysis",
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM6-Big-O-Analysis/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM6-Big-O-Analysis"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM6-Big-O-Analysis/solution"
 				},
 				{
 					title: "AM6 Project 3: Function Analysis",
 					content:
 						"Analyze several functions by counting the number of operations they perform relative to `n`. Break nested loops into outer-loop and inner-loop work, compare repeated addition with multiplication, and decide on the final Big-O classification.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM6-Function-Analysis"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM6-Function-Analysis/starter"
 				}
 			],
 			supplementalProjects: []
@@ -300,8 +328,10 @@ export const pythonLevel3Course: RawCourse = {
 					title: "AM7 Project 1: Binary Search Implementation",
 					content:
 						"Implement binary search both iteratively and recursively. In the iterative version, track low and high indexes and continue while `low <= high`. In the recursive version, use slices or index bounds to search the appropriate half until the list is empty or the target is found.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM7-Binary-Search/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM7-Binary-Search"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM7-Binary-Search/solution"
 				},
 				{
 					title: "Binary Search Big-O Analysis",
@@ -312,15 +342,19 @@ export const pythonLevel3Course: RawCourse = {
 					title: "AM7 Project 2: Reverse Number Guesser",
 					content:
 						"Write a program where the computer guesses the user's number by applying a binary search strategy. Use the shrinking interval of possible answers to make the guessing process efficient.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM7-Reverse-Number-Guesser/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM7-Reverse-Number-Guesser"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM7-Reverse-Number-Guesser/solution"
 				},
 				{
 					title: "AM7 Project 3: Runtime Comparator",
 					content:
 						"Copy in iterative versions of linear search and binary search, then compare their performance on many random searches. Use `time.time()` before and after the repeated searches to measure runtime and compare the results.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM7-Runtime-Comparator/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM7-Runtime-Comparator"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM7-Runtime-Comparator/solution"
 				}
 			],
 			supplementalProjects: [
@@ -328,8 +362,10 @@ export const pythonLevel3Course: RawCourse = {
 					title: "AM7 Supplemental Project 1: Number Guesser",
 					content:
 						"Design a number-guessing strategy that guarantees the correct answer within 7 tries. Focus on the process that always works, not on lucky guesses. This warm-up naturally motivates binary search.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM7-Number-Guesser/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM7-Number-Guesser"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM7-Number-Guesser/solution"
 				}
 			]
 		},
@@ -349,8 +385,10 @@ export const pythonLevel3Course: RawCourse = {
 					title: "AM8 Project 1: Selection Sort",
 					content:
 						"Write a function that sorts a list of numbers using selection sort. First build an approach that repeatedly removes the minimum value and adds it to a result list, then consider how an in-place version would reduce memory usage.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM8-Selection-Sort/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM8-Selection-Sort"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM8-Selection-Sort/solution"
 				},
 				{
 					title: "Selection Sort Big-O Analysis",
@@ -370,8 +408,10 @@ export const pythonLevel3Course: RawCourse = {
 					title: "AM8 Project 2: Insertion Sort",
 					content:
 						"Implement insertion sort and test it on several kinds of input, including an already sorted list, a descending list, and a random list. Track how the sorted and unsorted portions change over time.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM8-Insertion-Sort/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM8-Insertion-Sort"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM8-Insertion-Sort/solution"
 				},
 				{
 					title: "Insertion Sort Big-O Analysis",
@@ -478,22 +518,28 @@ export const pythonLevel3Course: RawCourse = {
 					title: "AM10 Project 1: Merge",
 					content:
 						"Write a `merge()` function that combines two already sorted lists into one larger sorted list. Build the result one element at a time by comparing the front items of the two input lists.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM10-Merge-Sort/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM10-Merge-Sort"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM10-Merge-Sort/solution"
 				},
 				{
 					title: "AM10 Project 2: Split",
 					content:
 						"Write a recursive function that repeatedly splits a list into halves until each piece has length 1 or less. This project isolates the recursive structure used by merge sort.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM10-Merge-Sort/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM10-Merge-Sort"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM10-Merge-Sort/solution"
 				},
 				{
 					title: "AM10 Project 3: Merge Sort",
 					content:
 						"Combine the splitting and merging processes into a full merge sort implementation. Then explore whether the same logic can be written in a more compact form without relying on separate helper functions.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM10-Merge-Sort/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM10-Merge-Sort"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM10-Merge-Sort/solution"
 				},
 				{
 					title: "Merge Sort Big-O Analysis",
@@ -519,15 +565,19 @@ export const pythonLevel3Course: RawCourse = {
 					title: "AM11 Project 1: Partition",
 					content:
 						"Write a helper function that takes a list and a pivot and returns the three partitions: less than the pivot, equal to the pivot, and greater than the pivot. This helper keeps the main quicksort function easier to read and test.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM11-Quicksort/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM11-Quicksort"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM11-Quicksort/solution"
 				},
 				{
 					title: "AM11 Project 2: Quicksort",
 					content:
 						"Write a quicksort function that partitions the input, recursively sorts the needed pieces, and concatenates the final result. Test the function on a variety of lists, including inputs with repeated values.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM11-Quicksort/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM11-Quicksort"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM11-Quicksort/solution"
 				},
 				{
 					title: "Quicksort Big-O Analysis",
@@ -538,8 +588,10 @@ export const pythonLevel3Course: RawCourse = {
 					title: "AM11 Project 3: Sorting Comparison",
 					content:
 						"Compare the runtime of several sorting algorithms on different kinds of input, such as random lists, sorted lists, or reversed lists. Use the results to reason about when one algorithm is a better fit than another.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM11-Sorting-Comparison/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM11-Sorting-Comparison"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM11-Sorting-Comparison/solution"
 				}
 			],
 			supplementalProjects: []
@@ -556,8 +608,10 @@ export const pythonLevel3Course: RawCourse = {
 					title: "AM12 Project 1: Crazy Name Tags Printer",
 					content:
 						"Ask for a name and write it to a file in several ways: one letter at a time, every other letter, and backward. As an extension, send each version to a separate file.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-Crazy-Name-Tags-Printer/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-Crazy-Name-Tags-Printer"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-Crazy-Name-Tags-Printer/solution"
 				},
 				{
 					title: "Reading From a File",
@@ -635,15 +689,19 @@ export const pythonLevel3Course: RawCourse = {
 					title: "AM13 Project 1: Conway's Game of Life",
 					content:
 						"Create a grid, load an initial pattern from a file, and print or display successive generations of the board. Implement the four update rules and pause briefly between generations so the simulation is easier to follow.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM13-Conways-Game-of-Life/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM13-Conways-Game-of-Life"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM13-Conways-Game-of-Life/solution"
 				},
 				{
 					title: "AM13 Project 2: Two-Player Conway's Game of Life",
 					content:
 						"Extend the original simulation into a two-player version. Store dead cells and two different player states in the grid, allow each player to place and remove cells between generations, and end the game when one player's cells are completely gone.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM13-Two-Player-Conways/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM13-Two-Player-Conways"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM13-Two-Player-Conways/solution"
 				},
 				{
 					title: "Master Project Presentation",
@@ -665,29 +723,37 @@ export const pythonLevel3Course: RawCourse = {
 					title: "AM14 Project 1: Tic Tac Toe UI",
 					content:
 						"Create a user interface for Tic Tac Toe. Represent the board with a list or a list of lists, print the board clearly, alternate turns between two players, and detect wins or ties. Start with a computer player that makes random legal moves.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM14-Tic-Tac-Toe-UI/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM14-Tic-Tac-Toe-UI"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM14-Tic-Tac-Toe-UI/solution"
 				},
 				{
 					title: "AM14 Project 2: Tic Tac Toe AI",
 					content:
 						"Replace the random computer player with a rule-based AI. Prioritize immediate wins, blocks against an opponent's immediate win, center control, corners, and then sides. Test each candidate move on a copied board so the real game state is not changed during evaluation.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM14-Tic-Tac-Toe-AI/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM14-Tic-Tac-Toe-AI"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM14-Tic-Tac-Toe-AI/solution"
 				},
 				{
 					title: "AM14 Project 3: Tic Tac Toe AI Test",
 					content:
 						"Run the AI against the random player many times and record wins, losses, and ties. Use the results to evaluate how well the strategy performs and where it can still improve.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM14-Tic-Tac-Toe-AI-Test/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM14-Tic-Tac-Toe-AI-Test"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM14-Tic-Tac-Toe-AI-Test/solution"
 				},
 				{
 					title: "AM14 Project 4: Advanced Tic Tac Toe AI",
 					content:
 						"Add support for fork creation and fork blocking. A fork is a move that creates two simultaneous winning threats. Update the AI strategy order to include immediate wins, blocks, forks, fork blocks, center, corners, and sides.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM14-Tic-Tac-Toe-AI-with-Forks/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM14-Tic-Tac-Toe-AI-with-Forks"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM14-Tic-Tac-Toe-AI-with-Forks/solution"
 				},
 				{
 					title: "Master Project Presentation",

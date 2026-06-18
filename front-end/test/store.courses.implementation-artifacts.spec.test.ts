@@ -374,6 +374,34 @@ describe("implemented course development artifacts", () => {
 		);
 	});
 
+	it("keeps Python Level 3 source links pointed at starter or solution folders", async () => {
+		const serializedCourse = JSON.stringify(
+			await requireCourse("python-level-3")
+		);
+		const rootOnlyLinks = [
+			...serializedCourse.matchAll(
+				/https:\/\/github\.com\/instruction-material\/Python-Level-3\/tree\/main\/([^"]+)/g
+			)
+		]
+			.map(match => match[1].replace(/\\+$/, ""))
+			.filter(
+				urlPath =>
+					!urlPath.endsWith("/starter") &&
+					!urlPath.endsWith("/solution")
+			);
+
+		expect(rootOnlyLinks).toHaveLength(0);
+		expect(serializedCourse).toContain(
+			"Python-Level-3/tree/main/AM1-Mad-Libs/starter"
+		);
+		expect(serializedCourse).toContain(
+			"Python-Level-3/tree/main/AM10-Merge-Sort/solution"
+		);
+		expect(serializedCourse).toContain(
+			"Python-Level-3/tree/main/AM14-Tic-Tac-Toe-AI-with-Forks/solution"
+		);
+	});
+
 	it("keeps Python Level 2 split source links pointed at starter or solution folders", async () => {
 		const serializedCourse = JSON.stringify(
 			await requireCourse("python-level-2")
