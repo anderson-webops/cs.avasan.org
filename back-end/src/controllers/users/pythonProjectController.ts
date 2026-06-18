@@ -14,7 +14,7 @@ const MAX_FILE_LENGTH = 1_000_000;
 const MAX_PROJECT_LENGTH = 5_000_000;
 const DEFAULT_PROJECT_FILE: PythonProjectFile = {
 	name: "main.py",
-	content: "print(\"Hello, Python!\")\n"
+	content: ""
 };
 
 function isSafeProjectFileName(value: string) {
@@ -73,7 +73,12 @@ const projectPayloadSchema = z.object({
 	title: z.string().trim().min(1).max(120).optional(),
 	mode: projectModeSchema.optional(),
 	files: projectFilesSchema.optional(),
-	activeFileName: z.string().trim().min(1).max(80).optional()
+	activeFileName: z.string().trim().min(1).max(80).optional(),
+	courseID: z.string().trim().min(1).max(120).optional(),
+	courseProjectKey: z.string().trim().min(1).max(240).optional(),
+	courseProjectTitle: z.string().trim().min(1).max(160).optional(),
+	starterLabel: z.string().trim().min(1).max(80).optional(),
+	starterUrl: z.string().trim().url().max(500).optional()
 });
 
 function serializePythonProject(project: IPythonProject) {
@@ -83,6 +88,11 @@ function serializePythonProject(project: IPythonProject) {
 		mode: project.mode,
 		files: project.files,
 		activeFileName: project.activeFileName,
+		courseID: project.courseID,
+		courseProjectKey: project.courseProjectKey,
+		courseProjectTitle: project.courseProjectTitle,
+		starterLabel: project.starterLabel,
+		starterUrl: project.starterUrl,
 		createdAt: project.createdAt,
 		updatedAt: project.updatedAt
 	};
@@ -175,7 +185,12 @@ export const createPythonProject: RequestHandler = async (req, res) => {
 		title: parsed.data.title ?? "Untitled Python Project",
 		mode: parsed.data.mode ?? "python",
 		files,
-		activeFileName
+		activeFileName,
+		courseID: parsed.data.courseID,
+		courseProjectKey: parsed.data.courseProjectKey,
+		courseProjectTitle: parsed.data.courseProjectTitle,
+		starterLabel: parsed.data.starterLabel,
+		starterUrl: parsed.data.starterUrl
 	});
 
 	res.status(201).json({ project: serializePythonProject(project) });
@@ -196,6 +211,11 @@ export const updatePythonProject: RequestHandler = async (req, res) => {
 	if (parsed.data.title) project.title = parsed.data.title;
 	if (parsed.data.mode) project.mode = parsed.data.mode as PythonProjectMode;
 	if (parsed.data.files) project.files = nextFiles;
+	if (parsed.data.courseID) project.courseID = parsed.data.courseID;
+	if (parsed.data.courseProjectKey) project.courseProjectKey = parsed.data.courseProjectKey;
+	if (parsed.data.courseProjectTitle) project.courseProjectTitle = parsed.data.courseProjectTitle;
+	if (parsed.data.starterLabel) project.starterLabel = parsed.data.starterLabel;
+	if (parsed.data.starterUrl) project.starterUrl = parsed.data.starterUrl;
 	project.activeFileName = nextActiveFileName;
 
 	await project.save();

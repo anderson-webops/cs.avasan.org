@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { strToU8, zipSync } from "fflate";
@@ -19,6 +19,7 @@ import {
 	normalizeImportedPythonIdeFileName,
 	normalizePythonIdeMode,
 	isValidPythonFileName,
+	loadPythonIdeStarterFilesFromGitHub,
 	loadLocalPythonProjects,
 	loadLocalPythonProjectsAsync,
 	normalizePythonFileName,
@@ -28,10 +29,12 @@ import {
 	pythonIdeLibrarySupport,
 	saveLocalPythonProjects,
 	saveLocalPythonProjectsAsync,
+	pgzeroCourseStarterCode,
 	pgzeroStudentSvg,
 	pgzeroStarterCode,
 	turtleStarterCode
 } from "../src/modules/pythonIde";
+import { resetCodePreviewCaches } from "../src/modules/codePreview";
 import {
 	findPythonIdeCourseAsset,
 	getPythonIdeCourseAssetObjectUrl,
@@ -78,6 +81,7 @@ const oneByOnePngBytes = new Uint8Array([
 describe("python IDE project helpers", () => {
 	beforeEach(() => {
 		resetPythonIdeCourseAssetPackCache();
+		resetCodePreviewCaches();
 		const storage = new Map<string, string>();
 		Object.defineProperty(window, "localStorage", {
 			configurable: true,
@@ -96,54 +100,167 @@ describe("python IDE project helpers", () => {
 		});
 	});
 
-	it("creates data/AI notebook starter projects", () => {
-		const project = createPythonIdeProject("data");
+	afterEach(() => {
+		vi.unstubAllGlobals();
+	});
 
-		expect(project.mode).toBe("data");
-		expect(project.title).toBe("Data / AI Notebook");
-		expect(project.files[0]?.content).toBe(dataScienceStarterCode);
-		expect(project.files[1]).toEqual({
+	it("creates blank projects by default", () => {
+		const pythonProject = createPythonIdeProject("python");
+		const dataProject = createPythonIdeProject("data");
+		const turtleProject = createPythonIdeProject("turtle");
+		const pgzeroProject = createPythonIdeProject("pgzero");
+
+		expect(pythonProject.files).toEqual([
+			{ name: "main.py", content: "" }
+		]);
+		expect(dataProject.files).toEqual([{ name: "main.py", content: "" }]);
+		expect(turtleProject.files).toEqual([
+			{ name: "main.py", content: "" }
+		]);
+		expect(pgzeroProject.files).toEqual([
+			{ name: "main.py", content: "" }
+		]);
+	});
+
+	it("creates demo project templates only when requested", () => {
+		const dataProject = createPythonIdeProject("data", {
+			template: "demo"
+		});
+		const pgzeroProject = createPythonIdeProject("pgzero", {
+			template: "demo"
+		});
+		const turtleProject = createPythonIdeProject("turtle", {
+			template: "demo"
+		});
+
+		expect(dataProject.mode).toBe("data");
+		expect(dataProject.title).toBe("Data / AI Notebook");
+		expect(dataProject.files[0]?.content).toBe(dataScienceStarterCode);
+		expect(dataProject.files[1]).toEqual({
 			name: "scores.csv",
 			content: dataScienceSampleCsv
 		});
-		expect(project.files[0]?.content).toContain("pandas");
-		expect(project.files[0]?.content).toContain('read_csv("scores.csv")');
-		expect(project.files[0]?.content).toContain("plt.bar");
-	});
+		expect(dataProject.files[0]?.content).toContain("pandas");
+		expect(dataProject.files[0]?.content).toContain(
+			'read_csv("scores.csv")'
+		);
+		expect(dataProject.files[0]?.content).toContain("plt.bar");
 
-	it("creates PyGame Zero starter projects", () => {
-		const project = createPythonIdeProject("pgzero");
-
-		expect(project.mode).toBe("pgzero");
-		expect(project.title).toBe("PyGame Zero Game");
-		expect(project.files[0]?.content).toBe(pgzeroStarterCode);
-		expect(project.files[0]?.content).toContain("Actor(");
-		expect(project.files[0]?.content).toContain("pgzrun.go()");
-		expect(project.files[1]).toEqual({
+		expect(pgzeroProject.mode).toBe("pgzero");
+		expect(pgzeroProject.title).toBe("PyGame Zero Game");
+		expect(pgzeroProject.files[0]?.content).toBe(pgzeroStarterCode);
+		expect(pgzeroProject.files[0]?.content).toContain("Actor(");
+		expect(pgzeroProject.files[0]?.content).toContain("pgzrun.go()");
+		expect(pgzeroProject.files[1]).toEqual({
 			name: "images/student.svg",
 			content: pgzeroStudentSvg
 		});
+
+		expect(turtleProject.mode).toBe("turtle");
+		expect(turtleProject.files[0]?.content).toBe(turtleStarterCode);
+		expect(turtleProject.files[0]?.content).toContain("screen.onkey");
+		expect(turtleProject.files[0]?.content).toContain("screen.onclick");
+		expect(turtleProject.files[0]?.content).toContain("pen.ondrag");
 	});
 
-	it("creates interactive Turtle starter projects", () => {
-		const project = createPythonIdeProject("turtle");
+	it("creates PyGame course starters with dimensions only", () => {
+		const project = createPythonIdeProject("pgzero", {
+			courseID: "pygames",
+			courseProjectKey: "pygames:course",
+			template: "course"
+		});
 
-		expect(project.mode).toBe("turtle");
-		expect(project.files[0]?.content).toBe(turtleStarterCode);
-		expect(project.files[0]?.content).toContain("screen.onkey");
-		expect(project.files[0]?.content).toContain("screen.onclick");
-		expect(project.files[0]?.content).toContain("pen.ondrag");
+		expect(project.files).toEqual([
+			{
+				name: "main.py",
+				content: pgzeroCourseStarterCode
+			}
+		]);
+		expect(project.files[0]?.content).toContain("WIDTH = 640");
+		expect(project.files[0]?.content).toContain("HEIGHT = 400");
+		expect(project.files[0]?.content).not.toContain("Actor(");
+		expect(project.files[0]?.content).not.toContain("pgzrun.go()");
 	});
 
-	it("serializes remote project create/update payloads without local metadata", () => {
-		const project = createPythonIdeProject("turtle");
+	it("loads GitHub starter files into safe IDE file names", async () => {
+		vi.stubGlobal(
+			"fetch",
+			vi.fn(async (url: string) => {
+				if (url.includes("api.github.com")) {
+					return new Response(
+						JSON.stringify([
+							{
+								download_url:
+									"https://raw.githubusercontent.com/example/main.py",
+								html_url:
+									"https://github.com/example/course/blob/main/starter/main.py",
+								name: "main.py",
+								path: "starter/main.py",
+								size: 18,
+								type: "file"
+							},
+							{
+								download_url:
+									"https://raw.githubusercontent.com/example/scores.csv",
+								html_url:
+									"https://github.com/example/course/blob/main/starter/data/scores.csv",
+								name: "scores.csv",
+								path: "starter/data/scores.csv",
+								size: 17,
+								type: "file"
+							}
+						])
+					);
+				}
+
+				return new Response(
+					url.endsWith("main.py")
+						? "print(\"starter\")\n"
+						: "name,score\nAri,10\n"
+				);
+			})
+		);
+
+		const files = await loadPythonIdeStarterFilesFromGitHub(
+			"https://github.com/instruction-material/Python-Level-1/tree/main/starter"
+		);
+
+		expect(files).toEqual([
+			{
+				name: "main.py",
+				content: "print(\"starter\")\n",
+				encoding: "text"
+			},
+			{
+				name: "scores.csv",
+				content: "name,score\nAri,10\n",
+				encoding: "text"
+			}
+		]);
+	});
+
+	it("serializes remote project payloads with course starter metadata", () => {
+		const project = createPythonIdeProject("turtle", {
+			courseID: "python-level-1",
+			courseProjectKey: "python-level-1:lesson-1:starter",
+			courseProjectTitle: "Turtle Coordinates",
+			starterLabel: "Starter project",
+			starterUrl:
+				"https://github.com/instruction-material/Python-Level-1/tree/main/starter"
+		});
 		const payload = pythonIdeProjectToPayload(project);
 
 		expect(payload).toEqual({
 			title: project.title,
 			mode: project.mode,
 			files: project.files,
-			activeFileName: project.activeFileName
+			activeFileName: project.activeFileName,
+			courseID: "python-level-1",
+			courseProjectKey: "python-level-1:lesson-1:starter",
+			courseProjectTitle: "Turtle Coordinates",
+			starterLabel: "Starter project",
+			starterUrl:
+				"https://github.com/instruction-material/Python-Level-1/tree/main/starter"
 		});
 		expect(payload).not.toHaveProperty("_id");
 		expect(payload).not.toHaveProperty("createdAt");

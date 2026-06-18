@@ -1,4 +1,9 @@
 import { api } from "@/api";
+import {
+	listPreviewFiles,
+	loadPreviewFile,
+	parseGitHubResource
+} from "@/modules/codePreview";
 
 const WHITESPACE_RE = /\s+/g;
 const FILE_EXTENSION_RE = /\.[\dA-Z]+$/i;
@@ -12,6 +17,7 @@ const TEXT_FILE_RE = /\.(?:csv|json|md|py|txt|svg)$/i;
 const IMAGE_EXTENSION_RE = /\.(?:gif|jpe?g|png|svg|webp)$/i;
 const SOUND_EXTENSION_RE = /\.wav$/i;
 const MUSIC_EXTENSION_RE = /\.(?:mp3|ogg)$/i;
+const STARTER_RELATIVE_PREFIX_RE = /^(?:starter|src)\//i;
 const PYTHON_IDE_INDEXED_DB_NAME = "classes-python-ide";
 const PYTHON_IDE_INDEXED_DB_VERSION = 1;
 const PYTHON_IDE_PROJECT_STORE = "projectStores";
@@ -19,6 +25,7 @@ const PYTHON_IDE_PROJECT_STORE = "projectStores";
 export type PythonIdeFileEncoding = "text" | "base64";
 
 export type PythonIdeMode = "data" | "pgzero" | "python" | "turtle";
+export type PythonIdeProjectTemplate = "blank" | "course" | "demo";
 
 export interface PythonIdeFile {
 	name: string;
@@ -32,6 +39,11 @@ export interface PythonIdeProject {
 	mode: PythonIdeMode;
 	files: PythonIdeFile[];
 	activeFileName: string;
+	courseID?: string;
+	courseProjectKey?: string;
+	courseProjectTitle?: string;
+	starterLabel?: string;
+	starterUrl?: string;
 	createdAt?: string;
 	updatedAt?: string;
 }
@@ -41,6 +53,22 @@ export interface PythonIdeProjectPayload {
 	mode?: PythonIdeMode;
 	files?: PythonIdeFile[];
 	activeFileName?: string;
+	courseID?: string;
+	courseProjectKey?: string;
+	courseProjectTitle?: string;
+	starterLabel?: string;
+	starterUrl?: string;
+}
+
+export interface CreatePythonIdeProjectOptions {
+	courseID?: string;
+	courseProjectKey?: string;
+	courseProjectTitle?: string;
+	files?: PythonIdeFile[];
+	starterLabel?: string;
+	starterUrl?: string;
+	template?: PythonIdeProjectTemplate;
+	title?: string;
 }
 
 interface PythonIdeProjectStorageRecord {
@@ -200,6 +228,10 @@ def update():
 pgzrun.go()
 `;
 
+export const pgzeroCourseStarterCode = `WIDTH = 640
+HEIGHT = 400
+`;
+
 export const pgzeroStudentSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
 	<rect width="120" height="120" rx="26" fill="#5eead4"/>
 	<circle cx="42" cy="48" r="8" fill="#0f172a"/>
@@ -241,18 +273,48 @@ export function getPythonIdeModeLabel(mode: PythonIdeMode) {
 	return "Python";
 }
 
-function getStarterCode(mode: PythonIdeMode) {
+function getDemoStarterCode(mode: PythonIdeMode) {
 	if (mode === "data") return dataScienceStarterCode;
 	if (mode === "pgzero") return pgzeroStarterCode;
 	if (mode === "turtle") return turtleStarterCode;
 	return pythonStarterCode;
 }
 
-function getStarterFiles(mode: PythonIdeMode): PythonIdeFile[] {
+function clonePythonIdeFiles(files: PythonIdeFile[]) {
+	return files.map(file => ({
+		name: file.name,
+		content: file.content,
+		encoding: file.encoding
+	}));
+}
+
+function getBlankStarterFiles(): PythonIdeFile[] {
+	return [
+		{
+			name: "main.py",
+			content: ""
+		}
+	];
+}
+
+function getCourseStarterFiles(mode: PythonIdeMode): PythonIdeFile[] {
+	if (mode === "pgzero") {
+		return [
+			{
+				name: "main.py",
+				content: pgzeroCourseStarterCode
+			}
+		];
+	}
+
+	return getBlankStarterFiles();
+}
+
+function getDemoStarterFiles(mode: PythonIdeMode): PythonIdeFile[] {
 	const files = [
 		{
 			name: "main.py",
-			content: getStarterCode(mode)
+			content: getDemoStarterCode(mode)
 		}
 	];
 
@@ -273,23 +335,45 @@ function getStarterFiles(mode: PythonIdeMode): PythonIdeFile[] {
 	return files;
 }
 
+function getStarterFilesForTemplate(
+	mode: PythonIdeMode,
+	template: PythonIdeProjectTemplate
+) {
+	if (template === "demo") return getDemoStarterFiles(mode);
+	if (template === "course") return getCourseStarterFiles(mode);
+	return getBlankStarterFiles();
+}
+
+function projectTitleForMode(mode: PythonIdeMode) {
+	return mode === "data"
+		? "Data / AI Notebook"
+		: mode === "pgzero"
+			? "PyGame Zero Game"
+			: mode === "turtle"
+				? "Turtle Drawing"
+				: "Python Practice";
+}
+
 export function createPythonIdeProject(
-	mode: PythonIdeMode = "python"
+	mode: PythonIdeMode = "python",
+	options: CreatePythonIdeProjectOptions = {}
 ): PythonIdeProject {
 	const now = new Date().toISOString();
+	const template = options.template ?? "blank";
+	const files = options.files?.length
+		? clonePythonIdeFiles(options.files)
+		: getStarterFilesForTemplate(mode, template);
 	return {
 		_id: `local-${crypto.randomUUID()}`,
-		title:
-			mode === "data"
-				? "Data / AI Notebook"
-				: mode === "pgzero"
-					? "PyGame Zero Game"
-					: mode === "turtle"
-						? "Turtle Drawing"
-						: "Python Practice",
+		title: options.title ?? projectTitleForMode(mode),
 		mode,
-		files: getStarterFiles(mode),
+		files,
 		activeFileName: "main.py",
+		courseID: options.courseID,
+		courseProjectKey: options.courseProjectKey,
+		courseProjectTitle: options.courseProjectTitle,
+		starterLabel: options.starterLabel,
+		starterUrl: options.starterUrl,
 		createdAt: now,
 		updatedAt: now
 	};
@@ -302,7 +386,12 @@ export function pythonIdeProjectToPayload(
 		title: project.title,
 		mode: project.mode,
 		files: project.files,
-		activeFileName: project.activeFileName
+		activeFileName: project.activeFileName,
+		courseID: project.courseID,
+		courseProjectKey: project.courseProjectKey,
+		courseProjectTitle: project.courseProjectTitle,
+		starterLabel: project.starterLabel,
+		starterUrl: project.starterUrl
 	};
 }
 
@@ -425,6 +514,86 @@ export function getPythonIdeDefaultFileContent(fileName: string) {
 	if (extension === ".md") return "# Notes\n\n";
 	if (extension === ".txt") return "";
 	return "# Add your Python code here.\n";
+}
+
+function baseName(path: string) {
+	return path.split("/").filter(Boolean).at(-1) ?? path;
+}
+
+function safeProjectFileNameFromStarterPath(
+	path: string,
+	resourceBasePath: string,
+	usedFileNames: Set<string>
+) {
+	const basePath = resourceBasePath.replace(/\/+$/, "");
+	const relativePath =
+		basePath && path.startsWith(`${basePath}/`)
+			? path.slice(basePath.length + 1)
+			: path;
+	const normalizedRelativePath = relativePath
+		.replace(STARTER_RELATIVE_PREFIX_RE, "")
+		.replace(/^\/+/, "");
+	const candidatePath = normalizePythonFileName(normalizedRelativePath);
+	let fileName = isValidPythonFileName(candidatePath)
+		? candidatePath
+		: normalizePythonFileName(baseName(normalizedRelativePath));
+
+	if (!isValidPythonFileName(fileName)) return "";
+
+	if (usedFileNames.has(fileName)) {
+		const extension = fileName.match(FILE_EXTENSION_RE)?.[0] ?? "";
+		const stem = extension
+			? fileName.slice(0, -extension.length)
+			: fileName;
+		let duplicateIndex = 2;
+		while (usedFileNames.has(`${stem}_${duplicateIndex}${extension}`)) {
+			duplicateIndex += 1;
+		}
+		fileName = `${stem}_${duplicateIndex}${extension}`;
+	}
+
+	usedFileNames.add(fileName);
+	return fileName;
+}
+
+export async function loadPythonIdeStarterFilesFromGitHub(
+	starterUrl: string
+): Promise<PythonIdeFile[]> {
+	const resource = parseGitHubResource(starterUrl);
+	if (!resource) {
+		throw new Error(
+			"Only public GitHub starter links can open in the IDE."
+		);
+	}
+
+	const previewFiles = await listPreviewFiles(starterUrl);
+	const usedFileNames = new Set<string>();
+	const starterFiles: PythonIdeFile[] = [];
+
+	for (const file of previewFiles) {
+		const name = safeProjectFileNameFromStarterPath(
+			file.path,
+			resource.path,
+			usedFileNames
+		);
+		if (!name || !isPythonIdeTextFile(name)) continue;
+
+		const preview = await loadPreviewFile(file);
+		starterFiles.push({
+			name,
+			content: preview.content,
+			encoding: "text"
+		});
+	}
+
+	const runnableFileIndex = starterFiles.findIndex(file =>
+		isPythonIdePythonFile(file.name)
+	);
+	if (runnableFileIndex <= 0) return starterFiles;
+
+	const [runnableFile] = starterFiles.splice(runnableFileIndex, 1);
+	if (runnableFile) starterFiles.unshift(runnableFile);
+	return starterFiles;
 }
 
 export function getPythonIdeRunnableFile(

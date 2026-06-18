@@ -205,6 +205,12 @@ const pythonIdeCourseHref = computed(() => {
 		course: selectedCourse.value.id,
 		mode: pythonIdeCourseMode.value
 	});
+	if (selectedCourse.value.id === "pygames") {
+		params.set("starter", "course");
+		params.set("projectKey", `${selectedCourse.value.id}:course`);
+		params.set("starterTitle", `${selectedCourse.value.name} Starter`);
+		params.set("starterLabel", "Course starter");
+	}
 	return `/python-ide?${params.toString()}`;
 });
 const pythonIdeCourseLabel = computed(() =>
@@ -1244,6 +1250,28 @@ function codePreviewResources(item: CourseModuleItem): CodePreviewResource[] {
 		}));
 }
 
+function pythonIdeStarterHref(item: CourseModuleItem, resource: ResourceLink) {
+	if (
+		!selectedCourse.value ||
+		!pythonIdeCourseMode.value ||
+		resource.kind !== "project" ||
+		resource.host !== "github.com" ||
+		!STARTER_RE.test(`${resource.label} ${resource.url}`)
+	) {
+		return "";
+	}
+
+	const params = new URLSearchParams({
+		course: selectedCourse.value.id,
+		mode: pythonIdeCourseMode.value,
+		projectKey: `${selectedCourse.value.id}:${item.id}:starter`,
+		starterUrl: resource.url,
+		starterTitle: item.title,
+		starterLabel: resource.label
+	});
+	return `/python-ide?${params.toString()}`;
+}
+
 function courseAssetPreviewResources(
 	item: CourseModuleItem
 ): CourseAssetResource[] {
@@ -1794,27 +1822,62 @@ function writeStoredValue(key: string, value: string) {
 										v-if="resourceLinks(item).length > 0"
 										class="resource-list"
 									>
-										<a
+										<template
 											v-for="resource in resourceLinks(
 												item
 											)"
 											:key="`${item.id}-${resource.kind}`"
-											class="resource-link"
-											:class="[`is-${resource.kind}`]"
-											:href="resourceOpenUrl(resource)"
-											rel="noreferrer"
-											target="_blank"
 										>
-											<span class="resource-link-label">
-												{{ resource.label }}
-												<span class="sr-only">
-													(opens in a new tab)
+											<a
+												class="resource-link"
+												:class="[`is-${resource.kind}`]"
+												:href="
+													resourceOpenUrl(resource)
+												"
+												rel="noreferrer"
+												target="_blank"
+											>
+												<span
+													class="resource-link-label"
+												>
+													{{ resource.label }}
+													<span class="sr-only">
+														(opens in a new tab)
+													</span>
 												</span>
-											</span>
-											<small class="resource-link-host">
-												{{ resource.host }}
-											</small>
-										</a>
+												<small
+													class="resource-link-host"
+												>
+													{{ resource.host }}
+												</small>
+											</a>
+											<a
+												v-if="
+													pythonIdeStarterHref(
+														item,
+														resource
+													)
+												"
+												class="resource-link is-ide-starter"
+												:href="
+													pythonIdeStarterHref(
+														item,
+														resource
+													)
+												"
+											>
+												<span
+													class="resource-link-label"
+												>
+													Start in IDE
+												</span>
+												<small
+													class="resource-link-host"
+												>
+													Browser workspace
+												</small>
+											</a>
+										</template>
 									</div>
 
 									<CourseAssetPreview
@@ -1949,27 +2012,62 @@ function writeStoredValue(key: string, value: string) {
 										v-if="resourceLinks(item).length > 0"
 										class="resource-list"
 									>
-										<a
+										<template
 											v-for="resource in resourceLinks(
 												item
 											)"
 											:key="`${item.id}-${resource.kind}`"
-											class="resource-link"
-											:class="[`is-${resource.kind}`]"
-											:href="resourceOpenUrl(resource)"
-											rel="noreferrer"
-											target="_blank"
 										>
-											<span class="resource-link-label">
-												{{ resource.label }}
-												<span class="sr-only">
-													(opens in a new tab)
+											<a
+												class="resource-link"
+												:class="[`is-${resource.kind}`]"
+												:href="
+													resourceOpenUrl(resource)
+												"
+												rel="noreferrer"
+												target="_blank"
+											>
+												<span
+													class="resource-link-label"
+												>
+													{{ resource.label }}
+													<span class="sr-only">
+														(opens in a new tab)
+													</span>
 												</span>
-											</span>
-											<small class="resource-link-host">
-												{{ resource.host }}
-											</small>
-										</a>
+												<small
+													class="resource-link-host"
+												>
+													{{ resource.host }}
+												</small>
+											</a>
+											<a
+												v-if="
+													pythonIdeStarterHref(
+														item,
+														resource
+													)
+												"
+												class="resource-link is-ide-starter"
+												:href="
+													pythonIdeStarterHref(
+														item,
+														resource
+													)
+												"
+											>
+												<span
+													class="resource-link-label"
+												>
+													Start in IDE
+												</span>
+												<small
+													class="resource-link-host"
+												>
+													Browser workspace
+												</small>
+											</a>
+										</template>
 									</div>
 
 									<CourseAssetPreview
@@ -2869,6 +2967,13 @@ function writeStoredValue(key: string, value: string) {
 	);
 	--course-resource-text: var(--course-project-resource-text, #134e4a);
 	--course-resource-host: var(--course-project-resource-host, #47736d);
+}
+
+.resource-link.is-ide-starter {
+	--course-resource-bg: rgba(220, 252, 231, 0.96);
+	--course-resource-bg-hover: rgba(187, 247, 208, 0.98);
+	--course-resource-text: #14532d;
+	--course-resource-host: #3f6f50;
 }
 
 .resource-link.is-solution {

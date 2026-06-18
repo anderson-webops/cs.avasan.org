@@ -162,6 +162,149 @@ describe("CourseExplorer.vue", () => {
 		expect(query.get("mode")).toBe("turtle");
 	});
 
+	it("links GitHub starter resources to course-tied IDE projects", async () => {
+		const pinia = createPinia();
+		setActivePinia(pinia);
+
+		const appStore = useAppStore();
+		const coursesStore = useCoursesStore();
+		const pythonCourse = coursesStore.courses.find(
+			course => course.id === "python-level-1"
+		);
+
+		if (!pythonCourse) throw new Error("Expected Python Level 1 course.");
+
+		vi.spyOn(coursesStore, "loadCourseById").mockResolvedValue({
+			id: pythonCourse.id,
+			name: pythonCourse.name,
+			modules: [
+				{
+					curriculum: [
+						{
+							content: "Use the starter project.",
+							id: "turtle-coordinates",
+							projectLink:
+								"https://github.com/instruction-material/Python-Level-1/tree/main/Turtle-Coordinates/starter",
+							title: "Turtle Coordinates"
+						}
+					],
+					id: "python-module-1",
+					supplementalProjects: [],
+					title: "Python Turtle"
+				}
+			]
+		});
+
+		appStore.setCurrentUser({
+			_id: "user-1",
+			name: "Student",
+			email: "student@example.com",
+			age: 12,
+			state: "GA",
+			courseAccess: [pythonCourse.id],
+			courseProgress: [],
+			editUsers: false,
+			saveEdit: "Save"
+		});
+
+		const wrapper = mount(CourseExplorer, {
+			global: {
+				plugins: [pinia]
+			}
+		});
+		await flushPromises();
+
+		await vi.waitFor(() => {
+			expect(wrapper.text()).toContain("Start in IDE");
+		});
+
+		const link = wrapper
+			.findAll("a")
+			.find(candidate => candidate.text().includes("Start in IDE"));
+		expect(link?.exists()).toBe(true);
+		const href = link?.attributes("href") ?? "";
+		const query = new URLSearchParams(href.split("?")[1] ?? "");
+		expect(href.startsWith("/python-ide?")).toBe(true);
+		expect(query.get("course")).toBe("python-level-1");
+		expect(query.get("mode")).toBe("turtle");
+		expect(query.get("projectKey")).toBe(
+			"python-level-1:turtle-coordinates:starter"
+		);
+		expect(query.get("starterUrl")).toBe(
+			"https://github.com/instruction-material/Python-Level-1/tree/main/Turtle-Coordinates/starter"
+		);
+		expect(query.get("starterTitle")).toBe("Turtle Coordinates");
+		expect(query.get("starterLabel")).toBe("Starter project");
+	});
+
+	it("marks PyGame course-level IDE links as course starters", async () => {
+		const pinia = createPinia();
+		setActivePinia(pinia);
+
+		const appStore = useAppStore();
+		const coursesStore = useCoursesStore();
+		const pygamesCourse = coursesStore.courses.find(
+			course => course.id === "pygames"
+		);
+
+		if (!pygamesCourse) throw new Error("Expected PyGames course.");
+
+		vi.spyOn(coursesStore, "loadCourseById").mockResolvedValue({
+			id: pygamesCourse.id,
+			name: pygamesCourse.name,
+			modules: [
+				{
+					curriculum: [
+						{
+							content: "Create a PyGame Zero window.",
+							id: "pgzero-window",
+							title: "Window setup"
+						}
+					],
+					id: "pygames-module-1",
+					supplementalProjects: [],
+					title: "PyGame Zero"
+				}
+			]
+		});
+
+		appStore.setCurrentUser({
+			_id: "user-1",
+			name: "Student",
+			email: "student@example.com",
+			age: 12,
+			state: "GA",
+			courseAccess: [pygamesCourse.id],
+			courseProgress: [],
+			editUsers: false,
+			saveEdit: "Save"
+		});
+
+		const wrapper = mount(CourseExplorer, {
+			global: {
+				plugins: [pinia]
+			}
+		});
+		await flushPromises();
+
+		await vi.waitFor(() => {
+			expect(wrapper.text()).toContain("Open PyGame Zero IDE");
+		});
+
+		const link = wrapper
+			.findAll("a")
+			.find(candidate => candidate.text() === "Open PyGame Zero IDE");
+		expect(link?.exists()).toBe(true);
+		const href = link?.attributes("href") ?? "";
+		const query = new URLSearchParams(href.split("?")[1] ?? "");
+		expect(query.get("course")).toBe("pygames");
+		expect(query.get("mode")).toBe("pgzero");
+		expect(query.get("starter")).toBe("course");
+		expect(query.get("projectKey")).toBe("pygames:course");
+		expect(query.get("starterTitle")).toBe("PyGames Starter");
+		expect(query.get("starterLabel")).toBe("Course starter");
+	});
+
 	it("counts reference appendices separately from core course work", async () => {
 		const pinia = createPinia();
 		setActivePinia(pinia);

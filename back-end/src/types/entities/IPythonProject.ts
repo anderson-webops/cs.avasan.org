@@ -16,6 +16,11 @@ export interface IPythonProject {
 	mode: PythonProjectMode;
 	files: PythonProjectFile[];
 	activeFileName: string;
+	courseID?: string;
+	courseProjectKey?: string;
+	courseProjectTitle?: string;
+	starterLabel?: string;
+	starterUrl?: string;
 	createdAt: Date;
 	updatedAt: Date;
 }

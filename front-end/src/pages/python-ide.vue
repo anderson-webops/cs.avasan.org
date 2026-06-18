@@ -38,6 +38,7 @@ import {
 	isPythonIdeTextFile,
 	isValidPythonFileName,
 	loadLocalPythonProjectsAsync,
+	loadPythonIdeStarterFilesFromGitHub,
 	normalizeImportedPythonIdeFileName,
 	normalizePythonFileName,
 	normalizePythonIdeMode,
@@ -345,6 +346,19 @@ const usesDrawingCanvas = computed(
 const requestedCourseId = computed(() =>
 	typeof route.query.course === "string" ? route.query.course : ""
 );
+const requestedCourseProjectKey = computed(() =>
+	typeof route.query.projectKey === "string" ? route.query.projectKey : ""
+);
+const requestedStarterUrl = computed(() =>
+	typeof route.query.starterUrl === "string" ? route.query.starterUrl : ""
+);
+const requestedStarterTitle = computed(() =>
+	typeof route.query.starterTitle === "string" ? route.query.starterTitle : ""
+);
+const requestedStarterLabel = computed(() =>
+	typeof route.query.starterLabel === "string" ? route.query.starterLabel : ""
+);
+const requestedCourseStarter = computed(() => route.query.starter === "course");
 const requestedStarterMode = computed(() => {
 	const rawMode =
 		typeof route.query.mode === "string" ? route.query.mode : "";
@@ -466,9 +480,98 @@ function touchSelectedProject() {
 	selectedProject.value.updatedAt = new Date().toISOString();
 }
 
+function requestedCourseProject() {
+	if (!requestedCourseProjectKey.value) return null;
+	return {
+		courseID: requestedCourseId.value || undefined,
+		courseProjectKey: requestedCourseProjectKey.value,
+		courseProjectTitle: requestedStarterTitle.value || undefined,
+		starterLabel: requestedStarterLabel.value || undefined,
+		starterUrl: requestedStarterUrl.value || undefined
+	};
+}
+
+function projectForRoute(projectList: PythonIdeProject[]) {
+	const request = requestedCourseProject();
+	if (!request) return null;
+	return (
+		projectList.find(
+			project => project.courseProjectKey === request.courseProjectKey
+		) ?? null
+	);
+}
+
+async function createRequestedCourseProject() {
+	const request = requestedCourseProject();
+	if (!request) return null;
+
+	let starterFiles: PythonIdeFile[] | undefined;
+	if (request.starterUrl) {
+		try {
+			const loadedFiles = await loadPythonIdeStarterFilesFromGitHub(
+				request.starterUrl
+			);
+			starterFiles = loadedFiles.length ? loadedFiles : undefined;
+		} catch (error) {
+			appendOutput(
+				"stderr",
+				error instanceof Error
+					? `Could not load starter code: ${error.message}`
+					: "Could not load starter code."
+			);
+		}
+	}
+
+	return createPythonIdeProject(requestedStarterMode.value, {
+		...request,
+		files: starterFiles,
+		template:
+			starterFiles || requestedCourseStarter.value ? "course" : "blank",
+		title: request.courseProjectTitle
+	});
+}
+
+async function saveNewProject(project: PythonIdeProject, localOnly = false) {
+	if (canSyncToAccount.value && !localOnly) {
+		const remoteProject = await createRemotePythonIdeProject(
+			pythonIdeProjectToPayload(project)
+		);
+		projects.value.unshift(remoteProject);
+		selectedProjectID.value = remoteProject._id;
+		await clearLocalPythonProjectsAsync(storageUserID.value);
+		saveMessage.value = "Synced to account";
+		return;
+	}
+
+	projects.value.unshift(project);
+	selectedProjectID.value = project._id;
+	await persistLocalProjects();
+}
+
+async function openRequestedCourseProjectIfNeeded(localOnly = false) {
+	const existingProject = projectForRoute(projects.value);
+	if (existingProject) {
+		selectedProjectID.value = existingProject._id;
+		return true;
+	}
+
+	const requestedProject = await createRequestedCourseProject();
+	if (!requestedProject) return false;
+
+	await saveNewProject(requestedProject, localOnly);
+	return true;
+}
+
+async function createInitialProject() {
+	const requestedProject = await createRequestedCourseProject();
+	if (requestedProject) return requestedProject;
+	return createPythonIdeProject(requestedStarterMode.value);
+}
+
 function setProjects(nextProjects: PythonIdeProject[]) {
 	projects.value = nextProjects;
-	selectedProjectID.value = nextProjects[0]?._id ?? "";
+	selectedProjectID.value =
+		projectForRoute(nextProjects)?._id ?? nextProjects[0]?._id ?? "";
 }
 
 async function persistLocalProjects() {
@@ -494,6 +597,7 @@ async function loadProjects() {
 			const remoteProjects = await fetchPythonIdeProjects();
 			if (remoteProjects.length) {
 				setProjects(remoteProjects);
+				await openRequestedCourseProjectIfNeeded();
 				saveMessage.value = "Synced to account";
 				return;
 			}
@@ -511,16 +615,16 @@ async function loadProjects() {
 				);
 				setProjects(migratedProjects);
 				await clearLocalPythonProjectsAsync(storageUserID.value);
+				await openRequestedCourseProjectIfNeeded();
 				saveMessage.value = "Synced local projects to account";
 				return;
 			}
 
-			const starter = await createRemotePythonIdeProject(
-				pythonIdeProjectToPayload(
-					createPythonIdeProject(requestedStarterMode.value)
-				)
+			const initialProject = await createInitialProject();
+			const remoteProject = await createRemotePythonIdeProject(
+				pythonIdeProjectToPayload(initialProject)
 			);
-			setProjects([starter]);
+			setProjects([remoteProject]);
 			await clearLocalPythonProjectsAsync(storageUserID.value);
 			saveMessage.value = "Synced to account";
 			return;
@@ -532,8 +636,9 @@ async function loadProjects() {
 		setProjects(
 			localProjects.length
 				? localProjects
-				: [createPythonIdeProject(requestedStarterMode.value)]
+				: [await createInitialProject()]
 		);
+		await openRequestedCourseProjectIfNeeded();
 		await persistLocalProjects();
 	} catch (error) {
 		const localProjects = await loadLocalPythonProjectsAsync(
@@ -542,8 +647,9 @@ async function loadProjects() {
 		setProjects(
 			localProjects.length
 				? localProjects
-				: [createPythonIdeProject(requestedStarterMode.value)]
+				: [await createInitialProject()]
 		);
+		await openRequestedCourseProjectIfNeeded(true);
 		saveMessage.value =
 			error instanceof Error ? error.message : "Using local workspace";
 	} finally {
@@ -647,23 +753,14 @@ function scheduleSave() {
 	}, 700);
 }
 
-async function createProject(mode: PythonIdeMode) {
-	const starter = createPythonIdeProject(mode);
+async function createProject(
+	mode: PythonIdeMode,
+	template: "blank" | "demo" = "blank"
+) {
+	const starter = createPythonIdeProject(mode, { template });
 	suppressAutoSave = true;
 	try {
-		if (canSyncToAccount.value) {
-			const remoteProject = await createRemotePythonIdeProject(
-				pythonIdeProjectToPayload(starter)
-			);
-			projects.value.unshift(remoteProject);
-			selectedProjectID.value = remoteProject._id;
-			await clearLocalPythonProjectsAsync(storageUserID.value);
-			saveMessage.value = "Synced to account";
-		} else {
-			projects.value.unshift(starter);
-			selectedProjectID.value = starter._id;
-			await persistLocalProjects();
-		}
+		await saveNewProject(starter);
 	} catch (error) {
 		projects.value.unshift(starter);
 		selectedProjectID.value = starter._id;
@@ -679,9 +776,12 @@ async function createProject(mode: PythonIdeMode) {
 	}
 }
 
-async function createProjectFromMenu(mode: PythonIdeMode) {
+async function createProjectFromMenu(
+	mode: PythonIdeMode,
+	template: "blank" | "demo" = "blank"
+) {
 	showProjectMenu.value = false;
-	await createProject(mode);
+	await createProject(mode, template);
 }
 
 function projectLabel(project: PythonIdeProject) {
@@ -2420,6 +2520,22 @@ watch(
 	}
 );
 
+watch(
+	() =>
+		[
+			route.query.course,
+			route.query.mode,
+			route.query.projectKey,
+			route.query.starter,
+			route.query.starterLabel,
+			route.query.starterTitle,
+			route.query.starterUrl
+		].join(":"),
+	() => {
+		void loadProjects();
+	}
+);
+
 watch(selectedProjectID, () => {
 	void nextTick(resetActiveCanvas);
 });
@@ -2576,6 +2692,55 @@ onBeforeUnmount(() => {
 										@click="createProjectFromMenu('pgzero')"
 									>
 										PyGame Zero
+									</button>
+									<span>Demo project</span>
+									<button
+										type="button"
+										role="menuitem"
+										@click="
+											createProjectFromMenu(
+												'python',
+												'demo'
+											)
+										"
+									>
+										Demo Python
+									</button>
+									<button
+										type="button"
+										role="menuitem"
+										@click="
+											createProjectFromMenu(
+												'data',
+												'demo'
+											)
+										"
+									>
+										Demo Data / AI
+									</button>
+									<button
+										type="button"
+										role="menuitem"
+										@click="
+											createProjectFromMenu(
+												'turtle',
+												'demo'
+											)
+										"
+									>
+										Demo Python Turtle
+									</button>
+									<button
+										type="button"
+										role="menuitem"
+										@click="
+											createProjectFromMenu(
+												'pgzero',
+												'demo'
+											)
+										"
+									>
+										Demo PyGame Zero
 									</button>
 								</div>
 							</div>
