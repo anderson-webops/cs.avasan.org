@@ -3916,8 +3916,8 @@ function projectExpectations(context: CourseTextContext) {
 			],
 			subject => [
 				`- Write the ${subject} class contract as state, public calls, return values, side effects, and expected evidence.`,
-				`- Implement fields, constructors, methods, branches, and collection changes in slices that compile independently.`,
-				`- Compare one routine object state with one boundary or awkward state and explain the Java rule involved.`
+				`- Implement fields, constructors, methods, branches, and collection changes for ${subject} in slices that compile independently.`,
+				`- Compare one routine object state in ${subject} with one boundary or awkward state and explain the Java rule involved.`
 			],
 			subject => [
 				`- Decide whether ${subject} belongs in a class, record, interface, helper method, or collection workflow before coding.`,
@@ -3926,7 +3926,7 @@ function projectExpectations(context: CourseTextContext) {
 			],
 			subject => [
 				`- Sketch the ${subject} object relationships, access levels, method signatures, and evidence needed for the result.`,
-				`- Build the core behavior first, then add the branch, overload, override, record, interface, or list behavior that carries the concept.`,
+				`- Build the core behavior for ${subject} first, then add the branch, overload, override, record, interface, or list behavior that carries the concept.`,
 				`- Check a typical case, an edge case, and one case that changes object state or collaboration.`
 			],
 			subject => [
@@ -4844,6 +4844,27 @@ function projectSupportReference(context: CourseTextContext) {
 	return "the work";
 }
 
+function projectSupportScopedReference(
+	context: CourseTextContext,
+	reference: string
+) {
+	const topic = supportFocusTopic(context);
+	if (!topic || topic === "this course item") return reference;
+
+	const bareReference = reference.replace(/^the\s+/i, "");
+	const normalizedTopic = topic.toLowerCase();
+	const normalizedReference = bareReference.toLowerCase();
+	if (
+		normalizedTopic === normalizedReference ||
+		normalizedTopic.endsWith(` ${normalizedReference}`) ||
+		normalizedTopic.includes(`${normalizedReference}:`)
+	) {
+		return reference;
+	}
+
+	return `the ${topic} ${bareReference}`;
+}
+
 function capitalizeSentence(value: string) {
 	return `${value.slice(0, 1).toUpperCase()}${value.slice(1)}`;
 }
@@ -4860,7 +4881,10 @@ function compactGeneratedProjectSupport(
 	if (!subject) return lines;
 
 	const escapedSubject = escapeStringForRegExp(subject);
-	const reference = projectSupportReference(context);
+	const reference = projectSupportScopedReference(
+		context,
+		projectSupportReference(context)
+	);
 	const capitalizedReference = capitalizeSentence(reference);
 	const bareReference = reference.replace(/^the\s+/i, "");
 	const escapedBareReference = escapeStringForRegExp(bareReference);
@@ -4908,21 +4932,21 @@ function compactGeneratedProjectSupport(
 				`\\bThe final ${escapedSubject} (${compactableFinalNouns})\\b`,
 				"g"
 			),
-			"The final $1"
+			`The final ${bareReference} $1`
 		],
 		[
 			new RegExp(
 				`\\bThe ${escapedSubject} (${compactableSubjectNouns})\\b`,
 				"g"
 			),
-			"The $1"
+			`The ${bareReference} $1`
 		],
 		[
 			new RegExp(
 				`\\bthe ${escapedSubject} (${compactableSubjectNouns})\\b`,
 				"g"
 			),
-			"the $1"
+			`the ${bareReference} $1`
 		],
 		[
 			new RegExp(`\\bA typical ${escapedSubject} case\\b`, "g"),
@@ -4965,8 +4989,8 @@ function compactGeneratedProjectSupport(
 			),
 			"a short note"
 		],
-		[new RegExp(`\\bFor ${escapedSubject}, `, "g"), ""],
-		[new RegExp(`\\bIn ${escapedSubject}, `, "g"), ""],
+		[new RegExp(`\\bFor ${escapedSubject}, `, "g"), `For ${reference}, `],
+		[new RegExp(`\\bIn ${escapedSubject}, `, "g"), `In ${reference}, `],
 		[
 			new RegExp(`\\bUse ${escapedSubject} to\\b`, "g"),
 			`Use ${reference} to`
@@ -5084,6 +5108,13 @@ function compactGeneratedProjectSupport(
 					"g"
 				),
 				"one $2 for the $1"
+			)
+			.replace(
+				new RegExp(
+					`\\bone ${escapedReference} (example|case|input|path|run|trace|observation)\\b`,
+					"g"
+				),
+				`one $1 for ${reference}`
 			)
 			.replace(
 				new RegExp(`\\bthe visible ${escapedReference}\\b`, "g"),
@@ -5320,6 +5351,12 @@ function compactGeneratedProjectSupport(
 				),
 				"Verify $1"
 			)
+			.replace(
+				/\b(project|checkpoint|program|exercise|implementation|build|task|lab|page|solution) \1\b/gi,
+				"$1"
+			)
+			.replace(/\bresponse answer\b/gi, "response")
+			.replace(/\bactivity work\b/gi, "activity")
 			.replace(
 				new RegExp(
 					`\\beach the (?:${supportReferenceCleanupNames}) `,
