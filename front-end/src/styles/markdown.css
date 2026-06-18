@@ -12,6 +12,42 @@
 	width: 100%;
 }
 
+:is(
+	.markdown-content,
+	.item-content-markdown,
+	.record-body,
+	.history-note__body,
+	.preview-body,
+	.course-asset-preview
+) :is(ul, ol) {
+	margin: 0.75em 0;
+	padding-inline-start: 1.6em;
+	list-style-position: outside;
+}
+
+:is(
+	.markdown-content,
+	.item-content-markdown,
+	.record-body,
+	.history-note__body,
+	.preview-body,
+	.course-asset-preview
+) li {
+	margin-block: 0.35em;
+	padding-inline-start: 0.15em;
+}
+
+:is(
+	.markdown-content,
+	.item-content-markdown,
+	.record-body,
+	.history-note__body,
+	.preview-body,
+	.course-asset-preview
+) li > p {
+	margin: 0;
+}
+
 .shiki,
 .shiki span {
 	color: var(--shiki-light);
