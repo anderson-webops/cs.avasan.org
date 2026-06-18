@@ -104,19 +104,6 @@ function capitalizeSentence(value: string) {
 	return `${value.slice(0, 1).toUpperCase()}${value.slice(1)}`;
 }
 
-function indefiniteArticleFor(value: string) {
-	const trimmedValue = value.trim();
-	if (
-		/^(?:AI|API|AP|HTML|HTTP|IDE|I\/O|ML|MVP|SQL|SVG|XML)\b/i.test(
-			trimmedValue
-		)
-	) {
-		return "an";
-	}
-
-	return /^[aeiou]/i.test(trimmedValue) ? "an" : "a";
-}
-
 function guidanceReference(courseFamily: string, moduleTitle: string) {
 	const family = courseFamily.toLowerCase();
 
@@ -634,11 +621,11 @@ function compactGuidanceBody(
 		.replace(
 			new RegExp(`\\bthe ${escapedScopedReference}\\b`, "g"),
 			scopedReference
-			)
-			.replace(new RegExp(`\\b(${cleanupReferenceNames}) \\1\\b`, "gi"), "$1")
-			.replace(/\b([A-Za-z][A-Za-z-]{3,})\s+\1\b/gi, "$1")
-			.replace(/\b(the final|The final|the closing|The closing) the\b/g, "$1")
-			.replace(
+		)
+		.replace(new RegExp(`\\b(${cleanupReferenceNames}) \\1\\b`, "gi"), "$1")
+		.replace(/\b([A-Z][A-Z-]{3,})\s+\1\b/gi, "$1")
+		.replace(/\b(the final|The final|the closing|The closing) the\b/g, "$1")
+		.replace(
 			new RegExp(
 				`\\b(final|Final|closing|Closing) ${escapedScopedReference} (note|explanation|response|answer|work|review)\\b`,
 				"g"
@@ -677,7 +664,7 @@ function normalizeGeneratedGuidanceText(
 
 	return guidanceText
 		.replace(new RegExp(`\\b(${cleanupReferenceNames}) \\1\\b`, "gi"), "$1")
-		.replace(/\b([A-Za-z][A-Za-z-]{3,})\s+\1\b/gi, "$1")
+		.replace(/\b([A-Z][A-Z-]{3,})\s+\1\b/gi, "$1")
 		.replace(/\b(the final|The final|the closing|The closing) the\b/g, "$1")
 		.replace(
 			new RegExp(
@@ -1097,13 +1084,13 @@ function requiredWorkSteps(
 		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
-		if (family.includes("web") || family.includes("javascript")) {
-			return [
-				[
-					"Identify the feature user interaction, state change, DOM/canvas/API output, and visible error or empty state.",
-					`Implement one ${moduleTitle} visible behavior at a time, inspecting the page, console, network panel, or local server after each change.`,
-					`Verify ${moduleTitle} with a normal interaction, an invalid or empty input, and one accessibility, layout, or deployment-readiness check.`
-				],
+	if (family.includes("web") || family.includes("javascript")) {
+		return [
+			[
+				"Identify the feature user interaction, state change, DOM/canvas/API output, and visible error or empty state.",
+				`Implement one ${moduleTitle} visible behavior at a time, inspecting the page, console, network panel, or local server after each change.`,
+				`Verify ${moduleTitle} with a normal interaction, an invalid or empty input, and one accessibility, layout, or deployment-readiness check.`
+			],
 			[
 				`Map ${moduleTitle} from user action to state, data, rendered output, and feedback before changing code.`,
 				`Build the feature in small browser-checked steps with console, network, DOM, or canvas evidence visible.`,
@@ -1674,12 +1661,12 @@ function completionCheckSteps(
 				`${moduleTitle} has a fresh compile/run result and at least one concrete output, assertion, or trace.`,
 				`The ${moduleTitle} checked cases include ordinary behavior, boundary behavior, and one object or collection interaction.`,
 				`The final ${moduleTitle} note explains which Java type owns the behavior and why that boundary is useful.`
-				],
-				[
-					"The program demonstrates the required Java behavior without relying on stale build output or hidden IDE state.",
-					`Constructor, method, branch, and data-representation behavior are checked for ${moduleTitle} where relevant.`,
-					`The final ${moduleTitle} note names the API, state, equality, inheritance, interface, record, or collection decision that affected correctness.`
-				],
+			],
+			[
+				"The program demonstrates the required Java behavior without relying on stale build output or hidden IDE state.",
+				`Constructor, method, branch, and data-representation behavior are checked for ${moduleTitle} where relevant.`,
+				`The final ${moduleTitle} note names the API, state, equality, inheritance, interface, record, or collection decision that affected correctness.`
+			],
 			[
 				`${moduleTitle} can be rebuilt and rerun with current evidence for the target behavior.`,
 				`A typical ${moduleTitle} path, an awkward path, and one stateful or polymorphic path are checked when relevant.`,
@@ -1954,10 +1941,7 @@ function projectPathNote({
 	itemTitle,
 	projectKind,
 	hasReference
-}: Pick<
-	ProjectGuidanceOptions,
-	"itemTitle" | "projectKind" | "hasReference"
->) {
+}: Pick<ProjectGuidanceOptions, "itemTitle" | "projectKind" | "hasReference">) {
 	const label = itemTitle?.toLowerCase() ?? "";
 
 	if (label.includes("worked example")) {

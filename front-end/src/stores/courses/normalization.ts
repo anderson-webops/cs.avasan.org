@@ -5436,7 +5436,7 @@ function compactGeneratedProjectSupport(
 				),
 				"Change one success condition in the $1 and compare"
 			)
-			.replace(/\b([A-Za-z][A-Za-z-]{3,})\s+\1\b/gi, "$1")
+			.replace(/\b([A-Z][A-Z-]{3,})\s+\1\b/gi, "$1")
 			.replace(
 				new RegExp(`\\b${escapedCourseName} the ([A-Z])`, "g"),
 				"the $1"
@@ -6456,7 +6456,8 @@ function studioSupport(context: CourseTextContext) {
 		"",
 		studioReference
 	);
-	const pathTitle = `${itemTitle} ${context.item.projectLink ?? ""}`.toLowerCase();
+	const pathTitle =
+		`${itemTitle} ${context.item.projectLink ?? ""}`.toLowerCase();
 	const studioPath = (() => {
 		if (pathTitle.includes("worked example")) {
 			return `Model path for ${studioReference}: setup, one hand-checkable trace, expected output, and the reason the result is trustworthy.`;
@@ -6467,7 +6468,10 @@ function studioSupport(context: CourseTextContext) {
 		if (pathTitle.includes("review")) {
 			return `Review path for ${studioReference}: inspect the result, name one limitation or bug risk, and record the next improvement.`;
 		}
-		if (pathTitle.includes("transfer") || pathTitle.includes("supplemental 2")) {
+		if (
+			pathTitle.includes("transfer") ||
+			pathTitle.includes("supplemental 2")
+		) {
 			return `Transfer path for ${studioReference}: change one dataset, constraint, representation, or context and compare what still works.`;
 		}
 		if (
@@ -6654,50 +6658,50 @@ function normalizeImplementationLabLanguage(course: RawCourse) {
 	const genericSupplementalPattern =
 		/Supplemental project connected to [^.!?\n]+\. The linked starter provides the implementation artifact, and the solution provides the reference state\./g;
 
-		for (const module of course.modules) {
-			module.title = module.title
-				.replace(patternImplementationTitlePattern, "Pattern Applied Lab")
-				.replace(titlePattern, " applied lab");
-			module.title = cleanAppliedLabDisplayTitle(module.title);
+	for (const module of course.modules) {
+		module.title = module.title
+			.replace(patternImplementationTitlePattern, "Pattern Applied Lab")
+			.replace(titlePattern, " applied lab");
+		module.title = cleanAppliedLabDisplayTitle(module.title);
 
-			for (const section of ["curriculum", "supplementalProjects"] as const) {
-				for (const item of module[section]) {
-					item.title = item.title
-						.replace(
-							patternImplementationTitlePattern,
-							"Pattern Applied Lab"
-						)
-						.replace(titlePattern, " applied lab")
-						.replace(implementationLabelPattern, "Applied lab");
-					item.title = cleanAppliedLabDisplayTitle(item.title);
-					item.content = item.content
-						.replace(
-							patternImplementationTitlePattern,
-							"Pattern Applied Lab"
-						)
-						.replace(
-							definesPattern,
-							"This lab defines the artifact, required behavior, and core concepts for the project or problem set. Use it to name the inputs, outputs, constraints, and evidence of correctness before implementation begins."
-						)
-						.replace(
-							centersPattern,
-							"This lab centers on one complete artifact. Build the smallest working version first, then add one targeted improvement and one edge-case pass."
-						)
-						.replace(
-							closesPattern,
-							"This review closes the lab by checking the edge cases that matter most, naming one bug or limitation, and recording one improvement for the next iteration."
-						)
-						.replace(extensionPattern, "Extend the core build with")
-						.replace(
-							supplementalPattern,
-							"Use this supplemental task as adjacent practice. The linked repository gives a starting point; any reference link shows one complete solution path. Focus on the same core idea while handling a different input shape, constraint, or edge case."
-						)
-						.replace(
-							genericSupplementalPattern,
-							"Use this supplemental task as adjacent practice. The linked repository gives a starting point; any reference link shows one complete solution path. Focus on the same core idea while handling a different input shape, constraint, or edge case."
-						)
-						.replace(titlePattern, " applied lab")
-						.replace(implementationLabelPattern, "Applied lab");
+		for (const section of ["curriculum", "supplementalProjects"] as const) {
+			for (const item of module[section]) {
+				item.title = item.title
+					.replace(
+						patternImplementationTitlePattern,
+						"Pattern Applied Lab"
+					)
+					.replace(titlePattern, " applied lab")
+					.replace(implementationLabelPattern, "Applied lab");
+				item.title = cleanAppliedLabDisplayTitle(item.title);
+				item.content = item.content
+					.replace(
+						patternImplementationTitlePattern,
+						"Pattern Applied Lab"
+					)
+					.replace(
+						definesPattern,
+						"This lab defines the artifact, required behavior, and core concepts for the project or problem set. Use it to name the inputs, outputs, constraints, and evidence of correctness before implementation begins."
+					)
+					.replace(
+						centersPattern,
+						"This lab centers on one complete artifact. Build the smallest working version first, then add one targeted improvement and one edge-case pass."
+					)
+					.replace(
+						closesPattern,
+						"This review closes the lab by checking the edge cases that matter most, naming one bug or limitation, and recording one improvement for the next iteration."
+					)
+					.replace(extensionPattern, "Extend the core build with")
+					.replace(
+						supplementalPattern,
+						"Use this supplemental task as adjacent practice. The linked repository gives a starting point; any reference link shows one complete solution path. Focus on the same core idea while handling a different input shape, constraint, or edge case."
+					)
+					.replace(
+						genericSupplementalPattern,
+						"Use this supplemental task as adjacent practice. The linked repository gives a starting point; any reference link shows one complete solution path. Focus on the same core idea while handling a different input shape, constraint, or edge case."
+					)
+					.replace(titlePattern, " applied lab")
+					.replace(implementationLabelPattern, "Applied lab");
 				item.content = cleanAppliedLabReferenceText(item.content);
 			}
 		}
