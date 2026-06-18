@@ -410,8 +410,10 @@ export const javaLevel1Course: RawCourse = {
 					title: "Check-In #1 Overview",
 					content:
 						"Use this module as a low-pressure review of variables, strings, conditionals, and loops. Work through the prompts independently first, then revisit any ideas that need reinforcement.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS-Check-in-1/starter",
 					solutionLink:
-						"https://github.com/instruction-material/APCS/tree/main/APCS-Check-in-1"
+						"https://github.com/instruction-material/APCS/tree/main/APCS-Check-in-1/solution"
 				},
 				{
 					title: "Check-In #1: Variables and Strings",
@@ -446,8 +448,10 @@ export const javaLevel1Course: RawCourse = {
 						moduleTitle: "Check In #1",
 						section: "extension"
 					}),
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS-Check-in-1/starter",
 					solutionLink:
-						"https://github.com/instruction-material/APCS/tree/main/APCS-Check-in-1"
+						"https://github.com/instruction-material/APCS/tree/main/APCS-Check-in-1/solution"
 				},
 				{
 					title: "Check In #1 Supplemental 2",

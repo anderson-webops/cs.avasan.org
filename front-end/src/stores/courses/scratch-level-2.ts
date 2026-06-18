@@ -1067,7 +1067,7 @@ Typing practice is not required to complete the Scratch course, but it can make 
 
 **Advanced typing games:**
 - Typing Rocket: https://www.abcya.com/games/typing_rocket
-- Type Racer: https://github.com/instruction-material/Python-Level-2/tree/main/PS12-Type-Racer`
+- Type Racer: https://github.com/instruction-material/Python-Level-2/tree/main/PS12-Type-Racer/starter`
 				}
 			],
 			supplementalProjects: [

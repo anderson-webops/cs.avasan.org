@@ -2144,7 +2144,9 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Build a generic in-memory repository that stores Java `record` objects by ID through a shared interface, supports filtering with predicates, and exposes only safe collection views. Explain the type parameter, what invariants the repository protects, and why records fit immutable snapshot-style data.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ20-Generic-Repository"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ20-Generic-Repository/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ20-Generic-Repository/solution"
 				},
 				{
 					title: "AJ20 Project 2: Comparator-Driven Priority Scheduler",

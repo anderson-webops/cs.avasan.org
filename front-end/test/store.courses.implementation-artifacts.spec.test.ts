@@ -441,6 +441,85 @@ describe("implemented course development artifacts", () => {
 		);
 	});
 
+	it("keeps AP CSA learner source links on starter folders with staff solution links", async () => {
+		const course = await requireCourse("ap-computer-science-a");
+		const serializedCourse = JSON.stringify(course);
+		const projectSolutionLinks = courseItems(course)
+			.filter(item =>
+				item.projectLink?.startsWith(
+					"https://github.com/instruction-material/APCS/tree/main/"
+				)
+			)
+			.filter(item => item.projectLink?.endsWith("/solution"))
+			.map(item => item.title);
+		const missingSolutionPairs = courseItems(course)
+			.filter(item =>
+				item.projectLink?.startsWith(
+					"https://github.com/instruction-material/APCS/tree/main/"
+				)
+			)
+			.filter(item => item.projectLink?.endsWith("/starter"))
+			.filter(
+				item =>
+					item.solutionLink !==
+					item.projectLink?.replace(/\/starter$/, "/solution")
+			)
+			.map(item => item.title);
+
+		expect(projectSolutionLinks).toHaveLength(0);
+		expect(missingSolutionPairs).toHaveLength(0);
+		expect(serializedCourse).toContain(
+			"APCS/tree/main/APCS1-Mad-Libs/starter"
+		);
+		expect(serializedCourse).toContain(
+			"APCS/tree/main/APCS1-Mad-Libs/solution"
+		);
+		expect(serializedCourse).toContain(
+			"APCS/tree/main/APCS17-Decode/starter"
+		);
+		expect(serializedCourse).toContain(
+			"APCS/tree/main/APCS17-Decode/solution"
+		);
+	});
+
+	it("keeps cross-course split-folder source references out of ambiguous roots", async () => {
+		const javaLevel1 = JSON.stringify(await requireCourse("java-level-1"));
+		const javaLevel3 = JSON.stringify(await requireCourse("java-level-3"));
+		const scratchLevel1 = JSON.stringify(
+			await requireCourse("scratch-level-1")
+		);
+		const scratchLevel2 = JSON.stringify(
+			await requireCourse("scratch-level-2")
+		);
+
+		expect(javaLevel1).toContain(
+			"APCS/tree/main/APCS-Check-in-1/starter"
+		);
+		expect(javaLevel1).toContain(
+			"APCS/tree/main/APCS-Check-in-1/solution"
+		);
+		expect(javaLevel1).not.toContain(
+			"APCS/tree/main/APCS-Check-in-1\""
+		);
+		expect(javaLevel3).toContain(
+			"Java-Level-3/tree/main/AJ20-Generic-Repository/starter"
+		);
+		expect(javaLevel3).toContain(
+			"Java-Level-3/tree/main/AJ20-Generic-Repository/solution"
+		);
+		expect(javaLevel3).not.toContain(
+			"Java-Level-3/tree/main/AJ20-Generic-Repository\""
+		);
+		for (const serializedCourse of [scratchLevel1, scratchLevel2]) {
+			expect(serializedCourse).toContain(
+				"Python-Level-2/tree/main/PS12-Type-Racer/starter"
+			);
+			expect(serializedCourse).not.toContain(
+				"Python-Level-2/tree/main/PS12-Type-Racer\""
+			);
+		}
+	});
+
 	it("keeps USACO source links pointed at starter and solution folders", async () => {
 		for (const [courseId, repo, sampleFolder] of [
 			["usaco-bronze", "USACO-Bronze", "UB1-Square-Pasture"],
