@@ -10,6 +10,7 @@ interface AppliedDataScienceLab {
 	example: string;
 	coreProjectTitle: string;
 	project: string;
+	reviewTitle: string;
 	review: string;
 	extensionTitle: string;
 	extension: string;
@@ -31,6 +32,7 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 		coreProjectTitle: "CSV Summary Builder",
 		project:
 			"Complete the CSV summary program so it returns accurate count, total, and average values for the provided data. Include safe empty-list behavior and one short verification note explaining how the expected output was checked.",
+		reviewTitle: "CSV Summary Review",
 		review: "Review the result by naming the exact file, column, values used, output dictionary, and boundary case. A strong review explains why the average is valid for the loaded rows and what would need to change if the CSV column name or units changed.",
 		extensionTitle: "Min-Max and Outlier Extension",
 		extension:
@@ -53,6 +55,7 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 		coreProjectTitle: "Cleaning Report Builder",
 		project:
 			"Adapt the CSV starter into a cleaner that returns valid numeric values plus a short cleaning report. Include rows loaded, rows accepted, rows rejected, and at least one reason for rejection.",
+		reviewTitle: "Cleaning Rule Review",
 		review: "Review the cleaning rule by explaining what it protects against and what it might accidentally remove. The conclusion names whether the cleaned dataset is still large and representative enough for the original question.",
 		extensionTitle: "Safe Repair Rule Extension",
 		extension:
@@ -75,6 +78,7 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 		coreProjectTitle: "Grouped Summary Builder",
 		project:
 			"Extend the starter so values can be grouped by a category column and summarized per group. Each group reports count, total, and average, with sorted or formatted output so comparisons are easy to read.",
+		reviewTitle: "Grouped Comparison Review",
 		review: "Review the grouping by naming the strongest comparison and the weakest comparison. The strongest comparison has enough rows and a clear category meaning; the weakest may be distorted by small sample size or inconsistent labels.",
 		extensionTitle: "Label Normalization Extension",
 		extension:
@@ -97,6 +101,7 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 		coreProjectTitle: "Chart Integrity Build",
 		project:
 			"Turn the summary output into one clear visualization with a title, labeled axes, and a short interpretation. The project is complete when the chart answers a named question and the explanation states one limitation of the visual.",
+		reviewTitle: "Chart Integrity Review",
 		review: "Review the visualization by checking whether the chart type matches the data types, whether labels and units are present, and whether the conclusion overstates what the chart proves.",
 		extensionTitle: "Second-Question Chart Extension",
 		extension:
@@ -119,6 +124,7 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 		coreProjectTitle: "Reproducible Mini Report",
 		project:
 			"Create a mini report around the CSV starter. Include a question, a reproducible run path, the computed summary, one visual or formatted table, and a conclusion that does not exceed the evidence.",
+		reviewTitle: "Mini Report Review",
 		review: "Review the report by checking whether a reader can identify the data source, rerun the code, find the main result, and understand one important caveat.",
 		extensionTitle: "Reproducibility Appendix",
 		extension:
@@ -141,6 +147,7 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 		coreProjectTitle: "Filtered Dashboard Build",
 		project:
 			"Build a lightweight dashboard or console menu around the CSV analysis. The interface lets the user choose at least one filter and updates the summary output in a way that can be checked by hand on a small dataset.",
+		reviewTitle: "Dashboard Behavior Review",
 		review: "Review the dashboard by naming the user question it supports, the filter behavior, the default state, and one case where the interface warns that too little data remains.",
 		extensionTitle: "Second Filter or Summary Card",
 		extension:
@@ -163,6 +170,7 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 		coreProjectTitle: "Capstone Readiness Brief",
 		project:
 			"Create a capstone readiness brief that defines the question, dataset, columns, cleaning plan, summary or visualization plan, evidence of correctness, and final presentation format. The brief is detailed enough to start the capstone without redesigning the whole project.",
+		reviewTitle: "Capstone Scope Review",
 		review: "Review the brief by checking whether the proposed claim can actually be supported by the dataset. If the question is too broad, revise it into a narrower comparison, trend, or relationship.",
 		extensionTitle: "Tiny Capstone Prototype",
 		extension:
@@ -254,7 +262,7 @@ function applyDataScienceAppliedLabs(course: RawCourse) {
 				solutionLink: dataScienceAppliedStudioUrl(lab, "solution")
 			},
 			{
-				title: "Review and Reflection",
+				title: lab.reviewTitle,
 				content: dataScienceStudioContent(
 					lab,
 					"Review and Reflection",

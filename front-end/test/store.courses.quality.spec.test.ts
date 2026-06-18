@@ -1572,7 +1572,8 @@ describe("course text quality normalization", () => {
 			"Cleaning Report Builder",
 			"Chart Integrity Build",
 			"Filtered Summary Export",
-			"Capstone Readiness Brief"
+			"Capstone Readiness Brief",
+			"Capstone Scope Review"
 		]) {
 			expect(
 				allCourseItemTitles(course!).some(({ title }) =>
@@ -1581,6 +1582,11 @@ describe("course text quality normalization", () => {
 				expectedItemTitle
 			).toBe(true);
 		}
+		expect(
+			allCourseItemTitles(course!).filter(
+				({ title }) => title === "Review and Reflection"
+			)
+		).toEqual([]);
 
 		for (const phrase of [
 			"empty-dataset behavior",
