@@ -23,6 +23,8 @@ const openingBracketToClosingBracket: Record<string, string> = {
 	"[": "]",
 	"{": "}"
 };
+const pythonIndentText = "    ";
+const lineLeadingWhitespaceRegex = /^[\t ]*/;
 const closingBrackets = new Set(Object.values(openingBracketToClosingBracket));
 const bracketPairDecorations = [
 	bracketDecorationForIndex(0),
@@ -145,6 +147,12 @@ const wrapSelectionKeymap = keymap.of(
 		run: (view: EditorView) => wrapSelection(view, open, close)
 	}))
 );
+const pythonNewlineKeymap = keymap.of([
+	{
+		key: "Enter",
+		run: insertPythonNewlineAndIndent
+	}
+]);
 
 class BracketPairColorPlugin {
 	decorations: DecorationSet;
@@ -202,6 +210,7 @@ export function createPythonCodeMirrorExtensions(
 		pythonEditorTheme,
 		syntaxHighlighting(pythonHighlightStyle),
 		bracketPairColorExtension,
+		Prec.highest(pythonNewlineKeymap),
 		Prec.highest(keymap.of([indentWithTab])),
 		Prec.high(wrapSelectionKeymap),
 		EditorView.lineWrapping,
@@ -228,6 +237,37 @@ export function createPythonCodeMirrorExtensions(
 				options.onChange(update.state.doc.toString());
 		})
 	];
+}
+
+export function pythonNewlineIndentText(state: EditorState, position: number) {
+	const line = state.doc.lineAt(position);
+	const textBeforeCursor = line.text.slice(0, position - line.from);
+	const currentIndent =
+		line.text.match(lineLeadingWhitespaceRegex)?.[0] ?? "";
+	const shouldIndentOneLevel = textBeforeCursor.trimEnd().endsWith(":");
+
+	return `\n${currentIndent}${shouldIndentOneLevel ? pythonIndentText : ""}`;
+}
+
+function insertPythonNewlineAndIndent(view: EditorView) {
+	const transaction = view.state.changeByRange(range => {
+		const insertedText = pythonNewlineIndentText(view.state, range.from);
+
+		return {
+			changes: {
+				from: range.from,
+				to: range.to,
+				insert: insertedText
+			},
+			range: EditorSelection.cursor(range.from + insertedText.length)
+		};
+	});
+
+	view.dispatch({
+		...transaction,
+		scrollIntoView: true
+	});
+	return true;
 }
 
 function buildBracketPairDecorations(view: EditorView) {

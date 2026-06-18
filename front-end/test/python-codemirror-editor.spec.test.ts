@@ -1,6 +1,8 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { EditorState } from "@codemirror/state";
 import { describe, expect, it } from "vitest";
+import { pythonNewlineIndentText } from "../src/modules/pythonCodeMirror";
 
 function sourceFile(path: string) {
 	return readFileSync(resolve(__dirname, path), "utf8");
@@ -26,9 +28,36 @@ describe("python IDE CodeMirror editor", () => {
 		expect(editorSource).toContain("python()");
 		expect(editorSource).toContain("indentWithTab");
 		expect(editorSource).toContain("EditorState.allowMultipleSelections");
+		expect(editorSource).toContain("insertPythonNewlineAndIndent");
 		expect(editorSource).toContain("wrapSelection");
 		expect(editorSource).toContain("syntaxHighlighting");
 		expect(editorSource).toContain("BracketPairColorPlugin");
 		expect(editorSource).toContain("cm-bracket-pair-1");
+	});
+
+	it("indents one extra Python level after a colon", () => {
+		const state = EditorState.create({
+			doc: [
+				"if ready:",
+				"    for item in items:",
+				"        print(item)"
+			].join("\n")
+		});
+
+		expect(pythonNewlineIndentText(state, "if ready:".length)).toBe(
+			"\n    "
+		);
+		expect(
+			pythonNewlineIndentText(
+				state,
+				"if ready:\n    for item in items:".length
+			)
+		).toBe("\n        ");
+		expect(
+			pythonNewlineIndentText(
+				state,
+				"if ready:\n    for item in items:\n        print(item)".length
+			)
+		).toBe("\n        ");
 	});
 });
