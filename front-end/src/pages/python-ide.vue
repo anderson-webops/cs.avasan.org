@@ -50,6 +50,7 @@ import {
 	runPythonProject,
 	warmPythonRuntime
 } from "@/modules/pythonIdeRuntime";
+import { highlightPythonCodeAsHtml } from "@/modules/pythonSyntaxHighlighting";
 import {
 	addAdjacentLineEditorSelections,
 	deleteAtEditorSelections,
@@ -148,6 +149,8 @@ const saveMessage = ref("Loading workspace");
 const runMessage = ref("Ready");
 const codeEditorRef = ref<HTMLTextAreaElement | null>(null);
 const canvasRef = ref<HTMLCanvasElement | null>(null);
+const codeEditorScrollLeft = ref(0);
+const codeEditorScrollTop = ref(0);
 const editorSelections = ref<EditorSelectionRange[]>([]);
 const artifactCounter = ref(0);
 const outputCounter = ref(0);
@@ -258,6 +261,12 @@ const usesDrawingCanvas = computed(
 		selectedProject.value?.mode === "pgzero"
 );
 const editorCursorCount = computed(() => editorSelections.value.length);
+const highlightedActiveFileHtml = computed(() =>
+	highlightPythonCodeAsHtml(activeFileContent.value)
+);
+const codeEditorHighlightStyle = computed(() => ({
+	transform: `translate(${-codeEditorScrollLeft.value}px, ${-codeEditorScrollTop.value}px)`
+}));
 const requestedCourseId = computed(() =>
 	typeof route.query.course === "string" ? route.query.course : ""
 );
@@ -711,6 +720,12 @@ function handleCodeEditorPaste(event: ClipboardEvent) {
 	);
 }
 
+function handleCodeEditorScroll(event: Event) {
+	const textarea = event.currentTarget as HTMLTextAreaElement;
+	codeEditorScrollLeft.value = textarea.scrollLeft;
+	codeEditorScrollTop.value = textarea.scrollTop;
+}
+
 function handleCodeEditorKeyDown(event: KeyboardEvent) {
 	event.stopPropagation();
 	if (event.isComposing) return;
@@ -815,6 +830,8 @@ function selectFile(fileName: string) {
 	selectedProject.value.activeFileName = fileName;
 	editorSelections.value = [];
 	pendingAltClickSelections = [];
+	codeEditorScrollLeft.value = 0;
+	codeEditorScrollTop.value = 0;
 	touchSelectedProject();
 	scheduleSave();
 }
@@ -1945,6 +1962,8 @@ watch(
 	() => {
 		editorSelections.value = [];
 		pendingAltClickSelections = [];
+		codeEditorScrollLeft.value = 0;
+		codeEditorScrollTop.value = 0;
 	}
 );
 
@@ -2326,22 +2345,34 @@ onBeforeUnmount(() => {
 								asset for this project.
 							</p>
 						</div>
-						<textarea
-							v-else
-							ref="codeEditorRef"
-							v-model="activeFileContent"
-							autocapitalize="off"
-							autocomplete="off"
-							autocorrect="off"
-							aria-label="Code editor"
-							class="code-editor"
-							spellcheck="false"
-							@keydown="handleCodeEditorKeyDown"
-							@mousedown="handleCodeEditorMouseDown"
-							@mouseup="handleCodeEditorMouseUp"
-							@paste="handleCodeEditorPaste"
-							@select="handleCodeEditorSelect"
-						/>
+						<div v-else class="code-editor-shell">
+							<pre
+								class="code-editor-highlight"
+								aria-hidden="true"
+							>
+								<code
+									:style="codeEditorHighlightStyle"
+									v-html="highlightedActiveFileHtml"
+								/>
+							</pre>
+							<textarea
+								ref="codeEditorRef"
+								v-model="activeFileContent"
+								autocapitalize="off"
+								autocomplete="off"
+								autocorrect="off"
+								aria-label="Code editor"
+								class="code-editor"
+								spellcheck="false"
+								wrap="off"
+								@keydown="handleCodeEditorKeyDown"
+								@mousedown="handleCodeEditorMouseDown"
+								@mouseup="handleCodeEditorMouseUp"
+								@paste="handleCodeEditorPaste"
+								@scroll="handleCodeEditorScroll"
+								@select="handleCodeEditorSelect"
+							/>
+						</div>
 					</section>
 
 					<section class="result-panel" aria-label="Python output">
@@ -3112,21 +3143,106 @@ html.dark .file-delete:disabled::after {
 	font-weight: 800;
 }
 
+.code-editor-shell {
+	position: relative;
+	min-height: 100%;
+	overflow: hidden;
+	background: #07111f;
+}
+
+.code-editor-highlight,
+.code-editor-highlight code,
 .code-editor {
+	font-family:
+		"SFMono-Regular", "Cascadia Code", "Liberation Mono", monospace;
+	font-size: 0.94rem;
+	font-variant-ligatures: none;
+	line-height: 1.58;
+	tab-size: 4;
+	white-space: pre;
+}
+
+.code-editor-highlight {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	margin: 0;
+	overflow: hidden;
+	background: #07111f;
+	color: #d7fbe8;
+	pointer-events: none;
+}
+
+.code-editor-highlight code {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	min-width: max-content;
+	will-change: transform;
+}
+
+.code-editor.code-editor {
+	position: relative;
+	z-index: 1;
 	width: 100%;
 	min-height: 100%;
 	padding: 1rem;
 	border: 0;
 	outline: 0;
 	resize: none;
-	background: #07111f;
-	color: #d7fbe8;
-	font-family:
-		"SFMono-Regular", "Cascadia Code", "Liberation Mono", monospace;
-	font-size: 0.94rem;
-	line-height: 1.58;
-	tab-size: 4;
-	white-space: pre;
+	background: transparent !important;
+	caret-color: #f8fbff;
+	color: transparent !important;
+	-webkit-text-fill-color: transparent !important;
+}
+
+.code-editor.code-editor::selection {
+	background: rgba(59, 130, 246, 0.4);
+	color: transparent !important;
+	-webkit-text-fill-color: transparent !important;
+}
+
+:deep(.syntax-token--keyword) {
+	color: #c084fc;
+}
+
+:deep(.syntax-token--builtin) {
+	color: #60a5fa;
+}
+
+:deep(.syntax-token--function) {
+	color: #fde68a;
+}
+
+:deep(.syntax-token--property) {
+	color: #93c5fd;
+}
+
+:deep(.syntax-token--string) {
+	color: #86efac;
+}
+
+:deep(.syntax-token--comment) {
+	color: #94a3b8;
+	font-style: italic;
+}
+
+:deep(.syntax-token--number) {
+	color: #fca5a5;
+}
+
+:deep(.syntax-token--operator),
+:deep(.syntax-token--decorator) {
+	color: #67e8f9;
+}
+
+html:not(.dark) .code-editor-shell,
+html:not(.dark) .code-editor-highlight {
+	background: #0b1220;
+}
+
+html:not(.dark) .code-editor.code-editor {
+	caret-color: #eff6ff;
 }
 
 .asset-file-preview {
