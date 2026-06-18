@@ -1911,7 +1911,8 @@ describe("course text quality normalization", () => {
 		const corpus = allCourseText(course);
 
 		expect(corpus).toContain("Core Concepts");
-		expect(corpus).toContain("Applied Challenge");
+		expect(corpus).toContain("Input Variation Practice");
+		expect(corpus).not.toContain("Applied Challenge");
 		expect(corpus).not.toMatch(/Core Concepts and Learning Sequence/i);
 		expect(corpus).not.toMatch(
 			/Application, Misconceptions, and Readiness Check/i

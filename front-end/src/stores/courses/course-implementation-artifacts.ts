@@ -2603,32 +2603,104 @@ function fallbackPracticeFocus(topic: string) {
 	};
 }
 
+function supplementalTransferTitle(topic: string) {
+	const lowerTopic = topic.toLowerCase();
+
+	if (/^check-?in|review/.test(lowerTopic)) return "Changed-Case Review";
+	if (
+		/search|sort|algorithm|runtime|recursion|quicksort|merge|bubble|selection|insertion/.test(
+			lowerTopic
+		)
+	) {
+		return "Trace and Boundary Case";
+	}
+	if (
+		/file|input|output|list|array|dictionar(?:y|ies)|data|csv|json|table/.test(
+			lowerTopic
+		)
+	) {
+		return "Input Variation Practice";
+	}
+	if (
+		/class|object|method|inherit|interface|record|state|constructor/.test(
+			lowerTopic
+		)
+	) {
+		return "State and Contract Practice";
+	}
+	if (
+		/game|graphics|ui|event|simulation|animation|sprite|unity|pygame|swift|app/.test(
+			lowerTopic
+		)
+	) {
+		return "Interaction Variation";
+	}
+
+	return "Transfer Practice";
+}
+
+function supplementalTransferContent(topic: string, next: number) {
+	const focus = fallbackPracticeFocus(topic);
+	const variants = [
+		{
+			goal: `Extend ${topic} with a focused transfer task that asks for work to ${focus.goal}`,
+			sequence: focus.sequence
+		},
+		{
+			goal: `Use ${topic} in a second context so the same skill is checked through new evidence, not repetition.`,
+			sequence: [
+				focus.sequence[0],
+				focus.sequence[1],
+				"Add one comparison note explaining what stayed stable and what changed."
+			]
+		},
+		{
+			goal: `Turn ${topic} into a short variation with a visible result, one boundary case, and a concise explanation.`,
+			sequence: [
+				"Name the topic skill that must carry over.",
+				focus.sequence[1],
+				focus.sequence[2]
+			]
+		},
+		{
+			goal: `Build one additional ${topic} practice artifact that proves the concept under a changed input, rule, model, or representation.`,
+			sequence: [
+				focus.sequence[0],
+				"Change one input, rule, model, representation, or success condition.",
+				focus.sequence[2]
+			]
+		}
+	];
+	const variant =
+		variants[stableVariantIndex(`${topic}|${next}`, variants.length)];
+
+	return `**Project goal:** ${variant.goal}
+
+**Work sequence:**
+${variant.sequence.map((step, index) => `${index + 1}. ${step}`).join("\n")}
+
+**Completion checks:**
+${focus.checks.map(check => `- ${check}`).join("\n")}`;
+}
+
 function supplementalProjectFor(
 	module: RawCourseModule,
 	next: number
 ): RawCourseModuleItem {
+	const topic = fallbackSupplementalTopic(module.title);
+
 	if (next === 1) {
-		const topic = fallbackSupplementalTopic(module.title);
 		const focus = fallbackPracticeFocus(topic);
 
 		return {
 			title: `Checkpoint: ${topic}`,
-			content: `**Project goal:** Build a topic-specific readiness checkpoint for ${topic}. The checkpoint ${focus.goal}\n\n**Work sequence:**\n${focus.sequence.map((step, index) => `${index + 1}. ${step}`).join("\n")}\n\n**Completion checks:**\n${focus.checks.map(check => `- ${check}`).join("\n")}`
+			content: `**Project goal:** Build a readiness checkpoint for ${topic} that asks for work to ${focus.goal}\n\n**Work sequence:**\n${focus.sequence.map((step, index) => `${index + 1}. ${step}`).join("\n")}\n\n**Completion checks:**\n${focus.checks.map(check => `- ${check}`).join("\n")}`
 		};
 	}
 
-	const variant = stableVariantIndex(`${module.title}|${next}`, 5);
-	const content = [
-		`**Project goal:** Extend ${module.title} into a new context that changes the input, representation, or design constraint from the lesson example. State the changed requirement first, then build or solve a small version before completing the full variation.\n\n**Work sequence:**\n1. Identify the original idea being transferred.\n2. Name the one constraint, input shape, representation, or success condition that changed.\n3. Complete a normal case, then test an awkward or boundary case that the original example did not cover.\n4. Write a short reflection explaining what stayed the same, what had to change, and how the result proves the concept still works.\n\n**Completion checks:**\n- The changed constraint is explicit.\n- The work includes both a normal case and an awkward case.\n- The final reflection names the transferred concept and the adaptation that made it work.`,
-		`**Project goal:** Apply ${module.title} to a nearby but different problem. Keep the same core idea, then change one important condition so the work proves transfer rather than repetition.\n\n**Work sequence:**\n1. State the original concept in one sentence.\n2. Define the changed input, representation, rule, data shape, or success condition.\n3. Build the smallest version that can be checked by hand, then expand to the full challenge.\n4. Record which part of the original strategy still worked and which part had to be revised.\n\n**Completion checks:**\n- The transfer target is different from the lesson example.\n- A normal case and a boundary or awkward case are both checked.\n- The reflection explains the adaptation, not just the final answer.`,
-		`**Project goal:** Turn ${module.title} into an applied challenge with a new constraint. The result demonstrates that the topic skill survives changed data, changed rules, or a different artifact shape.\n\n**Work sequence:**\n1. Choose the concept from the module that carries over.\n2. Write the new constraint and predict what it changes.\n3. Complete one traceable case before the full version.\n4. Compare the finished result with the original example and name the design or reasoning change.\n\n**Completion checks:**\n- The new constraint is stated before implementation or solving begins.\n- The work includes evidence from a traceable case and a nontrivial case.\n- The reflection identifies what transferred cleanly and what required a redesign.`,
-		`**Project goal:** Create a variation of ${module.title} that changes the context while preserving the main skill. The challenge should be small enough to finish, but different enough that copying the original pattern without thought would fail.\n\n**Work sequence:**\n1. Identify the reusable strategy, formula, model, API, or algorithmic idea.\n2. Change one requirement such as input source, output format, edge case, representation, or interaction rule.\n3. Test the variation with an ordinary case and a case chosen to expose the changed requirement.\n4. Explain why the final result still demonstrates the module concept.\n\n**Completion checks:**\n- The changed requirement affects the implementation or reasoning.\n- The verification includes a case the original example did not cover.\n- The explanation connects the variation back to the module skill.`,
-		`**Project goal:** Use ${module.title} in a transfer task that asks for a fresh decision. The work preserves the core concept while changing enough context to require planning, testing, and explanation.\n\n**Work sequence:**\n1. Write the transferable skill that remains true.\n2. Choose a changed assumption, input shape, object relationship, resource limit, or communication format.\n3. Build or solve a minimal case, then test one awkward case before polishing.\n4. Summarize the evidence that the concept works under the changed condition.\n\n**Completion checks:**\n- The task has a visible or inspectable result.\n- The test or explanation covers both ordinary behavior and the changed condition.\n- The reflection names the transferred concept and the evidence that supports it.`
-	][variant];
-
 	return {
-		title: `${module.title}: Applied Challenge`,
-		content
+		title: supplementalTransferTitle(topic),
+		content: supplementalTransferContent(topic, next)
 	};
 }
 
