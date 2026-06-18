@@ -1402,9 +1402,7 @@ describe("course text quality normalization", () => {
 						}
 						if (
 							genericColonTitlePattern.test(item.title) ||
-							generatedSupplementalResiduePattern.test(
-								item.title
-							)
+							generatedSupplementalResiduePattern.test(item.title)
 						) {
 							redundantGenericTitles.push(
 								`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title}`
