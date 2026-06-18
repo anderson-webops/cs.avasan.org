@@ -9,6 +9,7 @@ import type {
 	RuntimeArtifact,
 	TurtleBridge
 } from "@/modules/pythonIdeRuntime";
+import type { EditorSelectionRange } from "@/modules/textEditorShortcuts";
 import { storeToRefs } from "pinia";
 import {
 	computed,
@@ -49,6 +50,17 @@ import {
 	runPythonProject,
 	warmPythonRuntime
 } from "@/modules/pythonIdeRuntime";
+import {
+	addAdjacentLineEditorSelections,
+	deleteAtEditorSelections,
+	editorPairForKey,
+	indentEditorSelections,
+	insertTextAtEditorSelections,
+	lineEndEditorSelections,
+	normalizeEditorSelections,
+	outdentEditorSelections,
+	wrapEditorSelections
+} from "@/modules/textEditorShortcuts";
 import { useAppStore } from "@/stores/app";
 
 interface OutputLine {
@@ -134,7 +146,9 @@ const sidebarCollapsed = ref(false);
 const stopRequested = ref(false);
 const saveMessage = ref("Loading workspace");
 const runMessage = ref("Ready");
+const codeEditorRef = ref<HTMLTextAreaElement | null>(null);
 const canvasRef = ref<HTMLCanvasElement | null>(null);
+const editorSelections = ref<EditorSelectionRange[]>([]);
 const artifactCounter = ref(0);
 const outputCounter = ref(0);
 const keyHandlers = new Map<string, () => void>();
@@ -155,6 +169,7 @@ let gameTickInFlight = false;
 let activeTurtleDragButton: string | null = null;
 let lastGamePointerPoint: { x: number; y: number } | null = null;
 let gameMusicAudio: HTMLAudioElement | null = null;
+let pendingAltClickSelections: EditorSelectionRange[] = [];
 let turtleStampCounter = 0;
 
 const turtleState: TurtleState = {
@@ -242,6 +257,7 @@ const usesDrawingCanvas = computed(
 		selectedProject.value?.mode === "turtle" ||
 		selectedProject.value?.mode === "pgzero"
 );
+const editorCursorCount = computed(() => editorSelections.value.length);
 const requestedCourseId = computed(() =>
 	typeof route.query.course === "string" ? route.query.course : ""
 );
@@ -579,9 +595,226 @@ function updateProjectMode(event: Event) {
 	void nextTick(resetActiveCanvas);
 }
 
+function codeEditorSelection(textarea: HTMLTextAreaElement) {
+	return {
+		from: textarea.selectionStart,
+		to: textarea.selectionEnd
+	};
+}
+
+function activeCodeEditorSelections(textarea: HTMLTextAreaElement) {
+	const currentSelection = codeEditorSelection(textarea);
+	if (editorSelections.value.length <= 1) return [currentSelection];
+
+	const selections = normalizeEditorSelections(
+		editorSelections.value,
+		textarea.value.length
+	);
+	const currentSelectionAlreadyTracked = selections.some(
+		selection =>
+			selection.from === currentSelection.from &&
+			selection.to === currentSelection.to
+	);
+
+	return currentSelectionAlreadyTracked
+		? selections
+		: normalizeEditorSelections(
+				[...selections, currentSelection],
+				textarea.value.length
+			);
+}
+
+function setCodeEditorSelections(
+	selections: EditorSelectionRange[],
+	primarySelectionIndex = selections.length - 1
+) {
+	const textarea = codeEditorRef.value;
+	const textLength = activeFileContent.value.length;
+	const normalizedSelections = normalizeEditorSelections(
+		selections,
+		textLength
+	);
+	const primarySelection =
+		normalizedSelections[
+			Math.max(
+				0,
+				Math.min(primarySelectionIndex, normalizedSelections.length - 1)
+			)
+		] ?? normalizedSelections[0];
+	editorSelections.value = normalizedSelections;
+
+	void nextTick(() => {
+		const editor = textarea ?? codeEditorRef.value;
+		if (!editor) return;
+		editor.focus();
+		editor.setSelectionRange(primarySelection.from, primarySelection.to);
+	});
+}
+
+function applyCodeEditorEdit(result: {
+	text: string;
+	selections: EditorSelectionRange[];
+}) {
+	activeFileContent.value = result.text;
+	setCodeEditorSelections(result.selections);
+}
+
+function clearCodeEditorMulticursor(textarea?: HTMLTextAreaElement) {
+	const editor = textarea ?? codeEditorRef.value;
+	editorSelections.value = editor ? [codeEditorSelection(editor)] : [];
+	pendingAltClickSelections = [];
+}
+
+function handleCodeEditorMouseDown(event: MouseEvent) {
+	const textarea = event.currentTarget as HTMLTextAreaElement;
+	if (event.button === 0 && event.altKey) {
+		pendingAltClickSelections = activeCodeEditorSelections(textarea);
+		return;
+	}
+
+	clearCodeEditorMulticursor(textarea);
+}
+
+function handleCodeEditorMouseUp(event: MouseEvent) {
+	if (!pendingAltClickSelections.length || !event.altKey) return;
+
+	const textarea = event.currentTarget as HTMLTextAreaElement;
+	const cursor = codeEditorSelection(textarea);
+	setCodeEditorSelections(
+		normalizeEditorSelections(
+			[...pendingAltClickSelections, cursor],
+			textarea.value.length
+		)
+	);
+	pendingAltClickSelections = [];
+}
+
+function handleCodeEditorSelect(event: Event) {
+	if (editorSelections.value.length > 1) return;
+	const textarea = event.currentTarget as HTMLTextAreaElement;
+	editorSelections.value = [codeEditorSelection(textarea)];
+}
+
+function handleCodeEditorPaste(event: ClipboardEvent) {
+	if (editorSelections.value.length <= 1) return;
+	const textarea = event.currentTarget as HTMLTextAreaElement;
+	const pastedText = event.clipboardData?.getData("text/plain") ?? "";
+	if (!pastedText) return;
+
+	event.preventDefault();
+	applyCodeEditorEdit(
+		insertTextAtEditorSelections(
+			textarea.value,
+			activeCodeEditorSelections(textarea),
+			pastedText
+		)
+	);
+}
+
+function handleCodeEditorKeyDown(event: KeyboardEvent) {
+	event.stopPropagation();
+	if (event.isComposing) return;
+
+	const textarea = event.currentTarget as HTMLTextAreaElement;
+	const selections = activeCodeEditorSelections(textarea);
+
+	if (event.key === "Tab") {
+		event.preventDefault();
+		applyCodeEditorEdit(
+			event.shiftKey
+				? outdentEditorSelections(textarea.value, selections)
+				: indentEditorSelections(textarea.value, selections)
+		);
+		return;
+	}
+
+	if (event.key === "Escape" && editorSelections.value.length > 1) {
+		event.preventDefault();
+		clearCodeEditorMulticursor(textarea);
+		return;
+	}
+
+	if (
+		event.altKey &&
+		event.shiftKey &&
+		!event.metaKey &&
+		!event.ctrlKey &&
+		event.key.toLowerCase() === "i"
+	) {
+		event.preventDefault();
+		setCodeEditorSelections(
+			lineEndEditorSelections(
+				textarea.value,
+				codeEditorSelection(textarea)
+			)
+		);
+		return;
+	}
+
+	if (
+		event.altKey &&
+		(event.metaKey || event.ctrlKey || event.shiftKey) &&
+		(event.key === "ArrowUp" || event.key === "ArrowDown")
+	) {
+		event.preventDefault();
+		setCodeEditorSelections(
+			addAdjacentLineEditorSelections(
+				textarea.value,
+				selections,
+				event.key === "ArrowUp" ? "up" : "down"
+			)
+		);
+		return;
+	}
+
+	const pair = editorPairForKey(event.key);
+	if (pair && !event.metaKey && !event.ctrlKey && !event.altKey) {
+		event.preventDefault();
+		applyCodeEditorEdit(
+			wrapEditorSelections(
+				textarea.value,
+				selections,
+				pair.open,
+				pair.close
+			)
+		);
+		return;
+	}
+
+	if (editorSelections.value.length <= 1 || event.metaKey || event.ctrlKey)
+		return;
+
+	if (event.key === "Backspace" || event.key === "Delete") {
+		event.preventDefault();
+		applyCodeEditorEdit(
+			deleteAtEditorSelections(
+				textarea.value,
+				selections,
+				event.key === "Backspace" ? "backward" : "forward"
+			)
+		);
+		return;
+	}
+
+	const insertedText =
+		event.key === "Enter"
+			? "\n"
+			: !event.altKey && event.key.length === 1
+				? event.key
+				: "";
+	if (!insertedText) return;
+
+	event.preventDefault();
+	applyCodeEditorEdit(
+		insertTextAtEditorSelections(textarea.value, selections, insertedText)
+	);
+}
+
 function selectFile(fileName: string) {
 	if (!selectedProject.value) return;
 	selectedProject.value.activeFileName = fileName;
+	editorSelections.value = [];
+	pendingAltClickSelections = [];
 	touchSelectedProject();
 	scheduleSave();
 }
@@ -1707,6 +1940,14 @@ watch(selectedProjectID, () => {
 	void nextTick(resetActiveCanvas);
 });
 
+watch(
+	() => activeFile.value?.name,
+	() => {
+		editorSelections.value = [];
+		pendingAltClickSelections = [];
+	}
+);
+
 onMounted(() => {
 	warmPythonRuntime();
 	void loadProjects();
@@ -2061,6 +2302,9 @@ onBeforeUnmount(() => {
 					<section class="code-panel" aria-label="Code editor">
 						<div class="panel-header">
 							<span>{{ activeFile?.name ?? "main.py" }}</span>
+							<small v-if="editorCursorCount > 1">
+								{{ editorCursorCount }} cursors
+							</small>
 						</div>
 						<div
 							v-if="activeFileIsBinaryAsset"
@@ -2084,12 +2328,19 @@ onBeforeUnmount(() => {
 						</div>
 						<textarea
 							v-else
+							ref="codeEditorRef"
 							v-model="activeFileContent"
 							autocapitalize="off"
 							autocomplete="off"
 							autocorrect="off"
+							aria-label="Code editor"
 							class="code-editor"
 							spellcheck="false"
+							@keydown="handleCodeEditorKeyDown"
+							@mousedown="handleCodeEditorMouseDown"
+							@mouseup="handleCodeEditorMouseUp"
+							@paste="handleCodeEditorPaste"
+							@select="handleCodeEditorSelect"
 						/>
 					</section>
 
