@@ -2799,6 +2799,7 @@ onBeforeUnmount(() => {
 	--python-code-ink: #1e293b;
 	--python-code-muted: #64748b;
 	--python-code-selection: rgba(37, 99, 235, 0.18);
+	--python-code-selection-ink: var(--python-code-ink);
 	--python-code-caret: #0f172a;
 	--python-output-bg: #f8fafc;
 	--python-output-ink: #334155;
@@ -2919,6 +2920,7 @@ html.dark .python-ide-page {
 	--python-code-ink: #d7fbe8;
 	--python-code-muted: #94a3b8;
 	--python-code-selection: rgba(59, 130, 246, 0.4);
+	--python-code-selection-ink: #f8fbff;
 	--python-code-caret: #f8fbff;
 	--python-output-bg: #07111f;
 	--python-output-ink: #e2e8f0;

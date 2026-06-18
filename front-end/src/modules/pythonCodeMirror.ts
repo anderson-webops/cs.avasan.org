@@ -69,6 +69,11 @@ const pythonHighlightStyle = HighlightStyle.define([
 	}
 ]);
 
+const pythonEditorNativeSelectionStyle = {
+	backgroundColor: "var(--python-code-selection) !important",
+	color: "var(--python-code-selection-ink) !important"
+};
+
 const pythonEditorTheme = EditorView.theme({
 	"&": {
 		height: "100%",
@@ -97,10 +102,13 @@ const pythonEditorTheme = EditorView.theme({
 	".cm-cursor": {
 		borderLeftColor: "var(--python-code-caret)"
 	},
-	".cm-selectionBackground, &.cm-focused .cm-selectionBackground, .cm-content ::selection":
-		{
-			backgroundColor: "var(--python-code-selection)"
-		},
+	".cm-selectionBackground, &.cm-focused .cm-selectionBackground": {
+		backgroundColor: "var(--python-code-selection) !important"
+	},
+	".cm-content ::selection, .cm-line ::selection, .cm-line::selection":
+		pythonEditorNativeSelectionStyle,
+	".cm-content ::-moz-selection, .cm-line ::-moz-selection, .cm-line::-moz-selection":
+		pythonEditorNativeSelectionStyle,
 	".cm-gutters": {
 		borderRight: "1px solid var(--color-border)",
 		backgroundColor:
