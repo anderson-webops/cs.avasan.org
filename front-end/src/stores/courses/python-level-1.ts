@@ -15,8 +15,10 @@ export const pythonLevel1Course: RawCourse = {
 					title: "GrS1 Project 1: Turtle Exploration",
 					content:
 						"Import `turtle`, create a turtle, move it with `forward()`, turn with `left()` and `right()`, and use `goto()`, `penup()`, `pendown()`, `color()`, `begin_fill()`, and `end_fill()` to create a square, a triangle, and a filled shape in a new location. Practice reading console errors, fixing mistakes, and adding comments to explain code.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS1-Turtle-Exporation-All-Star/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/blob/main/GrS1-Turtle-Exporation-All-Star/solution/main.py"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS1-Turtle-Exporation-All-Star/solution"
 				}
 			],
 			supplementalProjects: [
@@ -134,8 +136,10 @@ export const pythonLevel1Course: RawCourse = {
 					title: "GrS3 Project 3: Random Walk",
 					content:
 						"Combine loops with random movement to simulate a random walk. Customize the turtle shape and pen size while practicing readable variable names.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS3-Random-Walk/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/blob/main/GrS3-Random-Walk/solution/main.py"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS3-Random-Walk/solution"
 				}
 			],
 			supplementalProjects: [

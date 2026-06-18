@@ -243,6 +243,31 @@ describe("implemented course development artifacts", () => {
 		}
 	});
 
+	it("links Python Level 1 Turtle projects to starter and solution folders", async () => {
+		const serializedCourse = JSON.stringify(
+			await requireCourse("python-level-1")
+		);
+
+		expect(serializedCourse).toContain(
+			"Python-Level-1/tree/main/GrS1-Turtle-Exporation-All-Star/starter"
+		);
+		expect(serializedCourse).toContain(
+			"Python-Level-1/tree/main/GrS1-Turtle-Exporation-All-Star/solution"
+		);
+		expect(serializedCourse).toContain(
+			"Python-Level-1/tree/main/GrS3-Random-Walk/starter"
+		);
+		expect(serializedCourse).toContain(
+			"Python-Level-1/tree/main/GrS3-Random-Walk/solution"
+		);
+		expect(serializedCourse).not.toContain(
+			"Python-Level-1/blob/main/GrS1-Turtle-Exporation-All-Star/solution/main.py"
+		);
+		expect(serializedCourse).not.toContain(
+			"Python-Level-1/blob/main/GrS3-Random-Walk/solution/main.py"
+		);
+	});
+
 	it("records source policy decisions for content-only or composed courses", async () => {
 		for (const courseId of Object.keys(courseContentOnlySourcePolicies)) {
 			if (authoredLearnerCourseIds.has(courseId)) continue;
