@@ -166,7 +166,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "mov, Zero Extension, and Sign Extension",
 					content:
-						"Show `mov` as data transfer rather than hidden computation, then pair it with zero-extension and sign-extension instructions so students can explain how a smaller value becomes a wider value safely. This matters immediately when mixing bytes, ints, pointers, and return values."
+						"`mov` represents data transfer rather than hidden computation. Zero-extension and sign-extension instructions show how a smaller value becomes a wider value safely, which matters immediately when mixing bytes, ints, pointers, and return values."
 				},
 				{
 					title: "Immediate, Register, and Memory Operands",
@@ -176,7 +176,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Project: Integer Calculator in Assembly",
 					content:
-						"Use the calculator lab to make register flow visible with arithmetic on function arguments and operator-driven dispatch. The project should be small enough to trace by hand while still forcing students to move values through argument registers and return registers intentionally.",
+						"The calculator lab makes register flow visible through arithmetic on function arguments and operator-driven dispatch. The project stays small enough to trace by hand while still moving values through argument registers and return registers intentionally.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM1-Integer-Calculator/starter",
 					solutionLink:
@@ -885,7 +885,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Project: Reverse-Engineer a Toy Program Back into Pseudocode",
 					content:
-						"Use the reverse-engineering lab to inspect a hand-written assembly routine, reconstruct its logic in C or pseudocode, and compare the outputs. The main lesson is that students can recover real structure from instruction flow instead of treating a disassembly listing as unreadable noise.",
+						"Use the reverse-engineering lab to inspect a hand-written assembly routine, reconstruct its logic in C or pseudocode, and compare the outputs. The main lesson is recovering real structure from instruction flow instead of treating a disassembly listing as unreadable noise.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM6-Reverse-Engineering-Toy-Program/starter",
 					solutionLink:

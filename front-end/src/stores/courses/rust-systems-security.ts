@@ -129,7 +129,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Project: Ownership and Move Tracer",
 					content:
-						"Build a small CLI that moves strings, vectors, and structs through helper functions so students can see when ownership transfers and when values must be cloned.",
+						"Build a small CLI that moves strings, vectors, and structs through helper functions to make ownership transfers and necessary clones visible.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-03-rss1-ownership-moves-and-memory-responsibility-supplemental-2/starter",
 					solutionLink:

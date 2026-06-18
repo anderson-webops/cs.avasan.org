@@ -425,6 +425,24 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(/\bwhere no change should happen\b/i);
 			expect(corpus).not.toMatch(/\bcase where nothing should happen\b/i);
 			expect(corpus).not.toMatch(/\bcase where no change should happen\b/i);
+			expect(corpus).not.toMatch(/\bshould show\./i);
+			expect(corpus).not.toMatch(
+				/\bshould be rejected or handled carefully\b/i
+			);
+			expect(corpus).not.toMatch(
+				/\bshould be small enough to trace by hand\b/i
+			);
+			expect(corpus).not.toMatch(
+				/\bshould measure, predict, classify, search, or compare before implementation begins\b/i
+			);
+			expect(corpus).not.toMatch(
+				/\bshould stay current when the course depends\b/i
+			);
+			expect(corpus).not.toMatch(/\bshould produce one runnable artifact\b/i);
+			expect(corpus).not.toMatch(
+				/\bshould answer a practical engineering question\b/i
+			);
+			expect(corpus).not.toMatch(/\bshould increase independence\b/i);
 			expect(corpus).not.toMatch(/\bMake Scratch game design:/i);
 			expect(corpus).not.toMatch(
 				/\bStart from a small working case, then add one improvement that still reflects Scratch game design:/i
@@ -592,6 +610,13 @@ describe("course text quality normalization", () => {
 		expect(corpus).not.toMatch(/\band pair them\b/);
 		expect(corpus).not.toMatch(/\bthen connect that difference\b/);
 		expect(corpus).not.toMatch(/\bthen show how\b/);
+		expect(corpus).not.toMatch(/\bso students\b/i);
+		expect(corpus).not.toMatch(/\bstudents can compare\b/i);
+		expect(corpus).not.toMatch(/\bstudents can see\b/i);
+		expect(corpus).not.toMatch(/\bstudents stop\b/i);
+		expect(corpus).not.toMatch(/\bstudents learn\b/i);
+		expect(corpus).not.toMatch(/\bstudents start\b/i);
+		expect(corpus).not.toMatch(/\bforcing students\b/i);
 		expect(corpus).not.toMatch(/Visible pattern: That/);
 		expect(corpus).not.toMatch(
 			/title:\s*"(?:Course Setup|Lesson|Concept Lesson|Data Mini Lesson):/i

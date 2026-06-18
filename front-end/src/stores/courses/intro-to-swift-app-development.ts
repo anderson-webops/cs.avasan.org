@@ -90,7 +90,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Practical Walkthrough: Apple ID Sign-In and Folder Organization",
 					content:
-						"Sign in with an Apple ID in Xcode and explain when a paid Apple Developer membership is required. Create a clean app-development folder structure for projects, screenshots, app icons, metadata drafts, and notes so students start with manageable organization."
+						"Sign in with an Apple ID in Xcode and explain when a paid Apple Developer membership is required. Create a clean app-development folder structure for projects, screenshots, app icons, metadata drafts, and notes so the workflow starts with manageable organization."
 				},
 				{
 					title: "Mini Lab: First Blank SwiftUI App",
@@ -370,7 +370,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Entry Point, Lifecycle, Scenes, and Views",
 					content:
-						"Explain what an app is structurally before diving deeper into Swift syntax. Cover the app entry point, scenes, views, navigation, assets, and data flow so students can place each later topic inside a coherent architecture."
+						"Explain what an app is structurally before diving deeper into Swift syntax. Cover the app entry point, scenes, views, navigation, assets, and data flow so each later topic fits inside a coherent architecture."
 				},
 				{
 					title: "Navigation, Assets, and Data as App Systems",
@@ -998,7 +998,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Worked Example Set: Loading, Loaded, and Failed UI States",
 					content:
-						"Compare empty, loading, loaded, and failed states for the same feature so students stop assuming the success view is the whole feature. Explain why async/await improves clarity but does not remove the need for explicit state modeling."
+						"Compare empty, loading, loaded, and failed states for the same feature to avoid treating the success view as the whole feature. Explain why async/await improves clarity but does not remove the need for explicit state modeling."
 				},
 				{
 					title: "Project: API-Powered Reference App",
@@ -1130,7 +1130,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Worked Example Set: UI Bug vs Data Bug vs Build Bug",
 					content:
-						"Compare a broken layout, a bad state update, and a configuration/build issue so students learn to classify problems before they attack them. This helps keep debugging efficient and calm."
+						"Compare a broken layout, a bad state update, and a configuration/build issue so problem classification comes before attempted fixes. This helps keep debugging efficient and calm."
 				},
 				{
 					title: "Practical Walkthrough: Previews and Basic Test Concepts",

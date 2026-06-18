@@ -267,7 +267,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Environment Variables, Forms, and Validation",
 					content:
-						"This section covers environment variables as configuration boundaries rather than as secret magic strings. Pair that lesson with forms and validation so students learn early that user input and deployment configuration are both data surfaces that need explicit handling, clear defaults, and careful debugging."
+						"This section covers environment variables as configuration boundaries rather than as secret magic strings. Pair that lesson with forms and validation so user input and deployment configuration are treated early as data surfaces that need explicit handling, clear defaults, and careful debugging."
 				},
 				{
 					title: "WDF3 Stage 2: Web Development Foundations: Core Project",

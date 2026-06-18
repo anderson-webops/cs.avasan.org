@@ -436,7 +436,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Function Decorators and Object Wrappers",
 					content:
-						"Compare function decorators with object-level wrappers so students can see where each style shines. Logging, caching, metrics, and access checks often start as decorators before they need a fuller proxy or wrapper object."
+						"Compare function decorators with object-level wrappers to show where each style shines. Logging, caching, metrics, and access checks often start as decorators before they need a fuller proxy or wrapper object."
 				},
 				{
 					title: "Proxy for Control, Facade for Simplicity",

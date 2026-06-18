@@ -12,12 +12,12 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Python Environment for Search and Graph Labs",
 					content:
-						"Set up `Python 3`, a virtual environment, and a lightweight editor workflow in either `PyCharm` or `VS Code`. Install `networkx`, `matplotlib`, and notebook support early so students can inspect graphs, visualize search spaces, and keep small experiment logs without changing tools halfway through the course."
+						"Set up `Python 3`, a virtual environment, and a lightweight editor workflow in either `PyCharm` or `VS Code`. Install `networkx`, `matplotlib`, and notebook support early to inspect graphs, visualize search spaces, and keep small experiment logs without changing tools halfway through the course."
 				},
 				{
 					title: "Bridge Positioning between Core Python and ML",
 					content:
-						"Frame the course as a bridge from programming fundamentals into AI thinking. The emphasis should be on state, goals, search, rules, heuristics, and evaluation so students gain AI intuition before they need heavier statistics or model-training pipelines."
+						"Frame the course as a bridge from programming fundamentals into AI thinking. The emphasis is on state, goals, search, rules, heuristics, and evaluation before heavier statistics or model-training pipelines."
 				},
 				{
 					title: "How to Read an AI Problem Statement",
@@ -307,7 +307,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Uniform Cost Search and Weighted Paths",
 					content:
-						"Move from step counts to path costs so students can distinguish shortest-by-steps from cheapest-by-total-cost. This sets up a clearer understanding of why BFS is not enough once edge weights matter."
+						"Move from step counts to path costs to distinguish shortest-by-steps from cheapest-by-total-cost. This sets up a clearer understanding of why BFS is not enough once edge weights matter."
 				},
 				{
 					title: "Heuristics, Greedy Choice, and A*",
@@ -356,7 +356,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Project: Compare A* and Greedy Search",
 					content:
-						"Run the same state space through greedy best-first search and A* so students can see the difference between fast-looking decisions and cost-aware planning.",
+						"Run the same state space through greedy best-first search and A* to compare fast-looking decisions with cost-aware planning.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI10-Implement-A-Search"
 				},
@@ -700,7 +700,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Extension: DFS with a Stack Class",
 					content:
-						"Compare the earlier DFS implementation with a more class-structured stack-based version so students can see the same algorithm through a cleaner API boundary.",
+						"Compare the earlier DFS implementation with a more class-structured stack-based version to show the same algorithm through a cleaner API boundary.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI5-DFS-With-a-Stack-Class"
 				},

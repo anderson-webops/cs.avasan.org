@@ -1843,7 +1843,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Reference: Open Addressing Hash Tables",
 					content:
-						"Keep the open-addressing reference alongside separate chaining so students can compare the main collision strategies directly.",
+						"Keep the open-addressing reference alongside separate chaining to compare the main collision strategies directly.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-Open-Addressing-Reference"
 				},

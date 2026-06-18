@@ -764,9 +764,9 @@ function familyFocus(
 
 	if (family.includes("web") || family.includes("javascript")) {
 		return [
-			`Connect ${moduleTitle} browser behavior to state changes, event handling, DOM or canvas output, and user input; the result should be inspectable in the page, not only in source code`,
+			`Connect ${moduleTitle} browser behavior to state changes, event handling, DOM or canvas output, and user input; the result is inspectable in the page, not only in source code`,
 			`For ${moduleTitle}, make the browser evidence visible through a user action, a state or data change, rendered output, and one failure or empty-state check`,
-			`Use ${moduleTitle} to tie the code to the page: event listener, state update, DOM or canvas result, and keyboard or responsive-layout behavior should be observable`,
+			`Use ${moduleTitle} to tie the code to the page: event listener, state update, DOM or canvas result, and keyboard or responsive-layout behavior are observable`,
 			`Keep ${moduleTitle} grounded in the actual user flow, with source code, browser output, console or network evidence, and one edge interaction all agreeing`
 		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
@@ -786,7 +786,7 @@ function familyFocus(
 
 	if (family.includes("python")) {
 		return [
-			`Keep the ${moduleTitle} Python implementation readable and testable by separating input handling, data transformation, helper functions, and output; boundary cases should be small enough to trace by hand`,
+			`Keep the ${moduleTitle} Python implementation readable and testable by separating input handling, data transformation, helper functions, and output; boundary cases stay small enough to trace by hand`,
 			`Use ${moduleTitle} to practice Python structure: isolate the calculation, name the data shape, run one normal case, and run one boundary case without hiding logic in input prompts`,
 			`For ${moduleTitle}, make the Python data flow visible from input or setup through transformation to output, with one small traceable case proving the main branch or loop`,
 			`Build ${moduleTitle} as readable Python first: clear names, narrow helper functions when useful, predictable output, and a test case that catches more than syntax errors`
@@ -795,7 +795,7 @@ function familyFocus(
 
 	if (family.includes("security") || family.includes("network")) {
 		return [
-			`Work on ${moduleTitle} only inside the provided local or owned lab boundary; the finished artifact should include defensive evidence such as logs, traces, validation results, or a short risk note`,
+			`Work on ${moduleTitle} only inside the provided local or owned lab boundary; the finished artifact includes defensive evidence such as logs, traces, validation results, or a short risk note`,
 			`Keep ${moduleTitle} scoped to approved local systems and include concrete defensive evidence, rollback notes, or validation results in the finished artifact`,
 			`Treat ${moduleTitle} as a defensive evidence exercise: name the allowed boundary, capture the relevant logs or traces, and finish with a risk or hardening note`,
 			`For ${moduleTitle}, connect every security or networking claim to owned-lab evidence such as configuration, packet, log, validation, or mitigation output`
@@ -809,7 +809,7 @@ function familyFocus(
 		family.includes("c++")
 	) {
 		return [
-			`For ${moduleTitle}, make the system boundary explicit: inputs, memory ownership, resource lifetime, build settings, and diagnostic output should be easy to inspect and reproduce`,
+			`For ${moduleTitle}, make the system boundary explicit: inputs, memory ownership, resource lifetime, build settings, and diagnostic output are easy to inspect and reproduce`,
 			`Use ${moduleTitle} to connect representation, ownership or resource lifetime, build evidence, and one diagnostic output that confirms behavior`,
 			`Keep ${moduleTitle} reproducible by naming the compile or run command, the resource boundary, the expected output, and one failure or edge case`,
 			`For ${moduleTitle}, show how the low-level representation or system state changes, then verify it with concrete terminal, debugger, sanitizer, or log evidence`
@@ -818,7 +818,7 @@ function familyFocus(
 
 	if (family.includes("swift")) {
 		return [
-			`Connect ${moduleTitle} to app behavior: state ownership, view updates, user interaction, and a simulator verification path should be clear from the running project`,
+			`Connect ${moduleTitle} to app behavior: state ownership, view updates, user interaction, and a simulator verification path are clear from the running project`,
 			`For ${moduleTitle}, make the SwiftUI behavior visible through the state owner, the screen update, one user action, and one empty, error, layout, or accessibility check`,
 			`Use ${moduleTitle} to separate model state from view behavior, then verify the normal interaction and one edge state in the simulator or preview data`,
 			`Keep ${moduleTitle} app-focused by showing launch state, the target interaction, the UI response, and the evidence that Xcode configuration is not hiding behavior`
@@ -834,9 +834,9 @@ function javaFamilyFocus(
 	kind: ProjectGuidanceOptions["projectKind"]
 ) {
 	return [
-		`Use Java syntax and object boundaries deliberately in ${moduleTitle}: method contracts, object state, collection choices, and compile-run feedback should all be visible in the finished artifact`,
+		`Use Java syntax and object boundaries deliberately in ${moduleTitle}: method contracts, object state, collection choices, and compile-run feedback are visible in the finished artifact`,
 		`Make ${moduleTitle} show how Java responsibilities are divided across classes, methods, records, interfaces, collections, or tests instead of hiding everything in one procedure`,
-		`Connect ${moduleTitle} to concrete Java behavior: object construction, method calls, state changes, access boundaries, and one edge case should be easy to inspect`,
+		`Connect ${moduleTitle} to concrete Java behavior: object construction, method calls, state changes, access boundaries, and one edge case are easy to inspect`,
 		`Keep ${moduleTitle} structured enough to explain: name the owning type, the public behavior, the state or data representation, and the compile/run evidence that proves it`
 	][variantIndex(courseFamily, moduleTitle, kind, 4)];
 }
@@ -847,11 +847,11 @@ function systemsFamilyFocus(
 	kind: ProjectGuidanceOptions["projectKind"]
 ) {
 	return [
-		`Make ${moduleTitle} inspectable from the command line: inputs, ownership or resource boundaries, build settings, and diagnostic output should be easy to reproduce`,
-		`Use ${moduleTitle} to expose the system boundary directly: command, file, memory, lifetime, process, register, or runtime evidence should be visible`,
+		`Make ${moduleTitle} inspectable from the command line: inputs, ownership or resource boundaries, build settings, and diagnostic output are easy to reproduce`,
+		`Use ${moduleTitle} to expose the system boundary directly: command, file, memory, lifetime, process, register, or runtime evidence is visible`,
 		`Keep ${moduleTitle} reproducible by naming the build/run command, the relevant boundary, and the trace, log, sanitizer, debugger, or performance evidence`,
-		`Treat ${moduleTitle} as a systems checkpoint: the artifact should show what was built, what resource or memory assumption matters, and how the result was verified`,
-		`Use ${moduleTitle} to connect source code to runtime evidence: command line, build output, process state, memory layout, or diagnostic traces should agree`,
+		`Treat ${moduleTitle} as a systems checkpoint: the artifact shows what was built, what resource or memory assumption matters, and how the result was verified`,
+		`Use ${moduleTitle} to connect source code to runtime evidence: command line, build output, process state, memory layout, and diagnostic traces agree`,
 		`Make ${moduleTitle} easy to rerun from scratch by recording setup assumptions, command sequence, expected output, and one low-level observation`,
 		`Keep ${moduleTitle} focused on the boundary between program design and machine behavior, with evidence from compilation, execution, or diagnostics`,
 		`Treat ${moduleTitle} as an engineering artifact: define the contract, run it from a clean command, and capture the evidence that proves the contract holds`,
@@ -934,7 +934,7 @@ function requiredWorkSteps(
 				`Exercise ordinary behavior plus one empty, failed, inaccessible, or awkward layout state.`
 			],
 			[
-				`Define how ${moduleTitle} should feel to a user: input path, visible response, error handling, and final screen state.`,
+				`Define the ${moduleTitle} user experience: input path, visible response, error handling, and final screen state.`,
 				`Implement the smallest visible slice first, then add validation, layout, or persistence behavior with browser checks.`,
 				`Confirm the result after refresh, at another viewport width, and with one invalid or incomplete interaction.`
 			]
@@ -958,7 +958,7 @@ function requiredWorkSteps(
 				`Check a hand-verifiable case, a representative case, and one case where the method could fail or mislead.`
 			],
 			[
-				`Define what ${moduleTitle} should measure, predict, classify, search, or compare before implementation begins.`,
+				`Define the ${moduleTitle} measurement, prediction, classification, search, or comparison target before implementation begins.`,
 				`Build the pipeline in inspectable stages so input quality, transformation behavior, and output evidence are visible.`,
 				`Record a normal result, a sanity check, and one caveat that limits the conclusion.`
 			],
@@ -990,12 +990,12 @@ function requiredWorkSteps(
 				`Check ${subject} with one ordinary path, one awkward or invalid input path, and one state transition or method-call sequence.`
 			],
 			[
-				`Name the public behavior for ${subject}, then decide which class, helper method, interface, record, or collection should carry it.`,
+				`Name the public behavior for ${subject}, then decide which class, helper method, interface, record, or collection owns it.`,
 				`Implement the ${subject} behavior in short compile/run cycles with a visible output, assertion, or trace after each stage.`,
 				`Verify ${subject} with one normal case, one edge path, and one design boundary such as encapsulation, overriding, overloading, or collection mutation.`
 			],
 			[
-				`Write the ${subject} object model first: type names, fields, public methods, and the evidence each method should produce.`,
+				`Write the ${subject} object model first: type names, fields, public methods, and the evidence each method produces.`,
 				`Compile after each constructor, method signature, branch, or collection change so the next error has a narrow cause.`,
 				`Check ${subject} with an ordinary call, a boundary call, and one state change that proves the object is not just storing data.`
 			],
@@ -1010,7 +1010,7 @@ function requiredWorkSteps(
 				`Test ${subject} with a normal path, a boundary path, and one case that checks how classes collaborate.`
 			],
 			[
-				`Decide what ${subject} should make public, what should stay private, and what evidence will prove the boundary works.`,
+				`Decide the public API for ${subject}, the private implementation details, and the evidence that proves the boundary works.`,
 				`Implement one responsibility at a time and keep constructor setup, method behavior, and collection or inheritance logic separately testable.`,
 				`Compare ${subject} against one expected scenario and one failure-shaped scenario before using the reference.`
 			],
@@ -1045,9 +1045,9 @@ function requiredWorkSteps(
 				`Check a normal run, a boundary run, and one run that tests how Java references or objects behave.`
 			],
 			[
-				`Write the ${subject} API expectation first: what can be called, what changes state, and what should be returned or printed.`,
+				`Write the ${subject} API expectation first: what can be called, what changes state, and what gets returned or printed.`,
 				`Keep object creation, method calls, and collection changes independently inspectable while the program compiles.`,
-				`Compare the finished behavior with one example that should pass and one example that should reveal a weak contract.`
+				`Compare the finished behavior with one passing example and one example designed to reveal a weak contract.`
 			],
 			[
 				`Choose a narrow responsibility for each ${subject} Java type before adding optional behavior.`,
@@ -1072,7 +1072,7 @@ function requiredWorkSteps(
 			[
 				`Define the ${moduleTitle} starting data, intermediate state, loop or function responsibility, and final result before writing code.`,
 				`Keep ${moduleTitle} runnable while adding logic so each error points to one recent branch, loop, helper, or collection change.`,
-				`Compare the output for one ordinary case, one boundary case, and one case that should be rejected or handled carefully.`
+				`Compare the output for one ordinary case, one boundary case, and one case that is rejected, ignored safely, or handled with a clear fallback.`
 			],
 			[
 				`Turn ${moduleTitle} into a Python plan: inputs, stored values, functions, collections, control flow, and visible evidence.`,
@@ -1095,7 +1095,7 @@ function requiredWorkSteps(
 				`Check the program with representative data, smallest useful data, and one malformed or surprising case.`
 			],
 			[
-				`Before coding ${moduleTitle}, name the main function or loop, the data it receives, the data it changes, and the result it should show.`,
+				`Before coding ${moduleTitle}, name the main function or loop, the data it receives, the data it changes, and the visible result it produces.`,
 				`Build ${moduleTitle} from a tiny traceable case toward the full prompt, rerunning after each control-flow or data-structure change.`,
 				`Finish by testing one ordinary case, one edge case, and one case chosen because it might break the first design.`
 			]
@@ -1245,7 +1245,7 @@ function requiredWorkSteps(
 				`Record evidence from one simulator or preview run plus one edge condition tied to navigation, persistence, or accessibility.`
 			],
 			[
-				`Decide what ${moduleTitle} should prove about state, data flow, user input, or platform behavior before adding features.`,
+				`Decide the ${moduleTitle} state, data-flow, user-input, or platform behavior target before adding features.`,
 				`Run the app after each important view, model, binding, or persistence change and inspect the visible result.`,
 				`Finish with one ordinary interaction and one condition that checks whether the app path remains understandable.`
 			]
@@ -1562,7 +1562,7 @@ function completionCheckSteps(
 			[
 				`${moduleTitle} shows current evidence for both syntax correctness and the intended object behavior.`,
 				`The verification includes one straightforward example and one example chosen to expose equality, aliasing, mutation, or dispatch mistakes.`,
-				`The final ${moduleTitle} review names the rule a reader should remember for the next Java task.`
+				`The final ${moduleTitle} review names the rule to carry into the next Java task.`
 			]
 		][variantIndex(courseFamily, moduleTitle, kind, 16)];
 	}

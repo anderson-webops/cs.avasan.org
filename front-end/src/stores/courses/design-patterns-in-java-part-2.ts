@@ -109,7 +109,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Method Object Versus Plain Extraction",
 					content:
-						"Explain when Replace Method with Method Object is justified: many local variables, multi-step computation, or logic that deserves its own collaborator. Compare it against simpler Extract Method work so students do not escalate prematurely."
+						"Explain when Replace Method with Method Object is justified: many local variables, multi-step computation, or logic that deserves its own collaborator. Compare it against simpler Extract Method work to avoid premature escalation."
 				},
 				{
 					title: "Mini Lab: Refactor a Calculation Pipeline Safely",
@@ -539,7 +539,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Delegation Versus Inheritance Revisited",
 					content:
-						"This section covers Replace Inheritance with Delegation and Replace Delegation with Inheritance together so students can compare the forces honestly. Java design should not worship either one uncritically."
+						"This section covers Replace Inheritance with Delegation and Replace Delegation with Inheritance together to compare the forces honestly. Java design should not worship either one uncritically."
 				},
 				{
 					title: "Mini Lab: Repair a Parallel Hierarchy",
@@ -699,7 +699,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Dependency Injection for Refactoring Seams",
 					content:
-						"Use constructor injection, interface seams, and simple fakes so students can isolate dependencies while reshaping a design. DI here is a refactoring enabler first and a framework topic second."
+						"Use constructor injection, interface seams, and simple fakes to isolate dependencies while reshaping a design. DI here is a refactoring enabler first and a framework topic second."
 				},
 				{
 					title: "Worked Example Set: Make a Hard-to-Test Class Refactorable",

@@ -1064,7 +1064,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Cloud Network Security Path",
 					content:
-						"Build a follow-up course around VPCs, security groups, subnets, private services, and public edge design so students can move from host-level hardening into cloud network architecture."
+						"Build a follow-up course around VPCs, security groups, subnets, private services, and public edge design to move from host-level hardening into cloud network architecture."
 				},
 				{
 					title: "NSEC14 Expansion Ideas and Next Steps: Core Project",

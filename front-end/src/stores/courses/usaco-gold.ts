@@ -132,7 +132,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Problem: Fruit Feast",
 					content:
-						"Use a state-space DP problem to test whether students can manage reachable states and transitions without losing clarity.",
+						"Use a state-space DP problem to test whether reachable states and transitions can be managed without losing clarity.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG40-Fruit-Feast"
 				}
@@ -192,7 +192,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Problem: Fine Dining",
 					content:
-						"Use a more layered graph task to test whether students can adapt shortest-path ideas to a richer condition set.",
+						"Use a more layered graph task to test whether shortest-path ideas can be adapted to a richer condition set.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG30-Fine-Dining"
 				},
@@ -291,7 +291,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Choose the Smallest Structure that Works",
 					content:
-						"Compare direct arrays, prefix sums, Fenwick trees, and sorting passes so students learn when a heavier data structure is necessary and when it is just extra complexity."
+						"Compare direct arrays, prefix sums, Fenwick trees, and sorting passes to distinguish when a heavier data structure is necessary and when it is just extra complexity."
 				},
 				{
 					title: "Unit 4: Fenwick Trees, Ordering, and Range Structure: Core Project",
@@ -389,7 +389,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Problem: Lights Out",
 					content:
-						"Use geometric structure and path reasoning to test whether students can keep multiple interpretations of distance and position aligned.",
+						"Use geometric structure and path reasoning to test whether multiple interpretations of distance and position stay aligned.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG35-Lights-Out"
 				},

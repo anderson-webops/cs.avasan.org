@@ -237,7 +237,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Crash Taxonomy for Defensive Analysis",
 					content:
-						"Separate harmless aborts, denial of service, memory disclosure, and memory corruption into distinct categories so students stop treating every crash as equivalent. This taxonomy matters because a null dereference, a stale debug leak, and an unchecked write may all look like “the program failed” at first glance, but they imply very different risks and priorities."
+						"Separate harmless aborts, denial of service, memory disclosure, and memory corruption into distinct categories instead of treating every crash as equivalent. This taxonomy matters because a null dereference, a stale debug leak, and an unchecked write may all look like “the program failed” at first glance, but they imply very different risks and priorities."
 				},
 				{
 					title: "Write Short Exploitability Notes for Maintainers",

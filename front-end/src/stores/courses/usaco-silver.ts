@@ -324,7 +324,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Problem: Just Green Enough",
 					content:
-						"Use a more layered counting problem to test whether students can keep transformed values aligned with the real goal.",
+						"Use a more layered counting problem to test whether transformed values stay aligned with the real goal.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US33-Just-Green-Enough"
 				},
@@ -407,7 +407,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Mix Patterns Deliberately",
 					content:
-						"Practice short sets that combine graph reasoning, sorting, simulation, and counting so students stop expecting the problem category to be obvious from the first sentence."
+						"Practice short sets that combine graph reasoning, sorting, simulation, and counting to avoid expecting the problem category to be obvious from the first sentence."
 				},
 				{
 					title: "Write Cleaner Contest Explanations",

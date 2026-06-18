@@ -22,7 +22,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Why This Course Uses Small Labs Instead of Giant Apps",
 					content:
-						"Keep the codebases small enough that students can inspect every pointer update, recursive branch, and container mutation. The goal is not flashy UI work. It is clear reasoning about structure, invariants, and algorithmic tradeoffs."
+						"Keep the codebases small enough to inspect every pointer update, recursive branch, and container mutation. The goal is not flashy UI work. It is clear reasoning about structure, invariants, and algorithmic tradeoffs."
 				},
 				{
 					title: "Working Habits for the Sequence",
@@ -127,7 +127,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Project: Task Manager CLI",
 					content:
-						"Build a file-ready task manager that stores dated tasks, filters by date, removes tasks safely, and prints consistent views of the current schedule. The lab is intentionally small so students can focus on clean data handling and interface boundaries.",
+						"Build a file-ready task manager that stores dated tasks, filters by date, removes tasks safely, and prints consistent views of the current schedule. The lab is intentionally small to keep the focus on clean data handling and interface boundaries.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP1-Task-Manager-CLI/starter",
 					solutionLink:

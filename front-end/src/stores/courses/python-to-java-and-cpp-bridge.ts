@@ -48,7 +48,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Project: Syntax Translation Warmup",
 					content:
-						"Port several tiny Python snippets into typed Java and C++ starter files so students can compare variables, conditionals, loops, and return statements side by side.",
+						"Port several tiny Python snippets into typed Java and C++ starter files to compare variables, conditionals, loops, and return statements side by side.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ1-Syntax-Translation-Warmup/starter",
 					solutionLink:

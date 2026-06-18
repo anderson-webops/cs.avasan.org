@@ -322,7 +322,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Ephemeral Ports and Client-Side Source Ports",
 					content:
-						"Explain ephemeral ports so students stop assuming the client side of every connection always uses the same number. This is especially important when they read `ss` output or packet captures and need to separate server ports from temporary client ports."
+						"Explain ephemeral ports to avoid assuming the client side of every connection always uses the same number. This is especially important when reading `ss` output or packet captures and separating server ports from temporary client ports."
 				},
 				{
 					title: "Using ss, netstat, and lsof to Map Services",

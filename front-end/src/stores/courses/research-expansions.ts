@@ -452,7 +452,7 @@ function buildSequencingModule(
 			{
 				title: `${courseLabel} Reference Refresh`,
 				content: [
-					`**Resource guide:** ${courseLabel} references should stay current when the course depends on an external tool, source repository, dataset, simulation, exam standard, or official documentation page.`,
+					`**Resource guide:** ${courseLabel} references stay current when the course depends on an external tool, source repository, dataset, simulation, exam standard, or official documentation page.`,
 					`**Refresh guidance:** Stable ${courseLabel} conceptual references can be reviewed less often, but tool versions, source-code repositories, exam links, data licenses, and simulation URLs need an explicit refresh cadence. If a link changes, update the ${courseLabel} course text and the project resource card together.`,
 					`**Evidence target:** The ${courseLabel} note states what must be refreshed each term, which links or versions are stable, and which materials are reference-only rather than assignments.`
 				].join("\n\n")
