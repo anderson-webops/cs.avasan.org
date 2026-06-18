@@ -42,7 +42,10 @@ import {
 	pythonIdeCourseAssetsZipUrl,
 	resetPythonIdeCourseAssetPackCache
 } from "../src/modules/pythonIdeCourseAssets";
-import { pythonIdeProjectModuleNames } from "../src/modules/pythonIdeRuntime";
+import {
+	pythonIdeImportedTopLevelModules,
+	pythonIdeProjectModuleNames
+} from "../src/modules/pythonIdeRuntime";
 
 const oneByOnePngBytes = new Uint8Array([
 	0x89,
@@ -413,6 +416,12 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain(
 			"const installedMicropipPackages = new Set<string>();"
 		);
+		expect(runtimeSource).toContain(
+			"const loadedPyodideImportModules = new Set<string>();"
+		);
+		expect(runtimeSource).toContain("function loadPyodideImportPackages");
+		expect(runtimeSource).toContain("loadedPyodideImportModules.has");
+		expect(runtimeSource).toContain("loadedPyodideImportModules.add");
 		expect(runtimeSource).toContain("let micropipLoaded = false;");
 		expect(runtimeSource).toContain(
 			"!installedMicropipPackages.has(packageName)"
@@ -427,6 +436,28 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain(
 			"loadedBrowserShimPackages.add(\"numpy\")"
 		);
+	});
+
+	it("extracts multiple top-level import modules for runtime package setup", () => {
+		expect(
+			[
+				...pythonIdeImportedTopLevelModules([
+					{
+						name: "main.py",
+						content: [
+							"import os, numpy as np, pandas.io",
+							"from sklearn.model_selection import train_test_split",
+							"from .local import helper",
+							"import invalid-name, altair # keep the valid item after a comma"
+						].join("\n")
+					},
+					{
+						name: "notes.txt",
+						content: "import should_not_count"
+					}
+				])
+			]
+		).toEqual(["os", "numpy", "pandas", "sklearn", "altair"]);
 	});
 
 	it("normalizes local Python project module names for fresh imports", () => {

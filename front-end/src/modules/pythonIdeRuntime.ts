@@ -11,8 +11,13 @@ const PYODIDE_INDEX_URL = `https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSION}/
 const PYODIDE_SCRIPT_SRC = `${PYODIDE_INDEX_URL}pyodide.js`;
 const PROJECT_ROOT = "/home/pyodide/classes_project";
 const PYTHON_EXTENSION_RE = /\.py$/i;
-const IMPORT_MODULE_RE = /^import\s+([A-Za-z_]\w*)/;
-const FROM_IMPORT_MODULE_RE = /^from\s+([A-Za-z_]\w*)\s+import\b/;
+const FROM_IMPORT_MODULE_RE =
+	/^from\s+([A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)\s+import\b/;
+const PYTHON_IDENTIFIER_RE = /^[A-Z_]\w*$/i;
+const PYTHON_IMPORT_KEYWORD = "import";
+const PYTHON_IMPORT_SEPARATOR_RE = /\s*,\s*/;
+const PYTHON_IMPORT_ALIAS_RE = /\s+as\s+/i;
+const PYTHON_MODULE_SEPARATOR_RE = /\./;
 const FOR_LOOP_ITERATION_LIMIT = 500000;
 const WHILE_LOOP_ITERATION_LIMIT = 25000;
 const MICROPIP_PACKAGES = new Map([
@@ -179,6 +184,7 @@ let pyodidePromise: Promise<PyodideAPI> | null = null;
 let lastProjectFileNames = new Set<string>();
 const loadedBrowserShimPackages = new Set<string>();
 const installedMicropipPackages = new Set<string>();
+const loadedPyodideImportModules = new Set<string>();
 let micropipLoaded = false;
 
 function throwIfRunStopped(
@@ -2203,7 +2209,34 @@ json.dumps(__classes_files)
 	);
 }
 
-function importedTopLevelModules(files: PythonIdeFile[]) {
+function importedTopLevelModulesFromLine(line: string) {
+	const trimmed = line.trim();
+	const fromMatch = trimmed.match(FROM_IMPORT_MODULE_RE);
+	if (fromMatch) {
+		return [fromMatch[1].split(PYTHON_MODULE_SEPARATOR_RE)[0]].filter(
+			moduleName => PYTHON_IDENTIFIER_RE.test(moduleName)
+		);
+	}
+
+	if (!trimmed.startsWith(PYTHON_IMPORT_KEYWORD)) return [];
+	const importWhitespace = trimmed.charAt(PYTHON_IMPORT_KEYWORD.length);
+	if (importWhitespace !== " " && importWhitespace !== "\t") return [];
+
+	return trimmed
+		.slice(PYTHON_IMPORT_KEYWORD.length)
+		.split("#")[0]
+		.split(PYTHON_IMPORT_SEPARATOR_RE)
+		.map(
+			specifier =>
+				specifier
+					.split(PYTHON_IMPORT_ALIAS_RE)[0]
+					.trim()
+					.split(PYTHON_MODULE_SEPARATOR_RE)[0]
+		)
+		.filter(moduleName => PYTHON_IDENTIFIER_RE.test(moduleName));
+}
+
+export function pythonIdeImportedTopLevelModules(files: PythonIdeFile[]) {
 	const modules = new Set<string>();
 
 	for (const line of files
@@ -2211,17 +2244,14 @@ function importedTopLevelModules(files: PythonIdeFile[]) {
 		.map(file => file.content)
 		.join("\n")
 		.split("\n")) {
-		const trimmed = line.trim();
-		const importMatch = trimmed.match(IMPORT_MODULE_RE);
-		const fromMatch = trimmed.match(FROM_IMPORT_MODULE_RE);
-		const moduleName = importMatch?.[1] ?? fromMatch?.[1];
-		if (moduleName) modules.add(moduleName);
+		for (const moduleName of importedTopLevelModulesFromLine(line))
+			modules.add(moduleName);
 	}
 
 	return modules;
 }
 
-function packageScanCode(files: PythonIdeFile[]) {
+function packageScanModules(files: PythonIdeFile[]) {
 	const pythonFiles = files.filter(file => isPythonIdePythonFile(file.name));
 	const localModules = new Set([
 		"_classes_pgzero",
@@ -2235,22 +2265,28 @@ function packageScanCode(files: PythonIdeFile[]) {
 		...pythonIdeProjectModuleNames(pythonFiles)
 	]);
 
-	return pythonFiles
-		.map(file => file.content)
-		.join("\n")
-		.split("\n")
-		.filter(line => {
-			const trimmed = line.trim();
-			const importMatch = trimmed.match(IMPORT_MODULE_RE);
-			const fromMatch = trimmed.match(FROM_IMPORT_MODULE_RE);
-			const moduleName = importMatch?.[1] ?? fromMatch?.[1];
-			return (
-				!moduleName ||
-				(!localModules.has(moduleName) &&
-					!MICROPIP_PACKAGES.has(moduleName))
-			);
-		})
-		.join("\n");
+	return [...pythonIdeImportedTopLevelModules(pythonFiles)]
+		.filter(
+			moduleName =>
+				!localModules.has(moduleName) &&
+				!MICROPIP_PACKAGES.has(moduleName) &&
+				!loadedPyodideImportModules.has(moduleName)
+		)
+		.sort();
+}
+
+async function loadPyodideImportPackages(
+	pyodide: PyodideAPI,
+	files: PythonIdeFile[]
+) {
+	const modules = packageScanModules(files);
+	if (!modules.length) return;
+
+	await pyodide.loadPackagesFromImports(
+		modules.map(moduleName => `import ${moduleName}`).join("\n")
+	);
+	for (const moduleName of modules)
+		loadedPyodideImportModules.add(moduleName);
 }
 
 async function installMicropipPackages(
@@ -2498,7 +2534,7 @@ export async function runPythonProject(options: RunPythonProjectOptions) {
 	}
 
 	ensureProjectDirectory(pyodide);
-	const importedModules = importedTopLevelModules(options.files);
+	const importedModules = pythonIdeImportedTopLevelModules(options.files);
 	const projectModuleNames = pythonIdeProjectModuleNames([
 		...options.files,
 		...[...lastProjectFileNames].map(name => ({ name }))
@@ -2512,7 +2548,7 @@ export async function runPythonProject(options: RunPythonProjectOptions) {
 	if (!activeFile)
 		throw new Error("Project does not have a runnable Python file.");
 
-	await pyodide.loadPackagesFromImports(packageScanCode(options.files));
+	await loadPyodideImportPackages(pyodide, options.files);
 	throwIfRunStopped(options);
 	await loadBrowserShimDependencies(
 		pyodide,
