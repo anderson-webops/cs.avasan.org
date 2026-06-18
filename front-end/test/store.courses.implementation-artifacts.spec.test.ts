@@ -625,6 +625,12 @@ describe("implemented course development artifacts", () => {
 	it("keeps cross-course split-folder source references out of ambiguous roots", async () => {
 		const javaLevel1 = JSON.stringify(await requireCourse("java-level-1"));
 		const javaLevel3 = JSON.stringify(await requireCourse("java-level-3"));
+		const javaWithoutGraphics = JSON.stringify(
+			await requireCourse("java-without-graphics")
+		);
+		const javaWithGraphics = JSON.stringify(
+			await requireCourse("java-with-graphics")
+		);
 		const scratchLevel1 = JSON.stringify(
 			await requireCourse("scratch-level-1")
 		);
@@ -650,6 +656,18 @@ describe("implemented course development artifacts", () => {
 		expect(javaLevel3).not.toContain(
 			"Java-Level-3/tree/main/AJ20-Generic-Repository\""
 		);
+		for (const serializedCourse of [
+			javaLevel3,
+			javaWithoutGraphics,
+			javaWithGraphics
+		]) {
+			expect(serializedCourse).toContain(
+				"Java-Level-3/tree/main/AJ13-Class-Rank"
+			);
+			expect(serializedCourse).not.toContain(
+				"Python-Level-3/tree/main/AM13-Priority-Queue"
+			);
+		}
 		for (const serializedCourse of [scratchLevel1, scratchLevel2]) {
 			expect(serializedCourse).toContain(
 				"Python-Level-2/tree/main/PS12-Type-Racer/starter"

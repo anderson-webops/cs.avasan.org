@@ -1406,7 +1406,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Practice the Java `PriorityQueue` API, including adding, peeking, polling, removing, iterating, checking membership, and converting the queue into an array.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM13-Priority-Queue"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ13-Class-Rank"
 				},
 				{
 					title: "AJ13 Project 1: Class Rank",
@@ -1448,7 +1448,7 @@ export const javaLevel3Course: RawCourse = {
 						section: "extension"
 					}),
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM13-Priority-Queue"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ13-Class-Rank"
 				},
 				{
 					title: "Priority Queues and Maps supplemental 2",
