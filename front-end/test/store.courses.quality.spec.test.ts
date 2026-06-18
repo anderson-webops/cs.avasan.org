@@ -900,6 +900,40 @@ describe("course text quality normalization", () => {
 		expect(corpus).toContain("Binary search relies on sorted data");
 	});
 
+	it("keeps Java Level 3 sorting modules substantive instead of one-line prompts", async () => {
+		const course = await loadRawCourse("java-level-3");
+		expect(course).not.toBeNull();
+		const corpus = allCourseText(course);
+
+		expect(corpus).not.toMatch(
+			/Learn how selection sort repeatedly finds the smallest remaining element/i
+		);
+		expect(corpus).not.toMatch(
+			/Implement selection sort using two `ArrayList`s/i
+		);
+		expect(corpus).not.toMatch(
+			/Learn how bubble sort repeatedly swaps adjacent values/i
+		);
+		expect(corpus).not.toMatch(
+			/Implement the helper method that merges two sorted lists/i
+		);
+		expect(corpus).not.toMatch(
+			/Describe selection sort, predict the state of an array/i
+		);
+		expect(corpus).toContain(
+			"Selection sort divides a collection into a sorted prefix and an unsorted remainder"
+		);
+		expect(corpus).toContain(
+			"Bubble sort repeatedly compares adjacent values and swaps them when they are out of order"
+		);
+		expect(corpus).toContain(
+			"Merge sort is a divide-and-conquer algorithm"
+		);
+		expect(corpus).toContain(
+			"This review compares selection sort, insertion sort, bubble sort, and merge sort"
+		);
+	});
+
 	it("keeps early Python Turtle prompts structured around planning and verification", async () => {
 		const course = await loadRawCourse("python-level-1");
 		expect(course).not.toBeNull();

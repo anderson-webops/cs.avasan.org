@@ -773,13 +773,19 @@ export const javaLevel3Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Selection Sort",
-					content:
-						"Learn how selection sort repeatedly finds the smallest remaining element and places it into the next sorted position."
+					content: `**Concept path:** Selection sort divides a collection into a sorted prefix and an unsorted remainder. Each pass selects the smallest or largest remaining value and moves it into the next final position.
+
+**Practice targets:** Trace the sorted boundary, the current candidate index, and the swap at the end of each pass. Include lists that are already sorted, reverse sorted, random, and contain duplicate values.
+
+**Evidence target:** A correct trace shows that one more element reaches its final position after every outer-loop pass, even when the rest of the list is still unsorted.`
 				},
 				{
 					title: "AJ7 Project 1: Selection Sort",
-					content:
-						"Implement selection sort using two `ArrayList`s and test the algorithm on randomly generated values.",
+					content: `**Project target:** Implement selection sort and make the pass-by-pass behavior visible enough to debug.
+
+**Build path:** Generate test values, find the smallest remaining value during each pass, move or swap it into the next sorted position, and print the list after selected passes while the algorithm is being verified.
+
+**Evidence target:** Tests cover random values, duplicates, negative values, an already sorted list, and a reverse-sorted list. The final list is sorted, and intermediate traces match the selection-sort invariant.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ7-Selection-Sort",
 					solutionLink:
@@ -787,18 +793,27 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "Selection Sort Big-O Analysis",
-					content:
-						"Analyze selection sort as a quadratic-time algorithm and compare in-place versus out-of-place space usage."
+					content: `**Concept path:** Selection sort performs a full scan of the unsorted remainder on each pass. The number of comparisons forms a decreasing sum, which still grows quadratically with input size.
+
+**Practice targets:** Count comparisons for small lists, then generalize the pattern to n values. Separate comparison cost from swap cost, because selection sort performs many comparisons but relatively few swaps.
+
+**Evidence target:** The analysis distinguishes time complexity from space complexity and explains whether the chosen implementation sorts in place or builds a separate output list.`
 				},
 				{
 					title: "Insertion Sort",
-					content:
-						"Learn how insertion sort places each new element into the correct spot among the items that are already sorted."
+					content: `**Concept path:** Insertion sort grows a sorted prefix by taking the next unsorted value and shifting larger values to make room for it. It is especially useful for nearly sorted data because values often move only a short distance.
+
+**Practice targets:** Trace the current value, the shifting index, and the sorted prefix after each pass. Compare behavior on sorted, nearly sorted, reverse-sorted, and duplicate-heavy lists.
+
+**Evidence target:** A correct trace shows that the prefix is sorted after every pass, even though values to the right of the prefix have not been processed yet.`
 				},
 				{
 					title: "AJ7 Project 2: Insertion Sort",
-					content:
-						"Implement insertion sort in-place on an array and compare how it behaves on sorted, reverse-sorted, and random input.",
+					content: `**Project target:** Implement in-place insertion sort on an array and compare how much movement different input orders create.
+
+**Build path:** Store the current value, shift larger values one position to the right, insert the current value into the open position, and print enough intermediate states to confirm the sorted-prefix invariant.
+
+**Evidence target:** Tests show minimal movement for sorted or nearly sorted input and much more movement for reverse-sorted input. The implementation handles duplicates without losing values.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ7-Insertion-Sort",
 					solutionLink:
@@ -806,15 +821,21 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "Insertion Sort Big-O Analysis",
-					content:
-						"Compare insertion sort with selection sort, paying attention to why insertion sort performs especially well on nearly sorted data."
+					content: `**Concept path:** Insertion sort has quadratic worst-case time, but its best case is linear when the input is already sorted. This makes input order more important for insertion sort than for selection sort.
+
+**Practice targets:** Count comparisons and shifts separately for sorted, nearly sorted, and reverse-sorted examples. Then compare those counts with selection sort's more consistent comparison pattern.
+
+**Evidence target:** The runtime explanation names both the best-case and worst-case conditions instead of assigning one fixed amount of work to every input.`
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "AJ7 Supplemental Project 1: Biggest to Smallest Bookshelf",
-					content:
-						"Store book page counts in an `ArrayList` and use selection sort to organize them from biggest to smallest.",
+					content: `**Project target:** Sort a bookshelf represented by page counts or book records from largest to smallest.
+
+**Build path:** Store the data in an ArrayList, adapt selection sort to choose the largest remaining value, and keep book identity attached to the page count when records include more than one field.
+
+**Evidence target:** The output preserves every original book, orders equal page counts predictably, and explains how descending order changes the comparison from the ascending version.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ7-Biggest-to-Smallest-Bookshelf",
 					solutionLink:
@@ -857,13 +878,19 @@ export const javaLevel3Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Bubble Sort",
-					content:
-						"Learn how bubble sort repeatedly swaps adjacent values so that large elements bubble toward the end of the list over multiple passes."
+					content: `**Concept path:** Bubble sort repeatedly compares adjacent values and swaps them when they are out of order. After each full pass, one extreme value has moved into its final region.
+
+**Practice targets:** Trace adjacent comparisons, swaps, and the sorted tail after each pass. Include an early-stop flag so a pass with no swaps can end the algorithm.
+
+**Evidence target:** The trace explains why the inner loop can shrink after each pass and why a no-swap pass proves the list is already sorted.`
 				},
 				{
 					title: "AJ8 Project 1: Bubble Sort Implementation",
-					content:
-						"Implement bubble sort with nested loops, test it on random data, and improve it by shrinking the inner loop range over time.",
+					content: `**Project target:** Implement bubble sort, then improve the implementation by reducing unnecessary comparisons.
+
+**Build path:** Begin with a clear adjacent-swap implementation, verify it on small printed lists, then add a shrinking inner bound and an optional swapped flag for early termination.
+
+**Evidence target:** The project shows the same final sorted result before and after optimization, while the optimized version performs fewer comparisons on already sorted or nearly sorted input.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ8-Bubble-Sort",
 					solutionLink:
@@ -871,13 +898,19 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "Bubble Sort Big-O Analysis",
-					content:
-						"Analyze why bubble sort is also quadratic time, compare it to other simple sorting algorithms, and review how in-place sorting affects space complexity."
+					content: `**Concept path:** Bubble sort is quadratic in the average and worst case because adjacent comparisons happen across many passes. With an early-stop flag, its best case can be linear for already sorted input.
+
+**Practice targets:** Count comparisons and swaps separately, then compare bubble sort with selection sort and insertion sort on sorted, reverse-sorted, and random lists.
+
+**Evidence target:** The analysis identifies the optimization's benefit without overstating it: bubble sort remains inefficient for large random lists even when simple improvements are added.`
 				},
 				{
 					title: "AJ8 Project 2: Alphabetical Order",
-					content:
-						"Adapt bubble sort to work on `ArrayList<String>` values by using `compareTo()` to sort words alphabetically.",
+					content: `**Project target:** Adapt bubble sort from numeric values to strings so words can be ordered alphabetically.
+
+**Build path:** Store words in an ArrayList<String>, compare adjacent words with compareTo(), swap out-of-order strings, and decide how capitalization or punctuation will be handled.
+
+**Evidence target:** Tests include lowercase words, mixed-case words if supported, repeated words, and words that are already in order. The comparison rule is stated clearly enough to explain any surprising order.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ8-Alphabetical-Order-Starter",
 					solutionLink:
@@ -932,13 +965,19 @@ export const javaLevel3Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Merge Sort",
-					content:
-						"Learn how merge sort uses recursion to split an array into smaller pieces, sort those pieces, and merge them back together efficiently."
+					content: `**Concept path:** Merge sort is a divide-and-conquer algorithm. It recursively splits a list into smaller pieces, treats one-element lists as already sorted, and merges sorted pieces back into a sorted result.
+
+**Practice targets:** Draw the split tree and the merge steps for a short list. Keep the divide phase separate from the conquer phase so the recursion structure is clear.
+
+**Evidence target:** The explanation shows why merge sort is not just "sorting twice": the merge step depends on both halves already being sorted.`
 				},
 				{
 					title: "AJ9 Project 1: Merge Method",
-					content:
-						"Implement the helper method that merges two sorted lists into one sorted result.",
+					content: `**Project target:** Implement the merge helper that combines two sorted lists into one sorted output list.
+
+**Build path:** Track one index for each input list, repeatedly copy the smaller current value, and append the remainder of the non-empty list after the other list is exhausted.
+
+**Evidence target:** The method works for empty lists, one empty list, duplicates, negative values, and uneven list lengths. A failing input where either half is unsorted is recognized as a precondition issue.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ9-Merge",
 					solutionLink:
@@ -946,8 +985,11 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "AJ9 Project 2: Split Method",
-					content:
-						"Practice recursively splitting an `ArrayList` until all sublists are size 1, building intuition for merge sort's divide-and-conquer structure.",
+					content: `**Project target:** Build the recursive split phase that divides a list until each sublist is small enough to be considered sorted.
+
+**Build path:** Define the base case for size 0 or 1, calculate the middle index, create left and right sublists, and recursively split each side.
+
+**Evidence target:** Printed or logged structure shows that every original value appears in exactly one leaf sublist, with no lost or duplicated values during splitting.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ9-Split",
 					solutionLink:
@@ -955,8 +997,11 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "AJ9 Project 3: Merge Sort",
-					content:
-						"Combine recursive splitting with the merge helper to implement full merge sort on a list of random numbers.",
+					content: `**Project target:** Combine recursive splitting and the merge helper into a complete merge sort implementation.
+
+**Build path:** Return immediately for lists of size 0 or 1, recursively sort the left and right halves, then merge the sorted halves into a new sorted list.
+
+**Evidence target:** The implementation produces sorted output for random, sorted, reverse-sorted, duplicate-heavy, and small edge-case lists, and the original size is preserved.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ9-Merge-Sort",
 					solutionLink:
@@ -964,8 +1009,11 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "Merge Sort Big-O Analysis",
-					content:
-						"Analyze merge sort as a `O(n log n)` algorithm, compare it with quadratic-time sorts, and discuss why recursion overhead means it is most useful on sufficiently large lists."
+					content: `**Concept path:** Merge sort performs logarithmically many split levels, and each level performs linear merge work. The result is O(n log n) time for typical implementations.
+
+**Practice targets:** Count split levels for powers of two, identify the linear work at each level, and compare the growth with quadratic sorting algorithms on larger input sizes.
+
+**Evidence target:** The analysis includes both time and space costs: merge sort is faster on large random lists than simple quadratic sorts, but it usually requires extra storage for temporary lists or arrays.`
 				}
 			],
 			supplementalProjects: [
@@ -1016,8 +1064,11 @@ export const javaLevel3Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Check-In #2 Overview",
-					content:
-						"Use this check-in to review the major sorting algorithms in the course and compare how they behave, how they are implemented, and how their runtimes differ.",
+					content: `**Check-in target:** This review compares selection sort, insertion sort, bubble sort, and merge sort by behavior, implementation pattern, and runtime growth.
+
+**Practice targets:** Trace each algorithm on a short list, name its invariant, identify the source of its runtime cost, and compare how input order affects the amount of work.
+
+**Evidence target:** Strong comparisons explain not only which algorithm is faster, but why its control flow produces that growth pattern.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-2-Starter",
 					solutionLink:
@@ -1025,28 +1076,43 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "Check-In #2: Selection Sort",
-					content:
-						"Describe selection sort, predict the state of an array after several passes, complete an implementation, and discuss runtime plus in-place versus out-of-place behavior."
+					content: `**Concept path:** Selection sort questions focus on selecting an extreme value from the unsorted region and placing it into the next final position.
+
+**Practice targets:** Predict the array state after specific passes, complete missing loop logic, and identify whether the implementation sorts in place or creates a separate result.
+
+**Evidence target:** The answer names the sorted boundary and explains why the selected value is final after the pass ends.`
 				},
 				{
 					title: "Check-In #2: Insertion Sort",
-					content:
-						"Review insertion sort, trace several passes on a given list, complete the algorithm, and compare it with selection sort."
+					content: `**Concept path:** Insertion sort questions focus on the sorted prefix and the shifts needed to insert the next value.
+
+**Practice targets:** Trace several passes, complete the shifting loop, and compare best-case and worst-case behavior with selection sort.
+
+**Evidence target:** The trace preserves all values during shifting and shows the current value being inserted into the correct open position.`
 				},
 				{
 					title: "Check-In #2: Bubble Sort",
-					content:
-						"Explain bubble sort, complete an implementation, consider optimizations such as early cutoffs, and compare it with other quadratic-time sorts."
+					content: `**Concept path:** Bubble sort questions focus on adjacent swaps, pass boundaries, and optimization through shrinking bounds or early stopping.
+
+**Practice targets:** Complete nested-loop logic, identify when a swap occurs, and reason about how many passes are needed before the sorted region is guaranteed.
+
+**Evidence target:** The explanation connects adjacent swaps to sorted-tail growth and distinguishes best-case behavior from average or worst-case behavior.`
 				},
 				{
 					title: "Check-In #2: Merge Sort",
-					content:
-						"Merge sorted sublists by hand, finish an incomplete merge sort implementation, and explain why merge sort's time complexity differs from the other sorting algorithms."
+					content: `**Concept path:** Merge sort questions test both recursive structure and the merge precondition that each half is already sorted.
+
+**Practice targets:** Merge sorted sublists by hand, complete base-case and recursive-call logic, and explain why the algorithm grows as O(n log n).
+
+**Evidence target:** The answer separates the cost of dividing from the cost of merging and avoids treating merge sort as another quadratic pass-based sort.`
 				},
 				{
 					title: "Check-In #2: Additional Practice Project",
-					content:
-						"Time multiple sorting algorithms on arrays of different sizes and compare how their observed speeds change as the test scale increases.",
+					content: `**Project target:** Measure several sorting algorithms on different input sizes and compare observed timing with theoretical runtime.
+
+**Build path:** Generate repeatable input arrays, run each algorithm multiple times, average the timing results, and test several sizes large enough for growth patterns to become visible.
+
+**Evidence target:** The comparison explains measurement noise, input-order effects, and the difference between timing a small example and analyzing asymptotic growth.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-2-Additional-Practice-Project",
 					solutionLink:
