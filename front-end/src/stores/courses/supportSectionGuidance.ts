@@ -103,55 +103,55 @@ export function buildSupportSectionGuidance({
 
 	if (section === "debugging") {
 		const opener = [
-			`Use **${title}** to diagnose realistic failure modes instead of only rerunning the normal case.`,
-			`Debug **${title}** by narrowing the failure before changing the solution.`,
-			`Treat **${title}** as a controlled troubleshooting pass with evidence before and after the fix.`
+			`**${title}** diagnoses realistic failure modes instead of only rerunning the normal case.`,
+			`**${title}** narrows the failure before changing the solution.`,
+			`**${title}** is a controlled troubleshooting pass with evidence before and after the fix.`
 		][variant];
 
 		return [
 			opener,
-			`Inspect the **${title}** work for ${focus}.`,
-			`Record the ${courseFamily} symptom in **${title}**, the smallest reproduction, the suspected cause, the fix, and the evidence that the fix changed the behavior.`
+			`The **${title}** work is checked for ${focus}.`,
+			`The ${courseFamily} evidence names the symptom in **${title}**, the smallest reproduction, the suspected cause, the fix, and the proof that the fix changed the behavior.`
 		].join("\n\n");
 	}
 
 	if (section === "planning") {
 		const opener = [
-			`Plan **${title}** as a sequence of runnable checkpoints.`,
-			`Break **${title}** into checkpoints that can be tested before the full version is complete.`,
-			`Map **${title}** before building: name the pieces that need to work, then choose the first runnable checkpoint.`
+			`**${title}** is planned as a sequence of runnable checkpoints.`,
+			`**${title}** is divided into checkpoints that can be tested before the full version is complete.`,
+			`**${title}** starts with a map of the pieces that need to work, followed by the first runnable checkpoint.`
 		][variant];
 
 		return [
 			opener,
-			`Name the **${title}** core state, inputs, outputs, boundaries, and verification evidence for ${focus}.`,
-			`Choose an order for **${title}** that produces a small working version early, then add complexity only after the current checkpoint can be explained.`
+			`The **${title}** plan names the core state, inputs, outputs, boundaries, and verification evidence for ${focus}.`,
+			`The build order for **${title}** produces a small working version early, then adds complexity only after the current checkpoint can be explained.`
 		].join("\n\n");
 	}
 
 	if (section === "verification") {
 		const opener = [
-			`Close **${title}** with a concrete verification pass.`,
-			`Verify **${title}** by comparing the expected result with what actually happened.`,
-			`Review **${title}** through evidence, not just whether the final answer looks plausible.`
+			`**${title}** ends with a concrete verification pass.`,
+			`**${title}** compares the expected result with what actually happened.`,
+			`**${title}** is reviewed through evidence, not just whether the final answer looks plausible.`
 		][variant];
 
 		return [
 			opener,
-			`Compare expected and observed behavior in **${title}** for ${focus}.`,
-			`Record the **${title}** main result, one meaningful edge case, one design or debugging decision, and one limitation that would guide a later revision.`
+			`Expected and observed behavior in **${title}** are compared for ${focus}.`,
+			`The **${title}** record includes the main result, one meaningful edge case, one design or debugging decision, and one limitation that would guide a later revision.`
 		].join("\n\n");
 	}
 
 	const opener = [
-		`Extend **${title}** in ${courseFamily} by changing one meaningful constraint rather than adding unrelated features.`,
-		`Revise **${title}** with one new constraint, input shape, or behavior that still fits the original goal.`,
-		`Add depth to **${title}** by making one requirement more realistic and then checking the result.`
+		`**${title}** extends the ${courseFamily} work by changing one meaningful constraint rather than adding unrelated features.`,
+		`**${title}** adds one new constraint, input shape, or behavior that still fits the original goal.`,
+		`**${title}** gains depth by making one requirement more realistic and then checking the result.`
 	][variant];
 
 	return [
 		opener,
-		`Keep the **${title}** extension centered on ${focus}.`,
-		`Keep the new ${courseFamily} requirement in **${title}** testable: define the expected behavior, run one normal case and one boundary case, and record what changed from the base version.`
+		`The **${title}** extension stays centered on ${focus}.`,
+		`The new ${courseFamily} requirement in **${title}** remains testable: expected behavior is defined, one normal case and one boundary case are run, and the change from the base version is recorded.`
 	].join("\n\n");
 }

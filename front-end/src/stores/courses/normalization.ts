@@ -1680,7 +1680,7 @@ function neutralizeStudentFacingText(text: string) {
 					/\bTreat this as the anchor for\b/gi,
 					"This is the anchor for"
 				)
-				.replace(/\bTreat this as\b/gi, "Use this as")
+				.replace(/\bTreat this as\b/gi, "This functions as")
 				.replace(/\binstructor-provided\b/gi, "provided")
 				.replace(/\binstructor-approved\b/gi, "approved")
 				.replace(/\binstructor-authored\b/gi, "authored")
@@ -5473,14 +5473,14 @@ function compactGeneratedProjectSupport(
 function lessonSupport(context: CourseTextContext) {
 	const focus = unscopedSubjectFocus(context);
 	const conceptPath = variantPrompt(context, [
-		subject =>
-			`**Concept path:** ${subject} starts by identifying which part of ${focus} matters, then uses a specific example to test a nearby condition.`,
-		subject =>
-			`**Concept path:** ${subject} links the main terms in ${focus} to a traceable example and a nearby variation.`,
-		subject =>
-			`**Concept path:** ${subject} shows how ${focus} appears in a concrete task: identify the state or representation, trace the example, and test a variation.`,
-		subject =>
-			`**Concept path:** ${subject} uses one worked example and one transfer check to show how ${focus} changes with the situation.`
+		() =>
+			`**Concept path:** The core idea is ${focus}. A concrete example establishes the vocabulary, then a nearby variation tests whether the same reasoning still works.`,
+		() =>
+			`**Concept path:** ${capitalizeSentence(focus)} is connected to one traceable example, one changed condition, and one explanation of what changed.`,
+		() =>
+			`**Concept path:** The main representation in ${focus} is identified first, then traced through a concrete task and checked against a variation.`,
+		() =>
+			`**Concept path:** One worked example and one transfer check show how ${focus} changes when the situation changes.`
 	]);
 
 	return [
@@ -5493,18 +5493,19 @@ function lessonSupport(context: CourseTextContext) {
 function diagnosticSupport(context: CourseTextContext) {
 	const compact = (line: string) =>
 		compactGeneratedProjectSupport(context, [line])[0];
+	const focus = unscopedSubjectFocus(context);
 	const readiness = compact(
 		variantPrompt(context, [
 			subject =>
-				`This is a formative check for ${subject} in ${subjectFocus(context)}, not a pass/fail quiz; attempt ${subject} independently first, then use the result to identify whether the issue is ${diagnosticCategories(context)}.`,
+				`This is a formative check for ${subject} in ${focus}, not a pass/fail quiz. An independent attempt comes first, then the result identifies whether the issue is ${diagnosticCategories(context)}.`,
 			subject =>
-				`Use ${subject} as a readiness check for ${subjectFocus(context)}. First try ${subject} without hints, then classify any gap as ${diagnosticCategories(context)}.`,
+				`${subject} checks readiness for ${focus}. The first pass is independent, then any gap is classified as ${diagnosticCategories(context)}.`,
 			subject =>
 				`${subject} checks whether the core idea is ready for transfer. An independent attempt comes first; the evidence identifies whether the next step is vocabulary, tracing, syntax, design, or testing support.`,
 			subject =>
 				`${subject} is a low-stakes checkpoint: solve what is possible first, then identify the smallest missing piece before harder work.`,
 			subject =>
-				`Use ${subject} to locate the current bottleneck: vocabulary, setup, tracing, syntax, design, testing, or explanation.`,
+				`${subject} locates the current bottleneck: vocabulary, setup, tracing, syntax, design, testing, or explanation.`,
 			subject =>
 				`A short independent attempt for ${subject} comes first, followed by comparison with the target skill before support is added.`,
 			subject =>
