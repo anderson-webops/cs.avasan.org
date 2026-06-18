@@ -421,7 +421,7 @@ describe("python IDE project helpers", () => {
 			"utf8"
 		);
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/pages/python-ide.vue"),
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -440,7 +440,7 @@ describe("python IDE project helpers", () => {
 			"utf8"
 		);
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/pages/python-ide.vue"),
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -457,7 +457,7 @@ describe("python IDE project helpers", () => {
 
 	it("keeps Turtle runs animated with a visible cursor marker", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/pages/python-ide.vue"),
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -473,7 +473,7 @@ describe("python IDE project helpers", () => {
 
 	it("renders the original Turtle built-in shapes with classic as default", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/pages/python-ide.vue"),
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
 		const runtimeSource = readFileSync(
@@ -527,11 +527,17 @@ describe("python IDE project helpers", () => {
 			"utf8"
 		);
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/pages/python-ide.vue"),
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
 
 		expect(runtimeSource).toContain("const FOR_LOOP_ITERATION_LIMIT");
+		expect(runtimeSource).toContain(
+			"const PYTHON_IDE_RUNTIME_BOOTSTRAP_VERSION"
+		);
+		expect(runtimeSource).toContain(
+			"__classes_runtime_bootstrap_version"
+		);
 		expect(runtimeSource).toContain("const WHILE_LOOP_ITERATION_LIMIT");
 		expect(runtimeSource).toContain(
 			"const TURTLE_COOPERATIVE_WHILE_LOOP_ITERATION_LIMIT"
@@ -590,7 +596,7 @@ describe("python IDE project helpers", () => {
 
 	it("keeps tiny Turtle animation steps responsive for continuous movement", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/pages/python-ide.vue"),
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -608,7 +614,7 @@ describe("python IDE project helpers", () => {
 
 	it("bounds output rendering so print-heavy runs stay responsive", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/pages/python-ide.vue"),
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -627,7 +633,7 @@ describe("python IDE project helpers", () => {
 
 	it("bounds imported project files before local storage writes", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/pages/python-ide.vue"),
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -661,7 +667,7 @@ describe("python IDE project helpers", () => {
 			"utf8"
 		);
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/pages/python-ide.vue"),
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
 		const captureIndex = runtimeSource.indexOf(
@@ -934,7 +940,7 @@ describe("python IDE project helpers", () => {
 			"utf8"
 		);
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/pages/python-ide.vue"),
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -949,7 +955,7 @@ describe("python IDE project helpers", () => {
 
 	it("clears stale local account fallback after successful remote syncs", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/pages/python-ide.vue"),
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -962,7 +968,7 @@ describe("python IDE project helpers", () => {
 
 	it("serializes saves and protects newer edits from stale remote responses", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/pages/python-ide.vue"),
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -980,7 +986,7 @@ describe("python IDE project helpers", () => {
 
 	it("keeps canvas keyboard handlers separate from editor and input focus", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/pages/python-ide.vue"),
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -1016,7 +1022,7 @@ describe("python IDE project helpers", () => {
 			"utf8"
 		);
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/pages/python-ide.vue"),
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -1040,7 +1046,7 @@ describe("python IDE project helpers", () => {
 
 	it("tracks overlapping PyGame Zero sound instances for cleanup", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/pages/python-ide.vue"),
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -1310,7 +1316,7 @@ describe("python IDE project helpers", () => {
 			"utf8"
 		);
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/pages/python-ide.vue"),
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
 

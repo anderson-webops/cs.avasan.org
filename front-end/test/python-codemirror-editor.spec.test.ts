@@ -25,8 +25,19 @@ function completionMatchBefore(doc: string, pos: number, expression: RegExp) {
 }
 
 describe("python IDE CodeMirror editor", () => {
+	it("keeps the route page as a lightweight async workspace wrapper", () => {
+		const routeSource = sourceFile("../src/pages/python-ide.vue");
+
+		expect(routeSource).toContain("defineAsyncComponent");
+		expect(routeSource).toContain(
+			"() => import(\"@/components/PythonIdeWorkspace.vue\")"
+		);
+		expect(routeSource).not.toContain("new EditorView");
+		expect(routeSource).not.toContain("loadPythonIdeRuntime");
+	});
+
 	it("mounts CodeMirror instead of the old textarea highlight overlay", () => {
-		const pageSource = sourceFile("../src/pages/python-ide.vue");
+		const pageSource = sourceFile("../src/components/PythonIdeWorkspace.vue");
 
 		expect(pageSource).toContain("createPythonCodeMirrorExtensions");
 		expect(pageSource).toContain("new EditorView");
@@ -39,7 +50,7 @@ describe("python IDE CodeMirror editor", () => {
 
 	it("enables Python parsing and typical IDE editing behavior", () => {
 		const editorSource = sourceFile("../src/modules/pythonCodeMirror.ts");
-		const pageSource = sourceFile("../src/pages/python-ide.vue");
+		const pageSource = sourceFile("../src/components/PythonIdeWorkspace.vue");
 
 		expect(editorSource).toContain("basicSetup");
 		expect(editorSource).toContain("python()");
@@ -69,7 +80,7 @@ describe("python IDE CodeMirror editor", () => {
 	});
 
 	it("surfaces the built-in editor shortcuts in the IDE chrome", () => {
-		const pageSource = sourceFile("../src/pages/python-ide.vue");
+		const pageSource = sourceFile("../src/components/PythonIdeWorkspace.vue");
 
 		expect(pageSource).toContain("class=\"editor-shortcuts\"");
 		expect(pageSource).toContain("Cmd/Ctrl+F opens search.");
@@ -85,7 +96,7 @@ describe("python IDE CodeMirror editor", () => {
 	});
 
 	it("offers course-runtime completions by immutable project mode", () => {
-		const pageSource = sourceFile("../src/pages/python-ide.vue");
+		const pageSource = sourceFile("../src/components/PythonIdeWorkspace.vue");
 		const toolbarSource =
 			pageSource.match(
 				/class="editor-toolbar"[\s\S]*?<div class="ide-grid">/

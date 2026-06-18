@@ -24,6 +24,7 @@ declare module 'vue' {
     LearnerSessionTools: typeof import('./components/LearnerSessionTools.vue')['default']
     ProfileDetailsCard: typeof import('./components/ProfileDetailsCard.vue')['default']
     ProfileFields: typeof import('./components/ProfileFields.vue')['default']
+    PythonIdeWorkspace: typeof import('./components/PythonIdeWorkspace.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TheFooter: typeof import('./components/TheFooter.vue')['default']

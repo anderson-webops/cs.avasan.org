@@ -11,6 +11,8 @@ const PYODIDE_INDEX_URL = `https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSION}/
 const PYODIDE_SCRIPT_SRC = `${PYODIDE_INDEX_URL}pyodide.js`;
 const PYODIDE_CDN_ORIGIN = "https://cdn.jsdelivr.net";
 const PROJECT_ROOT = "/home/pyodide/classes_project";
+const PYTHON_IDE_RUNTIME_BOOTSTRAP_VERSION =
+	"2026-06-18-name-mangling-cache-bust";
 const PYTHON_EXTENSION_RE = /\.py$/i;
 const FROM_IMPORT_MODULE_RE =
 	/^from\s+([A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)\s+import\b/;
@@ -445,6 +447,7 @@ import time as __classes_time
 from pathlib import Path as __ClassesPath
 __classes_input_values = iter(__import__("json").loads(${escapePythonString(JSON.stringify(inputLines))}))
 __classes_python_ide_mode = ${escapePythonString(mode)}
+__classes_runtime_bootstrap_version = ${escapePythonString(PYTHON_IDE_RUNTIME_BOOTSTRAP_VERSION)}
 __classes_project_root = __ClassesPath(${escapePythonString(PROJECT_ROOT)})
 __classes_project_root_resolved = __classes_project_root.resolve()
 __classes_reserved_import_roots = set(
