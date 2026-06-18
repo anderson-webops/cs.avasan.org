@@ -876,7 +876,7 @@ The check-in should show that only one branch of an \`if\`/\`elif\`/\`else\` cha
 					title: "Check-In #3: Additional Practice Project",
 					content: `Create a simple target game with a spinning turtle, a randomly placed goal, and a spacebar-controlled launch mechanic. The player should wait for the turtle to face a useful direction, press space, and see whether the launch reaches the target.
 
-Use conditionals or collision checks to decide whether the launch succeeds. The finished project should include a clear reset or replay path so the game can be tested several times without restarting the whole program.`,
+Use conditionals or collision checks to decide whether the launch succeeds. Include a clear reset or replay path so the game can be tested several times without restarting the whole program.`,
 					solutionLink:
 						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS-Check-in-2-Practice-Project"
 				}

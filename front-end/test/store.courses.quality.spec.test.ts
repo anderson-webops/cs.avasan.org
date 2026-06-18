@@ -727,6 +727,13 @@ describe("course text quality normalization", () => {
 		expect(corpus).not.toMatch(
 			/same core idea with a different input, constraint, or edge case/i
 		);
+		expect(corpus).not.toMatch(/\*\*Use this section:\*\*/i);
+		expect(corpus).not.toMatch(/\bComplete an extension project:/i);
+		expect(corpus).not.toMatch(/\bThe finished project should\b/i);
+		expect(corpus).not.toMatch(
+			/\bThis module focuses on (?:turning|using|diagnosing|connecting|combining|organizing|mapping)\b/i
+		);
+		expect(corpus).not.toMatch(/\bThe work should make\b/i);
 		expect(corpus).not.toMatch(/content:\s*""/);
 	});
 
@@ -1676,7 +1683,7 @@ describe("course text quality normalization", () => {
 			?.curriculum.find(item => item.title === "Core Concepts");
 		expect(scratchBridge).toBeDefined();
 		expect(scratchBridge!.content).toContain(
-			"This module connects Scratch blocks to text-code ideas"
+			"Scratch blocks can be translated into text-code ideas"
 		);
 		expect(scratchBridge!.content).not.toMatch(/\bconnectings\b/i);
 
@@ -1687,7 +1694,7 @@ describe("course text quality normalization", () => {
 			?.curriculum.find(item => item.title === "Core Concepts");
 		expect(scratchLevel2Bridge).toBeDefined();
 		expect(scratchLevel2Bridge!.content).toContain(
-			"This module maps advanced Scratch concepts to Python readiness"
+			"Advanced Scratch concepts map directly to Python readiness"
 		);
 		expect(scratchLevel2Bridge!.content).not.toMatch(/\bmappings\b/i);
 

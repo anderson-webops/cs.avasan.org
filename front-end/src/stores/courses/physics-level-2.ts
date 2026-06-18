@@ -480,7 +480,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Extension Project: Motion Model Comparison",
 					content:
-						"Complete an extension project: motion-model comparison with ideal and corrected graphs. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
+						"Compare an ideal motion model with a corrected model for drag, friction, nonconstant acceleration, or measurement noise. Include both graphs, explain what changed physically, and state which model is useful for prediction versus explanation."
 				}
 			]
 		},
@@ -532,7 +532,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Extension Project: Measurement Audit",
 					content:
-						"Complete an extension project: measurement audit with uncertainty and revised conclusion. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
+						"Audit a measurement set by identifying precision, possible systematic bias, residuals, and the meaning of the fitted slope or trend. Revise the conclusion so it names what the data supports, what remains uncertain, and what additional measurement would help most."
 				}
 			]
 		},
@@ -584,7 +584,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Extension Project: Connected System Constraint Map",
 					content:
-						"Complete an extension project: constraint map for a real connected mechanical system. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
+						"Map a connected mechanical system such as linked carts, pulley masses, an elevator setup, or a hinged structure. Label the shared constraints, forces, assumed ideal parts, and one failure mode where the simplified constraint model would break."
 				}
 			]
 		},
@@ -636,7 +636,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Extension Project: Fluid System Case Study",
 					content:
-						"Complete an extension project: fluid-system case study with assumptions and limitation. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
+						"Analyze a fluid-system case such as a pipe, nozzle, duct, blood-vessel analogy, simplified wing, or water-slide segment. Identify the continuum assumption, flow or pressure variables, evidence source, and one reason the model may not transfer to a turbulent or real-material case."
 				}
 			]
 		},
@@ -688,7 +688,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Extension Project: Engine or Refrigerator Audit",
 					content:
-						"Complete an extension project: engine or refrigerator audit with useful-output definition. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
+						"Audit an engine, refrigerator, heat pump, or power-plant cycle by defining useful output before calculating or comparing efficiency. Include an energy-flow diagram, identify heat and work directions, and explain one unavoidable loss or irreversibility."
 				}
 			]
 		},
@@ -740,7 +740,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Extension Project: Sensor System Proposal",
 					content:
-						"Complete an extension project: sensor-system proposal with calibration and noise plan. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
+						"Design a sensor-system proposal that names the physical quantity, transducer, calibration method, noise source, and filtering or averaging plan. Include a sample signal sketch and one test that would show whether the sensor is trustworthy."
 				}
 			]
 		},
@@ -792,7 +792,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Extension Project: Relativity Explainer",
 					content:
-						"Complete an extension project: relativity explainer that compares classical expectation with correction. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
+						"Create a relativity explainer that starts with the classical expectation, then shows why a frame-aware correction is needed. Use an event diagram, timing comparison, or GPS-style example and clearly mark the speed or precision conditions where the correction matters."
 				}
 			]
 		},
@@ -844,7 +844,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Extension Project: Independent Physics Portfolio",
 					content:
-						"Complete an extension project: independent portfolio with question, model, evidence, graph, conclusion, and limitation. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
+						"Build an independent physics portfolio with a focused question, chosen model, evidence source, graph or diagram, conclusion, and limitation. The final revision should show how the evidence changed the claim or narrowed the scope."
 				}
 			]
 		}

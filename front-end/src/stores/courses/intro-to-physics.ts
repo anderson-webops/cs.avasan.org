@@ -416,7 +416,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Extension Project: Impact Safety Brief",
 					content:
-						"Complete an extension project: helmet, bumper, or sports-impact safety brief. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
+						"Create a helmet, bumper, or sports-impact safety brief. Use an impulse or energy model to explain how the design changes force, time, distance, or energy transfer; include a diagram, one calculation or evidence-based comparison, and one limitation of the model."
 				}
 			]
 		},
@@ -468,7 +468,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Extension Project: Rotation and Torque Audit",
 					content:
-						"Complete an extension project: everyday rotation audit with a pivot and torque diagram. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
+						"Create an everyday rotation audit for a door, wrench, seesaw, balance tool, or similar object. Identify the pivot, force direction, lever arm, and torque direction; include a labeled diagram, one numeric or proportional comparison, and one assumption that affects the conclusion."
 				}
 			]
 		},
@@ -520,7 +520,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Extension Project: Boat Shape and Buoyancy Design",
 					content:
-						"Complete an extension project: boat-shape design with density and displacement explanation. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
+						"Design a boat-shape explanation that connects density, displaced fluid, and floating or sinking. Include a cross-section or side-view model, a mass-volume or displacement comparison, and a short note about what the simplified model ignores."
 				}
 			]
 		},
@@ -572,7 +572,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Extension Project: Thermal Design Memo",
 					content:
-						"Complete an extension project: thermal design memo for cooling, warming, or reducing heat loss. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
+						"Write a thermal design memo for cooling, warming, insulation, or reducing heat loss. Separate temperature from total thermal energy, identify the heat-transfer path, and include a diagram or table plus one revision that would improve the design."
 				}
 			]
 		},
@@ -624,7 +624,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Extension Project: Optical Device Explainer",
 					content:
-						"Complete an extension project: optical-device explainer with ray diagram and design constraint. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
+						"Explain an optical device such as glasses, a mirror, a camera, a telescope, or a projector. Use a ray diagram to show reflection or refraction, name the design constraint, and state which parts of the real device the simplified ray model does not capture."
 				}
 			]
 		},
@@ -676,7 +676,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Extension Project: Electromagnetic Device Brief",
 					content:
-						"Complete an extension project: electromagnetic device brief with energy transformation. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
+						"Create an electromagnetic device brief for a speaker, generator, motor, relay, or charger. Trace the energy transformation, identify the role of current and magnetic field, and include one piece of evidence that distinguishes the model from a purely mechanical explanation."
 				}
 			]
 		},
@@ -728,7 +728,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Extension Project: Resonance Case Study",
 					content:
-						"Complete an extension project: resonance case study from music, engineering, medicine, or electronics. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
+						"Build a resonance case study from music, engineering, medicine, or electronics. Identify the system, natural frequency or driving pattern, what increases the response, and what damping or design choice controls the effect."
 				}
 			]
 		},
@@ -780,7 +780,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Extension Project: Mission Planning Sketch",
 					content:
-						"Complete an extension project: mission-planning sketch with gravity and orbit constraints. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
+						"Create a mission-planning sketch that uses gravity and orbit constraints. Show the central body, path, velocity direction, and force direction; explain why orbiting is not the same as escaping gravity, and identify one missing real-world complication."
 				}
 			]
 		},
@@ -832,7 +832,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Extension Project: Modern Physics Explainer",
 					content:
-						"Complete an extension project: modern-physics explainer that names the old model and its limit. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
+						"Write a modern-physics explainer that names a classical model, the evidence that strains it, and the newer idea that handles the case better. Include a diagram, spectrum, data snippet, or device example and one caution about oversimplifying the topic."
 				}
 			]
 		},
@@ -884,7 +884,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Extension Project: Final Physics Portfolio",
 					content:
-						"Complete an extension project: final physics design portfolio with revision based on evidence. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
+						"Build a final physics design portfolio around one question, model, evidence source, and revision. The portfolio should include a diagram or graph, a calculation or data-based comparison, a stated limitation, and a final paragraph explaining how the evidence changed the design."
 				}
 			]
 		}

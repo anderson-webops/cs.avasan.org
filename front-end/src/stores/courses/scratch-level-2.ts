@@ -745,7 +745,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Concept Path",
 					content:
-						"This module focuses on combining cloning, lists, functions, broadcasts, and complex conditionals into a reusable arcade-game structure. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
+						"An arcade system depends on reusable structure: clone creation, list-backed state, custom blocks, broadcasts, and conditionals should work together instead of living in separate one-off scripts. The project should make spawn rules, collisions, scoring, levels, and game-over cleanup traceable from the green flag."
 				},
 				{
 					title: "Design and Planning Map",
@@ -755,7 +755,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Build Requirements",
 					content:
-						"Build around spawn rules, collision rules, level progression, score state, difficulty changes, and game-over cleanup. The finished project should have visible behavior that can be tested from the green flag, not only isolated scripts that work one at a time."
+						"Build spawn rules, collision rules, level progression, score state, difficulty changes, and game-over cleanup. Test the full game loop from green flag to restart so the systems can be inspected together."
 				},
 				{
 					title: "Debugging and Test Pass",
@@ -782,7 +782,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Extension Project: Arcade Systems Game",
 					content:
-						"Complete an extension project: arcade game with reusable reset, spawn, scoring, and level systems. Include one new feature, one cleanup/refactor step, and one explanation of why the added behavior fits the original project."
+						"Create an arcade game with reusable reset, spawn, scoring, and level systems. Add one feature, clean up one repeated script pattern, and explain how the systems cooperate."
 				}
 			]
 		},
@@ -792,7 +792,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Concept Path",
 					content:
-						"This module focuses on using Scratch lists and variables to model changing systems and display data over time. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
+						"A Scratch simulation uses variables and lists to represent a changing system over time. The important pieces are the starting values, repeated update rule, random or user-controlled event, visible display, and summary result that explains what happened."
 				},
 				{
 					title: "Design and Planning Map",
@@ -802,7 +802,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Build Requirements",
 					content:
-						"Build around population changes, resource collection, random events, graph-like list displays, and repeated trials. The finished project should have visible behavior that can be tested from the green flag, not only isolated scripts that work one at a time."
+						"Build population changes, resource collection, random events, graph-like list displays, and repeated trials. Run multiple trials from the green flag and compare how the data changes."
 				},
 				{
 					title: "Debugging and Test Pass",
@@ -829,7 +829,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Extension Project: Interactive Data Simulation",
 					content:
-						"Complete an extension project: interactive simulation with visible data, summary statistic, and explanation of randomness. Include one new feature, one cleanup/refactor step, and one explanation of why the added behavior fits the original project."
+						"Create an interactive simulation with visible data, a summary statistic, and an explanation of randomness. Add one feature, clean up one repeated update rule, and explain what the data shows."
 				}
 			]
 		},
@@ -839,7 +839,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Concept Path",
 					content:
-						"This module focuses on organizing larger Scratch projects with named custom blocks, consistent broadcasts, reset scripts, and testable subsystems. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
+						"Larger Scratch projects need organization before they become difficult to debug. Named custom blocks, consistent broadcasts, reset scripts, and small subsystems make it possible to explain what starts the project, what changes state, what repeats, and what ends or advances the experience."
 				},
 				{
 					title: "Design and Planning Map",
@@ -849,7 +849,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Build Requirements",
 					content:
-						"Build around duplicated scripts, unclear message names, stale variable state, hidden clones, and functions that do too many things. The finished project should have visible behavior that can be tested from the green flag, not only isolated scripts that work one at a time."
+						"Repair duplicated scripts, unclear message names, stale variable state, hidden clones, and custom blocks that do too many things. Test each subsystem separately, then test the whole project from the green flag."
 				},
 				{
 					title: "Debugging and Test Pass",
@@ -876,7 +876,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Extension Project: Refactored Scratch Project",
 					content:
-						"Complete an extension project: refactored Scratch project with a before-and-after explanation. Include one new feature, one cleanup/refactor step, and one explanation of why the added behavior fits the original project."
+						"Create a refactored Scratch project with a before-and-after explanation. Add one feature only after the cleanup is complete, and explain why the refactor makes the project easier to test."
 				}
 			]
 		},
@@ -886,7 +886,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Concept Path",
 					content:
-						"This module focuses on mapping advanced Scratch concepts to Python readiness: lists, functions, parameters, loops, conditionals, state, and debugging traces. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
+						"Advanced Scratch concepts map directly to Python readiness: lists store collections, custom blocks behave like functions, inputs resemble parameters, loops repeat actions, conditionals branch, and variables preserve state. The goal is to explain a Scratch system in text-code terms without losing how the original project behaves."
 				},
 				{
 					title: "Design and Planning Map",
@@ -896,7 +896,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Build Requirements",
 					content:
-						"Build around Scratch custom blocks translated to functions, list operations translated to Python lists, and broadcasts translated to function calls or state changes. The finished project should have visible behavior that can be tested from the green flag, not only isolated scripts that work one at a time."
+						"Translate Scratch custom blocks into functions, list operations into Python-style list work, and broadcasts into function calls or state changes. Include a trace showing how one Scratch event becomes a text-code sequence."
 				},
 				{
 					title: "Debugging and Test Pass",
@@ -923,7 +923,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Extension Project: Scratch-to-Python Bridge Portfolio",
 					content:
-						"Complete an extension project: bridge portfolio that translates one Scratch game mechanic into pseudocode and Python-style code. Include one new feature, one cleanup/refactor step, and one explanation of why the added behavior fits the original project."
+						"Create a bridge portfolio that translates one Scratch game mechanic into pseudocode and Python-style code. Include the original Scratch behavior, the translated steps, and one explanation of what was easier or harder to express in text."
 				}
 			]
 		}
