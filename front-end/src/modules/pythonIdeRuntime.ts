@@ -1659,8 +1659,100 @@ class Rect:
         inflated.inflate_ip(width, height)
         return inflated
 
+    def scale_by(self, *args):
+        scaled = self.copy()
+        scaled.scale_by_ip(*args)
+        return scaled
+
+    def scale_by_ip(self, *args):
+        if len(args) == 1:
+            scale_x = _number(args[0], 1)
+            scale_y = scale_x
+        elif len(args) == 2:
+            scale_x = _number(args[0], 1)
+            scale_y = _number(args[1], 1)
+        else:
+            raise TypeError("scale_by expects scalar or (scale_x, scale_y).")
+        old_center = self.center
+        self.width *= scale_x
+        self.height *= scale_y
+        self.center = old_center
+        return None
+
     def update(self, *args):
         self.x, self.y, self.width, self.height = _rect_parts_from_args(args)
+        return None
+
+    def clamp(self, other):
+        clamped = self.copy()
+        clamped.clamp_ip(other)
+        return clamped
+
+    def clamp_ip(self, other):
+        outer = Rect(other)
+        if self.width >= outer.width:
+            self.centerx = outer.centerx
+        elif self.left < outer.left:
+            self.left = outer.left
+        elif self.right > outer.right:
+            self.right = outer.right
+
+        if self.height >= outer.height:
+            self.centery = outer.centery
+        elif self.top < outer.top:
+            self.top = outer.top
+        elif self.bottom > outer.bottom:
+            self.bottom = outer.bottom
+        return None
+
+    def clip(self, other):
+        other_rect = Rect(other)
+        left = max(self.left, other_rect.left)
+        top = max(self.top, other_rect.top)
+        right = min(self.right, other_rect.right)
+        bottom = min(self.bottom, other_rect.bottom)
+        if right <= left or bottom <= top:
+            return Rect(left, top, 0, 0)
+        return Rect(left, top, right - left, bottom - top)
+
+    def union(self, other):
+        other_rect = Rect(other)
+        left = min(self.left, other_rect.left)
+        top = min(self.top, other_rect.top)
+        right = max(self.right, other_rect.right)
+        bottom = max(self.bottom, other_rect.bottom)
+        return Rect(left, top, right - left, bottom - top)
+
+    def union_ip(self, other):
+        self.update(self.union(other))
+        return None
+
+    def unionall(self, rects):
+        unioned = self.copy()
+        for rect in rects:
+            unioned.union_ip(rect)
+        return unioned
+
+    def unionall_ip(self, rects):
+        self.update(self.unionall(rects))
+        return None
+
+    def fit(self, other):
+        outer = Rect(other)
+        if self.width <= 0 or self.height <= 0 or outer.width <= 0 or outer.height <= 0:
+            return Rect(outer.x, outer.y, 0, 0)
+        scale = min(outer.width / self.width, outer.height / self.height)
+        fitted = Rect(0, 0, self.width * scale, self.height * scale)
+        fitted.center = outer.center
+        return fitted
+
+    def normalize(self):
+        if self.width < 0:
+            self.x += self.width
+            self.width = -self.width
+        if self.height < 0:
+            self.y += self.height
+            self.height = -self.height
         return None
 
     def collidepoint(self, *args):

@@ -1363,7 +1363,26 @@ describe("python IDE project helpers", () => {
 			"return iter((self.x, self.y, self.width, self.height))"
 		);
 		expect(runtimeSource).toContain("def __getitem__(self, index):");
+		expect(runtimeSource).toContain("def scale_by(self, *args):");
+		expect(runtimeSource).toContain("def scale_by_ip(self, *args):");
 		expect(runtimeSource).toContain("def update(self, *args):");
+		expect(runtimeSource).toContain("def clamp(self, other):");
+		expect(runtimeSource).toContain("def clamp_ip(self, other):");
+		expect(runtimeSource).toContain("self.centerx = outer.centerx");
+		expect(runtimeSource).toContain("def clip(self, other):");
+		expect(runtimeSource).toContain(
+			"return Rect(left, top, right - left, bottom - top)"
+		);
+		expect(runtimeSource).toContain("def union(self, other):");
+		expect(runtimeSource).toContain("def union_ip(self, other):");
+		expect(runtimeSource).toContain("def unionall(self, rects):");
+		expect(runtimeSource).toContain("def unionall_ip(self, rects):");
+		expect(runtimeSource).toContain("def fit(self, other):");
+		expect(runtimeSource).toContain(
+			"scale = min(outer.width / self.width, outer.height / self.height)"
+		);
+		expect(runtimeSource).toContain("def normalize(self):");
+		expect(runtimeSource).toContain("self.width = -self.width");
 		expect(runtimeSource).toContain("def _point_from_args(args):");
 		expect(runtimeSource).toContain("def collidepoint(self, *args):");
 		expect(runtimeSource).toContain(

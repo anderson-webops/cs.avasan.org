@@ -150,6 +150,21 @@ describe("python IDE CodeMirror editor", () => {
 			])
 		);
 		expect(
+			pythonIdeCompletionsForMode("pgzero", "rect").map(
+				option => option.label
+			)
+		).toEqual(
+			expect.arrayContaining([
+				"clamp",
+				"clip",
+				"collidelist",
+				"fit",
+				"normalize",
+				"scale_by",
+				"unionall"
+			])
+		);
+		expect(
 			pythonIdeCompletionsForMode("turtle", "screen").map(
 				option => option.label
 			)

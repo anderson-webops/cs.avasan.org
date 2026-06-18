@@ -243,7 +243,8 @@ const sharedMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
 			"distance to another actor or point"
 		),
 		completion("angle_to", "method", "angle to another actor or point")
-	]
+	],
+	Rect: rectMemberCompletions()
 };
 
 const turtleMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
@@ -273,8 +274,11 @@ const turtleMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
 
 const pgzeroMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
 	actor: actorMemberCompletions(),
+	bounds: rectMemberCompletions(),
 	enemy: actorMemberCompletions(),
+	hitbox: rectMemberCompletions(),
 	player: actorMemberCompletions(),
+	rect: rectMemberCompletions(),
 	clock: [
 		completion("schedule", "method", "run once after a delay"),
 		completion("schedule_unique", "method", "replace a scheduled callback"),
@@ -672,6 +676,47 @@ function turtlePenCompletions() {
 
 function actorMemberCompletions() {
 	return sharedMemberCompletions.Actor ?? [];
+}
+
+function rectMemberCompletions() {
+	return [
+		completion("copy", "method", "copy the rectangle"),
+		completion("move", "method", "return a moved rectangle"),
+		completion("move_ip", "method", "move the rectangle in place"),
+		completion("inflate", "method", "return a resized rectangle"),
+		completion("inflate_ip", "method", "resize the rectangle in place"),
+		completion("scale_by", "method", "return a scaled rectangle"),
+		completion("scale_by_ip", "method", "scale the rectangle in place"),
+		completion("update", "method", "replace position and size"),
+		completion("clamp", "method", "move inside another rectangle"),
+		completion(
+			"clamp_ip",
+			"method",
+			"move inside another rectangle in place"
+		),
+		completion("clip", "method", "return overlapping area"),
+		completion("union", "method", "return rectangle covering both"),
+		completion("union_ip", "method", "cover both rectangles in place"),
+		completion("unionall", "method", "cover a sequence of rectangles"),
+		completion("unionall_ip", "method", "cover many rectangles in place"),
+		completion(
+			"fit",
+			"method",
+			"scale proportionally into another rectangle"
+		),
+		completion("normalize", "method", "fix negative width or height"),
+		completion("contains", "method", "test containment"),
+		completion("collidepoint", "method", "test point collision"),
+		completion("colliderect", "method", "test rectangle collision"),
+		completion("collidelist", "method", "first collision in a list"),
+		completion(
+			"collidelistall",
+			"method",
+			"all collision indexes in a list"
+		),
+		completion("collidedict", "method", "first collision in a dictionary"),
+		completion("collidedictall", "method", "all collisions in a dictionary")
+	];
 }
 
 function runtimeCompletionsForMode(mode: PythonIdeMode = "python") {
