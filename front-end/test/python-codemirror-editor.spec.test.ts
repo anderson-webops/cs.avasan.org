@@ -63,6 +63,23 @@ describe("python IDE CodeMirror editor", () => {
 	});
 
 	it("offers course-runtime completions by immutable project mode", () => {
+		const pageSource = sourceFile("../src/pages/python-ide.vue");
+		const toolbarSource =
+			pageSource.match(
+				/class="editor-toolbar"[\s\S]*?<div class="ide-grid">/
+			)?.[0] ?? "";
+		const createMenuSource =
+			pageSource.match(
+				/class="project-create-menu"[\s\S]*?<div class="project-list">/
+			)?.[0] ?? "";
+
+		expect(toolbarSource).not.toContain("<select");
+		expect(toolbarSource).not.toContain("selectedProject.mode");
+		expect(createMenuSource).toContain("createProjectFromMenu('python')");
+		expect(createMenuSource).toContain("createProjectFromMenu('data')");
+		expect(createMenuSource).toContain("createProjectFromMenu('turtle')");
+		expect(createMenuSource).toContain("createProjectFromMenu('pgzero')");
+
 		expect(
 			pythonIdeCompletionsForMode("pgzero").map(option => option.label)
 		).toEqual(
