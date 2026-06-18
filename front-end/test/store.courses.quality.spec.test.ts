@@ -11,6 +11,7 @@ import {
 const COURSE_SWEEP_TIMEOUT = 180000;
 
 function allCourseText(course: Awaited<ReturnType<typeof loadRawCourse>>) {
+	expect(course).not.toBeNull();
 	if (!course) return "";
 
 	return course.modules
@@ -143,9 +144,34 @@ function stripLinksFromSource(source: string) {
 	return source.replace(/https?:\/\/[^"',\s)]+/g, "");
 }
 
+function literalCourseIdsLoadedByTests() {
+	return fs
+		.readdirSync("test")
+		.filter(file => file.endsWith(".ts"))
+		.flatMap(file => {
+			const source = fs.readFileSync(`test/${file}`, "utf8");
+
+			return [...source.matchAll(/loadRawCourse\("([^"]+)"\)/g)].map(
+				match => ({
+					file,
+					id: match[1]
+				})
+			);
+		});
+}
+
 describe("course text quality normalization", () => {
 	beforeEach(() => {
 		setActivePinia(createPinia());
+	});
+
+	it("keeps literal course IDs in course tests aligned with the catalog", () => {
+		const catalogIds = new Set(courseCatalog.map(entry => entry.id));
+		const unknownIds = literalCourseIdsLoadedByTests()
+			.filter(reference => !catalogIds.has(reference.id))
+			.map(reference => `${reference.file}: ${reference.id}`);
+
+		expect(unknownIds).toEqual([]);
 	});
 
 	it(
@@ -623,7 +649,7 @@ describe("course text quality normalization", () => {
 
 	it("does not treat console input/output lessons as file parsing work", async () => {
 		const courses = await Promise.all([
-			loadRawCourse("java-level-1-java-superstar"),
+			loadRawCourse("java-level-1"),
 			loadRawCourse("ap-computer-science-a"),
 			loadRawCourse("c-level-1")
 		]);
