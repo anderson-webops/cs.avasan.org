@@ -23,6 +23,7 @@ const openingBracketToClosingBracket: Record<string, string> = {
 	"[": "]",
 	"{": "}"
 };
+const intelligentClosingTokens = [")", "]", "}", "'", '"', "`"];
 const pythonIndentText = "    ";
 const lineLeadingWhitespaceRegex = /^[\t ]*/;
 const closingBrackets = new Set(Object.values(openingBracketToClosingBracket));
@@ -153,6 +154,12 @@ const pythonNewlineKeymap = keymap.of([
 		run: insertPythonNewlineAndIndent
 	}
 ]);
+const closingTokenSkipKeymap = keymap.of(
+	intelligentClosingTokens.map(token => ({
+		key: token,
+		run: (view: EditorView) => skipExistingClosingToken(view, token)
+	}))
+);
 
 class BracketPairColorPlugin {
 	decorations: DecorationSet;
@@ -210,6 +217,7 @@ export function createPythonCodeMirrorExtensions(
 		pythonEditorTheme,
 		syntaxHighlighting(pythonHighlightStyle),
 		bracketPairColorExtension,
+		Prec.highest(closingTokenSkipKeymap),
 		Prec.highest(pythonNewlineKeymap),
 		Prec.highest(keymap.of([indentWithTab])),
 		Prec.high(wrapSelectionKeymap),
@@ -237,6 +245,29 @@ export function createPythonCodeMirrorExtensions(
 				options.onChange(update.state.doc.toString());
 		})
 	];
+}
+
+export function canSkipExistingClosingToken(state: EditorState, token: string) {
+	return state.selection.ranges.every(
+		range =>
+			range.empty &&
+			state.sliceDoc(range.from, range.from + token.length) === token
+	);
+}
+
+function skipExistingClosingToken(view: EditorView, token: string) {
+	if (!canSkipExistingClosingToken(view.state, token)) return false;
+
+	view.dispatch({
+		selection: EditorSelection.create(
+			view.state.selection.ranges.map(range =>
+				EditorSelection.cursor(range.from + token.length)
+			),
+			view.state.selection.mainIndex
+		),
+		scrollIntoView: true
+	});
+	return true;
 }
 
 export function pythonNewlineIndentText(state: EditorState, position: number) {

@@ -1,8 +1,11 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { EditorState } from "@codemirror/state";
+import { EditorSelection, EditorState } from "@codemirror/state";
 import { describe, expect, it } from "vitest";
-import { pythonNewlineIndentText } from "../src/modules/pythonCodeMirror";
+import {
+	canSkipExistingClosingToken,
+	pythonNewlineIndentText
+} from "../src/modules/pythonCodeMirror";
 
 function sourceFile(path: string) {
 	return readFileSync(resolve(__dirname, path), "utf8");
@@ -30,9 +33,97 @@ describe("python IDE CodeMirror editor", () => {
 		expect(editorSource).toContain("EditorState.allowMultipleSelections");
 		expect(editorSource).toContain("insertPythonNewlineAndIndent");
 		expect(editorSource).toContain("wrapSelection");
+		expect(editorSource).toContain("closingTokenSkipKeymap");
+		expect(editorSource).toContain("canSkipExistingClosingToken");
 		expect(editorSource).toContain("syntaxHighlighting");
 		expect(editorSource).toContain("BracketPairColorPlugin");
 		expect(editorSource).toContain("cm-bracket-pair-1");
+	});
+
+	it("skips existing auto-inserted closing tokens instead of duplicating them", () => {
+		expect(
+			canSkipExistingClosingToken(
+				EditorState.create({
+					doc: "print()",
+					selection: { anchor: "print(".length }
+				}),
+				")"
+			)
+		).toBe(true);
+		expect(
+			canSkipExistingClosingToken(
+				EditorState.create({
+					doc: "items[0]",
+					selection: { anchor: "items[0".length }
+				}),
+				"]"
+			)
+		).toBe(true);
+		expect(
+			canSkipExistingClosingToken(
+				EditorState.create({
+					doc: "data = {name}",
+					selection: { anchor: "data = {name".length }
+				}),
+				"}"
+			)
+		).toBe(true);
+		expect(
+			canSkipExistingClosingToken(
+				EditorState.create({
+					doc: "\"hello\"",
+					selection: { anchor: "\"hello".length }
+				}),
+				"\""
+			)
+		).toBe(true);
+	});
+
+	it("only skips closers when every cursor is directly before the matching token", () => {
+		expect(
+			canSkipExistingClosingToken(
+				EditorState.create({
+					doc: "print(",
+					selection: { anchor: "print(".length }
+				}),
+				")"
+			)
+		).toBe(false);
+		expect(
+			canSkipExistingClosingToken(
+				EditorState.create({
+					doc: "name",
+					selection: { anchor: 0, head: 4 }
+				}),
+				"\""
+			)
+		).toBe(false);
+		expect(
+			canSkipExistingClosingToken(
+				EditorState.create({
+					doc: "() ()",
+					extensions: [EditorState.allowMultipleSelections.of(true)],
+					selection: EditorSelection.create([
+						EditorSelection.cursor(1),
+						EditorSelection.cursor(4)
+					])
+				}),
+				")"
+			)
+		).toBe(true);
+		expect(
+			canSkipExistingClosingToken(
+				EditorState.create({
+					doc: "() []",
+					extensions: [EditorState.allowMultipleSelections.of(true)],
+					selection: EditorSelection.create([
+						EditorSelection.cursor(1),
+						EditorSelection.cursor(4)
+					])
+				}),
+				")"
+			)
+		).toBe(false);
 	});
 
 	it("indents one extra Python level after a colon", () => {
