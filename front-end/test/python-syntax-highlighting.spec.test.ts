@@ -55,26 +55,26 @@ describe("python syntax highlighting", () => {
 
 	it("assigns the same color class to each matched bracket pair", () => {
 		expect(flattenedBracketPairs("print(items[0])")).toEqual([
-			["(", 1, "hsl(137.5 95% 74%)"],
-			["[", 2, "hsl(275.0 95% 74%)"],
-			["]", 2, "hsl(275.0 95% 74%)"],
-			[")", 1, "hsl(137.5 95% 74%)"]
+			["(", 1, "var(--syntax-bracket-pair-1, hsl(137.5 95% 74%))"],
+			["[", 2, "var(--syntax-bracket-pair-2, hsl(275.0 95% 74%))"],
+			["]", 2, "var(--syntax-bracket-pair-2, hsl(275.0 95% 74%))"],
+			[")", 1, "var(--syntax-bracket-pair-1, hsl(137.5 95% 74%))"]
 		]);
 	});
 
 	it("uses different pair ids for nearby sibling brackets", () => {
 		expect(flattenedBracketPairs("first = (1)\nsecond = [2]")).toEqual([
-			["(", 1, "hsl(137.5 95% 74%)"],
-			[")", 1, "hsl(137.5 95% 74%)"],
-			["[", 2, "hsl(275.0 95% 74%)"],
-			["]", 2, "hsl(275.0 95% 74%)"]
+			["(", 1, "var(--syntax-bracket-pair-1, hsl(137.5 95% 74%))"],
+			[")", 1, "var(--syntax-bracket-pair-1, hsl(137.5 95% 74%))"],
+			["[", 2, "var(--syntax-bracket-pair-2, hsl(275.0 95% 74%))"],
+			["]", 2, "var(--syntax-bracket-pair-2, hsl(275.0 95% 74%))"]
 		]);
 	});
 
 	it("does not color brackets inside strings or comments as pairs", () => {
 		expect(flattenedBracketPairs("print(']')  # (")).toEqual([
-			["(", 1, "hsl(137.5 95% 74%)"],
-			[")", 1, "hsl(137.5 95% 74%)"]
+			["(", 1, "var(--syntax-bracket-pair-1, hsl(137.5 95% 74%))"],
+			[")", 1, "var(--syntax-bracket-pair-1, hsl(137.5 95% 74%))"]
 		]);
 	});
 
@@ -89,6 +89,8 @@ describe("python syntax highlighting", () => {
 		const html = highlightPythonCodeAsHtml("print(items[0])");
 		expect(html).toContain("syntax-token--bracket-matched");
 		expect(html).toContain("syntax-token--bracket-pair-2");
-		expect(html).toContain("--syntax-bracket-color: hsl(275.0 95% 74%)");
+		expect(html).toContain(
+			"--syntax-bracket-color: var(--syntax-bracket-pair-2, hsl(275.0 95% 74%))"
+		);
 	});
 });

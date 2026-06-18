@@ -351,7 +351,8 @@ function syntaxTokenClasses(token: PythonSyntaxToken) {
 
 function bracketColorForPair(pairId: number) {
 	const hue = (pairId * bracketHueStep) % 360;
-	return `hsl(${hue.toFixed(1)} 95% 74%)`;
+	const paletteIndex = ((pairId - 1) % 6) + 1;
+	return `var(--syntax-bracket-pair-${paletteIndex}, hsl(${hue.toFixed(1)} 95% 74%))`;
 }
 
 function consumeWhile(

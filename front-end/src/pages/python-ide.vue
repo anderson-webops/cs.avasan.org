@@ -2876,6 +2876,31 @@ onBeforeUnmount(() => {
 .python-ide-page {
 	width: min(1680px, calc(100% - clamp(2rem, 4vw, 4rem)));
 	gap: 1.25rem;
+	--python-code-bg: #f8fafc;
+	--python-code-ink: #1e293b;
+	--python-code-muted: #64748b;
+	--python-code-selection: rgba(37, 99, 235, 0.18);
+	--python-code-caret: #0f172a;
+	--python-output-bg: #f8fafc;
+	--python-output-ink: #334155;
+	--python-output-muted: #64748b;
+	--python-output-stderr: #b91c1c;
+	--python-output-system: #047857;
+	--syntax-keyword: #7c3aed;
+	--syntax-builtin: #2563eb;
+	--syntax-function: #a16207;
+	--syntax-property: #1d4ed8;
+	--syntax-string: #15803d;
+	--syntax-comment: #64748b;
+	--syntax-number: #dc2626;
+	--syntax-operator: #0891b2;
+	--syntax-bracket: #334155;
+	--syntax-bracket-pair-1: #047857;
+	--syntax-bracket-pair-2: #7c3aed;
+	--syntax-bracket-pair-3: #ca8a04;
+	--syntax-bracket-pair-4: #dc2626;
+	--syntax-bracket-pair-5: #2563eb;
+	--syntax-bracket-pair-6: #0891b2;
 }
 
 .python-ide-page {
@@ -2968,6 +2993,34 @@ html.dark .python-ide-status {
 
 html.dark .python-ide-status strong {
 	color: #f8fbff;
+}
+
+html.dark .python-ide-page {
+	--python-code-bg: #07111f;
+	--python-code-ink: #d7fbe8;
+	--python-code-muted: #94a3b8;
+	--python-code-selection: rgba(59, 130, 246, 0.4);
+	--python-code-caret: #f8fbff;
+	--python-output-bg: #07111f;
+	--python-output-ink: #e2e8f0;
+	--python-output-muted: #94a3b8;
+	--python-output-stderr: #fecaca;
+	--python-output-system: #a7f3d0;
+	--syntax-keyword: #c084fc;
+	--syntax-builtin: #60a5fa;
+	--syntax-function: #fde68a;
+	--syntax-property: #93c5fd;
+	--syntax-string: #86efac;
+	--syntax-comment: #94a3b8;
+	--syntax-number: #fca5a5;
+	--syntax-operator: #67e8f9;
+	--syntax-bracket: #e2e8f0;
+	--syntax-bracket-pair-1: hsl(137.5 95% 74%);
+	--syntax-bracket-pair-2: hsl(275 95% 74%);
+	--syntax-bracket-pair-3: hsl(52.5 95% 74%);
+	--syntax-bracket-pair-4: hsl(190 95% 74%);
+	--syntax-bracket-pair-5: hsl(327.5 95% 74%);
+	--syntax-bracket-pair-6: hsl(105 95% 74%);
 }
 
 .python-ide-loading,
@@ -3535,7 +3588,7 @@ html.dark .file-delete:disabled::after {
 	position: relative;
 	min-height: 100%;
 	overflow: hidden;
-	background: #07111f;
+	background: var(--python-code-bg);
 }
 
 .code-editor-highlight,
@@ -3556,8 +3609,8 @@ html.dark .file-delete:disabled::after {
 	z-index: 0;
 	margin: 0;
 	overflow: hidden;
-	background: #07111f;
-	color: #d7fbe8;
+	background: var(--python-code-bg);
+	color: var(--python-code-ink);
 	pointer-events: none;
 }
 
@@ -3579,49 +3632,49 @@ html.dark .file-delete:disabled::after {
 	outline: 0;
 	resize: none;
 	background: transparent !important;
-	caret-color: #f8fbff;
+	caret-color: var(--python-code-caret);
 	color: transparent !important;
 	-webkit-text-fill-color: transparent !important;
 }
 
 .code-editor.code-editor::selection {
-	background: rgba(59, 130, 246, 0.4);
+	background: var(--python-code-selection);
 	color: transparent !important;
 	-webkit-text-fill-color: transparent !important;
 }
 
 :deep(.syntax-token--keyword) {
-	color: #c084fc;
+	color: var(--syntax-keyword);
 }
 
 :deep(.syntax-token--builtin) {
-	color: #60a5fa;
+	color: var(--syntax-builtin);
 }
 
 :deep(.syntax-token--function) {
-	color: #fde68a;
+	color: var(--syntax-function);
 }
 
 :deep(.syntax-token--property) {
-	color: #93c5fd;
+	color: var(--syntax-property);
 }
 
 :deep(.syntax-token--string) {
-	color: #86efac;
+	color: var(--syntax-string);
 }
 
 :deep(.syntax-token--comment) {
-	color: #94a3b8;
+	color: var(--syntax-comment);
 	font-style: italic;
 }
 
 :deep(.syntax-token--number) {
-	color: #fca5a5;
+	color: var(--syntax-number);
 }
 
 :deep(.syntax-token--operator),
 :deep(.syntax-token--decorator) {
-	color: #67e8f9;
+	color: var(--syntax-operator);
 }
 
 :deep(.syntax-token--bracket) {
@@ -3629,20 +3682,11 @@ html.dark .file-delete:disabled::after {
 }
 
 :deep(.syntax-token--bracket-unmatched) {
-	color: #e2e8f0;
+	color: var(--syntax-bracket);
 }
 
 :deep(.syntax-token--bracket-matched) {
-	color: var(--syntax-bracket-color, #e2e8f0);
-}
-
-html:not(.dark) .code-editor-shell,
-html:not(.dark) .code-editor-highlight {
-	background: #0b1220;
-}
-
-html:not(.dark) .code-editor.code-editor {
-	caret-color: #eff6ff;
+	color: var(--syntax-bracket-color, var(--syntax-bracket));
 }
 
 .asset-file-preview {
@@ -3651,8 +3695,8 @@ html:not(.dark) .code-editor.code-editor {
 	place-items: center;
 	gap: 1rem;
 	padding: 1.25rem;
-	background: #07111f;
-	color: #d7fbe8;
+	background: var(--python-code-bg);
+	color: var(--python-code-ink);
 	text-align: center;
 }
 
@@ -3667,7 +3711,7 @@ html:not(.dark) .code-editor.code-editor {
 }
 
 .asset-file-preview p {
-	color: #b7d4c6;
+	color: var(--python-code-muted);
 	font-size: 0.9rem;
 	font-weight: 700;
 }
@@ -3776,12 +3820,12 @@ html:not(.dark) .code-editor.code-editor {
 	min-height: 0;
 	overflow: auto;
 	padding: 1rem;
-	background: #07111f;
-	color: #e2e8f0;
+	background: var(--python-output-bg);
+	color: var(--python-output-ink);
 }
 
 .empty-output {
-	color: #94a3b8;
+	color: var(--python-output-muted);
 	font-family:
 		"SFMono-Regular", "Cascadia Code", "Liberation Mono", monospace;
 	font-size: 0.9rem;
@@ -3797,11 +3841,11 @@ html:not(.dark) .code-editor.code-editor {
 }
 
 .output-line--stderr {
-	color: #fecaca;
+	color: var(--python-output-stderr);
 }
 
 .output-line--system {
-	color: #a7f3d0;
+	color: var(--python-output-system);
 }
 
 @media (max-width: 1180px) {
