@@ -48,7 +48,8 @@ import {
 } from "../src/modules/pythonIdeCourseAssets";
 import {
 	pythonIdeImportedTopLevelModules,
-	pythonIdeProjectModuleNames
+	pythonIdeProjectModuleNames,
+	warmPythonRuntime
 } from "../src/modules/pythonIdeRuntime";
 
 const oneByOnePngBytes = new Uint8Array([
@@ -101,6 +102,14 @@ describe("python IDE project helpers", () => {
 	});
 
 	afterEach(() => {
+		document.head
+			.querySelectorAll('link[href*="cdn.jsdelivr.net/pyodide"]')
+			.forEach(element => element.remove());
+		document.head
+			.querySelectorAll(
+				'link[href="//cdn.jsdelivr.net"], link[href="https://cdn.jsdelivr.net"]'
+			)
+			.forEach(element => element.remove());
 		vi.unstubAllGlobals();
 	});
 
@@ -181,6 +190,24 @@ describe("python IDE project helpers", () => {
 		expect(project.files[0]?.content).toContain("HEIGHT = 400");
 		expect(project.files[0]?.content).not.toContain("Actor(");
 		expect(project.files[0]?.content).not.toContain("pgzrun.go()");
+	});
+
+	it("preloads the Pyodide runtime script when warming the IDE", () => {
+		warmPythonRuntime();
+		warmPythonRuntime();
+
+		const preloadSelector =
+			'link[rel="preload"][as="script"][href="https://cdn.jsdelivr.net/pyodide/v314.0.0/full/pyodide.js"]';
+		const preload = document.head.querySelector(preloadSelector);
+
+		expect(preload).not.toBeNull();
+		expect(preload?.getAttribute("crossorigin")).toBe("anonymous");
+		expect(document.head.querySelectorAll(preloadSelector)).toHaveLength(1);
+		expect(
+			document.head.querySelector(
+				'link[rel="preconnect"][href="https://cdn.jsdelivr.net"]'
+			)
+		).not.toBeNull();
 	});
 
 	it("loads GitHub starter files into safe IDE file names", async () => {

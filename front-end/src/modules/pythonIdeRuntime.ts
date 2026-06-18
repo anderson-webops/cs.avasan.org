@@ -9,6 +9,7 @@ import {
 const PYODIDE_VERSION = "314.0.0";
 const PYODIDE_INDEX_URL = `https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSION}/full/`;
 const PYODIDE_SCRIPT_SRC = `${PYODIDE_INDEX_URL}pyodide.js`;
+const PYODIDE_CDN_ORIGIN = "https://cdn.jsdelivr.net";
 const PROJECT_ROOT = "/home/pyodide/classes_project";
 const PYTHON_EXTENSION_RE = /\.py$/i;
 const FROM_IMPORT_MODULE_RE =
@@ -288,18 +289,29 @@ function loadScript(src: string) {
 export function warmPythonRuntime() {
 	if (typeof document === "undefined") return;
 
-	for (const [rel, href] of [
-		["dns-prefetch", "//cdn.jsdelivr.net"],
-		["preconnect", "https://cdn.jsdelivr.net"]
+	for (const hint of [
+		{ rel: "dns-prefetch", href: "//cdn.jsdelivr.net" },
+		{
+			rel: "preconnect",
+			href: PYODIDE_CDN_ORIGIN,
+			crossOrigin: "anonymous"
+		},
+		{
+			rel: "preload",
+			href: PYODIDE_SCRIPT_SRC,
+			as: "script",
+			crossOrigin: "anonymous"
+		}
 	]) {
 		const existing = document.querySelector(
-			`link[rel="${rel}"][href="${href}"]`
+			`link[rel="${hint.rel}"][href="${hint.href}"]`
 		);
 		if (existing) continue;
 		const link = document.createElement("link");
-		link.rel = rel;
-		link.href = href;
-		if (rel === "preconnect") link.crossOrigin = "anonymous";
+		link.rel = hint.rel;
+		link.href = hint.href;
+		if ("as" in hint) link.setAttribute("as", hint.as);
+		if ("crossOrigin" in hint) link.crossOrigin = hint.crossOrigin;
 		document.head.append(link);
 	}
 }
