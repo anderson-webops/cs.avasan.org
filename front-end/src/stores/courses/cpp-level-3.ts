@@ -88,7 +88,7 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "Recursive Traversal and Backtracking",
 					content:
-						"Use traversal problems to show recursion as a practical tool rather than a trick. Cover: marking visited grid cells, stopping at invalid positions, returning success/failure, and the backtracking pattern of choose, recurse, undo, and try the next possibility. Keep the search space small enough that students can draw it and explain exactly why the algorithm stops."
+						"Use traversal problems to show recursion as a practical tool rather than a trick. Cover: marking visited grid cells, stopping at invalid positions, returning success/failure, and the backtracking pattern of choose, recurse, undo, and try the next possibility. Keep the search space small enough to draw and to explain exactly why the algorithm stops."
 				},
 				{
 					title: "CPPI2 Project: Recursive Maze or Word Search",

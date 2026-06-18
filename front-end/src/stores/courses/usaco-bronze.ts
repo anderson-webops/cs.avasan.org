@@ -379,14 +379,14 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Problem: Feeding the Cows",
 					content:
-						"Use a late-Bronze constraint problem to test whether students can still keep the solution simple under a more layered prompt.",
+						"Use a late-Bronze constraint problem to test whether the solution stays simple under a more layered prompt.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB63-Feeding-the-Cows"
 				},
 				{
 					title: "Problem: Just Stalling",
 					content:
-						"Use a counting-and-ordering problem as a final check that students can combine sorting with a careful interpretation of what is being counted.",
+						"Use a counting-and-ordering problem as a final check for combining sorting with a careful interpretation of what is being counted.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB55-Just-Stalling"
 				},

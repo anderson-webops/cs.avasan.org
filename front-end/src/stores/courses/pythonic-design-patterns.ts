@@ -739,7 +739,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Module-Level Singletons and Why They Feel Convenient",
 					content:
-						"This section covers module state, cached objects, and one-per-process resources as the Python forms students will actually encounter. The lesson starts from real convenience before it moves into the costs."
+						"This section covers module state, cached objects, and one-per-process resources as Python's practical forms of singleton-like behavior. The lesson starts from real convenience before it moves into the costs."
 				},
 				{
 					title: "Hidden Globals, Implicit Coupling, and Test Pain",
@@ -888,7 +888,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Choose a Messy but Salvageable App",
 					content:
-						"Use a medium-sized Python project with real duplication, mixed responsibilities, and awkward boundaries, but keep it small enough that students can still explain the whole system. The capstone feels like rescue work, not greenfield architecture fiction."
+						"Use a medium-sized Python project with real duplication, mixed responsibilities, and awkward boundaries, but keep it small enough for the whole system to stay explainable. The capstone feels like rescue work, not greenfield architecture fiction."
 				},
 				{
 					title: "Refactor in Small, Defensible Steps",

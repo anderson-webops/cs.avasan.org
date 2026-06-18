@@ -16,7 +16,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Code Smells from Refactoring.Guru",
 					content:
-						"Survey the smell families explicitly: bloaters such as Long Method, Large Class, Primitive Obsession, Long Parameter List, and Data Clumps; object-orientation abusers such as Alternative Classes with Different Interfaces, Refused Bequest, Switch Statements, and Temporary Field; change preventers such as Divergent Change, Parallel Inheritance Hierarchies, and Shotgun Surgery; dispensables such as Comments, Duplicate Code, Data Class, Dead Code, Lazy Class, and Speculative Generality; and couplers such as Feature Envy, Inappropriate Intimacy, Incomplete Library Class, Message Chains, and Middle Man. Use Java examples where students must identify the dominant smell instead of simply listing everything wrong."
+						"Survey the smell families explicitly: bloaters such as Long Method, Large Class, Primitive Obsession, Long Parameter List, and Data Clumps; object-orientation abusers such as Alternative Classes with Different Interfaces, Refused Bequest, Switch Statements, and Temporary Field; change preventers such as Divergent Change, Parallel Inheritance Hierarchies, and Shotgun Surgery; dispensables such as Comments, Duplicate Code, Data Class, Dead Code, Lazy Class, and Speculative Generality; and couplers such as Feature Envy, Inappropriate Intimacy, Incomplete Library Class, Message Chains, and Middle Man. Use Java examples that require identifying the dominant smell instead of simply listing everything wrong."
 				},
 				{
 					title: "Refactoring Workflow: Characterize, Slice, Verify",

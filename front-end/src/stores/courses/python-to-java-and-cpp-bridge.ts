@@ -12,7 +12,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Why Typed Languages Feel Harder at First",
 					content:
-						"Frame the bridge as a translation problem, not a full restart. Students already know variables, loops, functions, and objects from Python; the new challenge is stronger type declarations, compilation, braces, semicolons, and more explicit project structure."
+						"Frame the bridge as a translation problem, not a full restart. The assumed background is variables, loops, functions, and objects from Python; the new challenge is stronger type declarations, compilation, braces, semicolons, and more explicit project structure."
 				},
 				{
 					title: "Compiled vs. Interpreted Workflows",

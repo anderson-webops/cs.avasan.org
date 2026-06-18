@@ -1049,7 +1049,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "DNS and Email Security Follow-Up",
 					content:
-						"Extend the course with DNS security, resolver trust, email authentication, and delivery-surface protection once students can already reason about the core service boundary."
+						"Extend the course with DNS security, resolver trust, email authentication, and delivery-surface protection once the core service boundary is already familiar."
 				},
 				{
 					title: "OAuth and Session Security",

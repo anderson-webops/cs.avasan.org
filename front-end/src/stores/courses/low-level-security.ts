@@ -292,7 +292,7 @@ export const lowLevelSecurityCourse: RawCourse = {
 				{
 					title: "Printable Data, Encodings, and Validation",
 					content:
-						"Not every parser should accept arbitrary bytes. For simple educational protocols, require printable ASCII or a narrow allowed character set so learners can reason about malformed data and rejection paths. This makes it easier to write meaningful negative tests and to observe how validation gates reduce risk."
+						"Not every parser should accept arbitrary bytes. For simple educational protocols, printable ASCII or a narrow allowed character set makes malformed data and rejection paths easier to reason about. This makes it easier to write meaningful negative tests and to observe how validation gates reduce risk."
 				},
 				{
 					title: "Negative Tests for Malformed Inputs",

@@ -26,7 +26,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Course Outcomes and Daily Operating Habits",
 					content:
-						"By the end of the course, learners can navigate the filesystem confidently, inspect and edit configs, manage services and logs, automate routine work, and deploy a small web service. Each lesson begins with a command-of-the-day drill and ends with a short note about what changed on the system, what was verified, and how to undo the change safely."
+						"By the end of the course, the expected outcome is confident filesystem navigation, config inspection and editing, service and log management, routine automation, and deployment of a small web service. Each lesson begins with a command-of-the-day drill and ends with a short note about what changed on the system, what was verified, and how to undo the change safely."
 				},
 				{
 					title: "Project: Provision a Personal Linux Lab VM",
@@ -87,12 +87,12 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Core Navigation and File Management Commands",
 					content:
-						"Practice `pwd`, `ls`, `cd`, `mkdir`, `cp`, `mv`, `rm`, `cat`, `less`, `head`, and `tail` until students can move through a directory tree without guessing. Tie every command back to a practical question: Where am I, what files are here, what changed, and how do I inspect something without damaging it."
+						"Practice `pwd`, `ls`, `cd`, `mkdir`, `cp`, `mv`, `rm`, `cat`, `less`, `head`, and `tail` until directory traversal no longer depends on guessing. Tie every command back to a practical question: Where am I, what files are here, what changed, and how do I inspect something without damaging it."
 				},
 				{
 					title: "Filtering and Searching in the Shell",
 					content:
-						"This section covers `grep`, `find`, `rg`, `sort`, `uniq`, `wc`, and `xargs` as a family of inspection tools rather than isolated commands. The key lesson is that Linux work scales when students can search a tree, narrow results, count patterns, and pass findings into a follow-up command without manually copying file names around."
+						"This section covers `grep`, `find`, `rg`, `sort`, `uniq`, `wc`, and `xargs` as a family of inspection tools rather than isolated commands. The key lesson is that Linux work scales when a command sequence can search a tree, narrow results, count patterns, and pass findings into a follow-up command without manually copying file names around."
 				},
 				{
 					title: "Build Small Pipelines Before Writing Scripts",

@@ -870,7 +870,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Stack Canaries, PIE, and Binary Hardening Signals",
 					content:
-						"This section covers stack canaries, PIE, and related hardening features as visible patterns around the code students already understand. The point is not exhaustive exploit mitigation coverage; it is helping students recognize how security features show up around functions, calls, and process layout."
+						"This section covers stack canaries, PIE, and related hardening features as visible patterns around familiar function, call, and process-layout code. The point is not exhaustive exploit mitigation coverage; it is recognizing how security features show up around functions, calls, and process layout."
 				},
 				{
 					title: "How Assembly Explains Low-Level Bugs",
@@ -948,7 +948,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Reverse-Engineering Elective",
 					content:
-						"Extend the course into a reverse-engineering elective with more disassembly-only exercises, function identification, and pseudocode recovery. This is a natural direction for students headed toward low-level security, tooling, or binary analysis."
+						"Extend the course into a reverse-engineering elective with more disassembly-only exercises, function identification, and pseudocode recovery. This is a natural direction for deeper low-level security, tooling, or binary-analysis work."
 				},
 				{
 					title: "Linker, Relocation, and Symbol Deep Dives",

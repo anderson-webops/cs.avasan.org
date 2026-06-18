@@ -301,7 +301,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Entropy, Gini, and Overfitting at an Intuitive Level",
 					content:
-						"Keep the math light but honest: a good split reduces uncertainty, and a tree that grows without restraint can memorize noise. This is the best place in the course to make bias-variance tradeoffs visible through a model students can still inspect."
+						"Keep the math light but honest: a good split reduces uncertainty, and a tree that grows without restraint can memorize noise. This is the best place in the course to make bias-variance tradeoffs visible through an inspectable model."
 				},
 				{
 					title: "Tree Models as a Bridge between Rules and Learned Models",

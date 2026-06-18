@@ -933,7 +933,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "VPN and Tunneling Concepts",
 					content:
-						"Offer VPN and tunneling as the next step once students already understand interfaces, routes, and exposure boundaries. These topics make far more sense after learners can already explain how ordinary reachability works without the tunnel."
+						"Offer VPN and tunneling as the next step after interfaces, routes, and exposure boundaries are already clear. These topics make far more sense after ordinary reachability works without the tunnel."
 				},
 				{
 					title: "BGP and Internet Routing at a High Level",
@@ -948,7 +948,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Cloud Networking Patterns",
 					content:
-						"Use cloud networking patterns such as security groups, load balancers, and VPC boundaries as the natural next specialization for students headed toward deployment or infrastructure work. These ideas land better once host firewalls, ports, routes, and controlled exposure already feel concrete."
+						"Use cloud networking patterns such as security groups, load balancers, and VPC boundaries as the natural next specialization for deployment or infrastructure work. These ideas land better once host firewalls, ports, routes, and controlled exposure already feel concrete."
 				},
 				{
 					title: "NS13 Expansion Ideas and Next Steps: Core Project",

@@ -370,7 +370,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Project: Slice and Bounds Workbench",
 					content:
-						"Implement a byte-buffer or log-slice utility that compares safe slicing patterns with the kinds of off-by-one and unchecked indexing bugs students already know from low-level work.",
+						"Implement a byte-buffer or log-slice utility that compares safe slicing patterns with familiar off-by-one and unchecked indexing bugs from low-level work.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-09-rss4-strings-slices-collections-and-bounds-safety-supplemental-2/starter",
 					solutionLink:

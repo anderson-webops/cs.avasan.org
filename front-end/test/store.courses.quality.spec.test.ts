@@ -101,6 +101,31 @@ function visibleCourseSourceCorpus() {
 		.join("\n");
 }
 
+function rawCourseSourceCorpus() {
+	const excludedFiles = new Set([
+		"course-implementation-artifacts.ts",
+		"implementationLabGuidance.ts",
+		"normalization.ts",
+		"physicsContentContext.ts",
+		"projectGuidance.ts",
+		"public-pathways.ts",
+		"research-expansions.ts",
+		"supportSectionGuidance.ts",
+		"types.ts"
+	]);
+
+	return fs
+		.readdirSync("src/stores/courses")
+		.filter(
+			file =>
+				file.endsWith(".ts") &&
+				!excludedFiles.has(file) &&
+				file !== "index.ts"
+		)
+		.map(file => fs.readFileSync(`src/stores/courses/${file}`, "utf8"))
+		.join("\n");
+}
+
 describe("course text quality normalization", () => {
 	beforeEach(() => {
 		setActivePinia(createPinia());
@@ -172,7 +197,9 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/\b(?:a AI|a Algebra|a object|a array|an Java|an Python|an C\+\+)\b/i
 			);
-			expect(corpus).toContain("as an AI/Python implementation checkpoint");
+			expect(corpus).toContain(
+				"as an AI/Python implementation checkpoint"
+			);
 			expect(corpus).toContain(
 				"Complete **PTJ0 Positioning and Workflow Translation** as a Java implementation checkpoint that exposes class responsibilities, public behavior, and one edge case"
 			);
@@ -424,7 +451,9 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(/\bwhere nothing should happen\b/i);
 			expect(corpus).not.toMatch(/\bwhere no change should happen\b/i);
 			expect(corpus).not.toMatch(/\bcase where nothing should happen\b/i);
-			expect(corpus).not.toMatch(/\bcase where no change should happen\b/i);
+			expect(corpus).not.toMatch(
+				/\bcase where no change should happen\b/i
+			);
 			expect(corpus).not.toMatch(/\bshould show\./i);
 			expect(corpus).not.toMatch(
 				/\bshould be rejected or handled carefully\b/i
@@ -438,7 +467,9 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/\bshould stay current when the course depends\b/i
 			);
-			expect(corpus).not.toMatch(/\bshould produce one runnable artifact\b/i);
+			expect(corpus).not.toMatch(
+				/\bshould produce one runnable artifact\b/i
+			);
 			expect(corpus).not.toMatch(
 				/\bshould answer a practical engineering question\b/i
 			);
@@ -573,7 +604,9 @@ describe("course text quality normalization", () => {
 		expect(corpus).not.toMatch(/Visible pattern: This as/);
 		expect(corpus).not.toMatch(/Teach patterns through small before/);
 		expect(corpus).not.toMatch(/Teach accuracy, precision, recall/);
-		expect(corpus).not.toMatch(/Students arriving from the Python sequence/);
+		expect(corpus).not.toMatch(
+			/Students arriving from the Python sequence/
+		);
 		expect(corpus).not.toMatch(/show the modern correction/);
 		expect(corpus).not.toMatch(/younger learners can explain/);
 	});
@@ -639,6 +672,20 @@ describe("course text quality normalization", () => {
 			/same core idea with a different input, constraint, or edge case/i
 		);
 		expect(corpus).not.toMatch(/content:\s*""/);
+	});
+
+	it("keeps raw course copy neutral instead of audience-directed", () => {
+		const corpus = rawCourseSourceCorpus();
+
+		expect(corpus).not.toMatch(
+			/\b(?:Ask|Have|Tell|Show|Teach|Encourage|Remind|Make sure|Walk|Guide) (?:the )?(?:student|students|learner|learners)\b/i
+		);
+		expect(corpus).not.toMatch(
+			/\bso (?:the )?(?:student|students|learner|learners)\b/i
+		);
+		expect(corpus).not.toMatch(
+			/\b(?:student|students|learner|learners) (?:can|should|will|need|needs|must|learn|start|stop|understand|already|headed)\b/i
+		);
 	});
 
 	it("keeps JavaScript course project copy labeled as web development", () => {
@@ -1483,14 +1530,19 @@ describe("course text quality normalization", () => {
 
 	it("formats grouped lesson arcs as readable ordered markdown lists", async () => {
 		const store = useCoursesStore();
-		const [course, scratchCourse, scratchLevel2, machineLearning, aiLevel1] =
-			await Promise.all([
-				store.loadCourseById("python-level-3"),
-				loadRawCourse("scratch-level-1"),
-				loadRawCourse("scratch-level-2"),
-				loadRawCourse("machine-learning"),
-				loadRawCourse("ai-level-1")
-			]);
+		const [
+			course,
+			scratchCourse,
+			scratchLevel2,
+			machineLearning,
+			aiLevel1
+		] = await Promise.all([
+			store.loadCourseById("python-level-3"),
+			loadRawCourse("scratch-level-1"),
+			loadRawCourse("scratch-level-2"),
+			loadRawCourse("machine-learning"),
+			loadRawCourse("ai-level-1")
+		]);
 		expect(course).not.toBeNull();
 		expect(scratchCourse).not.toBeNull();
 		expect(scratchLevel2).not.toBeNull();
@@ -1530,7 +1582,9 @@ describe("course text quality normalization", () => {
 		);
 
 		const scratchBridge = scratchCourse!.modules
-			.find(module => module.title === "GS17 Text-Based Programming Bridge")
+			.find(
+				module => module.title === "GS17 Text-Based Programming Bridge"
+			)
 			?.curriculum.find(item => item.title === "Core Concepts");
 		expect(scratchBridge).toBeDefined();
 		expect(scratchBridge!.content).toContain(
@@ -1539,7 +1593,9 @@ describe("course text quality normalization", () => {
 		expect(scratchBridge!.content).not.toMatch(/\bconnectings\b/i);
 
 		const scratchLevel2Bridge = scratchLevel2!.modules
-			.find(module => module.title === "GM15 Text-Based Programming Bridge")
+			.find(
+				module => module.title === "GM15 Text-Based Programming Bridge"
+			)
 			?.curriculum.find(item => item.title === "Core Concepts");
 		expect(scratchLevel2Bridge).toBeDefined();
 		expect(scratchLevel2Bridge!.content).toContain(
@@ -1888,12 +1944,8 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/\*\*Concept path:\*\* [^\n.]+ starts with the relevant parts of [^\n.]+, then follows one concrete example through a changed case/i
 			);
-			expect(corpus).not.toMatch(
-				/\bmakes the central decision for\b/i
-			);
-			expect(corpus).not.toMatch(
-				/\bMake the central decision for\b/
-			);
+			expect(corpus).not.toMatch(/\bmakes the central decision for\b/i);
+			expect(corpus).not.toMatch(/\bMake the central decision for\b/);
 			expect(corpus).not.toMatch(
 				/\bconnects the prompt requirements to\b/i
 			);
@@ -1903,9 +1955,7 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/\bDocument the input, process, and output path\b/
 			);
-			expect(corpus).not.toMatch(
-				/\bFinish with an observable result\b/
-			);
+			expect(corpus).not.toMatch(/\bFinish with an observable result\b/);
 			expect(corpus).not.toMatch(
 				/\bends with an observable result, a checked assumption, and evidence tied to\b/i
 			);

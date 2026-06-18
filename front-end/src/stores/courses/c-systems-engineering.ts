@@ -26,7 +26,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Core Outcomes and Daily Working Habits",
 					content:
-						"By the end of the course, learners can read binary and hexadecimal representations, use bitwise operators confidently, reason about layout and lifetime, and build small systems-style tools in C. Every unit pairs the abstract idea with a printed byte or memory view plus a short written explanation of why the code works."
+						"By the end of the course, the expected outcome is reading binary and hexadecimal representations, using bitwise operators confidently, reasoning about layout and lifetime, and building small systems-style tools in C. Every unit pairs the abstract idea with a printed byte or memory view plus a short written explanation of why the code works."
 				},
 				{
 					title: "CSE0 Setup and Tooling: Core Project",
@@ -161,12 +161,12 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Bits, Nibbles, Bytes, and Words",
 					content:
-						"This section covers binary representation at the physical grouping level first: bits form nibbles, nibbles form bytes, and bytes are the practical units students will keep seeing in memory dumps and file formats. This removes the intimidation factor from later byte-level work."
+						"This section covers binary representation at the physical grouping level first: bits form nibbles, nibbles form bytes, and bytes are the practical units that keep appearing in memory dumps and file formats. This removes the intimidation factor from later byte-level work."
 				},
 				{
 					title: "Decimal, Binary, and Hex Conversions",
 					content:
-						"Practice converting small values across decimal, binary, and hexadecimal until students can move between them without guessing. Hex should feel like a readable shorthand for groups of four bits, not like an unrelated numbering system."
+						"Practice converting small values across decimal, binary, and hexadecimal until moving between representations no longer depends on guessing. Hex should feel like a readable shorthand for groups of four bits, not like an unrelated numbering system."
 				},
 				{
 					title: "Signed vs Unsigned Integers and Two's Complement",
@@ -808,7 +808,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Tooling Pass on a Real Utility",
 					content:
-						"Use one of the earlier projects to inspect warnings, run under the debugger, and compare the file bytes or symbols against the source expectations. This keeps the tooling lesson grounded in code students already know rather than in synthetic debugging puzzles."
+						"Use one of the earlier projects to inspect warnings, run under the debugger, and compare the file bytes or symbols against the source expectations. This keeps the tooling lesson grounded in familiar course code rather than in synthetic debugging puzzles."
 				},
 				{
 					title: "Unit 11: Systems Tooling: Core Project",
