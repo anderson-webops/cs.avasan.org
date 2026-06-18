@@ -5464,9 +5464,9 @@ function scienceSupport(context: CourseTextContext) {
 		subject =>
 			`${subject} uses shared-screen materials and paper notes alongside ${evidenceFormat}. The ${band} work does not require beakers, kits, or household materials; any physical demonstration can be replaced with evidence from the provided resource.`,
 		subject =>
-			`${subject} is designed for a Zoom-safe ${band} workflow using ${evidenceFormat}. Physical supplies are optional only when the same question can be answered from notes, diagrams, tables, or screen-shared resources.`,
+			`${subject} is designed for a Zoom-safe ${band} workflow using ${evidenceFormat}. This ${band} evidence plan for ${topic} treats physical supplies as optional only when the same question can be answered from notes, diagrams, tables, or screen-shared resources.`,
 		subject =>
-			`${subject} can be completed with a notebook, pencil, and shared digital resources focused on ${topic}. When a physical example appears, the required investigation still comes from data, diagrams, models, or simulations.`,
+			`${subject} can be completed with a notebook, pencil, and shared digital resources focused on ${topic}. If the ${band} example about ${topic} uses a physical demonstration, the required investigation still comes from data, diagrams, models, or simulations.`,
 		subject =>
 			`${subject} relies on accessible remote evidence: ${evidenceFormat}. Any hands-on observation must be safe, simple, optional, and replaceable with an equivalent source.`
 	]);

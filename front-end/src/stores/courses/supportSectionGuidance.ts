@@ -110,8 +110,8 @@ export function buildSupportSectionGuidance({
 
 		return [
 			opener,
-			`Inspect the ${courseFamily} work for ${focus}.`,
-			`Record the ${courseFamily} symptom, the smallest reproduction, the suspected cause, the fix, and the evidence that the fix changed the behavior.`
+			`Inspect the **${title}** work for ${focus}.`,
+			`Record the ${courseFamily} symptom in **${title}**, the smallest reproduction, the suspected cause, the fix, and the evidence that the fix changed the behavior.`
 		].join("\n\n");
 	}
 
@@ -124,8 +124,8 @@ export function buildSupportSectionGuidance({
 
 		return [
 			opener,
-			`Name the core state, inputs, outputs, boundaries, and verification evidence for ${focus}.`,
-			"Choose an order that produces a small working version early, then add complexity only after the current checkpoint can be explained."
+			`Name the **${title}** core state, inputs, outputs, boundaries, and verification evidence for ${focus}.`,
+			`Choose a **${title}** order that produces a small working version early, then add complexity only after the current checkpoint can be explained.`
 		].join("\n\n");
 	}
 
@@ -138,8 +138,8 @@ export function buildSupportSectionGuidance({
 
 		return [
 			opener,
-			`Compare expected and observed behavior for ${focus}.`,
-			"Record the main result, one meaningful edge case, one design or debugging decision, and one limitation that would guide a later revision."
+			`Compare expected and observed behavior in **${title}** for ${focus}.`,
+			`Record the **${title}** main result, one meaningful edge case, one design or debugging decision, and one limitation that would guide a later revision.`
 		].join("\n\n");
 	}
 
@@ -151,7 +151,7 @@ export function buildSupportSectionGuidance({
 
 	return [
 		opener,
-		`Keep the extension centered on ${focus}.`,
-		`Keep the new ${courseFamily} requirement testable: define the expected behavior, run one normal case and one boundary case, and record what changed from the base version.`
+		`Keep the **${title}** extension centered on ${focus}.`,
+		`Keep the new ${courseFamily} requirement in **${title}** testable: define the expected behavior, run one normal case and one boundary case, and record what changed from the base version.`
 	].join("\n\n");
 }
