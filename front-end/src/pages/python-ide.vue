@@ -4,6 +4,7 @@ import type {
 	PythonIdeMode,
 	PythonIdeProject
 } from "@/modules/pythonIde";
+import type { PythonIdeCourseAssetPack } from "@/modules/pythonIdeCourseAssets";
 import type {
 	GameBridge,
 	RuntimeArtifact,
@@ -47,6 +48,13 @@ import {
 	saveLocalPythonProjects,
 	updateRemotePythonIdeProject
 } from "@/modules/pythonIde";
+import {
+	findPythonIdeCourseAsset,
+	getPythonIdeCourseAssetObjectUrl,
+	loadPythonIdeCourseAssetPack,
+	normalizePythonIdeAssetLookupPath,
+	pythonIdeAssetCandidateNames
+} from "@/modules/pythonIdeCourseAssets";
 import {
 	runPythonProject,
 	warmPythonRuntime
@@ -169,6 +177,13 @@ interface CachedGameImage {
 	src: string;
 }
 
+interface ResolvedGameAsset {
+	height?: number;
+	key: string;
+	src: string;
+	width?: number;
+}
+
 const imageAssetExtensions = [".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"];
 const audioAssetExtensions = [".wav", ".mp3", ".ogg"];
 
@@ -225,6 +240,8 @@ let lastGamePointerPoint: { x: number; y: number } | null = null;
 let gameMusicAudio: HTMLAudioElement | null = null;
 let codeEditorView: EditorView | null = null;
 let syncingCodeMirrorContent = false;
+let gameCourseAssetPack: PythonIdeCourseAssetPack | null = null;
+let gameCourseAssetPackLoadFailed = false;
 let turtleStampCounter = 0;
 let turtleCompletedCommands: TurtleRenderCommand[] = [];
 let turtleQueuedSteps: TurtleAnimationStep[] = [];
@@ -1396,19 +1413,37 @@ function stopAllGameAudio() {
 	stopGameMusic();
 }
 
-function assetCandidateNames(
+async function ensureGameCourseAssetsLoaded() {
+	if (gameCourseAssetPack || gameCourseAssetPackLoadFailed) return;
+
+	appendOutput(
+		"system",
+		"Loading shared PyGame Zero assets from static.classes."
+	);
+
+	try {
+		gameCourseAssetPack = await loadPythonIdeCourseAssetPack();
+		appendOutput(
+			"system",
+			`Loaded ${gameCourseAssetPack.assets.size} shared PyGame Zero assets.`
+		);
+	} catch (error) {
+		gameCourseAssetPackLoadFailed = true;
+		appendOutput(
+			"stderr",
+			error instanceof Error
+				? `Could not load shared PyGame Zero assets: ${error.message}`
+				: "Could not load shared PyGame Zero assets."
+		);
+	}
+}
+
+function localAssetCandidateNames(
 	folder: "images" | "music" | "sounds",
 	name: string,
 	extensions: string[]
 ) {
-	const normalized = name
-		.trim()
-		.replaceAll("\\", "/")
-		.replace(/^\/+/, "")
-		.replace(/^images\/|^music\/|^sounds\//i, "");
-	if (!normalized) return [];
-	if (/\.[\dA-Z]+$/i.test(normalized)) return [`${folder}/${normalized}`];
-	return extensions.map(extension => `${folder}/${normalized}${extension}`);
+	return new Set(pythonIdeAssetCandidateNames(folder, name, extensions));
 }
 
 function findProjectAssetFile(
@@ -1418,17 +1453,51 @@ function findProjectAssetFile(
 ) {
 	const project = selectedProject.value;
 	if (!project) return null;
-	const candidateNames = new Set(
-		assetCandidateNames(folder, name, extensions)
+	const candidateNames = localAssetCandidateNames(folder, name, extensions);
+	return (
+		project.files.find(file =>
+			candidateNames.has(normalizePythonIdeAssetLookupPath(file.name))
+		) ?? null
 	);
-	return project.files.find(file => candidateNames.has(file.name)) ?? null;
 }
 
-function getGameImageEntry(file: PythonIdeFile) {
-	const src = getPythonIdeAssetDataUrl(file);
+function findCourseAsset(
+	folder: "images" | "music" | "sounds",
+	name: string,
+	extensions: string[]
+) {
+	return findPythonIdeCourseAsset(
+		gameCourseAssetPack,
+		pythonIdeAssetCandidateNames(folder, name, extensions)
+	);
+}
+
+function resolveGameAsset(
+	folder: "images" | "music" | "sounds",
+	name: string,
+	extensions: string[]
+): ResolvedGameAsset | null {
+	const projectFile = findProjectAssetFile(folder, name, extensions);
+	if (projectFile) {
+		const src = getPythonIdeAssetDataUrl(projectFile);
+		if (src) return { key: `project:${projectFile.name}`, src };
+	}
+
+	const courseAsset = findCourseAsset(folder, name, extensions);
+	if (!courseAsset) return null;
+	return {
+		height: courseAsset.height,
+		key: `course:${courseAsset.name}`,
+		src: getPythonIdeCourseAssetObjectUrl(courseAsset),
+		width: courseAsset.width
+	};
+}
+
+function getGameImageEntry(asset: ResolvedGameAsset) {
+	const src = asset.src;
 	if (!src) return null;
 
-	const cached = gameImageCache.get(file.name);
+	const cached = gameImageCache.get(asset.key);
 	if (cached?.src === src) return cached;
 
 	const entry: CachedGameImage = {
@@ -1444,8 +1513,30 @@ function getGameImageEntry(file: PythonIdeFile) {
 		entry.failed = true;
 	});
 	entry.element.src = src;
-	gameImageCache.set(file.name, entry);
+	gameImageCache.set(asset.key, entry);
 	return entry;
+}
+
+function courseAssetSize(asset: ResolvedGameAsset | null) {
+	if (!asset) return { height: 64, width: 64 };
+	if (asset.width && asset.height)
+		return { height: asset.height, width: asset.width };
+
+	const cached = gameImageCache.get(asset.key);
+	if (cached?.loaded && cached.element.naturalWidth > 0) {
+		return {
+			height: cached.element.naturalHeight,
+			width: cached.element.naturalWidth
+		};
+	}
+
+	return { height: 64, width: 64 };
+}
+
+function gameImageSizeJson(name: string) {
+	return JSON.stringify(
+		courseAssetSize(resolveGameAsset("images", name, imageAssetExtensions))
+	);
 }
 
 function playProjectAudio(
@@ -1453,17 +1544,17 @@ function playProjectAudio(
 	name: string,
 	loop = false
 ) {
-	const file = findProjectAssetFile(folder, name, audioAssetExtensions);
-	if (!file) {
+	const asset = resolveGameAsset(folder, name, audioAssetExtensions);
+	if (!asset) {
 		appendOutput("system", `Missing ${folder} asset: ${name}`);
 		return null;
 	}
 
-	const src = getPythonIdeAssetDataUrl(file);
+	const src = asset.src;
 	if (!src) {
 		appendOutput(
 			"system",
-			`Cannot play ${file.name}; import an audio file first.`
+			`Cannot play ${name}; import an audio file or use the shared asset pack.`
 		);
 		return null;
 	}
@@ -1546,12 +1637,8 @@ function drawGameActor(
 ) {
 	const context = setGameCanvasTransform();
 	if (!context) return;
-	const assetFile = findProjectAssetFile(
-		"images",
-		image,
-		imageAssetExtensions
-	);
-	const assetImage = assetFile ? getGameImageEntry(assetFile) : null;
+	const asset = resolveGameAsset("images", image, imageAssetExtensions);
+	const assetImage = asset ? getGameImageEntry(asset) : null;
 
 	context.save();
 	context.translate(x, y);
@@ -1573,6 +1660,53 @@ function drawGameActor(
 	context.lineWidth = 3;
 	context.beginPath();
 	context.roundRect(left, top, width, height, 12);
+	context.fill();
+	context.stroke();
+	context.fillStyle = "#0f172a";
+	context.font = "bold 14px Avenir Next, Segoe UI, sans-serif";
+	context.textAlign = "center";
+	context.textBaseline = "middle";
+	context.fillText(image, 0, 0, Math.max(16, width - 10));
+	context.restore();
+}
+
+function drawGameImage(
+	image: string,
+	x: number,
+	y: number,
+	width: number,
+	height: number,
+	angle: number
+) {
+	const context = setGameCanvasTransform();
+	if (!context) return;
+	const asset = resolveGameAsset("images", image, imageAssetExtensions);
+	const assetImage = asset ? getGameImageEntry(asset) : null;
+
+	context.save();
+	context.translate(x + width / 2, y + height / 2);
+	context.rotate((angle * Math.PI) / 180);
+	if (
+		assetImage?.loaded &&
+		!assetImage.failed &&
+		assetImage.element.naturalWidth > 0
+	) {
+		context.drawImage(
+			assetImage.element,
+			-width / 2,
+			-height / 2,
+			width,
+			height
+		);
+		context.restore();
+		return;
+	}
+
+	context.fillStyle = "#5eead4";
+	context.strokeStyle = "#134e4a";
+	context.lineWidth = 3;
+	context.beginPath();
+	context.roundRect(-width / 2, -height / 2, width, height, 12);
 	context.fill();
 	context.stroke();
 	context.fillStyle = "#0f172a";
@@ -1823,8 +1957,10 @@ const gameBridge: GameBridge = {
 		clearGameCanvas(color);
 	},
 	drawActor: drawGameActor,
+	drawImage: drawGameImage,
 	drawText: drawGameText,
 	drawRect: drawGameRect,
+	imageSizeJson: gameImageSizeJson,
 	isKeyDown(key: string) {
 		return gameKeysDown.has(normalizeKey(key));
 	},
@@ -1879,6 +2015,11 @@ async function runCurrentProject() {
 	appendOutput("system", `Running ${runnableFile.name}`);
 
 	try {
+		if (project.mode === "pgzero") {
+			runMessage.value = "Loading assets";
+			await ensureGameCourseAssetsLoaded();
+		}
+
 		await runPythonProject({
 			files: project.files,
 			activeFileName: runnableFile.name,

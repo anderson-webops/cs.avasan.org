@@ -77,6 +77,14 @@ export interface GameBridge {
 		height: number,
 		angle: number
 	) => void;
+	drawImage: (
+		image: string,
+		x: number,
+		y: number,
+		width: number,
+		height: number,
+		angle: number
+	) => void;
 	drawText: (
 		text: string,
 		x: number,
@@ -92,6 +100,7 @@ export interface GameBridge {
 		color: string,
 		filled: boolean
 	) => void;
+	imageSizeJson: (name: string) => string;
 	isKeyDown: (key: string) => boolean;
 	popEventsJson: () => string;
 	requestLoop: () => void;
@@ -830,6 +839,18 @@ def _normalize_color(color):
         )
     return str(color)
 
+def _asset_size(image, fallback=(64, 64)):
+    try:
+        raw_size = _bridge.imageSizeJson(str(image))
+        size = json.loads(raw_size) if raw_size else {}
+        width = _number(size.get("width"), fallback[0])
+        height = _number(size.get("height"), fallback[1])
+        if width > 0 and height > 0:
+            return width, height
+    except Exception:
+        pass
+    return float(fallback[0]), float(fallback[1])
+
 def _callback_shape(callback):
     try:
         parameters = inspect.signature(callback).parameters.values()
@@ -978,9 +999,12 @@ class ZRect(Rect):
 
 class Actor:
     def __init__(self, image, pos=None, **kwargs):
-        self.image = str(image)
-        self.width = _number(kwargs.pop("width", 64), 64)
-        self.height = _number(kwargs.pop("height", 64), 64)
+        self._image = str(image)
+        natural_width, natural_height = _asset_size(self.image)
+        self._auto_width = "width" not in kwargs
+        self._auto_height = "height" not in kwargs
+        self.width = _number(kwargs.pop("width", natural_width), natural_width)
+        self.height = _number(kwargs.pop("height", natural_height), natural_height)
         self.angle = _number(kwargs.pop("angle", 0), 0)
         self.visible = kwargs.pop("visible", True)
 
@@ -993,6 +1017,20 @@ class Actor:
 
         for key, value in kwargs.items():
             setattr(self, key, value)
+
+    @property
+    def image(self):
+        return self._image
+
+    @image.setter
+    def image(self, value):
+        self._image = str(value)
+        if getattr(self, "_auto_width", False) or getattr(self, "_auto_height", False):
+            natural_width, natural_height = _asset_size(self._image)
+            if getattr(self, "_auto_width", False):
+                self.width = natural_width
+            if getattr(self, "_auto_height", False):
+                self.height = natural_height
 
     @property
     def pos(self):
@@ -1125,6 +1163,18 @@ class _Screen:
     def __init__(self):
         self.draw = _ScreenDraw()
 
+    def blit(self, image, pos, **kwargs):
+        width, height = _asset_size(image)
+        angle = _number(kwargs.get("angle", 0), 0)
+        _bridge.drawImage(
+            str(image),
+            float(_number(pos[0])),
+            float(_number(pos[1])),
+            float(width),
+            float(height),
+            float(angle),
+        )
+
     def clear(self):
         _bridge.clear()
 
@@ -1173,6 +1223,9 @@ class _SoundLibrary:
     def __getattr__(self, name):
         return _Sound(name)
 
+    def __getitem__(self, name):
+        return _Sound(name)
+
 sounds = _SoundLibrary()
 
 class _Music:
@@ -1184,6 +1237,29 @@ class _Music:
         return None
 
 music = _Music()
+
+class _Image:
+    def __init__(self, name):
+        self.name = str(name)
+
+    def get_width(self):
+        return int(_asset_size(self.name)[0])
+
+    def get_height(self):
+        return int(_asset_size(self.name)[1])
+
+    def get_size(self):
+        width, height = _asset_size(self.name)
+        return (int(width), int(height))
+
+class _ImageLibrary:
+    def __getattr__(self, name):
+        return _Image(name)
+
+    def __getitem__(self, name):
+        return _Image(name)
+
+images = _ImageLibrary()
 
 class _Pgzrun:
     def go(self):
@@ -1237,6 +1313,7 @@ def install_builtins():
     builtins.clock = clock
     builtins.sounds = sounds
     builtins.music = music
+    builtins.images = images
     builtins.pgzrun = pgzrun
 
 def start(module_globals=None):

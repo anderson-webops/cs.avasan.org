@@ -5,6 +5,7 @@ import cookieSession from "cookie-session";
 import express from "express";
 import mongoose from "mongoose";
 
+import { pythonIdeAssetsProxy } from "./controllers/common/pythonIdeAssetsProxy.js";
 import { quoteProxy } from "./controllers/common/quoteProxy.js";
 import { createAdminMailLimiter } from "./middleware/rateLimiters.js";
 import { accountRoutes } from "./routes/accountRoutes.js";
@@ -79,6 +80,7 @@ async function main() {
 
 	//
 	app.use("/quotes", quoteProxy);
+	app.use("/python-assets", pythonIdeAssetsProxy);
 
 	// ready
 	app.get("/readyz", async (_req, res) => {

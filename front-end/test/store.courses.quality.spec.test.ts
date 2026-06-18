@@ -1355,6 +1355,10 @@ describe("course text quality normalization", () => {
 			const corpus = courses.map(allCourseText).join("\n");
 			const genericTitleSuffix =
 				/(?:Applied Challenge|Core Project|Debugging and Failure Modes|Diagnostic Checkpoint|Extension Challenge|Fluency Drill|Focused Practice|Modeling or Error Analysis|Open-Ended Variant|Planning and Architecture|Standards Practice Set|Supplemental(?: Project| Practice)? [23]|Verification and Reflection)$/i;
+			const genericColonTitlePattern =
+				/^.+:\s*(?:Applied Challenge|Core Project|Extension Challenge|Supplemental(?: Project| Practice)? [2-9])$/i;
+			const generatedSupplementalResiduePattern =
+				/\bsupplemental\s+[2-9]\b/i;
 			const nestedBoldProjectGoalPattern =
 				/\*\*Goal:\*\*\s+\*\*[^*\n]{1,180}\*\*/;
 			const nestedBoldStudioGoalPattern =
@@ -1391,6 +1395,16 @@ describe("course text quality normalization", () => {
 								item.title.startsWith(
 									`${course.name}: ${module.title}`
 								))
+						) {
+							redundantGenericTitles.push(
+								`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title}`
+							);
+						}
+						if (
+							genericColonTitlePattern.test(item.title) ||
+							generatedSupplementalResiduePattern.test(
+								item.title
+							)
 						) {
 							redundantGenericTitles.push(
 								`${courseCatalog[courseIndex].id} / ${module.title} / ${item.title}`

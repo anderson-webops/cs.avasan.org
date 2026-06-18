@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { strToU8, zipSync } from "fflate";
 import {
 	clearLocalPythonProjects,
 	createPythonIdeProject,
@@ -28,10 +29,45 @@ import {
 	pgzeroStarterCode,
 	turtleStarterCode
 } from "../src/modules/pythonIde";
+import {
+	findPythonIdeCourseAsset,
+	parsePythonIdeCourseAssetZip,
+	pythonIdeAssetCandidateNames,
+	resetPythonIdeCourseAssetPackCache,
+	loadPythonIdeCourseAssetPack
+} from "../src/modules/pythonIdeCourseAssets";
 import { pythonIdeProjectModuleNames } from "../src/modules/pythonIdeRuntime";
+
+const oneByOnePngBytes = new Uint8Array([
+	0x89,
+	0x50,
+	0x4E,
+	0x47,
+	0x0D,
+	0x0A,
+	0x1A,
+	0x0A,
+	0x00,
+	0x00,
+	0x00,
+	0x0D,
+	0x49,
+	0x48,
+	0x44,
+	0x52,
+	0x00,
+	0x00,
+	0x00,
+	0x01,
+	0x00,
+	0x00,
+	0x00,
+	0x01
+]);
 
 describe("python IDE project helpers", () => {
 	beforeEach(() => {
+		resetPythonIdeCourseAssetPackCache();
 		const storage = new Map<string, string>();
 		Object.defineProperty(window, "localStorage", {
 			configurable: true,
@@ -421,6 +457,75 @@ describe("python IDE project helpers", () => {
 				encoding: "base64"
 			})
 		).toBe("data:audio/wav;base64,UklGRg==");
+	});
+
+	it("loads shared PyGame Zero assets from the static assets zip", async () => {
+		const zipBytes = zipSync({
+			"__MACOSX/images/._alien.png": strToU8("ignored"),
+			"images/.DS_Store": strToU8("ignored"),
+			"images/alien.png": oneByOnePngBytes,
+			"music/tune.mp3": new Uint8Array([1, 2, 3]),
+			"sounds/eep.wav": new Uint8Array([4, 5, 6])
+		});
+
+		const pack = parsePythonIdeCourseAssetZip(zipBytes, "/assets.zip");
+		const alien = findPythonIdeCourseAsset(
+			pack,
+			pythonIdeAssetCandidateNames("images", "alien", [".png"])
+		);
+		const eep = findPythonIdeCourseAsset(
+			pack,
+			pythonIdeAssetCandidateNames("sounds", "eep", [".wav"])
+		);
+		const tune = findPythonIdeCourseAsset(
+			pack,
+			pythonIdeAssetCandidateNames("music", "tune.mp3", [".mp3"])
+		);
+
+		expect(pack.assets.size).toBe(3);
+		expect(alien?.mimeType).toBe("image/png");
+		expect(alien?.width).toBe(1);
+		expect(alien?.height).toBe(1);
+		expect(eep?.mimeType).toBe("audio/wav");
+		expect(tune?.mimeType).toBe("audio/mpeg");
+	});
+
+	it("fetches the shared PyGame Zero asset pack through the same-origin API proxy", async () => {
+		const zipBytes = zipSync({
+			"images/alien.png": oneByOnePngBytes
+		});
+		const pack = await loadPythonIdeCourseAssetPack({
+			fetcher: async url => {
+				expect(url).toBe("/api/python-assets/assets.zip");
+				return {
+					arrayBuffer: async () => zipBytes.buffer.slice(0),
+					ok: true,
+					status: 200
+				};
+			}
+		});
+
+		expect(pack.assets.has("images/alien.png")).toBe(true);
+	});
+
+	it("keeps shared PyGame Zero asset support wired into the page and runtime", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/pages/python-ide.vue"),
+			"utf8"
+		);
+
+		expect(runtimeSource).toContain("def _asset_size(image");
+		expect(runtimeSource).toContain("builtins.images = images");
+		expect(runtimeSource).toContain("def blit(self, image, pos");
+		expect(runtimeSource).toContain("def get_width(self):");
+		expect(pageSource).toContain("await ensureGameCourseAssetsLoaded()");
+		expect(pageSource).toContain("drawImage: drawGameImage");
+		expect(pageSource).toContain("imageSizeJson: gameImageSizeJson");
+		expect(pageSource).toContain("findPythonIdeCourseAsset");
 	});
 
 	it("runs the selected Python file or falls back from resource files", () => {

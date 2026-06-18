@@ -312,6 +312,13 @@ function conciseGenericItemTitle(suffix: string) {
 	return genericSuffixes.has(trimmed) ? trimmed : null;
 }
 
+function conciseGenericColonTitle(title: string) {
+	const colonIndex = title.lastIndexOf(":");
+	if (colonIndex < 0) return null;
+
+	return conciseGenericItemTitle(title.slice(colonIndex + 1));
+}
+
 function normalizeGeneratedSupplementalLabel(text: string) {
 	return text
 		.replace(
@@ -374,7 +381,7 @@ function removeRedundantItemTitleContext(
 		if (spacedSuffix) return spacedSuffix;
 	}
 
-	return title;
+	return conciseGenericColonTitle(title) ?? title;
 }
 
 function normalizeContextualItemTitles(course: RawCourse) {
