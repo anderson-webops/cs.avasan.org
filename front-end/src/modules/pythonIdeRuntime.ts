@@ -1311,6 +1311,8 @@ def _rect_parts(value):
 
     if hasattr(value, "rect"):
         rect_value = getattr(value, "rect")
+        if callable(rect_value):
+            rect_value = rect_value()
         if rect_value is not value:
             return _rect_parts(rect_value)
 
@@ -1680,6 +1682,33 @@ class Rect:
             self.top >= other_rect.bottom
         )
 
+    def collidelist(self, rects):
+        for index, rect in enumerate(rects):
+            if self.colliderect(rect):
+                return index
+        return -1
+
+    def collidelistall(self, rects):
+        return [
+            index
+            for index, rect in enumerate(rects)
+            if self.colliderect(rect)
+        ]
+
+    def collidedict(self, rect_dict, use_values=0):
+        for key, value in rect_dict.items():
+            rect = value if use_values else key
+            if self.colliderect(rect):
+                return (key, value)
+        return None
+
+    def collidedictall(self, rect_dict, use_values=0):
+        return [
+            (key, value)
+            for key, value in rect_dict.items()
+            if self.colliderect(value if use_values else key)
+        ]
+
     def contains(self, other):
         other_rect = Rect(other)
         return (
@@ -1966,6 +1995,18 @@ class Actor:
 
     def colliderect(self, other):
         return self._rect().colliderect(other)
+
+    def collidelist(self, rects):
+        return self._rect().collidelist(rects)
+
+    def collidelistall(self, rects):
+        return self._rect().collidelistall(rects)
+
+    def collidedict(self, rect_dict, use_values=0):
+        return self._rect().collidedict(rect_dict, use_values)
+
+    def collidedictall(self, rect_dict, use_values=0):
+        return self._rect().collidedictall(rect_dict, use_values)
 
     def contains(self, other):
         return self._rect().contains(other)

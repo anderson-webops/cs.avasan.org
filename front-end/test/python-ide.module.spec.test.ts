@@ -1352,6 +1352,8 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("def move_ip(self, x, y=None):");
 		expect(runtimeSource).toContain("def _rect_parts_from_args(args):");
 		expect(runtimeSource).toContain("if hasattr(value, \"rect\"):");
+		expect(runtimeSource).toContain("if callable(rect_value):");
+		expect(runtimeSource).toContain("rect_value = rect_value()");
 		expect(runtimeSource).toContain("return _rect_parts(rect_value)");
 		expect(runtimeSource).toContain(
 			"self.x, self.y, self.width, self.height = _rect_parts_from_args(args)"
@@ -1374,7 +1376,17 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain(
 			"if other_rect.width <= 0 or other_rect.height <= 0:"
 		);
+		expect(runtimeSource).toContain("def collidelist(self, rects):");
+		expect(runtimeSource).toContain("for index, rect in enumerate(rects):");
+		expect(runtimeSource).toContain("return -1");
+		expect(runtimeSource).toContain("def collidelistall(self, rects):");
+		expect(runtimeSource).toContain("def collidedict(self, rect_dict, use_values=0):");
+		expect(runtimeSource).toContain("rect = value if use_values else key");
+		expect(runtimeSource).toContain("return (key, value)");
+		expect(runtimeSource).toContain("def collidedictall(self, rect_dict, use_values=0):");
 		expect(runtimeSource).toContain("return self._rect().collidepoint(*args)");
+		expect(runtimeSource).toContain("return self._rect().collidelist(rects)");
+		expect(runtimeSource).toContain("return self._rect().collidedict(rect_dict, use_values)");
 		expect(runtimeSource).toContain("def get_length(self):");
 		expect(runtimeSource).toContain("def play_once(self, name):");
 		expect(runtimeSource).toContain("def queue(self, name):");
