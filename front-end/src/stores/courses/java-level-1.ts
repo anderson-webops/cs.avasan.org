@@ -161,14 +161,14 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Use BlueJ graphics methods such as `fillRect`, `fillOval`, and `fillArc` with `setColor` to explore Java graphics coordinates, color, and shape sizing.",
 					solutionLink:
-						"https://static.junilearning.com/java1/js2-basic-shapes.java"
+						"https://github.com/instruction-material/Java-Level-1/blob/main/graphics/JS2_Basic_Shapes.java"
 				},
 				{
 					title: "Happy Graphics (Optional)",
 					content:
 						"Use the same drawing methods to create a smiley face and a pair of Pac-Man characters.",
 					solutionLink:
-						"https://static.junilearning.com/java1/js2-happy-graphics.java"
+						"https://github.com/instruction-material/Java-Level-1/blob/main/graphics/JS2_Happy_Graphics.java"
 				}
 			]
 		},
@@ -213,9 +213,9 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Use a string and conditionals in a BlueJ graphics project to decide whether to draw a circle, square, Pac-Man, or another shape.",
 					projectLink:
-						"https://static.junilearning.com/java1/js3-which-shape.java",
+						"https://github.com/instruction-material/Java-Level-1/blob/main/graphics/JS3_Which_Shape.java",
 					solutionLink:
-						"https://static.junilearning.com/java1/js3-which-shape.java"
+						"https://github.com/instruction-material/Java-Level-1/blob/main/graphics/JS3_Which_Shape.java"
 				},
 				{
 					title: "JS3 Supplemental Project 1: Elevator Limits",
@@ -293,9 +293,9 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Use loops and coordinates in a BlueJ graphics project to draw diagonals of circles and experiment with other repeated patterns.",
 					projectLink:
-						"https://static.junilearning.com/java1/js4-paintball.java",
+						"https://github.com/instruction-material/Java-Level-1/blob/main/graphics/JS4_Paintball.java",
 					solutionLink:
-						"https://static.junilearning.com/java1/js4-paintball.java"
+						"https://github.com/instruction-material/Java-Level-1/blob/main/graphics/JS4_Paintball.java"
 				},
 				{
 					title: "JS4 Supplemental Project 1: Letter Square",
@@ -523,9 +523,9 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Use methods plus random size, color, and position values in a BlueJ graphics project to generate abstract art from multiple shapes.",
 					projectLink:
-						"https://static.junilearning.com/java1/js6-picasso.java",
+						"https://github.com/instruction-material/Java-Level-1/blob/main/graphics/JS6_Picasso.java",
 					solutionLink:
-						"https://static.junilearning.com/java1/js6-picasso.java"
+						"https://github.com/instruction-material/Java-Level-1/blob/main/graphics/JS6_Picasso.java"
 				},
 				{
 					title: "JS6 Supplemental Project 1: Min and Max",

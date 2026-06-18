@@ -165,9 +165,9 @@ const graphicsBranchModules: RawCourseModule[] = [
 				content:
 					"Use conditionals to choose which shape to draw based on a string command, then add input validation for unknown shapes.",
 				projectLink:
-					"https://static.junilearning.com/java1/js3-which-shape.java",
+					"https://github.com/instruction-material/Java-Level-1/blob/main/graphics/JS3_Which_Shape.java",
 				solutionLink:
-					"https://static.junilearning.com/java1/js3-which-shape.java"
+					"https://github.com/instruction-material/Java-Level-1/blob/main/graphics/JS3_Which_Shape.java"
 			}
 		]
 	},
@@ -184,18 +184,18 @@ const graphicsBranchModules: RawCourseModule[] = [
 				content:
 					"Use loops and coordinates to draw repeated circles or other marks in diagonal, grid, or randomized patterns.",
 				projectLink:
-					"https://static.junilearning.com/java1/js4-paintball.java",
+					"https://github.com/instruction-material/Java-Level-1/blob/main/graphics/JS4_Paintball.java",
 				solutionLink:
-					"https://static.junilearning.com/java1/js4-paintball.java"
+					"https://github.com/instruction-material/Java-Level-1/blob/main/graphics/JS4_Paintball.java"
 			},
 			{
 				title: "Java Graphics Project 2: Picasso Method Art",
 				content:
 					"Use methods plus random size, color, and position choices to generate abstract art from repeated shape families.",
 				projectLink:
-					"https://static.junilearning.com/java1/js6-picasso.java",
+					"https://github.com/instruction-material/Java-Level-1/blob/main/graphics/JS6_Picasso.java",
 				solutionLink:
-					"https://static.junilearning.com/java1/js6-picasso.java"
+					"https://github.com/instruction-material/Java-Level-1/blob/main/graphics/JS6_Picasso.java"
 			}
 		],
 		supplementalProjects: [

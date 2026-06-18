@@ -1654,6 +1654,44 @@ describe("course text quality normalization", () => {
 	);
 
 	it(
+		"keeps Java graphics code links on the source repository",
+		async () => {
+			const courses = await Promise.all(
+				courseCatalog.map(entry => loadRawCourse(entry.id))
+			);
+			const links = courses.flatMap((course, index) =>
+				course
+					? courseItemLinks(courseCatalog[index].id, course)
+					: []
+			);
+			const legacyJavaGraphicsLinks = links.filter(({ link }) =>
+				/^https:\/\/static\.junilearning\.com\/java1\/.+\.java$/i.test(
+					link
+				)
+			);
+			const expectedSourceLinks = [
+				"graphics/JS2_Basic_Shapes.java",
+				"graphics/JS2_Happy_Graphics.java",
+				"graphics/JS3_Which_Shape.java",
+				"graphics/JS4_Paintball.java",
+				"graphics/JS6_Picasso.java"
+			];
+
+			expect(legacyJavaGraphicsLinks).toEqual([]);
+			for (const sourcePath of expectedSourceLinks) {
+				expect(
+					links.some(({ link }) =>
+						link ===
+						`https://github.com/instruction-material/Java-Level-1/blob/main/${sourcePath}`
+					),
+					sourcePath
+				).toBe(true);
+			}
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
+
+	it(
 		"keeps loaded course module and item titles unique within their visible scope",
 		async () => {
 			const duplicateLabels: string[] = [];
