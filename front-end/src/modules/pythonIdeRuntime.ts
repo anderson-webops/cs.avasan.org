@@ -1295,6 +1295,13 @@ def _point(value, fallback=(0, 0)):
     except Exception:
         return float(fallback[0]), float(fallback[1])
 
+def _point_from_args(args):
+    if len(args) == 1:
+        return _point(args[0])
+    if len(args) == 2:
+        return _number(args[0]), _number(args[1])
+    raise TypeError("Expected a point as (x, y) or x, y.")
+
 def _rect_parts(value):
     if isinstance(value, Rect):
         return value.x, value.y, value.width, value.height
@@ -1629,18 +1636,23 @@ class Rect:
         inflated.inflate_ip(width, height)
         return inflated
 
-    def collidepoint(self, pos):
-        x = _number(pos[0])
-        y = _number(pos[1])
-        return self.left <= x <= self.right and self.top <= y <= self.bottom
+    def collidepoint(self, *args):
+        if self.width <= 0 or self.height <= 0:
+            return False
+        x, y = _point_from_args(args)
+        return self.left <= x < self.right and self.top <= y < self.bottom
 
     def colliderect(self, other):
         other_rect = Rect(other)
+        if self.width <= 0 or self.height <= 0:
+            return False
+        if other_rect.width <= 0 or other_rect.height <= 0:
+            return False
         return not (
-            self.right < other_rect.left or
-            self.left > other_rect.right or
-            self.bottom < other_rect.top or
-            self.top > other_rect.bottom
+            self.right <= other_rect.left or
+            self.left >= other_rect.right or
+            self.bottom <= other_rect.top or
+            self.top >= other_rect.bottom
         )
 
     def contains(self, other):
@@ -1924,8 +1936,8 @@ class Actor:
                 float(self._anchor_y()),
             )
 
-    def collidepoint(self, pos):
-        return self._rect().collidepoint(pos)
+    def collidepoint(self, *args):
+        return self._rect().collidepoint(*args)
 
     def colliderect(self, other):
         return self._rect().colliderect(other)
