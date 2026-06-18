@@ -9,7 +9,7 @@ import type {
 	RuntimeArtifact,
 	TurtleBridge
 } from "@/modules/pythonIdeRuntime";
-import type { EditorSelectionRange } from "@/modules/textEditorShortcuts";
+import { EditorView } from "@codemirror/view";
 import { storeToRefs } from "pinia";
 import {
 	computed,
@@ -20,6 +20,7 @@ import {
 	watch
 } from "vue";
 import { useRoute } from "vue-router";
+import { createPythonCodeMirrorExtensions } from "@/modules/pythonCodeMirror";
 import {
 	clearLocalPythonProjects,
 	createPythonIdeProject,
@@ -50,18 +51,6 @@ import {
 	runPythonProject,
 	warmPythonRuntime
 } from "@/modules/pythonIdeRuntime";
-import { highlightPythonCodeAsHtml } from "@/modules/pythonSyntaxHighlighting";
-import {
-	addAdjacentLineEditorSelections,
-	deleteAtEditorSelections,
-	editorPairForKey,
-	indentEditorSelections,
-	insertTextAtEditorSelections,
-	lineEndEditorSelections,
-	normalizeEditorSelections,
-	outdentEditorSelections,
-	wrapEditorSelections
-} from "@/modules/textEditorShortcuts";
 import { useAppStore } from "@/stores/app";
 
 interface OutputLine {
@@ -206,11 +195,9 @@ const sidebarCollapsed = ref(false);
 const stopRequested = ref(false);
 const saveMessage = ref("Loading workspace");
 const runMessage = ref("Ready");
-const codeEditorRef = ref<HTMLTextAreaElement | null>(null);
+const codeEditorHostRef = ref<HTMLDivElement | null>(null);
 const canvasRef = ref<HTMLCanvasElement | null>(null);
-const codeEditorScrollLeft = ref(0);
-const codeEditorScrollTop = ref(0);
-const editorSelections = ref<EditorSelectionRange[]>([]);
+const editorCursorCount = ref(1);
 const artifactCounter = ref(0);
 const outputCounter = ref(0);
 const keyHandlers = new Map<string, () => void>();
@@ -236,7 +223,8 @@ let gameTickInFlight = false;
 let activeTurtleDragButton: string | null = null;
 let lastGamePointerPoint: { x: number; y: number } | null = null;
 let gameMusicAudio: HTMLAudioElement | null = null;
-let pendingAltClickSelections: EditorSelectionRange[] = [];
+let codeEditorView: EditorView | null = null;
+let syncingCodeMirrorContent = false;
 let turtleStampCounter = 0;
 let turtleCompletedCommands: TurtleRenderCommand[] = [];
 let turtleQueuedSteps: TurtleAnimationStep[] = [];
@@ -326,13 +314,6 @@ const usesDrawingCanvas = computed(
 		selectedProject.value?.mode === "turtle" ||
 		selectedProject.value?.mode === "pgzero"
 );
-const editorCursorCount = computed(() => editorSelections.value.length);
-const highlightedActiveFileHtml = computed(() =>
-	highlightPythonCodeAsHtml(activeFileContent.value)
-);
-const codeEditorHighlightStyle = computed(() => ({
-	transform: `translate(${-codeEditorScrollLeft.value}px, ${-codeEditorScrollTop.value}px)`
-}));
 const requestedCourseId = computed(() =>
 	typeof route.query.course === "string" ? route.query.course : ""
 );
@@ -670,234 +651,48 @@ function updateProjectMode(event: Event) {
 	void nextTick(resetActiveCanvas);
 }
 
-function codeEditorSelection(textarea: HTMLTextAreaElement) {
-	return {
-		from: textarea.selectionStart,
-		to: textarea.selectionEnd
-	};
-}
+function resetCodeEditor() {
+	codeEditorView?.destroy();
+	codeEditorView = null;
+	editorCursorCount.value = 1;
 
-function activeCodeEditorSelections(textarea: HTMLTextAreaElement) {
-	const currentSelection = codeEditorSelection(textarea);
-	if (editorSelections.value.length <= 1) return [currentSelection];
+	const host = codeEditorHostRef.value;
+	if (!host || activeFileIsBinaryAsset.value) return;
 
-	const selections = normalizeEditorSelections(
-		editorSelections.value,
-		textarea.value.length
-	);
-	const currentSelectionAlreadyTracked = selections.some(
-		selection =>
-			selection.from === currentSelection.from &&
-			selection.to === currentSelection.to
-	);
-
-	return currentSelectionAlreadyTracked
-		? selections
-		: normalizeEditorSelections(
-				[...selections, currentSelection],
-				textarea.value.length
-			);
-}
-
-function setCodeEditorSelections(
-	selections: EditorSelectionRange[],
-	primarySelectionIndex = selections.length - 1
-) {
-	const textarea = codeEditorRef.value;
-	const textLength = activeFileContent.value.length;
-	const normalizedSelections = normalizeEditorSelections(
-		selections,
-		textLength
-	);
-	const primarySelection =
-		normalizedSelections[
-			Math.max(
-				0,
-				Math.min(primarySelectionIndex, normalizedSelections.length - 1)
-			)
-		] ?? normalizedSelections[0];
-	editorSelections.value = normalizedSelections;
-
-	void nextTick(() => {
-		const editor = textarea ?? codeEditorRef.value;
-		if (!editor) return;
-		editor.focus();
-		editor.setSelectionRange(primarySelection.from, primarySelection.to);
+	host.textContent = "";
+	codeEditorView = new EditorView({
+		doc: activeFileContent.value,
+		extensions: createPythonCodeMirrorExtensions({
+			onChange(content) {
+				syncingCodeMirrorContent = true;
+				activeFileContent.value = content;
+				syncingCodeMirrorContent = false;
+			},
+			onCursorCountChange(count) {
+				editorCursorCount.value = count;
+			}
+		}),
+		parent: host
 	});
 }
 
-function applyCodeEditorEdit(result: {
-	text: string;
-	selections: EditorSelectionRange[];
-}) {
-	activeFileContent.value = result.text;
-	setCodeEditorSelections(result.selections);
-}
+function syncCodeEditorContent(content: string) {
+	if (syncingCodeMirrorContent || !codeEditorView) return;
+	if (codeEditorView.state.doc.toString() === content) return;
 
-function clearCodeEditorMulticursor(textarea?: HTMLTextAreaElement) {
-	const editor = textarea ?? codeEditorRef.value;
-	editorSelections.value = editor ? [codeEditorSelection(editor)] : [];
-	pendingAltClickSelections = [];
-}
-
-function handleCodeEditorMouseDown(event: MouseEvent) {
-	const textarea = event.currentTarget as HTMLTextAreaElement;
-	if (event.button === 0 && event.altKey) {
-		pendingAltClickSelections = activeCodeEditorSelections(textarea);
-		return;
-	}
-
-	clearCodeEditorMulticursor(textarea);
-}
-
-function handleCodeEditorMouseUp(event: MouseEvent) {
-	if (!pendingAltClickSelections.length || !event.altKey) return;
-
-	const textarea = event.currentTarget as HTMLTextAreaElement;
-	const cursor = codeEditorSelection(textarea);
-	setCodeEditorSelections(
-		normalizeEditorSelections(
-			[...pendingAltClickSelections, cursor],
-			textarea.value.length
-		)
-	);
-	pendingAltClickSelections = [];
-}
-
-function handleCodeEditorSelect(event: Event) {
-	if (editorSelections.value.length > 1) return;
-	const textarea = event.currentTarget as HTMLTextAreaElement;
-	editorSelections.value = [codeEditorSelection(textarea)];
-}
-
-function handleCodeEditorPaste(event: ClipboardEvent) {
-	if (editorSelections.value.length <= 1) return;
-	const textarea = event.currentTarget as HTMLTextAreaElement;
-	const pastedText = event.clipboardData?.getData("text/plain") ?? "";
-	if (!pastedText) return;
-
-	event.preventDefault();
-	applyCodeEditorEdit(
-		insertTextAtEditorSelections(
-			textarea.value,
-			activeCodeEditorSelections(textarea),
-			pastedText
-		)
-	);
-}
-
-function handleCodeEditorScroll(event: Event) {
-	const textarea = event.currentTarget as HTMLTextAreaElement;
-	codeEditorScrollLeft.value = textarea.scrollLeft;
-	codeEditorScrollTop.value = textarea.scrollTop;
-}
-
-function handleCodeEditorKeyDown(event: KeyboardEvent) {
-	event.stopPropagation();
-	if (event.isComposing) return;
-
-	const textarea = event.currentTarget as HTMLTextAreaElement;
-	const selections = activeCodeEditorSelections(textarea);
-
-	if (event.key === "Tab") {
-		event.preventDefault();
-		applyCodeEditorEdit(
-			event.shiftKey
-				? outdentEditorSelections(textarea.value, selections)
-				: indentEditorSelections(textarea.value, selections)
-		);
-		return;
-	}
-
-	if (event.key === "Escape" && editorSelections.value.length > 1) {
-		event.preventDefault();
-		clearCodeEditorMulticursor(textarea);
-		return;
-	}
-
-	if (
-		event.altKey &&
-		event.shiftKey &&
-		!event.metaKey &&
-		!event.ctrlKey &&
-		event.key.toLowerCase() === "i"
-	) {
-		event.preventDefault();
-		setCodeEditorSelections(
-			lineEndEditorSelections(
-				textarea.value,
-				codeEditorSelection(textarea)
-			)
-		);
-		return;
-	}
-
-	if (
-		event.altKey &&
-		(event.metaKey || event.ctrlKey || event.shiftKey) &&
-		(event.key === "ArrowUp" || event.key === "ArrowDown")
-	) {
-		event.preventDefault();
-		setCodeEditorSelections(
-			addAdjacentLineEditorSelections(
-				textarea.value,
-				selections,
-				event.key === "ArrowUp" ? "up" : "down"
-			)
-		);
-		return;
-	}
-
-	const pair = editorPairForKey(event.key);
-	if (pair && !event.metaKey && !event.ctrlKey && !event.altKey) {
-		event.preventDefault();
-		applyCodeEditorEdit(
-			wrapEditorSelections(
-				textarea.value,
-				selections,
-				pair.open,
-				pair.close
-			)
-		);
-		return;
-	}
-
-	if (editorSelections.value.length <= 1 || event.metaKey || event.ctrlKey)
-		return;
-
-	if (event.key === "Backspace" || event.key === "Delete") {
-		event.preventDefault();
-		applyCodeEditorEdit(
-			deleteAtEditorSelections(
-				textarea.value,
-				selections,
-				event.key === "Backspace" ? "backward" : "forward"
-			)
-		);
-		return;
-	}
-
-	const insertedText =
-		event.key === "Enter"
-			? "\n"
-			: !event.altKey && event.key.length === 1
-				? event.key
-				: "";
-	if (!insertedText) return;
-
-	event.preventDefault();
-	applyCodeEditorEdit(
-		insertTextAtEditorSelections(textarea.value, selections, insertedText)
-	);
+	codeEditorView.dispatch({
+		changes: {
+			from: 0,
+			to: codeEditorView.state.doc.length,
+			insert: content
+		}
+	});
 }
 
 function selectFile(fileName: string) {
 	if (!selectedProject.value) return;
 	selectedProject.value.activeFileName = fileName;
-	editorSelections.value = [];
-	pendingAltClickSelections = [];
-	codeEditorScrollLeft.value = 0;
-	codeEditorScrollTop.value = 0;
+	editorCursorCount.value = 1;
 	touchSelectedProject();
 	scheduleSave();
 }
@@ -2345,14 +2140,21 @@ watch(selectedProjectID, () => {
 });
 
 watch(
-	() => activeFile.value?.name,
+	() =>
+		`${selectedProjectID.value}:${activeFile.value?.name ?? ""}:${activeFileIsBinaryAsset.value}`,
 	() => {
-		editorSelections.value = [];
-		pendingAltClickSelections = [];
-		codeEditorScrollLeft.value = 0;
-		codeEditorScrollTop.value = 0;
-	}
+		void nextTick(resetCodeEditor);
+	},
+	{ flush: "post" }
 );
+
+watch(activeFileContent, content => {
+	syncCodeEditorContent(content);
+});
+
+watch(isLoading, loading => {
+	if (!loading) void nextTick(resetCodeEditor);
+});
 
 onMounted(() => {
 	warmPythonRuntime();
@@ -2369,6 +2171,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
 	if (saveTimer) window.clearTimeout(saveTimer);
+	codeEditorView?.destroy();
 	window.removeEventListener("keydown", handleKeyDown);
 	window.removeEventListener("keyup", handleKeyUp);
 	window.removeEventListener("mouseup", clearTurtleDrag);
@@ -2734,31 +2537,9 @@ onBeforeUnmount(() => {
 							</p>
 						</div>
 						<div v-else class="code-editor-shell">
-							<pre
-								class="code-editor-highlight"
-								aria-hidden="true"
-							>
-								<code
-									:style="codeEditorHighlightStyle"
-									v-html="highlightedActiveFileHtml"
-								/>
-							</pre>
-							<textarea
-								ref="codeEditorRef"
-								v-model="activeFileContent"
-								autocapitalize="off"
-								autocomplete="off"
-								autocorrect="off"
-								aria-label="Code editor"
-								class="code-editor"
-								spellcheck="false"
-								wrap="off"
-								@keydown="handleCodeEditorKeyDown"
-								@mousedown="handleCodeEditorMouseDown"
-								@mouseup="handleCodeEditorMouseUp"
-								@paste="handleCodeEditorPaste"
-								@scroll="handleCodeEditorScroll"
-								@select="handleCodeEditorSelect"
+							<div
+								ref="codeEditorHostRef"
+								class="code-editor-host"
 							/>
 						</div>
 					</section>
@@ -3591,102 +3372,16 @@ html.dark .file-delete:disabled::after {
 	background: var(--python-code-bg);
 }
 
-.code-editor-highlight,
-.code-editor-highlight code,
-.code-editor {
-	font-family:
-		"SFMono-Regular", "Cascadia Code", "Liberation Mono", monospace;
-	font-size: 0.94rem;
-	font-variant-ligatures: none;
-	line-height: 1.58;
-	tab-size: 4;
-	white-space: pre;
+.code-editor-host {
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
 }
 
-.code-editor-highlight {
-	position: absolute;
-	inset: 0;
-	z-index: 0;
-	margin: 0;
-	overflow: hidden;
+.code-editor-host :deep(.cm-editor) {
+	border: 0;
 	background: var(--python-code-bg);
 	color: var(--python-code-ink);
-	pointer-events: none;
-}
-
-.code-editor-highlight code {
-	position: absolute;
-	top: 1rem;
-	left: 1rem;
-	min-width: max-content;
-	will-change: transform;
-}
-
-.code-editor.code-editor {
-	position: relative;
-	z-index: 1;
-	width: 100%;
-	min-height: 100%;
-	padding: 1rem;
-	border: 0;
-	outline: 0;
-	resize: none;
-	background: transparent !important;
-	caret-color: var(--python-code-caret);
-	color: transparent !important;
-	-webkit-text-fill-color: transparent !important;
-}
-
-.code-editor.code-editor::selection {
-	background: var(--python-code-selection);
-	color: transparent !important;
-	-webkit-text-fill-color: transparent !important;
-}
-
-:deep(.syntax-token--keyword) {
-	color: var(--syntax-keyword);
-}
-
-:deep(.syntax-token--builtin) {
-	color: var(--syntax-builtin);
-}
-
-:deep(.syntax-token--function) {
-	color: var(--syntax-function);
-}
-
-:deep(.syntax-token--property) {
-	color: var(--syntax-property);
-}
-
-:deep(.syntax-token--string) {
-	color: var(--syntax-string);
-}
-
-:deep(.syntax-token--comment) {
-	color: var(--syntax-comment);
-	font-style: italic;
-}
-
-:deep(.syntax-token--number) {
-	color: var(--syntax-number);
-}
-
-:deep(.syntax-token--operator),
-:deep(.syntax-token--decorator) {
-	color: var(--syntax-operator);
-}
-
-:deep(.syntax-token--bracket) {
-	font-weight: 900;
-}
-
-:deep(.syntax-token--bracket-unmatched) {
-	color: var(--syntax-bracket);
-}
-
-:deep(.syntax-token--bracket-matched) {
-	color: var(--syntax-bracket-color, var(--syntax-bracket));
 }
 
 .asset-file-preview {
