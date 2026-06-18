@@ -358,6 +358,8 @@ for __classes_builtin_name in (
     "pgzrun",
     "show_chart",
     "show_plots",
+    "__classes_loop_guard",
+    "__classes_schedule_turtle_loop",
 ):
     if not hasattr(builtins, __classes_builtin_name):
         continue
@@ -367,7 +369,10 @@ for __classes_builtin_name in (
         "__module__",
         getattr(type(__classes_builtin_value), "__module__", ""),
     )
-    if __classes_builtin_owner in ("_classes_pgzero", "_classes_artifacts"):
+    if (
+        __classes_builtin_name.startswith("__classes_")
+        or __classes_builtin_owner in ("_classes_pgzero", "_classes_artifacts")
+    ):
         delattr(builtins, __classes_builtin_name)
 `);
 }
@@ -566,6 +571,11 @@ class __ClassesLoopGuardTransformer(ast.NodeTransformer):
                         ast.Constant(value=body_source),
                         ast.Constant(value=self.filename),
                         ast.Constant(value=node.lineno),
+                        ast.Call(
+                            func=ast.Name(id="globals", ctx=ast.Load()),
+                            args=[],
+                            keywords=[],
+                        ),
                     ],
                     keywords=[],
                 )
@@ -662,8 +672,10 @@ def __classes_install_project_import_hook():
 
 __classes_install_project_import_hook()
 
-def __classes_schedule_turtle_loop(body_source, filename, line_number):
+def __classes_schedule_turtle_loop(body_source, filename, line_number, namespace=None):
     global __classes_turtle_loop_counter
+    if namespace is None:
+        namespace = globals()
     try:
         from js import window as __classes_window
         from pyodide.ffi import create_proxy as __classes_create_proxy
@@ -681,7 +693,7 @@ def __classes_schedule_turtle_loop(body_source, filename, line_number):
     def __classes_run_turtle_loop():
         try:
             __classes_loop_guard("turtle while")
-            exec(body_code, globals())
+            exec(body_code, namespace)
             __classes_window.__classesPythonIdeTurtle.scheduleTimer(
                 __classes_turtle_loop_delay_ms,
                 __classes_turtle_loop_proxies[loop_key],
@@ -699,6 +711,9 @@ def __classes_schedule_turtle_loop(body_source, filename, line_number):
         0,
         __classes_turtle_loop_proxies[loop_key],
     )
+
+builtins.__classes_loop_guard = __classes_loop_guard
+builtins.__classes_schedule_turtle_loop = __classes_schedule_turtle_loop
 `;
 }
 

@@ -738,6 +738,12 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain(
 			"return __classes_compile_student_source(source, path)"
 		);
+		expect(runtimeSource).toContain(
+			"builtins.__classes_loop_guard = __classes_loop_guard"
+		);
+		expect(runtimeSource).toContain(
+			"builtins.__classes_schedule_turtle_loop = __classes_schedule_turtle_loop"
+		);
 	});
 
 	it("clears browser-owned runtime shim modules before each run", () => {
@@ -756,9 +762,29 @@ describe("python IDE project helpers", () => {
 		);
 		expect(runtimeSource).toContain("\"Actor\"");
 		expect(runtimeSource).toContain("\"show_chart\"");
+		expect(runtimeSource).toContain("\"__classes_loop_guard\"");
+		expect(runtimeSource).toContain(
+			"__classes_builtin_name.startswith(\"__classes_\")"
+		);
 		expect(runtimeSource).toContain(
 			"delattr(builtins, __classes_builtin_name)"
 		);
+	});
+
+	it("keeps imported Turtle loop bodies in the importing module namespace", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+
+		expect(runtimeSource).toContain(
+			"def __classes_schedule_turtle_loop(body_source, filename, line_number, namespace=None):"
+		);
+		expect(runtimeSource).toContain("if namespace is None:");
+		expect(runtimeSource).toContain("namespace = globals()");
+		expect(runtimeSource).toContain("exec(body_code, namespace)");
+		expect(runtimeSource).toContain("func=ast.Name(id=\"globals\", ctx=ast.Load())");
+		expect(runtimeSource).toContain("ast.Call(");
 	});
 
 	it("keeps generated text-file persistence wired between runtime and page", () => {
