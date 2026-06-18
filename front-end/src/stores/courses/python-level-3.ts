@@ -439,9 +439,11 @@ export const pythonLevel3Course: RawCourse = {
 				{
 					title: "AM9 Project 1: Bubble Sort",
 					content:
-						"Implement bubble sort by first coding a single pass, then extending it to repeat for enough passes to fully sort the list. Use a temporary variable when swapping values and test the result on randomly generated data.",
+						"Implement bubble sort by first coding one adjacent-comparison pass, then repeating passes until the list is sorted. Build a basic in-place version, an improved early-exit version, and a helper that returns a sorted copy while leaving the original list unchanged. Test duplicate values, already-sorted input, reversed input, and random input, then explain why the inner comparison range can shrink after each pass.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM9-Bubble-Sort/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM9-Bubble-Sort"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM9-Bubble-Sort/solution"
 				},
 				{
 					title: "Bubble Sort Big-O Analysis",

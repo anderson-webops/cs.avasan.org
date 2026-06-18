@@ -268,6 +268,22 @@ describe("implemented course development artifacts", () => {
 		);
 	});
 
+	it("links the Python Level 3 bubble sort project to starter and solution folders", async () => {
+		const serializedCourse = JSON.stringify(
+			await requireCourse("python-level-3")
+		);
+
+		expect(serializedCourse).toContain(
+			"Python-Level-3/tree/main/AM9-Bubble-Sort/starter"
+		);
+		expect(serializedCourse).toContain(
+			"Python-Level-3/tree/main/AM9-Bubble-Sort/solution"
+		);
+		expect(serializedCourse).not.toContain(
+			"Python-Level-3/tree/main/AM9-Bubble-Sort\""
+		);
+	});
+
 	it("records source policy decisions for content-only or composed courses", async () => {
 		for (const courseId of Object.keys(courseContentOnlySourcePolicies)) {
 			if (authoredLearnerCourseIds.has(courseId)) continue;
