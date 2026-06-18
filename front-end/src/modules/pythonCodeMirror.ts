@@ -178,11 +178,15 @@ const turtleRuntimeCompletions = [
 const pgzeroRuntimeCompletions = [
 	completion("pgzrun", "namespace", "run a PyGame Zero project", 60),
 	completion("Actor", "class", "sprite with image, position, and collision"),
+	completion("Animation", "class", "running animation handle"),
 	completion("Rect", "class", "rectangle for collision and layout"),
 	completion("WIDTH", "constant", "canvas width"),
 	completion("HEIGHT", "constant", "canvas height"),
+	completion("animate", "function", "animate actor or object properties", 40),
 	completion("screen", "variable", "PyGame Zero drawing surface"),
 	completion("keyboard", "variable", "keyboard state"),
+	completion("keys", "variable", "keyboard constants"),
+	completion("keymods", "variable", "modifier-key constants"),
 	completion("mouse", "variable", "mouse constants"),
 	completion("clock", "variable", "schedule timed callbacks"),
 	completion("images", "namespace", "loaded image assets"),
@@ -191,7 +195,11 @@ const pgzeroRuntimeCompletions = [
 	completion("draw", "function", "PyGame Zero draw callback", 30),
 	completion("update", "function", "PyGame Zero frame callback", 30),
 	completion("on_key_down", "function", "keyboard event callback"),
-	completion("on_mouse_down", "function", "mouse event callback")
+	completion("on_key_up", "function", "keyboard release callback"),
+	completion("on_mouse_down", "function", "mouse press callback"),
+	completion("on_mouse_move", "function", "mouse move callback"),
+	completion("on_mouse_up", "function", "mouse release callback"),
+	completion("on_music_end", "function", "music finished callback")
 ];
 
 const dataRuntimeCompletions = [
@@ -266,6 +274,7 @@ const pgzeroMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
 	player: actorMemberCompletions(),
 	clock: [
 		completion("schedule", "method", "run once after a delay"),
+		completion("schedule_unique", "method", "replace a scheduled callback"),
 		completion("schedule_interval", "method", "repeat on an interval"),
 		completion("unschedule", "method", "remove a scheduled callback")
 	],
@@ -276,10 +285,30 @@ const pgzeroMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
 		completion("down", "property", "down arrow key"),
 		completion("space", "property", "spacebar")
 	],
+	keys: [
+		completion("A", "constant", "A key"),
+		completion("D", "constant", "D key"),
+		completion("DOWN", "constant", "down arrow"),
+		completion("ESCAPE", "constant", "escape key"),
+		completion("LEFT", "constant", "left arrow"),
+		completion("RETURN", "constant", "return key"),
+		completion("RIGHT", "constant", "right arrow"),
+		completion("SPACE", "constant", "spacebar"),
+		completion("UP", "constant", "up arrow"),
+		completion("W", "constant", "W key")
+	],
+	keymods: [
+		completion("ALT", "constant", "either alt key"),
+		completion("CTRL", "constant", "either control key"),
+		completion("META", "constant", "either meta key"),
+		completion("SHIFT", "constant", "either shift key")
+	],
 	mouse: [
 		completion("LEFT", "constant", "left mouse button"),
 		completion("MIDDLE", "constant", "middle mouse button"),
-		completion("RIGHT", "constant", "right mouse button")
+		completion("RIGHT", "constant", "right mouse button"),
+		completion("WHEEL_DOWN", "constant", "scroll wheel down"),
+		completion("WHEEL_UP", "constant", "scroll wheel up")
 	],
 	music: [
 		completion("fadeout", "method", "fade and stop background music"),
@@ -294,7 +323,9 @@ const pgzeroMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
 		completion("set_volume", "method", "set music volume")
 	],
 	screen: [
+		completion("bounds", "method", "screen rectangle"),
 		completion("clear", "method", "clear the canvas"),
+		completion("fill", "method", "fill the canvas"),
 		completion("blit", "method", "draw an image"),
 		completion("draw", "property", "drawing helpers")
 	],

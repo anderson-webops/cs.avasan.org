@@ -370,7 +370,10 @@ for __classes_builtin_name in (
     "keyboard",
     "keys",
     "mouse",
+    "keymods",
     "clock",
+    "Animation",
+    "animate",
     "sounds",
     "music",
     "images",
@@ -1254,6 +1257,8 @@ from js import window
 _bridge = window.__classesPythonIdeGame
 _module_globals = {}
 _scheduled = []
+_animations = []
+_last_tick = None
 
 def _number(value, fallback=0):
     try:
@@ -1337,25 +1342,47 @@ def _call_callback(callback, *args):
         return callback(*args)
     return callback(*args[:positional_count])
 
+def _call_named_callback(callback, named_args, fallback_args=()):
+    try:
+        parameters = list(inspect.signature(callback).parameters.values())
+    except Exception:
+        return callback(*fallback_args)
+
+    args = []
+    kwargs = {}
+    fallback_index = 0
+    for parameter in parameters:
+        if parameter.kind == parameter.VAR_POSITIONAL:
+            args.extend(fallback_args[fallback_index:])
+            fallback_index = len(fallback_args)
+            continue
+        if parameter.kind == parameter.VAR_KEYWORD:
+            continue
+        if parameter.kind == parameter.KEYWORD_ONLY:
+            if parameter.name in named_args:
+                kwargs[parameter.name] = named_args[parameter.name]
+            continue
+        if parameter.name in named_args:
+            args.append(named_args[parameter.name])
+        elif fallback_index < len(fallback_args):
+            args.append(fallback_args[fallback_index])
+            fallback_index += 1
+        elif parameter.default is inspect._empty:
+            break
+
+    return callback(*args, **kwargs)
+
 def _call_optional(name, *args):
     callback = _module_globals.get(name)
     if callable(callback):
         return _call_callback(callback, *args)
     return None
 
-def _call_mouse_move(pos, rel, buttons):
-    callback = _module_globals.get("on_mouse_move")
+def _call_optional_named(name, named_args, fallback_args=()):
+    callback = _module_globals.get(name)
     if not callable(callback):
         return None
-
-    positional_count, has_varargs = _callback_shape(callback)
-    if has_varargs or positional_count is None or positional_count >= 3:
-        return callback(pos, rel, buttons)
-    if positional_count == 2:
-        return callback(pos, buttons)
-    if positional_count == 1:
-        return callback(pos)
-    return callback()
+    return _call_named_callback(callback, named_args, fallback_args)
 
 class Rect:
     def __init__(self, *args):
@@ -1834,8 +1861,29 @@ class _Mouse:
     LEFT = "left"
     MIDDLE = "middle"
     RIGHT = "right"
+    WHEEL_UP = "wheel_up"
+    WHEEL_DOWN = "wheel_down"
 
 mouse = _Mouse()
+
+class _KeyMods:
+    LSHIFT = 1
+    RSHIFT = 2
+    SHIFT = LSHIFT | RSHIFT
+    LCTRL = 4
+    RCTRL = 8
+    CTRL = LCTRL | RCTRL
+    LALT = 16
+    RALT = 32
+    ALT = LALT | RALT
+    LMETA = 64
+    RMETA = 128
+    META = LMETA | RMETA
+    NUM = 256
+    CAPS = 512
+    MODE = 1024
+
+keymods = _KeyMods()
 
 class _ScreenDraw:
     def text(self, text, pos=(0, 0), color="white", fontsize=24, center=None, **_kwargs):
@@ -1916,6 +1964,15 @@ class _Screen:
     def fill(self, color):
         _bridge.fill(_normalize_color(color))
 
+    def bounds(self):
+        return ZRect(
+            (0, 0),
+            (
+                _number(_module_globals.get("WIDTH", 640), 640),
+                _number(_module_globals.get("HEIGHT", 400), 400),
+            ),
+        )
+
 screen = _Screen()
 
 class _Clock:
@@ -1948,6 +2005,85 @@ class _Clock:
         ]
 
 clock = _Clock()
+
+def _tween_progress(tween, progress):
+    progress = max(0.0, min(1.0, float(progress)))
+    tween = str(tween or "linear")
+    if tween == "accelerate":
+        return progress * progress
+    if tween == "decelerate":
+        return 1 - ((1 - progress) * (1 - progress))
+    if tween == "accel_decel":
+        return (3 * progress * progress) - (2 * progress * progress * progress)
+    return progress
+
+def _interpolate_value(start, target, progress):
+    if isinstance(start, (tuple, list)) and isinstance(target, (tuple, list)):
+        size = min(len(start), len(target))
+        return tuple(
+            _interpolate_value(start[index], target[index], progress)
+            for index in range(size)
+        )
+    try:
+        return _number(start) + ((_number(target) - _number(start)) * progress)
+    except Exception:
+        return target if progress >= 1 else start
+
+class Animation:
+    def __init__(self, obj, tween="linear", duration=1, on_finished=None, **targets):
+        self.object = obj
+        self.tween = tween
+        self.duration = max(0.0, float(_number(duration, 1)))
+        self.on_finished = on_finished
+        self.running = True
+        self._started = time.monotonic()
+        self._targets = dict(targets)
+        self._starts = {
+            name: getattr(obj, name)
+            for name in self._targets
+            if hasattr(obj, name)
+        }
+
+    def _apply(self, progress):
+        eased = _tween_progress(self.tween, progress)
+        for name, target in self._targets.items():
+            start = self._starts.get(name, target)
+            setattr(self.object, name, _interpolate_value(start, target, eased))
+
+    def _step(self, now):
+        if not self.running:
+            return False
+        progress = 1.0 if self.duration <= 0 else (now - self._started) / self.duration
+        self._apply(progress)
+        if progress >= 1:
+            self.running = False
+            if callable(self.on_finished):
+                self.on_finished()
+            return False
+        return True
+
+    def stop(self, complete=False):
+        if complete:
+            self._apply(1.0)
+        self.running = False
+
+def animate(obj, tween="linear", duration=1, on_finished=None, **targets):
+    animation = Animation(
+        obj,
+        tween=tween,
+        duration=duration,
+        on_finished=on_finished,
+        **targets,
+    )
+    _animations.append(animation)
+    return animation
+
+def _run_animations(now):
+    for animation in list(_animations):
+        if animation.running:
+            animation._step(now)
+        if not animation.running and animation in _animations:
+            _animations.remove(animation)
 
 class _Sound:
     def __init__(self, name):
@@ -2038,6 +2174,10 @@ class _Image:
         width, height = _asset_size(self.name)
         return (int(width), int(height))
 
+    def get_rect(self):
+        width, height = self.get_size()
+        return Rect((0, 0), (width, height))
+
 class _ImageLibrary:
     def __getattr__(self, name):
         return _Image(name)
@@ -2073,20 +2213,47 @@ def _handle_events():
     for event in json.loads(raw_events):
         event_type = event.get("type")
         if event_type == "keydown":
-            _call_optional("on_key_down", event.get("key"))
+            key = event.get("key")
+            unicode = event.get("unicode", key if isinstance(key, str) and len(key) == 1 else "")
+            mod = event.get("mod", 0)
+            _call_optional_named(
+                "on_key_down",
+                {"key": key, "mod": mod, "unicode": unicode},
+                (key, mod, unicode),
+            )
         elif event_type == "keyup":
-            _call_optional("on_key_up", event.get("key"))
+            key = event.get("key")
+            mod = event.get("mod", 0)
+            _call_optional_named(
+                "on_key_up",
+                {"key": key, "mod": mod},
+                (key, mod),
+            )
         elif event_type == "mousedown":
             pos = (event.get("x", 0), event.get("y", 0))
-            _call_optional("on_mouse_down", pos, event.get("button", "left"))
+            button = event.get("button", "left")
+            _call_optional_named(
+                "on_mouse_down",
+                {"pos": pos, "button": button},
+                (pos, button),
+            )
         elif event_type == "mouseup":
             pos = (event.get("x", 0), event.get("y", 0))
-            _call_optional("on_mouse_up", pos, event.get("button", "left"))
+            button = event.get("button", "left")
+            _call_optional_named(
+                "on_mouse_up",
+                {"pos": pos, "button": button},
+                (pos, button),
+            )
         elif event_type == "mousemove":
             pos = (event.get("x", 0), event.get("y", 0))
             rel = (event.get("relX", 0), event.get("relY", 0))
             buttons = event.get("buttons", [])
-            _call_mouse_move(pos, rel, buttons)
+            _call_optional_named(
+                "on_mouse_move",
+                {"pos": pos, "rel": rel, "buttons": buttons},
+                (pos, rel, buttons),
+            )
 
 def install_builtins():
     builtins.Actor = Actor
@@ -2096,16 +2263,20 @@ def install_builtins():
     builtins.keyboard = keyboard
     builtins.keys = keys
     builtins.mouse = mouse
+    builtins.keymods = keymods
     builtins.clock = clock
+    builtins.Animation = Animation
+    builtins.animate = animate
     builtins.sounds = sounds
     builtins.music = music
     builtins.images = images
     builtins.pgzrun = pgzrun
 
 def start(module_globals=None):
-    global _module_globals
+    global _module_globals, _last_tick
     if module_globals is not None:
         _module_globals = module_globals
+    _last_tick = None
     install_builtins()
     _bridge.reset(
         float(_number(_module_globals.get("WIDTH", 640), 640)),
@@ -2124,9 +2295,14 @@ def __classes_pgzero_start(module_globals):
     start(module_globals)
 
 def __classes_pgzero_tick():
+    global _last_tick
+    now = time.monotonic()
+    dt = 0 if _last_tick is None else min(now - _last_tick, 0.25)
+    _last_tick = now
     _handle_events()
     _run_scheduled()
-    _call_optional("update")
+    _call_optional("update", dt)
+    _run_animations(now)
     _call_optional("draw")
 
 install_builtins()

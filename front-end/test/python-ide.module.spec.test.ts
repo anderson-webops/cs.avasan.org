@@ -1180,7 +1180,11 @@ describe("python IDE project helpers", () => {
 
 		expect(runtimeSource).toContain("def _asset_size(image");
 		expect(runtimeSource).toContain("builtins.images = images");
+		expect(runtimeSource).toContain("builtins.keymods = keymods");
+		expect(runtimeSource).toContain("builtins.Animation = Animation");
+		expect(runtimeSource).toContain("builtins.animate = animate");
 		expect(runtimeSource).toContain("def blit(self, image, pos");
+		expect(runtimeSource).toContain("def bounds(self):");
 		expect(runtimeSource).toContain("def line(self, start, end, color):");
 		expect(runtimeSource).toContain("def circle(self, pos, radius, color):");
 		expect(runtimeSource).toContain(
@@ -1209,6 +1213,17 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("def unpause(self):");
 		expect(runtimeSource).toContain("def set_volume(self, volume):");
 		expect(runtimeSource).toContain("def get_width(self):");
+		expect(runtimeSource).toContain("def get_rect(self):");
+		expect(runtimeSource).toContain("def _call_named_callback");
+		expect(runtimeSource).toContain("def animate(obj");
+		expect(runtimeSource).toContain("class Animation:");
+		expect(runtimeSource).toContain("def _run_animations(now):");
+		expect(runtimeSource).toContain(
+			`_call_optional_named(
+                "on_mouse_down"`
+		);
+		expect(runtimeSource).toContain("_call_optional(\"update\", dt)");
+		expect(runtimeSource).toContain("_run_animations(now)");
 		expect(pageSource).toContain("await ensureGameCourseAssetsLoaded()");
 		expect(pageSource).toContain(
 			"assetCompletions: pythonCodeMirrorAssetCompletions"

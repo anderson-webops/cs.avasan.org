@@ -107,9 +107,14 @@ describe("python IDE CodeMirror editor", () => {
 		).toEqual(
 			expect.arrayContaining([
 				"Actor",
+				"Animation",
 				"HEIGHT",
 				"WIDTH",
+				"animate",
+				"keys",
 				"keyboard",
+				"on_key_up",
+				"on_mouse_move",
 				"pgzrun",
 				"screen"
 			])
@@ -167,9 +172,30 @@ describe("python IDE CodeMirror editor", () => {
 			expect.arrayContaining([
 				"schedule",
 				"schedule_interval",
+				"schedule_unique",
 				"unschedule"
 			])
 		);
+		expect(
+			pythonIdeCompletionsForMode("pgzero", "keys").map(
+				option => option.label
+			)
+		).toEqual(expect.arrayContaining(["LEFT", "SPACE", "UP"]));
+		expect(
+			pythonIdeCompletionsForMode("pgzero", "keymods").map(
+				option => option.label
+			)
+		).toEqual(expect.arrayContaining(["ALT", "CTRL", "SHIFT"]));
+		expect(
+			pythonIdeCompletionsForMode("pgzero", "mouse").map(
+				option => option.label
+			)
+		).toEqual(expect.arrayContaining(["LEFT", "WHEEL_DOWN", "WHEEL_UP"]));
+		expect(
+			pythonIdeCompletionsForMode("pgzero", "screen").map(
+				option => option.label
+			)
+		).toEqual(expect.arrayContaining(["bounds", "fill"]));
 		expect(
 			pythonIdeCompletionsForMode("pgzero", "music").map(
 				option => option.label
