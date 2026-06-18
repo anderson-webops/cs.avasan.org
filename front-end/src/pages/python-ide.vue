@@ -234,6 +234,8 @@ const gameImageCache = new Map<string, CachedGameImage>();
 const gameSoundAudio = new Map<string, HTMLAudioElement>();
 
 let saveTimer: ReturnType<typeof window.setTimeout> | null = null;
+let saveInFlight: Promise<void> | null = null;
+let saveQueued = false;
 let suppressAutoSave = false;
 let resizeObserver: ResizeObserver | null = null;
 let gameAnimationFrame: number | null = null;
@@ -552,27 +554,55 @@ async function loadProjects() {
 	}
 }
 
-async function saveSelectedProject() {
+async function saveSelectedProjectOnce() {
 	const project = selectedProject.value;
 	if (!project || suppressAutoSave) return;
 
-	isSaving.value = true;
+	const startedProjectID = project._id;
+	const startedUpdatedAt = project.updatedAt ?? "";
+	const payload = pythonIdeProjectToPayload(project);
+
 	try {
-		if (!canSyncToAccount.value || project._id.startsWith("local-")) {
+		if (!canSyncToAccount.value) {
 			await persistLocalProjects();
 			return;
 		}
 
-		const savedProject = await updateRemotePythonIdeProject(project._id, {
-			title: project.title,
-			mode: project.mode,
-			files: project.files,
-			activeFileName: project.activeFileName
-		});
+		const savedProject = startedProjectID.startsWith("local-")
+			? await createRemotePythonIdeProject(payload)
+			: await updateRemotePythonIdeProject(startedProjectID, payload);
 		const index = projects.value.findIndex(
-			candidate => candidate._id === project._id
+			candidate => candidate._id === startedProjectID
 		);
-		if (index >= 0) projects.value.splice(index, 1, savedProject);
+		const currentProject = index >= 0 ? projects.value[index] : null;
+		if (!currentProject) return;
+
+		const projectChangedDuringSave =
+			currentProject.updatedAt !== startedUpdatedAt;
+
+		if (projectChangedDuringSave) {
+			if (startedProjectID.startsWith("local-")) {
+				currentProject._id = savedProject._id;
+				currentProject.createdAt =
+					currentProject.createdAt ?? savedProject.createdAt;
+				if (selectedProjectID.value === startedProjectID) {
+					selectedProjectID.value = savedProject._id;
+				}
+			}
+			saveQueued = true;
+			await saveLocalPythonProjectsAsync(
+				projects.value,
+				storageUserID.value
+			);
+			return;
+		}
+
+		if (index >= 0) {
+			projects.value.splice(index, 1, savedProject);
+			if (selectedProjectID.value === startedProjectID) {
+				selectedProjectID.value = savedProject._id;
+			}
+		}
 		await clearLocalPythonProjectsAsync(storageUserID.value);
 		saveMessage.value = "Synced to account";
 	} catch (error) {
@@ -583,7 +613,28 @@ async function saveSelectedProject() {
 				? error.message
 				: "Save failed; kept a local copy."
 		);
+	}
+}
+
+async function saveSelectedProject() {
+	if (suppressAutoSave) return;
+	if (saveInFlight) {
+		saveQueued = true;
+		return saveInFlight;
+	}
+
+	isSaving.value = true;
+	saveInFlight = (async () => {
+		do {
+			saveQueued = false;
+			await saveSelectedProjectOnce();
+		} while (saveQueued);
+	})();
+
+	try {
+		await saveInFlight;
 	} finally {
+		saveInFlight = null;
 		isSaving.value = false;
 	}
 }

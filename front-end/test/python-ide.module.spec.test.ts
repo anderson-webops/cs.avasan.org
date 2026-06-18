@@ -566,6 +566,24 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("const isRemoteProject =");
 	});
 
+	it("serializes saves and protects newer edits from stale remote responses", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/pages/python-ide.vue"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain("let saveInFlight: Promise<void> | null");
+		expect(pageSource).toContain("let saveQueued = false");
+		expect(pageSource).toContain("async function saveSelectedProjectOnce");
+		expect(pageSource).toContain("const startedUpdatedAt");
+		expect(pageSource).toContain(
+			"? await createRemotePythonIdeProject(payload)"
+		);
+		expect(pageSource).toContain("const projectChangedDuringSave");
+		expect(pageSource).toContain("saveQueued = true");
+		expect(pageSource).toContain("currentProject._id = savedProject._id");
+	});
+
 	it("normalizes project file names without accepting unsafe names", () => {
 		expect(normalizePythonFileName("helper tools")).toBe("helper_tools.py");
 		expect(normalizePythonFileName("helpers/math tools")).toBe(
