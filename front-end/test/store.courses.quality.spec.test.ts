@@ -2267,6 +2267,40 @@ describe("course text quality normalization", () => {
 		);
 	});
 
+	it("keeps refactoring clinics concept-specific instead of repeated design-pattern filler", async () => {
+		const course = await loadRawCourse("design-patterns-in-java-part-2");
+		expect(course).not.toBeNull();
+
+		const clinicConcepts = [11, 12, 13, 14, 15, 16, 17].map(clinic =>
+			findItem(
+				course!,
+				new RegExp(`Refactoring Clinic ${clinic}: Core Concepts`)
+			)
+		);
+
+		expect(new Set(clinicConcepts.map(item => item.content)).size).toBe(7);
+		expect(clinicConcepts[0].content).toContain("feature envy");
+		expect(clinicConcepts[0].content).toContain("Extract Class");
+		expect(clinicConcepts[1].content).toContain(
+			"Replace Conditional with Polymorphism"
+		);
+		expect(clinicConcepts[2].content).toContain(
+			"Introduce Parameter Object"
+		);
+		expect(clinicConcepts[3].content).toContain("Replace Temp with Query");
+		expect(clinicConcepts[4].content).toContain("Template Method");
+		expect(clinicConcepts[5].content).toContain("Null Object");
+		expect(clinicConcepts[6].content).toContain(
+			"multi-smell sequencing"
+		);
+
+		for (const item of clinicConcepts) {
+			expect(item.content).not.toContain(
+				"object roles, collaboration boundaries, before-and-after coupling"
+			);
+		}
+	});
+
 	it("formats inline project steps and support labels as readable markdown blocks", async () => {
 		const [scratchLevel1, scratchLevel2, pygames] = await Promise.all([
 			loadRawCourse("scratch-level-1"),

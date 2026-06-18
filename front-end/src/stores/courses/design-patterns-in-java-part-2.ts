@@ -1,6 +1,116 @@
+import type { ImplementationLabSection } from "./implementationLabGuidance";
 import type { RawCourse } from "./types";
 import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
+
+const refactoringClinicContexts = {
+	11: {
+		focus: "feature envy, Extract Class, Move Method, object ownership, client impact, and tests that prove behavior stayed stable while responsibilities moved",
+		artifact:
+			"the source class that owns too much behavior, the extracted collaborator, the public method that clients still call, and the tests that compare before-and-after output",
+		invariant:
+			"the invariant that clients should not need to know which class now owns the moved behavior",
+		exampleCase:
+			"For **Refactoring Clinic 11**, trace one method that reads more data from another object than from its own class. Record the original call path, the data it uses, the extracted method or class boundary, and the test output before moving anything else.",
+		boundaryCase:
+			"Then check a case where the moved behavior depends on missing, empty, or unusual collaborator state so the new class boundary does not hide a broken invariant.",
+		reviewEvidence:
+			"Summarize which behavior moved, which class now owns the decision, what client code did not change, and what test or sample output proves the refactor preserved behavior."
+	},
+	12: {
+		focus: "switch statements, Replace Conditional with Polymorphism, Strategy extraction, branch-specific tests, and evidence that each variant owns its rule instead of one method owning every case",
+		artifact:
+			"the original conditional hotspot, the replacement interface or superclass, the concrete variants, and the caller that selects or receives the right behavior",
+		invariant:
+			"the invariant that adding a new variant should not require editing the old branch-heavy method",
+		exampleCase:
+			"For **Refactoring Clinic 12**, start with one switch or if/else chain and trace two different branches with expected outputs. Refactor only one branch into a variant first, then compare the mixed state against the original behavior.",
+		boundaryCase:
+			"Then add an unknown, default, or unsupported case so the design has an explicit failure path rather than silently choosing the wrong subclass or strategy.",
+		reviewEvidence:
+			"Summarize the branch logic that became polymorphic, the remaining conditional logic if any, the tests for each variant, and the next variant that would be easiest to add."
+	},
+	13: {
+		focus: "long parameter lists, Introduce Parameter Object, Preserve Whole Object, data clumps, validation boundaries, and tests that prove grouping values improved the API without changing results",
+		artifact:
+			"the original method signature, the new parameter object or preserved source object, validation rules, and the call sites that become simpler after the change",
+		invariant:
+			"the invariant that grouped data should represent one coherent concept rather than a bag of unrelated values",
+		exampleCase:
+			"For **Refactoring Clinic 13**, choose one call with three or more related parameters and trace how those values travel through the method. Replace the group with a named object, then verify the same output with the old sample input.",
+		boundaryCase:
+			"Then test an incomplete or inconsistent parameter group so validation happens at a clear boundary instead of being scattered across the method body.",
+		reviewEvidence:
+			"Summarize which parameters belonged together, where validation now lives, how call sites changed, and whether the new object clarified or merely renamed the same complexity."
+	},
+	14: {
+		focus: "temporary variables, Replace Temp with Query, Split Temporary Variable, calculation pipelines, readable names, and tests that prove each extracted query preserves the same computed value",
+		artifact:
+			"the original calculation method, the named query methods or split variables, the intermediate values worth checking, and a small expected-output table",
+		invariant:
+			"the invariant that each named step has one meaning and can be checked independently",
+		exampleCase:
+			"For **Refactoring Clinic 14**, trace a calculation with at least two intermediate values. Rename or split one temporary at a time, compare intermediate values, and only then extract a query method.",
+		boundaryCase:
+			"Then check zero, negative, maximum, or precision-sensitive input so the refactor does not accidentally change numeric behavior while improving readability.",
+		reviewEvidence:
+			"Summarize the before-and-after calculation path, the intermediate values that were verified, and one extraction that would be risky if done before the values were understood."
+	},
+	15: {
+		focus: "duplicated workflows, Template Method, Strategy, hook methods, subclass responsibilities, and tests that prove shared algorithm structure is separated from variable steps",
+		artifact:
+			"the duplicated workflow methods, the common algorithm skeleton, the variable steps, and representative subclasses or strategies that exercise different behavior",
+		invariant:
+			"the invariant that shared workflow order stays fixed while individual steps can vary safely",
+		exampleCase:
+			"For **Refactoring Clinic 15**, compare two similar workflow methods and mark which lines are identical, which lines vary, and which order constraints matter. Extract the shared skeleton before introducing any new variation.",
+		boundaryCase:
+			"Then add a workflow variant with one missing or optional step so the design exposes whether Template Method hooks or Strategy objects communicate the variation more clearly.",
+		reviewEvidence:
+			"Summarize why Template Method or Strategy was chosen, which duplicate logic disappeared, what still varies, and which test proves the workflow order stayed correct."
+	},
+	16: {
+		focus: "repeated null checks, Introduce Special Case, Null Object, Optional-return boundaries, default behavior, and tests that prove absence is handled intentionally rather than hidden",
+		artifact:
+			"the nullable collaborator or return value, the special-case object or explicit Optional boundary, default behavior, and callers that no longer repeat null checks",
+		invariant:
+			"the invariant that absent data should have one explicit policy instead of several slightly different caller-side guesses",
+		exampleCase:
+			"For **Refactoring Clinic 16**, trace one normal object and one missing object through the same call path. Introduce a special case or explicit absence boundary, then verify both paths still produce deliberate output.",
+		boundaryCase:
+			"Then check a partially populated object so the design does not confuse a valid object with absent data or use Null Object to hide a data-quality problem.",
+		reviewEvidence:
+			"Summarize which null checks were removed, where absence is now represented, what default behavior is intentional, and what condition should still fail loudly."
+	},
+	17: {
+		focus: "multi-smell sequencing, characterization tests, commit-sized refactor steps, postponed changes, rollback points, and evidence that a refactor plan improves design without becoming a rewrite",
+		artifact:
+			"the original design-smell map, ordered refactor sequence, characterization tests, final class or method layout, and a short log of changes that were intentionally delayed",
+		invariant:
+			"the invariant that each step must leave the program runnable and easier to reason about than before",
+		exampleCase:
+			"For **Refactoring Clinic 17**, select a small legacy slice with at least two smells and write the sequence before editing. Complete one safe step, rerun the characterization checks, and decide whether the next planned step is still correct.",
+		boundaryCase:
+			"Then test a rollback or stop point by naming the first step that would be too large for one safe refactor and splitting it into smaller verified moves.",
+		reviewEvidence:
+			"Summarize the final sequence, the smell addressed by each step, the evidence after each checkpoint, and one improvement that was postponed because it belonged in a later refactor."
+	}
+} satisfies Record<
+	number,
+	NonNullable<Parameters<typeof buildImplementationLabGuidance>[0]["context"]>
+>;
+
+function buildRefactoringClinicGuidance(
+	clinic: keyof typeof refactoringClinicContexts,
+	section: ImplementationLabSection
+) {
+	return buildImplementationLabGuidance({
+		courseFamily: "Java design patterns",
+		moduleTitle: `Refactoring Clinic ${clinic}: Implementation Lab`,
+		section,
+		context: refactoringClinicContexts[clinic]
+	});
+}
 
 export const designPatternsInJavaPart2Course: RawCourse = {
 	name: "Design Patterns in Java Part 2: Refactoring",
@@ -866,30 +976,15 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Refactoring Clinic 11: Core Concepts",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 11: Implementation Lab",
-						section: "concepts"
-					})
+					content: buildRefactoringClinicGuidance(11, "concepts")
 				},
 				{
 					title: "Refactoring Clinic 11: Guided Example",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 11: Implementation Lab",
-						section: "example"
-					})
+					content: buildRefactoringClinicGuidance(11, "example")
 				},
 				{
 					title: "Refactoring Clinic 11: Core Project",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 11: Implementation Lab",
-						section: "coreProject"
-					}),
+					content: buildRefactoringClinicGuidance(11, "coreProject"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-01-refactoring-clinic-11/starter",
 					solutionLink:
@@ -897,23 +992,13 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				},
 				{
 					title: "Refactoring Clinic 11: Review and Reflection",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 11: Implementation Lab",
-						section: "review"
-					})
+					content: buildRefactoringClinicGuidance(11, "review")
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Refactoring Clinic 11: Extension Challenge",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 11: Implementation Lab",
-						section: "extension"
-					}),
+					content: buildRefactoringClinicGuidance(11, "extension"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-01-refactoring-clinic-11/starter",
 					solutionLink:
@@ -954,30 +1039,15 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Refactoring Clinic 12: Core Concepts",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 12: Implementation Lab",
-						section: "concepts"
-					})
+					content: buildRefactoringClinicGuidance(12, "concepts")
 				},
 				{
 					title: "Refactoring Clinic 12: Guided Example",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 12: Implementation Lab",
-						section: "example"
-					})
+					content: buildRefactoringClinicGuidance(12, "example")
 				},
 				{
 					title: "Refactoring Clinic 12: Core Project",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 12: Implementation Lab",
-						section: "coreProject"
-					}),
+					content: buildRefactoringClinicGuidance(12, "coreProject"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-02-refactoring-clinic-12/starter",
 					solutionLink:
@@ -985,23 +1055,13 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				},
 				{
 					title: "Refactoring Clinic 12: Review and Reflection",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 12: Implementation Lab",
-						section: "review"
-					})
+					content: buildRefactoringClinicGuidance(12, "review")
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Refactoring Clinic 12: Extension Challenge",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 12: Implementation Lab",
-						section: "extension"
-					}),
+					content: buildRefactoringClinicGuidance(12, "extension"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-02-refactoring-clinic-12/starter",
 					solutionLink:
@@ -1042,30 +1102,15 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Refactoring Clinic 13: Core Concepts",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 13: Implementation Lab",
-						section: "concepts"
-					})
+					content: buildRefactoringClinicGuidance(13, "concepts")
 				},
 				{
 					title: "Refactoring Clinic 13: Guided Example",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 13: Implementation Lab",
-						section: "example"
-					})
+					content: buildRefactoringClinicGuidance(13, "example")
 				},
 				{
 					title: "Refactoring Clinic 13: Core Project",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 13: Implementation Lab",
-						section: "coreProject"
-					}),
+					content: buildRefactoringClinicGuidance(13, "coreProject"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-03-refactoring-clinic-13/starter",
 					solutionLink:
@@ -1073,23 +1118,13 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				},
 				{
 					title: "Refactoring Clinic 13: Review and Reflection",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 13: Implementation Lab",
-						section: "review"
-					})
+					content: buildRefactoringClinicGuidance(13, "review")
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Refactoring Clinic 13: Extension Challenge",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 13: Implementation Lab",
-						section: "extension"
-					}),
+					content: buildRefactoringClinicGuidance(13, "extension"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-03-refactoring-clinic-13/starter",
 					solutionLink:
@@ -1130,30 +1165,15 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Refactoring Clinic 14: Core Concepts",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 14: Implementation Lab",
-						section: "concepts"
-					})
+					content: buildRefactoringClinicGuidance(14, "concepts")
 				},
 				{
 					title: "Refactoring Clinic 14: Guided Example",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 14: Implementation Lab",
-						section: "example"
-					})
+					content: buildRefactoringClinicGuidance(14, "example")
 				},
 				{
 					title: "Refactoring Clinic 14: Core Project",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 14: Implementation Lab",
-						section: "coreProject"
-					}),
+					content: buildRefactoringClinicGuidance(14, "coreProject"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-04-refactoring-clinic-14/starter",
 					solutionLink:
@@ -1161,23 +1181,13 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				},
 				{
 					title: "Refactoring Clinic 14: Review and Reflection",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 14: Implementation Lab",
-						section: "review"
-					})
+					content: buildRefactoringClinicGuidance(14, "review")
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Refactoring Clinic 14: Extension Challenge",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 14: Implementation Lab",
-						section: "extension"
-					}),
+					content: buildRefactoringClinicGuidance(14, "extension"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-04-refactoring-clinic-14/starter",
 					solutionLink:
@@ -1218,30 +1228,15 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Refactoring Clinic 15: Core Concepts",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 15: Implementation Lab",
-						section: "concepts"
-					})
+					content: buildRefactoringClinicGuidance(15, "concepts")
 				},
 				{
 					title: "Refactoring Clinic 15: Guided Example",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 15: Implementation Lab",
-						section: "example"
-					})
+					content: buildRefactoringClinicGuidance(15, "example")
 				},
 				{
 					title: "Refactoring Clinic 15: Core Project",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 15: Implementation Lab",
-						section: "coreProject"
-					}),
+					content: buildRefactoringClinicGuidance(15, "coreProject"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-05-refactoring-clinic-15/starter",
 					solutionLink:
@@ -1249,23 +1244,13 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				},
 				{
 					title: "Refactoring Clinic 15: Review and Reflection",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 15: Implementation Lab",
-						section: "review"
-					})
+					content: buildRefactoringClinicGuidance(15, "review")
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Refactoring Clinic 15: Extension Challenge",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 15: Implementation Lab",
-						section: "extension"
-					}),
+					content: buildRefactoringClinicGuidance(15, "extension"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-05-refactoring-clinic-15/starter",
 					solutionLink:
@@ -1306,30 +1291,15 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Refactoring Clinic 16: Core Concepts",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 16: Implementation Lab",
-						section: "concepts"
-					})
+					content: buildRefactoringClinicGuidance(16, "concepts")
 				},
 				{
 					title: "Refactoring Clinic 16: Guided Example",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 16: Implementation Lab",
-						section: "example"
-					})
+					content: buildRefactoringClinicGuidance(16, "example")
 				},
 				{
 					title: "Refactoring Clinic 16: Core Project",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 16: Implementation Lab",
-						section: "coreProject"
-					}),
+					content: buildRefactoringClinicGuidance(16, "coreProject"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-06-refactoring-clinic-16/starter",
 					solutionLink:
@@ -1337,23 +1307,13 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				},
 				{
 					title: "Refactoring Clinic 16: Review and Reflection",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 16: Implementation Lab",
-						section: "review"
-					})
+					content: buildRefactoringClinicGuidance(16, "review")
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Refactoring Clinic 16: Extension Challenge",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 16: Implementation Lab",
-						section: "extension"
-					}),
+					content: buildRefactoringClinicGuidance(16, "extension"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-06-refactoring-clinic-16/starter",
 					solutionLink:
@@ -1394,30 +1354,15 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Refactoring Clinic 17: Core Concepts",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 17: Implementation Lab",
-						section: "concepts"
-					})
+					content: buildRefactoringClinicGuidance(17, "concepts")
 				},
 				{
 					title: "Refactoring Clinic 17: Guided Example",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 17: Implementation Lab",
-						section: "example"
-					})
+					content: buildRefactoringClinicGuidance(17, "example")
 				},
 				{
 					title: "Refactoring Clinic 17: Core Project",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 17: Implementation Lab",
-						section: "coreProject"
-					}),
+					content: buildRefactoringClinicGuidance(17, "coreProject"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-07-refactoring-clinic-17/starter",
 					solutionLink:
@@ -1425,23 +1370,13 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				},
 				{
 					title: "Refactoring Clinic 17: Review and Reflection",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 17: Implementation Lab",
-						section: "review"
-					})
+					content: buildRefactoringClinicGuidance(17, "review")
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Refactoring Clinic 17: Extension Challenge",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java design patterns",
-						moduleTitle:
-							"Refactoring Clinic 17: Implementation Lab",
-						section: "extension"
-					}),
+					content: buildRefactoringClinicGuidance(17, "extension"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-07-refactoring-clinic-17/starter",
 					solutionLink:

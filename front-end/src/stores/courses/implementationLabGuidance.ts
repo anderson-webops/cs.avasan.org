@@ -10,6 +10,14 @@ export interface ImplementationLabGuidanceOptions {
 	moduleTitle: string;
 	section: ImplementationLabSection;
 	hasReference?: boolean;
+	context?: {
+		focus?: string;
+		artifact?: string;
+		invariant?: string;
+		exampleCase?: string;
+		boundaryCase?: string;
+		reviewEvidence?: string;
+	};
 }
 
 function labLabel(moduleTitle: string) {
@@ -122,15 +130,23 @@ export function buildImplementationLabGuidance({
 	courseFamily,
 	moduleTitle,
 	section,
-	hasReference = true
+	hasReference = true,
+	context
 }: ImplementationLabGuidanceOptions) {
 	const label = labLabel(moduleTitle);
-	const focus = familyFocus(courseFamily);
+	const focus = context?.focus ?? familyFocus(courseFamily);
 
 	if (section === "concepts") {
+		const artifact =
+			context?.artifact ??
+			`${definiteLabel(label)} artifact, minimum working behavior, input/output surfaces`;
+		const invariant =
+			context?.invariant ??
+			"invariant that should stay true as features are added";
+
 		return [
 			`Use **${label}** to connect the build target to ${focus}.`,
-			`Define ${definiteLabel(label)} artifact, minimum working behavior, input/output surfaces, and invariant that should stay true as features are added.`,
+			`Define ${artifact}, and ${invariant}.`,
 			`Keep **${label}** concrete: the concept is complete only when the result can be run, inspected, and explained with evidence from the artifact.`
 		].join("\n\n");
 	}
@@ -145,15 +161,18 @@ export function buildImplementationLabGuidance({
 
 		return [
 			opener,
-			`For **${label}**, record the starting files or commands, exact input, expected result, observed result, and diagnostic checkpoint that proves the code is moving in the right direction.`,
-			`Then add one **${label}** boundary or failure case so the project has a clear comparison between normal behavior and the edge condition that most needs protection.`
+			context?.exampleCase ??
+				`For **${label}**, record the starting files or commands, exact input, expected result, observed result, and diagnostic checkpoint that proves the code is moving in the right direction.`,
+			context?.boundaryCase ??
+				`Then add one **${label}** boundary or failure case so the project has a clear comparison between normal behavior and the edge condition that most needs protection.`
 		].join("\n\n");
 	}
 
 	if (section === "review") {
 		return [
 			`Close **${label}** with an engineering note rather than a generic reflection.`,
-			`Summarize the final **${label}** behavior, the most important edge case, the evidence used to verify the result, and one limitation or next improvement.`,
+			context?.reviewEvidence ??
+				`Summarize the final **${label}** behavior, the most important edge case, the evidence used to verify the result, and one limitation or next improvement.`,
 			`${capitalizedDefiniteLabel(label)} note should be specific enough that the same artifact could be rerun or reviewed later without reconstructing the reasoning from memory.`
 		].join("\n\n");
 	}
