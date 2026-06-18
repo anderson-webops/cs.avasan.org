@@ -144,11 +144,13 @@ export interface GameBridge {
 	stopLoop: () => void;
 	playSound: (name: string) => void;
 	stopSound: (name: string) => void;
-	playMusic: (name: string) => void;
+	playMusic: (name: string, loop?: boolean) => void;
 	pauseMusic: () => void;
 	unpauseMusic: () => void;
 	setMusicVolume: (volume: number) => void;
 	stopMusic: () => void;
+	playTone: (frequency: number, duration: number) => number;
+	stopTone: (toneID: number) => void;
 	log: (text: string) => void;
 }
 
@@ -374,6 +376,7 @@ for __classes_builtin_name in (
     "clock",
     "Animation",
     "animate",
+    "tone",
     "sounds",
     "music",
     "images",
@@ -1308,6 +1311,45 @@ def _normalize_color(color):
         )
     return str(color)
 
+_tone_note_offsets = {
+    "c": -9,
+    "c#": -8,
+    "db": -8,
+    "d": -7,
+    "d#": -6,
+    "eb": -6,
+    "e": -5,
+    "f": -4,
+    "f#": -3,
+    "gb": -3,
+    "g": -2,
+    "g#": -1,
+    "ab": -1,
+    "a": 0,
+    "a#": 1,
+    "bb": 1,
+    "b": 2,
+}
+
+def _tone_frequency(pitch):
+    if isinstance(pitch, (int, float)):
+        return float(pitch)
+
+    note = str(pitch).strip().lower()
+    if len(note) >= 2 and note[1] in ("#", "b"):
+        name = note[:2]
+        octave_text = note[2:]
+    else:
+        name = note[:1]
+        octave_text = note[1:]
+
+    if name not in _tone_note_offsets:
+        raise ValueError("Unsupported tone pitch: {}".format(pitch))
+
+    octave = int(octave_text) if octave_text else 4
+    semitones = _tone_note_offsets[name] + ((octave - 4) * 12)
+    return 440.0 * (2 ** (semitones / 12))
+
 def _asset_size(image, fallback=(64, 64)):
     try:
         raw_size = _bridge.imageSizeJson(str(image))
@@ -2116,12 +2158,14 @@ class _Music:
         self._queued = None
 
     def play(self, name):
-        _bridge.playMusic(str(name))
+        _bridge.playMusic(str(name), True)
         self._playing = True
         self._queued = None
 
     def play_once(self, name):
-        self.play(name)
+        _bridge.playMusic(str(name), False)
+        self._playing = True
+        self._queued = None
 
     def queue(self, name):
         self._queued = str(name)
@@ -2158,7 +2202,48 @@ class _Music:
         self._queued = None
         return None
 
+    def _handle_music_end(self):
+        if self._queued:
+            next_track = self._queued
+            self._queued = None
+            self.play_once(next_track)
+        else:
+            self._playing = False
+
 music = _Music()
+
+class _ToneSound:
+    def __init__(self, pitch, duration):
+        self.pitch = pitch
+        self.duration = max(0.02, float(_number(duration, 0.2)))
+        self.frequency = _tone_frequency(pitch)
+        self._active_ids = []
+
+    def play(self, *_args, **_kwargs):
+        tone_id = int(_bridge.playTone(float(self.frequency), float(self.duration)))
+        if tone_id:
+            self._active_ids.append(tone_id)
+        return None
+
+    def stop(self):
+        for tone_id in list(self._active_ids):
+            _bridge.stopTone(int(tone_id))
+        self._active_ids.clear()
+        return None
+
+    def get_length(self):
+        return self.duration
+
+class _Tone:
+    def create(self, pitch, duration):
+        return _ToneSound(pitch, duration)
+
+    def play(self, pitch, duration):
+        sound = self.create(pitch, duration)
+        sound.play()
+        return sound
+
+tone = _Tone()
 
 class _Image:
     def __init__(self, name):
@@ -2254,6 +2339,9 @@ def _handle_events():
                 {"pos": pos, "rel": rel, "buttons": buttons},
                 (pos, rel, buttons),
             )
+        elif event_type == "musicended":
+            music._handle_music_end()
+            _call_optional("on_music_end")
 
 def install_builtins():
     builtins.Actor = Actor
@@ -2267,6 +2355,7 @@ def install_builtins():
     builtins.clock = clock
     builtins.Animation = Animation
     builtins.animate = animate
+    builtins.tone = tone
     builtins.sounds = sounds
     builtins.music = music
     builtins.images = images

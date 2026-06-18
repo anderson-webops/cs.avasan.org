@@ -192,6 +192,7 @@ const pgzeroRuntimeCompletions = [
 	completion("images", "namespace", "loaded image assets"),
 	completion("sounds", "namespace", "loaded sound effects"),
 	completion("music", "namespace", "background music controller"),
+	completion("tone", "namespace", "built-in tone generator"),
 	completion("draw", "function", "PyGame Zero draw callback", 30),
 	completion("update", "function", "PyGame Zero frame callback", 30),
 	completion("on_key_down", "function", "keyboard event callback"),
@@ -321,6 +322,10 @@ const pgzeroMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
 		completion("pause", "method", "pause background music"),
 		completion("unpause", "method", "resume background music"),
 		completion("set_volume", "method", "set music volume")
+	],
+	tone: [
+		completion("create", "method", "create a reusable tone sound"),
+		completion("play", "method", "play a synthesized note")
 	],
 	screen: [
 		completion("bounds", "method", "screen rectangle"),

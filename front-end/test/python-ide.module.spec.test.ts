@@ -1183,6 +1183,7 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("builtins.keymods = keymods");
 		expect(runtimeSource).toContain("builtins.Animation = Animation");
 		expect(runtimeSource).toContain("builtins.animate = animate");
+		expect(runtimeSource).toContain("builtins.tone = tone");
 		expect(runtimeSource).toContain("def blit(self, image, pos");
 		expect(runtimeSource).toContain("def bounds(self):");
 		expect(runtimeSource).toContain("def line(self, start, end, color):");
@@ -1218,6 +1219,12 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("def animate(obj");
 		expect(runtimeSource).toContain("class Animation:");
 		expect(runtimeSource).toContain("def _run_animations(now):");
+		expect(runtimeSource).toContain("def _tone_frequency(pitch):");
+		expect(runtimeSource).toContain("class _ToneSound:");
+		expect(runtimeSource).toContain("def create(self, pitch, duration):");
+		expect(runtimeSource).toContain("def play(self, pitch, duration):");
+		expect(runtimeSource).toContain("def _handle_music_end(self):");
+		expect(runtimeSource).toContain("elif event_type == \"musicended\":");
 		expect(runtimeSource).toContain(
 			`_call_optional_named(
                 "on_mouse_down"`
@@ -1235,6 +1242,9 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("pauseMusic: pauseGameMusic");
 		expect(pageSource).toContain("unpauseMusic: unpauseGameMusic");
 		expect(pageSource).toContain("setMusicVolume: setGameMusicVolume");
+		expect(pageSource).toContain("playTone: playGameTone");
+		expect(pageSource).toContain("stopTone: stopGameTone");
+		expect(pageSource).toContain("type: \"musicended\"");
 		expect(pageSource).toContain("imageSizeJson: gameImageSizeJson");
 		expect(pageSource).toContain("findPythonIdeCourseAsset");
 		expect(pageSource).toContain("gameImageCache.clear()");

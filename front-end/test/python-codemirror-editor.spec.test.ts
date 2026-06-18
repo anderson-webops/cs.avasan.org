@@ -116,7 +116,8 @@ describe("python IDE CodeMirror editor", () => {
 				"on_key_up",
 				"on_mouse_move",
 				"pgzrun",
-				"screen"
+				"screen",
+				"tone"
 			])
 		);
 		expect(
@@ -214,6 +215,11 @@ describe("python IDE CodeMirror editor", () => {
 				"unpause"
 			])
 		);
+		expect(
+			pythonIdeCompletionsForMode("pgzero", "tone").map(
+				option => option.label
+			)
+		).toEqual(expect.arrayContaining(["create", "play"]));
 		expect(
 			pythonIdeCompletionsForMode("data").map(option => option.label)
 		).toEqual(

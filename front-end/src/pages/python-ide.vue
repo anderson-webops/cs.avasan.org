@@ -168,7 +168,13 @@ interface GameCanvasState {
 }
 
 interface GameInputEvent {
-	type: "keydown" | "keyup" | "mousedown" | "mouseup" | "mousemove";
+	type:
+		| "keydown"
+		| "keyup"
+		| "mousedown"
+		| "mouseup"
+		| "mousemove"
+		| "musicended";
 	key?: string;
 	x?: number;
 	y?: number;
@@ -190,6 +196,12 @@ interface ResolvedGameAsset {
 	key: string;
 	src: string;
 	width?: number;
+}
+
+interface GameToneHandle {
+	gain: GainNode;
+	oscillator: OscillatorNode;
+	timeout: ReturnType<typeof window.setTimeout>;
 }
 
 type PythonIdeAssetFolder = "images" | "music" | "sounds";
@@ -266,6 +278,7 @@ const gameKeysDown = new Set<string>();
 const gameEvents: GameInputEvent[] = [];
 const gameImageCache = new Map<string, CachedGameImage>();
 const gameSoundAudio = new Map<string, Set<HTMLAudioElement>>();
+const gameToneAudio = new Map<number, GameToneHandle>();
 
 let saveTimer: ReturnType<typeof window.setTimeout> | null = null;
 let saveInFlight: Promise<void> | null = null;
@@ -284,6 +297,8 @@ let activeTurtleDragButton: string | null = null;
 let lastGamePointerPoint: { x: number; y: number } | null = null;
 let gameMusicAudio: HTMLAudioElement | null = null;
 let gameMusicVolume = 1;
+let gameToneAudioContext: AudioContext | null = null;
+let gameToneCounter = 0;
 let codeEditorView: EditorView | null = null;
 let syncingCodeMirrorContent = false;
 let gameCourseAssetPack: PythonIdeCourseAssetPack | null = null;
@@ -1830,6 +1845,7 @@ function stopAllGameAudio() {
 		stopGameSound(soundName);
 	gameSoundAudio.clear();
 	stopGameMusic();
+	stopAllGameTones();
 }
 
 async function ensureGameCourseAssetsLoaded(
@@ -2067,10 +2083,23 @@ function stopGameSound(name: string) {
 	gameSoundAudio.delete(name);
 }
 
-function playGameMusic(name: string) {
+function queueGameMusicEndedEvent(audio: HTMLAudioElement) {
+	if (gameMusicAudio !== audio) return;
+	gameMusicAudio = null;
+	gameEvents.push({ type: "musicended" });
+}
+
+function playGameMusic(name: string, loop = true) {
 	stopGameMusic();
-	gameMusicAudio = playProjectAudio("music", name, true);
-	if (gameMusicAudio) gameMusicAudio.volume = gameMusicVolume;
+	const audio = playProjectAudio("music", name, loop);
+	gameMusicAudio = audio;
+	if (!audio) return;
+	audio.volume = gameMusicVolume;
+	if (!loop) {
+		audio.addEventListener("ended", () => queueGameMusicEndedEvent(audio), {
+			once: true
+		});
+	}
 }
 
 function pauseGameMusic() {
@@ -2099,6 +2128,98 @@ function stopGameMusic() {
 	gameMusicAudio.pause();
 	gameMusicAudio.currentTime = 0;
 	gameMusicAudio = null;
+}
+
+function gameAudioContext() {
+	if (gameToneAudioContext) return gameToneAudioContext;
+	const AudioContextConstructor =
+		window.AudioContext ??
+		(window as typeof window & { webkitAudioContext?: typeof AudioContext })
+			.webkitAudioContext;
+	if (!AudioContextConstructor) return null;
+	gameToneAudioContext = new AudioContextConstructor();
+	return gameToneAudioContext;
+}
+
+function stopGameTone(toneID: number) {
+	const handle = gameToneAudio.get(toneID);
+	if (!handle) return;
+	window.clearTimeout(handle.timeout);
+	try {
+		handle.gain.gain.cancelScheduledValues(handle.gain.context.currentTime);
+		handle.gain.gain.setValueAtTime(0, handle.gain.context.currentTime);
+		handle.oscillator.stop();
+	} catch {
+		// Already stopped.
+	}
+	gameToneAudio.delete(toneID);
+}
+
+function stopAllGameTones() {
+	for (const toneID of [...gameToneAudio.keys()]) stopGameTone(toneID);
+}
+
+function playGameTone(frequency: number, duration: number) {
+	const context = gameAudioContext();
+	if (!context) {
+		appendOutput(
+			"system",
+			"Tone playback is not available in this browser."
+		);
+		return 0;
+	}
+
+	const safeFrequency = Math.min(
+		12000,
+		Math.max(20, Number(frequency) || 440)
+	);
+	const safeDuration = Math.min(10, Math.max(0.02, Number(duration) || 0.2));
+	const toneID = ++gameToneCounter;
+	const oscillator = context.createOscillator();
+	const gain = context.createGain();
+	const startedAt = context.currentTime;
+	const stoppedAt = startedAt + safeDuration;
+
+	oscillator.type = "sine";
+	oscillator.frequency.setValueAtTime(safeFrequency, startedAt);
+	gain.gain.setValueAtTime(0.0001, startedAt);
+	gain.gain.exponentialRampToValueAtTime(0.22, startedAt + 0.01);
+	gain.gain.setValueAtTime(
+		0.22,
+		Math.max(startedAt + 0.01, stoppedAt - 0.025)
+	);
+	gain.gain.exponentialRampToValueAtTime(0.0001, stoppedAt);
+	oscillator.connect(gain);
+	gain.connect(context.destination);
+
+	const cleanup = () => {
+		gameToneAudio.delete(toneID);
+		try {
+			oscillator.disconnect();
+			gain.disconnect();
+		} catch {
+			// Already disconnected.
+		}
+	};
+	oscillator.addEventListener("ended", cleanup, { once: true });
+
+	const timeout = window.setTimeout(
+		stopGameTone,
+		Math.ceil((safeDuration + 0.05) * 1000),
+		toneID
+	);
+	gameToneAudio.set(toneID, { gain, oscillator, timeout });
+	void context.resume().catch((error: unknown) => {
+		appendOutput(
+			"system",
+			error instanceof Error
+				? `Tone playback was blocked: ${error.message}`
+				: "Tone playback was blocked."
+		);
+	});
+	oscillator.start(startedAt);
+	oscillator.stop(stoppedAt);
+	return toneID;
 }
 
 function startGameLoop(tick: () => Promise<void>) {
@@ -2545,6 +2666,8 @@ const gameBridge: GameBridge = {
 	unpauseMusic: unpauseGameMusic,
 	setMusicVolume: setGameMusicVolume,
 	stopMusic: stopGameMusic,
+	playTone: playGameTone,
+	stopTone: stopGameTone,
 	log(text: string) {
 		appendOutput("system", text);
 	}
