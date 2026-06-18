@@ -439,6 +439,24 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("cancelTurtleAnimation()");
 	});
 
+	it("renders the Turtle cursor as a stable green turtle shape", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/pages/python-ide.vue"),
+			"utf8"
+		);
+		const markerStart = pageSource.indexOf("function drawTurtleMarker");
+		const markerEnd = pageSource.indexOf(
+			"function renderTurtleCommand",
+			markerStart
+		);
+		const markerSource = pageSource.slice(markerStart, markerEnd);
+
+		expect(markerSource).toContain("context.ellipse");
+		expect(markerSource).toContain("context.rotate(-radians)");
+		expect(markerSource).toContain("context.fillStyle = \"#22c55e\"");
+		expect(markerSource).not.toContain("context.fillStyle = pose.penColor");
+	});
+
 	it("guards long-running student loops before executing Python files", () => {
 		const runtimeSource = readFileSync(
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),

@@ -1163,32 +1163,59 @@ function turtleMovementDuration(fromPose: TurtlePose, toPose: TurtlePose) {
 function drawTurtleMarker(context: CanvasRenderingContext2D, pose: TurtlePose) {
 	const point = canvasCoordinates(pose.x, pose.y);
 	const radians = (pose.heading * Math.PI) / 180;
-	const size = 15;
-	const tip = { x: Math.cos(radians) * size, y: -Math.sin(radians) * size };
-	const leftWing = {
-		x: Math.cos(radians + 2.45) * size,
-		y: -Math.sin(radians + 2.45) * size
-	};
-	const rightWing = {
-		x: Math.cos(radians - 2.45) * size,
-		y: -Math.sin(radians - 2.45) * size
-	};
 
 	context.save();
-	context.fillStyle = pose.penColor;
-	context.strokeStyle = "#0f172a";
-	context.lineWidth = 1.75;
-	context.beginPath();
-	context.moveTo(point.x + tip.x, point.y + tip.y);
-	for (const nextPoint of [leftWing, rightWing]) {
-		context.lineTo(point.x + nextPoint.x, point.y + nextPoint.y);
+	context.translate(point.x, point.y);
+	context.rotate(-radians);
+	context.lineCap = "round";
+	context.lineJoin = "round";
+	context.lineWidth = 1.35;
+	context.strokeStyle = "#14532d";
+
+	context.fillStyle = "#86efac";
+	for (const [x, y, radiusX, radiusY, rotation] of [
+		[7.5, -9, 4.5, 2.5, -0.55],
+		[7.5, 9, 4.5, 2.5, 0.55],
+		[-8.5, -8.5, 4.2, 2.4, 0.55],
+		[-8.5, 8.5, 4.2, 2.4, -0.55]
+	] as const) {
+		context.beginPath();
+		context.ellipse(x, y, radiusX, radiusY, rotation, 0, Math.PI * 2);
+		context.fill();
+		context.stroke();
 	}
-	context.closePath();
+
+	context.beginPath();
+	context.ellipse(12.5, 0, 5.6, 4.6, 0, 0, Math.PI * 2);
 	context.fill();
 	context.stroke();
-	context.fillStyle = "#f8fafc";
+
 	context.beginPath();
-	context.arc(point.x, point.y, 3, 0, Math.PI * 2);
+	context.ellipse(-13.4, 0, 4.8, 3.4, 0, 0, Math.PI * 2);
+	context.fill();
+	context.stroke();
+
+	context.fillStyle = "#22c55e";
+	context.beginPath();
+	context.ellipse(0, 0, 12, 9.25, 0, 0, Math.PI * 2);
+	context.fill();
+	context.stroke();
+
+	context.strokeStyle = "rgba(20, 83, 45, 0.55)";
+	context.lineWidth = 0.9;
+	context.beginPath();
+	context.moveTo(-7.2, -5.3);
+	context.quadraticCurveTo(0, -8.2, 7.2, -5.3);
+	context.moveTo(-8.3, 0);
+	context.lineTo(8.3, 0);
+	context.moveTo(-7.2, 5.3);
+	context.quadraticCurveTo(0, 8.2, 7.2, 5.3);
+	context.stroke();
+
+	context.fillStyle = "#052e16";
+	context.beginPath();
+	context.arc(14.5, -1.6, 0.85, 0, Math.PI * 2);
+	context.arc(14.5, 1.6, 0.85, 0, Math.PI * 2);
 	context.fill();
 	context.restore();
 }
