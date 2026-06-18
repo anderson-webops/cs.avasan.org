@@ -34,10 +34,12 @@ export const usacoBronzeCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "USB0 Setup and Contest Workflow",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-22-Why-Did-the-Cow-Cross-the-Road-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-22-Why-Did-the-Cow-Cross-the-Road-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-22-Why-Did-the-Cow-Cross-the-Road-Java/solution"
 				}
 			],
 			supplementalProjects: [
@@ -46,7 +48,9 @@ export const usacoBronzeCourse: RawCourse = {
 					content:
 						"Keep a short contest log for setup and contest workflow that records one wrong assumption, one edge case that broke an early idea, and one note about which part of the problem statement is easiest to misread under time pressure. Bronze-level progress comes from disciplined debugging as much as from knowing a trick.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-22-Why-Did-the-Cow-Cross-the-Road-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-22-Why-Did-the-Cow-Cross-the-Road-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-22-Why-Did-the-Cow-Cross-the-Road-Java/solution"
 				},
 				{
 					title: "UB 23 Why Did the Cow Cross the Road II Java",
@@ -54,10 +58,12 @@ export const usacoBronzeCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "USB0 Setup and Contest Workflow",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-23-Why-Did-the-Cow-Cross-the-Road-II-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-23-Why-Did-the-Cow-Cross-the-Road-II-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-23-Why-Did-the-Cow-Cross-the-Road-II-Java/solution"
 				},
 				{
 					title: "UB 24 Why Did the Cow Cross the Road III Java",
@@ -65,10 +71,12 @@ export const usacoBronzeCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "USB0 Setup and Contest Workflow",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-24-Why-Did-the-Cow-Cross-the-Road-III-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-24-Why-Did-the-Cow-Cross-the-Road-III-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-24-Why-Did-the-Cow-Cross-the-Road-III-Java/solution"
 				}
 			]
 		},
@@ -102,10 +110,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"Unit 1: Simulation and Careful Translation",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB1-Square-Pasture"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB1-Square-Pasture/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB1-Square-Pasture/solution"
 				}
 			],
 			supplementalProjects: [
@@ -114,21 +124,27 @@ export const usacoBronzeCourse: RawCourse = {
 					content:
 						"Use geometric bounds and direct translation to practice reading a short statement carefully and converting it into a compact calculation.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB1-Square-Pasture"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB1-Square-Pasture/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB1-Square-Pasture/solution"
 				},
 				{
 					title: "Problem: Your Ride Is Here",
 					content:
 						"Use a classic warmup to reinforce modular arithmetic, string processing, and exact interpretation of a quirky problem statement.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB2-Your-Ride-Is-Here"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB2-Your-Ride-Is-Here/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB2-Your-Ride-Is-Here/solution"
 				},
 				{
 					title: "Problem: Transformations",
 					content:
 						"Practice rule-driven simulation by applying a fixed set of transformations and checking results systematically.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB10-Transformations"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB10-Transformations/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB10-Transformations/solution"
 				},
 				{
 					title: "Square Pasture Java",
@@ -137,10 +153,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"Unit 1: Simulation and Careful Translation",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB1-Square-Pasture-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB1-Square-Pasture-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB1-Square-Pasture-Java/solution"
 				}
 			]
 		},
@@ -174,10 +192,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"Unit 2: Intervals, Arrays, and Greedy Warmups",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB6-Milking-Cows"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB6-Milking-Cows/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB6-Milking-Cows/solution"
 				}
 			],
 			supplementalProjects: [
@@ -186,21 +206,27 @@ export const usacoBronzeCourse: RawCourse = {
 					content:
 						"Use interval merging and longest-gap reasoning to practice scanning sorted ranges carefully.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB6-Milking-Cows"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB6-Milking-Cows/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB6-Milking-Cows/solution"
 				},
 				{
 					title: "Problem: Barn Repair",
 					content:
 						"Use a clean greedy idea to decide where not to cover space, which is a great Bronze introduction to minimizing wasted coverage.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB12-Barn-Repair"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB12-Barn-Repair/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB12-Barn-Repair/solution"
 				},
 				{
 					title: "Problem: Speeding Ticket",
 					content:
 						"Practice range comparisons and piecewise simulation while keeping the data model simple enough to debug quickly.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB29-Speeding-Ticket"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB29-Speeding-Ticket/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB29-Speeding-Ticket/solution"
 				}
 			]
 		},
@@ -233,10 +259,12 @@ export const usacoBronzeCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Unit 3: Counting, Sorting, and Ranking",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB37-Diamond-Collector"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB37-Diamond-Collector/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB37-Diamond-Collector/solution"
 				}
 			],
 			supplementalProjects: [
@@ -245,21 +273,27 @@ export const usacoBronzeCourse: RawCourse = {
 					content:
 						"Use sorting and window-style reasoning to capture a best group under a constraint.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB37-Diamond-Collector"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB37-Diamond-Collector/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB37-Diamond-Collector/solution"
 				},
 				{
 					title: "Problem: Promotion Counting",
 					content:
 						"Practice tier-by-tier counting and careful propagation of totals through a simple structure.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB31-Promotion-Counting"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB31-Promotion-Counting/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB31-Promotion-Counting/solution"
 				},
 				{
 					title: "Problem: Acowdemia",
 					content:
 						"Use ranking and threshold logic to reinforce the habit of naming the exact score or count the problem asks for.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB54-Acowdemia"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB54-Acowdemia/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB54-Acowdemia/solution"
 				},
 				{
 					title: "Transformations Java",
@@ -267,10 +301,12 @@ export const usacoBronzeCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Unit 3: Counting, Sorting, and Ranking",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB10-Transformations-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB10-Transformations-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB10-Transformations-Java/solution"
 				}
 			]
 		},
@@ -303,10 +339,12 @@ export const usacoBronzeCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Unit 4: Search-Flavored Bronze Problems",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB25-The-Lost-Cow"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB25-The-Lost-Cow/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB25-The-Lost-Cow/solution"
 				}
 			],
 			supplementalProjects: [
@@ -315,21 +353,27 @@ export const usacoBronzeCourse: RawCourse = {
 					content:
 						"Use path simulation to model repeated movement and distance accumulation carefully.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB25-The-Lost-Cow"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB25-The-Lost-Cow/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB25-The-Lost-Cow/solution"
 				},
 				{
 					title: "Problem: Wormholes",
 					content:
 						"Treat pairings and repeated movement as a structured search exercise with a clear, bounded state space.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB16-Wormholes"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB16-Wormholes/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB16-Wormholes/solution"
 				},
 				{
 					title: "Problem: Family Tree",
 					content:
 						"Use parent and ancestor reasoning to practice a light graph-style relationship problem without leaving Bronze territory.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB51-Family-Tree"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB51-Family-Tree/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB51-Family-Tree/solution"
 				}
 			]
 		},
@@ -362,10 +406,12 @@ export const usacoBronzeCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Unit 5: Contest Sets and Tier Transition",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB50-Milking-Order"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB50-Milking-Order/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB50-Milking-Order/solution"
 				}
 			],
 			supplementalProjects: [
@@ -374,21 +420,27 @@ export const usacoBronzeCourse: RawCourse = {
 					content:
 						"Use ordering constraints and careful placement to rehearse the kind of structured reasoning that starts to appear near the top of Bronze.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB50-Milking-Order"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB50-Milking-Order/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB50-Milking-Order/solution"
 				},
 				{
 					title: "Problem: Feeding the Cows",
 					content:
 						"Use a late-Bronze constraint problem to test whether the solution stays simple under a more layered prompt.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB63-Feeding-the-Cows"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB63-Feeding-the-Cows/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB63-Feeding-the-Cows/solution"
 				},
 				{
 					title: "Problem: Just Stalling",
 					content:
 						"Use a counting-and-ordering problem as a final check for combining sorting with a careful interpretation of what is being counted.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB55-Just-Stalling"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB55-Just-Stalling/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB55-Just-Stalling/solution"
 				},
 				{
 					title: "Mixing Milk Java",
@@ -396,10 +448,12 @@ export const usacoBronzeCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Unit 5: Contest Sets and Tier Transition",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB11-Mixing-Milk-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB11-Mixing-Milk-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB11-Mixing-Milk-Java/solution"
 				}
 			]
 		},
@@ -456,28 +510,36 @@ export const usacoBronzeCourse: RawCourse = {
 					content:
 						"Use repeated pour operations to rehearse careful simulation and container-state updates.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB11-Mixing-Milk"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB11-Mixing-Milk/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB11-Mixing-Milk/solution"
 				},
 				{
 					title: "Problem: Hoof, Paper, Scissors",
 					content:
 						"Use case-based counting and matchup reasoning to strengthen simple game-logic analysis.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB20-Hoof-Paper-Scissors"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB20-Hoof-Paper-Scissors/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB20-Hoof-Paper-Scissors/solution"
 				},
 				{
 					title: "Problem: Circular Barn",
 					content:
 						"Use a stronger late-Bronze simulation and counting problem to test whether state modeling stays clean under more layered movement.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB35-Circular-Barn"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB35-Circular-Barn/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB35-Circular-Barn/solution"
 				},
 				{
 					title: "Problem: Cow College",
 					content:
 						"Use a late Bronze optimization prompt to practice sorting, revenue reasoning, and clear objective definition.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB62-Cow-College"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB62-Cow-College/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB62-Cow-College/solution"
 				}
 			]
 		},
@@ -509,10 +571,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 12 Barn Repair Java: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-12-Barn-Repair-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-12-Barn-Repair-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-12-Barn-Repair-Java/solution"
 				},
 				{
 					title: "UB 12 Barn Repair Java: Review and Reflection",
@@ -532,10 +596,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 12 Barn Repair Java: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-12-Barn-Repair-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-12-Barn-Repair-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-12-Barn-Repair-Java/solution"
 				},
 				{
 					title: "Combination Lock",
@@ -544,10 +610,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 12 Barn Repair Java: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB13-Combination-Lock"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB13-Combination-Lock/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB13-Combination-Lock/solution"
 				},
 				{
 					title: "Prime Cryptarithm",
@@ -556,10 +624,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 12 Barn Repair Java: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB14-Prime-Cryptarithm"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB14-Prime-Cryptarithm/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB14-Prime-Cryptarithm/solution"
 				}
 			]
 		},
@@ -591,10 +661,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 13 Combination Lock Java: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-13-Combination-Lock-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-13-Combination-Lock-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-13-Combination-Lock-Java/solution"
 				},
 				{
 					title: "UB 13 Combination Lock Java: Review and Reflection",
@@ -614,10 +686,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 13 Combination Lock Java: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-13-Combination-Lock-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-13-Combination-Lock-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-13-Combination-Lock-Java/solution"
 				},
 				{
 					title: "Ski Course Design",
@@ -626,10 +700,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 13 Combination Lock Java: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB15-Ski-Course-Design"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB15-Ski-Course-Design/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB15-Ski-Course-Design/solution"
 				},
 				{
 					title: "Block Game",
@@ -638,10 +714,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 13 Combination Lock Java: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB17-Block-Game"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB17-Block-Game/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB17-Block-Game/solution"
 				}
 			]
 		},
@@ -673,10 +751,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 14 Prime Cryptarithm Java: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-14-Prime-Cryptarithm-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-14-Prime-Cryptarithm-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-14-Prime-Cryptarithm-Java/solution"
 				},
 				{
 					title: "UB 14 Prime Cryptarithm Java: Review and Reflection",
@@ -696,10 +776,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 14 Prime Cryptarithm Java: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-14-Prime-Cryptarithm-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-14-Prime-Cryptarithm-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-14-Prime-Cryptarithm-Java/solution"
 				},
 				{
 					title: "The Cow Signal",
@@ -708,10 +790,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 14 Prime Cryptarithm Java: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB18-The-Cow-Signal"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB18-The-Cow-Signal/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB18-The-Cow-Signal/solution"
 				},
 				{
 					title: "Don't Be Last",
@@ -720,10 +804,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 14 Prime Cryptarithm Java: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB19-Dont-Be-Last"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB19-Dont-Be-Last/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB19-Dont-Be-Last/solution"
 				}
 			]
 		},
@@ -755,10 +841,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 15 Ski Course Design Java: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-15-Ski-Course-Design-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-15-Ski-Course-Design-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-15-Ski-Course-Design-Java/solution"
 				},
 				{
 					title: "UB 15 Ski Course Design Java: Review and Reflection",
@@ -778,10 +866,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 15 Ski Course Design Java: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-15-Ski-Course-Design-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-15-Ski-Course-Design-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-15-Ski-Course-Design-Java/solution"
 				},
 				{
 					title: "Your Ride Is Here Java",
@@ -790,10 +880,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 15 Ski Course Design Java: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB2-Your-Ride-Is-Here-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB2-Your-Ride-Is-Here-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB2-Your-Ride-Is-Here-Java/solution"
 				},
 				{
 					title: "Cow Tipping",
@@ -802,10 +894,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 15 Ski Course Design Java: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB21-Cow-Tipping"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB21-Cow-Tipping/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB21-Cow-Tipping/solution"
 				}
 			]
 		},
@@ -834,10 +928,12 @@ export const usacoBronzeCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "UB 16 Wormholes Java: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-16-Wormholes-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-16-Wormholes-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-16-Wormholes-Java/solution"
 				},
 				{
 					title: "UB 16 Wormholes Java: Review and Reflection",
@@ -855,10 +951,12 @@ export const usacoBronzeCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "UB 16 Wormholes Java: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-16-Wormholes-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-16-Wormholes-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-16-Wormholes-Java/solution"
 				},
 				{
 					title: "Why Did the Cow Cross the Road",
@@ -866,10 +964,12 @@ export const usacoBronzeCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "UB 16 Wormholes Java: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB22-Why-Did-the-Cow-Cross-the-Road"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB22-Why-Did-the-Cow-Cross-the-Road/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB22-Why-Did-the-Cow-Cross-the-Road/solution"
 				},
 				{
 					title: "Why Did the Cow Cross the Road II",
@@ -877,10 +977,12 @@ export const usacoBronzeCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "UB 16 Wormholes Java: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB23-Why-Did-the-Cow-Cross-the-Road-II"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB23-Why-Did-the-Cow-Cross-the-Road-II/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB23-Why-Did-the-Cow-Cross-the-Road-II/solution"
 				}
 			]
 		},
@@ -912,10 +1014,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 17 Block Game Java: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-17-Block-Game-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-17-Block-Game-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-17-Block-Game-Java/solution"
 				},
 				{
 					title: "UB 17 Block Game Java: Review and Reflection",
@@ -935,10 +1039,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 17 Block Game Java: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-17-Block-Game-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-17-Block-Game-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-17-Block-Game-Java/solution"
 				},
 				{
 					title: "Why Did the Cow Cross the Road III",
@@ -947,10 +1053,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 17 Block Game Java: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB24-Why-Did-the-Cow-Cross-the-Road-III"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB24-Why-Did-the-Cow-Cross-the-Road-III/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB24-Why-Did-the-Cow-Cross-the-Road-III/solution"
 				},
 				{
 					title: "The Lost Cow Java",
@@ -959,10 +1067,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 17 Block Game Java: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB25-The-Lost-Cow-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB25-The-Lost-Cow-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB25-The-Lost-Cow-Java/solution"
 				}
 			]
 		},
@@ -994,10 +1104,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 18 The Cow Signal Java: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-18-The-Cow-Signal-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-18-The-Cow-Signal-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-18-The-Cow-Signal-Java/solution"
 				},
 				{
 					title: "UB 18 The Cow Signal Java: Review and Reflection",
@@ -1017,10 +1129,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 18 The Cow Signal Java: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-18-The-Cow-Signal-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-18-The-Cow-Signal-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-18-The-Cow-Signal-Java/solution"
 				},
 				{
 					title: "Bovine Genomics",
@@ -1029,10 +1143,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 18 The Cow Signal Java: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB26-Bovine-Genomics"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB26-Bovine-Genomics/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB26-Bovine-Genomics/solution"
 				},
 				{
 					title: "Bovine Genomics Java",
@@ -1041,10 +1157,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 18 The Cow Signal Java: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB26-Bovine-Genomics-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB26-Bovine-Genomics-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB26-Bovine-Genomics-Java/solution"
 				}
 			]
 		},
@@ -1076,10 +1194,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 19 Don't Be Last Java: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-19-Dont-Be-Last-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-19-Dont-Be-Last-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-19-Dont-Be-Last-Java/solution"
 				},
 				{
 					title: "UB 19 Don't Be Last Java: Review and Reflection",
@@ -1099,10 +1219,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 19 Don't Be Last Java: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-19-Dont-Be-Last-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-19-Dont-Be-Last-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-19-Dont-Be-Last-Java/solution"
 				},
 				{
 					title: "Modern Art",
@@ -1111,10 +1233,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 19 Don't Be Last Java: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB27-Modern-Art"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB27-Modern-Art/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB27-Modern-Art/solution"
 				},
 				{
 					title: "Modern Art Java",
@@ -1123,10 +1247,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 19 Don't Be Last Java: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB27-Modern-Art-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB27-Modern-Art-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB27-Modern-Art-Java/solution"
 				}
 			]
 		},
@@ -1158,10 +1284,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 20 Hoof Paper Scissors Java: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-20-Hoof-Paper-Scissors-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-20-Hoof-Paper-Scissors-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-20-Hoof-Paper-Scissors-Java/solution"
 				},
 				{
 					title: "UB 20 Hoof Paper Scissors Java: Review and Reflection",
@@ -1181,10 +1309,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 20 Hoof Paper Scissors Java: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-20-Hoof-Paper-Scissors-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-20-Hoof-Paper-Scissors-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-20-Hoof-Paper-Scissors-Java/solution"
 				},
 				{
 					title: "Fence Painting",
@@ -1193,10 +1323,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 20 Hoof Paper Scissors Java: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB28-Fence-Painting"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB28-Fence-Painting/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB28-Fence-Painting/solution"
 				},
 				{
 					title: "Fence Painting Java",
@@ -1205,10 +1337,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 20 Hoof Paper Scissors Java: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB28-Fence-Painting-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB28-Fence-Painting-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB28-Fence-Painting-Java/solution"
 				}
 			]
 		},
@@ -1240,10 +1374,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 21 Cow Tipping Java: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-21-Cow-Tipping-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-21-Cow-Tipping-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-21-Cow-Tipping-Java/solution"
 				},
 				{
 					title: "UB 21 Cow Tipping Java: Review and Reflection",
@@ -1263,10 +1399,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 21 Cow Tipping Java: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-21-Cow-Tipping-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-21-Cow-Tipping-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-21-Cow-Tipping-Java/solution"
 				},
 				{
 					title: "Speeding Ticket Java",
@@ -1275,10 +1413,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 21 Cow Tipping Java: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB29-Speeding-Ticket-Java"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB29-Speeding-Ticket-Java/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB29-Speeding-Ticket-Java/solution"
 				},
 				{
 					title: "Friday the Thirteenth",
@@ -1287,10 +1427,12 @@ export const usacoBronzeCourse: RawCourse = {
 						moduleTitle:
 							"UB 21 Cow Tipping Java: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB3-Friday-the-Thirteenth"
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB3-Friday-the-Thirteenth/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB3-Friday-the-Thirteenth/solution"
 				}
 			]
 		}

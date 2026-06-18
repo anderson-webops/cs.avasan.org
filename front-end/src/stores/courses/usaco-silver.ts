@@ -34,10 +34,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "USS0 Setup and Silver Transition",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US25-Why-Did-the-Cow-Cross-the-Road-II"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US25-Why-Did-the-Cow-Cross-the-Road-II/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US25-Why-Did-the-Cow-Cross-the-Road-II/solution"
 				}
 			],
 			supplementalProjects: [
@@ -46,7 +48,9 @@ export const usacoSilverCourse: RawCourse = {
 					content:
 						"Keep a short contest log for setup and silver transition that records one structural idea, one failed approach, and one note about which Bronze habit still helps and which old instinct now causes wasted effort. Silver progress comes from recognizing patterns quickly and abandoning weak ideas early.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US25-Why-Did-the-Cow-Cross-the-Road-II"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US25-Why-Did-the-Cow-Cross-the-Road-II/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US25-Why-Did-the-Cow-Cross-the-Road-II/solution"
 				},
 				{
 					title: "Why Did the Cow Cross the Road III",
@@ -54,10 +58,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "USS0 Setup and Silver Transition",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US26-Why-Did-the-Cow-Cross-the-Road-III"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US26-Why-Did-the-Cow-Cross-the-Road-III/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US26-Why-Did-the-Cow-Cross-the-Road-III/solution"
 				},
 				{
 					title: "Paired Up",
@@ -65,10 +71,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "USS0 Setup and Silver Transition",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US27-Paired-Up"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US27-Paired-Up/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US27-Paired-Up/solution"
 				}
 			]
 		},
@@ -102,10 +110,12 @@ export const usacoSilverCourse: RawCourse = {
 						moduleTitle:
 							"Unit 1: Data Structures and Problem Modeling",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US4-Exam-and-Bank-Account-Classes"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US4-Exam-and-Bank-Account-Classes/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US4-Exam-and-Bank-Account-Classes/solution"
 				}
 			],
 			supplementalProjects: [
@@ -114,21 +124,27 @@ export const usacoSilverCourse: RawCourse = {
 					content:
 						"Use a structured warmup to keep class design and data modeling fluent before heavier graph and range problems dominate.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US4-Exam-and-Bank-Account-Classes"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US4-Exam-and-Bank-Account-Classes/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US4-Exam-and-Bank-Account-Classes/solution"
 				},
 				{
 					title: "Problem: HashSets",
 					content:
 						"Practice membership and deduplication logic in a contest setting where the structure choice matters directly.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US5-Hash-Sets"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US5-Hash-Sets/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US5-Hash-Sets/solution"
 				},
 				{
 					title: "Problem: HashMaps",
 					content:
 						"Use keyed storage and frequency-style reasoning to reinforce when a map is the cleanest expression of the problem.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US5-Hash-Maps"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US5-Hash-Maps/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US5-Hash-Maps/solution"
 				},
 				{
 					title: "Bovine Genomics",
@@ -137,10 +153,12 @@ export const usacoSilverCourse: RawCourse = {
 						moduleTitle:
 							"Unit 1: Data Structures and Problem Modeling",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US28-Bovine-Genomics"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US28-Bovine-Genomics/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US28-Bovine-Genomics/solution"
 				}
 			]
 		},
@@ -173,10 +191,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Unit 2: DFS, BFS, and Graph Traversal",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US6-Mothers-Milk"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US6-Mothers-Milk/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US6-Mothers-Milk/solution"
 				}
 			],
 			supplementalProjects: [
@@ -185,21 +205,27 @@ export const usacoSilverCourse: RawCourse = {
 					content:
 						"Use state-space exploration to practice traversal on a generated graph instead of a fixed one.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US6-Mothers-Milk"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US6-Mothers-Milk/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US6-Mothers-Milk/solution"
 				},
 				{
 					title: "Problem: MooTube",
 					content:
 						"Treat relationships and thresholds as graph structure so that traversal answers a query cleanly.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US7-Moo-Tube"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US7-Moo-Tube/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US7-Moo-Tube/solution"
 				},
 				{
 					title: "Problem: Dance Mooves",
 					content:
 						"Use repeated transitions and component reasoning to rehearse graph thinking in a problem that does not announce itself as graph theory at first glance.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US34-Dance-Mooves"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US34-Dance-Mooves/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US34-Dance-Mooves/solution"
 				}
 			]
 		},
@@ -233,10 +259,12 @@ export const usacoSilverCourse: RawCourse = {
 						moduleTitle:
 							"Unit 3: Sorting, Searching, and Binary Search",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US10-Prime-Palindromes"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US10-Prime-Palindromes/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US10-Prime-Palindromes/solution"
 				}
 			],
 			supplementalProjects: [
@@ -245,28 +273,36 @@ export const usacoSilverCourse: RawCourse = {
 					content:
 						"Use a search-heavy numeric problem to practice pruning and candidate generation with strong test discipline.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US10-Prime-Palindromes"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US10-Prime-Palindromes/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US10-Prime-Palindromes/solution"
 				},
 				{
 					title: "Problem: Ordered Fractions",
 					content:
 						"Use ordering and careful generation of candidates to practice sorted reasoning in a mathematically flavored setting.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US14-Ordered-Fractions"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US14-Ordered-Fractions/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US14-Ordered-Fractions/solution"
 				},
 				{
 					title: "Problem: Loan Repayment",
 					content:
 						"Use binary search over the answer space to practice monotonic reasoning and careful predicate design.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US-Loan-Repayment"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-Loan-Repayment/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-Loan-Repayment/solution"
 				},
 				{
 					title: "Problem: Searching for Soulmates",
 					content:
 						"Use a later Silver search-style problem to compare direct transformation ideas with cleaner search reasoning.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US40-Searching-For-Soulmates"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US40-Searching-For-Soulmates/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US40-Searching-For-Soulmates/solution"
 				}
 			]
 		},
@@ -300,10 +336,12 @@ export const usacoSilverCourse: RawCourse = {
 						moduleTitle:
 							"Unit 4: Prefix Sums, Ranges, and Counting",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US18-Counting-Haybales"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US18-Counting-Haybales/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US18-Counting-Haybales/solution"
 				}
 			],
 			supplementalProjects: [
@@ -312,21 +350,27 @@ export const usacoSilverCourse: RawCourse = {
 					content:
 						"Use sorted positions and repeated range queries to practice structural counting instead of repeated scanning.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US18-Counting-Haybales"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US18-Counting-Haybales/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US18-Counting-Haybales/solution"
 				},
 				{
 					title: "Problem: Prefix Sums",
 					content:
 						"Treat a direct prefix-sum exercise as a template for broader Silver range reasoning.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US22-Prefix-Sums"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US22-Prefix-Sums/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US22-Prefix-Sums/solution"
 				},
 				{
 					title: "Problem: Just Green Enough",
 					content:
 						"Use a more layered counting problem to test whether transformed values stay aligned with the real goal.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US33-Just-Green-Enough"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US33-Just-Green-Enough/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US33-Just-Green-Enough/solution"
 				},
 				{
 					title: "Dance Mooves",
@@ -335,10 +379,12 @@ export const usacoSilverCourse: RawCourse = {
 						moduleTitle:
 							"Unit 4: Prefix Sums, Ranges, and Counting",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US34-Dance-Mooves"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US34-Dance-Mooves/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US34-Dance-Mooves/solution"
 				}
 			]
 		},
@@ -371,10 +417,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Unit 5: Greedy and Structured Simulation",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US21-Cow-Dance-Show"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US21-Cow-Dance-Show/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US21-Cow-Dance-Show/solution"
 				}
 			],
 			supplementalProjects: [
@@ -383,21 +431,27 @@ export const usacoSilverCourse: RawCourse = {
 					content:
 						"Use scheduling and ordered simulation to practice reasoning about feasibility and bottlenecks.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US21-Cow-Dance-Show"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US21-Cow-Dance-Show/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US21-Cow-Dance-Show/solution"
 				},
 				{
 					title: "Problem: Secret Cow Code",
 					content:
 						"Use structured reasoning and repeated transformations to avoid naive simulation of a much larger process.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US23-Secret-Cow-Code"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US23-Secret-Cow-Code/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US23-Secret-Cow-Code/solution"
 				},
 				{
 					title: "Problem: Rental Service",
 					content:
 						"Compare multiple ways to allocate resources and justify the order in which choices should be considered.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US34-Rental-Service"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US34-Rental-Service/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US34-Rental-Service/solution"
 				}
 			]
 		},
@@ -430,10 +484,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Unit 6: Silver Capstone Sets",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US38-Redistributing-Gifts"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US38-Redistributing-Gifts/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US38-Redistributing-Gifts/solution"
 				}
 			],
 			supplementalProjects: [
@@ -442,14 +498,18 @@ export const usacoSilverCourse: RawCourse = {
 					content:
 						"Use a more layered relationship problem to test whether graph and constraint reasoning are becoming automatic.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US38-Redistributing-Gifts"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US38-Redistributing-Gifts/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US38-Redistributing-Gifts/solution"
 				},
 				{
 					title: "Problem: Wormhole Sort",
 					content:
 						"Use a Silver capstone that mixes structural reasoning, search thinking, and strong implementation discipline.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US-Wormhole-Sort"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-Wormhole-Sort/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-Wormhole-Sort/solution"
 				},
 				{
 					title: "Stuck in a Rut Silver",
@@ -457,10 +517,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Unit 6: Silver Capstone Sets",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US35-Stuck-in-a-Rut-Silver"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US35-Stuck-in-a-Rut-Silver/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US35-Stuck-in-a-Rut-Silver/solution"
 				}
 			]
 		},
@@ -512,28 +574,36 @@ export const usacoSilverCourse: RawCourse = {
 					content:
 						"Use a direct flood-fill and component-style problem to reinforce traversal fundamentals in a contest setting.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US12-Floodfill"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US12-Floodfill/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US12-Floodfill/solution"
 				},
 				{
 					title: "Problem: Cities and States",
 					content:
 						"Use hashed counting and pair reasoning to strengthen map-based Silver problem modeling.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US19-Cities-and-States"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US19-Cities-and-States/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US19-Cities-and-States/solution"
 				},
 				{
 					title: "Problem: Moocast",
 					content:
 						"Use reachability and graph construction in a problem where the hidden structure matters more than the story text.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US20-Moocast"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US20-Moocast/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US20-Moocast/solution"
 				},
 				{
 					title: "Problem: Rectangular Pasture",
 					content:
 						"Use geometric counting and structure-aware iteration as a stronger late-Silver challenge.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US36-Rectangular-Pasture"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US36-Rectangular-Pasture/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US36-Rectangular-Pasture/solution"
 				}
 			]
 		},
@@ -562,10 +632,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "US Berry Picking: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US-Berry-Picking"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-Berry-Picking/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-Berry-Picking/solution"
 				},
 				{
 					title: "US Berry Picking: Review and Reflection",
@@ -583,10 +655,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "US Berry Picking: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US-Berry-Picking"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-Berry-Picking/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-Berry-Picking/solution"
 				},
 				{
 					title: "Subset Equality",
@@ -594,10 +668,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "US Berry Picking: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US37-Subset-Equality"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US37-Subset-Equality/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US37-Subset-Equality/solution"
 				},
 				{
 					title: "Closest Cow Wins",
@@ -605,10 +681,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "US Berry Picking: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US39-Closest-Cow-Wins"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US39-Closest-Cow-Wins/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US39-Closest-Cow-Wins/solution"
 				}
 			]
 		},
@@ -637,10 +715,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Superprime Rib: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US11-Superprime-Rib"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US11-Superprime-Rib/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US11-Superprime-Rib/solution"
 				},
 				{
 					title: "Superprime Rib: Review and Reflection",
@@ -658,10 +738,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Superprime Rib: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US11-Superprime-Rib"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US11-Superprime-Rib/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US11-Superprime-Rib/solution"
 				},
 				{
 					title: "Custom Classes with HashSets and HashMaps",
@@ -669,10 +751,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Superprime Rib: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US5-Custom-Classes-with-Hash-Sets-and-Hash-Maps"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US5-Custom-Classes-with-Hash-Sets-and-Hash-Maps/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US5-Custom-Classes-with-Hash-Sets-and-Hash-Maps/solution"
 				},
 				{
 					title: "DFS",
@@ -680,10 +764,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Superprime Rib: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US6-DFS"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US6-DFS/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US6-DFS/solution"
 				}
 			]
 		},
@@ -712,10 +798,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "The Castle: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US13-The-Castle"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US13-The-Castle/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US13-The-Castle/solution"
 				},
 				{
 					title: "The Castle: Review and Reflection",
@@ -733,10 +821,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "The Castle: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US13-The-Castle"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US13-The-Castle/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US13-The-Castle/solution"
 				},
 				{
 					title: "Stacks",
@@ -744,10 +834,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "The Castle: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US6-Stacks"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US6-Stacks/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US6-Stacks/solution"
 				},
 				{
 					title: "BFS",
@@ -755,10 +847,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "The Castle: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US7-BFS"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US7-BFS/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US7-BFS/solution"
 				}
 			]
 		},
@@ -790,10 +884,12 @@ export const usacoSilverCourse: RawCourse = {
 						moduleTitle:
 							"Sorting a Three Valued Sequence: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US15-Sorting-a-Three-Valued-Sequence"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US15-Sorting-a-Three-Valued-Sequence/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US15-Sorting-a-Three-Valued-Sequence/solution"
 				},
 				{
 					title: "Sorting a Three Valued Sequence: Review and Reflection",
@@ -813,10 +909,12 @@ export const usacoSilverCourse: RawCourse = {
 						moduleTitle:
 							"Sorting a Three Valued Sequence: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US15-Sorting-a-Three-Valued-Sequence"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US15-Sorting-a-Three-Valued-Sequence/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US15-Sorting-a-Three-Valued-Sequence/solution"
 				},
 				{
 					title: "Queues",
@@ -825,10 +923,12 @@ export const usacoSilverCourse: RawCourse = {
 						moduleTitle:
 							"Sorting a Three Valued Sequence: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US7-Queues"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US7-Queues/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US7-Queues/solution"
 				},
 				{
 					title: "Arithmetic Progressions",
@@ -837,10 +937,12 @@ export const usacoSilverCourse: RawCourse = {
 						moduleTitle:
 							"Sorting a Three Valued Sequence: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US8-Arithmetic-Progressions"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US8-Arithmetic-Progressions/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US8-Arithmetic-Progressions/solution"
 				}
 			]
 		},
@@ -869,10 +971,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Healthy Holsteins: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US16-Healthy-Holsteins"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US16-Healthy-Holsteins/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US16-Healthy-Holsteins/solution"
 				},
 				{
 					title: "Healthy Holsteins: Review and Reflection",
@@ -890,10 +994,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Healthy Holsteins: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US16-Healthy-Holsteins"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US16-Healthy-Holsteins/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US16-Healthy-Holsteins/solution"
 				},
 				{
 					title: "Number Triangles",
@@ -901,10 +1007,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Healthy Holsteins: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US9-Number-Triangles"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US9-Number-Triangles/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US9-Number-Triangles/solution"
 				},
 				{
 					title: "Healthy Holsteins Supplemental 3: Implementation Lab",
@@ -946,10 +1054,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Hamming Codes: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US17-Hamming-Codes"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US17-Hamming-Codes/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US17-Hamming-Codes/solution"
 				},
 				{
 					title: "Hamming Codes: Review and Reflection",
@@ -967,10 +1077,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Hamming Codes: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US17-Hamming-Codes"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US17-Hamming-Codes/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US17-Hamming-Codes/solution"
 				},
 				{
 					title: "Hamming Codes Supplemental 2: Implementation Lab",
@@ -1025,10 +1137,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Priority Queues: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US21-Priority-Queues"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US21-Priority-Queues/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US21-Priority-Queues/solution"
 				},
 				{
 					title: "Priority Queues: Review and Reflection",
@@ -1046,10 +1160,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Priority Queues: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US21-Priority-Queues"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US21-Priority-Queues/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US21-Priority-Queues/solution"
 				},
 				{
 					title: "Priority Queues Supplemental 2: Implementation Lab",
@@ -1104,10 +1220,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US22-Hoof-Paper-Scissors"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US22-Hoof-Paper-Scissors/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US22-Hoof-Paper-Scissors/solution"
 				},
 				{
 					title: "Hoof Paper Scissors: Review and Reflection",
@@ -1125,10 +1243,12 @@ export const usacoSilverCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US22-Hoof-Paper-Scissors"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US22-Hoof-Paper-Scissors/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US22-Hoof-Paper-Scissors/solution"
 				},
 				{
 					title: "Hoof Paper Scissors Supplemental 2: Implementation Lab",
@@ -1186,10 +1306,12 @@ export const usacoSilverCourse: RawCourse = {
 						moduleTitle:
 							"Why Did the Cow Cross the Road: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US24-Why-Did-the-Cow-Cross-the-Road"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US24-Why-Did-the-Cow-Cross-the-Road/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US24-Why-Did-the-Cow-Cross-the-Road/solution"
 				},
 				{
 					title: "Why Did the Cow Cross the Road: Review and Reflection",
@@ -1209,10 +1331,12 @@ export const usacoSilverCourse: RawCourse = {
 						moduleTitle:
 							"Why Did the Cow Cross the Road: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US24-Why-Did-the-Cow-Cross-the-Road"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US24-Why-Did-the-Cow-Cross-the-Road/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US24-Why-Did-the-Cow-Cross-the-Road/solution"
 				},
 				{
 					title: "Why Did the Cow Cross the Road Supplemental 2: Implementation Lab",

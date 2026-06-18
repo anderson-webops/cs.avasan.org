@@ -34,10 +34,12 @@ export const usacoGoldCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "USG0 Setup and Gold Mindset",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG21-Moo-Tube"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG21-Moo-Tube/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG21-Moo-Tube/solution"
 				}
 			],
 			supplementalProjects: [
@@ -46,7 +48,9 @@ export const usacoGoldCourse: RawCourse = {
 					content:
 						"Keep a compact Gold-level log for setup and gold mindset that records the core recurrence or invariant, one discarded approach, and one note about which constraint or invariant most clearly signals the right solution family. Gold progress depends on being able to explain the structure of a solution, not just implement it.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG21-Moo-Tube"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG21-Moo-Tube/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG21-Moo-Tube/solution"
 				},
 				{
 					title: "Why Did the Cow Cross the Road III",
@@ -54,10 +58,12 @@ export const usacoGoldCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "USG0 Setup and Gold Mindset",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG24-Why-Did-the-Cow-Cross-the-Road-III"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG24-Why-Did-the-Cow-Cross-the-Road-III/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG24-Why-Did-the-Cow-Cross-the-Road-III/solution"
 				},
 				{
 					title: "Snow Boots",
@@ -65,10 +71,12 @@ export const usacoGoldCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "USG0 Setup and Gold Mindset",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG27-Snow-Boots"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG27-Snow-Boots/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG27-Snow-Boots/solution"
 				}
 			]
 		},
@@ -101,10 +109,12 @@ export const usacoGoldCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Unit 1: Dynamic Programming Foundations",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Dynamic-Programming-with-Fibonacci"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Dynamic-Programming-with-Fibonacci/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Dynamic-Programming-with-Fibonacci/solution"
 				}
 			],
 			supplementalProjects: [
@@ -113,28 +123,36 @@ export const usacoGoldCourse: RawCourse = {
 					content:
 						"Use a simple recurrence to make the DP mindset explicit before harder state spaces are introduced.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Dynamic-Programming-with-Fibonacci"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Dynamic-Programming-with-Fibonacci/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Dynamic-Programming-with-Fibonacci/solution"
 				},
 				{
 					title: "Problem: 0-1 Knapsack",
 					content:
 						"Use a classic optimization recurrence to practice state design, choices, and table updates.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG2-0-1-Knapsack"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG2-0-1-Knapsack/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG2-0-1-Knapsack/solution"
 				},
 				{
 					title: "Problem: Teamwork",
 					content:
 						"Use grouped decisions and transition design to move beyond the most basic DP templates.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG3-Teamwork"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG3-Teamwork/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG3-Teamwork/solution"
 				},
 				{
 					title: "Problem: Fruit Feast",
 					content:
 						"Use a state-space DP problem to test whether reachable states and transitions can be managed without losing clarity.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG40-Fruit-Feast"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG40-Fruit-Feast/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG40-Fruit-Feast/solution"
 				}
 			]
 		},
@@ -168,10 +186,12 @@ export const usacoGoldCourse: RawCourse = {
 						moduleTitle:
 							"Unit 2: Shortest Paths and Weighted Graphs",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG9-Dijkstras-Algorithm"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG9-Dijkstras-Algorithm/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG9-Dijkstras-Algorithm/solution"
 				}
 			],
 			supplementalProjects: [
@@ -180,21 +200,27 @@ export const usacoGoldCourse: RawCourse = {
 					content:
 						"Use a direct shortest-path implementation to make priority-queue relaxation fully concrete.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG9-Dijkstras-Algorithm"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG9-Dijkstras-Algorithm/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG9-Dijkstras-Algorithm/solution"
 				},
 				{
 					title: "Problem: Shortcut",
 					content:
 						"Use shortest-path information inside a second optimization question so distance arrays become tools, not endpoints.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG11-Shortcut"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG11-Shortcut/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG11-Shortcut/solution"
 				},
 				{
 					title: "Problem: Fine Dining",
 					content:
 						"Use a more layered graph task to test whether shortest-path ideas can be adapted to a richer condition set.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG30-Fine-Dining"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG30-Fine-Dining/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG30-Fine-Dining/solution"
 				},
 				{
 					title: "Why Did the Cow Cross the Road II",
@@ -203,10 +229,12 @@ export const usacoGoldCourse: RawCourse = {
 						moduleTitle:
 							"Unit 2: Shortest Paths and Weighted Graphs",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG31-Why-Did-the-Cow-Cross-the-Road-II"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG31-Why-Did-the-Cow-Cross-the-Road-II/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG31-Why-Did-the-Cow-Cross-the-Road-II/solution"
 				}
 			]
 		},
@@ -240,10 +268,12 @@ export const usacoGoldCourse: RawCourse = {
 						moduleTitle:
 							"Unit 3: MSTs, DSU, and Connectivity Optimization",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG14-MST"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG14-MST/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG14-MST/solution"
 				}
 			],
 			supplementalProjects: [
@@ -252,21 +282,27 @@ export const usacoGoldCourse: RawCourse = {
 					content:
 						"Use a direct MST implementation to practice sorted edges, cycle avoidance, and connection cost reasoning.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG14-MST"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG14-MST/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG14-MST/solution"
 				},
 				{
 					title: "Problem: Disjoint Sets and Kruskal's",
 					content:
 						"Use a dedicated DSU and Kruskal exercise to make the structure and proof idea explicit.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG19-Disjoint-Sets-and-Kruskals"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG19-Disjoint-Sets-and-Kruskals/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG19-Disjoint-Sets-and-Kruskals/solution"
 				},
 				{
 					title: "Problem: Moocast",
 					content:
 						"Use a connectivity optimization problem that turns graph reachability and distance structure into a stronger Gold-style challenge.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG17-Moocast"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG17-Moocast/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG17-Moocast/solution"
 				}
 			]
 		},
@@ -300,10 +336,12 @@ export const usacoGoldCourse: RawCourse = {
 						moduleTitle:
 							"Unit 4: Fenwick Trees, Ordering, and Range Structure",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG22-Binary-Indexed-Tree-Fenwick-Tree"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG22-Binary-Indexed-Tree-Fenwick-Tree/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG22-Binary-Indexed-Tree-Fenwick-Tree/solution"
 				}
 			],
 			supplementalProjects: [
@@ -312,21 +350,27 @@ export const usacoGoldCourse: RawCourse = {
 					content:
 						"Build a direct Fenwick tree checkpoint that connects the data structure to concrete prefix-query behavior.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG22-Binary-Indexed-Tree-Fenwick-Tree"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG22-Binary-Indexed-Tree-Fenwick-Tree/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG22-Binary-Indexed-Tree-Fenwick-Tree/solution"
 				},
 				{
 					title: "Problem: Balanced Photo",
 					content:
 						"Use relative ordering and imbalance counts to practice range-style reasoning around positions.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG23-Balanced-Photo"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG23-Balanced-Photo/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG23-Balanced-Photo/solution"
 				},
 				{
 					title: "Problem: Out of Sorts",
 					content:
 						"Use ordering and movement analysis to show how a simple-looking sorting story hides richer structure.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG26-Out-of-Sorts"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG26-Out-of-Sorts/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG26-Out-of-Sorts/solution"
 				},
 				{
 					title: "Circular Barn",
@@ -335,10 +379,12 @@ export const usacoGoldCourse: RawCourse = {
 						moduleTitle:
 							"Unit 4: Fenwick Trees, Ordering, and Range Structure",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG37-Circular-Barn"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG37-Circular-Barn/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG37-Circular-Barn/solution"
 				}
 			]
 		},
@@ -372,10 +418,12 @@ export const usacoGoldCourse: RawCourse = {
 						moduleTitle:
 							"Unit 5: Advanced Graph Modeling and Geometry-Flavored Problems",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG33-Lasers-and-Mirrors"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG33-Lasers-and-Mirrors/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG33-Lasers-and-Mirrors/solution"
 				}
 			],
 			supplementalProjects: [
@@ -384,21 +432,27 @@ export const usacoGoldCourse: RawCourse = {
 					content:
 						"Use a spatially flavored graph problem to practice turning geometry into a graph you can actually search.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG33-Lasers-and-Mirrors"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG33-Lasers-and-Mirrors/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG33-Lasers-and-Mirrors/solution"
 				},
 				{
 					title: "Problem: Lights Out",
 					content:
 						"Use geometric structure and path reasoning to test whether multiple interpretations of distance and position stay aligned.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG35-Lights-Out"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG35-Lights-Out/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG35-Lights-Out/solution"
 				},
 				{
 					title: "Problem: Circular Barn Revisited",
 					content:
 						"Use a more involved structural problem to push representation and optimization thinking together.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG36-Circular-Barn-Revisited"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG36-Circular-Barn-Revisited/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG36-Circular-Barn-Revisited/solution"
 				}
 			]
 		},
@@ -431,10 +485,12 @@ export const usacoGoldCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Unit 6: Advanced DP and Combinatorics",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG28-Cow-Poetry"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG28-Cow-Poetry/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG28-Cow-Poetry/solution"
 				}
 			],
 			supplementalProjects: [
@@ -443,28 +499,36 @@ export const usacoGoldCourse: RawCourse = {
 					content:
 						"Use combinatorial counting and dynamic programming together in a problem where explanation matters as much as implementation.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG28-Cow-Poetry"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG28-Cow-Poetry/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG28-Cow-Poetry/solution"
 				},
 				{
 					title: "Problem: Stamp Painting",
 					content:
 						"Use a counting DP problem to practice recurrence design under modular arithmetic constraints.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG32-Stamp-Painting"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG32-Stamp-Painting/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG32-Stamp-Painting/solution"
 				},
 				{
 					title: "Problem: Time is Mooney",
 					content:
 						"Use a richer optimization problem that blends repeated transitions and scoring over time.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-Time-is-Mooney"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-Time-is-Mooney/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-Time-is-Mooney/solution"
 				},
 				{
 					title: "Problem: Milk Visits",
 					content:
 						"Use a stronger capstone-style problem to test whether multiple Gold ideas can be held together in one coherent solution.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-Milk-Visits"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-Milk-Visits/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-Milk-Visits/solution"
 				}
 			]
 		},
@@ -497,10 +561,12 @@ export const usacoGoldCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Unit 7: Gold Capstone Sets",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG34-Radio-Contact"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG34-Radio-Contact/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG34-Radio-Contact/solution"
 				}
 			],
 			supplementalProjects: [
@@ -509,14 +575,18 @@ export const usacoGoldCourse: RawCourse = {
 					content:
 						"Use a capstone-style state problem that blends movement and optimization in a way that rewards careful representation.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG34-Radio-Contact"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG34-Radio-Contact/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG34-Radio-Contact/solution"
 				},
 				{
 					title: "Problem: Cowpatibility",
 					content:
 						"Use a richer counting or combinatorial problem as one more test of explanation and implementation discipline.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG29-Cowpatibility"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG29-Cowpatibility/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG29-Cowpatibility/solution"
 				},
 				{
 					title: "Bovine Genomics",
@@ -524,10 +594,12 @@ export const usacoGoldCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Unit 7: Gold Capstone Sets",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG38-Bovine-Genomics"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG38-Bovine-Genomics/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG38-Bovine-Genomics/solution"
 				}
 			]
 		},
@@ -579,28 +651,36 @@ export const usacoGoldCourse: RawCourse = {
 					content:
 						"Use shortest-path sensitivity analysis to deepen understanding of weighted-graph optimization.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG10-Roadblock"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG10-Roadblock/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG10-Roadblock/solution"
 				},
 				{
 					title: "Problem: Superbull",
 					content:
 						"Use an MST-style optimization problem as a stronger extension of connectivity and edge-choice reasoning.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG15-Superbull"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG15-Superbull/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG15-Superbull/solution"
 				},
 				{
 					title: "Problem: Fenced In",
 					content:
 						"Use a richer connectivity and cost-optimization problem to strengthen MST and graph-structure judgment.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG20-Fenced-In"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG20-Fenced-In/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG20-Fenced-In/solution"
 				},
 				{
 					title: "Problem: Sleepy Cow Sorting",
 					content:
 						"Use a strong ordering and invariants problem to test whether the work can reason about progress without brute force.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG25-Sleepy-Cow-Sorting"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG25-Sleepy-Cow-Sorting/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG25-Sleepy-Cow-Sorting/solution"
 				}
 			]
 		},
@@ -632,10 +712,12 @@ export const usacoGoldCourse: RawCourse = {
 						moduleTitle:
 							"Dynamic Programming Practice: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Dynamic-Programming-Practice"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Dynamic-Programming-Practice/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Dynamic-Programming-Practice/solution"
 				},
 				{
 					title: "Dynamic Programming Practice: Review and Reflection",
@@ -655,10 +737,12 @@ export const usacoGoldCourse: RawCourse = {
 						moduleTitle:
 							"Dynamic Programming Practice: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Dynamic-Programming-Practice"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Dynamic-Programming-Practice/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Dynamic-Programming-Practice/solution"
 				},
 				{
 					title: "Cow Checklist",
@@ -667,10 +751,12 @@ export const usacoGoldCourse: RawCourse = {
 						moduleTitle:
 							"Dynamic Programming Practice: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG4-Cow-Checklist"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG4-Cow-Checklist/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG4-Cow-Checklist/solution"
 				},
 				{
 					title: "Marathon",
@@ -679,10 +765,12 @@ export const usacoGoldCourse: RawCourse = {
 						moduleTitle:
 							"Dynamic Programming Practice: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG5-Marathon"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG5-Marathon/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG5-Marathon/solution"
 				}
 			]
 		},
@@ -711,10 +799,12 @@ export const usacoGoldCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Hoof-Paper-Scissors"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Hoof-Paper-Scissors/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Hoof-Paper-Scissors/solution"
 				},
 				{
 					title: "Hoof Paper Scissors: Review and Reflection",
@@ -732,10 +822,12 @@ export const usacoGoldCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Hoof-Paper-Scissors"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Hoof-Paper-Scissors/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Hoof-Paper-Scissors/solution"
 				},
 				{
 					title: "248",
@@ -743,10 +835,12 @@ export const usacoGoldCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG6-248"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG6-248/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG6-248/solution"
 				},
 				{
 					title: "Treasure Chest",
@@ -754,10 +848,12 @@ export const usacoGoldCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG7-Treasure-Chest"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG7-Treasure-Chest/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG7-Treasure-Chest/solution"
 				}
 			]
 		},
@@ -789,10 +885,12 @@ export const usacoGoldCourse: RawCourse = {
 						moduleTitle:
 							"Why Did the Cow Cross the Road: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG12-Why-Did-the-Cow-Cross-the-Road"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG12-Why-Did-the-Cow-Cross-the-Road/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG12-Why-Did-the-Cow-Cross-the-Road/solution"
 				},
 				{
 					title: "Why Did the Cow Cross the Road: Review and Reflection",
@@ -812,10 +910,12 @@ export const usacoGoldCourse: RawCourse = {
 						moduleTitle:
 							"Why Did the Cow Cross the Road: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG12-Why-Did-the-Cow-Cross-the-Road"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG12-Why-Did-the-Cow-Cross-the-Road/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG12-Why-Did-the-Cow-Cross-the-Road/solution"
 				},
 				{
 					title: "Bookshelf",
@@ -824,10 +924,12 @@ export const usacoGoldCourse: RawCourse = {
 						moduleTitle:
 							"Why Did the Cow Cross the Road: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG8-Bookshelf"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG8-Bookshelf/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG8-Bookshelf/solution"
 				},
 				{
 					title: "Dijkstras Algorithm II",
@@ -836,10 +938,12 @@ export const usacoGoldCourse: RawCourse = {
 						moduleTitle:
 							"Why Did the Cow Cross the Road: Implementation Lab",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG9-Dijkstras-Algorithm-II"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG9-Dijkstras-Algorithm-II/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG9-Dijkstras-Algorithm-II/solution"
 				}
 			]
 		},
@@ -868,10 +972,12 @@ export const usacoGoldCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Cow Routing: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG13-Cow-Routing"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG13-Cow-Routing/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG13-Cow-Routing/solution"
 				},
 				{
 					title: "Cow Routing: Review and Reflection",
@@ -889,10 +995,12 @@ export const usacoGoldCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Cow Routing: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG13-Cow-Routing"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG13-Cow-Routing/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG13-Cow-Routing/solution"
 				},
 				{
 					title: "Cow Routing Supplemental 2: Implementation Lab",
@@ -947,10 +1055,12 @@ export const usacoGoldCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "MST II: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG14-MST-II"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG14-MST-II/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG14-MST-II/solution"
 				},
 				{
 					title: "MST II: Review and Reflection",
@@ -968,10 +1078,12 @@ export const usacoGoldCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "MST II: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG14-MST-II"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG14-MST-II/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG14-MST-II/solution"
 				},
 				{
 					title: "MST II Supplemental 2: Implementation Lab",
@@ -1026,10 +1138,12 @@ export const usacoGoldCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Watering the Fields: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG16-Watering-the-Fields"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG16-Watering-the-Fields/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG16-Watering-the-Fields/solution"
 				},
 				{
 					title: "Watering the Fields: Review and Reflection",
@@ -1047,10 +1161,12 @@ export const usacoGoldCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Watering the Fields: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG16-Watering-the-Fields"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG16-Watering-the-Fields/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG16-Watering-the-Fields/solution"
 				},
 				{
 					title: "Watering the Fields Supplemental 2: Implementation Lab",
@@ -1108,10 +1224,12 @@ export const usacoGoldCourse: RawCourse = {
 						moduleTitle:
 							"I Would Walk 500 Miles: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG18-I-Would-Walk-500-Miles"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG18-I-Would-Walk-500-Miles/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG18-I-Would-Walk-500-Miles/solution"
 				},
 				{
 					title: "I Would Walk 500 Miles: Review and Reflection",
@@ -1131,10 +1249,12 @@ export const usacoGoldCourse: RawCourse = {
 						moduleTitle:
 							"I Would Walk 500 Miles: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG18-I-Would-Walk-500-Miles"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG18-I-Would-Walk-500-Miles/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG18-I-Would-Walk-500-Miles/solution"
 				},
 				{
 					title: "I Would Walk 500 Miles Supplemental 2: Implementation Lab",
@@ -1191,10 +1311,12 @@ export const usacoGoldCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Talent Show: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG2-Talent-Show"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG2-Talent-Show/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG2-Talent-Show/solution"
 				},
 				{
 					title: "Talent Show: Review and Reflection",
@@ -1212,10 +1334,12 @@ export const usacoGoldCourse: RawCourse = {
 						courseFamily: "USACO",
 						moduleTitle: "Talent Show: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG2-Talent-Show"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG2-Talent-Show/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG2-Talent-Show/solution"
 				},
 				{
 					title: "Talent Show Supplemental 2: Implementation Lab",

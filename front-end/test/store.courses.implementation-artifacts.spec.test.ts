@@ -96,6 +96,13 @@ function coreModules(course: Awaited<ReturnType<typeof requireCourse>>) {
 	return course.modules.filter(module => module.kind !== "appendix");
 }
 
+function courseItems(course: Awaited<ReturnType<typeof requireCourse>>) {
+	return course.modules.flatMap(module => [
+		...module.curriculum,
+		...module.supplementalProjects
+	]);
+}
+
 describe("implemented course development artifacts", () => {
 	it(
 		"keeps course-development planning scaffolds internal while retaining metadata",
@@ -432,6 +439,53 @@ describe("implemented course development artifacts", () => {
 		expect(serializedCourse).toContain(
 			"Python-Level-2/tree/main/PS14-Mastermind/solution"
 		);
+	});
+
+	it("keeps USACO source links pointed at starter and solution folders", async () => {
+		for (const [courseId, repo, sampleFolder] of [
+			["usaco-bronze", "USACO-Bronze", "UB1-Square-Pasture"],
+			["usaco-silver", "USACO-Silver", "US25-Why-Did-the-Cow-Cross-the-Road-II"],
+			["usaco-gold", "USACO-Gold", "UG1-Dynamic-Programming-with-Fibonacci"]
+		] as const) {
+			const course = await requireCourse(courseId);
+			const serializedCourse = JSON.stringify(course);
+			const rootOnlyLinks = [
+				...serializedCourse.matchAll(
+					new RegExp(
+						`https://github\\.com/instruction-material/${repo}/tree/main/([^"]+)`,
+						"g"
+					)
+				)
+			]
+				.map(match => match[1].replace(/\\+$/, ""))
+				.filter(
+					urlPath =>
+						!urlPath.endsWith("/starter") &&
+						!urlPath.endsWith("/solution")
+				);
+			const missingSolutionPairs = courseItems(course)
+				.filter(item =>
+					item.projectLink?.startsWith(
+						`https://github.com/instruction-material/${repo}/tree/main/`
+					)
+				)
+				.filter(item => item.projectLink?.endsWith("/starter"))
+				.filter(
+					item =>
+						item.solutionLink !==
+						item.projectLink?.replace(/\/starter$/, "/solution")
+				)
+				.map(item => item.title);
+
+			expect(rootOnlyLinks, courseId).toHaveLength(0);
+			expect(missingSolutionPairs, courseId).toHaveLength(0);
+			expect(serializedCourse).toContain(
+				`${repo}/tree/main/${sampleFolder}/starter`
+			);
+			expect(serializedCourse).toContain(
+				`${repo}/tree/main/${sampleFolder}/solution`
+			);
+		}
 	});
 
 	it("records source policy decisions for content-only or composed courses", async () => {
