@@ -1008,6 +1008,49 @@ describe("course text quality normalization", () => {
 		}
 	});
 
+	it("keeps PyGame lessons and projects structured instead of dense one-paragraph prompts", async () => {
+		const course = await loadRawCourse("pygames");
+		expect(course).not.toBeNull();
+
+		const source = fs.readFileSync("src/stores/courses/pygames.ts", "utf8");
+		const loadedCorpus = allCourseText(course!);
+		const requiredSections = [
+			"**Coordinate model:**",
+			"**Position keywords:**",
+			"**Practice checks:**",
+			"**Starter example:**",
+			"**Project goal:**",
+			"**Implementation steps:**",
+			"**Game objects and state:**",
+			"**Build sequence:**",
+			"**Double-jump prevention:**",
+			"**One-time schedule:**",
+			"**Repeated schedule:**",
+			"**Shark behavior:**",
+			"**Hiding mechanic:**",
+			"**Projectile behavior:**",
+			"**Laser list behavior:**",
+			"**Alien behavior:**",
+			"**Completion checks:**"
+		];
+
+		for (const phrase of requiredSections) {
+			expect(source).toContain(phrase);
+		}
+
+		expect(source).not.toContain(
+			"Create a simple top-down golf game where the player clicks to hit a ball toward a hole. Add Actors for a golf ball, hole, and flag."
+		);
+		expect(source).not.toContain(
+			"Build a Fish Bowl game where a shark chases a diver and seaweed can hide the player. The finished Shark Chase or Fish Bowl game should make these behaviors clear"
+		);
+		expect(source).not.toContain(
+			"Create a boss-style Space Battle where an alien ship with AI fires at the player. The finished game should make the alien behavior clear"
+		);
+		expect(loadedCorpus).toContain("The score changes only on collision");
+		expect(loadedCorpus).toContain("Both projectile lists update safely");
+	});
+
 	it("keeps JavaScript normalization focused on web development instead of Java", async () => {
 		const courses = await Promise.all([
 			loadRawCourse("javascript-level-1-javascript-superstar"),

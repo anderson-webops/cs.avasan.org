@@ -95,8 +95,14 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Position Keywords",
-					content:
-						"The coordinate system starts at (0, 0) in the top-left, with y increasing downward. Position keywords include topleft, topright, bottomleft, bottomright, midtop, midleft, midright, midbottom, and center. Place the alien with alien.bottomleft = (0, HEIGHT) or other keywords and experiment with the result. Improve wrapping logic so the alien fully leaves the screen before reappearing: use if alien.left > WIDTH: alien.right = 0 in update()."
+					content: `**Coordinate model:** Pygame Zero uses a screen grid where \`(0, 0)\` is the top-left corner. The x-coordinate increases to the right, and the y-coordinate increases downward.
+
+**Position keywords:** Actors and rectangles can be positioned with named anchor points such as \`topleft\`, \`topright\`, \`bottomleft\`, \`bottomright\`, \`midtop\`, \`midleft\`, \`midright\`, \`midbottom\`, and \`center\`. For example, \`alien.bottomleft = (0, HEIGHT)\` places the alien's lower-left corner at the lower-left edge of the window.
+
+**Practice checks:**
+- Move the same alien with at least three different position keywords and describe which anchor point is being controlled.
+- Compare changing \`alien.x\` directly with changing \`alien.center\` or \`alien.bottomleft\`.
+- Improve wrapping logic so the alien fully leaves the screen before reappearing: \`if alien.left > WIDTH: alien.right = 0\` in \`update()\`.`
 				},
 				{
 					title: "Global Variables & Bouncing",
@@ -271,8 +277,18 @@ export const pyGamesCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "ZRect Class",
-					content:
-						"A ZRect object represents a rectangle with position, width, and height, and can be used to draw shapes and detect overlaps. Define WIDTH and HEIGHT, then create a rectangle with box = ZRect((100, 100), (50, 50)). In draw(), use screen.draw.rect(box, (255, 0, 0)) to draw a red rectangle. Experiment with different colors using (r, g, b) values and practice creating rectangles that cover the whole screen or only half. ZRects support the same position keywords as actors, such as box.center and box.topleft."
+					content: `**Concept focus:** A \`ZRect\` represents a rectangle with position, width, and height. Rectangles are useful for drawing simple shapes, building invisible hitboxes, and checking overlaps.
+
+**Starter example:**
+- Define \`WIDTH\` and \`HEIGHT\`.
+- Create a rectangle with \`box = ZRect((100, 100), (50, 50))\`.
+- In \`draw()\`, use \`screen.draw.rect(box, (255, 0, 0))\` to draw a red rectangle.
+
+**Practice checks:**
+- Change the rectangle's position, width, and height and predict the visual result before running.
+- Experiment with RGB color values such as \`(255, 0, 0)\`, \`(0, 255, 0)\`, and \`(0, 0, 255)\`.
+- Create one rectangle that covers the whole screen and another that covers only half.
+- Use position keywords such as \`box.center\` and \`box.topleft\` to connect ZRects back to Actor positioning.`
 				},
 				{
 					title: "PyG3 Project 1: ZRect Art",
@@ -304,8 +320,18 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "PyG3 Project 3: Beach Ball Chase",
-					content:
-						"Create an alien actor (controlled by the player) and a ball actor with random position and random xspeed and yspeed dynamic attributes. In update(), move the alien with arrow keys (up/down/left/right) and move the ball by its speeds, bouncing it off the walls. When the alien collides with the ball, increase a score variable and move the ball to a new random position. In draw(), draw both actors and display the score at the top-left using screen.draw.text(str(score), (10, 10)). Break logic into helper functions for keyboard input, ball movement, and collision checks.",
+					content: `**Project goal:** Build a small chase game that uses dynamic actor attributes, keyboard input, collision checks, and score display.
+
+**Implementation steps:**
+- Create an alien Actor controlled by the player.
+- Create a beach ball Actor with a random starting position.
+- Store the ball's movement as dynamic attributes such as \`ball.xspeed\` and \`ball.yspeed\`.
+- In \`update()\`, move the alien with the arrow keys and move the ball using its speed attributes.
+- Bounce the ball off the window edges by reversing the relevant speed.
+- When the alien collides with the ball, increase \`score\` and move the ball to a new random position.
+- In \`draw()\`, draw both actors and show the score with \`screen.draw.text(str(score), (10, 10))\`.
+
+**Completion checks:** The score changes only on collision, the ball never becomes stuck on an edge, and the code is split into helper functions for keyboard input, ball movement, and collision handling.`,
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -555,8 +581,23 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "PyG5 Project 2: Golf",
-					content:
-						"Create a simple top-down golf game where the player clicks to hit a ball toward a hole. Add Actors for a golf ball, hole, and flag. Give the ball dynamic xspeed and yspeed and create global FRICTION and strokes variables. Place the hole in the center and the flag above it. In draw(), set the background with screen.fill((50, 100, 50)), draw the stroke count in the top-left corner, and draw the hole, flag, and ball. In update(), apply friction to the ball, update its position based on xspeed and yspeed, and make it bounce off the walls. Implement on_mouse_down(pos) so that if the ball is essentially stopped (abs(xspeed) and abs(yspeed) < 0.5), clicking sets ball.xspeed = (mouseX - ball.x) / 10 and ball.yspeed = (mouseY - ball.y) / 10, where mouseX and mouseY come from pos, and increments strokes by 1. Detect when the ball reaches the hole and handle a win state, resetting or advancing as desired.",
+					content: `**Project goal:** Create a top-down golf game where the player clicks to hit a ball toward a hole and tries to finish in as few strokes as possible.
+
+**Game objects and state:**
+- Add Actors for the golf ball, hole, and flag.
+- Give the ball dynamic movement attributes: \`ball.xspeed\` and \`ball.yspeed\`.
+- Create global values for \`FRICTION\` and \`strokes\`.
+- Place the hole near the center of the course and the flag above it.
+
+**Implementation steps:**
+- In \`draw()\`, set the background with \`screen.fill((50, 100, 50))\`, draw the stroke count, and draw the hole, flag, and ball.
+- In \`update()\`, multiply the ball's speeds by friction, update its position, and bounce it off the walls.
+- In \`on_mouse_down(pos)\`, allow a hit only when the ball is nearly stopped, such as \`abs(ball.xspeed) < 0.5\` and \`abs(ball.yspeed) < 0.5\`.
+- Convert the click position into velocity, for example \`ball.xspeed = (mouseX - ball.x) / 10\` and \`ball.yspeed = (mouseY - ball.y) / 10\`.
+- Increment \`strokes\` each time a valid hit is made.
+- Detect when the ball reaches the hole and handle a win state, reset, or next level.
+
+**Completion checks:** The ball cannot be hit repeatedly while still moving, friction gradually slows the ball, wall bounces keep it on screen, and the stroke count changes only after a valid shot.`,
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -622,18 +663,60 @@ export const pyGamesCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "Platforms with ZRect",
-					content:
-						"ZRect can represent solid platforms that a character can stand on. Create a floor ZRect at the bottom of the screen using floor = ZRect((0, HEIGHT - 20), (WIDTH, 20)) and draw it in draw() with screen.draw.filled_rect(floor, (255, 255, 255)). Create an alien Actor in the center with dynamic xspeed and yspeed. Add global GRAVITY and FRICTION and in update() apply gravity to yspeed, friction to xspeed, and update alien.x and alien.y so the alien falls through the floor. Then implement platform collision with if alien.colliderect(floor): alien.bottom = floor.top; alien.yspeed = 0 so the alien stands on the floor. Add keyboard.left and keyboard.right controls that adjust xspeed, and implement jumping with a space key. To prevent double jumps, create alien.onground = False, change the jump condition to if keyboard.space and alien.onground and set alien.onground = False when jumping, and set alien.onground = True inside the platform collision logic. Test that the alien can only jump when standing on the platform."
+					content: `**Concept focus:** A \`ZRect\` can act as a solid platform that blocks or supports an Actor. Platform movement depends on gravity, horizontal input, collision correction, and a state flag for whether the player is on the ground.
+
+**Build sequence:**
+- Create a floor rectangle at the bottom of the screen: \`floor = ZRect((0, HEIGHT - 20), (WIDTH, 20))\`.
+- In \`draw()\`, draw the floor with \`screen.draw.filled_rect(floor, (255, 255, 255))\`.
+- Create an alien Actor with dynamic \`alien.xspeed\` and \`alien.yspeed\`.
+- Add global \`GRAVITY\` and \`FRICTION\`.
+- In \`update()\`, apply gravity to \`alien.yspeed\`, apply friction to \`alien.xspeed\`, and update \`alien.x\` and \`alien.y\`.
+- Add collision correction: when \`alien.colliderect(floor)\`, set \`alien.bottom = floor.top\` and \`alien.yspeed = 0\`.
+- Add left and right movement with keyboard input.
+- Add jumping with the space key.
+
+**Double-jump prevention:** Track \`alien.onground\`. Jump only when \`keyboard.space and alien.onground\` is true, set \`alien.onground = False\` when jumping, and set it back to true only inside the platform-collision logic.
+
+**Completion checks:** The alien lands on the platform instead of falling through it, can move left and right, can jump from the platform, and cannot double jump in midair.`
 				},
 				{
 					title: "Moving Platforms",
-					content:
-						"This section covers how to make platforms move and bounce between limits. Shorten the floor platform to 200 pixels wide and give it a dynamic floor.xspeed = 2. In update(), move it with floor.x += floor.xspeed and observe that it disappears off the right side. Add dynamic bounds floor.leftlimit = 0 and floor.rightlimit = WIDTH and, in update(), bounce with if floor.right > floor.rightlimit: floor.right = floor.rightlimit; floor.xspeed = -floor.xspeed and a similar condition when floor.left < floor.leftlimit. Experiment with different limits so the platform stays only on the right side or in the center third of the screen. Add yspeed, toplimit, and bottomlimit attributes to support vertical and diagonal motion and bounce vertically in a similar way."
+					content: `**Concept focus:** Moving platforms use the same rectangle and collision ideas as static platforms, but each platform also needs speed and boundary values.
+
+**Horizontal platform sequence:**
+- Shorten the floor platform to 200 pixels wide.
+- Give it a dynamic speed such as \`floor.xspeed = 2\`.
+- In \`update()\`, move it with \`floor.x += floor.xspeed\` and observe that it eventually leaves the screen.
+- Add dynamic bounds such as \`floor.leftlimit = 0\` and \`floor.rightlimit = WIDTH\`.
+- Bounce at the right edge with \`if floor.right > floor.rightlimit: floor.right = floor.rightlimit; floor.xspeed = -floor.xspeed\`.
+- Add the matching left-edge condition for \`floor.left < floor.leftlimit\`.
+
+**Extensions:** Change the limits so the platform stays only on the right side or in the center third of the screen. Add \`yspeed\`, \`toplimit\`, and \`bottomlimit\` to support vertical or diagonal movement.
+
+**Completion checks:** The platform stays inside its assigned bounds, reverses direction cleanly at each limit, and can move independently of the alien.`
 				},
 				{
 					title: "PyG6 Project 1: Stay on the Platform",
-					content:
-						'Create a game where the player must stay on an increasingly difficult moving platform. Make a platform with dynamic xspeed, yspeed, leftlimit, rightlimit, toplimit, and bottomlimit and an alien Actor with xspeed, yspeed, and onground. Define update() to apply gravity and friction to the alien, process keyboard input to move and jump, move the alien by its speeds, move the platform and bounce it within its limits, and handle platform collision by setting alien.bottom to the platform\'s top, alien.yspeed = 0, and alien.onground = True. Define draw() to draw the alien, platform, and score text in the top-left. Create global lose = False and score = 0 and in update() declare them global, wrap all movement and game logic in if not lose:, increase the platform speed over time, and set lose = True if the alien falls off the bottom of the screen. Increment score each update or based on survival time. In draw(), show only the score and a "Game Over" message when lose is True.',
+					content: `**Project goal:** Create a survival game where the player must stay on an increasingly difficult moving platform.
+
+**Objects and state:**
+- Make one platform with dynamic \`xspeed\`, \`yspeed\`, \`leftlimit\`, \`rightlimit\`, \`toplimit\`, and \`bottomlimit\`.
+- Create an alien Actor with \`xspeed\`, \`yspeed\`, and \`onground\`.
+- Create global values such as \`lose = False\` and \`score = 0\`.
+
+**Update loop:**
+- Apply gravity and friction to the alien.
+- Process keyboard input for movement and jumping.
+- Move the alien by its speeds.
+- Move the platform and bounce it within its limits.
+- Handle platform collision by setting \`alien.bottom\` to the platform's top, \`alien.yspeed = 0\`, and \`alien.onground = True\`.
+- Wrap gameplay logic in \`if not lose:\` so movement stops when the game is over.
+- Increase platform speed over time.
+- Set \`lose = True\` if the alien falls off the bottom of the screen.
+
+**Draw loop:** Draw the alien, platform, and score while the game is active. When \`lose\` is true, show the final score and a clear "Game Over" message.
+
+**Completion checks:** The platform speed ramps up over time, the alien can land and jump correctly, the score reflects survival time, and the game-over state stops normal movement.`,
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -643,13 +726,48 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Multiple Platforms with Lists",
-					content:
-						"Use a list to manage many platforms with one shared pattern. Create an empty `platforms` list and add a floor platform plus two smaller platforms (`platform1` and `platform2`) above it. In `draw()`, loop through `platforms` and draw each one. Reuse the alien, gravity, friction, and jumping code. In `update()`, set `alien.onground = False` before checking collisions. Then loop through platforms and use `if alien.colliderect(p) and alien.yspeed >= 0: alien.bottom = p.top; alien.yspeed = 0; alien.onground = True` so the alien snaps to the top of any platform it lands on while moving downward. This prevents the alien from snapping when jumping upward through a platform. Next, loop through platforms after creating them to set `p.xspeed = 0` and `p.yspeed = 0` for all; then manually set `xspeed` and `yspeed` for any moving platforms. Add limits with `p.leftlimit = 0`, `p.rightlimit = WIDTH`, `p.toplimit = 0`, and `p.bottomlimit = HEIGHT` in the same loop. In `update()`, move each platform and bounce it inside its limits. A list keeps the platform logic scalable as more platforms are added."
+					content: `**Concept focus:** A list makes platform logic scalable. Instead of writing separate collision and draw code for each platform, every platform can follow the same shared pattern.
+
+**Setup sequence:**
+- Create an empty \`platforms\` list.
+- Add a floor platform plus two smaller platforms, such as \`platform1\` and \`platform2\`, above it.
+- In \`draw()\`, loop through \`platforms\` and draw each one.
+- Reuse the existing alien, gravity, friction, and jumping code.
+
+**Collision sequence:**
+- At the start of \`update()\`, set \`alien.onground = False\`.
+- Loop through each platform \`p\`.
+- Use a downward-motion check such as \`if alien.colliderect(p) and alien.yspeed >= 0:\`.
+- Snap the alien onto the platform with \`alien.bottom = p.top\`, set \`alien.yspeed = 0\`, and set \`alien.onground = True\`.
+- The \`alien.yspeed >= 0\` condition prevents the alien from snapping to a platform while jumping upward through it.
+
+**Moving-platform sequence:** After creating the platforms, loop through them to set default \`p.xspeed\`, \`p.yspeed\`, and boundary attributes. Then manually customize speeds or limits for any moving platforms. In \`update()\`, move each platform and bounce it inside its own limits.
+
+**Completion checks:** All platforms are drawn from the list, the alien can land on any platform, upward jumps do not cause false snapping, and moving platforms reuse the same update logic as static ones.`
 				},
 				{
 					title: "PyG6 Project 2: Platformer Game",
-					content:
-						'Design and build a full platformer level. Start by sketching a level layout (for example using https://aggie.io) including at least 8 platforms, at least 1 moving platform, a start position for the alien, and a diamond. Convert the drawing into a list of ZRects for platforms, then write draw() and run to verify platform positions. Add dynamic motion attributes to selected platforms and update() logic so they move and stay within their limits. Add an alien Actor that can walk and jump on platforms and resets to the start when it falls off the screen. Add a diamond Actor using the "diamond_s" image at the goal location. Create a global gameOver flag initially False and another variable to track whether the diamond has been collected. When the alien touches the diamond, set gameOver to True, hide the diamond, and display a "Game Over" or "You Win" text instead of the regular game view.',
+					content: `**Project goal:** Design and build a full platformer level with static platforms, at least one moving platform, a player start, and a collectible goal.
+
+**Planning and layout:**
+- Sketch a level layout, for example with https://aggie.io or a simple drawing tool.
+- Include at least 8 platforms.
+- Include at least 1 moving platform.
+- Mark the alien's start position.
+- Mark the diamond's goal position.
+- Convert the drawing into a list of \`ZRect\` platforms.
+
+**Implementation sequence:**
+- Write \`draw()\` first and run the game to verify platform positions.
+- Add dynamic motion attributes to selected platforms.
+- Add \`update()\` logic so moving platforms stay within their limits.
+- Add an alien Actor that can walk and jump on platforms.
+- Reset the alien to the start when it falls off the screen.
+- Add a diamond Actor using the \`"diamond_s"\` image at the goal location.
+
+**Win state:** Create a global \`gameOver\` flag initially set to false and another variable to track whether the diamond has been collected. When the alien touches the diamond, set \`gameOver\` to true, hide the diamond, and display a "You Win" message instead of the regular game view.
+
+**Completion checks:** The level matches the planned layout, moving platforms stay bounded, falling resets the alien, and collecting the diamond produces a clear win state.`,
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -659,8 +777,26 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "PyG6 Project 3: Falling Jump",
-					content:
-						'Create an endless survival game with falling platforms. Start with an empty platforms list and a loop that creates 10 ZRects at random horizontal positions. For each platform, add dynamic attributes yspeed and color (an (r, g, b) tuple) and append it to platforms. Define draw() to draw all platforms. Add an alien Actor that moves left and right, is affected by gravity, and falls off-screen if unsupported. In update(), move each platform downward by its yspeed and when a platform goes below the bottom, send it back to the top with a new random position. Implement collision so that when the alien lands on a platform its yspeed becomes a negative value (a bounce). Create a global gameOver flag that, when True, stops motion and triggers a "Game Over" message in draw(). Tune bounce strength and platform speeds until the difficulty feels fair but challenging.',
+					content: `**Project goal:** Create an endless survival game where platforms fall and the player must keep bouncing upward.
+
+**Platform setup:**
+- Start with an empty \`platforms\` list.
+- Use a loop to create 10 \`ZRect\` platforms at random horizontal positions.
+- Give each platform dynamic attributes such as \`yspeed\` and \`color\`.
+- Store color as an RGB tuple, such as \`(r, g, b)\`.
+- Append each platform to \`platforms\`.
+- Define \`draw()\` to draw every platform from the list.
+
+**Gameplay sequence:**
+- Add an alien Actor that moves left and right.
+- Apply gravity so the alien falls when unsupported.
+- In \`update()\`, move each platform downward by \`yspeed\`.
+- When a platform goes below the bottom edge, send it back to the top with a new random x-position.
+- When the alien lands on a platform, set its vertical speed to a negative value so it bounces upward.
+
+**Game-over behavior:** Create a global \`gameOver\` flag. When true, stop motion and show a "Game Over" message in \`draw()\`.
+
+**Completion checks:** Platforms recycle cleanly, bounce behavior is consistent, unsupported falling can end the game, and bounce strength plus platform speed feel fair but challenging.`,
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -804,13 +940,31 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Time Module and Pausing",
-					content:
-						"Python's time module provides utilities for working with real time. Import time at the top of the file. Modify a simple alien-running game so that when the alien reaches the right edge of the screen, the game pauses for one second before resetting the alien to the left. Use time.sleep(1) to create a blocking delay and note its limitation: it freezes the entire game loop and is only appropriate for brief transitions or very simple effects."
+					content: `**Concept focus:** Python's \`time\` module provides utilities for working with real time. In a game loop, timing code affects not only one object, but the whole update cycle.
+
+**Practice sequence:**
+- Import \`time\` at the top of the file.
+- Start with a simple alien-running game where the alien moves toward the right edge.
+- When the alien reaches the right edge, call \`time.sleep(1)\` before resetting the alien to the left.
+- Observe that the pause freezes the whole game, including input and animation.
+
+**Design note:** \`time.sleep()\` is acceptable for a tiny transition or demonstration, but it is usually not the best choice for live gameplay because it blocks the event loop. Later projects should prefer clock scheduling when the game needs to keep updating while a delay is in progress.`
 				},
 				{
 					title: "Clock Scheduling in Pygame Zero",
-					content:
-						'Pygame Zero\'s clock schedules functions without freezing the game. Create an alien that can be clicked to change its image to a "hurt" version. Define setAlienNormal() to restore the alien\'s normal image. Replace any time.sleep calls with clock.schedule_unique(setAlienNormal, 1.0) in the click handler so the alien looks hurt for one second while the game keeps running. Next, define moveRandom() to move the alien to a random screen position and use clock.schedule_interval(moveRandom, 0.5) when the player presses space so the alien teleports every half second. Add clock.unschedule(moveRandom) when the player presses "s" to stop the movement. Key distinction: schedule_unique runs once after a delay, schedule_interval runs repeatedly, and unschedule cancels scheduled callbacks.'
+					content: `**Concept focus:** Pygame Zero's \`clock\` schedules functions without freezing the game. Scheduled callbacks are better than \`time.sleep()\` when animation and input should continue.
+
+**One-time schedule:**
+- Create an alien that changes to a "hurt" image when clicked.
+- Define \`setAlienNormal()\` to restore the alien's normal image.
+- In the click handler, call \`clock.schedule_unique(setAlienNormal, 1.0)\` so the hurt image lasts one second while the game keeps running.
+
+**Repeated schedule:**
+- Define \`moveRandom()\` to move the alien to a random screen position.
+- When the player presses space, call \`clock.schedule_interval(moveRandom, 0.5)\` so the alien teleports every half second.
+- When the player presses "s", call \`clock.unschedule(moveRandom)\` to stop the repeated movement.
+
+**Key distinction:** \`schedule_unique\` runs once after a delay, \`schedule_interval\` runs repeatedly, and \`unschedule\` cancels scheduled callbacks.`
 				},
 				{
 					title: "PyG7 Project 1: Alien Catch",
@@ -825,8 +979,22 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "PyG7 Project 2: Beach Ball Dodge",
-					content:
-						"Create a survival game where a blue square dodges moving beach balls while two scheduled functions track difficulty and time. The finished Beach Ball Dodge game should make its screens, components, and square-growth behavior easy to identify. Implement a start screen controlled by the space key. In play mode, let the player move a blue square using the arrow keys while beach balls move horizontally across the screen. Create increaseSize(), which uses inflate_ip(w, l) to grow the square, and schedule it with clock.schedule_interval(increaseSize, 5) so the square increases in size every 5 seconds. Create increaseTimer(), which increments a timer variable and schedule it every second to track survival time. Ensure these scheduled functions start only when the game starts and are cancelled or stopped once the game ends. When the player collides with a beach ball, show an end screen displaying how long they lasted, and allow them to restart with space or quit with Escape.",
+					content: `**Project goal:** Create a survival game where a blue square dodges moving beach balls while scheduled functions track difficulty and survival time.
+
+**Core screens and controls:**
+- Add a start screen controlled by the space key.
+- In play mode, move a blue square with the arrow keys.
+- Move beach balls horizontally across the screen as hazards.
+- When the player collides with a beach ball, switch to an end screen.
+
+**Scheduled behavior:**
+- Create \`increaseSize()\`, using \`inflate_ip(w, l)\` to grow the square.
+- Schedule \`increaseSize()\` with \`clock.schedule_interval(increaseSize, 5)\` so the square gets larger every five seconds.
+- Create \`increaseTimer()\`, increment a timer variable, and schedule it once per second.
+- Start the scheduled functions only when gameplay begins.
+- Cancel or stop scheduled callbacks once the game ends so old timers do not keep modifying the next run.
+
+**Completion checks:** The end screen displays survival time, the square growth is visible, scheduled callbacks do not duplicate after restarting, and the player can restart with space or quit with Escape.`,
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -839,8 +1007,26 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "PyG7 Project 3: Number Count",
-					content:
-						'Implement a memory and timing game that uses levels, music, and multiple screens. The finished Number Count game should make its components, interactions, and screen flow easy to explain. On the start screen, let the player select easy, medium, or hard difficulty. Initialize the player with 3 lives and 3 numbered blocks in level 1. For each level, display purple tiles that show numbers in order; after the player clicks the tile labeled "1", hide numbers on the other tiles and start a timer. Track which number the player should click next with a variable and, when they click correctly, play a chime and keep that tile\'s number visible. Use music.play("tune.mp3") for background music. When time runs out, reduce lives by one; when lives reach zero, show a game-over screen where the player can choose to play again or quit with the space and Escape keys. When the player completes all 15 levels, show a winning end screen with a congratulatory message and restart options. Store and increment the level, then scale the number of tiles with each level.',
+					content: `**Project goal:** Implement a memory and timing game that uses levels, music, difficulty selection, and multiple screens.
+
+**Screen flow and setup:**
+- On the start screen, let the player select easy, medium, or hard difficulty.
+- Initialize the player with 3 lives and 3 numbered blocks in level 1.
+- Use \`music.play("tune.mp3")\` for background music.
+
+**Level behavior:**
+- For each level, display purple tiles that show numbers in order.
+- After the player clicks the tile labeled "1", hide the numbers on the other tiles and start a timer.
+- Track the next expected number with a variable.
+- When the player clicks the correct tile, play a chime and keep that tile's number visible.
+- Store and increment the current level, then scale the number of tiles as levels increase.
+
+**Ending behavior:**
+- When time runs out, reduce lives by one.
+- When lives reach zero, show a game-over screen with options to play again or quit using space and Escape.
+- When all 15 levels are completed, show a winning end screen with a short congratulatory message and restart options.
+
+**Completion checks:** Difficulty affects the challenge, level state changes predictably, incorrect timing reduces lives, correct clicks preserve visible numbers, and both win and loss screens can restart cleanly.`,
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -909,8 +1095,24 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "PyG8 Project 1: Target Shoot",
-					content:
-						"Develop a ninja-target shooting game using a single reusable projectile. The finished Target Shoot game should make its components and screen flow easy to explain. Add a start screen where the player presses Enter to begin. Create a ninja Actor that can move left, right, and jump on platforms using the arrow keys and space bar. Add a ninja star projectile that fires in the direction the ninja is facing when space is pressed and prevent firing a new star until the current one hits something or leaves the screen. Track the direction of the ninja with a property (e.g., facing left or right) and use it to set the projectile's x speed. When the star collides with a target, a platform, or the edge of the screen, hide it and reset it to the ninja so another shot can be fired. Move the target to a new location when it is hit. Track how many targets are hit; require the player to hit 10 targets before time runs out to win, otherwise display a loss message on an end screen. Allow restarting from the end screen and quitting with Escape.",
+					content: `**Project goal:** Develop a ninja-target shooting game using one reusable projectile.
+
+**Core setup:**
+- Add a start screen where the player presses Enter to begin.
+- Create a ninja Actor that can move left, move right, and jump on platforms using the arrow keys and space bar.
+- Add one ninja-star projectile.
+- Track the direction the ninja is facing with a property or state variable.
+
+**Projectile behavior:**
+- Fire the ninja star in the direction the ninja is facing when space is pressed.
+- Prevent firing a new star until the current star hits something or leaves the screen.
+- Use the ninja's facing direction to set the projectile's x speed.
+- When the star collides with a target, a platform, or the edge of the screen, hide it and reset it to the ninja.
+- Move the target to a new location when it is hit.
+
+**Win and loss behavior:** Track how many targets are hit. The win condition is 10 hits before time runs out; otherwise, display a loss message on an end screen. Allow restarting from the end screen and quitting with Escape.
+
+**Completion checks:** Only one star can be active at a time, projectile direction follows the ninja's facing state, target hits are counted accurately, and the game has clear start, win, loss, restart, and quit behavior.`,
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -933,8 +1135,24 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "PyG8 Project 2: Asteroid Shoot",
-					content:
-						"Create a classic bottom-shooter game where a rocket fires multiple lasers at falling asteroids. The finished Asteroid Shoot game should make its main components and interactions easy to identify. Add a start screen that requires pressing Enter to start. Create a rocket Actor at the bottom of the screen that moves left and right with the arrow keys. Create a list player_lasers; when space is pressed, append a new laser to this list starting at the rocket's position. In update(), move lasers upward and remove any that leave the top of the screen. Create multiple asteroid Actors falling from the top; when a laser collides with an asteroid, remove the laser (checking it is still in the list to avoid errors) and reset the asteroid to a random position at the top. If any asteroid reaches the bottom or collides with the rocket, end the game. Increase asteroid speed every five seconds to ramp up difficulty. At game over, display how long the player survived and allow restarting with Enter and quitting with Escape.",
+					content: `**Project goal:** Create a bottom-shooter game where a rocket fires multiple lasers at falling asteroids.
+
+**Core setup:**
+- Add a start screen that requires pressing Enter to begin.
+- Create a rocket Actor at the bottom of the screen.
+- Move the rocket left and right with the arrow keys.
+- Create multiple asteroid Actors that fall from the top of the screen.
+
+**Laser list behavior:**
+- Create a \`player_lasers\` list.
+- When space is pressed, append a new laser starting at the rocket's position.
+- In \`update()\`, move each laser upward.
+- Remove lasers that leave the top of the screen.
+- When a laser collides with an asteroid, remove the laser and reset the asteroid to a random top position. Check that the laser is still in the list before removing it to avoid duplicate-removal errors.
+
+**Difficulty and ending:** End the game if an asteroid reaches the bottom or collides with the rocket. Increase asteroid speed every five seconds to ramp up difficulty. At game over, display survival time and allow restarting with Enter or quitting with Escape.
+
+**Completion checks:** Laser creation and removal do not corrupt the list, asteroids reset on hits, difficulty increases over time, and both asteroid-bottom and rocket-collision failures end the game cleanly.`,
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -989,8 +1207,26 @@ export const pyGamesCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "PyG9 Project 1: Shark Chase (Fish Bowl)",
-					content:
-						"Build a Fish Bowl game where a shark chases a diver and seaweed can hide the player. The finished Shark Chase or Fish Bowl game should make these behaviors clear: how the diver is controlled, what happens when fish are collected, what happens when the shark catches the diver, how the shark behaves, and what changes when the player goes behind seaweed. Create a diver Actor controlled with the arrow keys; apply gravity and friction in both x and y directions for an underwater feel and prevent the diver from leaving the screen. Add a shark Actor with dynamic xspeed and yspeed; first test it by giving fixed speeds and moving it each frame. Define setDirection() to compute xspeed and yspeed so the shark moves toward the diver's current position (similar to the vector math used in the Golf project to move the ball toward a click). Use clock.schedule_interval(setDirection, 1.0) so the shark retargets the diver every second. Add a seaweed Actor and modify setDirection() so that if the diver is fully inside the seaweed, the shark's xspeed and yspeed become random values, simulating the shark \"losing sight\" of the player. Add game-over logic when the shark catches the diver and any needed gameState variables. Create a school of fish that swim across the screen and award points when the diver collects them, showing the score on screen.",
+					content: `**Project goal:** Build a Fish Bowl game where a shark chases a diver, fish increase the score, and seaweed can hide the player.
+
+**Player and motion:**
+- Create a diver Actor controlled with the arrow keys.
+- Apply gravity and friction in both x and y directions for an underwater feel.
+- Prevent the diver from leaving the screen.
+
+**Shark behavior:**
+- Add a shark Actor with dynamic \`shark.xspeed\` and \`shark.yspeed\`.
+- First test the shark with fixed speeds so movement and wall behavior are easy to debug.
+- Define \`setDirection()\` to compute speeds that move the shark toward the diver's current position. This is similar to the vector math used in the Golf project to move a ball toward a click.
+- Use \`clock.schedule_interval(setDirection, 1.0)\` so the shark retargets the diver every second instead of every frame.
+
+**Hiding mechanic:**
+- Add a seaweed Actor.
+- Modify \`setDirection()\` so that if the diver is fully inside the seaweed, the shark receives random speeds instead of targeting the diver. This simulates the shark losing sight of the player.
+
+**Scoring and ending:** Create a school of fish that swim across the screen and award points when collected. Add game-over logic when the shark catches the diver and use clear game-state values for play, win, loss, or restart screens.
+
+**Completion checks:** The diver controls are responsive, the shark visibly retargets over time, seaweed changes the shark behavior, fish collection changes the score, and the game reaches a clear end state on collision.`,
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -1000,8 +1236,25 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "PyG9 Project 2: Space Battle",
-					content:
-						"Create a boss-style Space Battle where an alien ship with AI fires at the player. The finished game should make the alien behavior clear: how it moves, when it shoots, how lasers are created, and how projectile lists are updated. Create an alien Actor with dynamic xspeed and health that moves horizontally and bounces off the walls, speeding up each time it changes direction. Create a list enemy_lasers to hold enemy projectiles. Define alien_shoot() to spawn a new laser from the alien and add it to enemy_lasers. To simulate random firing, schedule alien_shoot() at several different intervals (e.g., 1.0, 1.3, 0.6 seconds) so the shots do not line up predictably. Create a player rocket at the bottom of the screen with a health attribute and allow it to move left and right with the arrow keys. Create a list player_lasers and add a new laser on each space press. In update(), move all lasers, remove them when they go offscreen, and check collisions: player lasers hitting the alien reduce its health; enemy lasers hitting the player reduce the player's health. End the game when either health reaches zero and display a win or loss message. This simple AI reacts by shooting at semi-random times and moving in a repeated pattern.",
+					content: `**Project goal:** Create a boss-style Space Battle where an alien ship fires at the player while the player fires back.
+
+**Alien behavior:**
+- Create an alien Actor with dynamic \`xspeed\` and \`health\`.
+- Move the alien horizontally and bounce it off the walls.
+- Increase the alien's speed each time it changes direction.
+- Create an \`enemy_lasers\` list to hold enemy projectiles.
+- Define \`alien_shoot()\` to spawn a new laser from the alien and append it to \`enemy_lasers\`.
+- Schedule \`alien_shoot()\` at several different intervals, such as 1.0, 1.3, and 0.6 seconds, so shots do not line up predictably.
+
+**Player behavior:**
+- Create a player rocket at the bottom of the screen with a health attribute.
+- Move the rocket left and right with the arrow keys.
+- Create a \`player_lasers\` list.
+- Add a new player laser on each valid space press.
+
+**Collision and ending:** In \`update()\`, move all lasers, remove offscreen lasers, and check collisions. Player lasers that hit the alien reduce alien health; enemy lasers that hit the player reduce player health. End the game when either health reaches zero and display a win or loss message.
+
+**Completion checks:** Both projectile lists update safely, alien firing feels semi-random, health changes only on hits, and the win/loss result matches which ship reaches zero health first.`,
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
