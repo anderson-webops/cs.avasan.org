@@ -14,8 +14,20 @@ export const scratchLevel2Course: RawCourse = {
 				},
 				{
 					title: "GM1 Project 1: Dragonfly Events",
-					content:
-						'1. When the green flag is clicked, make the dragonfly go to a random spot on the stage.\n2. When the arrow keys are pressed, make the dragonfly move 20 steps in that direction.\n3. When the dragonfly is clicked, make it change its color.\n4. When the space bar is pressed, make the dragonfly make a popping sound.\n5. When 1 is pressed, make the dragonfly "pop" and then go to a random position.\n6. When 2 is pressed, make the dragonfly say something ("Buzzzz", for example).\n7. When 3 is pressed, make the background change.\nChallenge: can you add another sprite that is moves around using the WASD keys?',
+					content: `**Project goal:** Practice event listeners by making the dragonfly respond to startup, keys, clicks, and backdrop changes.
+
+**Event behaviors:**
+1. When the green flag is clicked, move the dragonfly to a random spot on the stage.
+2. When an arrow key is pressed, move the dragonfly 20 steps in that direction.
+3. When the dragonfly is clicked, change its color.
+4. When the spacebar is pressed, play a popping sound.
+5. When 1 is pressed, make the dragonfly pop and then move to a random position.
+6. When 2 is pressed, make the dragonfly say something, such as "Buzzzz".
+7. When 3 is pressed, change the background.
+
+**Extension:** Add another sprite controlled by the W-A-S-D keys.
+
+**Completion check:** Each event should trigger only the intended behavior, and the project should reset cleanly when the green flag is clicked.`,
 					projectLink: "https://scratch.mit.edu/projects/287707460/",
 					solutionLink: "https://scratch.mit.edu/projects/284408078/"
 				},
@@ -26,8 +38,16 @@ export const scratchLevel2Course: RawCourse = {
 				},
 				{
 					title: "GM1 Project 2: Drawing Mouse",
-					content:
-						"1. Add an event listener so that when the flag is clicked, everything gets erased.\n2. Add an event listener so that when the 1 key is pressed, the mouse draws a square (using a loop) in a random location.\n3. Add a similar set of blocks so that the mouse draws a triangle.\n4. Add a similar set of blocks so that the mouse draws a circle.\n5. What other shapes can you create? Make some other sets of blocks that draw other shapes (e.g. an octagon, a star, etc.).",
+					content: `**Project goal:** Use event listeners and loops to draw different shapes on command.
+
+**Build steps:**
+1. When the green flag is clicked, erase all drawings so the stage starts clean.
+2. When the 1 key is pressed, move the mouse to a random location and draw a square using a loop.
+3. Add a similar event so another key draws a triangle.
+4. Add a similar event so another key draws a circle.
+5. Create at least one additional shape, such as an octagon, star, or original geometric pattern.
+
+**Completion check:** Each key should draw a clear shape without leaving unwanted setup marks from the previous drawing.`,
 					projectLink: "https://scratch.mit.edu/projects/289744824/",
 					solutionLink: "https://scratch.mit.edu/projects/289445069/"
 				},
@@ -38,8 +58,16 @@ export const scratchLevel2Course: RawCourse = {
 				},
 				{
 					title: "GM1 Project 3: Math Facts",
-					content:
-						'1. When 1 is pressed, have Gobo ask a question like "What\'s 9-7?" Based on how the user answers, Gobo should change his costume, make a sound, and/or say something to indicate a correct or incorrect answer.\n2. When is 2 is pressed, have Gobo ask a question like "What\'s a number less than 0?" Based on how the user answers, Gobo should change his costume, make a sound, and/or say something to indicate a correct or incorrect answer.\n3. When 3 is pressed, have Gobo ask a harder math question that allows the user to keep answering until the answer is correct. Gobo should indicate each time whether the answer was correct or incorrect.',
+					content: `**Project goal:** Build a math-practice project where Gobo asks questions and reacts to correct or incorrect answers.
+
+**Question events:**
+1. When 1 is pressed, ask a direct arithmetic question such as "What's 9 - 7?"
+2. When 2 is pressed, ask a comparison question such as "What's a number less than 0?"
+3. When 3 is pressed, ask a harder question that repeats until the answer is correct.
+
+**Feedback behavior:** For each question, have Gobo change costume, play a sound, or say a message that clearly shows whether the answer was correct.
+
+**Completion check:** The harder question should keep asking until the correct answer is entered, while the simpler questions should give immediate feedback.`,
 					projectLink: "https://scratch.mit.edu/projects/295332936/",
 					solutionLink: "https://scratch.mit.edu/projects/294539961/"
 				},
@@ -50,8 +78,21 @@ export const scratchLevel2Course: RawCourse = {
 				},
 				{
 					title: "GM1 Project 4: Speed Click",
-					content:
-						'Build a 10-second clicking game: the player clicks the button as many times as possible before time runs out.\n1. Make a variable to keep track of the number of clicks.\n2. Use an event listener so that when the sprite is clicked, the variable goes up by one. Make the button switch to the pressed costume and make a sound, too.\n3. Make a variable that keeps track of time.\n4. When the green flag is clicked, make the timer start from 10 and count down to 0.\n5. Before the timer starts, make the button say "Ready...", "Set...", and "Go!" for one second each.\n6. When time runs out, make the button hide. Because the button hides at the end, include a green-flag reset that shows it again when a new game starts.',
+					content: `**Project goal:** Build a 10-second clicking game where the player clicks a button as many times as possible before time runs out.
+
+**Variables:**
+- clicks tracks the player's score.
+- time tracks the countdown from 10 to 0.
+
+**Build steps:**
+1. When the sprite is clicked, increase clicks by one.
+2. Make the button switch to its pressed costume and play a sound on each click.
+3. When the green flag is clicked, reset clicks, show the button, and set time to 10.
+4. Before the timer starts, make the button say "Ready...", "Set...", and "Go!" for one second each.
+5. Count time down to 0.
+6. When time runs out, hide the button and show the final score.
+
+**Completion check:** Starting a new round should reset the button visibility, score, and timer instead of carrying over old state.`,
 					projectLink: "https://scratch.mit.edu/projects/299327014/",
 					solutionLink: "https://scratch.mit.edu/projects/299311602/"
 				},
@@ -62,8 +103,20 @@ export const scratchLevel2Course: RawCourse = {
 				},
 				{
 					title: "GM1 Project 5: Dance Off",
-					content:
-						"Build a dance sequence where each sprite gets a turn to perform on the stage.\n1. When the green flag is clicked, make the ballerina glide to the middle of the stage and cycle twice through all of her costumes. When she is done, have her glide off to the right side of the stage.\n2. Make each of the other dancers follow the same pattern one by one. Add clapping or applause between performers, and reset each dancer to the left side when the green flag is clicked.\n3. Add backdrop code that plays dancing music forever. When Champ is done dancing, broadcast a message that stops the music.\n4. Optional extension: add lighting changes, a final applause sequence, or a closing pose after everyone is done.",
+					content: `**Project goal:** Build a dance sequence where each sprite gets a turn to perform on the stage.
+
+**Dance sequence:**
+1. When the green flag is clicked, reset each dancer to the left side of the stage.
+2. Make the ballerina glide to the middle and cycle twice through all costumes.
+3. When the ballerina is done, glide her off to the right side.
+4. Make each other dancer follow the same pattern one by one.
+5. Add clapping or applause between performers.
+6. Add backdrop code that plays dancing music during the show.
+7. When the final dancer is done, broadcast a message that stops the music.
+
+**Extension:** Add lighting changes, a final applause sequence, or a closing pose after everyone is done.
+
+**Completion check:** The performers should appear in a clear order, and the music should stop because of a broadcast rather than by timing guesswork.`,
 					projectLink: "https://scratch.mit.edu/projects/301002220/",
 					solutionLink: "https://scratch.mit.edu/projects/300644693/"
 				},
@@ -140,22 +193,47 @@ export const scratchLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "GM2 Supplemental Project 1: Playing Baseball",
-					content:
-						"1. Start by setting the pitcher's costume to the first one, make him say “Batter up!”, and then cycle through all of his costumes. Send a message broadcast when he's done pitching and wait for the batter.\n2. When the batter receives the message, make her cycle through all of her costumes.\n3. How many strikes until the batter's out? Repeat your code this many times.",
+					content: `**Project goal:** Use loops and broadcasts to coordinate a pitcher and batter animation.
+
+**Build steps:**
+1. Set the pitcher's costume to the first costume at the start.
+2. Make the pitcher say "Batter up!" and cycle through all pitching costumes.
+3. Broadcast a message when the pitch is complete.
+4. When the batter receives the message, cycle through the batter's costumes.
+5. Decide how many strikes create an out, then repeat the pitch-and-bat sequence that many times.
+
+**Completion check:** The batter should wait for the pitch broadcast instead of starting at the same time as the pitcher.`,
 					projectLink: "https://scratch.mit.edu/projects/334075920",
 					solutionLink: "https://scratch.mit.edu/projects/334073245/"
 				},
 				{
 					title: "GM2 Supplemental Project 2: Grid",
-					content:
-						"Draw a grid by treating one row as a repeated pattern.\n1. Plan how one row of squares changes after each square is drawn.\n2. Make the pencil start at (-200, 150) and draw 8 squares with a side length of 50 from left to right across the screen.\n3. Extend the row logic into multiple rows by changing the starting position for each row.\n4. Draw 6 rows of squares from the top to the bottom of the screen.",
+					content: `**Project goal:** Draw a grid by treating one row as a repeated pattern and then repeating the row.
+
+**Build steps:**
+1. Plan how the pencil position changes after each square in one row.
+2. Start the pencil at (-200, 150).
+3. Draw 8 squares with side length 50 from left to right.
+4. Extend the row logic into multiple rows by changing the starting position for each row.
+5. Draw 6 rows of squares from the top to the bottom of the screen.
+
+**Completion check:** The grid should have consistent square size, row spacing, and column spacing.`,
 					projectLink: "https://scratch.mit.edu/projects/334073152/",
 					solutionLink: "https://scratch.mit.edu/projects/334067890/"
 				},
 				{
 					title: "GM2 Supplemental Project 3: Rainbow Flower",
-					content:
-						"Draw a rainbow flower with repeated circular petals.\n1. When the green flag is clicked, make the pencil sprite go to the center of the screen and put the pen down.\n2. Start by programming a circle and inspecting the turn amount. Experiment with changing the turn amount and the amount added after each turn. Store the angle in a variable and increase it by 1 each loop iteration.\n3. After the experiment, set the starting angle to 0 degrees and repeat 40 times to create a spiral.\n4. Use the first petal pattern to create the other six petals. Each petal should start near the flower center and move outward.\n5. Change the pen color after each petal to create a rainbow-colored flower.",
+					content: `**Project goal:** Draw a rainbow flower by repeating and rotating a circular petal pattern.
+
+**Build steps:**
+1. When the green flag is clicked, move the pencil to the center and put the pen down.
+2. Start with a circle and inspect how the turn amount affects the drawing.
+3. Store the angle in a variable and increase it by 1 each loop iteration.
+4. Set the starting angle to 0 degrees and repeat 40 times to create a spiral.
+5. Reuse the petal pattern to create six more petals that start near the flower center and move outward.
+6. Change the pen color after each petal to create a rainbow effect.
+
+**Completion check:** The finished flower should show both repetition and controlled variation: repeated petals, changing angle, and changing color.`,
 					projectLink: "https://scratch.mit.edu/projects/335808333/",
 					solutionLink: "https://scratch.mit.edu/projects/335807180/"
 				}
@@ -295,14 +373,31 @@ export const scratchLevel2Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Check-in #1: Nested Loops",
-					content:
-						'Create a new blank project in Scratch, and name it "Check-in #1".\nNested-1: What is a loop? What is it called when a loop is placed inside another loop?\nNested-2: Add a sprite to your project and have it play a sound when the spacebar is pressed. Put a repeat 3 around the sound block and then a repeat 2 around the whole thing. Before running the code, predict how many times the sprite will make the sound.\nNested-3: When the green flag is clicked, draw a triangle. Turn 60 degrees and draw another triangle. Use a repeat block to make a hexagon of triangles.\nNote: You can draw this shape using the annotation tool on the screen for clarity.\nNested-4: Draw another, bigger hexagon around the first one. Use a loop around the existing code if it helps remove repetition.',
+					content: `**Check-in goal:** Review loops and nested loops with a small Scratch drawing project.
+
+**Setup:** Create a new blank Scratch project named "Check-in #1".
+
+**Prompts:**
+1. Define a loop and explain what it means for one loop to be placed inside another loop.
+2. Add a sprite that plays a sound when the spacebar is pressed. Put a repeat 3 around the sound block, then put a repeat 2 around the whole script. Predict the total number of sounds before running it.
+3. When the green flag is clicked, draw a triangle, turn 60 degrees, and draw another triangle. Use a repeat block to form a hexagon of triangles.
+4. Draw another larger hexagon around the first one. Use a loop around the existing code if it helps remove repetition.
+
+**Completion check:** The prediction for the sound loop should match the actual run, and the drawing should show why nested loops reduce repeated code.`,
 					solutionLink: "https://scratch.mit.edu/projects/341945558/"
 				},
 				{
 					title: "Check-in #1: Cloning",
-					content:
-						"Practice prompts:\n1. How can Scratch duplicate sprites and make the duplicates do different things?\n2. Move the drawing code so that when the green flag is clicked, the parent sprite makes clones of itself every 2 seconds and the clones go to a random position and draw the hexagon shape.\n3. Make the clones show when they are created and then delete themselves when they are done. Decide what the original sprite should do while it is not drawing.",
+					content: `**Check-in goal:** Review how clones let one sprite create temporary copies with their own behavior.
+
+**Prompts:**
+1. Explain how Scratch can duplicate sprites and make the duplicates do different things.
+2. Move the drawing code so the parent sprite creates clones every 2 seconds after the green flag is clicked.
+3. Make each clone go to a random position and draw the hexagon shape.
+4. Make clones show when created and delete themselves when finished.
+5. Decide what the original parent sprite should do while it is not drawing.
+
+**Completion check:** The parent sprite should manage clone creation while the clones handle the drawing and cleanup.`,
 					solutionLink: "https://scratch.mit.edu/projects/341945558/"
 				},
 				{
@@ -351,15 +446,33 @@ export const scratchLevel2Course: RawCourse = {
 				},
 				{
 					title: "GM5 Project 1: Security Bot",
-					content:
-						'The robot is protecting the city. Use string blocks to ask questions and check text responses.\n1. Program the robot to ask for the user\'s name, and make him reply, "Nice to meet you, _____"\n2. Program the robot to ask for a word that starts with "q" and tell the user if they answered correctly.\n3. Program the robot to ask for a 7-letter word and tell the user if they answered correctly.\n4. Program the robot to ask for a word that ends in "y" and tell the user if they answered correctly.\nChallenge: Program the robot to ask for a 6-letter word that starts with "a" and tell the user if they answered correctly.',
+					content: `**Project goal:** Use Scratch string blocks to make a security robot ask questions and check text responses.
+
+**String checks:**
+1. Ask for the user's name and reply with "Nice to meet you, _____".
+2. Ask for a word that starts with q and report whether it matches.
+3. Ask for a 7-letter word and report whether it matches.
+4. Ask for a word that ends in y and report whether it matches.
+
+**Extension:** Ask for a 6-letter word that starts with a and report whether it matches.
+
+**Completion check:** Each rule should check the user's actual text rather than only reacting to any answer.`,
 					projectLink: "https://scratch.mit.edu/projects/308722400/",
 					solutionLink: "https://scratch.mit.edu/projects/308717171/"
 				},
 				{
 					title: "GM5 Project 2: Spelling Bee",
-					content:
-						"1. When 1 is pressed, ask the user for a word and spell out the word letter by letter. Example: C-O-D-I-N-G\n2. When 2 is pressed, ask the user for a word and spell out all but the first letter. Example: O-D-I-N-G\n3. When 3 is pressed, ask the user for a word and spell out all but the last letter. Example: C-O-D-I-N\n4. When 4 is pressed, ask the user for a word and spell out all but the first and last letters. Example: O-D-I-N\n5. When 5 is pressed, ask the user for a word and spell out every other letter. Example: C-D-N\n6. When 6 is pressed, ask the user for a word and spell out the word backward. Example: G-N-I-D-O-C",
+					content: `**Project goal:** Use string indexing and loops to spell words in different patterns.
+
+**Key commands:**
+1. When 1 is pressed, ask for a word and spell it letter by letter. Example: C-O-D-I-N-G.
+2. When 2 is pressed, spell all but the first letter. Example: O-D-I-N-G.
+3. When 3 is pressed, spell all but the last letter. Example: C-O-D-I-N.
+4. When 4 is pressed, spell all but the first and last letters. Example: O-D-I-N.
+5. When 5 is pressed, spell every other letter. Example: C-D-N.
+6. When 6 is pressed, spell the word backward. Example: G-N-I-D-O-C.
+
+**Completion check:** Each key should use the same input idea but a different string traversal pattern.`,
 					projectLink: "https://scratch.mit.edu/projects/357452950/",
 					solutionLink: "https://scratch.mit.edu/projects/357452924/"
 				},
@@ -375,15 +488,33 @@ export const scratchLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "GM5 Supplemental Project 1: Crazy Country",
-					content:
-						'Create your own fictional crazy country, with its own leader and activity its citizens are known for!\n1. Ask the user for the name of the country and save it.\n2. Similarly, ask and save the leader of the country and the primary activity the country is known for.\n3. Report this information back to the user using the "say" and "join" blocks.\nChallenge: Try to accomplish step 3 using one "say" block with many "join" blocks.',
+					content: `**Project goal:** Create a fictional country profile using user input and joined strings.
+
+**Build steps:**
+1. Ask for the country name and save the response.
+2. Ask for the leader's name and save the response.
+3. Ask for the main activity the country is known for and save the response.
+4. Report the full country profile back using say and join blocks.
+
+**Extension:** Build the full report with one say block that contains several joined text pieces.
+
+**Completion check:** The final message should include all three user-provided details in a readable sentence.`,
 					projectLink: "https://scratch.mit.edu/projects/338824789",
 					solutionLink: "https://scratch.mit.edu/projects/338828947/"
 				},
 				{
 					title: "GM5 Supplemental Project 2: Beary Spelly",
-					content:
-						'Build a spelling test that checks one letter at a time.\n1. The starter code already has a secret word picked out and saved in the Secret Word variable.\n2. Add the Text to Speech extension and speak the secret word to the user.\n3. Ask the user to enter each letter of the word one by one. If the letter is correct, speak "Correct!" Otherwise end the game. (Hint: think about how to repeat through the word letter by letter.)\n4. If the user has spelled the entire word correctly, speak "You spelled [secret word] correctly!"',
+					content: `**Project goal:** Build a spelling test that checks one letter at a time.
+
+**Build steps:**
+1. Use the starter's Secret Word variable as the word to spell.
+2. Add the Text to Speech extension and speak the secret word.
+3. Ask the user to enter the word one letter at a time.
+4. If a letter is correct, speak "Correct!"
+5. If a letter is incorrect, end the game.
+6. If the full word is spelled correctly, speak "You spelled [secret word] correctly!"
+
+**Completion check:** The spelling test should compare each typed letter to the matching position in the secret word.`,
 					projectLink: "https://scratch.mit.edu/projects/338829500",
 					solutionLink: "https://scratch.mit.edu/projects/338832976"
 				},
@@ -428,15 +559,36 @@ export const scratchLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "GM6 Supplemental Project 1: Times Tables",
-					content:
-						"Build a multiples practice game.\n1. Start by asking the user which number they want to know the multiples of.\n2. Create a variable that tracks the multiplier and set it to 1.\n3. Say the product of the user's answer and the multiplier variable, and then increase the multiplier variable by 1. Repeat this to make Scratch say the first ten multiples.\nChallenge: Have Scratch also ask the user how many multiples the user wants to hear, and update the code accordingly.",
+					content: `**Project goal:** Build a multiples practice tool that generates a times table from user input.
+
+**Build steps:**
+1. Ask which number the user wants multiples of.
+2. Create a multiplier variable and set it to 1.
+3. Say the product of the user's number and the multiplier.
+4. Increase the multiplier by 1.
+5. Repeat until Scratch has said the first ten multiples.
+
+**Extension:** Ask how many multiples the user wants to hear, then repeat for that many values instead of always stopping at ten.
+
+**Completion check:** The multiplier should update each round so the output is a sequence, not the same product repeated.`,
 					projectLink: "https://scratch.mit.edu/projects/338508588/",
 					solutionLink: "https://scratch.mit.edu/projects/338505545/"
 				},
 				{
 					title: "GM6 Supplemental Project 2: Stamping with Dotty",
-					content:
-						"Graph the absolute value function with Dotty.\n1. When the green flag is clicked, make Dotty go to the center of the screen and ask the user for an x-coordinate.\n2. First, change her x-coordinate to the user's answer, then change her y-coordinate to the absolute value of the answer (hint: this is a mathematical operator).\n3. Make her say what her new coordinates are and then leave a stamp with the pen tool.\n4. Repeat this code 10 times to graph 10 points of the function.\n5. Next, make Dotty go to (-180, 180), put the pen down, and then repeatedly increase the x position by 1 and update the y position to be the absolute value of the x position.",
+					content: `**Project goal:** Graph the absolute value function with Dotty by turning user input into stamped coordinates.
+
+**Interactive graphing:**
+1. When the green flag is clicked, move Dotty to the center.
+2. Ask for an x-coordinate.
+3. Set Dotty's x-coordinate to the answer.
+4. Set Dotty's y-coordinate to the absolute value of the answer.
+5. Say the new coordinates and leave a stamp.
+6. Repeat the process 10 times to graph 10 points.
+
+**Automated graphing:** Move Dotty to (-180, 180), put the pen down, and repeatedly increase x by 1 while setting y to the absolute value of x.
+
+**Completion check:** The stamped points should form the expected V-shape for an absolute value function.`,
 					projectLink: "https://scratch.mit.edu/projects/341759115",
 					solutionLink: "https://scratch.mit.edu/projects/338501835/"
 				},
@@ -457,22 +609,55 @@ export const scratchLevel2Course: RawCourse = {
 				},
 				{
 					title: "GM7 Project 1: Bucket List",
-					content:
-						"Build a list program that stores five bucket-list items and repeats them back.\n1. When the green flag is clicked, have the cat ask, “Tell me 5 things on your bucket list!”\n2. Program the cat to repeat this five times, adding the user's response to the list each time.\n3. Once the list is complete, have the cat loop through the list and repeat each bucket-list item back to the user.\nChallenge: Change the code so that instead of asking for five items, the cat keeps asking for new things to put on the list until the user types “stop.”",
+					content: `**Project goal:** Build a list program that stores five bucket-list items and repeats them back.
+
+**Build steps:**
+1. When the green flag is clicked, have the cat ask for five bucket-list items.
+2. Repeat five times, adding each answer to the list.
+3. Once the list is complete, loop through the list.
+4. Have the cat repeat each bucket-list item back to the user.
+
+**Extension:** Keep asking for new items until the user types "stop" instead of always collecting exactly five items.
+
+**Completion check:** The list should preserve every entered item and report the items in order.`,
 					projectLink: "https://scratch.mit.edu/projects/308826506/",
 					solutionLink: "https://scratch.mit.edu/projects/308824008/"
 				},
 				{
 					title: "GM7 Project 2: List Practice",
-					content:
-						"1. When the spacebar is pressed, make the cat ask, “What number do you want to add to the list?” Add the number the user enters to the list.\n2. When the green flag is clicked, delete everything in the list.\n3. When the 1 key is pressed, program the cat to read the list normally, saying each number in the list for 1 second.\n4. When the 2 key is pressed, program the cat to read each number in the list doubled.\n5. When the 3 key is pressed, program the cat to read the list backwards.\n6. When the 4 key is pressed, program the cat to read each number and then whether the number is odd or even (e.g.: “1, Odd, 14, Even,...”).\nExtensions: say every other number in the list, say every number multiplied by 10, or say each number and then turn that many degrees to the right.",
+					content: `**Project goal:** Practice adding numbers to a list and reading the same list in several different ways.
+
+**List setup:**
+1. When the green flag is clicked, delete everything in the list.
+2. When the spacebar is pressed, ask what number should be added.
+3. Add the user's number to the list.
+
+**Read modes:**
+1. When 1 is pressed, read the list normally.
+2. When 2 is pressed, read each number doubled.
+3. When 3 is pressed, read the list backward.
+4. When 4 is pressed, read each number and say whether it is odd or even.
+
+**Extensions:** Read every other number, multiply each number by 10, or turn the sprite by each number of degrees.
+
+**Completion check:** The same stored list should support all four read modes without requiring separate variables for each item.`,
 					projectLink: "https://scratch.mit.edu/projects/315090026/",
 					solutionLink: "https://scratch.mit.edu/projects/315051160/"
 				},
 				{
 					title: "GM7 Project 3: Music Memory",
-					content:
-						'Build a memory game where the keyboard plays a series of notes and the player repeats them back correctly.\n1. Make the keyboard introduce the game and say “Ready... Set... Go!”\n2. Program the keyboard to say and play 3 random notes, adding these notes to a "solution" list.\n3. Ask the user to type in their note guesses, one note at a time, adding these notes to a "guess" list.\n4. If an incorrect note is typed in, end the game.\n5. If the user types in all the correct notes, make the game start over with the keyboard playing one more note than last time.',
+					content: `**Project goal:** Build a memory game where the keyboard plays a note sequence and the player repeats it back.
+
+**Game flow:**
+1. Introduce the game with "Ready... Set... Go!"
+2. Say and play 3 random notes.
+3. Add those notes to a solution list.
+4. Ask the player to type note guesses one at a time.
+5. Add guesses to a guess list.
+6. If a guess is incorrect, end the game.
+7. If all guesses are correct, start a new round with one additional note.
+
+**Completion check:** The solution list and guess list should make it clear which note failed when the player makes a mistake.`,
 					projectLink: "https://scratch.mit.edu/projects/309658040/",
 					solutionLink: "https://scratch.mit.edu/projects/309653930/"
 				}
@@ -533,8 +718,11 @@ export const scratchLevel2Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Functions",
-					content:
-						"Custom blocks in Scratch work like functions. A function is a named set of instructions that can be reused whenever the sprite needs that behavior. Some functions also take inputs, such as numbers, words, or conditions.\nUse the My Blocks section to create a custom block, define what it does, and then call it from another script. The key distinction is definition versus use: defining a function describes the behavior once, while calling the function runs that behavior with specific input values.\nFunctions keep projects organized by separating repeated behavior into named pieces. A game such as Music Memory could use functions for playing a note sequence, checking an answer, resetting a round, or displaying feedback."
+					content: `**Concept path:** Custom blocks in Scratch work like functions. A function is a named set of instructions that can be reused whenever a sprite needs that behavior.
+
+**Definition and call:** Use the My Blocks section to create a custom block, define what it does, and call it from another script. Defining a function describes the behavior once; calling the function runs that behavior with specific input values.
+
+**Why it matters:** Functions keep projects organized by separating repeated behavior into named pieces. A game such as Music Memory could use functions for playing a note sequence, checking an answer, resetting a round, or displaying feedback.`
 				},
 				{
 					title: "GM8 Project 1: My First Functions",
@@ -640,20 +828,51 @@ export const scratchLevel2Course: RawCourse = {
 				},
 				{
 					title: "Check-in #2: Lists",
-					content:
-						'Practice prompts:\n1. What are lists useful for in Scratch?\n2. Change the name of each of Andie\'s costumes to match the action that each costume is performing ("pass", "shoot", etc.). Create a list called “actions” and add each costume name when the 3 key is pressed.\n3. Make Andie say the second item in the list.\n4. Report the actions Andie can perform by looping through the list.\n5. After reporting all actions, ask which action should appear and switch the costume to that action. Clear the list first so the 3 key does not add duplicate items.',
+					content: `**Check-in goal:** Review how lists store related values and support repeated behavior.
+
+**Prompts:**
+1. Explain what lists are useful for in Scratch.
+2. Rename each of Andie's costumes to match its action, such as pass or shoot.
+3. Create a list called actions and add each costume name when 3 is pressed.
+4. Make Andie say the second item in the list.
+5. Report all available actions by looping through the list.
+6. After reporting all actions, ask which action should appear and switch to that costume.
+7. Clear the list first so pressing 3 does not add duplicate items.
+
+**Completion check:** The action list should be rebuilt cleanly and should control the costume selection.`,
 					solutionLink: "https://scratch.mit.edu/projects/342645999/"
 				},
 				{
 					title: "Check-in #2: Functions",
-					content:
-						"Practice prompts:\n1. What are functions in Scratch, and where can custom blocks be created?\n2. Create a function called “Score!” that changes Andie's costume, makes him say “Woohoo!”, and plays a clapping sound.\n3. Make Andie score when the spacebar is pressed.\n4. Create another function called “Find Multiples” that takes one number input and says the first 10 multiples of that number for one second each.\n5. When the spacebar is pressed, make Andie say the multiples of a random number from 1 to 10.",
+					content: `**Check-in goal:** Review custom blocks as reusable Scratch functions.
+
+**Prompts:**
+1. Explain what functions are in Scratch and where custom blocks can be created.
+2. Create a function called Score! that changes Andie's costume, says "Woohoo!", and plays a clapping sound.
+3. Make Andie score when the spacebar is pressed.
+4. Create a function called Find Multiples that takes one number input.
+5. Have Find Multiples say the first 10 multiples of the input number.
+6. When the spacebar is pressed, make Andie say the multiples of a random number from 1 to 10.
+
+**Completion check:** The same Find Multiples custom block should work for different random inputs.`,
 					solutionLink: "https://scratch.mit.edu/projects/342645999/"
 				},
 				{
 					title: "Check-in #2: Additional Practice Project",
-					content:
-						"Add one of the dancing sprites to the project and create a function that loops through all of their costumes.\nAdd a number input that says how many seconds they should dance for in total. Can you use a division operator in the wait block to make sure they're dancing for the right number of seconds? Hint: Think about how long they should spend on each costume to add up to the right number of seconds.\nWhen the green flag is pressed, make your sprite dance for 3 seconds.\nWhen they're done dancing, ask the user to tell you their favorite dance move by the costume number. Get their top five favorites.\nCreate a function that loops through this list of favorite dance moves.\nMake your sprite dance these moves forever!",
+					content: `**Project goal:** Combine functions, costume loops, math operators, and lists in one dancing-sprite project.
+
+**Build steps:**
+1. Add one dancing sprite.
+2. Create a function that loops through all of the sprite's costumes.
+3. Add a number input for how many seconds the dance should last.
+4. Use division in the wait block so the total costume loop lasts the requested number of seconds.
+5. When the green flag is pressed, make the sprite dance for 3 seconds.
+6. Ask for the user's top five favorite dance moves by costume number.
+7. Store those favorite moves in a list.
+8. Create a function that loops through the favorite-moves list.
+9. Make the sprite repeat those favorite moves forever.
+
+**Completion check:** The dance timing should depend on the input value, and the favorite-move loop should come from the list rather than hard-coded costume changes.`,
 					projectLink: "https://scratch.mit.edu/projects/386649865/",
 					solutionLink: "https://scratch.mit.edu/projects/386376803/"
 				}
@@ -830,7 +1049,7 @@ export const scratchLevel2Course: RawCourse = {
 				},
 				{
 					title: "Optional Extra Practice: Typing Games",
-					content: `**Purpose:** This optional section supports the transition from Scratch into Python Level 1.
+					content: `**Purpose:** This resource supports the transition from Scratch into Python Level 1.
 
 Typing practice is not required to complete the Scratch course, but it can make the move to text-based programming smoother. Choose games that feel useful, practice for about 15 to 20 minutes as needed, and move to the intermediate options if the beginner games feel too easy.
 

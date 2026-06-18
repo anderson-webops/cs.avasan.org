@@ -69,22 +69,50 @@ export const scratchLevel1Course: RawCourse = {
 				},
 				{
 					title: "Project 1 – Spinner",
-					content:
-						'It\'s time to build a fun spinner:\n\n1. When the green flag is clicked, make the arrow point to the right.\n2. When the up, left, right or down arrow keys are pressed, point the arrow in the corresponding direction.\n3. When the "A" key is pressed, turn the arrow 15 degrees to the left.\n4. When the "D" key is pressed, turn the arrow 15 degrees to the right.\n5. When the spacebar is pressed, make the arrow point towards the mouse.',
+					content: `**Project goal:** Build a spinner that responds to the green flag, arrow keys, letter keys, and the mouse pointer.
+
+**Event behaviors:**
+1. When the green flag is clicked, point the arrow to the right.
+2. When the up, left, right, or down arrow key is pressed, point the arrow in that direction.
+3. When A is pressed, turn the arrow 15 degrees left.
+4. When D is pressed, turn the arrow 15 degrees right.
+5. When the spacebar is pressed, point the arrow toward the mouse.
+
+**Completion check:** Each event should change only the intended direction or rotation, so the spinner is easy to test one key at a time.`,
 					projectLink: "https://scratch.mit.edu/projects/287920173/",
 					solutionLink: "https://scratch.mit.edu/projects/287887351/"
 				},
 				{
 					title: "Project 2 – Bouncy Ball Room",
-					content:
-						"1. When the green flag is clicked, have the ball go to a random position.\n2. When the space key is pressed, make the ball move 10 steps and bounce off the edge.\n3. When the right-arrow key is pressed, change the backdrop.\n4. When the up or down arrows are pressed, make the ball grow or shrink (use negative numbers for shrinking).\n5. When the ball is clicked, play a sound and change its color.",
+					content: `**Project goal:** Make a ball respond to keyboard and click events while changing position, backdrop, size, sound, and color.
+
+**Event behaviors:**
+1. When the green flag is clicked, move the ball to a random position.
+2. When the space key is pressed, move 10 steps and bounce off the edge.
+3. When the right-arrow key is pressed, change the backdrop.
+4. When the up or down arrow is pressed, grow or shrink the ball.
+5. When the ball is clicked, play a sound and change its color.
+
+**Completion check:** The ball should reset on green flag and each input should produce visible feedback.`,
 					projectLink: "https://scratch.mit.edu/projects/287924505/",
 					solutionLink: "https://scratch.mit.edu/projects/287922077/"
 				},
 				{
 					title: "Project 3 – Dragonfly Events",
-					content:
-						'1. When the green flag is clicked, move the dragonfly to a random spot.\n2. Use the arrow keys to move the dragonfly 20 steps.\n3. When the dragonfly is clicked, change its color.\n4. When the space bar is pressed, play a pop sound.\n5. When the "1" key is pressed, make the dragonfly pop and go to a random position.\n6. When the "2" key is pressed, have the dragonfly say something.\n7. When the "3" key is pressed, change the background.\nChallenge: Add another sprite controlled by the W-A-S-D keys.',
+					content: `**Project goal:** Practice several event types by making the dragonfly react to startup, keys, clicks, sounds, and backdrops.
+
+**Event behaviors:**
+1. When the green flag is clicked, move the dragonfly to a random spot.
+2. Use the arrow keys to move the dragonfly 20 steps.
+3. When the dragonfly is clicked, change its color.
+4. When the spacebar is pressed, play a pop sound.
+5. When 1 is pressed, make the dragonfly pop and move to a random position.
+6. When 2 is pressed, have the dragonfly say something.
+7. When 3 is pressed, change the background.
+
+**Extension:** Add another sprite controlled by the W-A-S-D keys.
+
+**Completion check:** Every event should be independently testable without breaking the green-flag reset.`,
 					projectLink: "https://scratch.mit.edu/projects/287707460/",
 					solutionLink: "https://scratch.mit.edu/projects/284408078/"
 				}
@@ -491,15 +519,36 @@ export const scratchLevel1Course: RawCourse = {
 				},
 				{
 					title: "GS10 Project 1 – Dance Off",
-					content:
-						"Build a dance sequence where each sprite gets a turn to perform on the stage.\n\n1. When the green flag is clicked, make the ballerina glide to the middle of the stage and cycle twice through all of her costumes. When she is done, have her glide off to the right side of the stage.\n2. Make each of the other dancers follow the same pattern one by one. Add clapping or applause between performers, and reset each dancer to the left side when the green flag is clicked.\n3. Add backdrop code that plays dancing music forever. When Champ is done dancing, broadcast a message that stops the music.\n4. Optional extension: add lighting changes, a final applause sequence, or a closing pose after everyone is done.",
+					content: `**Project goal:** Build a dance sequence where each sprite gets a turn to perform on the stage.
+
+**Dance sequence:**
+1. When the green flag is clicked, reset each dancer to the left side.
+2. Make the ballerina glide to the middle and cycle twice through all costumes.
+3. When the ballerina is done, glide her off to the right side.
+4. Make each other dancer follow the same pattern one by one.
+5. Add clapping or applause between performers.
+6. Add backdrop code that plays dancing music during the show.
+7. When Champ is done dancing, broadcast a message that stops the music.
+
+**Extension:** Add lighting changes, a final applause sequence, or a closing pose after everyone is done.
+
+**Completion check:** The dancers should perform in a clear sequence, and the music should stop from a broadcast rather than an unrelated timer.`,
 					projectLink: "https://scratch.mit.edu/projects/301002220/",
 					solutionLink: "https://scratch.mit.edu/projects/300644693/"
 				},
 				{
 					title: "GS10 Project 2 – Bowl Fill",
-					content:
-						'Build a collection game where the player controls a bowl and collects different items.\n\n1. Program the bowl so it can be controlled with the arrow keys after the green flag is clicked.\n2. When a sprite is touched by the bowl, make it broadcast a message such as "Cheese touched".\n3. Decide what each sprite should do when it receives its message. It might move, play a sound, hide, or trigger a bowl reaction.\n4. Add variables that track how many times each object has been collected.\n5. Add a timer that stops the game after 15 seconds. When the timer runs out, broadcast a message that makes all sprites on the screen react, such as spinning, growing, shrinking, or showing the final result.',
+					content: `**Project goal:** Build a collection game where the player controls a bowl and collects different items.
+
+**Build steps:**
+1. Program the bowl so the arrow keys control it after the green flag is clicked.
+2. When an item sprite touches the bowl, broadcast a message such as "Cheese touched".
+3. Decide what each sprite should do after receiving its message. It might move, play a sound, hide, or trigger a bowl reaction.
+4. Add variables that track how many times each object has been collected.
+5. Add a 15-second timer.
+6. When the timer ends, broadcast a message that makes every sprite react, such as spinning, growing, shrinking, or showing a final result.
+
+**Completion check:** Each collected object should update the correct variable and trigger the correct broadcast response.`,
 					projectLink: "https://scratch.mit.edu/projects/303008513/",
 					solutionLink: "https://scratch.mit.edu/projects/302811491/"
 				},
@@ -515,15 +564,30 @@ export const scratchLevel1Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "GS10 Supplemental Project 1 – Magical Quest",
-					content:
-						"Design your own play, and use the broadcast blocks to set up the scene changes and dialogue between characters!\n\n1. Come up with a story that involves 3-4 characters and scenes. You can use movies or your real life as inspiration!\n2. Add the sprites and backdrops you will need to your project.\n3. Make your story come to life! Broadcast messages between your sprites to make sure everything happens in the correct sequence.",
+					content: `**Project goal:** Design a short interactive play that uses broadcasts to coordinate scene changes and dialogue.
+
+**Build steps:**
+1. Create a story with 3 to 4 characters and multiple scenes.
+2. Add the sprites and backdrops needed for the story.
+3. Use broadcast messages so each character speaks or moves at the correct time.
+4. Use additional broadcasts for scene changes or major story events.
+
+**Completion check:** The story should run in a clear sequence because sprites react to broadcasts, not because unrelated scripts happen to finish at the same time.`,
 					projectLink: "https://scratch.mit.edu/projects/330301165/",
 					solutionLink: "https://scratch.mit.edu/projects/328309254/"
 				},
 				{
 					title: "GS10 Supplemental Project 2 – Cartoon Crash",
-					content:
-						"Pick a partner for Dani to play with, and they will bounce around the screen together!\n\n1. When the green flag is clicked, set up the Start button in the correct position and have Dani explain the instructions.\n2. When the Start button is clicked, set up the sprites in the correct positions.\n3. Program each sprite so that if it is chosen (i.e., clicked on), it bounces around the room with Dani! If it is not chosen, it should also react appropriately.",
+					content: `**Project goal:** Build a partner-selection game where Dani bounces around the room with the chosen sprite.
+
+**Build steps:**
+1. When the green flag is clicked, reset the Start button and have Dani explain the instructions.
+2. When Start is clicked, place all sprites in their starting positions.
+3. Let the player choose a partner sprite by clicking it.
+4. If a sprite is chosen, make it bounce around the room with Dani.
+5. If a sprite is not chosen, give it an appropriate alternate reaction.
+
+**Completion check:** The chosen and unchosen sprites should respond differently, and the project should reset correctly with the green flag.`,
 					projectLink: "https://scratch.mit.edu/projects/330302209/",
 					solutionLink: "https://scratch.mit.edu/projects/328312475/"
 				},
@@ -539,8 +603,13 @@ export const scratchLevel1Course: RawCourse = {
 			curriculum: [
 				{
 					title: "GS11 Project 1 – Hedgehog Race",
-					content:
-						"Build Hedgehog Race by planning the moving pieces before programming. Play through the demo and identify the game elements that need to be built: sprite behavior, controls, event reactions, variables, scoring, and end conditions.\n\nAdd a project comment that lists the implementation steps. Starter code is provided, but a custom version can also be built from a blank project with original sprites, costumes, and backdrops.",
+					content: `**Project goal:** Build Hedgehog Race by planning the moving pieces before programming.
+
+**Planning targets:** Identify the sprite behavior, controls, event reactions, variables, scoring, and end conditions. Add a project comment that lists the implementation steps.
+
+**Implementation options:** Use the starter project as a base or rebuild the race from a blank project with original sprites, costumes, and backdrops.
+
+**Completion check:** The race should have clear starting positions, player controls, a finish condition, and visible feedback when the race ends.`,
 					projectLink: "https://scratch.mit.edu/projects/304551665/",
 					solutionLink: "https://scratch.mit.edu/projects/305082197/"
 				},
@@ -683,7 +752,7 @@ export const scratchLevel1Course: RawCourse = {
 				},
 				{
 					title: "Optional Extra Practice – Typing Games",
-					content: `**Purpose:** This optional section supports the transition from Scratch Level 1 into Python Level 1.
+					content: `**Purpose:** This resource supports the transition from Scratch Level 1 into Python Level 1.
 
 Typing practice is not required to complete the Scratch course, but it can make the move to text-based programming smoother. Choose games that feel useful, practice for about 15 to 20 minutes as needed, and move to the intermediate options if the beginner games feel too easy.
 

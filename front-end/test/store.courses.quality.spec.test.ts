@@ -1885,14 +1885,16 @@ describe("course text quality normalization", () => {
 
 		const spinner = findItem(scratchLevel1!, /Spinner/);
 		expect(spinner.content).toContain(
-			"It's time to build a fun spinner:\n\n1. When the green flag is clicked"
+			"**Goal:** Build a spinner that responds to the green flag"
 		);
-		expect(spinner.content).toContain("towards the mouse.\n\n**Goal:**");
+		expect(spinner.content).toContain("**Event behaviors:**");
 		expect(spinner.content).toContain(
-			"Use clear structure, naming, and evidence so the project can be reviewed without relying on memory"
+			"When the spacebar is pressed, point the arrow toward the mouse"
 		);
-		expect(spinner.content).toContain("**Focus:** Scratch game design:");
-		expect(spinner.content).toContain("\n\n**Outcome:**");
+		expect(spinner.content).toContain("**Evidence target:**");
+		expect(spinner.content).not.toContain(
+			"It's time to build a fun spinner"
+		);
 		expect(spinner.content).not.toContain("Build a working result for");
 
 		const imagesReview = findItem(pygames!, /Images and Sprites: Review/);
