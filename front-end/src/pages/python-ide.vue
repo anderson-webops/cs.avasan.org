@@ -57,6 +57,7 @@ import {
 	pythonIdeAssetCandidateNames
 } from "@/modules/pythonIdeCourseAssets";
 import {
+	releasePythonIdeRuntimeCallbacks,
 	runPythonProject,
 	warmPythonRuntime
 } from "@/modules/pythonIdeRuntime";
@@ -1471,6 +1472,18 @@ function clearTurtleTimers() {
 	activeTurtleTimerCount.value = 0;
 }
 
+function releaseIdlePythonRuntimeCallbacks() {
+	if (isRunning.value) return;
+	void releasePythonIdeRuntimeCallbacks().catch(error => {
+		appendOutput(
+			"stderr",
+			error instanceof Error
+				? error.message
+				: "Could not release Python runtime callbacks."
+		);
+	});
+}
+
 function trackTurtleFillPoint(x: number, y: number) {
 	if (!turtleFillState.active) return;
 	const previous = turtleFillState.points.at(-1);
@@ -2326,7 +2339,10 @@ function stopCurrentProject() {
 			? "Stop requested. Python will halt at the next runtime checkpoint."
 			: "Stopped active canvas handlers."
 	);
-	if (!hadPythonRunInFlight) stopRequested.value = false;
+	if (!hadPythonRunInFlight) {
+		releaseIdlePythonRuntimeCallbacks();
+		stopRequested.value = false;
+	}
 }
 
 function activateRunControl() {
@@ -2605,6 +2621,7 @@ onBeforeUnmount(() => {
 	window.removeEventListener("mouseup", clearTurtleDrag);
 	clearTurtleTimers();
 	cancelTurtleAnimation();
+	void releasePythonIdeRuntimeCallbacks().catch(() => {});
 	stopGameLoop();
 	resizeObserver?.disconnect();
 });

@@ -420,8 +420,12 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("def ontimer(self, function, t=0):");
 		expect(runtimeSource).toContain("def ontimer(function, t=0):");
 		expect(runtimeSource).toContain("_bridge.scheduleTimer");
+		expect(runtimeSource).toContain("def _release_all_callbacks():");
+		expect(runtimeSource).toContain("releaseRuntimeCallbackRegistries");
+		expect(runtimeSource).toContain("releasePythonIdeRuntimeCallbacks");
 		expect(pageSource).toContain("scheduleTimer(delayMs: number");
 		expect(pageSource).toContain("clearTurtleTimers()");
+		expect(pageSource).toContain("releaseIdlePythonRuntimeCallbacks()");
 	});
 
 	it("keeps Turtle runs animated with a visible cursor marker", () => {
@@ -473,15 +477,22 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain(
 			"const TURTLE_COOPERATIVE_WHILE_LOOP_ITERATION_LIMIT"
 		);
+		expect(runtimeSource).toContain(
+			"const TURTLE_COOPERATIVE_WHILE_LOOP_ITERATION_LIMIT = 0"
+		);
 		expect(runtimeSource).toContain("class __ClassesLoopGuardTransformer");
 		expect(runtimeSource).toContain("def __classes_loop_guard(kind):");
+		expect(runtimeSource).toContain("if limit <= 0:");
 		expect(runtimeSource).toContain("__classes_loop_iteration_limits");
+		expect(runtimeSource).toContain("__classes_turtle_animation_call_names");
 		expect(runtimeSource).toContain(
 			"def __classes_schedule_turtle_loop"
 		);
 		expect(runtimeSource).toContain(
 			"def _is_simple_top_level_turtle_loop"
 		);
+		expect(runtimeSource).toContain("def _module_imports_turtle");
+		expect(runtimeSource).toContain("def _loop_body_uses_turtle_api");
 		expect(runtimeSource).toContain("def __classes_sleep(_seconds=0):");
 		expect(runtimeSource).toContain("__classes_time.sleep = __classes_sleep");
 		expect(runtimeSource).toContain("__classes_compile_student_source(");

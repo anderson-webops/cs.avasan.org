@@ -20,7 +20,7 @@ const PYTHON_IMPORT_ALIAS_RE = /\s+as\s+/i;
 const PYTHON_MODULE_SEPARATOR_RE = /\./;
 const FOR_LOOP_ITERATION_LIMIT = 500000;
 const WHILE_LOOP_ITERATION_LIMIT = 25000;
-const TURTLE_COOPERATIVE_WHILE_LOOP_ITERATION_LIMIT = 250000;
+const TURTLE_COOPERATIVE_WHILE_LOOP_ITERATION_LIMIT = 0;
 const TURTLE_COOPERATIVE_LOOP_DELAY_MS = 16;
 const MICROPIP_PACKAGES = new Map([
 	["altair", "altair"],
@@ -288,6 +288,32 @@ async function loadRuntime() {
 	return pyodidePromise;
 }
 
+const releaseRuntimeCallbackRegistriesSource = `
+import sys
+
+for __classes_module_name in ("turtle",):
+    __classes_module = sys.modules.get(__classes_module_name)
+    __classes_release = getattr(__classes_module, "_release_all_callbacks", None)
+    if callable(__classes_release):
+        __classes_release()
+
+__classes_loop_proxies = globals().get("__classes_turtle_loop_proxies")
+if isinstance(__classes_loop_proxies, dict):
+    for __classes_proxy in list(__classes_loop_proxies.values()):
+        if __classes_proxy is not None and hasattr(__classes_proxy, "destroy"):
+            __classes_proxy.destroy()
+    __classes_loop_proxies.clear()
+`;
+
+function releaseRuntimeCallbackRegistries(pyodide: PyodideAPI) {
+	pyodide.runPython(releaseRuntimeCallbackRegistriesSource);
+}
+
+export async function releasePythonIdeRuntimeCallbacks() {
+	if (!pyodidePromise) return;
+	releaseRuntimeCallbackRegistries(await pyodidePromise);
+}
+
 function escapePythonString(value: string) {
 	return JSON.stringify(value);
 }
@@ -309,7 +335,53 @@ __classes_loop_iteration_limits = {
 }
 __classes_turtle_loop_delay_ms = ${TURTLE_COOPERATIVE_LOOP_DELAY_MS}
 __classes_turtle_loop_counter = 0
+__classes_existing_turtle_loop_proxies = globals().get("__classes_turtle_loop_proxies")
+if isinstance(__classes_existing_turtle_loop_proxies, dict):
+    for __classes_existing_proxy in list(__classes_existing_turtle_loop_proxies.values()):
+        if __classes_existing_proxy is not None and hasattr(__classes_existing_proxy, "destroy"):
+            __classes_existing_proxy.destroy()
+    __classes_existing_turtle_loop_proxies.clear()
 __classes_turtle_loop_proxies = {}
+__classes_turtle_animation_call_names = {
+    "back",
+    "backward",
+    "bgcolor",
+    "bk",
+    "circle",
+    "clear",
+    "color",
+    "dot",
+    "down",
+    "fd",
+    "fillcolor",
+    "forward",
+    "goto",
+    "home",
+    "left",
+    "listen",
+    "lt",
+    "onclick",
+    "ondrag",
+    "onkey",
+    "onkeypress",
+    "onscreenclick",
+    "ontimer",
+    "pd",
+    "pendown",
+    "pensize",
+    "pencolor",
+    "penup",
+    "pu",
+    "right",
+    "rt",
+    "setheading",
+    "seth",
+    "setpos",
+    "setposition",
+    "stamp",
+    "up",
+    "write",
+}
 
 def __classes_input(prompt=""):
     print(prompt, end="")
@@ -325,8 +397,10 @@ def __classes_sleep(_seconds=0):
 __classes_time.sleep = __classes_sleep
 
 def __classes_loop_guard(kind):
-    __classes_loop_iterations[kind] = __classes_loop_iterations.get(kind, 0) + 1
     limit = __classes_loop_iteration_limits.get(kind, ${WHILE_LOOP_ITERATION_LIMIT})
+    if limit <= 0:
+        return
+    __classes_loop_iterations[kind] = __classes_loop_iterations.get(kind, 0) + 1
     if __classes_loop_iterations[kind] > limit:
         raise RuntimeError(
             "Stopped a long-running {} loop after {} iterations. "
@@ -358,8 +432,31 @@ class __ClassesLoopGuardTransformer(ast.NodeTransformer):
         node.body.insert(0, self._guard_statement(node, kind))
         return node
 
-    def _is_simple_top_level_turtle_loop(self, node):
-        if not self.allow_turtle_cooperative:
+    def _module_imports_turtle(self, node):
+        for statement in node.body:
+            if isinstance(statement, ast.Import):
+                for alias in statement.names:
+                    if alias.name == "turtle" or alias.name.startswith("turtle."):
+                        return True
+            if isinstance(statement, ast.ImportFrom):
+                module = statement.module or ""
+                if module == "turtle" or module.startswith("turtle."):
+                    return True
+        return False
+
+    def _loop_body_uses_turtle_api(self, node):
+        for child in ast.walk(node):
+            if not isinstance(child, ast.Call):
+                continue
+            function = child.func
+            if isinstance(function, ast.Attribute) and function.attr in __classes_turtle_animation_call_names:
+                return True
+            if isinstance(function, ast.Name) and function.id in __classes_turtle_animation_call_names:
+                return True
+        return False
+
+    def _is_simple_top_level_turtle_loop(self, node, module_allows_turtle_loop):
+        if not module_allows_turtle_loop:
             return False
         if not isinstance(node, ast.While):
             return False
@@ -375,7 +472,10 @@ class __ClassesLoopGuardTransformer(ast.NodeTransformer):
             ast.Yield,
             ast.YieldFrom,
         )
-        return not any(isinstance(child, unsupported_nodes) for child in ast.walk(node))
+        return (
+            self._loop_body_uses_turtle_api(node)
+            and not any(isinstance(child, unsupported_nodes) for child in ast.walk(node))
+        )
 
     def _loop_body_source(self, node):
         body_segments = []
@@ -407,9 +507,12 @@ class __ClassesLoopGuardTransformer(ast.NodeTransformer):
         )
 
     def visit_Module(self, node):
+        module_allows_turtle_loop = (
+            self.allow_turtle_cooperative or self._module_imports_turtle(node)
+        )
         rewritten_body = []
         for statement in node.body:
-            if self._is_simple_top_level_turtle_loop(statement):
+            if self._is_simple_top_level_turtle_loop(statement, module_allows_turtle_loop):
                 scheduled = self._turtle_loop_schedule_statement(statement)
                 if scheduled is not None:
                     rewritten_body.append(scheduled)
@@ -565,6 +668,11 @@ def _timer_callback(function):
     _callback_proxies[storage_key] = proxy
     return proxy
 
+def _release_all_callbacks():
+    for proxy in list(_callback_proxies.values()):
+        _release_proxy(proxy)
+    _callback_proxies.clear()
+
 class _Screen:
     def bgcolor(self, color):
         _bridge.bgcolor(_normalize_color(color))
@@ -573,6 +681,7 @@ class _Screen:
         _bridge.clear()
 
     def reset(self):
+        _release_all_callbacks()
         _bridge.reset()
 
     def listen(self):
@@ -2625,6 +2734,8 @@ function writeRuntimeShims(pyodide: PyodideAPI) {
 
 export async function runPythonProject(options: RunPythonProjectOptions) {
 	const pyodide = await loadRuntime();
+	throwIfRunStopped(options);
+	releaseRuntimeCallbackRegistries(pyodide);
 	throwIfRunStopped(options);
 	window.__classesPythonIdeTurtle = options.turtleBridge;
 	window.__classesPythonIdeGame = options.gameBridge;
