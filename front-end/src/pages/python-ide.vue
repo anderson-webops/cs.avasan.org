@@ -186,6 +186,9 @@ interface ResolvedGameAsset {
 
 const imageAssetExtensions = [".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"];
 const audioAssetExtensions = [".wav", ".mp3", ".ogg"];
+const maxPythonIdeProjectFiles = 40;
+const maxImportedTextFileBytes = 512 * 1024;
+const maxImportedBinaryFileBytes = 2 * 1024 * 1024;
 const maxOutputLines = 500;
 const maxOutputTextLength = 12000;
 const outputEntryTruncatedMessage =
@@ -801,6 +804,17 @@ async function readImportedProjectFile(file: File, fileName: string) {
 	};
 }
 
+function importedProjectFileSizeLimit(fileName: string) {
+	return isPythonIdeTextFile(fileName)
+		? maxImportedTextFileBytes
+		: maxImportedBinaryFileBytes;
+}
+
+function formatFileSize(bytes: number) {
+	if (bytes >= 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+	return `${Math.ceil(bytes / 1024)} KB`;
+}
+
 async function importProjectFiles(event: Event) {
 	const project = selectedProject.value;
 	const input = event.target as HTMLInputElement;
@@ -816,16 +830,40 @@ async function importProjectFiles(event: Event) {
 			skippedFiles.push(file.name);
 			continue;
 		}
+		const existingIndex = project.files.findIndex(
+			candidate => candidate.name === fileName
+		);
+		const sizeLimit = importedProjectFileSizeLimit(fileName);
+		if (file.size > sizeLimit) {
+			skippedFiles.push(
+				`${file.name} (larger than ${formatFileSize(sizeLimit)})`
+			);
+			continue;
+		}
+		if (
+			existingIndex < 0 &&
+			project.files.length >= maxPythonIdeProjectFiles
+		) {
+			skippedFiles.push(
+				`${file.name} (project already has ${maxPythonIdeProjectFiles} files)`
+			);
+			continue;
+		}
 
-		const imported = await readImportedProjectFile(file, fileName);
+		let imported: Awaited<ReturnType<typeof readImportedProjectFile>>;
+		try {
+			imported = await readImportedProjectFile(file, fileName);
+		} catch (error) {
+			skippedFiles.push(
+				error instanceof Error ? error.message : file.name
+			);
+			continue;
+		}
 		const nextFile: PythonIdeFile = {
 			name: fileName,
 			content: imported.content,
 			encoding: imported.encoding
 		};
-		const existingIndex = project.files.findIndex(
-			candidate => candidate.name === fileName
-		);
 
 		if (existingIndex >= 0) {
 			project.files.splice(existingIndex, 1, nextFile);

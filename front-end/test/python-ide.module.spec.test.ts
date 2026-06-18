@@ -368,6 +368,36 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("maxOutputLines - 1");
 	});
 
+	it("bounds imported project files before local storage writes", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/pages/python-ide.vue"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain("const maxPythonIdeProjectFiles = 40;");
+		expect(pageSource).toContain(
+			"const maxImportedTextFileBytes = 512 * 1024;"
+		);
+		expect(pageSource).toContain(
+			"const maxImportedBinaryFileBytes = 2 * 1024 * 1024;"
+		);
+		expect(pageSource).toContain(
+			"function importedProjectFileSizeLimit"
+		);
+		expect(pageSource).toContain("file.size > sizeLimit");
+		expect(pageSource).toContain(
+			"project.files.length >= maxPythonIdeProjectFiles"
+		);
+		expect(pageSource).toContain(
+			"project already has ${maxPythonIdeProjectFiles} files"
+		);
+		expect(pageSource).toContain(
+			"larger than ${formatFileSize(sizeLimit)}"
+		);
+		expect(pageSource).toContain("await readImportedProjectFile");
+		expect(pageSource).toContain("continue;");
+	});
+
 	it("checks requested stops before post-run capture and game loop startup", () => {
 		const runtimeSource = readFileSync(
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
