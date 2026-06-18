@@ -191,6 +191,56 @@ describe("python IDE CodeMirror editor", () => {
 		);
 	});
 
+	it("offers PyGame Zero asset completions for project and course assets", () => {
+		const assetCompletions = {
+			images: ["student", "space-ship"],
+			music: ["theme"],
+			sounds: ["eep"]
+		};
+		const imageMemberLabels = pythonIdeCompletionsForMode(
+			"pgzero",
+			"images",
+			assetCompletions
+		).map(option => option.label);
+		const actorDoc = "player = Actor(\"space";
+		const actorState = EditorState.create({ doc: actorDoc });
+		const actorCompletionSource = pythonIdeCompletionSource(
+			"pgzero",
+			() => assetCompletions
+		);
+		const actorResult = actorCompletionSource({
+			explicit: false,
+			pos: actorDoc.length,
+			state: actorState,
+			matchBefore: expression =>
+				completionMatchBefore(actorDoc, actorDoc.length, expression)
+		});
+		const musicDoc = "music.play(\"th";
+		const musicState = EditorState.create({ doc: musicDoc });
+		const musicCompletionSource = pythonIdeCompletionSource(
+			"pgzero",
+			() => assetCompletions
+		);
+		const musicResult = musicCompletionSource({
+			explicit: false,
+			pos: musicDoc.length,
+			state: musicState,
+			matchBefore: expression =>
+				completionMatchBefore(musicDoc, musicDoc.length, expression)
+		});
+
+		expect(imageMemberLabels).toContain("student");
+		expect(imageMemberLabels).not.toContain("space-ship");
+		expect(actorResult?.from).toBe("player = Actor(\"".length);
+		expect(actorResult?.options.map(option => option.label)).toEqual(
+			expect.arrayContaining(["space-ship", "student"])
+		);
+		expect(musicResult?.from).toBe("music.play(\"".length);
+		expect(musicResult?.options.map(option => option.label)).toContain(
+			"theme"
+		);
+	});
+
 	it("bounds custom bracket-pair colorization to the visible editor range", () => {
 		const editorSource = sourceFile("../src/modules/pythonCodeMirror.ts");
 

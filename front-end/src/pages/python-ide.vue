@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { PythonCodeMirrorAssetCompletionNames } from "@/modules/pythonCodeMirror";
 import type {
 	PythonIdeFile,
 	PythonIdeMode,
@@ -186,8 +187,15 @@ interface ResolvedGameAsset {
 	width?: number;
 }
 
+type PythonIdeAssetFolder = "images" | "music" | "sounds";
+
 const imageAssetExtensions = [".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"];
 const audioAssetExtensions = [".wav", ".mp3", ".ogg"];
+const assetCompletionExtensionMap = {
+	images: imageAssetExtensions,
+	music: audioAssetExtensions,
+	sounds: audioAssetExtensions
+} satisfies Record<PythonIdeAssetFolder, string[]>;
 const maxPythonIdeProjectFiles = 40;
 const maxImportedTextFileBytes = 512 * 1024;
 const maxImportedBinaryFileBytes = 2 * 1024 * 1024;
@@ -862,6 +870,7 @@ function resetCodeEditor() {
 	codeEditorView = new EditorView({
 		doc: activeFileContent.value,
 		extensions: createPythonCodeMirrorExtensions({
+			assetCompletions: pythonCodeMirrorAssetCompletions,
 			mode: selectedProject.value?.mode ?? "python",
 			onChange(content) {
 				syncingCodeMirrorContent = true;
@@ -878,6 +887,9 @@ function resetCodeEditor() {
 		}),
 		parent: host
 	});
+
+	if (selectedProject.value?.mode === "pgzero")
+		void ensureGameCourseAssetsLoaded({ announce: false });
 }
 
 function syncCodeEditorContent(content: string) {
@@ -1678,18 +1690,28 @@ function stopAllGameAudio() {
 	stopGameMusic();
 }
 
-async function ensureGameCourseAssetsLoaded() {
+async function ensureGameCourseAssetsLoaded(
+	options: { announce?: boolean } = {}
+) {
 	if (gameCourseAssetPack || gameCourseAssetPackLoadFailed) return;
+	const announce = options.announce ?? true;
 
-	appendOutput("system", "Loading shared PyGame Zero assets.");
+	if (announce) appendOutput("system", "Loading shared PyGame Zero assets.");
 
 	try {
 		gameCourseAssetPack = await loadPythonIdeCourseAssetPack();
-		appendOutput(
-			"system",
-			`Loaded ${gameCourseAssetPack.assets.size} shared PyGame Zero assets.`
-		);
+		if (announce) {
+			appendOutput(
+				"system",
+				`Loaded ${gameCourseAssetPack.assets.size} shared PyGame Zero assets.`
+			);
+		}
 	} catch (error) {
+		if (!announce) {
+			console.warn("Could not preload shared PyGame Zero assets.", error);
+			return;
+		}
+
 		gameCourseAssetPackLoadFailed = true;
 		appendOutput(
 			"stderr",
@@ -1700,8 +1722,42 @@ async function ensureGameCourseAssetsLoaded() {
 	}
 }
 
+function pythonAssetCompletionName(path: string, folder: PythonIdeAssetFolder) {
+	const normalizedPath = normalizePythonIdeAssetLookupPath(path);
+	if (!normalizedPath.startsWith(`${folder}/`)) return "";
+
+	const fileName = normalizedPath
+		.slice(folder.length + 1)
+		.split("/")
+		.at(-1);
+	if (!fileName) return "";
+
+	const extension = assetCompletionExtensionMap[folder].find(candidate =>
+		fileName.endsWith(candidate)
+	);
+	return extension ? fileName.slice(0, -extension.length) : "";
+}
+
+function pythonCodeMirrorAssetCompletions(): PythonCodeMirrorAssetCompletionNames {
+	const completions: PythonCodeMirrorAssetCompletionNames = {};
+	for (const folder of ["images", "music", "sounds"] as const) {
+		const names = new Set<string>();
+		for (const file of selectedProject.value?.files ?? []) {
+			const name = pythonAssetCompletionName(file.name, folder);
+			if (name) names.add(name);
+		}
+		for (const assetName of gameCourseAssetPack?.assets.keys() ?? []) {
+			const name = pythonAssetCompletionName(assetName, folder);
+			if (name) names.add(name);
+		}
+		if (names.size) completions[folder] = [...names].sort();
+	}
+
+	return completions;
+}
+
 function localAssetCandidateNames(
-	folder: "images" | "music" | "sounds",
+	folder: PythonIdeAssetFolder,
 	name: string,
 	extensions: string[]
 ) {
@@ -1709,7 +1765,7 @@ function localAssetCandidateNames(
 }
 
 function findProjectAssetFile(
-	folder: "images" | "music" | "sounds",
+	folder: PythonIdeAssetFolder,
 	name: string,
 	extensions: string[]
 ) {
@@ -1724,7 +1780,7 @@ function findProjectAssetFile(
 }
 
 function findCourseAsset(
-	folder: "images" | "music" | "sounds",
+	folder: PythonIdeAssetFolder,
 	name: string,
 	extensions: string[]
 ) {
@@ -1735,7 +1791,7 @@ function findCourseAsset(
 }
 
 function resolveGameAsset(
-	folder: "images" | "music" | "sounds",
+	folder: PythonIdeAssetFolder,
 	name: string,
 	extensions: string[]
 ): ResolvedGameAsset | null {

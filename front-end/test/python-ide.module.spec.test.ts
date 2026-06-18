@@ -1171,6 +1171,10 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("def set_volume(self, volume):");
 		expect(runtimeSource).toContain("def get_width(self):");
 		expect(pageSource).toContain("await ensureGameCourseAssetsLoaded()");
+		expect(pageSource).toContain(
+			"assetCompletions: pythonCodeMirrorAssetCompletions"
+		);
+		expect(pageSource).toContain("pythonAssetCompletionName");
 		expect(pageSource).toContain("drawImage: drawGameImage");
 		expect(pageSource).toContain("drawLine: drawGameLine");
 		expect(pageSource).toContain("drawCircle: drawGameCircle");

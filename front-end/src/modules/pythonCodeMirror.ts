@@ -24,6 +24,7 @@ import { basicSetup } from "codemirror";
 interface PythonCodeMirrorOptions {
 	onChange: (content: string) => void;
 	onCursorCountChange: (count: number) => void;
+	assetCompletions?: () => PythonCodeMirrorAssetCompletionNames;
 	mode?: PythonIdeMode;
 	onRun?: () => void;
 	onSave?: () => void;
@@ -48,6 +49,17 @@ interface PythonIdeCompletionOption {
 	info?: string;
 }
 
+type PythonIdeAssetCompletionFolder = "images" | "music" | "sounds";
+
+export type PythonCodeMirrorAssetCompletionNames = Partial<
+	Record<PythonIdeAssetCompletionFolder, string[]>
+>;
+
+interface PythonIdeAssetStringCompletionContext {
+	folder: PythonIdeAssetCompletionFolder;
+	from: number;
+}
+
 const openingBracketToClosingBracket: Record<string, string> = {
 	"(": ")",
 	"[": "]",
@@ -59,6 +71,8 @@ const lineLeadingWhitespaceRegex = /^[\t ]*/;
 const pythonCompletionTokenRegex = /(?:[A-Z_]\w*\.){0,2}[A-Z_]\w*$/i;
 const pythonCompletionGlobalValidForRegex = /^[A-Z_]\w*$/i;
 const pythonCompletionMemberValidForRegex = /^\w*$/;
+const pythonAssetStringCompletionValidForRegex = /^[\w.-]*$/;
+const pythonIdentifierRegex = /^[A-Z_]\w*$/i;
 const bracketPairContextPadding = 2_000;
 const closingBrackets = new Set(Object.values(openingBracketToClosingBracket));
 const pythonCompletionBlockedNodeNames = new Set([
@@ -66,6 +80,16 @@ const pythonCompletionBlockedNodeNames = new Set([
 	"FormatString",
 	"String"
 ]);
+const pgzeroAssetStringCompletionPatterns: Array<{
+	folder: PythonIdeAssetCompletionFolder;
+	pattern: RegExp;
+}> = [
+	{ folder: "images", pattern: /\bActor\s*\(\s*["']([^"'\n]*)$/ },
+	{ folder: "images", pattern: /\bscreen\.blit\s*\(\s*["']([^"'\n]*)$/ },
+	{ folder: "images", pattern: /\bimages\[\s*["']([^"'\n]*)$/ },
+	{ folder: "music", pattern: /\bmusic\.play\s*\(\s*["']([^"'\n]*)$/ },
+	{ folder: "sounds", pattern: /\bsounds\[\s*["']([^"'\n]*)$/ }
+];
 const bracketPairDecorations = [
 	bracketDecorationForIndex(0),
 	bracketDecorationForIndex(1),
@@ -528,14 +552,56 @@ function memberCompletionMapForMode(mode: PythonIdeMode = "python") {
 
 export function pythonIdeCompletionsForMode(
 	mode: PythonIdeMode = "python",
-	receiver?: string
+	receiver?: string,
+	assetCompletions?: PythonCodeMirrorAssetCompletionNames
 ) {
 	if (!receiver) return runtimeCompletionsForMode(mode);
-	return memberCompletionMapForMode(mode)[receiver] ?? [];
+	const staticOptions = memberCompletionMapForMode(mode)[receiver] ?? [];
+	if (mode !== "pgzero") return staticOptions;
+
+	if (receiver === "images") {
+		return [
+			...assetCompletionOptions(assetCompletions, "images", {
+				identifierOnly: true
+			}),
+			...staticOptions
+		];
+	}
+
+	if (receiver === "sounds") {
+		return [
+			...assetCompletionOptions(assetCompletions, "sounds", {
+				identifierOnly: true
+			}),
+			...staticOptions
+		];
+	}
+
+	return staticOptions;
 }
 
-export function pythonIdeCompletionSource(mode: PythonIdeMode = "python") {
+export function pythonIdeCompletionSource(
+	mode: PythonIdeMode = "python",
+	assetCompletions?: () => PythonCodeMirrorAssetCompletionNames
+) {
 	return (context: PythonIdeCompletionContext) => {
+		const currentAssetCompletions = assetCompletions?.();
+		const assetStringCompletion = assetStringCompletionContext(
+			context.state,
+			context.pos,
+			mode
+		);
+		if (assetStringCompletion) {
+			return {
+				from: assetStringCompletion.from,
+				options: assetCompletionOptions(
+					currentAssetCompletions,
+					assetStringCompletion.folder
+				),
+				validFor: pythonAssetStringCompletionValidForRegex
+			};
+		}
+
 		const node = syntaxTree(context.state).resolveInner(context.pos, -1);
 		if (pythonCompletionBlockedNodeNames.has(node.name)) return null;
 
@@ -554,7 +620,11 @@ export function pythonIdeCompletionSource(mode: PythonIdeMode = "python") {
 		if (parts.length > 1) {
 			const memberPrefix = parts.at(-1) ?? "";
 			const receiver = parts.slice(0, -1).join(".");
-			const options = pythonIdeCompletionsForMode(mode, receiver);
+			const options = pythonIdeCompletionsForMode(
+				mode,
+				receiver,
+				currentAssetCompletions
+			);
 			if (!options.length) return null;
 			return {
 				from: word.to - memberPrefix.length,
@@ -565,10 +635,56 @@ export function pythonIdeCompletionSource(mode: PythonIdeMode = "python") {
 
 		return {
 			from: word.from,
-			options: pythonIdeCompletionsForMode(mode),
+			options: pythonIdeCompletionsForMode(
+				mode,
+				undefined,
+				currentAssetCompletions
+			),
 			validFor: pythonCompletionGlobalValidForRegex
 		};
 	};
+}
+
+function assetCompletionOptions(
+	assetCompletions: PythonCodeMirrorAssetCompletionNames | undefined,
+	folder: PythonIdeAssetCompletionFolder,
+	options: { identifierOnly?: boolean } = {}
+) {
+	const names = assetCompletions?.[folder] ?? [];
+	return names
+		.filter(
+			name => !options.identifierOnly || pythonIdentifierRegex.test(name)
+		)
+		.map(name =>
+			completion(
+				name,
+				folder === "images" ? "constant" : "variable",
+				`${folder} asset`,
+				80
+			)
+		);
+}
+
+function assetStringCompletionContext(
+	state: EditorState,
+	position: number,
+	mode: PythonIdeMode
+): PythonIdeAssetStringCompletionContext | null {
+	if (mode !== "pgzero") return null;
+
+	const line = state.doc.lineAt(position);
+	const lineBeforeCursor = line.text.slice(0, position - line.from);
+	for (const { folder, pattern } of pgzeroAssetStringCompletionPatterns) {
+		const match = lineBeforeCursor.match(pattern);
+		if (!match) continue;
+		const partial = match[1] ?? "";
+		return {
+			folder,
+			from: position - partial.length
+		};
+	}
+
+	return null;
 }
 
 class BracketPairColorPlugin {
@@ -623,7 +739,10 @@ export function createPythonCodeMirrorExtensions(
 		basicSetup,
 		python(),
 		pythonLanguage.data.of({
-			autocomplete: pythonIdeCompletionSource(options.mode)
+			autocomplete: pythonIdeCompletionSource(
+				options.mode,
+				options.assetCompletions
+			)
 		}),
 		EditorState.tabSize.of(4),
 		EditorState.allowMultipleSelections.of(true),
