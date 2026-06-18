@@ -180,7 +180,7 @@ interface GameInputEvent {
 	unicode?: string;
 	x?: number;
 	y?: number;
-	button?: "left" | "middle" | "right";
+	button?: "left" | "middle" | "right" | "wheel_down" | "wheel_up";
 	buttons?: ("left" | "middle" | "right")[];
 	relX?: number;
 	relY?: number;
@@ -3066,6 +3066,20 @@ function queueGamePointerEvent(
 	if (type !== "mousemove" || event.buttons) event.preventDefault();
 }
 
+function dispatchCanvasWheelEvent(event: WheelEvent) {
+	if (selectedProject.value?.mode !== "pgzero") return;
+
+	const point = gamePointerPosition(event);
+	gameEvents.push({
+		type: "mousedown",
+		x: point.x,
+		y: point.y,
+		button: event.deltaY < 0 ? "wheel_up" : "wheel_down"
+	});
+	canvasRef.value?.focus();
+	event.preventDefault();
+}
+
 function callTurtlePointerHandler(
 	handler: (x: number, y: number) => void,
 	event: MouseEvent,
@@ -3675,6 +3689,7 @@ onBeforeUnmount(() => {
 										'mouseup'
 									)
 								"
+								@wheel="dispatchCanvasWheelEvent"
 							/>
 						</div>
 

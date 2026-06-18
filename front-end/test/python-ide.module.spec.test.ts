@@ -942,6 +942,34 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain(".stdin-panel:focus-within");
 	});
 
+	it("routes PyGame Zero mouse wheel input through documented mouse constants", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/pages/python-ide.vue"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain("@wheel=\"dispatchCanvasWheelEvent\"");
+		expect(pageSource).toContain("function dispatchCanvasWheelEvent");
+		expect(pageSource).toContain(
+			"if (selectedProject.value?.mode !== \"pgzero\") return;"
+		);
+		expect(pageSource).toContain(
+			"button: event.deltaY < 0 ? \"wheel_up\" : \"wheel_down\""
+		);
+		expect(pageSource).toContain("type: \"mousedown\"");
+		expect(pageSource).toContain("event.preventDefault();");
+		expect(runtimeSource).toContain("WHEEL_UP = \"wheel_up\"");
+		expect(runtimeSource).toContain("WHEEL_DOWN = \"wheel_down\"");
+		expect(runtimeSource).toContain(
+			`_call_optional_named(
+                "on_mouse_down"`
+		);
+	});
+
 	it("tracks overlapping PyGame Zero sound instances for cleanup", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/pages/python-ide.vue"),
