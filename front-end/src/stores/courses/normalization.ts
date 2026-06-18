@@ -2461,7 +2461,7 @@ function cleanSupportTopicTitle(title: string) {
 		)
 		.replace(/^[A-Z]{1,5}\d+\s+Supplemental Graphics Project:\s*/iu, "")
 		.replace(
-			/^(?:Core Project|Project|Supplemental Project|Extension Challenge|Verification Review|Guided Example|Worked Example|Checkpoint):\s*/iu,
+			/^(?:Applied Challenge|Core Project|Debugging and Failure Modes|Diagnostic Checkpoint|Extension Challenge|Fluency Drill|Focused Practice|Guided Example|Modeling or Error Analysis|Open-Ended Variant|Planning and Architecture|Project|Review and Reflection|Review|Standards Practice Set|Supplemental Project|Verification and Reflection|Verification Review|Worked Example|Checkpoint):\s*/iu,
 			""
 		)
 		.replace(
@@ -2494,6 +2494,14 @@ function supportFocusTopic(context: CourseTextContext) {
 
 function topicScopedFocus(context: CourseTextContext, area: string) {
 	return `${supportFocusTopic(context)}: ${area}`;
+}
+
+function unscopedSubjectFocus(context: CourseTextContext) {
+	const focus = subjectFocus(context);
+	const topic = supportFocusTopic(context);
+	const prefix = `${topic}: `;
+
+	return focus.startsWith(prefix) ? focus.slice(prefix.length) : focus;
 }
 
 function subjectFocus(context: CourseTextContext) {
@@ -5463,7 +5471,7 @@ function compactGeneratedProjectSupport(
 }
 
 function lessonSupport(context: CourseTextContext) {
-	const focus = subjectFocus(context);
+	const focus = unscopedSubjectFocus(context);
 	const conceptPath = variantPrompt(context, [
 		subject =>
 			`**Concept path:** ${subject} starts by identifying which part of ${focus} matters, then uses a specific example to test a nearby condition.`,

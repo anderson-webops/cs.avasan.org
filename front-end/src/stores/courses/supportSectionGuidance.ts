@@ -125,7 +125,7 @@ export function buildSupportSectionGuidance({
 		return [
 			opener,
 			`Name the **${title}** core state, inputs, outputs, boundaries, and verification evidence for ${focus}.`,
-			`Choose a **${title}** order that produces a small working version early, then add complexity only after the current checkpoint can be explained.`
+			`Choose an order for **${title}** that produces a small working version early, then add complexity only after the current checkpoint can be explained.`
 		].join("\n\n");
 	}
 
