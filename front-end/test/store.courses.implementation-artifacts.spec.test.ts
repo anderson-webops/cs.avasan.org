@@ -10,6 +10,68 @@ import { researchBackedExpansionCourseIds } from "@/stores/courses/research-expa
 
 const authoredLearnerCourseIds = new Set(["intro-to-chemistry"]);
 const COURSE_SWEEP_TIMEOUT = 180000;
+const pythonLevel2SplitSourceFolders = new Set([
+	"PS-Check-in-1",
+	"PS-Check-in-2",
+	"PS1-Index-Picker",
+	"PS1-Mad-Libs",
+	"PS1-Relay-Race",
+	"PS1-Space-Mountain",
+	"PS1-Tip-Calculator",
+	"PS10-Field-Day",
+	"PS10-Field-Day-II",
+	"PS10-Todo-List",
+	"PS11-Bank-Account",
+	"PS11-Calculator",
+	"PS12-Type-Racer",
+	"PS13-Advanced-Typewriter-Monkeys",
+	"PS14-Advanced-Blackjack",
+	"PS14-Game-of-War",
+	"PS14-Mastermind",
+	"PS14-Simple-Blackjack",
+	"PS2-Calendar-Machine",
+	"PS2-Change-Machine",
+	"PS2-Crazy-Nametags",
+	"PS2-Double-or-Nothing",
+	"PS2-For-Loop-Fun",
+	"PS2-Interest-Aggregator",
+	"PS2-Juni-Archery",
+	"PS2-Multiplication-Tables",
+	"PS2-Password-Guesser",
+	"PS3-ASCII-Art",
+	"PS3-Caesar-Cipher",
+	"PS3-Nested-Boxes",
+	"PS3-Password-Cracker",
+	"PS3-Simple-Cipher",
+	"PS3-Uppercase-to-Lowercase",
+	"PS4-Carnival-Strength-Tester",
+	"PS4-Credit-Card-Validator",
+	"PS4-FizzBuzz",
+	"PS4-Joes-Donuts-Opening-Day",
+	"PS4-Number-Guesser",
+	"PS4-Relay-Race-Statistics",
+	"PS4-Rock-Paper-Scissors",
+	"PS4-Test-Statistics",
+	"PS5-Coin-Flipper",
+	"PS5-Dice-Roller",
+	"PS5-Functions-Practice",
+	"PS5-Juni-Latin",
+	"PS5-Number-Games",
+	"PS5-Parameter-Tracing",
+	"PS5-Squawka-Zilly-Floog",
+	"PS6-Basketball-Stars",
+	"PS6-Build-a-Song",
+	"PS6-Card-Shuffler",
+	"PS6-Dog-Breeds",
+	"PS6-Lists-Practice-1",
+	"PS6-Tower-of-Terror",
+	"PS7-Dictionaries-Practice",
+	"PS7-Test-Scores",
+	"PS9-Class-Registration-II",
+	"PS9-Favorite-Foods",
+	"PS9-Sets-Practice",
+	"PS9-Wheel-of-Fortune"
+]);
 
 async function requireCourse(courseId: string) {
 	const course = await loadRawCourse(courseId);
@@ -281,6 +343,38 @@ describe("implemented course development artifacts", () => {
 		);
 		expect(serializedCourse).not.toContain(
 			"Python-Level-3/tree/main/AM9-Bubble-Sort\""
+		);
+	});
+
+	it("keeps Python Level 2 split source links pointed at starter or solution folders", async () => {
+		const serializedCourse = JSON.stringify(
+			await requireCourse("python-level-2")
+		);
+		const rootOnlyLinks = [
+			...serializedCourse.matchAll(
+				/https:\/\/github\.com\/instruction-material\/Python-Level-2\/tree\/main\/([^"]+)/g
+			)
+		]
+			.map(match => match[1].replace(/\\+$/, ""))
+			.filter(urlPath => {
+				const folder = urlPath.replace(/\/(?:starter|solution)$/, "");
+
+				return (
+					pythonLevel2SplitSourceFolders.has(folder) &&
+					!urlPath.endsWith("/starter") &&
+					!urlPath.endsWith("/solution")
+				);
+			});
+
+		expect(rootOnlyLinks).toHaveLength(0);
+		expect(serializedCourse).toContain(
+			"Python-Level-2/tree/main/PS1-Mad-Libs/solution"
+		);
+		expect(serializedCourse).toContain(
+			"Python-Level-2/tree/main/PS5-Parameter-Tracing/starter"
+		);
+		expect(serializedCourse).toContain(
+			"Python-Level-2/tree/main/PS14-Mastermind/solution"
 		);
 	});
 

@@ -6436,7 +6436,7 @@ function normalizePythonLevel1(course: RawCourse) {
 
 function normalizePythonLevel2(course: RawCourse) {
 	setItemLinks(course, "Check-In #2", "Check-In #2 Overview", {
-		solutionLink: githubTree("Python-Level-2", "PS-Check-in-2")
+		solutionLink: githubTree("Python-Level-2", "PS-Check-in-2/solution")
 	});
 }
 

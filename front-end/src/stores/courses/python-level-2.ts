@@ -31,7 +31,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Create a Mad Libs program that asks for at least five words and prints a completed story using those values.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS1-Mad-Libs",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS1-Mad-Libs/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps1_mad_libs.gif"
 				},
@@ -40,7 +40,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Ask the user for a word and an index, then print both the word and the character stored at that index.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS1-Index-Picker",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS1-Index-Picker/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps1_index_picker.mp4"
 				}
@@ -51,7 +51,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Track the remaining safe weight capacity on a roller coaster car by asking for four rider weights and printing how much capacity remains after each rider boards.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS1-Space-Mountain",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS1-Space-Mountain/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps1_space_mountain.gif"
 				},
@@ -60,7 +60,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Ask for a bill total and tip percentage, calculate the tip, and print both a rounded-dollar version and a version rounded to the nearest cent.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS1-Tip-Calculator",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS1-Tip-Calculator/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps1_tip_calculator.gif"
 				},
@@ -69,7 +69,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Collect four relay split times, then print both the team's total time and the average lap time.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS1-Relay-Race",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS1-Relay-Race/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps1_relay_race.gif"
 				}
@@ -93,7 +93,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Ask for a name, then print its letters in several ways with both `for` loops and `while` loops: forward, every other character, and backward.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Crazy-Nametags",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Crazy-Nametags/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps2_crazy_nametags.gif"
 				},
@@ -102,7 +102,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Ask for an amount of money in cents and compute quarters, dimes, nickels, and pennies using loops and counters.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Change-Machine",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Change-Machine/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps2_change_machine.gif"
 				}
@@ -113,7 +113,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Model compound growth over time by asking for a starting balance and printing projected balances across 20 years at a chosen interest rate.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Interest-Aggregator",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Interest-Aggregator/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps2_interest_aggregator.gif"
 				},
@@ -122,7 +122,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Store a correct password in code and keep asking the user to guess until the answer is correct, then print how many guesses it took.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Password-Guesser",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Password-Guesser/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps2_password_guesser.gif"
 				},
@@ -131,7 +131,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Use nested loops to print number patterns, including repeated rows, shifting rows, and growing or shrinking triangle-style output.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-For-Loop-Fun",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-For-Loop-Fun/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps2_for_loop_fun.gif"
 				},
@@ -140,7 +140,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Convert a number of days into years, months, weeks, and days.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Calendar-Machine",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Calendar-Machine/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps2_calendar_machine.gif"
 				},
@@ -149,7 +149,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Simulate a betting game where the user starts with $10 and can keep risking all current winnings on a coin flip until choosing to stop or losing everything.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Double-or-Nothing",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Double-or-Nothing/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps2_double_or_nothing.gif"
 				},
@@ -169,7 +169,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Use nested loops to print the multiplication facts from 1 x 1 through 12 x 12.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Multiplication-Tables",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Multiplication-Tables/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps2_multiplication_tables.gif"
 				},
@@ -178,7 +178,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Simulate five rounds of archery with three shots per round, use randomness to determine hits and misses, and track the total number of bullseyes.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Juni-Archery",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Juni-Archery/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps2_juni_archery.gif"
 				}
@@ -197,7 +197,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Translate a message into ASCII with spaces between values, then build a second version that adds a constant key to each ASCII code.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS3-Simple-Cipher",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS3-Simple-Cipher/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps3_simple_cipher.gif"
 				},
@@ -206,7 +206,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Encrypt and decrypt text by shifting letters forward or backward through the alphabet by a chosen key, including wraparound behavior at both ends of the alphabet.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS3-Caesar-Cipher",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS3-Caesar-Cipher/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps3_caesar_cipher.gif"
 				}
@@ -217,7 +217,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Ask for a number and print a square grid of `#` symbols with that dimension.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS3-ASCII-Art",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS3-ASCII-Art/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps3_ascii_art.gif"
 				},
@@ -226,7 +226,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Convert an uppercase word to lowercase using ASCII math with `ord()` and `chr()` rather than calling `.lower()`.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS3-Uppercase-to-Lowercase",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS3-Uppercase-to-Lowercase/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps3_uppercase_to_lowercase.gif"
 				},
@@ -235,7 +235,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Print progressively larger box outlines using loops and concise pattern logic.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS3-Nested-Boxes",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS3-Nested-Boxes/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps3_nested_boxes.gif"
 				},
@@ -244,7 +244,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Reverse a secret string and try all 26 Caesar-shift possibilities to identify the most plausible original password.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS3-Password-Cracker",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS3-Password-Cracker/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps3_password_cracker.gif"
 				}
@@ -263,7 +263,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Build a two-player Rock, Paper, Scissors game and determine the winner with either a long conditional chain or nested conditionals. Optional extensions can add replay, CPU simulation, and invalid-input handling.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-Rock-Paper-Scissors",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-Rock-Paper-Scissors/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps4_rock_paper_scissors.gif"
 				},
@@ -272,7 +272,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Print numbers 1 through 50, replacing multiples of 3 with `Fizz`, multiples of 5 with `Buzz`, and multiples of both with `FizzBuzz`.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-FizzBuzz",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-FizzBuzz/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps4_fizzbuzz.gif"
 				},
@@ -281,7 +281,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Validate a card number by summing digits with every other digit doubled and checking whether the total is a multiple of 10.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-Credit-Card-Validator",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-Credit-Card-Validator/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps4_credit_card_validator.gif"
 				}
@@ -292,7 +292,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Read how high a puck flew and print a prize tier based on the measured height.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-Carnival-Strength-Tester",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-Carnival-Strength-Tester/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps4_carnival_strength_tester.gif"
 				},
@@ -301,7 +301,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Read five test scores and print the highest score, the lowest score, and the average.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-Test-Statistics",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-Test-Statistics/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps4_test_statistics.gif"
 				},
@@ -310,7 +310,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Collect four lap times, compute the average pace, and report whether each runner was faster than, slower than, or equal to the average.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-Relay-Race-Statistics",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-Relay-Race-Statistics/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps4_relay_race_statistics.gif"
 				},
@@ -319,7 +319,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Use a conditional chain to determine which promotions apply to a given customer number on opening day, including overlapping offers and a universal year-round deal.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-Joes-Donuts-Opening-Day",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-Joes-Donuts-Opening-Day/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps4_joes_donuts.gif"
 				},
@@ -328,7 +328,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Build a number guessing game with a random target from 1 to 50 and give higher/lower feedback until the correct number is guessed.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-Number-Guesser",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-Number-Guesser/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps4_number_guesser.gif"
 				},
@@ -353,7 +353,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Use this module as a low-pressure review of variables, loops, and conditionals. Work through the prompts independently first, then revisit any areas that need reinforcement.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS-Check-in-1"
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS-Check-in-1/solution"
 				},
 				{
 					title: "Check-In #1: Variables",
@@ -393,7 +393,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Write practice functions for arithmetic, averages, factorials, and exponents, and describe what each function takes in and returns.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Functions-Practice",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Functions-Practice/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps5_functions_practice.gif"
 				},
@@ -402,14 +402,14 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Trace a provided program to reinforce the importance of parameter order, variable scope, and calling functions inside other functions.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Parameter-Tracing"
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Parameter-Tracing/starter"
 				},
 				{
 					title: "PS5 Project 2: Coin Flipper",
 					content:
 						"Build a `flipCoin()` function that returns heads or tails, call it many times, tally the outcomes, and compare the observed percentages with the expected distribution.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Coin-Flipper",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Coin-Flipper/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps5_coin_flipper.gif"
 				},
@@ -418,7 +418,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Simulate rolling two dice repeatedly, track sums, and analyze why middle totals appear more often than edge totals.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Dice-Roller",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Dice-Roller/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps5_dice_roller.gif"
 				}
@@ -429,14 +429,14 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Define a small set of math functions that call one another to compute increasingly complex expressions.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Squawka-Zilly-Floog"
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Squawka-Zilly-Floog/solution"
 				},
 				{
 					title: "PS5 Supplemental Project 2: Word Translator",
 					content:
 						"Write a translator function for a simplified Pig Latin variant and use it to translate a user-provided word.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Juni-Latin",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Juni-Latin/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps5_juni_latin.gif"
 				},
@@ -445,7 +445,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Write helper functions such as `isEven`, `isOdd`, `isMultiple7`, and `isPrime`, then use them to print categorized ranges of numbers.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Number-Games",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Number-Games/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps5_number_games.gif"
 				},
@@ -475,7 +475,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Generate lists of descending numbers, letters from a word, perfect squares, and factorials, then write functions that compute aggregate properties such as the sum or maximum of a list.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Lists-Practice-1",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Lists-Practice-1/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps6_lists_practice.gif"
 				},
@@ -484,7 +484,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Use the `pysynth` module to turn a list of note-duration pairs into a `.wav` file and experiment with changing melodies and rhythm values.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Build-a-Song"
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Build-a-Song/solution"
 				},
 				{
 					title: "PS6 Project 3: Song Generator",
@@ -504,7 +504,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Collect rider weights into a list, then print the list, the total weight, and the average weight.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Tower-of-Terror",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Tower-of-Terror/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps6_tower_of_terror.gif"
 				},
@@ -513,7 +513,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Use a list of sublists to store points, rebounds, and assists for several players and identify which players recorded a triple double.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Basketball-Stars",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Basketball-Stars/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps6_basketball_stars.gif"
 				},
@@ -533,7 +533,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Build a list of dog breeds and print formatted information about each breed, including its first letter and length.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Dog-Breeds",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Dog-Breeds/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps6_dog_breeds.gif"
 				},
@@ -542,7 +542,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Generate an ordered deck representation, repeatedly swap two random positions, and compare how shuffled the deck looks after different numbers of swaps.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Card-Shuffler",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Card-Shuffler/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps6_card_shuffler.mp4"
 				},
@@ -572,7 +572,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Create dictionaries of words and definitions, squares, factorials, and letter frequencies from a word.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Dictionaries-Practice",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Dictionaries-Practice/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps7_dictionaries_practice.gif"
 				},
@@ -605,7 +605,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Store student test scores in a dictionary whose values are lists, then compute a second dictionary of student averages.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Test-Scores",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Test-Scores/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps7_test_scores.gif"
 				},
@@ -674,7 +674,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Create random sets, compare them with union and intersection, extract unique letters from words, compare words by common letters, and write functions that filter sets by conditions.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Sets-Practice",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Sets-Practice/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps9_sets_practice.gif"
 				},
@@ -683,7 +683,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Build a word-guessing game that uses sets to track both all letters in the target word and the letters the user has guessed correctly, then add replay or random-word extensions if desired.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Wheel-of-Fortune",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Wheel-of-Fortune/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps_9_wheel_of_fortune.mp4"
 				}
@@ -707,7 +707,7 @@ export const pythonLevel2Course: RawCourse = {
 					projectLink:
 						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Class-Registration/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Class-Registration-II",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Class-Registration-II/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps9_class_registration_ii.gif"
 				},
@@ -716,7 +716,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Compare two sets of favorite foods and print the shared foods as well as the foods unique to each person.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Favorite-Foods",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Favorite-Foods/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps9_favorite_foods.gif"
 				},
@@ -788,7 +788,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Build an interactive to-do list that lets the user add tasks, remove tasks, display the numbered list, and optionally prioritize tasks or reject invalid removals.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS10-Todo-List",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS10-Todo-List/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps10_todo_list.gif"
 				}
@@ -810,7 +810,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Assign classmates to kickball, capture the flag, both, or neither, then print the final rosters for both teams.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS10-Field-Day",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS10-Field-Day/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps10_field_day.gif"
 				},
@@ -819,7 +819,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Randomly split a class into Team Red and Team Blue while printing roster updates and the remaining unassigned players after each round.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS10-Field-Day-II",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS10-Field-Day-II/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps10_field_day_ii.gif"
 				}
@@ -833,7 +833,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Create a login-based bank account simulator with usernames, passwords, balances, deposits, withdrawals, password changes, and optional interest collection.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS11-Bank-Account",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS11-Bank-Account/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps11_bank_account.gif"
 				}
@@ -844,7 +844,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Write arithmetic helper functions and combine them into a calculator that lets the user choose an operation and print the result.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS11-Calculator",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS11-Calculator/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps11_calculator.gif"
 				},
@@ -874,7 +874,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Pick a random sentence, count down, time the user while typing, require exact completion before stopping the timer, and optionally score accuracy or support multiple players.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS12-Type-Racer",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS12-Type-Racer/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps12_type_racer.mp4"
 				}
@@ -938,7 +938,7 @@ export const pythonLevel2Course: RawCourse = {
 					projectLink:
 						"https://github.com/instruction-material/Python-Level-2/tree/main/PS13-Typewriter-Monkeys/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS13-Advanced-Typewriter-Monkeys",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS13-Advanced-Typewriter-Monkeys/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps13_advanced_typewriter_monkeys.gif"
 				}
@@ -952,7 +952,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Build a simplified Blackjack game with cards valued 2 through 11, repeated player hit/stay choices, dealer drawing until at least 17, and replay support.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS14-Simple-Blackjack",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS14-Simple-Blackjack/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps14_blackjack.gif"
 				},
@@ -961,7 +961,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Extend Blackjack with face cards, named card output, ace handling as 1 or 11, and helper functions that compute the best available hand value.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS14-Advanced-Blackjack",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS14-Advanced-Blackjack/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps14_advanced_blackjack.gif"
 				}
@@ -972,7 +972,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Simulate ten rounds of War by giving each player a random card value each round, printing the result, and tracking total wins.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS14-Game-of-War",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS14-Game-of-War/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps14_game_of_war.gif"
 				},
@@ -981,7 +981,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Implement the code-breaking game Mastermind by comparing user guesses to a hidden four-digit code and reporting how many digits are correct or close.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS14-Mastermind",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS14-Mastermind/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps_14_mastermind.mp4"
 				}
