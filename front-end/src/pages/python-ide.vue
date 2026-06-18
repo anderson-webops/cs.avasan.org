@@ -193,6 +193,7 @@ const maxImportedTextFileBytes = 512 * 1024;
 const maxImportedBinaryFileBytes = 2 * 1024 * 1024;
 const maxOutputLines = 500;
 const maxOutputTextLength = 12000;
+const turtleInstantStepMaxDurationMs = 16;
 const outputEntryTruncatedMessage =
 	"\n[Output truncated to keep the browser responsive.]";
 const outputHistoryTrimmedMessage =
@@ -233,7 +234,7 @@ const turtleTimerHandles = new Set<ReturnType<typeof window.setTimeout>>();
 const gameKeysDown = new Set<string>();
 const gameEvents: GameInputEvent[] = [];
 const gameImageCache = new Map<string, CachedGameImage>();
-const gameSoundAudio = new Map<string, HTMLAudioElement>();
+const gameSoundAudio = new Map<string, Set<HTMLAudioElement>>();
 
 let saveTimer: ReturnType<typeof window.setTimeout> | null = null;
 let saveInFlight: Promise<void> | null = null;
@@ -1399,6 +1400,11 @@ function scheduleTurtleAnimation() {
 }
 
 function queueTurtleStep(step: TurtleAnimationStep) {
+	if (step.durationMs <= turtleInstantStepMaxDurationMs) {
+		if (step.command) turtleCompletedCommands.push(step.command);
+		renderTurtleScene();
+		return;
+	}
 	turtleQueuedSteps.push(step);
 	void scheduleTurtleAnimation();
 }
@@ -1665,10 +1671,8 @@ function stopGameLoop() {
 }
 
 function stopAllGameAudio() {
-	for (const audio of gameSoundAudio.values()) {
-		audio.pause();
-		audio.currentTime = 0;
-	}
+	for (const soundName of [...gameSoundAudio.keys()])
+		stopGameSound(soundName);
 	gameSoundAudio.clear();
 	stopGameMusic();
 }
@@ -1799,7 +1803,8 @@ function gameImageSizeJson(name: string) {
 function playProjectAudio(
 	folder: "music" | "sounds",
 	name: string,
-	loop = false
+	loop = false,
+	onPlaybackBlocked?: (audio: HTMLAudioElement) => void
 ) {
 	const asset = resolveGameAsset(folder, name, audioAssetExtensions);
 	if (!asset) {
@@ -1819,6 +1824,7 @@ function playProjectAudio(
 	const audio = new Audio(src);
 	audio.loop = loop;
 	void audio.play().catch((error: unknown) => {
+		onPlaybackBlocked?.(audio);
 		appendOutput(
 			"system",
 			error instanceof Error
@@ -1829,16 +1835,36 @@ function playProjectAudio(
 	return audio;
 }
 
+function trackGameSoundAudio(name: string, audio: HTMLAudioElement) {
+	const existing = gameSoundAudio.get(name) ?? new Set<HTMLAudioElement>();
+	existing.add(audio);
+	gameSoundAudio.set(name, existing);
+
+	const cleanup = () => {
+		const activeSounds = gameSoundAudio.get(name);
+		if (!activeSounds) return;
+		activeSounds.delete(audio);
+		if (!activeSounds.size) gameSoundAudio.delete(name);
+	};
+
+	audio.addEventListener("ended", cleanup, { once: true });
+	audio.addEventListener("error", cleanup, { once: true });
+	return cleanup;
+}
+
 function playGameSound(name: string) {
-	const audio = playProjectAudio("sounds", name);
-	if (audio) gameSoundAudio.set(name, audio);
+	let cleanup: (() => void) | null = null;
+	const audio = playProjectAudio("sounds", name, false, () => cleanup?.());
+	if (audio) cleanup = trackGameSoundAudio(name, audio);
 }
 
 function stopGameSound(name: string) {
-	const audio = gameSoundAudio.get(name);
-	if (!audio) return;
-	audio.pause();
-	audio.currentTime = 0;
+	const activeSounds = gameSoundAudio.get(name);
+	if (!activeSounds) return;
+	for (const audio of activeSounds) {
+		audio.pause();
+		audio.currentTime = 0;
+	}
 	gameSoundAudio.delete(name);
 }
 

@@ -21,7 +21,7 @@ const PYTHON_MODULE_SEPARATOR_RE = /\./;
 const FOR_LOOP_ITERATION_LIMIT = 500000;
 const WHILE_LOOP_ITERATION_LIMIT = 25000;
 const TURTLE_COOPERATIVE_WHILE_LOOP_ITERATION_LIMIT = 0;
-const TURTLE_COOPERATIVE_LOOP_DELAY_MS = 16;
+const TURTLE_COOPERATIVE_LOOP_DELAY_MS = 8;
 const MICROPIP_PACKAGES = new Map([
 	["altair", "altair"],
 	["networkx", "networkx"],
@@ -476,7 +476,8 @@ def __classes_loop_guard(kind):
     if __classes_loop_iterations[kind] > limit:
         raise RuntimeError(
             "Stopped a long-running {} loop after {} iterations. "
-            "Add a break condition, or use screen.ontimer(...) for ongoing Turtle animation."
+            "Add a break condition. For ongoing Turtle animation, use a top-level "
+            "while True loop with Turtle calls inside it, or use screen.ontimer(...)."
             .format(kind, limit)
         )
 
@@ -516,7 +517,9 @@ class __ClassesLoopGuardTransformer(ast.NodeTransformer):
                     return True
         return False
 
-    def _loop_body_uses_turtle_api(self, node):
+    def _node_uses_turtle_api(self, node, turtle_helper_names=None):
+        if turtle_helper_names is None:
+            turtle_helper_names = set()
         for child in ast.walk(node):
             if not isinstance(child, ast.Call):
                 continue
@@ -525,14 +528,34 @@ class __ClassesLoopGuardTransformer(ast.NodeTransformer):
                 return True
             if isinstance(function, ast.Name) and function.id in __classes_turtle_animation_call_names:
                 return True
+            if isinstance(function, ast.Name) and function.id in turtle_helper_names:
+                return True
         return False
 
-    def _is_simple_top_level_turtle_loop(self, node, module_allows_turtle_loop):
-        if not module_allows_turtle_loop:
-            return False
-        if not isinstance(node, ast.While):
-            return False
-        if not isinstance(node.test, ast.Constant) or node.test.value is not True:
+    def _module_turtle_helper_names(self, node):
+        helper_names = set()
+        changed = True
+        while changed:
+            changed = False
+            for statement in node.body:
+                if not isinstance(statement, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                    continue
+                if statement.name in helper_names:
+                    continue
+                if self._node_uses_turtle_api(statement, helper_names):
+                    helper_names.add(statement.name)
+                    changed = True
+        return helper_names
+
+    def _is_forever_while_loop(self, node):
+        return (
+            isinstance(node, ast.While)
+            and isinstance(node.test, ast.Constant)
+            and node.test.value in (True, 1)
+        )
+
+    def _is_simple_top_level_turtle_loop(self, node, module_allows_turtle_loop, turtle_helper_names):
+        if not self._is_forever_while_loop(node):
             return False
         if node.orelse:
             return False
@@ -545,7 +568,8 @@ class __ClassesLoopGuardTransformer(ast.NodeTransformer):
             ast.YieldFrom,
         )
         return (
-            self._loop_body_uses_turtle_api(node)
+            (module_allows_turtle_loop or self._node_uses_turtle_api(node, turtle_helper_names))
+            and self._node_uses_turtle_api(node, turtle_helper_names)
             and not any(isinstance(child, unsupported_nodes) for child in ast.walk(node))
         )
 
@@ -587,9 +611,14 @@ class __ClassesLoopGuardTransformer(ast.NodeTransformer):
         module_allows_turtle_loop = (
             self.allow_turtle_cooperative or self._module_imports_turtle(node)
         )
+        turtle_helper_names = self._module_turtle_helper_names(node)
         rewritten_body = []
         for statement in node.body:
-            if self._is_simple_top_level_turtle_loop(statement, module_allows_turtle_loop):
+            if self._is_simple_top_level_turtle_loop(
+                statement,
+                module_allows_turtle_loop,
+                turtle_helper_names,
+            ):
                 scheduled = self._turtle_loop_schedule_statement(statement)
                 if scheduled is not None:
                     rewritten_body.append(scheduled)

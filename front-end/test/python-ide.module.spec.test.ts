@@ -480,6 +480,9 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain(
 			"const TURTLE_COOPERATIVE_WHILE_LOOP_ITERATION_LIMIT = 0"
 		);
+		expect(runtimeSource).toContain(
+			"const TURTLE_COOPERATIVE_LOOP_DELAY_MS = 8"
+		);
 		expect(runtimeSource).toContain("class __ClassesLoopGuardTransformer");
 		expect(runtimeSource).toContain("def __classes_loop_guard(kind):");
 		expect(runtimeSource).toContain("if limit <= 0:");
@@ -492,7 +495,11 @@ describe("python IDE project helpers", () => {
 			"def _is_simple_top_level_turtle_loop"
 		);
 		expect(runtimeSource).toContain("def _module_imports_turtle");
-		expect(runtimeSource).toContain("def _loop_body_uses_turtle_api");
+		expect(runtimeSource).toContain("def _node_uses_turtle_api");
+		expect(runtimeSource).toContain("def _module_turtle_helper_names");
+		expect(runtimeSource).toContain("def _is_forever_while_loop");
+		expect(runtimeSource).toContain("node.test.value in (True, 1)");
+		expect(runtimeSource).toContain("function.id in turtle_helper_names");
 		expect(runtimeSource).toContain("def __classes_sleep(_seconds=0):");
 		expect(runtimeSource).toContain("__classes_time.sleep = __classes_sleep");
 		expect(runtimeSource).toContain("__classes_compile_student_source(");
@@ -531,6 +538,13 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain(
 			"return Math.min(900, Math.max(16, distance * 5));"
 		);
+		expect(pageSource).toContain(
+			"const turtleInstantStepMaxDurationMs = 16"
+		);
+		expect(pageSource).toContain(
+			"if (step.durationMs <= turtleInstantStepMaxDurationMs)"
+		);
+		expect(pageSource).toContain("renderTurtleScene();");
 	});
 
 	it("bounds output rendering so print-heavy runs stay responsive", () => {
@@ -863,6 +877,23 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain(".code-editor-shell:focus-within");
 		expect(pageSource).toContain(".canvas-shell:focus-within");
 		expect(pageSource).toContain(".stdin-panel:focus-within");
+	});
+
+	it("tracks overlapping PyGame Zero sound instances for cleanup", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/pages/python-ide.vue"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain(
+			"const gameSoundAudio = new Map<string, Set<HTMLAudioElement>>();"
+		);
+		expect(pageSource).toContain("function trackGameSoundAudio");
+		expect(pageSource).toContain("existing.add(audio);");
+		expect(pageSource).toContain("audio.addEventListener(\"ended\", cleanup");
+		expect(pageSource).toContain("audio.addEventListener(\"error\", cleanup");
+		expect(pageSource).toContain("for (const audio of activeSounds)");
+		expect(pageSource).toContain("for (const soundName of [...gameSoundAudio.keys()])");
 	});
 
 	it("normalizes project file names without accepting unsafe names", () => {
