@@ -1,7 +1,12 @@
 import { strFromU8, unzipSync } from "fflate";
 import { getPythonIdeFileMimeType } from "@/modules/pythonIde";
 
+export const pythonIdeBundledCourseAssetsZipUrl = "/python-ide/assets.zip";
 export const pythonIdeCourseAssetsZipUrl = "/api/python-assets/assets.zip";
+export const pythonIdeCourseAssetSourceUrls = [
+	pythonIdeBundledCourseAssetsZipUrl,
+	pythonIdeCourseAssetsZipUrl
+];
 
 const ASSET_PATH_RE = /^(?:images|music|sounds)\/[^/].+\.[\dA-Z]+$/i;
 const IGNORED_ZIP_PATH_RE =
@@ -22,6 +27,7 @@ interface AssetFetcherResponse {
 export interface LoadPythonIdeCourseAssetPackOptions {
 	fetcher?: (url: string) => Promise<AssetFetcherResponse>;
 	url?: string;
+	urls?: string[];
 }
 
 export interface PythonIdeCourseAsset {
@@ -49,21 +55,33 @@ export async function loadPythonIdeCourseAssetPack(
 ) {
 	if (courseAssetPackPromise) return courseAssetPackPromise;
 
-	const sourceUrl = options.url ?? pythonIdeCourseAssetsZipUrl;
+	const sourceUrls = options.url
+		? [options.url]
+		: (options.urls ?? pythonIdeCourseAssetSourceUrls);
 	const fetcher = options.fetcher ?? window.fetch.bind(window);
 	courseAssetPackPromise = (async () => {
-		const response = await fetcher(sourceUrl);
-		if (!response.ok) {
-			throw new Error(
-				`Unable to load PyGame Zero assets (${response.status}).`
+		const failures: string[] = [];
+
+		for (const sourceUrl of sourceUrls) {
+			const response = await fetcher(sourceUrl);
+			if (!response.ok) {
+				failures.push(`${sourceUrl} returned ${response.status}`);
+				continue;
+			}
+
+			return parsePythonIdeCourseAssetZip(
+				new Uint8Array(await response.arrayBuffer()),
+				sourceUrl
 			);
 		}
 
-		return parsePythonIdeCourseAssetZip(
-			new Uint8Array(await response.arrayBuffer()),
-			sourceUrl
+		throw new Error(
+			`Unable to load PyGame Zero assets (${failures.join("; ") || "no asset sources configured"}).`
 		);
-	})();
+	})().catch(error => {
+		courseAssetPackPromise = null;
+		throw error;
+	});
 
 	return courseAssetPackPromise;
 }

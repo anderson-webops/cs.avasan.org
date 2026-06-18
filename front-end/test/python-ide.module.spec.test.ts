@@ -32,7 +32,9 @@ import {
 import {
 	findPythonIdeCourseAsset,
 	parsePythonIdeCourseAssetZip,
+	pythonIdeBundledCourseAssetsZipUrl,
 	pythonIdeAssetCandidateNames,
+	pythonIdeCourseAssetsZipUrl,
 	resetPythonIdeCourseAssetPackCache,
 	loadPythonIdeCourseAssetPack
 } from "../src/modules/pythonIdeCourseAssets";
@@ -490,13 +492,23 @@ describe("python IDE project helpers", () => {
 		expect(tune?.mimeType).toBe("audio/mpeg");
 	});
 
-	it("fetches the shared PyGame Zero asset pack through the same-origin API proxy", async () => {
+	it("prefers the deployed asset pack before falling back to the same-origin API proxy", async () => {
 		const zipBytes = zipSync({
 			"images/alien.png": oneByOnePngBytes
 		});
+		const requestedUrls: string[] = [];
 		const pack = await loadPythonIdeCourseAssetPack({
 			fetcher: async url => {
-				expect(url).toBe("/api/python-assets/assets.zip");
+				requestedUrls.push(url);
+				if (url === pythonIdeBundledCourseAssetsZipUrl) {
+					return {
+						arrayBuffer: async () => new ArrayBuffer(0),
+						ok: false,
+						status: 404
+					};
+				}
+
+				expect(url).toBe(pythonIdeCourseAssetsZipUrl);
 				return {
 					arrayBuffer: async () => zipBytes.buffer.slice(0),
 					ok: true,
@@ -505,6 +517,10 @@ describe("python IDE project helpers", () => {
 			}
 		});
 
+		expect(requestedUrls).toEqual([
+			pythonIdeBundledCourseAssetsZipUrl,
+			pythonIdeCourseAssetsZipUrl
+		]);
 		expect(pack.assets.has("images/alien.png")).toBe(true);
 	});
 
