@@ -1355,6 +1355,8 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("if callable(rect_value):");
 		expect(runtimeSource).toContain("rect_value = rect_value()");
 		expect(runtimeSource).toContain("return _rect_parts(rect_value)");
+		expect(runtimeSource).toContain("def _line_points_from_args(args):");
+		expect(runtimeSource).toContain("def _clipline_point(x, y):");
 		expect(runtimeSource).toContain(
 			"self.x, self.y, self.width, self.height = _rect_parts_from_args(args)"
 		);
@@ -1372,6 +1374,13 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("def clip(self, other):");
 		expect(runtimeSource).toContain(
 			"return Rect(left, top, right - left, bottom - top)"
+		);
+		expect(runtimeSource).toContain("def clipline(self, *args):");
+		expect(runtimeSource).toContain(
+			"x1, y1, x2, y2 = _line_points_from_args(args)"
+		);
+		expect(runtimeSource).toContain(
+			"_clipline_point(x1 + start * delta_x, y1 + start * delta_y)"
 		);
 		expect(runtimeSource).toContain("def union(self, other):");
 		expect(runtimeSource).toContain("def union_ip(self, other):");
@@ -1403,9 +1412,16 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("rect = value if use_values else key");
 		expect(runtimeSource).toContain("return (key, value)");
 		expect(runtimeSource).toContain("def collidedictall(self, rect_dict, use_values=0):");
+		expect(runtimeSource).toContain("def collideobjects(self, objects, key=None):");
+		expect(runtimeSource).toContain("rect = key(obj) if key is not None else obj");
+		expect(runtimeSource).toContain("def collideobjectsall(self, objects, key=None):");
 		expect(runtimeSource).toContain("return self._rect().collidepoint(*args)");
 		expect(runtimeSource).toContain("return self._rect().collidelist(rects)");
 		expect(runtimeSource).toContain("return self._rect().collidedict(rect_dict, use_values)");
+		expect(runtimeSource).toContain(
+			"return self._rect().collideobjects(objects, key)"
+		);
+		expect(runtimeSource).toContain("return self._rect().clipline(*args)");
 		expect(runtimeSource).toContain("def get_length(self):");
 		expect(runtimeSource).toContain("def play_once(self, name):");
 		expect(runtimeSource).toContain("def queue(self, name):");

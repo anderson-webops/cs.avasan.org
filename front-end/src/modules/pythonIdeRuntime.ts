@@ -1302,6 +1302,37 @@ def _point_from_args(args):
         return _number(args[0]), _number(args[1])
     raise TypeError("Expected a point as (x, y) or x, y.")
 
+def _line_points_from_args(args):
+    if len(args) == 4:
+        return tuple(_number(value) for value in args)
+
+    if len(args) == 2:
+        start_x, start_y = _point(args[0])
+        end_x, end_y = _point(args[1])
+        return start_x, start_y, end_x, end_y
+
+    if len(args) == 1:
+        value = args[0]
+        try:
+            value_length = len(value)
+        except Exception:
+            value_length = 0
+
+        if value_length == 4:
+            return tuple(_number(item) for item in value)
+        if value_length == 2:
+            start_x, start_y = _point(value[0])
+            end_x, end_y = _point(value[1])
+            return start_x, start_y, end_x, end_y
+
+    raise TypeError(
+        "Expected a line as x1, y1, x2, y2; "
+        "(x1, y1), (x2, y2); or a matching sequence."
+    )
+
+def _clipline_point(x, y):
+    return int(round(x)), int(round(y))
+
 def _rect_parts(value):
     if isinstance(value, Rect):
         return value.x, value.y, value.width, value.height
@@ -1715,6 +1746,43 @@ class Rect:
             return Rect(left, top, 0, 0)
         return Rect(left, top, right - left, bottom - top)
 
+    def clipline(self, *args):
+        if self.width <= 0 or self.height <= 0:
+            return ()
+        x1, y1, x2, y2 = _line_points_from_args(args)
+        delta_x = x2 - x1
+        delta_y = y2 - y1
+        start = 0
+        end = 1
+
+        for boundary_delta, boundary_distance in (
+            (-delta_x, x1 - self.left),
+            (delta_x, self.right - x1),
+            (-delta_y, y1 - self.top),
+            (delta_y, self.bottom - y1),
+        ):
+            if boundary_delta == 0:
+                if boundary_distance < 0:
+                    return ()
+                continue
+
+            ratio = boundary_distance / boundary_delta
+            if boundary_delta < 0:
+                if ratio > end:
+                    return ()
+                if ratio > start:
+                    start = ratio
+            else:
+                if ratio < start:
+                    return ()
+                if ratio < end:
+                    end = ratio
+
+        return (
+            _clipline_point(x1 + start * delta_x, y1 + start * delta_y),
+            _clipline_point(x1 + end * delta_x, y1 + end * delta_y),
+        )
+
     def union(self, other):
         other_rect = Rect(other)
         left = min(self.left, other_rect.left)
@@ -1799,6 +1867,20 @@ class Rect:
             (key, value)
             for key, value in rect_dict.items()
             if self.colliderect(value if use_values else key)
+        ]
+
+    def collideobjects(self, objects, key=None):
+        for obj in objects:
+            rect = key(obj) if key is not None else obj
+            if self.colliderect(rect):
+                return obj
+        return None
+
+    def collideobjectsall(self, objects, key=None):
+        return [
+            obj
+            for obj in objects
+            if self.colliderect(key(obj) if key is not None else obj)
         ]
 
     def contains(self, other):
@@ -2099,6 +2181,15 @@ class Actor:
 
     def collidedictall(self, rect_dict, use_values=0):
         return self._rect().collidedictall(rect_dict, use_values)
+
+    def collideobjects(self, objects, key=None):
+        return self._rect().collideobjects(objects, key)
+
+    def collideobjectsall(self, objects, key=None):
+        return self._rect().collideobjectsall(objects, key)
+
+    def clipline(self, *args):
+        return self._rect().clipline(*args)
 
     def contains(self, other):
         return self._rect().contains(other)

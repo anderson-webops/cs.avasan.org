@@ -237,6 +237,21 @@ const sharedMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
 		completion("draw", "method", "draw the actor"),
 		completion("colliderect", "method", "test rectangle collision"),
 		completion("collidepoint", "method", "test point collision"),
+		completion("collidelist", "method", "first collision in a list"),
+		completion(
+			"collidelistall",
+			"method",
+			"all collision indexes in a list"
+		),
+		completion("collidedict", "method", "first collision in a dictionary"),
+		completion(
+			"collidedictall",
+			"method",
+			"all collisions in a dictionary"
+		),
+		completion("collideobjects", "method", "first colliding object"),
+		completion("collideobjectsall", "method", "all colliding objects"),
+		completion("clipline", "method", "clip a line to the actor rectangle"),
 		completion(
 			"distance_to",
 			"method",
@@ -708,6 +723,7 @@ function rectMemberCompletions() {
 		completion("contains", "method", "test containment"),
 		completion("collidepoint", "method", "test point collision"),
 		completion("colliderect", "method", "test rectangle collision"),
+		completion("clipline", "method", "clip a line to this rectangle"),
 		completion("collidelist", "method", "first collision in a list"),
 		completion(
 			"collidelistall",
@@ -715,7 +731,13 @@ function rectMemberCompletions() {
 			"all collision indexes in a list"
 		),
 		completion("collidedict", "method", "first collision in a dictionary"),
-		completion("collidedictall", "method", "all collisions in a dictionary")
+		completion(
+			"collidedictall",
+			"method",
+			"all collisions in a dictionary"
+		),
+		completion("collideobjects", "method", "first colliding object"),
+		completion("collideobjectsall", "method", "all colliding objects")
 	];
 }
 

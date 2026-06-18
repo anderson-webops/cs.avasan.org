@@ -142,6 +142,8 @@ describe("python IDE CodeMirror editor", () => {
 				"anchor",
 				"angle_to",
 				"bottomright",
+				"clipline",
+				"collideobjects",
 				"colliderect",
 				"distance_to",
 				"draw",
@@ -157,7 +159,9 @@ describe("python IDE CodeMirror editor", () => {
 			expect.arrayContaining([
 				"clamp",
 				"clip",
+				"clipline",
 				"collidelist",
+				"collideobjects",
 				"fit",
 				"normalize",
 				"scale_by",
