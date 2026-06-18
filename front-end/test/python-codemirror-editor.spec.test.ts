@@ -45,6 +45,8 @@ describe("python IDE CodeMirror editor", () => {
 		expect(editorSource).toContain("python()");
 		expect(editorSource).toContain("indentWithTab");
 		expect(editorSource).toContain("EditorState.allowMultipleSelections");
+		expect(editorSource).toContain(".cm-panel.cm-search");
+		expect(editorSource).toContain(".cm-foldPlaceholder");
 		expect(editorSource).toContain("insertPythonNewlineAndIndent");
 		expect(editorSource).toContain("wrapSelection");
 		expect(editorSource).toContain("closingTokenSkipKeymap");
@@ -59,6 +61,22 @@ describe("python IDE CodeMirror editor", () => {
 		expect(editorSource).toContain("pythonIdeCompletionSource");
 		expect(pageSource).toContain(
 			"mode: selectedProject.value?.mode ?? \"python\""
+		);
+	});
+
+	it("surfaces the built-in editor shortcuts in the IDE chrome", () => {
+		const pageSource = sourceFile("../src/pages/python-ide.vue");
+
+		expect(pageSource).toContain("class=\"editor-shortcuts\"");
+		expect(pageSource).toContain("Cmd/Ctrl+F opens search.");
+		expect(pageSource).toMatch(/Cmd\/Ctrl\+Enter\s+runs the project\./);
+		expect(pageSource).toContain("Cmd/Ctrl+S saves the project.");
+		expect(pageSource).toContain("Tab indents; Shift+Tab dedents.");
+		expect(pageSource).toMatch(
+			/Alt\/Option-drag creates a\s+rectangular selection\./
+		);
+		expect(pageSource).toContain(
+			"Quotes and brackets wrap highlighted"
 		);
 	});
 

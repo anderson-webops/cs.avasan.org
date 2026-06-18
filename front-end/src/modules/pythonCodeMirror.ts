@@ -334,6 +334,62 @@ const pythonEditorTheme = EditorView.theme({
 		backgroundColor:
 			"color-mix(in srgb, var(--syntax-function) 30%, transparent)"
 	},
+	".cm-panels": {
+		borderColor: "var(--color-border)",
+		backgroundColor: "var(--color-surface-strong)",
+		color: "var(--color-ink)"
+	},
+	".cm-panels-top": {
+		borderBottom: "1px solid var(--color-border)"
+	},
+	".cm-panel.cm-search": {
+		display: "flex",
+		flexWrap: "wrap",
+		gap: "0.45rem",
+		alignItems: "center",
+		padding: "0.65rem 0.75rem",
+		fontFamily: "Avenir Next, Segoe UI, sans-serif",
+		fontSize: "0.82rem"
+	},
+	".cm-panel.cm-search label": {
+		display: "inline-flex",
+		gap: "0.35rem",
+		alignItems: "center",
+		color: "var(--color-ink-soft)",
+		fontWeight: "700"
+	},
+	".cm-panel.cm-search input": {
+		minHeight: "2rem",
+		border: "1px solid var(--color-border)",
+		borderRadius: "0.65rem",
+		backgroundColor:
+			"color-mix(in srgb, var(--color-surface-strong) 88%, var(--python-code-bg))",
+		color: "var(--color-ink)",
+		padding: "0.35rem 0.55rem"
+	},
+	".cm-panel.cm-search button": {
+		minHeight: "2rem",
+		border: "1px solid var(--color-border)",
+		borderRadius: "0.65rem",
+		backgroundColor:
+			"color-mix(in srgb, var(--color-surface-strong) 88%, var(--color-accent))",
+		color: "var(--color-ink)",
+		padding: "0.35rem 0.6rem",
+		fontWeight: "800"
+	},
+	".cm-panel.cm-search button:hover, .cm-panel.cm-search button:focus-visible":
+		{
+			borderColor: "var(--python-focus-ring)",
+			boxShadow: "0 0 0 3px var(--python-focus-glow)"
+		},
+	".cm-foldPlaceholder": {
+		border: "1px solid var(--color-border)",
+		borderRadius: "999px",
+		backgroundColor:
+			"color-mix(in srgb, var(--python-code-bg) 72%, var(--color-accent))",
+		color: "var(--python-code-ink)",
+		padding: "0 0.45rem"
+	},
 	".cm-tooltip": {
 		border: "1px solid var(--color-border)",
 		borderRadius: "0.75rem",

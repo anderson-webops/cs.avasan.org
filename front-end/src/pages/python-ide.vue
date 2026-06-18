@@ -2977,9 +2977,30 @@ onBeforeUnmount(() => {
 					<section class="code-panel" aria-label="Code editor">
 						<div class="panel-header">
 							<span>{{ activeFile?.name ?? "main.py" }}</span>
-							<small v-if="editorCursorCount > 1">
-								{{ editorCursorCount }} cursors
-							</small>
+							<div class="editor-assist">
+								<small v-if="editorCursorCount > 1">
+									{{ editorCursorCount }} cursors
+								</small>
+								<details class="editor-shortcuts">
+									<summary>Shortcuts</summary>
+									<ul>
+										<li>Cmd/Ctrl+F opens search.</li>
+										<li>
+											Cmd/Ctrl+Enter runs the project.
+										</li>
+										<li>Cmd/Ctrl+S saves the project.</li>
+										<li>Tab indents; Shift+Tab dedents.</li>
+										<li>
+											Alt/Option-drag creates a
+											rectangular selection.
+										</li>
+										<li>
+											Quotes and brackets wrap highlighted
+											text.
+										</li>
+									</ul>
+								</details>
+							</div>
 						</div>
 						<div
 							v-if="activeFileIsBinaryAsset"
@@ -3830,12 +3851,91 @@ html.dark .file-delete:disabled::after {
 	border-bottom: 1px solid var(--color-border);
 }
 
+.editor-assist {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 0.55rem;
+	align-items: center;
+}
+
 .panel-header small {
 	color: var(--color-ink-muted);
 	font-size: 0.8rem;
 	font-weight: 700;
 	letter-spacing: 0;
 	text-transform: none;
+}
+
+.editor-shortcuts {
+	position: relative;
+	text-transform: none;
+}
+
+.editor-shortcuts summary {
+	list-style: none;
+	cursor: pointer;
+	border: 1px solid var(--color-border);
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.72);
+	color: var(--color-ink-soft);
+	padding: 0.3rem 0.65rem;
+	font-size: 0.76rem;
+	font-weight: 800;
+	letter-spacing: 0;
+}
+
+.editor-shortcuts summary::-webkit-details-marker {
+	display: none;
+}
+
+.editor-shortcuts[open] summary {
+	border-color: var(--python-focus-ring);
+	box-shadow: 0 0 0 3px var(--python-focus-glow);
+	color: var(--color-ink);
+}
+
+.editor-shortcuts ul {
+	position: absolute;
+	z-index: 25;
+	top: calc(100% + 0.5rem);
+	right: 0;
+	width: min(17.5rem, 78vw);
+	display: grid;
+	gap: 0.35rem;
+	margin: 0;
+	padding: 0.8rem 0.9rem;
+	border: 1px solid var(--color-border);
+	border-radius: 14px;
+	background: var(--color-surface-strong);
+	box-shadow: var(--shadow-soft);
+	color: var(--color-ink-soft);
+	font-size: 0.82rem;
+	font-weight: 700;
+	letter-spacing: 0;
+	line-height: 1.45;
+	text-transform: none;
+}
+
+.editor-shortcuts li {
+	margin-left: 1rem;
+}
+
+html.dark .editor-shortcuts summary {
+	border-color: rgba(148, 163, 184, 0.32);
+	background: rgba(15, 23, 42, 0.7);
+	color: #c8dce6;
+}
+
+html.dark .editor-shortcuts[open] summary {
+	border-color: rgba(94, 234, 212, 0.56);
+	color: #f8fbff;
+}
+
+html.dark .editor-shortcuts ul {
+	border-color: rgba(94, 234, 212, 0.22);
+	background: #0f1b2a;
+	color: #c8dce6;
 }
 
 .panel-link {
