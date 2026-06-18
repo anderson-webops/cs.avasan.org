@@ -572,8 +572,24 @@ export const scratchLevel1Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "GS11 Supplemental Project 1 – Save the Wizard",
-					content:
-						"Play through the demo and identify the game elements that need to be programmed: sprite behavior, controls, event reactions, variables, scoring, and end conditions.\n\nAdd a project comment that lists the implementation steps.\n\nThe wizard has been turned into a frog. Help him collect potions while avoiding skeletons to turn back into a wizard.\n\n1. Program the frog wizard so that when the green flag is clicked, he goes to the center of the screen, changes size, and moves with the arrow keys.\n2. Program the skeleton to start at a random position on the far right side and move left. When it touches the frog or the left edge, send it back to the right side.\n3. Program the potion with a similar reset pattern. For a harder version, make the potion wait a few seconds before appearing on the right again. Hint: use show/hide blocks.\n4. Add a level variable. Set it to 1 at the start of the game and use it to control win/loss progress.\n5. Create broadcasts for leveling up and leveling down. Leveling up at level 4 wins the game; otherwise, increase the level, switch costume, and increase size. Leveling down at level 1 loses the game; otherwise, decrease the level, switch costume, and decrease size.\n6. Broadcast the level-up or level-down messages when the skeletons or potion touch the frog.\n7. Add another skeleton for extra difficulty.\n8. Add sound effects and backdrop changes for the finishing touches.",
+					content: `**Project goal:** Help the wizard collect potions, avoid skeletons, and turn back from a frog into a wizard.
+
+**Planning targets:** Before programming, identify the sprite behavior, controls, event reactions, variables, scoring or level rules, and end conditions. Add a project comment that lists the implementation steps.
+
+**Build steps:**
+1. Program the frog wizard so that the green flag places it at the center, sets its size, and enables arrow-key movement.
+2. Program the skeleton to start at a random position on the far right and move left.
+3. When the skeleton touches the frog or the left edge, send it back to the right side.
+4. Program the potion with a similar reset pattern.
+5. Add a level variable, set it to 1 at the start, and use it to control win/loss progress.
+6. Create broadcasts for leveling up and leveling down.
+7. Leveling up at level 4 wins the game. Otherwise, increase the level, switch costume, and increase size.
+8. Leveling down at level 1 loses the game. Otherwise, decrease the level, switch costume, and decrease size.
+9. Broadcast the level-up or level-down messages when the skeletons or potion touch the frog.
+
+**Extensions:** Add another skeleton for extra difficulty. Add sound effects and backdrop changes for the finishing touches. For a harder potion pattern, make the potion wait a few seconds before appearing again.
+
+**Completion check:** The level variable should change exactly once per collision event, and the win/loss broadcasts should make the final state clear.`,
 					projectLink: "https://scratch.mit.edu/projects/332395747/",
 					solutionLink: "https://scratch.mit.edu/projects/330724703/"
 				},
@@ -667,8 +683,25 @@ export const scratchLevel1Course: RawCourse = {
 				},
 				{
 					title: "Optional Extra Practice – Typing Games",
-					content:
-						"This optional section supports the transition from Scratch Level 1 into Python Level 1.\n\nThe purpose of this section is to prepare for the shift from block-based to text-based coding and to strengthen typing and computer literacy skills. These typing games are optional and do not need to be completed in full. Choose games that feel useful, spend about 15 to 20 minutes practicing as needed, and move to the intermediate options if the beginner games feel too easy.\n\nOne of the biggest differences between Python and Scratch is that Python code is typed rather than assembled from blocks. Typing practice makes that transition smoother and reduces friction when writing Python programs.\n\nBeginner Typing Games:\n• Practice with the Keyboard – Typing Letters: https://scratch.mit.edu/projects/214833806/\n• Practice with the Keyboard – Typing Numbers: https://scratch.mit.edu/projects/214828609/\n• Practice with the Keyboard – Typing Letters Race: https://www.nitrotype.com/\n\nIntermediate Typing Games:\n• Cup Stack Typing: https://www.abcya.com/games/cup-stack-typing-game\n• Ghost Typing: https://www.abcya.com/games/ghost_typing\n• Koala Paddleboards (spelling and typing practice): https://www.abcya.com/games/spelling_practice\n\nAdvanced Typing Games:\n• Typing Rocket: https://www.abcya.com/games/typing_rocket\n• Type Racer: https://github.com/instruction-material/Python-Level-2/tree/main/PS12-Type-Racer"
+					content: `**Purpose:** This optional section supports the transition from Scratch Level 1 into Python Level 1.
+
+Typing practice is not required to complete the Scratch course, but it can make the move to text-based programming smoother. Choose games that feel useful, practice for about 15 to 20 minutes as needed, and move to the intermediate options if the beginner games feel too easy.
+
+**Why it matters:** Scratch programs are assembled from blocks, while Python programs are typed. Keyboard fluency reduces friction so more attention can go toward variables, loops, conditionals, and debugging.
+
+**Beginner typing games:**
+- Practice with the Keyboard - Typing Letters: https://scratch.mit.edu/projects/214833806/
+- Practice with the Keyboard - Typing Numbers: https://scratch.mit.edu/projects/214828609/
+- Practice with the Keyboard - Typing Letters Race: https://www.nitrotype.com/
+
+**Intermediate typing games:**
+- Cup Stack Typing: https://www.abcya.com/games/cup-stack-typing-game
+- Ghost Typing: https://www.abcya.com/games/ghost_typing
+- Koala Paddleboards: https://www.abcya.com/games/spelling_practice
+
+**Advanced typing games:**
+- Typing Rocket: https://www.abcya.com/games/typing_rocket
+- Type Racer: https://github.com/instruction-material/Python-Level-2/tree/main/PS12-Type-Racer`
 				}
 			],
 			supplementalProjects: [

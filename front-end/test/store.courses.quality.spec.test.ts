@@ -1915,8 +1915,9 @@ describe("course text quality normalization", () => {
 
 		const wheel = findItem(scratchLevel2!, /Wheel of Fortune/);
 		expect(wheel.content).toContain(
-			"secret word.\n\n1. Construct a word bank"
+			"**Lists and variables:**\n- A word-bank list stores possible secret words"
 		);
+		expect(wheel.content).toContain("**Game flow:**");
 		expect(wheel.content).not.toMatch(/\band and\b/i);
 	});
 
@@ -1988,6 +1989,80 @@ describe("course text quality normalization", () => {
 		const masterProject = findItem(course!, /Master Project Planning/);
 		expect(masterProject.content).toContain(
 			"The result can be evaluated with an appropriate metric"
+		);
+	});
+
+	it("keeps Scratch project prompts structured instead of inline numbered walls", async () => {
+		const [scratchLevel1, scratchLevel2] = await Promise.all([
+			loadRawCourse("scratch-level-1"),
+			loadRawCourse("scratch-level-2")
+		]);
+		expect(scratchLevel1).not.toBeNull();
+		expect(scratchLevel2).not.toBeNull();
+
+		const levelOneSource = fs.readFileSync(
+			"src/stores/courses/scratch-level-1.ts",
+			"utf8"
+		);
+		const levelTwoSource = fs.readFileSync(
+			"src/stores/courses/scratch-level-2.ts",
+			"utf8"
+		);
+		const source = `${levelOneSource}\n${levelTwoSource}`;
+
+		const requiredSections = [
+			"**Project goal:** Help the wizard collect potions",
+			"**Project goal:** Use arrow-key movement and compound condition checks",
+			"**Butterfly controls:**",
+			"**State to track:**",
+			"**Lists and variables:**",
+			"**Custom blocks to build:**",
+			"**Function design:**",
+			"**Function set:**",
+			"**Function roles:**",
+			"**Level structure:**",
+			"**Pal movement:**",
+			"**Level transitions:**"
+		];
+
+		for (const section of requiredSections) {
+			expect(source).toContain(section);
+		}
+
+		expect(source).not.toContain(
+			"Play through the demo and identify the game elements that need to be programmed"
+		);
+		expect(source).not.toContain(
+			"Use the arrow keys to help the baby chick find its parents.\\n1. Program the chick"
+		);
+		expect(source).not.toContain(
+			"Welcome to the Wheel of Fortune! In this game, the user has a certain number of guesses"
+		);
+		expect(source).not.toContain(
+			"Build a platformer where Pal collects magic keys and moves through multiple levels.\\n1. Inspect"
+		);
+
+		const saveTheWizard = findItem(scratchLevel1!, /Save the Wizard/);
+		expect(saveTheWizard.content).toContain(
+			"The level variable should change exactly once per collision event"
+		);
+
+		const babyChick = findItem(scratchLevel2!, /Baby Chick/);
+		expect(babyChick.content).toContain(
+			"The chick must update its message correctly as it moves between the four possible touching states"
+		);
+
+		const rockPaperScissors = findItem(
+			scratchLevel2!,
+			/Rock Paper Scissors/
+		);
+		expect(rockPaperScissors.content).toContain(
+			"handle invalid input, ties, and all six non-tie matchups"
+		);
+
+		const platformerPal = findItem(scratchLevel2!, /Platformer Pal/);
+		expect(platformerPal.content).toContain(
+			"Each level should reset cleanly, use the correct broadcast, and avoid running old level scripts"
 		);
 	});
 

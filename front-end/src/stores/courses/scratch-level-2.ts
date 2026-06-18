@@ -195,15 +195,40 @@ export const scratchLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "GM3 Supplemental Project 1: Baby Chick",
-					content:
-						"Use the arrow keys to help the baby chick find its parents.\n1. Program the chick so it can move up, down, left, and right with the arrow keys.\n2. When the green flag is clicked, make the rooster point to the right and then move back and forth across the screen forever. (Hint: Make the rooster turn 180 degrees randomly while walking.)\n3. Repeat step 2 for the hen.\n4. Program the chick to recognize whether it is with both parents, only one parent, or neither parent. If it is touching both parents, make it say “I love my parents!”; if it is just touching its mom, make it say “Hi, Mom!”; if it is just touching its dad, make it say “Hi, Dad!”; and if it is not touching either, make it say “Where are my parents?”",
+					content: `**Project goal:** Use arrow-key movement and compound condition checks to help the baby chick find its parents.
+
+**Build steps:**
+1. Program the chick so it can move up, down, left, and right with the arrow keys.
+2. When the green flag is clicked, make the rooster point right and move back and forth forever.
+3. Add variety by letting the rooster turn 180 degrees randomly while walking.
+4. Repeat the same movement pattern for the hen.
+5. Program the chick to detect four states: touching both parents, touching only the hen, touching only the rooster, or touching neither parent.
+6. Display a different message for each state, such as "I love my parents!", "Hi, Mom!", "Hi, Dad!", or "Where are my parents?"
+
+**Completion check:** The chick must update its message correctly as it moves between the four possible touching states.`,
 					projectLink: "https://scratch.mit.edu/projects/335794156/",
 					solutionLink: "https://scratch.mit.edu/projects/335790153/"
 				},
 				{
 					title: "GM3 Supplemental Project 2: Save the Butterfly",
-					content:
-						"Use the left and right arrow keys to help the butterfly escape the hungry frog.\n1. When the green flag is pressed, make the butterfly go to (-60, 0) and the frog go to (-170, 0).\n2. Next, the frog should say “I'm hungry”, “Ooh, a butterfly!”, and “I'm coming to get you!” for two seconds each.\n3. After the frog broadcasts, it should start moving a random number of steps from 0 to 3 for the rest of the game. To make the game harder, increase the number of steps.\n4. Help the butterfly escape by using a “wait until” block so it moves forward 5 steps when the player alternates between the left and right keys.\n5. Holding down both keys can bypass the intended controls, so use complex conditionals to prevent that shortcut.\n6. If the butterfly is touching the frog, make it stop the other scripts, broadcast that the player lost, and hide. Add a green-flag reset that shows it again at the beginning.\n7. If the butterfly touches the dark purple tree on the other side of the screen, make it broadcast that the player won and glide off the screen.\n8. When the frog receives these win and lose broadcasts, make it stop the other scripts and respond accordingly.",
+					content: `**Project goal:** Use alternating-key controls, random movement, broadcasts, and compound conditionals to help the butterfly escape the frog.
+
+**Setup:**
+1. When the green flag is pressed, place the butterfly at (-60, 0) and the frog at (-170, 0).
+2. Have the frog say "I'm hungry", "Ooh, a butterfly!", and "I'm coming to get you!" for two seconds each.
+3. After the introduction, make the frog move a random number of steps from 0 to 3 for the rest of the game. Increase the step range for a harder version.
+
+**Butterfly controls:**
+1. Use a wait-until pattern so the butterfly moves forward 5 steps when the player alternates between the left and right arrow keys.
+2. Prevent the shortcut where holding both keys down bypasses the intended control pattern.
+3. Use complex conditionals to make the control rule explicit.
+
+**Win and loss rules:**
+1. If the butterfly touches the frog, stop the butterfly scripts, broadcast a loss message, hide the butterfly, and reset visibility on the next green flag.
+2. If the butterfly touches the dark purple tree, broadcast a win message and glide the butterfly off the screen.
+3. When the frog receives either the win or loss broadcast, stop the remaining scripts and respond with the matching outcome.
+
+**Completion check:** The butterfly should only move with the intended alternating-key pattern, and the win/loss broadcasts should end the game cleanly.`,
 					projectLink: "https://scratch.mit.edu/projects/335798048",
 					solutionLink: "https://scratch.mit.edu/projects/335794365"
 				},
@@ -455,15 +480,44 @@ export const scratchLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "GM7 Supplemental Project 1: Multiple Magic",
-					content:
-						"Build a game that tests how quickly the player can calculate multiples of a number.\n\n1. When the green flag is pressed, create a target-number variable and set it to a random number between 1 and 10.\n2. Make a list to keep track of which multiples the player has entered, and a variable to keep track of their score.\n3. Have the wizard introduce the game and then continuously ask for multiples of the target number.\n4. Check if the answer is a multiple of that number, and also check if this multiple has already been entered. Play a sound, update the score, and update the list depending on whether the guess counts toward the score.\n5. For a timed version, create a timer variable and give the user 30 seconds to play the game.",
+					content: `**Project goal:** Build a quick math game where the player enters multiples of a randomly chosen target number.
+
+**State to track:**
+- target-number: the number whose multiples are accepted.
+- score: the number of valid, non-duplicate multiples entered.
+- A list of accepted multiples so repeated answers do not count twice.
+
+**Game flow:**
+1. When the green flag is pressed, set target-number to a random number from 1 to 10.
+2. Clear the accepted-multiples list and reset the score.
+3. Have the wizard introduce the game and repeatedly ask for multiples of the target number.
+4. Check two conditions for each answer: the answer must be divisible by the target number and must not already be in the list.
+5. For a valid new multiple, play a success sound, update the score, and add the answer to the list.
+6. For an invalid or repeated answer, give feedback without increasing the score.
+
+**Extension:** Add a timer variable and give the player 30 seconds to score as many valid multiples as possible.`,
 					projectLink: "https://scratch.mit.edu/projects/337820507",
 					solutionLink: "https://scratch.mit.edu/projects/337817856"
 				},
 				{
 					title: "GM7 Supplemental Project 2: Wheel of Fortune",
-					content:
-						"Welcome to the Wheel of Fortune! In this game, the user has a certain number of guesses to guess every letter of the secret word.\n1. Construct a word bank using a list, from which the computer will choose a random word of at the beginning of each game.\n2. Once the secret word is decided, add all the letters of the word to a new list and count the total number of unique letters in the word. Use this variable to keep track of the total number of letters the user needs to guess correctly. As you are adding the letters, make sure you don't add the same letter twice.\n3. Ask the user to guess a letter. If they guess a letter that is in the secret word (and they have not already guessed this letter), add this letter to the guess list and update the variable you are using to keep track of how many correct guesses the user has made.\n4. Allow the user a certain number of guesses to win the game (for example, the length of the word, plus 5).\n5. The user wins the game if they have correctly guessed all of the letters in the word, and they lose if they run out of guesses!",
+					content: `**Project goal:** Build a word-guessing game where the player has a limited number of guesses to find every unique letter in a secret word.
+
+**Lists and variables:**
+- A word-bank list stores possible secret words.
+- A secret-letter list stores the unique letters in the chosen word.
+- A guess list stores letters already guessed correctly.
+- A remaining-guesses variable controls when the game ends.
+
+**Game flow:**
+1. Choose a random word from the word bank at the beginning of each game.
+2. Add the unique letters from the secret word to the secret-letter list. Do not add the same letter twice.
+3. Ask the player to guess one letter at a time.
+4. If the guessed letter is in the secret word and has not already been guessed, add it to the guess list and update the correct-guess count.
+5. Reduce the remaining guess count after each guess or after each incorrect guess, depending on the chosen game rule.
+6. The player wins after guessing all unique letters and loses after running out of guesses.
+
+**Completion check:** Repeated guesses should not count as new progress, and the game should clearly show whether the player won or lost.`,
 					projectLink: "https://scratch.mit.edu/projects/340691786",
 					solutionLink: "https://scratch.mit.edu/projects/342643080"
 				},
@@ -484,15 +538,36 @@ export const scratchLevel2Course: RawCourse = {
 				},
 				{
 					title: "GM8 Project 1: My First Functions",
-					content:
-						"1. Create a function that makes the cat speak a given number of times (the input will be the number of times).\n2. Create a function that makes the cat draw a square of a given size (the input will be the side length of the square).\n3. Create a function that makes the cat jump (the input will be the height of the jump).\n4. Create a function that makes the cat teleport by making the cat spin in a circle, go to a random spot with a sound effect, and then spin again (no inputs).\n5. When the green flag is clicked, use these functions to make the cat jump 100 steps, speak 3 times, draw a square of size 100, teleport, and then draw another square.",
+					content: `**Project goal:** Create reusable custom blocks so the cat can perform several actions without duplicating scripts.
+
+**Custom blocks to build:**
+1. A speaking function that makes the cat speak a given number of times.
+2. A square-drawing function that takes the side length as input.
+3. A jump function that takes the jump height as input.
+4. A teleport function with no inputs: spin, move to a random spot with a sound effect, then spin again.
+
+**Green-flag sequence:** Use the custom blocks to make the cat jump 100 steps, speak 3 times, draw a square of size 100, teleport, and draw another square.
+
+**Completion check:** Each behavior should be defined once as a custom block and then called from the main green-flag script.`,
 					projectLink: "https://scratch.mit.edu/projects/315773207",
 					solutionLink: "https://scratch.mit.edu/projects/315770711/"
 				},
 				{
 					title: "GM8 Project 2: Talent Show II",
-					content:
-						"Build a talent-show project where the cat performs different talents using custom functions and user input.\n1. Create functions for each of the cat's talents, such as playing a song with an inputted number of notes or spinning in the air an inputted number of times. Create at least four talents.\n2. When the green flag is clicked, make the cat start the talent show. The cat asks the user which talent to perform, and then asks for the input that function needs.",
+					content: `**Project goal:** Build a talent-show project where user input selects which custom function the cat performs.
+
+**Function design:**
+1. Create at least four talent functions.
+2. Each function should have a clear name, such as play song, spin, jump, or draw shape.
+3. At least two talents should use inputs, such as number of notes, number of spins, jump height, or drawing size.
+
+**Interaction flow:**
+1. When the green flag is clicked, the cat introduces the talent show.
+2. Ask which talent should be performed.
+3. Ask for any input value that the selected talent needs.
+4. Call the matching custom block with the selected input.
+
+**Completion check:** The same talent function should work with different input values, proving that the custom block is reusable.`,
 					projectLink: "https://scratch.mit.edu/projects/309293557",
 					solutionLink: "https://scratch.mit.edu/projects/309287208/"
 				},
@@ -508,15 +583,36 @@ export const scratchLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "GM8 Supplemental Project 1: Extra Functions",
-					content:
-						"1. Write a function that draws a shape! It should take in as input the number of sides and the size of each side. To calculate how many degrees to turn after drawing each side, use 360 divided by the number of sides.\n2. Write a function that takes in a starting number and an ending number, and make the function count from a starting number up to (and including) an ending number. (Challenge: If the ending number is smaller than the starting number, make it count down from the starting number.)\n3. Write a function that takes in two numbers and reports the result of addition, subtraction, multiplication, and division with the two numbers. (Challenge: calculate the average of the two numbers as well.)\n4. Write a function that takes in a number and says the first 10 multiples of that number. (Challenge: take in a number of multiples as another input, and say that many multiples of the number.)",
+					content: `**Project goal:** Practice custom blocks with inputs by building several small reusable tools.
+
+**Function set:**
+1. Shape drawer: takes the number of sides and side length as inputs. Turn 360 / sides degrees after each side.
+2. Counter: takes a starting number and ending number, then counts inclusively from start to end.
+3. Calculator reporter: takes two numbers and reports the sum, difference, product, and quotient.
+4. Multiples announcer: takes a number and says the first 10 multiples of that number.
+
+**Extensions:**
+- Make the counter count down if the ending number is smaller than the starting number.
+- Add average to the calculator reporter.
+- Add a second input to the multiples function so it can say any requested number of multiples.
+
+**Completion check:** Each function should be reusable with different inputs and should avoid copy-pasted blocks when the behavior is the same.`,
 					projectLink: "https://scratch.mit.edu/projects/339918479",
 					solutionLink: "https://scratch.mit.edu/projects/339602908"
 				},
 				{
 					title: "GM8 Supplemental Project 2: Rock Paper Scissors",
-					content:
-						"Build a rock-paper-scissors game with custom functions.\n1. Inspect the starter and identify the pink function blocks that need behavior.\n2. The “get computer answer” function should randomly pick rock, paper, or scissors and store it in a variable. A list can make this selection easier.\n3. The “get player answer” function should ask the player for rock, paper, or scissors and store it in a variable. If the user inputs something else, keep asking until the input is rock, paper, or scissors.\n4. The “find winner” function should compare the two answers and determine the winner. Rock beats scissors, scissors beats paper, and paper beats rock.\n5. Optional helper functions can handle player wins, computer wins, and ties.",
+					content: `**Project goal:** Build a rock-paper-scissors game whose main steps are separated into custom functions.
+
+**Function roles:**
+1. get computer answer: randomly choose rock, paper, or scissors and store the result in a variable. A list can simplify the random choice.
+2. get player answer: ask for rock, paper, or scissors and store the result in a variable.
+3. validate player answer: keep asking if the input is not rock, paper, or scissors.
+4. find winner: compare both answers using the rules rock beats scissors, scissors beats paper, and paper beats rock.
+
+**Extension:** Add helper functions for player wins, computer wins, and ties so the feedback code stays organized.
+
+**Completion check:** The game should handle invalid input, ties, and all six non-tie matchups without duplicated decision logic.`,
 					projectLink: "https://scratch.mit.edu/projects/339972570/",
 					solutionLink: "https://scratch.mit.edu/projects/339731727/"
 				},
@@ -622,8 +718,28 @@ export const scratchLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "GM9 Supplemental Project 1: Platformer Pal",
-					content:
-						'Build a platformer where Pal collects magic keys and moves through multiple levels.\n1. Inspect the backdrops for each level and create broadcasts for Level 1, Level 2, and Level 3 so each level\'s code stays organized.\n2. When the green flag is clicked, switch the backdrop to Level 1 and broadcast Level 1.\n3. When Pal receives Level 1, place Pal at the starting point and create a forever loop for ground checks and arrow-key movement. Functions can keep this movement code easier to manage.\n4. To keep Pal on the ground, move Pal down when it is not touching green. (Hint: try using a "repeat until" block.)\n5. Pal should move left and right using the left and right arrow keys.\n6. If the user presses the up arrow key, make Pal jump. To make Pal jump, increase its y position and let it move left and right. Challenge: prevent Pal from jumping through platforms.\n7. Choose where the magical key should be placed for Level 1, and tell it to go there when it receives the message broadcast.\n8. When Pal gets to the key, switch to the next backdrop, broadcast the next level, and stop the Level 1 script.\n9. Repeat the same structure for Level 2, with a pitfall reset when Pal touches the brown pitfall.\n10. Repeat the same structure for Level 3, placing teleporters and making Pal go to teleporter out when it touches teleporter in.\n11. When the user collects the key on Level 3, broadcast the end of the game and switch the backdrop.\n12. Add sounds or other special effects to support the game state changes.',
+					content: `**Project goal:** Build a multi-level platformer where Pal collects magic keys and moves through level-specific rules.
+
+**Level structure:**
+1. Inspect the backdrops for each level and create broadcasts for Level 1, Level 2, and Level 3.
+2. When the green flag is clicked, switch to the Level 1 backdrop and broadcast Level 1.
+3. Keep each level's setup and movement scripts tied to its own broadcast so the code stays organized.
+
+**Pal movement:**
+1. When Pal receives Level 1, place Pal at the starting point.
+2. Use a forever loop for ground checks and arrow-key movement.
+3. Move Pal down when it is not touching green so gravity keeps it on the ground.
+4. Move Pal left and right with the arrow keys.
+5. When the up arrow is pressed, make Pal jump by increasing its y position. For a harder version, prevent Pal from jumping through platforms.
+
+**Level transitions:**
+1. Place the magic key for Level 1 and show it when Level 1 starts.
+2. When Pal reaches the key, switch to the next backdrop, broadcast the next level, and stop the Level 1 script.
+3. Repeat the structure for Level 2, including a pitfall reset when Pal touches the brown pitfall.
+4. Repeat the structure for Level 3, including teleporters that move Pal from the teleporter in to the teleporter out.
+5. When Pal collects the Level 3 key, broadcast the end of the game and switch to the ending backdrop.
+
+**Completion check:** Each level should reset cleanly, use the correct broadcast, and avoid running old level scripts after the backdrop changes.`,
 					projectLink: "https://scratch.mit.edu/projects/343651574/",
 					solutionLink: "https://scratch.mit.edu/projects/343348430/"
 				},
@@ -714,8 +830,25 @@ export const scratchLevel2Course: RawCourse = {
 				},
 				{
 					title: "Optional Extra Practice: Typing Games",
-					content:
-						"This optional section is for the transition from Scratch into Python Level 1.\n\nThe purpose is to prepare for the shift from block-based to text-based coding and to strengthen typing and keyboard fluency. These games are optional and do not need to be completed in full. Choose games that feel useful, practice for about 15 to 20 minutes as needed, and move to the intermediate options if the beginner games feel too easy.\n\nOne of the biggest differences between Python and Scratch is that Python code must be typed rather than assembled from blocks. Typing practice makes it easier to focus on programming ideas instead of searching for keys.\n\nBeginner Typing Games:\n- Practice with the Keyboard - Typing Letters: https://scratch.mit.edu/projects/214833806/\n- Practice with the Keyboard - Typing Numbers: https://scratch.mit.edu/projects/214828609/\n- Practice with the Keyboard - Typing Letters Race: https://www.nitrotype.com/\n\nIntermediate Typing Games:\n- Cup Stack Typing: https://www.abcya.com/games/cup-stack-typing-game\n- Ghost Typing: https://www.abcya.com/games/ghost_typing\n- Koala Paddleboards (spelling and typing practice): https://www.abcya.com/games/spelling_practice\n\nAdvanced Typing Games:\n- Typing Rocket: https://www.abcya.com/games/typing_rocket\n- Type Racer: https://github.com/instruction-material/Python-Level-2/tree/main/PS12-Type-Racer"
+					content: `**Purpose:** This optional section supports the transition from Scratch into Python Level 1.
+
+Typing practice is not required to complete the Scratch course, but it can make the move to text-based programming smoother. Choose games that feel useful, practice for about 15 to 20 minutes as needed, and move to the intermediate options if the beginner games feel too easy.
+
+**Why it matters:** Scratch programs are assembled from blocks, while Python programs are typed. Keyboard fluency makes it easier to focus on programming ideas instead of searching for keys.
+
+**Beginner typing games:**
+- Practice with the Keyboard - Typing Letters: https://scratch.mit.edu/projects/214833806/
+- Practice with the Keyboard - Typing Numbers: https://scratch.mit.edu/projects/214828609/
+- Practice with the Keyboard - Typing Letters Race: https://www.nitrotype.com/
+
+**Intermediate typing games:**
+- Cup Stack Typing: https://www.abcya.com/games/cup-stack-typing-game
+- Ghost Typing: https://www.abcya.com/games/ghost_typing
+- Koala Paddleboards: https://www.abcya.com/games/spelling_practice
+
+**Advanced typing games:**
+- Typing Rocket: https://www.abcya.com/games/typing_rocket
+- Type Racer: https://github.com/instruction-material/Python-Level-2/tree/main/PS12-Type-Racer`
 				}
 			],
 			supplementalProjects: [
