@@ -27,6 +27,20 @@ const MICROPIP_PACKAGES = new Map([
 	["networkx", "networkx"],
 	["seaborn", "seaborn"]
 ]);
+const PYTHON_IDE_RUNTIME_MODULES = [
+	"_classes_artifacts",
+	"_classes_keras",
+	"_classes_pgzero",
+	"keras",
+	"pgzero",
+	"pgzrun",
+	"pygame",
+	"pysynth",
+	"streamlit",
+	"tensorflow",
+	"turtle",
+	"zrect"
+];
 const BROWSER_SHIM_MODULES = new Set([
 	"keras",
 	"pysynth",
@@ -312,6 +326,50 @@ function releaseRuntimeCallbackRegistries(pyodide: PyodideAPI) {
 export async function releasePythonIdeRuntimeCallbacks() {
 	if (!pyodidePromise) return;
 	releaseRuntimeCallbackRegistries(await pyodidePromise);
+}
+
+function clearRuntimeShimModules(pyodide: PyodideAPI) {
+	pyodide.runPython(`
+import builtins
+import json
+import sys
+
+__classes_runtime_module_roots = __import__("json").loads(${escapePythonString(JSON.stringify(PYTHON_IDE_RUNTIME_MODULES))})
+for __classes_runtime_name in list(sys.modules):
+    if any(
+        __classes_runtime_name == __classes_root
+        or __classes_runtime_name.startswith("{}.".format(__classes_root))
+        for __classes_root in __classes_runtime_module_roots
+    ):
+        sys.modules.pop(__classes_runtime_name, None)
+
+for __classes_builtin_name in (
+    "Actor",
+    "Rect",
+    "ZRect",
+    "screen",
+    "keyboard",
+    "keys",
+    "mouse",
+    "clock",
+    "sounds",
+    "music",
+    "images",
+    "pgzrun",
+    "show_chart",
+    "show_plots",
+):
+    if not hasattr(builtins, __classes_builtin_name):
+        continue
+    __classes_builtin_value = getattr(builtins, __classes_builtin_name)
+    __classes_builtin_owner = getattr(
+        __classes_builtin_value,
+        "__module__",
+        getattr(type(__classes_builtin_value), "__module__", ""),
+    )
+    if __classes_builtin_owner in ("_classes_pgzero", "_classes_artifacts"):
+        delattr(builtins, __classes_builtin_name)
+`);
 }
 
 function escapePythonString(value: string) {
@@ -2736,6 +2794,7 @@ export async function runPythonProject(options: RunPythonProjectOptions) {
 	const pyodide = await loadRuntime();
 	throwIfRunStopped(options);
 	releaseRuntimeCallbackRegistries(pyodide);
+	clearRuntimeShimModules(pyodide);
 	throwIfRunStopped(options);
 	window.__classesPythonIdeTurtle = options.turtleBridge;
 	window.__classesPythonIdeGame = options.gameBridge;

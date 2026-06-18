@@ -706,6 +706,27 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("sys.modules.pop(__classes_module_name, None)");
 	});
 
+	it("clears browser-owned runtime shim modules before each run", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+
+		expect(runtimeSource).toContain("const PYTHON_IDE_RUNTIME_MODULES");
+		expect(runtimeSource).toContain("function clearRuntimeShimModules");
+		expect(runtimeSource).toContain("clearRuntimeShimModules(pyodide)");
+		expect(runtimeSource).toContain("\"_classes_pgzero\"");
+		expect(runtimeSource).toContain("\"turtle\"");
+		expect(runtimeSource).toContain(
+			"sys.modules.pop(__classes_runtime_name, None)"
+		);
+		expect(runtimeSource).toContain("\"Actor\"");
+		expect(runtimeSource).toContain("\"show_chart\"");
+		expect(runtimeSource).toContain(
+			"delattr(builtins, __classes_builtin_name)"
+		);
+	});
+
 	it("keeps generated text-file persistence wired between runtime and page", () => {
 		const runtimeSource = readFileSync(
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
