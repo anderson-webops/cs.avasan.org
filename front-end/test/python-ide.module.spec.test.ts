@@ -348,6 +348,25 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("formatPythonRuntimeError(error)");
 	});
 
+	it("bounds output rendering so print-heavy runs stay responsive", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/pages/python-ide.vue"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain("const maxOutputLines = 500;");
+		expect(pageSource).toContain("const maxOutputTextLength = 12000;");
+		expect(pageSource).toContain("outputEntryTruncatedMessage");
+		expect(pageSource).toContain("outputHistoryTrimmedMessage");
+		expect(pageSource).toContain(
+			"text.length > maxOutputTextLength"
+		);
+		expect(pageSource).toContain(
+			"line.text !== outputHistoryTrimmedMessage"
+		);
+		expect(pageSource).toContain("maxOutputLines - 1");
+	});
+
 	it("checks requested stops before post-run capture and game loop startup", () => {
 		const runtimeSource = readFileSync(
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),

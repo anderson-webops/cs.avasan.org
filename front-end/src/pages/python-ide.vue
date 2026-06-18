@@ -186,6 +186,12 @@ interface ResolvedGameAsset {
 
 const imageAssetExtensions = [".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"];
 const audioAssetExtensions = [".wav", ".mp3", ".ogg"];
+const maxOutputLines = 500;
+const maxOutputTextLength = 12000;
+const outputEntryTruncatedMessage =
+	"\n[Output truncated to keep the browser responsive.]";
+const outputHistoryTrimmedMessage =
+	"Earlier output was hidden to keep the browser responsive.";
 
 const app = useAppStore();
 const route = useRoute();
@@ -343,11 +349,29 @@ const requestedStarterMode = computed(() => {
 
 function appendOutput(kind: OutputLine["kind"], text: string) {
 	if (!text) return;
+	const outputText =
+		text.length > maxOutputTextLength
+			? `${text.slice(0, maxOutputTextLength)}${outputEntryTruncatedMessage}`
+			: text;
+
 	outputLines.value.push({
 		id: outputCounter.value++,
 		kind,
-		text
+		text: outputText
 	});
+	if (outputLines.value.length <= maxOutputLines) return;
+
+	const visibleOutput = outputLines.value.filter(
+		line => line.text !== outputHistoryTrimmedMessage
+	);
+	outputLines.value = [
+		{
+			id: outputCounter.value++,
+			kind: "system",
+			text: outputHistoryTrimmedMessage
+		},
+		...visibleOutput.slice(-(maxOutputLines - 1))
+	];
 }
 
 function appendArtifact(artifact: RuntimeArtifact) {
