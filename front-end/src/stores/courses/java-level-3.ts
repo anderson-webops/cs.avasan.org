@@ -2089,12 +2089,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Positioning the Advanced Java Track",
 					content:
-						"Use this track after `C++ Level 3` when the next Java step needs real engineering weight rather than another syntax review. Prerequisite comfort: classes, data structures, recursion, file-backed command programs, parsing, and medium-size program organization. The new Java-specific goals are repeatable builds, packages, testable services, standard-library fluency, safer APIs, and capstone-scale architecture."
+						"**Concept path:** This track fits after `C++ Level 3` when the next Java step needs real engineering weight rather than another syntax review. It assumes comfort with classes, data structures, recursion, file-backed command programs, parsing, and medium-size program organization.\n**Java-specific goals:** The emphasis shifts to repeatable builds, packages, testable services, standard-library fluency, safer APIs, and capstone-scale architecture. The problem-solving ideas stay familiar while Java's tooling, library, and design conventions become explicit.\n**Evidence target:** By the end of the track, a project has named package boundaries, a thin console or UI layer, independently testable logic, documented edge cases, and a clear reason for each major data-structure or API choice."
 				},
 				{
 					title: "Packages, Builds, and Test Boundaries",
 					content:
-						"Move from single-folder Java exercises to package-organized projects. Cover: source roots, package names, public APIs, helper classes, command-line or IDE builds, JUnit-style test thinking even when using simple assertions, and why a program that is easy to test is usually easier to extend. Model logic should stay separate from console input."
+						"**Concept path:** Package-organized Java projects separate source roots, package names, public APIs, helper classes, build commands, and test entry points. This structure makes the program easier to navigate as it grows and prevents every file from depending on the console runner.\n**Practice targets:** Define a package name that matches the folder structure, keep public classes and helper classes in appropriate places, run the program from the command line or IDE, and create a small test harness even when formal JUnit setup is not used yet.\n**Design checkpoint:** Model logic belongs outside console input and output. A gradebook, parser, or scheduler is stronger when tests can call it without typing into `Scanner`, which is one reason testable code is usually easier to extend."
 				},
 				{
 					title: "AJ19 Project 1: Tested Gradebook Service",
@@ -2115,7 +2115,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ19 Project 3: Characterization Test Bug Fix",
 					content:
-						"Start with a small buggy service, write characterization tests that pin down the current behavior, then make a safe fix and update the tests only when the intended behavior is clear.",
+						"Characterization tests document what a buggy service currently does before the fix is attempted. The project flow is to capture the current behavior with small repeatable tests, identify the intended behavior, make one safe repair, and update the tests only when the intended behavior is clear. The strongest result includes one test that proves the bug existed and one test that proves the repaired behavior is stable.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ19-Characterization-Test-Bug-Fix"
 				}
@@ -2127,17 +2127,17 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Generics as API Contracts",
 					content:
-						"This section covers generics as a way to write reusable, type-safe APIs, not as angle-bracket decoration. Cover: generic classes, bounded type parameters, generic methods, why raw types lose safety, and how good generic APIs make invalid combinations hard to express."
+						"**Concept path:** Generics are API contracts for reusable, type-safe code, not angle-bracket decoration. A generic class or method states which type varies while preserving compile-time checks that would be lost with raw `Object` values.\n**Core topics:** Generic classes, generic methods, bounded type parameters, raw-type warnings, and invalid combinations that a well-designed generic API can reject before runtime.\n**Evidence target:** A correct generic design explains the type parameter in plain language, demonstrates at least two concrete type uses, and avoids unchecked casts unless there is a documented reason."
 				},
 				{
 					title: "Interfaces, Comparators, and Collection Choices",
 					content:
-						"Use interfaces to separate what a component promises from how it stores data. Cover: `Comparable`, `Comparator`, `List`, `Set`, `Map`, `Queue`, `PriorityQueue`, iteration order, uniqueness, lookup behavior, and choosing a collection based on required operations rather than habit."
+						"**Concept path:** Interfaces separate what a component promises from how it stores data. Collection APIs become clearer when the required behavior is named first: ordering, uniqueness, lookup by key, priority access, queue behavior, or stable iteration.\n**Core topics:** `Comparable`, `Comparator`, `List`, `Set`, `Map`, `Queue`, `PriorityQueue`, iteration order, uniqueness rules, lookup behavior, and custom ordering logic.\n**Decision checkpoint:** The collection choice comes from the operations the program performs most often, not from habit. A scheduler, registry, search index, and report builder each justify different tradeoffs."
 				},
 				{
 					title: "Records as Immutable Data Carriers",
 					content:
-						"Java `record` types are useful for small immutable data carriers. Cover the generated constructor, accessors, `equals`, `hashCode`, and `toString`; compact constructors for validation; records implementing interfaces; and why normal classes are still better for mutable objects, inheritance hierarchies, or behavior-heavy domain models."
+						"**Concept path:** Java `record` types are useful for small immutable data carriers. A record automatically provides a canonical constructor, accessors, `equals`, `hashCode`, and `toString`, which reduces boilerplate when the object mainly represents a named bundle of values.\n**Core topics:** Compact constructors for validation, records implementing interfaces, records as map keys or report rows, and the limits of records when a domain object needs mutation, inheritance, or substantial behavior.\n**Design checkpoint:** A record is a good fit for immutable snapshots such as parsed rows, task requests, coordinates, or score entries. A normal class remains better when identity, lifecycle, mutation, or polymorphic behavior is central."
 				},
 				{
 					title: "AJ20 Project 1: Generic Repository and Query Filters",
@@ -2170,12 +2170,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "File-Backed Data Pipelines",
 					content:
-						"Connect Java file I/O to prior parser and persistence habits from C++. Cover: reading lines, validating records, representing bad rows, writing clean output, preserving original data when import fails, and keeping parsing separate from reporting."
+						"**Concept path:** Java file I/O connects naturally to parser and persistence habits from C++. A file-backed pipeline reads raw text, validates records, separates accepted rows from rejected rows, and writes output without corrupting the original data.\n**Core topics:** Reading lines, validating required fields, representing bad rows, writing clean output, preserving existing data when import fails, and keeping parsing separate from reporting.\n**Evidence target:** A reliable pipeline shows accepted-row counts, rejected-row reasons, one malformed-input case, and one output file or report that can be regenerated consistently."
 				},
 				{
 					title: "Lambdas, Streams, and Readable Transformations",
 					content:
-						"Lambdas and streams are tools for clear transformations over collections. Cover: `map`, `filter`, `sorted`, `collect`, grouping, custom comparators, and when an explicit loop is still better because the stateful logic would make a stream harder to read."
+						"**Concept path:** Lambdas and streams are tools for clear transformations over collections. They are most useful when the operation can be described as filtering, mapping, sorting, grouping, or collecting rather than mutating many pieces of state at once.\n**Core topics:** `map`, `filter`, `sorted`, `collect`, grouping, custom comparators, method references, and the readability tradeoff between stream chains and explicit loops.\n**Decision checkpoint:** A stream is a good fit when each stage has a clear purpose and minimal hidden state. An explicit loop is better when the logic depends on multiple changing variables, early exits, or step-by-step debugging."
 				},
 				{
 					title: "AJ21 Project 1: Log Analyzer Pipeline",
@@ -2208,17 +2208,17 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Executors, Tasks, and Shared-State Discipline",
 					content:
-						"Concurrency is introduced through bounded task execution rather than raw thread chaos. Cover: `Runnable`, `Callable`, `ExecutorService`, futures, immutable task inputs, synchronized shared state when necessary, and why most bugs come from unclear ownership of mutable data."
+						"**Concept path:** Java concurrency begins with bounded task execution rather than raw thread chaos. An executor manages a controlled pool of workers, while each task keeps its input clear and reports its result through a stable return value or future.\n**Core topics:** `Runnable`, `Callable`, `ExecutorService`, futures, immutable task inputs, deterministic reporting, synchronized shared state when necessary, and ownership rules for mutable data.\n**Safety checkpoint:** Most beginner concurrency bugs come from unclear ownership of mutable state. A correct design identifies which data is task-local, which data is shared, and which code is allowed to mutate shared state."
 				},
 				{
 					title: "Capstone Architecture and Java-Specific Readiness",
 					content:
-						"Close the advanced Java track by requiring architecture decisions: packages, service boundaries, interfaces, data models, test harnesses, error handling, and one concurrency or event-processing component. Be ready afterward for serious Java design-pattern work, larger data-structure projects, or a service/application course."
+						"**Concept path:** The capstone brings the advanced Java track together through explicit architecture decisions. Packages, service boundaries, interfaces, data models, test harnesses, error handling, and one concurrency or event-processing component all need a clear reason to exist.\n**Readiness target:** A strong capstone demonstrates preparation for serious Java design-pattern work, larger data-structure projects, or a service/application course. The code is explainable by responsibilities and data flow, not only by a list of files.\n**Review target:** The final review identifies one strong design choice, one tradeoff that was accepted deliberately, and one concrete improvement that would make the system easier to test, extend, or debug."
 				},
 				{
 					title: "AJ22 Project 1: Concurrent Task Runner",
 					content:
-						"Build a task runner that accepts jobs, executes them with a small executor pool, records success or failure, and prints a final report in deterministic order. Explain which data is shared and how they kept it safe.",
+						"Build a task runner that accepts jobs, executes them with a small executor pool, records success or failure, and prints a final report in deterministic order. The design explanation names task-local data, shared data, synchronization or immutability choices, and the reason the final output remains stable even when tasks finish in different orders.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ22-Concurrent-Task-Runner"
 				},

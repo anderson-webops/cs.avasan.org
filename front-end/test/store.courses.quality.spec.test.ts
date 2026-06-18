@@ -934,6 +934,35 @@ describe("course text quality normalization", () => {
 		);
 	});
 
+	it("keeps Java Level 3 advanced track source free of planning shorthand", async () => {
+		const course = await loadRawCourse("java-level-3");
+		expect(course).not.toBeNull();
+		const corpus = allCourseText(course);
+		const source = fs.readFileSync(
+			"src/stores/courses/java-level-3.ts",
+			"utf8"
+		);
+		const advancedTrackSource = source.slice(
+			source.indexOf(
+				'title: "AJ19 Post-C++ Java Tooling, Testing, and Packages"'
+			)
+		);
+
+		expect(advancedTrackSource).not.toMatch(/\bCover:/);
+		expect(advancedTrackSource).not.toMatch(
+			/Start with a small buggy service/i
+		);
+		expect(corpus).toContain(
+			"Package-organized Java projects separate source roots, package names, public APIs, helper classes, build commands, and test entry points"
+		);
+		expect(corpus).toContain(
+			"Generics are API contracts for reusable, type-safe code"
+		);
+		expect(corpus).toContain(
+			"Java concurrency begins with bounded task execution rather than raw thread chaos"
+		);
+	});
+
 	it("keeps early Python Turtle prompts structured around planning and verification", async () => {
 		const course = await loadRawCourse("python-level-1");
 		expect(course).not.toBeNull();
