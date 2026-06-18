@@ -1309,7 +1309,17 @@ def _rect_parts(value):
     if isinstance(value, Actor):
         return value.left, value.top, value.width, value.height
 
-    if len(value) == 2 and len(value[0]) == 2 and len(value[1]) == 2:
+    if hasattr(value, "rect"):
+        rect_value = getattr(value, "rect")
+        if rect_value is not value:
+            return _rect_parts(rect_value)
+
+    try:
+        value_length = len(value)
+    except Exception:
+        raise TypeError("Expected a Rect, object with rect, ((x, y), (w, h)), or (x, y, w, h).")
+
+    if value_length == 2 and len(value[0]) == 2 and len(value[1]) == 2:
         return (
             _number(value[0][0]),
             _number(value[0][1]),
@@ -1317,7 +1327,7 @@ def _rect_parts(value):
             _number(value[1][1]),
         )
 
-    if len(value) == 4:
+    if value_length == 4:
         return (
             _number(value[0]),
             _number(value[1]),
@@ -1325,7 +1335,16 @@ def _rect_parts(value):
             _number(value[3]),
         )
 
-    raise TypeError("Expected a Rect, Actor, ((x, y), (w, h)), or (x, y, w, h).")
+    raise TypeError("Expected a Rect, object with rect, ((x, y), (w, h)), or (x, y, w, h).")
+
+def _rect_parts_from_args(args):
+    if len(args) == 1:
+        return _rect_parts(args[0])
+    if len(args) == 2:
+        return _rect_parts((args[0], args[1]))
+    if len(args) == 4:
+        return tuple(_number(value) for value in args)
+    raise TypeError("Rect expects (x, y, width, height), ((x, y), (width, height)), or object with rect.")
 
 def _normalize_color(color):
     if isinstance(color, str):
@@ -1455,14 +1474,16 @@ def _call_optional_named(name, named_args, fallback_args=()):
 
 class Rect:
     def __init__(self, *args):
-        if len(args) == 1:
-            self.x, self.y, self.width, self.height = _rect_parts(args[0])
-        elif len(args) == 2:
-            self.x, self.y, self.width, self.height = _rect_parts((args[0], args[1]))
-        elif len(args) == 4:
-            self.x, self.y, self.width, self.height = [_number(value) for value in args]
-        else:
-            raise TypeError("Rect expects (x, y, width, height) or ((x, y), (width, height)).")
+        self.x, self.y, self.width, self.height = _rect_parts_from_args(args)
+
+    def __iter__(self):
+        return iter((self.x, self.y, self.width, self.height))
+
+    def __len__(self):
+        return 4
+
+    def __getitem__(self, index):
+        return (self.x, self.y, self.width, self.height)[index]
 
     @property
     def left(self):
@@ -1635,6 +1656,10 @@ class Rect:
         inflated = self.copy()
         inflated.inflate_ip(width, height)
         return inflated
+
+    def update(self, *args):
+        self.x, self.y, self.width, self.height = _rect_parts_from_args(args)
+        return None
 
     def collidepoint(self, *args):
         if self.width <= 0 or self.height <= 0:

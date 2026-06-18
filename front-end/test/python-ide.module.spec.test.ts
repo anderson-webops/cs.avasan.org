@@ -1350,6 +1350,18 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("def topleft(self):");
 		expect(runtimeSource).toContain("def midbottom(self):");
 		expect(runtimeSource).toContain("def move_ip(self, x, y=None):");
+		expect(runtimeSource).toContain("def _rect_parts_from_args(args):");
+		expect(runtimeSource).toContain("if hasattr(value, \"rect\"):");
+		expect(runtimeSource).toContain("return _rect_parts(rect_value)");
+		expect(runtimeSource).toContain(
+			"self.x, self.y, self.width, self.height = _rect_parts_from_args(args)"
+		);
+		expect(runtimeSource).toContain("def __iter__(self):");
+		expect(runtimeSource).toContain(
+			"return iter((self.x, self.y, self.width, self.height))"
+		);
+		expect(runtimeSource).toContain("def __getitem__(self, index):");
+		expect(runtimeSource).toContain("def update(self, *args):");
 		expect(runtimeSource).toContain("def _point_from_args(args):");
 		expect(runtimeSource).toContain("def collidepoint(self, *args):");
 		expect(runtimeSource).toContain(
