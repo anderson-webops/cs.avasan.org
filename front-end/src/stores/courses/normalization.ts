@@ -1710,8 +1710,6 @@ function neutralizeStudentFacingText(text: string) {
 				.replace(/\bthe page should make\b/g, "the page makes")
 				.replace(/\bThe code should make\b/g, "The code makes")
 				.replace(/\bthe code should make\b/g, "the code makes")
-				.replace(/\b([A-Z][^.!?\n]{0,180}?) should make\b/g, "$1 makes")
-				.replace(/\b([a-z][^.!?\n]{0,180}?) should make\b/g, "$1 makes")
 				.replace(
 					/\bThe finished project should have\b/g,
 					"The finished project has"

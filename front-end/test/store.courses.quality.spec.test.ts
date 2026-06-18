@@ -2576,6 +2576,9 @@ describe("course text quality normalization", () => {
 			);
 			expect(corpus).not.toMatch(/\bThe work should make\b/i);
 			expect(corpus).not.toMatch(
+				/\b(?:broadcasts|colors|controls|variables|functions|lists|loops|keys|sprites|values|items|rules|tests|checks|steps|modules|projects|examples|conditions|outcomes|details|rings|halves|layers|errors|commands|labels|questions|methods|records|arrays) makes\b/i
+			);
+			expect(corpus).not.toMatch(
 				/\bworking artifact with explicit requirements\b/i
 			);
 			expect(corpus).not.toMatch(/\bUse this [^.]+ baseline\b/i);
