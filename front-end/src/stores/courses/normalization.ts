@@ -3862,13 +3862,13 @@ function projectExpectations(context: CourseTextContext) {
 			],
 			subject => [
 				`- Write one ${subject} example with exact input, important intermediate values, and expected output before adding general logic.`,
-				`- Add one condition, loop, helper, list, dictionary, or file operation at a time and rerun with labeled evidence.`,
+				`- Add one condition, loop, helper, list, dictionary, or file operation to ${subject} at a time and rerun with labeled evidence.`,
 				`- Record the ${subject} assumption most likely to fail when input format or data size changes.`
 			],
 			subject => [
 				`- Identify the ${subject} user input or file data, validation rule, processing step, and output format.`,
-				`- Compare a normal run with an empty, smallest, duplicate, messy, or invalid run that exercises a different path.`,
-				`- Keep parsing, computation, and presentation distinct enough that a bug can be isolated to one layer.`
+				`- Compare a normal ${subject} run with an empty, smallest, duplicate, messy, or invalid run that exercises a different path.`,
+				`- Keep ${subject} parsing, computation, and presentation distinct enough that a bug can be isolated to one layer.`
 			]
 		]);
 	}
@@ -3886,8 +3886,8 @@ function projectExpectations(context: CourseTextContext) {
 			],
 			subject => [
 				`- Identify the ${subject} class that owns the behavior, the stored state it uses, and the expected output or assertion.`,
-				`- Add one constructor, branch, method, or collection operation at a time, compiling between meaningful changes.`,
-				`- Keep ${indefiniteArticleFor(subject)} ${subject} note on the object-state change, equality check, access boundary, or dispatch rule that matters most.`
+				`- Add one constructor, branch, method, or collection operation to ${subject} at a time, compiling between meaningful changes.`,
+				`- Keep a short verification note for ${subject} on the object-state change, equality check, access boundary, or dispatch rule that matters most.`
 			],
 			subject => [
 				`- Turn ${subject} into a concrete Java contract: inputs, object state, return values, side effects, and evidence.`,
@@ -3896,13 +3896,13 @@ function projectExpectations(context: CourseTextContext) {
 			],
 			subject => [
 				`- Start ${subject} by naming the class boundary, stored data, method contract, and expected result.`,
-				`- Compile after each field, constructor, branch, or collection change so type errors stay tied to the recent edit.`,
-				`- Record one ordinary run, one boundary run, and the Java rule that explains the outcome.`
+				`- Compile ${subject} after each field, constructor, branch, or collection change so type errors stay tied to the recent edit.`,
+				`- Record one ordinary ${subject} run, one boundary run, and the Java rule that explains the outcome.`
 			],
 			subject => [
 				`- Describe ${subject} as a Java object model before coding: responsibilities, collaborators, public calls, and evidence.`,
-				`- Add behavior in compilable increments, checking constructor setup, method calls, and any collection mutation as they appear.`,
-				`- Keep the verification note focused on the design boundary that made the implementation easier to reason about.`
+				`- Add ${subject} behavior in compilable increments, checking constructor setup, method calls, and any collection mutation as they appear.`,
+				`- Keep the ${subject} verification note focused on the design boundary that made the implementation easier to reason about.`
 			],
 			subject => [
 				`- Identify the ${subject} type choices, access levels, method signatures, and expected console or test evidence.`,
@@ -3931,12 +3931,12 @@ function projectExpectations(context: CourseTextContext) {
 			],
 			subject => [
 				`- Start ${subject} from a concrete example call or object diagram, then generalize the class behavior.`,
-				`- Compile after each public contract change and rerun the smallest example before adding another path.`,
+				`- Compile ${subject} after each public contract change and rerun the smallest example before adding another path.`,
 				`- State which type, method, or collection owns the most important responsibility.`
 			],
 			subject => [
 				`- Separate ${subject} model behavior from console, runner, or test harness behavior before adding extra features.`,
-				`- Verify constructor state, method output, and one awkward input or object transition while the code still compiles cleanly.`,
+				`- Verify ${subject} constructor state, method output, and one awkward input or object transition while the code still compiles cleanly.`,
 				`- Explain which Java feature makes the final behavior reliable.`
 			]
 		]);
@@ -5290,10 +5290,18 @@ function compactGeneratedProjectSupport(
 			)
 			.replace(
 				new RegExp(
-					`\\bclosing the (${supportReferenceCleanupNames}) (note|explanation|response|answer|work|review)\\b`,
+					`\\bclosing the (${supportReferenceCleanupNames}) (note|explanation|response|answer|work|review|check)\\b`,
 					"g"
 				),
 				"closing $1 $2"
+			)
+			.replace(
+				new RegExp(
+					`\\b(The|the) closing ${escapedReference} (note|explanation|response|answer|work|review|check)\\b`,
+					"g"
+				),
+				(_match: string, article: string, noun: string) =>
+					`${article} closing ${noun} for ${reference}`
 			)
 			.replace(
 				new RegExp(
