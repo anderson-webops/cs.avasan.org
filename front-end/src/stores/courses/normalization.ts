@@ -3121,7 +3121,7 @@ function projectExpectations(context: CourseTextContext) {
 			],
 			subject => [
 				`- Identify the ${subject} player action, sprite response, state variable, and feedback shown on the stage.`,
-				`- Test ${subject} with intended input, repeated input, and a case where nothing should happen.`,
+				`- Test ${subject} with intended input, repeated input, and an ignored-input case where the state remains unchanged.`,
 				`- Keep ${subject} logic traceable from event block to state change to visible stage behavior.`
 			]
 		]);
@@ -3459,7 +3459,7 @@ function projectExpectations(context: CourseTextContext) {
 			],
 			subject => [
 				`- Choose a compact ${subject} sample that can be traced by hand.`,
-				`- Test ${subject} with duplicate values, a boundary position, and one case where no change should happen.`,
+				`- Test ${subject} with duplicate values, a boundary position, and one case that leaves the structure unchanged.`,
 				`- Explain whether ${subject} uses indices, enhanced iteration, nested loops, or helper methods and why.`
 			]
 		]);

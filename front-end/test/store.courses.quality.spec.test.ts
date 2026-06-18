@@ -421,6 +421,16 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(/\bafter already write\b/i);
 			expect(corpus).not.toMatch(/\byounger explain\b/i);
 			expect(corpus).not.toMatch(/\bshow the modern correction\b/i);
+			expect(corpus).not.toMatch(/\bwhere nothing should happen\b/i);
+			expect(corpus).not.toMatch(/\bwhere no change should happen\b/i);
+			expect(corpus).not.toMatch(/\bcase where nothing should happen\b/i);
+			expect(corpus).not.toMatch(/\bcase where no change should happen\b/i);
+			expect(corpus).toContain(
+				"an ignored-input case where the state remains unchanged"
+			);
+			expect(corpus).toContain(
+				"one case that leaves the structure unchanged"
+			);
 			expect(corpus).not.toMatch(/\bRecovered\b/);
 			expect(corpus).not.toMatch(
 				/recovered (?:course|lesson|applications|results|examples)/i
