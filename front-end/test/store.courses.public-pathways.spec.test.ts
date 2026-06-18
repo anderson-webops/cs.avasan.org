@@ -57,6 +57,9 @@ describe("public course pathways", () => {
 
 		expect(corpus).not.toMatch(/\bshould\b/i);
 		expect(corpus).not.toMatch(/\bStudents entering\b/i);
+		expect(corpus).not.toMatch(/\bKey idea:/i);
+		expect(corpus).not.toMatch(/\b(?:PyGame|Unity|Bronze|Silver|Gold)\s+(?:Know|Be)\b/i);
+		expect(corpus).not.toMatch(/\bBe (?:ready|comfortable)\b/i);
 	});
 
 	it("captures the high-priority research constraints that were easy to miss", () => {

@@ -120,7 +120,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		audience:
 			"Interactive project path for learners ready to reason about game loops, state, input, feedback, and playtesting.",
 		prerequisiteSummary:
-			"PyGame Know Python functions, loops, and lists. Unity Be ready for C# scripts, scenes, prefabs, components, and editor workflow.",
+			"PyGame expects Python functions, loops, and lists. Unity expects readiness for C# scripts, scenes, prefabs, components, and editor workflow.",
 		outcomes: [
 			"Build games around a clear update loop, input model, collision or interaction rules, UI state, and restart/end conditions.",
 			"Separate model/state decisions from rendering or scene setup so bugs can be diagnosed without guessing.",
@@ -168,7 +168,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		audience:
 			"Students ready to reason from data, search spaces, model behavior, evaluation, and responsible interpretation without treating output as magic.",
 		prerequisiteSummary:
-			"Key idea: Python basics, lists/dictionaries, functions, and enough algebra or graph reading to interpret tables and metrics.",
+			"Useful prerequisites include Python basics, lists and dictionaries, functions, and enough algebra or graph reading to interpret tables and metrics.",
 		outcomes: [
 			"Load, clean, visualize, and explain named datasets such as Iris, Palmer Penguins, Titanic-style survival data, weather records, or local CSV fixtures.",
 			"Build AI search or rule-based systems with explicit state spaces, heuristics, limitations, and test cases.",
@@ -320,7 +320,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		audience:
 			"Students ready to understand how programs interact with operating systems, memory, processes, services, networks, and safer systems languages.",
 		prerequisiteSummary:
-			"Be comfortable with command-line work, typed programming basics, files, and debugging small programs before taking these courses.",
+			"Readiness includes command-line work, typed programming basics, files, and experience debugging small programs.",
 		outcomes: [
 			"Explain machine representation, memory layout, stack/heap behavior, build tooling, processes, files, permissions, services, logs, and diagnostics.",
 			"Use Linux and network tools to gather evidence and explain system state without guessing.",
@@ -373,7 +373,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		audience:
 			"Students moving from introductory Java into stronger object-oriented design, inheritance, interfaces, abstract classes, records, graphics, and non-graphics application work.",
 		prerequisiteSummary:
-			"Key idea: Variables, control flow, methods, arrays or ArrayLists, and basic class construction before the advanced tracks.",
+			"The advanced tracks expect variables, control flow, methods, arrays or ArrayLists, and basic class construction.",
 		outcomes: [
 			"Write Java classes with encapsulation, constructors, methods, inheritance, polymorphism, abstract classes, interfaces, and records where appropriate.",
 			"Choose between graphics and non-graphics tracks depending on whether the next project emphasizes visual interaction or deeper backend/model design.",
@@ -418,7 +418,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		audience:
 			"Students preparing for AP Computer Science A or seeking a Java course with exam-aligned tracing, class design, arrays, ArrayLists, inheritance, recursion, and sorting/searching.",
 		prerequisiteSummary:
-			"Be ready for Java syntax and object-oriented reasoning. Prior programming helps, but the course must still explicitly teach AP-scoped Java.",
+			"Readiness includes Java syntax and object-oriented reasoning. Prior programming helps, but the course still explicitly teaches AP-scoped Java.",
 		outcomes: [
 			"Master AP CSA units from primitive types through objects, boolean logic, iteration, writing classes, arrays, ArrayLists, 2D arrays, inheritance, and recursion.",
 			"Practice MCQ reasoning, FRQ method writing, scoring, and error logs using College Board-aligned expectations.",
@@ -466,7 +466,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		audience:
 			"Students who already have programming fluency and need disciplined contest problem solving, implementation speed, edge-case testing, and postmortems.",
 		prerequisiteSummary:
-			"Bronze Be comfortable with loops, arrays or vectors, strings, maps/sets, and file-style input. Silver and Gold require stronger algorithms and proof habits.",
+			"Bronze expects comfort with loops, arrays or vectors, strings, maps/sets, and file-style input. Silver and Gold require stronger algorithms and proof habits.",
 		outcomes: [
 			"Solve official-style P1, P2, and P3 problems with correct parsing, sample verification, edge cases, and complexity reasoning.",
 			"Progress from Bronze simulation and sorting/searching into Silver data structures and Gold graph/dynamic-programming patterns.",
@@ -518,7 +518,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		audience:
 			"Intermediate students who can already build classes and now need vocabulary for responsibility, coupling, refactoring, polymorphism, and language-specific pattern tradeoffs.",
 		prerequisiteSummary:
-			"Key idea: Classes, methods, collections, and basic testing in the language used by the specific pattern course.",
+			"Useful prerequisites include classes, methods, collections, and basic testing in the language used by the specific pattern course.",
 		outcomes: [
 			"Recognize when a pattern clarifies responsibilities and when it only adds unnecessary architecture.",
 			"Refactor working code while preserving behavior with tests or driver programs.",
@@ -719,7 +719,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		audience:
 			"Students who need careful, ethical, local-only security education grounded in threat modeling, evidence collection, impact, and defensive remediation.",
 		prerequisiteSummary:
-			"Key idea: Command-line basics and enough networking, systems, or C/C++ context to understand the specific security course they are taking.",
+			"Useful prerequisites include command-line basics and enough networking, systems, or C/C++ context to understand the specific security course.",
 		outcomes: [
 			"Write threat models, identify assets and trust boundaries, collect evidence, describe impact, and propose defensive mitigations.",
 			"Use local fixtures, intentionally vulnerable examples, owned targets, or provided packet captures to study security behavior safely.",
