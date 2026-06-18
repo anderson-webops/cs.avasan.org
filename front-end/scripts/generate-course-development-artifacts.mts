@@ -390,7 +390,7 @@ writeMd(
 				"Lesson Backbone",
 				"Project Links",
 				"Solution Links",
-				"Source Parity"
+				"Visible Source Scaffold"
 			],
 			structuralAudit.map(row => [
 				row.courseId,
@@ -619,7 +619,7 @@ writeMd(
 			[
 				"Course",
 				"Policy Recorded",
-				"Source Parity Module",
+				"Visible Source Scaffold",
 				"Project Links",
 				"Solution Links",
 				"Media Links",

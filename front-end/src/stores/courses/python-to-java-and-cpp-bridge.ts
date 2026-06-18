@@ -65,7 +65,9 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						hasReference: false
 					}),
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ1-Syntax-Translation-Warmup/starter"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ1-Syntax-Translation-Warmup/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ1-Syntax-Translation-Warmup/solution"
 				},
 				{
 					title: "Positioning and Workflow Translation Supplemental 3",

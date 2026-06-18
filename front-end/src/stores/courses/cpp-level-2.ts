@@ -55,6 +55,8 @@ export const cppLevel2Course: RawCourse = {
 					content:
 						"Pointers are variables that store addresses, not regular values. Cover: `&`, `*`, `nullptr`, reading through a pointer, writing through a pointer, pointer aliasing, and how two names can change the same object. Then make failure modes explicit: uninitialized pointers, dangling pointers, null dereferences, stale observations, and why pointer bugs need evidence instead of guessing.",
 					projectLink:
+						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM1-Pointers-Starter",
+					solutionLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM1-Pointers"
 				},
 				{
@@ -130,7 +132,7 @@ export const cppLevel2Course: RawCourse = {
 					content:
 						"Re-run the array practice with one or two custom cases and explain how indexes and addresses line up in memory.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM2-Array-Practice",
+						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM2-Array-Practice-Starter",
 					solutionLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM2-Array-Practice"
 				}

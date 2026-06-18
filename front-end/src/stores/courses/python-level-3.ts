@@ -311,7 +311,9 @@ export const pythonLevel3Course: RawCourse = {
 					content:
 						"Analyze several functions by counting the number of operations they perform relative to `n`. Break nested loops into outer-loop and inner-loop work, compare repeated addition with multiplication, and decide on the final Big-O classification.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM6-Function-Analysis/starter"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM6-Function-Analysis/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM6-Function-Analysis/solution"
 				}
 			],
 			supplementalProjects: []

@@ -79,6 +79,12 @@ async function requireCourse(courseId: string) {
 	return course!;
 }
 
+async function requireAuthoredCourse(courseId: string) {
+	const entry = courseCatalog.find(courseEntry => courseEntry.id === courseId);
+	expect(entry, courseId).toBeDefined();
+	return entry!.load();
+}
+
 function allText(course: Awaited<ReturnType<typeof requireCourse>>) {
 	return course.modules
 		.flatMap(module => [
@@ -101,6 +107,30 @@ function courseItems(course: Awaited<ReturnType<typeof requireCourse>>) {
 		...module.curriculum,
 		...module.supplementalProjects
 	]);
+}
+
+function authoredCourseItems(
+	course: Awaited<ReturnType<typeof requireAuthoredCourse>>
+) {
+	return course.modules.flatMap(module => [
+		...module.curriculum,
+		...module.supplementalProjects
+	]);
+}
+
+function expectAuthoredSourcePair(
+	course: Awaited<ReturnType<typeof requireAuthoredCourse>>,
+	title: string,
+	projectPath: string,
+	solutionPath: string
+) {
+	const item = authoredCourseItems(course).find(
+		courseItem => courseItem.title === title
+	);
+
+	expect(item, title).toBeDefined();
+	expect(item?.projectLink, title).toContain(projectPath);
+	expect(item?.solutionLink, title).toContain(solutionPath);
 }
 
 describe("implemented course development artifacts", () => {
@@ -362,6 +392,116 @@ describe("implemented course development artifacts", () => {
 		);
 		expect(serializedCourse).toContain(
 			"Python-Level-1/tree/main/GRS-Check-in-Three-Updated/solution"
+		);
+	});
+
+	it("keeps authored starter and solution records explicit before normalization", async () => {
+		const pythonLevel1 = await requireAuthoredCourse("python-level-1");
+		const pythonLevel2 = await requireAuthoredCourse("python-level-2");
+		const pythonLevel3 = await requireAuthoredCourse("python-level-3");
+		const bridgeCourse = await requireAuthoredCourse(
+			"python-to-java-and-cpp-bridge"
+		);
+		const cppLevel2 = await requireAuthoredCourse("cpp-level-2");
+		const aiLevel1 = await requireAuthoredCourse("ai-level-1");
+		const javaLevel3 = await requireAuthoredCourse("java-level-3");
+		const machineLearning = await requireAuthoredCourse("machine-learning");
+
+		expectAuthoredSourcePair(
+			pythonLevel1,
+			"Check-In #1 Reflection",
+			"Python-Level-1/tree/main/Reflection-Template-Updated/starter",
+			"Python-Level-1/tree/main/Reflection-Template-Updated/solution"
+		);
+		expectAuthoredSourcePair(
+			pythonLevel1,
+			"GrS5 Supplemental Project 4: Turtle Race",
+			"Python-Level-1/tree/main/Turtle-Race-Starter/starter",
+			"Python-Level-1/tree/main/Turtle-Race-Starter/solution"
+		);
+		expectAuthoredSourcePair(
+			pythonLevel1,
+			"GrS9 Supplemental Project 3: Pyramid with Functions",
+			"Python-Level-1/tree/main/GrS7-Pyramid-with-Functions/starter",
+			"Python-Level-1/tree/main/GrS7-Pyramid-with-Functions/solution"
+		);
+		expectAuthoredSourcePair(
+			pythonLevel2,
+			"Parameter Tracing",
+			"Python-Level-2/tree/main/PS5-Parameter-Tracing/starter",
+			"Python-Level-2/tree/main/PS5-Parameter-Tracing/solution"
+		);
+		expectAuthoredSourcePair(
+			pythonLevel2,
+			"PS9 Supplemental Project 2: Class Registration II",
+			"Python-Level-2/tree/main/PS9-Class-Registration-II/starter",
+			"Python-Level-2/tree/main/PS9-Class-Registration-II/solution"
+		);
+		expectAuthoredSourcePair(
+			pythonLevel2,
+			"PS13 Supplemental Project 2: Advanced Typewriter Monkeys",
+			"Python-Level-2/tree/main/PS13-Advanced-Typewriter-Monkeys/starter",
+			"Python-Level-2/tree/main/PS13-Advanced-Typewriter-Monkeys/solution"
+		);
+		expectAuthoredSourcePair(
+			pythonLevel3,
+			"AM6 Project 3: Function Analysis",
+			"Python-Level-3/tree/main/AM6-Function-Analysis/starter",
+			"Python-Level-3/tree/main/AM6-Function-Analysis/solution"
+		);
+		expectAuthoredSourcePair(
+			bridgeCourse,
+			"Project: Starter Source Review",
+			"Python-to-Java-and-CPP-Bridge/tree/main/PTJ1-Syntax-Translation-Warmup/starter",
+			"Python-to-Java-and-CPP-Bridge/tree/main/PTJ1-Syntax-Translation-Warmup/solution"
+		);
+		expectAuthoredSourcePair(
+			cppLevel2,
+			"Pointer Basics, Aliasing, and Failure Modes",
+			"CPP-Level-2/tree/main/CPPM1-Pointers-Starter",
+			"CPP-Level-2/tree/main/CPPM1-Pointers"
+		);
+		expectAuthoredSourcePair(
+			cppLevel2,
+			"Raw Arrays: Verification Drill",
+			"CPP-Level-2/tree/main/CPPM2-Array-Practice-Starter",
+			"CPP-Level-2/tree/main/CPPM2-Array-Practice"
+		);
+		expectAuthoredSourcePair(
+			aiLevel1,
+			"Capstone Option: Maze Solver Showcase",
+			"AI-Level-1/tree/main/FAI9-Maze-Solver-Starter",
+			"AI-Level-1/tree/main/FAI9-Maze-Solver"
+		);
+		expectAuthoredSourcePair(
+			javaLevel3,
+			"AJ14 Project 3: BST Clear and Remove",
+			"Java-Level-3/tree/main/AJ14-BST-Starter",
+			"Java-Level-3/tree/main/AJ14-BST"
+		);
+		expectAuthoredSourcePair(
+			javaLevel3,
+			"AJ17 Project 3: Finding Shortest Paths",
+			"Java-Level-3/tree/main/AJ17-Street-Searcher-Starter",
+			"Java-Level-3/tree/main/AJ17-Street-Searcher"
+		);
+		expectAuthoredSourcePair(
+			machineLearning,
+			"ML7.5 Model Evaluation, Comparison, and Dataset Strategy: Core Project",
+			"AI-Level-2/tree/main/ML5-Simple-Linear-Regression-Starter",
+			"AI-Level-2/tree/main/ML5-Simple-Linear-Regression"
+		);
+		expectAuthoredSourcePair(
+			machineLearning,
+			"Customer Segmentation Starter Build: Core Project",
+			"AI-Level-2/tree/main/ML1-Customer-Segmentation-Starter",
+			"AI-Level-2/tree/main/ML1-Customer-Segmentation"
+		);
+		expectAuthoredSourcePair(
+			machineLearning,
+			"Disney Movie Clustering Starter Build: Core Project",
+			"AI-Level-2/tree/main/ML1-Disney-Movie-Clustering-Starter",
+			"AI-Level-2/tree/main/ML1-Disney-Movie-Clustering"
 		);
 	});
 

@@ -215,7 +215,7 @@ export const pythonLevel1Course: RawCourse = {
 					projectLink:
 						"https://github.com/instruction-material/Python-Level-1/tree/main/GRS-Conditionals-and-Booleans-Recap-Template/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Conditionals-and-Booleans-Recap/solution"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GRS-Conditionals-and-Booleans-Recap-Template/solution"
 				}
 			]
 		},
@@ -254,7 +254,9 @@ export const pythonLevel1Course: RawCourse = {
 					content:
 						"Write a short reflection about favorite concepts, challenges, problem-solving strategies, and a moment of pride from the course so far.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Reflection-Template-Updated/starter"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Reflection-Template-Updated/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Reflection-Template-Updated/solution"
 				},
 				{
 					title: "Check-In #1: Additional Practice Project",
@@ -320,7 +322,7 @@ export const pythonLevel1Course: RawCourse = {
 					projectLink:
 						"https://github.com/instruction-material/Python-Level-1/tree/main/Turtle-Race-Starter/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/blob/main/Turtle-Race-Updated/solution/main.py"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Turtle-Race-Starter/solution"
 				},
 				{
 					title: "GrS5 Supplemental Project 5: Reassignment and While Loops Recap",
@@ -531,7 +533,9 @@ Start with simple helpers such as \`moveForward50()\`, then move to parameterize
 
 The reflection should be specific. Instead of saying "loops are easier," explain what changed: predicting loop counts, tracking a variable as it changes, reading console errors, testing one function at a time, or using comments to plan a drawing before coding it.`,
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Reflection-Template-Updated/starter"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Reflection-Template-Updated/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Reflection-Template-Updated/solution"
 				},
 				{
 					title: "Check-In #2: Additional Practice Project",
@@ -603,7 +607,9 @@ Look for common function mistakes: calling a function before it exists, forgetti
 
 Before coding, decide how each row should differ from the previous one. The finished program should show that functions can separate "how to draw one piece" from "how to arrange many pieces."`,
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS7-Pyramid-with-Functions/starter"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS7-Pyramid-with-Functions/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS7-Pyramid-with-Functions/solution"
 				},
 				{
 					title: "GrS9 Supplemental Project 4: Square Inception with Functions",
@@ -719,7 +725,7 @@ Include one original example with at least three possible outcomes. A strong rec
 					projectLink:
 						"https://github.com/instruction-material/Python-Level-1/tree/main/GRS11Advanced-Conditionals-Recap-Template/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS11-Advanced-Conditionals-Recap/solution"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GRS11Advanced-Conditionals-Recap-Template/solution"
 				}
 			]
 		},
@@ -874,7 +880,9 @@ The check-in should show that only one branch of an \`if\`/\`elif\`/\`else\` cha
 					content:
 						"Write or record a reflection about what has been most interesting, what still feels challenging, and how problem-solving has improved over time.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Reflection-Template-Updated/starter"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Reflection-Template-Updated/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Reflection-Template-Updated/solution"
 				},
 				{
 					title: "Check-In #3: Additional Practice Project",

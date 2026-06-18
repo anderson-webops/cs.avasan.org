@@ -402,7 +402,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Trace a provided program to reinforce the importance of parameter order, variable scope, and calling functions inside other functions.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Parameter-Tracing/starter"
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Parameter-Tracing/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Parameter-Tracing/solution"
 				},
 				{
 					title: "PS5 Project 2: Coin Flipper",
@@ -705,7 +707,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Determine which students are waitlisted once duplicates are removed and enrollment caps are enforced.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Class-Registration/starter",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Class-Registration-II/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Class-Registration-II/solution",
 					mediaLink:
@@ -936,7 +938,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Generalize the monkey-typing simulation so it searches for a valid word of length `n` and compare how runtime changes as `n` increases.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS13-Typewriter-Monkeys/starter",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS13-Advanced-Typewriter-Monkeys/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-Level-2/tree/main/PS13-Advanced-Typewriter-Monkeys/solution",
 					mediaLink:

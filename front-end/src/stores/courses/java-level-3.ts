@@ -1612,7 +1612,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Add recursive clear and remove operations to the BST, including removal cases for nodes with zero, one, or two children.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ14-BST",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ14-BST-Starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ14-BST"
 				}
@@ -1929,7 +1929,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Complete the street searcher by running Dijkstra's algorithm on the loaded graph, printing the shortest path, and refining the user interface and error handling.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Street-Searcher",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Street-Searcher-Starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Street-Searcher"
 				},

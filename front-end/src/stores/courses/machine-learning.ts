@@ -1054,9 +1054,11 @@ export const machineLearningCourse: RawCourse = {
 						moduleTitle:
 							"ML7.5 Model Evaluation, Comparison, and Dataset Strategy",
 						projectKind: "core",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Simple-Linear-Regression-Starter",
+					solutionLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Simple-Linear-Regression"
 				}
 			],
@@ -1070,6 +1072,8 @@ export const machineLearningCourse: RawCourse = {
 						section: "extension"
 					}),
 					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Simple-Linear-Regression-Starter",
+					solutionLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Simple-Linear-Regression"
 				},
 				{
@@ -1250,9 +1254,11 @@ export const machineLearningCourse: RawCourse = {
 						moduleTitle:
 							"Customer Segmentation Starter Build: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation-Starter",
+					solutionLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation"
 				},
 				{
@@ -1273,9 +1279,11 @@ export const machineLearningCourse: RawCourse = {
 						moduleTitle:
 							"Customer Segmentation Starter Build: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation-Starter",
+					solutionLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation"
 				},
 				{
@@ -1508,9 +1516,11 @@ export const machineLearningCourse: RawCourse = {
 						moduleTitle:
 							"Disney Movie Clustering Starter Build: Implementation Lab",
 						section: "coreProject",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Disney-Movie-Clustering-Starter",
+					solutionLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Disney-Movie-Clustering"
 				},
 				{
@@ -1531,9 +1541,11 @@ export const machineLearningCourse: RawCourse = {
 						moduleTitle:
 							"Disney Movie Clustering Starter Build: Implementation Lab",
 						section: "extension",
-						hasReference: false
+						hasReference: true
 					}),
 					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Disney-Movie-Clustering-Starter",
+					solutionLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Disney-Movie-Clustering"
 				},
 				{

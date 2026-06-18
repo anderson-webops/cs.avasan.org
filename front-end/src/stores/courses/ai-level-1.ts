@@ -624,6 +624,8 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Turn the earlier maze work into a polished search visualizer or comparison tool with cleaner reporting and a stronger interface for explaining results.",
 					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI9-Maze-Solver-Starter",
+					solutionLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI9-Maze-Solver"
 				},
 				{
