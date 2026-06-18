@@ -447,21 +447,6 @@ const physicsContentReplacements: Array<
 			`Common ${moduleTitle} pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system.`
 	],
 	[
-		"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system.",
-		moduleTitle =>
-			`Watch for ${moduleTitle} formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system.`
-	],
-	[
-		"The correction should replace the shortcut with a specific introductory physics model.",
-		moduleTitle =>
-			`The ${moduleTitle} correction should replace the shortcut with a specific introductory physics model.`
-	],
-	[
-		"The correction should replace the shortcut with a specific advanced physics model.",
-		moduleTitle =>
-			`The ${moduleTitle} correction should replace the shortcut with a specific advanced physics model.`
-	],
-	[
 		"Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note.",
 		moduleTitle => topicContext(moduleTitle).extension
 	]
@@ -557,7 +542,7 @@ function applyPhysicsSupplementOverrides(course: RawCourse) {
 					diagnosticCheckpointOverrides[module.title] ?? item.content;
 			}
 
-			if (item.title === "Misconception Watchlist") {
+			if (item.title === "Common Pitfalls") {
 				item.content =
 					misconceptionWatchlistOverrides[module.title] ??
 					item.content;

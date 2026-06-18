@@ -45,7 +45,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Readiness check: resolve vectors accurately, label angles consistently, and explain why horizontal and vertical equations can be solved separately in projectile motion. Prompt: choose axes and defend the choice before calculating."
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Common Pitfalls",
 					content:
 						"Common pitfalls include treating horizontal motion as if it 'runs out' at the top of a projectile, adding vectors by simply adding magnitudes, and treating sign mistakes as minor when they actually signal a broken coordinate setup."
 				},
@@ -92,7 +92,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Readiness check: identify all external forces before solving and state whether the system is accelerating along each chosen axis. A short diagram checkpoint explains a scale reading without relying on intuition alone."
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Common Pitfalls",
 					content:
 						"Common pitfalls include mixing up the force pair in Newton's third law with the set of forces on one object, and assuming a larger scale reading means the object's mass changed."
 				},
@@ -139,7 +139,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Readiness check: decide when static friction should be compared against a maximum value and when kinetic friction is the better model. A strong checkpoint explains why the normal force is not always equal to weight."
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Common Pitfalls",
 					content:
 						"Common pitfalls include assuming friction always equals mu times N even in static situations where it only adjusts up to a maximum, and projecting the full weight down the ramp instead of resolving gravity into components."
 				},
@@ -186,7 +186,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Readiness check: distinguish momentum conservation from kinetic-energy conservation and interpret the sign of momentum consistently. Prompt: decide whether a force-time graph indicates a large force for a short time or a smaller force for a longer time."
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Common Pitfalls",
 					content:
 						"Common pitfalls include treating momentum as conserved only when objects bounce apart, assuming heavier objects always 'win' a collision regardless of velocity, and confusing impulse with impact duration alone."
 				},
@@ -233,7 +233,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Readiness check: identify the pivot, choose a sign convention, and explain why a large force near the pivot may be less effective than a smaller force farther away. A quick prompt about opening a heavy door works well here."
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Common Pitfalls",
 					content:
 						"Common pitfalls include treating force magnitude as the only important factor, ignoring the location of the force, and confusing clockwise versus counterclockwise sign choices with right versus wrong answers rather than conventions."
 				},
@@ -280,7 +280,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Readiness check: identify the inward direction in circular motion and explain why constant speed does not imply zero acceleration. Prompt: compare gravity at Earth's surface with gravity in low orbit."
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Common Pitfalls",
 					content:
 						"Common pitfalls include adding centrifugal force automatically in every inertial-frame analysis, assuming satellites orbit because gravity has become negligible, and confusing constant speed with constant velocity."
 				},
@@ -327,7 +327,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Readiness check: compare branch current and branch voltage correctly in series and parallel settings. A useful checkpoint predicts what changes everywhere in the circuit when one resistor is increased."
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Common Pitfalls",
 					content:
 						"Common pitfalls include assuming the battery provides a fixed current regardless of circuit structure, treating voltage as if it is used up the same way current is imagined to be used up, and overgeneralizing pure-series rules to every mixed circuit."
 				},
@@ -374,7 +374,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Readiness check: distinguish heat from temperature, identify the dominant heat-transfer pathway in a scenario, and interpret a heating curve in words. If optics is included, the checkpoint explains what a lens is doing to rays rather than merely naming the lens type."
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Common Pitfalls",
 					content:
 						"Common pitfalls include using heat and temperature interchangeably, assuming shiny automatically means hotter or colder without a mechanism, and treating a virtual image as if it physically sits on a screen."
 				},
@@ -421,7 +421,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Readiness check: defend the system choice, assumptions, graph choice, and uncertainty treatment under follow-up questioning. A strong checkpoint explains what evidence would have changed the conclusion."
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Common Pitfalls",
 					content:
 						"Common pitfalls include hiding weak reasoning behind long calculations, treating simulation output as automatically trustworthy because a computer produced it, and mistaking complexity for rigor instead of choosing a simpler, better-justified model."
 				},
@@ -473,9 +473,9 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Common Pitfalls",
 					content:
-						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific advanced physics model."
+						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific advanced physics model."
 				},
 				{
 					title: "Extension Project: Motion Model Comparison",
@@ -525,9 +525,9 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Common Pitfalls",
 					content:
-						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific advanced physics model."
+						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific advanced physics model."
 				},
 				{
 					title: "Extension Project: Measurement Audit",
@@ -577,9 +577,9 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Common Pitfalls",
 					content:
-						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific advanced physics model."
+						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific advanced physics model."
 				},
 				{
 					title: "Extension Project: Connected System Constraint Map",
@@ -629,9 +629,9 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Common Pitfalls",
 					content:
-						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific advanced physics model."
+						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific advanced physics model."
 				},
 				{
 					title: "Extension Project: Fluid System Case Study",
@@ -681,9 +681,9 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Common Pitfalls",
 					content:
-						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific advanced physics model."
+						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific advanced physics model."
 				},
 				{
 					title: "Extension Project: Engine or Refrigerator Audit",
@@ -733,9 +733,9 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Common Pitfalls",
 					content:
-						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific advanced physics model."
+						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific advanced physics model."
 				},
 				{
 					title: "Extension Project: Sensor System Proposal",
@@ -785,9 +785,9 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Common Pitfalls",
 					content:
-						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific advanced physics model."
+						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific advanced physics model."
 				},
 				{
 					title: "Extension Project: Relativity Explainer",
@@ -837,9 +837,9 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Common Pitfalls",
 					content:
-						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific advanced physics model."
+						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific advanced physics model."
 				},
 				{
 					title: "Extension Project: Independent Physics Portfolio",

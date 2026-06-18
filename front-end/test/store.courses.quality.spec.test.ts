@@ -2927,15 +2927,28 @@ describe("course text quality normalization", () => {
 			);
 			const misconceptions = course!.modules.flatMap(module =>
 				module.supplementalProjects
-					.filter(item => item.title === "Misconception Watchlist")
+					.filter(item => item.title === "Common Pitfalls")
 					.map(item => item.content)
 			);
 			const combined = [...diagnostics, ...misconceptions].join("\n");
 			const courseText = allCourseText(course);
+			const source = fs.readFileSync(
+				`src/stores/courses/${
+					courseId === "intro-to-physics"
+						? "intro-to-physics"
+						: "physics-level-2"
+				}.ts`,
+				"utf8"
+			);
 
 			expect(combined).not.toMatch(genericMisconceptionTemplate);
 			expect(combined).not.toMatch(genericCheckpointTemplate);
 			expect(combined).not.toMatch(/\bWatch for\b/i);
+			expect(courseText).toContain("Common Pitfalls");
+			expect(courseText).not.toContain("Misconception Watchlist");
+			expect(source).not.toMatch(/\bWatch for\b/i);
+			expect(source).not.toMatch(/The correction should replace/i);
+			expect(source).not.toContain("Misconception Watchlist");
 			for (const pattern of genericCurriculumTemplates) {
 				expect(courseText).not.toMatch(pattern);
 			}
@@ -2945,11 +2958,8 @@ describe("course text quality normalization", () => {
 
 		const physics2 = await loadRawCourse("physics-level-2");
 		expect(
-			findItem(
-				physics2!,
-				/Misconception Watchlist/,
-				/Bernoulli-style reasoning/
-			).content
+			findItem(physics2!, /Common Pitfalls/, /Bernoulli-style reasoning/)
+				.content
 		).toContain("continuum models break down");
 	});
 
