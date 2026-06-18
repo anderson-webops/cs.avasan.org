@@ -195,18 +195,18 @@ function isExecutable(file: string) {
 function unityFullProjectReadiness(root: string) {
 	const required = [
 		".gitattributes",
-		"UGD-FullProject-Starter/ProjectSettings/ProjectVersion.txt",
-		"UGD-FullProject-Starter/Packages/manifest.json",
-		"UGD-FullProject-Starter/Packages/packages-lock.json",
-		"UGD-FullProject-Starter/Assets/Scripts/GameSession.cs",
-		"UGD-FullProject-Starter/Assets/Tests/EditMode/GameSessionTests.cs",
-		"UGD-FullProject-Starter/THIRD_PARTY_ASSETS.md",
-		"UGD-FullProject-Solution/ProjectSettings/ProjectVersion.txt",
-		"UGD-FullProject-Solution/Packages/manifest.json",
-		"UGD-FullProject-Solution/Packages/packages-lock.json",
-		"UGD-FullProject-Solution/Assets/Scripts/GameSession.cs",
-		"UGD-FullProject-Solution/Assets/Tests/EditMode/GameSessionTests.cs",
-		"UGD-FullProject-Solution/THIRD_PARTY_ASSETS.md"
+		"UGD-full-project-starter/ProjectSettings/ProjectVersion.txt",
+		"UGD-full-project-starter/Packages/manifest.json",
+		"UGD-full-project-starter/Packages/packages-lock.json",
+		"UGD-full-project-starter/Assets/Scripts/GameSession.cs",
+		"UGD-full-project-starter/Assets/Tests/EditMode/GameSessionTests.cs",
+		"UGD-full-project-starter/THIRD_PARTY_ASSETS.md",
+		"UGD-full-project-solution/ProjectSettings/ProjectVersion.txt",
+		"UGD-full-project-solution/Packages/manifest.json",
+		"UGD-full-project-solution/Packages/packages-lock.json",
+		"UGD-full-project-solution/Assets/Scripts/GameSession.cs",
+		"UGD-full-project-solution/Assets/Tests/EditMode/GameSessionTests.cs",
+		"UGD-full-project-solution/THIRD_PARTY_ASSETS.md"
 	];
 	const missing = required.filter(
 		file => !fs.existsSync(path.join(root, file))
@@ -869,7 +869,7 @@ writeMd(
 		"",
 		"The catalog now includes UGD0-UGD6 rebuild modules covering setup, components, input/movement, physics/collision, UI/state, prefabs/spawning/polish, and capstone production.",
 		"",
-		"The source repo now includes `UGD-FullProject-Starter` and `UGD-FullProject-Solution` full-project baselines with Unity project settings, package manifests/locks, scripts, tests, attribution files, Git LFS rules, and a repository verification script.",
+		"The source repo now includes `UGD-full-project-starter` and `UGD-full-project-solution` full-project baselines with Unity project settings, package manifests/locks, scripts, tests, attribution files, Git LFS rules, and a repository verification script.",
 		"",
 		"Source repo target: `/Users/jacobanderson/Documents/Work/Instruction-Material/Unity-Game-Development` and `https://github.com/instruction-material/Unity-Game-Development`."
 	].join("\n")

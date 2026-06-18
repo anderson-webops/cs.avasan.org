@@ -2,7 +2,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { courseCatalog, loadRawCourse } from "../src/stores/courses/index";
 import { courseImplementationSourceRepos } from "../src/stores/courses/course-implementation-artifacts";
-import type { RawCourse, RawCourseModuleItem } from "../src/stores/courses/types";
+import type {
+	RawCourse,
+	RawCourseModuleItem
+} from "../src/stores/courses/types";
 
 const instructionRoot =
 	"/Users/jacobanderson/Documents/Work/Instruction-Material";
@@ -21,23 +24,24 @@ const generatedReadinessFiles = new Set([
 ]);
 
 function allItems(course: RawCourse) {
-	return course.modules.flatMap(module =>
-		[
-			...module.curriculum.map(item => ({
-				module: module.title,
-				section: "curriculum",
-				item
-			})),
-			...module.supplementalProjects.map(item => ({
-				module: module.title,
-				section: "supplementalProjects",
-				item
-			}))
-		] as Array<{
-			module: string;
-			section: string;
-			item: RawCourseModuleItem;
-		}>
+	return course.modules.flatMap(
+		module =>
+			[
+				...module.curriculum.map(item => ({
+					module: module.title,
+					section: "curriculum",
+					item
+				})),
+				...module.supplementalProjects.map(item => ({
+					module: module.title,
+					section: "supplementalProjects",
+					item
+				}))
+			] as Array<{
+				module: string;
+				section: string;
+				item: RawCourseModuleItem;
+			}>
 	);
 }
 
@@ -69,7 +73,9 @@ function sourceFiles(root: string) {
 			}
 			const relative = path.relative(root, fullPath);
 			if (generatedReadinessFiles.has(relative)) continue;
-			if (/\.(?:java|py|cpp|c|h|hpp|js|ts|swift|cs|md)$/i.test(entry.name)) {
+			if (
+				/\.(?:java|py|cpp|c|h|hpp|js|ts|swift|cs|md)$/i.test(entry.name)
+			) {
 				results.push(relative);
 			}
 		}
@@ -98,7 +104,10 @@ function comparableFolderName(folder: string) {
 	return folder
 		.toLowerCase()
 		.replace(/(?:^|-)java$/u, "")
-		.replace(/(?:^|-)(?:starter|solution|updated|template|reference)$/gu, "")
+		.replace(
+			/(?:^|-)(?:starter|solution|updated|template|reference)$/gu,
+			""
+		)
 		.replace(/(?:^|-)all-star$/u, "")
 		.replace(/[^a-z0-9]+/gu, "");
 }
@@ -110,7 +119,11 @@ function classifyUnlinkedFolder(folder: string, linkedFolders: string[]) {
 	);
 
 	if (coveredByVariant) return "covered-by-linked-variant";
-	if (/starter|solution|template|updated|reference|recap|check[- ]?in/i.test(folder)) {
+	if (
+		/starter|solution|template|updated|reference|recap|check[- ]?in/i.test(
+			folder
+		)
+	) {
 		return "support-or-variant-source";
 	}
 	if (/legacy|archive|old|customized|copy|backup|deprecated/i.test(folder)) {
@@ -141,7 +154,7 @@ function repoVerificationScript(repo: string) {
 	const unityChecks =
 		repo === "Unity-Game-Development"
 			? `
-for project in UGD-FullProject-Starter UGD-FullProject-Solution; do
+for project in UGD-full-project-starter UGD-full-project-solution; do
   require_file "$project/ProjectSettings/ProjectVersion.txt"
   require_file "$project/Packages/manifest.json"
   require_file "$project/Packages/packages-lock.json"
@@ -599,11 +612,14 @@ function syncUnityProject(root: string) {
 	);
 
 	for (const [projectName, solution] of [
-		["UGD-FullProject-Starter", false],
-		["UGD-FullProject-Solution", true]
+		["UGD-full-project-starter", false],
+		["UGD-full-project-solution", true]
 	] as const) {
 		const projectRoot = path.join(root, projectName);
-		for (const [relativeFile, content] of unityProjectFiles(projectName, solution)) {
+		for (const [relativeFile, content] of unityProjectFiles(
+			projectName,
+			solution
+		)) {
 			writeFileIfChanged(path.join(projectRoot, relativeFile), content);
 		}
 	}
@@ -616,11 +632,17 @@ const loadedCourses = (
 			course: await loadRawCourse(entry.id)
 		}))
 	)
-).filter((row): row is { entry: (typeof courseCatalog)[number]; course: RawCourse } =>
-	Boolean(row.course)
+).filter(
+	(
+		row
+	): row is { entry: (typeof courseCatalog)[number]; course: RawCourse } =>
+		Boolean(row.course)
 );
 
-const repos = new Map<string, Array<{ courseId: string; courseName: string; course: RawCourse }>>();
+const repos = new Map<
+	string,
+	Array<{ courseId: string; courseName: string; course: RawCourse }>
+>();
 
 for (const { entry, course } of loadedCourses) {
 	const repo = courseImplementationSourceRepos[entry.id];
@@ -632,7 +654,9 @@ for (const { entry, course } of loadedCourses) {
 
 const summaries: string[] = [];
 
-for (const [repo, mappedCourses] of [...repos].sort((a, b) => a[0].localeCompare(b[0]))) {
+for (const [repo, mappedCourses] of [...repos].sort((a, b) =>
+	a[0].localeCompare(b[0])
+)) {
 	const root = path.join(instructionRoot, repo);
 	if (!fs.existsSync(root)) {
 		summaries.push(`${repo}: missing local root`);
@@ -643,7 +667,9 @@ for (const [repo, mappedCourses] of [...repos].sort((a, b) => a[0].localeCompare
 
 	const linkedFolders = [
 		...new Set(
-			mappedCourses.flatMap(({ course }) => linkedFoldersForRepo(course, repo))
+			mappedCourses.flatMap(({ course }) =>
+				linkedFoldersForRepo(course, repo)
+			)
 		)
 	].sort((a, b) => a.localeCompare(b));
 	const linked = new Set(linkedFolders);

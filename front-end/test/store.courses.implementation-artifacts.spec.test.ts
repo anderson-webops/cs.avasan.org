@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { courseCatalog, loadRawCourse } from "@/stores/courses/index";
 import {
@@ -166,6 +167,20 @@ describe("implemented course development artifacts", () => {
 		expect(text).toContain("UGD6 Capstone Production");
 		expect(JSON.stringify(course)).toContain("UGD-full-project-starter");
 		expect(JSON.stringify(course)).toContain("UGD-full-project-solution");
+	});
+
+	it("keeps Unity source-readiness scripts aligned with canonical full-project folder names", () => {
+		const scriptCorpus = [
+			"scripts/generate-course-development-artifacts.mts",
+			"scripts/sync-course-source-readiness.mts"
+		]
+			.map(file => readFileSync(file, "utf8"))
+			.join("\n");
+
+		expect(scriptCorpus).toContain("UGD-full-project-starter");
+		expect(scriptCorpus).toContain("UGD-full-project-solution");
+		expect(scriptCorpus).not.toContain("UGD-FullProject-Starter");
+		expect(scriptCorpus).not.toContain("UGD-FullProject-Solution");
 	});
 
 	it("adds AP CSA alignment, C++ concept matrix, datasets, and safety policy modules", async () => {
