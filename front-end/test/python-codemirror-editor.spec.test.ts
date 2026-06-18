@@ -131,12 +131,34 @@ describe("python IDE CodeMirror editor", () => {
 			pythonIdeCompletionsForMode("pgzero", "player").map(
 				option => option.label
 			)
-		).toEqual(expect.arrayContaining(["colliderect", "draw", "pos"]));
+		).toEqual(
+			expect.arrayContaining([
+				"angle_to",
+				"bottomright",
+				"colliderect",
+				"distance_to",
+				"draw",
+				"pos",
+				"topleft"
+			])
+		);
 		expect(
 			pythonIdeCompletionsForMode("turtle", "screen").map(
 				option => option.label
 			)
 		).toEqual(expect.arrayContaining(["bgcolor", "onkey", "ontimer"]));
+		expect(
+			pythonIdeCompletionsForMode("turtle", "t").map(
+				option => option.label
+			)
+		).toEqual(
+			expect.arrayContaining([
+				"hideturtle",
+				"isvisible",
+				"shape",
+				"showturtle"
+			])
+		);
 		expect(
 			pythonIdeCompletionsForMode("pgzero", "clock").map(
 				option => option.label
@@ -154,8 +176,13 @@ describe("python IDE CodeMirror editor", () => {
 			)
 		).toEqual(
 			expect.arrayContaining([
+				"fadeout",
+				"get_volume",
+				"is_playing",
 				"pause",
 				"play",
+				"play_once",
+				"queue",
 				"set_volume",
 				"stop",
 				"unpause"
@@ -238,6 +265,30 @@ describe("python IDE CodeMirror editor", () => {
 		expect(musicResult?.from).toBe("music.play(\"".length);
 		expect(musicResult?.options.map(option => option.label)).toContain(
 			"theme"
+		);
+	});
+
+	it("offers original Turtle shape completions inside shape calls", () => {
+		const doc = "t.shape(\"cl";
+		const state = EditorState.create({ doc });
+		const result = pythonIdeCompletionSource("turtle")({
+			explicit: false,
+			pos: doc.length,
+			state,
+			matchBefore: expression =>
+				completionMatchBefore(doc, doc.length, expression)
+		});
+
+		expect(result?.from).toBe("t.shape(\"".length);
+		expect(result?.options.map(option => option.label)).toEqual(
+			expect.arrayContaining([
+				"arrow",
+				"circle",
+				"classic",
+				"square",
+				"triangle",
+				"turtle"
+			])
 		);
 	});
 

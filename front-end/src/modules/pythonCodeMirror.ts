@@ -60,6 +60,12 @@ interface PythonIdeAssetStringCompletionContext {
 	from: number;
 }
 
+interface PythonIdeStringCompletionContext {
+	from: number;
+	options: PythonIdeCompletionOption[];
+	validFor: RegExp;
+}
+
 const openingBracketToClosingBracket: Record<string, string> = {
 	"(": ")",
 	"[": "]",
@@ -72,6 +78,7 @@ const pythonCompletionTokenRegex = /(?:[A-Z_]\w*\.){0,2}[A-Z_]\w*$/i;
 const pythonCompletionGlobalValidForRegex = /^[A-Z_]\w*$/i;
 const pythonCompletionMemberValidForRegex = /^\w*$/;
 const pythonAssetStringCompletionValidForRegex = /^[\w.-]*$/;
+const pythonTurtleShapeStringCompletionValidForRegex = /^[A-Z_]*$/i;
 const pythonIdentifierRegex = /^[A-Z_]\w*$/i;
 const bracketPairContextPadding = 2_000;
 const closingBrackets = new Set(Object.values(openingBracketToClosingBracket));
@@ -90,6 +97,17 @@ const pgzeroAssetStringCompletionPatterns: Array<{
 	{ folder: "music", pattern: /\bmusic\.play\s*\(\s*["']([^"'\n]*)$/ },
 	{ folder: "sounds", pattern: /\bsounds\[\s*["']([^"'\n]*)$/ }
 ];
+const turtleShapeStringCompletionPattern =
+	/\b(?:shape|[A-Z_]\w*\.shape)\s*\(\s*["']([^"'\n]*)$/i;
+const turtleShapeCompletions = [
+	"classic",
+	"arrow",
+	"turtle",
+	"circle",
+	"square",
+	"triangle",
+	"fancy"
+].map(shape => completion(shape, "constant", "Turtle shape", 80));
 const bracketPairDecorations = [
 	bracketDecorationForIndex(0),
 	bracketDecorationForIndex(1),
@@ -194,11 +212,26 @@ const sharedMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
 	Actor: [
 		completion("image", "property", "asset name"),
 		completion("pos", "property", "actor position"),
+		completion("center", "property", "actor center"),
+		completion("topleft", "property", "top-left position"),
+		completion("topright", "property", "top-right position"),
+		completion("bottomleft", "property", "bottom-left position"),
+		completion("bottomright", "property", "bottom-right position"),
+		completion("midtop", "property", "middle-top position"),
+		completion("midbottom", "property", "middle-bottom position"),
+		completion("midleft", "property", "middle-left position"),
+		completion("midright", "property", "middle-right position"),
 		completion("x", "property", "horizontal position"),
 		completion("y", "property", "vertical position"),
 		completion("draw", "method", "draw the actor"),
 		completion("colliderect", "method", "test rectangle collision"),
-		completion("collidepoint", "method", "test point collision")
+		completion("collidepoint", "method", "test point collision"),
+		completion(
+			"distance_to",
+			"method",
+			"distance to another actor or point"
+		),
+		completion("angle_to", "method", "angle to another actor or point")
 	]
 };
 
@@ -206,7 +239,10 @@ const turtleMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
 	turtle: [
 		completion("Turtle", "class", "create a drawable turtle"),
 		completion("Screen", "class", "create or access the canvas screen"),
-		completion("colormode", "function", "set RGB color mode")
+		completion("colormode", "function", "set RGB color mode"),
+		completion("hideturtle", "function", "hide the Turtle cursor"),
+		completion("shape", "function", "choose a Turtle cursor shape"),
+		completion("showturtle", "function", "show the Turtle cursor")
 	],
 	pen: turtlePenCompletions(),
 	t: turtlePenCompletions(),
@@ -242,10 +278,16 @@ const pgzeroMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
 	],
 	mouse: [
 		completion("LEFT", "constant", "left mouse button"),
+		completion("MIDDLE", "constant", "middle mouse button"),
 		completion("RIGHT", "constant", "right mouse button")
 	],
 	music: [
+		completion("fadeout", "method", "fade and stop background music"),
+		completion("get_volume", "method", "current music volume"),
+		completion("is_playing", "method", "whether music is playing"),
 		completion("play", "method", "start background music"),
+		completion("play_once", "method", "play music once"),
+		completion("queue", "method", "queue background music"),
 		completion("stop", "method", "stop background music"),
 		completion("pause", "method", "pause background music"),
 		completion("unpause", "method", "resume background music"),
@@ -258,6 +300,7 @@ const pgzeroMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
 	],
 	"screen.draw": [
 		completion("text", "method", "draw text"),
+		completion("textbox", "method", "draw text inside a box"),
 		completion("line", "method", "draw a line"),
 		completion("circle", "method", "draw a circle outline"),
 		completion("filled_circle", "method", "draw a filled circle"),
@@ -509,6 +552,10 @@ function turtlePenCompletions() {
 		completion("circle", "method", "draw a circle"),
 		completion("dot", "method", "draw a dot"),
 		completion("stamp", "method", "stamp turtle shape"),
+		completion("shape", "method", "choose a cursor shape"),
+		completion("hideturtle", "method", "hide the cursor"),
+		completion("showturtle", "method", "show the cursor"),
+		completion("isvisible", "method", "whether the cursor is visible"),
 		completion("distance", "method", "distance to a point"),
 		completion("ondrag", "method", "bind a drag handler")
 	];
@@ -586,6 +633,19 @@ export function pythonIdeCompletionSource(
 ) {
 	return (context: PythonIdeCompletionContext) => {
 		const currentAssetCompletions = assetCompletions?.();
+		const stringCompletion = pythonIdeStringCompletionContext(
+			context.state,
+			context.pos,
+			mode
+		);
+		if (stringCompletion) {
+			return {
+				from: stringCompletion.from,
+				options: stringCompletion.options,
+				validFor: stringCompletion.validFor
+			};
+		}
+
 		const assetStringCompletion = assetStringCompletionContext(
 			context.state,
 			context.pos,
@@ -642,6 +702,27 @@ export function pythonIdeCompletionSource(
 			),
 			validFor: pythonCompletionGlobalValidForRegex
 		};
+	};
+}
+
+function pythonIdeStringCompletionContext(
+	state: EditorState,
+	position: number,
+	mode: PythonIdeMode
+): PythonIdeStringCompletionContext | null {
+	if (mode !== "turtle") return null;
+
+	const line = state.doc.lineAt(position);
+	const lineBeforeCursor = line.text.slice(0, position - line.from);
+	const shapeMatch = lineBeforeCursor.match(
+		turtleShapeStringCompletionPattern
+	);
+	if (!shapeMatch) return null;
+	const partial = shapeMatch[1] ?? "";
+	return {
+		from: position - partial.length,
+		options: turtleShapeCompletions,
+		validFor: pythonTurtleShapeStringCompletionValidForRegex
 	};
 }
 

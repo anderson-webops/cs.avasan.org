@@ -89,6 +89,8 @@ interface TurtleState {
 	fillColor: string;
 	lineWidth: number;
 	background: string;
+	shape: TurtleShapeName;
+	visible: boolean;
 }
 
 interface TurtleFillState {
@@ -102,6 +104,8 @@ interface TurtlePose {
 	y: number;
 	heading: number;
 	penColor: string;
+	shape: TurtleShapeName;
+	visible: boolean;
 }
 
 type TurtleRenderCommand =
@@ -138,6 +142,7 @@ type TurtleRenderCommand =
 			color: string;
 			heading: number;
 			kind: "stamp";
+			shape: TurtleShapeName;
 			x: number;
 			y: number;
 	  }
@@ -188,6 +193,14 @@ interface ResolvedGameAsset {
 }
 
 type PythonIdeAssetFolder = "images" | "music" | "sounds";
+type TurtleShapeName =
+	| "arrow"
+	| "circle"
+	| "classic"
+	| "fancy"
+	| "square"
+	| "triangle"
+	| "turtle";
 
 const imageAssetExtensions = [".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"];
 const audioAssetExtensions = [".wav", ".mp3", ".ogg"];
@@ -196,6 +209,16 @@ const assetCompletionExtensionMap = {
 	music: audioAssetExtensions,
 	sounds: audioAssetExtensions
 } satisfies Record<PythonIdeAssetFolder, string[]>;
+const defaultTurtleShape: TurtleShapeName = "classic";
+const supportedTurtleShapes = new Set<TurtleShapeName>([
+	"arrow",
+	"circle",
+	"classic",
+	"fancy",
+	"square",
+	"triangle",
+	"turtle"
+]);
 const maxPythonIdeProjectFiles = 40;
 const maxImportedTextFileBytes = 512 * 1024;
 const maxImportedBinaryFileBytes = 2 * 1024 * 1024;
@@ -274,10 +297,12 @@ const turtleState: TurtleState = {
 	y: 0,
 	heading: 0,
 	penDown: true,
-	penColor: "#0f766e",
-	fillColor: "#0f766e",
+	penColor: "#000000",
+	fillColor: "#000000",
 	lineWidth: 3,
-	background: "#ffffff"
+	background: "#ffffff",
+	shape: defaultTurtleShape,
+	visible: true
 };
 
 const turtleFillState: TurtleFillState = {
@@ -1136,7 +1161,9 @@ function currentTurtlePose(): TurtlePose {
 		x: turtleState.x,
 		y: turtleState.y,
 		heading: turtleState.heading,
-		penColor: turtleState.penColor
+		penColor: turtleState.penColor,
+		shape: turtleState.shape,
+		visible: turtleState.visible
 	};
 }
 
@@ -1145,7 +1172,9 @@ function turtlePoseChanged(fromPose: TurtlePose, toPose: TurtlePose) {
 		fromPose.x !== toPose.x ||
 		fromPose.y !== toPose.y ||
 		fromPose.heading !== toPose.heading ||
-		fromPose.penColor !== toPose.penColor
+		fromPose.penColor !== toPose.penColor ||
+		fromPose.shape !== toPose.shape ||
+		fromPose.visible !== toPose.visible
 	);
 }
 
@@ -1162,7 +1191,9 @@ function interpolateTurtlePose(
 		x: lerp(fromPose.x, toPose.x, progress),
 		y: lerp(fromPose.y, toPose.y, progress),
 		heading: lerp(fromPose.heading, toPose.heading, progress),
-		penColor: progress < 1 ? fromPose.penColor : toPose.penColor
+		penColor: progress < 1 ? fromPose.penColor : toPose.penColor,
+		shape: progress < 1 ? fromPose.shape : toPose.shape,
+		visible: progress < 1 ? fromPose.visible : toPose.visible
 	};
 }
 
@@ -1175,7 +1206,15 @@ function turtleMovementDuration(fromPose: TurtlePose, toPose: TurtlePose) {
 	return 80;
 }
 
+function normalizeTurtleShape(shape: string): TurtleShapeName {
+	return supportedTurtleShapes.has(shape as TurtleShapeName)
+		? (shape as TurtleShapeName)
+		: defaultTurtleShape;
+}
+
 function drawTurtleMarker(context: CanvasRenderingContext2D, pose: TurtlePose) {
+	if (!pose.visible) return;
+
 	const point = canvasCoordinates(pose.x, pose.y);
 	const radians = (pose.heading * Math.PI) / 180;
 
@@ -1184,9 +1223,108 @@ function drawTurtleMarker(context: CanvasRenderingContext2D, pose: TurtlePose) {
 	context.rotate(-radians);
 	context.lineCap = "round";
 	context.lineJoin = "round";
+	context.lineWidth = 1.5;
+	context.strokeStyle = pose.penColor;
+	context.fillStyle = pose.penColor;
+
+	switch (pose.shape) {
+		case "arrow":
+			drawArrowTurtleShape(context);
+			break;
+		case "circle":
+			drawCircleTurtleShape(context);
+			break;
+		case "fancy":
+			drawFancyTurtleShape(context);
+			break;
+		case "square":
+			drawSquareTurtleShape(context);
+			break;
+		case "triangle":
+			drawTriangleTurtleShape(context);
+			break;
+		case "turtle":
+			drawOriginalTurtleShape(context);
+			break;
+		case "classic":
+		default:
+			drawClassicTurtleShape(context);
+			break;
+	}
+
+	context.restore();
+}
+
+function drawClassicTurtleShape(context: CanvasRenderingContext2D) {
+	context.beginPath();
+	context.moveTo(14, 0);
+	context.lineTo(-7, -6);
+	context.lineTo(-3, 0);
+	context.lineTo(-7, 6);
+	context.closePath();
+	context.fill();
+}
+
+function drawArrowTurtleShape(context: CanvasRenderingContext2D) {
+	context.beginPath();
+	context.moveTo(14, 0);
+	context.lineTo(-10, -8);
+	context.lineTo(-5, 0);
+	context.lineTo(-10, 8);
+	context.closePath();
+	context.fill();
+}
+
+function drawTriangleTurtleShape(context: CanvasRenderingContext2D) {
+	context.beginPath();
+	context.moveTo(12, 0);
+	context.lineTo(-9, -10);
+	context.lineTo(-9, 10);
+	context.closePath();
+	context.fill();
+}
+
+function drawSquareTurtleShape(context: CanvasRenderingContext2D) {
+	context.fillRect(-9, -9, 18, 18);
+}
+
+function drawCircleTurtleShape(context: CanvasRenderingContext2D) {
+	context.beginPath();
+	context.arc(0, 0, 9.5, 0, Math.PI * 2);
+	context.fill();
+}
+
+function drawOriginalTurtleShape(context: CanvasRenderingContext2D) {
+	context.beginPath();
+	context.ellipse(0, 0, 10.5, 7.5, 0, 0, Math.PI * 2);
+	context.fill();
+
+	for (const [x, y, radiusX, radiusY, rotation] of [
+		[6.8, -7.2, 3.1, 1.8, -0.45],
+		[6.8, 7.2, 3.1, 1.8, 0.45],
+		[-6.8, -7.2, 3.1, 1.8, 0.45],
+		[-6.8, 7.2, 3.1, 1.8, -0.45]
+	] as const) {
+		context.beginPath();
+		context.ellipse(x, y, radiusX, radiusY, rotation, 0, Math.PI * 2);
+		context.fill();
+	}
+
+	context.beginPath();
+	context.ellipse(12.8, 0, 3.2, 2.5, 0, 0, Math.PI * 2);
+	context.fill();
+
+	context.beginPath();
+	context.moveTo(-10.5, 0);
+	context.lineTo(-15, -3);
+	context.lineTo(-15, 3);
+	context.closePath();
+	context.fill();
+}
+
+function drawFancyTurtleShape(context: CanvasRenderingContext2D) {
 	context.lineWidth = 1.35;
 	context.strokeStyle = "#14532d";
-
 	context.fillStyle = "#86efac";
 	for (const [x, y, radiusX, radiusY, rotation] of [
 		[7.5, -9, 4.5, 2.5, -0.55],
@@ -1232,7 +1370,6 @@ function drawTurtleMarker(context: CanvasRenderingContext2D, pose: TurtlePose) {
 	context.arc(14.5, -1.6, 0.85, 0, Math.PI * 2);
 	context.arc(14.5, 1.6, 0.85, 0, Math.PI * 2);
 	context.fill();
-	context.restore();
 }
 
 function renderTurtleCommand(
@@ -1317,7 +1454,9 @@ function renderTurtleCommand(
 			x: command.x,
 			y: command.y,
 			heading: command.heading,
-			penColor: command.color
+			penColor: command.color,
+			shape: command.shape,
+			visible: true
 		});
 		return;
 	}
@@ -1474,9 +1613,11 @@ function resetTurtleCanvas() {
 	turtleState.y = 0;
 	turtleState.heading = 0;
 	turtleState.penDown = true;
-	turtleState.penColor = "#0f766e";
-	turtleState.fillColor = "#0f766e";
+	turtleState.penColor = "#000000";
+	turtleState.fillColor = "#000000";
 	turtleState.lineWidth = 3;
+	turtleState.shape = defaultTurtleShape;
+	turtleState.visible = true;
 
 	context.fillStyle = turtleState.background;
 	context.fillRect(0, 0, rect.width, rect.height);
@@ -1601,6 +1742,7 @@ function stampTurtle() {
 			color: turtleState.penColor,
 			heading: turtleState.heading,
 			kind: "stamp",
+			shape: turtleState.shape,
 			x: turtleState.x,
 			y: turtleState.y
 		},
@@ -2350,6 +2492,18 @@ const turtleBridge: TurtleBridge = {
 	},
 	listen() {
 		canvasRef.value?.focus();
+	},
+	setShape(shape: string) {
+		const fromPose = currentTurtlePose();
+		turtleState.shape = normalizeTurtleShape(shape);
+		const toPose = currentTurtlePose();
+		if (turtlePoseChanged(fromPose, toPose)) renderTurtleScene();
+	},
+	setVisible(visible: boolean) {
+		const fromPose = currentTurtlePose();
+		turtleState.visible = visible;
+		const toPose = currentTurtlePose();
+		if (turtlePoseChanged(fromPose, toPose)) renderTurtleScene();
 	}
 };
 

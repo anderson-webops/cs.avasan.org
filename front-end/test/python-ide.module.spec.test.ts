@@ -444,9 +444,13 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("cancelTurtleAnimation()");
 	});
 
-	it("renders the Turtle cursor as a stable green turtle shape", () => {
+	it("renders the original Turtle built-in shapes with classic as default", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/pages/python-ide.vue"),
+			"utf8"
+		);
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
 			"utf8"
 		);
 		const markerStart = pageSource.indexOf("function drawTurtleMarker");
@@ -456,10 +460,29 @@ describe("python IDE project helpers", () => {
 		);
 		const markerSource = pageSource.slice(markerStart, markerEnd);
 
+		expect(pageSource).toContain(
+			"const defaultTurtleShape: TurtleShapeName = \"classic\""
+		);
+		expect(pageSource).toContain("shape: defaultTurtleShape");
+		expect(pageSource).toContain("penColor: \"#000000\"");
+		expect(pageSource).toContain("function drawClassicTurtleShape");
+		expect(pageSource).toContain("function drawArrowTurtleShape");
+		expect(pageSource).toContain("function drawOriginalTurtleShape");
+		expect(pageSource).toContain("function drawFancyTurtleShape");
 		expect(markerSource).toContain("context.ellipse");
 		expect(markerSource).toContain("context.rotate(-radians)");
-		expect(markerSource).toContain("context.fillStyle = \"#22c55e\"");
-		expect(markerSource).not.toContain("context.fillStyle = pose.penColor");
+		expect(markerSource).toContain("case \"classic\"");
+		expect(markerSource).toContain("case \"turtle\"");
+		expect(markerSource).toContain("case \"fancy\"");
+		expect(runtimeSource).toContain(
+			"_builtin_shapes = {\"arrow\", \"circle\", \"classic\", \"fancy\", \"square\", \"triangle\", \"turtle\"}"
+		);
+		expect(runtimeSource).toContain("self._shape = \"classic\"");
+		expect(runtimeSource).toContain("def shape(self, *_args):");
+		expect(runtimeSource).toContain("def hideturtle(self):");
+		expect(runtimeSource).toContain("def showturtle(self):");
+		expect(runtimeSource).toContain("def isvisible(self):");
+		expect(runtimeSource).toContain("def hideturtle(): return _default.hideturtle()");
 	});
 
 	it("guards long-running student loops before executing Python files", () => {
@@ -1163,9 +1186,25 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain(
 			"def filled_circle(self, pos, radius, color):"
 		);
+		expect(runtimeSource).toContain("def textbox(self, text, rect");
 		expect(runtimeSource).toContain("_bridge.drawLine(");
 		expect(runtimeSource).toContain("_bridge.drawCircle(");
 		expect(runtimeSource).toContain("def schedule(self, function, delay):");
+		expect(runtimeSource).toContain(
+			"def schedule_unique(self, function, delay):"
+		);
+		expect(runtimeSource).toContain("def distance_to(self, target):");
+		expect(runtimeSource).toContain("def angle_to(self, target):");
+		expect(runtimeSource).toContain("self.x = self.width / 2");
+		expect(runtimeSource).toContain("def topleft(self):");
+		expect(runtimeSource).toContain("def midbottom(self):");
+		expect(runtimeSource).toContain("def move_ip(self, x, y=None):");
+		expect(runtimeSource).toContain("def get_length(self):");
+		expect(runtimeSource).toContain("def play_once(self, name):");
+		expect(runtimeSource).toContain("def queue(self, name):");
+		expect(runtimeSource).toContain("def is_playing(self):");
+		expect(runtimeSource).toContain("def fadeout(self, duration):");
+		expect(runtimeSource).toContain("def get_volume(self):");
 		expect(runtimeSource).toContain("def pause(self):");
 		expect(runtimeSource).toContain("def unpause(self):");
 		expect(runtimeSource).toContain("def set_volume(self, volume):");

@@ -198,6 +198,8 @@ export interface TurtleBridge {
 	) => void;
 	scheduleTimer: (delayMs: number, callback: (() => void) | null) => void;
 	listen: () => void;
+	setShape: (shape: string) => void;
+	setVisible: (visible: boolean) => void;
 }
 
 export interface RunPythonProjectOptions {
@@ -772,6 +774,7 @@ _bridge = window.__classesPythonIdeTurtle
 _callback_proxies = {}
 _color_mode = 1.0
 _timer_counter = 0
+_builtin_shapes = {"arrow", "circle", "classic", "fancy", "square", "triangle", "turtle"}
 
 def _is_number(value):
     try:
@@ -918,11 +921,15 @@ class Turtle:
         self._y = 0.0
         self._heading = 0.0
         self._pen_down = True
-        self._pen_color = "#0f766e"
-        self._fill_color = "#0f766e"
+        self._pen_color = "#000000"
+        self._fill_color = "#000000"
         self._line_width = 3.0
+        self._shape = "classic"
+        self._visible = True
 
     def _sync_bridge(self):
+        _bridge.setShape(str(self._shape))
+        _bridge.setVisible(bool(self._visible))
         _bridge.setState(
             float(self._x),
             float(self._y),
@@ -1108,6 +1115,13 @@ class Turtle:
         return None
 
     def shape(self, *_args):
+        if len(_args) == 0:
+            return self._shape
+        shape_name = str(_args[0]).lower()
+        if shape_name not in _builtin_shapes:
+            raise ValueError("Unknown turtle shape: {}".format(_args[0]))
+        self._shape = shape_name
+        self._sync_bridge()
         return None
 
     def clear(self):
@@ -1118,9 +1132,11 @@ class Turtle:
         self._y = 0.0
         self._heading = 0.0
         self._pen_down = True
-        self._pen_color = "#0f766e"
-        self._fill_color = "#0f766e"
+        self._pen_color = "#000000"
+        self._fill_color = "#000000"
         self._line_width = 3.0
+        self._shape = "classic"
+        self._visible = True
         _bridge.reset()
 
     def distance(self, x, y=None):
@@ -1142,10 +1158,17 @@ class Turtle:
         return math.degrees(math.atan2(float(target_y) - self.ycor(), float(target_x) - self.xcor()))
 
     def hideturtle(self):
+        self._visible = False
+        self._sync_bridge()
         return None
 
     def showturtle(self):
+        self._visible = True
+        self._sync_bridge()
         return None
+
+    def isvisible(self):
+        return self._visible
 
     def begin_fill(self):
         self._sync_bridge()
@@ -1208,6 +1231,11 @@ def onscreenclick(function, btn=1, add=None): _screen.onscreenclick(function, bt
 def ondrag(function, btn=1, add=None): _default.ondrag(function, btn, add)
 def speed(*args): return _default.speed(*args)
 def shape(*args): return _default.shape(*args)
+def hideturtle(): return _default.hideturtle()
+def ht(): return _default.hideturtle()
+def showturtle(): return _default.showturtle()
+def st(): return _default.showturtle()
+def isvisible(): return _default.isvisible()
 def begin_fill(): return _default.begin_fill()
 def end_fill(): return _default.end_fill()
 def mainloop(): _screen.mainloop()
@@ -1219,6 +1247,7 @@ const pgzeroShim = `
 import builtins
 import inspect
 import json
+import math
 import time
 from js import window
 
@@ -1231,6 +1260,12 @@ def _number(value, fallback=0):
         return float(value)
     except Exception:
         return float(fallback)
+
+def _point(value, fallback=(0, 0)):
+    try:
+        return _number(value[0], fallback[0]), _number(value[1], fallback[1])
+    except Exception:
+        return float(fallback[0]), float(fallback[1])
 
 def _rect_parts(value):
     if isinstance(value, Rect):
@@ -1371,8 +1406,25 @@ class Rect:
 
     @center.setter
     def center(self, value):
-        self.x = _number(value[0]) - self.width / 2
-        self.y = _number(value[1]) - self.height / 2
+        x, y = _point(value, self.center)
+        self.x = x - self.width / 2
+        self.y = y - self.height / 2
+
+    @property
+    def centerx(self):
+        return self.center[0]
+
+    @centerx.setter
+    def centerx(self, value):
+        self.center = (value, self.centery)
+
+    @property
+    def centery(self):
+        return self.center[1]
+
+    @centery.setter
+    def centery(self, value):
+        self.center = (self.centerx, value)
 
     @property
     def pos(self):
@@ -1380,8 +1432,31 @@ class Rect:
 
     @pos.setter
     def pos(self, value):
-        self.x = _number(value[0])
-        self.y = _number(value[1])
+        self.x, self.y = _point(value, self.pos)
+
+    @property
+    def w(self):
+        return self.width
+
+    @w.setter
+    def w(self, value):
+        self.width = _number(value, self.width)
+
+    @property
+    def h(self):
+        return self.height
+
+    @h.setter
+    def h(self, value):
+        self.height = _number(value, self.height)
+
+    @property
+    def size(self):
+        return (self.width, self.height)
+
+    @size.setter
+    def size(self, value):
+        self.width, self.height = _point(value, self.size)
 
     @property
     def topleft(self):
@@ -1389,8 +1464,81 @@ class Rect:
 
     @topleft.setter
     def topleft(self, value):
-        self.left = value[0]
-        self.top = value[1]
+        self.left, self.top = _point(value, self.topleft)
+
+    @property
+    def topright(self):
+        return (self.right, self.top)
+
+    @topright.setter
+    def topright(self, value):
+        self.right, self.top = _point(value, self.topright)
+
+    @property
+    def bottomleft(self):
+        return (self.left, self.bottom)
+
+    @bottomleft.setter
+    def bottomleft(self, value):
+        self.left, self.bottom = _point(value, self.bottomleft)
+
+    @property
+    def bottomright(self):
+        return (self.right, self.bottom)
+
+    @bottomright.setter
+    def bottomright(self, value):
+        self.right, self.bottom = _point(value, self.bottomright)
+
+    @property
+    def midtop(self):
+        return (self.centerx, self.top)
+
+    @midtop.setter
+    def midtop(self, value):
+        self.centerx, self.top = _point(value, self.midtop)
+
+    @property
+    def midbottom(self):
+        return (self.centerx, self.bottom)
+
+    @midbottom.setter
+    def midbottom(self, value):
+        self.centerx, self.bottom = _point(value, self.midbottom)
+
+    @property
+    def midleft(self):
+        return (self.left, self.centery)
+
+    @midleft.setter
+    def midleft(self, value):
+        self.left, self.centery = _point(value, self.midleft)
+
+    @property
+    def midright(self):
+        return (self.right, self.centery)
+
+    @midright.setter
+    def midright(self, value):
+        self.right, self.centery = _point(value, self.midright)
+
+    def copy(self):
+        return Rect(self.x, self.y, self.width, self.height)
+
+    def move(self, x, y=None):
+        moved = self.copy()
+        moved.move_ip(x, y)
+        return moved
+
+    def move_ip(self, x, y=None):
+        delta_x, delta_y = _point(x, (0, 0)) if y is None else (_number(x), _number(y))
+        self.x += delta_x
+        self.y += delta_y
+
+    def inflate(self, width, height):
+        inflated = self.copy()
+        inflated.inflate_ip(width, height)
+        return inflated
 
     def collidepoint(self, pos):
         x = _number(pos[0])
@@ -1436,13 +1584,15 @@ class Actor:
         self.height = _number(kwargs.pop("height", natural_height), natural_height)
         self.angle = _number(kwargs.pop("angle", 0), 0)
         self.visible = kwargs.pop("visible", True)
+        initial_pos = pos if pos is not None else kwargs.pop("pos", None)
 
-        if pos is None:
-            self.x = _number(kwargs.pop("x", 320), 320)
-            self.y = _number(kwargs.pop("y", 200), 200)
-        else:
-            self.x = _number(pos[0], 320)
-            self.y = _number(pos[1], 200)
+        self.x = self.width / 2
+        self.y = self.height / 2
+        if initial_pos is not None:
+            self.pos = initial_pos
+        if "x" in kwargs or "y" in kwargs:
+            self.x = _number(kwargs.pop("x", self.x), self.x)
+            self.y = _number(kwargs.pop("y", self.y), self.y)
 
         for key, value in kwargs.items():
             setattr(self, key, value)
@@ -1510,8 +1660,119 @@ class Actor:
     def center(self, value):
         self.pos = value
 
+    @property
+    def centerx(self):
+        return self.x
+
+    @centerx.setter
+    def centerx(self, value):
+        self.x = _number(value, self.x)
+
+    @property
+    def centery(self):
+        return self.y
+
+    @centery.setter
+    def centery(self, value):
+        self.y = _number(value, self.y)
+
+    @property
+    def w(self):
+        return self.width
+
+    @w.setter
+    def w(self, value):
+        self.width = _number(value, self.width)
+
+    @property
+    def h(self):
+        return self.height
+
+    @h.setter
+    def h(self, value):
+        self.height = _number(value, self.height)
+
+    @property
+    def size(self):
+        return (self.width, self.height)
+
+    @size.setter
+    def size(self, value):
+        self.width, self.height = _point(value, self.size)
+
+    @property
+    def topleft(self):
+        return (self.left, self.top)
+
+    @topleft.setter
+    def topleft(self, value):
+        self.left, self.top = _point(value, self.topleft)
+
+    @property
+    def topright(self):
+        return (self.right, self.top)
+
+    @topright.setter
+    def topright(self, value):
+        self.right, self.top = _point(value, self.topright)
+
+    @property
+    def bottomleft(self):
+        return (self.left, self.bottom)
+
+    @bottomleft.setter
+    def bottomleft(self, value):
+        self.left, self.bottom = _point(value, self.bottomleft)
+
+    @property
+    def bottomright(self):
+        return (self.right, self.bottom)
+
+    @bottomright.setter
+    def bottomright(self, value):
+        self.right, self.bottom = _point(value, self.bottomright)
+
+    @property
+    def midtop(self):
+        return (self.centerx, self.top)
+
+    @midtop.setter
+    def midtop(self, value):
+        self.centerx, self.top = _point(value, self.midtop)
+
+    @property
+    def midbottom(self):
+        return (self.centerx, self.bottom)
+
+    @midbottom.setter
+    def midbottom(self, value):
+        self.centerx, self.bottom = _point(value, self.midbottom)
+
+    @property
+    def midleft(self):
+        return (self.left, self.centery)
+
+    @midleft.setter
+    def midleft(self, value):
+        self.left, self.centery = _point(value, self.midleft)
+
+    @property
+    def midright(self):
+        return (self.right, self.centery)
+
+    @midright.setter
+    def midright(self, value):
+        self.right, self.centery = _point(value, self.midright)
+
     def _rect(self):
         return Rect(self.left, self.top, self.width, self.height)
+
+    def _target_position(self, target):
+        if hasattr(target, "pos"):
+            return _point(target.pos, self.pos)
+        if hasattr(target, "x") and hasattr(target, "y"):
+            return _number(target.x), _number(target.y)
+        return _point(target, self.pos)
 
     def draw(self):
         if self.visible:
@@ -1532,6 +1793,14 @@ class Actor:
 
     def contains(self, other):
         return self._rect().contains(other)
+
+    def distance_to(self, target):
+        target_x, target_y = self._target_position(target)
+        return math.hypot(target_x - self.x, target_y - self.y)
+
+    def angle_to(self, target):
+        target_x, target_y = self._target_position(target)
+        return math.degrees(math.atan2(self.y - target_y, target_x - self.x))
 
 class _Keyboard:
     def __getattr__(self, key):
@@ -1576,6 +1845,16 @@ class _ScreenDraw:
             str(text),
             float(_number(pos[0])),
             float(_number(pos[1])),
+            _normalize_color(color),
+            float(_number(fontsize, 24)),
+        )
+
+    def textbox(self, text, rect, color="white", fontsize=24, **_kwargs):
+        x, y, width, height = _rect_parts(rect)
+        _bridge.drawText(
+            str(text),
+            float(x + width / 2),
+            float(y + height / 2),
             _normalize_color(color),
             float(_number(fontsize, 24)),
         )
@@ -1674,13 +1953,16 @@ class _Sound:
     def __init__(self, name):
         self.name = str(name)
 
-    def play(self, *_args, **_kwargs):
+    def play(self, loops=0, *_args, **_kwargs):
         _bridge.playSound(self.name)
         return None
 
     def stop(self):
         _bridge.stopSound(self.name)
         return None
+
+    def get_length(self):
+        return 0.0
 
 class _SoundLibrary:
     def __getattr__(self, name):
@@ -1692,23 +1974,52 @@ class _SoundLibrary:
 sounds = _SoundLibrary()
 
 class _Music:
+    def __init__(self):
+        self._volume = 1.0
+        self._playing = False
+        self._queued = None
+
     def play(self, name):
         _bridge.playMusic(str(name))
+        self._playing = True
+        self._queued = None
+
+    def play_once(self, name):
+        self.play(name)
+
+    def queue(self, name):
+        self._queued = str(name)
 
     def pause(self):
         _bridge.pauseMusic()
+        self._playing = False
         return None
 
     def unpause(self):
         _bridge.unpauseMusic()
+        self._playing = True
         return None
 
     def set_volume(self, volume):
-        _bridge.setMusicVolume(float(_number(volume, 1)))
+        self._volume = max(0.0, min(1.0, float(_number(volume, 1))))
+        _bridge.setMusicVolume(self._volume)
+        return None
+
+    def get_volume(self):
+        return self._volume
+
+    def is_playing(self):
+        return bool(self._playing)
+
+    def fadeout(self, duration):
+        _bridge.stopMusic()
+        self._playing = False
         return None
 
     def stop(self):
         _bridge.stopMusic()
+        self._playing = False
+        self._queued = None
         return None
 
 music = _Music()
