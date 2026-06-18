@@ -138,6 +138,58 @@ function supplementalLabLabelReplacement(_match: string, number: string) {
 	return supplementalPurposeLabel(number).replace("Practice", "Lab");
 }
 
+function compactTitleFocus(text: string, fallback: string) {
+	const compacted = cleanTitleText(text)
+		.replace(
+			/:\s*(?:Applied Challenge|Core Project|Debugging and Failure Modes|Diagnostic Checkpoint|Extension Challenge|Fluency Drill|Focused Practice|Modeling or Error Analysis|Open-Ended Variant|Planning and Architecture|Review and Reflection|Standards Practice Set|Verification and Reflection)$/i,
+			""
+		)
+		.replace(
+			/^(?:Applied Challenge|Core Project|Debugging and Failure Modes|Diagnostic Checkpoint|Extension Challenge|Fluency Drill|Focused Practice|Modeling or Error Analysis|Open-Ended Variant|Planning and Architecture|Review|Standards Practice Set|Verification Review):\s*/i,
+			""
+		)
+		.replace(/^(?:Module|Unit|Chapter)\s+\d+\s*[:.-]?\s*/i, "")
+		.replace(/^Check-In\s+#(\d+)\s*[:.-]?\s*/i, "Check-In $1: ")
+		.replace(/^J\d+X?\d+\s*[:.-]?\s*/i, "")
+		.replace(/^[A-Z]{1,6}\d+[A-Z]?\s*[:.-]?\s*/i, "")
+		.replace(/^(?:Applied|Implementation) (?:Lab|Studio):\s*/i, "")
+		.replace(/:\s*(?:Applied|Implementation) (?:Lab|Studio)$/i, "")
+		.replace(/:+\s*$/g, "")
+		.replace(/\s{2,}/g, " ")
+		.trim();
+
+	if (
+		!compacted ||
+		/^(?:Application Check|Core Concepts|Master Project|Setup and Tooling)$/i.test(
+			compacted
+		)
+	) {
+		return fallback;
+	}
+
+	return compacted;
+}
+
+function genericTitleLabel(label: string) {
+	const labels: Record<string, string> = {
+		"Review and Reflection": "Review",
+		"Verification and Reflection": "Verification Review"
+	};
+
+	return labels[label] ?? label;
+}
+
+function contextualGenericTitle(
+	courseTitle: string,
+	moduleTitle: string,
+	label: string,
+	focusSource = moduleTitle
+) {
+	const focus = compactTitleFocus(focusSource, courseTitle);
+
+	return `${genericTitleLabel(label)}: ${focus}`;
+}
+
 function cleanDisplayTitle(text: string) {
 	return cleanTitleText(text)
 		.replace(/\bTodo\b/g, "To-Do")
@@ -238,7 +290,7 @@ function genericSupplementalNeedsCourseContext(moduleTitle: string) {
 }
 
 function contextualizeGenericItemTitle(
-	_courseTitle: string,
+	courseTitle: string,
 	moduleTitle: string,
 	itemTitle: string
 ) {
@@ -257,10 +309,10 @@ function contextualizeGenericItemTitle(
 		sameTitle(baseTitle, moduleTitle) ||
 		genericSupplementalNeedsCourseContext(moduleTitle)
 	) {
-		return label;
+		return contextualGenericTitle(courseTitle, moduleTitle, label);
 	}
 
-	return label;
+	return contextualGenericTitle(courseTitle, moduleTitle, label, baseTitle);
 }
 
 function normalizeDisplayTitles(course: RawCourse) {
@@ -305,6 +357,7 @@ function conciseGenericItemTitle(suffix: string) {
 		"Modeling or Error Analysis",
 		"Open-Ended Variant",
 		"Planning and Architecture",
+		"Review and Reflection",
 		"Standards Practice Set",
 		"Verification and Reflection"
 	]);
@@ -317,6 +370,56 @@ function conciseGenericColonTitle(title: string) {
 	if (colonIndex < 0) return null;
 
 	return conciseGenericItemTitle(title.slice(colonIndex + 1));
+}
+
+function contextualizeGenericDisplayTitles(course: RawCourse) {
+	const genericTitles = new Set([
+		"Applied Challenge",
+		"Challenge Lab",
+		"Challenge Practice",
+		"Core Project",
+		"Debugging and Failure Modes",
+		"Diagnostic Checkpoint",
+		"Extension Challenge",
+		"Extension Lab",
+		"Extension Practice",
+		"Fluency Drill",
+		"Focused Practice",
+		"Modeling or Error Analysis",
+		"Open-Ended Variant",
+		"Planning and Architecture",
+		"Review and Reflection",
+		"Standards Practice Set",
+		"Transfer Lab",
+		"Transfer Practice",
+		"Verification and Reflection"
+	]);
+
+	for (const module of course.modules) {
+		for (const item of [
+			...module.curriculum,
+			...module.supplementalProjects
+		]) {
+			if (genericTitles.has(item.title)) {
+				item.title = contextualGenericTitle(
+					course.name,
+					module.title,
+					item.title
+				);
+				continue;
+			}
+
+			const colonSuffix = conciseGenericColonTitle(item.title);
+			if (!colonSuffix) continue;
+
+			item.title = contextualGenericTitle(
+				course.name,
+				module.title,
+				colonSuffix,
+				item.title
+			);
+		}
+	}
 }
 
 function normalizeGeneratedSupplementalLabel(text: string) {
@@ -367,7 +470,14 @@ function removeRedundantItemTitleContext(
 		const colonSuffix = colonMatch
 			? conciseGenericItemTitle(colonMatch[1])
 			: null;
-		if (colonSuffix) return colonSuffix;
+		if (colonSuffix) {
+			return contextualGenericTitle(
+				course.name,
+				module.title,
+				colonSuffix,
+				prefix
+			);
+		}
 
 		const spacedMatch = title.match(
 			new RegExp(
@@ -378,10 +488,20 @@ function removeRedundantItemTitleContext(
 		const spacedSuffix = spacedMatch
 			? conciseGenericItemTitle(spacedMatch[1])
 			: null;
-		if (spacedSuffix) return spacedSuffix;
+		if (spacedSuffix) {
+			return contextualGenericTitle(
+				course.name,
+				module.title,
+				spacedSuffix,
+				prefix
+			);
+		}
 	}
 
-	return conciseGenericColonTitle(title) ?? title;
+	const colonSuffix = conciseGenericColonTitle(title);
+	return colonSuffix
+		? contextualGenericTitle(course.name, module.title, colonSuffix, title)
+		: title;
 }
 
 function normalizeContextualItemTitles(course: RawCourse) {
@@ -6759,6 +6879,7 @@ export function normalizeRawCourse(id: string, rawCourse: RawCourse) {
 	neutralizeStudentFacingCourseText(course);
 	normalizeGeneratedSupplementalLabels(course);
 	normalizeLegacyBranding(course);
+	contextualizeGenericDisplayTitles(course);
 	formatVisibleCourseMarkdown(course);
 	return course;
 }

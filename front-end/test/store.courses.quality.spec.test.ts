@@ -26,6 +26,17 @@ function allCourseText(course: Awaited<ReturnType<typeof loadRawCourse>>) {
 		.join("\n");
 }
 
+function allCourseItemTitles(
+	course: NonNullable<Awaited<ReturnType<typeof loadRawCourse>>>
+) {
+	return course.modules.flatMap(module =>
+		[...module.curriculum, ...module.supplementalProjects].map(item => ({
+			module: module.title,
+			title: item.title
+		}))
+	);
+}
+
 function wordCount(text: string) {
 	return text.match(/\b[\w'+-]+\b/g)?.length ?? 0;
 }
@@ -185,6 +196,74 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(/introduce the main goal/i);
 			expect(corpus).not.toMatch(/build the central artifact/i);
 			expect(corpus).not.toMatch(/alternate supplemental snapshot/i);
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
+
+	it(
+		"keeps generated support card titles topic-specific",
+		async () => {
+			const genericStandaloneTitles = new Set([
+				"Applied Challenge",
+				"Challenge Lab",
+				"Challenge Practice",
+				"Core Project",
+				"Debugging and Failure Modes",
+				"Diagnostic Checkpoint",
+				"Extension Challenge",
+				"Extension Lab",
+				"Extension Practice",
+				"Fluency Drill",
+				"Focused Practice",
+				"Modeling or Error Analysis",
+				"Open-Ended Variant",
+				"Planning and Architecture",
+				"Review and Reflection",
+				"Standards Practice Set",
+				"Transfer Lab",
+				"Transfer Practice",
+				"Verification and Reflection"
+			]);
+			const repeatedSuffixPattern =
+				/^(Applied Challenge|Core Project|Debugging and Failure Modes|Diagnostic Checkpoint|Extension Challenge|Fluency Drill|Focused Practice|Modeling or Error Analysis|Open-Ended Variant|Planning and Architecture|Review|Standards Practice Set|Transfer Practice|Extension Practice|Challenge Practice|Verification Review):\s+.*:\s+(Applied Challenge|Core Project|Debugging and Failure Modes|Diagnostic Checkpoint|Extension Challenge|Fluency Drill|Focused Practice|Modeling or Error Analysis|Open-Ended Variant|Planning and Architecture|Review and Reflection|Standards Practice Set|Transfer Practice|Extension Practice|Challenge Practice|Verification and Reflection)$/i;
+			const badArtifactPattern =
+				/\bSupplemental\s+[2-9]\b|\bImplementation Lab\b|:\s*(?:Core Project|Review and Reflection|Extension Challenge)\s*$|:\s*$/i;
+			const loadedCourses = await Promise.all(
+				courseCatalog.map(async entry => ({
+					entry,
+					course: await loadRawCourse(entry.id)
+				}))
+			);
+			const badTitles = loadedCourses.flatMap(({ entry, course }) =>
+				course
+					? allCourseItemTitles(course).flatMap(item =>
+							genericStandaloneTitles.has(item.title) ||
+							repeatedSuffixPattern.test(item.title) ||
+							badArtifactPattern.test(item.title)
+								? [
+										`${entry.id} | ${item.module} | ${item.title}`
+									]
+								: []
+						)
+					: []
+			);
+			const corpus = loadedCourses
+				.map(({ course }) =>
+					course
+						? allCourseItemTitles(course)
+								.map(item => item.title)
+								.join("\n")
+						: ""
+				)
+				.join("\n");
+
+			expect(badTitles).toEqual([]);
+			expect(corpus).toContain(
+				"Transfer Practice: Setup, Editors, and Asset Workflow"
+			);
+			expect(corpus).toContain(
+				"Review: CSV Summaries and Sanity Checks"
+			);
 		},
 		COURSE_SWEEP_TIMEOUT
 	);
@@ -2122,7 +2201,7 @@ describe("course text quality normalization", () => {
 		);
 		expect(spinner.content).not.toContain("Build a working result for");
 
-		const imagesReview = findItem(pygames!, /Images and Sprites: Review/);
+		const imagesReview = findItem(pygames!, /Review: Images and Sprites/);
 		expect(imagesReview.content).toContain(
 			"PyGame development: game-loop state, actors, events, collisions, timing, assets, and playable feedback"
 		);
