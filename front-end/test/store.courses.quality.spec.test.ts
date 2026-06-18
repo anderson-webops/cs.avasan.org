@@ -25,6 +25,16 @@ function allCourseText(course: Awaited<ReturnType<typeof loadRawCourse>>) {
 		.join("\n");
 }
 
+function wordCount(text: string) {
+	return text.match(/\b[\w'+-]+\b/g)?.length ?? 0;
+}
+
+function isProjectLikeTitle(title: string) {
+	return /project|capstone|challenge|lab|practice|drill|notebook|audit|reflection|build|create|implement|exercise/i.test(
+		title
+	);
+}
+
 function findItem(
 	course: NonNullable<Awaited<ReturnType<typeof loadRawCourse>>>,
 	titlePattern: RegExp,
@@ -1773,6 +1783,51 @@ describe("course text quality normalization", () => {
 		expect(calendarMachine.content).toContain("Test zero days");
 		expect(calendarMachine.content).toContain("**Checkpoints:**");
 	});
+
+	it(
+		"keeps short project-like items backed by review structure",
+		async () => {
+			const courses = await Promise.all(
+				courseCatalog.map(async entry => ({
+					id: entry.id,
+					course: await loadRawCourse(entry.id)
+				}))
+			);
+			const reviewStructurePattern =
+				/\*\*(?:Outcome|Required outcome|Success criteria|Completion checks|Checkpoints|Extension):\*\*/i;
+			const weakItems = courses.flatMap(({ id, course }) =>
+				(course?.modules ?? []).flatMap(module =>
+					[
+						...module.curriculum.map(item => ({
+							section: "curriculum",
+							item
+						})),
+						...module.supplementalProjects.map(item => ({
+							section: "supplementalProjects",
+							item
+						}))
+					].flatMap(({ section, item }) => {
+						const projectLike =
+							isProjectLikeTitle(item.title) ||
+							Boolean(item.projectLink || item.solutionLink);
+						const shortWithoutReview =
+							projectLike &&
+							wordCount(item.content) < 95 &&
+							!reviewStructurePattern.test(item.content);
+
+						return shortWithoutReview
+							? [
+									`${id} | ${module.title} | ${section} | ${item.title} | ${wordCount(item.content)} words`
+								]
+							: [];
+					})
+				)
+			);
+
+			expect(weakItems).toEqual([]);
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
 
 	it("preserves structured guidance after UI course-store normalization", async () => {
 		const store = useCoursesStore();

@@ -671,6 +671,8 @@ interface CourseTextContext {
 
 const structuredSupportPattern =
 	/\*\*(?:Goal|Project goal|Teaching flow|Concept path|Learning sequence|Diagnostic guidance|Readiness check|Misconception check|Common pitfalls|Exit check|Mastery check|Investigation|Remote investigation|Explanation|Science explanation|Studio focus|Evidence target|Evidence targets|AP connection):?\*\*/i;
+const projectReviewSupportPattern =
+	/\*\*(?:Outcome|Required outcome|Success criteria|Completion checks|Checkpoints|Extension):\*\*/i;
 
 const placeholderContentPattern =
 	/\b(?:introduce the main goal|build the central artifact|define the success criteria|use the .* snapshot|alternate supplemental snapshot)\b/i;
@@ -2188,6 +2190,16 @@ function needsPygameProjectCompletionSupport(context: CourseTextContext) {
 		!/\*\*(?:Outcome|Required outcome|Checkpoints|Completion checks|Extension):\*\*/i.test(
 			content
 		)
+	);
+}
+
+function needsShortProjectReviewSupport(context: CourseTextContext) {
+	const content = context.item.content;
+
+	return (
+		isProjectLikeItem(context.item) &&
+		wordCount(content) < 95 &&
+		!projectReviewSupportPattern.test(content)
 	);
 }
 
@@ -6064,6 +6076,13 @@ function qualitySupportFor(context: CourseTextContext) {
 	return lessonSupport(context);
 }
 
+function shortProjectReviewSupport(context: CourseTextContext) {
+	return [
+		`**Completion checks:**\n${compactGeneratedProjectSupport(context, completionChecks(context)).join("\n")}`,
+		`**Extension:** ${compactGeneratedProjectSupport(context, [extensionPrompt(context)])[0]}`
+	].join("\n\n");
+}
+
 function rewritePlaceholderCourseText(course: RawCourse, courseId: string) {
 	for (const module of course.modules) {
 		for (const section of ["curriculum", "supplementalProjects"] as const) {
@@ -6111,13 +6130,23 @@ function normalizeCourseTextQuality(course: RawCourse, courseId: string) {
 					item.content = `${supportBaseContent(item.content)}\n\n${pygameProjectCompletionSupport()}`;
 				}
 
-				if (!needsContentSupport(context)) continue;
+				if (!needsContentSupport(context)) {
+					if (needsShortProjectReviewSupport(context)) {
+						item.content = `${supportBaseContent(item.content)}\n\n${shortProjectReviewSupport(context)}`;
+					}
+
+					continue;
+				}
 
 				const currentContent = supportBaseContent(item.content);
 				const support = qualitySupportFor(context);
 				item.content = currentContent
 					? `${currentContent}\n\n${support}`
 					: support;
+
+				if (needsShortProjectReviewSupport(context)) {
+					item.content = `${supportBaseContent(item.content)}\n\n${shortProjectReviewSupport(context)}`;
+				}
 			}
 		}
 	}

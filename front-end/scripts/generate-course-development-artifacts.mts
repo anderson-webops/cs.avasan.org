@@ -9,7 +9,10 @@ import {
 	courseContentOnlySourcePolicies,
 	courseImplementationSourceRepos
 } from "../src/stores/courses/course-implementation-artifacts";
-import type { RawCourse, RawCourseModuleItem } from "../src/stores/courses/types";
+import type {
+	RawCourse,
+	RawCourseModuleItem
+} from "../src/stores/courses/types";
 
 const repoRoot = path.resolve(import.meta.dirname, "../..");
 const outDir = path.join(repoRoot, "no-include");
@@ -17,7 +20,7 @@ const instructionRoot =
 	"/Users/jacobanderson/Documents/Work/Instruction-Material";
 
 const structuredSupportPattern =
-	/\*\*(?:Project goal|Teaching flow|Diagnostic guidance|Remote investigation|Science explanation|Studio focus|AP connection|Remote investigation):?\*\*/i;
+	/\*\*(?:Goal|Project goal|Project target|Concept path|Learning path|Teaching flow|Diagnostic guidance|Readiness check|Common pitfalls|Remote investigation|Science explanation|Studio focus|Focus|Outcome|Required outcome|Success criteria|Steps|Build steps|Build path|Implementation steps|Evidence target|Evidence targets|Completion checks|Checkpoints|Extension|AP connection):?\*\*/i;
 const placeholderPattern =
 	/\b(?:introduce the main goal|build the central artifact|define the success criteria|alternate supplemental snapshot)\b/i;
 const projectTitlePattern =
@@ -84,14 +87,23 @@ function sourceFiles(root: string) {
 			if (entry.name.startsWith(".")) continue;
 			const fullPath = path.join(current, entry.name);
 			if (entry.isDirectory()) {
-				if (!["build", "cmake-build-debug", "node_modules", "dist"].includes(entry.name)) {
+				if (
+					![
+						"build",
+						"cmake-build-debug",
+						"node_modules",
+						"dist"
+					].includes(entry.name)
+				) {
 					stack.push(fullPath);
 				}
 				continue;
 			}
 			const relative = path.relative(root, fullPath);
 			if (generatedReadinessFiles.has(relative)) continue;
-			if (/\.(?:java|py|cpp|c|h|hpp|js|ts|swift|cs|md)$/i.test(entry.name)) {
+			if (
+				/\.(?:java|py|cpp|c|h|hpp|js|ts|swift|cs|md)$/i.test(entry.name)
+			) {
 				results.push(relative);
 			}
 		}
@@ -101,23 +113,24 @@ function sourceFiles(root: string) {
 }
 
 function allItems(course: RawCourse) {
-	return course.modules.flatMap(module =>
-		[
-			...module.curriculum.map(item => ({
-				module: module.title,
-				section: "curriculum",
-				item
-			})),
-			...module.supplementalProjects.map(item => ({
-				module: module.title,
-				section: "supplementalProjects",
-				item
-			}))
-		] as Array<{
-			module: string;
-			section: string;
-			item: RawCourseModuleItem;
-		}>
+	return course.modules.flatMap(
+		module =>
+			[
+				...module.curriculum.map(item => ({
+					module: module.title,
+					section: "curriculum",
+					item
+				})),
+				...module.supplementalProjects.map(item => ({
+					module: module.title,
+					section: "supplementalProjects",
+					item
+				}))
+			] as Array<{
+				module: string;
+				section: string;
+				item: RawCourseModuleItem;
+			}>
 	);
 }
 
@@ -141,7 +154,10 @@ function comparableFolderName(folder: string) {
 	return folder
 		.toLowerCase()
 		.replace(/(?:^|-)java$/u, "")
-		.replace(/(?:^|-)(?:starter|solution|updated|template|reference)$/gu, "")
+		.replace(
+			/(?:^|-)(?:starter|solution|updated|template|reference)$/gu,
+			""
+		)
 		.replace(/(?:^|-)all-star$/u, "")
 		.replace(/[^a-z0-9]+/gu, "");
 }
@@ -180,7 +196,9 @@ function unityFullProjectReadiness(root: string) {
 		"UGD-FullProject-Solution/Assets/Tests/EditMode/GameSessionTests.cs",
 		"UGD-FullProject-Solution/THIRD_PARTY_ASSETS.md"
 	];
-	const missing = required.filter(file => !fs.existsSync(path.join(root, file)));
+	const missing = required.filter(
+		file => !fs.existsSync(path.join(root, file))
+	);
 
 	return {
 		ready: missing.length === 0,
@@ -204,8 +222,7 @@ function classifyUnlinkedFolder(
 		return {
 			folder,
 			classification: "covered-by-linked-variant",
-			status:
-				"tracked: an alternate starter, solution, language, updated, or template variant is linked in the catalog"
+			status: "tracked: an alternate starter, solution, language, updated, or template variant is linked in the catalog"
 		};
 	}
 
@@ -213,17 +230,19 @@ function classifyUnlinkedFolder(
 		return {
 			folder,
 			classification: "covered-by-shared-repo-course",
-			status:
-				"tracked: active in another catalog course that shares this source repository"
+			status: "tracked: active in another catalog course that shares this source repository"
 		};
 	}
 
-	if (/starter|solution|template|updated|reference|recap|check[- ]?in/i.test(folder)) {
+	if (
+		/starter|solution|template|updated|reference|recap|check[- ]?in/i.test(
+			folder
+		)
+	) {
 		return {
 			folder,
 			classification: "support-or-variant-source",
-			status:
-				"tracked: support material or variant source folder; keep out of active project links unless promoted"
+			status: "tracked: support material or variant source folder; keep out of active project links unless promoted"
 		};
 	}
 
@@ -231,8 +250,7 @@ function classifyUnlinkedFolder(
 		return {
 			folder,
 			classification: "legacy-or-archive",
-			status:
-				"tracked: legacy/archive folder; do not link as active course work without explicit promotion"
+			status: "tracked: legacy/archive folder; do not link as active course work without explicit promotion"
 		};
 	}
 
@@ -240,16 +258,14 @@ function classifyUnlinkedFolder(
 		return {
 			folder,
 			classification: "ledgered-inactive-source",
-			status:
-				"tracked: listed in SOURCE_BACKLOG.md as inactive/promotable source; not an unresolved active-placement gap"
+			status: "tracked: listed in SOURCE_BACKLOG.md as inactive/promotable source; not an unresolved active-placement gap"
 		};
 	}
 
 	return {
 		folder,
 		classification: "source-backlog-recorded",
-		status:
-			"tracked: source folder is recorded in parity backlog and needs explicit future placement only if promoted"
+		status: "tracked: source folder is recorded in parity backlog and needs explicit future placement only if promoted"
 	};
 }
 
@@ -269,9 +285,12 @@ function severityFlags(courseId: string, item: RawCourseModuleItem) {
 	const structured = structuredSupportPattern.test(item.content);
 	const projectLike = projectTitlePattern.test(item.title);
 
-	if (placeholderPattern.test(item.content)) flags.push("placeholder-language");
-	if (!structured && projectLike && words < 95) flags.push("short-project-spec");
-	if (!structured && !projectLike && words < 65) flags.push("short-lesson-text");
+	if (placeholderPattern.test(item.content))
+		flags.push("placeholder-language");
+	if (!structured && projectLike && words < 95)
+		flags.push("short-project-spec");
+	if (!structured && !projectLike && words < 65)
+		flags.push("short-lesson-text");
 	if (
 		scienceCourseIds.has(courseId) &&
 		!scienceEvidencePattern.test(item.content) &&
@@ -298,8 +317,11 @@ const courses = (
 			course: await loadRawCourse(entry.id)
 		}))
 	)
-).filter((row): row is { entry: (typeof courseCatalog)[number]; course: RawCourse } =>
-	Boolean(row.course)
+).filter(
+	(
+		row
+	): row is { entry: (typeof courseCatalog)[number]; course: RawCourse } =>
+		Boolean(row.course)
 );
 
 fs.mkdirSync(outDir, { recursive: true });
@@ -393,14 +415,16 @@ writeMd(
 		"",
 		asTable(
 			["Course", "Module", "Section", "Title", "Words", "Flags"],
-			highSeverityLedger.slice(0, 200).map(row => [
-				row.courseId,
-				row.module.replaceAll("|", "/"),
-				row.section,
-				row.title.replaceAll("|", "/"),
-				row.wordCount,
-				row.flags.join(", ")
-			])
+			highSeverityLedger
+				.slice(0, 200)
+				.map(row => [
+					row.courseId,
+					row.module.replaceAll("|", "/"),
+					row.section,
+					row.title.replaceAll("|", "/"),
+					row.wordCount,
+					row.flags.join(", ")
+				])
 		)
 	].join("\n")
 );
@@ -411,8 +435,12 @@ for (const { entry, course } of courses) {
 	const repo = courseImplementationSourceRepos[entry.id];
 	if (!repo) continue;
 	const folders = new Set(repoLinkedFolders.get(repo) ?? []);
-	for (const folder of linkedFoldersForRepo(course, repo)) folders.add(folder);
-	repoLinkedFolders.set(repo, [...folders].sort((a, b) => a.localeCompare(b)));
+	for (const folder of linkedFoldersForRepo(course, repo))
+		folders.add(folder);
+	repoLinkedFolders.set(
+		repo,
+		[...folders].sort((a, b) => a.localeCompare(b))
+	);
 }
 
 const sourceParityAudit = courses.flatMap(({ entry, course }) => {
@@ -422,9 +450,12 @@ const sourceParityAudit = courses.flatMap(({ entry, course }) => {
 	const topDirs = listTopDirs(localRoot);
 	const linkedFolders = linkedFoldersForRepo(course, repo);
 	const linked = new Set(linkedFolders);
-	const unlinkedTopLevelFolders = topDirs.filter(folder => !linked.has(folder));
+	const unlinkedTopLevelFolders = topDirs.filter(
+		folder => !linked.has(folder)
+	);
 	const ledgered = ledgeredFolders(localRoot);
-	const sharedRepoLinkedFolders = repoLinkedFolders.get(repo) ?? linkedFolders;
+	const sharedRepoLinkedFolders =
+		repoLinkedFolders.get(repo) ?? linkedFolders;
 	const classifiedUnlinkedFolders = unlinkedTopLevelFolders.map(folder =>
 		classifyUnlinkedFolder(
 			folder,
@@ -439,9 +470,15 @@ const sourceParityAudit = courses.flatMap(({ entry, course }) => {
 	const activeBacklogFolders = classifiedUnlinkedFolders.filter(
 		folder => folder.classification === "source-backlog-recorded"
 	);
-	const sourceManifestPath = path.join(localRoot, "COURSE_SOURCE_MANIFEST.md");
+	const sourceManifestPath = path.join(
+		localRoot,
+		"COURSE_SOURCE_MANIFEST.md"
+	);
 	const sourceBacklogPath = path.join(localRoot, "SOURCE_BACKLOG.md");
-	const verificationScriptPath = path.join(localRoot, "verify-course-source.sh");
+	const verificationScriptPath = path.join(
+		localRoot,
+		"verify-course-source.sh"
+	);
 	const unityReadiness =
 		repo === "Unity-Game-Development"
 			? unityFullProjectReadiness(localRoot)
