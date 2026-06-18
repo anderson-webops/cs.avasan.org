@@ -172,10 +172,19 @@ export interface RunPythonProjectOptions {
 	onArtifact: (artifact: RuntimeArtifact) => void;
 	onProjectFilesUpdate?: (files: PythonIdeFile[]) => void;
 	onOutput: (kind: "stdout" | "stderr" | "system", text: string) => void;
+	shouldStop?: () => boolean;
 }
 
 let pyodidePromise: Promise<PyodideAPI> | null = null;
 let lastProjectFileNames = new Set<string>();
+
+function throwIfRunStopped(
+	options: Pick<RunPythonProjectOptions, "shouldStop">
+) {
+	if (options.shouldStop?.()) {
+		throw new Error("Python run stopped before post-run work completed.");
+	}
+}
 
 export function pythonIdeProjectModuleNames(
 	files: Pick<PythonIdeFile, "name">[]
@@ -2449,6 +2458,7 @@ function writeRuntimeShims(pyodide: PyodideAPI) {
 
 export async function runPythonProject(options: RunPythonProjectOptions) {
 	const pyodide = await loadRuntime();
+	throwIfRunStopped(options);
 	window.__classesPythonIdeTurtle = options.turtleBridge;
 	window.__classesPythonIdeGame = options.gameBridge;
 	window.__classesPythonIdeArtifacts = {
@@ -2490,12 +2500,15 @@ export async function runPythonProject(options: RunPythonProjectOptions) {
 		throw new Error("Project does not have a runnable Python file.");
 
 	await pyodide.loadPackagesFromImports(packageScanCode(options.files));
+	throwIfRunStopped(options);
 	await loadBrowserShimDependencies(
 		pyodide,
 		importedModules,
 		options.onOutput
 	);
+	throwIfRunStopped(options);
 	await installMicropipPackages(pyodide, importedModules, options.onOutput);
+	throwIfRunStopped(options);
 
 	pyodide.runPython(`
 import os
@@ -2523,6 +2536,7 @@ try:
 except Exception:
     pass
 `);
+	throwIfRunStopped(options);
 
 	await pyodide.runPythonAsync(`
 import __main__
@@ -2535,6 +2549,7 @@ exec(
     __main__.__dict__,
 	)
 	`);
+	throwIfRunStopped(options);
 
 	await pyodide.runPythonAsync(`
 try:
@@ -2544,8 +2559,10 @@ except Exception as error:
     import sys
     print("Could not render chart artifact: {}".format(error), file=sys.stderr)
 `);
+	throwIfRunStopped(options);
 
 	options.onProjectFilesUpdate?.(await captureProjectTextFiles(pyodide));
+	throwIfRunStopped(options);
 
 	if (options.mode === "pgzero") {
 		await pyodide.runPythonAsync(`
@@ -2553,6 +2570,7 @@ except Exception as error:
 	import _classes_pgzero
 	_classes_pgzero.__classes_pgzero_start(__main__.__dict__)
 	`);
+		throwIfRunStopped(options);
 		options.gameBridge.consumeLoopRequest();
 		options.gameBridge.startLoop(async () => {
 			await pyodide.runPythonAsync(`

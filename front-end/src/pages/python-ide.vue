@@ -2033,7 +2033,8 @@ async function runCurrentProject() {
 			onArtifact: appendArtifact,
 			onProjectFilesUpdate: files =>
 				mergeRuntimeProjectFiles(project, files),
-			onOutput: appendOutput
+			onOutput: appendOutput,
+			shouldStop: () => stopRequested.value
 		});
 		if (project.mode === "turtle" && !stopRequested.value) {
 			runMessage.value = "Drawing";
@@ -2050,6 +2051,11 @@ async function runCurrentProject() {
 							: "Run complete";
 		}
 	} catch (error) {
+		if (stopRequested.value) {
+			appendOutput("system", "Stopped Python run.");
+			runMessage.value = "Stopped";
+			return;
+		}
 		appendOutput("stderr", formatPythonRuntimeError(error));
 		runMessage.value = "Run failed";
 	} finally {
@@ -2073,7 +2079,12 @@ function stopCurrentProject() {
 	turtleDragHandlers.clear();
 	activeTurtleDragButton = null;
 	runMessage.value = "Stopped";
-	appendOutput("system", "Stopped active canvas handlers.");
+	appendOutput(
+		"system",
+		hadPythonRunInFlight
+			? "Stop requested. Python will halt at the next runtime checkpoint."
+			: "Stopped active canvas handlers."
+	);
 	if (!hadPythonRunInFlight) stopRequested.value = false;
 }
 

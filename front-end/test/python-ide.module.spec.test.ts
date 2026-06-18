@@ -345,6 +345,44 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("formatPythonRuntimeError(error)");
 	});
 
+	it("checks requested stops before post-run capture and game loop startup", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/pages/python-ide.vue"),
+			"utf8"
+		);
+		const captureIndex = runtimeSource.indexOf(
+			"options.onProjectFilesUpdate?.(await captureProjectTextFiles(pyodide));"
+		);
+		const gameLoopIndex = runtimeSource.indexOf(
+			"options.gameBridge.consumeLoopRequest();"
+		);
+
+		expect(runtimeSource).toContain("shouldStop?: () => boolean;");
+		expect(runtimeSource).toContain("function throwIfRunStopped");
+		expect(runtimeSource).toContain(
+			"Python run stopped before post-run work completed."
+		);
+		expect(captureIndex).toBeGreaterThan(0);
+		expect(
+			runtimeSource.lastIndexOf("throwIfRunStopped(options);", captureIndex)
+		).toBeGreaterThan(0);
+		expect(gameLoopIndex).toBeGreaterThan(0);
+		expect(
+			runtimeSource.lastIndexOf("throwIfRunStopped(options);", gameLoopIndex)
+		).toBeGreaterThan(captureIndex);
+		expect(pageSource).toContain(
+			"shouldStop: () => stopRequested.value"
+		);
+		expect(pageSource).toContain("Stopped Python run.");
+		expect(pageSource).toContain(
+			"Python will halt at the next runtime checkpoint."
+		);
+	});
+
 	it("keeps Streamlit dashboard widget helpers wired in the runtime shim", () => {
 		const runtimeSource = readFileSync(
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
