@@ -153,7 +153,7 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "RAII and Single-Owner Resource Design",
 					content:
-						"This section covers RAII as the default modern C++ answer to cleanup: resources are acquired by objects and released automatically when those objects leave scope. Cover: destructors, scope exit, standard containers, file streams, and why this is the same lifetime principle students saw in Level 2. `std::unique_ptr` is the first smart pointer because it models single ownership clearly; practice deliberate moves and avoid treating heap allocation as the default."
+						"This section covers RAII as the default modern C++ answer to cleanup: resources are acquired by objects and released automatically when those objects leave scope. Cover: destructors, scope exit, standard containers, file streams, and why this is the same lifetime principle introduced in Level 2. `std::unique_ptr` is the first smart pointer because it models single ownership clearly; practice deliberate moves and avoid treating heap allocation as the default."
 				},
 				{
 					title: "Validation, Exceptions, and Resource Boundaries",
@@ -228,7 +228,7 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "Advanced Pathways and Program Framing",
 					content:
-						"Close the course by naming the next paths clearly and framing the capstone as evidence of readiness. Cover: when to continue into `Data Structures and Algorithms in C++`, when `Design Patterns in C++` is the better architecture path, and when lower-level representation points toward `C Systems Engineering`. Offer a CS236-inspired capstone option for strong students: scanner, parser, command or AST objects, table-style evaluation, and a dependency graph, kept smaller than the original college project."
+						"Close the course by naming the next paths clearly and framing the capstone as evidence of readiness. Cover: when to continue into `Data Structures and Algorithms in C++`, when `Design Patterns in C++` is the better architecture path, and when lower-level representation points toward `C Systems Engineering`. Include an advanced CS236-inspired capstone option: scanner, parser, command or AST objects, table-style evaluation, and a dependency graph, kept smaller than the original college project."
 				},
 				{
 					title: "CPPI6 Capstone: Saveable Command-Driven Simulation",

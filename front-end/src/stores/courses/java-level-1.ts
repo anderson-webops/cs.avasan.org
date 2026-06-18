@@ -22,7 +22,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "Primitive Types",
 					content:
-						"Learn the built-in Java types `int`, `double`, `char`, and `boolean`, and practice declaring variables, assigning values, printing them, and noticing Java syntax such as semicolons and single quotes for characters.",
+						"This module covers the built-in Java types `int`, `double`, `char`, and `boolean`, along with declaring variables, assigning values, printing them, and noticing Java syntax such as semicolons and single quotes for characters.",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/JS1-Primitives"
 				},

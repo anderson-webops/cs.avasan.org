@@ -619,7 +619,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Worked Example Set: One Smell, Several Possible Destinations",
 					content:
-						"Take one Java design problem and show more than one plausible refactoring path, such as guard clauses only, Strategy, or State. This teaches students that good design is contextual and falsifiable."
+						"Take one Java design problem and show more than one plausible refactoring path, such as guard clauses only, Strategy, or State. This makes good design contextual and falsifiable instead of presenting a single pattern as automatically correct."
 				},
 				{
 					title: "Mini Lab: Refactor Until the Pattern Is Obvious",

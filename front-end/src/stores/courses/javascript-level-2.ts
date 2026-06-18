@@ -163,7 +163,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Introductions & Setup",
 					content:
-						'Connect with the learner and set up CodePen (fork https://codepen.io/junilearning/pen/JjGrYOG). Show saving, running code, and printToScreen("Hello World").'
+						'Set up CodePen using the starter fork at https://codepen.io/junilearning/pen/JjGrYOG. Practice saving, running code, and using printToScreen("Hello World").'
 				},
 				{
 					title: "Variables and Strings",

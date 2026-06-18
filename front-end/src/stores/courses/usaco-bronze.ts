@@ -26,7 +26,7 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Language Strategy",
 					content:
-						"Choose the language that best supports current growth, while keeping problem-solving habits language-agnostic. Python is often enough for Bronze, while Java versions in the repo are useful for learners preparing for later tiers."
+						"Choose the language that best supports current growth, while keeping problem-solving habits language-agnostic. Python is often enough for Bronze, while Java versions in the repo are useful preparation for later tiers."
 				},
 				{
 					title: "USB0 Setup and Contest Workflow: Core Project",
@@ -349,7 +349,7 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Reflect on Weak Spots",
 					content:
-						"Use logs to identify whether the main obstacle is misreading statements, building the wrong state model, weak test design, or overcomplicating simple tasks. Bronze growth is very diagnosable when students track it honestly."
+						"Use logs to identify whether the main obstacle is misreading statements, building the wrong state model, weak test design, or overcomplicating simple tasks. Bronze growth is very diagnosable when the evidence is tracked honestly."
 				},
 				{
 					title: "Prepare for USACO Silver",

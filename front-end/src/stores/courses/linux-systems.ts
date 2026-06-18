@@ -385,7 +385,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Foreground Jobs, Background Jobs, nohup, and Shell Sessions",
 					content:
-						"Use a toy command to show how backgrounding works, what the jobs table tracks, and why `nohup` changes the survival story when a terminal closes. This gives learners a bridge between ad hoc command-line operation and real service management."
+						"Use a toy command to show how backgrounding works, what the jobs table tracks, and why `nohup` changes the survival story when a terminal closes. This bridges ad hoc command-line operation and real service management."
 				},
 				{
 					title: "Zombies, Orphans, and Process Ownership",
@@ -470,7 +470,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Project: Create a systemd Service for a Toy App",
 					content:
-						"Use the toy-service lab to package a simple long-running process under `systemd` and then operate it with start, stop, restart, enable, and log inspection commands. The lab should make students justify each path, user, restart policy, and environment choice in the unit file rather than treating service files as boilerplate.",
+						"Use the toy-service lab to package a simple long-running process under `systemd` and then operate it with start, stop, restart, enable, and log inspection commands. The lab should require justification for each path, user, restart policy, and environment choice in the unit file rather than treating service files as boilerplate.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS5-Systemd-Toy-Service/starter",
 					solutionLink:
@@ -526,7 +526,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Application Logs vs System Logs",
 					content:
-						"Differentiate between logs written by applications, logs written by services through the journal, and platform logs about the machine itself. This distinction helps students decide whether they are debugging code behavior, service supervision, or a deeper machine problem."
+						"Differentiate between logs written by applications, logs written by services through the journal, and platform logs about the machine itself. This distinction separates code behavior, service supervision, and deeper machine problems."
 				},
 				{
 					title: "Log Rotation and Retention",
@@ -760,7 +760,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Bridge to a Networking Course without Losing the Systems Lens",
 					content:
-						"Keep the focus on the administrator's day-to-day needs: is the interface up, is the route present, is DNS returning what I expect, and is the service listening where the proxy thinks it is. That systems lens gives students enough network competence to operate a host even before they take a deeper networking course."
+						"Keep the focus on the administrator's day-to-day needs: is the interface up, is the route present, is DNS returning what I expect, and is the service listening where the proxy thinks it is. That systems lens builds enough network competence to operate a host before a deeper networking course."
 				},
 				{
 					title: "Unit 10: Networking from a Systems View: Core Project",
@@ -835,12 +835,12 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "TLS, Virtual Hosts, Server Blocks, Reload vs Restart",
 					content:
-						"Even if the full TLS setup is saved for later, Learn the vocabulary and the lifecycle commands. A careful operator validates config, reloads when possible, restarts only when necessary, and understands that multi-site hosting depends on explicit host-based routing whether the server is Nginx or Apache."
+						"Even if the full TLS setup is saved for later, learn the vocabulary and the lifecycle commands. A careful operator validates config, reloads when possible, restarts only when necessary, and understands that multi-site hosting depends on explicit host-based routing whether the server is Nginx or Apache."
 				},
 				{
 					title: "Project: Run a Small App Behind Nginx",
 					content:
-						"Use the reverse-proxy lab to place a toy application on an internal port and then serve it through Nginx. This project should force students to verify the app independently, confirm the listening socket, inspect proxy headers, and prove whether a bug lives in the app, the proxy, or the network path between them.",
+						"Use the reverse-proxy lab to place a toy application on an internal port and then serve it through Nginx. This project requires independent app verification, listening-socket confirmation, proxy-header inspection, and evidence about whether a bug lives in the app, the proxy, or the network path between them.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS3-Nginx-Reverse-Proxy-App/starter",
 					solutionLink:
@@ -849,7 +849,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Project: Configure an Apache Virtual Host and Compare It to Nginx",
 					content:
-						"Use the Apache lab to serve a parallel site and write a short compare-and-contrast note between Apache `<VirtualHost>` configuration and Nginx `server` blocks. The point is to make students comfortable operating more than one web server family without losing the underlying mental model.",
+						"Use the Apache lab to serve a parallel site and write a short compare-and-contrast note between Apache `<VirtualHost>` configuration and Nginx `server` blocks. The point is to make more than one web server family understandable without losing the underlying mental model.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS4-Apache-Virtual-Host-Compare/starter",
 					solutionLink:

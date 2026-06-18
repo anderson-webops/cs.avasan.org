@@ -247,7 +247,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Project: LLS13 Crash Classification Lab",
 					content:
-						"Use the crash-classification lab to compare toy failures and convert them into maintainer-facing exploitability notes. The project should train students to justify their classification rather than rely on fear-driven language or vague claims about “possible exploitation.”",
+						"Use the crash-classification lab to compare toy failures and convert them into maintainer-facing exploitability notes. The project should require justified classification rather than fear-driven language or vague claims about “possible exploitation.”",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS13-Crash-Classification-Lab/starter",
 					solutionLink:

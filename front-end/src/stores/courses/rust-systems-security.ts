@@ -821,7 +821,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Prepare for Systems, Security, or Compiler Follow-On Work",
 					content:
-						"Close by positioning the course as a launch point for deeper systems, networking, low-level security, or language tooling work where the student now has a sharper mental model of safe systems design."
+						"Close by positioning the course as a launch point for deeper systems, networking, low-level security, or language tooling work with a sharper mental model of safe systems design."
 				},
 				{
 					title: "Capstone: Harden a Legacy Tool: Verification and Reflection",
@@ -849,7 +849,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Project: Harden a Legacy Tool",
 					content:
-						"Complete a larger audit-and-port capstone where the student documents the old bug classes, the Rust redesign, the remaining risks, and the final testing evidence.",
+						"Complete a larger audit-and-port capstone that documents the old bug classes, the Rust redesign, the remaining risks, and the final testing evidence.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-21-rss10-capstone-harden-a-legacy-tool-supplemental-2/starter",
 					solutionLink:

@@ -81,7 +81,7 @@ const noGraphicsIntroModule: RawCourseModule = {
 		{
 			title: "Console-First Java Path",
 			content:
-				"This branch keeps Java focused on console programs, data modeling, files, collections, algorithms, testing habits, and larger service-style projects. It intentionally removes optional BlueJ/static drawing projects so the sequence works cleanly for students who do not want graphics setup or coordinate-drawing work."
+				"This branch keeps Java focused on console programs, data modeling, files, collections, algorithms, testing habits, and larger service-style projects. It intentionally removes optional BlueJ/static drawing projects so the sequence works cleanly without graphics setup or coordinate-drawing work."
 		},
 		{
 			title: "What This Branch Keeps",

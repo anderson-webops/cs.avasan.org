@@ -1359,7 +1359,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Trees",
 					content:
-						"Learn the core vocabulary of trees, including nodes, edges, parents, children, ancestors, descendants, leaves, roots, height, and subtrees."
+						"Core tree vocabulary includes nodes, edges, parents, children, ancestors, descendants, leaves, roots, height, and subtrees."
 				},
 				{
 					title: "Binary Search Trees",
@@ -1785,7 +1785,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Capstone Support Material",
 					content:
-						"Keep the `AJ17` starters and side folders visible as capstone support, not as hidden repo drift. Students who want to push the Google Maps branch further should be able to find the supporting scaffolds quickly."
+						"Keep the `AJ17` starters and side folders visible as capstone support, not as hidden repo drift. The Google Maps branch should have supporting scaffolds that are easy to find when deeper extension work is useful."
 				},
 				{
 					title: "Repo Extension, Starter, and Capstone Library: Verification and Reflection",

@@ -230,7 +230,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Practical Walkthrough: Build and Run Destinations",
 					content:
-						"Choose simulator destinations, connect a real device, trust the developer path, and verify that the correct scheme is selected. Learn the difference between an app that compiles, an app that launches, and an app that behaves correctly."
+						"Choose simulator destinations, connect a real device, trust the developer path, and verify that the correct scheme is selected. Differentiate between an app that compiles, an app that launches, and an app that behaves correctly."
 				},
 				{
 					title: "Practical Walkthrough: Logs, Console Output, and Crash Clues",
@@ -801,7 +801,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Project: Multi-Tab Hobby App",
 					content:
-						"Build a hobby app with multiple tabs, a home dashboard, a simple schedule, and a favorites or saved-items area. This project gives students a realistic app shell and forces them to think about shared state, routing, and what belongs on each top-level screen.",
+						"Build a hobby app with multiple tabs, a home dashboard, a simple schedule, and a favorites or saved-items area. This project provides a realistic app shell and requires clear decisions about shared state, routing, and what belongs on each top-level screen.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD3-Multi-Tab-Hobby-App/starter",
 					solutionLink:

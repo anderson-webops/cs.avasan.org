@@ -458,7 +458,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Project: Call a C Helper from Assembly",
 					content:
-						"Use the mixed-language lab to sum values in assembly, then call back into a C helper that clamps or formats the result. The project should force students to keep argument registers, preserved registers, and stack alignment straight across the language boundary.",
+						"Use the mixed-language lab to sum values in assembly, then call back into a C helper that clamps or formats the result. The project requires explicit tracking of argument registers, preserved registers, and stack alignment across the language boundary.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM4-Call-C-Helper-from-Assembly/starter",
 					solutionLink:
@@ -587,7 +587,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "argc, argv, and Process Startup State",
 					content:
-						"Use command-line arguments as a beginner-friendly runtime surface that still reveals process state, string parsing, and error handling. This gives students a concrete input path without requiring a large UI or framework."
+						"Use command-line arguments as a beginner-friendly runtime surface that still reveals process state, string parsing, and error handling. This provides a concrete input path without requiring a large UI or framework."
 				},
 				{
 					title: "Project: Tiny Command-Line Parser",
@@ -938,7 +938,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "ARM64 Comparison Module",
 					content:
-						"Offer an ARM64 comparison module once students are stable in x86-64. The useful lesson is not memorizing a second ISA immediately, but seeing which concepts transfer cleanly across register sets, calling conventions, and instruction encodings."
+						"Offer an ARM64 comparison module once x86-64 tracing is stable. The useful lesson is not memorizing a second ISA immediately, but seeing which concepts transfer cleanly across register sets, calling conventions, and instruction encodings."
 				},
 				{
 					title: "SIMD and Wider Data Paths",

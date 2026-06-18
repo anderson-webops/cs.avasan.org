@@ -26,7 +26,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Positioning, Prerequisites, and Safe Scope",
 					content:
-						"This is a defensive network security course for students who are already comfortable with JavaScript fundamentals and preferably have completed `Linux Systems` and `Network Systems`. The focus is secure services, observability, trust boundaries, and controlled local labs rather than offensive abuse."
+						"This is a defensive network security course for a JavaScript-comfortable background, preferably after `Linux Systems` and `Network Systems`. The focus is secure services, observability, trust boundaries, and controlled local labs rather than offensive abuse."
 				},
 				{
 					title: "NSEC0 Setup and Tooling: Core Project",
@@ -245,7 +245,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Common Mistakes in Toy APIs",
 					content:
-						"Cover insecure defaults such as trusting client role flags, leaking internal errors, reflecting unsanitized values, skipping ownership checks, or exposing admin-style endpoints without proper guardrails. The goal is for students to recognize weak assumptions before they write more code."
+						"Cover insecure defaults such as trusting client role flags, leaking internal errors, reflecting unsanitized values, skipping ownership checks, or exposing admin-style endpoints without proper guardrails. The goal is to recognize weak assumptions before writing more code."
 				},
 				{
 					title: "State Changes, Idempotence, and Error Surfaces",
@@ -473,7 +473,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Reading Logs After Simulated Bad Requests",
 					content:
-						"Include a lab where students deliberately send malformed or suspicious requests to a safe local service and then reconstruct what happened from the logs. This turns monitoring into an investigative skill instead of a passive dashboard habit."
+						"Include a lab that sends malformed or suspicious requests to a safe local service and then reconstructs what happened from the logs. This turns monitoring into an investigative skill instead of a passive dashboard habit."
 				},
 				{
 					title: "Project: Suspicious Request Log Parser",
@@ -826,7 +826,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "TLS Certificate Placement and Renewal Ownership",
 					content:
-						"Explain where certificates live, which process terminates TLS, and who is responsible for renewal and failure monitoring. This gives students a deployment model they can reason about when something breaks at the edge."
+						"Explain where certificates live, which process terminates TLS, and who is responsible for renewal and failure monitoring. This gives the deployment model enough structure to reason about edge failures."
 				},
 				{
 					title: "Service Exposure, Logs, and Recovery Signals",
@@ -979,12 +979,12 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Implement Controls and Observability Together",
 					content:
-						"Include validation, auth, authorization, rate limits, structured logs, and deployment notes as part of the same deliverable. Not treat security and monitoring as separate post-build tasks."
+						"Include validation, auth, authorization, rate limits, structured logs, and deployment notes as part of the same deliverable. Do not treat security and monitoring as separate post-build tasks."
 				},
 				{
 					title: "Audit the Service with an Authorized Test Playbook",
 					content:
-						"Run a post-build audit that checks binding scope, proxy behavior, TLS placement, failure handling, abuse visibility, and the local penetration-test cases defined in the course playbook. Students may use AI to help organize the checklist or summarize results, but every claim in the final audit must still be backed by direct local evidence."
+						"Run a post-build audit that checks binding scope, proxy behavior, TLS placement, failure handling, abuse visibility, and the local penetration-test cases defined in the course playbook. AI may help organize the checklist or summarize results, but every claim in the final audit must still be backed by direct local evidence."
 				},
 				{
 					title: "Write the Incident, Disclosure, and Recovery Notes",

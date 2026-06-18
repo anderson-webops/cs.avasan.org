@@ -275,7 +275,7 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "Nested Vectors, Grid Traversal, and Nested Loop Patterns",
 					content:
-						"A 2D vector should first feel like a grid of rows instead of a shortcut into raw multi-dimensional arrays. Include reading `grid[row][col]`, row versus column meaning, printing a grid, updating a cell, nested loops for row totals and scans, rectangular versus irregular grids, and why this higher-level model prepares learners for raw array layout later without introducing memory tricks too early.",
+						"A 2D vector should first feel like a grid of rows instead of a shortcut into raw multi-dimensional arrays. Include reading `grid[row][col]`, row versus column meaning, printing a grid, updating a cell, nested loops for row totals and scans, rectangular versus irregular grids, and why this higher-level model prepares for raw array layout later without introducing memory tricks too early.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF7-Grids-and-2D-Vectors-Reference"
 				},

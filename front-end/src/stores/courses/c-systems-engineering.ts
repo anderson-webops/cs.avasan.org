@@ -385,7 +385,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Project: Byte Buffer Workbench",
 					content:
-						"Use the byte-buffer lab to compare a safe fixed-size text copy with a raw packet buffer that contains non-text bytes and an embedded zero. The project should force students to justify why `strlen` is valid for one buffer and a bad assumption for the other.",
+						"Use the byte-buffer lab to compare a safe fixed-size text copy with a raw packet buffer that contains non-text bytes and an embedded zero. The project requires a clear justification for why `strlen` is valid for one buffer and a bad assumption for the other.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE5-Byte-Buffer-Workbench/starter",
 					solutionLink:
@@ -516,7 +516,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Ownership and Lifetime Invariants",
 					content:
-						"Frame lifetime as an invariant story: who owns the allocation, who may borrow it temporarily, and when the program considers it invalid. This prepares students to reason about leaks, invalid frees, and stale pointers before those bugs become difficult to debug."
+						"Frame lifetime as an invariant story: who owns the allocation, who may borrow it temporarily, and when the program considers it invalid. This prepares for reasoning about leaks, invalid frees, and stale pointers before those bugs become difficult to debug."
 				},
 				{
 					title: "Leaks, Double Frees, and Invalid Access",
@@ -526,7 +526,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Project: Dynamic Ring Buffer",
 					content:
-						"Use the ring-buffer lab to make heap ownership concrete with allocation, resize logic, queue state, and cleanup. The project should force students to keep head, count, capacity, and final `free` responsibilities straight.",
+						"Use the ring-buffer lab to make heap ownership concrete with allocation, resize logic, queue state, and cleanup. The project requires head, count, capacity, and final `free` responsibilities to stay explicit.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE7-Dynamic-Ring-Buffer/starter",
 					solutionLink:
@@ -577,7 +577,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Callbacks and Function Pointer Basics",
 					content:
-						"This section covers function pointers as stored behavior that lets one part of the program call another indirectly. Students do not need exotic syntax games; they need a practical model of callbacks, handlers, and how code can be selected by data."
+						"This section covers function pointers as stored behavior that lets one part of the program call another indirectly. The practical model is callbacks, handlers, and code selected by data rather than exotic syntax games."
 				},
 				{
 					title: "Dispatch Tables and State Machines",
@@ -592,7 +592,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Design Exercise: Command Handler Table",
 					content:
-						"Sketch a command table for a toy parser and explain which inputs map to which handlers. The exercise should make indirect control flow feel understandable before students encounter it in larger programs."
+						"Sketch a command table for a toy parser and explain which inputs map to which handlers. The exercise makes indirect control flow understandable before larger programs introduce more complicated dispatch."
 				},
 				{
 					title: "Unit 8: Function Pointers and Dispatch: Core Project",

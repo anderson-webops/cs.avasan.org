@@ -598,7 +598,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Common IPv6 Admin Mistakes",
 					content:
-						"Highlight the mistakes that repeatedly confuse students and operators: forgetting link-local scope, validating only IPv4 reachability, or assuming that an IPv4 firewall policy automatically covers IPv6. These are the habits that create subtle deployment gaps."
+						"Highlight the mistakes that repeatedly confuse IPv6 operations: forgetting link-local scope, validating only IPv4 reachability, or assuming that an IPv4 firewall policy automatically covers IPv6. These are the habits that create subtle deployment gaps."
 				},
 				{
 					title: "Unit 8: IPv6 in Practice: Core Project",
@@ -724,7 +724,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "tcpdump and Beginner-Friendly Packet Anatomy",
 					content:
-						"This section covers `tcpdump` as the first deep-inspection tool students reach for when ports, routes, and DNS no longer explain the failure alone. They do not need to decode every bit of every header; they need to identify source, destination, protocol, ports, and the broad shape of the exchange."
+						"This section covers `tcpdump` as the first deep-inspection tool for failures that ports, routes, and DNS no longer explain alone. The practical target is identifying source, destination, protocol, ports, and the broad shape of the exchange rather than decoding every bit of every header."
 				},
 				{
 					title: "Safe Filter Expressions",
@@ -938,7 +938,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "BGP and Internet Routing at a High Level",
 					content:
-						"Treat BGP and broader internet routing as an advanced appendix rather than a prerequisite. The useful outcome is seeing how route announcements and policy shape the public internet beyond the single-host route table students used in the core course."
+						"Treat BGP and broader internet routing as an advanced appendix rather than a prerequisite. The useful outcome is seeing how route announcements and policy shape the public internet beyond the single-host route table used in the core course."
 				},
 				{
 					title: "Wireless and Home-Network Variations",

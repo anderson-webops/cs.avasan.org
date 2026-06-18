@@ -11,7 +11,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Move from Bronze Accuracy to Silver Structure",
 					content:
-						"Frame Silver as the tier where clean modeling is still necessary but no longer sufficient. Students now need to recognize algorithm families such as DFS, BFS, prefix sums, sorting-based reasoning, and binary search more deliberately."
+						"Frame Silver as the tier where clean modeling is still necessary but no longer sufficient. Algorithm families such as DFS, BFS, prefix sums, sorting-based reasoning, and binary search now need to be recognized more deliberately."
 				},
 				{
 					title: "Stronger Debugging under Time Pressure",
@@ -88,7 +88,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Separate Storage from Strategy",
 					content:
-						"Train students to distinguish the data structure from the algorithm using it. A HashSet does not solve the problem by itself; it enables a class of faster reasoning."
+						"Distinguish the data structure from the algorithm using it. A HashSet does not solve the problem by itself; it enables a class of faster reasoning."
 				},
 				{
 					title: "Trace with Structure",
@@ -286,7 +286,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Build Small Examples First",
 					content:
-						"Use small arrays and hand-built prefixes to verify that the transformed representation really answers the original question. This is especially important when students are new to cumulative reasoning."
+						"Use small arrays and hand-built prefixes to verify that the transformed representation really answers the original question. This is especially important when cumulative reasoning is still new."
 				},
 				{
 					title: "Keep the Interpretation Visible",
@@ -417,7 +417,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Find the Gaps before Gold",
 					content:
-						"Identify whether the student still struggles most with graph modeling, answer-space search, counting transforms, or structured simulation. The transition to Gold is much smoother when that diagnosis is honest."
+						"Identify whether the remaining gap is graph modeling, answer-space search, counting transforms, or structured simulation. The transition to Gold is much smoother when that diagnosis is honest."
 				},
 				{
 					title: "Prepare for USACO Gold",

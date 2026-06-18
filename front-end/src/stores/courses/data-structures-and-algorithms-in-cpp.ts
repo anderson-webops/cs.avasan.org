@@ -12,7 +12,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Course Positioning After C++ Level 2",
 					content:
-						"Position this course as the algorithmic next step after `C++ Level 2`, with `C++ Level 3` preferred first when file-backed programs, recursion, STL containers, RAII, and medium-size C++ structure need more practice. Learners entering this sequence should already be comfortable with variables, control flow, functions, classes, vectors, pointers, references, and ownership reasoning before the focus shifts to data structures, algorithm design, and complexity."
+						"Position this course as the algorithmic next step after `C++ Level 2`, with `C++ Level 3` preferred first when file-backed programs, recursion, STL containers, RAII, and medium-size C++ structure need more practice. The expected prerequisites are variables, control flow, functions, classes, vectors, pointers, references, and ownership reasoning before the focus shifts to data structures, algorithm design, and complexity."
 				},
 				{
 					title: "Preferred Toolchain",
@@ -87,7 +87,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Small Record Types and Sequence Storage",
 					content:
-						"Use a simple task manager to re-center students on structured records, not just primitive values. This is the point where a vector of objects should start to feel normal instead of advanced."
+						"Use a simple task manager to re-center the work on structured records, not just primitive values. This is the point where a vector of objects should start to feel normal instead of advanced."
 				},
 				{
 					title: "Filtering, Removal, and Stable Output",
@@ -252,7 +252,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Tokenization and Cleanup",
 					content:
-						"Use a text pipeline to normalize tokens, remove punctuation, and distinguish total tokens from unique vocabulary. This gives students a concrete reason to combine multiple container types in one coherent program."
+						"Use a text pipeline to normalize tokens, remove punctuation, and distinguish total tokens from unique vocabulary. This gives the program a concrete reason to combine multiple container types coherently."
 				},
 				{
 					title: "State Windows and Markov-Style Generation",
@@ -334,7 +334,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Visited State and Cycle Prevention",
 					content:
-						"Backtracking only works cleanly when students mark visited cells and reason about state changes carefully. This is the unit where accidental revisits, coordinate mistakes, and off-by-one bugs should be surfaced deliberately. Use the CS235 5x5x5 maze constraints as the anchor: exactly 125 imported cells, six legal directions, and no mutation of the current maze after a bad import."
+						"Backtracking only works cleanly when visited cells and state changes are tracked carefully. This is the unit where accidental revisits, coordinate mistakes, and off-by-one bugs should be surfaced deliberately. Use the CS235 5x5x5 maze constraints as the anchor: exactly 125 imported cells, six legal directions, and no mutation of the current maze after a bad import."
 				},
 				{
 					title: "Path Construction and Rollback",

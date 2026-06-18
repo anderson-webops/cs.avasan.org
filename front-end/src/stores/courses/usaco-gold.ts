@@ -281,7 +281,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Fenwick Tree Mechanics",
 					content:
-						"Make the Fenwick tree implementation meaningful by explaining what each node aggregates and why the lowbit jumps work. Not treat the structure as a magic snippet."
+						"Make the Fenwick tree implementation meaningful by explaining what each node aggregates and why the lowbit jumps work. Do not treat the structure as a magic snippet."
 				},
 				{
 					title: "Ordering Problems with Hidden Statistics",
@@ -474,7 +474,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Mix Families on Purpose",
 					content:
-						"Practice sets that force students to choose among DP, graph optimization, range structures, and combinatorial reasoning. Gold readiness is as much about classification speed as raw implementation skill."
+						"Practice sets that force a choice among DP, graph optimization, range structures, and combinatorial reasoning. Gold readiness is as much about classification speed as raw implementation skill."
 				},
 				{
 					title: "Write Proof Sketches and Design Notes",
@@ -489,7 +489,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Prepare for Independent Gold and Beyond",
 					content:
-						"Close by positioning the student for continued Gold training, open contest prep, or deeper systems and algorithms coursework. The outcome is a stronger internal map of advanced problem types."
+						"Close by positioning the path toward continued Gold training, open contest prep, or deeper systems and algorithms coursework. The outcome is a stronger internal map of advanced problem types."
 				},
 				{
 					title: "Unit 7: Gold Capstone Sets: Core Project",
@@ -537,7 +537,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Why Gold Needs a Bigger Library",
 					content:
-						"The `USACO-Gold` repo is broader than the main course by design. Gold students benefit from a larger technique-indexed library because pattern recognition at this level depends on seeing many structurally similar problems."
+						"The `USACO-Gold` repo is broader than the main course by design. A larger technique-indexed library supports pattern recognition at this level because advanced classification depends on seeing many structurally similar problems."
 				},
 				{
 					title: "Advanced DP and Optimization Bank",

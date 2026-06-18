@@ -96,7 +96,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Main Goals of the Expanded Path",
 					content:
-						"State the four main goals clearly: turn browser-focused JavaScript into full web-development fluency, add practical hosting and deployment knowledge, connect front end, back end, databases, and networking, and prepare students to publish real projects rather than only local demos. These goals should be revisited whenever a new unit risks feeling isolated from the rest of the stack."
+						"State the four main goals clearly: turn browser-focused JavaScript into full web-development fluency, add practical hosting and deployment knowledge, connect front end, back end, databases, and networking, and prepare for publishing real projects rather than only local demos. These goals should be revisited whenever a new unit risks feeling isolated from the rest of the stack."
 				},
 				{
 					title: "Suggested Course Family and Placement",
@@ -189,7 +189,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Make Browser Devtools a Recurring Strand",
 					content:
-						"Use devtools in every major JavaScript or browser module so debugging becomes routine. Console inspection, network tabs, layout inspection, storage inspection, and source maps should feel like part of the normal development loop, especially before students move into frameworks and back ends where the debugging surface becomes larger."
+						"Use devtools in every major JavaScript or browser module so debugging becomes routine. Console inspection, network tabs, layout inspection, storage inspection, and source maps should feel like part of the normal development loop, especially before frameworks and back ends make the debugging surface larger."
 				},
 				{
 					title: "WDF2 Stage 1: Strengthen the Existing JavaScript Courses: Core Project",
@@ -262,7 +262,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Modules, Bundlers, and Local Dev Servers at a Gentle Level",
 					content:
-						"Explain JavaScript modules, bundlers, and local dev servers without overwhelming students with toolchain internals. The important lesson is that modern web development often turns many source files into a smaller deployable build and that a local server is part of the workflow even for front-end-only projects."
+						"Explain JavaScript modules, bundlers, and local dev servers without overwhelming the lesson with toolchain internals. The important point is that modern web development often turns many source files into a smaller deployable build and that a local server is part of the workflow even for front-end-only projects."
 				},
 				{
 					title: "Environment Variables, Forms, and Validation",
@@ -340,7 +340,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "State Management Basics and Async Data Loading",
 					content:
-						"Explain local state, shared state, and asynchronous data loading at a practical level. Students do not need advanced theory first; they need to understand where data lives, how it changes, and how to model loading, success, empty, and error states without confusing the user interface or the developer."
+						"Explain local state, shared state, and asynchronous data loading at a practical level. Start with where data lives, how it changes, and how to model loading, success, empty, and error states without confusing the user interface or the developer."
 				},
 				{
 					title: "Accessibility and Responsive Design as Core Requirements",
@@ -410,7 +410,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Express or Fastify as the API Surface",
 					content:
-						"Use Express or Fastify to show how server applications define routes, parse requests, return responses, and structure middleware or validation steps. The framework is not the end goal; the goal is helping students model how a browser or front-end app talks to a server in a predictable, inspectable way."
+						"Use Express or Fastify to show how server applications define routes, parse requests, return responses, and structure middleware or validation steps. The framework is not the end goal; the goal is modeling how a browser or front-end app talks to a server in a predictable, inspectable way."
 				},
 				{
 					title: "REST APIs, Request Validation, and Error Shapes",
@@ -805,7 +805,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Backups, Environment Rotation, and Performance Basics",
 					content:
-						"This section covers backups, environment rotation, and performance basics as a natural next step once students have published full-stack work. The lesson is that stable production systems are not only built; they are maintained, rotated, backed up, and observed over time."
+						"This section covers backups, environment rotation, and performance basics as a natural next step after published full-stack work. The lesson is that stable production systems are not only built; they are maintained, rotated, backed up, and observed over time."
 				},
 				{
 					title: "Move from Deployment to Operations Thinking",

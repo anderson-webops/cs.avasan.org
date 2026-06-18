@@ -22,7 +22,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "How to Read an AI Problem Statement",
 					content:
-						"Train students to identify the state, the valid actions, the goal condition, and the cost or score function before they touch code. This is the key shift from basic programming tasks into AI-style problem solving."
+						"Practice identifying the state, the valid actions, the goal condition, and the cost or score function before code is written. This is the key shift from basic programming tasks into AI-style problem solving."
 				},
 				{
 					title: "Experiment Logging and Reflection",
@@ -92,7 +92,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Graphs as a Universal Representation",
 					content:
-						"Show why graphs are such a useful abstraction for AI. Locations, social links, game boards, dependency chains, and puzzle moves can all be phrased as nodes and edges once students decide what information the structure must preserve."
+						"Graphs are useful abstractions for AI because locations, social links, game boards, dependency chains, and puzzle moves can all be phrased as nodes and edges once the necessary information has been identified."
 				},
 				{
 					title: "Knowledge Representation for Small Systems",
@@ -165,7 +165,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Stack Behavior and Depth-First Thinking",
 					content:
-						"Use stacks to show what it means to commit to one branch before backtracking. The point is to make the control flow of DFS concrete long before students optimize or compare it formally."
+						"Use stacks to make branch commitment and backtracking visible. The point is to make the control flow of DFS concrete long before formal optimization or comparison."
 				},
 				{
 					title: "Queue Behavior and Breadth-First Thinking",
@@ -515,7 +515,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "From States to Features",
 					content:
-						"Turn raw states into measurable signals such as path cost, remaining distance, mobility, piece control, or resource counts. This is the conceptual bridge into ML because students begin to ask which inputs actually help a system make better decisions."
+						"Turn raw states into measurable signals such as path cost, remaining distance, mobility, piece control, or resource counts. This is the conceptual bridge into ML because the design question becomes which inputs actually help a system make better decisions."
 				},
 				{
 					title: "Labels, Benchmarks, and Success Criteria",
@@ -693,7 +693,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Extension: BankAccount Class",
 					content:
-						"Keep a second lightweight class-design warmup available for students who need more confidence with object state before graph and game objects.",
+						"Keep a second lightweight class-design warmup available when object state needs more reinforcement before graph and game objects.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI1-Bank-Account-Class"
 				},

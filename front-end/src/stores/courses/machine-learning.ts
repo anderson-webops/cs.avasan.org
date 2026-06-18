@@ -12,7 +12,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Preferred Tools and Environment",
 					content:
-						"Standardize the course around `Google Colab` for the main workflow, with `VS Code` or `PyCharm` as the local follow-on environment when students are ready to move beyond notebooks. Set up Python, pandas, NumPy, matplotlib, seaborn, scikit-learn, and notebook support before the first real model so environment issues do not derail the conceptual lessons."
+						"Standardize the course around `Google Colab` for the main workflow, with `VS Code` or `PyCharm` as the local follow-on environment when notebook work is ready to move into local modules. Set up Python, pandas, NumPy, matplotlib, seaborn, scikit-learn, and notebook support before the first real model so environment issues do not derail the conceptual lessons."
 				},
 				{
 					title: "Notebook Cells vs. Reusable Python Modules",

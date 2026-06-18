@@ -902,7 +902,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Extension: Dog Class Test",
 					content:
-						"Use the dog-class test harness as a lightweight object-model review before students move into the later multi-class projects.",
+						"Use the dog-class test harness as a lightweight object-model review before the later multi-class projects.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM1-Dog-Class-Test"
 				},
@@ -916,7 +916,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Preview: Threading Example",
 					content:
-						"Keep the threading example visible as a preview for students who are ready to see how timed or concurrent behavior starts to appear in Java.",
+						"Keep the threading example visible as a preview of how timed or concurrent behavior starts to appear in Java.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM6-Threading-Example"
 				},

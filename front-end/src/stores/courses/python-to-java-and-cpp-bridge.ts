@@ -348,7 +348,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "String Equality and Reference Habits",
 					content:
-						"Make `.equals()` versus `==` explicit for students coming from Python. This is one of the most important translation mistakes to prevent before the student enters the main Java course."
+						"Make `.equals()` versus `==` explicit for a Python background. This is one of the most important translation mistakes to prevent before the main Java course."
 				},
 				{
 					title: "Bridge Exit to Java Level 1",

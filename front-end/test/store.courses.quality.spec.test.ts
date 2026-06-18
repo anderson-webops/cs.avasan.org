@@ -678,7 +678,7 @@ describe("course text quality normalization", () => {
 		const corpus = rawCourseSourceCorpus();
 
 		expect(corpus).not.toMatch(
-			/\b(?:Ask|Have|Tell|Show|Teach|Encourage|Remind|Make sure|Walk|Guide) (?:the )?(?:student|students|learner|learners)\b/i
+			/\b(?:Ask|Have|Tell|Show|Teach|Train|Encourage|Remind|Make sure|Walk|Guide) (?:the )?(?:student|students|learner|learners)\b/i
 		);
 		expect(corpus).not.toMatch(
 			/\bso (?:the )?(?:student|students|learner|learners)\b/i
@@ -686,6 +686,17 @@ describe("course text quality normalization", () => {
 		expect(corpus).not.toMatch(
 			/\b(?:student|students|learner|learners) (?:can|should|will|need|needs|must|learn|start|stop|understand|already|headed)\b/i
 		);
+		expect(corpus).not.toMatch(
+			/\b(?:for|when|once|before) (?:the )?(?:student|students|learner|learners)\b/i
+		);
+		expect(corpus).not.toMatch(
+			/\b(?:This (?:gives|teaches)|should force|force|train) students\b/i
+		);
+		expect(corpus).not.toMatch(
+			/\bstudents (?:who|now|benefit|track|decide|optimize|move|reach|justify|encounter|use|begin)\b/i
+		);
+		expect(corpus).not.toMatch(/\bConnect with the learner\b/i);
+		expect(corpus).not.toMatch(/(?:^|["'`]\s*)Not treat\b/im);
 	});
 
 	it("keeps JavaScript course project copy labeled as web development", () => {
@@ -1634,7 +1645,7 @@ describe("course text quality normalization", () => {
 			"Strong representations are easy to inspect"
 		);
 		expect(aiLandscape!.content).toContain(
-			"once the structure's required information is identified"
+			"once the necessary information has been identified"
 		);
 		expect(aiLandscape!.content).not.toMatch(/\bcourse should\b/i);
 		expect(aiLandscape!.content).not.toMatch(/\bShow why\b/);

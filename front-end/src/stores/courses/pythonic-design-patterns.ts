@@ -20,7 +20,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Positioning against Python 2, Python 3, and the Java Track",
 					content:
-						"Frame this course as a follow-up for students who already know Python fundamentals and want to improve structure, reuse, and maintainability. The Python track should borrow the judgment from the Java design-patterns sequence without copying the Java object model."
+						"Frame this course as a follow-up after Python fundamentals for improving structure, reuse, and maintainability. The Python track should borrow the judgment from the Java design-patterns sequence without copying the Java object model."
 				},
 				{
 					title: "Pattern Names as Compression, Not Decoration",
