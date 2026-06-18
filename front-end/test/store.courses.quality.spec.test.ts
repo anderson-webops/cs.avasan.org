@@ -2301,6 +2301,43 @@ describe("course text quality normalization", () => {
 		}
 	});
 
+	it("keeps Java foundation implementation builds tied to distinct source projects", async () => {
+		const [javaLevel1, javaWithoutGraphics, javaWithGraphics] =
+			await Promise.all([
+				loadRawCourse("java-level-1"),
+				loadRawCourse("java-without-graphics"),
+				loadRawCourse("java-with-graphics")
+			]);
+		expect(javaLevel1).not.toBeNull();
+		expect(javaWithoutGraphics).not.toBeNull();
+		expect(javaWithGraphics).not.toBeNull();
+
+		const concepts = [13, 14, 15, 16, 17].map(build =>
+			findItem(
+				javaLevel1!,
+				new RegExp(`Java Foundations Build ${build}: Core Concepts`)
+			)
+		);
+
+		expect(new Set(concepts.map(item => item.content)).size).toBe(5);
+		expect(concepts[0].content).toContain("even-value filtering");
+		expect(concepts[1].content).toContain("threshold comparisons");
+		expect(concepts[2].content).toContain("inclusive range checks");
+		expect(concepts[3].content).toContain("adjacent list access");
+		expect(concepts[4].content).toContain("two-pass list processing");
+
+		expect(
+			findItem(
+				javaWithoutGraphics!,
+				/Java Foundations Build 17: Core Concepts/
+			).content
+		).toContain("empty-list handling");
+		expect(
+			findItem(javaWithGraphics!, /Java Foundations Build 13: Core Concepts/)
+				.content
+		).toContain("divisibility checks");
+	});
+
 	it("formats inline project steps and support labels as readable markdown blocks", async () => {
 		const [scratchLevel1, scratchLevel2, pygames] = await Promise.all([
 			loadRawCourse("scratch-level-1"),

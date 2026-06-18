@@ -1,7 +1,102 @@
+import type { ImplementationLabSection } from "./implementationLabGuidance";
 import type { RawCourse } from "./types";
 import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
 import { buildSupportSectionGuidance } from "./supportSectionGuidance";
+
+const javaFoundationBuildContexts = {
+	13: {
+		code: "J1X02",
+		focus: "enhanced `for` loops, `%` divisibility checks, accumulator variables, even-value filtering, and hand-checking a computed total",
+		artifact:
+			"the `computeScore(List<Integer> values)` method, the even-value rule, the default list, and one custom list with odd values or zero",
+		invariant:
+			"the invariant that odd values do not affect the score and the input list is never changed",
+		exampleCase:
+			"For **Java Foundations Build 13**, trace `List.of(2, 5, 8, 13)` by hand before coding. The even values are `2` and `8`, so the expected score is `10`.",
+		boundaryCase:
+			"Then check an all-odd list and a list containing `0` so the `% 2 == 0` condition is understood as a rule rather than a memorized sample.",
+		reviewEvidence:
+			"Summarize the divisibility condition, which values were skipped, which values were added, and the custom case used to prove the accumulator is correct."
+	},
+	14: {
+		code: "J1X03",
+		focus: "`if`/`else` scoring rules, threshold comparisons, accumulator updates, and predicting output before running the program",
+		artifact:
+			"the weighted `computeScore(List<Integer> values)` method, the `>= 10` threshold, the doubled-value branch, and a test case containing exactly `10`",
+		invariant:
+			"the invariant that values below `10` count once while values `10` or higher count twice",
+		exampleCase:
+			"For **Java Foundations Build 14**, trace `List.of(2, 5, 8, 13)` as `2 + 5 + 8 + 26`, producing an expected score of `41`.",
+		boundaryCase:
+			"Then test a value exactly equal to `10` so the inclusive threshold is explicit and not confused with `> 10`.",
+		reviewEvidence:
+			"Summarize the threshold rule, both branches of the conditional, and the custom case that proves the boundary value belongs in the doubled branch."
+	},
+	15: {
+		code: "J1X04",
+		focus: "method parameters, inclusive range checks, boolean `&&`, counting matching values, and distinguishing a count from a sum",
+		artifact:
+			"the `computeScore(List<Integer> values, int min, int max)` method, the inclusive `min`/`max` rule, and a default call using the range `5` through `10`",
+		invariant:
+			"the invariant that both endpoints are included and only matching values increase the count",
+		exampleCase:
+			"For **Java Foundations Build 15**, trace `List.of(2, 5, 8, 13)` with range `5` to `10`; only `5` and `8` match, so the expected result is `2`.",
+		boundaryCase:
+			"Then test values equal to `min` and `max` so the inclusive comparison is verified from both sides.",
+		reviewEvidence:
+			"Summarize the boolean expression, which values matched, which values failed, and why the method returns a count instead of a total."
+	},
+	16: {
+		code: "J1X05",
+		focus: "index-based loops, adjacent list access, best-so-far tracking, positive differences, and safe behavior for short or non-increasing lists",
+		artifact:
+			"the largest-adjacent-gap `computeScore(List<Integer> values)` method, the `values.get(i)` and `values.get(i - 1)` comparison, and a default increasing list",
+		invariant:
+			"the invariant that a list with fewer than two values or no positive adjacent increase returns `0`",
+		exampleCase:
+			"For **Java Foundations Build 16**, trace the adjacent gaps in `List.of(2, 5, 8, 13)`: `3`, `3`, and `5`; the expected score is `5`.",
+		boundaryCase:
+			"Then test a one-element list and a decreasing list so the loop bounds and default `0` result are justified.",
+		reviewEvidence:
+			"Summarize the loop start index, the adjacent values compared, the largest gap found, and the short-list or non-increasing case used for verification."
+	},
+	17: {
+		code: "J1X06",
+		focus: "two-pass list processing, average calculation, integer-to-double conversion, empty-list handling, and counting values above a computed benchmark",
+		artifact:
+			"the above-average `computeScore(List<Integer> values)` method, the total pass, the average calculation, the count pass, and the empty-list guard",
+		invariant:
+			"the invariant that an empty list returns `0` and only values strictly greater than the average are counted",
+		exampleCase:
+			"For **Java Foundations Build 17**, trace `List.of(2, 5, 8, 13)`: the average is `7.0`, and `8` plus `13` are above average, so the expected result is `2`.",
+		boundaryCase:
+			"Then test an empty list and a list where every value equals the average so strict greater-than behavior is clear.",
+		reviewEvidence:
+			"Summarize why two passes are used, how the average is calculated as a `double`, and which custom case proves the empty or equal-to-average behavior."
+	}
+} satisfies Record<
+	number,
+	{
+		code: string;
+	} & NonNullable<
+		Parameters<typeof buildImplementationLabGuidance>[0]["context"]
+	>
+>;
+
+function buildJavaFoundationGuidance(
+	build: keyof typeof javaFoundationBuildContexts,
+	section: ImplementationLabSection
+) {
+	const context = javaFoundationBuildContexts[build];
+
+	return buildImplementationLabGuidance({
+		courseFamily: "Java Level 1",
+		moduleTitle: `${context.code} Java Foundations Build ${build}: Implementation Lab`,
+		section,
+		context
+	});
+}
 
 export const javaLevel1Course: RawCourse = {
 	name: "Java Level 1",
@@ -901,30 +996,15 @@ export const javaLevel1Course: RawCourse = {
 			curriculum: [
 				{
 					title: "J1X02 Java Foundations Build 13: Core Concepts",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X02 Java Foundations Build 13: Implementation Lab",
-						section: "concepts"
-					})
+					content: buildJavaFoundationGuidance(13, "concepts")
 				},
 				{
 					title: "J1X02 Java Foundations Build 13: Guided Example",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X02 Java Foundations Build 13: Implementation Lab",
-						section: "example"
-					})
+					content: buildJavaFoundationGuidance(13, "example")
 				},
 				{
 					title: "J1X02 Java Foundations Build 13: Core Project",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X02 Java Foundations Build 13: Implementation Lab",
-						section: "coreProject"
-					}),
+					content: buildJavaFoundationGuidance(13, "coreProject"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-02-java-foundations-build-13/starter",
 					solutionLink:
@@ -932,23 +1012,13 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "J1X02 Java Foundations Build 13: Review and Reflection",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X02 Java Foundations Build 13: Implementation Lab",
-						section: "review"
-					})
+					content: buildJavaFoundationGuidance(13, "review")
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "J1X02 Java Foundations Build 13: Extension Challenge",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X02 Java Foundations Build 13: Implementation Lab",
-						section: "extension"
-					}),
+					content: buildJavaFoundationGuidance(13, "extension"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-02-java-foundations-build-13/starter",
 					solutionLink:
@@ -993,30 +1063,15 @@ export const javaLevel1Course: RawCourse = {
 			curriculum: [
 				{
 					title: "J1X03 Java Foundations Build 14: Core Concepts",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X03 Java Foundations Build 14: Implementation Lab",
-						section: "concepts"
-					})
+					content: buildJavaFoundationGuidance(14, "concepts")
 				},
 				{
 					title: "J1X03 Java Foundations Build 14: Guided Example",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X03 Java Foundations Build 14: Implementation Lab",
-						section: "example"
-					})
+					content: buildJavaFoundationGuidance(14, "example")
 				},
 				{
 					title: "J1X03 Java Foundations Build 14: Core Project",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X03 Java Foundations Build 14: Implementation Lab",
-						section: "coreProject"
-					}),
+					content: buildJavaFoundationGuidance(14, "coreProject"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-java-foundations-build-14/starter",
 					solutionLink:
@@ -1024,23 +1079,13 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "J1X03 Java Foundations Build 14: Review and Reflection",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X03 Java Foundations Build 14: Implementation Lab",
-						section: "review"
-					})
+					content: buildJavaFoundationGuidance(14, "review")
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "J1X03 Java Foundations Build 14: Extension Challenge",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X03 Java Foundations Build 14: Implementation Lab",
-						section: "extension"
-					}),
+					content: buildJavaFoundationGuidance(14, "extension"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-java-foundations-build-14/starter",
 					solutionLink:
@@ -1085,30 +1130,15 @@ export const javaLevel1Course: RawCourse = {
 			curriculum: [
 				{
 					title: "J1X04 Java Foundations Build 15: Core Concepts",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X04 Java Foundations Build 15: Implementation Lab",
-						section: "concepts"
-					})
+					content: buildJavaFoundationGuidance(15, "concepts")
 				},
 				{
 					title: "J1X04 Java Foundations Build 15: Guided Example",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X04 Java Foundations Build 15: Implementation Lab",
-						section: "example"
-					})
+					content: buildJavaFoundationGuidance(15, "example")
 				},
 				{
 					title: "J1X04 Java Foundations Build 15: Core Project",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X04 Java Foundations Build 15: Implementation Lab",
-						section: "coreProject"
-					}),
+					content: buildJavaFoundationGuidance(15, "coreProject"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-java-foundations-build-15/starter",
 					solutionLink:
@@ -1116,23 +1146,13 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "J1X04 Java Foundations Build 15: Review and Reflection",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X04 Java Foundations Build 15: Implementation Lab",
-						section: "review"
-					})
+					content: buildJavaFoundationGuidance(15, "review")
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "J1X04 Java Foundations Build 15: Extension Challenge",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X04 Java Foundations Build 15: Implementation Lab",
-						section: "extension"
-					}),
+					content: buildJavaFoundationGuidance(15, "extension"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-java-foundations-build-15/starter",
 					solutionLink:
@@ -1177,30 +1197,15 @@ export const javaLevel1Course: RawCourse = {
 			curriculum: [
 				{
 					title: "J1X05 Java Foundations Build 16: Core Concepts",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X05 Java Foundations Build 16: Implementation Lab",
-						section: "concepts"
-					})
+					content: buildJavaFoundationGuidance(16, "concepts")
 				},
 				{
 					title: "J1X05 Java Foundations Build 16: Guided Example",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X05 Java Foundations Build 16: Implementation Lab",
-						section: "example"
-					})
+					content: buildJavaFoundationGuidance(16, "example")
 				},
 				{
 					title: "J1X05 Java Foundations Build 16: Core Project",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X05 Java Foundations Build 16: Implementation Lab",
-						section: "coreProject"
-					}),
+					content: buildJavaFoundationGuidance(16, "coreProject"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-05-java-foundations-build-16/starter",
 					solutionLink:
@@ -1208,23 +1213,13 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "J1X05 Java Foundations Build 16: Review and Reflection",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X05 Java Foundations Build 16: Implementation Lab",
-						section: "review"
-					})
+					content: buildJavaFoundationGuidance(16, "review")
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "J1X05 Java Foundations Build 16: Extension Challenge",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X05 Java Foundations Build 16: Implementation Lab",
-						section: "extension"
-					}),
+					content: buildJavaFoundationGuidance(16, "extension"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-05-java-foundations-build-16/starter",
 					solutionLink:
@@ -1269,30 +1264,15 @@ export const javaLevel1Course: RawCourse = {
 			curriculum: [
 				{
 					title: "J1X06 Java Foundations Build 17: Core Concepts",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X06 Java Foundations Build 17: Implementation Lab",
-						section: "concepts"
-					})
+					content: buildJavaFoundationGuidance(17, "concepts")
 				},
 				{
 					title: "J1X06 Java Foundations Build 17: Guided Example",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X06 Java Foundations Build 17: Implementation Lab",
-						section: "example"
-					})
+					content: buildJavaFoundationGuidance(17, "example")
 				},
 				{
 					title: "J1X06 Java Foundations Build 17: Core Project",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X06 Java Foundations Build 17: Implementation Lab",
-						section: "coreProject"
-					}),
+					content: buildJavaFoundationGuidance(17, "coreProject"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-06-java-foundations-build-17/starter",
 					solutionLink:
@@ -1300,23 +1280,13 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "J1X06 Java Foundations Build 17: Review and Reflection",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X06 Java Foundations Build 17: Implementation Lab",
-						section: "review"
-					})
+					content: buildJavaFoundationGuidance(17, "review")
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "J1X06 Java Foundations Build 17: Extension Challenge",
-					content: buildImplementationLabGuidance({
-						courseFamily: "Java Level 1",
-						moduleTitle:
-							"J1X06 Java Foundations Build 17: Implementation Lab",
-						section: "extension"
-					}),
+					content: buildJavaFoundationGuidance(17, "extension"),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-06-java-foundations-build-17/starter",
 					solutionLink:
