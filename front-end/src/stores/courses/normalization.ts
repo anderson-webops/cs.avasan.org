@@ -6285,6 +6285,8 @@ function studioSupport(context: CourseTextContext) {
 			"",
 			studioReference
 		);
+	const compactScopedStudio = (text: string) =>
+		compactStudioSupportText(text, "", studioReference);
 	const studioFocus = variantPrompt(context, [
 		() =>
 			`For ${studioLabel}, define the artifact, prerequisite concepts, success criteria, and evidence before adding polish.`,
@@ -6322,8 +6324,8 @@ function studioSupport(context: CourseTextContext) {
 
 	return [
 		`**${supportLabel}:** ${supportSubject} produces ${studioArtifact(context)} connected to ${subjectFocus(context)}.`,
-		`**Studio focus:** ${compactStudio(studioFocus)}`,
-		`**Build sequence:**\n${compactStudio(studioBuildSequence(context).join("\n"))}\n- ${compactStudio(reviewStep)}`,
+		`**Studio focus:** ${compactScopedStudio(studioFocus)}`,
+		`**Build sequence:**\n${compactStudio(studioBuildSequence(context).join("\n"))}\n- ${compactScopedStudio(reviewStep)}`,
 		`**Completion checks:**\n${compactStudio(studioCompletionChecks(context).join("\n"))}`,
 		`**Extension:** ${compactExtension}`
 	].join("\n\n");
