@@ -59,16 +59,17 @@ describe("scheduler embed helpers", () => {
 	});
 
 	it("keeps scheduler URL search params on the configured scheduler origin", () => {
+		const sampleSearchParam = "sample search param";
 		const url = new URL(
 			buildSchedulerUrl("/booking/manage", {
 				empty: "",
-				token: "abc 123"
+				token: sampleSearchParam
 			})
 		);
 
 		expect(url.origin).toBe(DEFAULT_SCHEDULER_ORIGIN);
 		expect(url.pathname).toBe("/booking/manage");
-		expect(url.searchParams.get("token")).toBe("abc 123");
+		expect(url.searchParams.get("token")).toBe(sampleSearchParam);
 		expect(url.searchParams.has("empty")).toBe(false);
 	});
 

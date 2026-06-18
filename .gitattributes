@@ -7,5 +7,6 @@
 *.mjs text eol=lf
 *.mts text eol=lf
 **/.npmrc text eol=lf
+.env.EXAMPLE text eol=lf
 *.ts text eol=lf
 *.vue text eol=lf

@@ -27,6 +27,7 @@ describe("AccountManagement.vue login (happy path)", () => {
 
 	it("logs in a user, updates the store, and closes the login modal", async () => {
 		const app = useAppStore();
+		const loginFormPassphrase = "login-test-pass";
 		// Open the login modal (component checks app.loginBlock)
 		app.setLoginBlock(true);
 
@@ -50,13 +51,17 @@ describe("AccountManagement.vue login (happy path)", () => {
 
 		// Fill form and submit
 		await wrapper.get("#uname").setValue("user@example.com");
-		await wrapper.get("#psw1").setValue("secret");
+		await wrapper.get("#psw1").setValue(loginFormPassphrase);
 		await wrapper.get("form").trigger("submit.prevent");
 
 		// Assert API call
 		expect(apiMod.api.post).toHaveBeenCalledWith(
 			"/accounts/login",
-			{ email: "user@example.com", password: "secret", remember: false },
+			{
+				email: "user@example.com",
+				password: loginFormPassphrase,
+				remember: false
+			},
 			{ withCredentials: true }
 		);
 
