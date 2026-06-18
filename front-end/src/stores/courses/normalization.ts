@@ -2448,86 +2448,198 @@ function formatDenseProcedureInstructions(course: RawCourse) {
 	}
 }
 
+function cleanSupportTopicTitle(title: string) {
+	return cleanModuleTopicTitle(title)
+		.replace(
+			/^[A-Z]{1,5}\d+\s+(?:Project|Supplemental Project|Master Project)\s+\d+:\s*/iu,
+			""
+		)
+		.replace(/^[A-Z]{1,5}\d+\s+Supplemental Graphics Project:\s*/iu, "")
+		.replace(
+			/^(?:Core Project|Project|Supplemental Project|Extension Challenge|Verification Review|Guided Example|Worked Example|Checkpoint):\s*/iu,
+			""
+		)
+		.replace(/^(?:Project|Supplemental Project|Master Project)\s+\d+:\s*/iu, "")
+		.replace(/\s{2,}/g, " ")
+		.trim();
+}
+
+function supportFocusTopic(context: CourseTextContext) {
+	const itemTitle = cleanSupportTopicTitle(context.item.title);
+	const moduleTitle = cleanSupportTopicTitle(context.module.title);
+	const normalizedItem = itemTitle.toLowerCase();
+	const normalizedModule = moduleTitle.toLowerCase();
+	const itemIsGeneric =
+		!itemTitle ||
+		genericSupportItemTitlePattern.test(itemTitle) ||
+		/^core concepts(?: and (?:teaching flow|learning sequence))?$/i.test(
+			itemTitle
+		) ||
+		normalizedItem === normalizedModule ||
+		(Boolean(normalizedModule) &&
+			normalizedItem.startsWith(`${normalizedModule}:`));
+
+	return itemIsGeneric
+		? moduleTitle || itemTitle || "this course item"
+		: itemTitle;
+}
+
+function topicScopedFocus(context: CourseTextContext, area: string) {
+	return `${supportFocusTopic(context)}: ${area}`;
+}
+
 function subjectFocus(context: CourseTextContext) {
 	const source = contextText(context);
 
 	if (/ap computer science|apcs/.test(source)) {
-		return "AP CSA Java reasoning: tracing code, explaining object state, writing method-level logic, and testing edge cases";
+		return topicScopedFocus(
+			context,
+			"AP CSA Java reasoning, including tracing code, explaining object state, writing method-level logic, and testing edge cases"
+		);
 	}
 	if (/python level 1|grs/.test(source)) {
-		return "beginner Python fluency: variables, input, conditionals, loops, functions, and readable console output";
+		return topicScopedFocus(
+			context,
+			"beginner Python fluency with variables, input, conditionals, loops, functions, and readable console output"
+		);
 	}
 	if (/python level 2|ps\d/.test(source)) {
-		return "Python program design: control flow, data structures, user input, and careful testing of console behavior";
+		return topicScopedFocus(
+			context,
+			"Python program design with control flow, data structures, user input, and careful testing of console behavior"
+		);
 	}
 	if (/python level 3|advanced python|am\d/.test(source)) {
-		return "advanced Python decomposition, algorithmic reasoning, file/data handling, and clear testing habits";
+		return topicScopedFocus(
+			context,
+			"advanced Python decomposition, algorithmic reasoning, file/data handling, and clear testing habits"
+		);
 	}
 	if (isPygameSource(source)) {
-		return "PyGame development: game-loop state, actors, events, collisions, timing, assets, and playable feedback";
+		return topicScopedFocus(
+			context,
+			"PyGame development with game-loop state, actors, events, collisions, timing, assets, and playable feedback"
+		);
 	}
 	if (isScratchSource(source)) {
-		return "Scratch game design: sprites, event blocks, broadcasts, variables, costumes or backdrops, loops, and playable feedback";
+		return topicScopedFocus(
+			context,
+			"Scratch game design with sprites, event blocks, broadcasts, variables, costumes or backdrops, loops, and playable feedback"
+		);
 	}
 	if (/swift|xcode|testflight|app store|simulator|bundle id/.test(source)) {
-		return "Swift app development: project structure, SwiftUI views, state flow, signing, simulator/device testing, and release readiness";
+		return topicScopedFocus(
+			context,
+			"Swift app development with project structure, SwiftUI views, state flow, signing, simulator/device testing, and release readiness"
+		);
 	}
 	if (
 		/linux|systemd|shell|cron|permissions|processes|filesystem/.test(source)
 	) {
-		return "Linux systems practice: shell commands, filesystems, users and permissions, services, logs, automation, and repeatable troubleshooting evidence";
+		return topicScopedFocus(
+			context,
+			"Linux systems practice with shell commands, filesystems, users and permissions, services, logs, automation, and repeatable troubleshooting evidence"
+		);
 	}
 	if (isScienceContext(context)) {
-		return "scientific explanation: observable phenomena, models, data, vocabulary, and claim-evidence-reasoning";
+		return topicScopedFocus(
+			context,
+			"scientific explanation using observable phenomena, models, data, vocabulary, and claim-evidence-reasoning"
+		);
 	}
 	if (isCppContext(context)) {
-		return "C++ engineering: types, memory ownership, containers, algorithms, command-line behavior, and repeatable tests";
+		return topicScopedFocus(
+			context,
+			"C++ engineering with types, memory ownership, containers, algorithms, command-line behavior, and repeatable tests"
+		);
 	}
 	if (/c systems|systems build|assembly/.test(source)) {
-		return "systems programming: machine representation, memory layout, build tooling, low-level debugging, and safe constraints";
+		return topicScopedFocus(
+			context,
+			"systems programming with machine representation, memory layout, build tooling, low-level debugging, and safe constraints"
+		);
 	}
 	if (isJavaContext(context)) {
 		return variantPrompt(context, [
 			() =>
-				"object-oriented Java design: classes, method contracts, object state, inheritance, interfaces, records, and tests",
+				topicScopedFocus(
+					context,
+					"object-oriented Java design with classes, method contracts, object state, inheritance, interfaces, records, and tests"
+				),
 			() =>
-				"Java type design: objects, fields, methods, collection choices, public APIs, and compile-run feedback",
+				topicScopedFocus(
+					context,
+					"Java type design with objects, fields, methods, collection choices, public APIs, and compile-run feedback"
+				),
 			() =>
-				"Java program structure: constructors, object state, method behavior, access boundaries, and testable cases",
+				topicScopedFocus(
+					context,
+					"Java program structure with constructors, object state, method behavior, access boundaries, and testable cases"
+				),
 			() =>
-				"Java reasoning: values versus references, class responsibilities, interfaces or records when useful, and visible verification"
+				topicScopedFocus(
+					context,
+					"Java reasoning with values versus references, class responsibilities, interfaces or records when useful, and visible verification"
+				)
 		]);
 	}
 	if (/usaco|competitive/.test(source)) {
-		return "competitive-programming discipline: input parsing, sample verification, edge cases, and complexity reasoning";
+		return topicScopedFocus(
+			context,
+			"competitive-programming discipline with input parsing, sample verification, edge cases, and complexity reasoning"
+		);
 	}
 	if (/security|offensive|low-level security|network security/.test(source)) {
-		return "safe security analysis: local-only test fixtures, threat modeling, evidence collection, and defensive remediation";
+		return topicScopedFocus(
+			context,
+			"safe security analysis with local-only test fixtures, threat modeling, evidence collection, and defensive remediation"
+		);
 	}
 	if (isNetworkSystemsSource(source)) {
-		return "network systems practice: addressing, routing, ports, DNS, packet evidence, service exposure, and diagnostic reasoning";
+		return topicScopedFocus(
+			context,
+			"network systems practice with addressing, routing, ports, DNS, packet evidence, service exposure, and diagnostic reasoning"
+		);
 	}
 	if (
 		/data science|data analysis|machine learning|ai search|ai level|model/.test(
 			source
 		)
 	) {
-		return "data and model reasoning: dataset assumptions, measured output, interpretation, limitations, and responsible use";
+		return topicScopedFocus(
+			context,
+			"data and model reasoning with dataset assumptions, measured output, interpretation, limitations, and responsible use"
+		);
 	}
 	if (/unity|game development|game-mechanics/.test(source)) {
-		return "game development: scene setup, state changes, player feedback, playtesting, and a clear completion loop";
+		return topicScopedFocus(
+			context,
+			"game development with scene setup, state changes, player feedback, playtesting, and a clear completion loop"
+		);
 	}
 	if (isWebContext(context)) {
-		return "web development workflow: user-facing behavior, browser checks, API/data flow, accessibility, and deployment readiness";
+		return topicScopedFocus(
+			context,
+			"web development workflow with user-facing behavior, browser checks, API/data flow, accessibility, and deployment readiness"
+		);
 	}
 	if (/design pattern|refactoring|pattern implementation/.test(source)) {
-		return "software design tradeoffs: naming, responsibilities, coupling, refactoring safety, and behavior-preserving tests";
+		return topicScopedFocus(
+			context,
+			"software design tradeoffs involving naming, responsibilities, coupling, refactoring safety, and behavior-preserving tests"
+		);
 	}
 	if (/algebra|geometry|calculus|math/.test(source)) {
-		return "mathematical reasoning: worked examples, notation, graph or table interpretation, and explanation of each step";
+		return topicScopedFocus(
+			context,
+			"mathematical reasoning through worked examples, notation, graph or table interpretation, and explanation of each step"
+		);
 	}
 
-	return "the module's core concept, a concrete worked example, and a testable artifact";
+	return topicScopedFocus(
+		context,
+		"the module's core concept, a concrete worked example, and a testable artifact"
+	);
 }
 
 function isMathContext(context: CourseTextContext) {
@@ -4624,33 +4736,36 @@ function extensionPrompt(context: CourseTextContext) {
 
 function projectSupport(context: CourseTextContext) {
 	const focus = subjectFocus(context);
+	const topic = supportFocusTopic(context);
+	const topicContext =
+		topic === "this course item" ? "" : ` for ${topic}`;
 	const reference = projectSupportReference(context);
 	const capitalizedReference = capitalizeSentence(reference);
 	const goal = variantPrompt(context, [
 		() =>
-			`**Goal:** ${capitalizedReference} has an observable result, one normal path, and one boundary or failure case.`,
+			`**Goal:** ${capitalizedReference}${topicContext} has an observable result, one normal path, and one boundary or failure case.`,
 		() =>
-			`**Goal:** Make ${reference} easy to verify by stating expected behavior, observing actual behavior, and explaining one evidence point.`,
+			`**Goal:** Make ${reference}${topicContext} easy to verify by stating expected behavior, observing actual behavior, and explaining one evidence point.`,
 		() =>
-			`**Goal:** Build ${reference} in a small working case, then add one improvement or edge case.`,
+			`**Goal:** Build ${reference}${topicContext} in a small working case, then add one improvement or edge case.`,
 		() =>
-			`**Goal:** Connect ${reference} to a visible run, trace, model, or user interaction and record what proves it works.`,
+			`**Goal:** Connect ${reference}${topicContext} to a visible run, trace, model, or user interaction and record what proves it works.`,
 		() =>
-			`**Goal:** Verify ${reference} with one ordinary case and one case that could fail if the concept is misunderstood.`,
+			`**Goal:** Verify ${reference}${topicContext} with one ordinary case and one case that could fail if the concept is misunderstood.`,
 		() =>
-			`**Goal:** Start from a small working case for ${reference}, then add one improvement with visible evidence.`,
+			`**Goal:** Start from a small working case for ${reference}${topicContext}, then add one improvement with visible evidence.`,
 		() =>
-			`**Goal:** Apply the concept in ${reference}, then compare expected behavior with the observed result.`,
+			`**Goal:** Apply the concept in ${reference}${topicContext}, then compare expected behavior with the observed result.`,
 		() =>
-			`**Goal:** Use clear structure, naming, and evidence so ${reference} can be reviewed without relying on memory.`,
+			`**Goal:** Use clear structure, naming, and evidence so ${reference}${topicContext} can be reviewed without relying on memory.`,
 		() =>
-			`**Goal:** Choose one design or reasoning decision in ${reference}, test it, and show its effect in the final artifact.`,
+			`**Goal:** Choose one design or reasoning decision in ${reference}${topicContext}, test it, and show its effect in the final artifact.`,
 		() =>
-			`**Goal:** Demonstrate ${reference} with one ordinary case and one case that could fail if the idea is misunderstood.`,
+			`**Goal:** Demonstrate ${reference}${topicContext} with one ordinary case and one case that could fail if the idea is misunderstood.`,
 		() =>
-			`**Goal:** Map the prompt requirements to ${reference}, then record the evidence that proves the result works.`,
+			`**Goal:** Map the prompt requirements to ${reference}${topicContext}, then record the evidence that proves the result works.`,
 		() =>
-			`**Goal:** Identify the starting state, main transformation, and output or conclusion for ${reference}.`
+			`**Goal:** Identify the starting state, main transformation, and output or conclusion for ${reference}${topicContext}.`
 	]);
 
 	return [
