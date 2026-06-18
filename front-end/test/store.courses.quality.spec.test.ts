@@ -35,6 +35,9 @@ function isProjectLikeTitle(title: string) {
 	);
 }
 
+const lessonBackbonePattern =
+	/\*\*(?:Applied studio|Build path|Concept focus|Concept path|Course path|Evidence of proficiency|Evidence target|Evidence targets|Explanation|Focus|Goal|Investigation|Project selection|Project target|Readiness check|Readiness map|Result|Science explanation|Scope path|Selected checks|Studio focus):\*\*|Core topics in this module:|Representative solutions/i;
+
 function findItem(
 	course: NonNullable<Awaited<ReturnType<typeof loadRawCourse>>>,
 	titlePattern: RegExp,
@@ -1825,6 +1828,32 @@ describe("course text quality normalization", () => {
 			);
 
 			expect(weakItems).toEqual([]);
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
+
+	it(
+		"keeps every core module backed by a visible lesson structure",
+		async () => {
+			const courses = await Promise.all(
+				courseCatalog.map(async entry => ({
+					id: entry.id,
+					course: await loadRawCourse(entry.id)
+				}))
+			);
+			const missingBackbone = courses.flatMap(({ id, course }) =>
+				(course?.modules ?? [])
+					.filter(module => module.kind !== "appendix")
+					.filter(
+						module =>
+							!module.curriculum.some(item =>
+								lessonBackbonePattern.test(item.content)
+							)
+					)
+					.map(module => `${id} | ${module.title}`)
+			);
+
+			expect(missingBackbone).toEqual([]);
 		},
 		COURSE_SWEEP_TIMEOUT
 	);

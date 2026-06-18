@@ -673,6 +673,8 @@ const structuredSupportPattern =
 	/\*\*(?:Goal|Project goal|Teaching flow|Concept path|Learning sequence|Diagnostic guidance|Readiness check|Misconception check|Common pitfalls|Exit check|Mastery check|Investigation|Remote investigation|Explanation|Science explanation|Studio focus|Evidence target|Evidence targets|AP connection):?\*\*/i;
 const projectReviewSupportPattern =
 	/\*\*(?:Outcome|Required outcome|Success criteria|Completion checks|Checkpoints|Extension):\*\*/i;
+const visibleLessonBackbonePattern =
+	/\*\*(?:Applied studio|Build path|Concept focus|Concept path|Course path|Evidence of proficiency|Evidence target|Evidence targets|Explanation|Focus|Goal|Investigation|Project selection|Project target|Readiness check|Readiness map|Result|Science explanation|Scope path|Selected checks|Studio focus):\*\*|Core topics in this module:|Representative solutions/i;
 
 const placeholderContentPattern =
 	/\b(?:introduce the main goal|build the central artifact|define the success criteria|use the .* snapshot|alternate supplemental snapshot)\b/i;
@@ -6118,6 +6120,52 @@ function contextualizeGenericRepresentationPrompt(context: CourseTextContext) {
 	);
 }
 
+function cleanModuleTopicTitle(title: string) {
+	return compactWhitespace(stripLessonTitlePrefix(title))
+		.replace(/^[A-Z]{1,4}\d+\s+/u, "")
+		.replace(/^Module Project:\s*/iu, "")
+		.replace(/\s+\([^)]*\)$/u, "");
+}
+
+function mathModuleBackboneSupport(context: CourseTextContext) {
+	const topic = cleanModuleTopicTitle(context.module.title) || "this module";
+
+	return [
+		`**Concept path:** ${topic} connects the main rule or representation to worked examples, then checks the result through substitution, graph or table interpretation, units, or reasonableness.`,
+		`**Common pitfalls:** In ${topic}, common mistakes include copying a pattern without checking the condition, dropping a sign or exponent, skipping domain or unit restrictions, or reporting an answer without explaining what it means.`,
+		`**Mastery check:** A complete response states the setup, shows the algebraic or representational move, verifies the answer in context, and explains one case where the same method would need to change.`
+	].join("\n\n");
+}
+
+function addMissingMathModuleLessonBackbones(
+	course: RawCourse,
+	courseId: string
+) {
+	for (const module of course.modules) {
+		if (module.kind === "appendix") continue;
+		if (module.curriculum.length === 0) continue;
+		if (
+			module.curriculum.some(item =>
+				visibleLessonBackbonePattern.test(item.content)
+			)
+		) {
+			continue;
+		}
+
+		const item = module.curriculum[0];
+		const context = {
+			courseId,
+			course,
+			module,
+			item,
+			section: "curriculum" as const
+		};
+		if (!isMathContext(context)) continue;
+
+		item.content = `${supportBaseContent(item.content)}\n\n${mathModuleBackboneSupport(context)}`;
+	}
+}
+
 function normalizeCourseTextQuality(course: RawCourse, courseId: string) {
 	for (const module of course.modules) {
 		for (const section of ["curriculum", "supplementalProjects"] as const) {
@@ -6164,6 +6212,8 @@ function normalizeCourseTextQuality(course: RawCourse, courseId: string) {
 			}
 		}
 	}
+
+	addMissingMathModuleLessonBackbones(course, courseId);
 }
 
 function normalizeImplementationLabLanguage(course: RawCourse) {

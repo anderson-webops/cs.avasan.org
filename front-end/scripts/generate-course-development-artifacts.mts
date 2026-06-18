@@ -34,6 +34,8 @@ const scienceCourseIds = new Set([
 	"intro-to-physics",
 	"physics-level-2"
 ]);
+const lessonBackbonePattern =
+	/\*\*(?:Applied studio|Build path|Concept focus|Concept path|Course path|Evidence of proficiency|Evidence target|Evidence targets|Explanation|Focus|Goal|Investigation|Project selection|Project target|Readiness check|Readiness map|Result|Science explanation|Scope path|Selected checks|Studio focus):\*\*|Core topics in this module:|Representative solutions/i;
 const generatedReadinessFiles = new Set([
 	"COURSE_SOURCE_MANIFEST.md",
 	"SOURCE_BACKLOG.md",
@@ -131,6 +133,16 @@ function allItems(course: RawCourse) {
 				section: string;
 				item: RawCourseModuleItem;
 			}>
+	);
+}
+
+function coreModules(course: RawCourse) {
+	return course.modules.filter(module => module.kind !== "appendix");
+}
+
+function hasLessonBackbone(module: RawCourse["modules"][number]) {
+	return module.curriculum.some(item =>
+		lessonBackbonePattern.test(item.content)
 	);
 }
 
@@ -328,6 +340,11 @@ fs.mkdirSync(outDir, { recursive: true });
 
 const structuralAudit = courses.map(({ entry, course }) => {
 	const links = itemLinks(course);
+	const coreModuleList = coreModules(course);
+	const modulesMissingLessonBackbone = coreModuleList
+		.filter(module => !hasLessonBackbone(module))
+		.map(module => module.title);
+
 	return {
 		courseId: entry.id,
 		name: course.name,
@@ -335,13 +352,18 @@ const structuralAudit = courses.map(({ entry, course }) => {
 		modulesWithUnderTwoProjects: course.modules.filter(
 			module => module.supplementalProjects.length < 2
 		).length,
+		coreModules: coreModuleList.length,
+		modulesMissingLessonBackbone,
+		lessonBackboneCoverage:
+			coreModuleList.length === 0
+				? 1
+				: (coreModuleList.length -
+						modulesMissingLessonBackbone.length) /
+					coreModuleList.length,
 		projectLinks: links.projectLinks,
 		solutionLinks: links.solutionLinks,
 		datasetLinks: links.datasetLinks,
 		mediaLinks: links.mediaLinks,
-		hasFullLessonPack: course.modules.some(module =>
-			module.title.endsWith(": Full Lesson Authoring Pack")
-		),
 		hasSourceParityModule: course.modules.some(
 			module => module.title === "Source and Asset Parity Implementation"
 		)
@@ -363,18 +385,24 @@ writeMd(
 				"Course",
 				"Modules",
 				"Under 2 Projects",
+				"Core Modules",
+				"Missing Lesson Backbone",
+				"Lesson Backbone",
 				"Project Links",
 				"Solution Links",
-				"Full Lesson Pack",
 				"Source Parity"
 			],
 			structuralAudit.map(row => [
 				row.courseId,
 				row.modules,
 				row.modulesWithUnderTwoProjects,
+				row.coreModules,
+				row.modulesMissingLessonBackbone.length,
+				row.lessonBackboneCoverage === 1
+					? "yes"
+					: `${Math.round(row.lessonBackboneCoverage * 100)}%`,
 				row.projectLinks,
 				row.solutionLinks,
-				row.hasFullLessonPack ? "yes" : "no",
 				row.hasSourceParityModule ? "yes" : "no"
 			])
 		)
