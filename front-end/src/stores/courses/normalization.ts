@@ -2459,7 +2459,10 @@ function cleanSupportTopicTitle(title: string) {
 			/^(?:Core Project|Project|Supplemental Project|Extension Challenge|Verification Review|Guided Example|Worked Example|Checkpoint):\s*/iu,
 			""
 		)
-		.replace(/^(?:Project|Supplemental Project|Master Project)\s+\d+:\s*/iu, "")
+		.replace(
+			/^(?:Project|Supplemental Project|Master Project)\s+\d+:\s*/iu,
+			""
+		)
 		.replace(/\s{2,}/g, " ")
 		.trim();
 }
@@ -4737,8 +4740,7 @@ function extensionPrompt(context: CourseTextContext) {
 function projectSupport(context: CourseTextContext) {
 	const focus = subjectFocus(context);
 	const topic = supportFocusTopic(context);
-	const topicContext =
-		topic === "this course item" ? "" : ` for ${topic}`;
+	const topicContext = topic === "this course item" ? "" : ` for ${topic}`;
 	const reference = projectSupportReference(context);
 	const capitalizedReference = capitalizeSentence(reference);
 	const goal = variantPrompt(context, [
