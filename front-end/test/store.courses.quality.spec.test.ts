@@ -425,11 +425,25 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(/\bwhere no change should happen\b/i);
 			expect(corpus).not.toMatch(/\bcase where nothing should happen\b/i);
 			expect(corpus).not.toMatch(/\bcase where no change should happen\b/i);
+			expect(corpus).not.toMatch(/\bMake Scratch game design:/i);
+			expect(corpus).not.toMatch(
+				/\bStart from a small working case, then add one improvement that still reflects Scratch game design:/i
+			);
+			expect(corpus).not.toMatch(
+				/\bMake one design or reasoning choice explicit, test it, and show its effect in the final artifact\b/i
+			);
+			expect(corpus).not.toMatch(
+				/\bIdentify the input or starting state, the main transformation, and the output or conclusion tied to Scratch game design:/i
+			);
 			expect(corpus).toContain(
 				"an ignored-input case where the state remains unchanged"
 			);
 			expect(corpus).toContain(
 				"one case that leaves the structure unchanged"
+			);
+			expect(corpus).toContain("the module focus (Scratch game design:");
+			expect(corpus).toContain(
+				"Choose one design or reasoning decision connected to the module focus"
 			);
 			expect(corpus).not.toMatch(/\bRecovered\b/);
 			expect(corpus).not.toMatch(
@@ -1651,7 +1665,7 @@ describe("course text quality normalization", () => {
 		);
 		expect(spinner.content).toContain("towards the mouse.\n\n**Goal:**");
 		expect(spinner.content).toContain(
-			"Use clear structure, naming, and evidence so Scratch game design"
+			"Use clear structure, naming, and evidence so the module focus (Scratch game design"
 		);
 		expect(spinner.content).toContain("\n\n**Outcome:**");
 		expect(spinner.content).not.toContain("Build a working result for");

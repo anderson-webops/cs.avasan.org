@@ -4477,29 +4477,29 @@ function projectSupport(context: CourseTextContext) {
 	const focus = subjectFocus(context);
 	const goal = variantPrompt(context, [
 		() =>
-			`**Goal:** Build a visible result tied to ${focus}. Include a normal path, an edge case, and one sentence explaining the evidence.`,
+			`**Goal:** Build a visible result tied to the module focus (${focus}). Include a normal path, an edge case, and one sentence explaining the evidence.`,
 		() =>
-			`**Goal:** Create an observable result, verify one assumption, and tie the evidence to ${focus}.`,
+			`**Goal:** Create an observable result, verify one assumption, and connect the evidence to the module focus (${focus}).`,
 		() =>
-			`**Goal:** Make ${focus} testable with a runnable result, inspected output, and a short evidence note.`,
+			`**Goal:** Make the module focus (${focus}) testable with a runnable result, inspected output, and a short evidence note.`,
 		() =>
-			`**Goal:** Use one concrete behavior, model, output, or analysis to make ${focus} visible.`,
+			`**Goal:** Use one concrete behavior, model, output, or analysis to make the module focus (${focus}) visible.`,
 		() =>
-			`**Goal:** Show ${focus} through a run, trace, model, or user interaction.`,
+			`**Goal:** Show the module focus (${focus}) through a run, trace, model, or user interaction.`,
 		() =>
-			`**Goal:** Start from a small working case, then add one improvement that still reflects ${focus}.`,
+			`**Goal:** Start from a small working case, then add one improvement that still reflects the module focus (${focus}).`,
 		() =>
-			`**Goal:** Apply ${focus} in a practical artifact, then compare expected behavior with the observed result.`,
+			`**Goal:** Apply the module focus (${focus}) in a practical artifact, then compare expected behavior with the observed result.`,
 		() =>
-			`**Goal:** Use clear structure, naming, and evidence so ${focus} can be reviewed without relying on memory.`,
+			`**Goal:** Use clear structure, naming, and evidence so the module focus (${focus}) can be reviewed without relying on memory.`,
 		() =>
-			`**Goal:** Make one design or reasoning choice explicit, test it, and show its effect in the final artifact.`,
+			`**Goal:** Choose one design or reasoning decision connected to the module focus (${focus}), test it, and show its effect in the final artifact.`,
 		() =>
-			`**Goal:** Demonstrate ${focus} with one ordinary case and one case that could fail if the idea is misunderstood.`,
+			`**Goal:** Demonstrate the module focus (${focus}) with one ordinary case and one case that could fail if the idea is misunderstood.`,
 		() =>
-			`**Goal:** Map the prompt requirements to ${focus}, then record the evidence that proves the result works.`,
+			`**Goal:** Map the prompt requirements to the module focus (${focus}), then record the evidence that proves the result works.`,
 		() =>
-			`**Goal:** Identify the input or starting state, the main transformation, and the output or conclusion tied to ${focus}.`
+			`**Goal:** Identify the input or starting state, the main transformation, and the output or conclusion tied to the module focus (${focus}).`
 	]);
 
 	return [
