@@ -634,10 +634,11 @@ function compactGuidanceBody(
 		.replace(
 			new RegExp(`\\bthe ${escapedScopedReference}\\b`, "g"),
 			scopedReference
-		)
-		.replace(new RegExp(`\\b(${cleanupReferenceNames}) \\1\\b`, "gi"), "$1")
-		.replace(/\b(the final|The final|the closing|The closing) the\b/g, "$1")
-		.replace(
+			)
+			.replace(new RegExp(`\\b(${cleanupReferenceNames}) \\1\\b`, "gi"), "$1")
+			.replace(/\b([A-Za-z][A-Za-z-]{3,})\s+\1\b/gi, "$1")
+			.replace(/\b(the final|The final|the closing|The closing) the\b/g, "$1")
+			.replace(
 			new RegExp(
 				`\\b(final|Final|closing|Closing) ${escapedScopedReference} (note|explanation|response|answer|work|review)\\b`,
 				"g"
@@ -676,6 +677,7 @@ function normalizeGeneratedGuidanceText(
 
 	return guidanceText
 		.replace(new RegExp(`\\b(${cleanupReferenceNames}) \\1\\b`, "gi"), "$1")
+		.replace(/\b([A-Za-z][A-Za-z-]{3,})\s+\1\b/gi, "$1")
 		.replace(/\b(the final|The final|the closing|The closing) the\b/g, "$1")
 		.replace(
 			new RegExp(
@@ -827,6 +829,15 @@ function projectGoal(
 		][index];
 	}
 
+	if (family.includes("ai/python")) {
+		return [
+			`**Project goal:** Complete **${moduleTitle}** as an AI/Python ${artifact} with explicit state, decision logic, visible output, and one sanity check.`,
+			`**Project goal:** Build **${moduleTitle}** as an AI/Python ${artifact} that exposes the input state, rule or search step, output, and limitation.`,
+			`**Project goal:** Produce **${moduleTitle}** as an AI/Python ${artifact} with inspectable intermediate behavior and a cautious interpretation.`,
+			`**Project goal:** Complete **${moduleTitle}** as an AI/Python ${artifact} that can be traced from setup through result and checked against one edge case.`
+		][index];
+	}
+
 	if (
 		family.includes("data") ||
 		family.includes("machine learning") ||
@@ -834,7 +845,7 @@ function projectGoal(
 	) {
 		return [
 			`**Project goal:** Produce the ${courseFamily} ${artifact} for **${moduleTitle}** as an evidence-backed analysis, model, or search result with a stated limitation.`,
-			`**Project goal:** Complete **${moduleTitle}** as ${indefiniteArticleFor(courseFamily)} ${courseFamily} ${artifact} that inspects inputs, records assumptions, and verifies the output with a sanity check.`,
+			`**Project goal:** Complete **${moduleTitle}** as a ${artifact} for ${courseFamily} that inspects inputs, records assumptions, and verifies the output with a sanity check.`,
 			`**Project goal:** Build **${moduleTitle}** around a clear question, measurable result, baseline or trace, and limitation that affects interpretation.`,
 			`**Project goal:** Turn **${moduleTitle}** into a reproducible data/model checkpoint with visible intermediate evidence and a cautious conclusion.`
 		][index];
@@ -892,7 +903,7 @@ function projectGoal(
 
 	return [
 		`**Project goal:** Create the ${courseFamily} ${artifact} for **${moduleTitle}** with an observable result, a checked boundary case, and a short reasoning note.`,
-		`**Project goal:** Complete **${moduleTitle}** as ${indefiniteArticleFor(courseFamily)} ${courseFamily} ${artifact} with a clear success condition and evidence that the result works.`,
+		`**Project goal:** Complete **${moduleTitle}** as a ${artifact} for ${courseFamily} with a clear success condition and evidence that the result works.`,
 		`**Project goal:** Build **${moduleTitle}** in small verifiable steps, then compare the expected result with the observed result.`,
 		`**Project goal:** Produce **${moduleTitle}** as a focused artifact that demonstrates the module concept and one important edge case.`
 	][index];
@@ -974,6 +985,24 @@ function familyFocus(
 			`For ${moduleTitle}, make the SwiftUI behavior visible through the state owner, the screen update, one user action, and one empty, error, layout, or accessibility check`,
 			`Use ${moduleTitle} to separate model state from view behavior, then verify the normal interaction and one edge state in the simulator or preview data`,
 			`Keep ${moduleTitle} app-focused by showing launch state, the target interaction, the UI response, and the evidence that Xcode configuration is not hiding behavior`
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
+	}
+
+	if (family.includes("scratch")) {
+		return [
+			`Scratch game design: define the sprites, events, variables, stage state, and visible feedback for ${moduleTitle}`,
+			`Scratch game design: connect ${moduleTitle} controls, broadcasts, variables, costumes or backdrops, and reset behavior to the playable result`,
+			`Scratch game design: make ${moduleTitle} traceable from player action to block sequence to visible stage change`,
+			`Scratch game design: verify ${moduleTitle} through a normal play path, an awkward input or reset case, and a clear explanation of the event flow`
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
+	}
+
+	if (family.includes("pygame")) {
+		return [
+			`PyGame development: define the game-loop state, actors, input events, collisions, timing, assets, and visible feedback for ${moduleTitle}`,
+			`PyGame development: connect ${moduleTitle} startup, event handling, updates, drawing, collision logic, and reset behavior to the playable result`,
+			`PyGame development: make ${moduleTitle} traceable from player input to state update to rendered frame`,
+			`PyGame development: verify ${moduleTitle} with a normal play path, a boundary interaction, and a short explanation of the loop state`
 		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
@@ -1068,13 +1097,13 @@ function requiredWorkSteps(
 		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
-	if (family.includes("web") || family.includes("javascript")) {
-		return [
-			[
-				`Identify the ${moduleTitle} user interaction, state change, DOM/canvas/API output, and visible error or empty state.`,
-				`Implement one ${moduleTitle} visible behavior at a time, inspecting the page, console, network panel, or local server after each change.`,
-				`Verify ${moduleTitle} with a normal interaction, an invalid or empty input, and one accessibility, layout, or deployment-readiness check.`
-			],
+		if (family.includes("web") || family.includes("javascript")) {
+			return [
+				[
+					"Identify the feature user interaction, state change, DOM/canvas/API output, and visible error or empty state.",
+					`Implement one ${moduleTitle} visible behavior at a time, inspecting the page, console, network panel, or local server after each change.`,
+					`Verify ${moduleTitle} with a normal interaction, an invalid or empty input, and one accessibility, layout, or deployment-readiness check.`
+				],
 			[
 				`Map ${moduleTitle} from user action to state, data, rendered output, and feedback before changing code.`,
 				`Build the feature in small browser-checked steps with console, network, DOM, or canvas evidence visible.`,
@@ -1137,7 +1166,7 @@ function requiredWorkSteps(
 				`Verify ${subject} with a standard case, a boundary case, and one case involving object identity, equality, inheritance, records, or collections when relevant.`
 			],
 			[
-				`Map ${subject} into Java responsibilities before coding: constructor data, method parameters, return values, stored state, and any collection shape.`,
+				"Map the program into Java responsibilities before coding: constructor data, method parameters, return values, stored state, and any collection shape.",
 				`Compile ${subject} after each meaningful signature, field, branch, or loop change so errors stay local.`,
 				`Check ${subject} with one ordinary path, one awkward or invalid input path, and one state transition or method-call sequence.`
 			],
@@ -1452,7 +1481,7 @@ function referenceReviewStep(
 
 	if (family.includes("usaco")) {
 		return [
-			`After ${moduleTitle} samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling.`,
+			"After the solution samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling.",
 			`Use the ${moduleTitle} reference only after local tests pass, then note one difference in proof idea, bounds handling, or complexity.`,
 			`Compare ${moduleTitle} with the reference after the sample and edge case pass, focusing on invariant, implementation detail, or failure case.`,
 			`After ${moduleTitle} behaves like a contest submission, use the reference to check one missed edge case or alternate invariant.`
@@ -1489,7 +1518,7 @@ function referenceReviewStep(
 			`After the ${subject} behavior works, compare against the reference and note one difference in type design, public API, object state, or test coverage.`,
 			`Run ${subject} locally first, then use the reference to compare constructor behavior, method boundaries, records/interfaces, or edge-case handling.`,
 			`Compare ${subject} with the reference after the compile/run path is clean, then identify one design or robustness difference that matters.`,
-			`Use the reference after ${subject} has fresh compile/run evidence, then record one difference in class responsibility or API shape.`,
+			"Use the reference after the program has fresh compile/run evidence, then record one difference in class responsibility or API shape.",
 			`Check ${subject} against the reference by focusing on one object-state, inheritance, interface, record, or collection decision.`
 		][variantIndex(courseFamily, moduleTitle, kind, 6)];
 	}
@@ -1645,12 +1674,12 @@ function completionCheckSteps(
 				`${moduleTitle} has a fresh compile/run result and at least one concrete output, assertion, or trace.`,
 				`The ${moduleTitle} checked cases include ordinary behavior, boundary behavior, and one object or collection interaction.`,
 				`The final ${moduleTitle} note explains which Java type owns the behavior and why that boundary is useful.`
-			],
-			[
-				`${moduleTitle} demonstrates the required Java behavior without relying on stale build output or hidden IDE state.`,
-				`Constructor, method, branch, and data-representation behavior are checked for ${moduleTitle} where relevant.`,
-				`The final ${moduleTitle} note names the API, state, equality, inheritance, interface, record, or collection decision that affected correctness.`
-			],
+				],
+				[
+					"The program demonstrates the required Java behavior without relying on stale build output or hidden IDE state.",
+					`Constructor, method, branch, and data-representation behavior are checked for ${moduleTitle} where relevant.`,
+					`The final ${moduleTitle} note names the API, state, equality, inheritance, interface, record, or collection decision that affected correctness.`
+				],
 			[
 				`${moduleTitle} can be rebuilt and rerun with current evidence for the target behavior.`,
 				`A typical ${moduleTitle} path, an awkward path, and one stateful or polymorphic path are checked when relevant.`,
@@ -1921,6 +1950,43 @@ function completionCheckSteps(
 	];
 }
 
+function projectPathNote({
+	itemTitle,
+	projectKind,
+	hasReference
+}: Pick<
+	ProjectGuidanceOptions,
+	"itemTitle" | "projectKind" | "hasReference"
+>) {
+	const label = itemTitle?.toLowerCase() ?? "";
+
+	if (label.includes("worked example")) {
+		return "**Path:** Model version. It exposes the setup, reasoning, expected evidence, and one common mistake before independent practice begins.";
+	}
+
+	if (label.includes("transfer")) {
+		return "**Path:** Transfer version. The same core idea appears with changed data, representation, constraints, or context so the concept is not tied to the first example.";
+	}
+
+	if (label.includes("extension") || label.includes("challenge")) {
+		return "**Path:** Extension version. The working base case comes first, followed by a harder constraint, extra edge case, design variation, or deeper explanation target.";
+	}
+
+	if (label.includes("review")) {
+		return "**Path:** Review check. The main idea is compressed into a short artifact, then the weakest prerequisite or misconception is verified before moving forward.";
+	}
+
+	if (projectKind === "core") {
+		return hasReference
+			? "**Path:** Core implementation. The first complete version is built and verified independently before comparison with the reference."
+			: "**Path:** Core implementation. The first complete version is verified with one normal case plus one boundary or failure case.";
+	}
+
+	return hasReference
+		? "**Path:** Independent practice. One meaningful condition changes from the core version, and comparison with the reference happens after the evidence is recorded."
+		: "**Path:** Independent practice. One meaningful condition changes from the core version, followed by a record of what still works, what breaks, and why.";
+}
+
 export function buildProjectGuidance({
 	courseFamily,
 	moduleTitle,
@@ -1930,6 +1996,7 @@ export function buildProjectGuidance({
 }: ProjectGuidanceOptions) {
 	const scopedModuleTitle = guidanceModuleTitle(moduleTitle, itemTitle);
 	const goal = projectGoal(courseFamily, scopedModuleTitle, projectKind);
+	const pathNote = projectPathNote({ itemTitle, projectKind, hasReference });
 	const body = [
 		`**Focus:** ${focusFor(courseFamily, scopedModuleTitle, projectKind)}.`,
 		"**Required work:**",
@@ -1947,8 +2014,10 @@ export function buildProjectGuidance({
 
 	return normalizeGeneratedGuidanceText(
 		courseFamily,
-		[goal, compactGuidanceBody(courseFamily, scopedModuleTitle, body)].join(
-			"\n\n"
-		)
+		[
+			goal,
+			pathNote,
+			compactGuidanceBody(courseFamily, scopedModuleTitle, body)
+		].join("\n\n")
 	);
 }

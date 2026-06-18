@@ -84,7 +84,7 @@ function courseUseNote(courseLabel: string, emphasis: string) {
 }
 
 function standardsEvidenceNote(courseLabel: string) {
-	return `**Evidence to keep:** A strong ${courseLabel} entry names the source standard or documentation page, explains why that source matters for the current module, and connects it to a visible task such as a worked example, project requirement, assessment item, or reflection prompt.`;
+	return `**Evidence to keep:** A strong entry in ${courseLabel} names the source standard or documentation page, explains why that source matters for the current module, and connects it to a visible task such as a worked example, project requirement, assessment item, or reflection prompt.`;
 }
 
 function sequencingEvidenceNote(courseLabel: string) {
@@ -142,42 +142,49 @@ function projectTitle(project: string) {
 
 function projectOptionGoal(
 	profile: ResearchExpansionProfile,
-	courseLabel: string
+	courseLabel: string,
+	project: string
 ) {
 	const family = profile.family.toLowerCase();
+	const optionTitle = projectTitle(project);
+	const optionDescription = projectDescription(project);
+	const optionContext =
+		optionDescription.toLowerCase() === optionTitle.toLowerCase()
+			? ""
+			: ` The option focus is: ${optionDescription}.`;
 
 	if (family.includes("scratch")) {
-		return `**Project goal:** Build this as a playable ${courseLabel} project with clear sprite roles, event flow, state changes, and end conditions.`;
+		return `**Project goal:** Build **${optionTitle}** as a playable ${courseLabel} project with clear sprite roles, event flow, state changes, and end conditions.${optionContext}`;
 	}
 	if (family.includes("python")) {
-		return `**Project goal:** Implement a program for ${courseLabel} with named inputs, reusable functions or classes where helpful, and reproducible console or file output.`;
+		return `**Project goal:** Implement **${optionTitle}** for ${courseLabel} with named inputs, reusable functions or classes where helpful, and reproducible console or file output.${optionContext}`;
 	}
 	if (family.includes("pygame")) {
-		return "**Project goal:** Prototype this as a game loop with actors, controls, collision or state rules, scoring or progress feedback, and a reset path.";
+		return `**Project goal:** Prototype **${optionTitle}** as a game loop with actors, controls, collision or state rules, scoring or progress feedback, and a reset path.${optionContext}`;
 	}
 	if (family.includes("data") || family.includes("machine learning")) {
-		return `**Project goal:** Complete an analysis artifact for ${courseLabel} with a defined question, source data, cleaning or feature choices, evidence, and limitations.`;
+		return `**Project goal:** Complete **${optionTitle}** for ${courseLabel} as an analysis artifact with a defined question, source data, cleaning or feature choices, evidence, and limitations.${optionContext}`;
 	}
 	if (family.includes("ai")) {
-		return `**Project goal:** Build a reasoning artifact for ${courseLabel} with an explicit state representation, decision rule or search strategy, traceable output, and limitation note.`;
+		return `**Project goal:** Build **${optionTitle}** for ${courseLabel} as a reasoning artifact with an explicit state representation, decision rule or search strategy, traceable output, and limitation note.${optionContext}`;
 	}
 	if (family.includes("algebra")) {
-		return `**Project goal:** Use this project to model, solve, graph, or justify relationships in ${courseLabel} with visible steps and a reasonableness check.`;
+		return `**Project goal:** Use **${optionTitle}** to model, solve, graph, or justify relationships in ${courseLabel} with visible steps and a reasonableness check.${optionContext}`;
 	}
 	if (family.includes("c++")) {
-		return `**Project goal:** Build a program for ${courseLabel} with a documented compile command, data representation, ownership or container decision, and test cases.`;
+		return `**Project goal:** Build **${optionTitle}** for ${courseLabel} as a program with a documented compile command, data representation, ownership or container decision, and test cases.${optionContext}`;
 	}
 	if (family.includes("javascript") || family.includes("web")) {
-		return `**Project goal:** Build a browser feature for ${courseLabel} with visible UI state, event handling, validation, and responsive layout evidence.`;
+		return `**Project goal:** Build **${optionTitle}** for ${courseLabel} as a browser feature with visible UI state, event handling, validation, and responsive layout evidence.${optionContext}`;
 	}
 	if (family.includes("java")) {
-		return `**Project goal:** Implement a Java artifact for ${courseLabel} with clear class responsibilities, method contracts, state changes, and compile/run evidence.`;
+		return `**Project goal:** Implement **${optionTitle}** for ${courseLabel} as a Java artifact with clear class responsibilities, method contracts, state changes, and compile/run evidence.${optionContext}`;
 	}
 	if (family.includes("usaco")) {
-		return `**Project goal:** Solve a contest problem for ${courseLabel} with exact input/output behavior, constraints, invariants, and complexity reasoning.`;
+		return `**Project goal:** Solve **${optionTitle}** as a contest problem for ${courseLabel} with exact input/output behavior, constraints, invariants, and complexity reasoning.${optionContext}`;
 	}
 	if (isScienceFamily(family)) {
-		return `**Project goal:** Investigate a model, data, or explanation task in ${courseLabel} that connects a claim to evidence and reasoning.`;
+		return `**Project goal:** Investigate **${optionTitle}** for ${courseLabel} as a model, data, or explanation task that connects a claim to evidence and reasoning.${optionContext}`;
 	}
 	if (
 		family.includes("security") ||
@@ -185,15 +192,15 @@ function projectOptionGoal(
 		family.includes("linux") ||
 		family.includes("network")
 	) {
-		return `**Project goal:** Complete a local lab for ${courseLabel} with explicit scope, allowed target, command evidence, interpretation, and rollback or remediation.`;
+		return `**Project goal:** Complete **${optionTitle}** for ${courseLabel} as a local lab with explicit scope, allowed target, command evidence, interpretation, and rollback or remediation.${optionContext}`;
 	}
 	if (family.includes("swift")) {
-		return `**Project goal:** Build an app feature for ${courseLabel} with a defined screen, state owner, user flow, simulator evidence, and accessibility check.`;
+		return `**Project goal:** Build **${optionTitle}** for ${courseLabel} as an app feature with a defined screen, state owner, user flow, simulator evidence, and accessibility check.${optionContext}`;
 	}
 	if (family.includes("unity")) {
-		return `**Project goal:** Build a Unity scene or mechanic for ${courseLabel} with player action, state feedback, playtest evidence, and reset behavior.`;
+		return `**Project goal:** Build **${optionTitle}** as a Unity scene or mechanic for ${courseLabel} with player action, state feedback, playtest evidence, and reset behavior.${optionContext}`;
 	}
-	return `**Project goal:** Complete an artifact for ${courseLabel} with named inputs, expected behavior, evidence of correctness, and one limitation or edge case.`;
+	return `**Project goal:** Complete **${optionTitle}** for ${courseLabel} as an artifact with named inputs, expected behavior, evidence of correctness, and one limitation or edge case.${optionContext}`;
 }
 
 function projectOptionRequiredOutcome(
@@ -389,7 +396,7 @@ function buildStandardsModule(
 				title: `${courseLabel} Boundaries`,
 				content: [
 					`**Course boundaries:** The priority and expansion topics clarify what belongs in ${courseLabel} and what fits better in a prerequisite, follow-up, or separate course. This keeps the course coherent instead of absorbing every adjacent topic.`,
-					`**Boundary rule:** Keep a topic inside ${courseLabel} when it directly supports the projects, assessments, and expected readiness level. Move a ${courseLabel} topic elsewhere when it requires a different prerequisite chain, a different safety model, or a level of depth that would crowd out the core purpose.`,
+					`**Boundary rule:** Keep a topic inside ${courseLabel} when it directly supports the projects, assessments, and expected readiness level. Move the topic elsewhere when it requires a different prerequisite chain, a different safety model, or a level of depth that would crowd out the core purpose.`,
 					`**Evidence target:** The ${courseLabel} boundary, one near-term addition, and one intentionally deferred topic are explicit.`
 				].join("\n\n")
 			}
@@ -407,7 +414,7 @@ function buildStandardsModule(
 				title: `${courseLabel} Sequence Map`,
 				content: [
 					`**Readiness map:** The current ${courseLabel} sequence labels each gap as prerequisite, core lesson, project practice, assessment, enrichment, or optional reference.`,
-					`**Sequence guidance:** ${courseLabel} sequence decisions are based on dependency, not convenience. If a ${courseLabel} project expects a skill that has not appeared in a worked example or smaller practice task, a bridge item belongs before that project.`,
+					`**Sequence guidance:** ${courseLabel} sequence decisions are based on dependency, not convenience. If a project in ${courseLabel} expects a skill that has not appeared in a worked example or smaller practice task, a bridge item belongs before that project.`,
 					`**Evidence targets:**\n- No ${courseLabel} gap remains as a vague reminder without a clear next action.\n- Required ${profile.family} gaps appear before the project that depends on them.\n- Optional ${courseLabel} enrichment is labeled separately from required pacing.`
 				].join("\n\n")
 			}
@@ -473,7 +480,7 @@ function buildSequencingModule(
 				title: `${courseLabel} Materials Readiness`,
 				content: [
 					`**Project goal:** Create a materials checklist for ${courseLabel}: source code, starter/reference files, datasets, simulations, diagrams, rubrics, and tool versions.`,
-					`**Checklist guidance:** A missing ${courseLabel} resource is not automatically a blocker, but it must be classified. For ${courseLabel}, mark each item as required, replaceable, provided, learner-created, optional enrichment, or reference-only so the course does not depend on hidden materials.`,
+					`**Checklist guidance:** A missing resource in ${courseLabel} is not automatically a blocker, but it must be classified. For ${courseLabel}, mark each item as required, replaceable, provided, learner-created, optional enrichment, or reference-only so the course does not depend on hidden materials.`,
 					`**Evidence targets:**\n- Every required ${courseLabel} project has a starter state or equivalent handout.\n- Every ${profile.family} assessment has a rubric or answer-check method.\n- Any external ${courseLabel} tool or source is documented with a stable URL.`
 				].join("\n\n")
 			}
@@ -516,7 +523,7 @@ function buildProjectModule(
 				title: `${courseLabel} Rubric`,
 				content: [
 					`**Project reflection:** Every major ${courseLabel} project includes a short reflection naming the goal, approach, evidence, bug or misconception, and one next improvement.`,
-					`**Rubric use:** Score the ${courseLabel} artifact and the explanation separately. A ${courseLabel} project can produce the right output while still needing a stronger explanation, clearer evidence, better edge-case coverage, or a more maintainable structure.`,
+					`**Rubric use:** Score the ${courseLabel} artifact and the explanation separately. A project in ${courseLabel} can produce the right output while still needing a stronger explanation, clearer evidence, better edge-case coverage, or a more maintainable structure.`,
 					`**Evidence targets:**\n- The ${courseLabel} deliverable is visible, runnable, or inspectable.\n- A normal ${courseLabel} case and an edge case are tested or justified.\n- The ${courseLabel} explanation does not depend on reading every line or step from notes.`
 				].join("\n\n")
 			},
@@ -533,7 +540,7 @@ function buildProjectModule(
 		supplementalProjects: projects.map(project => ({
 			title: `Project Option: ${projectTitle(project)}`,
 			content: [
-				projectOptionGoal(profile, courseLabel),
+				projectOptionGoal(profile, courseLabel, project),
 				projectOptionRequiredOutcome(profile, courseLabel, project),
 				`**Evidence targets:**\n${bullets(profile.assessments.slice(0, 3))}`,
 				projectOptionExtension(profile, project)

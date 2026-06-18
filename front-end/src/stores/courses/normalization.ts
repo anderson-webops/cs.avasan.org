@@ -1069,6 +1069,7 @@ function normalizeSupportLabelText(text: string) {
 		.replace(/\*\*Success criteria:\*\*/gi, "**Success:**")
 		.replace(/\*\*Build sequence:\*\*/gi, "**Build steps:**")
 		.replace(/\*\*Completion checks:\*\*/gi, "**Checkpoints:**")
+		.replace(/\*\*Remote-safe activity:\*\*/gi, "**Remote activity:**")
 		.replace(/\*\*Remote investigation:\*\*/gi, "**Investigation:**")
 		.replace(/\*\*Science explanation:\*\*/gi, "**Explanation:**");
 }
@@ -1710,6 +1711,10 @@ function neutralizeStudentFacingText(text: string) {
 				.replace(/\bthe page should make\b/g, "the page makes")
 				.replace(/\bThe code should make\b/g, "The code makes")
 				.replace(/\bthe code should make\b/g, "the code makes")
+				.replace(
+					/\bshould make ([^.]{0,160}?) visible\b/g,
+					"makes $1 visible"
+				)
 				.replace(
 					/\bThe finished project should have\b/g,
 					"The finished project has"
@@ -2521,13 +2526,13 @@ function subjectFocus(context: CourseTextContext) {
 	if (isPygameSource(source)) {
 		return topicScopedFocus(
 			context,
-			"PyGame development with game-loop state, actors, events, collisions, timing, assets, and playable feedback"
+			"PyGame development: game-loop state, actors, events, collisions, timing, assets, and playable feedback"
 		);
 	}
 	if (isScratchSource(source)) {
 		return topicScopedFocus(
 			context,
-			"Scratch game design with sprites, event blocks, broadcasts, variables, costumes or backdrops, loops, and playable feedback"
+			"Scratch game design: sprites, event blocks, broadcasts, variables, costumes or backdrops, loops, and playable feedback"
 		);
 	}
 	if (/swift|xcode|testflight|app store|simulator|bundle id/.test(source)) {
@@ -2778,7 +2783,7 @@ function commonPitfalls(context: CourseTextContext) {
 			subject =>
 				`In ${subject}, common pitfalls include assuming a dataset is complete or neutral, confusing correlation with explanation, trusting one metric without a baseline, or omitting limitations and responsible-use boundaries.`,
 			subject =>
-				`For ${subject}, watch for uninspected missing values, unclear labels, metrics without baselines, conclusions that overclaim, and limitations that are mentioned only after the answer.`,
+				`For ${subject}, common pitfalls include uninspected missing values, unclear labels, metrics without baselines, conclusions that overclaim, and limitations that are mentioned only after the answer.`,
 			subject =>
 				`In ${subject}, likely mistakes include treating sampled data as the whole population, hiding cleaning choices, skipping a toy sanity check, or interpreting a model result without a comparison point.`,
 			subject =>
@@ -2790,7 +2795,7 @@ function commonPitfalls(context: CourseTextContext) {
 			subject =>
 				`In ${subject}, common pitfalls include rushing past Java's exact syntax, confusing primitive values with object references, skipping trace tables, or testing only the example from the prompt.`,
 			subject =>
-				`For ${subject}, watch for syntax that compiles differently than expected, object references treated like primitive values, missing trace tables, and edge cases copied from the sample only.`,
+				`For ${subject}, common pitfalls include syntax that compiles differently than expected, object references treated like primitive values, missing trace tables, and edge cases copied from the sample only.`,
 			subject =>
 				`In ${subject}, likely mistakes include changing several Java statements before compiling, overlooking AP-style boundary cases, and explaining the answer without tracing state.`,
 			subject =>
@@ -2802,7 +2807,7 @@ function commonPitfalls(context: CourseTextContext) {
 			subject =>
 				`In ${subject}, common pitfalls include matching the sample without proving the general case, missing boundary sizes, using an algorithm that is too slow, or overlooking duplicate and tie cases.`,
 			subject =>
-				`For ${subject}, watch for sample-only reasoning, untested smallest and largest inputs, hidden off-by-one errors, and complexity that does not fit the constraints.`,
+				`For ${subject}, common pitfalls include sample-only reasoning, untested smallest and largest inputs, hidden off-by-one errors, and complexity that does not fit the constraints.`,
 			subject =>
 				`In ${subject}, likely mistakes include coding before the invariant is clear, treating ties inconsistently, and skipping adversarial cases that expose ordering assumptions.`,
 			subject =>
@@ -2814,7 +2819,7 @@ function commonPitfalls(context: CourseTextContext) {
 			subject =>
 				`In ${subject}, common pitfalls include unclear state ownership, treating previews as full tests, overlooking empty or error states, and confusing Xcode configuration issues with app behavior.`,
 			subject =>
-				`For ${subject}, watch for state that lives in the wrong view, previews that hide real simulator behavior, missing accessibility labels, and layouts that break at another size.`,
+				`For ${subject}, common pitfalls include state that lives in the wrong view, previews that hide real simulator behavior, missing accessibility labels, and layouts that break at another size.`,
 			subject =>
 				`In ${subject}, likely mistakes include mixing navigation and model logic, verifying only the default preview, and ignoring error or empty data states.`,
 			subject =>
@@ -2826,7 +2831,7 @@ function commonPitfalls(context: CourseTextContext) {
 			subject =>
 				`In ${subject}, common pitfalls include blurring the authorized scope, changing a system before recording the baseline, trusting command output without interpretation, or skipping rollback evidence.`,
 			subject =>
-				`For ${subject}, watch for unclear lab boundaries, missing before-and-after evidence, mitigation steps that are not verified, and command output copied without explanation.`,
+				`For ${subject}, common pitfalls include unclear lab boundaries, missing before-and-after evidence, mitigation steps that are not verified, and command output copied without explanation.`,
 			subject =>
 				`In ${subject}, likely mistakes include testing outside the approved environment, changing too many settings at once, and omitting the evidence that proves the final state.`,
 			subject =>
@@ -2838,7 +2843,7 @@ function commonPitfalls(context: CourseTextContext) {
 			subject =>
 				`In ${subject}, common pitfalls include changing a toolchain or system state before recording the baseline, using commands whose effects are unclear, trusting output without interpretation, or skipping rollback and reproducibility evidence.`,
 			subject =>
-				`For ${subject}, watch for hidden environment assumptions, commands that cannot be repeated, missing diagnostic output, and cleanup steps that are not documented.`,
+				`For ${subject}, common pitfalls include hidden environment assumptions, commands that cannot be repeated, missing diagnostic output, and cleanup steps that are not documented.`,
 			subject =>
 				`In ${subject}, likely mistakes include editing too many variables at once, ignoring logs or traces, losing the before/after comparison, and leaving the final state hard to reproduce.`,
 			subject =>
@@ -2862,7 +2867,7 @@ function commonPitfalls(context: CourseTextContext) {
 			subject =>
 				`In ${subject}, common pitfalls include building only the default interaction, hiding loading or error states, ignoring keyboard and screen-size behavior, or letting UI state drift away from the data source.`,
 			subject =>
-				`For ${subject}, watch for interactions that work only with perfect input, missing empty or failure states, inaccessible controls, and layouts that collapse on narrow screens.`,
+				`For ${subject}, common pitfalls include interactions that work only with perfect input, missing empty or failure states, inaccessible controls, and layouts that collapse on narrow screens.`,
 			subject =>
 				`In ${subject}, likely mistakes include updating the DOM without updating state, handling clicks but not keyboard use, and testing only one viewport or browser state.`,
 			subject =>
@@ -2874,7 +2879,7 @@ function commonPitfalls(context: CourseTextContext) {
 			subject =>
 				`In ${subject}, common mistakes include mixing input, calculation, and output in one hard-to-test block; mutating a list while looping; missing a return value; or only testing the normal case.`,
 			subject =>
-				`For ${subject}, watch for helper functions that depend on hidden input, loops that skip or double-count values, unclear list mutation, and output that cannot be checked independently.`,
+				`For ${subject}, common pitfalls include helper functions that depend on hidden input, loops that skip or double-count values, unclear list mutation, and output that cannot be checked independently.`,
 			subject =>
 				`In ${subject}, likely bugs include off-by-one loops, branches that never run, functions that print instead of return when a value is needed, and tests that only cover the easiest input.`,
 			subject =>
@@ -2898,7 +2903,7 @@ function commonPitfalls(context: CourseTextContext) {
 			subject =>
 				`In ${subject}, common pitfalls include losing track of ownership or lifetime, mixing indices with values, ignoring compiler warnings, or testing only the case that appears in the prompt.`,
 			subject =>
-				`For ${subject}, watch for unclear resource ownership, stale references, unchecked bounds, copied data that was expected to alias, and diagnostics that are ignored.`,
+				`For ${subject}, common pitfalls include unclear resource ownership, stale references, unchecked bounds, copied data that was expected to alias, and diagnostics that are ignored.`,
 			subject =>
 				`In ${subject}, likely mistakes include relying on undefined behavior, hiding allocation or lifetime decisions, skipping edge-size inputs, and treating compiler warnings as optional.`,
 			subject =>
@@ -2934,16 +2939,12 @@ function diagnosticCategories(context: CourseTextContext) {
 function evidenceForSubject(subject: string, details: string) {
 	const trimmed = subject.trim();
 
-	if (/^the\s/i.test(trimmed)) {
-		return `${trimmed} evidence includes ${details}`;
-	}
-
-	return `Evidence for ${trimmed} includes ${details}`;
+	return `${trimmed} evidence includes ${details}`;
 }
 
 function normalizeEvidenceSentence(text: string) {
 	return text.replace(
-		/\bEvidence for The ([a-z][^.?!:;]{0,100}?) includes\b/g,
+		/\bEvidence for The (.{1,160}?) includes\b/g,
 		"The $1 evidence includes"
 	);
 }
@@ -3847,7 +3848,7 @@ function projectExpectations(context: CourseTextContext) {
 			],
 			subject => [
 				`- Before coding ${subject}, write the expected input, intermediate state, helper function role, and final printed or saved result.`,
-				`- Start with a tiny traceable case, then add one ordinary case and one awkward or invalid case.`,
+				`- Begin with a tiny traceable case, then add one ordinary case and one awkward or invalid case.`,
 				`- Keep the ${subject} implementation readable enough that the data flow can be followed without rereading every line.`
 			],
 			subject => [
@@ -4738,7 +4739,7 @@ function extensionPrompt(context: CourseTextContext) {
 }
 
 function projectSupport(context: CourseTextContext) {
-	const focus = subjectFocus(context);
+	const focus = projectSupportFocus(context);
 	const topic = supportFocusTopic(context);
 	const topicContext = topic === "this course item" ? "" : ` for ${topic}`;
 	const reference = projectSupportReference(context);
@@ -4777,6 +4778,20 @@ function projectSupport(context: CourseTextContext) {
 		`**Completion checks:**\n${compactGeneratedProjectSupport(context, completionChecks(context)).join("\n")}`,
 		`**Extension:** ${compactGeneratedProjectSupport(context, [extensionPrompt(context)])[0]}`
 	].join("\n\n");
+}
+
+function projectSupportFocus(context: CourseTextContext) {
+	const source = contextText(context);
+
+	if (isPygameSource(source)) {
+		return "PyGame development: game-loop state, actors, events, collisions, timing, assets, and playable feedback";
+	}
+
+	if (isScratchSource(source)) {
+		return "Scratch game design: sprites, event blocks, broadcasts, variables, costumes or backdrops, loops, and playable feedback";
+	}
+
+	return subjectFocus(context);
 }
 
 function projectSupportReference(context: CourseTextContext) {
@@ -5386,6 +5401,35 @@ function compactGeneratedProjectSupport(
 				"$1"
 			)
 			.replace(
+				new RegExp(
+					`\\bExtend the [A-Z0-9][^.!?\\n]{1,180}? (${supportReferenceCleanupNames}) with one additional method\\b`,
+					"g"
+				),
+				"Extend the $1 with one additional method"
+			)
+			.replace(
+				new RegExp(
+					`\\bAdd one transfer case to the [A-Z0-9][^.!?\\n]{1,180}? (${supportReferenceCleanupNames}) that changes\\b`,
+					"g"
+				),
+				"Add one transfer case to the $1 that changes"
+			)
+			.replace(
+				new RegExp(
+					`\\bChange one rule or control in the [A-Z0-9][^.!?\\n]{1,180}? (${supportReferenceCleanupNames}) while preserving\\b`,
+					"g"
+				),
+				"Change one rule or control in the $1 while preserving"
+			)
+			.replace(
+				new RegExp(
+					`\\bChange one success condition in the [A-Z0-9][^.!?\\n]{1,180}? (${supportReferenceCleanupNames}) and compare\\b`,
+					"g"
+				),
+				"Change one success condition in the $1 and compare"
+			)
+			.replace(/\b([A-Za-z][A-Za-z-]{3,})\s+\1\b/gi, "$1")
+			.replace(
 				new RegExp(`\\b${escapedCourseName} the ([A-Z])`, "g"),
 				"the $1"
 			)
@@ -5448,17 +5492,17 @@ function diagnosticSupport(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} as a readiness check for ${subjectFocus(context)}. First try ${subject} without hints, then classify any gap as ${diagnosticCategories(context)}.`,
 			subject =>
-				`${subject} checks whether the core idea is ready for transfer. Start ${subject} with an independent attempt, then use the evidence to decide whether the next step is vocabulary, tracing, syntax, design, or testing support.`,
+				`${subject} checks whether the core idea is ready for transfer. An independent attempt comes first; the evidence identifies whether the next step is vocabulary, tracing, syntax, design, or testing support.`,
 			subject =>
-				`Treat ${subject} as a low-stakes checkpoint: solve what is possible first, then identify the smallest missing piece before moving to harder work.`,
+				`${subject} is a low-stakes checkpoint: solve what is possible first, then identify the smallest missing piece before harder work.`,
 			subject =>
 				`Use ${subject} to locate the current bottleneck: vocabulary, setup, tracing, syntax, design, testing, or explanation.`,
 			subject =>
-				`Start ${subject} with a short independent attempt, then compare the result with the target skill before adding support.`,
+				`A short independent attempt for ${subject} comes first, followed by comparison with the target skill before support is added.`,
 			subject =>
-				`${subject} reveals whether the next step is more practice, a smaller example, a concept review, or a transfer challenge.`,
+				`${subject} reveals whether the next step is more practice, a smaller example, concept review, or transfer work.`,
 			subject =>
-				`Complete the easiest part of ${subject} first, then use the missing or uncertain step to choose the next review target.`
+				`The easiest part of ${subject} comes first; the missing or uncertain step identifies the next review target.`
 		])
 	);
 
@@ -5588,7 +5632,7 @@ function scienceEvidenceCheckpoint(context: CourseTextContext) {
 	return compactGeneratedProjectSupport(context, [
 		variantPrompt(context, [
 			subject =>
-				`**CER checkpoint:** End ${subject} with a claim, evidence, and reasoning response. The ${subject} claim answers the question, the evidence comes from the provided image, graph, dataset, reading, or simulation, and the reasoning uses the target vocabulary to explain why that evidence supports the claim.`,
+				`**CER checkpoint:** End ${subject} with a claim, evidence, and reasoning response. The activity claim answers the question, the evidence comes from the provided image, graph, dataset, reading, or simulation, and the reasoning uses the target vocabulary to explain why that evidence supports the claim.`,
 			subject =>
 				`**CER checkpoint:** For ${subject}, write one claim, cite the specific evidence source, and explain the connection with the target vocabulary rather than only naming the topic.`,
 			subject =>
@@ -6371,23 +6415,23 @@ function studioSupport(context: CourseTextContext) {
 		compactStudioSupportText(text, "", studioReference);
 	const studioFocus = variantPrompt(context, [
 		() =>
-			`For ${studioLabel}, define the artifact, prerequisite concepts, success criteria, and evidence before adding polish.`,
+			`For ${studioReference}, define the artifact, prerequisite concepts, success criteria, and evidence before adding polish.`,
 		() =>
-			`Name the ${studioLabel} minimum working version first, then add extensions only after the required behavior is testable.`,
+			`Name the ${studioReference} minimum working version first, then add extensions only after the required behavior is testable.`,
 		() =>
-			`Frame ${studioLabel} around one observable result, the constraints that shape it, and the evidence that proves it works.`,
+			`Frame ${studioReference} around one observable result, the constraints that shape it, and the evidence that proves it works.`,
 		() =>
-			`Separate ${studioLabel} setup, core behavior, edge cases, and review notes so the finished artifact can be inspected later.`,
+			`Separate ${studioReference} setup, core behavior, edge cases, and review notes so the finished artifact can be inspected later.`,
 		() =>
-			`Build the smallest complete version of ${studioLabel} first, then record evidence that shows it meets the activity requirements.`,
+			`Build the smallest complete version of ${studioReference} first, then record evidence that shows it meets the activity requirements.`,
 		() =>
-			`Use ${studioLabel} to connect prerequisite ideas to a concrete result, a testable constraint, and a visible review point.`,
+			`Use ${studioReference} to connect prerequisite ideas to a concrete result, a testable constraint, and a visible review point.`,
 		() =>
-			`Define ${studioLabel} by its required behavior, verification evidence, likely edge case, and final explanation target.`,
+			`Define ${studioReference} by its required behavior, verification evidence, likely edge case, and final explanation target.`,
 		() =>
-			`Keep ${studioLabel} organized around setup, implementation, verification, and one improvement or limitation.`
+			`Keep ${studioReference} organized around setup, implementation, verification, and one improvement or limitation.`
 	]);
-	const reviewTarget = studioLabel;
+	const reviewTarget = studioReference;
 	const reviewStep = variantPrompt(context, [
 		() =>
 			`Compare ${reviewTarget} against the original goal and record at least one improvement or bug fix.`,
@@ -6403,9 +6447,34 @@ function studioSupport(context: CourseTextContext) {
 		"",
 		studioReference
 	);
+	const pathTitle = `${itemTitle} ${context.item.projectLink ?? ""}`.toLowerCase();
+	const studioPath = (() => {
+		if (pathTitle.includes("worked example")) {
+			return `Model path for ${studioReference}: setup, one hand-checkable trace, expected output, and the reason the result is trustworthy.`;
+		}
+		if (pathTitle.includes("core project")) {
+			return `Required build path for ${studioReference}: complete the main artifact first, then verify the ordinary case and one boundary case.`;
+		}
+		if (pathTitle.includes("review")) {
+			return `Review path for ${studioReference}: inspect the result, name one limitation or bug risk, and record the next improvement.`;
+		}
+		if (pathTitle.includes("transfer") || pathTitle.includes("supplemental 2")) {
+			return `Transfer path for ${studioReference}: change one dataset, constraint, representation, or context and compare what still works.`;
+		}
+		if (
+			pathTitle.includes("extension") ||
+			pathTitle.includes("challenge") ||
+			pathTitle.includes("supplemental 3")
+		) {
+			return `Extension path for ${studioReference}: add a harder case, second metric, alternate representation, or deeper limitation check after the base version works.`;
+		}
+
+		return `${studioReference} connects the activity goal to a visible artifact, verification evidence, and one limitation.`;
+	})();
 
 	return [
 		`**${supportLabel}:** ${supportSubject} produces ${studioArtifact(context)} connected to ${subjectFocus(context)}.`,
+		`**Path:** ${studioPath}`,
 		`**Studio focus:** ${compactScopedStudio(studioFocus)}`,
 		`**Build sequence:**\n${compactStudio(studioBuildSequence(context).join("\n"))}\n- ${compactScopedStudio(reviewStep)}`,
 		`**Completion checks:**\n${compactStudio(studioCompletionChecks(context).join("\n"))}`,
@@ -6576,50 +6645,50 @@ function normalizeImplementationLabLanguage(course: RawCourse) {
 	const genericSupplementalPattern =
 		/Supplemental project connected to [^.!?\n]+\. The linked starter provides the implementation artifact, and the solution provides the reference state\./g;
 
-	for (const module of course.modules) {
-		module.title = module.title
-			.replace(patternImplementationTitlePattern, "Pattern Applied Lab")
-			.replace(titlePattern, ": Applied Lab");
-		module.title = cleanAppliedLabDisplayTitle(module.title);
+		for (const module of course.modules) {
+			module.title = module.title
+				.replace(patternImplementationTitlePattern, "Pattern Applied Lab")
+				.replace(titlePattern, " applied lab");
+			module.title = cleanAppliedLabDisplayTitle(module.title);
 
-		for (const section of ["curriculum", "supplementalProjects"] as const) {
-			for (const item of module[section]) {
-				item.title = item.title
-					.replace(
-						patternImplementationTitlePattern,
-						"Pattern Applied Lab"
-					)
-					.replace(titlePattern, ": Applied Lab")
-					.replace(implementationLabelPattern, "Applied Lab");
-				item.title = cleanAppliedLabDisplayTitle(item.title);
-				item.content = item.content
-					.replace(
-						patternImplementationTitlePattern,
-						"Pattern Applied Lab"
-					)
-					.replace(titlePattern, ": Applied Lab")
-					.replace(implementationLabelPattern, "Applied Lab")
-					.replace(
-						definesPattern,
-						"This lab defines the artifact, required behavior, and core concepts for the project or problem set. Use it to name the inputs, outputs, constraints, and evidence of correctness before implementation begins."
-					)
-					.replace(
-						centersPattern,
-						"This lab centers on one complete artifact. Build the smallest working version first, then add one targeted improvement and one edge-case pass."
-					)
-					.replace(
-						closesPattern,
-						"This review closes the lab by checking the edge cases that matter most, naming one bug or limitation, and recording one improvement for the next iteration."
-					)
-					.replace(extensionPattern, "Extend the core build with")
-					.replace(
-						supplementalPattern,
-						"Use this supplemental task as adjacent practice. The linked repository gives a starting point; any reference link shows one complete solution path. Focus on the same core idea while handling a different input shape, constraint, or edge case."
-					)
-					.replace(
-						genericSupplementalPattern,
-						"Use this supplemental task as adjacent practice. The linked repository gives a starting point; any reference link shows one complete solution path. Focus on the same core idea while handling a different input shape, constraint, or edge case."
-					);
+			for (const section of ["curriculum", "supplementalProjects"] as const) {
+				for (const item of module[section]) {
+					item.title = item.title
+						.replace(
+							patternImplementationTitlePattern,
+							"Pattern Applied Lab"
+						)
+						.replace(titlePattern, " applied lab")
+						.replace(implementationLabelPattern, "Applied lab");
+					item.title = cleanAppliedLabDisplayTitle(item.title);
+					item.content = item.content
+						.replace(
+							patternImplementationTitlePattern,
+							"Pattern Applied Lab"
+						)
+						.replace(
+							definesPattern,
+							"This lab defines the artifact, required behavior, and core concepts for the project or problem set. Use it to name the inputs, outputs, constraints, and evidence of correctness before implementation begins."
+						)
+						.replace(
+							centersPattern,
+							"This lab centers on one complete artifact. Build the smallest working version first, then add one targeted improvement and one edge-case pass."
+						)
+						.replace(
+							closesPattern,
+							"This review closes the lab by checking the edge cases that matter most, naming one bug or limitation, and recording one improvement for the next iteration."
+						)
+						.replace(extensionPattern, "Extend the core build with")
+						.replace(
+							supplementalPattern,
+							"Use this supplemental task as adjacent practice. The linked repository gives a starting point; any reference link shows one complete solution path. Focus on the same core idea while handling a different input shape, constraint, or edge case."
+						)
+						.replace(
+							genericSupplementalPattern,
+							"Use this supplemental task as adjacent practice. The linked repository gives a starting point; any reference link shows one complete solution path. Focus on the same core idea while handling a different input shape, constraint, or edge case."
+						)
+						.replace(titlePattern, " applied lab")
+						.replace(implementationLabelPattern, "Applied lab");
 				item.content = cleanAppliedLabReferenceText(item.content);
 			}
 		}

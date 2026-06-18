@@ -628,6 +628,10 @@ The generated graph shows the classic intersection at \`(1, 5)\`.
 			createLesson(
 				"Representative Problem Set",
 				`
+Use these problems to practice reading the meaning of an intersection, not just locating a point on a graph. A solution to a system is any point that makes both equations true. When the lines cross once, the system has one solution. When the graphs are parallel, the system has no solution. When the two equations describe the same line, every point on that line works and the system has infinitely many solutions.
+
+For graphing practice, estimate the intersection first, then substitute the coordinates back into both equations to confirm the result. For nonlinear systems, expect zero, one, or two intersections depending on how the line and curve meet.
+
 **Selected answers**
 
 - \`y = 4x - 3\` and \`y = -2x + 9\` -> \`(2, 5)\`
@@ -685,6 +689,10 @@ To solve a system of inequalities, graph every boundary and keep only the region
 				`
 Rewrite one equation so a variable is isolated, substitute that expression into the other equation, then solve the remaining one-variable equation.
 
+Substitution works best when one equation already gives \`x =\` or \`y =\`, or when a variable has coefficient \`1\` or \`-1\`. After substitution, the two-variable system becomes a one-variable equation. A normal numeric answer gives one ordered pair. A contradiction such as \`0 = 2\` means no solution. An identity such as \`0 = 0\` means the two equations represent the same line and there are infinitely many solutions.
+
+The final step is always to substitute the solved value back into one original equation, not only into the rewritten equation, so the ordered pair is checked against the source system.
+
 **Representative results**
 
 - \`6x + 2y = 28\`, \`y = 4x\` -> \`(2, 8)\`
@@ -721,6 +729,10 @@ Rewrite one equation so a variable is isolated, substitute that expression into 
 				"Elimination Method",
 				`
 Add or subtract equations so one variable disappears. If needed, multiply one or both equations first so the coefficients line up.
+
+Elimination is strongest when the equations are already in standard form or when matching coefficients can be created with small multipliers. Choose the variable that is easiest to cancel, then add or subtract the equations carefully. Keep signs attached to their terms, especially when subtracting an entire equation. If both variables disappear, read the remaining statement: a true statement means infinitely many solutions, while a false statement means no solution.
+
+After finding one variable, substitute back into either original equation to find the other value. The answer is complete only when it is written as an ordered pair and both original equations have been checked.
 
 **Representative results**
 
@@ -902,7 +914,7 @@ This project should feel like a short capstone reflection, not another worksheet
 			createLesson(
 				"Additional Practice",
 				`
-Use the remaining source answers for a compact end-of-course review.
+Use the remaining source answers for a compact end-of-course review. The goal is to choose a method deliberately: graphing for visual interpretation, substitution when a variable is already isolated, and elimination when terms can cancel cleanly. Each answer should be checked in both original equations. When the result is \`no solution\` or \`infinite solutions\`, explain the line relationship instead of treating the answer like a missing ordered pair.
 
 **Selected answers**
 
