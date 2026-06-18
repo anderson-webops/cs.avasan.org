@@ -629,7 +629,7 @@ export const scratchLevel2Course: RawCourse = {
 
 **List setup:**
 1. When the green flag is clicked, delete everything in the list.
-2. When the spacebar is pressed, ask what number should be added.
+2. When the spacebar is pressed, request the number to add.
 3. Add the user's number to the list.
 
 **Read modes:**
