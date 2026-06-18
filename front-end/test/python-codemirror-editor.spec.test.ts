@@ -25,6 +25,19 @@ function completionMatchBefore(doc: string, pos: number, expression: RegExp) {
 }
 
 describe("python IDE CodeMirror editor", () => {
+	it("does not eager-import IDE feature modules through the app plugin loader", () => {
+		const mainSource = sourceFile("../src/main.ts");
+
+		expect(mainSource).toContain("import: \"install\"");
+		expect(mainSource).toContain("./modules/admin-guard.ts");
+		expect(mainSource).toContain("./modules/i18n.ts");
+		expect(mainSource).toContain("./modules/nprogress.ts");
+		expect(mainSource).toContain("./modules/pinia.ts");
+		expect(mainSource).not.toContain("\"./modules/*.ts\"");
+		expect(mainSource).not.toContain("./modules/pythonCodeMirror.ts");
+		expect(mainSource).not.toContain("./modules/pythonIdeRuntime.ts");
+	});
+
 	it("keeps the route page as a lightweight async workspace wrapper", () => {
 		const routeSource = sourceFile("../src/pages/python-ide.vue");
 

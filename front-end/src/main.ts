@@ -33,12 +33,19 @@ export const createApp = ViteSSG(
 		// ctx is the context where you can add global components or plugins
 		ctx.app.component("font-awesome-icon", FontAwesomeIcon);
 
-		// Auto-import and install all modules under `modules/`, if any install all modules under `modules/`
+		// Auto-install only app plugin modules. Broad eager globs pull feature
+		// modules like the Python IDE runtime into the startup bundle.
 		Object.values(
-			import.meta.glob<{
-				install: UserModule;
-			}>("./modules/*.ts", { eager: true })
-		).forEach(i => i.install?.(ctx));
+			import.meta.glob<UserModule>(
+				[
+					"./modules/admin-guard.ts",
+					"./modules/i18n.ts",
+					"./modules/nprogress.ts",
+					"./modules/pinia.ts"
+				],
+				{ eager: true, import: "install" }
+			)
+		).forEach(install => install?.(ctx));
 		// ctx.app.use(Previewer)
 
 		// Only run on client, after Pinia is ready
