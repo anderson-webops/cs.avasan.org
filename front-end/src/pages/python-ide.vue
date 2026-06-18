@@ -681,6 +681,7 @@ function resetCodeEditor() {
 	codeEditorView = new EditorView({
 		doc: activeFileContent.value,
 		extensions: createPythonCodeMirrorExtensions({
+			mode: selectedProject.value?.mode ?? "python",
 			onChange(content) {
 				syncingCodeMirrorContent = true;
 				activeFileContent.value = content;

@@ -4,11 +4,24 @@ import { EditorSelection, EditorState } from "@codemirror/state";
 import { describe, expect, it } from "vitest";
 import {
 	canSkipExistingClosingToken,
+	pythonIdeCompletionSource,
+	pythonIdeCompletionsForMode,
 	pythonNewlineIndentText
 } from "../src/modules/pythonCodeMirror";
 
 function sourceFile(path: string) {
 	return readFileSync(resolve(__dirname, path), "utf8");
+}
+
+function completionMatchBefore(doc: string, pos: number, expression: RegExp) {
+	const prefix = doc.slice(0, pos);
+	const match = prefix.match(expression);
+	if (!match?.[0]) return null;
+	return {
+		from: pos - match[0].length,
+		text: match[0],
+		to: pos
+	};
 }
 
 describe("python IDE CodeMirror editor", () => {
@@ -26,6 +39,7 @@ describe("python IDE CodeMirror editor", () => {
 
 	it("enables Python parsing and typical IDE editing behavior", () => {
 		const editorSource = sourceFile("../src/modules/pythonCodeMirror.ts");
+		const pageSource = sourceFile("../src/pages/python-ide.vue");
 
 		expect(editorSource).toContain("basicSetup");
 		expect(editorSource).toContain("python()");
@@ -41,6 +55,71 @@ describe("python IDE CodeMirror editor", () => {
 		expect(editorSource).toContain("syntaxHighlighting");
 		expect(editorSource).toContain("BracketPairColorPlugin");
 		expect(editorSource).toContain("cm-bracket-pair-1");
+		expect(editorSource).toContain("pythonLanguage.data.of");
+		expect(editorSource).toContain("pythonIdeCompletionSource");
+		expect(pageSource).toContain(
+			"mode: selectedProject.value?.mode ?? \"python\""
+		);
+	});
+
+	it("offers course-runtime completions by immutable project mode", () => {
+		expect(
+			pythonIdeCompletionsForMode("pgzero").map(option => option.label)
+		).toEqual(
+			expect.arrayContaining([
+				"Actor",
+				"HEIGHT",
+				"WIDTH",
+				"keyboard",
+				"pgzrun",
+				"screen"
+			])
+		);
+		expect(
+			pythonIdeCompletionsForMode("pgzero", "screen.draw").map(
+				option => option.label
+			)
+		).toEqual(
+			expect.arrayContaining(["filled_rect", "line", "text"])
+		);
+		expect(
+			pythonIdeCompletionsForMode("pgzero", "player").map(
+				option => option.label
+			)
+		).toEqual(expect.arrayContaining(["colliderect", "draw", "pos"]));
+		expect(
+			pythonIdeCompletionsForMode("turtle", "screen").map(
+				option => option.label
+			)
+		).toEqual(expect.arrayContaining(["bgcolor", "onkey", "ontimer"]));
+		expect(
+			pythonIdeCompletionsForMode("data").map(option => option.label)
+		).toEqual(
+			expect.arrayContaining([
+				"DecisionTreeClassifier",
+				"pd",
+				"plt",
+				"st"
+			])
+		);
+	});
+
+	it("completes member names after a runtime receiver dot", () => {
+		const doc = "screen.dr";
+		const state = EditorState.create({ doc });
+		const result = pythonIdeCompletionSource("pgzero")({
+			explicit: false,
+			pos: doc.length,
+			state,
+			matchBefore: expression =>
+				completionMatchBefore(doc, doc.length, expression)
+		});
+
+		expect(result).not.toBeNull();
+		expect(result?.from).toBe("screen.".length);
+		expect(result?.options.map(option => option.label)).toEqual(
+			expect.arrayContaining(["draw"])
+		);
 	});
 
 	it("bounds custom bracket-pair colorization to the visible editor range", () => {

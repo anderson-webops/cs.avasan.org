@@ -1,8 +1,13 @@
 import type { Extension } from "@codemirror/state";
 import type { DecorationSet, ViewUpdate } from "@codemirror/view";
+import type { PythonIdeMode } from "@/modules/pythonIde";
 import { indentWithTab } from "@codemirror/commands";
-import { python } from "@codemirror/lang-python";
-import { HighlightStyle, syntaxHighlighting } from "@codemirror/language";
+import { python, pythonLanguage } from "@codemirror/lang-python";
+import {
+	HighlightStyle,
+	syntaxHighlighting,
+	syntaxTree
+} from "@codemirror/language";
 import {
 	EditorSelection,
 	EditorState,
@@ -16,8 +21,28 @@ import { basicSetup } from "codemirror";
 interface PythonCodeMirrorOptions {
 	onChange: (content: string) => void;
 	onCursorCountChange: (count: number) => void;
+	mode?: PythonIdeMode;
 	onRun?: () => void;
 	onSave?: () => void;
+}
+
+interface PythonIdeCompletionContext {
+	explicit: boolean;
+	pos: number;
+	state: EditorState;
+	matchBefore: (expression: RegExp) => {
+		from: number;
+		text: string;
+		to: number;
+	} | null;
+}
+
+interface PythonIdeCompletionOption {
+	label: string;
+	type: string;
+	boost?: number;
+	detail?: string;
+	info?: string;
 }
 
 const openingBracketToClosingBracket: Record<string, string> = {
@@ -28,8 +53,16 @@ const openingBracketToClosingBracket: Record<string, string> = {
 const intelligentClosingTokens = [")", "]", "}", "'", '"', "`"];
 const pythonIndentText = "    ";
 const lineLeadingWhitespaceRegex = /^[\t ]*/;
+const pythonCompletionTokenRegex = /(?:[A-Z_]\w*\.){0,2}[A-Z_]\w*$/i;
+const pythonCompletionGlobalValidForRegex = /^[A-Z_]\w*$/i;
+const pythonCompletionMemberValidForRegex = /^\w*$/;
 const bracketPairContextPadding = 2_000;
 const closingBrackets = new Set(Object.values(openingBracketToClosingBracket));
+const pythonCompletionBlockedNodeNames = new Set([
+	"Comment",
+	"FormatString",
+	"String"
+]);
 const bracketPairDecorations = [
 	bracketDecorationForIndex(0),
 	bracketDecorationForIndex(1),
@@ -82,6 +115,158 @@ const pythonHighlightStyle = HighlightStyle.define([
 		fontWeight: "800"
 	}
 ]);
+
+const sharedRuntimeCompletions = [
+	completion("random", "namespace", "standard library module"),
+	completion("math", "namespace", "standard library module"),
+	completion("json", "namespace", "standard library module"),
+	completion("csv", "namespace", "standard library module"),
+	completion("pathlib", "namespace", "standard library module")
+];
+
+const turtleRuntimeCompletions = [
+	completion("turtle", "namespace", "Turtle graphics module", 40),
+	completion("Turtle", "class", "create a drawable turtle", 40),
+	completion("Screen", "class", "create or access the canvas screen", 40)
+];
+
+const pgzeroRuntimeCompletions = [
+	completion("pgzrun", "namespace", "run a PyGame Zero project", 60),
+	completion("Actor", "class", "sprite with image, position, and collision"),
+	completion("Rect", "class", "rectangle for collision and layout"),
+	completion("WIDTH", "constant", "canvas width"),
+	completion("HEIGHT", "constant", "canvas height"),
+	completion("screen", "variable", "PyGame Zero drawing surface"),
+	completion("keyboard", "variable", "keyboard state"),
+	completion("mouse", "variable", "mouse constants"),
+	completion("clock", "variable", "schedule timed callbacks"),
+	completion("images", "namespace", "loaded image assets"),
+	completion("sounds", "namespace", "loaded sound effects"),
+	completion("music", "namespace", "background music controller"),
+	completion("draw", "function", "PyGame Zero draw callback", 30),
+	completion("update", "function", "PyGame Zero frame callback", 30),
+	completion("on_key_down", "function", "keyboard event callback"),
+	completion("on_mouse_down", "function", "mouse event callback")
+];
+
+const dataRuntimeCompletions = [
+	completion("pd", "namespace", "pandas alias"),
+	completion("np", "namespace", "NumPy alias"),
+	completion("plt", "namespace", "matplotlib pyplot alias"),
+	completion("sns", "namespace", "Seaborn alias"),
+	completion("alt", "namespace", "Altair alias"),
+	completion("st", "namespace", "Streamlit-style shim"),
+	completion("DataFrame", "class", "tabular data object"),
+	completion("read_csv", "function", "load CSV data"),
+	completion("train_test_split", "function", "split model data"),
+	completion("DecisionTreeClassifier", "class", "decision tree model"),
+	completion("LinearRegression", "class", "linear regression model")
+];
+
+const sharedMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
+	Actor: [
+		completion("image", "property", "asset name"),
+		completion("pos", "property", "actor position"),
+		completion("x", "property", "horizontal position"),
+		completion("y", "property", "vertical position"),
+		completion("draw", "method", "draw the actor"),
+		completion("colliderect", "method", "test rectangle collision"),
+		completion("collidepoint", "method", "test point collision")
+	]
+};
+
+const turtleMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
+	turtle: [
+		completion("Turtle", "class", "create a drawable turtle"),
+		completion("Screen", "class", "create or access the canvas screen"),
+		completion("colormode", "function", "set RGB color mode")
+	],
+	pen: turtlePenCompletions(),
+	t: turtlePenCompletions(),
+	turtlePen: turtlePenCompletions(),
+	screen: [
+		completion("bgcolor", "method", "set canvas background"),
+		completion("title", "method", "set canvas title"),
+		completion("listen", "method", "listen for keyboard input"),
+		completion("onkey", "method", "bind a key press"),
+		completion("onclick", "method", "bind a mouse click"),
+		completion("ontimer", "method", "schedule a callback"),
+		completion("tracer", "method", "control animation updates"),
+		completion("update", "method", "flush pending drawing"),
+		completion("mainloop", "method", "keep interactive canvas alive")
+	]
+};
+
+const pgzeroMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
+	actor: actorMemberCompletions(),
+	enemy: actorMemberCompletions(),
+	player: actorMemberCompletions(),
+	clock: [
+		completion("schedule", "method", "run once after a delay"),
+		completion("schedule_interval", "method", "repeat on an interval"),
+		completion("unschedule", "method", "remove a scheduled callback")
+	],
+	keyboard: [
+		completion("left", "property", "left arrow key"),
+		completion("right", "property", "right arrow key"),
+		completion("up", "property", "up arrow key"),
+		completion("down", "property", "down arrow key"),
+		completion("space", "property", "spacebar")
+	],
+	mouse: [
+		completion("LEFT", "constant", "left mouse button"),
+		completion("RIGHT", "constant", "right mouse button")
+	],
+	music: [
+		completion("play", "method", "start background music"),
+		completion("stop", "method", "stop background music"),
+		completion("pause", "method", "pause background music"),
+		completion("unpause", "method", "resume background music"),
+		completion("set_volume", "method", "set music volume")
+	],
+	screen: [
+		completion("clear", "method", "clear the canvas"),
+		completion("blit", "method", "draw an image"),
+		completion("draw", "property", "drawing helpers")
+	],
+	"screen.draw": [
+		completion("text", "method", "draw text"),
+		completion("line", "method", "draw a line"),
+		completion("circle", "method", "draw a circle outline"),
+		completion("filled_circle", "method", "draw a filled circle"),
+		completion("rect", "method", "draw a rectangle outline"),
+		completion("filled_rect", "method", "draw a filled rectangle")
+	]
+};
+
+const dataMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
+	pd: [
+		completion("DataFrame", "class", "create tabular data"),
+		completion("read_csv", "function", "load CSV data")
+	],
+	plt: [
+		completion("plot", "method", "line plot"),
+		completion("bar", "method", "bar chart"),
+		completion("scatter", "method", "scatter plot"),
+		completion("hist", "method", "histogram"),
+		completion("show", "method", "render chart")
+	],
+	np: [
+		completion("array", "function", "create an array"),
+		completion("mean", "function", "average value"),
+		completion("median", "function", "middle value"),
+		completion("linspace", "function", "evenly spaced values"),
+		completion("zeros", "function", "array of zeros")
+	],
+	st: [
+		completion("write", "method", "render text or data"),
+		completion("dataframe", "method", "render a data table"),
+		completion("pyplot", "method", "render matplotlib output"),
+		completion("altair_chart", "method", "render Altair chart"),
+		completion("selectbox", "method", "choice control"),
+		completion("slider", "method", "numeric control")
+	]
+};
 
 const pythonEditorNativeSelectionStyle = {
 	backgroundColor: "var(--python-code-selection) !important",
@@ -204,6 +389,129 @@ function pythonEditorActionKeymap(options: PythonCodeMirrorOptions) {
 	]);
 }
 
+function completion(
+	label: string,
+	type: string,
+	detail?: string,
+	boost?: number
+): PythonIdeCompletionOption {
+	return {
+		label,
+		type,
+		...(boost ? { boost } : {}),
+		...(detail ? { detail } : {})
+	};
+}
+
+function turtlePenCompletions() {
+	return [
+		completion("forward", "method", "move forward"),
+		completion("backward", "method", "move backward"),
+		completion("right", "method", "turn right"),
+		completion("left", "method", "turn left"),
+		completion("goto", "method", "move to coordinates"),
+		completion("setheading", "method", "set direction"),
+		completion("heading", "method", "current direction"),
+		completion("xcor", "method", "current x coordinate"),
+		completion("ycor", "method", "current y coordinate"),
+		completion("penup", "method", "move without drawing"),
+		completion("pendown", "method", "resume drawing"),
+		completion("color", "method", "set pen and fill color"),
+		completion("pencolor", "method", "set pen color"),
+		completion("fillcolor", "method", "set fill color"),
+		completion("pensize", "method", "set line width"),
+		completion("speed", "method", "set animation speed"),
+		completion("begin_fill", "method", "start a filled shape"),
+		completion("end_fill", "method", "finish a filled shape"),
+		completion("circle", "method", "draw a circle"),
+		completion("dot", "method", "draw a dot"),
+		completion("stamp", "method", "stamp turtle shape"),
+		completion("distance", "method", "distance to a point"),
+		completion("ondrag", "method", "bind a drag handler")
+	];
+}
+
+function actorMemberCompletions() {
+	return sharedMemberCompletions.Actor ?? [];
+}
+
+function runtimeCompletionsForMode(mode: PythonIdeMode = "python") {
+	if (mode === "data")
+		return [...sharedRuntimeCompletions, ...dataRuntimeCompletions];
+	if (mode === "pgzero")
+		return [...sharedRuntimeCompletions, ...pgzeroRuntimeCompletions];
+	if (mode === "turtle")
+		return [...sharedRuntimeCompletions, ...turtleRuntimeCompletions];
+	return sharedRuntimeCompletions;
+}
+
+function memberCompletionMapForMode(mode: PythonIdeMode = "python") {
+	if (mode === "data") {
+		return {
+			...sharedMemberCompletions,
+			...dataMemberCompletions
+		};
+	}
+	if (mode === "pgzero") {
+		return {
+			...sharedMemberCompletions,
+			...pgzeroMemberCompletions
+		};
+	}
+	if (mode === "turtle") {
+		return {
+			...sharedMemberCompletions,
+			...turtleMemberCompletions
+		};
+	}
+	return sharedMemberCompletions;
+}
+
+export function pythonIdeCompletionsForMode(
+	mode: PythonIdeMode = "python",
+	receiver?: string
+) {
+	if (!receiver) return runtimeCompletionsForMode(mode);
+	return memberCompletionMapForMode(mode)[receiver] ?? [];
+}
+
+export function pythonIdeCompletionSource(mode: PythonIdeMode = "python") {
+	return (context: PythonIdeCompletionContext) => {
+		const node = syntaxTree(context.state).resolveInner(context.pos, -1);
+		if (pythonCompletionBlockedNodeNames.has(node.name)) return null;
+
+		const word = context.matchBefore(pythonCompletionTokenRegex);
+		if (!word) {
+			if (!context.explicit) return null;
+			return {
+				from: context.pos,
+				options: pythonIdeCompletionsForMode(mode),
+				validFor: pythonCompletionGlobalValidForRegex
+			};
+		}
+		if (word.from === word.to && !context.explicit) return null;
+
+		const parts = word.text.split(".");
+		if (parts.length > 1) {
+			const memberPrefix = parts.at(-1) ?? "";
+			const receiver = parts.slice(0, -1).join(".");
+			const options = pythonIdeCompletionsForMode(mode, receiver);
+			if (!options.length) return null;
+			return {
+				from: word.to - memberPrefix.length,
+				options,
+				validFor: pythonCompletionMemberValidForRegex
+			};
+		}
+
+		return {
+			from: word.from,
+			options: pythonIdeCompletionsForMode(mode),
+			validFor: pythonCompletionGlobalValidForRegex
+		};
+	};
+}
+
 class BracketPairColorPlugin {
 	decorations: DecorationSet;
 
@@ -255,6 +563,9 @@ export function createPythonCodeMirrorExtensions(
 	return [
 		basicSetup,
 		python(),
+		pythonLanguage.data.of({
+			autocomplete: pythonIdeCompletionSource(options.mode)
+		}),
 		EditorState.tabSize.of(4),
 		EditorState.allowMultipleSelections.of(true),
 		pythonEditorTheme,
