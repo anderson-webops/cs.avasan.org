@@ -4482,35 +4482,38 @@ function extensionPrompt(context: CourseTextContext) {
 
 function projectSupport(context: CourseTextContext) {
 	const focus = subjectFocus(context);
+	const reference = projectSupportReference(context);
+	const capitalizedReference = capitalizeSentence(reference);
 	const goal = variantPrompt(context, [
 		() =>
-			`**Goal:** Build a visible result tied to the module focus (${focus}). Include a normal path, an edge case, and one sentence explaining the evidence.`,
+			`**Goal:** ${capitalizedReference} has an observable result, one normal path, and one boundary or failure case.`,
 		() =>
-			`**Goal:** Create an observable result, verify one assumption, and connect the evidence to the module focus (${focus}).`,
+			`**Goal:** Make ${reference} easy to verify by stating expected behavior, observing actual behavior, and explaining one evidence point.`,
 		() =>
-			`**Goal:** Make the module focus (${focus}) testable with a runnable result, inspected output, and a short evidence note.`,
+			`**Goal:** Build ${reference} in a small working case, then add one improvement or edge case.`,
 		() =>
-			`**Goal:** Use one concrete behavior, model, output, or analysis to make the module focus (${focus}) visible.`,
+			`**Goal:** Connect ${reference} to a visible run, trace, model, or user interaction and record what proves it works.`,
 		() =>
-			`**Goal:** Show the module focus (${focus}) through a run, trace, model, or user interaction.`,
+			`**Goal:** Verify ${reference} with one ordinary case and one case that could fail if the concept is misunderstood.`,
 		() =>
-			`**Goal:** Start from a small working case, then add one improvement that still reflects the module focus (${focus}).`,
+			`**Goal:** Start from a small working case for ${reference}, then add one improvement with visible evidence.`,
 		() =>
-			`**Goal:** Apply the module focus (${focus}) in a practical artifact, then compare expected behavior with the observed result.`,
+			`**Goal:** Apply the concept in ${reference}, then compare expected behavior with the observed result.`,
 		() =>
-			`**Goal:** Use clear structure, naming, and evidence so the module focus (${focus}) can be reviewed without relying on memory.`,
+			`**Goal:** Use clear structure, naming, and evidence so ${reference} can be reviewed without relying on memory.`,
 		() =>
-			`**Goal:** Choose one design or reasoning decision connected to the module focus (${focus}), test it, and show its effect in the final artifact.`,
+			`**Goal:** Choose one design or reasoning decision in ${reference}, test it, and show its effect in the final artifact.`,
 		() =>
-			`**Goal:** Demonstrate the module focus (${focus}) with one ordinary case and one case that could fail if the idea is misunderstood.`,
+			`**Goal:** Demonstrate ${reference} with one ordinary case and one case that could fail if the idea is misunderstood.`,
 		() =>
-			`**Goal:** Map the prompt requirements to the module focus (${focus}), then record the evidence that proves the result works.`,
+			`**Goal:** Map the prompt requirements to ${reference}, then record the evidence that proves the result works.`,
 		() =>
-			`**Goal:** Identify the input or starting state, the main transformation, and the output or conclusion tied to the module focus (${focus}).`
+			`**Goal:** Identify the starting state, main transformation, and output or conclusion for ${reference}.`
 	]);
 
 	return [
 		goal,
+		`**Focus:** ${capitalizeSentence(focus)}.`,
 		`**Required outcome:**\n${compactGeneratedProjectSupport(context, projectExpectations(context)).join("\n")}`,
 		`**Completion checks:**\n${compactGeneratedProjectSupport(context, completionChecks(context)).join("\n")}`,
 		`**Extension:** ${compactGeneratedProjectSupport(context, [extensionPrompt(context)])[0]}`

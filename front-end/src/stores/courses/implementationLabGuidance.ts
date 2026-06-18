@@ -136,8 +136,15 @@ export function buildImplementationLabGuidance({
 	}
 
 	if (section === "example") {
+		const opener = [
+			`Walk through one representative **${label}** case before expanding the implementation.`,
+			`Start **${label}** with one narrow case that can be traced from input to result.`,
+			`Before adding features to **${label}**, run one normal case slowly enough to explain each checkpoint.`,
+			`Use a small **${label}** example first so the later build has a known baseline.`
+		][variantIndex(courseFamily, moduleTitle, section, 4)];
+
 		return [
-			`Trace one representative case for **${label}** before expanding the implementation.`,
+			opener,
 			`For **${label}**, record the starting files or commands, exact input, expected result, observed result, and diagnostic checkpoint that proves the code is moving in the right direction.`,
 			`Then add one **${label}** boundary or failure case so the project has a clear comparison between normal behavior and the edge condition that most needs protection.`
 		].join("\n\n");

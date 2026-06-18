@@ -546,9 +546,9 @@ describe("course text quality normalization", () => {
 			expect(corpus).toContain(
 				"one case that leaves the structure unchanged"
 			);
-			expect(corpus).toContain("the module focus (Scratch game design:");
+			expect(corpus).toContain("**Focus:** Scratch game design:");
 			expect(corpus).toContain(
-				"Choose one design or reasoning decision connected to the module focus"
+				"Choose one design or reasoning decision in the project"
 			);
 			expect(corpus).not.toMatch(/\bRecovered\b/);
 			expect(corpus).not.toMatch(
@@ -1300,7 +1300,8 @@ describe("course text quality normalization", () => {
 		);
 		expect(corpus).toContain("buildSupportSectionGuidance");
 		expect(corpus).toContain("Plan **");
-		expect(corpus).toContain("Finish **");
+		expect(corpus).toContain("Close **");
+		expect(corpus).toContain("Verify **");
 		expect(corpus).toContain("Extend **");
 	});
 
@@ -1833,8 +1834,9 @@ describe("course text quality normalization", () => {
 		);
 		expect(spinner.content).toContain("towards the mouse.\n\n**Goal:**");
 		expect(spinner.content).toContain(
-			"Use clear structure, naming, and evidence so the module focus (Scratch game design"
+			"Use clear structure, naming, and evidence so the project can be reviewed without relying on memory"
 		);
+		expect(spinner.content).toContain("**Focus:** Scratch game design:");
 		expect(spinner.content).toContain("\n\n**Outcome:**");
 		expect(spinner.content).not.toContain("Build a working result for");
 
