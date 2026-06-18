@@ -332,8 +332,16 @@ describe("course text quality normalization", () => {
 				/with visible behavior and verification evidence/i
 			);
 			expect(corpus).not.toMatch(
+				/fork(?:ing)? https:\/\/codepen\.io\/junilearning/i
+			);
+			expect(corpus).not.toMatch(
+				/starter at https:\/\/codepen\.io\/junilearning/i
+			);
+			expect(corpus).not.toMatch(
 				/\b(?:a AI|a Algebra|a object|a array|an Java|an Python|an C\+\+)\b/i
 			);
+			expect(corpus).toContain("opening the starter resource");
+			expect(corpus).toContain("Open the starter resource");
 			expect(corpus).toContain(
 				"as an AI/Python implementation checkpoint"
 			);

@@ -192,11 +192,12 @@ export const javascriptLevel2Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Introductions & Setup",
-					content: `**Setup path:** JavaScript Level 2 uses CodePen as a fast browser workspace with separate HTML, CSS, and JavaScript panels. Fork the starter at https://codepen.io/junilearning/pen/JjGrYOG, save a personal copy, run the page, and confirm that JavaScript changes update the visible output.
+					content: `**Setup path:** JavaScript Level 2 uses CodePen as a fast browser workspace with separate HTML, CSS, and JavaScript panels. Open the starter resource, save a personal copy, run the page, and confirm that JavaScript changes update the visible output.
 
 **Core workflow:** Use \`printToScreen("Hello World")\` for page output and \`console.log()\` for diagnostic output. The page output is for the user-visible result; the console is for inspecting intermediate values, types, and errors.
 
-**Evidence target:** The saved pen runs after a refresh, a small text change appears on the page, and the console can be opened to inspect a test value.`
+**Evidence target:** The saved pen runs after a refresh, a small text change appears on the page, and the console can be opened to inspect a test value.`,
+					projectLink: "https://codepen.io/junilearning/pen/JjGrYOG"
 				},
 				{
 					title: "Variables and Strings",
