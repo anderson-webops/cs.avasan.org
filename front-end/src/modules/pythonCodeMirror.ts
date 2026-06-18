@@ -94,7 +94,10 @@ const pgzeroAssetStringCompletionPatterns: Array<{
 	{ folder: "images", pattern: /\bActor\s*\(\s*["']([^"'\n]*)$/ },
 	{ folder: "images", pattern: /\bscreen\.blit\s*\(\s*["']([^"'\n]*)$/ },
 	{ folder: "images", pattern: /\bimages\[\s*["']([^"'\n]*)$/ },
-	{ folder: "music", pattern: /\bmusic\.play\s*\(\s*["']([^"'\n]*)$/ },
+	{
+		folder: "music",
+		pattern: /\bmusic\.(?:play|play_once|queue)\s*\(\s*["']([^"'\n]*)$/
+	},
 	{ folder: "sounds", pattern: /\bsounds\[\s*["']([^"'\n]*)$/ }
 ];
 const turtleShapeStringCompletionPattern =
@@ -216,6 +219,18 @@ const dataRuntimeCompletions = [
 	completion("train_test_split", "function", "split model data"),
 	completion("DecisionTreeClassifier", "class", "decision tree model"),
 	completion("LinearRegression", "class", "linear regression model")
+];
+
+const imageSurfaceMemberCompletions = [
+	completion("get_width", "method", "image width"),
+	completion("get_height", "method", "image height"),
+	completion("get_size", "method", "image size tuple"),
+	completion("get_rect", "method", "image bounds rectangle")
+];
+const soundMemberCompletions = [
+	completion("play", "method", "play the sound effect"),
+	completion("stop", "method", "stop the sound effect"),
+	completion("get_length", "method", "sound length in seconds")
 ];
 
 const sharedMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
@@ -806,6 +821,14 @@ export function pythonIdeCompletionsForMode(
 			}),
 			...staticOptions
 		];
+	}
+
+	if (/^images\.[A-Z_]\w*$/i.test(receiver)) {
+		return imageSurfaceMemberCompletions;
+	}
+
+	if (/^sounds\.[A-Z_]\w*$/i.test(receiver)) {
+		return soundMemberCompletions;
 	}
 
 	return staticOptions;

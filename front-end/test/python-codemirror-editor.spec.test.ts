@@ -319,6 +319,32 @@ describe("python IDE CodeMirror editor", () => {
 			matchBefore: expression =>
 				completionMatchBefore(musicDoc, musicDoc.length, expression)
 		});
+		const playOnceDoc = "music.play_once(\"th";
+		const playOnceResult = musicCompletionSource({
+			explicit: false,
+			pos: playOnceDoc.length,
+			state: EditorState.create({ doc: playOnceDoc }),
+			matchBefore: expression =>
+				completionMatchBefore(playOnceDoc, playOnceDoc.length, expression)
+		});
+		const queueDoc = "music.queue(\"th";
+		const queueResult = musicCompletionSource({
+			explicit: false,
+			pos: queueDoc.length,
+			state: EditorState.create({ doc: queueDoc }),
+			matchBefore: expression =>
+				completionMatchBefore(queueDoc, queueDoc.length, expression)
+		});
+		const imageSurfaceLabels = pythonIdeCompletionsForMode(
+			"pgzero",
+			"images.student",
+			assetCompletions
+		).map(option => option.label);
+		const soundMemberLabels = pythonIdeCompletionsForMode(
+			"pgzero",
+			"sounds.eep",
+			assetCompletions
+		).map(option => option.label);
 
 		expect(imageMemberLabels).toContain("student");
 		expect(imageMemberLabels).not.toContain("space-ship");
@@ -329,6 +355,25 @@ describe("python IDE CodeMirror editor", () => {
 		expect(musicResult?.from).toBe("music.play(\"".length);
 		expect(musicResult?.options.map(option => option.label)).toContain(
 			"theme"
+		);
+		expect(playOnceResult?.from).toBe("music.play_once(\"".length);
+		expect(playOnceResult?.options.map(option => option.label)).toContain(
+			"theme"
+		);
+		expect(queueResult?.from).toBe("music.queue(\"".length);
+		expect(queueResult?.options.map(option => option.label)).toContain(
+			"theme"
+		);
+		expect(imageSurfaceLabels).toEqual(
+			expect.arrayContaining([
+				"get_height",
+				"get_rect",
+				"get_size",
+				"get_width"
+			])
+		);
+		expect(soundMemberLabels).toEqual(
+			expect.arrayContaining(["get_length", "play", "stop"])
 		);
 	});
 
