@@ -384,9 +384,9 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/b1db3868ed9880b007754b9003337700"
 				},
 				{
-					title: "JSM3 Project 2: Juni Department Store",
+					title: "JSM3 Project 2: Department Store Discounts",
 					content:
-						"Apply student discounts with extra adjustments for perfect squares or primes; print final price using functions and conditionals.",
+						"Apply shopper discounts with extra adjustments for perfect squares or primes; print final price using functions and conditionals.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/b3de9678fa8b77aae5cc988f74bd086e",
 					solutionLink:

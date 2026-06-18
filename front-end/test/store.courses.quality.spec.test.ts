@@ -126,6 +126,10 @@ function rawCourseSourceCorpus() {
 		.join("\n");
 }
 
+function stripLinksFromSource(source: string) {
+	return source.replace(/https?:\/\/[^"',\s)]+/g, "");
+}
+
 describe("course text quality normalization", () => {
 	beforeEach(() => {
 		setActivePinia(createPinia());
@@ -697,6 +701,14 @@ describe("course text quality normalization", () => {
 		);
 		expect(corpus).not.toMatch(/\bConnect with the learner\b/i);
 		expect(corpus).not.toMatch(/(?:^|["'`]\s*)Not treat\b/im);
+	});
+
+	it("keeps raw display copy free of legacy platform-branded names", () => {
+		const corpus = stripLinksFromSource(visibleCourseSourceCorpus());
+
+		expect(corpus).not.toMatch(/\bJuni\b/i);
+		expect(corpus).not.toMatch(/\bJunian\b/i);
+		expect(corpus).not.toMatch(/single-folder Juni layout/i);
 	});
 
 	it("keeps JavaScript course project copy labeled as web development", () => {
@@ -2020,7 +2032,7 @@ describe("course text quality normalization", () => {
 		expect(corpus).toContain("News Homepage");
 		expect(corpus).toContain("Department Store Discounts");
 		expect(corpus).toContain("single-folder legacy layout");
-		expect(corpus).toContain("a word translator function");
+		expect(corpus).toContain("a word-translation function");
 	});
 
 	it(

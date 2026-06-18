@@ -427,14 +427,14 @@ const boundaryOverrides: Record<string, string[]> = {
 	],
 	"cpp-level-2": [
 		"Owns pointers, dynamic memory, RAII, smart pointers, STL containers, iterators, algorithms, and lifetime discipline.",
-		"Prepares students for DS&A and Level 3 without adding AI/ML."
+		"Prepares for DS&A and Level 3 without adding AI/ML."
 	],
 	"cpp-level-3": [
 		"Owns templates, operator overloading, abstract interfaces, state machines, command architecture, parsers, and robust file formats.",
 		"Excludes AI/ML so those topics remain in Data Science, AI Foundations, and Machine Learning."
 	],
 	"java-level-1": [
-		"Builds Java foundations for students who need the full language ramp.",
+		"Builds Java foundations for a full language ramp.",
 		"Accelerated placements can skip repetitive syntax drills after placement evidence."
 	],
 	"java-level-2": [
@@ -444,11 +444,11 @@ const boundaryOverrides: Record<string, string[]> = {
 		"Owns modern Java application design, streams, NIO, JUnit, service/plugin architecture, and larger projects."
 	],
 	"java-without-graphics": [
-		"Routes advanced Java students into services, data processing, concurrency, testing, and architecture.",
-		"Default pathway for a strong post-C++ student."
+		"Routes advanced Java work into services, data processing, concurrency, testing, and architecture.",
+		"Default pathway after strong post-C++ preparation."
 	],
 	"java-with-graphics": [
-		"Routes motivated students into JavaFX/event-driven projects after shared Java core.",
+		"Routes motivated Java work into JavaFX/event-driven projects after shared Java core.",
 		"Graphics is an application branch, not a substitute for modern Java core."
 	],
 	"unity-game-development": [
@@ -567,7 +567,7 @@ function metadataStandards(courseId: string) {
 function sourcePolicyFor(courseId: string) {
 	const url = repoUrl(courseId);
 	if (url) {
-		return `Source-backed course. Canonical source repository: ${url}. Starter/reference links should remain synchronized with catalog projects.`;
+		return `Source-backed course. Canonical source repository: ${url}. Starter/reference links remain synchronized with catalog projects.`;
 	}
 
 	return (
@@ -1126,7 +1126,7 @@ function addElementaryScienceDecision(courseId: string, course: RawCourse) {
 			{
 				title: "Decision: Keep One Course with K-2 and 3-5 Paths",
 				content:
-					"**Concept path:** Elementary Science stays as one course, with each activity labeled by a K-2 path and a 3-5 path during activity design. K-2 emphasizes observation, drawing, sorting, oral explanation, and sentence frames. Grades 3-5 add data tables, simple graphs, variables, model critique, and fuller CER writing.\n\n**Evidence target:** Every elementary science module should name the simpler path, the advanced path, and the shared phenomenon."
+					"**Concept path:** Elementary Science stays as one course, with each activity labeled by a K-2 path and a 3-5 path during activity design. K-2 emphasizes observation, drawing, sorting, oral explanation, and sentence frames. Grades 3-5 add data tables, simple graphs, variables, model critique, and fuller CER writing.\n\n**Evidence target:** Every elementary science module names the simpler path, the advanced path, and the shared phenomenon."
 			},
 			{
 				title: "K-2 Path",
@@ -1136,7 +1136,7 @@ function addElementaryScienceDecision(courseId: string, course: RawCourse) {
 			{
 				title: "Grades 3-5 Path",
 				content:
-					"**Concept path:** Add simple measurements, data tables, graph reading, model critique, and claim-evidence-reasoning paragraphs. Require the work to compare examples and explain what would change if one condition changed. This path should feel like a bridge toward middle-school science: evidence is still accessible, but explanations include variables, patterns, and limits of the model or dataset.\n\n**Evidence target:** The work demonstrates the ability to use evidence from a shared source and connect it to a science vocabulary term."
+					"**Concept path:** Add simple measurements, data tables, graph reading, model critique, and claim-evidence-reasoning paragraphs. The work compares examples and explains what would change if one condition changed. This path acts as a bridge toward middle-school science: evidence is still accessible, but explanations include variables, patterns, and limits of the model or dataset.\n\n**Evidence target:** The work demonstrates the ability to use evidence from a shared source and connect it to a science vocabulary term."
 			},
 			{
 				title: "Shared Zoom Constraint",
@@ -1148,7 +1148,7 @@ function addElementaryScienceDecision(courseId: string, course: RawCourse) {
 			{
 				title: "Differentiation Project: Two-Level Prompt",
 				content:
-					"**Project goal:** Rewrite one elementary science activity with a K-2 prompt and a 3-5 prompt using the same phenomenon. The two prompts should share the same observation target while changing the expected reasoning depth, vocabulary support, and evidence format.\n\n**Completion checks:**\n- The K-2 version can be answered with drawing, sorting, or oral explanation.\n- The 3-5 version adds data, graphing, model critique, or CER.\n- Both versions use the same core vocabulary."
+					"**Project goal:** Rewrite one elementary science activity with a K-2 prompt and a 3-5 prompt using the same phenomenon. The two prompts share the same observation target while changing the expected reasoning depth, vocabulary support, and evidence format.\n\n**Completion checks:**\n- The K-2 version can be answered with drawing, sorting, or oral explanation.\n- The 3-5 version adds data, graphing, model critique, or CER.\n- Both versions use the same core vocabulary."
 			},
 			{
 				title: "Differentiation Project: Sentence Frame Bank",
@@ -1281,7 +1281,7 @@ function addUnityRebuildModules(courseId: string, course: RawCourse) {
 				{
 					title: "Collision vs Trigger",
 					content:
-						"Separate physical collision from trigger detection. The work should know when an object should block movement and when it should only report contact."
+						"Separate physical collision from trigger detection. The work distinguishes when an object blocks movement and when it only reports contact."
 				},
 				{
 					title: "Collectibles and Score",
@@ -1355,7 +1355,7 @@ function addUnityRebuildModules(courseId: string, course: RawCourse) {
 				{
 					title: "Prefabs and Reusable Objects",
 					content:
-						"Turn repeated objects into prefabs and explain which values should be instance-specific."
+						"Turn repeated objects into prefabs and explain which values are instance-specific."
 				},
 				{
 					title: "Spawning and Level Data",

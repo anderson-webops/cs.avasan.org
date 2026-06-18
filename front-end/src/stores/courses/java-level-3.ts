@@ -958,7 +958,7 @@ export const javaLevel3Course: RawCourse = {
 						"Compare static nested classes and inner classes, and learn when a HAS-A relationship makes nested classes a good fit."
 				},
 				{
-					title: "AJ10 Project 1: Juni Bakery",
+					title: "AJ10 Project 1: Bakery Model",
 					content:
 						"Use nested classes to model a bakery, its workers, and its baked goods, then collect input and print the resulting bakery state.",
 					projectLink:
@@ -1480,7 +1480,7 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-Hash-Map"
 				},
 				{
-					title: "AJ15 Project 2: Juni Search Engine",
+					title: "AJ15 Project 2: Mini Search Engine",
 					content:
 						"Use the custom `HashMap`, file reading, and string splitting to build a simple keyword search engine over a text corpus of URLs and tags.",
 					projectLink:

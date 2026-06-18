@@ -54,14 +54,14 @@ export const pythonLevel3Course: RawCourse = {
 						'Review how conditionals control the flow of a program. Create examples with `if`, `elif`, and `else`, and compare conditions such as `==`, `>`, and `>=`. Test what happens when a conditional expression is replaced with `True` or `False`. Practice writing a chain that prints `"big"`, `"HUGE"`, `"H U M O N G O U S"`, or `"small"` depending on the value of `x`, and compare multiple independent `if` statements with an `if`/`elif` chain.'
 				},
 				{
-					title: "AM1 Project 2: Junian Language Verifier",
+					title: "AM1 Project 2: Fictional Language Verifier",
 					content:
-						'Write a program that checks whether an input string is a valid Junian word. A valid word has an even number of characters, contains at least two vowels, and begins and ends with different letters. For example, `"Juni"` is valid. After finishing, prepare a short walkthrough of the logic used to verify each rule.',
+						'Write a program that checks whether an input string is a valid fictional word. A valid word has an even number of characters, contains at least two vowels, and begins and ends with different letters. For example, `"Lumo"` is valid. After finishing, prepare a short walkthrough of the logic used to verify each rule.',
 					solutionLink:
 						"https://github.com/instruction-material/Python-Level-3/tree/main/AM1-Junian-Language-Verifier"
 				},
 				{
-					title: "AM1 Project 3: Juni Assistant",
+					title: "AM1 Project 3: Command Assistant",
 					content:
 						"Create a simple assistant program that can respond to commands such as reporting the time or date, remembering a name, telling a joke, or sharing a fun fact. Use a loop so the assistant can continue accepting requests until a stopping condition is met. One possible design uses `while True`; another uses a boolean variable to control whether the program should keep running.",
 					solutionLink:
@@ -572,9 +572,9 @@ export const pythonLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-File-IO-and-Dictionaries/solution"
 				},
 				{
-					title: "AM12 Project 3: Juni Latin with File IO",
+					title: "AM12 Project 3: Word Translator with File I/O",
 					content:
-						"Read sentences from an input text file, translate each word using a Juni Latin function, and write the translated results to an output file. As a challenge, preserve punctuation in its correct place while translating the words.",
+						"Read sentences from an input text file, translate each word using a word-translation function, and write the translated results to an output file. As a challenge, preserve punctuation in its correct place while translating the words.",
 					projectLink:
 						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-Juni-Latin-with-File-IO/starter",
 					solutionLink:

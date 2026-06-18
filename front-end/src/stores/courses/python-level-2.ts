@@ -174,7 +174,7 @@ export const pythonLevel2Course: RawCourse = {
 						"https://static.classes.jacobdanderson.net/ps2_multiplication_tables.gif"
 				},
 				{
-					title: "PS2 Supplemental Project 8: Juni Archery",
+					title: "PS2 Supplemental Project 8: Archery Simulator",
 					content:
 						"Simulate five rounds of archery with three shots per round, use randomness to determine hits and misses, and track the total number of bullseyes.",
 					solutionLink:
@@ -432,7 +432,7 @@ export const pythonLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Squawka-Zilly-Floog"
 				},
 				{
-					title: "PS5 Supplemental Project 2: Juni Latin",
+					title: "PS5 Supplemental Project 2: Word Translator",
 					content:
 						"Write a translator function for a simplified Pig Latin variant and use it to translate a user-provided word.",
 					solutionLink:
@@ -849,7 +849,7 @@ export const pythonLevel2Course: RawCourse = {
 						"https://static.classes.jacobdanderson.net/ps11_calculator.gif"
 				},
 				{
-					title: "PS11 Supplemental Project 2: Juni World",
+					title: "PS11 Supplemental Project 2: Theme Park Planner",
 					content:
 						"Use dictionaries and looping menu logic to track how much time remains in a six-hour amusement park visit and which rides the user chooses.",
 					projectLink:

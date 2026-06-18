@@ -45,7 +45,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Legacy Archive: AI Level 1 Workspace",
 					content:
-						"Use the legacy umbrella Python archive when the older single-folder Juni layout is useful for comparison or for recovering an earlier classroom variant of the AI Level 1 materials.",
+						"Use the legacy umbrella Python archive when the older single-folder legacy layout is useful for comparison or for recovering an earlier classroom variant of the AI Level 1 materials.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main"
 				},
@@ -421,7 +421,7 @@ export const aiLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI-Puzzle"
 				},
 				{
-					title: "Project: Juni Book Rule System",
+					title: "Project: Book Rule System",
 					content:
 						"Use a structured decision or lookup problem to practice explicit rules, routing, and explainability. Skill target: Justify each program choice in natural language.",
 					projectLink:
@@ -582,7 +582,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Choose a Toy AI Direction",
 					content:
-						"Choose a capstone direction such as a puzzle solver, game AI, rule-based recommender, or search visualizer. The scope should be ambitious enough to show real thinking but small enough to finish cleanly."
+						"Choose a capstone direction such as a puzzle solver, game AI, rule-based recommender, or search visualizer. The scope needs enough ambition to show real thinking while staying small enough to finish cleanly."
 				},
 				{
 					title: "Build for Explanation, Not Just Output",
@@ -597,7 +597,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Reflect on the Next Course Step",
 					content:
-						"Close by deciding whether the next step should be `Machine Learning`, `Data Science in Python`, `AP Computer Science A`, or deeper algorithmic work such as `USACO Bronze`. Skill target: Justify that next step based on the kind of thinking they enjoyed most."
+						"Close by comparing possible next steps: `Machine Learning`, `Data Science in Python`, `AP Computer Science A`, or deeper algorithmic work such as `USACO Bronze`. Skill target: Justify the next step based on the kind of thinking that was most engaging."
 				},
 				{
 					title: "Unit 8: Capstone and Portfolio Build: Core Project",

@@ -587,7 +587,7 @@ const scratchProfile: ResearchExpansionProfile = {
 	materials: [
 		"Scratch educator references and sample projects.",
 		"Broken-script debugging cards.",
-		"Simple presentation rubric for young students.",
+		"Introductory presentation rubric.",
 		"Blocks-to-pseudocode glossary and project reflection prompts."
 	]
 };
@@ -942,7 +942,7 @@ const assemblyProfile: ResearchExpansionProfile = {
 	sources: ["ISO C++ Core Guidelines"],
 	gaps: [
 		"Choose one target architecture and toolchain instead of mixing assembly dialects.",
-		"Decide whether students mainly write assembly, read compiler output, or learn architecture through assembly.",
+		"Decide whether the course mainly writes assembly, reads compiler output, or studies architecture through assembly.",
 		"Add trace-heavy assessment for registers, stack, and memory."
 	],
 	topics: [
@@ -984,7 +984,7 @@ const javaProfile: ResearchExpansionProfile = {
 	sources: ["College Board AP CSA", "CSTA K-12 Standards"],
 	gaps: [
 		"Keep Java with Graphics and Java without Graphics coherent while sharing a strong core.",
-		"Make advanced Java sufficient for students after C++ Level 3.",
+		"Make advanced Java sufficient after C++ Level 3.",
 		"Do not treat AP CSA as the only advanced Java path."
 	],
 	topics: [
@@ -1458,7 +1458,7 @@ const networkingProfile: ResearchExpansionProfile = {
 	gaps: [
 		"Build a practical network systems path covering concepts, diagnostics, and safe labs.",
 		"Include IPv6, DNS, HTTP/TLS, routing basics, and packet inspection.",
-		"Avoid requiring students to alter their home network."
+		"Avoid requiring changes to a home network."
 	],
 	topics: [
 		"OSI/TCP-IP models, IP addressing, subnetting, DNS, DHCP, routing, NAT, TCP/UDP, HTTP, TLS, packet capture, firewalls, latency, bandwidth, and troubleshooting."

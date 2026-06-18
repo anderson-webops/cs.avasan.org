@@ -315,7 +315,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Legacy Archive: Data Science in Python Workspace",
 					content:
-						"Use the older umbrella Python archive when you need the original single-folder Juni layout or want to compare the current course structure with the legacy material organization.",
+						"Use the older umbrella Python archive when the original single-folder legacy layout is useful for comparison with the current course structure and material organization.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main"
 				},

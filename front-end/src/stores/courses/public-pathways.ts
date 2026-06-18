@@ -217,7 +217,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		adminPriority: "urgent",
 		courseIds: ["algebra-1a", "algebra-1b", "algebra-2a", "algebra-2b"],
 		audience:
-			"Students needing structured support in school algebra, graph interpretation, modeling, written justification, and cumulative practice.",
+			"Structured support in school algebra, graph interpretation, modeling, written justification, and cumulative practice.",
 		prerequisiteSummary:
 			"Algebra 1A starts from pre-algebra readiness. Later algebra courses assume comfort with equations, graph reading, variables, and multi-step reasoning.",
 		outcomes: [
@@ -232,7 +232,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		projectExpectations: [
 			"Modeling task with scenario, equation, graph or table, solution, and reasonableness check.",
-			"Error-analysis task where students diagnose a flawed solution and write the corrected reasoning.",
+			"Error-analysis task that diagnoses a flawed solution and writes the corrected reasoning.",
 			"Cumulative mixed practice set with a short reflection on which representation helped most."
 		],
 		assessmentStyle: [
@@ -267,7 +267,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"data-structures-and-algorithms-in-cpp"
 		],
 		audience:
-			"Fast-moving programming students who are ready for typed program design, memory ownership, command-line tools, and algorithmic data structures.",
+			"Fast-moving programming path for typed program design, memory ownership, command-line tools, and algorithmic data structures.",
 		prerequisiteSummary:
 			"Level 1 assumes general programming readiness. Level 2 and 3 assume variables, I/O, loops, functions, classes, vectors, references, pointers, raw arrays, and dynamic memory have been introduced.",
 		outcomes: [
@@ -355,7 +355,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		adminExpansionBacklog: [
 			"Add a systems prerequisite matrix that shows where C, Assembly, Linux, Networking, Security, and Rust belong in the sequence.",
 			"Add more evidence-based lab rubrics for logs, packets, service state, and rollback.",
-			"Document VM/container setup options for students without full admin access.",
+			"Document VM/container setup options for environments without full admin access.",
 			"Add course-specific safety matrices for Linux, networking, C systems, assembly, and Rust labs."
 		]
 	},
@@ -486,7 +486,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		assessmentStyle: [
 			"Check exact sample input/output, smallest case, largest reasonable case, ties, duplicates, and impossible cases.",
 			"Include time complexity, memory complexity, and proof of why the algorithm matches constraints.",
-			"Use timed practice only after the student has a repeatable untimed solution process.",
+			"Use timed practice only after a repeatable untimed solution process is reliable.",
 			"Every assigned official problem includes a brute-force idea, target complexity, invariant or proof note, common wrong turns, and postmortem."
 		],
 		sourceAndTooling: [
@@ -516,7 +516,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"pythonic-design-patterns"
 		],
 		audience:
-			"Intermediate students who can already build classes and now need vocabulary for responsibility, coupling, refactoring, polymorphism, and language-specific pattern tradeoffs.",
+			"Intermediate OOP path for work that already includes classes and now needs vocabulary for responsibility, coupling, refactoring, polymorphism, and language-specific pattern tradeoffs.",
 		prerequisiteSummary:
 			"Useful prerequisites include classes, methods, collections, and basic testing in the language used by the specific pattern course.",
 		outcomes: [
@@ -567,7 +567,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"physics-level-2"
 		],
 		audience:
-			"Zoom-based science students who need strong explanations, diagrams, data, simulations, and claim-evidence-reasoning without physical lab requirements.",
+			"Zoom-based science path built around explanations, diagrams, data, simulations, and claim-evidence-reasoning without physical lab requirements.",
 		prerequisiteSummary:
 			"Elementary Science splits K-2 and grades 3-5 expectations. Middle school science assumes basic reading, graphing, and explanation readiness. Chemistry and Physics assume stronger math and model reading.",
 		outcomes: [
@@ -616,7 +616,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		adminPriority: "soon",
 		courseIds: ["intro-to-swift-app-development"],
 		audience:
-			"Students interested in iOS-style app development, SwiftUI views, app structure, navigation, state, assets, persistence, and release-minded polish.",
+			"Swift/mobile path for iOS-style app development, SwiftUI views, app structure, navigation, state, assets, persistence, and release-minded polish.",
 		prerequisiteSummary:
 			"Have general programming readiness and be able to work with files and a local IDE. Prior Swift is not required for the intro course.",
 		outcomes: [
@@ -647,7 +647,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		safetyAndAccess: [
 			"Do not require an Apple Developer Program account for core projects.",
 			"Keep networking examples mockable when credentials or live APIs are unavailable.",
-			"Make device-specific features optional unless the student has the required hardware."
+			"Make device-specific features optional unless the required hardware is available."
 		],
 		adminExpansionBacklog: [
 			"Add more testing and accessibility checkpoints.",
@@ -665,7 +665,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"web-development-foundations"
 		],
 		audience:
-			"Students moving from browser JavaScript projects into full web-development habits: files, Git, npm, dev servers, accessibility, APIs, deployment, and operations.",
+			"Pathway from browser JavaScript projects into full web-development habits: files, Git, npm, dev servers, accessibility, APIs, deployment, and operations.",
 		prerequisiteSummary:
 			"JavaScript Level 1 can start near the beginning. Web Development Foundations assumes readiness with small JavaScript programs, HTML/CSS, and the DOM.",
 		outcomes: [
@@ -674,7 +674,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Explain HTTP basics, accessibility checks, security basics, OWASP-informed safe input handling, and production-readiness tradeoffs."
 		],
 		sequencingNotes: [
-			"JavaScript Level 1 keeps fundamentals visible while adding more local-file structure as students are ready.",
+			"JavaScript Level 1 keeps fundamentals visible while adding more local-file structure as readiness grows.",
 			"JavaScript Level 2 strengthens DOM, async/fetch, data handling, debugging, and multi-file projects.",
 			"Web Development Foundations bridges into full-stack and deployment without becoming a framework-only course."
 		],
@@ -697,7 +697,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Core topic checklist: semantic HTML, forms and labels, responsive CSS, DOM events, modules, promises, async/await, fetch, JSON, HTTP status codes, local storage, deployment, performance basics, and OWASP-informed validation."
 		],
 		safetyAndAccess: [
-			"Do not require real payment, authentication, or production secrets for student projects.",
+			"Do not require real payment, authentication, or production secrets for course projects.",
 			"Use safe mock APIs or provided endpoints for early work.",
 			"Treat security topics as defensive design and safe validation, not offensive web testing."
 		],
