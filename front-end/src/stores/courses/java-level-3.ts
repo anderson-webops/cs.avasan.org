@@ -10,33 +10,51 @@ export const javaLevel3Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Introductions and Setup",
-					content:
-						"Get familiar with the Java workspace, custom Java projects, and the structure of a Java program. This module works well as a review resource for variables, strings, input, and commenting before moving into more advanced topics."
+					content: `**Concept path:** Java programs move through a source-edit, compile, run, and observe cycle. A useful setup pass identifies where source files live, where compiled output appears, how the terminal reports errors, and how project folders separate one exercise from another.
+
+**Practice targets:** Open a small Java project, identify the file containing the entry point, run it once unchanged, make one visible output change, run it again, and confirm that the displayed result came from the newest source file rather than stale output.
+
+**Evidence target:** A reliable setup is visible when a small source change produces a predictable new console result and compile errors can be traced back to a specific file and line.`
 				},
 				{
 					title: "Creating and Running a Java Program",
-					content:
-						"Review the role of classes, methods, `main()`, console output, and the basic project structure used throughout the course."
+					content: `**Concept path:** A Java application starts from a class that contains the main method. The class name, file name, braces, method header, and statements work together to create the smallest runnable program.
+
+**Practice targets:** Locate the class declaration, the main method header, and the first executable statement. Add several console outputs, distinguish fixed text from calculated values, and keep braces and semicolons aligned so the compiler can parse the program.
+
+**Evidence target:** The program can be explained from file to class to main method to statement order, and each line of output can be traced to the exact statement that produced it.`
 				},
 				{
 					title: "Compilation",
-					content:
-						"Understand that Java code must be compiled before it runs, both to catch syntax issues and to translate source code into a form the computer can execute."
+					content: `**Concept path:** Java source code is compiled before execution. Compilation catches syntax and type errors, then produces bytecode that the Java runtime executes. Runtime behavior begins only after the compiler accepts the source.
+
+**Practice targets:** Create and fix common compile-time errors such as missing semicolons, mismatched braces, wrong capitalization, and incompatible assignments. Then compare them with runtime or logic errors where the program compiles but behaves incorrectly.
+
+**Evidence target:** Error messages are useful when the filename, line number, symbol name, and surrounding code are read together instead of treating the first red message as a mystery.`
 				},
 				{
 					title: "Variables, Primitive Data Types, and Strings",
-					content:
-						"Review variables, primitive data types such as `int`, `boolean`, and `double`, and object references such as `String`. Practice declaring, assigning, concatenating, indexing with `charAt()`, and measuring string length."
+					content: `**Concept path:** Variables name stored values, while types describe what operations are valid. Primitive types such as int, boolean, and double store direct values. String values are objects, so they support methods such as length(), charAt(), substring(), and equals().
+
+**Practice targets:** Declare variables with meaningful names, update them safely, combine text with numeric values, and compare strings using equals() rather than ==. Include small checks for off-by-one indexing, integer division, and boolean expressions.
+
+**Evidence target:** A strong solution makes each variable's role obvious, produces correct output for more than one input, and avoids relying on accidental string or numeric behavior.`
 				},
 				{
 					title: "Input, Output, and Commenting",
-					content:
-						"Use `Scanner` to read console input, compare `System.out.print()` with `System.out.println()`, and review both single-line and block comments."
+					content: `**Concept path:** Console programs become interactive when Scanner reads typed input and output statements explain what is needed next. print() keeps output on the same line, println() ends the line, and comments preserve reasoning that is not obvious from code alone.
+
+**Practice targets:** Read strings, integers, and decimal values; name prompts clearly; handle the common nextInt() then nextLine() newline issue; and keep comments focused on purpose, assumptions, or a non-obvious decision.
+
+**Evidence target:** The program is readable from the console alone: prompts describe the expected input, output spacing is intentional, and comments clarify reasoning rather than repeating the statement literally.`
 				},
 				{
 					title: "AJ1 Project 1: Mad Libs",
-					content:
-						"Ask the user for several words, store them in descriptive variables, and build a Mad Lib story by concatenating the inputs together.",
+					content: `**Project target:** Build a console Mad Libs program that collects several typed words, stores each value in a descriptive variable, and inserts those values into a complete story.
+
+**Build path:** Plan the story before coding so every blank has a clear part of speech. Then create prompts, read input with Scanner, combine fixed text with variables, and preserve spacing, punctuation, and line breaks.
+
+**Evidence target:** The story remains readable after multiple runs with different inputs, and the source code clearly separates input collection from final story output.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ1-Mad-Lib",
 					solutionLink:
@@ -44,8 +62,11 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "AJ1 Project 2: Chat Bot",
-					content:
-						"Create a simple chatbot that asks several questions, stores each response, and replies based on the answers.",
+					content: `**Project target:** Create a console chatbot that collects responses, stores them in variables, and produces replies that depend on earlier input.
+
+**Build path:** Keep each prompt short and specific, normalize text where needed, and use conditionals for at least a few different response paths. A fallback response keeps the conversation stable when input does not match the expected wording.
+
+**Evidence target:** The chatbot has a repeatable conversation flow, at least one branch based on typed input, and output that makes sense even when responses vary.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ1-Chat-Bot",
 					solutionLink:
@@ -104,18 +125,27 @@ export const javaLevel3Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Review Focus",
-					content:
-						"Use this module as a review resource for one-dimensional arrays, two-dimensional arrays, and `ArrayList`s before the course moves into more advanced data structures."
+					content: `**Concept path:** Arrays and ArrayLists both store ordered collections, but they make different tradeoffs. Arrays have fixed length and direct indexed storage. ArrayLists resize and provide methods for insertion, removal, and replacement.
+
+**Practice targets:** Compare length with size(), index access with get(), assignment with set(), and fixed storage with dynamic growth. Include at least one example where an array is the simpler structure and one where an ArrayList is more appropriate.
+
+**Evidence target:** Collection code is strongest when index bounds, mutation points, and traversal order are visible and tested with empty, single-item, and multi-item cases.`
 				},
 				{
 					title: "Arrays",
-					content:
-						"Review how arrays store ordered elements of one type, how indexing works, how to get the length, and how to print an array by iterating through it."
+					content: `**Concept path:** Arrays are fixed-size ordered collections where every element has the same type. Indexing starts at 0, the final valid index is length - 1, and direct access is fast when the index is known.
+
+**Practice targets:** Create arrays with explicit values and with a size only, fill them with loops, read and update individual elements, and print them with both standard loops and enhanced for loops where mutation is not needed.
+
+**Evidence target:** Correct array code avoids off-by-one errors, handles the first and last element deliberately, and does not use an index outside the valid range.`
 				},
 				{
 					title: "AJ2 Project 1: Array Practice",
-					content:
-						"Write methods that double array values, sum even numbers, generate arrays of random doubles, and total the lengths of words in an array.",
+					content: `**Project target:** Write a group of array utility methods that transform values, compute totals, generate random data, and summarize strings.
+
+**Build path:** Keep each method responsible for one task: double numeric values, sum even numbers, generate random doubles, or total word lengths. Use parameters and return values so methods can be tested without rewriting the main method every time.
+
+**Evidence target:** Each method has at least one normal case plus one edge case, such as an empty array, a one-element array, or an array with no even numbers.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-Array-Practice",
 					solutionLink:
@@ -123,13 +153,19 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "Two-Dimensional Arrays",
-					content:
-						"Review how 2D arrays represent grids, how to access rows and columns, and how nested loops traverse every element."
+					content: `**Concept path:** A two-dimensional array is an array of rows, and each row contains elements at column indices. This structure is useful for grids, tables, matrices, maps, and board-like data.
+
+**Practice targets:** Access a specific row and column, traverse by rows, traverse by columns when appropriate, and distinguish the number of rows from the number of columns. Include rectangular arrays as well as square arrays so the two dimensions are not accidentally treated as identical.
+
+**Evidence target:** Nested-loop code is correct when the outer and inner bounds match the actual row and column lengths, not a memorized size.`
 				},
 				{
 					title: "AJ2 Project 2: Two-Dimensional Array Practice",
-					content:
-						"Create and fill square grids, find maximum values, generate random matrices, and search 2D arrays for a target value.",
+					content: `**Project target:** Build utility methods for square grids and general matrices, including filling, printing, maximum search, random generation, and target search.
+
+**Build path:** Use predictable small matrices before adding random values. Print intermediate grids in a readable row-and-column layout so incorrect indexing is visible.
+
+**Evidence target:** The methods work for targets at the first cell, last cell, middle cells, and missing values, and maximum-value logic handles negative numbers as well as positive numbers.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-Two-Dimensional-Array-Practice",
 					solutionLink:
@@ -137,18 +173,27 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "ArrayLists",
-					content:
-						"Compare arrays with `ArrayList`s, then review `add()`, `get()`, `set()`, and `remove()` for dynamic collections."
+					content: `**Concept path:** ArrayLists are resizable lists backed by object references. They trade fixed-size simplicity for methods that make insertion, deletion, replacement, and dynamic growth easier.
+
+**Practice targets:** Use add(), get(), set(), remove(), contains(), and size() in small examples. Pay special attention to removal while iterating because removing an item shifts later indices left.
+
+**Evidence target:** ArrayList code is reliable when it clearly handles changing size, avoids skipped elements during removal, and chooses wrapper types such as Integer for primitive-style values.`
 				},
 				{
 					title: "Primitive Wrapper Objects",
-					content:
-						"Review how wrapper types such as `Integer` and `Double` allow primitive values to be stored inside `ArrayList`s through auto-boxing and unboxing."
+					content: `**Concept path:** Java generics work with reference types, so collections such as ArrayList use wrapper classes like Integer, Double, Boolean, and Character instead of primitive types directly. Autoboxing converts a primitive into its wrapper when needed, and unboxing converts it back.
+
+**Practice targets:** Create ArrayList<Integer> and ArrayList<Double> examples, perform arithmetic with retrieved values, and identify where Java converts between primitive and wrapper forms automatically.
+
+**Evidence target:** Code that uses wrappers well avoids null unboxing errors and keeps numeric intent clear despite the object wrapper around the value.`
 				},
 				{
 					title: "AJ2 Project 3: ArrayList Practice",
-					content:
-						"Write methods that filter even numbers, test whether two values sum to zero, remove the smallest value, and append a total sum to an `ArrayList`.",
+					content: `**Project target:** Build ArrayList methods that filter values, search for a pair with a target relationship, remove an extreme value, and append summary data.
+
+**Build path:** Use separate methods for filtering even numbers, checking for two values that sum to zero, removing the smallest value, and appending the total sum. Keep mutation explicit so it is clear which methods modify the original list.
+
+**Evidence target:** The project handles duplicates, all-negative lists, all-positive lists, empty lists where relevant, and lists where the smallest value appears more than once.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-Array-List-Practice",
 					solutionLink:
@@ -158,8 +203,11 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "AJ2 Supplemental Project 1: Test Scores",
-					content:
-						"Store a set of test scores in an array, compute the average, and convert it into a letter grade.",
+					content: `**Project target:** Store numeric test scores, compute summary statistics, and convert the average into a letter-grade category.
+
+**Build path:** Validate the score range, calculate the total and average with clear numeric types, and use conditionals that make grade boundaries unambiguous.
+
+**Evidence target:** Boundary cases such as exactly 90, exactly 80, a perfect score, and a low score produce the expected category.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-Test-Scores",
 					solutionLink:
@@ -167,8 +215,11 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "AJ2 Supplemental Project 2: Matrix Addition",
-					content:
-						"Read in two matrices of matching dimensions, add them entry by entry, and print the result.",
+					content: `**Project target:** Add two matrices by combining entries at matching row and column positions.
+
+**Build path:** Confirm that both matrices have compatible dimensions, traverse rows and columns with nested loops, and store each sum in a result matrix rather than overwriting input data too early.
+
+**Evidence target:** The output matrix has the same dimensions as the inputs, and each cell can be verified by one hand calculation.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-Matrix-Addition",
 					solutionLink:
@@ -176,8 +227,11 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "AJ2 Supplemental Project 3: Sandwich Orders",
-					content:
-						"Build an ingredient list with an `ArrayList`, collect a sandwich order, and convert it into an abbreviated string representation.",
+					content: `**Project target:** Model a sandwich order with an ArrayList of ingredients and convert that order into a compact representation.
+
+**Build path:** Store available ingredients, collect selected ingredients, preserve ordering where it matters, and create abbreviations through a clear rule rather than hard-coded output only.
+
+**Evidence target:** Repeated ingredients, missing ingredients, and differently ordered selections produce predictable results.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-Sandwich-Orders",
 					solutionLink:
@@ -190,28 +244,43 @@ export const javaLevel3Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Object-Oriented Programming",
-					content:
-						"Review classes, objects, instance variables, methods, constructors, and the overall purpose of object-oriented programming in Java."
+					content: `**Concept path:** Object-oriented Java is clearest when each class owns one coherent responsibility. A class defines the fields and behavior available to its objects, while each object stores its own state.
+
+**Practice targets:** Identify which data belongs in fields, which behavior belongs in methods, and which setup belongs in constructors. Separate object state from local variables so long-lived information is stored in the correct place.
+
+**Evidence target:** A class is well-shaped when another file can create objects, call public methods, and understand the object state without directly editing private data.`
 				},
 				{
 					title: "Public and Private Instance Variables",
-					content:
-						"Compare public and private variables, discuss encapsulation, and review why most instance data should stay private behind methods."
+					content: `**Concept path:** Encapsulation protects object state by keeping fields private and exposing controlled operations through methods. Public fields make quick experiments easy, but they also allow invalid state from anywhere in the program.
+
+**Practice targets:** Convert public fields into private fields, add getters and setters where useful, and enforce at least one rule inside a setter or constructor.
+
+**Evidence target:** Invalid values are rejected or normalized at the class boundary instead of requiring every caller to remember the same rule.`
 				},
 				{
 					title: "Constructors",
-					content:
-						"Review default constructors and overloaded constructors, then instantiate objects using different constructor signatures."
+					content: `**Concept path:** Constructors establish an object's starting state. A no-argument constructor provides a default setup, while overloaded constructors allow specific starting values.
+
+**Practice targets:** Write multiple constructors for the same class, use this to resolve field and parameter names, and avoid duplicated setup logic when one constructor can delegate to another.
+
+**Evidence target:** Every constructed object begins in a valid state, and object creation examples show why each constructor signature exists.`
 				},
 				{
 					title: "Class Methods",
-					content:
-						"Use getters, setters, and `toString()` to expose and update object state in a controlled way."
+					content: `**Concept path:** Methods define what an object can do. Accessor methods expose state safely, mutator methods update state according to rules, and toString() creates a readable summary for debugging and display.
+
+**Practice targets:** Write getters, setters, behavior methods, and a toString() method that includes the important fields without exposing implementation details unnecessarily.
+
+**Evidence target:** Method calls read naturally from the outside of the class and keep state changes inside the class's rules.`
 				},
 				{
 					title: "AJ3 Project 1: Student Class",
-					content:
-						"Create a `Student` class with private fields, constructors, getters, setters, and a coherent `toString()` method.",
+					content: `**Project target:** Create a Student class that stores identity and academic data with private fields and public methods.
+
+**Build path:** Define fields, constructors, getters, setters, validation rules, and a toString() method. Then create several Student objects from main and update them through methods rather than direct field access.
+
+**Evidence target:** The class supports valid object creation, readable output, controlled updates, and at least one rejected or corrected invalid value.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ3-Student-Class",
 					solutionLink:
@@ -219,18 +288,27 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "Static Variables and Methods",
-					content:
-						"Use a static variable such as `numStudents` to track a class-wide total and access it through a static getter."
+					content: `**Concept path:** Static members belong to the class itself rather than to one object. They are useful for shared constants, class-wide counters, utility methods, and state that genuinely applies across all instances.
+
+**Practice targets:** Add a static counter such as numStudents, update it during construction, expose it through a static getter, and compare it with an instance field that differs for each object.
+
+**Evidence target:** The output distinguishes per-object state from class-wide state, and static data is not used as a shortcut for information that belongs in each object.`
 				},
 				{
 					title: "Inheritance and Subclasses",
-					content:
-						"Review how subclasses extend superclasses, inherit public behavior, and use `super()` to reuse parent constructors."
+					content: `**Concept path:** Inheritance models an is-a relationship: a subclass is a more specific version of its superclass. The subclass inherits accessible behavior, can add new behavior, and can override methods when the general behavior is not specific enough.
+
+**Practice targets:** Create a superclass with shared fields and methods, extend it with a subclass, call super() from the subclass constructor, and override one method with more specific behavior.
+
+**Evidence target:** Shared behavior appears only once in the superclass, while subclass-specific details stay in the subclass.`
 				},
 				{
 					title: "AJ3 Project 2: BakedGood Class",
-					content:
-						"Create a `BakedGood` class and use it as a base for later work with inheritance, abstract classes, interfaces, and enums.",
+					content: `**Project target:** Create a BakedGood model that can grow from a basic class into a small inheritance hierarchy.
+
+**Build path:** Store common baked-good data such as name, ingredients, quantity, and size-related information. Then identify which behavior belongs to all baked goods and which behavior varies by subtype.
+
+**Evidence target:** The base class is useful on its own as a shared model and also prepares cleanly for later abstract classes, interfaces, and enum-based constraints.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ3-Baked-Good",
 					solutionLink:
@@ -238,18 +316,27 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "Abstract Classes and Methods",
-					content:
-						"Make `BakedGood` abstract, add an abstract pricing method, and create a `Bread` subclass that provides a concrete implementation."
+					content: `**Concept path:** Abstract classes define shared state or behavior while leaving some details incomplete. Abstract methods name behavior that every concrete subclass must provide.
+
+**Practice targets:** Convert a general class into an abstract class, add an abstract method for price calculation, and implement that method in a concrete subclass such as Bread.
+
+**Evidence target:** The abstract type captures common structure without pretending that every baked good uses the same pricing rule.`
 				},
 				{
 					title: "Interfaces",
-					content:
-						"Create and implement an interface such as `ForSale`, then use `Comparable` to compare baked goods by ingredient count."
+					content: `**Concept path:** Interfaces define capabilities without committing to one inheritance tree. A class can implement an interface to promise that certain methods exist, even when the class already extends another type.
+
+**Practice targets:** Create a ForSale-style interface, implement its methods, and use Comparable or Comparator to order baked goods by a meaningful property such as ingredient count or price.
+
+**Evidence target:** Interface-based code can operate on any object that provides the promised behavior, not just one specific class name.`
 				},
 				{
 					title: "Enums",
-					content:
-						"Use enums to restrict possible values such as loaf sizes and update constructors and instance variables to use those enum types."
+					content: `**Concept path:** Enums represent a fixed set of named choices. They make code safer than loose strings when only a small number of values are valid.
+
+**Practice targets:** Replace string-based categories with enum constants such as loaf sizes, pass enum values through constructors, and use switch expressions or conditionals where behavior depends on the chosen constant.
+
+**Evidence target:** Invalid category names cannot be created by typo, and every valid enum value has a clear meaning in the program.`
 				}
 			],
 			supplementalProjects: [
@@ -300,23 +387,35 @@ export const javaLevel3Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Recursion",
-					content:
-						"Learn how recursive methods solve problems by reducing them to smaller subproblems, and review the roles of the base case and recursive case."
+					content: `**Concept path:** Recursive methods solve a problem by calling themselves on a smaller version of the same problem. Each method needs a base case that stops the chain and a recursive case that moves toward that stop condition.
+
+**Practice targets:** Identify the base case, identify what gets smaller, trace several calls by hand, and compare the recursive solution with an iterative loop when both versions are reasonable.
+
+**Evidence target:** A recursive method is valid when every allowed input eventually reaches a base case and each returned value contributes to the larger answer correctly.`
 				},
 				{
 					title: "Sum of the First N Numbers",
-					content:
-						"Trace a recursive example for summing the first `n` numbers and compare the recursive solution with an iterative one."
+					content: `**Concept path:** Summing the first n numbers is a compact recursion example because sum(n) can be described as n plus sum(n - 1), with sum(1) as a natural stopping point.
+
+**Practice targets:** Trace sum(4) or sum(5) as a stack of calls, then unwind the returns in the opposite direction. Compare that trace with a loop that accumulates the same total.
+
+**Evidence target:** The trace shows both the downward call phase and the upward return phase, not just the final numeric answer.`
 				},
 				{
 					title: "Call Stack",
-					content:
-						"Review how recursive calls build up on the call stack, why stack overflow happens, and why recursive overhead sometimes makes iterative solutions faster."
+					content: `**Concept path:** Every method call gets a stack frame containing its local variables and return location. Recursion creates many frames, so missing or unreachable base cases can produce stack overflow.
+
+**Practice targets:** Draw stack frames for a short recursive call, label the parameter values in each frame, and identify exactly where execution resumes after a recursive call returns.
+
+**Evidence target:** Stack reasoning explains why recursion can be elegant but not free: each call has memory and control-flow overhead.`
 				},
 				{
 					title: "AJ4 Project 1: Recursion Practice",
-					content:
-						"Write recursive methods for exponents, factorials, digit sums, Fibonacci numbers, and palindrome checking.",
+					content: `**Project target:** Implement several recursive methods that use different recursive patterns: numeric countdown, digit decomposition, branching recursion, and string narrowing.
+
+**Build path:** Create methods for exponents, factorials, digit sums, Fibonacci numbers, and palindrome checking. For each method, write the base case first, then define how the input moves closer to it.
+
+**Evidence target:** Each method includes small test calls whose answers can be checked mentally, plus at least one edge case such as zero, one, an empty string, or a one-character string.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ4-Recursion-Practice",
 					solutionLink:
@@ -324,8 +423,11 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "AJ4 Project 2: Divisible by 7",
-					content:
-						"Use a recursive divisibility rule to determine whether a number is divisible by 7, breaking it into smaller subproblems each step.",
+					content: `**Project target:** Implement a recursive divisibility-by-7 test that reduces a large number into a smaller value while preserving whether divisibility holds.
+
+**Build path:** Encode the divisibility rule carefully, print or trace intermediate values during early testing, and stop at a small enough base case to decide true or false.
+
+**Evidence target:** The method agrees with direct modulo checks for several positive numbers, including values that are divisible by 7, not divisible by 7, and already small.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ4-Divisible-by-7",
 					solutionLink:
@@ -380,13 +482,19 @@ export const javaLevel3Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Linear Search",
-					content:
-						"Learn how linear search checks items one by one in order until the target is found or the collection ends."
+					content: `**Concept path:** Linear search scans a collection one item at a time. It works on unsorted data, sorted data, arrays, ArrayLists, and many other sequential structures because it makes no ordering assumption.
+
+**Practice targets:** Trace searches where the target is first, middle, last, and missing. Return either the matching index, the matching value, or a boolean result depending on the method contract.
+
+**Evidence target:** Runtime reasoning distinguishes best case, worst case, and average case rather than treating every search as the same amount of work.`
 				},
 				{
 					title: "AJ5 Project 1: Linear Search Implementation",
-					content:
-						"Write a method that searches an array for a target and returns its index or `-1` if it is not found.",
+					content: `**Project target:** Implement a linear search method with a clear contract: return the target index when found and -1 when absent.
+
+**Build path:** Traverse from left to right, check each element once, return immediately when the target is found, and return -1 only after the loop finishes without a match.
+
+**Evidence target:** Tests cover the first index, a later index, repeated values, a missing value, and an empty array if the method accepts one.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ5-Linear-Search",
 					solutionLink:
@@ -394,13 +502,19 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "Introduction to Big-O Analysis",
-					content:
-						"Use Big-O notation to estimate runtime growth based on input size, focusing on worst-case behavior and dominant terms."
+					content: `**Concept path:** Big-O notation describes how runtime or memory use grows as input size grows. It ignores constant factors and lower-order terms so algorithms can be compared by their long-term growth pattern.
+
+**Practice targets:** Classify constant, logarithmic, linear, linearithmic, quadratic, and exponential patterns. Simplify expressions by keeping the dominant term and dropping constants.
+
+**Evidence target:** A runtime claim is tied to a counted operation, a variable input size, and a reason the dominant term controls growth.`
 				},
 				{
 					title: "AJ5 Project 2: Big-O Practice",
-					content:
-						"Determine the Big-O of several mathematical runtime expressions and connect those expressions to algorithm behavior.",
+					content: `**Project target:** Analyze runtime expressions and connect each simplified Big-O result to a concrete algorithm pattern.
+
+**Build path:** For each expression, identify the dominant term, remove constants, and explain what kind of code shape could produce that growth, such as one loop, nested loops, repeated halving, or recursive branching.
+
+**Evidence target:** The explanation is stronger than the label alone because it links the notation to a real control-flow pattern.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ5-Big-O-Practice-Starter",
 					solutionLink:
@@ -457,13 +571,19 @@ export const javaLevel3Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Binary Search",
-					content:
-						"Learn how binary search repeatedly narrows a sorted array by comparing the target to the middle element and discarding half the search space each time."
+					content: `**Concept path:** Binary search relies on sorted data. Each comparison with the middle element eliminates half of the remaining search interval because the sorted order proves where the target cannot be.
+
+**Practice targets:** Trace low, high, and mid values for found and missing targets. Include cases where the target is below all values, above all values, at the first element, and at the last element.
+
+**Evidence target:** Correct binary search reasoning always names the sorted-data precondition and explains why each discarded half is safe to ignore.`
 				},
 				{
 					title: "AJ6 Project 1: Binary Search with Iteration",
-					content:
-						"Implement binary search iteratively using lower and upper bounds plus a loop that updates the midpoint after every comparison.",
+					content: `**Project target:** Implement iterative binary search with lower and upper bounds that shrink after every comparison.
+
+**Build path:** Initialize bounds, calculate the midpoint safely, compare the middle value with the target, update one bound, and stop when the target is found or the interval becomes empty.
+
+**Evidence target:** Tests cover odd and even array lengths, missing values, boundary values, and arrays with one element.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ6-Binary-Search-with-Iteration",
 					solutionLink:
@@ -471,8 +591,11 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "AJ6 Project 2: Binary Search with Recursion",
-					content:
-						"Implement binary search recursively, either by passing bounds into each call or by splitting the array into subarrays.",
+					content: `**Project target:** Implement recursive binary search using either bounds parameters or smaller subarrays.
+
+**Build path:** Treat an empty interval as the missing-target base case, treat a matching midpoint as the found-target base case, and recurse only into the half where the target could still exist.
+
+**Evidence target:** The recursive version produces the same answers as the iterative version and terminates for missing targets as well as found targets.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ6-Binary-Search-with-Recursion",
 					solutionLink:
@@ -480,13 +603,19 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "Binary Search Big-O Analysis",
-					content:
-						"Compare binary search with linear search and reason about why halving the problem each step leads to `O(log n)` runtime."
+					content: `**Concept path:** Binary search has logarithmic runtime because each unsuccessful comparison halves the remaining search interval. Doubling the input size adds about one more comparison rather than doubling the work.
+
+**Practice targets:** Compare the maximum number of checks for arrays of size 8, 16, 32, and 1024. Then contrast that growth with linear search on the same sizes.
+
+**Evidence target:** The analysis connects repeated halving to logarithms and also names the cost of the precondition: the data must already be sorted or sorted before searching.`
 				},
 				{
 					title: "AJ6 Project 3: Precise Square Roots",
-					content:
-						"Use a binary-search-style approach on a numeric interval to approximate square roots to a chosen precision.",
+					content: `**Project target:** Use binary-search reasoning on a numeric interval to approximate square roots.
+
+**Build path:** Maintain low and high numeric bounds, test the midpoint by squaring it, and shrink the interval until the approximation reaches the chosen precision.
+
+**Evidence target:** The method handles perfect squares, non-perfect squares, values between 0 and 1, and values greater than 1 with a documented precision tolerance.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ6-Precision-Square-Root",
 					solutionLink:
@@ -541,8 +670,11 @@ export const javaLevel3Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Check-In #1 Overview",
-					content:
-						"Use this check-in as a review of recursion, time complexity, and search algorithms. Focus on explaining how each algorithm works and why its runtime behaves the way it does.",
+					content: `**Check-in target:** This review connects recursion, time complexity, linear search, and binary search into one algorithmic reasoning checkpoint.
+
+**Practice targets:** Explain what the code does, trace the important variables, identify the stopping condition, and connect the implementation to its runtime.
+
+**Evidence target:** Strong answers include both the result and the reason: what value is returned or printed, why termination occurs, and how input size changes the amount of work.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-1-Starter",
 					solutionLink:
@@ -550,28 +682,43 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "Check-In #1: Recursion",
-					content:
-						"Review recursive methods, base and recursive cases, the dangers of missing base cases, recursive string length, Pascal's triangle, and tracing recursive output."
+					content: `**Concept path:** Recursion questions test the ability to identify a base case, verify progress toward it, and trace how values return through the call stack.
+
+**Practice targets:** Analyze recursive string length, Pascal-style recurrence, and recursive printing. Look for unchanged recursive calls because they signal infinite recursion.
+
+**Evidence target:** A correct trace shows the order of calls and the order of returns; for printing methods, it also shows whether output occurs before or after the recursive call.`
 				},
 				{
 					title: "Check-In #1: Time Complexity",
-					content:
-						"Practice Big-O notation by simplifying expressions and reasoning about the best and worst cases of different methods."
+					content: `**Concept path:** Time-complexity questions reduce code or formulas to growth categories. The key is identifying which operation is being counted and how many times it runs as input grows.
+
+**Practice targets:** Simplify expressions, compare best and worst cases, and classify loops, nested loops, repeated halving, and recursive branching.
+
+**Evidence target:** Each answer includes a short reason tied to a loop bound, recursive split, or counted operation rather than only the final notation.`
 				},
 				{
 					title: "Check-In #1: Linear Search",
-					content:
-						"Explain when linear search is useful, complete an unfinished implementation, and describe its best and worst case runtime."
+					content: `**Concept path:** Linear search is useful when no sorted-order guarantee exists or when the collection is small enough that a simple scan is appropriate.
+
+**Practice targets:** Complete unfinished search code, identify the return value for found and missing targets, and describe best case and worst case in terms of target position.
+
+**Evidence target:** The implementation does not return "missing" too early and does not read beyond the final valid index.`
 				},
 				{
 					title: "Check-In #1: Binary Search",
-					content:
-						"Review both iterative and recursive binary search, finish incomplete implementations, and compare its runtime with linear search."
+					content: `**Concept path:** Binary search combines sorted-data reasoning with careful bound updates. Small off-by-one mistakes can skip the target or create a loop that never ends.
+
+**Practice targets:** Complete iterative and recursive versions, trace low, high, and mid, and compare logarithmic growth with the linear growth of a full scan.
+
+**Evidence target:** The algorithm handles missing values and boundary values while preserving the sorted-data precondition.`
 				},
 				{
 					title: "Check-In #1: Additional Practice Project",
-					content:
-						"Compare the real-world speeds of linear search and binary search by timing many runs on a large array with millisecond timestamps.",
+					content: `**Project target:** Compare observed search times for linear search and binary search across many repeated runs.
+
+**Build path:** Generate or load a large sorted array, select targets in several positions, time many searches with millisecond or nanosecond timestamps, and average results to reduce noise.
+
+**Evidence target:** The written comparison separates measured timing from theoretical Big-O and explains why small runs may not visibly match the long-term growth prediction.`,
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-1-Additional-Practice-Project",
 					solutionLink:

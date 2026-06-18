@@ -872,6 +872,34 @@ describe("course text quality normalization", () => {
 		expect(corpus).toContain("loop that changes size and rotation");
 	});
 
+	it("keeps Java Level 3 review modules substantive instead of one-line prompts", async () => {
+		const course = await loadRawCourse("java-level-3");
+		expect(course).not.toBeNull();
+		const corpus = allCourseText(course);
+
+		expect(corpus).not.toMatch(
+			/Ask the user for several words, store them in descriptive variables/i
+		);
+		expect(corpus).not.toMatch(/Use this module as a review resource/i);
+		expect(corpus).not.toMatch(
+			/Learn how linear search checks items one by one/i
+		);
+		expect(corpus).not.toMatch(
+			/Create a simple chatbot that asks several questions/i
+		);
+		expect(corpus).toContain(
+			"Java programs move through a source-edit, compile, run, and observe cycle"
+		);
+		expect(corpus).toContain("Arrays are fixed-size ordered collections");
+		expect(corpus).toContain(
+			"Object-oriented Java is clearest when each class owns one coherent responsibility"
+		);
+		expect(corpus).toContain(
+			"Recursive methods solve a problem by calling themselves on a smaller version of the same problem"
+		);
+		expect(corpus).toContain("Binary search relies on sorted data");
+	});
+
 	it("keeps early Python Turtle prompts structured around planning and verification", async () => {
 		const course = await loadRawCourse("python-level-1");
 		expect(course).not.toBeNull();
