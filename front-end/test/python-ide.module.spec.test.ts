@@ -1322,14 +1322,19 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("builtins.tone = tone");
 		expect(runtimeSource).toContain("def blit(self, image, pos");
 		expect(runtimeSource).toContain("def bounds(self):");
-		expect(runtimeSource).toContain("def line(self, start, end, color):");
-		expect(runtimeSource).toContain("def circle(self, pos, radius, color):");
+		expect(runtimeSource).toContain("def rect(self, rect, color, width=1):");
+		expect(runtimeSource).toContain("rect_width, rect_height = _rect_parts(rect)");
+		expect(runtimeSource).toContain("def line(self, start, end, color, width=1):");
+		expect(runtimeSource).toContain(
+			"def circle(self, pos, radius, color, width=1):"
+		);
 		expect(runtimeSource).toContain(
 			"def filled_circle(self, pos, radius, color):"
 		);
 		expect(runtimeSource).toContain("def textbox(self, text, rect");
 		expect(runtimeSource).toContain("_bridge.drawLine(");
 		expect(runtimeSource).toContain("_bridge.drawCircle(");
+		expect(runtimeSource).toContain("float(_number(width, 1))");
 		expect(runtimeSource).toContain("def schedule(self, function, delay):");
 		expect(runtimeSource).toContain(
 			"def schedule_unique(self, function, delay):"
@@ -1463,6 +1468,10 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("const left = -anchorX");
 		expect(pageSource).toContain("drawLine: drawGameLine");
 		expect(pageSource).toContain("drawCircle: drawGameCircle");
+		expect(pageSource).toContain("lineWidth = 1");
+		expect(pageSource).toContain(
+			"context.lineWidth = Math.max(1, lineWidth)"
+		);
 		expect(pageSource).toContain("pauseMusic: pauseGameMusic");
 		expect(pageSource).toContain("unpauseMusic: unpauseGameMusic");
 		expect(pageSource).toContain("setMusicVolume: setGameMusicVolume");

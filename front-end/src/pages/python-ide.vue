@@ -2506,7 +2506,8 @@ function drawGameRect(
 	width: number,
 	height: number,
 	color: string,
-	filled: boolean
+	filled: boolean,
+	lineWidth = 1
 ) {
 	const context = setGameCanvasTransform();
 	if (!context) return;
@@ -2518,7 +2519,7 @@ function drawGameRect(
 	}
 
 	context.strokeStyle = color;
-	context.lineWidth = 3;
+	context.lineWidth = Math.max(1, lineWidth);
 	context.strokeRect(x, y, width, height);
 }
 
@@ -2527,13 +2528,14 @@ function drawGameLine(
 	y1: number,
 	x2: number,
 	y2: number,
-	color: string
+	color: string,
+	lineWidth = 1
 ) {
 	const context = setGameCanvasTransform();
 	if (!context) return;
 
 	context.strokeStyle = color;
-	context.lineWidth = 3;
+	context.lineWidth = Math.max(1, lineWidth);
 	context.lineCap = "round";
 	context.beginPath();
 	context.moveTo(x1, y1);
@@ -2546,7 +2548,8 @@ function drawGameCircle(
 	y: number,
 	radius: number,
 	color: string,
-	filled: boolean
+	filled: boolean,
+	lineWidth = 1
 ) {
 	const context = setGameCanvasTransform();
 	if (!context) return;
@@ -2560,7 +2563,7 @@ function drawGameCircle(
 	}
 
 	context.strokeStyle = color;
-	context.lineWidth = 3;
+	context.lineWidth = Math.max(1, lineWidth);
 	context.stroke();
 }
 

@@ -429,10 +429,18 @@ const pgzeroMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
 	"screen.draw": [
 		completion("text", "method", "draw text"),
 		completion("textbox", "method", "draw text inside a box"),
-		completion("line", "method", "draw a line"),
-		completion("circle", "method", "draw a circle outline"),
+		completion("line", "method", "draw a line with optional width"),
+		completion(
+			"circle",
+			"method",
+			"draw a circle outline with optional width"
+		),
 		completion("filled_circle", "method", "draw a filled circle"),
-		completion("rect", "method", "draw a rectangle outline"),
+		completion(
+			"rect",
+			"method",
+			"draw a rectangle outline with optional width"
+		),
 		completion("filled_rect", "method", "draw a filled rectangle")
 	]
 };

@@ -122,21 +122,24 @@ export interface GameBridge {
 		width: number,
 		height: number,
 		color: string,
-		filled: boolean
+		filled: boolean,
+		lineWidth?: number
 	) => void;
 	drawLine: (
 		x1: number,
 		y1: number,
 		x2: number,
 		y2: number,
-		color: string
+		color: string,
+		lineWidth?: number
 	) => void;
 	drawCircle: (
 		x: number,
 		y: number,
 		radius: number,
 		color: string,
-		filled: boolean
+		filled: boolean,
+		lineWidth?: number
 	) => void;
 	imageSizeJson: (name: string) => string;
 	isKeyDown: (key: string) => boolean;
@@ -2396,30 +2399,40 @@ class _ScreenDraw:
             float(_number(fontsize, 24)),
         )
 
-    def rect(self, rect, color):
-        x, y, width, height = _rect_parts(rect)
-        _bridge.drawRect(x, y, width, height, _normalize_color(color), False)
+    def rect(self, rect, color, width=1):
+        x, y, rect_width, rect_height = _rect_parts(rect)
+        _bridge.drawRect(
+            x,
+            y,
+            rect_width,
+            rect_height,
+            _normalize_color(color),
+            False,
+            float(_number(width, 1)),
+        )
 
     def filled_rect(self, rect, color):
         x, y, width, height = _rect_parts(rect)
         _bridge.drawRect(x, y, width, height, _normalize_color(color), True)
 
-    def line(self, start, end, color):
+    def line(self, start, end, color, width=1):
         _bridge.drawLine(
             float(_number(start[0])),
             float(_number(start[1])),
             float(_number(end[0])),
             float(_number(end[1])),
             _normalize_color(color),
+            float(_number(width, 1)),
         )
 
-    def circle(self, pos, radius, color):
+    def circle(self, pos, radius, color, width=1):
         _bridge.drawCircle(
             float(_number(pos[0])),
             float(_number(pos[1])),
             float(_number(radius)),
             _normalize_color(color),
             False,
+            float(_number(width, 1)),
         )
 
     def filled_circle(self, pos, radius, color):
