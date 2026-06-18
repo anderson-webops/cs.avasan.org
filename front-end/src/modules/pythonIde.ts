@@ -12,6 +12,9 @@ const TEXT_FILE_RE = /\.(?:csv|json|md|py|txt|svg)$/i;
 const IMAGE_EXTENSION_RE = /\.(?:gif|jpe?g|png|svg|webp)$/i;
 const SOUND_EXTENSION_RE = /\.wav$/i;
 const MUSIC_EXTENSION_RE = /\.(?:mp3|ogg)$/i;
+const PYTHON_IDE_INDEXED_DB_NAME = "classes-python-ide";
+const PYTHON_IDE_INDEXED_DB_VERSION = 1;
+const PYTHON_IDE_PROJECT_STORE = "projectStores";
 
 export type PythonIdeFileEncoding = "text" | "base64";
 
@@ -40,6 +43,12 @@ export interface PythonIdeProjectPayload {
 	activeFileName?: string;
 }
 
+interface PythonIdeProjectStorageRecord {
+	key: string;
+	projects: PythonIdeProject[];
+	updatedAt: string;
+}
+
 export interface PythonIdeLibrarySupport {
 	name: string;
 	status: "browser" | "shim" | "local";
@@ -65,6 +74,8 @@ export const pythonIdeAllowedFileExtensions = [
 ] as const;
 export const pythonIdeFileUploadAccept =
 	pythonIdeAllowedFileExtensions.join(",");
+
+let pythonIdeStorageDbPromise: Promise<IDBDatabase> | null = null;
 
 export const pythonIdeLibrarySupport: PythonIdeLibrarySupport[] = [
 	{
@@ -443,6 +454,18 @@ export function loadLocalPythonProjects(userID?: string | null) {
 	}
 }
 
+export async function loadLocalPythonProjectsAsync(userID?: string | null) {
+	const key = pythonIdeStorageKey(userID);
+	const storedProjects = await readIndexedDbPythonProjects(key);
+	if (storedProjects) return storedProjects;
+
+	const legacyProjects = loadLocalPythonProjects(userID);
+	if (legacyProjects.length) {
+		await saveLocalPythonProjectsAsync(legacyProjects, userID);
+	}
+	return legacyProjects;
+}
+
 export function saveLocalPythonProjects(
 	projects: PythonIdeProject[],
 	userID?: string | null
@@ -454,9 +477,157 @@ export function saveLocalPythonProjects(
 	);
 }
 
+export async function saveLocalPythonProjectsAsync(
+	projects: PythonIdeProject[],
+	userID?: string | null
+) {
+	const key = pythonIdeStorageKey(userID);
+
+	try {
+		await writeIndexedDbPythonProjects(key, projects);
+		clearLegacyLocalPythonProjects(key);
+	} catch (indexedDbError) {
+		try {
+			saveLocalPythonProjects(projects, userID);
+		} catch {
+			throw new Error(
+				`Could not save Python IDE projects locally. Browser project storage may be full or unavailable. (${formatStorageError(indexedDbError)})`
+			);
+		}
+	}
+}
+
 export function clearLocalPythonProjects(userID?: string | null) {
 	if (typeof window === "undefined") return;
 	window.localStorage.removeItem(pythonIdeStorageKey(userID));
+}
+
+export async function clearLocalPythonProjectsAsync(userID?: string | null) {
+	const key = pythonIdeStorageKey(userID);
+	await deleteIndexedDbPythonProjects(key).catch(() => undefined);
+	clearLegacyLocalPythonProjects(key);
+}
+
+async function readIndexedDbPythonProjects(key: string) {
+	try {
+		const db = await openPythonIdeStorageDb();
+		const transaction = db.transaction(
+			PYTHON_IDE_PROJECT_STORE,
+			"readonly"
+		);
+		const record = await indexedDbRequest<
+			PythonIdeProjectStorageRecord | undefined
+		>(transaction.objectStore(PYTHON_IDE_PROJECT_STORE).get(key));
+		await indexedDbTransactionDone(transaction);
+		return Array.isArray(record?.projects) ? record.projects : null;
+	} catch {
+		return null;
+	}
+}
+
+async function writeIndexedDbPythonProjects(
+	key: string,
+	projects: PythonIdeProject[]
+) {
+	const db = await openPythonIdeStorageDb();
+	const transaction = db.transaction(PYTHON_IDE_PROJECT_STORE, "readwrite");
+	await indexedDbRequest(
+		transaction.objectStore(PYTHON_IDE_PROJECT_STORE).put({
+			key,
+			projects,
+			updatedAt: new Date().toISOString()
+		} satisfies PythonIdeProjectStorageRecord)
+	);
+	await indexedDbTransactionDone(transaction);
+}
+
+async function deleteIndexedDbPythonProjects(key: string) {
+	const db = await openPythonIdeStorageDb();
+	const transaction = db.transaction(PYTHON_IDE_PROJECT_STORE, "readwrite");
+	await indexedDbRequest(
+		transaction.objectStore(PYTHON_IDE_PROJECT_STORE).delete(key)
+	);
+	await indexedDbTransactionDone(transaction);
+}
+
+function openPythonIdeStorageDb() {
+	if (typeof window === "undefined" || !window.indexedDB) {
+		return Promise.reject(new Error("IndexedDB is unavailable."));
+	}
+
+	pythonIdeStorageDbPromise ??= new Promise<IDBDatabase>(
+		(resolve, reject) => {
+			const request = window.indexedDB.open(
+				PYTHON_IDE_INDEXED_DB_NAME,
+				PYTHON_IDE_INDEXED_DB_VERSION
+			);
+
+			request.onupgradeneeded = () => {
+				const db = request.result;
+				if (!db.objectStoreNames.contains(PYTHON_IDE_PROJECT_STORE)) {
+					db.createObjectStore(PYTHON_IDE_PROJECT_STORE, {
+						keyPath: "key"
+					});
+				}
+			};
+			request.onsuccess = () => {
+				const db = request.result;
+				db.onversionchange = () => {
+					db.close();
+					pythonIdeStorageDbPromise = null;
+				};
+				resolve(db);
+			};
+			request.onerror = () =>
+				reject(request.error ?? new Error("Could not open IndexedDB."));
+			request.onblocked = () =>
+				reject(
+					new Error(
+						"Python IDE project storage is blocked by another tab."
+					)
+				);
+		}
+	).catch(error => {
+		pythonIdeStorageDbPromise = null;
+		throw error;
+	});
+
+	return pythonIdeStorageDbPromise;
+}
+
+function indexedDbRequest<T>(request: IDBRequest<T>) {
+	return new Promise<T>((resolve, reject) => {
+		request.onsuccess = () => resolve(request.result);
+		request.onerror = () =>
+			reject(request.error ?? new Error("IndexedDB request failed."));
+	});
+}
+
+function indexedDbTransactionDone(transaction: IDBTransaction) {
+	return new Promise<void>((resolve, reject) => {
+		transaction.oncomplete = () => resolve();
+		transaction.onerror = () =>
+			reject(
+				transaction.error ?? new Error("IndexedDB transaction failed.")
+			);
+		transaction.onabort = () =>
+			reject(
+				transaction.error ?? new Error("IndexedDB transaction aborted.")
+			);
+	});
+}
+
+function clearLegacyLocalPythonProjects(key: string) {
+	if (typeof window === "undefined") return;
+	try {
+		window.localStorage.removeItem(key);
+	} catch {
+		// Cleanup is best-effort because IndexedDB is the primary store.
+	}
+}
+
+function formatStorageError(error: unknown) {
+	return error instanceof Error ? error.message : "storage unavailable";
 }
 
 export async function fetchPythonIdeProjects() {

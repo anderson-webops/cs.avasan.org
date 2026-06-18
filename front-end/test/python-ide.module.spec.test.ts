@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import { strToU8, zipSync } from "fflate";
 import {
 	clearLocalPythonProjects,
+	clearLocalPythonProjectsAsync,
 	createPythonIdeProject,
 	dataScienceSampleCsv,
 	dataScienceStarterCode,
@@ -19,12 +20,14 @@ import {
 	normalizePythonIdeMode,
 	isValidPythonFileName,
 	loadLocalPythonProjects,
+	loadLocalPythonProjectsAsync,
 	normalizePythonFileName,
 	pythonIdeModeForCourseId,
 	pythonIdeProjectToPayload,
 	pythonIdeStorageKey,
 	pythonIdeLibrarySupport,
 	saveLocalPythonProjects,
+	saveLocalPythonProjectsAsync,
 	pgzeroStudentSvg,
 	pgzeroStarterCode,
 	turtleStarterCode
@@ -82,6 +85,10 @@ describe("python IDE project helpers", () => {
 					storage.set(key, value)
 				)
 			}
+		});
+		Object.defineProperty(window, "indexedDB", {
+			configurable: true,
+			value: undefined
 		});
 	});
 
@@ -157,6 +164,36 @@ describe("python IDE project helpers", () => {
 		expect(
 			window.localStorage.getItem(pythonIdeStorageKey("student-b"))
 		).toContain(secondProject.title);
+	});
+
+	it("uses localStorage fallback when IndexedDB is unavailable", async () => {
+		const project = createPythonIdeProject("pgzero");
+
+		await saveLocalPythonProjectsAsync([project], "student-a");
+
+		expect(loadLocalPythonProjects("student-a")).toHaveLength(1);
+		await expect(
+			loadLocalPythonProjectsAsync("student-a")
+		).resolves.toHaveLength(1);
+
+		await clearLocalPythonProjectsAsync("student-a");
+
+		expect(loadLocalPythonProjects("student-a")).toEqual([]);
+	});
+
+	it("keeps IndexedDB wired as the primary local project store", () => {
+		const moduleSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIde.ts"),
+			"utf8"
+		);
+
+		expect(moduleSource).toContain("window.indexedDB.open");
+		expect(moduleSource).toContain(
+			"const PYTHON_IDE_PROJECT_STORE = \"projectStores\";"
+		);
+		expect(moduleSource).toContain(
+			"export async function saveLocalPythonProjectsAsync"
+		);
 	});
 
 	it("labels supported runtime modes", () => {
@@ -376,7 +413,7 @@ describe("python IDE project helpers", () => {
 		);
 
 		expect(pageSource).toContain(
-			"clearLocalPythonProjects(storageUserID.value);"
+			"await clearLocalPythonProjectsAsync(storageUserID.value);"
 		);
 		expect(pageSource).toContain("Saved locally after sync issue");
 		expect(pageSource).toContain("const isRemoteProject =");

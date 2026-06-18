@@ -23,7 +23,7 @@ import {
 import { useRoute } from "vue-router";
 import { createPythonCodeMirrorExtensions } from "@/modules/pythonCodeMirror";
 import {
-	clearLocalPythonProjects,
+	clearLocalPythonProjectsAsync,
 	createPythonIdeProject,
 	createRemotePythonIdeProject,
 	deleteRemotePythonIdeProject,
@@ -37,7 +37,7 @@ import {
 	isPythonIdePythonFile,
 	isPythonIdeTextFile,
 	isValidPythonFileName,
-	loadLocalPythonProjects,
+	loadLocalPythonProjectsAsync,
 	normalizeImportedPythonIdeFileName,
 	normalizePythonFileName,
 	normalizePythonIdeMode,
@@ -45,7 +45,7 @@ import {
 	pythonIdeFileUploadAccept,
 	pythonIdeModeForCourseId,
 	pythonIdeProjectToPayload,
-	saveLocalPythonProjects,
+	saveLocalPythonProjectsAsync,
 	updateRemotePythonIdeProject
 } from "@/modules/pythonIde";
 import {
@@ -442,11 +442,19 @@ function setProjects(nextProjects: PythonIdeProject[]) {
 	selectedProjectID.value = nextProjects[0]?._id ?? "";
 }
 
-function persistLocalProjects() {
-	saveLocalPythonProjects(projects.value, storageUserID.value);
-	saveMessage.value = canSyncToAccount.value
-		? "Saved locally after sync issue"
-		: "Saved locally";
+async function persistLocalProjects() {
+	try {
+		await saveLocalPythonProjectsAsync(projects.value, storageUserID.value);
+		saveMessage.value = canSyncToAccount.value
+			? "Saved locally after sync issue"
+			: "Saved locally";
+	} catch (error) {
+		saveMessage.value =
+			error instanceof Error
+				? error.message
+				: "Could not save local project copy.";
+		appendOutput("stderr", saveMessage.value);
+	}
 }
 
 async function loadProjects() {
@@ -461,7 +469,9 @@ async function loadProjects() {
 				return;
 			}
 
-			const localProjects = loadLocalPythonProjects(storageUserID.value);
+			const localProjects = await loadLocalPythonProjectsAsync(
+				storageUserID.value
+			);
 			if (localProjects.length) {
 				const migratedProjects = await Promise.all(
 					localProjects.map(project =>
@@ -471,7 +481,7 @@ async function loadProjects() {
 					)
 				);
 				setProjects(migratedProjects);
-				clearLocalPythonProjects(storageUserID.value);
+				await clearLocalPythonProjectsAsync(storageUserID.value);
 				saveMessage.value = "Synced local projects to account";
 				return;
 			}
@@ -482,20 +492,24 @@ async function loadProjects() {
 				)
 			);
 			setProjects([starter]);
-			clearLocalPythonProjects(storageUserID.value);
+			await clearLocalPythonProjectsAsync(storageUserID.value);
 			saveMessage.value = "Synced to account";
 			return;
 		}
 
-		const localProjects = loadLocalPythonProjects(storageUserID.value);
+		const localProjects = await loadLocalPythonProjectsAsync(
+			storageUserID.value
+		);
 		setProjects(
 			localProjects.length
 				? localProjects
 				: [createPythonIdeProject(requestedStarterMode.value)]
 		);
-		persistLocalProjects();
+		await persistLocalProjects();
 	} catch (error) {
-		const localProjects = loadLocalPythonProjects(storageUserID.value);
+		const localProjects = await loadLocalPythonProjectsAsync(
+			storageUserID.value
+		);
 		setProjects(
 			localProjects.length
 				? localProjects
@@ -518,7 +532,7 @@ async function saveSelectedProject() {
 	isSaving.value = true;
 	try {
 		if (!canSyncToAccount.value || project._id.startsWith("local-")) {
-			persistLocalProjects();
+			await persistLocalProjects();
 			return;
 		}
 
@@ -532,10 +546,10 @@ async function saveSelectedProject() {
 			candidate => candidate._id === project._id
 		);
 		if (index >= 0) projects.value.splice(index, 1, savedProject);
-		clearLocalPythonProjects(storageUserID.value);
+		await clearLocalPythonProjectsAsync(storageUserID.value);
 		saveMessage.value = "Synced to account";
 	} catch (error) {
-		persistLocalProjects();
+		await persistLocalProjects();
 		appendOutput(
 			"system",
 			error instanceof Error
@@ -565,17 +579,17 @@ async function createProject(mode: PythonIdeMode) {
 			);
 			projects.value.unshift(remoteProject);
 			selectedProjectID.value = remoteProject._id;
-			clearLocalPythonProjects(storageUserID.value);
+			await clearLocalPythonProjectsAsync(storageUserID.value);
 			saveMessage.value = "Synced to account";
 		} else {
 			projects.value.unshift(starter);
 			selectedProjectID.value = starter._id;
-			persistLocalProjects();
+			await persistLocalProjects();
 		}
 	} catch (error) {
 		projects.value.unshift(starter);
 		selectedProjectID.value = starter._id;
-		persistLocalProjects();
+		await persistLocalProjects();
 		appendOutput(
 			"system",
 			error instanceof Error ? error.message : "Project created locally."
@@ -634,10 +648,10 @@ async function deleteProject(project: PythonIdeProject) {
 		);
 		selectedProjectID.value = projects.value[0]?._id ?? "";
 		if (isRemoteProject) {
-			clearLocalPythonProjects(storageUserID.value);
+			await clearLocalPythonProjectsAsync(storageUserID.value);
 			saveMessage.value = "Synced to account";
 		} else {
-			persistLocalProjects();
+			await persistLocalProjects();
 		}
 	} catch (error) {
 		appendOutput(
