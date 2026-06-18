@@ -26,6 +26,7 @@ const openingBracketToClosingBracket: Record<string, string> = {
 const intelligentClosingTokens = [")", "]", "}", "'", '"', "`"];
 const pythonIndentText = "    ";
 const lineLeadingWhitespaceRegex = /^[\t ]*/;
+const bracketPairContextPadding = 2_000;
 const closingBrackets = new Set(Object.values(openingBracketToClosingBracket));
 const bracketPairDecorations = [
 	bracketDecorationForIndex(0),
@@ -38,6 +39,17 @@ const bracketPairDecorations = [
 const unmatchedBracketDecoration = Decoration.mark({
 	class: "cm-bracket-pair cm-bracket-unmatched"
 });
+interface BracketStackEntry {
+	expectedClose: string;
+	pairId: number;
+	position: number;
+}
+
+interface BracketDecorationEntry {
+	decoration: Decoration;
+	from: number;
+	to: number;
+}
 
 function bracketDecorationForIndex(index: number) {
 	return Decoration.mark({
@@ -310,21 +322,49 @@ function insertPythonNewlineAndIndent(view: EditorView) {
 }
 
 function buildBracketPairDecorations(view: EditorView) {
-	const text = view.state.doc.toString();
-	const stack: Array<{
-		expectedClose: string;
-		pairId: number;
-		position: number;
-	}> = [];
-	const decorations: Array<{
-		decoration: Decoration;
-		from: number;
-		to: number;
-	}> = [];
+	const decorations: BracketDecorationEntry[] = [];
+	const docLength = view.state.doc.length;
+
+	for (const range of view.visibleRanges) {
+		const contextFrom = Math.max(0, range.from - bracketPairContextPadding);
+		const contextTo = Math.min(
+			docLength,
+			range.to + bracketPairContextPadding
+		);
+
+		appendBracketPairDecorationsForRange(
+			view,
+			decorations,
+			contextFrom,
+			contextTo,
+			range.from,
+			range.to
+		);
+	}
+
+	decorations.sort((first, second) => first.from - second.from);
+	const builder = new RangeSetBuilder<Decoration>();
+	for (const { decoration, from, to } of decorations) {
+		builder.add(from, to, decoration);
+	}
+	return builder.finish();
+}
+
+function appendBracketPairDecorationsForRange(
+	view: EditorView,
+	decorations: BracketDecorationEntry[],
+	contextFrom: number,
+	contextTo: number,
+	visibleFrom: number,
+	visibleTo: number
+) {
+	const text = view.state.doc.sliceString(contextFrom, contextTo);
+	const stack: BracketStackEntry[] = [];
 	let nextPairId = 1;
 
-	for (let index = 0; index < text.length; index += 1) {
-		const character = text[index] ?? "";
+	for (let offset = 0; offset < text.length; offset += 1) {
+		const character = text[offset] ?? "";
+		const index = contextFrom + offset;
 		const expectedClose = openingBracketToClosingBracket[character];
 		if (expectedClose) {
 			stack.push({
@@ -340,11 +380,13 @@ function buildBracketPairDecorations(view: EditorView) {
 
 		const candidate = stack.at(-1);
 		if (!candidate || candidate.expectedClose !== character) {
-			decorations.push({
-				decoration: unmatchedBracketDecoration,
-				from: index,
-				to: index + 1
-			});
+			if (isVisibleBracketPosition(index, visibleFrom, visibleTo)) {
+				decorations.push({
+					decoration: unmatchedBracketDecoration,
+					from: index,
+					to: index + 1
+				});
+			}
 			continue;
 		}
 
@@ -355,34 +397,50 @@ function buildBracketPairDecorations(view: EditorView) {
 			] ??
 			bracketPairDecorations[0] ??
 			unmatchedBracketDecoration;
-		decorations.push(
-			{
+		if (
+			isVisibleBracketPosition(candidate.position, visibleFrom, visibleTo)
+		) {
+			decorations.push({
 				decoration,
 				from: candidate.position,
 				to: candidate.position + 1
-			},
-			{
+			});
+		}
+		if (isVisibleBracketPosition(index, visibleFrom, visibleTo)) {
+			decorations.push({
 				decoration,
 				from: index,
 				to: index + 1
-			}
-		);
+			});
+		}
 	}
 
+	if (contextTo < view.state.doc.length) return;
+
 	for (const unmatched of stack) {
+		if (
+			!isVisibleBracketPosition(
+				unmatched.position,
+				visibleFrom,
+				visibleTo
+			)
+		) {
+			continue;
+		}
 		decorations.push({
 			decoration: unmatchedBracketDecoration,
 			from: unmatched.position,
 			to: unmatched.position + 1
 		});
 	}
+}
 
-	decorations.sort((first, second) => first.from - second.from);
-	const builder = new RangeSetBuilder<Decoration>();
-	for (const { decoration, from, to } of decorations) {
-		builder.add(from, to, decoration);
-	}
-	return builder.finish();
+function isVisibleBracketPosition(
+	position: number,
+	visibleFrom: number,
+	visibleTo: number
+) {
+	return position >= visibleFrom && position < visibleTo;
 }
 
 function wrapSelection(view: EditorView, open: string, close: string) {

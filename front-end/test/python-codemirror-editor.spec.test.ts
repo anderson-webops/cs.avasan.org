@@ -40,6 +40,14 @@ describe("python IDE CodeMirror editor", () => {
 		expect(editorSource).toContain("cm-bracket-pair-1");
 	});
 
+	it("bounds custom bracket-pair colorization to the visible editor range", () => {
+		const editorSource = sourceFile("../src/modules/pythonCodeMirror.ts");
+
+		expect(editorSource).toContain("view.visibleRanges");
+		expect(editorSource).toContain("bracketPairContextPadding");
+		expect(editorSource).toContain("sliceString(contextFrom, contextTo)");
+	});
+
 	it("skips existing auto-inserted closing tokens instead of duplicating them", () => {
 		expect(
 			canSkipExistingClosingToken(
