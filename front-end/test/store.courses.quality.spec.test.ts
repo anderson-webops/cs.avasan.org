@@ -1565,6 +1565,23 @@ describe("course text quality normalization", () => {
 			).toBe(true);
 		}
 
+		for (const expectedItemTitle of [
+			"CSV Summary Builder",
+			"Min-Max and Outlier Extension",
+			"Median and Mode Practice",
+			"Cleaning Report Builder",
+			"Chart Integrity Build",
+			"Filtered Summary Export",
+			"Capstone Readiness Brief"
+		]) {
+			expect(
+				allCourseItemTitles(course!).some(({ title }) =>
+					title.includes(expectedItemTitle)
+				),
+				expectedItemTitle
+			).toBe(true);
+		}
+
 		for (const phrase of [
 			"empty-dataset behavior",
 			"Cleaning is an analytical decision",

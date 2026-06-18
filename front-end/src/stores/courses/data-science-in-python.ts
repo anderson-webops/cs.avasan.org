@@ -8,10 +8,14 @@ interface AppliedDataScienceLab {
 	focus: string;
 	coreConcepts: string;
 	example: string;
+	coreProjectTitle: string;
 	project: string;
 	review: string;
+	extensionTitle: string;
 	extension: string;
+	supplemental2Title: string;
 	supplemental2: string;
+	supplemental3Title: string;
 	supplemental3: string;
 }
 
@@ -24,13 +28,17 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 			"Use this studio to make the smallest useful data pipeline explicit: load rows, convert text values into numbers, compute count, total, and mean, then verify that each number has the expected meaning. A summary is not just a calculator result; it is a claim about the rows that were actually read. Check the file path, column name, type conversion, row count, and empty-input behavior before interpreting the average.",
 		example:
 			"Trace a three-row CSV by hand before running the code. Write the expected list of values, expected total, expected count, and expected average, then compare that hand trace to the program output. Add one custom CSV with no rows or one row so the difference between normal data and boundary data is visible.",
+		coreProjectTitle: "CSV Summary Builder",
 		project:
 			"Complete the CSV summary program so it returns accurate count, total, and average values for the provided data. Include safe empty-list behavior and one short verification note explaining how the expected output was checked.",
 		review: "Review the result by naming the exact file, column, values used, output dictionary, and boundary case. A strong review explains why the average is valid for the loaded rows and what would need to change if the CSV column name or units changed.",
+		extensionTitle: "Min-Max and Outlier Extension",
 		extension:
 			"Extend the summary with minimum, maximum, and range. Then add one intentionally surprising value and explain whether it is a valid outlier, a data-entry error, or a value that requires more context before removal.",
+		supplemental2Title: "Median and Mode Practice",
 		supplemental2:
 			"Create a second summary function for median and mode using the same loaded values. Compare mean and median on a balanced dataset and on a dataset with one extreme value.",
+		supplemental3Title: "Readable Summary Report",
 		supplemental3:
 			"Create a small command-line report that prints the summary in readable sentences instead of a raw dictionary. Include the file name, row count, and one caution about interpreting the result."
 	},
@@ -42,13 +50,17 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 			"Cleaning is an analytical decision, not a cosmetic step. Each missing or invalid value needs a classification before it is removed, replaced, or preserved. Track how many rows are affected and why the chosen cleaning rule is reasonable for the question being asked.",
 		example:
 			"Start with a small table containing one blank value, one nonnumeric value, one negative value, and several valid values. Predict which rows are accepted, rejected, or flagged, then run the cleaning code and compare the counts.",
+		coreProjectTitle: "Cleaning Report Builder",
 		project:
 			"Adapt the CSV starter into a cleaner that returns valid numeric values plus a short cleaning report. Include rows loaded, rows accepted, rows rejected, and at least one reason for rejection.",
 		review: "Review the cleaning rule by explaining what it protects against and what it might accidentally remove. The conclusion names whether the cleaned dataset is still large and representative enough for the original question.",
+		extensionTitle: "Safe Repair Rule Extension",
 		extension:
 			"Add a repair rule for one safe case, such as trimming whitespace or converting commas in numbers, while still rejecting values that cannot be justified.",
+		supplemental2Title: "Data-Quality Checklist",
 		supplemental2:
 			"Build a data-quality checklist for a CSV before analysis begins. Include schema, units, missing values, duplicates, impossible values, and date or category consistency.",
+		supplemental3Title: "Before-and-After Cleaning Summary",
 		supplemental3:
 			"Write a before-and-after cleaning summary that compares the original and cleaned datasets and identifies one conclusion that would change if invalid rows were kept."
 	},
@@ -60,13 +72,17 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 			"Grouped summaries answer different questions than whole-dataset summaries. Before comparing groups, verify the category column, group sizes, and whether each group has enough data to support a claim. A large difference in averages is less persuasive when one group contains only one row.",
 		example:
 			"Use a table with categories such as region, class period, product type, or team. Compute one overall average and then per-category averages. Compare the two outputs and identify what the overall average hides.",
+		coreProjectTitle: "Grouped Summary Builder",
 		project:
 			"Extend the starter so values can be grouped by a category column and summarized per group. Each group reports count, total, and average, with sorted or formatted output so comparisons are easy to read.",
 		review: "Review the grouping by naming the strongest comparison and the weakest comparison. The strongest comparison has enough rows and a clear category meaning; the weakest may be distorted by small sample size or inconsistent labels.",
+		extensionTitle: "Label Normalization Extension",
 		extension:
 			"Add a normalization step that merges inconsistent labels such as `north`, `North`, and `NORTH`, then explain how label cleanup changes the grouped result.",
+		supplemental2Title: "Grouped Notebook Table",
 		supplemental2:
 			"Create a grouped-summary notebook cell that displays the same result as both a table and a short written interpretation.",
+		supplemental3Title: "Second-Metric Comparison",
 		supplemental3:
 			"Add a second metric, such as median or maximum, and explain when that metric tells a better story than average."
 	},
@@ -78,13 +94,17 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 			"A chart is an argument about the comparison being made. Choose bar charts for category comparison, line charts for ordered time-like trends, scatterplots for relationships between two numeric variables, and tables when exact values matter more than visual pattern. Every chart needs labels, units, and a sentence explaining the intended comparison.",
 		example:
 			"Create two possible charts for the same small dataset and decide which one better answers the question. Then intentionally remove an axis label or change the scale to see how quickly a technically correct chart can become misleading.",
+		coreProjectTitle: "Chart Integrity Build",
 		project:
 			"Turn the summary output into one clear visualization with a title, labeled axes, and a short interpretation. The project is complete when the chart answers a named question and the explanation states one limitation of the visual.",
 		review: "Review the visualization by checking whether the chart type matches the data types, whether labels and units are present, and whether the conclusion overstates what the chart proves.",
+		extensionTitle: "Second-Question Chart Extension",
 		extension:
 			"Create a second chart that answers a different question from the same data, then compare which chart is better for exploration and which is better for presentation.",
+		supplemental2Title: "Weak Chart Redesign",
 		supplemental2:
 			"Redesign a weak chart by improving labels, scale, color, ordering, or annotation while keeping the underlying data unchanged.",
+		supplemental3Title: "Chart Critique",
 		supplemental3:
 			"Write a chart critique that identifies the intended audience, the visual claim, the evidence, and one way the chart could mislead a reader."
 	},
@@ -96,13 +116,17 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 			"A data report lets another reader rerun the analysis and understand the reasoning without asking what happened off screen. Keep imports visible, load data from a documented path, state the question, show the cleaned or summarized output, include one chart or table, and end with a conclusion plus limitation.",
 		example:
 			"Take a short analysis that only prints a dictionary and convert it into a mini report: question, data source, method, result table, interpretation, limitation, and next question. Restart and rerun to confirm there is no hidden state.",
+		coreProjectTitle: "Reproducible Mini Report",
 		project:
 			"Create a mini report around the CSV starter. Include a question, a reproducible run path, the computed summary, one visual or formatted table, and a conclusion that does not exceed the evidence.",
 		review: "Review the report by checking whether a reader can identify the data source, rerun the code, find the main result, and understand one important caveat.",
+		extensionTitle: "Reproducibility Appendix",
 		extension:
 			"Add a small appendix that records package versions, file names, or command-line run instructions so the analysis can be repeated later.",
+		supplemental2Title: "Script and Markdown Conversion",
 		supplemental2:
 			"Convert a notebook-style analysis into a script plus a short markdown report, preserving the same result while improving organization.",
+		supplemental3Title: "Mini Report Peer Review",
 		supplemental3:
 			"Create a peer-review checklist for mini reports and apply it to one previous project."
 	},
@@ -114,13 +138,17 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 			"A dashboard is useful when it helps a reader ask a focused follow-up question without editing the code. Keep the first version small: one dataset, one filter, one summary table or chart, and one explanation of what changes when the filter changes.",
 		example:
 			"Start with a printed summary, then add a simple filter such as category, date range, or minimum value. Compare the all-data result to the filtered result and explain what changed.",
+		coreProjectTitle: "Filtered Dashboard Build",
 		project:
 			"Build a lightweight dashboard or console menu around the CSV analysis. The interface lets the user choose at least one filter and updates the summary output in a way that can be checked by hand on a small dataset.",
 		review: "Review the dashboard by naming the user question it supports, the filter behavior, the default state, and one case where the interface warns that too little data remains.",
+		extensionTitle: "Second Filter or Summary Card",
 		extension:
 			"Add a second filter or a summary card that updates with the selected data. Keep the explanation close to the output so the interface does not become a pile of disconnected widgets.",
+		supplemental2Title: "Dashboard Test Plan",
 		supplemental2:
 			"Create a dashboard test plan with three scenarios: default data, a normal filter, and a filter that leaves no matching rows.",
+		supplemental3Title: "Filtered Summary Export",
 		supplemental3:
 			"Add export behavior that writes the filtered summary to a small text or CSV report and verify the exported result."
 	},
@@ -132,13 +160,17 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 			"A capstone data story begins with a question that can be answered with available evidence. Before building the final artifact, confirm the dataset source, column meanings, cleaning needs, expected analysis steps, chart candidates, and likely limitations. A narrow, well-supported question is stronger than a broad claim with weak evidence.",
 		example:
 			"Compare two possible capstone questions for the same dataset. Identify which one has clearer columns, a better analysis path, fewer hidden assumptions, and a more realistic final output.",
+		coreProjectTitle: "Capstone Readiness Brief",
 		project:
 			"Create a capstone readiness brief that defines the question, dataset, columns, cleaning plan, summary or visualization plan, evidence of correctness, and final presentation format. The brief is detailed enough to start the capstone without redesigning the whole project.",
 		review: "Review the brief by checking whether the proposed claim can actually be supported by the dataset. If the question is too broad, revise it into a narrower comparison, trend, or relationship.",
+		extensionTitle: "Tiny Capstone Prototype",
 		extension:
 			"Build a tiny prototype using five to ten rows or a filtered slice of the dataset to prove the full capstone path is feasible.",
+		supplemental2Title: "Capstone Risk Register",
 		supplemental2:
 			"Create a risk register for the capstone with likely data problems, interpretation risks, and fallback plans.",
+		supplemental3Title: "First Slide or README Section",
 		supplemental3:
 			"Create the first slide or README section for the capstone, including the question, why it matters, and what evidence will be shown."
 	}
@@ -212,7 +244,7 @@ function applyDataScienceAppliedLabs(course: RawCourse) {
 				)
 			},
 			{
-				title: "Core Project",
+				title: lab.coreProjectTitle,
 				content: dataScienceStudioContent(
 					lab,
 					"Core Project",
@@ -232,7 +264,7 @@ function applyDataScienceAppliedLabs(course: RawCourse) {
 		];
 		module.supplementalProjects = [
 			{
-				title: "Extension Challenge",
+				title: lab.extensionTitle,
 				content: dataScienceStudioContent(
 					lab,
 					"Extension Challenge",
@@ -242,7 +274,7 @@ function applyDataScienceAppliedLabs(course: RawCourse) {
 				solutionLink: dataScienceAppliedStudioUrl(lab, "solution")
 			},
 			{
-				title: "Supplemental Project 2",
+				title: lab.supplemental2Title,
 				content: dataScienceStudioContent(
 					lab,
 					"Supplemental Project 2",
@@ -256,7 +288,7 @@ function applyDataScienceAppliedLabs(course: RawCourse) {
 				)
 			},
 			{
-				title: "Supplemental Project 3",
+				title: lab.supplemental3Title,
 				content: dataScienceStudioContent(
 					lab,
 					"Supplemental Project 3",
