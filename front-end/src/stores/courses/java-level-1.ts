@@ -17,7 +17,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "Optional Python-to-Java Bridge",
 					content:
-						"Students arriving from the Python sequence should use the `Python to Java and C++ Bridge` course or its equivalent addendum before or alongside the first Java module. The point is to translate typed variables, method signatures, `Scanner`, and compiler feedback into familiar concepts rather than treating Java as a fresh start."
+						"The `Python to Java and C++ Bridge` course or its equivalent addendum fits before or alongside the first Java module when the Python sequence is already familiar. The point is to translate typed variables, method signatures, `Scanner`, and compiler feedback into familiar concepts rather than treating Java as a fresh start."
 				},
 				{
 					title: "Primitive Types",

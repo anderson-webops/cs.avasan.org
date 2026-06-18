@@ -1153,7 +1153,7 @@ function addElementaryScienceDecision(courseId: string, course: RawCourse) {
 			{
 				title: "Differentiation Project: Sentence Frame Bank",
 				content:
-					"**Project goal:** Create sentence frames for observation, inference, claim, evidence, reasoning, and changed-condition prediction. The bank should support both oral and written responses, so younger learners can explain a visible pattern while older learners can connect evidence to a claim.\n\n**Completion checks:**\n- Frames are age-appropriate.\n- Each frame can be used with a shared image or simulation.\n- At least one frame supports short written responses when writing is difficult."
+					"**Project goal:** Create sentence frames for observation, inference, claim, evidence, reasoning, and changed-condition prediction. The bank supports both oral and written responses: K-2 frames help explain a visible pattern, while 3-5 frames connect evidence to a claim.\n\n**Completion checks:**\n- Frames are age-appropriate.\n- Each frame can be used with a shared image or simulation.\n- At least one frame supports short written responses when writing is difficult."
 			}
 		]
 	});

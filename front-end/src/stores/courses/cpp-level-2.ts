@@ -9,12 +9,12 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "Level 2 Positioning and Ownership Vocabulary",
 					content:
-						"This course is the low-level follow-on after learners can already write menu-driven programs with functions, classes, vectors, structs, references, and simple state. Include why Level 2 deepens the memory model instead of introducing pointer syntax as disconnected trivia; what it means for a function or class to own data; how observation, mutation, borrowing, and ownership differ; and the vocabulary needed before raw arrays, heap allocation, and custom containers."
+						"This course is the low-level follow-on after prior work has already covered menu-driven programs with functions, classes, vectors, structs, references, and simple state. Level 2 deepens the memory model instead of presenting pointer syntax as disconnected trivia. The central vocabulary includes what it means for a function or class to own data, how observation, mutation, borrowing, and ownership differ, and what needs to be clear before raw arrays, heap allocation, and custom containers."
 				},
 				{
 					title: "References, Lifetimes, and Evidence-Based Debugging",
 					content:
-						"Review pass-by-value, pass-by-reference, and `const` reference before raw pointers. Cover: stack objects, heap objects, aliases, dangling references, leaks, and objects that clean themselves up when they leave scope; when a function may mutate caller-owned data; when it only observes data; and how to use address prints, trace output, and debugger inspection as evidence for where values live and why an alias changes what it changes."
+						"Pass-by-value, pass-by-reference, and `const` reference come before raw pointers because they expose ownership and aliasing without adding address syntax too early. Key topics include stack objects, heap objects, aliases, dangling references, leaks, objects that clean themselves up when they leave scope, when a function may mutate caller-owned data, when it only observes data, and how address prints, trace output, and debugger inspection provide evidence for where values live and why an alias changes what it changes."
 				},
 				{
 					title: "CPPM0 Project 1: Lifetime Tracing Warm-Up",
@@ -256,7 +256,7 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "Modern Ownership and Next-Step Positioning",
 					content:
-						"After the manual-memory capstones, show the modern correction: resources should normally be tied to object lifetime, and single-owner heap data should usually move toward `std::unique_ptr` or a standard container. Cover: what cleanup responsibility disappears with RAII, what design responsibility remains, and where the work should go next: `C++ Level 3` for medium-size idiomatic C++, `Data Structures and Algorithms in C++` for implementation depth, or `C Systems Engineering` for lower-level representation."
+						"After the manual-memory capstones, the modern correction is RAII: resources normally tie to object lifetime, and single-owner heap data usually moves toward `std::unique_ptr` or a standard container. The next-step comparison separates cleanup responsibility, design responsibility, and course placement: `C++ Level 3` for medium-size idiomatic C++, `Data Structures and Algorithms in C++` for implementation depth, or `C Systems Engineering` for lower-level representation."
 				}
 			],
 			supplementalProjects: [

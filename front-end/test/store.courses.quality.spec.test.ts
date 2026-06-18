@@ -418,6 +418,9 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(/fresh the starting point is/i);
 			expect(corpus).not.toMatch(/The sequence begins with/i);
 			expect(corpus).not.toMatch(/\band and\b/i);
+			expect(corpus).not.toMatch(/\bafter already write\b/i);
+			expect(corpus).not.toMatch(/\byounger explain\b/i);
+			expect(corpus).not.toMatch(/\bshow the modern correction\b/i);
 			expect(corpus).not.toMatch(/\bRecovered\b/);
 			expect(corpus).not.toMatch(
 				/recovered (?:course|lesson|applications|results|examples)/i
@@ -505,6 +508,9 @@ describe("course text quality normalization", () => {
 
 	it("guards against raw generated grammar artifacts in course sources", () => {
 		const sourcePaths = [
+			"src/stores/courses/cpp-level-2.ts",
+			"src/stores/courses/java-level-1.ts",
+			"src/stores/courses/course-implementation-artifacts.ts",
 			"src/stores/courses/java-level-3.ts",
 			"src/stores/courses/machine-learning.ts",
 			"src/stores/courses/public-pathways.ts",
@@ -525,6 +531,9 @@ describe("course text quality normalization", () => {
 		expect(corpus).not.toMatch(/Visible pattern: This as/);
 		expect(corpus).not.toMatch(/Teach patterns through small before/);
 		expect(corpus).not.toMatch(/Teach accuracy, precision, recall/);
+		expect(corpus).not.toMatch(/Students arriving from the Python sequence/);
+		expect(corpus).not.toMatch(/show the modern correction/);
+		expect(corpus).not.toMatch(/younger learners can explain/);
 	});
 
 	it("keeps C++ and design-pattern course source copy course-facing", () => {
