@@ -1416,10 +1416,7 @@ function stopAllGameAudio() {
 async function ensureGameCourseAssetsLoaded() {
 	if (gameCourseAssetPack || gameCourseAssetPackLoadFailed) return;
 
-	appendOutput(
-		"system",
-		"Loading shared PyGame Zero assets from static.classes."
-	);
+	appendOutput("system", "Loading shared PyGame Zero assets.");
 
 	try {
 		gameCourseAssetPack = await loadPythonIdeCourseAssetPack();

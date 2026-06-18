@@ -9,5 +9,6 @@ node_modules
 *.log
 cypress/downloads
 /.cache/
+/public/python-ide/assets/
 /public/python-ide/assets.zip
 #public/assets/fonts

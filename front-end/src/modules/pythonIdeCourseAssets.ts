@@ -1,12 +1,10 @@
 import { strFromU8, unzipSync } from "fflate";
 import { getPythonIdeFileMimeType } from "@/modules/pythonIde";
 
-export const pythonIdeBundledCourseAssetsZipUrl = "/python-ide/assets.zip";
+export const pythonIdeCourseAssetsManifestUrl =
+	"/python-ide/assets/manifest.json";
 export const pythonIdeCourseAssetsZipUrl = "/api/python-assets/assets.zip";
-export const pythonIdeCourseAssetSourceUrls = [
-	pythonIdeBundledCourseAssetsZipUrl,
-	pythonIdeCourseAssetsZipUrl
-];
+export const pythonIdeCourseAssetZipSourceUrls = [pythonIdeCourseAssetsZipUrl];
 
 const ASSET_PATH_RE = /^(?:images|music|sounds)\/[^/].+\.[\dA-Z]+$/i;
 const IGNORED_ZIP_PATH_RE =
@@ -20,21 +18,25 @@ const SVG_VIEWBOX_RE =
 
 interface AssetFetcherResponse {
 	arrayBuffer: () => Promise<ArrayBuffer>;
+	json?: () => Promise<unknown>;
 	ok: boolean;
 	status: number;
 }
 
 export interface LoadPythonIdeCourseAssetPackOptions {
 	fetcher?: (url: string) => Promise<AssetFetcherResponse>;
+	manifestUrl?: string;
+	manifestUrls?: string[];
 	url?: string;
 	urls?: string[];
 }
 
 export interface PythonIdeCourseAsset {
-	bytes: Uint8Array;
+	bytes?: Uint8Array;
 	height?: number;
 	mimeType: string;
 	name: string;
+	url?: string;
 	width?: number;
 }
 
@@ -55,14 +57,30 @@ export async function loadPythonIdeCourseAssetPack(
 ) {
 	if (courseAssetPackPromise) return courseAssetPackPromise;
 
-	const sourceUrls = options.url
+	const manifestUrls = options.manifestUrl
+		? [options.manifestUrl]
+		: (options.manifestUrls ?? [pythonIdeCourseAssetsManifestUrl]);
+	const zipSourceUrls = options.url
 		? [options.url]
-		: (options.urls ?? pythonIdeCourseAssetSourceUrls);
+		: (options.urls ?? pythonIdeCourseAssetZipSourceUrls);
 	const fetcher = options.fetcher ?? window.fetch.bind(window);
 	courseAssetPackPromise = (async () => {
 		const failures: string[] = [];
 
-		for (const sourceUrl of sourceUrls) {
+		for (const sourceUrl of manifestUrls) {
+			const response = await fetcher(sourceUrl);
+			if (!response.ok) {
+				failures.push(`${sourceUrl} returned ${response.status}`);
+				continue;
+			}
+
+			return parsePythonIdeCourseAssetManifest(
+				await readAssetManifestResponse(response),
+				sourceUrl
+			);
+		}
+
+		for (const sourceUrl of zipSourceUrls) {
 			const response = await fetcher(sourceUrl);
 			if (!response.ok) {
 				failures.push(`${sourceUrl} returned ${response.status}`);
@@ -84,6 +102,35 @@ export async function loadPythonIdeCourseAssetPack(
 	});
 
 	return courseAssetPackPromise;
+}
+
+export function parsePythonIdeCourseAssetManifest(
+	manifest: unknown,
+	sourceUrl = pythonIdeCourseAssetsManifestUrl
+): PythonIdeCourseAssetPack {
+	const assets = new Map<string, PythonIdeCourseAsset>();
+
+	if (!isCourseAssetManifest(manifest)) return { assets, sourceUrl };
+
+	for (const manifestAsset of manifest.assets) {
+		const name = normalizeZipAssetName(manifestAsset.name);
+		if (!name || !ASSET_PATH_RE.test(name)) continue;
+		if (isIgnoredZipAssetName(name)) continue;
+
+		const mimeType =
+			manifestAsset.mimeType || getPythonIdeFileMimeType(name);
+		if (!mimeType || !manifestAsset.url) continue;
+
+		assets.set(normalizePythonIdeAssetLookupPath(name), {
+			height: numberOrUndefined(manifestAsset.height),
+			mimeType,
+			name,
+			url: manifestAsset.url,
+			width: numberOrUndefined(manifestAsset.width)
+		});
+	}
+
+	return { assets, sourceUrl };
 }
 
 export function parsePythonIdeCourseAssetZip(
@@ -153,8 +200,11 @@ export function findPythonIdeCourseAsset(
 }
 
 export function getPythonIdeCourseAssetObjectUrl(asset: PythonIdeCourseAsset) {
+	if (asset.url) return asset.url;
+
 	const existing = assetObjectUrls.get(asset);
 	if (existing) return existing;
+	if (!asset.bytes) return "";
 
 	const url = URL.createObjectURL(
 		new Blob([copyBytesToArrayBuffer(asset.bytes)], {
@@ -163,6 +213,36 @@ export function getPythonIdeCourseAssetObjectUrl(asset: PythonIdeCourseAsset) {
 	);
 	assetObjectUrls.set(asset, url);
 	return url;
+}
+
+async function readAssetManifestResponse(response: AssetFetcherResponse) {
+	if (response.json) return response.json();
+
+	return JSON.parse(
+		new TextDecoder().decode(new Uint8Array(await response.arrayBuffer()))
+	);
+}
+
+function isCourseAssetManifest(value: unknown): value is {
+	assets: Array<{
+		height?: unknown;
+		mimeType?: string;
+		name: string;
+		url: string;
+		width?: unknown;
+	}>;
+} {
+	return (
+		typeof value === "object" &&
+		value !== null &&
+		Array.isArray((value as { assets?: unknown }).assets)
+	);
+}
+
+function numberOrUndefined(value: unknown) {
+	return typeof value === "number" && Number.isFinite(value)
+		? value
+		: undefined;
 }
 
 function copyBytesToArrayBuffer(bytes: Uint8Array): ArrayBuffer {

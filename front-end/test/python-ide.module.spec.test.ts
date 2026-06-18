@@ -31,12 +31,13 @@ import {
 } from "../src/modules/pythonIde";
 import {
 	findPythonIdeCourseAsset,
+	loadPythonIdeCourseAssetPack,
 	parsePythonIdeCourseAssetZip,
-	pythonIdeBundledCourseAssetsZipUrl,
+	parsePythonIdeCourseAssetManifest,
 	pythonIdeAssetCandidateNames,
+	pythonIdeCourseAssetsManifestUrl,
 	pythonIdeCourseAssetsZipUrl,
-	resetPythonIdeCourseAssetPackCache,
-	loadPythonIdeCourseAssetPack
+	resetPythonIdeCourseAssetPackCache
 } from "../src/modules/pythonIdeCourseAssets";
 import { pythonIdeProjectModuleNames } from "../src/modules/pythonIdeRuntime";
 
@@ -492,7 +493,72 @@ describe("python IDE project helpers", () => {
 		expect(tune?.mimeType).toBe("audio/mpeg");
 	});
 
-	it("prefers the deployed asset pack before falling back to the same-origin API proxy", async () => {
+	it("loads deployed PyGame Zero assets from the extracted asset manifest", () => {
+		const pack = parsePythonIdeCourseAssetManifest({
+			assets: [
+				{
+					height: 18,
+					mimeType: "image/png",
+					name: "images/alien.png",
+					url: "/python-ide/assets/images/alien.png",
+					width: 20
+				},
+				{
+					mimeType: "audio/wav",
+					name: "sounds/eep.wav",
+					url: "/python-ide/assets/sounds/eep.wav"
+				},
+				{
+					mimeType: "audio/mpeg",
+					name: "music/tune.mp3",
+					url: "/python-ide/assets/music/tune.mp3"
+				}
+			]
+		});
+		const alien = findPythonIdeCourseAsset(
+			pack,
+			pythonIdeAssetCandidateNames("images", "alien", [".png"])
+		);
+
+		expect(pack.assets.size).toBe(3);
+		expect(alien?.url).toBe("/python-ide/assets/images/alien.png");
+		expect(alien?.width).toBe(20);
+		expect(alien?.height).toBe(18);
+	});
+
+	it("prefers the extracted asset manifest before falling back to the same-origin API proxy", async () => {
+		const requestedUrls: string[] = [];
+		const pack = await loadPythonIdeCourseAssetPack({
+			fetcher: async url => {
+				requestedUrls.push(url);
+				expect(url).toBe(pythonIdeCourseAssetsManifestUrl);
+
+				return {
+					arrayBuffer: async () => new ArrayBuffer(0),
+					json: async () => ({
+						assets: [
+							{
+								height: 18,
+								mimeType: "image/png",
+								name: "images/alien.png",
+								url: "/python-ide/assets/images/alien.png",
+								width: 20
+							}
+						]
+					}),
+					ok: true,
+					status: 200
+				};
+			}
+		});
+
+		expect(requestedUrls).toEqual([pythonIdeCourseAssetsManifestUrl]);
+		expect(pack.assets.get("images/alien.png")?.url).toBe(
+			"/python-ide/assets/images/alien.png"
+		);
+	});
+
+	it("falls back to the same-origin zip proxy when the extracted manifest is missing", async () => {
 		const zipBytes = zipSync({
 			"images/alien.png": oneByOnePngBytes
 		});
@@ -500,7 +566,7 @@ describe("python IDE project helpers", () => {
 		const pack = await loadPythonIdeCourseAssetPack({
 			fetcher: async url => {
 				requestedUrls.push(url);
-				if (url === pythonIdeBundledCourseAssetsZipUrl) {
+				if (url === pythonIdeCourseAssetsManifestUrl) {
 					return {
 						arrayBuffer: async () => new ArrayBuffer(0),
 						ok: false,
@@ -518,7 +584,7 @@ describe("python IDE project helpers", () => {
 		});
 
 		expect(requestedUrls).toEqual([
-			pythonIdeBundledCourseAssetsZipUrl,
+			pythonIdeCourseAssetsManifestUrl,
 			pythonIdeCourseAssetsZipUrl
 		]);
 		expect(pack.assets.has("images/alien.png")).toBe(true);
