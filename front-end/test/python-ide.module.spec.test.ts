@@ -497,6 +497,18 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("__classes_time.sleep = __classes_sleep");
 		expect(runtimeSource).toContain("__classes_compile_student_source(");
 		expect(runtimeSource).toContain(
+			"class __ClassesProjectSourceLoader"
+		);
+		expect(runtimeSource).toContain(
+			"return __classes_compile_student_source(source, path)"
+		);
+		expect(runtimeSource).toContain(
+			"class __ClassesProjectImportFinder"
+		);
+		expect(runtimeSource).toContain(
+			"__classes_install_project_import_hook()"
+		);
+		expect(runtimeSource).toContain(
 			"createInputBootstrap(options.inputText, options.mode)"
 		);
 		expect(runtimeSource).toContain("visit_While");
@@ -704,6 +716,28 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("function syncProjectFiles");
 		expect(runtimeSource).toContain("safeUnlink(pyodide");
 		expect(runtimeSource).toContain("sys.modules.pop(__classes_module_name, None)");
+	});
+
+	it("guards imported local project modules through the IDE compiler", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+
+		expect(runtimeSource).toContain("__classes_project_root =");
+		expect(runtimeSource).toContain("__classes_reserved_import_roots");
+		expect(runtimeSource).toContain(
+			"root_name in __classes_reserved_import_roots"
+		);
+		expect(runtimeSource).toContain(
+			"__classes_python_ide_project_finder__ = True"
+		);
+		expect(runtimeSource).toContain(
+			"sys.meta_path.insert(0, __ClassesProjectImportFinder())"
+		);
+		expect(runtimeSource).toContain(
+			"return __classes_compile_student_source(source, path)"
+		);
 	});
 
 	it("clears browser-owned runtime shim modules before each run", () => {
