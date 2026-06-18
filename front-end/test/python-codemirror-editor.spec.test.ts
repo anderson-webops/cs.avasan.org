@@ -44,6 +44,10 @@ describe("python IDE CodeMirror editor", () => {
 		expect(editorSource).toContain("basicSetup");
 		expect(editorSource).toContain("python()");
 		expect(editorSource).toContain("indentWithTab");
+		expect(editorSource).toContain(
+			"codeMirrorInsertNewlineAndIndent(view)"
+		);
+		expect(editorSource).toContain("insertPythonNewlineWithFallbackIndent");
 		expect(editorSource).toContain("EditorState.allowMultipleSelections");
 		expect(editorSource).toContain(".cm-panel.cm-search");
 		expect(editorSource).toContain(".cm-foldPlaceholder");

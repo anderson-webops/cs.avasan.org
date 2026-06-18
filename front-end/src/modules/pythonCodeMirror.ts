@@ -1,7 +1,10 @@
 import type { Extension } from "@codemirror/state";
 import type { DecorationSet, ViewUpdate } from "@codemirror/view";
 import type { PythonIdeMode } from "@/modules/pythonIde";
-import { indentWithTab } from "@codemirror/commands";
+import {
+	insertNewlineAndIndent as codeMirrorInsertNewlineAndIndent,
+	indentWithTab
+} from "@codemirror/commands";
 import { python, pythonLanguage } from "@codemirror/lang-python";
 import {
 	HighlightStyle,
@@ -691,7 +694,7 @@ export function pythonNewlineIndentText(state: EditorState, position: number) {
 	return `\n${currentIndent}${shouldIndentOneLevel ? pythonIndentText : ""}`;
 }
 
-function insertPythonNewlineAndIndent(view: EditorView) {
+function insertPythonNewlineWithFallbackIndent(view: EditorView) {
 	const transaction = view.state.changeByRange(range => {
 		const insertedText = pythonNewlineIndentText(view.state, range.from);
 
@@ -710,6 +713,11 @@ function insertPythonNewlineAndIndent(view: EditorView) {
 		scrollIntoView: true
 	});
 	return true;
+}
+
+function insertPythonNewlineAndIndent(view: EditorView) {
+	if (codeMirrorInsertNewlineAndIndent(view)) return true;
+	return insertPythonNewlineWithFallbackIndent(view);
 }
 
 function buildBracketPairDecorations(view: EditorView) {
