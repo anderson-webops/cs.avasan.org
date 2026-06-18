@@ -1091,11 +1091,35 @@ describe("course text quality normalization", () => {
 		expect(corpus).not.toMatch(
 			/Allow users to add comments to each post and display them beneath posts\./
 		);
+		expect(corpus).not.toMatch(
+			/Define functions \(arrow syntax\), parameters vs arguments, closures, and calling order\./
+		);
+		expect(corpus).not.toMatch(
+			/Draw a landscape using shapes and canvas techniques\./
+		);
+		expect(corpus).not.toMatch(
+			/Repeated logic belongs in small reusable, well-named functions\./
+		);
+		expect(corpus).not.toMatch(
+			/Explain APIs, requests, and why fetch is asynchronous\./
+		);
 		expect(corpus).toContain(
 			"Use CSS Diner to practice selector precision"
 		);
 		expect(corpus).toContain(
 			"Use Flexbox Froggy as a layout reasoning drill"
+		);
+		expect(corpus).toContain(
+			"Functions turn a repeated process into a named operation"
+		);
+		expect(corpus).toContain(
+			"Create a landscape scene with repeated canvas shapes"
+		);
+		expect(corpus).toContain(
+			"Helper functions keep a program understandable by giving a name to repeated or low-level work"
+		);
+		expect(corpus).toContain(
+			"API requests are asynchronous because the browser must wait for another service to respond"
 		);
 		expect(corpus).toContain(
 			"The key skill is separating local page state from persisted remote state"
