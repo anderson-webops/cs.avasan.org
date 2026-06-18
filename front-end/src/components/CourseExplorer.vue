@@ -412,22 +412,20 @@ const courseStats = computed(() => {
 	const course = selectedCourse.value;
 	if (!course) return null;
 
-	const lessonCount = course.modules.reduce(
+	const coreModules = course.modules.filter(isCoreModule);
+	const appendixModules = course.modules.filter(isAppendixModule);
+	const lessonCount = coreModules.reduce(
 		(total, module) => total + module.curriculum.length,
 		0
 	);
-	const supplementalCount = course.modules.reduce(
+	const supplementalCount = coreModules.reduce(
 		(total, module) => total + module.supplementalProjects.length,
 		0
 	);
-	const moduleCount = course.modules.filter(
-		module => module.kind !== "appendix"
+	const completedModuleCount = coreModules.filter(module =>
+		isModuleComplete(module)
 	).length;
-	const appendixCount = course.modules.length - moduleCount;
-	const completedModuleCount = course.modules.filter(
-		module => module.kind !== "appendix" && isModuleComplete(module)
-	).length;
-	const completedItemCount = course.modules.reduce(
+	const completedItemCount = coreModules.reduce(
 		(total, module) =>
 			total +
 			[...module.curriculum, ...module.supplementalProjects].filter(
@@ -437,8 +435,8 @@ const courseStats = computed(() => {
 	);
 
 	return {
-		moduleCount,
-		appendixCount,
+		moduleCount: coreModules.length,
+		appendixCount: appendixModules.length,
 		lessonCount,
 		supplementalCount,
 		completedModuleCount,
@@ -466,13 +464,47 @@ const completedItemIdSet = computed(
 	() => new Set(selectedCourseProgress.value?.completedItemIds ?? [])
 );
 
-const visibleModules = computed<VisibleModule[]>(() => {
+const courseModules = computed(() => selectedCourse.value?.modules ?? []);
+const coreCourseModules = computed(() =>
+	courseModules.value.filter(isCoreModule)
+);
+const appendixCourseModules = computed(() =>
+	courseModules.value.filter(isAppendixModule)
+);
+
+const visibleCoreModules = computed<VisibleModule[]>(() =>
+	visibleModuleList(coreCourseModules.value, normalizedQuery.value)
+);
+
+const visibleAppendixModules = computed<VisibleModule[]>(() =>
+	visibleModuleList(appendixCourseModules.value, normalizedQuery.value)
+);
+
+const visibleModules = computed<VisibleModule[]>(() => [
+	...visibleCoreModules.value,
+	...visibleAppendixModules.value
+]);
+
+const visibleOutlineGroups = computed(() =>
+	[
+		{
+			key: "modules",
+			label: "Modules",
+			modules: visibleCoreModules.value
+		},
+		{
+			key: "references",
+			label: "References",
+			modules: visibleAppendixModules.value
+		}
+	].filter(group => group.modules.length > 0)
+);
+
+function visibleModuleList(modules: CourseModule[], query: string) {
 	const course = selectedCourse.value;
 	if (!course) return [];
 
-	const query = normalizedQuery.value;
-
-	return course.modules
+	return modules
 		.map((module, index) => {
 			const totalItemCount =
 				module.curriculum.length + module.supplementalProjects.length;
@@ -513,7 +545,7 @@ const visibleModules = computed<VisibleModule[]>(() => {
 			};
 		})
 		.filter((module): module is VisibleModule => module !== null);
-});
+}
 
 watch(
 	[visibleModules, selectedCourseId, isStorageReady, currentHashAnchor],
@@ -560,10 +592,47 @@ const activeModule = computed(
 		) ?? null
 );
 
+const canEditActiveModuleProgress = computed(
+	() =>
+		canEditProgress.value &&
+		!!activeModule.value &&
+		isCoreModule(activeModule.value)
+);
+
+const activeCurriculumSectionLabel = computed(() =>
+	activeModule.value?.kind === "appendix" ? "Reference" : "Core path"
+);
+
+const activeCurriculumHeading = computed(() =>
+	activeModule.value?.kind === "appendix"
+		? "Reference Materials"
+		: "Curriculum"
+);
+
+const activeSupplementalSectionLabel = computed(() =>
+	activeModule.value?.kind === "appendix"
+		? "Reference practice"
+		: "Extra practice"
+);
+
+const activeSupplementalHeading = computed(() =>
+	activeModule.value?.kind === "appendix"
+		? "Reference Activities"
+		: "Supplemental Projects"
+);
+
+const activeCurriculumJumpHeading = computed(() =>
+	activeModule.value?.kind === "appendix" ? "References:" : "Lessons:"
+);
+
+const activeSupplementalJumpHeading = computed(() =>
+	activeModule.value?.kind === "appendix" ? "Activities:" : "Supplemental:"
+);
+
 const courseReaderStatus = computed(() => {
 	if (!selectedCourse.value || !activeModule.value) return "";
 	const searchContext = normalizedQuery.value
-		? `${visibleModules.value.length} matching module${
+		? `${visibleModules.value.length} matching section${
 				visibleModules.value.length === 1 ? "" : "s"
 			}. `
 		: "";
@@ -573,6 +642,14 @@ const courseReaderStatus = computed(() => {
 
 function moduleKindLabel(module: Pick<CourseModule, "kind">) {
 	return module.kind === "appendix" ? "Appendix" : "Module";
+}
+
+function isAppendixModule(module: Pick<CourseModule, "kind">) {
+	return module.kind === "appendix";
+}
+
+function isCoreModule(module: Pick<CourseModule, "kind">) {
+	return !isAppendixModule(module);
 }
 
 const activeModuleProjectLinks = computed(() => {
@@ -1460,7 +1537,7 @@ function writeStoredValue(key: string, value: string) {
 				<aside class="course-outline">
 					<div class="outline-header">
 						<p class="outline-eyebrow">Syllabus</p>
-						<h3>Choose a module</h3>
+						<h3>Choose a section</h3>
 						<!--
 						<p>
 							The right side shows the full reading view for the
@@ -1470,53 +1547,65 @@ function writeStoredValue(key: string, value: string) {
 					</div>
 
 					<div v-if="visibleModules.length > 0" class="outline-list">
-						<button
-							v-for="module in visibleModules"
-							:key="module.id"
-							aria-controls="course-reader-panel"
-							:aria-current="
-								activeModule?.id === module.id
-									? 'true'
-									: undefined
-							"
-							:aria-label="`Show ${moduleKindLabel(module).toLowerCase()} ${module.position}: ${module.title}`"
-							class="outline-button"
-							:class="{
-								'is-complete':
-									hasProgressTracking &&
-									isModuleComplete(module)
-							}"
-							type="button"
-							@click="selectModule(module.id)"
+						<section
+							v-for="group in visibleOutlineGroups"
+							:key="group.key"
+							class="outline-section"
 						>
-							<span class="outline-position">
-								{{ module.position }}
-							</span>
-							<span class="outline-copy">
-								<strong>{{ module.title }}</strong>
-								<small>
-									{{ module.visibleItemCount }}
-									{{
-										module.visibleItemCount === 1
-											? "item"
-											: "items"
-									}}
-									<span v-if="module.isFiltered">
-										visible out of
-										{{ module.totalItemCount }}
-									</span>
-									<span
-										v-if="
-											hasProgressTracking &&
-											isModuleComplete(module)
-										"
-										class="complete-pill"
-									>
-										Complete
-									</span>
-								</small>
-							</span>
-						</button>
+							<p class="outline-section-label">
+								{{ group.label }}
+							</p>
+							<button
+								v-for="module in group.modules"
+								:key="module.id"
+								aria-controls="course-reader-panel"
+								:aria-current="
+									activeModule?.id === module.id
+										? 'true'
+										: undefined
+								"
+								:aria-label="`Show ${moduleKindLabel(module).toLowerCase()} ${module.position}: ${module.title}`"
+								class="outline-button"
+								:class="{
+									'is-complete':
+										hasProgressTracking &&
+										isCoreModule(module) &&
+										isModuleComplete(module),
+									'is-reference': isAppendixModule(module)
+								}"
+								type="button"
+								@click="selectModule(module.id)"
+							>
+								<span class="outline-position">
+									{{ module.position }}
+								</span>
+								<span class="outline-copy">
+									<strong>{{ module.title }}</strong>
+									<small>
+										{{ module.visibleItemCount }}
+										{{
+											module.visibleItemCount === 1
+												? "item"
+												: "items"
+										}}
+										<span v-if="module.isFiltered">
+											visible out of
+											{{ module.totalItemCount }}
+										</span>
+										<span
+											v-if="
+												hasProgressTracking &&
+												isCoreModule(module) &&
+												isModuleComplete(module)
+											"
+											class="complete-pill"
+										>
+											Complete
+										</span>
+									</small>
+								</span>
+							</button>
+						</section>
 					</div>
 
 					<div v-else class="outline-empty">
@@ -1530,7 +1619,7 @@ function writeStoredValue(key: string, value: string) {
 							class="outline-reset"
 							@click="clearSearch"
 						>
-							Show all modules
+							Show all sections
 						</button>
 					</div>
 				</aside>
@@ -1548,7 +1637,7 @@ function writeStoredValue(key: string, value: string) {
 							</p>
 							<h3>{{ activeModule.title }}</h3>
 							<label
-								v-if="canEditProgress"
+								v-if="canEditActiveModuleProgress"
 								class="progress-toggle is-module"
 							>
 								<input
@@ -1575,6 +1664,7 @@ function writeStoredValue(key: string, value: string) {
 							<p
 								v-if="
 									hasProgressTracking &&
+									isCoreModule(activeModule) &&
 									isModuleComplete(activeModule)
 								"
 								class="module-complete-note"
@@ -1594,7 +1684,9 @@ function writeStoredValue(key: string, value: string) {
 								v-if="activeModuleProjectLinks.length > 0"
 								class="reader-link-group"
 							>
-								<h4 class="reader-link-heading">Lessons:</h4>
+								<h4 class="reader-link-heading">
+									{{ activeCurriculumJumpHeading }}
+								</h4>
 								<nav
 									aria-label="Jump to module lesson"
 									class="reader-jump-links"
@@ -1615,7 +1707,7 @@ function writeStoredValue(key: string, value: string) {
 								class="reader-link-group"
 							>
 								<h4 class="reader-link-heading is-supplemental">
-									Supplemental:
+									{{ activeSupplementalJumpHeading }}
 								</h4>
 								<nav
 									aria-label="Jump to supplemental project"
@@ -1637,8 +1729,10 @@ function writeStoredValue(key: string, value: string) {
 					<section class="reader-section">
 						<div class="section-header">
 							<div>
-								<p class="section-eyebrow">Core path</p>
-								<h4>Curriculum</h4>
+								<p class="section-eyebrow">
+									{{ activeCurriculumSectionLabel }}
+								</p>
+								<h4>{{ activeCurriculumHeading }}</h4>
 							</div>
 							<span class="section-count">
 								{{ activeModule.curriculum.length }}
@@ -1664,6 +1758,7 @@ function writeStoredValue(key: string, value: string) {
 										<span
 											v-if="
 												hasProgressTracking &&
+												isCoreModule(activeModule) &&
 												isItemComplete(item)
 											"
 											class="item-complete-badge"
@@ -1671,7 +1766,7 @@ function writeStoredValue(key: string, value: string) {
 											Done
 										</span>
 										<label
-											v-if="canEditProgress"
+											v-if="canEditActiveModuleProgress"
 											class="progress-toggle is-item"
 										>
 											<input
@@ -1783,8 +1878,10 @@ function writeStoredValue(key: string, value: string) {
 					>
 						<div class="section-header">
 							<div>
-								<p class="section-eyebrow">Extra practice</p>
-								<h4>Supplemental Projects</h4>
+								<p class="section-eyebrow">
+									{{ activeSupplementalSectionLabel }}
+								</p>
+								<h4>{{ activeSupplementalHeading }}</h4>
 							</div>
 							<span class="section-count">
 								{{ activeModule.supplementalProjects.length }}
@@ -1816,6 +1913,7 @@ function writeStoredValue(key: string, value: string) {
 										<span
 											v-if="
 												hasProgressTracking &&
+												isCoreModule(activeModule) &&
 												isItemComplete(item)
 											"
 											class="item-complete-badge"
@@ -1823,7 +1921,7 @@ function writeStoredValue(key: string, value: string) {
 											Done
 										</span>
 										<label
-											v-if="canEditProgress"
+											v-if="canEditActiveModuleProgress"
 											class="progress-toggle is-item"
 										>
 											<input
@@ -1931,8 +2029,8 @@ function writeStoredValue(key: string, value: string) {
 				</div>
 
 				<div v-else class="reader-empty">
-					<h3>No module selected</h3>
-					<p>Choose a module to open its lesson summaries.</p>
+					<h3>No section selected</h3>
+					<p>Choose a module or reference to open its summaries.</p>
 				</div>
 			</div>
 
@@ -2346,10 +2444,26 @@ function writeStoredValue(key: string, value: string) {
 	min-height: 0;
 	display: flex;
 	flex-direction: column;
-	gap: 0.35rem;
+	gap: 0.85rem;
 	max-height: none;
 	overflow: auto;
 	padding-right: 0.2rem;
+}
+
+.outline-section {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+}
+
+.outline-section-label {
+	margin: 0;
+	padding: 0 0.25rem;
+	color: var(--course-muted);
+	font-size: 0.72rem;
+	font-weight: 800;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
 }
 
 .outline-button {
@@ -2390,6 +2504,11 @@ function writeStoredValue(key: string, value: string) {
 	background: rgba(240, 253, 244, 0.78);
 }
 
+.outline-button.is-reference {
+	border-color: rgba(100, 116, 139, 0.12);
+	background: rgba(248, 250, 252, 0.62);
+}
+
 .outline-position,
 .lesson-index {
 	width: 2.5rem;
@@ -2409,6 +2528,16 @@ function writeStoredValue(key: string, value: string) {
 .lesson-index {
 	background: var(--course-accent-soft);
 	color: var(--course-accent);
+}
+
+.outline-button.is-reference .outline-position {
+	background: rgba(100, 116, 139, 0.12);
+	color: var(--course-muted);
+}
+
+.outline-button.is-reference[aria-current="true"] .outline-position {
+	background: rgba(59, 130, 246, 0.14);
+	color: #1d4ed8;
 }
 
 .outline-copy {

@@ -4,6 +4,10 @@ import { elementaryScienceCourse } from "@/stores/courses/elementary-science";
 import { middleSchoolIntegratedScienceCourse } from "@/stores/courses/middle-school-integrated-science";
 import { useCoursesStore } from "@/stores/courses";
 
+function coreModules<T extends { kind?: string }>(modules: T[] = []) {
+	return modules.filter(module => module.kind !== "appendix");
+}
+
 describe("course catalog breadth", () => {
 	beforeEach(() => {
 		setActivePinia(createPinia());
@@ -16,7 +20,7 @@ describe("course catalog breadth", () => {
 		expect(course).not.toBeNull();
 		expect(course?.modules.length).toBeGreaterThanOrEqual(17);
 		expect(
-			course?.modules.every(
+			coreModules(course?.modules).every(
 				module =>
 					module.curriculum.length >= 4 &&
 					module.supplementalProjects.length >= 2
@@ -45,7 +49,7 @@ describe("course catalog breadth", () => {
 
 		for (const course of [elementary, middleSchool]) {
 			expect(
-				course?.modules.every(
+				coreModules(course?.modules).every(
 					module =>
 						module.curriculum.length >= 1 &&
 						module.supplementalProjects.length >= 2

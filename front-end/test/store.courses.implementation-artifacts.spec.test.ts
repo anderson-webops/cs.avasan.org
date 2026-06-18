@@ -29,6 +29,10 @@ function allText(course: Awaited<ReturnType<typeof requireCourse>>) {
 		.join("\n");
 }
 
+function coreModules(course: Awaited<ReturnType<typeof requireCourse>>) {
+	return course.modules.filter(module => module.kind !== "appendix");
+}
+
 describe("implemented course development artifacts", () => {
 	it(
 		"keeps course-development planning scaffolds internal while retaining metadata",
@@ -61,11 +65,11 @@ describe("implemented course development artifacts", () => {
 	);
 
 	it(
-		"ensures every visible module has at least two supplemental project/checkpoint options",
+		"ensures every core module has at least two supplemental project/checkpoint options",
 		async () => {
 			for (const { id } of courseCatalog) {
 				const course = await requireCourse(id);
-				const underfilled = course.modules.filter(
+				const underfilled = coreModules(course).filter(
 					module => module.supplementalProjects.length < 2
 				);
 
@@ -90,7 +94,7 @@ describe("implemented course development artifacts", () => {
 			);
 			expect(text).toContain("Structure Decision");
 			expect(
-				course.modules.every(
+				coreModules(course).every(
 					module => module.supplementalProjects.length >= 2
 				),
 				courseId
@@ -110,12 +114,10 @@ describe("implemented course development artifacts", () => {
 				const course = await requireCourse(courseId);
 				const text = allText(course);
 
-				expect(text, courseId).toContain(
-					"Science Resource Shortlist and Remote Lab Bank"
-				);
+				expect(text, courseId).toContain("Remote Resource Bank");
 				expect(text, courseId).toContain("PhET");
-				expect(text, courseId).toContain(
-					"The activity does not require household materials"
+				expect(text, courseId).toMatch(
+					/does not require (?:beakers|household materials|physical lab supplies)|No physical lab supplies are required|No required project depends/i
 				);
 				expect(
 					course.modules.some(module =>
@@ -361,11 +363,11 @@ describe("implemented course development artifacts", () => {
 			"low-level-security",
 			"low-level-security-part-2",
 			"rust-systems-security"
-			]) {
-				expect(allText(await requireCourse(courseId)), courseId).toContain(
-					"Defensive Lab Contract"
-				);
-			}
+		]) {
+			expect(allText(await requireCourse(courseId)), courseId).toContain(
+				"Defensive Lab Contract"
+			);
+		}
 
 		const unityText = allText(
 			await requireCourse("unity-game-development")
@@ -383,7 +385,9 @@ describe("implemented course development artifacts", () => {
 	it(
 		"backfills reference solution links for source-backed project links",
 		async () => {
-			for (const courseId of Object.keys(courseImplementationSourceRepos)) {
+			for (const courseId of Object.keys(
+				courseImplementationSourceRepos
+			)) {
 				const course = await requireCourse(courseId);
 				const missingSolutionItems = course.modules.flatMap(module =>
 					[

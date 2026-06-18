@@ -162,7 +162,7 @@ describe("CourseExplorer.vue", () => {
 		expect(query.get("mode")).toBe("turtle");
 	});
 
-	it("counts reference appendices separately from course modules", async () => {
+	it("counts reference appendices separately from core course work", async () => {
 		const pinia = createPinia();
 		setActivePinia(pinia);
 
@@ -227,9 +227,13 @@ describe("CourseExplorer.vue", () => {
 
 		expect(wrapper.find(".course-stats").text()).toContain("Modules1");
 		expect(wrapper.find(".course-stats").text()).toContain("Appendices1");
+		expect(wrapper.find(".course-stats").text()).toContain("Core lessons1");
+		expect(wrapper.find(".course-stats").text()).toContain("Projects0");
+		expect(wrapper.text()).toContain("Choose a section");
+		expect(wrapper.text()).toContain("References");
 		expect(
 			wrapper
-				.find('[aria-label="Show appendix 2: Reference Appendix"]')
+				.find('[aria-label="Show appendix 1: Reference Appendix"]')
 				.exists()
 		).toBe(true);
 	});

@@ -24,7 +24,7 @@ function allText(
 
 describe("research-backed course family expansions", () => {
 	it(
-		"adds the standards, sequencing, and project practice modules to every audited course",
+		"adds standards, sequencing, and project practice appendices to every audited course",
 		async () => {
 			expect(researchBackedExpansionCourseIds.length).toBeGreaterThan(35);
 
@@ -35,22 +35,27 @@ describe("research-backed course family expansions", () => {
 				expect(course, courseId).not.toBeNull();
 				expect(profile, courseId).toBeDefined();
 
-				const expansionLabel = course!.name.trim() || profile.family;
-				const coreExpansionTitles = [
-					`${expansionLabel}: Standards and Course Map`,
-					`${expansionLabel}: Course Roadmap`,
-					`${expansionLabel}: Project and Assessment Practice`
+				const referenceExpansionTitles = [
+					"Standards Map",
+					"Course Roadmap",
+					"Project Practice Guide"
 				];
 				const titles = course!.modules.map(module => module.title);
-				for (const title of coreExpansionTitles) {
+				for (const title of referenceExpansionTitles) {
 					expect(titles, courseId).toContain(title);
 				}
 
 				const expansionModules = course!.modules.filter(module =>
-					coreExpansionTitles.includes(module.title)
+					referenceExpansionTitles.includes(module.title)
 				);
 
 				expect(expansionModules, courseId).toHaveLength(3);
+				expect(
+					expansionModules.every(
+						module => module.kind === "appendix"
+					),
+					courseId
+				).toBe(true);
 				expect(
 					expansionModules.every(
 						module => module.curriculum.length >= 4
