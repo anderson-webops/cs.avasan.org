@@ -438,6 +438,9 @@ __classes_project_root_resolved = __classes_project_root.resolve()
 __classes_reserved_import_roots = set(
     __import__("json").loads(${escapePythonString(JSON.stringify(PYTHON_IDE_RUNTIME_MODULES))})
 )
+_classes_project_root = __classes_project_root
+_classes_project_root_resolved = __classes_project_root_resolved
+_classes_reserved_import_roots = __classes_reserved_import_roots
 __classes_loop_iterations = {"for": 0, "while": 0}
 __classes_loop_iteration_limits = {
     "for": ${FOR_LOOP_ITERATION_LIMIT},
@@ -493,6 +496,7 @@ __classes_turtle_animation_call_names = {
     "up",
     "write",
 }
+_classes_turtle_animation_call_names = __classes_turtle_animation_call_names
 
 def __classes_input(prompt=""):
     print(prompt, end="")
@@ -563,9 +567,9 @@ class __ClassesLoopGuardTransformer(ast.NodeTransformer):
             if not isinstance(child, ast.Call):
                 continue
             function = child.func
-            if isinstance(function, ast.Attribute) and function.attr in __classes_turtle_animation_call_names:
+            if isinstance(function, ast.Attribute) and function.attr in _classes_turtle_animation_call_names:
                 return True
-            if isinstance(function, ast.Name) and function.id in __classes_turtle_animation_call_names:
+            if isinstance(function, ast.Name) and function.id in _classes_turtle_animation_call_names:
                 return True
             if isinstance(function, ast.Name) and function.id in turtle_helper_names:
                 return True
@@ -683,13 +687,14 @@ def __classes_compile_student_source(source, filename, allow_turtle_cooperative=
     ).visit(tree)
     ast.fix_missing_locations(tree)
     return compile(tree, filename, "exec")
+_classes_compile_student_source = __classes_compile_student_source
 
-def __classes_is_project_path(path):
+def _classes_is_project_path(path):
     try:
         resolved = path.resolve()
         return (
-            resolved == __classes_project_root_resolved
-            or __classes_project_root_resolved in resolved.parents
+            resolved == _classes_project_root_resolved
+            or _classes_project_root_resolved in resolved.parents
         )
     except Exception:
         return False
@@ -697,25 +702,26 @@ def __classes_is_project_path(path):
 class __ClassesProjectSourceLoader(importlib.machinery.SourceFileLoader):
     def source_to_code(self, data, path, *, _optimize=-1):
         source = data.decode("utf-8") if isinstance(data, (bytes, bytearray)) else str(data)
-        return __classes_compile_student_source(source, path)
+        return _classes_compile_student_source(source, path)
+_ClassesProjectSourceLoader = __ClassesProjectSourceLoader
 
 class __ClassesProjectImportFinder(importlib.abc.MetaPathFinder):
     __classes_python_ide_project_finder__ = True
 
     def find_spec(self, fullname, path=None, target=None):
         root_name = fullname.split(".", 1)[0]
-        if root_name in __classes_reserved_import_roots:
+        if root_name in _classes_reserved_import_roots:
             return None
 
-        module_path = __classes_project_root / fullname.replace(".", "/")
+        module_path = _classes_project_root / fullname.replace(".", "/")
         candidates = (
             (module_path.with_suffix(".py"), False),
             (module_path / "__init__.py", True),
         )
         for candidate, is_package in candidates:
-            if not __classes_is_project_path(candidate) or not candidate.is_file():
+            if not _classes_is_project_path(candidate) or not candidate.is_file():
                 continue
-            loader = __ClassesProjectSourceLoader(fullname, str(candidate))
+            loader = _ClassesProjectSourceLoader(fullname, str(candidate))
             if is_package:
                 return importlib.util.spec_from_file_location(
                     fullname,

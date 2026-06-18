@@ -566,7 +566,7 @@ describe("python IDE project helpers", () => {
 			"class __ClassesProjectSourceLoader"
 		);
 		expect(runtimeSource).toContain(
-			"return __classes_compile_student_source(source, path)"
+			"return _classes_compile_student_source(source, path)"
 		);
 		expect(runtimeSource).toContain(
 			"class __ClassesProjectImportFinder"
@@ -800,7 +800,10 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("__classes_project_root =");
 		expect(runtimeSource).toContain("__classes_reserved_import_roots");
 		expect(runtimeSource).toContain(
-			"root_name in __classes_reserved_import_roots"
+			"_classes_reserved_import_roots = __classes_reserved_import_roots"
+		);
+		expect(runtimeSource).toContain(
+			"root_name in _classes_reserved_import_roots"
 		);
 		expect(runtimeSource).toContain(
 			"__classes_python_ide_project_finder__ = True"
@@ -809,13 +812,78 @@ describe("python IDE project helpers", () => {
 			"sys.meta_path.insert(0, __ClassesProjectImportFinder())"
 		);
 		expect(runtimeSource).toContain(
-			"return __classes_compile_student_source(source, path)"
+			"return _classes_compile_student_source(source, path)"
 		);
 		expect(runtimeSource).toContain(
 			"builtins.__classes_loop_guard = __classes_loop_guard"
 		);
 		expect(runtimeSource).toContain(
 			"builtins.__classes_schedule_turtle_loop = __classes_schedule_turtle_loop"
+		);
+	});
+
+	it("avoids double-underscore global reads inside generated Python classes", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+		const loopClassStart = runtimeSource.indexOf(
+			"class __ClassesLoopGuardTransformer"
+		);
+		const loopClassEnd = runtimeSource.indexOf(
+			"def __classes_compile_student_source",
+			loopClassStart
+		);
+		const sourceLoaderStart = runtimeSource.indexOf(
+			"class __ClassesProjectSourceLoader"
+		);
+		const sourceLoaderEnd = runtimeSource.indexOf(
+			"_ClassesProjectSourceLoader = __ClassesProjectSourceLoader",
+			sourceLoaderStart
+		);
+		const importFinderStart = runtimeSource.indexOf(
+			"class __ClassesProjectImportFinder"
+		);
+		const importFinderEnd = runtimeSource.indexOf(
+			"def __classes_install_project_import_hook",
+			importFinderStart
+		);
+		const loopClassSource = runtimeSource.slice(
+			loopClassStart,
+			loopClassEnd
+		);
+		const sourceLoaderSource = runtimeSource.slice(
+			sourceLoaderStart,
+			sourceLoaderEnd
+		);
+		const importFinderSource = runtimeSource.slice(
+			importFinderStart,
+			importFinderEnd
+		);
+
+		expect(loopClassSource).toContain(
+			"_classes_turtle_animation_call_names"
+		);
+		expect(loopClassSource).not.toContain(
+			"__classes_turtle_animation_call_names"
+		);
+		expect(sourceLoaderSource).toContain(
+			"_classes_compile_student_source(source, path)"
+		);
+		expect(sourceLoaderSource).not.toContain(
+			"__classes_compile_student_source(source, path)"
+		);
+		expect(importFinderSource).toContain("_classes_reserved_import_roots");
+		expect(importFinderSource).toContain("_classes_project_root");
+		expect(importFinderSource).toContain("_classes_is_project_path");
+		expect(importFinderSource).toContain("_ClassesProjectSourceLoader");
+		expect(importFinderSource).not.toContain(
+			"__classes_reserved_import_roots"
+		);
+		expect(importFinderSource).not.toContain("__classes_project_root /");
+		expect(importFinderSource).not.toContain("__classes_is_project_path");
+		expect(importFinderSource).not.toContain(
+			"__ClassesProjectSourceLoader("
 		);
 	});
 
