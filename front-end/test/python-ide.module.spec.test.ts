@@ -401,6 +401,34 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("sidebar = _Container");
 	});
 
+	it("caches runtime package setup after successful Pyodide installs", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+
+		expect(runtimeSource).toContain(
+			"const loadedBrowserShimPackages = new Set<string>();"
+		);
+		expect(runtimeSource).toContain(
+			"const installedMicropipPackages = new Set<string>();"
+		);
+		expect(runtimeSource).toContain("let micropipLoaded = false;");
+		expect(runtimeSource).toContain(
+			"!installedMicropipPackages.has(packageName)"
+		);
+		expect(runtimeSource).toContain("if (!micropipLoaded)");
+		expect(runtimeSource).toContain(
+			"installedMicropipPackages.add(packageName)"
+		);
+		expect(runtimeSource).toContain(
+			"loadedBrowserShimPackages.has(\"numpy\")"
+		);
+		expect(runtimeSource).toContain(
+			"loadedBrowserShimPackages.add(\"numpy\")"
+		);
+	});
+
 	it("normalizes local Python project module names for fresh imports", () => {
 		expect(
 			pythonIdeProjectModuleNames([

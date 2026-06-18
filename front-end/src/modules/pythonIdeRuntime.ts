@@ -177,6 +177,9 @@ export interface RunPythonProjectOptions {
 
 let pyodidePromise: Promise<PyodideAPI> | null = null;
 let lastProjectFileNames = new Set<string>();
+const loadedBrowserShimPackages = new Set<string>();
+const installedMicropipPackages = new Set<string>();
+let micropipLoaded = false;
 
 function throwIfRunStopped(
 	options: Pick<RunPythonProjectOptions, "shouldStop">
@@ -2257,7 +2260,10 @@ async function installMicropipPackages(
 ) {
 	const packages = [...modules]
 		.map(moduleName => MICROPIP_PACKAGES.get(moduleName))
-		.filter((packageName): packageName is string => !!packageName);
+		.filter(
+			(packageName): packageName is string =>
+				!!packageName && !installedMicropipPackages.has(packageName)
+		);
 
 	if (!packages.length) return;
 
@@ -2268,11 +2274,16 @@ async function installMicropipPackages(
 	}
 
 	onOutput("system", `Loading Python packages: ${packages.join(", ")}`);
-	await pyodide.loadPackage("micropip");
+	if (!micropipLoaded) {
+		await pyodide.loadPackage("micropip");
+		micropipLoaded = true;
+	}
 	await pyodide.runPythonAsync(`
 import micropip
 await micropip.install(__import__("json").loads(${escapePythonString(JSON.stringify(packages))}))
 `);
+	for (const packageName of packages)
+		installedMicropipPackages.add(packageName);
 }
 
 async function loadBrowserShimDependencies(
@@ -2282,9 +2293,11 @@ async function loadBrowserShimDependencies(
 ) {
 	if (!modules.has("tensorflow") && !modules.has("keras")) return;
 	if (!pyodide.loadPackage) return;
+	if (loadedBrowserShimPackages.has("numpy")) return;
 
 	onOutput("system", "Loading Python packages: numpy");
 	await pyodide.loadPackage("numpy");
+	loadedBrowserShimPackages.add("numpy");
 }
 
 function warnForBrowserLimitedLibraries(
