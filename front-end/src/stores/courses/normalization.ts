@@ -5446,6 +5446,20 @@ function studioArtifact(context: CourseTextContext) {
 	if (/data science|machine learning|ai/.test(source)) {
 		return "a notebook or script that turns a defined dataset or state space into measured, interpreted output";
 	}
+	if (
+		/design pattern|pattern lab|refactor|pythonic design|solid|adapter|decorator|strategy|observer/.test(
+			source
+		)
+	) {
+		return "a behavior-preserving refactor or design-pattern implementation with tests, before/after structure, and tradeoff notes";
+	}
+	if (
+		/unity|game development|scene setup|player feedback|playtesting/.test(
+			source
+		)
+	) {
+		return "a playable game checkpoint with scene behavior, state changes, player feedback, and playtest evidence";
+	}
 	if (/physics|chemistry|science/.test(source)) {
 		return "a remote-safe investigation writeup using provided data, a diagram, or a simulation";
 	}

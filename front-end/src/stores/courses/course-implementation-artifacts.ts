@@ -2318,7 +2318,7 @@ function addSystemsSpecificSafetyModule(courseId: string, course: RawCourse) {
 			{
 				title: `${courseLabel} Environment and Tooling Baseline`,
 				content: [
-					`**Concept path:** Use this ${courseLabel} baseline before starting systems or security work. Setup is part of the lesson because drift or unsafe host assumptions can invalidate the lab.`,
+					`**Concept path:** The ${courseLabel} baseline comes before systems or security work. Setup is part of the lesson because drift or unsafe host assumptions can invalidate the lab.`,
 					`**Environment:**\n${bullets(config.environment)}`,
 					"**Evidence target:** The work demonstrates the ability to name the lab boundary, setup path, and recovery method."
 				].join("\n\n")
@@ -2333,7 +2333,7 @@ function addSystemsSpecificSafetyModule(courseId: string, course: RawCourse) {
 			},
 			{
 				title: `${courseLabel} Signature Project`,
-				content: `**Project goal:** ${config.project} The signature project should combine setup, observation, interpretation, and remediation rather than ending at a tool output. The final artifact should make the environment, evidence, limitation, and defensive value clear enough to inspect later.\n\n**Completion checks:**\n- Scope and authorization are explicit.\n- Setup and reset instructions are documented.\n- Evidence leads to a defensive fix, monitoring improvement, or hardening recommendation.`
+				content: `**Project goal:** ${config.project} The signature project combines setup, observation, interpretation, and remediation rather than ending at a tool output. The final artifact makes the environment, evidence, limitation, and defensive value clear enough to inspect later.\n\n**Completion checks:**\n- Scope and authorization are explicit.\n- Setup and reset instructions are documented.\n- Evidence leads to a defensive fix, monitoring improvement, or hardening recommendation.`
 			},
 			{
 				title: `${courseLabel} Evidence Rubric`,

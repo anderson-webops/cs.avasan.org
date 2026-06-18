@@ -1206,7 +1206,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Practice Lab: Accessibility Labels and Content Review",
 					content:
-						"Add accessibility labels to interactive controls and review whether the screen still makes sense with large text and clear spoken descriptions. Use this to build a baseline accessibility habit instead of treating it as a late compliance task."
+						"Add accessibility labels to interactive controls and review whether the screen still makes sense with large text and clear spoken descriptions. Accessibility belongs in the baseline design habit instead of being treated as a late compliance task."
 				},
 				{
 					title: "Reflection Question: What Makes an App Feel Intentionally Designed?",

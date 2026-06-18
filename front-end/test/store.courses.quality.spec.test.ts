@@ -2576,6 +2576,12 @@ describe("course text quality normalization", () => {
 			);
 			expect(corpus).not.toMatch(/\bThe work should make\b/i);
 			expect(corpus).not.toMatch(
+				/\bworking artifact with explicit requirements\b/i
+			);
+			expect(corpus).not.toMatch(/\bUse this [^.]+ baseline\b/i);
+			expect(corpus).not.toMatch(/\bThe signature project should\b/i);
+			expect(corpus).not.toMatch(/\bThe final artifact should\b/i);
+			expect(corpus).not.toMatch(
 				/\bprerequisite modules, project ladder, and assessment model should already be practiced\b/i
 			);
 		},
