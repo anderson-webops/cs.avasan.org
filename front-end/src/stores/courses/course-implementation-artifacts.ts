@@ -31,6 +31,8 @@ export const courseImplementationSourceRepos: Record<string, string> = {
 	"data-structures-and-algorithms-in-cpp":
 		"Data-Structures-and-Algorithms-in-CPP",
 	"design-patterns-in-cpp": "Design-Patterns-in-CPP",
+	"design-patterns-in-java": "Java-Level-3",
+	"design-patterns-in-java-part-2": "Java-Level-3",
 	"java-level-1": "Java-Level-1",
 	"java-level-2": "Java-Level-2",
 	"java-level-3": "Java-Level-3",
@@ -64,10 +66,6 @@ export const courseContentOnlySourcePolicies: Record<string, string> = {
 		"Content-only math course. Use course modules plus generated practice, modeling, and error-analysis tasks; worksheets or Desmos links should be added as media assets when created.",
 	"algebra-2b":
 		"Content-only math course. Use course modules plus generated practice, modeling, and error-analysis tasks; worksheets or Desmos links should be added as media assets when created.",
-	"design-patterns-in-java":
-		"Catalog-owned course. Keep source snippets embedded until a dedicated Java design-patterns repo is created.",
-	"design-patterns-in-java-part-2":
-		"Catalog-owned course. Keep refactoring scenarios embedded until a before/after Java design-patterns repo is created.",
 	"elementary-science":
 		"Content and media course. Source parity means every activity has a listed simulation, image/data source, notebook routine, or explicit no-physical-material alternative.",
 	"intro-to-chemistry":

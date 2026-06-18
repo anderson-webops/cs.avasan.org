@@ -222,6 +222,27 @@ describe("implemented course development artifacts", () => {
 		}
 	});
 
+	it("keeps Java design-pattern courses source-backed by the shared Java Level 3 repo", async () => {
+		for (const courseId of [
+			"design-patterns-in-java",
+			"design-patterns-in-java-part-2"
+		]) {
+			const course = await requireCourse(courseId);
+
+			expect(courseImplementationSourceRepos[courseId], courseId).toBe(
+				"Java-Level-3"
+			);
+			expect(
+				course.developmentMetadata?.sourcePolicy,
+				courseId
+			).toContain("https://github.com/instruction-material/Java-Level-3");
+			expect(
+				courseContentOnlySourcePolicies[courseId],
+				courseId
+			).toBeUndefined();
+		}
+	});
+
 	it("records source policy decisions for content-only or composed courses", async () => {
 		for (const courseId of Object.keys(courseContentOnlySourcePolicies)) {
 			if (authoredLearnerCourseIds.has(courseId)) continue;
