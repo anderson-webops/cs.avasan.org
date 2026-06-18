@@ -46,10 +46,12 @@ export interface PythonIdeCourseAssetPack {
 }
 
 let courseAssetPackPromise: Promise<PythonIdeCourseAssetPack> | null = null;
-const assetObjectUrls = new WeakMap<PythonIdeCourseAsset, string>();
+const assetObjectUrls = new Map<PythonIdeCourseAsset, string>();
 
 export function resetPythonIdeCourseAssetPackCache() {
 	courseAssetPackPromise = null;
+	for (const url of assetObjectUrls.values()) URL.revokeObjectURL(url);
+	assetObjectUrls.clear();
 }
 
 export async function loadPythonIdeCourseAssetPack(

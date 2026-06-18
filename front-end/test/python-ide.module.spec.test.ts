@@ -34,6 +34,7 @@ import {
 } from "../src/modules/pythonIde";
 import {
 	findPythonIdeCourseAsset,
+	getPythonIdeCourseAssetObjectUrl,
 	loadPythonIdeCourseAssetPack,
 	parsePythonIdeCourseAssetZip,
 	parsePythonIdeCourseAssetManifest,
@@ -646,6 +647,47 @@ describe("python IDE project helpers", () => {
 		expect(tune?.mimeType).toBe("audio/mpeg");
 	});
 
+	it("reuses and revokes generated PyGame Zero asset object URLs", async () => {
+		const createdUrls: string[] = [];
+		const revokedUrls: string[] = [];
+		const createObjectUrlSpy = vi
+			.spyOn(URL, "createObjectURL")
+			.mockImplementation(() => {
+				const url = `blob:test-${createdUrls.length}`;
+				createdUrls.push(url);
+				return url;
+			});
+		const revokeObjectUrlSpy = vi
+			.spyOn(URL, "revokeObjectURL")
+			.mockImplementation(url => {
+				revokedUrls.push(url);
+			});
+
+		try {
+			const pack = parsePythonIdeCourseAssetZip(
+				zipSync({ "images/alien.png": oneByOnePngBytes }),
+				"/assets.zip"
+			);
+			const alien = findPythonIdeCourseAsset(
+				pack,
+				pythonIdeAssetCandidateNames("images", "alien", [".png"])
+			);
+
+			expect(alien).toBeTruthy();
+			if (!alien) return;
+			expect(getPythonIdeCourseAssetObjectUrl(alien)).toBe("blob:test-0");
+			expect(getPythonIdeCourseAssetObjectUrl(alien)).toBe("blob:test-0");
+			expect(createObjectUrlSpy).toHaveBeenCalledTimes(1);
+
+			resetPythonIdeCourseAssetPackCache();
+			expect(revokeObjectUrlSpy).toHaveBeenCalledWith("blob:test-0");
+			expect(revokedUrls).toEqual(["blob:test-0"]);
+		} finally {
+			createObjectUrlSpy.mockRestore();
+			revokeObjectUrlSpy.mockRestore();
+		}
+	});
+
 	it("loads deployed PyGame Zero assets from the extracted asset manifest", () => {
 		const pack = parsePythonIdeCourseAssetManifest({
 			assets: [
@@ -761,6 +803,7 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("drawImage: drawGameImage");
 		expect(pageSource).toContain("imageSizeJson: gameImageSizeJson");
 		expect(pageSource).toContain("findPythonIdeCourseAsset");
+		expect(pageSource).toContain("gameImageCache.clear()");
 	});
 
 	it("runs the selected Python file or falls back from resource files", () => {

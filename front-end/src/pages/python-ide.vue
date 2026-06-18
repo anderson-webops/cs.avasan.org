@@ -1415,6 +1415,7 @@ function resetGameCanvas(width = 640, height = 400) {
 	keyHandlers.clear();
 	gameKeysDown.clear();
 	gameEvents.length = 0;
+	gameImageCache.clear();
 	gameLoopRequested = false;
 	gameTickInFlight = false;
 	stopAllGameAudio();
