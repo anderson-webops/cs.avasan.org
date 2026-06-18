@@ -14,6 +14,7 @@ import { VueRouterAutoImports } from "vue-router/unplugin";
 import VueRouter from "vue-router/vite";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const pythonIdePreloadChunkRE = /(?:^|\/)python-ide-(?:runtime|editor)-[^/]+\.js$/;
 
 export default defineConfig(({ command }) => ({
 	resolve: {
@@ -67,7 +68,7 @@ export default defineConfig(({ command }) => ({
 		}),
 
 		/* 6️⃣  CSS / Markdown / Misc */
-		Unocss(),
+		Unocss()
 	],
 
 	/* vitest */
@@ -94,6 +95,34 @@ export default defineConfig(({ command }) => ({
 	ssr: {
 		// TODO: workaround until they support native ESM
 		noExternal: ["workbox-window", /vue-i18n/]
+	},
+
+	build: {
+		modulePreload: {
+			resolveDependencies(_filename, deps, context) {
+				if (context.hostType !== "html")
+					return deps;
+
+				return deps.filter(dep => !pythonIdePreloadChunkRE.test(dep));
+			}
+		},
+		rolldownOptions: {
+			output: {
+				codeSplitting: {
+					includeDependenciesRecursively: false,
+					groups: [
+						{
+							name: "python-ide-runtime",
+							test: /src\/modules\/pythonIdeRuntime\.ts$/
+						},
+						{
+							name: "python-ide-editor",
+							test: /src\/modules\/pythonCodeMirror\.ts$/
+						}
+					]
+				}
+			}
+		}
 	},
 
 	server: {

@@ -49,6 +49,28 @@ const BROWSER_SHIM_MODULES = new Set([
 	"tensorflow"
 ]);
 
+interface PythonRuntimeResourceHint {
+	rel: string;
+	href: string;
+	as?: string;
+	crossOrigin?: string;
+}
+
+const PYTHON_RUNTIME_RESOURCE_HINTS: PythonRuntimeResourceHint[] = [
+	{ rel: "dns-prefetch", href: "//cdn.jsdelivr.net" },
+	{
+		rel: "preconnect",
+		href: PYODIDE_CDN_ORIGIN,
+		crossOrigin: "anonymous"
+	},
+	{
+		rel: "preload",
+		href: PYODIDE_SCRIPT_SRC,
+		as: "script",
+		crossOrigin: "anonymous"
+	}
+];
+
 interface PyodideAPI {
 	FS: {
 		analyzePath: (path: string) => { exists: boolean };
@@ -292,20 +314,7 @@ function loadScript(src: string) {
 export function warmPythonRuntime() {
 	if (typeof document === "undefined") return;
 
-	for (const hint of [
-		{ rel: "dns-prefetch", href: "//cdn.jsdelivr.net" },
-		{
-			rel: "preconnect",
-			href: PYODIDE_CDN_ORIGIN,
-			crossOrigin: "anonymous"
-		},
-		{
-			rel: "preload",
-			href: PYODIDE_SCRIPT_SRC,
-			as: "script",
-			crossOrigin: "anonymous"
-		}
-	]) {
+	for (const hint of PYTHON_RUNTIME_RESOURCE_HINTS) {
 		const existing = document.querySelector(
 			`link[rel="${hint.rel}"][href="${hint.href}"]`
 		);
@@ -313,8 +322,8 @@ export function warmPythonRuntime() {
 		const link = document.createElement("link");
 		link.rel = hint.rel;
 		link.href = hint.href;
-		if ("as" in hint) link.setAttribute("as", hint.as);
-		if ("crossOrigin" in hint) link.crossOrigin = hint.crossOrigin;
+		if (hint.as) link.setAttribute("as", hint.as);
+		if (hint.crossOrigin) link.crossOrigin = hint.crossOrigin;
 		document.head.append(link);
 	}
 }

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { EditorView as CodeEditorView } from "@codemirror/view";
 import type { PythonCodeMirrorAssetCompletionNames } from "@/modules/pythonCodeMirror";
 import type {
 	PythonIdeFile,
@@ -11,7 +12,6 @@ import type {
 	RuntimeArtifact,
 	TurtleBridge
 } from "@/modules/pythonIdeRuntime";
-import { EditorView } from "@codemirror/view";
 import { storeToRefs } from "pinia";
 import {
 	computed,
@@ -22,7 +22,6 @@ import {
 	watch
 } from "vue";
 import { useRoute } from "vue-router";
-import { createPythonCodeMirrorExtensions } from "@/modules/pythonCodeMirror";
 import {
 	clearLocalPythonProjectsAsync,
 	createPythonIdeProject,
@@ -57,12 +56,13 @@ import {
 	normalizePythonIdeAssetLookupPath,
 	pythonIdeAssetCandidateNames
 } from "@/modules/pythonIdeCourseAssets";
-import {
-	releasePythonIdeRuntimeCallbacks,
-	runPythonProject,
-	warmPythonRuntime
-} from "@/modules/pythonIdeRuntime";
 import { useAppStore } from "@/stores/app";
+
+type PythonCodeEditorModules = [
+	typeof import("@codemirror/view"),
+	typeof import("@/modules/pythonCodeMirror")
+];
+type PythonRuntimeModule = typeof import("@/modules/pythonIdeRuntime");
 
 interface OutputLine {
 	id: number;
@@ -461,13 +461,29 @@ let gameMusicAudio: HTMLAudioElement | null = null;
 let gameMusicVolume = 1;
 let gameToneAudioContext: AudioContext | null = null;
 let gameToneCounter = 0;
-let codeEditorView: EditorView | null = null;
+let codeEditorView: CodeEditorView | null = null;
 let syncingCodeMirrorContent = false;
 let gameCourseAssetPack: PythonIdeCourseAssetPack | null = null;
 let gameCourseAssetPackLoadFailed = false;
 let turtleStampCounter = 0;
 let turtleCompletedCommands: TurtleRenderCommand[] = [];
 let turtleQueuedSteps: TurtleAnimationStep[] = [];
+let codeEditorModulesPromise: Promise<PythonCodeEditorModules> | null = null;
+let pythonRuntimeModulePromise: Promise<PythonRuntimeModule> | null = null;
+let codeEditorResetToken = 0;
+
+function loadPythonCodeEditorModules() {
+	codeEditorModulesPromise ??= Promise.all([
+		import("@codemirror/view"),
+		import("@/modules/pythonCodeMirror")
+	]);
+	return codeEditorModulesPromise;
+}
+
+function loadPythonRuntimeModule() {
+	pythonRuntimeModulePromise ??= import("@/modules/pythonIdeRuntime");
+	return pythonRuntimeModulePromise;
+}
 
 const turtleState: TurtleState = {
 	x: 0,
@@ -1060,7 +1076,8 @@ function updateProjectTitle(event: Event) {
 	scheduleSave();
 }
 
-function resetCodeEditor() {
+async function resetCodeEditor() {
+	const resetToken = ++codeEditorResetToken;
 	codeEditorView?.destroy();
 	codeEditorView = null;
 	editorCursorCount.value = 1;
@@ -1069,6 +1086,12 @@ function resetCodeEditor() {
 	if (!host || activeFileIsBinaryAsset.value) return;
 
 	host.textContent = "";
+	const [{ EditorView }, { createPythonCodeMirrorExtensions }] =
+		await loadPythonCodeEditorModules();
+	if (resetToken !== codeEditorResetToken) return;
+	if (host !== codeEditorHostRef.value || activeFileIsBinaryAsset.value)
+		return;
+
 	codeEditorView = new EditorView({
 		doc: activeFileContent.value,
 		extensions: createPythonCodeMirrorExtensions({
@@ -1789,14 +1812,16 @@ function clearTurtleTimers() {
 
 function releaseIdlePythonRuntimeCallbacks() {
 	if (isRunning.value) return;
-	void releasePythonIdeRuntimeCallbacks().catch(error => {
-		appendOutput(
-			"stderr",
-			error instanceof Error
-				? error.message
-				: "Could not release Python runtime callbacks."
-		);
-	});
+	void loadPythonRuntimeModule()
+		.then(module => module.releasePythonIdeRuntimeCallbacks())
+		.catch(error => {
+			appendOutput(
+				"stderr",
+				error instanceof Error
+					? error.message
+					: "Could not release Python runtime callbacks."
+			);
+		});
 }
 
 function trackTurtleFillPoint(x: number, y: number) {
@@ -2868,6 +2893,7 @@ async function runCurrentProject() {
 			await ensureGameCourseAssetsLoaded();
 		}
 
+		const { runPythonProject } = await loadPythonRuntimeModule();
 		await runPythonProject({
 			files: project.files,
 			activeFileName: runnableFile.name,
@@ -3205,7 +3231,7 @@ watch(isLoading, loading => {
 });
 
 onMounted(() => {
-	warmPythonRuntime();
+	void loadPythonRuntimeModule().then(module => module.warmPythonRuntime());
 	void loadProjects();
 	window.addEventListener("keydown", handleKeyDown);
 	window.addEventListener("keyup", handleKeyUp);
@@ -3225,7 +3251,9 @@ onBeforeUnmount(() => {
 	window.removeEventListener("mouseup", clearTurtleDrag);
 	clearTurtleTimers();
 	cancelTurtleAnimation();
-	void releasePythonIdeRuntimeCallbacks().catch(() => {});
+	void loadPythonRuntimeModule()
+		.then(module => module.releasePythonIdeRuntimeCallbacks())
+		.catch(() => {});
 	stopGameLoop();
 	resizeObserver?.disconnect();
 });
