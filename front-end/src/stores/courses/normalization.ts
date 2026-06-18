@@ -5393,6 +5393,10 @@ function compactGeneratedProjectSupport(
 			.replace(/\bThe the ([A-Z])/g, "The $1")
 			.replace(/\bthe the ([A-Z])/g, "the $1")
 			.replace(
+				/\bUse (the [^.?!\n]{1,160}? checkpoint) as a readiness check for \1\b/gi,
+				"Use $1 to check readiness"
+			)
+			.replace(
 				/\ballowed the ([A-Z][^.!?\n]{1,180}? lab) target\b/g,
 				"allowed target for the $1"
 			)

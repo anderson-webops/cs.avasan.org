@@ -581,6 +581,25 @@ describe("implemented course development artifacts", () => {
 		);
 	});
 
+	it("keeps Pythonic Design Patterns source links course-owned", async () => {
+		const serializedCourse = JSON.stringify(
+			await requireCourse("pythonic-design-patterns")
+		);
+
+		expect(serializedCourse).not.toMatch(
+			/instruction-material\/(?:PyGames|Python-Level-[123])\/tree\/main"/
+		);
+		expect(serializedCourse).toContain(
+			"Pythonic-Design-Patterns/tree/main/PDP-01-pdp1-why-python-changes-the-design-patterns-conversation-supplemental-2/starter"
+		);
+		expect(serializedCourse).toContain(
+			"Pythonic-Design-Patterns/tree/main/PDP-04-pdp2-design-foundations-in-python-supplemental-3/solution"
+		);
+		expect(serializedCourse).toContain(
+			"Pythonic-Design-Patterns/tree/main/PDP-19-pdp10-singleton-global-state-and-module-patterns/starter"
+		);
+	});
+
 	it("keeps AP CSA learner source links on starter folders with staff solution links", async () => {
 		const course = await requireCourse("ap-computer-science-a");
 		const serializedCourse = JSON.stringify(course);

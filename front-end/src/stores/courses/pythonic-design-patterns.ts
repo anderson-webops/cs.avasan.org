@@ -36,7 +36,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						hasReference: false
 					}),
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main"
 				}
 			],
 			supplementalProjects: [
@@ -45,7 +45,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 					content:
 						"Keep a compact journal for setup and tooling that records the design pressure, the simplest Python feature that might solve it, the named pattern if one is still justified, and one short note about which workflow choices will make later refactors observable and safe. The habit should be diagnosis first, pattern name second.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main"
 				},
 				{
 					title: "Pythonic Design Patterns",
@@ -93,7 +93,9 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						hasReference: false
 					}),
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-01-pdp1-why-python-changes-the-design-patterns-conversation-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-01-pdp1-why-python-changes-the-design-patterns-conversation-supplemental-2/solution"
 				}
 			],
 			supplementalProjects: [
@@ -102,7 +104,9 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 					content:
 						"Keep a compact journal for why python changes the design-patterns conversation that records the design pressure, the simplest Python feature that might solve it, the named pattern if one is still justified, and one short note about which Python features replace ceremony and which ones simply hide it. The habit should be diagnosis first, pattern name second.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-02-pdp1-why-python-changes-the-design-patterns-conversation-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-02-pdp1-why-python-changes-the-design-patterns-conversation-supplemental-3/solution"
 				},
 				{
 					title: "Why Python Changes the Design Patterns Conversation Supplemental 2",
@@ -166,7 +170,9 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						hasReference: false
 					}),
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-03-pdp2-design-foundations-in-python-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-03-pdp2-design-foundations-in-python-supplemental-2/solution"
 				}
 			],
 			supplementalProjects: [
@@ -175,7 +181,9 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 					content:
 						"Keep a compact journal for design foundations in python that records the design pressure, the simplest Python feature that might solve it, the named pattern if one is still justified, and one short note about which boundary would be easiest to fake, replace, or move later. The habit should be diagnosis first, pattern name second.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-04-pdp2-design-foundations-in-python-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-04-pdp2-design-foundations-in-python-supplemental-3/solution"
 				},
 				{
 					title: "Design Foundations in Python Supplemental 2",
@@ -766,7 +774,9 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						hasReference: false
 					}),
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-19-pdp10-singleton-global-state-and-module-patterns/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-19-pdp10-singleton-global-state-and-module-patterns/solution"
 				}
 			],
 			supplementalProjects: [
@@ -775,7 +785,9 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 					content:
 						"Keep a compact journal for singleton, global state, and module patterns that records the design pressure, the simplest Python feature that might solve it, the named pattern if one is still justified, and one short note about which shared objects are explicit resources and which ones are just hidden dependencies. The habit should be diagnosis first, pattern name second.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-20-pdp10-singleton-global-state-and-module-patterns/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-20-pdp10-singleton-global-state-and-module-patterns/solution"
 				},
 				{
 					title: "Singleton, Global State, and Module Patterns Supplemental 2",
