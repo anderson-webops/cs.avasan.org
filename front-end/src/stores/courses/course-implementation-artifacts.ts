@@ -264,6 +264,166 @@ const scienceResourceBanks: Record<string, string[]> = {
 	]
 };
 
+const scienceResourceGuidance: Record<
+	string,
+	{
+		remoteInvestigation: string;
+		mappingFocus: string;
+		evidenceSource: string;
+		vocabularyTarget: string;
+		representation: string;
+		cerPrompt: string;
+		notebookOutput: string;
+		safetyBoundary: string;
+		projectGoal: string;
+		observations: string;
+		changedCondition: string;
+		critiqueFocus: string;
+		critiqueImprovement: string;
+	}
+> = {
+	"elementary-science": {
+		remoteInvestigation:
+			"Elementary investigations use shared images, simple simulations, sorting cards, weather maps, and notebook sketches so the science question stays visible without requiring supplies.",
+		mappingFocus:
+			"one observable phenomenon, one grade-band vocabulary set, and one compare/sort/predict task",
+		evidenceSource:
+			"a picture, teacher-provided data table, short simulation view, or map that can be described with everyday observations first",
+		vocabularyTarget:
+			"observable property, pattern, cause, change, model, evidence, and prediction",
+		representation:
+			"a labeled drawing, T-chart, simple table, picture sort, or bar graph",
+		cerPrompt:
+			"Which pattern or change can be seen, and what evidence from the picture, data, or simulation supports that claim?",
+		notebookOutput:
+			"one labeled observation sketch, one simple data table or sort, one claim, and one because-sentence that connects evidence to the claim",
+		safetyBoundary:
+			"Optional home observations are limited to looking, drawing, counting, or comparing familiar safe objects; a provided picture or data card always works as the default evidence.",
+		projectGoal:
+			"Use an approved elementary simulation, image set, or provided data card to make a short CER response about an observable pattern.",
+		observations:
+			"two visible observations written in everyday language before any science inference is added",
+		changedCondition:
+			"one simple changed condition, such as more light, more pushes, different material, more water on a map, or a different season",
+		critiqueFocus:
+			"a picture, model, or simulation that helps compare visible properties but leaves out size, time, hidden parts, or exact measurement",
+		critiqueImprovement:
+			"add one label, key, scale marker, or second picture that would make the model easier to interpret"
+	},
+	"middle-school-integrated-science": {
+		remoteInvestigation:
+			"Middle-school investigations use cross-discipline phenomena, simulations, maps, public media, and provided datasets to connect variables, systems, and evidence.",
+		mappingFocus:
+			"one physical, life, Earth/space, or engineering phenomenon with a clear system boundary and measurable variable",
+		evidenceSource:
+			"a simulation run, graph, public dataset, image sequence, ecosystem or Earth-system map, or engineering constraint table",
+		vocabularyTarget:
+			"system, variable, interaction, scale, stability, feedback, structure/function, energy, matter, and evidence",
+		representation:
+			"a system diagram, annotated graph, variable table, cause-effect map, or model comparison chart",
+		cerPrompt:
+			"How does changing one part of the system affect another part, and what evidence supports that relationship?",
+		notebookOutput:
+			"a system boundary note, input/output list, graph or diagram, CER paragraph, and changed-variable prediction",
+		safetyBoundary:
+			"Required work uses browser evidence and provided data; optional observations never require collecting outdoor samples, handling organisms, using electricity, or changing household materials.",
+		projectGoal:
+			"Use one approved middle-school simulation, public data source, or media case to explain a system relationship with evidence.",
+		observations:
+			"two observations that include a variable, pattern, or before/after comparison rather than only a description",
+		changedCondition:
+			"one changed variable or constraint, such as temperature, population size, force, energy input, water flow, or available resources",
+		critiqueFocus:
+			"a model that simplifies a real system by hiding scale, time delay, uncertainty, competing variables, or organism/environment detail",
+		critiqueImprovement:
+			"add a second variable, a time-series view, a scale note, or an uncertainty note that would make the model more honest"
+	},
+	"intro-to-chemistry": {
+		remoteInvestigation:
+			"Chemistry investigations use particle diagrams, periodic-table references, vetted simulations, reaction tables, and provided scenario data instead of household chemicals.",
+		mappingFocus:
+			"one particle-level or formula-level question connected to observable evidence and conservation of matter",
+		evidenceSource:
+			"a particle model, simulation state, periodic-table data, balanced equation, stoichiometry table, pH or concentration scenario, or provided reaction case",
+		vocabularyTarget:
+			"atom, molecule, ion, element, compound, mixture, reactant, product, coefficient, subscript, mole, energy, and concentration",
+		representation:
+			"a particle diagram, formula table, balanced equation, mole-ratio table, periodic-table annotation, or reaction-energy sketch",
+		cerPrompt:
+			"What particle-level or formula-level change explains the evidence, and how does the representation preserve atoms, charge, or amount?",
+		notebookOutput:
+			"a labeled particle/formula representation, evidence table, balanced or classified relationship, CER paragraph, and one conservation or limiting-reactant check",
+		safetyBoundary:
+			"Required chemistry work uses simulations, diagrams, and provided data only; videos or household examples are treated as evidence cases, not as required experiments.",
+		projectGoal:
+			"Use one approved chemistry simulation, provided reaction table, periodic reference, or particle diagram to write a CER response about matter, reactions, or solutions.",
+		observations:
+			"two observations that distinguish macroscopic evidence from particle-level explanation",
+		changedCondition:
+			"one changed condition such as amount, concentration, temperature, limiting reactant, compound identity, or phase",
+		critiqueFocus:
+			"a particle, equation, or simulation model that shows conservation or structure well but hides scale, energy transfer, solvent behavior, or reaction mechanism",
+		critiqueImprovement:
+			"add coefficients, charges, phase labels, energy arrows, particle counts, or a limiting-reactant table to make the explanation more complete"
+	},
+	"intro-to-physics": {
+		remoteInvestigation:
+			"Introductory physics investigations use motion graphs, free-body diagrams, circuit diagrams, wave views, and simulation snapshots to connect observations with models.",
+		mappingFocus:
+			"one measurable relationship such as position-time, force-motion, energy transfer, circuit behavior, or wave property",
+		evidenceSource:
+			"a simulation run, motion graph, force diagram, circuit snapshot, wave diagram, or provided measurement table",
+		vocabularyTarget:
+			"position, velocity, acceleration, force, mass, energy, work, power, current, voltage, resistance, wave, frequency, and amplitude",
+		representation:
+			"a graph with labeled axes, free-body diagram, energy bar chart, circuit diagram, wave sketch, or proportionality table",
+		cerPrompt:
+			"Which physics model explains the measured pattern, and what graph, diagram, or data evidence supports it?",
+		notebookOutput:
+			"a known/unknown list, unit-aware graph or diagram, model statement, CER paragraph, and one reasonableness or units check",
+		safetyBoundary:
+			"Required physics work uses simulation and provided data; no household electricity, dropped objects, outdoor timing, or improvised apparatus is required.",
+		projectGoal:
+			"Use one approved introductory physics simulation or dataset to explain a measured relationship with a model and a CER response.",
+		observations:
+			"two observations tied to measurements, graph shape, slope, area, direction, or circuit behavior",
+		changedCondition:
+			"one changed condition such as mass, force, angle, voltage, resistance, medium, amplitude, or starting speed",
+		critiqueFocus:
+			"a graph, free-body diagram, circuit model, or simulation that explains a relationship but hides friction, uncertainty, scale, idealization, or boundary conditions",
+		critiqueImprovement:
+			"add units, coordinate sign convention, force labels, circuit direction, uncertainty bars, or a note about ideal assumptions"
+	},
+	"physics-level-2": {
+		remoteInvestigation:
+			"Advanced physics investigations use quantitative simulations, multi-step datasets, vector diagrams, energy/momentum accounting, and uncertainty notes.",
+		mappingFocus:
+			"one quantitative model with a stated coordinate system, assumption set, variable relationship, and validation check",
+		evidenceSource:
+			"a projectile, circular-motion, momentum, circuit, wave, field, or thermodynamics simulation plus a data table or graph",
+		vocabularyTarget:
+			"vector components, system, impulse, momentum, torque, field, flux, oscillation, uncertainty, conservation, approximation, and model limit",
+		representation:
+			"a vector diagram, free-body diagram, conservation table, circuit reduction, field sketch, residual plot, or uncertainty-aware graph",
+		cerPrompt:
+			"Which quantitative model is defensible, what assumptions make it valid, and where does the evidence show the model's limits?",
+		notebookOutput:
+			"a coordinate or system definition, symbolic setup, graph or diagram, numerical check, uncertainty or limitation note, and CER-style conclusion",
+		safetyBoundary:
+			"Required advanced physics work uses simulations, public references, and provided datasets; physical builds are optional case studies only.",
+		projectGoal:
+			"Use one advanced physics simulation or provided dataset to defend a quantitative model, including assumptions and limits.",
+		observations:
+			"two evidence statements that include direction, units, graph trend, conservation accounting, or uncertainty rather than only visual description",
+		changedCondition:
+			"one changed parameter such as launch angle, coefficient, mass ratio, radius, resistance, frequency, field strength, or boundary condition",
+		critiqueFocus:
+			"a quantitative model that is useful under assumptions but fails when friction, nonlinearity, measurement error, boundary conditions, or coupling becomes important",
+		critiqueImprovement:
+			"add an assumption list, residual check, uncertainty estimate, vector-component table, or comparison against a limiting case"
+	}
+};
+
 const authoredLearnerCourseIds = new Set(["intro-to-chemistry"]);
 
 const apCsaUnitMap = [
@@ -1084,6 +1244,8 @@ function addScienceResourceModule(courseId: string, course: RawCourse) {
 	const resources = scienceResourceBanks[courseId];
 	if (!resources) return;
 	const links = scienceResourceLinks[courseId];
+	const guidance = scienceResourceGuidance[courseId];
+	if (!guidance) return;
 
 	appendModule(course, {
 		kind: "appendix",
@@ -1092,7 +1254,7 @@ function addScienceResourceModule(courseId: string, course: RawCourse) {
 			{
 				title: "Curated Remote Resource Bank",
 				content: [
-					"**Remote investigation:** Shared-screen simulations, public images, provided datasets, diagrams, and paper notes provide the evidence source. Required work avoids household materials, lab kits, heat, chemicals, electricity components, and outdoor data collection.",
+					`**Remote investigation:** ${guidance.remoteInvestigation} Required work avoids household materials, lab kits, heat, chemicals, electricity components, and outdoor data collection.`,
 					`**Resource shortlist:**\n${bullets(resources)}`,
 					"**Evidence target:** Every investigation names the phenomenon, the source of evidence, the vocabulary target, and the CER prompt."
 				].join("\n\n"),
@@ -1101,31 +1263,47 @@ function addScienceResourceModule(courseId: string, course: RawCourse) {
 			},
 			{
 				title: "Module-by-Module Resource Mapping Routine",
-				content:
-					"**Concept path:** Each science module connects one simulation or media source, one provided data table or graph, one model or diagram, and one CER prompt to the module question and vocabulary.\n\n**Mapping routine:** The routine names the phenomenon and question, identifies the evidence source, states the vocabulary that must be used accurately, chooses the representation that fits the idea, and defines the claim-evidence-reasoning prompt. A resource is not enough by itself; the course item identifies what to notice, what to record, and what explanation the evidence supports.\n\n**Evidence targets:**\n- The evidence can be accessed through Zoom or a browser.\n- The task works without physical supplies.\n- The final product is a diagram, graph, data table, CER response, or short presentation."
+				content: [
+					`**Concept path:** Each module maps ${guidance.mappingFocus} to the module question. The evidence source is ${guidance.evidenceSource}.`,
+					`**Mapping routine:** Name the phenomenon and question, identify the evidence source, state the vocabulary target (${guidance.vocabularyTarget}), choose ${guidance.representation}, and define this claim-evidence-reasoning prompt: ${guidance.cerPrompt} A resource is not enough by itself; the course item identifies what to notice, what to record, and what explanation the evidence supports.`,
+					`**Evidence targets:**\n- The evidence can be accessed through Zoom or a browser.\n- The task works without physical supplies.\n- The final product includes ${guidance.notebookOutput}.`
+				].join("\n\n")
 			},
 			{
 				title: "Remote Safety and Accessibility Check",
-				content:
-					"**Concept path:** Required science projects are completable with notes, paper, a browser, and shared-screen material. Optional household observations need a fully equivalent data or simulation alternative.\n\n**Evidence target:** No required project depends on beakers, kits, food, chemicals, heat, electricity, outdoor access, or parent-managed materials."
+				content: [
+					"**Concept path:** Required science projects are completable with notes, paper, a browser, and shared-screen material. Optional household observations need a fully equivalent data or simulation alternative.",
+					`**Course boundary:** ${guidance.safetyBoundary}`,
+					"**Evidence target:** No required project depends on beakers, kits, food, chemicals, heat, electricity, outdoor access, or parent-managed materials."
+				].join("\n\n")
 			},
 			{
 				title: "Science Notebook Evidence Routine",
-				content:
-					"**Concept path:** A consistent notebook structure includes the date, phenomenon, vocabulary, observations, model or graph, claim, evidence, reasoning, and changed-condition prediction. Observations describe what is visible in the shared source; inferences explain what the observation suggests and why.\n\n**Evidence target:** The work separates observation from inference, supports claims with visible evidence, and includes one prediction about how the system would change if one variable or condition changed."
+				content: [
+					"**Concept path:** A consistent notebook structure includes the date, phenomenon, vocabulary, observations, model or graph, claim, evidence, reasoning, and changed-condition prediction. Observations describe what is visible in the shared source; inferences explain what the observation suggests and why.",
+					`**Notebook structure:** ${guidance.notebookOutput}.`,
+					`**Representation target:** Use ${guidance.representation} so the evidence is visible before the conclusion.`,
+					"**Evidence target:** The work separates observation from inference, supports claims with visible evidence, and includes one prediction about how the system would change if one variable or condition changed."
+				].join("\n\n")
 			}
 		],
 		supplementalProjects: [
 			{
 				title: "Resource Project: Simulation-to-CER Writeup",
-				content:
-					"**Project goal:** Use one approved simulation or provided dataset to write a CER response. Include a screenshot or sketch of the model, two observations, one claim, evidence from the source, and reasoning that uses the target vocabulary.\n\n**Completion checks:**\n- The evidence comes from the shared source.\n- The reasoning explains why the evidence supports the claim.\n- The work includes a prediction for what would change if one variable changed.",
+				content: [
+					`**Project goal:** ${guidance.projectGoal} Include ${guidance.observations}, one claim, evidence from the source, and reasoning that uses the target vocabulary.`,
+					`**Changed-condition prediction:** Predict what would happen if ${guidance.changedCondition} changed, then state what evidence would confirm or challenge that prediction.`,
+					"**Completion checks:**\n- The evidence comes from the shared source.\n- The reasoning explains why the evidence supports the claim.\n- The work includes a prediction for what would change if one variable changed."
+				].join("\n\n"),
 				mediaLink: links?.mediaLink
 			},
 			{
 				title: "Resource Project: Model Critique",
-				content:
-					"**Project goal:** Choose one model, diagram, graph, or simulation and explain what it shows well and what it leaves out.\n\n**Completion checks:**\n- The work identifies at least two strengths and one limitation.\n- The critique uses science vocabulary accurately.\n- The critique suggests one improvement or follow-up question.",
+				content: [
+					`**Project goal:** Choose ${guidance.critiqueFocus} and explain what it shows well and what it leaves out.`,
+					`**Improvement target:** ${guidance.critiqueImprovement}.`,
+					"**Completion checks:**\n- The work identifies at least two strengths and one limitation.\n- The critique uses science vocabulary accurately.\n- The critique suggests one improvement or follow-up question."
+				].join("\n\n"),
 				datasetLink: links?.datasetLink
 			}
 		]

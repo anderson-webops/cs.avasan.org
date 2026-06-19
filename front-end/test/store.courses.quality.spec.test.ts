@@ -3388,6 +3388,22 @@ describe("course text quality normalization", () => {
 				loadRawCourse("physics-level-2")
 			]);
 			const corpus = courses.map(allCourseText).join("\n");
+			const resourceBankBodies = courses.flatMap(course =>
+				course!.modules
+					.filter(module => module.title === "Remote Resource Bank")
+					.flatMap(module =>
+						[...module.curriculum, ...module.supplementalProjects]
+							.filter(item =>
+								[
+									"Module-by-Module Resource Mapping Routine",
+									"Science Notebook Evidence Routine",
+									"Resource Project: Simulation-to-CER Writeup",
+									"Resource Project: Model Critique"
+								].includes(item.title)
+							)
+							.map(item => item.content)
+					)
+			);
 
 			expect(corpus).toContain("**Investigation:**");
 			expect(corpus).not.toContain(
@@ -3411,6 +3427,13 @@ describe("course text quality normalization", () => {
 			);
 			expect(corpus).not.toMatch(
 				/motion[^.\n]{0,120}particles, formulas, reactions|graph[^.\n]{0,120}particles, formulas, reactions/i
+			);
+			expect(corpus).toContain("one labeled observation sketch");
+			expect(corpus).toContain("system boundary note");
+			expect(corpus).toContain("unit-aware graph or diagram");
+			expect(corpus).toContain("coordinate or system definition");
+			expect(new Set(resourceBankBodies).size).toBe(
+				resourceBankBodies.length
 			);
 		},
 		COURSE_SWEEP_TIMEOUT
