@@ -2431,7 +2431,7 @@ function addJavaBridgeModernModule(courseId: string, course: RawCourse) {
 				{
 					title: "Placement Gate",
 					content:
-						"**Readiness check:** Java Level 1 can move quickly through variables, conditionals, loops, and console I/O when the same ideas are already fluent in Python or C++. The non-negotiable evidence is Java-specific: method signatures, class layout, package/import habits, primitive versus reference types, and compile/run troubleshooting.\n\n**Evidence target:** A complete response explains what Java requires explicitly that Python hides and what Java hides compared with C++ memory management."
+						"**Readiness check:** Java Level 1 can move quickly through variables, conditionals, loops, and console I/O when the same ideas are already fluent in Python or C++. The non-negotiable evidence is Java-specific: method signatures, class layout, package/import habits, primitive versus reference types, and compile/run troubleshooting.\n\n**Placement evidence:** A fast-track learner should still demonstrate a clean compile-run cycle, explain `public static void main`, choose between `int`, `double`, `boolean`, `String`, and wrapper objects, and identify when a failure is syntax, type, runtime, or logic related. Familiar programming skill does not replace Java's explicit file, class, and type rules.\n\n**Evidence target:** A complete response explains what Java requires explicitly that Python hides and what Java hides compared with C++ memory management."
 				},
 				{
 					title: "Java Object Basics",
@@ -2441,7 +2441,7 @@ function addJavaBridgeModernModule(courseId: string, course: RawCourse) {
 				{
 					title: "AP CSA Alignment",
 					content:
-						"**Concept path:** Preserve the AP CSA essentials: integer division, boolean logic, method calls, class design, arrays, ArrayLists, inheritance, recursion, and sorting/searching. Acceleration should shorten familiar fundamentals, not skip AP-specific conventions or tracing style. The bridge should explicitly compare Java syntax with known Python/C++ ideas while keeping AP-style state tracing and method-contract language visible.\n\n**Evidence target:** A solution can be traced in AP style and still run cleanly in a local Java toolchain."
+						"**Concept path:** Preserve the AP CSA essentials: integer division, boolean logic, method calls, class design, arrays, ArrayLists, inheritance, recursion, and sorting/searching. Acceleration should shorten familiar fundamentals, not skip AP-specific conventions or tracing style. The bridge should explicitly compare Java syntax with known Python/C++ ideas while keeping AP-style state tracing and method-contract language visible.\n\n**Alignment routine:** For each accelerated topic, keep one AP-style trace or multiple-choice style reasoning check. Examples include predicting integer-division output, tracing an ArrayList after removals, identifying an overridden method call, or explaining why a recursive method terminates.\n\n**Evidence target:** A solution can be traced in AP style and still run cleanly in a local Java toolchain."
 				}
 			],
 			supplementalProjects: [
@@ -2495,7 +2495,7 @@ function addJavaBridgeModernModule(courseId: string, course: RawCourse) {
 				{
 					title: "Platform Gate",
 					content:
-						"**Readiness check:** Java Level 3 should feel like real application work: packages, NIO Path/Files, streams or well-structured loops, exceptions, tests, generics, simple concurrency boundaries, and maintainable command-line behavior. The gate is satisfied when code organization, error handling, and test fixtures are visible enough that the project could grow without becoming one large main method.\n\n**Evidence target:** A project demonstrates how Java organizes a medium-size program, not just how individual syntax features work."
+						"**Readiness check:** Java Level 3 should feel like real application work: packages, NIO Path/Files, streams or well-structured loops, exceptions, tests, generics, simple concurrency boundaries, and maintainable command-line behavior. The gate is satisfied when code organization, error handling, and test fixtures are visible enough that the project could grow without becoming one large main method.\n\n**Readiness evidence:** A medium-size Java project should have a clear source-root layout, named package boundaries, model or service classes that can run without terminal input, and at least one reproducible test fixture or manual test transcript. Error handling should report what failed and where, not only print a stack trace and continue.\n\n**Evidence target:** A project demonstrates how Java organizes a medium-size program, not just how individual syntax features work."
 				},
 				{
 					title: "Files, Streams, and Tests",
@@ -2505,19 +2505,19 @@ function addJavaBridgeModernModule(courseId: string, course: RawCourse) {
 				{
 					title: "Extension Architecture",
 					content:
-						"**Concept path:** ServiceLoader, explicit factories, or plugin-style registries are useful only when the project has multiple behaviors worth swapping. Architecture is justified by the change story, not by pattern vocabulary. A useful extension point has a stable interface, at least two implementations, and a small driver that does not need to know each implementation's internals.\n\n**Evidence target:** Adding a new processor, command, or report type does not require rewriting the application driver."
+						"**Concept path:** ServiceLoader, explicit factories, or plugin-style registries are useful only when the project has multiple behaviors worth swapping. Architecture is justified by the change story, not by pattern vocabulary. A useful extension point has a stable interface, at least two implementations, and a small driver that does not need to know each implementation's internals.\n\n**Design test:** Before adding an extension mechanism, name the future change it supports. Good examples include adding a new file parser, report formatter, scoring rule, command, or validation strategy. Weak examples are extensions that only rename a class or move the same hard-coded conditional into a different file.\n\n**Evidence target:** Adding a new processor, command, or report type does not require rewriting the application driver."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Java Level 3 Project: File Indexer or Log Analyzer",
 					content:
-						"**Project goal:** Build a Java application using records/classes, NIO file traversal, aggregation, and JUnit tests. The project should separate file discovery, parsing, data representation, analysis, and reporting so each piece can be tested or replaced independently.\n\n**Completion checks:**\n- File errors are handled clearly.\n- Tests cover empty, small, malformed, and larger inputs.\n- The final note explains the data model, API boundary, and one performance tradeoff."
+						"**Project goal:** Build a Java application using records/classes, NIO file traversal, aggregation, and JUnit tests. The project should separate file discovery, parsing, data representation, analysis, and reporting so each piece can be tested or replaced independently.\n\n**Required structure:** Use one layer to discover files, one layer to parse records, one layer to aggregate results, and one layer to format output. Keep rejected rows or unreadable files visible in the report instead of silently dropping them.\n\n**Completion checks:**\n- File errors are handled clearly.\n- Tests cover empty, small, malformed, and larger inputs.\n- The final note explains the data model, API boundary, and one performance tradeoff."
 				},
 				{
 					title: "Java Level 3 Project: Service Pipeline",
 					content:
-						"**Project goal:** Build a plugin-style processor using interfaces, packages, ServiceLoader or explicit factories, and tests. The pipeline should have a clear input object, processing contract, output object, and registration mechanism so new processors can be added deliberately.\n\n**Completion checks:**\n- Interface and implementation roles are separate.\n- Adding a new processor does not require rewriting the core loop.\n- The work explains why this is not just inheritance for its own sake."
+						"**Project goal:** Build a plugin-style processor using interfaces, packages, ServiceLoader or explicit factories, and tests. The pipeline should have a clear input object, processing contract, output object, and registration mechanism so new processors can be added deliberately.\n\n**Required structure:** Define the processor interface first, implement at least two processors with different behavior, and keep registration separate from processing. The driver should select or iterate processors without depending on their concrete class details.\n\n**Completion checks:**\n- Interface and implementation roles are separate.\n- Adding a new processor does not require rewriting the core loop.\n- The work explains why this is not just inheritance for its own sake."
 				}
 			]
 		},
@@ -2539,12 +2539,12 @@ function addJavaBridgeModernModule(courseId: string, course: RawCourse) {
 				{
 					title: "No-Graphics Java Project: CLI Inventory Service",
 					content:
-						"**Project goal:** Build a command-line inventory or library manager with records/classes, validation, file persistence, and tests. The CLI should be a thin shell over a testable model/service layer, not the place where all state and business rules are hidden.\n\n**Completion checks:**\n- Add, update, search, save, and load paths are covered.\n- Invalid commands and malformed saved data have defined outcomes.\n- The model layer can be tested without terminal input."
+						"**Project goal:** Build a command-line inventory or library manager with records/classes, validation, file persistence, and tests. The CLI should be a thin shell over a testable model/service layer, not the place where all state and business rules are hidden.\n\n**Required structure:** Represent stored items with a record or class, route commands through a service object, and isolate persistence behind load/save methods. The terminal runner should translate text commands into service calls; it should not own the inventory rules.\n\n**Completion checks:**\n- Add, update, search, save, and load paths are covered.\n- Invalid commands and malformed saved data have defined outcomes.\n- The model layer can be tested without terminal input."
 				},
 				{
 					title: "No-Graphics Java Project: Batch Report Tool",
 					content:
-						"**Project goal:** Read one or more local files, validate records, compute summaries, and write a compact report. The report should include both successful results and warnings so data-quality problems are visible instead of silently skipped.\n\n**Completion checks:**\n- Empty and malformed files are handled.\n- The report includes counts, warnings, and at least one derived metric.\n- Tests use deterministic fixtures instead of depending on manual input."
+						"**Project goal:** Read one or more local files, validate records, compute summaries, and write a compact report. The report should include both successful results and warnings so data-quality problems are visible instead of silently skipped.\n\n**Required structure:** Keep raw file reading, record parsing, summary calculation, and report formatting in separate methods or classes. That separation makes it possible to test malformed data without rereading the filesystem every time.\n\n**Completion checks:**\n- Empty and malformed files are handled.\n- The report includes counts, warnings, and at least one derived metric.\n- Tests use deterministic fixtures instead of depending on manual input."
 				}
 			]
 		},
@@ -2559,19 +2559,19 @@ function addJavaBridgeModernModule(courseId: string, course: RawCourse) {
 				{
 					title: "Event-driven State",
 					content:
-						"**Concept path:** Treat each user action as a state transition. Define the starting state, user event, model change, rendered result, and error/empty state before adding visual polish. This keeps JavaFX work from becoming disconnected button wiring and makes it possible to test model behavior outside the view.\n\n**Evidence target:** A normal click path, an empty/invalid path, and one persistence or refresh path are verified."
+						"**Concept path:** Treat each user action as a state transition. Define the starting state, user event, model change, rendered result, and error/empty state before adding visual polish. This keeps JavaFX work from becoming disconnected button wiring and makes it possible to test model behavior outside the view.\n\n**State trace:** For each important button or control, write the before-state, event, validation rule, model update, and rendered after-state. This trace prevents UI code from hiding business rules inside anonymous event handlers.\n\n**Evidence target:** A normal click path, an empty/invalid path, and one persistence or refresh path are verified."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Graphics Java Project: JavaFX Tracker",
 					content:
-						"**Project goal:** Build a JavaFX task, habit, or inventory tracker backed by a model layer and local persistence. The interface should show state clearly, while validation, saving, filtering, and updates remain in code that can be reasoned about separately from layout.\n\n**Completion checks:**\n- Add, edit, delete, filter, and empty-state behavior are visible.\n- Model logic is separated from controller/view code.\n- Saved data reloads correctly after restart."
+						"**Project goal:** Build a JavaFX task, habit, or inventory tracker backed by a model layer and local persistence. The interface should show state clearly, while validation, saving, filtering, and updates remain in code that can be reasoned about separately from layout.\n\n**Required structure:** Keep item data in records/classes, state transitions in model or service methods, and JavaFX controls focused on displaying and collecting values. Add a visible empty state and a validation message so the interface is understandable before any data exists.\n\n**Completion checks:**\n- Add, edit, delete, filter, and empty-state behavior are visible.\n- Model logic is separated from controller/view code.\n- Saved data reloads correctly after restart."
 				},
 				{
 					title: "Graphics Java Project: Event-driven Simulation",
 					content:
-						"**Project goal:** Build a small JavaFX simulation where controls change model state and the view updates predictably. The simulation should make the model's rules observable through the UI while still keeping the rules in ordinary Java classes.\n\n**Completion checks:**\n- The simulation has pause/reset or equivalent state controls.\n- Invalid or extreme values are handled visibly.\n- The final note explains the event-to-state-to-render path."
+						"**Project goal:** Build a small JavaFX simulation where controls change model state and the view updates predictably. The simulation should make the model's rules observable through the UI while still keeping the rules in ordinary Java classes.\n\n**Required structure:** Define the simulation state, update rule, event controls, and rendering path before styling. Use a timer, button, or slider only when it maps to a named state transition, and include one limit case such as zero speed, maximum count, or reset after completion.\n\n**Completion checks:**\n- The simulation has pause/reset or equivalent state controls.\n- Invalid or extreme values are handled visibly.\n- The final note explains the event-to-state-to-render path."
 				}
 			]
 		}
@@ -2913,7 +2913,7 @@ function addUnityFullProjectWorkflowModules(
 			{
 				title: "Repository Shape",
 				content:
-					"**Concept path:** A serious Unity project needs more than loose script snippets. The starter and review states use full project structure so scenes, packages, project settings, prefabs, scripts, tests, and attribution files can be inspected together. A clean project boundary also makes it possible to compare what was provided at the start with what changed by the review state.\n\n**Repository parts:** A complete project includes `ProjectSettings`, `Packages/manifest.json`, `Packages/packages-lock.json`, source scripts, scenes, prefabs or placeholder assets, tests where available, `THIRD_PARTY_ASSETS.md`, and Git LFS rules for large binary assets. The starter state opens cleanly without completed solution logic. The review state demonstrates the intended final behavior and validation path.\n\n**Evidence target:** The linked starter state can be cloned, opened, played, tested, and built."
+					"**Concept path:** A serious Unity project needs more than loose script snippets. The starter and review states use full project structure so scenes, packages, project settings, prefabs, scripts, tests, and attribution files can be inspected together. A clean project boundary also makes it possible to compare the current full-project baseline with what changed by the review state.\n\n**Repository parts:** A complete project includes `ProjectSettings`, `Packages/manifest.json`, `Packages/packages-lock.json`, source scripts, scenes, prefabs or placeholder assets, tests where available, `THIRD_PARTY_ASSETS.md`, and Git LFS rules for large binary assets. The starter state opens cleanly without completed solution logic. The review state demonstrates the intended final behavior and validation path.\n\n**Evidence target:** The linked starter state can be cloned, opened, played, tested, and built."
 			},
 			{
 				title: "Starter and Review Tag Model",

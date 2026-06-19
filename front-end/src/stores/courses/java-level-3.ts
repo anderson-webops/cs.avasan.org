@@ -486,7 +486,9 @@ export const javaLevel3Course: RawCourse = {
 
 **Practice targets:** Trace searches where the target is first, middle, last, and missing. Return either the matching index, the matching value, or a boolean result depending on the method contract.
 
-**Evidence target:** Runtime reasoning distinguishes best case, worst case, and average case rather than treating every search as the same amount of work.`
+**Contract check:** Decide what the method promises before writing the loop. A method that returns an index should not also print the answer, and a method that returns true or false should not hide where the match occurred unless the caller only needs membership.
+
+**Evidence target:** Runtime reasoning distinguishes best case, worst case, and average case rather than treating every search as the same amount of work. A strong trace names how many comparisons happened and why the loop stopped.`
 				},
 				{
 					title: "AJ5 Project 1: Linear Search Implementation",
@@ -506,7 +508,9 @@ export const javaLevel3Course: RawCourse = {
 
 **Practice targets:** Classify constant, logarithmic, linear, linearithmic, quadratic, and exponential patterns. Simplify expressions by keeping the dominant term and dropping constants.
 
-**Evidence target:** A runtime claim is tied to a counted operation, a variable input size, and a reason the dominant term controls growth.`
+**Comparison habit:** Use the same input variable when comparing algorithms. Searching one array of size n and then sorting a different list of size m should not be collapsed into one label unless the relationship between n and m is stated.
+
+**Evidence target:** A runtime claim is tied to a counted operation, a variable input size, and a reason the dominant term controls growth. The explanation should be able to predict what changes when the input doubles.`
 				},
 				{
 					title: "AJ5 Project 2: Big-O Practice",
@@ -575,7 +579,9 @@ export const javaLevel3Course: RawCourse = {
 
 **Practice targets:** Trace low, high, and mid values for found and missing targets. Include cases where the target is below all values, above all values, at the first element, and at the last element.
 
-**Evidence target:** Correct binary search reasoning always names the sorted-data precondition and explains why each discarded half is safe to ignore.`
+**Implementation caution:** Bound updates must move past the midpoint after an unsuccessful comparison. If low or high can remain unchanged, a missing target may create an infinite loop even though the midpoint calculation looks reasonable.
+
+**Evidence target:** Correct binary search reasoning always names the sorted-data precondition and explains why each discarded half is safe to ignore. The final trace should show the interval shrinking until the target is found or no valid interval remains.`
 				},
 				{
 					title: "AJ6 Project 1: Binary Search with Iteration",
@@ -606,6 +612,8 @@ export const javaLevel3Course: RawCourse = {
 					content: `**Concept path:** Binary search has logarithmic runtime because each unsuccessful comparison halves the remaining search interval. Doubling the input size adds about one more comparison rather than doubling the work.
 
 **Practice targets:** Compare the maximum number of checks for arrays of size 8, 16, 32, and 1024. Then contrast that growth with linear search on the same sizes.
+
+**Precondition tradeoff:** Binary search is only faster after sortedness is already available or worth creating. If the program searches once, sorting first may cost more than a linear scan; if it searches many times, the sort cost can be amortized across repeated fast lookups.
 
 **Evidence target:** The analysis connects repeated halving to logarithms and also names the cost of the precondition: the data must already be sorted or sorted before searching.`
 				},
@@ -882,6 +890,8 @@ export const javaLevel3Course: RawCourse = {
 
 **Practice targets:** Trace adjacent comparisons, swaps, and the sorted tail after each pass. Include an early-stop flag so a pass with no swaps can end the algorithm.
 
+**Invariant:** After each complete pass, the largest remaining unsorted value has bubbled into its final position at the end of the active range. Naming this invariant makes the shrinking inner loop a logical consequence rather than a memorized optimization.
+
 **Evidence target:** The trace explains why the inner loop can shrink after each pass and why a no-swap pass proves the list is already sorted.`
 				},
 				{
@@ -901,6 +911,8 @@ export const javaLevel3Course: RawCourse = {
 					content: `**Concept path:** Bubble sort is quadratic in the average and worst case because adjacent comparisons happen across many passes. With an early-stop flag, its best case can be linear for already sorted input.
 
 **Practice targets:** Count comparisons and swaps separately, then compare bubble sort with selection sort and insertion sort on sorted, reverse-sorted, and random lists.
+
+**Comparison habit:** Keep comparisons and data movement separate. Two algorithms can share the same Big-O label while behaving differently on nearly sorted data, expensive-to-move objects, or small lists where constant factors are visible.
 
 **Evidence target:** The analysis identifies the optimization's benefit without overstating it: bubble sort remains inefficient for large random lists even when simple improvements are added.`
 				},
@@ -969,6 +981,8 @@ export const javaLevel3Course: RawCourse = {
 
 **Practice targets:** Draw the split tree and the merge steps for a short list. Keep the divide phase separate from the conquer phase so the recursion structure is clear.
 
+**Implementation note:** The recursive method usually returns a sorted copy or writes into a helper array. In either version, the base case prevents endless splitting, and the merge step is where values are actually placed into sorted order.
+
 **Evidence target:** The explanation shows why merge sort is not just "sorting twice": the merge step depends on both halves already being sorted.`
 				},
 				{
@@ -1012,6 +1026,8 @@ export const javaLevel3Course: RawCourse = {
 					content: `**Concept path:** Merge sort performs logarithmically many split levels, and each level performs linear merge work. The result is O(n log n) time for typical implementations.
 
 **Practice targets:** Count split levels for powers of two, identify the linear work at each level, and compare the growth with quadratic sorting algorithms on larger input sizes.
+
+**Trace checkpoint:** For an eight-item list, there are three split levels before one-item lists appear. Each merge level touches all eight values in total, which is the concrete reason the runtime is described as linear work across logarithmically many levels.
 
 **Evidence target:** The analysis includes both time and space costs: merge sort is faster on large random lists than simple quadratic sorts, but it usually requires extra storage for temporary lists or arrays.`
 				}
@@ -2172,7 +2188,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "File-Backed Data Pipelines",
 					content:
-						"**Concept path:** Java file I/O connects naturally to parser and persistence habits from C++. A file-backed pipeline reads raw text, validates records, separates accepted rows from rejected rows, and writes output without corrupting the original data.\n**Core topics:** Reading lines, validating required fields, representing bad rows, writing clean output, preserving existing data when import fails, and keeping parsing separate from reporting.\n**Evidence target:** A reliable pipeline shows accepted-row counts, rejected-row reasons, one malformed-input case, and one output file or report that can be regenerated consistently."
+						"**Concept path:** Java file I/O connects naturally to parser and persistence habits from C++. A file-backed pipeline reads raw text, validates records, separates accepted rows from rejected rows, and writes output without corrupting the original data.\n\n**Core topics:** Reading lines, validating required fields, representing bad rows, writing clean output, preserving existing data when import fails, and keeping parsing separate from reporting.\n\n**Design sequence:** Treat raw text as untrusted until it has passed through parsing and validation. Convert each accepted row into a typed object or record, store rejected rows with reasons, then let the reporting stage work only with clean typed data plus a separate warning list.\n\n**Evidence target:** A reliable pipeline shows accepted-row counts, rejected-row reasons, one malformed-input case, and one output file or report that can be regenerated consistently."
 				},
 				{
 					title: "Lambdas, Streams, and Readable Transformations",

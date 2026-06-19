@@ -163,6 +163,7 @@ export function buildImplementationLabGuidance({
 			opener,
 			context?.exampleCase ??
 				`For **${label}**, record the starting files or commands, exact input, expected result, observed result, and diagnostic checkpoint that proves the code is moving in the right direction.`,
+			`Trace the example in the same vocabulary the project will use later: inputs, state changes, method or function boundaries, outputs, and the evidence that confirms each step. This keeps the example from becoming a demonstration to copy without understanding.`,
 			context?.boundaryCase ??
 				`Then add one **${label}** boundary or failure case so the project has a clear comparison between normal behavior and the edge condition that most needs protection.`
 		].join("\n\n");
