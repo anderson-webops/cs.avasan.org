@@ -1144,17 +1144,17 @@ function requiredWorkSteps(
 			[
 				`Restate ${moduleTitle} as a contest contract: input shape, output shape, constraints, and the property preserved by the algorithm.`,
 				`Trace a smallest useful ${moduleTitle} case by hand before coding so the implementation has a known target.`,
-				`Run the sample, one boundary case, and one duplicate, tie, ordering, or off-by-one case before comparing with the reference.`
+				`Run the ${moduleTitle} sample, one boundary case, and one duplicate, tie, ordering, or off-by-one case before comparing with the reference.`
 			],
 			[
 				`Identify the ${moduleTitle} variables, limits, invariant, and complexity budget before writing code.`,
 				`Use one tiny ${moduleTitle} trace to validate the idea, then implement in steps that keep input/output behavior exact.`,
-				`Check the official sample plus one non-sample case shaped by the hardest constraint or ordering assumption.`
+				`Check the ${moduleTitle} official sample plus one non-sample case shaped by the hardest constraint or ordering assumption.`
 			],
 			[
 				`Convert ${moduleTitle} into precise stdin/stdout behavior, a maintained invariant, and a target runtime before coding.`,
-				`Build the solution around one hand-checkable case, then expand to the sample and one adversarial or boundary input.`,
-				`Record which constraint, edge case, or ordering detail most influenced the algorithm.`
+				`Build the ${moduleTitle} solution around one hand-checkable case, then expand to the sample and one adversarial or boundary input.`,
+				`Record which ${moduleTitle} constraint, edge case, or ordering detail most influenced the algorithm.`
 			]
 		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
@@ -1543,7 +1543,7 @@ function referenceReviewStep(
 
 	if (family.includes("usaco")) {
 		return [
-			"After the solution samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling.",
+			`After the ${moduleTitle} samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling.`,
 			`Use the ${moduleTitle} reference only after local tests pass, then note one difference in proof idea, bounds handling, or complexity.`,
 			`Compare ${moduleTitle} with the reference after the sample and edge case pass, focusing on invariant, implementation detail, or failure case.`,
 			`After ${moduleTitle} behaves like a contest submission, use the reference to check one missed edge case or alternate invariant.`

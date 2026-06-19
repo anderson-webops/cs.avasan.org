@@ -390,8 +390,20 @@ describe("course text quality normalization", () => {
 			expect(corpus).toMatch(
 				/Use [^.\n]+ reference after fresh compile\/run evidence exists, then record one difference in class responsibility or API shape/
 			);
-			expect(corpus).toContain(
-				"After the solution samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling"
+			expect(corpus).not.toMatch(
+				/Build the solution around one hand-checkable case, then expand to the sample and one adversarial or boundary input/
+			);
+			expect(corpus).not.toMatch(
+				/Record which constraint, edge case, or ordering detail most influenced the algorithm/
+			);
+			expect(corpus).not.toMatch(
+				/Run the sample, one boundary case, and one duplicate, tie, ordering, or off-by-one case before comparing with the reference/
+			);
+			expect(corpus).not.toMatch(
+				/After the solution samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling/
+			);
+			expect(corpus).toMatch(
+				/After [^.\n]+ samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling/
 			);
 			expect(corpus).toContain(
 				"After the local lab works, compare against the reference and record one difference in evidence capture, boundary assumptions, defensive control, or rollback path"
