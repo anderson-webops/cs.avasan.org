@@ -1374,14 +1374,27 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("--python-game-aspect");
 		expect(pageSource).toContain("--python-game-max-width");
 		expect(pageSource).toContain("canvas-shell--game");
+		expect(pageSource).toContain("canvas-frame--game");
 		expect(pageSource).toContain("turtle-canvas--game");
 		expect(pageSource).toContain("ide-grid--drawing");
-		expect(pageSource).toContain(
+		const gameFrameStart = pageSource.indexOf(".canvas-frame--game");
+		const gameCanvasStart = pageSource.indexOf(".turtle-canvas--game");
+		const gameFrameSource = pageSource.slice(gameFrameStart, gameCanvasStart);
+		const gameCanvasSource = pageSource.slice(
+			gameCanvasStart,
+			pageSource.indexOf(".artifact-list", gameCanvasStart)
+		);
+
+		expect(gameFrameSource).toContain(
+			"width: min(100%, var(--python-game-max-width, 54rem));"
+		);
+		expect(gameFrameSource).toContain(
 			"aspect-ratio: var(--python-game-aspect, 640 / 400);"
 		);
-		expect(pageSource).toContain(
-			".turtle-canvas:not(.turtle-canvas--game)"
-		);
+		expect(gameCanvasSource).toContain("height: 100%;");
+		expect(gameCanvasSource).not.toContain("height: auto;");
+		expect(gameCanvasSource).not.toContain("aspect-ratio:");
+		expect(pageSource).toContain(".turtle-canvas:not(.turtle-canvas--game)");
 	});
 
 	it("keeps PyGame Zero actor angles anticlockwise like Pygame Zero", () => {

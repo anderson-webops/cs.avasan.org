@@ -4543,36 +4543,43 @@ onBeforeUnmount(() => {
 							class="canvas-shell"
 							:class="{ 'canvas-shell--game': usesGameCanvas }"
 						>
-							<canvas
-								ref="canvasRef"
-								:aria-label="`${selectedModeLabel} canvas`"
-								class="turtle-canvas"
+							<div
+								class="canvas-frame"
 								:class="{
-									'turtle-canvas--game': usesGameCanvas
+									'canvas-frame--game': usesGameCanvas
 								}"
 								:style="drawingCanvasStyle"
-								tabindex="0"
-								@blur="clearCanvasKeyboardState"
-								@mousedown="
-									dispatchCanvasPointerEvent(
-										$event,
-										'mousedown'
-									)
-								"
-								@mousemove="
-									dispatchCanvasPointerEvent(
-										$event,
-										'mousemove'
-									)
-								"
-								@mouseup="
-									dispatchCanvasPointerEvent(
-										$event,
-										'mouseup'
-									)
-								"
-								@wheel="dispatchCanvasWheelEvent"
-							/>
+							>
+								<canvas
+									ref="canvasRef"
+									:aria-label="`${selectedModeLabel} canvas`"
+									class="turtle-canvas"
+									:class="{
+										'turtle-canvas--game': usesGameCanvas
+									}"
+									tabindex="0"
+									@blur="clearCanvasKeyboardState"
+									@mousedown="
+										dispatchCanvasPointerEvent(
+											$event,
+											'mousedown'
+										)
+									"
+									@mousemove="
+										dispatchCanvasPointerEvent(
+											$event,
+											'mousemove'
+										)
+									"
+									@mouseup="
+										dispatchCanvasPointerEvent(
+											$event,
+											'mouseup'
+										)
+									"
+									@wheel="dispatchCanvasWheelEvent"
+								/>
+							</div>
 						</div>
 
 						<div
@@ -5534,7 +5541,17 @@ html.dark .editor-shortcuts ul {
 	padding: 1.25rem;
 }
 
+.canvas-frame {
+	width: 100%;
+}
+
+.canvas-frame--game {
+	width: min(100%, var(--python-game-max-width, 54rem));
+	aspect-ratio: var(--python-game-aspect, 640 / 400);
+}
+
 .turtle-canvas {
+	display: block;
 	width: 100%;
 	height: 23rem;
 	border: 1px solid var(--color-border);
@@ -5544,9 +5561,8 @@ html.dark .editor-shortcuts ul {
 }
 
 .turtle-canvas--game {
-	width: min(100%, var(--python-game-max-width, 54rem));
-	height: auto;
-	aspect-ratio: var(--python-game-aspect, 640 / 400);
+	width: 100%;
+	height: 100%;
 }
 
 .artifact-list {
