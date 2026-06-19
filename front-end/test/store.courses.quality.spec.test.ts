@@ -4439,6 +4439,21 @@ describe("course text quality normalization", () => {
 			expect(new Set(misconceptions).size).toBe(misconceptions.length);
 		}
 
+		const introPhysics = await loadRawCourse("intro-to-physics");
+		const introPhysicsCorpus = allCourseText(introPhysics);
+		expect(introPhysicsCorpus).toContain(
+			"Momentum treats motion as a conserved, direction-aware quantity during short interactions."
+		);
+		expect(introPhysicsCorpus).toContain(
+			"Fluids connect pressure, density, and buoyancy through contact forces spread over area"
+		);
+		expect(introPhysicsCorpus).toContain(
+			"Modern physics introduces places where classical models stop being enough."
+		);
+		expect(introPhysicsCorpus).toContain(
+			"The final portfolio turns physics knowledge into a defended design or investigation."
+		);
+
 		const physics2 = await loadRawCourse("physics-level-2");
 		const physics2Corpus = allCourseText(physics2);
 		expect(physics2Corpus).toContain(

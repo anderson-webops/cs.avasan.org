@@ -67,7 +67,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Worked Example Set: Reading Motion Stories",
 					content:
-						"Short scenarios such as a track sprinter, a marathon runner, and a tossed ball support translation between a story and a position-time or velocity-time graph. Examples should include objects speeding up, slowing down, stopping, reversing direction, or moving at constant velocity. Slope and area reasoning matter more than formula memorization alone."
+						"Short scenarios such as a track sprinter, a marathon runner, and a tossed ball support translation between a story and a position-time or velocity-time graph. Include objects speeding up, slowing down, stopping, reversing direction, or moving at constant velocity. Slope and area reasoning matter more than formula memorization alone."
 				},
 				{
 					title: "Graph and Data Exercise: Motion Graph Detective",
@@ -347,7 +347,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Reflection Question: How Has Your Physics Thinking Changed?",
 					content:
-						"Compare how evidence, graphs, and models were handled at the start of the course versus at the end. The goal is to make scientific growth visible, not just to review vocabulary."
+						"Compare how evidence, graphs, and models were handled at the start of the course versus at the end. The reflection should make scientific growth visible, not just review vocabulary."
 				}
 			],
 			supplementalProjects: [
@@ -374,44 +374,44 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Concept Path",
 					content:
-						"This module develops momentum as mass in motion, impulse as force over time, and conservation in short interactions. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
+						"Momentum treats motion as a conserved, direction-aware quantity during short interactions. Impulse connects force and time to a change in momentum, which makes collisions, recoil, and impact safety easier to analyze than force alone."
 				},
 				{
 					title: "Model and Reasoning Toolkit",
 					content:
-						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
+						"Name the system before choosing an equation: a cart pair, a ball and wall, or a person and safety device can each define different internal and external forces. Track momentum before and after the interaction, choose a positive direction, and use force-time area when the evidence is an impulse graph."
 				},
 				{
 					title: "Worked Example Set",
 					content:
-						"Use examples from collisions, recoil, impact safety, and force-time graphs. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
+						"Use collisions, recoil, impact safety, and force-time graphs as the core examples. Each problem should start with a before-and-after sketch, a prediction about which object changes momentum most, the conservation or impulse calculation, and a reasonableness check on direction and units."
 				},
 				{
 					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+						"Read a force-time graph and shade the impulse area, then compare it with a before-and-after momentum table. The useful representation shows whether momentum is conserved inside the chosen system or changed by an external impulse."
 				},
 				{
 					title: "Mini Lab, Simulation, or Case Study",
 					content:
-						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+						"Use a collision simulation, provided cart data, or a video case study of an impact safety design. The final explanation should identify the system, the momentum or impulse evidence, and one simplification such as friction, deformation, or measurement timing."
 				},
 				{
 					title: "Reflection and Transfer Practice",
 					content:
-						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
+						"Transfer the model to a different collision or safety device and explain what changes when contact time increases. A strong transfer distinguishes reduced force from reduced momentum change."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
+						"Checkpoint: identify the system boundary, the positive direction, the before-and-after momentum values, and whether external impulse is being ignored or measured. The explanation should say why conservation applies or why impulse is the better model."
 				},
 				{
 					title: "Common Pitfalls",
 					content:
-						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific introductory physics model."
+						"Common pitfalls include treating momentum as a scalar, assuming kinetic energy is always conserved in collisions, forgetting direction signs, and describing airbags as reducing momentum change rather than increasing stopping time to reduce average force."
 				},
 				{
 					title: "Extension Project: Impact Safety Brief",
@@ -426,44 +426,44 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Concept Path",
 					content:
-						"This module develops angular motion, pivots, lever arms, clockwise torque, and counterclockwise torque. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
+						"Rotational motion starts with pivots, lever arms, and the direction of rotation a force would cause. Torque depends on force, distance from the pivot, and angle, so the same push can have a different effect depending on where and how it is applied."
 				},
 				{
 					title: "Model and Reasoning Toolkit",
 					content:
-						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
+						"Mark the pivot first, then draw the force direction and perpendicular lever arm. Classify torques as clockwise or counterclockwise before calculating so equilibrium and rotation direction are visible in the diagram."
 				},
 				{
 					title: "Worked Example Set",
 					content:
-						"Use examples from doors, wrenches, seesaws, balance beams, and rotating tools. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
+						"Use doors, wrenches, seesaws, balance beams, and rotating tools as the main examples. Each example should compare at least two force locations or angles so the lever-arm idea is tested instead of memorized."
 				},
 				{
 					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+						"Build a torque table with force, lever arm, torque direction, and net torque. A balance-beam diagram should show how equal forces can fail to balance when their distances from the pivot differ."
 				},
 				{
 					title: "Mini Lab, Simulation, or Case Study",
 					content:
-						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+						"Use a seesaw simulation, door-handle case, or paper balance model. The final explanation should show the pivot, identify all torques, and state which small real-world effects were ignored, such as friction at the hinge."
 				},
 				{
 					title: "Reflection and Transfer Practice",
 					content:
-						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
+						"Transfer the model to a new object such as a steering wheel, wrench, or crane arm. Explain why a longer handle helps and when extra length would stop being the only important design factor."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
+						"Checkpoint: locate the pivot, draw the applied force, identify the perpendicular lever arm, and predict clockwise or counterclockwise rotation before calculating torque."
 				},
 				{
 					title: "Common Pitfalls",
 					content:
-						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific introductory physics model."
+						"Common pitfalls include measuring distance along the object instead of perpendicular distance to the force line, mixing clockwise and counterclockwise signs, and assuming the largest force always creates the largest torque."
 				},
 				{
 					title: "Extension Project: Rotation and Torque Audit",
@@ -478,44 +478,44 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Concept Path",
 					content:
-						"This module develops pressure as force over area, density as mass per volume, and buoyancy as displaced-fluid reasoning. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
+						"Fluids connect pressure, density, and buoyancy through contact forces spread over area and through the fluid displaced by an object. Pressure explains why the same force can feel different over different areas, while buoyancy explains floating as an upward force from the surrounding fluid."
 				},
 				{
 					title: "Model and Reasoning Toolkit",
 					content:
-						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
+						"Separate three questions before calculating: how much force is spread over what area, how much mass is packed into what volume, and how much fluid is displaced. This prevents pressure, density, and buoyant force from blending into one vague 'floating' idea."
 				},
 				{
 					title: "Worked Example Set",
 					content:
-						"Use examples from snowshoes, hydraulic lifts, boats, submarines, and sink-float data. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
+						"Use snowshoes, hydraulic lifts, boats, submarines, and sink-float data as the main examples. Compare cases where changing area changes pressure, changing volume changes density, or changing displaced fluid changes buoyant force."
 				},
 				{
 					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+						"Create a density table or pressure comparison chart, then use it to predict floating, sinking, or surface pressure. A strong representation labels the material, volume, mass, area, and force so the conclusion is tied to measurable quantities."
 				},
 				{
 					title: "Mini Lab, Simulation, or Case Study",
 					content:
-						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+						"Use a buoyancy simulation, boat-shape design case, or provided fluid-density dataset. The final explanation should identify the displaced-fluid evidence and state one limitation, such as treating the fluid as still or ignoring object deformation."
 				},
 				{
 					title: "Reflection and Transfer Practice",
 					content:
-						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
+						"Transfer the model to a new object such as a ship, balloon, submarine, or snowshoe. Explain whether pressure, density, or buoyancy is the main idea and what extra measurement would make the prediction stronger."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
+						"Checkpoint: distinguish pressure, density, and buoyant force in the same scenario. The answer should identify area, volume, mass, displaced fluid, and whether the object-fluid system is being simplified."
 				},
 				{
 					title: "Common Pitfalls",
 					content:
-						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific introductory physics model."
+						"Common pitfalls include saying heavy objects always sink, treating pressure and force as identical, ignoring area, and using density without specifying the material or the volume being compared."
 				},
 				{
 					title: "Extension Project: Boat Shape and Buoyancy Design",
@@ -530,44 +530,44 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Concept Path",
 					content:
-						"This module develops temperature, total thermal energy, heat transfer, specific heat, and phase-change behavior. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
+						"Thermal physics separates temperature from total thermal energy and uses heat transfer to explain warming, cooling, insulation, and phase changes. The same temperature change can require different energy amounts because mass, material, and phase matter."
 				},
 				{
 					title: "Model and Reasoning Toolkit",
 					content:
-						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
+						"Start by naming the system, surroundings, and direction of energy transfer. Then choose whether the situation is about temperature change, phase change, conduction, convection, radiation, or a combination of several transfer paths."
 				},
 				{
 					title: "Worked Example Set",
 					content:
-						"Use examples from insulation, cooling curves, heating curves, cooking, climate, and electronics. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
+						"Use insulation, cooling curves, heating curves, cooking, climate, and electronics as the main examples. Compare cases where temperature changes steadily with cases where added energy changes phase instead of temperature."
 				},
 				{
 					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+						"Read a heating or cooling curve and label warming segments, phase-change plateaus, and transfer direction. A data table should connect mass, material, temperature change, and energy so the graph is more than a line shape."
 				},
 				{
 					title: "Mini Lab, Simulation, or Case Study",
 					content:
-						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+						"Use a thermal simulation, insulation design case, or provided temperature dataset. The final explanation should state the transfer path, evidence for warming or cooling, and one uncontrolled factor such as airflow, contact area, or sensor delay."
 				},
 				{
 					title: "Reflection and Transfer Practice",
 					content:
-						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
+						"Transfer the model to a new thermal design such as a cooler, phone heat sink, winter coat, or cooking container. Explain which transfer path dominates and what data would test that claim."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
+						"Checkpoint: separate temperature, heat transfer, total thermal energy, and phase change in one scenario. The explanation should identify the system, surroundings, and direction of energy flow."
 				},
 				{
 					title: "Common Pitfalls",
 					content:
-						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific introductory physics model."
+						"Common pitfalls include treating heat and temperature as the same thing, assuming all materials warm equally, ignoring mass, and describing insulation as creating heat rather than slowing energy transfer."
 				},
 				{
 					title: "Extension Project: Thermal Design Memo",
@@ -582,44 +582,44 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Concept Path",
 					content:
-						"This module develops ray models for reflection, refraction, focal points, real images, and virtual images. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
+						"Optics uses ray models to explain reflection, refraction, focal points, and image formation. Mirrors and lenses become easier to reason about when the path of light is drawn before image properties are calculated."
 				},
 				{
 					title: "Model and Reasoning Toolkit",
 					content:
-						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
+						"Identify the optical element, incoming ray direction, normal line, focal point, and image side before using equations. Ray diagrams are the first model; formulas refine distances and magnification after the geometry is clear."
 				},
 				{
 					title: "Worked Example Set",
 					content:
-						"Use examples from mirrors, eyeglasses, cameras, projectors, telescopes, and lens simulations. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
+						"Use mirrors, eyeglasses, cameras, projectors, telescopes, and lens simulations as the main examples. Compare real and virtual images, converging and diverging behavior, and cases where changing object distance changes the image."
 				},
 				{
 					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+						"Draw ray diagrams for several object positions and record image orientation, relative size, and image type. The diagram should show reflection or refraction rules explicitly rather than only reporting an answer."
 				},
 				{
 					title: "Mini Lab, Simulation, or Case Study",
 					content:
-						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+						"Use a lens simulation, mirror case study, or provided optical-device diagram. The final explanation should connect the ray model to the device purpose and name one limitation such as ideal thin lenses or ignoring lens thickness."
 				},
 				{
 					title: "Reflection and Transfer Practice",
 					content:
-						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
+						"Transfer the model to a new optical device and explain which ray behavior matters most. A strong response distinguishes what the ray diagram predicts from what a real device adds through materials, apertures, and alignment."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
+						"Checkpoint: draw at least two correct rays, identify the image as real or virtual, and explain whether the model is using reflection, refraction, or both."
 				},
 				{
 					title: "Common Pitfalls",
 					content:
-						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific introductory physics model."
+						"Common pitfalls include using lens formulas before deciding image type, drawing rays that bend without a normal line, treating virtual images as fake, and forgetting that ray models are simplified representations of light behavior."
 				},
 				{
 					title: "Extension Project: Optical Device Explainer",
@@ -634,44 +634,44 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Concept Path",
 					content:
-						"This module develops magnetic fields, current-created fields, coils, motors, generators, and changing-field effects. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
+						"Magnetism connects fields, moving charge, coils, motors, generators, and induction. The module emphasizes how electric current can create magnetic effects and how changing magnetic conditions can produce electrical effects."
 				},
 				{
 					title: "Model and Reasoning Toolkit",
 					content:
-						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
+						"Start with a field diagram, current direction, coil orientation, and energy transformation. Then decide whether the situation is about an electromagnet, a force on a current, a motor effect, a generator effect, or a changing-field induction effect."
 				},
 				{
 					title: "Worked Example Set",
 					content:
-						"Use examples from electromagnets, speakers, relays, generators, wireless charging, and field diagrams. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
+						"Use electromagnets, speakers, relays, generators, wireless charging, and field diagrams as the main examples. Each example should trace current, magnetic field, motion or changing field, and the resulting energy transfer."
 				},
 				{
 					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+						"Create a field-line sketch or input-output table for a magnetic device. The useful representation shows direction, relative strength, and what changes when current, coil turns, magnet motion, or distance changes."
 				},
 				{
 					title: "Mini Lab, Simulation, or Case Study",
 					content:
-						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+						"Use an electromagnet simulation, generator case study, or speaker/motor diagram. The final explanation should identify the field interaction and one simplification, such as ideal coils, uniform fields, or neglected losses."
 				},
 				{
 					title: "Reflection and Transfer Practice",
 					content:
-						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
+						"Transfer the model between a motor and a generator. Explain which direction the energy conversion runs, which parts stay analogous, and what evidence distinguishes mechanical-to-electrical from electrical-to-mechanical behavior."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
+						"Checkpoint: identify current direction, magnetic field direction, device purpose, and energy transformation before using vocabulary such as motor, generator, or induction."
 				},
 				{
 					title: "Common Pitfalls",
 					content:
-						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific introductory physics model."
+						"Common pitfalls include treating magnetic fields as visible material lines, describing magnets as storing unlimited energy, mixing up motors and generators, and ignoring the role of changing fields in induction."
 				},
 				{
 					title: "Extension Project: Electromagnetic Device Brief",
@@ -686,44 +686,44 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Concept Path",
 					content:
-						"This module develops oscillation around equilibrium, amplitude, period, frequency, damping, and resonance. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
+						"Simple harmonic motion describes repeated motion around equilibrium. Amplitude, period, frequency, damping, and resonance explain why springs, pendulums, instruments, and structures can respond strongly to repeated pushes."
 				},
 				{
 					title: "Model and Reasoning Toolkit",
 					content:
-						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
+						"Identify the equilibrium point, restoring effect, amplitude, period, and energy changes during the cycle. Then decide whether damping or driving frequency is important enough to include in the model."
 				},
 				{
 					title: "Worked Example Set",
 					content:
-						"Use examples from springs, pendulums, swings, instruments, bridges, and resonance graphs. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
+						"Use springs, pendulums, swings, instruments, bridges, and resonance graphs as the main examples. Compare free oscillation, damped oscillation, and driven oscillation so resonance is tied to evidence rather than treated as a dramatic word."
 				},
 				{
 					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+						"Read position-time or amplitude-frequency graphs and identify amplitude, period, frequency, damping, and resonance peaks. A strong graph explanation connects the shape to energy transfer and restoring motion."
 				},
 				{
 					title: "Mini Lab, Simulation, or Case Study",
 					content:
-						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+						"Use a pendulum simulation, spring dataset, sound resonance example, or bridge case study. The final explanation should identify the driving pattern, the response, and one factor that would add damping or shift the period."
 				},
 				{
 					title: "Reflection and Transfer Practice",
 					content:
-						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
+						"Transfer the model to a different oscillating system and decide whether simple harmonic motion is a good approximation. Explain what would break the approximation, such as large angles, friction, nonlinear springs, or irregular driving."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
+						"Checkpoint: identify equilibrium, amplitude, period, frequency, and whether damping or driving is present. The explanation should separate one full cycle from one crossing of equilibrium."
 				},
 				{
 					title: "Common Pitfalls",
 					content:
-						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific introductory physics model."
+						"Common pitfalls include confusing amplitude with period, assuming resonance always destroys a system, ignoring damping, and treating every repeated motion as perfectly simple harmonic."
 				},
 				{
 					title: "Extension Project: Resonance Case Study",
@@ -738,44 +738,44 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Concept Path",
 					content:
-						"This module develops gravity as a universal interaction, orbital motion as falling around, and frame-aware space reasoning. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
+						"Astronomy extends gravity from falling objects to planets, moons, satellites, and orbital motion. Orbits are modeled as continuous falling around a central body, not as motion without gravity."
 				},
 				{
 					title: "Model and Reasoning Toolkit",
 					content:
-						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
+						"Name the central body, orbiting object, distance scale, velocity direction, and gravitational force direction. Then decide whether the task is comparing weight, explaining an orbit, reading planetary data, or reasoning about escape and capture."
 				},
 				{
 					title: "Worked Example Set",
 					content:
-						"Use examples from planetary data, satellite orbits, weight on other worlds, and orbit simulations. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
+						"Use planetary data, satellite orbits, weight on other worlds, and orbit simulations as the main examples. Each example should connect the diagram to gravitational force direction and the motion that follows."
 				},
 				{
 					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+						"Compare orbital radius, period, speed, or surface gravity using a table or scaled diagram. The representation should reveal that distance and mass both matter, and that visual scale can be misleading without units."
 				},
 				{
 					title: "Mini Lab, Simulation, or Case Study",
 					content:
-						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+						"Use an orbit simulation, mission sketch, or provided planetary dataset. The final explanation should show force direction, velocity direction, and one simplification such as circular orbit assumptions or ignoring atmospheric drag."
 				},
 				{
 					title: "Reflection and Transfer Practice",
 					content:
-						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
+						"Transfer the model from a satellite to a moon, planet, or spacecraft maneuver. Explain why orbiting is not escaping gravity and what data would be needed to compare two orbital paths."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
+						"Checkpoint: draw force and velocity directions for an orbiting object, then explain the difference between falling, orbiting, and escaping in terms of speed and gravitational interaction."
 				},
 				{
 					title: "Common Pitfalls",
 					content:
-						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific introductory physics model."
+						"Common pitfalls include saying there is no gravity in orbit, drawing orbital force forward along the path, using not-to-scale diagrams as evidence, and confusing mass with weight on different worlds."
 				},
 				{
 					title: "Extension Project: Mission Planning Sketch",
@@ -790,44 +790,44 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Concept Path",
 					content:
-						"This module develops model domains, spectra, photons, quantized energy, and evidence that pushes beyond classical models. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
+						"Modern physics introduces places where classical models stop being enough. Spectra, photons, quantized energy, semiconductors, and timing effects show that a model can be useful in one domain while needing replacement or refinement in another."
 				},
 				{
 					title: "Model and Reasoning Toolkit",
 					content:
-						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
+						"Start by naming the classical expectation, the evidence that strains it, and the newer idea that explains the observation better. This keeps modern physics grounded in model limits rather than turning it into disconnected facts."
 				},
 				{
 					title: "Worked Example Set",
 					content:
-						"Use examples from emission spectra, absorption, solar panels, lasers, semiconductors, and GPS timing. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
+						"Use emission spectra, absorption, solar panels, lasers, semiconductors, and GPS timing as the main examples. Each example should identify the observed evidence, the classical idea that is insufficient, and the newer model feature that improves the explanation."
 				},
 				{
 					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+						"Read a spectrum, energy-level diagram, or device data table. The representation should make discrete energies, absorption/emission patterns, or model breakdown visible instead of only naming quantum vocabulary."
 				},
 				{
 					title: "Mini Lab, Simulation, or Case Study",
 					content:
-						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+						"Use a spectrum simulation, semiconductor case study, photoelectric-effect visualization, or GPS timing scenario. The final explanation should connect evidence to model limits and avoid claiming more precision than the introductory model supports."
 				},
 				{
 					title: "Reflection and Transfer Practice",
 					content:
-						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
+						"Transfer the model-limit idea to a new technology or observation. Explain which classical idea still helps, which part fails, and what evidence would justify introducing the newer model."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
+						"Checkpoint: name the observation, the classical model being challenged, and the modern-physics idea that handles the evidence better. The response should avoid vague claims that quantum physics is simply 'weird.'"
 				},
 				{
 					title: "Common Pitfalls",
 					content:
-						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific introductory physics model."
+						"Common pitfalls include treating modern physics as magic, claiming classical physics is useless, confusing photons with ordinary particles in every respect, and using device names without explaining the evidence behind the model."
 				},
 				{
 					title: "Extension Project: Modern Physics Explainer",
@@ -842,49 +842,49 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Concept Path",
 					content:
-						"This module develops physics claims supported by models, diagrams, calculations, graphs, uncertainty, and design tradeoffs. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
+						"The final portfolio turns physics knowledge into a defended design or investigation. A strong portfolio uses a focused question, a model, evidence, uncertainty, and at least one design tradeoff rather than collecting disconnected artifacts."
 				},
 				{
 					title: "Model and Reasoning Toolkit",
 					content:
-						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
+						"Choose one physics thread, define the system, state the assumption that makes the model usable, and decide what evidence would support or weaken the claim. Calculations and graphs should serve the argument rather than appear as decoration."
 				},
 				{
 					title: "Worked Example Set",
 					content:
-						"Use examples from portfolio artifacts from motion, forces, circuits, collisions, waves, thermal systems, or space. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
+						"Review portfolio artifacts from motion, forces, circuits, collisions, waves, thermal systems, or space. For each artifact, identify the claim, the model used, the evidence, and the limitation that would need improvement in a second revision."
 				},
 				{
 					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+						"Select the graph, diagram, data table, or storyboard that best supports the final claim. The chosen representation should make the relationship visible and include units, labels, and enough context for someone else to evaluate the evidence."
 				},
 				{
 					title: "Mini Lab, Simulation, or Case Study",
 					content:
-						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+						"Use a safe remote simulation, provided dataset, video observation, or paper design case as the final evidence source. The final explanation should state the claim, evidence, model, uncertainty, and revision decision in a single coherent argument."
 				},
 				{
 					title: "Reflection and Transfer Practice",
 					content:
-						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
+						"Close by transferring the portfolio model to a related design or investigation. Explain what would stay the same, what would need new evidence, and which assumption is most fragile."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
+						"Checkpoint: confirm that the portfolio has a focused question, named model, evidence source, labeled representation, limitation, and revision plan before final polish begins."
 				},
 				{
 					title: "Common Pitfalls",
 					content:
-						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific introductory physics model."
+						"Common pitfalls include making the portfolio too broad, hiding weak evidence behind visual polish, omitting units, using a graph without interpreting it, and failing to say what the model cannot explain."
 				},
 				{
 					title: "Extension Project: Final Physics Portfolio",
 					content:
-						"Build a final physics design portfolio around one question, model, evidence source, and revision. The portfolio should include a diagram or graph, a calculation or data-based comparison, a stated limitation, and a final paragraph explaining how the evidence changed the design."
+						"Build a final physics design portfolio around one question, model, evidence source, and revision. Include a diagram or graph, a calculation or data-based comparison, a stated limitation, and a final paragraph explaining how the evidence changed the design."
 				}
 			]
 		}
