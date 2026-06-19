@@ -2323,6 +2323,27 @@ describe("course text quality normalization", () => {
 		expect(corpus).toContain("never ask it to target unauthorized systems");
 	});
 
+	it("keeps Network Systems explanations topic-specific", async () => {
+		const course = await loadRawCourse("network-systems");
+		expect(course).not.toBeNull();
+		const corpus = allCourseText(course);
+
+		expect(corpus).not.toMatch(/This section covers/i);
+		expect(corpus).not.toMatch(/Key idea:/i);
+		expect(corpus).not.toMatch(/Skill target:/i);
+		expect(corpus).not.toMatch(/The goal is to make port-to-process/i);
+		expect(corpus).not.toMatch(/The goal is to make dual-stack/i);
+		expect(corpus).toContain(
+			"Interfaces attach a host to a network, frames move across the local link"
+		);
+		expect(corpus).toContain(
+			"UFW provides a safe, readable host-policy layer"
+		);
+		expect(corpus).toContain(
+			"Safe port forwarding is a last-mile exposure step"
+		);
+	});
+
 	it("keeps Network Systems IPv6 projects distinct and clearly named", async () => {
 		const course = await loadRawCourse("network-systems");
 		expect(course).not.toBeNull();

@@ -86,7 +86,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Interfaces, Frames, Packets, Sockets, and Ports",
 					content:
-						"This section covers the vocabulary in concrete layers: interfaces attach a host to a network, frames move locally, packets move end to end, sockets bind applications to the stack, and ports distinguish services on one host. Skill target: Explain these as related but different objects instead of using them interchangeably."
+						"Interfaces attach a host to a network, frames move across the local link, packets move end to end between IP addresses, sockets connect applications to the network stack, and ports distinguish services on one host. Treat these as related but different objects so later diagnostics can identify which layer is actually failing."
 				},
 				{
 					title: "TCP versus UDP",
@@ -164,7 +164,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "MAC, IPv4, and IPv6 Addresses",
 					content:
-						"This section covers MAC addresses as local-link identifiers, IPv4 and IPv6 addresses as network-layer identities, and hostnames as human-facing labels that must be resolved. Key idea: A hostname is not the same thing as the destination address ultimately used on the wire."
+						"MAC addresses identify local-link endpoints, IPv4 and IPv6 addresses identify network-layer destinations, and hostnames are human-facing labels that must be resolved before packets can move. A hostname may be the name typed by a person, but the wire ultimately carries addresses and link-layer delivery information."
 				},
 				{
 					title: "Public versus Private Addressing",
@@ -239,7 +239,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Local Subnets and Default Gateways",
 					content:
-						"This section covers local subnet behavior as the boundary between destinations a host can reach directly and destinations that must go through a router. Key idea: The default gateway is not a magic internet button; it is simply the next hop for traffic that leaves the local segment."
+						"Local subnet behavior defines which destinations a host can reach directly and which destinations must go through a router. The default gateway is not a magic internet button; it is the next hop chosen when traffic leaves the local segment."
 				},
 				{
 					title: "How Routers Forward Traffic",
@@ -317,7 +317,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "What a Port Actually Identifies",
 					content:
-						"This section covers a port as one part of a socket endpoint, not as a stand-alone service identity. Key idea: A process, protocol, local address, and port together define what is actually listening or connected."
+						"A port is one part of a socket endpoint, not a complete service identity by itself. A process, protocol, local address, and port together define what is actually listening or connected, which is why port-only explanations are often incomplete."
 				},
 				{
 					title: "Ephemeral Ports and Client-Side Source Ports",
@@ -327,7 +327,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Using ss, netstat, and lsof to Map Services",
 					content:
-						"Use `ss`, `netstat`, and `lsof -i` to map listening sockets and established connections back to processes. The goal is to make port-to-process mapping a routine diagnostic habit, not a one-time command memorization exercise."
+						"`ss`, `netstat`, and `lsof -i` map listening sockets and established connections back to processes. Build the habit of proving which process owns a network endpoint before changing firewall rules, killing services, or assuming a port belongs to a particular application."
 				},
 				{
 					title: "Project: Map All Listening Services on a Linux Host",
@@ -383,12 +383,12 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Recursive and Authoritative Resolution",
 					content:
-						"This section covers the difference between recursive resolvers and authoritative servers: who is answering a question, and who is forwarding it. This matters when a hostname resolves differently from different locations or after a change has only partially propagated."
+						"Recursive resolvers and authoritative servers play different roles: one follows or caches the answer path, and the other is responsible for the zone data. This distinction matters when a hostname resolves differently from different locations or after a DNS change has only partially propagated."
 				},
 				{
 					title: "Caching and Resolver State",
 					content:
-						"Caching explains why DNS changes can appear inconsistent during deployment or troubleshooting. Key idea: Cached success, cached failure, and local override files all shape what a resolver returns."
+						"DNS caching explains why changes can appear inconsistent during deployment or troubleshooting. Cached success, cached failure, TTL behavior, and local override files all shape what a resolver returns before the request ever reaches an authoritative server."
 				},
 				{
 					title: "dig, nslookup, host, and Resolver Configuration",
@@ -398,7 +398,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Project: Compare IPv4 and IPv6 Resolution for the Same Hostname",
 					content:
-						"Use the resolution-comparison lab to inspect A and AAAA answers, compare resolver outputs, and explain which address family a client is likely to try first. The goal is to make dual-stack resolution behavior concrete instead of leaving it as background theory.",
+						"The resolution-comparison lab inspects A and AAAA answers, compares resolver outputs, and explains which address family a client is likely to try first. Dual-stack behavior becomes concrete when the same hostname produces different address families with different paths and failure modes.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS4-IPv4-vs-IPv6-Resolution-Comparison/starter",
 					solutionLink:
@@ -449,7 +449,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "ping, traceroute, tracepath, and mtr",
 					content:
-						"This section covers the core path tools as different ways of answering different questions: basic reachability, approximate hop path, path MTU hints, and repeated latency observation. Stop treating them as interchangeable and instead identify what evidence each one is actually collecting."
+						"The core path tools answer different questions: `ping` checks basic reachability, `traceroute` estimates hop path, `tracepath` can expose path MTU clues, and `mtr` watches repeated latency and loss patterns. Choose the tool based on the evidence needed instead of treating them as interchangeable."
 				},
 				{
 					title: "curl, nc, and telnet for Service Checks",
@@ -515,12 +515,12 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "ip addr, ip link, and Interface State",
 					content:
-						"Use `ip addr` and `ip link` to make interface state visible: addresses, link state, and whether an interface is even up. Key idea: No amount of higher-level diagnostics matters if the interface itself is down or misaddressed."
+						"`ip addr` and `ip link` make interface state visible: assigned addresses, link state, and whether an interface is even up. Higher-level diagnostics cannot compensate for an interface that is down, disconnected, or misaddressed."
 				},
 				{
 					title: "ip route and Static versus Dynamic Paths",
 					content:
-						"This section covers `ip route` as the host's own forwarding decision table. Key idea: Default routes, directly connected networks, and the difference between routes learned automatically and routes set deliberately for a lab or override."
+						"`ip route` is the host's own forwarding decision table. Default routes, directly connected networks, automatically learned paths, and deliberately configured lab overrides explain why a host chooses one next hop instead of another."
 				},
 				{
 					title: "ARP, Neighbor Discovery, and ip neigh",
@@ -583,7 +583,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Global Unicast, Link-Local, and Loopback",
 					content:
-						"This section covers the practical IPv6 address categories that appear in diagnostics and firewall policies. Link-local addresses have strictly local meaning even though they look like 'real' IPv6 addresses."
+						"Practical IPv6 diagnostics depend on recognizing global unicast, link-local, and loopback addresses. Link-local addresses have strictly local meaning even though they look like routable IPv6 addresses, so scope must be included in the interpretation."
 				},
 				{
 					title: "SLAAC and DHCPv6 at a Conceptual Level",
@@ -661,7 +661,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "UFW Basics",
 					content:
-						"This section covers UFW as a safe, readable host-policy layer rather than as a wall of raw packet filter rules. Key idea: Allow, deny, limit, delete, and numbered rules before they try to expose a service deliberately."
+						"UFW provides a safe, readable host-policy layer before raw packet-filter syntax becomes necessary. Allow, deny, limit, delete, and numbered rules are enough to build deliberate service exposure while keeping the recovery path understandable."
 				},
 				{
 					title: "Application Profiles, Logging, and Safe Rollout",
@@ -727,7 +727,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "tcpdump and Beginner-Friendly Packet Anatomy",
 					content:
-						"This section covers `tcpdump` as the first deep-inspection tool for failures that ports, routes, and DNS no longer explain alone. The practical target is identifying source, destination, protocol, ports, and the broad shape of the exchange rather than decoding every bit of every header."
+						"`tcpdump` is the first deep-inspection tool for failures that ports, routes, and DNS no longer explain alone. Begin by identifying source, destination, protocol, ports, and the broad shape of the exchange rather than trying to decode every bit of every header."
 				},
 				{
 					title: "Safe Filter Expressions",
@@ -737,7 +737,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Host Capture versus Router Capture",
 					content:
-						"This section covers capture placement as a question in its own right. Capturing on the host answers whether the host sent or received packets at all; capturing on a router or edge device answers whether the path is dropping or rewriting traffic before it reaches the service."
+						"Capture placement is a diagnostic decision. Capturing on the host answers whether the host sent or received packets at all; capturing on a router or edge device answers whether the path is dropping or rewriting traffic before it reaches the service."
 				},
 				{
 					title: "Project: Capture and Analyze a Local HTTP Request with tcpdump",
@@ -795,7 +795,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "HTTP and HTTPS",
 					content:
-						"Use HTTP and HTTPS to connect protocol behavior back to ports, hostnames, and TLS. Key idea: What remains visible before encryption, what becomes opaque after TLS, and why HTTPS diagnostics often require both packet-level and application-level thinking."
+						"HTTP and HTTPS connect protocol behavior back to ports, hostnames, and TLS. The useful comparison is what remains visible before encryption, what becomes opaque after TLS starts, and why HTTPS diagnostics often require both packet-level and application-level evidence."
 				},
 				{
 					title: "SSH as a Diagnostic and Administrative Protocol",
@@ -805,12 +805,12 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "SMTP and DNS as Support Protocols",
 					content:
-						"SMTP and DNS show that not every important network protocol looks like interactive browsing. Skill target: connect name resolution and mail transport to the same reachability, port, and policy concepts as the rest of the course."
+						"SMTP and DNS show that not every important network protocol looks like interactive browsing. Name resolution and mail transport still depend on the same reachability, port, policy, and evidence-gathering habits used throughout the course."
 				},
 				{
 					title: "How TLS Changes Visibility",
 					content:
-						"TLS protects application payload visibility but does not make the existence of the connection itself invisible. Key idea: Which layers still reveal addresses, ports, and timing and which layers become opaque after encryption begins."
+						"TLS protects application payload visibility but does not make the existence of the connection itself invisible. Addresses, ports, timing, certificate negotiation, and connection metadata can remain visible even when application content becomes opaque."
 				},
 				{
 					title: "Unit 11: Common Application Protocols: Core Project",
@@ -870,7 +870,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Expose Only What Must Be Reachable",
 					content:
-						"This section covers exposure as a deliberate design decision rather than a side effect of starting a service. Skill target: Name which ports are meant to be public, which ports are private, and how firewall or proxy layers enforce that boundary."
+						"Exposure is a deliberate design decision, not a side effect of starting a service. A defensible service map names which ports are public, which ports stay private, and how firewall or proxy layers enforce that boundary."
 				},
 				{
 					title: "Reverse Proxy and Firewall Layering",
@@ -880,7 +880,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Safe Port Forwarding and External Validation",
 					content:
-						"This section covers safe port forwarding as a last-mile exposure step that must be paired with limited scope and outside verification. Key idea: Validating from the same host is not enough once the question is whether another machine on another segment can really reach the service."
+						"Safe port forwarding is a last-mile exposure step that must be paired with limited scope and outside verification. Testing from the same host is not enough once the real question is whether another machine on another segment can reach the service."
 				},
 				{
 					title: "Project Pass: Validate the NAT and Exposure Topology from Outside",
