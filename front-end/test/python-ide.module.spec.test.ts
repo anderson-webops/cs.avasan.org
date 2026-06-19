@@ -1644,6 +1644,38 @@ describe("python IDE project helpers", () => {
 		);
 	});
 
+	it("cleans up PyGame Zero tone timers and suspends idle audio context", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const stopAllGameAudioStart = pageSource.indexOf(
+			"function stopAllGameAudio"
+		);
+		const stopAllGameAudioSource = pageSource.slice(
+			stopAllGameAudioStart,
+			pageSource.indexOf("async function ensureGameCourseAssetsLoaded")
+		);
+		const playGameToneStart = pageSource.indexOf("function playGameTone");
+		const playGameToneSource = pageSource.slice(
+			playGameToneStart,
+			pageSource.indexOf("function startGameLoop", playGameToneStart)
+		);
+
+		expect(pageSource).toContain("function suspendGameAudioContext");
+		expect(pageSource).toContain(
+			'console.warn("Could not suspend PyGame Zero audio context.", error);'
+		);
+		expect(stopAllGameAudioSource).toContain("stopAllGameTones();");
+		expect(stopAllGameAudioSource).toContain("suspendGameAudioContext();");
+		expect(playGameToneSource).toContain(
+			"let timeout: ReturnType<typeof window.setTimeout> | null = null;"
+		);
+		expect(playGameToneSource).toContain("window.clearTimeout(timeout);");
+		expect(playGameToneSource).toContain("timeout = null;");
+		expect(playGameToneSource).toContain("timeout = window.setTimeout(");
+	});
+
 	it("normalizes project file names without accepting unsafe names", () => {
 		expect(normalizePythonFileName("helper tools")).toBe("helper_tools.py");
 		expect(normalizePythonFileName("helpers/math tools")).toBe(

@@ -2229,6 +2229,7 @@ function stopAllGameAudio() {
 	gameSoundAudio.clear();
 	stopGameMusic();
 	stopAllGameTones();
+	suspendGameAudioContext();
 }
 
 async function ensureGameCourseAssetsLoaded(
@@ -2530,6 +2531,15 @@ function gameAudioContext() {
 	return gameToneAudioContext;
 }
 
+function suspendGameAudioContext() {
+	if (!gameToneAudioContext || gameToneAudioContext.state !== "running")
+		return;
+
+	void gameToneAudioContext.suspend().catch((error: unknown) => {
+		console.warn("Could not suspend PyGame Zero audio context.", error);
+	});
+}
+
 function stopGameTone(toneID: number) {
 	const handle = gameToneAudio.get(toneID);
 	if (!handle) return;
@@ -2568,6 +2578,7 @@ function playGameTone(frequency: number, duration: number) {
 	const gain = context.createGain();
 	const startedAt = context.currentTime;
 	const stoppedAt = startedAt + safeDuration;
+	let timeout: ReturnType<typeof window.setTimeout> | null = null;
 
 	oscillator.type = "sine";
 	oscillator.frequency.setValueAtTime(safeFrequency, startedAt);
@@ -2582,6 +2593,10 @@ function playGameTone(frequency: number, duration: number) {
 	gain.connect(context.destination);
 
 	const cleanup = () => {
+		if (timeout !== null) {
+			window.clearTimeout(timeout);
+			timeout = null;
+		}
 		gameToneAudio.delete(toneID);
 		try {
 			oscillator.disconnect();
@@ -2592,7 +2607,7 @@ function playGameTone(frequency: number, duration: number) {
 	};
 	oscillator.addEventListener("ended", cleanup, { once: true });
 
-	const timeout = window.setTimeout(
+	timeout = window.setTimeout(
 		stopGameTone,
 		Math.ceil((safeDuration + 0.05) * 1000),
 		toneID
