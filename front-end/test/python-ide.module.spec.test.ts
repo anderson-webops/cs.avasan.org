@@ -926,6 +926,22 @@ describe("python IDE project helpers", () => {
 		);
 	});
 
+	it("keeps rendered HTML artifacts isolated from the IDE page", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const iframeStart = pageSource.indexOf("<iframe");
+		const iframeEnd = pageSource.indexOf("/>", iframeStart);
+		const iframeSource = pageSource.slice(iframeStart, iframeEnd);
+
+		expect(pageSource).toContain('artifact.mimeType === "text/html"');
+		expect(iframeSource).toContain('v-else-if="artifact.srcdoc"');
+		expect(iframeSource).toContain('referrerpolicy="no-referrer"');
+		expect(iframeSource).toContain('sandbox="allow-scripts"');
+		expect(iframeSource).not.toContain("allow-same-origin");
+	});
+
 	it("bounds imported project files before local storage writes", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),

@@ -4422,6 +4422,7 @@ onBeforeUnmount(() => {
 								/>
 								<iframe
 									v-else-if="artifact.srcdoc"
+									referrerpolicy="no-referrer"
 									sandbox="allow-scripts"
 									:srcdoc="artifact.srcdoc"
 									:title="artifact.title"
