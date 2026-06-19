@@ -507,6 +507,45 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toContain(
 				"Map Java/C++ bridge PTJ0 Positioning and Workflow Translation into Java responsibilities before coding"
 			);
+			expect(corpus).not.toContain(
+				"Build a minimal runnable version, then add one Java feature at a time: access control, overload, override, interface, record, or collection behavior."
+			);
+			expect(corpus).not.toContain(
+				"Compile after each constructor, method signature, branch, or collection change so the next error has a narrow cause."
+			);
+			expect(corpus).not.toContain(
+				"Keep one small driver example available while compiling after each state, branch, loop, or dispatch change."
+			);
+			expect(corpus).not.toContain(
+				"Check the expected path, a boundary path, and one case that would expose a vague method contract."
+			);
+			expect(corpus).not.toContain(
+				"Change one API, allocation, loop, branch, build setting, or diagnostic hook at a time."
+			);
+			expect(corpus).not.toContain(
+				"Finish with a repeatable run plus one trace, warning, sanitizer result, debugger observation, or timing clue."
+			);
+			expect(corpus).not.toContain(
+				"Use short command-line cycles to connect the source change to build output, runtime output, and diagnostic evidence."
+			);
+			expect(corpus).not.toContain(
+				"Record normal behavior, abnormal or boundary behavior, and the low-level clue that explains the difference."
+			);
+			expect(corpus).toMatch(
+				/Build a minimal runnable [^.\n]+ version, then add the Java feature that matters for this module/
+			);
+			expect(corpus).toMatch(
+				/Compile [^.\n]+ after each constructor, method signature, branch, or collection change/
+			);
+			expect(corpus).toMatch(
+				/Keep one small [^.\n]+ driver example available while compiling after each state, branch, loop, or dispatch change/
+			);
+			expect(corpus).toMatch(
+				/Change one [^.\n]+ API, allocation, loop, branch, build setting, or diagnostic hook at a time/
+			);
+			expect(corpus).toMatch(
+				/Finish [^.\n]+ with a repeatable run plus one trace, warning, sanitizer result, debugger observation, or timing clue/
+			);
 			expect(corpus).toContain(
 				"The page or app shows the expected state change, output, validation, or canvas behavior"
 			);
@@ -659,6 +698,9 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/A focused example anchors Java reasoning with values versus references, class responsibilities, interfaces or records when useful, and visible verification/i
 			);
+			expect(corpus).not.toContain(
+				"**Extension:** Add a second metric, comparison, or visualization and explain what it changes."
+			);
 			expect(corpus).not.toMatch(
 				/One worked example and one transfer check show how Java reasoning with values versus references, class responsibilities, interfaces or records when useful/i
 			);
@@ -751,6 +793,9 @@ describe("course text quality normalization", () => {
 			);
 			expect(corpus).toContain(
 				"traces the Java idea from data shape to public behavior"
+			);
+			expect(corpus).toMatch(
+				/\*\*Extension:\*\* Add a second [^.\n]+ metric, comparison, or visualization and explain what it changes/
 			);
 		},
 		COURSE_SWEEP_TIMEOUT

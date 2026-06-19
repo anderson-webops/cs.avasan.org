@@ -1239,12 +1239,12 @@ function requiredWorkSteps(
 			],
 			[
 				`Write the ${subject} object model first: type names, fields, public methods, and the evidence each method produces.`,
-				`Compile after each constructor, method signature, branch, or collection change so the next error has a narrow cause.`,
+				`Compile ${subject} after each constructor, method signature, branch, or collection change so the next error has a narrow cause.`,
 				`Check ${subject} with an ordinary call, a boundary call, and one state change that proves the object is not just storing data.`
 			],
 			[
 				`For ${subject}, separate syntax setup from design setup by naming the package, class boundary, state, and public contract.`,
-				`Build a minimal runnable version, then add one Java feature at a time: access control, overload, override, interface, record, or collection behavior.`,
+				`Build a minimal runnable ${subject} version, then add the Java feature that matters for this module: access control, overload, override, interface, record, or collection behavior.`,
 				`Verify ${subject} with a traceable example and one awkward case that would expose a weak method contract.`
 			],
 			[
@@ -1269,8 +1269,8 @@ function requiredWorkSteps(
 			],
 			[
 				`Describe ${subject} with an example object or call sequence before implementing the general version.`,
-				`Keep one small driver example available while compiling after each state, branch, loop, or dispatch change.`,
-				`Check the expected path, a boundary path, and one case that would expose a vague method contract.`
+				`Keep one small ${subject} driver example available while compiling after each state, branch, loop, or dispatch change.`,
+				`Check the ${subject} expected path, a boundary path, and one case that would expose a vague method contract.`
 			],
 			[
 				`Separate ${subject} into model behavior, runner or console behavior, and any collection or inheritance behavior.`,
@@ -1429,8 +1429,8 @@ function requiredWorkSteps(
 			],
 			[
 				`Frame ${moduleTitle} around a clear systems question: what state changes, what resource is touched, and how the evidence will be captured.`,
-				`Use short command-line cycles to connect the source change to build output, runtime output, and diagnostic evidence.`,
-				`Record normal behavior, abnormal or boundary behavior, and the low-level clue that explains the difference.`
+				`Use short ${moduleTitle} command-line cycles to connect the source change to build output, runtime output, and diagnostic evidence.`,
+				`Record ${moduleTitle} normal behavior, abnormal or boundary behavior, and the low-level clue that explains the difference.`
 			],
 			[
 				`Write down the ${moduleTitle} preconditions, command path, expected side effect or output, and the diagnostic signal to inspect.`,
@@ -1449,8 +1449,8 @@ function requiredWorkSteps(
 			],
 			[
 				`Name the ${moduleTitle} command path, toolchain flags, memory or process boundary, and observable result before coding.`,
-				`Change one API, allocation, loop, branch, build setting, or diagnostic hook at a time.`,
-				`Finish with a repeatable run plus one trace, warning, sanitizer result, debugger observation, or timing clue.`
+				`Change one ${moduleTitle} API, allocation, loop, branch, build setting, or diagnostic hook at a time.`,
+				`Finish ${moduleTitle} with a repeatable run plus one trace, warning, sanitizer result, debugger observation, or timing clue.`
 			],
 			[
 				`Frame ${moduleTitle} around the engineering question being tested: representation, ownership, lifetime, complexity, or system state.`,

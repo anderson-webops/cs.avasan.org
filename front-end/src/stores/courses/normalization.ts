@@ -6395,11 +6395,13 @@ function studioExtensionPrompt(context: CourseTextContext) {
 		]);
 	}
 	if (isDataAiMlContext(context)) {
+		const subject = supportFocusTopic(context);
+
 		return variantPrompt(context, [
 			() =>
 				"Add one baseline, sanity check, hand-checkable example, or limitation note.",
 			() =>
-				"Add a second metric, comparison, or visualization and explain what it changes.",
+				`Add a second ${subject} metric, comparison, or visualization and explain what it changes.`,
 			() =>
 				"Add one data-quality check for missing values, outliers, labels, leakage, or sampling bias.",
 			() =>
