@@ -601,11 +601,12 @@ export const networkSystemsCourse: RawCourse = {
 						"Highlight the mistakes that repeatedly confuse IPv6 operations: forgetting link-local scope, validating only IPv4 reachability, or assuming that an IPv4 firewall policy automatically covers IPv6. These are the habits that create subtle deployment gaps."
 				},
 				{
-					title: "Unit 8: IPv6 in Practice: Core Project",
+					title: "IPv6 Diagnostics Core Project",
 					content: buildProjectGuidance({
 						courseFamily: "network systems",
 						moduleTitle: "Unit 8: IPv6 in Practice",
-						projectKind: "extension",
+						itemTitle: "IPv6 Diagnostics Core Project",
+						projectKind: "core",
 						hasReference: true
 					}),
 					projectLink:
@@ -625,10 +626,11 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-08-unit-8-ipv6-in-practice/solution"
 				},
 				{
-					title: "Unit 8: IPv6 in Practice supplemental 2",
+					title: "IPv6 Transfer Practice",
 					content: buildProjectGuidance({
 						courseFamily: "network systems",
 						moduleTitle: "Unit 8: IPv6 in Practice",
+						itemTitle: "Unit 8: IPv6 in Practice Supplemental 2",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -638,10 +640,11 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-17-unit-8-ipv6-in-practice-supplemental-2/solution"
 				},
 				{
-					title: "Unit 8: IPv6 in Practice supplemental 3",
+					title: "IPv6 Extension Practice",
 					content: buildProjectGuidance({
 						courseFamily: "network systems",
 						moduleTitle: "Unit 8: IPv6 in Practice",
+						itemTitle: "Unit 8: IPv6 in Practice Supplemental 3",
 						projectKind: "extension",
 						hasReference: true
 					}),

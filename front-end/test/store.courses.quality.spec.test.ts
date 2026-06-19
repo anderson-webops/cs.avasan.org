@@ -1786,6 +1786,38 @@ describe("course text quality normalization", () => {
 		expect(corpus).toContain("Full Stack Web Lab 14: Implementation Lab");
 	});
 
+	it("keeps Network Systems IPv6 projects distinct and clearly named", async () => {
+		const course = await loadRawCourse("network-systems");
+		expect(course).not.toBeNull();
+
+		const module = course!.modules.find(
+			module => module.title === "Unit 8: IPv6 in Practice"
+		);
+		expect(module).toBeDefined();
+		if (!module) return;
+
+		const projectItems = [
+			...module.curriculum.filter(item =>
+				item.title.includes("Core Project")
+			),
+			...module.supplementalProjects.filter(item =>
+				/^(?:IPv6 Transfer Practice|IPv6 Extension Practice)$/.test(
+					item.title
+				)
+			)
+		];
+
+		expect(projectItems.map(item => item.title)).toEqual([
+			"IPv6 Diagnostics Core Project",
+			"IPv6 Transfer Practice",
+			"IPv6 Extension Practice"
+		]);
+		expect(new Set(projectItems.map(item => item.content)).size).toBe(3);
+		expect(projectItems[0].content).toContain("Core implementation");
+		expect(projectItems[1].content).toContain("Transfer Practice");
+		expect(projectItems[2].content).toContain("Extension Practice");
+	});
+
 	it("keeps AI, data, and machine learning implementation labs from regressing to generated filler", () => {
 		const sourcePaths = [
 			"src/stores/courses/ai-level-1.ts",
