@@ -1573,6 +1573,11 @@ describe("python IDE project helpers", () => {
 			"const validFiles = validProjectFiles(files);"
 		);
 		expect(workerSource).toContain("projectModuleNames(validFiles)");
+		expect(workerSource).toContain("const projectModulesToClear =");
+		expect(workerSource).toContain(
+			"...[...lastProjectFileNames].map(name => ({ name }))"
+		);
+		expect(workerSource).toContain("projectModulesToClear");
 		expect(workerSource).toContain(
 			"pythonIdeImportedTopLevelModules(validFiles)"
 		);

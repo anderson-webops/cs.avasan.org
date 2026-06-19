@@ -156,12 +156,17 @@ function syncProjectFiles(pyodide: PyodideAPI, files: PythonIdeFile[]) {
 	lastProjectFileNames = nextFileNames;
 }
 
-function projectModuleNames(files: PythonIdeFile[]) {
+function projectModuleNames(files: Pick<PythonIdeFile, "name">[]) {
 	const packageSuffix = ".__init__";
 	const modules = new Set<string>();
 
-	for (const file of validProjectFiles(files)) {
-		if (!PYTHON_EXTENSION_RE.test(file.name)) continue;
+	for (const file of files) {
+		if (
+			!isValidPythonFileName(file.name) ||
+			!PYTHON_EXTENSION_RE.test(file.name)
+		) {
+			continue;
+		}
 		const moduleName = file.name
 			.replace(PYTHON_EXTENSION_RE, "")
 			.replaceAll("/", ".");
@@ -234,7 +239,7 @@ __classes_builtins.input = __classes_input
 function projectBootstrap(
 	activeFileName: string,
 	inputText: string,
-	files: PythonIdeFile[]
+	projectModulesToClear: string[]
 ) {
 	return `
 import os
@@ -242,7 +247,7 @@ import sys
 os.chdir(${escapePythonString(PROJECT_ROOT)})
 if ${escapePythonString(PROJECT_ROOT)} not in sys.path:
     sys.path.insert(0, ${escapePythonString(PROJECT_ROOT)})
-for __classes_module_name in __import__("json").loads(${escapePythonString(JSON.stringify(projectModuleNames(files)))}):
+for __classes_module_name in __import__("json").loads(${escapePythonString(JSON.stringify(projectModulesToClear))}):
     sys.modules.pop(__classes_module_name, None)
 ${inputBootstrap(inputText)}
 import __main__ as __classes_main
@@ -303,6 +308,10 @@ async function runPlainPythonProject(request: PlainPythonRunRequest) {
 		batched: text => postOutput(request.id, "stderr", text)
 	});
 
+	const projectModulesToClear = projectModuleNames([
+		...request.files,
+		...[...lastProjectFileNames].map(name => ({ name }))
+	]);
 	syncProjectFiles(pyodide, request.files);
 	if (!isActiveRun(request.id)) return;
 	await loadPlainPythonImportPackages(pyodide, request.files);
@@ -311,7 +320,7 @@ async function runPlainPythonProject(request: PlainPythonRunRequest) {
 		projectBootstrap(
 			request.activeFileName,
 			request.inputText,
-			request.files
+			projectModulesToClear
 		)
 	);
 	if (!isActiveRun(request.id)) return;
