@@ -620,7 +620,7 @@ function githubTree(repo: string, path: string) {
 }
 
 const projectLikeTitlePattern =
-	/project|capstone|challenge|lab|practice|drill|notebook|audit|reflection|build|create|implement|exercise/i;
+	/project|capstone|challenge|lab|practice|drill|notebook|audit|reflection|review|build|create|implement|exercise/i;
 
 function isProjectLikeItem(item: RawCourseModuleItem) {
 	return (
@@ -4973,7 +4973,7 @@ function projectSupport(context: CourseTextContext) {
 			`**Goal:** Map the prompt requirements to ${reference}, then record the evidence that proves the result works.`,
 		() =>
 			`**Goal:** Identify the starting state, main transformation, and output or conclusion for ${reference}.`
-	]);
+	]).replace(/\*\*Goal:\*\* Build Build\b/g, "**Goal:** Build");
 
 	return [
 		goal,
@@ -5076,7 +5076,8 @@ function projectSupportScopedReference(
 	if (
 		normalizedTopic === normalizedReference ||
 		normalizedTopic.endsWith(` ${normalizedReference}`) ||
-		normalizedTopic.includes(`${normalizedReference}:`)
+		normalizedTopic.includes(`${normalizedReference}:`) ||
+		(normalizedReference === "class exercise" && /\bclass$/i.test(topic))
 	) {
 		return reference;
 	}
@@ -5088,7 +5089,9 @@ function projectSupportScopedReference(
 		return topic;
 	}
 
-	return `the ${topic} ${bareReference}`;
+	return `the ${topic} ${bareReference}`
+		.replace(/\bBuild Build\b/g, "Build")
+		.replace(/\bclass class exercise\b/gi, "class exercise");
 }
 
 function capitalizeSentence(value: string) {
@@ -5703,11 +5706,11 @@ function lessonSupport(context: CourseTextContext) {
 			() =>
 				`**Concept path:** For ${topic}, responsibilities are mapped first: which class owns the state, which method changes it, and which output or test proves the behavior.`,
 			() =>
-				`**Concept path:** For ${topic}, Java syntax connects to a concrete responsibility: constructor setup, method contract, object state, collection choice, or interface/record boundary.`,
+				`**Concept path:** For ${topic}, the work connects Java syntax to a concrete responsibility: constructor setup, method contract, object state, collection choice, or interface/record boundary.`,
 			() =>
 				`**Concept path:** For ${topic}, the model is separated from the driver code, then checked with one normal case and one edge case so the Java behavior is visible.`,
 			() =>
-				`**Concept path:** For ${topic}, the Java idea is traced from data shape to public behavior: fields, parameters, return values, object interactions, and compile-run evidence.`,
+				`**Concept path:** For ${topic}, the work traces the Java idea from data shape to public behavior: fields, parameters, return values, object interactions, and compile-run evidence.`,
 			() =>
 				`**Concept path:** For ${topic}, each language feature links to a design choice, then verifies that choice through a runnable example and a changed case.`,
 			() =>
@@ -6655,7 +6658,20 @@ function studioSupport(context: CourseTextContext) {
 		? "Applied lab"
 		: "Applied studio";
 	const supportNoun = supportLabel === "Applied lab" ? "lab" : "studio";
-	const studioReference =
+	const rawStudioReference = compactStudioContextTitle(context.module.title);
+	const itemReference = compactStudioContextTitle(itemTitle);
+	let studioReference = rawStudioReference;
+	if (
+		itemReference &&
+		rawStudioReference.toLowerCase().includes(itemReference.toLowerCase())
+	) {
+		studioReference = "";
+	}
+	if (!studioReference) {
+		studioReference =
+			supportLabel === "Applied lab" ? "this lab" : "this studio";
+	}
+	const compactStudioReference =
 		supportLabel === "Applied lab" ? "the lab" : "the studio";
 	const supportSubject = studioSupportSubject(context, supportNoun);
 	const compactStudio = (text: string) =>
@@ -6666,27 +6682,25 @@ function studioSupport(context: CourseTextContext) {
 						? compactStudioSupportText(
 								compacted,
 								alias,
-								studioReference,
+								compactStudioReference,
 								false
 							)
 						: compacted,
 				text
 			),
 			"",
-			studioReference
+			compactStudioReference
 		);
 	const compactScopedStudio = (text: string) =>
 		compactStudioSupportText(text, "", studioReference);
 	const pathTitle =
 		`${itemTitle} ${context.item.projectLink ?? ""}`.toLowerCase();
-	const pathSubject =
-		compactStudioContextTitle(scopedSubject || itemTitle || moduleTitle) ||
-		(supportNoun === "lab" ? "the lab task" : "the studio task");
+	const pathSubject = studioReference;
 	const studioFocus = variantPrompt(context, [
 		() =>
-			`For ${studioReference}, define the artifact, prerequisite concepts, success criteria, and evidence before adding polish.`,
+			`For ${studioReference}, name the minimum working version first, then add extensions only after the required behavior is testable; ${studioReference} connects prerequisite ideas to a concrete result, a testable constraint, and a visible review point.`,
 		() =>
-			`For ${pathSubject}, name the minimum working version first, then add extensions only after the required behavior is testable.`,
+			`For ${studioReference}, define the artifact, prerequisite concepts, success criteria, and evidence before adding polish.`,
 		() =>
 			`Frame ${studioReference} around one observable result, the constraints that shape it, and the evidence that proves it works.`,
 		() =>
@@ -6694,13 +6708,13 @@ function studioSupport(context: CourseTextContext) {
 		() =>
 			`Build the smallest complete version of ${studioReference} first, then record evidence that shows it meets the activity requirements.`,
 		() =>
-			`${pathSubject} connects prerequisite ideas to a concrete result, a testable constraint, and a visible review point.`,
+			"Connect prerequisite ideas to a concrete result, a testable constraint, and a visible review point.",
 		() =>
 			`Define ${studioReference} by its required behavior, verification evidence, likely edge case, and final explanation target.`,
 		() =>
 			`Keep ${studioReference} organized around setup, implementation, verification, and one improvement or limitation.`
 	]);
-	const reviewTarget = studioReference;
+	const reviewTarget = compactStudioReference;
 	const reviewStep = variantPrompt(context, [
 		() =>
 			`Compare ${reviewTarget} against the original goal and record at least one improvement or bug fix.`,
@@ -6774,7 +6788,7 @@ function studioSupport(context: CourseTextContext) {
 	})();
 
 	return [
-		`**${supportLabel}:** ${supportSubject} produces ${studioArtifact(context)} connected to ${subjectFocus(context)}.`,
+		`**${supportLabel}:** ${supportSubject} produces ${studioArtifact(context)} connected to ${unscopedSubjectFocus(context)}.`,
 		`**Path:** ${studioPath}`,
 		`**Studio focus:** ${compactScopedStudio(studioFocus)}`,
 		`**Build sequence:**\n${compactStudio(studioBuildSequence(context).join("\n"))}\n- ${compactScopedStudio(reviewStep)}`,
@@ -7435,14 +7449,8 @@ function normalizeRustSystemsSecurity(course: RawCourse) {
 	});
 }
 
-function usacoCourseFamily(courseId: string) {
-	const labels: Record<string, string> = {
-		"usaco-bronze": "USACO Bronze",
-		"usaco-silver": "USACO Silver",
-		"usaco-gold": "USACO Gold"
-	};
-
-	return labels[courseId] ?? "USACO";
+function usacoCourseFamily(_courseId: string) {
+	return "USACO";
 }
 
 function usacoSupplementalSubject(itemTitle: string) {

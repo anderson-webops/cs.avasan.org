@@ -32,9 +32,9 @@ const appliedDataScienceLabs: AppliedDataScienceLab[] = [
 		coreProjectTitle: "CSV Summary Builder",
 		project:
 			"Complete the CSV summary program so it returns accurate count, total, and average values for the provided data. Include safe empty-list behavior and one short verification note explaining how the expected output was checked.",
-		reviewTitle: "CSV Summary Review",
+		reviewTitle: "Review: CSV Summaries and Sanity Checks",
 		review: "Review the result by naming the exact file, column, values used, output dictionary, and boundary case. A strong review explains why the average is valid for the loaded rows and what would need to change if the CSV column name or units changed.",
-		extensionTitle: "Min-Max and Outlier Extension",
+		extensionTitle: "Transfer Practice: CSV Summaries and Sanity Checks",
 		extension:
 			"Extend the summary with minimum, maximum, and range. Then add one intentionally surprising value and explain whether it is a valid outlier, a data-entry error, or a value that requires more context before removal.",
 		supplemental2Title: "Median and Mode Practice",

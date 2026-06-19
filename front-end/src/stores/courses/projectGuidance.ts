@@ -2060,7 +2060,7 @@ function projectPathNote({
 			`**Path:** Transfer version. ${subject} compares the familiar case with a changed case before treating the idea as mastered.`,
 			`**Path:** Transfer version. ${subject} keeps the target concept stable while the surrounding details change enough to test understanding.`,
 			`**Path:** Transfer version. ${subject} turns the example into a new scenario, then identifies what carried over and what had to change.`,
-			`**Path:** Transfer version. ${subject} checks whether the module idea survives a controlled variation rather than only a copied pattern.`
+			`**Path:** Transfer version. ${subject} checks whether the target concept survives a controlled variation rather than only a copied pattern.`
 		][index];
 	}
 
@@ -2083,7 +2083,7 @@ function projectPathNote({
 			`**Path:** Review check. ${subject} uses a small result to confirm whether the underlying vocabulary, trace, or procedure is stable.`,
 			`**Path:** Review check. ${subject} favors a compact evidence check over a large project so the next gap is easy to see.`,
 			`**Path:** Review check. ${subject} isolates the concept most likely to block later work and checks it directly.`,
-			`**Path:** Review check. ${subject} turns the module idea into a quick diagnostic before harder transfer or extension work.`,
+			`**Path:** Review check. ${subject} turns the target concept into a quick diagnostic before harder transfer or extension work.`,
 			`**Path:** Review check. ${subject} records whether the core skill is ready for a changed case, not only whether the first example was copied.`,
 			`**Path:** Review check. ${subject} uses a small artifact to separate recall, tracing, setup, and explanation gaps.`,
 			`**Path:** Review check. ${subject} confirms the next useful step by comparing expected behavior with observed evidence.`

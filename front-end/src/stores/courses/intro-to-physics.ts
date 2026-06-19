@@ -389,7 +389,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Read a force-time graph and shade the impulse area, then compare it with a before-and-after momentum table. The useful representation shows whether momentum is conserved inside the chosen system or changed by an external impulse."
+						"Create a representation for Momentum, Impulse, and Collisions with at least one graph, diagram sequence, or data table. Read a force-time graph and shade the impulse area, then compare it with a before-and-after momentum table. The useful representation shows whether momentum is conserved inside the chosen system or changed by an external impulse."
 				},
 				{
 					title: "Mini Lab, Simulation, or Case Study",

@@ -157,11 +157,11 @@ function securityLabProjectContent(
 
 	return [
 		`**Project goal:** Complete the ${purposeText.artifact} for **${label}** that produces defensive evidence, not just a passing program.`,
-		`**Focus:** ${securityLabFocus(topic)}.`,
+		`**Studio focus:** ${securityLabFocus(topic)}. The work stays inside an authorized local lab boundary and uses only the provided toy target or starter fixture.`,
 		`**Practice path:** ${purposeText.path}`,
-		"**Required work:**",
+		"**Build steps:**",
 		...requiredWork,
-		"**Completion checks:**",
+		"**Checkpoints:**",
 		...completionChecks
 	].join("\n\n");
 }
@@ -175,6 +175,7 @@ function securityLabConceptContent(topic: string) {
 
 	return [
 		`**Concept path:** Use **${label}** to connect the lab artifact to ${securityLabFocus(topic)}.`,
+		"Name the allowed target, disallowed actions, evidence source, stop condition, and defensive purpose.",
 		"Begin with the protected asset, the trust boundary, the unsafe assumption, and the invariant that should stay true after the code is changed. The concept is not only the bug name; it includes what input or state can cross the boundary, what evidence would prove the problem, and what evidence would prove the defensive result.",
 		"Keep the work defensive and local. A strong concept note identifies the normal behavior, the failure-shaped behavior, the smallest useful remediation or hardening step, and the command, trace, sanitizer report, or test output that would let another person verify the final state."
 	].join("\n\n");

@@ -31,7 +31,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "USS0 Setup and Silver Transition: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "USS0 Setup and Silver Transition",
 						projectKind: "core",
 						hasReference: true
@@ -55,7 +55,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Why Did the Cow Cross the Road III",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Why Did the Cow Cross the Road III",
 						projectKind: "core",
 						hasReference: true
@@ -68,7 +68,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Paired Up",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Paired Up",
 						projectKind: "core",
 						hasReference: true
@@ -106,7 +106,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Unit 1: Data Structures and Problem Modeling: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle:
 							"Unit 1: Data Structures and Problem Modeling",
 						projectKind: "core",
@@ -149,7 +149,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Bovine Genomics",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle:
 							"Unit 1: Data Structures and Problem Modeling",
 						projectKind: "core",
@@ -188,7 +188,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Unit 2: DFS, BFS, and Graph Traversal: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Unit 2: DFS, BFS, and Graph Traversal",
 						projectKind: "core",
 						hasReference: true
@@ -255,7 +255,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Unit 3: Sorting, Searching, and Binary Search: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle:
 							"Unit 3: Sorting, Searching, and Binary Search",
 						projectKind: "core",
@@ -332,7 +332,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Unit 4: Prefix Sums, Ranges, and Counting: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle:
 							"Unit 4: Prefix Sums, Ranges, and Counting",
 						projectKind: "core",
@@ -375,7 +375,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Dance Mooves",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle:
 							"Unit 4: Prefix Sums, Ranges, and Counting",
 						projectKind: "core",
@@ -414,7 +414,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Unit 5: Greedy and Structured Simulation: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Unit 5: Greedy and Structured Simulation",
 						projectKind: "core",
 						hasReference: true
@@ -481,7 +481,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Unit 6: Silver Capstone Sets: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Unit 6: Silver Capstone Sets",
 						projectKind: "core",
 						hasReference: true
@@ -514,7 +514,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Stuck in a Rut Silver",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Unit 6: Silver Capstone Sets",
 						projectKind: "core",
 						hasReference: true
@@ -552,7 +552,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Unit 7: Optional Silver Problem Bank: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Unit 7: Optional Silver Problem Bank",
 						projectKind: "core",
 						hasReference: false
@@ -613,7 +613,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "US Berry Picking: Core Concepts",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "US Berry Picking: Implementation Lab",
 						section: "concepts"
 					})
@@ -621,7 +621,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "US Berry Picking: Guided Example",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "US Berry Picking: Implementation Lab",
 						section: "example"
 					})
@@ -629,7 +629,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "US Berry Picking: Core Project",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "US Berry Picking: Implementation Lab",
 						section: "coreProject",
 						hasReference: true
@@ -642,7 +642,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "US Berry Picking: Review and Reflection",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "US Berry Picking: Implementation Lab",
 						section: "review"
 					})
@@ -652,7 +652,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "US Berry Picking: Extension Challenge",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "US Berry Picking: Implementation Lab",
 						section: "extension",
 						hasReference: true
@@ -665,7 +665,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Subset Equality",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "US Berry Picking: Implementation Lab",
 						projectKind: "core",
 						hasReference: true
@@ -678,7 +678,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Closest Cow Wins",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "US Berry Picking: Implementation Lab",
 						projectKind: "core",
 						hasReference: true
@@ -696,7 +696,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Superprime Rib: Core Concepts",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Superprime Rib: Implementation Lab",
 						section: "concepts"
 					})
@@ -704,7 +704,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Superprime Rib: Guided Example",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Superprime Rib: Implementation Lab",
 						section: "example"
 					})
@@ -712,7 +712,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Superprime Rib: Core Project",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Superprime Rib: Implementation Lab",
 						section: "coreProject",
 						hasReference: true
@@ -725,7 +725,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Superprime Rib: Review and Reflection",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Superprime Rib: Implementation Lab",
 						section: "review"
 					})
@@ -735,7 +735,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Superprime Rib: Extension Challenge",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Superprime Rib: Implementation Lab",
 						section: "extension",
 						hasReference: true
@@ -748,7 +748,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Custom Classes with HashSets and HashMaps",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Superprime Rib: Implementation Lab",
 						projectKind: "core",
 						hasReference: true
@@ -761,7 +761,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "DFS",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Superprime Rib: Implementation Lab",
 						projectKind: "core",
 						hasReference: true
@@ -779,7 +779,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "The Castle: Core Concepts",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "The Castle: Implementation Lab",
 						section: "concepts"
 					})
@@ -787,7 +787,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "The Castle: Guided Example",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "The Castle: Implementation Lab",
 						section: "example"
 					})
@@ -795,7 +795,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "The Castle: Core Project",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "The Castle: Implementation Lab",
 						section: "coreProject",
 						hasReference: true
@@ -808,7 +808,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "The Castle: Review and Reflection",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "The Castle: Implementation Lab",
 						section: "review"
 					})
@@ -818,7 +818,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "The Castle: Extension Challenge",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "The Castle: Implementation Lab",
 						section: "extension",
 						hasReference: true
@@ -831,7 +831,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Stacks",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "The Castle: Implementation Lab",
 						projectKind: "core",
 						hasReference: true
@@ -844,7 +844,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "BFS",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "The Castle: Implementation Lab",
 						projectKind: "core",
 						hasReference: true
@@ -862,7 +862,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Sorting a Three Valued Sequence: Core Concepts",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle:
 							"Sorting a Three Valued Sequence: Implementation Lab",
 						section: "concepts"
@@ -871,7 +871,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Sorting a Three Valued Sequence: Guided Example",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle:
 							"Sorting a Three Valued Sequence: Implementation Lab",
 						section: "example"
@@ -880,7 +880,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Sorting a Three Valued Sequence: Core Project",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle:
 							"Sorting a Three Valued Sequence: Implementation Lab",
 						section: "coreProject",
@@ -894,7 +894,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Sorting a Three Valued Sequence: Review and Reflection",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle:
 							"Sorting a Three Valued Sequence: Implementation Lab",
 						section: "review"
@@ -905,7 +905,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Sorting a Three Valued Sequence: Extension Challenge",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle:
 							"Sorting a Three Valued Sequence: Implementation Lab",
 						section: "extension",
@@ -919,7 +919,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Queues",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle:
 							"Sorting a Three Valued Sequence: Implementation Lab",
 						projectKind: "core",
@@ -933,7 +933,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Arithmetic Progressions",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle:
 							"Sorting a Three Valued Sequence: Implementation Lab",
 						projectKind: "core",
@@ -952,7 +952,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Healthy Holsteins: Core Concepts",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Healthy Holsteins: Implementation Lab",
 						section: "concepts"
 					})
@@ -960,7 +960,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Healthy Holsteins: Guided Example",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Healthy Holsteins: Implementation Lab",
 						section: "example"
 					})
@@ -968,7 +968,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Healthy Holsteins: Core Project",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Healthy Holsteins: Implementation Lab",
 						section: "coreProject",
 						hasReference: true
@@ -981,7 +981,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Healthy Holsteins: Review and Reflection",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Healthy Holsteins: Implementation Lab",
 						section: "review"
 					})
@@ -991,7 +991,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Healthy Holsteins: Extension Challenge",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Healthy Holsteins: Implementation Lab",
 						section: "extension",
 						hasReference: true
@@ -1004,7 +1004,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Number Triangles",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Healthy Holsteins: Implementation Lab",
 						projectKind: "core",
 						hasReference: true
@@ -1017,7 +1017,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Healthy Holsteins Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Healthy Holsteins: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
@@ -1035,7 +1035,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Hamming Codes: Core Concepts",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Hamming Codes: Implementation Lab",
 						section: "concepts"
 					})
@@ -1043,7 +1043,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Hamming Codes: Guided Example",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Hamming Codes: Implementation Lab",
 						section: "example"
 					})
@@ -1051,7 +1051,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Hamming Codes: Core Project",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Hamming Codes: Implementation Lab",
 						section: "coreProject",
 						hasReference: true
@@ -1064,7 +1064,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Hamming Codes: Review and Reflection",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Hamming Codes: Implementation Lab",
 						section: "review"
 					})
@@ -1074,7 +1074,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Hamming Codes: Extension Challenge",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Hamming Codes: Implementation Lab",
 						section: "extension",
 						hasReference: true
@@ -1087,7 +1087,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Hamming Codes Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Hamming Codes: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
@@ -1100,7 +1100,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Hamming Codes Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Hamming Codes: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
@@ -1118,7 +1118,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Priority Queues: Core Concepts",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Priority Queues: Implementation Lab",
 						section: "concepts"
 					})
@@ -1126,7 +1126,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Priority Queues: Guided Example",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Priority Queues: Implementation Lab",
 						section: "example"
 					})
@@ -1134,7 +1134,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Priority Queues: Core Project",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Priority Queues: Implementation Lab",
 						section: "coreProject",
 						hasReference: true
@@ -1147,7 +1147,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Priority Queues: Review and Reflection",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Priority Queues: Implementation Lab",
 						section: "review"
 					})
@@ -1157,7 +1157,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Priority Queues: Extension Challenge",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Priority Queues: Implementation Lab",
 						section: "extension",
 						hasReference: true
@@ -1170,7 +1170,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Priority Queues Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Priority Queues: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
@@ -1183,7 +1183,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Priority Queues Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Priority Queues: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
@@ -1201,7 +1201,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Hoof Paper Scissors: Core Concepts",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
 						section: "concepts"
 					})
@@ -1209,7 +1209,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Hoof Paper Scissors: Guided Example",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
 						section: "example"
 					})
@@ -1217,7 +1217,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Hoof Paper Scissors: Core Project",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
 						section: "coreProject",
 						hasReference: true
@@ -1230,7 +1230,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Hoof Paper Scissors: Review and Reflection",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
 						section: "review"
 					})
@@ -1240,7 +1240,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Hoof Paper Scissors: Extension Challenge",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
 						section: "extension",
 						hasReference: true
@@ -1253,7 +1253,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Hoof Paper Scissors Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
@@ -1266,7 +1266,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Hoof Paper Scissors Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
@@ -1284,7 +1284,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Why Did the Cow Cross the Road: Core Concepts",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle:
 							"Why Did the Cow Cross the Road: Implementation Lab",
 						section: "concepts"
@@ -1293,7 +1293,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Why Did the Cow Cross the Road: Guided Example",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle:
 							"Why Did the Cow Cross the Road: Implementation Lab",
 						section: "example"
@@ -1302,7 +1302,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Why Did the Cow Cross the Road: Core Project",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle:
 							"Why Did the Cow Cross the Road: Implementation Lab",
 						section: "coreProject",
@@ -1316,7 +1316,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Why Did the Cow Cross the Road: Review and Reflection",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle:
 							"Why Did the Cow Cross the Road: Implementation Lab",
 						section: "review"
@@ -1327,7 +1327,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Why Did the Cow Cross the Road: Extension Challenge",
 					content: buildImplementationLabGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle:
 							"Why Did the Cow Cross the Road: Implementation Lab",
 						section: "extension",
@@ -1341,7 +1341,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Why Did the Cow Cross the Road Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle:
 							"Why Did the Cow Cross the Road: Implementation Lab",
 						projectKind: "extension",
@@ -1355,7 +1355,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Why Did the Cow Cross the Road Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "USACO Silver",
+						courseFamily: "USACO",
 						moduleTitle:
 							"Why Did the Cow Cross the Road: Implementation Lab",
 						projectKind: "extension",
