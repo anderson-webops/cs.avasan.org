@@ -62,29 +62,41 @@ export async function loadPythonIdeCourseAssetPack(
 		const failures: string[] = [];
 
 		for (const sourceUrl of manifestUrls) {
-			const response = await fetcher(sourceUrl);
-			if (!response.ok) {
-				failures.push(`${sourceUrl} returned ${response.status}`);
-				continue;
-			}
+			try {
+				const response = await fetcher(sourceUrl);
+				if (!response.ok) {
+					failures.push(`${sourceUrl} returned ${response.status}`);
+					continue;
+				}
 
-			return parsePythonIdeCourseAssetManifest(
-				await readAssetManifestResponse(response),
-				sourceUrl
-			);
+				return parsePythonIdeCourseAssetManifest(
+					await readAssetManifestResponse(response),
+					sourceUrl
+				);
+			} catch (error) {
+				failures.push(
+					`${sourceUrl} failed: ${formatAssetLoadError(error)}`
+				);
+			}
 		}
 
 		for (const sourceUrl of zipSourceUrls) {
-			const response = await fetcher(sourceUrl);
-			if (!response.ok) {
-				failures.push(`${sourceUrl} returned ${response.status}`);
-				continue;
-			}
+			try {
+				const response = await fetcher(sourceUrl);
+				if (!response.ok) {
+					failures.push(`${sourceUrl} returned ${response.status}`);
+					continue;
+				}
 
-			return await parsePythonIdeCourseAssetZip(
-				new Uint8Array(await response.arrayBuffer()),
-				sourceUrl
-			);
+				return await parsePythonIdeCourseAssetZip(
+					new Uint8Array(await response.arrayBuffer()),
+					sourceUrl
+				);
+			} catch (error) {
+				failures.push(
+					`${sourceUrl} failed: ${formatAssetLoadError(error)}`
+				);
+			}
 		}
 
 		throw new Error(
@@ -224,6 +236,10 @@ function copyBytesToArrayBuffer(bytes: Uint8Array): ArrayBuffer {
 	const copy = new Uint8Array(bytes.byteLength);
 	copy.set(bytes);
 	return copy.buffer;
+}
+
+function formatAssetLoadError(error: unknown) {
+	return error instanceof Error ? error.message : String(error);
 }
 
 function normalizeZipAssetName(path: string) {

@@ -1299,6 +1299,34 @@ describe("python IDE project helpers", () => {
 		expect(pack.assets.has("images/alien.png")).toBe(true);
 	});
 
+	it("falls back to the same-origin zip proxy when the asset manifest fetch fails", async () => {
+		const zipBytes = zipSync({
+			"images/alien.png": oneByOnePngBytes
+		});
+		const requestedUrls: string[] = [];
+		const pack = await loadPythonIdeCourseAssetPack({
+			fetcher: async url => {
+				requestedUrls.push(url);
+				if (url === pythonIdeCourseAssetsManifestUrl) {
+					throw new TypeError("manifest network failure");
+				}
+
+				expect(url).toBe(pythonIdeCourseAssetsZipUrl);
+				return {
+					arrayBuffer: async () => zipBytes.buffer.slice(0),
+					ok: true,
+					status: 200
+				};
+			}
+		});
+
+		expect(requestedUrls).toEqual([
+			pythonIdeCourseAssetsManifestUrl,
+			pythonIdeCourseAssetsZipUrl
+		]);
+		expect(pack.assets.has("images/alien.png")).toBe(true);
+	});
+
 	it("keeps shared PyGame Zero asset support wired into the page and runtime", () => {
 		const runtimeSource = readFileSync(
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
