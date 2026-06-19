@@ -49,6 +49,33 @@ describe("python IDE CodeMirror editor", () => {
 		expect(routeSource).not.toContain("loadPythonIdeRuntime");
 	});
 
+	it("does not import the heavy Pyodide runtime before running code", () => {
+		const pageSource = sourceFile("../src/components/PythonIdeWorkspace.vue");
+		const runtimeSource = sourceFile("../src/modules/pythonIdeRuntime.ts");
+		const hintSource = sourceFile("../src/modules/pythonIdeRuntimeHints.ts");
+
+		expect(pageSource).toContain(
+			"import { warmPythonRuntimeResources }"
+		);
+		expect(pageSource).toContain("warmPythonRuntimeResources();");
+		expect(pageSource).not.toContain(
+			"loadPythonRuntimeModule().then(module => module.warmPythonRuntime())"
+		);
+		expect(pageSource).toContain(
+			"if (!pythonRuntimeModulePromise) return;"
+		);
+		expect(pageSource).toContain(
+			"releaseLoadedPythonRuntimeCallbacks();"
+		);
+		expect(runtimeSource).toContain("warmPythonRuntimeResources();");
+		expect(hintSource).toContain(
+			"export function warmPythonRuntimeResources"
+		);
+		expect(hintSource).toContain(
+			"https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSION}/full/"
+		);
+	});
+
 	it("mounts CodeMirror instead of the old textarea highlight overlay", () => {
 		const pageSource = sourceFile("../src/components/PythonIdeWorkspace.vue");
 

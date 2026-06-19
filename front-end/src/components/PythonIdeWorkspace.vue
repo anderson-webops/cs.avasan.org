@@ -56,6 +56,7 @@ import {
 	normalizePythonIdeAssetLookupPath,
 	pythonIdeAssetCandidateNames
 } from "@/modules/pythonIdeCourseAssets";
+import { warmPythonRuntimeResources } from "@/modules/pythonIdeRuntimeHints";
 import { useAppStore } from "@/stores/app";
 
 type PythonCodeEditorModules = [
@@ -483,6 +484,23 @@ function loadPythonCodeEditorModules() {
 function loadPythonRuntimeModule() {
 	pythonRuntimeModulePromise ??= import("@/modules/pythonIdeRuntime");
 	return pythonRuntimeModulePromise;
+}
+
+function releaseLoadedPythonRuntimeCallbacks(
+	options: { reportErrors?: boolean } = {}
+) {
+	if (!pythonRuntimeModulePromise) return;
+	void pythonRuntimeModulePromise
+		.then(module => module.releasePythonIdeRuntimeCallbacks())
+		.catch(error => {
+			if (!options.reportErrors) return;
+			appendOutput(
+				"stderr",
+				error instanceof Error
+					? error.message
+					: "Could not release Python runtime callbacks."
+			);
+		});
 }
 
 const turtleState: TurtleState = {
@@ -1812,16 +1830,7 @@ function clearTurtleTimers() {
 
 function releaseIdlePythonRuntimeCallbacks() {
 	if (isRunning.value) return;
-	void loadPythonRuntimeModule()
-		.then(module => module.releasePythonIdeRuntimeCallbacks())
-		.catch(error => {
-			appendOutput(
-				"stderr",
-				error instanceof Error
-					? error.message
-					: "Could not release Python runtime callbacks."
-			);
-		});
+	releaseLoadedPythonRuntimeCallbacks({ reportErrors: true });
 }
 
 function trackTurtleFillPoint(x: number, y: number) {
@@ -3231,7 +3240,7 @@ watch(isLoading, loading => {
 });
 
 onMounted(() => {
-	void loadPythonRuntimeModule().then(module => module.warmPythonRuntime());
+	warmPythonRuntimeResources();
 	void loadProjects();
 	window.addEventListener("keydown", handleKeyDown);
 	window.addEventListener("keyup", handleKeyUp);
@@ -3251,9 +3260,7 @@ onBeforeUnmount(() => {
 	window.removeEventListener("mouseup", clearTurtleDrag);
 	clearTurtleTimers();
 	cancelTurtleAnimation();
-	void loadPythonRuntimeModule()
-		.then(module => module.releasePythonIdeRuntimeCallbacks())
-		.catch(() => {});
+	releaseLoadedPythonRuntimeCallbacks();
 	stopGameLoop();
 	resizeObserver?.disconnect();
 });
