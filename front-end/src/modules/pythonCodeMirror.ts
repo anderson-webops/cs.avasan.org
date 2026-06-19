@@ -162,6 +162,7 @@ const bracketPairDecorations = [
 	bracketDecorationForIndex(4),
 	bracketDecorationForIndex(5)
 ];
+const bracketPairContextScanLimit = 60000;
 const unmatchedBracketDecoration = Decoration.mark({
 	class: "cm-bracket-pair cm-bracket-unmatched"
 });
@@ -1348,11 +1349,19 @@ export function pythonBracketPairColorRanges(
 ) {
 	const ranges: PythonBracketPairColorRange[] = [];
 	const docLength = state.doc.length;
-	const visibleEnd = Math.min(
-		docLength,
-		Math.max(0, ...visibleRanges.map(range => range.to))
+	const boundedVisibleRanges = visibleRanges
+		.map(range => ({
+			from: Math.max(0, Math.min(docLength, range.from)),
+			to: Math.max(0, Math.min(docLength, range.to))
+		}))
+		.filter(range => range.from < range.to);
+	if (!boundedVisibleRanges.length) return ranges;
+
+	const visibleStart = Math.min(
+		...boundedVisibleRanges.map(range => range.from)
 	);
-	if (visibleEnd <= 0) return ranges;
+	const visibleEnd = Math.max(...boundedVisibleRanges.map(range => range.to));
+	const scanStart = Math.max(0, visibleStart - bracketPairContextScanLimit);
 	const stack: BracketStackEntry[] = [];
 
 	const scanBracketText = (text: string, baseOffset: number) => {
@@ -1380,7 +1389,7 @@ export function pythonBracketPairColorRanges(
 
 			const candidate = stack.at(-1);
 			if (!candidate || candidate.expectedClose !== character) {
-				if (isVisibleBracketPosition(index, visibleRanges)) {
+				if (isVisibleBracketPosition(index, boundedVisibleRanges)) {
 					ranges.push({
 						from: index,
 						pairIndex: 0,
@@ -1392,7 +1401,12 @@ export function pythonBracketPairColorRanges(
 			}
 
 			stack.pop();
-			if (isVisibleBracketPosition(candidate.position, visibleRanges)) {
+			if (
+				isVisibleBracketPosition(
+					candidate.position,
+					boundedVisibleRanges
+				)
+			) {
 				ranges.push({
 					from: candidate.position,
 					pairIndex: candidate.pairIndex,
@@ -1400,7 +1414,7 @@ export function pythonBracketPairColorRanges(
 					unmatched: false
 				});
 			}
-			if (isVisibleBracketPosition(index, visibleRanges)) {
+			if (isVisibleBracketPosition(index, boundedVisibleRanges)) {
 				ranges.push({
 					from: index,
 					pairIndex: candidate.pairIndex,
@@ -1411,20 +1425,26 @@ export function pythonBracketPairColorRanges(
 		}
 	};
 
-	scanBracketText(state.doc.sliceString(0, visibleEnd), 0);
+	scanBracketText(state.doc.sliceString(scanStart, visibleEnd), scanStart);
 
 	const visibleOpenersStillNeedMatch = stack.some(entry =>
-		isVisibleBracketPosition(entry.position, visibleRanges)
+		isVisibleBracketPosition(entry.position, boundedVisibleRanges)
 	);
 	if (visibleOpenersStillNeedMatch && visibleEnd < docLength) {
+		const suffixScanEnd = Math.min(
+			docLength,
+			visibleEnd + bracketPairContextScanLimit
+		);
 		scanBracketText(
-			state.doc.sliceString(visibleEnd, docLength),
+			state.doc.sliceString(visibleEnd, suffixScanEnd),
 			visibleEnd
 		);
 	}
 
 	for (const unmatched of stack) {
-		if (!isVisibleBracketPosition(unmatched.position, visibleRanges)) {
+		if (
+			!isVisibleBracketPosition(unmatched.position, boundedVisibleRanges)
+		) {
 			continue;
 		}
 		ranges.push({

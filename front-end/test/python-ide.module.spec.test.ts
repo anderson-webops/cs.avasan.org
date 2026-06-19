@@ -238,6 +238,56 @@ describe("python IDE project helpers", () => {
 		]);
 	});
 
+	it("caps bracket context scans for distant visible ranges", () => {
+		const hiddenPrefix = Array.from(
+			{ length: 12000 },
+			(_, index) => `prefix_${index} = ${index}\n`
+		).join("");
+		const visibleLine = "value = (1 + 2)\n";
+		const visibleFrom = hiddenPrefix.length;
+		const visibleTo = visibleFrom + visibleLine.length;
+		const state = pythonEditorState(`${hiddenPrefix}${visibleLine}`);
+		const sliceSpy = vi.spyOn(state.doc, "sliceString");
+		const ranges = pythonBracketPairColorRanges(state, [
+			{ from: visibleFrom, to: visibleTo }
+		]);
+		const firstCall = sliceSpy.mock.calls[0] ?? [];
+
+		expect(sliceSpy).toHaveBeenCalledTimes(1);
+		expect(firstCall[0]).toBeGreaterThan(0);
+		expect(firstCall[1]).toBe(visibleTo);
+		expect(ranges.map(range => range.from)).toEqual([
+			visibleFrom + visibleLine.indexOf("("),
+			visibleFrom + visibleLine.indexOf(")")
+		]);
+	});
+
+	it("caps hidden suffix scans for far-off matching brackets", () => {
+		const hiddenMiddle = Array.from(
+			{ length: 15000 },
+			(_, index) => `hidden_${index} = ${index}\n`
+		).join("");
+		const doc = `items = (\n${hiddenMiddle})\n`;
+		const visibleTo = doc.indexOf("\n") + 1;
+		const openParen = doc.indexOf("(");
+		const state = pythonEditorState(doc);
+		const sliceSpy = vi.spyOn(state.doc, "sliceString");
+		const ranges = pythonBracketPairColorRanges(state, [
+			{ from: 0, to: visibleTo }
+		]);
+		const secondCall = sliceSpy.mock.calls[1] ?? [];
+
+		expect(sliceSpy).toHaveBeenCalledTimes(2);
+		expect(secondCall[0]).toBe(visibleTo);
+		expect(secondCall[1]).toBeLessThan(doc.length);
+		expect(ranges).toContainEqual({
+			from: openParen,
+			pairIndex: 0,
+			to: openParen + 1,
+			unmatched: true
+		});
+	});
+
 	it("ignores bracket characters inside Python strings and comments", () => {
 		const doc = `text = "("\n# ]\nvalue = (1 + 2)\n`;
 		const ranges = pythonBracketPairColorRanges(pythonEditorState(doc), [
