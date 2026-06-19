@@ -6619,52 +6619,64 @@ function studioSupport(context: CourseTextContext) {
 	);
 	const pathTitle =
 		`${itemTitle} ${context.item.projectLink ?? ""}`.toLowerCase();
+	const pathSubject =
+		compactStudioContextTitle(scopedSubject || itemTitle || moduleTitle) ||
+		(supportNoun === "lab" ? "the lab task" : "the studio task");
 	const studioPath = (() => {
 		if (pathTitle.includes("build requirements")) {
-			return `Build path for ${studioReference}: define the required parts, connect them into one runnable artifact, and verify the complete path rather than isolated pieces.`;
+			return `Build path for ${pathSubject}: define the required parts, connect them into one runnable artifact, and verify the complete path rather than isolated pieces.`;
 		}
 		if (
 			pathTitle.includes("common bug") ||
 			pathTitle.includes("debugging")
 		) {
-			return `Debug path for ${studioReference}: reproduce one realistic failure, name the suspected cause, change the smallest relevant script or state rule, and verify the fix.`;
+			return `Debug path for ${pathSubject}: reproduce one realistic failure, name the suspected cause, change the smallest relevant script or state rule, and verify the fix.`;
 		}
 		if (
 			pathTitle.includes("share and explain") ||
 			pathTitle.includes("presentation")
 		) {
-			return `Explanation path for ${studioReference}: connect the finished behavior to the main event chain, state variable, design choice, and remaining limitation.`;
+			return `Explanation path for ${pathSubject}: connect the finished behavior to the main event chain, state variable, design choice, and remaining limitation.`;
 		}
 		if (
 			pathTitle.includes("design and planning") ||
 			pathTitle.includes("planning map")
 		) {
-			return `Planning path for ${studioReference}: map the pieces, first runnable checkpoint, verification evidence, and one likely risk before implementation expands.`;
+			return `Planning path for ${pathSubject}: map the pieces, first runnable checkpoint, verification evidence, and one likely risk before implementation expands.`;
 		}
 		if (pathTitle.includes("worked example")) {
-			return `Model path for ${studioReference}: setup, one hand-checkable trace, expected output, and the reason the result is trustworthy.`;
+			return `Model path for ${pathSubject}: setup, one hand-checkable trace, expected output, and the reason the result is trustworthy.`;
 		}
 		if (pathTitle.includes("core project")) {
-			return `Required build path for ${studioReference}: complete the main artifact first, then verify the ordinary case and one boundary case.`;
+			return `Required build path for ${pathSubject}: complete the main artifact first, then verify the ordinary case and one boundary case.`;
 		}
 		if (pathTitle.includes("review")) {
-			return `Review path for ${studioReference}: inspect the result, name one limitation or bug risk, and record the next improvement.`;
+			return `Review path for ${pathSubject}: inspect the result, name one limitation or bug risk, and record the next improvement.`;
 		}
 		if (
 			pathTitle.includes("transfer") ||
 			pathTitle.includes("supplemental 2")
 		) {
-			return `Transfer path for ${studioReference}: change one dataset, constraint, representation, or context and compare what still works.`;
+			return `Transfer path for ${pathSubject}: change one dataset, constraint, representation, or context and compare what still works.`;
 		}
 		if (
 			pathTitle.includes("extension") ||
 			pathTitle.includes("challenge") ||
 			pathTitle.includes("supplemental 3")
 		) {
-			return `Extension path for ${studioReference}: add a harder case, second metric, alternate representation, or deeper limitation check after the base version works.`;
+			return `Extension path for ${pathSubject}: add a harder case, second metric, alternate representation, or deeper limitation check after the base version works.`;
 		}
 
-		return `${studioReference} connects the activity goal to a visible artifact, verification evidence, and one limitation.`;
+		return variantPrompt(context, [
+			() =>
+				`${pathSubject} connects the activity goal to a visible artifact, verification evidence, and one limitation that can be inspected later.`,
+			() =>
+				`${pathSubject} starts from the intended result, then records the evidence, boundary behavior, and limitation that make the work reviewable.`,
+			() =>
+				`Use ${pathSubject} to produce a concrete result, check it against the module goal, and name one limitation before extension work begins.`,
+			() =>
+				`${pathSubject} leaves behind a runnable artifact, a specific verification note, and one improvement target tied to the module goal.`
+		]);
 	})();
 
 	return [

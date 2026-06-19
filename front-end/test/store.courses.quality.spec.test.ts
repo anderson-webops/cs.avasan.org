@@ -468,6 +468,15 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/Name the input values, helper functions or loops, data structures, and printed output before coding/
 			);
+			expect(corpus).not.toMatch(
+				/\*\*Path:\*\* the (?:lab|studio) connects the activity goal to a visible artifact, verification evidence, and one limitation/i
+			);
+			expect(corpus).not.toMatch(
+				/\*\*Path:\*\* Review path for the (?:lab|studio): inspect the result, name one limitation or bug risk, and record the next improvement/i
+			);
+			expect(corpus).not.toMatch(
+				/\*\*Path:\*\* (?:Build|Debug|Explanation|Planning|Model|Required build|Transfer|Extension) path for the (?:lab|studio):/i
+			);
 			expect(corpus).toContain(
 				"The program demonstrates the required Java behavior without relying on stale build output or hidden IDE state"
 			);
