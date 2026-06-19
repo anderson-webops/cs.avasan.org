@@ -2498,6 +2498,12 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("def _handle_music_end(self):");
 		expect(runtimeSource).toContain('elif event_type == "musicended":');
 		expect(runtimeSource).toContain(
+			"playSound: (name: string, loops?: number) => void"
+		);
+		expect(runtimeSource).toContain(
+			"_bridge.playSound(self.name, int(_number(loops, 0)))"
+		);
+		expect(runtimeSource).toContain(
 			`_call_optional_named(
                 "on_mouse_down"`
 		);
@@ -2519,6 +2525,18 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("const left = -anchorX");
 		expect(pageSource).toContain("drawLine: drawGameLine");
 		expect(pageSource).toContain("drawCircle: drawGameCircle");
+		expect(pageSource).toContain("function playGameSound(name: string, loops = 0)");
+		expect(pageSource).toContain("const repeatCount = Math.max(");
+		expect(pageSource).toContain(
+			"Math.trunc(Number.isFinite(loops) ? loops : 0)"
+		);
+		expect(pageSource).toContain("repeatCount < 0");
+		expect(pageSource).toContain("let remainingLoops = repeatCount;");
+		expect(pageSource).toContain("remainingLoops -= 1;");
+		expect(pageSource).toContain(
+			"playSound(name: string, loops?: number)"
+		);
+		expect(pageSource).toContain("gameBridge.playSound(name, loops)");
 		expect(pageSource).toContain("lineWidth = 1");
 		expect(pageSource).toContain(
 			"context.lineWidth = Math.max(1, lineWidth)"

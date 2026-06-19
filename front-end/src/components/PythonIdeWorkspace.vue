@@ -2725,10 +2725,15 @@ function playProjectAudio(
 	return audio;
 }
 
-function trackGameSoundAudio(name: string, audio: HTMLAudioElement) {
+function trackGameSoundAudio(
+	name: string,
+	audio: HTMLAudioElement,
+	options: { cleanupOnEnded?: boolean } = {}
+) {
 	const existing = gameSoundAudio.get(name) ?? new Set<HTMLAudioElement>();
 	existing.add(audio);
 	gameSoundAudio.set(name, existing);
+	const cleanupOnEnded = options.cleanupOnEnded ?? true;
 
 	const cleanup = () => {
 		const activeSounds = gameSoundAudio.get(name);
@@ -2737,15 +2742,54 @@ function trackGameSoundAudio(name: string, audio: HTMLAudioElement) {
 		if (!activeSounds.size) gameSoundAudio.delete(name);
 	};
 
-	audio.addEventListener("ended", cleanup, { once: true });
+	if (cleanupOnEnded)
+		audio.addEventListener("ended", cleanup, { once: true });
 	audio.addEventListener("error", cleanup, { once: true });
 	return cleanup;
 }
 
-function playGameSound(name: string) {
+function playGameSound(name: string, loops = 0) {
+	const repeatCount = Math.max(
+		-1,
+		Math.trunc(Number.isFinite(loops) ? loops : 0)
+	);
 	let cleanup: (() => void) | null = null;
-	const audio = playProjectAudio("sounds", name, false, () => cleanup?.());
-	if (audio) cleanup = trackGameSoundAudio(name, audio);
+	const cleanupBlockedSound = () => {
+		cleanup?.();
+	};
+	const audio = playProjectAudio(
+		"sounds",
+		name,
+		repeatCount < 0,
+		cleanupBlockedSound
+	);
+	if (!audio) return;
+
+	if (repeatCount <= 0) {
+		cleanup = trackGameSoundAudio(name, audio);
+		return;
+	}
+
+	cleanup = trackGameSoundAudio(name, audio, { cleanupOnEnded: false });
+	let remainingLoops = repeatCount;
+	audio.addEventListener("ended", () => {
+		if (remainingLoops <= 0) {
+			cleanup?.();
+			return;
+		}
+
+		remainingLoops -= 1;
+		audio.currentTime = 0;
+		void audio.play().catch((error: unknown) => {
+			cleanup?.();
+			appendOutput(
+				"system",
+				error instanceof Error
+					? `Audio playback was blocked: ${error.message}`
+					: "Audio playback was blocked."
+			);
+		});
+	});
 }
 
 function stopGameSound(name: string) {
@@ -3591,8 +3635,8 @@ function createGuardedGameBridgeRun(): GameBridge {
 		stopLoop() {
 			if (isActiveRun()) gameBridge.stopLoop();
 		},
-		playSound(name: string) {
-			if (isActiveRun()) gameBridge.playSound(name);
+		playSound(name: string, loops?: number) {
+			if (isActiveRun()) gameBridge.playSound(name, loops);
 		},
 		stopSound(name: string) {
 			if (isActiveRun()) gameBridge.stopSound(name);

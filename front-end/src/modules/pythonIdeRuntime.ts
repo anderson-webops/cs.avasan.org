@@ -148,7 +148,7 @@ export interface GameBridge {
 	consumeLoopRequest: () => boolean;
 	startLoop: (tick: () => Promise<void>) => void;
 	stopLoop: () => void;
-	playSound: (name: string) => void;
+	playSound: (name: string, loops?: number) => void;
 	stopSound: (name: string) => void;
 	playMusic: (name: string, loop?: boolean) => void;
 	pauseMusic: () => void;
@@ -2724,7 +2724,7 @@ class _Sound:
         self.name = str(name)
 
     def play(self, loops=0, *_args, **_kwargs):
-        _bridge.playSound(self.name)
+        _bridge.playSound(self.name, int(_number(loops, 0)))
         return None
 
     def stop(self):
