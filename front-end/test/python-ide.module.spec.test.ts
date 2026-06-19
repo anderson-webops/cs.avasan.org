@@ -1038,6 +1038,18 @@ describe("python IDE project helpers", () => {
 		expect(workerSource).toContain("setStdout");
 		expect(workerSource).toContain("setStderr");
 		expect(workerSource).toContain("captureProjectTextFiles");
+		expect(workerSource).toContain(
+			'import {\n\tisPythonIdeTextFile,\n\tisValidPythonFileName\n} from "@/modules/pythonIde";'
+		);
+		expect(workerSource).toContain("function decodeBase64File");
+		expect(workerSource).toContain("function writeProjectFile");
+		expect(workerSource).toContain('file.encoding === "base64"');
+		expect(workerSource).toContain(
+			"const writableFiles = files.filter(file =>"
+		);
+		expect(workerSource).toContain("isValidPythonFileName(file.name)");
+		expect(workerSource).toContain("__classes_text_suffixes");
+		expect(workerSource).toContain("isPythonIdeTextFile(file.name)");
 		expect(workerSource).toContain("function isActiveRun");
 		expect(workerSource).toContain("if (!isActiveRun(id)) return;");
 		expect(workerSource).toContain("if (!isActiveRun(request.id)) return;");

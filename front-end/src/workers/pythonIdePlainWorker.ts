@@ -1,4 +1,8 @@
 import type { PythonIdeFile } from "@/modules/pythonIde";
+import {
+	isPythonIdeTextFile,
+	isValidPythonFileName
+} from "@/modules/pythonIde";
 import { PYODIDE_INDEX_URL } from "@/modules/pythonIdeRuntimeHints";
 import { pythonIdeImportedTopLevelModules } from "@/modules/pythonImportScanner";
 import { pythonStandardLibraryModules } from "@/modules/pythonStandardLibraryModules";
@@ -116,19 +120,36 @@ function safeUnlink(pyodide: PyodideAPI, path: string) {
 	pyodide.FS.unlink(path);
 }
 
+function decodeBase64File(content: string) {
+	const binary = atob(content);
+	const bytes = new Uint8Array(binary.length);
+	for (let index = 0; index < binary.length; index += 1)
+		bytes[index] = binary.charCodeAt(index);
+	return bytes;
+}
+
+function writeProjectFile(pyodide: PyodideAPI, file: PythonIdeFile) {
+	ensureParentDirectories(pyodide, file.name);
+	pyodide.FS.writeFile(
+		`${PROJECT_ROOT}/${file.name}`,
+		file.encoding === "base64"
+			? decodeBase64File(file.content)
+			: file.content
+	);
+}
+
 function syncProjectFiles(pyodide: PyodideAPI, files: PythonIdeFile[]) {
 	ensureDirectory(pyodide, PROJECT_ROOT);
-	const nextFileNames = new Set(files.map(file => file.name));
+	const writableFiles = files.filter(file =>
+		isValidPythonFileName(file.name)
+	);
+	const nextFileNames = new Set(writableFiles.map(file => file.name));
 	for (const previousName of lastProjectFileNames) {
 		if (!nextFileNames.has(previousName))
 			safeUnlink(pyodide, `${PROJECT_ROOT}/${previousName}`);
 	}
 
-	for (const file of files) {
-		if (file.encoding && file.encoding !== "text") continue;
-		ensureParentDirectories(pyodide, file.name);
-		pyodide.FS.writeFile(`${PROJECT_ROOT}/${file.name}`, file.content);
-	}
+	for (const file of writableFiles) writeProjectFile(pyodide, file);
 
 	lastProjectFileNames = nextFileNames;
 }
@@ -239,8 +260,11 @@ from pathlib import Path
 
 __classes_root = Path(${escapePythonString(PROJECT_ROOT)})
 __classes_files = []
+__classes_text_suffixes = {".csv", ".json", ".md", ".py", ".svg", ".txt"}
 for __classes_path in sorted(__classes_root.rglob("*")):
     if not __classes_path.is_file():
+        continue
+    if __classes_path.suffix.lower() not in __classes_text_suffixes:
         continue
     try:
         __classes_content = __classes_path.read_text(encoding="utf-8")
@@ -253,7 +277,13 @@ for __classes_path in sorted(__classes_root.rglob("*")):
     })
 json.dumps(__classes_files)
 `);
-	return JSON.parse(String(snapshot)) as PythonIdeFile[];
+	const files = JSON.parse(String(snapshot)) as PythonIdeFile[];
+	return files.filter(
+		file =>
+			isValidPythonFileName(file.name) &&
+			isPythonIdeTextFile(file.name) &&
+			file.encoding === "text"
+	);
 }
 
 async function runPlainPythonProject(request: PlainPythonRunRequest) {
