@@ -503,6 +503,20 @@ function releaseLoadedPythonRuntimeCallbacks(
 		});
 }
 
+function stopLoadedPythonRuntimeRun() {
+	if (!pythonRuntimeModulePromise) return;
+	void pythonRuntimeModulePromise
+		.then(module => module.stopPythonIdeRuntimeRun())
+		.catch(error => {
+			appendOutput(
+				"stderr",
+				error instanceof Error
+					? error.message
+					: "Could not stop Python runtime."
+			);
+		});
+}
+
 const turtleState: TurtleState = {
 	x: 0,
 	y: 0,
@@ -590,6 +604,15 @@ const usesDrawingCanvas = computed(
 		selectedProject.value?.mode === "turtle" ||
 		selectedProject.value?.mode === "pgzero"
 );
+const usesGameCanvas = computed(() => selectedProject.value?.mode === "pgzero");
+const drawingCanvasStyle = computed(() => {
+	if (!usesGameCanvas.value) return {};
+	const aspect = gameState.width / gameState.height;
+	return {
+		"--python-game-aspect": `${gameState.width} / ${gameState.height}`,
+		"--python-game-max-width": `${Math.min(68, Math.max(18, aspect * 34))}rem`
+	};
+});
 const requestedCourseId = computed(() =>
 	typeof route.query.course === "string" ? route.query.course : ""
 );
@@ -2951,6 +2974,7 @@ function stopCurrentProject() {
 	if (!runControlIsStop.value) return;
 	const hadPythonRunInFlight = isRunning.value;
 	stopRequested.value = true;
+	stopLoadedPythonRuntimeRun();
 	clearTurtleTimers();
 	cancelTurtleAnimation();
 	stopGameLoop();
@@ -2965,7 +2989,9 @@ function stopCurrentProject() {
 	appendOutput(
 		"system",
 		hadPythonRunInFlight
-			? "Stop requested. Python will halt at the next runtime checkpoint."
+			? selectedProject.value?.mode === "python"
+				? "Stop requested. Plain Python worker is being terminated."
+				: "Stop requested. Python will halt at the next runtime checkpoint."
 			: "Stopped active canvas handlers."
 	);
 	if (!hadPythonRunInFlight) {
@@ -3632,7 +3658,10 @@ onBeforeUnmount(() => {
 					</button>
 				</div>
 
-				<div class="ide-grid">
+				<div
+					class="ide-grid"
+					:class="{ 'ide-grid--drawing': usesDrawingCanvas }"
+				>
 					<section class="code-panel" aria-label="Code editor">
 						<div class="panel-header">
 							<span>{{ activeFile?.name ?? "main.py" }}</span>
@@ -3705,11 +3734,19 @@ onBeforeUnmount(() => {
 							</button>
 						</div>
 
-						<div v-show="usesDrawingCanvas" class="canvas-shell">
+						<div
+							v-show="usesDrawingCanvas"
+							class="canvas-shell"
+							:class="{ 'canvas-shell--game': usesGameCanvas }"
+						>
 							<canvas
 								ref="canvasRef"
 								:aria-label="`${selectedModeLabel} canvas`"
 								class="turtle-canvas"
+								:class="{
+									'turtle-canvas--game': usesGameCanvas
+								}"
+								:style="drawingCanvasStyle"
 								tabindex="0"
 								@blur="clearCanvasKeyboardState"
 								@mousedown="
@@ -4498,6 +4535,10 @@ html.dark .file-delete:disabled::after {
 	gap: 1rem;
 }
 
+.ide-grid--drawing {
+	grid-template-columns: minmax(0, 0.82fr) minmax(28rem, 1.18fr);
+}
+
 .code-panel,
 .result-panel {
 	min-width: 0;
@@ -4669,6 +4710,8 @@ html.dark .editor-shortcuts ul {
 }
 
 .canvas-shell {
+	display: grid;
+	place-items: center;
 	padding: 1rem;
 	border: 1px solid transparent;
 	border-bottom-color: var(--color-border);
@@ -4682,6 +4725,10 @@ html.dark .editor-shortcuts ul {
 		box-shadow 150ms ease;
 }
 
+.canvas-shell--game {
+	padding: 1.25rem;
+}
+
 .turtle-canvas {
 	width: 100%;
 	height: 23rem;
@@ -4689,6 +4736,12 @@ html.dark .editor-shortcuts ul {
 	border-radius: 14px;
 	background: #fff;
 	outline: none;
+}
+
+.turtle-canvas--game {
+	width: min(100%, var(--python-game-max-width, 54rem));
+	height: auto;
+	aspect-ratio: var(--python-game-aspect, 640 / 400);
 }
 
 .artifact-list {
@@ -4837,7 +4890,7 @@ html.dark .editor-shortcuts ul {
 		min-width: 0;
 	}
 
-	.turtle-canvas {
+	.turtle-canvas:not(.turtle-canvas--game) {
 		height: 18rem;
 	}
 }

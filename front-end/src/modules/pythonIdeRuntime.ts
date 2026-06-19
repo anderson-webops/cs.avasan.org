@@ -226,7 +226,34 @@ export interface RunPythonProjectOptions {
 	shouldStop?: () => boolean;
 }
 
+interface PlainPythonWorkerOutputMessage {
+	type: "output";
+	id: number;
+	kind: "stdout" | "stderr" | "system";
+	text: string;
+}
+
+interface PlainPythonWorkerDoneMessage {
+	type: "done";
+	id: number;
+	files: PythonIdeFile[];
+}
+
+interface PlainPythonWorkerErrorMessage {
+	type: "error";
+	id: number;
+	message: string;
+}
+
+type PlainPythonWorkerMessage =
+	| PlainPythonWorkerDoneMessage
+	| PlainPythonWorkerErrorMessage
+	| PlainPythonWorkerOutputMessage;
+
 let pyodidePromise: Promise<PyodideAPI> | null = null;
+let plainPythonWorker: Worker | null = null;
+let plainPythonWorkerRunID = 0;
+let stopActivePlainPythonWorkerRun: ((reason: string) => void) | null = null;
 let lastProjectFileNames = new Set<string>();
 const loadedBrowserShimPackages = new Set<string>();
 const installedMicropipPackages = new Set<string>();
@@ -341,6 +368,111 @@ function releaseRuntimeCallbackRegistries(pyodide: PyodideAPI) {
 export async function releasePythonIdeRuntimeCallbacks() {
 	if (!pyodidePromise) return;
 	releaseRuntimeCallbackRegistries(await pyodidePromise);
+}
+
+function getPlainPythonWorker() {
+	plainPythonWorker ??= new Worker(
+		new URL("../workers/pythonIdePlainWorker.ts", import.meta.url),
+		{ type: "module" }
+	);
+	return plainPythonWorker;
+}
+
+function terminatePlainPythonWorker() {
+	plainPythonWorker?.terminate();
+	plainPythonWorker = null;
+}
+
+export function stopPythonIdeRuntimeRun() {
+	stopActivePlainPythonWorkerRun?.("Python run stopped.");
+}
+
+function filterCapturedProjectTextFiles(files: PythonIdeFile[]) {
+	return files.filter(
+		file =>
+			isValidPythonFileName(file.name) &&
+			isPythonIdeTextFile(file.name) &&
+			file.encoding === "text"
+	);
+}
+
+function clonePlainPythonIdeFiles(files: PythonIdeFile[]) {
+	return files.map(file => ({
+		name: file.name,
+		content: file.content,
+		...(file.encoding ? { encoding: file.encoding } : {})
+	}));
+}
+
+async function runPlainPythonProjectInWorker(options: RunPythonProjectOptions) {
+	options.gameBridge.stopLoop();
+	options.turtleBridge.reset();
+
+	const activeFile = getPythonIdeRunnableFile(options);
+	if (!activeFile)
+		throw new Error("Project does not have a runnable Python file.");
+
+	const worker = getPlainPythonWorker();
+	const runID = ++plainPythonWorkerRunID;
+
+	return new Promise<void>((resolve, reject) => {
+		let settled = false;
+		let activeStopRun: ((reason: string) => void) | null = null;
+		const cleanup = () => {
+			worker.removeEventListener("message", handleMessage);
+			worker.removeEventListener("error", handleWorkerError);
+			if (stopActivePlainPythonWorkerRun === activeStopRun)
+				stopActivePlainPythonWorkerRun = null;
+		};
+		const settle = (finish: () => void) => {
+			if (settled) return;
+			settled = true;
+			cleanup();
+			finish();
+		};
+		activeStopRun = (reason: string) => {
+			terminatePlainPythonWorker();
+			settle(() => reject(new Error(reason)));
+		};
+		function handleWorkerError(event: ErrorEvent) {
+			terminatePlainPythonWorker();
+			settle(() =>
+				reject(
+					new Error(
+						event.message ||
+							"Python worker failed to run the project."
+					)
+				)
+			);
+		}
+		function handleMessage(event: MessageEvent<PlainPythonWorkerMessage>) {
+			const message = event.data;
+			if (message.id !== runID) return;
+			if (message.type === "output") {
+				options.onOutput(message.kind, message.text);
+				return;
+			}
+			if (message.type === "error") {
+				settle(() => reject(new Error(message.message)));
+				return;
+			}
+			options.onProjectFilesUpdate?.(
+				filterCapturedProjectTextFiles(message.files)
+			);
+			settle(resolve);
+		}
+
+		stopActivePlainPythonWorkerRun = activeStopRun;
+		worker.addEventListener("message", handleMessage);
+		worker.addEventListener("error", handleWorkerError);
+		worker.postMessage({
+			type: "run",
+			id: runID,
+			activeFileName: activeFile.name,
+			files: clonePlainPythonIdeFiles(options.files),
+			inputText: options.inputText
+		});
+	});
 }
 
 function clearRuntimeShimModules(pyodide: PyodideAPI) {
@@ -3984,6 +4116,9 @@ function writeRuntimeShims(pyodide: PyodideAPI) {
 }
 
 export async function runPythonProject(options: RunPythonProjectOptions) {
+	if (options.mode === "python")
+		return runPlainPythonProjectInWorker(options);
+
 	const pyodide = await loadRuntime();
 	throwIfRunStopped(options);
 	releaseRuntimeCallbackRegistries(pyodide);

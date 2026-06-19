@@ -686,6 +686,65 @@ describe("python IDE project helpers", () => {
 		);
 	});
 
+	it("runs plain Python projects in a terminable Pyodide worker", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+		const workerSource = readFileSync(
+			resolve(__dirname, "../src/workers/pythonIdePlainWorker.ts"),
+			"utf8"
+		);
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+
+		expect(runtimeSource).toContain('if (options.mode === "python")');
+		expect(runtimeSource).toContain(
+			"return runPlainPythonProjectInWorker(options);"
+		);
+		expect(runtimeSource).toContain(
+			'new URL("../workers/pythonIdePlainWorker.ts", import.meta.url)'
+		);
+		expect(runtimeSource).toContain(
+			"export function stopPythonIdeRuntimeRun"
+		);
+		expect(runtimeSource).toContain("terminatePlainPythonWorker()");
+		expect(runtimeSource).toContain("function clonePlainPythonIdeFiles");
+		expect(runtimeSource).toContain("files: clonePlainPythonIdeFiles");
+		expect(pageSource).toContain("stopLoadedPythonRuntimeRun()");
+		expect(pageSource).toContain(
+			"Plain Python worker is being terminated."
+		);
+		expect(workerSource).toContain("pyodide.mjs");
+		expect(workerSource).toContain("loadPackagesFromImports");
+		expect(workerSource).toContain("setStdout");
+		expect(workerSource).toContain("setStderr");
+		expect(workerSource).toContain("captureProjectTextFiles");
+	});
+
+	it("preserves PyGame Zero canvas aspect ratio instead of stretching", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain("const usesGameCanvas = computed");
+		expect(pageSource).toContain("drawingCanvasStyle");
+		expect(pageSource).toContain("--python-game-aspect");
+		expect(pageSource).toContain("--python-game-max-width");
+		expect(pageSource).toContain("canvas-shell--game");
+		expect(pageSource).toContain("turtle-canvas--game");
+		expect(pageSource).toContain("ide-grid--drawing");
+		expect(pageSource).toContain(
+			"aspect-ratio: var(--python-game-aspect, 640 / 400);"
+		);
+		expect(pageSource).toContain(
+			".turtle-canvas:not(.turtle-canvas--game)"
+		);
+	});
+
 	it("keeps Streamlit dashboard widget helpers wired in the runtime shim", () => {
 		const runtimeSource = readFileSync(
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
