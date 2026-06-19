@@ -1095,6 +1095,72 @@ describe("course text quality normalization", () => {
 		expect(duplicateGroups).toEqual([]);
 	});
 
+	it("keeps C++ placement appendices level-specific across Levels 1-3", async () => {
+		const courseIds = ["c-level-1", "cpp-level-2", "cpp-level-3"] as const;
+		const courseLevels: Record<(typeof courseIds)[number], string> = {
+			"c-level-1": "Level 1",
+			"cpp-level-2": "Level 2",
+			"cpp-level-3": "Level 3"
+		};
+		const appendixTitles = [
+			"C++ Levels 1-3 Concept Matrix and Placement",
+			"Modern Three-Course C++ Spine"
+		];
+		const courses = await Promise.all(
+			courseIds.map(async courseId => ({
+				courseId,
+				course: await loadRawCourse(courseId)
+			}))
+		);
+		const duplicateSummaries: string[] = [];
+
+		for (const { courseId, course } of courses) {
+			expect(course, courseId).not.toBeNull();
+			if (!course) continue;
+
+			const text = allCourseText(course);
+			const level = courseLevels[courseId];
+			expect(text, courseId).toContain(`Use this from ${level}`);
+			expect(text, courseId).toContain(`For ${level}`);
+		}
+
+		for (const appendixTitle of appendixTitles) {
+			const itemContentByTitle = new Map<string, string[]>();
+
+			for (const { courseId, course } of courses) {
+				if (!course) continue;
+
+				const module = course.modules.find(
+					module => module.title === appendixTitle
+				);
+				expect(module, `${courseId}: ${appendixTitle}`).toBeTruthy();
+				if (!module) continue;
+
+				for (const item of [
+					...module.curriculum,
+					...module.supplementalProjects
+				]) {
+					const contents = itemContentByTitle.get(item.title) ?? [];
+					contents.push(item.content.replace(/\s+/g, " ").trim());
+					itemContentByTitle.set(item.title, contents);
+				}
+			}
+
+			for (const [itemTitle, contents] of itemContentByTitle) {
+				expect(
+					contents,
+					`${appendixTitle}: ${itemTitle}`
+				).toHaveLength(courseIds.length);
+
+				if (new Set(contents).size !== contents.length) {
+					duplicateSummaries.push(`${appendixTitle}: ${itemTitle}`);
+				}
+			}
+		}
+
+		expect(duplicateSummaries).toEqual([]);
+	});
+
 	it("keeps older JavaScript and Python project prompts from collapsing to one-line tasks", async () => {
 		const courses = await Promise.all([
 			loadRawCourse("javascript-level-1-javascript-superstar"),
