@@ -1196,9 +1196,59 @@ function formatNamedCheckpointPrompts(text: string) {
 		.replace(/\nNote:\s*/g, "\n\n**Note:** ");
 }
 
+const useThisOpeningVerbMap: Record<string, string> = {
+	compare: "compares",
+	drill: "drills",
+	force: "forces",
+	highlight: "highlights",
+	reinforce: "reinforces",
+	revisit: "revisits",
+	review: "reviews",
+	sharpen: "sharpens",
+	tighten: "tightens"
+};
+
+function neutralizeUseThisOpening(text: string) {
+	return text
+		.replace(
+			/(^|\n)Use this (check-in|module|review module|review|final check-in|project) as a ([^.]+)\./gi,
+			(_match, prefix: string, subject: string, description: string) =>
+				`${prefix}This ${subject.toLowerCase()} is a ${description}.`
+		)
+		.replace(
+			/(^|\n)Use this (check-in|module|review module|review|final check-in|reference build|reference|project|build|one-line boolean exercise|supplemental build) to (compare|drill|force|highlight|reinforce|revisit|review|sharpen|tighten) ([^.]+)\./gi,
+			(
+				_match,
+				prefix: string,
+				subject: string,
+				verb: string,
+				detail: string
+			) =>
+				`${prefix}This ${subject.toLowerCase()} ${useThisOpeningVerbMap[verb.toLowerCase()]} ${detail}.`
+		)
+		.replace(
+			/(^|\n)Use this (checklist) when ([^.]+)\./gi,
+			(_match, prefix: string, subject: string, detail: string) =>
+				`${prefix}This ${subject.toLowerCase()} supports ${detail}.`
+		)
+		.replace(
+			/(^|\n)Use this (project|build|reference|supplemental build) for ([^.]+)\./gi,
+			(_match, prefix: string, subject: string, detail: string) =>
+				`${prefix}This ${subject.toLowerCase()} focuses on ${detail}.`
+		)
+		.replace(
+			/(^|\n)Use this (reference|project|build|supplemental build) when ([^.]+)\./gi,
+			(_match, prefix: string, subject: string, detail: string) =>
+				`${prefix}This ${subject.toLowerCase()} is a reference point when ${detail}.`
+		)
+		.replace(/\brather than as a\b/g, "rather than a");
+}
+
 function formatVisibleMarkdownStructure(text: string) {
 	const formatted = formatNamedCheckpointPrompts(
-		formatSupportLabels(formatInlineNumberedLists(text))
+		formatSupportLabels(
+			formatInlineNumberedLists(neutralizeUseThisOpening(text))
+		)
 	);
 
 	if (!formatted.includes("Core topics in this module:")) {

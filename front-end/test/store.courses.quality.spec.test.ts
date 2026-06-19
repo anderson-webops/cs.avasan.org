@@ -3333,6 +3333,7 @@ describe("course text quality normalization", () => {
 				/\b(?:students?|learners?)\s+(?:explain|write|build|practice|reason|understand|inspect|trace|identify|distinguish|compare|create|use|complete)\b/i,
 				/This lesson arc covers/i,
 				/Use this as one/i,
+				/(?:^|\n)Use this (?:module|check-in|review|final check-in|checklist|reference|reference build|project|build|supplemental build)\b/i,
 				/Treat this as/i,
 				/\bfuture lesson writing\b/i,
 				/\bfamily can tell\b/i
