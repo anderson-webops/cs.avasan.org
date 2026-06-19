@@ -25,9 +25,9 @@ const RUNTIME_RESERVED_FILE_NAMES = new Set([
 	"zrect.py"
 ]);
 const RUNTIME_RESERVED_ROOTS = new Set(["keras", "pgzero", "tensorflow"]);
-const MAX_PROJECT_FILES = 32;
-const MAX_FILE_LENGTH = 1_000_000;
-const MAX_PROJECT_LENGTH = 5_000_000;
+const MAX_PROJECT_FILES = 40;
+const MAX_FILE_LENGTH = 3_000_000;
+const MAX_PROJECT_LENGTH = 12_000_000;
 const DEFAULT_PROJECT_FILE: PythonProjectFile = {
 	name: "main.py",
 	content: ""

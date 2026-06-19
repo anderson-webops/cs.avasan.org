@@ -22,6 +22,7 @@ async function main() {
 	const app = express();
 	const internalDiagnosticsKey = env.INTERNAL_DIAGNOSTICS_KEY;
 	const loopbackAddresses = new Set(["127.0.0.1", "::1", "::ffff:127.0.0.1"]);
+	const pythonProjectJsonBodyLimit = env.PYTHON_IDE_PROJECT_BODY_LIMIT || "15mb";
 
 	// health
 	app.get("/healthz", (_req, res) => {
@@ -35,6 +36,7 @@ async function main() {
 	app.set("trust proxy", 1);
 
 	// 1) parsers first (with limits)
+	app.use("/users/loggedin/python-projects", bodyParser.json({ limit: pythonProjectJsonBodyLimit }));
 	app.use(bodyParser.urlencoded({ extended: false, limit: "1mb" }));
 	app.use(bodyParser.json({ limit: "1mb" }));
 
