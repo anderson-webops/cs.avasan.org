@@ -24,7 +24,7 @@ import { basicSetup } from "codemirror";
 interface PythonCodeMirrorOptions {
 	onChange: (content: string) => void;
 	onCursorCountChange: (count: number) => void;
-	assetCompletions?: () => PythonCodeMirrorAssetCompletionNames;
+	assetCompletions?: PythonCodeMirrorAssetCompletionProvider;
 	mode?: PythonIdeMode;
 	onRun?: () => void;
 	onSave?: () => void;
@@ -54,6 +54,9 @@ type PythonIdeAssetCompletionFolder = "images" | "music" | "sounds";
 export type PythonCodeMirrorAssetCompletionNames = Partial<
 	Record<PythonIdeAssetCompletionFolder, string[]>
 >;
+type PythonCodeMirrorAssetCompletionProvider = () =>
+	| PythonCodeMirrorAssetCompletionNames
+	| Promise<PythonCodeMirrorAssetCompletionNames>;
 
 interface PythonIdeAssetStringCompletionContext {
 	folder: PythonIdeAssetCompletionFolder;
@@ -65,6 +68,11 @@ interface PythonIdeStringCompletionContext {
 	options: PythonIdeCompletionOption[];
 	validFor: RegExp;
 }
+
+type PythonIdeCompletionResult = PythonIdeStringCompletionContext | null;
+type PythonIdeCompletionAsyncResult =
+	| PythonIdeCompletionResult
+	| Promise<PythonIdeCompletionResult>;
 
 const openingBracketToClosingBracket: Record<string, string> = {
 	"(": ")",
@@ -835,11 +843,22 @@ export function pythonIdeCompletionsForMode(
 }
 
 export function pythonIdeCompletionSource(
+	mode?: PythonIdeMode,
+	assetCompletions?: undefined
+): (context: PythonIdeCompletionContext) => PythonIdeCompletionResult;
+export function pythonIdeCompletionSource(
+	mode: PythonIdeMode | undefined,
+	assetCompletions: PythonCodeMirrorAssetCompletionProvider
+): (context: PythonIdeCompletionContext) => PythonIdeCompletionAsyncResult;
+export function pythonIdeCompletionSource(
+	mode: PythonIdeMode | undefined,
+	assetCompletions: PythonCodeMirrorAssetCompletionProvider | undefined
+): (context: PythonIdeCompletionContext) => PythonIdeCompletionAsyncResult;
+export function pythonIdeCompletionSource(
 	mode: PythonIdeMode = "python",
-	assetCompletions?: () => PythonCodeMirrorAssetCompletionNames
+	assetCompletions?: PythonCodeMirrorAssetCompletionProvider
 ) {
 	return (context: PythonIdeCompletionContext) => {
-		const currentAssetCompletions = assetCompletions?.();
 		const stringCompletion = pythonIdeStringCompletionContext(
 			context.state,
 			context.pos,
@@ -859,14 +878,17 @@ export function pythonIdeCompletionSource(
 			mode
 		);
 		if (assetStringCompletion) {
-			return {
-				from: assetStringCompletion.from,
-				options: assetCompletionOptions(
-					currentAssetCompletions,
-					assetStringCompletion.folder
-				),
-				validFor: pythonAssetStringCompletionValidForRegex
-			};
+			return withPythonAssetCompletions(
+				assetCompletions,
+				completions => ({
+					from: assetStringCompletion.from,
+					options: assetCompletionOptions(
+						completions,
+						assetStringCompletion.folder
+					),
+					validFor: pythonAssetStringCompletionValidForRegex
+				})
+			);
 		}
 
 		const node = syntaxTree(context.state).resolveInner(context.pos, -1);
@@ -887,14 +909,30 @@ export function pythonIdeCompletionSource(
 		if (parts.length > 1) {
 			const memberPrefix = parts.at(-1) ?? "";
 			const receiver = parts.slice(0, -1).join(".");
-			const options = pythonIdeCompletionsForMode(
-				mode,
-				receiver,
-				currentAssetCompletions
-			);
+			const completionFrom = word.to - memberPrefix.length;
+			if (mode === "pgzero" && ["images", "sounds"].includes(receiver)) {
+				return withPythonAssetCompletions(
+					assetCompletions,
+					completions => {
+						const options = pythonIdeCompletionsForMode(
+							mode,
+							receiver,
+							completions
+						);
+						if (!options.length) return null;
+						return {
+							from: completionFrom,
+							options,
+							validFor: pythonCompletionMemberValidForRegex
+						};
+					}
+				);
+			}
+
+			const options = pythonIdeCompletionsForMode(mode, receiver);
 			if (!options.length) return null;
 			return {
-				from: word.to - memberPrefix.length,
+				from: completionFrom,
 				options,
 				validFor: pythonCompletionMemberValidForRegex
 			};
@@ -902,14 +940,28 @@ export function pythonIdeCompletionSource(
 
 		return {
 			from: word.from,
-			options: pythonIdeCompletionsForMode(
-				mode,
-				undefined,
-				currentAssetCompletions
-			),
+			options: pythonIdeCompletionsForMode(mode),
 			validFor: pythonCompletionGlobalValidForRegex
 		};
 	};
+}
+
+function withPythonAssetCompletions<T>(
+	provider: PythonCodeMirrorAssetCompletionProvider | undefined,
+	createResult: (completions: PythonCodeMirrorAssetCompletionNames) => T
+) {
+	const completions = provider?.() ?? {};
+	if (isPromiseLike(completions)) return completions.then(createResult);
+	return createResult(completions);
+}
+
+function isPromiseLike<T>(value: T | Promise<T>): value is Promise<T> {
+	return (
+		typeof value === "object" &&
+		value !== null &&
+		"then" in value &&
+		typeof value.then === "function"
+	);
 }
 
 function pythonIdeStringCompletionContext(

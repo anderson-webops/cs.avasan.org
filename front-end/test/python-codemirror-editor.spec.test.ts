@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { EditorSelection, EditorState } from "@codemirror/state";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import {
 	canSkipExistingClosingToken,
 	pythonIdeCompletionSource,
@@ -28,12 +28,12 @@ describe("python IDE CodeMirror editor", () => {
 	it("does not eager-import IDE feature modules through the app plugin loader", () => {
 		const mainSource = sourceFile("../src/main.ts");
 
-		expect(mainSource).toContain("import: \"install\"");
+		expect(mainSource).toContain('import: "install"');
 		expect(mainSource).toContain("./modules/admin-guard.ts");
 		expect(mainSource).toContain("./modules/i18n.ts");
 		expect(mainSource).toContain("./modules/nprogress.ts");
 		expect(mainSource).toContain("./modules/pinia.ts");
-		expect(mainSource).not.toContain("\"./modules/*.ts\"");
+		expect(mainSource).not.toContain('"./modules/*.ts"');
 		expect(mainSource).not.toContain("./modules/pythonCodeMirror.ts");
 		expect(mainSource).not.toContain("./modules/pythonIdeRuntime.ts");
 	});
@@ -43,20 +43,22 @@ describe("python IDE CodeMirror editor", () => {
 
 		expect(routeSource).toContain("defineAsyncComponent");
 		expect(routeSource).toContain(
-			"() => import(\"@/components/PythonIdeWorkspace.vue\")"
+			'() => import("@/components/PythonIdeWorkspace.vue")'
 		);
 		expect(routeSource).not.toContain("new EditorView");
 		expect(routeSource).not.toContain("loadPythonIdeRuntime");
 	});
 
 	it("does not import the heavy Pyodide runtime before running code", () => {
-		const pageSource = sourceFile("../src/components/PythonIdeWorkspace.vue");
-		const runtimeSource = sourceFile("../src/modules/pythonIdeRuntime.ts");
-		const hintSource = sourceFile("../src/modules/pythonIdeRuntimeHints.ts");
-
-		expect(pageSource).toContain(
-			"import { warmPythonRuntimeResources }"
+		const pageSource = sourceFile(
+			"../src/components/PythonIdeWorkspace.vue"
 		);
+		const runtimeSource = sourceFile("../src/modules/pythonIdeRuntime.ts");
+		const hintSource = sourceFile(
+			"../src/modules/pythonIdeRuntimeHints.ts"
+		);
+
+		expect(pageSource).toContain("import { warmPythonRuntimeResources }");
 		expect(pageSource).toContain("warmPythonRuntimeResources();");
 		expect(pageSource).not.toContain(
 			"loadPythonRuntimeModule().then(module => module.warmPythonRuntime())"
@@ -64,9 +66,7 @@ describe("python IDE CodeMirror editor", () => {
 		expect(pageSource).toContain(
 			"if (!pythonRuntimeModulePromise) return;"
 		);
-		expect(pageSource).toContain(
-			"releaseLoadedPythonRuntimeCallbacks();"
-		);
+		expect(pageSource).toContain("releaseLoadedPythonRuntimeCallbacks();");
 		expect(runtimeSource).toContain("warmPythonRuntimeResources();");
 		expect(hintSource).toContain(
 			"export function warmPythonRuntimeResources"
@@ -77,12 +77,14 @@ describe("python IDE CodeMirror editor", () => {
 	});
 
 	it("mounts CodeMirror instead of the old textarea highlight overlay", () => {
-		const pageSource = sourceFile("../src/components/PythonIdeWorkspace.vue");
+		const pageSource = sourceFile(
+			"../src/components/PythonIdeWorkspace.vue"
+		);
 
 		expect(pageSource).toContain("createPythonCodeMirrorExtensions");
 		expect(pageSource).toContain("new EditorView");
 		expect(pageSource).toContain("codeEditorHostRef");
-		expect(pageSource).toContain("class=\"code-editor-host\"");
+		expect(pageSource).toContain('class="code-editor-host"');
 		expect(pageSource).not.toContain("highlightPythonCodeAsHtml");
 		expect(pageSource).not.toContain("code-editor-highlight");
 		expect(pageSource).not.toContain("handleCodeEditorKeyDown");
@@ -90,7 +92,9 @@ describe("python IDE CodeMirror editor", () => {
 
 	it("enables Python parsing and typical IDE editing behavior", () => {
 		const editorSource = sourceFile("../src/modules/pythonCodeMirror.ts");
-		const pageSource = sourceFile("../src/components/PythonIdeWorkspace.vue");
+		const pageSource = sourceFile(
+			"../src/components/PythonIdeWorkspace.vue"
+		);
 
 		expect(editorSource).toContain("basicSetup");
 		expect(editorSource).toContain("python()");
@@ -115,14 +119,16 @@ describe("python IDE CodeMirror editor", () => {
 		expect(editorSource).toContain("pythonLanguage.data.of");
 		expect(editorSource).toContain("pythonIdeCompletionSource");
 		expect(pageSource).toContain(
-			"mode: selectedProject.value?.mode ?? \"python\""
+			'mode: selectedProject.value?.mode ?? "python"'
 		);
 	});
 
 	it("surfaces the built-in editor shortcuts in the IDE chrome", () => {
-		const pageSource = sourceFile("../src/components/PythonIdeWorkspace.vue");
+		const pageSource = sourceFile(
+			"../src/components/PythonIdeWorkspace.vue"
+		);
 
-		expect(pageSource).toContain("class=\"editor-shortcuts\"");
+		expect(pageSource).toContain('class="editor-shortcuts"');
 		expect(pageSource).toContain("Cmd/Ctrl+F opens search.");
 		expect(pageSource).toMatch(/Cmd\/Ctrl\+Enter\s+runs the project\./);
 		expect(pageSource).toContain("Cmd/Ctrl+S saves the project.");
@@ -130,13 +136,13 @@ describe("python IDE CodeMirror editor", () => {
 		expect(pageSource).toMatch(
 			/Alt\/Option-drag creates a\s+rectangular selection\./
 		);
-		expect(pageSource).toContain(
-			"Quotes and brackets wrap highlighted"
-		);
+		expect(pageSource).toContain("Quotes and brackets wrap highlighted");
 	});
 
 	it("offers course-runtime completions by immutable project mode", () => {
-		const pageSource = sourceFile("../src/components/PythonIdeWorkspace.vue");
+		const pageSource = sourceFile(
+			"../src/components/PythonIdeWorkspace.vue"
+		);
 		const toolbarSource =
 			pageSource.match(
 				/class="editor-toolbar"[\s\S]*?<div class="ide-grid">/
@@ -333,7 +339,7 @@ describe("python IDE CodeMirror editor", () => {
 		);
 	});
 
-	it("offers PyGame Zero asset completions for project and course assets", () => {
+	it("offers PyGame Zero asset completions for project and course assets", async () => {
 		const assetCompletions = {
 			images: ["student", "space-ship"],
 			music: ["theme"],
@@ -344,42 +350,46 @@ describe("python IDE CodeMirror editor", () => {
 			"images",
 			assetCompletions
 		).map(option => option.label);
-		const actorDoc = "player = Actor(\"space";
+		const actorDoc = 'player = Actor("space';
 		const actorState = EditorState.create({ doc: actorDoc });
 		const actorCompletionSource = pythonIdeCompletionSource(
 			"pgzero",
 			() => assetCompletions
 		);
-		const actorResult = actorCompletionSource({
+		const actorResult = await actorCompletionSource({
 			explicit: false,
 			pos: actorDoc.length,
 			state: actorState,
 			matchBefore: expression =>
 				completionMatchBefore(actorDoc, actorDoc.length, expression)
 		});
-		const musicDoc = "music.play(\"th";
+		const musicDoc = 'music.play("th';
 		const musicState = EditorState.create({ doc: musicDoc });
 		const musicCompletionSource = pythonIdeCompletionSource(
 			"pgzero",
 			() => assetCompletions
 		);
-		const musicResult = musicCompletionSource({
+		const musicResult = await musicCompletionSource({
 			explicit: false,
 			pos: musicDoc.length,
 			state: musicState,
 			matchBefore: expression =>
 				completionMatchBefore(musicDoc, musicDoc.length, expression)
 		});
-		const playOnceDoc = "music.play_once(\"th";
-		const playOnceResult = musicCompletionSource({
+		const playOnceDoc = 'music.play_once("th';
+		const playOnceResult = await musicCompletionSource({
 			explicit: false,
 			pos: playOnceDoc.length,
 			state: EditorState.create({ doc: playOnceDoc }),
 			matchBefore: expression =>
-				completionMatchBefore(playOnceDoc, playOnceDoc.length, expression)
+				completionMatchBefore(
+					playOnceDoc,
+					playOnceDoc.length,
+					expression
+				)
 		});
-		const queueDoc = "music.queue(\"th";
-		const queueResult = musicCompletionSource({
+		const queueDoc = 'music.queue("th';
+		const queueResult = await musicCompletionSource({
 			explicit: false,
 			pos: queueDoc.length,
 			state: EditorState.create({ doc: queueDoc }),
@@ -399,19 +409,19 @@ describe("python IDE CodeMirror editor", () => {
 
 		expect(imageMemberLabels).toContain("student");
 		expect(imageMemberLabels).not.toContain("space-ship");
-		expect(actorResult?.from).toBe("player = Actor(\"".length);
+		expect(actorResult?.from).toBe('player = Actor("'.length);
 		expect(actorResult?.options.map(option => option.label)).toEqual(
 			expect.arrayContaining(["space-ship", "student"])
 		);
-		expect(musicResult?.from).toBe("music.play(\"".length);
+		expect(musicResult?.from).toBe('music.play("'.length);
 		expect(musicResult?.options.map(option => option.label)).toContain(
 			"theme"
 		);
-		expect(playOnceResult?.from).toBe("music.play_once(\"".length);
+		expect(playOnceResult?.from).toBe('music.play_once("'.length);
 		expect(playOnceResult?.options.map(option => option.label)).toContain(
 			"theme"
 		);
-		expect(queueResult?.from).toBe("music.queue(\"".length);
+		expect(queueResult?.from).toBe('music.queue("'.length);
 		expect(queueResult?.options.map(option => option.label)).toContain(
 			"theme"
 		);
@@ -428,8 +438,65 @@ describe("python IDE CodeMirror editor", () => {
 		);
 	});
 
+	it("loads asset completions lazily for PyGame asset contexts", async () => {
+		const assetCompletions = vi.fn(async () => ({
+			images: ["alien"],
+			sounds: ["eep"]
+		}));
+		const memberDoc = "screen.dr";
+		const memberResult = pythonIdeCompletionSource(
+			"pgzero",
+			assetCompletions
+		)({
+			explicit: false,
+			pos: memberDoc.length,
+			state: EditorState.create({ doc: memberDoc }),
+			matchBefore: expression =>
+				completionMatchBefore(memberDoc, memberDoc.length, expression)
+		});
+
+		expect(memberResult?.options.map(option => option.label)).toContain(
+			"draw"
+		);
+		expect(assetCompletions).not.toHaveBeenCalled();
+
+		const actorDoc = 'ship = Actor("al';
+		const actorResult = await pythonIdeCompletionSource(
+			"pgzero",
+			assetCompletions
+		)({
+			explicit: false,
+			pos: actorDoc.length,
+			state: EditorState.create({ doc: actorDoc }),
+			matchBefore: expression =>
+				completionMatchBefore(actorDoc, actorDoc.length, expression)
+		});
+
+		expect(assetCompletions).toHaveBeenCalledTimes(1);
+		expect(actorResult?.options.map(option => option.label)).toContain(
+			"alien"
+		);
+
+		const imageDoc = "images.al";
+		const imageResult = await pythonIdeCompletionSource(
+			"pgzero",
+			assetCompletions
+		)({
+			explicit: false,
+			pos: imageDoc.length,
+			state: EditorState.create({ doc: imageDoc }),
+			matchBefore: expression =>
+				completionMatchBefore(imageDoc, imageDoc.length, expression)
+		});
+
+		expect(assetCompletions).toHaveBeenCalledTimes(2);
+		expect(imageResult?.options.map(option => option.label)).toContain(
+			"alien"
+		);
+	});
+
 	it("offers original Turtle shape completions inside shape calls", () => {
-		const doc = "t.shape(\"cl";
+		const doc = 't.shape("cl';
 		const state = EditorState.create({ doc });
 		const result = pythonIdeCompletionSource("turtle")({
 			explicit: false,
@@ -439,7 +506,7 @@ describe("python IDE CodeMirror editor", () => {
 				completionMatchBefore(doc, doc.length, expression)
 		});
 
-		expect(result?.from).toBe("t.shape(\"".length);
+		expect(result?.from).toBe('t.shape("'.length);
 		expect(result?.options.map(option => option.label)).toEqual(
 			expect.arrayContaining([
 				"arrow",
@@ -493,10 +560,10 @@ describe("python IDE CodeMirror editor", () => {
 		expect(
 			canSkipExistingClosingToken(
 				EditorState.create({
-					doc: "\"hello\"",
-					selection: { anchor: "\"hello".length }
+					doc: '"hello"',
+					selection: { anchor: '"hello'.length }
 				}),
-				"\""
+				'"'
 			)
 		).toBe(true);
 	});
@@ -517,7 +584,7 @@ describe("python IDE CodeMirror editor", () => {
 					doc: "name",
 					selection: { anchor: 0, head: 4 }
 				}),
-				"\""
+				'"'
 			)
 		).toBe(false);
 		expect(

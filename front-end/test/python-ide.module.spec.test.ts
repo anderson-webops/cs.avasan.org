@@ -53,30 +53,8 @@ import {
 } from "../src/modules/pythonIdeRuntime";
 
 const oneByOnePngBytes = new Uint8Array([
-	0x89,
-	0x50,
-	0x4E,
-	0x47,
-	0x0D,
-	0x0A,
-	0x1A,
-	0x0A,
-	0x00,
-	0x00,
-	0x00,
-	0x0D,
-	0x49,
-	0x48,
-	0x44,
-	0x52,
-	0x00,
-	0x00,
-	0x00,
-	0x01,
-	0x00,
-	0x00,
-	0x00,
-	0x01
+	0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00, 0x00, 0x0d,
+	0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01
 ]);
 
 describe("python IDE project helpers", () => {
@@ -119,16 +97,10 @@ describe("python IDE project helpers", () => {
 		const turtleProject = createPythonIdeProject("turtle");
 		const pgzeroProject = createPythonIdeProject("pgzero");
 
-		expect(pythonProject.files).toEqual([
-			{ name: "main.py", content: "" }
-		]);
+		expect(pythonProject.files).toEqual([{ name: "main.py", content: "" }]);
 		expect(dataProject.files).toEqual([{ name: "main.py", content: "" }]);
-		expect(turtleProject.files).toEqual([
-			{ name: "main.py", content: "" }
-		]);
-		expect(pgzeroProject.files).toEqual([
-			{ name: "main.py", content: "" }
-		]);
+		expect(turtleProject.files).toEqual([{ name: "main.py", content: "" }]);
+		expect(pgzeroProject.files).toEqual([{ name: "main.py", content: "" }]);
 	});
 
 	it("creates demo project templates only when requested", () => {
@@ -243,7 +215,7 @@ describe("python IDE project helpers", () => {
 
 				return new Response(
 					url.endsWith("main.py")
-						? "print(\"starter\")\n"
+						? 'print("starter")\n'
 						: "name,score\nAri,10\n"
 				);
 			})
@@ -256,7 +228,7 @@ describe("python IDE project helpers", () => {
 		expect(files).toEqual([
 			{
 				name: "main.py",
-				content: "print(\"starter\")\n",
+				content: 'print("starter")\n',
 				encoding: "text"
 			},
 			{
@@ -338,7 +310,7 @@ describe("python IDE project helpers", () => {
 
 		expect(moduleSource).toContain("window.indexedDB.open");
 		expect(moduleSource).toContain(
-			"const PYTHON_IDE_PROJECT_STORE = \"projectStores\";"
+			'const PYTHON_IDE_PROJECT_STORE = "projectStores";'
 		);
 		expect(moduleSource).toContain(
 			"export async function saveLocalPythonProjectsAsync"
@@ -355,9 +327,7 @@ describe("python IDE project helpers", () => {
 	it("maps Python-family courses to the right IDE starter modes", () => {
 		expect(pythonIdeModeForCourseId("python-level-1")).toBe("turtle");
 		expect(pythonIdeModeForCourseId("pygames")).toBe("pgzero");
-		expect(pythonIdeModeForCourseId("data-science-in-python")).toBe(
-			"data"
-		);
+		expect(pythonIdeModeForCourseId("data-science-in-python")).toBe("data");
 		expect(pythonIdeModeForCourseId("machine-learning")).toBe("data");
 		expect(pythonIdeModeForCourseId("python-level-3")).toBe("python");
 		expect(pythonIdeModeForCourseId("scratch-level-1")).toBeNull();
@@ -488,10 +458,10 @@ describe("python IDE project helpers", () => {
 		const markerSource = pageSource.slice(markerStart, markerEnd);
 
 		expect(pageSource).toContain(
-			"const defaultTurtleShape: TurtleShapeName = \"classic\""
+			'const defaultTurtleShape: TurtleShapeName = "classic"'
 		);
 		expect(pageSource).toContain("shape: defaultTurtleShape");
-		expect(pageSource).toContain("penColor: \"#000000\"");
+		expect(pageSource).toContain('penColor: "#000000"');
 		expect(pageSource).toContain("const turtleOriginalShapePolygons = {");
 		expect(pageSource).toContain("classic: [");
 		expect(pageSource).toContain("[0, 0]");
@@ -501,24 +471,28 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("function drawOriginalTurtleShape");
 		expect(pageSource).toContain("function drawFancyTurtleShape");
 		expect(pageSource).toContain("function drawOriginalTurtlePolygonShape");
-		expect(pageSource).toContain("context.moveTo(firstPoint[1], firstPoint[0])");
+		expect(pageSource).toContain(
+			"context.moveTo(firstPoint[1], firstPoint[0])"
+		);
 		expect(pageSource).toContain(
 			"for (const [x, y] of remainingPoints) context.lineTo(y, x);"
 		);
 		expect(markerSource).toContain("context.rotate(-radians)");
-		expect(markerSource).toContain("case \"classic\"");
-		expect(markerSource).toContain("case \"turtle\"");
-		expect(markerSource).toContain("case \"blank\"");
-		expect(markerSource).toContain("case \"fancy\"");
+		expect(markerSource).toContain('case "classic"');
+		expect(markerSource).toContain('case "turtle"');
+		expect(markerSource).toContain('case "blank"');
+		expect(markerSource).toContain('case "fancy"');
 		expect(runtimeSource).toContain(
-			"_builtin_shapes = {\"arrow\", \"blank\", \"circle\", \"classic\", \"fancy\", \"square\", \"triangle\", \"turtle\"}"
+			'_builtin_shapes = {"arrow", "blank", "circle", "classic", "fancy", "square", "triangle", "turtle"}'
 		);
-		expect(runtimeSource).toContain("self._shape = \"classic\"");
+		expect(runtimeSource).toContain('self._shape = "classic"');
 		expect(runtimeSource).toContain("def shape(self, *_args):");
 		expect(runtimeSource).toContain("def hideturtle(self):");
 		expect(runtimeSource).toContain("def showturtle(self):");
 		expect(runtimeSource).toContain("def isvisible(self):");
-		expect(runtimeSource).toContain("def hideturtle(): return _default.hideturtle()");
+		expect(runtimeSource).toContain(
+			"def hideturtle(): return _default.hideturtle()"
+		);
 	});
 
 	it("guards long-running student loops before executing Python files", () => {
@@ -535,9 +509,7 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain(
 			"const PYTHON_IDE_RUNTIME_BOOTSTRAP_VERSION"
 		);
-		expect(runtimeSource).toContain(
-			"__classes_runtime_bootstrap_version"
-		);
+		expect(runtimeSource).toContain("__classes_runtime_bootstrap_version");
 		expect(runtimeSource).toContain("const WHILE_LOOP_ITERATION_LIMIT");
 		expect(runtimeSource).toContain(
 			"const TURTLE_COOPERATIVE_WHILE_LOOP_ITERATION_LIMIT"
@@ -552,13 +524,11 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("def __classes_loop_guard(kind):");
 		expect(runtimeSource).toContain("if limit <= 0:");
 		expect(runtimeSource).toContain("__classes_loop_iteration_limits");
-		expect(runtimeSource).toContain("__classes_turtle_animation_call_names");
 		expect(runtimeSource).toContain(
-			"def __classes_schedule_turtle_loop"
+			"__classes_turtle_animation_call_names"
 		);
-		expect(runtimeSource).toContain(
-			"def _is_simple_top_level_turtle_loop"
-		);
+		expect(runtimeSource).toContain("def __classes_schedule_turtle_loop");
+		expect(runtimeSource).toContain("def _is_simple_top_level_turtle_loop");
 		expect(runtimeSource).toContain("def _module_imports_turtle");
 		expect(runtimeSource).toContain("def _node_uses_turtle_api");
 		expect(runtimeSource).toContain("def _module_turtle_helper_names");
@@ -566,17 +536,15 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("node.test.value in (True, 1)");
 		expect(runtimeSource).toContain("function.id in turtle_helper_names");
 		expect(runtimeSource).toContain("def __classes_sleep(_seconds=0):");
-		expect(runtimeSource).toContain("__classes_time.sleep = __classes_sleep");
-		expect(runtimeSource).toContain("__classes_compile_student_source(");
 		expect(runtimeSource).toContain(
-			"class __ClassesProjectSourceLoader"
+			"__classes_time.sleep = __classes_sleep"
 		);
+		expect(runtimeSource).toContain("__classes_compile_student_source(");
+		expect(runtimeSource).toContain("class __ClassesProjectSourceLoader");
 		expect(runtimeSource).toContain(
 			"return _classes_compile_student_source(source, path)"
 		);
-		expect(runtimeSource).toContain(
-			"class __ClassesProjectImportFinder"
-		);
+		expect(runtimeSource).toContain("class __ClassesProjectImportFinder");
 		expect(runtimeSource).toContain(
 			"__classes_install_project_import_hook()"
 		);
@@ -622,9 +590,7 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("const maxOutputTextLength = 12000;");
 		expect(pageSource).toContain("outputEntryTruncatedMessage");
 		expect(pageSource).toContain("outputHistoryTrimmedMessage");
-		expect(pageSource).toContain(
-			"text.length > maxOutputTextLength"
-		);
+		expect(pageSource).toContain("text.length > maxOutputTextLength");
 		expect(pageSource).toContain(
 			"line.text !== outputHistoryTrimmedMessage"
 		);
@@ -644,9 +610,7 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain(
 			"const maxImportedBinaryFileBytes = 2 * 1024 * 1024;"
 		);
-		expect(pageSource).toContain(
-			"function importedProjectFileSizeLimit"
-		);
+		expect(pageSource).toContain("function importedProjectFileSizeLimit");
 		expect(pageSource).toContain("file.size > sizeLimit");
 		expect(pageSource).toContain(
 			"project.files.length >= maxPythonIdeProjectFiles"
@@ -684,15 +648,19 @@ describe("python IDE project helpers", () => {
 		);
 		expect(captureIndex).toBeGreaterThan(0);
 		expect(
-			runtimeSource.lastIndexOf("throwIfRunStopped(options);", captureIndex)
+			runtimeSource.lastIndexOf(
+				"throwIfRunStopped(options);",
+				captureIndex
+			)
 		).toBeGreaterThan(0);
 		expect(gameLoopIndex).toBeGreaterThan(0);
 		expect(
-			runtimeSource.lastIndexOf("throwIfRunStopped(options);", gameLoopIndex)
+			runtimeSource.lastIndexOf(
+				"throwIfRunStopped(options);",
+				gameLoopIndex
+			)
 		).toBeGreaterThan(captureIndex);
-		expect(pageSource).toContain(
-			"shouldStop: () => stopRequested.value"
-		);
+		expect(pageSource).toContain("shouldStop: () => stopRequested.value");
 		expect(pageSource).toContain("Stopped Python run.");
 		expect(pageSource).toContain(
 			"Python will halt at the next runtime checkpoint."
@@ -744,33 +712,31 @@ describe("python IDE project helpers", () => {
 			"installedMicropipPackages.add(packageName)"
 		);
 		expect(runtimeSource).toContain(
-			"loadedBrowserShimPackages.has(\"numpy\")"
+			'loadedBrowserShimPackages.has("numpy")'
 		);
 		expect(runtimeSource).toContain(
-			"loadedBrowserShimPackages.add(\"numpy\")"
+			'loadedBrowserShimPackages.add("numpy")'
 		);
 	});
 
 	it("extracts multiple top-level import modules for runtime package setup", () => {
-		expect(
-			[
-				...pythonIdeImportedTopLevelModules([
-					{
-						name: "main.py",
-						content: [
-							"import os, numpy as np, pandas.io",
-							"from sklearn.model_selection import train_test_split",
-							"from .local import helper",
-							"import invalid-name, altair # keep the valid item after a comma"
-						].join("\n")
-					},
-					{
-						name: "notes.txt",
-						content: "import should_not_count"
-					}
-				])
-			]
-		).toEqual(["os", "numpy", "pandas", "sklearn", "altair"]);
+		expect([
+			...pythonIdeImportedTopLevelModules([
+				{
+					name: "main.py",
+					content: [
+						"import os, numpy as np, pandas.io",
+						"from sklearn.model_selection import train_test_split",
+						"from .local import helper",
+						"import invalid-name, altair # keep the valid item after a comma"
+					].join("\n")
+				},
+				{
+					name: "notes.txt",
+					content: "import should_not_count"
+				}
+			])
+		]).toEqual(["os", "numpy", "pandas", "sklearn", "altair"]);
 	});
 
 	it("normalizes local Python project module names for fresh imports", () => {
@@ -794,7 +760,9 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("lastProjectFileNames");
 		expect(runtimeSource).toContain("function syncProjectFiles");
 		expect(runtimeSource).toContain("safeUnlink(pyodide");
-		expect(runtimeSource).toContain("sys.modules.pop(__classes_module_name, None)");
+		expect(runtimeSource).toContain(
+			"sys.modules.pop(__classes_module_name, None)"
+		);
 	});
 
 	it("guards imported local project modules through the IDE compiler", () => {
@@ -902,16 +870,16 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("const PYTHON_IDE_RUNTIME_MODULES");
 		expect(runtimeSource).toContain("function clearRuntimeShimModules");
 		expect(runtimeSource).toContain("clearRuntimeShimModules(pyodide)");
-		expect(runtimeSource).toContain("\"_classes_pgzero\"");
-		expect(runtimeSource).toContain("\"turtle\"");
+		expect(runtimeSource).toContain('"_classes_pgzero"');
+		expect(runtimeSource).toContain('"turtle"');
 		expect(runtimeSource).toContain(
 			"sys.modules.pop(__classes_runtime_name, None)"
 		);
-		expect(runtimeSource).toContain("\"Actor\"");
-		expect(runtimeSource).toContain("\"show_chart\"");
-		expect(runtimeSource).toContain("\"__classes_loop_guard\"");
+		expect(runtimeSource).toContain('"Actor"');
+		expect(runtimeSource).toContain('"show_chart"');
+		expect(runtimeSource).toContain('"__classes_loop_guard"');
 		expect(runtimeSource).toContain(
-			"__classes_builtin_name.startswith(\"__classes_\")"
+			'__classes_builtin_name.startswith("__classes_")'
 		);
 		expect(runtimeSource).toContain(
 			"delattr(builtins, __classes_builtin_name)"
@@ -930,7 +898,9 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("if namespace is None:");
 		expect(runtimeSource).toContain("namespace = globals()");
 		expect(runtimeSource).toContain("exec(body_code, namespace)");
-		expect(runtimeSource).toContain("func=ast.Name(id=\"globals\", ctx=ast.Load())");
+		expect(runtimeSource).toContain(
+			'func=ast.Name(id="globals", ctx=ast.Load())'
+		);
 		expect(runtimeSource).toContain("ast.Call(");
 	});
 
@@ -944,7 +914,9 @@ describe("python IDE project helpers", () => {
 			"utf8"
 		);
 
-		expect(runtimeSource).toContain("async function captureProjectTextFiles");
+		expect(runtimeSource).toContain(
+			"async function captureProjectTextFiles"
+		);
 		expect(runtimeSource).toContain("__classes_reserved_files");
 		expect(runtimeSource).toContain("isValidPythonFileName(file.name)");
 		expect(runtimeSource).toContain("options.onProjectFilesUpdate?.");
@@ -996,19 +968,15 @@ describe("python IDE project helpers", () => {
 			"if (!canvasOwnsKeyboardEvent(event)) return;"
 		);
 		expect(
-			pageSource.indexOf(
-				"if (!canvasOwnsKeyboardEvent(event)) return;"
-			)
+			pageSource.indexOf("if (!canvasOwnsKeyboardEvent(event)) return;")
 		).toBeLessThan(
-			pageSource.indexOf(
-				"[\"down\", \"left\", \"right\", \"space\", \"up\"]"
-			)
+			pageSource.indexOf('["down", "left", "right", "space", "up"]')
 		);
 		expect(pageSource).toContain("function pythonGameKeyFromEvent");
 		expect(pageSource).toContain("function gameKeyModifierMask");
 		expect(pageSource).toContain("mod: gameKeyModifierMask(event)");
 		expect(pageSource).toContain("unicode: gameKeyUnicode(event)");
-		expect(pageSource).toContain("@blur=\"clearCanvasKeyboardState\"");
+		expect(pageSource).toContain('@blur="clearCanvasKeyboardState"');
 		expect(pageSource).toContain("canvasRef.value?.focus();");
 		expect(pageSource).toContain("--python-focus-ring");
 		expect(pageSource).toContain(".code-editor-shell:focus-within");
@@ -1026,18 +994,18 @@ describe("python IDE project helpers", () => {
 			"utf8"
 		);
 
-		expect(pageSource).toContain("@wheel=\"dispatchCanvasWheelEvent\"");
+		expect(pageSource).toContain('@wheel="dispatchCanvasWheelEvent"');
 		expect(pageSource).toContain("function dispatchCanvasWheelEvent");
 		expect(pageSource).toContain(
-			"if (selectedProject.value?.mode !== \"pgzero\") return;"
+			'if (selectedProject.value?.mode !== "pgzero") return;'
 		);
 		expect(pageSource).toContain(
-			"button: event.deltaY < 0 ? \"wheel_up\" : \"wheel_down\""
+			'button: event.deltaY < 0 ? "wheel_up" : "wheel_down"'
 		);
-		expect(pageSource).toContain("type: \"mousedown\"");
+		expect(pageSource).toContain('type: "mousedown"');
 		expect(pageSource).toContain("event.preventDefault();");
-		expect(runtimeSource).toContain("WHEEL_UP = \"wheel_up\"");
-		expect(runtimeSource).toContain("WHEEL_DOWN = \"wheel_down\"");
+		expect(runtimeSource).toContain('WHEEL_UP = "wheel_up"');
+		expect(runtimeSource).toContain('WHEEL_DOWN = "wheel_down"');
 		expect(runtimeSource).toContain(
 			`_call_optional_named(
                 "on_mouse_down"`
@@ -1055,10 +1023,12 @@ describe("python IDE project helpers", () => {
 		);
 		expect(pageSource).toContain("function trackGameSoundAudio");
 		expect(pageSource).toContain("existing.add(audio);");
-		expect(pageSource).toContain("audio.addEventListener(\"ended\", cleanup");
-		expect(pageSource).toContain("audio.addEventListener(\"error\", cleanup");
+		expect(pageSource).toContain('audio.addEventListener("ended", cleanup');
+		expect(pageSource).toContain('audio.addEventListener("error", cleanup');
 		expect(pageSource).toContain("for (const audio of activeSounds)");
-		expect(pageSource).toContain("for (const soundName of [...gameSoundAudio.keys()])");
+		expect(pageSource).toContain(
+			"for (const soundName of [...gameSoundAudio.keys()])"
+		);
 	});
 
 	it("normalizes project file names without accepting unsafe names", () => {
@@ -1075,9 +1045,7 @@ describe("python IDE project helpers", () => {
 		expect(isValidPythonFileName("helper_tools.py")).toBe(true);
 		expect(isValidPythonFileName("package/__init__.py")).toBe(true);
 		expect(isValidPythonFileName("package/util.py")).toBe(true);
-		expect(isValidPythonFileName("package/submodule/tools.py")).toBe(
-			true
-		);
+		expect(isValidPythonFileName("package/submodule/tools.py")).toBe(true);
 		expect(isValidPythonFileName("scores.csv")).toBe(true);
 		expect(isValidPythonFileName("notes.md")).toBe(true);
 		expect(isValidPythonFileName("images/player.svg")).toBe(true);
@@ -1259,11 +1227,11 @@ describe("python IDE project helpers", () => {
 			"utf8"
 		);
 
-		expect(assetSource).not.toContain("from \"fflate\"");
+		expect(assetSource).not.toContain('from "fflate"');
 		expect(assetSource).toMatch(
 			/import\(\s*"@\/modules\/pythonIdeCourseAssetZip"\s*\)/
 		);
-		expect(zipSource).toContain("from \"fflate\"");
+		expect(zipSource).toContain('from "fflate"');
 		expect(zipSource).toContain("parsePythonIdeCourseAssetZipBytes");
 	});
 
@@ -1349,9 +1317,15 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("builtins.tone = tone");
 		expect(runtimeSource).toContain("def blit(self, image, pos");
 		expect(runtimeSource).toContain("def bounds(self):");
-		expect(runtimeSource).toContain("def rect(self, rect, color, width=1):");
-		expect(runtimeSource).toContain("rect_width, rect_height = _rect_parts(rect)");
-		expect(runtimeSource).toContain("def line(self, start, end, color, width=1):");
+		expect(runtimeSource).toContain(
+			"def rect(self, rect, color, width=1):"
+		);
+		expect(runtimeSource).toContain(
+			"rect_width, rect_height = _rect_parts(rect)"
+		);
+		expect(runtimeSource).toContain(
+			"def line(self, start, end, color, width=1):"
+		);
 		expect(runtimeSource).toContain(
 			"def circle(self, pos, radius, color, width=1):"
 		);
@@ -1369,7 +1343,7 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("def distance_to(self, target):");
 		expect(runtimeSource).toContain("def angle_to(self, target):");
 		expect(runtimeSource).toContain(
-			"self.anchor = kwargs.pop(\"anchor\", self._anchor)"
+			'self.anchor = kwargs.pop("anchor", self._anchor)'
 		);
 		expect(runtimeSource).toContain(
 			"def _anchor_component(self, value, axis):"
@@ -1383,7 +1357,7 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("def midbottom(self):");
 		expect(runtimeSource).toContain("def move_ip(self, x, y=None):");
 		expect(runtimeSource).toContain("def _rect_parts_from_args(args):");
-		expect(runtimeSource).toContain("if hasattr(value, \"rect\"):");
+		expect(runtimeSource).toContain('if hasattr(value, "rect"):');
 		expect(runtimeSource).toContain("if callable(rect_value):");
 		expect(runtimeSource).toContain("rect_value = rect_value()");
 		expect(runtimeSource).toContain("return _rect_parts(rect_value)");
@@ -1440,16 +1414,32 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("for index, rect in enumerate(rects):");
 		expect(runtimeSource).toContain("return -1");
 		expect(runtimeSource).toContain("def collidelistall(self, rects):");
-		expect(runtimeSource).toContain("def collidedict(self, rect_dict, use_values=0):");
+		expect(runtimeSource).toContain(
+			"def collidedict(self, rect_dict, use_values=0):"
+		);
 		expect(runtimeSource).toContain("rect = value if use_values else key");
 		expect(runtimeSource).toContain("return (key, value)");
-		expect(runtimeSource).toContain("def collidedictall(self, rect_dict, use_values=0):");
-		expect(runtimeSource).toContain("def collideobjects(self, objects, key=None):");
-		expect(runtimeSource).toContain("rect = key(obj) if key is not None else obj");
-		expect(runtimeSource).toContain("def collideobjectsall(self, objects, key=None):");
-		expect(runtimeSource).toContain("return self._rect().collidepoint(*args)");
-		expect(runtimeSource).toContain("return self._rect().collidelist(rects)");
-		expect(runtimeSource).toContain("return self._rect().collidedict(rect_dict, use_values)");
+		expect(runtimeSource).toContain(
+			"def collidedictall(self, rect_dict, use_values=0):"
+		);
+		expect(runtimeSource).toContain(
+			"def collideobjects(self, objects, key=None):"
+		);
+		expect(runtimeSource).toContain(
+			"rect = key(obj) if key is not None else obj"
+		);
+		expect(runtimeSource).toContain(
+			"def collideobjectsall(self, objects, key=None):"
+		);
+		expect(runtimeSource).toContain(
+			"return self._rect().collidepoint(*args)"
+		);
+		expect(runtimeSource).toContain(
+			"return self._rect().collidelist(rects)"
+		);
+		expect(runtimeSource).toContain(
+			"return self._rect().collidedict(rect_dict, use_values)"
+		);
 		expect(runtimeSource).toContain(
 			"return self._rect().collideobjects(objects, key)"
 		);
@@ -1465,10 +1455,10 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("def set_volume(self, volume):");
 		expect(runtimeSource).toContain("def get_width(self):");
 		expect(runtimeSource).toContain("def get_rect(self):");
-		expect(runtimeSource).toContain("BACKSPACE = \"backspace\"");
-		expect(runtimeSource).toContain("K_1 = \"1\"");
-		expect(runtimeSource).toContain("LSHIFT = \"lshift\"");
-		expect(runtimeSource).toContain("KP_ENTER = \"kp_enter\"");
+		expect(runtimeSource).toContain('BACKSPACE = "backspace"');
+		expect(runtimeSource).toContain('K_1 = "1"');
+		expect(runtimeSource).toContain('LSHIFT = "lshift"');
+		expect(runtimeSource).toContain('KP_ENTER = "kp_enter"');
 		expect(runtimeSource).toContain("def _call_named_callback");
 		expect(runtimeSource).toContain("def animate(obj");
 		expect(runtimeSource).toContain("class Animation:");
@@ -1478,19 +1468,22 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("def create(self, pitch, duration):");
 		expect(runtimeSource).toContain("def play(self, pitch, duration):");
 		expect(runtimeSource).toContain("def _handle_music_end(self):");
-		expect(runtimeSource).toContain("elif event_type == \"musicended\":");
+		expect(runtimeSource).toContain('elif event_type == "musicended":');
 		expect(runtimeSource).toContain(
 			`_call_optional_named(
                 "on_mouse_down"`
 		);
-		expect(runtimeSource).toContain("_call_optional(\"update\", dt)");
+		expect(runtimeSource).toContain('_call_optional("update", dt)');
 		expect(runtimeSource).toContain("_run_animations(now)");
 		expect(pageSource).toContain("await ensureGameCourseAssetsLoaded()");
 		expect(pageSource).not.toContain(
 			"void ensureGameCourseAssetsLoaded({ announce: false })"
 		);
 		expect(pageSource).toContain(
-			"assetCompletions: pythonCodeMirrorAssetCompletions"
+			"async function loadPythonCodeMirrorAssetCompletions"
+		);
+		expect(pageSource).toContain(
+			"assetCompletions: loadPythonCodeMirrorAssetCompletions"
 		);
 		expect(pageSource).toContain("pythonAssetCompletionName");
 		expect(pageSource).toContain("drawImage: drawGameImage");
@@ -1507,7 +1500,7 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("setMusicVolume: setGameMusicVolume");
 		expect(pageSource).toContain("playTone: playGameTone");
 		expect(pageSource).toContain("stopTone: stopGameTone");
-		expect(pageSource).toContain("type: \"musicended\"");
+		expect(pageSource).toContain('type: "musicended"');
 		expect(pageSource).toContain("imageSizeJson: gameImageSizeJson");
 		expect(pageSource).toContain("findPythonIdeCourseAsset");
 		expect(pageSource).toContain("gameImageCache.clear()");

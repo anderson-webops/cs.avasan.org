@@ -1113,7 +1113,7 @@ async function resetCodeEditor() {
 	codeEditorView = new EditorView({
 		doc: activeFileContent.value,
 		extensions: createPythonCodeMirrorExtensions({
-			assetCompletions: pythonCodeMirrorAssetCompletions,
+			assetCompletions: loadPythonCodeMirrorAssetCompletions,
 			mode: selectedProject.value?.mode ?? "python",
 			onChange(content) {
 				syncingCodeMirrorContent = true;
@@ -2049,6 +2049,12 @@ async function ensureGameCourseAssetsLoaded(
 				: "Could not load shared PyGame Zero assets."
 		);
 	}
+}
+
+async function loadPythonCodeMirrorAssetCompletions() {
+	if (selectedProject.value?.mode === "pgzero")
+		await ensureGameCourseAssetsLoaded({ announce: false });
+	return pythonCodeMirrorAssetCompletions();
 }
 
 function pythonAssetCompletionName(path: string, folder: PythonIdeAssetFolder) {
