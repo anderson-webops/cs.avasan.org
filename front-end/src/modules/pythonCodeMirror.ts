@@ -1,3 +1,4 @@
+import type { Diagnostic } from "@codemirror/lint";
 import type { Extension } from "@codemirror/state";
 import type { DecorationSet, ViewUpdate } from "@codemirror/view";
 import type { PythonIdeMode } from "@/modules/pythonIde";
@@ -25,7 +26,7 @@ import {
 	syntaxHighlighting,
 	syntaxTree
 } from "@codemirror/language";
-import { lintKeymap } from "@codemirror/lint";
+import { linter, lintKeymap } from "@codemirror/lint";
 import { highlightSelectionMatches, searchKeymap } from "@codemirror/search";
 import {
 	EditorSelection,
@@ -529,6 +530,8 @@ const pythonEditorNativeSelectionStyle = {
 	backgroundColor: "var(--python-code-selection) !important",
 	color: "var(--python-code-selection-ink) !important"
 };
+const pythonSyntaxErrorMessage =
+	"Python syntax error. Check this line before running the project.";
 
 const pythonEditorTheme = EditorView.theme({
 	"&": {
@@ -654,6 +657,26 @@ const pythonEditorTheme = EditorView.theme({
 		color: "var(--color-ink)"
 	}
 });
+
+export function pythonSyntaxDiagnostics(state: EditorState): Diagnostic[] {
+	const diagnostics: Diagnostic[] = [];
+	const cursor = syntaxTree(state).cursor();
+
+	do {
+		if (!cursor.type.isError) continue;
+		diagnostics.push({
+			from: cursor.from,
+			to: Math.max(
+				cursor.to,
+				Math.min(cursor.from + 1, state.doc.length)
+			),
+			severity: "error",
+			message: pythonSyntaxErrorMessage
+		});
+	} while (cursor.next());
+
+	return diagnostics;
+}
 
 const wrapSelectionKeymap = keymap.of(
 	[
@@ -1114,6 +1137,7 @@ const pythonEditorBaseSetup: Extension[] = [
 	bracketMatching(),
 	closeBrackets(),
 	autocompletion(),
+	linter(view => pythonSyntaxDiagnostics(view.state)),
 	rectangularSelection(),
 	crosshairCursor(),
 	highlightActiveLine(),

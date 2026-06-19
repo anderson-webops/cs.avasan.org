@@ -1,12 +1,14 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { EditorSelection, EditorState } from "@codemirror/state";
+import { python } from "@codemirror/lang-python";
 import { describe, expect, it, vi } from "vitest";
 import {
 	canSkipExistingClosingToken,
 	pythonIdeCompletionSource,
 	pythonIdeCompletionsForMode,
-	pythonNewlineIndentText
+	pythonNewlineIndentText,
+	pythonSyntaxDiagnostics
 } from "../src/modules/pythonCodeMirror";
 
 function sourceFile(path: string) {
@@ -139,6 +141,8 @@ describe("python IDE CodeMirror editor", () => {
 		expect(editorSource).toContain("cm-bracket-pair-1");
 		expect(editorSource).toContain("pythonLanguage.data.of");
 		expect(editorSource).toContain("pythonIdeCompletionSource");
+		expect(editorSource).toContain("pythonSyntaxDiagnostics");
+		expect(editorSource).toContain("linter(view =>");
 		expect(pageSource).toContain(
 			'mode: selectedProject.value?.mode ?? "python"'
 		);
@@ -660,5 +664,29 @@ describe("python IDE CodeMirror editor", () => {
 				"if ready:\n    for item in items:\n        print(item)".length
 			)
 		).toBe("\n        ");
+	});
+
+	it("surfaces parser-backed Python syntax diagnostics before run", () => {
+		const validState = EditorState.create({
+			doc: ["def move():", "    return 1"].join("\n"),
+			extensions: [python()]
+		});
+		const invalidState = EditorState.create({
+			doc: ["def move()", "    return 1"].join("\n"),
+			extensions: [python()]
+		});
+
+		expect(pythonSyntaxDiagnostics(validState)).toEqual([]);
+		const diagnostics = pythonSyntaxDiagnostics(invalidState);
+
+		expect(diagnostics.length).toBeGreaterThan(0);
+		expect(diagnostics[0]).toMatchObject({
+			severity: "error",
+			message:
+				"Python syntax error. Check this line before running the project."
+		});
+		expect(diagnostics[0]?.to).toBeGreaterThanOrEqual(
+			diagnostics[0]?.from ?? 0
+		);
 	});
 });
