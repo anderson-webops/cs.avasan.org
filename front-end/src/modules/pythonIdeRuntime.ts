@@ -164,6 +164,8 @@ export interface TurtleBridge {
 	activate: (id: string) => void;
 	reset: () => void;
 	clear: () => void;
+	resetTurtle: () => void;
+	clearTurtle: () => void;
 	bgcolor: (color: string) => void;
 	beginFill: () => void;
 	endFill: () => void;
@@ -1279,7 +1281,8 @@ class Turtle:
         return None
 
     def clear(self):
-        _bridge.clear()
+        _bridge.activate(str(self._bridge_id))
+        _bridge.clearTurtle()
 
     def reset(self):
         _bridge.activate(str(self._bridge_id))
@@ -1292,7 +1295,7 @@ class Turtle:
         self._line_width = 3.0
         self._shape = "classic"
         self._visible = True
-        _bridge.reset()
+        _bridge.resetTurtle()
 
     def distance(self, x, y=None):
         if hasattr(x, "xcor") and hasattr(x, "ycor") and y is None:

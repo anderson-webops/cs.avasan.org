@@ -809,9 +809,12 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("self._bridge_id = str(_turtle_counter)");
 		expect(runtimeSource).toContain('_bridge.activate(str(self._bridge_id))');
 		expect(runtimeSource).toContain("activate: (id: string) => void");
+		expect(runtimeSource).toContain("clearTurtle: () => void");
+		expect(runtimeSource).toContain("resetTurtle: () => void");
 		expect(pageSource).toContain('const defaultTurtleID = "default"');
 		expect(pageSource).toContain("let activeTurtleID = defaultTurtleID");
 		expect(pageSource).toContain("let turtleVisiblePoses = new Map");
+		expect(pageSource).toContain("interface TurtleCompletedCommand");
 		expect(pageSource).toContain("function activateTurtleState");
 		expect(pageSource).toContain("turtleStates.delete(defaultTurtleID)");
 		expect(pageSource).toContain("turtleID: step.turtleID ?? activeTurtleID");
@@ -822,6 +825,51 @@ describe("python IDE project helpers", () => {
 			"for (const [turtleID, pose] of turtleVisiblePoses)"
 		);
 		expect(pageSource).toContain("activate(id: string)");
+	});
+
+	it("keeps Turtle clear and reset scoped to the active Turtle", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+		const turtleClearStart = runtimeSource.indexOf(
+			"    def clear(self):",
+			runtimeSource.indexOf("class Turtle")
+		);
+		const turtleClearSource = runtimeSource.slice(
+			turtleClearStart,
+			runtimeSource.indexOf("    def reset(self):", turtleClearStart)
+		);
+		const turtleResetStart = runtimeSource.indexOf(
+			"    def reset(self):",
+			turtleClearStart
+		);
+		const turtleResetSource = runtimeSource.slice(
+			turtleResetStart,
+			runtimeSource.indexOf("    def distance(self", turtleResetStart)
+		);
+
+		expect(turtleClearSource).toContain("_bridge.clearTurtle()");
+		expect(turtleClearSource).not.toContain("_bridge.clear()");
+		expect(turtleResetSource).toContain("_bridge.resetTurtle()");
+		expect(turtleResetSource).not.toContain("_bridge.reset()");
+		expect(pageSource).toContain("function cancelActiveTurtleDrawingSteps");
+		expect(pageSource).toContain("command => command.turtleID !== turtleID");
+		expect(pageSource).toContain("step => step.turtleID !== turtleID");
+		expect(pageSource).toContain("function clearActiveTurtleDrawing");
+		expect(pageSource).toContain("function resetActiveTurtle");
+		expect(pageSource).toContain("resetTurtle: resetActiveTurtle");
+		expect(pageSource).toContain("clearTurtle: clearActiveTurtleDrawing");
+		expect(pageSource).toContain("reset: resetTurtleCanvas");
+		expect(pageSource).toContain("clear: resetTurtleCanvas");
+		expect(pageSource).toContain(
+			"for (const state of turtleStates.values()) state.background = color"
+		);
+		expect(pageSource).toContain("renderTurtleScene();");
 	});
 
 	it("keeps visible Turtle trail batches small enough to stay attached to the marker", () => {

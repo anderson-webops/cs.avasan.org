@@ -170,6 +170,11 @@ interface TurtleAnimationStep {
 	toPose: TurtlePose;
 }
 
+interface TurtleCompletedCommand {
+	command: TurtleRenderCommand;
+	turtleID: string;
+}
+
 interface CodeEditorViewState {
 	mainIndex: number;
 	ranges: Array<{ anchor: number; head: number }>;
@@ -501,7 +506,7 @@ let syncingCodeMirrorContent = false;
 let gameCourseAssetPack: PythonIdeCourseAssetPack | null = null;
 let gameCourseAssetPackLoadFailed = false;
 let turtleStampCounter = 0;
-let turtleCompletedCommands: TurtleRenderCommand[] = [];
+let turtleCompletedCommands: TurtleCompletedCommand[] = [];
 let turtleQueuedSteps: TurtleAnimationStep[] = [];
 let turtleVisiblePoses = new Map<string, TurtlePose>();
 let codeEditorModulesPromise: Promise<PythonCodeEditorModules> | null = null;
@@ -1994,7 +1999,7 @@ function renderTurtleScene(
 	const toCanvas = createCanvasCoordinateMapper(rect);
 	context.fillStyle = turtleState.background;
 	context.fillRect(0, 0, rect.width, rect.height);
-	for (const command of turtleCompletedCommands)
+	for (const { command } of turtleCompletedCommands)
 		renderTurtleCommand(context, command, toCanvas);
 	if (activeCommand) {
 		renderTurtleCommand(
@@ -2067,7 +2072,12 @@ function runTurtleAnimationFrame(timestamp: number) {
 	);
 
 	if (progress >= 1) {
-		if (step.command) turtleCompletedCommands.push(step.command);
+		if (step.command) {
+			turtleCompletedCommands.push({
+				command: step.command,
+				turtleID: step.turtleID
+			});
+		}
 		activeTurtleAnimationStep = null;
 	}
 
@@ -2097,7 +2107,12 @@ function turtleAnimationStepDistance(step: TurtleAnimationStep) {
 }
 
 function completeTurtleAnimationStep(step: TurtleAnimationStep) {
-	if (step.command) turtleCompletedCommands.push(step.command);
+	if (step.command) {
+		turtleCompletedCommands.push({
+			command: step.command,
+			turtleID: step.turtleID
+		});
+	}
 	setTurtleVisiblePose(step.toPose, step.turtleID);
 }
 
@@ -2230,6 +2245,39 @@ function resetTurtleCanvas() {
 		visibleTurtlePose(),
 		createCanvasCoordinateMapper(rect)
 	);
+}
+
+function cancelActiveTurtleDrawingSteps(turtleID = activeTurtleID) {
+	turtleCompletedCommands = turtleCompletedCommands.filter(
+		command => command.turtleID !== turtleID
+	);
+	turtleQueuedSteps = turtleQueuedSteps.filter(
+		step => step.turtleID !== turtleID
+	);
+	if (activeTurtleAnimationStep?.turtleID === turtleID) {
+		activeTurtleAnimationStep = null;
+		turtleAnimationStepStartedAt = 0;
+	}
+	if (turtleFillState.active) {
+		turtleFillState.active = false;
+		turtleFillState.points = [];
+	}
+}
+
+function clearActiveTurtleDrawing() {
+	cancelActiveTurtleDrawingSteps();
+	renderTurtleScene(visibleTurtlePose(), undefined, activeTurtleID);
+	if (turtleQueuedSteps.length > 0) void scheduleTurtleAnimation();
+}
+
+function resetActiveTurtle() {
+	cancelActiveTurtleDrawingSteps();
+	const background = turtleState.background;
+	turtleState = createDefaultTurtleState(background);
+	turtleStates.set(activeTurtleID, turtleState);
+	setTurtleVisiblePose(currentTurtlePose());
+	renderTurtleScene(currentTurtlePose(), undefined, activeTurtleID);
+	if (turtleQueuedSteps.length > 0) void scheduleTurtleAnimation();
 }
 
 function clearTurtleTimers() {
@@ -3106,9 +3154,11 @@ const turtleBridge: TurtleBridge = {
 	},
 	reset: resetTurtleCanvas,
 	clear: resetTurtleCanvas,
+	resetTurtle: resetActiveTurtle,
+	clearTurtle: clearActiveTurtleDrawing,
 	bgcolor(color: string) {
 		for (const state of turtleStates.values()) state.background = color;
-		resetTurtleCanvas();
+		renderTurtleScene();
 	},
 	beginFill: beginTurtleFill,
 	endFill: endTurtleFill,
@@ -3303,6 +3353,12 @@ function createGuardedTurtleBridgeRun(): TurtleBridge {
 		},
 		clear() {
 			if (isActiveRun()) turtleBridge.clear();
+		},
+		resetTurtle() {
+			if (isActiveRun()) turtleBridge.resetTurtle();
+		},
+		clearTurtle() {
+			if (isActiveRun()) turtleBridge.clearTurtle();
 		},
 		bgcolor(color: string) {
 			if (isActiveRun()) turtleBridge.bgcolor(color);
