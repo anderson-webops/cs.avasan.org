@@ -1130,9 +1130,6 @@ async function resetCodeEditor() {
 		}),
 		parent: host
 	});
-
-	if (selectedProject.value?.mode === "pgzero")
-		void ensureGameCourseAssetsLoaded({ announce: false });
 }
 
 function syncCodeEditorContent(content: string) {

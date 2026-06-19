@@ -1486,6 +1486,9 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("_call_optional(\"update\", dt)");
 		expect(runtimeSource).toContain("_run_animations(now)");
 		expect(pageSource).toContain("await ensureGameCourseAssetsLoaded()");
+		expect(pageSource).not.toContain(
+			"void ensureGameCourseAssetsLoaded({ announce: false })"
+		);
 		expect(pageSource).toContain(
 			"assetCompletions: pythonCodeMirrorAssetCompletions"
 		);
