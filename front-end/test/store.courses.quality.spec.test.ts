@@ -2581,6 +2581,34 @@ describe("course text quality normalization", () => {
 		}
 	});
 
+	it("keeps modern design-pattern projects distinct across core, transfer, and extension work", async () => {
+		const course = await loadRawCourse("design-patterns-in-java");
+		expect(course).not.toBeNull();
+
+		const module = course!.modules.find(
+			module =>
+				module.title ===
+				"DPJ8 Modern Extensions and Architecture-Level Patterns"
+		);
+		expect(module).toBeDefined();
+		if (!module) return;
+
+		const projectItems = [
+			...module.curriculum.filter(item =>
+				item.title.includes("Core Project")
+			),
+			...module.supplementalProjects.filter(item =>
+				/^(?:Transfer|Extension) Practice/.test(item.title)
+			)
+		];
+
+		expect(projectItems).toHaveLength(3);
+		expect(new Set(projectItems.map(item => item.content)).size).toBe(3);
+		expect(projectItems[0].content).toContain("implementation checkpoint");
+		expect(projectItems[1].content).toContain("Transfer Practice");
+		expect(projectItems[2].content).toContain("Extension Practice");
+	});
+
 	it("keeps Java foundation implementation builds tied to distinct source projects", async () => {
 		const [javaLevel1, javaWithoutGraphics, javaWithGraphics] =
 			await Promise.all([

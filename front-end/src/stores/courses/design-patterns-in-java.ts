@@ -645,7 +645,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 						courseFamily: "Design Patterns in Java",
 						moduleTitle:
 							"DPJ8 Modern Extensions and Architecture-Level Patterns",
-						projectKind: "extension",
+						projectKind: "core",
 						hasReference: true
 					}),
 					projectLink:
@@ -670,6 +670,8 @@ export const designPatternsInJavaCourse: RawCourse = {
 						courseFamily: "Design Patterns in Java",
 						moduleTitle:
 							"DPJ8 Modern Extensions and Architecture-Level Patterns",
+						itemTitle:
+							"Modern Extensions and Architecture Level Patterns Supplemental 2",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -684,6 +686,8 @@ export const designPatternsInJavaCourse: RawCourse = {
 						courseFamily: "Design Patterns in Java",
 						moduleTitle:
 							"DPJ8 Modern Extensions and Architecture-Level Patterns",
+						itemTitle:
+							"Modern Extensions and Architecture Level Patterns Supplemental 3",
 						projectKind: "extension",
 						hasReference: true
 					}),
