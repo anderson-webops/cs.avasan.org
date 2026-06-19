@@ -120,7 +120,7 @@ export const pythonLevel2Course: RawCourse = {
 				{
 					title: "PS2 Supplemental Project 2: Password Guesser",
 					content:
-						"Store a correct password in code and keep asking the user to guess until the answer is correct, then print how many guesses it took.",
+						"Use a sample target phrase and keep asking for guesses until it matches, then print how many guesses it took.",
 					solutionLink:
 						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Password-Guesser/solution",
 					mediaLink:
@@ -242,7 +242,7 @@ export const pythonLevel2Course: RawCourse = {
 				{
 					title: "PS3 Supplemental Project 4: Password Cracker",
 					content:
-						"Reverse a secret string and try all 26 Caesar-shift possibilities to identify the most plausible original password.",
+						"Reverse an encoded sample phrase and try all 26 Caesar-shift possibilities to identify the most plausible original text.",
 					solutionLink:
 						"https://github.com/instruction-material/Python-Level-2/tree/main/PS3-Password-Cracker/solution",
 					mediaLink:
@@ -833,7 +833,7 @@ export const pythonLevel2Course: RawCourse = {
 				{
 					title: "PS11 Project 1: Bank Account",
 					content:
-						"Create a login-based bank account simulator with usernames, passwords, balances, deposits, withdrawals, password changes, and optional interest collection.",
+						"Create a login-based bank account simulator with sample login names, access phrases, balances, deposits, withdrawals, credential updates, and optional interest collection.",
 					solutionLink:
 						"https://github.com/instruction-material/Python-Level-2/tree/main/PS11-Bank-Account/solution",
 					mediaLink:

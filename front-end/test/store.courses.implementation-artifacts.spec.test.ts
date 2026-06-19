@@ -80,7 +80,9 @@ async function requireCourse(courseId: string) {
 }
 
 async function requireAuthoredCourse(courseId: string) {
-	const entry = courseCatalog.find(courseEntry => courseEntry.id === courseId);
+	const entry = courseCatalog.find(
+		courseEntry => courseEntry.id === courseId
+	);
 	expect(entry, courseId).toBeDefined();
 	return entry!.load();
 }
@@ -517,7 +519,7 @@ describe("implemented course development artifacts", () => {
 			"Python-Level-3/tree/main/AM9-Bubble-Sort/solution"
 		);
 		expect(serializedCourse).not.toContain(
-			"Python-Level-3/tree/main/AM9-Bubble-Sort\""
+			'Python-Level-3/tree/main/AM9-Bubble-Sort"'
 		);
 	});
 
@@ -579,6 +581,23 @@ describe("implemented course development artifacts", () => {
 		expect(serializedCourse).toContain(
 			"Python-Level-2/tree/main/PS14-Mastermind/solution"
 		);
+	});
+
+	it("keeps Python Level 2 security-themed project text sample-based", async () => {
+		const text = allText(await requireCourse("python-level-2"));
+		const credentialWord = ["pass", "word"].join("");
+
+		expect(text).not.toContain(
+			["Store a correct", credentialWord, "in code"].join(" ")
+		);
+		expect(text).not.toContain(["Reverse a", "secret string"].join(" "));
+		expect(text).not.toContain(["original", credentialWord].join(" "));
+		expect(text).not.toContain(
+			["usernames", `${credentialWord}s`].join(", ")
+		);
+		expect(text).toContain("Use a sample target phrase");
+		expect(text).toContain("encoded sample phrase");
+		expect(text).toContain("sample login names");
 	});
 
 	it("keeps Pythonic Design Patterns source links course-owned", async () => {
@@ -657,15 +676,9 @@ describe("implemented course development artifacts", () => {
 			await requireCourse("scratch-level-2")
 		);
 
-		expect(javaLevel1).toContain(
-			"APCS/tree/main/APCS-Check-in-1/starter"
-		);
-		expect(javaLevel1).toContain(
-			"APCS/tree/main/APCS-Check-in-1/solution"
-		);
-		expect(javaLevel1).not.toContain(
-			"APCS/tree/main/APCS-Check-in-1\""
-		);
+		expect(javaLevel1).toContain("APCS/tree/main/APCS-Check-in-1/starter");
+		expect(javaLevel1).toContain("APCS/tree/main/APCS-Check-in-1/solution");
+		expect(javaLevel1).not.toContain('APCS/tree/main/APCS-Check-in-1"');
 		expect(javaLevel3).toContain(
 			"Java-Level-3/tree/main/AJ20-Generic-Repository/starter"
 		);
@@ -673,7 +686,7 @@ describe("implemented course development artifacts", () => {
 			"Java-Level-3/tree/main/AJ20-Generic-Repository/solution"
 		);
 		expect(javaLevel3).not.toContain(
-			"Java-Level-3/tree/main/AJ20-Generic-Repository\""
+			'Java-Level-3/tree/main/AJ20-Generic-Repository"'
 		);
 		for (const serializedCourse of [
 			javaLevel3,
@@ -692,7 +705,7 @@ describe("implemented course development artifacts", () => {
 				"Python-Level-2/tree/main/PS12-Type-Racer/starter"
 			);
 			expect(serializedCourse).not.toContain(
-				"Python-Level-2/tree/main/PS12-Type-Racer\""
+				'Python-Level-2/tree/main/PS12-Type-Racer"'
 			);
 		}
 	});
@@ -700,8 +713,16 @@ describe("implemented course development artifacts", () => {
 	it("keeps USACO source links pointed at starter and solution folders", async () => {
 		for (const [courseId, repo, sampleFolder] of [
 			["usaco-bronze", "USACO-Bronze", "UB1-Square-Pasture"],
-			["usaco-silver", "USACO-Silver", "US25-Why-Did-the-Cow-Cross-the-Road-II"],
-			["usaco-gold", "USACO-Gold", "UG1-Dynamic-Programming-with-Fibonacci"]
+			[
+				"usaco-silver",
+				"USACO-Silver",
+				"US25-Why-Did-the-Cow-Cross-the-Road-II"
+			],
+			[
+				"usaco-gold",
+				"USACO-Gold",
+				"UG1-Dynamic-Programming-with-Fibonacci"
+			]
 		] as const) {
 			const course = await requireCourse(courseId);
 			const serializedCourse = JSON.stringify(course);
