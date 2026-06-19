@@ -328,8 +328,8 @@ const turtleInstantStepMaxDurationMs = 16;
 const turtleInstantStepMaxDistance = 2;
 const turtleInstantFrameDistanceBudget = 12;
 const turtleInstantFrameStepBudget = 24;
-const turtleVisibleTrailFrameDistanceBudget = 2;
-const turtleVisibleTrailFrameStepBudget = 2;
+const turtleVisibleTrailFrameDistanceBudget = 1;
+const turtleVisibleTrailFrameStepBudget = 1;
 const outputEntryTruncatedMessage =
 	"\n[Output truncated to keep the browser responsive.]";
 const outputHistoryTrimmedMessage =
@@ -1590,7 +1590,6 @@ function drawTurtleMarker(
 	context.save();
 	context.translate(point.x, point.y);
 	context.rotate(-radians);
-	if (pose.shape !== "blank") drawTurtleMarkerTrailMask(context);
 	context.lineCap = "round";
 	context.lineJoin = "round";
 	context.lineWidth = 1.5;
@@ -1625,13 +1624,6 @@ function drawTurtleMarker(
 	}
 
 	context.restore();
-}
-
-function drawTurtleMarkerTrailMask(context: CanvasRenderingContext2D) {
-	context.fillStyle = turtleState.background;
-	context.beginPath();
-	context.arc(0, 0, 18, 0, Math.PI * 2);
-	context.fill();
 }
 
 function drawClassicTurtleShape(context: CanvasRenderingContext2D) {

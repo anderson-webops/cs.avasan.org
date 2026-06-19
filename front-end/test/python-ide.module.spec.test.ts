@@ -716,7 +716,7 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("renderTurtleScene();");
 	});
 
-	it("keeps the Turtle cursor visually above its trail", () => {
+	it("keeps the Turtle cursor drawn directly above its trail", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
@@ -729,15 +729,11 @@ describe("python IDE project helpers", () => {
 		const markerSource = pageSource.slice(markerStart, markerEnd);
 
 		expect(markerSource).toContain("if (!pose.visible) return;");
-		expect(markerSource).toContain(
-			'if (pose.shape !== "blank") drawTurtleMarkerTrailMask(context);'
+		expect(markerSource).not.toContain("drawTurtleMarkerTrailMask");
+		expect(pageSource).not.toContain("function drawTurtleMarkerTrailMask");
+		expect(markerSource.indexOf("context.translate(point.x, point.y)")).toBeLessThan(
+			markerSource.indexOf("context.strokeStyle = pose.penColor")
 		);
-		expect(markerSource).toContain("function drawTurtleMarkerTrailMask");
-		expect(markerSource).toContain("context.fillStyle = turtleState.background");
-		expect(markerSource).toContain("context.arc(0, 0, 18, 0, Math.PI * 2)");
-		expect(
-			markerSource.indexOf("drawTurtleMarkerTrailMask(context);")
-		).toBeLessThan(markerSource.indexOf("context.strokeStyle = pose.penColor"));
 	});
 
 	it("keeps tiny Turtle steps frame-batched with the visible cursor", () => {
@@ -765,10 +761,10 @@ describe("python IDE project helpers", () => {
 		);
 
 		expect(pageSource).toContain(
-			"const turtleVisibleTrailFrameDistanceBudget = 2"
+			"const turtleVisibleTrailFrameDistanceBudget = 1"
 		);
 		expect(pageSource).toContain(
-			"const turtleVisibleTrailFrameStepBudget = 2"
+			"const turtleVisibleTrailFrameStepBudget = 1"
 		);
 		expect(pageSource).toContain("function isVisibleTurtleTrailStep");
 		expect(pageSource).toContain('step.command?.kind === "line"');
