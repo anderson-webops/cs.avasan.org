@@ -127,6 +127,9 @@ const pythonCompletionBlockedNodeNames = new Set([
 	"FormatString",
 	"String"
 ]);
+const pythonBracketPairIgnoredNodeNames = new Set(
+	pythonCompletionBlockedNodeNames
+);
 const pgzeroAssetStringCompletionPatterns: Array<{
 	folder: PythonIdeAssetCompletionFolder;
 	pattern: RegExp;
@@ -713,6 +716,19 @@ export function pythonRuntimeDiagnosticForLine(
 		source: pythonRuntimeErrorSource,
 		message
 	};
+}
+
+export function isPythonBracketPairIgnoredAt(
+	state: EditorState,
+	position: number
+) {
+	let node = syntaxTree(state).resolveInner(position, 1);
+	while (true) {
+		if (pythonBracketPairIgnoredNodeNames.has(node.name)) return true;
+		const parent = node.parent;
+		if (!parent) return false;
+		node = parent;
+	}
 }
 
 const wrapSelectionKeymap = keymap.of(
@@ -1354,6 +1370,13 @@ function appendBracketPairDecorationsForRange(
 		const character = text[offset] ?? "";
 		const index = contextFrom + offset;
 		const expectedClose = openingBracketToClosingBracket[character];
+		if (
+			(expectedClose || closingBrackets.has(character)) &&
+			isPythonBracketPairIgnoredAt(view.state, index)
+		) {
+			continue;
+		}
+
 		if (expectedClose) {
 			stack.push({
 				expectedClose,

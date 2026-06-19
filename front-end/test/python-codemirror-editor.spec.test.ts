@@ -7,6 +7,7 @@ import { describe, expect, it, vi } from "vitest";
 import {
 	canSkipExistingClosingToken,
 	createPythonCodeMirrorExtensions,
+	isPythonBracketPairIgnoredAt,
 	pythonIdeCompletionSource,
 	pythonIdeCompletionsForMode,
 	pythonNewlineIndentText,
@@ -596,6 +597,34 @@ describe("python IDE CodeMirror editor", () => {
 		expect(editorSource).toContain("view.visibleRanges");
 		expect(editorSource).toContain("bracketPairContextPadding");
 		expect(editorSource).toContain("sliceString(contextFrom, contextTo)");
+	});
+
+	it("ignores Python string and comment brackets in custom pair coloring", () => {
+		const doc = [
+			'message = "not (code)"',
+			"# ignore [comment brackets]",
+			"items = [value]"
+		].join("\n");
+		const state = EditorState.create({
+			doc,
+			extensions: [python()]
+		});
+
+		expect(isPythonBracketPairIgnoredAt(state, doc.indexOf("("))).toBe(
+			true
+		);
+		expect(isPythonBracketPairIgnoredAt(state, doc.indexOf(")"))).toBe(
+			true
+		);
+		expect(isPythonBracketPairIgnoredAt(state, doc.indexOf("["))).toBe(
+			true
+		);
+		expect(
+			isPythonBracketPairIgnoredAt(state, doc.lastIndexOf("["))
+		).toBe(false);
+		expect(
+			isPythonBracketPairIgnoredAt(state, doc.lastIndexOf("]"))
+		).toBe(false);
 	});
 
 	it("skips existing auto-inserted closing tokens instead of duplicating them", () => {
