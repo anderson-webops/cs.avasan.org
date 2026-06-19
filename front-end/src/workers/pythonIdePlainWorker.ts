@@ -61,6 +61,10 @@ let pyodidePromise: Promise<PyodideAPI> | null = null;
 let activeRunID: number | null = null;
 let lastProjectFileNames = new Set<string>();
 
+function isActiveRun(id: number) {
+	return activeRunID === id;
+}
+
 function postWorkerMessage(message: PlainPythonWorkerMessage) {
 	globalThis.postMessage(message);
 }
@@ -70,6 +74,7 @@ function postOutput(
 	kind: PlainPythonOutputMessage["kind"],
 	text: string
 ) {
+	if (!isActiveRun(id)) return;
 	postWorkerMessage({ type: "output", id, kind, text });
 }
 
@@ -215,6 +220,7 @@ json.dumps(__classes_files)
 async function runPlainPythonProject(request: PlainPythonRunRequest) {
 	activeRunID = request.id;
 	const pyodide = await loadRuntime();
+	if (!isActiveRun(request.id)) return;
 
 	pyodide.setStdout?.({
 		batched: text => postOutput(request.id, "stdout", text)
@@ -224,12 +230,14 @@ async function runPlainPythonProject(request: PlainPythonRunRequest) {
 	});
 
 	syncProjectFiles(pyodide, request.files);
+	if (!isActiveRun(request.id)) return;
 	await pyodide.loadPackagesFromImports(
 		request.files
 			.filter(file => PYTHON_EXTENSION_RE.test(file.name))
 			.map(file => file.content)
 			.join("\n")
 	);
+	if (!isActiveRun(request.id)) return;
 	await pyodide.runPythonAsync(
 		projectBootstrap(
 			request.activeFileName,
@@ -237,6 +245,7 @@ async function runPlainPythonProject(request: PlainPythonRunRequest) {
 			request.files
 		)
 	);
+	if (!isActiveRun(request.id)) return;
 
 	postWorkerMessage({
 		type: "done",
@@ -251,6 +260,7 @@ globalThis.addEventListener("message", event => {
 
 	void runPlainPythonProject(request)
 		.catch(error => {
+			if (!isActiveRun(request.id)) return;
 			postWorkerMessage({
 				type: "error",
 				id: request.id,

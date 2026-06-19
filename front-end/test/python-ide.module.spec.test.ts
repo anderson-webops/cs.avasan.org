@@ -737,6 +737,9 @@ describe("python IDE project helpers", () => {
 		expect(workerSource).toContain("setStdout");
 		expect(workerSource).toContain("setStderr");
 		expect(workerSource).toContain("captureProjectTextFiles");
+		expect(workerSource).toContain("function isActiveRun");
+		expect(workerSource).toContain("if (!isActiveRun(id)) return;");
+		expect(workerSource).toContain("if (!isActiveRun(request.id)) return;");
 	});
 
 	it("preserves PyGame Zero canvas aspect ratio instead of stretching", () => {
