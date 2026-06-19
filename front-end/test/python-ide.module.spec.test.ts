@@ -1756,6 +1756,19 @@ describe("python IDE project helpers", () => {
 		expect(workerSource).toContain("loadPackagesFromImports");
 		expect(workerSource).toContain("setStdout");
 		expect(workerSource).toContain("setStderr");
+		expect(workerSource).toContain("def __classes_run_active_file():");
+		expect(workerSource).toContain(
+			"for __classes_name in list(__classes_main.__dict__):"
+		);
+		expect(workerSource).toContain(
+			"del __classes_main.__dict__[__classes_name]"
+		);
+		expect(workerSource).toContain(
+			'__classes_main.__dict__["__name__"] = "__main__"'
+		);
+		expect(workerSource).toContain(
+			'__classes_main.__dict__["__file__"] = __classes_active_file'
+		);
 		expect(workerSource).toContain("captureProjectTextFiles");
 		expect(workerSource).toContain(
 			'import {\n\tisPythonIdeTextFile,\n\tisValidPythonFileName\n} from "@/modules/pythonIde";'

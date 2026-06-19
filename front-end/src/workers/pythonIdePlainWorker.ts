@@ -221,47 +221,63 @@ async function loadPlainPythonImportPackages(
 		loadedPlainPythonImportModules.add(moduleName);
 }
 
-function inputBootstrap(inputText: string) {
-	const inputLines = inputText.replaceAll("\r\n", "\n").split("\n");
-	return `
-import builtins as __classes_builtins
-__classes_input_values = iter(__import__("json").loads(${escapePythonString(JSON.stringify(inputLines))}))
-
-def __classes_input(prompt=""):
-    print(prompt, end="")
-    try:
-        return next(__classes_input_values)
-    except StopIteration:
-        raise EOFError("No more input values are available in the input panel.")
-
-__classes_builtins.input = __classes_input
-`;
-}
-
 function projectBootstrap(
 	activeFileName: string,
 	inputText: string,
 	projectModulesToClear: string[]
 ) {
+	const inputLines = inputText.replaceAll("\r\n", "\n").split("\n");
 	return `
-import os
-import sys
-os.chdir(${escapePythonString(PROJECT_ROOT)})
-if ${escapePythonString(PROJECT_ROOT)} not in sys.path:
-    sys.path.insert(0, ${escapePythonString(PROJECT_ROOT)})
-for __classes_module_name in __import__("json").loads(${escapePythonString(JSON.stringify(projectModulesToClear))}):
-    sys.modules.pop(__classes_module_name, None)
-${inputBootstrap(inputText)}
-import __main__ as __classes_main
-__classes_main.__dict__["__name__"] = "__main__"
-exec(
-    compile(
-        open(${escapePythonString(activeFileName)}, "r", encoding="utf-8").read(),
-        ${escapePythonString(activeFileName)},
-        "exec",
-    ),
-    __classes_main.__dict__,
-)
+def __classes_run_active_file():
+    import builtins
+    import json
+    import os
+    import sys
+
+    __classes_project_root = ${escapePythonString(PROJECT_ROOT)}
+    __classes_active_file = ${escapePythonString(activeFileName)}
+    __classes_main = sys.modules["__main__"]
+    __classes_preserved_main_names = {
+        "__builtins__",
+        "__doc__",
+        "__loader__",
+        "__package__",
+        "__spec__",
+    }
+    for __classes_name in list(__classes_main.__dict__):
+        if __classes_name not in __classes_preserved_main_names:
+            del __classes_main.__dict__[__classes_name]
+    __classes_main.__dict__["__builtins__"] = builtins
+    __classes_main.__dict__["__file__"] = __classes_active_file
+    __classes_main.__dict__["__name__"] = "__main__"
+
+    os.chdir(__classes_project_root)
+    if __classes_project_root not in sys.path:
+        sys.path.insert(0, __classes_project_root)
+    for __classes_module_name in json.loads(${escapePythonString(JSON.stringify(projectModulesToClear))}):
+        sys.modules.pop(__classes_module_name, None)
+
+    __classes_input_values = iter(json.loads(${escapePythonString(JSON.stringify(inputLines))}))
+
+    def __classes_input(prompt=""):
+        print(prompt, end="")
+        try:
+            return next(__classes_input_values)
+        except StopIteration:
+            raise EOFError("No more input values are available in the input panel.")
+
+    builtins.input = __classes_input
+    exec(
+        compile(
+            open(__classes_active_file, "r", encoding="utf-8").read(),
+            __classes_active_file,
+            "exec",
+        ),
+        __classes_main.__dict__,
+        __classes_main.__dict__,
+    )
+
+__classes_run_active_file()
 `;
 }
 
