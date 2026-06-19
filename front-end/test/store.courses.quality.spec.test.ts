@@ -3129,6 +3129,17 @@ describe("course text quality normalization", () => {
 					)
 				)
 				.join("\n");
+			const checkInModelingBodies = courses.flatMap(course =>
+				course!.modules
+					.filter(module => /^Check-In #\d+$/.test(module.title))
+					.flatMap(module =>
+						module.supplementalProjects
+							.filter(item =>
+								item.title.startsWith("Modeling or Error Analysis")
+							)
+							.map(item => item.content)
+					)
+			);
 
 			expect(corpus).not.toMatch(/Develop an application task/i);
 			expect(corpus).not.toMatch(
@@ -3156,6 +3167,92 @@ describe("course text quality normalization", () => {
 			expect(supplementalCorpus).toContain("tracking inputs and outputs");
 			expect(supplementalCorpus).toContain("extraneous solution");
 			expect(supplementalCorpus).toContain("population, depreciation");
+			expect(supplementalCorpus).toContain("linear readiness scenario");
+			expect(supplementalCorpus).toContain("nonlinear readiness scenario");
+			expect(supplementalCorpus).toContain(
+				"advanced-function readiness scenario"
+			);
+			expect(supplementalCorpus).toContain("cumulative modeling scenario");
+			expect(new Set(checkInModelingBodies).size).toBe(
+				checkInModelingBodies.length
+			);
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
+
+	it(
+		"keeps algebra standards architecture course-specific",
+		async () => {
+			const expectedPhrasesByCourse = new Map([
+				[
+					"algebra-1a",
+					[
+						"linear-equation fluency",
+						"comparing phone plans",
+						"slope/intercept interpretation"
+					]
+				],
+				[
+					"algebra-1b",
+					[
+						"absolute-value or piecewise behavior",
+						"projectile height",
+						"factored or vertex form"
+					]
+				],
+				[
+					"algebra-2a",
+					[
+						"composition/inverse work",
+						"dose decay",
+						"logarithmic interpretation"
+					]
+				],
+				[
+					"algebra-2b",
+					[
+						"trigonometric modeling",
+						"periodic daylight",
+						"rational domain restrictions"
+					]
+				]
+			]);
+			const architectureContentByTitle = new Map<string, string[]>();
+
+			for (const [courseId, expectedPhrases] of expectedPhrasesByCourse) {
+				const course = await loadRawCourse(courseId);
+				expect(course, courseId).not.toBeNull();
+				if (!course) continue;
+
+				const courseText = allCourseText(course);
+				for (const phrase of expectedPhrases) {
+					expect(courseText, `${courseId} should include ${phrase}`).toContain(
+						phrase
+					);
+				}
+
+				const architecture = course.modules.find(
+					module => module.title === "Standards-Mapped Algebra Architecture"
+				);
+				expect(
+					architecture,
+					`${courseId} Standards-Mapped Algebra Architecture`
+				).toBeDefined();
+				if (!architecture) continue;
+
+				for (const item of [
+					...architecture.curriculum,
+					...architecture.supplementalProjects
+				]) {
+					const bodies = architectureContentByTitle.get(item.title) ?? [];
+					bodies.push(item.content);
+					architectureContentByTitle.set(item.title, bodies);
+				}
+			}
+
+			for (const [title, bodies] of architectureContentByTitle) {
+				expect(new Set(bodies).size, title).toBe(bodies.length);
+			}
 		},
 		COURSE_SWEEP_TIMEOUT
 	);

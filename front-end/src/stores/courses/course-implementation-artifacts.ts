@@ -861,6 +861,58 @@ function profileFor(courseId: string) {
 	);
 }
 
+function algebraCheckInTopicFocus(courseId: string, moduleTitle: string) {
+	if (!/^check-in #\d+$/i.test(moduleTitle.trim())) return null;
+
+	const checkInFocusByCourse: Record<
+		string,
+		ReturnType<typeof algebraTopicFocus>
+	> = {
+		"algebra-1a": {
+			representation:
+				"movement between a verbal situation, rate table, coordinate graph, and linear equation or system",
+			routine:
+				"checking linear readiness through slope, intercepts, equations, inequalities, and systems constraints",
+			trap: "a reversed rate, graph scale mismatch, boundary value, or solution point that satisfies only one constraint",
+			model: "a linear readiness scenario such as comparing membership plans, delivery fees, savings rates, or two budget constraints",
+			error: "a solution that uses the correct-looking line but misreads the rate, intercept, inequality boundary, or system intersection",
+			check: "testing the solution in the original equation or constraints, inspecting the graph, and stating the units"
+		},
+		"algebra-1b": {
+			representation:
+				"translation between function notation, a table, a nonlinear graph, and a factored, vertex, absolute-value, or exponential rule",
+			routine:
+				"checking nonlinear readiness through function notation, exponent rules, quadratic features, and model comparison",
+			trap: "a domain mismatch, exponent-rule slip, sign error in factoring, or graph feature interpreted without context",
+			model: "a nonlinear readiness scenario such as a projectile path, area relationship, savings growth, or linear-versus-quadratic comparison",
+			error: "a solution that calculates a root, vertex, or growth value but does not connect it to the question being asked",
+			check: "substituting a selected input, checking the graph feature, and explaining whether the model behavior fits the context"
+		},
+		"algebra-2a": {
+			representation:
+				"tracking a function through notation, transformation description, composition table, inverse check, and exponential or logarithmic form",
+			routine:
+				"checking function-family readiness through transformations, composition, inverse reasoning, logarithms, and quadratic method choice",
+			trap: "a transformation-order mistake, unrestricted inverse, mismatched sequence index, or logarithm used without domain context",
+			model: "an advanced-function readiness scenario such as repeated discounts, transformed measurements, dose decay, or inverse conversion",
+			error: "a solution that performs symbolic steps correctly but loses the input-output meaning or allowed domain",
+			check: "testing a small input, verifying inverse or composition behavior, and comparing the symbolic result with the graph or context"
+		},
+		"algebra-2b": {
+			representation:
+				"comparison of polynomial graph features, rational restrictions, trigonometric period/amplitude, probability table, and residual interpretation",
+			routine:
+				"checking cumulative modeling readiness through polynomial, rational, trigonometric, probability, statistics, and cross-model interpretation",
+			trap: "an ignored asymptote, invalid domain value, period mismatch, probability assumption, or model chosen despite poor residual behavior",
+			model: "a cumulative modeling scenario such as periodic daylight, concentration over time, production cost, rational rate behavior, or probability decision",
+			error: "a solution that fits a formula mechanically but ignores domain, end behavior, periodicity, uncertainty, or model limitations",
+			check: "testing a domain value, inspecting the graph or residual pattern, and explaining the model limitation in context"
+		}
+	};
+
+	return checkInFocusByCourse[courseId] ?? null;
+}
+
 function algebraTopicFocus(moduleTitle: string) {
 	const title = moduleTitle.toLowerCase();
 
@@ -986,7 +1038,9 @@ function addAlgebraSupplementalProjects(courseId: string, course: RawCourse) {
 	const courseLabel = course.name || courseId.replace(/-/g, " ");
 
 	for (const module of course.modules) {
-		const focus = algebraTopicFocus(module.title);
+		const focus =
+			algebraCheckInTopicFocus(courseId, module.title) ??
+			algebraTopicFocus(module.title);
 
 		while (module.supplementalProjects.length < 2) {
 			const next = module.supplementalProjects.length + 1;
@@ -1720,8 +1774,77 @@ function addAlgebraStandardsArchitectureModule(
 			"Cumulative comparative modeling across function families."
 		]
 	};
+	const architectureDetails: Record<
+		string,
+		{
+			labelExamples: string;
+			anchorFocus: string;
+			anchorRepresentations: string;
+			practiceEmphasis: string;
+			blueprintContext: string;
+			extensionChange: string;
+		}
+	> = {
+		"algebra-1a": {
+			labelExamples:
+				"Algebra 1A labels should distinguish expression translation, linear-equation fluency, graph/table interpretation, systems reasoning, and introductory function notation.",
+			anchorFocus:
+				"a linear or systems model such as comparing phone plans, fundraising rates, taxi fares, break-even points, or two-constraint scheduling.",
+			anchorRepresentations:
+				"table, graph, equation, verbal rule, and solution-point interpretation",
+			practiceEmphasis:
+				"near-transfer equation solving, slope/intercept interpretation, graph-to-equation translation, systems constraints, and reasonableness checks for units and domains",
+			blueprintContext:
+				"a linear relationship or systems scenario with two quantities that can be represented by table, graph, equation, and written interpretation",
+			extensionChange:
+				"change the rate, starting value, inequality boundary, or second constraint so the graph and equation must both be rechecked"
+		},
+		"algebra-1b": {
+			labelExamples:
+				"Algebra 1B labels should separate function notation, absolute-value or piecewise behavior, exponent rules, quadratic structure, and model comparison.",
+			anchorFocus:
+				"a quadratic or exponential comparison such as projectile height, revenue, savings growth, area optimization, or choosing between linear and nonlinear models.",
+			anchorRepresentations:
+				"function notation, table, graph, factored or vertex form, intercepts, and contextual meaning",
+			practiceEmphasis:
+				"function input/output notation, exponent-pattern fluency, factoring and graph features, model selection, and comparison between linear, quadratic, and exponential behavior",
+			blueprintContext:
+				"a nonlinear relationship where function notation, graph features, and contextual interpretation all matter",
+			extensionChange:
+				"change the starting value, growth factor, vertex, domain restriction, or comparison model so the best representation may change"
+		},
+		"algebra-2a": {
+			labelExamples:
+				"Algebra 2A labels should identify sequence reasoning, parent-function transformations, composition/inverse work, exponential-logarithmic interpretation, and advanced quadratic methods.",
+			anchorFocus:
+				"a function-transformation or inverse-model project such as temperature conversion, dose decay, repeated discounts, transformed sensor readings, or comparing exact and approximate quadratic methods.",
+			anchorRepresentations:
+				"symbolic function rules, transformation descriptions, composition tables, inverse checks, logarithmic form, and graph behavior",
+			practiceEmphasis:
+				"representation transfer, domain/range language, composition order, inverse verification, logarithmic interpretation, complex-number or quadratic-method comparison",
+			blueprintContext:
+				"a function family or sequence model where transformation, inverse, composition, or logarithmic interpretation changes the meaning of the result",
+			extensionChange:
+				"change the transformation order, inverse restriction, sequence index, exponential base, or quadratic method and compare the effect"
+		},
+		"algebra-2b": {
+			labelExamples:
+				"Algebra 2B labels should distinguish polynomial behavior, rational restrictions, trigonometric modeling, probability/statistics, and cumulative model comparison.",
+			anchorFocus:
+				"a cumulative model such as periodic daylight, medication concentration, production cost, rational rate behavior, polynomial trend, or probability-based decision.",
+			anchorRepresentations:
+				"polynomial graph features, rational domain restrictions, trigonometric period/amplitude, probability tables, residuals, and written model limits",
+			practiceEmphasis:
+				"domain restrictions, end behavior, asymptotes, period and amplitude, probability interpretation, residual reasoning, and comparison across function families",
+			blueprintContext:
+				"a higher-algebra modeling situation where choosing polynomial, rational, trigonometric, or statistical representation changes the conclusion",
+			extensionChange:
+				"change the domain, asymptote, period, data spread, probability assumption, or competing model and justify whether the original model still fits"
+		}
+	};
 	const scope = maps[courseId];
-	if (!scope) return;
+	const details = architectureDetails[courseId];
+	if (!scope || !details) return;
 
 	appendModule(course, {
 		kind: "appendix",
@@ -1737,30 +1860,48 @@ function addAlgebraStandardsArchitectureModule(
 			},
 			{
 				title: "Course Item Labels",
-				content:
-					"**Concept path:** Use clear labels such as Lesson, Practice, Check-in, Project, Remediation, Enrichment, or Assessment. The label should make the purpose of each item obvious: introducing a concept, practicing a skill, checking mastery, repairing a gap, or extending the idea.\n\n**Label rules:** A Lesson introduces vocabulary, representation, and a worked example. Practice builds fluency with near-transfer problems. A Check-in samples mastery without becoming a full unit test. A Project applies algebra to a context, model, or comparison. Remediation targets a named gap, while Enrichment changes a constraint or adds a second method.\n\n**Evidence target:** A reader can tell which items teach, which items practice, which items assess, and which items extend before opening the detailed prompt."
+				content: [
+					"**Concept path:** Use clear labels such as Lesson, Practice, Check-in, Project, Remediation, Enrichment, or Assessment. The label should make the purpose of each item obvious: introducing a concept, practicing a skill, checking mastery, repairing a gap, or extending the idea.",
+					"**Label rules:** A Lesson introduces vocabulary, representation, and a worked example. Practice builds fluency with near-transfer problems. A Check-in samples mastery without becoming a full unit test. A Project applies algebra to a context, model, or comparison. Remediation targets a named gap, while Enrichment changes a constraint or adds a second method.",
+					`**Course-specific labels:** ${details.labelExamples}`,
+					"**Evidence target:** A reader can tell which items teach, which items practice, which items assess, which items extend, and which algebra strand is being checked before opening the detailed prompt."
+				].join("\n\n")
 			},
 			{
 				title: "Required Anchor and Extension Projects",
-				content:
-					"**Project goal:** Each algebra course includes one required anchor modeling project and one optional extension project. The anchor project ties the course strand to a realistic relationship: define quantities, choose representations, solve, interpret, and check reasonableness. The extension keeps the same mathematical structure but changes one meaningful constraint, comparison, or method so transfer becomes visible.\n\n**Anchor structure:**\n1. Name the context, variables, units, domain, and question being answered.\n2. Represent the relationship in at least two ways, such as equation and graph, table and equation, graph and verbal interpretation, or symbolic form and diagram.\n3. Solve with visible algebra and explain why that method fits the context.\n4. Check the answer through substitution, graph inspection, units, estimation, or a boundary case.\n5. Write a conclusion that interprets the result rather than only reporting a value.\n\n**Extension structure:** Change one condition, add a second method, compare two models, or introduce a plausible flawed solution. The extension records what stayed equivalent, what changed, and which representation made the change easiest to inspect.\n\n**Completion checks:**\n- At least two representations are used and compared.\n- The answer is interpreted in context with a reasonableness check.\n- The rubric separates procedure, representation, interpretation, and error-analysis evidence.\n- A remediation path identifies the prerequisite skill to revisit if the anchor project breaks down."
+				content: [
+					`**Project goal:** Each algebra course includes one required anchor modeling project and one optional extension project. For this course, the anchor should center on ${details.anchorFocus} The project defines quantities, chooses representations, solves, interprets, and checks reasonableness. The extension keeps the same mathematical structure but changes one meaningful constraint, comparison, or method so transfer becomes visible.`,
+					`**Anchor structure:**\n1. Name the context, variables, units, domain, and question being answered.\n2. Represent the relationship with ${details.anchorRepresentations}.\n3. Solve with visible algebra and explain why that method fits the context.\n4. Check the answer through substitution, graph inspection, units, estimation, or a boundary case.\n5. Write a conclusion that interprets the result rather than only reporting a value.`,
+					`**Extension structure:** ${details.extensionChange}. The extension records what stayed equivalent, what changed, and which representation made the change easiest to inspect.`,
+					"**Completion checks:**\n- At least two representations are used and compared.\n- The answer is interpreted in context with a reasonableness check.\n- The rubric separates procedure, representation, interpretation, and error-analysis evidence.\n- A remediation path identifies the prerequisite skill to revisit if the anchor project breaks down."
+				].join("\n\n")
 			},
 			{
 				title: "Practice Set Types",
-				content:
-					"**Readiness check:** Rotate six practice formats: worked example, near-transfer fluency, error analysis, interleaved mixed set, retrieval spiral, and compact application set. The formats should not be random worksheet styles; each one checks a different kind of algebra understanding, from procedure to transfer to misconception repair.\n\n**Set design:** Worked examples show notation and reasoning. Near-transfer sets keep the same structure with changed numbers. Error analysis asks what step failed and why. Interleaved sets mix old and new skills. Retrieval spirals revisit prior units. Compact applications connect equations, graphs, tables, or written interpretation to a short context.\n\n**Evidence target:** The work demonstrates the ability to solve, explain, identify a common error, and transfer the same idea to a changed context."
+				content: [
+					"**Readiness check:** Rotate six practice formats: worked example, near-transfer fluency, error analysis, interleaved mixed set, retrieval spiral, and compact application set. The formats should not be random worksheet styles; each one checks a different kind of algebra understanding, from procedure to transfer to misconception repair.",
+					`**Course emphasis:** In this course, practice sets should prioritize ${details.practiceEmphasis}.`,
+					"**Set design:** Worked examples show notation and reasoning. Near-transfer sets keep the same structure with changed numbers. Error analysis asks what step failed and why. Interleaved sets mix old and new skills. Retrieval spirals revisit prior units. Compact applications connect equations, graphs, tables, or written interpretation to a short context.",
+					"**Evidence target:** The work demonstrates the ability to solve, explain, identify a common error, and transfer the same idea to a changed context."
+				].join("\n\n")
 			}
 		],
 		supplementalProjects: [
 			{
 				title: "Anchor Project: Modeling Task Blueprint",
-				content:
-					"**Project goal:** Draft the required anchor modeling project for this course. Name the context, variables, representation choices, solution method, and reasonableness check. The blueprint should make the task usable as a course anchor rather than a single exercise by showing how the same model can be introduced, practiced, assessed, and extended.\n\n**Completion checks:**\n- The project uses at least two representations.\n- The answer is interpreted in context.\n- The rubric checks both procedure and explanation."
+				content: [
+					`**Project goal:** Draft the required anchor modeling project around ${details.blueprintContext}. Name the context, variables, representation choices, solution method, and reasonableness check. The blueprint should make the task usable as a course anchor rather than a single exercise by showing how the same model can be introduced, practiced, assessed, and extended.`,
+					`**Representation requirement:** Include ${details.anchorRepresentations}, then state which representation best supports calculation and which one best supports interpretation.`,
+					"**Completion checks:**\n- The project uses at least two representations.\n- The answer is interpreted in context.\n- The rubric checks both procedure and explanation."
+				].join("\n\n")
 			},
 			{
 				title: "Extension Project: Changed Constraint",
-				content:
-					"**Project goal:** Extend the anchor project by changing one constraint, adding a second method, or comparing two models. The extension tests whether the method is understood structurally: a changed condition may preserve the same relationship, require a new representation, or expose where the original model was too narrow.\n\n**Completion checks:**\n- The changed condition is explicit.\n- The work explains why the original method still works or must change.\n- The result is compared against the original case."
+				content: [
+					`**Project goal:** Extend the anchor project by making this course-specific change: ${details.extensionChange}. The extension tests whether the method is understood structurally: a changed condition may preserve the same relationship, require a new representation, or expose where the original model was too narrow.`,
+					`**Comparison target:** Reuse ${details.anchorRepresentations} where useful, then explain which representation changes most clearly and which one hides the change.`,
+					"**Completion checks:**\n- The changed condition is explicit.\n- The work explains why the original method still works or must change.\n- The result is compared against the original case."
+				].join("\n\n")
 			}
 		]
 	});
