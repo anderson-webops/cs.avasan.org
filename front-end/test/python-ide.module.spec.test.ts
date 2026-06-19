@@ -1161,6 +1161,7 @@ describe("python IDE project helpers", () => {
 		expect(guardSource).toContain(
 			"return isActiveRun() ? gameBridge.playTone(frequency, duration) : 0;"
 		);
+		expect(guardSource).toContain("gameBridge.fill(color, gcolor);");
 	});
 
 	it("guards PyGame Zero loop ticks from stale async completions", () => {
@@ -2355,6 +2356,13 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain(
 			"_bridge.drawImage(\n            _image_name(image),"
 		);
+		expect(runtimeSource).toContain(
+			"fill: (color: string, gcolor?: string) => void;"
+		);
+		expect(runtimeSource).toContain("def fill(self, color, gcolor=None):");
+		expect(runtimeSource).toContain(
+			"_normalize_color(gcolor) if gcolor is not None else None"
+		);
 		expect(runtimeSource).toContain("def bounds(self):");
 		expect(runtimeSource).toContain(
 			"def rect(self, rect, color, width=1):"
@@ -2388,6 +2396,15 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("return left == right");
 		expect(runtimeSource).toContain(
 			"if not _same_callback(entry[\"function\"], function)"
+		);
+		expect(pageSource).toContain("backgroundGradient: string | null;");
+		expect(pageSource).toContain("function gameCanvasFillStyle");
+		expect(pageSource).toContain(
+			"context.createLinearGradient(0, 0, 0, gameState.height)"
+		);
+		expect(pageSource).toContain("gradient.addColorStop(1, gcolor);");
+		expect(pageSource).toContain(
+			"gameState.backgroundGradient = gcolor ?? null;"
 		);
 		expect(runtimeSource).toContain("def distance_to(self, target):");
 		expect(runtimeSource).toContain("def angle_to(self, target):");

@@ -90,7 +90,7 @@ interface ArtifactBridge {
 export interface GameBridge {
 	reset: (width?: number, height?: number) => void;
 	clear: () => void;
-	fill: (color: string) => void;
+	fill: (color: string, gcolor?: string) => void;
 	drawActor: (
 		image: string,
 		x: number,
@@ -2611,8 +2611,11 @@ class _Screen:
     def clear(self):
         _bridge.clear()
 
-    def fill(self, color):
-        _bridge.fill(_normalize_color(color))
+    def fill(self, color, gcolor=None):
+        _bridge.fill(
+            _normalize_color(color),
+            _normalize_color(gcolor) if gcolor is not None else None,
+        )
 
     def bounds(self):
         return ZRect(

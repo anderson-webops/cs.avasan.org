@@ -186,6 +186,7 @@ interface GameCanvasState {
 	width: number;
 	height: number;
 	background: string;
+	backgroundGradient: string | null;
 }
 
 interface GameInputEvent {
@@ -588,7 +589,8 @@ const turtleFillState: TurtleFillState = {
 const gameState: GameCanvasState = {
 	width: 640,
 	height: 400,
-	background: "#111827"
+	background: "#111827",
+	backgroundGradient: null
 };
 
 const selectedProject = computed(
@@ -2475,11 +2477,27 @@ function setGameCanvasTransform() {
 	return context;
 }
 
-function clearGameCanvas(color = gameState.background) {
+function gameCanvasFillStyle(
+	context: CanvasRenderingContext2D,
+	color: string,
+	gcolor: string | null = gameState.backgroundGradient
+) {
+	if (!gcolor) return color;
+
+	const gradient = context.createLinearGradient(0, 0, 0, gameState.height);
+	gradient.addColorStop(0, color);
+	gradient.addColorStop(1, gcolor);
+	return gradient;
+}
+
+function clearGameCanvas(
+	color = gameState.background,
+	gcolor: string | null = gameState.backgroundGradient
+) {
 	const context = setGameCanvasTransform();
 	if (!context) return;
 
-	context.fillStyle = color;
+	context.fillStyle = gameCanvasFillStyle(context, color, gcolor);
 	context.fillRect(0, 0, gameState.width, gameState.height);
 }
 
@@ -2494,6 +2512,7 @@ function resetGameCanvas(width = 640, height = 400) {
 	gameState.width = Math.max(1, width);
 	gameState.height = Math.max(1, height);
 	gameState.background = "#111827";
+	gameState.backgroundGradient = null;
 	clearGameCanvas();
 }
 
@@ -3529,9 +3548,10 @@ function createGuardedTurtleBridgeRun(): TurtleBridge {
 const gameBridge: GameBridge = {
 	reset: resetGameCanvas,
 	clear: () => clearGameCanvas(),
-	fill(color: string) {
+	fill(color: string, gcolor?: string) {
 		gameState.background = color;
-		clearGameCanvas(color);
+		gameState.backgroundGradient = gcolor ?? null;
+		clearGameCanvas(color, gameState.backgroundGradient);
 	},
 	drawActor: drawGameActor,
 	drawImage: drawGameImage,
@@ -3587,8 +3607,8 @@ function createGuardedGameBridgeRun(): GameBridge {
 		clear() {
 			if (isActiveRun()) gameBridge.clear();
 		},
-		fill(color: string) {
-			if (isActiveRun()) gameBridge.fill(color);
+		fill(color: string, gcolor?: string) {
+			if (isActiveRun()) gameBridge.fill(color, gcolor);
 		},
 		drawActor(...args) {
 			if (isActiveRun()) gameBridge.drawActor(...args);
