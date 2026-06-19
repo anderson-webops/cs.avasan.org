@@ -658,6 +658,10 @@ describe("python IDE project helpers", () => {
 			"const turtleInstantStepMaxDurationMs = 16"
 		);
 		expect(pageSource).toContain(
+			"const turtleInstantFrameDistanceBudget = 24"
+		);
+		expect(pageSource).toContain("const turtleInstantFrameStepBudget = 48");
+		expect(pageSource).toContain(
 			"step.durationMs <= turtleInstantStepMaxDurationMs"
 		);
 		expect(pageSource).toContain("let turtleVisiblePose");
@@ -668,19 +672,24 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("renderTurtleScene();");
 	});
 
-	it("keeps tiny Turtle steps ordered behind active animation", () => {
+	it("keeps tiny Turtle steps frame-batched with the visible cursor", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
 
-		expect(pageSource).toContain("function canRenderTurtleStepImmediately");
-		expect(pageSource).toContain("activeTurtleAnimationStep === null");
-		expect(pageSource).toContain("turtleQueuedSteps.length === 0");
-		expect(pageSource).toContain("turtleAnimationFrame === null");
 		expect(pageSource).toContain(
-			"if (canRenderTurtleStepImmediately(step))"
+			"function flushInstantTurtleAnimationSteps"
 		);
+		expect(pageSource).toContain(
+			"consumedDistance < turtleInstantFrameDistanceBudget"
+		);
+		expect(pageSource).toContain(
+			"consumedSteps < turtleInstantFrameStepBudget"
+		);
+		expect(pageSource).toContain("completeTurtleAnimationStep(step);");
+		expect(pageSource).toContain("renderTurtleScene(markerPose);");
+		expect(pageSource).toContain("void scheduleTurtleAnimation();");
 	});
 
 	it("redraws Turtle canvas resizes without resetting active drawings", () => {
@@ -804,6 +813,13 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain(
 			"Python will halt at the next runtime checkpoint."
 		);
+		expect(pageSource).toContain("function stopActiveRuntimeSurfaces");
+		expect(pageSource).toContain("stopLoadedPythonRuntimeRun();");
+		expect(pageSource).toContain("stopAllGameAudio();");
+		expect(pageSource).toContain("gameKeysDown.clear();");
+		expect(pageSource).toContain("gameEvents.length = 0;");
+		expect(pageSource).toContain("stopRequested.value = true;");
+		expect(pageSource).toContain("stopActiveRuntimeSurfaces();");
 	});
 
 	it("runs plain Python projects in a terminable Pyodide worker", () => {

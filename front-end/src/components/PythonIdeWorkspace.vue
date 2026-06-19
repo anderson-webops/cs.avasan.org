@@ -317,6 +317,8 @@ const maxImportedBinaryFileBytes = 2 * 1024 * 1024;
 const maxOutputLines = 500;
 const maxOutputTextLength = 12000;
 const turtleInstantStepMaxDurationMs = 16;
+const turtleInstantFrameDistanceBudget = 24;
+const turtleInstantFrameStepBudget = 48;
 const outputEntryTruncatedMessage =
 	"\n[Output truncated to keep the browser responsive.]";
 const outputHistoryTrimmedMessage =
@@ -1826,6 +1828,11 @@ function runTurtleAnimationFrame(timestamp: number) {
 		return;
 	}
 
+	if (isInstantTurtleAnimationStep(step)) {
+		flushInstantTurtleAnimationSteps(timestamp);
+		return;
+	}
+
 	const elapsed = timestamp - turtleAnimationStepStartedAt;
 	const progress = Math.min(1, elapsed / Math.max(1, step.durationMs));
 	const markerPose = interpolateTurtlePose(
@@ -1847,6 +1854,53 @@ function runTurtleAnimationFrame(timestamp: number) {
 	turtleAnimationFrame = requestAnimationFrame(runTurtleAnimationFrame);
 }
 
+function isInstantTurtleAnimationStep(step: TurtleAnimationStep) {
+	return step.durationMs <= turtleInstantStepMaxDurationMs;
+}
+
+function turtleAnimationStepDistance(step: TurtleAnimationStep) {
+	return Math.hypot(
+		step.toPose.x - step.fromPose.x,
+		step.toPose.y - step.fromPose.y
+	);
+}
+
+function completeTurtleAnimationStep(step: TurtleAnimationStep) {
+	if (step.command) turtleCompletedCommands.push(step.command);
+	setTurtleVisiblePose(step.toPose);
+}
+
+function flushInstantTurtleAnimationSteps(timestamp: number) {
+	let consumedDistance = 0;
+	let consumedSteps = 0;
+	let markerPose = visibleTurtlePose();
+
+	while (
+		activeTurtleAnimationStep &&
+		isInstantTurtleAnimationStep(activeTurtleAnimationStep) &&
+		consumedSteps < turtleInstantFrameStepBudget &&
+		(consumedDistance < turtleInstantFrameDistanceBudget ||
+			consumedSteps === 0)
+	) {
+		const step = activeTurtleAnimationStep;
+		completeTurtleAnimationStep(step);
+		markerPose = step.toPose;
+		consumedDistance += turtleAnimationStepDistance(step);
+		consumedSteps += 1;
+		activeTurtleAnimationStep = turtleQueuedSteps.shift() ?? null;
+		turtleAnimationStepStartedAt = timestamp;
+	}
+
+	renderTurtleScene(markerPose);
+	if (!activeTurtleAnimationStep && turtleQueuedSteps.length === 0) {
+		turtleAnimationFrame = null;
+		resolveActiveTurtleAnimation();
+		return;
+	}
+
+	turtleAnimationFrame = requestAnimationFrame(runTurtleAnimationFrame);
+}
+
 function scheduleTurtleAnimation() {
 	if (!turtleAnimationPromise) {
 		turtleAnimationPromise = new Promise<void>(resolve => {
@@ -1858,22 +1912,7 @@ function scheduleTurtleAnimation() {
 	return turtleAnimationPromise;
 }
 
-function canRenderTurtleStepImmediately(step: TurtleAnimationStep) {
-	return (
-		step.durationMs <= turtleInstantStepMaxDurationMs &&
-		activeTurtleAnimationStep === null &&
-		turtleQueuedSteps.length === 0 &&
-		turtleAnimationFrame === null
-	);
-}
-
 function queueTurtleStep(step: TurtleAnimationStep) {
-	if (canRenderTurtleStepImmediately(step)) {
-		if (step.command) turtleCompletedCommands.push(step.command);
-		setTurtleVisiblePose(step.toPose);
-		renderTurtleScene();
-		return;
-	}
 	turtleQueuedSteps.push(step);
 	void scheduleTurtleAnimation();
 }
@@ -3097,17 +3136,7 @@ function stopCurrentProject() {
 	if (!runControlIsStop.value) return;
 	const hadPythonRunInFlight = isRunning.value;
 	stopRequested.value = true;
-	stopLoadedPythonRuntimeRun();
-	clearTurtleTimers();
-	cancelTurtleAnimation();
-	stopGameLoop();
-	stopAllGameAudio();
-	keyHandlers.clear();
-	gameKeysDown.clear();
-	gameEvents.length = 0;
-	turtleClickHandlers.clear();
-	turtleDragHandlers.clear();
-	activeTurtleDragButton = null;
+	stopActiveRuntimeSurfaces();
 	runMessage.value = "Stopped";
 	appendOutput(
 		"system",
@@ -3121,6 +3150,20 @@ function stopCurrentProject() {
 		releaseIdlePythonRuntimeCallbacks();
 		stopRequested.value = false;
 	}
+}
+
+function stopActiveRuntimeSurfaces() {
+	stopLoadedPythonRuntimeRun();
+	clearTurtleTimers();
+	cancelTurtleAnimation();
+	stopGameLoop();
+	stopAllGameAudio();
+	keyHandlers.clear();
+	gameKeysDown.clear();
+	gameEvents.length = 0;
+	turtleClickHandlers.clear();
+	turtleDragHandlers.clear();
+	activeTurtleDragButton = null;
 }
 
 function activateRunControl() {
@@ -3410,10 +3453,9 @@ onBeforeUnmount(() => {
 	window.removeEventListener("keydown", handleKeyDown);
 	window.removeEventListener("keyup", handleKeyUp);
 	window.removeEventListener("mouseup", clearTurtleDrag);
-	clearTurtleTimers();
-	cancelTurtleAnimation();
+	stopRequested.value = true;
+	stopActiveRuntimeSurfaces();
 	releaseLoadedPythonRuntimeCallbacks();
-	stopGameLoop();
 	resizeObserver?.disconnect();
 });
 </script>
