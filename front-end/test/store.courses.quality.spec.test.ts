@@ -1231,6 +1231,103 @@ describe("course text quality normalization", () => {
 		expect(duplicateSummaries).toEqual([]);
 	});
 
+	it(
+		"keeps generated transfer and extension project cards distinct inside each module",
+		async () => {
+			const duplicateGroups: string[] = [];
+			const courses = await Promise.all(
+				courseCatalog.map(async entry => ({
+					entry,
+					course: await loadRawCourse(entry.id)
+				}))
+			);
+
+			for (const { entry, course } of courses) {
+				if (!course) continue;
+
+				for (const module of course.modules) {
+					const contentGroups = new Map<string, string[]>();
+
+					for (const item of [
+						...module.curriculum,
+						...module.supplementalProjects
+					]) {
+						if (
+							!item.projectLink ||
+							!/^\*\*(?:Goal|Project goal):\*\*/i.test(item.content)
+						) {
+							continue;
+						}
+
+						const normalizedContent = item.content
+							.replace(/\s+/g, " ")
+							.trim();
+						const titles = contentGroups.get(normalizedContent) ?? [];
+						titles.push(item.title);
+						contentGroups.set(normalizedContent, titles);
+					}
+
+					for (const titles of contentGroups.values()) {
+						if (titles.length < 2) continue;
+
+						duplicateGroups.push(
+							`${entry.id} > ${module.title} > ${titles.join(" | ")}`
+						);
+					}
+				}
+			}
+
+			expect(duplicateGroups).toEqual([]);
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
+
+	it(
+		"does not render unrelated non-composed course items as exact long-form duplicates",
+		async () => {
+			const excludedCourseIds = new Set([
+				"java-without-graphics",
+				"java-with-graphics"
+			]);
+			const contentGroups = new Map<string, string[]>();
+			const duplicateGroups: string[] = [];
+			const courses = await Promise.all(
+				courseCatalog.map(async entry => ({
+					entry,
+					course: await loadRawCourse(entry.id)
+				}))
+			);
+
+			for (const { entry, course } of courses) {
+				if (!course || excludedCourseIds.has(entry.id)) continue;
+
+				for (const module of course.modules) {
+					for (const item of [
+						...module.curriculum,
+						...module.supplementalProjects
+					]) {
+						const normalizedContent = item.content
+							.replace(/\s+/g, " ")
+							.trim();
+						if (normalizedContent.length < 280) continue;
+
+						const labels = contentGroups.get(normalizedContent) ?? [];
+						labels.push(`${entry.id} > ${module.title} > ${item.title}`);
+						contentGroups.set(normalizedContent, labels);
+					}
+				}
+			}
+
+			for (const labels of contentGroups.values()) {
+				if (labels.length < 2) continue;
+				duplicateGroups.push(labels.join(" || "));
+			}
+
+			expect(duplicateGroups).toEqual([]);
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
+
 	it("keeps older JavaScript and Python project prompts from collapsing to one-line tasks", async () => {
 		const courses = await Promise.all([
 			loadRawCourse("javascript-level-1-javascript-superstar"),

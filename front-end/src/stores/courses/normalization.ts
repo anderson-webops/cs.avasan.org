@@ -463,6 +463,64 @@ function normalizeGeneratedSupplementalLabels(course: RawCourse) {
 	}
 }
 
+function generatedGuidanceVariantFocus(title: string) {
+	if (/core project/i.test(title)) {
+		return "Core project work establishes the required baseline behavior first. The result should identify the main artifact, ordinary success path, and one protected boundary case before optional variants are attempted.";
+	}
+
+	if (/transfer/i.test(title)) {
+		return "Transfer practice keeps the core concept intact while changing the input shape, representation, context, or constraint. The result should prove the idea works outside the first example.";
+	}
+
+	if (/extension/i.test(title)) {
+		return "Extension practice starts from the working base case, then adds a harder edge case, extra rule, design variation, or deeper explanation target. The result should show what changed and why the original reasoning still holds.";
+	}
+
+	if (/challenge/i.test(title)) {
+		return "Challenge practice raises the independence bar: define the success condition, choose the verification evidence, and explain one tradeoff or failure mode that was not visible in the simpler version.";
+	}
+
+	return "Practice variant focus should name the changed condition, the new evidence required, and the reason this version is not just a copy of the previous task.";
+}
+
+function distinguishDuplicateGeneratedProjectGuidance(course: RawCourse) {
+	for (const module of course.modules) {
+		const generatedProjectGroups = new Map<string, RawCourseModuleItem[]>();
+
+		for (const section of ["curriculum", "supplementalProjects"] as const) {
+			for (const item of module[section]) {
+				if (
+					!item.projectLink ||
+					!/^\*\*(?:Goal|Project goal):\*\*/i.test(item.content)
+				) {
+					continue;
+				}
+
+				const normalizedContent = item.content
+					.replace(/\s+/g, " ")
+					.trim();
+				const group =
+					generatedProjectGroups.get(normalizedContent) ?? [];
+				group.push(item);
+				generatedProjectGroups.set(normalizedContent, group);
+			}
+		}
+
+		for (const group of generatedProjectGroups.values()) {
+			if (group.length < 2) continue;
+
+			for (const item of group) {
+				if (/\*\*Variant focus:\*\*/i.test(item.content)) continue;
+
+				item.content = [
+					item.content.trim(),
+					`**Variant focus:** ${generatedGuidanceVariantFocus(item.title)}`
+				].join("\n\n");
+			}
+		}
+	}
+}
+
 function removeRedundantItemTitleContext(
 	course: RawCourse,
 	module: RawCourseModule,
@@ -6460,6 +6518,27 @@ function studioSupport(context: CourseTextContext) {
 	const pathTitle =
 		`${itemTitle} ${context.item.projectLink ?? ""}`.toLowerCase();
 	const studioPath = (() => {
+		if (pathTitle.includes("build requirements")) {
+			return `Build path for ${studioReference}: define the required parts, connect them into one runnable artifact, and verify the complete path rather than isolated pieces.`;
+		}
+		if (
+			pathTitle.includes("common bug") ||
+			pathTitle.includes("debugging")
+		) {
+			return `Debug path for ${studioReference}: reproduce one realistic failure, name the suspected cause, change the smallest relevant script or state rule, and verify the fix.`;
+		}
+		if (
+			pathTitle.includes("share and explain") ||
+			pathTitle.includes("presentation")
+		) {
+			return `Explanation path for ${studioReference}: connect the finished behavior to the main event chain, state variable, design choice, and remaining limitation.`;
+		}
+		if (
+			pathTitle.includes("design and planning") ||
+			pathTitle.includes("planning map")
+		) {
+			return `Planning path for ${studioReference}: map the pieces, first runnable checkpoint, verification evidence, and one likely risk before implementation expands.`;
+		}
 		if (pathTitle.includes("worked example")) {
 			return `Model path for ${studioReference}: setup, one hand-checkable trace, expected output, and the reason the result is trustworthy.`;
 		}
@@ -7256,6 +7335,7 @@ export function normalizeRawCourse(id: string, rawCourse: RawCourse) {
 	normalizeCourseTextQuality(course, id);
 	neutralizeStudentFacingCourseText(course);
 	normalizeGeneratedSupplementalLabels(course);
+	distinguishDuplicateGeneratedProjectGuidance(course);
 	normalizeLegacyBranding(course);
 	contextualizeGenericDisplayTitles(course);
 	formatVisibleCourseMarkdown(course);
