@@ -86,7 +86,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Assembler, Linker, Object Files, and Executables",
 					content:
-						"This section covers the assembly pipeline as a concrete artifact flow: source becomes object code, objects become a linked executable, and each stage exposes different evidence. Key idea: Where symbols, relocation, and disassembly fit long before they write large amounts of assembly."
+						"The assembly pipeline is an artifact flow: source becomes object code, object files become a linked executable, and each stage leaves evidence that can be inspected. Symbols, relocation entries, and disassembly output belong in that flow before large hand-written assembly routines are introduced."
 				},
 				{
 					title: "Intel versus AT&T Syntax",
@@ -161,7 +161,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "General-Purpose Registers and Partial Register Views",
 					content:
-						"This section covers `rax`, `rbx`, `rcx`, `rdx`, the pointer and index registers, and the relationship between 64-bit, 32-bit, 16-bit, and 8-bit register views. Key idea: Partial-register writes can zero or preserve upper bits depending on the instruction and destination width."
+						"`rax`, `rbx`, `rcx`, `rdx`, pointer registers, and index registers are the working storage for many early examples. The 64-bit, 32-bit, 16-bit, and 8-bit views of a register are connected, so partial-register writes must be traced carefully because some destinations clear upper bits while others preserve them."
 				},
 				{
 					title: "mov, Zero Extension, and Sign Extension",
@@ -227,7 +227,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "add, sub, imul, and idiv",
 					content:
-						"This section covers the arithmetic instructions as state changes over explicit registers rather than as magical one-line operators. Key idea: Which instructions write only one destination register, which ones use implicit registers, and why signed division requires deliberate setup."
+						"Arithmetic instructions change explicit machine state rather than acting like magical one-line operators. `add` and `sub` mostly write the named destination, while multiplication and signed division introduce implicit register use, setup requirements, and result locations that must be traced before the answer is trusted."
 				},
 				{
 					title: "and, or, xor, test, and Condition Checks",
@@ -237,7 +237,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Flags, Condition Codes, and Arithmetic Visibility",
 					content:
-						"This section covers the zero flag, sign flag, carry flag, and overflow flag as observable state that later drives conditional branches. Skill target: Explain not only what a calculation produced, but what flags that calculation set and why."
+						"The zero flag, sign flag, carry flag, and overflow flag are observable state produced by arithmetic and logic instructions. A complete explanation names not only the numeric result, but also which flags changed, why they changed, and how a later conditional branch could use that state."
 				},
 				{
 					title: "C-to-Assembly Compare: Arithmetic Helper",
@@ -302,7 +302,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "cmp, jmp, and Conditional Jumps",
 					content:
-						"This section covers branching by making the compare-and-branch relationship explicit. Key idea: `cmp` prepares flags and `jcc` reads them, which is a clearer model than treating each conditional jump as a stand-alone feature."
+						"Branching becomes clearer when the compare-and-branch relationship is explicit: `cmp` prepares flags, unconditional jumps move control directly, and `jcc` instructions read the current flag state. Conditional jumps are easier to predict when they are tied back to the instruction that last set the relevant flags."
 				},
 				{
 					title: "Loop Construction and State Tracing",
@@ -317,7 +317,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Project: Array Sum and Search Routines",
 					content:
-						"Use the array lab to connect loops, comparisons, pointer stepping, and return values. Skill target: Explain exactly how each pass through the loop changes the accumulator or search result and what causes the branch to continue or exit.",
+						"The array lab connects loops, comparisons, pointer stepping, and return values in one traceable routine. Each pass through the loop should make the accumulator or search result clearer, and the branch condition should explain exactly why the loop continues or exits.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM2-Array-Sum-and-Search/starter",
 					solutionLink:
@@ -368,7 +368,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "call, ret, and Return Addresses",
 					content:
-						"This section covers `call` and `ret` as stack operations as well as control-flow operations. Key idea: The return address becomes data on the stack, which is why call depth, frame layout, and corruption bugs become visible in assembly."
+						"`call` and `ret` are stack operations as well as control-flow operations. A call places the return address on the stack, so call depth, frame layout, and corruption bugs become visible as concrete data movement rather than abstract function behavior."
 				},
 				{
 					title: "Stack Frames and Local Storage",
@@ -443,7 +443,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Parameter Passing and Return Values",
 					content:
-						"This section covers the System V AMD64 calling convention directly: which registers carry the first arguments, where integer return values come back, and when values spill to the stack. Skill target: Predict the first few arguments before stepping a call."
+						"The System V AMD64 calling convention defines where the first arguments live, where integer return values come back, and when extra values spill to the stack. Before stepping through a call, the expected argument registers and return register should already be predictable."
 				},
 				{
 					title: "Caller-Saved versus Callee-Saved Registers",
@@ -509,7 +509,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Base Plus Index Plus Scale Addressing",
 					content:
-						"This section covers complex addressing as a readable formula instead of a scary syntax form. Skill target: Decode base register, scaled index, and displacement into a clear statement like 'array base plus element index times element size plus field offset.'"
+						"Complex addressing is a readable formula, not a syntax trick. Decode the base register, scaled index, and displacement into a statement such as 'array base plus element index times element size plus field offset,' then verify that the resulting address matches the data being loaded or stored."
 				},
 				{
 					title: "Arrays, Strings, and Sequential Memory Walks",
@@ -524,7 +524,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Project: String Length and Copy Routines",
 					content:
-						"Use the string lab to make pointer walking, null termination, and capacity-aware copying visible instruction by instruction. Skill target: Justify every load, store, and branch in terms of address movement and buffer boundaries.",
+						"The string lab makes pointer walking, null termination, and capacity-aware copying visible one instruction at a time. Every load, store, and branch should be justified in terms of address movement, byte values, and buffer boundaries.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM3-String-Length-and-Copy/starter",
 					solutionLink:
@@ -577,7 +577,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Minimal Linux Syscall Examples",
 					content:
-						"This section covers direct syscalls as the lowest visible interface between user-space code and the kernel, even if the active classroom build sometimes uses a libc-backed harness for portability. Key idea: The idea of putting a syscall number and arguments in the right registers and then interpreting the return value as success or failure."
+						"Direct syscalls expose the lowest visible interface between user-space code and the kernel, even when the classroom build sometimes uses a libc-backed harness for portability. The central pattern is putting the syscall number and arguments in the required registers, executing the boundary-crossing instruction, and interpreting the return value as success or failure."
 				},
 				{
 					title: "libc versus Direct Syscalls",
@@ -720,7 +720,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Step Instructions, Not Just Source Lines",
 					content:
-						"This section covers stepping by instruction so the smallest meaningful debugging unit becomes a machine instruction rather than a line of source. Watch how one compare, one move, or one conditional jump changes the machine state before the next instruction runs."
+						"Instruction-level debugging treats a single machine instruction as the smallest meaningful step. One compare, move, load, store, or conditional jump can change the state that the next instruction depends on, so the trace should explain the machine state before and after each step."
 				},
 				{
 					title: "Watching Registers and Memory Together",
@@ -730,7 +730,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Breakpoints on Functions and Addresses",
 					content:
-						"This section covers symbolic breakpoints and raw address breakpoints for both source-friendly code and stripped-down instruction sequences. This is especially useful once optimization or reverse-engineering exercises make source-line stepping less reliable."
+						"Symbolic breakpoints and raw address breakpoints both matter: symbols are convenient when source context exists, while address breakpoints still work for stripped-down instruction sequences. This becomes especially useful once optimization or reverse-engineering exercises make source-line stepping unreliable."
 				},
 				{
 					title: "Instruction-Level Debug Pass on an Existing Lab",
@@ -795,7 +795,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Branch Cost and Predictability",
 					content:
-						"Branches can be performance costs, but the goal is not premature micro-optimization. Key idea: at a high level, predictable straight-line code often behaves differently from branch-heavy code even when the instruction count looks similar on paper."
+						"Branches can affect performance, but this unit is about evidence rather than premature micro-optimization. Predictable straight-line code often behaves differently from branch-heavy code even when the instruction count looks similar on paper, so measurements and traces matter more than guesses."
 				},
 				{
 					title: "Memory Locality and Access Patterns",
@@ -870,7 +870,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Stack Canaries, PIE, and Binary Hardening Signals",
 					content:
-						"This section covers stack canaries, PIE, and related hardening features as visible patterns around familiar function, call, and process-layout code. The point is not exhaustive exploit mitigation coverage; it is recognizing how security features show up around functions, calls, and process layout."
+						"Stack canaries, PIE, and related hardening features appear as visible patterns around familiar function, call, and process-layout code. This is not exhaustive exploit-mitigation coverage; the useful skill is recognizing how security features show up in ordinary disassembly and runtime layout evidence."
 				},
 				{
 					title: "How Assembly Explains Low-Level Bugs",

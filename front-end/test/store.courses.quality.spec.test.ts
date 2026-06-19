@@ -4475,4 +4475,23 @@ describe("course text quality normalization", () => {
 		expect(studioItem?.content).toMatch(/authorization|authorized/i);
 		expect(studioItem?.content).toMatch(/local (lab|evidence|target)/i);
 	});
+
+	it("keeps Assembly guidance concrete and architecture-specific", async () => {
+		const course = await loadRawCourse("assembly");
+		expect(course).not.toBeNull();
+
+		const corpus = allCourseText(course);
+		expect(corpus).not.toMatch(/This section covers/i);
+		expect(corpus).not.toMatch(/Key idea:/i);
+		expect(corpus).not.toMatch(/Skill target:/i);
+		expect(corpus).toContain(
+			"The assembly pipeline is an artifact flow: source becomes object code"
+		);
+		expect(corpus).toContain(
+			"The System V AMD64 calling convention defines where the first arguments live"
+		);
+		expect(corpus).toContain(
+			"Instruction-level debugging treats a single machine instruction as the smallest meaningful step."
+		);
+	});
 });
