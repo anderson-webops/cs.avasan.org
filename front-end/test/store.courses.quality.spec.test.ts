@@ -3445,6 +3445,15 @@ describe("course text quality normalization", () => {
 				/\b(?:the|The) [^\n.]{1,120}? (?:project|program|activity|task|exercise) (?:project|program|activity|task|exercise)\b/i
 			);
 			expect(corpus).not.toMatch(/\bwhich the [^\n.]{1,120}? values\b/i);
+			expect(corpus).not.toMatch(
+				/\b(?:Explain|Note|Record|Identify) which the\b/i
+			);
+			expect(corpus).not.toMatch(
+				/\beach the [^\n.]{1,120}? Java type\b/i
+			);
+			expect(corpus).not.toMatch(
+				/\bChoose a narrow responsibility for each the\b/i
+			);
 			expect(corpus).not.toMatch(/\bThe signature project should\b/i);
 			expect(corpus).not.toMatch(/\bThe final artifact should\b/i);
 			expect(corpus).not.toMatch(

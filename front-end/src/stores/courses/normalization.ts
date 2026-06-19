@@ -5492,10 +5492,18 @@ function compactGeneratedProjectSupport(
 			)
 			.replace(
 				new RegExp(
-					`\\beach the (${supportReferenceCleanupNames}) Java type\\b`,
+					`\\beach the (?:${supportReferenceCleanupNames}) Java type\\b`,
 					"g"
 				),
-				"each Java type in the $1"
+				"each Java type"
+			)
+			.replace(
+				new RegExp(`\\beach ${escapedReference} Java type\\b`, "g"),
+				"each Java type"
+			)
+			.replace(
+				new RegExp(`\\beach ${escapedBareReference} Java type\\b`, "g"),
+				"each Java type"
 			)
 			.replace(
 				new RegExp(
@@ -5503,6 +5511,20 @@ function compactGeneratedProjectSupport(
 					"g"
 				),
 				"which $1 $2"
+			)
+			.replace(
+				new RegExp(
+					`\\bwhich ${escapedReference} (Swift|SwiftUI|Xcode|signing|simulator|trace|score|comparison|visualization|command|diagnostic|representation detail|assumption|recursive or iterative branch|statement|method|constructor|array access|list call|class relationship)\\b`,
+					"g"
+				),
+				"which $1"
+			)
+			.replace(
+				new RegExp(
+					`\\bwhich ${escapedBareReference} (Swift|SwiftUI|Xcode|signing|simulator|trace|score|comparison|visualization|command|diagnostic|representation detail|assumption|recursive or iterative branch|statement|method|constructor|array access|list call|class relationship)\\b`,
+					"g"
+				),
+				"which $1"
 			)
 			.replace(
 				new RegExp(

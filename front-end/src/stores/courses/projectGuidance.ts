@@ -468,10 +468,29 @@ function compactGuidanceBody(
 		)
 		.replace(
 			new RegExp(
-				`\\beach the (${cleanupReferenceNames}) Java type\\b`,
+				`\\beach the (?:${cleanupReferenceNames}) Java type\\b`,
 				"g"
 			),
-			"each Java type in the $1"
+			"each Java type"
+		)
+		.replace(
+			new RegExp(`\\beach ${escapedReference} Java type\\b`, "g"),
+			"each Java type"
+		)
+		.replace(
+			new RegExp(`\\beach ${escapedBareReference} Java type\\b`, "g"),
+			"each Java type"
+		)
+		.replace(
+			new RegExp(`\\beach ${escapedScopedReference} Java type\\b`, "g"),
+			"each Java type"
+		)
+		.replace(
+			new RegExp(
+				`\\beach ${escapedBareScopedReference} Java type\\b`,
+				"g"
+			),
+			"each Java type"
 		)
 		.replace(
 			new RegExp(
@@ -503,12 +522,40 @@ function compactGuidanceBody(
 			"which values"
 		)
 		.replace(
+			new RegExp(
+				`\\bwhich ${escapedReference} (Swift|SwiftUI|Xcode|signing|simulator|trace|score|comparison|visualization|command|diagnostic|representation detail|assumption|recursive or iterative branch|statement|method|constructor|array access|list call|class relationship)\\b`,
+				"g"
+			),
+			"which $1"
+		)
+		.replace(
+			new RegExp(
+				`\\bwhich ${escapedBareReference} (Swift|SwiftUI|Xcode|signing|simulator|trace|score|comparison|visualization|command|diagnostic|representation detail|assumption|recursive or iterative branch|statement|method|constructor|array access|list call|class relationship)\\b`,
+				"g"
+			),
+			"which $1"
+		)
+		.replace(
 			new RegExp(`\\bwhich ${escapedScopedReference} values\\b`, "g"),
 			"which values"
 		)
 		.replace(
 			new RegExp(`\\bwhich ${escapedBareScopedReference} values\\b`, "g"),
 			"which values"
+		)
+		.replace(
+			new RegExp(
+				`\\bwhich ${escapedScopedReference} (Swift|SwiftUI|Xcode|signing|simulator|trace|score|comparison|visualization|command|diagnostic|representation detail|assumption|recursive or iterative branch|statement|method|constructor|array access|list call|class relationship)\\b`,
+				"g"
+			),
+			"which $1"
+		)
+		.replace(
+			new RegExp(
+				`\\bwhich ${escapedBareScopedReference} (Swift|SwiftUI|Xcode|signing|simulator|trace|score|comparison|visualization|command|diagnostic|representation detail|assumption|recursive or iterative branch|statement|method|constructor|array access|list call|class relationship)\\b`,
+				"g"
+			),
+			"which $1"
 		)
 		.replace(
 			new RegExp(
@@ -637,6 +684,7 @@ function compactGuidanceBody(
 			new RegExp(`\\bthe ${escapedScopedReference}\\b`, "g"),
 			scopedReference
 		)
+		.replace(/\beach the [^.!?\n]{1,160}? Java type\b/g, "each Java type")
 		.replace(new RegExp(`\\b(${cleanupReferenceNames}) \\1\\b`, "gi"), "$1")
 		.replace(/\b([A-Z][A-Z-]{3,})\s+\1\b/gi, "$1")
 		.replace(/\b(the final|The final|the closing|The closing) the\b/g, "$1")
