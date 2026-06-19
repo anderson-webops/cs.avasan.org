@@ -317,6 +317,7 @@ const maxImportedBinaryFileBytes = 2 * 1024 * 1024;
 const maxOutputLines = 500;
 const maxOutputTextLength = 12000;
 const turtleInstantStepMaxDurationMs = 16;
+const turtleInstantStepMaxDistance = 2;
 const turtleInstantFrameDistanceBudget = 12;
 const turtleInstantFrameStepBudget = 24;
 const outputEntryTruncatedMessage =
@@ -1859,7 +1860,7 @@ function runTurtleAnimationFrame(timestamp: number) {
 function isInstantTurtleAnimationStep(step: TurtleAnimationStep) {
 	return (
 		step.durationMs <= turtleInstantStepMaxDurationMs &&
-		turtleAnimationStepDistance(step) === 0
+		turtleAnimationStepDistance(step) <= turtleInstantStepMaxDistance
 	);
 }
 

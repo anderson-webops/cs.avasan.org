@@ -8,6 +8,9 @@ const PYTHON_IMPORT_KEYWORD = "import";
 const PYTHON_IMPORT_SEPARATOR_RE = /\s*,\s*/;
 const PYTHON_IMPORT_ALIAS_RE = /\s+as\s+/i;
 const PYTHON_MODULE_SEPARATOR_RE = /\./;
+const PYTHON_TRIPLE_QUOTE_DELIMITERS = ['"""', "'''"] as const;
+type PythonTripleQuoteDelimiter =
+	(typeof PYTHON_TRIPLE_QUOTE_DELIMITERS)[number];
 
 function isPythonFileName(value: string) {
 	return PYTHON_EXTENSION_RE.test(value);
@@ -40,16 +43,64 @@ function importedTopLevelModulesFromLine(line: string) {
 		.filter(moduleName => PYTHON_IDENTIFIER_RE.test(moduleName));
 }
 
+function nextTripleQuoteDelimiter(
+	line: string,
+	activeDelimiter: PythonTripleQuoteDelimiter | null
+) {
+	let delimiter = activeDelimiter;
+	let offset = 0;
+	const codeBeforeComment = line.split("#")[0] ?? "";
+
+	while (offset < codeBeforeComment.length) {
+		if (delimiter) {
+			const closingIndex = codeBeforeComment.indexOf(delimiter, offset);
+			if (closingIndex === -1) return delimiter;
+			offset = closingIndex + delimiter.length;
+			delimiter = null;
+			continue;
+		}
+
+		let nextIndex = -1;
+		let nextDelimiter: PythonTripleQuoteDelimiter | null = null;
+		for (const candidate of PYTHON_TRIPLE_QUOTE_DELIMITERS) {
+			const candidateIndex = codeBeforeComment.indexOf(candidate, offset);
+			if (
+				candidateIndex !== -1 &&
+				(nextIndex === -1 || candidateIndex < nextIndex)
+			) {
+				nextIndex = candidateIndex;
+				nextDelimiter = candidate;
+			}
+		}
+		if (!nextDelimiter) return null;
+
+		delimiter = nextDelimiter;
+		offset = nextIndex + nextDelimiter.length;
+	}
+
+	return delimiter;
+}
+
 export function pythonIdeImportedTopLevelModules(files: PythonIdeFile[]) {
 	const modules = new Set<string>();
+	let activeMultilineStringDelimiter: PythonTripleQuoteDelimiter | null =
+		null;
 
 	for (const line of files
 		.filter(file => isPythonFileName(file.name))
 		.map(file => file.content)
 		.join("\n")
 		.split("\n")) {
-		for (const moduleName of importedTopLevelModulesFromLine(line))
-			modules.add(moduleName);
+		const startsInsideMultilineString =
+			activeMultilineStringDelimiter !== null;
+		activeMultilineStringDelimiter = nextTripleQuoteDelimiter(
+			line,
+			activeMultilineStringDelimiter
+		);
+		if (!startsInsideMultilineString) {
+			for (const moduleName of importedTopLevelModulesFromLine(line))
+				modules.add(moduleName);
+		}
 	}
 
 	return modules;

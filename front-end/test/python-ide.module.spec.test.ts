@@ -508,7 +508,7 @@ describe("python IDE project helpers", () => {
 			"? { x: markerPose.x, y: markerPose.y }"
 		);
 		expect(pageSource).toContain(
-			"turtleAnimationStepDistance(step) === 0"
+			"turtleAnimationStepDistance(step) <= turtleInstantStepMaxDistance"
 		);
 		expect(pageSource).not.toContain(
 			"return step.durationMs <= turtleInstantStepMaxDurationMs;"
@@ -663,12 +663,16 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain(
 			"const turtleInstantStepMaxDurationMs = 16"
 		);
+		expect(pageSource).toContain("const turtleInstantStepMaxDistance = 2");
 		expect(pageSource).toContain(
 			"const turtleInstantFrameDistanceBudget = 12"
 		);
 		expect(pageSource).toContain("const turtleInstantFrameStepBudget = 24");
 		expect(pageSource).toContain(
 			"step.durationMs <= turtleInstantStepMaxDurationMs"
+		);
+		expect(pageSource).toContain(
+			"turtleAnimationStepDistance(step) <= turtleInstantStepMaxDistance"
 		);
 		expect(pageSource).toContain("let turtleVisiblePose");
 		expect(pageSource).toContain("function setTurtleVisiblePose");
@@ -1074,7 +1078,12 @@ describe("python IDE project helpers", () => {
 						"import os, numpy as np, pandas.io",
 						"from sklearn.model_selection import train_test_split",
 						"from .local import helper",
-						"import invalid-name, altair # keep the valid item after a comma"
+						"import invalid-name, altair # keep the valid item after a comma",
+						'"""',
+						"import tensorflow",
+						"from keras import Sequential",
+						'"""',
+						"import csv # a comment with \"\"\" should not open a string"
 					].join("\n")
 				},
 				{
@@ -1082,7 +1091,7 @@ describe("python IDE project helpers", () => {
 					content: "import should_not_count"
 				}
 			])
-		]).toEqual(["os", "numpy", "pandas", "sklearn", "altair"]);
+		]).toEqual(["os", "numpy", "pandas", "sklearn", "altair", "csv"]);
 	});
 
 	it("normalizes local Python project module names for fresh imports", () => {
