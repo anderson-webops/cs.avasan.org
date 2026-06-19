@@ -2661,10 +2661,7 @@ function subjectFocus(context: CourseTextContext) {
 		);
 	}
 	if (isScratchSource(source)) {
-		return topicScopedFocus(
-			context,
-			"Scratch game design: sprites, event blocks, broadcasts, variables, costumes or backdrops, loops, and playable feedback"
-		);
+		return topicScopedFocus(context, scratchDesignFocus(context));
 	}
 	if (/swift|xcode|testflight|app store|simulator|bundle id/.test(source)) {
 		return topicScopedFocus(
@@ -2779,6 +2776,21 @@ function subjectFocus(context: CourseTextContext) {
 		context,
 		"the module's core concept, a concrete worked example, and a testable artifact"
 	);
+}
+
+function scratchDesignFocus(context: CourseTextContext) {
+	return variantPrompt(context, [
+		() =>
+			"Scratch game design: sprites, event blocks, broadcasts, variables, costumes or backdrops, loops, and playable feedback",
+		() =>
+			"Scratch game design: green-flag setup, sprite state, loops, sensing, reset behavior, and visible feedback",
+		() =>
+			"Scratch game design: player actions, block sequences, costume or backdrop changes, and clear stage feedback",
+		() =>
+			"Scratch game design: event flow, variables, collision or timing logic, and a visible progress or goal signal",
+		() =>
+			"Scratch game design: sprite responsibilities, control events, state updates, and a playable result that can be tested"
+	]);
 }
 
 function isMathContext(context: CourseTextContext) {
@@ -4920,7 +4932,7 @@ function projectSupportFocus(context: CourseTextContext) {
 	}
 
 	if (isScratchSource(source)) {
-		return "Scratch game design: sprites, event blocks, broadcasts, variables, costumes or backdrops, loops, and playable feedback";
+		return scratchDesignFocus(context);
 	}
 
 	return subjectFocus(context);
@@ -5764,7 +5776,7 @@ function scienceSupport(context: CourseTextContext) {
 		subject =>
 			`${subject} can be completed with a notebook, pencil, and shared digital resources focused on ${topic}. If the ${band} example about ${topic} uses a physical demonstration, the required investigation still comes from data, diagrams, models, or simulations.`,
 		subject =>
-			`${subject} relies on accessible remote evidence: ${evidenceFormat}. If an optional observation is used, it stays simple and must be replaceable by the same evidence source named in the activity.`
+			`${subject} relies on accessible remote evidence: ${evidenceFormat}. For ${subject}, any optional observation stays simple and must be replaceable by the same evidence source named in the activity.`
 	]);
 	const output = variantPrompt(context, [
 		subject =>
@@ -5778,7 +5790,7 @@ function scienceSupport(context: CourseTextContext) {
 	]);
 	const scienceExplanation = variantPrompt(context, [
 		subject =>
-			`Anchor ${subject} in ${topic}. Start with the evidence record, add the model annotation, and finish by explaining what the model accounts for and what it leaves out.`,
+			`Anchor ${subject} in ${topic}. In ${subject}, begin with the evidence record, add the model annotation, and finish by explaining what the model accounts for and what it leaves out.`,
 		subject =>
 			`Use ${subject} to connect the phenomenon, evidence source, model, and vocabulary for ${topic} before writing the final claim.`,
 		subject =>

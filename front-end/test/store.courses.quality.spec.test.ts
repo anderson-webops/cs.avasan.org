@@ -751,10 +751,18 @@ describe("course text quality normalization", () => {
 			loadRawCourse("scratch-level-2")
 		]);
 		const corpus = courses.map(allCourseText).join("\n");
+		const legacyScratchFocusCount =
+			corpus.match(
+				/\*\*Focus:\*\* Scratch game design: sprites, event blocks, broadcasts, variables, costumes or backdrops, loops, and playable feedback\./g
+			)?.length ?? 0;
 
 		expect(corpus).toContain("Scratch game design");
+		expect(corpus).toContain("green-flag setup");
+		expect(corpus).toContain("player actions");
+		expect(corpus).toContain("sprite responsibilities");
 		expect(corpus).toContain("green-flag state");
 		expect(corpus).toContain("event or state logic");
+		expect(legacyScratchFocusCount).toBeLessThan(25);
 		expect(corpus).not.toMatch(
 			/module's core concept, a concrete worked example, and a testable artifact/i
 		);
@@ -3896,7 +3904,13 @@ describe("course text quality normalization", () => {
 				"Any hands-on observation must be safe, simple, optional, and replaceable with an equivalent source."
 			);
 			expect(corpus).not.toContain(
+				"If an optional observation is used, it stays simple and must be replaceable by the same evidence source named in the activity."
+			);
+			expect(corpus).not.toContain(
 				"Record observations first, then build or annotate a model, and only then write the explanation."
+			);
+			expect(corpus).not.toContain(
+				"Begin with the evidence record, add the model annotation, and finish by explaining what the model accounts for and what it leaves out."
 			);
 			expect(corpus).not.toContain(
 				"uses shared-screen materials, notes, paper, pencil, and"
