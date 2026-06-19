@@ -13,7 +13,7 @@ import {
 
 const PROJECT_ROOT = "/home/pyodide/classes_project";
 const PYTHON_IDE_RUNTIME_BOOTSTRAP_VERSION =
-	"2026-06-18-name-mangling-cache-bust";
+	"2026-06-19-stale-import-hook-reset";
 const PYTHON_EXTENSION_RE = /\.py$/i;
 const FROM_IMPORT_MODULE_RE =
 	/^from\s+([A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)\s+import\b/;
@@ -403,6 +403,11 @@ function escapePythonString(value: string) {
 function createInputBootstrap(inputText: string, mode: PythonIdeMode) {
 	const inputLines = inputText.replaceAll("\r\n", "\n").split("\n");
 	return `
+import sys as __classes_sys
+__classes_sys.meta_path[:] = [
+    __classes_finder for __classes_finder in __classes_sys.meta_path
+    if not getattr(__classes_finder, "__classes_python_ide_project_finder__", False)
+]
 import ast
 import builtins
 import importlib.abc
@@ -422,6 +427,7 @@ __classes_reserved_import_roots = set(
 _classes_project_root = __classes_project_root
 _classes_project_root_resolved = __classes_project_root_resolved
 _classes_reserved_import_roots = __classes_reserved_import_roots
+_ClassesProjectImportFinder__classes_reserved_import_roots = _classes_reserved_import_roots
 __classes_loop_iterations = {"for": 0, "while": 0}
 __classes_loop_iteration_limits = {
     "for": ${FOR_LOOP_ITERATION_LIMIT},
@@ -478,6 +484,7 @@ __classes_turtle_animation_call_names = {
     "write",
 }
 _classes_turtle_animation_call_names = __classes_turtle_animation_call_names
+_ClassesLoopGuardTransformer__classes_turtle_animation_call_names = _classes_turtle_animation_call_names
 
 def __classes_input(prompt=""):
     print(prompt, end="")

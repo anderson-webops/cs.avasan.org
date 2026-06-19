@@ -511,6 +511,9 @@ describe("python IDE project helpers", () => {
 			"const PYTHON_IDE_RUNTIME_BOOTSTRAP_VERSION"
 		);
 		expect(runtimeSource).toContain("__classes_runtime_bootstrap_version");
+		expect(runtimeSource).toContain(
+			"2026-06-19-stale-import-hook-reset"
+		);
 		expect(runtimeSource).toContain("const WHILE_LOOP_ITERATION_LIMIT");
 		expect(runtimeSource).toContain(
 			"const TURTLE_COOPERATIVE_WHILE_LOOP_ITERATION_LIMIT"
@@ -775,7 +778,13 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("__classes_project_root =");
 		expect(runtimeSource).toContain("__classes_reserved_import_roots");
 		expect(runtimeSource).toContain(
+			"if not getattr(__classes_finder, \"__classes_python_ide_project_finder__\", False)"
+		);
+		expect(runtimeSource).toContain(
 			"_classes_reserved_import_roots = __classes_reserved_import_roots"
+		);
+		expect(runtimeSource).toContain(
+			"_ClassesProjectImportFinder__classes_reserved_import_roots = _classes_reserved_import_roots"
 		);
 		expect(runtimeSource).toContain(
 			"root_name in _classes_reserved_import_roots"
@@ -838,6 +847,9 @@ describe("python IDE project helpers", () => {
 
 		expect(loopClassSource).toContain(
 			"_classes_turtle_animation_call_names"
+		);
+		expect(runtimeSource).toContain(
+			"_ClassesLoopGuardTransformer__classes_turtle_animation_call_names = _classes_turtle_animation_call_names"
 		);
 		expect(loopClassSource).not.toContain(
 			"__classes_turtle_animation_call_names"
