@@ -111,6 +111,32 @@ describe("python IDE CodeMirror editor", () => {
 		expect(pageSource).not.toContain("handleCodeEditorKeyDown");
 	});
 
+	it("preserves CodeMirror cursor and scroll state per IDE file", () => {
+		const pageSource = sourceFile(
+			"../src/components/PythonIdeWorkspace.vue"
+		);
+		const resetStart = pageSource.indexOf("async function resetCodeEditor");
+		const resetSource = pageSource.slice(
+			resetStart,
+			pageSource.indexOf("function syncCodeEditorContent", resetStart)
+		);
+
+		expect(pageSource).toContain(
+			"const codeEditorViewStates = new Map<string, CodeEditorViewState>();"
+		);
+		expect(pageSource).toContain("let activeCodeEditorViewStateKey");
+		expect(pageSource).toContain("function saveCodeEditorViewState");
+		expect(pageSource).toContain("function restoreCodeEditorViewState");
+		expect(pageSource).toContain("codeEditorView.scrollDOM.scrollTop");
+		expect(pageSource).toContain("view.scrollDOM.scrollTop = state.scrollTop");
+		expect(pageSource).toContain("clampCodeEditorPosition");
+		expect(pageSource).toContain('import("@codemirror/state")');
+		expect(resetSource).toContain("saveCodeEditorViewState();");
+		expect(resetSource).toContain("codeEditorView?.destroy();");
+		expect(resetSource).toContain("const viewStateKey = codeEditorViewStateKey();");
+		expect(resetSource).toContain("restoreCodeEditorViewState(");
+	});
+
 	it("enables Python parsing and typical IDE editing behavior", () => {
 		const editorSource = sourceFile("../src/modules/pythonCodeMirror.ts");
 		const pageSource = sourceFile(

@@ -62,6 +62,7 @@ import { useAppStore } from "@/stores/app";
 
 type PythonCodeEditorModules = [
 	typeof import("@codemirror/view"),
+	typeof import("@codemirror/state"),
 	typeof import("@/modules/pythonCodeMirror")
 ];
 type PythonRuntimeModule = typeof import("@/modules/pythonIdeRuntime");
@@ -166,6 +167,13 @@ interface TurtleAnimationStep {
 	durationMs: number;
 	fromPose: TurtlePose;
 	toPose: TurtlePose;
+}
+
+interface CodeEditorViewState {
+	mainIndex: number;
+	ranges: Array<{ anchor: number; head: number }>;
+	scrollLeft: number;
+	scrollTop: number;
 }
 
 interface GameCanvasState {
@@ -325,6 +333,7 @@ const maxOutputTextLength = 12000;
 const maxRuntimeArtifacts = 12;
 const maxRuntimeArtifactTextLength = 500000;
 const maxRuntimeArtifactBase64Length = 1500000;
+const maxCodeEditorViewStates = 120;
 const turtleInstantStepMaxDurationMs = 16;
 const turtleInstantStepMaxDistance = 2;
 const turtleInstantFrameDistanceBudget = 12;
@@ -457,6 +466,7 @@ const gameEvents: GameInputEvent[] = [];
 const gameImageCache = new Map<string, CachedGameImage>();
 const gameSoundAudio = new Map<string, Set<HTMLAudioElement>>();
 const gameToneAudio = new Map<number, GameToneHandle>();
+const codeEditorViewStates = new Map<string, CodeEditorViewState>();
 
 let saveTimer: ReturnType<typeof window.setTimeout> | null = null;
 let saveInFlight: Promise<void> | null = null;
@@ -491,10 +501,12 @@ let turtleVisiblePose: TurtlePose | null = null;
 let codeEditorModulesPromise: Promise<PythonCodeEditorModules> | null = null;
 let pythonRuntimeModulePromise: Promise<PythonRuntimeModule> | null = null;
 let codeEditorResetToken = 0;
+let activeCodeEditorViewStateKey = "";
 
 function loadPythonCodeEditorModules() {
 	codeEditorModulesPromise ??= Promise.all([
 		import("@codemirror/view"),
+		import("@codemirror/state"),
 		import("@/modules/pythonCodeMirror")
 	]);
 	return codeEditorModulesPromise;
@@ -781,7 +793,7 @@ async function markPythonRuntimeErrorInEditor(
 	);
 	if (!lineNumber || !codeEditorView) return;
 
-	const [, codeMirrorModule] = await loadPythonCodeEditorModules();
+	const [, , codeMirrorModule] = await loadPythonCodeEditorModules();
 	if (!codeEditorView || activeFile.value?.name !== activeFileName) return;
 
 	const diagnostic = codeMirrorModule.pythonRuntimeDiagnosticForLine(
@@ -799,7 +811,7 @@ async function markPythonRuntimeErrorInEditor(
 function clearPythonRuntimeDiagnosticInEditor() {
 	if (!codeEditorView || !codeEditorModulesPromise) return;
 
-	void codeEditorModulesPromise.then(([, codeMirrorModule]) => {
+	void codeEditorModulesPromise.then(([, , codeMirrorModule]) => {
 		codeEditorView?.dispatch({
 			effects: codeMirrorModule.pythonRuntimeDiagnosticEffect.of(null)
 		});
@@ -1236,22 +1248,96 @@ function updateProjectTitle(event: Event) {
 	scheduleSave();
 }
 
+function codeEditorViewStateKey() {
+	const projectID = selectedProject.value?._id;
+	const fileName = activeFile.value?.name;
+	return projectID && fileName ? `${projectID}:${fileName}` : "";
+}
+
+function saveCodeEditorViewState() {
+	if (!codeEditorView || !activeCodeEditorViewStateKey) return;
+
+	const { selection } = codeEditorView.state;
+	codeEditorViewStates.set(activeCodeEditorViewStateKey, {
+		mainIndex: selection.mainIndex,
+		ranges: selection.ranges.map(range => ({
+			anchor: range.anchor,
+			head: range.head
+		})),
+		scrollLeft: codeEditorView.scrollDOM.scrollLeft,
+		scrollTop: codeEditorView.scrollDOM.scrollTop
+	});
+
+	if (codeEditorViewStates.size <= maxCodeEditorViewStates) return;
+	const oldestKey = codeEditorViewStates.keys().next().value;
+	if (oldestKey) codeEditorViewStates.delete(oldestKey);
+}
+
+function clampCodeEditorPosition(position: number, docLength: number) {
+	return Math.max(0, Math.min(docLength, position));
+}
+
+function restoreCodeEditorViewState(
+	view: CodeEditorView,
+	editorSelection: typeof import("@codemirror/state").EditorSelection,
+	viewStateKey: string
+) {
+	const state = codeEditorViewStates.get(viewStateKey);
+	if (!state) return;
+
+	const docLength = view.state.doc.length;
+	const ranges = state.ranges.length
+		? state.ranges.map(range => {
+				const anchor = clampCodeEditorPosition(range.anchor, docLength);
+				const head = clampCodeEditorPosition(range.head, docLength);
+				return anchor === head
+					? editorSelection.cursor(anchor)
+					: editorSelection.range(anchor, head);
+			})
+		: [editorSelection.cursor(0)];
+
+	view.dispatch({
+		selection: editorSelection.create(
+			ranges,
+			Math.min(state.mainIndex, ranges.length - 1)
+		),
+		scrollIntoView: true
+	});
+
+	requestAnimationFrame(() => {
+		if (
+			codeEditorView !== view ||
+			activeCodeEditorViewStateKey !== viewStateKey
+		) {
+			return;
+		}
+		view.scrollDOM.scrollLeft = state.scrollLeft;
+		view.scrollDOM.scrollTop = state.scrollTop;
+	});
+}
+
 async function resetCodeEditor() {
 	const resetToken = ++codeEditorResetToken;
+	saveCodeEditorViewState();
 	codeEditorView?.destroy();
 	codeEditorView = null;
+	activeCodeEditorViewStateKey = "";
 	editorCursorCount.value = 1;
 
 	const host = codeEditorHostRef.value;
 	if (!host || activeFileIsBinaryAsset.value) return;
 
 	host.textContent = "";
-	const [{ EditorView }, { createPythonCodeMirrorExtensions }] =
-		await loadPythonCodeEditorModules();
+	const [
+		{ EditorView },
+		{ EditorSelection },
+		{ createPythonCodeMirrorExtensions }
+	] = await loadPythonCodeEditorModules();
 	if (resetToken !== codeEditorResetToken) return;
 	if (host !== codeEditorHostRef.value || activeFileIsBinaryAsset.value)
 		return;
 
+	const viewStateKey = codeEditorViewStateKey();
 	codeEditorView = new EditorView({
 		doc: activeFileContent.value,
 		extensions: createPythonCodeMirrorExtensions({
@@ -1272,6 +1358,14 @@ async function resetCodeEditor() {
 		}),
 		parent: host
 	});
+	activeCodeEditorViewStateKey = viewStateKey;
+	if (viewStateKey) {
+		restoreCodeEditorViewState(
+			codeEditorView,
+			EditorSelection,
+			viewStateKey
+		);
+	}
 }
 
 function syncCodeEditorContent(content: string) {
@@ -3781,6 +3875,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
 	if (saveTimer) window.clearTimeout(saveTimer);
+	saveCodeEditorViewState();
 	codeEditorView?.destroy();
 	window.removeEventListener("keydown", handleKeyDown);
 	window.removeEventListener("keyup", handleKeyUp);
