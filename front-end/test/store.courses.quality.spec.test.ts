@@ -3459,6 +3459,19 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/\bprerequisite modules, project ladder, and assessment model should already be practiced\b/i
 			);
+			expect(corpus).not.toMatch(
+				/\bOne meaningful condition changes from the core version\b/i
+			);
+			expect(corpus).not.toMatch(/\bVariant focus: Transfer practice\b/i);
+			expect(corpus).not.toMatch(
+				/\bVariant focus: Extension practice\b/i
+			);
+			expect(corpus).not.toMatch(
+				/\bThe first complete version is built and verified independently\b/i
+			);
+			expect(corpus).not.toMatch(
+				/\bA concrete example establishes the (?:relevant )?vocabulary\b/i
+			);
 		},
 		COURSE_SWEEP_TIMEOUT
 	);

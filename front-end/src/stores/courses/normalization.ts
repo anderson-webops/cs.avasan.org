@@ -463,24 +463,34 @@ function normalizeGeneratedSupplementalLabels(course: RawCourse) {
 	}
 }
 
-function generatedGuidanceVariantFocus(title: string) {
-	if (/core project/i.test(title)) {
-		return "Core project work establishes the required baseline behavior first. The result should identify the main artifact, ordinary success path, and one protected boundary case before optional variants are attempted.";
+function generatedGuidanceVariantFocus(
+	course: RawCourse,
+	module: RawCourseModule,
+	item: RawCourseModuleItem
+) {
+	const subject = removeRedundantItemTitleContext(
+		course,
+		module,
+		cleanDisplayTitle(item.title)
+	);
+
+	if (/core project/i.test(item.title)) {
+		return `${subject} establishes the required baseline behavior first. The result identifies the main artifact, ordinary success path, and one protected boundary case before optional variants are attempted.`;
 	}
 
-	if (/transfer/i.test(title)) {
-		return "Transfer practice keeps the core concept intact while changing the input shape, representation, context, or constraint. The result should prove the idea works outside the first example.";
+	if (/transfer/i.test(item.title)) {
+		return `${subject} keeps the core concept intact while changing the input shape, representation, context, or constraint. The evidence shows whether the idea works outside the first example.`;
 	}
 
-	if (/extension/i.test(title)) {
-		return "Extension practice starts from the working base case, then adds a harder edge case, extra rule, design variation, or deeper explanation target. The result should show what changed and why the original reasoning still holds.";
+	if (/extension/i.test(item.title)) {
+		return `${subject} starts from the working base case, then adds a harder edge case, extra rule, design variation, or deeper explanation target. The evidence shows what changed and why the original reasoning still holds.`;
 	}
 
-	if (/challenge/i.test(title)) {
-		return "Challenge practice raises the independence bar: define the success condition, choose the verification evidence, and explain one tradeoff or failure mode that was not visible in the simpler version.";
+	if (/challenge/i.test(item.title)) {
+		return `${subject} raises the independence bar: define the success condition, choose the verification evidence, and explain one tradeoff or failure mode that was not visible in the simpler version.`;
 	}
 
-	return "Practice variant focus should name the changed condition, the new evidence required, and the reason this version is not just a copy of the previous task.";
+	return `${subject} names the changed condition, the new evidence required, and the reason this version is not just a copy of the previous task.`;
 }
 
 function distinguishDuplicateGeneratedProjectGuidance(course: RawCourse) {
@@ -514,7 +524,7 @@ function distinguishDuplicateGeneratedProjectGuidance(course: RawCourse) {
 
 				item.content = [
 					item.content.trim(),
-					`**Variant focus:** ${generatedGuidanceVariantFocus(item.title)}`
+					`**Variant focus:** ${generatedGuidanceVariantFocus(course, module, item)}`
 				].join("\n\n");
 			}
 		}
@@ -5617,13 +5627,21 @@ function lessonSupport(context: CourseTextContext) {
 	const focus = unscopedSubjectFocus(context);
 	const conceptPath = variantPrompt(context, [
 		() =>
-			`**Concept path:** The core idea is ${focus}. A concrete example establishes the vocabulary, then a nearby variation tests whether the same reasoning still works.`,
+			`**Concept path:** The core idea is ${focus}: one concrete example establishes the relevant vocabulary, then a nearby variation checks whether the same reasoning still works.`,
 		() =>
 			`**Concept path:** ${capitalizeSentence(focus)} is connected to one traceable example, one changed condition, and one explanation of what changed.`,
 		() =>
 			`**Concept path:** The main representation in ${focus} is identified first, then traced through a concrete task and checked against a variation.`,
 		() =>
-			`**Concept path:** One worked example and one transfer check show how ${focus} changes when the situation changes.`
+			`**Concept path:** One worked example and one transfer check show how ${focus} changes when the situation changes.`,
+		() =>
+			`**Concept path:** ${capitalizeSentence(focus)} starts with a named idea, follows it through one example, then checks the idea in a nearby case.`,
+		() =>
+			`**Concept path:** The first pass makes the rule or model visible for ${focus}; the second pass changes one condition to test transfer.`,
+		() =>
+			`**Concept path:** ${capitalizeSentence(focus)} is easier to use when the vocabulary, example, changed case, and evidence are separated clearly.`,
+		() =>
+			`**Concept path:** A focused example anchors ${focus}, and a controlled variation checks whether the explanation still fits.`
 	]);
 
 	return [

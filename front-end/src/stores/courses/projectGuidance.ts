@@ -40,6 +40,18 @@ function referenceVariantIndex(
 	return stableVariantIndex(seed, count);
 }
 
+function pathVariantIndex(
+	courseFamily: string,
+	moduleTitle: string,
+	itemTitle: string | undefined,
+	projectKind: ProjectGuidanceOptions["projectKind"],
+	hasReference: boolean,
+	count: number
+) {
+	const seed = `${courseFamily}|${moduleTitle}|${itemTitle ?? ""}|${projectKind}|${hasReference ? "reference" : "no-reference"}|path`;
+	return stableVariantIndex(seed, count);
+}
+
 function guidanceSubject(courseFamily: string, moduleTitle: string) {
 	return `${courseFamily} ${moduleTitle}`;
 }
@@ -2001,37 +2013,132 @@ function completionCheckSteps(
 }
 
 function projectPathNote({
+	courseFamily,
+	moduleTitle,
 	itemTitle,
 	projectKind,
 	hasReference
-}: Pick<ProjectGuidanceOptions, "itemTitle" | "projectKind" | "hasReference">) {
+}: Pick<
+	ProjectGuidanceOptions,
+	| "courseFamily"
+	| "moduleTitle"
+	| "itemTitle"
+	| "projectKind"
+	| "hasReference"
+>) {
 	const label = itemTitle?.toLowerCase() ?? "";
+	const reference = guidanceReference(courseFamily, moduleTitle);
+	const subject = guidanceModuleTitle(moduleTitle, itemTitle);
+	const index = pathVariantIndex(
+		courseFamily,
+		subject,
+		itemTitle,
+		projectKind,
+		hasReference,
+		8
+	);
 
 	if (label.includes("worked example")) {
-		return "**Path:** Model version. It exposes the setup, reasoning, expected evidence, and one common mistake before independent practice begins.";
+		return [
+			`**Path:** Model version. ${subject} exposes the setup, reasoning trace, expected evidence, and one likely mistake before independent practice begins.`,
+			`**Path:** Model version. ${subject} makes the example inspectable first: setup, key step, expected result, and one mistake to avoid.`,
+			`**Path:** Model version. ${subject} establishes the pattern before transfer work by showing the starting state, reasoning, evidence, and correction point.`,
+			`**Path:** Model version. ${subject} is the reference pattern for the module: one complete trace, one evidence check, and one common failure mode.`,
+			`**Path:** Model version. ${subject} keeps the first pass explicit so later practice can change the condition without changing the core idea.`,
+			`**Path:** Model version. ${subject} documents the example path from setup through result, including the assumption most likely to be missed.`,
+			`**Path:** Model version. ${subject} turns the new idea into a concrete trace before the same idea appears in a less familiar setting.`,
+			`**Path:** Model version. ${subject} shows what good evidence looks like before the work shifts to independent implementation.`
+		][index];
 	}
 
 	if (label.includes("transfer")) {
-		return "**Path:** Transfer version. The same core idea appears with changed data, representation, constraints, or context so the concept is not tied to the first example.";
+		return [
+			`**Path:** Transfer version. ${subject} keeps the core idea but changes the data, representation, constraint, or context so the reasoning is not tied to the first example.`,
+			`**Path:** Transfer version. ${subject} reuses the same concept in a nearby situation and records which part changed.`,
+			`**Path:** Transfer version. ${subject} changes one condition while preserving the main rule, making the difference visible in the result.`,
+			`**Path:** Transfer version. ${subject} asks whether the same reasoning still works after the input shape, model, or constraint shifts.`,
+			`**Path:** Transfer version. ${subject} compares the familiar case with a changed case before treating the idea as mastered.`,
+			`**Path:** Transfer version. ${subject} keeps the target concept stable while the surrounding details change enough to test understanding.`,
+			`**Path:** Transfer version. ${subject} turns the example into a new scenario, then identifies what carried over and what had to change.`,
+			`**Path:** Transfer version. ${subject} checks whether the module idea survives a controlled variation rather than only a copied pattern.`
+		][index];
 	}
 
 	if (label.includes("extension") || label.includes("challenge")) {
-		return "**Path:** Extension version. The working base case comes first, followed by a harder constraint, extra edge case, design variation, or deeper explanation target.";
+		return [
+			`**Path:** Extension version. ${subject} starts from a working base case, then adds a harder constraint, extra edge case, design variation, or deeper explanation target.`,
+			`**Path:** Extension version. ${subject} keeps the baseline behavior intact while one new requirement raises the difficulty.`,
+			`**Path:** Extension version. ${subject} extends the core result only after the original case has current evidence.`,
+			`**Path:** Extension version. ${subject} adds complexity in one visible place so the new behavior can still be traced.`,
+			`**Path:** Extension version. ${subject} turns a correct base case into a sturdier result by adding an edge case or design tradeoff.`,
+			`**Path:** Extension version. ${subject} raises the challenge without losing the original success condition.`,
+			`**Path:** Extension version. ${subject} adds a deliberate constraint and then checks that the earlier behavior still works.`,
+			`**Path:** Extension version. ${subject} moves from working output to more robust output by naming the new rule and verifying it.`
+		][index];
 	}
 
 	if (label.includes("review")) {
-		return "**Path:** Review check. The main idea is compressed into a short artifact, then the weakest prerequisite or misconception is verified before moving forward.";
+		return [
+			`**Path:** Review check. ${subject} compresses the main idea into a short artifact, then verifies the weakest prerequisite or misconception before moving forward.`,
+			`**Path:** Review check. ${subject} uses a small result to confirm whether the underlying vocabulary, trace, or procedure is stable.`,
+			`**Path:** Review check. ${subject} favors a compact evidence check over a large project so the next gap is easy to see.`,
+			`**Path:** Review check. ${subject} isolates the concept most likely to block later work and checks it directly.`,
+			`**Path:** Review check. ${subject} turns the module idea into a quick diagnostic before harder transfer or extension work.`,
+			`**Path:** Review check. ${subject} records whether the core skill is ready for a changed case, not only whether the first example was copied.`,
+			`**Path:** Review check. ${subject} uses a small artifact to separate recall, tracing, setup, and explanation gaps.`,
+			`**Path:** Review check. ${subject} confirms the next useful step by comparing expected behavior with observed evidence.`
+		][index];
 	}
 
 	if (projectKind === "core") {
-		return hasReference
-			? "**Path:** Core implementation. The first complete version is built and verified independently before comparison with the reference."
-			: "**Path:** Core implementation. The first complete version is verified with one normal case plus one boundary or failure case.";
+		if (hasReference) {
+			return [
+				`**Path:** Core implementation. ${subject} is built and verified independently before comparison with ${reference}.`,
+				`**Path:** Core implementation. ${subject} reaches a working local result first, then ${reference} is used to compare structure and edge handling.`,
+				`**Path:** Core implementation. ${subject} should have fresh evidence before ${reference} is opened, so comparison does not replace reasoning.`,
+				`**Path:** Core implementation. ${subject} starts with a normal path and one boundary check, then ${reference} helps identify missing cases.`,
+				`**Path:** Core implementation. ${subject} is treated as the primary solution attempt; ${reference} is a review tool after behavior is observed.`,
+				`**Path:** Core implementation. ${subject} records compile/run, output, trace, or result evidence before using ${reference} for refinement.`,
+				`**Path:** Core implementation. ${subject} is complete enough to explain before ${reference} is used as a second opinion.`,
+				`**Path:** Core implementation. ${subject} compares against ${reference} only after the local design has a checked normal case.`
+			][index];
+		}
+
+		return [
+			`**Path:** Core implementation. ${subject} is verified with one normal case plus one boundary or failure case.`,
+			`**Path:** Core implementation. ${subject} moves from the smallest working result to a checked edge case.`,
+			`**Path:** Core implementation. ${subject} records expected behavior, observed behavior, and one condition that could break it.`,
+			`**Path:** Core implementation. ${subject} keeps the first version narrow enough to test before optional polish is added.`,
+			`**Path:** Core implementation. ${subject} has a clear success condition and one awkward case that proves more than syntax.`,
+			`**Path:** Core implementation. ${subject} is checked against both the intended path and one small failure-shaped path.`,
+			`**Path:** Core implementation. ${subject} turns the module concept into an observable result with at least one edge check.`,
+			`**Path:** Core implementation. ${subject} is considered ready only after the main result and one boundary condition are both explainable.`
+		][index];
 	}
 
-	return hasReference
-		? "**Path:** Independent practice. One meaningful condition changes from the core version, and comparison with the reference happens after the evidence is recorded."
-		: "**Path:** Independent practice. One meaningful condition changes from the core version, followed by a record of what still works, what breaks, and why.";
+	if (hasReference) {
+		return [
+			`**Path:** Independent practice. ${subject} changes one meaningful condition from the core version, and comparison with ${reference} happens after the evidence is recorded.`,
+			`**Path:** Independent practice. ${subject} is solved as a new attempt first; ${reference} is used afterward to compare the changed condition.`,
+			`**Path:** Independent practice. ${subject} records what changed, what stayed stable, and how ${reference} handles the same pressure point.`,
+			`**Path:** Independent practice. ${subject} tests transfer by changing one rule before using ${reference} as a review source.`,
+			`**Path:** Independent practice. ${subject} keeps the comparison honest by collecting local evidence before opening ${reference}.`,
+			`**Path:** Independent practice. ${subject} compares with ${reference} only after the modified case has an observed result.`,
+			`**Path:** Independent practice. ${subject} uses the changed condition to expose reasoning gaps, then checks those gaps against ${reference}.`,
+			`**Path:** Independent practice. ${subject} treats ${reference} as a verification step, not as the starting point.`
+		][index];
+	}
+
+	return [
+		`**Path:** Independent practice. ${subject} changes one meaningful condition from the core version, followed by a record of what still works, what breaks, and why.`,
+		`**Path:** Independent practice. ${subject} preserves the main idea while one changed condition tests whether the reasoning transfers.`,
+		`**Path:** Independent practice. ${subject} records the baseline expectation, the changed case, and the evidence that proves the result.`,
+		`**Path:** Independent practice. ${subject} makes one controlled variation and explains the effect on the final behavior.`,
+		`**Path:** Independent practice. ${subject} keeps the work small enough to compare against the core case without copying it.`,
+		`**Path:** Independent practice. ${subject} checks what survives after the rule, input, representation, or constraint changes.`,
+		`**Path:** Independent practice. ${subject} uses one changed condition to separate memorized steps from transferable reasoning.`,
+		`**Path:** Independent practice. ${subject} ends with a short comparison between the original case and the modified case.`
+	][index];
 }
 
 export function buildProjectGuidance({
@@ -2043,7 +2150,13 @@ export function buildProjectGuidance({
 }: ProjectGuidanceOptions) {
 	const scopedModuleTitle = guidanceModuleTitle(moduleTitle, itemTitle);
 	const goal = projectGoal(courseFamily, scopedModuleTitle, projectKind);
-	const pathNote = projectPathNote({ itemTitle, projectKind, hasReference });
+	const pathNote = projectPathNote({
+		courseFamily,
+		moduleTitle,
+		itemTitle,
+		projectKind,
+		hasReference
+	});
 	const body = [
 		`**Focus:** ${focusFor(courseFamily, scopedModuleTitle, projectKind)}.`,
 		"**Required work:**",
