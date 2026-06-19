@@ -1599,6 +1599,60 @@ describe("course text quality normalization", () => {
 		expect(checkedLabs).toEqual([13, 14, 15, 16, 17]);
 	});
 
+	it("keeps Python check-in supplemental checkpoints level-specific", async () => {
+		const expectedByCourse = new Map([
+			[
+				"python-level-1",
+				[
+					"turtle movement and drawing",
+					"function decomposition",
+					"game-state updates"
+				]
+			],
+			[
+				"python-level-2",
+				[
+					"string and numeric input",
+					"choosing the right collection for a task"
+				]
+			],
+			[
+				"python-level-3",
+				[
+					"stack behavior",
+					"runtime vocabulary",
+					"file input/output"
+				]
+			]
+		]);
+		const checkpointBodies: string[] = [];
+
+		for (const [courseId, expectedPhrases] of expectedByCourse) {
+			const course = await loadRawCourse(courseId);
+			expect(course, courseId).not.toBeNull();
+			if (!course) continue;
+
+			const courseText = allCourseText(course);
+			for (const phrase of expectedPhrases) {
+				expect(courseText, `${courseId} should include ${phrase}`).toContain(
+					phrase
+				);
+			}
+
+			for (const module of course.modules.filter(module =>
+				/^Check-In #\d+$/.test(module.title)
+			)) {
+				const checkpoint = module.supplementalProjects.find(item =>
+					item.title.startsWith("Checkpoint:")
+				);
+				expect(checkpoint, `${courseId} ${module.title}`).toBeDefined();
+				if (checkpoint) checkpointBodies.push(checkpoint.content);
+			}
+		}
+
+		expect(new Set(checkpointBodies).size).toBe(checkpointBodies.length);
+	});
+
 	it("keeps systems and web implementation labs from regressing to generated filler", () => {
 		const sourcePaths = [
 			"src/stores/courses/assembly.ts",

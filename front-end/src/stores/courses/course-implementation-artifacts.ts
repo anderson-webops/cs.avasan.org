@@ -2487,7 +2487,153 @@ function fallbackSupplementalTopic(moduleTitle: string) {
 	return cleaned || moduleTitle.trim();
 }
 
-function fallbackPracticeFocus(topic: string) {
+function pythonCheckInPracticeFocus(
+	courseId: string | undefined,
+	topic: string
+) {
+	if (!courseId?.startsWith("python-level-")) return null;
+
+	const checkInMatch = topic.match(/^Check-In #(\d+)/i);
+	if (!checkInMatch) return null;
+
+	const checkInNumber = Number(checkInMatch[1]);
+	const focusByCourseAndCheckIn: Record<
+		string,
+		Record<number, { skills: string[]; transfer: string; evidence: string }>
+	> = {
+		"python-level-1": {
+			1: {
+				skills: [
+					"turtle movement and drawing",
+					"counted loops",
+					"variables",
+					"random-number use",
+					"basic conditionals"
+				],
+				transfer:
+					"change a drawing, loop count, random range, or branch condition while keeping the program readable and testable.",
+				evidence:
+					"a visible turtle result or console output plus a short explanation of the changed input or rule"
+			},
+			2: {
+				skills: [
+					"advanced loops",
+					"function decomposition",
+					"parameters",
+					"return values",
+					"event-listener behavior"
+				],
+				transfer:
+					"move repeated drawing or interaction code into a function, then adjust one parameter or event condition.",
+				evidence:
+					"a working interaction or drawing and a note naming which function owns each responsibility"
+			},
+			3: {
+				skills: [
+					"nested loops",
+					"game-state updates",
+					"compound conditionals",
+					"lists",
+					"iteration over stored values"
+				],
+				transfer:
+					"change one game rule, list operation, or nested-loop pattern and explain how the state changes.",
+				evidence:
+					"a normal play/test case, a boundary case, and a short state-change trace"
+			}
+		},
+		"python-level-2": {
+			1: {
+				skills: [
+					"variables",
+					"string and numeric input",
+					"loop control",
+					"conditionals",
+					"validation-style branches"
+				],
+				transfer:
+					"turn a direct console problem into a changed-input version with a different prompt, range, or stopping condition.",
+				evidence:
+					"sample runs showing expected input, awkward input, and the branch or loop that handled each case"
+			},
+			2: {
+				skills: [
+					"functions",
+					"lists",
+					"dictionaries",
+					"sets",
+					"choosing the right collection for a task"
+				],
+				transfer:
+					"solve the same data task with a changed collection shape or lookup requirement, then justify the representation.",
+				evidence:
+					"before-and-after data examples plus a note explaining why a list, dictionary, or set fits the operation"
+			}
+		},
+		"python-level-3": {
+			1: {
+				skills: [
+					"string helper functions",
+					"recursion",
+					"stack behavior",
+					"base cases",
+					"trace-based reasoning"
+				],
+				transfer:
+					"trace one recursive or stack-based solution, then change the input shape to expose the base case or stack order.",
+				evidence:
+					"a frame/stack trace, a normal input, a boundary input, and a statement of the stopping condition"
+			},
+			2: {
+				skills: [
+					"runtime vocabulary",
+					"linear search",
+					"binary search",
+					"selection sort",
+					"insertion sort"
+				],
+				transfer:
+					"compare two input orders or search targets and explain how the trace changes the runtime or correctness claim.",
+				evidence:
+					"step counts or intermediate arrays for normal, already-sorted, reversed, missing-target, or duplicate cases"
+			},
+			3: {
+				skills: [
+					"bubble sort",
+					"merge sort",
+					"quicksort",
+					"file input/output",
+					"algorithm choice under constraints"
+				],
+				transfer:
+					"use a file-backed or awkward dataset to compare sorting behavior, partitioning, merging, or output formatting.",
+				evidence:
+					"input-file assumptions, intermediate algorithm evidence, and an explanation of which algorithm fits the case"
+			}
+		}
+	};
+	const focus = focusByCourseAndCheckIn[courseId]?.[checkInNumber];
+	if (!focus) return null;
+
+	return {
+		goal: `check readiness in ${focus.skills.join(", ")} through a direct case and a changed case.`,
+		sequence: [
+			`Choose one small task that uses ${focus.skills.slice(0, -1).join(", ")}, and ${focus.skills.at(-1)}.`,
+			focus.transfer,
+			`Record ${focus.evidence}.`
+		],
+		checks: [
+			"The direct case runs or can be traced without copying a memorized answer.",
+			"The changed case keeps the same core skill but changes the input, rule, representation, or constraint.",
+			"The explanation names the Python idea being checked and one mistake the evidence would catch."
+		]
+	};
+}
+
+function fallbackPracticeFocus(topic: string, courseId?: string) {
+	const pythonFocus = pythonCheckInPracticeFocus(courseId, topic);
+	if (pythonFocus) return pythonFocus;
+
 	const lowerTopic = topic.toLowerCase();
 
 	if (/^check-?in|review/.test(lowerTopic)) {
@@ -2637,8 +2783,12 @@ function supplementalTransferTitle(topic: string) {
 	return "Transfer Practice";
 }
 
-function supplementalTransferContent(topic: string, next: number) {
-	const focus = fallbackPracticeFocus(topic);
+function supplementalTransferContent(
+	topic: string,
+	next: number,
+	courseId?: string
+) {
+	const focus = fallbackPracticeFocus(topic, courseId);
 	const variants = [
 		{
 			goal: `Extend ${topic} with a focused transfer task that asks for work to ${focus.goal}`,
@@ -2683,12 +2833,13 @@ ${focus.checks.map(check => `- ${check}`).join("\n")}`;
 
 function supplementalProjectFor(
 	module: RawCourseModule,
-	next: number
+	next: number,
+	courseId?: string
 ): RawCourseModuleItem {
 	const topic = fallbackSupplementalTopic(module.title);
 
 	if (next === 1) {
-		const focus = fallbackPracticeFocus(topic);
+		const focus = fallbackPracticeFocus(topic, courseId);
 
 		return {
 			title: `Checkpoint: ${topic}`,
@@ -2698,11 +2849,11 @@ function supplementalProjectFor(
 
 	return {
 		title: supplementalTransferTitle(topic),
-		content: supplementalTransferContent(topic, next)
+		content: supplementalTransferContent(topic, next, courseId)
 	};
 }
 
-function ensureSupplementalProjectFloor(course: RawCourse) {
+function ensureSupplementalProjectFloor(courseId: string, course: RawCourse) {
 	for (const module of course.modules) {
 		if (module.kind === "appendix") continue;
 
@@ -2710,7 +2861,8 @@ function ensureSupplementalProjectFloor(course: RawCourse) {
 			module.supplementalProjects.push(
 				supplementalProjectFor(
 					module,
-					module.supplementalProjects.length + 1
+					module.supplementalProjects.length + 1,
+					courseId
 				)
 			);
 		}
@@ -2745,5 +2897,5 @@ export function applyCourseImplementationArtifacts(
 	addSystemsSpecificSafetyModule(courseId, course);
 	addToolchainAssumptionsModule(courseId, course);
 	backfillReferenceSolutionLinks(courseId, course);
-	ensureSupplementalProjectFloor(course);
+	ensureSupplementalProjectFloor(courseId, course);
 }
