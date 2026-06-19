@@ -2091,13 +2091,23 @@ describe("python IDE project helpers", () => {
 			'const pythonIdeEditorViewStateStoragePrefix ='
 		);
 		expect(pageSource).toContain(
+			"const codeEditorStateSnapshots = new Map<string, CodeEditorState>();"
+		);
+		expect(pageSource).toContain(
 			"function loadPersistedCodeEditorViewStates"
 		);
 		expect(pageSource).toContain("function persistCodeEditorViewStates");
 		expect(pageSource).toContain("function isCodeEditorViewState");
+		expect(pageSource).toContain("function restoreCodeEditorScroll");
+		expect(pageSource).toContain("function deleteCodeEditorStateForFile");
+		expect(pageSource).toContain("function deleteCodeEditorStateForProject");
 		expect(pageSource).toContain(
 			'CodeEditorViewState["ranges"][number]'
 		);
+		expect(pageSource).toContain(
+			"savedState?.doc.toString() === activeFileContent.value"
+		);
+		expect(pageSource).toContain("state: restoredState");
 		expect(pageSource).toContain(
 			"loadPersistedCodeEditorViewStates(storageUserID.value);"
 		);

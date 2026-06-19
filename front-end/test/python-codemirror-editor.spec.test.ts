@@ -112,7 +112,7 @@ describe("python IDE CodeMirror editor", () => {
 		expect(pageSource).not.toContain("handleCodeEditorKeyDown");
 	});
 
-	it("preserves CodeMirror cursor and scroll state per IDE file", () => {
+	it("preserves CodeMirror state, cursor, scroll, and history per IDE file", () => {
 		const pageSource = sourceFile(
 			"../src/components/PythonIdeWorkspace.vue"
 		);
@@ -125,10 +125,17 @@ describe("python IDE CodeMirror editor", () => {
 		expect(pageSource).toContain(
 			"const codeEditorViewStates = new Map<string, CodeEditorViewState>();"
 		);
+		expect(pageSource).toContain(
+			"const codeEditorStateSnapshots = new Map<string, CodeEditorState>();"
+		);
 		expect(pageSource).toContain("let activeCodeEditorViewStateKey");
 		expect(pageSource).toContain("function saveCodeEditorViewState");
+		expect(pageSource).toContain("codeEditorStateSnapshots.set(");
 		expect(pageSource).toContain("function migrateCodeEditorViewStates");
 		expect(pageSource).toContain("function restoreCodeEditorViewState");
+		expect(pageSource).toContain("function restoreCodeEditorScroll");
+		expect(pageSource).toContain("function deleteCodeEditorStateForFile");
+		expect(pageSource).toContain("function deleteCodeEditorStateForProject");
 		expect(pageSource).toContain("codeEditorView.scrollDOM.scrollTop");
 		expect(pageSource).toContain("view.scrollDOM.scrollTop = state.scrollTop");
 		expect(pageSource).toContain("clampCodeEditorPosition");
@@ -139,6 +146,11 @@ describe("python IDE CodeMirror editor", () => {
 			"activeCodeEditorViewStateKey = nextKey;"
 		);
 		expect(pageSource).toContain('import("@codemirror/state")');
+		expect(pageSource).toContain(
+			"savedState?.doc.toString() === activeFileContent.value"
+		);
+		expect(pageSource).toContain("state: restoredState");
+		expect(pageSource).toContain("restoreCodeEditorScroll(");
 		expect(resetSource).toContain("saveCodeEditorViewState();");
 		expect(resetSource).toContain("codeEditorView?.destroy();");
 		expect(resetSource).toContain("const viewStateKey = codeEditorViewStateKey();");

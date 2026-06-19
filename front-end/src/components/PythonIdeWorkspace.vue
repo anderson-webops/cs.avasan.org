@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { EditorState as CodeEditorState } from "@codemirror/state";
 import type { EditorView as CodeEditorView } from "@codemirror/view";
 import type { PythonCodeMirrorAssetCompletionNames } from "@/modules/pythonCodeMirror";
 import type {
@@ -485,6 +486,7 @@ const gameImageCache = new Map<string, CachedGameImage>();
 const gameSoundAudio = new Map<string, Set<HTMLAudioElement>>();
 const gameToneAudio = new Map<number, GameToneHandle>();
 const codeEditorViewStates = new Map<string, CodeEditorViewState>();
+const codeEditorStateSnapshots = new Map<string, CodeEditorState>();
 
 let saveTimer: ReturnType<typeof window.setTimeout> | null = null;
 let localSnapshotTimer: ReturnType<typeof window.setTimeout> | null = null;
@@ -1574,6 +1576,7 @@ async function deleteProject(project: PythonIdeProject) {
 		projects.value = projects.value.filter(
 			candidate => candidate._id !== project._id
 		);
+		deleteCodeEditorStateForProject(project._id);
 		selectedProjectID.value = projects.value[0]?._id ?? "";
 		if (isRemoteProject) {
 			await discardLocalProjectSnapshotIfSafe();
@@ -1607,6 +1610,10 @@ function saveCodeEditorViewState() {
 	if (!codeEditorView || !activeCodeEditorViewStateKey) return;
 
 	const { selection } = codeEditorView.state;
+	codeEditorStateSnapshots.set(
+		activeCodeEditorViewStateKey,
+		codeEditorView.state
+	);
 	codeEditorViewStates.set(activeCodeEditorViewStateKey, {
 		mainIndex: selection.mainIndex,
 		ranges: selection.ranges.map(range => ({
@@ -1619,7 +1626,32 @@ function saveCodeEditorViewState() {
 
 	if (codeEditorViewStates.size > maxCodeEditorViewStates) {
 		const oldestKey = codeEditorViewStates.keys().next().value;
-		if (oldestKey) codeEditorViewStates.delete(oldestKey);
+		if (oldestKey) {
+			codeEditorViewStates.delete(oldestKey);
+			codeEditorStateSnapshots.delete(oldestKey);
+		}
+	}
+	persistCodeEditorViewStates(storageUserID.value);
+}
+
+function deleteCodeEditorStateForFile(projectID: string, fileName: string) {
+	const key = `${projectID}:${fileName}`;
+	codeEditorViewStates.delete(key);
+	codeEditorStateSnapshots.delete(key);
+	if (activeCodeEditorViewStateKey === key) activeCodeEditorViewStateKey = "";
+	persistCodeEditorViewStates(storageUserID.value);
+}
+
+function deleteCodeEditorStateForProject(projectID: string) {
+	for (const key of [
+		...codeEditorViewStates.keys(),
+		...codeEditorStateSnapshots.keys()
+	]) {
+		if (!key.startsWith(`${projectID}:`)) continue;
+		codeEditorViewStates.delete(key);
+		codeEditorStateSnapshots.delete(key);
+		if (activeCodeEditorViewStateKey === key)
+			activeCodeEditorViewStateKey = "";
 	}
 	persistCodeEditorViewStates(storageUserID.value);
 }
@@ -1638,11 +1670,35 @@ function migrateCodeEditorViewStates(
 		if (activeCodeEditorViewStateKey === key)
 			activeCodeEditorViewStateKey = nextKey;
 	}
+	for (const [key, state] of [...codeEditorStateSnapshots]) {
+		if (!key.startsWith(`${fromProjectID}:`)) continue;
+		const nextKey = `${toProjectID}:${key.slice(fromProjectID.length + 1)}`;
+		codeEditorStateSnapshots.set(nextKey, state);
+		codeEditorStateSnapshots.delete(key);
+		if (activeCodeEditorViewStateKey === key)
+			activeCodeEditorViewStateKey = nextKey;
+	}
 	persistCodeEditorViewStates(storageUserID.value);
 }
 
 function clampCodeEditorPosition(position: number, docLength: number) {
 	return Math.max(0, Math.min(docLength, position));
+}
+
+function restoreCodeEditorScroll(view: CodeEditorView, viewStateKey: string) {
+	const state = codeEditorViewStates.get(viewStateKey);
+	if (!state) return;
+
+	requestAnimationFrame(() => {
+		if (
+			codeEditorView !== view ||
+			activeCodeEditorViewStateKey !== viewStateKey
+		) {
+			return;
+		}
+		view.scrollDOM.scrollLeft = state.scrollLeft;
+		view.scrollDOM.scrollTop = state.scrollTop;
+	});
 }
 
 function restoreCodeEditorViewState(
@@ -1672,16 +1728,7 @@ function restoreCodeEditorViewState(
 		scrollIntoView: true
 	});
 
-	requestAnimationFrame(() => {
-		if (
-			codeEditorView !== view ||
-			activeCodeEditorViewStateKey !== viewStateKey
-		) {
-			return;
-		}
-		view.scrollDOM.scrollLeft = state.scrollLeft;
-		view.scrollDOM.scrollTop = state.scrollTop;
-	});
+	restoreCodeEditorScroll(view, viewStateKey);
 }
 
 async function resetCodeEditor() {
@@ -1706,35 +1753,52 @@ async function resetCodeEditor() {
 		return;
 
 	const viewStateKey = codeEditorViewStateKey();
-	codeEditorView = new EditorView({
-		doc: activeFileContent.value,
-		extensions: createPythonCodeMirrorExtensions({
-			assetCompletions: loadPythonCodeMirrorAssetCompletions,
-			mode: selectedProject.value?.mode ?? "python",
-			onChange(content) {
-				syncingCodeMirrorContent = true;
-				activeFileContent.value = content;
-				void nextTick(() => {
-					syncingCodeMirrorContent = false;
-				});
-			},
-			onCursorCountChange(count) {
-				editorCursorCount.value = count;
-			},
-			onRun: activateRunControl,
-			onSave: () => {
-				void saveSelectedProject({ force: true });
-			}
-		}),
-		parent: host
+	const savedState = viewStateKey
+		? codeEditorStateSnapshots.get(viewStateKey)
+		: null;
+	const restoredState =
+		savedState?.doc.toString() === activeFileContent.value
+			? savedState
+			: null;
+	const extensions = createPythonCodeMirrorExtensions({
+		assetCompletions: loadPythonCodeMirrorAssetCompletions,
+		mode: selectedProject.value?.mode ?? "python",
+		onChange(content) {
+			syncingCodeMirrorContent = true;
+			activeFileContent.value = content;
+			void nextTick(() => {
+				syncingCodeMirrorContent = false;
+			});
+		},
+		onCursorCountChange(count) {
+			editorCursorCount.value = count;
+		},
+		onRun: activateRunControl,
+		onSave: () => {
+			void saveSelectedProject({ force: true });
+		}
 	});
+	codeEditorView = restoredState
+		? new EditorView({
+				state: restoredState,
+				parent: host
+			})
+		: new EditorView({
+				doc: activeFileContent.value,
+				extensions,
+				parent: host
+			});
 	activeCodeEditorViewStateKey = viewStateKey;
 	if (viewStateKey) {
-		restoreCodeEditorViewState(
-			codeEditorView,
-			EditorSelection,
-			viewStateKey
-		);
+		if (restoredState) {
+			restoreCodeEditorScroll(codeEditorView, viewStateKey);
+		} else {
+			restoreCodeEditorViewState(
+				codeEditorView,
+				EditorSelection,
+				viewStateKey
+			);
+		}
 	}
 }
 
@@ -1922,6 +1986,7 @@ function deleteFile(file: PythonIdeFile) {
 	project.files = project.files.filter(
 		candidate => candidate.name !== file.name
 	);
+	deleteCodeEditorStateForFile(project._id, file.name);
 	if (project.activeFileName === file.name) {
 		project.activeFileName = resolvePythonIdeActiveFileName(project.files);
 	}
