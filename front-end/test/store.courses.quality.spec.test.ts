@@ -1176,6 +1176,33 @@ describe("course text quality normalization", () => {
 		expect(source).not.toMatch(/The goal is to/i);
 	});
 
+	it("keeps Data Science lessons explanatory instead of scaffold-labeled", async () => {
+		const course = await loadRawCourse("data-science-in-python");
+		const corpus = allCourseText(course);
+		const source = fs.readFileSync(
+			"src/stores/courses/data-science-in-python.ts",
+			"utf8"
+		);
+
+		expect(corpus).toContain(
+			"Strong data science can provide real value before training any model."
+		);
+		expect(corpus).toContain(
+			"Notebooks are communication tools, not just places to run code."
+		);
+		expect(corpus).toContain(
+			"Dashboard design needs restraint: clear controls, few charts, obvious labels, and a visible explanation of what the user is seeing."
+		);
+		expect(corpus).toContain(
+			"The log turns the capstone into an evidence-backed argument rather than a collection of outputs."
+		);
+		expect(source).not.toMatch(/This section covers/i);
+		expect(source).not.toMatch(/Key idea:/i);
+		expect(source).not.toMatch(/Skill target:/i);
+		expect(source).not.toMatch(/Practice target:/i);
+		expect(source).not.toMatch(/The goal is to/i);
+	});
+
 	it("keeps USACO setup problem cards distinct from setup workflow prompts", async () => {
 		const setupModules = [
 			{

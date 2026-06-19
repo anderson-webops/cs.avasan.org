@@ -403,7 +403,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Data Science versus Machine Learning",
 					content:
-						"Separate descriptive analysis, visualization, and cleaning work from predictive modeling. Key idea: A strong data scientist can provide real value before training any model."
+						"Separate descriptive analysis, visualization, and cleaning work from predictive modeling. Strong data science can provide real value before training any model."
 				},
 				{
 					title: "Portfolio Mindset",
@@ -428,7 +428,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: What Data Science Is",
 					content:
-						"Keep a compact analysis log for what data science is that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about why the chosen question is worth answering with data in the first place. Practice target: Make the reasoning inspectable.",
+						"Keep a compact analysis log for what data science is that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about why the chosen question is worth answering with data in the first place. The log should make the question, assumptions, and value of the analysis visible before any code is judged.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-08-module-1-what-data-science-is/starter",
 					solutionLink:
@@ -468,7 +468,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Cells, Markdown, and Narrative Structure",
 					content:
-						"This section covers notebooks as a communication tool, not just a place to run code. Skill target: Combine code cells, markdown, and short conclusions so another person can follow the reasoning from question to result."
+						"Notebooks are communication tools, not just places to run code. Combine code cells, markdown, and short conclusions so another person can follow the reasoning from question to result."
 				},
 				{
 					title: "Restart-and-Run-All Discipline",
@@ -478,7 +478,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "When to Graduate into Scripts or Apps",
 					content:
-						"A notebook has outgrown itself when repeated analysis, reusable functions, or user-facing outputs belong in a Python module, script, or dashboard app. Key idea: Notebooks are ideal for exploration, but not always for long-term project structure."
+						"A notebook has outgrown itself when repeated analysis, reusable functions, or user-facing outputs belong in a Python module, script, or dashboard app. Notebooks are ideal for exploration, but not always for long-term project structure."
 				},
 				{
 					title: "Versioning Small Analyses",
@@ -504,7 +504,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: Notebook Workflow and Reproducibility",
 					content:
-						"Keep a compact analysis log for notebook workflow and reproducibility that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which parts of the analysis are exploratory and which belong in stable steps. Practice target: Make the reasoning inspectable.",
+						"Keep a compact analysis log for notebook workflow and reproducibility that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which parts of the analysis are exploratory and which belong in stable steps. The log separates exploratory notebook work from stable steps that should reproduce cleanly.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-09-module-2-notebook-workflow-and-reproducibility/starter",
 					solutionLink:
@@ -551,12 +551,12 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Selecting, Filtering, and Sorting",
 					content:
-						"This section covers column selection, row filtering, sorting, and boolean masks as the basic grammar of tabular analysis. These operations become routine before grouping and aggregation are introduced."
+						"Column selection, row filtering, sorting, and boolean masks form the basic grammar of tabular analysis. These operations become routine before grouping and aggregation are introduced."
 				},
 				{
 					title: "Grouping and Aggregation",
 					content:
-						"Use grouped summaries to answer questions about segments, categories, and trends. The goal is to replace manual loops when a data-frame operation expresses the intent more clearly."
+						"Use grouped summaries to answer questions about segments, categories, and trends. Prefer a data-frame operation over a manual loop when it expresses the analytical intent more clearly."
 				},
 				{
 					title: "Derived Columns and Transformations",
@@ -581,7 +581,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: pandas Foundations",
 					content:
-						"Keep a compact analysis log for pandas foundations that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which transformations are merely helpful and which ones materially change the meaning of the dataset. Practice target: Make the reasoning inspectable.",
+						"Keep a compact analysis log for pandas foundations that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which transformations are merely helpful and which ones materially change the meaning of the dataset. The log makes it possible to review both the calculation and the meaning of each transformation.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-10-module-3-pandas-foundations/starter",
 					solutionLink:
@@ -626,7 +626,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Duplicates and Inconsistent Categories",
 					content:
-						"Work through duplicate rows, inconsistent labels, whitespace issues, and accidental category splits. Key idea: How small formatting defects can distort counts, averages, and rankings."
+						"Work through duplicate rows, inconsistent labels, whitespace issues, and accidental category splits. Small formatting defects can distort counts, averages, and rankings."
 				},
 				{
 					title: "Validation Checks and Sanity Tests",
@@ -656,7 +656,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: Cleaning and Validation",
 					content:
-						"Keep a compact analysis log for cleaning and validation that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which cleaning decision had the biggest effect on the final answer. Practice target: Make the reasoning inspectable.",
+						"Keep a compact analysis log for cleaning and validation that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which cleaning decision had the biggest effect on the final answer. The log links the final answer back to the cleaning decisions that changed it most.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-11-module-4-cleaning-and-validation/starter",
 					solutionLink:
@@ -696,7 +696,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Choosing the Right Chart",
 					content:
-						"This section covers line, bar, scatter, histogram, box plot, and basic distribution views as tools for specific questions rather than decorations. Skill target: Defend a chart choice in one sentence."
+						"Line, bar, scatter, histogram, box plot, and distribution views are tools for specific questions rather than decorations. Defend each chart choice in one sentence."
 				},
 				{
 					title: "Misleading Scales and Weak Comparisons",
@@ -706,12 +706,12 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Averages, Spread, Correlation, and Outliers",
 					content:
-						"This section covers descriptive statistics in service of context. Key idea: What these measures can reveal, but also when a summary number hides important structure in the data."
+						"Descriptive statistics serve context. These measures can reveal useful structure, but a summary number can also hide important variation in the data."
 				},
 				{
 					title: "Correlation Is Not Causation",
 					content:
-						"Keep causation claims disciplined by asking what the dataset can actually support. Practice target: Write careful conclusions that do not overstate what a pattern proves."
+						"Keep causation claims disciplined by asking what the dataset can actually support. Write careful conclusions that do not overstate what a pattern proves."
 				},
 				{
 					title: "Module 5: Visualization and Statistics in Context: Core Project",
@@ -782,7 +782,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Audience-Aware Presentation",
 					content:
-						"Explain how the same data might be presented differently for a peer, a school club, an academic audience, or a portfolio reviewer. Skill target: Tune explanations without changing the evidence."
+						"Explain how the same data might be presented differently for a peer, a school club, an academic audience, or a portfolio reviewer. Tune explanations without changing the evidence."
 				},
 				{
 					title: "Module 6: Storytelling with Data: Core Project",
@@ -802,7 +802,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: Storytelling with Data",
 					content:
-						"Keep a compact analysis log for storytelling with data that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which part of the story is genuinely supported and which part is still only a hypothesis. Practice target: Make the reasoning inspectable.",
+						"Keep a compact analysis log for storytelling with data that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which part of the story is genuinely supported and which part is still only a hypothesis. The log separates supported claims from hypotheses that still need more evidence.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-12-module-6-storytelling-with-data/starter",
 					solutionLink:
@@ -857,7 +857,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Designing a Useful Analytical Interface",
 					content:
-						"This section covers restraint in dashboard design: clear controls, few charts, obvious labels, and a visible explanation of what the user is seeing. Key idea: An overloaded dashboard is not a better dashboard."
+						"Dashboard design needs restraint: clear controls, few charts, obvious labels, and a visible explanation of what the user is seeing. An overloaded dashboard is not a better dashboard."
 				},
 				{
 					title: "Module 7: Dashboards with Altair and Streamlit: Core Project",
@@ -878,7 +878,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: Dashboards with Altair and Streamlit",
 					content:
-						"Keep a compact analysis log for dashboards with Altair and Streamlit that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which interactions actually help the user answer the question faster. Practice target: Make the reasoning inspectable.",
+						"Keep a compact analysis log for dashboards with Altair and Streamlit that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which interactions actually help the user answer the question faster. The log shows which controls sharpen the answer and which interactions only add noise.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-13-module-7-dashboards-with-altair-and-streamlit/starter",
 					solutionLink:
@@ -1006,7 +1006,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Reflect on Next Steps",
 					content:
-						"The capstone reflection helps identify a next course such as `Machine Learning`, `AI Level 1`, `Web Development Foundations`, or a more advanced Python track. The goal is a clearer sense of whether modeling, storytelling, or productizing data work is the strongest next direction."
+						"The capstone reflection helps identify a next course such as `Machine Learning`, `AI Level 1`, `Web Development Foundations`, or a more advanced Python track. The reflection should clarify whether modeling, storytelling, or productizing data work is the strongest next direction."
 				},
 				{
 					title: "Module 9: Data Science Capstone: Core Project",
@@ -1026,7 +1026,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: Data Science Capstone",
 					content:
-						"Keep a compact analysis log for data science capstone that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about what claim the project ultimately makes and what evidence best supports it. Practice target: Make the reasoning inspectable.",
+						"Keep a compact analysis log for data science capstone that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about what claim the project ultimately makes and what evidence best supports it. The log turns the capstone into an evidence-backed argument rather than a collection of outputs.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-14-module-9-data-science-capstone/starter",
 					solutionLink:
