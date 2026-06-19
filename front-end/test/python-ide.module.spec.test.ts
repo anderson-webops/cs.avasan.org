@@ -1830,6 +1830,10 @@ describe("python IDE project helpers", () => {
 			'__classes_main.__dict__["__file__"] = __classes_active_file'
 		);
 		expect(workerSource).toContain("captureProjectTextFiles");
+		expect(workerSource).toContain("const capturedFiles = files.filter(");
+		expect(workerSource).toContain(
+			"for (const file of capturedFiles) lastProjectFileNames.add(file.name);"
+		);
 		expect(workerSource).toContain(
 			'import {\n\tisPythonIdeTextFile,\n\tisValidPythonFileName\n} from "@/modules/pythonIde";'
 		);
@@ -2165,6 +2169,13 @@ describe("python IDE project helpers", () => {
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
 			"utf8"
 		);
+		const captureStart = runtimeSource.indexOf(
+			"async function captureProjectTextFiles"
+		);
+		const captureSource = runtimeSource.slice(
+			captureStart,
+			runtimeSource.indexOf("function packageScanModules", captureStart)
+		);
 
 		expect(runtimeSource).toContain("lastProjectFileNames");
 		expect(runtimeSource).toContain("function syncProjectFiles");
@@ -2175,6 +2186,12 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("safeUnlink(pyodide");
 		expect(runtimeSource).toContain(
 			"sys.modules.pop(__classes_module_name, None)"
+		);
+		expect(captureSource).toContain(
+			"const capturedFiles = files.filter("
+		);
+		expect(captureSource).toContain(
+			"for (const file of capturedFiles) lastProjectFileNames.add(file.name);"
 		);
 	});
 

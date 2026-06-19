@@ -4066,12 +4066,14 @@ for __classes_path in sorted(__classes_project_root.rglob("*")):
 json.dumps(__classes_files)
 `);
 	const files = JSON.parse(String(snapshot)) as PythonIdeFile[];
-	return files.filter(
+	const capturedFiles = files.filter(
 		file =>
 			isValidPythonFileName(file.name) &&
 			isPythonIdeTextFile(file.name) &&
 			file.encoding === "text"
 	);
+	for (const file of capturedFiles) lastProjectFileNames.add(file.name);
+	return capturedFiles;
 }
 
 function packageScanModules(
