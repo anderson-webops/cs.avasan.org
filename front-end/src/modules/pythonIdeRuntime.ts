@@ -4034,7 +4034,8 @@ function packageScanModules(
 async function loadPyodideImportPackages(
 	pyodide: PyodideAPI,
 	files: PythonIdeFile[],
-	importedModules: Set<string>
+	importedModules: Set<string>,
+	onOutput: RunPythonProjectOptions["onOutput"]
 ) {
 	const standardLibraryModules = await pythonStandardLibraryModules(pyodide);
 	const modules = packageScanModules(
@@ -4044,6 +4045,7 @@ async function loadPyodideImportPackages(
 	);
 	if (!modules.length) return;
 
+	onOutput("system", `Loading Python packages: ${modules.join(", ")}`);
 	await pyodide.loadPackagesFromImports(
 		modules.map(moduleName => `import ${moduleName}`).join("\n")
 	);
@@ -4325,7 +4327,12 @@ export async function runPythonProject(options: RunPythonProjectOptions) {
 	if (!activeFile)
 		throw new Error("Project does not have a runnable Python file.");
 
-	await loadPyodideImportPackages(pyodide, options.files, importedModules);
+	await loadPyodideImportPackages(
+		pyodide,
+		options.files,
+		importedModules,
+		options.onOutput
+	);
 	throwIfRunStopped(options);
 	await loadBrowserShimDependencies(
 		pyodide,

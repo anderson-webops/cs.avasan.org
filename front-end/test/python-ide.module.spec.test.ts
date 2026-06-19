@@ -1645,6 +1645,9 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("function loadPyodideImportPackages");
 		expect(runtimeSource).toContain("loadedPyodideImportModules.has");
 		expect(runtimeSource).toContain("loadedPyodideImportModules.add");
+		expect(runtimeSource).toContain(
+			'onOutput("system", `Loading Python packages: ${modules.join(", ")}`);'
+		);
 		expect(runtimeSource).toContain("let micropipLoaded = false;");
 		expect(runtimeSource).toContain(
 			"!installedMicropipPackages.has(packageName)"
@@ -1689,7 +1692,7 @@ describe("python IDE project helpers", () => {
 			"packageScanModules(\n\t\tfiles,\n\t\timportedModules,\n\t\tstandardLibraryModules\n\t)"
 		);
 		expect(runtimeSource).toContain(
-			"await loadPyodideImportPackages(pyodide, options.files, importedModules);"
+			"await loadPyodideImportPackages(\n\t\tpyodide,\n\t\toptions.files,\n\t\timportedModules,\n\t\toptions.onOutput\n\t);"
 		);
 		expect(workerSource).toContain(
 			'import { pythonStandardLibraryModules } from "@/modules/pythonStandardLibraryModules";'
@@ -1995,7 +1998,9 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("options.onProjectFilesUpdate?.");
 		expect(pageSource).toContain("function mergeRuntimeProjectFiles");
 		expect(pageSource).toContain("onProjectFilesUpdate: files =>");
-		expect(pageSource).toContain("void saveSelectedProject()");
+		expect(pageSource).toContain(
+			"void saveSelectedProject({ force: true });"
+		);
 	});
 
 	it("clears stale local account fallback after successful remote syncs", () => {
@@ -2033,10 +2038,26 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("function updateAutoSavePreference");
 		expect(pageSource).toContain("Autosave projects");
 		expect(pageSource).toContain('aria-label="Python IDE settings"');
+		expect(pageSource).toContain(
+			"const pendingSaveProjectIDs = new Set<string>();"
+		);
+		expect(pageSource).toContain(
+			"const unsyncedProjectIDs = new Set<string>();"
+		);
+		expect(pageSource).toContain("interface SaveProjectOptions");
+		expect(pageSource).toContain("async function savePendingProjects");
+		expect(pageSource).toContain("pendingSaveProjectIDs.add(projectID);");
+		expect(pageSource).toContain("unsyncedProjectIDs.add(startedProjectID);");
+		expect(pageSource).toContain("void savePendingProjects();");
+		expect(pageSource).toContain("saveSelectedProject({ force: true })");
 		expect(pageSource).toContain("let localSnapshotTimer:");
 		expect(pageSource).toContain("async function persistLocalProjectSnapshot");
 		expect(pageSource).toContain("async function discardLocalProjectSnapshot");
+		expect(pageSource).toContain(
+			"async function discardLocalProjectSnapshotIfSafe"
+		);
 		expect(pageSource).toContain("await localSnapshotInFlight;");
+		expect(pageSource).toContain("unsyncedProjectIDs.clear();");
 		expect(pageSource).toContain("function scheduleLocalProjectSnapshot");
 		expect(pageSource).toContain("scheduleLocalProjectSnapshot();");
 		expect(pageSource).toContain("await discardLocalProjectSnapshot();");
@@ -2049,6 +2070,12 @@ describe("python IDE project helpers", () => {
 		);
 		expect(pageSource).toContain(
 			'window.addEventListener("pagehide", flushPendingProjectSave);'
+		);
+		expect(pageSource).toContain(
+			'document.addEventListener(\n\t\t"visibilitychange",'
+		);
+		expect(pageSource).toContain(
+			"function flushPendingProjectSaveOnVisibilityChange"
 		);
 		expect(pageSource).toContain("flushPendingProjectSave();");
 		expect(pageSource).toContain("saveLocalProjectSnapshot();");
@@ -2161,7 +2188,9 @@ describe("python IDE project helpers", () => {
 
 		expect(pageSource).toContain("let saveInFlight: Promise<void> | null");
 		expect(pageSource).toContain("let saveQueued = false");
-		expect(pageSource).toContain("async function saveSelectedProjectOnce");
+		expect(pageSource).toContain("async function saveProjectOnce");
+		expect(pageSource).toContain("async function savePendingProjects");
+		expect(pageSource).toContain("const pendingSaveProjectIDs");
 		expect(pageSource).toContain("const startedUpdatedAt");
 		expect(pageSource).toContain(
 			"? await createRemotePythonIdeProject(payload)"
@@ -2169,9 +2198,15 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("const projectChangedDuringSave");
 		expect(pageSource).toContain("saveQueued = true");
 		expect(pageSource).toContain(
+			"} while (saveQueued || pendingSaveProjectIDs.size);"
+		);
+		expect(pageSource).toContain(
 			"migrateCodeEditorViewStates(startedProjectID, savedProject._id);"
 		);
 		expect(pageSource).toContain("currentProject._id = savedProject._id");
+		expect(pageSource).toContain(
+			"pendingSaveProjectIDs.add(currentProject._id);"
+		);
 	});
 
 	it("keeps canvas keyboard handlers separate from editor and input focus", () => {

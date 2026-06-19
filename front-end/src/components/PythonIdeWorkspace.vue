@@ -493,6 +493,8 @@ let localSnapshotInFlight: Promise<void> | null = null;
 let localSnapshotQueued = false;
 let saveQueued = false;
 let suppressAutoSave = false;
+const pendingSaveProjectIDs = new Set<string>();
+const unsyncedProjectIDs = new Set<string>();
 let resizeObserver: ResizeObserver | null = null;
 let gameAnimationFrame: number | null = null;
 let turtleAnimationFrame: number | null = null;
@@ -969,7 +971,7 @@ function mergeRuntimeProjectFiles(
 
 	if (!changedCount) return;
 	touchSelectedProject();
-	void saveSelectedProject();
+	void saveSelectedProject({ force: true });
 	appendOutput(
 		"system",
 		`Saved ${changedCount} changed project file${changedCount === 1 ? "" : "s"}${addedCount ? `, including ${addedCount} new file${addedCount === 1 ? "" : "s"}` : ""}.`
@@ -1050,7 +1052,7 @@ async function saveNewProject(
 		if (!projectLoadIsCurrent(loadRunID)) return;
 		projects.value.unshift(remoteProject);
 		selectedProjectID.value = remoteProject._id;
-		await discardLocalProjectSnapshot();
+		await discardLocalProjectSnapshotIfSafe();
 		if (!projectLoadIsCurrent(loadRunID)) return;
 		saveMessage.value = "Synced to account";
 		return;
@@ -1173,7 +1175,13 @@ async function discardLocalProjectSnapshot() {
 		}
 	}
 	localSnapshotQueued = false;
+	unsyncedProjectIDs.clear();
 	await clearLocalPythonProjectsAsync(storageUserID.value);
+}
+
+async function discardLocalProjectSnapshotIfSafe() {
+	if (unsyncedProjectIDs.size) return;
+	await discardLocalProjectSnapshot();
 }
 
 function scheduleLocalProjectSnapshot() {
@@ -1300,9 +1308,19 @@ async function loadProjects() {
 	}
 }
 
-async function saveSelectedProjectOnce() {
-	const project = selectedProject.value;
-	if (!project || suppressAutoSave) return;
+interface SaveProjectOptions {
+	force?: boolean;
+}
+
+async function saveProjectOnce(
+	projectID: string,
+	options: SaveProjectOptions = {}
+) {
+	const index = projects.value.findIndex(
+		candidate => candidate._id === projectID
+	);
+	const project = index >= 0 ? projects.value[index] : null;
+	if (!project || (suppressAutoSave && !options.force)) return true;
 
 	const startedProjectID = project._id;
 	const startedUpdatedAt = project.updatedAt ?? "";
@@ -1311,18 +1329,19 @@ async function saveSelectedProjectOnce() {
 	try {
 		if (!canSyncToAccount.value) {
 			await persistLocalProjects();
-			return;
+			return true;
 		}
 
 		await persistLocalProjects({ quiet: true });
 		const savedProject = startedProjectID.startsWith("local-")
 			? await createRemotePythonIdeProject(payload)
 			: await updateRemotePythonIdeProject(startedProjectID, payload);
-		const index = projects.value.findIndex(
+		const currentIndex = projects.value.findIndex(
 			candidate => candidate._id === startedProjectID
 		);
-		const currentProject = index >= 0 ? projects.value[index] : null;
-		if (!currentProject) return;
+		const currentProject =
+			currentIndex >= 0 ? projects.value[currentIndex] : null;
+		if (!currentProject) return true;
 
 		const projectChangedDuringSave =
 			currentProject.updatedAt !== startedUpdatedAt;
@@ -1337,25 +1356,29 @@ async function saveSelectedProjectOnce() {
 					selectedProjectID.value = savedProject._id;
 				}
 			}
-			saveQueued = true;
+			unsyncedProjectIDs.delete(startedProjectID);
+			unsyncedProjectIDs.delete(savedProject._id);
+			pendingSaveProjectIDs.add(currentProject._id);
 			await saveLocalPythonProjectsAsync(
 				projects.value,
 				storageUserID.value
 			);
-			return;
+			return true;
 		}
 
-		if (index >= 0) {
+		if (currentIndex >= 0) {
 			if (startedProjectID.startsWith("local-"))
 				migrateCodeEditorViewStates(startedProjectID, savedProject._id);
-			projects.value.splice(index, 1, savedProject);
+			projects.value.splice(currentIndex, 1, savedProject);
 			if (selectedProjectID.value === startedProjectID) {
 				selectedProjectID.value = savedProject._id;
 			}
 		}
-		await discardLocalProjectSnapshot();
-		saveMessage.value = "Synced to account";
+		unsyncedProjectIDs.delete(startedProjectID);
+		unsyncedProjectIDs.delete(savedProject._id);
+		return true;
 	} catch (error) {
+		unsyncedProjectIDs.add(startedProjectID);
 		await persistLocalProjects({
 			message: "Saved locally after sync issue"
 		});
@@ -1365,11 +1388,12 @@ async function saveSelectedProjectOnce() {
 				? error.message
 				: "Save failed; kept a local copy."
 		);
+		return false;
 	}
 }
 
-async function saveSelectedProject() {
-	if (suppressAutoSave) return;
+async function savePendingProjects(options: SaveProjectOptions = {}) {
+	if (suppressAutoSave && !options.force) return;
 	if (saveInFlight) {
 		saveQueued = true;
 		return saveInFlight;
@@ -1377,10 +1401,30 @@ async function saveSelectedProject() {
 
 	isSaving.value = true;
 	saveInFlight = (async () => {
+		let remoteSyncFailed = false;
 		do {
 			saveQueued = false;
-			await saveSelectedProjectOnce();
-		} while (saveQueued);
+			const projectIDs = pendingSaveProjectIDs.size
+				? [...pendingSaveProjectIDs]
+				: selectedProjectID.value
+					? [selectedProjectID.value]
+					: [];
+			pendingSaveProjectIDs.clear();
+
+			for (const projectID of projectIDs) {
+				const saved = await saveProjectOnce(projectID, options);
+				if (!saved) remoteSyncFailed = true;
+			}
+		} while (saveQueued || pendingSaveProjectIDs.size);
+
+		if (
+			canSyncToAccount.value &&
+			!remoteSyncFailed &&
+			!unsyncedProjectIDs.size
+		) {
+			await discardLocalProjectSnapshot();
+			saveMessage.value = "Synced to account";
+		}
 	})();
 
 	try {
@@ -1391,8 +1435,18 @@ async function saveSelectedProject() {
 	}
 }
 
+async function saveSelectedProject(options: SaveProjectOptions = {}) {
+	const projectID = selectedProject.value?._id;
+	if (projectID) pendingSaveProjectIDs.add(projectID);
+	return savePendingProjects(options);
+}
+
 function scheduleSave() {
 	if (suppressAutoSave) return;
+	const projectID = selectedProject.value?._id;
+	if (!projectID) return;
+	pendingSaveProjectIDs.add(projectID);
+
 	if (!autoSaveEnabled.value) {
 		if (saveTimer) window.clearTimeout(saveTimer);
 		saveTimer = null;
@@ -1408,19 +1462,29 @@ function scheduleSave() {
 	if (saveTimer) window.clearTimeout(saveTimer);
 	saveTimer = window.setTimeout(() => {
 		saveTimer = null;
-		void saveSelectedProject();
+		void savePendingProjects();
 	}, 700);
 }
 
 function flushPendingProjectSave() {
-	if (suppressAutoSave || !autoSaveEnabled.value) return;
+	if (
+		suppressAutoSave ||
+		!autoSaveEnabled.value ||
+		!pendingSaveProjectIDs.size
+	) {
+		return;
+	}
 	cancelLocalProjectSnapshot();
 	if (saveTimer) {
 		window.clearTimeout(saveTimer);
 		saveTimer = null;
 	}
 	saveLocalProjectSnapshot();
-	void saveSelectedProject();
+	void savePendingProjects();
+}
+
+function flushPendingProjectSaveOnVisibilityChange() {
+	if (document.visibilityState === "hidden") flushPendingProjectSave();
 }
 
 function updateAutoSavePreference(event: Event) {
@@ -1512,7 +1576,7 @@ async function deleteProject(project: PythonIdeProject) {
 		);
 		selectedProjectID.value = projects.value[0]?._id ?? "";
 		if (isRemoteProject) {
-			await discardLocalProjectSnapshot();
+			await discardLocalProjectSnapshotIfSafe();
 			saveMessage.value = "Synced to account";
 		} else {
 			await persistLocalProjects();
@@ -1659,7 +1723,7 @@ async function resetCodeEditor() {
 			},
 			onRun: activateRunControl,
 			onSave: () => {
-				void saveSelectedProject();
+				void saveSelectedProject({ force: true });
 			}
 		}),
 		parent: host
@@ -3984,7 +4048,7 @@ async function runCurrentProject() {
 	if (!project) return;
 
 	stopRequested.value = false;
-	await saveSelectedProject();
+	await saveSelectedProject({ force: true });
 	clearOutput();
 	const runnableFile = getPythonIdeRunnableFile(project);
 	if (!runnableFile) {
@@ -4369,6 +4433,10 @@ onMounted(() => {
 	primePythonRuntimeConnection();
 	void loadProjects();
 	window.addEventListener("pagehide", flushPendingProjectSave);
+	document.addEventListener(
+		"visibilitychange",
+		flushPendingProjectSaveOnVisibilityChange
+	);
 	window.addEventListener("keydown", handleKeyDown);
 	window.addEventListener("keyup", handleKeyUp);
 	window.addEventListener("mouseup", clearTurtleDrag);
@@ -4384,6 +4452,10 @@ onBeforeUnmount(() => {
 	saveCodeEditorViewState();
 	codeEditorView?.destroy();
 	window.removeEventListener("pagehide", flushPendingProjectSave);
+	document.removeEventListener(
+		"visibilitychange",
+		flushPendingProjectSaveOnVisibilityChange
+	);
 	window.removeEventListener("keydown", handleKeyDown);
 	window.removeEventListener("keyup", handleKeyUp);
 	window.removeEventListener("mouseup", clearTurtleDrag);
@@ -4777,7 +4849,7 @@ onBeforeUnmount(() => {
 							class="site-button site-button--secondary"
 							:disabled="isSaving"
 							type="button"
-							@click="saveSelectedProject"
+							@click="saveSelectedProject({ force: true })"
 						>
 							{{ isSaving ? "Saving" : "Save" }}
 						</button>
