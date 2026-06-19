@@ -1151,6 +1151,31 @@ describe("course text quality normalization", () => {
 		expect(source).not.toMatch(/This project should/i);
 	});
 
+	it("keeps AI Level 1 lessons explanatory instead of scaffold-labeled", async () => {
+		const course = await loadRawCourse("ai-level-1");
+		const corpus = allCourseText(course);
+		const source = fs.readFileSync(
+			"src/stores/courses/ai-level-1.ts",
+			"utf8"
+		);
+
+		expect(corpus).toContain(
+			"AI is a family of approaches: rules, search, planning, heuristics, machine learning, and modern generative systems."
+		);
+		expect(corpus).toContain(
+			"DFS is a systematic way to explore one branch fully, record visited nodes, and backtrack cleanly."
+		);
+		expect(corpus).toContain(
+			"Heuristic evaluation is a practical compromise when exhaustive search is too expensive."
+		);
+		expect(source).not.toMatch(/This section covers/i);
+		expect(source).not.toMatch(/Key idea:/i);
+		expect(source).not.toMatch(/Skill target:/i);
+		expect(source).not.toMatch(/Visible pattern:/i);
+		expect(source).not.toMatch(/Practice target:/i);
+		expect(source).not.toMatch(/The goal is to/i);
+	});
+
 	it("keeps USACO setup problem cards distinct from setup workflow prompts", async () => {
 		const setupModules = [
 			{

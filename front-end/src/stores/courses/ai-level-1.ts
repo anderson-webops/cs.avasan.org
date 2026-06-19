@@ -135,12 +135,12 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "What AI Is and What It Is Not",
 					content:
-						"AI is a family of approaches: rules, search, planning, heuristics, machine learning, and modern generative systems. Key idea: This course focuses on explicit state and decision processes rather than jumping straight to model fitting."
+						"AI is a family of approaches: rules, search, planning, heuristics, machine learning, and modern generative systems. This course focuses on explicit state and decision processes rather than jumping straight to model fitting."
 				},
 				{
 					title: "States, Actions, Goals, and Costs",
 					content:
-						"Every AI problem can be framed as a question about state changes. Skill target: say what a valid state looks like, what transitions are allowed, what counts as success, and whether a path should be judged by steps, cost, score, or some other metric."
+						"Every AI problem can be framed as a question about state changes. A clear problem statement says what a valid state looks like, what transitions are allowed, what counts as success, and whether a path is judged by steps, cost, score, or another metric."
 				},
 				{
 					title: "Graphs as a Universal Representation",
@@ -213,7 +213,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Why Search Needs a Frontier",
 					content:
-						"The frontier is the set of states that have been generated but not fully explored. Key idea: Search behavior is largely determined by how the frontier is organized and updated."
+						"The frontier is the set of states that have been generated but not fully explored. Search behavior is largely determined by how the frontier is organized and updated."
 				},
 				{
 					title: "Stack Behavior and Depth-First Thinking",
@@ -223,12 +223,12 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Queue Behavior and Breadth-First Thinking",
 					content:
-						"Use queues to show layer-by-layer exploration and shortest-path intuition in unweighted settings. Visible pattern: Why data structure choice changes the order of discovery and the type of guarantees an algorithm can make."
+						"Use queues to show layer-by-layer exploration and shortest-path intuition in unweighted settings. Data structure choice changes the order of discovery and the type of guarantees an algorithm can make."
 				},
 				{
 					title: "Tracing Traversals by Hand",
 					content:
-						"Use diagram or notebook traces before implementation. Skill target: Follow push, pop, enqueue, dequeue, and visited-set changes step by step instead of treating search as magic recursion or copy-pasted code."
+						"Use diagram or notebook traces before implementation. Follow push, pop, enqueue, dequeue, and visited-set changes step by step instead of treating search as magic recursion or copy-pasted code."
 				},
 				{
 					title: "Unit 2: Stacks, Queues, and Traversal Intuition: Core Project",
@@ -261,7 +261,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Project: Stacks and Queues Reference",
 					content:
-						"Keep a reference implementation of stack- and queue-based workflows nearby while later search code gets more complex. The goal is to separate data-structure confusion from algorithmic confusion.",
+						"Keep a reference implementation of stack- and queue-based workflows nearby while later search code gets more complex. This separates data-structure confusion from algorithmic confusion.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI-Queues"
 				},
@@ -287,12 +287,12 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Depth-First Search as Structured Exploration",
 					content:
-						"This section covers DFS as a systematic way to explore one branch fully, record visited nodes, and backtrack cleanly. Key idea: Where DFS is useful for reachability, component finding, and exhaustive path exploration."
+						"DFS is a systematic way to explore one branch fully, record visited nodes, and backtrack cleanly. It is especially useful for reachability, component finding, and exhaustive path exploration."
 				},
 				{
 					title: "Breadth-First Search and Unweighted Shortest Paths",
 					content:
-						"This section covers BFS as the correct default when edge costs are uniform and the first shortest path matters. Skill target: Defend BFS in a shortest-step setting instead of choosing it only because they remember the name."
+						"BFS is the correct default when edge costs are uniform and the first shortest path matters. Defend BFS in a shortest-step setting instead of choosing it only because the name is familiar."
 				},
 				{
 					title: "Visited Sets, Parents, and Path Reconstruction",
@@ -320,7 +320,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Project: Implement DFS",
 					content:
-						"Build DFS explicitly rather than relying on library behavior. Skill target: Explain every mutation of the stack, visited set, and current node during execution.",
+						"Build DFS explicitly rather than relying on library behavior. Explain every mutation of the stack, visited set, and current node during execution.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI5-Implement-DFS"
 				},
@@ -355,7 +355,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Depth-Limited and Iterative Deepening Search",
 					content:
-						"This section covers DLS and IDS as tools for controlling explosion in deep trees while still reasoning about completeness. Visible pattern: Why search often needs operational constraints as much as it needs cleverness."
+						"DLS and IDS control explosion in deep trees while still preserving a way to reason about completeness. Search often needs operational constraints as much as it needs cleverness."
 				},
 				{
 					title: "Uniform Cost Search and Weighted Paths",
@@ -370,7 +370,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Comparing Search Strategies Honestly",
 					content:
-						"Compare algorithms by memory use, guarantees, path quality, and runtime behavior on the same problem family. The goal is to make tradeoffs explicit rather than celebrating any single algorithm as 'the AI one'."
+						"Compare algorithms by memory use, guarantees, path quality, and runtime behavior on the same problem family. The comparison makes tradeoffs explicit rather than celebrating any single algorithm as 'the AI one'."
 				},
 				{
 					title: "Unit 4: Informed and Bounded Search: Core Project",
@@ -395,7 +395,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Project: Implement IDS",
 					content:
-						"Layer repeated depth-limited searches into an iterative-deepening workflow and compare its behavior to plain DFS. Skill target: Say when the extra repeated work is worth it.",
+						"Layer repeated depth-limited searches into an iterative-deepening workflow and compare its behavior to plain DFS. Identify when the extra repeated work is worth it.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI9-Implement-IDS"
 				},
@@ -443,7 +443,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Feature Thinking before Machine Learning",
 					content:
-						"Start the bridge to ML by asking what information a system would need in order to make a good decision. Skill target: Name candidate features even when they are not training a predictive model yet."
+						"Start the bridge to ML by asking what information a system would need in order to make a good decision. Name candidate features even before training a predictive model."
 				},
 				{
 					title: "Unit 5: Rule-Based Systems and Puzzle Framing: Core Project",
@@ -476,7 +476,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Project: Book Rule System",
 					content:
-						"Use a structured decision or lookup problem to practice explicit rules, routing, and explainability. Skill target: Justify each program choice in natural language.",
+						"Use a structured decision or lookup problem to practice explicit rules, routing, and explainability. Justify each program choice in natural language.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI5-Juni-Book"
 				},
@@ -502,7 +502,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Game State Trees",
 					content:
-						"Represent turn-based games as trees of future possibilities. Key idea: How one move creates a new state and how repeated expansion leads to a search tree instead of a single graph walk."
+						"Represent turn-based games as trees of future possibilities. One move creates a new state, and repeated expansion creates a search tree instead of a single graph walk."
 				},
 				{
 					title: "Random Play, Heuristic Play, and Stronger Play",
@@ -512,7 +512,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Evaluation Functions and Tradeoffs",
 					content:
-						"This section covers heuristic evaluation as a practical compromise when exhaustive search is too expensive. Practice target: Designing scores that reflect the actual objectives of the game, not just arbitrary numbers."
+						"Heuristic evaluation is a practical compromise when exhaustive search is too expensive. Design scores that reflect the actual objectives of the game, not just arbitrary numbers."
 				},
 				{
 					title: "Debugging a Game AI",
@@ -650,7 +650,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Reflect on the Next Course Step",
 					content:
-						"Close by comparing possible next steps: `Machine Learning`, `Data Science in Python`, `AP Computer Science A`, or deeper algorithmic work such as `USACO Bronze`. Skill target: Justify the next step based on the kind of thinking that was most engaging."
+						"Close by comparing possible next steps: `Machine Learning`, `Data Science in Python`, `AP Computer Science A`, or deeper algorithmic work such as `USACO Bronze`. Justify the next step based on the kind of thinking that was most engaging."
 				},
 				{
 					title: "Unit 8: Capstone and Portfolio Build: Core Project",
