@@ -1240,9 +1240,31 @@ class Turtle:
             self._fill_color = _normalize_color(colors[1])
         self._sync_bridge()
 
-    def circle(self, radius, *_args, **_kwargs):
-        self._sync_bridge()
-        _bridge.circle(float(radius))
+    def circle(self, radius, extent=None, steps=None):
+        radius = float(radius)
+        if extent is None:
+            extent = 360.0
+        else:
+            extent = float(extent)
+        if steps is None:
+            fraction = abs(extent) / 360.0
+            steps = 1 + int(min(11 + abs(radius) / 6.0, 59.0) * fraction)
+        else:
+            steps = int(steps)
+
+        turn = extent / steps
+        half_turn = turn * 0.5
+        side_length = 2.0 * radius * math.sin(math.radians(half_turn))
+        if radius < 0:
+            side_length = -side_length
+            turn = -turn
+            half_turn = -half_turn
+
+        self.left(half_turn)
+        for _ in range(steps):
+            self.forward(side_length)
+            self.left(turn)
+        self.left(-half_turn)
 
     def dot(self, size=8, color=None):
         self._sync_bridge()

@@ -584,6 +584,39 @@ describe("python IDE project helpers", () => {
 		);
 	});
 
+	it("moves the Turtle through standard circle arcs instead of drawing a static circle", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+		const circleStart = runtimeSource.indexOf(
+			"    def circle(self, radius, extent=None, steps=None):"
+		);
+		const circleSource = runtimeSource.slice(
+			circleStart,
+			runtimeSource.indexOf(
+				"    def dot(self, size=8, color=None):",
+				circleStart
+			)
+		);
+
+		expect(circleSource).toContain("if extent is None:");
+		expect(circleSource).toContain("extent = 360.0");
+		expect(circleSource).toContain("steps = 1 + int(");
+		expect(circleSource).toContain("turn = extent / steps");
+		expect(circleSource).toContain("half_turn = turn * 0.5");
+		expect(circleSource).toContain(
+			"side_length = 2.0 * radius * math.sin(math.radians(half_turn))"
+		);
+		expect(circleSource).toContain("if radius < 0:");
+		expect(circleSource).toContain("self.left(half_turn)");
+		expect(circleSource).toContain("for _ in range(steps):");
+		expect(circleSource).toContain("self.forward(side_length)");
+		expect(circleSource).toContain("self.left(turn)");
+		expect(circleSource).toContain("self.left(-half_turn)");
+		expect(circleSource).not.toContain("_bridge.circle(float(radius))");
+	});
+
 	it("renders the original Turtle built-in shapes with classic as default", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
