@@ -11,6 +11,7 @@ import {
 	warmPythonRuntimeResources
 } from "@/modules/pythonIdeRuntimeHints";
 import { pythonIdeImportedTopLevelModules } from "@/modules/pythonImportScanner";
+import { pythonStandardLibraryModules } from "@/modules/pythonStandardLibraryModules";
 
 export { pythonIdeImportedTopLevelModules } from "@/modules/pythonImportScanner";
 
@@ -3819,7 +3820,10 @@ json.dumps(__classes_files)
 	);
 }
 
-function packageScanModules(files: PythonIdeFile[]) {
+function packageScanModules(
+	files: PythonIdeFile[],
+	standardLibraryModules: Set<string>
+) {
 	const pythonFiles = files.filter(file => isPythonIdePythonFile(file.name));
 	const localModules = new Set([
 		"_classes_pgzero",
@@ -3838,6 +3842,7 @@ function packageScanModules(files: PythonIdeFile[]) {
 			moduleName =>
 				!localModules.has(moduleName) &&
 				!MICROPIP_PACKAGES.has(moduleName) &&
+				!standardLibraryModules.has(moduleName) &&
 				!loadedPyodideImportModules.has(moduleName)
 		)
 		.sort();
@@ -3847,7 +3852,8 @@ async function loadPyodideImportPackages(
 	pyodide: PyodideAPI,
 	files: PythonIdeFile[]
 ) {
-	const modules = packageScanModules(files);
+	const standardLibraryModules = await pythonStandardLibraryModules(pyodide);
+	const modules = packageScanModules(files, standardLibraryModules);
 	if (!modules.length) return;
 
 	await pyodide.loadPackagesFromImports(

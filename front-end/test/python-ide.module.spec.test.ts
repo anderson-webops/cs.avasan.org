@@ -53,6 +53,10 @@ import {
 	warmPythonRuntime
 } from "../src/modules/pythonIdeRuntime";
 import { primePythonRuntimeConnection } from "../src/modules/pythonIdeRuntimeHints";
+import {
+	pythonStandardLibraryModules,
+	resetPythonStandardLibraryModuleCache
+} from "../src/modules/pythonStandardLibraryModules";
 
 const oneByOnePngBytes = new Uint8Array([
 	0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00, 0x00, 0x0d,
@@ -63,6 +67,7 @@ describe("python IDE project helpers", () => {
 	beforeEach(() => {
 		resetPythonIdeCourseAssetPackCache();
 		resetCodePreviewCaches();
+		resetPythonStandardLibraryModuleCache();
 		const storage = new Map<string, string>();
 		Object.defineProperty(window, "localStorage", {
 			configurable: true,
@@ -1113,6 +1118,67 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain('from "@/modules/pythonImportScanner"');
 		expect(scannerSource).toContain(
 			"export function pythonIdeImportedTopLevelModules"
+		);
+	});
+
+	it("skips standard-library imports before runtime package setup", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+		const workerSource = readFileSync(
+			resolve(__dirname, "../src/workers/pythonIdePlainWorker.ts"),
+			"utf8"
+		);
+
+		expect(runtimeSource).toContain(
+			'import { pythonStandardLibraryModules } from "@/modules/pythonStandardLibraryModules";'
+		);
+		expect(runtimeSource).toContain(
+			"standardLibraryModules: Set<string>"
+		);
+		expect(runtimeSource).toContain(
+			"!standardLibraryModules.has(moduleName)"
+		);
+		expect(runtimeSource).toContain(
+			"const standardLibraryModules = await pythonStandardLibraryModules(pyodide);"
+		);
+		expect(runtimeSource).toContain(
+			"packageScanModules(files, standardLibraryModules)"
+		);
+		expect(workerSource).toContain(
+			'import { pythonStandardLibraryModules } from "@/modules/pythonStandardLibraryModules";'
+		);
+		expect(workerSource).toContain(
+			"standardLibraryModules: Set<string>"
+		);
+		expect(workerSource).toContain(
+			"!standardLibraryModules.has(moduleName)"
+		);
+		expect(workerSource).toContain(
+			"const modules = plainPythonPackageScanModules("
+		);
+		expect(workerSource).toContain(
+			"files,\n\t\tstandardLibraryModules"
+		);
+	});
+
+	it("loads the standard-library module list from Pyodide once", async () => {
+		const runPython = vi.fn(
+			() => JSON.stringify(["csv", "json", "math", "random"])
+		);
+		const pyodide = { runPython };
+
+		await expect(pythonStandardLibraryModules(pyodide)).resolves.toEqual(
+			new Set(["csv", "json", "math", "random"])
+		);
+		await expect(pythonStandardLibraryModules(pyodide)).resolves.toEqual(
+			new Set(["csv", "json", "math", "random"])
+		);
+
+		expect(runPython).toHaveBeenCalledTimes(1);
+		expect(runPython.mock.calls[0]?.[0]).toContain(
+			"stdlib_module_names"
 		);
 	});
 

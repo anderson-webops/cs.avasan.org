@@ -1,6 +1,7 @@
 import type { PythonIdeFile } from "@/modules/pythonIde";
 import { PYODIDE_INDEX_URL } from "@/modules/pythonIdeRuntimeHints";
 import { pythonIdeImportedTopLevelModules } from "@/modules/pythonImportScanner";
+import { pythonStandardLibraryModules } from "@/modules/pythonStandardLibraryModules";
 
 const PROJECT_ROOT = "/home/pyodide/classes_project";
 const PYTHON_EXTENSION_RE = /\.py$/i;
@@ -151,7 +152,10 @@ function projectModuleNames(files: PythonIdeFile[]) {
 	return [...modules];
 }
 
-function plainPythonPackageScanModules(files: PythonIdeFile[]) {
+function plainPythonPackageScanModules(
+	files: PythonIdeFile[],
+	standardLibraryModules: Set<string>
+) {
 	const localModules = new Set(
 		projectModuleNames(files).map(moduleName => moduleName.split(".")[0])
 	);
@@ -160,6 +164,7 @@ function plainPythonPackageScanModules(files: PythonIdeFile[]) {
 		.filter(
 			moduleName =>
 				!localModules.has(moduleName) &&
+				!standardLibraryModules.has(moduleName) &&
 				!loadedPlainPythonImportModules.has(moduleName)
 		)
 		.sort();
@@ -169,7 +174,11 @@ async function loadPlainPythonImportPackages(
 	pyodide: PyodideAPI,
 	files: PythonIdeFile[]
 ) {
-	const modules = plainPythonPackageScanModules(files);
+	const standardLibraryModules = await pythonStandardLibraryModules(pyodide);
+	const modules = plainPythonPackageScanModules(
+		files,
+		standardLibraryModules
+	);
 	if (!modules.length) return;
 
 	await pyodide.loadPackagesFromImports(
