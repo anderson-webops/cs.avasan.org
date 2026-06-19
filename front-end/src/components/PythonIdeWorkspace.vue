@@ -1863,7 +1863,7 @@ function renderTurtleCommand(
 		const end = toCanvas(partialEnd.x, partialEnd.y);
 		context.strokeStyle = command.color;
 		context.lineWidth = command.width;
-		context.lineCap = "round";
+		context.lineCap = activeLineEnd ? "butt" : "round";
 		context.lineJoin = "round";
 		context.beginPath();
 		context.moveTo(start.x, start.y);
@@ -2850,7 +2850,7 @@ function drawGameActor(
 
 	context.save();
 	context.translate(x, y);
-	context.rotate((angle * Math.PI) / 180);
+	context.rotate((-angle * Math.PI) / 180);
 	const left = -anchorX;
 	const top = -anchorY;
 	if (
@@ -2893,7 +2893,7 @@ function drawGameImage(
 
 	context.save();
 	context.translate(x + width / 2, y + height / 2);
-	context.rotate((angle * Math.PI) / 180);
+	context.rotate((-angle * Math.PI) / 180);
 	if (
 		assetImage?.loaded &&
 		!assetImage.failed &&

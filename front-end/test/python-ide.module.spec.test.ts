@@ -557,6 +557,9 @@ describe("python IDE project helpers", () => {
 			"activeLineEnd?: { x: number; y: number }"
 		);
 		expect(renderCommandSource).toContain("activeLineEnd ??");
+		expect(renderCommandSource).toContain(
+			'context.lineCap = activeLineEnd ? "butt" : "round";'
+		);
 		expect(renderSceneSource).toContain(
 			'activeCommand.command.kind === "line"'
 		);
@@ -1279,6 +1282,24 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain(
 			".turtle-canvas:not(.turtle-canvas--game)"
 		);
+	});
+
+	it("keeps PyGame Zero actor angles anticlockwise like Pygame Zero", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const actorStart = pageSource.indexOf("function drawGameActor");
+		const imageStart = pageSource.indexOf("function drawGameImage");
+		const actorSource = pageSource.slice(actorStart, imageStart);
+		const imageSource = pageSource.slice(
+			imageStart,
+			pageSource.indexOf("function drawGameLine", imageStart)
+		);
+
+		expect(actorSource).toContain("context.rotate((-angle * Math.PI) / 180);");
+		expect(imageSource).toContain("context.rotate((-angle * Math.PI) / 180);");
+		expect(pageSource).not.toContain("context.rotate((angle * Math.PI) / 180);");
 	});
 
 	it("keeps Streamlit dashboard widget helpers wired in the runtime shim", () => {
