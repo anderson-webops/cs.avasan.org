@@ -3,6 +3,59 @@ import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
 import { buildSupportSectionGuidance } from "./supportSectionGuidance";
 
+type AiSearchSupplementalPurpose = "transfer" | "extension";
+
+function aiSearchLabFocus(labNumber: number) {
+	const focusByLab: Record<number, string> = {
+		13: "frontier instrumentation, path reconstruction, visited-state evidence, and a trace that explains why the selected path was found",
+		14: "depth limits, iterative-deepening comparisons, missed-state notes, repeated-work logs, and a clear explanation of the stop condition",
+		15: "uniform-cost or A* cost accounting, priority-queue traces, weighted-edge behavior, and heuristic admissibility checks",
+		16: "greedy versus A* comparisons, misleading heuristic cases, cost-aware path explanations, and evidence that the faster-looking path is not always best",
+		17: "game or puzzle search evaluation, baseline comparison, scoring-heuristic stress tests, decision logs, and a cautious interpretation of the chosen move"
+	};
+
+	return (
+		focusByLab[labNumber] ??
+		"state representation, search traces, success conditions, and evidence that the algorithm behaves intentionally"
+	);
+}
+
+function aiSearchSupplementalContent(
+	labNumber: number,
+	purpose: AiSearchSupplementalPurpose
+) {
+	const label = `AI Search Lab ${labNumber}`;
+	const purposeText =
+		purpose === "transfer"
+			? {
+					artifact: "transfer-practice search lab",
+					path: "Move the search idea into a changed state space, graph shape, cost rule, or stopping condition so the same reasoning is checked outside the original walkthrough."
+				}
+			: {
+					artifact: "extension-practice search lab",
+					path: "Add one stronger diagnostic, comparison, visualization, or stress case that makes the search behavior easier to inspect and explain."
+				};
+	const finalCheck =
+		purpose === "transfer"
+			? "The changed case still names the state representation, valid actions, goal test, and evidence used to judge correctness."
+			: "The extension adds insight rather than only extra output: the new evidence changes what can be explained about the search behavior.";
+
+	return [
+		`**Project goal:** Complete the ${purposeText.artifact} for **${label}** with a reproducible run, visible search trace, and one edge case that is not copied from the core lab.`,
+		`**Practice path:** ${purposeText.path}`,
+		`**Focus:** ${aiSearchLabFocus(labNumber)}.`,
+		"**Required work:**",
+		"1. Define the state representation, valid actions, goal condition, frontier rule, and evidence to record before changing the code.",
+		"2. Run one baseline case and save enough trace output to explain the order in which states are explored.",
+		"3. Change one meaningful condition, then rerun the search and compare path, cost, frontier size, visited states, or decision quality.",
+		"4. Write a short interpretation that separates algorithm behavior from implementation bugs or arbitrary tie-breaking.",
+		"**Completion checks:**",
+		`- ${finalCheck}`,
+		"- The output includes a normal case, a changed or awkward case, and a short explanation of what the trace proves.",
+		"- The conclusion names one limitation of the representation, heuristic, cost rule, or stopping condition."
+	].join("\n\n");
+}
+
 export const aiLevel1Course: RawCourse = {
 	name: "AI Level 1",
 	modules: [
@@ -784,12 +837,7 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "AI Search Lab 13 supplemental 2: Implementation Lab",
-					content: buildProjectGuidance({
-						courseFamily: "AI/Python",
-						moduleTitle: "AI Search Lab 13: Implementation Lab",
-						projectKind: "extension",
-						hasReference: true
-					}),
+					content: aiSearchSupplementalContent(13, "transfer"),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-05-applied-studio-11-ai-search-lab-13-supplemental-2/starter",
 					solutionLink:
@@ -797,12 +845,7 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "AI Search Lab 13 supplemental 3: Implementation Lab",
-					content: buildProjectGuidance({
-						courseFamily: "AI/Python",
-						moduleTitle: "AI Search Lab 13: Implementation Lab",
-						projectKind: "extension",
-						hasReference: true
-					}),
+					content: aiSearchSupplementalContent(13, "extension"),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-06-applied-studio-11-ai-search-lab-13-supplemental-3/starter",
 					solutionLink:
@@ -865,12 +908,7 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "AI Search Lab 14 supplemental 2: Implementation Lab",
-					content: buildProjectGuidance({
-						courseFamily: "AI/Python",
-						moduleTitle: "AI Search Lab 14: Implementation Lab",
-						projectKind: "extension",
-						hasReference: true
-					}),
+					content: aiSearchSupplementalContent(14, "transfer"),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-07-applied-studio-12-ai-search-lab-14-supplemental-2/starter",
 					solutionLink:
@@ -878,12 +916,7 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "AI Search Lab 14 supplemental 3: Implementation Lab",
-					content: buildProjectGuidance({
-						courseFamily: "AI/Python",
-						moduleTitle: "AI Search Lab 14: Implementation Lab",
-						projectKind: "extension",
-						hasReference: true
-					}),
+					content: aiSearchSupplementalContent(14, "extension"),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-08-applied-studio-12-ai-search-lab-14-supplemental-3/starter",
 					solutionLink:
@@ -946,12 +979,7 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "AI Search Lab 15 supplemental 2: Implementation Lab",
-					content: buildProjectGuidance({
-						courseFamily: "AI/Python",
-						moduleTitle: "AI Search Lab 15: Implementation Lab",
-						projectKind: "extension",
-						hasReference: true
-					}),
+					content: aiSearchSupplementalContent(15, "transfer"),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-09-applied-studio-13-ai-search-lab-15-supplemental-2/starter",
 					solutionLink:
@@ -959,12 +987,7 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "AI Search Lab 15 supplemental 3: Implementation Lab",
-					content: buildProjectGuidance({
-						courseFamily: "AI/Python",
-						moduleTitle: "AI Search Lab 15: Implementation Lab",
-						projectKind: "extension",
-						hasReference: true
-					}),
+					content: aiSearchSupplementalContent(15, "extension"),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-10-applied-studio-13-ai-search-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -1027,12 +1050,7 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "AI Search Lab 16 supplemental 2: Implementation Lab",
-					content: buildProjectGuidance({
-						courseFamily: "AI/Python",
-						moduleTitle: "AI Search Lab 16: Implementation Lab",
-						projectKind: "extension",
-						hasReference: true
-					}),
+					content: aiSearchSupplementalContent(16, "transfer"),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-11-applied-studio-14-ai-search-lab-16-supplemental-2/starter",
 					solutionLink:
@@ -1040,12 +1058,7 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "AI Search Lab 16 supplemental 3: Implementation Lab",
-					content: buildProjectGuidance({
-						courseFamily: "AI/Python",
-						moduleTitle: "AI Search Lab 16: Implementation Lab",
-						projectKind: "extension",
-						hasReference: true
-					}),
+					content: aiSearchSupplementalContent(16, "extension"),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-12-applied-studio-14-ai-search-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -1108,12 +1121,7 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "AI Search Lab 17 supplemental 2: Implementation Lab",
-					content: buildProjectGuidance({
-						courseFamily: "AI/Python",
-						moduleTitle: "AI Search Lab 17: Implementation Lab",
-						projectKind: "extension",
-						hasReference: true
-					}),
+					content: aiSearchSupplementalContent(17, "transfer"),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-13-applied-studio-15-ai-search-lab-17-supplemental-2/starter",
 					solutionLink:
@@ -1121,12 +1129,7 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "AI Search Lab 17 supplemental 3: Implementation Lab",
-					content: buildProjectGuidance({
-						courseFamily: "AI/Python",
-						moduleTitle: "AI Search Lab 17: Implementation Lab",
-						projectKind: "extension",
-						hasReference: true
-					}),
+					content: aiSearchSupplementalContent(17, "extension"),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-14-applied-studio-15-ai-search-lab-17-supplemental-3/starter",
 					solutionLink:

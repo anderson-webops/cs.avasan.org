@@ -1549,6 +1549,56 @@ describe("course text quality normalization", () => {
 		expect(combinedText).toContain("capstone audit synthesis");
 	});
 
+	it("keeps AI search supplemental labs purpose-specific", async () => {
+		const course = await loadRawCourse("ai-level-1");
+		expect(course).not.toBeNull();
+		if (!course) return;
+
+		const expectedFocusByLab = new Map([
+			[13, "frontier instrumentation"],
+			[14, "depth limits"],
+			[15, "uniform-cost or A* cost accounting"],
+			[16, "greedy versus A* comparisons"],
+			[17, "game or puzzle search evaluation"]
+		]);
+		const checkedLabs: number[] = [];
+
+		for (const [labNumber, focus] of expectedFocusByLab) {
+			const module = course.modules.find(
+				module => module.title === `AI Search Lab ${labNumber}`
+			);
+			expect(module, `AI Search Lab ${labNumber}`).toBeDefined();
+			if (!module) continue;
+
+			const transfer = module.supplementalProjects.find(
+				item =>
+					item.title ===
+					`Transfer Practice: AI Search Lab ${labNumber}`
+			);
+			const extension = module.supplementalProjects.find(
+				item =>
+					item.title ===
+					`Extension Practice: AI Search Lab ${labNumber}`
+			);
+			expect(transfer, module.title).toBeDefined();
+			expect(extension, module.title).toBeDefined();
+			if (!transfer || !extension) continue;
+
+			expect(transfer.content, transfer.title).toContain(
+				"transfer-practice search lab"
+			);
+			expect(extension.content, extension.title).toContain(
+				"extension-practice search lab"
+			);
+			expect(transfer.content, transfer.title).toContain(focus);
+			expect(extension.content, extension.title).toContain(focus);
+			expect(transfer.content, module.title).not.toEqual(extension.content);
+			checkedLabs.push(labNumber);
+		}
+
+		expect(checkedLabs).toEqual([13, 14, 15, 16, 17]);
+	});
+
 	it("keeps systems and web implementation labs from regressing to generated filler", () => {
 		const sourcePaths = [
 			"src/stores/courses/assembly.ts",
