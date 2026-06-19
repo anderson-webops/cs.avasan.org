@@ -2,9 +2,11 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { EditorSelection, EditorState } from "@codemirror/state";
 import { python } from "@codemirror/lang-python";
+import { getIndentUnit } from "@codemirror/language";
 import { describe, expect, it, vi } from "vitest";
 import {
 	canSkipExistingClosingToken,
+	createPythonCodeMirrorExtensions,
 	pythonIdeCompletionSource,
 	pythonIdeCompletionsForMode,
 	pythonNewlineIndentText,
@@ -123,6 +125,7 @@ describe("python IDE CodeMirror editor", () => {
 		expect(editorSource).not.toContain('from "codemirror"');
 		expect(editorSource).toContain("python()");
 		expect(editorSource).toContain("indentWithTab");
+		expect(editorSource).toContain("indentUnit.of(pythonIndentText)");
 		expect(editorSource).toContain(
 			"codeMirrorInsertNewlineAndIndent(view)"
 		);
@@ -148,6 +151,19 @@ describe("python IDE CodeMirror editor", () => {
 		expect(pageSource).toContain(
 			'mode: selectedProject.value?.mode ?? "python"'
 		);
+	});
+
+	it("configures CodeMirror's native indentation unit to four spaces", () => {
+		const state = EditorState.create({
+			doc: "if ready:",
+			extensions: createPythonCodeMirrorExtensions({
+				onChange: vi.fn(),
+				onCursorCountChange: vi.fn()
+			})
+		});
+
+		expect(getIndentUnit(state)).toBe(4);
+		expect(state.tabSize).toBe(4);
 	});
 
 	it("surfaces the built-in editor shortcuts in the IDE chrome", () => {

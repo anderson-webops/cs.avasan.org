@@ -23,6 +23,7 @@ import {
 	foldKeymap,
 	HighlightStyle,
 	indentOnInput,
+	indentUnit,
 	syntaxHighlighting,
 	syntaxTree
 } from "@codemirror/language";
@@ -1213,6 +1214,7 @@ export function createPythonCodeMirrorExtensions(
 			)
 		}),
 		EditorState.tabSize.of(4),
+		indentUnit.of(pythonIndentText),
 		EditorState.allowMultipleSelections.of(true),
 		pythonEditorTheme,
 		syntaxHighlighting(pythonHighlightStyle),
