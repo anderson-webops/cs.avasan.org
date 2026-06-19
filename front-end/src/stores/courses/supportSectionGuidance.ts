@@ -125,7 +125,9 @@ export function buildSupportSectionGuidance({
 		return [
 			opener,
 			`The **${title}** plan names the core state, inputs, outputs, boundaries, and verification evidence for ${focus}.`,
-			`The build order for **${title}** produces a small working version early, then adds complexity only after the current checkpoint can be explained.`
+			`The build order for **${title}** produces a small working version early, then adds complexity only after the current checkpoint can be explained.`,
+			`A complete plan separates required behavior from optional polish. It identifies the first runnable slice, the data or state representation, the smallest useful test case, and the point where the work can pause without losing a working baseline.`,
+			`Each checkpoint should answer three questions: what changed, how the change can be observed, and what evidence would show that the next layer is safe to add.`
 		].join("\n\n");
 	}
 
@@ -139,7 +141,9 @@ export function buildSupportSectionGuidance({
 		return [
 			opener,
 			`Expected and observed behavior in **${title}** are compared for ${focus}.`,
-			`The **${title}** record includes the main result, one meaningful edge case, one design or debugging decision, and one limitation that would guide a later revision.`
+			`The **${title}** record includes the main result, one meaningful edge case, one design or debugging decision, and one limitation that would guide a later revision.`,
+			`A complete verification pass names the expected result, the actual result, the evidence source, and the interpretation. Useful evidence can be a trace, screenshot, console output, unit test, sample run, diagram, table, or short written comparison, depending on the course family.`,
+			`If the evidence does not match the expectation, classify the mismatch before changing the work: implementation bug, unclear requirement, invalid assumption, weak test case, or acceptable limitation. That classification determines the next check.`
 		].join("\n\n");
 	}
 

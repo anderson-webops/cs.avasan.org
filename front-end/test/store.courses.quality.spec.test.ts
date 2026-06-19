@@ -3,6 +3,7 @@ import fs from "node:fs";
 import { createPinia, setActivePinia } from "pinia";
 import { useCoursesStore } from "@/stores/courses";
 import { courseCatalog, loadRawCourse } from "@/stores/courses/index";
+import { buildSupportSectionGuidance } from "@/stores/courses/supportSectionGuidance";
 import {
 	parseCourseAssetUrl,
 	slugMarkdownHeading
@@ -282,6 +283,38 @@ describe("course text quality normalization", () => {
 		},
 		COURSE_SWEEP_TIMEOUT
 	);
+
+	it("keeps generated planning and verification support sections substantive", () => {
+		const examples = [
+			buildSupportSectionGuidance({
+				courseFamily: "Scratch Level 1",
+				moduleTitle: "Starting in Scratch",
+				section: "planning"
+			}),
+			buildSupportSectionGuidance({
+				courseFamily: "USACO Bronze",
+				moduleTitle: "Why Did the Cow Cross the Road",
+				section: "planning"
+			}),
+			buildSupportSectionGuidance({
+				courseFamily: "Rust Systems Security",
+				moduleTitle: "Ownership, Moves, and Memory Responsibility",
+				section: "verification"
+			}),
+			buildSupportSectionGuidance({
+				courseFamily: "Java Level 2",
+				moduleTitle: "Bank Account",
+				section: "verification"
+			})
+		];
+
+		for (const content of examples) {
+			expect(wordCount(content)).toBeGreaterThanOrEqual(100);
+			expect(content).toMatch(
+				/evidence|checkpoint|expected|observed|runnable|baseline|mismatch/i
+			);
+		}
+	});
 
 	it(
 		"replaces generic linked-project boilerplate with concrete project guidance",
