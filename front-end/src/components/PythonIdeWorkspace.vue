@@ -340,6 +340,8 @@ const turtleInstantFrameDistanceBudget = 12;
 const turtleInstantFrameStepBudget = 24;
 const turtleVisibleTrailFrameDistanceBudget = 1;
 const turtleVisibleTrailFrameStepBudget = 1;
+const turtleMarkerHaloLineWidth = 4;
+const turtleMarkerStrokeLineWidth = 1.2;
 const outputEntryTruncatedMessage =
 	"\n[Output truncated to keep the browser responsive.]";
 const outputHistoryTrimmedMessage =
@@ -1780,11 +1782,19 @@ function drawOriginalTurtlePolygonShape(
 ) {
 	const [firstPoint, ...remainingPoints] = points;
 	if (!firstPoint) return;
+	const markerColor = context.fillStyle;
 	context.beginPath();
 	context.moveTo(firstPoint[1], firstPoint[0]);
 	for (const [x, y] of remainingPoints) context.lineTo(y, x);
 	context.closePath();
+	context.strokeStyle = turtleState.background;
+	context.lineWidth = turtleMarkerHaloLineWidth;
+	context.stroke();
+	context.fillStyle = markerColor;
 	context.fill();
+	context.strokeStyle = markerColor;
+	context.lineWidth = turtleMarkerStrokeLineWidth;
+	context.stroke();
 }
 
 function drawFancyTurtleShape(context: CanvasRenderingContext2D) {

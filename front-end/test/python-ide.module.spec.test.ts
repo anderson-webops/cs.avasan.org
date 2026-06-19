@@ -756,6 +756,14 @@ describe("python IDE project helpers", () => {
 		expect(markerSource.indexOf("context.translate(point.x, point.y)")).toBeLessThan(
 			markerSource.indexOf("context.strokeStyle = pose.penColor")
 		);
+		expect(pageSource).toContain("const turtleMarkerHaloLineWidth = 4");
+		expect(pageSource).toContain(
+			"const turtleMarkerStrokeLineWidth = 1.2"
+		);
+		expect(pageSource).toContain("context.strokeStyle = turtleState.background");
+		expect(pageSource).toContain("context.lineWidth = turtleMarkerHaloLineWidth");
+		expect(pageSource).toContain("context.fillStyle = markerColor");
+		expect(pageSource).toContain("context.lineWidth = turtleMarkerStrokeLineWidth");
 	});
 
 	it("keeps tiny Turtle steps frame-batched with the visible cursor", () => {
