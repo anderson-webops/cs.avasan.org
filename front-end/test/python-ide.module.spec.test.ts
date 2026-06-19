@@ -1660,6 +1660,7 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain(
 			"return runPlainPythonProjectInWorker(options);"
 		);
+		expect(runtimeSource).toContain('script.crossOrigin = "anonymous";');
 		expect(runtimeSource).toContain(
 			'new URL("../workers/pythonIdePlainWorker.ts", import.meta.url)'
 		);
@@ -1673,7 +1674,7 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain(
 			"Plain Python worker is being terminated."
 		);
-		expect(workerSource).toContain("pyodide.mjs");
+		expect(workerSource).toContain("PYODIDE_MODULE_SRC");
 		expect(workerSource).toContain("loadPackagesFromImports");
 		expect(workerSource).toContain("setStdout");
 		expect(workerSource).toContain("setStderr");

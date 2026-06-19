@@ -316,6 +316,9 @@ function loadScript(src: string) {
 		const script = document.createElement("script");
 		script.src = src;
 		script.async = true;
+		if (src.startsWith(PYODIDE_INDEX_URL)) {
+			script.crossOrigin = "anonymous";
+		}
 		script.addEventListener("load", () => resolve(), { once: true });
 		script.addEventListener(
 			"error",

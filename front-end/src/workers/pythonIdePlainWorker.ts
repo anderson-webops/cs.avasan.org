@@ -3,13 +3,15 @@ import {
 	isPythonIdeTextFile,
 	isValidPythonFileName
 } from "@/modules/pythonIde";
-import { PYODIDE_INDEX_URL } from "@/modules/pythonIdeRuntimeHints";
+import {
+	PYODIDE_INDEX_URL,
+	PYODIDE_MODULE_SRC
+} from "@/modules/pythonIdeRuntimeHints";
 import { pythonIdeImportedTopLevelModules } from "@/modules/pythonImportScanner";
 import { pythonStandardLibraryModules } from "@/modules/pythonStandardLibraryModules";
 
 const PROJECT_ROOT = "/home/pyodide/classes_project";
 const PYTHON_EXTENSION_RE = /\.py$/i;
-const PYODIDE_MODULE_SRC = `${PYODIDE_INDEX_URL}pyodide.mjs`;
 
 interface PyodideAPI {
 	FS: {
