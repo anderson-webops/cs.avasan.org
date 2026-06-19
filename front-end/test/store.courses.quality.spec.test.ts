@@ -656,6 +656,15 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/module's core concept, a concrete worked example, and a testable artifact/i
 			);
+			expect(corpus).not.toMatch(
+				/A focused example anchors Java reasoning with values versus references, class responsibilities, interfaces or records when useful, and visible verification/i
+			);
+			expect(corpus).not.toMatch(
+				/One worked example and one transfer check show how Java reasoning with values versus references, class responsibilities, interfaces or records when useful/i
+			);
+			expect(corpus).not.toMatch(
+				/The first pass makes the rule or model visible for Java type design with objects, fields, methods, collection choices, public APIs, and compile-run feedback/i
+			);
 			expect(corpus).not.toMatch(/the work should be able to describe/i);
 			expect(corpus).not.toMatch(
 				/turn the prompt into a concrete artifact/i
@@ -737,6 +746,12 @@ describe("course text quality normalization", () => {
 			expect(corpus).toContain("AP CSA Java reasoning");
 			expect(corpus).toContain("competitive-programming discipline");
 			expect(corpus).toContain("mathematical reasoning");
+			expect(corpus).toContain(
+				"connects Java syntax to a concrete responsibility"
+			);
+			expect(corpus).toContain(
+				"traces the Java idea from data shape to public behavior"
+			);
 		},
 		COURSE_SWEEP_TIMEOUT
 	);
@@ -4190,7 +4205,9 @@ describe("course text quality normalization", () => {
 			/Each example should include a diagram or table/i,
 			/Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case/i,
 			/State what stays the same, what changes, which assumption is most fragile/i,
-			/Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note/i
+			/Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note/i,
+			/The introductory physics work does not require beakers, kits, or household materials; any physical demonstration can be replaced with evidence from the provided resource/i,
+			/The physics modeling work does not require beakers, kits, or household materials; any physical demonstration can be replaced with evidence from the provided resource/i
 		];
 
 		for (const courseId of courseIds) {

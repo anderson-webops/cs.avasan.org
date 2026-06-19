@@ -5637,6 +5637,26 @@ function compactGeneratedProjectSupport(
 
 function lessonSupport(context: CourseTextContext) {
 	const focus = unscopedSubjectFocus(context);
+	const topic = supportFocusTopic(context);
+	const javaConceptPath = () =>
+		variantPrompt(context, [
+			() =>
+				`**Concept path:** ${topic} starts by mapping responsibilities: which class owns the state, which method changes it, and which output or test proves the behavior.`,
+			() =>
+				`**Concept path:** ${topic} connects Java syntax to a concrete responsibility: constructor setup, method contract, object state, collection choice, or interface/record boundary.`,
+			() =>
+				`**Concept path:** ${topic} separates the model from the driver code, then checks one normal case and one edge case so the Java behavior is visible.`,
+			() =>
+				`**Concept path:** ${topic} traces the Java idea from data shape to public behavior: fields, parameters, return values, object interactions, and compile-run evidence.`,
+			() =>
+				`**Concept path:** ${topic} links each language feature to a design choice, then verifies that choice through a runnable example and a changed case.`,
+			() =>
+				`**Concept path:** ${topic} makes the object boundary explicit first, then follows the value or reference through one method call and one variation.`,
+			() =>
+				`**Concept path:** ${topic} treats Java structure as evidence: names, access levels, constructors, records or interfaces, and tests all point back to the same behavior.`,
+			() =>
+				`**Concept path:** ${topic} begins with a small runnable example, then changes one responsibility or object interaction to test whether the design still holds.`
+		]);
 	const conceptPath = variantPrompt(context, [
 		() =>
 			`**Concept path:** The core idea is ${focus}: one concrete example establishes the relevant vocabulary, then a nearby variation checks whether the same reasoning still works.`,
@@ -5657,7 +5677,7 @@ function lessonSupport(context: CourseTextContext) {
 	]);
 
 	return [
-		conceptPath,
+		isJavaContext(context) ? javaConceptPath() : conceptPath,
 		`**Common pitfalls:** ${commonPitfalls(context)}`,
 		`**Mastery check:** ${proficiencyEvidence(context)}`
 	].join("\n\n");
@@ -5770,7 +5790,7 @@ function scienceSupport(context: CourseTextContext) {
 	const evidenceFormat = scienceEvidenceFormat(context);
 	const remoteInvestigation = variantPrompt(context, [
 		subject =>
-			`${subject} uses shared-screen materials and paper notes alongside ${evidenceFormat}. The ${band} work does not require beakers, kits, or household materials; any physical demonstration can be replaced with evidence from the provided resource.`,
+			`${subject} uses shared-screen materials and paper notes alongside ${evidenceFormat}; for ${topic}, any physical demonstration is replaceable with evidence from the named resource, so beakers, kits, and household materials are not required.`,
 		subject =>
 			`${subject} is designed for a Zoom-safe ${band} workflow using ${evidenceFormat}. This ${band} evidence plan for ${topic} treats physical supplies as optional only when the same question can be answered from notes, diagrams, tables, or screen-shared resources.`,
 		subject =>
