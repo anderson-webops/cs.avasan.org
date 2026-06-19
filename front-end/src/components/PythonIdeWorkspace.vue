@@ -46,6 +46,7 @@ import {
 	pythonIdeFileUploadAccept,
 	pythonIdeModeForCourseId,
 	pythonIdeProjectToPayload,
+	resolvePythonIdeActiveFileName,
 	saveLocalPythonProjectsAsync,
 	updateRemotePythonIdeProject
 } from "@/modules/pythonIde";
@@ -572,11 +573,11 @@ const selectedProject = computed(
 const activeFile = computed(() => {
 	const project = selectedProject.value;
 	if (!project) return null;
-	return (
-		project.files.find(file => file.name === project.activeFileName) ??
-		project.files[0] ??
-		null
+	const activeFileName = resolvePythonIdeActiveFileName(
+		project.files,
+		project.activeFileName
 	);
+	return project.files.find(file => file.name === activeFileName) ?? null;
 });
 
 const activeFileContent = computed({
@@ -951,9 +952,15 @@ async function createInitialProject() {
 }
 
 function setProjects(nextProjects: PythonIdeProject[]) {
-	projects.value = nextProjects;
+	projects.value = nextProjects.map(project => ({
+		...project,
+		activeFileName: resolvePythonIdeActiveFileName(
+			project.files,
+			project.activeFileName
+		)
+	}));
 	selectedProjectID.value =
-		projectForRoute(nextProjects)?._id ?? nextProjects[0]?._id ?? "";
+		projectForRoute(projects.value)?._id ?? projects.value[0]?._id ?? "";
 }
 
 async function persistLocalProjects() {
@@ -1452,10 +1459,7 @@ function deleteFile(file: PythonIdeFile) {
 		candidate => candidate.name !== file.name
 	);
 	if (project.activeFileName === file.name) {
-		project.activeFileName =
-			getPythonIdeRunnableFile(project)?.name ??
-			project.files[0]?.name ??
-			"main.py";
+		project.activeFileName = resolvePythonIdeActiveFileName(project.files);
 	}
 	touchSelectedProject();
 	scheduleSave();

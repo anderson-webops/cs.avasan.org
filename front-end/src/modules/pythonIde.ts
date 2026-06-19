@@ -375,8 +375,12 @@ function getStarterFilesForTemplate(
 	return getBlankStarterFiles();
 }
 
-function activeFileNameForProjectFiles(files: PythonIdeFile[]) {
+export function resolvePythonIdeActiveFileName(
+	files: PythonIdeFile[],
+	preferredFileName?: string
+) {
 	return (
+		files.find(file => file.name === preferredFileName)?.name ??
 		files.find(file => file.name === "main.py")?.name ??
 		files.find(file => isPythonIdePythonFile(file.name))?.name ??
 		files[0]?.name ??
@@ -408,7 +412,7 @@ export function createPythonIdeProject(
 		title: options.title ?? projectTitleForMode(mode),
 		mode,
 		files,
-		activeFileName: activeFileNameForProjectFiles(files),
+		activeFileName: resolvePythonIdeActiveFileName(files),
 		courseID: options.courseID,
 		courseProjectKey: options.courseProjectKey,
 		courseProjectTitle: options.courseProjectTitle,
@@ -426,7 +430,10 @@ export function pythonIdeProjectToPayload(
 		title: project.title,
 		mode: project.mode,
 		files: project.files,
-		activeFileName: project.activeFileName,
+		activeFileName: resolvePythonIdeActiveFileName(
+			project.files,
+			project.activeFileName
+		),
 		courseID: project.courseID,
 		courseProjectKey: project.courseProjectKey,
 		courseProjectTitle: project.courseProjectTitle,

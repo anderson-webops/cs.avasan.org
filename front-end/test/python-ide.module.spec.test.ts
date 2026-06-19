@@ -28,6 +28,7 @@ import {
 	pythonIdeProjectToPayload,
 	pythonIdeStorageKey,
 	pythonIdeLibrarySupport,
+	resolvePythonIdeActiveFileName,
 	saveLocalPythonProjects,
 	saveLocalPythonProjectsAsync,
 	pgzeroCourseStarterCode,
@@ -197,7 +198,18 @@ describe("python IDE project helpers", () => {
 		expect(pythonIdeProjectToPayload(project).activeFileName).toBe(
 			"lesson.py"
 		);
+		expect(
+			resolvePythonIdeActiveFileName(project.files, "notes.md")
+		).toBe("notes.md");
 		expect(dataProject.activeFileName).toBe("scores.csv");
+
+		project.activeFileName = "missing.py";
+		expect(resolvePythonIdeActiveFileName(project.files, "missing.py")).toBe(
+			"lesson.py"
+		);
+		expect(pythonIdeProjectToPayload(project).activeFileName).toBe(
+			"lesson.py"
+		);
 	});
 
 	it("preloads the Pyodide runtime script when warming the IDE", () => {
@@ -1634,6 +1646,30 @@ describe("python IDE project helpers", () => {
 		);
 		expect(pageSource).toContain("Saved locally after sync issue");
 		expect(pageSource).toContain("const isRemoteProject =");
+	});
+
+	it("normalizes loaded project active files before rendering or saving", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const setProjectsStart = pageSource.indexOf("function setProjects");
+		const setProjectsSource = pageSource.slice(
+			setProjectsStart,
+			pageSource.indexOf("async function persistLocalProjects", setProjectsStart)
+		);
+
+		expect(setProjectsSource).toContain("projects.value = nextProjects.map");
+		expect(setProjectsSource).toContain(
+			"activeFileName: resolvePythonIdeActiveFileName("
+		);
+		expect(setProjectsSource).toContain(
+			"project.files,\n\t\t\tproject.activeFileName"
+		);
+		expect(setProjectsSource).toContain("projectForRoute(projects.value)");
+		expect(pageSource).toContain(
+			"const activeFileName = resolvePythonIdeActiveFileName("
+		);
 	});
 
 	it("serializes saves and protects newer edits from stale remote responses", () => {
