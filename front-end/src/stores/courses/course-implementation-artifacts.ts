@@ -1811,6 +1811,62 @@ function addDataCatalogModule(courseId: string, course: RawCourse) {
 	const catalog = dataCatalogs[courseId];
 	if (!catalog) return;
 
+	const catalogNotes: Record<
+		string,
+		{
+			sourceUse: string;
+			reproducibility: string;
+			evaluation: string;
+			responsibleUse: string;
+			readinessCard: string;
+			evaluationReport: string;
+		}
+	> = {
+		"data-science-in-python": {
+			sourceUse:
+				"Data Science uses these sources to practice cleaning, aggregation, visualization, and defensible written claims from tabular evidence.",
+			reproducibility:
+				"For Data Science, reproducibility means the same cleaning decisions, row counts, grouped summaries, and charts can be regenerated from the original fixture or dataset.",
+			evaluation:
+				"For Data Science, evaluation should compare the claim against a baseline summary, alternate grouping, missing-data check, or visualization choice rather than a model score alone.",
+			responsibleUse:
+				"For Data Science, the responsible-use note should name audience, sampling limits, missing or messy data, chart-scale risk, and any causal claim that the data cannot support.",
+			readinessCard:
+				"For Data Science, the readiness card should emphasize column meanings, missing values, units, categorical cleanup, aggregation level, and what claim the dataset can or cannot support.",
+			evaluationReport:
+				"For Data Science, the report should defend a human-readable conclusion with a table or chart, explain the cleaning choices, and state the strongest limitation on interpretation."
+		},
+		"ai-level-1": {
+			sourceUse:
+				"AI Foundations uses these fixtures to practice state representation, search traces, heuristic behavior, rule systems, and agent explanations.",
+			reproducibility:
+				"For AI Foundations, reproducibility means the same start state, goal test, transition rules, tie-breaking rule, and trace produce the same path or decision.",
+			evaluation:
+				"For AI Foundations, evaluation should compare a solver or agent against a known path, baseline strategy, state count, trace, or failure case rather than a statistical score alone.",
+			responsibleUse:
+				"For AI Foundations, the responsible-use note should name where the representation, heuristic, rule priority, or search depth can mislead an agent or user.",
+			readinessCard:
+				"For AI Foundations, the readiness card should emphasize state format, allowed actions, goal test, heuristic assumptions, deterministic tie-breaking, and known unsolved or impossible cases.",
+			evaluationReport:
+				"For AI Foundations, the report should explain the agent behavior with a trace, compare it to a baseline or expected solution, and identify one state where the rule system fails or needs guardrails."
+		},
+		"machine-learning": {
+			sourceUse:
+				"Machine Learning uses these sources to practice feature/target definition, leakage checks, train/test discipline, baseline comparisons, and model-card writing.",
+			reproducibility:
+				"For Machine Learning, reproducibility means the same split strategy, seed, preprocessing pipeline, baseline, and metric can be rerun without accidental leakage or hidden notebook state.",
+			evaluation:
+				"For Machine Learning, evaluation should include a baseline, split or cross-validation plan, metric justification, error analysis, and a note about whether the model appears to generalize.",
+			responsibleUse:
+				"For Machine Learning, the responsible-use note should name intended use, target leakage risk, subgroup or sampling concerns, confidence limits, and where human review is required.",
+			readinessCard:
+				"For Machine Learning, the readiness card should emphasize target definition, feature availability at prediction time, leakage risks, class balance or target distribution, and baseline expectation.",
+			evaluationReport:
+				"For Machine Learning, the report should compare baseline and model results, include error examples, discuss overfitting or leakage risk, and translate the metric into a cautious deployment claim."
+		}
+	};
+	const notes = catalogNotes[courseId];
+
 	appendModule(course, {
 		kind: "appendix",
 		title: "Dataset, Model, and Evaluation Catalog",
@@ -1819,36 +1875,32 @@ function addDataCatalogModule(courseId: string, course: RawCourse) {
 				title: "Approved Dataset and Fixture Sources",
 				content: [
 					"**Concept path:** Use stable, inspectable datasets before introducing heavier tooling. Every dataset should have a source, license/usage note, target question, and known caveat.",
+					`**Current course use:** ${notes.sourceUse}`,
 					`**Catalog:**\n${bullets(catalog)}`,
 					"**Evidence target:** The work demonstrates the ability to name the target, features or evidence, limitation, and evaluation method before coding."
 				].join("\n\n")
 			},
 			{
 				title: "Reproducibility Contract",
-				content:
-					"**Concept path:** Each notebook or script runs from top to bottom with fixed seeds or documented randomness, visible imports, environment notes, and clear data-loading paths. Reproducibility is part of the result: if the artifact cannot be rerun, the evidence is difficult to trust or review.\n\n**Required notes:** Record the runtime or notebook environment, package assumptions, data source path, random seed or nondeterministic step, and the exact output that should reappear. For a dataset project, this may be the cleaned row count and a graph. For an AI or ML project, this may be a baseline score, model metric, search result, or behavior trace.\n\n**Evidence target:** A fresh run reproduces the main table, graph, model metric, or AI behavior without hidden local files."
+				content: `**Concept path:** Each notebook or script runs from top to bottom with fixed seeds or documented randomness, visible imports, environment notes, and clear data-loading paths. Reproducibility is part of the result: if the artifact cannot be rerun, the evidence is difficult to trust or review.\n\n**Current course standard:** ${notes.reproducibility}\n\n**Required notes:** Record the runtime or notebook environment, package assumptions, data source path, random seed or nondeterministic step, and the exact output that should reappear. For a dataset project, this may be the cleaned row count and a graph. For an AI or ML project, this may be a baseline score, model metric, search result, or behavior trace.\n\n**Evidence target:** A fresh run reproduces the main table, graph, model metric, or AI behavior without hidden local files.`
 			},
 			{
 				title: "Evaluation and Limitation Notes",
-				content:
-					"**Readiness check:** Evaluation uses a baseline, metric, validation split or test scenario, and limitation note when the course uses models or AI behavior. The limitation is not an apology at the end; it is part of the interpretation and helps separate measured evidence from overconfident claims.\n\n**Evidence of proficiency:** The work demonstrates the ability to explain why the metric fits the problem and where the result should not be trusted."
+				content: `**Readiness check:** Evaluation uses a baseline, metric, validation split or test scenario, and limitation note when the course uses models or AI behavior. The limitation is not an apology at the end; it is part of the interpretation and helps separate measured evidence from overconfident claims.\n\n**Current course emphasis:** ${notes.evaluation}\n\n**Evidence of proficiency:** The work demonstrates the ability to explain why the metric fits the problem and where the result should not be trusted.`
 			},
 			{
 				title: "Responsible Use Check",
-				content:
-					"**Concept path:** Use introductory NIST AI RMF language: intended use, risk, harm, uncertainty, mitigation, and human oversight. This check keeps technical output connected to audience and context, especially when a chart, prediction, or generated behavior could be misread as more certain than it is.\n\n**Required notes:** Identify who might use the result, what decision it should not be used for, what data or model assumption matters most, and what review step would catch a misleading output. A strong note is specific: it names a likely failure mode such as missing data, biased sampling, leakage, overfitting, hallucinated reasoning, or an overconfident chart interpretation.\n\n**Evidence target:** The work includes one limitation or risk statement for each major AI/ML/data project and one mitigation or review step."
+				content: `**Concept path:** Use introductory NIST AI RMF language: intended use, risk, harm, uncertainty, mitigation, and human oversight. This check keeps technical output connected to audience and context, especially when a chart, prediction, or generated behavior could be misread as more certain than it is.\n\n**Current course risk lens:** ${notes.responsibleUse}\n\n**Required notes:** Identify who might use the result, what decision it should not be used for, what data or model assumption matters most, and what review step would catch a misleading output. A strong note is specific: it names a likely failure mode such as missing data, biased sampling, leakage, overfitting, hallucinated reasoning, or an overconfident chart interpretation.\n\n**Evidence target:** The work includes one limitation or risk statement for each major AI/ML/data project and one mitigation or review step.`
 			}
 		],
 		supplementalProjects: [
 			{
 				title: "Catalog Project: Dataset Readiness Card",
-				content:
-					"**Project goal:** Create a readiness card for one dataset or fixture before using it in an analysis, model, or AI behavior test. The card should make the source understandable without opening the notebook first.\n\n**Required fields:** source URL or origin, license or usage note, target question, relevant columns or features, expected row/item count when available, missing-value or quality caveats, and one reason the source is appropriate for the course level.\n\n**Completion checks:**\n- Source and license/usage notes are recorded.\n- Target question and columns/features are named.\n- Known limitations or risks are documented.\n- One sanity check is listed before analysis begins."
+				content: `**Project goal:** Create a readiness card for one dataset or fixture before using it in an analysis, model, or AI behavior test. The card should make the source understandable without opening the notebook first.\n\n**Current course emphasis:** ${notes.readinessCard}\n\n**Required fields:** source URL or origin, license or usage note, target question, relevant columns or features, expected row/item count when available, missing-value or quality caveats, and one reason the source is appropriate for the course level.\n\n**Completion checks:**\n- Source and license/usage notes are recorded.\n- Target question and columns/features are named.\n- Known limitations or risks are documented.\n- One sanity check is listed before analysis begins.`
 			},
 			{
 				title: "Catalog Project: Evaluation Report",
-				content:
-					"**Project goal:** Write a short evaluation report for one AI, data, or ML artifact. The report should explain what the artifact was expected to do, what evidence was collected, and what would make the result stronger or less trustworthy.\n\n**Required fields:** task or question, baseline or comparison, metric or evidence source, result, interpretation, limitation, and one follow-up test.\n\n**Completion checks:**\n- The report includes baseline or comparison.\n- The metric or evidence is justified.\n- The limitation statement is specific.\n- The conclusion avoids claiming more than the evidence supports."
+				content: `**Project goal:** Write a short evaluation report for one AI, data, or ML artifact. The report should explain what the artifact was expected to do, what evidence was collected, and what would make the result stronger or less trustworthy.\n\n**Current course emphasis:** ${notes.evaluationReport}\n\n**Required fields:** task or question, baseline or comparison, metric or evidence source, result, interpretation, limitation, and one follow-up test.\n\n**Completion checks:**\n- The report includes baseline or comparison.\n- The metric or evidence is justified.\n- The limitation statement is specific.\n- The conclusion avoids claiming more than the evidence supports.`
 			}
 		]
 	});
@@ -2242,6 +2294,55 @@ function addDataAiMlBoundaryModule(courseId: string, course: RawCourse) {
 	const lines = boundaryText[courseId];
 	if (!lines) return;
 
+	const boundaryNotes: Record<
+		string,
+		{
+			checkpoint: string;
+			artifact: string;
+			antiOverlap: string;
+			classification: string;
+			responsibleCard: string;
+		}
+	> = {
+		"data-science-in-python": {
+			checkpoint:
+				"Data Science checkpoints focus on audience, source quality, missing data, units, aggregation choices, chart interpretation, and whether the evidence supports the claim.",
+			artifact:
+				"Data Science artifacts should preserve the path from raw data to cleaned table to visualization or report, with assumptions visible at each transformation.",
+			antiOverlap:
+				"Keep the project in Data Science when the central work is cleaning, exploring, visualizing, summarizing, and communicating evidence rather than building an agent or training a predictive model.",
+			classification:
+				"For Data Science, classify projects by the human question, data quality problem, visualization or summary evidence, and claim being defended.",
+			responsibleCard:
+				"For Data Science, the card should name sampling limits, missing-data risk, chart-scale risk, and one sentence the evidence does not justify."
+		},
+		"ai-level-1": {
+			checkpoint:
+				"AI Foundations checkpoints focus on representation, state transitions, heuristic assumptions, deterministic traces, search failure modes, and whether an agent explanation is faithful.",
+			artifact:
+				"AI Foundations artifacts should preserve the path from problem representation to solver behavior, including start state, legal moves, goal test, trace, and failure case.",
+			antiOverlap:
+				"Keep the project in AI Foundations when the central work is symbolic reasoning, search, planning, rule systems, or agent behavior rather than data cleaning or statistical generalization.",
+			classification:
+				"For AI Foundations, classify projects by state representation, action rules, search or reasoning strategy, and the trace that proves the agent made a valid decision.",
+			responsibleCard:
+				"For AI Foundations, the card should name the representation limit, heuristic or rule-priority risk, unsolved-state behavior, and one human check of the trace."
+		},
+		"machine-learning": {
+			checkpoint:
+				"Machine Learning checkpoints focus on target definition, feature availability, leakage, train/test separation, baseline quality, metric fit, overfitting, and deployment caution.",
+			artifact:
+				"Machine Learning artifacts should preserve the path from raw examples to features, split, baseline, model, metric, error analysis, and model-card limitation.",
+			antiOverlap:
+				"Keep the project in Machine Learning when the central work is learning from examples and proving generalization, not only drawing a chart or writing a symbolic solver.",
+			classification:
+				"For Machine Learning, classify projects by prediction target, available features, training evidence, evaluation metric, and the baseline that must be beaten.",
+			responsibleCard:
+				"For Machine Learning, the card should name intended use, leakage or bias risk, subgroup or distribution concerns, metric limits, and a required human review step."
+		}
+	};
+	const notes = boundaryNotes[courseId];
+
 	appendModule(course, {
 		kind: "appendix",
 		title: "Data Science, AI Foundations, and Machine Learning Boundary Map",
@@ -2256,30 +2357,25 @@ function addDataAiMlBoundaryModule(courseId: string, course: RawCourse) {
 			},
 			{
 				title: "Required Responsible-Use Checkpoint",
-				content:
-					"**Readiness check:** A short responsible-use checkpoint appears before any final artifact: audience, data/source, assumptions, limitations, likely failure modes, and what a human review step verifies. This makes responsible use part of the project design instead of a reflection added after the result is already accepted.\n\n**Checkpoint fields:** Name the intended audience, the source of evidence, the assumption that most affects interpretation, one way the artifact could mislead someone, one mitigation, and one human review action. In Data Science, that may mean checking missing data or chart scale. In AI Foundations, it may mean checking a heuristic or search failure. In Machine Learning, it may mean checking leakage, bias, or overfitting.\n\n**Evidence target:** The work names one realistic misleading use and one concrete review step."
+				content: `**Readiness check:** A short responsible-use checkpoint appears before any final artifact: audience, data/source, assumptions, limitations, likely failure modes, and what a human review step verifies. This makes responsible use part of the project design instead of a reflection added after the result is already accepted.\n\n**Current course lens:** ${notes.checkpoint}\n\n**Checkpoint fields:** Name the intended audience, the source of evidence, the assumption that most affects interpretation, one way the artifact could mislead someone, one mitigation, and one human review action. In Data Science, that may mean checking missing data or chart scale. In AI Foundations, it may mean checking a heuristic or search failure. In Machine Learning, it may mean checking leakage, bias, or overfitting.\n\n**Evidence target:** The work names one realistic misleading use and one concrete review step.`
 			},
 			{
 				title: "Reproducible Artifact Requirement",
-				content:
-					"**Concept path:** Every final data/AI/ML artifact includes setup notes, source or fixture details, the exact question or goal, evaluation evidence, and a short explanation of limitations. The artifact should be understandable from its own notes, because hidden local setup and undocumented assumptions make results hard to reproduce.\n\n**Artifact contents:** Include the data or fixture path, commands or notebook order, package assumptions, baseline or comparison, metric or evidence source, and one known limitation. If randomness is involved, record the seed or describe why exact repetition is not expected.\n\n**Evidence target:** Another reviewer can rerun or inspect the artifact without private context and reach the same main conclusion."
+				content: `**Concept path:** Every final data/AI/ML artifact includes setup notes, source or fixture details, the exact question or goal, evaluation evidence, and a short explanation of limitations. The artifact should be understandable from its own notes, because hidden local setup and undocumented assumptions make results hard to reproduce.\n\n**Current course artifact:** ${notes.artifact}\n\n**Artifact contents:** Include the data or fixture path, commands or notebook order, package assumptions, baseline or comparison, metric or evidence source, and one known limitation. If randomness is involved, record the seed or describe why exact repetition is not expected.\n\n**Evidence target:** Another reviewer can rerun or inspect the artifact without private context and reach the same main conclusion.`
 			},
 			{
 				title: "Anti-Overlap Review",
-				content:
-					"**Concept path:** Before adding a new project, classify it by grading emphasis: cleaning and communication means Data Science; state representation and algorithmic reasoning means AI Foundations; generalization and model evaluation means Machine Learning. This prevents one project idea from being copied across three courses with only the title changed.\n\n**Review questions:** What is the main artifact? What skill is being assessed? What evidence would prove success? What adjacent course would use a different rubric for the same topic? A weather dataset can become a data-cleaning and visualization project, a search-planning activity, or a prediction model, but the grading target must change.\n\n**Evidence target:** The rubric matches the course identity and rejects at least one tempting but wrong placement."
+				content: `**Concept path:** Before adding a new project, classify it by grading emphasis: cleaning and communication means Data Science; state representation and algorithmic reasoning means AI Foundations; generalization and model evaluation means Machine Learning. This prevents one project idea from being copied across three courses with only the title changed.\n\n**Current course placement rule:** ${notes.antiOverlap}\n\n**Review questions:** What is the main artifact? What skill is being assessed? What evidence would prove success? What adjacent course would use a different rubric for the same topic? A weather dataset can become a data-cleaning and visualization project, a search-planning activity, or a prediction model, but the grading target must change.\n\n**Evidence target:** The rubric matches the course identity and rejects at least one tempting but wrong placement.`
 			}
 		],
 		supplementalProjects: [
 			{
 				title: "Boundary Project: Artifact Classification",
-				content:
-					"**Project goal:** Classify three possible projects as Data Science, AI Foundations, or Machine Learning and justify each decision. The explanation should name the artifact, the main skill being assessed, and why the same prompt would need a different rubric in an adjacent course.\n\n**Completion checks:**\n- The classification names the main artifact.\n- The rubric emphasis matches the course.\n- One rejected course placement is explained."
+				content: `**Project goal:** Classify three possible projects as Data Science, AI Foundations, or Machine Learning and justify each decision. The explanation should name the artifact, the main skill being assessed, and why the same prompt would need a different rubric in an adjacent course.\n\n**Current course emphasis:** ${notes.classification}\n\n**Completion checks:**\n- The classification names the main artifact.\n- The rubric emphasis matches the course.\n- One rejected course placement is explained.`
 			},
 			{
 				title: "Boundary Project: Responsible-Use Card",
-				content:
-					"**Project goal:** Create a responsible-use card for a dataset, solver, agent, or model before treating its output as reliable. The card should connect the artifact to a realistic user, a realistic failure mode, and a concrete mitigation.\n\n**Required fields:** source or system name, intended use, user or stakeholder, assumption, limitation, possible harm or misleading output, human review step, and mitigation.\n\n**Completion checks:**\n- Source and intended use are stated.\n- A limitation or risk is specific.\n- Human review or mitigation is named.\n- The card distinguishes uncertainty from a definite failure."
+				content: `**Project goal:** Create a responsible-use card for a dataset, solver, agent, or model before treating its output as reliable. The card should connect the artifact to a realistic user, a realistic failure mode, and a concrete mitigation.\n\n**Current course emphasis:** ${notes.responsibleCard}\n\n**Required fields:** source or system name, intended use, user or stakeholder, assumption, limitation, possible harm or misleading output, human review step, and mitigation.\n\n**Completion checks:**\n- Source and intended use are stated.\n- A limitation or risk is specific.\n- Human review or mitigation is named.\n- The card distinguishes uncertainty from a definite failure.`
 			}
 		]
 	});
