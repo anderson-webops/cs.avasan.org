@@ -697,14 +697,35 @@ describe("python IDE project helpers", () => {
 			"function flushInstantTurtleAnimationSteps"
 		);
 		expect(pageSource).toContain(
-			"consumedDistance < turtleInstantFrameDistanceBudget"
+			"consumedDistance < frameDistanceBudget"
 		);
-		expect(pageSource).toContain(
-			"consumedSteps < turtleInstantFrameStepBudget"
-		);
+		expect(pageSource).toContain("consumedSteps < frameStepBudget");
 		expect(pageSource).toContain("completeTurtleAnimationStep(step);");
 		expect(pageSource).toContain("renderTurtleScene(markerPose);");
 		expect(pageSource).toContain("void scheduleTurtleAnimation();");
+	});
+
+	it("keeps visible Turtle trail batches small enough to stay attached to the marker", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain(
+			"const turtleVisibleTrailFrameDistanceBudget = 2"
+		);
+		expect(pageSource).toContain(
+			"const turtleVisibleTrailFrameStepBudget = 2"
+		);
+		expect(pageSource).toContain("function isVisibleTurtleTrailStep");
+		expect(pageSource).toContain('step.command?.kind === "line"');
+		expect(pageSource).toContain("const synchronizedTrailBatch =");
+		expect(pageSource).toContain(
+			"isVisibleTurtleTrailStep(activeTurtleAnimationStep) ==="
+		);
+		expect(pageSource).toContain("synchronizedTrailBatch &&");
+		expect(pageSource).toContain("consumedSteps < frameStepBudget");
+		expect(pageSource).toContain("consumedDistance < frameDistanceBudget");
 	});
 
 	it("redraws Turtle canvas resizes without resetting active drawings", () => {

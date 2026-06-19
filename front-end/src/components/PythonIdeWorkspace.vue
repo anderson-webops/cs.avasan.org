@@ -325,6 +325,8 @@ const turtleInstantStepMaxDurationMs = 16;
 const turtleInstantStepMaxDistance = 2;
 const turtleInstantFrameDistanceBudget = 12;
 const turtleInstantFrameStepBudget = 24;
+const turtleVisibleTrailFrameDistanceBudget = 2;
+const turtleVisibleTrailFrameStepBudget = 2;
 const outputEntryTruncatedMessage =
 	"\n[Output truncated to keep the browser responsive.]";
 const outputHistoryTrimmedMessage =
@@ -1877,6 +1879,14 @@ function isInstantTurtleAnimationStep(step: TurtleAnimationStep) {
 	);
 }
 
+function isVisibleTurtleTrailStep(step: TurtleAnimationStep) {
+	return (
+		step.command?.kind === "line" &&
+		step.fromPose.visible &&
+		step.toPose.visible
+	);
+}
+
 function turtleAnimationStepDistance(step: TurtleAnimationStep) {
 	return Math.hypot(
 		step.toPose.x - step.fromPose.x,
@@ -1893,13 +1903,23 @@ function flushInstantTurtleAnimationSteps(timestamp: number) {
 	let consumedDistance = 0;
 	let consumedSteps = 0;
 	let markerPose = visibleTurtlePose();
+	const synchronizedTrailBatch =
+		activeTurtleAnimationStep !== null &&
+		isVisibleTurtleTrailStep(activeTurtleAnimationStep);
+	const frameDistanceBudget = synchronizedTrailBatch
+		? turtleVisibleTrailFrameDistanceBudget
+		: turtleInstantFrameDistanceBudget;
+	const frameStepBudget = synchronizedTrailBatch
+		? turtleVisibleTrailFrameStepBudget
+		: turtleInstantFrameStepBudget;
 
 	while (
 		activeTurtleAnimationStep &&
 		isInstantTurtleAnimationStep(activeTurtleAnimationStep) &&
-		consumedSteps < turtleInstantFrameStepBudget &&
-		(consumedDistance < turtleInstantFrameDistanceBudget ||
-			consumedSteps === 0)
+		isVisibleTurtleTrailStep(activeTurtleAnimationStep) ===
+			synchronizedTrailBatch &&
+		consumedSteps < frameStepBudget &&
+		(consumedDistance < frameDistanceBudget || consumedSteps === 0)
 	) {
 		const step = activeTurtleAnimationStep;
 		completeTurtleAnimationStep(step);
