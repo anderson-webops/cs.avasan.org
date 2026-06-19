@@ -575,6 +575,10 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("visit_Module");
 		expect(runtimeSource).toContain("ast.get_source_segment");
 		expect(pageSource).toContain("function formatPythonRuntimeError");
+		expect(pageSource).toContain("const pythonTracebackFrameRegex");
+		expect(pageSource).toContain("function markPythonRuntimeErrorInEditor");
+		expect(pageSource).toContain("pythonRuntimeDiagnosticForLine");
+		expect(pageSource).toContain("pythonRuntimeDiagnosticEffect");
 		expect(pageSource).toContain(
 			"RuntimeError: Stopped a long-running (?:for|while) loop"
 		);
@@ -596,6 +600,11 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain(
 			"step.durationMs <= turtleInstantStepMaxDurationMs"
 		);
+		expect(pageSource).toContain("let turtleVisiblePose");
+		expect(pageSource).toContain("function setTurtleVisiblePose");
+		expect(pageSource).toContain("markerPose = visibleTurtlePose()");
+		expect(pageSource).toContain("setTurtleVisiblePose(markerPose)");
+		expect(pageSource).toContain("setTurtleVisiblePose(step.toPose)");
 		expect(pageSource).toContain("renderTurtleScene();");
 	});
 
@@ -611,6 +620,19 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("turtleAnimationFrame === null");
 		expect(pageSource).toContain(
 			"if (canRenderTurtleStepImmediately(step))"
+		);
+	});
+
+	it("redraws Turtle canvas resizes without resetting active drawings", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain("function redrawActiveCanvas");
+		expect(pageSource).toContain("renderTurtleScene();");
+		expect(pageSource).toContain(
+			"new ResizeObserver(() => redrawActiveCanvas())"
 		);
 	});
 

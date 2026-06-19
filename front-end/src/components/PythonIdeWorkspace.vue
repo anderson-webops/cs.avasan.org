@@ -326,6 +326,7 @@ const browserKeyboardLetterCodeRegex = /^Key([A-Z])$/;
 const browserKeyboardDigitCodeRegex = /^Digit(\d)$/;
 const browserKeyboardNumpadDigitCodeRegex = /^Numpad(\d)$/;
 const browserKeyboardFunctionCodeRegex = /^F([1-9]|1[0-5])$/;
+const pythonTracebackFrameRegex = /File "([^"]+)", line (\d+)/g;
 const browserKeyboardCodeMap: Record<string, string> = {
 	AltLeft: "lalt",
 	AltRight: "ralt",
@@ -469,6 +470,7 @@ let gameCourseAssetPackLoadFailed = false;
 let turtleStampCounter = 0;
 let turtleCompletedCommands: TurtleRenderCommand[] = [];
 let turtleQueuedSteps: TurtleAnimationStep[] = [];
+let turtleVisiblePose: TurtlePose | null = null;
 let codeEditorModulesPromise: Promise<PythonCodeEditorModules> | null = null;
 let pythonRuntimeModulePromise: Promise<PythonRuntimeModule> | null = null;
 let codeEditorResetToken = 0;
@@ -691,6 +693,72 @@ function formatPythonRuntimeError(error: unknown) {
 	);
 
 	return loopGuardMessage?.[0] ?? message;
+}
+
+function pythonRuntimeDiagnosticMessage(message: string) {
+	const lines = message
+		.split("\n")
+		.map(line => line.trim())
+		.filter(Boolean);
+	return lines.at(-1) ?? "Python run failed.";
+}
+
+function pythonTracebackLineForActiveFile(
+	message: string,
+	activeFileName: string
+) {
+	let lineNumber: number | null = null;
+
+	for (const match of message.matchAll(pythonTracebackFrameRegex)) {
+		const fileName = match[1] ?? "";
+		if (
+			fileName !== activeFileName &&
+			!fileName.endsWith(`/${activeFileName}`)
+		) {
+			continue;
+		}
+		const parsedLineNumber = Number(match[2]);
+		if (Number.isInteger(parsedLineNumber) && parsedLineNumber > 0) {
+			lineNumber = parsedLineNumber;
+		}
+	}
+
+	return lineNumber;
+}
+
+async function markPythonRuntimeErrorInEditor(
+	message: string,
+	activeFileName: string
+) {
+	const lineNumber = pythonTracebackLineForActiveFile(
+		message,
+		activeFileName
+	);
+	if (!lineNumber || !codeEditorView) return;
+
+	const [, codeMirrorModule] = await loadPythonCodeEditorModules();
+	if (!codeEditorView || activeFile.value?.name !== activeFileName) return;
+
+	const diagnostic = codeMirrorModule.pythonRuntimeDiagnosticForLine(
+		codeEditorView.state,
+		lineNumber,
+		pythonRuntimeDiagnosticMessage(message)
+	);
+	if (!diagnostic) return;
+
+	codeEditorView.dispatch({
+		effects: codeMirrorModule.pythonRuntimeDiagnosticEffect.of(diagnostic)
+	});
+}
+
+function clearPythonRuntimeDiagnosticInEditor() {
+	if (!codeEditorView || !codeEditorModulesPromise) return;
+
+	void codeEditorModulesPromise.then(([, codeMirrorModule]) => {
+		codeEditorView?.dispatch({
+			effects: codeMirrorModule.pythonRuntimeDiagnosticEffect.of(null)
+		});
+	});
 }
 
 function mergeRuntimeProjectFiles(
@@ -1405,6 +1473,14 @@ function currentTurtlePose(): TurtlePose {
 	};
 }
 
+function visibleTurtlePose() {
+	return turtleVisiblePose ?? currentTurtlePose();
+}
+
+function setTurtleVisiblePose(pose: TurtlePose) {
+	turtleVisiblePose = { ...pose };
+}
+
 function turtlePoseChanged(fromPose: TurtlePose, toPose: TurtlePose) {
 	return (
 		fromPose.x !== toPose.x ||
@@ -1684,7 +1760,7 @@ function renderTurtleCommand(
 }
 
 function renderTurtleScene(
-	markerPose = currentTurtlePose(),
+	markerPose = visibleTurtlePose(),
 	activeCommand?: { command: TurtleRenderCommand; progress: number }
 ) {
 	const canvasContext = resizeCanvasForDisplay();
@@ -1743,6 +1819,7 @@ function runTurtleAnimationFrame(timestamp: number) {
 		step.toPose,
 		progress
 	);
+	setTurtleVisiblePose(markerPose);
 	renderTurtleScene(
 		markerPose,
 		step.command ? { command: step.command, progress } : undefined
@@ -1779,6 +1856,7 @@ function canRenderTurtleStepImmediately(step: TurtleAnimationStep) {
 function queueTurtleStep(step: TurtleAnimationStep) {
 	if (canRenderTurtleStepImmediately(step)) {
 		if (step.command) turtleCompletedCommands.push(step.command);
+		setTurtleVisiblePose(step.toPose);
 		renderTurtleScene();
 		return;
 	}
@@ -1843,10 +1921,11 @@ function resetTurtleCanvas() {
 	turtleState.lineWidth = 3;
 	turtleState.shape = defaultTurtleShape;
 	turtleState.visible = true;
+	setTurtleVisiblePose(currentTurtlePose());
 
 	context.fillStyle = turtleState.background;
 	context.fillRect(0, 0, rect.width, rect.height);
-	drawTurtleMarker(context, currentTurtlePose());
+	drawTurtleMarker(context, visibleTurtlePose());
 }
 
 function clearTurtleTimers() {
@@ -2849,13 +2928,25 @@ const turtleBridge: TurtleBridge = {
 		const fromPose = currentTurtlePose();
 		turtleState.shape = normalizeTurtleShape(shape);
 		const toPose = currentTurtlePose();
-		if (turtlePoseChanged(fromPose, toPose)) renderTurtleScene();
+		if (turtlePoseChanged(fromPose, toPose)) {
+			queueTurtleStep({
+				durationMs: turtleInstantStepMaxDurationMs,
+				fromPose,
+				toPose
+			});
+		}
 	},
 	setVisible(visible: boolean) {
 		const fromPose = currentTurtlePose();
 		turtleState.visible = visible;
 		const toPose = currentTurtlePose();
-		if (turtlePoseChanged(fromPose, toPose)) renderTurtleScene();
+		if (turtlePoseChanged(fromPose, toPose)) {
+			queueTurtleStep({
+				durationMs: turtleInstantStepMaxDurationMs,
+				fromPose,
+				toPose
+			});
+		}
 	}
 };
 
@@ -2913,6 +3004,15 @@ function resetActiveCanvas() {
 	resetTurtleCanvas();
 }
 
+function redrawActiveCanvas() {
+	if (selectedProject.value?.mode === "pgzero") {
+		clearGameCanvas();
+		return;
+	}
+
+	renderTurtleScene();
+}
+
 async function runCurrentProject() {
 	const project = selectedProject.value;
 	if (!project) return;
@@ -2930,6 +3030,7 @@ async function runCurrentProject() {
 	isRunning.value = true;
 	runMessage.value = "Starting Python";
 	appendOutput("system", `Running ${runnableFile.name}`);
+	clearPythonRuntimeDiagnosticInEditor();
 
 	try {
 		if (project.mode === "pgzero") {
@@ -2971,7 +3072,9 @@ async function runCurrentProject() {
 			runMessage.value = "Stopped";
 			return;
 		}
-		appendOutput("stderr", formatPythonRuntimeError(error));
+		const formattedError = formatPythonRuntimeError(error);
+		appendOutput("stderr", formattedError);
+		void markPythonRuntimeErrorInEditor(formattedError, runnableFile.name);
 		runMessage.value = "Run failed";
 	} finally {
 		isRunning.value = false;
@@ -3285,7 +3388,7 @@ onMounted(() => {
 	window.addEventListener("mouseup", clearTurtleDrag);
 
 	if (canvasRef.value) {
-		resizeObserver = new ResizeObserver(() => resetActiveCanvas());
+		resizeObserver = new ResizeObserver(() => redrawActiveCanvas());
 		resizeObserver.observe(canvasRef.value);
 	}
 });

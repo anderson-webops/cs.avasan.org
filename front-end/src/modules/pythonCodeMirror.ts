@@ -32,7 +32,9 @@ import {
 	EditorSelection,
 	EditorState,
 	Prec,
-	RangeSetBuilder
+	RangeSetBuilder,
+	StateEffect,
+	StateField
 } from "@codemirror/state";
 import {
 	crosshairCursor,
@@ -532,6 +534,7 @@ const pythonEditorNativeSelectionStyle = {
 };
 const pythonSyntaxErrorMessage =
 	"Python syntax error. Check this line before running the project.";
+const pythonRuntimeErrorSource = "Python runtime";
 
 const pythonEditorTheme = EditorView.theme({
 	"&": {
@@ -676,6 +679,39 @@ export function pythonSyntaxDiagnostics(state: EditorState): Diagnostic[] {
 	} while (cursor.next());
 
 	return diagnostics;
+}
+
+export const pythonRuntimeDiagnosticEffect =
+	StateEffect.define<Diagnostic | null>();
+
+const pythonRuntimeDiagnosticsField = StateField.define<Diagnostic[]>({
+	create() {
+		return [];
+	},
+	update(value, transaction) {
+		for (const effect of transaction.effects) {
+			if (effect.is(pythonRuntimeDiagnosticEffect))
+				return effect.value ? [effect.value] : [];
+		}
+		if (transaction.docChanged && value.length) return [];
+		return value;
+	}
+});
+
+export function pythonRuntimeDiagnosticForLine(
+	state: EditorState,
+	lineNumber: number,
+	message: string
+): Diagnostic | null {
+	if (!Number.isInteger(lineNumber) || lineNumber < 1) return null;
+	const line = state.doc.line(Math.min(lineNumber, state.doc.lines));
+	return {
+		from: line.from,
+		to: Math.max(line.from + 1, line.to),
+		severity: "error",
+		source: pythonRuntimeErrorSource,
+		message
+	};
 }
 
 const wrapSelectionKeymap = keymap.of(
@@ -1138,6 +1174,16 @@ const pythonEditorBaseSetup: Extension[] = [
 	closeBrackets(),
 	autocompletion(),
 	linter(view => pythonSyntaxDiagnostics(view.state)),
+	pythonRuntimeDiagnosticsField,
+	linter(view => view.state.field(pythonRuntimeDiagnosticsField), {
+		needsRefresh(update) {
+			return update.transactions.some(transaction =>
+				transaction.effects.some(effect =>
+					effect.is(pythonRuntimeDiagnosticEffect)
+				)
+			);
+		}
+	}),
 	rectangularSelection(),
 	crosshairCursor(),
 	highlightActiveLine(),

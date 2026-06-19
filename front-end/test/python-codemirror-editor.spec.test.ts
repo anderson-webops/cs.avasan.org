@@ -8,6 +8,7 @@ import {
 	pythonIdeCompletionSource,
 	pythonIdeCompletionsForMode,
 	pythonNewlineIndentText,
+	pythonRuntimeDiagnosticForLine,
 	pythonSyntaxDiagnostics
 } from "../src/modules/pythonCodeMirror";
 
@@ -688,5 +689,29 @@ describe("python IDE CodeMirror editor", () => {
 		expect(diagnostics[0]?.to).toBeGreaterThanOrEqual(
 			diagnostics[0]?.from ?? 0
 		);
+	});
+
+	it("maps runtime traceback lines to editor diagnostics", () => {
+		const state = EditorState.create({
+			doc: ["total = 1", "print(total / 0)", "print('done')"].join("\n"),
+			extensions: [python()]
+		});
+
+		const diagnostic = pythonRuntimeDiagnosticForLine(
+			state,
+			2,
+			"ZeroDivisionError: division by zero"
+		);
+
+		expect(diagnostic).toMatchObject({
+			from: state.doc.line(2).from,
+			to: state.doc.line(2).to,
+			severity: "error",
+			source: "Python runtime",
+			message: "ZeroDivisionError: division by zero"
+		});
+		expect(
+			pythonRuntimeDiagnosticForLine(state, 0, "Invalid line")
+		).toBeNull();
 	});
 });
