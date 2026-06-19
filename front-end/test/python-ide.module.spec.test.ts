@@ -218,6 +218,26 @@ describe("python IDE project helpers", () => {
 		});
 	});
 
+	it("does not scan hidden bracket text after resolved visible pairs", () => {
+		const visibleLine = "value = (1 + 2)\n";
+		const hiddenSuffix = Array.from(
+			{ length: 350 },
+			(_, index) => `hidden_${index} = [${index}]\n`
+		).join("");
+		const state = pythonEditorState(`${visibleLine}${hiddenSuffix}`);
+		const sliceSpy = vi.spyOn(state.doc, "sliceString");
+		const ranges = pythonBracketPairColorRanges(state, [
+			{ from: 0, to: visibleLine.length }
+		]);
+
+		expect(sliceSpy).toHaveBeenCalledTimes(1);
+		expect(sliceSpy).toHaveBeenCalledWith(0, visibleLine.length);
+		expect(ranges.map(range => range.from)).toEqual([
+			visibleLine.indexOf("("),
+			visibleLine.indexOf(")")
+		]);
+	});
+
 	it("ignores bracket characters inside Python strings and comments", () => {
 		const doc = `text = "("\n# ]\nvalue = (1 + 2)\n`;
 		const ranges = pythonBracketPairColorRanges(pythonEditorState(doc), [

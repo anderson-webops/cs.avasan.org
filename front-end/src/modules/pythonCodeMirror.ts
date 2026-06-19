@@ -1348,61 +1348,79 @@ export function pythonBracketPairColorRanges(
 ) {
 	const ranges: PythonBracketPairColorRange[] = [];
 	const docLength = state.doc.length;
-	const text = state.doc.sliceString(0, docLength);
+	const visibleEnd = Math.min(
+		docLength,
+		Math.max(0, ...visibleRanges.map(range => range.to))
+	);
+	if (visibleEnd <= 0) return ranges;
 	const stack: BracketStackEntry[] = [];
 
-	for (let offset = 0; offset < text.length; offset += 1) {
-		const character = text[offset] ?? "";
-		const index = offset;
-		const expectedClose = openingBracketToClosingBracket[character];
-		if (
-			(expectedClose || closingBrackets.has(character)) &&
-			isPythonBracketPairIgnoredAt(state, index)
-		) {
-			continue;
-		}
+	const scanBracketText = (text: string, baseOffset: number) => {
+		for (let offset = 0; offset < text.length; offset += 1) {
+			const character = text[offset] ?? "";
+			const index = baseOffset + offset;
+			const expectedClose = openingBracketToClosingBracket[character];
+			if (
+				(expectedClose || closingBrackets.has(character)) &&
+				isPythonBracketPairIgnoredAt(state, index)
+			) {
+				continue;
+			}
 
-		if (expectedClose) {
-			stack.push({
-				expectedClose,
-				pairIndex: stack.length % bracketPairDecorations.length,
-				position: index
-			});
-			continue;
-		}
+			if (expectedClose) {
+				stack.push({
+					expectedClose,
+					pairIndex: stack.length % bracketPairDecorations.length,
+					position: index
+				});
+				continue;
+			}
 
-		if (!closingBrackets.has(character)) continue;
+			if (!closingBrackets.has(character)) continue;
 
-		const candidate = stack.at(-1);
-		if (!candidate || candidate.expectedClose !== character) {
+			const candidate = stack.at(-1);
+			if (!candidate || candidate.expectedClose !== character) {
+				if (isVisibleBracketPosition(index, visibleRanges)) {
+					ranges.push({
+						from: index,
+						pairIndex: 0,
+						to: index + 1,
+						unmatched: true
+					});
+				}
+				continue;
+			}
+
+			stack.pop();
+			if (isVisibleBracketPosition(candidate.position, visibleRanges)) {
+				ranges.push({
+					from: candidate.position,
+					pairIndex: candidate.pairIndex,
+					to: candidate.position + 1,
+					unmatched: false
+				});
+			}
 			if (isVisibleBracketPosition(index, visibleRanges)) {
 				ranges.push({
 					from: index,
-					pairIndex: 0,
+					pairIndex: candidate.pairIndex,
 					to: index + 1,
-					unmatched: true
+					unmatched: false
 				});
 			}
-			continue;
 		}
+	};
 
-		stack.pop();
-		if (isVisibleBracketPosition(candidate.position, visibleRanges)) {
-			ranges.push({
-				from: candidate.position,
-				pairIndex: candidate.pairIndex,
-				to: candidate.position + 1,
-				unmatched: false
-			});
-		}
-		if (isVisibleBracketPosition(index, visibleRanges)) {
-			ranges.push({
-				from: index,
-				pairIndex: candidate.pairIndex,
-				to: index + 1,
-				unmatched: false
-			});
-		}
+	scanBracketText(state.doc.sliceString(0, visibleEnd), 0);
+
+	const visibleOpenersStillNeedMatch = stack.some(entry =>
+		isVisibleBracketPosition(entry.position, visibleRanges)
+	);
+	if (visibleOpenersStillNeedMatch && visibleEnd < docLength) {
+		scanBracketText(
+			state.doc.sliceString(visibleEnd, docLength),
+			visibleEnd
+		);
 	}
 
 	for (const unmatched of stack) {
