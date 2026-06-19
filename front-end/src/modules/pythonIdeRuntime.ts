@@ -1658,6 +1658,9 @@ class Rect:
     def __len__(self):
         return 4
 
+    def __bool__(self):
+        return self.width != 0 and self.height != 0
+
     def __getitem__(self, index):
         return (self.x, self.y, self.width, self.height)[index]
 

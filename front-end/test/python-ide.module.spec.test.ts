@@ -2358,6 +2358,10 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain(
 			"def filled_circle(self, pos, radius, color):"
 		);
+		expect(runtimeSource).toContain("def __bool__(self):");
+		expect(runtimeSource).toContain(
+			"return self.width != 0 and self.height != 0"
+		);
 		expect(runtimeSource).toContain("def textbox(self, text, rect");
 		expect(runtimeSource).toContain("_bridge.drawLine(");
 		expect(runtimeSource).toContain("_bridge.drawCircle(");
