@@ -1558,6 +1558,7 @@ function drawTurtleMarker(
 	context.save();
 	context.translate(point.x, point.y);
 	context.rotate(-radians);
+	if (pose.shape !== "blank") drawTurtleMarkerTrailMask(context);
 	context.lineCap = "round";
 	context.lineJoin = "round";
 	context.lineWidth = 1.5;
@@ -1592,6 +1593,13 @@ function drawTurtleMarker(
 	}
 
 	context.restore();
+}
+
+function drawTurtleMarkerTrailMask(context: CanvasRenderingContext2D) {
+	context.fillStyle = turtleState.background;
+	context.beginPath();
+	context.arc(0, 0, 18, 0, Math.PI * 2);
+	context.fill();
 }
 
 function drawClassicTurtleShape(context: CanvasRenderingContext2D) {

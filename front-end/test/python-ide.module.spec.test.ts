@@ -687,6 +687,30 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("renderTurtleScene();");
 	});
 
+	it("keeps the Turtle cursor visually above its trail", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const markerStart = pageSource.indexOf("function drawTurtleMarker");
+		const markerEnd = pageSource.indexOf(
+			"function drawClassicTurtleShape",
+			markerStart
+		);
+		const markerSource = pageSource.slice(markerStart, markerEnd);
+
+		expect(markerSource).toContain("if (!pose.visible) return;");
+		expect(markerSource).toContain(
+			'if (pose.shape !== "blank") drawTurtleMarkerTrailMask(context);'
+		);
+		expect(markerSource).toContain("function drawTurtleMarkerTrailMask");
+		expect(markerSource).toContain("context.fillStyle = turtleState.background");
+		expect(markerSource).toContain("context.arc(0, 0, 18, 0, Math.PI * 2)");
+		expect(
+			markerSource.indexOf("drawTurtleMarkerTrailMask(context);")
+		).toBeLessThan(markerSource.indexOf("context.strokeStyle = pose.penColor"));
+	});
+
 	it("keeps tiny Turtle steps frame-batched with the visible cursor", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
