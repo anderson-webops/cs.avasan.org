@@ -1767,8 +1767,17 @@ function scheduleTurtleAnimation() {
 	return turtleAnimationPromise;
 }
 
+function canRenderTurtleStepImmediately(step: TurtleAnimationStep) {
+	return (
+		step.durationMs <= turtleInstantStepMaxDurationMs &&
+		activeTurtleAnimationStep === null &&
+		turtleQueuedSteps.length === 0 &&
+		turtleAnimationFrame === null
+	);
+}
+
 function queueTurtleStep(step: TurtleAnimationStep) {
-	if (step.durationMs <= turtleInstantStepMaxDurationMs) {
+	if (canRenderTurtleStepImmediately(step)) {
 		if (step.command) turtleCompletedCommands.push(step.command);
 		renderTurtleScene();
 		return;

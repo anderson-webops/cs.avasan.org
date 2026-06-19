@@ -594,9 +594,24 @@ describe("python IDE project helpers", () => {
 			"const turtleInstantStepMaxDurationMs = 16"
 		);
 		expect(pageSource).toContain(
-			"if (step.durationMs <= turtleInstantStepMaxDurationMs)"
+			"step.durationMs <= turtleInstantStepMaxDurationMs"
 		);
 		expect(pageSource).toContain("renderTurtleScene();");
+	});
+
+	it("keeps tiny Turtle steps ordered behind active animation", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain("function canRenderTurtleStepImmediately");
+		expect(pageSource).toContain("activeTurtleAnimationStep === null");
+		expect(pageSource).toContain("turtleQueuedSteps.length === 0");
+		expect(pageSource).toContain("turtleAnimationFrame === null");
+		expect(pageSource).toContain(
+			"if (canRenderTurtleStepImmediately(step))"
+		);
 	});
 
 	it("bounds output rendering so print-heavy runs stay responsive", () => {
