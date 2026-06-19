@@ -5569,6 +5569,10 @@ function compactGeneratedProjectSupport(
 				"$1 $2"
 			)
 			.replace(
+				/\b(one|each|every|a|an) the (?:[A-Z]{2}[A-Z0-9+.-]*|Unit|Module)\b[^.!?\n]{0,120}? (boundary|behavior|constructor|branch|method|collection operation|diagnostic|data-structure|resource|control-flow change|variable|state transition|view|model|persistence path|normal case|edge case|ordinary behavior|runtime evidence|local lab|page behavior|simulator path|insert\/search\/remove path|search|traceable case|sanity check|limitation|example|case|input|path|run|trace|observation)\b/g,
+				"$1 $2"
+			)
+			.replace(
 				new RegExp(
 					`\\b(one|each|every|a|an) the (?:${supportReferenceCleanupNames}) (insert\\/search\\/remove path|search)\\b`,
 					"g"
@@ -6014,6 +6018,10 @@ function compactStudioContextTitle(title: string) {
 		.trim();
 }
 
+function articleSafeStudioReference(reference: string) {
+	return reference.replace(/^(?:the|a|an)\s+/i, "");
+}
+
 function studioContextLabel(context: CourseTextContext) {
 	const scopedSubject = scopedItemSubject(context);
 	if (scopedSubject) {
@@ -6176,7 +6184,7 @@ function studioBuildSequence(context: CourseTextContext) {
 			],
 			() => [
 				`- Name the ${studioLabel} dataset or search space, target question, feature or column choices, and comparison point.`,
-				`- Show at least one ${studioLabel} intermediate table, statistic, state, plot, or trace before presenting the final result.`,
+				`- Show at least one intermediate table, statistic, state, plot, or trace for ${studioLabel} before presenting the final result.`,
 				`- Check ${studioLabel} with a toy example, a realistic example, and a caveat about sampling, labels, leakage, or assumptions.`
 			],
 			() => [
@@ -6352,7 +6360,7 @@ function studioCompletionChecks(context: CourseTextContext) {
 			],
 			() => [
 				`- The ${studioLabel} source data or state space, target question, comparison point, and metric are named.`,
-				`- A ${studioLabel} intermediate table, statistic, trace, or visualization is checked before the conclusion.`,
+				`- An intermediate table, statistic, trace, or visualization for ${studioLabel} is checked before the conclusion.`,
 				`- The ${studioLabel} writeup names one caveat about sampling, labels, assumptions, leakage, or measurement.`
 			],
 			() => [
@@ -6459,12 +6467,13 @@ function studioExtensionPrompt(context: CourseTextContext) {
 	}
 	if (isDataAiMlContext(context)) {
 		const subject = supportFocusTopic(context);
+		const subjectReference = articleSafeStudioReference(subject);
 
 		return variantPrompt(context, [
 			() =>
 				"Add one baseline, sanity check, hand-checkable example, or limitation note.",
 			() =>
-				`Add a second ${subject} metric, comparison, or visualization and explain what it changes.`,
+				`Add a second metric, comparison, or visualization for ${subjectReference} and explain what it changes.`,
 			() =>
 				"Add one data-quality check for missing values, outliers, labels, leakage, or sampling bias.",
 			() =>
@@ -6617,10 +6626,14 @@ function compactStudioSupportText(
 	return compacted
 		.replace(/\b(the (?:studio|lab|work)) \([^)]{3,80}\)/gi, "$1")
 		.replace(
-			/\b(one|each|every) the (?:studio|lab|work) ([a-z])/gi,
+			/\b(one|each|every|first|second|third|another) the (?:studio|lab|work) ([a-z])/gi,
 			"$1 $2"
 		)
 		.replace(/\b(a|an) the (?:studio|lab|work) ([a-z])/gi, "$1 $2")
+		.replace(
+			/\b(?:A|a) (?:the )?(?:studio|lab|work) intermediate\b/g,
+			"An intermediate"
+		)
 		.replace(/\bthe the\b/gi, "the")
 		.replace(/\b(the|a|an) The ([A-Z])/g, "$1 $2")
 		.replace(/\b(The|A|An) The ([A-Z])/g, "$1 $2")
@@ -7524,6 +7537,48 @@ function normalizeUsacoProjectGuidance(course: RawCourse, courseId: string) {
 	}
 }
 
+function cleanVisibleCourseGrammar(course: RawCourse) {
+	const vowelArticleNouns =
+		"intermediate|implementation|artifact|edge|empty|input|output|argument|example|activity|analysis|extension|optional|observable|operation|error|invalid|image|environment|experiment|investigation|idea|issue|array|object|interface";
+	const consonantArticleNouns =
+		"data|small|normal|boundary|working|valid|useful|clear|concrete|specific|single|final|first|second|third|safe|runnable|testable|repeatable|named|short|visible|focused|complete|different|same|simple";
+	const evidenceNouns =
+		"boundary|behavior|constructor|branch|method|collection operation|diagnostic|data-structure|resource|control-flow change|variable|state transition|view|model|persistence path|normal case|edge case|ordinary behavior|runtime evidence|local lab|page behavior|simulator path|insert\\/search\\/remove path|search|traceable case|sanity check|limitation|example|case|input|path|run|trace|observation";
+
+	for (const module of course.modules) {
+		for (const section of ["curriculum", "supplementalProjects"] as const) {
+			for (const item of module[section]) {
+				item.content = item.content
+					.replace(
+						new RegExp(`\\b([Aa]) (${vowelArticleNouns})\\b`, "g"),
+						(_match: string, article: string, noun: string) =>
+							`${article === "A" ? "An" : "an"} ${noun}`
+					)
+					.replace(
+						new RegExp(
+							`\\b([Aa])n (${consonantArticleNouns})\\b`,
+							"g"
+						),
+						(_match: string, article: string, noun: string) =>
+							`${article === "A" ? "A" : "a"} ${noun}`
+					)
+					.replace(
+						new RegExp(
+							`\\b(one|each|every|a|an) the (?:[A-Z]{2}[A-Z0-9+.-]*|Unit|Module)\\b[^.!?\\n]{0,120}? (${evidenceNouns})\\b`,
+							"g"
+						),
+						"$1 $2"
+					)
+					.replace(
+						/\b(first|second|third|another|one) the (?:studio|lab|work) ([a-z])/gi,
+						"$1 $2"
+					)
+					.replace(/\bthe the\b/gi, "the");
+			}
+		}
+	}
+}
+
 const normalizers: Record<string, (course: RawCourse) => void> = {
 	"ai-level-1": normalizeAiLevel1,
 	"algebra-1a": normalizeAlgebra1A,
@@ -7565,5 +7620,6 @@ export function normalizeRawCourse(id: string, rawCourse: RawCourse) {
 	normalizeLegacyBranding(course);
 	contextualizeGenericDisplayTitles(course);
 	formatVisibleCourseMarkdown(course);
+	cleanVisibleCourseGrammar(course);
 	return course;
 }
