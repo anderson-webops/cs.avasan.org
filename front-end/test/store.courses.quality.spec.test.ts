@@ -2344,6 +2344,26 @@ describe("course text quality normalization", () => {
 		);
 	});
 
+	it("keeps Linux Systems guidance operational and specific", async () => {
+		const course = await loadRawCourse("linux-systems");
+		expect(course).not.toBeNull();
+		const corpus = allCourseText(course);
+
+		expect(corpus).not.toMatch(/This section covers/i);
+		expect(corpus).not.toMatch(/Key idea:/i);
+		expect(corpus).not.toMatch(/Skill target:/i);
+		expect(corpus).not.toMatch(/The goal is to/i);
+		expect(corpus).toContain(
+			"`grep`, `find`, `rg`, `sort`, `uniq`, `wc`, and `xargs` work as a family"
+		);
+		expect(corpus).toContain(
+			"File permissions and directory permissions behave differently"
+		);
+		expect(corpus).toContain(
+			"`journalctl` is the central way to read systemd-managed service output"
+		);
+	});
+
 	it("keeps Web Development Foundations guidance specific", async () => {
 		const course = await loadRawCourse("web-development-foundations");
 		expect(course).not.toBeNull();

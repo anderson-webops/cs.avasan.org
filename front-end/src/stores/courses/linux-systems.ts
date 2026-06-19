@@ -31,7 +31,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Project: Provision a Personal Linux Lab VM",
 					content:
-						"Use the personal lab starter to verify the active user, shell, kernel, package manager, and core commands needed for the course. The goal is to build a known-good Linux workspace before any later unit depends on paths, service management, or package installation working correctly.",
+						"Use the personal lab starter to verify the active user, shell, kernel, package manager, and core commands needed for the course. Build a known-good Linux workspace before later units depend on paths, service management, or package installation working correctly.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS1-Personal-Lab-VM/starter",
 					solutionLink:
@@ -92,7 +92,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Filtering and Searching in the Shell",
 					content:
-						"This section covers `grep`, `find`, `rg`, `sort`, `uniq`, `wc`, and `xargs` as a family of inspection tools rather than isolated commands. The key lesson is that Linux work scales when a command sequence can search a tree, narrow results, count patterns, and pass findings into a follow-up command without manually copying file names around."
+						"`grep`, `find`, `rg`, `sort`, `uniq`, `wc`, and `xargs` work as a family of inspection tools rather than isolated commands. Linux work scales when a command sequence can search a tree, narrow results, count patterns, and pass findings into a follow-up command without manually copying file names around."
 				},
 				{
 					title: "Build Small Pipelines Before Writing Scripts",
@@ -167,7 +167,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Choosing Between /var, /srv, and /opt",
 					content:
-						"This section covers the judgment call behind application layout. Content that a service is serving often fits under `/srv`, mutable state belongs under `/var`, and self-contained optional software can live under `/opt`. The expected outcome is a defensible layout choice instead of files scattered arbitrarily."
+						"Application layout is a judgment call. Content that a service is serving often fits under `/srv`, mutable state belongs under `/var`, and self-contained optional software can live under `/opt`. A defensible layout choice is stronger than files scattered arbitrarily across whichever directory was convenient."
 				},
 				{
 					title: "Project: Deploy a Static Site from /srv",
@@ -225,7 +225,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Read, Write, Execute, and Directory Permission Semantics",
 					content:
-						"This section covers the difference between file permissions and directory permissions, especially the fact that execute on a directory governs traversal rather than program execution. Skill target: Predict what happens when a service can read a file but cannot enter the directory that contains it."
+						"File permissions and directory permissions behave differently: execute on a directory governs traversal rather than program execution. A service may have permission to read a file and still fail if it cannot enter the directory path that contains it."
 				},
 				{
 					title: "Ownership Changes with chmod, chown, chgrp, and umask",
@@ -300,7 +300,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Terminal Editing with nano, vim, sed, and tee",
 					content:
-						"The goal is confident file editing in a Linux environment, not editor fanaticism. This section covers `nano` and `vim` for interactive edits, then shows how `sed` and `tee` help with controlled replacements, scripted updates, and privilege-bound writes."
+						"Confident Linux editing matters more than editor identity. `nano` and `vim` handle interactive edits, while `sed` and `tee` support controlled replacements, scripted updates, and privilege-bound writes."
 				},
 				{
 					title: "Safe Configuration Editing Patterns",
@@ -310,7 +310,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Environment Files and Service-Specific Configuration",
 					content:
-						"Applications often separate executable code from environment settings, secrets, or per-service overrides. Key idea: Why environment files are useful, where they are typically referenced from, and why configuration should be explicit enough that another operator can reconstruct the service later."
+						"Applications often separate executable code from environment settings, secrets, or per-service overrides. Environment files are useful because they make configuration explicit, reusable, and traceable enough that another operator can reconstruct the service later."
 				},
 				{
 					title: "Readable Configs Beat Clever Configs",
@@ -375,7 +375,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Inspecting Processes with ps, top, and htop",
 					content:
-						"This section covers process inspection as a story about what is running, who owns it, how much CPU or memory it is using, and whether it still matches the expected command line. Skill target: Move between snapshot tools like `ps` and live views like `top` or `htop` depending on whether they are chasing a momentary bug or an active performance problem."
+						"Process inspection answers what is running, who owns it, how much CPU or memory it is using, and whether it still matches the expected command line. Snapshot tools like `ps` help with point-in-time questions, while live views like `top` or `htop` are better for active performance problems."
 				},
 				{
 					title: "Signals, kill, pkill, and Process Shutdown",
@@ -390,7 +390,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Zombies, Orphans, and Process Ownership",
 					content:
-						"Zombies and orphans are bookkeeping realities of process supervision rather than mysterious trivia. Key idea: what it means when a parent process fails to reap a child and why proper service management is better than leaving long-lived application processes attached to random shells."
+						"Zombies and orphans are bookkeeping realities of process supervision rather than mysterious trivia. A parent process that fails to reap a child leaves evidence in the process table, and proper service management is safer than leaving long-lived application processes attached to random shells."
 				},
 				{
 					title: "Unit 5: Processes and Job Control: Core Project",
@@ -455,12 +455,12 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Reading Unit Files",
 					content:
-						"A unit file has a visible structure: `[Unit]`, `[Service]`, and `[Install]` sections each have a role. Key idea: working directory, executable path, environment variables, user identity, and restart policy all belong in the definition instead of being left to memory."
+						"A unit file has a visible structure: `[Unit]`, `[Service]`, and `[Install]` sections each have a role. Working directory, executable path, environment variables, user identity, and restart policy belong in the service definition instead of being left to memory."
 				},
 				{
 					title: "Daily Commands: status, start, stop, restart, reload, enable, disable",
 					content:
-						"This section covers `systemctl status/start/stop/restart/reload/enable/disable` as a minimal operator toolkit. The important distinction is not only what each verb does, but when reload is safer than restart, when enable affects future boots instead of the current session, and how to verify state after each action."
+						"`systemctl status/start/stop/restart/reload/enable/disable` form a minimal operator toolkit. The important distinctions are when reload is safer than restart, when enable affects future boots instead of the current session, and how to verify state after each action."
 				},
 				{
 					title: "Dependencies, Startup Ordering, and Environment Overrides",
@@ -521,7 +521,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "journalctl as the First Stop for Service Debugging",
 					content:
-						"This section covers `journalctl` as the central way to read systemd-managed service output, boot logs, and recent failures. Learn how to scope logs by unit, boot, and time window so they can answer targeted questions instead of dumping enormous unfiltered output."
+						"`journalctl` is the central way to read systemd-managed service output, boot logs, and recent failures. Scope logs by unit, boot, and time window so the output answers targeted questions instead of dumping enormous unfiltered history."
 				},
 				{
 					title: "Application Logs vs System Logs",
@@ -536,7 +536,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Diagnosing Boot Failures and Service Crashes",
 					content:
-						"Work through a break/fix story where a service fails after a bad config change or a wrong file path. Skill target: Start with status, move to recent logs, identify the first trustworthy error, and only then decide whether the fix is a config repair, a path correction, or a permission change."
+						"Work through a break/fix story where a service fails after a bad config change or a wrong file path. Start with status, move to recent logs, identify the first trustworthy error, and only then decide whether the fix is a config repair, a path correction, or a permission change."
 				},
 				{
 					title: "Unit 7: Logging and Observability: Core Project",
@@ -601,7 +601,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Cron Environment Gotchas",
 					content:
-						"This section covers the common surprise that scheduled jobs often run with a smaller environment than interactive shells. Missing PATH entries, relative paths, and unstated shell assumptions are routine sources of failure, so scheduled commands should be self-sufficient and observable."
+						"Scheduled jobs often run with a smaller environment than interactive shells. Missing PATH entries, relative paths, and unstated shell assumptions are routine sources of failure, so scheduled commands need to be self-sufficient and observable."
 				},
 				{
 					title: "systemd Timers vs cron",
@@ -611,12 +611,12 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Automating Cleanup and Backup Tasks",
 					content:
-						"Use cleanup and backup examples to show how small shell scripts become maintainable operational tools when they are idempotent, logged, and scheduled deliberately. Key idea: How a reliable scheduled task includes verification, retention thinking, and a failure story instead of only a command that seems to work once."
+						"Cleanup and backup examples show how small shell scripts become maintainable operational tools when they are idempotent, logged, and scheduled deliberately. A reliable scheduled task includes verification, retention thinking, and a failure story instead of only a command that seems to work once."
 				},
 				{
 					title: "Project: Write a Backup Script and Schedule It with cron and a Timer",
 					content:
-						"Use the backup lab to build a small archive script, schedule it first with `cron` and then with a `systemd` timer, and compare the operational experience. Skill target: Explain what changed in observability, environment handling, and reliability when they moved between the two schedulers.",
+						"Use the backup lab to build a small archive script, schedule it first with `cron` and then with a `systemd` timer, and compare the operational experience. Explain what changed in observability, environment handling, and reliability when moving between the two schedulers.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS6-Backup-Cron-and-Timer/starter",
 					solutionLink:
@@ -677,12 +677,12 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Understand Where Installed Software Lives",
 					content:
-						"Tie package management back to filesystem layout by showing how binaries, libraries, config files, and service units can end up under different directories. Skill target: Inspect the package view of software and the filesystem view of software together instead of assuming that an installed app is a single folder."
+						"Package management connects directly to filesystem layout because binaries, libraries, config files, and service units can end up under different directories. Inspect the package view and filesystem view of software together instead of assuming that an installed app is a single folder."
 				},
 				{
 					title: "Keeping Systems Patched without Losing Control",
 					content:
-						"This section covers patching as a balance between timeliness and operational confidence. Practice target: Reading what will change, understanding whether a service restart is implied, and recording what was upgraded so that post-change debugging has an audit trail."
+						"Patching balances timeliness with operational confidence. Read what will change, understand whether a service restart is implied, and record what was upgraded so post-change debugging has an audit trail."
 				},
 				{
 					title: "Unit 9: Package Management and Software Layout: Core Project",
@@ -745,7 +745,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Inspect Interfaces and Routes with ip",
 					content:
-						"This section covers `ip` as the modern way to inspect addresses, interfaces, and routes. Skill target: Answer basic systems questions such as whether the machine has an address, which interface owns it, and where packets are expected to go next."
+						"`ip` is the modern way to inspect addresses, interfaces, and routes. It answers basic systems questions such as whether the machine has an address, which interface owns it, and where packets are expected to go next."
 				},
 				{
 					title: "Listening Services and Sockets with ss",
@@ -755,7 +755,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Testing Connectivity with ping, curl, and dig",
 					content:
-						"This section covers `ping`, `curl`, and `dig` as distinct tools with distinct jobs: reachability, HTTP-level testing, and DNS inspection. The point is to avoid hand-wavy networking guesses and replace them with specific checks at the right layer."
+						"`ping`, `curl`, and `dig` are distinct tools with distinct jobs: reachability, HTTP-level testing, and DNS inspection. Replace hand-wavy networking guesses with specific checks at the right layer."
 				},
 				{
 					title: "Bridge to a Networking Course without Losing the Systems Lens",
@@ -820,7 +820,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Nginx Fundamentals",
 					content:
-						"This section covers Nginx as both a static file server and a reverse proxy. Key idea: The role of a `server` block, a document root, a location block, and the difference between testing config syntax and actually reloading the service."
+						"Nginx can operate as both a static file server and a reverse proxy. Understand the role of a `server` block, a document root, a location block, and the difference between testing config syntax and actually reloading the service."
 				},
 				{
 					title: "Apache Fundamentals",
@@ -900,12 +900,12 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Disks, Mounts, and Capacity with df, du, mount, and fstab",
 					content:
-						'Storage management starts from operator questions that come up in real systems work: what is mounted, how full is it, and what will happen on the next boot. Skill target: distinguish device-level thinking from directory-level usage so that a problem can be classified as "the filesystem is full" or "one path is unexpectedly large."'
+						'Storage management starts from operator questions that come up in real systems work: what is mounted, how full is it, and what will happen on the next boot. Distinguish device-level thinking from directory-level usage so a problem can be classified as "the filesystem is full" or "one path is unexpectedly large."'
 				},
 				{
 					title: "Backup Patterns for Small Linux Systems",
 					content:
-						"This section covers backups as a reliability practice rather than a checkbox. Think about what must be preserved, how often it changes, where archives should live, how retention works, and how to tell whether a backup succeeded beyond simply seeing that a file was created."
+						"Backups are a reliability practice rather than a checkbox. Think about what must be preserved, how often it changes, where archives should live, how retention works, and how to tell whether a backup succeeded beyond simply seeing that a file was created."
 				},
 				{
 					title: "log and tmp Cleanup as Operational Hygiene",
