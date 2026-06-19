@@ -1165,7 +1165,10 @@ describe("python IDE project helpers", () => {
 			"const standardLibraryModules = await pythonStandardLibraryModules(pyodide);"
 		);
 		expect(runtimeSource).toContain(
-			"packageScanModules(files, standardLibraryModules)"
+			"packageScanModules(\n\t\tfiles,\n\t\timportedModules,\n\t\tstandardLibraryModules\n\t)"
+		);
+		expect(runtimeSource).toContain(
+			"await loadPyodideImportPackages(pyodide, options.files, importedModules);"
 		);
 		expect(workerSource).toContain(
 			'import { pythonStandardLibraryModules } from "@/modules/pythonStandardLibraryModules";'
