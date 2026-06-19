@@ -785,12 +785,27 @@ describe("python IDE project helpers", () => {
 			"function flushInstantTurtleAnimationSteps"
 		);
 		expect(pageSource).toContain(
+			"let renderedActiveLineStep: TurtleAnimationStep | null = null;"
+		);
+		expect(pageSource).toContain(
 			"consumedDistance < frameDistanceBudget"
 		);
 		expect(pageSource).toContain("consumedSteps < frameStepBudget");
-		expect(pageSource).toContain("completeTurtleAnimationStep(step);");
 		expect(pageSource).toContain(
-			"renderTurtleScene(markerPose, undefined, synchronizedTurtleID);"
+			"setTurtleVisiblePose(markerPose, step.turtleID);"
+		);
+		expect(pageSource).toContain("renderedActiveLineStep = step;");
+		expect(pageSource).toContain(
+			"renderedActiveLineStep?.command"
+		);
+		expect(pageSource).toContain(
+			"? { command: renderedActiveLineStep.command, progress: 1 }"
+		);
+		expect(pageSource).toContain(
+			"if (renderedActiveLineStep)"
+		);
+		expect(pageSource).toContain(
+			"completeTurtleAnimationStep(renderedActiveLineStep);"
 		);
 		expect(pageSource).toContain("void scheduleTurtleAnimation();");
 	});

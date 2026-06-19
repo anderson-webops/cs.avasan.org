@@ -2119,6 +2119,7 @@ function completeTurtleAnimationStep(step: TurtleAnimationStep) {
 function flushInstantTurtleAnimationSteps(timestamp: number) {
 	let consumedDistance = 0;
 	let consumedSteps = 0;
+	let renderedActiveLineStep: TurtleAnimationStep | null = null;
 	const synchronizedTurtleID =
 		activeTurtleAnimationStep?.turtleID ?? activeTurtleID;
 	let markerPose = visibleTurtlePose(synchronizedTurtleID);
@@ -2142,15 +2143,30 @@ function flushInstantTurtleAnimationSteps(timestamp: number) {
 		(consumedDistance < frameDistanceBudget || consumedSteps === 0)
 	) {
 		const step = activeTurtleAnimationStep;
-		completeTurtleAnimationStep(step);
 		markerPose = step.toPose;
+		if (synchronizedTrailBatch) {
+			if (renderedActiveLineStep)
+				completeTurtleAnimationStep(renderedActiveLineStep);
+			setTurtleVisiblePose(markerPose, step.turtleID);
+			renderedActiveLineStep = step;
+		} else {
+			completeTurtleAnimationStep(step);
+		}
 		consumedDistance += turtleAnimationStepDistance(step);
 		consumedSteps += 1;
 		activeTurtleAnimationStep = turtleQueuedSteps.shift() ?? null;
 		turtleAnimationStepStartedAt = timestamp;
 	}
 
-	renderTurtleScene(markerPose, undefined, synchronizedTurtleID);
+	renderTurtleScene(
+		markerPose,
+		renderedActiveLineStep?.command
+			? { command: renderedActiveLineStep.command, progress: 1 }
+			: undefined,
+		synchronizedTurtleID
+	);
+	if (renderedActiveLineStep)
+		completeTurtleAnimationStep(renderedActiveLineStep);
 	if (!activeTurtleAnimationStep && turtleQueuedSteps.length === 0) {
 		turtleAnimationFrame = null;
 		resolveActiveTurtleAnimation();
