@@ -658,9 +658,9 @@ describe("python IDE project helpers", () => {
 			"const turtleInstantStepMaxDurationMs = 16"
 		);
 		expect(pageSource).toContain(
-			"const turtleInstantFrameDistanceBudget = 24"
+			"const turtleInstantFrameDistanceBudget = 12"
 		);
-		expect(pageSource).toContain("const turtleInstantFrameStepBudget = 48");
+		expect(pageSource).toContain("const turtleInstantFrameStepBudget = 24");
 		expect(pageSource).toContain(
 			"step.durationMs <= turtleInstantStepMaxDurationMs"
 		);
@@ -814,12 +814,78 @@ describe("python IDE project helpers", () => {
 			"Python will halt at the next runtime checkpoint."
 		);
 		expect(pageSource).toContain("function stopActiveRuntimeSurfaces");
+		expect(pageSource).toContain("invalidateTurtleBridgeRuns();");
+		expect(pageSource).toContain("invalidateGameBridgeRuns();");
 		expect(pageSource).toContain("stopLoadedPythonRuntimeRun();");
 		expect(pageSource).toContain("stopAllGameAudio();");
 		expect(pageSource).toContain("gameKeysDown.clear();");
 		expect(pageSource).toContain("gameEvents.length = 0;");
 		expect(pageSource).toContain("stopRequested.value = true;");
 		expect(pageSource).toContain("stopActiveRuntimeSurfaces();");
+	});
+
+	it("guards PyGame Zero bridge calls to the active run", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const guardStart = pageSource.indexOf(
+			"function createGuardedGameBridgeRun"
+		);
+		const guardSource = pageSource.slice(
+			guardStart,
+			pageSource.indexOf("function resetActiveCanvas", guardStart)
+		);
+
+		expect(pageSource).toContain("let activeGameBridgeRunID = 0;");
+		expect(pageSource).toContain("function invalidateGameBridgeRuns");
+		expect(pageSource).toContain(
+			"project.mode === \"pgzero\"\n\t\t\t\t\t? createGuardedGameBridgeRun()\n\t\t\t\t\t: gameBridge"
+		);
+		expect(guardSource).toContain("const runID = ++activeGameBridgeRunID;");
+		expect(guardSource).toContain(
+			"const isActiveRun = () => runID === activeGameBridgeRunID;"
+		);
+		expect(guardSource).toContain("if (!isActiveRun()) return;");
+		expect(guardSource).toContain(
+			"return isActiveRun() ? gameBridge.popEventsJson() : \"\";"
+		);
+		expect(guardSource).toContain(
+			"return isActiveRun() ? gameBridge.playTone(frequency, duration) : 0;"
+		);
+	});
+
+	it("guards Turtle bridge calls to the active run", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const guardStart = pageSource.indexOf(
+			"function createGuardedTurtleBridgeRun"
+		);
+		const guardSource = pageSource.slice(
+			guardStart,
+			pageSource.indexOf("const gameBridge", guardStart)
+		);
+
+		expect(pageSource).toContain("let activeTurtleBridgeRunID = 0;");
+		expect(pageSource).toContain("function invalidateTurtleBridgeRuns");
+		expect(pageSource).toContain(
+			"project.mode === \"turtle\"\n\t\t\t\t\t? createGuardedTurtleBridgeRun()\n\t\t\t\t\t: turtleBridge"
+		);
+		expect(guardSource).toContain(
+			"const runID = ++activeTurtleBridgeRunID;"
+		);
+		expect(guardSource).toContain(
+			"const isActiveRun = () => runID === activeTurtleBridgeRunID;"
+		);
+		expect(guardSource).toContain(
+			"if (isActiveRun()) turtleBridge.forward(distance);"
+		);
+		expect(guardSource).toContain("if (isActiveRun()) callback();");
+		expect(guardSource).toContain(
+			"return isActiveRun() ? turtleBridge.stamp() : 0;"
+		);
 	});
 
 	it("stops active IDE runtime surfaces when the selected project changes", () => {

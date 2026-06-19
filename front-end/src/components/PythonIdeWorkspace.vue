@@ -317,8 +317,8 @@ const maxImportedBinaryFileBytes = 2 * 1024 * 1024;
 const maxOutputLines = 500;
 const maxOutputTextLength = 12000;
 const turtleInstantStepMaxDurationMs = 16;
-const turtleInstantFrameDistanceBudget = 24;
-const turtleInstantFrameStepBudget = 48;
+const turtleInstantFrameDistanceBudget = 12;
+const turtleInstantFrameStepBudget = 24;
 const outputEntryTruncatedMessage =
 	"\n[Output truncated to keep the browser responsive.]";
 const outputHistoryTrimmedMessage =
@@ -459,6 +459,8 @@ let turtleAnimationPromise: Promise<void> | null = null;
 let resolveTurtleAnimation: (() => void) | null = null;
 let gameLoopRequested = false;
 let gameTickInFlight = false;
+let activeTurtleBridgeRunID = 0;
+let activeGameBridgeRunID = 0;
 let activeTurtleDragButton: string | null = null;
 let lastGamePointerPoint: { x: number; y: number } | null = null;
 let gameMusicAudio: HTMLAudioElement | null = null;
@@ -3001,6 +3003,127 @@ const turtleBridge: TurtleBridge = {
 	}
 };
 
+function invalidateTurtleBridgeRuns() {
+	activeTurtleBridgeRunID += 1;
+}
+
+function createGuardedTurtleBridgeRun(): TurtleBridge {
+	const runID = ++activeTurtleBridgeRunID;
+	const isActiveRun = () => runID === activeTurtleBridgeRunID;
+
+	return {
+		reset() {
+			if (isActiveRun()) turtleBridge.reset();
+		},
+		clear() {
+			if (isActiveRun()) turtleBridge.clear();
+		},
+		bgcolor(color: string) {
+			if (isActiveRun()) turtleBridge.bgcolor(color);
+		},
+		beginFill() {
+			if (isActiveRun()) turtleBridge.beginFill();
+		},
+		endFill() {
+			if (isActiveRun()) turtleBridge.endFill();
+		},
+		forward(distance: number) {
+			if (isActiveRun()) turtleBridge.forward(distance);
+		},
+		right(degrees: number) {
+			if (isActiveRun()) turtleBridge.right(degrees);
+		},
+		left(degrees: number) {
+			if (isActiveRun()) turtleBridge.left(degrees);
+		},
+		setheading(degrees: number) {
+			if (isActiveRun()) turtleBridge.setheading(degrees);
+		},
+		heading() {
+			return isActiveRun() ? turtleBridge.heading() : 0;
+		},
+		setState(...args) {
+			if (isActiveRun()) turtleBridge.setState(...args);
+		},
+		xcor() {
+			return isActiveRun() ? turtleBridge.xcor() : 0;
+		},
+		ycor() {
+			return isActiveRun() ? turtleBridge.ycor() : 0;
+		},
+		goto(x: number, y: number) {
+			if (isActiveRun()) turtleBridge.goto(x, y);
+		},
+		home() {
+			if (isActiveRun()) turtleBridge.home();
+		},
+		penup() {
+			if (isActiveRun()) turtleBridge.penup();
+		},
+		pendown() {
+			if (isActiveRun()) turtleBridge.pendown();
+		},
+		isdown() {
+			return isActiveRun() && turtleBridge.isdown();
+		},
+		pensize(width: number) {
+			if (isActiveRun()) turtleBridge.pensize(width);
+		},
+		pencolor(color: string) {
+			if (isActiveRun()) turtleBridge.pencolor(color);
+		},
+		fillcolor(color: string) {
+			if (isActiveRun()) turtleBridge.fillcolor(color);
+		},
+		color(primary: string, secondary?: string) {
+			if (isActiveRun()) turtleBridge.color(primary, secondary);
+		},
+		circle(radius: number) {
+			if (isActiveRun()) turtleBridge.circle(radius);
+		},
+		dot(size: number, color?: string) {
+			if (isActiveRun()) turtleBridge.dot(size, color);
+		},
+		stamp() {
+			return isActiveRun() ? turtleBridge.stamp() : 0;
+		},
+		write(text: string) {
+			if (isActiveRun()) turtleBridge.write(text);
+		},
+		registerKey(key: string, callback: (() => void) | null) {
+			if (isActiveRun()) turtleBridge.registerKey(key, callback);
+		},
+		registerClick(
+			button: string,
+			callback: ((x: number, y: number) => void) | null
+		) {
+			if (isActiveRun()) turtleBridge.registerClick(button, callback);
+		},
+		registerDrag(
+			button: string,
+			callback: ((x: number, y: number) => void) | null
+		) {
+			if (isActiveRun()) turtleBridge.registerDrag(button, callback);
+		},
+		scheduleTimer(delayMs: number, callback: (() => void) | null) {
+			if (!isActiveRun() || !callback) return;
+
+			turtleBridge.scheduleTimer(delayMs, () => {
+				if (isActiveRun()) callback();
+			});
+		},
+		listen() {
+			if (isActiveRun()) turtleBridge.listen();
+		},
+		setShape(shape: string) {
+			if (isActiveRun()) turtleBridge.setShape(shape);
+		},
+		setVisible(visible: boolean) {
+			if (isActiveRun()) turtleBridge.setVisible(visible);
+		}
+	};
+}
+
 const gameBridge: GameBridge = {
 	reset: resetGameCanvas,
 	clear: () => clearGameCanvas(),
@@ -3045,6 +3168,103 @@ const gameBridge: GameBridge = {
 		appendOutput("system", text);
 	}
 };
+
+function invalidateGameBridgeRuns() {
+	activeGameBridgeRunID += 1;
+}
+
+function createGuardedGameBridgeRun(): GameBridge {
+	const runID = ++activeGameBridgeRunID;
+	const isActiveRun = () => runID === activeGameBridgeRunID;
+
+	return {
+		reset(width?: number, height?: number) {
+			if (!isActiveRun()) return;
+			gameBridge.reset(width, height);
+		},
+		clear() {
+			if (isActiveRun()) gameBridge.clear();
+		},
+		fill(color: string) {
+			if (isActiveRun()) gameBridge.fill(color);
+		},
+		drawActor(...args) {
+			if (isActiveRun()) gameBridge.drawActor(...args);
+		},
+		drawImage(...args) {
+			if (isActiveRun()) gameBridge.drawImage(...args);
+		},
+		drawText(...args) {
+			if (isActiveRun()) gameBridge.drawText(...args);
+		},
+		drawRect(...args) {
+			if (isActiveRun()) gameBridge.drawRect(...args);
+		},
+		drawLine(...args) {
+			if (isActiveRun()) gameBridge.drawLine(...args);
+		},
+		drawCircle(...args) {
+			if (isActiveRun()) gameBridge.drawCircle(...args);
+		},
+		imageSizeJson(name: string) {
+			return isActiveRun()
+				? gameBridge.imageSizeJson(name)
+				: JSON.stringify({ height: 64, width: 64 });
+		},
+		isKeyDown(key: string) {
+			return isActiveRun() && gameBridge.isKeyDown(key);
+		},
+		popEventsJson() {
+			return isActiveRun() ? gameBridge.popEventsJson() : "";
+		},
+		requestLoop() {
+			if (isActiveRun()) gameBridge.requestLoop();
+		},
+		consumeLoopRequest() {
+			return isActiveRun() && gameBridge.consumeLoopRequest();
+		},
+		startLoop(tick: () => Promise<void>) {
+			if (!isActiveRun()) return;
+			gameBridge.startLoop(async () => {
+				if (!isActiveRun()) return;
+				await tick();
+			});
+		},
+		stopLoop() {
+			if (isActiveRun()) gameBridge.stopLoop();
+		},
+		playSound(name: string) {
+			if (isActiveRun()) gameBridge.playSound(name);
+		},
+		stopSound(name: string) {
+			if (isActiveRun()) gameBridge.stopSound(name);
+		},
+		playMusic(name: string, loop?: boolean) {
+			if (isActiveRun()) gameBridge.playMusic(name, loop);
+		},
+		pauseMusic() {
+			if (isActiveRun()) gameBridge.pauseMusic();
+		},
+		unpauseMusic() {
+			if (isActiveRun()) gameBridge.unpauseMusic();
+		},
+		setMusicVolume(volume: number) {
+			if (isActiveRun()) gameBridge.setMusicVolume(volume);
+		},
+		stopMusic() {
+			if (isActiveRun()) gameBridge.stopMusic();
+		},
+		playTone(frequency: number, duration: number) {
+			return isActiveRun() ? gameBridge.playTone(frequency, duration) : 0;
+		},
+		stopTone(toneID: number) {
+			if (isActiveRun()) gameBridge.stopTone(toneID);
+		},
+		log(text: string) {
+			if (isActiveRun()) gameBridge.log(text);
+		}
+	};
+}
 
 function resetActiveCanvas() {
 	if (selectedProject.value?.mode === "pgzero") {
@@ -3095,8 +3315,14 @@ async function runCurrentProject() {
 			activeFileName: runnableFile.name,
 			inputText: inputText.value,
 			mode: project.mode,
-			gameBridge,
-			turtleBridge,
+			gameBridge:
+				project.mode === "pgzero"
+					? createGuardedGameBridgeRun()
+					: gameBridge,
+			turtleBridge:
+				project.mode === "turtle"
+					? createGuardedTurtleBridgeRun()
+					: turtleBridge,
 			onArtifact: appendArtifact,
 			onProjectFilesUpdate: files =>
 				mergeRuntimeProjectFiles(project, files),
@@ -3154,6 +3380,8 @@ function stopCurrentProject() {
 }
 
 function stopActiveRuntimeSurfaces() {
+	invalidateTurtleBridgeRuns();
+	invalidateGameBridgeRuns();
 	stopLoadedPythonRuntimeRun();
 	clearTurtleTimers();
 	cancelTurtleAnimation();
