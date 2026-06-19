@@ -507,6 +507,12 @@ describe("python IDE project helpers", () => {
 		expect(renderSceneSource).toContain(
 			"? { x: markerPose.x, y: markerPose.y }"
 		);
+		expect(pageSource).toContain(
+			"turtleAnimationStepDistance(step) === 0"
+		);
+		expect(pageSource).not.toContain(
+			"return step.durationMs <= turtleInstantStepMaxDurationMs;"
+		);
 		expect(forwardSource).toContain("next_x = self._x +");
 		expect(forwardSource).toContain("next_y = self._y +");
 		expect(

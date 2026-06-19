@@ -1857,7 +1857,10 @@ function runTurtleAnimationFrame(timestamp: number) {
 }
 
 function isInstantTurtleAnimationStep(step: TurtleAnimationStep) {
-	return step.durationMs <= turtleInstantStepMaxDurationMs;
+	return (
+		step.durationMs <= turtleInstantStepMaxDurationMs &&
+		turtleAnimationStepDistance(step) === 0
+	);
 }
 
 function turtleAnimationStepDistance(step: TurtleAnimationStep) {
