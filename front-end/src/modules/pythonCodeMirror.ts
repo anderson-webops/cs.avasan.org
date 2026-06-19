@@ -2,24 +2,52 @@ import type { Extension } from "@codemirror/state";
 import type { DecorationSet, ViewUpdate } from "@codemirror/view";
 import type { PythonIdeMode } from "@/modules/pythonIde";
 import {
+	autocompletion,
+	closeBrackets,
+	closeBracketsKeymap,
+	completionKeymap
+} from "@codemirror/autocomplete";
+import {
 	insertNewlineAndIndent as codeMirrorInsertNewlineAndIndent,
+	defaultKeymap,
+	history,
+	historyKeymap,
 	indentWithTab
 } from "@codemirror/commands";
 import { python, pythonLanguage } from "@codemirror/lang-python";
 import {
+	bracketMatching,
+	defaultHighlightStyle,
+	foldGutter,
+	foldKeymap,
 	HighlightStyle,
+	indentOnInput,
 	syntaxHighlighting,
 	syntaxTree
 } from "@codemirror/language";
+import { lintKeymap } from "@codemirror/lint";
+import { highlightSelectionMatches, searchKeymap } from "@codemirror/search";
 import {
 	EditorSelection,
 	EditorState,
 	Prec,
 	RangeSetBuilder
 } from "@codemirror/state";
-import { Decoration, EditorView, keymap, ViewPlugin } from "@codemirror/view";
+import {
+	crosshairCursor,
+	Decoration,
+	drawSelection,
+	dropCursor,
+	EditorView,
+	highlightActiveLine,
+	highlightActiveLineGutter,
+	highlightSpecialChars,
+	keymap,
+	lineNumbers,
+	rectangularSelection,
+	ViewPlugin
+} from "@codemirror/view";
 import { tags } from "@lezer/highlight";
-import { basicSetup } from "codemirror";
 
 interface PythonCodeMirrorOptions {
 	onChange: (content: string) => void;
@@ -1072,11 +1100,40 @@ const bracketPairColorExtension = [
 	})
 ];
 
+const pythonEditorBaseSetup: Extension[] = [
+	lineNumbers(),
+	highlightActiveLineGutter(),
+	highlightSpecialChars(),
+	history(),
+	foldGutter(),
+	drawSelection(),
+	dropCursor(),
+	EditorState.allowMultipleSelections.of(true),
+	indentOnInput(),
+	syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
+	bracketMatching(),
+	closeBrackets(),
+	autocompletion(),
+	rectangularSelection(),
+	crosshairCursor(),
+	highlightActiveLine(),
+	highlightSelectionMatches(),
+	keymap.of([
+		...closeBracketsKeymap,
+		...defaultKeymap,
+		...searchKeymap,
+		...historyKeymap,
+		...foldKeymap,
+		...completionKeymap,
+		...lintKeymap
+	])
+];
+
 export function createPythonCodeMirrorExtensions(
 	options: PythonCodeMirrorOptions
 ): Extension[] {
 	return [
-		basicSetup,
+		pythonEditorBaseSetup,
 		python(),
 		pythonLanguage.data.of({
 			autocomplete: pythonIdeCompletionSource(

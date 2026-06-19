@@ -27,9 +27,12 @@
 		"lint-fix": "eslint \"src/**/*.{js,ts,vue}\" --fix"
 	},
 	"dependencies": {
+		"@codemirror/autocomplete": "^6.20.3",
 		"@codemirror/commands": "^6.10.3",
 		"@codemirror/lang-python": "^6.2.1",
 		"@codemirror/language": "^6.12.3",
+		"@codemirror/lint": "^6.9.7",
+		"@codemirror/search": "^6.7.1",
 		"@codemirror/state": "^6.6.0",
 		"@codemirror/view": "^6.43.1",
 		"@fortawesome/fontawesome-svg-core": "^7.2.0",
@@ -42,8 +45,7 @@
 		"@vueuse/core": "^14.2.1",
 		"axios": "^1.15.2",
 		"bootstrap": "^5.3.8",
-		"codemirror": "^6.0.2",
-		"dompurify": "^3.4.10",
+		"dompurify": "^3.4.11",
 		"fflate": "^0.8.3",
 		"follow-redirects": "^1.16.0",
 		"leaflet": "^1.9.4",

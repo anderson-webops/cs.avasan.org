@@ -96,7 +96,12 @@ describe("python IDE CodeMirror editor", () => {
 			"../src/components/PythonIdeWorkspace.vue"
 		);
 
-		expect(editorSource).toContain("basicSetup");
+		expect(editorSource).toContain("pythonEditorBaseSetup");
+		expect(editorSource).toContain("lineNumbers()");
+		expect(editorSource).toContain("history()");
+		expect(editorSource).toContain("autocompletion()");
+		expect(editorSource).toContain("highlightSelectionMatches()");
+		expect(editorSource).not.toContain('from "codemirror"');
 		expect(editorSource).toContain("python()");
 		expect(editorSource).toContain("indentWithTab");
 		expect(editorSource).toContain(
