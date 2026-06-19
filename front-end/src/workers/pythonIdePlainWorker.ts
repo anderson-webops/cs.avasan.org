@@ -138,11 +138,13 @@ function writeProjectFile(pyodide: PyodideAPI, file: PythonIdeFile) {
 	);
 }
 
+function validProjectFiles(files: PythonIdeFile[]) {
+	return files.filter(file => isValidPythonFileName(file.name));
+}
+
 function syncProjectFiles(pyodide: PyodideAPI, files: PythonIdeFile[]) {
 	ensureDirectory(pyodide, PROJECT_ROOT);
-	const writableFiles = files.filter(file =>
-		isValidPythonFileName(file.name)
-	);
+	const writableFiles = validProjectFiles(files);
 	const nextFileNames = new Set(writableFiles.map(file => file.name));
 	for (const previousName of lastProjectFileNames) {
 		if (!nextFileNames.has(previousName))
@@ -158,7 +160,7 @@ function projectModuleNames(files: PythonIdeFile[]) {
 	const packageSuffix = ".__init__";
 	const modules = new Set<string>();
 
-	for (const file of files) {
+	for (const file of validProjectFiles(files)) {
 		if (!PYTHON_EXTENSION_RE.test(file.name)) continue;
 		const moduleName = file.name
 			.replace(PYTHON_EXTENSION_RE, "")
@@ -177,11 +179,14 @@ function plainPythonPackageScanModules(
 	files: PythonIdeFile[],
 	standardLibraryModules: Set<string>
 ) {
+	const validFiles = validProjectFiles(files);
 	const localModules = new Set(
-		projectModuleNames(files).map(moduleName => moduleName.split(".")[0])
+		projectModuleNames(validFiles).map(
+			moduleName => moduleName.split(".")[0]
+		)
 	);
 
-	return [...pythonIdeImportedTopLevelModules(files)]
+	return [...pythonIdeImportedTopLevelModules(validFiles)]
 		.filter(
 			moduleName =>
 				!localModules.has(moduleName) &&

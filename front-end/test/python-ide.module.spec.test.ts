@@ -1043,9 +1043,10 @@ describe("python IDE project helpers", () => {
 		);
 		expect(workerSource).toContain("function decodeBase64File");
 		expect(workerSource).toContain("function writeProjectFile");
+		expect(workerSource).toContain("function validProjectFiles");
 		expect(workerSource).toContain('file.encoding === "base64"');
 		expect(workerSource).toContain(
-			"const writableFiles = files.filter(file =>"
+			"const writableFiles = validProjectFiles(files);"
 		);
 		expect(workerSource).toContain("isValidPythonFileName(file.name)");
 		expect(workerSource).toContain("__classes_text_suffixes");
@@ -1063,7 +1064,11 @@ describe("python IDE project helpers", () => {
 			"function plainPythonPackageScanModules"
 		);
 		expect(workerSource).toContain(
-			"pythonIdeImportedTopLevelModules(files)"
+			"const validFiles = validProjectFiles(files);"
+		);
+		expect(workerSource).toContain("projectModuleNames(validFiles)");
+		expect(workerSource).toContain(
+			"pythonIdeImportedTopLevelModules(validFiles)"
 		);
 		expect(workerSource).toContain(
 			"!loadedPlainPythonImportModules.has(moduleName)"
