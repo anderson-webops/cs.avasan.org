@@ -738,6 +738,53 @@ describe("python IDE project helpers", () => {
 		);
 	});
 
+	it("maps Turtle coordinates without repeated layout reads per command", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const coordinateMapperStart = pageSource.indexOf(
+			"function createCanvasCoordinateMapper"
+		);
+		const getCanvasContextStart = pageSource.indexOf(
+			"function getCanvasContext"
+		);
+		const renderCommandStart = pageSource.indexOf(
+			"function renderTurtleCommand"
+		);
+		const renderSceneStart = pageSource.indexOf(
+			"function renderTurtleScene"
+		);
+		const coordinateMapperSource = pageSource.slice(
+			coordinateMapperStart,
+			getCanvasContextStart
+		);
+		const renderCommandSource = pageSource.slice(
+			renderCommandStart,
+			renderSceneStart
+		);
+		const renderSceneSource = pageSource.slice(
+			renderSceneStart,
+			pageSource.indexOf("function resolveActiveTurtleAnimation")
+		);
+
+		expect(pageSource).toContain("type CanvasCoordinateMapper");
+		expect(coordinateMapperSource).not.toContain("getBoundingClientRect()");
+		expect(renderCommandSource).toContain(
+			"toCanvas: CanvasCoordinateMapper"
+		);
+		expect(renderCommandSource).not.toContain("getBoundingClientRect()");
+		expect(renderSceneSource).toContain(
+			"const toCanvas = createCanvasCoordinateMapper(rect);"
+		);
+		expect(renderSceneSource).toContain(
+			"renderTurtleCommand(context, command, toCanvas);"
+		);
+		expect(renderSceneSource).toContain(
+			"drawTurtleMarker(context, markerPose, toCanvas);"
+		);
+	});
+
 	it("bounds output rendering so print-heavy runs stay responsive", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),

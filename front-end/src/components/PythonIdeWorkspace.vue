@@ -109,6 +109,11 @@ interface TurtlePose {
 	visible: boolean;
 }
 
+type CanvasCoordinateMapper = (
+	x: number,
+	y: number
+) => { x: number; y: number };
+
 type TurtleRenderCommand =
 	| {
 			color: string;
@@ -1437,14 +1442,11 @@ function clearOutput() {
 	runtimeArtifacts.value = [];
 }
 
-function canvasCoordinates(x: number, y: number) {
-	const canvas = canvasRef.value;
-	if (!canvas) return { x: 0, y: 0 };
-	const rect = canvas.getBoundingClientRect();
-	return {
+function createCanvasCoordinateMapper(rect: DOMRect): CanvasCoordinateMapper {
+	return (x: number, y: number) => ({
 		x: rect.width / 2 + x,
 		y: rect.height / 2 - y
-	};
+	});
 }
 
 function getCanvasContext() {
@@ -1541,10 +1543,14 @@ function normalizeTurtleShape(shape: string): TurtleShapeName {
 		: defaultTurtleShape;
 }
 
-function drawTurtleMarker(context: CanvasRenderingContext2D, pose: TurtlePose) {
+function drawTurtleMarker(
+	context: CanvasRenderingContext2D,
+	pose: TurtlePose,
+	toCanvas: CanvasCoordinateMapper
+) {
 	if (!pose.visible) return;
 
-	const point = canvasCoordinates(pose.x, pose.y);
+	const point = toCanvas(pose.x, pose.y);
 	const radians = (pose.heading * Math.PI) / 180;
 
 	context.save();
@@ -1682,16 +1688,17 @@ function drawFancyTurtleShape(context: CanvasRenderingContext2D) {
 function renderTurtleCommand(
 	context: CanvasRenderingContext2D,
 	command: TurtleRenderCommand,
+	toCanvas: CanvasCoordinateMapper,
 	progress = 1,
 	activeLineEnd?: { x: number; y: number }
 ) {
 	if (command.kind === "line") {
-		const start = canvasCoordinates(command.from.x, command.from.y);
+		const start = toCanvas(command.from.x, command.from.y);
 		const partialEnd = activeLineEnd ?? {
 			x: lerp(command.from.x, command.to.x, progress),
 			y: lerp(command.from.y, command.to.y, progress)
 		};
-		const end = canvasCoordinates(partialEnd.x, partialEnd.y);
+		const end = toCanvas(partialEnd.x, partialEnd.y);
 		context.strokeStyle = command.color;
 		context.lineWidth = command.width;
 		context.lineCap = "round";
@@ -1706,7 +1713,7 @@ function renderTurtleCommand(
 	if (progress < 1) return;
 
 	if (command.kind === "circle") {
-		const center = canvasCoordinates(command.x, command.y + command.radius);
+		const center = toCanvas(command.x, command.y + command.radius);
 		context.strokeStyle = command.color;
 		context.lineWidth = command.width;
 		context.beginPath();
@@ -1722,7 +1729,7 @@ function renderTurtleCommand(
 	}
 
 	if (command.kind === "dot") {
-		const point = canvasCoordinates(command.x, command.y);
+		const point = toCanvas(command.x, command.y);
 		context.fillStyle = command.color;
 		context.beginPath();
 		context.arc(
@@ -1739,12 +1746,12 @@ function renderTurtleCommand(
 	if (command.kind === "fill") {
 		const [firstPoint, ...remainingPoints] = command.points;
 		if (!firstPoint) return;
-		const firstCanvasPoint = canvasCoordinates(firstPoint.x, firstPoint.y);
+		const firstCanvasPoint = toCanvas(firstPoint.x, firstPoint.y);
 		context.fillStyle = command.fillColor;
 		context.beginPath();
 		context.moveTo(firstCanvasPoint.x, firstCanvasPoint.y);
 		for (const point of remainingPoints) {
-			const canvasPoint = canvasCoordinates(point.x, point.y);
+			const canvasPoint = toCanvas(point.x, point.y);
 			context.lineTo(canvasPoint.x, canvasPoint.y);
 		}
 		context.closePath();
@@ -1758,18 +1765,22 @@ function renderTurtleCommand(
 	}
 
 	if (command.kind === "stamp") {
-		drawTurtleMarker(context, {
-			x: command.x,
-			y: command.y,
-			heading: command.heading,
-			penColor: command.color,
-			shape: command.shape,
-			visible: true
-		});
+		drawTurtleMarker(
+			context,
+			{
+				x: command.x,
+				y: command.y,
+				heading: command.heading,
+				penColor: command.color,
+				shape: command.shape,
+				visible: true
+			},
+			toCanvas
+		);
 		return;
 	}
 
-	const point = canvasCoordinates(command.x, command.y);
+	const point = toCanvas(command.x, command.y);
 	context.fillStyle = command.color;
 	context.font = "16px Avenir Next, Segoe UI, sans-serif";
 	context.fillText(command.text, point.x, point.y);
@@ -1783,21 +1794,23 @@ function renderTurtleScene(
 	if (!canvasContext) return;
 
 	const { context, rect } = canvasContext;
+	const toCanvas = createCanvasCoordinateMapper(rect);
 	context.fillStyle = turtleState.background;
 	context.fillRect(0, 0, rect.width, rect.height);
 	for (const command of turtleCompletedCommands)
-		renderTurtleCommand(context, command);
+		renderTurtleCommand(context, command, toCanvas);
 	if (activeCommand) {
 		renderTurtleCommand(
 			context,
 			activeCommand.command,
+			toCanvas,
 			activeCommand.progress,
 			activeCommand.command.kind === "line"
 				? { x: markerPose.x, y: markerPose.y }
 				: undefined
 		);
 	}
-	drawTurtleMarker(context, markerPose);
+	drawTurtleMarker(context, markerPose, toCanvas);
 }
 
 function resolveActiveTurtleAnimation() {
@@ -1984,7 +1997,11 @@ function resetTurtleCanvas() {
 
 	context.fillStyle = turtleState.background;
 	context.fillRect(0, 0, rect.width, rect.height);
-	drawTurtleMarker(context, visibleTurtlePose());
+	drawTurtleMarker(
+		context,
+		visibleTurtlePose(),
+		createCanvasCoordinateMapper(rect)
+	);
 }
 
 function clearTurtleTimers() {
