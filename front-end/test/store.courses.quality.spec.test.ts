@@ -272,13 +272,13 @@ describe("course text quality normalization", () => {
 			expect(corpus).toContain(
 				"Transfer Practice: Setup, Editors, and Asset Workflow"
 			);
-			expect(corpus).toContain(
-				"Review: CSV Summaries and Sanity Checks"
-			);
+			expect(corpus).toContain("Review: CSV Summaries and Sanity Checks");
 			expect(corpus).toContain(
 				"Transfer Practice: CSV Summaries and Sanity Checks"
 			);
-			expect(dataScienceText).not.toContain("remote-safe investigation writeup");
+			expect(dataScienceText).not.toContain(
+				"remote-safe investigation writeup"
+			);
 		},
 		COURSE_SWEEP_TIMEOUT
 	);
@@ -1051,9 +1051,10 @@ describe("course text quality normalization", () => {
 			const contents = setupModule.items.map(({ title, subject }) => {
 				const item = moduleItems.find(item => item.title === title);
 				expect(item, `${setupModule.courseId}: ${title}`).toBeTruthy();
-				expect(item?.content, `${setupModule.courseId}: ${title}`).toContain(
-					`**${subject}**`
-				);
+				expect(
+					item?.content,
+					`${setupModule.courseId}: ${title}`
+				).toContain(`**${subject}**`);
 
 				return item?.content ?? "";
 			});
@@ -1082,7 +1083,9 @@ describe("course text quality normalization", () => {
 					if (!content.startsWith("**Goal:**")) continue;
 
 					const entries = generatedPrompts.get(content) ?? [];
-					entries.push(`${courseId} > ${module.title} > ${item.title}`);
+					entries.push(
+						`${courseId} > ${module.title} > ${item.title}`
+					);
 					generatedPrompts.set(content, entries);
 				}
 			}
@@ -1147,10 +1150,9 @@ describe("course text quality normalization", () => {
 			}
 
 			for (const [itemTitle, contents] of itemContentByTitle) {
-				expect(
-					contents,
-					`${appendixTitle}: ${itemTitle}`
-				).toHaveLength(courseIds.length);
+				expect(contents, `${appendixTitle}: ${itemTitle}`).toHaveLength(
+					courseIds.length
+				);
 
 				if (new Set(contents).size !== contents.length) {
 					duplicateSummaries.push(`${appendixTitle}: ${itemTitle}`);
@@ -1217,10 +1219,9 @@ describe("course text quality normalization", () => {
 			}
 
 			for (const [itemTitle, contents] of itemContentByTitle) {
-				expect(
-					contents,
-					`${appendixTitle}: ${itemTitle}`
-				).toHaveLength(courseIds.length);
+				expect(contents, `${appendixTitle}: ${itemTitle}`).toHaveLength(
+					courseIds.length
+				);
 
 				if (new Set(contents).size !== contents.length) {
 					duplicateSummaries.push(`${appendixTitle}: ${itemTitle}`);
@@ -1254,7 +1255,9 @@ describe("course text quality normalization", () => {
 					]) {
 						if (
 							!item.projectLink ||
-							!/^\*\*(?:Goal|Project goal):\*\*/i.test(item.content)
+							!/^\*\*(?:Goal|Project goal):\*\*/i.test(
+								item.content
+							)
 						) {
 							continue;
 						}
@@ -1262,7 +1265,8 @@ describe("course text quality normalization", () => {
 						const normalizedContent = item.content
 							.replace(/\s+/g, " ")
 							.trim();
-						const titles = contentGroups.get(normalizedContent) ?? [];
+						const titles =
+							contentGroups.get(normalizedContent) ?? [];
 						titles.push(item.title);
 						contentGroups.set(normalizedContent, titles);
 					}
@@ -1311,8 +1315,11 @@ describe("course text quality normalization", () => {
 							.trim();
 						if (normalizedContent.length < 280) continue;
 
-						const labels = contentGroups.get(normalizedContent) ?? [];
-						labels.push(`${entry.id} > ${module.title} > ${item.title}`);
+						const labels =
+							contentGroups.get(normalizedContent) ?? [];
+						labels.push(
+							`${entry.id} > ${module.title} > ${item.title}`
+						);
 						contentGroups.set(normalizedContent, labels);
 					}
 				}
@@ -1945,7 +1952,9 @@ describe("course text quality normalization", () => {
 			);
 			expect(transfer.content, transfer.title).toContain(focus);
 			expect(extension.content, extension.title).toContain(focus);
-			expect(transfer.content, module.title).not.toEqual(extension.content);
+			expect(transfer.content, module.title).not.toEqual(
+				extension.content
+			);
 			checkedLabs.push(labNumber);
 		}
 
@@ -1971,11 +1980,7 @@ describe("course text quality normalization", () => {
 			],
 			[
 				"python-level-3",
-				[
-					"stack behavior",
-					"runtime vocabulary",
-					"file input/output"
-				]
+				["stack behavior", "runtime vocabulary", "file input/output"]
 			]
 		]);
 		const checkpointBodies: string[] = [];
@@ -1987,9 +1992,10 @@ describe("course text quality normalization", () => {
 
 			const courseText = allCourseText(course);
 			for (const phrase of expectedPhrases) {
-				expect(courseText, `${courseId} should include ${phrase}`).toContain(
-					phrase
-				);
+				expect(
+					courseText,
+					`${courseId} should include ${phrase}`
+				).toContain(phrase);
 			}
 
 			for (const module of course.modules.filter(module =>
@@ -2042,9 +2048,10 @@ describe("course text quality normalization", () => {
 
 			const courseText = allCourseText(course);
 			for (const phrase of expectedPhrases) {
-				expect(courseText, `${courseId} should include ${phrase}`).toContain(
-					phrase
-				);
+				expect(
+					courseText,
+					`${courseId} should include ${phrase}`
+				).toContain(phrase);
 			}
 
 			const standardsMap = course.modules.find(
@@ -2091,9 +2098,10 @@ describe("course text quality normalization", () => {
 
 			const courseText = allCourseText(course);
 			for (const phrase of expectedPhrases) {
-				expect(courseText, `${courseId} should include ${phrase}`).toContain(
-					phrase
-				);
+				expect(
+					courseText,
+					`${courseId} should include ${phrase}`
+				).toContain(phrase);
 			}
 
 			for (const module of course.modules.filter(module =>
@@ -2302,7 +2310,9 @@ describe("course text quality normalization", () => {
 			/Extend the work from [^.]+ with a tighter constraint, one extra feature, or a slightly more realistic input case\./
 		);
 		expect(corpus).toContain("buildSupportSectionGuidance");
-		expect(corpus).toContain("is planned as a sequence of runnable checkpoints");
+		expect(corpus).toContain(
+			"is planned as a sequence of runnable checkpoints"
+		);
 		expect(corpus).toContain("ends with a concrete verification pass");
 		expect(corpus).toContain(
 			"compares the expected result with what actually happened"
@@ -2348,9 +2358,7 @@ describe("course text quality normalization", () => {
 				courseCatalog.map(entry => loadRawCourse(entry.id))
 			);
 			const links = courses.flatMap((course, index) =>
-				course
-					? courseItemLinks(courseCatalog[index].id, course)
-					: []
+				course ? courseItemLinks(courseCatalog[index].id, course) : []
 			);
 			const legacyJavaGraphicsLinks = links.filter(({ link }) =>
 				/^https:\/\/static\.junilearning\.com\/java1\/.+\.java$/i.test(
@@ -2368,9 +2376,10 @@ describe("course text quality normalization", () => {
 			expect(legacyJavaGraphicsLinks).toEqual([]);
 			for (const sourcePath of expectedSourceLinks) {
 				expect(
-					links.some(({ link }) =>
-						link ===
-						`https://github.com/instruction-material/Java-Level-1/blob/main/${sourcePath}`
+					links.some(
+						({ link }) =>
+							link ===
+							`https://github.com/instruction-material/Java-Level-1/blob/main/${sourcePath}`
 					),
 					sourcePath
 				).toBe(true);
@@ -2955,9 +2964,7 @@ describe("course text quality normalization", () => {
 		expect(clinicConcepts[3].content).toContain("Replace Temp with Query");
 		expect(clinicConcepts[4].content).toContain("Template Method");
 		expect(clinicConcepts[5].content).toContain("Null Object");
-		expect(clinicConcepts[6].content).toContain(
-			"multi-smell sequencing"
-		);
+		expect(clinicConcepts[6].content).toContain("multi-smell sequencing");
 
 		for (const item of clinicConcepts) {
 			expect(item.content).not.toContain(
@@ -3026,8 +3033,10 @@ describe("course text quality normalization", () => {
 			).content
 		).toContain("empty-list handling");
 		expect(
-			findItem(javaWithGraphics!, /Java Foundations Build 13: Core Concepts/)
-				.content
+			findItem(
+				javaWithGraphics!,
+				/Java Foundations Build 13: Core Concepts/
+			).content
 		).toContain("divisibility checks");
 	});
 
@@ -3549,7 +3558,9 @@ describe("course text quality normalization", () => {
 					.flatMap(module =>
 						module.supplementalProjects
 							.filter(item =>
-								item.title.startsWith("Modeling or Error Analysis")
+								item.title.startsWith(
+									"Modeling or Error Analysis"
+								)
 							)
 							.map(item => item.content)
 					)
@@ -3582,11 +3593,15 @@ describe("course text quality normalization", () => {
 			expect(supplementalCorpus).toContain("extraneous solution");
 			expect(supplementalCorpus).toContain("population, depreciation");
 			expect(supplementalCorpus).toContain("linear readiness scenario");
-			expect(supplementalCorpus).toContain("nonlinear readiness scenario");
+			expect(supplementalCorpus).toContain(
+				"nonlinear readiness scenario"
+			);
 			expect(supplementalCorpus).toContain(
 				"advanced-function readiness scenario"
 			);
-			expect(supplementalCorpus).toContain("cumulative modeling scenario");
+			expect(supplementalCorpus).toContain(
+				"cumulative modeling scenario"
+			);
 			expect(new Set(checkInModelingBodies).size).toBe(
 				checkInModelingBodies.length
 			);
@@ -3640,13 +3655,15 @@ describe("course text quality normalization", () => {
 
 				const courseText = allCourseText(course);
 				for (const phrase of expectedPhrases) {
-					expect(courseText, `${courseId} should include ${phrase}`).toContain(
-						phrase
-					);
+					expect(
+						courseText,
+						`${courseId} should include ${phrase}`
+					).toContain(phrase);
 				}
 
 				const architecture = course.modules.find(
-					module => module.title === "Standards-Mapped Algebra Architecture"
+					module =>
+						module.title === "Standards-Mapped Algebra Architecture"
 				);
 				expect(
 					architecture,
@@ -3658,7 +3675,8 @@ describe("course text quality normalization", () => {
 					...architecture.curriculum,
 					...architecture.supplementalProjects
 				]) {
-					const bodies = architectureContentByTitle.get(item.title) ?? [];
+					const bodies =
+						architectureContentByTitle.get(item.title) ?? [];
 					bodies.push(item.content);
 					architectureContentByTitle.set(item.title, bodies);
 				}
