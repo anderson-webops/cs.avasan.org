@@ -688,7 +688,30 @@ describe("python IDE project helpers", () => {
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
+		const resizeCanvasStart = pageSource.indexOf(
+			"function resizeCanvasForDisplay"
+		);
+		const resizeCanvasSource = pageSource.slice(
+			resizeCanvasStart,
+			pageSource.indexOf("function currentTurtlePose", resizeCanvasStart)
+		);
+		const gameTransformStart = pageSource.indexOf(
+			"function setGameCanvasTransform"
+		);
+		const gameTransformSource = pageSource.slice(
+			gameTransformStart,
+			pageSource.indexOf("function clearGameCanvas", gameTransformStart)
+		);
 
+		expect(pageSource).toContain("function syncCanvasBitmapSize");
+		expect(pageSource).toContain("if (canvas.width !== nextWidth)");
+		expect(pageSource).toContain("if (canvas.height !== nextHeight)");
+		expect(resizeCanvasSource).toContain(
+			"syncCanvasBitmapSize(canvas, rect, dpr);"
+		);
+		expect(gameTransformSource).toContain(
+			"syncCanvasBitmapSize(canvas, rect, dpr);"
+		);
 		expect(pageSource).toContain("function redrawActiveCanvas");
 		expect(pageSource).toContain("renderTurtleScene();");
 		expect(pageSource).toContain(

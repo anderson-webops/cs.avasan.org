@@ -1448,6 +1448,17 @@ function getCanvasContext() {
 	return canvas.getContext("2d");
 }
 
+function syncCanvasBitmapSize(
+	canvas: HTMLCanvasElement,
+	rect: DOMRect,
+	dpr: number
+) {
+	const nextWidth = Math.max(1, Math.floor(rect.width * dpr));
+	const nextHeight = Math.max(1, Math.floor(rect.height * dpr));
+	if (canvas.width !== nextWidth) canvas.width = nextWidth;
+	if (canvas.height !== nextHeight) canvas.height = nextHeight;
+}
+
 function resizeCanvasForDisplay() {
 	const canvas = canvasRef.value;
 	const context = getCanvasContext();
@@ -1455,8 +1466,7 @@ function resizeCanvasForDisplay() {
 
 	const rect = canvas.getBoundingClientRect();
 	const dpr = window.devicePixelRatio || 1;
-	canvas.width = Math.max(1, Math.floor(rect.width * dpr));
-	canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+	syncCanvasBitmapSize(canvas, rect, dpr);
 	context.setTransform(dpr, 0, 0, dpr, 0, 0);
 
 	return { context, rect };
@@ -2078,10 +2088,7 @@ function setGameCanvasTransform() {
 
 	const rect = canvas.getBoundingClientRect();
 	const dpr = window.devicePixelRatio || 1;
-	const nextWidth = Math.max(1, Math.floor(rect.width * dpr));
-	const nextHeight = Math.max(1, Math.floor(rect.height * dpr));
-	if (canvas.width !== nextWidth) canvas.width = nextWidth;
-	if (canvas.height !== nextHeight) canvas.height = nextHeight;
+	syncCanvasBitmapSize(canvas, rect, dpr);
 	context.setTransform(
 		dpr * (rect.width / gameState.width),
 		0,
