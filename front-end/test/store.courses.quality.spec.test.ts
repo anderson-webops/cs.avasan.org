@@ -4094,9 +4094,10 @@ describe("course text quality normalization", () => {
 		expect(setup.content).toContain("This lesson begins with");
 		expect(setup.content).toContain("**Key topics:**");
 		expect(setup.content).toContain("- `#include`");
-		expect(setup.content).toContain("**Practice target:**");
+		expect(setup.content).toContain("**Practice check:**");
 		expect(setup.content).not.toMatch(/Start with|Cover:|Students should/);
 		expect(setup.content).not.toMatch(/\*\*Learning sequence:\*\*/);
+		expect(setup.content).not.toMatch(/\*\*Practice target:\*\*/);
 	});
 
 	it("adds AP-specific scaffolding to terse AP Computer Science A algorithm projects", async () => {

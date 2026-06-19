@@ -691,11 +691,11 @@ function neutralizeLessonPointText(text: string) {
 
 	return source
 		.replace(/^Set expectations for\b/i, "This section establishes")
-		.replace(/^Teach students to\b/i, "This section covers how to")
+		.replace(/^Teach students to\b/i, "This section develops how to")
 		.replace(/^Show students\b/i, "This section shows")
 		.replace(/^Introduce\b/i, "This section introduces")
-		.replace(/^Teach\b/i, "This section covers")
-		.replace(/^Cover\b/i, "This section covers")
+		.replace(/^Teach\b/i, "This section develops")
+		.replace(/^Cover\b/i, "This section includes")
 		.replace(/^Review\b/i, "This section reviews")
 		.replace(/^Use\b/i, "This section uses")
 		.replace(/^Practice\b/i, "This section practices")
@@ -726,7 +726,7 @@ function formatLessonArcPointContent(content: string) {
 	const [keyIdea, ...details] = sentences;
 
 	return [
-		`**Key idea:** ${keyIdea}`,
+		`**Main idea:** ${keyIdea}`,
 		`**Details:**\n${details.map(detail => `- ${detail}`).join("\n")}`
 	].join("\n\n");
 }
@@ -1100,6 +1100,10 @@ const supportLabelPattern = [
 	"Explanation",
 	"Science explanation",
 	"Output",
+	"Practice check",
+	"Evidence pattern",
+	"Main idea",
+	"Skill focus",
 	"Practice target",
 	"Visible pattern",
 	"Key idea",
@@ -1270,7 +1274,7 @@ function formatVisibleMarkdownStructure(text: string) {
 	return normalizeRepeatedReferenceNouns(
 		normalizeSentenceStartReferences(
 			formatted.replace(
-				/\n\n(\*\*(?:Practice target|Visible pattern|Key idea|Skill target):\*\*)/g,
+				/\n\n(\*\*(?:Practice check|Evidence pattern|Main idea|Skill focus):\*\*)/g,
 				"\n\n   $1"
 			)
 		)
@@ -1317,6 +1321,13 @@ function supportLabelParagraph(
 	sourceText: string,
 	matchOffset: number
 ) {
+	const readerLabel =
+		{
+			"Practice target": "Practice check",
+			"Visible pattern": "Evidence pattern",
+			"Key idea": "Main idea",
+			"Skill target": "Skill focus"
+		}[label] ?? label;
 	const lineStart = sourceText.lastIndexOf("\n", matchOffset) + 1;
 	const linePrefix = sourceText.slice(lineStart, matchOffset);
 	const indentation =
@@ -1326,7 +1337,7 @@ function supportLabelParagraph(
 				? (leadingWhitespace.match(/(?:^|\n)([ \t]*)$/)?.[1] ?? "")
 				: "";
 
-	return `\n\n${indentation}**${label}:** ${capitalizeFirstLetter(stripTrailingSentencePunctuation(body))}.`;
+	return `\n\n${indentation}**${readerLabel}:** ${capitalizeFirstLetter(stripTrailingSentencePunctuation(body))}.`;
 }
 
 function neutralizeLessonDirectiveText(text: string) {
@@ -1343,14 +1354,14 @@ function neutralizeLessonDirectiveText(text: string) {
 		)
 		.replace(
 			/(^|\n\s*|[.!?]\s+|:\s+)Teach students to\b/g,
-			"$1This section covers how to"
+			"$1This lesson develops how to"
 		)
-		.replace(/(^|\n\s*|[.!?]\s+|:\s+)Teach\b/g, "$1This section covers")
+		.replace(/(^|\n\s*|[.!?]\s+|:\s+)Teach\b/g, "$1This lesson develops")
 		.replace(
 			/(^|\n\s*|[.!?]\s+|:\s+)Introduce\b/g,
 			"$1This section introduces"
 		)
-		.replace(/(^|\n\s*|:\s+)Cover\b/g, "$1This section covers")
+		.replace(/(^|\n\s*|:\s+)Cover\b/g, "$1This section includes")
 		.replace(
 			/(^|\n\s*|[.!?]\s+|:\s+)Set expectations for\b/g,
 			"$1This section establishes"
@@ -1429,7 +1440,7 @@ function neutralizeLessonDirectiveText(text: string) {
 		.replace(
 			/^Teach ([^.]+)\. Cover: ([^.]+)\./g,
 			(_match, description, topics) =>
-				lessonOpening("This lesson covers", description, topics)
+				lessonOpening("This lesson develops", description, topics)
 		)
 		.replace(
 			/^Introduce ([^.]+)\. Cover: ([^.]+)\./g,
@@ -1752,7 +1763,7 @@ function neutralizeStudentFacingText(text: string) {
 				)
 				.replace(
 					/(\*\*Concept path:\*\*\s+)Teach\b/g,
-					"$1This section covers"
+					"$1This section develops"
 				)
 				.replace(
 					/(\*\*Concept path:\*\*\s+)Introduce\b/g,
@@ -1760,7 +1771,7 @@ function neutralizeStudentFacingText(text: string) {
 				)
 				.replace(
 					/(\*\*Concept path:\*\*\s+)Cover\b/g,
-					"$1This section covers"
+					"$1This section includes"
 				)
 				.replace(
 					/(\*\*Concept path:\*\*\s+)Set expectations for\b/g,
@@ -1948,8 +1959,8 @@ function neutralizeStudentFacingText(text: string) {
 				.replace(/\bto Ensure\b/g, "to ensure")
 				.replace(/\bEnsure to ([a-z])/g, capitalizeMatchedFirstLetter)
 				.replace(/\bensure to ([a-z])/g, keepMatchedFirstLetter)
-				.replace(/\bThe goal is to be able to\b/g, "The goal is to")
-				.replace(/\bthe goal is to be able to\b/g, "the goal is to")
+				.replace(/\bThe goal is to be able to\b/g, "The result should")
+				.replace(/\bthe goal is to be able to\b/g, "the result should")
 				.replace(
 					/\bSummarize ([^.]+?) by naming\b/g,
 					"A complete check for $1 names"
@@ -2070,10 +2081,16 @@ function neutralizeStudentFacingText(text: string) {
 					(_match, verb: string) =>
 						`A strong response ${thirdPersonVerb(verb)}`
 				)
-				.replace(/\bThe student should\b/g, "The goal is to")
-				.replace(/\bStudents should\b/g, "The goal is to")
-				.replace(/\bthe student should\b/g, "the goal is to")
-				.replace(/\bstudents should\b/g, "the goal is to")
+				.replace(
+					/\bThe student should\b/g,
+					"A complete response should"
+				)
+				.replace(/\bStudents should\b/g, "Complete responses should")
+				.replace(
+					/\bthe student should\b/g,
+					"a complete response should"
+				)
+				.replace(/\bstudents should\b/g, "complete responses should")
 				.replace(
 					/\bwhen the student needs one more\b/gi,
 					"for one more"
@@ -2204,12 +2221,18 @@ function neutralizeStudentFacingText(text: string) {
 				.replace(/\bstudent answers\b/g, "response answers")
 				.replace(/\bbefore the student enters\b/gi, "before entering")
 				.replace(/\bstudent enters\b/g, "the entry uses")
-				.replace(/\bThe learner should\b/g, "The goal is to")
-				.replace(/\bLearners should\b/g, "The goal is to")
-				.replace(/\bthe learner should\b/g, "the goal is to")
-				.replace(/\blearners should\b/g, "the goal is to")
-				.replace(/\bThe goal is to be able to\b/g, "The goal is to")
-				.replace(/\bthe goal is to be able to\b/g, "the goal is to")
+				.replace(
+					/\bThe learner should\b/g,
+					"A complete response should"
+				)
+				.replace(/\bLearners should\b/g, "Complete responses should")
+				.replace(
+					/\bthe learner should\b/g,
+					"a complete response should"
+				)
+				.replace(/\blearners should\b/g, "complete responses should")
+				.replace(/\bThe goal is to be able to\b/g, "The result should")
+				.replace(/\bthe goal is to be able to\b/g, "the result should")
 				.replace(
 					/\bThe learner can ([a-z])/g,
 					capitalizeMatchedFirstLetter
@@ -3525,7 +3548,7 @@ function projectExpectations(context: CourseTextContext) {
 			subject => [
 				`- Map ${subject} sprites to events, variables, costumes, sounds, broadcasts, or clone behavior before adding polish.`,
 				`- Test ${subject} startup, one normal play path, one reset path, and one scoring or boundary case.`,
-				`- Explain which ${subject} block sequence controls the visible result.`
+				`- For ${subject}, identify the block sequence that controls the visible result.`
 			],
 			subject => [
 				`- Identify the ${subject} player action, sprite response, state variable, and feedback shown on the stage.`,
@@ -3561,7 +3584,7 @@ function projectExpectations(context: CourseTextContext) {
 			subject => [
 				`- State the ${subject} app path, state transition, persistence or navigation boundary, and success signal before coding.`,
 				`- Run ${subject} from a clean launch and inspect one ordinary interaction plus one edge or accessibility case.`,
-				`- Note which ${subject} Swift, SwiftUI, Xcode, signing, or simulator detail controls the observed behavior.`
+				`- For ${subject}, note the Swift, SwiftUI, Xcode, signing, or simulator detail that controls the observed behavior.`
 			]
 		]);
 	}
@@ -3575,7 +3598,7 @@ function projectExpectations(context: CourseTextContext) {
 			subject => [
 				`- State the ${subject} input representation, expected behavior, and evaluation signal before building.`,
 				`- Test ${subject} with a hand-checkable case, a representative case, and one case where the result should be uncertain or limited.`,
-				`- Explain which ${subject} trace, score, comparison, or visualization supports the conclusion.`
+				`- For ${subject}, explain which trace, score, comparison, or visualization supports the conclusion.`
 			],
 			subject => [
 				`- Identify the ${subject} assumptions about data, state, actions, search, rules, or scoring before implementation.`,
@@ -3644,7 +3667,7 @@ function projectExpectations(context: CourseTextContext) {
 			subject => [
 				`- Identify the ${subject} compile target, runtime setup, ownership or layout assumption, and success signal before implementation.`,
 				`- Use a small successful run, a failing or edge run, and one tool-backed observation to verify behavior.`,
-				`- Note which ${subject} command, diagnostic, or representation detail would matter most during troubleshooting.`
+				`- For ${subject}, note the command, diagnostic, or representation detail that would matter most during troubleshooting.`
 			],
 			subject => [
 				`- Describe the ${subject} inputs, outputs, files, build flags, and cleanup or rollback path before running it.`,
@@ -3664,7 +3687,7 @@ function projectExpectations(context: CourseTextContext) {
 	) {
 		return variantLines(context, [
 			subject => [
-				`- Define which ${subject} values are typed by the user, which values are stored, and which values are printed.`,
+				`- For ${subject}, define which values are typed by the user, which values are stored, and which values are printed.`,
 				`- Test ${subject} typical input, awkward input such as extra spaces or decimals when relevant, and output labels that make the result unambiguous.`,
 				`- Keep ${subject} input collection, calculation, and printed output separated enough to debug each step.`
 			],
@@ -3695,7 +3718,7 @@ function projectExpectations(context: CourseTextContext) {
 			subject => [
 				`- State the ${subject} compile path, input fixture, memory or process assumption, and output that proves success.`,
 				`- Use compiler diagnostics, return codes, command output, traces, or sanitizer output to compare expected and edge behavior.`,
-				`- Record which ${subject} boundary was tested: header/source split, lifetime, layout, process state, or machine behavior.`
+				`- For ${subject}, record which boundary was tested: header/source split, lifetime, layout, process state, or machine behavior.`
 			],
 			subject => [
 				`- Set up ${subject} with an explicit command, file boundary, expected output, and cleanup step if the run changes state.`,
@@ -3794,7 +3817,7 @@ function projectExpectations(context: CourseTextContext) {
 			subject => [
 				`- Draw a small ${subject} tree before coding so parent, left child, and right child relationships are explicit.`,
 				`- Test ${subject} with balanced-looking data, sorted insertion data, a missing value, and the chosen duplicate behavior.`,
-				`- Record which ${subject} recursive or iterative branch is taken during one traced operation.`
+				`- For ${subject}, record which recursive or iterative branch is taken during one traced operation.`
 			]
 		]);
 	}
@@ -3858,7 +3881,7 @@ function projectExpectations(context: CourseTextContext) {
 			subject => [
 				`- Sketch the ${subject} indices before coding so row, column, and length relationships are explicit.`,
 				`- Test ${subject} with an empty or smallest useful structure, a full structure, and one middle position.`,
-				`- Explain which ${subject} loop variable controls rows, columns, or element positions.`
+				`- For ${subject}, explain which loop variable controls rows, columns, or element positions.`
 			],
 			subject => [
 				`- Show the ${subject} data before and after the operation so changes are visible.`,
@@ -3887,7 +3910,7 @@ function projectExpectations(context: CourseTextContext) {
 			subject => [
 				`- Show the ${subject} structure before and after every operation that changes membership or priority.`,
 				`- Test ${subject} with duplicate data, absent data, and the smallest useful collection.`,
-				`- Explain which ${subject} operation controls correctness: insertion, lookup, update, removal, or ordering.`
+				`- For ${subject}, explain which operation controls correctness: insertion, lookup, update, removal, or ordering.`
 			]
 		]);
 	}
@@ -3929,7 +3952,7 @@ function projectExpectations(context: CourseTextContext) {
 			subject => [
 				`- Draw or annotate the ${subject} relationship between values, addresses, and ownership before coding.`,
 				`- Test ${subject} allocation, access, resizing or cleanup behavior, and an empty or one-element case.`,
-				`- Explain which ${subject} object owns each resource and when that resource is released.`
+				`- For ${subject}, explain which object owns each resource and when that resource is released.`
 			],
 			subject => [
 				`- State the ${subject} owner, borrowed reference, pointer target, or array extent before writing memory-sensitive code.`,
@@ -3966,7 +3989,7 @@ function projectExpectations(context: CourseTextContext) {
 				`- Keep the reasoning note focused on why Java produces that result, not only what the output is.`
 			],
 			subject => [
-				`- Identify which ${subject} statement, method, constructor, array access, list call, or class relationship controls the answer.`,
+				`- For ${subject}, identify which statement, method, constructor, array access, list call, or class relationship controls the answer.`,
 				`- Test or trace a standard example, a boundary example, and one example likely to catch a common AP misconception.`,
 				`- Summarize the scoring-relevant reasoning in one compact explanation.`
 			]
@@ -3997,7 +4020,7 @@ function projectExpectations(context: CourseTextContext) {
 			subject => [
 				`- State the ${subject} input shape, output shape, important variables, and helper or loop responsibility before coding.`,
 				`- Run a compact hand-checkable case, then compare it with a representative case and one malformed or surprising case.`,
-				`- Explain which ${subject} branch, loop, helper, collection, or file step controls the result.`
+				`- For ${subject}, explain which branch, loop, helper, collection, or file step controls the result.`
 			],
 			subject => [
 				`- Break ${subject} into setup, input handling, core transformation, and visible output before implementation.`,
@@ -4105,7 +4128,7 @@ function projectExpectations(context: CourseTextContext) {
 			subject => [
 				`- Identify the ${subject} input contract, output contract, build flags, and resource boundary before writing code.`,
 				`- Verify a clean run, a smallest or empty run, and one invalid or stress-shaped run with current output.`,
-				`- Record which ${subject} assumption would break first if the program became larger.`
+				`- For ${subject}, record which assumption would break first if the program became larger.`
 			],
 			subject => [
 				`- Separate ${subject} setup, data ownership, mutation behavior, and output formatting before adding extra features.`,
@@ -5641,39 +5664,39 @@ function lessonSupport(context: CourseTextContext) {
 	const javaConceptPath = () =>
 		variantPrompt(context, [
 			() =>
-				`**Concept path:** ${topic} starts by mapping responsibilities: which class owns the state, which method changes it, and which output or test proves the behavior.`,
+				`**Concept path:** For ${topic}, responsibilities are mapped first: which class owns the state, which method changes it, and which output or test proves the behavior.`,
 			() =>
-				`**Concept path:** ${topic} connects Java syntax to a concrete responsibility: constructor setup, method contract, object state, collection choice, or interface/record boundary.`,
+				`**Concept path:** For ${topic}, Java syntax connects to a concrete responsibility: constructor setup, method contract, object state, collection choice, or interface/record boundary.`,
 			() =>
-				`**Concept path:** ${topic} separates the model from the driver code, then checks one normal case and one edge case so the Java behavior is visible.`,
+				`**Concept path:** For ${topic}, the model is separated from the driver code, then checked with one normal case and one edge case so the Java behavior is visible.`,
 			() =>
-				`**Concept path:** ${topic} traces the Java idea from data shape to public behavior: fields, parameters, return values, object interactions, and compile-run evidence.`,
+				`**Concept path:** For ${topic}, the Java idea is traced from data shape to public behavior: fields, parameters, return values, object interactions, and compile-run evidence.`,
 			() =>
-				`**Concept path:** ${topic} links each language feature to a design choice, then verifies that choice through a runnable example and a changed case.`,
+				`**Concept path:** For ${topic}, each language feature links to a design choice, then verifies that choice through a runnable example and a changed case.`,
 			() =>
-				`**Concept path:** ${topic} makes the object boundary explicit first, then follows the value or reference through one method call and one variation.`,
+				`**Concept path:** For ${topic}, the object boundary is made explicit first, then the value or reference is followed through one method call and one variation.`,
 			() =>
-				`**Concept path:** ${topic} treats Java structure as evidence: names, access levels, constructors, records or interfaces, and tests all point back to the same behavior.`,
+				`**Concept path:** For ${topic}, Java structure acts as evidence: names, access levels, constructors, records or interfaces, and tests all point back to the same behavior.`,
 			() =>
-				`**Concept path:** ${topic} begins with a small runnable example, then changes one responsibility or object interaction to test whether the design still holds.`
+				`**Concept path:** For ${topic}, a small runnable example comes first, then one responsibility or object interaction changes to test whether the design still holds.`
 		]);
 	const conceptPath = variantPrompt(context, [
 		() =>
-			`**Concept path:** The core idea is ${focus}: one concrete example establishes the relevant vocabulary, then a nearby variation checks whether the same reasoning still works.`,
+			`**Concept path:** For ${focus}, one concrete example establishes the relevant vocabulary, then a nearby variation checks whether the same reasoning still works.`,
 		() =>
-			`**Concept path:** ${capitalizeSentence(focus)} is connected to one traceable example, one changed condition, and one explanation of what changed.`,
+			`**Concept path:** For ${focus}, one traceable example, one changed condition, and one explanation make the reasoning visible.`,
 		() =>
-			`**Concept path:** The main representation in ${focus} is identified first, then traced through a concrete task and checked against a variation.`,
+			`**Concept path:** For ${focus}, the main representation is identified first, then traced through a concrete task and checked against a variation.`,
 		() =>
-			`**Concept path:** One worked example and one transfer check show how ${focus} changes when the situation changes.`,
+			`**Concept path:** For ${focus}, one worked example and one transfer check show what changes when the situation changes.`,
 		() =>
-			`**Concept path:** ${capitalizeSentence(focus)} starts with a named idea, follows it through one example, then checks the idea in a nearby case.`,
+			`**Concept path:** For ${focus}, start with a named idea, follow it through one example, then check the idea in a nearby case.`,
 		() =>
-			`**Concept path:** The first pass makes the rule or model visible for ${focus}; the second pass changes one condition to test transfer.`,
+			`**Concept path:** For ${focus}, the first pass makes the rule or model visible; the second pass changes one condition to test transfer.`,
 		() =>
-			`**Concept path:** ${capitalizeSentence(focus)} is easier to use when the vocabulary, example, changed case, and evidence are separated clearly.`,
+			`**Concept path:** For ${focus}, vocabulary, examples, changed cases, and evidence are easier to use when they are separated clearly.`,
 		() =>
-			`**Concept path:** A focused example anchors ${focus}, and a controlled variation checks whether the explanation still fits.`
+			`**Concept path:** For ${focus}, a focused example anchors the idea, and a controlled variation checks whether the explanation still fits.`
 	]);
 
 	return [

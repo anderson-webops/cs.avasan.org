@@ -1154,7 +1154,7 @@ function requiredWorkSteps(
 			[
 				`Convert ${moduleTitle} into precise stdin/stdout behavior, a maintained invariant, and a target runtime before coding.`,
 				`Build the ${moduleTitle} solution around one hand-checkable case, then expand to the sample and one adversarial or boundary input.`,
-				`Record which ${moduleTitle} constraint, edge case, or ordering detail most influenced the algorithm.`
+				`Record the constraint, edge case, or ordering detail in ${moduleTitle} that most influenced the algorithm.`
 			]
 		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
@@ -1353,7 +1353,7 @@ function requiredWorkSteps(
 				`Verify ${moduleTitle} normal behavior, failure or attack-shaped behavior, and one remediation, detection, or hardening result.`
 			],
 			[
-				`Define the approved ${moduleTitle} target, allowed traffic or inputs, expected safe behavior, and failure mode before running the lab.`,
+				`For ${moduleTitle}, define the approved target, allowed traffic or inputs, expected safe behavior, and failure mode before running the lab.`,
 				`Capture one concrete ${moduleTitle} evidence source such as a log, packet, request, response, rule, or configuration diff at each major step.`,
 				`Finish with proof of normal operation plus one defensive validation, rollback, or hardening check.`
 			],

@@ -79,7 +79,7 @@ export const pythonLevel1Course: RawCourse = {
 				{
 					title: "GrS2 Supplemental Project 3: Watermelon Slice",
 					content:
-						"Use loops and fills to draw a watermelon slice with rind, fruit, and seeds. Separate the drawing into layers: outer rind, inner fruit, and repeated seed shapes. The repeated seeds should be positioned with a visible pattern rather than placed randomly, and the fill colors should make each layer easy to distinguish.",
+						"Use loops and fills to draw a watermelon slice with rind, fruit, and seeds. Separate the drawing into layers: outer rind, inner fruit, and repeated seed shapes. The repeated seeds should be positioned with a clear pattern rather than placed randomly, and the fill colors should make each layer easy to distinguish.",
 					solutionLink:
 						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS2-Watermelon-Slice/solution"
 				},
