@@ -1590,7 +1590,9 @@ async function resetCodeEditor() {
 			onChange(content) {
 				syncingCodeMirrorContent = true;
 				activeFileContent.value = content;
-				syncingCodeMirrorContent = false;
+				void nextTick(() => {
+					syncingCodeMirrorContent = false;
+				});
 			},
 			onCursorCountChange(count) {
 				editorCursorCount.value = count;

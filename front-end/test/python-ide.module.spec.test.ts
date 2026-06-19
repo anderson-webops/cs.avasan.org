@@ -2098,6 +2098,25 @@ describe("python IDE project helpers", () => {
 		);
 	});
 
+	it("suppresses CodeMirror-originated echo updates through the Vue flush", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const onChangeStart = pageSource.indexOf("onChange(content) {");
+		const onChangeSource = pageSource.slice(
+			onChangeStart,
+			pageSource.indexOf("onCursorCountChange", onChangeStart)
+		);
+
+		expect(onChangeSource).toContain("syncingCodeMirrorContent = true;");
+		expect(onChangeSource).toContain("activeFileContent.value = content;");
+		expect(onChangeSource).toContain("void nextTick(() => {");
+		expect(onChangeSource).toContain("syncingCodeMirrorContent = false;");
+		expect(pageSource).toContain("watch(activeFileContent, content => {");
+		expect(pageSource).toContain("syncCodeEditorContent(content);");
+	});
+
 	it("normalizes loaded project active files before rendering or saving", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
