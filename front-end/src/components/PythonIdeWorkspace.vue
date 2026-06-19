@@ -4180,11 +4180,11 @@ function redrawActiveCanvas() {
 }
 
 async function runCurrentProject() {
+	stopRequested.value = false;
+	await saveSelectedProject({ force: true });
 	const project = selectedProject.value;
 	if (!project) return;
 
-	stopRequested.value = false;
-	await saveSelectedProject({ force: true });
 	clearOutput();
 	const runnableFile = getPythonIdeRunnableFile(project);
 	if (!runnableFile) {

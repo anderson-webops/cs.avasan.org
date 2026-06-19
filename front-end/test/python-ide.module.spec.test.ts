@@ -2050,6 +2050,33 @@ describe("python IDE project helpers", () => {
 		);
 	});
 
+	it("uses the current selected project after forced save before running", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const runStart = pageSource.indexOf("async function runCurrentProject");
+		const runSource = pageSource.slice(
+			runStart,
+			pageSource.indexOf("function stopCurrentProject", runStart)
+		);
+
+		const saveIndex = runSource.indexOf(
+			"await saveSelectedProject({ force: true });"
+		);
+		const projectIndex = runSource.indexOf("const project = selectedProject.value;");
+		const runnableIndex = runSource.indexOf(
+			"const runnableFile = getPythonIdeRunnableFile(project);"
+		);
+
+		expect(saveIndex).toBeGreaterThan(0);
+		expect(projectIndex).toBeGreaterThan(saveIndex);
+		expect(runnableIndex).toBeGreaterThan(projectIndex);
+		expect(runSource).toContain(
+			"onProjectFilesUpdate: files =>\n\t\t\t\tmergeRuntimeProjectFiles(project, files)"
+		);
+	});
+
 	it("clears stale local account fallback after successful remote syncs", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
