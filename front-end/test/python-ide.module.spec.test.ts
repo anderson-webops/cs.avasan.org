@@ -2409,6 +2409,16 @@ describe("python IDE project helpers", () => {
 			"return iter((self.x, self.y, self.width, self.height))"
 		);
 		expect(runtimeSource).toContain("def __getitem__(self, index):");
+		expect(runtimeSource).toContain("def _new(self, x, y, width, height):");
+		expect(runtimeSource).toContain(
+			"rect = self.__class__.__new__(self.__class__)"
+		);
+		expect(runtimeSource).toContain(
+			"Rect.__init__(rect, x, y, width, height)"
+		);
+		expect(runtimeSource).toContain(
+			"return self._new(self.x, self.y, self.width, self.height)"
+		);
 		expect(runtimeSource).toContain("def scale_by(self, *args):");
 		expect(runtimeSource).toContain("def scale_by_ip(self, *args):");
 		expect(runtimeSource).toContain("def update(self, *args):");
@@ -2417,7 +2427,10 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("self.centerx = outer.centerx");
 		expect(runtimeSource).toContain("def clip(self, other):");
 		expect(runtimeSource).toContain(
-			"return Rect(left, top, right - left, bottom - top)"
+			"return self._new(left, top, 0, 0)"
+		);
+		expect(runtimeSource).toContain(
+			"return self._new(left, top, right - left, bottom - top)"
 		);
 		expect(runtimeSource).toContain("def clipline(self, *args):");
 		expect(runtimeSource).toContain(
@@ -2432,7 +2445,13 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("def unionall_ip(self, rects):");
 		expect(runtimeSource).toContain("def fit(self, other):");
 		expect(runtimeSource).toContain(
+			"return self._new(outer.x, outer.y, 0, 0)"
+		);
+		expect(runtimeSource).toContain(
 			"scale = min(outer.width / self.width, outer.height / self.height)"
+		);
+		expect(runtimeSource).toContain(
+			"fitted = self._new(0, 0, self.width * scale, self.height * scale)"
 		);
 		expect(runtimeSource).toContain("def normalize(self):");
 		expect(runtimeSource).toContain("self.width = -self.width");

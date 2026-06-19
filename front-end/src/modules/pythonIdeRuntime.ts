@@ -1818,8 +1818,13 @@ class Rect:
     def midright(self, value):
         self.right, self.centery = _point(value, self.midright)
 
+    def _new(self, x, y, width, height):
+        rect = self.__class__.__new__(self.__class__)
+        Rect.__init__(rect, x, y, width, height)
+        return rect
+
     def copy(self):
-        return Rect(self.x, self.y, self.width, self.height)
+        return self._new(self.x, self.y, self.width, self.height)
 
     def move(self, x, y=None):
         moved = self.copy()
@@ -1889,8 +1894,8 @@ class Rect:
         right = min(self.right, other_rect.right)
         bottom = min(self.bottom, other_rect.bottom)
         if right <= left or bottom <= top:
-            return Rect(left, top, 0, 0)
-        return Rect(left, top, right - left, bottom - top)
+            return self._new(left, top, 0, 0)
+        return self._new(left, top, right - left, bottom - top)
 
     def clipline(self, *args):
         if self.width <= 0 or self.height <= 0:
@@ -1935,7 +1940,7 @@ class Rect:
         top = min(self.top, other_rect.top)
         right = max(self.right, other_rect.right)
         bottom = max(self.bottom, other_rect.bottom)
-        return Rect(left, top, right - left, bottom - top)
+        return self._new(left, top, right - left, bottom - top)
 
     def union_ip(self, other):
         self.update(self.union(other))
@@ -1954,9 +1959,9 @@ class Rect:
     def fit(self, other):
         outer = Rect(other)
         if self.width <= 0 or self.height <= 0 or outer.width <= 0 or outer.height <= 0:
-            return Rect(outer.x, outer.y, 0, 0)
+            return self._new(outer.x, outer.y, 0, 0)
         scale = min(outer.width / self.width, outer.height / self.height)
-        fitted = Rect(0, 0, self.width * scale, self.height * scale)
+        fitted = self._new(0, 0, self.width * scale, self.height * scale)
         fitted.center = outer.center
         return fitted
 
