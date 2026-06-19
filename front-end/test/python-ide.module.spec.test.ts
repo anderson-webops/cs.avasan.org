@@ -1026,6 +1026,33 @@ describe("python IDE project helpers", () => {
 		expect(resetGameCanvasSource).toContain("stopGameLoop();");
 	});
 
+	it("keeps PyGame Zero image cache entries reusable across canvas resets", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const resetGameCanvasStart = pageSource.indexOf(
+			"function resetGameCanvas"
+		);
+		const resetGameCanvasSource = pageSource.slice(
+			resetGameCanvasStart,
+			pageSource.indexOf("function stopGameLoop", resetGameCanvasStart)
+		);
+		const getGameImageEntryStart = pageSource.indexOf(
+			"function getGameImageEntry"
+		);
+		const getGameImageEntrySource = pageSource.slice(
+			getGameImageEntryStart,
+			pageSource.indexOf("function courseAssetSize", getGameImageEntryStart)
+		);
+
+		expect(resetGameCanvasSource).not.toContain("gameImageCache.clear()");
+		expect(getGameImageEntrySource).toContain(
+			"if (cached?.src === src) return cached;"
+		);
+		expect(getGameImageEntrySource).toContain("gameImageCache.set(asset.key, entry);");
+	});
+
 	it("runs plain Python projects in a terminable Pyodide worker", () => {
 		const runtimeSource = readFileSync(
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
@@ -2171,7 +2198,7 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain('type: "musicended"');
 		expect(pageSource).toContain("imageSizeJson: gameImageSizeJson");
 		expect(pageSource).toContain("findPythonIdeCourseAsset");
-		expect(pageSource).toContain("gameImageCache.clear()");
+		expect(pageSource).toContain("if (cached?.src === src) return cached;");
 	});
 
 	it("runs the selected Python file or falls back from resource files", () => {
