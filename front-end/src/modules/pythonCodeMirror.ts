@@ -26,7 +26,7 @@ import {
 	syntaxHighlighting,
 	syntaxTree
 } from "@codemirror/language";
-import { linter, lintKeymap } from "@codemirror/lint";
+import { linter, lintGutter, lintKeymap } from "@codemirror/lint";
 import { highlightSelectionMatches, searchKeymap } from "@codemirror/search";
 import {
 	EditorSelection,
@@ -1161,6 +1161,7 @@ const bracketPairColorExtension = [
 
 const pythonEditorBaseSetup: Extension[] = [
 	lineNumbers(),
+	lintGutter({ hoverTime: 220 }),
 	highlightActiveLineGutter(),
 	highlightSpecialChars(),
 	history(),

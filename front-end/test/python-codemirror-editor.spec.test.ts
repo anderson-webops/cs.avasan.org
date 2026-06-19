@@ -144,6 +144,7 @@ describe("python IDE CodeMirror editor", () => {
 		expect(editorSource).toContain("pythonIdeCompletionSource");
 		expect(editorSource).toContain("pythonSyntaxDiagnostics");
 		expect(editorSource).toContain("linter(view =>");
+		expect(editorSource).toContain("lintGutter({ hoverTime: 220 })");
 		expect(pageSource).toContain(
 			'mode: selectedProject.value?.mode ?? "python"'
 		);
