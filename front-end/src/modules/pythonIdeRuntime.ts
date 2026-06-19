@@ -871,6 +871,9 @@ def __classes_schedule_turtle_loop(body_source, filename, line_number, namespace
         from pyodide.ffi import create_proxy as __classes_create_proxy
     except Exception:
         raise RuntimeError("Scheduled Turtle while loops require the browser Turtle runtime.")
+    __classes_turtle_bridge = getattr(__classes_window, "__classesPythonIdeTurtle", None)
+    if __classes_turtle_bridge is None:
+        raise RuntimeError("Scheduled Turtle while loops require the browser Turtle runtime.")
 
     __classes_turtle_loop_counter += 1
     loop_key = str(__classes_turtle_loop_counter)
@@ -884,7 +887,7 @@ def __classes_schedule_turtle_loop(body_source, filename, line_number, namespace
         try:
             __classes_loop_guard("turtle while")
             exec(body_code, namespace)
-            __classes_window.__classesPythonIdeTurtle.scheduleTimer(
+            __classes_turtle_bridge.scheduleTimer(
                 __classes_turtle_loop_delay_ms,
                 __classes_turtle_loop_proxies[loop_key],
             )
@@ -897,7 +900,7 @@ def __classes_schedule_turtle_loop(body_source, filename, line_number, namespace
     __classes_turtle_loop_proxies[loop_key] = __classes_create_proxy(
         __classes_run_turtle_loop
     )
-    __classes_window.__classesPythonIdeTurtle.scheduleTimer(
+    __classes_turtle_bridge.scheduleTimer(
         0,
         __classes_turtle_loop_proxies[loop_key],
     )

@@ -1248,6 +1248,15 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("namespace = globals()");
 		expect(runtimeSource).toContain("exec(body_code, namespace)");
 		expect(runtimeSource).toContain(
+			'__classes_turtle_bridge = getattr(__classes_window, "__classesPythonIdeTurtle", None)'
+		);
+		expect(runtimeSource).toContain(
+			"__classes_turtle_bridge.scheduleTimer("
+		);
+		expect(runtimeSource).not.toContain(
+			"__classes_window.__classesPythonIdeTurtle.scheduleTimer("
+		);
+		expect(runtimeSource).toContain(
 			'func=ast.Name(id="globals", ctx=ast.Load())'
 		);
 		expect(runtimeSource).toContain("ast.Call(");
