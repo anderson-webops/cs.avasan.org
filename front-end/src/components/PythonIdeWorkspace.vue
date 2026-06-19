@@ -469,6 +469,7 @@ let gameLoopRequested = false;
 let gameTickInFlight = false;
 let activeTurtleBridgeRunID = 0;
 let activeGameBridgeRunID = 0;
+let activeGameLoopID = 0;
 let activeTurtleDragButton: string | null = null;
 let lastGamePointerPoint: { x: number; y: number } | null = null;
 let gameMusicAudio: HTMLAudioElement | null = null;
@@ -2214,6 +2215,7 @@ function resetGameCanvas(width = 640, height = 400) {
 }
 
 function stopGameLoop() {
+	activeGameLoopID += 1;
 	if (gameAnimationFrame !== null) {
 		cancelAnimationFrame(gameAnimationFrame);
 		gameAnimationFrame = null;
@@ -2628,14 +2630,17 @@ function playGameTone(frequency: number, duration: number) {
 
 function startGameLoop(tick: () => Promise<void>) {
 	stopGameLoop();
+	const loopID = ++activeGameLoopID;
+	const isActiveLoop = () => loopID === activeGameLoopID;
 	isGameLoopActive.value = true;
 
 	const runTick = () => {
-		if (gameTickInFlight) return;
+		if (!isActiveLoop() || gameTickInFlight) return;
 
 		gameTickInFlight = true;
 		tick()
 			.catch((error: unknown) => {
+				if (!isActiveLoop()) return;
 				appendOutput(
 					"stderr",
 					error instanceof Error ? error.message : "Game loop failed."
@@ -2643,11 +2648,12 @@ function startGameLoop(tick: () => Promise<void>) {
 				stopGameLoop();
 			})
 			.finally(() => {
-				gameTickInFlight = false;
+				if (isActiveLoop()) gameTickInFlight = false;
 			});
 	};
 
 	const runFrame = () => {
+		if (!isActiveLoop()) return;
 		gameAnimationFrame = requestAnimationFrame(runFrame);
 		runTick();
 	};

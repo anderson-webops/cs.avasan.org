@@ -962,6 +962,39 @@ describe("python IDE project helpers", () => {
 		);
 	});
 
+	it("guards PyGame Zero loop ticks from stale async completions", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const startGameLoopStart = pageSource.indexOf(
+			"function startGameLoop"
+		);
+		const startGameLoopSource = pageSource.slice(
+			startGameLoopStart,
+			pageSource.indexOf("function drawGameActor", startGameLoopStart)
+		);
+		const stopGameLoopStart = pageSource.indexOf("function stopGameLoop");
+		const stopGameLoopSource = pageSource.slice(
+			stopGameLoopStart,
+			pageSource.indexOf("function stopAllGameAudio", stopGameLoopStart)
+		);
+
+		expect(pageSource).toContain("let activeGameLoopID = 0;");
+		expect(stopGameLoopSource).toContain("activeGameLoopID += 1;");
+		expect(startGameLoopSource).toContain("const loopID = ++activeGameLoopID;");
+		expect(startGameLoopSource).toContain(
+			"const isActiveLoop = () => loopID === activeGameLoopID;"
+		);
+		expect(startGameLoopSource).toContain(
+			"if (!isActiveLoop() || gameTickInFlight) return;"
+		);
+		expect(startGameLoopSource).toContain("if (!isActiveLoop()) return;");
+		expect(startGameLoopSource).toContain(
+			"if (isActiveLoop()) gameTickInFlight = false;"
+		);
+	});
+
 	it("guards Turtle bridge calls to the active run", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
