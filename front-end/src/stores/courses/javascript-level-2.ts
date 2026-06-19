@@ -72,7 +72,9 @@ export const javascriptLevel2Course: RawCourse = {
 					title: "Check In #1 supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "web development",
-						moduleTitle: "Check-In #1",
+						moduleTitle: "JavaScript Master Check-In #1",
+						itemTitle:
+							"Transfer Practice: Check-In #1 supplemental 2",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -85,7 +87,9 @@ export const javascriptLevel2Course: RawCourse = {
 					title: "Check In #1 supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "web development",
-						moduleTitle: "Check-In #1",
+						moduleTitle: "JavaScript Master Check-In #1",
+						itemTitle:
+							"Extension Practice: Check-In #1 supplemental 3",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -163,7 +167,9 @@ export const javascriptLevel2Course: RawCourse = {
 					title: "Check In #2 supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "web development",
-						moduleTitle: "Check-In #2",
+						moduleTitle: "JavaScript Master Check-In #2",
+						itemTitle:
+							"Transfer Practice: Check-In #2 supplemental 2",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -176,7 +182,9 @@ export const javascriptLevel2Course: RawCourse = {
 					title: "Check In #2 supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "web development",
-						moduleTitle: "Check-In #2",
+						moduleTitle: "JavaScript Master Check-In #2",
+						itemTitle:
+							"Extension Practice: Check-In #2 supplemental 3",
 						projectKind: "extension",
 						hasReference: true
 					}),

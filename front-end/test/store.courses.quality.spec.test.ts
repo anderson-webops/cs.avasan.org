@@ -1653,6 +1653,57 @@ describe("course text quality normalization", () => {
 		expect(new Set(checkpointBodies).size).toBe(checkpointBodies.length);
 	});
 
+	it("keeps JavaScript check-in supplemental practice level-specific", async () => {
+		const expectedByCourse = new Map([
+			[
+				"javascript-level-1-javascript-superstar",
+				[
+					"JavaScript Superstar Check-In #1 Transfer Practice",
+					"JavaScript Superstar Check-In #1 Extension Practice",
+					"JavaScript Superstar Check-In #2 Transfer Practice",
+					"JavaScript Superstar Check-In #2 Extension Practice"
+				]
+			],
+			[
+				"javascript-level-2-javascript-master",
+				[
+					"JavaScript Master Check-In #1 Transfer Practice",
+					"JavaScript Master Check-In #1 Extension Practice",
+					"JavaScript Master Check-In #2 Transfer Practice",
+					"JavaScript Master Check-In #2 Extension Practice"
+				]
+			]
+		]);
+		const supplementalBodies: string[] = [];
+
+		for (const [courseId, expectedPhrases] of expectedByCourse) {
+			const course = await loadRawCourse(courseId);
+			expect(course, courseId).not.toBeNull();
+			if (!course) continue;
+
+			const courseText = allCourseText(course);
+			for (const phrase of expectedPhrases) {
+				expect(courseText, `${courseId} should include ${phrase}`).toContain(
+					phrase
+				);
+			}
+
+			for (const module of course.modules.filter(module =>
+				/^Check-In #\d+$/.test(module.title)
+			)) {
+				for (const item of module.supplementalProjects.filter(item =>
+					/supplemental [23]$/i.test(item.title)
+				)) {
+					supplementalBodies.push(item.content);
+				}
+			}
+		}
+
+		expect(new Set(supplementalBodies).size).toBe(
+			supplementalBodies.length
+		);
+	});
+
 	it("keeps systems and web implementation labs from regressing to generated filler", () => {
 		const sourcePaths = [
 			"src/stores/courses/assembly.ts",
