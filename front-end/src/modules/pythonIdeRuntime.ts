@@ -591,6 +591,21 @@ function escapePythonString(value: string) {
 function createInputBootstrap(inputText: string, mode: PythonIdeMode) {
 	const inputLines = inputText.replaceAll("\r\n", "\n").split("\n");
 	return `
+import builtins as __classes_bootstrap_builtins
+import sys as __classes_bootstrap_sys
+__classes_main = __classes_bootstrap_sys.modules["__main__"]
+__classes_preserved_main_names = {
+    "__builtins__",
+    "__doc__",
+    "__loader__",
+    "__package__",
+    "__spec__",
+}
+for __classes_name in list(__classes_main.__dict__):
+    if __classes_name not in __classes_preserved_main_names:
+        del __classes_main.__dict__[__classes_name]
+__classes_main.__dict__["__builtins__"] = __classes_bootstrap_builtins
+__classes_main.__dict__["__name__"] = "__main__"
 import sys as __classes_sys
 __classes_sys.meta_path[:] = [
     __classes_finder for __classes_finder in __classes_sys.meta_path
@@ -4431,6 +4446,7 @@ except Exception:
 	await pyodide.runPythonAsync(`
 import __main__
 __main__.__dict__["__name__"] = "__main__"
+__main__.__dict__["__file__"] = ${escapePythonString(activeFile.name)}
 exec(
     __classes_compile_student_source(
         open(${escapePythonString(activeFile.name)}, "r", encoding="utf-8").read(),

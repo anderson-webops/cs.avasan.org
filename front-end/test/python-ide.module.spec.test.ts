@@ -1530,6 +1530,46 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("stopActiveRuntimeSurfaces();");
 	});
 
+	it("clears stale main-thread Python globals before Turtle and game runs", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+		const inputBootstrapStart = runtimeSource.indexOf(
+			"function createInputBootstrap"
+		);
+		const inputBootstrapSource = runtimeSource.slice(
+			inputBootstrapStart,
+			runtimeSource.indexOf("const turtleShim", inputBootstrapStart)
+		);
+		const runSourceStart = runtimeSource.indexOf(
+			"export async function runPythonProject"
+		);
+		const runSource = runtimeSource.slice(runSourceStart);
+
+		expect(inputBootstrapSource).toContain(
+			'__classes_main = __classes_bootstrap_sys.modules["__main__"]'
+		);
+		expect(inputBootstrapSource).toContain(
+			"__classes_preserved_main_names = {"
+		);
+		expect(inputBootstrapSource).toContain(
+			"for __classes_name in list(__classes_main.__dict__):"
+		);
+		expect(inputBootstrapSource).toContain(
+			"del __classes_main.__dict__[__classes_name]"
+		);
+		expect(inputBootstrapSource).toContain(
+			'__classes_main.__dict__["__builtins__"] = __classes_bootstrap_builtins'
+		);
+		expect(inputBootstrapSource).toContain(
+			'__classes_main.__dict__["__name__"] = "__main__"'
+		);
+		expect(runSource).toContain('__main__.__dict__["__file__"] =');
+		expect(runSource).toContain("__classes_compile_student_source(");
+		expect(runSource).toContain("__main__.__dict__,");
+	});
+
 	it("guards PyGame Zero bridge calls to the active run", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
