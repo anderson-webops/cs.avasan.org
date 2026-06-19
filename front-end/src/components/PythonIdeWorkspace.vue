@@ -522,6 +522,7 @@ let codeEditorModulesPromise: Promise<PythonCodeEditorModules> | null = null;
 let pythonRuntimeModulePromise: Promise<PythonRuntimeModule> | null = null;
 let codeEditorResetToken = 0;
 let activeCodeEditorViewStateKey = "";
+let projectLoadRunID = 0;
 
 function loadPythonCodeEditorModules() {
 	codeEditorModulesPromise ??= Promise.all([
@@ -1028,24 +1029,42 @@ async function createRequestedCourseProject() {
 	});
 }
 
-async function saveNewProject(project: PythonIdeProject, localOnly = false) {
+function projectLoadIsCurrent(loadRunID?: number) {
+	return loadRunID === undefined || loadRunID === projectLoadRunID;
+}
+
+async function saveNewProject(
+	project: PythonIdeProject,
+	localOnly = false,
+	loadRunID?: number
+) {
+	if (!projectLoadIsCurrent(loadRunID)) return;
+
 	if (canSyncToAccount.value && !localOnly) {
 		const remoteProject = await createRemotePythonIdeProject(
 			pythonIdeProjectToPayload(project)
 		);
+		if (!projectLoadIsCurrent(loadRunID)) return;
 		projects.value.unshift(remoteProject);
 		selectedProjectID.value = remoteProject._id;
 		await clearLocalPythonProjectsAsync(storageUserID.value);
+		if (!projectLoadIsCurrent(loadRunID)) return;
 		saveMessage.value = "Synced to account";
 		return;
 	}
 
+	if (!projectLoadIsCurrent(loadRunID)) return;
 	projects.value.unshift(project);
 	selectedProjectID.value = project._id;
 	await persistLocalProjects();
 }
 
-async function openRequestedCourseProjectIfNeeded(localOnly = false) {
+async function openRequestedCourseProjectIfNeeded(
+	localOnly = false,
+	loadRunID?: number
+) {
+	if (!projectLoadIsCurrent(loadRunID)) return false;
+
 	const existingProject = projectForRoute(projects.value);
 	if (existingProject) {
 		selectedProjectID.value = existingProject._id;
@@ -1053,10 +1072,11 @@ async function openRequestedCourseProjectIfNeeded(localOnly = false) {
 	}
 
 	const requestedProject = await createRequestedCourseProject();
+	if (!projectLoadIsCurrent(loadRunID)) return false;
 	if (!requestedProject) return false;
 
-	await saveNewProject(requestedProject, localOnly);
-	return true;
+	await saveNewProject(requestedProject, localOnly, loadRunID);
+	return projectLoadIsCurrent(loadRunID);
 }
 
 async function createInitialProject() {
@@ -1123,25 +1143,32 @@ async function syncProjectsToAccount(projectList: PythonIdeProject[]) {
 }
 
 async function loadProjects() {
+	const loadRunID = ++projectLoadRunID;
 	isLoading.value = true;
 	suppressAutoSave = true;
 	loadPersistedCodeEditorViewStates(storageUserID.value);
 	try {
 		if (canSyncToAccount.value) {
 			const remoteProjects = await fetchPythonIdeProjects();
+			if (!projectLoadIsCurrent(loadRunID)) return;
 			const localProjects = await loadLocalPythonProjectsAsync(
 				storageUserID.value
 			);
+			if (!projectLoadIsCurrent(loadRunID)) return;
 			if (localProjects.length) {
 				try {
 					const syncedProjects =
 						await syncProjectsToAccount(localProjects);
+					if (!projectLoadIsCurrent(loadRunID)) return;
 					setProjects(syncedProjects);
 					await clearLocalPythonProjectsAsync(storageUserID.value);
-					await openRequestedCourseProjectIfNeeded();
+					if (!projectLoadIsCurrent(loadRunID)) return;
+					await openRequestedCourseProjectIfNeeded(false, loadRunID);
+					if (!projectLoadIsCurrent(loadRunID)) return;
 					saveMessage.value = "Synced recovered local edits";
 					return;
 				} catch (error) {
+					if (!projectLoadIsCurrent(loadRunID)) return;
 					setProjects(localProjects);
 					appendOutput(
 						"system",
@@ -1151,24 +1178,29 @@ async function loadProjects() {
 					);
 				}
 
-				await openRequestedCourseProjectIfNeeded();
+				await openRequestedCourseProjectIfNeeded(false, loadRunID);
+				if (!projectLoadIsCurrent(loadRunID)) return;
 				saveMessage.value = "Recovered local edits";
 				return;
 			}
 
 			if (remoteProjects.length) {
 				setProjects(remoteProjects);
-				await openRequestedCourseProjectIfNeeded();
+				await openRequestedCourseProjectIfNeeded(false, loadRunID);
+				if (!projectLoadIsCurrent(loadRunID)) return;
 				saveMessage.value = "Synced to account";
 				return;
 			}
 
 			const initialProject = await createInitialProject();
+			if (!projectLoadIsCurrent(loadRunID)) return;
 			const remoteProject = await createRemotePythonIdeProject(
 				pythonIdeProjectToPayload(initialProject)
 			);
+			if (!projectLoadIsCurrent(loadRunID)) return;
 			setProjects([remoteProject]);
 			await clearLocalPythonProjectsAsync(storageUserID.value);
+			if (!projectLoadIsCurrent(loadRunID)) return;
 			saveMessage.value = "Synced to account";
 			return;
 		}
@@ -1176,30 +1208,38 @@ async function loadProjects() {
 		const localProjects = await loadLocalPythonProjectsAsync(
 			storageUserID.value
 		);
+		if (!projectLoadIsCurrent(loadRunID)) return;
 		setProjects(
 			localProjects.length
 				? localProjects
 				: [await createInitialProject()]
 		);
-		await openRequestedCourseProjectIfNeeded();
+		if (!projectLoadIsCurrent(loadRunID)) return;
+		await openRequestedCourseProjectIfNeeded(false, loadRunID);
+		if (!projectLoadIsCurrent(loadRunID)) return;
 		await persistLocalProjects();
 	} catch (error) {
 		const localProjects = await loadLocalPythonProjectsAsync(
 			storageUserID.value
 		);
+		if (!projectLoadIsCurrent(loadRunID)) return;
 		setProjects(
 			localProjects.length
 				? localProjects
 				: [await createInitialProject()]
 		);
-		await openRequestedCourseProjectIfNeeded(true);
+		if (!projectLoadIsCurrent(loadRunID)) return;
+		await openRequestedCourseProjectIfNeeded(true, loadRunID);
+		if (!projectLoadIsCurrent(loadRunID)) return;
 		saveMessage.value =
 			error instanceof Error ? error.message : "Using local workspace";
 	} finally {
-		await nextTick();
-		suppressAutoSave = false;
-		isLoading.value = false;
-		resetActiveCanvas();
+		if (projectLoadIsCurrent(loadRunID)) {
+			await nextTick();
+			suppressAutoSave = false;
+			isLoading.value = false;
+			resetActiveCanvas();
+		}
 	}
 }
 

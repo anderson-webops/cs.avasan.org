@@ -2075,6 +2075,29 @@ describe("python IDE project helpers", () => {
 		);
 	});
 
+	it("ignores stale async project loads before mutating the workspace", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain("let projectLoadRunID = 0;");
+		expect(pageSource).toContain("function projectLoadIsCurrent");
+		expect(pageSource).toContain("const loadRunID = ++projectLoadRunID;");
+		expect(pageSource).toContain(
+			"if (!projectLoadIsCurrent(loadRunID)) return;"
+		);
+		expect(pageSource).toContain(
+			"await openRequestedCourseProjectIfNeeded(false, loadRunID);"
+		);
+		expect(pageSource).toContain(
+			"await openRequestedCourseProjectIfNeeded(true, loadRunID);"
+		);
+		expect(pageSource).toContain(
+			"await saveNewProject(requestedProject, localOnly, loadRunID);"
+		);
+	});
+
 	it("normalizes loaded project active files before rendering or saving", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
