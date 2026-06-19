@@ -3439,6 +3439,9 @@ describe("course text quality normalization", () => {
 				/\bUse clear structure, naming, and evidence so the [^\n.]{0,120} can be reviewed without relying on memory\b/i
 			);
 			expect(corpus).not.toMatch(
+				/\bcan be reviewed without relying on memory\b/i
+			);
+			expect(corpus).not.toMatch(
 				/\b(?:the|The) [^\n.]{1,120}? (?:project|program|activity|task|exercise) (?:project|program|activity|task|exercise)\b/i
 			);
 			expect(corpus).not.toMatch(/\bwhich the [^\n.]{1,120}? values\b/i);

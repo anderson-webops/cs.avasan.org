@@ -4882,7 +4882,7 @@ function projectSupport(context: CourseTextContext) {
 		() =>
 			`**Goal:** Apply the concept in ${reference}, then compare expected behavior with the observed result.`,
 		() =>
-			`**Goal:** ${capitalizedReference} uses clear structure, naming, and evidence so the result can be reviewed without relying on memory.`,
+			`**Goal:** ${capitalizedReference} uses clear structure, naming, and evidence so the final result is easy to inspect.`,
 		() =>
 			`**Goal:** Choose one design or reasoning decision in ${reference}, test it, and show its effect in the final artifact.`,
 		() =>
