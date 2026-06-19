@@ -524,9 +524,71 @@ describe("python IDE project helpers", () => {
 			"if (timerGeneration !== turtleTimerGeneration) return;"
 		);
 		expect(pageSource).toContain(
-			"void runTurtleTimerCallback(callback, timerGeneration);"
+			"void runTurtleTimerCallback(callback, timerGeneration).finally("
 		);
 		expect(pageSource).toContain("releaseIdlePythonRuntimeCallbacks()");
+	});
+
+	it("keeps the Run control stable while Turtle callbacks or handlers remain active", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const runControlStart = pageSource.indexOf(
+			"const runControlIsStop = computed"
+		);
+		const runControlSource = pageSource.slice(
+			runControlStart,
+			pageSource.indexOf("const selectedModeLabel", runControlStart)
+		);
+		const registerStart = pageSource.indexOf(
+			"registerKey(key: string"
+		);
+		const registerSource = pageSource.slice(
+			registerStart,
+			pageSource.indexOf("listen()", registerStart)
+		);
+		const stopStart = pageSource.indexOf(
+			"function stopActiveRuntimeSurfaces"
+		);
+		const stopSource = pageSource.slice(
+			stopStart,
+			pageSource.indexOf("function activateRunControl", stopStart)
+		);
+
+		expect(pageSource).toContain(
+			"const activeTurtleTimerCallbackCount = ref(0);"
+		);
+		expect(pageSource).toContain(
+			"const activeTurtleEventHandlerCount = ref(0);"
+		);
+		expect(pageSource).toContain(
+			"function refreshActiveTurtleEventHandlerCount"
+		);
+		expect(runControlSource).toContain(
+			"activeTurtleTimerCount.value > 0"
+		);
+		expect(runControlSource).toContain(
+			"activeTurtleTimerCallbackCount.value > 0"
+		);
+		expect(runControlSource).toContain(
+			"activeTurtleEventHandlerCount.value > 0"
+		);
+		expect(pageSource).toContain(
+			"activeTurtleTimerCallbackCount.value += 1;"
+		);
+		expect(pageSource).toContain(
+			"activeTurtleTimerCallbackCount.value = Math.max("
+		);
+		expect(registerSource).toContain(
+			"refreshActiveTurtleEventHandlerCount();"
+		);
+		expect(stopSource).toContain("keyHandlers.clear();");
+		expect(stopSource).toContain("turtleClickHandlers.clear();");
+		expect(stopSource).toContain("turtleDragHandlers.clear();");
+		expect(stopSource).toContain(
+			"refreshActiveTurtleEventHandlerCount();"
+		);
 	});
 
 	it("keeps Turtle runs animated with a visible cursor marker", () => {

@@ -464,6 +464,8 @@ const isSaving = ref(false);
 const isRunning = ref(false);
 const isGameLoopActive = ref(false);
 const activeTurtleTimerCount = ref(0);
+const activeTurtleTimerCallbackCount = ref(0);
+const activeTurtleEventHandlerCount = ref(0);
 const showProjectMenu = ref(false);
 const showFileTools = ref(false);
 const showIdeSettings = ref(false);
@@ -741,7 +743,9 @@ const runControlIsStop = computed(
 	() =>
 		isRunning.value ||
 		isGameLoopActive.value ||
-		activeTurtleTimerCount.value > 0
+		activeTurtleTimerCount.value > 0 ||
+		activeTurtleTimerCallbackCount.value > 0 ||
+		activeTurtleEventHandlerCount.value > 0
 );
 const selectedModeLabel = computed(() =>
 	selectedProject.value
@@ -2017,6 +2021,11 @@ function clearOutput() {
 	runtimeArtifacts.value = [];
 }
 
+function refreshActiveTurtleEventHandlerCount() {
+	activeTurtleEventHandlerCount.value =
+		keyHandlers.size + turtleClickHandlers.size + turtleDragHandlers.size;
+}
+
 function createCanvasCoordinateMapper(rect: DOMRect): CanvasCoordinateMapper {
 	return (x: number, y: number) => ({
 		x: rect.width / 2 + x,
@@ -2677,6 +2686,7 @@ function resetTurtleCanvas() {
 	keyHandlers.clear();
 	turtleClickHandlers.clear();
 	turtleDragHandlers.clear();
+	refreshActiveTurtleEventHandlerCount();
 	activeTurtleDragButton = null;
 	turtleStampCounter = 0;
 	turtleCompletedCommands = [];
@@ -2747,6 +2757,7 @@ function clearTurtleTimers() {
 	}
 	turtleTimerHandles.clear();
 	activeTurtleTimerCount.value = 0;
+	activeTurtleTimerCallbackCount.value = 0;
 }
 
 async function runTurtleTimerCallback(
@@ -2946,6 +2957,7 @@ function clearGameCanvas(
 function resetGameCanvas(width = 640, height = 400) {
 	stopGameLoop();
 	keyHandlers.clear();
+	refreshActiveTurtleEventHandlerCount();
 	gameKeysDown.clear();
 	gameEvents.length = 0;
 	gameLoopRequested = false;
@@ -3852,9 +3864,11 @@ const turtleBridge: TurtleBridge = {
 	registerKey(key: string, callback: (() => void) | null) {
 		if (!callback) {
 			keyHandlers.delete(normalizeKey(key));
+			refreshActiveTurtleEventHandlerCount();
 			return;
 		}
 		keyHandlers.set(normalizeKey(key), callback);
+		refreshActiveTurtleEventHandlerCount();
 	},
 	registerClick(
 		button: string,
@@ -3862,9 +3876,11 @@ const turtleBridge: TurtleBridge = {
 	) {
 		if (!callback) {
 			turtleClickHandlers.delete(button);
+			refreshActiveTurtleEventHandlerCount();
 			return;
 		}
 		turtleClickHandlers.set(button, callback);
+		refreshActiveTurtleEventHandlerCount();
 	},
 	registerDrag(
 		button: string,
@@ -3874,9 +3890,11 @@ const turtleBridge: TurtleBridge = {
 			turtleDragHandlers.delete(button);
 			if (activeTurtleDragButton === button)
 				activeTurtleDragButton = null;
+			refreshActiveTurtleEventHandlerCount();
 			return;
 		}
 		turtleDragHandlers.set(button, callback);
+		refreshActiveTurtleEventHandlerCount();
 	},
 	scheduleTimer(delayMs: number, callback: (() => void) | null) {
 		if (!callback) return;
@@ -3884,9 +3902,17 @@ const turtleBridge: TurtleBridge = {
 		const timerGeneration = turtleTimerGeneration;
 		const handle = window.setTimeout(
 			() => {
+				activeTurtleTimerCallbackCount.value += 1;
 				turtleTimerHandles.delete(handle);
 				activeTurtleTimerCount.value = turtleTimerHandles.size;
-				void runTurtleTimerCallback(callback, timerGeneration);
+				void runTurtleTimerCallback(callback, timerGeneration).finally(
+					() => {
+						activeTurtleTimerCallbackCount.value = Math.max(
+							0,
+							activeTurtleTimerCallbackCount.value - 1
+						);
+					}
+				);
 			},
 			Math.max(0, delayMs)
 		);
@@ -4342,6 +4368,7 @@ function stopActiveRuntimeSurfaces() {
 	gameEvents.length = 0;
 	turtleClickHandlers.clear();
 	turtleDragHandlers.clear();
+	refreshActiveTurtleEventHandlerCount();
 	activeTurtleDragButton = null;
 }
 
