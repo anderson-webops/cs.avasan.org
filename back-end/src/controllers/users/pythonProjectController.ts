@@ -9,6 +9,22 @@ const ROOT_TEXT_FILE_RE = /^\w[\w.-]*\.(?:csv|json|md|py|txt)$/i;
 const IMAGE_FILE_RE = /^images\/\w[\w.-]*\.(?:gif|jpe?g|png|svg|webp)$/i;
 const AUDIO_FILE_RE = /^(?:music|sounds)\/\w[\w.-]*\.(?:mp3|ogg|wav)$/i;
 const PYTHON_FILE_NAME_RE = /\.py$/i;
+const ASSET_DIRECTORY_NAMES = new Set(["images", "music", "sounds"]);
+const RUNTIME_RESERVED_FILE_NAMES = new Set([
+	"_classes_artifacts.py",
+	"_classes_keras.py",
+	"_classes_pgzero.py",
+	"keras.py",
+	"pgzero.py",
+	"pgzrun.py",
+	"pygame.py",
+	"pysynth.py",
+	"streamlit.py",
+	"tensorflow.py",
+	"turtle.py",
+	"zrect.py"
+]);
+const RUNTIME_RESERVED_ROOTS = new Set(["keras", "pgzero", "tensorflow"]);
 const MAX_PROJECT_FILES = 32;
 const MAX_FILE_LENGTH = 1_000_000;
 const MAX_PROJECT_LENGTH = 5_000_000;
@@ -17,22 +33,31 @@ const DEFAULT_PROJECT_FILE: PythonProjectFile = {
 	content: ""
 };
 
+function isRuntimeReservedProjectPath(value: string) {
+	const normalized = value.trim().replaceAll("\\", "/").toLowerCase();
+	if (!normalized) return false;
+	if (RUNTIME_RESERVED_FILE_NAMES.has(normalized)) return true;
+
+	const root = normalized.split("/")[0] ?? "";
+	return RUNTIME_RESERVED_ROOTS.has(root);
+}
+
 function isSafeProjectFileName(value: string) {
 	if (!value || value.length > 80) return false;
-	if (value.startsWith("/") || value.includes("\\") || value.includes("//"))
-		return false;
+	if (value.startsWith("/") || value.includes("\\") || value.includes("//")) return false;
 
 	const segments = value.split("/");
 	if (
-		segments.some(
-			segment =>
-				!segment
-				|| segment === "."
-				|| segment === ".."
-				|| !SAFE_FILE_SEGMENT_RE.test(segment)
-		)
+		segments.some(segment => !segment || segment === "." || segment === ".." || !SAFE_FILE_SEGMENT_RE.test(segment))
 	) {
 		return false;
+	}
+
+	if (isRuntimeReservedProjectPath(value)) return false;
+
+	if (PYTHON_FILE_NAME_RE.test(value)) {
+		const rootDirectory = segments[0]?.toLowerCase();
+		return !rootDirectory || !ASSET_DIRECTORY_NAMES.has(rootDirectory);
 	}
 
 	if (segments.length === 1) return ROOT_TEXT_FILE_RE.test(value);
@@ -49,7 +74,7 @@ const projectFileSchema = z.object({
 		.max(80)
 		.refine(
 			isSafeProjectFileName,
-			"Use a safe root .py/.csv/.json/.txt/.md file or an images/, sounds/, or music/ asset file"
+			"Use a safe .py file, root data/text file, or images/, sounds/, or music/ asset file that does not use a runtime-reserved module name"
 		),
 	content: z.string().max(MAX_FILE_LENGTH),
 	encoding: z.enum(["text", "base64"]).optional()
@@ -59,9 +84,7 @@ const projectFilesSchema = z
 	.min(1)
 	.max(MAX_PROJECT_FILES)
 	.refine(
-		files =>
-			files.reduce((total, file) => total + file.name.length + file.content.length, 0)
-			<= MAX_PROJECT_LENGTH,
+		files => files.reduce((total, file) => total + file.name.length + file.content.length, 0) <= MAX_PROJECT_LENGTH,
 		`Project files must be ${MAX_PROJECT_LENGTH} characters or less in total`
 	)
 	.refine(
@@ -162,9 +185,7 @@ export const listPythonProjects: RequestHandler = async (req, res) => {
 	const userID = req.currentUser?._id;
 	if (!userID) return res.status(403).json({ message: "Student session required" });
 
-	const projects = await PythonProject.find({ user: userID })
-		.sort({ updatedAt: -1 })
-		.limit(100);
+	const projects = await PythonProject.find({ user: userID }).sort({ updatedAt: -1 }).limit(100);
 
 	res.json({ projects: projects.map(serializePythonProject) });
 };

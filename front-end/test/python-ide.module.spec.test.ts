@@ -15,10 +15,11 @@ import {
 	getPythonIdeRunnableFile,
 	isPythonIdeBinaryAssetFile,
 	isPythonIdePythonFile,
+	isPythonIdeRuntimeReservedPath,
 	isPythonIdeTextFile,
+	isValidPythonFileName,
 	normalizeImportedPythonIdeFileName,
 	normalizePythonIdeMode,
-	isValidPythonFileName,
 	loadPythonIdeStarterFilesFromGitHub,
 	loadLocalPythonProjects,
 	loadLocalPythonProjectsAsync,
@@ -1060,6 +1061,19 @@ describe("python IDE project helpers", () => {
 		expect(isValidPythonFileName("sounds/eep.py")).toBe(false);
 		expect(isValidPythonFileName("package/data.csv")).toBe(false);
 		expect(isValidPythonFileName("script.exe")).toBe(false);
+		expect(isPythonIdeRuntimeReservedPath("turtle.py")).toBe(true);
+		expect(isPythonIdeRuntimeReservedPath("keras/layers.py")).toBe(true);
+		expect(isValidPythonFileName("turtle.py")).toBe(false);
+		expect(isValidPythonFileName("pgzrun.py")).toBe(false);
+		expect(isValidPythonFileName("pygame.py")).toBe(false);
+		expect(isValidPythonFileName("streamlit.py")).toBe(false);
+		expect(isValidPythonFileName("keras.py")).toBe(false);
+		expect(isValidPythonFileName("tensorflow.py")).toBe(false);
+		expect(isValidPythonFileName("keras/layers.py")).toBe(false);
+		expect(isValidPythonFileName("pgzero/builtins.py")).toBe(false);
+		expect(isValidPythonFileName("tensorflow/keras/__init__.py")).toBe(
+			false
+		);
 	});
 
 	it("labels file kinds and creates safe default content", () => {

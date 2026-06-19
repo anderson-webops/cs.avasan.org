@@ -13,6 +13,25 @@ const ROOT_TEXT_FILE_RE = /^\w[\w.-]*\.(?:csv|json|md|py|txt)$/i;
 const IMAGE_FILE_RE = /^images\/\w[\w.-]*\.(?:gif|jpe?g|png|svg|webp)$/i;
 const AUDIO_FILE_RE = /^(?:music|sounds)\/\w[\w.-]*\.(?:mp3|ogg|wav)$/i;
 const ASSET_DIRECTORY_NAMES = new Set(["images", "music", "sounds"]);
+const PYTHON_IDE_RUNTIME_RESERVED_FILE_NAMES = new Set([
+	"_classes_artifacts.py",
+	"_classes_keras.py",
+	"_classes_pgzero.py",
+	"keras.py",
+	"pgzero.py",
+	"pgzrun.py",
+	"pygame.py",
+	"pysynth.py",
+	"streamlit.py",
+	"tensorflow.py",
+	"turtle.py",
+	"zrect.py"
+]);
+const PYTHON_IDE_RUNTIME_RESERVED_ROOTS = new Set([
+	"keras",
+	"pgzero",
+	"tensorflow"
+]);
 const TEXT_FILE_RE = /\.(?:csv|json|md|py|txt|svg)$/i;
 const IMAGE_EXTENSION_RE = /\.(?:gif|jpe?g|png|svg|webp)$/i;
 const SOUND_EXTENSION_RE = /\.wav$/i;
@@ -432,6 +451,15 @@ export function normalizePythonFileName(value: string) {
 	return segments.join("/");
 }
 
+export function isPythonIdeRuntimeReservedPath(value: string) {
+	const normalized = value.trim().replaceAll("\\", "/").toLowerCase();
+	if (!normalized) return false;
+	if (PYTHON_IDE_RUNTIME_RESERVED_FILE_NAMES.has(normalized)) return true;
+
+	const root = normalized.split("/")[0] ?? "";
+	return PYTHON_IDE_RUNTIME_RESERVED_ROOTS.has(root);
+}
+
 export function isValidPythonFileName(value: string) {
 	if (!value || value.length > 80) return false;
 	if (value.startsWith("/") || value.includes("\\") || value.includes("//"))
@@ -449,6 +477,8 @@ export function isValidPythonFileName(value: string) {
 	) {
 		return false;
 	}
+
+	if (isPythonIdeRuntimeReservedPath(value)) return false;
 
 	if (PYTHON_EXTENSION_RE.test(value)) {
 		const rootDirectory = segments[0]?.toLowerCase();
