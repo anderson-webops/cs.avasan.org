@@ -3213,6 +3213,21 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain('_call_optional("update", dt)');
 		expect(runtimeSource).toContain("_run_animations(now)");
 		expect(pageSource).toContain("await ensureGameCourseAssetsLoaded()");
+		expect(pageSource).toContain(
+			"let gameCourseAssetPackSilentLoadFailed = false;"
+		);
+		expect(pageSource).toContain(
+			"if (!announce && gameCourseAssetPackSilentLoadFailed) return;"
+		);
+		expect(pageSource).toContain(
+			"gameCourseAssetPackSilentLoadFailed = true;"
+		);
+		expect(pageSource).toContain(
+			"gameCourseAssetPackSilentLoadFailed = false;"
+		);
+		expect(pageSource).not.toContain(
+			"Could not preload shared PyGame Zero assets."
+		);
 		expect(pageSource).not.toContain(
 			"void ensureGameCourseAssetsLoaded({ announce: false })"
 		);

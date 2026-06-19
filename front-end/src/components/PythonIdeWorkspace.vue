@@ -534,6 +534,7 @@ let codeEditorView: CodeEditorView | null = null;
 let syncingCodeMirrorContent = false;
 let gameCourseAssetPack: PythonIdeCourseAssetPack | null = null;
 let gameCourseAssetPackLoadFailed = false;
+let gameCourseAssetPackSilentLoadFailed = false;
 let turtleStampCounter = 0;
 let turtleCompletedCommands: TurtleCompletedCommand[] = [];
 let turtleQueuedSteps: TurtleAnimationStep[] = [];
@@ -3030,11 +3031,13 @@ async function ensureGameCourseAssetsLoaded(
 ) {
 	if (gameCourseAssetPack || gameCourseAssetPackLoadFailed) return;
 	const announce = options.announce ?? true;
+	if (!announce && gameCourseAssetPackSilentLoadFailed) return;
 
 	if (announce) appendOutput("system", "Loading shared PyGame Zero assets.");
 
 	try {
 		gameCourseAssetPack = await loadPythonIdeCourseAssetPack();
+		gameCourseAssetPackSilentLoadFailed = false;
 		if (announce) {
 			appendOutput(
 				"system",
@@ -3043,7 +3046,7 @@ async function ensureGameCourseAssetsLoaded(
 		}
 	} catch (error) {
 		if (!announce) {
-			console.warn("Could not preload shared PyGame Zero assets.", error);
+			gameCourseAssetPackSilentLoadFailed = true;
 			return;
 		}
 
