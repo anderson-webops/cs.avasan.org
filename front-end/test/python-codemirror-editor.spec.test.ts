@@ -49,6 +49,16 @@ describe("python IDE CodeMirror editor", () => {
 		expect(routeSource).not.toContain("loadPythonIdeRuntime");
 	});
 
+	it("does not force CodeMirror through a fragile manual editor chunk", () => {
+		const viteSource = sourceFile("../vite.config.mts");
+
+		expect(viteSource).not.toContain('name: "python-ide-editor"');
+		expect(viteSource).not.toContain(
+			"test: /src\\/modules\\/pythonCodeMirror\\.ts$/"
+		);
+		expect(viteSource).toContain('name: "python-ide-runtime"');
+	});
+
 	it("does not import the heavy Pyodide runtime before running code", () => {
 		const pageSource = sourceFile(
 			"../src/components/PythonIdeWorkspace.vue"
@@ -58,8 +68,9 @@ describe("python IDE CodeMirror editor", () => {
 			"../src/modules/pythonIdeRuntimeHints.ts"
 		);
 
-		expect(pageSource).toContain("import { warmPythonRuntimeResources }");
-		expect(pageSource).toContain("warmPythonRuntimeResources();");
+		expect(pageSource).toContain("import { primePythonRuntimeConnection }");
+		expect(pageSource).toContain("primePythonRuntimeConnection();");
+		expect(pageSource).not.toContain("warmPythonRuntimeResources();");
 		expect(pageSource).not.toContain(
 			"loadPythonRuntimeModule().then(module => module.warmPythonRuntime())"
 		);
@@ -69,8 +80,13 @@ describe("python IDE CodeMirror editor", () => {
 		expect(pageSource).toContain("releaseLoadedPythonRuntimeCallbacks();");
 		expect(runtimeSource).toContain("warmPythonRuntimeResources();");
 		expect(hintSource).toContain(
+			"export function primePythonRuntimeConnection"
+		);
+		expect(hintSource).toContain(
 			"export function warmPythonRuntimeResources"
 		);
+		expect(hintSource).toContain("const PYTHON_RUNTIME_CONNECTION_HINTS");
+		expect(hintSource).toContain("const PYTHON_RUNTIME_RESOURCE_HINTS");
 		expect(hintSource).toContain(
 			"https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSION}/full/"
 		);

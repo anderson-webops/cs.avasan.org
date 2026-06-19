@@ -56,7 +56,7 @@ import {
 	normalizePythonIdeAssetLookupPath,
 	pythonIdeAssetCandidateNames
 } from "@/modules/pythonIdeCourseAssets";
-import { warmPythonRuntimeResources } from "@/modules/pythonIdeRuntimeHints";
+import { primePythonRuntimeConnection } from "@/modules/pythonIdeRuntimeHints";
 import { useAppStore } from "@/stores/app";
 
 type PythonCodeEditorModules = [
@@ -3243,7 +3243,7 @@ watch(isLoading, loading => {
 });
 
 onMounted(() => {
-	warmPythonRuntimeResources();
+	primePythonRuntimeConnection();
 	void loadProjects();
 	window.addEventListener("keydown", handleKeyDown);
 	window.addEventListener("keyup", handleKeyUp);

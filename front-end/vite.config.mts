@@ -14,7 +14,7 @@ import { VueRouterAutoImports } from "vue-router/unplugin";
 import VueRouter from "vue-router/vite";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const pythonIdePreloadChunkRE = /(?:^|\/)python-ide-(?:runtime|editor)-[^/]+\.js$/;
+const pythonIdePreloadChunkRE = /(?:^|\/)python-ide-runtime-[^/]+\.js$/;
 
 export default defineConfig(({ command }) => ({
 	resolve: {
@@ -100,8 +100,7 @@ export default defineConfig(({ command }) => ({
 	build: {
 		modulePreload: {
 			resolveDependencies(_filename, deps, context) {
-				if (context.hostType !== "html")
-					return deps;
+				if (context.hostType !== "html") return deps;
 
 				return deps.filter(dep => !pythonIdePreloadChunkRE.test(dep));
 			}
@@ -114,10 +113,6 @@ export default defineConfig(({ command }) => ({
 						{
 							name: "python-ide-runtime",
 							test: /src\/modules\/pythonIdeRuntime\.ts$/
-						},
-						{
-							name: "python-ide-editor",
-							test: /src\/modules\/pythonCodeMirror\.ts$/
 						}
 					]
 				}

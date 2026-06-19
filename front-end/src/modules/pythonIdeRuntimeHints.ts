@@ -11,13 +11,17 @@ interface PythonRuntimeResourceHint {
 	crossOrigin?: string;
 }
 
-const PYTHON_RUNTIME_RESOURCE_HINTS: PythonRuntimeResourceHint[] = [
+const PYTHON_RUNTIME_CONNECTION_HINTS: PythonRuntimeResourceHint[] = [
 	{ rel: "dns-prefetch", href: "//cdn.jsdelivr.net" },
 	{
 		rel: "preconnect",
 		href: PYODIDE_CDN_ORIGIN,
 		crossOrigin: "anonymous"
-	},
+	}
+];
+
+const PYTHON_RUNTIME_RESOURCE_HINTS: PythonRuntimeResourceHint[] = [
+	...PYTHON_RUNTIME_CONNECTION_HINTS,
 	{
 		rel: "preload",
 		href: PYODIDE_SCRIPT_SRC,
@@ -26,10 +30,10 @@ const PYTHON_RUNTIME_RESOURCE_HINTS: PythonRuntimeResourceHint[] = [
 	}
 ];
 
-export function warmPythonRuntimeResources() {
+function appendPythonRuntimeResourceHints(hints: PythonRuntimeResourceHint[]) {
 	if (typeof document === "undefined") return;
 
-	for (const hint of PYTHON_RUNTIME_RESOURCE_HINTS) {
+	for (const hint of hints) {
 		const existing = document.querySelector(
 			`link[rel="${hint.rel}"][href="${hint.href}"]`
 		);
@@ -41,4 +45,12 @@ export function warmPythonRuntimeResources() {
 		if (hint.crossOrigin) link.crossOrigin = hint.crossOrigin;
 		document.head.append(link);
 	}
+}
+
+export function primePythonRuntimeConnection() {
+	appendPythonRuntimeResourceHints(PYTHON_RUNTIME_CONNECTION_HINTS);
+}
+
+export function warmPythonRuntimeResources() {
+	appendPythonRuntimeResourceHints(PYTHON_RUNTIME_RESOURCE_HINTS);
 }

@@ -52,6 +52,7 @@ import {
 	pythonIdeProjectModuleNames,
 	warmPythonRuntime
 } from "../src/modules/pythonIdeRuntime";
+import { primePythonRuntimeConnection } from "../src/modules/pythonIdeRuntimeHints";
 
 const oneByOnePngBytes = new Uint8Array([
 	0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00, 0x00, 0x0d,
@@ -181,6 +182,22 @@ describe("python IDE project helpers", () => {
 				'link[rel="preconnect"][href="https://cdn.jsdelivr.net"]'
 			)
 		).not.toBeNull();
+	});
+
+	it("primes the Python runtime connection without preloading Pyodide", () => {
+		primePythonRuntimeConnection();
+		primePythonRuntimeConnection();
+
+		const preconnectSelector =
+			'link[rel="preconnect"][href="https://cdn.jsdelivr.net"]';
+		const preloadSelector =
+			'link[rel="preload"][as="script"][href="https://cdn.jsdelivr.net/pyodide/v314.0.0/full/pyodide.js"]';
+
+		expect(document.head.querySelector(preconnectSelector)).not.toBeNull();
+		expect(document.head.querySelectorAll(preconnectSelector)).toHaveLength(
+			1
+		);
+		expect(document.head.querySelector(preloadSelector)).toBeNull();
 	});
 
 	it("loads GitHub starter files into safe IDE file names", async () => {
@@ -511,9 +528,7 @@ describe("python IDE project helpers", () => {
 			"const PYTHON_IDE_RUNTIME_BOOTSTRAP_VERSION"
 		);
 		expect(runtimeSource).toContain("__classes_runtime_bootstrap_version");
-		expect(runtimeSource).toContain(
-			"2026-06-19-stale-import-hook-reset"
-		);
+		expect(runtimeSource).toContain("2026-06-19-stale-import-hook-reset");
 		expect(runtimeSource).toContain("const WHILE_LOOP_ITERATION_LIMIT");
 		expect(runtimeSource).toContain(
 			"const TURTLE_COOPERATIVE_WHILE_LOOP_ITERATION_LIMIT"
@@ -778,7 +793,7 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("__classes_project_root =");
 		expect(runtimeSource).toContain("__classes_reserved_import_roots");
 		expect(runtimeSource).toContain(
-			"if not getattr(__classes_finder, \"__classes_python_ide_project_finder__\", False)"
+			'if not getattr(__classes_finder, "__classes_python_ide_project_finder__", False)'
 		);
 		expect(runtimeSource).toContain(
 			"_classes_reserved_import_roots = __classes_reserved_import_roots"
