@@ -321,6 +321,9 @@ const maxImportedTextFileBytes = 512 * 1024;
 const maxImportedBinaryFileBytes = 2 * 1024 * 1024;
 const maxOutputLines = 500;
 const maxOutputTextLength = 12000;
+const maxRuntimeArtifacts = 12;
+const maxRuntimeArtifactTextLength = 500000;
+const maxRuntimeArtifactBase64Length = 1500000;
 const turtleInstantStepMaxDurationMs = 16;
 const turtleInstantStepMaxDistance = 2;
 const turtleInstantFrameDistanceBudget = 12;
@@ -679,6 +682,34 @@ function appendOutput(kind: OutputLine["kind"], text: string) {
 }
 
 function appendArtifact(artifact: RuntimeArtifact) {
+	if (runtimeArtifacts.value.length >= maxRuntimeArtifacts) {
+		appendOutput(
+			"system",
+			`Skipped ${artifact.title}; this run already rendered ${maxRuntimeArtifacts} artifacts.`
+		);
+		return;
+	}
+	if (
+		artifact.mimeType.startsWith("audio/") &&
+		artifact.data.length > maxRuntimeArtifactBase64Length
+	) {
+		appendOutput(
+			"system",
+			`Skipped ${artifact.title}; audio artifacts must be under ${formatFileSize(maxRuntimeArtifactBase64Length)}.`
+		);
+		return;
+	}
+	if (
+		!artifact.mimeType.startsWith("audio/") &&
+		artifact.data.length > maxRuntimeArtifactTextLength
+	) {
+		appendOutput(
+			"system",
+			`Skipped ${artifact.title}; rendered artifacts must be under ${formatFileSize(maxRuntimeArtifactTextLength)}.`
+		);
+		return;
+	}
+
 	const view: RuntimeArtifactView = {
 		id: artifactCounter.value++,
 		title: artifact.title,

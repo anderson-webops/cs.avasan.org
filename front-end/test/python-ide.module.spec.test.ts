@@ -852,6 +852,33 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("maxOutputLines - 1");
 	});
 
+	it("bounds runtime artifacts so chart-heavy runs stay responsive", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain("const maxRuntimeArtifacts = 12;");
+		expect(pageSource).toContain(
+			"const maxRuntimeArtifactTextLength = 500000;"
+		);
+		expect(pageSource).toContain(
+			"const maxRuntimeArtifactBase64Length = 1500000;"
+		);
+		expect(pageSource).toContain(
+			"runtimeArtifacts.value.length >= maxRuntimeArtifacts"
+		);
+		expect(pageSource).toContain(
+			"artifact.data.length > maxRuntimeArtifactBase64Length"
+		);
+		expect(pageSource).toContain(
+			"artifact.data.length > maxRuntimeArtifactTextLength"
+		);
+		expect(pageSource).toContain(
+			"`Skipped ${artifact.title}; rendered artifacts must be under ${formatFileSize(maxRuntimeArtifactTextLength)}.`"
+		);
+	});
+
 	it("bounds imported project files before local storage writes", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
