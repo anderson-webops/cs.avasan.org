@@ -1,5 +1,6 @@
 import type { PythonIdeFile } from "@/modules/pythonIde";
 import { PYODIDE_INDEX_URL } from "@/modules/pythonIdeRuntimeHints";
+import { pythonIdeImportedTopLevelModules } from "@/modules/pythonImportScanner";
 
 const PROJECT_ROOT = "/home/pyodide/classes_project";
 const PYTHON_EXTENSION_RE = /\.py$/i;
@@ -60,6 +61,7 @@ type PlainPythonWorkerMessage =
 let pyodidePromise: Promise<PyodideAPI> | null = null;
 let activeRunID: number | null = null;
 let lastProjectFileNames = new Set<string>();
+const loadedPlainPythonImportModules = new Set<string>();
 
 function isActiveRun(id: number) {
 	return activeRunID === id;
@@ -149,6 +151,34 @@ function projectModuleNames(files: PythonIdeFile[]) {
 	return [...modules];
 }
 
+function plainPythonPackageScanModules(files: PythonIdeFile[]) {
+	const localModules = new Set(
+		projectModuleNames(files).map(moduleName => moduleName.split(".")[0])
+	);
+
+	return [...pythonIdeImportedTopLevelModules(files)]
+		.filter(
+			moduleName =>
+				!localModules.has(moduleName) &&
+				!loadedPlainPythonImportModules.has(moduleName)
+		)
+		.sort();
+}
+
+async function loadPlainPythonImportPackages(
+	pyodide: PyodideAPI,
+	files: PythonIdeFile[]
+) {
+	const modules = plainPythonPackageScanModules(files);
+	if (!modules.length) return;
+
+	await pyodide.loadPackagesFromImports(
+		modules.map(moduleName => `import ${moduleName}`).join("\n")
+	);
+	for (const moduleName of modules)
+		loadedPlainPythonImportModules.add(moduleName);
+}
+
 function inputBootstrap(inputText: string) {
 	const inputLines = inputText.replaceAll("\r\n", "\n").split("\n");
 	return `
@@ -231,12 +261,7 @@ async function runPlainPythonProject(request: PlainPythonRunRequest) {
 
 	syncProjectFiles(pyodide, request.files);
 	if (!isActiveRun(request.id)) return;
-	await pyodide.loadPackagesFromImports(
-		request.files
-			.filter(file => PYTHON_EXTENSION_RE.test(file.name))
-			.map(file => file.content)
-			.join("\n")
-	);
+	await loadPlainPythonImportPackages(pyodide, request.files);
 	if (!isActiveRun(request.id)) return;
 	await pyodide.runPythonAsync(
 		projectBootstrap(

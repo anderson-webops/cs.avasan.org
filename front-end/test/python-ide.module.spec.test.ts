@@ -845,6 +845,24 @@ describe("python IDE project helpers", () => {
 		expect(workerSource).toContain("function isActiveRun");
 		expect(workerSource).toContain("if (!isActiveRun(id)) return;");
 		expect(workerSource).toContain("if (!isActiveRun(request.id)) return;");
+		expect(workerSource).toContain(
+			'import { pythonIdeImportedTopLevelModules } from "@/modules/pythonImportScanner";'
+		);
+		expect(workerSource).toContain(
+			"const loadedPlainPythonImportModules = new Set<string>();"
+		);
+		expect(workerSource).toContain(
+			"function plainPythonPackageScanModules"
+		);
+		expect(workerSource).toContain(
+			"pythonIdeImportedTopLevelModules(files)"
+		);
+		expect(workerSource).toContain(
+			"!loadedPlainPythonImportModules.has(moduleName)"
+		);
+		expect(workerSource).toContain(
+			"loadedPlainPythonImportModules.add(moduleName)"
+		);
 	});
 
 	it("preserves PyGame Zero canvas aspect ratio instead of stretching", () => {
@@ -891,6 +909,10 @@ describe("python IDE project helpers", () => {
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
 			"utf8"
 		);
+		const scannerSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonImportScanner.ts"),
+			"utf8"
+		);
 
 		expect(runtimeSource).toContain(
 			"const loadedBrowserShimPackages = new Set<string>();"
@@ -917,6 +939,10 @@ describe("python IDE project helpers", () => {
 		);
 		expect(runtimeSource).toContain(
 			'loadedBrowserShimPackages.add("numpy")'
+		);
+		expect(runtimeSource).toContain('from "@/modules/pythonImportScanner"');
+		expect(scannerSource).toContain(
+			"export function pythonIdeImportedTopLevelModules"
 		);
 	});
 
