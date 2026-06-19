@@ -6818,12 +6818,16 @@ function rewritePlaceholderCourseText(course: RawCourse, courseId: string) {
 			for (const item of module[section]) {
 				const context = { courseId, course, module, item, section };
 
-				if (
-					placeholderContentPattern.test(item.content) ||
-					(isAppliedStudioContext(context) &&
-						wordCount(item.content) < 90)
-				) {
+				if (placeholderContentPattern.test(item.content)) {
 					item.content = studioSupport(context);
+					continue;
+				}
+
+				if (
+					isAppliedStudioContext(context) &&
+					wordCount(item.content) < 90
+				) {
+					item.content = `${supportBaseContent(item.content)}\n\n${studioSupport(context)}`;
 				}
 			}
 		}
@@ -7449,8 +7453,14 @@ function normalizeRustSystemsSecurity(course: RawCourse) {
 	});
 }
 
-function usacoCourseFamily(_courseId: string) {
-	return "USACO";
+function usacoCourseFamily(courseId: string) {
+	const labels: Record<string, string> = {
+		"usaco-bronze": "USACO Bronze",
+		"usaco-silver": "USACO Silver",
+		"usaco-gold": "USACO Gold"
+	};
+
+	return labels[courseId] ?? "USACO";
 }
 
 function usacoSupplementalSubject(itemTitle: string) {
