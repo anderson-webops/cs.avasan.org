@@ -1,7 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { python } from "@codemirror/lang-python";
+import { EditorState } from "@codemirror/state";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { strToU8, zipSync } from "fflate";
+import { pythonBracketPairColorRanges } from "../src/modules/pythonCodeMirror";
 import {
 	clearLocalPythonProjects,
 	clearLocalPythonProjectsAsync,
@@ -63,6 +66,13 @@ const oneByOnePngBytes = new Uint8Array([
 	0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00, 0x00, 0x0d,
 	0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01
 ]);
+
+function pythonEditorState(doc: string) {
+	return EditorState.create({
+		doc,
+		extensions: [python()]
+	});
+}
 
 describe("python IDE project helpers", () => {
 	beforeEach(() => {
@@ -151,6 +161,74 @@ describe("python IDE project helpers", () => {
 		expect(turtleProject.files[0]?.content).toContain("screen.onclick");
 		expect(turtleProject.files[0]?.content).toContain("screen.ontimer");
 		expect(turtleProject.files[0]?.content).toContain("pen.ondrag");
+	});
+
+	it("colors visible bracket pairs using document-wide nesting context", () => {
+		const filler = Array.from(
+			{ length: 350 },
+			(_, index) => `value_${index} = ${index}`
+		).join("\n");
+		const doc = `outer = (\n${filler}\ninner = [1, (2 + 3)]\n)\n`;
+		const visibleFrom = doc.indexOf("inner =");
+		const visibleTo = visibleFrom + "inner = [1, (2 + 3)]".length;
+		const ranges = pythonBracketPairColorRanges(pythonEditorState(doc), [
+			{ from: visibleFrom, to: visibleTo }
+		]);
+		const byPosition = new Map(ranges.map(range => [range.from, range]));
+		const squareOpen = doc.indexOf("[", visibleFrom);
+		const squareClose = doc.indexOf("]", visibleFrom);
+		const parenOpen = doc.indexOf("(", visibleFrom);
+		const parenClose = doc.indexOf(")", parenOpen);
+
+		expect(byPosition.get(squareOpen)).toMatchObject({
+			pairIndex: 1,
+			unmatched: false
+		});
+		expect(byPosition.get(squareClose)).toMatchObject({
+			pairIndex: 1,
+			unmatched: false
+		});
+		expect(byPosition.get(parenOpen)).toMatchObject({
+			pairIndex: 2,
+			unmatched: false
+		});
+		expect(byPosition.get(parenClose)).toMatchObject({
+			pairIndex: 2,
+			unmatched: false
+		});
+	});
+
+	it("colors a visible opener when its matching close is below the viewport", () => {
+		const filler = Array.from(
+			{ length: 350 },
+			(_, index) => `\t${index},`
+		).join("\n");
+		const doc = `items = (\n${filler}\n)\n`;
+		const visibleTo = doc.indexOf("\n") + 1;
+		const openParen = doc.indexOf("(");
+		const ranges = pythonBracketPairColorRanges(pythonEditorState(doc), [
+			{ from: 0, to: visibleTo }
+		]);
+
+		expect(ranges).toContainEqual({
+			from: openParen,
+			pairIndex: 0,
+			to: openParen + 1,
+			unmatched: false
+		});
+	});
+
+	it("ignores bracket characters inside Python strings and comments", () => {
+		const doc = `text = "("\n# ]\nvalue = (1 + 2)\n`;
+		const ranges = pythonBracketPairColorRanges(pythonEditorState(doc), [
+			{ from: 0, to: doc.length }
+		]);
+		const positions = ranges.map(range => range.from);
+
+		expect(positions).not.toContain(doc.indexOf('"("') + 1);
+		expect(positions).not.toContain(doc.indexOf("]"));
+		expect(positions).toContain(doc.indexOf("(", doc.indexOf("value")));
+		expect(positions).toContain(doc.indexOf(")", doc.indexOf("value")));
 	});
 
 	it("creates PyGame course starters with dimensions only", () => {
@@ -3160,6 +3238,18 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("repeatCount < 0");
 		expect(pageSource).toContain("let remainingLoops = repeatCount;");
 		expect(pageSource).toContain("remainingLoops -= 1;");
+		expect(pageSource).toContain(
+			"let gameAudioPlaybackBlockedNoticeShown = false;"
+		);
+		expect(pageSource).toContain(
+			"function reportGameAudioPlaybackBlocked"
+		);
+		expect(pageSource).toContain(
+			"Audio is waiting for a browser gesture."
+		);
+		expect(pageSource).not.toContain(
+			"Audio playback was blocked: ${error.message}"
+		);
 		expect(pageSource).toContain("playSound(name: string, loops?: number)");
 		expect(pageSource).toContain("gameBridge.playSound(name, loops)");
 		expect(pageSource).toContain("lineWidth = 1");

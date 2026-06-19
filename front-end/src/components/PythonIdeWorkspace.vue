@@ -529,6 +529,7 @@ let gameMusicAudio: HTMLAudioElement | null = null;
 let gameMusicVolume = 1;
 let gameToneAudioContext: AudioContext | null = null;
 let gameToneCounter = 0;
+let gameAudioPlaybackBlockedNoticeShown = false;
 let codeEditorView: CodeEditorView | null = null;
 let syncingCodeMirrorContent = false;
 let gameCourseAssetPack: PythonIdeCourseAssetPack | null = null;
@@ -2021,6 +2022,7 @@ function canDeleteFile(file: PythonIdeFile) {
 function clearOutput() {
 	outputLines.value = [];
 	runtimeArtifacts.value = [];
+	gameAudioPlaybackBlockedNoticeShown = false;
 }
 
 function refreshActiveTurtleEventHandlerCount() {
@@ -3221,16 +3223,20 @@ function playProjectAudio(
 
 	const audio = new Audio(src);
 	audio.loop = loop;
-	void audio.play().catch((error: unknown) => {
+	void audio.play().catch(() => {
 		onPlaybackBlocked?.(audio);
-		appendOutput(
-			"system",
-			error instanceof Error
-				? `Audio playback was blocked: ${error.message}`
-				: "Audio playback was blocked."
-		);
+		reportGameAudioPlaybackBlocked();
 	});
 	return audio;
+}
+
+function reportGameAudioPlaybackBlocked() {
+	if (gameAudioPlaybackBlockedNoticeShown) return;
+	gameAudioPlaybackBlockedNoticeShown = true;
+	appendOutput(
+		"system",
+		"Audio is waiting for a browser gesture. Click the canvas or press a game key, then trigger the sound again."
+	);
 }
 
 function trackGameSoundAudio(
@@ -3288,14 +3294,9 @@ function playGameSound(name: string, loops = 0) {
 
 		remainingLoops -= 1;
 		audio.currentTime = 0;
-		void audio.play().catch((error: unknown) => {
+		void audio.play().catch(() => {
 			cleanup?.();
-			appendOutput(
-				"system",
-				error instanceof Error
-					? `Audio playback was blocked: ${error.message}`
-					: "Audio playback was blocked."
-			);
+			reportGameAudioPlaybackBlocked();
 		});
 	});
 }
@@ -3319,7 +3320,9 @@ function queueGameMusicEndedEvent(audio: HTMLAudioElement) {
 
 function playGameMusic(name: string, loop = true) {
 	stopGameMusic();
-	const audio = playProjectAudio("music", name, loop);
+	const audio = playProjectAudio("music", name, loop, blockedAudio => {
+		if (gameMusicAudio === blockedAudio) gameMusicAudio = null;
+	});
 	gameMusicAudio = audio;
 	if (!audio) return;
 	audio.volume = gameMusicVolume;
@@ -3336,14 +3339,7 @@ function pauseGameMusic() {
 
 function unpauseGameMusic() {
 	if (!gameMusicAudio) return;
-	void gameMusicAudio.play().catch((error: unknown) => {
-		appendOutput(
-			"system",
-			error instanceof Error
-				? `Could not resume music: ${error.message}`
-				: "Could not resume music."
-		);
-	});
+	void gameMusicAudio.play().catch(() => reportGameAudioPlaybackBlocked());
 }
 
 function setGameMusicVolume(volume: number) {
@@ -3451,14 +3447,7 @@ function playGameTone(frequency: number, duration: number) {
 		toneID
 	);
 	gameToneAudio.set(toneID, { gain, oscillator, timeout });
-	void context.resume().catch((error: unknown) => {
-		appendOutput(
-			"system",
-			error instanceof Error
-				? `Tone playback was blocked: ${error.message}`
-				: "Tone playback was blocked."
-		);
-	});
+	void context.resume().catch(() => reportGameAudioPlaybackBlocked());
 	oscillator.start(startedAt);
 	oscillator.stop(stoppedAt);
 	return toneID;

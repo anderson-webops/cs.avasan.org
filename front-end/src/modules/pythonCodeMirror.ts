@@ -120,7 +120,6 @@ const pythonCompletionMemberValidForRegex = /^\w*$/;
 const pythonAssetStringCompletionValidForRegex = /^[\w.-]*$/;
 const pythonTurtleShapeStringCompletionValidForRegex = /^[A-Z_]*$/i;
 const pythonIdentifierRegex = /^[A-Z_]\w*$/i;
-const bracketPairContextPadding = 2_000;
 const closingBrackets = new Set(Object.values(openingBracketToClosingBracket));
 const pythonCompletionBlockedNodeNames = new Set([
 	"Comment",
@@ -168,14 +167,15 @@ const unmatchedBracketDecoration = Decoration.mark({
 });
 interface BracketStackEntry {
 	expectedClose: string;
-	pairId: number;
+	pairIndex: number;
 	position: number;
 }
 
-interface BracketDecorationEntry {
-	decoration: Decoration;
+export interface PythonBracketPairColorRange {
 	from: number;
+	pairIndex: number;
 	to: number;
+	unmatched: boolean;
 }
 
 function bracketDecorationForIndex(index: number) {
@@ -1326,53 +1326,38 @@ function insertPythonNewlineAndIndent(view: EditorView) {
 }
 
 function buildBracketPairDecorations(view: EditorView) {
-	const decorations: BracketDecorationEntry[] = [];
-	const docLength = view.state.doc.length;
-
-	for (const range of view.visibleRanges) {
-		const contextFrom = Math.max(0, range.from - bracketPairContextPadding);
-		const contextTo = Math.min(
-			docLength,
-			range.to + bracketPairContextPadding
-		);
-
-		appendBracketPairDecorationsForRange(
-			view,
-			decorations,
-			contextFrom,
-			contextTo,
-			range.from,
-			range.to
-		);
-	}
-
-	decorations.sort((first, second) => first.from - second.from);
+	const decorations = pythonBracketPairColorRanges(
+		view.state,
+		view.visibleRanges
+	);
 	const builder = new RangeSetBuilder<Decoration>();
-	for (const { decoration, from, to } of decorations) {
+	for (const { from, pairIndex, to, unmatched } of decorations) {
+		const decoration = unmatched
+			? unmatchedBracketDecoration
+			: (bracketPairDecorations[pairIndex] ??
+				bracketPairDecorations[0] ??
+				unmatchedBracketDecoration);
 		builder.add(from, to, decoration);
 	}
 	return builder.finish();
 }
 
-function appendBracketPairDecorationsForRange(
-	view: EditorView,
-	decorations: BracketDecorationEntry[],
-	contextFrom: number,
-	contextTo: number,
-	visibleFrom: number,
-	visibleTo: number
+export function pythonBracketPairColorRanges(
+	state: EditorState,
+	visibleRanges: readonly { from: number; to: number }[]
 ) {
-	const text = view.state.doc.sliceString(contextFrom, contextTo);
+	const ranges: PythonBracketPairColorRange[] = [];
+	const docLength = state.doc.length;
+	const text = state.doc.sliceString(0, docLength);
 	const stack: BracketStackEntry[] = [];
-	let nextPairId = 1;
 
 	for (let offset = 0; offset < text.length; offset += 1) {
 		const character = text[offset] ?? "";
-		const index = contextFrom + offset;
+		const index = offset;
 		const expectedClose = openingBracketToClosingBracket[character];
 		if (
 			(expectedClose || closingBrackets.has(character)) &&
-			isPythonBracketPairIgnoredAt(view.state, index)
+			isPythonBracketPairIgnoredAt(state, index)
 		) {
 			continue;
 		}
@@ -1380,10 +1365,9 @@ function appendBracketPairDecorationsForRange(
 		if (expectedClose) {
 			stack.push({
 				expectedClose,
-				pairId: nextPairId,
+				pairIndex: stack.length % bracketPairDecorations.length,
 				position: index
 			});
-			nextPairId += 1;
 			continue;
 		}
 
@@ -1391,67 +1375,58 @@ function appendBracketPairDecorationsForRange(
 
 		const candidate = stack.at(-1);
 		if (!candidate || candidate.expectedClose !== character) {
-			if (isVisibleBracketPosition(index, visibleFrom, visibleTo)) {
-				decorations.push({
-					decoration: unmatchedBracketDecoration,
+			if (isVisibleBracketPosition(index, visibleRanges)) {
+				ranges.push({
 					from: index,
-					to: index + 1
+					pairIndex: 0,
+					to: index + 1,
+					unmatched: true
 				});
 			}
 			continue;
 		}
 
 		stack.pop();
-		const decoration =
-			bracketPairDecorations[
-				(candidate.pairId - 1) % bracketPairDecorations.length
-			] ??
-			bracketPairDecorations[0] ??
-			unmatchedBracketDecoration;
-		if (
-			isVisibleBracketPosition(candidate.position, visibleFrom, visibleTo)
-		) {
-			decorations.push({
-				decoration,
+		if (isVisibleBracketPosition(candidate.position, visibleRanges)) {
+			ranges.push({
 				from: candidate.position,
-				to: candidate.position + 1
+				pairIndex: candidate.pairIndex,
+				to: candidate.position + 1,
+				unmatched: false
 			});
 		}
-		if (isVisibleBracketPosition(index, visibleFrom, visibleTo)) {
-			decorations.push({
-				decoration,
+		if (isVisibleBracketPosition(index, visibleRanges)) {
+			ranges.push({
 				from: index,
-				to: index + 1
+				pairIndex: candidate.pairIndex,
+				to: index + 1,
+				unmatched: false
 			});
 		}
 	}
-
-	if (contextTo < view.state.doc.length) return;
 
 	for (const unmatched of stack) {
-		if (
-			!isVisibleBracketPosition(
-				unmatched.position,
-				visibleFrom,
-				visibleTo
-			)
-		) {
+		if (!isVisibleBracketPosition(unmatched.position, visibleRanges)) {
 			continue;
 		}
-		decorations.push({
-			decoration: unmatchedBracketDecoration,
+		ranges.push({
 			from: unmatched.position,
-			to: unmatched.position + 1
+			pairIndex: 0,
+			to: unmatched.position + 1,
+			unmatched: true
 		});
 	}
+
+	return ranges.sort((first, second) => first.from - second.from);
 }
 
 function isVisibleBracketPosition(
 	position: number,
-	visibleFrom: number,
-	visibleTo: number
+	visibleRanges: readonly { from: number; to: number }[]
 ) {
-	return position >= visibleFrom && position < visibleTo;
+	return visibleRanges.some(
+		range => position >= range.from && position < range.to
+	);
 }
 
 function wrapSelection(view: EditorView, open: string, close: string) {
