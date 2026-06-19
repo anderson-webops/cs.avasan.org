@@ -3670,6 +3670,12 @@ describe("course text quality normalization", () => {
 				expect(corpus).not.toMatch(phrase);
 
 			expect(corpus).not.toMatch(/The goal is to be able to/i);
+			expect(corpus).not.toMatch(/\bThe goal is to\b/i);
+			expect(corpus).not.toMatch(/\bThis (?:section|lesson) covers\b/i);
+			expect(corpus).not.toMatch(/\bPractice targets?\b/i);
+			expect(corpus).not.toMatch(/\bVisible pattern\b/i);
+			expect(corpus).not.toMatch(/\bSkill target\b/i);
+			expect(corpus).not.toMatch(/\*\*Key idea:\*\*/i);
 			expect(corpus).not.toMatch(/\bensure to [a-z]/i);
 			expect(corpus).not.toMatch(
 				/with a clear input, process, and output path that makes .+ easier to inspect/i

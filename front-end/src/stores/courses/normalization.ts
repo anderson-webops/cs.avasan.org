@@ -1104,6 +1104,7 @@ const supportLabelPattern = [
 	"Evidence pattern",
 	"Main idea",
 	"Skill focus",
+	"Practice targets",
 	"Practice target",
 	"Visible pattern",
 	"Key idea",
@@ -1324,6 +1325,7 @@ function supportLabelParagraph(
 	const readerLabel =
 		{
 			"Practice target": "Practice check",
+			"Practice targets": "Practice checks",
 			"Visible pattern": "Evidence pattern",
 			"Key idea": "Main idea",
 			"Skill target": "Skill focus"
@@ -1545,6 +1547,17 @@ function neutralizeLessonDirectiveText(text: string) {
 			(_match, leadingWhitespace, practice, offset, sourceText) =>
 				supportLabelParagraph(
 					"Practice target",
+					leadingWhitespace,
+					practice,
+					sourceText,
+					offset
+				)
+		)
+		.replace(
+			/(\s*)(?:\*\*)?\bPractice targets:(?:\*\*)?([^\n.]+)\./g,
+			(_match, leadingWhitespace, practice, offset, sourceText) =>
+				supportLabelParagraph(
+					"Practice targets",
 					leadingWhitespace,
 					practice,
 					sourceText,
@@ -1959,8 +1972,20 @@ function neutralizeStudentFacingText(text: string) {
 				.replace(/\bto Ensure\b/g, "to ensure")
 				.replace(/\bEnsure to ([a-z])/g, capitalizeMatchedFirstLetter)
 				.replace(/\bensure to ([a-z])/g, keepMatchedFirstLetter)
+				.replace(
+					/\bThis section covers how to\b/g,
+					"This section develops how to"
+				)
+				.replace(/\bThis section covers\b/g, "This section develops")
+				.replace(
+					/\bThis lesson covers how to\b/g,
+					"This lesson develops how to"
+				)
+				.replace(/\bThis lesson covers\b/g, "This lesson develops")
 				.replace(/\bThe goal is to be able to\b/g, "The result should")
 				.replace(/\bthe goal is to be able to\b/g, "the result should")
+				.replace(/\bThe goal is to\b/g, "The result should")
+				.replace(/\bthe goal is to\b/g, "the result should")
 				.replace(
 					/\bSummarize ([^.]+?) by naming\b/g,
 					"A complete check for $1 names"
@@ -2222,6 +2247,16 @@ function neutralizeStudentFacingText(text: string) {
 				.replace(/\bbefore the student enters\b/gi, "before entering")
 				.replace(/\bstudent enters\b/g, "the entry uses")
 				.replace(
+					/\bThis section covers how to\b/g,
+					"This section develops how to"
+				)
+				.replace(/\bThis section covers\b/g, "This section develops")
+				.replace(
+					/\bThis lesson covers how to\b/g,
+					"This lesson develops how to"
+				)
+				.replace(/\bThis lesson covers\b/g, "This lesson develops")
+				.replace(
 					/\bThe learner should\b/g,
 					"A complete response should"
 				)
@@ -2233,6 +2268,8 @@ function neutralizeStudentFacingText(text: string) {
 				.replace(/\blearners should\b/g, "complete responses should")
 				.replace(/\bThe goal is to be able to\b/g, "The result should")
 				.replace(/\bthe goal is to be able to\b/g, "the result should")
+				.replace(/\bThe goal is to\b/g, "The result should")
+				.replace(/\bthe goal is to\b/g, "the result should")
 				.replace(
 					/\bThe learner can ([a-z])/g,
 					capitalizeMatchedFirstLetter
