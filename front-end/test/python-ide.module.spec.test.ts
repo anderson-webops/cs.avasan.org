@@ -1299,6 +1299,47 @@ describe("python IDE project helpers", () => {
 		expect(pack.assets.has("images/alien.png")).toBe(true);
 	});
 
+	it("falls back to the same-origin zip proxy when the asset manifest has no usable assets", async () => {
+		const zipBytes = zipSync({
+			"images/alien.png": oneByOnePngBytes
+		});
+		const requestedUrls: string[] = [];
+		const pack = await loadPythonIdeCourseAssetPack({
+			fetcher: async url => {
+				requestedUrls.push(url);
+				if (url === pythonIdeCourseAssetsManifestUrl) {
+					return {
+						arrayBuffer: async () => new ArrayBuffer(0),
+						json: async () => ({
+							assets: [
+								{
+									mimeType: "text/plain",
+									name: "README.txt",
+									url: "/python-ide/assets/README.txt"
+								}
+							]
+						}),
+						ok: true,
+						status: 200
+					};
+				}
+
+				expect(url).toBe(pythonIdeCourseAssetsZipUrl);
+				return {
+					arrayBuffer: async () => zipBytes.buffer.slice(0),
+					ok: true,
+					status: 200
+				};
+			}
+		});
+
+		expect(requestedUrls).toEqual([
+			pythonIdeCourseAssetsManifestUrl,
+			pythonIdeCourseAssetsZipUrl
+		]);
+		expect(pack.assets.has("images/alien.png")).toBe(true);
+	});
+
 	it("falls back to the same-origin zip proxy when the asset manifest fetch fails", async () => {
 		const zipBytes = zipSync({
 			"images/alien.png": oneByOnePngBytes

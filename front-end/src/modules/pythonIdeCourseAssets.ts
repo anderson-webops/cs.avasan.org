@@ -69,10 +69,16 @@ export async function loadPythonIdeCourseAssetPack(
 					continue;
 				}
 
-				return parsePythonIdeCourseAssetManifest(
+				const pack = parsePythonIdeCourseAssetManifest(
 					await readAssetManifestResponse(response),
 					sourceUrl
 				);
+				if (!pack.assets.size) {
+					failures.push(`${sourceUrl} contained no usable assets`);
+					continue;
+				}
+
+				return pack;
 			} catch (error) {
 				failures.push(
 					`${sourceUrl} failed: ${formatAssetLoadError(error)}`
@@ -88,10 +94,16 @@ export async function loadPythonIdeCourseAssetPack(
 					continue;
 				}
 
-				return await parsePythonIdeCourseAssetZip(
+				const pack = await parsePythonIdeCourseAssetZip(
 					new Uint8Array(await response.arrayBuffer()),
 					sourceUrl
 				);
+				if (!pack.assets.size) {
+					failures.push(`${sourceUrl} contained no usable assets`);
+					continue;
+				}
+
+				return pack;
 			} catch (error) {
 				failures.push(
 					`${sourceUrl} failed: ${formatAssetLoadError(error)}`
