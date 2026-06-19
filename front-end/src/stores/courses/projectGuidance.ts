@@ -982,7 +982,7 @@ function familyFocus(
 		return [
 			`Translate ${moduleTitle} into inputs, state, invariants, and output before optimizing; add one tiny custom case and one bounds, ordering, or off-by-one case beyond the sample`,
 			`Use ${moduleTitle} to practice contest discipline: restate the constraints, trace the invariant on a hand-built case, then test a sample and a custom edge case`,
-			`For ${moduleTitle}, prove the idea before coding by writing a smallest-case trace, then confirm the implementation against sample output and one adversarial boundary case`,
+			`${moduleTitle} proof work starts with a smallest-case trace, then confirms the implementation against sample output and one adversarial boundary case`,
 			`Keep ${moduleTitle} grounded in the official input/output contract, the preserved invariant, the expected complexity, and at least one non-sample case that could expose a wrong assumption`
 		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}

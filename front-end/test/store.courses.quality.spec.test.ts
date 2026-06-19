@@ -402,6 +402,12 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/After the solution samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling/
 			);
+			expect(corpus).not.toMatch(
+				/\*\*Focus:\*\* Prove the idea before coding by writing a smallest-case trace, then confirm the implementation against sample output and one adversarial boundary case/
+			);
+			expect(corpus).toMatch(
+				/\*\*Focus:\*\* [^.\n]+ proof work starts with a smallest-case trace, then confirms the implementation against sample output and one adversarial boundary case/
+			);
 			expect(corpus).toMatch(
 				/After [^.\n]+ samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling/
 			);
