@@ -1667,11 +1667,12 @@ function drawFancyTurtleShape(context: CanvasRenderingContext2D) {
 function renderTurtleCommand(
 	context: CanvasRenderingContext2D,
 	command: TurtleRenderCommand,
-	progress = 1
+	progress = 1,
+	activeLineEnd?: { x: number; y: number }
 ) {
 	if (command.kind === "line") {
 		const start = canvasCoordinates(command.from.x, command.from.y);
-		const partialEnd = {
+		const partialEnd = activeLineEnd ?? {
 			x: lerp(command.from.x, command.to.x, progress),
 			y: lerp(command.from.y, command.to.y, progress)
 		};
@@ -1775,7 +1776,10 @@ function renderTurtleScene(
 		renderTurtleCommand(
 			context,
 			activeCommand.command,
-			activeCommand.progress
+			activeCommand.progress,
+			activeCommand.command.kind === "line"
+				? { x: markerPose.x, y: markerPose.y }
+				: undefined
 		);
 	}
 	drawTurtleMarker(context, markerPose);

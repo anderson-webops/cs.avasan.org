@@ -1093,10 +1093,11 @@ class Turtle:
     def forward(self, distance):
         amount = float(distance)
         self._sync_bridge()
-        _bridge.forward(amount)
         radians = math.radians(self._heading)
-        self._x += math.cos(radians) * amount
-        self._y += math.sin(radians) * amount
+        next_x = self._x + math.cos(radians) * amount
+        next_y = self._y + math.sin(radians) * amount
+        self._set_position(next_x, next_y)
+        _bridge.goto(float(next_x), float(next_y))
 
     def fd(self, distance):
         self.forward(distance)
@@ -1150,8 +1151,8 @@ class Turtle:
         if y is None:
             x, y = x
         self._sync_bridge()
-        _bridge.goto(float(x), float(y))
         self._set_position(x, y)
+        _bridge.goto(float(x), float(y))
 
     def setpos(self, x, y=None):
         self.goto(x, y)

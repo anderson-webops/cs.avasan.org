@@ -459,6 +459,66 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("cancelTurtleAnimation()");
 	});
 
+	it("keeps Turtle trail drawing synchronized to the visible cursor pose", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+		const renderCommandStart = pageSource.indexOf(
+			"function renderTurtleCommand"
+		);
+		const renderSceneStart = pageSource.indexOf(
+			"function renderTurtleScene"
+		);
+		const renderCommandSource = pageSource.slice(
+			renderCommandStart,
+			renderSceneStart
+		);
+		const renderSceneSource = pageSource.slice(
+			renderSceneStart,
+			pageSource.indexOf("function resolveActiveTurtleAnimation")
+		);
+		const forwardStart = runtimeSource.indexOf(
+			"    def forward(self, distance):"
+		);
+		const forwardSource = runtimeSource.slice(
+			forwardStart,
+			runtimeSource.indexOf("    def fd(self, distance):", forwardStart)
+		);
+		const gotoStart = runtimeSource.indexOf(
+			"    def goto(self, x, y=None):"
+		);
+		const gotoSource = runtimeSource.slice(
+			gotoStart,
+			runtimeSource.indexOf("    def setpos(self, x, y=None):", gotoStart)
+		);
+
+		expect(renderCommandSource).toContain(
+			"activeLineEnd?: { x: number; y: number }"
+		);
+		expect(renderCommandSource).toContain("activeLineEnd ??");
+		expect(renderSceneSource).toContain(
+			'activeCommand.command.kind === "line"'
+		);
+		expect(renderSceneSource).toContain(
+			"? { x: markerPose.x, y: markerPose.y }"
+		);
+		expect(forwardSource).toContain("next_x = self._x +");
+		expect(forwardSource).toContain("next_y = self._y +");
+		expect(
+			forwardSource.indexOf("self._set_position(next_x, next_y)")
+		).toBeLessThan(
+			forwardSource.indexOf("_bridge.goto(float(next_x), float(next_y))")
+		);
+		expect(gotoSource.indexOf("self._set_position(x, y)")).toBeLessThan(
+			gotoSource.indexOf("_bridge.goto(float(x), float(y))")
+		);
+	});
+
 	it("renders the original Turtle built-in shapes with classic as default", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
