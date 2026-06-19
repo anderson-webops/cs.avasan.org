@@ -487,7 +487,10 @@ const gameToneAudio = new Map<number, GameToneHandle>();
 const codeEditorViewStates = new Map<string, CodeEditorViewState>();
 
 let saveTimer: ReturnType<typeof window.setTimeout> | null = null;
+let localSnapshotTimer: ReturnType<typeof window.setTimeout> | null = null;
 let saveInFlight: Promise<void> | null = null;
+let localSnapshotInFlight: Promise<void> | null = null;
+let localSnapshotQueued = false;
 let saveQueued = false;
 let suppressAutoSave = false;
 let resizeObserver: ResizeObserver | null = null;
@@ -1047,7 +1050,7 @@ async function saveNewProject(
 		if (!projectLoadIsCurrent(loadRunID)) return;
 		projects.value.unshift(remoteProject);
 		selectedProjectID.value = remoteProject._id;
-		await clearLocalPythonProjectsAsync(storageUserID.value);
+		await discardLocalProjectSnapshot();
 		if (!projectLoadIsCurrent(loadRunID)) return;
 		saveMessage.value = "Synced to account";
 		return;
@@ -1127,6 +1130,60 @@ function saveLocalProjectSnapshot() {
 	}
 }
 
+async function persistLocalProjectSnapshot() {
+	if (!projects.value.length) return;
+	if (localSnapshotInFlight) {
+		localSnapshotQueued = true;
+		return localSnapshotInFlight;
+	}
+
+	localSnapshotInFlight = (async () => {
+		do {
+			localSnapshotQueued = false;
+			await saveLocalPythonProjectsAsync(
+				projects.value,
+				storageUserID.value
+			);
+		} while (localSnapshotQueued);
+	})();
+
+	try {
+		await localSnapshotInFlight;
+	} catch (error) {
+		console.warn("Could not write Python IDE local snapshot.", error);
+	} finally {
+		localSnapshotInFlight = null;
+	}
+}
+
+function cancelLocalProjectSnapshot() {
+	if (localSnapshotTimer) {
+		window.clearTimeout(localSnapshotTimer);
+		localSnapshotTimer = null;
+	}
+}
+
+async function discardLocalProjectSnapshot() {
+	cancelLocalProjectSnapshot();
+	if (localSnapshotInFlight) {
+		try {
+			await localSnapshotInFlight;
+		} catch {
+			// Snapshot failures are already logged by persistLocalProjectSnapshot.
+		}
+	}
+	localSnapshotQueued = false;
+	await clearLocalPythonProjectsAsync(storageUserID.value);
+}
+
+function scheduleLocalProjectSnapshot() {
+	cancelLocalProjectSnapshot();
+	localSnapshotTimer = window.setTimeout(() => {
+		localSnapshotTimer = null;
+		void persistLocalProjectSnapshot();
+	}, 250);
+}
+
 async function syncProjectsToAccount(projectList: PythonIdeProject[]) {
 	return Promise.all(
 		projectList.map(project =>
@@ -1161,7 +1218,7 @@ async function loadProjects() {
 						await syncProjectsToAccount(localProjects);
 					if (!projectLoadIsCurrent(loadRunID)) return;
 					setProjects(syncedProjects);
-					await clearLocalPythonProjectsAsync(storageUserID.value);
+					await discardLocalProjectSnapshot();
 					if (!projectLoadIsCurrent(loadRunID)) return;
 					await openRequestedCourseProjectIfNeeded(false, loadRunID);
 					if (!projectLoadIsCurrent(loadRunID)) return;
@@ -1199,7 +1256,7 @@ async function loadProjects() {
 			);
 			if (!projectLoadIsCurrent(loadRunID)) return;
 			setProjects([remoteProject]);
-			await clearLocalPythonProjectsAsync(storageUserID.value);
+			await discardLocalProjectSnapshot();
 			if (!projectLoadIsCurrent(loadRunID)) return;
 			saveMessage.value = "Synced to account";
 			return;
@@ -1296,7 +1353,7 @@ async function saveSelectedProjectOnce() {
 				selectedProjectID.value = savedProject._id;
 			}
 		}
-		await clearLocalPythonProjectsAsync(storageUserID.value);
+		await discardLocalProjectSnapshot();
 		saveMessage.value = "Synced to account";
 	} catch (error) {
 		await persistLocalProjects({
@@ -1339,11 +1396,12 @@ function scheduleSave() {
 	if (!autoSaveEnabled.value) {
 		if (saveTimer) window.clearTimeout(saveTimer);
 		saveTimer = null;
+		cancelLocalProjectSnapshot();
 		saveMessage.value = "Autosave off";
 		return;
 	}
 
-	saveLocalProjectSnapshot();
+	scheduleLocalProjectSnapshot();
 	saveMessage.value = canSyncToAccount.value
 		? "Autosaving to account"
 		: "Autosaving locally";
@@ -1356,6 +1414,7 @@ function scheduleSave() {
 
 function flushPendingProjectSave() {
 	if (suppressAutoSave || !autoSaveEnabled.value) return;
+	cancelLocalProjectSnapshot();
 	if (saveTimer) {
 		window.clearTimeout(saveTimer);
 		saveTimer = null;
@@ -1371,6 +1430,7 @@ function updateAutoSavePreference(event: Event) {
 	if (!enabled) {
 		if (saveTimer) window.clearTimeout(saveTimer);
 		saveTimer = null;
+		cancelLocalProjectSnapshot();
 		saveMessage.value = "Autosave off";
 		return;
 	}
@@ -1452,7 +1512,7 @@ async function deleteProject(project: PythonIdeProject) {
 		);
 		selectedProjectID.value = projects.value[0]?._id ?? "";
 		if (isRemoteProject) {
-			await clearLocalPythonProjectsAsync(storageUserID.value);
+			await discardLocalProjectSnapshot();
 			saveMessage.value = "Synced to account";
 		} else {
 			await persistLocalProjects();

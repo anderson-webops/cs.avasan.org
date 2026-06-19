@@ -2033,7 +2033,13 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("function updateAutoSavePreference");
 		expect(pageSource).toContain("Autosave projects");
 		expect(pageSource).toContain('aria-label="Python IDE settings"');
-		expect(pageSource).toContain("saveLocalProjectSnapshot();");
+		expect(pageSource).toContain("let localSnapshotTimer:");
+		expect(pageSource).toContain("async function persistLocalProjectSnapshot");
+		expect(pageSource).toContain("async function discardLocalProjectSnapshot");
+		expect(pageSource).toContain("await localSnapshotInFlight;");
+		expect(pageSource).toContain("function scheduleLocalProjectSnapshot");
+		expect(pageSource).toContain("scheduleLocalProjectSnapshot();");
+		expect(pageSource).toContain("await discardLocalProjectSnapshot();");
 		expect(pageSource).toContain("if (!autoSaveEnabled.value)");
 		expect(pageSource).toContain(
 			"await persistLocalProjects({ quiet: true });"
@@ -2045,6 +2051,7 @@ describe("python IDE project helpers", () => {
 			'window.addEventListener("pagehide", flushPendingProjectSave);'
 		);
 		expect(pageSource).toContain("flushPendingProjectSave();");
+		expect(pageSource).toContain("saveLocalProjectSnapshot();");
 	});
 
 	it("persists CodeMirror view state across reloads and project ID migration", () => {
