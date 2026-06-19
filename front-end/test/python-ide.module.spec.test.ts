@@ -875,8 +875,16 @@ describe("python IDE project helpers", () => {
 			"utf8"
 		);
 
+		expect(pageSource).toContain("const turtleDefaultSpeed = 3");
 		expect(pageSource).toContain(
-			"return Math.min(900, Math.max(16, distance * 5));"
+			"const turtleDistanceDurationMsPerPixelAtDefaultSpeed = 5"
+		);
+		expect(pageSource).toContain(
+			"function turtleAnimationSpeedScale"
+		);
+		expect(pageSource).toContain("return turtleDefaultSpeed / normalizedSpeed;");
+		expect(pageSource).toContain(
+			"distance *\n\t\t\t\t\tturtleDistanceDurationMsPerPixelAtDefaultSpeed *\n\t\t\t\t\tspeedScale"
 		);
 		expect(pageSource).toContain(
 			"const turtleAnimationInitialFrameCreditMs = 16"
@@ -925,7 +933,7 @@ describe("python IDE project helpers", () => {
 		);
 
 		expect(pageSource).toContain(
-			"if (headingDelta > 0) return turtleTurnStepDurationMs;"
+			"if (headingDelta > 0)\n\t\treturn Math.max(1, turtleTurnStepDurationMs * speedScale);"
 		);
 		expect(pageSource).not.toContain(
 			"return Math.min(260, Math.max(90, headingDelta * 1.5));"
@@ -946,6 +954,8 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain(
 			"if (!turtleTracerEnabled || fromPose.speed === 0)"
 		);
+		expect(pageSource).toContain("const speedScale = turtleAnimationSpeedScale");
+		expect(pageSource).toContain("Math.max(1, Math.min(10, speed))");
 		expect(pageSource).toContain("setSpeed(speed: number)");
 		expect(pageSource).toContain("setTracer(value: number)");
 		expect(runtimeSource).toContain("def _normalize_turtle_speed(value):");

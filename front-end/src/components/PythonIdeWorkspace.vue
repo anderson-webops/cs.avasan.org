@@ -353,6 +353,8 @@ const turtleAnimationInitialFrameCreditMs = 16;
 const turtleInstantStepMaxDurationMs = 16;
 const turtleTurnStepDurationMs = turtleInstantStepMaxDurationMs;
 const turtleInstantStepMaxDistance = 2;
+const turtleDefaultSpeed = 3;
+const turtleDistanceDurationMsPerPixelAtDefaultSpeed = 5;
 const turtleInstantFrameDistanceBudget = 12;
 const turtleInstantFrameStepBudget = 24;
 const turtleBacklogFastForwardStepThreshold = 18;
@@ -2142,11 +2144,30 @@ function turtleMovementDuration(fromPose: TurtlePose, toPose: TurtlePose) {
 	if (!turtleTracerEnabled || fromPose.speed === 0)
 		return turtleInstantStepMaxDurationMs;
 
+	const speedScale = turtleAnimationSpeedScale(fromPose.speed);
 	const distance = Math.hypot(toPose.x - fromPose.x, toPose.y - fromPose.y);
 	const headingDelta = Math.abs(toPose.heading - fromPose.heading);
-	if (distance > 0) return Math.min(900, Math.max(16, distance * 5));
-	if (headingDelta > 0) return turtleTurnStepDurationMs;
+	if (distance > 0) {
+		return Math.min(
+			900,
+			Math.max(
+				1,
+				distance *
+					turtleDistanceDurationMsPerPixelAtDefaultSpeed *
+					speedScale
+			)
+		);
+	}
+	if (headingDelta > 0)
+		return Math.max(1, turtleTurnStepDurationMs * speedScale);
 	return turtleInstantStepMaxDurationMs;
+}
+
+function turtleAnimationSpeedScale(speed: number) {
+	const normalizedSpeed = Number.isFinite(speed)
+		? Math.max(1, Math.min(10, speed))
+		: turtleDefaultSpeed;
+	return turtleDefaultSpeed / normalizedSpeed;
 }
 
 function normalizeTurtleShape(shape: string): TurtleShapeName {
