@@ -86,7 +86,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Attack Surface in Real Services",
 					content:
-						"This section covers attack surface as every externally reachable input, management path, credential boundary, and background integration a service exposes. Skill target: Name the surface area of a simple app before choosing specific mitigations."
+						"Attack surface means every externally reachable input, management path, credential boundary, and background integration a service exposes. Start by naming the surface area of a simple app before choosing mitigations, because a defense cannot be evaluated until the exposed paths are visible."
 				},
 				{
 					title: "Trust Boundaries and Data Ownership",
@@ -96,7 +96,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "CIA Triad in Practical Service Terms",
 					content:
-						"This section covers confidentiality, integrity, and availability using web and service examples: leaked tokens, tampered requests, poisoned logs, service outages, and rate-limit exhaustion. The aim is to make the triad operational rather than abstract."
+						"Confidentiality, integrity, and availability become concrete through web-service examples: leaked tokens, tampered requests, poisoned logs, service outages, and rate-limit exhaustion. The triad should read like an operational checklist for a real service, not a vocabulary box."
 				},
 				{
 					title: "Threat Modeling Small TS Services",
@@ -164,7 +164,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "What a Listening Service Exposes",
 					content:
-						"Treat a listening socket as a concrete exposure point rather than a vague idea of 'the server'. Skill target: Explain which process, protocol, address, and port are actually reachable and which clients can reach them."
+						"Treat a listening socket as a concrete exposure point rather than a vague idea of 'the server'. A useful explanation identifies the process, protocol, address, port, and client scope so the actual reachable surface is clear."
 				},
 				{
 					title: "Localhost versus LAN versus Public Internet",
@@ -235,7 +235,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Requests, Headers, Cookies, and Tokens",
 					content:
-						"Make the HTTP request concrete: method, path, headers, body, cookie state, and bearer tokens all represent different trust claims. Skill target: Explain what each one proves and what each one can be forged or misused to do."
+						"Make the HTTP request concrete: method, path, headers, body, cookie state, and bearer tokens all represent different trust claims. Each part should be tied to what it proves, what it does not prove, and how it could be forged or misused."
 				},
 				{
 					title: "Authentication versus Authorization",
@@ -245,12 +245,12 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Common Mistakes in Toy APIs",
 					content:
-						"Cover insecure defaults such as trusting client role flags, leaking internal errors, reflecting unsanitized values, skipping ownership checks, or exposing admin-style endpoints without proper guardrails. The goal is to recognize weak assumptions before writing more code."
+						"Insecure toy APIs often trust client role flags, leak internal errors, reflect unsanitized values, skip ownership checks, or expose admin-style endpoints without guardrails. Recognizing the weak assumption matters before adding more code on top of it."
 				},
 				{
 					title: "State Changes, Idempotence, and Error Surfaces",
 					content:
-						"This section covers why method choice, status codes, retry behavior, and response details all matter to security. Key idea: Sloppy API behavior makes abuse harder to detect and legitimate failures harder to investigate."
+						"Method choice, status codes, retry behavior, and response details all shape the security behavior of an API. Sloppy API behavior makes abuse harder to detect and legitimate failures harder to investigate, especially when state-changing routes do not communicate clearly."
 				},
 				{
 					title: "Unit 3: HTTP and API Security Basics: Core Project",
@@ -310,7 +310,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "What TLS Protects and What It Does Not",
 					content:
-						"This section covers TLS as protection for data in transit against interception and tampering, not as a blanket application-security solution. Key idea: That TLS does not replace correct authorization, input validation, or safe server behavior."
+						"TLS protects data in transit against interception and tampering, but it is not a blanket application-security solution. Authorization, input validation, session handling, and safe server behavior still have to be correct after the encrypted connection is established."
 				},
 				{
 					title: "Certificates and Trust at a High Level",
@@ -320,7 +320,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Reverse-Proxy Termination",
 					content:
-						"Show where TLS often terminates in real deployments and how that changes what the upstream app sees. Key idea: Why trusted proxy headers, secure forwarding rules, and internal-only app listeners matter once TLS ends at the edge."
+						"Show where TLS often terminates in real deployments and how that changes what the upstream app sees. Once TLS ends at the edge, trusted proxy headers, secure forwarding rules, and internal-only app listeners become part of the security model."
 				},
 				{
 					title: "Why Plain HTTP Is Still Risky",
@@ -385,7 +385,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Malformed Requests and Parser Edges",
 					content:
-						"This section covers malformed requests as a boundary problem, not just a coding inconvenience. Look for parser ambiguity, missing fields, unexpected nesting, unsupported content types, and type confusion before values ever touch business logic."
+						"Malformed requests are boundary problems, not just coding inconveniences. Look for parser ambiguity, missing fields, unexpected nesting, unsupported content types, and type confusion before values ever touch business logic."
 				},
 				{
 					title: "Size Limits and Resource Exhaustion",
@@ -400,7 +400,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Normalize Before Deeper Logic",
 					content:
-						"This section covers early normalization of casing, enums, identifiers, and optional fields so downstream code can rely on a smaller set of safe assumptions. The security value is fewer ambiguous states and fewer ways to bypass checks."
+						"Normalize casing, enums, identifiers, and optional fields early so downstream code can rely on a smaller set of safe assumptions. The security value is fewer ambiguous states and fewer ways to bypass checks."
 				},
 				{
 					title: "Project: Request Schema Validation Gateway",
@@ -458,7 +458,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Access Logs and Structured Logs",
 					content:
-						"This section covers the difference between generic access logs and structured application logs, then show why both matter. Key idea: Which questions each log type can answer during routine monitoring and during a real incident."
+						"Generic access logs and structured application logs answer different security questions. Access logs show request patterns and edge behavior; structured logs can explain application decisions during routine monitoring and incident reconstruction."
 				},
 				{
 					title: "Suspicious Activity Indicators",
@@ -468,7 +468,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Rate-Limit and Abuse Telemetry",
 					content:
-						"This section covers rate limiting as both a control and a source of evidence. Log throttle decisions, track source identity carefully, and understand the difference between a strict limit, a challenge, and a hard block."
+						"Rate limiting is both a control and a source of evidence. Log throttle decisions, track source identity carefully, and distinguish a strict limit, a challenge, and a hard block so later review can explain why the service reacted."
 				},
 				{
 					title: "Reading Logs After Simulated Bad Requests",
@@ -531,12 +531,12 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "UFW Review and Least-Open Policy",
 					content:
-						"Review host firewall behavior with a deny-by-default mindset, then explicitly map which ports should be reachable from which networks. Skill target: Treat exposure policy as a design decision that should be documented, not guessed."
+						"Review host firewall behavior with a deny-by-default mindset, then explicitly map which ports should be reachable from which networks. Exposure policy is a design decision that should be documented, not guessed from whatever happens to work."
 				},
 				{
 					title: "Reverse Proxies as Security Boundaries",
 					content:
-						"This section covers reverse proxies as both routing tools and security boundaries. They can terminate TLS, enforce method or size policy, centralize logs, and keep internal services off the public edge when configured carefully."
+						"Reverse proxies are both routing tools and security boundaries. They can terminate TLS, enforce method or size policy, centralize logs, and keep internal services off the public edge when configured carefully."
 				},
 				{
 					title: "Internal versus External Services",
@@ -546,7 +546,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Trusted Proxy Headers and Real Client Identity",
 					content:
-						"Explain when forwarded headers are trustworthy, when they are attacker-controlled, and how misconfigured proxy trust corrupts logs, rate limits, or auth logic. Key idea: Client identity is a boundary decision, not a free value."
+						"Explain when forwarded headers are trustworthy, when they are attacker-controlled, and how misconfigured proxy trust corrupts logs, rate limits, or auth logic. Client identity is a boundary decision, not a free value from the request."
 				},
 				{
 					title: "Project: TLS and Proxy Configuration Companion App",
@@ -602,17 +602,17 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Express or Fastify Hardening Basics",
 					content:
-						"Use one small service to show safe defaults around routing, parser configuration, central error handling, and defensive middleware ordering. Key idea: How framework defaults and app-specific decisions combine into a real boundary."
+						"Use one small service to show safe defaults around routing, parser configuration, central error handling, and defensive middleware ordering. Framework defaults and app-specific decisions combine into the real boundary a request encounters."
 				},
 				{
 					title: "Security Headers and Browser-Side Policy",
 					content:
-						"Cover common header protections such as content type discipline, frame policy, and transport hints, and explain what they do and do not solve. This keeps browser-facing service security tied to concrete HTTP behavior instead of vague best-practice lists."
+						"Common header protections include content type discipline, frame policy, and transport hints. Each header should be connected to what it does, what it does not solve, and how browser-facing service security depends on concrete HTTP behavior instead of vague best-practice lists."
 				},
 				{
 					title: "CORS, Body Limits, and Parsing Rules",
 					content:
-						"This section covers CORS as a browser policy surface, not an authentication mechanism, and pairs it with strict body parsing and request-size limits. Skill target: Explain exactly which clients a CORS rule affects and which clients it does not."
+						"CORS is a browser policy surface, not an authentication mechanism. Pair it with strict body parsing and request-size limits, and be explicit about which clients a CORS rule affects and which clients it does not."
 				},
 				{
 					title: "Route-Level Authentication and Authorization",
@@ -748,7 +748,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Connection Lifecycle and Session State",
 					content:
-						"This section covers connect, authenticate, subscribe, send, receive, and disconnect as distinct phases with different failure risks. Stop treating a WebSocket as a magical persistent tunnel and start treating it as a stateful security boundary."
+						"Connect, authenticate, subscribe, send, receive, and disconnect are distinct WebSocket phases with different failure risks. Treat a WebSocket as a stateful security boundary rather than a magical persistent tunnel."
 				},
 				{
 					title: "Event Validation and Message Contracts",
@@ -758,7 +758,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Abuse Handling, Backpressure, and Disconnect Policy",
 					content:
-						"Cover message floods, invalid event spam, reconnect storms, and idle-session cleanup. Key idea: Availability protection is part of real-time security, not separate from it."
+						"Message floods, invalid event spam, reconnect storms, and idle-session cleanup all belong in the real-time security model. Availability protection is part of real-time security, not a separate operational afterthought."
 				},
 				{
 					title: "Broadcast Boundaries and Data Leakage",
@@ -821,7 +821,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Environment Variables and Secret Handling",
 					content:
-						"This section covers secrets as runtime configuration that should be injected deliberately, rotated when needed, and kept out of source control and logs. Skill target: Distinguish public config, internal config, and true secrets."
+						"Secrets are runtime configuration that should be injected deliberately, rotated when needed, and kept out of source control and logs. Distinguish public config, internal config, and true secrets before deciding where a value belongs."
 				},
 				{
 					title: "TLS Certificate Placement and Renewal Ownership",
@@ -831,7 +831,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Service Exposure, Logs, and Recovery Signals",
 					content:
-						"This section covers deployment review as a combined exercise in public exposure, logging quality, health checks, and rollback clarity. Key idea: What evidence they need before declaring a deployment secure enough to expose."
+						"Deployment review combines public exposure, logging quality, health checks, and rollback clarity. Before a service is declared secure enough to expose, the evidence should show what is public, what is logged, how health is checked, and how rollback would work."
 				},
 				{
 					title: "Secure Release Checklist",
@@ -896,7 +896,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Rules of Engagement and Safe Penetration-Test Scope",
 					content:
-						"This section covers penetration testing as an authorized defensive activity with explicit scope, approval, timing, and stop conditions. Only test local labs, staging systems, owned environments, or systems with written permission to assess. In-bounds targets must be defined before any probing begins."
+						"Penetration testing is an authorized defensive activity with explicit scope, approval, timing, and stop conditions. Only test local labs, staging systems, owned environments, or systems with written permission to assess. In-bounds targets must be defined before any probing begins."
 				},
 				{
 					title: "Build a Repeatable Defensive Test Plan",
@@ -906,12 +906,12 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Use AI to Draft Checks, Payload Variants, and Review Notes",
 					content:
-						"This section covers AI as a constrained assistant for defensive work: drafting test matrices, generating benign local payload variations, summarizing logs, suggesting follow-up checks, and helping write clearer triage or disclosure notes. Also learn the hard boundaries: never use AI as the final authority, never ask it to target unauthorized systems, never trust its security claims without local verification, and never let it replace a written scope or evidence trail."
+						"AI can be a constrained assistant for defensive work: drafting test matrices, generating benign local payload variations, summarizing logs, suggesting follow-up checks, and helping write clearer triage or disclosure notes. The hard boundaries remain explicit: never use AI as the final authority, never ask it to target unauthorized systems, never trust its security claims without local verification, and never let it replace a written scope or evidence trail."
 				},
 				{
 					title: "Ethics and Responsible Disclosure for Network Findings",
 					content:
-						"This section covers responsible disclosure as part of the engineering workflow: reproduce privately, minimize impact, document the vulnerable path, include evidence and reproduction notes, propose practical mitigations, and communicate within the agreed reporting channel. The goal is to normalize calm, precise handoff to maintainers instead of vague or harmful reporting behavior."
+						"Responsible disclosure is part of the engineering workflow: reproduce privately, minimize impact, document the vulnerable path, include evidence and reproduction notes, propose practical mitigations, and communicate within the agreed reporting channel. The expected handoff is calm, precise, and useful to maintainers instead of vague or harmful."
 				},
 				{
 					title: "Unit 12: Authorized Penetration Testing, AI-Assisted Workflow, and Disclosure: Core Project",

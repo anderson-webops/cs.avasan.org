@@ -2299,6 +2299,30 @@ describe("course text quality normalization", () => {
 		expect(corpus).toContain("Full Stack Web Lab 14: Implementation Lab");
 	});
 
+	it("keeps Network Security guidance specific and defensively scoped", async () => {
+		const course = await loadRawCourse("network-security");
+		expect(course).not.toBeNull();
+		const corpus = allCourseText(course);
+
+		expect(corpus).not.toMatch(/This section covers/i);
+		expect(corpus).not.toMatch(/Key idea:/i);
+		expect(corpus).not.toMatch(/Skill target:/i);
+		expect(corpus).not.toMatch(
+			/The goal is to recognize weak assumptions/i
+		);
+		expect(corpus).not.toMatch(/The goal is to normalize calm/i);
+		expect(corpus).toContain(
+			"Attack surface means every externally reachable input"
+		);
+		expect(corpus).toContain(
+			"TLS protects data in transit against interception and tampering"
+		);
+		expect(corpus).toContain(
+			"Penetration testing is an authorized defensive activity"
+		);
+		expect(corpus).toContain("never ask it to target unauthorized systems");
+	});
+
 	it("keeps Network Systems IPv6 projects distinct and clearly named", async () => {
 		const course = await loadRawCourse("network-systems");
 		expect(course).not.toBeNull();
