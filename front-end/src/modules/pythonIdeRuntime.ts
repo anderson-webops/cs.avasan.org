@@ -966,6 +966,15 @@ def _normalize_color(*values):
 
     return str(values[0]) if values else "black"
 
+def _looks_like_color(value):
+    if isinstance(value, str):
+        return True
+    try:
+        sequence = list(value)
+    except TypeError:
+        return False
+    return len(sequence) >= 3 and all(_is_number(part) for part in sequence[:3])
+
 def _set_color_mode(cmode=None):
     global _color_mode
     if cmode is None:
@@ -1212,6 +1221,9 @@ class Turtle:
     def width(self, width=None):
         return self.pensize(width)
 
+    def _default_dot_size(self):
+        return self._line_width + max(self._line_width, 4.0)
+
     def pencolor(self, *color):
         if len(color) == 0:
             return self._pen_color
@@ -1266,12 +1278,19 @@ class Turtle:
             self.left(turn)
         self.left(-half_turn)
 
-    def dot(self, size=8, color=None):
+    def dot(self, size=None, *color):
         self._sync_bridge()
-        if color is None:
-            _bridge.dot(float(size))
+        if len(color) == 0:
+            if _looks_like_color(size):
+                dot_size = self._default_dot_size()
+                dot_color = _normalize_color(size)
+            else:
+                dot_size = size or self._default_dot_size()
+                dot_color = self._pen_color
         else:
-            _bridge.dot(float(size), str(color))
+            dot_size = size or self._default_dot_size()
+            dot_color = _normalize_color(*color)
+        _bridge.dot(float(dot_size), str(dot_color))
 
     def stamp(self):
         self._sync_bridge()
@@ -1395,7 +1414,7 @@ def pencolor(*color): return _default.pencolor(*color)
 def fillcolor(*color): return _default.fillcolor(*color)
 def color(*colors): return _default.color(*colors)
 def circle(radius, *args, **kwargs): _default.circle(radius, *args, **kwargs)
-def dot(size=8, color=None): _default.dot(size, color)
+def dot(size=None, *color): _default.dot(size, *color)
 def stamp(): return _default.stamp()
 def write(text, *args, **kwargs): _default.write(text, *args, **kwargs)
 def clear(): _default.clear()

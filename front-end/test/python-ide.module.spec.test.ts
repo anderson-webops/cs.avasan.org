@@ -617,6 +617,42 @@ describe("python IDE project helpers", () => {
 		expect(circleSource).not.toContain("_bridge.circle(float(radius))");
 	});
 
+	it("supports standard Turtle dot size and color overloads", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+		const dotStart = runtimeSource.indexOf(
+			"    def dot(self, size=None, *color):"
+		);
+		const dotSource = runtimeSource.slice(
+			dotStart,
+			runtimeSource.indexOf("    def stamp(self):", dotStart)
+		);
+
+		expect(runtimeSource).toContain("def _looks_like_color(value):");
+		expect(runtimeSource).toContain(
+			"return len(sequence) >= 3 and all(_is_number(part) for part in sequence[:3])"
+		);
+		expect(runtimeSource).toContain("def _default_dot_size(self):");
+		expect(runtimeSource).toContain(
+			"return self._line_width + max(self._line_width, 4.0)"
+		);
+		expect(dotSource).toContain("if _looks_like_color(size):");
+		expect(dotSource).toContain("dot_size = self._default_dot_size()");
+		expect(dotSource).toContain("dot_color = _normalize_color(size)");
+		expect(dotSource).toContain(
+			"dot_size = size or self._default_dot_size()"
+		);
+		expect(dotSource).toContain("dot_color = _normalize_color(*color)");
+		expect(dotSource).toContain(
+			"_bridge.dot(float(dot_size), str(dot_color))"
+		);
+		expect(runtimeSource).toContain(
+			"def dot(size=None, *color): _default.dot(size, *color)"
+		);
+	});
+
 	it("renders the original Turtle built-in shapes with classic as default", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
