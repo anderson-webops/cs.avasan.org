@@ -198,15 +198,15 @@ describe("python IDE project helpers", () => {
 		expect(pythonIdeProjectToPayload(project).activeFileName).toBe(
 			"lesson.py"
 		);
-		expect(
-			resolvePythonIdeActiveFileName(project.files, "notes.md")
-		).toBe("notes.md");
+		expect(resolvePythonIdeActiveFileName(project.files, "notes.md")).toBe(
+			"notes.md"
+		);
 		expect(dataProject.activeFileName).toBe("scores.csv");
 
 		project.activeFileName = "missing.py";
-		expect(resolvePythonIdeActiveFileName(project.files, "missing.py")).toBe(
-			"lesson.py"
-		);
+		expect(
+			resolvePythonIdeActiveFileName(project.files, "missing.py")
+		).toBe("lesson.py");
 		expect(pythonIdeProjectToPayload(project).activeFileName).toBe(
 			"lesson.py"
 		);
@@ -720,6 +720,9 @@ describe("python IDE project helpers", () => {
 			"return Math.min(900, Math.max(16, distance * 5));"
 		);
 		expect(pageSource).toContain(
+			"const turtleAnimationInitialFrameCreditMs = 16"
+		);
+		expect(pageSource).toContain(
 			"const turtleInstantStepMaxDurationMs = 16"
 		);
 		expect(pageSource).toContain("const turtleInstantStepMaxDistance = 2");
@@ -730,6 +733,7 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain(
 			"step.durationMs <= turtleInstantStepMaxDurationMs"
 		);
+		expect(pageSource).toContain("!isVisibleTurtleTrailStep(step)");
 		expect(pageSource).toContain(
 			"turtleAnimationStepDistance(step) <= turtleInstantStepMaxDistance"
 		);
@@ -737,6 +741,11 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("function setTurtleVisiblePose");
 		expect(pageSource).toContain(
 			"markerPose = visibleTurtlePose(synchronizedTurtleID)"
+		);
+		expect(pageSource).toContain("Math.min(");
+		expect(pageSource).toContain("turtleAnimationInitialFrameCreditMs,");
+		expect(pageSource).toContain(
+			"activeTurtleAnimationStep?.durationMs ?? 0"
 		);
 		expect(pageSource).toContain(
 			"setTurtleVisiblePose(markerPose, step.turtleID)"
@@ -762,51 +771,64 @@ describe("python IDE project helpers", () => {
 		expect(markerSource).toContain("if (!pose.visible) return;");
 		expect(markerSource).not.toContain("drawTurtleMarkerTrailMask");
 		expect(pageSource).not.toContain("function drawTurtleMarkerTrailMask");
-		expect(markerSource.indexOf("context.translate(point.x, point.y)")).toBeLessThan(
+		expect(
+			markerSource.indexOf("context.translate(point.x, point.y)")
+		).toBeLessThan(
 			markerSource.indexOf("context.strokeStyle = pose.penColor")
 		);
 		expect(pageSource).toContain("const turtleMarkerHaloLineWidth = 4");
+		expect(pageSource).toContain("const turtleMarkerStrokeLineWidth = 1.2");
 		expect(pageSource).toContain(
-			"const turtleMarkerStrokeLineWidth = 1.2"
+			"context.strokeStyle = turtleState.background"
 		);
-		expect(pageSource).toContain("context.strokeStyle = turtleState.background");
-		expect(pageSource).toContain("context.lineWidth = turtleMarkerHaloLineWidth");
+		expect(pageSource).toContain(
+			"context.lineWidth = turtleMarkerHaloLineWidth"
+		);
 		expect(pageSource).toContain("context.fillStyle = markerColor");
-		expect(pageSource).toContain("context.lineWidth = turtleMarkerStrokeLineWidth");
+		expect(pageSource).toContain(
+			"context.lineWidth = turtleMarkerStrokeLineWidth"
+		);
 	});
 
-	it("keeps tiny Turtle steps frame-batched with the visible cursor", () => {
+	it("keeps visible Turtle trail steps out of instant batching", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
+		);
+		const instantStart = pageSource.indexOf(
+			"function isInstantTurtleAnimationStep"
+		);
+		const instantSource = pageSource.slice(
+			instantStart,
+			pageSource.indexOf(
+				"function isVisibleTurtleTrailStep",
+				instantStart
+			)
+		);
+		const flushStart = pageSource.indexOf(
+			"function flushInstantTurtleAnimationSteps"
+		);
+		const flushSource = pageSource.slice(
+			flushStart,
+			pageSource.indexOf("function scheduleTurtleAnimation", flushStart)
 		);
 
 		expect(pageSource).toContain(
 			"function flushInstantTurtleAnimationSteps"
 		);
-		expect(pageSource).toContain(
-			"let renderedActiveLineStep: TurtleAnimationStep | null = null;"
+		expect(instantSource).toContain("!isVisibleTurtleTrailStep(step)");
+		expect(pageSource).toContain("function isVisibleTurtleTrailStep");
+		expect(flushSource).toContain(
+			"consumedDistance < turtleInstantFrameDistanceBudget"
 		);
-		expect(pageSource).toContain(
-			"consumedDistance < frameDistanceBudget"
+		expect(flushSource).toContain(
+			"consumedSteps < turtleInstantFrameStepBudget"
 		);
-		expect(pageSource).toContain("consumedSteps < frameStepBudget");
-		expect(pageSource).toContain(
-			"setTurtleVisiblePose(markerPose, step.turtleID);"
+		expect(flushSource).toContain("completeTurtleAnimationStep(step);");
+		expect(flushSource).toContain(
+			"renderTurtleScene(markerPose, undefined, synchronizedTurtleID);"
 		);
-		expect(pageSource).toContain("renderedActiveLineStep = step;");
-		expect(pageSource).toContain(
-			"renderedActiveLineStep?.command"
-		);
-		expect(pageSource).toContain(
-			"? { command: renderedActiveLineStep.command, progress: 1 }"
-		);
-		expect(pageSource).toContain(
-			"if (renderedActiveLineStep)"
-		);
-		expect(pageSource).toContain(
-			"completeTurtleAnimationStep(renderedActiveLineStep);"
-		);
+		expect(flushSource).not.toContain("renderedActiveLineStep");
 		expect(pageSource).toContain("void scheduleTurtleAnimation();");
 	});
 
@@ -821,8 +843,12 @@ describe("python IDE project helpers", () => {
 		);
 
 		expect(runtimeSource).toContain("_turtle_counter = 0");
-		expect(runtimeSource).toContain("self._bridge_id = str(_turtle_counter)");
-		expect(runtimeSource).toContain('_bridge.activate(str(self._bridge_id))');
+		expect(runtimeSource).toContain(
+			"self._bridge_id = str(_turtle_counter)"
+		);
+		expect(runtimeSource).toContain(
+			"_bridge.activate(str(self._bridge_id))"
+		);
 		expect(runtimeSource).toContain("activate: (id: string) => void");
 		expect(runtimeSource).toContain("clearTurtle: () => void");
 		expect(runtimeSource).toContain("resetTurtle: () => void");
@@ -832,7 +858,9 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("interface TurtleCompletedCommand");
 		expect(pageSource).toContain("function activateTurtleState");
 		expect(pageSource).toContain("turtleStates.delete(defaultTurtleID)");
-		expect(pageSource).toContain("turtleID: step.turtleID ?? activeTurtleID");
+		expect(pageSource).toContain(
+			"turtleID: step.turtleID ?? activeTurtleID"
+		);
 		expect(pageSource).toContain(
 			"activeTurtleAnimationStep.turtleID === synchronizedTurtleID"
 		);
@@ -873,7 +901,9 @@ describe("python IDE project helpers", () => {
 		expect(turtleResetSource).toContain("_bridge.resetTurtle()");
 		expect(turtleResetSource).not.toContain("_bridge.reset()");
 		expect(pageSource).toContain("function cancelActiveTurtleDrawingSteps");
-		expect(pageSource).toContain("command => command.turtleID !== turtleID");
+		expect(pageSource).toContain(
+			"command => command.turtleID !== turtleID"
+		);
 		expect(pageSource).toContain("step => step.turtleID !== turtleID");
 		expect(pageSource).toContain("function clearActiveTurtleDrawing");
 		expect(pageSource).toContain("function resetActiveTurtle");
@@ -887,27 +917,37 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("renderTurtleScene();");
 	});
 
-	it("keeps visible Turtle trail batches small enough to stay attached to the marker", () => {
+	it("keeps visible Turtle trail movement on the synchronized animation path", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
+		const instantStart = pageSource.indexOf(
+			"function isInstantTurtleAnimationStep"
+		);
+		const instantSource = pageSource.slice(
+			instantStart,
+			pageSource.indexOf(
+				"function isVisibleTurtleTrailStep",
+				instantStart
+			)
+		);
+		const flushStart = pageSource.indexOf(
+			"function flushInstantTurtleAnimationSteps"
+		);
+		const flushSource = pageSource.slice(
+			flushStart,
+			pageSource.indexOf("function scheduleTurtleAnimation", flushStart)
+		);
 
-		expect(pageSource).toContain(
-			"const turtleVisibleTrailFrameDistanceBudget = 1"
-		);
-		expect(pageSource).toContain(
-			"const turtleVisibleTrailFrameStepBudget = 1"
-		);
 		expect(pageSource).toContain("function isVisibleTurtleTrailStep");
 		expect(pageSource).toContain('step.command?.kind === "line"');
-		expect(pageSource).toContain("const synchronizedTrailBatch =");
-		expect(pageSource).toContain(
-			"isVisibleTurtleTrailStep(activeTurtleAnimationStep) ==="
+		expect(instantSource).toContain("!isVisibleTurtleTrailStep(step)");
+		expect(flushSource).not.toContain("synchronizedTrailBatch");
+		expect(flushSource).not.toContain("renderedActiveLineStep");
+		expect(flushSource).toContain(
+			"renderTurtleScene(markerPose, undefined, synchronizedTurtleID);"
 		);
-		expect(pageSource).toContain("synchronizedTrailBatch &&");
-		expect(pageSource).toContain("consumedSteps < frameStepBudget");
-		expect(pageSource).toContain("consumedDistance < frameDistanceBudget");
 	});
 
 	it("redraws Turtle canvas resizes without resetting active drawings", () => {
@@ -1148,7 +1188,7 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("let activeGameBridgeRunID = 0;");
 		expect(pageSource).toContain("function invalidateGameBridgeRuns");
 		expect(pageSource).toContain(
-			"project.mode === \"pgzero\"\n\t\t\t\t\t? createGuardedGameBridgeRun()\n\t\t\t\t\t: gameBridge"
+			'project.mode === "pgzero"\n\t\t\t\t\t? createGuardedGameBridgeRun()\n\t\t\t\t\t: gameBridge'
 		);
 		expect(guardSource).toContain("const runID = ++activeGameBridgeRunID;");
 		expect(guardSource).toContain(
@@ -1156,7 +1196,7 @@ describe("python IDE project helpers", () => {
 		);
 		expect(guardSource).toContain("if (!isActiveRun()) return;");
 		expect(guardSource).toContain(
-			"return isActiveRun() ? gameBridge.popEventsJson() : \"\";"
+			'return isActiveRun() ? gameBridge.popEventsJson() : "";'
 		);
 		expect(guardSource).toContain(
 			"return isActiveRun() ? gameBridge.playTone(frequency, duration) : 0;"
@@ -1169,9 +1209,7 @@ describe("python IDE project helpers", () => {
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
-		const startGameLoopStart = pageSource.indexOf(
-			"function startGameLoop"
-		);
+		const startGameLoopStart = pageSource.indexOf("function startGameLoop");
 		const startGameLoopSource = pageSource.slice(
 			startGameLoopStart,
 			pageSource.indexOf("function drawGameActor", startGameLoopStart)
@@ -1184,7 +1222,9 @@ describe("python IDE project helpers", () => {
 
 		expect(pageSource).toContain("let activeGameLoopID = 0;");
 		expect(stopGameLoopSource).toContain("activeGameLoopID += 1;");
-		expect(startGameLoopSource).toContain("const loopID = ++activeGameLoopID;");
+		expect(startGameLoopSource).toContain(
+			"const loopID = ++activeGameLoopID;"
+		);
 		expect(startGameLoopSource).toContain(
 			"const isActiveLoop = () => loopID === activeGameLoopID;"
 		);
@@ -1213,7 +1253,7 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("let activeTurtleBridgeRunID = 0;");
 		expect(pageSource).toContain("function invalidateTurtleBridgeRuns");
 		expect(pageSource).toContain(
-			"project.mode === \"turtle\"\n\t\t\t\t\t? createGuardedTurtleBridgeRun()\n\t\t\t\t\t: turtleBridge"
+			'project.mode === "turtle"\n\t\t\t\t\t? createGuardedTurtleBridgeRun()\n\t\t\t\t\t: turtleBridge'
 		);
 		expect(guardSource).toContain(
 			"const runID = ++activeTurtleBridgeRunID;"
@@ -1255,9 +1295,13 @@ describe("python IDE project helpers", () => {
 		);
 		expect(projectSwitchSource).toContain("stopRequested.value = true;");
 		expect(projectSwitchSource).toContain("stopActiveRuntimeSurfaces();");
-		expect(projectSwitchSource).toContain("releaseIdlePythonRuntimeCallbacks();");
+		expect(projectSwitchSource).toContain(
+			"releaseIdlePythonRuntimeCallbacks();"
+		);
 		expect(projectSwitchSource).toContain("stopRequested.value = false;");
-		expect(projectSwitchSource).toContain("void nextTick(resetActiveCanvas);");
+		expect(projectSwitchSource).toContain(
+			"void nextTick(resetActiveCanvas);"
+		);
 		expect(resetGameCanvasSource).toContain("stopGameLoop();");
 	});
 
@@ -1278,14 +1322,19 @@ describe("python IDE project helpers", () => {
 		);
 		const getGameImageEntrySource = pageSource.slice(
 			getGameImageEntryStart,
-			pageSource.indexOf("function courseAssetSize", getGameImageEntryStart)
+			pageSource.indexOf(
+				"function courseAssetSize",
+				getGameImageEntryStart
+			)
 		);
 
 		expect(resetGameCanvasSource).not.toContain("gameImageCache.clear()");
 		expect(getGameImageEntrySource).toContain(
 			"if (cached?.src === src) return cached;"
 		);
-		expect(getGameImageEntrySource).toContain("gameImageCache.set(asset.key, entry);");
+		expect(getGameImageEntrySource).toContain(
+			"gameImageCache.set(asset.key, entry);"
+		);
 	});
 
 	it("runs plain Python projects in a terminable Pyodide worker", () => {
@@ -1380,7 +1429,10 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("ide-grid--drawing");
 		const gameFrameStart = pageSource.indexOf(".canvas-frame--game");
 		const gameCanvasStart = pageSource.indexOf(".turtle-canvas--game");
-		const gameFrameSource = pageSource.slice(gameFrameStart, gameCanvasStart);
+		const gameFrameSource = pageSource.slice(
+			gameFrameStart,
+			gameCanvasStart
+		);
 		const gameCanvasSource = pageSource.slice(
 			gameCanvasStart,
 			pageSource.indexOf(".artifact-list", gameCanvasStart)
@@ -1395,7 +1447,9 @@ describe("python IDE project helpers", () => {
 		expect(gameCanvasSource).toContain("height: 100%;");
 		expect(gameCanvasSource).not.toContain("height: auto;");
 		expect(gameCanvasSource).not.toContain("aspect-ratio:");
-		expect(pageSource).toContain(".turtle-canvas:not(.turtle-canvas--game)");
+		expect(pageSource).toContain(
+			".turtle-canvas:not(.turtle-canvas--game)"
+		);
 	});
 
 	it("keeps PyGame Zero actor angles anticlockwise like Pygame Zero", () => {
@@ -1411,9 +1465,15 @@ describe("python IDE project helpers", () => {
 			pageSource.indexOf("function drawGameLine", imageStart)
 		);
 
-		expect(actorSource).toContain("context.rotate((-angle * Math.PI) / 180);");
-		expect(imageSource).toContain("context.rotate((-angle * Math.PI) / 180);");
-		expect(pageSource).not.toContain("context.rotate((angle * Math.PI) / 180);");
+		expect(actorSource).toContain(
+			"context.rotate((-angle * Math.PI) / 180);"
+		);
+		expect(imageSource).toContain(
+			"context.rotate((-angle * Math.PI) / 180);"
+		);
+		expect(pageSource).not.toContain(
+			"context.rotate((angle * Math.PI) / 180);"
+		);
 	});
 
 	it("keeps Streamlit dashboard widget helpers wired in the runtime shim", () => {
@@ -1489,9 +1549,7 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain(
 			'import { pythonStandardLibraryModules } from "@/modules/pythonStandardLibraryModules";'
 		);
-		expect(runtimeSource).toContain(
-			"standardLibraryModules: Set<string>"
-		);
+		expect(runtimeSource).toContain("standardLibraryModules: Set<string>");
 		expect(runtimeSource).toContain(
 			"!standardLibraryModules.has(moduleName)"
 		);
@@ -1507,23 +1565,19 @@ describe("python IDE project helpers", () => {
 		expect(workerSource).toContain(
 			'import { pythonStandardLibraryModules } from "@/modules/pythonStandardLibraryModules";'
 		);
-		expect(workerSource).toContain(
-			"standardLibraryModules: Set<string>"
-		);
+		expect(workerSource).toContain("standardLibraryModules: Set<string>");
 		expect(workerSource).toContain(
 			"!standardLibraryModules.has(moduleName)"
 		);
 		expect(workerSource).toContain(
 			"const modules = plainPythonPackageScanModules("
 		);
-		expect(workerSource).toContain(
-			"files,\n\t\tstandardLibraryModules"
-		);
+		expect(workerSource).toContain("files,\n\t\tstandardLibraryModules");
 	});
 
 	it("loads the standard-library module list from Pyodide once", async () => {
-		const runPython = vi.fn(
-			() => JSON.stringify(["csv", "json", "math", "random"])
+		const runPython = vi.fn(() =>
+			JSON.stringify(["csv", "json", "math", "random"])
 		);
 		const pyodide = { runPython };
 
@@ -1535,9 +1589,7 @@ describe("python IDE project helpers", () => {
 		);
 
 		expect(runPython).toHaveBeenCalledTimes(1);
-		expect(runPython.mock.calls[0]?.[0]).toContain(
-			"stdlib_module_names"
-		);
+		expect(runPython.mock.calls[0]?.[0]).toContain("stdlib_module_names");
 	});
 
 	it("extracts multiple top-level import modules for runtime package setup", () => {
@@ -1558,7 +1610,7 @@ describe("python IDE project helpers", () => {
 						"    keras",
 						"from keras import Sequential",
 						'"""',
-						"import csv # a comment with \"\"\" should not open a string"
+						'import csv # a comment with """ should not open a string'
 					].join("\n")
 				},
 				{
@@ -1838,10 +1890,15 @@ describe("python IDE project helpers", () => {
 		const setProjectsStart = pageSource.indexOf("function setProjects");
 		const setProjectsSource = pageSource.slice(
 			setProjectsStart,
-			pageSource.indexOf("async function persistLocalProjects", setProjectsStart)
+			pageSource.indexOf(
+				"async function persistLocalProjects",
+				setProjectsStart
+			)
 		);
 
-		expect(setProjectsSource).toContain("projects.value = nextProjects.map");
+		expect(setProjectsSource).toContain(
+			"projects.value = nextProjects.map"
+		);
 		expect(setProjectsSource).toContain(
 			"activeFileName: resolvePythonIdeActiveFileName("
 		);
@@ -2395,7 +2452,7 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("if left is right:");
 		expect(runtimeSource).toContain("return left == right");
 		expect(runtimeSource).toContain(
-			"if not _same_callback(entry[\"function\"], function)"
+			'if not _same_callback(entry["function"], function)'
 		);
 		expect(pageSource).toContain("backgroundGradient: string | null;");
 		expect(pageSource).toContain("function gameCanvasFillStyle");
@@ -2413,6 +2470,9 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain(
 			'self.anchor = kwargs.pop("anchor", self._anchor)'
 		);
+		expect(runtimeSource).toContain("def _apply_rect(self, rect):");
+		expect(runtimeSource).toContain("self.width = rect.width");
+		expect(runtimeSource).toContain("self.left = rect.left");
 		expect(runtimeSource).toContain(
 			"def _anchor_component(self, value, axis):"
 		);
@@ -2423,6 +2483,18 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("float(self._anchor_x()),");
 		expect(runtimeSource).toContain("def topleft(self):");
 		expect(runtimeSource).toContain("def midbottom(self):");
+		expect(runtimeSource).toContain("def move_ip(self, x, y=None):");
+		expect(runtimeSource).toContain(
+			"return self._apply_rect(self.move(x, y))"
+		);
+		expect(runtimeSource).toContain("def inflate_ip(self, width, height):");
+		expect(runtimeSource).toContain("def scale_by_ip(self, *args):");
+		expect(runtimeSource).toContain("def clamp_ip(self, other):");
+		expect(runtimeSource).toContain("def unionall_ip(self, rects):");
+		expect(runtimeSource).toContain("def normalize(self):");
+		expect(runtimeSource).toContain("rect.normalize()");
+		expect(runtimeSource).toContain("def __iter__(self):");
+		expect(runtimeSource).toContain("return iter(self._rect())");
 		expect(runtimeSource).toContain("def move_ip(self, x, y=None):");
 		expect(runtimeSource).toContain("def _rect_parts_from_args(args):");
 		expect(runtimeSource).toContain('if hasattr(value, "rect"):');
@@ -2456,9 +2528,7 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("def clamp_ip(self, other):");
 		expect(runtimeSource).toContain("self.centerx = outer.centerx");
 		expect(runtimeSource).toContain("def clip(self, other):");
-		expect(runtimeSource).toContain(
-			"return self._new(left, top, 0, 0)"
-		);
+		expect(runtimeSource).toContain("return self._new(left, top, 0, 0)");
 		expect(runtimeSource).toContain(
 			"return self._new(left, top, right - left, bottom - top)"
 		);
@@ -2584,7 +2654,9 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("const left = -anchorX");
 		expect(pageSource).toContain("drawLine: drawGameLine");
 		expect(pageSource).toContain("drawCircle: drawGameCircle");
-		expect(pageSource).toContain("function playGameSound(name: string, loops = 0)");
+		expect(pageSource).toContain(
+			"function playGameSound(name: string, loops = 0)"
+		);
 		expect(pageSource).toContain("const repeatCount = Math.max(");
 		expect(pageSource).toContain(
 			"Math.trunc(Number.isFinite(loops) ? loops : 0)"
@@ -2592,9 +2664,7 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("repeatCount < 0");
 		expect(pageSource).toContain("let remainingLoops = repeatCount;");
 		expect(pageSource).toContain("remainingLoops -= 1;");
-		expect(pageSource).toContain(
-			"playSound(name: string, loops?: number)"
-		);
+		expect(pageSource).toContain("playSound(name: string, loops?: number)");
 		expect(pageSource).toContain("gameBridge.playSound(name, loops)");
 		expect(pageSource).toContain("lineWidth = 1");
 		expect(pageSource).toContain(

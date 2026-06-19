@@ -2295,6 +2295,14 @@ class Actor:
     def _rect(self):
         return Rect(self.left, self.top, self.width, self.height)
 
+    def _apply_rect(self, rect):
+        rect = Rect(rect)
+        self.width = rect.width
+        self.height = rect.height
+        self.left = rect.left
+        self.top = rect.top
+        return None
+
     def _target_position(self, target):
         if hasattr(target, "pos"):
             return _point(target.pos, self.pos)
@@ -2314,6 +2322,68 @@ class Actor:
                 float(self._anchor_x()),
                 float(self._anchor_y()),
             )
+
+    def copy(self):
+        return self._rect()
+
+    def move(self, x, y=None):
+        return self._rect().move(x, y)
+
+    def move_ip(self, x, y=None):
+        return self._apply_rect(self.move(x, y))
+
+    def inflate(self, width, height):
+        return self._rect().inflate(width, height)
+
+    def inflate_ip(self, width, height):
+        return self._apply_rect(self.inflate(width, height))
+
+    def scale_by(self, *args):
+        return self._rect().scale_by(*args)
+
+    def scale_by_ip(self, *args):
+        return self._apply_rect(self.scale_by(*args))
+
+    def update(self, *args):
+        return self._apply_rect(Rect(*args))
+
+    def clamp(self, other):
+        return self._rect().clamp(other)
+
+    def clamp_ip(self, other):
+        return self._apply_rect(self.clamp(other))
+
+    def clip(self, other):
+        return self._rect().clip(other)
+
+    def union(self, other):
+        return self._rect().union(other)
+
+    def union_ip(self, other):
+        return self._apply_rect(self.union(other))
+
+    def unionall(self, rects):
+        return self._rect().unionall(rects)
+
+    def unionall_ip(self, rects):
+        return self._apply_rect(self.unionall(rects))
+
+    def fit(self, other):
+        return self._rect().fit(other)
+
+    def normalize(self):
+        rect = self._rect()
+        rect.normalize()
+        return self._apply_rect(rect)
+
+    def __iter__(self):
+        return iter(self._rect())
+
+    def __getitem__(self, index):
+        return self._rect()[index]
+
+    def __bool__(self):
+        return bool(self._rect())
 
     def collidepoint(self, *args):
         return self._rect().collidepoint(*args)
