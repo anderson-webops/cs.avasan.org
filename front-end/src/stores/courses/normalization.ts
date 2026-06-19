@@ -5690,11 +5690,11 @@ function diagnosticSupport(context: CourseTextContext) {
 	const readiness = compact(
 		variantPrompt(context, [
 			subject =>
-				`This is a formative check for ${subject} in ${focus}, not a pass/fail quiz. An independent attempt comes first, then the result identifies whether the issue is ${diagnosticCategories(context)}.`,
+				`This is a formative check for ${subject} in ${focus}, not a pass/fail quiz. In ${subject}, the independent attempt comes first, then the result identifies whether the issue is ${diagnosticCategories(context)}.`,
 			subject =>
 				`${subject} checks readiness for ${focus}. The first pass is independent, then any gap is classified as ${diagnosticCategories(context)}.`,
 			subject =>
-				`${subject} checks whether the core idea is ready for transfer. An independent attempt comes first; the evidence identifies whether the next step is vocabulary, tracing, syntax, design, or testing support.`,
+				`${subject} checks whether the core idea is ready for transfer. The ${subject} independent attempt comes first; the evidence identifies whether the next step is vocabulary, tracing, syntax, design, or testing support.`,
 			subject =>
 				`${subject} is a low-stakes checkpoint: solve what is possible first, then identify the smallest missing piece before harder work.`,
 			subject =>
@@ -6617,11 +6617,16 @@ function studioSupport(context: CourseTextContext) {
 		);
 	const compactScopedStudio = (text: string) =>
 		compactStudioSupportText(text, "", studioReference);
+	const pathTitle =
+		`${itemTitle} ${context.item.projectLink ?? ""}`.toLowerCase();
+	const pathSubject =
+		compactStudioContextTitle(scopedSubject || itemTitle || moduleTitle) ||
+		(supportNoun === "lab" ? "the lab task" : "the studio task");
 	const studioFocus = variantPrompt(context, [
 		() =>
 			`For ${studioReference}, define the artifact, prerequisite concepts, success criteria, and evidence before adding polish.`,
 		() =>
-			`Name the ${studioReference} minimum working version first, then add extensions only after the required behavior is testable.`,
+			`For ${pathSubject}, name the minimum working version first, then add extensions only after the required behavior is testable.`,
 		() =>
 			`Frame ${studioReference} around one observable result, the constraints that shape it, and the evidence that proves it works.`,
 		() =>
@@ -6629,7 +6634,7 @@ function studioSupport(context: CourseTextContext) {
 		() =>
 			`Build the smallest complete version of ${studioReference} first, then record evidence that shows it meets the activity requirements.`,
 		() =>
-			`Use ${studioReference} to connect prerequisite ideas to a concrete result, a testable constraint, and a visible review point.`,
+			`${pathSubject} connects prerequisite ideas to a concrete result, a testable constraint, and a visible review point.`,
 		() =>
 			`Define ${studioReference} by its required behavior, verification evidence, likely edge case, and final explanation target.`,
 		() =>
@@ -6651,11 +6656,6 @@ function studioSupport(context: CourseTextContext) {
 		"",
 		studioReference
 	);
-	const pathTitle =
-		`${itemTitle} ${context.item.projectLink ?? ""}`.toLowerCase();
-	const pathSubject =
-		compactStudioContextTitle(scopedSubject || itemTitle || moduleTitle) ||
-		(supportNoun === "lab" ? "the lab task" : "the studio task");
 	const studioPath = (() => {
 		if (pathTitle.includes("build requirements")) {
 			return `Build path for ${pathSubject}: define the required parts, connect them into one runnable artifact, and verify the complete path rather than isolated pieces.`;

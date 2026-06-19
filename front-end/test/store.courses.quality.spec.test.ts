@@ -520,6 +520,18 @@ describe("course text quality normalization", () => {
 				"Check the expected path, a boundary path, and one case that would expose a vague method contract."
 			);
 			expect(corpus).not.toContain(
+				"Add implementation details in slices that keep errors tied to one field, constructor, method, branch, or list operation."
+			);
+			expect(corpus).not.toContain(
+				"Check a normal run, a boundary run, and one run that tests how Java references or objects behave."
+			);
+			expect(corpus).not.toContain(
+				"Implement the smallest visible slice first, then add validation, layout, or persistence behavior with browser checks."
+			);
+			expect(corpus).not.toContain(
+				"Confirm the result after refresh, at another viewport width, and with one invalid or incomplete interaction."
+			);
+			expect(corpus).not.toContain(
 				"Change one API, allocation, loop, branch, build setting, or diagnostic hook at a time."
 			);
 			expect(corpus).not.toContain(
@@ -530,6 +542,12 @@ describe("course text quality normalization", () => {
 			);
 			expect(corpus).not.toContain(
 				"Record normal behavior, abnormal or boundary behavior, and the low-level clue that explains the difference."
+			);
+			expect(corpus).not.toContain(
+				"Build the core run first, then add one diagnostic, error path, or data-structure detail at a time."
+			);
+			expect(corpus).not.toContain(
+				"Verify the intended behavior plus one boundary case using terminal, debugger, sanitizer, trace, or log evidence."
 			);
 			expect(corpus).toMatch(
 				/Build a minimal runnable [^.\n]+ version, then add the Java feature that matters for this module/
@@ -545,6 +563,18 @@ describe("course text quality normalization", () => {
 			);
 			expect(corpus).toMatch(
 				/Finish [^.\n]+ with a repeatable run plus one trace, warning, sanitizer result, debugger observation, or timing clue/
+			);
+			expect(corpus).toMatch(
+				/Add [^.\n]+ implementation details in slices that keep errors tied to one field, constructor, method, branch, or list operation/
+			);
+			expect(corpus).toMatch(
+				/Implement the smallest visible [^.\n]+ slice first, then add validation, layout, or persistence behavior with browser checks/
+			);
+			expect(corpus).toMatch(
+				/Recheck [^.\n]+ after refresh, at another viewport width, and with one invalid or incomplete interaction/
+			);
+			expect(corpus).toMatch(
+				/Build the core [^.\n]+ run first, then add one diagnostic, error path, or data-structure detail at a time/
 			);
 			expect(corpus).toContain(
 				"The page or app shows the expected state change, output, validation, or canvas behavior"
@@ -707,6 +737,21 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/The first pass makes the rule or model visible for Java type design with objects, fields, methods, collection choices, public APIs, and compile-run feedback/i
 			);
+			expect(corpus).not.toContain(
+				"An independent attempt comes first; the evidence identifies whether the next step is vocabulary, tracing, syntax, design, or testing support."
+			);
+			expect(corpus).not.toContain(
+				"**Studio focus:** Name the lab minimum working version first, then add extensions only after the required behavior is testable."
+			);
+			expect(corpus).not.toContain(
+				"**Studio focus:** For the lab, name the minimum working version first, then add extensions only after the required behavior is testable."
+			);
+			expect(corpus).not.toContain(
+				"**Studio focus:** Use the lab to connect prerequisite ideas to a concrete result, a testable constraint, and a visible review point."
+			);
+			expect(corpus).not.toContain(
+				"**Studio focus:** The lab connects prerequisite ideas to a concrete result, a testable constraint, and a visible review point."
+			);
 			expect(corpus).not.toMatch(/the work should be able to describe/i);
 			expect(corpus).not.toMatch(
 				/turn the prompt into a concrete artifact/i
@@ -796,6 +841,15 @@ describe("course text quality normalization", () => {
 			);
 			expect(corpus).toMatch(
 				/\*\*Extension:\*\* Add a second [^.\n]+ metric, comparison, or visualization and explain what it changes/
+			);
+			expect(corpus).toMatch(
+				/The [^.\n]+ independent attempt comes first; the evidence identifies whether the next step is vocabulary, tracing, syntax, design, or testing support/
+			);
+			expect(corpus).toMatch(
+				/\*\*Studio focus:\*\* For (?!the lab\b)[^.\n]+, name the minimum working version first, then add extensions only after the required behavior is testable/
+			);
+			expect(corpus).toMatch(
+				/\*\*Studio focus:\*\* (?!The lab\b)[^.\n]+ connects prerequisite ideas to a concrete result, a testable constraint, and a visible review point/
 			);
 		},
 		COURSE_SWEEP_TIMEOUT

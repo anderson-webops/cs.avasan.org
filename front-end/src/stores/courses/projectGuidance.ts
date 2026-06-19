@@ -1178,8 +1178,8 @@ function requiredWorkSteps(
 			],
 			[
 				`Define the ${moduleTitle} user experience: input path, visible response, error handling, and final screen state.`,
-				`Implement the smallest visible slice first, then add validation, layout, or persistence behavior with browser checks.`,
-				`Confirm the result after refresh, at another viewport width, and with one invalid or incomplete interaction.`
+				`Implement the smallest visible ${moduleTitle} slice first, then add validation, layout, or persistence behavior with browser checks.`,
+				`Recheck ${moduleTitle} after refresh, at another viewport width, and with one invalid or incomplete interaction.`
 			]
 		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
@@ -1284,8 +1284,8 @@ function requiredWorkSteps(
 			],
 			[
 				`Start ${subject} by separating data representation, behavior, and driver code.`,
-				`Add implementation details in slices that keep errors tied to one field, constructor, method, branch, or list operation.`,
-				`Check a normal run, a boundary run, and one run that tests how Java references or objects behave.`
+				`Add ${subject} implementation details in slices that keep errors tied to one field, constructor, method, branch, or list operation.`,
+				`Check a normal ${subject} run, a boundary run, and one run that tests how Java references or objects behave.`
 			],
 			[
 				`Write the ${subject} API expectation first: what can be called, what changes state, and what gets returned or printed.`,
@@ -1439,8 +1439,8 @@ function requiredWorkSteps(
 			],
 			[
 				`State the ${moduleTitle} source files, command, input fixture, resource ownership, and expected output before implementation.`,
-				`Build the core run first, then add one diagnostic, error path, or data-structure detail at a time.`,
-				`Verify the intended behavior plus one boundary case using terminal, debugger, sanitizer, trace, or log evidence.`
+				`Build the core ${moduleTitle} run first, then add one diagnostic, error path, or data-structure detail at a time.`,
+				`Verify the intended ${moduleTitle} behavior plus one boundary case using terminal, debugger, sanitizer, trace, or log evidence.`
 			],
 			[
 				`Describe the ${moduleTitle} runtime contract: what enters, what changes, what resource is owned, and what output proves success.`,
