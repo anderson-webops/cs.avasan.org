@@ -2149,6 +2149,7 @@ function clearGameCanvas(color = gameState.background) {
 }
 
 function resetGameCanvas(width = 640, height = 400) {
+	stopGameLoop();
 	keyHandlers.clear();
 	gameKeysDown.clear();
 	gameEvents.length = 0;
@@ -3414,6 +3415,13 @@ watch(
 );
 
 watch(selectedProjectID, () => {
+	const hadPythonRunInFlight = isRunning.value;
+	stopRequested.value = true;
+	stopActiveRuntimeSurfaces();
+	if (!hadPythonRunInFlight) {
+		releaseIdlePythonRuntimeCallbacks();
+		stopRequested.value = false;
+	}
 	void nextTick(resetActiveCanvas);
 });
 

@@ -822,6 +822,37 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("stopActiveRuntimeSurfaces();");
 	});
 
+	it("stops active IDE runtime surfaces when the selected project changes", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const projectSwitchStart = pageSource.indexOf(
+			"watch(selectedProjectID"
+		);
+		const projectSwitchSource = pageSource.slice(
+			projectSwitchStart,
+			pageSource.indexOf("watch(", projectSwitchStart + 1)
+		);
+		const resetGameCanvasStart = pageSource.indexOf(
+			"function resetGameCanvas"
+		);
+		const resetGameCanvasSource = pageSource.slice(
+			resetGameCanvasStart,
+			pageSource.indexOf("function stopGameLoop", resetGameCanvasStart)
+		);
+
+		expect(projectSwitchSource).toContain(
+			"const hadPythonRunInFlight = isRunning.value;"
+		);
+		expect(projectSwitchSource).toContain("stopRequested.value = true;");
+		expect(projectSwitchSource).toContain("stopActiveRuntimeSurfaces();");
+		expect(projectSwitchSource).toContain("releaseIdlePythonRuntimeCallbacks();");
+		expect(projectSwitchSource).toContain("stopRequested.value = false;");
+		expect(projectSwitchSource).toContain("void nextTick(resetActiveCanvas);");
+		expect(resetGameCanvasSource).toContain("stopGameLoop();");
+	});
+
 	it("runs plain Python projects in a terminable Pyodide worker", () => {
 		const runtimeSource = readFileSync(
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
