@@ -56,7 +56,7 @@ export const usacoGoldCourse: RawCourse = {
 					title: "Why Did the Cow Cross the Road III",
 					content: buildProjectGuidance({
 						courseFamily: "USACO",
-						moduleTitle: "USG0 Setup and Gold Mindset",
+						moduleTitle: "Why Did the Cow Cross the Road III",
 						projectKind: "core",
 						hasReference: true
 					}),
@@ -69,7 +69,7 @@ export const usacoGoldCourse: RawCourse = {
 					title: "Snow Boots",
 					content: buildProjectGuidance({
 						courseFamily: "USACO",
-						moduleTitle: "USG0 Setup and Gold Mindset",
+						moduleTitle: "Snow Boots",
 						projectKind: "core",
 						hasReference: true
 					}),

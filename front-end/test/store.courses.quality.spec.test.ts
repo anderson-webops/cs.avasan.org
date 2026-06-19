@@ -352,7 +352,7 @@ describe("course text quality normalization", () => {
 				"Build the web development applied challenge for **JSM1 Fundamentals Review** as a browser-visible feature with clear state, interaction, and error-handling evidence"
 			);
 			expect(corpus).toContain(
-				"Solve the USACO implementation checkpoint for **USB0 Setup and Contest Workflow** with exact input/output behavior, a traceable invariant, and evidence from sample plus custom cases"
+				"Solve the USACO Bronze implementation checkpoint for **USB0 Setup and Contest Workflow** with exact input/output behavior, a traceable invariant, and evidence from sample plus custom cases"
 			);
 			expect(corpus).toContain(
 				"Turn **Images and Sprites** into a core build checkpoint with a reproducible run, visible diagnostics, and a named success condition"
@@ -973,6 +973,126 @@ describe("course text quality normalization", () => {
 				"utf8"
 			)
 		).not.toContain('courseFamily: "implementation"');
+	});
+
+	it("keeps USACO setup problem cards distinct from setup workflow prompts", async () => {
+		const setupModules = [
+			{
+				courseId: "usaco-bronze",
+				moduleTitle: "USB0 Setup and Contest Workflow",
+				items: [
+					{
+						title: "Core Project: Setup and Contest Workflow",
+						subject: "USB0 Setup and Contest Workflow"
+					},
+					{
+						title: "UB 23 Why Did the Cow Cross the Road II Java",
+						subject: "UB 23 Why Did the Cow Cross the Road II Java"
+					},
+					{
+						title: "UB 24 Why Did the Cow Cross the Road III Java",
+						subject: "UB 24 Why Did the Cow Cross the Road III Java"
+					}
+				]
+			},
+			{
+				courseId: "usaco-silver",
+				moduleTitle: "USS0 Setup and Silver Transition",
+				items: [
+					{
+						title: "Core Project: Setup and Silver Transition",
+						subject: "USS0 Setup and Silver Transition"
+					},
+					{
+						title: "Why Did the Cow Cross the Road III",
+						subject: "Why Did the Cow Cross the Road III"
+					},
+					{
+						title: "Paired Up",
+						subject: "Paired Up"
+					}
+				]
+			},
+			{
+				courseId: "usaco-gold",
+				moduleTitle: "USG0 Setup and Gold Mindset",
+				items: [
+					{
+						title: "Core Project: Setup and Gold Mindset",
+						subject: "USG0 Setup and Gold Mindset"
+					},
+					{
+						title: "Why Did the Cow Cross the Road III",
+						subject: "Why Did the Cow Cross the Road III"
+					},
+					{
+						title: "Snow Boots",
+						subject: "Snow Boots"
+					}
+				]
+			}
+		];
+
+		for (const setupModule of setupModules) {
+			const course = await loadRawCourse(setupModule.courseId);
+			expect(course, setupModule.courseId).not.toBeNull();
+			if (!course) continue;
+
+			const module = course.modules.find(
+				module => module.title === setupModule.moduleTitle
+			);
+			expect(module, setupModule.moduleTitle).toBeTruthy();
+			if (!module) continue;
+
+			const moduleItems = [
+				...module.curriculum,
+				...module.supplementalProjects
+			];
+			const contents = setupModule.items.map(({ title, subject }) => {
+				const item = moduleItems.find(item => item.title === title);
+				expect(item, `${setupModule.courseId}: ${title}`).toBeTruthy();
+				expect(item?.content, `${setupModule.courseId}: ${title}`).toContain(
+					`**${subject}**`
+				);
+
+				return item?.content ?? "";
+			});
+
+			expect(
+				new Set(contents),
+				`${setupModule.courseId} setup project prompts`
+			).toHaveProperty("size", contents.length);
+		}
+	});
+
+	it("keeps generated USACO project prompts unique across tiers and problem cards", async () => {
+		const generatedPrompts = new Map<string, string[]>();
+
+		for (const courseId of ["usaco-bronze", "usaco-silver", "usaco-gold"]) {
+			const course = await loadRawCourse(courseId);
+			expect(course, courseId).not.toBeNull();
+			if (!course) continue;
+
+			for (const module of course.modules) {
+				for (const item of [
+					...module.curriculum,
+					...module.supplementalProjects
+				]) {
+					const content = item.content.replace(/\s+/g, " ").trim();
+					if (!content.startsWith("**Goal:**")) continue;
+
+					const entries = generatedPrompts.get(content) ?? [];
+					entries.push(`${courseId} > ${module.title} > ${item.title}`);
+					generatedPrompts.set(content, entries);
+				}
+			}
+		}
+
+		const duplicateGroups = [...generatedPrompts.values()].filter(
+			entries => entries.length > 1
+		);
+
+		expect(duplicateGroups).toEqual([]);
 	});
 
 	it("keeps older JavaScript and Python project prompts from collapsing to one-line tasks", async () => {

@@ -56,7 +56,8 @@ export const usacoBronzeCourse: RawCourse = {
 					title: "UB 23 Why Did the Cow Cross the Road II Java",
 					content: buildProjectGuidance({
 						courseFamily: "USACO",
-						moduleTitle: "USB0 Setup and Contest Workflow",
+						moduleTitle:
+							"UB 23 Why Did the Cow Cross the Road II Java",
 						projectKind: "core",
 						hasReference: true
 					}),
@@ -69,7 +70,8 @@ export const usacoBronzeCourse: RawCourse = {
 					title: "UB 24 Why Did the Cow Cross the Road III Java",
 					content: buildProjectGuidance({
 						courseFamily: "USACO",
-						moduleTitle: "USB0 Setup and Contest Workflow",
+						moduleTitle:
+							"UB 24 Why Did the Cow Cross the Road III Java",
 						projectKind: "core",
 						hasReference: true
 					}),

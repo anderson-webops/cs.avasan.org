@@ -56,7 +56,7 @@ export const usacoSilverCourse: RawCourse = {
 					title: "Why Did the Cow Cross the Road III",
 					content: buildProjectGuidance({
 						courseFamily: "USACO",
-						moduleTitle: "USS0 Setup and Silver Transition",
+						moduleTitle: "Why Did the Cow Cross the Road III",
 						projectKind: "core",
 						hasReference: true
 					}),
@@ -69,7 +69,7 @@ export const usacoSilverCourse: RawCourse = {
 					title: "Paired Up",
 					content: buildProjectGuidance({
 						courseFamily: "USACO",
-						moduleTitle: "USS0 Setup and Silver Transition",
+						moduleTitle: "Paired Up",
 						projectKind: "core",
 						hasReference: true
 					}),

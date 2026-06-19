@@ -1,5 +1,6 @@
 import type { RawCourse, RawCourseModule, RawCourseModuleItem } from "./types";
 import { applyCourseImplementationArtifacts } from "./course-implementation-artifacts";
+import { buildProjectGuidance } from "./projectGuidance";
 import { applyResearchBackedExpansions } from "./research-expansions";
 
 const INSTRUCTION_MATERIAL_BASE = "https://github.com/instruction-material";
@@ -7147,6 +7148,77 @@ function normalizeRustSystemsSecurity(course: RawCourse) {
 	});
 }
 
+function usacoCourseFamily(courseId: string) {
+	const labels: Record<string, string> = {
+		"usaco-bronze": "USACO Bronze",
+		"usaco-silver": "USACO Silver",
+		"usaco-gold": "USACO Gold"
+	};
+
+	return labels[courseId] ?? "USACO";
+}
+
+function usacoSupplementalSubject(itemTitle: string) {
+	return cleanTitleText(itemTitle)
+		.replace(/^Problem:\s*/i, "")
+		.replace(
+			/\bSupplemental\s+([2-4]):\s*Implementation Lab$/i,
+			(_match: string, number: string) => supplementalPurposeLabel(number)
+		);
+}
+
+function usacoSupplementalProjectKind(itemTitle: string) {
+	return /transfer|extension|challenge|supplemental\s+[2-4]/i.test(itemTitle)
+		? "extension"
+		: "core";
+}
+
+function usacoProjectSubject(
+	module: RawCourseModule,
+	item: RawCourseModuleItem,
+	section: "curriculum" | "supplementalProjects"
+) {
+	if (section === "supplementalProjects")
+		return usacoSupplementalSubject(item.title);
+
+	const implementationLabMatch = module.title.match(
+		/^(.+?):\s*Implementation Lab$/i
+	);
+	if (implementationLabMatch) return implementationLabMatch[1].trim();
+
+	return cleanTitleText(item.title)
+		.replace(/^Core Project:\s*/i, "")
+		.replace(/:\s*Core Project$/i, "")
+		.replace(/:\s*Extension Challenge$/i, "")
+		.replace(/^Extension Challenge:\s*/i, "");
+}
+
+function normalizeUsacoProjectGuidance(course: RawCourse, courseId: string) {
+	if (!courseId.startsWith("usaco-")) return;
+
+	for (const module of course.modules) {
+		for (const section of ["curriculum", "supplementalProjects"] as const) {
+			for (const item of module[section]) {
+				if (
+					!item.projectLink ||
+					!/^\*\*Project goal:\*\*/i.test(item.content)
+				) {
+					continue;
+				}
+
+				const subject = usacoProjectSubject(module, item, section);
+				item.content = buildProjectGuidance({
+					courseFamily: usacoCourseFamily(courseId),
+					moduleTitle: subject,
+					itemTitle: item.title,
+					projectKind: usacoSupplementalProjectKind(item.title),
+					hasReference: Boolean(item.solutionLink)
+				});
+			}
+		}
+	}
+}
+
 const normalizers: Record<string, (course: RawCourse) => void> = {
 	"ai-level-1": normalizeAiLevel1,
 	"algebra-1a": normalizeAlgebra1A,
@@ -7177,6 +7249,7 @@ export function normalizeRawCourse(id: string, rawCourse: RawCourse) {
 	normalizeModuleLessonShape(course);
 	applyResearchBackedExpansions(id, course);
 	applyCourseImplementationArtifacts(id, course);
+	normalizeUsacoProjectGuidance(course, id);
 	normalizeImplementationLabLanguage(course);
 	normalizeContextualItemTitles(course);
 	formatDenseProcedureInstructions(course);
