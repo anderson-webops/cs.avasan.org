@@ -1653,6 +1653,61 @@ describe("course text quality normalization", () => {
 		expect(new Set(checkpointBodies).size).toBe(checkpointBodies.length);
 	});
 
+	it("keeps Python standards and roadmap profiles level-specific", async () => {
+		const expectedPhrasesByCourse = new Map([
+			[
+				"python-level-1",
+				[
+					"turtle coordinates",
+					"Input, casting, and validation mini-lab",
+					"Beginner game capstone"
+				]
+			],
+			[
+				"python-level-2",
+				[
+					"collection choice",
+					"Text files, CSV-like rows",
+					"Data-backed capstone"
+				]
+			],
+			[
+				"python-level-3",
+				[
+					"algorithms and software-quality bridge",
+					"Runtime measurement and asymptotic reasoning",
+					"Object-oriented capstone"
+				]
+			]
+		]);
+		const sourceMapBodies: string[] = [];
+
+		for (const [courseId, expectedPhrases] of expectedPhrasesByCourse) {
+			const course = await loadRawCourse(courseId);
+			expect(course, courseId).not.toBeNull();
+			if (!course) continue;
+
+			const courseText = allCourseText(course);
+			for (const phrase of expectedPhrases) {
+				expect(courseText, `${courseId} should include ${phrase}`).toContain(
+					phrase
+				);
+			}
+
+			const standardsMap = course.modules.find(
+				module => module.title === "Standards Map"
+			);
+			expect(standardsMap, `${courseId} Standards Map`).toBeDefined();
+			const sourceMap = standardsMap?.curriculum.find(item =>
+				item.title.endsWith("Source Map")
+			);
+			expect(sourceMap, `${courseId} Source Map`).toBeDefined();
+			if (sourceMap) sourceMapBodies.push(sourceMap.content);
+		}
+
+		expect(new Set(sourceMapBodies).size).toBe(sourceMapBodies.length);
+	});
+
 	it("keeps JavaScript check-in supplemental practice level-specific", async () => {
 		const expectedByCourse = new Map([
 			[

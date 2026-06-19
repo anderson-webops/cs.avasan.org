@@ -644,6 +644,126 @@ const pythonProfile: ResearchExpansionProfile = {
 	]
 };
 
+const pythonLevel1Profile: ResearchExpansionProfile = {
+	...pythonProfile,
+	gaps: [
+		"Make beginner prompts explicit about expected input, visible output, and one custom test.",
+		"Keep turtle, drawing, and event projects connected to variables, loops, conditionals, and functions.",
+		"Add short debugging checkpoints for indentation, type conversion, off-by-one loops, and missing function calls."
+	],
+	topics: [
+		"Variables, numeric and string input, turtle coordinates, counted loops, random values, conditionals, functions, events, and simple lists.",
+		"Reading error messages, tracing loop variables, and checking small examples before adding graphics.",
+		"Clear separation between beginner core projects, remediation practice, optional art/game extensions, and final reflection."
+	],
+	moduleAdditions: [
+		"Turtle coordinate and loop-debugging lab.",
+		"Input, casting, and validation mini-lab.",
+		"Functions with drawing parameters.",
+		"Event-driven turtle interaction.",
+		"List-backed score or inventory project.",
+		"Beginner capstone with test notes and extension choices."
+	],
+	projectTypes: [
+		"Parameterized turtle drawing with two changed inputs.",
+		"Number guessing or quiz game with validation.",
+		"Click or keypress interaction that changes state.",
+		"Mini animation or drawing tool using functions.",
+		"Beginner game capstone with one list-backed feature."
+	],
+	assessments: [
+		"Trace a loop before running it.",
+		"Fix indentation, variable-name, and type-conversion mistakes.",
+		"Explain how one event changes program state.",
+		"Review the capstone for required behavior, one test case, and one extension."
+	],
+	materials: [
+		"Starter repos and turtle screenshots for core projects.",
+		"Small broken-code cards for syntax and logic debugging.",
+		"Input/output examples for prompts that use casting or randomness."
+	]
+};
+
+const pythonLevel2Profile: ResearchExpansionProfile = {
+	...pythonProfile,
+	gaps: [
+		"Strengthen console-project prompts with concrete inputs, outputs, edge cases, and extension paths.",
+		"Make collection choice explicit when a project uses lists, dictionaries, sets, or nested data.",
+		"Add more review material for file-backed data, validation, helper functions, and reusable program structure."
+	],
+	topics: [
+		"Functions, parameters, return values, lists, dictionaries, sets, nested collections, text processing, file input, and validation.",
+		"Choosing the right data representation before writing loops or helper functions.",
+		"Separating direct practice, changed-case practice, supplemental projects, and capstone expectations."
+	],
+	moduleAdditions: [
+		"Function testing and assertion lab.",
+		"Text files, CSV-like rows, and dictionary-backed lookup.",
+		"Nested data model for a small catalog or tracker.",
+		"Set operations and duplicate detection.",
+		"Command-line style utility with validation.",
+		"Data-backed capstone with clear input/output contract."
+	],
+	projectTypes: [
+		"Contact book or gradebook stored as dictionaries and lists.",
+		"Text analyzer with word frequencies and stop words.",
+		"Flashcard or quiz trainer with saved questions.",
+		"Data-cleaning challenge with missing or repeated records.",
+		"Collection-choice comparison project."
+	],
+	assessments: [
+		"Write helper-level tests for normal and edge cases.",
+		"Explain why a list, dictionary, or set fits a task.",
+		"Debug mutation, missing-key, empty-input, and repeated-data mistakes.",
+		"Review projects for input contract, output examples, organization, and explanation."
+	],
+	materials: [
+		"Starter repos and review prompts for every collection-heavy project.",
+		"TXT and CSV fixtures with normal, empty, repeated, and malformed records.",
+		"Small assertion examples that avoid requiring a full testing framework."
+	]
+};
+
+const pythonLevel3Profile: ResearchExpansionProfile = {
+	...pythonProfile,
+	gaps: [
+		"Treat Python Level 3 as an algorithms and software-quality bridge, not only a harder project list.",
+		"Require traces, runtimes, and boundary cases for recursion, stacks, searching, and sorting work.",
+		"Add stronger capstone expectations around file-backed data, maintainability, tests, and explanation."
+	],
+	topics: [
+		"Recursion, stacks, queues, searching, sorting, runtime reasoning, file I/O, data modeling, exceptions, modules, and object-oriented design.",
+		"Correctness arguments, benchmark or step-count evidence, and comparison between algorithm choices.",
+		"Preparing for Java, C++, data structures, or competitive programming through language-independent reasoning."
+	],
+	moduleAdditions: [
+		"Recursion trace and base-case lab.",
+		"Stack and queue problem set.",
+		"Search and sort comparison notebook or script.",
+		"Runtime measurement and asymptotic reasoning checkpoint.",
+		"File-backed algorithm project.",
+		"Object-oriented capstone with tests and design notes."
+	],
+	projectTypes: [
+		"Recursive puzzle solver with trace output.",
+		"Search benchmark over generated and file-backed data.",
+		"Sorting visualizer or logging harness.",
+		"Mini data-structure library with tests.",
+		"Object-oriented game or simulation model without graphics."
+	],
+	assessments: [
+		"Trace recursive calls and identify the base case.",
+		"Compare algorithm behavior on sorted, reversed, duplicate, empty, and missing-target inputs.",
+		"Explain runtime using step counts before formal notation.",
+		"Review the capstone for tests, data representation, complexity, and maintainability."
+	],
+	materials: [
+		"Starter repos with trace hooks for recursion and algorithms.",
+		"Benchmark datasets small enough for hand checking and large enough to show growth.",
+		"Rubrics for correctness, complexity explanation, tests, and code organization."
+	]
+};
+
 const pyGameProfile: ResearchExpansionProfile = {
 	family: "PyGame",
 	priority: "soon",
@@ -1769,9 +1889,9 @@ export const researchBackedExpansionProfiles: Record<
 	"network-systems": networkingProfile,
 	"physics-level-2": physicsProfile,
 	pygames: pyGameProfile,
-	"python-level-1": pythonProfile,
-	"python-level-2": pythonProfile,
-	"python-level-3": pythonProfile,
+	"python-level-1": pythonLevel1Profile,
+	"python-level-2": pythonLevel2Profile,
+	"python-level-3": pythonLevel3Profile,
 	"pythonic-design-patterns": designPatternsProfile,
 	"rust-systems-security": rustProfile,
 	"scratch-level-1": scratchProfile,
