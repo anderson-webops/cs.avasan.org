@@ -436,46 +436,46 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 			title: "PHY17 Numerical Modeling and Simulation Checks",
 			curriculum: [
 				{
-					title: "Concept Path",
+					title: "Numerical Model Concepts",
 					content:
-						"This module develops step-based updates, time-step sensitivity, conservation checks, and model validation. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
+						"Numerical modeling turns a physics relationship into repeated update rules. Track the state variables, choose a time step, calculate the next state, and compare the result with a conservation check or known limiting case. The main question is not whether the computer produced numbers; it is whether the step size, assumptions, and validation evidence make those numbers physically defensible."
 				},
 				{
-					title: "Model and Reasoning Toolkit",
+					title: "Simulation Reasoning Toolkit",
 					content:
-						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
+						"Start each simulation by naming the system, stored quantities, update equation, units, and stopping condition. Use a very small test case before trusting a longer run: constant velocity should stay linear, free fall should curve predictably, and total energy should only drift for a known reason. Record both the graph and one numerical check so errors in the loop, signs, or time step are visible."
 				},
 				{
 					title: "Worked Example Set",
 					content:
-						"Use examples from projectile motion with drag, iterative motion updates, and simulation-versus-ideal comparisons. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
+						"Use examples from projectile motion with drag, iterative motion updates, and simulation-versus-ideal comparisons. For each example, show the update rule, a small table or graph, the first few calculated steps, and the validation check that makes the output credible."
 				},
 				{
-					title: "Graph, Diagram, or Data Exercise",
+					title: "Time-Step Data Exercise",
 					content:
-						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+						"Run the same model with at least two time-step sizes and graph the results together. Look for divergence, artificial energy gain or loss, and places where a smooth path becomes jagged. The written conclusion should explain whether the model is stable enough for the question being asked, not simply which graph looks better."
 				},
 				{
-					title: "Mini Lab, Simulation, or Case Study",
+					title: "Simulation Case Study",
 					content:
-						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+						"Use a browser simulation, spreadsheet, or short Python notebook to model projectile drag, repeated acceleration updates, orbit-like motion, or another iterative system. Keep the case study remote-safe and evidence-based: include the update rule, sample rows or graph output, one validation check, and one reason the ideal model and corrected model differ."
 				},
 				{
-					title: "Reflection and Transfer Practice",
+					title: "Transfer Practice: Model Stability",
 					content:
-						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
+						"Transfer the simulation pattern to a new physical system by identifying which variables still update step by step and which assumptions change. A strong response names the most fragile assumption, explains how smaller steps or better data would test it, and distinguishes a numerical artifact from a real physical effect."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
+						"Check whether the update rule, time step, initial conditions, and validation target are stated before a simulation run is trusted. A strong checkpoint explains one conservation or limiting-case test that would catch a broken numerical model."
 				},
 				{
 					title: "Common Pitfalls",
 					content:
-						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific advanced physics model."
+						"Common pitfalls include trusting a long simulation without a small sanity test, choosing a time step that creates artificial behavior, and treating graph smoothness as proof that the physics is correct."
 				},
 				{
 					title: "Extension Project: Motion Model Comparison",
@@ -488,46 +488,46 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 			title: "PHY18 Experimental Uncertainty and Curve Fitting",
 			curriculum: [
 				{
-					title: "Concept Path",
+					title: "Uncertainty and Fit Concepts",
 					content:
-						"This module develops precision, systematic bias, residuals, slope meaning, and model fit quality. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
+						"Experimental uncertainty is part of the evidence, not a decoration added after the answer. Distinguish precision from accuracy, random scatter from systematic bias, and a good-looking trend from a justified model. Residuals, slope meaning, units, and fit quality all help decide what the data actually supports."
 				},
 				{
-					title: "Model and Reasoning Toolkit",
+					title: "Data Quality Toolkit",
 					content:
-						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
+						"Before fitting a curve, define the measured quantities, units, instrument resolution, expected relationship, and possible bias source. Then inspect the data visually before calculating. A fitted line or curve needs a physical interpretation: the slope, intercept, residual pattern, and outliers should all be explained in context."
 				},
 				{
 					title: "Worked Example Set",
 					content:
-						"Use examples from position-time, velocity-time, force-extension, current-voltage, and transformed-variable graphs. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
+						"Use examples from position-time, velocity-time, force-extension, current-voltage, and transformed-variable graphs. For each example, identify the measured variables, graph shape, fitted relationship, residual behavior, and physical meaning of the slope or intercept."
 				},
 				{
-					title: "Graph, Diagram, or Data Exercise",
+					title: "Residuals and Slope Exercise",
 					content:
-						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+						"Create a graph with labeled axes, a fitted relationship, and a residual check. Explain what the slope means physically, whether the intercept is meaningful or just a fitting artifact, and whether the residuals show random scatter or a pattern that the model missed."
 				},
 				{
-					title: "Mini Lab, Simulation, or Case Study",
+					title: "Measurement Case Study",
 					content:
-						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+						"Use provided data, a simulation export, a video measurement, or a spreadsheet dataset to make a claim with uncertainty attached. The final explanation should include the fitted model, the evidence for trusting or rejecting it, and one additional measurement that would most improve the conclusion."
 				},
 				{
-					title: "Reflection and Transfer Practice",
+					title: "Transfer Practice: Evidence Strength",
 					content:
-						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
+						"Apply the same uncertainty reasoning to a new dataset. State what the graph can prove, what it cannot prove, and how the conclusion changes if a suspected bias is real. The emphasis is on defensible evidence rather than producing a single polished equation."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
+						"Check whether the measurement units, precision, suspected bias, fit type, and residual pattern are named before drawing a conclusion. A strong checkpoint explains what the slope means and whether the data actually supports that model."
 				},
 				{
 					title: "Common Pitfalls",
 					content:
-						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific advanced physics model."
+						"Common pitfalls include reporting too many digits, ignoring systematic bias because the graph looks linear, treating correlation as a physics law, and skipping residuals that would reveal a poor fit."
 				},
 				{
 					title: "Extension Project: Measurement Audit",
@@ -540,46 +540,46 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 			title: "PHY19 Coupled Systems and Constraints",
 			curriculum: [
 				{
-					title: "Concept Path",
+					title: "Constraint Concepts",
 					content:
-						"This module develops connected motion, shared acceleration, tension assumptions, and constraint equations. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
+						"Coupled systems require reasoning about relationships between objects before solving equations. Shared acceleration, fixed string length, tension assumptions, rods, pulleys, and contact constraints all restrict what motion is possible. The model succeeds when the diagram, constraint statement, and algebra describe the same physical linkage."
 				},
 				{
-					title: "Model and Reasoning Toolkit",
+					title: "Constraint Reasoning Toolkit",
 					content:
-						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
+						"Name each object, force, idealization, and shared variable before writing equations. Then write the constraint in words and symbols: equal accelerations, opposite directions, fixed distance, rolling without slipping, or another relationship. Check that every equation follows from a diagram feature rather than from a memorized setup."
 				},
 				{
 					title: "Worked Example Set",
 					content:
-						"Use examples from pulleys, elevators, linked carts, friction pairs, rods, strings, and mechanical linkages. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
+						"Use examples from pulleys, elevators, linked carts, friction pairs, rods, strings, and mechanical linkages. For each example, draw the connected objects, state the constraint in words, translate it into equations, and check whether the assumed linkage is physically plausible."
 				},
 				{
-					title: "Graph, Diagram, or Data Exercise",
+					title: "Constraint Diagram Exercise",
 					content:
-						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+						"Draw a diagram or table that separates object-level forces from system-level constraints. The representation should show which quantities are shared, which directions are linked, and which assumptions would fail if a string stretches, a pulley has mass, or contact is lost."
 				},
 				{
-					title: "Mini Lab, Simulation, or Case Study",
+					title: "Coupled-System Case Study",
 					content:
-						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+						"Use a remote-safe simulation, diagram set, or paper design case to analyze a connected system. The final explanation should state the chosen system boundary, the constraint equation, the force model, and one realistic condition where the simplified constraint would stop working."
 				},
 				{
-					title: "Reflection and Transfer Practice",
+					title: "Transfer Practice: Changing Constraints",
 					content:
-						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
+						"Transfer the analysis to a related system with one changed constraint, such as a heavier pulley, slipping contact, elastic string, or added friction. Explain which equations survive, which must be rewritten, and what observation would reveal the change."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
+						"Check whether the system boundary, connected objects, shared variables, and idealized constraints are named before solving. A strong checkpoint explains why two accelerations, distances, or forces are linked rather than merely copying a pulley formula."
 				},
 				{
 					title: "Common Pitfalls",
 					content:
-						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific advanced physics model."
+						"Common pitfalls include assigning one tension value when the ideal-string assumption is not justified, mixing internal and external forces, and writing more equations without checking whether the constraints are independent."
 				},
 				{
 					title: "Extension Project: Connected System Constraint Map",
@@ -592,46 +592,46 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 			title: "PHY20 Fluids and Continuum Models",
 			curriculum: [
 				{
-					title: "Concept Path",
+					title: "Continuum Model Concepts",
 					content:
-						"This module develops continuum approximations, pressure, density, viscosity, flow rate, and model limits. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
+						"Fluid models treat many particles as a continuous material when the scale makes that approximation useful. Pressure, density, viscosity, flow rate, and boundary shape determine which model is reasonable. The important habit is naming when a continuum model is useful and when turbulence, compressibility, or material complexity makes it too simple."
 				},
 				{
-					title: "Model and Reasoning Toolkit",
+					title: "Fluid Reasoning Toolkit",
 					content:
-						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
+						"Define the fluid region, inlet and outlet conditions, pressure or height difference, flow assumptions, and relevant material properties. Use diagrams to show where pressure changes, where speed changes, and where energy or mass conservation is being applied. Keep units visible because flow, pressure, and density errors often hide inside conversions."
 				},
 				{
 					title: "Worked Example Set",
 					content:
-						"Use examples from pipes, nozzles, blood vessels, ducts, weather, water slides, and simplified wing models. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
+						"Use examples from pipes, nozzles, blood vessels, ducts, weather, water slides, and simplified wing models. For each example, label the control volume or flow path, name the pressure and flow variables, and decide which assumptions make the simplified fluid model usable."
 				},
 				{
-					title: "Graph, Diagram, or Data Exercise",
+					title: "Pressure and Flow Exercise",
 					content:
-						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+						"Represent a pipe, nozzle, duct, vessel, or flow path with a labeled diagram and a simple graph or table. The representation should connect geometry to pressure, speed, or flow-rate changes and identify where the model would be unreliable because of turbulence, leaks, changing viscosity, or poorly defined boundaries."
 				},
 				{
-					title: "Mini Lab, Simulation, or Case Study",
+					title: "Fluid Case Study",
 					content:
-						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+						"Use a simulation, provided data, video observation, or paper case such as a nozzle, wing analogy, blood-vessel model, water slide, or ventilation duct. The final explanation should state the continuum assumption, the key variables, the evidence source, and one condition that would force a more detailed model."
 				},
 				{
-					title: "Reflection and Transfer Practice",
+					title: "Transfer Practice: Model Domain",
 					content:
-						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
+						"Transfer the fluid model to a new scale or material and decide whether the same assumptions still apply. A strong response compares what stays conserved with what changes because of viscosity, turbulence, compressibility, or boundary shape."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
+						"Check whether the fluid region, density or pressure variables, flow assumptions, and model limits are stated before calculation. A strong checkpoint explains why a continuum model is acceptable for the case being analyzed."
 				},
 				{
 					title: "Common Pitfalls",
 					content:
-						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific advanced physics model."
+						"Common pitfalls include using a pipe-flow formula outside its assumptions, ignoring viscosity or turbulence, mixing pressure and force units, and treating density as constant when the situation does not justify it."
 				},
 				{
 					title: "Extension Project: Fluid System Case Study",
@@ -644,46 +644,46 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 			title: "PHY21 Thermodynamics and Engines",
 			curriculum: [
 				{
-					title: "Concept Path",
+					title: "Thermal System Concepts",
 					content:
-						"This module develops heat, work, internal energy, first-law accounting, efficiency, and irreversibility. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
+						"Thermodynamics tracks energy as heat, work, and internal energy across a defined system boundary. The first law is an accounting rule, but the physical interpretation depends on sign convention, process path, useful output, and irreversibility. Engines, refrigerators, and heat pumps make the bookkeeping concrete."
 				},
 				{
-					title: "Model and Reasoning Toolkit",
+					title: "Energy Accounting Toolkit",
 					content:
-						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
+						"Begin with a system boundary and an energy-flow diagram. Label heat entering or leaving, work done by or on the system, internal-energy change, and the process being approximated. Only then calculate efficiency, coefficient of performance, or energy balance; otherwise the signs and useful-output claims become guesswork."
 				},
 				{
 					title: "Worked Example Set",
 					content:
-						"Use examples from engines, refrigerators, heat pumps, power plants, human bodies, and energy-flow diagrams. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
+						"Use examples from engines, refrigerators, heat pumps, power plants, human bodies, and energy-flow diagrams. For each example, mark the system boundary, heat direction, work direction, internal-energy change, and useful-output definition before comparing efficiency or performance."
 				},
 				{
-					title: "Graph, Diagram, or Data Exercise",
+					title: "Energy Flow Exercise",
 					content:
-						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+						"Create an energy-flow diagram, process table, or simplified PV-style sketch for an engine, refrigerator, heat pump, power plant, or biological energy-transfer example. The representation should separate total energy accounting from useful output and name the loss or irreversible step."
 				},
 				{
-					title: "Mini Lab, Simulation, or Case Study",
+					title: "Thermal Case Study",
 					content:
-						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+						"Use a remote-safe simulation, provided data, product specification, or paper design case to compare heat, work, and efficiency. The final explanation should state the energy claim, the evidence used, the chosen sign convention, and one reason a real device cannot reach the ideal limit."
 				},
 				{
-					title: "Reflection and Transfer Practice",
+					title: "Transfer Practice: Useful Energy",
 					content:
-						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
+						"Transfer the accounting method to a different thermal device and decide what counts as useful output. Explain how the conclusion changes when the goal is heating, cooling, mechanical work, or electrical generation."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
+						"Check whether heat, work, internal-energy change, system boundary, and useful output are labeled before efficiency is calculated. A strong checkpoint explains the sign convention and why an ideal limit is not the same as a real device."
 				},
 				{
 					title: "Common Pitfalls",
 					content:
-						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific advanced physics model."
+						"Common pitfalls include treating heat as stored energy, reversing work signs, claiming lost energy disappeared, and comparing engines or refrigerators without first defining the useful output."
 				},
 				{
 					title: "Extension Project: Engine or Refrigerator Audit",
@@ -696,46 +696,46 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 			title: "PHY22 Electromagnetic Applications and Signals",
 			curriculum: [
 				{
-					title: "Concept Path",
+					title: "Signal and Sensor Concepts",
 					content:
-						"This module develops signals as changing physical quantities, sensors, transducers, noise, calibration, and filters. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
+						"Signals are changing physical quantities that become useful only after measurement, calibration, and interpretation. Sensors and transducers convert one kind of physical behavior into another, while noise and filtering shape what can be trusted. The physics question is how the signal relates to the real quantity, not just how to make a graph."
 				},
 				{
-					title: "Model and Reasoning Toolkit",
+					title: "Signal Reasoning Toolkit",
 					content:
-						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
+						"Identify the measured quantity, transducer mechanism, sampling pattern, calibration method, noise source, and expected signal shape. Compare raw and processed data before drawing conclusions. A useful model states what the sensor can resolve, what it averages away, and what failure mode could produce a misleading signal."
 				},
 				{
 					title: "Worked Example Set",
 					content:
-						"Use examples from microphones, speakers, thermistors, accelerometers, RC-style filtering, and noisy time-series graphs. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
+						"Use examples from microphones, speakers, thermistors, accelerometers, RC-style filtering, and noisy time-series graphs. For each example, trace the physical quantity through the transducer, calibration step, signal graph, and interpretation limit."
 				},
 				{
-					title: "Graph, Diagram, or Data Exercise",
+					title: "Noisy Signal Exercise",
 					content:
-						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+						"Plot a signal with noise, calibration points, or filtering applied. Explain which features represent the physical quantity and which are measurement artifacts. The exercise should compare at least two interpretations, such as raw peak value versus averaged trend or unfiltered noise versus smoothed signal."
 				},
 				{
-					title: "Mini Lab, Simulation, or Case Study",
+					title: "Sensor Case Study",
 					content:
-						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+						"Use a remote-safe data file, simulation, app sensor export, or device-spec case to analyze a signal. The final explanation should state the physical quantity, transducer or measurement method, calibration evidence, noise treatment, and one test that would reveal whether the sensor is trustworthy."
 				},
 				{
-					title: "Reflection and Transfer Practice",
+					title: "Transfer Practice: Measurement Trust",
 					content:
-						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
+						"Transfer the signal model to a different sensor or physical quantity. Decide what changes about calibration, sampling, noise, and interpretation, then name the evidence needed before the measurement can support a claim."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
+						"Check whether the measured quantity, transducer, sampling method, calibration evidence, and noise source are identified before interpreting a signal. A strong checkpoint explains which part of the graph is physical and which part may be measurement artifact."
 				},
 				{
 					title: "Common Pitfalls",
 					content:
-						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific advanced physics model."
+						"Common pitfalls include smoothing away real events, mistaking noise for a signal, trusting an uncalibrated sensor, and forgetting that a transducer can distort the quantity it is supposed to reveal."
 				},
 				{
 					title: "Extension Project: Sensor System Proposal",
@@ -748,46 +748,46 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 			title: "PHY23 Relativity and Reference Frames Preview",
 			curriculum: [
 				{
-					title: "Concept Path",
+					title: "Reference Frame Concepts",
 					content:
-						"This module develops reference frames, relative velocity, model domains, simultaneity previews, and practical time corrections. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
+						"Reference frames determine how position, velocity, time, and event order are described. Classical relative velocity works well at everyday speeds, but high-speed or high-precision cases require clearer domain limits and relativistic corrections. The aim is to see why a model can be accurate in one regime and incomplete in another."
 				},
 				{
-					title: "Model and Reasoning Toolkit",
+					title: "Frame Reasoning Toolkit",
 					content:
-						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
+						"State the observer frame before writing a velocity, time, or distance claim. Use event diagrams, frame labels, and domain notes to prevent accidental mixing of perspectives. When a correction is needed, explain the condition that makes the classical model insufficient rather than treating relativity as a disconnected formula set."
 				},
 				{
 					title: "Worked Example Set",
 					content:
-						"Use examples from passenger-car-road frames, high-speed limits, GPS timing, particle examples, and event diagrams. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
+						"Use examples from passenger-car-road frames, high-speed limits, GPS timing, particle examples, and event diagrams. For each example, label the observer frame, event order, classical expectation, correction trigger, and scale where the difference matters."
 				},
 				{
-					title: "Graph, Diagram, or Data Exercise",
+					title: "Event Diagram Exercise",
 					content:
-						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+						"Represent a passenger-car-road problem, GPS timing example, particle scenario, or light-signal case with labeled frames and events. The diagram should make clear which observer describes each quantity and where the classical description remains adequate or begins to fail."
 				},
 				{
-					title: "Mini Lab, Simulation, or Case Study",
+					title: "Relativity Case Study",
 					content:
-						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+						"Use a safe simulation, provided article excerpt, GPS timing example, or particle-physics case to compare classical and frame-aware reasoning. The final explanation should state the frame, the quantity being corrected, the evidence or scale that requires the correction, and one limitation of the simplified treatment."
 				},
 				{
-					title: "Reflection and Transfer Practice",
+					title: "Transfer Practice: Domain Limits",
 					content:
-						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
+						"Transfer the reference-frame reasoning to a new high-speed or high-precision example. State when the classical model is still useful, when it is not, and what scale of evidence would justify using a relativistic correction."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
+						"Check whether the observer frame, event labels, velocity claim, and domain limit are stated before applying a correction. A strong checkpoint explains why the classical frame description is adequate or why a relativistic preview is needed."
 				},
 				{
 					title: "Common Pitfalls",
 					content:
-						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific advanced physics model."
+						"Common pitfalls include mixing quantities from different frames, treating relativity as relevant at every everyday speed, and using a correction formula without naming the physical scale that makes the correction matter."
 				},
 				{
 					title: "Extension Project: Relativity Explainer",
@@ -800,46 +800,46 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 			title: "PHY24 Independent Physics Research Portfolio",
 			curriculum: [
 				{
-					title: "Concept Path",
+					title: "Research Portfolio Concepts",
 					content:
-						"This module develops focused research questions, source quality, model choice, evidence, limitations, and revision. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
+						"An independent physics portfolio begins with a focused question narrow enough to model and broad enough to matter. Source quality, model choice, evidence, limitations, and revision all shape the final claim. The final product should show how physics reasoning changed the question, not just collect facts about a topic."
 				},
 				{
-					title: "Model and Reasoning Toolkit",
+					title: "Research Reasoning Toolkit",
 					content:
-						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
+						"Define the system, physical quantities, model type, evidence source, and expected relationship before collecting material. Use formulas, diagrams, or simulations only when they answer the research question directly. Keep a revision log that records why the claim narrowed, changed, or became better supported."
 				},
 				{
 					title: "Worked Example Set",
 					content:
-						"Use examples from sports, rockets, music, climate, medicine, robotics, or electronics translated into physics questions. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
+						"Use examples from sports, rockets, music, climate, medicine, robotics, or electronics translated into physics questions. For each example, narrow the broad topic into a modelable question, identify the evidence source, and explain how the physics model supports or limits the claim."
 				},
 				{
-					title: "Graph, Diagram, or Data Exercise",
+					title: "Portfolio Evidence Exercise",
 					content:
-						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+						"Create one graph, diagram sequence, calculation table, or source-comparison chart that carries real evidence for the portfolio. The representation should make a physical relationship visible and include a note about uncertainty, model fit, or a limitation in the available source."
 				},
 				{
-					title: "Mini Lab, Simulation, or Case Study",
+					title: "Independent Case Study",
 					content:
-						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+						"Use a safe remote-friendly simulation, public dataset, article diagram, video observation, or paper design case tied to the chosen topic. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption that limits the conclusion."
 				},
 				{
-					title: "Reflection and Transfer Practice",
+					title: "Transfer Practice: Revising a Claim",
 					content:
-						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
+						"Finish by revising the portfolio claim after reviewing the evidence. State what became more precise, what remains uncertain, which assumption is most fragile, and what additional source or model would make the conclusion stronger."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
+						"Check whether the research question, source quality, physical quantities, model choice, and limitation are explicit before the portfolio is drafted. A strong checkpoint explains how the evidence narrows or revises the original claim."
 				},
 				{
 					title: "Common Pitfalls",
 					content:
-						"Common pitfalls include formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. A stronger explanation replaces the shortcut with a specific advanced physics model."
+						"Common pitfalls include choosing a topic too broad to model, collecting interesting facts without a physics question, using an unvetted source as evidence, and hiding uncertainty instead of using it to improve the final claim."
 				},
 				{
 					title: "Extension Project: Independent Physics Portfolio",

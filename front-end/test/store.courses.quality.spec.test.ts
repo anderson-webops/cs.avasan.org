@@ -4350,6 +4350,19 @@ describe("course text quality normalization", () => {
 		}
 
 		const physics2 = await loadRawCourse("physics-level-2");
+		const physics2Corpus = allCourseText(physics2);
+		expect(physics2Corpus).toContain(
+			"Numerical modeling turns a physics relationship into repeated update rules."
+		);
+		expect(physics2Corpus).toContain(
+			"Experimental uncertainty is part of the evidence, not a decoration added after the answer."
+		);
+		expect(physics2Corpus).toContain(
+			"Reference frames determine how position, velocity, time, and event order are described."
+		);
+		expect(physics2Corpus).toContain(
+			"An independent physics portfolio begins with a focused question narrow enough to model and broad enough to matter."
+		);
 		expect(
 			findItem(physics2!, /Common Pitfalls/, /Bernoulli-style reasoning/)
 				.content
