@@ -355,6 +355,9 @@ const turtleTurnStepDurationMs = turtleInstantStepMaxDurationMs;
 const turtleInstantStepMaxDistance = 2;
 const turtleInstantFrameDistanceBudget = 12;
 const turtleInstantFrameStepBudget = 24;
+const turtleBacklogFastForwardStepThreshold = 18;
+const turtleBacklogFrameDistanceBudget = 420;
+const turtleBacklogFrameStepBudget = 140;
 const turtleMarkerHaloLineWidth = 4;
 const turtleMarkerStrokeLineWidth = 1.2;
 const outputEntryTruncatedMessage =
@@ -2309,7 +2312,7 @@ function renderTurtleCommand(
 		const end = toCanvas(partialEnd.x, partialEnd.y);
 		context.strokeStyle = command.color;
 		context.lineWidth = command.width;
-		context.lineCap = activeLineEnd ? "butt" : "round";
+		context.lineCap = "butt";
 		context.lineJoin = "round";
 		context.beginPath();
 		context.moveTo(start.x, start.y);
@@ -2429,6 +2432,20 @@ function renderTurtleScene(
 	drawTurtleMarker(context, markerPose, toCanvas);
 }
 
+function turtleAnimationBacklogStepCount(turtleID: string) {
+	return (
+		(activeTurtleAnimationStep?.turtleID === turtleID ? 1 : 0) +
+		turtleQueuedSteps.filter(step => step.turtleID === turtleID).length
+	);
+}
+
+function shouldFastForwardTurtleBacklog(step: TurtleAnimationStep) {
+	return (
+		turtleAnimationBacklogStepCount(step.turtleID) >=
+		turtleBacklogFastForwardStepThreshold
+	);
+}
+
 function resolveActiveTurtleAnimation() {
 	resolveTurtleAnimation?.();
 	resolveTurtleAnimation = null;
@@ -2462,6 +2479,11 @@ function runTurtleAnimationFrame(timestamp: number) {
 		turtleAnimationFrame = null;
 		renderTurtleScene();
 		resolveActiveTurtleAnimation();
+		return;
+	}
+
+	if (shouldFastForwardTurtleBacklog(step)) {
+		flushBackloggedTurtleAnimationSteps(timestamp);
 		return;
 	}
 
@@ -2543,6 +2565,39 @@ function flushInstantTurtleAnimationSteps(timestamp: number) {
 		activeTurtleAnimationStep.turtleID === synchronizedTurtleID &&
 		consumedSteps < turtleInstantFrameStepBudget &&
 		(consumedDistance < turtleInstantFrameDistanceBudget ||
+			consumedSteps === 0)
+	) {
+		const step = activeTurtleAnimationStep;
+		markerPose = step.toPose;
+		completeTurtleAnimationStep(step);
+		consumedDistance += turtleAnimationStepDistance(step);
+		consumedSteps += 1;
+		activeTurtleAnimationStep = turtleQueuedSteps.shift() ?? null;
+		turtleAnimationStepStartedAt = timestamp;
+	}
+
+	renderTurtleScene(markerPose, undefined, synchronizedTurtleID);
+	if (!activeTurtleAnimationStep && turtleQueuedSteps.length === 0) {
+		turtleAnimationFrame = null;
+		resolveActiveTurtleAnimation();
+		return;
+	}
+
+	turtleAnimationFrame = requestAnimationFrame(runTurtleAnimationFrame);
+}
+
+function flushBackloggedTurtleAnimationSteps(timestamp: number) {
+	let consumedDistance = 0;
+	let consumedSteps = 0;
+	const synchronizedTurtleID =
+		activeTurtleAnimationStep?.turtleID ?? activeTurtleID;
+	let markerPose = visibleTurtlePose(synchronizedTurtleID);
+
+	while (
+		activeTurtleAnimationStep &&
+		activeTurtleAnimationStep.turtleID === synchronizedTurtleID &&
+		consumedSteps < turtleBacklogFrameStepBudget &&
+		(consumedDistance < turtleBacklogFrameDistanceBudget ||
 			consumedSteps === 0)
 	) {
 		const step = activeTurtleAnimationStep;

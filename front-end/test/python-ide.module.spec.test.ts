@@ -587,9 +587,7 @@ describe("python IDE project helpers", () => {
 			"activeLineEnd?: { x: number; y: number }"
 		);
 		expect(renderCommandSource).toContain("activeLineEnd ??");
-		expect(renderCommandSource).toContain(
-			'context.lineCap = activeLineEnd ? "butt" : "round";'
-		);
+		expect(renderCommandSource).toContain('context.lineCap = "butt";');
 		expect(renderSceneSource).toContain(
 			'activeCommand.command.kind === "line"'
 		);
@@ -1089,6 +1087,70 @@ describe("python IDE project helpers", () => {
 		expect(flushSource).not.toContain("renderedActiveLineStep");
 		expect(flushSource).toContain(
 			"renderTurtleScene(markerPose, undefined, synchronizedTurtleID);"
+		);
+	});
+
+	it("fast-forwards stale Turtle animation backlog without making every line instant", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const backlogStart = pageSource.indexOf(
+			"function flushBackloggedTurtleAnimationSteps"
+		);
+		const backlogSource = pageSource.slice(
+			backlogStart,
+			pageSource.indexOf("function scheduleTurtleAnimation", backlogStart)
+		);
+		const runFrameStart = pageSource.indexOf(
+			"function runTurtleAnimationFrame"
+		);
+		const runFrameSource = pageSource.slice(
+			runFrameStart,
+			pageSource.indexOf(
+				"function isInstantTurtleAnimationStep",
+				runFrameStart
+			)
+		);
+		const lineCommandStart = pageSource.indexOf(
+			'if (command.kind === "line")'
+		);
+		const lineCommandSource = pageSource.slice(
+			lineCommandStart,
+			pageSource.indexOf("if (progress < 1) return;", lineCommandStart)
+		);
+
+		expect(pageSource).toContain(
+			"const turtleBacklogFastForwardStepThreshold = 18"
+		);
+		expect(pageSource).toContain(
+			"function shouldFastForwardTurtleBacklog"
+		);
+		expect(pageSource).toContain(
+			"function turtleAnimationBacklogStepCount"
+		);
+		expect(runFrameSource).toContain(
+			"if (shouldFastForwardTurtleBacklog(step))"
+		);
+		expect(runFrameSource.indexOf("shouldFastForwardTurtleBacklog")).toBeLessThan(
+			runFrameSource.indexOf("isInstantTurtleAnimationStep")
+		);
+		expect(backlogSource).toContain(
+			"activeTurtleAnimationStep.turtleID === synchronizedTurtleID"
+		);
+		expect(backlogSource).toContain(
+			"consumedSteps < turtleBacklogFrameStepBudget"
+		);
+		expect(backlogSource).toContain(
+			"consumedDistance < turtleBacklogFrameDistanceBudget"
+		);
+		expect(backlogSource).toContain("completeTurtleAnimationStep(step);");
+		expect(backlogSource).toContain(
+			"renderTurtleScene(markerPose, undefined, synchronizedTurtleID);"
+		);
+		expect(lineCommandSource).toContain('context.lineCap = "butt";');
+		expect(lineCommandSource).not.toContain(
+			'activeLineEnd ? "butt" : "round"'
 		);
 	});
 
