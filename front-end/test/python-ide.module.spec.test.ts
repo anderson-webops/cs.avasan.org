@@ -2366,6 +2366,12 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain(
 			"def schedule_unique(self, function, delay):"
 		);
+		expect(runtimeSource).toContain("def _same_callback(left, right):");
+		expect(runtimeSource).toContain("if left is right:");
+		expect(runtimeSource).toContain("return left == right");
+		expect(runtimeSource).toContain(
+			"if not _same_callback(entry[\"function\"], function)"
+		);
 		expect(runtimeSource).toContain("def distance_to(self, target):");
 		expect(runtimeSource).toContain("def angle_to(self, target):");
 		expect(runtimeSource).toContain("self._image = _image_name(image)");

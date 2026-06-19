@@ -1415,6 +1415,14 @@ _scheduled = []
 _animations = []
 _last_tick = None
 
+def _same_callback(left, right):
+    if left is right:
+        return True
+    try:
+        return left == right
+    except Exception:
+        return False
+
 def _number(value, fallback=0):
     try:
         return float(value)
@@ -2635,7 +2643,7 @@ class _Clock:
     def unschedule(self, function):
         _scheduled[:] = [
             entry for entry in _scheduled
-            if entry["function"] is not function
+            if not _same_callback(entry["function"], function)
         ]
 
 clock = _Clock()
