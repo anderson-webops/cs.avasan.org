@@ -1561,9 +1561,12 @@ def _tone_frequency(pitch):
     semitones = _tone_note_offsets[name] + ((octave - 4) * 12)
     return 440.0 * (2 ** (semitones / 12))
 
+def _image_name(image):
+    return str(getattr(image, "name", image))
+
 def _asset_size(image, fallback=(64, 64)):
     try:
-        raw_size = _bridge.imageSizeJson(str(image))
+        raw_size = _bridge.imageSizeJson(_image_name(image))
         size = json.loads(raw_size) if raw_size else {}
         width = _number(size.get("width"), fallback[0])
         height = _number(size.get("height"), fallback[1])
@@ -2037,7 +2040,7 @@ class ZRect(Rect):
 
 class Actor:
     def __init__(self, image, pos=None, **kwargs):
-        self._image = str(image)
+        self._image = _image_name(image)
         natural_width, natural_height = _asset_size(self.image)
         self._auto_width = "width" not in kwargs
         self._auto_height = "height" not in kwargs
@@ -2066,7 +2069,7 @@ class Actor:
 
     @image.setter
     def image(self, value):
-        self._image = str(value)
+        self._image = _image_name(value)
         if getattr(self, "_auto_width", False) or getattr(self, "_auto_height", False):
             natural_width, natural_height = _asset_size(self._image)
             if getattr(self, "_auto_width", False):
@@ -2581,7 +2584,7 @@ class _Screen:
         width, height = _asset_size(image)
         angle = _number(kwargs.get("angle", 0), 0)
         _bridge.drawImage(
-            str(image),
+            _image_name(image),
             float(_number(pos[0])),
             float(_number(pos[1])),
             float(width),

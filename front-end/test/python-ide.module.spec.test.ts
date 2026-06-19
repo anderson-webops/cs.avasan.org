@@ -2314,12 +2314,19 @@ describe("python IDE project helpers", () => {
 		);
 
 		expect(runtimeSource).toContain("def _asset_size(image");
+		expect(runtimeSource).toContain("def _image_name(image):");
+		expect(runtimeSource).toContain(
+			'return str(getattr(image, "name", image))'
+		);
 		expect(runtimeSource).toContain("builtins.images = images");
 		expect(runtimeSource).toContain("builtins.keymods = keymods");
 		expect(runtimeSource).toContain("builtins.Animation = Animation");
 		expect(runtimeSource).toContain("builtins.animate = animate");
 		expect(runtimeSource).toContain("builtins.tone = tone");
 		expect(runtimeSource).toContain("def blit(self, image, pos");
+		expect(runtimeSource).toContain(
+			"_bridge.drawImage(\n            _image_name(image),"
+		);
 		expect(runtimeSource).toContain("def bounds(self):");
 		expect(runtimeSource).toContain(
 			"def rect(self, rect, color, width=1):"
@@ -2346,6 +2353,8 @@ describe("python IDE project helpers", () => {
 		);
 		expect(runtimeSource).toContain("def distance_to(self, target):");
 		expect(runtimeSource).toContain("def angle_to(self, target):");
+		expect(runtimeSource).toContain("self._image = _image_name(image)");
+		expect(runtimeSource).toContain("self._image = _image_name(value)");
 		expect(runtimeSource).toContain(
 			'self.anchor = kwargs.pop("anchor", self._anchor)'
 		);
