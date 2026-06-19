@@ -1127,6 +1127,30 @@ describe("course text quality normalization", () => {
 		).not.toContain('courseFamily: "implementation"');
 	});
 
+	it("keeps C Systems lessons explanatory instead of scaffold-labeled", async () => {
+		const course = await loadRawCourse("c-systems-engineering");
+		const corpus = allCourseText(course);
+		const source = fs.readFileSync(
+			"src/stores/courses/c-systems-engineering.ts",
+			"utf8"
+		);
+
+		expect(corpus).toContain(
+			"C becomes useful for systems work once the source-file, object-file, and linked-program path is clear."
+		);
+		expect(corpus).toContain(
+			"Bitwise operators are data-shaping tools, not abstract truth tables alone."
+		);
+		expect(corpus).toContain(
+			"Heap allocation calls are explicit ownership decisions instead of generic ways to 'make more memory.'"
+		);
+		expect(source).not.toMatch(/This section covers/i);
+		expect(source).not.toMatch(/Key idea:/i);
+		expect(source).not.toMatch(/Skill target:/i);
+		expect(source).not.toMatch(/The goal is to/i);
+		expect(source).not.toMatch(/This project should/i);
+	});
+
 	it("keeps USACO setup problem cards distinct from setup workflow prompts", async () => {
 		const setupModules = [
 			{

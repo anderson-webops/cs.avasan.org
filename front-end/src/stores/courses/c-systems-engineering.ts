@@ -86,12 +86,12 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Translation Units, Compilation, and Linking",
 					content:
-						"This section covers C as a language that becomes useful once the source-file, object-file, and linked-program path is clear. The goal is not linker trivia for its own sake, but a grounded model of where declarations, definitions, and build artifacts live."
+						"C becomes useful for systems work once the source-file, object-file, and linked-program path is clear. Linking is not trivia for its own sake; it is the model that explains where declarations, definitions, and build artifacts live."
 				},
 				{
 					title: "Runtime Model Compared to Higher-Level Languages",
 					content:
-						"Compare C's runtime model to higher-level environments that hide allocation, object layout, and dispatch details. Key idea: C gives fewer automatic protections but a clearer view of data movement and memory representation, which is exactly why it is valuable for systems work."
+						"Compare C's runtime model to higher-level environments that hide allocation, object layout, and dispatch details. C gives fewer automatic protections but a clearer view of data movement and memory representation, which is exactly why it is valuable for systems work."
 				},
 				{
 					title: "Headers, Source Files, and Observable Build Boundaries",
@@ -161,7 +161,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Bits, Nibbles, Bytes, and Words",
 					content:
-						"This section covers binary representation at the physical grouping level first: bits form nibbles, nibbles form bytes, and bytes are the practical units that keep appearing in memory dumps and file formats. This removes the intimidation factor from later byte-level work."
+						"Binary representation starts with physical groupings: bits form nibbles, nibbles form bytes, and bytes are the practical units that keep appearing in memory dumps and file formats. This removes the intimidation factor from later byte-level work."
 				},
 				{
 					title: "Decimal, Binary, and Hex Conversions",
@@ -171,7 +171,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Signed vs Unsigned Integers and Two's Complement",
 					content:
-						"The same 16 bits can name one unsigned value and one signed value. Connect that idea to two's complement and the meaning of the top bit. Skill target: Explain signedness as an interpretation rule rather than as a different kind of memory."
+						"The same 16 bits can name one unsigned value and one signed value. Connect that idea to two's complement and the meaning of the top bit, then explain signedness as an interpretation rule rather than as a different kind of memory."
 				},
 				{
 					title: "Project: Hex and Binary Inspector",
@@ -229,7 +229,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "AND, OR, XOR, NOT, and Shifts",
 					content:
-						"This section covers the bitwise operators as data-shaping tools rather than as abstract truth tables alone. Key idea: What gets cleared with AND, what gets set with OR, what toggles with XOR, and why left and right shifts only make sense when they can describe the bit movement clearly."
+						"Bitwise operators are data-shaping tools, not abstract truth tables alone. Track what gets cleared with AND, what gets set with OR, what toggles with XOR, and why left and right shifts only make sense when they describe the bit movement clearly."
 				},
 				{
 					title: "Masking, Flag Extraction, and Bit Packing",
@@ -304,7 +304,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Addresses and Pointer Arithmetic",
 					content:
-						"Use arrays and pointer arithmetic to show that addresses move in element-sized steps rather than in vague 'next item' intuition. Skill target: Connect pointer movement directly to type size and memory layout."
+						"Use arrays and pointer arithmetic to show that addresses move in element-sized steps rather than in vague 'next item' intuition. Connect pointer movement directly to type size and memory layout."
 				},
 				{
 					title: "Stack vs Heap vs Static Storage",
@@ -314,7 +314,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Alignment, Padding, Arrays, and Struct Layout",
 					content:
-						"This section covers struct layout with `sizeof`, `offsetof`, and printed addresses so padding and alignment can be measured directly rather than treated as mysterious compiler behavior."
+						"Struct layout becomes measurable with `sizeof`, `offsetof`, and printed addresses. Padding and alignment are concrete layout decisions that can be observed directly rather than treated as mysterious compiler behavior."
 				},
 				{
 					title: "Project: Memory Visualizer for Arrays and Structs",
@@ -370,12 +370,12 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "C Strings vs Raw Byte Arrays",
 					content:
-						"This section covers C strings as one special convention built on top of bytes: a sequence terminated by `\\0`. Key idea: A byte buffer is not automatically a string and that treating arbitrary bytes like text is a fast path to truncated reads or misleading output."
+						"C strings are one special convention built on top of bytes: a sequence terminated by `\\0`. A byte buffer is not automatically a string, and treating arbitrary bytes like text is a fast path to truncated reads or misleading output."
 				},
 				{
 					title: "Length vs Capacity and Null Termination",
 					content:
-						"Separate the number of meaningful characters from the size of the allocated buffer. Skill target: Explain why a destination buffer needs capacity-aware copying and where the terminator ends up after a safe copy."
+						"Separate the number of meaningful characters from the size of the allocated buffer. Explain why a destination buffer needs capacity-aware copying and where the terminator ends up after a safe copy."
 				},
 				{
 					title: "Safe Copy Patterns and Byte Dumps",
@@ -436,7 +436,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "FILE Pointers, Buffered I O, and Binary vs Text Modes",
 					content:
-						"`FILE *` is the basic stream handle for structured reading and writing. Key idea: When text parsing is appropriate, when binary formats are more stable, and why checking return values matters more than assuming the file behaved as expected."
+						"`FILE *` is the basic stream handle for structured reading and writing. The important decisions are when text parsing is appropriate, when binary formats are more stable, and why checking return values matters more than assuming the file behaved as expected."
 				},
 				{
 					title: "Reading Structured Data One Field at a Time",
@@ -446,7 +446,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Checksums, Validation, and Parse Boundaries",
 					content:
-						"This section covers validation as part of parsing, not as an optional afterthought. Reject bad magic values, mismatched checksums, or truncated records before they start treating bytes as trustworthy data."
+						"Validation is part of parsing, not an optional afterthought. Reject bad magic values, mismatched checksums, or truncated records before treating bytes as trustworthy data."
 				},
 				{
 					title: "Project: Packet Serializer Deserializer",
@@ -511,7 +511,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "malloc, calloc, realloc, and free",
 					content:
-						"This section covers the heap allocation calls as explicit ownership decisions instead of as generic ways to 'make more memory.' Key idea: Which call zeroes memory, which one resizes an existing region, and why every successful allocation needs a clear path to cleanup."
+						"Heap allocation calls are explicit ownership decisions instead of generic ways to 'make more memory.' Track which call zeroes memory, which one resizes an existing region, and why every successful allocation needs a clear path to cleanup."
 				},
 				{
 					title: "Ownership and Lifetime Invariants",
@@ -521,7 +521,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Leaks, Double Frees, and Invalid Access",
 					content:
-						"Use small examples to show how heap bugs usually come from broken lifetime rules rather than from the allocator itself being mysterious. Skill target: Describe the failure in terms of ownership and cleanup instead of only saying the program crashed."
+						"Use small examples to show how heap bugs usually come from broken lifetime rules rather than from the allocator itself being mysterious. Describe each failure in terms of ownership and cleanup instead of only saying the program crashed."
 				},
 				{
 					title: "Project: Dynamic Ring Buffer",
@@ -577,7 +577,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Callbacks and Function Pointer Basics",
 					content:
-						"This section covers function pointers as stored behavior that lets one part of the program call another indirectly. The practical model is callbacks, handlers, and code selected by data rather than exotic syntax games."
+						"Function pointers are stored behavior: one part of the program can call another indirectly. The practical model is callbacks, handlers, and code selected by data rather than exotic syntax games."
 				},
 				{
 					title: "Dispatch Tables and State Machines",
@@ -652,12 +652,12 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Dynamic Arrays, Linked Lists, and Ring Buffers",
 					content:
-						"Compare the main beginner-friendly C data structures by the questions they answer well: contiguous storage, cheap appends, cheap front removal, or stable node insertion. Skill target: Justify the structure choice instead of treating every container as a generic list."
+						"Compare the main beginner-friendly C data structures by the questions they answer well: contiguous storage, cheap appends, cheap front removal, or stable node insertion. Justify the structure choice instead of treating every container as a generic list."
 				},
 				{
 					title: "Hash Tables at a Beginner-Friendly Level",
 					content:
-						"Hash tables can be viewed conceptually as key-to-slot mapping with collision handling, without turning the lesson into a full algorithm course. The goal is to show why systems tools often need fast lookup and what tradeoffs that introduces in C."
+						"Hash tables can be viewed conceptually as key-to-slot mapping with collision handling, without turning the lesson into a full algorithm course. Systems tools often need fast lookup, and C makes the storage, collision, and ownership tradeoffs visible."
 				},
 				{
 					title: "Data Structure Invariants Are Part of the Design",
@@ -803,7 +803,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Binary Inspection with objdump and nm",
 					content:
-						"`objdump` or `llvm-objdump` and `nm` inspect the built artifact itself. Key idea: Systems engineering includes observing the binary, not only the source, especially when symbols, sections, or compiled layout choices need confirmation."
+						"`objdump` or `llvm-objdump` and `nm` inspect the built artifact itself. Systems engineering includes observing the binary, not only the source, especially when symbols, sections, or compiled layout choices need confirmation."
 				},
 				{
 					title: "Tooling Pass on a Real Utility",
@@ -883,7 +883,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Project: Capstone Telemetry Transform CLI",
 					content:
-						"Use the capstone CLI to read structured telemetry input, validate ranges, apply fixed-point transforms, and write normalized output. This project should tie together representation, parsing, validation, numeric care, and low-level engineering habits in one small but defensible utility.",
+						"Use the capstone CLI to read structured telemetry input, validate ranges, apply fixed-point transforms, and write normalized output. This project ties together representation, parsing, validation, numeric care, and low-level engineering habits in one small but defensible utility.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE9-Capstone-Telemetry-Transform-CLI/starter",
 					solutionLink:
