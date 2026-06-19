@@ -2036,9 +2036,43 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("saveLocalProjectSnapshot();");
 		expect(pageSource).toContain("if (!autoSaveEnabled.value)");
 		expect(pageSource).toContain(
+			"await persistLocalProjects({ quiet: true });"
+		);
+		expect(pageSource).toContain(
+			'message: "Saved locally after sync issue"'
+		);
+		expect(pageSource).toContain(
 			'window.addEventListener("pagehide", flushPendingProjectSave);'
 		);
 		expect(pageSource).toContain("flushPendingProjectSave();");
+	});
+
+	it("persists CodeMirror view state across reloads and project ID migration", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain(
+			'const pythonIdeEditorViewStateStoragePrefix ='
+		);
+		expect(pageSource).toContain(
+			"function loadPersistedCodeEditorViewStates"
+		);
+		expect(pageSource).toContain("function persistCodeEditorViewStates");
+		expect(pageSource).toContain("function isCodeEditorViewState");
+		expect(pageSource).toContain(
+			'CodeEditorViewState["ranges"][number]'
+		);
+		expect(pageSource).toContain(
+			"loadPersistedCodeEditorViewStates(storageUserID.value);"
+		);
+		expect(pageSource).toContain(
+			"persistCodeEditorViewStates(storageUserID.value);"
+		);
+		expect(pageSource).toContain(
+			"migrateCodeEditorViewStates(startedProjectID, savedProject._id);"
+		);
 	});
 
 	it("normalizes loaded project active files before rendering or saving", () => {

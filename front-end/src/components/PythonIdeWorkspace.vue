@@ -346,6 +346,8 @@ const maxRuntimeArtifactTextLength = 500000;
 const maxRuntimeArtifactBase64Length = 1500000;
 const maxCodeEditorViewStates = 120;
 const pythonIdeAutoSaveStorageKey = "classes-python-ide-autosave";
+const pythonIdeEditorViewStateStoragePrefix =
+	"classes-python-ide-editor-view-state";
 const turtleAnimationInitialFrameCreditMs = 16;
 const turtleInstantStepMaxDurationMs = 16;
 const turtleTurnStepDurationMs = turtleInstantStepMaxDurationMs;
@@ -546,6 +548,65 @@ function persistPythonIdeAutoSavePreference(enabled: boolean) {
 		pythonIdeAutoSaveStorageKey,
 		enabled ? "on" : "off"
 	);
+}
+
+function codeEditorViewStateStorageKey(userID: string | null) {
+	return `${pythonIdeEditorViewStateStoragePrefix}:${userID ?? "guest"}`;
+}
+
+function isCodeEditorViewState(value: unknown): value is CodeEditorViewState {
+	if (!value || typeof value !== "object") return false;
+	const candidate = value as Partial<CodeEditorViewState>;
+	return (
+		Number.isInteger(candidate.mainIndex) &&
+		Number.isFinite(candidate.scrollLeft) &&
+		Number.isFinite(candidate.scrollTop) &&
+		Array.isArray(candidate.ranges) &&
+		candidate.ranges.every(range => {
+			const candidateRange = range as Partial<
+				CodeEditorViewState["ranges"][number]
+			>;
+			return (
+				Number.isInteger(candidateRange.anchor) &&
+				Number.isInteger(candidateRange.head)
+			);
+		})
+	);
+}
+
+function loadPersistedCodeEditorViewStates(userID: string | null) {
+	codeEditorViewStates.clear();
+	if (typeof window === "undefined") return;
+
+	try {
+		const raw = window.localStorage.getItem(
+			codeEditorViewStateStorageKey(userID)
+		);
+		if (!raw) return;
+		const parsed = JSON.parse(raw) as Array<[string, unknown]>;
+		if (!Array.isArray(parsed)) return;
+
+		for (const [key, state] of parsed) {
+			if (typeof key !== "string" || !isCodeEditorViewState(state))
+				continue;
+			codeEditorViewStates.set(key, state);
+			if (codeEditorViewStates.size >= maxCodeEditorViewStates) break;
+		}
+	} catch {
+		codeEditorViewStates.clear();
+	}
+}
+
+function persistCodeEditorViewStates(userID: string | null) {
+	if (typeof window === "undefined") return;
+	try {
+		window.localStorage.setItem(
+			codeEditorViewStateStorageKey(userID),
+			JSON.stringify([...codeEditorViewStates])
+		);
+	} catch (error) {
+		console.warn("Could not persist Python IDE editor view state.", error);
+	}
 }
 
 function releaseLoadedPythonRuntimeCallbacks(
@@ -1016,12 +1077,18 @@ function setProjects(nextProjects: PythonIdeProject[]) {
 		projectForRoute(projects.value)?._id ?? projects.value[0]?._id ?? "";
 }
 
-async function persistLocalProjects() {
+async function persistLocalProjects(
+	options: { message?: string; quiet?: boolean } = {}
+) {
 	try {
 		await saveLocalPythonProjectsAsync(projects.value, storageUserID.value);
-		saveMessage.value = canSyncToAccount.value
-			? "Saved locally after sync issue"
-			: "Saved locally";
+		if (!options.quiet) {
+			saveMessage.value =
+				options.message ??
+				(canSyncToAccount.value
+					? "Saved locally after sync issue"
+					: "Saved locally");
+		}
 	} catch (error) {
 		saveMessage.value =
 			error instanceof Error
@@ -1044,7 +1111,9 @@ async function syncProjectsToAccount(projectList: PythonIdeProject[]) {
 	return Promise.all(
 		projectList.map(project =>
 			project._id.startsWith("local-")
-				? createRemotePythonIdeProject(pythonIdeProjectToPayload(project))
+				? createRemotePythonIdeProject(
+						pythonIdeProjectToPayload(project)
+					)
 				: updateRemotePythonIdeProject(
 						project._id,
 						pythonIdeProjectToPayload(project)
@@ -1056,6 +1125,7 @@ async function syncProjectsToAccount(projectList: PythonIdeProject[]) {
 async function loadProjects() {
 	isLoading.value = true;
 	suppressAutoSave = true;
+	loadPersistedCodeEditorViewStates(storageUserID.value);
 	try {
 		if (canSyncToAccount.value) {
 			const remoteProjects = await fetchPythonIdeProjects();
@@ -1147,6 +1217,7 @@ async function saveSelectedProjectOnce() {
 			return;
 		}
 
+		await persistLocalProjects({ quiet: true });
 		const savedProject = startedProjectID.startsWith("local-")
 			? await createRemotePythonIdeProject(payload)
 			: await updateRemotePythonIdeProject(startedProjectID, payload);
@@ -1188,7 +1259,9 @@ async function saveSelectedProjectOnce() {
 		await clearLocalPythonProjectsAsync(storageUserID.value);
 		saveMessage.value = "Synced to account";
 	} catch (error) {
-		await persistLocalProjects();
+		await persistLocalProjects({
+			message: "Saved locally after sync issue"
+		});
 		appendOutput(
 			"system",
 			error instanceof Error
@@ -1380,9 +1453,11 @@ function saveCodeEditorViewState() {
 		scrollTop: codeEditorView.scrollDOM.scrollTop
 	});
 
-	if (codeEditorViewStates.size <= maxCodeEditorViewStates) return;
-	const oldestKey = codeEditorViewStates.keys().next().value;
-	if (oldestKey) codeEditorViewStates.delete(oldestKey);
+	if (codeEditorViewStates.size > maxCodeEditorViewStates) {
+		const oldestKey = codeEditorViewStates.keys().next().value;
+		if (oldestKey) codeEditorViewStates.delete(oldestKey);
+	}
+	persistCodeEditorViewStates(storageUserID.value);
 }
 
 function migrateCodeEditorViewStates(
@@ -1399,6 +1474,7 @@ function migrateCodeEditorViewStates(
 		if (activeCodeEditorViewStateKey === key)
 			activeCodeEditorViewStateKey = nextKey;
 	}
+	persistCodeEditorViewStates(storageUserID.value);
 }
 
 function clampCodeEditorPosition(position: number, docLength: number) {

@@ -722,7 +722,9 @@ function pythonIdeProjectSetUpdatedAt(projects: PythonIdeProject[]) {
 		const updatedAt = Date.parse(
 			project.updatedAt ?? project.createdAt ?? ""
 		);
-		return Number.isFinite(updatedAt) ? Math.max(latest, updatedAt) : latest;
+		return Number.isFinite(updatedAt)
+			? Math.max(latest, updatedAt)
+			: latest;
 	}, 0);
 }
 
