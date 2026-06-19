@@ -3893,6 +3893,12 @@ describe("course text quality normalization", () => {
 				"The activity should rely on accessible remote evidence"
 			);
 			expect(corpus).not.toContain(
+				"Any hands-on observation must be safe, simple, optional, and replaceable with an equivalent source."
+			);
+			expect(corpus).not.toContain(
+				"Record observations first, then build or annotate a model, and only then write the explanation."
+			);
+			expect(corpus).not.toContain(
 				"uses shared-screen materials, notes, paper, pencil, and"
 			);
 			expect(corpus).toMatch(

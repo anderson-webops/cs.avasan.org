@@ -5764,7 +5764,7 @@ function scienceSupport(context: CourseTextContext) {
 		subject =>
 			`${subject} can be completed with a notebook, pencil, and shared digital resources focused on ${topic}. If the ${band} example about ${topic} uses a physical demonstration, the required investigation still comes from data, diagrams, models, or simulations.`,
 		subject =>
-			`${subject} relies on accessible remote evidence: ${evidenceFormat}. Any hands-on observation must be safe, simple, optional, and replaceable with an equivalent source.`
+			`${subject} relies on accessible remote evidence: ${evidenceFormat}. If an optional observation is used, it stays simple and must be replaceable by the same evidence source named in the activity.`
 	]);
 	const output = variantPrompt(context, [
 		subject =>
@@ -5778,7 +5778,7 @@ function scienceSupport(context: CourseTextContext) {
 	]);
 	const scienceExplanation = variantPrompt(context, [
 		subject =>
-			`Anchor ${subject} in ${topic}. Record observations first, then build or annotate a model, and only then write the explanation.`,
+			`Anchor ${subject} in ${topic}. Start with the evidence record, add the model annotation, and finish by explaining what the model accounts for and what it leaves out.`,
 		subject =>
 			`Use ${subject} to connect the phenomenon, evidence source, model, and vocabulary for ${topic} before writing the final claim.`,
 		subject =>
