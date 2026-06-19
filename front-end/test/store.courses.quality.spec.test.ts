@@ -4398,6 +4398,25 @@ describe("course text quality normalization", () => {
 			/The introductory physics work does not require beakers, kits, or household materials; any physical demonstration can be replaced with evidence from the provided resource/i,
 			/The physics modeling work does not require beakers, kits, or household materials; any physical demonstration can be replaced with evidence from the provided resource/i
 		];
+		const physicsContextHelper = fs.readFileSync(
+			"src/stores/courses/physicsContentContext.ts",
+			"utf8"
+		);
+
+		expect(physicsContextHelper).not.toMatch(/physicsContentReplacements/);
+		expect(physicsContextHelper).not.toMatch(/defaultPhysicsTopicContext/);
+		expect(physicsContextHelper).not.toMatch(
+			/usable physics model rather than a memorized list/i
+		);
+		expect(physicsContextHelper).not.toMatch(
+			/Each example should include/i
+		);
+		expect(physicsContextHelper).toContain(
+			"Readiness check: define the system boundary"
+		);
+		expect(physicsContextHelper).toContain(
+			"Common pitfalls include treating momentum"
+		);
 
 		for (const courseId of courseIds) {
 			const course = await loadRawCourse(courseId);
@@ -4435,6 +4454,8 @@ describe("course text quality normalization", () => {
 			for (const pattern of genericCurriculumTemplates) {
 				expect(courseText).not.toMatch(pattern);
 			}
+			expect(courseText).not.toMatch(/\bEach example should\b/i);
+			expect(courseText).not.toMatch(/\bThe final explanation should\b/i);
 			expect(new Set(diagnostics).size).toBe(diagnostics.length);
 			expect(new Set(misconceptions).size).toBe(misconceptions.length);
 		}

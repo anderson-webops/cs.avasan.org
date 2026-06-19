@@ -119,7 +119,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Worked Example Set: Free-Body Diagram Repetition",
 					content:
-						"Work through a hanging object, a crate on a floor, an elevator rider, and a tug-of-war setup. Each example should isolate one object at a time, label every external force, and connect the net force to the motion. Build repetition on purpose so the diagramming habit feels routine before the math gets harder."
+						"Work through a hanging object, a crate on a floor, an elevator rider, and a tug-of-war setup. For each example, isolate one object at a time, label every external force, and connect the net force to the motion. Build repetition on purpose so the diagramming habit feels routine before the math gets harder."
 				},
 				{
 					title: "Graph and Data Exercise: Net Force and Acceleration",
@@ -394,7 +394,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Mini Lab, Simulation, or Case Study",
 					content:
-						"Use a collision simulation, provided cart data, or a video case study of an impact safety design. The final explanation should identify the system, the momentum or impulse evidence, and one simplification such as friction, deformation, or measurement timing."
+						"Use a collision simulation, provided cart data, or a video case study of an impact safety design. The final explanation identifies the system, the momentum or impulse evidence, and one simplification such as friction, deformation, or measurement timing."
 				},
 				{
 					title: "Reflection and Transfer Practice",
@@ -436,7 +436,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Worked Example Set",
 					content:
-						"Use doors, wrenches, seesaws, balance beams, and rotating tools as the main examples. Each example should compare at least two force locations or angles so the lever-arm idea is tested instead of memorized."
+						"Use doors, wrenches, seesaws, balance beams, and rotating tools as the main examples. For each example, compare at least two force locations or angles so the lever-arm idea is tested instead of memorized."
 				},
 				{
 					title: "Graph, Diagram, or Data Exercise",
@@ -446,7 +446,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Mini Lab, Simulation, or Case Study",
 					content:
-						"Use a seesaw simulation, door-handle case, or paper balance model. The final explanation should show the pivot, identify all torques, and state which small real-world effects were ignored, such as friction at the hinge."
+						"Use a seesaw simulation, door-handle case, or paper balance model. The final explanation shows the pivot, identifies all torques, and states which small real-world effects were ignored, such as friction at the hinge."
 				},
 				{
 					title: "Reflection and Transfer Practice",
@@ -498,7 +498,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Mini Lab, Simulation, or Case Study",
 					content:
-						"Use a buoyancy simulation, boat-shape design case, or provided fluid-density dataset. The final explanation should identify the displaced-fluid evidence and state one limitation, such as treating the fluid as still or ignoring object deformation."
+						"Use a buoyancy simulation, boat-shape design case, or provided fluid-density dataset. The final explanation identifies the displaced-fluid evidence and states one limitation, such as treating the fluid as still or ignoring object deformation."
 				},
 				{
 					title: "Reflection and Transfer Practice",
@@ -550,7 +550,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Mini Lab, Simulation, or Case Study",
 					content:
-						"Use a thermal simulation, insulation design case, or provided temperature dataset. The final explanation should state the transfer path, evidence for warming or cooling, and one uncontrolled factor such as airflow, contact area, or sensor delay."
+						"Use a thermal simulation, insulation design case, or provided temperature dataset. The final explanation states the transfer path, evidence for warming or cooling, and one uncontrolled factor such as airflow, contact area, or sensor delay."
 				},
 				{
 					title: "Reflection and Transfer Practice",
@@ -602,7 +602,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Mini Lab, Simulation, or Case Study",
 					content:
-						"Use a lens simulation, mirror case study, or provided optical-device diagram. The final explanation should connect the ray model to the device purpose and name one limitation such as ideal thin lenses or ignoring lens thickness."
+						"Use a lens simulation, mirror case study, or provided optical-device diagram. The final explanation connects the ray model to the device purpose and names one limitation such as ideal thin lenses or ignoring lens thickness."
 				},
 				{
 					title: "Reflection and Transfer Practice",
@@ -644,7 +644,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Worked Example Set",
 					content:
-						"Use electromagnets, speakers, relays, generators, wireless charging, and field diagrams as the main examples. Each example should trace current, magnetic field, motion or changing field, and the resulting energy transfer."
+						"Use electromagnets, speakers, relays, generators, wireless charging, and field diagrams as the main examples. For each example, trace current, magnetic field, motion or changing field, and the resulting energy transfer."
 				},
 				{
 					title: "Graph, Diagram, or Data Exercise",
@@ -654,7 +654,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Mini Lab, Simulation, or Case Study",
 					content:
-						"Use an electromagnet simulation, generator case study, or speaker/motor diagram. The final explanation should identify the field interaction and one simplification, such as ideal coils, uniform fields, or neglected losses."
+						"Use an electromagnet simulation, generator case study, or speaker/motor diagram. The final explanation identifies the field interaction and one simplification, such as ideal coils, uniform fields, or neglected losses."
 				},
 				{
 					title: "Reflection and Transfer Practice",
@@ -706,7 +706,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Mini Lab, Simulation, or Case Study",
 					content:
-						"Use a pendulum simulation, spring dataset, sound resonance example, or bridge case study. The final explanation should identify the driving pattern, the response, and one factor that would add damping or shift the period."
+						"Use a pendulum simulation, spring dataset, sound resonance example, or bridge case study. The final explanation identifies the driving pattern, the response, and one factor that would add damping or shift the period."
 				},
 				{
 					title: "Reflection and Transfer Practice",
@@ -748,7 +748,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Worked Example Set",
 					content:
-						"Use planetary data, satellite orbits, weight on other worlds, and orbit simulations as the main examples. Each example should connect the diagram to gravitational force direction and the motion that follows."
+						"Use planetary data, satellite orbits, weight on other worlds, and orbit simulations as the main examples. For each example, connect the diagram to gravitational force direction and the motion that follows."
 				},
 				{
 					title: "Graph, Diagram, or Data Exercise",
@@ -758,7 +758,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Mini Lab, Simulation, or Case Study",
 					content:
-						"Use an orbit simulation, mission sketch, or provided planetary dataset. The final explanation should show force direction, velocity direction, and one simplification such as circular orbit assumptions or ignoring atmospheric drag."
+						"Use an orbit simulation, mission sketch, or provided planetary dataset. The final explanation shows force direction, velocity direction, and one simplification such as circular orbit assumptions or ignoring atmospheric drag."
 				},
 				{
 					title: "Reflection and Transfer Practice",
@@ -800,7 +800,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Worked Example Set",
 					content:
-						"Use emission spectra, absorption, solar panels, lasers, semiconductors, and GPS timing as the main examples. Each example should identify the observed evidence, the classical idea that is insufficient, and the newer model feature that improves the explanation."
+						"Use emission spectra, absorption, solar panels, lasers, semiconductors, and GPS timing as the main examples. For each example, identify the observed evidence, the classical idea that is insufficient, and the newer model feature that improves the explanation."
 				},
 				{
 					title: "Graph, Diagram, or Data Exercise",
@@ -810,7 +810,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Mini Lab, Simulation, or Case Study",
 					content:
-						"Use a spectrum simulation, semiconductor case study, photoelectric-effect visualization, or GPS timing scenario. The final explanation should connect evidence to model limits and avoid claiming more precision than the introductory model supports."
+						"Use a spectrum simulation, semiconductor case study, photoelectric-effect visualization, or GPS timing scenario. The final explanation connects evidence to model limits and avoids claiming more precision than the introductory model supports."
 				},
 				{
 					title: "Reflection and Transfer Practice",
@@ -862,7 +862,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Mini Lab, Simulation, or Case Study",
 					content:
-						"Use a safe remote simulation, provided dataset, video observation, or paper design case as the final evidence source. The final explanation should state the claim, evidence, model, uncertainty, and revision decision in a single coherent argument."
+						"Use a safe remote simulation, provided dataset, video observation, or paper design case as the final evidence source. The final explanation states the claim, evidence, model, uncertainty, and revision decision in a single coherent argument."
 				},
 				{
 					title: "Reflection and Transfer Practice",

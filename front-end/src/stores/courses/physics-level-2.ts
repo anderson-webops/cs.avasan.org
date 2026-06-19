@@ -406,7 +406,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Mini Lab or Simulation: Engineering Modeling Challenge",
 					content:
-						"Accept projects such as a projectile planner, elevator-force simulation, pulley design, collision analysis, orbit model, or thermal design study. Every project should include a question, a model, a data source, a graph, and a short defense of the model's limits."
+						"Accept projects such as a projectile planner, elevator-force simulation, pulley design, collision analysis, orbit model, or thermal design study. Each project includes a question, a model, a data source, a graph, and a short defense of the model's limits."
 				},
 				{
 					title: "Reflection Question: What Makes a Physics Answer Convincing?",
@@ -510,7 +510,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Measurement Case Study",
 					content:
-						"Use provided data, a simulation export, a video measurement, or a spreadsheet dataset to make a claim with uncertainty attached. The final explanation should include the fitted model, the evidence for trusting or rejecting it, and one additional measurement that would most improve the conclusion."
+						"Use provided data, a simulation export, a video measurement, or a spreadsheet dataset to make a claim with uncertainty attached. The final explanation includes the fitted model, the evidence for trusting or rejecting it, and one additional measurement that would most improve the conclusion."
 				},
 				{
 					title: "Transfer Practice: Evidence Strength",
@@ -557,12 +557,12 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Constraint Diagram Exercise",
 					content:
-						"Draw a diagram or table that separates object-level forces from system-level constraints. The representation should show which quantities are shared, which directions are linked, and which assumptions would fail if a string stretches, a pulley has mass, or contact is lost."
+						"Draw a diagram or table that separates object-level forces from system-level constraints. The representation shows which quantities are shared, which directions are linked, and which assumptions would fail if a string stretches, a pulley has mass, or contact is lost."
 				},
 				{
 					title: "Coupled-System Case Study",
 					content:
-						"Use a remote-safe simulation, diagram set, or paper design case to analyze a connected system. The final explanation should state the chosen system boundary, the constraint equation, the force model, and one realistic condition where the simplified constraint would stop working."
+						"Use a remote-safe simulation, diagram set, or paper design case to analyze a connected system. The final explanation states the chosen system boundary, the constraint equation, the force model, and one realistic condition where the simplified constraint would stop working."
 				},
 				{
 					title: "Transfer Practice: Changing Constraints",
@@ -609,12 +609,12 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Pressure and Flow Exercise",
 					content:
-						"Represent a pipe, nozzle, duct, vessel, or flow path with a labeled diagram and a simple graph or table. The representation should connect geometry to pressure, speed, or flow-rate changes and identify where the model would be unreliable because of turbulence, leaks, changing viscosity, or poorly defined boundaries."
+						"Represent a pipe, nozzle, duct, vessel, or flow path with a labeled diagram and a simple graph or table. The representation connects geometry to pressure, speed, or flow-rate changes and identifies where the model would be unreliable because of turbulence, leaks, changing viscosity, or poorly defined boundaries."
 				},
 				{
 					title: "Fluid Case Study",
 					content:
-						"Use a simulation, provided data, video observation, or paper case such as a nozzle, wing analogy, blood-vessel model, water slide, or ventilation duct. The final explanation should state the continuum assumption, the key variables, the evidence source, and one condition that would force a more detailed model."
+						"Use a simulation, provided data, video observation, or paper case such as a nozzle, wing analogy, blood-vessel model, water slide, or ventilation duct. The final explanation states the continuum assumption, the key variables, the evidence source, and one condition that would force a more detailed model."
 				},
 				{
 					title: "Transfer Practice: Model Domain",
@@ -661,12 +661,12 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Energy Flow Exercise",
 					content:
-						"Create an energy-flow diagram, process table, or simplified PV-style sketch for an engine, refrigerator, heat pump, power plant, or biological energy-transfer example. The representation should separate total energy accounting from useful output and name the loss or irreversible step."
+						"Create an energy-flow diagram, process table, or simplified PV-style sketch for an engine, refrigerator, heat pump, power plant, or biological energy-transfer example. The representation separates total energy accounting from useful output and names the loss or irreversible step."
 				},
 				{
 					title: "Thermal Case Study",
 					content:
-						"Use a remote-safe simulation, provided data, product specification, or paper design case to compare heat, work, and efficiency. The final explanation should state the energy claim, the evidence used, the chosen sign convention, and one reason a real device cannot reach the ideal limit."
+						"Use a remote-safe simulation, provided data, product specification, or paper design case to compare heat, work, and efficiency. The final explanation states the energy claim, the evidence used, the chosen sign convention, and one reason a real device cannot reach the ideal limit."
 				},
 				{
 					title: "Transfer Practice: Useful Energy",
@@ -718,7 +718,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Sensor Case Study",
 					content:
-						"Use a remote-safe data file, simulation, app sensor export, or device-spec case to analyze a signal. The final explanation should state the physical quantity, transducer or measurement method, calibration evidence, noise treatment, and one test that would reveal whether the sensor is trustworthy."
+						"Use a remote-safe data file, simulation, app sensor export, or device-spec case to analyze a signal. The final explanation states the physical quantity, transducer or measurement method, calibration evidence, noise treatment, and one test that would reveal whether the sensor is trustworthy."
 				},
 				{
 					title: "Transfer Practice: Measurement Trust",
@@ -770,7 +770,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Relativity Case Study",
 					content:
-						"Use a safe simulation, provided article excerpt, GPS timing example, or particle-physics case to compare classical and frame-aware reasoning. The final explanation should state the frame, the quantity being corrected, the evidence or scale that requires the correction, and one limitation of the simplified treatment."
+						"Use a safe simulation, provided article excerpt, GPS timing example, or particle-physics case to compare classical and frame-aware reasoning. The final explanation states the frame, the quantity being corrected, the evidence or scale that requires the correction, and one limitation of the simplified treatment."
 				},
 				{
 					title: "Transfer Practice: Domain Limits",
@@ -802,7 +802,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Research Portfolio Concepts",
 					content:
-						"An independent physics portfolio begins with a focused question narrow enough to model and broad enough to matter. Source quality, model choice, evidence, limitations, and revision all shape the final claim. The final product should show how physics reasoning changed the question, not just collect facts about a topic."
+						"An independent physics portfolio begins with a focused question narrow enough to model and broad enough to matter. Source quality, model choice, evidence, limitations, and revision all shape the final claim. The final product shows how physics reasoning changed the question, not just collect facts about a topic."
 				},
 				{
 					title: "Research Reasoning Toolkit",
@@ -817,12 +817,12 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Portfolio Evidence Exercise",
 					content:
-						"Create one graph, diagram sequence, calculation table, or source-comparison chart that carries real evidence for the portfolio. The representation should make a physical relationship visible and include a note about uncertainty, model fit, or a limitation in the available source."
+						"Create one graph, diagram sequence, calculation table, or source-comparison chart that carries real evidence for the portfolio. The representation makes a physical relationship visible and includes a note about uncertainty, model fit, or a limitation in the available source."
 				},
 				{
 					title: "Independent Case Study",
 					content:
-						"Use a safe remote-friendly simulation, public dataset, article diagram, video observation, or paper design case tied to the chosen topic. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption that limits the conclusion."
+						"Use a safe remote-friendly simulation, public dataset, article diagram, video observation, or paper design case tied to the chosen topic. The final explanation states the claim, evidence, model used, and one uncertainty or simplifying assumption that limits the conclusion."
 				},
 				{
 					title: "Transfer Practice: Revising a Claim",
