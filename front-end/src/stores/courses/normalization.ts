@@ -2577,6 +2577,10 @@ function cleanSupportTopicTitle(title: string) {
 			/^(?:Project|Supplemental Project|Master Project)\s+\d+:\s*/iu,
 			""
 		)
+		.replace(
+			/^(?:Project|Supplemental Project|Master Project)\s+\d+\s*[-–—]\s*/iu,
+			""
+		)
 		.replace(/\s{2,}/g, " ")
 		.trim();
 }
@@ -4857,35 +4861,36 @@ function extensionPrompt(context: CourseTextContext) {
 
 function projectSupport(context: CourseTextContext) {
 	const focus = projectSupportFocus(context);
-	const topic = supportFocusTopic(context);
-	const topicContext = topic === "this course item" ? "" : ` for ${topic}`;
-	const reference = projectSupportReference(context);
+	const reference = projectSupportScopedReference(
+		context,
+		projectSupportReference(context)
+	);
 	const capitalizedReference = capitalizeSentence(reference);
 	const goal = variantPrompt(context, [
 		() =>
-			`**Goal:** ${capitalizedReference}${topicContext} has an observable result, one normal path, and one boundary or failure case.`,
+			`**Goal:** ${capitalizedReference} has an observable result, one normal path, and one boundary or failure case.`,
 		() =>
-			`**Goal:** Make ${reference}${topicContext} easy to verify by stating expected behavior, observing actual behavior, and explaining one evidence point.`,
+			`**Goal:** Make ${reference} easy to verify by stating expected behavior, observing actual behavior, and explaining one evidence point.`,
 		() =>
-			`**Goal:** Build ${reference}${topicContext} in a small working case, then add one improvement or edge case.`,
+			`**Goal:** Build ${reference} in a small working case, then add one improvement or edge case.`,
 		() =>
-			`**Goal:** Connect ${reference}${topicContext} to a visible run, trace, model, or user interaction and record what proves it works.`,
+			`**Goal:** Connect ${reference} to a visible run, trace, model, or user interaction and record what proves it works.`,
 		() =>
-			`**Goal:** Verify ${reference}${topicContext} with one ordinary case and one case that could fail if the concept is misunderstood.`,
+			`**Goal:** Verify ${reference} with one ordinary case and one case that could fail if the concept is misunderstood.`,
 		() =>
-			`**Goal:** Start from a small working case for ${reference}${topicContext}, then add one improvement with visible evidence.`,
+			`**Goal:** Start from a small working case for ${reference}, then add one improvement with visible evidence.`,
 		() =>
-			`**Goal:** Apply the concept in ${reference}${topicContext}, then compare expected behavior with the observed result.`,
+			`**Goal:** Apply the concept in ${reference}, then compare expected behavior with the observed result.`,
 		() =>
-			`**Goal:** Use clear structure, naming, and evidence so ${reference}${topicContext} can be reviewed without relying on memory.`,
+			`**Goal:** ${capitalizedReference} uses clear structure, naming, and evidence so the result can be reviewed without relying on memory.`,
 		() =>
-			`**Goal:** Choose one design or reasoning decision in ${reference}${topicContext}, test it, and show its effect in the final artifact.`,
+			`**Goal:** Choose one design or reasoning decision in ${reference}, test it, and show its effect in the final artifact.`,
 		() =>
-			`**Goal:** Demonstrate ${reference}${topicContext} with one ordinary case and one case that could fail if the idea is misunderstood.`,
+			`**Goal:** Demonstrate ${reference} with one ordinary case and one case that could fail if the idea is misunderstood.`,
 		() =>
-			`**Goal:** Map the prompt requirements to ${reference}${topicContext}, then record the evidence that proves the result works.`,
+			`**Goal:** Map the prompt requirements to ${reference}, then record the evidence that proves the result works.`,
 		() =>
-			`**Goal:** Identify the starting state, main transformation, and output or conclusion for ${reference}${topicContext}.`
+			`**Goal:** Identify the starting state, main transformation, and output or conclusion for ${reference}.`
 	]);
 
 	return [
@@ -4992,6 +4997,13 @@ function projectSupportScopedReference(
 		normalizedTopic.includes(`${normalizedReference}:`)
 	) {
 		return reference;
+	}
+	if (
+		/\b(?:project|program|activity|exercise|checkpoint|practice|lab|build|notebook|audit|reflection|challenge|drill|response|analysis|solution)\b/i.test(
+			topic
+		)
+	) {
+		return topic;
 	}
 
 	return `the ${topic} ${bareReference}`;

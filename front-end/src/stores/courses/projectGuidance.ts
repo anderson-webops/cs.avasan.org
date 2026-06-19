@@ -178,6 +178,13 @@ function scopedGuidanceReference(reference: string, moduleTitle: string) {
 	) {
 		return reference;
 	}
+	if (
+		/\b(?:project|program|activity|exercise|checkpoint|practice|lab|build|notebook|audit|reflection|challenge|drill|response|analysis|solution)\b/i.test(
+			cleanTitle
+		)
+	) {
+		return cleanTitle;
+	}
 
 	return `the ${cleanTitle} ${bareReference}`;
 }
@@ -493,6 +500,14 @@ function compactGuidanceBody(
 		)
 		.replace(
 			new RegExp(`\\bwhich ${escapedBareReference} values\\b`, "g"),
+			"which values"
+		)
+		.replace(
+			new RegExp(`\\bwhich ${escapedScopedReference} values\\b`, "g"),
+			"which values"
+		)
+		.replace(
+			new RegExp(`\\bwhich ${escapedBareScopedReference} values\\b`, "g"),
 			"which values"
 		)
 		.replace(

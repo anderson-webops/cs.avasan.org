@@ -3431,6 +3431,17 @@ describe("course text quality normalization", () => {
 				/\bworking artifact with explicit requirements\b/i
 			);
 			expect(corpus).not.toMatch(/\bUse this [^.]+ baseline\b/i);
+			expect(corpus).not.toMatch(
+				/\b(?:the|The) (?:project|program|activity|task|build|checkpoint|exercise|response|practice task|AP Java task|Java checkpoint|code checkpoint|class exercise|type-model task|object-design task|practice build|collection exercise|API checkpoint) for (?:Project|Reference|Supplemental|Check-In|Core|PS\d|JS\d|AJ\d|JM\d|APCS\d)\b/i
+			);
+			expect(corpus).not.toMatch(/\bfor (?:the )?project for\b/i);
+			expect(corpus).not.toMatch(
+				/\bUse clear structure, naming, and evidence so the [^\n.]{0,120} can be reviewed without relying on memory\b/i
+			);
+			expect(corpus).not.toMatch(
+				/\b(?:the|The) [^\n.]{1,120}? (?:project|program|activity|task|exercise) (?:project|program|activity|task|exercise)\b/i
+			);
+			expect(corpus).not.toMatch(/\bwhich the [^\n.]{1,120}? values\b/i);
 			expect(corpus).not.toMatch(/\bThe signature project should\b/i);
 			expect(corpus).not.toMatch(/\bThe final artifact should\b/i);
 			expect(corpus).not.toMatch(
