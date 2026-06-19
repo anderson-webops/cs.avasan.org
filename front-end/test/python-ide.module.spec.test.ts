@@ -1150,7 +1150,10 @@ describe("python IDE project helpers", () => {
 			"sounds/eep.wav": new Uint8Array([4, 5, 6])
 		});
 
-		const pack = parsePythonIdeCourseAssetZip(zipBytes, "/assets.zip");
+		const pack = await parsePythonIdeCourseAssetZip(
+			zipBytes,
+			"/assets.zip"
+		);
 		const alien = findPythonIdeCourseAsset(
 			pack,
 			pythonIdeAssetCandidateNames("images", "alien", [".png"])
@@ -1189,7 +1192,7 @@ describe("python IDE project helpers", () => {
 			});
 
 		try {
-			const pack = parsePythonIdeCourseAssetZip(
+			const pack = await parsePythonIdeCourseAssetZip(
 				zipSync({ "images/alien.png": oneByOnePngBytes }),
 				"/assets.zip"
 			);
@@ -1244,6 +1247,24 @@ describe("python IDE project helpers", () => {
 		expect(alien?.url).toBe("/python-ide/assets/images/alien.png");
 		expect(alien?.width).toBe(20);
 		expect(alien?.height).toBe(18);
+	});
+
+	it("keeps zip parsing out of the normal course asset loader chunk", () => {
+		const assetSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeCourseAssets.ts"),
+			"utf8"
+		);
+		const zipSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeCourseAssetZip.ts"),
+			"utf8"
+		);
+
+		expect(assetSource).not.toContain("from \"fflate\"");
+		expect(assetSource).toMatch(
+			/import\(\s*"@\/modules\/pythonIdeCourseAssetZip"\s*\)/
+		);
+		expect(zipSource).toContain("from \"fflate\"");
+		expect(zipSource).toContain("parsePythonIdeCourseAssetZipBytes");
 	});
 
 	it("prefers the extracted asset manifest before falling back to the same-origin API proxy", async () => {
