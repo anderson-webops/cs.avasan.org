@@ -1,6 +1,11 @@
 import type { RawCourse } from "./types";
 
 type SecurityLabMode = "core" | "extension";
+type SecurityLabPurpose =
+	| "core"
+	| "extension-challenge"
+	| "transfer-practice"
+	| "extension-practice";
 
 function stableVariantIndex(seed: string, count: number) {
 	let hash = 2166136261;
@@ -16,6 +21,24 @@ function stableVariantIndex(seed: string, count: number) {
 function securityLabFocus(topic: string) {
 	const source = topic.toLowerCase();
 
+	if (source.includes("low-level security lab 7")) {
+		return "sanitizer-output triage, minimal repro notes, failing-input classification, local impact wording, and a scoped patch proposal";
+	}
+	if (source.includes("low-level security lab 8")) {
+		return "bounds regression matrices, exact-fit strings, rejected oversized input, terminator evidence, and byte-level before-and-after checks";
+	}
+	if (source.includes("low-level security lab 9")) {
+		return "binary parser hardening, length-field validation, malformed records, endian assumptions, and negative fixtures";
+	}
+	if (source.includes("low-level security lab 10")) {
+		return "integer-state safety, overflow checks, signed and unsigned boundaries, counter wraparound, and invariant-preserving updates";
+	}
+	if (source.includes("low-level security lab 11")) {
+		return "fuzz-seed reduction, crash reproduction, sanitizer stack-trace interpretation, regression corpus preservation, and fix verification";
+	}
+	if (source.includes("low-level security lab 12")) {
+		return "patch-review handoff, root-cause summary, narrow remediation, residual-risk notes, and maintainer-facing verification commands";
+	}
 	if (source.includes("memory layout")) {
 		return "memory-region observation, address comparison, compiler-warning hygiene, and a short explanation of what changes between runs";
 	}
@@ -41,11 +64,48 @@ function securityLabFocus(topic: string) {
 	return `${securityLabLabel(topic)} local-only security evidence, clear assumptions, tool output, a patch or hardening decision, and a regression check`;
 }
 
-function securityLabProjectContent(topic: string, mode: SecurityLabMode) {
+function securityLabPurposeText(
+	mode: SecurityLabMode,
+	purpose: SecurityLabPurpose
+) {
+	if (mode === "core") {
+		return {
+			artifact: "core security lab",
+			path: "Build the baseline lab first: reproduce the intended behavior, document the local boundary, and prove one normal case plus one defensive edge case."
+		};
+	}
+
+	const textByPurpose: Record<
+		Exclude<SecurityLabPurpose, "core">,
+		{ artifact: string; path: string }
+	> = {
+		"extension-challenge": {
+			artifact: "extension challenge security lab",
+			path: "Add one meaningful constraint beyond the core lab, such as a stricter input rule, stronger sanitizer evidence, or a clearer mitigation decision."
+		},
+		"transfer-practice": {
+			artifact: "transfer-practice security lab",
+			path: "Move the same defensive method to a changed fixture, input shape, build flag, or data layout so the invariant is tested outside the original example."
+		},
+		"extension-practice": {
+			artifact: "extension-practice security lab",
+			path: "Make an independent hardening pass with a stronger edge-case suite, a tighter audit note, and one limitation that remains outside the local lab."
+		}
+	};
+
+	return textByPurpose[purpose === "core" ? "extension-challenge" : purpose];
+}
+
+function securityLabProjectContent(
+	topic: string,
+	mode: SecurityLabMode,
+	purpose: SecurityLabPurpose = mode === "core"
+		? "core"
+		: "extension-challenge"
+) {
 	const label = securityLabLabel(topic);
-	const artifact =
-		mode === "core" ? "core security lab" : "security extension lab";
-	const variant = stableVariantIndex(`${label}|${mode}`, 4);
+	const purposeText = securityLabPurposeText(mode, purpose);
+	const variant = stableVariantIndex(`${label}|${mode}|${purpose}`, 4);
 	const requiredWork = [
 		[
 			"1. State the local lab boundary and the exact toy target or starter being inspected.",
@@ -96,8 +156,9 @@ function securityLabProjectContent(topic: string, mode: SecurityLabMode) {
 	][variant];
 
 	return [
-		`**Project goal:** Complete a ${artifact} for **${label}** that produces defensive evidence, not just a passing program.`,
+		`**Project goal:** Complete the ${purposeText.artifact} for **${label}** that produces defensive evidence, not just a passing program.`,
 		`**Focus:** ${securityLabFocus(topic)}.`,
+		`**Practice path:** ${purposeText.path}`,
 		"**Required work:**",
 		...requiredWork,
 		"**Completion checks:**",
@@ -113,29 +174,31 @@ function securityLabConceptContent(topic: string) {
 	const label = securityLabLabel(topic);
 
 	return [
-		`Use **${label}** to connect the lab artifact to ${securityLabFocus(topic)}.`,
-		"Start by naming the asset being protected, the trust boundary, the unsafe assumption, and the invariant that should stay true.",
-		"Keep the discussion defensive and local: the goal is to understand the bug class, harden the program, and explain the evidence that proves the final behavior."
+		`**Concept path:** Use **${label}** to connect the lab artifact to ${securityLabFocus(topic)}.`,
+		"Begin with the protected asset, the trust boundary, the unsafe assumption, and the invariant that should stay true after the code is changed. The concept is not only the bug name; it includes what input or state can cross the boundary, what evidence would prove the problem, and what evidence would prove the defensive result.",
+		"Keep the work defensive and local. A strong concept note identifies the normal behavior, the failure-shaped behavior, the smallest useful remediation or hardening step, and the command, trace, sanitizer report, or test output that would let another person verify the final state."
 	].join("\n\n");
 }
 
 function securityLabExampleContent(topic: string) {
 	const label = securityLabLabel(topic);
+	const focus = securityLabFocus(topic);
 
 	return [
-		`Trace one small local example for **${label}** before changing the implementation.`,
-		"Record the exact input, command, expected behavior, observed behavior, and relevant warning, sanitizer, debugger, or log output.",
-		"Then identify which assumption the example checks so the later project has a concrete normal case, boundary case, and regression case to compare against."
+		`**Evidence target:** Trace one small local example for **${label}** before changing the implementation.`,
+		`Record the exact input, command, expected behavior, observed behavior, and relevant warning, sanitizer, debugger, byte dump, or log output for ${focus}. The example should be small enough to explain line by line, but realistic enough to show why the boundary or invariant matters.`,
+		`After the trace, identify which assumption the example checks and which part of ${label} it prepares for. The later project should reuse this example as the normal case, add one boundary or malformed case, and finish with a regression case that confirms the remediation did not only hide the original symptom.`
 	].join("\n\n");
 }
 
 function securityLabReviewContent(topic: string) {
 	const label = securityLabLabel(topic);
+	const focus = securityLabFocus(topic);
 
 	return [
-		`Close **${label}** with a maintainer-facing audit note rather than a vague reflection.`,
-		"Summarize the root cause, the security or reliability boundary involved, the patch or hardening choice, and the normal, malformed, and regression evidence that supports the conclusion.",
-		"Name one remaining limitation without expanding beyond the provided local lab."
+		`**Mastery check:** Close **${label}** with a maintainer-facing audit note rather than a vague reflection.`,
+		`The note should summarize the root cause, the security or reliability boundary involved, the patch or hardening choice, and the normal, malformed, and regression evidence that supports ${focus}. It should separate observed evidence from inferred risk so the result stays reviewable and does not overclaim.`,
+		"Finish by naming one remaining limitation without expanding beyond the provided local lab. Good review evidence includes the rerun command, the relevant output or trace, the behavior that changed, and the behavior that still needs a future test or design decision."
 	].join("\n\n");
 }
 
@@ -189,7 +252,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Memory Layout and Security Tooling Supplemental 2",
 					content: securityLabProjectContent(
 						"LLS1 Memory Layout and Security Tooling",
-						"extension"
+						"extension",
+						"transfer-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-01-lls1-memory-layout-and-security-tooling-supplemental-2/starter",
@@ -200,7 +264,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Memory Layout and Security Tooling Supplemental 3",
 					content: securityLabProjectContent(
 						"LLS1 Memory Layout and Security Tooling",
-						"extension"
+						"extension",
+						"extension-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-02-lls1-memory-layout-and-security-tooling-supplemental-3/starter",
@@ -256,7 +321,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Bounds, Arrays, and Safer Copy Patterns Supplemental 2",
 					content: securityLabProjectContent(
 						"LLS2 Bounds, Arrays, and Safer Copy Patterns",
-						"extension"
+						"extension",
+						"transfer-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-03-lls2-bounds-arrays-and-safer-copy-patterns-supplemental-2/starter",
@@ -267,7 +333,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Bounds, Arrays, and Safer Copy Patterns Supplemental 3",
 					content: securityLabProjectContent(
 						"LLS2 Bounds, Arrays, and Safer Copy Patterns",
-						"extension"
+						"extension",
+						"extension-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-04-lls2-bounds-arrays-and-safer-copy-patterns-supplemental-3/starter",
@@ -323,7 +390,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Defensive Parsers and Binary Input Supplemental 2",
 					content: securityLabProjectContent(
 						"LLS3 Defensive Parsers and Binary Input",
-						"extension"
+						"extension",
+						"transfer-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-05-lls3-defensive-parsers-and-binary-input-supplemental-2/starter",
@@ -334,7 +402,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Defensive Parsers and Binary Input Supplemental 3",
 					content: securityLabProjectContent(
 						"LLS3 Defensive Parsers and Binary Input",
-						"extension"
+						"extension",
+						"extension-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-06-lls3-defensive-parsers-and-binary-input-supplemental-3/starter",
@@ -390,7 +459,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Integer Safety, State, and Defensive Data Structures Supplemental 2",
 					content: securityLabProjectContent(
 						"LLS4 Integer Safety, State, and Defensive Data Structures",
-						"extension"
+						"extension",
+						"transfer-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-07-lls4-integer-safety-state-and-defensive-data-structures-supplemental-2/starter",
@@ -401,7 +471,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Integer Safety, State, and Defensive Data Structures Supplemental 3",
 					content: securityLabProjectContent(
 						"LLS4 Integer Safety, State, and Defensive Data Structures",
-						"extension"
+						"extension",
+						"extension-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-08-lls4-integer-safety-state-and-defensive-data-structures-supplemental-3/starter",
@@ -457,7 +528,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Bug Hunting with Sanitizers and Fuzzing Supplemental 2",
 					content: securityLabProjectContent(
 						"LLS5 Bug Hunting with Sanitizers and Fuzzing",
-						"extension"
+						"extension",
+						"transfer-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-09-lls5-bug-hunting-with-sanitizers-and-fuzzing-supplemental-2/starter",
@@ -468,7 +540,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Bug Hunting with Sanitizers and Fuzzing Supplemental 3",
 					content: securityLabProjectContent(
 						"LLS5 Bug Hunting with Sanitizers and Fuzzing",
-						"extension"
+						"extension",
+						"extension-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-10-lls5-bug-hunting-with-sanitizers-and-fuzzing-supplemental-3/starter",
@@ -524,7 +597,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Patching, Review, and Responsible Research Supplemental 2",
 					content: securityLabProjectContent(
 						"LLS6 Patching, Review, and Responsible Research",
-						"extension"
+						"extension",
+						"transfer-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-11-lls6-patching-review-and-responsible-research-supplemental-2/starter",
@@ -535,7 +609,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Patching, Review, and Responsible Research Supplemental 3",
 					content: securityLabProjectContent(
 						"LLS6 Patching, Review, and Responsible Research",
-						"extension"
+						"extension",
+						"extension-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-12-lls6-patching-review-and-responsible-research-supplemental-3/starter",
@@ -593,7 +668,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Offensive Security Lab 16 Supplemental 2: Implementation Lab",
 					content: securityLabProjectContent(
 						"Offensive Security Lab 16: Implementation Lab",
-						"extension"
+						"extension",
+						"transfer-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-13-applied-studio-7-offensive-security-lab-16-supplemental-2/starter",
@@ -604,7 +680,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Offensive Security Lab 16 Supplemental 3: Implementation Lab",
 					content: securityLabProjectContent(
 						"Offensive Security Lab 16: Implementation Lab",
-						"extension"
+						"extension",
+						"extension-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-14-applied-studio-7-offensive-security-lab-16-supplemental-3/starter",
@@ -662,7 +739,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Offensive Security Lab 17 Supplemental 2: Implementation Lab",
 					content: securityLabProjectContent(
 						"Offensive Security Lab 17: Implementation Lab",
-						"extension"
+						"extension",
+						"transfer-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-15-applied-studio-8-offensive-security-lab-17-supplemental-2/starter",
@@ -673,7 +751,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Offensive Security Lab 17 Supplemental 3: Implementation Lab",
 					content: securityLabProjectContent(
 						"Offensive Security Lab 17: Implementation Lab",
-						"extension"
+						"extension",
+						"extension-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-16-applied-studio-8-offensive-security-lab-17-supplemental-3/starter",
@@ -731,7 +810,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Low-Level Security Lab 7 Supplemental 2: Implementation Lab",
 					content: securityLabProjectContent(
 						"Low-Level Security Lab 7: Implementation Lab",
-						"extension"
+						"extension",
+						"transfer-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-23-applied-studio-12-low-level-security-lab-7-supplemental-2/starter",
@@ -742,7 +822,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Low-Level Security Lab 7 Supplemental 3: Implementation Lab",
 					content: securityLabProjectContent(
 						"Low-Level Security Lab 7: Implementation Lab",
-						"extension"
+						"extension",
+						"extension-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-24-applied-studio-12-low-level-security-lab-7-supplemental-3/starter",
@@ -800,7 +881,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Low-Level Security Lab 8 Supplemental 2: Implementation Lab",
 					content: securityLabProjectContent(
 						"Low-Level Security Lab 8: Implementation Lab",
-						"extension"
+						"extension",
+						"transfer-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-25-applied-studio-13-low-level-security-lab-8-supplemental-2/starter",
@@ -811,7 +893,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Low-Level Security Lab 8 Supplemental 3: Implementation Lab",
 					content: securityLabProjectContent(
 						"Low-Level Security Lab 8: Implementation Lab",
-						"extension"
+						"extension",
+						"extension-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-26-applied-studio-13-low-level-security-lab-8-supplemental-3/starter",
@@ -869,7 +952,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Low-Level Security Lab 9 Supplemental 2: Implementation Lab",
 					content: securityLabProjectContent(
 						"Low-Level Security Lab 9: Implementation Lab",
-						"extension"
+						"extension",
+						"transfer-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-27-applied-studio-14-low-level-security-lab-9-supplemental-2/starter",
@@ -880,7 +964,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Low-Level Security Lab 9 Supplemental 3: Implementation Lab",
 					content: securityLabProjectContent(
 						"Low-Level Security Lab 9: Implementation Lab",
-						"extension"
+						"extension",
+						"extension-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-28-applied-studio-14-low-level-security-lab-9-supplemental-3/starter",
@@ -938,7 +1023,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Low-Level Security Lab 10 Supplemental 2: Implementation Lab",
 					content: securityLabProjectContent(
 						"Low-Level Security Lab 10: Implementation Lab",
-						"extension"
+						"extension",
+						"transfer-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-29-applied-studio-15-low-level-security-lab-10-supplemental-2/starter",
@@ -949,7 +1035,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Low-Level Security Lab 10 Supplemental 3: Implementation Lab",
 					content: securityLabProjectContent(
 						"Low-Level Security Lab 10: Implementation Lab",
-						"extension"
+						"extension",
+						"extension-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-30-applied-studio-15-low-level-security-lab-10-supplemental-3/starter",
@@ -1007,7 +1094,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Low-Level Security Lab 11 Supplemental 2: Implementation Lab",
 					content: securityLabProjectContent(
 						"Low-Level Security Lab 11: Implementation Lab",
-						"extension"
+						"extension",
+						"transfer-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-31-applied-studio-16-low-level-security-lab-11-supplemental-2/starter",
@@ -1018,7 +1106,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Low-Level Security Lab 11 Supplemental 3: Implementation Lab",
 					content: securityLabProjectContent(
 						"Low-Level Security Lab 11: Implementation Lab",
-						"extension"
+						"extension",
+						"extension-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-32-applied-studio-16-low-level-security-lab-11-supplemental-3/starter",
@@ -1076,7 +1165,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Low-Level Security Lab 12 Supplemental 2: Implementation Lab",
 					content: securityLabProjectContent(
 						"Low-Level Security Lab 12: Implementation Lab",
-						"extension"
+						"extension",
+						"transfer-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-33-applied-studio-17-low-level-security-lab-12-supplemental-2/starter",
@@ -1087,7 +1177,8 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "Low-Level Security Lab 12 Supplemental 3: Implementation Lab",
 					content: securityLabProjectContent(
 						"Low-Level Security Lab 12: Implementation Lab",
-						"extension"
+						"extension",
+						"extension-practice"
 					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-34-applied-studio-17-low-level-security-lab-12-supplemental-3/starter",

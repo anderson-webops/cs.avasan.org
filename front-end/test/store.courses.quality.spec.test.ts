@@ -1479,6 +1479,76 @@ describe("course text quality normalization", () => {
 		expect(corpus).toContain("securityLabReviewContent");
 	});
 
+	it("keeps low-level security supplemental labs purpose-specific", async () => {
+		const courses = await Promise.all([
+			loadRawCourse("low-level-security"),
+			loadRawCourse("low-level-security-part-2")
+		]);
+		const checkedModules: string[] = [];
+
+		for (const course of courses) {
+			expect(course).not.toBeNull();
+			if (!course) continue;
+
+			for (const module of course.modules.filter(module =>
+				/^Low-Level Security Lab (?:[7-9]|1[0-7])$/.test(module.title)
+			)) {
+				const challenge = module.supplementalProjects.find(item =>
+					/Extension Challenge/.test(item.title)
+				);
+				const transfer = module.supplementalProjects.find(item =>
+					/Transfer Practice/.test(item.title)
+				);
+				const extension = module.supplementalProjects.find(item =>
+					/Extension Practice/.test(item.title)
+				);
+				expect(challenge, module.title).toBeDefined();
+				expect(transfer, module.title).toBeDefined();
+				expect(extension, module.title).toBeDefined();
+				if (!challenge || !transfer || !extension) continue;
+
+				expect(challenge.content, challenge.title).toContain(
+					"extension challenge security lab"
+				);
+				expect(transfer.content, transfer.title).toContain(
+					"transfer-practice security lab"
+				);
+				expect(extension.content, extension.title).toContain(
+					"extension-practice security lab"
+				);
+				expect(
+					new Set([
+						challenge.content,
+						transfer.content,
+						extension.content
+					]).size,
+					module.title
+				).toBe(3);
+				checkedModules.push(module.title);
+			}
+		}
+
+		expect(checkedModules).toEqual([
+			"Low-Level Security Lab 7",
+			"Low-Level Security Lab 8",
+			"Low-Level Security Lab 9",
+			"Low-Level Security Lab 10",
+			"Low-Level Security Lab 11",
+			"Low-Level Security Lab 12",
+			"Low-Level Security Lab 13",
+			"Low-Level Security Lab 14",
+			"Low-Level Security Lab 15",
+			"Low-Level Security Lab 16",
+			"Low-Level Security Lab 17"
+		]);
+		const combinedText = courses.map(allCourseText).join("\n");
+		expect(combinedText).toContain("sanitizer-output triage");
+		expect(combinedText).toContain("bounds regression matrices");
+		expect(combinedText).toContain("exploitability triage");
+		expect(combinedText).toContain("stack-corruption toy-program review");
+		expect(combinedText).toContain("capstone audit synthesis");
+	});
+
 	it("keeps systems and web implementation labs from regressing to generated filler", () => {
 		const sourcePaths = [
 			"src/stores/courses/assembly.ts",
