@@ -127,10 +127,17 @@ describe("python IDE CodeMirror editor", () => {
 		);
 		expect(pageSource).toContain("let activeCodeEditorViewStateKey");
 		expect(pageSource).toContain("function saveCodeEditorViewState");
+		expect(pageSource).toContain("function migrateCodeEditorViewStates");
 		expect(pageSource).toContain("function restoreCodeEditorViewState");
 		expect(pageSource).toContain("codeEditorView.scrollDOM.scrollTop");
 		expect(pageSource).toContain("view.scrollDOM.scrollTop = state.scrollTop");
 		expect(pageSource).toContain("clampCodeEditorPosition");
+		expect(pageSource).toContain(
+			"codeEditorViewStates.set(nextKey, state);"
+		);
+		expect(pageSource).toContain(
+			"activeCodeEditorViewStateKey = nextKey;"
+		);
 		expect(pageSource).toContain('import("@codemirror/state")');
 		expect(resetSource).toContain("saveCodeEditorViewState();");
 		expect(resetSource).toContain("codeEditorView?.destroy();");

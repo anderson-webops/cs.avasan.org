@@ -1089,6 +1089,7 @@ async function saveSelectedProjectOnce() {
 
 		if (projectChangedDuringSave) {
 			if (startedProjectID.startsWith("local-")) {
+				migrateCodeEditorViewStates(startedProjectID, savedProject._id);
 				currentProject._id = savedProject._id;
 				currentProject.createdAt =
 					currentProject.createdAt ?? savedProject.createdAt;
@@ -1105,6 +1106,8 @@ async function saveSelectedProjectOnce() {
 		}
 
 		if (index >= 0) {
+			if (startedProjectID.startsWith("local-"))
+				migrateCodeEditorViewStates(startedProjectID, savedProject._id);
 			projects.value.splice(index, 1, savedProject);
 			if (selectedProjectID.value === startedProjectID) {
 				selectedProjectID.value = savedProject._id;
@@ -1271,6 +1274,22 @@ function saveCodeEditorViewState() {
 	if (codeEditorViewStates.size <= maxCodeEditorViewStates) return;
 	const oldestKey = codeEditorViewStates.keys().next().value;
 	if (oldestKey) codeEditorViewStates.delete(oldestKey);
+}
+
+function migrateCodeEditorViewStates(
+	fromProjectID: string,
+	toProjectID: string
+) {
+	if (!fromProjectID || !toProjectID || fromProjectID === toProjectID) return;
+
+	for (const [key, state] of [...codeEditorViewStates]) {
+		if (!key.startsWith(`${fromProjectID}:`)) continue;
+		const nextKey = `${toProjectID}:${key.slice(fromProjectID.length + 1)}`;
+		codeEditorViewStates.set(nextKey, state);
+		codeEditorViewStates.delete(key);
+		if (activeCodeEditorViewStateKey === key)
+			activeCodeEditorViewStateKey = nextKey;
+	}
 }
 
 function clampCodeEditorPosition(position: number, docLength: number) {

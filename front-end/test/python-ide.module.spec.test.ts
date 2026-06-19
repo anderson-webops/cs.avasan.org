@@ -1687,6 +1687,9 @@ describe("python IDE project helpers", () => {
 		);
 		expect(pageSource).toContain("const projectChangedDuringSave");
 		expect(pageSource).toContain("saveQueued = true");
+		expect(pageSource).toContain(
+			"migrateCodeEditorViewStates(startedProjectID, savedProject._id);"
+		);
 		expect(pageSource).toContain("currentProject._id = savedProject._id");
 	});
 
