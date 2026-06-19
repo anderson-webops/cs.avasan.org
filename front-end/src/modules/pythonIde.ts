@@ -427,7 +427,7 @@ export function pythonIdeProjectToPayload(
 	project: PythonIdeProject
 ): PythonIdeProjectPayload {
 	return {
-		title: project.title,
+		title: project.title.trim() || "Untitled Python Project",
 		mode: project.mode,
 		files: project.files,
 		activeFileName: resolvePythonIdeActiveFileName(
@@ -736,7 +736,7 @@ export async function saveLocalPythonProjectsAsync(
 
 	try {
 		await writeIndexedDbPythonProjects(key, projects);
-		clearLegacyLocalPythonProjects(key);
+		saveLegacyLocalPythonProjectsMirror(projects, userID);
 	} catch (indexedDbError) {
 		try {
 			saveLocalPythonProjects(projects, userID);
@@ -756,7 +756,7 @@ export function clearLocalPythonProjects(userID?: string | null) {
 export async function clearLocalPythonProjectsAsync(userID?: string | null) {
 	const key = pythonIdeStorageKey(userID);
 	await deleteIndexedDbPythonProjects(key).catch(() => undefined);
-	clearLegacyLocalPythonProjects(key);
+	clearLocalPythonProjects(userID);
 }
 
 async function readIndexedDbPythonProjects(key: string) {
@@ -868,12 +868,14 @@ function indexedDbTransactionDone(transaction: IDBTransaction) {
 	});
 }
 
-function clearLegacyLocalPythonProjects(key: string) {
-	if (typeof window === "undefined") return;
+function saveLegacyLocalPythonProjectsMirror(
+	projects: PythonIdeProject[],
+	userID?: string | null
+) {
 	try {
-		window.localStorage.removeItem(key);
+		saveLocalPythonProjects(projects, userID);
 	} catch {
-		// Cleanup is best-effort because IndexedDB is the primary store.
+		// IndexedDB remains the primary store; the mirror is best-effort.
 	}
 }
 

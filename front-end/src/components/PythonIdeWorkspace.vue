@@ -499,13 +499,18 @@ const pendingSaveProjectIDs = new Set<string>();
 const unsyncedProjectIDs = new Set<string>();
 let resizeObserver: ResizeObserver | null = null;
 let gameAnimationFrame: number | null = null;
+let gameOnDemandTickFrame: number | null = null;
 let turtleAnimationFrame: number | null = null;
 let activeTurtleAnimationStep: TurtleAnimationStep | null = null;
 let turtleAnimationStepStartedAt = 0;
 let turtleAnimationPromise: Promise<void> | null = null;
 let resolveTurtleAnimation: (() => void) | null = null;
 let gameLoopRequested = false;
+let gameLoopContinuous = false;
 let gameTickInFlight = false;
+let gameTickQueued = false;
+let gameTickCallback: (() => Promise<void>) | null = null;
+let gameContinuousFrameRunner: (() => void) | null = null;
 let activeTurtleBridgeRunID = 0;
 let turtleTimerGeneration = 0;
 let activeTurtleID = defaultTurtleID;
@@ -2889,7 +2894,11 @@ function resetGameCanvas(width = 640, height = 400) {
 	gameKeysDown.clear();
 	gameEvents.length = 0;
 	gameLoopRequested = false;
+	gameLoopContinuous = false;
 	gameTickInFlight = false;
+	gameTickQueued = false;
+	gameTickCallback = null;
+	gameContinuousFrameRunner = null;
 	stopAllGameAudio();
 	gameState.width = Math.max(1, width);
 	gameState.height = Math.max(1, height);
@@ -2904,8 +2913,16 @@ function stopGameLoop() {
 		cancelAnimationFrame(gameAnimationFrame);
 		gameAnimationFrame = null;
 	}
+	if (gameOnDemandTickFrame !== null) {
+		cancelAnimationFrame(gameOnDemandTickFrame);
+		gameOnDemandTickFrame = null;
+	}
 	gameLoopRequested = false;
+	gameLoopContinuous = false;
 	gameTickInFlight = false;
+	gameTickQueued = false;
+	gameTickCallback = null;
+	gameContinuousFrameRunner = null;
 	isGameLoopActive.value = false;
 }
 
@@ -3060,9 +3077,11 @@ function getGameImageEntry(asset: ResolvedGameAsset) {
 	};
 	entry.element.addEventListener("load", () => {
 		entry.loaded = true;
+		requestGameTick();
 	});
 	entry.element.addEventListener("error", () => {
 		entry.failed = true;
+		requestGameTick();
 	});
 	entry.element.src = src;
 	gameImageCache.set(asset.key, entry);
@@ -3207,6 +3226,7 @@ function queueGameMusicEndedEvent(audio: HTMLAudioElement) {
 	if (gameMusicAudio !== audio) return;
 	gameMusicAudio = null;
 	gameEvents.push({ type: "musicended" });
+	requestGameTick();
 }
 
 function playGameMusic(name: string, loop = true) {
@@ -3356,38 +3376,89 @@ function playGameTone(frequency: number, duration: number) {
 	return toneID;
 }
 
-function startGameLoop(tick: () => Promise<void>) {
+interface StartGameLoopOptions {
+	continuous?: boolean;
+}
+
+function requestContinuousGameLoop() {
+	gameLoopRequested = true;
+	if (!gameTickCallback || gameLoopContinuous) return;
+
+	gameLoopContinuous = true;
+	gameTickQueued = false;
+	if (gameContinuousFrameRunner && gameAnimationFrame === null) {
+		gameAnimationFrame = requestAnimationFrame(gameContinuousFrameRunner);
+	}
+}
+
+function requestGameTick() {
+	if (!gameTickCallback || gameLoopContinuous) return;
+
+	if (gameTickInFlight || gameOnDemandTickFrame !== null) {
+		gameTickQueued = true;
+		return;
+	}
+
+	const loopID = activeGameLoopID;
+	gameOnDemandTickFrame = requestAnimationFrame(() => {
+		gameOnDemandTickFrame = null;
+		void runGameTick(loopID);
+	});
+}
+
+async function runGameTick(loopID: number) {
+	const tick = gameTickCallback;
+	if (loopID !== activeGameLoopID || !tick || gameTickInFlight) return;
+
+	gameTickInFlight = true;
+	try {
+		await tick();
+	} catch (error) {
+		if (loopID !== activeGameLoopID) return;
+		appendOutput(
+			"stderr",
+			error instanceof Error ? error.message : "Game loop failed."
+		);
+		stopGameLoop();
+	} finally {
+		if (loopID === activeGameLoopID) {
+			gameTickInFlight = false;
+			if (!gameLoopContinuous && gameTickQueued) {
+				gameTickQueued = false;
+				requestGameTick();
+			}
+		}
+	}
+}
+
+function startGameLoop(
+	tick: () => Promise<void>,
+	options: StartGameLoopOptions = {}
+) {
 	stopGameLoop();
 	const loopID = ++activeGameLoopID;
-	const isActiveLoop = () => loopID === activeGameLoopID;
+	gameTickCallback = tick;
+	gameLoopContinuous = options.continuous ?? true;
 	isGameLoopActive.value = true;
 
-	const runTick = () => {
-		if (!isActiveLoop() || gameTickInFlight) return;
-
-		gameTickInFlight = true;
-		tick()
-			.catch((error: unknown) => {
-				if (!isActiveLoop()) return;
-				appendOutput(
-					"stderr",
-					error instanceof Error ? error.message : "Game loop failed."
-				);
-				stopGameLoop();
-			})
-			.finally(() => {
-				if (isActiveLoop()) gameTickInFlight = false;
-			});
-	};
-
 	const runFrame = () => {
-		if (!isActiveLoop()) return;
-		gameAnimationFrame = requestAnimationFrame(runFrame);
-		runTick();
-	};
+		if (loopID !== activeGameLoopID || !gameLoopContinuous) {
+			gameAnimationFrame = null;
+			return;
+		}
 
-	runTick();
-	runFrame();
+		gameAnimationFrame = requestAnimationFrame(runFrame);
+		void runGameTick(loopID);
+	};
+	gameContinuousFrameRunner = runFrame;
+
+	if (gameLoopContinuous) {
+		void runGameTick(loopID);
+		gameAnimationFrame = requestAnimationFrame(runFrame);
+		return;
+	}
+
+	requestGameTick();
 }
 
 function drawGameActor(
@@ -3970,7 +4041,7 @@ const gameBridge: GameBridge = {
 		return events === "[]" ? "" : events;
 	},
 	requestLoop() {
-		gameLoopRequested = true;
+		requestContinuousGameLoop();
 	},
 	consumeLoopRequest() {
 		const requested = gameLoopRequested;
@@ -4047,12 +4118,12 @@ function createGuardedGameBridgeRun(): GameBridge {
 		consumeLoopRequest() {
 			return isActiveRun() && gameBridge.consumeLoopRequest();
 		},
-		startLoop(tick: () => Promise<void>) {
+		startLoop(tick: () => Promise<void>, options?: StartGameLoopOptions) {
 			if (!isActiveRun()) return;
 			gameBridge.startLoop(async () => {
 				if (!isActiveRun()) return;
 				await tick();
-			});
+			}, options);
 		},
 		stopLoop() {
 			if (isActiveRun()) gameBridge.stopLoop();
@@ -4265,6 +4336,7 @@ function handleKeyDown(event: KeyboardEvent) {
 			mod: gameKeyModifierMask(event),
 			unicode: gameKeyUnicode(event)
 		});
+		requestGameTick();
 	}
 
 	if (["down", "left", "right", "space", "up"].includes(normalizedKey)) {
@@ -4283,6 +4355,7 @@ function handleKeyUp(event: KeyboardEvent) {
 		key: normalizedKey,
 		mod: gameKeyModifierMask(event)
 	});
+	requestGameTick();
 }
 
 function gamePointerPosition(event: MouseEvent) {
@@ -4347,6 +4420,7 @@ function queueGamePointerEvent(
 		relX,
 		relY
 	});
+	requestGameTick();
 
 	if (type === "mouseup") lastGamePointerPoint = null;
 	if (type !== "mousemove" || event.buttons) event.preventDefault();
@@ -4362,6 +4436,7 @@ function dispatchCanvasWheelEvent(event: WheelEvent) {
 		y: point.y,
 		button: event.deltaY < 0 ? "wheel_up" : "wheel_down"
 	});
+	requestGameTick();
 	canvasRef.value?.focus();
 	event.preventDefault();
 }

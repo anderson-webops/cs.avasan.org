@@ -331,6 +331,15 @@ describe("python IDE project helpers", () => {
 		expect(payload).not.toHaveProperty("updatedAt");
 	});
 
+	it("keeps remote project payload titles valid when the name is blank", () => {
+		const project = createPythonIdeProject("python");
+		project.title = "   ";
+
+		expect(pythonIdeProjectToPayload(project).title).toBe(
+			"Untitled Python Project"
+		);
+	});
+
 	it("clears local Python projects for one storage user only", () => {
 		const firstProject = createPythonIdeProject("python");
 		const secondProject = createPythonIdeProject("data");
@@ -395,6 +404,10 @@ describe("python IDE project helpers", () => {
 		);
 		expect(moduleSource).toContain(
 			"export async function saveLocalPythonProjectsAsync"
+		);
+		expect(moduleSource).toContain("await writeIndexedDbPythonProjects");
+		expect(moduleSource).toContain(
+			"saveLegacyLocalPythonProjectsMirror(projects, userID);"
 		);
 	});
 
@@ -1285,6 +1298,10 @@ describe("python IDE project helpers", () => {
 				gameLoopIndex
 			)
 		).toBeGreaterThan(captureIndex);
+		expect(runtimeSource).toContain(
+			"const runContinuously = options.gameBridge.consumeLoopRequest();"
+		);
+		expect(runtimeSource).toContain("{ continuous: runContinuously }");
 		expect(pageSource).toContain("shouldStop: () => stopRequested.value");
 		expect(pageSource).toContain("Stopped Python run.");
 		expect(pageSource).toContain(
@@ -1350,19 +1367,43 @@ describe("python IDE project helpers", () => {
 		);
 
 		expect(pageSource).toContain("let activeGameLoopID = 0;");
+		expect(pageSource).toContain(
+			"let gameOnDemandTickFrame: number | null = null;"
+		);
+		expect(pageSource).toContain("let gameLoopContinuous = false;");
+		expect(pageSource).toContain("let gameTickQueued = false;");
+		expect(pageSource).toContain(
+			"let gameTickCallback: (() => Promise<void>) | null = null;"
+		);
 		expect(stopGameLoopSource).toContain("activeGameLoopID += 1;");
 		expect(startGameLoopSource).toContain(
 			"const loopID = ++activeGameLoopID;"
 		);
+		expect(pageSource).toContain("function requestGameTick");
+		expect(pageSource).toContain("function requestContinuousGameLoop");
+		expect(pageSource).toContain("async function runGameTick");
 		expect(startGameLoopSource).toContain(
-			"const isActiveLoop = () => loopID === activeGameLoopID;"
+			"options: StartGameLoopOptions = {}"
 		);
 		expect(startGameLoopSource).toContain(
-			"if (!isActiveLoop() || gameTickInFlight) return;"
+			"gameLoopContinuous = options.continuous ?? true;"
 		);
-		expect(startGameLoopSource).toContain("if (!isActiveLoop()) return;");
 		expect(startGameLoopSource).toContain(
-			"if (isActiveLoop()) gameTickInFlight = false;"
+			"if (loopID !== activeGameLoopID || !gameLoopContinuous)"
+		);
+		expect(startGameLoopSource).toContain(
+			"gameAnimationFrame = requestAnimationFrame(runFrame);"
+		);
+		expect(startGameLoopSource).toContain("void runGameTick(loopID);");
+		expect(startGameLoopSource).toContain("requestGameTick();");
+		expect(pageSource).toContain(
+			"if (!gameTickCallback || gameLoopContinuous) return;"
+		);
+		expect(pageSource).toContain("gameTickQueued = true;");
+		expect(pageSource).toContain("requestContinuousGameLoop();");
+		expect(pageSource).toContain("}, options);");
+		expect(stopGameLoopSource).toContain(
+			"if (gameOnDemandTickFrame !== null)"
 		);
 	});
 
@@ -1464,6 +1505,7 @@ describe("python IDE project helpers", () => {
 		expect(getGameImageEntrySource).toContain(
 			"gameImageCache.set(asset.key, entry);"
 		);
+		expect(getGameImageEntrySource).toContain("requestGameTick();");
 	});
 
 	it("runs plain Python projects in a terminable Pyodide worker", () => {

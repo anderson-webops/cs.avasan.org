@@ -146,7 +146,10 @@ export interface GameBridge {
 	popEventsJson: () => string;
 	requestLoop: () => void;
 	consumeLoopRequest: () => boolean;
-	startLoop: (tick: () => Promise<void>) => void;
+	startLoop: (
+		tick: () => Promise<void>,
+		options?: { continuous?: boolean }
+	) => void;
 	stopLoop: () => void;
 	playSound: (name: string, loops?: number) => void;
 	stopSound: (name: string) => void;
@@ -2781,6 +2784,7 @@ class _Clock:
             "due": time.monotonic() + float(_number(delay, 0)),
             "interval": None,
         })
+        _bridge.requestLoop()
 
     def schedule_unique(self, function, delay):
         self.unschedule(function)
@@ -2789,6 +2793,7 @@ class _Clock:
             "due": time.monotonic() + float(_number(delay, 0)),
             "interval": None,
         })
+        _bridge.requestLoop()
 
     def schedule_interval(self, function, interval):
         _scheduled.append({
@@ -2796,6 +2801,7 @@ class _Clock:
             "due": time.monotonic() + float(_number(interval, 0)),
             "interval": float(_number(interval, 0)),
         })
+        _bridge.requestLoop()
 
     def unschedule(self, function):
         _scheduled[:] = [
@@ -2875,6 +2881,7 @@ def animate(obj, tween="linear", duration=1, on_finished=None, **targets):
         **targets,
     )
     _animations.append(animation)
+    _bridge.requestLoop()
     return animation
 
 def _run_animations(now):
@@ -3128,7 +3135,8 @@ def start(module_globals=None):
         float(_number(_module_globals.get("WIDTH", 640), 640)),
         float(_number(_module_globals.get("HEIGHT", 400), 400)),
     )
-    _bridge.requestLoop()
+    if callable(_module_globals.get("update")) or _scheduled or _animations:
+        _bridge.requestLoop()
 
 def go():
     frame = inspect.currentframe()
@@ -4404,12 +4412,15 @@ except Exception as error:
 	_classes_pgzero.__classes_pgzero_start(__main__.__dict__)
 	`);
 		throwIfRunStopped(options);
-		options.gameBridge.consumeLoopRequest();
-		options.gameBridge.startLoop(async () => {
-			await pyodide.runPythonAsync(`
+		const runContinuously = options.gameBridge.consumeLoopRequest();
+		options.gameBridge.startLoop(
+			async () => {
+				await pyodide.runPythonAsync(`
 	import _classes_pgzero
 	_classes_pgzero.__classes_pgzero_tick()
 	`);
-		});
+			},
+			{ continuous: runContinuously }
+		);
 	}
 }
