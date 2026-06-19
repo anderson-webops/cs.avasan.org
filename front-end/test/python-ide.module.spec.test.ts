@@ -486,6 +486,16 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("releasePythonIdeRuntimeCallbacks");
 		expect(pageSource).toContain("scheduleTimer(delayMs: number");
 		expect(pageSource).toContain("clearTurtleTimers()");
+		expect(pageSource).toContain("let turtleTimerGeneration = 0;");
+		expect(pageSource).toContain("turtleTimerGeneration += 1;");
+		expect(pageSource).toContain("async function runTurtleTimerCallback");
+		expect(pageSource).toContain("await waitForTurtleAnimation();");
+		expect(pageSource).toContain(
+			"if (timerGeneration !== turtleTimerGeneration) return;"
+		);
+		expect(pageSource).toContain(
+			"void runTurtleTimerCallback(callback, timerGeneration);"
+		);
 		expect(pageSource).toContain("releaseIdlePythonRuntimeCallbacks()");
 	});
 

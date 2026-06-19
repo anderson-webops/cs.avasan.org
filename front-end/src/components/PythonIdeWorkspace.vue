@@ -482,6 +482,7 @@ let resolveTurtleAnimation: (() => void) | null = null;
 let gameLoopRequested = false;
 let gameTickInFlight = false;
 let activeTurtleBridgeRunID = 0;
+let turtleTimerGeneration = 0;
 let activeGameBridgeRunID = 0;
 let activeGameLoopID = 0;
 let activeTurtleDragButton: string | null = null;
@@ -2174,11 +2175,31 @@ function resetTurtleCanvas() {
 }
 
 function clearTurtleTimers() {
+	turtleTimerGeneration += 1;
 	for (const handle of turtleTimerHandles) {
 		window.clearTimeout(handle);
 	}
 	turtleTimerHandles.clear();
 	activeTurtleTimerCount.value = 0;
+}
+
+async function runTurtleTimerCallback(
+	callback: () => void,
+	timerGeneration: number
+) {
+	await waitForTurtleAnimation();
+	if (timerGeneration !== turtleTimerGeneration) return;
+
+	try {
+		callback();
+	} catch (error) {
+		appendOutput(
+			"stderr",
+			error instanceof Error
+				? error.message
+				: "Turtle timer handler failed."
+		);
+	}
 }
 
 function releaseIdlePythonRuntimeCallbacks() {
@@ -3162,20 +3183,12 @@ const turtleBridge: TurtleBridge = {
 	scheduleTimer(delayMs: number, callback: (() => void) | null) {
 		if (!callback) return;
 
+		const timerGeneration = turtleTimerGeneration;
 		const handle = window.setTimeout(
 			() => {
 				turtleTimerHandles.delete(handle);
 				activeTurtleTimerCount.value = turtleTimerHandles.size;
-				try {
-					callback();
-				} catch (error) {
-					appendOutput(
-						"stderr",
-						error instanceof Error
-							? error.message
-							: "Turtle timer handler failed."
-					);
-				}
+				void runTurtleTimerCallback(callback, timerGeneration);
 			},
 			Math.max(0, delayMs)
 		);
