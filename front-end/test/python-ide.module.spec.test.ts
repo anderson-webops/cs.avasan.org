@@ -1415,8 +1415,12 @@ describe("python IDE project helpers", () => {
 						"from sklearn.model_selection import train_test_split",
 						"from .local import helper",
 						"import invalid-name, altair # keep the valid item after a comma",
+						"import matplotlib.pyplot as plt, \\",
+						"    scipy.stats as stats",
 						'"""',
 						"import tensorflow",
+						"import torch, \\",
+						"    keras",
 						"from keras import Sequential",
 						'"""',
 						"import csv # a comment with \"\"\" should not open a string"
@@ -1427,7 +1431,16 @@ describe("python IDE project helpers", () => {
 					content: "import should_not_count"
 				}
 			])
-		]).toEqual(["os", "numpy", "pandas", "sklearn", "altair", "csv"]);
+		]).toEqual([
+			"os",
+			"numpy",
+			"pandas",
+			"sklearn",
+			"altair",
+			"matplotlib",
+			"scipy",
+			"csv"
+		]);
 	});
 
 	it("normalizes local Python project module names for fresh imports", () => {

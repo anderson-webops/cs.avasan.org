@@ -8,12 +8,27 @@ const PYTHON_IMPORT_KEYWORD = "import";
 const PYTHON_IMPORT_SEPARATOR_RE = /\s*,\s*/;
 const PYTHON_IMPORT_ALIAS_RE = /\s+as\s+/i;
 const PYTHON_MODULE_SEPARATOR_RE = /\./;
+const PYTHON_LINE_CONTINUATION_RE = /\\\s*$/;
 const PYTHON_TRIPLE_QUOTE_DELIMITERS = ['"""', "'''"] as const;
 type PythonTripleQuoteDelimiter =
 	(typeof PYTHON_TRIPLE_QUOTE_DELIMITERS)[number];
 
 function isPythonFileName(value: string) {
 	return PYTHON_EXTENSION_RE.test(value);
+}
+
+function codeBeforeComment(line: string) {
+	return line.split("#")[0] ?? "";
+}
+
+function lineContinues(line: string) {
+	return PYTHON_LINE_CONTINUATION_RE.test(codeBeforeComment(line));
+}
+
+function withoutLineContinuation(line: string) {
+	return codeBeforeComment(line)
+		.replace(PYTHON_LINE_CONTINUATION_RE, "")
+		.trim();
 }
 
 function importedTopLevelModulesFromLine(line: string) {
@@ -49,11 +64,11 @@ function nextTripleQuoteDelimiter(
 ) {
 	let delimiter = activeDelimiter;
 	let offset = 0;
-	const codeBeforeComment = line.split("#")[0] ?? "";
+	const lineCode = codeBeforeComment(line);
 
-	while (offset < codeBeforeComment.length) {
+	while (offset < lineCode.length) {
 		if (delimiter) {
-			const closingIndex = codeBeforeComment.indexOf(delimiter, offset);
+			const closingIndex = lineCode.indexOf(delimiter, offset);
 			if (closingIndex === -1) return delimiter;
 			offset = closingIndex + delimiter.length;
 			delimiter = null;
@@ -63,7 +78,7 @@ function nextTripleQuoteDelimiter(
 		let nextIndex = -1;
 		let nextDelimiter: PythonTripleQuoteDelimiter | null = null;
 		for (const candidate of PYTHON_TRIPLE_QUOTE_DELIMITERS) {
-			const candidateIndex = codeBeforeComment.indexOf(candidate, offset);
+			const candidateIndex = lineCode.indexOf(candidate, offset);
 			if (
 				candidateIndex !== -1 &&
 				(nextIndex === -1 || candidateIndex < nextIndex)
@@ -85,6 +100,7 @@ export function pythonIdeImportedTopLevelModules(files: PythonIdeFile[]) {
 	const modules = new Set<string>();
 	let activeMultilineStringDelimiter: PythonTripleQuoteDelimiter | null =
 		null;
+	let continuedLine = "";
 
 	for (const line of files
 		.filter(file => isPythonFileName(file.name))
@@ -98,9 +114,32 @@ export function pythonIdeImportedTopLevelModules(files: PythonIdeFile[]) {
 			activeMultilineStringDelimiter
 		);
 		if (!startsInsideMultilineString) {
+			if (continuedLine) {
+				continuedLine =
+					`${continuedLine} ${withoutLineContinuation(line)}`.trim();
+				if (lineContinues(line)) continue;
+
+				for (const moduleName of importedTopLevelModulesFromLine(
+					continuedLine
+				))
+					modules.add(moduleName);
+				continuedLine = "";
+				continue;
+			}
+
+			if (lineContinues(line)) {
+				continuedLine = withoutLineContinuation(line);
+				continue;
+			}
+
 			for (const moduleName of importedTopLevelModulesFromLine(line))
 				modules.add(moduleName);
 		}
+	}
+
+	if (continuedLine) {
+		for (const moduleName of importedTopLevelModulesFromLine(continuedLine))
+			modules.add(moduleName);
 	}
 
 	return modules;
