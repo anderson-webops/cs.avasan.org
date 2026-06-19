@@ -21,7 +21,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "macOS and Windows Walkthroughs",
 					content:
-						"On macOS, install Node.js LTS, the chosen editor, and verify that `node`, `npm`, and a local dev server` all work before moving into frameworks or deployment. On Windows, the same setup should include early practice with path handling, terminals, and environment variables so hosting and backend topics do not feel like a second course with different rules."
+						"On macOS, install Node.js LTS, the chosen editor, and verify that `node`, `npm`, and a local dev server` all work before moving into frameworks or deployment. On Windows, add early practice with path handling, terminals, and environment variables so hosting and backend topics do not feel like a second course with different rules."
 				},
 				{
 					title: "Course Workspace and Folder Structure",
@@ -31,7 +31,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Early Module on Browser Devtools, Git, npm, and Project Structure",
 					content:
-						"Before deeper framework or hosting topics appear, teach browser devtools, Git/GitHub basics, npm, and project layout as recurring strands. The goal is to stop deployment and back-end material from feeling disconnected by making inspection, version control, and package management part of normal development from the beginning."
+						"Before deeper framework or hosting topics appear, browser devtools, Git/GitHub basics, npm, and project layout need to become recurring strands. Deployment and back-end material feel connected when inspection, version control, and package management are normal development habits from the beginning."
 				},
 				{
 					title: "WDF0 Setup and Tooling: Core Project",
@@ -184,7 +184,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Add Git and GitHub as Normal Workflow Tools",
 					content:
-						'This section covers repository initialization, commit hygiene, branch awareness, and remote publishing as part of normal development rather than as an optional add-on after the code is "done." Connect Git not only to collaboration, but to safe experimentation, rollback, and project history during longer builds.'
+						'Repository initialization, commit hygiene, branch awareness, and remote publishing belong inside normal development rather than after the code is "done." Git supports collaboration, but it also makes safe experimentation, rollback, and project history practical during longer builds.'
 				},
 				{
 					title: "Make Browser Devtools a Recurring Strand",
@@ -252,12 +252,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Project Structure and Front-End Workspace Habits",
 					content:
-						"This section covers how to separate HTML, CSS, JavaScript, assets, configuration, and build outputs so a project stays understandable as it grows. This is where naming conventions, folder boundaries, and deliberate entry points become part of the course, because hosting and build tooling depend on those structural habits later."
+						"Separate HTML, CSS, JavaScript, assets, configuration, and build outputs so a project stays understandable as it grows. Naming conventions, folder boundaries, and deliberate entry points become practical engineering habits because hosting and build tooling depend on that structure later."
 				},
 				{
 					title: "npm and Package Management",
 					content:
-						"npm is the mechanism for package installation, scripts, and local tooling rather than a magical prerequisite for frameworks. Key idea: what `package.json` is for, why dependencies and devDependencies differ, and how scripts like `dev`, `build`, and `start` capture repeatable project behavior."
+						"npm is the mechanism for package installation, scripts, and local tooling rather than a magical prerequisite for frameworks. `package.json` records project behavior, dependencies and devDependencies serve different purposes, and scripts like `dev`, `build`, and `start` make common tasks repeatable."
 				},
 				{
 					title: "Modules, Bundlers, and Local Dev Servers at a Gentle Level",
@@ -267,7 +267,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Environment Variables, Forms, and Validation",
 					content:
-						"This section covers environment variables as configuration boundaries rather than as secret magic strings. Pair that lesson with forms and validation so user input and deployment configuration are treated early as data surfaces that need explicit handling, clear defaults, and careful debugging."
+						"Environment variables are configuration boundaries, not secret magic strings. Pair them with forms and validation so user input and deployment configuration are treated early as data surfaces that need explicit handling, clear defaults, and careful debugging."
 				},
 				{
 					title: "WDF3 Stage 2: Web Development Foundations: Core Project",
@@ -335,7 +335,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Routing and Multi-View Thinking",
 					content:
-						"This section covers client-side routing as a way to represent multiple screens or views in one application without reloading the entire page. Connect this to information architecture, URL design, and the idea that front-end applications need deliberate navigation structures rather than one growing script file."
+						"Client-side routing represents multiple screens or views in one application without reloading the entire page. Connect routing to information architecture, URL design, and the need for deliberate navigation structures rather than one growing script file."
 				},
 				{
 					title: "State Management Basics and Async Data Loading",
@@ -345,7 +345,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Accessibility and Responsive Design as Core Requirements",
 					content:
-						"Treat accessibility and responsive design as first-class constraints in front-end work rather than polish for the end. Practice target: Semantic HTML, keyboard access, readable contrast, flexible layouts, and content priorities across screen sizes so their app work is credible outside a demo environment."
+						"Treat accessibility and responsive design as first-class constraints in front-end work rather than polish for the end. Practice semantic HTML, keyboard access, readable contrast, flexible layouts, and content priorities across screen sizes so app work is credible outside a demo environment."
 				},
 				{
 					title: "WDF4 Stage 3: Front-End Applications: Core Project",
@@ -405,7 +405,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Node.js Runtime and Server-Side JavaScript",
 					content:
-						"Node.js is the runtime that lets JavaScript move from the browser into server work, tooling, and automation. Key idea: the same language now runs in a different environment with different APIs, different security boundaries, and a different responsibility for input handling and process lifecycle."
+						"Node.js is the runtime that lets JavaScript move from the browser into server work, tooling, and automation. The same language now runs in a different environment with different APIs, different security boundaries, and different responsibilities for input handling and process lifecycle."
 				},
 				{
 					title: "Express or Fastify as the API Surface",
@@ -415,7 +415,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "REST APIs, Request Validation, and Error Shapes",
 					content:
-						'This section covers simple RESTful patterns paired immediately with request validation and explicit error handling. Key idea: An API is more than a route that "works"; it is a contract that must handle missing fields, invalid payloads, malformed input, and repeatable response shapes.'
+						'Simple RESTful patterns need to be paired immediately with request validation and explicit error handling. An API is more than a route that "works"; it is a contract that must handle missing fields, invalid payloads, malformed input, and repeatable response shapes.'
 				},
 				{
 					title: "Auth Basics and Session vs Token Concepts",
@@ -480,7 +480,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "MongoDB Basics and Data Modeling",
 					content:
-						"This section covers MongoDB as a practical entry point into document databases and data models. Learn what a collection and document are, how application code maps user-facing features onto stored data, and why schema thinking still matters even in a NoSQL environment."
+						"MongoDB is a practical entry point into document databases and data models. Learn what a collection and document are, how application code maps user-facing features onto stored data, and why schema thinking still matters even in a NoSQL environment."
 				},
 				{
 					title: "Schemas, Validation, and CRUD",
@@ -490,7 +490,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Indexes at a High Level",
 					content:
-						"Indexes should be handled conceptually rather than as a deep database-internals topic. Key idea: indexes trade extra storage and write cost for faster queries, and data shape and access patterns influence performance long before a project becomes large."
+						"Handle indexes conceptually before diving into database internals. Indexes trade extra storage and write cost for faster queries, and data shape plus access patterns influence performance long before a project becomes large."
 				},
 				{
 					title: "When to Choose SQL vs NoSQL",
@@ -515,7 +515,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Project: Blog or Notes App with MongoDB",
 					content:
-						"Use the notes app lab to combine MongoDB basics, schemas, validation, and CRUD in a full-stack workflow. Skill target: Explain how the browser talks to the API, how the API validates payloads, how the database stores notes, and why a simple index or schema constraint improves the project beyond a basic demo.",
+						"The notes app lab combines MongoDB basics, schemas, validation, and CRUD in a full-stack workflow. The finished explanation should trace how the browser talks to the API, how the API validates payloads, how the database stores notes, and why a simple index or schema constraint improves the project beyond a basic demo.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF2-Notes-App-with-MongoDB/starter",
 					solutionLink:
@@ -555,7 +555,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Domain Names, DNS, and Deployment Targets",
 					content:
-						'This section covers how domain names, DNS records, and deployment targets fit together so publishing feels concrete. A deployed project is not just "on the internet"; it has a hosting surface, a domain, DNS configuration, environment settings, and a verification story after each change.'
+						'Domain names, DNS records, and deployment targets fit together so publishing feels concrete. A deployed project is not just "on the internet"; it has a hosting surface, a domain, DNS configuration, environment settings, and a verification story after each change.'
 				},
 				{
 					title: "Static Hosting vs App Hosting",
@@ -565,7 +565,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Reverse Proxies, Environment Configuration, Monitoring, and Logs",
 					content:
-						"This section covers reverse proxies, environment configuration, monitoring, and logs as part of deployment rather than as optional operations trivia. Key idea: deployment quality depends on observability, configuration boundaries, and the ability to distinguish front-end failures from API failures after the project leaves localhost."
+						"Reverse proxies, environment configuration, monitoring, and logs are part of deployment rather than optional operations trivia. Deployment quality depends on observability, configuration boundaries, and the ability to distinguish front-end failures from API failures after the project leaves localhost."
 				},
 				{
 					title: "Deployment as a Repeatable Process",
@@ -630,7 +630,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Linux and Server Basics for Web Developers",
 					content:
-						"Cover SSH, service processes, logs, environment files, and file locations so deployment does not stop at a platform dashboard. Key idea: Enough Linux and server structure to connect code to runtime files, service processes, log locations, and safe operational changes."
+						"SSH, service processes, logs, environment files, and file locations keep deployment from stopping at a platform dashboard. Web developers need enough Linux and server structure to connect code to runtime files, service processes, log locations, and safe operational changes."
 				},
 				{
 					title: "Cloud and Platform Ideas",
@@ -640,12 +640,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Database Hosting and Recovery Basics",
 					content:
-						"This section covers MongoDB Atlas and local MongoDB together as related but different development and hosted contexts. Backup and restore basics frame data hosting as reliability planning, not just a connection string."
+						"MongoDB Atlas and local MongoDB are related but different development and hosted contexts. Backup and restore basics frame data hosting as reliability planning, not just a connection string."
 				},
 				{
 					title: "Use Hosting Topics to Connect the Whole Stack",
 					content:
-						"This section unifies earlier lessons by showing how front-end bundles, Node servers, databases, domains, environment variables, and logs all meet in production. The target outcome is the ability to name the likely deployment surface and operational responsibility for each layer of a small web product."
+						"Hosting topics unify earlier lessons by showing how front-end bundles, Node servers, databases, domains, environment variables, and logs all meet in production. A strong explanation names the likely deployment surface and operational responsibility for each layer of a small web product."
 				},
 				{
 					title: "WDF8 Hosting and Operations Topics to Add: Core Project",
@@ -744,7 +744,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Project: Deployment Lab for Separate Front-End and Back-End Shipping",
 					content:
-						'Use a split deployment project to tie hosting, DNS, reverse proxies, environment configuration, and monitoring together. The goal is to move beyond "my app works locally" into "I can explain how the pieces are hosted, connected, and verified after release."',
+						'A split deployment project ties hosting, DNS, reverse proxies, environment configuration, and monitoring together. The final explanation should move beyond "my app works locally" into "I can explain how the pieces are hosted, connected, and verified after release."',
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF5-Separate-Deployment-Lab/starter",
 					solutionLink:
@@ -795,7 +795,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Logs and Uptime",
 					content:
-						"Add a follow-up strand focused on actual production operations, beginning with logs and uptime. Key idea: Once a project is live, part of the job is making sure it stays reachable, emits useful signals, and can be diagnosed when users report problems."
+						"Add a follow-up strand focused on actual production operations, beginning with logs and uptime. Once a project is live, part of the job is making sure it stays reachable, emits useful signals, and can be diagnosed when users report problems."
 				},
 				{
 					title: "TLS and Reverse Proxies",
@@ -805,12 +805,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Backups, Environment Rotation, and Performance Basics",
 					content:
-						"This section covers backups, environment rotation, and performance basics as a natural next step after published full-stack work. The lesson is that stable production systems are not only built; they are maintained, rotated, backed up, and observed over time."
+						"Backups, environment rotation, and performance basics are a natural next step after published full-stack work. Stable production systems are not only built; they are maintained, rotated, backed up, and observed over time."
 				},
 				{
 					title: "Move from Deployment to Operations Thinking",
 					content:
-						"This advanced strand frames deployment as the start of operational responsibility, not the end of the project. Completion evidence should include an explanation of how to monitor, protect, and maintain a small production system after launch."
+						"This advanced strand frames deployment as the start of operational responsibility, not the end of the project. Completion evidence needs an explanation of how to monitor, protect, and maintain a small production system after launch."
 				},
 				{
 					title: "WDF10 Suggested Advanced Strand: Core Project",
@@ -870,22 +870,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Ports and Listening Services",
 					content:
-						"Cross-link this course with networking by treating ports and listening services as concrete operational facts. Key idea: Browsers, APIs, databases, and reverse proxies all communicate through explicit ports and that many deployment bugs start with services not listening where the rest of the system expects them to be."
+						"Cross-link this course with networking by treating ports and listening services as concrete operational facts. Browsers, APIs, databases, and reverse proxies all communicate through explicit ports, and many deployment bugs start with services not listening where the rest of the system expects them to be."
 				},
 				{
 					title: "DNS and Domain Routing",
 					content:
-						"This section covers DNS and domain routing as the networking layer that makes published sites and APIs reachable. Skill target: Connect hostname records to the hosting platform or server that answers them and explain why DNS changes can affect deployment timing and rollback strategy."
+						"DNS and domain routing are the networking layer that makes published sites and APIs reachable. Connect hostname records to the hosting platform or server that answers them, then explain why DNS changes can affect deployment timing and rollback strategy."
 				},
 				{
 					title: "TLS, HTTPS, and Trust Boundaries",
 					content:
-						"Use TLS and HTTPS to connect networking, security, and deployment. Key idea: Why secure transport matters, where termination often happens, and how HTTPS relates to modern browsers, cookies, API access, and user trust."
+						"Use TLS and HTTPS to connect networking, security, and deployment. Secure transport matters for modern browsers, cookies, API access, and user trust, and the point where TLS terminates changes which system layer is responsible for certificates and decrypted traffic."
 				},
 				{
 					title: "Firewalls, Security Groups, and localhost vs LAN vs Public Deployment",
 					content:
-						"This section covers the difference between `localhost`, a LAN-accessible service, and a public deployment, then connects that difference to firewalls and security groups. The important idea is that exposure level changes the security and operational assumptions of the app even when the code itself has not changed."
+						"`localhost`, LAN-accessible services, and public deployments expose different audiences and risk levels. Firewalls and security groups make that boundary explicit, and exposure level changes the security and operational assumptions of the app even when the code itself has not changed."
 				},
 				{
 					title: "WDF11 Integration with Network Topics: Core Project",

@@ -2344,6 +2344,31 @@ describe("course text quality normalization", () => {
 		);
 	});
 
+	it("keeps Web Development Foundations guidance specific", async () => {
+		const course = await loadRawCourse("web-development-foundations");
+		expect(course).not.toBeNull();
+		const corpus = allCourseText(course);
+		const source = fs.readFileSync(
+			"src/stores/courses/web-development-foundations.ts",
+			"utf8"
+		);
+
+		expect(corpus).not.toMatch(/This section covers/i);
+		expect(corpus).not.toMatch(/Key idea:/i);
+		expect(corpus).not.toMatch(/Skill target:/i);
+		expect(corpus).not.toMatch(/The goal is to/i);
+		expect(source).not.toMatch(/should include/i);
+		expect(corpus).toContain(
+			"browser devtools, Git/GitHub basics, npm, and project layout need to become recurring strands"
+		);
+		expect(corpus).toContain(
+			"Environment variables are configuration boundaries"
+		);
+		expect(corpus).toContain(
+			"DNS and domain routing are the networking layer"
+		);
+	});
+
 	it("keeps Network Systems IPv6 projects distinct and clearly named", async () => {
 		const course = await loadRawCourse("network-systems");
 		expect(course).not.toBeNull();
