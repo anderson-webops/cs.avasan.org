@@ -166,6 +166,7 @@ interface TurtleAnimationStep {
 	command?: TurtleRenderCommand;
 	durationMs: number;
 	fromPose: TurtlePose;
+	turtleID: string;
 	toPose: TurtlePose;
 }
 
@@ -239,6 +240,7 @@ const assetCompletionExtensionMap = {
 	music: audioAssetExtensions,
 	sounds: audioAssetExtensions
 } satisfies Record<PythonIdeAssetFolder, string[]>;
+const defaultTurtleID = "default";
 const defaultTurtleShape: TurtleShapeName = "classic";
 const supportedTurtleShapes = new Set<TurtleShapeName>([
 	"arrow",
@@ -485,6 +487,7 @@ let gameLoopRequested = false;
 let gameTickInFlight = false;
 let activeTurtleBridgeRunID = 0;
 let turtleTimerGeneration = 0;
+let activeTurtleID = defaultTurtleID;
 let activeGameBridgeRunID = 0;
 let activeGameLoopID = 0;
 let activeTurtleDragButton: string | null = null;
@@ -500,7 +503,7 @@ let gameCourseAssetPackLoadFailed = false;
 let turtleStampCounter = 0;
 let turtleCompletedCommands: TurtleRenderCommand[] = [];
 let turtleQueuedSteps: TurtleAnimationStep[] = [];
-let turtleVisiblePose: TurtlePose | null = null;
+let turtleVisiblePoses = new Map<string, TurtlePose>();
 let codeEditorModulesPromise: Promise<PythonCodeEditorModules> | null = null;
 let pythonRuntimeModulePromise: Promise<PythonRuntimeModule> | null = null;
 let codeEditorResetToken = 0;
@@ -551,18 +554,25 @@ function stopLoadedPythonRuntimeRun() {
 		});
 }
 
-const turtleState: TurtleState = {
-	x: 0,
-	y: 0,
-	heading: 0,
-	penDown: true,
-	penColor: "#000000",
-	fillColor: "#000000",
-	lineWidth: 3,
-	background: "#ffffff",
-	shape: defaultTurtleShape,
-	visible: true
-};
+function createDefaultTurtleState(background = "#ffffff"): TurtleState {
+	return {
+		x: 0,
+		y: 0,
+		heading: 0,
+		penDown: true,
+		penColor: "#000000",
+		fillColor: "#000000",
+		lineWidth: 3,
+		background,
+		shape: defaultTurtleShape,
+		visible: true
+	};
+}
+
+let turtleState = createDefaultTurtleState();
+let turtleStates = new Map<string, TurtleState>([
+	[defaultTurtleID, turtleState]
+]);
 
 const turtleFillState: TurtleFillState = {
 	active: false,
@@ -1644,12 +1654,36 @@ function currentTurtlePose(): TurtlePose {
 	};
 }
 
-function visibleTurtlePose() {
-	return turtleVisiblePose ?? currentTurtlePose();
+function activateTurtleState(id: string) {
+	activeTurtleID = id || defaultTurtleID;
+	if (
+		activeTurtleID !== defaultTurtleID &&
+		turtleStates.size === 1 &&
+		turtleStates.has(defaultTurtleID) &&
+		turtleCompletedCommands.length === 0 &&
+		turtleQueuedSteps.length === 0
+	) {
+		turtleStates.delete(defaultTurtleID);
+		turtleVisiblePoses.delete(defaultTurtleID);
+	}
+
+	const existingState = turtleStates.get(activeTurtleID);
+	if (existingState) {
+		turtleState = existingState;
+		return;
+	}
+
+	turtleState = createDefaultTurtleState(turtleState.background);
+	turtleStates.set(activeTurtleID, turtleState);
+	turtleVisiblePoses.set(activeTurtleID, currentTurtlePose());
 }
 
-function setTurtleVisiblePose(pose: TurtlePose) {
-	turtleVisiblePose = { ...pose };
+function visibleTurtlePose(turtleID = activeTurtleID) {
+	return turtleVisiblePoses.get(turtleID) ?? currentTurtlePose();
+}
+
+function setTurtleVisiblePose(pose: TurtlePose, turtleID = activeTurtleID) {
+	turtleVisiblePoses.set(turtleID, { ...pose });
 }
 
 function turtlePoseChanged(fromPose: TurtlePose, toPose: TurtlePose) {
@@ -1950,7 +1984,8 @@ function renderTurtleCommand(
 
 function renderTurtleScene(
 	markerPose = visibleTurtlePose(),
-	activeCommand?: { command: TurtleRenderCommand; progress: number }
+	activeCommand?: { command: TurtleRenderCommand; progress: number },
+	activeMarkerTurtleID = activeTurtleID
 ) {
 	const canvasContext = resizeCanvasForDisplay();
 	if (!canvasContext) return;
@@ -1972,6 +2007,12 @@ function renderTurtleScene(
 				: undefined
 		);
 	}
+
+	for (const [turtleID, pose] of turtleVisiblePoses) {
+		if (turtleID !== activeMarkerTurtleID)
+			drawTurtleMarker(context, pose, toCanvas);
+	}
+
 	drawTurtleMarker(context, markerPose, toCanvas);
 }
 
@@ -2018,10 +2059,11 @@ function runTurtleAnimationFrame(timestamp: number) {
 		step.toPose,
 		progress
 	);
-	setTurtleVisiblePose(markerPose);
+	setTurtleVisiblePose(markerPose, step.turtleID);
 	renderTurtleScene(
 		markerPose,
-		step.command ? { command: step.command, progress } : undefined
+		step.command ? { command: step.command, progress } : undefined,
+		step.turtleID
 	);
 
 	if (progress >= 1) {
@@ -2056,13 +2098,15 @@ function turtleAnimationStepDistance(step: TurtleAnimationStep) {
 
 function completeTurtleAnimationStep(step: TurtleAnimationStep) {
 	if (step.command) turtleCompletedCommands.push(step.command);
-	setTurtleVisiblePose(step.toPose);
+	setTurtleVisiblePose(step.toPose, step.turtleID);
 }
 
 function flushInstantTurtleAnimationSteps(timestamp: number) {
 	let consumedDistance = 0;
 	let consumedSteps = 0;
-	let markerPose = visibleTurtlePose();
+	const synchronizedTurtleID =
+		activeTurtleAnimationStep?.turtleID ?? activeTurtleID;
+	let markerPose = visibleTurtlePose(synchronizedTurtleID);
 	const synchronizedTrailBatch =
 		activeTurtleAnimationStep !== null &&
 		isVisibleTurtleTrailStep(activeTurtleAnimationStep);
@@ -2076,6 +2120,7 @@ function flushInstantTurtleAnimationSteps(timestamp: number) {
 	while (
 		activeTurtleAnimationStep &&
 		isInstantTurtleAnimationStep(activeTurtleAnimationStep) &&
+		activeTurtleAnimationStep.turtleID === synchronizedTurtleID &&
 		isVisibleTurtleTrailStep(activeTurtleAnimationStep) ===
 			synchronizedTrailBatch &&
 		consumedSteps < frameStepBudget &&
@@ -2090,7 +2135,7 @@ function flushInstantTurtleAnimationSteps(timestamp: number) {
 		turtleAnimationStepStartedAt = timestamp;
 	}
 
-	renderTurtleScene(markerPose);
+	renderTurtleScene(markerPose, undefined, synchronizedTurtleID);
 	if (!activeTurtleAnimationStep && turtleQueuedSteps.length === 0) {
 		turtleAnimationFrame = null;
 		resolveActiveTurtleAnimation();
@@ -2111,8 +2156,13 @@ function scheduleTurtleAnimation() {
 	return turtleAnimationPromise;
 }
 
-function queueTurtleStep(step: TurtleAnimationStep) {
-	turtleQueuedSteps.push(step);
+function queueTurtleStep(
+	step: Omit<TurtleAnimationStep, "turtleID"> & { turtleID?: string }
+) {
+	turtleQueuedSteps.push({
+		...step,
+		turtleID: step.turtleID ?? activeTurtleID
+	});
 	void scheduleTurtleAnimation();
 }
 
@@ -2157,6 +2207,13 @@ function resetTurtleCanvas() {
 	turtleStampCounter = 0;
 	turtleCompletedCommands = [];
 	turtleQueuedSteps = [];
+	activeTurtleID = defaultTurtleID;
+	const background = turtleState.background;
+	turtleState = createDefaultTurtleState(background);
+	turtleStates = new Map<string, TurtleState>([
+		[defaultTurtleID, turtleState]
+	]);
+	turtleVisiblePoses = new Map<string, TurtlePose>();
 	turtleFillState.active = false;
 	turtleFillState.points = [];
 	stopGameLoop();
@@ -2164,15 +2221,6 @@ function resetTurtleCanvas() {
 	if (!canvasContext) return;
 
 	const { context, rect } = canvasContext;
-	turtleState.x = 0;
-	turtleState.y = 0;
-	turtleState.heading = 0;
-	turtleState.penDown = true;
-	turtleState.penColor = "#000000";
-	turtleState.fillColor = "#000000";
-	turtleState.lineWidth = 3;
-	turtleState.shape = defaultTurtleShape;
-	turtleState.visible = true;
 	setTurtleVisiblePose(currentTurtlePose());
 
 	context.fillStyle = turtleState.background;
@@ -3053,10 +3101,13 @@ function gameKeyUnicode(event: KeyboardEvent) {
 }
 
 const turtleBridge: TurtleBridge = {
+	activate(id: string) {
+		activateTurtleState(id);
+	},
 	reset: resetTurtleCanvas,
 	clear: resetTurtleCanvas,
 	bgcolor(color: string) {
-		turtleState.background = color;
+		for (const state of turtleStates.values()) state.background = color;
 		resetTurtleCanvas();
 	},
 	beginFill: beginTurtleFill,
@@ -3244,6 +3295,9 @@ function createGuardedTurtleBridgeRun(): TurtleBridge {
 	const isActiveRun = () => runID === activeTurtleBridgeRunID;
 
 	return {
+		activate(id: string) {
+			if (isActiveRun()) turtleBridge.activate(id);
+		},
 		reset() {
 			if (isActiveRun()) turtleBridge.reset();
 		},

@@ -733,11 +733,17 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain(
 			"turtleAnimationStepDistance(step) <= turtleInstantStepMaxDistance"
 		);
-		expect(pageSource).toContain("let turtleVisiblePose");
+		expect(pageSource).toContain("let turtleVisiblePoses");
 		expect(pageSource).toContain("function setTurtleVisiblePose");
-		expect(pageSource).toContain("markerPose = visibleTurtlePose()");
-		expect(pageSource).toContain("setTurtleVisiblePose(markerPose)");
-		expect(pageSource).toContain("setTurtleVisiblePose(step.toPose)");
+		expect(pageSource).toContain(
+			"markerPose = visibleTurtlePose(synchronizedTurtleID)"
+		);
+		expect(pageSource).toContain(
+			"setTurtleVisiblePose(markerPose, step.turtleID)"
+		);
+		expect(pageSource).toContain(
+			"setTurtleVisiblePose(step.toPose, step.turtleID)"
+		);
 		expect(pageSource).toContain("renderTurtleScene();");
 	});
 
@@ -783,8 +789,39 @@ describe("python IDE project helpers", () => {
 		);
 		expect(pageSource).toContain("consumedSteps < frameStepBudget");
 		expect(pageSource).toContain("completeTurtleAnimationStep(step);");
-		expect(pageSource).toContain("renderTurtleScene(markerPose);");
+		expect(pageSource).toContain(
+			"renderTurtleScene(markerPose, undefined, synchronizedTurtleID);"
+		);
 		expect(pageSource).toContain("void scheduleTurtleAnimation();");
+	});
+
+	it("keeps separate browser poses for independent Turtle instances", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+
+		expect(runtimeSource).toContain("_turtle_counter = 0");
+		expect(runtimeSource).toContain("self._bridge_id = str(_turtle_counter)");
+		expect(runtimeSource).toContain('_bridge.activate(str(self._bridge_id))');
+		expect(runtimeSource).toContain("activate: (id: string) => void");
+		expect(pageSource).toContain('const defaultTurtleID = "default"');
+		expect(pageSource).toContain("let activeTurtleID = defaultTurtleID");
+		expect(pageSource).toContain("let turtleVisiblePoses = new Map");
+		expect(pageSource).toContain("function activateTurtleState");
+		expect(pageSource).toContain("turtleStates.delete(defaultTurtleID)");
+		expect(pageSource).toContain("turtleID: step.turtleID ?? activeTurtleID");
+		expect(pageSource).toContain(
+			"activeTurtleAnimationStep.turtleID === synchronizedTurtleID"
+		);
+		expect(pageSource).toContain(
+			"for (const [turtleID, pose] of turtleVisiblePoses)"
+		);
+		expect(pageSource).toContain("activate(id: string)");
 	});
 
 	it("keeps visible Turtle trail batches small enough to stay attached to the marker", () => {

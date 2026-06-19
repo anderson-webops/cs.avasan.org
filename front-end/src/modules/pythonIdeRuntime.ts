@@ -161,6 +161,7 @@ export interface GameBridge {
 }
 
 export interface TurtleBridge {
+	activate: (id: string) => void;
 	reset: () => void;
 	clear: () => void;
 	bgcolor: (color: string) => void;
@@ -921,6 +922,7 @@ _bridge = window.__classesPythonIdeTurtle
 _callback_proxies = {}
 _color_mode = 1.0
 _timer_counter = 0
+_turtle_counter = 0
 _builtin_shapes = {"arrow", "blank", "circle", "classic", "fancy", "square", "triangle", "turtle"}
 
 def _is_number(value):
@@ -1064,6 +1066,9 @@ def Screen():
 
 class Turtle:
     def __init__(self, *_args, **_kwargs):
+        global _turtle_counter
+        _turtle_counter += 1
+        self._bridge_id = str(_turtle_counter)
         self._x = 0.0
         self._y = 0.0
         self._heading = 0.0
@@ -1075,6 +1080,7 @@ class Turtle:
         self._visible = True
 
     def _sync_bridge(self):
+        _bridge.activate(str(self._bridge_id))
         _bridge.setShape(str(self._shape))
         _bridge.setVisible(bool(self._visible))
         _bridge.setState(
@@ -1276,6 +1282,7 @@ class Turtle:
         _bridge.clear()
 
     def reset(self):
+        _bridge.activate(str(self._bridge_id))
         self._x = 0.0
         self._y = 0.0
         self._heading = 0.0
