@@ -375,6 +375,15 @@ function getStarterFilesForTemplate(
 	return getBlankStarterFiles();
 }
 
+function activeFileNameForProjectFiles(files: PythonIdeFile[]) {
+	return (
+		files.find(file => file.name === "main.py")?.name ??
+		files.find(file => isPythonIdePythonFile(file.name))?.name ??
+		files[0]?.name ??
+		"main.py"
+	);
+}
+
 function projectTitleForMode(mode: PythonIdeMode) {
 	return mode === "data"
 		? "Data / AI Notebook"
@@ -399,7 +408,7 @@ export function createPythonIdeProject(
 		title: options.title ?? projectTitleForMode(mode),
 		mode,
 		files,
-		activeFileName: "main.py",
+		activeFileName: activeFileNameForProjectFiles(files),
 		courseID: options.courseID,
 		courseProjectKey: options.courseProjectKey,
 		courseProjectTitle: options.courseProjectTitle,

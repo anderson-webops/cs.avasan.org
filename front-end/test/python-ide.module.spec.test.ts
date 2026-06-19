@@ -171,6 +171,35 @@ describe("python IDE project helpers", () => {
 		expect(project.files[0]?.content).not.toContain("pgzrun.go()");
 	});
 
+	it("selects an active file that exists in custom starter files", () => {
+		const project = createPythonIdeProject("python", {
+			files: [
+				{
+					name: "lesson.py",
+					content: 'print("lesson")\n'
+				},
+				{
+					name: "notes.md",
+					content: "# Notes\n"
+				}
+			]
+		});
+		const dataProject = createPythonIdeProject("data", {
+			files: [
+				{
+					name: "scores.csv",
+					content: "name,score\n"
+				}
+			]
+		});
+
+		expect(project.activeFileName).toBe("lesson.py");
+		expect(pythonIdeProjectToPayload(project).activeFileName).toBe(
+			"lesson.py"
+		);
+		expect(dataProject.activeFileName).toBe("scores.csv");
+	});
+
 	it("preloads the Pyodide runtime script when warming the IDE", () => {
 		warmPythonRuntime();
 		warmPythonRuntime();
