@@ -1248,9 +1248,44 @@ describe("python IDE project helpers", () => {
 
 		expect(runtimeSource).toContain("lastProjectFileNames");
 		expect(runtimeSource).toContain("function syncProjectFiles");
+		expect(runtimeSource).toContain(
+			"const writableFiles = files.filter(file =>"
+		);
+		expect(runtimeSource).toContain("isValidPythonFileName(file.name)");
 		expect(runtimeSource).toContain("safeUnlink(pyodide");
 		expect(runtimeSource).toContain(
 			"sys.modules.pop(__classes_module_name, None)"
+		);
+	});
+
+	it("writes browser runtime shims once per bootstrap version", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+		const writeRuntimeShimsStart = runtimeSource.indexOf(
+			"function writeRuntimeShims"
+		);
+		const writeRuntimeShimsSource = runtimeSource.slice(
+			writeRuntimeShimsStart,
+			runtimeSource.indexOf(
+				"export async function runPythonProject",
+				writeRuntimeShimsStart
+			)
+		);
+
+		expect(runtimeSource).toContain(
+			'let runtimeShimsWrittenForBootstrapVersion = "";'
+		);
+		expect(writeRuntimeShimsSource).toContain(
+			"runtimeShimsWrittenForBootstrapVersion ==="
+		);
+		expect(writeRuntimeShimsSource).toContain(
+			"PYTHON_IDE_RUNTIME_BOOTSTRAP_VERSION"
+		);
+		expect(writeRuntimeShimsSource).toContain("return;");
+		expect(writeRuntimeShimsSource).toContain(
+			"runtimeShimsWrittenForBootstrapVersion ="
 		);
 	});
 

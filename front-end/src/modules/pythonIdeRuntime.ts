@@ -252,6 +252,7 @@ let plainPythonWorker: Worker | null = null;
 let plainPythonWorkerRunID = 0;
 let stopActivePlainPythonWorkerRun: ((reason: string) => void) | null = null;
 let lastProjectFileNames = new Set<string>();
+let runtimeShimsWrittenForBootstrapVersion = "";
 const loadedBrowserShimPackages = new Set<string>();
 const installedMicropipPackages = new Set<string>();
 const loadedPyodideImportModules = new Set<string>();
@@ -3753,14 +3754,17 @@ function writeProjectFile(pyodide: PyodideAPI, file: PythonIdeFile) {
 }
 
 function syncProjectFiles(pyodide: PyodideAPI, files: PythonIdeFile[]) {
-	const currentFileNames = new Set(files.map(file => file.name));
+	const writableFiles = files.filter(file =>
+		isValidPythonFileName(file.name)
+	);
+	const currentFileNames = new Set(writableFiles.map(file => file.name));
 
 	for (const staleFileName of lastProjectFileNames) {
 		if (currentFileNames.has(staleFileName)) continue;
 		safeUnlink(pyodide, `${PROJECT_ROOT}/${staleFileName}`);
 	}
 
-	for (const file of files) {
+	for (const file of writableFiles) {
 		writeProjectFile(pyodide, file);
 	}
 
@@ -4045,6 +4049,13 @@ function writeTensorFlowPackage(pyodide: PyodideAPI) {
 }
 
 function writeRuntimeShims(pyodide: PyodideAPI) {
+	if (
+		runtimeShimsWrittenForBootstrapVersion ===
+		PYTHON_IDE_RUNTIME_BOOTSTRAP_VERSION
+	) {
+		return;
+	}
+
 	pyodide.FS.writeFile(`${PROJECT_ROOT}/turtle.py`, turtleShim);
 	pyodide.FS.writeFile(`${PROJECT_ROOT}/_classes_artifacts.py`, artifactShim);
 	pyodide.FS.writeFile(`${PROJECT_ROOT}/pysynth.py`, pysynthShim);
@@ -4077,6 +4088,8 @@ function writeRuntimeShims(pyodide: PyodideAPI) {
 	);
 
 	writeTensorFlowPackage(pyodide);
+	runtimeShimsWrittenForBootstrapVersion =
+		PYTHON_IDE_RUNTIME_BOOTSTRAP_VERSION;
 }
 
 export async function runPythonProject(options: RunPythonProjectOptions) {
