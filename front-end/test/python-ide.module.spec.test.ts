@@ -1815,6 +1815,59 @@ describe("python IDE project helpers", () => {
 		);
 	});
 
+	it("allows Pyodide runtime loading to be retried after script failures", () => {
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+		const loadScriptStart = runtimeSource.indexOf("function loadScript");
+		const loadScriptSource = runtimeSource.slice(
+			loadScriptStart,
+			runtimeSource.indexOf(
+				"export function warmPythonRuntime",
+				loadScriptStart
+			)
+		);
+		const loadRuntimeStart = runtimeSource.indexOf(
+			"async function loadRuntime"
+		);
+		const loadRuntimeSource = runtimeSource.slice(
+			loadRuntimeStart,
+			runtimeSource.indexOf(
+				"const releaseRuntimeCallbackRegistriesSource",
+				loadRuntimeStart
+			)
+		);
+
+		expect(loadScriptSource).toContain(
+			"existing.dataset.classesPythonIdeLoadState === \"error\""
+		);
+		expect(loadScriptSource).toContain(
+			"existing.dataset.classesPythonIdeLoadState === \"loaded\""
+		);
+		expect(loadScriptSource).toContain("existing.remove();");
+		expect(loadScriptSource).toContain(
+			"script.dataset.classesPythonIdeLoadState = \"loading\";"
+		);
+		expect(loadScriptSource).toContain(
+			"script.dataset.classesPythonIdeLoadState = \"error\";"
+		);
+		expect(loadScriptSource).toContain("script.remove();");
+		expect(loadScriptSource).toContain(
+			'existing.addEventListener(\n\t\t\t\t\t"error"'
+		);
+		expect(runtimeSource).toContain(
+			"function removeUninitializedPyodideScript"
+		);
+		expect(loadRuntimeSource).toContain("const runtimePromise = (async () =>");
+		expect(loadRuntimeSource).toContain("pyodidePromise = runtimePromise;");
+		expect(loadRuntimeSource).toContain("runtimePromise.catch(() =>");
+		expect(loadRuntimeSource).toContain("pyodidePromise = null;");
+		expect(loadRuntimeSource).toContain(
+			"removeUninitializedPyodideScript();"
+		);
+	});
+
 	it("preserves PyGame Zero canvas aspect ratio instead of stretching", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),

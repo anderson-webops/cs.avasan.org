@@ -299,34 +299,75 @@ export function pythonIdeProjectModuleNames(
 
 function loadScript(src: string) {
 	return new Promise<void>((resolve, reject) => {
+		const rejectScriptLoad = () =>
+			reject(new Error("Unable to load Python runtime."));
 		const existing = document.querySelector<HTMLScriptElement>(
 			`script[src="${src}"]`
 		);
 		if (existing) {
 			if (window.loadPyodide) {
 				resolve();
+				return;
+			} else if (
+				existing.dataset.classesPythonIdeLoadState === "error" ||
+				existing.dataset.classesPythonIdeLoadState === "loaded"
+			) {
+				existing.remove();
 			} else {
-				existing.addEventListener("load", () => resolve(), {
-					once: true
-				});
+				existing.addEventListener(
+					"load",
+					() => {
+						existing.dataset.classesPythonIdeLoadState = "loaded";
+						resolve();
+					},
+					{ once: true }
+				);
+				existing.addEventListener(
+					"error",
+					() => {
+						existing.dataset.classesPythonIdeLoadState = "error";
+						existing.remove();
+						rejectScriptLoad();
+					},
+					{ once: true }
+				);
+				return;
 			}
-			return;
 		}
 
 		const script = document.createElement("script");
 		script.src = src;
 		script.async = true;
+		script.dataset.classesPythonIdeLoadState = "loading";
 		if (src.startsWith(PYODIDE_INDEX_URL)) {
 			script.crossOrigin = "anonymous";
 		}
-		script.addEventListener("load", () => resolve(), { once: true });
+		script.addEventListener(
+			"load",
+			() => {
+				script.dataset.classesPythonIdeLoadState = "loaded";
+				resolve();
+			},
+			{ once: true }
+		);
 		script.addEventListener(
 			"error",
-			() => reject(new Error("Unable to load Python runtime.")),
+			() => {
+				script.dataset.classesPythonIdeLoadState = "error";
+				script.remove();
+				rejectScriptLoad();
+			},
 			{ once: true }
 		);
 		document.head.append(script);
 	});
+}
+
+function removeUninitializedPyodideScript() {
+	if (window.loadPyodide) return;
+	document
+		.querySelector<HTMLScriptElement>(`script[src="${PYODIDE_SCRIPT_SRC}"]`)
+		?.remove();
 }
 
 export function warmPythonRuntime() {
@@ -340,7 +381,7 @@ async function loadRuntime() {
 
 	if (!pyodidePromise) {
 		warmPythonRuntimeResources();
-		pyodidePromise = (async () => {
+		const runtimePromise = (async () => {
 			await loadScript(PYODIDE_SCRIPT_SRC);
 			if (!window.loadPyodide)
 				throw new Error("Python runtime failed to initialize.");
@@ -349,6 +390,11 @@ async function loadRuntime() {
 			});
 			return pyodide;
 		})();
+		pyodidePromise = runtimePromise;
+		runtimePromise.catch(() => {
+			if (pyodidePromise === runtimePromise) pyodidePromise = null;
+			removeUninitializedPyodideScript();
+		});
 	}
 
 	return pyodidePromise;
