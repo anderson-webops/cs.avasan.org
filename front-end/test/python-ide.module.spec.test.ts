@@ -2375,6 +2375,13 @@ describe("python IDE project helpers", () => {
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
+		const mergeStart = pageSource.indexOf(
+			"function mergeRuntimeProjectFiles"
+		);
+		const mergeSource = pageSource.slice(
+			mergeStart,
+			pageSource.indexOf("function requestedCourseProject", mergeStart)
+		);
 
 		expect(runtimeSource).toContain(
 			"async function captureProjectTextFiles"
@@ -2384,6 +2391,14 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("options.onProjectFilesUpdate?.");
 		expect(pageSource).toContain("function mergeRuntimeProjectFiles");
 		expect(pageSource).toContain("onProjectFilesUpdate: files =>");
+		expect(mergeSource).toContain(
+			"const currentProject = projects.value.find("
+		);
+		expect(mergeSource).toContain(
+			"selectedProject.value?._id !== currentProject._id"
+		);
+		expect(mergeSource).toContain("currentProject.files.findIndex");
+		expect(mergeSource).toContain("touchProject(currentProject);");
 		expect(pageSource).toContain(
 			"void saveSelectedProject({ force: true });"
 		);

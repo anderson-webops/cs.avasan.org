@@ -948,7 +948,11 @@ function mergeRuntimeProjectFiles(
 	project: PythonIdeProject,
 	files: PythonIdeFile[]
 ) {
-	if (selectedProject.value?._id !== project._id) return;
+	const currentProject = projects.value.find(
+		candidate => candidate._id === project._id
+	);
+	if (!currentProject || selectedProject.value?._id !== currentProject._id)
+		return;
 
 	let changedCount = 0;
 	let addedCount = 0;
@@ -967,28 +971,28 @@ function mergeRuntimeProjectFiles(
 			content: file.content,
 			encoding: "text"
 		};
-		const existingIndex = project.files.findIndex(
+		const existingIndex = currentProject.files.findIndex(
 			candidate => candidate.name === file.name
 		);
 
 		if (existingIndex >= 0) {
-			const existingFile = project.files[existingIndex];
+			const existingFile = currentProject.files[existingIndex];
 			if (
 				existingFile?.content === nextFile.content &&
 				(existingFile.encoding ?? "text") === nextFile.encoding
 			) {
 				continue;
 			}
-			project.files.splice(existingIndex, 1, nextFile);
+			currentProject.files.splice(existingIndex, 1, nextFile);
 		} else {
-			project.files.push(nextFile);
+			currentProject.files.push(nextFile);
 			addedCount += 1;
 		}
 		changedCount += 1;
 	}
 
 	if (!changedCount) return;
-	touchSelectedProject();
+	touchProject(currentProject);
 	void saveSelectedProject({ force: true });
 	appendOutput(
 		"system",
@@ -996,9 +1000,13 @@ function mergeRuntimeProjectFiles(
 	);
 }
 
+function touchProject(project: PythonIdeProject) {
+	project.updatedAt = new Date().toISOString();
+}
+
 function touchSelectedProject() {
 	if (!selectedProject.value) return;
-	selectedProject.value.updatedAt = new Date().toISOString();
+	touchProject(selectedProject.value);
 }
 
 function requestedCourseProject() {
