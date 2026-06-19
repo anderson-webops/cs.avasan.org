@@ -384,8 +384,11 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/After the code compiles and tests run, compare against the reference and record one difference in class responsibility, method contract, state handling, or edge-case coverage/
 			);
-			expect(corpus).toContain(
-				"Use the reference after the program has fresh compile/run evidence, then record one difference in class responsibility or API shape"
+			expect(corpus).not.toMatch(
+				/Use the reference after the program has fresh compile\/run evidence, then record one difference in class responsibility or API shape/
+			);
+			expect(corpus).toMatch(
+				/Use [^.\n]+ reference after fresh compile\/run evidence exists, then record one difference in class responsibility or API shape/
 			);
 			expect(corpus).toContain(
 				"After the solution samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling"

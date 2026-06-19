@@ -1580,7 +1580,7 @@ function referenceReviewStep(
 			`After the ${subject} behavior works, compare against the reference and note one difference in type design, public API, object state, or test coverage.`,
 			`Run ${subject} locally first, then use the reference to compare constructor behavior, method boundaries, records/interfaces, or edge-case handling.`,
 			`Compare ${subject} with the reference after the compile/run path is clean, then identify one design or robustness difference that matters.`,
-			"Use the reference after the program has fresh compile/run evidence, then record one difference in class responsibility or API shape.",
+			`Use the ${subject} reference after fresh compile/run evidence exists, then record one difference in class responsibility or API shape.`,
 			`Check ${subject} against the reference by focusing on one object-state, inheritance, interface, record, or collection decision.`
 		][variantIndex(courseFamily, moduleTitle, kind, 6)];
 	}
