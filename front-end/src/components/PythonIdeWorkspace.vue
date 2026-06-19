@@ -93,6 +93,7 @@ interface TurtleState {
 	lineWidth: number;
 	background: string;
 	shape: TurtleShapeName;
+	speed: number;
 	visible: boolean;
 }
 
@@ -108,6 +109,7 @@ interface TurtlePose {
 	heading: number;
 	penColor: string;
 	shape: TurtleShapeName;
+	speed: number;
 	visible: boolean;
 }
 
@@ -344,6 +346,7 @@ const maxRuntimeArtifactBase64Length = 1500000;
 const maxCodeEditorViewStates = 120;
 const turtleAnimationInitialFrameCreditMs = 16;
 const turtleInstantStepMaxDurationMs = 16;
+const turtleTurnStepDurationMs = turtleInstantStepMaxDurationMs;
 const turtleInstantStepMaxDistance = 2;
 const turtleInstantFrameDistanceBudget = 12;
 const turtleInstantFrameStepBudget = 24;
@@ -570,6 +573,7 @@ function createDefaultTurtleState(background = "#ffffff"): TurtleState {
 		lineWidth: 3,
 		background,
 		shape: defaultTurtleShape,
+		speed: 3,
 		visible: true
 	};
 }
@@ -578,6 +582,7 @@ let turtleState = createDefaultTurtleState();
 let turtleStates = new Map<string, TurtleState>([
 	[defaultTurtleID, turtleState]
 ]);
+let turtleTracerEnabled = true;
 
 const turtleFillState: TurtleFillState = {
 	active: false,
@@ -1656,6 +1661,7 @@ function currentTurtlePose(): TurtlePose {
 		heading: turtleState.heading,
 		penColor: turtleState.penColor,
 		shape: turtleState.shape,
+		speed: turtleState.speed,
 		visible: turtleState.visible
 	};
 }
@@ -1718,17 +1724,20 @@ function interpolateTurtlePose(
 		heading: lerp(fromPose.heading, toPose.heading, progress),
 		penColor: progress < 1 ? fromPose.penColor : toPose.penColor,
 		shape: progress < 1 ? fromPose.shape : toPose.shape,
+		speed: progress < 1 ? fromPose.speed : toPose.speed,
 		visible: progress < 1 ? fromPose.visible : toPose.visible
 	};
 }
 
 function turtleMovementDuration(fromPose: TurtlePose, toPose: TurtlePose) {
+	if (!turtleTracerEnabled || fromPose.speed === 0)
+		return turtleInstantStepMaxDurationMs;
+
 	const distance = Math.hypot(toPose.x - fromPose.x, toPose.y - fromPose.y);
 	const headingDelta = Math.abs(toPose.heading - fromPose.heading);
 	if (distance > 0) return Math.min(900, Math.max(16, distance * 5));
-	if (headingDelta > 0)
-		return Math.min(260, Math.max(90, headingDelta * 1.5));
-	return 80;
+	if (headingDelta > 0) return turtleTurnStepDurationMs;
+	return turtleInstantStepMaxDurationMs;
 }
 
 function normalizeTurtleShape(shape: string): TurtleShapeName {
@@ -2220,6 +2229,7 @@ function resetTurtleCanvas() {
 	turtleCompletedCommands = [];
 	turtleQueuedSteps = [];
 	activeTurtleID = defaultTurtleID;
+	turtleTracerEnabled = true;
 	const background = turtleState.background;
 	turtleState = createDefaultTurtleState(background);
 	turtleStates = new Map<string, TurtleState>([
@@ -3380,6 +3390,14 @@ const turtleBridge: TurtleBridge = {
 			});
 		}
 	},
+	setSpeed(speed: number) {
+		turtleState.speed = Number.isFinite(speed)
+			? Math.max(0, Math.min(10, speed))
+			: 3;
+	},
+	setTracer(value: number) {
+		turtleTracerEnabled = value !== 0;
+	},
 	setVisible(visible: boolean) {
 		const fromPose = currentTurtlePose();
 		turtleState.visible = visible;
@@ -3391,6 +3409,9 @@ const turtleBridge: TurtleBridge = {
 				toPose
 			});
 		}
+	},
+	update() {
+		renderTurtleScene();
 	}
 };
 
@@ -3518,8 +3539,17 @@ function createGuardedTurtleBridgeRun(): TurtleBridge {
 		setShape(shape: string) {
 			if (isActiveRun()) turtleBridge.setShape(shape);
 		},
+		setSpeed(speed: number) {
+			if (isActiveRun()) turtleBridge.setSpeed(speed);
+		},
+		setTracer(value: number) {
+			if (isActiveRun()) turtleBridge.setTracer(value);
+		},
 		setVisible(visible: boolean) {
 			if (isActiveRun()) turtleBridge.setVisible(visible);
+		},
+		update() {
+			if (isActiveRun()) turtleBridge.update();
 		}
 	};
 }

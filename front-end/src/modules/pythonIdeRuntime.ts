@@ -210,7 +210,10 @@ export interface TurtleBridge {
 	scheduleTimer: (delayMs: number, callback: (() => void) | null) => void;
 	listen: () => void;
 	setShape: (shape: string) => void;
+	setSpeed: (speed: number) => void;
+	setTracer: (value: number) => void;
 	setVisible: (visible: boolean) => void;
+	update: () => void;
 }
 
 export interface RunPythonProjectOptions {
@@ -923,9 +926,17 @@ from pyodide.ffi import create_proxy
 _bridge = window.__classesPythonIdeTurtle
 _callback_proxies = {}
 _color_mode = 1.0
+_tracer_value = 1.0
 _timer_counter = 0
 _turtle_counter = 0
 _builtin_shapes = {"arrow", "blank", "circle", "classic", "fancy", "square", "triangle", "turtle"}
+_speed_values = {
+    "fastest": 0.0,
+    "fast": 10.0,
+    "normal": 6.0,
+    "slow": 3.0,
+    "slowest": 1.0,
+}
 
 def _is_number(value):
     try:
@@ -974,6 +985,16 @@ def _looks_like_color(value):
     except TypeError:
         return False
     return len(sequence) >= 3 and all(_is_number(part) for part in sequence[:3])
+
+def _normalize_turtle_speed(value):
+    if isinstance(value, str):
+        speed_name = value.lower()
+        if speed_name in _speed_values:
+            return _speed_values[speed_name]
+    speed = float(value)
+    if speed > 10.0 or speed < 0.5:
+        return 0.0
+    return max(0.0, min(10.0, speed))
 
 def _set_color_mode(cmode=None):
     global _color_mode
@@ -1055,10 +1076,16 @@ class _Screen:
     def setup(self, *_args, **_kwargs):
         return None
 
-    def tracer(self, *_args, **_kwargs):
+    def tracer(self, n=None, delay=None):
+        global _tracer_value
+        if n is None:
+            return _tracer_value
+        _tracer_value = float(n)
+        _bridge.setTracer(float(_tracer_value))
         return None
 
     def update(self):
+        _bridge.update()
         return None
 
     def mainloop(self):
@@ -1088,11 +1115,13 @@ class Turtle:
         self._fill_color = "#000000"
         self._line_width = 3.0
         self._shape = "classic"
+        self._speed = 3.0
         self._visible = True
 
     def _sync_bridge(self):
         _bridge.activate(str(self._bridge_id))
         _bridge.setShape(str(self._shape))
+        _bridge.setSpeed(float(self._speed))
         _bridge.setVisible(bool(self._visible))
         _bridge.setState(
             float(self._x),
@@ -1309,6 +1338,10 @@ class Turtle:
         _bridge.registerDrag(str(btn), _stored_callback("drag", btn, function))
 
     def speed(self, *_args):
+        if len(_args) == 0:
+            return self._speed
+        self._speed = _normalize_turtle_speed(_args[0])
+        self._sync_bridge()
         return None
 
     def shape(self, *_args):
@@ -1429,6 +1462,8 @@ def onclick(function, btn=1, add=None): _screen.onclick(function, btn, add)
 def onscreenclick(function, btn=1, add=None): _screen.onscreenclick(function, btn, add)
 def ondrag(function, btn=1, add=None): _default.ondrag(function, btn, add)
 def speed(*args): return _default.speed(*args)
+def tracer(*args): return _screen.tracer(*args)
+def update(): return _screen.update()
 def shape(*args): return _default.shape(*args)
 def hideturtle(): return _default.hideturtle()
 def ht(): return _default.hideturtle()

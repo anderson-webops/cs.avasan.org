@@ -794,6 +794,9 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain(
 			"const turtleInstantStepMaxDurationMs = 16"
 		);
+		expect(pageSource).toContain(
+			"const turtleTurnStepDurationMs = turtleInstantStepMaxDurationMs"
+		);
 		expect(pageSource).toContain("const turtleInstantStepMaxDistance = 2");
 		expect(pageSource).toContain(
 			"const turtleInstantFrameDistanceBudget = 12"
@@ -823,6 +826,46 @@ describe("python IDE project helpers", () => {
 			"setTurtleVisiblePose(step.toPose, step.turtleID)"
 		);
 		expect(pageSource).toContain("renderTurtleScene();");
+	});
+
+	it("keeps repeated Turtle turn controls off the slow animation queue", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain(
+			"if (headingDelta > 0) return turtleTurnStepDurationMs;"
+		);
+		expect(pageSource).not.toContain(
+			"return Math.min(260, Math.max(90, headingDelta * 1.5));"
+		);
+	});
+
+	it("supports Turtle speed and tracer animation controls", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const runtimeSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain("let turtleTracerEnabled = true;");
+		expect(pageSource).toContain(
+			"if (!turtleTracerEnabled || fromPose.speed === 0)"
+		);
+		expect(pageSource).toContain("setSpeed(speed: number)");
+		expect(pageSource).toContain("setTracer(value: number)");
+		expect(runtimeSource).toContain("def _normalize_turtle_speed(value):");
+		expect(runtimeSource).toContain('"fastest": 0.0');
+		expect(runtimeSource).toContain(
+			"def tracer(*args): return _screen.tracer(*args)"
+		);
+		expect(runtimeSource).toContain("def update(): return _screen.update()");
+		expect(runtimeSource).toContain("_bridge.setSpeed(float(self._speed))");
+		expect(runtimeSource).toContain("_bridge.setTracer(float(_tracer_value))");
 	});
 
 	it("keeps the Turtle cursor drawn directly above its trail", () => {
