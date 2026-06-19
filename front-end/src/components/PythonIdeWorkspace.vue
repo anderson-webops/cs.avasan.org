@@ -47,6 +47,7 @@ import {
 	pythonIdeModeForCourseId,
 	pythonIdeProjectToPayload,
 	resolvePythonIdeActiveFileName,
+	saveLocalPythonProjects,
 	saveLocalPythonProjectsAsync,
 	updateRemotePythonIdeProject
 } from "@/modules/pythonIde";
@@ -344,6 +345,7 @@ const maxRuntimeArtifacts = 12;
 const maxRuntimeArtifactTextLength = 500000;
 const maxRuntimeArtifactBase64Length = 1500000;
 const maxCodeEditorViewStates = 120;
+const pythonIdeAutoSaveStorageKey = "classes-python-ide-autosave";
 const turtleAnimationInitialFrameCreditMs = 16;
 const turtleInstantStepMaxDurationMs = 16;
 const turtleTurnStepDurationMs = turtleInstantStepMaxDurationMs;
@@ -458,6 +460,8 @@ const isGameLoopActive = ref(false);
 const activeTurtleTimerCount = ref(0);
 const showProjectMenu = ref(false);
 const showFileTools = ref(false);
+const showIdeSettings = ref(false);
+const autoSaveEnabled = ref(loadPythonIdeAutoSavePreference());
 const deleteCandidateProjectID = ref("");
 const deleteConfirmText = ref("");
 const sidebarCollapsed = ref(false);
@@ -529,6 +533,19 @@ function loadPythonCodeEditorModules() {
 function loadPythonRuntimeModule() {
 	pythonRuntimeModulePromise ??= import("@/modules/pythonIdeRuntime");
 	return pythonRuntimeModulePromise;
+}
+
+function loadPythonIdeAutoSavePreference() {
+	if (typeof window === "undefined") return true;
+	return window.localStorage.getItem(pythonIdeAutoSaveStorageKey) !== "off";
+}
+
+function persistPythonIdeAutoSavePreference(enabled: boolean) {
+	if (typeof window === "undefined") return;
+	window.localStorage.setItem(
+		pythonIdeAutoSaveStorageKey,
+		enabled ? "on" : "off"
+	);
 }
 
 function releaseLoadedPythonRuntimeCallbacks(
@@ -1014,34 +1031,65 @@ async function persistLocalProjects() {
 	}
 }
 
+function saveLocalProjectSnapshot() {
+	if (!projects.value.length) return;
+	try {
+		saveLocalPythonProjects(projects.value, storageUserID.value);
+	} catch (error) {
+		console.warn("Could not write Python IDE local snapshot.", error);
+	}
+}
+
+async function syncProjectsToAccount(projectList: PythonIdeProject[]) {
+	return Promise.all(
+		projectList.map(project =>
+			project._id.startsWith("local-")
+				? createRemotePythonIdeProject(pythonIdeProjectToPayload(project))
+				: updateRemotePythonIdeProject(
+						project._id,
+						pythonIdeProjectToPayload(project)
+					)
+		)
+	);
+}
+
 async function loadProjects() {
 	isLoading.value = true;
 	suppressAutoSave = true;
 	try {
 		if (canSyncToAccount.value) {
 			const remoteProjects = await fetchPythonIdeProjects();
-			if (remoteProjects.length) {
-				setProjects(remoteProjects);
-				await openRequestedCourseProjectIfNeeded();
-				saveMessage.value = "Synced to account";
-				return;
-			}
-
 			const localProjects = await loadLocalPythonProjectsAsync(
 				storageUserID.value
 			);
 			if (localProjects.length) {
-				const migratedProjects = await Promise.all(
-					localProjects.map(project =>
-						createRemotePythonIdeProject(
-							pythonIdeProjectToPayload(project)
-						)
-					)
-				);
-				setProjects(migratedProjects);
-				await clearLocalPythonProjectsAsync(storageUserID.value);
+				try {
+					const syncedProjects =
+						await syncProjectsToAccount(localProjects);
+					setProjects(syncedProjects);
+					await clearLocalPythonProjectsAsync(storageUserID.value);
+					await openRequestedCourseProjectIfNeeded();
+					saveMessage.value = "Synced recovered local edits";
+					return;
+				} catch (error) {
+					setProjects(localProjects);
+					appendOutput(
+						"system",
+						error instanceof Error
+							? error.message
+							: "Recovered local edits; account sync can be retried with Save."
+					);
+				}
+
 				await openRequestedCourseProjectIfNeeded();
-				saveMessage.value = "Synced local projects to account";
+				saveMessage.value = "Recovered local edits";
+				return;
+			}
+
+			if (remoteProjects.length) {
+				setProjects(remoteProjects);
+				await openRequestedCourseProjectIfNeeded();
+				saveMessage.value = "Synced to account";
 				return;
 			}
 
@@ -1175,10 +1223,47 @@ async function saveSelectedProject() {
 
 function scheduleSave() {
 	if (suppressAutoSave) return;
+	if (!autoSaveEnabled.value) {
+		if (saveTimer) window.clearTimeout(saveTimer);
+		saveTimer = null;
+		saveMessage.value = "Autosave off";
+		return;
+	}
+
+	saveLocalProjectSnapshot();
+	saveMessage.value = canSyncToAccount.value
+		? "Autosaving to account"
+		: "Autosaving locally";
 	if (saveTimer) window.clearTimeout(saveTimer);
 	saveTimer = window.setTimeout(() => {
+		saveTimer = null;
 		void saveSelectedProject();
 	}, 700);
+}
+
+function flushPendingProjectSave() {
+	if (suppressAutoSave || !autoSaveEnabled.value) return;
+	if (saveTimer) {
+		window.clearTimeout(saveTimer);
+		saveTimer = null;
+	}
+	saveLocalProjectSnapshot();
+	void saveSelectedProject();
+}
+
+function updateAutoSavePreference(event: Event) {
+	const enabled = (event.target as HTMLInputElement).checked;
+	autoSaveEnabled.value = enabled;
+	persistPythonIdeAutoSavePreference(enabled);
+	if (!enabled) {
+		if (saveTimer) window.clearTimeout(saveTimer);
+		saveTimer = null;
+		saveMessage.value = "Autosave off";
+		return;
+	}
+
+	saveMessage.value = "Autosave on";
+	flushPendingProjectSave();
 }
 
 async function createProject(
@@ -1984,6 +2069,7 @@ function renderTurtleCommand(
 				heading: command.heading,
 				penColor: command.color,
 				shape: command.shape,
+				speed: 0,
 				visible: true
 			},
 			toCanvas
@@ -4104,6 +4190,7 @@ watch(isLoading, loading => {
 onMounted(() => {
 	primePythonRuntimeConnection();
 	void loadProjects();
+	window.addEventListener("pagehide", flushPendingProjectSave);
 	window.addEventListener("keydown", handleKeyDown);
 	window.addEventListener("keyup", handleKeyUp);
 	window.addEventListener("mouseup", clearTurtleDrag);
@@ -4115,9 +4202,10 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-	if (saveTimer) window.clearTimeout(saveTimer);
+	flushPendingProjectSave();
 	saveCodeEditorViewState();
 	codeEditorView?.destroy();
+	window.removeEventListener("pagehide", flushPendingProjectSave);
 	window.removeEventListener("keydown", handleKeyDown);
 	window.removeEventListener("keyup", handleKeyUp);
 	window.removeEventListener("mouseup", clearTurtleDrag);
@@ -4472,23 +4560,59 @@ onBeforeUnmount(() => {
 							@input="updateProjectTitle"
 						/>
 					</label>
-					<button
-						class="site-button site-button--secondary"
-						:disabled="isSaving"
-						type="button"
-						@click="saveSelectedProject"
-					>
-						{{ isSaving ? "Saving" : "Save" }}
-					</button>
-					<button
-						class="site-button site-button--primary run-control"
-						:class="{ 'run-control--stop': runControlIsStop }"
-						:disabled="!runControlIsStop && isSaving"
-						type="button"
-						@click="activateRunControl"
-					>
-						{{ runControlIsStop ? "Stop" : "Run" }}
-					</button>
+					<div class="editor-actions">
+						<div class="ide-settings">
+							<button
+								:aria-expanded="showIdeSettings"
+								aria-label="Python IDE settings"
+								class="ide-settings-trigger"
+								title="Python IDE settings"
+								type="button"
+								@click="showIdeSettings = !showIdeSettings"
+							>
+								<span aria-hidden="true">⚙</span>
+							</button>
+							<div
+								v-if="showIdeSettings"
+								class="ide-settings-panel"
+								role="dialog"
+								aria-label="Python IDE settings"
+							>
+								<label class="ide-setting-toggle">
+									<input
+										:checked="autoSaveEnabled"
+										type="checkbox"
+										@change="updateAutoSavePreference"
+									/>
+									<span>
+										<strong>Autosave projects</strong>
+										<small>
+											Save edits locally right away and
+											sync them to your account when
+											possible.
+										</small>
+									</span>
+								</label>
+							</div>
+						</div>
+						<button
+							class="site-button site-button--secondary"
+							:disabled="isSaving"
+							type="button"
+							@click="saveSelectedProject"
+						>
+							{{ isSaving ? "Saving" : "Save" }}
+						</button>
+						<button
+							class="site-button site-button--primary run-control"
+							:class="{ 'run-control--stop': runControlIsStop }"
+							:disabled="!runControlIsStop && isSaving"
+							type="button"
+							@click="activateRunControl"
+						>
+							{{ runControlIsStop ? "Stop" : "Run" }}
+						</button>
+					</div>
 				</div>
 
 				<div
@@ -4802,6 +4926,20 @@ html.dark .python-ide-status {
 
 html.dark .python-ide-status strong {
 	color: #f8fbff;
+}
+
+html.dark .ide-settings-trigger,
+html.dark .ide-settings-panel {
+	background: rgba(8, 17, 31, 0.94);
+	color: #f8fbff;
+}
+
+html.dark .ide-setting-toggle strong {
+	color: #f8fbff;
+}
+
+html.dark .ide-setting-toggle small {
+	color: #c8dce6;
 }
 
 html.dark .python-ide-page {
@@ -5301,7 +5439,7 @@ html.dark .file-delete:disabled::after {
 
 .new-file-row input,
 .project-delete-confirm input,
-.editor-toolbar input,
+.editor-toolbar > label input,
 .stdin-panel textarea {
 	width: 100%;
 	border: 1px solid var(--color-border);
@@ -5312,7 +5450,7 @@ html.dark .file-delete:disabled::after {
 
 .new-file-row input,
 .project-delete-confirm input,
-.editor-toolbar input {
+.editor-toolbar > label input {
 	min-height: 2.8rem;
 	padding: 0.55rem 0.75rem;
 }
@@ -5349,24 +5487,93 @@ html.dark .file-delete:disabled::after {
 
 .editor-toolbar {
 	display: grid;
-	grid-template-columns: minmax(15rem, 1fr) auto auto;
+	grid-template-columns: minmax(15rem, 1fr) auto;
 	gap: 0.75rem;
 	align-items: end;
 }
 
-.editor-toolbar label,
+.editor-toolbar > label,
 .stdin-panel {
 	display: grid;
 	gap: 0.35rem;
 }
 
-.editor-toolbar label {
+.editor-toolbar > label {
 	padding: 0.2rem;
 	border: 1px solid transparent;
 	border-radius: 14px;
 	transition:
 		border-color 150ms ease,
 		box-shadow 150ms ease;
+}
+
+.editor-actions {
+	position: relative;
+	display: flex;
+	gap: 0.65rem;
+	align-items: end;
+}
+
+.ide-settings {
+	position: relative;
+}
+
+.ide-settings-trigger {
+	width: 2.8rem;
+	height: 2.8rem;
+	display: grid;
+	place-items: center;
+	border: 1px solid var(--color-border);
+	border-radius: 14px;
+	background: rgba(255, 255, 255, 0.84);
+	color: var(--color-ink-strong);
+	font-size: 1.15rem;
+	font-weight: 900;
+}
+
+.ide-settings-panel {
+	position: absolute;
+	z-index: 8;
+	top: calc(100% + 0.55rem);
+	right: 0;
+	width: min(20rem, calc(100vw - 2rem));
+	padding: 0.85rem;
+	border: 1px solid var(--color-border);
+	border-radius: 16px;
+	background: rgba(255, 255, 255, 0.96);
+	box-shadow: var(--shadow-soft);
+}
+
+.ide-setting-toggle {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr);
+	gap: 0.7rem;
+	align-items: start;
+	color: var(--color-ink);
+}
+
+.ide-setting-toggle input {
+	width: 1.1rem;
+	height: 1.1rem;
+	margin-top: 0.2rem;
+	accent-color: #0f766e;
+}
+
+.ide-setting-toggle strong,
+.ide-setting-toggle small {
+	display: block;
+}
+
+.ide-setting-toggle strong {
+	color: var(--color-ink-strong);
+	font-size: 0.95rem;
+}
+
+.ide-setting-toggle small {
+	margin-top: 0.2rem;
+	color: var(--color-ink-soft);
+	font-size: 0.78rem;
+	line-height: 1.45;
 }
 
 .ide-grid {
@@ -5500,7 +5707,7 @@ html.dark .editor-shortcuts ul {
 .code-editor-shell:focus-within,
 .canvas-shell:focus-within,
 .stdin-panel:focus-within,
-.editor-toolbar label:focus-within {
+.editor-toolbar > label:focus-within {
 	border-color: var(--python-focus-ring);
 	box-shadow:
 		0 0 0 3px var(--python-focus-glow),

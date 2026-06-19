@@ -366,6 +366,23 @@ describe("python IDE project helpers", () => {
 		expect(loadLocalPythonProjects("student-a")).toEqual([]);
 	});
 
+	it("keeps newer localStorage snapshots ahead of stale IndexedDB records", () => {
+		const moduleSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIde.ts"),
+			"utf8"
+		);
+
+		expect(moduleSource).toContain("function pythonIdeProjectSetUpdatedAt");
+		expect(moduleSource).toContain("const storedProjectsUpdatedAt");
+		expect(moduleSource).toContain("const legacyProjectsUpdatedAt");
+		expect(moduleSource).toContain(
+			"if (legacyProjectsUpdatedAt > storedProjectsUpdatedAt)"
+		);
+		expect(moduleSource).toContain(
+			"await saveLocalPythonProjectsAsync(legacyProjects, userID);"
+		);
+	});
+
 	it("keeps IndexedDB wired as the primary local project store", () => {
 		const moduleSource = readFileSync(
 			resolve(__dirname, "../src/modules/pythonIde.ts"),
@@ -1990,8 +2007,38 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain(
 			"await clearLocalPythonProjectsAsync(storageUserID.value);"
 		);
+		expect(pageSource).toContain("async function syncProjectsToAccount");
+		expect(pageSource).toContain(
+			'saveMessage.value = "Synced recovered local edits";'
+		);
+		expect(pageSource).toContain(
+			'saveMessage.value = "Recovered local edits";'
+		);
 		expect(pageSource).toContain("Saved locally after sync issue");
 		expect(pageSource).toContain("const isRemoteProject =");
+	});
+
+	it("autosaves Python IDE projects by default with a settings toggle", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain(
+			'const pythonIdeAutoSaveStorageKey = "classes-python-ide-autosave";'
+		);
+		expect(pageSource).toContain(
+			"const autoSaveEnabled = ref(loadPythonIdeAutoSavePreference());"
+		);
+		expect(pageSource).toContain("function updateAutoSavePreference");
+		expect(pageSource).toContain("Autosave projects");
+		expect(pageSource).toContain('aria-label="Python IDE settings"');
+		expect(pageSource).toContain("saveLocalProjectSnapshot();");
+		expect(pageSource).toContain("if (!autoSaveEnabled.value)");
+		expect(pageSource).toContain(
+			'window.addEventListener("pagehide", flushPendingProjectSave);'
+		);
+		expect(pageSource).toContain("flushPendingProjectSave();");
 	});
 
 	it("normalizes loaded project active files before rendering or saving", () => {

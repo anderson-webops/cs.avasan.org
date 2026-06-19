@@ -684,9 +684,22 @@ export function loadLocalPythonProjects(userID?: string | null) {
 export async function loadLocalPythonProjectsAsync(userID?: string | null) {
 	const key = pythonIdeStorageKey(userID);
 	const storedProjects = await readIndexedDbPythonProjects(key);
+	const legacyProjects = loadLocalPythonProjects(userID);
+
+	if (storedProjects && legacyProjects.length) {
+		const storedProjectsUpdatedAt =
+			pythonIdeProjectSetUpdatedAt(storedProjects);
+		const legacyProjectsUpdatedAt =
+			pythonIdeProjectSetUpdatedAt(legacyProjects);
+		if (legacyProjectsUpdatedAt > storedProjectsUpdatedAt) {
+			await saveLocalPythonProjectsAsync(legacyProjects, userID);
+			return legacyProjects;
+		}
+		return storedProjects;
+	}
+
 	if (storedProjects) return storedProjects;
 
-	const legacyProjects = loadLocalPythonProjects(userID);
 	if (legacyProjects.length) {
 		await saveLocalPythonProjectsAsync(legacyProjects, userID);
 	}
@@ -702,6 +715,15 @@ export function saveLocalPythonProjects(
 		pythonIdeStorageKey(userID),
 		JSON.stringify(projects)
 	);
+}
+
+function pythonIdeProjectSetUpdatedAt(projects: PythonIdeProject[]) {
+	return projects.reduce((latest, project) => {
+		const updatedAt = Date.parse(
+			project.updatedAt ?? project.createdAt ?? ""
+		);
+		return Number.isFinite(updatedAt) ? Math.max(latest, updatedAt) : latest;
+	}, 0);
 }
 
 export async function saveLocalPythonProjectsAsync(
