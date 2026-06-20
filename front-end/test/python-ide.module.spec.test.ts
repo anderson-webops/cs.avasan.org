@@ -1012,6 +1012,10 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("pythonRuntimeDiagnosticForLine");
 		expect(pageSource).toContain("pythonRuntimeDiagnosticEffect");
 		expect(pageSource).toContain(
+			"selection: { anchor: diagnostic.from, head: diagnostic.to }"
+		);
+		expect(pageSource).toContain("scrollIntoView: true");
+		expect(pageSource).toContain(
 			"RuntimeError: Stopped a long-running (?:for|while) loop"
 		);
 		expect(pageSource).toContain("formatPythonRuntimeError(error)");

@@ -995,6 +995,8 @@ async function markPythonRuntimeErrorInEditor(
 	if (!diagnostic) return;
 
 	codeEditorView.dispatch({
+		selection: { anchor: diagnostic.from, head: diagnostic.to },
+		scrollIntoView: true,
 		effects: codeMirrorModule.pythonRuntimeDiagnosticEffect.of(diagnostic)
 	});
 }
