@@ -1,3 +1,4 @@
+import type { Completion } from "@codemirror/autocomplete";
 import type { Diagnostic } from "@codemirror/lint";
 import type { Extension } from "@codemirror/state";
 import type { DecorationSet, ViewUpdate } from "@codemirror/view";
@@ -6,7 +7,8 @@ import {
 	autocompletion,
 	closeBrackets,
 	closeBracketsKeymap,
-	completionKeymap
+	completionKeymap,
+	snippetCompletion
 } from "@codemirror/autocomplete";
 import {
 	insertNewlineAndIndent as codeMirrorInsertNewlineAndIndent,
@@ -73,13 +75,7 @@ interface PythonIdeCompletionContext {
 	} | null;
 }
 
-interface PythonIdeCompletionOption {
-	label: string;
-	type: string;
-	boost?: number;
-	detail?: string;
-	info?: string;
-}
+type PythonIdeCompletionOption = Completion;
 
 type PythonIdeAssetCompletionFolder = "images" | "music" | "sounds";
 
@@ -113,6 +109,7 @@ const openingBracketToClosingBracket: Record<string, string> = {
 };
 const intelligentClosingTokens = [")", "]", "}", "'", '"', "`"];
 const pythonIndentText = "    ";
+const snippetEnd = snippetField("");
 const lineLeadingWhitespaceRegex = /^[\t ]*/;
 const pythonCompletionTokenRegex = /(?:[A-Z_]\w*\.){0,2}[A-Z_]\w*$/i;
 const pythonCompletionGlobalValidForRegex = /^[A-Z_]\w*$/i;
@@ -241,14 +238,96 @@ const pgzeroRuntimeCompletions = [
 	completion("sounds", "namespace", "loaded sound effects"),
 	completion("music", "namespace", "background music controller"),
 	completion("tone", "namespace", "built-in tone generator"),
-	completion("draw", "function", "PyGame Zero draw callback", 30),
-	completion("update", "function", "PyGame Zero frame callback", 30),
-	completion("on_key_down", "function", "keyboard event callback"),
-	completion("on_key_up", "function", "keyboard release callback"),
-	completion("on_mouse_down", "function", "mouse press callback"),
-	completion("on_mouse_move", "function", "mouse move callback"),
-	completion("on_mouse_up", "function", "mouse release callback"),
-	completion("on_music_end", "function", "music finished callback")
+	pythonSnippet(
+		"draw",
+		"PyGame Zero draw callback",
+		snippetLines(
+			"def draw():",
+			`    screen.clear()`,
+			`    ${snippetField("body")}`,
+			snippetEnd
+		),
+		70
+	),
+	pythonSnippet(
+		"update",
+		"PyGame Zero frame callback",
+		snippetLines(
+			"def update(dt):",
+			`    ${snippetField("body")}`,
+			snippetEnd
+		),
+		70
+	),
+	pythonSnippet(
+		"on_key_down",
+		"keyboard event callback",
+		snippetLines(
+			"def on_key_down(key):",
+			`    ${snippetField("body")}`,
+			snippetEnd
+		),
+		60
+	),
+	pythonSnippet(
+		"on_key_up",
+		"keyboard release callback",
+		snippetLines(
+			"def on_key_up(key):",
+			`    ${snippetField("body")}`,
+			snippetEnd
+		),
+		60
+	),
+	pythonSnippet(
+		"on_mouse_down",
+		"mouse press callback",
+		snippetLines(
+			"def on_mouse_down(pos, button):",
+			`    ${snippetField("body")}`,
+			snippetEnd
+		),
+		60
+	),
+	pythonSnippet(
+		"on_mouse_move",
+		"mouse move callback",
+		snippetLines(
+			"def on_mouse_move(pos):",
+			`    ${snippetField("body")}`,
+			snippetEnd
+		),
+		60
+	),
+	pythonSnippet(
+		"on_mouse_up",
+		"mouse release callback",
+		snippetLines(
+			"def on_mouse_up(pos, button):",
+			`    ${snippetField("body")}`,
+			snippetEnd
+		),
+		60
+	),
+	pythonSnippet(
+		"on_music_end",
+		"music finished callback",
+		snippetLines(
+			"def on_music_end():",
+			`    ${snippetField("body")}`,
+			snippetEnd
+		),
+		60
+	),
+	pythonSnippet(
+		"actor",
+		"create an Actor sprite",
+		snippetLines(
+			`player = Actor("${snippetField("image")}", (${snippetField("x")}, ${snippetField("y")}))`,
+			snippetEnd
+		),
+		65
+	)
 ];
 
 const dataRuntimeCompletions = [
@@ -793,6 +872,138 @@ function completion(
 	};
 }
 
+function snippetField(name: string) {
+	return `\${${name}}`;
+}
+
+function snippetLines(...lines: string[]) {
+	return lines.join("\n");
+}
+
+function pythonSnippet(
+	label: string,
+	detail: string,
+	template: string,
+	boost = 50
+): PythonIdeCompletionOption {
+	return snippetCompletion(template, {
+		label,
+		type: "snippet",
+		detail,
+		boost,
+		section: "Snippets"
+	});
+}
+
+const projectSnippetCompletions = [
+	pythonSnippet(
+		"main_guard",
+		"main function guard",
+		snippetLines(
+			"def main():",
+			`    ${snippetField("body")}`,
+			"",
+			'if __name__ == "__main__":',
+			"    main()",
+			snippetEnd
+		),
+		60
+	)
+];
+
+const turtleSnippetCompletions = [
+	pythonSnippet(
+		"turtle_screen",
+		"Turtle screen setup",
+		snippetLines(
+			"import turtle",
+			"",
+			"screen = turtle.Screen()",
+			"t = turtle.Turtle()",
+			"",
+			snippetField("body"),
+			"",
+			"screen.mainloop()",
+			snippetEnd
+		),
+		80
+	),
+	pythonSnippet(
+		"ontimer_loop",
+		"Turtle animation loop",
+		snippetLines(
+			"def animate():",
+			`    ${snippetField("body")}`,
+			`    screen.ontimer(animate, ${snippetField("milliseconds")})`,
+			"",
+			`screen.ontimer(animate, ${snippetField("milliseconds")})`,
+			snippetEnd
+		),
+		75
+	),
+	pythonSnippet(
+		"onkey_handler",
+		"Turtle keyboard handler",
+		snippetLines(
+			"def move():",
+			`    ${snippetField("body")}`,
+			"",
+			`screen.onkey(move, "${snippetField("key")}")`,
+			"screen.listen()",
+			snippetEnd
+		),
+		70
+	)
+];
+
+const dataSnippetCompletions = [
+	pythonSnippet(
+		"data_setup",
+		"pandas chart setup",
+		snippetLines(
+			"import pandas as pd",
+			"import matplotlib.pyplot as plt",
+			"",
+			snippetField("body"),
+			"plt.show()",
+			snippetEnd
+		),
+		75
+	),
+	pythonSnippet(
+		"read_csv_df",
+		"load a CSV into a DataFrame",
+		snippetLines(
+			`df = pd.read_csv("${snippetField("file")}.csv")`,
+			snippetEnd
+		),
+		70
+	),
+	pythonSnippet(
+		"scatter_plot",
+		"matplotlib scatter plot",
+		snippetLines(
+			`plt.figure(figsize=(${snippetField("width")}, ${snippetField("height")}))`,
+			`plt.scatter(${snippetField("x")}, ${snippetField("y")})`,
+			`plt.xlabel("${snippetField("x_label")}")`,
+			`plt.ylabel("${snippetField("y_label")}")`,
+			"plt.tight_layout()",
+			snippetEnd
+		),
+		65
+	),
+	pythonSnippet(
+		"decision_tree",
+		"train a decision tree classifier",
+		snippetLines(
+			`model = DecisionTreeClassifier(max_depth=${snippetField("depth")}, random_state=0)`,
+			`model.fit(${snippetField("features")}, ${snippetField("labels")})`,
+			snippetEnd
+		),
+		65
+	)
+];
+
 function turtlePenCompletions() {
 	return [
 		completion("forward", "method", "move forward"),
@@ -878,13 +1089,30 @@ function rectMemberCompletions() {
 }
 
 function runtimeCompletionsForMode(mode: PythonIdeMode = "python") {
-	if (mode === "data")
-		return [...sharedRuntimeCompletions, ...dataRuntimeCompletions];
-	if (mode === "pgzero")
-		return [...sharedRuntimeCompletions, ...pgzeroRuntimeCompletions];
-	if (mode === "turtle")
-		return [...sharedRuntimeCompletions, ...turtleRuntimeCompletions];
-	return sharedRuntimeCompletions;
+	if (mode === "data") {
+		return [
+			...sharedRuntimeCompletions,
+			...projectSnippetCompletions,
+			...dataRuntimeCompletions,
+			...dataSnippetCompletions
+		];
+	}
+	if (mode === "pgzero") {
+		return [
+			...sharedRuntimeCompletions,
+			...projectSnippetCompletions,
+			...pgzeroRuntimeCompletions
+		];
+	}
+	if (mode === "turtle") {
+		return [
+			...sharedRuntimeCompletions,
+			...projectSnippetCompletions,
+			...turtleRuntimeCompletions,
+			...turtleSnippetCompletions
+		];
+	}
+	return [...sharedRuntimeCompletions, ...projectSnippetCompletions];
 }
 
 function memberCompletionMapForMode(mode: PythonIdeMode = "python") {

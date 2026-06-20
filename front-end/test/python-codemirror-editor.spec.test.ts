@@ -167,6 +167,7 @@ describe("python IDE CodeMirror editor", () => {
 		expect(editorSource).toContain("lineNumbers()");
 		expect(editorSource).toContain("history()");
 		expect(editorSource).toContain("autocompletion()");
+		expect(editorSource).toContain("snippetCompletion");
 		expect(editorSource).toContain("highlightSelectionMatches()");
 		expect(editorSource).not.toContain('from "codemirror"');
 		expect(editorSource).toContain("python()");
@@ -410,6 +411,52 @@ describe("python IDE CodeMirror editor", () => {
 		);
 	});
 
+	it("offers CodeMirror snippets for course-specific Python patterns", () => {
+		const pythonCompletions = pythonIdeCompletionsForMode("python");
+		const pgzeroCompletions = pythonIdeCompletionsForMode("pgzero");
+		const turtleCompletions = pythonIdeCompletionsForMode("turtle");
+		const dataCompletions = pythonIdeCompletionsForMode("data");
+		const findSnippet = (label: string, completions = pythonCompletions) =>
+			completions.find(
+				option => option.label === label && option.type === "snippet"
+		);
+
+		expect(pythonCompletions.map(option => option.label)).toEqual(
+			expect.arrayContaining(["main_guard"])
+		);
+		expect(findSnippet("main_guard")).toMatchObject({
+			detail: "main function guard",
+			section: "Snippets"
+		});
+		expect(typeof findSnippet("main_guard")?.apply).toBe("function");
+		expect(findSnippet("if")).toBeUndefined();
+		expect(findSnippet("for")).toBeUndefined();
+		expect(findSnippet("draw", pgzeroCompletions)).toMatchObject({
+			detail: "PyGame Zero draw callback"
+		});
+		expect(
+			pgzeroCompletions.filter(option => option.label === "draw")
+		).toHaveLength(1);
+		expect(
+			pgzeroCompletions.filter(option => option.label === "update")
+		).toHaveLength(1);
+		expect(turtleCompletions.map(option => option.label)).toEqual(
+			expect.arrayContaining([
+				"onkey_handler",
+				"ontimer_loop",
+				"turtle_screen"
+			])
+		);
+		expect(dataCompletions.map(option => option.label)).toEqual(
+			expect.arrayContaining([
+				"data_setup",
+				"decision_tree",
+				"read_csv_df",
+				"scatter_plot"
+			])
+		);
+	});
+
 	it("completes member names after a runtime receiver dot", () => {
 		const doc = "screen.dr";
 		const state = EditorState.create({ doc });
@@ -614,8 +661,13 @@ describe("python IDE CodeMirror editor", () => {
 		const editorSource = sourceFile("../src/modules/pythonCodeMirror.ts");
 
 		expect(editorSource).toContain("view.visibleRanges");
-		expect(editorSource).toContain("bracketPairContextPadding");
-		expect(editorSource).toContain("sliceString(contextFrom, contextTo)");
+		expect(editorSource).toContain("bracketPairContextScanLimit");
+		expect(editorSource).toContain(
+			"state.doc.sliceString(scanStart, visibleEnd)"
+		);
+		expect(editorSource).toContain(
+			"state.doc.sliceString(visibleEnd, suffixScanEnd)"
+		);
 	});
 
 	it("ignores Python string and comment brackets in custom pair coloring", () => {
