@@ -1,5 +1,5 @@
 version = 1
-name = "classes.jacobdanderson.net"
+name = "instruction-material/classes.jacobdanderson.net"
 
 [setup]
 script = """

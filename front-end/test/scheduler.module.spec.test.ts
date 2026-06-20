@@ -17,16 +17,14 @@ describe("scheduler embed helpers", () => {
 	it("defaults to the production scheduler service", () => {
 		expect(SCHEDULER_ORIGIN).toBe(DEFAULT_SCHEDULER_ORIGIN);
 		expect(schedulerUrl).toBe(`${DEFAULT_SCHEDULER_ORIGIN}/`);
-		expect(schedulerDnsPrefetchHref).toBe(
-			"//scheduler.classes.jacobdanderson.net"
-		);
+		expect(schedulerDnsPrefetchHref).toBe("//scheduler.example.com");
 	});
 
 	it("normalizes configured scheduler origins", () => {
 		expect(normalizeSchedulerOrigin("http://localhost:5173/calendar")).toBe(
 			"http://localhost:5173"
 		);
-		expect(normalizeSchedulerOrigin("scheduler.classes.jacobdanderson.net")).toBe(
+		expect(normalizeSchedulerOrigin("scheduler.example.com")).toBe(
 			DEFAULT_SCHEDULER_ORIGIN
 		);
 		expect(normalizeSchedulerOrigin("ftp://example.invalid")).toBe(
@@ -81,9 +79,7 @@ describe("scheduler embed helpers", () => {
 	});
 
 	it("exposes the theme message contract used by the iframe", () => {
-		expect(schedulerEmbedThemeMessageSource).toBe(
-			"classes.jacobdanderson.net"
-		);
+		expect(schedulerEmbedThemeMessageSource).toBe("example.com");
 		expect(schedulerEmbedThemeType).toBe("scheduler:theme");
 	});
 });

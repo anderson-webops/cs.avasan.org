@@ -2,7 +2,7 @@
 	"name": "front-end",
 	"version": "2.0.0",
 	"description": "",
-	"author": "Jacob Anderson",
+	"author": "Instruction Material",
 	"keywords": [],
 	"license": "ISC",
 	"type": "module",
@@ -111,10 +111,10 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/anderson-webops/classes.jacobdanderson.net"
+		"url": "git+https://github.com/instruction-material/classes.jacobdanderson.net"
 	},
 	"bugs": {
-		"url": "https://github.com/anderson-webops/classes.jacobdanderson.net/issues"
+		"url": "https://github.com/instruction-material/classes.jacobdanderson.net/issues"
 	},
-	"homepage": "https://github.com/anderson-webops/classes.jacobdanderson.net#readme"
+	"homepage": "https://github.com/instruction-material/classes.jacobdanderson.net#readme"
 }

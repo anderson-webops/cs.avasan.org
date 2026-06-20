@@ -19,7 +19,7 @@ useHead(
 			link: [
 				{
 					rel: "canonical",
-					href: "https://classes.jacobdanderson.net/payment"
+					href: "https://example.com/payment"
 				}
 			],
 			script: [
@@ -90,11 +90,8 @@ useHead(
 			<div class="note">
 				<p>
 					Need Cash App, Apple Cash, or a mailed check instead? Email
-					<a
-						class="text-link"
-						href="mailto:classes@jacobdanderson.net"
-					>
-						classes@jacobdanderson.net
+					<a class="text-link" href="mailto:contact@example.com">
+						contact@example.com
 					</a>
 					.
 				</p>
@@ -157,9 +154,9 @@ useHead(
 				</RouterLink>
 				<a
 					class="site-button site-button--secondary"
-					href="mailto:classes@jacobdanderson.net"
+					href="mailto:contact@example.com"
 				>
-					Email Jacob
+					Email
 				</a>
 			</div>
 		</section>

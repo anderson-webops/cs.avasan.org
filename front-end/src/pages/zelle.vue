@@ -24,7 +24,7 @@ defineOptions({ name: "ZellePaymentPage" });
 
 			<div class="zelle-copy">
 				<p class="eyebrow">Zelle Email</p>
-				<p class="zelle-email">classes@jacobdanderson.net</p>
+				<p class="zelle-email">contact@example.com</p>
 			</div>
 
 			<div class="actions">

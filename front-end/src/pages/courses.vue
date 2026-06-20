@@ -125,8 +125,8 @@ function openSignup() {
 			<h2>No Courses Yet</h2>
 			<p>
 				Email
-				<a class="text-link" href="mailto:classes@jacobdanderson.net">
-					classes@jacobdanderson.net
+				<a class="text-link" href="mailto:contact@example.com">
+					contact@example.com
 				</a>
 				if access should already be enabled.
 			</p>

@@ -186,8 +186,8 @@ async function addSignup() {
 				</p>
 				<p class="auth-help">
 					Forgot your password? Email
-					<a href="mailto:classes@jacobdanderson.net">
-						classes@jacobdanderson.net </a
+					<a href="mailto:contact@example.com">
+						contact@example.com </a
 					>.
 				</p>
 			</form>
