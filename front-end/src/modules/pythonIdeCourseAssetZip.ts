@@ -3,6 +3,7 @@ import { strFromU8, unzipSync } from "fflate";
 import { getPythonIdeFileMimeType } from "@/modules/pythonIde";
 import {
 	normalizePythonIdeAssetLookupPath,
+	pythonIdeAssetLookupAliases,
 	pythonIdeCourseAssetsZipUrl
 } from "@/modules/pythonIdeCourseAssets";
 
@@ -21,6 +22,7 @@ export function parsePythonIdeCourseAssetZipBytes(
 	sourceUrl = pythonIdeCourseAssetsZipUrl
 ): PythonIdeCourseAssetPack {
 	const files = unzipSync(zipBytes);
+	const aliases = new Map<string, string>();
 	const assets = new Map();
 
 	for (const [rawName, bytes] of Object.entries(files)) {
@@ -32,16 +34,21 @@ export function parsePythonIdeCourseAssetZipBytes(
 		if (!mimeType) continue;
 
 		const dimensions = imageDimensions(name, bytes);
-		assets.set(normalizePythonIdeAssetLookupPath(name), {
+		const lookupPath = normalizePythonIdeAssetLookupPath(name);
+		assets.set(lookupPath, {
 			bytes,
 			height: dimensions?.height,
 			mimeType,
 			name,
 			width: dimensions?.width
 		});
+		for (const alias of pythonIdeAssetLookupAliases(name)) {
+			if (alias === lookupPath || aliases.has(alias)) continue;
+			aliases.set(alias, lookupPath);
+		}
 	}
 
-	return { assets, sourceUrl };
+	return { aliases, assets, sourceUrl };
 }
 
 function normalizeZipAssetName(path: string) {

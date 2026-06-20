@@ -6,6 +6,8 @@ export const pythonIdeCourseAssetsZipUrl = "/api/python-assets/assets.zip";
 export const pythonIdeCourseAssetZipSourceUrls = [pythonIdeCourseAssetsZipUrl];
 
 const ASSET_PATH_RE = /^(?:images|music|sounds)\/[^/].+\.[\dA-Z]+$/i;
+const ASSET_PATH_EXTENSION_RE = /\.[\dA-Z]+$/i;
+const ASSET_LOOKUP_SEPARATOR_RE = /[^\dA-Z]+/gi;
 const IGNORED_ZIP_PATH_RE =
 	/(?:^|\/)(?:__MACOSX|\.DS_Store|Thumbs\.db|desktop\.ini)(?:\/|$)/i;
 interface AssetFetcherResponse {
@@ -33,6 +35,7 @@ export interface PythonIdeCourseAsset {
 }
 
 export interface PythonIdeCourseAssetPack {
+	aliases?: Map<string, string>;
 	assets: Map<string, PythonIdeCourseAsset>;
 	sourceUrl: string;
 }
@@ -126,9 +129,10 @@ export function parsePythonIdeCourseAssetManifest(
 	manifest: unknown,
 	sourceUrl = pythonIdeCourseAssetsManifestUrl
 ): PythonIdeCourseAssetPack {
+	const aliases = new Map<string, string>();
 	const assets = new Map<string, PythonIdeCourseAsset>();
 
-	if (!isCourseAssetManifest(manifest)) return { assets, sourceUrl };
+	if (!isCourseAssetManifest(manifest)) return { aliases, assets, sourceUrl };
 
 	for (const manifestAsset of manifest.assets) {
 		const name = normalizeZipAssetName(manifestAsset.name);
@@ -139,16 +143,18 @@ export function parsePythonIdeCourseAssetManifest(
 			manifestAsset.mimeType || getPythonIdeFileMimeType(name);
 		if (!mimeType || !manifestAsset.url) continue;
 
-		assets.set(normalizePythonIdeAssetLookupPath(name), {
+		const lookupPath = normalizePythonIdeAssetLookupPath(name);
+		assets.set(lookupPath, {
 			height: numberOrUndefined(manifestAsset.height),
 			mimeType,
 			name,
 			url: manifestAsset.url,
 			width: numberOrUndefined(manifestAsset.width)
 		});
+		registerPythonIdeAssetAliases(aliases, lookupPath, name);
 	}
 
-	return { assets, sourceUrl };
+	return { aliases, assets, sourceUrl };
 }
 
 export async function parsePythonIdeCourseAssetZip(
@@ -164,6 +170,27 @@ export function normalizePythonIdeAssetLookupPath(path: string) {
 	return path.trim().replaceAll("\\", "/").replace(/^\/+/, "").toLowerCase();
 }
 
+export function pythonIdeAssetLookupAliases(path: string) {
+	const normalized = normalizePythonIdeAssetLookupPath(path);
+	const match = normalized.match(
+		/^(images|music|sounds)\/(.+?)(\.[\dA-Z]+)$/i
+	);
+	if (!match?.[1] || !match[2] || !match[3]) return [normalized];
+
+	const folder = match[1].toLowerCase();
+	const relativeStem = match[2];
+	const extension = match[3].toLowerCase();
+	const fileStem = relativeStem.split("/").at(-1) ?? relativeStem;
+	const aliases = new Set([normalized]);
+
+	for (const stem of [relativeStem, fileStem]) {
+		const looseStem = normalizePythonIdeAssetAliasStem(stem);
+		if (looseStem) aliases.add(`${folder}/${looseStem}${extension}`);
+	}
+
+	return [...aliases];
+}
+
 export function pythonIdeAssetCandidateNames(
 	folder: "images" | "music" | "sounds",
 	name: string,
@@ -175,13 +202,25 @@ export function pythonIdeAssetCandidateNames(
 		.replace(/^\/+/, "")
 		.replace(/^images\/|^music\/|^sounds\//i, "");
 	if (!normalized) return [];
-	if (/\.[\dA-Z]+$/i.test(normalized)) {
-		return [normalizePythonIdeAssetLookupPath(`${folder}/${normalized}`)];
+	const candidates = new Set<string>();
+
+	if (ASSET_PATH_EXTENSION_RE.test(normalized)) {
+		for (const alias of pythonIdeAssetLookupAliases(
+			`${folder}/${normalized}`
+		))
+			candidates.add(alias);
+		return [...candidates];
 	}
 
-	return extensions.map(extension =>
-		normalizePythonIdeAssetLookupPath(`${folder}/${normalized}${extension}`)
-	);
+	for (const extension of extensions) {
+		for (const alias of pythonIdeAssetLookupAliases(
+			`${folder}/${normalized}${extension}`
+		)) {
+			candidates.add(alias);
+		}
+	}
+
+	return [...candidates];
 }
 
 export function findPythonIdeCourseAsset(
@@ -190,9 +229,10 @@ export function findPythonIdeCourseAsset(
 ) {
 	if (!pack) return null;
 	for (const candidateName of candidateNames) {
-		const asset = pack.assets.get(
-			normalizePythonIdeAssetLookupPath(candidateName)
-		);
+		const lookupPath = normalizePythonIdeAssetLookupPath(candidateName);
+		const asset =
+			pack.assets.get(lookupPath) ??
+			pack.assets.get(pack.aliases?.get(lookupPath) ?? "");
 		if (asset) return asset;
 	}
 	return null;
@@ -252,6 +292,27 @@ function copyBytesToArrayBuffer(bytes: Uint8Array): ArrayBuffer {
 
 function formatAssetLoadError(error: unknown) {
 	return error instanceof Error ? error.message : String(error);
+}
+
+function normalizePythonIdeAssetAliasStem(stem: string) {
+	return stem
+		.trim()
+		.replaceAll("\\", "/")
+		.toLowerCase()
+		.replaceAll(ASSET_LOOKUP_SEPARATOR_RE, "_")
+		.replace(/^_+|_+$/g, "")
+		.replace(/_+/g, "_");
+}
+
+function registerPythonIdeAssetAliases(
+	aliases: Map<string, string>,
+	lookupPath: string,
+	name: string
+) {
+	for (const alias of pythonIdeAssetLookupAliases(name)) {
+		if (alias === lookupPath || aliases.has(alias)) continue;
+		aliases.set(alias, lookupPath);
+	}
 }
 
 function normalizeZipAssetName(path: string) {

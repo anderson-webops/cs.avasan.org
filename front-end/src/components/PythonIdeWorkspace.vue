@@ -57,7 +57,8 @@ import {
 	getPythonIdeCourseAssetObjectUrl,
 	loadPythonIdeCourseAssetPack,
 	normalizePythonIdeAssetLookupPath,
-	pythonIdeAssetCandidateNames
+	pythonIdeAssetCandidateNames,
+	pythonIdeAssetLookupAliases
 } from "@/modules/pythonIdeCourseAssets";
 import { primePythonRuntimeConnection } from "@/modules/pythonIdeRuntimeHints";
 import { useAppStore } from "@/stores/app";
@@ -3201,7 +3202,9 @@ function findProjectAssetFile(
 	const candidateNames = localAssetCandidateNames(folder, name, extensions);
 	return (
 		project.files.find(file =>
-			candidateNames.has(normalizePythonIdeAssetLookupPath(file.name))
+			pythonIdeAssetLookupAliases(file.name).some(alias =>
+				candidateNames.has(alias)
+			)
 		) ?? null
 	);
 }

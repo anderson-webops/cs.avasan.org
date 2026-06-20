@@ -48,6 +48,7 @@ import {
 	loadPythonIdeCourseAssetPack,
 	parsePythonIdeCourseAssetZip,
 	parsePythonIdeCourseAssetManifest,
+	pythonIdeAssetLookupAliases,
 	pythonIdeAssetCandidateNames,
 	pythonIdeCourseAssetsManifestUrl,
 	pythonIdeCourseAssetsZipUrl,
@@ -3142,6 +3143,40 @@ describe("python IDE project helpers", () => {
 		expect(tune?.mimeType).toBe("audio/mpeg");
 	});
 
+	it("matches PyGame Zero shared assets by student-friendly aliases", async () => {
+		const pack = await parsePythonIdeCourseAssetZip(
+			zipSync({
+				"images/alien-left.png": oneByOnePngBytes,
+				"images/orange (2).png": oneByOnePngBytes,
+				"music/Battle Theme.mp3": new Uint8Array([1, 2, 3])
+			}),
+			"/assets.zip"
+		);
+		const alienLeft = findPythonIdeCourseAsset(
+			pack,
+			pythonIdeAssetCandidateNames("images", "alien_left", [".png"])
+		);
+		const orange = findPythonIdeCourseAsset(
+			pack,
+			pythonIdeAssetCandidateNames("images", "orange 2", [".png"])
+		);
+		const battleTheme = findPythonIdeCourseAsset(
+			pack,
+			pythonIdeAssetCandidateNames("music", "battle_theme", [".mp3"])
+		);
+
+		expect(pythonIdeAssetLookupAliases("images/orange (2).png")).toContain(
+			"images/orange_2.png"
+		);
+		expect(
+			pythonIdeAssetCandidateNames("images", "Alien Left", [".png"])
+		).toContain("images/alien_left.png");
+		expect(pack.assets.size).toBe(3);
+		expect(alienLeft?.name).toBe("images/alien-left.png");
+		expect(orange?.name).toBe("images/orange (2).png");
+		expect(battleTheme?.name).toBe("music/Battle Theme.mp3");
+	});
+
 	it("reuses and revokes generated PyGame Zero asset object URLs", async () => {
 		const createdUrls: string[] = [];
 		const revokedUrls: string[] = [];
@@ -3202,6 +3237,13 @@ describe("python IDE project helpers", () => {
 					mimeType: "audio/mpeg",
 					name: "music/tune.mp3",
 					url: "/python-ide/assets/music/tune.mp3"
+				},
+				{
+					height: 18,
+					mimeType: "image/png",
+					name: "images/alien-left.png",
+					url: "/python-ide/assets/images/alien-left.png",
+					width: 20
 				}
 			]
 		});
@@ -3209,11 +3251,18 @@ describe("python IDE project helpers", () => {
 			pack,
 			pythonIdeAssetCandidateNames("images", "alien", [".png"])
 		);
+		const alienLeft = findPythonIdeCourseAsset(
+			pack,
+			pythonIdeAssetCandidateNames("images", "alien_left", [".png"])
+		);
 
-		expect(pack.assets.size).toBe(3);
+		expect(pack.assets.size).toBe(4);
 		expect(alien?.url).toBe("/python-ide/assets/images/alien.png");
 		expect(alien?.width).toBe(20);
 		expect(alien?.height).toBe(18);
+		expect(alienLeft?.url).toBe(
+			"/python-ide/assets/images/alien-left.png"
+		);
 	});
 
 	it("keeps zip parsing out of the normal course asset loader chunk", () => {
