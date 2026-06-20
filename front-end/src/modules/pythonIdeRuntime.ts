@@ -591,21 +591,23 @@ function escapePythonString(value: string) {
 function createInputBootstrap(inputText: string, mode: PythonIdeMode) {
 	const inputLines = inputText.replaceAll("\r\n", "\n").split("\n");
 	return `
-import builtins as __classes_bootstrap_builtins
-import sys as __classes_bootstrap_sys
-__classes_main = __classes_bootstrap_sys.modules["__main__"]
-__classes_preserved_main_names = {
-    "__builtins__",
-    "__doc__",
-    "__loader__",
-    "__package__",
-    "__spec__",
-}
-for __classes_name in list(__classes_main.__dict__):
-    if __classes_name not in __classes_preserved_main_names:
-        del __classes_main.__dict__[__classes_name]
-__classes_main.__dict__["__builtins__"] = __classes_bootstrap_builtins
-__classes_main.__dict__["__name__"] = "__main__"
+def _classes_reset_main_namespace():
+    import builtins as classes_bootstrap_builtins
+    import sys as classes_bootstrap_sys
+    classes_main = classes_bootstrap_sys.modules["__main__"]
+    classes_preserved_main_names = {
+        "__builtins__",
+        "__doc__",
+        "__loader__",
+        "__package__",
+        "__spec__",
+    }
+    for classes_name in list(classes_main.__dict__):
+        if classes_name not in classes_preserved_main_names:
+            del classes_main.__dict__[classes_name]
+    classes_main.__dict__["__builtins__"] = classes_bootstrap_builtins
+    classes_main.__dict__["__name__"] = "__main__"
+_classes_reset_main_namespace()
 import sys as __classes_sys
 __classes_sys.meta_path[:] = [
     __classes_finder for __classes_finder in __classes_sys.meta_path

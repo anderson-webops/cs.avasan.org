@@ -523,6 +523,9 @@ let turtleTimerGeneration = 0;
 let activeTurtleID = defaultTurtleID;
 let activeGameBridgeRunID = 0;
 let activeGameLoopID = 0;
+let activePythonIdeRunID = 0;
+let expectedSelectedProjectIDMigration: { from: string; to: string } | null =
+	null;
 let activeTurtleDragButton: string | null = null;
 let lastGamePointerPoint: { x: number; y: number } | null = null;
 let gameMusicAudio: HTMLAudioElement | null = null;
@@ -1379,6 +1382,10 @@ async function saveProjectOnce(
 				currentProject.createdAt =
 					currentProject.createdAt ?? savedProject.createdAt;
 				if (selectedProjectID.value === startedProjectID) {
+					expectedSelectedProjectIDMigration = {
+						from: startedProjectID,
+						to: savedProject._id
+					};
 					selectedProjectID.value = savedProject._id;
 				}
 			}
@@ -1397,6 +1404,10 @@ async function saveProjectOnce(
 				migrateCodeEditorViewStates(startedProjectID, savedProject._id);
 			projects.value.splice(currentIndex, 1, savedProject);
 			if (selectedProjectID.value === startedProjectID) {
+				expectedSelectedProjectIDMigration = {
+					from: startedProjectID,
+					to: savedProject._id
+				};
 				selectedProjectID.value = savedProject._id;
 			}
 		}
@@ -4281,11 +4292,32 @@ function redrawActiveCanvas() {
 	renderTurtleScene();
 }
 
+function nextPythonIdeRunID() {
+	activePythonIdeRunID += 1;
+	return activePythonIdeRunID;
+}
+
+function invalidatePythonIdeRuns() {
+	activePythonIdeRunID += 1;
+}
+
+function isPythonIdeRunCurrent(runID: number, projectID: string) {
+	return (
+		runID === activePythonIdeRunID && selectedProjectID.value === projectID
+	);
+}
+
+function shouldStopPythonIdeRun(runID: number, projectID: string) {
+	return stopRequested.value || !isPythonIdeRunCurrent(runID, projectID);
+}
+
 async function runCurrentProject() {
+	const runID = nextPythonIdeRunID();
 	stopRequested.value = false;
 	await saveSelectedProject({ force: true });
 	const project = selectedProject.value;
 	if (!project) return;
+	if (shouldStopPythonIdeRun(runID, project._id)) return;
 
 	clearOutput();
 	const runnableFile = getPythonIdeRunnableFile(project);
@@ -4304,9 +4336,11 @@ async function runCurrentProject() {
 		if (project.mode === "pgzero") {
 			runMessage.value = "Loading assets";
 			await ensureGameCourseAssetsLoaded();
+			if (shouldStopPythonIdeRun(runID, project._id)) return;
 		}
 
 		const { runPythonProject } = await loadPythonRuntimeModule();
+		if (shouldStopPythonIdeRun(runID, project._id)) return;
 		await runPythonProject({
 			files: project.files,
 			activeFileName: runnableFile.name,
@@ -4324,13 +4358,16 @@ async function runCurrentProject() {
 			onProjectFilesUpdate: files =>
 				mergeRuntimeProjectFiles(project, files),
 			onOutput: appendOutput,
-			shouldStop: () => stopRequested.value
+			shouldStop: () => shouldStopPythonIdeRun(runID, project._id)
 		});
-		if (project.mode === "turtle" && !stopRequested.value) {
+		if (
+			project.mode === "turtle" &&
+			!shouldStopPythonIdeRun(runID, project._id)
+		) {
 			runMessage.value = "Drawing";
 			await waitForTurtleAnimation();
 		}
-		if (!stopRequested.value) {
+		if (!shouldStopPythonIdeRun(runID, project._id)) {
 			runMessage.value =
 				project.mode === "data"
 					? "Analysis ready"
@@ -4341,18 +4378,16 @@ async function runCurrentProject() {
 							: "Run complete";
 		}
 	} catch (error) {
-		if (stopRequested.value) {
-			appendOutput("system", "Stopped Python run.");
-			runMessage.value = "Stopped";
-			return;
-		}
+		if (shouldStopPythonIdeRun(runID, project._id)) return;
 		const formattedError = formatPythonRuntimeError(error);
 		appendOutput("stderr", formattedError);
 		void markPythonRuntimeErrorInEditor(formattedError, runnableFile.name);
 		runMessage.value = "Run failed";
 	} finally {
-		isRunning.value = false;
-		stopRequested.value = false;
+		if (isPythonIdeRunCurrent(runID, project._id)) {
+			isRunning.value = false;
+			stopRequested.value = false;
+		}
 	}
 }
 
@@ -4377,6 +4412,8 @@ function stopCurrentProject() {
 }
 
 function stopActiveRuntimeSurfaces() {
+	invalidatePythonIdeRuns();
+	isRunning.value = false;
 	invalidateTurtleBridgeRuns();
 	invalidateGameBridgeRuns();
 	stopLoadedPythonRuntimeRun();
@@ -4644,7 +4681,18 @@ watch(
 	}
 );
 
-watch(selectedProjectID, () => {
+watch(selectedProjectID, (projectID, previousProjectID) => {
+	const expectedMigration = expectedSelectedProjectIDMigration;
+	expectedSelectedProjectIDMigration = null;
+	if (
+		expectedMigration &&
+		previousProjectID === expectedMigration.from &&
+		projectID === expectedMigration.to
+	) {
+		void nextTick(resetActiveCanvas);
+		return;
+	}
+
 	const hadPythonRunInFlight = isRunning.value;
 	stopRequested.value = true;
 	stopActiveRuntimeSurfaces();

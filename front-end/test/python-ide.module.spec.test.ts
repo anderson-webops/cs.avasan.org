@@ -1584,12 +1584,15 @@ describe("python IDE project helpers", () => {
 			"const runContinuously = options.gameBridge.consumeLoopRequest();"
 		);
 		expect(runtimeSource).toContain("{ continuous: runContinuously }");
-		expect(pageSource).toContain("shouldStop: () => stopRequested.value");
-		expect(pageSource).toContain("Stopped Python run.");
+		expect(pageSource).toContain(
+			"shouldStop: () => shouldStopPythonIdeRun(runID, project._id)"
+		);
 		expect(pageSource).toContain(
 			"Python will halt at the next runtime checkpoint."
 		);
 		expect(pageSource).toContain("function stopActiveRuntimeSurfaces");
+		expect(pageSource).toContain("invalidatePythonIdeRuns();");
+		expect(pageSource).toContain("isRunning.value = false;");
 		expect(pageSource).toContain("invalidateTurtleBridgeRuns();");
 		expect(pageSource).toContain("invalidateGameBridgeRuns();");
 		expect(pageSource).toContain("stopLoadedPythonRuntimeRun();");
@@ -1598,6 +1601,47 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("gameEvents.length = 0;");
 		expect(pageSource).toContain("stopRequested.value = true;");
 		expect(pageSource).toContain("stopActiveRuntimeSurfaces();");
+	});
+
+	it("prevents stale async IDE runs from reviving after stop or project switch", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const runStart = pageSource.indexOf("async function runCurrentProject");
+		const runSource = pageSource.slice(
+			runStart,
+			pageSource.indexOf("function stopCurrentProject", runStart)
+		);
+		const stopStart = pageSource.indexOf("function stopActiveRuntimeSurfaces");
+		const stopSource = pageSource.slice(
+			stopStart,
+			pageSource.indexOf("function activateRunControl", stopStart)
+		);
+
+		expect(pageSource).toContain("let activePythonIdeRunID = 0;");
+		expect(pageSource).toContain("function nextPythonIdeRunID");
+		expect(pageSource).toContain("function invalidatePythonIdeRuns");
+		expect(pageSource).toContain("function isPythonIdeRunCurrent");
+		expect(pageSource).toContain("function shouldStopPythonIdeRun");
+		expect(runSource).toContain("const runID = nextPythonIdeRunID();");
+		expect(runSource.indexOf("await saveSelectedProject")).toBeLessThan(
+			runSource.indexOf("if (shouldStopPythonIdeRun(runID, project._id)) return;")
+		);
+		expect(runSource).toContain(
+			"await ensureGameCourseAssetsLoaded();\n\t\t\tif (shouldStopPythonIdeRun(runID, project._id)) return;"
+		);
+		expect(runSource).toContain(
+			"const { runPythonProject } = await loadPythonRuntimeModule();\n\t\tif (shouldStopPythonIdeRun(runID, project._id)) return;"
+		);
+		expect(runSource).toContain(
+			"shouldStop: () => shouldStopPythonIdeRun(runID, project._id)"
+		);
+		expect(runSource).toContain(
+			"if (isPythonIdeRunCurrent(runID, project._id))"
+		);
+		expect(stopSource).toContain("invalidatePythonIdeRuns();");
+		expect(stopSource).toContain("isRunning.value = false;");
 	});
 
 	it("clears stale main-thread Python globals before Turtle and game runs", () => {
@@ -1617,24 +1661,26 @@ describe("python IDE project helpers", () => {
 		);
 		const runSource = runtimeSource.slice(runSourceStart);
 
+		expect(inputBootstrapSource).toContain("def _classes_reset_main_namespace():");
 		expect(inputBootstrapSource).toContain(
-			'__classes_main = __classes_bootstrap_sys.modules["__main__"]'
+			'classes_main = classes_bootstrap_sys.modules["__main__"]'
 		);
 		expect(inputBootstrapSource).toContain(
-			"__classes_preserved_main_names = {"
+			"classes_preserved_main_names = {"
 		);
 		expect(inputBootstrapSource).toContain(
-			"for __classes_name in list(__classes_main.__dict__):"
+			"for classes_name in list(classes_main.__dict__):"
 		);
 		expect(inputBootstrapSource).toContain(
-			"del __classes_main.__dict__[__classes_name]"
+			"del classes_main.__dict__[classes_name]"
 		);
 		expect(inputBootstrapSource).toContain(
-			'__classes_main.__dict__["__builtins__"] = __classes_bootstrap_builtins'
+			'classes_main.__dict__["__builtins__"] = classes_bootstrap_builtins'
 		);
 		expect(inputBootstrapSource).toContain(
-			'__classes_main.__dict__["__name__"] = "__main__"'
+			'classes_main.__dict__["__name__"] = "__main__"'
 		);
+		expect(inputBootstrapSource).toContain("_classes_reset_main_namespace()");
 		expect(runSource).toContain('__main__.__dict__["__file__"] =');
 		expect(runSource).toContain("__classes_compile_student_source(");
 		expect(runSource).toContain("__main__.__dict__,");
@@ -1795,6 +1841,45 @@ describe("python IDE project helpers", () => {
 			"void nextTick(resetActiveCanvas);"
 		);
 		expect(resetGameCanvasSource).toContain("stopGameLoop();");
+	});
+
+	it("allows local-to-remote project ID sync without cancelling the current IDE run", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const saveStart = pageSource.indexOf("async function saveProjectOnce");
+		const saveSource = pageSource.slice(
+			saveStart,
+			pageSource.indexOf("async function savePendingProjects", saveStart)
+		);
+		const projectSwitchStart = pageSource.indexOf(
+			"watch(selectedProjectID"
+		);
+		const projectSwitchSource = pageSource.slice(
+			projectSwitchStart,
+			pageSource.indexOf("watch(", projectSwitchStart + 1)
+		);
+		const migrationReturnIndex = projectSwitchSource.indexOf("return;");
+		const runtimeStopIndex = projectSwitchSource.indexOf(
+			"const hadPythonRunInFlight = isRunning.value;"
+		);
+
+		expect(pageSource).toContain(
+			"let expectedSelectedProjectIDMigration: { from: string; to: string } | null"
+		);
+		expect(saveSource).toContain("expectedSelectedProjectIDMigration = {");
+		expect(saveSource).toContain("from: startedProjectID");
+		expect(saveSource).toContain("to: savedProject._id");
+		expect(projectSwitchSource).toContain(
+			"const expectedMigration = expectedSelectedProjectIDMigration;"
+		);
+		expect(projectSwitchSource).toContain(
+			"previousProjectID === expectedMigration.from"
+		);
+		expect(projectSwitchSource).toContain("projectID === expectedMigration.to");
+		expect(migrationReturnIndex).toBeGreaterThan(0);
+		expect(runtimeStopIndex).toBeGreaterThan(migrationReturnIndex);
 	});
 
 	it("keeps PyGame Zero image cache entries reusable across canvas resets", () => {
