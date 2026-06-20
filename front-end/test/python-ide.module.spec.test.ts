@@ -1925,6 +1925,10 @@ describe("python IDE project helpers", () => {
 			resolve(__dirname, "../src/workers/pythonIdePlainWorker.ts"),
 			"utf8"
 		);
+		const runtimeHintsSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeRuntimeHints.ts"),
+			"utf8"
+		);
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
@@ -1948,7 +1952,9 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain(
 			"Plain Python worker is being terminated."
 		);
+		expect(runtimeHintsSource).toContain("export const PYODIDE_MODULE_SRC");
 		expect(workerSource).toContain("PYODIDE_MODULE_SRC");
+		expect(workerSource).not.toContain("const PYODIDE_MODULE_SRC =");
 		expect(workerSource).toContain("loadPackagesFromImports");
 		expect(workerSource).toContain("setStdout");
 		expect(workerSource).toContain("setStderr");
