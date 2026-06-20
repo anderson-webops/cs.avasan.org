@@ -387,7 +387,7 @@ function buildStandardsModule(
 					`**Expansion topics:**\n${bullets(profile.topics)}`,
 					courseUseNote(
 						courseLabel,
-						`Topic additions in ${courseLabel} are strongest when they include vocabulary, one representative example, one misconception check, and one transfer task.`
+						`Topic additions in ${courseLabel} are strongest when they include vocabulary, one representative example, one common-error check, and one transfer task.`
 					),
 					`**Common pitfalls:** Topics in ${courseLabel} are strongest when they connect to real projects. If the connection is unclear, a smaller bridge lesson belongs before the major project.`
 				].join("\n\n")
@@ -1282,7 +1282,7 @@ const chemistryProfile: ResearchExpansionProfile = {
 	gaps: [
 		"Align to NGSS and ACS guidance while keeping all required work remote-safe.",
 		"Replace physical-lab assumptions with simulations, provided data, diagrams, videos, and paper modeling.",
-		"Build misconception checkpoints around particles, conservation, bonding, reactions, and stoichiometry."
+		"Build common-error checkpoints around particles, conservation, bonding, reactions, and stoichiometry."
 	],
 	topics: [
 		"Matter and particle model, atomic structure, periodic trends, bonding, reactions, equations, mole concept, stoichiometry, acids/bases, thermochemistry, solutions, and equilibrium intro.",
