@@ -2706,6 +2706,40 @@ describe("python IDE project helpers", () => {
 		);
 	});
 
+	it("documents the enabled CodeMirror editor shortcuts in the IDE help", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const codeMirrorSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonCodeMirror.ts"),
+			"utf8"
+		);
+		const helpTextSource = pageSource.replace(/\s+/g, " ");
+
+		expect(codeMirrorSource).toContain("...defaultKeymap");
+		expect(codeMirrorSource).toContain("...closeBracketsKeymap");
+		expect(codeMirrorSource).toContain("rectangularSelection()");
+		expect(codeMirrorSource).toContain("EditorState.allowMultipleSelections.of(true)");
+		expect(codeMirrorSource).toContain("Prec.highest(keymap.of([indentWithTab]))");
+		expect(helpTextSource).toContain("Cmd/Ctrl+/ toggles comments.");
+		expect(helpTextSource).toContain(
+			"Cmd/Ctrl+Alt+Up/Down adds cursors above or below."
+		);
+		expect(helpTextSource).toContain(
+			"Alt/Option+Up/Down moves lines; add Shift to copy them."
+		);
+		expect(helpTextSource).toContain(
+			"Shift+Cmd/Ctrl+\\ jumps to the matching bracket."
+		);
+		expect(helpTextSource).toContain(
+			"Alt/Option-drag creates a rectangular selection."
+		);
+		expect(helpTextSource).toContain(
+			"Quotes and brackets wrap highlighted text."
+		);
+	});
+
 	it("ignores stale async project loads before mutating the workspace", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),

@@ -5176,7 +5176,20 @@ onBeforeUnmount(() => {
 											Cmd/Ctrl+Enter runs the project.
 										</li>
 										<li>Cmd/Ctrl+S saves the project.</li>
+										<li>Cmd/Ctrl+/ toggles comments.</li>
+										<li>
+											Cmd/Ctrl+Alt+Up/Down adds cursors
+											above or below.
+										</li>
 										<li>Tab indents; Shift+Tab dedents.</li>
+										<li>
+											Alt/Option+Up/Down moves lines; add
+											Shift to copy them.
+										</li>
+										<li>
+											Shift+Cmd/Ctrl+\ jumps to the
+											matching bracket.
+										</li>
 										<li>
 											Alt/Option-drag creates a
 											rectangular selection.
