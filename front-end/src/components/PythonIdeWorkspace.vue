@@ -478,6 +478,10 @@ const sidebarCollapsed = ref(false);
 const stopRequested = ref(false);
 const saveMessage = ref("Loading workspace");
 const runMessage = ref("Ready");
+const storagePersistenceMessage = ref("Checking local save protection");
+const storagePersistenceStatus = ref<
+	"best-effort" | "checking" | "persistent" | "unsupported"
+>("checking");
 const codeEditorHostRef = ref<HTMLDivElement | null>(null);
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 const editorCursorCount = ref(1);
@@ -573,6 +577,64 @@ function persistPythonIdeAutoSavePreference(enabled: boolean) {
 		pythonIdeAutoSaveStorageKey,
 		enabled ? "on" : "off"
 	);
+}
+
+function storageManagerWithPersistence() {
+	if (typeof navigator === "undefined") return null;
+	if (!navigator.storage?.persist || !navigator.storage.persisted)
+		return null;
+	return navigator.storage;
+}
+
+async function refreshPythonIdeStoragePersistenceStatus() {
+	const storageManager = storageManagerWithPersistence();
+	if (!storageManager) {
+		storagePersistenceStatus.value = "unsupported";
+		storagePersistenceMessage.value =
+			"Your browser does not expose persistent local project storage.";
+		return;
+	}
+
+	storagePersistenceStatus.value = "checking";
+	try {
+		const persisted = await storageManager.persisted();
+		storagePersistenceStatus.value = persisted
+			? "persistent"
+			: "best-effort";
+		storagePersistenceMessage.value = persisted
+			? "Local project saves are protected from automatic browser cleanup."
+			: "Local project saves use normal browser storage and may be cleared if the browser needs space.";
+	} catch {
+		storagePersistenceStatus.value = "unsupported";
+		storagePersistenceMessage.value =
+			"Could not check local project storage protection in this browser.";
+	}
+}
+
+async function requestPythonIdeStoragePersistence() {
+	const storageManager = storageManagerWithPersistence();
+	if (!storageManager) {
+		storagePersistenceStatus.value = "unsupported";
+		storagePersistenceMessage.value =
+			"Your browser does not support persistent local project storage.";
+		return;
+	}
+
+	storagePersistenceStatus.value = "checking";
+	try {
+		const alreadyPersisted = await storageManager.persisted();
+		const persisted = alreadyPersisted || (await storageManager.persist());
+		storagePersistenceStatus.value = persisted
+			? "persistent"
+			: "best-effort";
+		storagePersistenceMessage.value = persisted
+			? "Local project saves are protected from automatic browser cleanup."
+			: "The browser kept local project saves in normal storage for now.";
+	} catch {
+		storagePersistenceStatus.value = "unsupported";
+		storagePersistenceMessage.value =
+			"Could not request persistent local project storage.";
+	}
 }
 
 function codeEditorViewStateStorageKey(userID: string | null) {
@@ -4723,6 +4785,7 @@ watch(isLoading, loading => {
 
 onMounted(() => {
 	primePythonRuntimeConnection();
+	void refreshPythonIdeStoragePersistenceStatus();
 	void loadProjects();
 	window.addEventListener("pagehide", flushPendingProjectSave);
 	document.addEventListener(
@@ -5135,6 +5198,29 @@ onBeforeUnmount(() => {
 										</small>
 									</span>
 								</label>
+								<div class="ide-setting-storage">
+									<button
+										class="ide-setting-action"
+										:disabled="
+											storagePersistenceStatus ===
+											'checking'
+										"
+										type="button"
+										@click="
+											requestPythonIdeStoragePersistence
+										"
+									>
+										{{
+											storagePersistenceStatus ===
+											"checking"
+												? "Checking storage"
+												: "Protect local saves"
+										}}
+									</button>
+									<small>
+										{{ storagePersistenceMessage }}
+									</small>
+								</div>
 							</div>
 						</div>
 						<button
@@ -5494,6 +5580,16 @@ html.dark .ide-setting-toggle strong {
 }
 
 html.dark .ide-setting-toggle small {
+	color: #c8dce6;
+}
+
+html.dark .ide-setting-action {
+	border-color: rgba(94, 234, 212, 0.42);
+	background: rgba(20, 184, 166, 0.16);
+	color: #7dd3fc;
+}
+
+html.dark .ide-setting-storage small {
 	color: #c8dce6;
 }
 
@@ -6107,6 +6203,31 @@ html.dark .file-delete:disabled::after {
 	color: var(--color-ink);
 }
 
+.ide-setting-storage {
+	display: grid;
+	gap: 0.45rem;
+	margin-top: 0.8rem;
+	padding-top: 0.8rem;
+	border-top: 1px solid var(--color-border);
+}
+
+.ide-setting-action {
+	justify-self: start;
+	padding: 0.48rem 0.72rem;
+	border: 1px solid rgba(15, 118, 110, 0.35);
+	border-radius: 999px;
+	background: rgba(15, 118, 110, 0.1);
+	color: #0f766e;
+	font-size: 0.78rem;
+	font-weight: 900;
+	letter-spacing: 0.02em;
+}
+
+.ide-setting-action:disabled {
+	cursor: wait;
+	opacity: 0.65;
+}
+
 .ide-setting-toggle input {
 	width: 1.1rem;
 	height: 1.1rem;
@@ -6129,6 +6250,12 @@ html.dark .file-delete:disabled::after {
 	color: var(--color-ink-soft);
 	font-size: 0.78rem;
 	line-height: 1.45;
+}
+
+.ide-setting-storage small {
+	color: var(--color-ink-soft);
+	font-size: 0.76rem;
+	line-height: 1.4;
 }
 
 .ide-grid {

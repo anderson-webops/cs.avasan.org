@@ -2625,6 +2625,23 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("function updateAutoSavePreference");
 		expect(pageSource).toContain("Autosave projects");
 		expect(pageSource).toContain('aria-label="Python IDE settings"');
+		expect(pageSource).toContain("Protect local saves");
+		expect(pageSource).toContain("function storageManagerWithPersistence");
+		expect(pageSource).toContain("navigator.storage?.persist");
+		expect(pageSource).toContain("navigator.storage.persisted");
+		expect(pageSource).toContain(
+			"async function refreshPythonIdeStoragePersistenceStatus"
+		);
+		expect(pageSource).toContain(
+			"async function requestPythonIdeStoragePersistence"
+		);
+		expect(pageSource).toContain(
+			"void refreshPythonIdeStoragePersistenceStatus();"
+		);
+		expect(pageSource).not.toContain(
+			"void requestPythonIdeStoragePersistence();"
+		);
+		expect(pageSource).toContain("html.dark .ide-setting-action");
 		expect(pageSource).toContain(
 			"const pendingSaveProjectIDs = new Set<string>();"
 		);
