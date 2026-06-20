@@ -204,12 +204,8 @@ const pythonHighlightStyle = HighlightStyle.define([
 	{ tag: tags.number, color: "var(--syntax-number)" },
 	{ tag: tags.operator, color: "var(--syntax-operator)" },
 	{ tag: tags.punctuation, color: "var(--syntax-bracket)" },
-	{ tag: tags.bracket, color: "var(--syntax-bracket)", fontWeight: "800" },
-	{
-		tag: tags.angleBracket,
-		color: "var(--syntax-bracket)",
-		fontWeight: "800"
-	}
+	{ tag: tags.bracket, color: "var(--syntax-bracket)" },
+	{ tag: tags.angleBracket, color: "var(--syntax-bracket)" }
 ]);
 
 const sharedRuntimeCompletions = [
@@ -1381,9 +1377,6 @@ class BracketPairColorPlugin {
 
 const bracketPairColorExtension = [
 	EditorView.baseTheme({
-		".cm-bracket-pair": {
-			fontWeight: "800"
-		},
 		".cm-bracket-pair-1": {
 			color: "var(--syntax-bracket-pair-1)"
 		},

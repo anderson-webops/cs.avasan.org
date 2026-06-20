@@ -200,6 +200,16 @@ describe("python IDE CodeMirror editor", () => {
 		);
 	});
 
+	it("keeps bracket-pair colors from changing editor text metrics", () => {
+		const editorSource = sourceFile("../src/modules/pythonCodeMirror.ts");
+
+		expect(editorSource).toContain("cm-bracket-pair-1");
+		expect(editorSource).toContain("syntax-bracket-pair-6");
+		expect(editorSource).not.toContain('tag: tags.bracket, color: "var(--syntax-bracket)", fontWeight');
+		expect(editorSource).not.toContain("tag: tags.angleBracket,\n\t\tcolor: \"var(--syntax-bracket)\",\n\t\tfontWeight");
+		expect(editorSource).not.toContain('".cm-bracket-pair": {\n\t\t\tfontWeight');
+	});
+
 	it("configures CodeMirror's native indentation unit to four spaces", () => {
 		const state = EditorState.create({
 			doc: "if ready:",

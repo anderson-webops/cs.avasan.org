@@ -6273,17 +6273,20 @@ html.dark .file-delete:disabled::after {
 
 .ide-grid {
 	min-height: 38rem;
+	height: clamp(38rem, 76vh, 54rem);
 	display: grid;
 	grid-template-columns: minmax(0, 1.08fr) minmax(24rem, 0.92fr);
 	gap: 1rem;
 }
 
 .ide-grid--drawing {
+	height: clamp(40rem, 78vh, 56rem);
 	grid-template-columns: minmax(0, 0.82fr) minmax(28rem, 1.18fr);
 }
 
 .code-panel,
 .result-panel {
+	min-height: 0;
 	min-width: 0;
 	display: grid;
 	grid-template-rows: auto minmax(0, 1fr);
@@ -6291,7 +6294,7 @@ html.dark .file-delete:disabled::after {
 }
 
 .code-panel {
-	overflow: visible;
+	overflow: hidden;
 }
 
 .panel-header {
@@ -6397,7 +6400,8 @@ html.dark .editor-shortcuts ul {
 
 .code-editor-shell {
 	position: relative;
-	min-height: 100%;
+	height: 100%;
+	min-height: 0;
 	overflow: hidden;
 	border: 1px solid transparent;
 	background: var(--python-code-bg);
@@ -6419,7 +6423,7 @@ html.dark .editor-shortcuts ul {
 .code-editor-host {
 	width: 100%;
 	height: 100%;
-	min-height: 100%;
+	min-height: 0;
 }
 
 .code-editor-host :deep(.cm-editor) {
@@ -6621,6 +6625,19 @@ html.dark .editor-shortcuts ul {
 	.python-ide-workspace,
 	.ide-grid {
 		grid-template-columns: 1fr;
+	}
+
+	.ide-grid,
+	.ide-grid--drawing {
+		height: auto;
+	}
+
+	.code-panel {
+		height: clamp(32rem, 68vh, 44rem);
+	}
+
+	.result-panel {
+		height: clamp(30rem, 68vh, 42rem);
 	}
 
 	.python-ide-workspace.is-sidebar-collapsed {

@@ -2152,6 +2152,57 @@ describe("python IDE project helpers", () => {
 		);
 	});
 
+	it("bounds the IDE editor grid so long files scroll inside CodeMirror", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+		const gridStart = pageSource.indexOf(".ide-grid {");
+		const drawingGridStart = pageSource.indexOf(".ide-grid--drawing {");
+		const panelStart = pageSource.indexOf(".code-panel,", drawingGridStart);
+		const editorShellStart = pageSource.indexOf(".code-editor-shell {");
+		const editorHostStart = pageSource.indexOf(".code-editor-host {");
+		const gridSource = pageSource.slice(gridStart, drawingGridStart);
+		const drawingGridSource = pageSource.slice(
+			drawingGridStart,
+			panelStart
+		);
+		const panelSource = pageSource.slice(
+			panelStart,
+			pageSource.indexOf(".panel-header", panelStart)
+		);
+		const editorShellSource = pageSource.slice(
+			editorShellStart,
+			pageSource.indexOf(".code-editor-shell:focus-within")
+		);
+		const editorHostSource = pageSource.slice(
+			editorHostStart,
+			pageSource.indexOf(".code-editor-host :deep(.cm-editor)")
+		);
+		const stackedGridSource = pageSource.slice(
+			pageSource.indexOf("@media (max-width: 1180px)"),
+			pageSource.indexOf("@media (max-width: 820px)")
+		);
+
+		expect(gridSource).toContain("height: clamp(38rem, 76vh, 54rem);");
+		expect(drawingGridSource).toContain(
+			"height: clamp(40rem, 78vh, 56rem);"
+		);
+		expect(panelSource).toContain("min-height: 0;");
+		expect(panelSource).toContain("overflow: hidden;");
+		expect(editorShellSource).toContain("height: 100%;");
+		expect(editorShellSource).toContain("min-height: 0;");
+		expect(editorHostSource).toContain("height: 100%;");
+		expect(editorHostSource).toContain("min-height: 0;");
+		expect(stackedGridSource).toContain("height: auto;");
+		expect(stackedGridSource).toContain(
+			"height: clamp(32rem, 68vh, 44rem);"
+		);
+		expect(stackedGridSource).toContain(
+			"height: clamp(30rem, 68vh, 42rem);"
+		);
+	});
+
 	it("keeps PyGame Zero actor angles anticlockwise like Pygame Zero", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
@@ -2778,7 +2829,7 @@ describe("python IDE project helpers", () => {
 		expect(codeMirrorSource).toContain("rectangularSelection()");
 		expect(codeMirrorSource).toContain("EditorState.allowMultipleSelections.of(true)");
 		expect(codeMirrorSource).toContain("Prec.highest(keymap.of([indentWithTab]))");
-		expect(helpTextSource).toContain(".code-panel { overflow: visible;");
+		expect(helpTextSource).toContain(".code-panel { overflow: hidden;");
 		expect(helpTextSource).toContain("max-height: min(24rem, 44vh);");
 		expect(helpTextSource).toContain("overscroll-behavior: contain;");
 		expect(helpTextSource).toContain("Cmd/Ctrl+/ toggles comments.");
