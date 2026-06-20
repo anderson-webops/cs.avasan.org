@@ -670,7 +670,7 @@ describe("python IDE CodeMirror editor", () => {
 			"state.doc.sliceString(scanStart, visibleEnd)"
 		);
 		expect(editorSource).toContain(
-			"state.doc.sliceString(visibleEnd, suffixScanEnd)"
+			"state.doc.sliceString(visibleEnd, scanEnd)"
 		);
 	});
 

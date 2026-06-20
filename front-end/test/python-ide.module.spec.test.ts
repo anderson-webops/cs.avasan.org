@@ -4,7 +4,10 @@ import { EditorState } from "@codemirror/state";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { strToU8, zipSync } from "fflate";
-import { pythonBracketPairColorRanges } from "../src/modules/pythonCodeMirror";
+import {
+	pythonBracketPairColorRanges,
+	pythonBracketPairIgnoredRanges
+} from "../src/modules/pythonCodeMirror";
 import {
 	clearLocalPythonProjects,
 	clearLocalPythonProjectsAsync,
@@ -299,6 +302,38 @@ describe("python IDE project helpers", () => {
 		expect(positions).not.toContain(doc.indexOf("]"));
 		expect(positions).toContain(doc.indexOf("(", doc.indexOf("value")));
 		expect(positions).toContain(doc.indexOf(")", doc.indexOf("value")));
+	});
+
+	it("precomputes Python string and comment ranges for bracket-pair coloring", () => {
+		const doc = `text = "("\n# ]\nvalue = (1 + 2)\n`;
+		const ranges = pythonBracketPairIgnoredRanges(
+			pythonEditorState(doc),
+			0,
+			doc.length
+		);
+		const ignoredText = ranges.map(range =>
+			doc.slice(range.from, range.to)
+		);
+
+		expect(ignoredText).toContain('"("');
+		expect(ignoredText).toContain("# ]");
+		expect(
+			ranges.some(
+				range =>
+					range.from <= doc.indexOf("(", doc.indexOf("value")) &&
+					range.to > doc.indexOf("(", doc.indexOf("value"))
+			)
+		).toBe(false);
+	});
+
+	it("keeps IDE-style scroll-past-end editing enabled in CodeMirror", () => {
+		const codeMirrorSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonCodeMirror.ts"),
+			"utf8"
+		);
+
+		expect(codeMirrorSource).toContain("scrollPastEnd,");
+		expect(codeMirrorSource).toContain("scrollPastEnd(),");
 	});
 
 	it("creates PyGame course starters with dimensions only", () => {

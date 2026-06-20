@@ -51,6 +51,7 @@ import {
 	keymap,
 	lineNumbers,
 	rectangularSelection,
+	scrollPastEnd,
 	ViewPlugin
 } from "@codemirror/view";
 import { tags } from "@lezer/highlight";
@@ -174,6 +175,11 @@ export interface PythonBracketPairColorRange {
 	pairIndex: number;
 	to: number;
 	unmatched: boolean;
+}
+
+export interface PythonBracketPairIgnoredRange {
+	from: number;
+	to: number;
 }
 
 function bracketDecorationForIndex(index: number) {
@@ -1414,6 +1420,7 @@ const pythonEditorBaseSetup: Extension[] = [
 	foldGutter(),
 	drawSelection(),
 	dropCursor(),
+	scrollPastEnd(),
 	EditorState.allowMultipleSelections.of(true),
 	indentOnInput(),
 	syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
@@ -1590,7 +1597,29 @@ export function pythonBracketPairColorRanges(
 	);
 	const visibleEnd = Math.max(...boundedVisibleRanges.map(range => range.to));
 	const scanStart = Math.max(0, visibleStart - bracketPairContextScanLimit);
+	const scanEnd = Math.min(
+		docLength,
+		visibleEnd + bracketPairContextScanLimit
+	);
 	const stack: BracketStackEntry[] = [];
+	const ignoredRanges = pythonBracketPairIgnoredRanges(
+		state,
+		scanStart,
+		scanEnd
+	);
+	let ignoredRangeIndex = 0;
+
+	const isIgnoredByRange = (index: number) => {
+		while (
+			ignoredRanges[ignoredRangeIndex] &&
+			(ignoredRanges[ignoredRangeIndex]?.to ?? 0) <= index
+		) {
+			ignoredRangeIndex += 1;
+		}
+
+		const range = ignoredRanges[ignoredRangeIndex];
+		return !!range && range.from <= index && index < range.to;
+	};
 
 	const scanBracketText = (text: string, baseOffset: number) => {
 		for (let offset = 0; offset < text.length; offset += 1) {
@@ -1599,7 +1628,7 @@ export function pythonBracketPairColorRanges(
 			const expectedClose = openingBracketToClosingBracket[character];
 			if (
 				(expectedClose || closingBrackets.has(character)) &&
-				isPythonBracketPairIgnoredAt(state, index)
+				isIgnoredByRange(index)
 			) {
 				continue;
 			}
@@ -1659,14 +1688,7 @@ export function pythonBracketPairColorRanges(
 		isVisibleBracketPosition(entry.position, boundedVisibleRanges)
 	);
 	if (visibleOpenersStillNeedMatch && visibleEnd < docLength) {
-		const suffixScanEnd = Math.min(
-			docLength,
-			visibleEnd + bracketPairContextScanLimit
-		);
-		scanBracketText(
-			state.doc.sliceString(visibleEnd, suffixScanEnd),
-			visibleEnd
-		);
+		scanBracketText(state.doc.sliceString(visibleEnd, scanEnd), visibleEnd);
 	}
 
 	for (const unmatched of stack) {
@@ -1682,6 +1704,32 @@ export function pythonBracketPairColorRanges(
 			unmatched: true
 		});
 	}
+
+	return ranges.sort((first, second) => first.from - second.from);
+}
+
+export function pythonBracketPairIgnoredRanges(
+	state: EditorState,
+	from: number,
+	to: number
+): PythonBracketPairIgnoredRange[] {
+	const boundedFrom = Math.max(0, Math.min(state.doc.length, from));
+	const boundedTo = Math.max(0, Math.min(state.doc.length, to));
+	if (boundedFrom >= boundedTo) return [];
+
+	const ranges: PythonBracketPairIgnoredRange[] = [];
+	syntaxTree(state).iterate({
+		from: boundedFrom,
+		to: boundedTo,
+		enter(node) {
+			if (!pythonBracketPairIgnoredNodeNames.has(node.name)) return;
+			ranges.push({
+				from: Math.max(boundedFrom, node.from),
+				to: Math.min(boundedTo, node.to)
+			});
+			return false;
+		}
+	});
 
 	return ranges.sort((first, second) => first.from - second.from);
 }
