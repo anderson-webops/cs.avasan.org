@@ -319,7 +319,9 @@ function clonePythonIdeFiles(files: PythonIdeFile[]) {
 	}));
 }
 
-function getBlankStarterFiles(): PythonIdeFile[] {
+function getBlankStarterFiles(mode: PythonIdeMode): PythonIdeFile[] {
+	if (mode === "pgzero") return getCourseStarterFiles(mode);
+
 	return [
 		{
 			name: "main.py",
@@ -338,7 +340,7 @@ function getCourseStarterFiles(mode: PythonIdeMode): PythonIdeFile[] {
 		];
 	}
 
-	return getBlankStarterFiles();
+	return getBlankStarterFiles(mode);
 }
 
 function getDemoStarterFiles(mode: PythonIdeMode): PythonIdeFile[] {
@@ -372,7 +374,7 @@ function getStarterFilesForTemplate(
 ) {
 	if (template === "demo") return getDemoStarterFiles(mode);
 	if (template === "course") return getCourseStarterFiles(mode);
-	return getBlankStarterFiles();
+	return getBlankStarterFiles(mode);
 }
 
 export function resolvePythonIdeActiveFileName(

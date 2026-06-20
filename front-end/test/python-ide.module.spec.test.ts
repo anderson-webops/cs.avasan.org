@@ -112,7 +112,7 @@ describe("python IDE project helpers", () => {
 		vi.unstubAllGlobals();
 	});
 
-	it("creates blank projects by default", () => {
+	it("creates empty projects by default except for minimal PyGame Zero dimensions", () => {
 		const pythonProject = createPythonIdeProject("python");
 		const dataProject = createPythonIdeProject("data");
 		const turtleProject = createPythonIdeProject("turtle");
@@ -121,7 +121,12 @@ describe("python IDE project helpers", () => {
 		expect(pythonProject.files).toEqual([{ name: "main.py", content: "" }]);
 		expect(dataProject.files).toEqual([{ name: "main.py", content: "" }]);
 		expect(turtleProject.files).toEqual([{ name: "main.py", content: "" }]);
-		expect(pgzeroProject.files).toEqual([{ name: "main.py", content: "" }]);
+		expect(pgzeroProject.files).toEqual([
+			{ name: "main.py", content: pgzeroCourseStarterCode }
+		]);
+		expect(pgzeroProject.files[0]?.content).toContain("WIDTH = 640");
+		expect(pgzeroProject.files[0]?.content).toContain("HEIGHT = 400");
+		expect(pgzeroProject.files[0]?.content).not.toContain("Actor(");
 	});
 
 	it("creates demo project templates only when requested", () => {
