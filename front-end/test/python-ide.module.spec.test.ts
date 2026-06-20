@@ -33,7 +33,6 @@ import {
 	pythonIdeModeForCourseId,
 	pythonIdeProjectToPayload,
 	pythonIdeStorageKey,
-	pythonIdeLibrarySupport,
 	resolvePythonIdeActiveFileName,
 	saveLocalPythonProjects,
 	saveLocalPythonProjectsAsync,
@@ -615,56 +614,6 @@ describe("python IDE project helpers", () => {
 		expect(pythonIdeModeForCourseId("scratch-level-1")).toBeNull();
 		expect(normalizePythonIdeMode("pgzero", "turtle")).toBe("pgzero");
 		expect(normalizePythonIdeMode("unknown", "turtle")).toBe("turtle");
-	});
-
-	it("documents browser and local course-library support", () => {
-		expect(
-			pythonIdeLibrarySupport.some(
-				entry =>
-					entry.name === "Data science stack" &&
-					entry.status === "browser"
-			)
-		).toBe(true);
-		expect(
-			pythonIdeLibrarySupport.some(
-				entry =>
-					entry.name === "TensorFlow / Keras" &&
-					entry.status === "shim" &&
-					entry.detail.includes("Sequential") &&
-					entry.detail.includes("ImageDataGenerator")
-			)
-		).toBe(true);
-		expect(
-			pythonIdeLibrarySupport.some(
-				entry =>
-					entry.name === "PySynth song projects" &&
-					entry.status === "shim"
-			)
-		).toBe(true);
-		expect(
-			pythonIdeLibrarySupport.some(
-				entry =>
-					entry.name === "Turtle and PyGame Zero" &&
-					entry.detail.includes("begin_fill()") &&
-					entry.detail.includes("colormode()") &&
-					entry.detail.includes("independent Turtle() objects") &&
-					entry.detail.includes("xcor()") &&
-					entry.detail.includes("distance()") &&
-					entry.detail.includes("stamp()") &&
-					entry.detail.includes("Turtle.ondrag") &&
-					entry.detail.includes("Screen.ontimer") &&
-					entry.detail.includes("mouse handlers")
-			)
-		).toBe(true);
-		expect(
-			pythonIdeLibrarySupport.some(
-				entry =>
-					entry.name === "Streamlit-style reports" &&
-					entry.detail.includes("selectbox") &&
-					entry.detail.includes("slider") &&
-					entry.detail.includes("metric")
-			)
-		).toBe(true);
 	});
 
 	it("keeps Turtle fill and RGB color hooks wired in the runtime shim", () => {

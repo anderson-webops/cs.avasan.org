@@ -96,12 +96,6 @@ interface PythonIdeProjectStorageRecord {
 	updatedAt: string;
 }
 
-export interface PythonIdeLibrarySupport {
-	name: string;
-	status: "browser" | "shim" | "local";
-	detail: string;
-}
-
 export const pythonIdeStorageNamespace = "classes-python-ide-projects";
 export const pythonIdeAllowedFileExtensions = [
 	".py",
@@ -123,39 +117,6 @@ export const pythonIdeFileUploadAccept =
 	pythonIdeAllowedFileExtensions.join(",");
 
 let pythonIdeStorageDbPromise: Promise<IDBDatabase> | null = null;
-
-export const pythonIdeLibrarySupport: PythonIdeLibrarySupport[] = [
-	{
-		name: "Python standard library",
-		status: "browser",
-		detail: "Core course modules such as random, math, json, csv, time, pathlib, and collections run directly in the browser runtime."
-	},
-	{
-		name: "Turtle and PyGame Zero",
-		status: "shim",
-		detail: "Turtle drawing, filled shapes with begin_fill()/end_fill(), colormode()/RGB colors, independent Turtle() objects for list/collision projects, coordinate helpers such as xcor(), ycor(), distance(), stamp(), Screen.onkey, Screen.onclick, Screen.ontimer, Turtle.ondrag, Actor, screen, keyboard, mouse handlers, clock, Rect, images/, sounds/, music/, and common PyGame Zero patterns run through course-specific browser shims."
-	},
-	{
-		name: "Data science stack",
-		status: "browser",
-		detail: "NumPy, pandas, matplotlib, and scikit-learn load through Pyodide; NetworkX, Altair, and Seaborn are installed on demand for imported projects."
-	},
-	{
-		name: "Streamlit-style reports",
-		status: "shim",
-		detail: "Common st.write, dataframe, pyplot, altair_chart, selectbox, slider, checkbox, columns, and metric calls render as IDE output or deterministic browser controls, but full Streamlit apps still require a local/deployed server."
-	},
-	{
-		name: "PySynth song projects",
-		status: "shim",
-		detail: "Python Level 2 song-generator projects can call make_wav(...) to create a playable WAV artifact in the browser output."
-	},
-	{
-		name: "TensorFlow / Keras",
-		status: "shim",
-		detail: "Sequential, Dense, common layers, compile(), fit(), evaluate(), predict(), simple datasets, and ImageDataGenerator imports run through a lightweight teaching shim; real neural-network training still belongs in Colab or local Python."
-	}
-];
 
 const pythonIdeCourseModes: Record<string, PythonIdeMode> = {
 	"ai-level-1": "data",
