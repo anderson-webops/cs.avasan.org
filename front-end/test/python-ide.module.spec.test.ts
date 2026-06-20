@@ -1833,6 +1833,7 @@ describe("python IDE project helpers", () => {
 		);
 		expect(projectSwitchSource).toContain("stopRequested.value = true;");
 		expect(projectSwitchSource).toContain("stopActiveRuntimeSurfaces();");
+		expect(projectSwitchSource).toContain('runMessage.value = "Ready";');
 		expect(projectSwitchSource).toContain(
 			"releaseIdlePythonRuntimeCallbacks();"
 		);

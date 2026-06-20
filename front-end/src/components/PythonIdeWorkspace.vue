@@ -4696,6 +4696,7 @@ watch(selectedProjectID, (projectID, previousProjectID) => {
 	const hadPythonRunInFlight = isRunning.value;
 	stopRequested.value = true;
 	stopActiveRuntimeSurfaces();
+	runMessage.value = "Ready";
 	if (!hadPythonRunInFlight) {
 		releaseIdlePythonRuntimeCallbacks();
 		stopRequested.value = false;
