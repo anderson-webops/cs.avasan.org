@@ -2744,6 +2744,12 @@ describe("python IDE project helpers", () => {
 		expect(helpTextSource).toContain("overscroll-behavior: contain;");
 		expect(helpTextSource).toContain("Cmd/Ctrl+/ toggles comments.");
 		expect(helpTextSource).toContain(
+			"Ctrl+Space opens completions; Enter accepts the highlighted option."
+		);
+		expect(helpTextSource).toContain(
+			"Course snippets include main_guard, turtle_screen, ontimer_loop, onkey_handler, draw, update, actor, data_setup, scatter_plot, and decision_tree."
+		);
+		expect(helpTextSource).toContain(
 			"Cmd/Ctrl+Alt+Up/Down adds cursors above or below."
 		);
 		expect(helpTextSource).toContain(

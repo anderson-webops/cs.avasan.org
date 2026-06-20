@@ -5264,6 +5264,17 @@ onBeforeUnmount(() => {
 										<li>Cmd/Ctrl+S saves the project.</li>
 										<li>Cmd/Ctrl+/ toggles comments.</li>
 										<li>
+											Ctrl+Space opens completions; Enter
+											accepts the highlighted option.
+										</li>
+										<li>
+											Course snippets include main_guard,
+											turtle_screen, ontimer_loop,
+											onkey_handler, draw, update, actor,
+											data_setup, scatter_plot, and
+											decision_tree.
+										</li>
+										<li>
 											Cmd/Ctrl+Alt+Up/Down adds cursors
 											above or below.
 										</li>
