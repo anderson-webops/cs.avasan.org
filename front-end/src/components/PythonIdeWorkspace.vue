@@ -6150,6 +6150,10 @@ html.dark .file-delete:disabled::after {
 	overflow: hidden;
 }
 
+.code-panel {
+	overflow: visible;
+}
+
 .panel-header {
 	padding: 0.9rem 1rem;
 	border-bottom: 1px solid var(--color-border);
@@ -6205,9 +6209,11 @@ html.dark .file-delete:disabled::after {
 	top: calc(100% + 0.5rem);
 	right: 0;
 	width: min(17.5rem, 78vw);
+	max-height: min(24rem, 44vh);
 	display: grid;
 	gap: 0.35rem;
 	margin: 0;
+	overflow: auto;
 	padding: 0.8rem 0.9rem;
 	border: 1px solid var(--color-border);
 	border-radius: 14px;
@@ -6218,6 +6224,7 @@ html.dark .file-delete:disabled::after {
 	font-weight: 700;
 	letter-spacing: 0;
 	line-height: 1.45;
+	overscroll-behavior: contain;
 	text-transform: none;
 }
 

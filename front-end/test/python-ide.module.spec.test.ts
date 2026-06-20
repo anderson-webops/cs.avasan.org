@@ -2722,6 +2722,9 @@ describe("python IDE project helpers", () => {
 		expect(codeMirrorSource).toContain("rectangularSelection()");
 		expect(codeMirrorSource).toContain("EditorState.allowMultipleSelections.of(true)");
 		expect(codeMirrorSource).toContain("Prec.highest(keymap.of([indentWithTab]))");
+		expect(helpTextSource).toContain(".code-panel { overflow: visible;");
+		expect(helpTextSource).toContain("max-height: min(24rem, 44vh);");
+		expect(helpTextSource).toContain("overscroll-behavior: contain;");
 		expect(helpTextSource).toContain("Cmd/Ctrl+/ toggles comments.");
 		expect(helpTextSource).toContain(
 			"Cmd/Ctrl+Alt+Up/Down adds cursors above or below."
