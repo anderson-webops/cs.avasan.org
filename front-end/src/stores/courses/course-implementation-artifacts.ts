@@ -288,7 +288,7 @@ const scienceResourceGuidance: Record<
 		mappingFocus:
 			"one observable phenomenon, one grade-band vocabulary set, and one compare/sort/predict task",
 		evidenceSource:
-			"a picture, teacher-provided data table, short simulation view, or map that can be described with everyday observations first",
+			"a picture, provided data table, short simulation view, or map that can be described with everyday observations first",
 		vocabularyTarget:
 			"observable property, pattern, cause, change, model, evidence, and prediction",
 		representation:
@@ -3133,7 +3133,7 @@ function pythonCheckInPracticeFocus(
 			`Record ${focus.evidence}.`
 		],
 		checks: [
-			"The direct case runs or can be traced without copying a memorized answer.",
+			"The direct case runs or can be traced from the visible steps.",
 			"The changed case keeps the same core skill but changes the input, rule, representation, or constraint.",
 			"The explanation names the Python idea being checked and one mistake the evidence would catch."
 		]

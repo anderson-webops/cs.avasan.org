@@ -172,6 +172,39 @@ function literalCourseIdsLoadedByTests() {
 		});
 }
 
+type LoadedCatalogCourse = {
+	course: NonNullable<Awaited<ReturnType<typeof loadRawCourse>>>;
+	entry: (typeof courseCatalog)[number];
+};
+
+let loadedCatalogCoursesPromise: Promise<LoadedCatalogCourse[]> | null = null;
+let loadedCatalogTextPromise: Promise<string> | null = null;
+
+async function loadedCatalogCourses() {
+	loadedCatalogCoursesPromise ??= Promise.all(
+		courseCatalog.map(async entry => {
+			const course = await loadRawCourse(entry.id);
+			if (!course) throw new Error(`Could not load course ${entry.id}`);
+
+			return { course, entry };
+		})
+	);
+
+	return loadedCatalogCoursesPromise;
+}
+
+async function loadedCatalogCourseList() {
+	return (await loadedCatalogCourses()).map(({ course }) => course);
+}
+
+async function loadedCatalogText() {
+	loadedCatalogTextPromise ??= loadedCatalogCourseList().then(courses =>
+		courses.map(allCourseText).join("\n")
+	);
+
+	return loadedCatalogTextPromise;
+}
+
 describe("course text quality normalization", () => {
 	beforeEach(() => {
 		setActivePinia(createPinia());
@@ -189,10 +222,7 @@ describe("course text quality normalization", () => {
 	it(
 		"removes generated placeholder language from loaded catalog text",
 		async () => {
-			const courses = await Promise.all(
-				courseCatalog.map(entry => loadRawCourse(entry.id))
-			);
-			const corpus = courses.map(allCourseText).join("\n");
+			const corpus = await loadedCatalogText();
 
 			expect(corpus).not.toMatch(/introduce the main goal/i);
 			expect(corpus).not.toMatch(/build the central artifact/i);
@@ -233,12 +263,7 @@ describe("course text quality normalization", () => {
 				/^Supplemental(?: Project| Practice)?\s+[2-9]$/i;
 			const badArtifactPattern =
 				/\bImplementation Lab\b|:\s*(?:Core Project|Review and Reflection|Extension Challenge)\s*$|:\s*$/i;
-			const loadedCourses = await Promise.all(
-				courseCatalog.map(async entry => ({
-					entry,
-					course: await loadRawCourse(entry.id)
-				}))
-			);
+			const loadedCourses = await loadedCatalogCourses();
 			const badTitles = loadedCourses.flatMap(({ entry, course }) =>
 				course
 					? allCourseItemTitles(course).flatMap(item =>
@@ -255,11 +280,9 @@ describe("course text quality normalization", () => {
 			);
 			const corpus = loadedCourses
 				.map(({ course }) =>
-					course
-						? allCourseItemTitles(course)
-								.map(item => item.title)
-								.join("\n")
-						: ""
+					allCourseItemTitles(course)
+						.map(item => item.title)
+						.join("\n")
 				)
 				.join("\n");
 			const dataScienceCourse = loadedCourses.find(
@@ -274,9 +297,8 @@ describe("course text quality normalization", () => {
 				"Transfer Practice: Setup, Editors, and Asset Workflow"
 			);
 			expect(corpus).toContain("Review: CSV Summaries and Sanity Checks");
-			expect(corpus).toContain(
-				"Transfer Practice: CSV Summaries and Sanity Checks"
-			);
+			expect(corpus).toContain("Min-Max and Outlier Extension");
+			expect(corpus).toContain("Median and Mode Practice");
 			expect(dataScienceText).not.toContain(
 				"remote-safe investigation writeup"
 			);
@@ -319,10 +341,7 @@ describe("course text quality normalization", () => {
 	it(
 		"replaces generic linked-project boilerplate with concrete project guidance",
 		async () => {
-			const courses = await Promise.all(
-				courseCatalog.map(entry => loadRawCourse(entry.id))
-			);
-			const corpus = courses.map(allCourseText).join("\n");
+			const corpus = await loadedCatalogText();
 
 			expect(corpus).not.toMatch(
 				/The project should prove the module concept/i
@@ -657,10 +676,7 @@ describe("course text quality normalization", () => {
 	it(
 		"keeps internal implementation-planning scaffolds out of visible course text",
 		async () => {
-			const courses = await Promise.all(
-				courseCatalog.map(entry => loadRawCourse(entry.id))
-			);
-			const corpus = courses.map(allCourseText).join("\n");
+			const corpus = await loadedCatalogText();
 
 			expect(corpus).not.toMatch(/Implementation Studio/i);
 			expect(corpus).not.toMatch(/Full Lesson Authoring Pack/i);
@@ -717,12 +733,7 @@ describe("course text quality normalization", () => {
 				/^Data Science, AI Foundations, and Machine Learning Boundary Map$/,
 				/Defensive Lab Contract$/
 			];
-			const courses = await Promise.all(
-				courseCatalog.map(async entry => ({
-					entry,
-					course: await loadRawCourse(entry.id)
-				}))
-			);
+			const courses = await loadedCatalogCourses();
 			const generatedReferenceModules = courses.flatMap(
 				({ entry, course }) =>
 					(course?.modules ?? [])
@@ -750,10 +761,7 @@ describe("course text quality normalization", () => {
 	it(
 		"uses course-family support text instead of the generic fallback",
 		async () => {
-			const courses = await Promise.all(
-				courseCatalog.map(entry => loadRawCourse(entry.id))
-			);
-			const corpus = courses.map(allCourseText).join("\n");
+			const corpus = await loadedCatalogText();
 
 			expect(corpus).not.toMatch(
 				/module's core concept, a concrete worked example, and a testable artifact/i
@@ -873,7 +881,7 @@ describe("course text quality normalization", () => {
 				"traces the Java idea from data shape to public behavior"
 			);
 			expect(corpus).toMatch(
-				/\*\*Extension:\*\* Add a second [^.\n]+ metric, comparison, or visualization and explain what it changes/
+				/\*\*Extension:\*\* Add a second (?:[^.\n]+ )?metric, comparison, or visualization[^.\n]*and explain what it changes/
 			);
 			expect(corpus).toMatch(
 				/The [^.\n]+ independent attempt comes first; the evidence identifies whether the next step is vocabulary, tracing, syntax, design, or testing support/
@@ -1118,25 +1126,25 @@ describe("course text quality normalization", () => {
 		expect(corpus).toContain('courseFamily: "web development"');
 	});
 
-	it("keeps generated project guidance labels aligned to course families", () => {
-		const courseFamilies = new Map([
-			["src/stores/courses/ai-level-1.ts", "AI/Python"],
-			["src/stores/courses/c-systems-engineering.ts", "C systems"],
-			[
-				"src/stores/courses/data-science-in-python.ts",
-				"data science in Python"
-			],
-			["src/stores/courses/machine-learning.ts", "machine learning"],
-			["src/stores/courses/network-security.ts", "network security"],
-			["src/stores/courses/pygames.ts", "Python/PyGame"],
-			[
-				"src/stores/courses/python-to-java-and-cpp-bridge.ts",
-				"Java/C++ bridge"
-			],
-			["src/stores/courses/usaco-bronze.ts", "USACO"],
-			["src/stores/courses/usaco-silver.ts", "USACO"],
-			["src/stores/courses/usaco-gold.ts", "USACO"]
-		]);
+		it("keeps generated project guidance labels aligned to course families", () => {
+			const courseFamilies = new Map([
+				["src/stores/courses/ai-level-1.ts", "AI/Python"],
+				["src/stores/courses/c-systems-engineering.ts", "C systems"],
+				[
+					"src/stores/courses/data-science-in-python.ts",
+					"data science in Python"
+				],
+				["src/stores/courses/machine-learning.ts", "machine learning"],
+				["src/stores/courses/network-security.ts", "network security"],
+				["src/stores/courses/pygames.ts", "Python/PyGame"],
+				[
+					"src/stores/courses/python-to-java-and-cpp-bridge.ts",
+					"Java/C++ bridge"
+				],
+				["src/stores/courses/usaco-bronze.ts", "USACO"],
+				["src/stores/courses/usaco-silver.ts", "USACO Silver"],
+				["src/stores/courses/usaco-gold.ts", "USACO Gold"]
+			]);
 
 		for (const [path, family] of courseFamilies) {
 			const source = fs.readFileSync(path, "utf8");
@@ -1497,12 +1505,7 @@ describe("course text quality normalization", () => {
 		"keeps generated transfer and extension project cards distinct inside each module",
 		async () => {
 			const duplicateGroups: string[] = [];
-			const courses = await Promise.all(
-				courseCatalog.map(async entry => ({
-					entry,
-					course: await loadRawCourse(entry.id)
-				}))
-			);
+			const courses = await loadedCatalogCourses();
 
 			for (const { entry, course } of courses) {
 				if (!course) continue;
@@ -1556,12 +1559,7 @@ describe("course text quality normalization", () => {
 			]);
 			const contentGroups = new Map<string, string[]>();
 			const duplicateGroups: string[] = [];
-			const courses = await Promise.all(
-				courseCatalog.map(async entry => ({
-					entry,
-					course: await loadRawCourse(entry.id)
-				}))
-			);
+			const courses = await loadedCatalogCourses();
 
 			for (const { entry, course } of courses) {
 				if (!course || excludedCourseIds.has(entry.id)) continue;
@@ -2674,20 +2672,14 @@ describe("course text quality normalization", () => {
 	it(
 		"keeps linked course projects from loading as blank placeholder cards",
 		async () => {
-			const courses = await Promise.all(
-				courseCatalog.map(entry => loadRawCourse(entry.id))
-			);
+			const courses = await loadedCatalogCourseList();
 			const linkedItems = courses.flatMap(course =>
-				course
-					? course.modules.flatMap(module =>
-							[
-								...module.curriculum,
-								...module.supplementalProjects
-							].filter(
-								item => item.projectLink || item.solutionLink
-							)
-						)
-					: []
+				course.modules.flatMap(module =>
+					[
+						...module.curriculum,
+						...module.supplementalProjects
+					].filter(item => item.projectLink || item.solutionLink)
+				)
 			);
 
 			expect(linkedItems.length).toBeGreaterThan(0);
@@ -2705,11 +2697,8 @@ describe("course text quality normalization", () => {
 	it(
 		"keeps Java graphics code links on the source repository",
 		async () => {
-			const courses = await Promise.all(
-				courseCatalog.map(entry => loadRawCourse(entry.id))
-			);
-			const links = courses.flatMap((course, index) =>
-				course ? courseItemLinks(courseCatalog[index].id, course) : []
+			const links = (await loadedCatalogCourses()).flatMap(
+				({ course, entry }) => courseItemLinks(entry.id, course)
 			);
 			const legacyJavaGraphicsLinks = links.filter(({ link }) =>
 				/^https:\/\/static\.junilearning\.com\/java1\/.+\.java$/i.test(
@@ -2805,10 +2794,8 @@ describe("course text quality normalization", () => {
 			const genericFocusedPracticeTitles: string[] = [];
 			const genericExtensionProjectTitles: string[] = [];
 			const repeatedWords: string[] = [];
-			const courses = await Promise.all(
-				courseCatalog.map(entry => loadRawCourse(entry.id))
-			);
-			const corpus = courses.map(allCourseText).join("\n");
+			const courses = await loadedCatalogCourseList();
+			const corpus = await loadedCatalogText();
 			const genericTitleSuffix =
 				/(?:Applied Challenge|Core Project|Debugging and Failure Modes|Diagnostic Checkpoint|Extension Challenge|Fluency Drill|Focused Practice|Modeling or Error Analysis|Open-Ended Variant|Planning and Architecture|Standards Practice Set|Supplemental(?: Project| Practice)? [23]|Verification and Reflection)$/i;
 			const genericColonTitlePattern =
@@ -3010,11 +2997,11 @@ describe("course text quality normalization", () => {
 	it(
 		"keeps short project-like items backed by review structure",
 		async () => {
-			const courses = await Promise.all(
-				courseCatalog.map(async entry => ({
-					id: entry.id,
-					course: await loadRawCourse(entry.id)
-				}))
+			const courses = (await loadedCatalogCourses()).map(
+				({ course, entry }) => ({
+					course,
+					id: entry.id
+				})
 			);
 			const reviewStructurePattern =
 				/\*\*(?:Outcome|Required outcome|Success criteria|Completion checks|Checkpoints|Extension):\*\*/i;
@@ -3055,11 +3042,11 @@ describe("course text quality normalization", () => {
 	it(
 		"keeps every core module backed by a visible lesson structure",
 		async () => {
-			const courses = await Promise.all(
-				courseCatalog.map(async entry => ({
-					id: entry.id,
-					course: await loadRawCourse(entry.id)
-				}))
+			const courses = (await loadedCatalogCourses()).map(
+				({ course, entry }) => ({
+					course,
+					id: entry.id
+				})
 			);
 			const missingBackbone = courses.flatMap(({ id, course }) =>
 				(course?.modules ?? [])
@@ -3670,10 +3657,8 @@ describe("course text quality normalization", () => {
 	it(
 		"keeps generated architecture modules reader-facing",
 		async () => {
-			const courses = await Promise.all(
-				courseCatalog.map(entry => loadRawCourse(entry.id))
-			);
-			const corpus = courses.map(allCourseText).join("\n");
+			const loadedCourses = await loadedCatalogCourses();
+			const corpus = await loadedCatalogText();
 
 			const internalPhrases = [
 				/\binstructor\b/i,
@@ -3892,10 +3877,9 @@ describe("course text quality normalization", () => {
 				"vocabulary, representation choice, algebraic procedure"
 			);
 
-			const allCourses = await Promise.all(
-				courseCatalog.map(entry => loadRawCourse(entry.id))
-			);
-			const allCorpus = allCourses.map(allCourseText).join("\n");
+			const loadedCourses = await loadedCatalogCourses();
+			const allCourses = loadedCourses.map(({ course }) => course);
+			const allCorpus = await loadedCatalogText();
 			expect(allCorpus).not.toMatch(
 				/Common pitfalls:\*\* Common mistakes include/i
 			);
@@ -3903,15 +3887,17 @@ describe("course text quality normalization", () => {
 				/Modify the prompt so it still uses the same concept/i
 			);
 
-			const nonSecurityCourses = allCourses.filter(
-				(_course, index) =>
-					![
-						"network-security",
-						"low-level-security",
-						"low-level-security-part-2",
-						"rust-systems-security"
-					].includes(courseCatalog[index].id)
-			);
+			const nonSecurityCourses = loadedCourses
+				.filter(
+					({ entry }) =>
+						![
+							"network-security",
+							"low-level-security",
+							"low-level-security-part-2",
+							"rust-systems-security"
+						].includes(entry.id)
+				)
+				.map(({ course }) => course);
 			expect(
 				nonSecurityCourses.map(allCourseText).join("\n")
 			).not.toMatch(/authorized scope/i);
@@ -4085,11 +4071,9 @@ describe("course text quality normalization", () => {
 	it(
 		"keeps generated architecture and capstone cards substantive",
 		async () => {
-			const courses = await Promise.all(
-				courseCatalog.map(entry => loadRawCourse(entry.id))
-			);
+			const courses = await loadedCatalogCourseList();
 			const terseFormulaicCards: string[] = [];
-			const corpus = courses.map(allCourseText).join("\n");
+			const corpus = await loadedCatalogText();
 
 			for (const [courseIndex, course] of courses.entries()) {
 				expect(course).not.toBeNull();

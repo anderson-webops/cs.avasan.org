@@ -24,7 +24,7 @@ const refactoringClinicContexts = {
 		invariant:
 			"the invariant that adding a new variant should not require editing the old branch-heavy method",
 		exampleCase:
-			"For **Refactoring Clinic 12**, start with one switch or if/else chain and trace two different branches with expected outputs. Refactor only one branch into a variant first, then compare the mixed state against the original behavior.",
+			"For **Refactoring Clinic 12**, trace one switch or if/else chain through two different branches with expected outputs. Refactor only one branch into a variant first, then compare the mixed state against the original behavior.",
 		boundaryCase:
 			"Then add an unknown, default, or unsupported case so the design has an explicit failure path rather than silently choosing the wrong subclass or strategy.",
 		reviewEvidence:

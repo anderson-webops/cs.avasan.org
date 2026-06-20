@@ -5734,7 +5734,7 @@ function lessonSupport(context: CourseTextContext) {
 		() =>
 			`**Concept path:** For ${focus}, one worked example and one transfer check show what changes when the situation changes.`,
 		() =>
-			`**Concept path:** For ${focus}, start with a named idea, follow it through one example, then check the idea in a nearby case.`,
+			`**Concept path:** For ${focus}, a named idea is traced through one example, then checked against a nearby case.`,
 		() =>
 			`**Concept path:** For ${focus}, the first pass makes the rule or model visible; the second pass changes one condition to test transfer.`,
 		() =>

@@ -177,7 +177,7 @@ const graphicsBranchModules: RawCourseModule[] = [
 			{
 				title: "Drawing with Loops and Helper Methods",
 				content:
-					"**Concept path:** Move from one-off shapes to repeated visual structure. Cover loop-driven patterns, random placement, helper methods for reusable drawing pieces, and the difference between visual complexity and code complexity.\n\n**Practice targets:** Start with one correctly placed shape, convert it into a helper method, then call it from a loop with changing coordinates, color, or size. A strong result makes the repeated rule visible in code.\n\n**Evidence target:** The final scene should become shorter or easier to adjust because repetition moved into a loop or helper method. If adding the tenth object requires copying the same long block again, the decomposition has not done enough work."
+					"**Concept path:** Move from one-off shapes to repeated visual structure. Cover loop-driven patterns, random placement, helper methods for reusable drawing pieces, and the difference between visual complexity and code complexity.\n\n**Practice targets:** One correctly placed shape becomes a helper method, then that helper is called from a loop with changing coordinates, color, or size. A strong result makes the repeated rule visible in code.\n\n**Evidence target:** The final scene should become shorter or easier to adjust because repetition moved into a loop or helper method. If adding the tenth object requires copying the same long block again, the decomposition has not done enough work."
 			},
 			{
 				title: "Java Graphics Project 1: Paintball Pattern",

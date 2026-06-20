@@ -877,7 +877,7 @@ function projectGoal(
 		return [
 			`**Project goal:** Solve the ${courseFamily} ${artifact} for **${moduleTitle}** with exact input/output behavior, a traceable invariant, and evidence from sample plus custom cases.`,
 			`**Project goal:** Turn **${moduleTitle}** into a contest-ready ${courseFamily} ${artifact} with a proved idea, matching samples, and at least one custom edge case.`,
-			`**Project goal:** Complete **${moduleTitle}** as a ${courseFamily} ${artifact} that states the constraints, preserves an invariant, and justifies complexity.`,
+			`**Project goal:** Complete **${moduleTitle}** as a ${artifact} for ${courseFamily} that states the constraints, preserves an invariant, and justifies complexity.`,
 			`**Project goal:** Implement **${moduleTitle}** with strict USACO input/output discipline, then verify the algorithm against samples and a hand-built boundary case.`
 		][index];
 	}
