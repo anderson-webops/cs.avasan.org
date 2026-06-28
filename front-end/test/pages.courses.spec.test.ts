@@ -65,7 +65,7 @@ describe("courses page access gate", () => {
 		await flushPromises();
 
 		expect(wrapper.text()).toContain("No Courses Yet");
-		expect(wrapper.text()).toContain("classes@jacobdanderson.net");
+		expect(wrapper.text()).toContain("contact@example.com");
 	});
 
 	it("keeps booking calls out of the assigned-course view", async () => {

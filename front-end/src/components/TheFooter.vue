@@ -18,9 +18,7 @@ import { warmSchedulerConnections } from "@/modules/scheduler";
 				<h3>Connect</h3>
 				<ul>
 					<li>
-						<a href="mailto:classes@jacobdanderson.net">
-							Email Jacob
-						</a>
+						<a href="mailto:contact@example.com">Email</a>
 					</li>
 					<li>
 						<a
@@ -71,7 +69,7 @@ import { warmSchedulerConnections } from "@/modules/scheduler";
 		</div>
 
 		<div class="site-shell site-shell--wide site-footer__bottom">
-			<p>© {{ new Date().getFullYear() }} Jacob Anderson.</p>
+			<p>© {{ new Date().getFullYear() }} Classes.</p>
 			<button
 				class="site-footer__theme-toggle"
 				type="button"

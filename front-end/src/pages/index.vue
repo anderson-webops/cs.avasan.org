@@ -6,7 +6,7 @@ import { useContentStore } from "@/stores/content";
 defineOptions({ name: "HomePage" });
 
 const content = useContentStore();
-const siteUrl = "https://classes.jacobdanderson.net";
+const siteUrl = import.meta.env.VITE_SITE_URL || "https://example.com";
 const { faqs, highlights, subjectGroups } = storeToRefs(content);
 const faqStructuredData = computed(() => ({
 	"@context": "https://schema.org",
@@ -178,7 +178,7 @@ useHead(
 					</RouterLink>
 					<a
 						class="site-button site-button--secondary"
-						href="mailto:classes@jacobdanderson.net"
+						href="mailto:contact@example.com"
 					>
 						Ask a Question
 					</a>

@@ -1,5 +1,4 @@
-export const DEFAULT_SCHEDULER_ORIGIN =
-	"https://scheduler.classes.jacobdanderson.net";
+export const DEFAULT_SCHEDULER_ORIGIN = "https://scheduler.example.com";
 const httpProtocolPattern = /^https?:\/\//i;
 const protocolPattern = /^[a-z][a-z\d+.-]*:\/\//i;
 export type SchedulerUrlSearchParams = Record<
@@ -88,10 +87,9 @@ export function buildSchedulerEmbedUrl(
 export const schedulerEmbedUrl = buildSchedulerEmbedUrl();
 export const schedulerPortalUrl = buildSchedulerUrl("/portal");
 export const schedulerManageBookingUrl = buildSchedulerUrl("/booking/manage");
-export const schedulerEmbedMessageSource =
-	"scheduler.classes.jacobdanderson.net";
+export const schedulerEmbedMessageSource = "scheduler.example.com";
 export const schedulerEmbedResizeType = "scheduler:resize";
-export const schedulerEmbedThemeMessageSource = "classes.jacobdanderson.net";
+export const schedulerEmbedThemeMessageSource = "example.com";
 export const schedulerEmbedThemeType = "scheduler:theme";
 
 let schedulerWarmthApplied = false;

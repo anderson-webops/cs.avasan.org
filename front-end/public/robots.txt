@@ -55,4 +55,4 @@ Disallow: /api
 Disallow: /admin
 Disallow: /profile
 
-Sitemap: https://classes.jacobdanderson.net/sitemap.xml
+Sitemap: https://example.com/sitemap.xml

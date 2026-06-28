@@ -16,17 +16,17 @@ import { renderMarkdownEmailHtml } from "../utils/markdownEmail.js";
 
 const router = Router();
 const DATE_PREFIX_RE = /^(\d{4})-(\d{2})-(\d{2})/;
-const DEFAULT_PRIMARY_FROM_ADDR = "classes@jacobdanderson.net";
-const DEFAULT_FALLBACK_FROM_ADDR = "jacobdanderson@gmail.com";
+const DEFAULT_PRIMARY_FROM_ADDR = "classes@example.com";
+const DEFAULT_FALLBACK_FROM_ADDR = "classes@example.com";
 const DEFAULT_PRIMARY_TRANSPORT_HOST = "127.0.0.1";
 const DEFAULT_PRIMARY_TRANSPORT_PORT = 25;
-const DEFAULT_PRIMARY_TRANSPORT_SERVERNAME = "mail.stridewithus.co";
+const DEFAULT_PRIMARY_TRANSPORT_SERVERNAME = "mail.example.com";
 const DEFAULT_FALLBACK_TRANSPORT_HOST = "smtp.gmail.com";
 const DEFAULT_FALLBACK_TRANSPORT_PORT = 587;
 const DEFAULT_FALLBACK_TRANSPORT_SERVERNAME = "smtp.gmail.com";
-const DEFAULT_IMAP_APPEND_HOST = "mail.stridewithus.co";
+const DEFAULT_IMAP_APPEND_HOST = "mail.example.com";
 const DEFAULT_IMAP_APPEND_PORT = 993;
-const DEFAULT_IMAP_APPEND_USER = "jacob@jacobdanderson.net";
+const DEFAULT_IMAP_APPEND_USER = "classes@example.com";
 const DEFAULT_IMAP_SENT_MAILBOX = "Sent Messages";
 const TRANSPORT_FAILURE_CODES = new Set([
 	"ECONNREFUSED",

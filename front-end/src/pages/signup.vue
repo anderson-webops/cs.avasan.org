@@ -126,8 +126,8 @@ onBeforeUnmount(() => {
 			<p class="page-copy">
 				Use the scheduler below to book a one-time or recurring 30- or
 				60-minute class. Prefer email? Reach me at
-				<a class="text-link" href="mailto:classes@jacobdanderson.net">
-					classes@jacobdanderson.net
+				<a class="text-link" href="mailto:contact@example.com">
+					contact@example.com
 				</a>
 				.
 			</p>
