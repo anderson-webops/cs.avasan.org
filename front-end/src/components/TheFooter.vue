@@ -1,75 +1,32 @@
-<script lang="ts" setup>
-import { warmSchedulerConnections } from "@/modules/scheduler";
-</script>
-
 <template>
 	<footer class="site-footer">
 		<div class="site-shell site-shell--wide site-footer__inner">
 			<section class="site-footer__brand">
-				<p class="site-footer__eyebrow">Private Online Tutoring</p>
-				<h2>Classes with Jacob</h2>
+				<p class="site-footer__eyebrow">
+					A simple computer science classroom
+				</p>
+				<h2>Classes with Julio</h2>
 				<p class="site-footer__summary">
-					One-on-one support for active coursework, projects, and
-					structured course paths.
+					Scratch, Python, and game-making lessons for young coders.
+					Course materials are open to every student—no account
+					needed.
 				</p>
 			</section>
 
-			<section class="site-footer__group">
-				<h3>Connect</h3>
+			<nav class="site-footer__group" aria-label="Footer navigation">
+				<h3>Explore</h3>
 				<ul>
+					<li><RouterLink to="/courses">Courses</RouterLink></li>
 					<li>
-						<a href="mailto:contact@example.com">Email</a>
+						<RouterLink to="/python-ide">Python IDE</RouterLink>
 					</li>
-					<li>
-						<a
-							href="https://www.linkedin.com/in/jacoba1100254352/"
-							rel="noopener noreferrer"
-							target="_blank"
-						>
-							LinkedIn<span class="sr-only">
-								(opens in a new tab)</span
-							>
-						</a>
-					</li>
-					<li>
-						<a
-							href="https://github.com/jacoba1100254352"
-							rel="noopener noreferrer"
-							target="_blank"
-						>
-							GitHub<span class="sr-only">
-								(opens in a new tab)</span
-							>
-						</a>
-					</li>
+					<li><RouterLink to="/about">About Julio</RouterLink></li>
 				</ul>
-			</section>
-
-			<section class="site-footer__group">
-				<h3>Use the Site</h3>
-				<ul>
-					<li>
-						<RouterLink
-							to="/signup"
-							@focus="warmSchedulerConnections"
-							@mouseenter="warmSchedulerConnections"
-							@touchstart.passive="warmSchedulerConnections"
-						>
-							Book a Class
-						</RouterLink>
-					</li>
-					<li>
-						<RouterLink to="/payment">View Tuition</RouterLink>
-					</li>
-					<li>
-						<RouterLink to="/about">About Jacob</RouterLink>
-					</li>
-				</ul>
-			</section>
+			</nav>
 		</div>
 
 		<div class="site-shell site-shell--wide site-footer__bottom">
-			<p>© {{ new Date().getFullYear() }} Classes.</p>
+			<p>© {{ new Date().getFullYear() }} Classes with Julio.</p>
 			<button
 				class="site-footer__theme-toggle"
 				type="button"
@@ -89,63 +46,62 @@ import { warmSchedulerConnections } from "@/modules/scheduler";
 .site-footer {
 	margin-top: 4rem;
 	padding: 3.5rem 0 1.75rem;
-	background: #0f1c2a;
-	color: #e6edf5;
+	background: #0c2630;
+	color: #e8f7f4;
 }
 
 .site-footer__inner {
 	display: grid;
-	grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 0.9fr));
-	gap: 2rem 2.5rem;
+	grid-template-columns: minmax(0, 1.5fr) minmax(12rem, 0.6fr);
+	gap: 2rem 3rem;
 	align-items: start;
-}
-
-.site-footer__eyebrow {
-	margin: 0 0 0.75rem;
-	font-size: 0.78rem;
-	font-weight: 700;
-	letter-spacing: 0.14em;
-	text-transform: uppercase;
-	color: #9ec3f4;
 }
 
 .site-footer__brand,
 .site-footer__group {
-	min-width: 0;
 	display: grid;
 	gap: 0.9rem;
-	text-align: left;
+	min-width: 0;
 }
 
-.site-footer__brand h2 {
+.site-footer__eyebrow {
+	color: #8ee4d2;
+	font-size: 0.78rem;
+	font-weight: 800;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+}
+
+.site-footer h2,
+.site-footer h3 {
+	color: #f7fffd;
+}
+
+.site-footer h2 {
 	font-size: clamp(1.9rem, 3vw, 2.4rem);
-	color: #f6fbff;
+}
+
+.site-footer h3 {
+	font-size: 1.05rem;
 }
 
 .site-footer__summary {
-	margin: 0;
-	max-width: 28rem;
-	color: #b8cadd;
+	max-width: 36rem;
+	color: #bdd9d5;
 	line-height: 1.7;
 }
 
-.site-footer__group h3 {
-	margin: 0;
-	font-size: 1.05rem;
-	color: #f6fbff;
-}
-
 .site-footer__group ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
 	display: grid;
 	gap: 0.75rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
 .site-footer__group a {
-	color: #9ec3f4;
-	font-weight: 600;
+	color: #a8eee0;
+	font-weight: 700;
 	text-decoration: none;
 }
 
@@ -161,14 +117,12 @@ import { warmSchedulerConnections } from "@/modules/scheduler";
 	gap: 0.85rem 1rem;
 	margin-top: 2rem;
 	padding-top: 1rem;
-	border-top: 1px solid rgba(184, 202, 221, 0.16);
+	border-top: 1px solid rgba(189, 217, 213, 0.18);
 }
 
 .site-footer__bottom p {
-	margin: 0;
-	color: #8fa6c1;
+	color: #93b8b2;
 	font-size: 0.9rem;
-	text-align: left;
 }
 
 .site-footer__theme-toggle {
@@ -177,31 +131,21 @@ import { warmSchedulerConnections } from "@/modules/scheduler";
 	justify-content: center;
 	min-height: 2.6rem;
 	padding: 0.6rem 0.9rem;
-	border: 1px solid rgba(158, 195, 244, 0.34);
+	border: 1px solid rgba(142, 228, 210, 0.34);
 	border-radius: 999px;
 	background: rgba(255, 255, 255, 0.08);
-	color: #f6fbff;
+	color: #f7fffd;
 	font-weight: 800;
-	line-height: 1.2;
-	transition:
-		background-color 0.18s ease,
-		border-color 0.18s ease,
-		transform 0.18s ease;
 }
 
 .site-footer__theme-toggle:hover {
-	border-color: rgba(158, 195, 244, 0.62);
-	background: rgba(158, 195, 244, 0.14);
-	transform: translateY(-1px);
+	border-color: rgba(142, 228, 210, 0.65);
+	background: rgba(142, 228, 210, 0.14);
 }
 
-@media (max-width: 960px) {
+@media (max-width: 760px) {
 	.site-footer__inner {
 		grid-template-columns: 1fr;
-	}
-
-	.site-footer__brand h2 {
-		font-size: clamp(1.6rem, 8vw, 2rem);
 	}
 }
 </style>

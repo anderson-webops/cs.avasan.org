@@ -24,6 +24,7 @@ import {
 	isPythonIdeRuntimeReservedPath,
 	isPythonIdeTextFile,
 	isValidPythonFileName,
+	normalizeClassroomPythonIdeMode,
 	normalizeImportedPythonIdeFileName,
 	normalizePythonIdeMode,
 	loadPythonIdeStarterFilesFromGitHub,
@@ -615,6 +616,9 @@ describe("python IDE project helpers", () => {
 		expect(pythonIdeModeForCourseId("scratch-level-1")).toBeNull();
 		expect(normalizePythonIdeMode("pgzero", "turtle")).toBe("pgzero");
 		expect(normalizePythonIdeMode("unknown", "turtle")).toBe("turtle");
+		expect(normalizeClassroomPythonIdeMode("data", "turtle")).toBe("python");
+		expect(normalizeClassroomPythonIdeMode("", "data")).toBe("python");
+		expect(normalizeClassroomPythonIdeMode("pgzero", "turtle")).toBe("pgzero");
 	});
 
 	it("keeps Turtle fill and RGB color hooks wired in the runtime shim", () => {

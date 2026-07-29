@@ -4,8 +4,8 @@
 	"version": "1.0.0",
 	"private": true,
 	"packageManager": "npm@11.12.0",
-	"description": "Monorepo for Classes project",
-	"author": "Instruction Material",
+	"description": "Public computer science courses for Julio's grade-school students",
+	"author": "Classes with Julio",
 	"license": "ISC",
 	"keywords": [],
 	"workspaces": [

@@ -7,23 +7,15 @@ import mongoose from "mongoose";
 
 import { pythonIdeAssetsProxy } from "./controllers/common/pythonIdeAssetsProxy.js";
 import { quoteProxy } from "./controllers/common/quoteProxy.js";
-import { createAdminMailLimiter } from "./middleware/rateLimiters.js";
-import { accountRoutes } from "./routes/accountRoutes.js";
-import { adminMailRoutes } from "./routes/adminMailRoutes.js";
-import { adminRoutes } from "./routes/adminRoutes.js";
-import { tutorRoutes } from "./routes/tutorRoutes.js";
-
-import { userRoutes } from "./routes/userRoutes.js";
-
+import { requireInternalDiagnostics } from "./middleware/internalDiagnostics.js";
+import { mountRuntimeAccountRoutes } from "./routes/runtimeAccountRoutes.js";
+import { readTrustProxySetting } from "./security/trustProxy.js";
 import { readMongoSecret } from "./vaultClient.js";
 import "dotenv/config";
 
 async function main() {
 	const app = express();
 	const internalDiagnosticsKey = env.INTERNAL_DIAGNOSTICS_KEY;
-	const loopbackAddresses = new Set(["127.0.0.1", "::1", "::ffff:127.0.0.1"]);
-	const pythonProjectJsonBodyLimit = env.PYTHON_IDE_PROJECT_BODY_LIMIT || "15mb";
-	const pythonProjectJsonRoute = /^\/users\/(?:loggedin\/python-projects|loggedin\/python-project-reviews|[^/]+\/python-projects)(?:\/|$)/;
 
 	// health
 	app.get("/healthz", (_req, res) => {
@@ -34,10 +26,9 @@ async function main() {
 	const SESSION_SECRET = env.SESSION_SECRET;
 	if (!SESSION_SECRET) throw new Error("Missing SESSION_SECRET");
 
-	app.set("trust proxy", 1);
+	app.set("trust proxy", readTrustProxySetting(env.TRUST_PROXY_HOPS));
 
 	// 1) parsers first (with limits)
-	app.use(pythonProjectJsonRoute, bodyParser.json({ limit: pythonProjectJsonBodyLimit }));
 	app.use(bodyParser.urlencoded({ extended: false, limit: "1mb" }));
 	app.use(bodyParser.json({ limit: "1mb" }));
 
@@ -78,10 +69,7 @@ async function main() {
 		next();
 	});
 
-	// 4) rate limit (can be before or after parsers; keep before routes)
-	app.use("/admin-mail", createAdminMailLimiter(), adminMailRoutes);
-
-	//
+	// 4) public, read-only classroom resources
 	app.use("/quotes", quoteProxy);
 	app.use("/python-assets", pythonIdeAssetsProxy);
 
@@ -154,22 +142,7 @@ async function main() {
 	console.log("Connected to MongoDB");
 	const c = mongoose.connection;
 	console.log(`Mongo connected: db=${c.db?.databaseName} host=${c.host} name=${c.name}`);
-	app.get("/_dbinfo", (req, res) => {
-		const forwardedFor = req.headers["x-forwarded-for"];
-		const forwardedIp = typeof forwardedFor === "string"
-			? forwardedFor.split(",")[0]?.trim()
-			: Array.isArray(forwardedFor)
-				? forwardedFor[0]?.trim()
-				: undefined;
-		const clientIp = forwardedIp || req.ip || req.socket.remoteAddress || "";
-		const isInternalRequest = env.NODE_ENV !== "production"
-			|| (internalDiagnosticsKey && req.get("x-internal-diagnostics-key") === internalDiagnosticsKey)
-			|| loopbackAddresses.has(clientIp);
-
-		if (!isInternalRequest) {
-			return res.status(403).set("Cache-Control", "no-store").json({ ok: false, error: "forbidden" });
-		}
-
+	app.get("/_dbinfo", requireInternalDiagnostics(internalDiagnosticsKey), (_req, res) => {
 		res.set("Cache-Control", "no-store").json({
 			databaseName: c.db?.databaseName ?? null,
 			host: c.host || null,
@@ -179,17 +152,9 @@ async function main() {
 		});
 	});
 
-	// Your routes (note: you’ve commented an axios baseURL elsewhere; these are mounted as-is)
-	app.use("/tutors", tutorRoutes);
-	app.use("/users", userRoutes);
-	app.use("/admins", adminRoutes);
-	app.use("/accounts", accountRoutes);
-
-	// after your session middleware in server.ts
-	app.get("/accounts/me", (req, res) => {
-		const s = req.session as any;
-		res.json({ adminID: s?.adminID ?? null, tutorID: s?.tutorID ?? null, userID: s?.userID ?? null });
-	});
+	// Julio is the only authenticated account. Student, tutor, signup, and
+	// admin-mail routes intentionally are not part of this downstream runtime.
+	mountRuntimeAccountRoutes(app);
 
 	const PORT = env.PORT || 3008;
 	const server = app.listen(PORT, () => console.log(`Server listening on port ${PORT}!`));

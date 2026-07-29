@@ -1,31 +1,14 @@
 // src/routes/adminRoutes.ts
 
 import express from "express";
-import {
-	createAdmin,
-	deleteAdmin,
-	getAllAdmins,
-	getLoggedInAdmin,
-	updateAdmin
-} from "../controllers/users/adminController.js";
+import { getLoggedInAdmin, updateAdmin } from "../controllers/users/adminController.js";
 import { validAdmin } from "../middleware/auth.js";
 
 const router = express.Router();
 
-// Route to create an admin
-router.post("/", createAdmin);
-
-// Route to get all admins (protected)
-router.get("/", validAdmin, getAllAdmins);
-
-// Route to update an admin's information (protected)
+// There is no HTTP account creation, directory, or deletion surface. The sole
+// teacher account is provisioned with create-admin-user.ts.
+router.get("/loggedin", validAdmin, getLoggedInAdmin);
 router.put("/:adminID", validAdmin, updateAdmin);
 
-// Route to delete an admin (protected)
-router.delete("/remove/:adminID", validAdmin, deleteAdmin);
-
-// Route to get the currently logged-in admin (protected)
-router.get("/loggedin", validAdmin, getLoggedInAdmin);
-
-// Export the router
 export const adminRoutes = router;

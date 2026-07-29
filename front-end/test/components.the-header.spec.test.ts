@@ -21,60 +21,63 @@ describe("TheHeader.vue", () => {
 				stubs: {
 					RouterLink: {
 						props: ["to"],
-						template: "<a><slot /></a>"
+						template: '<a :href="to"><slot /></a>'
 					}
 				}
 			}
 		});
 	}
 
-	it("shows Zoom and Pathways in the primary navigation for visitors", () => {
+	it("shows the public classroom navigation and a teacher-only login", () => {
 		const wrapper = mountHeader();
+		const links = wrapper
+			.findAll(".site-nav__link")
+			.map(link => [link.text(), link.attributes("href")]);
 
-		expect(wrapper.text()).toContain("Zoom");
-		expect(wrapper.text()).toContain("Pathways");
+		expect(wrapper.text()).toContain("Classes with Julio");
+		expect(links).toEqual([
+			["Home", "/"],
+			["Courses", "/courses"],
+			["Python IDE", "/python-ide"],
+			["About Julio", "/about"]
+		]);
+		expect(wrapper.text()).toContain("Teacher log in");
+		expect(wrapper.text()).not.toMatch(
+			/Sign up|Book a Class|Tuition|Zoom|Pathways|Teaching/
+		);
 	});
 
-	it("keeps Pathways visible for admins without adding public booking links", () => {
+	it("opens the private teacher login from the public header", async () => {
+		const wrapper = mountHeader();
+
+		await wrapper.get("button.site-nav__teacher-login").trigger("click");
+
+		expect(wrapper.emitted("loginClick")).toHaveLength(1);
+	});
+
+	it("shows Julio's teacher account controls when he is logged in", () => {
 		const pinia = createPinia();
 		setActivePinia(pinia);
 		const app = useAppStore();
 		app.setCurrentAdmin({
-			_id: "admin-1",
-			name: "Admin",
-			email: "admin@example.com",
+			_id: "julio",
+			name: "Julio",
+			email: "julio@example.com",
 			editAdmins: false,
 			saveEdit: "Save"
 		});
 
 		const wrapper = mountHeader(pinia);
 
-		expect(wrapper.text()).toContain("Zoom");
-		expect(wrapper.text()).toContain("Pathways");
+		expect(wrapper.text()).toContain("Teacher");
 		expect(wrapper.text()).toContain("Account");
-		expect(wrapper.text()).not.toContain("Book a Class");
-	});
-
-	it("shows the Teaching workspace link for tutors", () => {
-		const pinia = createPinia();
-		setActivePinia(pinia);
-		const app = useAppStore();
-		app.setCurrentTutor({
-			_id: "tutor-1",
-			name: "Tutor",
-			email: "tutor@example.com",
-			age: 30,
-			state: "GA",
-			usersOfTutorLength: 1,
-			coursePermissions: [],
-			editTutors: false,
-			saveEdit: "Save"
-		});
-
-		const wrapper = mountHeader(pinia);
-
-		expect(wrapper.text()).toContain("Teaching");
-		expect(wrapper.text()).toContain("Account");
-		expect(wrapper.text()).not.toContain("Profile");
+		expect(wrapper.text()).toContain("Log out");
+		expect(wrapper.text()).not.toContain("Teacher log in");
+		expect(
+			wrapper
+				.findAll("a")
+				.find(link => link.text() === "Account")
+				?.attributes("href")
+		).toBe("/profile");
 	});
 });

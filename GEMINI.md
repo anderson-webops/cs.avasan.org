@@ -1,46 +1,43 @@
-# Workspace Instructions
+# cs.avasan.org Workspace Instructions
 
-## Local Course Material Paths
-- Place local starter/solution packs and source course working folders under `/Users/jacobanderson/Documents/Work/Juni`, not under `/Users/jacobanderson/Work/Juni`.
-- Prefer the existing top-level course folder layout there, including names such as `Low Level Security`, `Intro to Swift App Development`, `Linux Systems`, and `Web Development Foundations`, unless the user asks for a different local structure.
+Follow `AGENTS.md` as the primary repository guidance. These downstream rules
+are non-negotiable:
 
-## Lockfiles, Commits, Tags, And Releases
-- Do not leave completed work uncommitted. After each coherent, validated change set, create a commit and push it in the same session.
-- Use multiple commits and pushes when that keeps unrelated changes, partial validations, or follow-up fixes clearly separated. Prefer small, logically grouped commits over one mixed commit.
-- Keep both `package-lock.json` and `back-end/package-lock.json` synchronized before every commit or push.
-- Use lowercase annotated semver tags only. Do not invent ad-hoc labels such as `V1`, `torca-r07`, `pre-lfs-migration-*`, or similar one-off names.
-- This repo follows the stable `v2.x` line. Stay on `v2` for routine work; only cut `v3` for an intentional breaking application or API change.
-- Before creating a new tag, check the latest tag in the active semver line and decide whether the new commit is still the same release milestone. If it is, move that existing tag forward to the new validated commit instead of minting a new version number.
-- Keep the GitHub release aligned with that decision: when the commit still belongs to the same milestone, update or recreate the existing release so it points at the moved tag/current commit; only create a brand-new release when the change creates a genuinely new milestone.
-- Cut a fresh semver tag and release only when the work crosses a real release boundary, such as a new deployable milestone, a materially different operator/user-facing state, or a version-line change that deserves its own notes and rollback point.
-- Create an annotated tag when a deployable course-catalog, front-end UX, back-end API, health/deploy, performance, or security change is ready to ship.
-- Create a GitHub release when that tag represents a real site milestone for users, admins, or operators. Release notes should summarize scope, validation, rollout notes, and any migration or recovery steps.
-- If the existing tag or release history contains stale drafts, redundant entries, or ad-hoc labels, clean that history up instead of preserving clutter.
-- Skip tags and releases for trivial doc-only edits, formatting-only changes, or routine housekeeping unless they change deployment, operations, or a consumer-facing contract.
+- This is Julio's grade-school classroom, maintained as a deliberate overlay on
+  `git@github.com:instruction-material/classes.jacobdanderson.net.git`.
+- `origin` is `git@github.com:anderson-webops/cs.avasan.org.git`; `upstream` is
+  read-only.
+- Adopt upstream work selectively after reviewing both the upstream commits and
+  downstream-only changes. Never blindly merge/reset the fork, push to
+  `upstream`, or copy upstream tags.
+- The only courses are Scratch Levels 1–2, Python Levels 1–2, and PyGames.
+- Students access courses and the browser IDE anonymously. Do not add student
+  registration, accounts, or server-side project persistence.
+- Julio is the sole Admin and is provisioned only with
+  `npm run -w back-end create-admin-ts`. Do not add public account creation,
+  another admin, or tutor-role workflows.
+- Do not restore scheduler, booking, Zoom, payment, tuition, freelance,
+  tutoring-business, intake, or expectation-setting features.
+- Use the fork-specific database and secret configuration; never reuse or commit
+  upstream credentials or data.
 
-## Dependency & Lockfile Discipline
+Use npm only. Keep package manifests and lockfiles synchronized, treat root
+`npm ci` as the clean-install gate, and do not install dependencies for ordinary
+source or documentation edits.
 
-- Treat the repo-root `npm ci` path as the source of truth for deploy readiness.
-- Any time `package.json`, any workspace `package.json`, dependency ranges, `package-lock.json`, or dependency update tooling changes, verify lockfile parity from the repo root before committing.
-- Do not rely on `npm install` fallback as success. A change is not deploy-ready unless root `npm ci` succeeds.
+Before committing or pushing code or dependency work, require:
 
-Required production/dev dependency update flow before every dependency commit:
-1. Check production and development dependency freshness from the repository root with `npm outdated --workspaces --long` or the repo's documented equivalent.
-2. Review both `dependencies` and `devDependencies` in the root and every workspace package; do not limit updates to production-only packages.
-3. Apply needed updates with the narrowest command that updates the relevant manifest and lockfile together, such as `npm install -w <workspace> <package>@<version>` or `npm install -D -w <workspace> <package>@<version>`.
-4. If the update is only a lockfile/security refresh, regenerate from the root with `npm install --package-lock-only --ignore-scripts --no-fund --no-audit`.
-5. Run `npm audit` from the repository root and resolve remaining production or dev advisories before committing unless a documented upstream limitation prevents it.
+```bash
+npm run lint
+npm run typecheck
+npm run -w front-end test:unit
+npm run -w back-end test
+npm run build
+git diff --check
+```
 
-Required dependency verification before every commit/push:
-1. Run `npm ci` from the repository root.
-2. Run `npm run lint`.
-3. Run `npm run typecheck`.
-4. Run `npm run build`.
-5. If API or back-end behavior changed and the repo has a back-end workspace, run `npm run -w back-end test` or the repo's equivalent API test command.
-
-If `npm ci` fails because `package.json` and `package-lock.json` are out of sync:
-1. Run `npm install --package-lock-only --ignore-scripts --no-fund --no-audit` from the repository root.
-2. Re-run `npm ci` from the repository root.
-3. Commit the resulting `package-lock.json` change with the related dependency/package change.
-
-Never commit or push dependency/package changes if root `npm ci` fails.
+Verify the public five-course catalog, anonymous student access, and Julio-only
+Admin boundary whenever affected. Commit each coherent validated change with a
+concise present-tense subject and push completed work to `origin`. Create or move
+an annotated downstream tag only for an explicit validated release, never as a
+routine upstream-sync step.

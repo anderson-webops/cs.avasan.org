@@ -17,45 +17,13 @@ const routeScenarios = [
 		name: "public",
 		role: "public",
 		routes: runFullMatrix
-			? [
-					"/",
-					"/about",
-					"/courses",
-					"/pathways",
-					"/signup",
-					"/payment",
-					"/zoom",
-					"/wheel"
-				]
-			: ["/", "/courses", "/signup", "/zoom"]
+			? ["/", "/about", "/courses", "/python-ide", "/profile"]
+			: ["/", "/courses", "/profile"]
 	},
 	{
-		name: "student",
-		role: "student",
-		routes: runFullMatrix
-			? ["/profile", "/courses", "/pathways", "/zoom", "/wheel"]
-			: ["/profile", "/courses"]
-	},
-	{
-		name: "tutor",
-		role: "tutor",
-		routes: runFullMatrix
-			? ["/profile", "/courses", "/teaching", "/pathways", "/zoom"]
-			: ["/profile", "/courses", "/teaching"]
-	},
-	{
-		name: "admin",
-		role: "admin",
-		routes: runFullMatrix
-			? [
-					"/profile",
-					"/courses",
-					"/admin",
-					"/admin/people",
-					"/admin/mdmail",
-					"/admin/student-management"
-				]
-			: ["/admin", "/admin/mdmail", "/admin/student-management"]
+		name: "teacher",
+		role: "teacher",
+		routes: ["/profile", "/courses"]
 	}
 ];
 const viewportScenarios = runFullMatrix
@@ -99,40 +67,11 @@ if (chromePath) process.env.PUPPETEER_EXECUTABLE_PATH = chromePath;
 let activeRole = "public";
 
 const admin = {
-	_id: "admin-accessibility",
-	name: "Accessibility Admin",
-	email: "admin@example.com",
+	_id: "julio",
+	name: "Julio",
+	email: "julio@example.com",
 	editAdmins: false,
 	saveEdit: ""
-};
-const tutor = {
-	_id: "tutor-accessibility",
-	name: "Jacob",
-	email: "classes@example.com",
-	age: 30,
-	state: "GA",
-	usersOfTutorLength: 1,
-	editTutors: false,
-	saveEdit: "",
-	coursePermissions: ["javascript-level-1"]
-};
-const student = {
-	_id: "user-accessibility",
-	name: "Student Test",
-	email: "student@example.com",
-	age: 15,
-	state: "GA",
-	editUsers: false,
-	saveEdit: "",
-	tutors: [tutor],
-	courseAccess: ["javascript-level-1"],
-	courseProgress: [
-		{
-			courseId: "javascript-level-1",
-			completedModuleIds: [],
-			completedItemIds: []
-		}
-	]
 };
 
 function writeServerLine(prefix, data) {
@@ -152,9 +91,6 @@ function sendJson(res, body, status = 200) {
 }
 
 function createMockApiServer() {
-	const users = [student];
-	const tutors = [tutor];
-
 	return http.createServer((req, res) => {
 		const url = new URL(req.url || "/", `http://127.0.0.1:${apiPort}`);
 		if (req.method === "OPTIONS") {
@@ -163,50 +99,19 @@ function createMockApiServer() {
 		}
 
 		if (url.pathname === "/accounts/me") {
-			if (activeRole === "admin") sendJson(res, { adminID: admin._id });
-			else if (activeRole === "tutor") sendJson(res, { tutorID: tutor._id });
-			else if (activeRole === "student") sendJson(res, { userID: student._id });
-			else sendJson(res, {});
+			if (activeRole === "teacher") {
+				sendJson(res, { adminID: admin._id });
+			} else {
+				sendJson(res, {});
+			}
 			return;
 		}
 		if (url.pathname === "/admins/loggedin") {
 			sendJson(
 				res,
-				activeRole === "admin" ? { currentAdmin: admin } : {},
-				activeRole === "admin" ? 200 : 401
+				activeRole === "teacher" ? { currentAdmin: admin } : {},
+				activeRole === "teacher" ? 200 : 401
 			);
-			return;
-		}
-		if (url.pathname === "/tutors/loggedin") {
-			sendJson(
-				res,
-				activeRole === "tutor" ? { currentTutor: tutor } : {},
-				activeRole === "tutor" ? 200 : 401
-			);
-			return;
-		}
-		if (url.pathname === "/users/loggedin") {
-			sendJson(
-				res,
-				activeRole === "student" ? { currentUser: student } : {},
-				activeRole === "student" ? 200 : 401
-			);
-			return;
-		}
-		if (url.pathname === "/users/all") {
-			sendJson(res, users);
-			return;
-		}
-		if (url.pathname === `/users/oftutor/${tutor._id}`) {
-			sendJson(res, users);
-			return;
-		}
-		if (url.pathname === "/tutors") {
-			sendJson(res, tutors);
-			return;
-		}
-		if (url.pathname === "/admins") {
-			sendJson(res, [admin]);
 			return;
 		}
 		if (url.pathname === "/quotes") {
@@ -260,7 +165,8 @@ function startVite() {
 			detached: process.platform !== "win32",
 			env: {
 				...process.env,
-				BROWSER: "none"
+				BROWSER: "none",
+				VITE_API_PROXY_TARGET: `http://127.0.0.1:${apiPort}`
 			},
 			stdio: ["ignore", "pipe", "pipe"]
 		}

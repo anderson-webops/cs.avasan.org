@@ -50,22 +50,15 @@ describe("static route normalization", () => {
 		generateProductionSitemap(options => calls.push(options));
 
 		expect(options.hostname).toBe(SITE_URL);
-		expect(options.hostname).toBe("https://classes.jacobdanderson.net");
+		expect(options.hostname).toBe("https://cs.avasan.org");
 		expect(options.hostname).not.toContain("localhost");
 		expect(options.generateRobotsTxt).toBe(false);
 		expect(options.exclude).toEqual(SITEMAP_EXCLUDED_ROUTES);
-		expect(options.exclude).toEqual(
-			expect.arrayContaining([
-				"/admin",
-				"/admin/mdmail",
-				"/admin/people",
-				"/admin/student-management",
-				"/course-resource",
-				"/profile",
-				"/python-ide",
-				"/README"
-			])
-		);
+		expect(options.exclude).toEqual([
+			"/course-resource",
+			"/profile",
+			"/python-ide"
+		]);
 		expect(calls).toEqual([options]);
 	});
 });

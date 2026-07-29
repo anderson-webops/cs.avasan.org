@@ -168,6 +168,14 @@ export function normalizePythonIdeMode(
 	return fallback;
 }
 
+export function normalizeClassroomPythonIdeMode(
+	value: string | null | undefined,
+	fallback: PythonIdeMode = "python"
+): Exclude<PythonIdeMode, "data"> {
+	const mode = normalizePythonIdeMode(value, fallback);
+	return mode === "data" ? "python" : mode;
+}
+
 export function pythonIdeModeForCourseId(courseId: string | null | undefined) {
 	return courseId ? (pythonIdeCourseModes[courseId] ?? null) : null;
 }

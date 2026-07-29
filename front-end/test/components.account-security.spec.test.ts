@@ -12,29 +12,29 @@ describe("AccountSecurity", () => {
 		const first = mount(AccountSecurity, {
 			props: {
 				email: "first@example.com",
-				entityId: "first-user",
-				role: "user"
+				entityId: "julio-primary",
+				role: "admin"
 			}
 		});
 		const second = mount(AccountSecurity, {
 			props: {
 				email: "second@example.com",
-				entityId: "second-user",
-				role: "user"
+				entityId: "julio-backup",
+				role: "admin"
 			}
 		});
 
 		expect(first.find("label").attributes("for")).toBe(
-			"account-security-user-first-user-email"
+			"account-security-admin-julio-primary-email"
 		);
 		expect(second.find("label").attributes("for")).toBe(
-			"account-security-user-second-user-email"
-		);
-		expect(first.find("#account-security-user-first-user-email").exists()).toBe(
-			true
+			"account-security-admin-julio-backup-email"
 		);
 		expect(
-			second.find("#account-security-user-second-user-email").exists()
+			first.find("#account-security-admin-julio-primary-email").exists()
+		).toBe(true);
+		expect(
+			second.find("#account-security-admin-julio-backup-email").exists()
 		).toBe(true);
 	});
 });

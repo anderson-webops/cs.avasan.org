@@ -239,22 +239,17 @@ const forbiddenScratchRawPatterns = [
 	/\(Introduce the /i
 ];
 
-const rawCourseFiles = readdirSync(coursesSourceDir)
-	.filter(file => file.endsWith(".ts"))
-	.filter(
-		file => !["index.ts", "normalization.ts", "types.ts"].includes(file)
-	)
-	.map(file => resolve(coursesSourceDir, file));
+const publishedCourseSourceFiles = [
+	"scratch-level-1.ts",
+	"scratch-level-2.ts",
+	"python-level-1.ts",
+	"python-level-2.ts",
+	"pygames.ts"
+].map(file => resolve(coursesSourceDir, file));
 
-function markdownFilesIn(directory: string): string[] {
-	return readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
-		const path = resolve(directory, entry.name);
-		if (entry.isDirectory()) return markdownFilesIn(path);
-		return entry.isFile() && entry.name.endsWith(".md") ? [path] : [];
-	});
-}
-
-const courseAssetMarkdownFiles = markdownFilesIn(courseAssetsDir);
+const publishedCourseAssetMarkdownFiles = [
+	resolve(courseAssetsDir, "python/turtle-project-reference.md")
+];
 
 function snippet(value: string, pattern: RegExp) {
 	const match = value.match(pattern);
@@ -273,16 +268,9 @@ function escapeRegExp(value: string) {
 
 describe("student-facing course copy", () => {
 	it("keeps generated boilerplate and recovery notes out of raw course source", () => {
-		const files = [
-			...rawCourseFiles,
-			resolve(
-				repoRoot,
-				"front-end/scripts/materialize-course-expansions.ts"
-			)
-		];
 		const failures: string[] = [];
 
-		for (const file of files) {
+		for (const file of publishedCourseSourceFiles) {
 			const source = readFileSync(file, "utf8");
 
 			for (const pattern of forbiddenRawGeneratedPatterns) {
@@ -346,7 +334,7 @@ describe("student-facing course copy", () => {
 		];
 		const failures: string[] = [];
 
-		for (const file of courseAssetMarkdownFiles) {
+		for (const file of publishedCourseAssetMarkdownFiles) {
 			const source = readFileSync(file, "utf8");
 
 			for (const pattern of forbiddenAssetPatterns) {

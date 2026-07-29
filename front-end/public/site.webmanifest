@@ -1,9 +1,9 @@
 {
-	"name": "Classes",
-	"short_name": "Classes",
-	"description": "Private instruction for coding, STEM, and language learners.",
-	"theme_color": "#3158e8",
-	"background_color": "#ffffff",
+	"name": "Classes with Julio",
+	"short_name": "Julio CS",
+	"description": "Scratch, Python, and PyGames courses for young coders.",
+	"theme_color": "#0f766e",
+	"background_color": "#f3faf8",
 	"display": "standalone",
 	"icons": [
 		{

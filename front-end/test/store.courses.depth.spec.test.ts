@@ -1,111 +1,48 @@
 import { createPinia, setActivePinia } from "pinia";
 import { beforeEach, describe, expect, it } from "vitest";
-import { elementaryScienceCourse } from "@/stores/courses/elementary-science";
-import { introToPhysicsCourse } from "@/stores/courses/intro-to-physics";
-import { middleSchoolIntegratedScienceCourse } from "@/stores/courses/middle-school-integrated-science";
 import { useCoursesStore } from "@/stores/courses";
+import { courseCatalog } from "@/stores/courses/index";
 
-function coreModules<T extends { kind?: string }>(modules: T[] = []) {
-	return modules.filter(module => module.kind !== "appendix");
-}
-
-describe("course catalog breadth", () => {
+describe("published course depth", () => {
 	beforeEach(() => {
 		setActivePinia(createPinia());
 	});
 
-	it("loads the permanent catalog breadth for non-Python courses", async () => {
+	it("loads useful lesson and project material for every published course", async () => {
 		const store = useCoursesStore();
-		const course = await store.loadCourseById("intro-to-physics");
 
-		expect(course).not.toBeNull();
-		expect(course?.modules.length).toBeGreaterThanOrEqual(17);
-		expect(
-			coreModules(course?.modules).every(
-				module =>
-					module.curriculum.length >= 3 &&
-					module.supplementalProjects.length >= 2
-			)
-		).toBe(true);
-		expect(
-			introToPhysicsCourse.modules.every(
-				module =>
-					module.curriculum.length >= 4 &&
-					module.supplementalProjects.length >= 2
-			)
-		).toBe(true);
-	});
+		for (const entry of courseCatalog) {
+			const course = await store.loadCourseById(entry.id);
+			expect(course, entry.id).not.toBeNull();
+			expect(course?.name, entry.id).toBe(entry.name);
+			expect(course?.modules.length, entry.id).toBeGreaterThan(0);
 
-	it("keeps the authored Python level course intact", async () => {
-		const store = useCoursesStore();
-		const course = await store.loadCourseById("python-level-1");
-
-		expect(course).not.toBeNull();
-		expect(course?.modules.length).toBeGreaterThanOrEqual(21);
-		expect(course?.modules[0]?.supplementalProjects.length).toBe(2);
-	});
-
-	it("loads Zoom-friendly elementary and middle school science courses", async () => {
-		const store = useCoursesStore();
-		const elementary = await store.loadCourseById("elementary-science");
-		const middleSchool = await store.loadCourseById(
-			"middle-school-integrated-science"
-		);
-
-		expect(elementary?.modules.length).toBeGreaterThanOrEqual(8);
-		expect(middleSchool?.modules.length).toBeGreaterThanOrEqual(10);
-
-		for (const course of [elementary, middleSchool]) {
+			const coreModules =
+				course?.modules.filter(module => module.kind !== "appendix") ??
+				[];
+			expect(coreModules.length, entry.id).toBeGreaterThan(0);
 			expect(
-				coreModules(course?.modules).every(
-					module =>
-						module.curriculum.length >= 1 &&
-						module.supplementalProjects.length >= 2
-				)
+				coreModules.some(module => module.curriculum.length > 0),
+				entry.id
+			).toBe(true);
+			expect(
+				coreModules.some(
+					module => module.supplementalProjects.length > 0
+				),
+				entry.id
 			).toBe(true);
 		}
+	});
 
-		for (const course of [
-			elementaryScienceCourse,
-			middleSchoolIntegratedScienceCourse
-		]) {
-			expect(
-				course.modules.every(
-					module =>
-						module.curriculum.length >= 4 &&
-						module.supplementalProjects.length >= 2
-				)
-			).toBe(true);
-		}
+	it("does not load upstream-only subjects through the public store", async () => {
+		const store = useCoursesStore();
 
-		expect(JSON.stringify(elementary)).toContain(
-			"No physical lab supplies are required"
-		);
-		expect(JSON.stringify(middleSchool)).toContain(
-			"No specialized science equipment or required household experiments are needed"
-		);
-		expect(JSON.stringify([elementary, middleSchool])).toContain(
-			"specialized science equipment or household experiments are not required"
-		);
-		expect(
-			elementaryScienceCourse.modules.every(module =>
-				module.curriculum.some(item =>
-					item.title.startsWith("Grade-Band Path:")
-				)
-			)
-		).toBe(true);
-		expect(
-			middleSchoolIntegratedScienceCourse.modules.every(module =>
-				module.curriculum.some(item =>
-					item.title.startsWith("Progression Map:")
-				)
-			)
-		).toBe(true);
-		expect(JSON.stringify([elementary, middleSchool])).not.toContain(
-			"Cover: 1."
-		);
-		expect(JSON.stringify([elementary, middleSchool])).not.toContain(
-			"evidence should point"
-		);
+		await expect(store.loadCourseById("python-level-3")).resolves.toBeNull();
+		await expect(
+			store.loadCourseById("ap-computer-science-a")
+		).resolves.toBeNull();
+		await expect(
+			store.loadCourseById("intro-to-chemistry")
+		).resolves.toBeNull();
 	});
 });

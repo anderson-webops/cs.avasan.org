@@ -2,32 +2,27 @@
 
 import { Router } from "express";
 import { changeEmail, changePassword, checkEmail, login, logout } from "../controllers/auth/authController.js";
+import { validAdmin } from "../middleware/auth.js";
+import { createLoginLimiter } from "../middleware/rateLimiters.js";
 
-const router = Router();
+export function createAccountRoutes(): Router {
+	const router = Router();
 
-// Route to check if email is available (useful for account creation)
-router.post("/checkEmail", checkEmail);
+	// Account security belongs to the sole authenticated teacher account.
+	router.post("/checkEmail", validAdmin, checkEmail);
 
-// Route to change email (could be used by users, tutors, or admins)
-router.post("/changeEmail/:ID", changeEmail);
+	router.post("/changeEmail/:ID", validAdmin, changeEmail);
 
-// Route to change password
-router.post("/changePassword/:ID", changePassword);
+	router.post("/changePassword/:ID", validAdmin, changePassword);
 
-// Route to handle login
-router.post("/login", login);
+	// Login is the only public account operation and is throttled per client IP.
+	router.post("/login", createLoginLimiter(), login);
 
-router.delete("/logout", logout);
+	router.delete("/logout", logout);
 
-// in accountRoutes.ts
-router.get("/me", (req, res) => {
-	const s = req.session as any;
-	res.json({
-		adminID: s?.adminID ?? null,
-		tutorID: s?.tutorID ?? null,
-		userID: s?.userID ?? null
+	router.get("/me", (req, res) => {
+		res.json({ adminID: req.session?.adminID ?? null });
 	});
-});
 
-// Export the router
-export const accountRoutes = router;
+	return router;
+}

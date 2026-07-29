@@ -1,291 +1,112 @@
-<!-- src/components/AccountManagement.vue -->
 <script lang="ts" setup>
 import type { AxiosError } from "axios";
 import { storeToRefs } from "pinia";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import { api } from "@/api";
 import AccessibleDialog from "@/components/AccessibleDialog.vue";
 import { useAppStore } from "@/stores/app";
 
 const app = useAppStore();
+const { loginBlock } = storeToRefs(app);
 
-// ─── LOGIN STATE & METHODS ──────────────────────────────────────────
-const { loginBlock, signupBlock } = storeToRefs(app);
-
-const loginEmail = ref("");
-const loginPassword = ref("");
+const email = ref("");
+const password = ref("");
 const rememberMe = ref(false);
-const errorLogin = ref("");
+const error = ref("");
+const isSubmitting = ref(false);
 
-function changeLoginView(show: boolean) {
-	app.setLoginBlock(show);
+function close() {
+	app.setLoginBlock(false);
+	error.value = "";
 }
 
-function openSignupFromLogin() {
-	changeLoginView(false);
-	changeSignupView(true);
-}
+async function loginTeacher() {
+	error.value = "";
+	if (!email.value || !password.value || isSubmitting.value) return;
 
-async function loginTutor() {
-	errorLogin.value = "";
-	if (!loginEmail.value || !loginPassword.value) return;
+	isSubmitting.value = true;
 	try {
 		const { data } = await api.post(
 			"/accounts/login",
 			{
-				email: loginEmail.value,
-				password: loginPassword.value,
+				email: email.value,
+				password: password.value,
 				remember: rememberMe.value
 			},
 			{ withCredentials: true }
 		);
-		if (data.currentTutor) app.setCurrentTutor(data.currentTutor);
-		if (data.currentUser) app.setCurrentUser(data.currentUser);
-		if (data.currentAdmin) app.setCurrentAdmin(data.currentAdmin);
-		changeLoginView(false);
-		rememberMe.value = false;
-	} catch (err: unknown) {
-		const e = err as AxiosError<{ message?: string }>;
-		errorLogin.value = `Login failed: ${e.response?.data?.message ?? e.message ?? "Unknown error"}`;
-	}
-}
 
-// form state (new signups default to users)
-const name = ref("");
-const age = ref("");
-const state = ref("");
-const email = ref("");
-const password = ref("");
-const passwordRepeat = ref("");
-const error = ref("");
-
-// simple password‐match guard
-const passwordMatch = computed(() => password.value === passwordRepeat.value);
-
-// close / open (comes from your store)
-function changeSignupView(show: boolean) {
-	app.setSignupBlock(show);
-}
-
-// reset inputs after submission
-function resetData() {
-	name.value =
-		age.value =
-		state.value =
-		email.value =
-		password.value =
-		passwordRepeat.value =
-			"";
-	error.value = "";
-}
-
-// on submit, dispatch to the right endpoint
-async function addSignup() {
-	error.value = "";
-	if (!passwordMatch.value) return;
-
-	try {
-		// every self-serve signup creates a user account
-		const res = await api.post(
-			"/users",
-			{
-				name: name.value,
-				age: age.value,
-				state: state.value,
-				email: email.value,
-				password: password.value
-			},
-			{ withCredentials: true }
-		);
-
-		// immediately stash the newly-created user/tutor into Pinia
-		if (res.data.currentTutor) {
-			app.setCurrentTutor(res.data.currentTutor);
-		} else if (res.data.currentUser) {
-			app.setCurrentUser(res.data.currentUser);
+		if (!data.currentAdmin) {
+			throw new Error("This sign-in is available only to Julio.");
 		}
 
-		resetData();
-		changeSignupView(false);
-	} catch (err: unknown) {
-		const e = err as AxiosError<{ message?: string }>;
-		error.value = `Error: ${e.response?.data?.message ?? e.message ?? "Unknown error"}`;
+		app.setCurrentAdmin(data.currentAdmin);
+		password.value = "";
+		rememberMe.value = false;
+		close();
+	} catch (caught: unknown) {
+		const axiosError = caught as AxiosError<{ message?: string }>;
+		error.value =
+			axiosError.response?.data?.message ??
+			(caught instanceof Error ? caught.message : "Unable to log in.");
+	} finally {
+		isSubmitting.value = false;
 	}
 }
 </script>
 
 <template>
-	<div>
-		<AccessibleDialog
-			close-label="Close login dialog"
-			description="Log in with the email and password connected to your classes account."
-			dialog-id="login-dialog"
-			:open="loginBlock"
-			title="Log in"
-			@close="changeLoginView(false)"
-		>
-			<form class="auth-form loginForm" @submit.prevent="loginTutor">
-				<label for="uname">Email</label>
-				<input
-					id="uname"
-					v-model="loginEmail"
-					autocomplete="email"
-					placeholder="Enter Email"
-					required
-					type="email"
-				/>
+	<AccessibleDialog
+		close-label="Close teacher login dialog"
+		description="This private sign-in is only for Julio, the teacher who maintains the course library."
+		dialog-id="teacher-login-dialog"
+		:open="loginBlock"
+		title="Teacher log in"
+		@close="close"
+	>
+		<form class="auth-form" @submit.prevent="loginTeacher">
+			<label for="teacher-email">Email</label>
+			<input
+				id="teacher-email"
+				v-model="email"
+				autocomplete="email"
+				placeholder="Teacher email"
+				required
+				type="email"
+			/>
 
-				<label for="psw1">Password</label>
-				<input
-					id="psw1"
-					v-model="loginPassword"
-					autocomplete="current-password"
-					placeholder="Enter Password"
-					required
-					type="password"
-				/>
+			<label for="teacher-password">Password</label>
+			<input
+				id="teacher-password"
+				v-model="password"
+				autocomplete="current-password"
+				placeholder="Password"
+				required
+				type="password"
+			/>
 
-				<label class="remember">
-					<input
-						v-model="rememberMe"
-						name="remember"
-						type="checkbox"
-					/>
-					Remember me
-				</label>
+			<label class="remember">
+				<input v-model="rememberMe" name="remember" type="checkbox" />
+				Remember me on this device
+			</label>
 
-				<p
-					v-if="errorLogin"
-					id="login-error"
-					class="error"
-					role="alert"
-				>
-					{{ errorLogin }}
-				</p>
+			<p v-if="error" class="error" role="alert">{{ error }}</p>
 
-				<div class="auth-actions">
-					<button class="button" type="submit">Login</button>
-					<button
-						class="button secondary"
-						type="button"
-						@click="changeLoginView(false)"
-					>
-						Cancel
-					</button>
-				</div>
+			<div class="auth-actions">
+				<button class="button" :disabled="isSubmitting" type="submit">
+					{{ isSubmitting ? "Logging in…" : "Log in" }}
+				</button>
+				<button class="button secondary" type="button" @click="close">
+					Cancel
+				</button>
+			</div>
 
-				<p class="auth-switch">
-					Don't have an account?
-					<button
-						class="text-button"
-						type="button"
-						@click="openSignupFromLogin"
-					>
-						Sign up
-					</button>
-				</p>
-				<p class="auth-help">
-					Forgot your password? Email
-					<a href="mailto:contact@example.com">
-						contact@example.com </a
-					>.
-				</p>
-			</form>
-		</AccessibleDialog>
-
-		<AccessibleDialog
-			close-label="Close sign up dialog"
-			description="Create a learner account to access assigned courses and class information."
-			dialog-id="signup-dialog"
-			:open="signupBlock"
-			title="Sign up"
-			@close="changeSignupView(false)"
-		>
-			<form class="auth-form signupForm" @submit.prevent="addSignup">
-				<label for="name">Name</label>
-				<input
-					id="name"
-					v-model="name"
-					autocomplete="name"
-					placeholder="Enter Name"
-					required
-					type="text"
-				/>
-
-				<label for="age">Age</label>
-				<input
-					id="age"
-					v-model="age"
-					inputmode="numeric"
-					placeholder="Enter Age"
-					required
-					type="text"
-				/>
-
-				<label for="state">State</label>
-				<input
-					id="state"
-					v-model="state"
-					autocomplete="address-level1"
-					placeholder="Enter State"
-					required
-					type="text"
-				/>
-
-				<label for="email">Email</label>
-				<input
-					id="email"
-					v-model="email"
-					autocomplete="email"
-					placeholder="Enter Email"
-					required
-					type="email"
-				/>
-
-				<label for="psw2">Password</label>
-				<input
-					id="psw2"
-					v-model="password"
-					autocomplete="new-password"
-					placeholder="Enter Password"
-					required
-					type="password"
-				/>
-
-				<label for="psw-repeat">Repeat Password</label>
-				<input
-					id="psw-repeat"
-					v-model="passwordRepeat"
-					autocomplete="new-password"
-					placeholder="Repeat Password"
-					required
-					type="password"
-				/>
-
-				<p
-					v-if="!passwordMatch"
-					class="passwordMatchError"
-					role="alert"
-				>
-					Passwords do not match.
-				</p>
-				<p v-if="error" class="error" role="alert">
-					{{ error }}
-				</p>
-
-				<div class="auth-actions">
-					<button class="button" type="submit">Create Account</button>
-					<button
-						class="button secondary"
-						type="button"
-						@click="changeSignupView(false)"
-					>
-						Cancel
-					</button>
-				</div>
-			</form>
-		</AccessibleDialog>
-	</div>
+			<p class="auth-note">
+				Students do not need an account. Open Courses or the Python IDE
+				directly from the main menu.
+			</p>
+		</form>
+	</AccessibleDialog>
 </template>
 
 <style scoped>
@@ -295,119 +116,68 @@ async function addSignup() {
 }
 
 .auth-form label {
-	display: grid;
-	gap: 0.35rem;
-	margin: 0;
-	color: var(--color-ink, #10263a);
 	font-weight: 800;
+	color: var(--color-ink);
 }
 
-.auth-form input[type="email"],
-.auth-form input[type="password"],
-.auth-form input[type="text"] {
+.auth-form input:not([type="checkbox"]) {
 	width: 100%;
-	box-sizing: border-box;
-	padding: 0.85rem 0.95rem;
-	border: 1px solid var(--color-border, rgba(148, 163, 184, 0.45));
+	border: 1px solid var(--color-border-strong);
 	border-radius: 14px;
-	background: var(--color-surface-strong, #fff);
-	color: var(--color-ink, #10263a);
-	font: inherit;
+	padding: 0.8rem 0.9rem;
+	background: var(--color-surface-strong);
 }
 
 .remember {
-	display: flex !important;
-	grid-template-columns: none !important;
-	flex-direction: row;
+	display: flex;
 	align-items: center;
-	gap: 0.55rem !important;
+	gap: 0.55rem;
+	font-size: 0.92rem;
 	font-weight: 600 !important;
-}
-
-.remember input {
-	width: auto;
+	color: var(--color-ink-soft) !important;
 }
 
 .auth-actions {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.75rem;
+	gap: 0.7rem;
 	margin-top: 0.35rem;
 }
 
 .button {
-	flex: 1 1 12rem;
-	border: 1px solid #2563eb;
-	border-radius: 999px;
-	background: linear-gradient(135deg, #2563eb, #1d4ed8);
-	color: #fff;
-	padding: 0.85rem 1.1rem;
-	cursor: pointer;
+	min-height: 2.9rem;
+	padding: 0.7rem 1rem;
+	border: 1px solid transparent;
+	border-radius: 13px;
+	background: var(--color-button-primary-bg);
+	color: var(--color-button-primary-text);
 	font-weight: 800;
 }
 
 .button.secondary {
-	border-color: var(--color-border, rgba(148, 163, 184, 0.45));
-	background: var(--color-surface-soft, #f8fafc);
-	color: var(--color-ink, #10263a);
+	border-color: var(--color-border-strong);
+	background: var(--color-button-secondary-bg);
+	color: var(--color-ink);
 }
 
-.text-button {
-	border: none;
-	background: transparent;
-	color: #1d4ed8;
-	padding: 0;
-	font: inherit;
-	font-weight: 800;
-	text-decoration: underline;
-	cursor: pointer;
+.button:disabled {
+	cursor: wait;
+	opacity: 0.7;
 }
 
-.auth-switch,
-.auth-help,
-.error,
-.passwordMatchError {
-	margin: 0;
-	line-height: 1.55;
+.error {
+	padding: 0.75rem 0.9rem;
+	border: 1px solid var(--color-error-border);
+	border-radius: 12px;
+	background: var(--color-error-surface);
+	color: var(--color-error-text);
 }
 
-.auth-switch,
-.auth-help {
-	color: var(--color-ink-soft, #526779);
-}
-
-.auth-help a {
-	color: #1d4ed8;
-	font-weight: bold;
-}
-
-.error,
-.passwordMatchError {
-	color: #b91c1c;
-	font-weight: 800;
-}
-
-.button:hover,
-.text-button:hover {
-	filter: brightness(0.96);
-}
-
-:global(html.dark) .text-button {
-	color: #bfdbfe;
-}
-
-:global(html.dark) .text-button:hover {
-	color: #dbeafe;
-	filter: none;
-}
-
-@media (max-width: 520px) {
-	.auth-actions {
-		flex-direction: column;
-	}
-
-	.button {
-		width: 100%;
-	}
+.auth-note {
+	padding-top: 0.85rem;
+	border-top: 1px solid var(--color-border);
+	color: var(--color-ink-soft);
+	font-size: 0.9rem;
+	line-height: 1.6;
 }
 </style>

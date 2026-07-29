@@ -158,7 +158,7 @@ export const pyGamesCourse: RawCourse = hideBroadPyGamesRootPairs({
 				{
 					title: "PyGame Setup with Mu",
 					content:
-						'Install the Mu editor from https://codewith.mu and switch it to PyGame mode using the "Mode" button. Confirm the mu_code folder exists and keep it in an easy-to-access location. The original shared asset pack is reserved at https://static.classes.jacobdanderson.net/assets.zip for future hosting; if that download is not available yet, create empty images, sounds, and music folders in mu_code and add only the project assets needed for the current lesson. Create a new file alien.py in mu_code. If Mu cannot be installed, use PyCharm with pip install pgzero, import pgzrun, and pgzrun.go(), and keep images in an images folder and sounds in a sounds folder.',
+						'Install the Mu editor from https://codewith.mu and switch it to PyGame mode using the "Mode" button. Confirm the mu_code folder exists and keep it in an easy-to-access location. Use the shared classroom asset pack linked with this lesson when it is available; otherwise, create empty images, sounds, and music folders in mu_code and add only the project assets needed for the current lesson. Create a new file alien.py in mu_code. If Mu cannot be installed, use PyCharm with pip install pgzero, import pgzrun, and pgzrun.go(), and keep images in an images folder and sounds in a sounds folder.',
 					datasetLink:
 						"https://static.classes.jacobdanderson.net/assets.zip"
 				},

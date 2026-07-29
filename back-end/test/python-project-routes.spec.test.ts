@@ -183,14 +183,12 @@ describe("Python project routes", () => {
 		});
 	});
 
-	it("keeps a larger JSON parser limit scoped to Python IDE project routes", () => {
+	it("does not mount authenticated student project persistence in the downstream runtime", () => {
 		const serverSource = readFileSync(resolve(__dirname, "../src/server.ts"), "utf8");
 
-		expect(serverSource).toContain("PYTHON_IDE_PROJECT_BODY_LIMIT");
-		expect(serverSource).toContain("pythonProjectJsonRoute");
-		expect(serverSource).toContain("loggedin\\/python-projects");
-		expect(serverSource).toContain("[^/]+\\/python-projects");
-		expect(serverSource).toContain("bodyParser.json({ limit: pythonProjectJsonBodyLimit })");
+		expect(serverSource).not.toContain("PYTHON_IDE_PROJECT_BODY_LIMIT");
+		expect(serverSource).not.toContain("pythonProjectJsonRoute");
+		expect(serverSource).not.toContain('app.use("/users"');
 		expect(serverSource).toContain('bodyParser.json({ limit: "1mb" })');
 	});
 

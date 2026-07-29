@@ -1,107 +1,58 @@
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
-import { computed } from "vue";
 import { useRoute } from "vue-router";
-import { warmSchedulerConnections } from "@/modules/scheduler";
 import { useAppStore } from "@/stores/app";
 
 const emit = defineEmits<{
 	(e: "loginClick"): void;
-	(e: "signupClick"): void;
 }>();
 
 const app = useAppStore();
 const route = useRoute();
-const { currentAdmin, currentTutor, currentUser, isLoggedIn, isAdmin } =
-	storeToRefs(app);
+const { currentAdmin, isLoggedIn } = storeToRefs(app);
 
-interface NavLink {
-	label: string;
-	to: string;
-	exact?: boolean;
-	warmScheduler?: boolean;
+const primaryLinks = [
+	{ label: "Home", to: "/" },
+	{ label: "Courses", to: "/courses" },
+	{ label: "Python IDE", to: "/python-ide" },
+	{ label: "About Julio", to: "/about" }
+];
+
+function isLinkActive(to: string) {
+	return to === "/" ? route.path === "/" : route.path.startsWith(to);
 }
 
-const primaryLinks = computed<NavLink[]>(() => {
-	const links: NavLink[] = [
-		{ label: "Home", to: "/", exact: true },
-		{ label: "Courses", to: "/courses", exact: true },
-		{ label: "Pathways", to: "/pathways", exact: true },
-		{ label: "Python IDE", to: "/python-ide", exact: true },
-		{ label: "Zoom", to: "/zoom", exact: true }
-	];
-
-	if (!isAdmin.value) {
-		links.push({
-			label: "Book a Class",
-			to: "/signup",
-			exact: true,
-			warmScheduler: true
-		});
-	}
-
-	links.push({ label: "About", to: "/about", exact: true });
-
-	return links;
-});
-
-const utilityLinks = computed<NavLink[]>(() => {
-	if (isAdmin.value) return [];
-	return [{ label: "Tuition", to: "/payment", exact: true }];
-});
-
-const workspaceLinks = computed<NavLink[]>(() => {
-	const links: NavLink[] = [];
-
-	if (isAdmin.value) {
-		links.push({ label: "Admin", to: "/admin", exact: false });
-	}
-
-	if (currentTutor.value) {
-		links.push({ label: "Teaching", to: "/teaching", exact: false });
-	}
-
-	if (isLoggedIn.value) {
-		links.push({ label: "Account", to: "/profile", exact: false });
-	}
-
-	return links;
-});
-
-const accountBadge = computed(() => {
-	if (currentAdmin.value) return "Administrator";
-	if (currentTutor.value) return "Tutor";
-	if (currentUser.value) return "Student";
-	return null;
-});
-
-function logoutUser() {
-	app.logout();
-}
-
-function isLinkActive(link: NavLink) {
-	if (link.exact === false) {
-		return route.path === link.to || route.path.startsWith(`${link.to}/`);
-	}
-
-	return route.path === link.to;
-}
-
-function maybeWarmScheduler(link: NavLink) {
-	if (link.warmScheduler) warmSchedulerConnections();
+async function logout() {
+	await app.logout();
 }
 </script>
 
 <template>
 	<header class="site-header">
 		<div class="site-shell site-shell--wide">
-			<nav class="navbar navbar-expand-xl site-nav">
+			<nav
+				class="navbar navbar-expand-lg site-nav"
+				aria-label="Main navigation"
+			>
 				<div class="site-nav__inner site-surface site-surface--strong">
-					<router-link class="site-brand" to="/">
-						<span class="site-brand__title"
-							>Classes with Jacob</span
+					<RouterLink
+						class="site-brand"
+						to="/"
+						aria-label="Classes with Julio home"
+					>
+						<span class="site-brand__mark" aria-hidden="true"
+							>&lt;/&gt;</span
 						>
-					</router-link>
+						<span>
+							<span class="site-brand__title"
+								>Classes with Julio</span
+							>
+							<span class="site-brand__subtitle"
+								>A young coder's classroom</span
+							>
+						</span>
+					</RouterLink>
+
 					<button
 						aria-controls="siteNavbar"
 						aria-expanded="false"
@@ -113,6 +64,7 @@ function maybeWarmScheduler(link: NavLink) {
 					>
 						<span class="navbar-toggler-icon" />
 					</button>
+
 					<div
 						id="siteNavbar"
 						class="collapse navbar-collapse site-nav__panel"
@@ -120,86 +72,51 @@ function maybeWarmScheduler(link: NavLink) {
 						<div class="site-nav__content">
 							<ul class="site-nav__links">
 								<li v-for="link in primaryLinks" :key="link.to">
-									<router-link
+									<RouterLink
 										class="site-nav__link"
 										:class="{
-											'is-active': isLinkActive(link)
+											'is-active': isLinkActive(link.to)
 										}"
 										:to="link.to"
-										@focus="maybeWarmScheduler(link)"
-										@mouseenter="maybeWarmScheduler(link)"
-										@touchstart.passive="
-											maybeWarmScheduler(link)
-										"
 									>
 										{{ link.label }}
-									</router-link>
+									</RouterLink>
 								</li>
 							</ul>
 
-							<div class="site-nav__aside">
-								<div
-									v-if="utilityLinks.length"
-									class="site-nav__utility"
+							<div class="site-nav__actions">
+								<span
+									v-if="currentAdmin"
+									class="site-nav__badge"
 								>
-									<router-link
-										v-for="link in utilityLinks"
-										:key="link.to"
-										class="site-nav__utility-link"
-										:class="{
-											'is-active': isLinkActive(link)
-										}"
-										:to="link.to"
-									>
-										{{ link.label }}
-									</router-link>
-								</div>
-
-								<div class="site-nav__actions">
-									<span
-										v-if="accountBadge"
-										class="site-nav__badge"
-									>
-										{{ accountBadge }}
-									</span>
-
-									<router-link
-										v-for="link in workspaceLinks"
-										:key="link.to"
-										class="site-button site-button--secondary site-nav__action"
-										:class="{
-											'is-active': isLinkActive(link)
-										}"
-										:to="link.to"
-									>
-										{{ link.label }}
-									</router-link>
-
-									<button
-										v-if="isLoggedIn"
-										class="site-button site-button--secondary site-nav__action site-nav__action--danger"
-										type="button"
-										@click="logoutUser"
-									>
-										Log out
-									</button>
-									<button
-										v-else
-										class="site-button site-button--secondary site-nav__action"
-										type="button"
-										@click="emit('loginClick')"
-									>
-										Log in
-									</button>
-									<button
-										v-if="!isLoggedIn"
-										class="site-button site-button--primary site-nav__action"
-										type="button"
-										@click="emit('signupClick')"
-									>
-										Sign up
-									</button>
-								</div>
+									Teacher
+								</span>
+								<RouterLink
+									v-if="currentAdmin"
+									class="site-button site-button--secondary site-nav__action"
+									:class="{
+										'is-active': isLinkActive('/profile')
+									}"
+									to="/profile"
+								>
+									Account
+								</RouterLink>
+								<button
+									v-if="isLoggedIn"
+									class="site-button site-button--secondary site-nav__action site-nav__action--danger"
+									type="button"
+									@click="logout"
+								>
+									Log out
+								</button>
+								<button
+									v-else
+									class="site-nav__teacher-login"
+									type="button"
+									@click="emit('loginClick')"
+								>
+									Teacher log in
+								</button>
 							</div>
 						</div>
 					</div>
@@ -212,18 +129,13 @@ function maybeWarmScheduler(link: NavLink) {
 <style scoped>
 .site-header {
 	position: relative;
-	z-index: 1;
+	z-index: 10;
 	padding-top: 0.9rem;
 }
 
 .site-nav {
 	width: 100%;
 	padding: 0;
-}
-
-.site-nav__panel {
-	flex: 1 1 auto;
-	min-width: 0;
 }
 
 .site-nav__inner {
@@ -233,22 +145,52 @@ function maybeWarmScheduler(link: NavLink) {
 	align-items: center;
 	justify-content: space-between;
 	gap: 0.85rem 1.25rem;
-	padding: 0.9rem 1rem;
+	padding: 0.85rem 1rem;
 }
 
 .site-brand {
 	display: inline-flex;
 	align-items: center;
+	gap: 0.75rem;
 	flex: 0 0 auto;
+	color: var(--color-ink);
 	text-decoration: none;
+}
+
+.site-brand__mark {
+	display: grid;
+	place-items: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	border-radius: 14px;
+	background: linear-gradient(145deg, #0f766e, #2563eb);
+	box-shadow: 0 12px 24px -18px rgba(15, 118, 110, 0.72);
+	color: white;
+	font-family: var(--font-sans);
+	font-size: 0.86rem;
+	font-weight: 900;
+	letter-spacing: -0.08em;
+}
+
+.site-brand__title,
+.site-brand__subtitle {
+	display: block;
 }
 
 .site-brand__title {
 	font-family: var(--font-display);
-	font-size: clamp(1.35rem, 2vw, 1.55rem);
-	font-weight: 600;
-	letter-spacing: -0.02em;
-	color: var(--color-ink);
+	font-size: clamp(1.2rem, 2vw, 1.45rem);
+	font-weight: 700;
+	line-height: 1.1;
+	letter-spacing: -0.025em;
+}
+
+.site-brand__subtitle {
+	margin-top: 0.18rem;
+	color: var(--color-ink-muted);
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.04em;
 }
 
 .site-toggler {
@@ -257,52 +199,40 @@ function maybeWarmScheduler(link: NavLink) {
 	background: rgba(255, 255, 255, 0.74);
 }
 
+.site-nav__panel {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
 .site-nav__content {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: flex-end;
 	gap: clamp(1rem, 2vw, 2.25rem);
 	width: 100%;
 	min-width: 0;
 }
 
-.site-nav__links,
-.site-nav__utility {
+.site-nav__links {
 	display: flex;
+	flex: 1 1 auto;
 	flex-wrap: wrap;
 	align-items: center;
-	gap: 0.55rem;
+	justify-content: center;
+	gap: 0.45rem;
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
-.site-nav__links {
-	flex: 1 1 auto;
-	justify-content: center;
-	min-width: 0;
-}
-
-.site-nav__aside {
-	display: flex;
-	flex: 0 0 auto;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: flex-end;
-	gap: 0.85rem;
-	margin-left: auto;
-	min-width: 0;
-}
-
-.site-nav__link,
-.site-nav__utility-link {
+.site-nav__link {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0.55rem 0.75rem;
+	padding: 0.55rem 0.72rem;
 	border-radius: var(--radius-sm);
 	color: var(--color-ink-soft);
-	font-weight: 600;
+	font-weight: 700;
 	text-decoration: none;
 	transition:
 		background-color 0.18s ease,
@@ -311,94 +241,86 @@ function maybeWarmScheduler(link: NavLink) {
 }
 
 .site-nav__link:hover,
-.site-nav__utility-link:hover,
-.site-nav__link.is-active,
-.site-nav__utility-link.is-active {
+.site-nav__link.is-active {
 	color: var(--color-ink);
-	background: rgba(255, 255, 255, 0.64);
+	background: rgba(255, 255, 255, 0.7);
 	box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.08);
-}
-
-.site-nav__utility-link {
-	padding-inline: 0.45rem;
-	font-size: 0.95rem;
 }
 
 .site-nav__actions {
 	display: flex;
+	flex: 0 0 auto;
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: flex-end;
-	gap: 0.65rem;
-	flex-shrink: 0;
+	gap: 0.55rem;
 }
 
 .site-nav__badge {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0.45rem 0.7rem;
+	padding: 0.42rem 0.68rem;
 	border-radius: var(--radius-pill);
-	background: rgba(31, 92, 145, 0.08);
-	color: var(--color-accent);
-	font-size: 0.78rem;
-	font-weight: 800;
-	text-transform: uppercase;
+	background: rgba(15, 118, 110, 0.1);
+	color: #0f766e;
+	font-size: 0.75rem;
+	font-weight: 900;
 	letter-spacing: 0.08em;
+	text-transform: uppercase;
 }
 
 .site-nav__action {
-	min-height: 2.9rem;
-	padding-inline: 1rem;
-}
-
-.site-nav__action.is-active {
-	background: rgba(255, 255, 255, 0.92);
-	border-color: rgba(31, 92, 145, 0.24);
+	min-height: 2.75rem;
+	padding-inline: 0.9rem;
 }
 
 .site-nav__action--danger {
-	color: #8c1d26;
-	background: rgba(255, 245, 245, 0.96);
-	border-color: rgba(244, 114, 114, 0.35);
-	box-shadow: none;
+	color: #9f1239;
 }
 
-@media (max-width: 1199px) {
-	.site-nav__content {
-		flex-direction: column;
-		align-items: stretch;
-		margin-top: 0.9rem;
+.site-nav__teacher-login {
+	padding: 0.5rem 0.35rem;
+	color: var(--color-ink-muted);
+	font-size: 0.82rem;
+	font-weight: 700;
+	text-decoration: underline;
+	text-decoration-color: transparent;
+	text-underline-offset: 0.22rem;
+}
+
+.site-nav__teacher-login:hover {
+	color: var(--color-accent);
+	text-decoration-color: currentColor;
+}
+
+@media (max-width: 991px) {
+	.site-nav__panel {
+		flex-basis: 100%;
 	}
 
-	.site-nav__aside {
-		flex: 0 0 auto;
-		justify-content: flex-start;
-	}
-
+	.site-nav__content,
+	.site-nav__links,
 	.site-nav__actions {
-		justify-content: flex-start;
-	}
-}
-
-@media (max-width: 700px) {
-	.site-nav__links {
+		align-items: stretch;
+		flex-direction: column;
 		width: 100%;
 	}
 
-	.site-nav__links > li {
-		width: 100%;
+	.site-nav__content {
+		padding-top: 0.9rem;
 	}
 
 	.site-nav__link,
-	.site-nav__utility-link,
-	.site-nav__action {
+	.site-nav__action,
+	.site-nav__teacher-login {
 		width: 100%;
 	}
+}
 
-	.site-nav__utility,
-	.site-nav__actions {
-		width: 100%;
+@media (max-width: 520px) {
+	.site-brand__subtitle {
+		display: none;
 	}
 }
 </style>

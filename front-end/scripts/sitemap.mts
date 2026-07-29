@@ -1,15 +1,9 @@
-export const SITE_URL = "https://classes.jacobdanderson.net";
+export const SITE_URL = "https://cs.avasan.org";
 
 export const SITEMAP_EXCLUDED_ROUTES = [
-	"/README",
-	"/admin",
-	"/admin/mdmail",
-	"/admin/people",
-	"/admin/student-management",
 	"/course-resource",
 	"/profile",
-	"/python-ide",
-	"/wheel"
+	"/python-ide"
 ];
 
 type SitemapOptions = {

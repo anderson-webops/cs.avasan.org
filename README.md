@@ -1,98 +1,96 @@
-# instruction-material/classes.jacobdanderson.net
+# cs.avasan.org
 
-Forkable course catalog, Python IDE, and supporting API for private instruction workflows.
+`cs.avasan.org` is Julio's grade-school computer science course site. It is a
+deliberately simplified downstream adaptation of
+[`instruction-material/classes.jacobdanderson.net`](https://github.com/instruction-material/classes.jacobdanderson.net).
 
-## Repo Layout
+## Product Scope
 
-- `front-end/` - Vite SSG application
-- `back-end/` - Express + MongoDB API
-- `HEALTHCHECKS.md` - monitor endpoints and expected `200`/`503` behavior
+- Julio is a grade-school teacher and the site's sole teacher/administrator.
+- Students browse course material anonymously. They do not need, and cannot
+  create, site accounts.
+- Julio's account is provisioned through the repository's code-based setup
+  process. Public account creation must remain disabled.
+- The course catalog contains only Scratch Levels 1 and 2, Python Levels 1 and
+  2, and PyGames.
+- The site does not provide tutoring-business, freelance, tuition, booking,
+  scheduler, or Zoom workflows.
 
-## Curriculum Paths
+## Repository Layout
 
-The diagram below reads from top to bottom. The top row shows possible entry
-points into the catalog, and dashed arrows show optional bridge or transition
-paths. Plain labels are current courses. Nodes marked `(planned)` are roadmap
-items from the course-planning docs rather than live standalone catalog
-entries.
+- `front-end/` contains the Vue 3 and Vite SSG course site and browser-based
+  Python IDE.
+- `back-end/` contains the small Express and MongoDB service used for Julio's
+  private account.
+- `HEALTHCHECKS.md` documents service health and readiness endpoints.
 
-```mermaid
-flowchart TB
-    classDef planned fill:#fff7d6,stroke:#b58900,color:#5b4500,stroke-width:1px;
+## Access Model
 
-    subgraph Entry["Possible Entry Points"]
-        direction LR
-        Scratch1["Scratch Level 1"]
-        Python1["Python Level 1"]
-        Java1["Java Level 1"]
-        Cpp1["C++ Level 1"]
-        JS1["JavaScript Level 1"]
-        LinuxSystems["Linux Systems"]
-        Physics1["Intro to Physics"]
-        Chemistry["Intro to Chemistry"]
-        SwiftIntro["Intro to Swift App Development"]
-        AI1["AI Level 1"]
-        APCSA["AP Computer Science A"]
-    end
+Course pages and the Python IDE are public. Anonymous IDE projects stay in the
+student's browser. Teacher-only capabilities are unlocked by Julio's
+code-provisioned account; there is no learner or self-service registration
+flow.
 
-    Scratch1 --> Scratch2["Scratch Level 2"]
-    Scratch2 --> Python1
-    Python1 --> Python2["Python Level 2"]
-    Python1 --> PyGames["PyGames"]
-    Python2 --> Python3["Python Level 3"]
-    Python3 --> DataScience["Data Science in Python"]
-    DataScience --> MachineLearning["Machine Learning"]
-    Python3 --> DesignPy["Pythonic Design Patterns"]
-    AI1 --> MachineLearning
+Do not add a second teacher account or re-enable public registration without an
+explicit product decision.
 
-    PythonBridge["Python to Java and C++ Bridge (planned addendum)"]
-    Python2 -.-> PythonBridge
-    Python3 -.-> PythonBridge
-    PythonBridge -.-> Java1
-    PythonBridge -.-> Cpp1
+### Provision Julio
 
-    Java1 --> Java2["Java Level 2"]
-    Java2 --> Java3["Java Level 3"]
-    Java3 --> DesignJava1["Design Patterns in Java"]
-    DesignJava1 --> DesignJava2["Design Patterns in Java Part 2: Refactoring"]
+Use a new, empty `cs-avasan-org` MongoDB database. After setting
+`MONGODB_URI` in an ignored backend environment file, run:
 
-    Cpp1 --> CSystems["C Systems Engineering"]
-    Cpp1 --> DsaCpp["Data Structures and Algorithms in C++"]
-    Cpp1 --> LowLevelSecurity["Low Level Security"]
-    CSystems --> DesignCpp["Design Patterns in C++"]
-    CSystems --> Assembly["Assembly"]
-    CSystems --> LowLevelSecurity
-    LowLevelSecurity --> LowLevelSecurity2["Low Level Security Part 2"]
-    Assembly --> LowLevelSecurity2
-    DsaCpp --> USACOBronze["USACO Bronze"]
-    USACOBronze --> USACOSilver["USACO Silver"]
-    USACOSilver --> USACOGold["USACO Gold"]
-
-    JS1 --> JS2["JavaScript Level 2"]
-    JS2 --> WebDevelopment["Web Development Foundations"]
-    WebDevelopment --> NetworkSecurity["Network Security"]
-    LinuxSystems --> NetworkSystems["Network Systems"]
-    NetworkSystems --> NetworkSecurity
-
-    Physics1 --> Physics2["Physics Level 2"]
-
-    class PythonBridge planned;
+```bash
+npm run -w back-end create-admin-ts
 ```
+
+The setup prompts for Julio's email and password, fixes the display name to
+`Julio`, requires a password of at least 14 characters, and refuses to create a
+second teacher account. Never reuse the upstream site's database.
+
+## Downstream Policy
+
+This repository keeps two remotes with distinct purposes:
+
+- `origin` is `git@github.com:anderson-webops/cs.avasan.org.git` and is the
+  downstream deployment repository.
+- `upstream` is
+  `git@github.com:instruction-material/classes.jacobdanderson.net.git` and is
+  read as the source project.
+
+Keep the Julio-specific product changes as a deliberate downstream overlay.
+When adopting upstream work:
+
+1. Fetch and inspect the desired upstream commits.
+2. Replay or adapt only the changes that fit this site's narrow course and
+   access model.
+3. Validate the public catalog, anonymous IDE, and Julio-only account boundary.
+4. Push downstream work only to `origin`.
+
+Do not blindly reset or merge the downstream branch to upstream, and do not
+push downstream changes to the upstream repository.
 
 ## Common Commands
 
 ```bash
-npm install
 npm run dev
 npm run server
-npm run serve
+npm run typecheck
+npm run lint
 npm run build
-npm run up
 ```
 
-## Operational Notes
+The normal build downloads the inherited Python/PyGames asset archive. For an
+offline application-only validation, use
+`PYTHON_IDE_ASSETS_DOWNLOAD=skip npm run build`; that verifies both workspaces
+but intentionally omits the optional IDE asset pack.
 
-- The root `package-lock.json` is the authoritative lockfile for the repo. Keep it updated whenever dependencies change.
-- Use `npm run server` and `npm run serve` when you want the API and front-end started separately.
-- Use [`HEALTHCHECKS.md`](./HEALTHCHECKS.md) for deployment monitor targets instead of `/`.
-- The booking page embeds a scheduler app from `VITE_SCHEDULER_ORIGIN`, defaulting to `https://scheduler.example.com`. For local end-to-end testing against a sibling scheduler checkout, run that app on port `5173` and set `VITE_SCHEDULER_ORIGIN=http://localhost:5173` in `front-end/.env`.
+The root `package-lock.json` is the authoritative lockfile. Use environment
+variables for session and database secrets, and never commit credentials.
+Leave `TRUST_PROXY_HOPS` unset unless the API is exclusively behind a known
+proxy chain that replaces incoming forwarding headers. Database diagnostics
+always require `INTERNAL_DIAGNOSTICS_KEY`, including during local development.
+
+The static front-end is deployable independently, but teacher login additionally
+requires the Express API and an `/api/*` route to that service. The course build
+continues to use the inherited Python asset archive until an equivalent archive
+is published and verified at `static.cs.avasan.org`.

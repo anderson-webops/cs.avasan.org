@@ -21,17 +21,25 @@ describe("app store bootstrapSession()", () => {
 		vi.clearAllMocks();
 	});
 
-	it("hydrates admin", async () => {
+	it("hydrates Julio's teacher account through the admin session", async () => {
 		(apiMod.api.get as any)
-			.mockResolvedValueOnce({ data: { adminID: "a1" } }) // /accounts/me
+			.mockResolvedValueOnce({ data: { adminID: "julio" } })
 			.mockResolvedValueOnce({
-				data: { currentAdmin: { _id: "a1", name: "A" } }
-			}); // /admins/loggedin
+				data: {
+					currentAdmin: {
+						_id: "julio",
+						name: "Julio",
+						email: "julio@example.com"
+					}
+				}
+			});
 
 		const app = useAppStore();
 		await app.bootstrapSession();
 
-		expect(app.currentAdmin?._id).toBe("a1");
+		expect(apiMod.api.get).toHaveBeenNthCalledWith(1, "/accounts/me");
+		expect(apiMod.api.get).toHaveBeenNthCalledWith(2, "/admins/loggedin");
+		expect(app.currentAdmin?._id).toBe("julio");
 		expect(app.currentUser).toBeNull();
 		expect(app.currentTutor).toBeNull();
 	});

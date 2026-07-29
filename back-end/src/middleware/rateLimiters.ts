@@ -12,6 +12,23 @@ const standardRateLimitHeaders = {
 	legacyHeaders: false
 } as const;
 
+function positiveIntegerFromEnv(name: string, fallback: number): number {
+	const value = Number(env[name]);
+	return Number.isSafeInteger(value) && value > 0 ? value : fallback;
+}
+
+export function createLoginLimiter(
+	options: TunableRateLimitOptions = {}
+): RateLimitRequestHandler {
+	return rateLimit({
+		windowMs: positiveIntegerFromEnv("LOGIN_RATE_WINDOW_MS", 15 * 60 * 1000),
+		limit: positiveIntegerFromEnv("LOGIN_RATE_MAX", 10),
+		...standardRateLimitHeaders,
+		message: { message: "Too many login attempts. Please try again later." },
+		...options
+	});
+}
+
 export function createUserCourseAccessLimiter(
 	options: TunableRateLimitOptions = {}
 ): RateLimitRequestHandler {
