@@ -7,10 +7,13 @@ deliberately simplified downstream adaptation of
 ## Product Scope
 
 - Julio is a grade-school teacher and the site's sole teacher/administrator.
-- Students browse course material anonymously. They do not need, and cannot
-  create, site accounts.
+- Students browse course material and use the browser IDE anonymously.
+  Optional student accounts exist only to sync saved Python projects.
+- Students cannot register or recover accounts themselves. Julio creates each
+  username and issues a unique, expiring password-setup code; student email is
+  never collected.
 - Julio's account is provisioned through the repository's code-based setup
-  process. Public account creation must remain disabled.
+  process. HTTP Admin creation must remain disabled.
 - The course catalog contains only Scratch Levels 1 and 2, Python Levels 1 and
   2, and PyGames.
 - The site does not provide tutoring-business, freelance, tuition, booking,
@@ -21,18 +24,34 @@ deliberately simplified downstream adaptation of
 - `front-end/` contains the Vue 3 and Vite SSG course site and browser-based
   Python IDE.
 - `back-end/` contains the small Express and MongoDB service used for Julio's
-  private account.
+  private account and optional student project sync.
 - `HEALTHCHECKS.md` documents service health and readiness endpoints.
 
 ## Access Model
 
 The five-course catalog is public at `/`, and the browser IDE is public at
-`/python-ide`. Anonymous IDE projects stay in the student's browser.
-Teacher-only account controls are available to Julio at `/admin`; there is no
-learner or self-service registration flow.
+`/python-ide`. Anonymous IDE projects stay in the browser unless a signed-in
+student explicitly imports them. Students sign in with a username and either a
+password or Julio-issued access code. A code is unique, expires, works only for
+initial password setup, and must immediately be replaced with a student-chosen
+password. The first successful exchange irreversibly consumes the code. The
+browser can continue an interrupted setup only when its setup session was
+saved and it presents the exact strong request ID from its password submission;
+otherwise Julio must issue a new code.
 
-Do not add a second teacher account or re-enable public registration without an
-explicit product decision.
+Teacher-only account controls are available to Julio at `/admin`. Julio can
+create, disable, reactivate, and recover student accounts and can inspect
+student projects through a separate editable review copy. Recovery issues a
+new per-student code and invalidates the old password and sessions. There is no
+shared class code, universal recovery code, student email, or self-service
+registration.
+
+Julio's name and email are fixed by code provisioning. The runtime exposes no
+profile or email mutation, and his browser cookie is nonpersistent with an
+eight-hour absolute session cap.
+
+Do not add a second teacher account or public registration without an explicit
+product decision.
 
 ### Provision Julio
 
@@ -63,7 +82,8 @@ When adopting upstream work:
 1. Fetch and inspect the desired upstream commits.
 2. Replay or adapt only the changes that fit this site's narrow course and
    access model.
-3. Validate the public catalog, anonymous IDE, and Julio-only account boundary.
+3. Validate the public catalog, anonymous IDE, optional student sync, and
+   Julio-only Admin boundary.
 4. Push downstream work only to `origin`.
 
 Do not blindly reset or merge the downstream branch to upstream, and do not
@@ -87,16 +107,32 @@ but intentionally omits the optional IDE asset pack.
 
 The root `package-lock.json` is the authoritative lockfile. Use environment
 variables for session and database secrets, and never commit credentials.
+Production refuses to start unless `SESSION_SECRET` is configured with at least
+32 UTF-8 bytes. Generate a random secret with `openssl rand -base64 32`; do not
+reuse it for any other service or commit it.
 Leave `TRUST_PROXY_HOPS` unset unless the API is exclusively behind a known
 proxy chain that replaces incoming forwarding headers. Database diagnostics
 always require `INTERNAL_DIAGNOSTICS_KEY`, including during local development.
+Set `CLASSROOM_ORIGIN=http://127.0.0.1:3333` for the local Vite classroom and
+`CLASSROOM_ORIGIN=https://cs.avasan.org` in production. `CROSS_SITE` must remain
+false: browser sessions are served through the same-origin `/api` route.
 
-The static front-end is deployable independently, but teacher login at
-`/admin` additionally requires the Express API and an `/api/*` route to that
-service. Source links from the upstream catalog are canonicalized to the
-reviewed downstream asset host at build/runtime normalization boundaries.
+The static front-end is deployable independently, but teacher and student
+sessions and cloud project sync require the Express API and an `/api/*` route
+to that service. The frontend build packages the reviewed Python IDE asset
+manifest; the backend does not stream an upstream asset archive at runtime.
 
-Production builds send page views to the dedicated
-`analytics.avasan.org` instance and the owner-visible central
-`analytics.jacobdanderson.net` instance. Set
-`VITE_DISABLE_ANALYTICS=true` to omit both trackers.
+Project quota counters are rebuilt from non-deleted projects before the API
+starts listening. Project and counter writes remain separate MongoDB
+operations, so an abrupt process or database failure can temporarily leave the
+ledger over-counted; the next successful startup reconciliation repairs that
+drift before accepting traffic.
+
+Authenticated project writes use a dedicated 80 MB JSON ceiling before the
+global 1 MB parser. This covers worst-case JSON escaping at the editor's
+12,000,000-character project limit; authentication and write throttling run
+before that larger body is accepted. Bodies above 4 MiB and requests without a
+trustworthy `Content-Length` use a separate low-frequency tier with one active
+request process-wide. Normal bodies retain a wider classroom tier but are also
+bounded to two concurrent requests per account and eight process-wide.
+Compressed project requests are rejected to prevent request-inflation attacks.

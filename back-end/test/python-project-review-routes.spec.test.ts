@@ -2,11 +2,11 @@ import type { Server } from "node:http";
 import express from "express";
 import { Types } from "mongoose";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { ADMIN_SINGLETON_ID } from "../src/security/adminIdentity.js";
 
 const modelMocks = vi.hoisted(() => ({
 	adminFindById: vi.fn(),
-	tutorFindById: vi.fn(),
-	userFindById: vi.fn(),
+	studentFindById: vi.fn(),
 	pythonProjectFind: vi.fn(),
 	pythonProjectFindOne: vi.fn(),
 	pythonProjectReviewFind: vi.fn(),
@@ -15,15 +15,15 @@ const modelMocks = vi.hoisted(() => ({
 }));
 
 vi.mock("../src/models/schemas/Admin.js", () => ({
-	Admin: { findById: modelMocks.adminFindById }
+	Admin: {
+		findById: modelMocks.adminFindById
+	}
 }));
 
-vi.mock("../src/models/schemas/Tutor.js", () => ({
-	Tutor: { findById: modelMocks.tutorFindById }
-}));
-
-vi.mock("../src/models/schemas/User.js", () => ({
-	User: { findById: modelMocks.userFindById }
+vi.mock("../src/models/schemas/Student.js", () => ({
+	Student: {
+		findById: modelMocks.studentFindById
+	}
 }));
 
 vi.mock("../src/models/schemas/PythonProject.js", () => ({
@@ -41,11 +41,11 @@ vi.mock("../src/models/schemas/PythonProjectReview.js", () => ({
 	}
 }));
 
-const { userRoutes } = await import("../src/routes/userRoutes.js");
+const { mountRuntimeAccountRoutes } = await import(
+	"../src/routes/runtimeAccountRoutes.js"
+);
 
-const adminID = new Types.ObjectId();
-const tutorID = new Types.ObjectId();
-const otherTutorID = new Types.ObjectId();
+const adminID = new Types.ObjectId(ADMIN_SINGLETON_ID);
 const studentID = new Types.ObjectId();
 const projectID = new Types.ObjectId();
 const reviewID = new Types.ObjectId();
@@ -53,23 +53,31 @@ const now = new Date("2026-06-20T12:00:00.000Z");
 
 function queryWith<T>(result: T) {
 	const query = {
-		populate: vi.fn().mockResolvedValue(result),
+		select: vi.fn(() => query),
 		sort: vi.fn(() => query),
 		limit: vi.fn(() => query),
-		lean: vi.fn().mockResolvedValue(result),
-		then: (resolve: (value: T) => unknown, reject: (reason: unknown) => unknown) =>
-			Promise.resolve(result).then(resolve, reject),
-		catch: (reject: (reason: unknown) => unknown) => Promise.resolve(result).catch(reject)
+		exec: vi.fn().mockResolvedValue(result),
+		then: (
+			resolve: (value: T) => unknown,
+			reject: (reason: unknown) => unknown
+		) => Promise.resolve(result).then(resolve, reject),
+		catch: (reject: (reason: unknown) => unknown) =>
+			Promise.resolve(result).catch(reject)
 	};
 	return query;
 }
 
-function makeStudent(tutors: Types.ObjectId[] = [tutorID]) {
+function makeStudent() {
 	return {
 		_id: studentID,
-		name: "Student One",
-		email: "student@example.com",
-		tutors
+		username: "student-one",
+		active: true,
+		sessionVersion: 3,
+		failedLoginAttempts: 0,
+		activeProjectCount: 1,
+		activeProjectBytes: 25,
+		createdAt: now,
+		updatedAt: now
 	};
 }
 
@@ -87,6 +95,7 @@ function makeProject(overrides: Record<string, unknown> = {}) {
 			}
 		],
 		activeFileName: "main.py",
+		byteCount: 25,
 		courseID: "python-level-2",
 		courseProjectKey: "python-level-2:loops:starter",
 		courseProjectTitle: "Loops practice",
@@ -97,7 +106,7 @@ function makeProject(overrides: Record<string, unknown> = {}) {
 }
 
 function makeReview(overrides: Record<string, unknown> = {}) {
-	const review = {
+	return {
 		_id: reviewID,
 		user: studentID,
 		sourceProject: projectID,
@@ -116,10 +125,10 @@ function makeReview(overrides: Record<string, unknown> = {}) {
 		courseProjectTitle: "Loops practice",
 		reviewer: adminID,
 		reviewerRole: "admin",
-		reviewerName: "Admin",
+		reviewerName: "Julio",
 		lastEditedBy: adminID,
 		lastEditedByRole: "admin",
-		lastEditedByName: "Admin",
+		lastEditedByName: "Julio",
 		visibleToStudent: false,
 		note: "",
 		sourceUpdatedAt: now,
@@ -128,21 +137,34 @@ function makeReview(overrides: Record<string, unknown> = {}) {
 		save: vi.fn().mockResolvedValue(undefined),
 		...overrides
 	};
-	return review;
 }
 
-async function withUserRoutes<T>(run: (baseUrl: string) => Promise<T>): Promise<T> {
+async function withRuntime<T>(run: (baseUrl: string) => Promise<T>): Promise<T> {
 	const app = express();
 	app.use(express.json({ limit: "15mb" }));
 	app.use((req: any, _res, next) => {
+		const requestStudentID =
+			req.get("x-session-student-id") || req.get("x-student-id") || undefined;
 		req.session = {
 			adminID: req.get("x-admin-id") || undefined,
-			tutorID: req.get("x-tutor-id") || undefined,
-			userID: req.get("x-user-id") || undefined
+			adminExpiresAt: req.get("x-admin-id")
+				? Date.now() + 8 * 60 * 60 * 1000
+				: undefined,
+			adminLastActivityAt: req.get("x-admin-id")
+				? Date.now()
+				: undefined,
+			adminSessionVersion: req.get("x-admin-id") ? 0 : undefined,
+			studentID: requestStudentID,
+			studentExpiresAt: requestStudentID
+				? Date.now() + 8 * 60 * 60 * 1000
+				: undefined,
+			studentSessionVersion: requestStudentID ? 3 : undefined,
+			studentAuthLevel: requestStudentID ? "full" : undefined,
+			studentLastActivityAt: requestStudentID ? Date.now() : undefined
 		};
 		next();
 	});
-	app.use("/users", userRoutes);
+	mountRuntimeAccountRoutes(app);
 
 	const server = await new Promise<Server>(resolve => {
 		const instance = app.listen(0, "127.0.0.1", () => resolve(instance));
@@ -154,7 +176,8 @@ async function withUserRoutes<T>(run: (baseUrl: string) => Promise<T>): Promise<
 
 	try {
 		return await run(`http://127.0.0.1:${address.port}`);
-	} finally {
+	}
+	finally {
 		await new Promise<void>((resolve, reject) => {
 			server.close(error => {
 				if (error) {
@@ -167,89 +190,120 @@ async function withUserRoutes<T>(run: (baseUrl: string) => Promise<T>): Promise<
 	}
 }
 
-async function postJson(baseUrl: string, path: string, body: unknown, headers: Record<string, string> = {}) {
-	return fetch(`${baseUrl}${path}`, {
-		method: "POST",
-		headers: {
-			"content-type": "application/json",
-			...headers
-		},
-		body: JSON.stringify(body)
-	});
+function mutationHeaders(extra: Record<string, string> = {}) {
+	return {
+		"content-type": "application/json",
+		"x-classroom-request": "1",
+		...extra
+	};
 }
 
-async function putJson(baseUrl: string, path: string, body: unknown, headers: Record<string, string> = {}) {
-	return fetch(`${baseUrl}${path}`, {
-		method: "PUT",
-		headers: {
-			"content-type": "application/json",
-			...headers
-		},
-		body: JSON.stringify(body)
-	});
-}
-
-describe("Python project review routes", () => {
+describe("student and Julio project routes", () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
 
 		modelMocks.adminFindById.mockImplementation((id: string) =>
-			id === adminID.toString()
-				? Promise.resolve({ _id: adminID, name: "Admin", email: "admin@example.com" })
-				: Promise.resolve(null)
+			id === ADMIN_SINGLETON_ID
+				? queryWith({
+						_id: adminID,
+						name: "Julio",
+						email: "julio@example.org",
+						sessionVersion: 0
+					})
+				: queryWith(null)
 		);
-		modelMocks.tutorFindById.mockImplementation((id: string) =>
-			id === tutorID.toString()
-				? Promise.resolve({ _id: tutorID, name: "Tutor", email: "tutor@example.com", coursePermissions: [] })
-				: Promise.resolve(null)
-		);
-		modelMocks.userFindById.mockImplementation(() => queryWith(makeStudent()));
+		modelMocks.studentFindById.mockReturnValue(queryWith(makeStudent()));
 		modelMocks.pythonProjectFind.mockReturnValue(queryWith([makeProject()]));
 		modelMocks.pythonProjectFindOne.mockResolvedValue(makeProject());
 		modelMocks.pythonProjectReviewFind.mockReturnValue(queryWith([makeReview()]));
 		modelMocks.pythonProjectReviewFindOne.mockResolvedValue(makeReview());
-		modelMocks.pythonProjectReviewCreate.mockImplementation(async payload => makeReview(payload));
+		modelMocks.pythonProjectReviewCreate.mockImplementation(
+			async payload => makeReview(payload)
+		);
 	});
 
-	it("lets signed-in students list their own Python IDE projects", async () => {
-		await withUserRoutes(async baseUrl => {
-			const response = await fetch(`${baseUrl}/users/loggedin/python-projects`, {
-				headers: { "x-user-id": studentID.toString() }
+	it("lets a full student session list only active owned projects", async () => {
+		await withRuntime(async baseUrl => {
+			const response = await fetch(`${baseUrl}/students/projects`, {
+				headers: { "x-student-id": studentID.toString() }
 			});
 			const body = await response.json();
 
 			expect(response.status).toBe(200);
-			expect(modelMocks.pythonProjectFind).toHaveBeenCalledWith({ user: studentID });
+			expect(modelMocks.pythonProjectFind).toHaveBeenCalledWith({
+				deletedAt: { $exists: false },
+				user: studentID
+			});
 			expect(body.projects).toHaveLength(1);
 			expect(body.projects[0].files[0].content).toBe("print('student')\n");
 		});
 	});
 
-	it("lets admins list saved projects with their staff review copies", async () => {
-		await withUserRoutes(async baseUrl => {
-			const response = await fetch(`${baseUrl}/users/${studentID}/python-projects`, {
-				headers: { "x-admin-id": adminID.toString() }
+	it("rejects a missing or mismatched explicit student context", async () => {
+		await withRuntime(async baseUrl => {
+			const missing = await fetch(`${baseUrl}/students/projects`, {
+				headers: { "x-session-student-id": studentID.toString() }
 			});
-			const body = await response.json();
+			const mismatch = await fetch(`${baseUrl}/students/projects`, {
+				headers: {
+					"x-session-student-id": studentID.toString(),
+					"x-student-id": new Types.ObjectId().toString()
+				}
+			});
 
-			expect(response.status).toBe(200);
-			expect(modelMocks.pythonProjectFind).toHaveBeenCalledWith({ user: studentID });
-			expect(modelMocks.pythonProjectReviewFind).toHaveBeenCalledWith({ user: studentID });
-			expect(body.projects).toHaveLength(1);
-			expect(body.projects[0].project.files[0].content).toBe("print('student')\n");
-			expect(body.projects[0].review.files[0].content).toContain("Try a for loop");
+			expect(missing.status).toBe(409);
+			expect(mismatch.status).toBe(409);
+			expect(modelMocks.pythonProjectFind).not.toHaveBeenCalled();
 		});
 	});
 
-	it("lets assigned tutors create a staff review copy from a student project", async () => {
+	it("lets Julio list active student projects with review copies", async () => {
+		await withRuntime(async baseUrl => {
+			const response = await fetch(
+				`${baseUrl}/admins/students/${studentID}/projects`,
+				{ headers: { "x-admin-id": ADMIN_SINGLETON_ID } }
+			);
+			const body = await response.json();
+
+			expect(response.status).toBe(200);
+			expect(modelMocks.pythonProjectFind).toHaveBeenCalledWith({
+				deletedAt: { $exists: false },
+				user: studentID
+			});
+			expect(modelMocks.pythonProjectReviewFind).toHaveBeenCalledWith({
+				deletedAt: { $exists: false },
+				sourceProject: { $in: [projectID] },
+				user: studentID
+			});
+			expect(body.projects[0].project.files[0].content).toBe(
+				"print('student')\n"
+			);
+		});
+	});
+
+	it("lets only Julio create a non-destructive review copy", async () => {
 		modelMocks.pythonProjectReviewFindOne.mockResolvedValue(null);
 
-		await withUserRoutes(async baseUrl => {
-			const response = await postJson(
-				baseUrl,
-				`/users/${studentID}/python-projects/${projectID}/review`,
-				{},
-				{ "x-tutor-id": tutorID.toString() }
+		await withRuntime(async baseUrl => {
+			const anonymous = await fetch(
+				`${baseUrl}/admins/students/${studentID}/projects/${projectID}/review`,
+				{
+					method: "POST",
+					headers: mutationHeaders(),
+					body: "{}"
+				}
+			);
+			expect(anonymous.status).toBe(403);
+
+			const response = await fetch(
+				`${baseUrl}/admins/students/${studentID}/projects/${projectID}/review`,
+				{
+					method: "POST",
+					headers: mutationHeaders({
+						"x-admin-id": ADMIN_SINGLETON_ID
+					}),
+					body: "{}"
+				}
 			);
 			const body = await response.json();
 
@@ -258,90 +312,72 @@ describe("Python project review routes", () => {
 				expect.objectContaining({
 					user: studentID,
 					sourceProject: projectID,
-					files: makeProject().files,
-					visibleToStudent: false,
-					reviewer: tutorID,
-					reviewerRole: "tutor",
-					lastEditedBy: tutorID,
-					lastEditedByRole: "tutor"
+					reviewer: adminID,
+					reviewerRole: "admin",
+					visibleToStudent: false
 				})
 			);
-			expect(body.review.sourceProject).toBe(projectID.toString());
-			expect(body.review.visibleToStudent).toBe(false);
+			expect(body.project.files[0].content).toBe("print('student')\n");
 		});
 	});
 
-	it("blocks tutors from reviewing code for students not assigned to them", async () => {
-		modelMocks.userFindById.mockImplementation(() => queryWith(makeStudent([otherTutorID])));
-
-		await withUserRoutes(async baseUrl => {
-			const response = await postJson(
-				baseUrl,
-				`/users/${studentID}/python-projects/${projectID}/review`,
-				{},
-				{ "x-tutor-id": tutorID.toString() }
-			);
-
-			expect(response.status).toBe(403);
-			expect(modelMocks.pythonProjectReviewCreate).not.toHaveBeenCalled();
-		});
-	});
-
-	it("updates only the staff review copy and visibility flag", async () => {
+	it("updates only Julio's review copy and its student visibility", async () => {
 		const review = makeReview();
 		modelMocks.pythonProjectReviewFindOne.mockResolvedValue(review);
 
-		await withUserRoutes(async baseUrl => {
-			const response = await putJson(
-				baseUrl,
-				`/users/${studentID}/python-projects/${projectID}/review/${reviewID}`,
+		await withRuntime(async baseUrl => {
+			const response = await fetch(
+				`${baseUrl}/admins/students/${studentID}/projects/${projectID}/review/${reviewID}`,
 				{
-					files: [
-						{
-							name: "main.py",
-							content: "# Nice decomposition.\nprint('reviewed')\n"
-						}
-					],
-					activeFileName: "main.py",
-					visibleToStudent: true,
-					note: "Review this before the next lesson."
-				},
-				{ "x-tutor-id": tutorID.toString() }
+					method: "PUT",
+					headers: mutationHeaders({
+						"x-admin-id": ADMIN_SINGLETON_ID
+					}),
+					body: JSON.stringify({
+						files: [
+							{
+								name: "main.py",
+								content: "# Nice decomposition.\nprint('reviewed')\n"
+							}
+						],
+						activeFileName: "main.py",
+						visibleToStudent: true,
+						note: "Review this before class."
+					})
+				}
 			);
 			const body = await response.json();
 
 			expect(response.status).toBe(200);
-			expect(review.save).toHaveBeenCalled();
+			expect(review.save).toHaveBeenCalledOnce();
 			expect(body.project.files[0].content).toBe("print('student')\n");
 			expect(body.review.files[0].content).toContain("Nice decomposition");
 			expect(body.review.visibleToStudent).toBe(true);
-			expect(body.review.note).toBe("Review this before the next lesson.");
-			expect(body.review.lastEditedByRole).toBe("tutor");
 		});
 	});
 
-	it("lists only visible review copies for the logged-in student", async () => {
+	it("lists visible reviews only for non-deleted student projects", async () => {
 		modelMocks.pythonProjectReviewFind.mockReturnValue(queryWith([
 			makeReview({
 				visibleToStudent: true,
-				note: "Tutor comments are in the code."
+				note: "Julio's comments are in the code."
 			})
 		]));
 
-		await withUserRoutes(async baseUrl => {
-			const response = await fetch(`${baseUrl}/users/loggedin/python-project-reviews`, {
-				headers: { "x-user-id": studentID.toString() }
+		await withRuntime(async baseUrl => {
+			const response = await fetch(`${baseUrl}/students/project-reviews`, {
+				headers: { "x-student-id": studentID.toString() }
 			});
 			const body = await response.json();
 
 			expect(response.status).toBe(200);
 			expect(modelMocks.pythonProjectReviewFind).toHaveBeenCalledWith({
+				deletedAt: { $exists: false },
+				sourceProject: { $in: [projectID] },
 				user: studentID,
 				visibleToStudent: true
 			});
 			expect(body.reviews).toHaveLength(1);
-			expect(body.reviews[0].sourceProject).toBe(projectID.toString());
-			expect(body.reviews[0].note).toBe("Tutor comments are in the code.");
 		});
 	});
 });

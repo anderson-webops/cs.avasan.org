@@ -43,7 +43,6 @@ useHead({
 	<section class="page-shell page-shell--wide courses-page">
 		<header class="courses-header">
 			<h1 class="page-title">Courses</h1>
-			<p class="page-copy">No student account is needed.</p>
 		</header>
 
 		<CourseExplorer public-catalog />

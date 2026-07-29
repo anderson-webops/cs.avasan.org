@@ -12,13 +12,20 @@ context("Public classroom navigation", () => {
 	beforeEach(() => {
 		cy.viewport(1440, 900);
 		cy.intercept("GET", "/api/accounts/me", { body: {} });
+		cy.intercept("GET", "/api/students/session", {
+			body: {
+				student: null,
+				requiresPasswordSetup: false
+			}
+		});
 		cy.visit("/");
 	});
 
-	it("loads Julio's account-free classroom", () => {
+	it("loads Julio's public classroom", () => {
 		cy.url().should("eq", `${Cypress.config().baseUrl}/`);
 		cy.contains("h1", "Courses").should("be.visible");
-		cy.contains("No student account is needed.").should("be.visible");
+		cy.contains("No student account is needed.").should("not.exist");
+		cy.contains("button", "Student sign in").should("be.visible");
 		cy.get("#course-select").should("be.visible");
 	});
 
@@ -41,7 +48,6 @@ context("Public classroom navigation", () => {
 				[...options].map(option => option.textContent?.trim())
 			).to.deep.equal(publicCourses);
 		});
-		cy.contains("No student account is needed.").should("be.visible");
 	});
 
 	it("keeps teacher login off public navigation and available at /admin", () => {

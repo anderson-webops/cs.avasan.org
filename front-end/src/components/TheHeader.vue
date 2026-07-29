@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
 import { useRoute } from "vue-router";
+import StudentAccess from "@/components/StudentAccess.vue";
 import { useAppStore } from "@/stores/app";
 
 const app = useAppStore();
 const route = useRoute();
-const { isLoggedIn } = storeToRefs(app);
+const { currentAdmin } = storeToRefs(app);
 
 const primaryLinks = [
 	{ label: "Courses", to: "/" },
@@ -73,7 +74,7 @@ async function logout() {
 								</li>
 							</ul>
 
-							<div v-if="isLoggedIn" class="site-nav__actions">
+							<div v-if="currentAdmin" class="site-nav__actions">
 								<RouterLink
 									class="site-button site-button--secondary site-nav__action"
 									:class="{
@@ -91,6 +92,7 @@ async function logout() {
 									Log out
 								</button>
 							</div>
+							<StudentAccess v-show="!currentAdmin" />
 						</div>
 					</div>
 				</div>

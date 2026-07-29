@@ -3,11 +3,10 @@ import { strFromU8, unzipSync } from "fflate";
 import { getPythonIdeFileMimeType } from "@/modules/pythonIde";
 import {
 	normalizePythonIdeAssetLookupPath,
-	pythonIdeAssetLookupAliases,
-	pythonIdeCourseAssetsZipUrl
+	pythonIdeAssetLookupAliases
 } from "@/modules/pythonIdeCourseAssets";
 
-const ASSET_PATH_RE = /^(?:images|music|sounds)\/[^/].+\.[\dA-Z]+$/i;
+const ASSET_PATH_RE = /^(?:images|music|sounds)\/[^/]+\.[\dA-Z]+$/i;
 const IGNORED_ZIP_PATH_RE =
 	/(?:^|\/)(?:__MACOSX|\.DS_Store|Thumbs\.db|desktop\.ini)(?:\/|$)/i;
 const IMAGE_EXTENSION_RE = /\.(?:gif|jpe?g|png|svg|webp)$/i;
@@ -19,7 +18,7 @@ const SVG_VIEWBOX_RE =
 
 export function parsePythonIdeCourseAssetZipBytes(
 	zipBytes: Uint8Array,
-	sourceUrl = pythonIdeCourseAssetsZipUrl
+	sourceUrl = "provided-python-course-assets.zip"
 ): PythonIdeCourseAssetPack {
 	const files = unzipSync(zipBytes);
 	const aliases = new Map<string, string>();

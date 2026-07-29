@@ -1,13 +1,16 @@
+import { createHash } from "node:crypto";
 import { mkdir, readFile, rename, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { strFromU8, unzipSync } from "fflate";
 
 const DEFAULT_ASSETS_ZIP_URL = "https://static.cs.avasan.org/assets.zip";
-const MINIMUM_ZIP_BYTES = 1024;
+const REVIEWED_ASSETS_ZIP_BYTES = 14_676_489;
+const REVIEWED_ASSETS_ZIP_SHA256 =
+	"6ab65a710032ca71cf957bfd56f8b60579d66c94395bbc34fc433be4bb0f92a1";
+const ASSET_REQUEST_TIMEOUT_MS = 60_000;
 const ZIP_HEADER = [0x50, 0x4b];
-const ASSET_PATH_RE =
-	/^(?:images|music|sounds)\/(?:[^/]+\/)*[^/]+\.[\dA-Z]+$/i;
+const ASSET_PATH_RE = /^(?:images|music|sounds)\/(?:[^/]+\/)*[^/]+\.[\dA-Z]+$/i;
 const IGNORED_ZIP_PATH_RE =
 	/(?:^|\/)(?:__MACOSX|\.DS_Store|Thumbs\.db|desktop\.ini)(?:\/|$)/i;
 const IMAGE_EXTENSION_RE = /\.(?:gif|jpe?g|png|svg|webp)$/i;
@@ -30,13 +33,24 @@ const MIME_TYPES = new Map([
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const frontEndDir = path.resolve(scriptDir, "..");
-const assetsOutputDir = path.join(frontEndDir, "public", "python-ide", "assets");
+const assetsOutputDir = path.join(
+	frontEndDir,
+	"public",
+	"python-ide",
+	"assets"
+);
 const manifestPath = path.join(assetsOutputDir, "manifest.json");
-const stalePublicZipPath = path.join(frontEndDir, "public", "python-ide", "assets.zip");
+const stalePublicZipPath = path.join(
+	frontEndDir,
+	"public",
+	"python-ide",
+	"assets.zip"
+);
 const cacheDir = path.join(frontEndDir, ".cache");
 const cachePath = path.join(cacheDir, "python-ide-assets.json");
 const cacheZipPath = path.join(cacheDir, "python-ide-assets.zip");
-const sourceUrl = process.env.PYTHON_IDE_ASSETS_ZIP_URL || DEFAULT_ASSETS_ZIP_URL;
+const sourceUrl =
+	process.env.PYTHON_IDE_ASSETS_ZIP_URL || DEFAULT_ASSETS_ZIP_URL;
 const forceRefresh =
 	process.argv.includes("--force") ||
 	process.env.PYTHON_IDE_ASSETS_REFRESH === "always";
@@ -48,7 +62,9 @@ async function stagePythonIdeAssets() {
 	await rm(stalePublicZipPath, { force: true });
 
 	if (skipDownload) {
-		console.log("[python-ide-assets] skipped by PYTHON_IDE_ASSETS_DOWNLOAD=skip");
+		console.log(
+			"[python-ide-assets] skipped by PYTHON_IDE_ASSETS_DOWNLOAD=skip"
+		);
 		return;
 	}
 
@@ -63,18 +79,28 @@ async function stagePythonIdeAssets() {
 	]);
 
 	if (!forceRefresh && isCurrent(localInfo, remoteInfo)) {
-		console.log(`[python-ide-assets] using extracted ${relativeManifestPath()}`);
+		console.log(
+			`[python-ide-assets] using extracted ${relativeManifestPath()}`
+		);
 		return;
 	}
 
 	try {
-		const response = await fetch(sourceUrl);
-		if (!response.ok) {
-			throw new Error(`download failed with status ${response.status}`);
-		}
-
-		const bytes = new Uint8Array(await response.arrayBuffer());
-		assertLooksLikeZip(bytes);
+		const { bytes, response } = await withAssetNetworkTimeout(
+			"asset download",
+			async signal => {
+				const response = await fetch(sourceUrl, { signal });
+				if (!response.ok) {
+					throw new Error(
+						`download failed with status ${response.status}`
+					);
+				}
+				return {
+					bytes: await readReviewedAssetArchive(response),
+					response
+				};
+			}
+		);
 
 		await mkdir(cacheDir, { recursive: true });
 		const tempZipPath = `${cacheZipPath}.tmp`;
@@ -84,23 +110,31 @@ async function stagePythonIdeAssets() {
 		const manifest = await extractAssets(bytes);
 		await writeFile(
 			cachePath,
-			`${JSON.stringify({
-				assetCount: manifest.assets.length,
-				contentLength:
-					response.headers.get("content-length") ?? String(bytes.byteLength),
-				downloadedAt: new Date().toISOString(),
-				etag: response.headers.get("etag"),
-				lastModified: response.headers.get("last-modified"),
-				sourceUrl
-			}, null, "\t")}\n`
+			`${JSON.stringify(
+				{
+					assetCount: manifest.assets.length,
+					contentLength:
+						response.headers.get("content-length") ??
+						String(bytes.byteLength),
+					downloadedAt: new Date().toISOString(),
+					etag: response.headers.get("etag"),
+					lastModified: response.headers.get("last-modified"),
+					sha256: REVIEWED_ASSETS_ZIP_SHA256,
+					sourceUrl
+				},
+				null,
+				"\t"
+			)}\n`
 		);
 
 		console.log(
 			`[python-ide-assets] extracted ${manifest.assets.length} files from ${formatBytes(bytes.byteLength)} into ${relativeAssetsPath()}`
 		);
-	}
-	catch (error) {
-		if (localInfo.exists) {
+	} catch (error) {
+		if (
+			localInfo.exists &&
+			localInfo.cache?.sha256 === REVIEWED_ASSETS_ZIP_SHA256
+		) {
 			console.warn(
 				`[python-ide-assets] download failed, using existing ${relativeManifestPath()}: ${formatError(error)}`
 			);
@@ -168,10 +202,21 @@ async function localAssetInfo() {
 }
 
 async function remoteAssetInfo() {
-	const response = await fetch(sourceUrl, { method: "HEAD" });
-	if (!response.ok) {
-		throw new Error(`metadata request failed with status ${response.status}`);
-	}
+	const response = await withAssetNetworkTimeout(
+		"asset metadata request",
+		async signal => {
+			const response = await fetch(sourceUrl, {
+				method: "HEAD",
+				signal
+			});
+			if (!response.ok) {
+				throw new Error(
+					`metadata request failed with status ${response.status}`
+				);
+			}
+			return response;
+		}
+	);
 
 	return {
 		contentLength: response.headers.get("content-length"),
@@ -179,6 +224,27 @@ async function remoteAssetInfo() {
 		lastModified: response.headers.get("last-modified"),
 		sourceUrl
 	};
+}
+
+async function withAssetNetworkTimeout(label, operation) {
+	const controller = new AbortController();
+	const timeout = setTimeout(
+		() => controller.abort(),
+		ASSET_REQUEST_TIMEOUT_MS
+	);
+	try {
+		return await operation(controller.signal);
+	} catch (error) {
+		if (controller.signal.aborted) {
+			throw new Error(
+				`${label} timed out after ${ASSET_REQUEST_TIMEOUT_MS} ms`,
+				{ cause: error }
+			);
+		}
+		throw error;
+	} finally {
+		clearTimeout(timeout);
+	}
 }
 
 async function readJson(filePath) {
@@ -189,6 +255,7 @@ function isCurrent(localInfo, remoteInfo) {
 	if (!localInfo.exists || !remoteInfo) return false;
 
 	return (
+		localInfo.cache?.sha256 === REVIEWED_ASSETS_ZIP_SHA256 &&
 		localInfo.cache?.sourceUrl === remoteInfo.sourceUrl &&
 		(!remoteInfo.contentLength ||
 			localInfo.cache?.contentLength === remoteInfo.contentLength) &&
@@ -198,14 +265,74 @@ function isCurrent(localInfo, remoteInfo) {
 	);
 }
 
-function assertLooksLikeZip(bytes) {
+async function readReviewedAssetArchive(response) {
+	const contentEncoding = response.headers.get("content-encoding");
+	if (contentEncoding && contentEncoding !== "identity") {
+		throw new Error(
+			`downloaded asset pack used unsupported content encoding ${contentEncoding}`
+		);
+	}
+	const declaredLength = response.headers.get("content-length");
 	if (
-		bytes.byteLength < MINIMUM_ZIP_BYTES ||
-		bytes[0] !== ZIP_HEADER[0] ||
-		bytes[1] !== ZIP_HEADER[1]
+		declaredLength &&
+		(!/^\d+$/.test(declaredLength) ||
+			Number(declaredLength) !== REVIEWED_ASSETS_ZIP_BYTES)
 	) {
+		throw new Error(
+			`downloaded asset pack declared unexpected size ${declaredLength}; expected ${REVIEWED_ASSETS_ZIP_BYTES}`
+		);
+	}
+	if (!response.body) {
+		throw new Error("downloaded asset pack response had no readable body");
+	}
+
+	const reader = response.body.getReader();
+	const chunks = [];
+	const hash = createHash("sha256");
+	let byteLength = 0;
+	try {
+		while (true) {
+			const { done, value } = await reader.read();
+			if (done) break;
+			const chunk =
+				value instanceof Uint8Array ? value : new Uint8Array(value);
+			byteLength += chunk.byteLength;
+			if (byteLength > REVIEWED_ASSETS_ZIP_BYTES) {
+				await reader
+					.cancel("reviewed Python asset archive size exceeded")
+					.catch(() => undefined);
+				throw new Error(
+					`downloaded asset pack exceeded ${REVIEWED_ASSETS_ZIP_BYTES} bytes`
+				);
+			}
+			chunks.push(chunk);
+			hash.update(chunk);
+		}
+	} finally {
+		reader.releaseLock();
+	}
+	if (byteLength !== REVIEWED_ASSETS_ZIP_BYTES) {
+		throw new Error(
+			`downloaded asset pack has unexpected size ${byteLength}; expected ${REVIEWED_ASSETS_ZIP_BYTES}`
+		);
+	}
+	const sha256 = hash.digest("hex");
+	if (sha256 !== REVIEWED_ASSETS_ZIP_SHA256) {
+		throw new Error(
+			`downloaded asset pack failed SHA-256 verification; expected ${REVIEWED_ASSETS_ZIP_SHA256}`
+		);
+	}
+
+	const bytes = new Uint8Array(byteLength);
+	let offset = 0;
+	for (const chunk of chunks) {
+		bytes.set(chunk, offset);
+		offset += chunk.byteLength;
+	}
+	if (bytes[0] !== ZIP_HEADER[0] || bytes[1] !== ZIP_HEADER[1]) {
 		throw new Error("downloaded asset pack does not look like a zip file");
 	}
+	return bytes;
 }
 
 function normalizeZipAssetName(filePath) {

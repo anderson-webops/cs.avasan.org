@@ -1,6 +1,29 @@
 // src/stores/app.ts
+import type { StudentAccount, StudentSession } from "@/modules/studentAccounts";
 import { defineStore } from "pinia";
 import { api } from "@/api";
+import {
+	clearAllStudentPythonProjectRecoveryFromLocalStorage,
+	purgeAllStudentPythonProjectRecovery,
+	volatileStudentPythonProjectRecovery
+} from "@/modules/pythonIde";
+import {
+	fetchStudentSession,
+	setStudentPassword,
+	signOutStudent
+} from "@/modules/studentAccounts";
+import {
+	broadcastStudentSessionChanged,
+	broadcastStudentSessionEnded,
+	cancelStudentLogoutInOtherTabs,
+	prepareStudentLogoutInOtherTabs
+} from "@/modules/studentSessionBroadcast";
+import {
+	endStudentSessionHandoff,
+	prepareStudentSessionHandoff,
+	resumeStudentSessionHandoff,
+	suspendStudentSessionHandoff
+} from "@/modules/studentSessionHandoff";
 
 type Displayable =
 	| string
@@ -33,20 +56,18 @@ export interface Tutor {
 	[key: string]: Displayable;
 }
 
-export interface User {
-	_id: string;
-	name: string;
-	email: string;
-	age: number;
-	state: string;
+export interface User extends StudentAccount {
+	name?: string;
+	email?: string;
+	age?: number;
+	state?: string;
 	recipientName?: string;
 	tutors?: (string | Tutor)[];
 	courseAccess?: string[];
 	courseStatus?: CourseStatusMap;
 	courseProgress?: CourseProgress[];
-	editUsers: boolean;
-	saveEdit: string;
-	[key: string]: Displayable;
+	editUsers?: boolean;
+	saveEdit?: string;
 }
 
 export interface CourseProgress {
@@ -62,6 +83,7 @@ export interface Admin {
 	_id: string;
 	name: string;
 	email: string;
+	passwordChangedAt?: string | null;
 	editAdmins: boolean;
 	saveEdit: string;
 	[key: string]: Displayable;
@@ -79,6 +101,13 @@ export const useAppStore = defineStore("app", {
 		currentUser: null as User | null,
 		currentTutor: null as Tutor | null,
 		currentAdmin: null as Admin | null,
+		adminSessionRevalidating: false,
+		adminSessionValidatedAt: 0,
+		studentRequiresPasswordSetup: false,
+		studentSessionRevalidating: false,
+		studentSessionValidatedAt: 0,
+		sessionBootstrapStatus: "pending" as "failed" | "pending" | "ready",
+		sessionRevision: 0,
 
 		signupBlock: false,
 		showUsers: false,
@@ -87,35 +116,67 @@ export const useAppStore = defineStore("app", {
 	}),
 
 	getters: {
-		isLoggedIn: state => !!state.currentAdmin,
+		isLoggedIn: state => !!state.currentAdmin || !!state.currentUser,
 
-		isAdmin: state => !!state.currentAdmin
+		isAdmin: state => !!state.currentAdmin,
+
+		isStudent: state => !!state.currentUser,
+
+		currentStudent: state => state.currentUser,
+
+		studentProjectOwnerID: state =>
+			state.currentUser && !state.studentRequiresPasswordSetup
+				? state.currentUser._id
+				: null
 	},
 
 	actions: {
-		/*		async bootstrapSession() {
-			await Promise.allSettled([
-				this.refreshCurrentAdmin(),
-				this.refreshCurrentTutor(),
-				this.refreshCurrentUser()
-			]);
-		}, */
 		async bootstrapSession() {
+			const bootstrapRevision = this.sessionRevision;
+			const existingAdminID = this.currentAdmin?._id ?? null;
+			this.sessionBootstrapStatus = "pending";
 			try {
-				const { data } = await api.get("/accounts/me");
-				if (data.adminID) {
-					await this.refreshCurrentAdmin();
-				} else {
-					this.setCurrentAdmin(null);
+				const { data } = await api.get<{ adminID: string | null }>(
+					"/accounts/me"
+				);
+				if (this.sessionRevision !== bootstrapRevision) {
+					this.sessionBootstrapStatus = "ready";
+					return;
 				}
-				// Legacy learner/tutor shapes remain for inherited course
-				// components, but this downstream never hydrates those roles.
-				this.setCurrentTutor(null);
-				this.setCurrentUser(null);
+				if (data.adminID) {
+					const { data: adminData } = await api.get<{
+						currentAdmin: Admin;
+					}>("/admins/loggedin");
+					if (this.sessionRevision !== bootstrapRevision) {
+						this.sessionBootstrapStatus = "ready";
+						return;
+					}
+					this.setCurrentAdmin(adminData.currentAdmin);
+					this.sessionBootstrapStatus = "ready";
+					return;
+				}
+
+				const session = await fetchStudentSession();
+				if (this.sessionRevision !== bootstrapRevision) {
+					this.sessionBootstrapStatus = "ready";
+					return;
+				}
+				this.setStudentSession(session);
+				this.sessionBootstrapStatus = "ready";
 			} catch {
-				this.setCurrentAdmin(null);
-				this.setCurrentTutor(null);
-				this.setCurrentUser(null);
+				// Keep the anonymous shell responsive during an outage, and never
+				// let a delayed bootstrap failure erase a newer interactive login.
+				if (this.sessionRevision !== bootstrapRevision) {
+					this.sessionBootstrapStatus = "ready";
+					return;
+				}
+				if (
+					existingAdminID &&
+					this.sessionRevision === bootstrapRevision
+				) {
+					this.clearSession();
+				}
+				this.sessionBootstrapStatus = "failed";
 			}
 		},
 
@@ -130,13 +191,52 @@ export const useAppStore = defineStore("app", {
 			this.admins = a;
 		}, */
 		setCurrentUser(u: User | null) {
+			this.sessionRevision += 1;
 			this.currentUser = u;
+			if (u) {
+				this.currentAdmin = null;
+				this.currentTutor = null;
+				this.studentSessionRevalidating = false;
+				this.studentSessionValidatedAt = Date.now();
+			} else {
+				this.studentRequiresPasswordSetup = false;
+				if (!this.studentSessionRevalidating)
+					this.studentSessionValidatedAt = 0;
+			}
 		},
 		setCurrentTutor(t: Tutor | null) {
+			this.sessionRevision += 1;
 			this.currentTutor = t;
 		},
 		setCurrentAdmin(a: Admin | null) {
+			this.sessionRevision += 1;
 			this.currentAdmin = a;
+			this.adminSessionRevalidating = false;
+			this.adminSessionValidatedAt = a ? Date.now() : 0;
+			if (a) {
+				this.currentUser = null;
+				this.currentTutor = null;
+				this.studentRequiresPasswordSetup = false;
+				this.studentSessionRevalidating = false;
+				this.studentSessionValidatedAt = 0;
+			}
+		},
+		setStudentSession(session: StudentSession) {
+			if (!session.student) {
+				this.setCurrentUser(null);
+				this.studentRequiresPasswordSetup = false;
+				return;
+			}
+			// Remove every legacy owner-keyed browser record before exposing a
+			// student identity on a shared classroom device. Anonymous projects
+			// and their atomic import markers remain available.
+			clearAllStudentPythonProjectRecoveryFromLocalStorage();
+			void purgeAllStudentPythonProjectRecovery().catch(() => undefined);
+			volatileStudentPythonProjectRecovery.retainAcrossOwnerChange(
+				session.student._id
+			);
+			this.setCurrentUser(session.student);
+			this.studentRequiresPasswordSetup = session.requiresPasswordSetup;
 		},
 		setSignupBlock(v: boolean) {
 			this.signupBlock = v;
@@ -146,6 +246,128 @@ export const useAppStore = defineStore("app", {
 		}, */
 		setError(e: string | null) {
 			this.error = e;
+		},
+		clearSession() {
+			this.sessionRevision += 1;
+			this.users = [];
+			this.tutors = [];
+			this.admins = [];
+			this.currentTutor = null;
+			this.currentUser = null;
+			this.currentAdmin = null;
+			this.adminSessionRevalidating = false;
+			this.adminSessionValidatedAt = 0;
+			this.studentRequiresPasswordSetup = false;
+			this.studentSessionRevalidating = false;
+			this.studentSessionValidatedAt = 0;
+			this.signupBlock = false;
+			this.showUsers = false;
+			this.error = null;
+		},
+		hideAdminSession(expectedAdminID?: string | null) {
+			const adminID = this.currentAdmin?._id ?? expectedAdminID ?? null;
+			if (!adminID) return null;
+			this.sessionRevision += 1;
+			this.users = [];
+			this.tutors = [];
+			this.admins = [];
+			this.currentTutor = null;
+			this.currentUser = null;
+			this.currentAdmin = null;
+			this.adminSessionRevalidating = true;
+			this.adminSessionValidatedAt = 0;
+			this.studentRequiresPasswordSetup = false;
+			this.signupBlock = false;
+			this.showUsers = false;
+			this.error = null;
+			return adminID;
+		},
+		hideStudentSession(expectedStudentID?: string | null) {
+			if (this.currentAdmin) return null;
+			const studentID =
+				this.currentUser?._id ?? expectedStudentID ?? null;
+			if (!studentID) return null;
+			if (
+				this.currentUser?._id === studentID &&
+				!this.studentRequiresPasswordSetup
+			) {
+				// The mounted IDE handoff synchronously snapshots and hides the
+				// old owner into volatile memory before async revalidation.
+				void suspendStudentSessionHandoff(studentID).catch(
+					() => undefined
+				);
+			}
+			this.sessionRevision += 1;
+			this.currentUser = null;
+			this.currentTutor = null;
+			this.studentRequiresPasswordSetup = false;
+			this.studentSessionRevalidating = true;
+			this.studentSessionValidatedAt = 0;
+			this.error = null;
+			return studentID;
+		},
+		cancelStudentSessionRevalidation() {
+			this.studentSessionRevalidating = false;
+			if (!this.currentUser) this.studentSessionValidatedAt = 0;
+		},
+		async revalidateStudentSession(expectedStudentID: string) {
+			const validationRevision = this.sessionRevision;
+			const failClosed = () => {
+				if (this.sessionRevision === validationRevision) {
+					void endStudentSessionHandoff(expectedStudentID).catch(
+						() => undefined
+					);
+					this.clearSession();
+				}
+			};
+
+			try {
+				const session = await fetchStudentSession();
+				if (this.sessionRevision !== validationRevision) return false;
+				if (session.student?._id !== expectedStudentID) {
+					failClosed();
+					return false;
+				}
+				this.setStudentSession(session);
+				return true;
+			} catch {
+				failClosed();
+				return false;
+			}
+		},
+		async revalidateAdminSession(expectedAdminID: string) {
+			const validationRevision = this.sessionRevision;
+			const failClosed = () => {
+				if (this.sessionRevision === validationRevision) {
+					this.clearSession();
+				}
+			};
+
+			try {
+				const { data: marker } = await api.get<{
+					adminID: string | null;
+				}>("/accounts/me");
+				if (this.sessionRevision !== validationRevision) return false;
+				if (marker.adminID !== expectedAdminID) {
+					failClosed();
+					return false;
+				}
+
+				const { data } = await api.get<{ currentAdmin: Admin }>(
+					"/admins/loggedin"
+				);
+				if (this.sessionRevision !== validationRevision) return false;
+				if (data.currentAdmin?._id !== expectedAdminID) {
+					failClosed();
+					return false;
+				}
+
+				this.setCurrentAdmin(data.currentAdmin);
+				return true;
+			} catch {
+				failClosed();
+				return false;
+			}
 		},
 
 		/* ---------- data fetchers ---------- */
@@ -181,23 +403,190 @@ export const useAppStore = defineStore("app", {
 
 		/* ---------- session helpers ---------- */
 		async logout() {
+			const adminID = this.currentAdmin?._id ?? null;
 			try {
-				await api.delete("/accounts/logout"); // one endpoint for all roles
-				this.setCurrentTutor(null);
-				this.setCurrentUser(null);
-				this.setCurrentAdmin(null);
-				this.setError(null);
-			} catch (e: any) {
-				this.setError(e.message);
+				await api.delete("/accounts/logout");
+				this.clearSession();
+				broadcastStudentSessionEnded();
+			} catch (error: unknown) {
+				if (adminID) {
+					try {
+						const { data: marker } = await api.get<{
+							adminID: string | null;
+						}>("/accounts/me");
+						if (marker.adminID === adminID) {
+							const { data } = await api.get<{
+								currentAdmin: Admin;
+							}>("/admins/loggedin");
+							if (data.currentAdmin?._id === adminID) {
+								this.setCurrentAdmin(data.currentAdmin);
+								this.setError(
+									error instanceof Error
+										? error.message
+										: "Couldn’t log out. Try again."
+								);
+								return;
+							}
+						}
+					} catch {
+						// A failed or inconclusive probe cannot justify keeping
+						// privileged classroom data visible.
+					}
+				}
+
+				this.clearSession();
+				broadcastStudentSessionEnded();
 			}
+		},
+
+		async logoutStudent() {
+			const studentID = this.currentUser?._id;
+			if (!studentID) return;
+			if (this.studentRequiresPasswordSetup) {
+				await signOutStudent();
+				this.setCurrentUser(null);
+				this.setError(null);
+				broadcastStudentSessionEnded();
+				return;
+			}
+			let handoffPrepared = false;
+			let logoutRequested = false;
+			try {
+				await prepareStudentSessionHandoff(studentID);
+				handoffPrepared = true;
+				await prepareStudentLogoutInOtherTabs(studentID);
+				logoutRequested = true;
+				await signOutStudent();
+				await this.failClosedStudentSessionExit(studentID);
+			} catch (error) {
+				if (!logoutRequested) {
+					if (handoffPrepared) {
+						cancelStudentLogoutInOtherTabs(studentID);
+						await resumeStudentSessionHandoff(studentID).catch(
+							() => undefined
+						);
+					}
+					throw error;
+				}
+
+				let recoveredSession: StudentSession;
+				try {
+					recoveredSession = await fetchStudentSession();
+				} catch (probeError) {
+					await this.failClosedStudentSessionExit(studentID);
+					throw new Error(
+						"Student session status could not be confirmed.",
+						{ cause: probeError }
+					);
+				}
+
+				if (
+					recoveredSession.student?._id === studentID &&
+					!recoveredSession.requiresPasswordSetup
+				) {
+					this.setStudentSession(recoveredSession);
+					await this.cancelStudentSessionExit(studentID);
+					throw error;
+				}
+
+				await this.failClosedStudentSessionExit(studentID);
+			}
+		},
+
+		async prepareStudentSessionExit() {
+			const studentID = this.currentUser?._id;
+			if (!studentID) return null;
+			if (this.studentRequiresPasswordSetup) return null;
+			let localPrepared = false;
+			try {
+				await prepareStudentSessionHandoff(studentID);
+				localPrepared = true;
+				await prepareStudentLogoutInOtherTabs(studentID);
+				return studentID;
+			} catch (error) {
+				if (localPrepared) {
+					cancelStudentLogoutInOtherTabs(studentID);
+					await resumeStudentSessionHandoff(studentID).catch(
+						() => undefined
+					);
+				}
+				throw error;
+			}
+		},
+
+		async cancelStudentSessionExit(studentID: string) {
+			cancelStudentLogoutInOtherTabs(studentID);
+			await resumeStudentSessionHandoff(studentID);
+		},
+
+		async finishStudentSessionExit(studentID?: string | null) {
+			if (studentID) {
+				await Promise.resolve(
+					endStudentSessionHandoff(studentID)
+				).catch(() => undefined);
+			}
+			this.setCurrentUser(null);
+			this.setError(null);
+			broadcastStudentSessionChanged(null, "admin");
+		},
+
+		async failClosedStudentSessionExit(studentID?: string | null) {
+			if (studentID) {
+				await Promise.resolve(
+					endStudentSessionHandoff(studentID)
+				).catch(() => undefined);
+			}
+			this.clearSession();
+			broadcastStudentSessionEnded();
+		},
+
+		async acceptStudentSessionEndedFromAnotherTab() {
+			const studentID = this.currentUser?._id;
+			if (!studentID) return;
+			try {
+				await endStudentSessionHandoff(studentID);
+			} finally {
+				this.setCurrentUser(null);
+				this.setError(null);
+			}
+		},
+
+		async completeStudentPassword(password: string, requestID: string) {
+			const expectedStudentID = this.currentUser?._id ?? null;
+			const expectedRevision = this.sessionRevision;
+			if (
+				!expectedStudentID ||
+				this.currentAdmin ||
+				!this.studentRequiresPasswordSetup
+			) {
+				throw new Error("Student password setup is no longer active.");
+			}
+			const session = await setStudentPassword(password, requestID);
+			if (
+				session.passwordSetupRequestID !== requestID ||
+				session.student?._id !== expectedStudentID ||
+				session.requiresPasswordSetup
+			) {
+				throw new Error(
+					"Password change could not be confirmed for this request."
+				);
+			}
+			if (
+				this.sessionRevision !== expectedRevision ||
+				this.currentAdmin ||
+				this.currentUser?._id !== expectedStudentID ||
+				!this.studentRequiresPasswordSetup
+			) {
+				throw new Error("Student password setup is no longer active.");
+			}
+			this.setStudentSession(session);
+			return session;
 		},
 
 		async refreshCurrentUser() {
 			try {
-				const { data } = await api.get<{ currentUser: User }>(
-					"/users/loggedin"
-				);
-				this.setCurrentUser(data.currentUser);
+				const session = await fetchStudentSession();
+				this.setStudentSession(session);
 			} catch {
 				this.setCurrentUser(null);
 			}
@@ -221,7 +610,7 @@ export const useAppStore = defineStore("app", {
 				);
 				this.setCurrentAdmin(data.currentAdmin);
 			} catch {
-				this.setCurrentAdmin(null);
+				this.clearSession();
 			}
 		}
 	}

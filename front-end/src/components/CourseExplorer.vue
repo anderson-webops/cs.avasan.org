@@ -344,9 +344,20 @@ watch(
 			return;
 		}
 
-		if (!storageReady) return;
-
 		const availableCourseIds = availableCourses.map(course => course.id);
+		if (!storageReady) {
+			// The public catalog has no identity-dependent choice. Select its
+			// first real course during SSG so no-JavaScript readers and crawlers
+			// receive course content instead of a false empty-state message.
+			if (
+				props.publicCatalog &&
+				!availableCourseIds.includes(selectedCourseId.value)
+			) {
+				selectedCourseId.value = availableCourses[0].id;
+			}
+			return;
+		}
+
 		const hashCourseId = courseIdFromHash(availableCourseIds);
 		const storedCourseId = readStoredValue(COURSE_SELECTION_STORAGE_KEY);
 
@@ -2288,7 +2299,10 @@ function writeStoredValue(key: string, value: string) {
 				</div>
 			</div>
 
-			<div v-else-if="isCourseLoading" class="reader-empty">
+			<div
+				v-else-if="isCourseLoading && !publicCatalog"
+				class="reader-empty"
+			>
 				<h3>Loading course</h3>
 				<p>Opening the selected course.</p>
 			</div>
@@ -2298,13 +2312,13 @@ function writeStoredValue(key: string, value: string) {
 				<p>{{ courseLoadError }}</p>
 			</div>
 
-			<div v-else class="reader-empty">
+			<div v-else-if="!publicCatalog" class="reader-empty">
 				<h3>{{ emptyTitle }}</h3>
 				<p>{{ emptyHint }}</p>
 			</div>
 		</div>
 
-		<div v-else class="course-empty">
+		<div v-else-if="!publicCatalog" class="course-empty">
 			<p>{{ emptyTitle }}</p>
 			<p class="hint">{{ emptyHint }}</p>
 		</div>

@@ -5,13 +5,13 @@ import {
 	isPythonIdeTextFile,
 	isValidPythonFileName
 } from "@/modules/pythonIde";
+import { warmPythonRuntimeResources } from "@/modules/pythonIdeRuntimeHints";
 import {
-	PYODIDE_INDEX_URL,
-	PYODIDE_SCRIPT_SRC,
-	warmPythonRuntimeResources
-} from "@/modules/pythonIdeRuntimeHints";
+	releasePythonIdeSandboxCallbacks,
+	runPythonProjectInSandbox,
+	stopPythonIdeSandboxRun
+} from "@/modules/pythonIdeSandbox";
 import { pythonIdeImportedTopLevelModules } from "@/modules/pythonImportScanner";
-import { pythonStandardLibraryModules } from "@/modules/pythonStandardLibraryModules";
 
 export { pythonIdeImportedTopLevelModules } from "@/modules/pythonImportScanner";
 
@@ -42,49 +42,10 @@ const PYTHON_IDE_RUNTIME_MODULES = [
 	"turtle",
 	"zrect"
 ];
-const BROWSER_SHIM_MODULES = new Set([
-	"keras",
-	"pysynth",
-	"streamlit",
-	"tensorflow"
-]);
-
-interface PyodideAPI {
-	FS: {
-		analyzePath: (path: string) => { exists: boolean };
-		mkdirTree: (path: string) => void;
-		unlink?: (path: string) => void;
-		writeFile: (path: string, data: string | Uint8Array) => void;
-	};
-	loadPackage?: (packages: string | string[]) => Promise<void>;
-	loadPackagesFromImports: (code: string) => Promise<void>;
-	runPython: (code: string) => unknown;
-	runPythonAsync: (code: string) => Promise<unknown>;
-	setStdout?: (options: { batched: (text: string) => void }) => void;
-	setStderr?: (options: { batched: (text: string) => void }) => void;
-}
-
-interface LoadPyodideOptions {
-	indexURL: string;
-}
-
-declare global {
-	interface Window {
-		__classesPythonIdeArtifacts?: ArtifactBridge;
-		__classesPythonIdeGame?: GameBridge;
-		loadPyodide?: (options: LoadPyodideOptions) => Promise<PyodideAPI>;
-		__classesPythonIdeTurtle?: TurtleBridge;
-	}
-}
-
 export interface RuntimeArtifact {
 	title: string;
 	mimeType: string;
 	data: string;
-}
-
-interface ArtifactBridge {
-	emit: (title: string, mimeType: string, data: string) => void;
 }
 
 export interface GameBridge {
@@ -161,6 +122,7 @@ export interface GameBridge {
 	playTone: (frequency: number, duration: number) => number;
 	stopTone: (toneID: number) => void;
 	log: (text: string) => void;
+	runtimeInputJson?: () => string;
 }
 
 export interface TurtleBridge {
@@ -232,49 +194,6 @@ export interface RunPythonProjectOptions {
 	shouldStop?: () => boolean;
 }
 
-interface PlainPythonWorkerOutputMessage {
-	type: "output";
-	id: number;
-	kind: "stdout" | "stderr" | "system";
-	text: string;
-}
-
-interface PlainPythonWorkerDoneMessage {
-	type: "done";
-	id: number;
-	files: PythonIdeFile[];
-}
-
-interface PlainPythonWorkerErrorMessage {
-	type: "error";
-	id: number;
-	message: string;
-}
-
-type PlainPythonWorkerMessage =
-	| PlainPythonWorkerDoneMessage
-	| PlainPythonWorkerErrorMessage
-	| PlainPythonWorkerOutputMessage;
-
-let pyodidePromise: Promise<PyodideAPI> | null = null;
-let plainPythonWorker: Worker | null = null;
-let plainPythonWorkerRunID = 0;
-let stopActivePlainPythonWorkerRun: ((reason: string) => void) | null = null;
-let lastProjectFileNames = new Set<string>();
-let runtimeShimsWrittenForBootstrapVersion = "";
-const loadedBrowserShimPackages = new Set<string>();
-const installedMicropipPackages = new Set<string>();
-const loadedPyodideImportModules = new Set<string>();
-let micropipLoaded = false;
-
-function throwIfRunStopped(
-	options: Pick<RunPythonProjectOptions, "shouldStop">
-) {
-	if (options.shouldStop?.()) {
-		throw new Error("Python run stopped before post-run work completed.");
-	}
-}
-
 export function pythonIdeProjectModuleNames(
 	files: Pick<PythonIdeFile, "name">[]
 ) {
@@ -297,150 +216,16 @@ export function pythonIdeProjectModuleNames(
 	return [...modules];
 }
 
-function loadScript(src: string) {
-	return new Promise<void>((resolve, reject) => {
-		const rejectScriptLoad = () =>
-			reject(new Error("Unable to load Python runtime."));
-		const existing = document.querySelector<HTMLScriptElement>(
-			`script[src="${src}"]`
-		);
-		if (existing) {
-			if (window.loadPyodide) {
-				resolve();
-				return;
-			} else if (
-				existing.dataset.classesPythonIdeLoadState === "error" ||
-				existing.dataset.classesPythonIdeLoadState === "loaded"
-			) {
-				existing.remove();
-			} else {
-				existing.addEventListener(
-					"load",
-					() => {
-						existing.dataset.classesPythonIdeLoadState = "loaded";
-						resolve();
-					},
-					{ once: true }
-				);
-				existing.addEventListener(
-					"error",
-					() => {
-						existing.dataset.classesPythonIdeLoadState = "error";
-						existing.remove();
-						rejectScriptLoad();
-					},
-					{ once: true }
-				);
-				return;
-			}
-		}
-
-		const script = document.createElement("script");
-		script.src = src;
-		script.async = true;
-		script.dataset.classesPythonIdeLoadState = "loading";
-		if (src.startsWith(PYODIDE_INDEX_URL)) {
-			script.crossOrigin = "anonymous";
-		}
-		script.addEventListener(
-			"load",
-			() => {
-				script.dataset.classesPythonIdeLoadState = "loaded";
-				resolve();
-			},
-			{ once: true }
-		);
-		script.addEventListener(
-			"error",
-			() => {
-				script.dataset.classesPythonIdeLoadState = "error";
-				script.remove();
-				rejectScriptLoad();
-			},
-			{ once: true }
-		);
-		document.head.append(script);
-	});
-}
-
-function removeUninitializedPyodideScript() {
-	if (window.loadPyodide) return;
-	document
-		.querySelector<HTMLScriptElement>(`script[src="${PYODIDE_SCRIPT_SRC}"]`)
-		?.remove();
-}
-
 export function warmPythonRuntime() {
 	warmPythonRuntimeResources();
 }
 
-async function loadRuntime() {
-	if (typeof window === "undefined" || typeof document === "undefined") {
-		throw new TypeError("Python runtime is only available in the browser.");
-	}
-
-	if (!pyodidePromise) {
-		warmPythonRuntimeResources();
-		const runtimePromise = (async () => {
-			await loadScript(PYODIDE_SCRIPT_SRC);
-			if (!window.loadPyodide)
-				throw new Error("Python runtime failed to initialize.");
-			const pyodide = await window.loadPyodide({
-				indexURL: PYODIDE_INDEX_URL
-			});
-			return pyodide;
-		})();
-		pyodidePromise = runtimePromise;
-		runtimePromise.catch(() => {
-			if (pyodidePromise === runtimePromise) pyodidePromise = null;
-			removeUninitializedPyodideScript();
-		});
-	}
-
-	return pyodidePromise;
-}
-
-const releaseRuntimeCallbackRegistriesSource = `
-import sys
-
-for __classes_module_name in ("turtle",):
-    __classes_module = sys.modules.get(__classes_module_name)
-    __classes_release = getattr(__classes_module, "_release_all_callbacks", None)
-    if callable(__classes_release):
-        __classes_release()
-
-__classes_loop_proxies = globals().get("__classes_turtle_loop_proxies")
-if isinstance(__classes_loop_proxies, dict):
-    for __classes_proxy in list(__classes_loop_proxies.values()):
-        if __classes_proxy is not None and hasattr(__classes_proxy, "destroy"):
-            __classes_proxy.destroy()
-    __classes_loop_proxies.clear()
-`;
-
-function releaseRuntimeCallbackRegistries(pyodide: PyodideAPI) {
-	pyodide.runPython(releaseRuntimeCallbackRegistriesSource);
-}
-
 export async function releasePythonIdeRuntimeCallbacks() {
-	if (!pyodidePromise) return;
-	releaseRuntimeCallbackRegistries(await pyodidePromise);
-}
-
-function getPlainPythonWorker() {
-	plainPythonWorker ??= new Worker(
-		new URL("../workers/pythonIdePlainWorker.ts", import.meta.url),
-		{ type: "module" }
-	);
-	return plainPythonWorker;
-}
-
-function terminatePlainPythonWorker() {
-	plainPythonWorker?.terminate();
-	plainPythonWorker = null;
+	releasePythonIdeSandboxCallbacks();
 }
 
 export function stopPythonIdeRuntimeRun() {
-	stopActivePlainPythonWorkerRun?.("Python run stopped.");
+	stopPythonIdeSandboxRun();
 }
 
 function filterCapturedProjectTextFiles(files: PythonIdeFile[]) {
@@ -458,130 +243,6 @@ function clonePlainPythonIdeFiles(files: PythonIdeFile[]) {
 		content: file.content,
 		...(file.encoding ? { encoding: file.encoding } : {})
 	}));
-}
-
-async function runPlainPythonProjectInWorker(options: RunPythonProjectOptions) {
-	options.gameBridge.stopLoop();
-	options.turtleBridge.reset();
-
-	const activeFile = getPythonIdeRunnableFile(options);
-	if (!activeFile)
-		throw new Error("Project does not have a runnable Python file.");
-
-	const worker = getPlainPythonWorker();
-	const runID = ++plainPythonWorkerRunID;
-
-	return new Promise<void>((resolve, reject) => {
-		let settled = false;
-		let activeStopRun: ((reason: string) => void) | null = null;
-		const cleanup = () => {
-			worker.removeEventListener("message", handleMessage);
-			worker.removeEventListener("error", handleWorkerError);
-			if (stopActivePlainPythonWorkerRun === activeStopRun)
-				stopActivePlainPythonWorkerRun = null;
-		};
-		const settle = (finish: () => void) => {
-			if (settled) return;
-			settled = true;
-			cleanup();
-			finish();
-		};
-		activeStopRun = (reason: string) => {
-			terminatePlainPythonWorker();
-			settle(() => reject(new Error(reason)));
-		};
-		function handleWorkerError(event: ErrorEvent) {
-			terminatePlainPythonWorker();
-			settle(() =>
-				reject(
-					new Error(
-						event.message ||
-							"Python worker failed to run the project."
-					)
-				)
-			);
-		}
-		function handleMessage(event: MessageEvent<PlainPythonWorkerMessage>) {
-			const message = event.data;
-			if (message.id !== runID) return;
-			if (message.type === "output") {
-				options.onOutput(message.kind, message.text);
-				return;
-			}
-			if (message.type === "error") {
-				settle(() => reject(new Error(message.message)));
-				return;
-			}
-			options.onProjectFilesUpdate?.(
-				filterCapturedProjectTextFiles(message.files)
-			);
-			settle(resolve);
-		}
-
-		stopActivePlainPythonWorkerRun = activeStopRun;
-		worker.addEventListener("message", handleMessage);
-		worker.addEventListener("error", handleWorkerError);
-		worker.postMessage({
-			type: "run",
-			id: runID,
-			activeFileName: activeFile.name,
-			files: clonePlainPythonIdeFiles(options.files),
-			inputText: options.inputText
-		});
-	});
-}
-
-function clearRuntimeShimModules(pyodide: PyodideAPI) {
-	pyodide.runPython(`
-import builtins
-import json
-import sys
-
-__classes_runtime_module_roots = __import__("json").loads(${escapePythonString(JSON.stringify(PYTHON_IDE_RUNTIME_MODULES))})
-for __classes_runtime_name in list(sys.modules):
-    if any(
-        __classes_runtime_name == __classes_root
-        or __classes_runtime_name.startswith("{}.".format(__classes_root))
-        for __classes_root in __classes_runtime_module_roots
-    ):
-        sys.modules.pop(__classes_runtime_name, None)
-
-for __classes_builtin_name in (
-    "Actor",
-    "Rect",
-    "ZRect",
-    "screen",
-    "keyboard",
-    "keys",
-    "mouse",
-    "keymods",
-    "clock",
-    "Animation",
-    "animate",
-    "tone",
-    "sounds",
-    "music",
-    "images",
-    "pgzrun",
-    "show_chart",
-    "show_plots",
-    "__classes_loop_guard",
-    "__classes_schedule_turtle_loop",
-):
-    if not hasattr(builtins, __classes_builtin_name):
-        continue
-    __classes_builtin_value = getattr(builtins, __classes_builtin_name)
-    __classes_builtin_owner = getattr(
-        __classes_builtin_value,
-        "__module__",
-        getattr(type(__classes_builtin_value), "__module__", ""),
-    )
-    if (
-        __classes_builtin_name.startswith("__classes_")
-        or __classes_builtin_owner in ("_classes_pgzero", "_classes_artifacts")
-    ):
-        delattr(builtins, __classes_builtin_name)
-`);
 }
 
 function escapePythonString(value: string) {
@@ -3969,213 +3630,6 @@ preprocessing = types.SimpleNamespace(image=types.SimpleNamespace(ImageDataGener
 utils = types.SimpleNamespace(to_categorical=to_categorical)
 `;
 
-function ensureProjectDirectory(pyodide: PyodideAPI) {
-	if (!pyodide.FS.analyzePath(PROJECT_ROOT).exists) {
-		pyodide.FS.mkdirTree(PROJECT_ROOT);
-	}
-}
-
-function decodeBase64File(content: string) {
-	const binary = atob(content);
-	const bytes = new Uint8Array(binary.length);
-	for (let index = 0; index < binary.length; index += 1) {
-		bytes[index] = binary.charCodeAt(index);
-	}
-	return bytes;
-}
-
-function ensureProjectFileDirectory(pyodide: PyodideAPI, fileName: string) {
-	const parts = fileName.split("/");
-	const folderParts = parts.slice(0, -1);
-	if (!folderParts.length) return;
-
-	const directory = `${PROJECT_ROOT}/${folderParts.join("/")}`;
-	if (!pyodide.FS.analyzePath(directory).exists) {
-		pyodide.FS.mkdirTree(directory);
-	}
-}
-
-function writeProjectFile(pyodide: PyodideAPI, file: PythonIdeFile) {
-	ensureProjectFileDirectory(pyodide, file.name);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/${file.name}`,
-		file.encoding === "base64"
-			? decodeBase64File(file.content)
-			: file.content
-	);
-}
-
-function syncProjectFiles(pyodide: PyodideAPI, files: PythonIdeFile[]) {
-	const writableFiles = files.filter(file =>
-		isValidPythonFileName(file.name)
-	);
-	const currentFileNames = new Set(writableFiles.map(file => file.name));
-
-	for (const staleFileName of lastProjectFileNames) {
-		if (currentFileNames.has(staleFileName)) continue;
-		safeUnlink(pyodide, `${PROJECT_ROOT}/${staleFileName}`);
-	}
-
-	for (const file of writableFiles) {
-		writeProjectFile(pyodide, file);
-	}
-
-	lastProjectFileNames = currentFileNames;
-}
-
-async function captureProjectTextFiles(pyodide: PyodideAPI) {
-	const snapshot = await pyodide.runPythonAsync(`
-import json
-from pathlib import Path
-
-__classes_project_root = Path(${escapePythonString(PROJECT_ROOT)})
-__classes_reserved_files = {
-    "_classes_artifacts.py",
-    "_classes_keras.py",
-    "_classes_pgzero.py",
-    "pgzrun.py",
-    "pygame.py",
-    "pysynth.py",
-    "streamlit.py",
-    "turtle.py",
-    "zrect.py",
-}
-__classes_reserved_dirs = {"__pycache__", "keras", "pgzero", "tensorflow"}
-__classes_text_suffixes = {".csv", ".json", ".md", ".py", ".svg", ".txt"}
-__classes_files = []
-
-for __classes_path in sorted(__classes_project_root.rglob("*")):
-    if not __classes_path.is_file():
-        continue
-    __classes_rel = __classes_path.relative_to(__classes_project_root).as_posix()
-    __classes_parts = __classes_rel.split("/")
-    if __classes_rel in __classes_reserved_files:
-        continue
-    if any(__classes_part in __classes_reserved_dirs for __classes_part in __classes_parts):
-        continue
-    if __classes_path.suffix.lower() not in __classes_text_suffixes:
-        continue
-    try:
-        __classes_content = __classes_path.read_text(encoding="utf-8")
-    except UnicodeDecodeError:
-        continue
-    __classes_files.append({
-        "name": __classes_rel,
-        "content": __classes_content,
-        "encoding": "text",
-    })
-
-json.dumps(__classes_files)
-`);
-	const files = JSON.parse(String(snapshot)) as PythonIdeFile[];
-	const capturedFiles = files.filter(
-		file =>
-			isValidPythonFileName(file.name) &&
-			isPythonIdeTextFile(file.name) &&
-			file.encoding === "text"
-	);
-	for (const file of capturedFiles) lastProjectFileNames.add(file.name);
-	return capturedFiles;
-}
-
-function packageScanModules(
-	files: PythonIdeFile[],
-	importedModules: Set<string>,
-	standardLibraryModules: Set<string>
-) {
-	const pythonFiles = files.filter(file => isPythonIdePythonFile(file.name));
-	const localModules = new Set([
-		"_classes_pgzero",
-		"_classes_artifacts",
-		...BROWSER_SHIM_MODULES,
-		"pgzero",
-		"pgzrun",
-		"pygame",
-		"turtle",
-		"zrect",
-		...pythonIdeProjectModuleNames(pythonFiles)
-	]);
-
-	return [...importedModules]
-		.filter(
-			moduleName =>
-				!localModules.has(moduleName) &&
-				!MICROPIP_PACKAGES.has(moduleName) &&
-				!standardLibraryModules.has(moduleName) &&
-				!loadedPyodideImportModules.has(moduleName)
-		)
-		.sort();
-}
-
-async function loadPyodideImportPackages(
-	pyodide: PyodideAPI,
-	files: PythonIdeFile[],
-	importedModules: Set<string>,
-	onOutput: RunPythonProjectOptions["onOutput"]
-) {
-	const standardLibraryModules = await pythonStandardLibraryModules(pyodide);
-	const modules = packageScanModules(
-		files,
-		importedModules,
-		standardLibraryModules
-	);
-	if (!modules.length) return;
-
-	onOutput("system", `Loading Python packages: ${modules.join(", ")}`);
-	await pyodide.loadPackagesFromImports(
-		modules.map(moduleName => `import ${moduleName}`).join("\n")
-	);
-	for (const moduleName of modules)
-		loadedPyodideImportModules.add(moduleName);
-}
-
-async function installMicropipPackages(
-	pyodide: PyodideAPI,
-	modules: Set<string>,
-	onOutput: RunPythonProjectOptions["onOutput"]
-) {
-	const packages = [...modules]
-		.map(moduleName => MICROPIP_PACKAGES.get(moduleName))
-		.filter(
-			(packageName): packageName is string =>
-				!!packageName && !installedMicropipPackages.has(packageName)
-		);
-
-	if (!packages.length) return;
-
-	if (!pyodide.loadPackage) {
-		throw new Error(
-			`Python package installer is unavailable; cannot install ${packages.join(", ")}.`
-		);
-	}
-
-	onOutput("system", `Loading Python packages: ${packages.join(", ")}`);
-	if (!micropipLoaded) {
-		await pyodide.loadPackage("micropip");
-		micropipLoaded = true;
-	}
-	await pyodide.runPythonAsync(`
-import micropip
-await micropip.install(__import__("json").loads(${escapePythonString(JSON.stringify(packages))}))
-`);
-	for (const packageName of packages)
-		installedMicropipPackages.add(packageName);
-}
-
-async function loadBrowserShimDependencies(
-	pyodide: PyodideAPI,
-	modules: Set<string>,
-	onOutput: RunPythonProjectOptions["onOutput"]
-) {
-	if (!modules.has("tensorflow") && !modules.has("keras")) return;
-	if (!pyodide.loadPackage) return;
-	if (loadedBrowserShimPackages.has("numpy")) return;
-
-	onOutput("system", "Loading Python packages: numpy");
-	await pyodide.loadPackage("numpy");
-	loadedBrowserShimPackages.add("numpy");
-}
-
 function warnForBrowserLimitedLibraries(
 	modules: Set<string>,
 	onOutput: RunPythonProjectOptions["onOutput"]
@@ -4195,301 +3649,185 @@ function warnForBrowserLimitedLibraries(
 	}
 }
 
-function safeUnlink(pyodide: PyodideAPI, path: string) {
-	if (!pyodide.FS.unlink || !pyodide.FS.analyzePath(path).exists) return;
-	pyodide.FS.unlink(path);
-}
-
-function ensureDirectory(pyodide: PyodideAPI, path: string) {
-	if (!pyodide.FS.analyzePath(path).exists) {
-		pyodide.FS.mkdirTree(path);
-	}
-}
-
-function writeKerasPackage(pyodide: PyodideAPI) {
-	pyodide.FS.writeFile(`${PROJECT_ROOT}/_classes_keras.py`, kerasShim);
-	safeUnlink(pyodide, `${PROJECT_ROOT}/keras.py`);
-	ensureDirectory(pyodide, `${PROJECT_ROOT}/keras`);
-	ensureDirectory(pyodide, `${PROJECT_ROOT}/keras/datasets`);
-	ensureDirectory(pyodide, `${PROJECT_ROOT}/keras/preprocessing`);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/keras/__init__.py`,
-		[
-			"from _classes_keras import *",
-			"from _classes_keras import datasets, layers, models, optimizers, preprocessing, utils",
-			""
-		].join("\n")
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/keras/layers.py`,
-		"from _classes_keras import Conv2D, Dense, Dropout, Flatten, MaxPooling2D\n"
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/keras/models.py`,
-		"from _classes_keras import Sequential\n"
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/keras/optimizers.py`,
-		"from _classes_keras import Adam, RMSprop, SGD\n"
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/keras/utils.py`,
-		"from _classes_keras import to_categorical\n"
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/keras/datasets/__init__.py`,
-		"from _classes_keras import datasets\nboston_housing = datasets.boston_housing\n"
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/keras/datasets/boston_housing.py`,
-		"from _classes_keras import datasets\nload_data = datasets.boston_housing.load_data\n"
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/keras/preprocessing/__init__.py`,
-		"from _classes_keras import preprocessing\n"
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/keras/preprocessing/image.py`,
-		"from _classes_keras import DirectoryIterator, ImageDataGenerator\n"
-	);
-}
-
-function writeTensorFlowPackage(pyodide: PyodideAPI) {
-	safeUnlink(pyodide, `${PROJECT_ROOT}/tensorflow/keras.py`);
-	ensureDirectory(pyodide, `${PROJECT_ROOT}/tensorflow`);
-	ensureDirectory(pyodide, `${PROJECT_ROOT}/tensorflow/keras`);
-	ensureDirectory(pyodide, `${PROJECT_ROOT}/tensorflow/keras/datasets`);
-	ensureDirectory(pyodide, `${PROJECT_ROOT}/tensorflow/keras/preprocessing`);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/tensorflow/__init__.py`,
-		[
-			"from . import keras",
-			"__version__ = 'classes-teaching-shim'",
-			""
-		].join("\n")
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/tensorflow/keras/__init__.py`,
-		[
-			"from keras import *",
-			"from keras import datasets, layers, models, optimizers, preprocessing, utils",
-			""
-		].join("\n")
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/tensorflow/keras/layers.py`,
-		"from keras.layers import *\n"
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/tensorflow/keras/models.py`,
-		"from keras.models import *\n"
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/tensorflow/keras/optimizers.py`,
-		"from keras.optimizers import *\n"
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/tensorflow/keras/utils.py`,
-		"from keras.utils import *\n"
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/tensorflow/keras/datasets/__init__.py`,
-		"from keras.datasets import *\n"
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/tensorflow/keras/datasets/boston_housing.py`,
-		"from keras.datasets.boston_housing import *\n"
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/tensorflow/keras/preprocessing/__init__.py`,
-		"from keras.preprocessing import *\n"
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/tensorflow/keras/preprocessing/image.py`,
-		"from keras.preprocessing.image import *\n"
-	);
-}
-
-function writeRuntimeShims(pyodide: PyodideAPI) {
-	if (
-		runtimeShimsWrittenForBootstrapVersion ===
-		PYTHON_IDE_RUNTIME_BOOTSTRAP_VERSION
-	) {
-		return;
-	}
-
-	pyodide.FS.writeFile(`${PROJECT_ROOT}/turtle.py`, turtleShim);
-	pyodide.FS.writeFile(`${PROJECT_ROOT}/_classes_artifacts.py`, artifactShim);
-	pyodide.FS.writeFile(`${PROJECT_ROOT}/pysynth.py`, pysynthShim);
-	pyodide.FS.writeFile(`${PROJECT_ROOT}/streamlit.py`, streamlitShim);
-	writeKerasPackage(pyodide);
-	pyodide.FS.writeFile(`${PROJECT_ROOT}/_classes_pgzero.py`, pgzeroShim);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/pgzrun.py`,
-		"from _classes_pgzero import go\n"
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/zrect.py`,
-		"from _classes_pgzero import ZRect, Rect\n"
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/pygame.py`,
-		"from _classes_pgzero import Rect\n"
-	);
-
-	if (!pyodide.FS.analyzePath(`${PROJECT_ROOT}/pgzero`).exists) {
-		pyodide.FS.mkdirTree(`${PROJECT_ROOT}/pgzero`);
-	}
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/pgzero/__init__.py`,
-		"from _classes_pgzero import *\n"
-	);
-	pyodide.FS.writeFile(
-		`${PROJECT_ROOT}/pgzero/builtins.py`,
-		"from _classes_pgzero import *\n"
-	);
-
-	writeTensorFlowPackage(pyodide);
-	runtimeShimsWrittenForBootstrapVersion =
-		PYTHON_IDE_RUNTIME_BOOTSTRAP_VERSION;
+function pythonIdeSandboxRuntimeFiles(): PythonIdeFile[] {
+	return [
+		{ name: "turtle.py", content: turtleShim, encoding: "text" },
+		{
+			name: "_classes_artifacts.py",
+			content: artifactShim,
+			encoding: "text"
+		},
+		{ name: "pysynth.py", content: pysynthShim, encoding: "text" },
+		{ name: "streamlit.py", content: streamlitShim, encoding: "text" },
+		{
+			name: "_classes_keras.py",
+			content: kerasShim,
+			encoding: "text"
+		},
+		{
+			name: "_classes_pgzero.py",
+			content: pgzeroShim,
+			encoding: "text"
+		},
+		{
+			name: "pgzrun.py",
+			content: "from _classes_pgzero import go\n",
+			encoding: "text"
+		},
+		{
+			name: "zrect.py",
+			content: "from _classes_pgzero import ZRect, Rect\n",
+			encoding: "text"
+		},
+		{
+			name: "pygame.py",
+			content: "from _classes_pgzero import Rect\n",
+			encoding: "text"
+		},
+		{
+			name: "pgzero/__init__.py",
+			content: "from _classes_pgzero import *\n",
+			encoding: "text"
+		},
+		{
+			name: "pgzero/builtins.py",
+			content: "from _classes_pgzero import *\n",
+			encoding: "text"
+		},
+		{
+			name: "keras/__init__.py",
+			content: [
+				"from _classes_keras import *",
+				"from _classes_keras import datasets, layers, models, optimizers, preprocessing, utils",
+				""
+			].join("\n"),
+			encoding: "text"
+		},
+		{
+			name: "keras/layers.py",
+			content:
+				"from _classes_keras import Conv2D, Dense, Dropout, Flatten, MaxPooling2D\n",
+			encoding: "text"
+		},
+		{
+			name: "keras/models.py",
+			content: "from _classes_keras import Sequential\n",
+			encoding: "text"
+		},
+		{
+			name: "keras/optimizers.py",
+			content: "from _classes_keras import Adam, RMSprop, SGD\n",
+			encoding: "text"
+		},
+		{
+			name: "keras/utils.py",
+			content: "from _classes_keras import to_categorical\n",
+			encoding: "text"
+		},
+		{
+			name: "keras/datasets/__init__.py",
+			content:
+				"from _classes_keras import datasets\nboston_housing = datasets.boston_housing\n",
+			encoding: "text"
+		},
+		{
+			name: "keras/datasets/boston_housing.py",
+			content:
+				"from _classes_keras import datasets\nload_data = datasets.boston_housing.load_data\n",
+			encoding: "text"
+		},
+		{
+			name: "keras/preprocessing/__init__.py",
+			content: "from _classes_keras import preprocessing\n",
+			encoding: "text"
+		},
+		{
+			name: "keras/preprocessing/image.py",
+			content:
+				"from _classes_keras import DirectoryIterator, ImageDataGenerator\n",
+			encoding: "text"
+		},
+		{
+			name: "tensorflow/__init__.py",
+			content:
+				"from . import keras\n__version__ = 'classes-teaching-shim'\n",
+			encoding: "text"
+		},
+		{
+			name: "tensorflow/keras/__init__.py",
+			content:
+				"from keras import *\nfrom keras import datasets, layers, models, optimizers, preprocessing, utils\n",
+			encoding: "text"
+		},
+		{
+			name: "tensorflow/keras/layers.py",
+			content: "from keras.layers import *\n",
+			encoding: "text"
+		},
+		{
+			name: "tensorflow/keras/models.py",
+			content: "from keras.models import *\n",
+			encoding: "text"
+		},
+		{
+			name: "tensorflow/keras/optimizers.py",
+			content: "from keras.optimizers import *\n",
+			encoding: "text"
+		},
+		{
+			name: "tensorflow/keras/utils.py",
+			content: "from keras.utils import *\n",
+			encoding: "text"
+		},
+		{
+			name: "tensorflow/keras/datasets/__init__.py",
+			content: "from keras.datasets import *\n",
+			encoding: "text"
+		},
+		{
+			name: "tensorflow/keras/datasets/boston_housing.py",
+			content: "from keras.datasets.boston_housing import *\n",
+			encoding: "text"
+		},
+		{
+			name: "tensorflow/keras/preprocessing/__init__.py",
+			content: "from keras.preprocessing import *\n",
+			encoding: "text"
+		},
+		{
+			name: "tensorflow/keras/preprocessing/image.py",
+			content: "from keras.preprocessing.image import *\n",
+			encoding: "text"
+		}
+	];
 }
 
 export async function runPythonProject(options: RunPythonProjectOptions) {
-	if (options.mode === "python")
-		return runPlainPythonProjectInWorker(options);
-
-	const pyodide = await loadRuntime();
-	throwIfRunStopped(options);
-	releaseRuntimeCallbackRegistries(pyodide);
-	clearRuntimeShimModules(pyodide);
-	throwIfRunStopped(options);
-	window.__classesPythonIdeTurtle = options.turtleBridge;
-	window.__classesPythonIdeGame = options.gameBridge;
-	window.__classesPythonIdeArtifacts = {
-		emit(title: string, mimeType: string, data: string) {
-			options.onArtifact({ title, mimeType, data });
-		}
-	};
-	options.gameBridge.stopLoop();
-	if (options.mode === "pgzero") {
-		options.gameBridge.reset();
-	} else {
-		options.turtleBridge.reset();
-	}
-
-	if (pyodide.setStdout) {
-		pyodide.setStdout({
-			batched: text => options.onOutput("stdout", text)
-		});
-	}
-	if (pyodide.setStderr) {
-		pyodide.setStderr({
-			batched: text => options.onOutput("stderr", text)
-		});
-	}
-
-	ensureProjectDirectory(pyodide);
-	const importedModules = pythonIdeImportedTopLevelModules(options.files);
-	const projectModuleNames = pythonIdeProjectModuleNames([
-		...options.files,
-		...[...lastProjectFileNames].map(name => ({ name }))
-	]);
-	warnForBrowserLimitedLibraries(importedModules, options.onOutput);
-
-	syncProjectFiles(pyodide, options.files);
-	writeRuntimeShims(pyodide);
-
 	const activeFile = getPythonIdeRunnableFile(options);
 	if (!activeFile)
 		throw new Error("Project does not have a runnable Python file.");
-
-	await loadPyodideImportPackages(
-		pyodide,
-		options.files,
-		importedModules,
-		options.onOutput
-	);
-	throwIfRunStopped(options);
-	await loadBrowserShimDependencies(
-		pyodide,
-		importedModules,
-		options.onOutput
-	);
-	throwIfRunStopped(options);
-	await installMicropipPackages(pyodide, importedModules, options.onOutput);
-	throwIfRunStopped(options);
-
-	pyodide.runPython(`
-import os
-import sys
-os.chdir(${escapePythonString(PROJECT_ROOT)})
-if ${escapePythonString(PROJECT_ROOT)} not in sys.path:
-    sys.path.insert(0, ${escapePythonString(PROJECT_ROOT)})
-for __classes_module_name in __import__("json").loads(${escapePythonString(JSON.stringify(projectModuleNames))}):
-    sys.modules.pop(__classes_module_name, None)
-${createInputBootstrap(options.inputText, options.mode)}
-if ${options.mode === "pgzero" ? "True" : "False"}:
-    import _classes_pgzero
-    _classes_pgzero.install_builtins()
-if ${options.mode === "data" || importedModules.has("matplotlib") ? "True" : "False"}:
-    try:
-        import matplotlib
-        matplotlib.use("Agg")
-    except Exception:
-        pass
-try:
-    import builtins
-    from _classes_artifacts import emit_matplotlib_figures, show_chart
-    builtins.show_chart = show_chart
-    builtins.show_plots = emit_matplotlib_figures
-except Exception:
-    pass
-`);
-	throwIfRunStopped(options);
-
-	await pyodide.runPythonAsync(`
-import __main__
-__main__.__dict__["__name__"] = "__main__"
-__main__.__dict__["__file__"] = ${escapePythonString(activeFile.name)}
-exec(
-    __classes_compile_student_source(
-        open(${escapePythonString(activeFile.name)}, "r", encoding="utf-8").read(),
-        ${escapePythonString(activeFile.name)},
-    ),
-    __main__.__dict__,
-	)
-	`);
-	throwIfRunStopped(options);
-
-	await pyodide.runPythonAsync(`
-try:
-    from _classes_artifacts import emit_matplotlib_figures
-    emit_matplotlib_figures()
-except Exception as error:
-    import sys
-    print("Could not render chart artifact: {}".format(error), file=sys.stderr)
-`);
-	throwIfRunStopped(options);
-
-	options.onProjectFilesUpdate?.(await captureProjectTextFiles(pyodide));
-	throwIfRunStopped(options);
-
-	if (options.mode === "pgzero") {
-		await pyodide.runPythonAsync(`
-	import __main__
-	import _classes_pgzero
-	_classes_pgzero.__classes_pgzero_start(__main__.__dict__)
-	`);
-		throwIfRunStopped(options);
-		const runContinuously = options.gameBridge.consumeLoopRequest();
-		options.gameBridge.startLoop(
-			async () => {
-				await pyodide.runPythonAsync(`
-	import _classes_pgzero
-	_classes_pgzero.__classes_pgzero_tick()
-	`);
-			},
-			{ continuous: runContinuously }
-		);
-	}
+	const importedModules = pythonIdeImportedTopLevelModules(options.files);
+	warnForBrowserLimitedLibraries(importedModules, options.onOutput);
+	const filteredOptions: RunPythonProjectOptions = {
+		...options,
+		onProjectFilesUpdate: options.onProjectFilesUpdate
+			? files =>
+					options.onProjectFilesUpdate?.(
+						filterCapturedProjectTextFiles(files)
+					)
+			: undefined
+	};
+	return runPythonProjectInSandbox(filteredOptions, {
+		activeFileName: activeFile.name,
+		files: clonePlainPythonIdeFiles(options.files),
+		importedModules: [...importedModules],
+		inputBootstrap: createInputBootstrap(options.inputText, options.mode),
+		inputText: options.inputText,
+		micropipPackages: [...MICROPIP_PACKAGES],
+		mode: options.mode,
+		projectModuleNames: pythonIdeProjectModuleNames(options.files),
+		projectRoot: PROJECT_ROOT,
+		runtimeFiles: pythonIdeSandboxRuntimeFiles(),
+		runtimeModules: PYTHON_IDE_RUNTIME_MODULES
+	});
 }

@@ -19,7 +19,7 @@ const pythonProjectReviewSchema: Schema<IPythonProjectReview> = new Schema(
 	{
 		user: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "User",
+			ref: "Student",
 			required: true,
 			index: true
 		},
@@ -50,7 +50,7 @@ const pythonProjectReviewSchema: Schema<IPythonProjectReview> = new Schema(
 		},
 		reviewerRole: {
 			type: String,
-			enum: ["admin", "tutor"],
+			enum: ["admin"],
 			required: true
 		},
 		reviewerName: { type: String, trim: true, maxlength: 160 },
@@ -60,19 +60,21 @@ const pythonProjectReviewSchema: Schema<IPythonProjectReview> = new Schema(
 		},
 		lastEditedByRole: {
 			type: String,
-			enum: ["admin", "tutor"],
+			enum: ["admin"],
 			default: undefined
 		},
 		lastEditedByName: { type: String, trim: true, maxlength: 160 },
 		visibleToStudent: { type: Boolean, default: false, required: true },
 		note: { type: String, default: "", maxlength: 20000 },
-		sourceUpdatedAt: { type: Date, required: true }
+		sourceUpdatedAt: { type: Date, required: true },
+		deletedAt: { type: Date, default: undefined }
 	},
 	{ timestamps: true }
 );
 
 pythonProjectReviewSchema.index({ user: 1, sourceProject: 1 }, { unique: true });
 pythonProjectReviewSchema.index({ user: 1, visibleToStudent: 1, updatedAt: -1 });
+pythonProjectReviewSchema.index({ deletedAt: 1 }, { expireAfterSeconds: 60 * 60 });
 
 export const PythonProjectReview: Model<IPythonProjectReview> = mongoose.model<IPythonProjectReview>(
 	"PythonProjectReview",

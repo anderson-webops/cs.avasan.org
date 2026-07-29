@@ -1,19 +1,29 @@
 // src/routes/accountRoutes.ts
 
 import { Router } from "express";
-import { changeEmail, changePassword, checkEmail, login, logout } from "../controllers/auth/authController.js";
+import {
+	changePassword,
+	login,
+	logout
+} from "../controllers/auth/authController.js";
 import { validAdmin } from "../middleware/auth.js";
-import { createLoginLimiter } from "../middleware/rateLimiters.js";
+import {
+	createLoginLimiter,
+	createTeacherVerificationLimiter
+} from "../middleware/rateLimiters.js";
 
 export function createAccountRoutes(): Router {
 	const router = Router();
+	const teacherVerificationLimiter = createTeacherVerificationLimiter();
 
-	// Account security belongs to the sole authenticated teacher account.
-	router.post("/checkEmail", validAdmin, checkEmail);
-
-	router.post("/changeEmail/:ID", validAdmin, changeEmail);
-
-	router.post("/changePassword/:ID", validAdmin, changePassword);
+	// Julio's email is provisioned only by code; runtime account security is
+	// limited to changing his own password.
+	router.post(
+		"/changePassword/:ID",
+		validAdmin,
+		teacherVerificationLimiter,
+		changePassword
+	);
 
 	// Login is the only public account operation and is throttled per client IP.
 	router.post("/login", createLoginLimiter(), login);

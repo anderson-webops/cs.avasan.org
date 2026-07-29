@@ -22,6 +22,10 @@ describe("TheHeader.vue", () => {
 					RouterLink: {
 						props: ["to"],
 						template: '<a :href="to"><slot /></a>'
+					},
+					StudentAccess: {
+						template:
+							'<div data-testid="student-access">Student access</div>'
 					}
 				}
 			}
@@ -41,6 +45,9 @@ describe("TheHeader.vue", () => {
 		]);
 		expect(wrapper.text()).not.toContain("Teacher log in");
 		expect(wrapper.find(".site-nav__actions").exists()).toBe(false);
+		expect(wrapper.get('[data-testid="student-access"]').exists()).toBe(
+			true
+		);
 		expect(wrapper.text()).not.toMatch(
 			/Sign up|Book a Class|Tuition|Zoom|Pathways|Teaching/
 		);
@@ -64,6 +71,12 @@ describe("TheHeader.vue", () => {
 		expect(wrapper.text()).toContain("Log out");
 		expect(wrapper.text()).not.toContain("Teacher log in");
 		expect(wrapper.text()).not.toContain("Account");
+		expect(wrapper.get('[data-testid="student-access"]').exists()).toBe(
+			true
+		);
+		expect(wrapper.get('[data-testid="student-access"]').isVisible()).toBe(
+			false
+		);
 		expect(
 			wrapper
 				.findAll("a")

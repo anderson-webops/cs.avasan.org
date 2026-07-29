@@ -31,7 +31,7 @@ describe("public home page", () => {
 		await flushPromises();
 
 		expect(wrapper.get("h1").text()).toBe("Courses");
-		expect(wrapper.text()).toContain("No student account is needed.");
+		expect(wrapper.text()).not.toContain("No student account is needed.");
 		expect(
 			wrapper
 				.get('[data-testid="course-explorer"]')
