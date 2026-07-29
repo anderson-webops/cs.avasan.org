@@ -1974,6 +1974,7 @@ export const researchBackedExpansionProfiles: Record<
 	pygames: pyGameProfile,
 	"pygames-classroom": pyGameProfile,
 	"python-level-1": pythonLevel1Profile,
+	"python-level-1-classroom": pythonLevel1Profile,
 	"python-level-2": pythonLevel2Profile,
 	"python-level-2-classroom": pythonLevel2Profile,
 	"python-level-3": pythonLevel3Profile,

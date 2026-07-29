@@ -1,100 +1,58 @@
-import type { RawCourse } from "./types";
-import { pendingStaticMediaNotice, staticMediaUrl } from "./staticMedia";
+import type {
+	CourseItemLearningPath,
+	RawCourse,
+	RawCourseModule,
+	RawCourseModuleItem
+} from "./types";
 
 const TURTLE_REFERENCE = "/course-assets/python/turtle-project-reference.md";
 const TURTLE_COMMAND_REFERENCE = `${TURTLE_REFERENCE}#turtle-command-reference`;
 const TURTLE_BOUNDARY_REFERENCE = `${TURTLE_REFERENCE}#boundaries-and-in-bounds-checks`;
 const TURTLE_SCORE_REFERENCE = `${TURTLE_REFERENCE}#score-turtle-pattern`;
 const TURTLE_GAME_TEMPLATE_REFERENCE = `${TURTLE_REFERENCE}#game-template-with-score-boundaries-and-moving-triangles`;
-
-const PYTHON_LEVEL_1_ORIGINAL_MEDIA = [
-	"grs1_turtle_exploration(1).mp4",
-	"grs2_basic_shapes.mp4",
-	"grs2_smiley_face.mp4",
-	"grs2_more_shapes.mp4",
-	"grs2_bullseye.mp4",
-	"grs2_watermelon_slice.mp4",
-	"grs2_taxi.mp4",
-	"grs2_captain_american_shield.mp4",
-	"grs2_minion.mp4",
-	"grs3_awesome_angles.mp4",
-	"grs3_surprise_me_square.mp4",
-	"grs3_random_walk.mp4",
-	"grs3_random_bowtie.mp4",
-	"grs3_debugging_practice.mp4",
-	"grs9_surprise_shape.gif",
-	"grs4_find_your_turtle.mp4",
-	"grs4_navigating_the_coordinate_plane.mp4",
-	"grs7_zigzag.mp4",
-	"grs4_fireworks.mp4",
-	"WhileLoopsExploration(1).mp4",
-	"grs5_square_spiral.mp4",
-	"grs4_rainbow_ninja_star.mp4",
-	"grs4_into_the_void.mp4",
-	"grs4_out_of_the_void.mp4",
-	"grs9_turtle_race.gif",
-	"grs9_project_1.mp4",
-	"grs5_square_inception.mp4",
-	"grs5_pyramid.mp4",
-	"grs5_reverse_pyramid.mp4",
-	"grs5_reverse_square_inception.mp4",
-	"grs5_rainbow_flower.mp4",
-	"grs5_circle_of_circles.mp4",
-	"grs1_spirals.mp4",
-	"grs6_project_1.mp4",
-	"grs6_project_2.mp4",
-	"grs6_randomly_random_shapes.mp4",
-	"grs7_project_1.mp4",
-	"grs8_etch_a_sketch.gif",
-	"grs8_picasso_game.gif",
-	"grs8_polka_dot_game.gif",
-	"grs8_fruit_stand.gif",
-	"grs8_project_1.mp4",
-	"grs8_project_2.mp4",
-	"grs9_polkadots.mp4",
-	"grs8_project_3.mp4",
-	"grs7_any_shape_staircase.mp4",
-	"grs7_debugging_functions.mp4",
-	"grs7_square_inception_with_functions.mp4",
-	"grs6_rainbow_square_inception.mp4",
-	"grs6_snowflake.mp4",
-	"grs7_winter_wonderland.gif",
-	"grs6_spiral_staircase.mp4",
-	"grs6_dizzy_hexagon.mp4",
-	"grs11_project_1.mp4",
-	"grs9_random_age.gif",
-	"grs9_turtle_launch.gif",
-	"grs12_list_exploration.mp4",
-	"grs10_which_way_turtles.gif",
-	"grs10_random_number_lists.gif",
-	"grs10_turtle_launch_with_lists.gif",
-	"grs10_rainbow_path.gif",
-	"grs10_debugging_practice.gif",
-	"grs13_perpetual_motion.mp4",
-	"grs11_stay_inbounds.gif",
-	"grs13_fluid_motion.mp4",
-	"grs10_bouncy_ball_room.gif",
-	"grs11_turtle_collision.gif",
-	"grs11_light_the_stars.gif",
-	"grs13_dodgeball.mp4",
-	"grs12_space_eater.gif",
-	"grs12_turtle_run.gif",
-	"grs12_target_practice.gif",
-	"grs12_pong.gif",
-	"grs12_fidget_spinner.gif",
-	"grs12_snake.gif"
-];
+const TURTLE_COLOR_REFERENCE = "https://trinket.io/docs/colors";
+const PYTHON_LIST_METHOD_REFERENCE =
+	"https://www.w3schools.com/python/python_ref_list.asp";
 
 export const pythonLevel1Course: RawCourse = {
 	name: "Python Level 1",
 	modules: [
 		{
+			title: "First 10 Days: Show, Play, Then Explain",
+			curriculum: [
+				{
+					title: "Quick Start Project 1: Color Circle Art",
+					content: `**Focus:** Begin by pressing Run so the first experience is a complete, colorful result rather than a list of definitions. Change the color list, circle count, radius, and three drawing positions, then predict and observe one result after each small edit. Trace the finished program from constants to the outer position loop, the circle loop, the drawing functions, and the pen-up, goto, pen-down movement pattern. Connect the visible repetition to loops and the reusable drawing actions to functions only after the design has been explored. Use ${TURTLE_COLOR_REFERENCE} to choose additional colors that work in Turtle. Finish by identifying one constant, one function call, and one repeated action in the code.`,
+					projectLink: "/ide?mode=turtle&template=circle-art",
+					datasetLink: TURTLE_COLOR_REFERENCE
+				},
+				{
+					title: "Quick Start Project 2: Picasso Keyboard Painter",
+					content:
+						"Open the prepared keyboard-art starter. It supplies the `Screen` and `Turtle` imports, `choice`, the color list, black canvas, Turtle setup, `screen.onkey()`, and `screen.listen()`. Replace the `draw_square()` placeholder with the complete drawing function. Keep the name `draw_square`, or change both the function definition and the name passed to `screen.onkey()` so they match. Inside the function, choose the pen size and outline/fill colors, begin the fill, draw and turn four times, and end the fill. Run the project, click the canvas, and press or hold S to paint overlapping squares. After it works, remix one feature at a time: change the side length, add a clear function on Space, bind another shape to a new key, add arrow-key movement, or expand the color list. Finish by tracing the S key from `screen.onkey()` to the student-created function and then to the visible drawing.",
+					projectLink: "/ide?mode=turtle&template=picasso"
+				},
+				{
+					title: "Debugging Habit: Read the First Red Squiggle",
+					content:
+						"Treat editor marks and error messages as instructions rather than failure. Stop at the first red squiggle or first error line, read the message aloud, locate the named line, and change one thing before running again. Practice with a missing colon, mismatched indentation, a misspelled variable, and an event function called with parentheses. Compare each broken version with the last working version to build a repeatable debugging routine before projects become larger. Record the symptom, the first useful clue, the single edit, and the new result for each repair. If another error remains, restart the same process from the new first message instead of changing several lines at once."
+				},
+				{
+					title: "Reflection: Name the Ideas After Play",
+					content:
+						"After changing and rerunning both projects, connect each observation to vocabulary: repeated drawing steps are iteration, named reusable actions are functions, values passed into actions are parameters, key presses are events, and constants provide safe remix controls. Predict one visible change before an edit, explain the actual result afterward, and point to the line or block that caused it. Compare the two starters by identifying what runs once, what repeats, and what waits for input. Then continue into GrS1 for the formal coordinate, movement, pen-control, and program-structure sequence. The later Circle of Circles and Picasso projects revisit these previews with less scaffolding, more planning, and fuller independence."
+				}
+			],
+			supplementalProjects: []
+		},
+		{
 			title: "GrS1 Coordinates and Movement",
 			curriculum: [
 				{
 					title: "Introduction and Setup",
-					content:
-						"Get comfortable with the coding environment, the Turtle canvas, the console, and project instructions. Learn what Python is used for and how Turtle programs are organized.",
+					content: `Get comfortable with the coding environment, the Turtle canvas, the console, and project instructions. Learn what Python is used for and how Turtle programs are organized.
+
+Color reference: use Trinket's Turtle color table when choosing Turtle names, CSS names, hex codes, or RGB values: ${TURTLE_COLOR_REFERENCE}`,
 					datasetLink: TURTLE_COMMAND_REFERENCE
 				},
 				{
@@ -213,10 +171,18 @@ export const pythonLevel1Course: RawCourse = {
 				},
 				{
 					title: "GrS3 Project 2: Surprise Me Square",
-					content:
-						"Replace hardcoded coordinates, side lengths, and RGB values with variables, then use `random.randint()` to generate random locations, sizes, and colors for a square.",
+					content: `Replace hardcoded coordinates, side lengths, and RGB values with variables, then use \`random.randint()\` to generate random locations, sizes, and colors for a square.
+
+Color reference: compare Turtle color names and RGB values with ${TURTLE_COLOR_REFERENCE}`,
 					solutionLink:
 						"https://github.com/instruction-material/Python-Level-1/tree/main/Surprise-Me-Square/solution"
+				},
+				{
+					title: "GrS3 Guided Project: User Input Shape Designer",
+					content: `Use \`screen.textinput()\` and \`screen.numinput()\` to let the user choose a shape color and size before Turtle draws. Store each response in a descriptively named variable, provide a safe default when the user cancels, and validate the size before using it.
+
+Test a typical color and size, the smallest accepted size, a value outside the accepted range, and a canceled prompt. Finish by explaining how the user's response becomes program state and then changes the visible drawing.`,
+					datasetLink: TURTLE_COLOR_REFERENCE
 				},
 				{
 					title: "GrS3 Project 3: Random Walk",
@@ -820,8 +786,9 @@ Include one original example with at least three possible outcomes. A strong rec
 			curriculum: [
 				{
 					title: "GrS12 Project 1: List Exploration",
-					content:
-						"Create empty lists, append values, loop through list items, and check whether a value is present with the `in` operator.",
+					content: `Create empty lists, append values, loop through list items, and check whether a value is present with the \`in\` operator.
+
+Method reference: use W3Schools' Python list methods page when checking what list operations such as \`.append()\` and \`.remove()\` do: ${PYTHON_LIST_METHOD_REFERENCE}`,
 					solutionLink:
 						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS12-List-Exploration/solution"
 				},
@@ -851,8 +818,9 @@ The list removes repeated launch code. Completion means adding another turtle on
 				},
 				{
 					title: "GrS12 Supplemental Project 2: Rainbow Path",
-					content:
-						"Store color strings in a list and iterate through them to create a path with changing colors and random turns.",
+					content: `Store color strings in a list and iterate through them to create a path with changing colors and random turns.
+
+Color reference: choose color strings from ${TURTLE_COLOR_REFERENCE}`,
 					solutionLink:
 						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS12-Rainbow-Path/solution"
 				},
@@ -1068,23 +1036,383 @@ Track the game-over conditions explicitly: hitting a wall, colliding with the sn
 				}
 			],
 			supplementalProjects: []
-		},
-		{
-			kind: "appendix",
-			title: "Pending Demo Media",
-			curriculum: [
-				{
-					title: "Pending Python Level 1 Demo Media",
-					content: [
-						"This course lists pending demo media below. Each entry keeps a stable static media URL so the matching file can be added without changing course links.",
-						...PYTHON_LEVEL_1_ORIGINAL_MEDIA.map(
-							filename =>
-								`- ${staticMediaUrl(filename)}\n\n${pendingStaticMediaNotice(filename)}`
-						)
-					].join("\n\n")
-				}
-			],
-			supplementalProjects: []
 		}
 	]
 };
+
+interface PythonLevel1FlowConfig {
+	title: string;
+	estimatedTime: string;
+	keyBlocks: string[];
+	choiceCurriculumTitles?: string[];
+	challengeCurriculumTitles?: string[];
+	projectThread: string;
+}
+
+const PYTHON_LEVEL_1_FLOW: PythonLevel1FlowConfig[] = [
+	{
+		title: "First 10 Days: Show, Play, Then Explain",
+		estimatedTime: "4–6 sessions · 45–60 minutes each",
+		keyBlocks: [
+			"turtle.Turtle()",
+			"for",
+			"def",
+			"screen.onkey()",
+			"read-run-change-explain"
+		],
+		projectThread:
+			"Run and remix the two complete visual projects before formal vocabulary. Treat the debugging routine and explanation as evidence that a visible change can be traced back to code."
+	},
+	{
+		title: "GrS1 Coordinates and Movement",
+		estimatedTime: "2 sessions · 45–60 minutes each",
+		keyBlocks: [
+			"forward()",
+			"left() / right()",
+			"goto()",
+			"penup() / pendown()",
+			"begin_fill() / end_fill()"
+		],
+		projectThread:
+			"Complete Turtle Exploration as the required movement-and-placement build. Use the recap or original drawing only when more coordinate or pen-control practice is useful."
+	},
+	{
+		title: "GrS2 Loops",
+		estimatedTime: "2 sessions · 45–60 minutes each",
+		keyBlocks: ["for", "range()", "loop body", "side count", "turn angle"],
+		choiceCurriculumTitles: ["GrS2 Project 2: Smiley Face"],
+		challengeCurriculumTitles: [
+			"GrS2 Project 3: Open Ended Project - Drawing with Loops"
+		],
+		projectThread:
+			"Use Basic Shapes to connect repetition count, side count, and turn angle. Smiley Face is a guided choice, while the original drawing is the independent challenge."
+	},
+	{
+		title: "GrS3 Variables and Random Numbers",
+		estimatedTime: "3 sessions · 45–60 minutes each",
+		keyBlocks: [
+			"variable assignment",
+			"random.randint()",
+			"screen.textinput()",
+			"screen.numinput()",
+			"input validation"
+		],
+		choiceCurriculumTitles: ["GrS3 Project 3: Random Walk"],
+		projectThread:
+			"Move from named drawing values to bounded randomness, then collect and validate user input in the Shape Designer. Random Walk is an optional transfer project after those state changes can be explained."
+	},
+	{
+		title: "GrS4 Conditionals Part 1",
+		estimatedTime: "2 sessions · 45–60 minutes each",
+		keyBlocks: [
+			"if",
+			"comparison operators",
+			"and / or",
+			"xcor() / ycor()",
+			"true and false branches"
+		],
+		projectThread:
+			"Use Surprise Shape for branch selection and Find Your Turtle for coordinate regions. Test a true case, a false case, and an exact boundary before adding an optional game."
+	},
+	{
+		title: "Check-In #1",
+		estimatedTime: "1–2 sessions · 45–60 minutes each",
+		keyBlocks: [
+			"Turtle movement",
+			"for loops",
+			"variables",
+			"random values",
+			"conditionals"
+		],
+		projectThread:
+			"Use this as a readiness checkpoint, not a second unit. Complete the integrated case, record one trace, and assign only the smallest review project needed for a demonstrated gap."
+	},
+	{
+		title: "GrS5 Loops with Variables",
+		estimatedTime: "2–3 sessions · 45–60 minutes each",
+		keyBlocks: [
+			"while",
+			"reassignment",
+			"counter",
+			"coordinate condition",
+			"break"
+		],
+		challengeCurriculumTitles: ["GrS5 Project 3: Square Spiral"],
+		projectThread:
+			"Use Fireworks to make reassignment visible and While Loops Exploration to connect condition, update, and stopping behavior. Square Spiral is the independent challenge."
+	},
+	{
+		title: "GrS6 Nested Loops Part 1",
+		estimatedTime: "2 sessions · 45–60 minutes each",
+		keyBlocks: [
+			"outer loop",
+			"inner loop",
+			"total iterations",
+			"changing size",
+			"shape placement"
+		],
+		challengeCurriculumTitles: [
+			"GrS6 Project 3: Open Ended Project - Nested Loop Pattern"
+		],
+		projectThread:
+			"Trace one inner loop completely before advancing the outer loop, then build Square Inception. The open-ended pattern begins only after the total repetition count can be predicted."
+	},
+	{
+		title: "GrS7 Functions Part 1",
+		estimatedTime: "2 sessions · 45–60 minutes each",
+		keyBlocks: [
+			"def",
+			"function call",
+			"helper function",
+			"local responsibility",
+			"reuse"
+		],
+		projectThread:
+			"Refactor the repeated house parts into named helpers, then build and call small Turtle utilities. Two calls demonstrate that a function is being reused."
+	},
+	{
+		title: "GrS8 Event Listeners",
+		estimatedTime: "2–3 sessions · 45–60 minutes each",
+		keyBlocks: [
+			"screen.onkey()",
+			"screen.onclick()",
+			"screen.listen()",
+			"callback function",
+			"canvas focus"
+		],
+		choiceCurriculumTitles: ["GrS8 Project 3: Picasso Game"],
+		projectThread:
+			"Connect one named function to one input event, then build Etch A Sketch with dependable canvas focus and controls. Picasso is a choice because its main idea was previewed in the opening module."
+	},
+	{
+		title: "Check-In #2",
+		estimatedTime: "1–2 sessions · 45–60 minutes each",
+		keyBlocks: [
+			"while and nested loops",
+			"function definitions",
+			"function calls",
+			"event callbacks",
+			"clean restart"
+		],
+		projectThread:
+			"Trace one input from event to function to visible result, then use targeted review only for the loop, function, or event step that cannot yet be explained."
+	},
+	{
+		title: "GrS9 Functions Part 2",
+		estimatedTime: "2–3 sessions · 45–60 minutes each",
+		keyBlocks: [
+			"parameters",
+			"arguments",
+			"multiple calls",
+			"click coordinates",
+			"generalized helper"
+		],
+		choiceCurriculumTitles: ["GrS9 Project 3: Polka Dots"],
+		challengeCurriculumTitles: [
+			"GrS9 Project 4: Click and Draw Rectangles"
+		],
+		projectThread:
+			"Generalize repeated shape functions with parameters before adding coordinate-driven callbacks. Polka Dots is a guided choice and Click and Draw Rectangles is the four-quadrant challenge."
+	},
+	{
+		title: "GrS10 Nested Loops Part 2",
+		estimatedTime: "2–3 sessions · 45–60 minutes each",
+		keyBlocks: [
+			"nested loops",
+			"function parameters",
+			"rotation",
+			"changing color",
+			"random placement"
+		],
+		choiceCurriculumTitles: ["GrS10 Project 1: Rainbow Square Inception"],
+		challengeCurriculumTitles: ["GrS10 Project 3: Winter Wonderland"],
+		projectThread:
+			"Use Snowflake as the required synthesis of nested structure and reusable drawing. Rainbow Square Inception is a fluency choice; Winter Wonderland is the parameter-and-randomness challenge."
+	},
+	{
+		title: "GrS11 Conditionals Part 2",
+		estimatedTime: "2 sessions · 45–60 minutes each",
+		keyBlocks: [
+			"if / elif / else",
+			"ordered ranges",
+			"mutually exclusive outcomes",
+			"boundary values",
+			"fallback branch"
+		],
+		projectThread:
+			"Build ordered branches, then test the smallest and largest value in every range. Random Age is complete only when there are no overlaps or uncovered boundary values."
+	},
+	{
+		title: "GrS12 Lists",
+		estimatedTime: "2–3 sessions · 45–60 minutes each",
+		keyBlocks: [
+			"list literal",
+			"append()",
+			"for item in list",
+			"index",
+			"in"
+		],
+		choiceCurriculumTitles: ["GrS12 Project 3: Random Number Lists"],
+		projectThread:
+			"Explore list creation and mutation, then use Which Way Turtles to apply one command to many objects. Random Number Lists is a data-focused choice after iteration is reliable."
+	},
+	{
+		title: "GrS13 Game Mechanics",
+		estimatedTime: "4–5 sessions · 45–60 minutes each",
+		keyBlocks: [
+			"while True",
+			"screen.tracer() / update()",
+			"boundary checks",
+			"object lists",
+			"collision helper"
+		],
+		projectThread:
+			"Build the real-time game loop in layers: continuous motion, boundaries, manual screen updates, many moving objects, then collision detection. Test each mechanic before combining it with the next."
+	},
+	{
+		title: "Check-In #3",
+		estimatedTime: "1–2 sessions · 45–60 minutes each",
+		keyBlocks: [
+			"nested loops",
+			"if / elif / else",
+			"lists of turtles",
+			"animation loop",
+			"collision or target check"
+		],
+		projectThread:
+			"Use the target game as the integrated readiness check for the capstone sequence. Record one normal run, one boundary case, and one restart before continuing."
+	},
+	{
+		title: "GrS14 Space Eater",
+		estimatedTime: "3–5 sessions · 45–60 minutes each",
+		keyBlocks: [
+			"player controls",
+			"lists of targets",
+			"collision detection",
+			"score state",
+			"win, loss, and restart"
+		],
+		projectThread:
+			"Ship Space Eater as the first complete game: controls, targets, score, collision feedback, end state, and clean replay. Use the alternate games only as transfer or challenge work."
+	},
+	{
+		title: "GrS15 Master Project",
+		estimatedTime: "5–7 sessions · 45–60 minutes each",
+		keyBlocks: [
+			"project plan",
+			"minimum playable loop",
+			"functions and lists",
+			"game-state tests",
+			"presentation and reflection"
+		],
+		choiceCurriculumTitles: ["Bonus Concepts"],
+		projectThread:
+			"Plan and ship a minimum playable version before optional shapes, dragging, levels, or visual polish. Present one state system, one reusable function, one bug fixed, and one tested edge case."
+	}
+];
+
+const PYTHON_LEVEL_1_CHALLENGE_PROJECT_RE =
+	/open ended|advanced|dodgeball|snake|pong|target practice|turtle run|light the stars|turtle launch with lists|bullseye with nested loops|reverse|winter wonderland|dizzy hexagon|circle of circles|spirals|minion|captain america|taxi|watermelon|haphazard|boolean bonanza/i;
+const PYTHON_LEVEL_1_COMBINING_MARKS_RE = /[\u0300-\u036F]/g;
+const PYTHON_LEVEL_1_NON_ALPHANUMERIC_RE = /[^a-z0-9]+/g;
+const PYTHON_LEVEL_1_LEADING_HYPHENS_RE = /^-+/;
+const PYTHON_LEVEL_1_TRAILING_HYPHENS_RE = /-+$/;
+
+function pythonLevel1Slugify(value: string) {
+	return value
+		.toLowerCase()
+		.normalize("NFKD")
+		.replace(PYTHON_LEVEL_1_COMBINING_MARKS_RE, "")
+		.replace(PYTHON_LEVEL_1_NON_ALPHANUMERIC_RE, "-")
+		.replace(PYTHON_LEVEL_1_LEADING_HYPHENS_RE, "")
+		.replace(PYTHON_LEVEL_1_TRAILING_HYPHENS_RE, "");
+}
+
+function preservePythonLevel1Ids(
+	module: RawCourseModule,
+	legacyModuleId: string
+) {
+	for (const [items, prefix] of [
+		[module.curriculum, "curriculum"],
+		[module.supplementalProjects, "supplemental"]
+	] as const) {
+		for (const item of items) {
+			item.id ??= pythonLevel1Slugify(
+				`${legacyModuleId}-${prefix}-${item.title}`
+			);
+		}
+	}
+}
+
+function pythonLevel1SupplementalPath(
+	item: Pick<RawCourseModuleItem, "title">
+): CourseItemLearningPath {
+	return PYTHON_LEVEL_1_CHALLENGE_PROJECT_RE.test(item.title)
+		? "challenge"
+		: "choice";
+}
+
+function configurePythonLevel1Module(
+	module: RawCourseModule,
+	config: PythonLevel1FlowConfig
+) {
+	const legacyModuleId = pythonLevel1Slugify(
+		`python-level-1-${module.title}`
+	);
+	module.id ??= legacyModuleId;
+	preservePythonLevel1Ids(module, legacyModuleId);
+
+	const choiceTitles = new Set(config.choiceCurriculumTitles ?? []);
+	const challengeTitles = new Set(config.challengeCurriculumTitles ?? []);
+	const movedItems = module.curriculum.filter(
+		item => choiceTitles.has(item.title) || challengeTitles.has(item.title)
+	);
+	module.curriculum = module.curriculum.filter(
+		item =>
+			!choiceTitles.has(item.title) && !challengeTitles.has(item.title)
+	);
+
+	for (const item of module.curriculum) {
+		item.learningPath = "core";
+	}
+	for (const item of movedItems) {
+		item.learningPath = challengeTitles.has(item.title)
+			? "challenge"
+			: "choice";
+	}
+	for (const item of module.supplementalProjects) {
+		item.learningPath = pythonLevel1SupplementalPath(item);
+	}
+
+	module.supplementalProjects = [
+		...movedItems,
+		...module.supplementalProjects
+	];
+	module.estimatedTime = config.estimatedTime;
+	module.keyBlocks = [...config.keyBlocks];
+
+	if (module.curriculum[0]) {
+		module.curriculum[0].content = [
+			module.curriculum[0].content,
+			`**Course flow:** ${config.projectThread}`
+		].join("\n\n");
+	}
+
+	return module;
+}
+
+function configurePythonLevel1Flow(course: RawCourse) {
+	const modulesByTitle = new Map(
+		course.modules.map(module => [module.title, module])
+	);
+
+	course.modules = PYTHON_LEVEL_1_FLOW.map(config => {
+		const module = modulesByTitle.get(config.title);
+		if (!module) {
+			throw new Error(`Python Level 1 flow is missing ${config.title}.`);
+		}
+		return configurePythonLevel1Module(module, config);
+	});
+}
+
+configurePythonLevel1Flow(pythonLevel1Course);

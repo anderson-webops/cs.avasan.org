@@ -104,7 +104,10 @@ describe("Julio's Python Level 2 and PyGames classroom editions", () => {
 		expect(courseCatalog.map(({ id, name }) => ({ id, name }))).toEqual([
 			{ id: "scratch-level-1", name: "Scratch Level 1" },
 			{ id: "scratch-level-2", name: "Scratch Level 2" },
-			{ id: "python-level-1", name: "Python Level 1" },
+			{
+				id: "python-level-1",
+				name: "Python Level 1: Classroom Edition"
+			},
 			{
 				id: "python-level-2",
 				name: "Python Level 2: Classroom Edition"

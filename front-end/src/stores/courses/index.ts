@@ -25,10 +25,11 @@ export const courseCatalog: CourseCatalogEntry[] = [
 	},
 	{
 		id: "python-level-1",
-		name: "Python Level 1",
+		name: "Python Level 1: Classroom Edition",
+		normalizeAs: "python-level-1-classroom",
 		load: () =>
-			import("./python-level-1").then(
-				({ pythonLevel1Course }) => pythonLevel1Course
+			import("./python-level-1-classroom").then(
+				({ pythonLevel1ClassroomCourse }) => pythonLevel1ClassroomCourse
 			)
 	},
 	{

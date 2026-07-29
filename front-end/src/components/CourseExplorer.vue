@@ -81,7 +81,7 @@ const MODULE_SELECTION_STORAGE_KEY_PREFIX =
 	"classes:course-explorer:active-module:";
 
 const coursesStore = useCoursesStore();
-const { archivedCourses, courses } = storeToRefs(coursesStore);
+const { courses } = storeToRefs(coursesStore);
 
 const appStore = useAppStore();
 const { currentTutor, currentAdmin, currentUser, users } =
@@ -115,7 +115,6 @@ let pendingProgressSave: {
 } | null = null;
 
 const allCourses = computed(() => courses.value ?? []);
-const allArchivedCourses = computed(() => archivedCourses.value ?? []);
 
 const canViewSolutions = computed(
 	() => !!currentTutor.value || !!currentAdmin.value
@@ -157,7 +156,7 @@ const courseGroupingOwner = computed<User | null>(() => {
 
 const courseList = computed(() => {
 	if (props.publicCatalog) {
-		return [...allCourses.value, ...allArchivedCourses.value];
+		return allCourses.value;
 	}
 	const allowed = new Set(permittedCourseIds.value);
 	return orderedCoursesByLearnerStatus(
@@ -173,11 +172,6 @@ const courseGroups = computed(() => {
 				key: "current" as const,
 				label: "Current courses",
 				courses: allCourses.value
-			},
-			{
-				key: "archive" as const,
-				label: "Archived reference versions",
-				courses: allArchivedCourses.value
 			}
 		].filter(group => group.courses.length > 0);
 	}
@@ -195,9 +189,6 @@ const hasCourseAccess = computed(() => {
 
 const pythonIdeCourseMode = computed(() =>
 	pythonIdeModeForCourseId(selectedCourse.value?.id)
-);
-const selectedCourseIsArchived = computed(() =>
-	selectedCourse.value?.id.endsWith("-archive")
 );
 const pythonIdeCourseHref = computed(() => {
 	if (!selectedCourse.value || !pythonIdeCourseMode.value) return "";
@@ -1541,13 +1532,6 @@ function writeStoredValue(key: string, value: string) {
 			<header v-if="selectedCourse" class="course-hero">
 				<div class="course-hero-copy">
 					<h2>{{ selectedCourse.name }}</h2>
-					<p
-						v-if="selectedCourseIsArchived"
-						class="course-archive-notice"
-					>
-						Archived original for teacher reference. Students should
-						use the current Classroom Edition.
-					</p>
 					<div v-if="pythonIdeCourseHref" class="course-ide-action">
 						<a
 							class="site-button site-button--secondary course-ide-link"
@@ -2453,16 +2437,6 @@ function writeStoredValue(key: string, value: string) {
 .course-description {
 	max-width: 46rem;
 	font-size: 0.98rem;
-}
-
-.course-archive-notice {
-	max-width: 46rem;
-	margin: 0;
-	padding-left: 0.85rem;
-	border-left: 3px solid var(--course-accent);
-	color: var(--course-text-soft);
-	font-size: 0.92rem;
-	line-height: 1.55;
 }
 
 .course-ide-action {

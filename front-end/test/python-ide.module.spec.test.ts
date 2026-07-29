@@ -46,6 +46,15 @@ import {
 	pgzeroCourseStarterCode,
 	pgzeroStudentSvg,
 	pgzeroStarterCode,
+	turtleCircleArtStarterCode,
+	turtleFireworkFestivalStarterCode,
+	turtleFlowerGardenStarterCode,
+	turtleMazeExplorerStarterCode,
+	turtleNeonTrailStarterCode,
+	turtlePicassoStarterCode,
+	turtleRaceDayStarterCode,
+	turtleSpiralGalaxyStarterCode,
+	turtleTriangleMotionStarterCode,
 	turtleStarterCode
 } from "../src/modules/pythonIde";
 import { resetCodePreviewCaches } from "../src/modules/codePreview";
@@ -234,6 +243,78 @@ screen.listen()
 		});
 		expect(project.files[0]?.content).toContain("###   NORMAL SECTION");
 		expect(project.files[0]?.content).toContain("###   HARD SECTION");
+	});
+
+	it("creates all Python Level 1 classroom Turtle frameworks", () => {
+		const templates = [
+			{
+				frameworkMarker: "draw_circle_burst(",
+				source: turtleCircleArtStarterCode,
+				template: "circle-art" as const,
+				title: "Color Circle Art"
+			},
+			{
+				frameworkMarker: 'screen.onkey(draw_square, "s")',
+				source: turtlePicassoStarterCode,
+				template: "picasso" as const,
+				title: "Picasso Keyboard Painter"
+			},
+			{
+				frameworkMarker: "redraw_triangle()",
+				source: turtleTriangleMotionStarterCode,
+				template: "triangle-motion" as const,
+				title: "Triangle Motion Starter"
+			},
+			{
+				frameworkMarker: "next_trail_color()",
+				source: turtleNeonTrailStarterCode,
+				template: "neon-trail" as const,
+				title: "Neon Trail Painter"
+			},
+			{
+				frameworkMarker: "screen.onclick(draw_firework)",
+				source: turtleFireworkFestivalStarterCode,
+				template: "firework-festival" as const,
+				title: "Firework Festival"
+			},
+			{
+				frameworkMarker: "draw_galaxy()",
+				source: turtleSpiralGalaxyStarterCode,
+				template: "spiral-galaxy" as const,
+				title: "Spiral Galaxy"
+			},
+			{
+				frameworkMarker: "create_racers()",
+				source: turtleRaceDayStarterCode,
+				template: "turtle-race" as const,
+				title: "Turtle Race Day"
+			},
+			{
+				frameworkMarker: "screen.onclick(draw_flower)",
+				source: turtleFlowerGardenStarterCode,
+				template: "flower-garden" as const,
+				title: "Flower Garden Clicker"
+			},
+			{
+				frameworkMarker: "can_move_to(",
+				source: turtleMazeExplorerStarterCode,
+				template: "maze-explorer" as const,
+				title: "Maze Explorer"
+			}
+		];
+
+		for (const { frameworkMarker, source, template, title } of templates) {
+			const project = createPythonIdeProject("turtle", { template });
+
+			expect(project.title, template).toBe(title);
+			expect(project.files, template).toEqual([
+				{ name: "main.py", content: source }
+			]);
+			expect(source, template).toContain("###   NORMAL SECTION");
+			expect(source, template).toContain("###   HARD SECTION");
+			expect(source, template).toContain(frameworkMarker);
+			expect(source, template).toMatch(/def \w+\([^)]*\):\n    pass/);
+		}
 	});
 
 	it("colors visible bracket pairs using document-wide nesting context", () => {
@@ -844,6 +925,9 @@ screen.listen()
 
 	it("maps Python-family courses to the right IDE starter modes", () => {
 		expect(pythonIdeModeForCourseId("python-level-1")).toBe("turtle");
+		expect(pythonIdeModeForCourseId("python-level-1-classroom")).toBe(
+			"turtle"
+		);
 		expect(pythonIdeModeForCourseId("pygames")).toBe("pgzero");
 		expect(pythonIdeModeForCourseId("pygames-classroom")).toBe("pgzero");
 		expect(pythonIdeModeForCourseId("pygames-archive")).toBe("pgzero");
@@ -878,6 +962,22 @@ screen.listen()
 			'route.query.template === "classroom-project"'
 		);
 		expect(pageSource).toContain("route.query.starterUrl");
+		for (const template of [
+			"circle-art",
+			"firework-festival",
+			"flower-garden",
+			"maze-explorer",
+			"neon-trail",
+			"picasso",
+			"spiral-galaxy",
+			"turtle-race",
+			"triangle-motion"
+		]) {
+			expect(pageSource, template).toContain(
+				`if (rawTemplate === "${template}") return "${template}";`
+			);
+		}
+		expect(pageSource).toContain(": requestedTemplate.value");
 	});
 
 	it("keeps Turtle fill and RGB color hooks wired in the runtime shim", () => {
