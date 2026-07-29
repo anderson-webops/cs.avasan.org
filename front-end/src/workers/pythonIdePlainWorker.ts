@@ -61,9 +61,7 @@ interface PlainPythonErrorMessage {
 }
 
 type PlainPythonWorkerMessage =
-	| PlainPythonDoneMessage
-	| PlainPythonErrorMessage
-	| PlainPythonOutputMessage;
+	PlainPythonDoneMessage | PlainPythonErrorMessage | PlainPythonOutputMessage;
 
 let pyodidePromise: Promise<PyodideAPI> | null = null;
 let activeRunID: number | null = null;

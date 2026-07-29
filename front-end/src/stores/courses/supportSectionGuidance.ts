@@ -1,8 +1,5 @@
 export type SupportSectionKind =
-	| "debugging"
-	| "planning"
-	| "verification"
-	| "extension";
+	"debugging" | "planning" | "verification" | "extension";
 
 export interface SupportSectionGuidanceOptions {
 	courseFamily: string;

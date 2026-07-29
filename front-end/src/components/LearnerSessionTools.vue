@@ -3,10 +3,7 @@ import { computed, ref } from "vue";
 import { api } from "@/api";
 
 type ScheduledSessionStatus =
-	| "scheduled"
-	| "cancelled"
-	| "completed"
-	| "rescheduled";
+	"scheduled" | "cancelled" | "completed" | "rescheduled";
 
 interface ScheduledSessionRecord {
 	_id: string;
