@@ -6,10 +6,6 @@ defineOptions({ name: "ProfilePage" });
 
 const app = useAppStore();
 const { currentAdmin } = storeToRefs(app);
-
-function openLogin() {
-	app.setLoginBlock(true);
-}
 </script>
 
 <template>
@@ -39,15 +35,8 @@ function openLogin() {
 				the public course library or Python IDE. No account is needed.
 			</p>
 			<div class="site-action-row">
-				<button
-					class="site-button site-button--primary"
-					type="button"
-					@click="openLogin"
-				>
-					Teacher log in
-				</button>
 				<RouterLink
-					class="site-button site-button--secondary"
+					class="site-button site-button--primary"
 					to="/courses"
 				>
 					Open courses

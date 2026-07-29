@@ -55,6 +55,7 @@ describe("static route normalization", () => {
 		expect(options.generateRobotsTxt).toBe(false);
 		expect(options.exclude).toEqual(SITEMAP_EXCLUDED_ROUTES);
 		expect(options.exclude).toEqual([
+			"/admin",
 			"/course-resource",
 			"/profile",
 			"/python-ide"
