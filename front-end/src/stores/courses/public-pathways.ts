@@ -73,6 +73,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		adminPriority: "urgent",
 		courseIds: [
 			"python-level-1",
+			"python-level-1-classroom",
 			"python-level-2",
 			"python-level-2-classroom",
 			"python-level-3",

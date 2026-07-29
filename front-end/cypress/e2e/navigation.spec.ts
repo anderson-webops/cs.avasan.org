@@ -3,9 +3,9 @@
 const publicCourses = [
 	"Scratch Level 1",
 	"Scratch Level 2",
-	"Python Level 1",
-	"Python Level 2",
-	"PyGames"
+	"Python Level 1: Classroom Edition",
+	"Python Level 2: Classroom Edition",
+	"PyGames: Classroom Edition"
 ];
 
 context("Public classroom navigation", () => {

@@ -47,16 +47,27 @@ describe("published course implementation artifacts", () => {
 		COURSE_SWEEP_TIMEOUT
 	);
 
-	it("keeps python-level-1 starter folders and teacher solution resources", async () => {
+	it("keeps python-level-1 completed classroom sources and teacher solutions", async () => {
 		const items = courseItems(await publishedCourse("python-level-1"));
-		const starters = items.filter(item =>
-			item.projectLink?.endsWith("/starter")
-		);
+		const starters = items
+			.map(item => item.projectLink)
+			.filter((link): link is string =>
+				Boolean(link?.startsWith("/python-ide?"))
+			)
+			.map(link => new URL(link, "https://cs.avasan.org"))
+			.filter(url => url.searchParams.has("starterUrl"));
 		const solutions = items.filter(item =>
 			item.solutionLink?.includes("/solution")
 		);
 
 		expect(starters.length).toBeGreaterThan(0);
+		expect(
+			starters.every(url =>
+				url.searchParams
+					.get("starterUrl")
+					?.startsWith("https://github.com/instruction-material/")
+			)
+		).toBe(true);
 		expect(solutions.length).toBeGreaterThan(0);
 	});
 

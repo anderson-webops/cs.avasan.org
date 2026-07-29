@@ -15,6 +15,7 @@ import {
 const INSTRUCTION_MATERIAL_BASE = "https://github.com/instruction-material";
 const CLASSROOM_BASE_COURSE_IDS: Record<string, string> = {
 	"pygames-classroom": "pygames",
+	"python-level-1-classroom": "python-level-1",
 	"python-level-2-classroom": "python-level-2"
 };
 
@@ -3565,10 +3566,9 @@ function isPygameSource(source: string) {
 }
 
 function isPythonTurtleContext(context: CourseTextContext) {
-	if (context.courseId !== "python-level-1") return false;
-
-	return /\b(?:grs\d+|turtle|coordinates?|movement|draw|drawing|canvas|shape|stamp|penup|pendown|goto|forward|left|right|event|collision|score|boundary|space eater|game mechanics)\b/.test(
-		contextText(context)
+	return (
+		context.courseId === "python-level-1" ||
+		context.courseId === "python-level-1-classroom"
 	);
 }
 
@@ -8244,6 +8244,84 @@ interface ClassroomChallengePair {
 	hard: string;
 }
 
+function pythonLevel1ClassroomChallenges(
+	moduleTitle: string
+): ClassroomChallengePair {
+	const normalizedTitle = moduleTitle.toLowerCase();
+
+	if (/coordinates|movement/.test(normalizedTitle)) {
+		return {
+			normal: "Add one visible movement, shape, or filled feature with the provided Turtle and coordinate setup",
+			hard: "Add a multi-part feature that moves between coordinates without accidental connecting lines"
+		};
+	}
+	if (/variables|random/.test(normalizedTitle)) {
+		return {
+			normal: "Use one named variable or random choice to control a visible project feature",
+			hard: "Coordinate several variables or bounded random values so the result changes while remaining readable"
+		};
+	}
+	if (/conditionals/.test(normalizedTitle)) {
+		return {
+			normal: "Add one condition that changes a visible action when a clear test becomes true",
+			hard: "Add ordered or compound conditions and verify normal, boundary, and alternate cases"
+		};
+	}
+	if (/nested loops/.test(normalizedTitle)) {
+		return {
+			normal: "Add one inner loop that repeats a small feature inside the existing outer pattern",
+			hard: "Use two loop variables to control different visual properties and explain the total repetition count"
+		};
+	}
+	if (/loops/.test(normalizedTitle)) {
+		return {
+			normal: "Add one counted or condition-controlled loop for a repeated visual feature",
+			hard: "Make the loop depend on a changing variable and test a small, typical, and boundary value"
+		};
+	}
+	if (/functions/.test(normalizedTitle)) {
+		return {
+			normal: "Complete one function that owns a clear drawing or interaction responsibility",
+			hard: "Add parameters or a return value so the same function supports several visibly different results"
+		};
+	}
+	if (/event listeners/.test(normalizedTitle)) {
+		return {
+			normal: "Complete one key or click action and confirm the matching event listener calls it",
+			hard: "Add another control that changes shared state without breaking focus, clearing, or existing controls"
+		};
+	}
+	if (/lists/.test(normalizedTitle)) {
+		return {
+			normal: "Use a list of colors, positions, sizes, or Turtle objects in one visible feature",
+			hard: "Update, cycle, or filter the list while keeping every index and empty-list case safe"
+		};
+	}
+	if (/game mechanics|space eater/.test(normalizedTitle)) {
+		return {
+			normal: "Complete one movement, boundary, scoring, target, or collision feature in the running game",
+			hard: "Add a coordinated game-state rule with visible feedback plus a reliable reset or replay path"
+		};
+	}
+	if (/master project/.test(normalizedTitle)) {
+		return {
+			normal: "Finish one playable vertical slice with controls, a goal, visible feedback, and a restart path",
+			hard: "Add one planned system such as scoring, levels, stored objects, difficulty changes, or richer collision rules"
+		};
+	}
+	if (/check-in/.test(normalizedTitle)) {
+		return {
+			normal: "Complete the required case and record one run or trace that demonstrates the checked skill",
+			hard: "Change one input, rule, or boundary and explain why the same solution still works or needs revision"
+		};
+	}
+
+	return {
+		normal: "Add one clearly visible feature that satisfies the central project requirement",
+		hard: "Add a second coordinated feature that reuses course concepts without breaking the completed framework"
+	};
+}
+
 function pythonLevel2ClassroomChallenges(
 	moduleTitle: string
 ): ClassroomChallengePair {
@@ -8414,9 +8492,13 @@ function classroomChallenges(
 	courseId: string,
 	moduleTitle: string
 ): ClassroomChallengePair {
-	return courseId === "pygames-classroom"
-		? pyGamesClassroomChallenges(moduleTitle)
-		: pythonLevel2ClassroomChallenges(moduleTitle);
+	if (courseId === "python-level-2-classroom") {
+		return pythonLevel2ClassroomChallenges(moduleTitle);
+	}
+	if (courseId === "pygames-classroom") {
+		return pyGamesClassroomChallenges(moduleTitle);
+	}
+	return pythonLevel1ClassroomChallenges(moduleTitle);
 }
 
 function isClassroomProject(
@@ -8431,6 +8513,20 @@ function isClassroomProject(
 		/\b(?:project|practice|exploration|recap)\b/i.test(item.title) ||
 		/^Check-In #\d+:/i.test(item.title)
 	);
+}
+
+function pythonLevel1ClassroomTemplate(itemTitle: string) {
+	if (/Color Circle Art/i.test(itemTitle)) return "circle-art";
+	if (/Picasso/i.test(itemTitle)) return "picasso";
+	if (/Triangle Motion|Basic Shapes/i.test(itemTitle))
+		return "triangle-motion";
+	if (/Random Walk|Neon Trail/i.test(itemTitle)) return "neon-trail";
+	if (/Fireworks?/i.test(itemTitle)) return "firework-festival";
+	if (/Square Spiral|Spirals?/i.test(itemTitle)) return "spiral-galaxy";
+	if (/Turtle Race/i.test(itemTitle)) return "turtle-race";
+	if (/Rainbow Flower|Flower Garden/i.test(itemTitle)) return "flower-garden";
+	if (/Stay Inbounds|Maze Explorer/i.test(itemTitle)) return "maze-explorer";
+	return "classroom-project";
 }
 
 const PYGAMES_CLASSROOM_SOURCE_FILES: Record<string, string> = {
@@ -8501,24 +8597,37 @@ function classroomSourceUrl(
 	courseId: string,
 	module: RawCourseModule,
 	item: RawCourseModuleItem,
-	originalProjectLink: string | undefined
+	originalProjectLink: string | undefined,
+	template: string
 ) {
+	if (
+		courseId === "python-level-1-classroom" &&
+		template !== "classroom-project"
+	) {
+		return undefined;
+	}
+
 	return (
 		item.solutionLink ??
 		originalProjectLink ??
 		(courseId === "pygames-classroom"
 			? pyGamesClassroomSourceUrl(module, item)
-			: pythonLevel2ClassroomSourceUrl(module))
+			: undefined) ??
+		(courseId === "python-level-2-classroom"
+			? pythonLevel2ClassroomSourceUrl(module)
+			: undefined)
 	);
 }
 
 function classroomIdeMode(courseId: string) {
+	if (courseId === "python-level-1-classroom") return "turtle";
 	return courseId === "pygames-classroom" ? "pgzero" : "python";
 }
 
 function classroomIdeLink(
 	courseId: string,
 	item: RawCourseModuleItem,
+	template: string,
 	starterUrl?: string
 ) {
 	const projectId =
@@ -8535,7 +8644,7 @@ function classroomIdeLink(
 		projectKey: `${courseId}:${projectId}:starter`,
 		starterLabel: "Classroom project",
 		starterTitle: item.title,
-		template: "classroom-project"
+		template
 	});
 	if (starterUrl?.startsWith("https://github.com/")) {
 		params.set("starterUrl", starterUrl);
@@ -8587,15 +8696,21 @@ function adaptClassroomCourse(course: RawCourse, courseId: string) {
 				item.content += `\n\n**Classroom build:** Run the completed framework first, then work only inside the labeled Normal and Hard sections. Save a working Normal checkpoint before changing the Hard section.\n\n**Normal:** ${challenge.normal}.\n\n**Hard:** ${challenge.hard}.`;
 			}
 
+			const template =
+				courseId === "python-level-1-classroom"
+					? pythonLevel1ClassroomTemplate(item.title)
+					: "classroom-project";
 			const sourceUrl = classroomSourceUrl(
 				courseId,
 				module,
 				item,
-				originalProjectLink
+				originalProjectLink,
+				template
 			);
 			item.projectLink = classroomIdeLink(
 				courseId,
 				item,
+				template,
 				sourceUrl?.startsWith("https://github.com/")
 					? sourceUrl
 					: undefined
@@ -9047,6 +9162,7 @@ const normalizers: Record<string, (course: RawCourse) => void> = {
 	"low-level-security-part-2": normalizeLowLevelSecurityPart2,
 	"machine-learning": normalizeMachineLearning,
 	"python-level-1": normalizePythonLevel1,
+	"python-level-1-classroom": normalizePythonLevel1,
 	"python-level-2": normalizePythonLevel2,
 	"python-level-2-classroom": normalizePythonLevel2,
 	"python-level-3": normalizePythonLevel3,

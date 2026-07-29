@@ -19,15 +19,10 @@ vi.mock("@/modules/classroomUsage", () => ({
 const expectedCourses = [
 	["scratch-level-1", "Scratch Level 1"],
 	["scratch-level-2", "Scratch Level 2"],
-	["python-level-1", "Python Level 1"],
+	["python-level-1", "Python Level 1: Classroom Edition"],
 	["python-level-2", "Python Level 2: Classroom Edition"],
 	["pygames", "PyGames: Classroom Edition"]
 ];
-const expectedArchivedCourses = [
-	["python-level-2-archive", "Python Level 2 — archived original"],
-	["pygames-archive", "PyGames — archived original"]
-];
-
 function installLocalStorageStub() {
 	const values = new Map<string, string>();
 	Object.defineProperty(window, "localStorage", {
@@ -116,18 +111,18 @@ describe("CourseExplorer public catalog", () => {
 		return { loadCourse, wrapper };
 	}
 
-	it("offers five current courses plus separate archived references", async () => {
+	it("offers exactly the five public classroom courses", async () => {
 		const { loadCourse, wrapper } = await mountPublicCatalog();
 		const options = wrapper
 			.findAll("#course-select option")
 			.map(option => [option.attributes("value"), option.text()]);
 
-		expect(options).toEqual([...expectedCourses, ...expectedArchivedCourses]);
+		expect(options).toEqual(expectedCourses);
 		expect(
 			wrapper
 				.findAll("#course-select optgroup")
 				.map(group => group.attributes("label"))
-		).toEqual(["Current courses", "Archived reference versions"]);
+		).toEqual(["Current courses"]);
 		expect(wrapper.text()).toContain("Scratch Level 1");
 		expect(wrapper.text()).not.toContain("Course preview");
 		expect(wrapper.find(".course-stats").exists()).toBe(false);
@@ -161,17 +156,4 @@ describe("CourseExplorer public catalog", () => {
 		expect(wrapper.text()).not.toContain("Use the browser workspace");
 	});
 
-	it("marks an original course as an archived teacher reference", async () => {
-		const { loadCourse, wrapper } = await mountPublicCatalog();
-
-		await wrapper
-			.get("#course-select")
-			.setValue("python-level-2-archive");
-		await flushPromises();
-
-		expect(loadCourse).toHaveBeenCalledWith("python-level-2-archive");
-		expect(wrapper.get(".course-archive-notice").text()).toContain(
-			"Archived original for teacher reference"
-		);
-	});
 });

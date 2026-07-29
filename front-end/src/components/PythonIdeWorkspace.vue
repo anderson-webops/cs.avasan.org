@@ -6,7 +6,8 @@ import type {
 	PythonIdeFile,
 	PythonIdeMode,
 	PythonIdeProject,
-	PythonIdeProjectReview
+	PythonIdeProjectReview,
+	PythonIdeProjectTemplate
 } from "@/modules/pythonIde";
 import type { PythonIdeCourseAssetPack } from "@/modules/pythonIdeCourseAssets";
 import type {
@@ -999,6 +1000,22 @@ const requestedClassroomProject = computed(
 		route.query.classroom === "1" ||
 		route.query.template === "classroom-project"
 );
+const requestedTemplate = computed<PythonIdeProjectTemplate>(() => {
+	const rawTemplate =
+		typeof route.query.template === "string" ? route.query.template : "";
+	if (rawTemplate === "circle-art") return "circle-art";
+	if (rawTemplate === "classroom-project") return "classroom-project";
+	if (rawTemplate === "firework-festival") return "firework-festival";
+	if (rawTemplate === "flower-garden") return "flower-garden";
+	if (rawTemplate === "maze-explorer") return "maze-explorer";
+	if (rawTemplate === "neon-trail") return "neon-trail";
+	if (rawTemplate === "picasso") return "picasso";
+	if (rawTemplate === "spiral-galaxy") return "spiral-galaxy";
+	if (rawTemplate === "turtle-race") return "turtle-race";
+	if (rawTemplate === "triangle-motion") return "triangle-motion";
+	if (requestedClassroomProject.value) return "classroom-project";
+	return "blank";
+});
 const requestedStarterMode = computed(() => {
 	const rawMode =
 		typeof route.query.mode === "string" ? route.query.mode : "";
@@ -1276,9 +1293,7 @@ async function createRequestedCourseProject() {
 		template:
 			starterFiles || requestedCourseStarter.value
 				? "course"
-				: requestedClassroomProject.value
-					? "classroom-project"
-					: "blank",
+				: requestedTemplate.value,
 		title: request.courseProjectTitle
 	});
 }
