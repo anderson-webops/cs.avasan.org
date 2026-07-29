@@ -189,6 +189,31 @@ describe("StudentManagement", () => {
 		).toContain("is-warning");
 	});
 
+	it("shows date-only sign-in and project activity in Julio's roster", async () => {
+		vi.mocked(fetchAdminStudents).mockResolvedValueOnce([
+			{
+				...student,
+				lastLoginAt: "2026-07-28T22:45:00.000Z",
+				lastProjectSavedAt: "2026-07-29T12:30:00.000Z",
+				projectCount: 3
+			}
+		]);
+
+		const wrapper = mountManagement();
+		await flushPromises();
+
+		expect(wrapper.get('[data-testid="student-project-count"]').text()).toBe(
+			"3"
+		);
+		expect(wrapper.get('[data-testid="student-last-sign-in"]').text()).toBe(
+			"Jul 28, 2026"
+		);
+		expect(
+			wrapper.get('[data-testid="student-last-project-save"]').text()
+		).toBe("Jul 29, 2026");
+		expect(wrapper.text()).not.toMatch(/\b\d{1,2}:\d{2}\b/);
+	});
+
 	it("clears the roster and a revealed code when Admin authorization expires", async () => {
 		const app = useAppStore();
 		app.setCurrentAdmin({

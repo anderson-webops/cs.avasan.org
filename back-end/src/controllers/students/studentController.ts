@@ -3,6 +3,7 @@ import type { IStudent } from "../../types/entities/IStudent.js";
 import type { CustomSession } from "../../types/session/CustomSession.js";
 import { Types } from "mongoose";
 import { Admin } from "../../models/schemas/Admin.js";
+import { PythonProject } from "../../models/schemas/PythonProject.js";
 import { Student } from "../../models/schemas/Student.js";
 import { ADMIN_SINGLETON_ID } from "../../security/adminIdentity.js";
 import {
@@ -31,6 +32,12 @@ const INVALID_STUDENT_CREDENTIALS = {
 const STUDENT_LOGIN_FAILURE_THRESHOLD = 5;
 const STUDENT_LOGIN_COOLDOWN_MS = 2 * 60 * 1000;
 const PASSWORD_SETUP_REQUEST_ID_RE = /^[\w-]{32,128}$/;
+
+interface StudentProjectActivity {
+	_id: Types.ObjectId;
+	lastProjectSavedAt: Date;
+	projectCount: number;
+}
 
 export function serializeStudent(student: IStudent) {
 	return {
@@ -686,7 +693,39 @@ export const listStudents: RequestHandler = async (_req, res) => {
 		.select("+passwordHash +accessCodeHash +pendingSetupCodeHash")
 		.sort({ username: 1 })
 		.limit(500);
-	return res.json({ students: students.map(student => serializeManagedStudent(student)) });
+	const projectActivity: StudentProjectActivity[] = [];
+	if (students.length) {
+		projectActivity.push(
+			...await PythonProject.aggregate<StudentProjectActivity>([
+				{
+					$match: {
+						deletedAt: { $exists: false },
+						user: { $in: students.map(student => student._id) }
+					}
+				},
+				{
+					$group: {
+						_id: "$user",
+						lastProjectSavedAt: { $max: "$updatedAt" },
+						projectCount: { $sum: 1 }
+					}
+				}
+			])
+		);
+	}
+	const projectsByStudentID = new Map(
+		projectActivity.map(activity => [activity._id.toString(), activity])
+	);
+	return res.json({
+		students: students.map((student) => {
+			const projectMetadata = projectsByStudentID.get(student._id.toString());
+			return {
+				...serializeManagedStudent(student),
+				projectCount: projectMetadata?.projectCount ?? 0,
+				lastProjectSavedAt: projectMetadata?.lastProjectSavedAt ?? null
+			};
+		})
+	});
 };
 
 export const createStudent: RequestHandler = async (req, res) => {

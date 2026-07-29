@@ -66,6 +66,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/student-privacy': RouteRecordInfo<
+      '/student-privacy',
+      '/student-privacy',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
   }
 
   /**
@@ -114,6 +121,14 @@ declare module 'vue-router/auto-routes' {
     'src/pages/python-ide.vue': {
       routes:
         | '/python-ide'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/student-privacy.vue': {
+      routes:
+        | '/student-privacy'
       views:
         | never
       pathParamNames:

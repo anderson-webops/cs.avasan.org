@@ -41,7 +41,8 @@ describe("TheHeader.vue", () => {
 		expect(wrapper.text()).toContain("Classes with Julio");
 		expect(links).toEqual([
 			["Courses", "/"],
-			["Python IDE", "/python-ide"]
+			["Python IDE", "/python-ide"],
+			["Student privacy", "/student-privacy"]
 		]);
 		expect(wrapper.text()).not.toContain("Teacher log in");
 		expect(wrapper.find(".site-nav__actions").exists()).toBe(false);

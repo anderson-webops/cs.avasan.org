@@ -11,6 +11,8 @@ export interface StudentAccount {
 	createdAt?: string;
 	updatedAt?: string;
 	lastLoginAt?: string | null;
+	projectCount?: number;
+	lastProjectSavedAt?: string | null;
 }
 
 export interface StudentSession {

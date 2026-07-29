@@ -717,6 +717,9 @@ describe("student Python project sync boundaries", () => {
 
 		expect(source).toContain("studentRequiresPasswordSetup.value");
 		expect(source).toContain("registerStudentSessionHandoff(");
+		expect(source).toContain(
+			'reportClassroomUsage("ide-open", requestedCourseId.value)'
+		);
 		expect(hideIndex).toBeGreaterThan(0);
 		expect(queueIndex).toBeGreaterThan(hideIndex);
 		expect(source).toContain("Only add them if they are yours.");

@@ -695,6 +695,10 @@ onBeforeUnmount(() => {
 					type="password"
 				/>
 
+				<a class="student-access__privacy" href="/student-privacy">
+					How student information is used
+				</a>
+
 				<p v-if="error" class="student-access__error" role="alert">
 					{{ error }}
 				</p>
@@ -857,6 +861,13 @@ onBeforeUnmount(() => {
 .student-access__help {
 	color: var(--color-ink-soft);
 	font-size: 0.8rem;
+}
+
+.student-access__privacy {
+	width: fit-content;
+	color: var(--color-link);
+	font-size: 0.82rem;
+	font-weight: 700;
 }
 
 .student-access__form input {

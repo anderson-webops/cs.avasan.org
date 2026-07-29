@@ -22,10 +22,16 @@ import {
 	createStudentProjectWriteLimiter
 } from "./middleware/rateLimiters.js";
 import { Admin } from "./models/schemas/Admin.js";
+import { ClassroomUsageDaily } from "./models/schemas/ClassroomUsageDaily.js";
 import { PythonProject } from "./models/schemas/PythonProject.js";
 import { PythonProjectReview } from "./models/schemas/PythonProjectReview.js";
 import { Student } from "./models/schemas/Student.js";
+import { mountClassroomAnalyticsRoutes } from "./routes/classroomAnalyticsRoutes.js";
 import { mountRuntimeAccountRoutes } from "./routes/runtimeAccountRoutes.js";
+import {
+	readClassroomAnalyticsRetentionDays,
+	readClassroomAnalyticsServiceKey
+} from "./security/classroomAnalytics.js";
 import {
 	readBooleanSetting,
 	readClassroomOrigin,
@@ -39,6 +45,18 @@ import "dotenv/config";
 async function main() {
 	const app = express();
 	const internalDiagnosticsKey = env.INTERNAL_DIAGNOSTICS_KEY;
+	const classroomAnalyticsRetentionDays
+		= readClassroomAnalyticsRetentionDays(
+			env.CLASSROOM_ANALYTICS_RETENTION_DAYS
+		);
+	const classroomAnalyticsCollectionEnabled = readBooleanSetting(
+		env.CLASSROOM_ANALYTICS_COLLECTION_ENABLED,
+		"CLASSROOM_ANALYTICS_COLLECTION_ENABLED"
+	);
+	const classroomAnalyticsServiceKey
+		= readClassroomAnalyticsServiceKey(
+			env.CLASSROOM_ANALYTICS_SERVICE_KEY
+		);
 	app.use(helmet());
 
 	// health
@@ -213,6 +231,7 @@ async function main() {
 	await mongoose.connect(mongoUri);
 	await Promise.all([
 		Admin.init(),
+		ClassroomUsageDaily.init(),
 		Student.init(),
 		// Reconcile the former sparse import-ID index with the partial index.
 		// Legacy projects without an import ID remain readable while every new
@@ -236,6 +255,11 @@ async function main() {
 
 	// Students have an optional, teacher-provisioned project-saving account.
 	// Tutor, self-signup, scheduler, and admin-mail routes remain unmounted.
+	mountClassroomAnalyticsRoutes(app, {
+		collectionEnabled: classroomAnalyticsCollectionEnabled,
+		retentionDays: classroomAnalyticsRetentionDays,
+		serviceKey: classroomAnalyticsServiceKey
+	});
 	mountRuntimeAccountRoutes(app);
 
 	const PORT = Number(env.PORT || 3008);
