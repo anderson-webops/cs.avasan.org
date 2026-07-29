@@ -2,7 +2,7 @@
 const router = useRouter();
 
 useHead({
-	title: "Page not found | Classes with Jacob"
+	title: "Page not found | Classes with Julio"
 });
 
 function goBack() {
@@ -15,7 +15,7 @@ function goBack() {
 	<section class="page-shell page-shell--narrow not-found-page">
 		<div class="not-found-card site-surface">
 			<p class="page-eyebrow">Page not found</p>
-			<h1 class="page-title">This page is not on the schedule.</h1>
+			<h1 class="page-title">This project wandered off the page.</h1>
 			<p class="page-copy">
 				The link may have moved, or the page may no longer be part of
 				the site. Use one of the main paths below to get back to the

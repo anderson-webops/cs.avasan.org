@@ -10,7 +10,7 @@ Use these endpoints for monitoring. They do not require auth and do not redirect
   - returns `503 {"ready":false,...}` when Mongo is unavailable
 - `GET /_dbinfo`
   - internal diagnostics only
-  - returns non-secret database metadata when allowed
-  - returns `403 {"ok":false,"error":"forbidden"}` for public requests without internal access
+  - returns non-secret database metadata only when the request supplies the configured `INTERNAL_DIAGNOSTICS_KEY`
+  - returns `403 {"ok":false,"error":"forbidden"}` when the key is absent or incorrect, including in local development
 
 Use `/healthz` and `/readyz` for monitors. Do not use `/`, login pages, or `/_dbinfo`.

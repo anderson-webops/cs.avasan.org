@@ -1,11 +1,4 @@
 import type { UserModule } from "~/types.ts";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-	faFacebook,
-	faGithub,
-	faInstagram
-} from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { setupLayouts } from "virtual:generated-layouts";
 
 import { routes } from "vue-router/auto-routes";
@@ -18,9 +11,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import "@unocss/reset/tailwind.css";
 import "./styles/main.css";
 
-// FontAwesome library setup
-library.add(faFacebook, faGithub, faInstagram);
-
 // https://github.com/antfu/vite-ssg
 // noinspection JSUnusedGlobalSymbols
 export const createApp = ViteSSG(
@@ -30,9 +20,6 @@ export const createApp = ViteSSG(
 		base: import.meta.env.BASE_URL
 	},
 	async ctx => {
-		// ctx is the context where you can add global components or plugins
-		ctx.app.component("font-awesome-icon", FontAwesomeIcon);
-
 		// Auto-install only app plugin modules. Broad eager globs pull feature
 		// modules like the Python IDE runtime into the startup bundle.
 		Object.values(

@@ -51,34 +51,6 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/admin/': RouteRecordInfo<
-      '/admin/',
-      '/admin',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/admin/mdmail': RouteRecordInfo<
-      '/admin/mdmail',
-      '/admin/mdmail',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/admin/people': RouteRecordInfo<
-      '/admin/people',
-      '/admin/people',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/admin/student-management': RouteRecordInfo<
-      '/admin/student-management',
-      '/admin/student-management',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
     '/course-resource': RouteRecordInfo<
       '/course-resource',
       '/course-resource',
@@ -93,20 +65,6 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/pathways': RouteRecordInfo<
-      '/pathways',
-      '/pathways',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/payment': RouteRecordInfo<
-      '/payment',
-      '/payment',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
     '/profile': RouteRecordInfo<
       '/profile',
       '/profile',
@@ -117,48 +75,6 @@ declare module 'vue-router/auto-routes' {
     '/python-ide': RouteRecordInfo<
       '/python-ide',
       '/python-ide',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/README': RouteRecordInfo<
-      '/README',
-      '/README',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/signup': RouteRecordInfo<
-      '/signup',
-      '/signup',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/teaching': RouteRecordInfo<
-      '/teaching',
-      '/teaching',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/wheel': RouteRecordInfo<
-      '/wheel',
-      '/wheel',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/zelle': RouteRecordInfo<
-      '/zelle',
-      '/zelle',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/zoom': RouteRecordInfo<
-      '/zoom',
-      '/zoom',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -194,30 +110,6 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/pages/admin/index.vue': {
-      routes:
-        | '/admin/'
-      views:
-        | never
-    }
-    'src/pages/admin/mdmail.vue': {
-      routes:
-        | '/admin/mdmail'
-      views:
-        | never
-    }
-    'src/pages/admin/people.vue': {
-      routes:
-        | '/admin/people'
-      views:
-        | never
-    }
-    'src/pages/admin/student-management.vue': {
-      routes:
-        | '/admin/student-management'
-      views:
-        | never
-    }
     'src/pages/course-resource.vue': {
       routes:
         | '/course-resource'
@@ -230,18 +122,6 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/pages/pathways.vue': {
-      routes:
-        | '/pathways'
-      views:
-        | never
-    }
-    'src/pages/payment.vue': {
-      routes:
-        | '/payment'
-      views:
-        | never
-    }
     'src/pages/profile.vue': {
       routes:
         | '/profile'
@@ -251,42 +131,6 @@ declare module 'vue-router/auto-routes' {
     'src/pages/python-ide.vue': {
       routes:
         | '/python-ide'
-      views:
-        | never
-    }
-    'src/pages/README.vue': {
-      routes:
-        | '/README'
-      views:
-        | never
-    }
-    'src/pages/signup.vue': {
-      routes:
-        | '/signup'
-      views:
-        | never
-    }
-    'src/pages/teaching.vue': {
-      routes:
-        | '/teaching'
-      views:
-        | never
-    }
-    'src/pages/wheel.vue': {
-      routes:
-        | '/wheel'
-      views:
-        | never
-    }
-    'src/pages/zelle.vue': {
-      routes:
-        | '/zelle'
-      views:
-        | never
-    }
-    'src/pages/zoom.vue': {
-      routes:
-        | '/zoom'
       views:
         | never
     }

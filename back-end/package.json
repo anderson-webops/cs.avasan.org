@@ -2,7 +2,7 @@
 	"name": "back-end",
 	"version": "1.0.0",
 	"private": true,
-	"description": "",
+	"description": "Admin-only API for Classes with Julio",
 	"type": "module",
 	"main": "dist/server.js",
 	"scripts": {
@@ -21,7 +21,7 @@
 		"create-admin-ts": "tsx -r dotenv/config src/create-admin-user.ts"
 	},
 	"keywords": [],
-	"author": "",
+	"author": "Classes with Julio",
 	"license": "ISC",
 	"dependencies": {
 		"argon2": "^0.44.0",

@@ -1,25 +1,20 @@
 <script lang="ts" setup>
 import { pageTitleForPath } from "@/modules/pageHead";
-import {
-	SCHEDULER_ORIGIN,
-	schedulerDnsPrefetchHref
-} from "@/modules/scheduler";
 
-// https://github.com/vueuse/head
-// you can use this to manipulate the document head in any components,
-// they will be rendered correctly in the HTML results with vite-ssg
-const siteUrl = import.meta.env.VITE_SITE_URL || "https://example.com";
+const siteUrl = import.meta.env.VITE_SITE_URL || "https://cs.avasan.org";
 const siteDescription =
-	"One-on-one online tutoring with Jacob Anderson for students working through coding, systems, STEM, or Spanish goals.";
+	"Free Scratch, Python, and PyGames course materials from grade-school teacher Julio. Students can start learning without creating an account.";
 const route = useRoute();
 const noindexMatchers = [
-	/^\/admin(?:\/|$)/,
 	/^\/profile(?:\/|$)/,
 	/^\/python-ide(?:\/|$)/,
 	/^\/api(?:\/|$)/
 ];
 const canonicalUrl = computed(() =>
 	new URL(route.path || "/", `${siteUrl}/`).toString()
+);
+const socialImageUrl = computed(() =>
+	new URL("/og.png", `${siteUrl}/`).toString()
 );
 const pageTitle = computed(() => pageTitleForPath(route.path || "/"));
 const robotsContent = computed(() =>
@@ -32,14 +27,14 @@ const structuredData = computed(() => [
 		"@context": "https://schema.org",
 		"@type": "EducationalOrganization",
 		description: siteDescription,
-		name: "Classes with Jacob",
+		name: "Classes with Julio",
 		url: siteUrl
 	},
 	{
 		"@context": "https://schema.org",
 		"@type": "WebSite",
 		description: siteDescription,
-		name: "Classes with Jacob",
+		name: "Classes with Julio",
 		url: siteUrl
 	}
 ]);
@@ -55,7 +50,7 @@ useHead(
 				},
 				{
 					property: "og:title",
-					content: "Classes with Jacob"
+					content: "Classes with Julio"
 				},
 				{
 					property: "og:description",
@@ -70,16 +65,29 @@ useHead(
 					content: canonicalUrl.value
 				},
 				{
+					property: "og:image",
+					content: socialImageUrl.value
+				},
+				{
+					property: "og:image:alt",
+					content:
+						"Classes with Julio: Scratch, Python, and PyGames for young coders"
+				},
+				{
 					name: "twitter:card",
-					content: "summary"
+					content: "summary_large_image"
 				},
 				{
 					name: "twitter:title",
-					content: "Classes with Jacob"
+					content: "Classes with Julio"
 				},
 				{
 					name: "twitter:description",
 					content: siteDescription
+				},
+				{
+					name: "twitter:image",
+					content: socialImageUrl.value
 				},
 				{
 					name: "robots",
@@ -116,14 +124,6 @@ useHead(
 				{
 					rel: "manifest",
 					href: "/site.webmanifest"
-				},
-				{
-					rel: "dns-prefetch",
-					href: schedulerDnsPrefetchHref
-				},
-				{
-					rel: "preconnect",
-					href: SCHEDULER_ORIGIN
 				},
 				{
 					rel: "dns-prefetch",

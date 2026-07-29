@@ -2,10 +2,13 @@ import type { Server } from "node:http";
 import type { RequestHandler } from "express";
 import express from "express";
 import { describe, expect, it } from "vitest";
+import { requireInternalDiagnostics } from "../src/middleware/internalDiagnostics.js";
 import {
 	createAdminMailLimiter,
+	createLoginLimiter,
 	createUserCourseAccessLimiter
 } from "../src/middleware/rateLimiters.js";
+import { readTrustProxySetting } from "../src/security/trustProxy.js";
 import { renderMarkdownEmailHtml } from "../src/utils/markdownEmail.js";
 import {
 	defaultSessionNoteSubject,
@@ -47,8 +50,11 @@ async function withServer<T>(
 	}
 }
 
-async function requestLimitedEndpoint(baseUrl: string): Promise<Response> {
-	return fetch(`${baseUrl}/limited`, { method: "POST" });
+async function requestLimitedEndpoint(
+	baseUrl: string,
+	headers?: Record<string, string>
+): Promise<Response> {
+	return fetch(`${baseUrl}/limited`, { headers, method: "POST" });
 }
 
 function getStandardRateLimitHeader(response: Response): string | null {
@@ -56,6 +62,65 @@ function getStandardRateLimitHeader(response: Response): string | null {
 }
 
 describe("security dependency regressions", () => {
+	it("does not trust forwarded client addresses unless proxy hops are explicitly configured", () => {
+		expect(readTrustProxySetting(undefined)).toBe(false);
+		expect(readTrustProxySetting("")).toBe(false);
+		expect(readTrustProxySetting("1")).toBe(1);
+		expect(() => readTrustProxySetting("0")).toThrow(
+			"TRUST_PROXY_HOPS must be a positive integer"
+		);
+		expect(() => readTrustProxySetting("not-a-number")).toThrow(
+			"TRUST_PROXY_HOPS must be a positive integer"
+		);
+	});
+
+	it("does not let spoofed forwarding headers bypass teacher login throttling", async () => {
+		await withServer(
+			createLoginLimiter({ limit: 1, windowMs: 60_000 }),
+			async (baseUrl) => {
+				const first = await requestLimitedEndpoint(baseUrl, {
+					"X-Forwarded-For": "198.51.100.10"
+				});
+				const second = await requestLimitedEndpoint(baseUrl, {
+					"X-Forwarded-For": "203.0.113.20"
+				});
+
+				expect(first.status).toBe(200);
+				expect(second.status).toBe(429);
+			}
+		);
+	});
+
+	it("requires the configured key for database diagnostics in every environment", async () => {
+		await withServer(requireInternalDiagnostics(undefined), async (baseUrl) => {
+			const response = await fetch(`${baseUrl}/limited`, {
+				headers: {
+					"X-Forwarded-For": "127.0.0.1"
+				}
+			});
+			expect(response.status).toBe(403);
+		});
+
+		await withServer(
+			requireInternalDiagnostics("correct-diagnostics-key"),
+			async (baseUrl) => {
+				const wrong = await fetch(`${baseUrl}/limited`, {
+					headers: {
+						"X-Internal-Diagnostics-Key": "wrong-diagnostics-key"
+					}
+				});
+				const correct = await fetch(`${baseUrl}/limited`, {
+					headers: {
+						"X-Internal-Diagnostics-Key": "correct-diagnostics-key"
+					}
+				});
+
+				expect(wrong.status).toBe(403);
+				expect(correct.status).toBe(200);
+			}
+		);
+	});
+
 	it("keeps admin mail rate limiting on standard headers and disables legacy headers", async () => {
 		await withServer(
 			createAdminMailLimiter({ limit: 2, windowMs: 60_000 }),

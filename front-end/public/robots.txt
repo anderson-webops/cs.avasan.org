@@ -55,4 +55,4 @@ Disallow: /api
 Disallow: /admin
 Disallow: /profile
 
-Sitemap: https://example.com/sitemap.xml
+Sitemap: https://cs.avasan.org/sitemap.xml

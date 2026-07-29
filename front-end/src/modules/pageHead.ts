@@ -1,24 +1,12 @@
-const SITE_TITLE = "Classes with Jacob";
+const SITE_TITLE = "Classes with Julio";
 
 const ROUTE_TITLES: Array<[RegExp, string]> = [
 	[/^\/$/, SITE_TITLE],
 	[/^\/courses(?:\/|$)/, "Courses"],
-	[/^\/pathways(?:\/|$)/, "Pathways"],
 	[/^\/course-resource(?:\/|$)/, "Course Resource"],
 	[/^\/python-ide(?:\/|$)/, "Python IDE"],
-	[/^\/zoom(?:\/|$)/, "Zoom"],
-	[/^\/signup(?:\/|$)/, "Book a Class"],
-	[/^\/payment(?:\/|$)/, "Tuition"],
-	[/^\/zelle(?:\/|$)/, "Zelle"],
-	[/^\/about(?:\/|$)/, "About"],
-	[/^\/profile(?:\/|$)/, "Account"],
-	[/^\/admin\/student-management(?:\/|$)/, "Student Management"],
-	[/^\/admin\/mdmail(?:\/|$)/, "Mail Tools"],
-	[/^\/admin\/people(?:\/|$)/, "People"],
-	[/^\/admin(?:\/|$)/, "Admin"],
-	[/^\/teaching(?:\/|$)/, "Teaching"],
-	[/^\/wheel(?:\/|$)/, "Wheel"],
-	[/^\/README(?:\/|$)/, "Readme"]
+	[/^\/about(?:\/|$)/, "About Julio"],
+	[/^\/profile(?:\/|$)/, "Teacher Account"]
 ];
 
 function normalizePath(path: string) {
@@ -33,6 +21,7 @@ export function pageTitleForPath(path: string) {
 		ROUTE_TITLES.find(([pattern]) => pattern.test(normalized))?.[1] ??
 		"Page Not Found";
 
-	if (matchedTitle === SITE_TITLE) return SITE_TITLE;
-	return `${matchedTitle} | ${SITE_TITLE}`;
+	return matchedTitle === SITE_TITLE
+		? SITE_TITLE
+		: `${matchedTitle} | ${SITE_TITLE}`;
 }

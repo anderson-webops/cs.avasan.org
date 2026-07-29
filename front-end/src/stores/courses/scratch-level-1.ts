@@ -20,7 +20,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Scratch basics",
 					content:
-						"Create a Scratch account and explore the code blocks. Learn how the stage and sprites work, and experiment with the green flag to start scripts."
+						"Open the Scratch editor and explore the code blocks—no account is required to begin. Learn how the stage and sprites work, and experiment with the green flag to start scripts. Download the project file when you want to save work without signing in."
 				},
 				{
 					title: "Project 1 – Hungry Hippo",

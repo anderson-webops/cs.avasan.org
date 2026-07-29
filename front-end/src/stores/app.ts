@@ -88,8 +88,7 @@ export const useAppStore = defineStore("app", {
 	}),
 
 	getters: {
-		isLoggedIn: state =>
-			!!state.currentUser || !!state.currentTutor || !!state.currentAdmin,
+		isLoggedIn: state => !!state.currentAdmin,
 
 		isAdmin: state => !!state.currentAdmin
 	},
@@ -107,21 +106,13 @@ export const useAppStore = defineStore("app", {
 				const { data } = await api.get("/accounts/me");
 				if (data.adminID) {
 					await this.refreshCurrentAdmin();
-					this.setCurrentTutor(null);
-					this.setCurrentUser(null);
-				} else if (data.tutorID) {
-					await this.refreshCurrentTutor();
-					this.setCurrentAdmin(null);
-					this.setCurrentUser(null);
-				} else if (data.userID) {
-					await this.refreshCurrentUser();
-					this.setCurrentAdmin(null);
-					this.setCurrentTutor(null);
 				} else {
 					this.setCurrentAdmin(null);
-					this.setCurrentTutor(null);
-					this.setCurrentUser(null);
 				}
+				// Legacy learner/tutor shapes remain for inherited course
+				// components, but this downstream never hydrates those roles.
+				this.setCurrentTutor(null);
+				this.setCurrentUser(null);
 			} catch {
 				this.setCurrentAdmin(null);
 				this.setCurrentTutor(null);

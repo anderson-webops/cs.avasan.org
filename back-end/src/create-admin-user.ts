@@ -1,48 +1,55 @@
-// src/create-admin-user.ts
-import { env, exit } from "node:process";
+import process, { env } from "node:process";
 import mongoose from "mongoose";
 import * as readlineSync from "readline-sync";
 
 import { Admin } from "./models/schemas/Admin.js";
+import { ADMIN_SINGLETON_ID } from "./security/adminIdentity.js";
+import {
+	isValidTeacherPassword,
+	MIN_TEACHER_PASSWORD_LENGTH
+} from "./security/passwordPolicy.js";
 import "dotenv/config";
 
-const MONGODB_URI = env.MONGODB_URI;
-if (!MONGODB_URI) {
-	console.error("MONGODB_URI is required");
-	exit(1);
+const TEACHER_NAME = "Julio";
+
+function normalizeEmail(email: string): string {
+	return email.trim().toLowerCase();
 }
 
-// Connect to MongoDB
-mongoose
-	.connect(MONGODB_URI)
-	.then(() => console.log("Connected to MongoDB"))
-	.catch((err) => {
-		console.error("Error connecting to MongoDB:", err);
-		exit(1);
-	});
+async function main(): Promise<void> {
+	const mongoUri = env.MONGODB_URI?.trim();
+	if (!mongoUri) {
+		console.error("MONGODB_URI is required.");
+		process.exitCode = 1;
+		return;
+	}
 
-// Gather input
-const name: string = readlineSync.question("Name: ");
-const email: string = readlineSync.question("Email: ");
-const password: string = readlineSync.question("Password: ", {
-	hideEchoBack: true
-});
-
-if (!name || !email || !password) {
-	console.error("You need to enter name, email, and password!");
-	exit(1);
-}
-
-(async () => {
 	try {
-		const existingAdmin = await Admin.findOne({ email });
-		if (existingAdmin) {
-			console.error("That email already exists");
-			exit(1);
+		await mongoose.connect(mongoUri);
+
+		const existingAdminCount = await Admin.countDocuments({}).exec();
+		if (existingAdminCount > 0) {
+			console.error("Teacher provisioning refused because an Admin account already exists.");
+			process.exitCode = 1;
+			return;
+		}
+
+		const email = normalizeEmail(readlineSync.question("Julio's email: "));
+		const password = readlineSync.question("Julio's password: ", {
+			hideEchoBack: true
+		});
+
+		if (!email || !email.includes("@") || !isValidTeacherPassword(password)) {
+			console.error(
+				`A valid email and password of at least ${MIN_TEACHER_PASSWORD_LENGTH} characters are required.`
+			);
+			process.exitCode = 1;
+			return;
 		}
 
 		const admin = new Admin({
-			name,
+			_id: ADMIN_SINGLETON_ID,
+			name: TEACHER_NAME,
 			email,
 			password,
 			editAdmins: false,
@@ -51,11 +58,24 @@ if (!name || !email || !password) {
 		});
 
 		await admin.save();
-		// console.log(`Admin user created for ${name} with email ${email}`);
-		exit(0);
+		console.log("Julio's teacher account was provisioned.");
 	}
-	catch (error) {
-		console.error(`Error: ${error}`);
-		exit(1);
+	catch {
+		// Do not print connection errors: they can contain database credentials.
+		console.error("Teacher provisioning failed. Check database connectivity and account state.");
+		process.exitCode = 1;
 	}
-})();
+	finally {
+		if (mongoose.connection.readyState !== 0) {
+			try {
+				await mongoose.disconnect();
+			}
+			catch {
+				console.error("Database disconnect failed after teacher provisioning.");
+				process.exitCode = 1;
+			}
+		}
+	}
+}
+
+void main();

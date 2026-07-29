@@ -42,9 +42,9 @@ import {
 	isValidPythonFileName,
 	loadLocalPythonProjectsAsync,
 	loadPythonIdeStarterFilesFromGitHub,
+	normalizeClassroomPythonIdeMode,
 	normalizeImportedPythonIdeFileName,
 	normalizePythonFileName,
-	normalizePythonIdeMode,
 	pythonIdeAllowedFileExtensions,
 	pythonIdeFileUploadAccept,
 	pythonIdeModeForCourseId,
@@ -890,7 +890,7 @@ const requestedStarterMode = computed(() => {
 	const rawMode =
 		typeof route.query.mode === "string" ? route.query.mode : "";
 	const courseMode = pythonIdeModeForCourseId(requestedCourseId.value);
-	return normalizePythonIdeMode(rawMode, courseMode ?? "turtle");
+	return normalizeClassroomPythonIdeMode(rawMode, courseMode ?? "turtle");
 });
 
 function appendOutput(kind: OutputLine["kind"], text: string) {
@@ -1926,6 +1926,11 @@ async function resetCodeEditor() {
 				extensions,
 				parent: host
 			});
+	codeEditorView.scrollDOM.tabIndex = 0;
+	codeEditorView.scrollDOM.setAttribute(
+		"aria-label",
+		"Code editor scrolling region"
+	);
 	activeCodeEditorViewStateKey = viewStateKey;
 	if (viewStateKey) {
 		if (restoredState) {
@@ -4886,8 +4891,7 @@ onBeforeUnmount(() => {
 				<p>
 					Build multi-file Python projects, run standard Python code,
 					and use the Turtle canvas for drawing and keyboard-driven
-					lessons, PyGame Zero game projects, or data/AI notebooks
-					with rendered charts.
+					lessons or PyGame Zero game projects.
 				</p>
 			</div>
 			<div class="python-ide-status" aria-live="polite">
@@ -4969,13 +4973,6 @@ onBeforeUnmount(() => {
 									<button
 										type="button"
 										role="menuitem"
-										@click="createProjectFromMenu('data')"
-									>
-										Data / AI notebook
-									</button>
-									<button
-										type="button"
-										role="menuitem"
 										@click="createProjectFromMenu('turtle')"
 									>
 										Python Turtle
@@ -4999,18 +4996,6 @@ onBeforeUnmount(() => {
 										"
 									>
 										Demo Python
-									</button>
-									<button
-										type="button"
-										role="menuitem"
-										@click="
-											createProjectFromMenu(
-												'data',
-												'demo'
-											)
-										"
-									>
-										Demo Data / AI
 									</button>
 									<button
 										type="button"
@@ -5255,9 +5240,9 @@ onBeforeUnmount(() => {
 									<span>
 										<strong>Autosave projects</strong>
 										<small>
-											Save edits locally right away and
-											sync them to your account when
-											possible.
+											Save edits locally on this device
+											right away. No student account is
+											required.
 										</small>
 									</span>
 								</label>
@@ -5675,6 +5660,18 @@ html.dark .python-ide-status {
 
 html.dark .python-ide-status strong {
 	color: #f8fbff;
+}
+
+html.dark
+	.python-ide-page
+	:is(
+		.python-ide-eyebrow,
+		.sidebar-heading,
+		.panel-header,
+		.editor-toolbar span,
+		.stdin-panel span
+	) {
+	color: #5eead4;
 }
 
 html.dark .ide-settings-trigger,

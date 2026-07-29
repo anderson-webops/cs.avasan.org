@@ -3,15 +3,23 @@ import type { RequestHandler } from "express";
 import { Admin } from "../models/schemas/Admin.js";
 import { Tutor } from "../models/schemas/Tutor.js";
 import { User } from "../models/schemas/User.js";
+import { ADMIN_SINGLETON_ID } from "../security/adminIdentity.js";
+
+interface LegacyAccountSession {
+	adminID?: string;
+	tutorID?: string;
+	userID?: string;
+}
 
 // Middleware to validate User
 export const validUser: RequestHandler = async (req, res, next) => {
-	if (!req.session?.userID) {
+	const session = req.session as LegacyAccountSession | undefined;
+	if (!session?.userID) {
 		res.status(403).json({ message: "Not logged in or session expired" });
 		return;
 	}
 	try {
-		const user = await User.findById(req.session.userID);
+		const user = await User.findById(session.userID);
 		if (!user) {
 			res.status(403).json({ message: "User account not found" });
 			return;
@@ -27,12 +35,13 @@ export const validUser: RequestHandler = async (req, res, next) => {
 
 // Middleware to validate Tutor
 export const validTutor: RequestHandler = async (req, res, next) => {
-	if (!req.session?.tutorID) {
+	const session = req.session as LegacyAccountSession | undefined;
+	if (!session?.tutorID) {
 		res.status(403).json({ message: "Not logged in or session expired" });
 		return;
 	}
 	try {
-		const tutor = await Tutor.findById(req.session.tutorID);
+		const tutor = await Tutor.findById(session.tutorID);
 		if (!tutor) {
 			res.status(403).json({ message: "Tutor account not found" });
 			return;
@@ -48,9 +57,10 @@ export const validTutor: RequestHandler = async (req, res, next) => {
 
 // Middleware to allow either tutor or admin sessions
 export const validTutorOrAdminSession: RequestHandler = async (req, res, next) => {
-	if (req.session?.adminID) {
+	const session = req.session as LegacyAccountSession | undefined;
+	if (session?.adminID) {
 		try {
-			const admin = await Admin.findById(req.session.adminID);
+			const admin = await Admin.findById(session.adminID);
 			if (!admin) {
 				res.status(403).json({ message: "Admin account not found" });
 				return;
@@ -65,9 +75,9 @@ export const validTutorOrAdminSession: RequestHandler = async (req, res, next) =
 		return;
 	}
 
-	if (req.session?.tutorID) {
+	if (session?.tutorID) {
 		try {
-			const tutor = await Tutor.findById(req.session.tutorID);
+			const tutor = await Tutor.findById(session.tutorID);
 			if (!tutor) {
 				res.status(403).json({ message: "Tutor account not found" });
 				return;
@@ -91,8 +101,12 @@ export const validAdmin: RequestHandler = async (req, res, next) => {
 		res.status(403).json({ message: "Not logged in or session expired" });
 		return;
 	}
+	if (req.session.adminID !== ADMIN_SINGLETON_ID) {
+		res.status(403).json({ message: "Admin account not found" });
+		return;
+	}
 	try {
-		const admin = await Admin.findById(req.session.adminID);
+		const admin = await Admin.findById(ADMIN_SINGLETON_ID);
 		if (!admin) {
 			res.status(403).json({ message: "Admin account not found" });
 			return;

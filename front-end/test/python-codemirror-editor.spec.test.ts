@@ -243,7 +243,7 @@ describe("python IDE CodeMirror editor", () => {
 		expect(pageSource).toContain("Quotes and brackets wrap highlighted");
 	});
 
-	it("offers course-runtime completions by immutable project mode", () => {
+	it("offers only the classroom project modes while keeping runtime completions", () => {
 		const pageSource = sourceFile(
 			"../src/components/PythonIdeWorkspace.vue"
 		);
@@ -259,7 +259,8 @@ describe("python IDE CodeMirror editor", () => {
 		expect(toolbarSource).not.toContain("<select");
 		expect(toolbarSource).not.toContain("selectedProject.mode");
 		expect(createMenuSource).toContain("createProjectFromMenu('python')");
-		expect(createMenuSource).toContain("createProjectFromMenu('data')");
+		expect(createMenuSource).not.toContain("createProjectFromMenu('data')");
+		expect(createMenuSource).not.toContain("Data / AI");
 		expect(createMenuSource).toContain("createProjectFromMenu('turtle')");
 		expect(createMenuSource).toContain("createProjectFromMenu('pgzero')");
 

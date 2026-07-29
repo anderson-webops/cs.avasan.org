@@ -1,53 +1,72 @@
-// cypress/e2e/navigation.spec.ts
 /// <reference types="cypress" />
 
-/**
- * Basic smoke-test for Classes
- *
- * Things we prove:
- *   1. Home page renders and shows the H1 banner.
- *   2. The header links perform client-side navigation.
- *   3. A quote is fetched and rendered.
- *
- * NB:  Make sure the `baseUrl` in cypress.config.(ts|js) is
- *      `http://localhost:3333` (the same port you run `vite` with).
- */
+const publicCourses = [
+	"Scratch Level 1",
+	"Scratch Level 2",
+	"Python Level 1",
+	"Python Level 2",
+	"PyGames"
+];
 
-context("Navigation & page smoke-tests", () => {
+context("Public classroom navigation", () => {
 	beforeEach(() => {
 		cy.viewport(1440, 900);
-		cy.visit("/"); // -> Home
+		cy.intercept("GET", "/api/accounts/me", { body: {} });
+		cy.visit("/");
 	});
 
-	it("loads the home page", () => {
+	it("loads Julio's account-free classroom", () => {
 		cy.url().should("eq", `${Cypress.config().baseUrl}/`);
-		cy.contains("Classes").should("exist"); // <h1>
+		cy.contains("h1", "Make something").should("be.visible");
+		cy.contains("Grade-school teacher Julio").should("be.visible");
+		cy.contains("No student account").should("be.visible");
 	});
 
-	it("header links work", () => {
-		// ---- About ---------------------------------------------------
-		cy.get(".site-nav").contains("a:visible", "About").click();
+	it("navigates among the public classroom pages", () => {
+		cy.get(".site-nav").contains("a:visible", "Courses").click();
+		cy.url().should("eq", `${Cypress.config().baseUrl}/courses`);
+		cy.contains("h1", "Computer Science Courses").should("be.visible");
+
+		cy.get(".site-nav").contains("a:visible", "Python IDE").click();
+		cy.url().should("eq", `${Cypress.config().baseUrl}/python-ide`);
+		cy.contains("h1", "Code, run, and draw in Python").should("be.visible");
+
+		cy.get(".site-nav").contains("a:visible", "About Julio").click();
 		cy.url().should("eq", `${Cypress.config().baseUrl}/about`);
-		cy.get("h1").contains("Focused Help").should("exist");
+		cy.contains("h1", "A teacher's small coding library").should(
+			"be.visible"
+		);
 
-		// ---- Book a Class --------------------------------------------------
-		cy.get(".site-nav").contains("a:visible", "Book a Class").click();
-		cy.url().should("eq", `${Cypress.config().baseUrl}/signup`);
-		cy.get("h1").contains("Book a Class").should("exist");
-
-		// ---- Tuition & Payment ---------------------------------------------
-		cy.get(".site-nav").contains("a:visible", "Tuition").click();
-		cy.url().should("eq", `${Cypress.config().baseUrl}/payment`);
-		cy.get("h1").contains("Tuition").should("exist");
-
-		// ---- back to Home -------------------------------------------
 		cy.get(".site-nav").contains("a:visible", "Home").click();
 		cy.url().should("eq", `${Cypress.config().baseUrl}/`);
 	});
 
-/*	it("shows a motivational quote on Home", () => {
-		cy.get(".quote")
-			.should("exist")
-			.and(($q) => expect($q.text().length).to.be.greaterThan(10)); // non-empty
-	});*/
+	it("publishes only Scratch, Python 1-2, and PyGames", () => {
+		cy.get(".site-nav").contains("a:visible", "Courses").click();
+
+		cy.get("#course-select option").should("have.length", 5);
+		cy.get("#course-select option").then(options => {
+			expect([...options].map(option => option.textContent?.trim())).to.deep
+				.equal(publicCourses);
+		});
+		cy.contains("Every course is available without a student account.").should(
+			"be.visible"
+		);
+	});
+
+	it("offers only Julio's private teacher login and no signup flow", () => {
+		cy.get(".site-nav").within(() => {
+			cy.contains("button:visible", "Teacher log in").click();
+		});
+
+		cy.get("#teacher-login-dialog")
+			.should("be.visible")
+			.and("have.attr", "role", "dialog");
+		cy.contains(
+			"This private sign-in is only for Julio, the teacher who maintains the course library."
+		).should("be.visible");
+		cy.contains("Students do not need an account.").should("be.visible");
+		cy.contains("Sign up").should("not.exist");
+		cy.contains("Book a Class").should("not.exist");
+	});
 });

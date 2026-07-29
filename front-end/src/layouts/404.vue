@@ -8,20 +8,13 @@ const app = useAppStore();
 function showLoginModal() {
 	app.setLoginBlock(true);
 }
-
-function showSignupModal() {
-	app.setSignupBlock(true);
-}
 </script>
 
 <template>
 	<div class="site-frame">
 		<a class="skip-link" href="#main-content">Skip to content</a>
 
-		<TheHeader
-			@login-click="showLoginModal"
-			@signup-click="showSignupModal"
-		/>
+		<TheHeader @login-click="showLoginModal" />
 
 		<AccountManagement />
 

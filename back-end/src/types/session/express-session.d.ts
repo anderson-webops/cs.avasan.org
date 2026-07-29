@@ -1,9 +1,10 @@
 // src/types/session/express-session.d.ts
 
 // noinspection JSUnusedGlobalSymbols // These are used/included by tsconfig.json
-import type { IAdmin } from "./IAdmin.js";
-import type { ITutor } from "./ITutor.js";
-import type { IUser } from "./IUser.js";
+import type { HydratedDocument } from "mongoose";
+import type { IAdmin } from "../entities/IAdmin.js";
+import type { ITutor } from "../entities/ITutor.js";
+import type { IUser } from "../entities/IUser.js";
 
 /**
  * Extend express-session's SessionData interface
@@ -11,20 +12,19 @@ import type { IUser } from "./IUser.js";
 declare module "express-session" {
 	interface SessionData {
 		adminID?: string;
-		tutorID?: string;
-		userID?: string;
 	}
 }
 
 /**
- * Extend Express's Request interface to include currentAdmin, etc.
+ * Extend Express's Request interface. Tutor and student request fields remain
+ * typed for source compatibility with downstream-unmounted legacy modules.
  */
 declare global {
 	namespace Express {
 		interface Request {
-			currentAdmin?: IAdmin;
-			currentTutor?: ITutor;
-			currentUser?: IUser;
+			currentAdmin?: HydratedDocument<IAdmin>;
+			currentTutor?: HydratedDocument<ITutor>;
+			currentUser?: HydratedDocument<IUser>;
 		}
 	}
 }

@@ -1,113 +1,86 @@
-# Repository Guidelines
+# cs.avasan.org Repository Guidance
 
-## Project Structure & Module Organization
-- `front-end/` hosts the Vite-powered Vue 3 client. Routing views live in `src/pages`, shared UI in `src/components`, state in `src/stores`, and feature logic in `src/modules`. Static assets belong in `public/` and `src/assets/`, while i18n copy sits under `locales/`.
-- Front-end unit specs reside in `front-end/test/*.spec.test.ts` (snapshots in `__snapshots__/`). End-to-end workflows live in `front-end/cypress/`.
-- `back-end/` contains the Express + Mongoose API. Keep request handling in `src/controllers/`, validation in `src/middleware/`, schemas in `src/models/`, and route wiring under `src/routes/`.
-- Monorepo-wide configuration (ESLint, TypeScript base config, workspace scripts) is defined at the repository root; update these when adjusting tooling for either project.
+## Purpose and Product Boundary
 
-## Build, Test, and Development Commands
-- `npm install` (root) installs all workspace dependencies using the pinned `npm@11` toolchain. Avoid mixing package managers.
-- `npm run dev` starts the front-end dev server on port 3333; `npm run serve` runs the same build with `--host` enabled for LAN previews.
-- `npm run server` launches the API with live reload via `tsx watch -r dotenv/config` on port 3008.
-- `npm run build` produces optimized client + server bundles (`front-end/dist/`, `back-end/dist/`).
-- `npm run -w front-end test` / `test:unit` run Vitest suites; `npm run -w front-end test:e2e` opens Cypress.
-- `npm run lint` (or `lint-fix`) runs the shared ESLint configuration across both workspaces; pre-commit hooks run `lint-staged` automatically.
+`cs.avasan.org` is Julio's grade-school computer science classroom. It is a
+deliberately simplified downstream adaptation of
+`instruction-material/classes.jacobdanderson.net`, not a general tutoring or
+freelance-business platform.
 
-## Coding Style & Naming Conventions
-- ESLint extends `@antfu/eslint-config` and enforces Prettier with tab indentation, double quotes, semicolons, 120-character lines, and LF endings. Run `npm run lint-fix` before pushing.
-- Vue single-file components use PascalCase filenames (`TheHeader.vue`), composables use the `useFeature` pattern, and Pinia stores live in `src/stores/`.
-- TypeScript modules should export camelCase functions and PascalCase classes/types. Keep front-end route files lowercase to match the generated router.
-- Prefer descriptive directory names (`controllers/common/`, `controllers/users/`) and colocate feature-specific assets alongside their modules.
+Keep these constraints intact:
 
-## Testing Guidelines
-- Write unit tests with Vitest and follow the `*.spec.test.ts` naming used in `front-end/test/`. Snapshot updates belong in `__snapshots__/` and should be reviewed line-by-line.
-- Cypress specs should stub network calls against the Express test server; store fixtures under `front-end/cypress/fixtures/`.
-- Back-end tests are not yet wired up—when adding them, place suites under a new `back-end/test/` tree and update `npm run -w back-end test` to execute them (prefer Vitest + Supertest for HTTP coverage).
-- Aim to cover new endpoints, Pinia stores, and critical user flows before requesting review; document any intentionally skipped scenarios in the PR.
+- The public catalog contains exactly Scratch Level 1, Scratch Level 2, Python
+  Level 1, Python Level 2, and PyGames.
+- Students browse courses and use the browser IDE anonymously. Do not require,
+  offer, or create student accounts; anonymous projects remain in the browser.
+- Julio is the sole teacher and sole authenticated Admin. His account is
+  provisioned only through `npm run -w back-end create-admin-ts`.
+- Do not add HTTP account creation, additional admins, tutor roles, or separate
+  tutor/admin workflows.
+- Do not restore scheduler, booking, Zoom, tuition, payment, freelance,
+  tutoring-business, intake, or expectation-setting flows.
 
-## Commit & Pull Request Guidelines
-- Follow the existing history: present-tense, concise subjects (`Add tutor availability routes`). Keep summaries under 72 characters and expand details in the body when needed.
-- Reference GitHub issues with `Fixes #123` or `Refs #123` in the description.
-- Before opening a PR, ensure `npm run lint` and relevant tests pass, and include screenshots or screen recordings for UI-facing changes.
-- PR descriptions should outline scope, testing evidence, migration steps (if any), and rollout considerations.
+Any change that expands those boundaries requires an explicit product decision.
 
-## Security & Configuration Tips
-- The API expects secrets via environment variables: `SESSION_SECRET`, Mongo credentials (`MONGODB_URI` or Vault via `VAULT_ROLE_ID`/`VAULT_SECRET_ID`), and optional `CROSS_SITE` to adjust cookie policy. Load them through `.env` files excluded from version control.
-- `npm run server` already loads `dotenv/config` and will attempt Vault retrieval via `src/vaultClient.ts`; validate both code paths when changing auth or persistence.
-- Never commit real credentials or production endpoints. Scrub logs before sharing, and verify rate limiting when exposing new routes under `/admin-mail` or other sensitive prefixes.
+## Downstream and Git Policy
 
-## Local Course Material Paths
-- Place local starter/solution packs and source course working folders under `/Users/jacobanderson/Documents/Work/Juni`, not under `/Users/jacobanderson/Work/Juni`.
-- Use the top-level course folder layout already present in that directory (for example `Low Level Security`, `Intro to Swift App Development`, `Linux Systems`, and `Web Development Foundations`) unless the user explicitly requests a different local structure.
+- `origin` is `git@github.com:anderson-webops/cs.avasan.org.git`; commit and push
+  completed downstream work there.
+- `upstream` is
+  `git@github.com:instruction-material/classes.jacobdanderson.net.git`; treat it
+  as a read-only source of selected changes.
+- Preserve this repository as a deliberate Julio-specific overlay. Before an
+  upstream sync, inspect the target commits and the downstream-only diff, then
+  replay or adapt only compatible changes.
+- Never blindly merge, reset, rebase, or replace the downstream branch with
+  upstream. Never push downstream work to `upstream`.
+- Do not import or recreate upstream tags during a sync. Create or move an
+  annotated downstream semver tag only for an explicit, validated release, and
+  verify the tag, release, and commit all point to the same revision.
+- Preserve unrelated work already present in the working tree.
 
+After a coherent change is complete and validated, commit it with a concise,
+present-tense subject and push it to `origin`. Do not leave completed work
+uncommitted unless the user asks you to.
 
-## Agent Delivery Workflow
-- Do not leave completed work uncommitted. After each coherent, validated change set, create a commit and push it in the same session.
-- Use multiple commits and pushes when that keeps unrelated changes, partial validations, or follow-up fixes clearly separated. Prefer small, logically grouped commits over one mixed commit.
-- Keep both `package-lock.json` and `back-end/package-lock.json` synchronized before every commit or push.
-- Use lowercase annotated semver tags only. Do not invent ad-hoc labels such as `V1`, `torca-r07`, `pre-lfs-migration-*`, or similar one-off names.
-- This repo follows the stable `v2.x` line. Stay on `v2` for routine work; only cut `v3` for an intentional breaking application or API change.
-- Before creating a new tag, check the latest tag in the active semver line and decide whether the new commit is still the same release milestone. If it is, move that existing tag forward to the new validated commit instead of minting a new version number.
-- Keep the GitHub release aligned with that decision: when the commit still belongs to the same milestone, update or recreate the existing release so it points at the moved tag/current commit; only create a brand-new release when the change creates a genuinely new milestone.
-- Cut a fresh semver tag and release only when the work crosses a real release boundary, such as a new deployable milestone, a materially different operator/user-facing state, or a version-line change that deserves its own notes and rollback point.
-- Create an annotated tag when a deployable course-catalog, front-end UX, back-end API, health/deploy, performance, or security change is ready to ship.
-- Create a GitHub release when that tag represents a real site milestone for users, admins, or operators. Release notes should summarize scope, validation, rollout notes, and any migration or recovery steps.
-- If the existing tag or release history contains stale drafts, redundant entries, or ad-hoc labels, clean that history up instead of preserving clutter.
-- Skip tags and releases for trivial doc-only edits, formatting-only changes, or routine housekeeping unless they change deployment, operations, or a consumer-facing contract.
+## Repository Shape
 
-## Dependency & Lockfile Discipline
+- `front-end/`: Vue 3/Vite SSG public course site and browser IDE.
+- `back-end/`: Express/Mongoose service for Julio's private Admin session.
+- `front-end/test/` and `back-end/test/`: Vitest suites.
+- Root configuration controls shared TypeScript, ESLint, workspaces, and builds.
 
-- Treat the repo-root `npm ci` path as the source of truth for deploy readiness.
-- Any time `package.json`, any workspace `package.json`, dependency ranges, `package-lock.json`, or dependency update tooling changes, verify lockfile parity from the repo root before committing.
-- Do not rely on `npm install` fallback as success. A change is not deploy-ready unless root `npm ci` succeeds.
-- Do not run `npm install`, `npm update`, `npm ci`, Playwright/Cypress installs, or dependency-refresh commands automatically unless dependencies or lockfiles changed, dependencies are missing, or the user explicitly asks for a clean dependency gate.
+Keep public course delivery independent of student identity. Use the
+fork-specific `cs-avasan-org` database, environment variables or the configured
+Vault path for secrets, and never reuse or commit upstream credentials or data.
 
-## Task-Spawning Guardrails
+## Dependency and Lockfile Discipline
 
-- Before spawning heavy tasks, check for existing work and avoid duplicate churn.
-- Use the repo-provided shared lock wrapper for dependency installs, build setup, browser installs, and other heavy local jobs: `node scripts/classes-family-heavy-task.mjs -- <command>`. For example, run clean installs as `node scripts/classes-family-heavy-task.mjs -- npm ci`, not bare `npm ci`, unless CI or the user explicitly requires the bare command.
-- Never run dependency installs concurrently across `classes.jacobdanderson.net` and `scheduler.classes.jacobdanderson.net`. Use a shared lock such as `/tmp/classes-family-dependency-install.lock` or `/tmp/classes-family-heavy-task.lock`.
-- Ignore generated/heavy directories in file watching, searches, indexing, audits, and task triggers: `node_modules`, `front-end/node_modules`, `back-end/node_modules`, `.git`, `.next`, `dist`, `build`, `coverage`, `.cache`, `.turbo`, `.vite`, `playwright-report`, and `test-results`.
-- If a task creates or refreshes dependency trees, mark generated dependency directories as non-indexable where possible: `touch node_modules/.metadata_never_index`, and do the same for `front-end/node_modules` and `back-end/node_modules` when present.
-- Enforce concurrency caps: max 1 dependency install across both repos, max 1 browser automation run per repo, and max 2 total heavy tasks across both repos. Queue extra tasks instead of spawning immediately. For install/setup commands, prefer a shared lock wrapper equivalent to:
-  ```sh
-  lock=/tmp/classes-family-heavy-task.lock
-  (
-    flock -n 9 || {
-      echo "Another classes/scheduler.classes heavy task is already running; skipping."
-      exit 0
-    }
+- Use the repository's pinned npm toolchain; do not mix package managers.
+- Treat root `npm ci` as the clean-install source of truth.
+- When dependencies change, update the relevant manifest and lockfile together.
+  Keep the root and backend lockfiles consistent with their manifests; never
+  hand-edit dependency resolutions.
+- Do not run install/update commands merely for source or documentation edits.
+  If dependencies or lockfiles change, run root `npm ci` and `npm audit` before
+  committing. Never commit dependency changes while the clean install fails.
 
-    npm ci
-  ) 9>"$lock"
-  ```
-  On macOS, use a Node/Python lockfile or install `flock` via Homebrew if `flock` is unavailable.
-- Every spawned process must log a clear parent task id, cwd, command, pid, start time, end time, exit code, timeout, and child-process-group cleanup on failure or cancellation.
-- Browser tasks must close pages, contexts, browser processes, and any dev servers they started in `finally`.
-- Avoid broad filesystem scans from the repo root unless filtered. Use `rg` with explicit excludes and never scan `node_modules`.
-- Do not start a dev server if the needed port is already served by a healthy process. Reuse it or fail clearly.
-- If macOS load average is already high, defer non-urgent jobs. Avoid new heavy jobs when load average is above 8, avoid dependency/file-generation jobs while `mds_stores` has high CPU, and avoid installs/builds when available disk is under 40 GB unless required.
+## Required Validation
 
-Required production/dev dependency update flow before every dependency commit:
-1. Check production and development dependency freshness from the repository root with `npm outdated --workspaces --long` or the repo's documented equivalent.
-2. Review both `dependencies` and `devDependencies` in the root and every workspace package; do not limit updates to production-only packages.
-3. Apply needed updates with the narrowest command that updates the relevant manifest and lockfile together, such as `npm install -w <workspace> <package>@<version>` or `npm install -D -w <workspace> <package>@<version>`.
-4. If the update is only a lockfile/security refresh, regenerate from the root with `npm install --package-lock-only --ignore-scripts --no-fund --no-audit`.
-5. Run `npm audit` from the repository root and resolve remaining production or dev advisories before committing unless a documented upstream limitation prevents it.
+Before committing or pushing code or dependency changes, run:
 
-Required dependency verification before dependency/lockfile commits and deploy-critical clean-install checks:
-1. Run `node scripts/classes-family-heavy-task.mjs -- npm ci` from the repository root through the shared classes-family install lock.
-2. Run `npm run lint`.
-3. Run `npm run typecheck`.
-4. Run `npm run build`.
-5. If API or back-end behavior changed and the repo has a back-end workspace, run `npm run -w back-end test` or the repo's equivalent API test command.
+```bash
+npm run lint
+npm run typecheck
+npm run -w front-end test:unit
+npm run -w back-end test
+npm run build
+git diff --check
+```
 
-For non-dependency source or documentation changes, do not run `npm ci` automatically. Use existing dependencies for the relevant lightweight checks, and skip generated-tree churn unless dependencies are missing, lockfiles changed, or the user explicitly requests a clean dependency gate.
+Run relevant browser/accessibility checks for affected user flows. For
+documentation-only work, at minimum review the rendered text, confirm repository
+facts against the live checkout, and run `git diff --check`.
 
-If `npm ci` fails because `package.json` and `package-lock.json` are out of sync:
-1. Run `npm install --package-lock-only --ignore-scripts --no-fund --no-audit` from the repository root.
-2. Re-run `npm ci` from the repository root.
-3. Commit the resulting `package-lock.json` change with the related dependency/package change.
-
-Never commit or push dependency/package changes if root `npm ci` fails.
+Validation must specifically confirm that the five-course public catalog,
+anonymous student access, and Julio-only Admin boundary remain intact.

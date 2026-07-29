@@ -2146,18 +2146,9 @@ function writeStoredValue(key: string, value: string) {
 												}}</strong
 											>.
 										</p>
-										<p>Static media URL:</p>
-										<a
-											:href="item.mediaLink"
-											rel="noopener noreferrer"
-											target="_blank"
-										>
-											{{ item.mediaLink }}
-										</a>
 										<p>
-											This preview will show the image or
-											video here once the static media
-											file is added.
+											This classroom preview will appear
+											once the media file is available.
 										</p>
 									</div>
 								</article>
@@ -2390,18 +2381,9 @@ function writeStoredValue(key: string, value: string) {
 												}}</strong
 											>.
 										</p>
-										<p>Static media URL:</p>
-										<a
-											:href="item.mediaLink"
-											rel="noopener noreferrer"
-											target="_blank"
-										>
-											{{ item.mediaLink }}
-										</a>
 										<p>
-											This preview will show the image or
-											video here once the static media
-											file is added.
+											This classroom preview will appear
+											once the media file is available.
 										</p>
 									</div>
 								</article>

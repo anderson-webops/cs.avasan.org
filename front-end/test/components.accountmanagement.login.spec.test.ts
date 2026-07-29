@@ -1,104 +1,110 @@
-// components/accountmanagement.login.spec.test.ts
-import { mount } from "@vue/test-utils";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { flushPromises, mount } from "@vue/test-utils";
 import { createPinia, setActivePinia } from "pinia";
-import AccountManagement from "../src/components/AccountManagement.vue";
-import { useAppStore } from "../src/stores/app";
-import * as apiMod from "../src/api";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { api } from "@/api";
+import AccountManagement from "@/components/AccountManagement.vue";
+import { useAppStore } from "@/stores/app";
 
-// Mock the axios client we export from "@/api"
-vi.mock("@/api", () => {
-	const mock = {
+vi.mock("@/api", () => ({
+	api: {
 		get: vi.fn(),
 		post: vi.fn(),
 		put: vi.fn(),
 		delete: vi.fn(),
 		defaults: { baseURL: "/api", withCredentials: true }
-	};
-	return { api: mock };
-});
+	}
+}));
 
-describe("AccountManagement.vue login (happy path)", () => {
+describe("AccountManagement teacher login", () => {
 	beforeEach(() => {
 		document.body.innerHTML = "";
 		setActivePinia(createPinia());
 		vi.clearAllMocks();
 	});
 
-	it("logs in a user, updates the store, and closes the login modal", async () => {
+	function mountLogin() {
 		const app = useAppStore();
-		const loginFormPassphrase = "login-test-pass";
-		// Open the login modal (component checks app.loginBlock)
 		app.setLoginBlock(true);
-
-		// Mock /accounts/login result with a user
-		(apiMod.api.post as any).mockResolvedValueOnce({
-			data: {
-				currentUser: {
-					_id: "u123",
-					name: "User",
-					email: "user@example.com",
-					age: 20,
-					state: "GA"
-				}
-			}
-		});
-
 		const wrapper = mount(AccountManagement, {
 			attachTo: document.body,
 			global: { stubs: { teleport: true } }
 		});
+		return { app, wrapper };
+	}
 
-		// Fill form and submit
-		await wrapper.get("#uname").setValue("user@example.com");
-		await wrapper.get("#psw1").setValue(loginFormPassphrase);
+	it("logs Julio in as the sole teacher account", async () => {
+		const passphrase = "teacher-login-test";
+		const julio = {
+			_id: "julio",
+			name: "Julio",
+			email: "julio@example.com",
+			editAdmins: false,
+			saveEdit: "Save"
+		};
+		vi.mocked(api.post).mockResolvedValueOnce({
+			data: { currentAdmin: julio }
+		});
+		const { app, wrapper } = mountLogin();
+
+		await wrapper.get("#teacher-email").setValue(julio.email);
+		await wrapper.get("#teacher-password").setValue(passphrase);
 		await wrapper.get("form").trigger("submit.prevent");
+		await flushPromises();
 
-		// Assert API call
-		expect(apiMod.api.post).toHaveBeenCalledWith(
+		expect(api.post).toHaveBeenCalledWith(
 			"/accounts/login",
 			{
-				email: "user@example.com",
-				password: loginFormPassphrase,
+				email: julio.email,
+				password: passphrase,
 				remember: false
 			},
 			{ withCredentials: true }
 		);
-
-		// Store updated with currentUser and modal closed
-		expect(app.currentUser?.email).toBe("user@example.com");
+		expect(app.currentAdmin).toEqual(julio);
+		expect(app.currentUser).toBeNull();
+		expect(app.currentTutor).toBeNull();
 		expect(app.loginBlock).toBe(false);
-
-		expect(document.querySelector("#login-dialog")).toBeNull();
+		expect(document.querySelector("#teacher-login-dialog")).toBeNull();
 		wrapper.unmount();
 	});
 
-	it("renders login as an accessible dialog and switches to signup without dead links", async () => {
-		const app = useAppStore();
-		app.setLoginBlock(true);
-
-		const wrapper = mount(AccountManagement, {
-			attachTo: document.body,
-			global: { stubs: { teleport: true } }
+	it("rejects non-teacher login responses without exposing signup", async () => {
+		vi.mocked(api.post).mockResolvedValueOnce({
+			data: {
+				currentUser: {
+					_id: "student",
+					name: "Student"
+				}
+			}
 		});
+		const { app, wrapper } = mountLogin();
 
-		const dialog = document.querySelector("#login-dialog");
+		await wrapper.get("#teacher-email").setValue("student@example.com");
+		await wrapper.get("#teacher-password").setValue("not-a-teacher");
+		await wrapper.get("form").trigger("submit.prevent");
+		await flushPromises();
+
+		expect(wrapper.get('[role="alert"]').text()).toBe(
+			"This sign-in is available only to Julio."
+		);
+		expect(app.currentAdmin).toBeNull();
+		expect(app.loginBlock).toBe(true);
+		expect(wrapper.text()).not.toMatch(/Sign up|Create account/i);
+		wrapper.unmount();
+	});
+
+	it("renders an accessible teacher dialog and explains public access", () => {
+		const { wrapper } = mountLogin();
+		const dialog = document.querySelector("#teacher-login-dialog");
+
 		expect(dialog?.getAttribute("role")).toBe("dialog");
 		expect(dialog?.getAttribute("aria-modal")).toBe("true");
 		expect(dialog?.getAttribute("aria-labelledby")).toBe(
-			"login-dialog-title"
+			"teacher-login-dialog-title"
 		);
+		expect(wrapper.text()).toContain("Students do not need an account.");
 		expect(document.querySelector('a[href="#"]')).toBeNull();
-
-		const signUpButton = wrapper
-			.findAll("button")
-			.find(button => button.text() === "Sign up");
-		if (!signUpButton) throw new Error("Sign up button was not rendered.");
-		await signUpButton.trigger("click");
-
-		expect(app.loginBlock).toBe(false);
-		expect(app.signupBlock).toBe(true);
-		expect(document.querySelector("#signup-dialog")).not.toBeNull();
+		expect(wrapper.text()).not.toMatch(/Sign up|Create account/i);
 		wrapper.unmount();
 	});
 });
