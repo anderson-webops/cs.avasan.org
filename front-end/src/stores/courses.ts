@@ -8,7 +8,11 @@ import { defineStore } from "pinia";
 
 import { computed } from "vue";
 import { useAppStore } from "./app";
-import { courseCatalog, loadRawCourse } from "./courses/index";
+import {
+	archivedCourseCatalog,
+	courseCatalog,
+	loadRawCourse
+} from "./courses/index";
 
 const COMBINING_MARKS_RE = /[\u0300-\u036F]/g;
 const NON_ALPHANUMERIC_RE = /[^a-z0-9]+/g;
@@ -424,6 +428,7 @@ function normalizeCourse(
 								title: item.title,
 								content:
 									displayCourseContent(normalizedContent),
+								learningPath: item.learningPath,
 								projectLink: (() => {
 									if (
 										explicitProjectLink &&
@@ -487,6 +492,12 @@ function normalizeCourse(
 				...(moduleAliases.length ? { aliases: moduleAliases } : {}),
 				...(module.kind ? { kind: module.kind } : {}),
 				title: module.title,
+				...(module.estimatedTime
+					? { estimatedTime: module.estimatedTime }
+					: {}),
+				...(module.keyBlocks?.length
+					? { keyBlocks: [...module.keyBlocks] }
+					: {}),
 				curriculum: mapItems(module.curriculum, "curriculum"),
 				supplementalProjects: mapItems(
 					module.supplementalProjects,
@@ -501,6 +512,12 @@ const courseSummaries: CourseSummary[] = courseCatalog.map(({ id, name }) => ({
 	id,
 	name
 }));
+const archivedCourseSummaries: CourseSummary[] = archivedCourseCatalog.map(
+	({ id, name }) => ({
+		id,
+		name
+	})
+);
 
 const normalizedLearnerCourseCache = new Map<string, CourseDefinition>();
 const normalizedStaffCourseCache = new Map<string, CourseDefinition>();
@@ -513,6 +530,7 @@ function courseCacheFor(includeSolutions: boolean) {
 
 export const useCoursesStore = defineStore("courses", () => {
 	const courses = computed(() => courseSummaries);
+	const archivedCourses = computed(() => archivedCourseSummaries);
 	const appStore = useAppStore();
 
 	const canViewSolutions = computed(
@@ -548,6 +566,7 @@ export const useCoursesStore = defineStore("courses", () => {
 	}
 
 	return {
+		archivedCourses,
 		courses,
 		getCourseById,
 		loadCourseById

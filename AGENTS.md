@@ -9,8 +9,12 @@ freelance-business platform.
 
 Keep these constraints intact:
 
-- The public catalog contains exactly Scratch Level 1, Scratch Level 2, Python
-  Level 1, Python Level 2, and PyGames.
+- The current public catalog contains exactly Scratch Level 1, Scratch Level 2,
+  Python Level 1, Python Level 2: Classroom Edition, and PyGames: Classroom
+  Edition. The two Classroom Editions use the existing stable course IDs.
+- The original Python Level 2 and PyGames curricula may remain visible in a
+  separate archived-reference group for Julio. Archived entries are not
+  current course offerings and must not be added to student course access.
 - Keep the upstream-derived Graph Sketcher available at `/graph-sketcher` as
   an anonymous, browser-local tool. It is not a catalog course, and graph
   projects or contents must not be sent to the backend or analytics.
@@ -93,6 +97,7 @@ Run relevant browser/accessibility checks for affected user flows. For
 documentation-only work, at minimum review the rendered text, confirm repository
 facts against the live checkout, and run `git diff --check`.
 
-Validation must specifically confirm that the five-course public catalog,
-anonymous course/IDE/Graph Sketcher access, browser-local graph projects,
-optional student project sync, and Julio-only Admin boundary remain intact.
+Validation must specifically confirm that the five current public courses,
+separate archived references, anonymous course/IDE/Graph Sketcher access,
+browser-local graph projects, optional student project sync, and Julio-only
+Admin boundary remain intact.

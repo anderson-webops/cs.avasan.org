@@ -3,6 +3,7 @@ import { normalizeRawCourse } from "./normalization";
 
 export interface CourseCatalogEntry extends CourseSummary {
 	load: () => Promise<RawCourse>;
+	normalizeAs?: string;
 }
 
 export const courseCatalog: CourseCatalogEntry[] = [
@@ -32,22 +33,45 @@ export const courseCatalog: CourseCatalogEntry[] = [
 	},
 	{
 		id: "python-level-2",
-		name: "Python Level 2",
+		name: "Python Level 2: Classroom Edition",
+		normalizeAs: "python-level-2-classroom",
+		load: () =>
+			import("./python-level-2-classroom").then(
+				({ pythonLevel2ClassroomCourse }) => pythonLevel2ClassroomCourse
+			)
+	},
+	{
+		id: "pygames",
+		name: "PyGames: Classroom Edition",
+		normalizeAs: "pygames-classroom",
+		load: () =>
+			import("./pygames-classroom").then(
+				({ pyGamesClassroomCourse }) => pyGamesClassroomCourse
+			)
+	}
+];
+
+export const archivedCourseCatalog: CourseCatalogEntry[] = [
+	{
+		id: "python-level-2-archive",
+		name: "Python Level 2 — archived original",
+		normalizeAs: "python-level-2",
 		load: () =>
 			import("./python-level-2").then(
 				({ pythonLevel2Course }) => pythonLevel2Course
 			)
 	},
 	{
-		id: "pygames",
-		name: "PyGames",
+		id: "pygames-archive",
+		name: "PyGames — archived original",
+		normalizeAs: "pygames",
 		load: () =>
 			import("./pygames").then(({ pyGamesCourse }) => pyGamesCourse)
 	}
 ];
 
 const courseCatalogById = new Map(
-	courseCatalog.map(entry => [entry.id, entry])
+	[...courseCatalog, ...archivedCourseCatalog].map(entry => [entry.id, entry])
 );
 
 export function getCourseCatalogEntry(id: string) {
@@ -55,6 +79,9 @@ export function getCourseCatalogEntry(id: string) {
 }
 
 export async function loadRawCourse(id: string) {
-	const rawCourse = await getCourseCatalogEntry(id)?.load();
-	return rawCourse ? normalizeRawCourse(id, rawCourse) : null;
+	const entry = getCourseCatalogEntry(id);
+	const rawCourse = await entry?.load();
+	return rawCourse
+		? normalizeRawCourse(entry?.normalizeAs ?? id, rawCourse)
+		: null;
 }

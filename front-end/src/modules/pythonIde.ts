@@ -46,7 +46,8 @@ const MAX_REMOTE_IMPORT_ID_LENGTH = 128;
 export type PythonIdeFileEncoding = "text" | "base64";
 
 export type PythonIdeMode = "data" | "pgzero" | "python" | "turtle";
-export type PythonIdeProjectTemplate = "blank" | "course" | "demo";
+export type PythonIdeProjectTemplate =
+	"blank" | "classroom-project" | "course" | "demo";
 
 export interface PythonIdeFile {
 	name: string;
@@ -214,8 +215,12 @@ const pythonIdeCourseModes: Record<string, PythonIdeMode> = {
 	"data-science-in-python": "data",
 	"machine-learning": "data",
 	pygames: "pgzero",
+	"pygames-archive": "pgzero",
+	"pygames-classroom": "pgzero",
 	"python-level-1": "turtle",
 	"python-level-2": "python",
+	"python-level-2-archive": "python",
+	"python-level-2-classroom": "python",
 	"python-level-3": "python",
 	"python-to-java-and-cpp-bridge": "python",
 	"pythonic-design-patterns": "python"
@@ -428,11 +433,105 @@ function getDemoStarterFiles(mode: PythonIdeMode): PythonIdeFile[] {
 	return files;
 }
 
+export const pythonIdeClassroomSectionsCode = `########################
+###   NORMAL SECTION  ###
+########################
+# Complete the Normal task from the course project card
+# The completed project still runs while this function is empty
+def normal_addition():
+    pass
+
+
+######################
+###   HARD SECTION  ###
+######################
+# Complete the Hard task after the Normal version works
+# This section can remain empty without breaking the project
+def hard_addition():
+    pass
+`;
+
+const PYTHON_IDE_CLASSROOM_CALLS = `# Run both classroom additions after the completed setup
+normal_addition()
+hard_addition()
+`;
+const PYTHON_IDE_CLASSROOM_BLOCKING_RE =
+	/^(?:while\b[^\n]*:|pgzrun\.go\s*\(|(?:\w+\.)*(?:done|exitonclick|listen|mainloop)\s*\()/m;
+
+function pythonIdeClassroomDefinitionIndex(source: string) {
+	const lines = source.split("\n");
+	let index = 0;
+
+	for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
+		const line = lines[lineIndex] ?? "";
+		const trimmedLine = line.trim();
+		if (
+			trimmedLine &&
+			!trimmedLine.startsWith("#") &&
+			!trimmedLine.startsWith("from __future__ import ")
+		) {
+			break;
+		}
+		index += line.length;
+		if (lineIndex < lines.length - 1) index += 1;
+	}
+
+	return index;
+}
+
+export function addPythonIdeClassroomSectionsToSource(source: string) {
+	if (
+		source.includes("###   NORMAL SECTION") &&
+		source.includes("###   HARD SECTION")
+	) {
+		return source;
+	}
+
+	const blockerIndex = source.search(PYTHON_IDE_CLASSROOM_BLOCKING_RE);
+	const completedFramework =
+		blockerIndex >= 0
+			? `${source.slice(0, blockerIndex)}${PYTHON_IDE_CLASSROOM_CALLS}\n${source.slice(blockerIndex)}`
+			: `${source.trimEnd()}\n\n\n${PYTHON_IDE_CLASSROOM_CALLS}`;
+	const definitionIndex =
+		pythonIdeClassroomDefinitionIndex(completedFramework);
+
+	return `${completedFramework.slice(0, definitionIndex)}${pythonIdeClassroomSectionsCode}\n\n\n${completedFramework.slice(definitionIndex)}`;
+}
+
+export function addPythonIdeClassroomSections(
+	files: PythonIdeFile[]
+): PythonIdeFile[] {
+	const targetIndex = files.findIndex(
+		file =>
+			(file.encoding ?? "text") === "text" &&
+			file.name.toLowerCase() === "main.py"
+	);
+	const fallbackIndex = files.findIndex(
+		file =>
+			(file.encoding ?? "text") === "text" &&
+			file.name.toLowerCase().endsWith(".py")
+	);
+	const fileIndex = targetIndex >= 0 ? targetIndex : fallbackIndex;
+	if (fileIndex < 0) return files.map(file => ({ ...file }));
+
+	return files.map((file, index) =>
+		index === fileIndex
+			? {
+					...file,
+					content: addPythonIdeClassroomSectionsToSource(file.content)
+				}
+			: { ...file }
+	);
+}
+
 function getStarterFilesForTemplate(
 	mode: PythonIdeMode,
 	template: PythonIdeProjectTemplate
 ) {
 	if (template === "demo") return getDemoStarterFiles(mode);
+	if (template === "classroom-project") {
+		return addPythonIdeClassroomSections(getCourseStarterFiles(mode));
+	}
 	if (template === "course") return getCourseStarterFiles(mode);
 	return getBlankStarterFiles(mode);
 }

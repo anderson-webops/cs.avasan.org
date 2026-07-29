@@ -36,6 +36,7 @@ describe("published course implementation artifacts", () => {
 					links.every(
 						link =>
 							link.startsWith("https://") ||
+							link.startsWith("/python-ide?") ||
 							link.startsWith("/course-assets/") ||
 							link.startsWith("/static/")
 					),
@@ -46,18 +47,45 @@ describe("published course implementation artifacts", () => {
 		COURSE_SWEEP_TIMEOUT
 	);
 
-	it.each(["python-level-1", "python-level-2", "pygames"])(
-		"keeps %s starter folders and teacher solution resources",
+	it("keeps python-level-1 starter folders and teacher solution resources", async () => {
+		const items = courseItems(await publishedCourse("python-level-1"));
+		const starters = items.filter(item =>
+			item.projectLink?.endsWith("/starter")
+		);
+		const solutions = items.filter(item =>
+			item.solutionLink?.includes("/solution")
+		);
+
+		expect(starters.length).toBeGreaterThan(0);
+		expect(solutions.length).toBeGreaterThan(0);
+	});
+
+	it.each(["python-level-2", "pygames"])(
+		"keeps %s completed sources in classroom IDE starters and teacher solutions",
 		async id => {
 			const items = courseItems(await publishedCourse(id));
-			const starters = items.filter(item =>
-				item.projectLink?.endsWith("/starter")
-			);
+			const starters = items
+				.map(item => item.projectLink)
+				.filter((link): link is string =>
+					Boolean(link?.startsWith("/python-ide?"))
+				)
+				.map(link => new URL(link, "https://cs.avasan.org"))
+				.filter(url => url.searchParams.has("starterUrl"));
 			const solutions = items.filter(item =>
 				item.solutionLink?.includes("/solution")
 			);
 
 			expect(starters.length, id).toBeGreaterThan(0);
+			expect(
+				starters.every(url =>
+					url.searchParams
+						.get("starterUrl")
+						?.startsWith(
+							"https://github.com/instruction-material/"
+						)
+				),
+				id
+			).toBe(true);
 			expect(solutions.length, id).toBeGreaterThan(0);
 		},
 		COURSE_SWEEP_TIMEOUT

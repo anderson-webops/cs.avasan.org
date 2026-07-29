@@ -27,6 +27,7 @@ import { useRoute } from "vue-router";
 import { reportClassroomUsage } from "@/modules/classroomUsage";
 import {
 	acknowledgeLocalPythonProjectRecovery,
+	addPythonIdeClassroomSections,
 	applyPythonIdeRecoveryPlan,
 	claimAnonymousPythonProjectForStudent,
 	clearLocalPythonIdeEditorState,
@@ -993,6 +994,11 @@ const requestedStarterLabel = computed(() =>
 	typeof route.query.starterLabel === "string" ? route.query.starterLabel : ""
 );
 const requestedCourseStarter = computed(() => route.query.starter === "course");
+const requestedClassroomProject = computed(
+	() =>
+		route.query.classroom === "1" ||
+		route.query.template === "classroom-project"
+);
 const requestedStarterMode = computed(() => {
 	const rawMode =
 		typeof route.query.mode === "string" ? route.query.mode : "";
@@ -1249,7 +1255,11 @@ async function createRequestedCourseProject() {
 			const loadedFiles = await loadPythonIdeStarterFilesFromGitHub(
 				request.starterUrl
 			);
-			starterFiles = loadedFiles.length ? loadedFiles : undefined;
+			starterFiles = loadedFiles.length
+				? requestedClassroomProject.value
+					? addPythonIdeClassroomSections(loadedFiles)
+					: loadedFiles
+				: undefined;
 		} catch (error) {
 			appendOutput(
 				"stderr",
@@ -1264,7 +1274,11 @@ async function createRequestedCourseProject() {
 		...request,
 		files: starterFiles,
 		template:
-			starterFiles || requestedCourseStarter.value ? "course" : "blank",
+			starterFiles || requestedCourseStarter.value
+				? "course"
+				: requestedClassroomProject.value
+					? "classroom-project"
+					: "blank",
 		title: request.courseProjectTitle
 	});
 }
@@ -5423,12 +5437,14 @@ watch(
 	() =>
 		[
 			route.query.course,
+			route.query.classroom,
 			route.query.mode,
 			route.query.projectKey,
 			route.query.starter,
 			route.query.starterLabel,
 			route.query.starterTitle,
-			route.query.starterUrl
+			route.query.starterUrl,
+			route.query.template
 		].join(":"),
 	() => {
 		void loadProjects();
