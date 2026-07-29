@@ -10,6 +10,8 @@ import {
 } from "../src/modules/pythonCodeMirror";
 import {
 	acknowledgeLocalPythonProjectRecovery,
+	addPythonIdeClassroomSections,
+	addPythonIdeClassroomSectionsToSource,
 	clearAllStudentPythonProjectRecoveryFromLocalStorage,
 	clearLocalPythonProjectsAsync,
 	createVolatileStudentPythonProjectRecovery,
@@ -179,6 +181,59 @@ describe("python IDE project helpers", () => {
 		expect(turtleProject.files[0]?.content).toContain("screen.onclick");
 		expect(turtleProject.files[0]?.content).toContain("screen.ontimer");
 		expect(turtleProject.files[0]?.content).toContain("pen.ondrag");
+	});
+
+	it("adds classroom work areas without moving setup behind blocking calls", () => {
+		const source = `# Keep this comment first.
+from __future__ import annotations
+import turtle
+
+screen = turtle.Screen()
+screen.listen()
+`;
+		const adapted = addPythonIdeClassroomSectionsToSource(source);
+
+		expect(adapted).toContain("###   NORMAL SECTION");
+		expect(adapted).toContain("###   HARD SECTION");
+		expect(adapted.indexOf("from __future__ import annotations")).toBeLessThan(
+			adapted.indexOf("def normal_addition():")
+		);
+		expect(adapted.indexOf("def hard_addition():")).toBeLessThan(
+			adapted.indexOf("import turtle")
+		);
+		expect(adapted.lastIndexOf("normal_addition()")).toBeLessThan(
+			adapted.indexOf("screen.listen()")
+		);
+		expect(adapted.lastIndexOf("hard_addition()")).toBeLessThan(
+			adapted.indexOf("screen.listen()")
+		);
+		expect(addPythonIdeClassroomSectionsToSource(adapted)).toBe(adapted);
+	});
+
+	it("adds classroom work areas to the runnable Python file and preserves assets", () => {
+		const files = addPythonIdeClassroomSections([
+			{ name: "notes.txt", content: "Keep me." },
+			{
+				name: "lesson.py",
+				content: "import pgzrun\n\nWIDTH = 640\npgzrun.go()\n"
+			}
+		]);
+		const source = files[1]?.content ?? "";
+
+		expect(files[0]).toEqual({
+			name: "notes.txt",
+			content: "Keep me."
+		});
+		expect(source).toContain("###   NORMAL SECTION");
+		expect(source.lastIndexOf("hard_addition()")).toBeLessThan(
+			source.indexOf("pgzrun.go()")
+		);
+
+		const project = createPythonIdeProject("python", {
+			template: "classroom-project"
+		});
+		expect(project.files[0]?.content).toContain("###   NORMAL SECTION");
+		expect(project.files[0]?.content).toContain("###   HARD SECTION");
 	});
 
 	it("colors visible bracket pairs using document-wide nesting context", () => {
@@ -790,6 +845,14 @@ describe("python IDE project helpers", () => {
 	it("maps Python-family courses to the right IDE starter modes", () => {
 		expect(pythonIdeModeForCourseId("python-level-1")).toBe("turtle");
 		expect(pythonIdeModeForCourseId("pygames")).toBe("pgzero");
+		expect(pythonIdeModeForCourseId("pygames-classroom")).toBe("pgzero");
+		expect(pythonIdeModeForCourseId("pygames-archive")).toBe("pgzero");
+		expect(pythonIdeModeForCourseId("python-level-2-classroom")).toBe(
+			"python"
+		);
+		expect(pythonIdeModeForCourseId("python-level-2-archive")).toBe(
+			"python"
+		);
 		expect(pythonIdeModeForCourseId("data-science-in-python")).toBe("data");
 		expect(pythonIdeModeForCourseId("machine-learning")).toBe("data");
 		expect(pythonIdeModeForCourseId("python-level-3")).toBe("python");
@@ -799,6 +862,22 @@ describe("python IDE project helpers", () => {
 		expect(normalizeClassroomPythonIdeMode("data", "turtle")).toBe("python");
 		expect(normalizeClassroomPythonIdeMode("", "data")).toBe("python");
 		expect(normalizeClassroomPythonIdeMode("pgzero", "turtle")).toBe("pgzero");
+	});
+
+	it("loads completed classroom starters through the client-side IDE route", () => {
+		const pageSource = readFileSync(
+			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			"utf8"
+		);
+
+		expect(pageSource).toContain(
+			"addPythonIdeClassroomSections(loadedFiles)"
+		);
+		expect(pageSource).toContain('route.query.classroom === "1"');
+		expect(pageSource).toContain(
+			'route.query.template === "classroom-project"'
+		);
+		expect(pageSource).toContain("route.query.starterUrl");
 	});
 
 	it("keeps Turtle fill and RGB color hooks wired in the runtime shim", () => {

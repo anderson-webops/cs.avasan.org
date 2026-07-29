@@ -74,6 +74,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		courseIds: [
 			"python-level-1",
 			"python-level-2",
+			"python-level-2-classroom",
 			"python-level-3",
 			"python-to-java-and-cpp-bridge"
 		],
@@ -121,7 +122,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		id: "game-development",
 		title: "Game Development with PyGame and Unity",
 		adminPriority: "urgent",
-		courseIds: ["pygames", "unity-game-development"],
+		courseIds: ["pygames", "pygames-classroom", "unity-game-development"],
 		audience:
 			"Interactive project path for learners ready to reason about game loops, state, input, feedback, and playtesting.",
 		prerequisiteSummary:

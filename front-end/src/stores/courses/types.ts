@@ -1,8 +1,11 @@
+export type CourseItemLearningPath = "core" | "choice" | "challenge";
+
 export interface RawCourseModuleItem {
 	id?: string;
 	aliases?: string[];
 	title: string;
 	content: string;
+	learningPath?: CourseItemLearningPath;
 	projectLink?: string;
 	solutionLink?: string;
 	datasetLink?: string;
@@ -14,6 +17,8 @@ export interface RawCourseModule {
 	aliases?: string[];
 	kind?: "module" | "appendix";
 	title: string;
+	estimatedTime?: string;
+	keyBlocks?: string[];
 	curriculum: RawCourseModuleItem[];
 	supplementalProjects: RawCourseModuleItem[];
 }
@@ -51,6 +56,8 @@ export interface CourseModule {
 	aliases?: string[];
 	kind?: "module" | "appendix";
 	title: string;
+	estimatedTime?: string;
+	keyBlocks?: string[];
 	curriculum: CourseModuleItem[];
 	supplementalProjects: CourseModuleItem[];
 }

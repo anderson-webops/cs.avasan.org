@@ -43,8 +43,10 @@ export const courseImplementationSourceRepos: Record<string, string> = {
 	"network-security": "Network-Security",
 	"network-systems": "Network-Systems",
 	pygames: "PyGames",
+	"pygames-classroom": "PyGames",
 	"python-level-1": "Python-Level-1",
 	"python-level-2": "Python-Level-2",
+	"python-level-2-classroom": "Python-Level-2",
 	"python-level-3": "Python-Level-3",
 	"python-to-java-and-cpp-bridge": "Python-to-Java-and-CPP-Bridge",
 	"pythonic-design-patterns": "Pythonic-Design-Patterns",
@@ -3265,7 +3267,12 @@ function pythonCheckInPracticeFocus(
 			}
 		}
 	};
-	const focus = focusByCourseAndCheckIn[courseId]?.[checkInNumber];
+	const classroomFocusCourseIds: Record<string, string> = {
+		"pygames-classroom": "pygames",
+		"python-level-2-classroom": "python-level-2"
+	};
+	const focusCourseId = classroomFocusCourseIds[courseId] ?? courseId;
+	const focus = focusByCourseAndCheckIn[focusCourseId]?.[checkInNumber];
 	if (!focus) return null;
 
 	return {

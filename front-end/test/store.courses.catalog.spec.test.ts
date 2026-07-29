@@ -5,12 +5,22 @@ import {
 	loadRawCourse
 } from "@/stores/courses/index";
 
-const expectedCatalog = [
+const expectedCatalog: Array<{
+	id: string;
+	loadedName?: string;
+	name: string;
+}> = [
 	{ id: "scratch-level-1", name: "Scratch Level 1" },
 	{ id: "scratch-level-2", name: "Scratch Level 2" },
 	{ id: "python-level-1", name: "Python Level 1" },
-	{ id: "python-level-2", name: "Python Level 2" },
-	{ id: "pygames", name: "PyGames" }
+	{
+		id: "python-level-2",
+		name: "Python Level 2: Classroom Edition"
+	},
+	{
+		id: "pygames",
+		name: "PyGames: Classroom Edition"
+	}
 ];
 
 describe("cs.avasan.org course catalog", () => {
@@ -20,7 +30,7 @@ describe("cs.avasan.org course catalog", () => {
 				id,
 				name
 			}))
-		).toEqual(expectedCatalog);
+		).toEqual(expectedCatalog.map(({ id, name }) => ({ id, name })));
 		expect(getCourseCatalogEntry("python-level-3")).toBeNull();
 	});
 
@@ -30,7 +40,7 @@ describe("cs.avasan.org course catalog", () => {
 		);
 
 		expect(courses.map(course => course?.name)).toEqual(
-			expectedCatalog.map(({ name }) => name)
+			expectedCatalog.map(course => course.loadedName ?? course.name)
 		);
 	});
 });
