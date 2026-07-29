@@ -6,6 +6,7 @@ const siteDescription =
 	"Free Scratch, Python, and PyGames course materials from grade-school teacher Julio. Students can start learning without creating an account.";
 const route = useRoute();
 const noindexMatchers = [
+	/^\/admin(?:\/|$)/,
 	/^\/profile(?:\/|$)/,
 	/^\/python-ide(?:\/|$)/,
 	/^\/api(?:\/|$)/

@@ -3,10 +3,6 @@ import { storeToRefs } from "pinia";
 import { useRoute } from "vue-router";
 import { useAppStore } from "@/stores/app";
 
-const emit = defineEmits<{
-	(e: "loginClick"): void;
-}>();
-
 const app = useAppStore();
 const route = useRoute();
 const { currentAdmin, isLoggedIn } = storeToRefs(app);
@@ -84,7 +80,7 @@ async function logout() {
 								</li>
 							</ul>
 
-							<div class="site-nav__actions">
+							<div v-if="isLoggedIn" class="site-nav__actions">
 								<span
 									v-if="currentAdmin"
 									class="site-nav__badge"
@@ -108,14 +104,6 @@ async function logout() {
 									@click="logout"
 								>
 									Log out
-								</button>
-								<button
-									v-else
-									class="site-nav__teacher-login"
-									type="button"
-									@click="emit('loginClick')"
-								>
-									Teacher log in
 								</button>
 							</div>
 						</div>
@@ -279,21 +267,6 @@ async function logout() {
 	color: #9f1239;
 }
 
-.site-nav__teacher-login {
-	padding: 0.5rem 0.35rem;
-	color: var(--color-ink-muted);
-	font-size: 0.82rem;
-	font-weight: 700;
-	text-decoration: underline;
-	text-decoration-color: transparent;
-	text-underline-offset: 0.22rem;
-}
-
-.site-nav__teacher-login:hover {
-	color: var(--color-accent);
-	text-decoration-color: currentColor;
-}
-
 @media (max-width: 991px) {
 	.site-nav__panel {
 		flex-basis: 100%;
@@ -312,8 +285,7 @@ async function logout() {
 	}
 
 	.site-nav__link,
-	.site-nav__action,
-	.site-nav__teacher-login {
+	.site-nav__action {
 		width: 100%;
 	}
 }

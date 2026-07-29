@@ -17,13 +17,13 @@ const routeScenarios = [
 		name: "public",
 		role: "public",
 		routes: runFullMatrix
-			? ["/", "/about", "/courses", "/python-ide", "/profile"]
-			: ["/", "/courses", "/profile"]
+			? ["/", "/about", "/courses", "/python-ide", "/admin", "/profile"]
+			: ["/", "/courses", "/admin", "/profile"]
 	},
 	{
 		name: "teacher",
 		role: "teacher",
-		routes: ["/profile", "/courses"]
+		routes: ["/admin", "/profile", "/courses"]
 	}
 ];
 const viewportScenarios = runFullMatrix

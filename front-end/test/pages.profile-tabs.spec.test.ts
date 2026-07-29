@@ -26,8 +26,7 @@ describe("Teacher account page", () => {
 		});
 	}
 
-	it("directs logged-out students to public courses without an account", async () => {
-		const app = useAppStore();
+	it("directs logged-out students to public courses without exposing login", () => {
 		const wrapper = mountProfile();
 
 		expect(wrapper.text()).toContain("Teacher account");
@@ -41,12 +40,8 @@ describe("Teacher account page", () => {
 				.find(link => link.text() === "Open courses")
 				?.attributes("href")
 		).toBe("/courses");
-
-		await wrapper
-			.findAll("button")
-			.find(button => button.text() === "Teacher log in")
-			?.trigger("click");
-		expect(app.loginBlock).toBe(true);
+		expect(wrapper.text()).not.toContain("Teacher log in");
+		expect(wrapper.find("button").exists()).toBe(false);
 	});
 
 	it("renders only Julio's teacher profile when he is logged in", () => {

@@ -54,10 +54,9 @@ context("Public classroom navigation", () => {
 		);
 	});
 
-	it("offers only Julio's private teacher login and no signup flow", () => {
-		cy.get(".site-nav").within(() => {
-			cy.contains("button:visible", "Teacher log in").click();
-		});
+	it("keeps teacher login off public navigation and available at /admin", () => {
+		cy.get(".site-nav").should("not.contain", "Teacher log in");
+		cy.visit("/admin");
 
 		cy.get("#teacher-login-dialog")
 			.should("be.visible")

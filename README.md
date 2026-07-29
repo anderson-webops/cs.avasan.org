@@ -91,10 +91,10 @@ Leave `TRUST_PROXY_HOPS` unset unless the API is exclusively behind a known
 proxy chain that replaces incoming forwarding headers. Database diagnostics
 always require `INTERNAL_DIAGNOSTICS_KEY`, including during local development.
 
-The static front-end is deployable independently, but teacher login additionally
-requires the Express API and an `/api/*` route to that service. Source links
-from the upstream catalog are canonicalized to the reviewed downstream asset
-host at build/runtime normalization boundaries.
+The static front-end is deployable independently, but teacher login at
+`/admin` additionally requires the Express API and an `/api/*` route to that
+service. Source links from the upstream catalog are canonicalized to the
+reviewed downstream asset host at build/runtime normalization boundaries.
 
 Production builds send page views to the dedicated
 `analytics.avasan.org` instance and the owner-visible central

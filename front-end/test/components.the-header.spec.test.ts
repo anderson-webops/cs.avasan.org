@@ -28,7 +28,7 @@ describe("TheHeader.vue", () => {
 		});
 	}
 
-	it("shows the public classroom navigation and a teacher-only login", () => {
+	it("shows only public classroom navigation when logged out", () => {
 		const wrapper = mountHeader();
 		const links = wrapper
 			.findAll(".site-nav__link")
@@ -41,18 +41,11 @@ describe("TheHeader.vue", () => {
 			["Python IDE", "/python-ide"],
 			["About Julio", "/about"]
 		]);
-		expect(wrapper.text()).toContain("Teacher log in");
+		expect(wrapper.text()).not.toContain("Teacher log in");
+		expect(wrapper.find(".site-nav__actions").exists()).toBe(false);
 		expect(wrapper.text()).not.toMatch(
 			/Sign up|Book a Class|Tuition|Zoom|Pathways|Teaching/
 		);
-	});
-
-	it("opens the private teacher login from the public header", async () => {
-		const wrapper = mountHeader();
-
-		await wrapper.get("button.site-nav__teacher-login").trigger("click");
-
-		expect(wrapper.emitted("loginClick")).toHaveLength(1);
 	});
 
 	it("shows Julio's teacher account controls when he is logged in", () => {
