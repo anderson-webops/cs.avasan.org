@@ -220,6 +220,44 @@ async function stopChild(child) {
 	await Promise.race([waitForChildExit(child), new Promise(resolve => setTimeout(resolve, 2_000))]);
 }
 
+const transientNavigationError =
+	/Execution context was destroyed|Cannot find context with specified id|Navigating frame was detached/i;
+
+async function runAxeAudit(page, url) {
+	for (let attempt = 1; attempt <= 3; attempt += 1) {
+		try {
+			await page.goto(url, {
+				timeout: 15_000,
+				waitUntil: "domcontentloaded"
+			});
+			await page.waitForSelector("body", { timeout: 10_000 });
+			await page.waitForFunction(() => document.body.innerText.trim().length > 0, {
+				timeout: 10_000
+			});
+			await new Promise(resolve => setTimeout(resolve, 250));
+			await page.addScriptTag({ path: axeSourcePath });
+
+			return await page.evaluate(async () => {
+				return await axe.run(document, {
+					resultTypes: ["violations"],
+					runOnly: {
+						type: "tag",
+						values: ["wcag2a", "wcag2aa"]
+					}
+				});
+			});
+		} catch (error) {
+			if (attempt === 3 || !(error instanceof Error) || !transientNavigationError.test(error.message)) {
+				throw error;
+			}
+
+			console.warn(`a11y retrying after a development-server reload: ${url}`);
+		}
+	}
+
+	throw new Error(`Unable to audit ${url}.`);
+}
+
 const apiServer = createMockApiServer();
 const viteProcess = startVite();
 let browser;
@@ -263,25 +301,7 @@ try {
 						await page.evaluateOnNewDocument(storedTheme => {
 							window.localStorage.setItem("vueuse-color-scheme", storedTheme);
 						}, media.storedTheme);
-						await page.goto(url, {
-							timeout: 15_000,
-							waitUntil: "domcontentloaded"
-						});
-						await page.waitForSelector("body", { timeout: 10_000 });
-						await page.waitForFunction(() => document.body.innerText.trim().length > 0, {
-							timeout: 10_000
-						});
-						await new Promise(resolve => setTimeout(resolve, 250));
-						await page.addScriptTag({ path: axeSourcePath });
-						const result = await page.evaluate(async () => {
-							return await axe.run(document, {
-								resultTypes: ["violations"],
-								runOnly: {
-									type: "tag",
-									values: ["wcag2a", "wcag2aa"]
-								}
-							});
-						});
+						const result = await runAxeAudit(page, url);
 						const violations = result.violations.filter(violation => violation.id !== "frame-tested");
 						if (violations.length) {
 							failures.push({
