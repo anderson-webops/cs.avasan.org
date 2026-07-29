@@ -13,7 +13,9 @@ const schoolPrivacyContact = (
 			<h1 class="page-title">Student privacy</h1>
 			<p>
 				This classroom uses only the information needed to teach and to
-				let students save their Python work.
+				operate the features students choose to use. Optional accounts
+				can sync Python work; Graph Sketcher work stays in the student's
+				current browser tab.
 			</p>
 		</header>
 
@@ -36,6 +38,24 @@ const schoolPrivacyContact = (
 				to five minutes to prevent automated flooding. It is not added
 				to classroom analytics. Any hosting security logs must follow
 				the school or district’s approved retention rules.
+			</p>
+		</section>
+
+		<section class="site-surface privacy-page__section">
+			<h2>Graph work saved in browser tabs</h2>
+			<p>
+				Graph Sketcher keeps a recovery copy in the current browser tab
+				so it can survive a reload. Some browsers also copy this
+				tab-only storage when a tab is duplicated. Graph projects and
+				graph contents are not sent to the classroom server, student
+				accounts, or analytics.
+			</p>
+			<p>
+				On a shared computer, a student should download work they want
+				to keep, then use <strong>Clear for next student</strong> in
+				every open or duplicated Graph Sketcher tab and close those
+				tabs. Work left in a tab may be visible to the next person who
+				uses it.
 			</p>
 		</section>
 

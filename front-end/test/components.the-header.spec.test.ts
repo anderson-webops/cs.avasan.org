@@ -42,6 +42,7 @@ describe("TheHeader.vue", () => {
 		expect(links).toEqual([
 			["Courses", "/"],
 			["Python IDE", "/python-ide"],
+			["Graphing", "/graph-sketcher"],
 			["Student privacy", "/student-privacy"]
 		]);
 		expect(wrapper.text()).not.toContain("Teacher log in");

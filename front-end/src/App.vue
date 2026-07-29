@@ -121,15 +121,6 @@ useHead(
 					href: "/site.webmanifest"
 				},
 				{
-					rel: "dns-prefetch",
-					href: "//cdn.jsdelivr.net"
-				},
-				{
-					rel: "preconnect",
-					href: "https://cdn.jsdelivr.net",
-					crossorigin: "anonymous"
-				},
-				{
 					rel: "canonical",
 					href: canonicalUrl.value
 				}

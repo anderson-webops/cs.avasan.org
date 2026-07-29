@@ -34,6 +34,10 @@ describe("static route normalization", () => {
 			join(tempDir, "course-resource.html"),
 			"<main>Course Resource</main>"
 		);
+		await writeFile(
+			join(tempDir, "graph-sketcher.html"),
+			"<main>Graph Sketcher</main>"
+		);
 		await writeFile(join(tempDir, "admin.html"), "<main>Admin</main>");
 
 		await normalizeStaticRoutes(tempDir);
@@ -44,6 +48,9 @@ describe("static route normalization", () => {
 		await expect(
 			readFile(join(tempDir, "admin", "index.html"), "utf8")
 		).resolves.toBe("<main>Admin</main>");
+		await expect(
+			readFile(join(tempDir, "graph-sketcher", "index.html"), "utf8")
+		).resolves.toBe("<main>Graph Sketcher</main>");
 		await expect(
 			stat(join(tempDir, "index", "index.html"))
 		).rejects.toThrow();
@@ -67,6 +74,12 @@ describe("static route normalization", () => {
 			"Course Resource | Classes with Julio",
 			"noindex,nofollow",
 			"https://cs.avasan.org/course-resource"
+		],
+		[
+			"/graph-sketcher",
+			"Graph Sketcher | Classes with Julio",
+			"index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+			"https://cs.avasan.org/graph-sketcher"
 		],
 		[
 			"/admin",
@@ -133,6 +146,7 @@ describe("static route normalization", () => {
 			"/course-resource",
 			"/python-ide"
 		]);
+		expect(options.exclude).not.toContain("/graph-sketcher");
 		expect(calls).toEqual([options]);
 	});
 });

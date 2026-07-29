@@ -18,7 +18,15 @@ const routeScenarios = [
 	{
 		name: "public",
 		role: "public",
-		routes: runFullMatrix ? ["/", "/python-ide", courseResourceRoute, "/admin"] : ["/", "/admin"]
+		routes: runFullMatrix
+			? [
+					"/",
+					"/python-ide",
+					"/graph-sketcher",
+					courseResourceRoute,
+					"/admin"
+				]
+			: ["/", "/graph-sketcher", "/admin"]
 	},
 	{
 		name: "teacher",

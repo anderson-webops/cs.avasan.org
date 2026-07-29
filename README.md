@@ -16,27 +16,35 @@ deliberately simplified downstream adaptation of
   process. HTTP Admin creation must remain disabled.
 - The course catalog contains only Scratch Levels 1 and 2, Python Levels 1 and
   2, and PyGames.
+- The upstream browser Graph Sketcher remains available as a separate,
+  anonymous tool. It uses browser tab storage and lets students download a
+  separate project copy; browsers may copy tab storage when a tab is
+  duplicated.
 - The site does not provide tutoring-business, freelance, tuition, booking,
   scheduler, or Zoom workflows.
 
 ## Repository Layout
 
-- `front-end/` contains the Vue 3 and Vite SSG course site and browser-based
-  Python IDE.
+- `front-end/` contains the Vue 3 and Vite SSG course site, browser-based
+  Python IDE, and Graph Sketcher.
 - `back-end/` contains the small Express and MongoDB service used for Julio's
   private account and optional student project sync.
 - `HEALTHCHECKS.md` documents service health and readiness endpoints.
 
 ## Access Model
 
-The five-course catalog is public at `/`, and the browser IDE is public at
-`/python-ide`. Anonymous IDE projects stay in the browser unless a signed-in
-student explicitly imports them. Students sign in with a username and either a
-password or Julio-issued access code. A code is unique, expires, works only for
-initial password setup, and must immediately be replaced with a student-chosen
+The five-course catalog is public at `/`, the browser IDE is public at
+`/python-ide`, and Graph Sketcher is public at `/graph-sketcher`. Graph
+Sketcher runs entirely in the browser and keeps its recovery copy in browser
+tab storage; a duplicated tab may receive its own browser-managed copy. Graph
+projects and graph contents are not sent to the backend or analytics.
+Anonymous IDE projects stay in the browser unless a signed-in student
+explicitly imports them. Students sign in with a username and either a password
+or Julio-issued access code. A code is unique, expires, works only for initial
+password setup, and must immediately be replaced with a student-chosen
 password. The first successful exchange irreversibly consumes the code. The
-browser can continue an interrupted setup only when its setup session was
-saved and it presents the exact strong request ID from its password submission;
+browser can continue an interrupted setup only when its setup session was saved
+and it presents the exact strong request ID from its password submission;
 otherwise Julio must issue a new code.
 
 Teacher-only account controls are available to Julio at `/admin`. Julio can

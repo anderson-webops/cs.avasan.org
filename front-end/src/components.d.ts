@@ -16,6 +16,7 @@ declare module 'vue' {
     CodePreview: typeof import('./components/CodePreview.vue')['default']
     CourseAssetPreview: typeof import('./components/CourseAssetPreview.vue')['default']
     CourseExplorer: typeof import('./components/CourseExplorer.vue')['default']
+    GraphSketcherWorkspace: typeof import('./components/GraphSketcherWorkspace.vue')['default']
     LazyMarkdownContent: typeof import('./components/LazyMarkdownContent.vue')['default']
     PythonIdeWorkspace: typeof import('./components/PythonIdeWorkspace.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
