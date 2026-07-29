@@ -1,7 +1,7 @@
 import type { Types } from "mongoose";
 import type { PythonProjectFile, PythonProjectMode } from "./IPythonProject.js";
 
-export type PythonProjectReviewRole = "admin" | "tutor";
+export type PythonProjectReviewRole = "admin";
 
 export interface IPythonProjectReview {
 	_id: Types.ObjectId;
@@ -23,6 +23,7 @@ export interface IPythonProjectReview {
 	visibleToStudent: boolean;
 	note?: string;
 	sourceUpdatedAt: Date;
+	deletedAt?: Date;
 	createdAt: Date;
 	updatedAt: Date;
 }

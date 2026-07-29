@@ -3,19 +3,43 @@ import process, { env, exit } from "node:process";
 import bodyParser from "body-parser";
 import cookieSession from "cookie-session";
 import express from "express";
+import helmet from "helmet";
 import mongoose from "mongoose";
 
-import { pythonIdeAssetsProxy } from "./controllers/common/pythonIdeAssetsProxy.js";
-import { quoteProxy } from "./controllers/common/quoteProxy.js";
+import {
+	requireStudentContext,
+	validAdmin,
+	validStudent
+} from "./middleware/auth.js";
+import { requireClassroomRequest } from "./middleware/classroomRequest.js";
 import { requireInternalDiagnostics } from "./middleware/internalDiagnostics.js";
+import {
+	createProjectJsonParser,
+	createProjectPayloadConcurrencyGuard
+} from "./middleware/projectPayload.js";
+import {
+	createHeavyProjectPayloadLimiter,
+	createStudentProjectWriteLimiter
+} from "./middleware/rateLimiters.js";
+import { Admin } from "./models/schemas/Admin.js";
+import { PythonProject } from "./models/schemas/PythonProject.js";
+import { PythonProjectReview } from "./models/schemas/PythonProjectReview.js";
+import { Student } from "./models/schemas/Student.js";
 import { mountRuntimeAccountRoutes } from "./routes/runtimeAccountRoutes.js";
+import {
+	readBooleanSetting,
+	readClassroomOrigin,
+	readSessionSecret
+} from "./security/environment.js";
 import { readTrustProxySetting } from "./security/trustProxy.js";
+import { reconcilePythonProjectQuotas } from "./services/pythonProjectQuotaReconciliation.js";
 import { readMongoSecret } from "./vaultClient.js";
 import "dotenv/config";
 
 async function main() {
 	const app = express();
 	const internalDiagnosticsKey = env.INTERNAL_DIAGNOSTICS_KEY;
+	app.use(helmet());
 
 	// health
 	app.get("/healthz", (_req, res) => {
@@ -23,55 +47,111 @@ async function main() {
 		res.json({ ok: true });
 	});
 
-	const SESSION_SECRET = env.SESSION_SECRET;
-	if (!SESSION_SECRET) throw new Error("Missing SESSION_SECRET");
-
 	app.set("trust proxy", readTrustProxySetting(env.TRUST_PROXY_HOPS));
 
-	// 1) parsers first (with limits)
-	app.use(bodyParser.urlencoded({ extended: false, limit: "1mb" }));
-	app.use(bodyParser.json({ limit: "1mb" }));
-
-	// 2) sessions BEFORE any route that needs req.session
+	// Sessions precede parsers so large project payloads can be authenticated
+	// before the server accepts them.
 	///   COOKIES   ///
 	const isProd = env.NODE_ENV === "production";
-	const isCrossSite = !!env.CROSS_SITE;
+	const sessionSecret = readSessionSecret(env.SESSION_SECRET, isProd);
+	const isCrossSite = readBooleanSetting(env.CROSS_SITE, "CROSS_SITE");
+	readClassroomOrigin(env.CLASSROOM_ORIGIN, isProd);
 	type CookieSessionOpts = Parameters<typeof cookieSession>[0];
+	if (isCrossSite) {
+		throw new Error(
+			"CROSS_SITE=true is not supported; classroom sessions must stay same-origin."
+		);
+	}
 
 	const cookieOptions: CookieSessionOpts = {
-		name: "session",
-		keys: [SESSION_SECRET],
-		maxAge: 24 * 60 * 60 * 1000,
+		name: isProd ? "__Host-session" : "session",
+		keys: [sessionSecret],
+		httpOnly: true,
+		overwrite: true,
+		path: "/",
 		sameSite: "lax", // default, safe for dev & same-origin
 		secure: false // default in dev
 	};
 
-	// Adjust for production
+	// Production keeps the same-origin cookie boundary and adds HTTPS-only
+	// delivery. The API is intentionally exposed through the site's /api path.
 	if (isProd) {
-		if (isCrossSite) {
-			cookieOptions.sameSite = "none"; // required for cross-site
-			cookieOptions.secure = true; // required when SameSite=None
-			// cookieOptions.domain = ".example.com"; // optional if you want subdomain sharing
-		}
-		else {
-			cookieOptions.sameSite = "lax"; // fine for same-origin
-			cookieOptions.secure = true; // enforce HTTPS cookies
-		}
+		cookieOptions.secure = true;
 	}
 
 	app.use(cookieSession(cookieOptions));
 
-	// 3) cache-control for auth endpoints
+	// Cookie-authenticated mutations require the same-origin API client's
+	// custom header before any request body is parsed.
+	app.use(
+		["/accounts", "/students", "/admins"],
+		requireClassroomRequest
+	);
+
+	// Authenticated project payloads may include binary assets and are the only
+	// requests allowed above the global 1 MB JSON limit.
+	const projectJson = createProjectJsonParser();
+	const studentProjectWriteLimiter = createStudentProjectWriteLimiter();
+	const teacherProjectWriteLimiter = createStudentProjectWriteLimiter();
+	const heavyProjectPayloadLimiter = createHeavyProjectPayloadLimiter();
+	const projectPayloadConcurrencyGuard = createProjectPayloadConcurrencyGuard();
+	const projectMutationMethods = new Set(["DELETE", "PATCH", "POST", "PUT"]);
+	const isProjectMutation = (req: express.Request) =>
+		projectMutationMethods.has(req.method.toUpperCase());
+	const limitProjectMutation = (
+		limiter: express.RequestHandler
+	) => (req: express.Request, res: express.Response, next: express.NextFunction) => {
+		if (!isProjectMutation(req)) {
+			next();
+			return;
+		}
+		limiter(req, res, next);
+	};
+	const parseProjectMutation = (
+		req: express.Request,
+		res: express.Response,
+		next: express.NextFunction
+	) => {
+		if (!isProjectMutation(req)) {
+			next();
+			return;
+		}
+		projectJson(req, res, next);
+	};
+	app.use(
+		["/students/projects", "/students/project-reviews"],
+		validStudent,
+		requireStudentContext
+	);
+	app.use(
+		"/students/projects",
+		limitProjectMutation(studentProjectWriteLimiter),
+		limitProjectMutation(heavyProjectPayloadLimiter),
+		limitProjectMutation(projectPayloadConcurrencyGuard),
+		parseProjectMutation
+	);
+	app.use(
+		/^\/admins\/students\/[a-f\d]{24}\/projects(?:\/|$)/i,
+		validAdmin,
+		limitProjectMutation(teacherProjectWriteLimiter),
+		limitProjectMutation(heavyProjectPayloadLimiter),
+		limitProjectMutation(projectPayloadConcurrencyGuard),
+		parseProjectMutation
+	);
+
+	app.use(bodyParser.json({ limit: "1mb" }));
+
+	// Authentication and student data must never be stored by intermediaries.
 	app.use((req, res, next) => {
-		if (req.path.startsWith("/accounts") || req.path.endsWith("/loggedin")) {
+		if (
+			req.path.startsWith("/accounts")
+			|| req.path.startsWith("/students")
+			|| req.path.startsWith("/admins/students")
+		) {
 			res.setHeader("Cache-Control", "no-store");
 		}
 		next();
 	});
-
-	// 4) public, read-only classroom resources
-	app.use("/quotes", quoteProxy);
-	app.use("/python-assets", pythonIdeAssetsProxy);
 
 	// ready
 	app.get("/readyz", async (_req, res) => {
@@ -109,14 +189,6 @@ async function main() {
 		}
 	});
 
-	// cache-control for auth endpoints
-	app.use((req, res, next) => {
-		if (req.path.startsWith("/accounts") || req.path.endsWith("/loggedin")) {
-			res.setHeader("Cache-Control", "no-store");
-		}
-		next();
-	});
-
 	// --- Get Mongo URI from Vault (preferred), else env fallback ---
 	let mongoUri: string | undefined;
 	try {
@@ -139,6 +211,16 @@ async function main() {
 	}
 
 	await mongoose.connect(mongoUri);
+	await Promise.all([
+		Admin.init(),
+		Student.init(),
+		// Reconcile the former sparse import-ID index with the partial index.
+		// Legacy projects without an import ID remain readable while every new
+		// project is required to have a stable idempotency key.
+		PythonProject.syncIndexes(),
+		PythonProjectReview.init()
+	]);
+	await reconcilePythonProjectQuotas();
 	console.log("Connected to MongoDB");
 	const c = mongoose.connection;
 	console.log(`Mongo connected: db=${c.db?.databaseName} host=${c.host} name=${c.name}`);
@@ -152,8 +234,8 @@ async function main() {
 		});
 	});
 
-	// Julio is the only authenticated account. Student, tutor, signup, and
-	// admin-mail routes intentionally are not part of this downstream runtime.
+	// Students have an optional, teacher-provisioned project-saving account.
+	// Tutor, self-signup, scheduler, and admin-mail routes remain unmounted.
 	mountRuntimeAccountRoutes(app);
 
 	const PORT = Number(env.PORT || 3008);

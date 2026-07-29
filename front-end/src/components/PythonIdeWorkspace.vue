@@ -5,7 +5,8 @@ import type { PythonCodeMirrorAssetCompletionNames } from "@/modules/pythonCodeM
 import type {
 	PythonIdeFile,
 	PythonIdeMode,
-	PythonIdeProject
+	PythonIdeProject,
+	PythonIdeProjectReview
 } from "@/modules/pythonIde";
 import type { PythonIdeCourseAssetPack } from "@/modules/pythonIdeCourseAssets";
 import type {
@@ -24,11 +25,15 @@ import {
 } from "vue";
 import { useRoute } from "vue-router";
 import {
-	clearLocalPythonProjectsAsync,
+	acknowledgeLocalPythonProjectRecovery,
+	applyPythonIdeRecoveryPlan,
+	claimAnonymousPythonProjectForStudent,
+	clearLocalPythonIdeEditorState,
 	createPythonIdeProject,
 	createRemotePythonIdeProject,
 	deleteRemotePythonIdeProject,
 	fetchPythonIdeProjects,
+	fetchVisiblePythonIdeProjectReviews,
 	getPythonIdeAssetDataUrl,
 	getPythonIdeDefaultFileContent,
 	getPythonIdeFileKindLabel,
@@ -38,19 +43,26 @@ import {
 	isPythonIdePythonFile,
 	isPythonIdeTextFile,
 	isValidPythonFileName,
+	loadCurrentTabPythonProjectRecoverySnapshot,
 	loadLocalPythonProjectsAsync,
 	loadPythonIdeStarterFilesFromGitHub,
 	normalizeClassroomPythonIdeMode,
 	normalizeImportedPythonIdeFileName,
 	normalizePythonFileName,
+	plainPythonIdeProjectsSnapshot,
+	purgeAllStudentPythonProjectRecovery,
 	pythonIdeAllowedFileExtensions,
+	pythonIdeEditorViewStateStoragePrefix,
 	pythonIdeFileUploadAccept,
+	pythonIdeImportID,
 	pythonIdeModeForCourseId,
 	pythonIdeProjectToPayload,
+	reconcilePythonIdeRecoveryProjects,
 	resolvePythonIdeActiveFileName,
 	saveLocalPythonProjects,
 	saveLocalPythonProjectsAsync,
-	updateRemotePythonIdeProject
+	updateRemotePythonIdeProject,
+	volatileStudentPythonProjectRecovery as volatileStudentProjectRecovery
 } from "@/modules/pythonIde";
 import {
 	findPythonIdeCourseAsset,
@@ -61,6 +73,10 @@ import {
 	pythonIdeAssetLookupAliases
 } from "@/modules/pythonIdeCourseAssets";
 import { primePythonRuntimeConnection } from "@/modules/pythonIdeRuntimeHints";
+import {
+	registerStudentSessionHandoff,
+	studentSessionHandoffErrorMessage
+} from "@/modules/studentSessionHandoff";
 import { useAppStore } from "@/stores/app";
 
 type PythonCodeEditorModules = [
@@ -346,10 +362,10 @@ const maxOutputTextLength = 12000;
 const maxRuntimeArtifacts = 12;
 const maxRuntimeArtifactTextLength = 500000;
 const maxRuntimeArtifactBase64Length = 1500000;
+const runtimeArtifactContentSecurityPolicy =
+	"default-src 'none'; base-uri 'none'; connect-src 'none'; font-src data:; form-action 'none'; frame-src 'none'; img-src data: blob:; media-src data: blob:; object-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' https://cdn.plot.ly; style-src 'unsafe-inline'; worker-src 'none'";
 const maxCodeEditorViewStates = 120;
 const pythonIdeAutoSaveStorageKey = "classes-python-ide-autosave";
-const pythonIdeEditorViewStateStoragePrefix =
-	"classes-python-ide-editor-view-state";
 const turtleAnimationInitialFrameCreditMs = 16;
 const turtleInstantStepMaxDurationMs = 16;
 const turtleTurnStepDurationMs = turtleInstantStepMaxDurationMs;
@@ -454,10 +470,17 @@ for (let digit = 0; digit <= 9; digit += 1) {
 
 const app = useAppStore();
 const route = useRoute();
-const { currentUser } = storeToRefs(app);
+const { currentStudent, studentRequiresPasswordSetup } = storeToRefs(app);
+const studentProjectOwnerID = computed(() =>
+	currentStudent.value && !studentRequiresPasswordSetup.value
+		? currentStudent.value._id
+		: null
+);
 
 const projects = ref<PythonIdeProject[]>([]);
+const visibleProjectReviews = ref<PythonIdeProjectReview[]>([]);
 const selectedProjectID = ref("");
+const selectedReviewFileName = ref("");
 const newFileName = ref("");
 const inputText = ref("");
 const outputLines = ref<OutputLine[]>([]);
@@ -483,6 +506,11 @@ const storagePersistenceMessage = ref("Checking local save protection");
 const storagePersistenceStatus = ref<
 	"best-effort" | "checking" | "persistent" | "unsupported"
 >("checking");
+const activeStorageOwnerID = ref<string | null>(studentProjectOwnerID.value);
+const pendingAnonymousProjects = ref<PythonIdeProject[]>([]);
+const isImportingAnonymousProjects = ref(false);
+const anonymousImportError = ref("");
+const pythonIdePageRef = ref<HTMLElement | null>(null);
 const codeEditorHostRef = ref<HTMLDivElement | null>(null);
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 const editorCursorCount = ref(1);
@@ -549,9 +577,54 @@ let turtleQueuedSteps: TurtleAnimationStep[] = [];
 let turtleVisiblePoses = new Map<string, TurtlePose>();
 let codeEditorModulesPromise: Promise<PythonCodeEditorModules> | null = null;
 let pythonRuntimeModulePromise: Promise<PythonRuntimeModule> | null = null;
+let loadedPythonRuntimeModule: PythonRuntimeModule | null = null;
 let codeEditorResetToken = 0;
 let activeCodeEditorViewStateKey = "";
 let projectLoadRunID = 0;
+let projectOwnerSwitchQueue = Promise.resolve();
+let desiredProjectOwnerID = studentProjectOwnerID.value;
+let preparedOwnerExitID: string | null = null;
+let volatileSuspendedOwnerID: string | null = null;
+let unregisterStudentSessionHandoff: (() => void) | null = null;
+const ownerBoundMutations = new Set<Promise<unknown>>();
+
+interface ProjectOwnerContext {
+	ownerID: string | null;
+	loadRunID: number;
+}
+
+function captureProjectOwnerContext(
+	loadRunID = projectLoadRunID
+): ProjectOwnerContext {
+	return {
+		ownerID: activeStorageOwnerID.value,
+		loadRunID
+	};
+}
+
+function projectOwnerContextIsCurrent(context: ProjectOwnerContext) {
+	return (
+		activeStorageOwnerID.value === context.ownerID &&
+		desiredProjectOwnerID === context.ownerID &&
+		projectLoadRunID === context.loadRunID
+	);
+}
+
+function runOwnerBoundMutation<T>(operation: () => Promise<T>) {
+	const mutation = operation();
+	ownerBoundMutations.add(mutation);
+	mutation.then(
+		() => ownerBoundMutations.delete(mutation),
+		() => ownerBoundMutations.delete(mutation)
+	);
+	return mutation;
+}
+
+async function waitForOwnerBoundMutations() {
+	while (ownerBoundMutations.size) {
+		await Promise.allSettled([...ownerBoundMutations]);
+	}
+}
 
 function loadPythonCodeEditorModules() {
 	codeEditorModulesPromise ??= Promise.all([
@@ -563,7 +636,12 @@ function loadPythonCodeEditorModules() {
 }
 
 function loadPythonRuntimeModule() {
-	pythonRuntimeModulePromise ??= import("@/modules/pythonIdeRuntime");
+	pythonRuntimeModulePromise ??= import("@/modules/pythonIdeRuntime").then(
+		module => {
+			loadedPythonRuntimeModule = module;
+			return module;
+		}
+	);
 	return pythonRuntimeModulePromise;
 }
 
@@ -664,7 +742,14 @@ function isCodeEditorViewState(value: unknown): value is CodeEditorViewState {
 
 function loadPersistedCodeEditorViewStates(userID: string | null) {
 	codeEditorViewStates.clear();
+	codeEditorStateSnapshots.clear();
 	if (typeof window === "undefined") return;
+	if (userID) {
+		// Authenticated editor state stays in this live component only. Do not
+		// read owner-keyed project or file metadata from a shared browser.
+		window.localStorage.removeItem(codeEditorViewStateStorageKey(userID));
+		return;
+	}
 
 	try {
 		const raw = window.localStorage.getItem(
@@ -687,6 +772,10 @@ function loadPersistedCodeEditorViewStates(userID: string | null) {
 
 function persistCodeEditorViewStates(userID: string | null) {
 	if (typeof window === "undefined") return;
+	if (userID) {
+		window.localStorage.removeItem(codeEditorViewStateStorageKey(userID));
+		return;
+	}
 	try {
 		window.localStorage.setItem(
 			codeEditorViewStateStorageKey(userID),
@@ -700,6 +789,20 @@ function persistCodeEditorViewStates(userID: string | null) {
 function releaseLoadedPythonRuntimeCallbacks(
 	options: { reportErrors?: boolean } = {}
 ) {
+	if (loadedPythonRuntimeModule) {
+		void loadedPythonRuntimeModule
+			.releasePythonIdeRuntimeCallbacks()
+			.catch(error => {
+				if (!options.reportErrors) return;
+				appendOutput(
+					"stderr",
+					error instanceof Error
+						? error.message
+						: "Could not release Python runtime callbacks."
+				);
+			});
+		return;
+	}
 	if (!pythonRuntimeModulePromise) return;
 	void pythonRuntimeModulePromise
 		.then(module => module.releasePythonIdeRuntimeCallbacks())
@@ -715,6 +818,13 @@ function releaseLoadedPythonRuntimeCallbacks(
 }
 
 function stopLoadedPythonRuntimeRun() {
+	if (loadedPythonRuntimeModule) {
+		// This removes the opaque iframe and its worker before this function
+		// returns. Owner transitions must not leave an old student's code alive
+		// for even one promise turn.
+		loadedPythonRuntimeModule.stopPythonIdeRuntimeRun();
+		return;
+	}
 	if (!pythonRuntimeModulePromise) return;
 	void pythonRuntimeModulePromise
 		.then(module => module.stopPythonIdeRuntimeRun())
@@ -806,8 +916,38 @@ const activeFilePreviewKind = computed(() => {
 	return "";
 });
 
-const canSyncToAccount = computed(() => !!currentUser.value?._id);
-const storageUserID = computed(() => currentUser.value?._id ?? null);
+const selectedVisibleReview = computed(
+	() =>
+		visibleProjectReviews.value.find(
+			review => review.sourceProject === selectedProject.value?._id
+		) ?? null
+);
+const visibleReviewFiles = computed(
+	() => selectedVisibleReview.value?.files ?? []
+);
+const activeVisibleReviewFile = computed(() => {
+	const review = selectedVisibleReview.value;
+	if (!review) return null;
+	const activeFileName =
+		selectedReviewFileName.value &&
+		review.files.some(file => file.name === selectedReviewFileName.value)
+			? selectedReviewFileName.value
+			: resolvePythonIdeActiveFileName(
+					review.files,
+					review.activeFileName
+				);
+	return review.files.find(file => file.name === activeFileName) ?? null;
+});
+const activeVisibleReviewFileContent = computed(() => {
+	const file = activeVisibleReviewFile.value;
+	if (!file) return "";
+	if (isPythonIdeBinaryAssetFile(file))
+		return `[Imported asset: ${file.name}]`;
+	return file.content;
+});
+
+const canSyncToAccount = computed(() => !!activeStorageOwnerID.value);
+const storageUserID = computed(() => activeStorageOwnerID.value);
 const sortedProjects = computed(() => [...projects.value]);
 const runControlIsStop = computed(
 	() =>
@@ -926,7 +1066,7 @@ function appendArtifact(artifact: RuntimeArtifact) {
 	} else if (artifact.mimeType.startsWith("audio/")) {
 		view.audioUrl = `data:${artifact.mimeType};base64,${artifact.data}`;
 	} else if (artifact.mimeType === "text/html") {
-		view.srcdoc = artifact.data;
+		view.srcdoc = `<!doctype html><meta http-equiv="Content-Security-Policy" content="${runtimeArtifactContentSecurityPolicy}">${artifact.data}`;
 	} else {
 		view.text = artifact.data;
 	}
@@ -1135,27 +1275,71 @@ function projectLoadIsCurrent(loadRunID?: number) {
 async function saveNewProject(
 	project: PythonIdeProject,
 	localOnly = false,
-	loadRunID?: number
+	loadRunID?: number,
+	ownerContext = captureProjectOwnerContext(loadRunID)
 ) {
-	if (!projectLoadIsCurrent(loadRunID)) return;
+	return runOwnerBoundMutation(async () => {
+		if (!projectOwnerContextIsCurrent(ownerContext)) return false;
 
-	if (canSyncToAccount.value && !localOnly) {
-		const remoteProject = await createRemotePythonIdeProject(
-			pythonIdeProjectToPayload(project)
-		);
-		if (!projectLoadIsCurrent(loadRunID)) return;
-		projects.value.unshift(remoteProject);
-		selectedProjectID.value = remoteProject._id;
-		await discardLocalProjectSnapshotIfSafe();
-		if (!projectLoadIsCurrent(loadRunID)) return;
-		saveMessage.value = "Synced to account";
-		return;
-	}
+		if (ownerContext.ownerID && !localOnly) {
+			const studentID = ownerContext.ownerID;
+			if (
+				!projects.value.some(candidate => candidate._id === project._id)
+			) {
+				projects.value.unshift(project);
+			}
+			selectedProjectID.value = project._id;
+			unsyncedProjectIDs.add(project._id);
+			refreshVolatileStudentProjectRecovery();
 
-	if (!projectLoadIsCurrent(loadRunID)) return;
-	projects.value.unshift(project);
-	selectedProjectID.value = project._id;
-	await persistLocalProjects();
+			const remoteProject = await createRemotePythonIdeProject(
+				pythonIdeProjectToPayload(project),
+				studentID,
+				{
+					importID: pythonIdeImportID(project),
+					localUpdatedAt: project.updatedAt
+				}
+			);
+			if (!projectOwnerContextIsCurrent(ownerContext)) return false;
+
+			const localIndex = projects.value.findIndex(
+				candidate => candidate._id === project._id
+			);
+			if (localIndex >= 0) {
+				migrateCodeEditorViewStates(project._id, remoteProject._id);
+				projects.value.splice(localIndex, 1, remoteProject);
+			} else {
+				projects.value.unshift(remoteProject);
+			}
+			selectedProjectID.value = remoteProject._id;
+			unsyncedProjectIDs.delete(project._id);
+			unsyncedProjectIDs.delete(remoteProject._id);
+			try {
+				await discardLocalProjectSnapshotIfSafe();
+			} catch {
+				// The server save is authoritative. Browser cleanup can retry
+				// without restoring or trusting any owner-keyed content.
+			}
+			if (!projectOwnerContextIsCurrent(ownerContext)) return false;
+			saveMessage.value = "Synced to account";
+			return true;
+		}
+
+		if (!projectOwnerContextIsCurrent(ownerContext)) return false;
+		projects.value.unshift(project);
+		selectedProjectID.value = project._id;
+		if (ownerContext.ownerID) {
+			unsyncedProjectIDs.add(project._id);
+			refreshVolatileStudentProjectRecovery();
+			saveMessage.value = "Waiting to sync to account";
+			return true;
+		}
+		const snapshot = plainPythonIdeProjectsSnapshot(projects.value);
+		await saveLocalPythonProjectsAsync(snapshot, ownerContext.ownerID);
+		if (!projectOwnerContextIsCurrent(ownerContext)) return false;
+		saveMessage.value = "Saved locally";
+		return true;
+	});
 }
 
 async function openRequestedCourseProjectIfNeeded(
@@ -1196,9 +1380,29 @@ function setProjects(nextProjects: PythonIdeProject[]) {
 		projectForRoute(projects.value)?._id ?? projects.value[0]?._id ?? "";
 }
 
+function refreshVolatileStudentProjectRecovery() {
+	const studentID = activeStorageOwnerID.value;
+	if (!studentID || !projects.value.length) return;
+	volatileStudentProjectRecovery.replace(studentID, projects.value);
+}
+
+function retainVolatileStudentProject(
+	studentID: string,
+	project: PythonIdeProject
+) {
+	const existingProjects =
+		volatileStudentProjectRecovery.forStudent(studentID);
+	volatileStudentProjectRecovery.replace(studentID, [
+		project,
+		...existingProjects.filter(candidate => candidate._id !== project._id)
+	]);
+}
+
 async function persistLocalProjects(
 	options: { message?: string; quiet?: boolean } = {}
 ) {
+	refreshVolatileStudentProjectRecovery();
+	if (storageUserID.value) return;
 	try {
 		await saveLocalPythonProjectsAsync(projects.value, storageUserID.value);
 		if (!options.quiet) {
@@ -1219,6 +1423,8 @@ async function persistLocalProjects(
 
 function saveLocalProjectSnapshot() {
 	if (!projects.value.length) return;
+	refreshVolatileStudentProjectRecovery();
+	if (storageUserID.value) return;
 	try {
 		saveLocalPythonProjects(projects.value, storageUserID.value);
 	} catch (error) {
@@ -1228,6 +1434,8 @@ function saveLocalProjectSnapshot() {
 
 async function persistLocalProjectSnapshot() {
 	if (!projects.value.length) return;
+	refreshVolatileStudentProjectRecovery();
+	if (storageUserID.value) return;
 	if (localSnapshotInFlight) {
 		localSnapshotQueued = true;
 		return localSnapshotInFlight;
@@ -1269,8 +1477,20 @@ async function discardLocalProjectSnapshot() {
 		}
 	}
 	localSnapshotQueued = false;
+	if (pendingSaveProjectIDs.size || saveQueued || unsyncedProjectIDs.size) {
+		return;
+	}
+	const studentID = storageUserID.value;
+	if (studentID) {
+		volatileStudentProjectRecovery.acknowledge(studentID);
+		await purgeAllStudentPythonProjectRecovery();
+		unsyncedProjectIDs.clear();
+		return;
+	}
+	const recoverySnapshot =
+		await loadCurrentTabPythonProjectRecoverySnapshot(null);
+	await acknowledgeLocalPythonProjectRecovery(recoverySnapshot);
 	unsyncedProjectIDs.clear();
-	await clearLocalPythonProjectsAsync(storageUserID.value);
 }
 
 async function discardLocalProjectSnapshotIfSafe() {
@@ -1280,47 +1500,174 @@ async function discardLocalProjectSnapshotIfSafe() {
 
 function scheduleLocalProjectSnapshot() {
 	cancelLocalProjectSnapshot();
+	refreshVolatileStudentProjectRecovery();
+	if (storageUserID.value) return;
 	localSnapshotTimer = window.setTimeout(() => {
 		localSnapshotTimer = null;
 		void persistLocalProjectSnapshot();
 	}, 250);
 }
 
-async function syncProjectsToAccount(projectList: PythonIdeProject[]) {
-	return Promise.all(
-		projectList.map(project =>
-			project._id.startsWith("local-")
-				? createRemotePythonIdeProject(
-						pythonIdeProjectToPayload(project)
-					)
-				: updateRemotePythonIdeProject(
-						project._id,
-						pythonIdeProjectToPayload(project)
-					)
-		)
+function projectContainsSavedWork(project: PythonIdeProject) {
+	return (
+		!!project.courseID ||
+		!!project.courseProjectKey ||
+		project.files.length > 1 ||
+		project.title !== "Untitled Python Project" ||
+		project.files.some(file => file.content.trim().length > 0)
 	);
 }
 
+async function importAnonymousProjects() {
+	if (
+		!activeStorageOwnerID.value ||
+		!pendingAnonymousProjects.value.length ||
+		isImportingAnonymousProjects.value
+	) {
+		return;
+	}
+
+	const ownerContext = captureProjectOwnerContext();
+	const studentID = ownerContext.ownerID;
+	if (!studentID) return;
+	isImportingAnonymousProjects.value = true;
+	anonymousImportError.value = "";
+	let claimedProjectHeldInOpenPage = false;
+	try {
+		await runOwnerBoundMutation(async () => {
+			// Each browser project uses its stable local id as the idempotency key.
+			// First remove it atomically from shared anonymous storage, then hold
+			// the claimed code only in this student's live workspace until the
+			// idempotent server upload succeeds.
+			for (const project of [...pendingAnonymousProjects.value]) {
+				if (!projectOwnerContextIsCurrent(ownerContext)) return;
+				const claimedProject =
+					await claimAnonymousPythonProjectForStudent(
+						project,
+						studentID
+					);
+				if (!projectOwnerContextIsCurrent(ownerContext)) {
+					if (volatileSuspendedOwnerID === studentID) {
+						retainVolatileStudentProject(studentID, claimedProject);
+					}
+					return;
+				}
+
+				pendingAnonymousProjects.value =
+					pendingAnonymousProjects.value.filter(
+						candidate => candidate._id !== project._id
+					);
+				if (
+					!projects.value.some(
+						candidate => candidate._id === claimedProject._id
+					)
+				) {
+					projects.value.unshift(claimedProject);
+				}
+				unsyncedProjectIDs.add(claimedProject._id);
+				refreshVolatileStudentProjectRecovery();
+				claimedProjectHeldInOpenPage = true;
+
+				const importedProject = await createRemotePythonIdeProject(
+					pythonIdeProjectToPayload(claimedProject),
+					studentID,
+					{
+						importID: pythonIdeImportID(claimedProject),
+						localUpdatedAt: claimedProject.updatedAt
+					}
+				);
+				if (!projectOwnerContextIsCurrent(ownerContext)) return;
+
+				const existingIndex = projects.value.findIndex(
+					candidate => candidate._id === claimedProject._id
+				);
+				if (existingIndex >= 0) {
+					migrateCodeEditorViewStates(
+						claimedProject._id,
+						importedProject._id
+					);
+					projects.value.splice(existingIndex, 1, importedProject);
+				} else if (
+					!projects.value.some(
+						candidate => candidate._id === importedProject._id
+					)
+				) {
+					projects.value.unshift(importedProject);
+				}
+				if (selectedProjectID.value === claimedProject._id) {
+					selectedProjectID.value = importedProject._id;
+				}
+				unsyncedProjectIDs.delete(claimedProject._id);
+				unsyncedProjectIDs.delete(importedProject._id);
+				claimedProjectHeldInOpenPage = false;
+			}
+			if (projectOwnerContextIsCurrent(ownerContext)) {
+				await discardLocalProjectSnapshotIfSafe().catch(
+					() => undefined
+				);
+				saveMessage.value = "Browser projects saved to this account";
+			}
+		});
+	} catch {
+		if (projectOwnerContextIsCurrent(ownerContext)) {
+			anonymousImportError.value = claimedProjectHeldInOpenPage
+				? "This project is only in this open page and is not in the account yet. Keep this page open and try again."
+				: "Couldn’t start saving this browser project. It is still saved in this browser; try again.";
+		}
+	} finally {
+		if (projectOwnerContextIsCurrent(ownerContext)) {
+			isImportingAnonymousProjects.value = false;
+		}
+	}
+}
+
+function keepAnonymousProjectsSeparate() {
+	pendingAnonymousProjects.value = [];
+	anonymousImportError.value = "";
+}
+
 async function loadProjects() {
+	if (activeStorageOwnerID.value !== desiredProjectOwnerID) return;
 	const loadRunID = ++projectLoadRunID;
 	isLoading.value = true;
 	suppressAutoSave = true;
+	pendingAnonymousProjects.value = [];
+	anonymousImportError.value = "";
 	loadPersistedCodeEditorViewStates(storageUserID.value);
 	try {
 		if (canSyncToAccount.value) {
-			const remoteProjects = await fetchPythonIdeProjects();
+			const studentID = activeStorageOwnerID.value;
+			if (!studentID)
+				throw new Error("Student project session is not ready.");
+			const remoteProjects = await fetchPythonIdeProjects(studentID);
 			if (!projectLoadIsCurrent(loadRunID)) return;
-			const localProjects = await loadLocalPythonProjectsAsync(
-				storageUserID.value
+			visibleProjectReviews.value =
+				await fetchVisiblePythonIdeProjectReviews(studentID).catch(
+					() => []
+				);
+			if (!projectLoadIsCurrent(loadRunID)) return;
+			const anonymousProjects = await loadLocalPythonProjectsAsync(null);
+			if (!projectLoadIsCurrent(loadRunID)) return;
+			pendingAnonymousProjects.value = anonymousProjects.filter(
+				projectContainsSavedWork
 			);
+			const localProjects =
+				volatileStudentProjectRecovery.forStudent(studentID);
 			if (!projectLoadIsCurrent(loadRunID)) return;
 			if (localProjects.length) {
+				const recoveryPlan = reconcilePythonIdeRecoveryProjects(
+					localProjects,
+					remoteProjects
+				);
 				try {
-					const syncedProjects =
-						await syncProjectsToAccount(localProjects);
+					const syncedProjects = await applyPythonIdeRecoveryPlan(
+						recoveryPlan,
+						studentID
+					);
 					if (!projectLoadIsCurrent(loadRunID)) return;
 					setProjects(syncedProjects);
-					await discardLocalProjectSnapshot();
+					volatileStudentProjectRecovery.acknowledge(studentID);
+					await purgeAllStudentPythonProjectRecovery();
 					if (!projectLoadIsCurrent(loadRunID)) return;
 					await openRequestedCourseProjectIfNeeded(false, loadRunID);
 					if (!projectLoadIsCurrent(loadRunID)) return;
@@ -1328,7 +1675,12 @@ async function loadProjects() {
 					return;
 				} catch (error) {
 					if (!projectLoadIsCurrent(loadRunID)) return;
-					setProjects(localProjects);
+					setProjects(recoveryPlan.projects);
+					for (const write of recoveryPlan.writes) {
+						pendingSaveProjectIDs.add(write.project._id);
+						unsyncedProjectIDs.add(write.project._id);
+					}
+					refreshVolatileStudentProjectRecovery();
 					appendOutput(
 						"system",
 						error instanceof Error
@@ -1353,17 +1705,13 @@ async function loadProjects() {
 
 			const initialProject = await createInitialProject();
 			if (!projectLoadIsCurrent(loadRunID)) return;
-			const remoteProject = await createRemotePythonIdeProject(
-				pythonIdeProjectToPayload(initialProject)
-			);
-			if (!projectLoadIsCurrent(loadRunID)) return;
-			setProjects([remoteProject]);
-			await discardLocalProjectSnapshot();
+			await saveNewProject(initialProject, false, loadRunID);
 			if (!projectLoadIsCurrent(loadRunID)) return;
 			saveMessage.value = "Synced to account";
 			return;
 		}
 
+		visibleProjectReviews.value = [];
 		const localProjects = await loadLocalPythonProjectsAsync(
 			storageUserID.value
 		);
@@ -1378,20 +1726,39 @@ async function loadProjects() {
 		if (!projectLoadIsCurrent(loadRunID)) return;
 		await persistLocalProjects();
 	} catch (error) {
-		const localProjects = await loadLocalPythonProjectsAsync(
-			storageUserID.value
-		);
-		if (!projectLoadIsCurrent(loadRunID)) return;
-		setProjects(
-			localProjects.length
-				? localProjects
-				: [await createInitialProject()]
-		);
-		if (!projectLoadIsCurrent(loadRunID)) return;
-		await openRequestedCourseProjectIfNeeded(true, loadRunID);
-		if (!projectLoadIsCurrent(loadRunID)) return;
+		const studentID = activeStorageOwnerID.value;
+		if (studentID) {
+			const volatileProjects =
+				volatileStudentProjectRecovery.forStudent(studentID);
+			if (!projectLoadIsCurrent(loadRunID)) return;
+			setProjects(
+				volatileProjects.length
+					? volatileProjects
+					: [await createInitialProject()]
+			);
+			if (!projectLoadIsCurrent(loadRunID)) return;
+			await openRequestedCourseProjectIfNeeded(true, loadRunID);
+			if (!projectLoadIsCurrent(loadRunID)) return;
+			for (const project of projects.value) {
+				pendingSaveProjectIDs.add(project._id);
+				unsyncedProjectIDs.add(project._id);
+			}
+			refreshVolatileStudentProjectRecovery();
+		} else {
+			const localProjects = await loadLocalPythonProjectsAsync(null);
+			if (!projectLoadIsCurrent(loadRunID)) return;
+			setProjects(
+				localProjects.length
+					? localProjects
+					: [await createInitialProject()]
+			);
+			if (!projectLoadIsCurrent(loadRunID)) return;
+			await openRequestedCourseProjectIfNeeded(true, loadRunID);
+			if (!projectLoadIsCurrent(loadRunID)) return;
+		}
 		saveMessage.value =
-			error instanceof Error ? error.message : "Using local workspace";
+			error instanceof Error ? error.message : "Using live workspace";
+		visibleProjectReviews.value = [];
 	} finally {
 		if (projectLoadIsCurrent(loadRunID)) {
 			await nextTick();
@@ -1418,6 +1785,10 @@ async function saveProjectOnce(
 
 	const startedProjectID = project._id;
 	const startedUpdatedAt = project.updatedAt ?? "";
+	const startedOwnerID = activeStorageOwnerID.value;
+	const startedWorkspaceSnapshot = plainPythonIdeProjectsSnapshot(
+		projects.value
+	);
 	const payload = pythonIdeProjectToPayload(project);
 
 	try {
@@ -1426,10 +1797,27 @@ async function saveProjectOnce(
 			return true;
 		}
 
+		const studentID = startedOwnerID;
+		if (!studentID)
+			throw new Error("Student project session is not ready.");
+		const expectedUpdatedAt = project.serverUpdatedAt;
+		if (!startedProjectID.startsWith("local-") && !expectedUpdatedAt) {
+			throw new Error(
+				"Could not verify the latest server project version. Reload before saving."
+			);
+		}
 		await persistLocalProjects({ quiet: true });
 		const savedProject = startedProjectID.startsWith("local-")
-			? await createRemotePythonIdeProject(payload)
-			: await updateRemotePythonIdeProject(startedProjectID, payload);
+			? await createRemotePythonIdeProject(payload, studentID, {
+					importID: pythonIdeImportID(project),
+					localUpdatedAt: project.updatedAt
+				})
+			: await updateRemotePythonIdeProject(
+					startedProjectID,
+					payload,
+					studentID,
+					{ expectedUpdatedAt: expectedUpdatedAt! }
+				);
 		const currentIndex = projects.value.findIndex(
 			candidate => candidate._id === startedProjectID
 		);
@@ -1441,6 +1829,8 @@ async function saveProjectOnce(
 			currentProject.updatedAt !== startedUpdatedAt;
 
 		if (projectChangedDuringSave) {
+			currentProject.serverUpdatedAt =
+				savedProject.serverUpdatedAt ?? savedProject.updatedAt;
 			if (startedProjectID.startsWith("local-")) {
 				migrateCodeEditorViewStates(startedProjectID, savedProject._id);
 				currentProject._id = savedProject._id;
@@ -1481,14 +1871,28 @@ async function saveProjectOnce(
 		return true;
 	} catch (error) {
 		unsyncedProjectIDs.add(startedProjectID);
-		await persistLocalProjects({
-			message: "Saved locally after sync issue"
-		});
+		if (
+			startedOwnerID &&
+			activeStorageOwnerID.value === startedOwnerID &&
+			desiredProjectOwnerID === startedOwnerID
+		) {
+			volatileStudentProjectRecovery.replace(
+				startedOwnerID,
+				projects.value
+			);
+		} else if (startedOwnerID) {
+			volatileStudentProjectRecovery.discard(startedOwnerID);
+		} else {
+			await saveLocalPythonProjectsAsync(startedWorkspaceSnapshot, null);
+		}
+		saveMessage.value = startedOwnerID
+			? "Waiting to sync to account"
+			: "Saved locally after sync issue";
 		appendOutput(
 			"system",
 			error instanceof Error
 				? error.message
-				: "Save failed; kept a local copy."
+				: "Save failed; kept this workspace open for retry."
 		);
 		return false;
 	}
@@ -1545,9 +1949,11 @@ async function saveSelectedProject(options: SaveProjectOptions = {}) {
 
 function scheduleSave() {
 	if (suppressAutoSave) return;
+	preparedOwnerExitID = null;
 	const projectID = selectedProject.value?._id;
 	if (!projectID) return;
 	pendingSaveProjectIDs.add(projectID);
+	refreshVolatileStudentProjectRecovery();
 
 	if (!autoSaveEnabled.value) {
 		if (saveTimer) window.clearTimeout(saveTimer);
@@ -1610,21 +2016,29 @@ async function createProject(
 	template: "blank" | "demo" = "blank"
 ) {
 	const starter = createPythonIdeProject(mode, { template });
+	const ownerContext = captureProjectOwnerContext();
 	suppressAutoSave = true;
 	try {
-		await saveNewProject(starter);
+		await saveNewProject(starter, false, undefined, ownerContext);
 	} catch (error) {
+		if (!projectOwnerContextIsCurrent(ownerContext)) return;
 		projects.value.unshift(starter);
 		selectedProjectID.value = starter._id;
-		await persistLocalProjects();
+		await saveLocalPythonProjectsAsync(
+			plainPythonIdeProjectsSnapshot(projects.value),
+			ownerContext.ownerID
+		);
+		if (!projectOwnerContextIsCurrent(ownerContext)) return;
 		appendOutput(
 			"system",
 			error instanceof Error ? error.message : "Project created locally."
 		);
 	} finally {
-		suppressAutoSave = false;
-		await nextTick();
-		resetActiveCanvas();
+		if (projectOwnerContextIsCurrent(ownerContext)) {
+			suppressAutoSave = false;
+			await nextTick();
+			resetActiveCanvas();
+		}
 	}
 }
 
@@ -1657,8 +2071,9 @@ function cancelProjectDelete() {
 
 async function confirmProjectDelete(project: PythonIdeProject) {
 	if (deleteConfirmText.value.trim().toLowerCase() !== "confirm") return;
+	const ownerContext = captureProjectOwnerContext();
 	await deleteProject(project);
-	cancelProjectDelete();
+	if (projectOwnerContextIsCurrent(ownerContext)) cancelProjectDelete();
 }
 
 async function deleteProject(project: PythonIdeProject) {
@@ -1667,24 +2082,51 @@ async function deleteProject(project: PythonIdeProject) {
 		return;
 	}
 
+	const ownerContext = captureProjectOwnerContext();
 	try {
-		const isRemoteProject =
-			canSyncToAccount.value && !project._id.startsWith("local-");
-		if (isRemoteProject) {
-			await deleteRemotePythonIdeProject(project._id);
-		}
-		projects.value = projects.value.filter(
-			candidate => candidate._id !== project._id
-		);
-		deleteCodeEditorStateForProject(project._id);
-		selectedProjectID.value = projects.value[0]?._id ?? "";
-		if (isRemoteProject) {
-			await discardLocalProjectSnapshotIfSafe();
-			saveMessage.value = "Synced to account";
-		} else {
-			await persistLocalProjects();
-		}
+		await runOwnerBoundMutation(async () => {
+			if (!projectOwnerContextIsCurrent(ownerContext)) return;
+			const isRemoteProject =
+				!!ownerContext.ownerID && !project._id.startsWith("local-");
+			if (isRemoteProject) {
+				const expectedUpdatedAt =
+					project.serverUpdatedAt ?? project.updatedAt;
+				if (!expectedUpdatedAt) {
+					throw new Error(
+						"Could not verify the latest server project version. Reload before deleting."
+					);
+				}
+				await deleteRemotePythonIdeProject(
+					project._id,
+					ownerContext.ownerID!,
+					{ expectedUpdatedAt }
+				);
+				if (!projectOwnerContextIsCurrent(ownerContext)) return;
+			}
+
+			projects.value = projects.value.filter(
+				candidate => candidate._id !== project._id
+			);
+			pendingSaveProjectIDs.delete(project._id);
+			unsyncedProjectIDs.delete(project._id);
+			refreshVolatileStudentProjectRecovery();
+			deleteCodeEditorStateForProject(project._id);
+			selectedProjectID.value = projects.value[0]?._id ?? "";
+			if (isRemoteProject) {
+				await discardLocalProjectSnapshotIfSafe();
+				if (!projectOwnerContextIsCurrent(ownerContext)) return;
+				saveMessage.value = "Synced to account";
+			} else {
+				await saveLocalPythonProjectsAsync(
+					plainPythonIdeProjectsSnapshot(projects.value),
+					ownerContext.ownerID
+				);
+				if (!projectOwnerContextIsCurrent(ownerContext)) return;
+				saveMessage.value = "Saved locally";
+			}
+		});
 	} catch (error) {
+		if (!projectOwnerContextIsCurrent(ownerContext)) return;
 		appendOutput(
 			"stderr",
 			error instanceof Error ? error.message : "Could not delete project."
@@ -4225,6 +4667,13 @@ const gameBridge: GameBridge = {
 		const events = JSON.stringify(gameEvents.splice(0));
 		return events === "[]" ? "" : events;
 	},
+	runtimeInputJson() {
+		const input = JSON.stringify({
+			events: gameEvents.splice(0),
+			keys: [...gameKeysDown]
+		});
+		return input;
+	},
 	requestLoop() {
 		requestContinuousGameLoop();
 	},
@@ -4296,6 +4745,12 @@ function createGuardedGameBridgeRun(): GameBridge {
 		},
 		popEventsJson() {
 			return isActiveRun() ? gameBridge.popEventsJson() : "";
+		},
+		runtimeInputJson() {
+			return isActiveRun()
+				? (gameBridge.runtimeInputJson?.() ??
+						JSON.stringify({ events: [], keys: [] }))
+				: JSON.stringify({ events: [], keys: [] });
 		},
 		requestLoop() {
 			if (isActiveRun()) gameBridge.requestLoop();
@@ -4730,12 +5185,238 @@ function clearCanvasKeyboardState() {
 	activeTurtleDragButton = null;
 }
 
-watch(
-	() => currentUser.value?._id,
-	() => {
-		void loadProjects();
+function clearOwnerRuntimeArtifactSurfaces() {
+	const root = pythonIdePageRef.value;
+	if (!root) return;
+	for (const audio of root.querySelectorAll<HTMLAudioElement>("audio")) {
+		audio.pause();
+		audio.removeAttribute("src");
+		audio.load();
 	}
-);
+	for (const frame of root.querySelectorAll<HTMLIFrameElement>(
+		".artifact-card iframe"
+	)) {
+		frame.srcdoc = "";
+		frame.removeAttribute("srcdoc");
+		frame.src = "about:blank";
+	}
+}
+
+function hideWorkspaceForOwnerTransition(previousOwnerID: string | null) {
+	// Tear down the old execution realm before clearing or loading any owner
+	// state. The stop path is synchronous once the runtime module has loaded.
+	stopActiveRuntimeSurfaces();
+	turtleState.background = "#ffffff";
+	resetTurtleCanvas();
+	resetGameCanvas();
+	clearOwnerRuntimeArtifactSurfaces();
+	++projectLoadRunID;
+	suppressAutoSave = true;
+	isLoading.value = true;
+	cancelLocalProjectSnapshot();
+	if (saveTimer) {
+		window.clearTimeout(saveTimer);
+		saveTimer = null;
+	}
+	if (!previousOwnerID && preparedOwnerExitID !== previousOwnerID) {
+		saveCodeEditorViewState();
+	}
+	codeEditorView?.destroy();
+	codeEditorView = null;
+	activeCodeEditorViewStateKey = "";
+	codeEditorViewStates.clear();
+	codeEditorStateSnapshots.clear();
+	editorCursorCount.value = 1;
+	gameImageCache.clear();
+	inputText.value = "";
+	newFileName.value = "";
+	clearOutput();
+	runMessage.value = "Ready";
+	saveMessage.value = "Loading workspace";
+	pendingAnonymousProjects.value = [];
+	isImportingAnonymousProjects.value = false;
+	anonymousImportError.value = "";
+	deleteCandidateProjectID.value = "";
+	deleteConfirmText.value = "";
+	showProjectMenu.value = false;
+	showFileTools.value = false;
+	projects.value = [];
+	visibleProjectReviews.value = [];
+	selectedProjectID.value = "";
+	selectedReviewFileName.value = "";
+}
+
+async function handleStudentSessionHandoff({
+	mode,
+	studentID
+}: {
+	mode: "prepare" | "resume" | "session-ended" | "suspend";
+	studentID: string;
+}) {
+	if (mode === "resume") {
+		if (
+			studentID !== activeStorageOwnerID.value &&
+			preparedOwnerExitID !== studentID
+		) {
+			return;
+		}
+		if (preparedOwnerExitID === studentID) preparedOwnerExitID = null;
+		if (volatileSuspendedOwnerID === studentID) {
+			volatileSuspendedOwnerID = null;
+		}
+		if (studentID === activeStorageOwnerID.value) {
+			await loadProjects();
+		}
+		return;
+	}
+
+	if (mode === "session-ended") {
+		volatileStudentProjectRecovery.discard(studentID);
+		if (volatileSuspendedOwnerID === studentID) {
+			volatileSuspendedOwnerID = null;
+		}
+		if (studentID !== activeStorageOwnerID.value) {
+			await purgeAllStudentPythonProjectRecovery();
+			return;
+		}
+		preparedOwnerExitID = studentID;
+		hideWorkspaceForOwnerTransition(studentID);
+		await purgeAllStudentPythonProjectRecovery();
+		return;
+	}
+
+	if (studentID !== activeStorageOwnerID.value) return;
+
+	if (mode === "suspend") {
+		if (projects.value.length) {
+			volatileStudentProjectRecovery.replace(studentID, projects.value, {
+				unsynced:
+					!!saveInFlight ||
+					!!pendingSaveProjectIDs.size ||
+					saveQueued ||
+					!!unsyncedProjectIDs.size
+			});
+		}
+		volatileSuspendedOwnerID = studentID;
+		preparedOwnerExitID = studentID;
+		hideWorkspaceForOwnerTransition(studentID);
+		return;
+	}
+
+	++projectLoadRunID;
+	suppressAutoSave = true;
+	isLoading.value = true;
+	cancelLocalProjectSnapshot();
+	if (saveTimer) {
+		window.clearTimeout(saveTimer);
+		saveTimer = null;
+	}
+	saveCodeEditorViewState();
+
+	let handoffPrepared = false;
+	try {
+		await waitForOwnerBoundMutations();
+		if (localSnapshotInFlight) await localSnapshotInFlight;
+		if (saveInFlight) await saveInFlight;
+		for (const project of projects.value) {
+			if (
+				project._id.startsWith("local-") ||
+				unsyncedProjectIDs.has(project._id)
+			) {
+				pendingSaveProjectIDs.add(project._id);
+			}
+		}
+		if (pendingSaveProjectIDs.size) {
+			await savePendingProjects({ force: true });
+		}
+		if (unsyncedProjectIDs.size) throw new Error("Project sync failed.");
+
+		clearLocalPythonIdeEditorState(studentID);
+		preparedOwnerExitID = studentID;
+		handoffPrepared = true;
+		isLoading.value = true;
+		saveMessage.value = "Projects safely synced";
+	} catch (error) {
+		preparedOwnerExitID = null;
+		saveMessage.value = studentSessionHandoffErrorMessage;
+		throw error;
+	} finally {
+		if (!handoffPrepared) suppressAutoSave = false;
+	}
+}
+
+async function switchProjectOwner(
+	nextOwnerID: string | null,
+	previousOwnerID: string | null,
+	previousProjects: PythonIdeProject[]
+) {
+	let transitionError: unknown;
+	const wasPrepared = preparedOwnerExitID === previousOwnerID;
+
+	try {
+		await waitForOwnerBoundMutations();
+		if (localSnapshotInFlight) await localSnapshotInFlight;
+		if (saveInFlight) await saveInFlight;
+		if (!wasPrepared && previousProjects.length) {
+			if (!previousOwnerID) {
+				await saveLocalPythonProjectsAsync(previousProjects, null);
+			}
+		}
+	} catch (error) {
+		transitionError = error;
+	} finally {
+		pendingSaveProjectIDs.clear();
+		unsyncedProjectIDs.clear();
+		saveQueued = false;
+		localSnapshotQueued = false;
+		if (preparedOwnerExitID === previousOwnerID) preparedOwnerExitID = null;
+		activeStorageOwnerID.value = nextOwnerID;
+		if (volatileSuspendedOwnerID === nextOwnerID) {
+			volatileSuspendedOwnerID = null;
+		}
+
+		if (desiredProjectOwnerID === nextOwnerID) {
+			await loadProjects();
+			if (transitionError) {
+				saveMessage.value =
+					transitionError instanceof Error
+						? transitionError.message
+						: "Could not finish the previous project save.";
+			}
+		}
+	}
+}
+
+watch(studentProjectOwnerID, nextOwnerID => {
+	if (nextOwnerID === desiredProjectOwnerID) return;
+	const previousOwnerID = activeStorageOwnerID.value;
+	const previousProjects = plainPythonIdeProjectsSnapshot(projects.value);
+	volatileStudentProjectRecovery.retainAcrossOwnerChange(nextOwnerID);
+	if (
+		nextOwnerID &&
+		volatileSuspendedOwnerID &&
+		volatileSuspendedOwnerID !== nextOwnerID
+	) {
+		volatileSuspendedOwnerID = null;
+	}
+	desiredProjectOwnerID = nextOwnerID;
+
+	// Hide the prior student's code synchronously, before any storage or
+	// network await, so it cannot flash for the next person at the device.
+	hideWorkspaceForOwnerTransition(previousOwnerID);
+	projectOwnerSwitchQueue = projectOwnerSwitchQueue
+		.then(() =>
+			switchProjectOwner(nextOwnerID, previousOwnerID, previousProjects)
+		)
+		.catch(error => {
+			// switchProjectOwner transitions in a finally block. This catch is a
+			// last-resort message and must never restore the old workspace.
+			saveMessage.value =
+				error instanceof Error
+					? error.message
+					: "Could not load the next Python workspace.";
+		});
+});
 
 watch(
 	() =>
@@ -4777,6 +5458,19 @@ watch(selectedProjectID, (projectID, previousProjectID) => {
 });
 
 watch(
+	selectedVisibleReview,
+	review => {
+		selectedReviewFileName.value = review
+			? resolvePythonIdeActiveFileName(
+					review.files,
+					review.activeFileName
+				)
+			: "";
+	},
+	{ immediate: true }
+);
+
+watch(
 	() =>
 		`${selectedProjectID.value}:${activeFile.value?.name ?? ""}:${activeFileIsBinaryAsset.value}`,
 	() => {
@@ -4794,6 +5488,9 @@ watch(isLoading, loading => {
 });
 
 onMounted(() => {
+	unregisterStudentSessionHandoff = registerStudentSessionHandoff(
+		handleStudentSessionHandoff
+	);
 	primePythonRuntimeConnection();
 	void refreshPythonIdeStoragePersistenceStatus();
 	void loadProjects();
@@ -4813,6 +5510,16 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+	unregisterStudentSessionHandoff?.();
+	unregisterStudentSessionHandoff = null;
+	if (
+		saveInFlight ||
+		pendingSaveProjectIDs.size ||
+		saveQueued ||
+		unsyncedProjectIDs.size
+	) {
+		refreshVolatileStudentProjectRecovery();
+	}
 	flushPendingProjectSave();
 	saveCodeEditorViewState();
 	codeEditorView?.destroy();
@@ -4832,7 +5539,10 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-	<section class="python-ide-page page-shell page-shell--wide">
+	<section
+		ref="pythonIdePageRef"
+		class="python-ide-page page-shell page-shell--wide"
+	>
 		<div class="python-ide-hero">
 			<h1>Python IDE</h1>
 			<div class="python-ide-status" aria-live="polite">
@@ -4840,6 +5550,52 @@ onBeforeUnmount(() => {
 				<strong>{{ runMessage }}</strong>
 			</div>
 		</div>
+
+		<section
+			v-if="pendingAnonymousProjects.length && currentStudent"
+			class="browser-project-import site-surface"
+			aria-labelledby="browser-project-import-title"
+		>
+			<div>
+				<h2 id="browser-project-import-title">
+					Projects already saved in this browser
+				</h2>
+				<p>
+					Only add them if they are yours. They will be copied to
+					<strong>{{ currentStudent.username }}</strong
+					>'s account.
+				</p>
+				<p
+					v-if="anonymousImportError"
+					class="browser-project-import__error"
+					role="alert"
+				>
+					{{ anonymousImportError }}
+				</p>
+			</div>
+			<div class="browser-project-import__actions">
+				<button
+					class="site-button site-button--primary"
+					:disabled="isImportingAnonymousProjects"
+					type="button"
+					@click="importAnonymousProjects"
+				>
+					{{
+						isImportingAnonymousProjects
+							? "Saving…"
+							: "Save to my account"
+					}}
+				</button>
+				<button
+					class="site-button site-button--secondary"
+					:disabled="isImportingAnonymousProjects"
+					type="button"
+					@click="keepAnonymousProjectsSeparate"
+				>
+					Keep separate
+				</button>
+			</div>
+		</section>
 
 		<div v-if="isLoading" class="python-ide-loading site-surface">
 			Loading Python workspace...
@@ -5230,6 +5986,40 @@ onBeforeUnmount(() => {
 					</div>
 				</div>
 
+				<section
+					v-if="selectedVisibleReview"
+					class="visible-review-panel"
+					aria-label="Julio's review copy"
+				>
+					<div class="visible-review-header">
+						<div>
+							<p class="visible-review-eyebrow">
+								Julio's review copy
+							</p>
+							<h2>{{ selectedVisibleReview.title }}</h2>
+							<p v-if="selectedVisibleReview.note">
+								{{ selectedVisibleReview.note }}
+							</p>
+						</div>
+						<label v-if="visibleReviewFiles.length">
+							<span>Review file</span>
+							<select v-model="selectedReviewFileName">
+								<option
+									v-for="file in visibleReviewFiles"
+									:key="file.name"
+									:value="file.name"
+								>
+									{{ file.name }}
+								</option>
+							</select>
+						</label>
+					</div>
+					<pre
+						v-if="activeVisibleReviewFile"
+						class="visible-review-code"
+					><code>{{ activeVisibleReviewFileContent }}</code></pre>
+				</section>
+
 				<div
 					class="ide-grid"
 					:class="{ 'ide-grid--drawing': usesDrawingCanvas }"
@@ -5369,6 +6159,8 @@ onBeforeUnmount(() => {
 								/>
 								<iframe
 									v-else-if="artifact.srcdoc"
+									:csp="runtimeArtifactContentSecurityPolicy"
+									credentialless
 									referrerpolicy="no-referrer"
 									sandbox="allow-scripts"
 									:srcdoc="artifact.srcdoc"
@@ -5532,6 +6324,38 @@ html.dark .python-ide-status {
 
 html.dark .python-ide-status strong {
 	color: #f8fbff;
+}
+
+.browser-project-import {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 1rem 1.1rem;
+	border-color: rgba(13, 148, 136, 0.32);
+}
+
+.browser-project-import h2 {
+	margin: 0;
+	color: var(--color-ink-strong);
+	font-size: 1rem;
+}
+
+.browser-project-import p {
+	margin-top: 0.25rem;
+	color: var(--color-ink-soft);
+	line-height: 1.5;
+}
+
+.browser-project-import__actions {
+	display: flex;
+	flex: 0 0 auto;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+}
+
+.browser-project-import__error {
+	color: var(--color-error-text) !important;
 }
 
 html.dark
@@ -6703,6 +7527,19 @@ html.dark .editor-shortcuts ul {
 
 	.python-ide-status {
 		min-width: 0;
+	}
+
+	.browser-project-import {
+		align-items: stretch;
+		flex-direction: column;
+	}
+
+	.browser-project-import__actions {
+		width: 100%;
+	}
+
+	.browser-project-import__actions .site-button {
+		flex: 1 1 12rem;
 	}
 
 	.turtle-canvas:not(.turtle-canvas--game) {

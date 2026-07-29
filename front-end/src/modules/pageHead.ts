@@ -1,7 +1,7 @@
 export const SITE_TITLE = "Classes with Julio";
 export const SITE_URL = "https://cs.avasan.org";
 export const SITE_DESCRIPTION =
-	"Free Scratch, Python, and PyGames course materials from grade-school teacher Julio. Students can start learning without creating an account.";
+	"Scratch, Python, and PyGames courses from grade-school teacher Julio.";
 export const INDEX_ROBOTS =
 	"index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1";
 export const NOINDEX_ROBOTS = "noindex,nofollow";

@@ -21,6 +21,9 @@ export interface IPythonProject {
 	courseProjectTitle?: string;
 	starterLabel?: string;
 	starterUrl?: string;
+	importID: string;
+	byteCount: number;
+	deletedAt?: Date;
 	createdAt: Date;
 	updatedAt: Date;
 }

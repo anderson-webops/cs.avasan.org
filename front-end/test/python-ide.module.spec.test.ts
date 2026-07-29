@@ -9,8 +9,10 @@ import {
 	pythonBracketPairIgnoredRanges
 } from "../src/modules/pythonCodeMirror";
 import {
-	clearLocalPythonProjects,
+	acknowledgeLocalPythonProjectRecovery,
+	clearAllStudentPythonProjectRecoveryFromLocalStorage,
 	clearLocalPythonProjectsAsync,
+	createVolatileStudentPythonProjectRecovery,
 	createPythonIdeProject,
 	dataScienceSampleCsv,
 	dataScienceStarterCode,
@@ -29,11 +31,13 @@ import {
 	normalizePythonIdeMode,
 	loadPythonIdeStarterFilesFromGitHub,
 	loadLocalPythonProjects,
+	loadLocalPythonProjectRecoverySnapshot,
 	loadLocalPythonProjectsAsync,
 	normalizePythonFileName,
 	pythonIdeModeForCourseId,
 	pythonIdeProjectToPayload,
 	pythonIdeStorageKey,
+	purgeAllStudentPythonProjectRecovery,
 	resolvePythonIdeActiveFileName,
 	saveLocalPythonProjects,
 	saveLocalPythonProjectsAsync,
@@ -52,7 +56,6 @@ import {
 	pythonIdeAssetLookupAliases,
 	pythonIdeAssetCandidateNames,
 	pythonIdeCourseAssetsManifestUrl,
-	pythonIdeCourseAssetsZipUrl,
 	resetPythonIdeCourseAssetPackCache
 } from "../src/modules/pythonIdeCourseAssets";
 import {
@@ -88,7 +91,13 @@ describe("python IDE project helpers", () => {
 			configurable: true,
 			value: {
 				clear: vi.fn(() => storage.clear()),
+				get length() {
+					return storage.size;
+				},
 				getItem: vi.fn((key: string) => storage.get(key) ?? null),
+				key: vi.fn(
+					(index: number) => [...storage.keys()][index] ?? null
+				),
 				removeItem: vi.fn((key: string) => storage.delete(key)),
 				setItem: vi.fn((key: string, value: string) =>
 					storage.set(key, value)
@@ -529,56 +538,226 @@ describe("python IDE project helpers", () => {
 		);
 	});
 
-	it("clears local Python projects for one storage user only", () => {
-		const firstProject = createPythonIdeProject("python");
-		const secondProject = createPythonIdeProject("data");
+	it("never reads or writes authenticated-owner project storage", async () => {
+		const project = createPythonIdeProject("python");
+		window.localStorage.setItem(
+			pythonIdeStorageKey("student-a"),
+			JSON.stringify([project])
+		);
+		vi.mocked(window.localStorage.getItem).mockClear();
+		vi.mocked(window.localStorage.setItem).mockClear();
 
-		saveLocalPythonProjects([firstProject], "student-a");
-		saveLocalPythonProjects([secondProject], "student-b");
-
-		expect(
-			window.localStorage.getItem(pythonIdeStorageKey("student-a"))
-		).toContain(firstProject.title);
-
-		clearLocalPythonProjects("student-a");
-
+		saveLocalPythonProjects([project], "student-a");
+		expect(window.localStorage.setItem).not.toHaveBeenCalled();
+		expect(window.localStorage.getItem).not.toHaveBeenCalled();
 		expect(loadLocalPythonProjects("student-a")).toEqual([]);
-		expect(loadLocalPythonProjects("student-b")).toHaveLength(1);
-		expect(
-			window.localStorage.getItem(pythonIdeStorageKey("student-b"))
-		).toContain(secondProject.title);
-	});
-
-	it("uses localStorage fallback when IndexedDB is unavailable", async () => {
-		const project = createPythonIdeProject("pgzero");
+		expect(window.localStorage.getItem).not.toHaveBeenCalled();
 
 		await saveLocalPythonProjectsAsync([project], "student-a");
-
-		expect(loadLocalPythonProjects("student-a")).toHaveLength(1);
 		await expect(
 			loadLocalPythonProjectsAsync("student-a")
-		).resolves.toHaveLength(1);
-
-		await clearLocalPythonProjectsAsync("student-a");
-
-		expect(loadLocalPythonProjects("student-a")).toEqual([]);
+		).resolves.toEqual([]);
+		expect(window.localStorage.setItem).not.toHaveBeenCalled();
+		expect(window.localStorage.getItem).not.toHaveBeenCalled();
 	});
 
-	it("keeps newer localStorage snapshots ahead of stale IndexedDB records", () => {
+	it("purges every legacy owner record while preserving anonymous work", async () => {
+		const anonymousProject = createPythonIdeProject("python");
+		const anonymousKey = pythonIdeStorageKey(null);
+		const claimKey =
+			"classes-python-ide-projects:anonymous-claim:local-claimed";
+		const guestEditorKey =
+			"classes-python-ide-editor-view-state:guest";
+		for (const key of [
+			pythonIdeStorageKey("student-a"),
+			`${pythonIdeStorageKey("student-a")}:recovery:old-tab`,
+			pythonIdeStorageKey("student-b"),
+			"classes-python-ide-editor-view-state:student-a",
+			"cs-avasan-python-ide-editor-state:student-b"
+		]) {
+			window.localStorage.setItem(key, "legacy owner data");
+		}
+		window.localStorage.setItem(
+			anonymousKey,
+			JSON.stringify([anonymousProject])
+		);
+		window.localStorage.setItem(
+			claimKey,
+			JSON.stringify({ studentID: "student-a" })
+		);
+		window.localStorage.setItem(guestEditorKey, "anonymous view state");
+
+		clearAllStudentPythonProjectRecoveryFromLocalStorage();
+		await purgeAllStudentPythonProjectRecovery();
+
+		expect(loadLocalPythonProjects(null)).toEqual([anonymousProject]);
+		expect(window.localStorage.getItem(claimKey)).not.toBeNull();
+		expect(window.localStorage.getItem(guestEditorKey)).toBe(
+			"anonymous view state"
+		);
+		expect(
+			[...Array(window.localStorage.length).keys()]
+				.map(index => window.localStorage.key(index))
+				.filter(Boolean)
+		).not.toContain(pythonIdeStorageKey("student-a"));
+		expect(
+			[...Array(window.localStorage.length).keys()]
+				.map(index => window.localStorage.key(index))
+				.filter(key => key?.includes("student-"))
+		).toEqual([]);
+	});
+
+	it("uses localStorage fallback for anonymous work when IndexedDB is unavailable", async () => {
+		const project = createPythonIdeProject("pgzero");
+
+		await saveLocalPythonProjectsAsync([project], null);
+
+		expect(loadLocalPythonProjects(null)).toHaveLength(1);
+		await expect(
+			loadLocalPythonProjectsAsync(null)
+		).resolves.toHaveLength(1);
+
+		await clearLocalPythonProjectsAsync(null);
+
+		expect(loadLocalPythonProjects(null)).toEqual([]);
+	});
+
+	it("selects the latest local or IndexedDB recovery revision", () => {
 		const moduleSource = readFileSync(
 			resolve(__dirname, "../src/modules/pythonIde.ts"),
 			"utf8"
 		);
 
 		expect(moduleSource).toContain("function pythonIdeProjectSetUpdatedAt");
-		expect(moduleSource).toContain("const storedProjectsUpdatedAt");
-		expect(moduleSource).toContain("const legacyProjectsUpdatedAt");
+		expect(moduleSource).toContain("function recordUpdatedAt");
 		expect(moduleSource).toContain(
-			"if (legacyProjectsUpdatedAt > storedProjectsUpdatedAt)"
+			"function chooseLatestPythonIdeStorageRecord"
 		);
 		expect(moduleSource).toContain(
-			"await saveLocalPythonProjectsAsync(legacyProjects, userID);"
+			"recordUpdatedAt(second) >= recordUpdatedAt(first)"
 		);
+	});
+
+	it("does not acknowledge a newer anonymous recovery write from the same tab", async () => {
+		const firstProject = createPythonIdeProject("python");
+		firstProject.title = "Before request";
+		await saveLocalPythonProjectsAsync([firstProject], null);
+		const recoverySnapshot =
+			await loadLocalPythonProjectRecoverySnapshot(null);
+
+		const newerProject = {
+			...firstProject,
+			title: "Changed while request was running",
+			updatedAt: new Date(Date.now() + 1_000).toISOString()
+		};
+		await saveLocalPythonProjectsAsync([newerProject], null);
+		await acknowledgeLocalPythonProjectRecovery(recoverySnapshot);
+
+		expect(loadLocalPythonProjects(null)).toEqual([newerProject]);
+	});
+
+	it("retains only the exact student in volatile memory", () => {
+		const recovery = createVolatileStudentPythonProjectRecovery();
+		const studentAProject = createPythonIdeProject("python");
+		studentAProject.files[0]!.content = "student A work";
+
+		recovery.replace("student-a", [studentAProject]);
+		studentAProject.files[0]!.content = "mutated after snapshot";
+		expect(recovery.forStudent("student-a")[0]?.files[0]?.content).toBe(
+			"student A work"
+		);
+		expect(recovery.hasUnsynced("student-a")).toBe(true);
+		expect(recovery.hasAnyUnsynced()).toBe(true);
+
+		recovery.retainAcrossOwnerChange(null);
+		expect(recovery.has("student-a")).toBe(true);
+		recovery.retainAcrossOwnerChange("student-a");
+		expect(recovery.has("student-a")).toBe(true);
+		recovery.retainAcrossOwnerChange("student-b");
+		expect(recovery.forStudent("student-a")).toEqual([]);
+
+		const cleanSuspension = createVolatileStudentPythonProjectRecovery();
+		cleanSuspension.replace("student-a", [studentAProject], {
+			unsynced: false
+		});
+		expect(cleanSuspension.has("student-a")).toBe(true);
+		expect(cleanSuspension.hasUnsynced("student-a")).toBe(false);
+		expect(cleanSuspension.hasAnyUnsynced()).toBe(false);
+		cleanSuspension.acknowledge("student-a");
+		expect(cleanSuspension.has("student-a")).toBe(false);
+	});
+
+	it("purges every IndexedDB owner record without deleting anonymous records", async () => {
+		const anonymousKey = pythonIdeStorageKey(null);
+		const claimKey =
+			"classes-python-ide-projects:anonymous-claim:local-claimed";
+		const records = new Set<string>([
+			anonymousKey,
+			claimKey,
+			pythonIdeStorageKey("student-a"),
+			`${pythonIdeStorageKey("student-a")}:recovery:old-tab`,
+			pythonIdeStorageKey("student-b")
+		]);
+		const database = {
+			objectStoreNames: { contains: () => true },
+			onversionchange: null,
+			close: vi.fn(),
+			transaction: vi.fn(() => {
+				const transaction = {
+					error: null,
+					onabort: null as (() => void) | null,
+					oncomplete: null as (() => void) | null,
+					onerror: null as (() => void) | null,
+					objectStore: null as unknown as () => IDBObjectStore
+				};
+				const store = {
+					delete: vi.fn((key: IDBValidKey) => {
+						records.delete(String(key));
+						return {} as IDBRequest;
+					}),
+					getAllKeys: vi.fn(() => {
+						const request = {
+							error: null,
+							result: [...records],
+							onerror: null as (() => void) | null,
+							onsuccess: null as (() => void) | null
+						};
+						window.setTimeout(() => {
+							request.onsuccess?.();
+							window.setTimeout(
+								() => transaction.oncomplete?.(),
+								0
+							);
+						}, 0);
+						return request as unknown as IDBRequest<IDBValidKey[]>;
+					})
+				};
+				transaction.objectStore = () =>
+					store as unknown as IDBObjectStore;
+				return transaction as unknown as IDBTransaction;
+			})
+		};
+		const openRequest = {
+			error: null,
+			result: database,
+			onblocked: null as (() => void) | null,
+			onerror: null as (() => void) | null,
+			onsuccess: null as (() => void) | null,
+			onupgradeneeded: null as (() => void) | null
+		};
+		Object.defineProperty(window, "indexedDB", {
+			configurable: true,
+			value: {
+				open: vi.fn(() => {
+					window.setTimeout(() => openRequest.onsuccess?.(), 0);
+					return openRequest;
+				})
+			}
+		});
+
+		await purgeAllStudentPythonProjectRecovery();
+
+		expect([...records]).toEqual([anonymousKey, claimKey]);
 	});
 
 	it("keeps IndexedDB wired as the primary local project store", () => {
@@ -596,8 +775,9 @@ describe("python IDE project helpers", () => {
 		);
 		expect(moduleSource).toContain("await writeIndexedDbPythonProjects");
 		expect(moduleSource).toContain(
-			"saveLegacyLocalPythonProjectsMirror(projects, userID);"
+			"saveLegacyLocalPythonProjectsMirror(record, userID);"
 		);
+		expect(moduleSource).toContain("plainPythonIdeProjectsSnapshot(projects)");
 	});
 
 	it("labels supported runtime modes", () => {
@@ -645,6 +825,10 @@ describe("python IDE project helpers", () => {
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
 			"utf8"
 		);
+		const sandboxSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeSandbox.ts"),
+			"utf8"
+		);
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
@@ -654,8 +838,12 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("def ontimer(function, t=0):");
 		expect(runtimeSource).toContain("_bridge.scheduleTimer");
 		expect(runtimeSource).toContain("def _release_all_callbacks():");
-		expect(runtimeSource).toContain("releaseRuntimeCallbackRegistries");
 		expect(runtimeSource).toContain("releasePythonIdeRuntimeCallbacks");
+		expect(sandboxSource).toContain("callbackRegistry");
+		expect(sandboxSource).toContain('method === "scheduleTimer"');
+		expect(sandboxSource).toContain(
+			"releasePythonIdeSandboxCallbacks"
+		);
 		expect(pageSource).toContain("scheduleTimer(delayMs: number");
 		expect(pageSource).toContain("clearTurtleTimers()");
 		expect(pageSource).toContain("let turtleTimerGeneration = 0;");
@@ -1509,7 +1697,20 @@ describe("python IDE project helpers", () => {
 		const iframeSource = pageSource.slice(iframeStart, iframeEnd);
 
 		expect(pageSource).toContain('artifact.mimeType === "text/html"');
+		expect(pageSource).toContain(
+			"connect-src 'none';"
+		);
+		expect(pageSource).toContain(
+			"form-action 'none';"
+		);
+		expect(pageSource).toContain(
+			'http-equiv="Content-Security-Policy"'
+		);
 		expect(iframeSource).toContain('v-else-if="artifact.srcdoc"');
+		expect(iframeSource).toContain(
+			':csp="runtimeArtifactContentSecurityPolicy"'
+		);
+		expect(iframeSource).toContain("credentialless");
 		expect(iframeSource).toContain('referrerpolicy="no-referrer"');
 		expect(iframeSource).toContain('sandbox="allow-scripts"');
 		expect(iframeSource).not.toContain("allow-same-origin");
@@ -1548,40 +1749,25 @@ describe("python IDE project helpers", () => {
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
 			"utf8"
 		);
+		const sandboxSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeSandbox.ts"),
+			"utf8"
+		);
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
-		const captureIndex = runtimeSource.indexOf(
-			"options.onProjectFilesUpdate?.(await captureProjectTextFiles(pyodide));"
-		);
-		const gameLoopIndex = runtimeSource.indexOf(
-			"options.gameBridge.consumeLoopRequest();"
-		);
-
 		expect(runtimeSource).toContain("shouldStop?: () => boolean;");
-		expect(runtimeSource).toContain("function throwIfRunStopped");
-		expect(runtimeSource).toContain(
-			"Python run stopped before post-run work completed."
+		expect(sandboxSource).toContain("if (options.shouldStop?.())");
+		expect(sandboxSource).toContain(
+			'session.destroy("Python run stopped.")'
 		);
-		expect(captureIndex).toBeGreaterThan(0);
-		expect(
-			runtimeSource.lastIndexOf(
-				"throwIfRunStopped(options);",
-				captureIndex
-			)
-		).toBeGreaterThan(0);
-		expect(gameLoopIndex).toBeGreaterThan(0);
-		expect(
-			runtimeSource.lastIndexOf(
-				"throwIfRunStopped(options);",
-				gameLoopIndex
-			)
-		).toBeGreaterThan(captureIndex);
-		expect(runtimeSource).toContain(
-			"const runContinuously = options.gameBridge.consumeLoopRequest();"
+		expect(sandboxSource).toContain(
+			"options.onProjectFilesUpdate?.(result.files)"
 		);
-		expect(runtimeSource).toContain("{ continuous: runContinuously }");
+		expect(sandboxSource).toContain(
+			"{ continuous: result.continuous }"
+		);
 		expect(pageSource).toContain(
 			"shouldStop: () => shouldStopPythonIdeRun(runID, project._id)"
 		);
@@ -1642,9 +1828,13 @@ describe("python IDE project helpers", () => {
 		expect(stopSource).toContain("isRunning.value = false;");
 	});
 
-	it("clears stale main-thread Python globals before Turtle and game runs", () => {
+	it("clears stale isolated Python globals before Turtle and game runs", () => {
 		const runtimeSource = readFileSync(
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+		const sandboxSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeSandbox.ts"),
 			"utf8"
 		);
 		const inputBootstrapStart = runtimeSource.indexOf(
@@ -1679,9 +1869,14 @@ describe("python IDE project helpers", () => {
 			'classes_main.__dict__["__name__"] = "__main__"'
 		);
 		expect(inputBootstrapSource).toContain("_classes_reset_main_namespace()");
-		expect(runSource).toContain('__main__.__dict__["__file__"] =');
-		expect(runSource).toContain("__classes_compile_student_source(");
-		expect(runSource).toContain("__main__.__dict__,");
+		expect(runSource).toContain("runPythonProjectInSandbox(");
+		expect(sandboxSource).toContain(
+			'__main__.__dict__["__file__"] ='
+		);
+		expect(sandboxSource).toContain(
+			"__classes_compile_student_source("
+		);
+		expect(sandboxSource).toContain("__main__.__dict__,");
 	});
 
 	it("guards PyGame Zero bridge calls to the active run", () => {
@@ -1914,17 +2109,13 @@ describe("python IDE project helpers", () => {
 		expect(getGameImageEntrySource).toContain("requestGameTick();");
 	});
 
-	it("runs plain Python projects in a terminable Pyodide worker", () => {
+	it("runs plain Python projects in the terminable opaque runtime worker", () => {
 		const runtimeSource = readFileSync(
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
 			"utf8"
 		);
-		const workerSource = readFileSync(
-			resolve(__dirname, "../src/workers/pythonIdePlainWorker.ts"),
-			"utf8"
-		);
-		const runtimeHintsSource = readFileSync(
-			resolve(__dirname, "../src/modules/pythonIdeRuntimeHints.ts"),
+		const sandboxSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeSandbox.ts"),
 			"utf8"
 		);
 		const pageSource = readFileSync(
@@ -1932,143 +2123,43 @@ describe("python IDE project helpers", () => {
 			"utf8"
 		);
 
-		expect(runtimeSource).toContain('if (options.mode === "python")');
-		expect(runtimeSource).toContain(
-			"return runPlainPythonProjectInWorker(options);"
-		);
-		expect(runtimeSource).toContain('script.crossOrigin = "anonymous";');
-		expect(runtimeSource).toContain(
-			'new URL("../workers/pythonIdePlainWorker.ts", import.meta.url)'
-		);
+		expect(runtimeSource).toContain("runPythonProjectInSandbox(");
+		expect(runtimeSource).not.toContain("runPlainPythonProjectInWorker");
 		expect(runtimeSource).toContain(
 			"export function stopPythonIdeRuntimeRun"
 		);
-		expect(runtimeSource).toContain("terminatePlainPythonWorker()");
 		expect(runtimeSource).toContain("function clonePlainPythonIdeFiles");
 		expect(runtimeSource).toContain("files: clonePlainPythonIdeFiles");
 		expect(pageSource).toContain("stopLoadedPythonRuntimeRun()");
-		expect(pageSource).toContain(
-			"Plain Python worker is being terminated."
+		expect(sandboxSource).toContain("new Worker(");
+		expect(sandboxSource).toContain("worker.terminate()");
+		expect(sandboxSource).toContain(
+			'iframe.setAttribute("sandbox", "allow-scripts")'
 		);
-		expect(runtimeHintsSource).toContain("export const PYODIDE_MODULE_SRC");
-		expect(workerSource).toContain("PYODIDE_MODULE_SRC");
-		expect(workerSource).not.toContain("const PYODIDE_MODULE_SRC =");
-		expect(workerSource).toContain("loadPackagesFromImports");
-		expect(workerSource).toContain("setStdout");
-		expect(workerSource).toContain("setStderr");
-		expect(workerSource).toContain("def __classes_run_active_file():");
-		expect(workerSource).toContain(
-			"for __classes_name in list(__classes_main.__dict__):"
-		);
-		expect(workerSource).toContain(
-			"del __classes_main.__dict__[__classes_name]"
-		);
-		expect(workerSource).toContain(
+		expect(sandboxSource).toContain("const plainBootstrap =");
+		expect(sandboxSource).toContain(
 			'__classes_main.__dict__["__name__"] = "__main__"'
 		);
-		expect(workerSource).toContain(
+		expect(sandboxSource).toContain(
 			'__classes_main.__dict__["__file__"] = __classes_active_file'
 		);
-		expect(workerSource).toContain("captureProjectTextFiles");
-		expect(workerSource).toContain("const capturedFiles = files.filter(");
-		expect(workerSource).toContain(
-			"for (const file of capturedFiles) lastProjectFileNames.add(file.name);"
-		);
-		expect(workerSource).toContain(
-			'import {\n\tisPythonIdeTextFile,\n\tisValidPythonFileName\n} from "@/modules/pythonIde";'
-		);
-		expect(workerSource).toContain("function decodeBase64File");
-		expect(workerSource).toContain("function writeProjectFile");
-		expect(workerSource).toContain("function validProjectFiles");
-		expect(workerSource).toContain('file.encoding === "base64"');
-		expect(workerSource).toContain(
-			"const writableFiles = validProjectFiles(files);"
-		);
-		expect(workerSource).toContain("isValidPythonFileName(file.name)");
-		expect(workerSource).toContain("__classes_text_suffixes");
-		expect(workerSource).toContain("isPythonIdeTextFile(file.name)");
-		expect(workerSource).toContain("function isActiveRun");
-		expect(workerSource).toContain("if (!isActiveRun(id)) return;");
-		expect(workerSource).toContain("if (!isActiveRun(request.id)) return;");
-		expect(workerSource).toContain(
-			'import { pythonIdeImportedTopLevelModules } from "@/modules/pythonImportScanner";'
-		);
-		expect(workerSource).toContain(
-			"const loadedPlainPythonImportModules = new Set<string>();"
-		);
-		expect(workerSource).toContain(
-			"function plainPythonPackageScanModules"
-		);
-		expect(workerSource).toContain(
-			"const validFiles = validProjectFiles(files);"
-		);
-		expect(workerSource).toContain("projectModuleNames(validFiles)");
-		expect(workerSource).toContain("const projectModulesToClear =");
-		expect(workerSource).toContain(
-			"...[...lastProjectFileNames].map(name => ({ name }))"
-		);
-		expect(workerSource).toContain("projectModulesToClear");
-		expect(workerSource).toContain(
-			"pythonIdeImportedTopLevelModules(validFiles)"
-		);
-		expect(workerSource).toContain(
-			"!loadedPlainPythonImportModules.has(moduleName)"
-		);
-		expect(workerSource).toContain(
-			"loadedPlainPythonImportModules.add(moduleName)"
-		);
+		expect(sandboxSource).toContain("captureFiles");
+		expect(sandboxSource).toContain("loadPackagesFromImports");
 	});
 
-	it("allows Pyodide runtime loading to be retried after script failures", () => {
-		const runtimeSource = readFileSync(
-			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+	it("uses a fresh isolated realm after runtime loading failures", () => {
+		const sandboxSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeSandbox.ts"),
 			"utf8"
 		);
-		const loadScriptStart = runtimeSource.indexOf("function loadScript");
-		const loadScriptSource = runtimeSource.slice(
-			loadScriptStart,
-			runtimeSource.indexOf(
-				"export function warmPythonRuntime",
-				loadScriptStart
-			)
-		);
-		const loadRuntimeStart = runtimeSource.indexOf(
-			"async function loadRuntime"
-		);
-		const loadRuntimeSource = runtimeSource.slice(
-			loadRuntimeStart,
-			runtimeSource.indexOf(
-				"const releaseRuntimeCallbackRegistriesSource",
-				loadRuntimeStart
-			)
-		);
 
-		expect(loadScriptSource).toContain(
-			"existing.dataset.classesPythonIdeLoadState === \"error\""
+		expect(sandboxSource).toContain(
+			'activeSandbox?.destroy("Python runtime replaced by a new run.")'
 		);
-		expect(loadScriptSource).toContain(
-			"existing.dataset.classesPythonIdeLoadState === \"loaded\""
-		);
-		expect(loadScriptSource).toContain("existing.remove();");
-		expect(loadScriptSource).toContain(
-			"script.dataset.classesPythonIdeLoadState = \"loading\";"
-		);
-		expect(loadScriptSource).toContain(
-			"script.dataset.classesPythonIdeLoadState = \"error\";"
-		);
-		expect(loadScriptSource).toContain("script.remove();");
-		expect(loadScriptSource).toContain(
-			'existing.addEventListener(\n\t\t\t\t\t"error"'
-		);
-		expect(runtimeSource).toContain(
-			"function removeUninitializedPyodideScript"
-		);
-		expect(loadRuntimeSource).toContain("const runtimePromise = (async () =>");
-		expect(loadRuntimeSource).toContain("pyodidePromise = runtimePromise;");
-		expect(loadRuntimeSource).toContain("runtimePromise.catch(() =>");
-		expect(loadRuntimeSource).toContain("pyodidePromise = null;");
-		expect(loadRuntimeSource).toContain(
-			"removeUninitializedPyodideScript();"
+		expect(sandboxSource).toContain("const iframe = document.createElement");
+		expect(sandboxSource).toContain("iframe.remove()");
+		expect(sandboxSource).toContain(
+			"const worker = new Worker("
 		);
 	});
 
@@ -2204,9 +2295,13 @@ describe("python IDE project helpers", () => {
 		expect(runtimeSource).toContain("sidebar = _Container");
 	});
 
-	it("caches runtime package setup after successful Pyodide installs", () => {
+	it("loads packages only inside the isolated worker", () => {
 		const runtimeSource = readFileSync(
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
+			"utf8"
+		);
+		const sandboxSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeSandbox.ts"),
 			"utf8"
 		);
 		const scannerSource = readFileSync(
@@ -2214,34 +2309,15 @@ describe("python IDE project helpers", () => {
 			"utf8"
 		);
 
-		expect(runtimeSource).toContain(
-			"const loadedBrowserShimPackages = new Set<string>();"
+		expect(runtimeSource).toContain("runPythonProjectInSandbox");
+		expect(runtimeSource).not.toContain("loadPackagesFromImports");
+		expect(sandboxSource).toContain("const loadPackages = async");
+		expect(sandboxSource).toContain("loadPackagesFromImports");
+		expect(sandboxSource).toContain(
+			'await pyodide.loadPackage("micropip")'
 		);
-		expect(runtimeSource).toContain(
-			"const installedMicropipPackages = new Set<string>();"
-		);
-		expect(runtimeSource).toContain(
-			"const loadedPyodideImportModules = new Set<string>();"
-		);
-		expect(runtimeSource).toContain("function loadPyodideImportPackages");
-		expect(runtimeSource).toContain("loadedPyodideImportModules.has");
-		expect(runtimeSource).toContain("loadedPyodideImportModules.add");
-		expect(runtimeSource).toContain(
-			'onOutput("system", `Loading Python packages: ${modules.join(", ")}`);'
-		);
-		expect(runtimeSource).toContain("let micropipLoaded = false;");
-		expect(runtimeSource).toContain(
-			"!installedMicropipPackages.has(packageName)"
-		);
-		expect(runtimeSource).toContain("if (!micropipLoaded)");
-		expect(runtimeSource).toContain(
-			"installedMicropipPackages.add(packageName)"
-		);
-		expect(runtimeSource).toContain(
-			'loadedBrowserShimPackages.has("numpy")'
-		);
-		expect(runtimeSource).toContain(
-			'loadedBrowserShimPackages.add("numpy")'
+		expect(sandboxSource).toContain(
+			'await pyodide.loadPackage("numpy")'
 		);
 		expect(runtimeSource).toContain('from "@/modules/pythonImportScanner"');
 		expect(scannerSource).toContain(
@@ -2250,42 +2326,19 @@ describe("python IDE project helpers", () => {
 	});
 
 	it("skips standard-library imports before runtime package setup", () => {
-		const runtimeSource = readFileSync(
-			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
-			"utf8"
-		);
-		const workerSource = readFileSync(
-			resolve(__dirname, "../src/workers/pythonIdePlainWorker.ts"),
+		const sandboxSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeSandbox.ts"),
 			"utf8"
 		);
 
-		expect(runtimeSource).toContain(
-			'import { pythonStandardLibraryModules } from "@/modules/pythonStandardLibraryModules";'
+		expect(sandboxSource).toContain(
+			'getattr(sys, "stdlib_module_names", [])'
 		);
-		expect(runtimeSource).toContain("standardLibraryModules: Set<string>");
-		expect(runtimeSource).toContain(
-			"!standardLibraryModules.has(moduleName)"
+		expect(sandboxSource).toContain(
+			"!standardLibrary.has(name)"
 		);
-		expect(runtimeSource).toContain(
-			"const standardLibraryModules = await pythonStandardLibraryModules(pyodide);"
-		);
-		expect(runtimeSource).toContain(
-			"packageScanModules(\n\t\tfiles,\n\t\timportedModules,\n\t\tstandardLibraryModules\n\t)"
-		);
-		expect(runtimeSource).toContain(
-			"await loadPyodideImportPackages(\n\t\tpyodide,\n\t\toptions.files,\n\t\timportedModules,\n\t\toptions.onOutput\n\t);"
-		);
-		expect(workerSource).toContain(
-			'import { pythonStandardLibraryModules } from "@/modules/pythonStandardLibraryModules";'
-		);
-		expect(workerSource).toContain("standardLibraryModules: Set<string>");
-		expect(workerSource).toContain(
-			"!standardLibraryModules.has(moduleName)"
-		);
-		expect(workerSource).toContain(
-			"const modules = plainPythonPackageScanModules("
-		);
-		expect(workerSource).toContain("files,\n\t\tstandardLibraryModules");
+		expect(sandboxSource).toContain("!localModules.has(name)");
+		expect(sandboxSource).toContain("!micropip.has(name)");
 	});
 
 	it("loads the standard-library module list from Pyodide once", async () => {
@@ -2355,65 +2408,46 @@ describe("python IDE project helpers", () => {
 		).toEqual(["main", "helper_tools", "package", "package.util"]);
 	});
 
-	it("clears stale project files and cached modules before each run", () => {
+	it("starts each run in a fresh project filesystem and module realm", () => {
 		const runtimeSource = readFileSync(
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
 			"utf8"
 		);
-		const captureStart = runtimeSource.indexOf(
-			"async function captureProjectTextFiles"
-		);
-		const captureSource = runtimeSource.slice(
-			captureStart,
-			runtimeSource.indexOf("function packageScanModules", captureStart)
+		const sandboxSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeSandbox.ts"),
+			"utf8"
 		);
 
-		expect(runtimeSource).toContain("lastProjectFileNames");
-		expect(runtimeSource).toContain("function syncProjectFiles");
-		expect(runtimeSource).toContain(
-			"const writableFiles = files.filter(file =>"
+		expect(runtimeSource).toContain("pythonIdeProjectModuleNames");
+		expect(sandboxSource).toContain(
+			'activeSandbox?.destroy("Python runtime replaced by a new run.")'
 		);
-		expect(runtimeSource).toContain("isValidPythonFileName(file.name)");
-		expect(runtimeSource).toContain("safeUnlink(pyodide");
-		expect(runtimeSource).toContain(
+		expect(sandboxSource).toContain("const worker = new Worker(");
+		expect(sandboxSource).toContain(
 			"sys.modules.pop(__classes_module_name, None)"
 		);
-		expect(captureSource).toContain(
-			"const capturedFiles = files.filter("
-		);
-		expect(captureSource).toContain(
-			"for (const file of capturedFiles) lastProjectFileNames.add(file.name);"
-		);
+		expect(sandboxSource).toContain("for (const file of packet.files)");
 	});
 
-	it("writes browser runtime shims once per bootstrap version", () => {
+	it("writes browser runtime shims inside each isolated realm", () => {
 		const runtimeSource = readFileSync(
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
 			"utf8"
 		);
-		const writeRuntimeShimsStart = runtimeSource.indexOf(
-			"function writeRuntimeShims"
-		);
-		const writeRuntimeShimsSource = runtimeSource.slice(
-			writeRuntimeShimsStart,
-			runtimeSource.indexOf(
-				"export async function runPythonProject",
-				writeRuntimeShimsStart
-			)
+		const sandboxSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeSandbox.ts"),
+			"utf8"
 		);
 
 		expect(runtimeSource).toContain(
-			'let runtimeShimsWrittenForBootstrapVersion = "";'
+			"function pythonIdeSandboxRuntimeFiles"
 		);
-		expect(writeRuntimeShimsSource).toContain(
-			"runtimeShimsWrittenForBootstrapVersion ==="
+		expect(runtimeSource).toContain("runtimeFiles:");
+		expect(sandboxSource).toContain(
+			"for (const file of packet.runtimeFiles)"
 		);
-		expect(writeRuntimeShimsSource).toContain(
-			"PYTHON_IDE_RUNTIME_BOOTSTRAP_VERSION"
-		);
-		expect(writeRuntimeShimsSource).toContain("return;");
-		expect(writeRuntimeShimsSource).toContain(
-			"runtimeShimsWrittenForBootstrapVersion ="
+		expect(sandboxSource).toContain(
+			"packet.runtimeFiles.map(file => file.name)"
 		);
 	});
 
@@ -2522,29 +2556,26 @@ describe("python IDE project helpers", () => {
 		);
 	});
 
-	it("clears browser-owned runtime shim modules before each run", () => {
+	it("keeps runtime shim modules confined to the fresh sandbox packet", () => {
 		const runtimeSource = readFileSync(
 			resolve(__dirname, "../src/modules/pythonIdeRuntime.ts"),
 			"utf8"
 		);
+		const sandboxSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeSandbox.ts"),
+			"utf8"
+		);
 
 		expect(runtimeSource).toContain("const PYTHON_IDE_RUNTIME_MODULES");
-		expect(runtimeSource).toContain("function clearRuntimeShimModules");
-		expect(runtimeSource).toContain("clearRuntimeShimModules(pyodide)");
+		expect(runtimeSource).toContain(
+			"runtimeModules: PYTHON_IDE_RUNTIME_MODULES"
+		);
 		expect(runtimeSource).toContain('"_classes_pgzero"');
 		expect(runtimeSource).toContain('"turtle"');
-		expect(runtimeSource).toContain(
-			"sys.modules.pop(__classes_runtime_name, None)"
+		expect(sandboxSource).toContain(
+			"...packet.runtimeModules"
 		);
-		expect(runtimeSource).toContain('"Actor"');
-		expect(runtimeSource).toContain('"show_chart"');
-		expect(runtimeSource).toContain('"__classes_loop_guard"');
-		expect(runtimeSource).toContain(
-			'__classes_builtin_name.startswith("__classes_")'
-		);
-		expect(runtimeSource).toContain(
-			"delattr(builtins, __classes_builtin_name)"
-		);
+		expect(sandboxSource).toContain("const worker = new Worker(");
 	});
 
 	it("keeps imported Turtle loop bodies in the importing module namespace", () => {
@@ -2583,6 +2614,10 @@ describe("python IDE project helpers", () => {
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
 		);
+		const sandboxSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeSandbox.ts"),
+			"utf8"
+		);
 		const mergeStart = pageSource.indexOf(
 			"function mergeRuntimeProjectFiles"
 		);
@@ -2591,12 +2626,13 @@ describe("python IDE project helpers", () => {
 			pageSource.indexOf("function requestedCourseProject", mergeStart)
 		);
 
-		expect(runtimeSource).toContain(
-			"async function captureProjectTextFiles"
-		);
-		expect(runtimeSource).toContain("__classes_reserved_files");
+		expect(sandboxSource).toContain("const captureFiles = async");
+		expect(sandboxSource).toContain("__classes_excluded_names");
+		expect(sandboxSource).toContain("validatedRuntimeResultFiles");
 		expect(runtimeSource).toContain("isValidPythonFileName(file.name)");
-		expect(runtimeSource).toContain("options.onProjectFilesUpdate?.");
+		expect(sandboxSource).toContain(
+			"options.onProjectFilesUpdate?.(result.files)"
+		);
 		expect(pageSource).toContain("function mergeRuntimeProjectFiles");
 		expect(pageSource).toContain("onProjectFilesUpdate: files =>");
 		expect(mergeSource).toContain(
@@ -2646,9 +2682,13 @@ describe("python IDE project helpers", () => {
 		);
 
 		expect(pageSource).toContain(
-			"await clearLocalPythonProjectsAsync(storageUserID.value);"
+			"await acknowledgeLocalPythonProjectRecovery("
 		);
-		expect(pageSource).toContain("async function syncProjectsToAccount");
+		expect(pageSource).toContain(
+			"loadCurrentTabPythonProjectRecoverySnapshot("
+		);
+		expect(pageSource).toContain("reconcilePythonIdeRecoveryProjects(");
+		expect(pageSource).toContain("applyPythonIdeRecoveryPlan(");
 		expect(pageSource).toContain(
 			'saveMessage.value = "Synced recovered local edits";'
 		);
@@ -2723,7 +2763,10 @@ describe("python IDE project helpers", () => {
 			"await persistLocalProjects({ quiet: true });"
 		);
 		expect(pageSource).toContain(
-			'message: "Saved locally after sync issue"'
+			'? "Waiting to sync to account"'
+		);
+		expect(pageSource).toContain(
+			"volatileStudentProjectRecovery.replace("
 		);
 		expect(pageSource).toContain(
 			'window.addEventListener("pagehide", flushPendingProjectSave);'
@@ -2744,9 +2787,7 @@ describe("python IDE project helpers", () => {
 			"utf8"
 		);
 
-		expect(pageSource).toContain(
-			'const pythonIdeEditorViewStateStoragePrefix ='
-		);
+		expect(pageSource).toContain("pythonIdeEditorViewStateStoragePrefix");
 		expect(pageSource).toContain(
 			"const codeEditorStateSnapshots = new Map<string, CodeEditorState>();"
 		);
@@ -2889,9 +2930,15 @@ describe("python IDE project helpers", () => {
 		expect(pageSource).toContain("const pendingSaveProjectIDs");
 		expect(pageSource).toContain("const startedUpdatedAt");
 		expect(pageSource).toContain(
-			"? await createRemotePythonIdeProject(payload)"
+			"? await createRemotePythonIdeProject("
+		);
+		expect(pageSource).toContain(
+			"{ expectedUpdatedAt: expectedUpdatedAt! }"
 		);
 		expect(pageSource).toContain("const projectChangedDuringSave");
+		expect(pageSource).toContain(
+			"currentProject.serverUpdatedAt ="
+		);
 		expect(pageSource).toContain("saveQueued = true");
 		expect(pageSource).toContain(
 			"} while (saveQueued || pendingSaveProjectIDs.size);"
@@ -3107,6 +3154,7 @@ describe("python IDE project helpers", () => {
 		const zipBytes = zipSync({
 			"__MACOSX/images/._alien.png": strToU8("ignored"),
 			"images/.DS_Store": strToU8("ignored"),
+			"images/1.png": oneByOnePngBytes,
 			"images/alien.png": oneByOnePngBytes,
 			"music/tune.mp3": new Uint8Array([1, 2, 3]),
 			"sounds/eep.wav": new Uint8Array([4, 5, 6])
@@ -3129,7 +3177,8 @@ describe("python IDE project helpers", () => {
 			pythonIdeAssetCandidateNames("music", "tune.mp3", [".mp3"])
 		);
 
-		expect(pack.assets.size).toBe(3);
+		expect(pack.assets.size).toBe(4);
+		expect(pack.assets.get("images/1.png")?.name).toBe("images/1.png");
 		expect(alien?.mimeType).toBe("image/png");
 		expect(alien?.width).toBe(1);
 		expect(alien?.height).toBe(1);
@@ -3277,7 +3326,52 @@ describe("python IDE project helpers", () => {
 		expect(zipSource).toContain("parsePythonIdeCourseAssetZipBytes");
 	});
 
-	it("prefers the extracted asset manifest before falling back to the same-origin API proxy", async () => {
+	it("pins the build-time asset archive to the reviewed size and SHA-256", () => {
+		const downloadSource = readFileSync(
+			resolve(
+				__dirname,
+				"../scripts/download-python-ide-assets.mjs"
+			),
+			"utf8"
+		);
+
+		expect(downloadSource).toContain('from "node:crypto"');
+		expect(downloadSource).toContain(
+			"const REVIEWED_ASSETS_ZIP_BYTES = 14_676_489;"
+		);
+		expect(downloadSource).toContain(
+			"6ab65a710032ca71cf957bfd56f8b60579d66c94395bbc34fc433be4bb0f92a1"
+		);
+		expect(downloadSource).toContain(
+			'const hash = createHash("sha256");'
+		);
+		expect(downloadSource).toContain("response.body.getReader()");
+		expect(downloadSource).toContain(
+			"byteLength > REVIEWED_ASSETS_ZIP_BYTES"
+		);
+		expect(downloadSource).toContain(
+			'response.headers.get("content-length")'
+		);
+		expect(downloadSource).toContain(
+			"localInfo.cache?.sha256 === REVIEWED_ASSETS_ZIP_SHA256"
+		);
+		expect(downloadSource).toContain(
+			"sha256: REVIEWED_ASSETS_ZIP_SHA256"
+		);
+		expect(downloadSource).toContain(
+			"const ASSET_REQUEST_TIMEOUT_MS = 60_000;"
+		);
+		expect(downloadSource).toContain(
+			"withAssetNetworkTimeout(\n\t\t\t\"asset download\""
+		);
+		expect(downloadSource).toContain(
+			"withAssetNetworkTimeout(\n\t\t\"asset metadata request\""
+		);
+		expect(downloadSource).toContain("fetch(sourceUrl, { signal })");
+		expect(downloadSource).toContain('method: "HEAD",');
+	});
+
+	it("loads the extracted asset manifest without a runtime archive request", async () => {
 		const requestedUrls: string[] = [];
 		const pack = await loadPythonIdeCourseAssetPack({
 			fetcher: async url => {
@@ -3309,7 +3403,31 @@ describe("python IDE project helpers", () => {
 		);
 	});
 
-	it("falls back to the same-origin zip proxy when the extracted manifest is missing", async () => {
+	it("does not use a runtime archive fallback when the manifest is missing", async () => {
+		const requestedUrls: string[] = [];
+
+		await expect(
+			loadPythonIdeCourseAssetPack({
+				fetcher: async url => {
+					requestedUrls.push(url);
+					return {
+						arrayBuffer: async () => new ArrayBuffer(0),
+						ok: false,
+						status: 404
+					};
+				}
+			})
+		).rejects.toThrow("Unable to load PyGame Zero assets");
+
+		expect(requestedUrls).toEqual([pythonIdeCourseAssetsManifestUrl]);
+		const assetSource = readFileSync(
+			resolve(__dirname, "../src/modules/pythonIdeCourseAssets.ts"),
+			"utf8"
+		);
+		expect(assetSource).not.toContain("/api/python-assets/assets.zip");
+	});
+
+	it("accepts an explicitly supplied archive source for module callers", async () => {
 		const zipBytes = zipSync({
 			"images/alien.png": oneByOnePngBytes
 		});
@@ -3325,31 +3443,29 @@ describe("python IDE project helpers", () => {
 					};
 				}
 
-				expect(url).toBe(pythonIdeCourseAssetsZipUrl);
+				expect(url).toBe("/test-assets.zip");
 				return {
 					arrayBuffer: async () => zipBytes.buffer.slice(0),
 					ok: true,
 					status: 200
 				};
-			}
+			},
+			url: "/test-assets.zip"
 		});
 
 		expect(requestedUrls).toEqual([
 			pythonIdeCourseAssetsManifestUrl,
-			pythonIdeCourseAssetsZipUrl
+			"/test-assets.zip"
 		]);
 		expect(pack.assets.has("images/alien.png")).toBe(true);
 	});
 
-	it("falls back to the same-origin zip proxy when the asset manifest has no usable assets", async () => {
-		const zipBytes = zipSync({
-			"images/alien.png": oneByOnePngBytes
-		});
+	it("does not fetch an archive when the asset manifest has no usable assets", async () => {
 		const requestedUrls: string[] = [];
-		const pack = await loadPythonIdeCourseAssetPack({
-			fetcher: async url => {
-				requestedUrls.push(url);
-				if (url === pythonIdeCourseAssetsManifestUrl) {
+		await expect(
+			loadPythonIdeCourseAssetPack({
+				fetcher: async url => {
+					requestedUrls.push(url);
 					return {
 						arrayBuffer: async () => new ArrayBuffer(0),
 						json: async () => ({
@@ -3365,49 +3481,10 @@ describe("python IDE project helpers", () => {
 						status: 200
 					};
 				}
+			})
+		).rejects.toThrow("contained no usable assets");
 
-				expect(url).toBe(pythonIdeCourseAssetsZipUrl);
-				return {
-					arrayBuffer: async () => zipBytes.buffer.slice(0),
-					ok: true,
-					status: 200
-				};
-			}
-		});
-
-		expect(requestedUrls).toEqual([
-			pythonIdeCourseAssetsManifestUrl,
-			pythonIdeCourseAssetsZipUrl
-		]);
-		expect(pack.assets.has("images/alien.png")).toBe(true);
-	});
-
-	it("falls back to the same-origin zip proxy when the asset manifest fetch fails", async () => {
-		const zipBytes = zipSync({
-			"images/alien.png": oneByOnePngBytes
-		});
-		const requestedUrls: string[] = [];
-		const pack = await loadPythonIdeCourseAssetPack({
-			fetcher: async url => {
-				requestedUrls.push(url);
-				if (url === pythonIdeCourseAssetsManifestUrl) {
-					throw new TypeError("manifest network failure");
-				}
-
-				expect(url).toBe(pythonIdeCourseAssetsZipUrl);
-				return {
-					arrayBuffer: async () => zipBytes.buffer.slice(0),
-					ok: true,
-					status: 200
-				};
-			}
-		});
-
-		expect(requestedUrls).toEqual([
-			pythonIdeCourseAssetsManifestUrl,
-			pythonIdeCourseAssetsZipUrl
-		]);
-		expect(pack.assets.has("images/alien.png")).toBe(true);
+		expect(requestedUrls).toEqual([pythonIdeCourseAssetsManifestUrl]);
 	});
 
 	it("keeps shared PyGame Zero asset support wired into the page and runtime", () => {

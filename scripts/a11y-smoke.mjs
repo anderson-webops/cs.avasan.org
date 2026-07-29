@@ -24,6 +24,11 @@ const routeScenarios = [
 		name: "teacher",
 		role: "teacher",
 		routes: ["/admin", "/"]
+	},
+	{
+		name: "student",
+		role: "student",
+		routes: ["/", "/python-ide"]
 	}
 ];
 const viewportScenarios = runFullMatrix
@@ -73,6 +78,24 @@ const admin = {
 	editAdmins: false,
 	saveEdit: ""
 };
+const student = {
+	_id: "student-1",
+	username: "alex-r",
+	active: true,
+	passwordSetAt: "2026-07-29T12:00:00.000Z",
+	lastLoginAt: "2026-07-29T12:00:00.000Z",
+	createdAt: "2026-07-29T12:00:00.000Z",
+	updatedAt: "2026-07-29T12:00:00.000Z"
+};
+const studentProject = {
+	_id: "project-1",
+	title: "My Python Project",
+	mode: "python",
+	files: [{ name: "main.py", content: "", encoding: "text" }],
+	activeFileName: "main.py",
+	createdAt: "2026-07-29T12:00:00.000Z",
+	updatedAt: "2026-07-29T12:00:00.000Z"
+};
 
 function writeServerLine(prefix, data) {
 	const text = data.toString().trim();
@@ -101,6 +124,8 @@ function createMockApiServer() {
 		if (url.pathname === "/accounts/me") {
 			if (activeRole === "teacher") {
 				sendJson(res, { adminID: admin._id });
+			} else if (activeRole === "student") {
+				sendJson(res, { studentID: student._id });
 			} else {
 				sendJson(res, {});
 			}
@@ -111,6 +136,47 @@ function createMockApiServer() {
 				res,
 				activeRole === "teacher" ? { currentAdmin: admin } : {},
 				activeRole === "teacher" ? 200 : 401
+			);
+			return;
+		}
+		if (url.pathname === "/students/session") {
+			sendJson(
+				res,
+				activeRole === "student"
+					? { student, requiresPasswordSetup: false }
+					: {},
+				activeRole === "student" ? 200 : 401
+			);
+			return;
+		}
+		if (
+			url.pathname === "/students/projects" &&
+			req.method === "GET"
+		) {
+			sendJson(
+				res,
+				activeRole === "student"
+					? { projects: [studentProject] }
+					: { message: "Student session required" },
+				activeRole === "student" ? 200 : 403
+			);
+			return;
+		}
+		if (url.pathname === "/students/project-reviews") {
+			sendJson(
+				res,
+				activeRole === "student"
+					? { reviews: [] }
+					: { message: "Student session required" },
+				activeRole === "student" ? 200 : 403
+			);
+			return;
+		}
+		if (url.pathname === "/admins/students") {
+			sendJson(
+				res,
+				activeRole === "teacher" ? { students: [] } : {},
+				activeRole === "teacher" ? 200 : 403
 			);
 			return;
 		}

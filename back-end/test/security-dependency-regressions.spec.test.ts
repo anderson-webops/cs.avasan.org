@@ -6,8 +6,17 @@ import { requireInternalDiagnostics } from "../src/middleware/internalDiagnostic
 import {
 	createAdminMailLimiter,
 	createLoginLimiter,
+	createStudentPasswordSetupLimiter,
+	createStudentProjectWriteLimiter,
 	createUserCourseAccessLimiter
 } from "../src/middleware/rateLimiters.js";
+import {
+	MIN_PRODUCTION_SESSION_SECRET_BYTES,
+	PRODUCTION_CLASSROOM_ORIGIN,
+	readBooleanSetting,
+	readClassroomOrigin,
+	readSessionSecret
+} from "../src/security/environment.js";
 import { readTrustProxySetting } from "../src/security/trustProxy.js";
 import { renderMarkdownEmailHtml } from "../src/utils/markdownEmail.js";
 import {
@@ -62,6 +71,49 @@ function getStandardRateLimitHeader(response: Response): string | null {
 }
 
 describe("security dependency regressions", () => {
+	it("parses false-valued environment flags as false", () => {
+		expect(readBooleanSetting(undefined, "CROSS_SITE")).toBe(false);
+		expect(readBooleanSetting("", "CROSS_SITE")).toBe(false);
+		expect(readBooleanSetting("false", "CROSS_SITE")).toBe(false);
+		expect(readBooleanSetting("0", "CROSS_SITE")).toBe(false);
+		expect(readBooleanSetting("true", "CROSS_SITE")).toBe(true);
+		expect(() => readBooleanSetting("sometimes", "CROSS_SITE")).toThrow(
+			"CROSS_SITE must be true or false"
+		);
+	});
+
+	it("uses a fixed HTTPS classroom origin when production is behind a proxy", () => {
+		expect(readClassroomOrigin(undefined, true)).toBe(
+			PRODUCTION_CLASSROOM_ORIGIN
+		);
+		expect(readClassroomOrigin(undefined, false)).toBeUndefined();
+		expect(readClassroomOrigin("https://school.example/", true)).toBe(
+			"https://school.example"
+		);
+		expect(() => readClassroomOrigin("http://school.example", true)).toThrow(
+			"must use HTTPS"
+		);
+		expect(() => readClassroomOrigin("https://school.example/api", true)).toThrow(
+			"must contain only a web origin"
+		);
+	});
+
+	it("requires a configured session secret and at least 32 UTF-8 bytes in production", () => {
+		expect(() => readSessionSecret(undefined, false)).toThrow(
+			"Missing SESSION_SECRET"
+		);
+		expect(() => readSessionSecret("   ", true)).toThrow(
+			"Missing SESSION_SECRET"
+		);
+		expect(readSessionSecret("short-development-secret", false)).toBe(
+			"short-development-secret"
+		);
+		expect(() => readSessionSecret("x".repeat(31), true)).toThrow(
+			`at least ${MIN_PRODUCTION_SESSION_SECRET_BYTES} UTF-8 bytes`
+		);
+		expect(readSessionSecret("x".repeat(32), true)).toBe("x".repeat(32));
+	});
+
 	it("does not trust forwarded client addresses unless proxy hops are explicitly configured", () => {
 		expect(readTrustProxySetting(undefined)).toBe(false);
 		expect(readTrustProxySetting("")).toBe(false);
@@ -89,6 +141,50 @@ describe("security dependency regressions", () => {
 				expect(second.status).toBe(429);
 			}
 		);
+	});
+
+	it("limits password setup attempts before expensive credential work", async () => {
+		await withServer(
+			createStudentPasswordSetupLimiter({ limit: 1, windowMs: 60_000 }),
+			async (baseUrl) => {
+				const first = await requestLimitedEndpoint(baseUrl);
+				const second = await requestLimitedEndpoint(baseUrl);
+
+				expect(first.status).toBe(200);
+				expect(second.status).toBe(429);
+				await expect(second.json()).resolves.toEqual({
+					message: "Too many password setup attempts. Please try again later."
+				});
+			}
+		);
+	});
+
+	it("counts a project mutation only once across pre-parser and route guards", async () => {
+		const preParserLimiter = createStudentProjectWriteLimiter({
+			limit: 1,
+			windowMs: 60_000
+		});
+		const routeLimiter = createStudentProjectWriteLimiter({
+			limit: 1,
+			windowMs: 60_000
+		});
+		const applyBoth: RequestHandler = (req, res, next) => {
+			preParserLimiter(req, res, (error) => {
+				if (error) {
+					next(error);
+					return;
+				}
+				routeLimiter(req, res, next);
+			});
+		};
+
+		await withServer(applyBoth, async (baseUrl) => {
+			const first = await requestLimitedEndpoint(baseUrl);
+			const second = await requestLimitedEndpoint(baseUrl);
+
+			expect(first.status).toBe(200);
+			expect(second.status).toBe(429);
+		});
 	});
 
 	it("requires the configured key for database diagnostics in every environment", async () => {

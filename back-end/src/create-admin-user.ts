@@ -54,7 +54,9 @@ async function main(): Promise<void> {
 			password,
 			editAdmins: false,
 			saveEdit: "Edit",
-			role: "admin"
+			role: "admin",
+			sessionVersion: 0,
+			passwordChangedAt: new Date()
 		});
 
 		await admin.save();

@@ -2,7 +2,6 @@ import { defineConfig } from "cypress";
 
 export default defineConfig({
 	allowCypressEnv: false,
-	blockHosts: ["analytics.avasan.org", "analytics.jacobdanderson.net"],
 	projectId: "d8k2m8",
 	e2e: {
 		baseUrl: "http://localhost:3333",

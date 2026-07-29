@@ -40,6 +40,8 @@ const STARTER_RELATIVE_PREFIX_RE = /^(?:starter|src)\//i;
 const PYTHON_IDE_INDEXED_DB_NAME = "classes-python-ide";
 const PYTHON_IDE_INDEXED_DB_VERSION = 1;
 const PYTHON_IDE_PROJECT_STORE = "projectStores";
+const MAX_REMOTE_PROJECT_TITLE_LENGTH = 120;
+const MAX_REMOTE_IMPORT_ID_LENGTH = 128;
 
 export type PythonIdeFileEncoding = "text" | "base64";
 
@@ -63,11 +65,14 @@ export interface PythonIdeProject {
 	courseProjectTitle?: string;
 	starterLabel?: string;
 	starterUrl?: string;
+	importID?: string;
+	byteCount?: number;
 	createdAt?: string;
 	updatedAt?: string;
+	serverUpdatedAt?: string;
 }
 
-export type PythonIdeProjectReviewRole = "admin" | "tutor";
+export type PythonIdeProjectReviewRole = "admin";
 
 export interface PythonIdeProjectReview {
 	_id: string;
@@ -121,10 +126,68 @@ export interface CreatePythonIdeProjectOptions {
 interface PythonIdeProjectStorageRecord {
 	key: string;
 	projects: PythonIdeProject[];
+	revision?: string;
 	updatedAt: string;
+	claimedProjectID?: string;
+	claimedStudentID?: string;
+}
+
+export interface PythonIdeLocalRecoveryRecordToken {
+	key: string;
+	idbFingerprint?: string;
+	idbRevision?: string;
+	idbUpdatedAt?: string;
+	localValue?: string;
+}
+
+export interface PythonIdeLocalRecoverySnapshot {
+	projects: PythonIdeProject[];
+	records: PythonIdeLocalRecoveryRecordToken[];
+}
+
+export interface VolatileStudentPythonProjectRecovery {
+	acknowledge: (studentID: string) => void;
+	discard: (studentID?: string) => void;
+	forStudent: (studentID: string) => PythonIdeProject[];
+	has: (studentID: string) => boolean;
+	hasAnyUnsynced: () => boolean;
+	hasUnsynced: (studentID: string) => boolean;
+	replace: (
+		studentID: string,
+		projects: PythonIdeProject[],
+		options?: { unsynced?: boolean }
+	) => void;
+	retainAcrossOwnerChange: (nextStudentID: string | null) => void;
+}
+
+export type PythonIdeRecoveryWrite =
+	| {
+			importID: string;
+			kind: "create";
+			project: PythonIdeProject;
+	  }
+	| {
+			expectedUpdatedAt: string;
+			kind: "update";
+			project: PythonIdeProject;
+	  };
+
+export interface PythonIdeRecoveryPlan {
+	projects: PythonIdeProject[];
+	writes: PythonIdeRecoveryWrite[];
 }
 
 export const pythonIdeStorageNamespace = "classes-python-ide-projects";
+export const pythonIdeEditorViewStateStoragePrefix =
+	"classes-python-ide-editor-view-state";
+const legacyPythonIdeEditorViewStateStoragePrefixes = [
+	pythonIdeEditorViewStateStoragePrefix,
+	"cs-avasan-python-ide-editor-state"
+] as const;
+const pythonIdeRecoveryTabID =
+	typeof crypto === "undefined"
+		? `tab-${Date.now()}-${Math.random().toString(36).slice(2)}`
+		: crypto.randomUUID();
 export const pythonIdeAllowedFileExtensions = [
 	".py",
 	".csv",
@@ -441,8 +504,110 @@ export function pythonIdeProjectToPayload(
 	};
 }
 
+export function plainPythonIdeProjectSnapshot(
+	project: PythonIdeProject
+): PythonIdeProject {
+	return {
+		...project,
+		files: project.files.map(file => ({ ...file }))
+	};
+}
+
+export function plainPythonIdeProjectsSnapshot(
+	projects: PythonIdeProject[]
+): PythonIdeProject[] {
+	return projects.map(plainPythonIdeProjectSnapshot);
+}
+
+export function createVolatileStudentPythonProjectRecovery(): VolatileStudentPythonProjectRecovery {
+	let recovery:
+		| {
+				unsynced: boolean;
+				projects: PythonIdeProject[];
+				studentID: string;
+		  }
+		| undefined;
+	return {
+		acknowledge(studentID) {
+			if (recovery?.studentID === studentID) recovery = undefined;
+		},
+		discard(studentID) {
+			if (!studentID || recovery?.studentID === studentID) {
+				recovery = undefined;
+			}
+		},
+		forStudent(studentID) {
+			return recovery?.studentID === studentID
+				? plainPythonIdeProjectsSnapshot(recovery.projects)
+				: [];
+		},
+		has(studentID) {
+			return recovery?.studentID === studentID;
+		},
+		hasAnyUnsynced() {
+			return recovery?.unsynced ?? false;
+		},
+		hasUnsynced(studentID) {
+			return recovery?.studentID === studentID && recovery.unsynced;
+		},
+		replace(studentID, projects, options = {}) {
+			if (!projects.length) {
+				if (recovery?.studentID === studentID) recovery = undefined;
+				return;
+			}
+			const existingUnsynced =
+				recovery?.studentID === studentID && recovery.unsynced;
+			recovery = {
+				projects: plainPythonIdeProjectsSnapshot(projects),
+				studentID,
+				unsynced: options.unsynced !== false || existingUnsynced
+			};
+		},
+		retainAcrossOwnerChange(nextStudentID) {
+			if (
+				nextStudentID &&
+				recovery &&
+				recovery.studentID !== nextStudentID
+			) {
+				recovery = undefined;
+			}
+		}
+	};
+}
+
+export const volatileStudentPythonProjectRecovery =
+	createVolatileStudentPythonProjectRecovery();
+
+export function pythonIdeImportID(
+	project: Pick<PythonIdeProject, "_id" | "importID">
+) {
+	return project.importID ?? project._id;
+}
+
 export function pythonIdeStorageKey(userID?: string | null) {
 	return `${pythonIdeStorageNamespace}:${userID || "anonymous"}`;
+}
+
+function pythonIdeRecoveryStoragePrefix(userID: string) {
+	return `${pythonIdeStorageKey(userID)}:recovery:`;
+}
+
+function pythonIdeCurrentRecoveryStorageKey(userID: string) {
+	return `${pythonIdeRecoveryStoragePrefix(userID)}${pythonIdeRecoveryTabID}`;
+}
+
+function pythonIdeActiveStorageKey(userID?: string | null) {
+	return userID
+		? pythonIdeCurrentRecoveryStorageKey(userID)
+		: pythonIdeStorageKey(null);
+}
+
+function pythonIdeAnonymousClaimStoragePrefix() {
+	return `${pythonIdeStorageNamespace}:anonymous-claim:`;
+}
+
+function pythonIdeAnonymousClaimStorageKey(projectID: string) {
+	return `${pythonIdeAnonymousClaimStoragePrefix()}${projectID}`;
 }
 
 export function normalizePythonFileName(value: string) {
@@ -667,55 +832,6 @@ export function getPythonIdeRunnableFile(
 	);
 }
 
-export function loadLocalPythonProjects(userID?: string | null) {
-	if (typeof window === "undefined") return [];
-
-	try {
-		const raw = window.localStorage.getItem(pythonIdeStorageKey(userID));
-		if (!raw) return [];
-		const parsed = JSON.parse(raw) as PythonIdeProject[];
-		return Array.isArray(parsed) ? parsed : [];
-	} catch {
-		return [];
-	}
-}
-
-export async function loadLocalPythonProjectsAsync(userID?: string | null) {
-	const key = pythonIdeStorageKey(userID);
-	const storedProjects = await readIndexedDbPythonProjects(key);
-	const legacyProjects = loadLocalPythonProjects(userID);
-
-	if (storedProjects && legacyProjects.length) {
-		const storedProjectsUpdatedAt =
-			pythonIdeProjectSetUpdatedAt(storedProjects);
-		const legacyProjectsUpdatedAt =
-			pythonIdeProjectSetUpdatedAt(legacyProjects);
-		if (legacyProjectsUpdatedAt > storedProjectsUpdatedAt) {
-			await saveLocalPythonProjectsAsync(legacyProjects, userID);
-			return legacyProjects;
-		}
-		return storedProjects;
-	}
-
-	if (storedProjects) return storedProjects;
-
-	if (legacyProjects.length) {
-		await saveLocalPythonProjectsAsync(legacyProjects, userID);
-	}
-	return legacyProjects;
-}
-
-export function saveLocalPythonProjects(
-	projects: PythonIdeProject[],
-	userID?: string | null
-) {
-	if (typeof window === "undefined") return;
-	window.localStorage.setItem(
-		pythonIdeStorageKey(userID),
-		JSON.stringify(projects)
-	);
-}
-
 function pythonIdeProjectSetUpdatedAt(projects: PythonIdeProject[]) {
 	return projects.reduce((latest, project) => {
 		const updatedAt = Date.parse(
@@ -727,18 +843,319 @@ function pythonIdeProjectSetUpdatedAt(projects: PythonIdeProject[]) {
 	}, 0);
 }
 
+function newPythonIdeStorageRevision() {
+	return typeof crypto === "undefined"
+		? `revision-${Date.now()}-${Math.random().toString(36).slice(2)}`
+		: crypto.randomUUID();
+}
+
+function pythonIdeProjectsFingerprint(projects: PythonIdeProject[]) {
+	return JSON.stringify(plainPythonIdeProjectsSnapshot(projects));
+}
+
+function parseLocalPythonProjectRecord(
+	key: string,
+	raw: string
+): PythonIdeProjectStorageRecord | null {
+	try {
+		const parsed = JSON.parse(raw) as
+			PythonIdeProject[] | Partial<PythonIdeProjectStorageRecord>;
+		if (Array.isArray(parsed)) {
+			const latestProjectUpdate = pythonIdeProjectSetUpdatedAt(parsed);
+			return {
+				key,
+				projects: parsed,
+				revision: `legacy-${latestProjectUpdate}`,
+				updatedAt: new Date(latestProjectUpdate || 0).toISOString()
+			};
+		}
+		if (!parsed || !Array.isArray(parsed.projects)) return null;
+		return {
+			key,
+			projects: parsed.projects,
+			revision:
+				typeof parsed.revision === "string"
+					? parsed.revision
+					: `legacy-${pythonIdeProjectSetUpdatedAt(parsed.projects)}`,
+			updatedAt:
+				typeof parsed.updatedAt === "string"
+					? parsed.updatedAt
+					: new Date(
+							pythonIdeProjectSetUpdatedAt(parsed.projects) || 0
+						).toISOString()
+		};
+	} catch {
+		return null;
+	}
+}
+
+function localStorageKeys() {
+	if (typeof window === "undefined") return [];
+	const keys: string[] = [];
+	try {
+		for (let index = 0; index < window.localStorage.length; index++) {
+			const key = window.localStorage.key(index);
+			if (key) keys.push(key);
+		}
+	} catch {
+		// A directly addressable current-tab key remains available below.
+	}
+	return keys;
+}
+
+function localPythonProjectStorageKeys(userID?: string | null) {
+	const baseKey = pythonIdeStorageKey(userID);
+	if (!userID) return [baseKey];
+	const prefix = pythonIdeRecoveryStoragePrefix(userID);
+	return [
+		...new Set([
+			baseKey,
+			pythonIdeCurrentRecoveryStorageKey(userID),
+			...localStorageKeys().filter(key => key.startsWith(prefix))
+		])
+	];
+}
+
+function localAnonymousClaimedProjectIDs() {
+	if (typeof window === "undefined") return new Set<string>();
+	const prefix = pythonIdeAnonymousClaimStoragePrefix();
+	return new Set(
+		localStorageKeys()
+			.filter(key => key.startsWith(prefix))
+			.map(key => key.slice(prefix.length))
+			.filter(Boolean)
+	);
+}
+
+function mergePythonIdeRecoveryProjects(
+	records: PythonIdeProjectStorageRecord[],
+	claimedProjectIDs = new Set<string>()
+) {
+	const projects: PythonIdeProject[] = [];
+	const seen = new Set<string>();
+	for (const record of records) {
+		for (const project of record.projects) {
+			if (claimedProjectIDs.has(project._id)) continue;
+			const fingerprint = `${project._id}:${pythonIdeProjectsFingerprint([
+				project
+			])}`;
+			if (seen.has(fingerprint)) continue;
+			seen.add(fingerprint);
+			projects.push(plainPythonIdeProjectSnapshot(project));
+		}
+	}
+	return projects;
+}
+
+export function loadLocalPythonProjects(userID?: string | null) {
+	if (typeof window === "undefined") return [];
+	if (userID) {
+		// Authenticated project state is server-authoritative. Never trust
+		// owner-keyed browser content, including records planted by another user
+		// of a shared classroom device.
+		clearAllStudentPythonProjectRecoveryFromLocalStorage();
+		return [];
+	}
+	const records: PythonIdeProjectStorageRecord[] = [];
+	for (const key of localPythonProjectStorageKeys(userID)) {
+		try {
+			const raw = window.localStorage.getItem(key);
+			if (!raw) continue;
+			const record = parseLocalPythonProjectRecord(key, raw);
+			if (record) records.push(record);
+		} catch {
+			// Ignore only the unreadable browser-storage record.
+		}
+	}
+	return mergePythonIdeRecoveryProjects(
+		records,
+		userID ? undefined : localAnonymousClaimedProjectIDs()
+	);
+}
+
+function localStorageRecordValue(
+	record: PythonIdeProjectStorageRecord,
+	userID?: string | null
+) {
+	return JSON.stringify(
+		userID
+			? {
+					projects: record.projects,
+					revision: record.revision,
+					updatedAt: record.updatedAt
+				}
+			: record.projects
+	);
+}
+
+function writeLocalPythonProjectRecord(
+	record: PythonIdeProjectStorageRecord,
+	userID?: string | null
+) {
+	window.localStorage.setItem(
+		record.key,
+		localStorageRecordValue(record, userID)
+	);
+}
+
+export function saveLocalPythonProjects(
+	projects: PythonIdeProject[],
+	userID?: string | null
+) {
+	if (typeof window === "undefined") return;
+	if (userID) {
+		clearAllStudentPythonProjectRecoveryFromLocalStorage();
+		return;
+	}
+	const claimedProjectIDs = userID
+		? new Set<string>()
+		: localAnonymousClaimedProjectIDs();
+	const snapshot = plainPythonIdeProjectsSnapshot(projects).filter(
+		project => !claimedProjectIDs.has(project._id)
+	);
+	writeLocalPythonProjectRecord(
+		{
+			key: pythonIdeActiveStorageKey(userID),
+			projects: snapshot,
+			revision: newPythonIdeStorageRevision(),
+			updatedAt: new Date().toISOString()
+		},
+		userID
+	);
+}
+
+function recordUpdatedAt(record: PythonIdeProjectStorageRecord) {
+	const timestamp = Date.parse(record.updatedAt);
+	return Number.isFinite(timestamp) ? timestamp : 0;
+}
+
+function chooseLatestPythonIdeStorageRecord(
+	first: PythonIdeProjectStorageRecord,
+	second: PythonIdeProjectStorageRecord
+) {
+	return recordUpdatedAt(second) >= recordUpdatedAt(first) ? second : first;
+}
+
+export async function loadLocalPythonProjectRecoverySnapshot(
+	userID?: string | null
+): Promise<PythonIdeLocalRecoverySnapshot> {
+	if (userID) {
+		await purgeAllStudentPythonProjectRecovery();
+		return { projects: [], records: [] };
+	}
+	const idbRecords = await readIndexedDbPythonProjectRecords(userID);
+	const idbByKey = new Map(idbRecords.map(record => [record.key, record]));
+	const localByKey = new Map<
+		string,
+		{ raw: string; record: PythonIdeProjectStorageRecord }
+	>();
+	for (const key of localPythonProjectStorageKeys(userID)) {
+		if (typeof window === "undefined") break;
+		try {
+			const raw = window.localStorage.getItem(key);
+			if (!raw) continue;
+			const record = parseLocalPythonProjectRecord(key, raw);
+			if (record) localByKey.set(key, { raw, record });
+		} catch {
+			// IndexedDB remains available when its local mirror is blocked.
+		}
+	}
+
+	const keys = new Set([...idbByKey.keys(), ...localByKey.keys()]);
+	const records: PythonIdeProjectStorageRecord[] = [];
+	const tokens: PythonIdeLocalRecoveryRecordToken[] = [];
+	for (const key of keys) {
+		const idbRecord = idbByKey.get(key);
+		const localRecord = localByKey.get(key);
+		const selected =
+			idbRecord && localRecord
+				? chooseLatestPythonIdeStorageRecord(
+						idbRecord,
+						localRecord.record
+					)
+				: (idbRecord ?? localRecord?.record);
+		if (!selected) continue;
+		const storesDiverged =
+			!!idbRecord &&
+			!!localRecord &&
+			pythonIdeProjectsFingerprint(idbRecord.projects) !==
+				pythonIdeProjectsFingerprint(localRecord.record.projects);
+		if (storesDiverged) {
+			// A crash can leave IndexedDB and its local mirror at different
+			// revisions with indistinguishable wall-clock timestamps. Reconcile
+			// both contents rather than guessing and deleting one unseen version.
+			records.push(idbRecord, localRecord.record);
+		} else {
+			records.push(selected);
+		}
+		tokens.push({
+			key,
+			idbFingerprint: idbRecord
+				? pythonIdeProjectsFingerprint(idbRecord.projects)
+				: undefined,
+			idbRevision: idbRecord?.revision,
+			idbUpdatedAt: idbRecord?.updatedAt,
+			localValue: localRecord?.raw
+		});
+	}
+
+	const claimedProjectIDs = userID
+		? new Set<string>()
+		: new Set([
+				...localAnonymousClaimedProjectIDs(),
+				...(await readIndexedDbAnonymousClaimedProjectIDs())
+			]);
+	return {
+		projects: mergePythonIdeRecoveryProjects(records, claimedProjectIDs),
+		records: tokens
+	};
+}
+
+export async function loadCurrentTabPythonProjectRecoverySnapshot(
+	userID?: string | null
+): Promise<PythonIdeLocalRecoverySnapshot> {
+	const snapshot = await loadLocalPythonProjectRecoverySnapshot(userID);
+	const currentKey = pythonIdeActiveStorageKey(userID);
+	return {
+		projects: snapshot.projects,
+		records: snapshot.records.filter(record => record.key === currentKey)
+	};
+}
+
+export async function loadLocalPythonProjectsAsync(userID?: string | null) {
+	return (await loadLocalPythonProjectRecoverySnapshot(userID)).projects;
+}
+
 export async function saveLocalPythonProjectsAsync(
 	projects: PythonIdeProject[],
 	userID?: string | null
 ) {
-	const key = pythonIdeStorageKey(userID);
+	if (userID) {
+		await purgeAllStudentPythonProjectRecovery();
+		return;
+	}
+	const claimedProjectIDs = userID
+		? new Set<string>()
+		: new Set([
+				...localAnonymousClaimedProjectIDs(),
+				...(await readIndexedDbAnonymousClaimedProjectIDs())
+			]);
+	const snapshot = plainPythonIdeProjectsSnapshot(projects).filter(
+		project => !claimedProjectIDs.has(project._id)
+	);
+	const record = {
+		key: pythonIdeActiveStorageKey(userID),
+		projects: snapshot,
+		revision: newPythonIdeStorageRevision(),
+		updatedAt: new Date().toISOString()
+	} satisfies PythonIdeProjectStorageRecord;
 
 	try {
-		await writeIndexedDbPythonProjects(key, projects);
-		saveLegacyLocalPythonProjectsMirror(projects, userID);
+		await writeIndexedDbPythonProjects(record);
+		saveLegacyLocalPythonProjectsMirror(record, userID);
 	} catch (indexedDbError) {
 		try {
-			saveLocalPythonProjects(projects, userID);
+			writeLocalPythonProjectRecord(record, userID);
 		} catch {
 			throw new Error(
 				`Could not save Python IDE projects locally. Browser project storage may be full or unavailable. (${formatStorageError(indexedDbError)})`
@@ -747,46 +1164,330 @@ export async function saveLocalPythonProjectsAsync(
 	}
 }
 
+/**
+ * Atomically remove an anonymous browser project from the shared workspace
+ * before an account upload begins. The caller holds the returned project only
+ * in authenticated memory. A durable claim marker prevents a stale anonymous
+ * tab from publishing it back into shared storage.
+ */
+export async function claimAnonymousPythonProjectForStudent(
+	project: PythonIdeProject,
+	studentID: string
+) {
+	if (typeof window === "undefined" || !window.indexedDB) {
+		throw new Error(
+			"Could not safely move this browser project into the student account. This browser needs IndexedDB project storage."
+		);
+	}
+	const db = await openPythonIdeStorageDb();
+	const anonymousSnapshot =
+		await loadLocalPythonProjectRecoverySnapshot(null);
+	const claimedProject = anonymousSnapshot.projects.find(
+		candidate => candidate._id === project._id
+	);
+	if (!claimedProject) {
+		throw new Error(
+			"This browser project changed before it could be moved. Reload and try again."
+		);
+	}
+
+	const claimKey = pythonIdeAnonymousClaimStorageKey(project._id);
+	const claimMarker = JSON.stringify({ studentID });
+	const anonymousKey = pythonIdeStorageKey(null);
+	const now = new Date().toISOString();
+	const latestAnonymousProjects = loadLocalPythonProjects(null);
+
+	const transaction = db.transaction(PYTHON_IDE_PROJECT_STORE, "readwrite");
+	const store = transaction.objectStore(PYTHON_IDE_PROJECT_STORE);
+
+	try {
+		const currentAnonymous = await indexedDbRequest<
+			PythonIdeProjectStorageRecord | undefined
+		>(store.get(anonymousKey));
+		const anonymousProjects = mergePythonIdeRecoveryProjects([
+			{
+				key: anonymousKey,
+				projects: [
+					...anonymousSnapshot.projects,
+					...latestAnonymousProjects,
+					...(currentAnonymous?.projects ?? [])
+				],
+				updatedAt: now
+			}
+		]).filter(candidate => candidate._id !== project._id);
+		const anonymousRecord = {
+			key: anonymousKey,
+			projects: anonymousProjects,
+			revision: newPythonIdeStorageRevision(),
+			updatedAt: now
+		} satisfies PythonIdeProjectStorageRecord;
+		const claimRecord = {
+			key: claimKey,
+			projects: [],
+			revision: newPythonIdeStorageRevision(),
+			updatedAt: now,
+			claimedProjectID: project._id,
+			claimedStudentID: studentID
+		} satisfies PythonIdeProjectStorageRecord;
+
+		store.put(anonymousRecord);
+		store.put(claimRecord);
+		await indexedDbTransactionDone(transaction);
+
+		// The durable claim marker is authoritative. These mirrors make stale
+		// anonymous tabs fail closed before their next IndexedDB read.
+		try {
+			window.localStorage.setItem(claimKey, claimMarker);
+			writeLocalPythonProjectRecord(anonymousRecord, null);
+		} catch {
+			// Async readers still enforce the committed IndexedDB marker.
+		}
+		return plainPythonIdeProjectSnapshot(claimedProject);
+	} catch (error) {
+		try {
+			transaction.abort();
+		} catch {
+			// The transaction may already have aborted.
+		}
+		// The transaction is atomic: a failed claim leaves the anonymous project
+		// in place and creates no trusted owner-side browser record.
+		throw error;
+	}
+}
+
 export function clearLocalPythonProjects(userID?: string | null) {
 	if (typeof window === "undefined") return;
-	window.localStorage.removeItem(pythonIdeStorageKey(userID));
+	for (const key of localPythonProjectStorageKeys(userID)) {
+		window.localStorage.removeItem(key);
+	}
+}
+
+function isAnonymousPythonIdeStorageKey(key: string) {
+	return (
+		key === pythonIdeStorageKey(null) ||
+		key.startsWith(pythonIdeAnonymousClaimStoragePrefix())
+	);
+}
+
+function isAnonymousPythonIdeEditorStateKey(key: string) {
+	return legacyPythonIdeEditorViewStateStoragePrefixes.some(
+		prefix => key === `${prefix}:guest`
+	);
+}
+
+function isStudentPythonIdeBrowserStorageKey(key: string) {
+	if (
+		key.startsWith(`${pythonIdeStorageNamespace}:`) &&
+		!isAnonymousPythonIdeStorageKey(key)
+	) {
+		return true;
+	}
+	return legacyPythonIdeEditorViewStateStoragePrefixes.some(
+		prefix =>
+			key.startsWith(`${prefix}:`) &&
+			!isAnonymousPythonIdeEditorStateKey(key)
+	);
+}
+
+export function clearAllStudentPythonProjectRecoveryFromLocalStorage() {
+	if (typeof window === "undefined") return;
+	const keys = localStorageKeys();
+	for (const key of keys) {
+		if (isStudentPythonIdeBrowserStorageKey(key)) {
+			window.localStorage.removeItem(key);
+		}
+	}
+}
+
+export async function purgeStudentPythonProjectRecovery(studentID: string) {
+	let indexedDbError: unknown;
+	let localStorageError: unknown;
+	try {
+		clearLocalPythonProjects(studentID);
+	} catch (error) {
+		localStorageError = error;
+	}
+	if (typeof window !== "undefined" && window.indexedDB) {
+		try {
+			await deleteIndexedDbPythonProjectRecords(studentID);
+		} catch (error) {
+			indexedDbError = error;
+		}
+	}
+	if (indexedDbError || localStorageError) {
+		throw new Error(
+			`Could not purge legacy student project recovery data. (${formatStorageError(indexedDbError ?? localStorageError)})`
+		);
+	}
+}
+
+export async function purgeAllStudentPythonProjectRecovery() {
+	let indexedDbError: unknown;
+	let localStorageError: unknown;
+	try {
+		clearAllStudentPythonProjectRecoveryFromLocalStorage();
+	} catch (error) {
+		localStorageError = error;
+	}
+	if (typeof window !== "undefined" && window.indexedDB) {
+		try {
+			await deleteAllIndexedDbStudentPythonProjectRecords();
+		} catch (error) {
+			indexedDbError = error;
+		}
+	}
+	if (indexedDbError || localStorageError) {
+		throw new Error(
+			`Could not purge legacy student project recovery data. (${formatStorageError(indexedDbError ?? localStorageError)})`
+		);
+	}
 }
 
 export async function clearLocalPythonProjectsAsync(userID?: string | null) {
-	const key = pythonIdeStorageKey(userID);
-	await deleteIndexedDbPythonProjects(key).catch(() => undefined);
-	clearLocalPythonProjects(userID);
+	let indexedDbError: unknown;
+	let localStorageError: unknown;
+
+	if (typeof window !== "undefined" && window.indexedDB) {
+		try {
+			await deleteIndexedDbPythonProjectRecords(userID);
+		} catch (error) {
+			indexedDbError = error;
+		}
+	}
+
+	try {
+		clearLocalPythonProjects(userID);
+	} catch (error) {
+		localStorageError = error;
+	}
+
+	if (indexedDbError || localStorageError) {
+		throw new Error(
+			`Could not remove the local Python IDE project copy. (${formatStorageError(indexedDbError ?? localStorageError)})`
+		);
+	}
 }
 
-async function readIndexedDbPythonProjects(key: string) {
+export async function clearCurrentTabLocalPythonProjectsAsync(
+	userID?: string | null
+) {
+	if (typeof window === "undefined") return;
+	const key = pythonIdeActiveStorageKey(userID);
+	let indexedDbError: unknown;
+	let localStorageError: unknown;
+	if (typeof window !== "undefined" && window.indexedDB) {
+		try {
+			await deleteIndexedDbPythonProjects(key);
+		} catch (error) {
+			indexedDbError = error;
+		}
+	}
+	try {
+		window.localStorage.removeItem(key);
+	} catch (error) {
+		localStorageError = error;
+	}
+	if (indexedDbError || localStorageError) {
+		throw new Error(
+			`Could not remove the current Python IDE recovery copy. (${formatStorageError(indexedDbError ?? localStorageError)})`
+		);
+	}
+}
+
+export async function acknowledgeLocalPythonProjectRecovery(
+	snapshot: PythonIdeLocalRecoverySnapshot
+) {
+	for (const token of snapshot.records) {
+		await deleteIndexedDbPythonProjectRecordIfUnchanged(token);
+		if (token.localValue === undefined || typeof window === "undefined")
+			continue;
+		try {
+			if (window.localStorage.getItem(token.key) === token.localValue) {
+				window.localStorage.removeItem(token.key);
+			}
+		} catch {
+			// The unchanged IndexedDB record was already handled; a blocked
+			// best-effort mirror cannot justify deleting a newer recovery record.
+		}
+	}
+}
+
+export async function removeLocalPythonProjectAsync(
+	projectID: string,
+	userID?: string | null
+) {
+	const projects = await loadLocalPythonProjectsAsync(userID);
+	const remainingProjects = projects.filter(
+		project => project._id !== projectID
+	);
+	if (remainingProjects.length === projects.length) return;
+	if (remainingProjects.length) {
+		await saveLocalPythonProjectsAsync(remainingProjects, userID);
+		return;
+	}
+	await clearLocalPythonProjectsAsync(userID);
+}
+
+export function clearLocalPythonIdeEditorState(userID?: string | null) {
+	if (typeof window === "undefined") return;
+	window.localStorage.removeItem(
+		`${pythonIdeEditorViewStateStoragePrefix}:${userID ?? "guest"}`
+	);
+}
+
+async function readIndexedDbPythonProjectRecords(userID?: string | null) {
+	if (userID) return [];
 	try {
 		const db = await openPythonIdeStorageDb();
 		const transaction = db.transaction(
 			PYTHON_IDE_PROJECT_STORE,
 			"readonly"
 		);
-		const record = await indexedDbRequest<
-			PythonIdeProjectStorageRecord | undefined
-		>(transaction.objectStore(PYTHON_IDE_PROJECT_STORE).get(key));
+		const allRecords = await indexedDbRequest<
+			PythonIdeProjectStorageRecord[]
+		>(transaction.objectStore(PYTHON_IDE_PROJECT_STORE).getAll());
 		await indexedDbTransactionDone(transaction);
-		return Array.isArray(record?.projects) ? record.projects : null;
+		const baseKey = pythonIdeStorageKey(userID);
+		const recoveryPrefix = userID
+			? pythonIdeRecoveryStoragePrefix(userID)
+			: "";
+		return allRecords.filter(
+			record =>
+				Array.isArray(record.projects) &&
+				(record.key === baseKey ||
+					(!!userID && record.key.startsWith(recoveryPrefix)))
+		);
 	} catch {
-		return null;
+		return [];
+	}
+}
+
+async function readIndexedDbAnonymousClaimedProjectIDs() {
+	try {
+		const db = await openPythonIdeStorageDb();
+		const transaction = db.transaction(
+			PYTHON_IDE_PROJECT_STORE,
+			"readonly"
+		);
+		const allRecords = await indexedDbRequest<
+			PythonIdeProjectStorageRecord[]
+		>(transaction.objectStore(PYTHON_IDE_PROJECT_STORE).getAll());
+		await indexedDbTransactionDone(transaction);
+		return allRecords.flatMap(record =>
+			record.claimedProjectID ? [record.claimedProjectID] : []
+		);
+	} catch {
+		return [];
 	}
 }
 
 async function writeIndexedDbPythonProjects(
-	key: string,
-	projects: PythonIdeProject[]
+	record: PythonIdeProjectStorageRecord
 ) {
 	const db = await openPythonIdeStorageDb();
 	const transaction = db.transaction(PYTHON_IDE_PROJECT_STORE, "readwrite");
 	await indexedDbRequest(
-		transaction.objectStore(PYTHON_IDE_PROJECT_STORE).put({
-			key,
-			projects,
-			updatedAt: new Date().toISOString()
-		} satisfies PythonIdeProjectStorageRecord)
+		transaction.objectStore(PYTHON_IDE_PROJECT_STORE).put(record)
 	);
 	await indexedDbTransactionDone(transaction);
 }
@@ -797,6 +1498,66 @@ async function deleteIndexedDbPythonProjects(key: string) {
 	await indexedDbRequest(
 		transaction.objectStore(PYTHON_IDE_PROJECT_STORE).delete(key)
 	);
+	await indexedDbTransactionDone(transaction);
+}
+
+async function deleteIndexedDbPythonProjectRecords(userID?: string | null) {
+	const db = await openPythonIdeStorageDb();
+	const transaction = db.transaction(PYTHON_IDE_PROJECT_STORE, "readwrite");
+	const store = transaction.objectStore(PYTHON_IDE_PROJECT_STORE);
+	const keys = await indexedDbRequest<IDBValidKey[]>(store.getAllKeys());
+	const baseKey = pythonIdeStorageKey(userID);
+	const recoveryPrefix = userID ? pythonIdeRecoveryStoragePrefix(userID) : "";
+	for (const keyValue of keys) {
+		const key = String(keyValue);
+		if (key === baseKey || (!!userID && key.startsWith(recoveryPrefix))) {
+			store.delete(key);
+		}
+	}
+	await indexedDbTransactionDone(transaction);
+}
+
+async function deleteAllIndexedDbStudentPythonProjectRecords() {
+	const db = await openPythonIdeStorageDb();
+	const transaction = db.transaction(PYTHON_IDE_PROJECT_STORE, "readwrite");
+	const store = transaction.objectStore(PYTHON_IDE_PROJECT_STORE);
+	const keys = await indexedDbRequest<IDBValidKey[]>(store.getAllKeys());
+	for (const keyValue of keys) {
+		const key = String(keyValue);
+		if (
+			key.startsWith(`${pythonIdeStorageNamespace}:`) &&
+			!isAnonymousPythonIdeStorageKey(key)
+		) {
+			store.delete(key);
+		}
+	}
+	await indexedDbTransactionDone(transaction);
+}
+
+async function deleteIndexedDbPythonProjectRecordIfUnchanged(
+	token: PythonIdeLocalRecoveryRecordToken
+) {
+	if (
+		typeof window === "undefined" ||
+		!window.indexedDB ||
+		token.idbUpdatedAt === undefined
+	) {
+		return;
+	}
+	const db = await openPythonIdeStorageDb();
+	const transaction = db.transaction(PYTHON_IDE_PROJECT_STORE, "readwrite");
+	const store = transaction.objectStore(PYTHON_IDE_PROJECT_STORE);
+	const current = await indexedDbRequest<
+		PythonIdeProjectStorageRecord | undefined
+	>(store.get(token.key));
+	if (
+		current &&
+		current.updatedAt === token.idbUpdatedAt &&
+		current.revision === token.idbRevision &&
+		pythonIdeProjectsFingerprint(current.projects) === token.idbFingerprint
+	) {
+		store.delete(token.key);
+	}
 	await indexedDbTransactionDone(transaction);
 }
 
@@ -868,11 +1629,11 @@ function indexedDbTransactionDone(transaction: IDBTransaction) {
 }
 
 function saveLegacyLocalPythonProjectsMirror(
-	projects: PythonIdeProject[],
+	record: PythonIdeProjectStorageRecord,
 	userID?: string | null
 ) {
 	try {
-		saveLocalPythonProjects(projects, userID);
+		writeLocalPythonProjectRecord(record, userID);
 	} catch {
 		// IndexedDB remains the primary store; the mirror is best-effort.
 	}
@@ -882,50 +1643,433 @@ function formatStorageError(error: unknown) {
 	return error instanceof Error ? error.message : "storage unavailable";
 }
 
-export async function fetchPythonIdeProjects() {
-	const { data } = await api.get<{ projects: PythonIdeProject[] }>(
-		"/users/loggedin/python-projects"
-	);
-	return data.projects;
+function normalizeRemotePythonIdeProject(
+	project: PythonIdeProject
+): PythonIdeProject {
+	const snapshot = plainPythonIdeProjectSnapshot(project);
+	return {
+		...snapshot,
+		serverUpdatedAt: snapshot.serverUpdatedAt ?? snapshot.updatedAt
+	};
 }
 
-export async function fetchVisiblePythonIdeProjectReviews() {
+function canonicalPythonIdeProjectPayload(payload: PythonIdeProjectPayload) {
+	const sourceFiles = payload.files?.length
+		? payload.files
+		: [{ name: "main.py", content: "", encoding: "text" as const }];
+	const seenFileNames = new Set<string>();
+	const files = sourceFiles.flatMap(file => {
+		const name = file.name.trim();
+		if (seenFileNames.has(name)) return [];
+		seenFileNames.add(name);
+		return [
+			{
+				content: file.content,
+				encoding: file.encoding ?? "text",
+				name
+			}
+		];
+	});
+	const normalizedFiles = files.length
+		? files
+		: [{ name: "main.py", content: "", encoding: "text" as const }];
+	const requestedActiveFileName = payload.activeFileName?.trim();
+	const activeFileName =
+		requestedActiveFileName &&
+		normalizedFiles.some(file => file.name === requestedActiveFileName)
+			? requestedActiveFileName
+			: (normalizedFiles[0]?.name ?? "main.py");
+	const optionalValue = (value: string | undefined) =>
+		value === undefined ? null : value.trim();
+
+	return {
+		activeFileName,
+		courseID: optionalValue(payload.courseID),
+		courseProjectKey: optionalValue(payload.courseProjectKey),
+		courseProjectTitle: optionalValue(payload.courseProjectTitle),
+		files: normalizedFiles,
+		mode: payload.mode ?? "python",
+		starterLabel: optionalValue(payload.starterLabel),
+		starterUrl: optionalValue(payload.starterUrl),
+		title: payload.title?.trim() || "Untitled Python Project"
+	};
+}
+
+function pythonIdePayloadMatchesProject(
+	payload: PythonIdeProjectPayload,
+	project: PythonIdeProject
+) {
+	return (
+		JSON.stringify(canonicalPythonIdeProjectPayload(payload)) ===
+		JSON.stringify(
+			canonicalPythonIdeProjectPayload(pythonIdeProjectToPayload(project))
+		)
+	);
+}
+
+function pythonIdeServerVersionsEqual(
+	first: string | undefined,
+	second: string | undefined
+) {
+	if (!first || !second) return false;
+	const firstTimestamp = Date.parse(first);
+	const secondTimestamp = Date.parse(second);
+	if (Number.isFinite(firstTimestamp) && Number.isFinite(secondTimestamp))
+		return firstTimestamp === secondTimestamp;
+	return first === second;
+}
+
+function pythonIdeRemoteProjectIsPristine(project: PythonIdeProject) {
+	return pythonIdeServerVersionsEqual(
+		project.createdAt,
+		project.serverUpdatedAt ?? project.updatedAt
+	);
+}
+
+function stablePythonIdePayloadToken(payload: PythonIdeProjectPayload) {
+	const value = JSON.stringify(canonicalPythonIdeProjectPayload(payload));
+	let first = 0x811c9dc5;
+	let second = 0x9e3779b9;
+	for (let index = 0; index < value.length; index++) {
+		const code = value.charCodeAt(index);
+		first = Math.imul(first ^ code, 0x01000193);
+		second = Math.imul(second ^ code, 0x85ebca6b);
+	}
+	return `${(first >>> 0).toString(36)}${(second >>> 0).toString(36)}`;
+}
+
+function recoveredPythonIdeImportID(
+	originalImportID: string,
+	localUpdatedAt: string | undefined,
+	payload: PythonIdeProjectPayload
+) {
+	const versionToken = (
+		localUpdatedAt || `content-${stablePythonIdePayloadToken(payload)}`
+	)
+		.replace(/[^\w.:-]+/g, "_")
+		.slice(0, 48);
+	const suffix = `:recovered:${versionToken}`;
+	const prefixLength = Math.max(
+		0,
+		MAX_REMOTE_IMPORT_ID_LENGTH - suffix.length
+	);
+	const safeOriginalImportID = originalImportID.replace(/[^\w.:-]+/g, "_");
+	return `${safeOriginalImportID.slice(0, prefixLength)}${suffix}`;
+}
+
+function recoveredPythonIdeTitle(title: string | undefined) {
+	const suffix = " (recovered)";
+	const baseTitle = (title?.trim() || "Untitled Python Project").replace(
+		/\s+\(recovered\)$/i,
+		""
+	);
+	return `${baseTitle.slice(
+		0,
+		MAX_REMOTE_PROJECT_TITLE_LENGTH - suffix.length
+	)}${suffix}`;
+}
+
+function recoveredPythonIdeProject(
+	project: PythonIdeProject,
+	originalImportID = project._id
+) {
+	const payload = pythonIdeProjectToPayload(project);
+	const importID = recoveredPythonIdeImportID(
+		originalImportID,
+		project.updatedAt,
+		payload
+	);
+	return {
+		importID,
+		project: {
+			...plainPythonIdeProjectSnapshot(project),
+			_id: `local-${importID}`,
+			importID,
+			serverUpdatedAt: undefined,
+			title: recoveredPythonIdeTitle(project.title)
+		}
+	};
+}
+
+function isPythonIdeSaveConflict(error: unknown) {
+	return (
+		typeof error === "object" &&
+		error !== null &&
+		"response" in error &&
+		(error as { response?: { status?: number } }).response?.status === 409
+	);
+}
+
+/**
+ * Reconcile a device recovery snapshot with a freshly fetched server list.
+ *
+ * Content and the last confirmed server version are authoritative; client wall
+ * clocks are never compared with server clocks. Matching content accepts the
+ * server copy. A local edit based on the current server revision is updated
+ * optimistically. Ambiguous/stale local edits become a separate recovered copy
+ * so neither version is overwritten.
+ */
+export function reconcilePythonIdeRecoveryProjects(
+	localProjects: PythonIdeProject[],
+	remoteProjects: PythonIdeProject[]
+): PythonIdeRecoveryPlan {
+	const remoteByID = new Map(
+		remoteProjects.map(project => [
+			project._id,
+			normalizeRemotePythonIdeProject(project)
+		])
+	);
+	const mergedProjects: PythonIdeProject[] = [];
+	const writes: PythonIdeRecoveryWrite[] = [];
+	const includedRemoteIDs = new Set<string>();
+
+	for (const localSource of localProjects) {
+		const localProject = plainPythonIdeProjectSnapshot(localSource);
+		if (localProject._id.startsWith("local-")) {
+			mergedProjects.push(localProject);
+			writes.push({
+				importID: pythonIdeImportID(localProject),
+				kind: "create",
+				project: localProject
+			});
+			continue;
+		}
+
+		const remoteProject = remoteByID.get(localProject._id);
+		if (!remoteProject) {
+			const localChangedAfterConfirmedServerVersion =
+				!!localProject.updatedAt &&
+				(!localProject.serverUpdatedAt ||
+					!pythonIdeServerVersionsEqual(
+						localProject.updatedAt,
+						localProject.serverUpdatedAt
+					));
+			if (localChangedAfterConfirmedServerVersion) {
+				// A delete may have succeeded while its response was lost. If the
+				// student kept editing the still-visible project, preserve those
+				// post-delete edits as a separate retry-safe recovery project.
+				const recovered = recoveredPythonIdeProject(localProject);
+				mergedProjects.push(recovered.project);
+				writes.push({
+					importID: recovered.importID,
+					kind: "create",
+					project: recovered.project
+				});
+			}
+			// An unchanged missing project reflects a confirmed delete on this or
+			// another device and should stay deleted.
+			continue;
+		}
+
+		includedRemoteIDs.add(remoteProject._id);
+		const localPayload = pythonIdeProjectToPayload(localProject);
+		if (pythonIdePayloadMatchesProject(localPayload, remoteProject)) {
+			mergedProjects.push(remoteProject);
+			continue;
+		}
+
+		const remoteUpdatedAt =
+			remoteProject.serverUpdatedAt ?? remoteProject.updatedAt;
+		if (
+			remoteUpdatedAt &&
+			pythonIdeServerVersionsEqual(
+				localProject.serverUpdatedAt,
+				remoteUpdatedAt
+			)
+		) {
+			const localRecoveryProject = {
+				...localProject,
+				serverUpdatedAt: remoteUpdatedAt
+			};
+			mergedProjects.push(localRecoveryProject);
+			writes.push({
+				expectedUpdatedAt: remoteUpdatedAt,
+				kind: "update",
+				project: localRecoveryProject
+			});
+			continue;
+		}
+
+		const recovered = recoveredPythonIdeProject(localProject);
+		mergedProjects.push(remoteProject, recovered.project);
+		writes.push({
+			importID: recovered.importID,
+			kind: "create",
+			project: recovered.project
+		});
+	}
+
+	for (const remoteProject of remoteByID.values()) {
+		if (!includedRemoteIDs.has(remoteProject._id))
+			mergedProjects.push(remoteProject);
+	}
+
+	return {
+		projects: mergedProjects,
+		writes
+	};
+}
+
+export async function applyPythonIdeRecoveryPlan(
+	plan: PythonIdeRecoveryPlan,
+	studentID: string
+) {
+	const mergedProjects = plan.projects.map(plainPythonIdeProjectSnapshot);
+
+	for (const write of plan.writes) {
+		const savedProject =
+			write.kind === "create"
+				? await createRemotePythonIdeProject(
+						pythonIdeProjectToPayload(write.project),
+						studentID,
+						{
+							importID: write.importID,
+							localUpdatedAt: write.project.updatedAt
+						}
+					)
+				: await updateRemotePythonIdeProject(
+						write.project._id,
+						pythonIdeProjectToPayload(write.project),
+						studentID,
+						{ expectedUpdatedAt: write.expectedUpdatedAt }
+					);
+		const localIndex = mergedProjects.findIndex(
+			project => project._id === write.project._id
+		);
+		if (localIndex >= 0) mergedProjects.splice(localIndex, 1, savedProject);
+		else mergedProjects.push(savedProject);
+	}
+
+	return mergedProjects.filter(
+		(project, index, allProjects) =>
+			allProjects.findIndex(
+				candidate => candidate._id === project._id
+			) === index
+	);
+}
+
+export async function syncStoredStudentPythonProjects(studentID: string) {
+	void studentID;
+	await purgeAllStudentPythonProjectRecovery();
+	return [];
+}
+
+export async function fetchPythonIdeProjects(studentID: string) {
+	const { data } = await api.get<{ projects: PythonIdeProject[] }>(
+		"/students/projects",
+		{ headers: { "X-Student-ID": studentID } }
+	);
+	return data.projects.map(normalizeRemotePythonIdeProject);
+}
+
+export async function fetchVisiblePythonIdeProjectReviews(studentID: string) {
 	const { data } = await api.get<{ reviews: PythonIdeProjectReview[] }>(
-		"/users/loggedin/python-project-reviews"
+		"/students/project-reviews",
+		{ headers: { "X-Student-ID": studentID } }
 	);
 	return data.reviews;
 }
 
-export async function fetchManagedPythonIdeProjects(userID: string) {
+export async function fetchManagedPythonIdeProjects(studentID: string) {
 	const { data } = await api.get<{ projects: ManagedPythonIdeProject[] }>(
-		`/users/${userID}/python-projects`
+		`/admins/students/${studentID}/projects`
 	);
 	return data.projects;
 }
 
 export async function createRemotePythonIdeProject(
-	payload: PythonIdeProjectPayload
+	payload: PythonIdeProjectPayload,
+	studentID: string,
+	options: { importID: string; localUpdatedAt?: string }
 ) {
-	const { data } = await api.post<{ project: PythonIdeProject }>(
-		"/users/loggedin/python-projects",
+	const response = await api.post<{
+		idempotentReplay?: boolean;
+		project: PythonIdeProject;
+	}>(
+		"/students/projects",
+		{
+			...payload,
+			importID: options.importID
+		},
+		{ headers: { "X-Student-ID": studentID } }
+	);
+	const remoteProject = normalizeRemotePythonIdeProject(
+		response.data.project
+	);
+	const idempotentReplay =
+		response.data.idempotentReplay ?? response.status === 200;
+	if (
+		!idempotentReplay ||
+		pythonIdePayloadMatchesProject(payload, remoteProject)
+	) {
+		return remoteProject;
+	}
+
+	const expectedUpdatedAt =
+		remoteProject.serverUpdatedAt ?? remoteProject.updatedAt;
+	if (expectedUpdatedAt && pythonIdeRemoteProjectIsPristine(remoteProject)) {
+		try {
+			return await updateRemotePythonIdeProject(
+				remoteProject._id,
+				payload,
+				studentID,
+				{ expectedUpdatedAt }
+			);
+		} catch (error) {
+			if (!isPythonIdeSaveConflict(error)) throw error;
+		}
+	}
+
+	const recoveredPayload = {
+		...payload,
+		title: recoveredPythonIdeTitle(payload.title)
+	};
+	const recoveredImportID = recoveredPythonIdeImportID(
+		options.importID,
+		options.localUpdatedAt,
 		payload
 	);
-	return data.project;
+	const recoveredResponse = await api.post<{
+		idempotentReplay?: boolean;
+		project: PythonIdeProject;
+	}>(
+		"/students/projects",
+		{
+			...recoveredPayload,
+			importID: recoveredImportID
+		},
+		{ headers: { "X-Student-ID": studentID } }
+	);
+	const recoveredProject = normalizeRemotePythonIdeProject(
+		recoveredResponse.data.project
+	);
+	const recoveredReplay =
+		recoveredResponse.data.idempotentReplay ??
+		recoveredResponse.status === 200;
+	if (
+		recoveredReplay &&
+		!pythonIdePayloadMatchesProject(recoveredPayload, recoveredProject)
+	) {
+		throw new Error(
+			"An existing recovered project changed. The newer local copy was kept on this device."
+		);
+	}
+	return recoveredProject;
 }
 
 export async function createPythonIdeProjectReview(
-	userID: string,
+	studentID: string,
 	projectID: string
 ) {
 	const { data } = await api.post<{
 		project: PythonIdeProject;
 		review: PythonIdeProjectReview;
-	}>(`/users/${userID}/python-projects/${projectID}/review`, {});
+	}>(`/admins/students/${studentID}/projects/${projectID}/review`, {});
 	return data;
 }
 
 export async function updatePythonIdeProjectReview(
-	userID: string,
+	studentID: string,
 	projectID: string,
 	reviewID: string,
 	payload: {
@@ -939,7 +2083,7 @@ export async function updatePythonIdeProjectReview(
 		project: PythonIdeProject;
 		review: PythonIdeProjectReview;
 	}>(
-		`/users/${userID}/python-projects/${projectID}/review/${reviewID}`,
+		`/admins/students/${studentID}/projects/${projectID}/review/${reviewID}`,
 		payload
 	);
 	return data;
@@ -947,15 +2091,46 @@ export async function updatePythonIdeProjectReview(
 
 export async function updateRemotePythonIdeProject(
 	projectID: string,
-	payload: PythonIdeProjectPayload
+	payload: PythonIdeProjectPayload,
+	studentID: string,
+	options: { expectedUpdatedAt: string }
 ) {
 	const { data } = await api.put<{ project: PythonIdeProject }>(
-		`/users/loggedin/python-projects/${projectID}`,
-		payload
+		`/students/projects/${projectID}`,
+		{
+			...payload,
+			expectedUpdatedAt: options.expectedUpdatedAt
+		},
+		{ headers: { "X-Student-ID": studentID } }
 	);
-	return data.project;
+	return normalizeRemotePythonIdeProject(data.project);
 }
 
-export async function deleteRemotePythonIdeProject(projectID: string) {
-	await api.delete(`/users/loggedin/python-projects/${projectID}`);
+export async function deleteRemotePythonIdeProject(
+	projectID: string,
+	studentID: string,
+	options: { expectedUpdatedAt: string }
+) {
+	try {
+		await api.delete(`/students/projects/${projectID}`, {
+			data: { expectedUpdatedAt: options.expectedUpdatedAt },
+			headers: { "X-Student-ID": studentID }
+		});
+	} catch (error) {
+		const status =
+			typeof error === "object" && error !== null && "response" in error
+				? (error as { response?: { status?: number } }).response?.status
+				: undefined;
+		const requestMayHaveSucceeded =
+			status === undefined || (status >= 500 && status <= 599);
+		if (!requestMayHaveSucceeded) throw error;
+
+		try {
+			const projects = await fetchPythonIdeProjects(studentID);
+			if (!projects.some(project => project._id === projectID)) return;
+		} catch {
+			// An inconclusive probe cannot authorize removing the local project.
+		}
+		throw error;
+	}
 }

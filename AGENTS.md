@@ -11,12 +11,16 @@ Keep these constraints intact:
 
 - The public catalog contains exactly Scratch Level 1, Scratch Level 2, Python
   Level 1, Python Level 2, and PyGames.
-- Students browse courses and use the browser IDE anonymously. Do not require,
-  offer, or create student accounts; anonymous projects remain in the browser.
-- Julio is the sole teacher and sole authenticated Admin. His account is
+- Students browse courses and use the browser IDE anonymously. An optional
+  student account may sync Python IDE projects, but it must never gate course
+  access or anonymous browser saves.
+- Student accounts have a username but no email. Julio creates them and issues
+  unique, expiring password-setup codes; students cannot register or recover
+  accounts themselves.
+- Julio is the sole teacher and sole authenticated Admin. His Admin account is
   provisioned only through `npm run -w back-end create-admin-ts`.
-- Do not add HTTP account creation, additional admins, tutor roles, or separate
-  tutor/admin workflows.
+- Do not add HTTP Admin creation, additional admins, tutor roles, separate
+  tutor/admin workflows, shared class codes, or universal recovery codes.
 - Do not restore scheduler, booking, Zoom, tuition, payment, freelance,
   tutoring-business, intake, or expectation-setting flows.
 
@@ -50,9 +54,12 @@ uncommitted unless the user asks you to.
 - `front-end/test/` and `back-end/test/`: Vitest suites.
 - Root configuration controls shared TypeScript, ESLint, workspaces, and builds.
 
-Keep public course delivery independent of student identity. Use the
-fork-specific `cs-avasan-org` database, environment variables or the configured
-Vault path for secrets, and never reuse or commit upstream credentials or data.
+Keep public course delivery independent of student identity. Store student
+credentials only as hashes, keep Julio-issued access codes unique and limited
+to password setup, and preserve anonymous browser projects until a student
+explicitly chooses to import them. Use the fork-specific `cs-avasan-org` database,
+environment variables or the configured Vault path for secrets, and never reuse
+or commit upstream credentials or data.
 
 ## Dependency and Lockfile Discipline
 
@@ -83,4 +90,5 @@ documentation-only work, at minimum review the rendered text, confirm repository
 facts against the live checkout, and run `git diff --check`.
 
 Validation must specifically confirm that the five-course public catalog,
-anonymous student access, and Julio-only Admin boundary remain intact.
+anonymous course/IDE access, optional student project sync, and Julio-only Admin
+boundary remain intact.

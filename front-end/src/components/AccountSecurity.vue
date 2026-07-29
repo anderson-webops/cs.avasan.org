@@ -1,51 +1,64 @@
 <script lang="ts" setup>
-import { computed, ref, watch } from "vue";
+import type { AxiosError } from "axios";
+import type { Admin } from "@/stores/app";
+import { computed, onBeforeUnmount, ref, watch } from "vue";
 import { api } from "@/api";
+import { clearAdminSessionOnAuthorizationError } from "@/modules/adminSession";
+import { broadcastStudentSessionEnded } from "@/modules/studentSessionBroadcast";
 import { useAppStore } from "@/stores/app";
 
-const props = defineProps<{ entityId: string; email: string }>();
+const props = defineProps<{ entityId: string }>();
 
 const app = useAppStore();
-const email = ref(props.email);
-const emailStatus = ref("");
-const emailError = ref("");
 
 const currentPassword = ref("");
 const newPassword = ref("");
 const confirmPassword = ref("");
+const currentPasswordInput = ref<HTMLInputElement | null>(null);
+const newPasswordInput = ref<HTMLInputElement | null>(null);
+const confirmPasswordInput = ref<HTMLInputElement | null>(null);
 const passwordStatus = ref("");
 const passwordError = ref("");
+const adminAuthRequestTimeoutMs = 30_000;
 const idPrefix = computed(
 	() => `account-security-admin-${props.entityId.replace(/[^\w-]/g, "-")}`
 );
 
-watch(
-	() => props.email,
-	value => {
-		email.value = value;
-	}
-);
+function clearPasswordInputs() {
+	currentPassword.value = "";
+	newPassword.value = "";
+	confirmPassword.value = "";
+	if (currentPasswordInput.value) currentPasswordInput.value.value = "";
+	if (newPasswordInput.value) newPasswordInput.value.value = "";
+	if (confirmPasswordInput.value) confirmPasswordInput.value.value = "";
+}
 
-async function updateEmail() {
-	emailStatus.value = "";
-	emailError.value = "";
-	if (!email.value) {
-		emailError.value = "Email is required.";
-		return;
-	}
+function submitPasswordChange() {
+	const submittedCurrentPassword = currentPassword.value;
+	const submittedNewPassword = newPassword.value;
+	clearPasswordInputs();
+	return api.post<{
+		currentAdmin: Admin;
+		message: string;
+	}>(
+		`/accounts/changePassword/${props.entityId}`,
+		{
+			currentPassword: submittedCurrentPassword,
+			newPassword: submittedNewPassword
+		},
+		{ timeout: adminAuthRequestTimeoutMs }
+	);
+}
 
-	try {
-		await api.post(`/accounts/changeEmail/${props.entityId}`, {
-			email: email.value
-		});
-		emailStatus.value = "Email updated successfully.";
-		app.refreshCurrentAdmin();
-	} catch (err: any) {
-		emailError.value =
-			err.response?.data?.message ??
-			err.message ??
-			"Unable to update email.";
-	}
+function passwordChangeConfirmed(
+	previousTimestamp: string | null | undefined,
+	currentTimestamp: string | null | undefined
+) {
+	const currentTime = Date.parse(currentTimestamp ?? "");
+	if (!Number.isFinite(currentTime)) return false;
+	if (!previousTimestamp) return true;
+	const previousTime = Date.parse(previousTimestamp);
+	return Number.isFinite(previousTime) && currentTime > previousTime;
 }
 
 async function updatePassword() {
@@ -53,72 +66,105 @@ async function updatePassword() {
 	passwordError.value = "";
 	if (!newPassword.value) {
 		passwordError.value = "New password is required.";
+		clearPasswordInputs();
 		return;
 	}
 	if (newPassword.value !== confirmPassword.value) {
 		passwordError.value = "New passwords do not match.";
+		clearPasswordInputs();
 		return;
 	}
 
+	const previousPasswordChangedAt =
+		app.currentAdmin?.passwordChangedAt ?? null;
 	try {
-		await api.post(`/accounts/changePassword/${props.entityId}`, {
-			currentPassword: currentPassword.value,
-			newPassword: newPassword.value
-		});
+		const { data } = await submitPasswordChange();
+		if (data.currentAdmin?._id !== props.entityId) {
+			clearPasswordInputs();
+			app.clearSession();
+			broadcastStudentSessionEnded();
+			return;
+		}
+		app.setCurrentAdmin(data.currentAdmin);
 		passwordStatus.value = "Password updated successfully.";
-		currentPassword.value = newPassword.value = confirmPassword.value = "";
-	} catch (err: any) {
-		passwordError.value =
-			err.response?.data?.message ??
-			err.message ??
-			"Unable to update password.";
+		clearPasswordInputs();
+		broadcastStudentSessionEnded();
+	} catch (caught: unknown) {
+		const axiosError = caught as AxiosError<{ message?: string }>;
+		const responseStatus = axiosError.response?.status;
+		if (
+			typeof responseStatus === "number" &&
+			responseStatus >= 400 &&
+			responseStatus < 500
+		) {
+			if (clearAdminSessionOnAuthorizationError(caught, app)) {
+				clearPasswordInputs();
+				broadcastStudentSessionEnded();
+				return;
+			}
+			passwordError.value =
+				axiosError.response?.data?.message ??
+				(caught instanceof Error
+					? caught.message
+					: "Unable to update password.");
+			return;
+		}
+
+		try {
+			const { data } = await api.get<{ currentAdmin: Admin }>(
+				"/admins/loggedin"
+			);
+			if (data.currentAdmin?._id !== props.entityId) {
+				throw new Error("Teacher session changed.");
+			}
+			app.setCurrentAdmin(data.currentAdmin);
+			clearPasswordInputs();
+			if (
+				passwordChangeConfirmed(
+					previousPasswordChangedAt,
+					data.currentAdmin.passwordChangedAt
+				)
+			) {
+				passwordStatus.value = "Password updated successfully.";
+				broadcastStudentSessionEnded();
+			} else {
+				passwordError.value =
+					"Password change could not be confirmed. Try again before relying on the new password.";
+			}
+		} catch {
+			clearPasswordInputs();
+			app.clearSession();
+			broadcastStudentSessionEnded();
+		}
+	} finally {
+		clearPasswordInputs();
 	}
 }
+
+watch(
+	[() => props.entityId, () => app.currentAdmin?._id ?? null],
+	([entityID, adminID], [previousEntityID, previousAdminID]) => {
+		if (entityID !== previousEntityID || adminID !== previousAdminID) {
+			clearPasswordInputs();
+		}
+	}
+);
+
+onBeforeUnmount(clearPasswordInputs);
 </script>
 
 <template>
 	<section class="security-card" :aria-labelledby="`${idPrefix}-title`">
-		<h2 :id="`${idPrefix}-title`">Account settings</h2>
+		<h2 :id="`${idPrefix}-title`">Change password</h2>
 
 		<div class="security-section">
-			<h3>Email</h3>
-			<div class="field">
-				<label :for="`${idPrefix}-email`">Email</label>
-				<input
-					:id="`${idPrefix}-email`"
-					v-model="email"
-					name="account-email"
-					type="email"
-				/>
-			</div>
-			<button
-				class="btn-secondary btn"
-				type="button"
-				@click="updateEmail"
-			>
-				Update email
-			</button>
-			<p
-				v-if="emailStatus"
-				class="status"
-				role="status"
-				aria-live="polite"
-			>
-				{{ emailStatus }}
-			</p>
-			<p v-if="emailError" class="error" role="alert">
-				{{ emailError }}
-			</p>
-		</div>
-
-		<div class="security-section">
-			<h3>Password</h3>
 			<div class="field">
 				<label :for="`${idPrefix}-current-password`"
 					>Current password</label
 				>
 				<input
 					:id="`${idPrefix}-current-password`"
+					ref="currentPasswordInput"
 					v-model="currentPassword"
 					autocomplete="current-password"
 					name="current-password"
@@ -129,6 +175,7 @@ async function updatePassword() {
 				<label :for="`${idPrefix}-new-password`">New password</label>
 				<input
 					:id="`${idPrefix}-new-password`"
+					ref="newPasswordInput"
 					v-model="newPassword"
 					autocomplete="new-password"
 					name="new-password"
@@ -141,6 +188,7 @@ async function updatePassword() {
 				>
 				<input
 					:id="`${idPrefix}-confirm-password`"
+					ref="confirmPasswordInput"
 					v-model="confirmPassword"
 					autocomplete="new-password"
 					name="confirm-password"

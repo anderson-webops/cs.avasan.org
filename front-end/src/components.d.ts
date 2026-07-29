@@ -20,6 +20,9 @@ declare module 'vue' {
     PythonIdeWorkspace: typeof import('./components/PythonIdeWorkspace.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    StudentAccess: typeof import('./components/StudentAccess.vue')['default']
+    StudentManagement: typeof import('./components/StudentManagement.vue')['default']
+    StudentProjectReview: typeof import('./components/StudentProjectReview.vue')['default']
     TheHeader: typeof import('./components/TheHeader.vue')['default']
   }
 }
