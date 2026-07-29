@@ -33,7 +33,7 @@ async function withPythonAssetsProxy<T>(
 }
 
 const realFetch = globalThis.fetch.bind(globalThis);
-const staticAssetsZipUrl = "https://static.classes.jacobdanderson.net/assets.zip";
+const staticAssetsZipUrl = "https://static.cs.avasan.org/assets.zip";
 const fetchSpy = vi.spyOn(globalThis, "fetch");
 
 function fetchUrl(input: Parameters<typeof fetch>[0]) {

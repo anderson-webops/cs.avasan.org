@@ -79,7 +79,8 @@ npm run lint
 npm run build
 ```
 
-The normal build downloads the inherited Python/PyGames asset archive. For an
+The normal build downloads the reviewed Python/PyGames asset archive from
+[`static.cs.avasan.org`](https://static.cs.avasan.org). For an
 offline application-only validation, use
 `PYTHON_IDE_ASSETS_DOWNLOAD=skip npm run build`; that verifies both workspaces
 but intentionally omits the optional IDE asset pack.
@@ -91,6 +92,11 @@ proxy chain that replaces incoming forwarding headers. Database diagnostics
 always require `INTERNAL_DIAGNOSTICS_KEY`, including during local development.
 
 The static front-end is deployable independently, but teacher login additionally
-requires the Express API and an `/api/*` route to that service. The course build
-continues to use the inherited Python asset archive until an equivalent archive
-is published and verified at `static.cs.avasan.org`.
+requires the Express API and an `/api/*` route to that service. Source links
+from the upstream catalog are canonicalized to the reviewed downstream asset
+host at build/runtime normalization boundaries.
+
+Production builds send page views to the dedicated
+`analytics.avasan.org` instance and the owner-visible central
+`analytics.jacobdanderson.net` instance. Set
+`VITE_DISABLE_ANALYTICS=true` to omit both trackers.

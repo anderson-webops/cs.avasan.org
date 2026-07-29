@@ -1,15 +1,12 @@
-export const STATIC_MEDIA_BASE = "https://static.classes.jacobdanderson.net";
+export const STATIC_MEDIA_BASE = "https://static.cs.avasan.org";
+export const UPSTREAM_STATIC_MEDIA_BASE = "https://static.classes.jacobdanderson.net";
 export const LEGACY_STATIC_MEDIA_BASE = "https://static.junilearning.com";
 const STATIC_MEDIA_URL_PATTERN =
-	/https:\/\/(?:static\.classes\.jacobdanderson\.net|static\.junilearning\.com)\/[^\s<>"')\]]+/g;
+	/https:\/\/(?:static\.cs\.avasan\.org|static\.classes\.jacobdanderson\.net|static\.junilearning\.com)\/[^\s<>"')\]]+/g;
 export const PENDING_STATIC_MEDIA_NOTICE_PATTERN =
 	/\b(?:pending media|reserved|placeholder|not currently available|class static host)\b/i;
 
-function numberedStaticFilenames(
-	prefix: string,
-	numbers: readonly number[],
-	extension = "png"
-) {
+function numberedStaticFilenames(prefix: string, numbers: readonly number[], extension = "png") {
 	return numbers.map(number => `${prefix}${number}.${extension}`);
 }
 
@@ -70,33 +67,15 @@ export const geometryAStaticFilenames = [
 	...numberedStaticFilenames("geoa7_concept1_", [0, 1, 2, 3, 4]),
 	...numberedStaticFilenames("geoa7_concept2_", [0, 1, 2]),
 	...numberedStaticFilenames("geoa7_concept3_", [0, 1, 2]),
-	...numberedStaticFilenames(
-		"geoa7_pset1_",
-		[0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 16, 17, 18, 20]
-	),
-	...numberedStaticFilenames(
-		"geoa7_pset2_",
-		[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
-	),
-	...numberedStaticFilenames(
-		"geoa7_pset3_",
-		[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-	),
-	...numberedStaticFilenames(
-		"geoa7_pset4_",
-		[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
-	),
+	...numberedStaticFilenames("geoa7_pset1_", [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 16, 17, 18, 20]),
+	...numberedStaticFilenames("geoa7_pset2_", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]),
+	...numberedStaticFilenames("geoa7_pset3_", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+	...numberedStaticFilenames("geoa7_pset4_", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]),
 	...numberedStaticFilenames("geoa7_pset4_", [18, 19, 20, 21, 22]),
 	...numberedStaticFilenames("geoa8_concept1_", [0, 1, 2]),
 	...numberedStaticFilenames("geoa8_concept2_", [0, 1, 2, 3]),
-	...numberedStaticFilenames(
-		"geoa8_pset1_",
-		[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15]
-	),
-	...numberedStaticFilenames(
-		"geoa8_pset2_",
-		[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 18, 19, 20, 21]
-	),
+	...numberedStaticFilenames("geoa8_pset1_", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15]),
+	...numberedStaticFilenames("geoa8_pset2_", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 18, 19, 20, 21]),
 	"geoa9_concept1_0.png",
 	...numberedStaticFilenames("geoa9_concept2_", [0, 1]),
 	...numberedStaticFilenames("geoa9_pset1_", [0, 1, 2, 3, 4]),
@@ -466,10 +445,7 @@ export const preCalculusAStaticFilenames = [
 	"pct6_concept1_0.png",
 	"pcta6_concept3_0.png",
 	...numberedStaticFilenames("pcta7_concept1_", [0, 1, 2, 3, 4]),
-	...numberedStaticFilenames(
-		"pcta7_pset1_",
-		[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
-	),
+	...numberedStaticFilenames("pcta7_pset1_", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]),
 	...numberedStaticFilenames("pcta12_concept1_", [0, 1]),
 	...numberedStaticFilenames("pcta12_concept2_", [0, 1, 2, 3]),
 	...numberedStaticFilenames(
@@ -495,10 +471,7 @@ export const preCalculusBStaticFilenames = [
 	"checkin1_trig_0.png",
 	"checkin1_trig_1.png",
 	"checkin1_trig_3.png",
-	...numberedStaticFilenames(
-		"pctb1_concept1_",
-		[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-	),
+	...numberedStaticFilenames("pctb1_concept1_", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
 	...numberedStaticFilenames("pctb1_concept2_", [0, 1, 2]),
 	...numberedStaticFilenames("pctb1_concept3_", [0, 1, 2, 3, 4, 5, 6]),
 	...numberedStaticFilenames("pctb1_pset1_", [0, 1, 2, 3, 4, 6, 8, 9]),
@@ -517,10 +490,7 @@ export const preCalculusBStaticFilenames = [
 	...numberedStaticFilenames("pctb3_pset2_", [9, 10]),
 	...numberedStaticFilenames("pctb3_pset4_", [0, 1, 2, 3, 4, 5, 19, 20]),
 	"pctb4_concept2_0.png",
-	...numberedStaticFilenames(
-		"pctb5_concept1_",
-		[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-	),
+	...numberedStaticFilenames("pctb5_concept1_", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
 	...numberedStaticFilenames("pctb5_concept2_", [0, 1, 2]),
 	"pctb6_concept1_0.png",
 	...numberedStaticFilenames("pctb7_concept1_", [0, 1]),
@@ -1719,19 +1689,14 @@ export const KNOWN_PENDING_STATIC_MEDIA_FILENAMES = [
 	...apCalculusStaticFilenames
 ] as const;
 
-const knownPendingStaticMedia = new Set<string>(
-	KNOWN_PENDING_STATIC_MEDIA_FILENAMES
-);
+const knownPendingStaticMedia = new Set<string>(KNOWN_PENDING_STATIC_MEDIA_FILENAMES);
 
 function encodeStaticMediaCharacter(character: string) {
 	return `%${character.charCodeAt(0).toString(16).toUpperCase()}`;
 }
 
 function staticMediaPathSegment(filename: string) {
-	return encodeURIComponent(filename).replace(
-		/[!'()*]/g,
-		encodeStaticMediaCharacter
-	);
+	return encodeURIComponent(filename).replace(/[!'()*]/g, encodeStaticMediaCharacter);
 }
 
 export function staticMediaUrl(filename: string) {
@@ -1749,9 +1714,7 @@ function trimStaticMediaUrl(url: string) {
 export function staticMediaFilename(url: string) {
 	try {
 		const pathname = new URL(url).pathname;
-		return decodeURIComponent(
-			pathname.split("/").filter(Boolean).pop() || pathname || url
-		);
+		return decodeURIComponent(pathname.split("/").filter(Boolean).pop() || pathname || url);
 	} catch {
 		return url;
 	}
@@ -1767,7 +1730,8 @@ export function isStaticMediaUrl(url: string) {
 
 export function isLegacyStaticMediaUrl(url: string) {
 	try {
-		return new URL(url).origin === LEGACY_STATIC_MEDIA_BASE;
+		const origin = new URL(url).origin;
+		return origin === LEGACY_STATIC_MEDIA_BASE || origin === UPSTREAM_STATIC_MEDIA_BASE;
 	} catch {
 		return false;
 	}
@@ -1775,8 +1739,7 @@ export function isLegacyStaticMediaUrl(url: string) {
 
 export function canonicalStaticMediaUrl(url: string) {
 	if (isStaticMediaUrl(url)) return url;
-	if (isLegacyStaticMediaUrl(url))
-		return staticMediaUrl(staticMediaFilename(url));
+	if (isLegacyStaticMediaUrl(url)) return staticMediaUrl(staticMediaFilename(url));
 	return null;
 }
 
@@ -1785,10 +1748,7 @@ export function isKnownPendingStaticMedia(filename: string) {
 }
 
 export function isKnownPendingStaticMediaUrl(url: string) {
-	return (
-		!!canonicalStaticMediaUrl(url) &&
-		isKnownPendingStaticMedia(staticMediaFilename(url))
-	);
+	return !!canonicalStaticMediaUrl(url) && isKnownPendingStaticMedia(staticMediaFilename(url));
 }
 
 export function staticMediaUrlsFromText(text: string) {
@@ -1817,10 +1777,7 @@ export function hasPendingStaticMediaNotice(content: string, filename: string) {
 	);
 }
 
-export function withPendingStaticMediaNotice(
-	content: string,
-	filename: string
-) {
+export function withPendingStaticMediaNotice(content: string, filename: string) {
 	if (!isKnownPendingStaticMedia(filename)) {
 		return content;
 	}

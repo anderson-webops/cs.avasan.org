@@ -3,7 +3,7 @@ import { env } from "node:process";
 import { Readable } from "node:stream";
 import { Router } from "express";
 
-const DEFAULT_ASSETS_ZIP_URL = "https://static.classes.jacobdanderson.net/assets.zip";
+const DEFAULT_ASSETS_ZIP_URL = "https://static.cs.avasan.org/assets.zip";
 const PYTHON_IDE_ASSETS_ZIP_URL = env.PYTHON_IDE_ASSETS_ZIP_URL || DEFAULT_ASSETS_ZIP_URL;
 
 export const pythonIdeAssetsProxy = Router().get("/assets.zip", async (_req, res) => {

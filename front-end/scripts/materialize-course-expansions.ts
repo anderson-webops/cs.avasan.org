@@ -460,6 +460,7 @@ function extractLeadingResourceLink(title: string, content: string) {
 		normalizedUrl.includes("github.com/instruction-material/") ||
 		normalizedUrl.includes("scratch.mit.edu/projects/") ||
 		normalizedUrl.includes("static.junilearning.com/") ||
+		normalizedUrl.includes("static.cs.avasan.org/") ||
 		normalizedUrl.includes("static.classes.jacobdanderson.net/");
 
 	if (!isInstructionMaterialLink && !PROJECT_TITLE_RE.test(title)) {

@@ -1,5 +1,6 @@
 // vite.config.ts
 import path from "node:path";
+import process from "node:process";
 import { fileURLToPath } from "node:url";
 import { unheadVueComposablesImports } from "@unhead/vue";
 import Vue from "@vitejs/plugin-vue";
@@ -16,6 +17,16 @@ import { generateProductionSitemap } from "./scripts/sitemap.mts";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const pythonIdePreloadChunkRE = /(?:^|\/)python-ide-runtime-[^/]+\.js$/;
+const analyticsScripts = [
+	{
+		src: "https://analytics.avasan.org/script.js",
+		websiteId: "ca8e90e1-8547-419e-a40e-7c63ac8f190c"
+	},
+	{
+		src: "https://analytics.jacobdanderson.net/script.js",
+		websiteId: "a2e14ad7-45b8-4b8f-a86a-7c55222a0835"
+	}
+];
 
 export default defineConfig(({ command }) => ({
 	resolve: {
@@ -69,6 +80,25 @@ export default defineConfig(({ command }) => ({
 		}),
 
 		/* 6️⃣  CSS / Markdown / Misc */
+		...(process.env.VITE_DISABLE_ANALYTICS === "true"
+			? []
+			: [
+					{
+						apply: "build" as const,
+						name: "avasan-analytics-html",
+						transformIndexHtml() {
+							return analyticsScripts.map(({ src, websiteId }) => ({
+								attrs: {
+									"data-website-id": websiteId,
+									defer: true,
+									src
+								},
+								injectTo: "head" as const,
+								tag: "script"
+							}));
+						}
+					}
+				]),
 		Unocss()
 	],
 
@@ -124,9 +154,7 @@ export default defineConfig(({ command }) => ({
 	server: {
 		proxy: {
 			"/api": {
-				target:
-					process.env.VITE_API_PROXY_TARGET ??
-					"http://localhost:3008",
+				target: process.env.VITE_API_PROXY_TARGET ?? "http://localhost:3008",
 				changeOrigin: true,
 				rewrite: p => p.replace(/^\/api/, "") // strip /api
 			}

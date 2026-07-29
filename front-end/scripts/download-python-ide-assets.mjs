@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { strFromU8, unzipSync } from "fflate";
 
-const DEFAULT_ASSETS_ZIP_URL = "https://static.classes.jacobdanderson.net/assets.zip";
+const DEFAULT_ASSETS_ZIP_URL = "https://static.cs.avasan.org/assets.zip";
 const MINIMUM_ZIP_BYTES = 1024;
 const ZIP_HEADER = [0x50, 0x4b];
 const ASSET_PATH_RE =

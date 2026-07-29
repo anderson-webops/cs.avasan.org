@@ -1,9 +1,4 @@
-import type {
-	CourseDefinition,
-	CourseModuleItem,
-	CourseSummary,
-	RawCourse
-} from "./courses/types";
+import type { CourseDefinition, CourseModuleItem, CourseSummary, RawCourse } from "./courses/types";
 import { defineStore } from "pinia";
 
 import { computed } from "vue";
@@ -19,8 +14,7 @@ const NEWLINE_RE = /\n+/g;
 const WHITESPACE_RE = /\s+/g;
 const INSTRUCTOR_NOTE_RE = /instructor note/i;
 const EXCESS_BLANK_LINES_RE = /\n{3,}/g;
-const PROJECT_TITLE_RE =
-	/\bproject\b|\bcapstone\b|^problem:|^practice:|^extension:|^optional project:/i;
+const PROJECT_TITLE_RE = /\bproject\b|\bcapstone\b|^problem:|^practice:|^extension:|^optional project:/i;
 const MERGE_INTO_PREVIOUS_TITLE_RE = /^course recap$/i;
 const PRESENTATION_TITLE_RE = /presentation$/i;
 const SENTENCE_END_RE = /[.!?]$/;
@@ -28,8 +22,7 @@ const SENTENCE_SPLIT_RE = /(?<=[.!?])\s+/;
 const TRAILING_SLASH_RE = /\/$/;
 const TRAILING_URL_PUNCTUATION_RE = /[),.;:]+$/;
 const GITHUB_BLOB_SEGMENT_RE = /\/blob\//i;
-const DEDICATED_SOLUTION_SEGMENT_RE =
-	/(?:^|\/)solution(?:\/|$)|(?:^|[-_])solution(?:[-_]|$)/i;
+const DEDICATED_SOLUTION_SEGMENT_RE = /(?:^|\/)solution(?:\/|$)|(?:^|[-_])solution(?:[-_]|$)/i;
 const REFERENCE_LEAD_LABEL_RE = /reference|repo|starter/i;
 const FIRST_WHITESPACE_RE = /\s/;
 const MAX_SUMMARY_SENTENCES = 2;
@@ -56,28 +49,23 @@ const BOILERPLATE_SENTENCE_REWRITES: Array<{
 	replace: (...matches: string[]) => string;
 }> = [
 	{
-		pattern:
-			/^Use the linked starter and solution for a supplemental project tied to (.+?)\.?$/i,
-		replace: (_whole, topic) =>
-			`Supplemental practice for ${topic} using the linked starter.`
+		pattern: /^Use the linked starter and solution for a supplemental project tied to (.+?)\.?$/i,
+		replace: (_whole, topic) => `Supplemental practice for ${topic} using the linked starter.`
 	},
 	{
 		pattern:
 			/^Extend the work from (.+?) with a tighter constraint, one extra feature, or a slightly more realistic input case\.?$/i,
-		replace: (_whole, topic) =>
-			`Extend ${topic} with one tighter constraint or extra feature.`
+		replace: (_whole, topic) => `Extend ${topic} with one tighter constraint or extra feature.`
 	},
 	{
 		pattern:
 			/^Repeat the core ideas from (.+?) on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning\.?$/i,
-		replace: (_whole, topic) =>
-			`Practice ${topic} again on a smaller problem.`
+		replace: (_whole, topic) => `Practice ${topic} again on a smaller problem.`
 	},
 	{
 		pattern:
 			/^Close (.+?) by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass\.?$/i,
-		replace: (_whole, topic) =>
-			`Review ${topic}, compare approaches, and record one improvement for the next pass.`
+		replace: (_whole, topic) => `Review ${topic}, compare approaches, and record one improvement for the next pass.`
 	}
 ];
 const STRUCTURED_COURSE_SUPPORT_RE =
@@ -88,11 +76,7 @@ interface NormalizeCourseOptions {
 	includeSolutions: boolean;
 }
 
-export type {
-	CourseDefinition,
-	CourseModule,
-	CourseModuleItem
-} from "./courses/types";
+export type { CourseDefinition, CourseModule, CourseModuleItem } from "./courses/types";
 
 function slugify(value: string): string {
 	return value
@@ -108,24 +92,14 @@ function courseEntityId(explicitId: string | undefined, fallbackId: string) {
 	return explicitId?.trim() ? slugify(explicitId) : fallbackId;
 }
 
-function courseEntityAliases(
-	explicitId: string | undefined,
-	fallbackId: string,
-	aliases: string[] | undefined
-) {
+function courseEntityAliases(explicitId: string | undefined, fallbackId: string, aliases: string[] | undefined) {
 	const normalizedExplicitId = explicitId?.trim() ? slugify(explicitId) : "";
-	return [
-		...(normalizedExplicitId ? [fallbackId] : []),
-		...(aliases ?? []).map(alias => slugify(alias))
-	]
+	return [...(normalizedExplicitId ? [fallbackId] : []), ...(aliases ?? []).map(alias => slugify(alias))]
 		.map(alias => alias.trim())
 		.filter(alias => alias && alias !== normalizedExplicitId);
 }
 
-const HIDDEN_ITEM_TITLES = new Set([
-	"session recap & assignment",
-	"recap & assignment review"
-]);
+const HIDDEN_ITEM_TITLES = new Set(["session recap & assignment", "recap & assignment review"]);
 
 function shouldHideItem(title: string) {
 	return HIDDEN_ITEM_TITLES.has(title.trim().toLowerCase());
@@ -137,10 +111,7 @@ function normalizeContent(content: string): string {
 		.map(part => part.trim())
 		.filter(Boolean)
 		.filter(part => !INSTRUCTOR_NOTE_RE.test(part));
-	return paragraphs
-		.join("\n\n")
-		.replace(EXCESS_BLANK_LINES_RE, "\n\n")
-		.trim();
+	return paragraphs.join("\n\n").replace(EXCESS_BLANK_LINES_RE, "\n\n").trim();
 }
 
 function ensureSentence(text: string) {
@@ -154,11 +125,7 @@ function rewriteBoilerplateSentence(sentence: string) {
 		return "";
 	}
 
-	if (
-		BOILERPLATE_SENTENCE_FILTERS.some(pattern =>
-			pattern.test(normalizedSentence)
-		)
-	) {
+	if (BOILERPLATE_SENTENCE_FILTERS.some(pattern => pattern.test(normalizedSentence))) {
 		return "";
 	}
 
@@ -200,11 +167,7 @@ function compactContent(content: string): string {
 
 		const candidate = [...summary, rewritten].join(" ");
 
-		if (
-			summary.length > 0 &&
-			(summary.length >= MAX_SUMMARY_SENTENCES ||
-				candidate.length > MAX_SUMMARY_LENGTH)
-		) {
+		if (summary.length > 0 && (summary.length >= MAX_SUMMARY_SENTENCES || candidate.length > MAX_SUMMARY_LENGTH)) {
 			break;
 		}
 
@@ -301,14 +264,8 @@ function extractLeadingResourceLink(title: string, content: string) {
 	}
 
 	const firstWhitespaceIndex = afterLabel.search(FIRST_WHITESPACE_RE);
-	const rawUrl =
-		firstWhitespaceIndex === -1
-			? afterLabel
-			: afterLabel.slice(0, firstWhitespaceIndex);
-	const remainder =
-		firstWhitespaceIndex === -1
-			? ""
-			: afterLabel.slice(firstWhitespaceIndex).trim();
+	const rawUrl = firstWhitespaceIndex === -1 ? afterLabel : afterLabel.slice(0, firstWhitespaceIndex);
+	const remainder = firstWhitespaceIndex === -1 ? "" : afterLabel.slice(firstWhitespaceIndex).trim();
 	const normalizedUrl = canonicalizeResourceUrl(rawUrl);
 
 	if (!normalizedUrl) {
@@ -319,22 +276,17 @@ function extractLeadingResourceLink(title: string, content: string) {
 		normalizedUrl.includes("github.com/instruction-material/") ||
 		normalizedUrl.includes("scratch.mit.edu/projects/") ||
 		normalizedUrl.includes("static.junilearning.com/") ||
+		normalizedUrl.includes("static.cs.avasan.org/") ||
 		normalizedUrl.includes("static.classes.jacobdanderson.net/");
 	const isReferenceLead = REFERENCE_LEAD_LABEL_RE.test(label);
 
-	if (
-		!isInstructionMaterialLink &&
-		!isReferenceLead &&
-		!PROJECT_TITLE_RE.test(title)
-	) {
+	if (!isInstructionMaterialLink && !isReferenceLead && !PROJECT_TITLE_RE.test(title)) {
 		return null;
 	}
 
 	return {
 		content: remainder.trim(),
-		isSolutionLink:
-			/\bsolution\b/i.test(label) ||
-			DEDICATED_SOLUTION_SEGMENT_RE.test(normalizedUrl),
+		isSolutionLink: /\bsolution\b/i.test(label) || DEDICATED_SOLUTION_SEGMENT_RE.test(normalizedUrl),
 		url: normalizedUrl
 	};
 }
@@ -351,12 +303,9 @@ function mergeAdjacentSupportItems(items: CourseModuleItemDraft[]) {
 		if (
 			previousItem &&
 			(MERGE_INTO_PREVIOUS_TITLE_RE.test(item.title) ||
-				(PRESENTATION_TITLE_RE.test(item.title) &&
-					PROJECT_TITLE_RE.test(previousItem.title)))
+				(PRESENTATION_TITLE_RE.test(item.title) && PROJECT_TITLE_RE.test(previousItem.title)))
 		) {
-			previousItem.content = displayCourseContent(
-				`${previousItem.content}\n\n${item.content}`
-			);
+			previousItem.content = displayCourseContent(`${previousItem.content}\n\n${item.content}`);
 			return mergedItems;
 		}
 
@@ -376,103 +325,56 @@ function normalizeCourse(
 		modules: course.modules.map(module => {
 			const generatedModuleId = slugify(`${courseId}-${module.title}`);
 			const moduleId = courseEntityId(module.id, generatedModuleId);
-			const moduleAliases = courseEntityAliases(
-				module.id,
-				generatedModuleId,
-				module.aliases
-			);
+			const moduleAliases = courseEntityAliases(module.id, generatedModuleId, module.aliases);
 
-			const mapItems = (
-				items: typeof module.curriculum,
-				prefix: string
-			): CourseModuleItem[] =>
+			const mapItems = (items: typeof module.curriculum, prefix: string): CourseModuleItem[] =>
 				mergeAdjacentSupportItems(
 					items
 						.filter(item => !shouldHideItem(item.title))
 						.map(item => {
-							const explicitProjectLink = canonicalizeResourceUrl(
-								item.projectLink
-							);
-							const extractedLink = extractLeadingResourceLink(
-								item.title,
-								item.content
-							);
-							const normalizedSolutionLink =
-								canonicalizeResourceUrl(item.solutionLink);
-							const projectLinkIsSolution =
-								DEDICATED_SOLUTION_SEGMENT_RE.test(
-									explicitProjectLink ?? ""
-								);
+							const explicitProjectLink = canonicalizeResourceUrl(item.projectLink);
+							const extractedLink = extractLeadingResourceLink(item.title, item.content);
+							const normalizedSolutionLink = canonicalizeResourceUrl(item.solutionLink);
+							const projectLinkIsSolution = DEDICATED_SOLUTION_SEGMENT_RE.test(explicitProjectLink ?? "");
 							const legacySolutionLink =
-								projectLinkIsSolution &&
-								options.includeSolutions
-									? explicitProjectLink
-									: undefined;
+								projectLinkIsSolution && options.includeSolutions ? explicitProjectLink : undefined;
 							const extractedSolutionLink =
-								extractedLink?.isSolutionLink &&
-								options.includeSolutions
+								extractedLink?.isSolutionLink && options.includeSolutions
 									? extractedLink.url
 									: undefined;
-							const normalizedContent = normalizeContent(
-								extractedLink?.content ?? item.content
-							);
+							const normalizedContent = normalizeContent(extractedLink?.content ?? item.content);
 
 							return {
 								stableAliases: item.aliases,
 								stableId: item.id,
 								title: item.title,
-								content:
-									displayCourseContent(normalizedContent),
+								content: displayCourseContent(normalizedContent),
 								projectLink: (() => {
-									if (
-										explicitProjectLink &&
-										!projectLinkIsSolution
-									) {
+									if (explicitProjectLink && !projectLinkIsSolution) {
 										return explicitProjectLink;
 									}
 
-									if (
-										extractedLink?.url &&
-										!extractedLink.isSolutionLink
-									) {
+									if (extractedLink?.url && !extractedLink.isSolutionLink) {
 										return extractedLink.url;
 									}
 
 									return options.includeSolutions &&
-										shouldExposeLegacySolutionAsProject(
-											item.title,
-											normalizedSolutionLink
-										)
+										shouldExposeLegacySolutionAsProject(item.title, normalizedSolutionLink)
 										? normalizedSolutionLink
 										: undefined;
 								})(),
 								solutionLink: options.includeSolutions
-									? (normalizedSolutionLink ??
-										legacySolutionLink ??
-										extractedSolutionLink)
+									? (normalizedSolutionLink ?? legacySolutionLink ?? extractedSolutionLink)
 									: undefined,
 								datasetLink: item.datasetLink,
 								mediaLink: item.mediaLink
 							};
 						})
 				).map(item => {
-					const generatedItemId = slugify(
-						`${generatedModuleId}-${prefix}-${item.title}`
-					);
-					const itemId = courseEntityId(
-						item.stableId,
-						generatedItemId
-					);
-					const itemAliases = courseEntityAliases(
-						item.stableId,
-						generatedItemId,
-						item.stableAliases
-					);
-					const {
-						stableAliases: _stableAliases,
-						stableId: _stableId,
-						...normalizedItem
-					} = item;
+					const generatedItemId = slugify(`${generatedModuleId}-${prefix}-${item.title}`);
+					const itemId = courseEntityId(item.stableId, generatedItemId);
+					const itemAliases = courseEntityAliases(item.stableId, generatedItemId, item.stableAliases);
+					const { stableAliases: _stableAliases, stableId: _stableId, ...normalizedItem } = item;
 
 					return {
 						...normalizedItem,
@@ -487,10 +389,7 @@ function normalizeCourse(
 				...(module.kind ? { kind: module.kind } : {}),
 				title: module.title,
 				curriculum: mapItems(module.curriculum, "curriculum"),
-				supplementalProjects: mapItems(
-					module.supplementalProjects,
-					"supplemental"
-				)
+				supplementalProjects: mapItems(module.supplementalProjects, "supplemental")
 			};
 		})
 	} satisfies CourseDefinition;
@@ -505,18 +404,14 @@ const normalizedLearnerCourseCache = new Map<string, CourseDefinition>();
 const normalizedStaffCourseCache = new Map<string, CourseDefinition>();
 
 function courseCacheFor(includeSolutions: boolean) {
-	return includeSolutions
-		? normalizedStaffCourseCache
-		: normalizedLearnerCourseCache;
+	return includeSolutions ? normalizedStaffCourseCache : normalizedLearnerCourseCache;
 }
 
 export const useCoursesStore = defineStore("courses", () => {
 	const courses = computed(() => courseSummaries);
 	const appStore = useAppStore();
 
-	const canViewSolutions = computed(
-		() => !!appStore.currentTutor || !!appStore.currentAdmin
-	);
+	const canViewSolutions = computed(() => !!appStore.currentTutor || !!appStore.currentAdmin);
 
 	function getCourseById(id: string) {
 		return courseCacheFor(canViewSolutions.value).get(id) ?? null;
