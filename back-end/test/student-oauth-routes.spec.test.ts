@@ -323,7 +323,8 @@ describe("code-bound student OAuth", () => {
 		await withRuntime({}, async (baseUrl, session) => {
 			const response = await fetch(
 				`${baseUrl}/students/oauth/google/callback`
-				+ `?code=provider-code&state=${state}`,
+				+ `?code=provider-code&state=${state}`
+				+ "&unexpected=provider-profile",
 				{
 					headers: callbackHeaders("google", binding),
 					redirect: "manual"
@@ -339,6 +340,11 @@ describe("code-bound student OAuth", () => {
 			expect(session.studentAuthLevel).toBe("full");
 		});
 
+		const providerCallback = oauthMocks.exchangeCode.mock.calls[0]?.[1] as
+			| URL
+			| undefined;
+		expect(providerCallback?.searchParams.get("code")).toBe("provider-code");
+		expect(providerCallback?.searchParams.has("unexpected")).toBe(false);
 		const expectedSubjectHash = hash("google\0provider-subject");
 		expect(modelMocks.studentFindOneAndUpdate).toHaveBeenCalledWith(
 			{
