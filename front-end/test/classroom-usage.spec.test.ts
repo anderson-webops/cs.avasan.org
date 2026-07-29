@@ -39,6 +39,7 @@ describe("privacy-first classroom usage", () => {
 			"/api/classroom-usage",
 			expect.objectContaining({
 				body: JSON.stringify({
+					siteID: "cs",
 					event: "course-open",
 					courseId: "python-level-1"
 				}),
@@ -66,6 +67,7 @@ describe("privacy-first classroom usage", () => {
 
 		const request = vi.mocked(fetch).mock.calls[0];
 		expect(JSON.parse(String(request?.[1]?.body))).toEqual({
+			siteID: "cs",
 			event: "ide-open"
 		});
 		expect(String(request?.[1]?.body)).not.toContain(

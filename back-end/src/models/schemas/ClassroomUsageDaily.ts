@@ -5,10 +5,19 @@ import type {
 import mongoose, { Schema } from "mongoose";
 import {
 	CLASSROOM_COURSES,
-	CLASSROOM_USAGE_EVENTS
+	CLASSROOM_SITES,
+	CLASSROOM_USAGE_EVENTS,
+	CS_CLASSROOM_COURSES,
+	MATH_CLASSROOM_COURSES
 } from "../../types/entities/IClassroomUsageDaily.js";
 
 const classroomCourseIDs = CLASSROOM_COURSES.map(course => course.id);
+const csClassroomCourseIDs = new Set<string>(
+	CS_CLASSROOM_COURSES.map(course => course.id)
+);
+const mathClassroomCourseIDs = new Set<string>(
+	MATH_CLASSROOM_COURSES.map(course => course.id)
+);
 
 function isUtcDay(value: Date): boolean {
 	return value.getUTCHours() === 0
@@ -26,6 +35,12 @@ const classroomUsageDailySchema = new Schema<IClassroomUsageDaily>(
 				message: "day must be UTC midnight",
 				validator: isUtcDay
 			}
+		},
+		siteID: {
+			type: String,
+			enum: CLASSROOM_SITES,
+			default: "cs",
+			required: true
 		},
 		event: {
 			type: String,
@@ -53,8 +68,42 @@ const classroomUsageDailySchema = new Schema<IClassroomUsageDaily>(
 	}
 );
 
+classroomUsageDailySchema.pre("validate", function validateSiteEventShape() {
+	const siteID = this.siteID ?? "cs";
+	const courseID = this.courseID;
+	const isValidCSShape = siteID === "cs" && (
+		(
+			this.event === "course-open"
+			&& courseID !== undefined
+			&& csClassroomCourseIDs.has(courseID)
+		)
+		|| (
+			this.event === "ide-open"
+			&& (
+				courseID === undefined
+				|| csClassroomCourseIDs.has(courseID)
+			)
+		)
+	);
+	const isValidMathShape = siteID === "math" && (
+		(
+			this.event === "course-open"
+			&& courseID !== undefined
+			&& mathClassroomCourseIDs.has(courseID)
+		)
+		|| (this.event === "graph-open" && courseID === undefined)
+	);
+
+	if (!isValidCSShape && !isValidMathShape) {
+		this.invalidate(
+			"event",
+			"event and courseID must match the classroom site"
+		);
+	}
+});
+
 classroomUsageDailySchema.index(
-	{ day: 1, event: 1, courseID: 1 },
+	{ day: 1, siteID: 1, event: 1, courseID: 1 },
 	{ unique: true }
 );
 classroomUsageDailySchema.index(

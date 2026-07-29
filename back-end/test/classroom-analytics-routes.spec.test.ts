@@ -116,6 +116,7 @@ describe("privacy-preserving classroom analytics routes", () => {
 	it("accepts only constrained anonymous events and stores no request identity", async () => {
 		await withRuntime({ serviceKey }, async baseUrl => {
 			const extra = await postUsage(baseUrl, {
+				siteID: "cs",
 				event: "course-open",
 				courseId: "python-level-1",
 				username: "student-one"
@@ -123,19 +124,36 @@ describe("privacy-preserving classroom analytics routes", () => {
 			expect(extra.status).toBe(400);
 
 			const unsupportedCourse = await postUsage(baseUrl, {
+				siteID: "cs",
 				event: "course-open",
 				courseId: "python-level-3"
 			});
 			expect(unsupportedCourse.status).toBe(400);
 
 			const missingCourse = await postUsage(baseUrl, {
+				siteID: "cs",
 				event: "course-open"
 			});
 			expect(missingCourse.status).toBe(400);
 
+			const missingSite = await postUsage(baseUrl, {
+				event: "ide-open"
+			});
+			expect(missingSite.status).toBe(400);
+
+			const crossSiteCourse = await postUsage(baseUrl, {
+				siteID: "math",
+				event: "course-open",
+				courseId: "python-level-1"
+			}, {
+				Origin: "https://math.avasan.org"
+			});
+			expect(crossSiteCourse.status).toBe(400);
+
 			const response = await postUsage(
 				baseUrl,
 				{
+					siteID: "cs",
 					event: "course-open",
 					courseId: "python-level-1"
 				},
@@ -151,6 +169,10 @@ describe("privacy-preserving classroom analytics routes", () => {
 		expect(modelMocks.usageUpdateOne).toHaveBeenCalledTimes(1);
 		const [filter, update, options] = modelMocks.usageUpdateOne.mock.calls[0];
 		expect(filter).toMatchObject({
+			$or: [
+				{ siteID: "cs" },
+				{ siteID: { $exists: false } }
+			],
 			courseID: "python-level-1",
 			event: "course-open"
 		});
@@ -161,7 +183,8 @@ describe("privacy-preserving classroom analytics routes", () => {
 			$setOnInsert: {
 				courseID: "python-level-1",
 				event: "course-open",
-				expiresAt: expect.any(Date)
+				expiresAt: expect.any(Date),
+				siteID: "cs"
 			}
 		});
 		expect(options).toEqual({
@@ -177,22 +200,79 @@ describe("privacy-preserving classroom analytics routes", () => {
 	it("requires the same-origin classroom guard before accepting events", async () => {
 		await withRuntime({ serviceKey }, async baseUrl => {
 			const missingHeader = await fetch(`${baseUrl}/classroom-usage`, {
-				body: JSON.stringify({ event: "ide-open" }),
+				body: JSON.stringify({ siteID: "cs", event: "ide-open" }),
 				headers: { "content-type": "application/json" },
 				method: "POST"
 			});
 			expect(missingHeader.status).toBe(403);
 
-			const crossSite = await postUsage(baseUrl, { event: "ide-open" }, { "Sec-Fetch-Site": "cross-site" });
+			const crossSite = await postUsage(
+				baseUrl,
+				{ siteID: "cs", event: "ide-open" },
+				{ "Sec-Fetch-Site": "cross-site" }
+			);
 			expect(crossSite.status).toBe(403);
+
+			const credentialed = await postUsage(
+				baseUrl,
+				{ siteID: "cs", event: "ide-open" },
+				{ Cookie: "session=not-allowed" }
+			);
+			expect(credentialed.status).toBe(403);
 		});
 
 		expect(modelMocks.usageUpdateOne).not.toHaveBeenCalled();
 	});
 
+	it("accepts Math only through its credential-free fixed-origin proxy", async () => {
+		await withRuntime({ serviceKey }, async baseUrl => {
+			const missingOrigin = await postUsage(
+				baseUrl,
+				{ siteID: "math", event: "graph-open" }
+			);
+			expect(missingOrigin.status).toBe(403);
+
+			const mismatchedSite = await postUsage(
+				baseUrl,
+				{ siteID: "cs", event: "ide-open" },
+				{
+					Origin: "https://math.avasan.org",
+					"Sec-Fetch-Site": "same-origin"
+				}
+			);
+			expect(mismatchedSite.status).toBe(403);
+
+			const response = await postUsage(
+				baseUrl,
+				{ siteID: "math", event: "graph-open" },
+				{
+					Origin: "https://math.avasan.org",
+					"Sec-Fetch-Site": "same-origin"
+				}
+			);
+			expect(response.status).toBe(204);
+		});
+
+		expect(modelMocks.usageUpdateOne).toHaveBeenCalledTimes(1);
+		const [filter, update] = modelMocks.usageUpdateOne.mock.calls[0];
+		expect(filter).toMatchObject({
+			courseID: { $exists: false },
+			event: "graph-open",
+			siteID: "math"
+		});
+		expect(update.$setOnInsert).toMatchObject({
+			event: "graph-open",
+			siteID: "math"
+		});
+		expect(JSON.stringify([filter, update])).not.toMatch(
+			/user|student|account|cookie|ip|agent|browser|referrer|password|code/i
+		);
+	});
+
 	it("fails closed until anonymous collection is explicitly enabled", async () => {
 		await withRuntime({ collectionEnabled: false, serviceKey }, async baseUrl => {
 			const response = await postUsage(baseUrl, {
+				siteID: "cs",
 				event: "course-open",
 				courseId: "python-level-1"
 			});
@@ -240,7 +320,21 @@ describe("privacy-preserving classroom analytics routes", () => {
 				{
 					count: 2,
 					day: yesterday,
-					event: "ide-open"
+					event: "ide-open",
+					siteID: "cs"
+				},
+				{
+					count: 7,
+					courseID: "algebra-1a",
+					day: today,
+					event: "course-open",
+					siteID: "math"
+				},
+				{
+					count: 4,
+					day: yesterday,
+					event: "graph-open",
+					siteID: "math"
 				}
 			])
 		);
@@ -260,10 +354,23 @@ describe("privacy-preserving classroom analytics routes", () => {
 					startDate: expect.any(String),
 					endDate: expect.any(String)
 				},
-				retentionDays: 45,
-				siteActivity: {
-					totals: { courseOpens: 5, ideOpens: 2 }
-				},
+					retentionDays: 45,
+					siteActivity: {
+						cs: {
+							totals: {
+								courseOpens: 5,
+								ideOpens: 2,
+								graphOpens: 0
+							}
+						},
+						math: {
+							totals: {
+								courseOpens: 7,
+								ideOpens: 0,
+								graphOpens: 4
+							}
+						}
+					},
 				studentWork: {
 					recentWindowDays: 7,
 					activeAccounts: 12,
@@ -274,14 +381,55 @@ describe("privacy-preserving classroom analytics routes", () => {
 					recentlyUpdatedProjects: 4
 				}
 			});
-			expect(body.siteActivity.daily).toHaveLength(7);
-			expect(body.siteActivity.courses).toEqual([
+			expect(body.siteActivity.cs.daily).toHaveLength(7);
+			expect(body.siteActivity.math.daily).toHaveLength(7);
+			expect(body.siteActivity.cs.daily.every(
+				(row: { graphOpens: number }) => row.graphOpens === 0
+			)).toBe(true);
+			expect(body.siteActivity.math.daily.every(
+				(row: { ideOpens: number }) => row.ideOpens === 0
+			)).toBe(true);
+			expect(body.siteActivity.cs.courses).toEqual([
 				{ courseId: "scratch-level-1", label: "Scratch Level 1", opens: 0 },
 				{ courseId: "scratch-level-2", label: "Scratch Level 2", opens: 0 },
-				{ courseId: "python-level-1", label: "Python Level 1", opens: 5 },
-				{ courseId: "python-level-2", label: "Python Level 2", opens: 0 },
-				{ courseId: "pygames", label: "PyGames", opens: 0 }
+				{
+					courseId: "python-level-1",
+					label: "Python Level 1: Classroom Edition",
+					opens: 5
+				},
+				{
+					courseId: "python-level-2",
+					label: "Python Level 2: Classroom Edition",
+					opens: 0
+				},
+				{
+					courseId: "pygames",
+					label: "PyGames: Classroom Edition",
+					opens: 0
+				}
 			]);
+			expect(body.siteActivity.math.courses.map(
+				(course: { courseId: string }) => course.courseId
+			)).toEqual([
+				"early-elementary-a-math",
+				"early-elementary-b-math",
+				"late-elementary-a-math",
+				"late-elementary-b-math",
+				"pre-algebra-a",
+				"pre-algebra-b",
+				"algebra-1a",
+				"algebra-1b",
+				"geometry-a",
+				"geometry-b",
+				"algebra-2a",
+				"algebra-2b",
+				"pre-calculus-a",
+				"pre-calculus-b",
+				"ap-calculus"
+			]);
+			expect(body.siteActivity.math.courses.find(
+				(course: { courseId: string }) => course.courseId === "algebra-1a"
+			)?.opens).toBe(7);
 			expect(Object.keys(body.studentWork).sort()).toEqual([
 				"activeAccounts",
 				"activeProjects",

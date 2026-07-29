@@ -9,9 +9,14 @@ describe("student privacy page", () => {
 
 		expect(wrapper.get("h1").text()).toBe("Student privacy");
 		expect(text).toContain("anonymous daily totals");
+		expect(text).toContain("CS and Math sites");
+		expect(text).toContain("Graph Sketcher opening on the Math site");
 		expect(text).toContain("up to 90 days");
 		expect(text).toContain("up to five minutes");
 		expect(text).toContain("not added to classroom analytics");
+		expect(text).toContain("fixed course ID");
+		expect(text).toContain("Do Not Track");
+		expect(text).toContain("Global Privacy Control");
 		expect(text).toContain("Graph work saved in browser tabs");
 		expect(text).toContain("when a tab is duplicated");
 		expect(text).toContain("every open or duplicated Graph Sketcher tab");

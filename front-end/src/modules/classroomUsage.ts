@@ -92,8 +92,8 @@ export async function reportClassroomUsage(
 	}
 
 	const payload = safeCourseId
-		? { event, courseId: safeCourseId }
-		: { event };
+		? { siteID: "cs", event, courseId: safeCourseId }
+		: { siteID: "cs", event };
 
 	try {
 		await globalThis.fetch("/api/classroom-usage", {

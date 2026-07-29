@@ -22,16 +22,19 @@ const schoolPrivacyContact = (
 		<section class="site-surface privacy-page__section">
 			<h2>Anonymous classroom counts</h2>
 			<p>
-				When school-authorized classroom counts are enabled, the site
-				may count a course opening once per selected course and a Python
-				IDE opening once per browser tab each day. These are anonymous
-				daily totals. They are kept for up to 90 days.
+				When school-authorized classroom counts are enabled, the CS and
+				Math sites may count a course opening once per selected course,
+				a Python IDE opening on the CS site, and a Graph Sketcher
+				opening on the Math site, once per browser tab each day. These
+				are anonymous daily totals. They are kept for up to 90 days.
 			</p>
 			<p>
 				These counts do not include a username, account or access code,
 				project name, code, page address, referrer, location, or device
-				fingerprint. The site honors browser Do Not Track and Global
-				Privacy Control signals.
+				fingerprint. Each count includes only the fixed site, supported
+				event type, and, for a course opening, its fixed course ID. Both
+				sites honor browser Do Not Track and Global Privacy Control
+				signals.
 			</p>
 			<p>
 				The classroom server may hold a network address in memory for up

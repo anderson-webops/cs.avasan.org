@@ -21,7 +21,8 @@ describe("anonymous classroom usage persistence", () => {
 			"courseID",
 			"day",
 			"event",
-			"expiresAt"
+			"expiresAt",
+			"siteID"
 		]);
 		expect(() => new ClassroomUsageDaily({
 			count: 1,
@@ -32,45 +33,76 @@ describe("anonymous classroom usage persistence", () => {
 		})).toThrow();
 	});
 
-	it("allows only the public catalog and the two coarse event types", async () => {
+	it("allows only each site's public catalog and coarse event types", async () => {
 		const valid = new ClassroomUsageDaily({
 			count: 1,
 			courseID: "python-level-1",
 			day: new Date("2026-07-29T00:00:00.000Z"),
 			event: "ide-open",
-			expiresAt: new Date("2026-10-27T00:00:00.000Z")
+			expiresAt: new Date("2026-10-27T00:00:00.000Z"),
+			siteID: "cs"
 		});
 		await expect(valid.validate()).resolves.toBeUndefined();
+
+		const mathGraph = new ClassroomUsageDaily({
+			count: 1,
+			day: new Date("2026-07-29T00:00:00.000Z"),
+			event: "graph-open",
+			expiresAt: new Date("2026-10-27T00:00:00.000Z"),
+			siteID: "math"
+		});
+		await expect(mathGraph.validate()).resolves.toBeUndefined();
 
 		const unsupportedCourse = new ClassroomUsageDaily({
 			count: 1,
 			courseID: "python-level-3",
 			day: new Date("2026-07-29T00:00:00.000Z"),
 			event: "course-open",
-			expiresAt: new Date("2026-10-27T00:00:00.000Z")
+			expiresAt: new Date("2026-10-27T00:00:00.000Z"),
+			siteID: "cs"
 		});
 		await expect(unsupportedCourse.validate()).rejects.toThrow();
+
+		const crossSiteCourse = new ClassroomUsageDaily({
+			count: 1,
+			courseID: "python-level-1",
+			day: new Date("2026-07-29T00:00:00.000Z"),
+			event: "course-open",
+			expiresAt: new Date("2026-10-27T00:00:00.000Z"),
+			siteID: "math"
+		});
+		await expect(crossSiteCourse.validate()).rejects.toThrow(
+			"must match the classroom site"
+		);
 
 		const detailedEvent = new ClassroomUsageDaily({
 			count: 1,
 			day: new Date("2026-07-29T00:00:00.000Z"),
 			event: "code-keystroke",
-			expiresAt: new Date("2026-10-27T00:00:00.000Z")
+			expiresAt: new Date("2026-10-27T00:00:00.000Z"),
+			siteID: "cs"
 		});
 		await expect(detailedEvent.validate()).rejects.toThrow();
 	});
 
 	it("uniquely aggregates a UTC day and automatically expires the row", async () => {
-		expect(findIndex({ day: 1, event: 1, courseID: 1 })?.[1])
+		expect(findIndex({
+			day: 1,
+			siteID: 1,
+			event: 1,
+			courseID: 1
+		})?.[1])
 			.toMatchObject({ unique: true });
 		expect(findIndex({ expiresAt: 1 })?.[1])
 			.toMatchObject({ expireAfterSeconds: 0 });
 
 		const nonUtcDay = new ClassroomUsageDaily({
 			count: 1,
+			courseID: "python-level-1",
 			day: new Date("2026-07-29T12:00:00.000Z"),
 			event: "course-open",
-			expiresAt: new Date("2026-10-27T00:00:00.000Z")
+			expiresAt: new Date("2026-10-27T00:00:00.000Z"),
+			siteID: "cs"
 		});
 		await expect(nonUtcDay.validate()).rejects.toThrow("UTC midnight");
 	});

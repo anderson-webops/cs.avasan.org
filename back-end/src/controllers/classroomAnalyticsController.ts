@@ -1,10 +1,16 @@
 import type { RequestHandler } from "express";
-import type { ClassroomCourseID } from "../types/entities/IClassroomUsageDaily.js";
+import type {
+	ClassroomCourseID,
+	ClassroomSiteID
+} from "../types/entities/IClassroomUsageDaily.js";
 import { z } from "zod";
 import { ClassroomUsageDaily } from "../models/schemas/ClassroomUsageDaily.js";
 import { PythonProject } from "../models/schemas/PythonProject.js";
 import { Student } from "../models/schemas/Student.js";
-import { CLASSROOM_COURSES } from "../types/entities/IClassroomUsageDaily.js";
+import {
+	CS_CLASSROOM_COURSES,
+	MATH_CLASSROOM_COURSES
+} from "../types/entities/IClassroomUsageDaily.js";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const DEFAULT_SUMMARY_DAYS = 30;
@@ -12,18 +18,34 @@ const MIN_SUMMARY_DAYS = 7;
 const MAX_SUMMARY_DAYS = 90;
 const STUDENT_WORK_RECENT_DAYS = 7;
 
-const classroomCourseIDs = CLASSROOM_COURSES.map(course => course.id);
-const classroomUsagePayloadSchema = z.discriminatedUnion("event", [
+const csClassroomCourseIDs = CS_CLASSROOM_COURSES.map(course => course.id);
+const mathClassroomCourseIDs = MATH_CLASSROOM_COURSES.map(course => course.id);
+const classroomUsagePayloadSchema = z.union([
 	z
 		.object({
-			courseId: z.enum(classroomCourseIDs),
+			siteID: z.literal("cs"),
+			courseId: z.enum(csClassroomCourseIDs),
 			event: z.literal("course-open")
 		})
 		.strict(),
 	z
 		.object({
-			courseId: z.enum(classroomCourseIDs).optional(),
+			siteID: z.literal("cs"),
+			courseId: z.enum(csClassroomCourseIDs).optional(),
 			event: z.literal("ide-open")
+		})
+		.strict(),
+	z
+		.object({
+			siteID: z.literal("math"),
+			courseId: z.enum(mathClassroomCourseIDs),
+			event: z.literal("course-open")
+		})
+		.strict(),
+	z
+		.object({
+			siteID: z.literal("math"),
+			event: z.literal("graph-open")
 		})
 		.strict()
 ]);
@@ -49,21 +71,32 @@ export function recordClassroomUsage(retentionDays: number): RequestHandler {
 		const parsed = classroomUsagePayloadSchema.safeParse(req.body);
 		if (!parsed.success) {
 			res.status(400).json({
-				message: "Only a supported classroom event and course ID are accepted."
+				message: "Only a supported site, classroom event, and course ID are accepted."
 			});
 			return;
 		}
 
 		const now = new Date();
 		const day = utcDay(now);
-		const courseID = parsed.data.courseId;
+		const courseID = "courseId" in parsed.data
+			? parsed.data.courseId
+			: undefined;
 		const filter = {
 			day,
 			event: parsed.data.event,
+			...(parsed.data.siteID === "cs"
+				? {
+						$or: [
+							{ siteID: "cs" as const },
+							{ siteID: { $exists: false } }
+						]
+					}
+				: { siteID: "math" as const }),
 			...(courseID ? { courseID } : { courseID: { $exists: false } })
 		};
 		const insertFields = {
 			day,
+			siteID: parsed.data.siteID,
 			event: parsed.data.event,
 			expiresAt: new Date(now.getTime() + retentionDays * DAY_MS),
 			...(courseID ? { courseID } : {})
@@ -94,7 +127,8 @@ export function recordClassroomUsage(retentionDays: number): RequestHandler {
 
 interface UsageAggregate {
 	day: Date;
-	event: "course-open" | "ide-open";
+	siteID?: ClassroomSiteID;
+	event: "course-open" | "ide-open" | "graph-open";
 	courseID?: ClassroomCourseID;
 	count: number;
 }
@@ -149,7 +183,7 @@ export function getClassroomAnalyticsSummary(retentionDays: number): RequestHand
 				ClassroomUsageDaily.find({
 					day: { $gte: startDay, $lte: endDay }
 				})
-					.select("day event courseID count -_id")
+					.select("day siteID event courseID count -_id")
 					.lean()
 					.exec() as Promise<UsageAggregate[]>,
 				Student.countDocuments({ active: true }).exec(),
@@ -163,31 +197,83 @@ export function getClassroomAnalyticsSummary(retentionDays: number): RequestHand
 				distinctProjectStudentCount(recentProjectFilter)
 			]);
 
-			const daily = Array.from({ length: days }, (_, index) => ({
-				date: dateKey(new Date(startDay.getTime() + index * DAY_MS)),
-				courseOpens: 0,
-				ideOpens: 0
-			}));
-			const dailyByDate = new Map(daily.map(row => [row.date, row]));
-			const courseOpenCounts = new Map<ClassroomCourseID, number>(
-				CLASSROOM_COURSES.map(course => [course.id, 0] as const)
+			const makeDailyRows = () => Array.from(
+				{ length: days },
+				(_, index) => ({
+					date: dateKey(new Date(startDay.getTime() + index * DAY_MS)),
+					courseOpens: 0,
+					ideOpens: 0,
+					graphOpens: 0
+				})
 			);
-			let courseOpens = 0;
-			let ideOpens = 0;
+			const csDaily = makeDailyRows();
+			const mathDaily = makeDailyRows();
+			const csDailyByDate = new Map(
+				csDaily.map(row => [row.date, row])
+			);
+			const mathDailyByDate = new Map(
+				mathDaily.map(row => [row.date, row])
+			);
+			const csCourseOpenCounts = new Map<ClassroomCourseID, number>(
+				CS_CLASSROOM_COURSES.map(course => [course.id, 0] as const)
+			);
+			const mathCourseOpenCounts = new Map<ClassroomCourseID, number>(
+				MATH_CLASSROOM_COURSES.map(course => [course.id, 0] as const)
+			);
+			const csTotals = {
+				courseOpens: 0,
+				ideOpens: 0,
+				graphOpens: 0
+			};
+			const mathTotals = {
+				courseOpens: 0,
+				ideOpens: 0,
+				graphOpens: 0
+			};
 
 			for (const row of usageRows) {
 				const count = Number.isSafeInteger(row.count) && row.count > 0 ? row.count : 0;
-				const dayRow = dailyByDate.get(dateKey(row.day));
-				if (row.event === "course-open") {
-					courseOpens += count;
-					if (dayRow) dayRow.courseOpens += count;
-					if (row.courseID && courseOpenCounts.has(row.courseID)) {
-						courseOpenCounts.set(row.courseID, (courseOpenCounts.get(row.courseID) ?? 0) + count);
+				const siteID = row.siteID === undefined
+					? "cs"
+					: row.siteID;
+
+				if (siteID === "cs") {
+					const dayRow = csDailyByDate.get(dateKey(row.day));
+					if (
+						row.event === "course-open"
+						&& row.courseID
+						&& csCourseOpenCounts.has(row.courseID)
+					) {
+						csTotals.courseOpens += count;
+						if (dayRow) dayRow.courseOpens += count;
+						csCourseOpenCounts.set(
+							row.courseID,
+							(csCourseOpenCounts.get(row.courseID) ?? 0) + count
+						);
+					}
+					else if (row.event === "ide-open") {
+						csTotals.ideOpens += count;
+						if (dayRow) dayRow.ideOpens += count;
 					}
 				}
-				else if (row.event === "ide-open") {
-					ideOpens += count;
-					if (dayRow) dayRow.ideOpens += count;
+				else if (siteID === "math") {
+					const dayRow = mathDailyByDate.get(dateKey(row.day));
+					if (
+						row.event === "course-open"
+						&& row.courseID
+						&& mathCourseOpenCounts.has(row.courseID)
+					) {
+						mathTotals.courseOpens += count;
+						if (dayRow) dayRow.courseOpens += count;
+						mathCourseOpenCounts.set(
+							row.courseID,
+							(mathCourseOpenCounts.get(row.courseID) ?? 0) + count
+						);
+					}
+					else if (row.event === "graph-open") {
+						mathTotals.graphOpens += count;
+						if (dayRow) dayRow.graphOpens += count;
+					}
 				}
 			}
 
@@ -200,13 +286,24 @@ export function getClassroomAnalyticsSummary(retentionDays: number): RequestHand
 				},
 				retentionDays,
 				siteActivity: {
-					totals: { courseOpens, ideOpens },
-					daily,
-					courses: CLASSROOM_COURSES.map(course => ({
-						courseId: course.id,
-						label: course.label,
-						opens: courseOpenCounts.get(course.id) ?? 0
-					}))
+					cs: {
+						totals: csTotals,
+						daily: csDaily,
+						courses: CS_CLASSROOM_COURSES.map(course => ({
+							courseId: course.id,
+							label: course.label,
+							opens: csCourseOpenCounts.get(course.id) ?? 0
+						}))
+					},
+					math: {
+						totals: mathTotals,
+						daily: mathDaily,
+						courses: MATH_CLASSROOM_COURSES.map(course => ({
+							courseId: course.id,
+							label: course.label,
+							opens: mathCourseOpenCounts.get(course.id) ?? 0
+						}))
+					}
 				},
 				studentWork: {
 					recentWindowDays: STUDENT_WORK_RECENT_DAYS,
