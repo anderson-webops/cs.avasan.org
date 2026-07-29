@@ -16,9 +16,8 @@ deliberately simplified downstream adaptation of
 - Julio's account is provisioned through the repository's code-based setup
   process. HTTP Admin creation must remain disabled.
 - The current course catalog contains only Scratch Levels 1 and 2, Python
-  Level 1, Python Level 2: Classroom Edition, and PyGames: Classroom Edition.
-  Their original Level 2 and PyGames curricula remain in a separate
-  archived-reference group for Julio.
+  Level 1: Classroom Edition, Python Level 2: Classroom Edition, and PyGames:
+  Classroom Edition.
 - The upstream browser Graph Sketcher remains available as a separate,
   anonymous tool. It uses browser tab storage and lets students download a
   separate project copy; browsers may copy tab storage when a tab is
@@ -36,13 +35,11 @@ deliberately simplified downstream adaptation of
 
 ## Access Model
 
-The five current courses and Julio's separately labeled archived references
-are public at `/`, the browser IDE is public at `/python-ide`, and Graph
-Sketcher is public at `/graph-sketcher`. Archived references are not student
-course assignments. Graph Sketcher runs entirely in the browser and keeps its
-recovery copy in browser tab storage; a duplicated tab may receive its own
-browser-managed copy. Graph projects and graph contents are not sent to the
-backend or analytics.
+The five current courses are public at `/`, the browser IDE is public at
+`/python-ide`, and Graph Sketcher is public at `/graph-sketcher`. Graph
+Sketcher runs entirely in the browser and keeps its recovery copy in browser
+tab storage; a duplicated tab may receive its own browser-managed copy. Graph
+projects and graph contents are not sent to the backend or analytics.
 Anonymous IDE projects stay in the browser unless a signed-in student
 explicitly imports them. A student first signs in with the username and unique,
 expiring setup code Julio provides. The first successful exchange irreversibly
