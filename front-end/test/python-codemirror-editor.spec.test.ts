@@ -223,24 +223,18 @@ describe("python IDE CodeMirror editor", () => {
 		expect(state.tabSize).toBe(4);
 	});
 
-	it("surfaces the built-in editor shortcuts in the IDE chrome", () => {
+	it("surfaces only the essential editor shortcuts in the IDE chrome", () => {
 		const pageSource = sourceFile(
 			"../src/components/PythonIdeWorkspace.vue"
 		);
 
 		expect(pageSource).toContain('class="editor-shortcuts"');
-		expect(pageSource).toContain("Cmd/Ctrl+F opens search.");
-		expect(pageSource).toMatch(/Cmd\/Ctrl\+Enter\s+runs the project\./);
-		expect(pageSource).toContain("Cmd/Ctrl+S saves the project.");
-		expect(pageSource).toContain("Ctrl+Space opens completions");
-		expect(pageSource).toContain("main_guard");
-		expect(pageSource).toContain("turtle_screen");
-		expect(pageSource).toContain("decision_tree");
-		expect(pageSource).toContain("Tab indents; Shift+Tab dedents.");
-		expect(pageSource).toMatch(
-			/Alt\/Option-drag creates a\s+rectangular selection\./
-		);
-		expect(pageSource).toContain("Quotes and brackets wrap highlighted");
+		expect(pageSource).toContain("Cmd/Ctrl+Enter: Run");
+		expect(pageSource).toContain("Cmd/Ctrl+S: Save");
+		expect(pageSource).toContain("Cmd/Ctrl+F: Find");
+		expect(pageSource).toContain("Tab / Shift+Tab: Indent / outdent");
+		expect(pageSource).not.toContain("Course snippets include");
+		expect(pageSource).not.toContain("rectangular selection");
 	});
 
 	it("offers only the classroom project modes while keeping runtime completions", () => {

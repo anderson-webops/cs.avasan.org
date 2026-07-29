@@ -145,7 +145,7 @@ function getMarkdownRenderer() {
 					env,
 					self
 				) =>
-					`<div class="markdown-table-scroll">${defaultTableOpen(tokens, index, options, env, self)}`;
+					`<div class="markdown-table-scroll" tabindex="0">${defaultTableOpen(tokens, index, options, env, self)}`;
 				markdown.renderer.rules.table_close = (
 					tokens,
 					index,
@@ -184,9 +184,9 @@ watch(
 			return;
 		}
 
-		renderedHtml.value = markdown.render(
-			normalizeInlineCourseMarkdown(content)
-		);
+		renderedHtml.value = markdown
+			.render(normalizeInlineCourseMarkdown(content))
+			.replaceAll("<pre>", '<pre tabindex="0">');
 	},
 	{ immediate: true }
 );

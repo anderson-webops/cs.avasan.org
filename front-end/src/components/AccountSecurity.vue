@@ -3,9 +3,7 @@ import { computed, ref, watch } from "vue";
 import { api } from "@/api";
 import { useAppStore } from "@/stores/app";
 
-type Role = "admin" | "tutor" | "user";
-
-const props = defineProps<{ entityId: string; role: Role; email: string }>();
+const props = defineProps<{ entityId: string; email: string }>();
 
 const app = useAppStore();
 const email = ref(props.email);
@@ -18,11 +16,7 @@ const confirmPassword = ref("");
 const passwordStatus = ref("");
 const passwordError = ref("");
 const idPrefix = computed(
-	() =>
-		`account-security-${props.role}-${props.entityId.replace(
-			/[^\w-]/g,
-			"-"
-		)}`
+	() => `account-security-admin-${props.entityId.replace(/[^\w-]/g, "-")}`
 );
 
 watch(
@@ -31,12 +25,6 @@ watch(
 		email.value = value;
 	}
 );
-
-function refreshRole() {
-	if (props.role === "admin") app.refreshCurrentAdmin();
-	else if (props.role === "tutor") app.refreshCurrentTutor();
-	else app.refreshCurrentUser();
-}
 
 async function updateEmail() {
 	emailStatus.value = "";
@@ -51,7 +39,7 @@ async function updateEmail() {
 			email: email.value
 		});
 		emailStatus.value = "Email updated successfully.";
-		refreshRole();
+		app.refreshCurrentAdmin();
 	} catch (err: any) {
 		emailError.value =
 			err.response?.data?.message ??
@@ -89,12 +77,11 @@ async function updatePassword() {
 </script>
 
 <template>
-	<section class="security-card">
-		<h4>Account security</h4>
-		<p class="hint">Update your email or password whenever you need to.</p>
+	<section class="security-card" :aria-labelledby="`${idPrefix}-title`">
+		<h2 :id="`${idPrefix}-title`">Account settings</h2>
 
 		<div class="security-section">
-			<h5>Change email</h5>
+			<h3>Email</h3>
 			<div class="field">
 				<label :for="`${idPrefix}-email`">Email</label>
 				<input
@@ -125,7 +112,7 @@ async function updatePassword() {
 		</div>
 
 		<div class="security-section">
-			<h5>Change password</h5>
+			<h3>Password</h3>
 			<div class="field">
 				<label :for="`${idPrefix}-current-password`"
 					>Current password</label
@@ -184,16 +171,17 @@ async function updatePassword() {
 
 <style scoped>
 .security-card {
-	margin-top: 1.5rem;
-	padding: 1.25rem;
-	border: 1px solid rgba(15, 23, 42, 0.15);
-	border-radius: 16px;
-	background: rgba(15, 23, 42, 0.02);
+	display: grid;
+	gap: 1.5rem;
 	text-align: left;
 }
 
+.security-section {
+	display: grid;
+	gap: 0.75rem;
+}
+
 .security-section + .security-section {
-	margin-top: 1.5rem;
 	border-top: 1px solid rgba(15, 23, 42, 0.08);
 	padding-top: 1.25rem;
 }
@@ -209,12 +197,6 @@ async function updatePassword() {
 	border: 1px solid rgba(15, 23, 42, 0.18);
 	border-radius: 8px;
 	padding: 0.5rem 0.75rem;
-}
-
-.hint {
-	margin-top: 0.25rem;
-	color: rgba(15, 23, 42, 0.65);
-	font-size: 0.9rem;
 }
 
 .status {

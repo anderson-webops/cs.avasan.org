@@ -80,7 +80,6 @@ export const useAppStore = defineStore("app", {
 		currentTutor: null as Tutor | null,
 		currentAdmin: null as Admin | null,
 
-		loginBlock: false,
 		signupBlock: false,
 		showUsers: false,
 
@@ -138,9 +137,6 @@ export const useAppStore = defineStore("app", {
 		},
 		setCurrentAdmin(a: Admin | null) {
 			this.currentAdmin = a;
-		},
-		setLoginBlock(v: boolean) {
-			this.loginBlock = v;
 		},
 		setSignupBlock(v: boolean) {
 			this.signupBlock = v;

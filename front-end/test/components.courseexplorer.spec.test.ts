@@ -63,12 +63,12 @@ describe("CourseExplorer public catalog", () => {
 	beforeEach(() => {
 		installLocalStorageStub();
 		window.localStorage.clear();
-		window.history.replaceState({}, "", "/courses");
+		window.history.replaceState({}, "", "/");
 	});
 
 	afterEach(() => {
 		window.localStorage.clear();
-		window.history.replaceState({}, "", "/courses");
+		window.history.replaceState({}, "", "/");
 		vi.restoreAllMocks();
 	});
 
@@ -115,10 +115,9 @@ describe("CourseExplorer public catalog", () => {
 		expect(wrapper.get("#course-select optgroup").attributes("label")).toBe(
 			"Course catalog"
 		);
-		expect(wrapper.text()).toContain("Course preview");
 		expect(wrapper.text()).toContain("Scratch Level 1");
-		expect(wrapper.text()).toContain("Core lessons");
-		expect(wrapper.text()).toContain("Projects");
+		expect(wrapper.text()).not.toContain("Course preview");
+		expect(wrapper.find(".course-stats").exists()).toBe(false);
 		expect(wrapper.find("#learner-select").exists()).toBe(false);
 		expect(wrapper.text()).not.toMatch(
 			/assigned courses|learner context|log in|sign up/i
@@ -135,8 +134,7 @@ describe("CourseExplorer public catalog", () => {
 
 		expect(loadCourse).toHaveBeenCalledWith("pygames");
 		expect(wrapper.get(".course-hero h2").text()).toBe("PyGames");
-		expect(wrapper.text()).toContain(
-			"Open modules, projects, and supplemental resources from this course."
-		);
+		expect(wrapper.text()).not.toContain("Course preview");
+		expect(wrapper.text()).not.toContain("Use the browser workspace");
 	});
 });

@@ -18,7 +18,6 @@ import {
 } from "vue";
 import { api } from "@/api";
 import {
-	courseStatusBucketForUser,
 	groupCoursesByLearnerStatus,
 	orderedCoursesByLearnerStatus
 } from "@/modules/courseAccess";
@@ -185,28 +184,6 @@ const hasCourseAccess = computed(() => {
 	return isStaffContext.value || courseList.value.length > 0;
 });
 
-const selectedCourseStatus = computed(() => {
-	if (props.publicCatalog || !selectedCourseId.value) return "";
-	return courseStatusBucketForUser(
-		courseGroupingOwner.value,
-		selectedCourseId.value
-	);
-});
-
-const courseEyebrow = computed(() => {
-	if (props.publicCatalog) return "Course preview";
-	if (selectedCourseStatus.value === "past") return "Past course";
-	if (selectedCourseStatus.value === "other") return "Available course";
-	return "Current course";
-});
-
-const courseDescription = computed(() =>
-	props.publicCatalog
-		? "Open modules, projects, and supplemental resources from this course."
-		: isStaffContext.value
-			? "Choose a learner, open one of their assigned courses, and mark progress directly inside the syllabus."
-			: "Use the controls below to switch courses or search inside this syllabus."
-);
 const pythonIdeCourseMode = computed(() =>
 	pythonIdeModeForCourseId(selectedCourse.value?.id)
 );
@@ -424,43 +401,6 @@ watch(
 	},
 	{ immediate: true }
 );
-
-const courseStats = computed(() => {
-	const course = selectedCourse.value;
-	if (!course) return null;
-
-	const coreModules = course.modules.filter(isCoreModule);
-	const appendixModules = course.modules.filter(isAppendixModule);
-	const lessonCount = coreModules.reduce(
-		(total, module) => total + module.curriculum.length,
-		0
-	);
-	const supplementalCount = coreModules.reduce(
-		(total, module) => total + module.supplementalProjects.length,
-		0
-	);
-	const completedModuleCount = coreModules.filter(module =>
-		isModuleComplete(module)
-	).length;
-	const completedItemCount = coreModules.reduce(
-		(total, module) =>
-			total +
-			[...module.curriculum, ...module.supplementalProjects].filter(
-				item => isItemComplete(item)
-			).length,
-		0
-	);
-
-	return {
-		moduleCount: coreModules.length,
-		appendixCount: appendixModules.length,
-		lessonCount,
-		supplementalCount,
-		completedModuleCount,
-		completedItemCount,
-		totalItemCount: lessonCount + supplementalCount
-	};
-});
 
 const selectedCourseProgress = computed(() => {
 	const courseId = selectedCourseId.value;
@@ -1566,13 +1506,9 @@ function writeStoredValue(key: string, value: string) {
 	<section class="course-explorer">
 		<p class="sr-only" aria-live="polite">{{ courseReaderStatus }}</p>
 		<div v-if="hasCourseAccess" class="course-shell">
-			<header v-if="selectedCourse && courseStats" class="course-hero">
+			<header v-if="selectedCourse" class="course-hero">
 				<div class="course-hero-copy">
-					<p class="course-eyebrow">{{ courseEyebrow }}</p>
 					<h2>{{ selectedCourse.name }}</h2>
-					<p class="course-description">
-						{{ courseDescription }}
-					</p>
 					<div v-if="pythonIdeCourseHref" class="course-ide-action">
 						<a
 							class="site-button site-button--secondary course-ide-link"
@@ -1580,47 +1516,8 @@ function writeStoredValue(key: string, value: string) {
 						>
 							{{ pythonIdeCourseLabel }}
 						</a>
-						<span>
-							Use the browser workspace for this course's code,
-							files, and canvas projects.
-						</span>
 					</div>
 				</div>
-
-				<dl class="course-stats">
-					<div class="stat">
-						<dt>Modules</dt>
-						<dd>{{ courseStats.moduleCount }}</dd>
-					</div>
-					<div v-if="courseStats.appendixCount > 0" class="stat">
-						<dt>Appendices</dt>
-						<dd>{{ courseStats.appendixCount }}</dd>
-					</div>
-					<div class="stat">
-						<dt>Core lessons</dt>
-						<dd>{{ courseStats.lessonCount }}</dd>
-					</div>
-					<div class="stat">
-						<dt>Projects</dt>
-						<dd>{{ courseStats.supplementalCount }}</dd>
-					</div>
-					<div v-if="hasProgressTracking" class="stat is-progress">
-						<dt>Done</dt>
-						<dd>
-							<span>
-								{{ courseStats.completedModuleCount }}/{{
-									courseStats.moduleCount
-								}}
-							</span>
-							<small>
-								{{ courseStats.completedItemCount }}/{{
-									courseStats.totalItemCount
-								}}
-								items
-							</small>
-						</dd>
-					</div>
-				</dl>
 			</header>
 
 			<div v-if="isStaffContext" class="staff-context-bar">
@@ -1740,14 +1637,7 @@ function writeStoredValue(key: string, value: string) {
 			<div v-if="selectedCourse" class="course-workspace">
 				<aside class="course-outline">
 					<div class="outline-header">
-						<p class="outline-eyebrow">Syllabus</p>
-						<h3>Choose a section</h3>
-						<!--
-						<p>
-							The right side shows the full reading view for the
-							selected module.
-						</p>
-						-->
+						<h3>Sections</h3>
 					</div>
 
 					<div v-if="visibleModules.length > 0" class="outline-list">

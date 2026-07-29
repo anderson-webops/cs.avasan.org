@@ -26,10 +26,10 @@ deliberately simplified downstream adaptation of
 
 ## Access Model
 
-Course pages and the Python IDE are public. Anonymous IDE projects stay in the
-student's browser. Teacher-only capabilities are unlocked by Julio's
-code-provisioned account; there is no learner or self-service registration
-flow.
+The five-course catalog is public at `/`, and the browser IDE is public at
+`/python-ide`. Anonymous IDE projects stay in the student's browser.
+Teacher-only account controls are available to Julio at `/admin`; there is no
+learner or self-service registration flow.
 
 Do not add a second teacher account or re-enable public registration without an
 explicit product decision.

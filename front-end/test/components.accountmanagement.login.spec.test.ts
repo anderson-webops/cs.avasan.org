@@ -24,11 +24,7 @@ describe("AccountManagement teacher login", () => {
 
 	function mountLogin() {
 		const app = useAppStore();
-		app.setLoginBlock(true);
-		const wrapper = mount(AccountManagement, {
-			attachTo: document.body,
-			global: { stubs: { teleport: true } }
-		});
+		const wrapper = mount(AccountManagement, { attachTo: document.body });
 		return { app, wrapper };
 	}
 
@@ -46,8 +42,8 @@ describe("AccountManagement teacher login", () => {
 		});
 		const { app, wrapper } = mountLogin();
 
-		await wrapper.get("#teacher-email").setValue(julio.email);
-		await wrapper.get("#teacher-password").setValue(passphrase);
+		await wrapper.get("#admin-email").setValue(julio.email);
+		await wrapper.get("#admin-password").setValue(passphrase);
 		await wrapper.get("form").trigger("submit.prevent");
 		await flushPromises();
 
@@ -63,8 +59,7 @@ describe("AccountManagement teacher login", () => {
 		expect(app.currentAdmin).toEqual(julio);
 		expect(app.currentUser).toBeNull();
 		expect(app.currentTutor).toBeNull();
-		expect(app.loginBlock).toBe(false);
-		expect(document.querySelector("#teacher-login-dialog")).toBeNull();
+		expect(wrapper.get("#admin-password").element).toHaveProperty("value", "");
 		wrapper.unmount();
 	});
 
@@ -79,8 +74,8 @@ describe("AccountManagement teacher login", () => {
 		});
 		const { app, wrapper } = mountLogin();
 
-		await wrapper.get("#teacher-email").setValue("student@example.com");
-		await wrapper.get("#teacher-password").setValue("not-a-teacher");
+		await wrapper.get("#admin-email").setValue("student@example.com");
+		await wrapper.get("#admin-password").setValue("not-a-teacher");
 		await wrapper.get("form").trigger("submit.prevent");
 		await flushPromises();
 
@@ -88,23 +83,52 @@ describe("AccountManagement teacher login", () => {
 			"This sign-in is available only to Julio."
 		);
 		expect(app.currentAdmin).toBeNull();
-		expect(app.loginBlock).toBe(true);
 		expect(wrapper.text()).not.toMatch(/Sign up|Create account/i);
 		wrapper.unmount();
 	});
 
-	it("renders an accessible teacher dialog and explains public access", () => {
+	it("renders only the inline login controls", () => {
 		const { wrapper } = mountLogin();
-		const dialog = document.querySelector("#teacher-login-dialog");
 
-		expect(dialog?.getAttribute("role")).toBe("dialog");
-		expect(dialog?.getAttribute("aria-modal")).toBe("true");
-		expect(dialog?.getAttribute("aria-labelledby")).toBe(
-			"teacher-login-dialog-title"
+		expect(wrapper.get('label[for="admin-email"]').text()).toBe("Email");
+		expect(wrapper.get('label[for="admin-password"]').text()).toBe("Password");
+		expect(wrapper.get('input[name="remember"]').exists()).toBe(true);
+		expect(wrapper.get('button[type="submit"]').text()).toBe("Log in");
+		expect(wrapper.find('[role="dialog"]').exists()).toBe(false);
+		expect(wrapper.find('button[type="button"]').exists()).toBe(false);
+		expect(wrapper.text()).not.toMatch(
+			/Student|Tutor|Sign up|Create account|Cancel/i
 		);
-		expect(wrapper.text()).toContain("Students do not need an account.");
-		expect(document.querySelector('a[href="#"]')).toBeNull();
-		expect(wrapper.text()).not.toMatch(/Sign up|Create account/i);
+		wrapper.unmount();
+	});
+
+	it("submits the remember preference", async () => {
+		vi.mocked(api.post).mockResolvedValueOnce({
+			data: {
+				currentAdmin: {
+					_id: "julio",
+					name: "Julio",
+					email: "julio@example.com"
+				}
+			}
+		});
+		const { wrapper } = mountLogin();
+
+		await wrapper.get("#admin-email").setValue("julio@example.com");
+		await wrapper.get("#admin-password").setValue("teacher-password");
+		await wrapper.get('input[name="remember"]').setValue(true);
+		await wrapper.get("form").trigger("submit.prevent");
+		await flushPromises();
+
+		expect(api.post).toHaveBeenCalledWith(
+			"/accounts/login",
+			{
+				email: "julio@example.com",
+				password: "teacher-password",
+				remember: true
+			},
+			{ withCredentials: true }
+		);
 		wrapper.unmount();
 	});
 });

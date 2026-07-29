@@ -1,40 +1,34 @@
 <script lang="ts" setup>
-import { pageTitleForPath } from "@/modules/pageHead";
+import {
+	canonicalUrlForPath,
+	pageRobotsForPath,
+	pageTitleForPath,
+	SITE_DESCRIPTION,
+	SITE_URL
+} from "@/modules/pageHead";
 
-const siteUrl = import.meta.env.VITE_SITE_URL || "https://cs.avasan.org";
-const siteDescription =
-	"Free Scratch, Python, and PyGames course materials from grade-school teacher Julio. Students can start learning without creating an account.";
+const siteUrl = import.meta.env.VITE_SITE_URL || SITE_URL;
 const route = useRoute();
-const noindexMatchers = [
-	/^\/admin(?:\/|$)/,
-	/^\/profile(?:\/|$)/,
-	/^\/python-ide(?:\/|$)/,
-	/^\/api(?:\/|$)/
-];
 const canonicalUrl = computed(() =>
-	new URL(route.path || "/", `${siteUrl}/`).toString()
+	canonicalUrlForPath(route.path || "/", siteUrl)
 );
 const socialImageUrl = computed(() =>
 	new URL("/og.png", `${siteUrl}/`).toString()
 );
 const pageTitle = computed(() => pageTitleForPath(route.path || "/"));
-const robotsContent = computed(() =>
-	noindexMatchers.some(matcher => matcher.test(route.path))
-		? "noindex,nofollow"
-		: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
-);
+const robotsContent = computed(() => pageRobotsForPath(route.path || "/"));
 const structuredData = computed(() => [
 	{
 		"@context": "https://schema.org",
 		"@type": "EducationalOrganization",
-		description: siteDescription,
+		description: SITE_DESCRIPTION,
 		name: "Classes with Julio",
 		url: siteUrl
 	},
 	{
 		"@context": "https://schema.org",
 		"@type": "WebSite",
-		description: siteDescription,
+		description: SITE_DESCRIPTION,
 		name: "Classes with Julio",
 		url: siteUrl
 	}
@@ -47,7 +41,7 @@ useHead(
 			meta: [
 				{
 					name: "description",
-					content: siteDescription
+					content: SITE_DESCRIPTION
 				},
 				{
 					property: "og:title",
@@ -55,7 +49,7 @@ useHead(
 				},
 				{
 					property: "og:description",
-					content: siteDescription
+					content: SITE_DESCRIPTION
 				},
 				{
 					property: "og:type",
@@ -84,7 +78,7 @@ useHead(
 				},
 				{
 					name: "twitter:description",
-					content: siteDescription
+					content: SITE_DESCRIPTION
 				},
 				{
 					name: "twitter:image",

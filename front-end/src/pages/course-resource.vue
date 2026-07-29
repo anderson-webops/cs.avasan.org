@@ -78,23 +78,13 @@ watch(
 </script>
 
 <template>
-	<main class="page-shell page-shell--wide course-resource-page">
-		<section class="page-hero course-resource-hero">
-			<div>
-				<p class="page-eyebrow">Course asset</p>
-				<h1 class="page-title">{{ title }}</h1>
-				<p class="page-copy">
-					This page renders the course asset as formatted Markdown so
-					it can be read without opening the raw source file.
-				</p>
-			</div>
-			<RouterLink
-				class="site-button site-button--secondary"
-				to="/courses"
-			>
-				Back to Courses
+	<section class="page-shell page-shell--wide course-resource-page">
+		<header class="course-resource-header">
+			<h1 class="page-title">{{ title }}</h1>
+			<RouterLink class="site-button site-button--secondary" to="/">
+				Back to courses
 			</RouterLink>
-		</section>
+		</header>
 
 		<section class="site-surface course-resource-card" aria-live="polite">
 			<p v-if="isLoading" class="course-resource-status">
@@ -105,7 +95,7 @@ watch(
 			</p>
 			<LazyMarkdownContent v-else :content="previewContent" />
 		</section>
-	</main>
+	</section>
 </template>
 
 <style scoped>
@@ -114,9 +104,11 @@ watch(
 	grid-template-columns: minmax(0, 1fr);
 }
 
-.course-resource-hero {
+.course-resource-header {
+	display: grid;
 	grid-template-columns: minmax(0, 1fr) auto;
 	align-items: end;
+	gap: 1rem;
 	min-width: 0;
 }
 
@@ -144,7 +136,7 @@ watch(
 }
 
 @media (max-width: 720px) {
-	.course-resource-hero {
+	.course-resource-header {
 		grid-template-columns: 1fr;
 		align-items: start;
 	}

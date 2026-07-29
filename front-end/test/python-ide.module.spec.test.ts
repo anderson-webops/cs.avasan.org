@@ -2776,7 +2776,7 @@ describe("python IDE project helpers", () => {
 		);
 	});
 
-	it("documents the enabled CodeMirror editor shortcuts in the IDE help", () => {
+	it("keeps the IDE shortcut help to the four essential commands", () => {
 		const pageSource = readFileSync(
 			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
 			"utf8"
@@ -2795,28 +2795,14 @@ describe("python IDE project helpers", () => {
 		expect(helpTextSource).toContain(".code-panel { overflow: hidden;");
 		expect(helpTextSource).toContain("max-height: min(24rem, 44vh);");
 		expect(helpTextSource).toContain("overscroll-behavior: contain;");
-		expect(helpTextSource).toContain("Cmd/Ctrl+/ toggles comments.");
+		expect(helpTextSource).toContain("Cmd/Ctrl+Enter: Run");
+		expect(helpTextSource).toContain("Cmd/Ctrl+S: Save");
+		expect(helpTextSource).toContain("Cmd/Ctrl+F: Find");
 		expect(helpTextSource).toContain(
-			"Ctrl+Space opens completions; Enter accepts the highlighted option."
+			"Tab / Shift+Tab: Indent / outdent"
 		);
-		expect(helpTextSource).toContain(
-			"Course snippets include main_guard, turtle_screen, ontimer_loop, onkey_handler, draw, update, actor, data_setup, scatter_plot, and decision_tree."
-		);
-		expect(helpTextSource).toContain(
-			"Cmd/Ctrl+Alt+Up/Down adds cursors above or below."
-		);
-		expect(helpTextSource).toContain(
-			"Alt/Option+Up/Down moves lines; add Shift to copy them."
-		);
-		expect(helpTextSource).toContain(
-			"Shift+Cmd/Ctrl+\\ jumps to the matching bracket."
-		);
-		expect(helpTextSource).toContain(
-			"Alt/Option-drag creates a rectangular selection."
-		);
-		expect(helpTextSource).toContain(
-			"Quotes and brackets wrap highlighted text."
-		);
+		expect(helpTextSource).not.toContain("Course snippets include");
+		expect(helpTextSource).not.toContain("rectangular selection");
 	});
 
 	it("ignores stale async project loads before mutating the workspace", () => {

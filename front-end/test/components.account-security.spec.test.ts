@@ -12,15 +12,13 @@ describe("AccountSecurity", () => {
 		const first = mount(AccountSecurity, {
 			props: {
 				email: "first@example.com",
-				entityId: "julio-primary",
-				role: "admin"
+				entityId: "julio-primary"
 			}
 		});
 		const second = mount(AccountSecurity, {
 			props: {
 				email: "second@example.com",
-				entityId: "julio-backup",
-				role: "admin"
+				entityId: "julio-backup"
 			}
 		});
 
@@ -36,5 +34,11 @@ describe("AccountSecurity", () => {
 		expect(
 			second.find("#account-security-admin-julio-backup-email").exists()
 		).toBe(true);
+		expect(first.get("h2").text()).toBe("Account settings");
+		expect(first.findAll("h3").map(heading => heading.text())).toEqual([
+			"Email",
+			"Password"
+		]);
+		expect(first.text()).not.toMatch(/Student|Tutor|whenever you need/i);
 	});
 });

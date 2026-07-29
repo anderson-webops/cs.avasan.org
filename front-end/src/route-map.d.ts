@@ -45,13 +45,6 @@ declare module 'vue-router/auto-routes' {
       { all: ParamValue<false> },
       | never
     >,
-    '/about': RouteRecordInfo<
-      '/about',
-      '/about',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
     '/admin': RouteRecordInfo<
       '/admin',
       '/admin',
@@ -62,20 +55,6 @@ declare module 'vue-router/auto-routes' {
     '/course-resource': RouteRecordInfo<
       '/course-resource',
       '/course-resource',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/courses': RouteRecordInfo<
-      '/courses',
-      '/courses',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/profile': RouteRecordInfo<
-      '/profile',
-      '/profile',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -116,14 +95,6 @@ declare module 'vue-router/auto-routes' {
       pathParamNames:
         | 'all'
     }
-    'src/pages/about.vue': {
-      routes:
-        | '/about'
-      views:
-        | never
-      pathParamNames:
-        | never
-    }
     'src/pages/admin.vue': {
       routes:
         | '/admin'
@@ -135,22 +106,6 @@ declare module 'vue-router/auto-routes' {
     'src/pages/course-resource.vue': {
       routes:
         | '/course-resource'
-      views:
-        | never
-      pathParamNames:
-        | never
-    }
-    'src/pages/courses.vue': {
-      routes:
-        | '/courses'
-      views:
-        | never
-      pathParamNames:
-        | never
-    }
-    'src/pages/profile.vue': {
-      routes:
-        | '/profile'
       views:
         | never
       pathParamNames:
