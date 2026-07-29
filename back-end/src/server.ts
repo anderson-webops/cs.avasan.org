@@ -156,8 +156,10 @@ async function main() {
 	// admin-mail routes intentionally are not part of this downstream runtime.
 	mountRuntimeAccountRoutes(app);
 
-	const PORT = env.PORT || 3008;
-	const server = app.listen(PORT, () => console.log(`Server listening on port ${PORT}!`));
+	const PORT = Number(env.PORT || 3008);
+	const HOST = env.HOST || env.BACKEND_HOST || "127.0.0.1";
+	const server = app.listen(PORT, HOST, () =>
+		console.log(`Server listening on http://${HOST}:${PORT}!`));
 	let isShuttingDown = false;
 
 	const shutdown = async (signal: NodeJS.Signals) => {
