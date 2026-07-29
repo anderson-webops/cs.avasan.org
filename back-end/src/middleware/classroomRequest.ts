@@ -3,6 +3,8 @@ import { env } from "node:process";
 import { readClassroomOrigin } from "../security/environment.js";
 
 const SAFE_METHODS = new Set(["GET", "HEAD", "OPTIONS"]);
+const APPLE_OAUTH_CALLBACK_PATH
+	= /^\/(?:api\/)?students\/oauth\/apple\/callback$/;
 
 function normalizeOrigin(value: string): string | null {
 	try {
@@ -35,12 +37,15 @@ function expectedRequestOrigin(
  */
 export const requireClassroomRequest: RequestHandler = (req, res, next) => {
 	const method = req.method.toUpperCase();
+	const originalPath = req.originalUrl.split("?", 1)[0];
+	const isAppleOAuthCallback
+		= method === "POST" && APPLE_OAUTH_CALLBACK_PATH.test(originalPath);
 	const isStudentActivityHeartbeat
 		= method === "GET" && req.get("X-Student-Activity") === "1";
 	const isAdminActivityHeartbeat
 		= method === "GET" && req.get("X-Admin-Activity") === "1";
 	if (
-		SAFE_METHODS.has(method)
+		(isAppleOAuthCallback || SAFE_METHODS.has(method))
 		&& !isStudentActivityHeartbeat
 		&& !isAdminActivityHeartbeat
 	) {

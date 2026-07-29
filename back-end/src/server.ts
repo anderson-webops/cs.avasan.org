@@ -23,6 +23,7 @@ import {
 } from "./middleware/rateLimiters.js";
 import { Admin } from "./models/schemas/Admin.js";
 import { ClassroomUsageDaily } from "./models/schemas/ClassroomUsageDaily.js";
+import { OAuthLoginAttempt } from "./models/schemas/OAuthLoginAttempt.js";
 import { PythonProject } from "./models/schemas/PythonProject.js";
 import { PythonProjectReview } from "./models/schemas/PythonProjectReview.js";
 import { Student } from "./models/schemas/Student.js";
@@ -39,6 +40,7 @@ import {
 } from "./security/environment.js";
 import { readTrustProxySetting } from "./security/trustProxy.js";
 import { reconcilePythonProjectQuotas } from "./services/pythonProjectQuotaReconciliation.js";
+import { enabledOAuthProviders } from "./utils/oauthProviderConfig.js";
 import { readMongoSecret } from "./vaultClient.js";
 import "dotenv/config";
 
@@ -57,6 +59,7 @@ async function main() {
 		= readClassroomAnalyticsServiceKey(
 			env.CLASSROOM_ANALYTICS_SERVICE_KEY
 		);
+	enabledOAuthProviders();
 	app.use(helmet());
 
 	// health
@@ -104,6 +107,24 @@ async function main() {
 	app.use(
 		["/accounts", "/students", "/admins"],
 		requireClassroomRequest
+	);
+	app.use(
+		"/students/oauth/apple/callback",
+		(req, res, next) => {
+			if (
+				req.method === "POST"
+				&& !req.is("application/x-www-form-urlencoded")
+			) {
+				res.sendStatus(415);
+				return;
+			}
+			next();
+		},
+		express.urlencoded({
+			extended: false,
+			limit: "16kb",
+			parameterLimit: 10
+		})
 	);
 
 	// Authenticated project payloads may include binary assets and are the only
@@ -232,6 +253,7 @@ async function main() {
 	await Promise.all([
 		Admin.init(),
 		ClassroomUsageDaily.init(),
+		OAuthLoginAttempt.init(),
 		Student.init(),
 		// Reconcile the former sparse import-ID index with the partial index.
 		// Legacy projects without an import ID remain readable while every new

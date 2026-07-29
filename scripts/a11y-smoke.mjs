@@ -34,6 +34,18 @@ const routeScenarios = [
 		routes: ["/admin", "/"]
 	},
 	{
+		interaction: "open-student-sign-in",
+		name: "student-sign-in",
+		role: "public",
+		routes: ["/"]
+	},
+	{
+		interaction: "open-student-navigation",
+		name: "student-setup",
+		role: "student-setup",
+		routes: ["/"]
+	},
+	{
 		name: "student",
 		role: "student",
 		routes: ["/", "/python-ide"]
@@ -132,7 +144,10 @@ function createMockApiServer() {
 		if (url.pathname === "/accounts/me") {
 			if (activeRole === "teacher") {
 				sendJson(res, { adminID: admin._id });
-			} else if (activeRole === "student") {
+			} else if (
+				activeRole === "student"
+				|| activeRole === "student-setup"
+			) {
 				sendJson(res, { studentID: student._id });
 			} else {
 				sendJson(res, {});
@@ -152,9 +167,17 @@ function createMockApiServer() {
 				res,
 				activeRole === "student"
 					? { student, requiresPasswordSetup: false }
+					: activeRole === "student-setup"
+						? { student, requiresPasswordSetup: true }
 					: {},
-				activeRole === "student" ? 200 : 401
+				activeRole === "student" || activeRole === "student-setup"
+					? 200
+					: 401
 			);
+			return;
+		}
+		if (url.pathname === "/students/oauth/providers") {
+			sendJson(res, { apple: true, google: true });
 			return;
 		}
 		if (
@@ -297,7 +320,7 @@ async function stopChild(child) {
 const transientNavigationError =
 	/Execution context was destroyed|Cannot find context with specified id|Navigating frame was detached/i;
 
-async function runAxeAudit(page, url) {
+async function runAxeAudit(page, url, interaction) {
 	for (let attempt = 1; attempt <= 3; attempt += 1) {
 		try {
 			await page.goto(url, {
@@ -308,6 +331,43 @@ async function runAxeAudit(page, url) {
 			await page.waitForFunction(() => document.body.innerText.trim().length > 0, {
 				timeout: 10_000
 			});
+			await page.waitForFunction(
+				() => document.querySelector("#app")?.hasAttribute("data-v-app"),
+				{ timeout: 10_000 }
+			);
+			if (
+				interaction === "open-student-sign-in"
+				|| interaction === "open-student-navigation"
+			) {
+				const targetSelector = interaction === "open-student-sign-in"
+					? ".student-access__trigger"
+					: "#student-access-panel";
+				let target = await page.$(targetSelector);
+				if (!target || !(await target.boundingBox())) {
+					await page.click(".site-toggler");
+					await page.waitForFunction(() => {
+						const navigation = document.querySelector("#siteNavbar");
+						const studentAccess = document.querySelector(
+							".student-access"
+						);
+						return navigation?.classList.contains("show")
+							&& !navigation.classList.contains("collapsing")
+							&& studentAccess instanceof HTMLElement
+							&& studentAccess.getClientRects().length > 0;
+					}, { timeout: 10_000 });
+					target = await page.waitForSelector(targetSelector, {
+						timeout: 10_000,
+						visible: true
+					});
+				}
+				if (interaction === "open-student-sign-in") {
+					await page.click(targetSelector);
+					await page.waitForSelector("#student-access-panel", {
+						timeout: 10_000,
+						visible: true
+					});
+				}
+			}
 			await new Promise(resolve => setTimeout(resolve, 250));
 			await page.addScriptTag({ path: axeSourcePath });
 
@@ -375,7 +435,11 @@ try {
 						await page.evaluateOnNewDocument(storedTheme => {
 							window.localStorage.setItem("vueuse-color-scheme", storedTheme);
 						}, media.storedTheme);
-						const result = await runAxeAudit(page, url);
+						const result = await runAxeAudit(
+							page,
+							url,
+							scenario.interaction
+						);
 						const violations = result.violations.filter(violation => violation.id !== "frame-tested");
 						if (violations.length) {
 							failures.push({

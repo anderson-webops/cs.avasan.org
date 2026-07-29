@@ -96,7 +96,10 @@ describe("StudentManagement", () => {
 			.find(button => button.text() === "Reset access")
 			?.trigger("click");
 
-		expect(wrapper.text()).toContain("invalidates the current password");
+		expect(wrapper.text()).toContain("invalidates any current password");
+		expect(wrapper.text()).toContain(
+			"disconnects any connected Google or Apple sign-in"
+		);
 		const passwordInput = wrapper.get(
 			`#reset-teacher-password-${student._id}`
 		);
@@ -167,6 +170,20 @@ describe("StudentManagement", () => {
 				username: "noah-5",
 				credentialState: "setup",
 				accessCodeExpiresAt: "2026-07-29T14:30:00.000Z"
+			},
+			{
+				...student,
+				_id: "student-5",
+				username: "sofia-3",
+				credentialState: "social",
+				socialProviders: ["google"]
+			},
+			{
+				...student,
+				_id: "student-6",
+				username: "mateo-8",
+				credentialState: "social",
+				socialProviders: ["apple"]
 			}
 		]);
 
@@ -179,6 +196,8 @@ describe("StudentManagement", () => {
 		expect(wrapper.text()).toContain(
 			"Password setup in progress — expires"
 		);
+		expect(wrapper.text()).toContain("Google connected");
+		expect(wrapper.text()).toContain("Apple connected");
 		expect(
 			wrapper
 				.findAll(".student-management__credential")
@@ -202,9 +221,9 @@ describe("StudentManagement", () => {
 		const wrapper = mountManagement();
 		await flushPromises();
 
-		expect(wrapper.get('[data-testid="student-project-count"]').text()).toBe(
-			"3"
-		);
+		expect(
+			wrapper.get('[data-testid="student-project-count"]').text()
+		).toBe("3");
 		expect(wrapper.get('[data-testid="student-last-sign-in"]').text()).toBe(
 			"Jul 28, 2026"
 		);

@@ -5,7 +5,13 @@ export interface StudentAccount {
 	username: string;
 	active: boolean;
 	credentialState?:
-		"access-code" | "expired-code" | "none" | "password" | "setup";
+		| "access-code"
+		| "expired-code"
+		| "none"
+		| "password"
+		| "setup"
+		| "social";
+	socialProviders?: ("apple" | "google")[];
 	accessCodeExpiresAt?: string | null;
 	passwordSetAt?: string | null;
 	createdAt?: string;

@@ -7,6 +7,8 @@ export interface IStudent {
 	accessCodeHash?: string;
 	pendingSetupCodeHash?: string;
 	accessCodeExpiresAt?: Date;
+	externalAuthProvider?: "apple" | "google";
+	externalAuthSubjectHash?: string;
 	active: boolean;
 	sessionVersion: number;
 	failedLoginAttempts: number;
