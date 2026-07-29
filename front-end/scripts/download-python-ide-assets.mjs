@@ -6,7 +6,8 @@ import { strFromU8, unzipSync } from "fflate";
 const DEFAULT_ASSETS_ZIP_URL = "https://static.classes.jacobdanderson.net/assets.zip";
 const MINIMUM_ZIP_BYTES = 1024;
 const ZIP_HEADER = [0x50, 0x4b];
-const ASSET_PATH_RE = /^(?:images|music|sounds)\/[^/].+\.[\dA-Z]+$/i;
+const ASSET_PATH_RE =
+	/^(?:images|music|sounds)\/(?:[^/]+\/)*[^/]+\.[\dA-Z]+$/i;
 const IGNORED_ZIP_PATH_RE =
 	/(?:^|\/)(?:__MACOSX|\.DS_Store|Thumbs\.db|desktop\.ini)(?:\/|$)/i;
 const IMAGE_EXTENSION_RE = /\.(?:gif|jpe?g|png|svg|webp)$/i;
