@@ -2,6 +2,7 @@ import { flushPromises, mount } from "@vue/test-utils";
 import { createPinia, setActivePinia } from "pinia";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import CourseExplorer from "@/components/CourseExplorer.vue";
+import { reportClassroomUsage } from "@/modules/classroomUsage";
 import { useCoursesStore } from "@/stores/courses";
 
 vi.mock("@/api", () => ({
@@ -9,6 +10,10 @@ vi.mock("@/api", () => ({
 		get: vi.fn(),
 		put: vi.fn()
 	}
+}));
+
+vi.mock("@/modules/classroomUsage", () => ({
+	reportClassroomUsage: vi.fn()
 }));
 
 const expectedCourses = [
@@ -61,6 +66,7 @@ function courseDefinition(id: string, name: string) {
 
 describe("CourseExplorer public catalog", () => {
 	beforeEach(() => {
+		vi.clearAllMocks();
 		installLocalStorageStub();
 		window.localStorage.clear();
 		window.history.replaceState({}, "", "/");
@@ -124,6 +130,10 @@ describe("CourseExplorer public catalog", () => {
 		);
 		expect(wrapper.text()).not.toContain("Done");
 		expect(loadCourse).toHaveBeenCalledWith("scratch-level-1");
+		expect(reportClassroomUsage).toHaveBeenCalledWith(
+			"course-open",
+			"scratch-level-1"
+		);
 	});
 
 	it("switches directly between public courses", async () => {
@@ -134,6 +144,10 @@ describe("CourseExplorer public catalog", () => {
 
 		expect(loadCourse).toHaveBeenCalledWith("pygames");
 		expect(wrapper.get(".course-hero h2").text()).toBe("PyGames");
+		expect(reportClassroomUsage).toHaveBeenCalledWith(
+			"course-open",
+			"pygames"
+		);
 		expect(wrapper.text()).not.toContain("Course preview");
 		expect(wrapper.text()).not.toContain("Use the browser workspace");
 	});

@@ -73,6 +73,12 @@ describe("static route normalization", () => {
 			"Teacher Admin | Classes with Julio",
 			"noindex,nofollow",
 			"https://cs.avasan.org/admin"
+		],
+		[
+			"/student-privacy",
+			"Student Privacy | Classes with Julio",
+			"index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+			"https://cs.avasan.org/student-privacy"
 		]
 	])(
 		"writes the route-aware static head for %s",

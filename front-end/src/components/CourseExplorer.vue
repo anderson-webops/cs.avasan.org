@@ -17,6 +17,7 @@ import {
 	watch
 } from "vue";
 import { api } from "@/api";
+import { reportClassroomUsage } from "@/modules/classroomUsage";
 import {
 	groupCoursesByLearnerStatus,
 	orderedCoursesByLearnerStatus
@@ -412,6 +413,11 @@ watch(
 	},
 	{ immediate: true }
 );
+
+watch([selectedCourse, isStorageReady], ([course, storageReady]) => {
+	if (!props.publicCatalog || !storageReady || !course) return;
+	void reportClassroomUsage("course-open", course.id);
+});
 
 const selectedCourseProgress = computed(() => {
 	const courseId = selectedCourseId.value;

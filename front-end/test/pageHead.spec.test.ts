@@ -15,6 +15,7 @@ describe("page head helpers", () => {
 			"Course Resource | Classes with Julio"
 		],
 		["/python-ide", "Python IDE | Classes with Julio"],
+		["/student-privacy", "Student Privacy | Classes with Julio"],
 		["/admin", "Teacher Admin | Classes with Julio"],
 		["/not-a-real-page", "Page Not Found | Classes with Julio"]
 	])("returns a useful title for %s", (path, title) => {
@@ -35,8 +36,9 @@ describe("page head helpers", () => {
 		);
 	});
 
-	it("indexes only the canonical public course catalog", () => {
+	it("indexes only the public catalog and student privacy notice", () => {
 		expect(pageRobotsForPath("/")).toBe(INDEX_ROBOTS);
+		expect(pageRobotsForPath("/student-privacy")).toBe(INDEX_ROBOTS);
 
 		for (const path of [
 			"/admin",

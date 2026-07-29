@@ -147,6 +147,27 @@ export function createStudentPasswordSetupLimiter(
 	});
 }
 
+/**
+ * Classroom usage events are anonymous. The default in-memory rate-limit store
+ * uses a client address only for a short abuse-prevention window; it is never
+ * written to MongoDB or included in the analytics aggregate.
+ */
+export function createClassroomUsageLimiter(
+	options: TunableRateLimitOptions = {}
+): RateLimitRequestHandler {
+	return rateLimit({
+		windowMs: 5 * 60 * 1000,
+		// Shared school networks need room for a full class opening courses and
+		// the IDE together while still bounding automated event floods.
+		limit: 600,
+		...standardRateLimitHeaders,
+		message: {
+			message: "Too many classroom activity updates. Please try again shortly."
+		},
+		...options
+	});
+}
+
 export function createTeacherVerificationLimiter(
 	options: TunableRateLimitOptions = {}
 ): RateLimitRequestHandler {

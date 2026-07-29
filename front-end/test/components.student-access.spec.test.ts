@@ -85,6 +85,11 @@ describe("StudentAccess", () => {
 		expect(wrapper.get("#student-secret").attributes("autocomplete")).toBe(
 			"off"
 		);
+		expect(
+			wrapper
+				.get(".student-access__privacy")
+				.attributes("href")
+		).toBe("/student-privacy");
 
 		await wrapper.get("#student-username").setValue("maria-7");
 		await wrapper.get("#student-secret").setValue("one-time-code");

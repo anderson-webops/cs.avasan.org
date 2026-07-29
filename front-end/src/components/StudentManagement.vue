@@ -45,6 +45,23 @@ function formatAccessCodeExpiry(value: string | null | undefined) {
 	}).format(expiresAt);
 }
 
+function formatRosterDate(value: string | null | undefined) {
+	if (!value) return "Never";
+	const date = new Date(value);
+	if (Number.isNaN(date.getTime())) return "Never";
+	return new Intl.DateTimeFormat("en-US", {
+		dateStyle: "medium"
+	}).format(date);
+}
+
+function rosterProjectCount(student: StudentAccount) {
+	const count = student.projectCount;
+	if (typeof count !== "number" || !Number.isFinite(count) || count < 0) {
+		return 0;
+	}
+	return Math.floor(count);
+}
+
 function credentialStatus(student: StudentAccount) {
 	switch (student.credentialState) {
 		case "password":
@@ -393,6 +410,30 @@ onMounted(loadStudents);
 						>
 							{{ credentialStatus(student) }}
 						</span>
+						<dl class="student-management__activity">
+							<div>
+								<dt>Projects</dt>
+								<dd data-testid="student-project-count">
+									{{ rosterProjectCount(student) }}
+								</dd>
+							</div>
+							<div>
+								<dt>Last sign-in</dt>
+								<dd data-testid="student-last-sign-in">
+									{{ formatRosterDate(student.lastLoginAt) }}
+								</dd>
+							</div>
+							<div>
+								<dt>Last project save</dt>
+								<dd data-testid="student-last-project-save">
+									{{
+										formatRosterDate(
+											student.lastProjectSavedAt
+										)
+									}}
+								</dd>
+							</div>
+						</dl>
 					</div>
 					<div class="student-management__student-actions">
 						<button
@@ -642,6 +683,30 @@ onMounted(loadStudents);
 
 .student-management__credential.is-warning {
 	color: var(--color-error-text);
+}
+
+.student-management__activity {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.45rem 1rem;
+	margin-top: 0.2rem;
+}
+
+.student-management__activity > div {
+	display: grid;
+	grid-template-columns: auto auto;
+	gap: 0.3rem;
+	color: var(--color-ink-soft);
+	font-size: 0.78rem;
+}
+
+.student-management__activity dt {
+	font-weight: 700;
+}
+
+.student-management__activity dd {
+	color: var(--color-ink);
+	font-weight: 800;
 }
 
 .student-management__state.is-disabled {

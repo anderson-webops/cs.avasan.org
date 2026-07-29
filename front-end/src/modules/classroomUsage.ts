@@ -1,0 +1,116 @@
+export type ClassroomUsageEvent = "course-open" | "ide-open";
+
+const allowedCourseIds = new Set([
+	"scratch-level-1",
+	"scratch-level-2",
+	"python-level-1",
+	"python-level-2",
+	"pygames"
+]);
+const storageKeyPrefix = "cs-avasan:classroom-usage";
+
+interface PrivacyAwareNavigator extends Navigator {
+	globalPrivacyControl?: boolean;
+	msDoNotTrack?: string | null;
+}
+
+interface PrivacyAwareWindow extends Window {
+	doNotTrack?: string | null;
+}
+
+function usageCollectionIsEnabled() {
+	return (
+		import.meta.env.VITE_CLASSROOM_USAGE_ENABLED?.trim().toLowerCase() ===
+		"true"
+	);
+}
+
+function privacySignalIsEnabled() {
+	if (typeof navigator === "undefined") return true;
+
+	const privacyNavigator = navigator as PrivacyAwareNavigator;
+	if (privacyNavigator.globalPrivacyControl === true) return true;
+
+	const signals = [
+		privacyNavigator.doNotTrack,
+		privacyNavigator.msDoNotTrack,
+		typeof window === "undefined"
+			? null
+			: (window as PrivacyAwareWindow).doNotTrack
+	];
+	return signals.some(signal => {
+		const normalized = signal?.toLowerCase();
+		return normalized === "1" || normalized === "yes";
+	});
+}
+
+function allowedCourseId(courseId?: string | null) {
+	const normalized = courseId?.trim() ?? "";
+	return allowedCourseIds.has(normalized) ? normalized : undefined;
+}
+
+function utcDate() {
+	return new Date().toISOString().slice(0, 10);
+}
+
+function reportStorageKey(event: ClassroomUsageEvent, courseId?: string) {
+	return [storageKeyPrefix, utcDate(), event, courseId ?? "none"].join(":");
+}
+
+/**
+ * Reports one anonymous classroom-use count per tab, event, course, and UTC
+ * date. This deliberately omits account, project, page, referrer, and device
+ * data. If privacy signals, browser storage, or the endpoint are unavailable,
+ * the classroom keeps working without reporting.
+ */
+export async function reportClassroomUsage(
+	event: ClassroomUsageEvent,
+	courseId?: string | null
+) {
+	if (
+		typeof window === "undefined" ||
+		typeof globalThis.fetch !== "function" ||
+		!usageCollectionIsEnabled()
+	) {
+		return;
+	}
+
+	try {
+		if (privacySignalIsEnabled()) return;
+	} catch {
+		return;
+	}
+
+	const safeCourseId = allowedCourseId(courseId);
+	const storageKey = reportStorageKey(event, safeCourseId);
+
+	try {
+		if (window.sessionStorage.getItem(storageKey)) return;
+		window.sessionStorage.setItem(storageKey, "1");
+	} catch {
+		return;
+	}
+
+	const payload = safeCourseId
+		? { event, courseId: safeCourseId }
+		: { event };
+
+	try {
+		await globalThis.fetch("/api/classroom-usage", {
+			body: JSON.stringify(payload),
+			cache: "no-store",
+			credentials: "omit",
+			headers: {
+				"Content-Type": "application/json",
+				"X-Classroom-Request": "1"
+			},
+			keepalive: true,
+			method: "POST",
+			mode: "same-origin",
+			redirect: "error",
+			referrerPolicy: "no-referrer"
+		});
+	} catch {
+		// Usage reporting must never interrupt anonymous course or IDE access.
+	}
+}

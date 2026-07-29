@@ -21,7 +21,8 @@ const modelMocks = vi.hoisted(() => ({
 	studentFindByIdAndUpdate: vi.fn(),
 	studentFindOne: vi.fn(),
 	studentFindOneAndUpdate: vi.fn(),
-	studentUpdateOne: vi.fn()
+	studentUpdateOne: vi.fn(),
+	pythonProjectAggregate: vi.fn()
 }));
 
 vi.mock("../src/models/schemas/Admin.js", () => ({
@@ -45,7 +46,9 @@ vi.mock("../src/models/schemas/Student.js", () => ({
 }));
 
 vi.mock("../src/models/schemas/PythonProject.js", () => ({
-	PythonProject: {}
+	PythonProject: {
+		aggregate: modelMocks.pythonProjectAggregate
+	}
 }));
 
 vi.mock("../src/models/schemas/PythonProjectReview.js", () => ({
@@ -206,6 +209,7 @@ describe("teacher-provisioned student accounts", () => {
 		modelMocks.studentFindById.mockReturnValue(queryWith(makeStudent()));
 		modelMocks.studentUpdateOne.mockResolvedValue({ modifiedCount: 1 });
 		modelMocks.studentExists.mockResolvedValue({ _id: studentID });
+		modelMocks.pythonProjectAggregate.mockResolvedValue([]);
 	});
 
 	it("expires teacher-issued codes exactly seven days after issuance", () => {
@@ -1059,6 +1063,74 @@ describe("teacher-provisioned student accounts", () => {
 				);
 			}
 		);
+	});
+
+	it("adds only coarse project activity to Julio's named roster", async () => {
+		const studentWithProjectsID = new Types.ObjectId();
+		const studentWithoutProjectsID = new Types.ObjectId();
+		const lastProjectSavedAt = new Date("2026-07-28T16:30:00.000Z");
+		modelMocks.studentFind.mockReturnValue(queryWith([
+			makeStudent({
+				_id: studentWithProjectsID,
+				username: "active-coder"
+			}),
+			makeStudent({
+				_id: studentWithoutProjectsID,
+				username: "new-coder"
+			})
+		]));
+		modelMocks.pythonProjectAggregate.mockResolvedValue([
+			{
+				_id: studentWithProjectsID,
+				lastProjectSavedAt,
+				projectCount: 3
+			}
+		]);
+
+		await withRuntime(
+			{ adminID: ADMIN_SINGLETON_ID },
+			async (baseUrl) => {
+				const response = await fetch(`${baseUrl}/admins/students`);
+				const body = await response.json();
+
+				expect(response.status).toBe(200);
+				expect(body.students).toEqual([
+					expect.objectContaining({
+						_id: studentWithProjectsID.toString(),
+						lastProjectSavedAt: lastProjectSavedAt.toISOString(),
+						projectCount: 3,
+						username: "active-coder"
+					}),
+					expect.objectContaining({
+						_id: studentWithoutProjectsID.toString(),
+						lastProjectSavedAt: null,
+						projectCount: 0,
+						username: "new-coder"
+					})
+				]);
+				expect(JSON.stringify(body)).not.toMatch(
+					/projectName|projectTitle|source|files|passwordHash|accessCodeHash/
+				);
+			}
+		);
+
+		expect(modelMocks.pythonProjectAggregate).toHaveBeenCalledWith([
+			{
+				$match: {
+					deletedAt: { $exists: false },
+					user: {
+						$in: [studentWithProjectsID, studentWithoutProjectsID]
+					}
+				}
+			},
+			{
+				$group: {
+					_id: "$user",
+					lastProjectSavedAt: { $max: "$updatedAt" },
+					projectCount: { $sum: 1 }
+				}
+			}
+		]);
 	});
 
 	it("rejects direct reactivation without a reusable credential", async () => {

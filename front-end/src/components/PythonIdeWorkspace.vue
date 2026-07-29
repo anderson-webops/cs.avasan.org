@@ -24,6 +24,7 @@ import {
 	watch
 } from "vue";
 import { useRoute } from "vue-router";
+import { reportClassroomUsage } from "@/modules/classroomUsage";
 import {
 	acknowledgeLocalPythonProjectRecovery,
 	applyPythonIdeRecoveryPlan,
@@ -5488,6 +5489,7 @@ watch(isLoading, loading => {
 });
 
 onMounted(() => {
+	void reportClassroomUsage("ide-open", requestedCourseId.value);
 	unregisterStudentSessionHandoff = registerStudentSessionHandoff(
 		handleStudentSessionHandoff
 	);

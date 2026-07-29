@@ -10,6 +10,7 @@ const ROUTE_TITLES = new Map([
 	["/", SITE_TITLE],
 	["/course-resource", "Course Resource"],
 	["/python-ide", "Python IDE"],
+	["/student-privacy", "Student Privacy"],
 	["/admin", "Teacher Admin"]
 ]);
 
@@ -29,7 +30,9 @@ export function pageTitleForPath(path: string) {
 }
 
 export function pageRobotsForPath(path: string) {
-	return normalizePagePath(path) === "/" ? INDEX_ROBOTS : NOINDEX_ROBOTS;
+	return ["/", "/student-privacy"].includes(normalizePagePath(path))
+		? INDEX_ROBOTS
+		: NOINDEX_ROBOTS;
 }
 
 export function canonicalUrlForPath(path: string, siteUrl = SITE_URL) {

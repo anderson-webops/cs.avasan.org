@@ -4,6 +4,12 @@ import express from "express";
 import { describe, expect, it } from "vitest";
 import { requireInternalDiagnostics } from "../src/middleware/internalDiagnostics.js";
 import {
+	DEFAULT_CLASSROOM_ANALYTICS_RETENTION_DAYS,
+	MIN_CLASSROOM_ANALYTICS_SERVICE_KEY_BYTES,
+	readClassroomAnalyticsRetentionDays,
+	readClassroomAnalyticsServiceKey
+} from "../src/security/classroomAnalytics.js";
+import {
 	createAdminMailLimiter,
 	createLoginLimiter,
 	createStudentPasswordSetupLimiter,
@@ -112,6 +118,27 @@ describe("security dependency regressions", () => {
 			`at least ${MIN_PRODUCTION_SESSION_SECRET_BYTES} UTF-8 bytes`
 		);
 		expect(readSessionSecret("x".repeat(32), true)).toBe("x".repeat(32));
+	});
+
+	it("bounds anonymous analytics retention and requires a strong service key", () => {
+		expect(readClassroomAnalyticsRetentionDays(undefined)).toBe(
+			DEFAULT_CLASSROOM_ANALYTICS_RETENTION_DAYS
+		);
+		expect(readClassroomAnalyticsRetentionDays("7")).toBe(7);
+		expect(readClassroomAnalyticsRetentionDays("90")).toBe(90);
+		expect(() => readClassroomAnalyticsRetentionDays("6")).toThrow(
+			"must be an integer from 7 to 90"
+		);
+		expect(() => readClassroomAnalyticsRetentionDays("91")).toThrow(
+			"must be an integer from 7 to 90"
+		);
+		expect(readClassroomAnalyticsServiceKey(undefined)).toBeUndefined();
+		expect(() => readClassroomAnalyticsServiceKey(
+			"x".repeat(MIN_CLASSROOM_ANALYTICS_SERVICE_KEY_BYTES - 1)
+		)).toThrow("must be at least 32 UTF-8 bytes");
+		expect(readClassroomAnalyticsServiceKey(
+			"x".repeat(MIN_CLASSROOM_ANALYTICS_SERVICE_KEY_BYTES)
+		)).toBe("x".repeat(MIN_CLASSROOM_ANALYTICS_SERVICE_KEY_BYTES));
 	});
 
 	it("does not trust forwarded client addresses unless proxy hops are explicitly configured", () => {
