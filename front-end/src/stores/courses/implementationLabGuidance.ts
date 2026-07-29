@@ -1,9 +1,5 @@
 export type ImplementationLabSection =
-	| "concepts"
-	| "example"
-	| "coreProject"
-	| "review"
-	| "extension";
+	"concepts" | "example" | "coreProject" | "review" | "extension";
 
 export interface ImplementationLabGuidanceOptions {
 	courseFamily: string;

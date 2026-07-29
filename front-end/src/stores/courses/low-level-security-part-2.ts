@@ -3,10 +3,7 @@ import { buildSupportSectionGuidance } from "./supportSectionGuidance";
 
 type SecurityLabMode = "core" | "extension";
 type SecurityLabPurpose =
-	| "core"
-	| "extension-challenge"
-	| "transfer-practice"
-	| "extension-practice";
+	"core" | "extension-challenge" | "transfer-practice" | "extension-practice";
 
 function stableVariantIndex(seed: string, count: number) {
 	let hash = 2166136261;

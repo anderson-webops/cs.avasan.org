@@ -100,8 +100,7 @@ interface PythonIdeStringCompletionContext {
 
 type PythonIdeCompletionResult = PythonIdeStringCompletionContext | null;
 type PythonIdeCompletionAsyncResult =
-	| PythonIdeCompletionResult
-	| Promise<PythonIdeCompletionResult>;
+	PythonIdeCompletionResult | Promise<PythonIdeCompletionResult>;
 
 const openingBracketToClosingBracket: Record<string, string> = {
 	"(": ")",

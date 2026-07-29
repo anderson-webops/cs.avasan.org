@@ -5525,8 +5525,7 @@ onBeforeUnmount(() => {
 									v-for="line in outputLines"
 									:key="line.id"
 									:class="`output-line output-line--${line.kind}`"
-									>{{ line.text }}</pre
-								>
+									>{{ line.text }}</pre>
 							</div>
 						</div>
 					</section>
