@@ -20,8 +20,9 @@ import type {
 
 declare module 'vue-router' {
   interface TypesConfig {
-    ParamParsers:
-      | never
+    _ParamParsers: {}
+    RouteNamedMap: import('vue-router/auto-routes').RouteNamedMap
+    _RouteFileInfoMap: import('vue-router/auto-routes')._RouteFileInfoMap
   }
 }
 
@@ -97,17 +98,23 @@ declare module 'vue-router/auto-routes' {
         | '/'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'src/pages/[...all].vue': {
       routes:
         | '/[...all]'
       views:
         | never
+      pathParamNames:
+        | 'all'
     }
     'src/pages/about.vue': {
       routes:
         | '/about'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'src/pages/course-resource.vue': {
@@ -115,11 +122,15 @@ declare module 'vue-router/auto-routes' {
         | '/course-resource'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'src/pages/courses.vue': {
       routes:
         | '/courses'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'src/pages/profile.vue': {
@@ -127,11 +138,15 @@ declare module 'vue-router/auto-routes' {
         | '/profile'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'src/pages/python-ide.vue': {
       routes:
         | '/python-ide'
       views:
+        | never
+      pathParamNames:
         | never
     }
   }
