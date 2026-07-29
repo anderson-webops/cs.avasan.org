@@ -37,6 +37,10 @@ context("Public classroom navigation", () => {
 		cy.get(".site-nav").contains("a:visible", "Python IDE").click();
 		cy.url().should("eq", `${Cypress.config().baseUrl}/python-ide`);
 		cy.contains("h1", "Python IDE").should("be.visible");
+
+		cy.get(".site-nav").contains("a:visible", "Graphing").click();
+		cy.url().should("eq", `${Cypress.config().baseUrl}/graph-sketcher`);
+		cy.contains("h1", "Graph Sketcher").should("be.visible");
 		cy.get(".site-nav").should("not.contain", "About");
 		cy.get(".site-nav").should("not.contain", "Home");
 	});

@@ -11,9 +11,12 @@ Keep these constraints intact:
 
 - The public catalog contains exactly Scratch Level 1, Scratch Level 2, Python
   Level 1, Python Level 2, and PyGames.
-- Students browse courses and use the browser IDE anonymously. An optional
-  student account may sync Python IDE projects, but it must never gate course
-  access or anonymous browser saves.
+- Keep the upstream-derived Graph Sketcher available at `/graph-sketcher` as
+  an anonymous, browser-local tool. It is not a catalog course, and graph
+  projects or contents must not be sent to the backend or analytics.
+- Students browse courses and use the browser IDE and Graph Sketcher
+  anonymously. An optional student account may sync Python IDE projects, but
+  it must never gate course access or anonymous browser saves.
 - Student accounts have a username but no email. Julio creates them and issues
   unique, expiring password-setup codes; students cannot register or recover
   accounts themselves.
@@ -49,7 +52,8 @@ uncommitted unless the user asks you to.
 
 ## Repository Shape
 
-- `front-end/`: Vue 3/Vite SSG public course site and browser IDE.
+- `front-end/`: Vue 3/Vite SSG public course site, browser IDE, and Graph
+  Sketcher.
 - `back-end/`: Express/Mongoose service for Julio's private Admin session.
 - `front-end/test/` and `back-end/test/`: Vitest suites.
 - Root configuration controls shared TypeScript, ESLint, workspaces, and builds.
@@ -90,5 +94,5 @@ documentation-only work, at minimum review the rendered text, confirm repository
 facts against the live checkout, and run `git diff --check`.
 
 Validation must specifically confirm that the five-course public catalog,
-anonymous course/IDE access, optional student project sync, and Julio-only Admin
-boundary remain intact.
+anonymous course/IDE/Graph Sketcher access, browser-local graph projects,
+optional student project sync, and Julio-only Admin boundary remain intact.

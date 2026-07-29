@@ -9,4 +9,5 @@
 **/.npmrc text eol=lf
 .env.EXAMPLE text eol=lf
 *.ts text eol=lf
+*.txt text eol=lf
 *.vue text eol=lf

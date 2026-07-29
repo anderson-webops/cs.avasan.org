@@ -59,6 +59,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/graph-sketcher': RouteRecordInfo<
+      '/graph-sketcher',
+      '/graph-sketcher',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/python-ide': RouteRecordInfo<
       '/python-ide',
       '/python-ide',
@@ -113,6 +120,14 @@ declare module 'vue-router/auto-routes' {
     'src/pages/course-resource.vue': {
       routes:
         | '/course-resource'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/graph-sketcher.vue': {
+      routes:
+        | '/graph-sketcher'
       views:
         | never
       pathParamNames:

@@ -14,6 +14,7 @@ describe("page head helpers", () => {
 			"/course-resource?asset=/course-assets/python/reference.md",
 			"Course Resource | Classes with Julio"
 		],
+		["/graph-sketcher", "Graph Sketcher | Classes with Julio"],
 		["/python-ide", "Python IDE | Classes with Julio"],
 		["/student-privacy", "Student Privacy | Classes with Julio"],
 		["/admin", "Teacher Admin | Classes with Julio"],
@@ -36,8 +37,9 @@ describe("page head helpers", () => {
 		);
 	});
 
-	it("indexes only the public catalog and student privacy notice", () => {
+	it("indexes only the public catalog, graphing tool, and privacy notice", () => {
 		expect(pageRobotsForPath("/")).toBe(INDEX_ROBOTS);
+		expect(pageRobotsForPath("/graph-sketcher")).toBe(INDEX_ROBOTS);
 		expect(pageRobotsForPath("/student-privacy")).toBe(INDEX_ROBOTS);
 
 		for (const path of [
