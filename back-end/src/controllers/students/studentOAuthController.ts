@@ -83,7 +83,8 @@ function callbackRequest(
 ): globalThis.Request | URL {
 	if (req.method !== "POST") {
 		const callbackUrl = new URL(oauthCallbackUrl(provider));
-		for (const [key, value] of Object.entries(req.query)) {
+		for (const key of ["code", "error", "error_description", "state"]) {
+			const value = req.query[key];
 			if (typeof value === "string") callbackUrl.searchParams.set(key, value);
 		}
 		return callbackUrl;
