@@ -5,9 +5,17 @@ const siteUrl = import.meta.env.VITE_SITE_URL || "https://cs.avasan.org";
 const siteDescription =
 	"Free Scratch, Python, and PyGames course materials from grade-school teacher Julio. Students can start learning without creating an account.";
 const route = useRoute();
-const noindexMatchers = [/^\/profile(?:\/|$)/, /^\/python-ide(?:\/|$)/, /^\/api(?:\/|$)/];
-const canonicalUrl = computed(() => new URL(route.path || "/", `${siteUrl}/`).toString());
-const socialImageUrl = computed(() => new URL("/og.png", `${siteUrl}/`).toString());
+const noindexMatchers = [
+	/^\/profile(?:\/|$)/,
+	/^\/python-ide(?:\/|$)/,
+	/^\/api(?:\/|$)/
+];
+const canonicalUrl = computed(() =>
+	new URL(route.path || "/", `${siteUrl}/`).toString()
+);
+const socialImageUrl = computed(() =>
+	new URL("/og.png", `${siteUrl}/`).toString()
+);
 const pageTitle = computed(() => pageTitleForPath(route.path || "/"));
 const robotsContent = computed(() =>
 	noindexMatchers.some(matcher => matcher.test(route.path))
@@ -62,7 +70,8 @@ useHead(
 				},
 				{
 					property: "og:image:alt",
-					content: "Classes with Julio: Scratch, Python, and PyGames for young coders"
+					content:
+						"Classes with Julio: Scratch, Python, and PyGames for young coders"
 				},
 				{
 					name: "twitter:card",
