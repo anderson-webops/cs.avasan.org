@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { Router } from "express";
 import { getClassroomAnalyticsSummary, recordClassroomUsage } from "../controllers/classroomAnalyticsController.js";
 import { requireClassroomAnalyticsService } from "../middleware/classroomAnalyticsAuth.js";
-import { requireClassroomRequest } from "../middleware/classroomRequest.js";
+import { requireAnonymousClassroomUsageRequest } from "../middleware/classroomRequest.js";
 import { createClassroomUsageLimiter } from "../middleware/rateLimiters.js";
 
 interface ClassroomAnalyticsRouteOptions {
@@ -22,7 +22,7 @@ export function mountClassroomAnalyticsRoutes(app: Express, options: ClassroomAn
 		const usageLimiter = createClassroomUsageLimiter();
 		router.post(
 			"/classroom-usage",
-			requireClassroomRequest,
+			requireAnonymousClassroomUsageRequest,
 			usageLimiter,
 			recordClassroomUsage(options.retentionDays)
 		);

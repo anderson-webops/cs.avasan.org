@@ -67,6 +67,25 @@ eight-hour absolute session cap.
 Do not add a second teacher account or public registration without an explicit
 product decision.
 
+## Shared Classroom Counts
+
+When explicitly enabled, the same privacy-limited aggregate service accepts
+anonymous counts from `cs.avasan.org` and `math.avasan.org`. Each request must
+use the fixed `cs` or `math` site ID and one supported event: CS course or
+Python IDE opens, or Math course or Graph Sketcher opens. Course events accept
+only the corresponding public catalog IDs. The service rejects arbitrary
+fields and credentials and never receives usernames, access codes, project
+names, source code, graph contents, expressions, coordinates, referrers, or
+device identifiers.
+
+The teacher analytics summary separates CS and Math activity while retaining
+only aggregate optional-account and Python-project counts under student work.
+Rows written before the Math site was connected remain part of the CS totals.
+Collection stays off unless both backend
+`CLASSROOM_ANALYTICS_COLLECTION_ENABLED` and frontend
+`VITE_CLASSROOM_USAGE_ENABLED` are explicitly set to `true`; browser Do Not
+Track and Global Privacy Control signals are honored.
+
 ### Provision Julio
 
 Use a new, empty `cs-avasan-org` MongoDB database. After setting
