@@ -70,7 +70,7 @@
 		"@vue/test-utils": "^2.4.11",
 		"beasties": "^0.4.3",
 		"cross-env": "^10.1.0",
-		"cypress": "^15.15.0",
+		"cypress": "^15.19.0",
 		"eslint-plugin-format": "^2.0.1",
 		"glob": "^13.0.6",
 		"lint-staged": "^16.4.0",
