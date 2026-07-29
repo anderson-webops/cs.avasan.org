@@ -1,28 +1,37 @@
-const SITE_TITLE = "Classes with Julio";
+export const SITE_TITLE = "Classes with Julio";
+export const SITE_URL = "https://cs.avasan.org";
+export const SITE_DESCRIPTION =
+	"Free Scratch, Python, and PyGames course materials from grade-school teacher Julio. Students can start learning without creating an account.";
+export const INDEX_ROBOTS =
+	"index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1";
+export const NOINDEX_ROBOTS = "noindex,nofollow";
 
-const ROUTE_TITLES: Array<[RegExp, string]> = [
-	[/^\/$/, SITE_TITLE],
-	[/^\/courses(?:\/|$)/, "Courses"],
-	[/^\/course-resource(?:\/|$)/, "Course Resource"],
-	[/^\/python-ide(?:\/|$)/, "Python IDE"],
-	[/^\/about(?:\/|$)/, "About Julio"],
-	[/^\/admin(?:\/|$)/, "Teacher Admin"],
-	[/^\/profile(?:\/|$)/, "Teacher Account"]
-];
+const ROUTE_TITLES = new Map([
+	["/", SITE_TITLE],
+	["/course-resource", "Course Resource"],
+	["/python-ide", "Python IDE"],
+	["/admin", "Teacher Admin"]
+]);
 
-function normalizePath(path: string) {
+export function normalizePagePath(path: string) {
 	const normalized = path.trim().split(/[?#]/, 1)[0] || "/";
 	if (normalized === "/") return normalized;
 	return normalized.replace(/\/+$/g, "");
 }
 
 export function pageTitleForPath(path: string) {
-	const normalized = normalizePath(path);
 	const matchedTitle =
-		ROUTE_TITLES.find(([pattern]) => pattern.test(normalized))?.[1] ??
-		"Page Not Found";
+		ROUTE_TITLES.get(normalizePagePath(path)) ?? "Page Not Found";
 
 	return matchedTitle === SITE_TITLE
 		? SITE_TITLE
 		: `${matchedTitle} | ${SITE_TITLE}`;
+}
+
+export function pageRobotsForPath(path: string) {
+	return normalizePagePath(path) === "/" ? INDEX_ROBOTS : NOINDEX_ROBOTS;
+}
+
+export function canonicalUrlForPath(path: string, siteUrl = SITE_URL) {
+	return new URL(normalizePagePath(path), `${siteUrl}/`).toString();
 }

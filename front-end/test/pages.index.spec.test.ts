@@ -1,10 +1,14 @@
 import { flushPromises, mount } from "@vue/test-utils";
-import { describe, expect, it } from "vitest";
-import CoursesPage from "@/pages/courses.vue";
+import { describe, expect, it, vi } from "vitest";
+import HomePage from "@/pages/index.vue";
 
-describe("public courses page", () => {
+vi.mock("@unhead/vue", () => ({
+	useHead: vi.fn()
+}));
+
+describe("public home page", () => {
 	it("opens the course explorer as a public catalog", async () => {
-		const wrapper = mount(CoursesPage, {
+		const wrapper = mount(HomePage, {
 			global: {
 				stubs: {
 					CourseExplorer: {
@@ -26,10 +30,8 @@ describe("public courses page", () => {
 
 		await flushPromises();
 
-		expect(wrapper.text()).toContain("Computer Science Courses");
-		expect(wrapper.text()).toContain(
-			"Every course is available without a student account."
-		);
+		expect(wrapper.get("h1").text()).toBe("Courses");
+		expect(wrapper.text()).toContain("No student account is needed.");
 		expect(
 			wrapper
 				.get('[data-testid="course-explorer"]')
@@ -38,7 +40,7 @@ describe("public courses page", () => {
 	});
 
 	it("does not present account or scheduler gates", async () => {
-		const wrapper = mount(CoursesPage, {
+		const wrapper = mount(HomePage, {
 			global: {
 				stubs: {
 					CourseExplorer: {

@@ -17,55 +17,51 @@ context("Public classroom navigation", () => {
 
 	it("loads Julio's account-free classroom", () => {
 		cy.url().should("eq", `${Cypress.config().baseUrl}/`);
-		cy.contains("h1", "Make something").should("be.visible");
-		cy.contains("Grade-school teacher Julio").should("be.visible");
-		cy.contains("No student account").should("be.visible");
+		cy.contains("h1", "Courses").should("be.visible");
+		cy.contains("No student account is needed.").should("be.visible");
+		cy.get("#course-select").should("be.visible");
 	});
 
-	it("navigates among the public classroom pages", () => {
+	it("keeps only the essential public navigation", () => {
 		cy.get(".site-nav").contains("a:visible", "Courses").click();
-		cy.url().should("eq", `${Cypress.config().baseUrl}/courses`);
-		cy.contains("h1", "Computer Science Courses").should("be.visible");
+		cy.url().should("eq", `${Cypress.config().baseUrl}/`);
+		cy.contains("h1", "Courses").should("be.visible");
 
 		cy.get(".site-nav").contains("a:visible", "Python IDE").click();
 		cy.url().should("eq", `${Cypress.config().baseUrl}/python-ide`);
-		cy.contains("h1", "Code, run, and draw in Python").should("be.visible");
-
-		cy.get(".site-nav").contains("a:visible", "About Julio").click();
-		cy.url().should("eq", `${Cypress.config().baseUrl}/about`);
-		cy.contains("h1", "A teacher's small coding library").should(
-			"be.visible"
-		);
-
-		cy.get(".site-nav").contains("a:visible", "Home").click();
-		cy.url().should("eq", `${Cypress.config().baseUrl}/`);
+		cy.contains("h1", "Python IDE").should("be.visible");
+		cy.get(".site-nav").should("not.contain", "About");
+		cy.get(".site-nav").should("not.contain", "Home");
 	});
 
 	it("publishes only Scratch, Python 1-2, and PyGames", () => {
-		cy.get(".site-nav").contains("a:visible", "Courses").click();
-
 		cy.get("#course-select option").should("have.length", 5);
 		cy.get("#course-select option").then(options => {
-			expect([...options].map(option => option.textContent?.trim())).to.deep
-				.equal(publicCourses);
+			expect(
+				[...options].map(option => option.textContent?.trim())
+			).to.deep.equal(publicCourses);
 		});
-		cy.contains("Every course is available without a student account.").should(
-			"be.visible"
-		);
+		cy.contains("No student account is needed.").should("be.visible");
 	});
 
 	it("keeps teacher login off public navigation and available at /admin", () => {
 		cy.get(".site-nav").should("not.contain", "Teacher log in");
 		cy.visit("/admin");
 
-		cy.get("#teacher-login-dialog")
-			.should("be.visible")
-			.and("have.attr", "role", "dialog");
-		cy.contains(
-			"This private sign-in is only for Julio, the teacher who maintains the course library."
-		).should("be.visible");
-		cy.contains("Students do not need an account.").should("be.visible");
+		cy.contains("h1", "Admin").should("be.visible");
+		cy.get("form").should("be.visible");
+		cy.get('input[type="email"]').should("be.visible");
+		cy.get('input[type="password"]').should("be.visible");
+		cy.contains("button", "Log in").should("be.visible");
+		cy.get('[role="dialog"]').should("not.exist");
 		cy.contains("Sign up").should("not.exist");
 		cy.contains("Book a Class").should("not.exist");
+	});
+
+	it("treats removed presentation pages as missing", () => {
+		for (const path of ["/about", "/courses", "/profile"]) {
+			cy.visit(path);
+			cy.contains("h1", "Page not found").should("be.visible");
+		}
 	});
 });

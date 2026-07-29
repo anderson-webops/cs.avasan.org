@@ -28,10 +28,7 @@ export const install: UserModule = ({ router }) => {
 
 		// Still not an admin? block & bounce
 		if (!app.currentAdmin) {
-			// optional: pop your login modal
-			app.setLoginBlock?.(true);
-			// redirect home (preserve intended path)
-			return { path: "/", query: { redirect: to.fullPath } };
+			return { path: "/admin", query: { redirect: to.fullPath } };
 		}
 	});
 };

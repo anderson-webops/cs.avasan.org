@@ -36,10 +36,8 @@ describe("TheHeader.vue", () => {
 
 		expect(wrapper.text()).toContain("Classes with Julio");
 		expect(links).toEqual([
-			["Home", "/"],
-			["Courses", "/courses"],
-			["Python IDE", "/python-ide"],
-			["About Julio", "/about"]
+			["Courses", "/"],
+			["Python IDE", "/python-ide"]
 		]);
 		expect(wrapper.text()).not.toContain("Teacher log in");
 		expect(wrapper.find(".site-nav__actions").exists()).toBe(false);
@@ -62,15 +60,15 @@ describe("TheHeader.vue", () => {
 
 		const wrapper = mountHeader(pinia);
 
-		expect(wrapper.text()).toContain("Teacher");
-		expect(wrapper.text()).toContain("Account");
+		expect(wrapper.text()).toContain("Admin");
 		expect(wrapper.text()).toContain("Log out");
 		expect(wrapper.text()).not.toContain("Teacher log in");
+		expect(wrapper.text()).not.toContain("Account");
 		expect(
 			wrapper
 				.findAll("a")
-				.find(link => link.text() === "Account")
+				.find(link => link.text() === "Admin")
 				?.attributes("href")
-		).toBe("/profile");
+		).toBe("/admin");
 	});
 });

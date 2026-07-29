@@ -5,8 +5,7 @@ import type { PythonCodeMirrorAssetCompletionNames } from "@/modules/pythonCodeM
 import type {
 	PythonIdeFile,
 	PythonIdeMode,
-	PythonIdeProject,
-	PythonIdeProjectReview
+	PythonIdeProject
 } from "@/modules/pythonIde";
 import type { PythonIdeCourseAssetPack } from "@/modules/pythonIdeCourseAssets";
 import type {
@@ -30,7 +29,6 @@ import {
 	createRemotePythonIdeProject,
 	deleteRemotePythonIdeProject,
 	fetchPythonIdeProjects,
-	fetchVisiblePythonIdeProjectReviews,
 	getPythonIdeAssetDataUrl,
 	getPythonIdeDefaultFileContent,
 	getPythonIdeFileKindLabel,
@@ -459,9 +457,7 @@ const route = useRoute();
 const { currentUser } = storeToRefs(app);
 
 const projects = ref<PythonIdeProject[]>([]);
-const visibleProjectReviews = ref<PythonIdeProjectReview[]>([]);
 const selectedProjectID = ref("");
-const selectedReviewFileName = ref("");
 const newFileName = ref("");
 const inputText = ref("");
 const outputLines = ref<OutputLine[]>([]);
@@ -808,36 +804,6 @@ const activeFilePreviewKind = computed(() => {
 	if (activeFileDataUrl.value.startsWith("data:image/")) return "image";
 	if (activeFileDataUrl.value.startsWith("data:audio/")) return "audio";
 	return "";
-});
-
-const selectedVisibleReview = computed(
-	() =>
-		visibleProjectReviews.value.find(
-			review => review.sourceProject === selectedProject.value?._id
-		) ?? null
-);
-const visibleReviewFiles = computed(
-	() => selectedVisibleReview.value?.files ?? []
-);
-const activeVisibleReviewFile = computed(() => {
-	const review = selectedVisibleReview.value;
-	if (!review) return null;
-	const activeFileName =
-		selectedReviewFileName.value &&
-		review.files.some(file => file.name === selectedReviewFileName.value)
-			? selectedReviewFileName.value
-			: resolvePythonIdeActiveFileName(
-					review.files,
-					review.activeFileName
-				);
-	return review.files.find(file => file.name === activeFileName) ?? null;
-});
-const activeVisibleReviewFileContent = computed(() => {
-	const file = activeVisibleReviewFile.value;
-	if (!file) return "";
-	if (isPythonIdeBinaryAssetFile(file))
-		return `[Imported asset: ${file.name}]`;
-	return file.content;
 });
 
 const canSyncToAccount = computed(() => !!currentUser.value?._id);
@@ -1344,8 +1310,6 @@ async function loadProjects() {
 		if (canSyncToAccount.value) {
 			const remoteProjects = await fetchPythonIdeProjects();
 			if (!projectLoadIsCurrent(loadRunID)) return;
-			visibleProjectReviews.value =
-				await fetchVisiblePythonIdeProjectReviews().catch(() => []);
 			const localProjects = await loadLocalPythonProjectsAsync(
 				storageUserID.value
 			);
@@ -1400,7 +1364,6 @@ async function loadProjects() {
 			return;
 		}
 
-		visibleProjectReviews.value = [];
 		const localProjects = await loadLocalPythonProjectsAsync(
 			storageUserID.value
 		);
@@ -1429,7 +1392,6 @@ async function loadProjects() {
 		if (!projectLoadIsCurrent(loadRunID)) return;
 		saveMessage.value =
 			error instanceof Error ? error.message : "Using local workspace";
-		visibleProjectReviews.value = [];
 	} finally {
 		if (projectLoadIsCurrent(loadRunID)) {
 			await nextTick();
@@ -4815,19 +4777,6 @@ watch(selectedProjectID, (projectID, previousProjectID) => {
 });
 
 watch(
-	selectedVisibleReview,
-	review => {
-		selectedReviewFileName.value = review
-			? resolvePythonIdeActiveFileName(
-					review.files,
-					review.activeFileName
-				)
-			: "";
-	},
-	{ immediate: true }
-);
-
-watch(
 	() =>
 		`${selectedProjectID.value}:${activeFile.value?.name ?? ""}:${activeFileIsBinaryAsset.value}`,
 	() => {
@@ -4885,15 +4834,7 @@ onBeforeUnmount(() => {
 <template>
 	<section class="python-ide-page page-shell page-shell--wide">
 		<div class="python-ide-hero">
-			<div>
-				<p class="python-ide-eyebrow">Python IDE</p>
-				<h1>Code, run, and draw in Python</h1>
-				<p>
-					Build multi-file Python projects, run standard Python code,
-					and use the Turtle canvas for drawing and keyboard-driven
-					lessons or PyGame Zero game projects.
-				</p>
-			</div>
+			<h1>Python IDE</h1>
 			<div class="python-ide-status" aria-live="polite">
 				<span>{{ saveMessage }}</span>
 				<strong>{{ runMessage }}</strong>
@@ -5240,9 +5181,7 @@ onBeforeUnmount(() => {
 									<span>
 										<strong>Autosave projects</strong>
 										<small>
-											Save edits locally on this device
-											right away. No student account is
-											required.
+											Save projects on this device.
 										</small>
 									</span>
 								</label>
@@ -5291,40 +5230,6 @@ onBeforeUnmount(() => {
 					</div>
 				</div>
 
-				<section
-					v-if="selectedVisibleReview"
-					class="visible-review-panel"
-					aria-label="Visible tutor review copy"
-				>
-					<div class="visible-review-header">
-						<div>
-							<p class="visible-review-eyebrow">
-								Staff review copy
-							</p>
-							<h2>{{ selectedVisibleReview.title }}</h2>
-							<p v-if="selectedVisibleReview.note">
-								{{ selectedVisibleReview.note }}
-							</p>
-						</div>
-						<label v-if="visibleReviewFiles.length">
-							<span>Review file</span>
-							<select v-model="selectedReviewFileName">
-								<option
-									v-for="file in visibleReviewFiles"
-									:key="file.name"
-									:value="file.name"
-								>
-									{{ file.name }}
-								</option>
-							</select>
-						</label>
-					</div>
-					<pre
-						v-if="activeVisibleReviewFile"
-						class="visible-review-code"
-					><code>{{ activeVisibleReviewFileContent }}</code></pre>
-				</section>
-
 				<div
 					class="ide-grid"
 					:class="{ 'ide-grid--drawing': usesDrawingCanvas }"
@@ -5339,43 +5244,11 @@ onBeforeUnmount(() => {
 								<details class="editor-shortcuts">
 									<summary>Shortcuts</summary>
 									<ul>
-										<li>Cmd/Ctrl+F opens search.</li>
+										<li>Cmd/Ctrl+Enter: Run</li>
+										<li>Cmd/Ctrl+S: Save</li>
+										<li>Cmd/Ctrl+F: Find</li>
 										<li>
-											Cmd/Ctrl+Enter runs the project.
-										</li>
-										<li>Cmd/Ctrl+S saves the project.</li>
-										<li>Cmd/Ctrl+/ toggles comments.</li>
-										<li>
-											Ctrl+Space opens completions; Enter
-											accepts the highlighted option.
-										</li>
-										<li>
-											Course snippets include main_guard,
-											turtle_screen, ontimer_loop,
-											onkey_handler, draw, update, actor,
-											data_setup, scatter_plot, and
-											decision_tree.
-										</li>
-										<li>
-											Cmd/Ctrl+Alt+Up/Down adds cursors
-											above or below.
-										</li>
-										<li>Tab indents; Shift+Tab dedents.</li>
-										<li>
-											Alt/Option+Up/Down moves lines; add
-											Shift to copy them.
-										</li>
-										<li>
-											Shift+Cmd/Ctrl+\ jumps to the
-											matching bracket.
-										</li>
-										<li>
-											Alt/Option-drag creates a
-											rectangular selection.
-										</li>
-										<li>
-											Quotes and brackets wrap highlighted
-											text.
+											Tab / Shift+Tab: Indent / outdent
 										</li>
 									</ul>
 								</details>

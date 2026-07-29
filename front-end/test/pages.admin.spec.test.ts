@@ -14,36 +14,33 @@ describe("Teacher admin page", () => {
 			global: {
 				stubs: {
 					AccountManagement: {
-						template:
-							'<div data-testid="teacher-login-dialog-host" />'
+						template: '<form data-testid="admin-login-form" />'
 					},
-					RouterLink: {
-						props: ["to"],
-						template: '<a :href="to"><slot /></a>'
+					AccountSecurity: {
+						props: ["email", "entityId"],
+						template:
+							'<div data-testid="account-settings">{{ email }}</div>'
 					}
 				}
 			}
 		});
 	}
 
-	it("opens Julio's login only when /admin is visited logged out", () => {
-		const app = useAppStore();
+	it("shows only the inline login when /admin is visited logged out", () => {
 		const wrapper = mountAdmin();
 
-		expect(app.loginBlock).toBe(true);
-		expect(wrapper.text()).toContain("Julio's private sign-in");
-		expect(
-			wrapper.get('[data-testid="teacher-login-dialog-host"]').exists()
-		).toBe(true);
-		expect(
-			wrapper
-				.findAll("a")
-				.find(link => link.text() === "Return to courses")
-				?.attributes("href")
-		).toBe("/courses");
+		expect(wrapper.get("h1").text()).toBe("Admin");
+		expect(wrapper.get('[data-testid="admin-login-form"]').exists()).toBe(
+			true
+		);
+		expect(wrapper.find('[data-testid="account-settings"]').exists()).toBe(
+			false
+		);
+		expect(wrapper.find("a").exists()).toBe(false);
+		expect(wrapper.text()).not.toMatch(/Student|Tutor|private|account-free/i);
 	});
 
-	it("shows Julio the private account destination when already logged in", () => {
+	it("shows account settings directly when Julio is logged in", () => {
 		const app = useAppStore();
 		app.setCurrentAdmin({
 			_id: "julio",
@@ -55,16 +52,13 @@ describe("Teacher admin page", () => {
 
 		const wrapper = mountAdmin();
 
-		expect(app.loginBlock).toBe(false);
-		expect(wrapper.text()).toContain("Signed in as Julio");
-		expect(
-			wrapper
-				.findAll("a")
-				.find(link => link.text() === "Open teacher account")
-				?.attributes("href")
-		).toBe("/profile");
-		expect(
-			wrapper.find('[data-testid="teacher-login-dialog-host"]').exists()
-		).toBe(false);
+		expect(wrapper.get("h1").text()).toBe("Admin");
+		expect(wrapper.get('[data-testid="account-settings"]').text()).toBe(
+			"julio@example.com"
+		);
+		expect(wrapper.find('[data-testid="admin-login-form"]').exists()).toBe(
+			false
+		);
+		expect(wrapper.find("a").exists()).toBe(false);
 	});
 });

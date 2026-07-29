@@ -14,6 +14,7 @@ import generateSitemap from "vite-ssg-sitemap";
 import { VueRouterAutoImports } from "vue-router/unplugin";
 import VueRouter from "vue-router/vite";
 import { generateProductionSitemap } from "./scripts/sitemap.mts";
+import { rewriteStaticHead } from "./scripts/static-head.mts";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const pythonIdePreloadChunkRE = /(?:^|\/)python-ide-runtime-[^/]+\.js$/;
@@ -87,15 +88,17 @@ export default defineConfig(({ command }) => ({
 						apply: "build" as const,
 						name: "avasan-analytics-html",
 						transformIndexHtml() {
-							return analyticsScripts.map(({ src, websiteId }) => ({
-								attrs: {
-									"data-website-id": websiteId,
-									defer: true,
-									src
-								},
-								injectTo: "head" as const,
-								tag: "script"
-							}));
+							return analyticsScripts.map(
+								({ src, websiteId }) => ({
+									attrs: {
+										"data-website-id": websiteId,
+										defer: true,
+										src
+									},
+									injectTo: "head" as const,
+									tag: "script"
+								})
+							);
 						}
 					}
 				]),
@@ -117,6 +120,9 @@ export default defineConfig(({ command }) => ({
 		formatting: "minify",
 		beastiesOptions: {
 			reduceInlineStyles: false
+		},
+		onPageRendered(route, html) {
+			return rewriteStaticHead(html, route);
 		},
 		onFinished() {
 			generateProductionSitemap(generateSitemap);
@@ -154,7 +160,9 @@ export default defineConfig(({ command }) => ({
 	server: {
 		proxy: {
 			"/api": {
-				target: process.env.VITE_API_PROXY_TARGET ?? "http://localhost:3008",
+				target:
+					process.env.VITE_API_PROXY_TARGET ??
+					"http://localhost:3008",
 				changeOrigin: true,
 				rewrite: p => p.replace(/^\/api/, "") // strip /api
 			}

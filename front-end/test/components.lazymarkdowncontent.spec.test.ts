@@ -21,6 +21,7 @@ describe("LazyMarkdownContent.vue", () => {
 
 		const tableWrapper = wrapper.find(".markdown-table-scroll");
 		expect(tableWrapper.exists()).toBe(true);
+		expect(tableWrapper.attributes("tabindex")).toBe("0");
 		expect(tableWrapper.find("table").exists()).toBe(true);
 		expect(wrapper.findAll("th").map(cell => cell.text())).toEqual([
 			"Sample",
@@ -143,6 +144,7 @@ describe("LazyMarkdownContent.vue", () => {
 		});
 
 		const codeText = wrapper.find("pre code").text();
+		expect(wrapper.get("pre").attributes("tabindex")).toBe("0");
 		expect(codeText).toContain("# Function definitions");
 		expect(codeText).toContain("def draw_border():");
 		expect(codeText).toContain("# Continuous game logic");

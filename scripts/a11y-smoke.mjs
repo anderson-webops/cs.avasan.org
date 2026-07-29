@@ -12,18 +12,18 @@ const apiPort = Number(process.env.A11Y_API_PORT || 3008);
 const baseUrl = `http://127.0.0.1:${frontendPort}`;
 const isCi = process.env.CI === "true";
 const runFullMatrix = process.env.A11Y_FULL === "true" || !isCi;
+const courseResourceRoute =
+	"/course-resource?asset=%2Fcourse-assets%2Fpython%2Fturtle-project-reference.md%23turtle-command-reference&label=Turtle+command+reference";
 const routeScenarios = [
 	{
 		name: "public",
 		role: "public",
-		routes: runFullMatrix
-			? ["/", "/about", "/courses", "/python-ide", "/admin", "/profile"]
-			: ["/", "/courses", "/admin", "/profile"]
+		routes: runFullMatrix ? ["/", "/python-ide", courseResourceRoute, "/admin"] : ["/", "/admin"]
 	},
 	{
 		name: "teacher",
 		role: "teacher",
-		routes: ["/admin", "/profile", "/courses"]
+		routes: ["/admin", "/"]
 	}
 ];
 const viewportScenarios = runFullMatrix
@@ -217,10 +217,7 @@ async function stopChild(child) {
 	if (exited) return;
 
 	killChild(child, "SIGKILL");
-	await Promise.race([
-		waitForChildExit(child),
-		new Promise(resolve => setTimeout(resolve, 2_000))
-	]);
+	await Promise.race([waitForChildExit(child), new Promise(resolve => setTimeout(resolve, 2_000))]);
 }
 
 const apiServer = createMockApiServer();
@@ -246,9 +243,7 @@ try {
 					const url = `${baseUrl}${route}`;
 					const page = await browser.newPage();
 					try {
-						console.log(
-							`a11y checking: ${url} (${scenario.name}, ${viewport.name}, ${media.name})`
-						);
+						console.log(`a11y checking: ${url} (${scenario.name}, ${viewport.name}, ${media.name})`);
 						page.setDefaultNavigationTimeout(15_000);
 						await page.setViewport({
 							deviceScaleFactor: 1,
@@ -266,20 +261,16 @@ try {
 							}
 						]);
 						await page.evaluateOnNewDocument(storedTheme => {
-							window.localStorage.setItem(
-								"vueuse-color-scheme",
-								storedTheme
-							);
+							window.localStorage.setItem("vueuse-color-scheme", storedTheme);
 						}, media.storedTheme);
 						await page.goto(url, {
 							timeout: 15_000,
 							waitUntil: "domcontentloaded"
 						});
 						await page.waitForSelector("body", { timeout: 10_000 });
-						await page.waitForFunction(
-							() => document.body.innerText.trim().length > 0,
-							{ timeout: 10_000 }
-						);
+						await page.waitForFunction(() => document.body.innerText.trim().length > 0, {
+							timeout: 10_000
+						});
 						await new Promise(resolve => setTimeout(resolve, 250));
 						await page.addScriptTag({ path: axeSourcePath });
 						const result = await page.evaluate(async () => {
@@ -291,9 +282,7 @@ try {
 								}
 							});
 						});
-						const violations = result.violations.filter(
-							violation => violation.id !== "frame-tested"
-						);
+						const violations = result.violations.filter(violation => violation.id !== "frame-tested");
 						if (violations.length) {
 							failures.push({
 								context: `${scenario.name}/${viewport.name}/${media.name}`,
@@ -302,9 +291,7 @@ try {
 							});
 							continue;
 						}
-						console.log(
-							`a11y ok: ${url} (${scenario.name}, ${viewport.name}, ${media.name})`
-						);
+						console.log(`a11y ok: ${url} (${scenario.name}, ${viewport.name}, ${media.name})`);
 					} finally {
 						await page.close().catch(() => {});
 					}
@@ -315,9 +302,7 @@ try {
 
 	if (failures.length) {
 		for (const failure of failures) {
-			console.error(
-				`\nAccessibility issues for ${failure.url} (${failure.context})`
-			);
+			console.error(`\nAccessibility issues for ${failure.url} (${failure.context})`);
 			for (const violation of failure.violations) {
 				console.error(`- [${violation.impact ?? "unknown"}] ${violation.id}: ${violation.help}`);
 				console.error(`  ${violation.helpUrl}`);

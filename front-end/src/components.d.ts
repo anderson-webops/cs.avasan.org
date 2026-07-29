@@ -11,29 +11,15 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    AccessibleDialog: typeof import('./components/AccessibleDialog.vue')['default']
     AccountManagement: typeof import('./components/AccountManagement.vue')['default']
     AccountSecurity: typeof import('./components/AccountSecurity.vue')['default']
-    AdminProfile: typeof import('./components/AdminProfile.vue')['default']
-    AdminWorkspaceShell: typeof import('./components/AdminWorkspaceShell.vue')['default']
     CodePreview: typeof import('./components/CodePreview.vue')['default']
     CourseAssetPreview: typeof import('./components/CourseAssetPreview.vue')['default']
     CourseExplorer: typeof import('./components/CourseExplorer.vue')['default']
     LazyMarkdownContent: typeof import('./components/LazyMarkdownContent.vue')['default']
-    LearnerCodeReviewTools: typeof import('./components/LearnerCodeReviewTools.vue')['default']
-    LearnerCourseProgressEditor: typeof import('./components/LearnerCourseProgressEditor.vue')['default']
-    LearnerSessionTools: typeof import('./components/LearnerSessionTools.vue')['default']
-    ProfileDetailsCard: typeof import('./components/ProfileDetailsCard.vue')['default']
-    ProfileFields: typeof import('./components/ProfileFields.vue')['default']
     PythonIdeWorkspace: typeof import('./components/PythonIdeWorkspace.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    TheFooter: typeof import('./components/TheFooter.vue')['default']
     TheHeader: typeof import('./components/TheHeader.vue')['default']
-    TheInput: typeof import('./components/TheInput.vue')['default']
-    TutorProfile: typeof import('./components/TutorProfile.vue')['default']
-    UserCommunicationPanel: typeof import('./components/UserCommunicationPanel.vue')['default']
-    UserProfile: typeof import('./components/UserProfile.vue')['default']
-    UserSignup: typeof import('./components/UserSignup.vue')['default']
   }
 }
