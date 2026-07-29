@@ -147,6 +147,25 @@ export function createStudentPasswordSetupLimiter(
 	});
 }
 
+export function createStudentOAuthLimiter(
+	options: TunableRateLimitOptions = {}
+): RateLimitRequestHandler {
+	return rateLimit({
+		windowMs: positiveIntegerFromEnv(
+			"OAUTH_RATE_WINDOW_MS",
+			15 * 60 * 1000
+		),
+		// Each provider round trip makes two requests. This accommodates a
+		// classroom behind one address while still bounding automated churn.
+		limit: positiveIntegerFromEnv("OAUTH_RATE_MAX", 120),
+		...standardRateLimitHeaders,
+		message: {
+			message: "Too many sign-in attempts. Please try again later."
+		},
+		...options
+	});
+}
+
 /**
  * Classroom usage events are anonymous. The default in-memory rate-limit store
  * uses a client address only for a short abuse-prevention window; it is never

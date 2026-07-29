@@ -10,8 +10,9 @@ deliberately simplified downstream adaptation of
 - Students browse course material and use the browser IDE anonymously.
   Optional student accounts exist only to sync saved Python projects.
 - Students cannot register or recover accounts themselves. Julio creates each
-  username and issues a unique, expiring password-setup code; student email is
-  never collected.
+  username and issues a unique, expiring setup code. After using it once, a
+  student chooses a password or connects either Google or Apple; student email
+  is never requested or collected by this site.
 - Julio's account is provisioned through the repository's code-based setup
   process. HTTP Admin creation must remain disabled.
 - The current course catalog contains only Scratch Levels 1 and 2, Python
@@ -43,19 +44,23 @@ recovery copy in browser tab storage; a duplicated tab may receive its own
 browser-managed copy. Graph projects and graph contents are not sent to the
 backend or analytics.
 Anonymous IDE projects stay in the browser unless a signed-in student
-explicitly imports them. Students sign in with a username and either a password
-or Julio-issued access code. A code is unique, expires, works only for initial
-password setup, and must immediately be replaced with a student-chosen
-password. The first successful exchange irreversibly consumes the code. The
-browser can continue an interrupted setup only when its setup session was saved
-and it presents the exact strong request ID from its password submission;
-otherwise Julio must issue a new code.
+explicitly imports them. A student first signs in with the username and unique,
+expiring setup code Julio provides. The first successful exchange irreversibly
+consumes that code and opens a short setup session. The student then either
+creates a password or connects one Google or Apple account. Later sign-ins use
+the chosen method. Google and Apple connection uses only the provider's opaque
+account identifier: this site does not request or store the student's provider
+email, name, profile, avatar, or access tokens. The browser can continue an
+interrupted password setup only when its setup session was saved and it
+presents the exact strong request ID from its password submission; otherwise
+Julio must issue a new code.
 
 Teacher-only account controls are available to Julio at `/admin`. Julio can
 create, disable, reactivate, and recover student accounts and can inspect
 student projects through a separate editable review copy. Recovery issues a
-new per-student code and invalidates the old password and sessions. There is no
-shared class code, universal recovery code, student email, or self-service
+new per-student code, signs the student out everywhere, and removes the old
+password or Google/Apple connection. There is no shared class code, universal
+recovery code, student email, provider-email matching, or self-service
 registration.
 
 Julio's name and email are fixed by code provisioning. The runtime exposes no
@@ -128,6 +133,24 @@ always require `INTERNAL_DIAGNOSTICS_KEY`, including during local development.
 Set `CLASSROOM_ORIGIN=http://127.0.0.1:3333` for the local Vite classroom and
 `CLASSROOM_ORIGIN=https://cs.avasan.org` in production. `CROSS_SITE` must remain
 false: browser sessions are served through the same-origin `/api` route.
+
+Google and Apple buttons appear only when `STUDENT_OAUTH_ENABLED=true` and the
+provider's complete credentials are configured. Keep the feature disabled
+until the school or district has approved it, supplied the required direct
+privacy notice, and approved the app for managed student provider accounts.
+Register these exact production return URLs with the providers:
+
+```text
+https://cs.avasan.org/api/students/oauth/google/callback
+https://cs.avasan.org/api/students/oauth/apple/callback
+```
+
+Apple must be configured as a web Services ID using the site's HTTPS domain.
+Provider secrets belong only in the backend environment or configured secret
+store; see `back-end/.env.EXAMPLE`. Do not enable email, name, profile, or
+offline-access scopes. The production proxy must preserve callback `Set-Cookie`
+headers and must not record callback query strings or request bodies in access
+logs; they can contain short-lived authorization codes and state values.
 
 The static front-end is deployable independently, but teacher and student
 sessions and cloud project sync require the Express API and an `/api/*` route

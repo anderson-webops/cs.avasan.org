@@ -64,6 +64,12 @@ function rosterProjectCount(student: StudentAccount) {
 
 function credentialStatus(student: StudentAccount) {
 	switch (student.credentialState) {
+		case "social":
+			return student.socialProviders?.[0] === "apple"
+				? "Apple connected"
+				: student.socialProviders?.[0] === "google"
+					? "Google connected"
+					: "Provider connected";
 		case "password":
 			return "Password set";
 		case "access-code": {
@@ -467,9 +473,9 @@ onMounted(loadStudents);
 					@submit.prevent="resetAccess(student)"
 				>
 					<p>
-						This signs {{ student.username }} out, invalidates the
-						current password, and creates a new one-time access
-						code.
+						This signs {{ student.username }} out, invalidates any
+						current password, disconnects any connected Google or
+						Apple sign-in, and creates a new one-time access code.
 					</p>
 					<div class="student-management__field">
 						<label :for="`reset-teacher-password-${student._id}`">

@@ -9,6 +9,12 @@ import {
 	signOutStudent
 } from "@/modules/studentAccounts";
 import {
+	fetchStudentOAuthProviderAvailability,
+	navigateToStudentOAuth,
+	startStudentOAuthConnection,
+	studentOAuthSignInHref
+} from "@/modules/studentOAuth";
+import {
 	broadcastStudentSessionEnded,
 	cancelStudentLogoutInOtherTabs,
 	subscribeToStudentSessionChanged
@@ -26,6 +32,28 @@ vi.mock("@/modules/studentAccounts", () => ({
 	setStudentPassword: vi.fn(),
 	signInStudent: vi.fn(),
 	signOutStudent: vi.fn()
+}));
+vi.mock("@/modules/studentOAuth", () => ({
+	emptyStudentOAuthProviderAvailability: {
+		apple: false,
+		google: false
+	},
+	fetchStudentOAuthProviderAvailability: vi.fn(),
+	navigateToStudentOAuth: vi.fn(),
+	startStudentOAuthConnection: vi.fn(),
+	studentOAuthErrorMessages: {
+		already_signed_in: "Another account is already signed in.",
+		cancelled: "Google or Apple sign-in was cancelled.",
+		identity_conflict:
+			"That Google or Apple account is already connected to another student.",
+		link_expired: "That connection request expired.",
+		not_linked: "That provider account is not connected yet.",
+		provider_error: "Provider sign-in failed.",
+		provider_unavailable: "That provider is unavailable."
+	},
+	studentOAuthSignInHref: vi.fn(
+		provider => `/api/students/oauth/${provider}/start?returnTo=%2F`
+	)
 }));
 vi.mock("@/modules/studentSessionBroadcast", () => ({
 	broadcastStudentSessionChanged: vi.fn(),
@@ -56,6 +84,11 @@ describe("StudentAccess", () => {
 		setActivePinia(createPinia());
 		vi.clearAllMocks();
 		window.sessionStorage.clear();
+		window.history.replaceState({}, "", "/");
+		vi.mocked(fetchStudentOAuthProviderAvailability).mockResolvedValue({
+			apple: false,
+			google: false
+		});
 		Object.defineProperty(document, "visibilityState", {
 			configurable: true,
 			value: "visible"
@@ -79,17 +112,15 @@ describe("StudentAccess", () => {
 
 		await wrapper.get("button").trigger("click");
 		expect(wrapper.get("form").attributes("autocomplete")).toBe("off");
-		expect(wrapper.get("#student-username").attributes("autocomplete")).toBe(
-			"off"
-		);
+		expect(
+			wrapper.get("#student-username").attributes("autocomplete")
+		).toBe("off");
 		expect(wrapper.get("#student-secret").attributes("autocomplete")).toBe(
 			"off"
 		);
-		expect(
-			wrapper
-				.get(".student-access__privacy")
-				.attributes("href")
-		).toBe("/student-privacy");
+		expect(wrapper.get(".student-access__privacy").attributes("href")).toBe(
+			"/student-privacy"
+		);
 
 		await wrapper.get("#student-username").setValue("maria-7");
 		await wrapper.get("#student-secret").setValue("one-time-code");
@@ -101,9 +132,7 @@ describe("StudentAccess", () => {
 			wrapper.get("#student-new-password").attributes("autocomplete")
 		).toBe("off");
 		expect(
-			wrapper
-				.get("#student-confirm-password")
-				.attributes("autocomplete")
+			wrapper.get("#student-confirm-password").attributes("autocomplete")
 		).toBe("off");
 	});
 
@@ -120,13 +149,108 @@ describe("StudentAccess", () => {
 		await wrapper.get("form").trigger("submit.prevent");
 		await flushPromises();
 
-		expect(signInStudent).toHaveBeenCalledWith(
-			"maria-7",
-			"one-time-code"
-		);
+		expect(signInStudent).toHaveBeenCalledWith("maria-7", "one-time-code");
 		expect(wrapper.text()).toContain("maria-7");
 		expect(wrapper.text()).toContain("Sign out");
 		expect(wrapper.find("#student-secret").exists()).toBe(false);
+	});
+
+	it("starts repeat provider sign-in without using entered credentials", async () => {
+		vi.mocked(fetchStudentOAuthProviderAvailability).mockResolvedValueOnce({
+			apple: true,
+			google: true
+		});
+		const wrapper = mountAccess();
+
+		await wrapper.get("button").trigger("click");
+		await flushPromises();
+		await wrapper.get("#student-username").setValue("maria-7");
+		await wrapper.get("#student-secret").setValue("not-sent");
+		await wrapper
+			.findAll("button")
+			.find(button => button.text() === "Sign in with Google")
+			?.trigger("click");
+
+		expect(studentOAuthSignInHref).toHaveBeenCalledWith("google");
+		expect(navigateToStudentOAuth).toHaveBeenCalledWith(
+			"/api/students/oauth/google/start?returnTo=%2F"
+		);
+		expect(startStudentOAuthConnection).not.toHaveBeenCalled();
+		expect(signInStudent).not.toHaveBeenCalled();
+	});
+
+	it("offers provider connection only after Julio's code creates a setup session", async () => {
+		vi.mocked(fetchStudentOAuthProviderAvailability).mockResolvedValueOnce({
+			apple: true,
+			google: true
+		});
+		vi.mocked(signInStudent).mockResolvedValueOnce({
+			student,
+			requiresPasswordSetup: true
+		});
+		vi.mocked(startStudentOAuthConnection).mockResolvedValueOnce(
+			"https://accounts.example/authorize"
+		);
+		const wrapper = mountAccess();
+
+		await wrapper.get("button").trigger("click");
+		await flushPromises();
+		expect(wrapper.text()).not.toContain("Connect Google");
+
+		await wrapper.get("#student-username").setValue("maria-7");
+		await wrapper.get("#student-secret").setValue("julio-one-time-code");
+		await wrapper.get("form").trigger("submit.prevent");
+		await flushPromises();
+
+		expect(wrapper.text()).toContain("Choose how to sign in");
+		expect(wrapper.text()).toContain("Connect Google");
+		await wrapper
+			.findAll("button")
+			.find(button => button.text() === "Connect Google")
+			?.trigger("click");
+		await flushPromises();
+
+		expect(startStudentOAuthConnection).toHaveBeenCalledWith("google");
+		expect(navigateToStudentOAuth).toHaveBeenCalledWith(
+			"https://accounts.example/authorize"
+		);
+		expect(startStudentOAuthConnection).toHaveBeenCalledTimes(1);
+	});
+
+	it("accepts and removes a successful provider callback marker", async () => {
+		window.history.replaceState(
+			{},
+			"",
+			"/python-ide?studentOAuthStatus=success&tab=files"
+		);
+		vi.mocked(fetchStudentSession).mockResolvedValueOnce({
+			student,
+			requiresPasswordSetup: false
+		});
+		const app = useAppStore();
+		const wrapper = mount(StudentAccess);
+		await flushPromises();
+
+		expect(fetchStudentSession).toHaveBeenCalledOnce();
+		expect(app.currentUser?._id).toBe(student._id);
+		expect(app.studentRequiresPasswordSetup).toBe(false);
+		expect(window.location.pathname).toBe("/python-ide");
+		expect(window.location.search).toBe("?tab=files");
+		expect(wrapper.text()).toContain("maria-7");
+	});
+
+	it("shows a safe provider callback error and removes it from the URL", async () => {
+		window.history.replaceState(
+			{},
+			"",
+			"/?studentOAuthError=not_linked&course=python-1"
+		);
+		const wrapper = mount(StudentAccess);
+		await flushPromises();
+
+		expect(wrapper.get('[role="alert"]').text()).toContain("not connected");
+		expect(window.location.search).toBe("?course=python-1");
+		expect(fetchStudentSession).not.toHaveBeenCalled();
 	});
 
 	it("requires a new password after an access-code sign in", async () => {
@@ -468,14 +592,12 @@ describe("StudentAccess", () => {
 	});
 
 	it("uses a generic sign-in error and clears the submitted secret", async () => {
-		vi.mocked(signInStudent).mockRejectedValueOnce(
-			{
-				response: {
-					data: { message: "student does not exist" },
-					status: 403
-				}
+		vi.mocked(signInStudent).mockRejectedValueOnce({
+			response: {
+				data: { message: "student does not exist" },
+				status: 403
 			}
-		);
+		});
 		const wrapper = mountAccess();
 
 		await wrapper.get("button").trigger("click");
@@ -722,9 +844,9 @@ describe("StudentAccess", () => {
 			});
 		});
 		mount(StudentAccess);
-		const sessionChangedListener = vi.mocked(
-			subscribeToStudentSessionChanged
-		).mock.calls.at(-1)?.[0];
+		const sessionChangedListener = vi
+			.mocked(subscribeToStudentSessionChanged)
+			.mock.calls.at(-1)?.[0];
 
 		sessionChangedListener?.({
 			type: "student-session-changed",
@@ -745,9 +867,9 @@ describe("StudentAccess", () => {
 			.spyOn(app, "bootstrapSession")
 			.mockResolvedValue(undefined);
 		mount(StudentAccess);
-		const sessionChangedListener = vi.mocked(
-			subscribeToStudentSessionChanged
-		).mock.calls.at(-1)?.[0];
+		const sessionChangedListener = vi
+			.mocked(subscribeToStudentSessionChanged)
+			.mock.calls.at(-1)?.[0];
 		Object.defineProperty(document, "visibilityState", {
 			configurable: true,
 			value: "hidden"
@@ -777,9 +899,9 @@ describe("StudentAccess", () => {
 			saveEdit: "Save"
 		});
 		mount(StudentAccess);
-		const sessionChangedListener = vi.mocked(
-			subscribeToStudentSessionChanged
-		).mock.calls.at(-1)?.[0];
+		const sessionChangedListener = vi
+			.mocked(subscribeToStudentSessionChanged)
+			.mock.calls.at(-1)?.[0];
 
 		sessionChangedListener?.({
 			type: "student-session-changed",

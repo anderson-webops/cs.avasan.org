@@ -453,6 +453,12 @@ describe("teacher-provisioned student accounts", () => {
 			const body = await response.json();
 
 			expect(response.status).toBe(200);
+			expect(response.headers.get("set-cookie")).toContain(
+				"cs_avasan_student_oauth_google="
+			);
+			expect(response.headers.get("set-cookie")).toContain(
+				"cs_avasan_student_oauth_apple="
+			);
 			expect(body.requiresPasswordSetup).toBe(false);
 			expect(session.adminID).toBeUndefined();
 			expect(session.studentAuthLevel).toBe("full");
@@ -865,6 +871,8 @@ describe("teacher-provisioned student accounts", () => {
 					accessCodeHash: "new-access-code-hash",
 					accessCodeExpiresAt: new Date(Date.now() + ACCESS_CODE_LIFETIME_MS),
 					active: true,
+					externalAuthProvider: "google",
+					externalAuthSubjectHash: "a".repeat(64),
 					sessionVersion: 8
 				})
 			)
@@ -889,9 +897,11 @@ describe("teacher-provisioned student accounts", () => {
 				expect.objectContaining({
 					$inc: { sessionVersion: 1 },
 					$set: expect.objectContaining({ active: true }),
-						$unset: expect.objectContaining({
-							lastPasswordSetupRequestID: 1,
-							pendingSetupCodeHash: 1,
+					$unset: expect.objectContaining({
+						externalAuthProvider: 1,
+						externalAuthSubjectHash: 1,
+						lastPasswordSetupRequestID: 1,
+						pendingSetupCodeHash: 1,
 						passwordHash: 1,
 						passwordSetAt: 1
 					})

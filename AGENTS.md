@@ -22,8 +22,10 @@ Keep these constraints intact:
   anonymously. An optional student account may sync Python IDE projects, but
   it must never gate course access or anonymous browser saves.
 - Student accounts have a username but no email. Julio creates them and issues
-  unique, expiring password-setup codes; students cannot register or recover
-  accounts themselves.
+  unique, expiring setup codes; students cannot register or recover accounts
+  themselves. After consuming the code, a student may choose a password or
+  connect exactly one Apple or Google identity. Never match provider identities
+  by email or retain provider profile data or tokens.
 - Julio is the sole teacher and sole authenticated Admin. His Admin account is
   provisioned only through `npm run -w back-end create-admin-ts`.
 - Do not add HTTP Admin creation, additional admins, tutor roles, separate
@@ -64,10 +66,11 @@ uncommitted unless the user asks you to.
 
 Keep public course delivery independent of student identity. Store student
 credentials only as hashes, keep Julio-issued access codes unique and limited
-to password setup, and preserve anonymous browser projects until a student
-explicitly chooses to import them. Use the fork-specific `cs-avasan-org` database,
-environment variables or the configured Vault path for secrets, and never reuse
-or commit upstream credentials or data.
+to initial setup, store only a hash of an opaque Google or Apple subject when a
+student chooses provider sign-in, and preserve anonymous browser projects until
+a student explicitly chooses to import them. Use the fork-specific
+`cs-avasan-org` database, environment variables or the configured Vault path
+for secrets, and never reuse or commit upstream credentials or data.
 
 ## Dependency and Lockfile Discipline
 

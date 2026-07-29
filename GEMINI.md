@@ -11,8 +11,11 @@ are non-negotiable:
   downstream-only changes. Never blindly merge/reset the fork, push to
   `upstream`, or copy upstream tags.
 - The only courses are Scratch Levels 1–2, Python Levels 1–2, and PyGames.
-- Students access courses and the browser IDE anonymously. Do not add student
-  registration, accounts, or server-side project persistence.
+- Students access courses and the browser IDE anonymously. Optional,
+  Julio-provisioned student accounts may sync Python projects, but never gate
+  public material or anonymous browser saves. Students have no email and
+  cannot self-register or self-recover; after Julio's one-time setup code they
+  may choose a password or connect one Apple or Google identity.
 - Julio is the sole Admin and is provisioned only with
   `npm run -w back-end create-admin-ts`. Do not add public account creation,
   another admin, or tutor-role workflows.

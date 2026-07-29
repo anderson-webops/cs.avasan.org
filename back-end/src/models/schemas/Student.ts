@@ -34,6 +34,19 @@ const studentSchema = new Schema<IStudent>(
 			type: Date,
 			default: undefined
 		},
+		externalAuthProvider: {
+			type: String,
+			enum: ["apple", "google"],
+			default: undefined,
+			select: false
+		},
+		externalAuthSubjectHash: {
+			type: String,
+			default: undefined,
+			match: /^[a-f\d]{64}$/,
+			select: false,
+			trim: true
+		},
 		active: {
 			type: Boolean,
 			default: true,
@@ -90,6 +103,28 @@ const studentSchema = new Schema<IStudent>(
 	{ timestamps: true }
 );
 
+studentSchema.pre("validate", function validateExternalIdentityPair() {
+	const hasProvider = Boolean(this.externalAuthProvider);
+	const hasSubjectHash = Boolean(this.externalAuthSubjectHash);
+	if (hasProvider !== hasSubjectHash) {
+		this.invalidate(
+			"externalAuthProvider",
+			"External sign-in provider and subject hash must be stored together."
+		);
+	}
+});
+
+studentSchema.index(
+	{ externalAuthProvider: 1, externalAuthSubjectHash: 1 },
+	{
+		partialFilterExpression: {
+			externalAuthProvider: { $type: "string" },
+			externalAuthSubjectHash: { $type: "string" }
+		},
+		unique: true
+	}
+);
+
 studentSchema.set("toJSON", {
 	transform(_document, returned) {
 		const clean = returned as unknown as Record<string, unknown>;
@@ -97,6 +132,8 @@ studentSchema.set("toJSON", {
 		delete clean.accessCodeHash;
 		delete clean.pendingSetupCodeHash;
 		delete clean.accessCodeExpiresAt;
+		delete clean.externalAuthProvider;
+		delete clean.externalAuthSubjectHash;
 		delete clean.sessionVersion;
 		delete clean.failedLoginAttempts;
 		delete clean.lockedUntil;

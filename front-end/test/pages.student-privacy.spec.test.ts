@@ -21,7 +21,15 @@ describe("student privacy page", () => {
 		);
 		expect(text).toContain("username and no email");
 		expect(text).toContain(
-			"Access codes are used only to set up a password"
+			"one-time code before creating a password or connecting"
+		);
+		expect(text).toContain("hash of that provider’s opaque account");
+		expect(text).toContain(
+			"does not request or store the student’s provider email"
+		);
+		expect(text).toContain("provider access tokens");
+		expect(text).toContain(
+			"does not send the student’s classroom username"
 		);
 		expect(text).toContain("Julio can view saved projects");
 		expect(text).toContain("There are no ads");

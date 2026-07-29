@@ -70,9 +70,32 @@ const schoolPrivacyContact = (
 				For signed-in students, the classroom keeps the username, login
 				and password-management records, and saved-project metadata
 				needed for saving work and Julio’s instruction. Julio can view
-				saved projects to teach and review student work. Access codes
-				are used only to set up a password and are never used as
+				saved projects to teach and review student work. A student uses
+				Julio’s one-time code before creating a password or connecting
+				one Google or Apple sign-in. Access codes are never used as
 				analytics identifiers.
+			</p>
+			<p>
+				If a student connects Google or Apple, the classroom stores the
+				provider and a hash of that provider’s opaque account
+				identifier. It does not request or store the student’s provider
+				email, name, profile, or provider access tokens. Google or Apple
+				receives a sign-in request only when the student chooses its
+				button. The classroom does not send the student’s classroom
+				username, one-time code, or projects to the provider. The
+				provider learns that its account was used to sign in and may
+				receive ordinary browser and network information under
+				<a
+					href="https://policies.google.com/privacy"
+					rel="noopener noreferrer"
+					>Google’s privacy policy</a
+				>
+				or
+				<a
+					href="https://www.apple.com/legal/privacy/"
+					rel="noopener noreferrer"
+					>Apple’s privacy policy</a
+				>.
 			</p>
 			<p>
 				Account and project retention is controlled by the school or

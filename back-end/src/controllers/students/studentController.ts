@@ -25,6 +25,9 @@ import {
 	studentAccessCodeExpiry,
 	verifyStudentCredential
 } from "../../security/studentCredentials.js";
+import {
+	clearStudentOAuthBrowserBindings
+} from "../../utils/studentOAuthCookies.js";
 
 const INVALID_STUDENT_CREDENTIALS = {
 	message: "Invalid username or credential."
@@ -54,9 +57,16 @@ export function serializeStudent(student: IStudent) {
 export type StudentCredentialState
 	= | "password"
 		| "access-code"
+		| "social"
 		| "setup"
 		| "expired-code"
 		| "none";
+
+function studentSocialProviders(student: IStudent) {
+	return student.externalAuthProvider
+		? [student.externalAuthProvider]
+		: [];
+}
 
 export function serializeManagedStudent(student: IStudent, now = Date.now()) {
 	let credentialState: StudentCredentialState = "none";
@@ -80,11 +90,18 @@ export function serializeManagedStudent(student: IStudent, now = Date.now()) {
 	else if (student.accessCodeHash || student.pendingSetupCodeHash) {
 		credentialState = "expired-code";
 	}
+	else if (
+		student.externalAuthProvider
+		&& student.externalAuthSubjectHash
+	) {
+		credentialState = "social";
+	}
 
 	return {
 		...serializeStudent(student),
 		credentialState,
-		accessCodeExpiresAt: student.accessCodeExpiresAt ?? null
+		accessCodeExpiresAt: student.accessCodeExpiresAt ?? null,
+		socialProviders: studentSocialProviders(student)
 	};
 }
 
@@ -127,7 +144,9 @@ function studentSessionTimingIsCurrent(
 	return false;
 }
 
-async function hasLiveAuthenticatedIdentity(req: Request): Promise<boolean> {
+export async function hasLiveAuthenticatedIdentity(
+	req: Request
+): Promise<boolean> {
 	const session = studentSession(req);
 	if (!session) return false;
 
@@ -178,7 +197,7 @@ async function hasLiveAuthenticatedIdentity(req: Request): Promise<boolean> {
 	return false;
 }
 
-function setStudentIdentity(
+export function setStudentIdentity(
 	req: Request,
 	student: IStudent,
 	authLevel: "setup" | "full",
@@ -309,7 +328,10 @@ export const createStudentSession: RequestHandler = async (req, res) => {
 
 	const normalizedUsername = normalizeStudentUsername(username);
 	const student = await Student.findOne({ username: normalizedUsername })
-		.select("+passwordHash +accessCodeHash +sessionVersion +failedLoginAttempts +lockedUntil")
+		.select(
+			"+passwordHash +accessCodeHash +sessionVersion"
+			+ " +failedLoginAttempts +lockedUntil"
+		)
 		.exec();
 
 	const usesPassword = Boolean(student?.passwordHash);
@@ -349,6 +371,7 @@ export const createStudentSession: RequestHandler = async (req, res) => {
 		if (!setStudentIdentity(req, authenticated, "full")) {
 			return res.status(500).json({ message: "Session unavailable." });
 		}
+		clearStudentOAuthBrowserBindings(res);
 		return res.json({
 			student: serializeStudent(authenticated),
 			requiresPasswordSetup: false
@@ -403,6 +426,7 @@ export const createStudentSession: RequestHandler = async (req, res) => {
 	if (!setStudentIdentity(req, consumed, "setup")) {
 		return res.status(500).json({ message: "Session unavailable." });
 	}
+	clearStudentOAuthBrowserBindings(res);
 	return res.json({
 		student: serializeStudent(consumed),
 		requiresPasswordSetup: true
@@ -456,6 +480,7 @@ export const getStudentSession: RequestHandler = async (req, res) => {
 		if (!setStudentIdentity(req, student, "full", absoluteExpiry)) {
 			return res.status(500).json({ message: "Session unavailable." });
 		}
+		clearStudentOAuthBrowserBindings(res);
 		return res.json({
 			student: serializeStudent(student),
 			requiresPasswordSetup: false,
@@ -551,6 +576,7 @@ export const setStudentPassword: RequestHandler = async (req, res) => {
 		if (!setStudentIdentity(req, currentStudent, "full", absoluteExpiry)) {
 			return res.status(500).json({ message: "Session unavailable." });
 		}
+		clearStudentOAuthBrowserBindings(res);
 		return res.json({
 			student: serializeStudent(currentStudent),
 			requiresPasswordSetup: false,
@@ -646,6 +672,7 @@ export const setStudentPassword: RequestHandler = async (req, res) => {
 			)) {
 				return res.status(500).json({ message: "Session unavailable." });
 			}
+			clearStudentOAuthBrowserBindings(res);
 			return res.json({
 				student: serializeStudent(currentStudent),
 				requiresPasswordSetup: false,
@@ -665,6 +692,7 @@ export const setStudentPassword: RequestHandler = async (req, res) => {
 	)) {
 		return res.status(500).json({ message: "Session unavailable." });
 	}
+	clearStudentOAuthBrowserBindings(res);
 	return res.json({
 		student: serializeStudent(updated),
 		requiresPasswordSetup: false,
@@ -674,6 +702,7 @@ export const setStudentPassword: RequestHandler = async (req, res) => {
 
 export const deleteStudentSession: RequestHandler = async (req, res) => {
 	const session = studentSession(req);
+	clearStudentOAuthBrowserBindings(res);
 	try {
 		await revokeSessionIdentities(session);
 	}
@@ -690,7 +719,10 @@ export const deleteStudentSession: RequestHandler = async (req, res) => {
 
 export const listStudents: RequestHandler = async (_req, res) => {
 	const students = await Student.find({})
-		.select("+passwordHash +accessCodeHash +pendingSetupCodeHash")
+		.select(
+			"+passwordHash +accessCodeHash +pendingSetupCodeHash"
+			+ " +externalAuthProvider +externalAuthSubjectHash"
+		)
 		.sort({ username: 1 })
 		.limit(500);
 	const projectActivity: StudentProjectActivity[] = [];
@@ -780,12 +812,24 @@ export const setStudentActive: RequestHandler = async (req, res) => {
 	}
 
 	const existingStudent = await Student.findById(studentID)
-		.select("+passwordHash +accessCodeHash");
+		.select(
+			"+passwordHash +accessCodeHash"
+			+ " +externalAuthProvider +externalAuthSubjectHash"
+		);
 	if (!existingStudent) return res.sendStatus(404);
 	const hasCurrentAccessCode = existingStudent.accessCodeHash
 		&& existingStudent.accessCodeExpiresAt
 		&& existingStudent.accessCodeExpiresAt.getTime() > Date.now();
-	if (active && !existingStudent.passwordHash && !hasCurrentAccessCode) {
+	const hasSocialSignIn = Boolean(
+		existingStudent.externalAuthProvider
+		&& existingStudent.externalAuthSubjectHash
+	);
+	if (
+		active
+		&& !existingStudent.passwordHash
+		&& !hasCurrentAccessCode
+		&& !hasSocialSignIn
+	) {
 		return res.status(409).json({
 			message: "Reset this student's access code before reactivating the account."
 		});
@@ -813,7 +857,10 @@ export const setStudentActive: RequestHandler = async (req, res) => {
 		studentID,
 		update,
 		{ new: true }
-	).select("+passwordHash +accessCodeHash");
+	).select(
+		"+passwordHash +accessCodeHash"
+		+ " +externalAuthProvider +externalAuthSubjectHash"
+	);
 	if (!student) return res.sendStatus(404);
 	return res.json({ student: serializeManagedStudent(student) });
 };
@@ -849,13 +896,18 @@ export const resetStudentAccessCode: RequestHandler = async (req, res) => {
 			$unset: {
 				lockedUntil: 1,
 				lastPasswordSetupRequestID: 1,
+				externalAuthProvider: 1,
+				externalAuthSubjectHash: 1,
 				passwordHash: 1,
 				passwordSetAt: 1,
 				pendingSetupCodeHash: 1
 			}
 		},
 		{ new: true }
-	).select("+passwordHash +accessCodeHash");
+	).select(
+		"+passwordHash +accessCodeHash"
+		+ " +externalAuthProvider +externalAuthSubjectHash"
+	);
 	if (!student) return res.sendStatus(404);
 	return res.json({
 		student: serializeManagedStudent(student),

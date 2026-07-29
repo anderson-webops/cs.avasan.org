@@ -17,6 +17,9 @@ import {
 	revokeSessionIdentities,
 	revokeStudentSessionIdentity
 } from "../../security/sessionLifecycle.js";
+import {
+	clearStudentOAuthBrowserBindings
+} from "../../utils/studentOAuthCookies.js";
 
 const DUMMY_ADMIN_PASSWORD = "not-a-real-admin-credential";
 const dummyAdminPasswordHash = argon2.hash(DUMMY_ADMIN_PASSWORD);
@@ -110,12 +113,14 @@ export const login: RequestHandler = async (req, res) => {
 	const options = ((req as any).sessionOptions ??= {});
 	delete options.maxAge;
 	delete options.expires;
+	clearStudentOAuthBrowserBindings(res);
 	return res.json({ currentAdmin: authenticated });
 };
 
 /** LOGOUT */
 export const logout: RequestHandler = async (req, res) => {
 	const session = req.session as CustomSession | undefined;
+	clearStudentOAuthBrowserBindings(res);
 	try {
 		await revokeSessionIdentities(session);
 	}

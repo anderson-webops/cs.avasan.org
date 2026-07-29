@@ -1,5 +1,8 @@
 <script lang="ts" setup>
 import type { AxiosError } from "axios";
+import type { StudentOAuthProvider } from "@/modules/studentOAuth";
+import { faApple, faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { storeToRefs } from "pinia";
 import {
 	computed,
@@ -14,6 +17,14 @@ import {
 	refreshStudentSessionActivity,
 	signInStudent
 } from "@/modules/studentAccounts";
+import {
+	emptyStudentOAuthProviderAvailability,
+	fetchStudentOAuthProviderAvailability,
+	navigateToStudentOAuth,
+	startStudentOAuthConnection,
+	studentOAuthErrorMessages,
+	studentOAuthSignInHref
+} from "@/modules/studentOAuth";
 import {
 	broadcastStudentSessionChanged,
 	broadcastTrustedStudentActivity,
@@ -52,6 +63,10 @@ const newPassword = ref("");
 const confirmPassword = ref("");
 const error = ref("");
 const status = ref("");
+const oauthProviders = ref({
+	...emptyStudentOAuthProviderAvailability
+});
+const oauthProvidersLoaded = ref(false);
 const passwordSetupRequestID = ref("");
 const passwordSetupRequestStudentID = ref("");
 const usernameInput = ref<HTMLInputElement | null>(null);
@@ -73,6 +88,22 @@ const panelIsOpen = computed(
 const isPasswordForm = computed(
 	() => !!currentUser.value && studentRequiresPasswordSetup.value
 );
+const hasOAuthProviders = computed(
+	() => oauthProviders.value.apple || oauthProviders.value.google
+);
+
+async function loadOAuthProviders() {
+	if (oauthProvidersLoaded.value) return;
+	oauthProvidersLoaded.value = true;
+	try {
+		oauthProviders.value = await fetchStudentOAuthProviderAvailability();
+	} catch {
+		oauthProviders.value = {
+			...emptyStudentOAuthProviderAvailability
+		};
+		oauthProvidersLoaded.value = false;
+	}
+}
 
 function clearSecrets() {
 	secret.value = "";
@@ -166,6 +197,7 @@ async function openSignIn() {
 	error.value = "";
 	status.value = "";
 	isOpen.value = true;
+	void loadOAuthProviders();
 	await nextTick();
 	usernameInput.value?.focus();
 }
@@ -194,6 +226,7 @@ async function acceptStudentSignIn(
 	secret.value = "";
 	isOpen.value = session.requiresPasswordSetup;
 	if (session.requiresPasswordSetup) {
+		await loadOAuthProviders();
 		await nextTick();
 		newPasswordInput.value?.focus();
 	} else {
@@ -237,6 +270,48 @@ async function login() {
 		error.value =
 			"Couldn’t sign in. Check your username and password or access code.";
 		secret.value = "";
+	} finally {
+		isSubmitting.value = false;
+	}
+}
+
+function startOAuthSignIn(provider: StudentOAuthProvider) {
+	if (isSubmitting.value) return;
+
+	error.value = "";
+	status.value = "";
+	isSubmitting.value = true;
+	clearSecrets();
+	navigateToStudentOAuth(studentOAuthSignInHref(provider));
+}
+
+async function connectOAuth(provider: StudentOAuthProvider) {
+	if (
+		isSubmitting.value ||
+		!currentUser.value ||
+		!studentRequiresPasswordSetup.value
+	) {
+		return;
+	}
+
+	error.value = "";
+	status.value = "";
+	isSubmitting.value = true;
+	try {
+		const authorizationUrl = await startStudentOAuthConnection(provider);
+		clearSecrets();
+		navigateToStudentOAuth(authorizationUrl);
+	} catch (caught: unknown) {
+		const axiosError = caught as AxiosError<{ error?: string }>;
+		const responseStatus = axiosError.response?.status;
+		error.value =
+			responseStatus === 401 || responseStatus === 403
+				? "This one-time setup session expired. Sign in again with the username and code from Julio."
+				: responseStatus === 409
+					? studentOAuthErrorMessages.identity_conflict
+					: responseStatus === 503
+						? studentOAuthErrorMessages.provider_unavailable
+						: "Couldn’t start Google or Apple sign-in. Please try again.";
 	} finally {
 		isSubmitting.value = false;
 	}
@@ -531,6 +606,7 @@ watch(
 			clearPasswordSetupRequestID(studentID);
 			return;
 		}
+		void loadOAuthProviders();
 		loadPasswordSetupRequestID(studentID);
 		setupTimeout = window.setTimeout(() => {
 			setupTimeout = null;
@@ -540,7 +616,59 @@ watch(
 	{ immediate: true }
 );
 
+async function acceptOAuthCallback(oauthStatus: "linked" | "success") {
+	try {
+		const session = await fetchStudentSession();
+		if (
+			!session.student ||
+			session.requiresPasswordSetup ||
+			!(await acceptStudentSignIn(session))
+		) {
+			throw new Error("OAuth session was not confirmed.");
+		}
+		status.value =
+			oauthStatus === "linked"
+				? "Google or Apple sign-in connected."
+				: `Signed in as ${session.student.username}.`;
+	} catch {
+		error.value =
+			"Sign-in finished, but this page could not confirm the student session. Try signing in again.";
+		isOpen.value = true;
+		void loadOAuthProviders();
+		await nextTick();
+		usernameInput.value?.focus();
+	}
+}
+
 onMounted(() => {
+	const current = new URL(window.location.href);
+	const oauthError = current.searchParams.get("studentOAuthError");
+	const oauthStatus = current.searchParams.get("studentOAuthStatus");
+	if (oauthError) {
+		error.value =
+			studentOAuthErrorMessages[oauthError] ??
+			studentOAuthErrorMessages.provider_error;
+		isOpen.value = true;
+		void loadOAuthProviders();
+		void nextTick(() => usernameInput.value?.focus());
+	}
+	const acceptedOAuthStatus =
+		oauthStatus === "linked" || oauthStatus === "success"
+			? oauthStatus
+			: null;
+	if (oauthError || oauthStatus) {
+		current.searchParams.delete("studentOAuthError");
+		current.searchParams.delete("studentOAuthStatus");
+		window.history.replaceState(
+			window.history.state,
+			"",
+			`${current.pathname}${current.search}${current.hash}`
+		);
+	}
+	if (!oauthError && acceptedOAuthStatus) {
+		void acceptOAuthCallback(acceptedOAuthStatus);
+	}
+
 	unsubscribeFromStudentActivity = subscribeToStudentActivity(() => {
 		recordStudentActivity(Date.now(), false);
 	});
@@ -650,7 +778,7 @@ onBeforeUnmount(() => {
 			class="student-access__panel site-surface site-surface--strong"
 			role="dialog"
 			:aria-label="
-				isPasswordForm ? 'Student password' : 'Student sign in'
+				isPasswordForm ? 'Student sign-in setup' : 'Student sign in'
 			"
 			@keydown.esc="closeOnEscape"
 		>
@@ -672,6 +800,38 @@ onBeforeUnmount(() => {
 					</button>
 				</div>
 
+				<div v-if="hasOAuthProviders" class="student-access__oauth">
+					<button
+						v-if="oauthProviders.google"
+						class="student-access__oauth-button is-google"
+						:disabled="isSubmitting"
+						type="button"
+						@click="startOAuthSignIn('google')"
+					>
+						<FontAwesomeIcon :icon="faGoogle" aria-hidden="true" />
+						Sign in with Google
+					</button>
+					<button
+						v-if="oauthProviders.apple"
+						class="student-access__oauth-button is-apple"
+						:disabled="isSubmitting"
+						type="button"
+						@click="startOAuthSignIn('apple')"
+					>
+						<FontAwesomeIcon :icon="faApple" aria-hidden="true" />
+						Sign in with Apple
+					</button>
+					<p class="student-access__oauth-help">
+						Already connected? Choose Google or Apple. For a first
+						connection, sign in below with the username and one-time
+						code from Julio.
+					</p>
+				</div>
+
+				<div v-if="hasOAuthProviders" class="student-access__separator">
+					<span>or use a classroom credential</span>
+				</div>
+
 				<label for="student-username">Username</label>
 				<input
 					id="student-username"
@@ -685,7 +845,9 @@ onBeforeUnmount(() => {
 					type="text"
 				/>
 
-				<label for="student-secret">Password or access code</label>
+				<label for="student-secret">
+					Password or Julio’s one-time code
+				</label>
 				<input
 					id="student-secret"
 					v-model="secret"
@@ -719,7 +881,43 @@ onBeforeUnmount(() => {
 				@submit.prevent="savePassword"
 			>
 				<div class="student-access__heading">
-					<strong>Create your password</strong>
+					<strong>
+						{{
+							hasOAuthProviders
+								? "Choose how to sign in"
+								: "Create your password"
+						}}
+					</strong>
+				</div>
+
+				<div v-if="hasOAuthProviders" class="student-access__oauth">
+					<p class="student-access__oauth-help">
+						Connect one provider, or create a password below.
+					</p>
+					<button
+						v-if="oauthProviders.google"
+						class="student-access__oauth-button is-google"
+						:disabled="isSubmitting"
+						type="button"
+						@click="connectOAuth('google')"
+					>
+						<FontAwesomeIcon :icon="faGoogle" aria-hidden="true" />
+						Connect Google
+					</button>
+					<button
+						v-if="oauthProviders.apple"
+						class="student-access__oauth-button is-apple"
+						:disabled="isSubmitting"
+						type="button"
+						@click="connectOAuth('apple')"
+					>
+						<FontAwesomeIcon :icon="faApple" aria-hidden="true" />
+						Connect Apple
+					</button>
+				</div>
+
+				<div v-if="hasOAuthProviders" class="student-access__separator">
+					<span>or create a password</span>
 				</div>
 
 				<label for="student-new-password">New password</label>
@@ -746,6 +944,10 @@ onBeforeUnmount(() => {
 					required
 					type="password"
 				/>
+
+				<a class="student-access__privacy" href="/student-privacy">
+					How student information is used
+				</a>
 
 				<p v-if="error" class="student-access__error" role="alert">
 					{{ error }}
@@ -830,6 +1032,60 @@ onBeforeUnmount(() => {
 .student-access__form {
 	display: grid;
 	gap: 0.65rem;
+}
+
+.student-access__oauth {
+	display: grid;
+	gap: 0.6rem;
+}
+
+.student-access__oauth-button {
+	display: flex;
+	min-height: 2.75rem;
+	align-items: center;
+	justify-content: center;
+	gap: 0.65rem;
+	border: 1px solid var(--color-border-strong);
+	border-radius: var(--radius-pill);
+	padding: 0.65rem 0.85rem;
+	font-weight: 800;
+}
+
+.student-access__oauth-button.is-google {
+	background: #fff;
+	color: #1f2937;
+}
+
+.student-access__oauth-button.is-apple {
+	border-color: #000;
+	background: #000;
+	color: #fff;
+}
+
+.student-access__oauth-help {
+	color: var(--color-ink-soft);
+	font-size: 0.8rem;
+	line-height: 1.45;
+}
+
+.student-access__separator {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	color: var(--color-ink-soft);
+	font-size: 0.78rem;
+	text-align: center;
+}
+
+.student-access__separator::before,
+.student-access__separator::after {
+	content: "";
+	flex: 1;
+	border-top: 1px solid var(--color-border);
+}
+
+.student-access__separator span {
+	flex: 0 0 auto;
 }
 
 .student-access__heading {
