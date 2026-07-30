@@ -586,7 +586,11 @@ screen.listen()
 		vi.stubGlobal(
 			"fetch",
 			vi.fn(async (url: string) => {
-				if (url.includes("api.github.com")) {
+				const parsedUrl = new URL(url);
+				if (
+					parsedUrl.protocol === "https:" &&
+					parsedUrl.hostname === "api.github.com"
+				) {
 					return new Response(
 						JSON.stringify([
 							{

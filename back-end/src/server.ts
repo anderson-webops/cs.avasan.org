@@ -11,7 +11,11 @@ import { requireStudentContext, validAdmin, validStudent } from "./middleware/au
 import { requireClassroomRequest } from "./middleware/classroomRequest.js";
 import { requireInternalDiagnostics } from "./middleware/internalDiagnostics.js";
 import { createProjectJsonParser, createProjectPayloadConcurrencyGuard } from "./middleware/projectPayload.js";
-import { createHeavyProjectPayloadLimiter, createStudentProjectWriteLimiter } from "./middleware/rateLimiters.js";
+import {
+	createHeavyProjectPayloadLimiter,
+	createProjectDataAccessLimiter,
+	createStudentProjectWriteLimiter
+} from "./middleware/rateLimiters.js";
 import { Admin } from "./models/schemas/Admin.js";
 import { ClassroomUsageDaily } from "./models/schemas/ClassroomUsageDaily.js";
 import { OAuthLoginAttempt } from "./models/schemas/OAuthLoginAttempt.js";
@@ -75,30 +79,24 @@ async function main() {
 		throw new Error("CROSS_SITE=true is not supported; classroom sessions must stay same-origin.");
 	}
 
+	// Reject unsafe cross-origin requests before cookie-backed identity is made
+	// available to downstream route handlers.
+	const classroomRequestPaths = classroomPrivacy.studentAccountsEnabled
+		? ["/accounts", "/students", "/admins"]
+		: ["/accounts", "/admins"];
+	app.use(classroomRequestPaths, requireClassroomRequest);
+
 	const cookieOptions: CookieSessionOpts = {
 		name: isProd ? "__Host-session" : "session",
 		keys: [sessionSecret],
 		httpOnly: true,
 		overwrite: true,
 		path: "/",
-		sameSite: "lax", // default, safe for dev & same-origin
-		secure: false // default in dev
+		sameSite: "strict",
+		...(isProd ? { secure: true } : {})
 	};
 
-	// Production keeps the same-origin cookie boundary and adds HTTPS-only
-	// delivery. The API is intentionally exposed through the site's /api path.
-	if (isProd) {
-		cookieOptions.secure = true;
-	}
-
 	app.use(cookieSession(cookieOptions));
-
-	// Cookie-authenticated mutations require the same-origin API client's
-	// custom header before any request body is parsed.
-	const classroomRequestPaths = classroomPrivacy.studentAccountsEnabled
-		? ["/accounts", "/students", "/admins"]
-		: ["/accounts", "/admins"];
-	app.use(classroomRequestPaths, requireClassroomRequest);
 	if (classroomPrivacy.studentOAuthEnabled) {
 		app.use(
 			"/students/oauth/apple/callback",
@@ -120,6 +118,8 @@ async function main() {
 	// Authenticated project payloads may include binary assets and are the only
 	// requests allowed above the global 1 MB JSON limit.
 	const projectJson = createProjectJsonParser();
+	const studentProjectDataAccessLimiter = createProjectDataAccessLimiter();
+	const teacherProjectDataAccessLimiter = createProjectDataAccessLimiter();
 	const studentProjectWriteLimiter = createStudentProjectWriteLimiter();
 	const teacherProjectWriteLimiter = createStudentProjectWriteLimiter();
 	const heavyProjectPayloadLimiter = createHeavyProjectPayloadLimiter();
@@ -143,7 +143,12 @@ async function main() {
 		projectJson(req, res, next);
 	};
 	if (classroomPrivacy.studentAccountsEnabled) {
-		app.use(["/students/projects", "/students/project-reviews"], validStudent, requireStudentContext);
+		app.use(
+			["/students/projects", "/students/project-reviews"],
+			studentProjectDataAccessLimiter,
+			validStudent,
+			requireStudentContext
+		);
 		app.use(
 			"/students/projects",
 			limitProjectMutation(studentProjectWriteLimiter),
@@ -153,6 +158,7 @@ async function main() {
 		);
 		app.use(
 			/^\/admins\/students\/[a-f\d]{24}\/projects(?:\/|$)/i,
+			teacherProjectDataAccessLimiter,
 			validAdmin,
 			limitProjectMutation(teacherProjectWriteLimiter),
 			limitProjectMutation(heavyProjectPayloadLimiter),

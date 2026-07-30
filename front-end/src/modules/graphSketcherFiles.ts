@@ -409,7 +409,9 @@ export function graphDocumentToCsv(document: GraphDocument) {
 
 function legacyChildren(element: Element, localName: string) {
 	return Array.from(element.children).filter(
-		child => child.localName === localName
+		child =>
+			child.namespaceURI === LEGACY_GRAPH_NAMESPACE &&
+			child.localName === localName
 	);
 }
 
@@ -531,12 +533,18 @@ function parseLegacyLabels(elements: Element[], warnings: string[]) {
 		);
 		const textParts = (paragraphs.length ? paragraphs : [element]).map(
 			paragraph =>
-				Array.from(paragraph.getElementsByTagNameNS("*", "lit"))
+				Array.from(
+					paragraph.getElementsByTagNameNS(
+						LEGACY_GRAPH_NAMESPACE,
+						"lit"
+					)
+				)
 					.map(literal => literal.textContent ?? "")
 					.join("")
 		);
 		const hasRichStyle =
-			element.getElementsByTagNameNS("*", "style").length > 0;
+			element.getElementsByTagNameNS(LEGACY_GRAPH_NAMESPACE, "style")
+				.length > 0;
 		if (hasRichStyle) {
 			addBoundedMessage(
 				warnings,
@@ -769,6 +777,51 @@ async function decodeLegacyGraphSource(
 	return decodeLegacyGraphArchive(data, signal);
 }
 
+function parseLegacyGraphXml(xml: string) {
+	if (/<!\s*(?:DOCTYPE|ENTITY)\b/i.test(xml)) {
+		throw new Error(
+			"Legacy graph imports cannot contain DOCTYPE or ENTITY declarations."
+		);
+	}
+
+	/*
+	 * Security boundary: this parses untrusted input as a detached XML document,
+	 * never as HTML and never into the page DOM. Only elements in the original
+	 * GraphSketcher namespace are accepted, and the importer copies selected
+	 * primitive values into a normalized GraphDocument. Exporters escape those
+	 * values before producing SVG.
+	 */
+	const parsed = new DOMParser().parseFromString(xml, "application/xml");
+	if (parsed.querySelector("parsererror")) {
+		throw new Error("The .ograph document contains malformed XML.");
+	}
+
+	const elementCount = parsed.getElementsByTagName("*").length;
+	if (elementCount > MAX_LEGACY_ELEMENTS) {
+		throw new Error(
+			`Legacy graph imports are limited to ${MAX_LEGACY_ELEMENTS.toLocaleString()} XML elements.`
+		);
+	}
+
+	const root = parsed.documentElement;
+	if (root.namespaceURI !== LEGACY_GRAPH_NAMESPACE) {
+		throw new Error(
+			"The file is not an original GraphSketcher .ograph document."
+		);
+	}
+	const legacyElementCount = parsed.getElementsByTagNameNS(
+		LEGACY_GRAPH_NAMESPACE,
+		"*"
+	).length;
+	if (legacyElementCount !== elementCount) {
+		throw new Error(
+			"The .ograph document contains elements outside the original GraphSketcher namespace."
+		);
+	}
+
+	return root;
+}
+
 export async function importLegacyGraphSketcherDocument(
 	data: string | Uint8Array,
 	title = "Imported Graph",
@@ -776,42 +829,14 @@ export async function importLegacyGraphSketcherDocument(
 ): Promise<LegacyGraphImportResult> {
 	const xml = await decodeLegacyGraphSource(data, signal);
 	throwIfGraphImportCanceled(signal);
-	if (/<!\s*(?:DOCTYPE|ENTITY)\b/i.test(xml)) {
-		throw new Error(
-			"Legacy graph imports cannot contain DOCTYPE or ENTITY declarations."
-		);
-	}
-	const parsed = new DOMParser().parseFromString(xml, "application/xml");
-	if (parsed.querySelector("parsererror")) {
-		throw new Error("The .ograph document contains malformed XML.");
-	}
-	if (parsed.getElementsByTagName("*").length > MAX_LEGACY_ELEMENTS) {
-		throw new Error(
-			`Legacy graph imports are limited to ${MAX_LEGACY_ELEMENTS.toLocaleString()} XML elements.`
-		);
-	}
-	const root = parsed.documentElement;
-	if (root.namespaceURI !== LEGACY_GRAPH_NAMESPACE) {
-		throw new Error(
-			"The file is not an original GraphSketcher .ograph document."
-		);
-	}
+	const root = parseLegacyGraphXml(xml);
 	const graph = legacyChildren(root, "graph")[0];
 	if (!graph)
 		throw new Error("The .ograph document does not contain a graph.");
-	const graphChildren = Array.from(graph.children);
-	const labelElements = graphChildren.filter(
-		element => element.localName === "label"
-	);
-	const vertexElements = graphChildren.filter(
-		element => element.localName === "vertex"
-	);
-	const lineElements = graphChildren.filter(
-		element => element.localName === "line"
-	);
-	const fillElements = graphChildren.filter(
-		element => element.localName === "fill"
-	);
+	const labelElements = legacyChildren(graph, "label");
+	const vertexElements = legacyChildren(graph, "vertex");
+	const lineElements = legacyChildren(graph, "line");
+	const fillElements = legacyChildren(graph, "fill");
 	if (labelElements.length > MAX_LEGACY_LABELS) {
 		throw new Error(
 			`Legacy graph imports are limited to ${MAX_LEGACY_LABELS.toLocaleString()} labels.`

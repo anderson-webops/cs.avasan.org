@@ -1,5 +1,7 @@
 import type { Server } from "node:http";
 import type { RequestHandler } from "express";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import express from "express";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { requireInternalDiagnostics } from "../src/middleware/internalDiagnostics.js";
@@ -9,6 +11,7 @@ import {
 } from "../src/security/classroomAnalytics.js";
 import {
 	createLoginLimiter,
+	createProjectDataAccessLimiter,
 	createStudentOAuthLimiter,
 	createStudentPasswordSetupLimiter,
 	createStudentProjectWriteLimiter
@@ -178,6 +181,60 @@ describe("security dependency regressions", () => {
 			expect(first.status).toBe(200);
 			expect(second.status).toBe(429);
 		});
+	});
+
+	it("rate limits project data access before route work can run", async () => {
+		await withServer(createProjectDataAccessLimiter({
+			limit: 1,
+			windowMs: 60_000
+		}), async baseUrl => {
+			const first = await requestLimitedEndpoint(baseUrl);
+			const second = await requestLimitedEndpoint(baseUrl);
+
+			expect(first.status).toBe(200);
+			expect(second.status).toBe(429);
+			await expect(second.json()).resolves.toEqual({
+				message: "Too many project requests. Please try again shortly."
+			});
+		});
+	});
+
+	it("keeps sensitive deletion receipt details out of application logs", () => {
+		const deletionService = readFileSync(
+			fileURLToPath(new URL("../src/services/studentRecordDeletion.ts", import.meta.url)),
+			"utf8"
+		);
+
+		expect(deletionService).not.toMatch(/console\.(?:debug|error|info|log|warn)/u);
+		expect(deletionService).not.toContain("student-record-delete completed");
+	});
+
+	it("guards cookie routes and project database access in security-first order", () => {
+		const server = readFileSync(
+			fileURLToPath(new URL("../src/server.ts", import.meta.url)),
+			"utf8"
+		);
+		const requestGuard = server.indexOf(
+			"app.use(classroomRequestPaths, requireClassroomRequest);"
+		);
+		const cookieMiddleware = server.indexOf(
+			"app.use(cookieSession(cookieOptions));"
+		);
+		const studentDataLimiter = server.indexOf(
+			"studentProjectDataAccessLimiter,"
+		);
+		const studentDatabaseAuth = server.indexOf(
+			"validStudent,",
+			studentDataLimiter
+		);
+
+		expect(requestGuard).toBeGreaterThan(-1);
+		expect(requestGuard).toBeLessThan(cookieMiddleware);
+		expect(server).toContain('sameSite: "strict"');
+		expect(server).toContain("...(isProd ? { secure: true } : {})");
+		expect(server).not.toContain("secure: false");
+		expect(studentDataLimiter).toBeGreaterThan(-1);
+		expect(studentDataLimiter).toBeLessThan(studentDatabaseAuth);
 	});
 
 	it("requires the configured key for database diagnostics in every environment", async () => {

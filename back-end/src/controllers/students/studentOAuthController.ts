@@ -45,6 +45,9 @@ function hashSecret(value: string) {
 }
 
 function externalSubjectHash(provider: ExternalIdentityProvider, subject: string) {
+	// Provider `sub` is a validated, high-entropy opaque identifier, not a
+	// student password. The provider prefix also keeps otherwise identical
+	// opaque subjects separate without changing the persisted lookup format.
 	return hashSecret(`${provider}\0${subject}`);
 }
 
