@@ -82,6 +82,7 @@ describe("versioned full-stack production deployment", () => {
 		expect(hostProxy.match(/access_log off;/g)).toHaveLength(2);
 		expect(hostProxy).not.toContain(" combined");
 		expect(hostProxy).toContain("proxy_pass http://127.0.0.1:8080;");
+		expect(hostProxy).toContain("proxy_redirect off;");
 		expect(hostProxy).not.toMatch(/^\s*(?:root|alias|try_files)\b/m);
 		expect(hostProxy).toContain("listen 80;");
 		expect(hostProxy).toContain("return 301 https://cs.avasan.org$request_uri;");
