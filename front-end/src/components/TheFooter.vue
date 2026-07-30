@@ -19,14 +19,14 @@
 }
 
 .site-footer__link {
-	color: var(--color-ink-muted);
+	color: var(--color-ink-soft);
 	font-size: 0.78rem;
 	line-height: 1.3;
 	text-decoration: none;
 }
 
 .site-footer__link:hover {
-	color: var(--color-ink-soft);
+	color: var(--color-ink);
 	text-decoration: underline;
 }
 </style>

@@ -77,14 +77,11 @@ const schoolPrivacyContact = configuredSchoolPrivacyContact();
 				there.
 			</p>
 			<p>
-				On a shared computer, download anything that should be kept,
-				then choose
-				<strong>Clear browser projects for next student</strong> in the
-				Python IDE and confirm the deletion. The clear is announced to
-				other open IDE tabs, removes anonymous projects, import markers,
-				and editor state, and opens a blank workspace. Projects already
-				saved to a signed-in account are not deleted. Close the tabs
-				when finished.
+				On a shared computer, download anything that should be kept and
+				follow Julio’s instructions for ending the browser session
+				before the next student begins. Close every Python IDE tab when
+				finished. Projects already saved to a signed-in account are not
+				part of the browser-local workspace.
 			</p>
 		</section>
 

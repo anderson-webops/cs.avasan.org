@@ -26,11 +26,12 @@ describe("student privacy page", () => {
 		expect(text).toContain("every open or duplicated Graph Sketcher tab");
 		expect(text).toContain("Clear for next student");
 		expect(text).toContain("Python work saved in a shared browser");
-		expect(text).toContain("Clear browser projects for next student");
-		expect(text).toContain("opens a blank workspace");
+		expect(text).toContain("follow Julio’s instructions");
+		expect(text).toContain("Close every Python IDE tab");
 		expect(text).toContain(
-			"Projects already saved to a signed-in account are not deleted"
+			"Projects already saved to a signed-in account are not part of the browser-local workspace"
 		);
+		expect(text).not.toContain("Clear browser projects for next student");
 		expect(text).toContain(
 			"not sent to the classroom server, student accounts, or analytics"
 		);
