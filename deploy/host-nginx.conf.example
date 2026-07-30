@@ -24,6 +24,9 @@ server {
 	# Do not add a host root, alias, try_files, or a second static deployment.
 	location / {
 		proxy_pass http://127.0.0.1:8080;
+		# Preserve the container's relative directory redirects so the outer
+		# host cannot turn /admin/ into an origin-dependent absolute Location.
+		proxy_redirect off;
 		proxy_http_version 1.1;
 		proxy_buffering off;
 		proxy_request_buffering off;

@@ -326,7 +326,7 @@ a copied frontend build, add a host-side `root` or `try_files`, or duplicate
 route and cache policy outside the immutable web image. The container
 configuration is the sole owner of strict unknown-route 404 responses,
 relative directory redirects, release headers, and same-origin `/api/*`
-routing.
+routing; the outer proxy explicitly leaves upstream redirects unchanged.
 
 Once the new stack is reachable through the proxy, but before the deployment
 timer records success, run the mandatory production gate from that exact
