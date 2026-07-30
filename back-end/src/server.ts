@@ -18,11 +18,13 @@ import { OAuthLoginAttempt } from "./models/schemas/OAuthLoginAttempt.js";
 import { PythonProject } from "./models/schemas/PythonProject.js";
 import { PythonProjectReview } from "./models/schemas/PythonProjectReview.js";
 import { Student } from "./models/schemas/Student.js";
-import {
-	StudentDataDeletionReceipt
-} from "./models/schemas/StudentDataDeletionReceipt.js";
+import { StudentDataDeletionReceipt } from "./models/schemas/StudentDataDeletionReceipt.js";
 import { mountClassroomAnalyticsRoutes } from "./routes/classroomAnalyticsRoutes.js";
-import { mountRuntimeAccountRoutes } from "./routes/runtimeAccountRoutes.js";
+import {
+	assertRetainedStudentDataHasRetentionPeriod,
+	mountRuntimeAccountRoutes,
+	retainedStudentDeletionReceiptFilter
+} from "./routes/runtimeAccountRoutes.js";
 import { readClassroomAnalyticsRetentionDays } from "./security/classroomAnalytics.js";
 import { readClassroomPrivacySettings } from "./security/classroomPrivacy.js";
 import { readBooleanSetting, readClassroomOrigin, readSessionSecret } from "./security/environment.js";
@@ -30,6 +32,10 @@ import { selectMongoConnection } from "./security/mongoConnection.js";
 import { readReleaseMetadata } from "./security/releaseMetadata.js";
 import { readTrustProxySetting } from "./security/trustProxy.js";
 import { reconcilePythonProjectQuotas } from "./services/pythonProjectQuotaReconciliation.js";
+import {
+	enforceStudentRecordRetention,
+	startStudentRecordRetentionSweeper
+} from "./services/studentRecordRetention.js";
 import { enabledOAuthProviders } from "./utils/oauthProviderConfig.js";
 import { readMongoSecret } from "./vaultClient.js";
 import "dotenv/config";
@@ -89,7 +95,10 @@ async function main() {
 
 	// Cookie-authenticated mutations require the same-origin API client's
 	// custom header before any request body is parsed.
-	app.use(["/accounts", "/students", "/admins"], requireClassroomRequest);
+	const classroomRequestPaths = classroomPrivacy.studentAccountsEnabled
+		? ["/accounts", "/students", "/admins"]
+		: ["/accounts", "/admins"];
+	app.use(classroomRequestPaths, requireClassroomRequest);
 	if (classroomPrivacy.studentOAuthEnabled) {
 		app.use(
 			"/students/oauth/apple/callback",
@@ -224,8 +233,25 @@ async function main() {
 		PythonProject.syncIndexes(),
 		PythonProjectReview.init()
 	]);
+	const retainedStudentData
+		= classroomPrivacy.studentRecordRetentionDays === null
+			? await Promise.all([
+					Student.exists({}),
+					StudentDataDeletionReceipt.exists(retainedStudentDeletionReceiptFilter(new Date()))
+				]).then(([student, receipt]) => ({
+					deletionReceiptsExist: Boolean(receipt),
+					studentRecordsExist: Boolean(student)
+				}))
+			: {
+					deletionReceiptsExist: false,
+					studentRecordsExist: false
+				};
+	assertRetainedStudentDataHasRetentionPeriod(classroomPrivacy.studentRecordRetentionDays, retainedStudentData);
 	await enforceClassroomAnalyticsRetention(classroomAnalyticsRetentionDays);
 	await reconcilePythonProjectQuotas();
+	if (classroomPrivacy.studentRecordRetentionDays) {
+		await enforceStudentRecordRetention(classroomPrivacy.studentRecordRetentionDays);
+	}
 	console.log("Connected to MongoDB");
 	const c = mongoose.connection;
 	console.log(`Mongo connected: db=${c.db?.databaseName} host=${c.host} name=${c.name}`);
@@ -248,12 +274,16 @@ async function main() {
 	mountRuntimeAccountRoutes(app, {
 		analyticsRetentionDays: classroomAnalyticsRetentionDays,
 		studentAccountsEnabled: classroomPrivacy.studentAccountsEnabled,
-		studentOAuthEnabled: classroomPrivacy.studentOAuthEnabled
+		studentOAuthEnabled: classroomPrivacy.studentOAuthEnabled,
+		studentRecordRetentionDays: classroomPrivacy.studentRecordRetentionDays
 	});
 
 	const PORT = Number(env.PORT || 3008);
 	const HOST = env.HOST || env.BACKEND_HOST || "127.0.0.1";
 	const server = app.listen(PORT, HOST, () => console.log(`Server listening on http://${HOST}:${PORT}!`));
+	const stopStudentRecordRetentionSweeper = classroomPrivacy.studentRecordRetentionDays
+		? startStudentRecordRetentionSweeper(classroomPrivacy.studentRecordRetentionDays)
+		: null;
 	let isShuttingDown = false;
 
 	const shutdown = async (signal: NodeJS.Signals) => {
@@ -278,6 +308,7 @@ async function main() {
 				});
 			}
 
+			await stopStudentRecordRetentionSweeper?.();
 			if (mongoose.connection.readyState !== 0) {
 				await mongoose.disconnect();
 			}

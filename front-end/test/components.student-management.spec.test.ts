@@ -3,6 +3,7 @@ import { createPinia, setActivePinia } from "pinia";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import StudentManagement from "@/components/StudentManagement.vue";
 import {
+	correctAdminStudentUsername,
 	createAdminStudent,
 	deleteAdminStudentRecords,
 	exportAdminStudentRecords,
@@ -14,6 +15,7 @@ import {
 import { useAppStore } from "@/stores/app";
 
 vi.mock("@/modules/studentAccounts", () => ({
+	correctAdminStudentUsername: vi.fn(),
 	createAdminStudent: vi.fn(),
 	deleteAdminStudentRecords: vi.fn(),
 	exportAdminStudentRecords: vi.fn(),
@@ -30,6 +32,7 @@ const student = {
 };
 const deletionReceipt = {
 	operationID: "01234567-89ab-4cde-8fab-0123456789ab",
+	reason: "julio-request" as const,
 	status: "completed" as const,
 	subject: {
 		studentID: "student-1",
@@ -57,8 +60,11 @@ describe("StudentManagement", () => {
 		});
 	});
 
-	function mountManagement() {
+	function mountManagement(maintenanceOnly = false) {
 		return mount(StudentManagement, {
+			props: {
+				maintenanceOnly
+			},
 			global: {
 				stubs: {
 					StudentProjectReview: {
@@ -70,6 +76,40 @@ describe("StudentManagement", () => {
 			}
 		});
 	}
+
+	it("limits maintenance mode to retained-record request tools", async () => {
+		vi.mocked(fetchAdminStudents).mockResolvedValueOnce([
+			{
+				...student,
+				credentialState: "password",
+				projectCount: 2,
+				retentionExpiresAt: "2026-10-27T12:00:00.000Z"
+			}
+		]);
+		const wrapper = mountManagement(true);
+		await flushPromises();
+		const labels = wrapper
+			.findAll(".student-management__student-actions button")
+			.map(button => button.text());
+
+		expect(wrapper.get("#student-management-title").text()).toBe(
+			"Student records"
+		);
+		expect(wrapper.text()).toContain("configured retention period");
+		expect(wrapper.find("#new-student-username").exists()).toBe(false);
+		expect(wrapper.text()).not.toContain("Password set");
+		expect(labels).toEqual([
+			"Correct username",
+			"Export records",
+			"Delete records"
+		]);
+		expect(wrapper.find('[data-testid="project-review"]').exists()).toBe(
+			false
+		);
+		expect(createAdminStudent).not.toHaveBeenCalled();
+		expect(resetAdminStudentAccess).not.toHaveBeenCalled();
+		expect(setAdminStudentActive).not.toHaveBeenCalled();
+	});
 
 	it("requires Julio's password and shows a new access code only transiently", async () => {
 		vi.mocked(createAdminStudent).mockResolvedValueOnce({
@@ -177,6 +217,44 @@ describe("StudentManagement", () => {
 		expect(wrapper.text()).toContain("Enable");
 		expect(wrapper.get('[data-testid="project-review"]').text()).toBe(
 			"maria-7"
+		);
+	});
+
+	it("lets Julio correct an alias without replacing the student record", async () => {
+		vi.mocked(fetchAdminStudents).mockResolvedValueOnce([student]);
+		vi.mocked(correctAdminStudentUsername).mockResolvedValueOnce({
+			...student,
+			username: "river-8"
+		});
+		const wrapper = mountManagement();
+		await flushPromises();
+
+		await wrapper
+			.findAll("button")
+			.find(button => button.text() === "Correct username")
+			?.trigger("click");
+		await wrapper
+			.get(`#correct-username-${student._id}`)
+			.setValue("River-8");
+		await wrapper
+			.get(`#correct-teacher-password-${student._id}`)
+			.setValue("julio-password");
+		await wrapper
+			.findAll("form")
+			.find(form => form.text().includes("Save correction"))
+			?.trigger("submit.prevent");
+		await flushPromises();
+
+		expect(correctAdminStudentUsername).toHaveBeenCalledWith(
+			student._id,
+			"river-8",
+			"julio-password"
+		);
+		expect(wrapper.text()).toContain(
+			"Corrected maria-7 to river-8. The student was signed out."
+		);
+		expect(wrapper.get(".student-management__student h3").text()).toBe(
+			"river-8"
 		);
 	});
 
@@ -297,14 +375,38 @@ describe("StudentManagement", () => {
 		await flushPromises();
 
 		expect(wrapper.text()).toContain("Recent deletion receipts");
-		expect(wrapper.text()).toContain("available for up to 90 days");
+		expect(wrapper.text()).toContain(
+			"Completed receipts remain for 90 days"
+		);
 		expect(wrapper.text()).toContain("maria-7");
 		expect(wrapper.text()).toContain(deletionReceipt.operationID);
+		expect(wrapper.text()).toContain("Deleted by Julio");
 		expect(
 			wrapper
 				.findAll("button")
 				.some(button => button.text() === "Download receipt")
 		).toBe(true);
+	});
+
+	it("shows unfinished receipts without inventing an expiry date", async () => {
+		vi.mocked(fetchAdminStudentDeletionReceipts).mockResolvedValueOnce({
+			receipts: [
+				{
+					...deletionReceipt,
+					completedAt: null,
+					deletedRecords: null,
+					expiresAt: null,
+					status: "needs-retry"
+				}
+			],
+			retentionDays: 90
+		});
+		const wrapper = mountManagement();
+		await flushPromises();
+
+		expect(wrapper.text()).toContain("Unfinished receipts remain");
+		expect(wrapper.text()).toContain("kept until deletion is resolved");
+		expect(wrapper.text()).not.toContain("available through Never");
 	});
 
 	it("shows which credentials need Julio's attention", async () => {
@@ -377,6 +479,7 @@ describe("StudentManagement", () => {
 				...student,
 				lastLoginAt: "2026-07-28T22:45:00.000Z",
 				lastProjectSavedAt: "2026-07-29T12:30:00.000Z",
+				retentionExpiresAt: "2026-10-27T22:45:00.000Z",
 				projectCount: 3
 			}
 		]);
@@ -393,7 +496,87 @@ describe("StudentManagement", () => {
 		expect(
 			wrapper.get('[data-testid="student-last-project-save"]').text()
 		).toBe("Jul 29, 2026");
+		expect(
+			wrapper.get('[data-testid="student-retention-expiry"]').text()
+		).toBe("Oct 27, 2026");
 		expect(wrapper.text()).not.toMatch(/\b\d{1,2}:\d{2}\b/);
+	});
+
+	it("shows a stranded retention deletion for Julio to retry", async () => {
+		vi.mocked(fetchAdminStudents).mockResolvedValueOnce([
+			{
+				...student,
+				active: false,
+				deletionPending: true,
+				retentionExpiresAt: "2026-07-29T12:00:00.000Z"
+			}
+		]);
+		const wrapper = mountManagement();
+		await flushPromises();
+
+		expect(wrapper.text()).toContain("Deletion needs retry");
+		expect(
+			wrapper
+				.findAll("button")
+				.find(button => button.text() === "Delete records")
+				?.attributes("disabled")
+		).toBeUndefined();
+		expect(
+			wrapper
+				.findAll("button")
+				.find(button => button.text() === "Correct username")
+				?.attributes("disabled")
+		).toBeDefined();
+		expect(wrapper.find('[data-testid="project-review"]').exists()).toBe(
+			false
+		);
+	});
+
+	it("directs expired accounts to deletion instead of reset or reactivation", async () => {
+		vi.mocked(fetchAdminStudents).mockResolvedValueOnce([
+			{
+				...student,
+				active: false,
+				credentialState: "password",
+				retentionExpiresAt: new Date(Date.now() - 60_000).toISOString()
+			}
+		]);
+		const wrapper = mountManagement();
+		await flushPromises();
+		const button = (label: string) =>
+			wrapper
+				.findAll("button")
+				.find(candidate => candidate.text() === label);
+
+		expect(wrapper.text()).toContain("Retention expired");
+		expect(wrapper.text()).toContain("Retention expired — delete records");
+		expect(
+			button("Correct username")?.attributes("disabled")
+		).toBeUndefined();
+		expect(button("Reset access")?.attributes("disabled")).toBeDefined();
+		expect(button("Enable")?.attributes("disabled")).toBeDefined();
+		expect(
+			button("Export records")?.attributes("disabled")
+		).toBeUndefined();
+		expect(
+			button("Delete records")?.attributes("disabled")
+		).toBeUndefined();
+	});
+
+	it("labels automatic retention receipts separately", async () => {
+		vi.mocked(fetchAdminStudentDeletionReceipts).mockResolvedValueOnce({
+			receipts: [
+				{
+					...deletionReceipt,
+					reason: "retention-expiry"
+				}
+			],
+			retentionDays: 90
+		});
+		const wrapper = mountManagement();
+		await flushPromises();
+
+		expect(wrapper.text()).toContain("Automatic retention deletion");
 	});
 
 	it("clears the roster and a revealed code when Admin authorization expires", async () => {

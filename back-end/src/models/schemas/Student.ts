@@ -93,6 +93,17 @@ const studentSchema = new Schema<IStudent>(
 			type: Date,
 			default: undefined
 		},
+		retentionExpiresAt: {
+			type: Date,
+			default: undefined,
+			index: true
+		},
+		retentionPolicyDays: {
+			type: Number,
+			default: undefined,
+			min: 1,
+			select: false
+		},
 		lastPasswordSetupRequestID: {
 			type: String,
 			default: undefined,
@@ -101,6 +112,23 @@ const studentSchema = new Schema<IStudent>(
 		},
 		dataDeletionPendingAt: {
 			type: Date,
+			default: undefined,
+			select: false
+		},
+		dataDeletionOperationID: {
+			type: String,
+			default: undefined,
+			match: /^[\da-f]{8}-[\da-f]{4}-4[\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{12}$/i,
+			select: false
+		},
+		dataDeletionRequestedAt: {
+			type: Date,
+			default: undefined,
+			select: false
+		},
+		dataDeletionReason: {
+			type: String,
+			enum: ["julio-request", "retention-expiry"],
 			default: undefined,
 			select: false
 		}
@@ -112,10 +140,7 @@ studentSchema.pre("validate", function validateExternalIdentityPair() {
 	const hasProvider = Boolean(this.externalAuthProvider);
 	const hasSubjectHash = Boolean(this.externalAuthSubjectHash);
 	if (hasProvider !== hasSubjectHash) {
-		this.invalidate(
-			"externalAuthProvider",
-			"External sign-in provider and subject hash must be stored together."
-		);
+		this.invalidate("externalAuthProvider", "External sign-in provider and subject hash must be stored together.");
 	}
 });
 
@@ -142,15 +167,16 @@ studentSchema.set("toJSON", {
 		delete clean.sessionVersion;
 		delete clean.failedLoginAttempts;
 		delete clean.lockedUntil;
+		delete clean.retentionPolicyDays;
 		delete clean.lastPasswordSetupRequestID;
 		delete clean.dataDeletionPendingAt;
+		delete clean.dataDeletionOperationID;
+		delete clean.dataDeletionRequestedAt;
+		delete clean.dataDeletionReason;
 		delete clean.activeProjectCount;
 		delete clean.activeProjectBytes;
 		return returned;
 	}
 });
 
-export const Student: Model<IStudent> = mongoose.model<IStudent>(
-	"Student",
-	studentSchema
-);
+export const Student: Model<IStudent> = mongoose.model<IStudent>("Student", studentSchema);

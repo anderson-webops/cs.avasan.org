@@ -51,28 +51,42 @@ following are complete:
    use.
 2. The exact direct privacy contact supplied with student access is available.
    Do not invent a contact.
-3. The public `/student-privacy` page has been built with that contact and
-   reviewed in the deployed site.
-4. The school or district has supplied its record-access, correction, export,
+3. The school or district has supplied and reviewed the public operator notice,
+   including every operator's postal address, telephone number, and email, and
+   the provider notice naming each approved infrastructure or identity
+   provider, its limited purpose, and the student information it handles. Do
+   not invent either notice.
+4. The public `/student-privacy` page has been built with the contact and both
+   notices and reviewed in the deployed site.
+5. For accounts, the authorized reviewer has selected a whole-number record
+   retention period from 30 through 365 days. There is no application default.
+6. The school or district has supplied its record-access, correction, export,
    deletion, backup, security-log, and end-of-service retention process.
-5. Julio understands that anonymous totals are directional signals, not
+7. Julio understands that anonymous totals are directional signals, not
    attendance, grades, or evidence about an individual student.
 
 The backend requires `CLASSROOM_PRIVACY_APPROVED=true`,
-`SCHOOL_PRIVACY_CONTACT`, and the desired feature flag. The frontend build
-independently requires `VITE_CLASSROOM_PRIVACY_APPROVED=true`,
-`VITE_SCHOOL_PRIVACY_CONTACT`, and its matching feature flag. Missing or
-inconsistent configuration fails closed.
+`SCHOOL_PRIVACY_CONTACT`, `CLASSROOM_PRIVACY_OPERATOR_NOTICE`,
+`CLASSROOM_SERVICE_PROVIDER_NOTICE`, and the desired feature flag. Accounts
+additionally require a whole-number `STUDENT_RECORD_RETENTION_DAYS` value from
+30 through 365. Production Compose derives the frontend approval and feature
+switches directly from those canonical backend values and maps the same
+contact, notices, and retention value into the frontend build. There is no
+second production set of `VITE_` feature switches to drift. Missing or invalid
+configuration fails closed.
 
-| Feature                                   | Backend                                                                 | Frontend build                                      |
-| ----------------------------------------- | ----------------------------------------------------------------------- | --------------------------------------------------- |
-| Optional student accounts and Python sync | `STUDENT_ACCOUNTS_ENABLED=true`                                         | `VITE_STUDENT_ACCOUNTS_ENABLED=true`                |
-| Apple or Google sign-in                   | `STUDENT_OAUTH_ENABLED=true` plus account flag and provider credentials | `VITE_STUDENT_OAUTH_ENABLED=true` plus account flag |
-| Anonymous CS and Math counts              | `CLASSROOM_ANALYTICS_COLLECTION_ENABLED=true`                           | `VITE_CLASSROOM_USAGE_ENABLED=true` in each site    |
+| Feature                                   | Backend                                                                                      | Frontend build                                               |
+| ----------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Optional student accounts and Python sync | `STUDENT_ACCOUNTS_ENABLED=true` and `STUDENT_RECORD_RETENTION_DAYS=30..365`                  | Derived by production Compose from the same canonical values |
+| Apple or Google sign-in                   | `STUDENT_OAUTH_ENABLED=true` plus account flag, retention, and complete provider credentials | Derived by production Compose from the same canonical values |
+| Anonymous CS and Math counts              | `CLASSROOM_ANALYTICS_COLLECTION_ENABLED=true`                                                | Derived by production Compose from the same canonical value  |
 
 OAuth is unavailable unless accounts are enabled. Provider apps must request
 only the OpenID identity needed for an opaque subject. Do not add email,
-profile, name, avatar, or offline-access scopes.
+profile, name, avatar, or offline-access scopes. The authorization-code
+exchange transiently receives the provider token response needed to validate
+the ID token. Only the one-way hash of the verified opaque subject is
+persisted; provider tokens are not retained.
 
 ## Data inventory
 
@@ -84,27 +98,67 @@ application.
 
 The optional account system owns:
 
-- the username, account status, login timestamps, credential hashes, and
-  session-version counter;
+- the username, account status, creation and successful-login timestamps,
+  record-deletion deadline, password and one-time-code hashes, session-version
+  counter, failed-login count, temporary account lockout, and the last random
+  password-setup request marker used to recognize an interrupted or retried
+  password submission;
 - a provider name and hash of an opaque Apple or Google subject, when chosen;
 - pending provider attempts, containing short-lived verifier, nonce, state,
-  and browser-binding proof;
+  browser-binding proof, sign-in or connection mode, expiry, and, while
+  connecting, the internal student ID and session version;
 - in-memory abuse-prevention counters keyed by a network address, normalized
   username, or internal student account ID for no longer than their configured
   window (five minutes for anonymous activity reporting and at most 15 minutes
   for account and project endpoints);
-- synced Python projects, including code and project metadata; and
-- Julio's separate project review copies and notes.
+- synced Python projects, including titles, mode, filenames, source or encoded
+  project assets, selected file, course/starter metadata, size, import
+  identifier, and creation/update times; and
+- Julio's separate project review copies, visibility setting, and notes.
 
 Sessions are signed browser cookies, not a server-side session collection.
+The cookie carries only the internal student ID, authentication level, session
+version, and setup, inactivity, and absolute expiry times. Setup lasts at most
+30 minutes; a full session ends after 30 minutes without activity or eight
+hours, whichever comes first.
 Rotating or deleting the student's session version invalidates every existing
 copy. Each abuse-prevention key uses an exact-expiry in-process store, is
 deleted when its own window ends, and is never written to MongoDB or analytics.
 Anonymous graph projects never enter this inventory.
 
+The browser keeps the matching random password-setup request marker in that
+tab's `sessionStorage` only while it may need to finish or safely retry setup.
+It is cleared after setup or sign-out and otherwise ends with the tab session.
+The account copy is replaced or cleared during later access setup and is
+deleted with the account. It is not a password or access code.
+
+After permanent deletion, the running API process keeps only the deleted
+account's internal database ID in a closed in-memory write gate until that
+process restarts. This process-lifetime tombstone contains no alias,
+credential, project, or code. It prevents a request that authenticated before
+deletion from arriving late and recreating deleted work.
+
 The anonymous count system owns only UTC day, fixed site, fixed event, optional
 allowlisted course ID, total count, and expiry. It has no account key or
 student-level join.
+
+## Access and correction
+
+Parents, guardians, students, the school, or the district use the exact
+`SCHOOL_PRIVACY_CONTACT` process shown on `/student-privacy`. The requester
+provides the school-approved alias and requested action; the school or district
+performs its approved identity and authority verification before Julio uses
+Admin.
+
+For an alias typo, choose **Correct username**, re-enter Julio's password, and
+enter the corrected school-approved alias. This preserves the same account,
+credentials, synced projects, and review copies while rotating the session
+version so existing student sessions must sign in again. Do not implement an
+alias correction by deleting and recreating the account. Export, disable, or
+permanently delete the record when that is the authorized action. A parent or
+guardian may refuse future optional account collection or use through the
+school process; anonymous courses, browser-local Python saves, and Graph
+Sketcher remain available.
 
 ## Export
 
@@ -143,18 +197,27 @@ be reactivated, reset, or reviewed after an API restart. Only then does the API
 create a durable deletion receipt and delete pending provider
 attempts associated with setup, all Python projects, all review copies, and the
 student row containing password, access-code, and provider-subject hashes. A
-late request cannot recreate those records after the deletion sweep. A partial
-failure leaves the account disabled, marks the receipt for retry where
-possible, and lets Julio retry the operation.
+late request cannot recreate those records after the deletion sweep. After the
+first deletion fence succeeds, a partial failure leaves the account disabled,
+marks the receipt for retry where possible, appears in Julio's roster as
+**Deletion needs retry**, and lets Julio retry the same **Delete records**
+operation. A failure before that first fence leaves the record eligible for the
+next scheduled sweep only when the operation was an automatic retention
+deletion. For a manual request, no pending state was recorded; reissue the
+authorized **Delete records** operation. Other account-management and
+project-review controls remain unavailable while deletion is pending.
 
 The response supplies an operation ID, subject-linked receipt, and
 primary-database deletion counts. The receipt contains the internal student ID
 and school-approved alias so an authorized backup operator can find the right
 record; it does not contain credentials or project contents. `/admin`
 automatically downloads the receipt after a completed deletion and lets Julio
-download any still-retained receipt again. Receipts are excluded from that
-Admin list after 90 days and are scheduled for physical deletion by MongoDB's
-asynchronous TTL cleanup.
+download any still-retained receipt again. An unfinished receipt has no TTL
+deadline and remains available only while deletion needs completion or retry.
+Once deletion completes, its 90-day follow-up period begins. It is then
+excluded from Admin and scheduled for physical deletion by MongoDB's
+asynchronous TTL cleanup. It may remain physically present briefly after
+logical exclusion while that cleanup runs.
 
 The application cannot erase independent infrastructure backups. Store or
 transmit a downloaded receipt only through the school or district's approved
@@ -172,9 +235,37 @@ database-distributed design.
 
 ## Retention and reporting
 
+New accounts receive the selected 30–365-day deadline at creation. Every
+successful password, one-time-code, Google, or Apple sign-in renews that
+deadline from the successful authentication time; Admin inspection, alias
+correction, password reset, export, and project review do not renew it. At
+startup, legacy account rows that predate the deadline field and rows carrying
+a different previously configured policy receive one full current period from
+that migration time. The persisted policy-days value prevents later sweeps
+from repeatedly extending the deadline. This deliberately avoids immediate
+retroactive deletion when a policy is first enabled, increased, or decreased.
+
+The API completes one retention sweep before it begins listening and then runs
+a non-overlapping sweep hourly. Expired rows use the same two-fence,
+write-drain, receipt, and collection-deletion path as Julio's manual deletion.
+A concurrent successful sign-in wins only by atomically renewing the deadline
+before the first deletion fence. After that fence succeeds, failed cleanup
+leaves a disabled, deletion-pending row visible to Julio for retry. A failure
+before the fence leaves the record eligible for the next scheduled sweep.
+Automatic receipts identify
+their reason as `retention-expiry`; manual receipts use `julio-request`. Both
+remain without a TTL deadline while unfinished. Their 90-day follow-up period
+starts only after completion; they are then excluded from Admin and scheduled
+for asynchronous physical TTL deletion, so they may remain physically present
+briefly afterward. A pending retry keeps the original reason and operation ID
+and reuses the same receipt. Legacy pending rows without that metadata are
+treated as Julio-requested deletions and receive stable metadata on their first
+retry.
+
 Anonymous daily rows are capped to the configured 7–90 day window at startup,
 on each write, and on summary reads. MongoDB TTL cleanup is asynchronous, so
-expired rows are excluded before physical cleanup.
+expired rows are excluded before physical cleanup and may remain physically
+present briefly afterward.
 
 Browsers make at most one reporting attempt per tab, fixed event, fixed course,
 and UTC day. The tab-local attempt marker is written before the request and is
@@ -199,8 +290,10 @@ When the classroom use ends:
 2. Export any records the approved process requires.
 3. Delete each student through the Admin workflow and complete backup
    follow-up.
-4. Set all five backend/frontend feature flags to `false` and rebuild the
-   frontend.
+4. Set `STUDENT_ACCOUNTS_ENABLED`, `STUDENT_OAUTH_ENABLED`, and
+   `CLASSROOM_ANALYTICS_COLLECTION_ENABLED` to `false`, while retaining the
+   approved `STUDENT_RECORD_RETENTION_DAYS` until all account records and
+   still-available deletion receipts are gone, then rebuild the frontend.
 5. Confirm student and OAuth HTTP routes return `404` and the header has no
    student sign-in control.
 6. While anonymous collection remains disabled, permanently remove its

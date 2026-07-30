@@ -3,6 +3,7 @@
 import express from "express";
 import { getClassroomAnalyticsSummary } from "../controllers/classroomAnalyticsController.js";
 import {
+	correctStudentUsername,
 	createStudent,
 	listStudents,
 	resetStudentAccessCode,
@@ -26,6 +27,7 @@ import { requireStudentDataWriteLease } from "../security/studentDataWriteBarrie
 export interface AdminRouteOptions {
 	analyticsRetentionDays: number;
 	studentAccountsEnabled: boolean;
+	studentRecordMaintenanceEnabled: boolean;
 }
 
 export function createAdminRoutes(options: AdminRouteOptions) {
@@ -42,20 +44,21 @@ export function createAdminRoutes(options: AdminRouteOptions) {
 		getClassroomAnalyticsSummary(options.analyticsRetentionDays)
 	);
 
-	if (!options.studentAccountsEnabled) {
+	if (
+		!options.studentAccountsEnabled
+		&& !options.studentRecordMaintenanceEnabled
+	) {
 		return configuredRouter;
 	}
 
 	configuredRouter.get("/students", validAdmin, listStudents);
 	configuredRouter.get("/student-deletion-receipts", validAdmin, listStudentDeletionReceipts);
-	configuredRouter.post("/students", validAdmin, teacherVerificationLimiter, createStudent);
-	configuredRouter.patch("/students/:studentID", validAdmin, requireStudentDataWriteLease, setStudentActive);
-	configuredRouter.post(
-		"/students/:studentID/access-code",
+	configuredRouter.patch(
+		"/students/:studentID/username",
 		validAdmin,
 		teacherVerificationLimiter,
 		requireStudentDataWriteLease,
-		resetStudentAccessCode
+		correctStudentUsername
 	);
 	configuredRouter.post(
 		"/students/:studentID/export",
@@ -65,6 +68,20 @@ export function createAdminRoutes(options: AdminRouteOptions) {
 		exportStudentData
 	);
 	configuredRouter.delete("/students/:studentID", validAdmin, teacherVerificationLimiter, deleteStudentData);
+
+	if (!options.studentAccountsEnabled) {
+		return configuredRouter;
+	}
+
+	configuredRouter.post("/students", validAdmin, teacherVerificationLimiter, createStudent);
+	configuredRouter.patch("/students/:studentID", validAdmin, requireStudentDataWriteLease, setStudentActive);
+	configuredRouter.post(
+		"/students/:studentID/access-code",
+		validAdmin,
+		teacherVerificationLimiter,
+		requireStudentDataWriteLease,
+		resetStudentAccessCode
+	);
 	configuredRouter.get("/students/:studentID/projects", validAdmin, listManagedPythonProjects);
 	configuredRouter.post(
 		"/students/:studentID/projects/:projectID/review",
@@ -88,5 +105,6 @@ export function createAdminRoutes(options: AdminRouteOptions) {
 // mounts a configured instance through mountRuntimeAccountRoutes.
 export const adminRoutes = createAdminRoutes({
 	analyticsRetentionDays: 90,
-	studentAccountsEnabled: true
+	studentAccountsEnabled: true,
+	studentRecordMaintenanceEnabled: true
 });

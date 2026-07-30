@@ -17,8 +17,13 @@ export interface IStudent {
 	activeProjectBytes: number;
 	passwordSetAt?: Date;
 	lastLoginAt?: Date;
+	retentionExpiresAt?: Date;
+	retentionPolicyDays?: number;
 	lastPasswordSetupRequestID?: string;
 	dataDeletionPendingAt?: Date;
+	dataDeletionOperationID?: string;
+	dataDeletionRequestedAt?: Date;
+	dataDeletionReason?: "julio-request" | "retention-expiry";
 	createdAt: Date;
 	updatedAt: Date;
 }

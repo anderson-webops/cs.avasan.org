@@ -86,8 +86,17 @@ describe("StudentAccess", () => {
 			"VITE_SCHOOL_PRIVACY_CONTACT",
 			"School privacy office, 555-0100"
 		);
+		vi.stubEnv(
+			"VITE_CLASSROOM_PRIVACY_OPERATOR_NOTICE",
+			"Test operator contact"
+		);
+		vi.stubEnv(
+			"VITE_CLASSROOM_SERVICE_PROVIDER_NOTICE",
+			"Test approved provider notice"
+		);
 		vi.stubEnv("VITE_STUDENT_ACCOUNTS_ENABLED", "true");
 		vi.stubEnv("VITE_STUDENT_OAUTH_ENABLED", "true");
+		vi.stubEnv("VITE_STUDENT_RECORD_RETENTION_DAYS", "90");
 		setActivePinia(createPinia());
 		vi.clearAllMocks();
 		window.sessionStorage.clear();
@@ -106,8 +115,9 @@ describe("StudentAccess", () => {
 		vi.unstubAllEnvs();
 	});
 
-	function mountAccess() {
+	function mountAccess(options: { attachTo?: HTMLElement } = {}) {
 		return mount(StudentAccess, {
+			...options,
 			global: {
 				plugins: [createPinia()]
 			}
@@ -463,6 +473,29 @@ describe("StudentAccess", () => {
 		expect(wrapper.get('[role="alert"]').text()).toContain(
 			"does not match"
 		);
+	});
+
+	it("returns keyboard focus to the sign-in trigger when the dialog closes", async () => {
+		const wrapper = mountAccess({ attachTo: document.body });
+		const trigger = wrapper.get(".student-access__trigger");
+
+		await trigger.trigger("click");
+		expect(document.activeElement).toBe(
+			wrapper.get("#student-username").element
+		);
+
+		await wrapper.get(".student-access__close").trigger("click");
+		await flushPromises();
+		expect(document.activeElement).toBe(trigger.element);
+
+		await trigger.trigger("click");
+		await wrapper.get("#student-access-panel").trigger("keydown", {
+			key: "Escape"
+		});
+		await flushPromises();
+		expect(document.activeElement).toBe(trigger.element);
+
+		wrapper.unmount();
 	});
 
 	it("clears setup secrets and retry markers before another student", async () => {

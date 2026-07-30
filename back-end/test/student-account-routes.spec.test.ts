@@ -71,6 +71,8 @@ function makeStudent(overrides: Record<string, unknown> = {}) {
 		activeProjectBytes: 0,
 		passwordSetAt: undefined,
 		lastLoginAt: undefined,
+		retentionExpiresAt: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
+		retentionPolicyDays: 90,
 		createdAt: now,
 		updatedAt: now,
 		...overrides
@@ -140,7 +142,8 @@ async function withRuntime<T>(
 	mountRuntimeAccountRoutes(app, {
 		analyticsRetentionDays: 90,
 		studentAccountsEnabled: true,
-		studentOAuthEnabled: true
+		studentOAuthEnabled: true,
+		studentRecordRetentionDays: 90
 	});
 
 	const server = await new Promise<Server>(resolve => {
@@ -180,6 +183,17 @@ function postJson(baseUrl: string, path: string, body: object) {
 function putJson(baseUrl: string, path: string, body: object) {
 	return fetch(`${baseUrl}${path}`, {
 		method: "PUT",
+		headers: {
+			"content-type": "application/json",
+			"x-classroom-request": "1"
+		},
+		body: JSON.stringify(body)
+	});
+}
+
+function patchJson(baseUrl: string, path: string, body: object) {
+	return fetch(`${baseUrl}${path}`, {
+		method: "PATCH",
 		headers: {
 			"content-type": "application/json",
 			"x-classroom-request": "1"
@@ -257,6 +271,50 @@ describe("teacher-provisioned student accounts", () => {
 			const createPayload = modelMocks.studentCreate.mock.calls[0]?.[0];
 			expect(createPayload.accessCodeHash).not.toBe(body.accessCode);
 			expect(JSON.stringify(body)).not.toContain(createPayload.accessCodeHash);
+		});
+	});
+
+	it("corrects only the student alias after Julio re-verifies", async () => {
+		modelMocks.studentFindOneAndUpdate.mockReturnValue(
+			queryWith(
+				makeStudent({
+					passwordHash: "password-hash",
+					sessionVersion: 5,
+					username: "river-8"
+				})
+			)
+		);
+
+		await withRuntime({ adminID: ADMIN_SINGLETON_ID }, async baseUrl => {
+			const denied = await patchJson(baseUrl, `/admins/students/${studentID}/username`, {
+				teacherPassword: "wrong",
+				username: "river-8"
+			});
+			expect(denied.status).toBe(403);
+			expect(modelMocks.studentFindOneAndUpdate).not.toHaveBeenCalled();
+
+			const response = await patchJson(baseUrl, `/admins/students/${studentID}/username`, {
+				teacherPassword: "teacher-passphrase",
+				username: " River-8 "
+			});
+			const body = await response.json();
+
+			expect(response.status).toBe(200);
+			expect(body.student).toMatchObject({
+				_id: studentID.toString(),
+				username: "river-8"
+			});
+			expect(modelMocks.studentFindOneAndUpdate).toHaveBeenCalledWith(
+				{
+					_id: studentID.toString(),
+					dataDeletionPendingAt: { $exists: false }
+				},
+				{
+					$inc: { sessionVersion: 1 },
+					$set: { username: "river-8" }
+				},
+				{ new: true }
+			);
 		});
 	});
 
@@ -457,13 +515,18 @@ describe("teacher-provisioned student accounts", () => {
 				}),
 				{
 					$inc: { sessionVersion: 1 },
-					$set: {
+					$set: expect.objectContaining({
 						failedLoginAttempts: 0,
-						lastLoginAt: expect.any(Date)
-					},
+						lastLoginAt: expect.any(Date),
+						retentionExpiresAt: expect.any(Date)
+					}),
 					$unset: { lockedUntil: 1 }
 				},
 				{ new: true }
+			);
+			const loginUpdate = modelMocks.studentFindOneAndUpdate.mock.calls[0]?.[1];
+			expect(loginUpdate.$set.retentionExpiresAt.getTime() - loginUpdate.$set.lastLoginAt.getTime()).toBe(
+				90 * 24 * 60 * 60 * 1000
 			);
 		});
 	});
@@ -835,7 +898,7 @@ describe("teacher-provisioned student accounts", () => {
 	});
 
 	it("resets access only after teacher verification and revokes old sessions", async () => {
-		modelMocks.studentFindByIdAndUpdate.mockReturnValue(
+		modelMocks.studentFindOneAndUpdate.mockReturnValue(
 			queryWith(
 				makeStudent({
 					accessCodeHash: "new-access-code-hash",
@@ -862,8 +925,13 @@ describe("teacher-provisioned student accounts", () => {
 			expect(body.accessCode).toEqual(expect.any(String));
 			expect(body.student.active).toBe(true);
 			expect(body.student.credentialState).toBe("access-code");
-			expect(modelMocks.studentFindByIdAndUpdate).toHaveBeenCalledWith(
-				studentID.toString(),
+			expect(modelMocks.studentFindOneAndUpdate).toHaveBeenCalledWith(
+				{
+					_id: studentID.toString(),
+					dataDeletionPendingAt: { $exists: false },
+					retentionExpiresAt: { $gt: expect.any(Date) },
+					sessionVersion: 4
+				},
 				expect.objectContaining({
 					$inc: { sessionVersion: 1 },
 					$set: expect.objectContaining({ active: true }),
@@ -906,12 +974,35 @@ describe("teacher-provisioned student accounts", () => {
 
 			expect(reactivate.status).toBe(409);
 			expect(reset.status).toBe(409);
-			expect(modelMocks.studentFindByIdAndUpdate).not.toHaveBeenCalled();
+			expect(modelMocks.studentFindOneAndUpdate).not.toHaveBeenCalled();
+		});
+	});
+
+	it("cannot reactivate or reset an account after its retention deadline", async () => {
+		modelMocks.studentFindById.mockReturnValue(
+			queryWith(
+				makeStudent({
+					active: false,
+					passwordHash: "password-hash",
+					retentionExpiresAt: new Date(Date.now() - 1)
+				})
+			)
+		);
+
+		await withRuntime({ adminID: ADMIN_SINGLETON_ID }, async baseUrl => {
+			const reactivate = await patchJson(baseUrl, `/admins/students/${studentID}`, { active: true });
+			const reset = await postJson(baseUrl, `/admins/students/${studentID}/access-code`, {
+				teacherPassword: "teacher-passphrase"
+			});
+
+			expect(reactivate.status).toBe(409);
+			expect(reset.status).toBe(409);
+			expect(modelMocks.studentFindOneAndUpdate).not.toHaveBeenCalled();
 		});
 	});
 
 	it("disabling revokes sessions and discards any unused access code", async () => {
-		modelMocks.studentFindByIdAndUpdate.mockReturnValue(
+		modelMocks.studentFindOneAndUpdate.mockReturnValue(
 			queryWith(
 				makeStudent({
 					active: false,
@@ -938,8 +1029,12 @@ describe("teacher-provisioned student accounts", () => {
 
 				expect(response.status).toBe(200);
 				expect(session.adminLastActivityAt).toBe(lastActivityAt);
-				expect(modelMocks.studentFindByIdAndUpdate).toHaveBeenCalledWith(
-					studentID.toString(),
+				expect(modelMocks.studentFindOneAndUpdate).toHaveBeenCalledWith(
+					{
+						_id: studentID.toString(),
+						dataDeletionPendingAt: { $exists: false },
+						sessionVersion: 4
+					},
 					expect.objectContaining({
 						$inc: { sessionVersion: 1 },
 						$unset: expect.objectContaining({
@@ -1148,7 +1243,7 @@ describe("teacher-provisioned student accounts", () => {
 			});
 
 			expect(response.status).toBe(409);
-			expect(modelMocks.studentFindByIdAndUpdate).not.toHaveBeenCalled();
+			expect(modelMocks.studentFindOneAndUpdate).not.toHaveBeenCalled();
 		});
 	});
 
@@ -1161,7 +1256,7 @@ describe("teacher-provisioned student accounts", () => {
 				})
 			)
 		);
-		modelMocks.studentFindByIdAndUpdate.mockReturnValue(
+		modelMocks.studentFindOneAndUpdate.mockReturnValue(
 			queryWith(
 				makeStudent({
 					active: true,
@@ -1202,7 +1297,7 @@ describe("teacher-provisioned student accounts", () => {
 			expect(create.status).toBe(400);
 			expect(reset.status).toBe(400);
 			expect(modelMocks.studentCreate).not.toHaveBeenCalled();
-			expect(modelMocks.studentFindByIdAndUpdate).not.toHaveBeenCalled();
+			expect(modelMocks.studentFindOneAndUpdate).not.toHaveBeenCalled();
 		});
 	});
 

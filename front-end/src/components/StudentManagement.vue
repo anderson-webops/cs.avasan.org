@@ -8,6 +8,7 @@ import { computed, onMounted, ref } from "vue";
 import StudentProjectReview from "@/components/StudentProjectReview.vue";
 import { clearAdminSessionOnAuthorizationError } from "@/modules/adminSession";
 import {
+	correctAdminStudentUsername,
 	createAdminStudent,
 	deleteAdminStudentRecords,
 	exportAdminStudentRecords,
@@ -17,6 +18,15 @@ import {
 	setAdminStudentActive
 } from "@/modules/studentAccounts";
 import { useAppStore } from "@/stores/app";
+
+const props = withDefaults(
+	defineProps<{
+		maintenanceOnly?: boolean;
+	}>(),
+	{
+		maintenanceOnly: false
+	}
+);
 
 const app = useAppStore();
 const students = ref<StudentAccount[]>([]);
@@ -29,6 +39,9 @@ const username = ref("");
 const createTeacherPassword = ref("");
 const resetCandidateID = ref("");
 const resetTeacherPassword = ref("");
+const correctionCandidateID = ref("");
+const correctedUsername = ref("");
+const correctionTeacherPassword = ref("");
 const recordCandidateID = ref("");
 const recordAction = ref<"delete" | "export" | "">("");
 const recordTeacherPassword = ref("");
@@ -72,7 +85,16 @@ function rosterProjectCount(student: StudentAccount) {
 	return Math.floor(count);
 }
 
+function retentionIsExpired(student: StudentAccount) {
+	if (!student.retentionExpiresAt) return false;
+	const expiresAt = new Date(student.retentionExpiresAt).getTime();
+	return Number.isFinite(expiresAt) && expiresAt <= Date.now();
+}
+
 function credentialStatus(student: StudentAccount) {
+	if (retentionIsExpired(student)) {
+		return "Retention expired — delete records";
+	}
 	switch (student.credentialState) {
 		case "social":
 			return student.socialProviders?.[0] === "apple"
@@ -143,6 +165,9 @@ function clearSensitiveManagementState() {
 	createTeacherPassword.value = "";
 	resetTeacherPassword.value = "";
 	resetCandidateID.value = "";
+	correctionCandidateID.value = "";
+	correctedUsername.value = "";
+	correctionTeacherPassword.value = "";
 	recordCandidateID.value = "";
 	recordAction.value = "";
 	recordTeacherPassword.value = "";
@@ -179,6 +204,7 @@ async function loadStudents() {
 }
 
 async function createStudent() {
+	if (props.maintenanceOnly) return;
 	const cleanUsername = username.value.trim().toLowerCase();
 	if (creating.value || !cleanUsername || !createTeacherPassword.value) {
 		return;
@@ -206,9 +232,11 @@ async function createStudent() {
 }
 
 function startReset(studentID: string) {
+	if (props.maintenanceOnly) return;
 	error.value = "";
 	status.value = "";
 	dismissAccessCode();
+	cancelCorrection();
 	cancelRecordAction();
 	resetTeacherPassword.value = "";
 	resetCandidateID.value = studentID;
@@ -219,11 +247,29 @@ function cancelReset() {
 	resetCandidateID.value = "";
 }
 
+function startCorrection(student: StudentAccount) {
+	error.value = "";
+	status.value = "";
+	dismissAccessCode();
+	cancelReset();
+	cancelRecordAction();
+	correctionCandidateID.value = student._id;
+	correctedUsername.value = student.username;
+	correctionTeacherPassword.value = "";
+}
+
+function cancelCorrection() {
+	correctionCandidateID.value = "";
+	correctedUsername.value = "";
+	correctionTeacherPassword.value = "";
+}
+
 function startRecordAction(studentID: string, action: "delete" | "export") {
 	error.value = "";
 	status.value = "";
 	dismissAccessCode();
 	cancelReset();
+	cancelCorrection();
 	recordCandidateID.value = studentID;
 	recordAction.value = action;
 	recordTeacherPassword.value = "";
@@ -269,6 +315,40 @@ function downloadDeletionReceipt(receipt: StudentDeletionReceipt) {
 		`${receipt.subject.username}-deletion-receipt-${receipt.operationID}.json`,
 		receipt
 	);
+}
+
+async function correctUsername(student: StudentAccount) {
+	const cleanUsername = correctedUsername.value.trim().toLowerCase();
+	if (
+		busyStudentID.value ||
+		correctionCandidateID.value !== student._id ||
+		!cleanUsername ||
+		!correctionTeacherPassword.value
+	) {
+		return;
+	}
+
+	busyStudentID.value = student._id;
+	error.value = "";
+	status.value = "";
+	try {
+		const saved = await correctAdminStudentUsername(
+			student._id,
+			cleanUsername,
+			correctionTeacherPassword.value
+		);
+		replaceStudent(saved);
+		status.value = `Corrected ${student.username} to ${saved.username}. The student was signed out.`;
+		cancelCorrection();
+	} catch (caught: unknown) {
+		handleManagementError(
+			caught,
+			"Couldn’t correct this student’s username."
+		);
+	} finally {
+		correctionTeacherPassword.value = "";
+		busyStudentID.value = "";
+	}
 }
 
 async function exportRecords(student: StudentAccount) {
@@ -348,6 +428,7 @@ async function deleteRecords(student: StudentAccount) {
 }
 
 async function resetAccess(student: StudentAccount) {
+	if (props.maintenanceOnly) return;
 	if (
 		busyStudentID.value ||
 		resetCandidateID.value !== student._id ||
@@ -378,6 +459,7 @@ async function resetAccess(student: StudentAccount) {
 }
 
 async function toggleActive(student: StudentAccount) {
+	if (props.maintenanceOnly) return;
 	if (busyStudentID.value) return;
 	busyStudentID.value = student._id;
 	error.value = "";
@@ -421,13 +503,20 @@ onMounted(loadStudents);
 	>
 		<div class="student-management__heading">
 			<div>
-				<h2 id="student-management-title">Students</h2>
-				<p>Create access and review saved Python projects.</p>
+				<h2 id="student-management-title">
+					{{ maintenanceOnly ? "Student records" : "Students" }}
+				</h2>
+				<p v-if="maintenanceOnly">
+					Review, correct, export, or delete records retained under
+					the school’s configured retention period.
+				</p>
+				<p v-else>Create access and review saved Python projects.</p>
 			</div>
 			<span class="site-chip">{{ students.length }}</span>
 		</div>
 
 		<form
+			v-if="!maintenanceOnly"
 			class="student-management__create"
 			@submit.prevent="createStudent"
 		>
@@ -478,7 +567,7 @@ onMounted(loadStudents);
 		</form>
 
 		<section
-			v-if="revealedAccess"
+			v-if="!maintenanceOnly && revealedAccess"
 			class="student-management__access-code"
 			aria-labelledby="student-access-code-title"
 		>
@@ -539,7 +628,11 @@ onMounted(loadStudents);
 			Loading students…
 		</p>
 		<p v-else-if="students.length === 0" class="student-management__empty">
-			No students yet.
+			{{
+				maintenanceOnly
+					? "No retained student records."
+					: "No students yet."
+			}}
 		</p>
 
 		<div v-else class="student-management__list">
@@ -554,14 +647,26 @@ onMounted(loadStudents);
 						<span
 							class="student-management__state"
 							:class="{
-								'is-disabled': student.active === false
+								'is-disabled':
+									student.active === false ||
+									student.deletionPending ||
+									retentionIsExpired(student)
 							}"
 						>
 							{{
-								student.active === false ? "Disabled" : "Active"
+								student.deletionPending
+									? "Deletion needs retry"
+									: retentionIsExpired(student)
+										? "Retention expired"
+										: maintenanceOnly
+											? "Retained record"
+											: student.active === false
+												? "Disabled"
+												: "Active"
 							}}
 						</span>
 						<span
+							v-if="!maintenanceOnly"
 							class="student-management__credential"
 							:class="{
 								'is-warning':
@@ -596,24 +701,55 @@ onMounted(loadStudents);
 									}}
 								</dd>
 							</div>
+							<div>
+								<dt>Scheduled record deletion</dt>
+								<dd data-testid="student-retention-expiry">
+									{{
+										formatRosterDate(
+											student.retentionExpiresAt
+										)
+									}}
+								</dd>
+							</div>
 						</dl>
 					</div>
 					<div class="student-management__student-actions">
 						<button
 							class="site-button site-button--secondary student-management__button"
-							:disabled="!!busyStudentID"
+							:disabled="
+								!!busyStudentID || student.deletionPending
+							"
+							type="button"
+							@click="startCorrection(student)"
+						>
+							Correct username
+						</button>
+						<button
+							v-if="!maintenanceOnly"
+							class="site-button site-button--secondary student-management__button"
+							:disabled="
+								!!busyStudentID ||
+								student.deletionPending ||
+								retentionIsExpired(student)
+							"
 							type="button"
 							@click="startReset(student._id)"
 						>
 							Reset access
 						</button>
 						<button
+							v-if="!maintenanceOnly"
 							class="site-button site-button--secondary student-management__button"
 							:class="{
 								'student-management__disable':
 									student.active !== false
 							}"
-							:disabled="!!busyStudentID"
+							:disabled="
+								!!busyStudentID ||
+								student.deletionPending ||
+								(student.active === false &&
+									retentionIsExpired(student))
+							"
 							type="button"
 							@click="toggleActive(student)"
 						>
@@ -623,7 +759,9 @@ onMounted(loadStudents);
 						</button>
 						<button
 							class="site-button site-button--secondary student-management__button"
-							:disabled="!!busyStudentID"
+							:disabled="
+								!!busyStudentID || student.deletionPending
+							"
 							type="button"
 							@click="startRecordAction(student._id, 'export')"
 						>
@@ -639,6 +777,71 @@ onMounted(loadStudents);
 						</button>
 					</div>
 				</div>
+
+				<form
+					v-if="correctionCandidateID === student._id"
+					class="student-management__reset"
+					@submit.prevent="correctUsername(student)"
+				>
+					<div>
+						<h4>Correct the school-approved alias</h4>
+						<p>
+							This keeps the account and saved projects, changes
+							only the classroom username, and signs the student
+							out. Update the separate alias-to-roster mapping in
+							the school’s approved system too.
+						</p>
+					</div>
+					<div class="student-management__field">
+						<label :for="`correct-username-${student._id}`">
+							Corrected username
+						</label>
+						<input
+							:id="`correct-username-${student._id}`"
+							v-model="correctedUsername"
+							autocomplete="off"
+							autocapitalize="none"
+							maxlength="24"
+							pattern="[A-Za-z][A-Za-z0-9-]{2,23}"
+							required
+							spellcheck="false"
+							type="text"
+						/>
+					</div>
+					<div class="student-management__field">
+						<label :for="`correct-teacher-password-${student._id}`">
+							Julio’s password
+						</label>
+						<input
+							:id="`correct-teacher-password-${student._id}`"
+							v-model="correctionTeacherPassword"
+							autocomplete="current-password"
+							required
+							type="password"
+						/>
+					</div>
+					<div class="student-management__reset-actions">
+						<button
+							class="site-button site-button--primary student-management__button"
+							:disabled="busyStudentID === student._id"
+							type="submit"
+						>
+							{{
+								busyStudentID === student._id
+									? "Correcting…"
+									: "Save correction"
+							}}
+						</button>
+						<button
+							class="site-button site-button--secondary student-management__button"
+							:disabled="busyStudentID === student._id"
+							type="button"
+							@click="cancelCorrection"
+						>
+							Cancel
+						</button>
+					</div>
+				</form>
 
 				<form
 					v-if="resetCandidateID === student._id"
@@ -813,6 +1016,7 @@ onMounted(loadStudents);
 				</form>
 
 				<StudentProjectReview
+					v-if="!maintenanceOnly && !student.deletionPending"
 					:student-id="student._id"
 					:username="student.username"
 				/>
@@ -829,7 +1033,8 @@ onMounted(loadStudents);
 					Recent deletion receipts
 				</h3>
 				<p>
-					These subject-linked receipts are available for up to
+					Unfinished receipts remain only until deletion is resolved.
+					Completed receipts remain for
 					{{ deletionReceiptRetentionDays }} days so Julio can finish
 					the school’s approved backup-deletion follow-up. Download
 					only into that approved system.
@@ -850,12 +1055,24 @@ onMounted(loadStudents);
 						>
 							{{ receipt.status }}
 						</span>
+						<small>
+							{{
+								receipt.reason === "retention-expiry"
+									? "Automatic retention deletion"
+									: "Deleted by Julio"
+							}}
+						</small>
 						<code>{{ receipt.operationID }}</code>
 						<small>
 							Requested
 							{{ formatRosterDate(receipt.requestedAt) }};
-							available through
-							{{ formatRosterDate(receipt.expiresAt) }}
+							<template v-if="receipt.expiresAt">
+								available through
+								{{ formatRosterDate(receipt.expiresAt) }}
+							</template>
+							<template v-else>
+								kept until deletion is resolved
+							</template>
 						</small>
 					</div>
 					<button

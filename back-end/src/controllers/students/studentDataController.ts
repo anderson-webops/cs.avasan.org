@@ -9,24 +9,13 @@ import {
 	STUDENT_DELETION_RECEIPT_RETENTION_DAYS,
 	StudentDataDeletionReceipt
 } from "../../models/schemas/StudentDataDeletionReceipt.js";
-import {
-	normalizeStudentUsername
-} from "../../security/studentCredentials.js";
-import {
-	closeStudentDataWritesAndWait
-} from "../../security/studentDataWriteBarrier.js";
+import { normalizeStudentUsername } from "../../security/studentCredentials.js";
+import { deleteStudentRecordSet } from "../../services/studentRecordDeletion.js";
 import { serializeManagedStudent } from "./studentController.js";
 
-const DAY_MS = 24 * 60 * 60 * 1000;
-
-function studentIdParam(
-	req: Parameters<RequestHandler>[0],
-	res: Parameters<RequestHandler>[1]
-): string | null {
+function studentIdParam(req: Parameters<RequestHandler>[0], res: Parameters<RequestHandler>[1]): string | null {
 	const rawStudentID = req.params.studentID;
-	const studentID = Array.isArray(rawStudentID)
-		? rawStudentID[0]
-		: rawStudentID;
+	const studentID = Array.isArray(rawStudentID) ? rawStudentID[0] : rawStudentID;
 	if (typeof studentID !== "string" || !Types.ObjectId.isValid(studentID)) {
 		res.status(400).json({ message: "Invalid student ID." });
 		return null;
@@ -57,29 +46,16 @@ async function teacherPasswordVerified(
 }
 
 function projectRecord(project: Record<string, unknown>) {
-	const {
-		__v: _version,
-		user: _user,
-		...record
-	} = project;
+	const { __v: _version, user: _user, ...record } = project;
 	return record;
 }
 
 function reviewRecord(review: Record<string, unknown>) {
-	const {
-		__v: _version,
-		lastEditedBy: _lastEditedBy,
-		reviewer: _reviewer,
-		user: _user,
-		...record
-	} = review;
+	const { __v: _version, lastEditedBy: _lastEditedBy, reviewer: _reviewer, user: _user, ...record } = review;
 	return record;
 }
 
-async function writeResponseChunk(
-	res: Parameters<RequestHandler>[1],
-	chunk: string
-): Promise<void> {
+async function writeResponseChunk(res: Parameters<RequestHandler>[1], chunk: string): Promise<void> {
 	if (res.destroyed || res.writableEnded) {
 		throw new Error("Student export connection closed.");
 	}
@@ -115,7 +91,7 @@ function deletionReceiptRecord(
 	username: string,
 	status: "completed" | "in-progress" | "needs-retry",
 	requestedAt: Date,
-	expiresAt: Date,
+	expiresAt: Date | null | undefined,
 	options: {
 		completedAt?: Date;
 		deletedRecords?: {
@@ -124,10 +100,12 @@ function deletionReceiptRecord(
 			reviews: number;
 			students: number;
 		};
+		reason?: "julio-request" | "retention-expiry";
 	} = {}
 ) {
 	return {
 		operationID,
+		reason: options.reason ?? "julio-request",
 		status,
 		subject: {
 			studentID,
@@ -135,7 +113,7 @@ function deletionReceiptRecord(
 		},
 		requestedAt: requestedAt.toISOString(),
 		completedAt: options.completedAt?.toISOString() ?? null,
-		expiresAt: expiresAt.toISOString(),
+		expiresAt: expiresAt?.toISOString() ?? null,
 		deletedRecords: options.deletedRecords ?? null
 	};
 }
@@ -146,8 +124,17 @@ function deletionReceiptRecord(
  */
 export const listStudentDeletionReceipts: RequestHandler = async (_req, res) => {
 	try {
+		const now = new Date();
 		const receipts = await StudentDataDeletionReceipt.find({
-			expiresAt: { $gt: new Date() }
+			$or: [
+				{
+					status: { $in: ["in-progress", "needs-retry"] }
+				},
+				{
+					expiresAt: { $gt: now },
+					status: "completed"
+				}
+			]
 		})
 			.sort({ requestedAt: -1 })
 			.limit(100)
@@ -165,7 +152,11 @@ export const listStudentDeletionReceipts: RequestHandler = async (_req, res) => 
 					receipt.expiresAt,
 					{
 						completedAt: receipt.completedAt,
-						deletedRecords: receipt.deletedRecords
+						deletedRecords:
+							receipt.status === "completed"
+								? receipt.deletedRecords
+								: undefined,
+						reason: receipt.reason ?? "julio-request"
 					}
 				)
 			)
@@ -196,11 +187,9 @@ export const exportStudentData: RequestHandler = async (req, res) => {
 	if (!studentID) return;
 
 	try {
-		const student = await Student.findById(studentID)
-			.select(
-				"+passwordHash +accessCodeHash +pendingSetupCodeHash"
-				+ " +externalAuthProvider +externalAuthSubjectHash"
-			);
+		const student = await Student.findById(studentID).select(
+			"+passwordHash +accessCodeHash +pendingSetupCodeHash" + " +externalAuthProvider +externalAuthSubjectHash"
+		);
 		if (!student) return res.sendStatus(404);
 
 		const pendingOAuthAttempts = await OAuthLoginAttempt.countDocuments({
@@ -217,8 +206,7 @@ export const exportStudentData: RequestHandler = async (req, res) => {
 		};
 
 		res.set({
-			"Content-Disposition":
-					`attachment; filename="${student.username}-classroom-records.json"`,
+			"Content-Disposition": `attachment; filename="${student.username}-classroom-records.json"`,
 			"Content-Type": "application/json; charset=utf-8"
 		});
 		await writeResponseChunk(
@@ -231,17 +219,12 @@ export const exportStudentData: RequestHandler = async (req, res) => {
 		);
 
 		let projectCount = 0;
-		const projectCursor = PythonProject.find({ user: student._id })
-			.sort({ createdAt: 1 })
-			.lean()
-			.cursor();
+		const projectCursor = PythonProject.find({ user: student._id }).sort({ createdAt: 1 }).lean().cursor();
 		for await (const project of projectCursor) {
 			await writeResponseChunk(
 				res,
 				`${projectCount ? "," : ""}${JSON.stringify(
-					projectRecord(
-						project as unknown as Record<string, unknown>
-					)
+					projectRecord(project as unknown as Record<string, unknown>)
 				)}`
 			);
 			projectCount += 1;
@@ -249,31 +232,26 @@ export const exportStudentData: RequestHandler = async (req, res) => {
 
 		await writeResponseChunk(res, "],\"reviews\":[");
 		let reviewCount = 0;
-		const reviewCursor = PythonProjectReview.find({ user: student._id })
-			.sort({ createdAt: 1 })
-			.lean()
-			.cursor();
+		const reviewCursor = PythonProjectReview.find({ user: student._id }).sort({ createdAt: 1 }).lean().cursor();
 		for await (const review of reviewCursor) {
 			await writeResponseChunk(
 				res,
-				`${reviewCount ? "," : ""}${JSON.stringify(
-					reviewRecord(
-						review as unknown as Record<string, unknown>
-					)
-				)}`
+				`${reviewCount ? "," : ""}${JSON.stringify(reviewRecord(review as unknown as Record<string, unknown>))}`
 			);
 			reviewCount += 1;
 		}
 
-		res.end(`],"recordInventory":${JSON.stringify({
-			pendingOAuthAttempts,
-			projects: projectCount,
-			reviews: reviewCount
-		})},"notes":${JSON.stringify([
-			"Credential hashes and temporary OAuth verifier, nonce, state, and browser-binding values are intentionally excluded.",
-			"Signed sessions are stored in browser cookies rather than a server-side session collection.",
-			"Deleted project and review rows are included while they remain in the database awaiting TTL cleanup."
-		])}}`);
+		res.end(
+			`],"recordInventory":${JSON.stringify({
+				pendingOAuthAttempts,
+				projects: projectCount,
+				reviews: reviewCount
+			})},"notes":${JSON.stringify([
+				"Credential hashes and temporary OAuth verifier, nonce, state, and browser-binding values are intentionally excluded.",
+				"Signed sessions are stored in browser cookies rather than a server-side session collection.",
+				"Deleted project and review rows are included while they remain in the database awaiting TTL cleanup."
+			])}}`
+		);
 		console.info(
 			`student-record-export completed operation=${operationID} projects=${projectCount} reviews=${reviewCount}`
 		);
@@ -305,175 +283,97 @@ export const deleteStudentData: RequestHandler = async (req, res) => {
 	const studentID = studentIdParam(req, res);
 	if (!studentID) return;
 	const { confirmUsername } = req.body as { confirmUsername?: unknown };
-	if (
-		typeof confirmUsername !== "string"
-		|| !confirmUsername.trim()
-	) {
+	if (typeof confirmUsername !== "string" || !confirmUsername.trim()) {
 		return res.status(400).json({
 			message: "Type the student’s username to confirm permanent deletion."
 		});
 	}
 
-	let operationID: string | null = null;
-	let requestedAt: Date | null = null;
-	let receiptExpiresAt: Date | null = null;
-	let receiptCreated = false;
 	try {
-		const existing = await Student.findById(studentID)
-			.select("+sessionVersion");
+		const existing = await Student.findById(studentID).select(
+			"+dataDeletionPendingAt +dataDeletionOperationID"
+			+ " +dataDeletionRequestedAt +dataDeletionReason +sessionVersion"
+		);
 		if (!existing) return res.sendStatus(404);
-		if (
-			normalizeStudentUsername(confirmUsername)
-			!== existing.username
-		) {
+		if (normalizeStudentUsername(confirmUsername) !== existing.username) {
 			return res.status(409).json({
 				message: "The confirmation username does not match."
 			});
 		}
 
-		const deletionPendingAt = new Date();
-		const revoked = await Student.findOneAndUpdate(
-			{
+		const resumeOperation
+			= existing.dataDeletionOperationID
+				? {
+						operationID: existing.dataDeletionOperationID,
+						requestedAt:
+							existing.dataDeletionRequestedAt
+							?? existing.dataDeletionPendingAt
+					}
+				: undefined;
+		const deletionReason = existing.dataDeletionReason ?? "julio-request";
+		const result = await deleteStudentRecordSet({
+			initialFilter: {
 				_id: existing._id,
-				sessionVersion: existing.sessionVersion
+				sessionVersion: existing.sessionVersion,
+				...(resumeOperation
+					? {
+							dataDeletionOperationID: resumeOperation.operationID
+						}
+					: {})
 			},
-			{
-				$inc: { sessionVersion: 1 },
-				$set: {
-					active: false,
-					dataDeletionPendingAt: deletionPendingAt
-				}
-			},
-			{ new: true }
-		).select("+sessionVersion");
-		if (!revoked) {
+			reason: deletionReason,
+			...(resumeOperation ? { resumeOperation } : {}),
+			studentID,
+			username: existing.username
+		});
+		if (!result.deleted && result.reason === "changed") {
 			return res.status(409).json({
 				message: "The student account changed. Reload and try again."
 			});
 		}
-
-		await closeStudentDataWritesAndWait(studentID);
-		const fenced = await Student.findOneAndUpdate(
-			{ _id: revoked._id },
-			{
-				$inc: { sessionVersion: 1 },
-				$set: {
-					active: false,
-					dataDeletionPendingAt: deletionPendingAt
-				}
-			},
-			{ new: true }
-		).select("+sessionVersion");
-		if (!fenced) {
+		if (!result.deleted) {
 			return res.status(503).json({
 				message:
-					"The student account could not be fenced for deletion. Retry this action."
+					"Student record deletion did not finish. The account was disabled where possible; retry the action.",
+				...(result.operationID && result.requestedAt
+					? {
+							operation: deletionOperation(result.operationID, result.requestedAt)
+						}
+					: {})
 			});
 		}
 
-		operationID = randomUUID();
-		requestedAt = new Date();
-		receiptExpiresAt = new Date(
-			requestedAt.getTime()
-			+ STUDENT_DELETION_RECEIPT_RETENTION_DAYS * DAY_MS
-		);
-		await StudentDataDeletionReceipt.create({
-			operationID,
-			studentID: fenced._id,
-			username: existing.username,
-			status: "in-progress",
-			requestedAt,
-			expiresAt: receiptExpiresAt
-		});
-		receiptCreated = true;
-
-		const [oauthResult, reviewResult, projectResult] = await Promise.all([
-			OAuthLoginAttempt.deleteMany({ studentID: fenced._id }).exec(),
-			PythonProjectReview.deleteMany({ user: fenced._id }).exec(),
-			PythonProject.deleteMany({ user: fenced._id }).exec()
-		]);
-		const studentResult = await Student.deleteOne({
-			_id: fenced._id,
-			active: false,
-			sessionVersion: fenced.sessionVersion
-		}).exec();
-		if (studentResult.deletedCount !== 1) {
-			await StudentDataDeletionReceipt.updateOne(
-				{ operationID },
-				{ $set: { status: "needs-retry" } }
-			).exec().catch(() => undefined);
-			return res.status(503).json({
-				message: "Related records were removed, but the disabled student account still needs deletion. Retry this action.",
-				operation: deletionOperation(operationID, requestedAt)
-			});
-		}
-
-		const deletedRecords = {
-			oauthAttempts: oauthResult.deletedCount,
-			projects: projectResult.deletedCount,
-			reviews: reviewResult.deletedCount,
-			students: studentResult.deletedCount
-		};
-		const completedAt = new Date();
-		let receiptStatus: "completed" | "in-progress" = "completed";
-		try {
-			const receiptUpdate = await StudentDataDeletionReceipt.updateOne(
-				{ operationID },
-				{
-					$set: {
-						completedAt,
-						deletedRecords,
-						status: "completed"
-					}
-				}
-			).exec();
-			if (
-				!receiptUpdate.acknowledged
-				|| receiptUpdate.matchedCount !== 1
-			) {
-				receiptStatus = "in-progress";
-			}
-		}
-		catch {
-			// The durable in-progress receipt still identifies this completed
-			// primary deletion for operator reconciliation.
-			receiptStatus = "in-progress";
-		}
-		console.info(
-			`student-record-delete completed operation=${operationID} oauthAttempts=${deletedRecords.oauthAttempts} projects=${deletedRecords.projects} reviews=${deletedRecords.reviews}`
-		);
 		return res.json({
 			deleted: true,
-			deletedRecords,
+			deletedRecords: result.deletedRecords,
 			operatorFollowUp: {
 				backupDeletionRequired: true,
 				instruction:
-						"Download and retain this short-lived receipt through the approved process. Use its subject ID and username to complete deletion from any retained classroom backups."
+					"Download and retain this short-lived receipt through the approved process. Use its subject ID and username to complete deletion from any retained classroom backups."
 			},
-			operation: deletionOperation(operationID, requestedAt),
+			operation: deletionOperation(result.operationID, result.requestedAt),
 			receipt: deletionReceiptRecord(
-				operationID,
+				result.operationID,
 				studentID,
 				existing.username,
-				receiptStatus,
-				requestedAt,
-				receiptExpiresAt,
-				{ completedAt, deletedRecords }
+				result.receiptStatus,
+				result.requestedAt,
+				result.receiptExpiresAt,
+				{
+					completedAt: result.completedAt,
+					deletedRecords:
+						result.receiptStatus === "completed"
+							? result.deletedRecords
+							: undefined,
+					reason: result.reason
+				}
 			)
 		});
 	}
 	catch {
-		if (receiptCreated && operationID) {
-			await StudentDataDeletionReceipt.updateOne(
-				{ operationID },
-				{ $set: { status: "needs-retry" } }
-			).exec().catch(() => undefined);
-		}
 		return res.status(503).json({
-			message: "Student record deletion did not finish. The account was disabled where possible; retry the action.",
-			...(operationID && requestedAt
-				? { operation: deletionOperation(operationID, requestedAt) }
-				: {})
+			message:
+				"Student record deletion did not finish. The account was disabled where possible; retry the action."
 		});
 	}
 };

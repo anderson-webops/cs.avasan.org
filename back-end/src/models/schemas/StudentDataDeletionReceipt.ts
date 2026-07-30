@@ -14,17 +14,22 @@ export type StudentDataDeletionStatus
 	= | "in-progress"
 		| "completed"
 		| "needs-retry";
+export type StudentDataDeletionReason = "julio-request" | "retention-expiry";
 
 export interface IStudentDataDeletionReceipt {
 	_id: mongoose.Types.ObjectId;
 	operationID: string;
 	studentID: mongoose.Types.ObjectId;
 	username: string;
+	reason?: StudentDataDeletionReason;
 	status: StudentDataDeletionStatus;
 	requestedAt: Date;
 	completedAt?: Date;
-	expiresAt: Date;
+	expiresAt?: Date;
+	recordInventory?: StudentDeletionCounts;
 	deletedRecords?: StudentDeletionCounts;
+	createdAt: Date;
+	updatedAt: Date;
 }
 
 const deletedRecordsSchema = new Schema<StudentDeletionCounts>(
@@ -61,6 +66,11 @@ const studentDataDeletionReceiptSchema
 				maxlength: 24,
 				match: /^[a-z][a-z0-9-]*$/
 			},
+			reason: {
+				type: String,
+				enum: ["julio-request", "retention-expiry"],
+				default: "julio-request"
+			},
 			status: {
 				type: String,
 				enum: ["in-progress", "completed", "needs-retry"],
@@ -76,7 +86,12 @@ const studentDataDeletionReceiptSchema
 			},
 			expiresAt: {
 				type: Date,
-				required: true
+				default: undefined
+			},
+			recordInventory: {
+				type: deletedRecordsSchema,
+				default: undefined,
+				select: false
 			},
 			deletedRecords: {
 				type: deletedRecordsSchema,
@@ -89,6 +104,22 @@ const studentDataDeletionReceiptSchema
 			versionKey: false
 		}
 	);
+
+studentDataDeletionReceiptSchema.pre("validate", function validateCompletionState() {
+	const completed = this.status === "completed";
+	if (completed && (!this.completedAt || !this.expiresAt || !this.deletedRecords)) {
+		this.invalidate(
+			"status",
+			"Completed deletion receipts require completion, expiry, and deleted-record metadata."
+		);
+	}
+	if (!completed && (this.completedAt || this.expiresAt || this.deletedRecords)) {
+		this.invalidate(
+			"status",
+			"Unfinished deletion receipts cannot carry completion or TTL metadata."
+		);
+	}
+});
 
 studentDataDeletionReceiptSchema.index(
 	{ expiresAt: 1 },

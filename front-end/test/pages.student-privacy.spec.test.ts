@@ -1,8 +1,12 @@
 import { mount } from "@vue/test-utils";
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import StudentPrivacyPage from "@/pages/student-privacy.vue";
 
 describe("student privacy page", () => {
+	afterEach(() => {
+		vi.unstubAllEnvs();
+	});
+
 	it("explains the classroom's minimal collection in plain language", () => {
 		const wrapper = mount(StudentPrivacyPage);
 		const text = wrapper.text();
@@ -11,7 +15,9 @@ describe("student privacy page", () => {
 		expect(text).toContain("anonymous daily totals");
 		expect(text).toContain("CS and Math sites");
 		expect(text).toContain("Graph Sketcher opening on the Math site");
-		expect(text).toContain("up to 90 days");
+		expect(text).toContain("logically expire");
+		expect(text).toContain("excluded from reports");
+		expect(text).toContain("physical removal may happen briefly later");
 		expect(text).toContain("up to five minutes");
 		expect(text).toContain("deleted when that five-minute window ends");
 		expect(text).toContain("not added to classroom analytics");
@@ -42,17 +48,40 @@ describe("student privacy page", () => {
 			"one-time code before creating a password or connecting"
 		);
 		expect(text).toContain("hash of that provider’s opaque account");
+		expect(text).toContain("does not request the student’s provider email");
 		expect(text).toContain(
-			"does not request or store the student’s provider email"
+			"may transiently receive a provider token response"
 		);
-		expect(text).toContain("provider access tokens");
+		expect(text).toContain("does not persist provider tokens");
+		expect(text).toContain(
+			"file names, source code or encoded project assets"
+		);
+		expect(text).toContain("separate review copy");
+		expect(text).toContain("failed-login counter");
+		expect(text).toContain("random password-setup request marker");
+		expect(text).toContain("tab’s session storage");
+		expect(text).toContain("ends with the tab session");
+		expect(text).toContain("PKCE verifier");
+		expect(text).toContain("expires after 10 minutes");
+		expect(text).toContain("signed, secure browser cookie");
+		expect(text).toContain("30 minutes without activity");
+		expect(text).toContain("after 8 hours");
 		expect(text).toContain(
 			"does not send the student’s classroom username"
 		);
-		expect(text).toContain("Julio can view saved projects");
+		expect(text).toContain("Julio can view those projects");
 		expect(text).toContain("short-lived deletion receipt");
 		expect(text).toContain("internal account ID");
-		expect(text).toContain("deletion counts for up to 90 days");
+		expect(text).toContain("excluded from Admin after 90 days");
+		expect(text).toContain("has no database-expiry deadline");
+		expect(text).toContain("After deletion completes");
+		expect(text).toContain("Accounts remain disabled");
+		expect(text).toContain("No default is assumed");
+		expect(text).toContain("deletion tombstone");
+		expect(text).toContain("Deleted-account write gate");
+		expect(text).toContain("process-lifetime tombstone");
+		expect(text).toContain("Anonymous classroom totals");
+		expect(text).toContain("Browser-local Graph and anonymous Python work");
 		expect(text).toContain("does not include a password");
 		expect(text).toContain("internal student account ID");
 		expect(text).toContain("up to 15 minutes");
@@ -61,10 +90,60 @@ describe("student privacy page", () => {
 		expect(text).toContain("cross-site tracking");
 		expect(text).toContain("session replay");
 		expect(text).toContain("keystroke tracking");
+		expect(text).toContain("are not public");
 		expect(text).toContain("access, correct, export, or delete");
+		expect(text).toContain("refuse further account collection or use");
+		expect(text).toContain(
+			"still use public courses, browser-local Python saves, and Graph Sketcher"
+		);
+		expect(text).toContain("identify every operator");
+		expect(text).toContain("name each approved infrastructure");
 		expect(text).toContain(
 			"school or district contact information provided with student access"
 		);
 		expect(text).not.toMatch(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i);
+	});
+
+	it("renders only the reviewed operator, provider, contact, and retention values", () => {
+		vi.stubEnv("VITE_CLASSROOM_PRIVACY_APPROVED", "true");
+		vi.stubEnv("VITE_STUDENT_ACCOUNTS_ENABLED", "true");
+		vi.stubEnv(
+			"VITE_CLASSROOM_PRIVACY_OPERATOR_NOTICE",
+			"Reviewed operator name, postal address, phone, and email"
+		);
+		vi.stubEnv(
+			"VITE_CLASSROOM_SERVICE_PROVIDER_NOTICE",
+			"Reviewed provider, purpose, and data categories"
+		);
+		vi.stubEnv(
+			"VITE_SCHOOL_PRIVACY_CONTACT",
+			"Reviewed school request channel"
+		);
+		vi.stubEnv("VITE_STUDENT_RECORD_RETENTION_DAYS", "90");
+
+		const text = mount(StudentPrivacyPage).text();
+
+		expect(text).toContain(
+			"Reviewed operator name, postal address, phone, and email"
+		);
+		expect(text).toContain(
+			"Reviewed provider, purpose, and data categories"
+		);
+		expect(text).toContain("Reviewed school request channel");
+		expect(text).toContain("90 days after Julio creates the account");
+		expect(text).toContain("Startup and hourly cleanup");
+		expect(text).toContain("receives one full 90-day period");
+		expect(text).toContain("does not delete a record immediately");
+		expect(text).not.toContain("No default is assumed");
+	});
+
+	it("does not describe account retention as active from a retention value alone", () => {
+		vi.stubEnv("VITE_STUDENT_RECORD_RETENTION_DAYS", "90");
+
+		const text = mount(StudentPrivacyPage).text();
+
+		expect(text).toContain("Accounts remain disabled");
+		expect(text).toContain("No default is assumed");
+		expect(text).not.toContain("The initial deadline is 90 days");
 	});
 });

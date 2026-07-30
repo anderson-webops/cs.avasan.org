@@ -156,7 +156,8 @@ async function withRuntime<T>(run: (baseUrl: string) => Promise<T>): Promise<T> 
 	mountRuntimeAccountRoutes(app, {
 		analyticsRetentionDays: 90,
 		studentAccountsEnabled: true,
-		studentOAuthEnabled: true
+		studentOAuthEnabled: true,
+		studentRecordRetentionDays: 90
 	});
 
 	const server = await new Promise<Server>(resolve => {

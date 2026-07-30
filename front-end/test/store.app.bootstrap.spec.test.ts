@@ -30,7 +30,16 @@ describe("app store bootstrapSession()", () => {
 			"VITE_SCHOOL_PRIVACY_CONTACT",
 			"School privacy office, 555-0100"
 		);
+		vi.stubEnv(
+			"VITE_CLASSROOM_PRIVACY_OPERATOR_NOTICE",
+			"Test operator contact"
+		);
+		vi.stubEnv(
+			"VITE_CLASSROOM_SERVICE_PROVIDER_NOTICE",
+			"Test approved provider notice"
+		);
 		vi.stubEnv("VITE_STUDENT_ACCOUNTS_ENABLED", "true");
+		vi.stubEnv("VITE_STUDENT_RECORD_RETENTION_DAYS", "90");
 		setActivePinia(createPinia());
 		vi.clearAllMocks();
 	});
