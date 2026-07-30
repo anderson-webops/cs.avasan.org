@@ -1,2 +1,7 @@
-node_modules
-dist
+.git
+**/.env
+**/.env.*
+**/dist
+**/node_modules
+deploy/cs.env
+npm-debug.log*

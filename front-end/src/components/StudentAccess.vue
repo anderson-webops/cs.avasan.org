@@ -12,6 +12,7 @@ import {
 	ref,
 	watch
 } from "vue";
+import { studentOAuthIsEnabled } from "@/modules/classroomFeatures";
 import {
 	fetchStudentSession,
 	refreshStudentSessionActivity,
@@ -93,6 +94,7 @@ const hasOAuthProviders = computed(
 );
 
 async function loadOAuthProviders() {
+	if (!studentOAuthIsEnabled()) return;
 	if (oauthProvidersLoaded.value) return;
 	oauthProvidersLoaded.value = true;
 	try {

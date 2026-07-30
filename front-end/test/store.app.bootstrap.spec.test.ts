@@ -1,6 +1,6 @@
 // test/store.app.bootstrap.spec.test.ts
 import { createPinia, setActivePinia } from "pinia";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { broadcastStudentSessionEnded } from "@/modules/studentSessionBroadcast";
 import { useAppStore } from "../src/stores/app";
 import * as apiMod from "../src/api";
@@ -25,8 +25,18 @@ vi.mock("@/modules/studentSessionBroadcast", () => ({
 
 describe("app store bootstrapSession()", () => {
 	beforeEach(() => {
+		vi.stubEnv("VITE_CLASSROOM_PRIVACY_APPROVED", "true");
+		vi.stubEnv(
+			"VITE_SCHOOL_PRIVACY_CONTACT",
+			"School privacy office, 555-0100"
+		);
+		vi.stubEnv("VITE_STUDENT_ACCOUNTS_ENABLED", "true");
 		setActivePinia(createPinia());
 		vi.clearAllMocks();
+	});
+
+	afterEach(() => {
+		vi.unstubAllEnvs();
 	});
 
 	it("hydrates Julio's teacher account through the admin session", async () => {

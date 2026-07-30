@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { createPinia, setActivePinia } from "pinia";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import TheHeader from "@/components/TheHeader.vue";
 import { useAppStore } from "@/stores/app";
 
@@ -10,7 +10,17 @@ vi.mock("vue-router", () => ({
 
 describe("TheHeader.vue", () => {
 	beforeEach(() => {
+		vi.stubEnv("VITE_CLASSROOM_PRIVACY_APPROVED", "true");
+		vi.stubEnv(
+			"VITE_SCHOOL_PRIVACY_CONTACT",
+			"School privacy office, 555-0100"
+		);
+		vi.stubEnv("VITE_STUDENT_ACCOUNTS_ENABLED", "true");
 		setActivePinia(createPinia());
+	});
+
+	afterEach(() => {
+		vi.unstubAllEnvs();
 	});
 
 	function mountHeader(pinia = createPinia()) {

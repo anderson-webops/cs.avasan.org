@@ -211,6 +211,53 @@ function createMockApiServer() {
 			);
 			return;
 		}
+		if (url.pathname === "/admins/classroom-analytics/summary") {
+			const siteActivity = {
+				totals: {
+					courseOpens: 0,
+					graphOpens: 0,
+					ideOpens: 0
+				},
+				daily: [
+					{
+						date: "2026-07-29",
+						courseOpens: 0,
+						graphOpens: 0,
+						ideOpens: 0
+					}
+				],
+				courses: []
+			};
+			sendJson(
+				res,
+				activeRole === "teacher"
+					? {
+							generatedAt: "2026-07-29T12:00:00.000Z",
+							period: {
+								days: 30,
+								startDate: "2026-06-30",
+								endDate: "2026-07-29"
+							},
+							retentionDays: 90,
+							siteActivity: {
+								cs: structuredClone(siteActivity),
+								math: structuredClone(siteActivity)
+							},
+							studentWork: {
+								recentWindowDays: 7,
+								activeAccounts: 0,
+								accountsWithRecentSignIn: 0,
+								studentsWithProjects: 0,
+								studentsWithRecentProjectUpdates: 0,
+								activeProjects: 0,
+								recentlyUpdatedProjects: 0
+							}
+						}
+					: {},
+				activeRole === "teacher" ? 200 : 403
+			);
+			return;
+		}
 		if (url.pathname === "/quotes") {
 			sendJson(res, []);
 			return;
@@ -263,7 +310,18 @@ function startVite() {
 			env: {
 				...process.env,
 				BROWSER: "none",
-				VITE_API_PROXY_TARGET: `http://127.0.0.1:${apiPort}`
+				VITE_API_PROXY_TARGET: `http://127.0.0.1:${apiPort}`,
+				VITE_CLASSROOM_PRIVACY_APPROVED:
+					process.env.VITE_CLASSROOM_PRIVACY_APPROVED ?? "true",
+				VITE_SCHOOL_PRIVACY_CONTACT:
+					process.env.VITE_SCHOOL_PRIVACY_CONTACT
+					?? "Julio via the school office",
+				VITE_STUDENT_ACCOUNTS_ENABLED:
+					process.env.VITE_STUDENT_ACCOUNTS_ENABLED ?? "true",
+				VITE_STUDENT_OAUTH_ENABLED:
+					process.env.VITE_STUDENT_OAUTH_ENABLED ?? "true",
+				VITE_CLASSROOM_USAGE_ENABLED:
+					process.env.VITE_CLASSROOM_USAGE_ENABLED ?? "false"
 			},
 			stdio: ["ignore", "pipe", "pipe"]
 		}

@@ -19,8 +19,7 @@ describe("student external sign-in model", () => {
 		).rejects.toMatchObject({
 			errors: {
 				externalAuthProvider: {
-					message:
-						"External sign-in provider and subject hash must be stored together."
+					message: "External sign-in provider and subject hash must be stored together."
 				}
 			}
 		});
@@ -34,12 +33,8 @@ describe("student external sign-in model", () => {
 	});
 
 	it("keeps the provider binding private and unique across students", () => {
-		expect(
-			Student.schema.path("externalAuthProvider").options.select
-		).toBe(false);
-		expect(
-			Student.schema.path("externalAuthSubjectHash").options.select
-		).toBe(false);
+		expect(Student.schema.path("externalAuthProvider").options.select).toBe(false);
+		expect(Student.schema.path("externalAuthSubjectHash").options.select).toBe(false);
 		expect(Student.schema.indexes()).toContainEqual([
 			{
 				externalAuthProvider: 1,
@@ -57,10 +52,13 @@ describe("student external sign-in model", () => {
 
 	it("never serializes the provider or subject hash", () => {
 		const serialized = studentDocument({
+			dataDeletionPendingAt: new Date("2026-07-29T12:00:00.000Z"),
 			externalAuthProvider: "google",
 			externalAuthSubjectHash: "b".repeat(64)
 		}).toJSON();
 
+		expect(Student.schema.path("dataDeletionPendingAt").options.select).toBe(false);
+		expect(serialized).not.toHaveProperty("dataDeletionPendingAt");
 		expect(serialized).not.toHaveProperty("externalAuthProvider");
 		expect(serialized).not.toHaveProperty("externalAuthSubjectHash");
 	});

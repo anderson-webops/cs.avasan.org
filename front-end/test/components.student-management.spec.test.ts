@@ -4,6 +4,9 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import StudentManagement from "@/components/StudentManagement.vue";
 import {
 	createAdminStudent,
+	deleteAdminStudentRecords,
+	exportAdminStudentRecords,
+	fetchAdminStudentDeletionReceipts,
 	fetchAdminStudents,
 	resetAdminStudentAccess,
 	setAdminStudentActive
@@ -12,6 +15,9 @@ import { useAppStore } from "@/stores/app";
 
 vi.mock("@/modules/studentAccounts", () => ({
 	createAdminStudent: vi.fn(),
+	deleteAdminStudentRecords: vi.fn(),
+	exportAdminStudentRecords: vi.fn(),
+	fetchAdminStudentDeletionReceipts: vi.fn(),
 	fetchAdminStudents: vi.fn(),
 	resetAdminStudentAccess: vi.fn(),
 	setAdminStudentActive: vi.fn()
@@ -22,12 +28,33 @@ const student = {
 	username: "maria-7",
 	active: true
 };
+const deletionReceipt = {
+	operationID: "01234567-89ab-4cde-8fab-0123456789ab",
+	status: "completed" as const,
+	subject: {
+		studentID: "student-1",
+		username: "maria-7"
+	},
+	requestedAt: "2026-07-29T12:00:00.000Z",
+	completedAt: "2026-07-29T12:00:01.000Z",
+	expiresAt: "2026-10-27T12:00:00.000Z",
+	deletedRecords: {
+		oauthAttempts: 1,
+		projects: 2,
+		reviews: 1,
+		students: 1
+	}
+};
 
 describe("StudentManagement", () => {
 	beforeEach(() => {
 		setActivePinia(createPinia());
 		vi.clearAllMocks();
 		vi.mocked(fetchAdminStudents).mockResolvedValue([]);
+		vi.mocked(fetchAdminStudentDeletionReceipts).mockResolvedValue({
+			receipts: [],
+			retentionDays: 90
+		});
 	});
 
 	function mountManagement() {
@@ -51,6 +78,16 @@ describe("StudentManagement", () => {
 		});
 		const wrapper = mountManagement();
 		await flushPromises();
+
+		expect(wrapper.text()).toContain(
+			"Use a school-approved alias such as river-7"
+		);
+		expect(wrapper.text()).toContain(
+			"Do not use a full name, email, birthdate, student number"
+		);
+		expect(
+			wrapper.get("#new-student-username").attributes("aria-describedby")
+		).toBe("new-student-username-hint");
 
 		await wrapper.get("#new-student-username").setValue("Maria-7");
 		await wrapper.get("form").trigger("submit.prevent");
@@ -120,7 +157,7 @@ describe("StudentManagement", () => {
 		).toBe(false);
 	});
 
-	it("disables and re-enables students without offering deletion", async () => {
+	it("disables and re-enables students", async () => {
 		vi.mocked(fetchAdminStudents).mockResolvedValueOnce([student]);
 		vi.mocked(setAdminStudentActive).mockResolvedValueOnce({
 			...student,
@@ -138,10 +175,136 @@ describe("StudentManagement", () => {
 		expect(setAdminStudentActive).toHaveBeenCalledWith(student._id, false);
 		expect(wrapper.text()).toContain("Disabled");
 		expect(wrapper.text()).toContain("Enable");
-		expect(wrapper.text()).not.toMatch(/Delete|Remove/);
 		expect(wrapper.get('[data-testid="project-review"]').text()).toBe(
 			"maria-7"
 		);
+	});
+
+	it("exports a complete record after Julio re-verifies", async () => {
+		vi.mocked(fetchAdminStudents).mockResolvedValueOnce([student]);
+		vi.mocked(exportAdminStudentRecords).mockResolvedValueOnce({
+			blob: new Blob(["streamed export"], {
+				type: "application/json"
+			})
+		});
+		vi.stubGlobal("URL", {
+			...URL,
+			createObjectURL: vi.fn(() => "blob:student-export"),
+			revokeObjectURL: vi.fn()
+		});
+		const click = vi
+			.spyOn(HTMLAnchorElement.prototype, "click")
+			.mockImplementation(() => undefined);
+		const wrapper = mountManagement();
+		await flushPromises();
+
+		await wrapper
+			.findAll("button")
+			.find(button => button.text() === "Export records")
+			?.trigger("click");
+		await wrapper
+			.get(`#export-teacher-password-${student._id}`)
+			.setValue("julio-password");
+		await wrapper
+			.findAll("form")
+			.find(form => form.text().includes("Download JSON"))
+			?.trigger("submit.prevent");
+		await flushPromises();
+
+		expect(exportAdminStudentRecords).toHaveBeenCalledWith(
+			student._id,
+			"julio-password"
+		);
+		expect(click).toHaveBeenCalledOnce();
+		expect(wrapper.text()).toContain("Exported maria-7.");
+		expect(URL.createObjectURL).toHaveBeenCalledWith(expect.any(Blob));
+		vi.unstubAllGlobals();
+	});
+
+	it("requires username confirmation before permanent deletion", async () => {
+		vi.mocked(fetchAdminStudents).mockResolvedValueOnce([student]);
+		vi.mocked(deleteAdminStudentRecords).mockResolvedValueOnce({
+			deleted: true,
+			deletedRecords: {
+				oauthAttempts: 1,
+				projects: 2,
+				reviews: 1,
+				students: 1
+			},
+			operation: {
+				id: "delete-operation",
+				kind: "student-record-delete",
+				performedAt: "2026-07-29T12:00:00.000Z",
+				performedBy: "Julio"
+			},
+			operatorFollowUp: {
+				backupDeletionRequired: true,
+				instruction: "Complete backup deletion."
+			},
+			receipt: deletionReceipt
+		});
+		vi.stubGlobal("URL", {
+			...URL,
+			createObjectURL: vi.fn(() => "blob:deletion-receipt"),
+			revokeObjectURL: vi.fn()
+		});
+		const click = vi
+			.spyOn(HTMLAnchorElement.prototype, "click")
+			.mockImplementation(() => undefined);
+		const wrapper = mountManagement();
+		await flushPromises();
+
+		await wrapper
+			.findAll("button")
+			.find(button => button.text() === "Delete records")
+			?.trigger("click");
+		const deleteButton = wrapper
+			.findAll("button")
+			.find(button => button.text() === "Permanently delete");
+		expect(deleteButton?.attributes("disabled")).toBeDefined();
+
+		await wrapper
+			.get(`#delete-confirmation-${student._id}`)
+			.setValue(student.username);
+		await wrapper
+			.get(`#delete-teacher-password-${student._id}`)
+			.setValue("julio-password");
+		await wrapper
+			.findAll("form")
+			.find(form => form.text().includes("Permanently delete"))
+			?.trigger("submit.prevent");
+		await flushPromises();
+
+		expect(deleteAdminStudentRecords).toHaveBeenCalledWith(
+			student._id,
+			student.username,
+			"julio-password"
+		);
+		expect(wrapper.findAll(".student-management__student")).toHaveLength(0);
+		expect(wrapper.text()).toContain("Operation delete-operation");
+		expect(wrapper.text()).toContain("Recent deletion receipts");
+		expect(wrapper.text()).toContain(deletionReceipt.operationID);
+		expect(click).toHaveBeenCalledOnce();
+		vi.unstubAllGlobals();
+	});
+
+	it("keeps recent subject-linked deletion receipts available to Julio", async () => {
+		vi.mocked(fetchAdminStudentDeletionReceipts).mockResolvedValueOnce({
+			receipts: [deletionReceipt],
+			retentionDays: 90
+		});
+		const wrapper = mountManagement();
+		await flushPromises();
+
+		expect(wrapper.text()).toContain("Recent deletion receipts");
+		expect(wrapper.text()).toContain("available for up to 90 days");
+		expect(wrapper.text()).toContain("maria-7");
+		expect(wrapper.text()).toContain(deletionReceipt.operationID);
+		expect(
+			wrapper
+				.findAll("button")
+				.some(button => button.text() === "Download receipt")
+		).toBe(true);
 	});
 
 	it("shows which credentials need Julio's attention", async () => {
@@ -246,6 +409,10 @@ describe("StudentManagement", () => {
 			student,
 			accessCode: "CODE-ONLY-ONCE"
 		});
+		vi.mocked(fetchAdminStudentDeletionReceipts).mockResolvedValueOnce({
+			receipts: [deletionReceipt],
+			retentionDays: 90
+		});
 		vi.mocked(setAdminStudentActive).mockRejectedValueOnce({
 			response: {
 				status: 403,
@@ -261,6 +428,7 @@ describe("StudentManagement", () => {
 		await wrapper.get("form").trigger("submit.prevent");
 		await flushPromises();
 		expect(wrapper.text()).toContain("CODE-ONLY-ONCE");
+		expect(wrapper.text()).toContain(deletionReceipt.operationID);
 
 		await wrapper
 			.findAll("button")
@@ -271,5 +439,6 @@ describe("StudentManagement", () => {
 		expect(app.currentAdmin).toBeNull();
 		expect(wrapper.text()).not.toContain("CODE-ONLY-ONCE");
 		expect(wrapper.text()).not.toContain("maria-7");
+		expect(wrapper.text()).not.toContain(deletionReceipt.operationID);
 	});
 });

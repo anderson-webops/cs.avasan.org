@@ -98,6 +98,11 @@ const studentSchema = new Schema<IStudent>(
 			default: undefined,
 			maxlength: 128,
 			select: false
+		},
+		dataDeletionPendingAt: {
+			type: Date,
+			default: undefined,
+			select: false
 		}
 	},
 	{ timestamps: true }
@@ -138,6 +143,7 @@ studentSchema.set("toJSON", {
 		delete clean.failedLoginAttempts;
 		delete clean.lockedUntil;
 		delete clean.lastPasswordSetupRequestID;
+		delete clean.dataDeletionPendingAt;
 		delete clean.activeProjectCount;
 		delete clean.activeProjectBytes;
 		return returned;

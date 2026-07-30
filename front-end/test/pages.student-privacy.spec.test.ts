@@ -13,18 +13,30 @@ describe("student privacy page", () => {
 		expect(text).toContain("Graph Sketcher opening on the Math site");
 		expect(text).toContain("up to 90 days");
 		expect(text).toContain("up to five minutes");
+		expect(text).toContain("deleted when that five-minute window ends");
 		expect(text).toContain("not added to classroom analytics");
 		expect(text).toContain("fixed course ID");
 		expect(text).toContain("Do Not Track");
 		expect(text).toContain("Global Privacy Control");
+		expect(text).toContain("marks a count as attempted before sending");
+		expect(text).toContain("does not retry after an error");
+		expect(text).toContain("prevents an uncertain response");
 		expect(text).toContain("Graph work saved in browser tabs");
 		expect(text).toContain("when a tab is duplicated");
 		expect(text).toContain("every open or duplicated Graph Sketcher tab");
 		expect(text).toContain("Clear for next student");
+		expect(text).toContain("Python work saved in a shared browser");
+		expect(text).toContain("Clear browser projects for next student");
+		expect(text).toContain("opens a blank workspace");
+		expect(text).toContain(
+			"Projects already saved to a signed-in account are not deleted"
+		);
 		expect(text).toContain(
 			"not sent to the classroom server, student accounts, or analytics"
 		);
 		expect(text).toContain("username and no email");
+		expect(text).toContain("school-approved alias");
+		expect(text).toContain("roster mapping stays");
 		expect(text).toContain(
 			"one-time code before creating a password or connecting"
 		);
@@ -37,6 +49,13 @@ describe("student privacy page", () => {
 			"does not send the student’s classroom username"
 		);
 		expect(text).toContain("Julio can view saved projects");
+		expect(text).toContain("short-lived deletion receipt");
+		expect(text).toContain("internal account ID");
+		expect(text).toContain("deletion counts for up to 90 days");
+		expect(text).toContain("does not include a password");
+		expect(text).toContain("internal student account ID");
+		expect(text).toContain("up to 15 minutes");
+		expect(text).toContain("not added to analytics or the student record");
 		expect(text).toContain("There are no ads");
 		expect(text).toContain("cross-site tracking");
 		expect(text).toContain("session replay");

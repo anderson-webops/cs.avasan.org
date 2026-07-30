@@ -7,6 +7,7 @@ const modelMocks = vi.hoisted(() => ({
 	projectCountDocuments: vi.fn(),
 	studentCountDocuments: vi.fn(),
 	usageFind: vi.fn(),
+	usageUpdateMany: vi.fn(),
 	usageUpdateOne: vi.fn()
 }));
 
@@ -28,6 +29,7 @@ function usageFindQuery<T>(result: T) {
 vi.mock("../src/models/schemas/ClassroomUsageDaily.js", () => ({
 	ClassroomUsageDaily: {
 		find: modelMocks.usageFind,
+		updateMany: modelMocks.usageUpdateMany,
 		updateOne: modelMocks.usageUpdateOne
 	}
 }));
@@ -45,14 +47,13 @@ vi.mock("../src/models/schemas/PythonProject.js", () => ({
 	}
 }));
 
+const { enforceClassroomAnalyticsRetention, getClassroomAnalyticsSummary } =
+	await import("../src/controllers/classroomAnalyticsController.js");
 const { mountClassroomAnalyticsRoutes } = await import("../src/routes/classroomAnalyticsRoutes.js");
-
-const serviceKey = "a".repeat(32);
 
 interface RuntimeOptions {
 	collectionEnabled?: boolean;
 	retentionDays?: number;
-	serviceKey?: string;
 }
 
 async function withRuntime<T>(options: RuntimeOptions, run: (baseUrl: string) => Promise<T>): Promise<T> {
@@ -61,9 +62,11 @@ async function withRuntime<T>(options: RuntimeOptions, run: (baseUrl: string) =>
 	app.use(express.json());
 	mountClassroomAnalyticsRoutes(app, {
 		collectionEnabled: options.collectionEnabled ?? true,
-		retentionDays: options.retentionDays ?? 90,
-		serviceKey: options.serviceKey
+		retentionDays: options.retentionDays ?? 90
 	});
+	// Controller harness; production exposes this handler only inside the
+	// validAdmin-protected /admins router.
+	app.get("/test-admin-summary", getClassroomAnalyticsSummary(options.retentionDays ?? 90));
 
 	const server = await new Promise<Server>(resolve => {
 		const instance = app.listen(0, "127.0.0.1", () => resolve(instance));
@@ -104,6 +107,7 @@ describe("privacy-preserving classroom analytics routes", () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
 		modelMocks.usageUpdateOne.mockReturnValue(resultQuery({ modifiedCount: 1 }));
+		modelMocks.usageUpdateMany.mockReturnValue(resultQuery({ modifiedCount: 1 }));
 		modelMocks.usageFind.mockReturnValue(usageFindQuery([]));
 		modelMocks.studentCountDocuments.mockImplementation(filter => resultQuery("lastLoginAt" in filter ? 3 : 12));
 		modelMocks.projectCountDocuments.mockImplementation(filter => resultQuery("updatedAt" in filter ? 4 : 20));
@@ -114,7 +118,7 @@ describe("privacy-preserving classroom analytics routes", () => {
 	});
 
 	it("accepts only constrained anonymous events and stores no request identity", async () => {
-		await withRuntime({ serviceKey }, async baseUrl => {
+		await withRuntime({}, async baseUrl => {
 			const extra = await postUsage(baseUrl, {
 				siteID: "cs",
 				event: "course-open",
@@ -141,13 +145,17 @@ describe("privacy-preserving classroom analytics routes", () => {
 			});
 			expect(missingSite.status).toBe(400);
 
-			const crossSiteCourse = await postUsage(baseUrl, {
-				siteID: "math",
-				event: "course-open",
-				courseId: "python-level-1"
-			}, {
-				Origin: "https://math.avasan.org"
-			});
+			const crossSiteCourse = await postUsage(
+				baseUrl,
+				{
+					siteID: "math",
+					event: "course-open",
+					courseId: "python-level-1"
+				},
+				{
+					Origin: "https://math.avasan.org"
+				}
+			);
 			expect(crossSiteCourse.status).toBe(400);
 
 			const response = await postUsage(
@@ -169,10 +177,7 @@ describe("privacy-preserving classroom analytics routes", () => {
 		expect(modelMocks.usageUpdateOne).toHaveBeenCalledTimes(1);
 		const [filter, update, options] = modelMocks.usageUpdateOne.mock.calls[0];
 		expect(filter).toMatchObject({
-			$or: [
-				{ siteID: "cs" },
-				{ siteID: { $exists: false } }
-			],
+			$or: [{ siteID: "cs" }, { siteID: { $exists: false } }],
 			courseID: "python-level-1",
 			event: "course-open"
 		});
@@ -180,10 +185,12 @@ describe("privacy-preserving classroom analytics routes", () => {
 		expect(filter.day.toISOString()).toMatch(/T00:00:00\.000Z$/);
 		expect(update).toMatchObject({
 			$inc: { count: 1 },
+			$set: {
+				expiresAt: expect.any(Date)
+			},
 			$setOnInsert: {
 				courseID: "python-level-1",
 				event: "course-open",
-				expiresAt: expect.any(Date),
 				siteID: "cs"
 			}
 		});
@@ -197,8 +204,48 @@ describe("privacy-preserving classroom analytics routes", () => {
 		);
 	});
 
+	it("caps existing rows when retention is shortened", async () => {
+		await enforceClassroomAnalyticsRetention(30);
+
+		expect(modelMocks.usageUpdateMany).toHaveBeenCalledWith(
+			{
+				$or: [
+					{ expiresAt: { $exists: false } },
+					{
+						$expr: {
+							$gt: [
+								"$expiresAt",
+								{
+									$dateAdd: {
+										amount: 30,
+										startDate: "$day",
+										unit: "day"
+									}
+								}
+							]
+						}
+					}
+				]
+			},
+			[
+				{
+					$set: {
+						expiresAt: {
+							$dateAdd: {
+								amount: 30,
+								startDate: "$day",
+								unit: "day"
+							}
+						}
+					}
+				}
+			],
+			{ updatePipeline: true }
+		);
+	});
+
 	it("requires the same-origin classroom guard before accepting events", async () => {
-		await withRuntime({ serviceKey }, async baseUrl => {
+		await withRuntime({}, async baseUrl => {
 			const missingHeader = await fetch(`${baseUrl}/classroom-usage`, {
 				body: JSON.stringify({ siteID: "cs", event: "ide-open" }),
 				headers: { "content-type": "application/json" },
@@ -225,11 +272,8 @@ describe("privacy-preserving classroom analytics routes", () => {
 	});
 
 	it("accepts Math only through its credential-free fixed-origin proxy", async () => {
-		await withRuntime({ serviceKey }, async baseUrl => {
-			const missingOrigin = await postUsage(
-				baseUrl,
-				{ siteID: "math", event: "graph-open" }
-			);
+		await withRuntime({}, async baseUrl => {
+			const missingOrigin = await postUsage(baseUrl, { siteID: "math", event: "graph-open" });
 			expect(missingOrigin.status).toBe(403);
 
 			const mismatchedSite = await postUsage(
@@ -270,7 +314,7 @@ describe("privacy-preserving classroom analytics routes", () => {
 	});
 
 	it("fails closed until anonymous collection is explicitly enabled", async () => {
-		await withRuntime({ collectionEnabled: false, serviceKey }, async baseUrl => {
+		await withRuntime({ collectionEnabled: false }, async baseUrl => {
 			const response = await postUsage(baseUrl, {
 				siteID: "cs",
 				event: "course-open",
@@ -282,26 +326,10 @@ describe("privacy-preserving classroom analytics routes", () => {
 		expect(modelMocks.usageUpdateOne).not.toHaveBeenCalled();
 	});
 
-	it("authenticates the coarse summary with the dedicated service key", async () => {
+	it("does not expose the retired service-key summary route", async () => {
 		await withRuntime({}, async baseUrl => {
-			const disabled = await fetch(`${baseUrl}/classroom-analytics/summary`);
-			expect(disabled.status).toBe(503);
-			expect(disabled.headers.get("cache-control")).toBe("no-store");
-		});
-
-		await withRuntime({ serviceKey }, async baseUrl => {
-			const missing = await fetch(`${baseUrl}/classroom-analytics/summary`);
-			expect(missing.status).toBe(401);
-
-			const wrong = await fetch(`${baseUrl}/classroom-analytics/summary`, {
-				headers: { "X-Classroom-Analytics-Key": "b".repeat(32) }
-			});
-			expect(wrong.status).toBe(401);
-
-			const allowed = await fetch(`${baseUrl}/classroom-analytics/summary`, {
-				headers: { "X-Classroom-Analytics-Key": serviceKey }
-			});
-			expect(allowed.status).toBe(200);
+			const response = await fetch(`${baseUrl}/classroom-analytics/summary`);
+			expect(response.status).toBe(404);
 		});
 	});
 
@@ -339,10 +367,8 @@ describe("privacy-preserving classroom analytics routes", () => {
 			])
 		);
 
-		await withRuntime({ retentionDays: 45, serviceKey }, async baseUrl => {
-			const response = await fetch(`${baseUrl}/classroom-analytics/summary?days=7`, {
-				headers: { "X-Classroom-Analytics-Key": serviceKey }
-			});
+		await withRuntime({ retentionDays: 45 }, async baseUrl => {
+			const response = await fetch(`${baseUrl}/test-admin-summary?days=7`);
 			const body = await response.json();
 
 			expect(response.status).toBe(200);
@@ -354,27 +380,27 @@ describe("privacy-preserving classroom analytics routes", () => {
 					startDate: expect.any(String),
 					endDate: expect.any(String)
 				},
-					retentionDays: 45,
-					siteActivity: {
-						cs: {
-							totals: {
-								courseOpens: 5,
-								ideOpens: 2,
-								graphOpens: 0
-							}
-						},
-						math: {
-							totals: {
-								courseOpens: 7,
-								ideOpens: 0,
-								graphOpens: 4
-							}
+				retentionDays: 45,
+				siteActivity: {
+					cs: {
+						totals: {
+							courseOpens: 5,
+							ideOpens: 2,
+							graphOpens: 0
 						}
 					},
+					math: {
+						totals: {
+							courseOpens: 7,
+							ideOpens: 0,
+							graphOpens: 4
+						}
+					}
+				},
 				studentWork: {
 					recentWindowDays: 7,
 					activeAccounts: 12,
-					recentSignIns: 3,
+					accountsWithRecentSignIn: 3,
 					studentsWithProjects: 2,
 					studentsWithRecentProjectUpdates: 1,
 					activeProjects: 20,
@@ -383,12 +409,8 @@ describe("privacy-preserving classroom analytics routes", () => {
 			});
 			expect(body.siteActivity.cs.daily).toHaveLength(7);
 			expect(body.siteActivity.math.daily).toHaveLength(7);
-			expect(body.siteActivity.cs.daily.every(
-				(row: { graphOpens: number }) => row.graphOpens === 0
-			)).toBe(true);
-			expect(body.siteActivity.math.daily.every(
-				(row: { ideOpens: number }) => row.ideOpens === 0
-			)).toBe(true);
+			expect(body.siteActivity.cs.daily.every((row: { graphOpens: number }) => row.graphOpens === 0)).toBe(true);
+			expect(body.siteActivity.math.daily.every((row: { ideOpens: number }) => row.ideOpens === 0)).toBe(true);
 			expect(body.siteActivity.cs.courses).toEqual([
 				{ courseId: "scratch-level-1", label: "Scratch Level 1", opens: 0 },
 				{ courseId: "scratch-level-2", label: "Scratch Level 2", opens: 0 },
@@ -408,9 +430,7 @@ describe("privacy-preserving classroom analytics routes", () => {
 					opens: 0
 				}
 			]);
-			expect(body.siteActivity.math.courses.map(
-				(course: { courseId: string }) => course.courseId
-			)).toEqual([
+			expect(body.siteActivity.math.courses.map((course: { courseId: string }) => course.courseId)).toEqual([
 				"early-elementary-a-math",
 				"early-elementary-b-math",
 				"late-elementary-a-math",
@@ -427,13 +447,14 @@ describe("privacy-preserving classroom analytics routes", () => {
 				"pre-calculus-b",
 				"ap-calculus"
 			]);
-			expect(body.siteActivity.math.courses.find(
-				(course: { courseId: string }) => course.courseId === "algebra-1a"
-			)?.opens).toBe(7);
+			expect(
+				body.siteActivity.math.courses.find((course: { courseId: string }) => course.courseId === "algebra-1a")
+					?.opens
+			).toBe(7);
 			expect(Object.keys(body.studentWork).sort()).toEqual([
+				"accountsWithRecentSignIn",
 				"activeAccounts",
 				"activeProjects",
-				"recentSignIns",
 				"recentWindowDays",
 				"recentlyUpdatedProjects",
 				"studentsWithProjects",
@@ -442,15 +463,20 @@ describe("privacy-preserving classroom analytics routes", () => {
 			expect(JSON.stringify(body)).not.toMatch(
 				/username|studentID|projectID|projectName|source|files|password|accessCode/i
 			);
+			expect(modelMocks.usageFind).toHaveBeenCalledWith({
+				day: {
+					$gte: expect.any(Date),
+					$lte: expect.any(Date)
+				},
+				expiresAt: { $gt: expect.any(Date) }
+			});
 		});
 	});
 
 	it("bounds summary queries to 7 through 90 days", async () => {
-		await withRuntime({ serviceKey }, async baseUrl => {
+		await withRuntime({}, async baseUrl => {
 			for (const days of ["6", "91", "7.5", "thirty"]) {
-				const response = await fetch(`${baseUrl}/classroom-analytics/summary?days=${days}`, {
-					headers: { "X-Classroom-Analytics-Key": serviceKey }
-				});
+				const response = await fetch(`${baseUrl}/test-admin-summary?days=${days}`);
 				expect(response.status).toBe(400);
 			}
 		});

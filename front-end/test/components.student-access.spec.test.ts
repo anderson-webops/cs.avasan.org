@@ -1,6 +1,6 @@
 import { flushPromises, mount } from "@vue/test-utils";
 import { createPinia, setActivePinia } from "pinia";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import StudentAccess from "@/components/StudentAccess.vue";
 import {
 	fetchStudentSession,
@@ -81,6 +81,13 @@ const student = {
 
 describe("StudentAccess", () => {
 	beforeEach(() => {
+		vi.stubEnv("VITE_CLASSROOM_PRIVACY_APPROVED", "true");
+		vi.stubEnv(
+			"VITE_SCHOOL_PRIVACY_CONTACT",
+			"School privacy office, 555-0100"
+		);
+		vi.stubEnv("VITE_STUDENT_ACCOUNTS_ENABLED", "true");
+		vi.stubEnv("VITE_STUDENT_OAUTH_ENABLED", "true");
 		setActivePinia(createPinia());
 		vi.clearAllMocks();
 		window.sessionStorage.clear();
@@ -93,6 +100,10 @@ describe("StudentAccess", () => {
 			configurable: true,
 			value: "visible"
 		});
+	});
+
+	afterEach(() => {
+		vi.unstubAllEnvs();
 	});
 
 	function mountAccess() {

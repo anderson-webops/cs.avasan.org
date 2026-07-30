@@ -1,12 +1,18 @@
 // src/routes/adminRoutes.ts
 
 import express from "express";
+import { getClassroomAnalyticsSummary } from "../controllers/classroomAnalyticsController.js";
 import {
 	createStudent,
 	listStudents,
 	resetStudentAccessCode,
 	setStudentActive
 } from "../controllers/students/studentController.js";
+import {
+	deleteStudentData,
+	exportStudentData,
+	listStudentDeletionReceipts
+} from "../controllers/students/studentDataController.js";
 import { getLoggedInAdmin } from "../controllers/users/adminController.js";
 import {
 	createPythonProjectReview,
@@ -14,49 +20,73 @@ import {
 	updatePythonProjectReview
 } from "../controllers/users/pythonProjectController.js";
 import { validAdmin } from "../middleware/auth.js";
-import {
-	createStudentProjectWriteLimiter,
-	createTeacherVerificationLimiter
-} from "../middleware/rateLimiters.js";
+import { createStudentProjectWriteLimiter, createTeacherVerificationLimiter } from "../middleware/rateLimiters.js";
+import { requireStudentDataWriteLease } from "../security/studentDataWriteBarrier.js";
 
-const router = express.Router();
-const teacherVerificationLimiter = createTeacherVerificationLimiter();
-const teacherProjectWriteLimiter = createStudentProjectWriteLimiter();
+export interface AdminRouteOptions {
+	analyticsRetentionDays: number;
+	studentAccountsEnabled: boolean;
+}
 
-// There is no HTTP account creation, directory, or deletion surface. The sole
-// teacher account is provisioned with create-admin-user.ts.
-router.get("/loggedin", validAdmin, getLoggedInAdmin);
+export function createAdminRoutes(options: AdminRouteOptions) {
+	const configuredRouter = express.Router();
+	const teacherVerificationLimiter = createTeacherVerificationLimiter();
+	const teacherProjectWriteLimiter = createStudentProjectWriteLimiter();
 
-router.get("/students", validAdmin, listStudents);
-router.post(
-	"/students",
-	validAdmin,
-	teacherVerificationLimiter,
-	createStudent
-);
-router.patch("/students/:studentID", validAdmin, setStudentActive);
-router.post(
-	"/students/:studentID/access-code",
-	validAdmin,
-	teacherVerificationLimiter,
-	resetStudentAccessCode
-);
-router.get(
-	"/students/:studentID/projects",
-	validAdmin,
-	listManagedPythonProjects
-);
-router.post(
-	"/students/:studentID/projects/:projectID/review",
-	validAdmin,
-	teacherProjectWriteLimiter,
-	createPythonProjectReview
-);
-router.put(
-	"/students/:studentID/projects/:projectID/review/:reviewID",
-	validAdmin,
-	teacherProjectWriteLimiter,
-	updatePythonProjectReview
-);
+	// There is no HTTP Admin account creation or directory. The sole teacher
+	// account is provisioned with create-admin-user.ts.
+	configuredRouter.get("/loggedin", validAdmin, getLoggedInAdmin);
+	configuredRouter.get(
+		"/classroom-analytics/summary",
+		validAdmin,
+		getClassroomAnalyticsSummary(options.analyticsRetentionDays)
+	);
 
-export const adminRoutes = router;
+	if (!options.studentAccountsEnabled) {
+		return configuredRouter;
+	}
+
+	configuredRouter.get("/students", validAdmin, listStudents);
+	configuredRouter.get("/student-deletion-receipts", validAdmin, listStudentDeletionReceipts);
+	configuredRouter.post("/students", validAdmin, teacherVerificationLimiter, createStudent);
+	configuredRouter.patch("/students/:studentID", validAdmin, requireStudentDataWriteLease, setStudentActive);
+	configuredRouter.post(
+		"/students/:studentID/access-code",
+		validAdmin,
+		teacherVerificationLimiter,
+		requireStudentDataWriteLease,
+		resetStudentAccessCode
+	);
+	configuredRouter.post(
+		"/students/:studentID/export",
+		validAdmin,
+		teacherVerificationLimiter,
+		requireStudentDataWriteLease,
+		exportStudentData
+	);
+	configuredRouter.delete("/students/:studentID", validAdmin, teacherVerificationLimiter, deleteStudentData);
+	configuredRouter.get("/students/:studentID/projects", validAdmin, listManagedPythonProjects);
+	configuredRouter.post(
+		"/students/:studentID/projects/:projectID/review",
+		validAdmin,
+		requireStudentDataWriteLease,
+		teacherProjectWriteLimiter,
+		createPythonProjectReview
+	);
+	configuredRouter.put(
+		"/students/:studentID/projects/:projectID/review/:reviewID",
+		validAdmin,
+		requireStudentDataWriteLease,
+		teacherProjectWriteLimiter,
+		updatePythonProjectReview
+	);
+
+	return configuredRouter;
+}
+
+// Kept as a complete route fixture for focused controller tests. Production
+// mounts a configured instance through mountRuntimeAccountRoutes.
+export const adminRoutes = createAdminRoutes({
+	analyticsRetentionDays: 90,
+	studentAccountsEnabled: true
+});

@@ -13,6 +13,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AccountManagement: typeof import('./components/AccountManagement.vue')['default']
     AccountSecurity: typeof import('./components/AccountSecurity.vue')['default']
+    ClassroomAnalytics: typeof import('./components/ClassroomAnalytics.vue')['default']
     CodePreview: typeof import('./components/CodePreview.vue')['default']
     CourseAssetPreview: typeof import('./components/CourseAssetPreview.vue')['default']
     CourseExplorer: typeof import('./components/CourseExplorer.vue')['default']

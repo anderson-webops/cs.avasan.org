@@ -1,14 +1,39 @@
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
+import { nextTick, onMounted, ref, watch } from "vue";
+import { useRoute } from "vue-router";
 import AccountManagement from "@/components/AccountManagement.vue";
 import AccountSecurity from "@/components/AccountSecurity.vue";
+import ClassroomAnalytics from "@/components/ClassroomAnalytics.vue";
 import StudentManagement from "@/components/StudentManagement.vue";
+import { studentAccountsAreEnabled } from "@/modules/classroomFeatures";
 import { useAppStore } from "@/stores/app";
 
 defineOptions({ name: "AdminPage" });
 
 const app = useAppStore();
+const route = useRoute();
 const { adminSessionRevalidating, currentAdmin } = storeToRefs(app);
+const analyticsPanel = ref<HTMLElement | null>(null);
+
+async function focusRequestedSection() {
+	if (
+		route.query.section !== "analytics" ||
+		!currentAdmin.value ||
+		typeof window === "undefined"
+	) {
+		return;
+	}
+	await nextTick();
+	analyticsPanel.value?.querySelector<HTMLElement>("h2")?.focus();
+	analyticsPanel.value?.scrollIntoView({
+		behavior: "smooth",
+		block: "start"
+	});
+}
+
+onMounted(focusRequestedSection);
+watch([() => route.query.section, currentAdmin], focusRequestedSection);
 </script>
 
 <template>
@@ -30,13 +55,21 @@ const { adminSessionRevalidating, currentAdmin } = storeToRefs(app);
 			<AccountManagement />
 		</section>
 
-		<div v-else class="admin-workspace">
-			<section class="admin-panel site-surface">
-				<AccountSecurity :entity-id="currentAdmin._id" />
+		<div v-else class="admin-sections">
+			<section ref="analyticsPanel" class="admin-panel site-surface">
+				<ClassroomAnalytics />
 			</section>
-			<section class="admin-panel site-surface">
-				<StudentManagement />
-			</section>
+			<div class="admin-workspace">
+				<section class="admin-panel site-surface">
+					<AccountSecurity :entity-id="currentAdmin._id" />
+				</section>
+				<section
+					v-if="studentAccountsAreEnabled()"
+					class="admin-panel site-surface"
+				>
+					<StudentManagement />
+				</section>
+			</div>
 		</div>
 	</section>
 </template>
@@ -59,10 +92,14 @@ const { adminSessionRevalidating, currentAdmin } = storeToRefs(app);
 	width: min(100%, var(--container-narrow));
 }
 
+.admin-sections,
 .admin-workspace {
 	display: grid;
-	grid-template-columns: minmax(16rem, 22rem) minmax(0, 1fr);
 	gap: 1rem;
+}
+
+.admin-workspace {
+	grid-template-columns: minmax(16rem, 22rem) minmax(0, 1fr);
 	align-items: start;
 }
 

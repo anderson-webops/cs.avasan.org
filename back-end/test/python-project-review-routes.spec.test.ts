@@ -41,9 +41,7 @@ vi.mock("../src/models/schemas/PythonProjectReview.js", () => ({
 	}
 }));
 
-const { mountRuntimeAccountRoutes } = await import(
-	"../src/routes/runtimeAccountRoutes.js"
-);
+const { mountRuntimeAccountRoutes } = await import("../src/routes/runtimeAccountRoutes.js");
 
 const adminID = new Types.ObjectId(ADMIN_SINGLETON_ID);
 const studentID = new Types.ObjectId();
@@ -57,17 +55,14 @@ function queryWith<T>(result: T) {
 		sort: vi.fn(() => query),
 		limit: vi.fn(() => query),
 		exec: vi.fn().mockResolvedValue(result),
-		then: (
-			resolve: (value: T) => unknown,
-			reject: (reason: unknown) => unknown
-		) => Promise.resolve(result).then(resolve, reject),
-		catch: (reject: (reason: unknown) => unknown) =>
-			Promise.resolve(result).catch(reject)
+		then: (resolve: (value: T) => unknown, reject: (reason: unknown) => unknown) =>
+			Promise.resolve(result).then(resolve, reject),
+		catch: (reject: (reason: unknown) => unknown) => Promise.resolve(result).catch(reject)
 	};
 	return query;
 }
 
-function makeStudent() {
+function makeStudent(overrides: Record<string, unknown> = {}) {
 	return {
 		_id: studentID,
 		username: "student-one",
@@ -77,7 +72,8 @@ function makeStudent() {
 		activeProjectCount: 1,
 		activeProjectBytes: 25,
 		createdAt: now,
-		updatedAt: now
+		updatedAt: now,
+		...overrides
 	};
 }
 
@@ -143,28 +139,25 @@ async function withRuntime<T>(run: (baseUrl: string) => Promise<T>): Promise<T> 
 	const app = express();
 	app.use(express.json({ limit: "15mb" }));
 	app.use((req: any, _res, next) => {
-		const requestStudentID =
-			req.get("x-session-student-id") || req.get("x-student-id") || undefined;
+		const requestStudentID = req.get("x-session-student-id") || req.get("x-student-id") || undefined;
 		req.session = {
 			adminID: req.get("x-admin-id") || undefined,
-			adminExpiresAt: req.get("x-admin-id")
-				? Date.now() + 8 * 60 * 60 * 1000
-				: undefined,
-			adminLastActivityAt: req.get("x-admin-id")
-				? Date.now()
-				: undefined,
+			adminExpiresAt: req.get("x-admin-id") ? Date.now() + 8 * 60 * 60 * 1000 : undefined,
+			adminLastActivityAt: req.get("x-admin-id") ? Date.now() : undefined,
 			adminSessionVersion: req.get("x-admin-id") ? 0 : undefined,
 			studentID: requestStudentID,
-			studentExpiresAt: requestStudentID
-				? Date.now() + 8 * 60 * 60 * 1000
-				: undefined,
+			studentExpiresAt: requestStudentID ? Date.now() + 8 * 60 * 60 * 1000 : undefined,
 			studentSessionVersion: requestStudentID ? 3 : undefined,
 			studentAuthLevel: requestStudentID ? "full" : undefined,
 			studentLastActivityAt: requestStudentID ? Date.now() : undefined
 		};
 		next();
 	});
-	mountRuntimeAccountRoutes(app);
+	mountRuntimeAccountRoutes(app, {
+		analyticsRetentionDays: 90,
+		studentAccountsEnabled: true,
+		studentOAuthEnabled: true
+	});
 
 	const server = await new Promise<Server>(resolve => {
 		const instance = app.listen(0, "127.0.0.1", () => resolve(instance));
@@ -176,8 +169,7 @@ async function withRuntime<T>(run: (baseUrl: string) => Promise<T>): Promise<T> 
 
 	try {
 		return await run(`http://127.0.0.1:${address.port}`);
-	}
-	finally {
+	} finally {
 		await new Promise<void>((resolve, reject) => {
 			server.close(error => {
 				if (error) {
@@ -217,9 +209,7 @@ describe("student and Julio project routes", () => {
 		modelMocks.pythonProjectFindOne.mockResolvedValue(makeProject());
 		modelMocks.pythonProjectReviewFind.mockReturnValue(queryWith([makeReview()]));
 		modelMocks.pythonProjectReviewFindOne.mockResolvedValue(makeReview());
-		modelMocks.pythonProjectReviewCreate.mockImplementation(
-			async payload => makeReview(payload)
-		);
+		modelMocks.pythonProjectReviewCreate.mockImplementation(async payload => makeReview(payload));
 	});
 
 	it("lets a full student session list only active owned projects", async () => {
@@ -259,10 +249,9 @@ describe("student and Julio project routes", () => {
 
 	it("lets Julio list active student projects with review copies", async () => {
 		await withRuntime(async baseUrl => {
-			const response = await fetch(
-				`${baseUrl}/admins/students/${studentID}/projects`,
-				{ headers: { "x-admin-id": ADMIN_SINGLETON_ID } }
-			);
+			const response = await fetch(`${baseUrl}/admins/students/${studentID}/projects`, {
+				headers: { "x-admin-id": ADMIN_SINGLETON_ID }
+			});
 			const body = await response.json();
 
 			expect(response.status).toBe(200);
@@ -275,9 +264,28 @@ describe("student and Julio project routes", () => {
 				sourceProject: { $in: [projectID] },
 				user: studentID
 			});
-			expect(body.projects[0].project.files[0].content).toBe(
-				"print('student')\n"
-			);
+			expect(body.projects[0].project.files[0].content).toBe("print('student')\n");
+		});
+	});
+
+	it("blocks project review access while permanent deletion is pending", async () => {
+		modelMocks.studentFindById.mockReturnValue(
+			queryWith(
+				makeStudent({
+					active: false,
+					dataDeletionPendingAt: new Date("2026-07-29T12:05:00.000Z")
+				})
+			)
+		);
+
+		await withRuntime(async baseUrl => {
+			const response = await fetch(`${baseUrl}/admins/students/${studentID}/projects`, {
+				headers: { "x-admin-id": ADMIN_SINGLETON_ID }
+			});
+
+			expect(response.status).toBe(409);
+			expect(modelMocks.pythonProjectFind).not.toHaveBeenCalled();
+			expect(modelMocks.pythonProjectReviewFind).not.toHaveBeenCalled();
 		});
 	});
 
@@ -285,26 +293,20 @@ describe("student and Julio project routes", () => {
 		modelMocks.pythonProjectReviewFindOne.mockResolvedValue(null);
 
 		await withRuntime(async baseUrl => {
-			const anonymous = await fetch(
-				`${baseUrl}/admins/students/${studentID}/projects/${projectID}/review`,
-				{
-					method: "POST",
-					headers: mutationHeaders(),
-					body: "{}"
-				}
-			);
+			const anonymous = await fetch(`${baseUrl}/admins/students/${studentID}/projects/${projectID}/review`, {
+				method: "POST",
+				headers: mutationHeaders(),
+				body: "{}"
+			});
 			expect(anonymous.status).toBe(403);
 
-			const response = await fetch(
-				`${baseUrl}/admins/students/${studentID}/projects/${projectID}/review`,
-				{
-					method: "POST",
-					headers: mutationHeaders({
-						"x-admin-id": ADMIN_SINGLETON_ID
-					}),
-					body: "{}"
-				}
-			);
+			const response = await fetch(`${baseUrl}/admins/students/${studentID}/projects/${projectID}/review`, {
+				method: "POST",
+				headers: mutationHeaders({
+					"x-admin-id": ADMIN_SINGLETON_ID
+				}),
+				body: "{}"
+			});
 			const body = await response.json();
 
 			expect(response.status).toBe(201);
@@ -357,12 +359,14 @@ describe("student and Julio project routes", () => {
 	});
 
 	it("lists visible reviews only for non-deleted student projects", async () => {
-		modelMocks.pythonProjectReviewFind.mockReturnValue(queryWith([
-			makeReview({
-				visibleToStudent: true,
-				note: "Julio's comments are in the code."
-			})
-		]));
+		modelMocks.pythonProjectReviewFind.mockReturnValue(
+			queryWith([
+				makeReview({
+					visibleToStudent: true,
+					note: "Julio's comments are in the code."
+				})
+			])
+		);
 
 		await withRuntime(async baseUrl => {
 			const response = await fetch(`${baseUrl}/students/project-reviews`, {

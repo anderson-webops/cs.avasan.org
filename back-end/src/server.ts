@@ -6,38 +6,27 @@ import express from "express";
 import helmet from "helmet";
 import mongoose from "mongoose";
 
-import {
-	requireStudentContext,
-	validAdmin,
-	validStudent
-} from "./middleware/auth.js";
+import { enforceClassroomAnalyticsRetention } from "./controllers/classroomAnalyticsController.js";
+import { requireStudentContext, validAdmin, validStudent } from "./middleware/auth.js";
 import { requireClassroomRequest } from "./middleware/classroomRequest.js";
 import { requireInternalDiagnostics } from "./middleware/internalDiagnostics.js";
-import {
-	createProjectJsonParser,
-	createProjectPayloadConcurrencyGuard
-} from "./middleware/projectPayload.js";
-import {
-	createHeavyProjectPayloadLimiter,
-	createStudentProjectWriteLimiter
-} from "./middleware/rateLimiters.js";
+import { createProjectJsonParser, createProjectPayloadConcurrencyGuard } from "./middleware/projectPayload.js";
+import { createHeavyProjectPayloadLimiter, createStudentProjectWriteLimiter } from "./middleware/rateLimiters.js";
 import { Admin } from "./models/schemas/Admin.js";
 import { ClassroomUsageDaily } from "./models/schemas/ClassroomUsageDaily.js";
 import { OAuthLoginAttempt } from "./models/schemas/OAuthLoginAttempt.js";
 import { PythonProject } from "./models/schemas/PythonProject.js";
 import { PythonProjectReview } from "./models/schemas/PythonProjectReview.js";
 import { Student } from "./models/schemas/Student.js";
+import {
+	StudentDataDeletionReceipt
+} from "./models/schemas/StudentDataDeletionReceipt.js";
 import { mountClassroomAnalyticsRoutes } from "./routes/classroomAnalyticsRoutes.js";
 import { mountRuntimeAccountRoutes } from "./routes/runtimeAccountRoutes.js";
-import {
-	readClassroomAnalyticsRetentionDays,
-	readClassroomAnalyticsServiceKey
-} from "./security/classroomAnalytics.js";
-import {
-	readBooleanSetting,
-	readClassroomOrigin,
-	readSessionSecret
-} from "./security/environment.js";
+import { readClassroomAnalyticsRetentionDays } from "./security/classroomAnalytics.js";
+import { readClassroomPrivacySettings } from "./security/classroomPrivacy.js";
+import { readBooleanSetting, readClassroomOrigin, readSessionSecret } from "./security/environment.js";
+import { selectMongoConnection } from "./security/mongoConnection.js";
 import { readTrustProxySetting } from "./security/trustProxy.js";
 import { reconcilePythonProjectQuotas } from "./services/pythonProjectQuotaReconciliation.js";
 import { enabledOAuthProviders } from "./utils/oauthProviderConfig.js";
@@ -47,19 +36,11 @@ import "dotenv/config";
 async function main() {
 	const app = express();
 	const internalDiagnosticsKey = env.INTERNAL_DIAGNOSTICS_KEY;
-	const classroomAnalyticsRetentionDays
-		= readClassroomAnalyticsRetentionDays(
-			env.CLASSROOM_ANALYTICS_RETENTION_DAYS
-		);
-	const classroomAnalyticsCollectionEnabled = readBooleanSetting(
-		env.CLASSROOM_ANALYTICS_COLLECTION_ENABLED,
-		"CLASSROOM_ANALYTICS_COLLECTION_ENABLED"
-	);
-	const classroomAnalyticsServiceKey
-		= readClassroomAnalyticsServiceKey(
-			env.CLASSROOM_ANALYTICS_SERVICE_KEY
-		);
-	enabledOAuthProviders();
+	const classroomAnalyticsRetentionDays = readClassroomAnalyticsRetentionDays(env.CLASSROOM_ANALYTICS_RETENTION_DAYS);
+	const classroomPrivacy = readClassroomPrivacySettings(env);
+	if (classroomPrivacy.studentOAuthEnabled) {
+		enabledOAuthProviders();
+	}
 	app.use(helmet());
 
 	// health
@@ -79,9 +60,7 @@ async function main() {
 	readClassroomOrigin(env.CLASSROOM_ORIGIN, isProd);
 	type CookieSessionOpts = Parameters<typeof cookieSession>[0];
 	if (isCrossSite) {
-		throw new Error(
-			"CROSS_SITE=true is not supported; classroom sessions must stay same-origin."
-		);
+		throw new Error("CROSS_SITE=true is not supported; classroom sessions must stay same-origin.");
 	}
 
 	const cookieOptions: CookieSessionOpts = {
@@ -104,28 +83,24 @@ async function main() {
 
 	// Cookie-authenticated mutations require the same-origin API client's
 	// custom header before any request body is parsed.
-	app.use(
-		["/accounts", "/students", "/admins"],
-		requireClassroomRequest
-	);
-	app.use(
-		"/students/oauth/apple/callback",
-		(req, res, next) => {
-			if (
-				req.method === "POST"
-				&& !req.is("application/x-www-form-urlencoded")
-			) {
-				res.sendStatus(415);
-				return;
-			}
-			next();
-		},
-		express.urlencoded({
-			extended: false,
-			limit: "16kb",
-			parameterLimit: 10
-		})
-	);
+	app.use(["/accounts", "/students", "/admins"], requireClassroomRequest);
+	if (classroomPrivacy.studentOAuthEnabled) {
+		app.use(
+			"/students/oauth/apple/callback",
+			(req, res, next) => {
+				if (req.method === "POST" && !req.is("application/x-www-form-urlencoded")) {
+					res.sendStatus(415);
+					return;
+				}
+				next();
+			},
+			express.urlencoded({
+				extended: false,
+				limit: "16kb",
+				parameterLimit: 10
+			})
+		);
+	}
 
 	// Authenticated project payloads may include binary assets and are the only
 	// requests allowed above the global 1 MB JSON limit.
@@ -135,48 +110,41 @@ async function main() {
 	const heavyProjectPayloadLimiter = createHeavyProjectPayloadLimiter();
 	const projectPayloadConcurrencyGuard = createProjectPayloadConcurrencyGuard();
 	const projectMutationMethods = new Set(["DELETE", "PATCH", "POST", "PUT"]);
-	const isProjectMutation = (req: express.Request) =>
-		projectMutationMethods.has(req.method.toUpperCase());
-	const limitProjectMutation = (
-		limiter: express.RequestHandler
-	) => (req: express.Request, res: express.Response, next: express.NextFunction) => {
-		if (!isProjectMutation(req)) {
-			next();
-			return;
-		}
-		limiter(req, res, next);
-	};
-	const parseProjectMutation = (
-		req: express.Request,
-		res: express.Response,
-		next: express.NextFunction
-	) => {
+	const isProjectMutation = (req: express.Request) => projectMutationMethods.has(req.method.toUpperCase());
+	const limitProjectMutation
+		= (limiter: express.RequestHandler) =>
+			(req: express.Request, res: express.Response, next: express.NextFunction) => {
+				if (!isProjectMutation(req)) {
+					next();
+					return;
+				}
+				limiter(req, res, next);
+			};
+	const parseProjectMutation = (req: express.Request, res: express.Response, next: express.NextFunction) => {
 		if (!isProjectMutation(req)) {
 			next();
 			return;
 		}
 		projectJson(req, res, next);
 	};
-	app.use(
-		["/students/projects", "/students/project-reviews"],
-		validStudent,
-		requireStudentContext
-	);
-	app.use(
-		"/students/projects",
-		limitProjectMutation(studentProjectWriteLimiter),
-		limitProjectMutation(heavyProjectPayloadLimiter),
-		limitProjectMutation(projectPayloadConcurrencyGuard),
-		parseProjectMutation
-	);
-	app.use(
-		/^\/admins\/students\/[a-f\d]{24}\/projects(?:\/|$)/i,
-		validAdmin,
-		limitProjectMutation(teacherProjectWriteLimiter),
-		limitProjectMutation(heavyProjectPayloadLimiter),
-		limitProjectMutation(projectPayloadConcurrencyGuard),
-		parseProjectMutation
-	);
+	if (classroomPrivacy.studentAccountsEnabled) {
+		app.use(["/students/projects", "/students/project-reviews"], validStudent, requireStudentContext);
+		app.use(
+			"/students/projects",
+			limitProjectMutation(studentProjectWriteLimiter),
+			limitProjectMutation(heavyProjectPayloadLimiter),
+			limitProjectMutation(projectPayloadConcurrencyGuard),
+			parseProjectMutation
+		);
+		app.use(
+			/^\/admins\/students\/[a-f\d]{24}\/projects(?:\/|$)/i,
+			validAdmin,
+			limitProjectMutation(teacherProjectWriteLimiter),
+			limitProjectMutation(heavyProjectPayloadLimiter),
+			limitProjectMutation(projectPayloadConcurrencyGuard),
+			parseProjectMutation
+		);
+	}
 
 	app.use(bodyParser.json({ limit: "1mb" }));
 
@@ -197,12 +165,15 @@ async function main() {
 		const connection = mongoose.connection;
 		const state = connection.readyState;
 		if (state !== 1 || !connection.db) {
-			return res.status(503).set("Cache-Control", "no-store").json({
-				ready: false,
-				components: {
-					db: { ok: false, state }
-				}
-			});
+			return res
+				.status(503)
+				.set("Cache-Control", "no-store")
+				.json({
+					ready: false,
+					components: {
+						db: { ok: false, state }
+					}
+				});
 		}
 
 		try {
@@ -214,40 +185,25 @@ async function main() {
 				}
 			});
 		}
-		catch (error) {
-			return res.status(503).set("Cache-Control", "no-store").json({
-				ready: false,
-				components: {
-					db: {
-						ok: false,
-						state,
-						error: error instanceof Error ? error.message : "db-ping-failed"
+		catch {
+			return res
+				.status(503)
+				.set("Cache-Control", "no-store")
+				.json({
+					ready: false,
+					components: {
+						db: {
+							ok: false,
+							state,
+							error: "db-ping-failed"
+						}
 					}
-				}
-			});
+				});
 		}
 	});
 
-	// --- Get Mongo URI from Vault (preferred), else env fallback ---
-	let mongoUri: string | undefined;
-	try {
-		const { uri } = await readMongoSecret(); // your Vault client should read from KV v2
-		mongoUri = uri;
-	}
-	catch (e) {
-		// Fail silently if Vault is not available, then probably local test (Had to do this to avoid weird requirements
-		// console.log("Vault unavailable, falling back to MONGODB_URI:", e);
-		const m: string = e?.toString() || "";
-		if (!m.includes("Failed to fetch") && !m.includes("connect ECONNREFUSED")) {
-			console.log("");
-		}
-
-		mongoUri = env.MONGODB_URI;
-	}
-
-	if (!mongoUri) {
-		throw new Error("No MongoDB URI available (Vault and MONGODB_URI missing)");
-	}
+	const mongoConnection = await selectMongoConnection(env, readMongoSecret);
+	const mongoUri = mongoConnection.uri;
 
 	await mongoose.connect(mongoUri);
 	await Promise.all([
@@ -255,12 +211,14 @@ async function main() {
 		ClassroomUsageDaily.init(),
 		OAuthLoginAttempt.init(),
 		Student.init(),
+		StudentDataDeletionReceipt.init(),
 		// Reconcile the former sparse import-ID index with the partial index.
 		// Legacy projects without an import ID remain readable while every new
 		// project is required to have a stable idempotency key.
 		PythonProject.syncIndexes(),
 		PythonProjectReview.init()
 	]);
+	await enforceClassroomAnalyticsRetention(classroomAnalyticsRetentionDays);
 	await reconcilePythonProjectQuotas();
 	console.log("Connected to MongoDB");
 	const c = mongoose.connection;
@@ -271,23 +229,25 @@ async function main() {
 			host: c.host || null,
 			name: c.name || null,
 			readyState: c.readyState,
-			usingVault: !!env.VAULT_ROLE_ID && !!env.VAULT_SECRET_ID
+			usingVault: mongoConnection.source === "vault"
 		});
 	});
 
 	// Students have an optional, teacher-provisioned project-saving account.
 	// Tutor, self-signup, scheduler, and admin-mail routes remain unmounted.
 	mountClassroomAnalyticsRoutes(app, {
-		collectionEnabled: classroomAnalyticsCollectionEnabled,
-		retentionDays: classroomAnalyticsRetentionDays,
-		serviceKey: classroomAnalyticsServiceKey
+		collectionEnabled: classroomPrivacy.analyticsCollectionEnabled,
+		retentionDays: classroomAnalyticsRetentionDays
 	});
-	mountRuntimeAccountRoutes(app);
+	mountRuntimeAccountRoutes(app, {
+		analyticsRetentionDays: classroomAnalyticsRetentionDays,
+		studentAccountsEnabled: classroomPrivacy.studentAccountsEnabled,
+		studentOAuthEnabled: classroomPrivacy.studentOAuthEnabled
+	});
 
 	const PORT = Number(env.PORT || 3008);
 	const HOST = env.HOST || env.BACKEND_HOST || "127.0.0.1";
-	const server = app.listen(PORT, HOST, () =>
-		console.log(`Server listening on http://${HOST}:${PORT}!`));
+	const server = app.listen(PORT, HOST, () => console.log(`Server listening on http://${HOST}:${PORT}!`));
 	let isShuttingDown = false;
 
 	const shutdown = async (signal: NodeJS.Signals) => {

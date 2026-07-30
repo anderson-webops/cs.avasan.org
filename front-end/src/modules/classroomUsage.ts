@@ -1,3 +1,5 @@
+import { classroomUsageIsEnabled } from "@/modules/classroomFeatures";
+
 export type ClassroomUsageEvent = "course-open" | "ide-open";
 
 const allowedCourseIds = new Set([
@@ -8,6 +10,7 @@ const allowedCourseIds = new Set([
 	"pygames"
 ]);
 const storageKeyPrefix = "cs-avasan:classroom-usage";
+const attemptedState = "attempted";
 
 interface PrivacyAwareNavigator extends Navigator {
 	globalPrivacyControl?: boolean;
@@ -16,13 +19,6 @@ interface PrivacyAwareNavigator extends Navigator {
 
 interface PrivacyAwareWindow extends Window {
 	doNotTrack?: string | null;
-}
-
-function usageCollectionIsEnabled() {
-	return (
-		import.meta.env.VITE_CLASSROOM_USAGE_ENABLED?.trim().toLowerCase() ===
-		"true"
-	);
 }
 
 function privacySignalIsEnabled() {
@@ -58,19 +54,26 @@ function reportStorageKey(event: ClassroomUsageEvent, courseId?: string) {
 }
 
 /**
- * Reports one anonymous classroom-use count per tab, event, course, and UTC
- * date. This deliberately omits account, project, page, referrer, and device
- * data. If privacy signals, browser storage, or the endpoint are unavailable,
- * the classroom keeps working without reporting.
+ * Attempts at most one anonymous classroom-use count per tab, event, course,
+ * and UTC date. This deliberately omits account, project, page, referrer, and
+ * device data. If privacy signals, browser storage, or the endpoint are
+ * unavailable, the classroom keeps working without reporting.
+ *
+ * A tab-local attempted state is written before the request and is never
+ * cleared. That can undercount a failed request, but prevents a lost response
+ * from causing a duplicate count. The anonymous counter intentionally has no
+ * request or browser identifier for server-side deduplication.
  */
 export async function reportClassroomUsage(
 	event: ClassroomUsageEvent,
 	courseId?: string | null
 ) {
+	if (event !== "course-open" && event !== "ide-open") return;
+
 	if (
 		typeof window === "undefined" ||
 		typeof globalThis.fetch !== "function" ||
-		!usageCollectionIsEnabled()
+		!classroomUsageIsEnabled()
 	) {
 		return;
 	}
@@ -81,12 +84,15 @@ export async function reportClassroomUsage(
 		return;
 	}
 
-	const safeCourseId = allowedCourseId(courseId);
+	const safeCourseId =
+		event === "course-open" ? allowedCourseId(courseId) : undefined;
+	if (event === "course-open" && !safeCourseId) return;
+
 	const storageKey = reportStorageKey(event, safeCourseId);
 
 	try {
-		if (window.sessionStorage.getItem(storageKey)) return;
-		window.sessionStorage.setItem(storageKey, "1");
+		if (window.sessionStorage.getItem(storageKey) !== null) return;
+		window.sessionStorage.setItem(storageKey, attemptedState);
 	} catch {
 		return;
 	}
@@ -111,6 +117,6 @@ export async function reportClassroomUsage(
 			referrerPolicy: "no-referrer"
 		});
 	} catch {
-		// Usage reporting must never interrupt anonymous course or IDE access.
+		// Reporting must never interrupt anonymous course or IDE access.
 	}
 }

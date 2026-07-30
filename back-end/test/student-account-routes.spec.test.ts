@@ -15,7 +15,6 @@ const modelMocks = vi.hoisted(() => ({
 	adminFindById: vi.fn(),
 	adminFindOne: vi.fn(),
 	studentCreate: vi.fn(),
-	studentExists: vi.fn(),
 	studentFind: vi.fn(),
 	studentFindById: vi.fn(),
 	studentFindByIdAndUpdate: vi.fn(),
@@ -35,7 +34,6 @@ vi.mock("../src/models/schemas/Admin.js", () => ({
 vi.mock("../src/models/schemas/Student.js", () => ({
 	Student: {
 		create: modelMocks.studentCreate,
-		exists: modelMocks.studentExists,
 		find: modelMocks.studentFind,
 		findById: modelMocks.studentFindById,
 		findByIdAndUpdate: modelMocks.studentFindByIdAndUpdate,
@@ -113,11 +111,9 @@ async function withRuntime<T>(
 	const session = {
 		...initialSession,
 		adminExpiresAt: initialSession.adminID
-			? initialSession.adminExpiresAt ?? Date.now() + 8 * 60 * 60 * 1000
+			? (initialSession.adminExpiresAt ?? Date.now() + 8 * 60 * 60 * 1000)
 			: undefined,
-		adminLastActivityAt: initialSession.adminID
-			? initialSession.adminLastActivityAt ?? Date.now()
-			: undefined,
+		adminLastActivityAt: initialSession.adminID ? (initialSession.adminLastActivityAt ?? Date.now()) : undefined,
 		adminSessionVersion: initialSession.adminID ? (initialSession.adminSessionVersion ?? 0) : undefined,
 		studentExpiresAt:
 			initialSession.studentAuthLevel === "full"
@@ -141,7 +137,11 @@ async function withRuntime<T>(
 	app.get("/student-read-probe", validStudent, (_req, res) => {
 		res.sendStatus(204);
 	});
-	mountRuntimeAccountRoutes(app);
+	mountRuntimeAccountRoutes(app, {
+		analyticsRetentionDays: 90,
+		studentAccountsEnabled: true,
+		studentOAuthEnabled: true
+	});
 
 	const server = await new Promise<Server>(resolve => {
 		const instance = app.listen(0, "127.0.0.1", () => resolve(instance));
@@ -208,7 +208,6 @@ describe("teacher-provisioned student accounts", () => {
 		modelMocks.studentFind.mockReturnValue(queryWith([makeStudent()]));
 		modelMocks.studentFindById.mockReturnValue(queryWith(makeStudent()));
 		modelMocks.studentUpdateOne.mockResolvedValue({ modifiedCount: 1 });
-		modelMocks.studentExists.mockResolvedValue({ _id: studentID });
 		modelMocks.pythonProjectAggregate.mockResolvedValue([]);
 	});
 
@@ -313,18 +312,15 @@ describe("teacher-provisioned student accounts", () => {
 			);
 			const consumeUpdate = modelMocks.studentFindOneAndUpdate.mock.calls[0]?.[1];
 			expect(consumeUpdate.$unset).not.toHaveProperty("accessCodeExpiresAt");
-			expect(
-				consumeUpdate.$set.accessCodeExpiresAt.getTime()
-				- consumeUpdate.$set.lastLoginAt.getTime()
-			).toBe(STUDENT_SETUP_SESSION_MS);
+			expect(consumeUpdate.$set.accessCodeExpiresAt.getTime() - consumeUpdate.$set.lastLoginAt.getTime()).toBe(
+				STUDENT_SETUP_SESSION_MS
+			);
 		});
 	});
 
 	it("never accepts a consumed pending setup code for login again", async () => {
 		const accessCode = "ABCD-EFGH-JKMP-QRST-UVWX";
-		const pendingSetupCodeHash = await hashStudentCredential(
-			normalizeStudentAccessCode(accessCode)
-		);
+		const pendingSetupCodeHash = await hashStudentCredential(normalizeStudentAccessCode(accessCode));
 		const accessCodeExpiresAt = new Date(Date.now() + 60_000);
 		modelMocks.studentFindOne.mockReturnValue(
 			queryWith(
@@ -359,10 +355,7 @@ describe("teacher-provisioned student accounts", () => {
 											{
 												$add: [
 													{
-														$ifNull: [
-															"$failedLoginAttempts",
-															0
-														]
+														$ifNull: ["$failedLoginAttempts", 0]
 													},
 													1
 												]
@@ -374,10 +367,7 @@ describe("teacher-provisioned student accounts", () => {
 									{
 										$add: [
 											{
-												$ifNull: [
-													"$failedLoginAttempts",
-													0
-												]
+												$ifNull: ["$failedLoginAttempts", 0]
 											},
 											1
 										]
@@ -385,11 +375,7 @@ describe("teacher-provisioned student accounts", () => {
 								]
 							},
 							lockedUntil: {
-								$cond: [
-									expect.any(Object),
-									expect.any(Date),
-									"$lockedUntil"
-								]
+								$cond: [expect.any(Object), expect.any(Date), "$lockedUntil"]
 							}
 						}
 					}
@@ -437,11 +423,11 @@ describe("teacher-provisioned student accounts", () => {
 			)
 		);
 		modelMocks.studentFindOneAndUpdate.mockReturnValue(
-				queryWith(
-					makeStudent({
-						sessionVersion: 5,
-						passwordSetAt: now,
-						lastLoginAt: now
+			queryWith(
+				makeStudent({
+					sessionVersion: 5,
+					passwordSetAt: now,
+					lastLoginAt: now
 				})
 			)
 		);
@@ -454,12 +440,8 @@ describe("teacher-provisioned student accounts", () => {
 			const body = await response.json();
 
 			expect(response.status).toBe(200);
-			expect(response.headers.get("set-cookie")).toContain(
-				"cs_avasan_student_oauth_google="
-			);
-			expect(response.headers.get("set-cookie")).toContain(
-				"cs_avasan_student_oauth_apple="
-			);
+			expect(response.headers.get("set-cookie")).toContain("cs_avasan_student_oauth_google=");
+			expect(response.headers.get("set-cookie")).toContain("cs_avasan_student_oauth_apple=");
 			expect(body.requiresPasswordSetup).toBe(false);
 			expect(session.adminID).toBeUndefined();
 			expect(session.studentAuthLevel).toBe("full");
@@ -578,9 +560,7 @@ describe("teacher-provisioned student accounts", () => {
 				expect(responseBody.passwordSetupRequestID).toBe(passwordSetupRequestID);
 				const update = modelMocks.studentFindOneAndUpdate.mock.calls.at(-1)?.[1];
 				expect(update.$set.passwordHash).toEqual(expect.any(String));
-				expect(update.$set.lastPasswordSetupRequestID).toBe(
-					passwordSetupRequestID
-				);
+				expect(update.$set.lastPasswordSetupRequestID).toBe(passwordSetupRequestID);
 				expect(update.$unset.pendingSetupCodeHash).toBe(1);
 				expect(update.$unset.accessCodeExpiresAt).toBe(1);
 				expect(JSON.stringify(responseBody)).not.toContain(update.$set.passwordHash);
@@ -606,20 +586,17 @@ describe("teacher-provisioned student accounts", () => {
 				studentAuthLevel: "setup"
 			},
 			async (baseUrl, session) => {
-				const response = await putJson(
-					baseUrl,
-					"/students/session/password",
-					{ password, requestID: passwordSetupRequestID }
-				);
+				const response = await putJson(baseUrl, "/students/session/password", {
+					password,
+					requestID: passwordSetupRequestID
+				});
 				const body = await response.json();
 
 				expect(response.status).toBe(200);
 				expect(body.passwordSetupRequestID).toBe(passwordSetupRequestID);
 				expect(session.studentAuthLevel).toBe("full");
 				expect(session.studentSessionVersion).toBe(6);
-				expect(session.studentExpiresAt).toBe(
-					passwordSetAt.getTime() + 8 * 60 * 60 * 1000
-				);
+				expect(session.studentExpiresAt).toBe(passwordSetAt.getTime() + 8 * 60 * 60 * 1000);
 				expect(modelMocks.studentFindOneAndUpdate).not.toHaveBeenCalled();
 			}
 		);
@@ -641,14 +618,10 @@ describe("teacher-provisioned student accounts", () => {
 				studentAuthLevel: "setup"
 			},
 			async (baseUrl, session) => {
-				const response = await putJson(
-					baseUrl,
-					"/students/session/password",
-					{
-						password: "different calm words",
-						requestID: passwordSetupRequestID
-					}
-				);
+				const response = await putJson(baseUrl, "/students/session/password", {
+					password: "different calm words",
+					requestID: passwordSetupRequestID
+				});
 
 				expect(response.status).toBe(409);
 				await expect(response.json()).resolves.toEqual({
@@ -665,16 +638,24 @@ describe("teacher-provisioned student accounts", () => {
 		const winningPassword = "winning calm words";
 		const pendingSetupCodeHash = await hashStudentCredential("ACCESSCODE");
 		modelMocks.studentFindById
-			.mockReturnValueOnce(queryWith(makeStudent({
-				pendingSetupCodeHash,
-				sessionVersion: 5
-			})))
-			.mockReturnValueOnce(queryWith(makeStudent({
-				lastPasswordSetupRequestID: passwordSetupRequestID,
-				passwordHash: await hashStudentCredential(winningPassword),
-				passwordSetAt: new Date(),
-				sessionVersion: 6
-			})));
+			.mockReturnValueOnce(
+				queryWith(
+					makeStudent({
+						pendingSetupCodeHash,
+						sessionVersion: 5
+					})
+				)
+			)
+			.mockReturnValueOnce(
+				queryWith(
+					makeStudent({
+						lastPasswordSetupRequestID: passwordSetupRequestID,
+						passwordHash: await hashStudentCredential(winningPassword),
+						passwordSetAt: new Date(),
+						sessionVersion: 6
+					})
+				)
+			);
 		modelMocks.studentFindOneAndUpdate.mockReturnValue(queryWith(null));
 
 		await withRuntime(
@@ -684,14 +665,10 @@ describe("teacher-provisioned student accounts", () => {
 				studentAuthLevel: "setup"
 			},
 			async (baseUrl, session) => {
-				const response = await putJson(
-					baseUrl,
-					"/students/session/password",
-					{
-						password: "different calm words",
-						requestID: passwordSetupRequestID
-					}
-				);
+				const response = await putJson(baseUrl, "/students/session/password", {
+					password: "different calm words",
+					requestID: passwordSetupRequestID
+				});
 
 				expect(response.status).toBe(409);
 				await expect(response.json()).resolves.toEqual({
@@ -724,11 +701,7 @@ describe("teacher-provisioned student accounts", () => {
 				studentAuthLevel: "setup"
 			},
 			async (baseUrl, session) => {
-				const response = await putJson(
-					baseUrl,
-					"/students/session/password",
-					{ requestID: losingRequestID }
-				);
+				const response = await putJson(baseUrl, "/students/session/password", { requestID: losingRequestID });
 
 				expect(response.status).toBe(409);
 				expect(session.studentAuthLevel).toBe("setup");
@@ -805,11 +778,10 @@ describe("teacher-provisioned student accounts", () => {
 				studentAuthLevel: "full"
 			},
 			async baseUrl => {
-				const response = await putJson(
-					baseUrl,
-					"/students/session/password",
-					{ password, requestID: passwordSetupRequestID }
-				);
+				const response = await putJson(baseUrl, "/students/session/password", {
+					password,
+					requestID: passwordSetupRequestID
+				});
 
 				expect(response.status).toBe(200);
 				await expect(response.json()).resolves.toMatchObject({
@@ -849,11 +821,7 @@ describe("teacher-provisioned student accounts", () => {
 								$cond: [expect.any(Object), 0, expect.any(Object)]
 							},
 							lockedUntil: {
-								$cond: [
-									expect.any(Object),
-									expect.any(Date),
-									"$lockedUntil"
-								]
+								$cond: [expect.any(Object), expect.any(Date), "$lockedUntil"]
 							}
 						}
 					}
@@ -913,6 +881,35 @@ describe("teacher-provisioned student accounts", () => {
 		});
 	});
 
+	it("cannot reactivate or reset access while permanent deletion is pending", async () => {
+		modelMocks.studentFindById.mockReturnValue(
+			queryWith(
+				makeStudent({
+					active: false,
+					dataDeletionPendingAt: new Date("2026-07-29T12:05:00.000Z")
+				})
+			)
+		);
+
+		await withRuntime({ adminID: ADMIN_SINGLETON_ID }, async baseUrl => {
+			const reactivate = await fetch(`${baseUrl}/admins/students/${studentID}`, {
+				method: "PATCH",
+				headers: {
+					"content-type": "application/json",
+					"x-classroom-request": "1"
+				},
+				body: JSON.stringify({ active: true })
+			});
+			const reset = await postJson(baseUrl, `/admins/students/${studentID}/access-code`, {
+				teacherPassword: "teacher-passphrase"
+			});
+
+			expect(reactivate.status).toBe(409);
+			expect(reset.status).toBe(409);
+			expect(modelMocks.studentFindByIdAndUpdate).not.toHaveBeenCalled();
+		});
+	});
+
 	it("disabling revokes sessions and discards any unused access code", async () => {
 		modelMocks.studentFindByIdAndUpdate.mockReturnValue(
 			queryWith(
@@ -930,17 +927,14 @@ describe("teacher-provisioned student accounts", () => {
 				adminLastActivityAt: lastActivityAt
 			},
 			async (baseUrl, session) => {
-				const response = await fetch(
-					`${baseUrl}/admins/students/${studentID}`,
-					{
-						method: "PATCH",
-						headers: {
-							"content-type": "application/json",
-							"x-classroom-request": "1"
-						},
-						body: JSON.stringify({ active: false })
-					}
-				);
+				const response = await fetch(`${baseUrl}/admins/students/${studentID}`, {
+					method: "PATCH",
+					headers: {
+						"content-type": "application/json",
+						"x-classroom-request": "1"
+					},
+					body: JSON.stringify({ active: false })
+				});
 
 				expect(response.status).toBe(200);
 				expect(session.adminLastActivityAt).toBe(lastActivityAt);
@@ -977,9 +971,7 @@ describe("teacher-provisioned student accounts", () => {
 				});
 
 				expect(heartbeat.status).toBe(200);
-				expect(session.adminLastActivityAt).toBeGreaterThan(
-					lastActivityAt
-				);
+				expect(session.adminLastActivityAt).toBeGreaterThan(lastActivityAt);
 			}
 		);
 	});
@@ -1045,9 +1037,7 @@ describe("teacher-provisioned student accounts", () => {
 			},
 			async (baseUrl, session) => {
 				for (let check = 0; check < 3; check += 1) {
-					const validation = await fetch(
-						`${baseUrl}/admins/loggedin`
-					);
+					const validation = await fetch(`${baseUrl}/admins/loggedin`);
 					expect(validation.status).toBe(200);
 				}
 				const response = await fetch(`${baseUrl}/admins/students`);
@@ -1055,11 +1045,7 @@ describe("teacher-provisioned student accounts", () => {
 
 				expect(response.status).toBe(200);
 				expect(session.adminLastActivityAt).toBe(lastActivityAt);
-				expect(
-					body.students.map(
-						(student: any) => student.credentialState
-					)
-				).toEqual([
+				expect(body.students.map((student: any) => student.credentialState)).toEqual([
 					"password",
 					"access-code",
 					"setup",
@@ -1067,9 +1053,7 @@ describe("teacher-provisioned student accounts", () => {
 					"expired-code",
 					"none"
 				]);
-				expect(body.students[2].accessCodeExpiresAt).toEqual(
-					expect.any(String)
-				);
+				expect(body.students[2].accessCodeExpiresAt).toEqual(expect.any(String));
 				expect(JSON.stringify(body)).not.toMatch(
 					/passwordHash|accessCodeHash|pendingSetupCodeHash|sessionVersion/
 				);
@@ -1081,16 +1065,18 @@ describe("teacher-provisioned student accounts", () => {
 		const studentWithProjectsID = new Types.ObjectId();
 		const studentWithoutProjectsID = new Types.ObjectId();
 		const lastProjectSavedAt = new Date("2026-07-28T16:30:00.000Z");
-		modelMocks.studentFind.mockReturnValue(queryWith([
-			makeStudent({
-				_id: studentWithProjectsID,
-				username: "active-coder"
-			}),
-			makeStudent({
-				_id: studentWithoutProjectsID,
-				username: "new-coder"
-			})
-		]));
+		modelMocks.studentFind.mockReturnValue(
+			queryWith([
+				makeStudent({
+					_id: studentWithProjectsID,
+					username: "active-coder"
+				}),
+				makeStudent({
+					_id: studentWithoutProjectsID,
+					username: "new-coder"
+				})
+			])
+		);
 		modelMocks.pythonProjectAggregate.mockResolvedValue([
 			{
 				_id: studentWithProjectsID,
@@ -1099,32 +1085,29 @@ describe("teacher-provisioned student accounts", () => {
 			}
 		]);
 
-		await withRuntime(
-			{ adminID: ADMIN_SINGLETON_ID },
-			async (baseUrl) => {
-				const response = await fetch(`${baseUrl}/admins/students`);
-				const body = await response.json();
+		await withRuntime({ adminID: ADMIN_SINGLETON_ID }, async baseUrl => {
+			const response = await fetch(`${baseUrl}/admins/students`);
+			const body = await response.json();
 
-				expect(response.status).toBe(200);
-				expect(body.students).toEqual([
-					expect.objectContaining({
-						_id: studentWithProjectsID.toString(),
-						lastProjectSavedAt: lastProjectSavedAt.toISOString(),
-						projectCount: 3,
-						username: "active-coder"
-					}),
-					expect.objectContaining({
-						_id: studentWithoutProjectsID.toString(),
-						lastProjectSavedAt: null,
-						projectCount: 0,
-						username: "new-coder"
-					})
-				]);
-				expect(JSON.stringify(body)).not.toMatch(
-					/projectName|projectTitle|source|files|passwordHash|accessCodeHash/
-				);
-			}
-		);
+			expect(response.status).toBe(200);
+			expect(body.students).toEqual([
+				expect.objectContaining({
+					_id: studentWithProjectsID.toString(),
+					lastProjectSavedAt: lastProjectSavedAt.toISOString(),
+					projectCount: 3,
+					username: "active-coder"
+				}),
+				expect.objectContaining({
+					_id: studentWithoutProjectsID.toString(),
+					lastProjectSavedAt: null,
+					projectCount: 0,
+					username: "new-coder"
+				})
+			]);
+			expect(JSON.stringify(body)).not.toMatch(
+				/projectName|projectTitle|source|files|passwordHash|accessCodeHash/
+			);
+		});
 
 		expect(modelMocks.pythonProjectAggregate).toHaveBeenCalledWith([
 			{
@@ -1304,12 +1287,8 @@ describe("teacher-provisioned student accounts", () => {
 			async (baseUrl, session) => {
 				const first = await fetch(`${baseUrl}/students/session`);
 				const second = await fetch(`${baseUrl}/students/session`);
-				const protectedFirst = await fetch(
-					`${baseUrl}/student-read-probe`
-				);
-				const protectedSecond = await fetch(
-					`${baseUrl}/student-read-probe`
-				);
+				const protectedFirst = await fetch(`${baseUrl}/student-read-probe`);
+				const protectedSecond = await fetch(`${baseUrl}/student-read-probe`);
 
 				expect(first.status).toBe(200);
 				expect(second.status).toBe(200);
@@ -1355,7 +1334,7 @@ describe("teacher-provisioned student accounts", () => {
 			async (baseUrl, session) => {
 				const heartbeat = await fetch(`${baseUrl}/students/session`, {
 					headers: {
-						"Origin": "https://attacker.example",
+						Origin: "https://attacker.example",
 						"X-Classroom-Request": "1",
 						"X-Student-Activity": "1"
 					}
@@ -1409,9 +1388,9 @@ describe("teacher-provisioned student accounts", () => {
 					requiresPasswordSetup: false
 				});
 				expect(session.studentID).toBeUndefined();
-					expect(JSON.stringify(body)).not.toMatch(
-						/passwordHash|accessCodeHash|pendingSetupCodeHash|lastPasswordSetupRequestID|sessionVersion|failedLoginAttempts|lockedUntil/
-					);
+				expect(JSON.stringify(body)).not.toMatch(
+					/passwordHash|accessCodeHash|pendingSetupCodeHash|lastPasswordSetupRequestID|sessionVersion|failedLoginAttempts|lockedUntil/
+				);
 			}
 		);
 	});

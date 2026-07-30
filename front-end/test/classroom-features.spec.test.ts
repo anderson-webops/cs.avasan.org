@@ -1,0 +1,47 @@
+import { afterEach, describe, expect, it, vi } from "vitest";
+import {
+	classroomUsageIsEnabled,
+	studentAccountsAreEnabled,
+	studentOAuthIsEnabled
+} from "@/modules/classroomFeatures";
+
+describe("frontend classroom privacy gates", () => {
+	afterEach(() => {
+		vi.unstubAllEnvs();
+	});
+
+	it("fails closed by default", () => {
+		expect(studentAccountsAreEnabled()).toBe(false);
+		expect(studentOAuthIsEnabled()).toBe(false);
+		expect(classroomUsageIsEnabled()).toBe(false);
+	});
+
+	it("requires approval and a direct contact in addition to feature flags", () => {
+		vi.stubEnv("VITE_STUDENT_ACCOUNTS_ENABLED", "true");
+		vi.stubEnv("VITE_STUDENT_OAUTH_ENABLED", "true");
+		vi.stubEnv("VITE_CLASSROOM_USAGE_ENABLED", "true");
+		expect(studentAccountsAreEnabled()).toBe(false);
+
+		vi.stubEnv("VITE_CLASSROOM_PRIVACY_APPROVED", "true");
+		expect(studentAccountsAreEnabled()).toBe(false);
+
+		vi.stubEnv(
+			"VITE_SCHOOL_PRIVACY_CONTACT",
+			"School privacy office, 555-0100"
+		);
+		expect(studentAccountsAreEnabled()).toBe(true);
+		expect(studentOAuthIsEnabled()).toBe(true);
+		expect(classroomUsageIsEnabled()).toBe(true);
+	});
+
+	it("never enables OAuth without optional accounts", () => {
+		vi.stubEnv("VITE_CLASSROOM_PRIVACY_APPROVED", "true");
+		vi.stubEnv(
+			"VITE_SCHOOL_PRIVACY_CONTACT",
+			"School privacy office, 555-0100"
+		);
+		vi.stubEnv("VITE_STUDENT_ACCOUNTS_ENABLED", "false");
+		vi.stubEnv("VITE_STUDENT_OAUTH_ENABLED", "true");
+		expect(studentOAuthIsEnabled()).toBe(false);
+	});
+});

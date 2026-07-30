@@ -37,8 +37,10 @@ import {
 	loadLocalPythonProjectsAsync,
 	normalizePythonFileName,
 	pythonIdeModeForCourseId,
+	pythonIdeAnonymousClearSignalStorageKey,
 	pythonIdeProjectToPayload,
 	pythonIdeStorageKey,
+	purgeAnonymousPythonWorkspace,
 	purgeAllStudentPythonProjectRecovery,
 	resolvePythonIdeActiveFileName,
 	saveLocalPythonProjects,
@@ -204,9 +206,9 @@ screen.listen()
 
 		expect(adapted).toContain("###   NORMAL SECTION");
 		expect(adapted).toContain("###   HARD SECTION");
-		expect(adapted.indexOf("from __future__ import annotations")).toBeLessThan(
-			adapted.indexOf("def normal_addition():")
-		);
+		expect(
+			adapted.indexOf("from __future__ import annotations")
+		).toBeLessThan(adapted.indexOf("def normal_addition():"));
 		expect(adapted.indexOf("def hard_addition():")).toBeLessThan(
 			adapted.indexOf("import turtle")
 		);
@@ -702,8 +704,7 @@ screen.listen()
 		const anonymousKey = pythonIdeStorageKey(null);
 		const claimKey =
 			"classes-python-ide-projects:anonymous-claim:local-claimed";
-		const guestEditorKey =
-			"classes-python-ide-editor-view-state:guest";
+		const guestEditorKey = "classes-python-ide-editor-view-state:guest";
 		for (const key of [
 			pythonIdeStorageKey("student-a"),
 			`${pythonIdeStorageKey("student-a")}:recovery:old-tab`,
@@ -743,15 +744,67 @@ screen.listen()
 		).toEqual([]);
 	});
 
+	it("clears anonymous projects, claim IDs, and guest editor state without touching owner data", async () => {
+		const anonymousProject = createPythonIdeProject("python");
+		const studentKey = pythonIdeStorageKey("student-a");
+		const claimKey =
+			"classes-python-ide-projects:anonymous-claim:local-claimed";
+		const guestEditorKey = "classes-python-ide-editor-view-state:guest";
+		window.localStorage.setItem(studentKey, "legacy owner data");
+		window.localStorage.setItem(
+			claimKey,
+			JSON.stringify({ studentID: "legacy-student-id" })
+		);
+		window.localStorage.setItem(guestEditorKey, "anonymous editor state");
+		saveLocalPythonProjects([anonymousProject], null);
+
+		await purgeAnonymousPythonWorkspace();
+
+		expect(loadLocalPythonProjects(null)).toEqual([]);
+		expect(window.localStorage.getItem(claimKey)).toBeNull();
+		expect(window.localStorage.getItem(guestEditorKey)).toBeNull();
+		expect(window.localStorage.getItem(studentKey)).toBe(
+			"legacy owner data"
+		);
+		expect(
+			window.localStorage.getItem(pythonIdeAnonymousClearSignalStorageKey)
+		).toBeTruthy();
+	});
+
+	it("blocks a stale tab from republishing work after another tab clears it", async () => {
+		const staleProject = createPythonIdeProject("python");
+		staleProject.files[0]!.content = "previous student's work";
+		saveLocalPythonProjects([staleProject], null);
+		expect(loadLocalPythonProjects(null)).toEqual([staleProject]);
+
+		// A storage event changes this key in real multi-tab use. Keep the
+		// module's observed generation unchanged to model a frozen stale tab.
+		window.localStorage.setItem(
+			pythonIdeAnonymousClearSignalStorageKey,
+			"clear-from-another-tab"
+		);
+
+		expect(loadLocalPythonProjects(null)).toEqual([]);
+		expect(() => saveLocalPythonProjects([staleProject], null)).toThrow(
+			"cleared in another tab"
+		);
+		await expect(
+			saveLocalPythonProjectsAsync([staleProject], null)
+		).rejects.toThrow("cleared in another tab");
+
+		await purgeAnonymousPythonWorkspace({ broadcast: false });
+		expect(loadLocalPythonProjects(null)).toEqual([]);
+	});
+
 	it("uses localStorage fallback for anonymous work when IndexedDB is unavailable", async () => {
 		const project = createPythonIdeProject("pgzero");
 
 		await saveLocalPythonProjectsAsync([project], null);
 
 		expect(loadLocalPythonProjects(null)).toHaveLength(1);
-		await expect(
-			loadLocalPythonProjectsAsync(null)
-		).resolves.toHaveLength(1);
+		await expect(loadLocalPythonProjectsAsync(null)).resolves.toHaveLength(
+			1
+		);
 
 		await clearLocalPythonProjectsAsync(null);
 
@@ -823,7 +876,7 @@ screen.listen()
 		expect(cleanSuspension.has("student-a")).toBe(false);
 	});
 
-	it("purges every IndexedDB owner record without deleting anonymous records", async () => {
+	it("purges anonymous and owner IndexedDB records through separate boundaries", async () => {
 		const anonymousKey = pythonIdeStorageKey(null);
 		const claimKey =
 			"classes-python-ide-projects:anonymous-claim:local-claimed";
@@ -891,9 +944,16 @@ screen.listen()
 			}
 		});
 
-		await purgeAllStudentPythonProjectRecovery();
+		await purgeAnonymousPythonWorkspace({ broadcast: false });
 
-		expect([...records]).toEqual([anonymousKey, claimKey]);
+		expect([...records]).toEqual([
+			pythonIdeStorageKey("student-a"),
+			`${pythonIdeStorageKey("student-a")}:recovery:old-tab`,
+			pythonIdeStorageKey("student-b")
+		]);
+
+		await purgeAllStudentPythonProjectRecovery();
+		expect([...records]).toEqual([]);
 	});
 
 	it("keeps IndexedDB wired as the primary local project store", () => {
@@ -913,7 +973,11 @@ screen.listen()
 		expect(moduleSource).toContain(
 			"saveLegacyLocalPythonProjectsMirror(record, userID);"
 		);
-		expect(moduleSource).toContain("plainPythonIdeProjectsSnapshot(projects)");
+		expect(moduleSource).toContain(
+			"plainPythonIdeProjectsSnapshot(projects)"
+		);
+		expect(moduleSource).not.toContain("claimedStudentID");
+		expect(moduleSource).not.toContain("JSON.stringify({ studentID })");
 	});
 
 	it("labels supported runtime modes", () => {
@@ -943,9 +1007,13 @@ screen.listen()
 		expect(pythonIdeModeForCourseId("scratch-level-1")).toBeNull();
 		expect(normalizePythonIdeMode("pgzero", "turtle")).toBe("pgzero");
 		expect(normalizePythonIdeMode("unknown", "turtle")).toBe("turtle");
-		expect(normalizeClassroomPythonIdeMode("data", "turtle")).toBe("python");
+		expect(normalizeClassroomPythonIdeMode("data", "turtle")).toBe(
+			"python"
+		);
 		expect(normalizeClassroomPythonIdeMode("", "data")).toBe("python");
-		expect(normalizeClassroomPythonIdeMode("pgzero", "turtle")).toBe("pgzero");
+		expect(normalizeClassroomPythonIdeMode("pgzero", "turtle")).toBe(
+			"pgzero"
+		);
 	});
 
 	it("loads completed classroom starters through the client-side IDE route", () => {
@@ -1020,9 +1088,7 @@ screen.listen()
 		expect(runtimeSource).toContain("releasePythonIdeRuntimeCallbacks");
 		expect(sandboxSource).toContain("callbackRegistry");
 		expect(sandboxSource).toContain('method === "scheduleTimer"');
-		expect(sandboxSource).toContain(
-			"releasePythonIdeSandboxCallbacks"
-		);
+		expect(sandboxSource).toContain("releasePythonIdeSandboxCallbacks");
 		expect(pageSource).toContain("scheduleTimer(delayMs: number");
 		expect(pageSource).toContain("clearTurtleTimers()");
 		expect(pageSource).toContain("let turtleTimerGeneration = 0;");
@@ -1050,9 +1116,7 @@ screen.listen()
 			runControlStart,
 			pageSource.indexOf("const selectedModeLabel", runControlStart)
 		);
-		const registerStart = pageSource.indexOf(
-			"registerKey(key: string"
-		);
+		const registerStart = pageSource.indexOf("registerKey(key: string");
 		const registerSource = pageSource.slice(
 			registerStart,
 			pageSource.indexOf("listen()", registerStart)
@@ -1074,9 +1138,7 @@ screen.listen()
 		expect(pageSource).toContain(
 			"function refreshActiveTurtleEventHandlerCount"
 		);
-		expect(runControlSource).toContain(
-			"activeTurtleTimerCount.value > 0"
-		);
+		expect(runControlSource).toContain("activeTurtleTimerCount.value > 0");
 		expect(runControlSource).toContain(
 			"activeTurtleTimerCallbackCount.value > 0"
 		);
@@ -1095,9 +1157,7 @@ screen.listen()
 		expect(stopSource).toContain("keyHandlers.clear();");
 		expect(stopSource).toContain("turtleClickHandlers.clear();");
 		expect(stopSource).toContain("turtleDragHandlers.clear();");
-		expect(stopSource).toContain(
-			"refreshActiveTurtleEventHandlerCount();"
-		);
+		expect(stopSource).toContain("refreshActiveTurtleEventHandlerCount();");
 	});
 
 	it("keeps Turtle runs animated with a visible cursor marker", () => {
@@ -1392,10 +1452,10 @@ screen.listen()
 		expect(pageSource).toContain(
 			"const turtleDistanceDurationMsPerPixelAtDefaultSpeed = 5"
 		);
+		expect(pageSource).toContain("function turtleAnimationSpeedScale");
 		expect(pageSource).toContain(
-			"function turtleAnimationSpeedScale"
+			"return turtleDefaultSpeed / normalizedSpeed;"
 		);
-		expect(pageSource).toContain("return turtleDefaultSpeed / normalizedSpeed;");
 		expect(pageSource).toContain(
 			"distance *\n\t\t\t\t\tturtleDistanceDurationMsPerPixelAtDefaultSpeed *\n\t\t\t\t\tspeedScale"
 		);
@@ -1467,7 +1527,9 @@ screen.listen()
 		expect(pageSource).toContain(
 			"if (!turtleTracerEnabled || fromPose.speed === 0)"
 		);
-		expect(pageSource).toContain("const speedScale = turtleAnimationSpeedScale");
+		expect(pageSource).toContain(
+			"const speedScale = turtleAnimationSpeedScale"
+		);
 		expect(pageSource).toContain("Math.max(1, Math.min(10, speed))");
 		expect(pageSource).toContain("setSpeed(speed: number)");
 		expect(pageSource).toContain("setTracer(value: number)");
@@ -1476,9 +1538,13 @@ screen.listen()
 		expect(runtimeSource).toContain(
 			"def tracer(*args): return _screen.tracer(*args)"
 		);
-		expect(runtimeSource).toContain("def update(): return _screen.update()");
+		expect(runtimeSource).toContain(
+			"def update(): return _screen.update()"
+		);
 		expect(runtimeSource).toContain("_bridge.setSpeed(float(self._speed))");
-		expect(runtimeSource).toContain("_bridge.setTracer(float(_tracer_value))");
+		expect(runtimeSource).toContain(
+			"_bridge.setTracer(float(_tracer_value))"
+		);
 	});
 
 	it("keeps the Turtle cursor drawn directly above its trail", () => {
@@ -1708,18 +1774,16 @@ screen.listen()
 		expect(pageSource).toContain(
 			"const turtleBacklogFastForwardStepThreshold = 18"
 		);
-		expect(pageSource).toContain(
-			"function shouldFastForwardTurtleBacklog"
-		);
+		expect(pageSource).toContain("function shouldFastForwardTurtleBacklog");
 		expect(pageSource).toContain(
 			"function turtleAnimationBacklogStepCount"
 		);
 		expect(runFrameSource).toContain(
 			"if (shouldFastForwardTurtleBacklog(step))"
 		);
-		expect(runFrameSource.indexOf("shouldFastForwardTurtleBacklog")).toBeLessThan(
-			runFrameSource.indexOf("isInstantTurtleAnimationStep")
-		);
+		expect(
+			runFrameSource.indexOf("shouldFastForwardTurtleBacklog")
+		).toBeLessThan(runFrameSource.indexOf("isInstantTurtleAnimationStep"));
 		expect(backlogSource).toContain(
 			"activeTurtleAnimationStep.turtleID === synchronizedTurtleID"
 		);
@@ -1876,15 +1940,9 @@ screen.listen()
 		const iframeSource = pageSource.slice(iframeStart, iframeEnd);
 
 		expect(pageSource).toContain('artifact.mimeType === "text/html"');
-		expect(pageSource).toContain(
-			"connect-src 'none';"
-		);
-		expect(pageSource).toContain(
-			"form-action 'none';"
-		);
-		expect(pageSource).toContain(
-			'http-equiv="Content-Security-Policy"'
-		);
+		expect(pageSource).toContain("connect-src 'none';");
+		expect(pageSource).toContain("form-action 'none';");
+		expect(pageSource).toContain('http-equiv="Content-Security-Policy"');
 		expect(iframeSource).toContain('v-else-if="artifact.srcdoc"');
 		expect(iframeSource).toContain(
 			':csp="runtimeArtifactContentSecurityPolicy"'
@@ -1944,9 +2002,7 @@ screen.listen()
 		expect(sandboxSource).toContain(
 			"options.onProjectFilesUpdate?.(result.files)"
 		);
-		expect(sandboxSource).toContain(
-			"{ continuous: result.continuous }"
-		);
+		expect(sandboxSource).toContain("{ continuous: result.continuous }");
 		expect(pageSource).toContain(
 			"shouldStop: () => shouldStopPythonIdeRun(runID, project._id)"
 		);
@@ -1976,7 +2032,9 @@ screen.listen()
 			runStart,
 			pageSource.indexOf("function stopCurrentProject", runStart)
 		);
-		const stopStart = pageSource.indexOf("function stopActiveRuntimeSurfaces");
+		const stopStart = pageSource.indexOf(
+			"function stopActiveRuntimeSurfaces"
+		);
 		const stopSource = pageSource.slice(
 			stopStart,
 			pageSource.indexOf("function activateRunControl", stopStart)
@@ -1989,7 +2047,9 @@ screen.listen()
 		expect(pageSource).toContain("function shouldStopPythonIdeRun");
 		expect(runSource).toContain("const runID = nextPythonIdeRunID();");
 		expect(runSource.indexOf("await saveSelectedProject")).toBeLessThan(
-			runSource.indexOf("if (shouldStopPythonIdeRun(runID, project._id)) return;")
+			runSource.indexOf(
+				"if (shouldStopPythonIdeRun(runID, project._id)) return;"
+			)
 		);
 		expect(runSource).toContain(
 			"await ensureGameCourseAssetsLoaded();\n\t\t\tif (shouldStopPythonIdeRun(runID, project._id)) return;"
@@ -2028,7 +2088,9 @@ screen.listen()
 		);
 		const runSource = runtimeSource.slice(runSourceStart);
 
-		expect(inputBootstrapSource).toContain("def _classes_reset_main_namespace():");
+		expect(inputBootstrapSource).toContain(
+			"def _classes_reset_main_namespace():"
+		);
 		expect(inputBootstrapSource).toContain(
 			'classes_main = classes_bootstrap_sys.modules["__main__"]'
 		);
@@ -2047,14 +2109,12 @@ screen.listen()
 		expect(inputBootstrapSource).toContain(
 			'classes_main.__dict__["__name__"] = "__main__"'
 		);
-		expect(inputBootstrapSource).toContain("_classes_reset_main_namespace()");
+		expect(inputBootstrapSource).toContain(
+			"_classes_reset_main_namespace()"
+		);
 		expect(runSource).toContain("runPythonProjectInSandbox(");
-		expect(sandboxSource).toContain(
-			'__main__.__dict__["__file__"] ='
-		);
-		expect(sandboxSource).toContain(
-			"__classes_compile_student_source("
-		);
+		expect(sandboxSource).toContain('__main__.__dict__["__file__"] =');
+		expect(sandboxSource).toContain("__classes_compile_student_source(");
 		expect(sandboxSource).toContain("__main__.__dict__,");
 	});
 
@@ -2250,7 +2310,9 @@ screen.listen()
 		expect(projectSwitchSource).toContain(
 			"previousProjectID === expectedMigration.from"
 		);
-		expect(projectSwitchSource).toContain("projectID === expectedMigration.to");
+		expect(projectSwitchSource).toContain(
+			"projectID === expectedMigration.to"
+		);
 		expect(migrationReturnIndex).toBeGreaterThan(0);
 		expect(runtimeStopIndex).toBeGreaterThan(migrationReturnIndex);
 	});
@@ -2335,11 +2397,11 @@ screen.listen()
 		expect(sandboxSource).toContain(
 			'activeSandbox?.destroy("Python runtime replaced by a new run.")'
 		);
-		expect(sandboxSource).toContain("const iframe = document.createElement");
-		expect(sandboxSource).toContain("iframe.remove()");
 		expect(sandboxSource).toContain(
-			"const worker = new Worker("
+			"const iframe = document.createElement"
 		);
+		expect(sandboxSource).toContain("iframe.remove()");
+		expect(sandboxSource).toContain("const worker = new Worker(");
 	});
 
 	it("preserves PyGame Zero canvas aspect ratio instead of stretching", () => {
@@ -2495,9 +2557,7 @@ screen.listen()
 		expect(sandboxSource).toContain(
 			'await pyodide.loadPackage("micropip")'
 		);
-		expect(sandboxSource).toContain(
-			'await pyodide.loadPackage("numpy")'
-		);
+		expect(sandboxSource).toContain('await pyodide.loadPackage("numpy")');
 		expect(runtimeSource).toContain('from "@/modules/pythonImportScanner"');
 		expect(scannerSource).toContain(
 			"export function pythonIdeImportedTopLevelModules"
@@ -2513,9 +2573,7 @@ screen.listen()
 		expect(sandboxSource).toContain(
 			'getattr(sys, "stdlib_module_names", [])'
 		);
-		expect(sandboxSource).toContain(
-			"!standardLibrary.has(name)"
-		);
+		expect(sandboxSource).toContain("!standardLibrary.has(name)");
 		expect(sandboxSource).toContain("!localModules.has(name)");
 		expect(sandboxSource).toContain("!micropip.has(name)");
 	});
@@ -2751,9 +2809,7 @@ screen.listen()
 		);
 		expect(runtimeSource).toContain('"_classes_pgzero"');
 		expect(runtimeSource).toContain('"turtle"');
-		expect(sandboxSource).toContain(
-			"...packet.runtimeModules"
-		);
+		expect(sandboxSource).toContain("...packet.runtimeModules");
 		expect(sandboxSource).toContain("const worker = new Worker(");
 	});
 
@@ -2841,7 +2897,9 @@ screen.listen()
 		const saveIndex = runSource.indexOf(
 			"await saveSelectedProject({ force: true });"
 		);
-		const projectIndex = runSource.indexOf("const project = selectedProject.value;");
+		const projectIndex = runSource.indexOf(
+			"const project = selectedProject.value;"
+		);
 		const runnableIndex = runSource.indexOf(
 			"const runnableFile = getPythonIdeRunnableFile(project);"
 		);
@@ -2923,12 +2981,18 @@ screen.listen()
 		expect(pageSource).toContain("interface SaveProjectOptions");
 		expect(pageSource).toContain("async function savePendingProjects");
 		expect(pageSource).toContain("pendingSaveProjectIDs.add(projectID);");
-		expect(pageSource).toContain("unsyncedProjectIDs.add(startedProjectID);");
+		expect(pageSource).toContain(
+			"unsyncedProjectIDs.add(startedProjectID);"
+		);
 		expect(pageSource).toContain("void savePendingProjects();");
 		expect(pageSource).toContain("saveSelectedProject({ force: true })");
 		expect(pageSource).toContain("let localSnapshotTimer:");
-		expect(pageSource).toContain("async function persistLocalProjectSnapshot");
-		expect(pageSource).toContain("async function discardLocalProjectSnapshot");
+		expect(pageSource).toContain(
+			"async function persistLocalProjectSnapshot"
+		);
+		expect(pageSource).toContain(
+			"async function discardLocalProjectSnapshot"
+		);
 		expect(pageSource).toContain(
 			"async function discardLocalProjectSnapshotIfSafe"
 		);
@@ -2941,12 +3005,8 @@ screen.listen()
 		expect(pageSource).toContain(
 			"await persistLocalProjects({ quiet: true });"
 		);
-		expect(pageSource).toContain(
-			'? "Waiting to sync to account"'
-		);
-		expect(pageSource).toContain(
-			"volatileStudentProjectRecovery.replace("
-		);
+		expect(pageSource).toContain('? "Waiting to sync to account"');
+		expect(pageSource).toContain("volatileStudentProjectRecovery.replace(");
 		expect(pageSource).toContain(
 			'window.addEventListener("pagehide", flushPendingProjectSave);'
 		);
@@ -2977,10 +3037,10 @@ screen.listen()
 		expect(pageSource).toContain("function isCodeEditorViewState");
 		expect(pageSource).toContain("function restoreCodeEditorScroll");
 		expect(pageSource).toContain("function deleteCodeEditorStateForFile");
-		expect(pageSource).toContain("function deleteCodeEditorStateForProject");
 		expect(pageSource).toContain(
-			'CodeEditorViewState["ranges"][number]'
+			"function deleteCodeEditorStateForProject"
 		);
+		expect(pageSource).toContain('CodeEditorViewState["ranges"][number]');
 		expect(pageSource).toContain(
 			"savedState?.doc.toString() === activeFileContent.value"
 		);
@@ -3010,17 +3070,19 @@ screen.listen()
 		expect(codeMirrorSource).toContain("...defaultKeymap");
 		expect(codeMirrorSource).toContain("...closeBracketsKeymap");
 		expect(codeMirrorSource).toContain("rectangularSelection()");
-		expect(codeMirrorSource).toContain("EditorState.allowMultipleSelections.of(true)");
-		expect(codeMirrorSource).toContain("Prec.highest(keymap.of([indentWithTab]))");
+		expect(codeMirrorSource).toContain(
+			"EditorState.allowMultipleSelections.of(true)"
+		);
+		expect(codeMirrorSource).toContain(
+			"Prec.highest(keymap.of([indentWithTab]))"
+		);
 		expect(helpTextSource).toContain(".code-panel { overflow: hidden;");
 		expect(helpTextSource).toContain("max-height: min(24rem, 44vh);");
 		expect(helpTextSource).toContain("overscroll-behavior: contain;");
 		expect(helpTextSource).toContain("Cmd/Ctrl+Enter: Run");
 		expect(helpTextSource).toContain("Cmd/Ctrl+S: Save");
 		expect(helpTextSource).toContain("Cmd/Ctrl+F: Find");
-		expect(helpTextSource).toContain(
-			"Tab / Shift+Tab: Indent / outdent"
-		);
+		expect(helpTextSource).toContain("Tab / Shift+Tab: Indent / outdent");
 		expect(helpTextSource).not.toContain("Course snippets include");
 		expect(helpTextSource).not.toContain("rectangular selection");
 	});
@@ -3108,16 +3170,12 @@ screen.listen()
 		expect(pageSource).toContain("async function savePendingProjects");
 		expect(pageSource).toContain("const pendingSaveProjectIDs");
 		expect(pageSource).toContain("const startedUpdatedAt");
-		expect(pageSource).toContain(
-			"? await createRemotePythonIdeProject("
-		);
+		expect(pageSource).toContain("? await createRemotePythonIdeProject(");
 		expect(pageSource).toContain(
 			"{ expectedUpdatedAt: expectedUpdatedAt! }"
 		);
 		expect(pageSource).toContain("const projectChangedDuringSave");
-		expect(pageSource).toContain(
-			"currentProject.serverUpdatedAt ="
-		);
+		expect(pageSource).toContain("currentProject.serverUpdatedAt =");
 		expect(pageSource).toContain("saveQueued = true");
 		expect(pageSource).toContain(
 			"} while (saveQueued || pendingSaveProjectIDs.size);"
@@ -3482,9 +3540,7 @@ screen.listen()
 		expect(alien?.url).toBe("/python-ide/assets/images/alien.png");
 		expect(alien?.width).toBe(20);
 		expect(alien?.height).toBe(18);
-		expect(alienLeft?.url).toBe(
-			"/python-ide/assets/images/alien-left.png"
-		);
+		expect(alienLeft?.url).toBe("/python-ide/assets/images/alien-left.png");
 	});
 
 	it("keeps zip parsing out of the normal course asset loader chunk", () => {
@@ -3507,10 +3563,7 @@ screen.listen()
 
 	it("pins the build-time asset archive to the reviewed size and SHA-256", () => {
 		const downloadSource = readFileSync(
-			resolve(
-				__dirname,
-				"../scripts/download-python-ide-assets.mjs"
-			),
+			resolve(__dirname, "../scripts/download-python-ide-assets.mjs"),
 			"utf8"
 		);
 
@@ -3521,9 +3574,7 @@ screen.listen()
 		expect(downloadSource).toContain(
 			"6ab65a710032ca71cf957bfd56f8b60579d66c94395bbc34fc433be4bb0f92a1"
 		);
-		expect(downloadSource).toContain(
-			'const hash = createHash("sha256");'
-		);
+		expect(downloadSource).toContain('const hash = createHash("sha256");');
 		expect(downloadSource).toContain("response.body.getReader()");
 		expect(downloadSource).toContain(
 			"byteLength > REVIEWED_ASSETS_ZIP_BYTES"
@@ -3534,17 +3585,15 @@ screen.listen()
 		expect(downloadSource).toContain(
 			"localInfo.cache?.sha256 === REVIEWED_ASSETS_ZIP_SHA256"
 		);
-		expect(downloadSource).toContain(
-			"sha256: REVIEWED_ASSETS_ZIP_SHA256"
-		);
+		expect(downloadSource).toContain("sha256: REVIEWED_ASSETS_ZIP_SHA256");
 		expect(downloadSource).toContain(
 			"const ASSET_REQUEST_TIMEOUT_MS = 60_000;"
 		);
 		expect(downloadSource).toContain(
-			"withAssetNetworkTimeout(\n\t\t\t\"asset download\""
+			'withAssetNetworkTimeout(\n\t\t\t"asset download"'
 		);
 		expect(downloadSource).toContain(
-			"withAssetNetworkTimeout(\n\t\t\"asset metadata request\""
+			'withAssetNetworkTimeout(\n\t\t"asset metadata request"'
 		);
 		expect(downloadSource).toContain("fetch(sourceUrl, { signal })");
 		expect(downloadSource).toContain('method: "HEAD",');
@@ -3959,12 +4008,8 @@ screen.listen()
 		expect(pageSource).toContain(
 			"let gameAudioPlaybackBlockedNoticeShown = false;"
 		);
-		expect(pageSource).toContain(
-			"function reportGameAudioPlaybackBlocked"
-		);
-		expect(pageSource).toContain(
-			"Audio is waiting for a browser gesture."
-		);
+		expect(pageSource).toContain("function reportGameAudioPlaybackBlocked");
+		expect(pageSource).toContain("Audio is waiting for a browser gesture.");
 		expect(pageSource).not.toContain(
 			"Audio playback was blocked: ${error.message}"
 		);

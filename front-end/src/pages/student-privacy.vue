@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-defineOptions({ name: "StudentPrivacyPage" });
+import { schoolPrivacyContact as configuredSchoolPrivacyContact } from "@/modules/classroomFeatures";
 
-const schoolPrivacyContact = (
-	import.meta.env.VITE_SCHOOL_PRIVACY_CONTACT ?? ""
-).trim();
+defineOptions({ name: "StudentPrivacyPage" });
+const schoolPrivacyContact = configuredSchoolPrivacyContact();
 </script>
 
 <template>
@@ -37,10 +36,17 @@ const schoolPrivacyContact = (
 				signals.
 			</p>
 			<p>
+				Each tab marks a count as attempted before sending it and does
+				not retry after an error or missing response. This may
+				undercount activity, but prevents an uncertain response from
+				causing a duplicate count without adding an identifier.
+			</p>
+			<p>
 				The classroom server may hold a network address in memory for up
-				to five minutes to prevent automated flooding. It is not added
-				to classroom analytics. Any hosting security logs must follow
-				the school or district’s approved retention rules.
+				to five minutes to prevent automated flooding. Each temporary
+				counter is deleted when that five-minute window ends. It is not
+				added to classroom analytics. Any hosting security logs must
+				follow the school or district’s approved retention rules.
 			</p>
 		</section>
 
@@ -63,11 +69,34 @@ const schoolPrivacyContact = (
 		</section>
 
 		<section class="site-surface privacy-page__section">
+			<h2>Python work saved in a shared browser</h2>
+			<p>
+				Without an account, the Python IDE saves projects and editor
+				state in browser storage on that computer. Anyone who later uses
+				the same browser profile could otherwise see or change work left
+				there.
+			</p>
+			<p>
+				On a shared computer, download anything that should be kept,
+				then choose
+				<strong>Clear browser projects for next student</strong> in the
+				Python IDE and confirm the deletion. The clear is announced to
+				other open IDE tabs, removes anonymous projects, import markers,
+				and editor state, and opens a blank workspace. Projects already
+				saved to a signed-in account are not deleted. Close the tabs
+				when finished.
+			</p>
+		</section>
+
+		<section class="site-surface privacy-page__section">
 			<h2>Optional student accounts</h2>
 			<p>
 				Courses and browser saves work without an account. Julio may
-				create an optional account, with a username and no email, so a
-				student can save Python projects across devices.
+				create an optional account with a username and no email, so a
+				student can save Python projects across devices. The username
+				must be a school-approved alias, not a full name, birthdate,
+				student number, or other direct identifier; any roster mapping
+				stays in the school’s approved system.
 			</p>
 			<p>
 				For signed-in students, the classroom keeps the username, login
@@ -102,7 +131,20 @@ const schoolPrivacyContact = (
 			</p>
 			<p>
 				Account and project retention is controlled by the school or
-				district authorization for the classroom.
+				district authorization for the classroom. When Julio permanently
+				deletes an account, the classroom keeps a short-lived deletion
+				receipt with the school-approved alias, internal account ID,
+				status, and deletion counts for up to 90 days so the school can
+				complete authorized backup deletion. The receipt does not
+				include a password, access code, provider identifier, project,
+				or code.
+			</p>
+			<p>
+				To protect account and project endpoints from automated misuse,
+				temporary security counters may hold a network address,
+				normalized username, or internal student account ID in server
+				memory for up to 15 minutes. They are deleted when that window
+				ends and are not added to analytics or the student record.
 			</p>
 		</section>
 

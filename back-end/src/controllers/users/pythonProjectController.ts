@@ -496,9 +496,16 @@ async function findManagedPythonProjectStudent(
 	const studentID = getStudentIDParam(req, res);
 	if (!studentID) return null;
 
-	const student = await Student.findById(studentID);
+	const student = await Student.findById(studentID)
+		.select("+dataDeletionPendingAt");
 	if (!student) {
 		res.sendStatus(404);
+		return null;
+	}
+	if (student.dataDeletionPendingAt) {
+		res.status(409).json({
+			message: "Permanent deletion is pending for this student."
+		});
 		return null;
 	}
 

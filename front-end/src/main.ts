@@ -4,6 +4,7 @@ import { setupLayouts } from "virtual:generated-layouts";
 import { routes } from "vue-router/auto-routes";
 import App from "./App.vue";
 import { startAdminSessionLifecycle } from "./modules/adminSession";
+import { studentAccountsAreEnabled } from "./modules/classroomFeatures";
 import {
 	purgeAllStudentPythonProjectRecovery,
 	volatileStudentPythonProjectRecovery
@@ -59,7 +60,9 @@ export const createApp = ViteSSG(
 			});
 			startSessionBootstrap(appStore);
 			startAdminSessionLifecycle(appStore);
-			startStudentSessionLifecycle(appStore);
+			if (studentAccountsAreEnabled()) {
+				startStudentSessionLifecycle(appStore);
+			}
 		}
 
 		// If you had specific plugins like a global error handler, i18n, etc., initialize them here

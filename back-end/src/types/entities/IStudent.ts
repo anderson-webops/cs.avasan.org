@@ -18,6 +18,7 @@ export interface IStudent {
 	passwordSetAt?: Date;
 	lastLoginAt?: Date;
 	lastPasswordSetupRequestID?: string;
+	dataDeletionPendingAt?: Date;
 	createdAt: Date;
 	updatedAt: Date;
 }

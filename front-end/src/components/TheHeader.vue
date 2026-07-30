@@ -2,6 +2,7 @@
 import { storeToRefs } from "pinia";
 import { useRoute } from "vue-router";
 import StudentAccess from "@/components/StudentAccess.vue";
+import { studentAccountsAreEnabled } from "@/modules/classroomFeatures";
 import { useAppStore } from "@/stores/app";
 
 const app = useAppStore();
@@ -94,7 +95,10 @@ async function logout() {
 									Log out
 								</button>
 							</div>
-							<StudentAccess v-show="!currentAdmin" />
+							<StudentAccess
+								v-if="studentAccountsAreEnabled()"
+								v-show="!currentAdmin"
+							/>
 						</div>
 					</div>
 				</div>

@@ -137,12 +137,12 @@ export interface CreatePythonIdeProjectOptions {
 }
 
 interface PythonIdeProjectStorageRecord {
+	anonymousGeneration?: string | null;
 	key: string;
 	projects: PythonIdeProject[];
 	revision?: string;
 	updatedAt: string;
 	claimedProjectID?: string;
-	claimedStudentID?: string;
 }
 
 export interface PythonIdeLocalRecoveryRecordToken {
@@ -193,6 +193,8 @@ export interface PythonIdeRecoveryPlan {
 export const pythonIdeStorageNamespace = "classes-python-ide-projects";
 export const pythonIdeEditorViewStateStoragePrefix =
 	"classes-python-ide-editor-view-state";
+export const pythonIdeAnonymousClearSignalStorageKey =
+	"cs-avasan-python-ide-anonymous-clear-signal";
 const legacyPythonIdeEditorViewStateStoragePrefixes = [
 	pythonIdeEditorViewStateStoragePrefix,
 	"cs-avasan-python-ide-editor-state"
@@ -221,6 +223,8 @@ export const pythonIdeFileUploadAccept =
 	pythonIdeAllowedFileExtensions.join(",");
 
 let pythonIdeStorageDbPromise: Promise<IDBDatabase> | null = null;
+let observedAnonymousClearSignal: string | null | undefined;
+let observedAnonymousClearSignalStorage: Storage | null = null;
 
 const pythonIdeCourseModes: Record<string, PythonIdeMode> = {
 	"ai-level-1": "data",
@@ -1723,6 +1727,64 @@ function pythonIdeAnonymousClaimStorageKey(projectID: string) {
 	return `${pythonIdeAnonymousClaimStoragePrefix()}${projectID}`;
 }
 
+function currentAnonymousClearSignal(): string | null {
+	if (typeof window === "undefined") return null;
+	try {
+		return window.localStorage.getItem(
+			pythonIdeAnonymousClearSignalStorageKey
+		);
+	} catch {
+		return null;
+	}
+}
+
+function ensureAnonymousClearSignalStorageIdentity() {
+	if (typeof window === "undefined") return;
+	if (observedAnonymousClearSignalStorage !== window.localStorage) {
+		observedAnonymousClearSignalStorage = window.localStorage;
+		observedAnonymousClearSignal = undefined;
+	}
+}
+
+function observeCurrentAnonymousClearSignal(): string | null {
+	ensureAnonymousClearSignalStorageIdentity();
+	observedAnonymousClearSignal = currentAnonymousClearSignal();
+	return observedAnonymousClearSignal;
+}
+
+function observedAnonymousWorkspaceGeneration(): string | null {
+	ensureAnonymousClearSignalStorageIdentity();
+	if (observedAnonymousClearSignal === undefined) {
+		return observeCurrentAnonymousClearSignal();
+	}
+	return observedAnonymousClearSignal;
+}
+
+function assertAnonymousWorkspaceGenerationIsCurrent() {
+	const observed = observedAnonymousWorkspaceGeneration();
+	if (observed !== currentAnonymousClearSignal()) {
+		throw new Error(
+			"These browser projects were cleared in another tab. Reload the blank workspace before saving."
+		);
+	}
+	return observed;
+}
+
+export function anonymousPythonWorkspaceWasClearedSinceLoad() {
+	return (
+		observedAnonymousWorkspaceGeneration() !== currentAnonymousClearSignal()
+	);
+}
+
+function recordMatchesAnonymousWorkspaceGeneration(
+	record: PythonIdeProjectStorageRecord
+) {
+	const generation = observedAnonymousWorkspaceGeneration();
+	return generation === null
+		? record.anonymousGeneration == null
+		: record.anonymousGeneration === generation;
+}
+
 export function normalizePythonFileName(value: string) {
 	const cleaned = value
 		.trim()
@@ -1984,6 +2046,11 @@ function parseLocalPythonProjectRecord(
 		}
 		if (!parsed || !Array.isArray(parsed.projects)) return null;
 		return {
+			anonymousGeneration:
+				typeof parsed.anonymousGeneration === "string" ||
+				parsed.anonymousGeneration === null
+					? parsed.anonymousGeneration
+					: undefined,
 			key,
 			projects: parsed.projects,
 			revision:
@@ -2032,9 +2099,23 @@ function localPythonProjectStorageKeys(userID?: string | null) {
 function localAnonymousClaimedProjectIDs() {
 	if (typeof window === "undefined") return new Set<string>();
 	const prefix = pythonIdeAnonymousClaimStoragePrefix();
+	const generation = observedAnonymousWorkspaceGeneration();
 	return new Set(
 		localStorageKeys()
 			.filter(key => key.startsWith(prefix))
+			.filter(key => {
+				try {
+					const marker = window.localStorage.getItem(key);
+					if (generation === null) return marker !== null;
+					if (!marker) return false;
+					const parsed = JSON.parse(marker) as {
+						anonymousGeneration?: unknown;
+					};
+					return parsed.anonymousGeneration === generation;
+				} catch {
+					return false;
+				}
+			})
 			.map(key => key.slice(prefix.length))
 			.filter(Boolean)
 	);
@@ -2069,13 +2150,17 @@ export function loadLocalPythonProjects(userID?: string | null) {
 		clearAllStudentPythonProjectRecoveryFromLocalStorage();
 		return [];
 	}
+	observedAnonymousWorkspaceGeneration();
+	if (anonymousPythonWorkspaceWasClearedSinceLoad()) return [];
 	const records: PythonIdeProjectStorageRecord[] = [];
 	for (const key of localPythonProjectStorageKeys(userID)) {
 		try {
 			const raw = window.localStorage.getItem(key);
 			if (!raw) continue;
 			const record = parseLocalPythonProjectRecord(key, raw);
-			if (record) records.push(record);
+			if (record && recordMatchesAnonymousWorkspaceGeneration(record)) {
+				records.push(record);
+			}
 		} catch {
 			// Ignore only the unreadable browser-storage record.
 		}
@@ -2090,15 +2175,14 @@ function localStorageRecordValue(
 	record: PythonIdeProjectStorageRecord,
 	userID?: string | null
 ) {
-	return JSON.stringify(
-		userID
-			? {
-					projects: record.projects,
-					revision: record.revision,
-					updatedAt: record.updatedAt
-				}
-			: record.projects
-	);
+	return JSON.stringify({
+		...(userID
+			? {}
+			: { anonymousGeneration: record.anonymousGeneration ?? null }),
+		projects: record.projects,
+		revision: record.revision,
+		updatedAt: record.updatedAt
+	});
 }
 
 function writeLocalPythonProjectRecord(
@@ -2120,6 +2204,7 @@ export function saveLocalPythonProjects(
 		clearAllStudentPythonProjectRecoveryFromLocalStorage();
 		return;
 	}
+	const anonymousGeneration = assertAnonymousWorkspaceGenerationIsCurrent();
 	const claimedProjectIDs = userID
 		? new Set<string>()
 		: localAnonymousClaimedProjectIDs();
@@ -2128,6 +2213,7 @@ export function saveLocalPythonProjects(
 	);
 	writeLocalPythonProjectRecord(
 		{
+			anonymousGeneration,
 			key: pythonIdeActiveStorageKey(userID),
 			projects: snapshot,
 			revision: newPythonIdeStorageRevision(),
@@ -2156,6 +2242,10 @@ export async function loadLocalPythonProjectRecoverySnapshot(
 		await purgeAllStudentPythonProjectRecovery();
 		return { projects: [], records: [] };
 	}
+	observedAnonymousWorkspaceGeneration();
+	if (anonymousPythonWorkspaceWasClearedSinceLoad()) {
+		return { projects: [], records: [] };
+	}
 	const idbRecords = await readIndexedDbPythonProjectRecords(userID);
 	const idbByKey = new Map(idbRecords.map(record => [record.key, record]));
 	const localByKey = new Map<
@@ -2168,7 +2258,9 @@ export async function loadLocalPythonProjectRecoverySnapshot(
 			const raw = window.localStorage.getItem(key);
 			if (!raw) continue;
 			const record = parseLocalPythonProjectRecord(key, raw);
-			if (record) localByKey.set(key, { raw, record });
+			if (record && recordMatchesAnonymousWorkspaceGeneration(record)) {
+				localByKey.set(key, { raw, record });
+			}
 		} catch {
 			// IndexedDB remains available when its local mirror is blocked.
 		}
@@ -2247,16 +2339,23 @@ export async function saveLocalPythonProjectsAsync(
 		await purgeAllStudentPythonProjectRecovery();
 		return;
 	}
+	const anonymousGeneration = assertAnonymousWorkspaceGenerationIsCurrent();
 	const claimedProjectIDs = userID
 		? new Set<string>()
 		: new Set([
 				...localAnonymousClaimedProjectIDs(),
 				...(await readIndexedDbAnonymousClaimedProjectIDs())
 			]);
+	if (anonymousGeneration !== assertAnonymousWorkspaceGenerationIsCurrent()) {
+		throw new Error(
+			"These browser projects were cleared while they were being saved."
+		);
+	}
 	const snapshot = plainPythonIdeProjectsSnapshot(projects).filter(
 		project => !claimedProjectIDs.has(project._id)
 	);
 	const record = {
+		anonymousGeneration,
 		key: pythonIdeActiveStorageKey(userID),
 		projects: snapshot,
 		revision: newPythonIdeStorageRevision(),
@@ -2265,8 +2364,12 @@ export async function saveLocalPythonProjectsAsync(
 
 	try {
 		await writeIndexedDbPythonProjects(record);
+		assertAnonymousWorkspaceGenerationIsCurrent();
 		saveLegacyLocalPythonProjectsMirror(record, userID);
 	} catch (indexedDbError) {
+		if (anonymousGeneration !== currentAnonymousClearSignal()) {
+			throw indexedDbError;
+		}
 		try {
 			writeLocalPythonProjectRecord(record, userID);
 		} catch {
@@ -2284,8 +2387,7 @@ export async function saveLocalPythonProjectsAsync(
  * tab from publishing it back into shared storage.
  */
 export async function claimAnonymousPythonProjectForStudent(
-	project: PythonIdeProject,
-	studentID: string
+	project: PythonIdeProject
 ) {
 	if (typeof window === "undefined" || !window.indexedDB) {
 		throw new Error(
@@ -2295,6 +2397,7 @@ export async function claimAnonymousPythonProjectForStudent(
 	const db = await openPythonIdeStorageDb();
 	const anonymousSnapshot =
 		await loadLocalPythonProjectRecoverySnapshot(null);
+	const anonymousGeneration = assertAnonymousWorkspaceGenerationIsCurrent();
 	const claimedProject = anonymousSnapshot.projects.find(
 		candidate => candidate._id === project._id
 	);
@@ -2305,7 +2408,7 @@ export async function claimAnonymousPythonProjectForStudent(
 	}
 
 	const claimKey = pythonIdeAnonymousClaimStorageKey(project._id);
-	const claimMarker = JSON.stringify({ studentID });
+	const claimMarker = JSON.stringify({ anonymousGeneration });
 	const anonymousKey = pythonIdeStorageKey(null);
 	const now = new Date().toISOString();
 	const latestAnonymousProjects = loadLocalPythonProjects(null);
@@ -2329,23 +2432,25 @@ export async function claimAnonymousPythonProjectForStudent(
 			}
 		]).filter(candidate => candidate._id !== project._id);
 		const anonymousRecord = {
+			anonymousGeneration,
 			key: anonymousKey,
 			projects: anonymousProjects,
 			revision: newPythonIdeStorageRevision(),
 			updatedAt: now
 		} satisfies PythonIdeProjectStorageRecord;
 		const claimRecord = {
+			anonymousGeneration,
 			key: claimKey,
 			projects: [],
 			revision: newPythonIdeStorageRevision(),
 			updatedAt: now,
-			claimedProjectID: project._id,
-			claimedStudentID: studentID
+			claimedProjectID: project._id
 		} satisfies PythonIdeProjectStorageRecord;
 
 		store.put(anonymousRecord);
 		store.put(claimRecord);
 		await indexedDbTransactionDone(transaction);
+		assertAnonymousWorkspaceGenerationIsCurrent();
 
 		// The durable claim marker is authoritative. These mirrors make stale
 		// anonymous tabs fail closed before their next IndexedDB read.
@@ -2412,6 +2517,18 @@ export function clearAllStudentPythonProjectRecoveryFromLocalStorage() {
 	}
 }
 
+function clearAnonymousPythonWorkspaceFromLocalStorage() {
+	if (typeof window === "undefined") return;
+	for (const key of localStorageKeys()) {
+		if (
+			isAnonymousPythonIdeStorageKey(key) ||
+			isAnonymousPythonIdeEditorStateKey(key)
+		) {
+			window.localStorage.removeItem(key);
+		}
+	}
+}
+
 export async function purgeStudentPythonProjectRecovery(studentID: string) {
 	let indexedDbError: unknown;
 	let localStorageError: unknown;
@@ -2452,6 +2569,49 @@ export async function purgeAllStudentPythonProjectRecovery() {
 	if (indexedDbError || localStorageError) {
 		throw new Error(
 			`Could not purge legacy student project recovery data. (${formatStorageError(indexedDbError ?? localStorageError)})`
+		);
+	}
+}
+
+export async function purgeAnonymousPythonWorkspace(
+	options: { broadcast?: boolean } = {}
+) {
+	let indexedDbError: unknown;
+	let localStorageError: unknown;
+
+	if (typeof window === "undefined") return;
+
+	if (options.broadcast !== false) {
+		try {
+			window.localStorage.setItem(
+				pythonIdeAnonymousClearSignalStorageKey,
+				newPythonIdeStorageRevision()
+			);
+		} catch (error) {
+			localStorageError = error;
+		}
+	}
+
+	if (window.indexedDB) {
+		try {
+			// All anonymous project records and import-claim markers share one
+			// object store, so IndexedDB removes them in one transaction.
+			await deleteAllIndexedDbAnonymousPythonProjectRecords();
+		} catch (error) {
+			indexedDbError = error;
+		}
+	}
+
+	try {
+		clearAnonymousPythonWorkspaceFromLocalStorage();
+	} catch (error) {
+		localStorageError ??= error;
+	}
+	observeCurrentAnonymousClearSignal();
+
+	if (indexedDbError || localStorageError) {
+		throw new Error(
+			`Could not clear every anonymous Python project from this browser. (${formatStorageError(indexedDbError ?? localStorageError)})`
 		);
 	}
 }
@@ -2568,7 +2728,8 @@ async function readIndexedDbPythonProjectRecords(userID?: string | null) {
 			record =>
 				Array.isArray(record.projects) &&
 				(record.key === baseKey ||
-					(!!userID && record.key.startsWith(recoveryPrefix)))
+					(!!userID && record.key.startsWith(recoveryPrefix))) &&
+				(!!userID || recordMatchesAnonymousWorkspaceGeneration(record))
 		);
 	} catch {
 		return [];
@@ -2587,7 +2748,10 @@ async function readIndexedDbAnonymousClaimedProjectIDs() {
 		>(transaction.objectStore(PYTHON_IDE_PROJECT_STORE).getAll());
 		await indexedDbTransactionDone(transaction);
 		return allRecords.flatMap(record =>
-			record.claimedProjectID ? [record.claimedProjectID] : []
+			record.claimedProjectID &&
+			recordMatchesAnonymousWorkspaceGeneration(record)
+				? [record.claimedProjectID]
+				: []
 		);
 	} catch {
 		return [];
@@ -2641,6 +2805,20 @@ async function deleteAllIndexedDbStudentPythonProjectRecords() {
 			key.startsWith(`${pythonIdeStorageNamespace}:`) &&
 			!isAnonymousPythonIdeStorageKey(key)
 		) {
+			store.delete(key);
+		}
+	}
+	await indexedDbTransactionDone(transaction);
+}
+
+async function deleteAllIndexedDbAnonymousPythonProjectRecords() {
+	const db = await openPythonIdeStorageDb();
+	const transaction = db.transaction(PYTHON_IDE_PROJECT_STORE, "readwrite");
+	const store = transaction.objectStore(PYTHON_IDE_PROJECT_STORE);
+	const keys = await indexedDbRequest<IDBValidKey[]>(store.getAllKeys());
+	for (const keyValue of keys) {
+		const key = String(keyValue);
+		if (isAnonymousPythonIdeStorageKey(key)) {
 			store.delete(key);
 		}
 	}

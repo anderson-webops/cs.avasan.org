@@ -25,7 +25,7 @@ context("Public classroom navigation", () => {
 		cy.url().should("eq", `${Cypress.config().baseUrl}/`);
 		cy.contains("h1", "Courses").should("be.visible");
 		cy.contains("No student account is needed.").should("not.exist");
-		cy.contains("button", "Student sign in").should("be.visible");
+		cy.contains("button", "Student sign in").should("not.exist");
 		cy.get("#course-select").should("be.visible");
 	});
 

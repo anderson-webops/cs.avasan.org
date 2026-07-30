@@ -1,6 +1,7 @@
 import type { RateLimitRequestHandler } from "express-rate-limit";
 import { env } from "node:process";
 import rateLimit, { ipKeyGenerator } from "express-rate-limit";
+import { ExactExpiryRateLimitStore } from "../security/exactExpiryRateLimitStore.js";
 import { normalizeStudentUsername } from "../security/studentCredentials.js";
 import {
 	HEAVY_PROJECT_PAYLOAD_THRESHOLD_BYTES,
@@ -21,58 +22,59 @@ const standardRateLimitHeaders = {
 	standardHeaders: true,
 	legacyHeaders: false
 } as const;
-const PROJECT_WRITE_LIMIT_APPLIED = Symbol.for(
-	"cs.avasan.org.project-write-limit-applied"
-);
+const PROJECT_WRITE_LIMIT_APPLIED = Symbol.for("cs.avasan.org.project-write-limit-applied");
 
 function positiveIntegerFromEnv(name: string, fallback: number): number {
 	const value = Number(env[name]);
 	return Number.isSafeInteger(value) && value > 0 ? value : fallback;
 }
 
-export function createLoginLimiter(
-	options: TunableRateLimitOptions = {}
-): RateLimitRequestHandler {
+function positiveIntegerAtMostFromEnv(name: string, fallback: number, maximum: number): number {
+	const configured = env[name]?.trim();
+	if (!configured) return fallback;
+	const value = Number(configured);
+	if (!Number.isSafeInteger(value) || value <= 0 || value > maximum) {
+		throw new Error(`${name} must be a positive integer no greater than ${maximum}.`);
+	}
+	return value;
+}
+
+export function createLoginLimiter(options: TunableRateLimitOptions = {}): RateLimitRequestHandler {
 	return rateLimit({
-		windowMs: positiveIntegerFromEnv("LOGIN_RATE_WINDOW_MS", 15 * 60 * 1000),
+		windowMs: positiveIntegerAtMostFromEnv("LOGIN_RATE_WINDOW_MS", 15 * 60 * 1000, 15 * 60 * 1000),
 		limit: positiveIntegerFromEnv("LOGIN_RATE_MAX", 10),
+		store: new ExactExpiryRateLimitStore(),
 		...standardRateLimitHeaders,
 		message: { message: "Too many login attempts. Please try again later." },
 		...options
 	});
 }
 
-export function createStudentLoginIpLimiter(
-	options: TunableRateLimitOptions = {}
-): RateLimitRequestHandler {
+export function createStudentLoginIpLimiter(options: TunableRateLimitOptions = {}): RateLimitRequestHandler {
 	return rateLimit({
 		windowMs: 15 * 60 * 1000,
 		// A classroom commonly shares one public IP, so this ceiling is
 		// deliberately much higher than the per-username limiter below.
 		limit: 120,
+		store: new ExactExpiryRateLimitStore(),
 		...standardRateLimitHeaders,
 		message: { message: "Too many login attempts. Please try again later." },
 		...options
 	});
 }
 
-export function createStudentCredentialLimiter(
-	options: TunableRateLimitOptions = {}
-): RateLimitRequestHandler {
+export function createStudentCredentialLimiter(options: TunableRateLimitOptions = {}): RateLimitRequestHandler {
 	return rateLimit({
 		windowMs: 15 * 60 * 1000,
 		limit: 10,
+		store: new ExactExpiryRateLimitStore(),
 		...standardRateLimitHeaders,
 		skipSuccessfulRequests: true,
 		keyGenerator: (req) => {
-			const rawUsername = typeof req.body?.username === "string"
-				? req.body.username
-				: "";
+			const rawUsername = typeof req.body?.username === "string" ? req.body.username : "";
 			const username = normalizeStudentUsername(rawUsername).slice(0, 24);
 			if (username) return `student:${username}`;
-			const client = ipKeyGenerator(
-				req.ip || req.socket.remoteAddress || "unknown"
-			);
+			const client = ipKeyGenerator(req.ip || req.socket.remoteAddress || "unknown");
 			return `invalid:${client}`;
 		},
 		message: { message: "Too many login attempts. Please try again later." },
@@ -80,15 +82,13 @@ export function createStudentCredentialLimiter(
 	});
 }
 
-export function createStudentProjectWriteLimiter(
-	options: TunableRateLimitOptions = {}
-): RateLimitRequestHandler {
+export function createStudentProjectWriteLimiter(options: TunableRateLimitOptions = {}): RateLimitRequestHandler {
 	const limiter = rateLimit({
 		windowMs: 15 * 60 * 1000,
 		limit: 300,
+		store: new ExactExpiryRateLimitStore(),
 		...standardRateLimitHeaders,
-		keyGenerator: req => req.session?.studentID
-			?? ipKeyGenerator(req.ip || req.socket.remoteAddress || "unknown"),
+		keyGenerator: req => req.session?.studentID ?? ipKeyGenerator(req.ip || req.socket.remoteAddress || "unknown"),
 		message: { message: "Too many project changes. Please try again shortly." },
 		...options
 	});
@@ -109,18 +109,14 @@ export function createStudentProjectWriteLimiter(
 	return applyOnce;
 }
 
-export function createHeavyProjectPayloadLimiter(
-	options: HeavyProjectRateLimitOptions = {}
-): RateLimitRequestHandler {
-	const {
-		heavyThresholdBytes = HEAVY_PROJECT_PAYLOAD_THRESHOLD_BYTES,
-		...rateOptions
-	} = options;
+export function createHeavyProjectPayloadLimiter(options: HeavyProjectRateLimitOptions = {}): RateLimitRequestHandler {
+	const { heavyThresholdBytes = HEAVY_PROJECT_PAYLOAD_THRESHOLD_BYTES, ...rateOptions } = options;
 	return rateLimit({
 		windowMs: 15 * 60 * 1000,
 		// Large bodies are exceptional imports/snapshots. Normal autosaves never
 		// enter this tier and retain the 300-request classroom allowance.
 		limit: 20,
+		store: new ExactExpiryRateLimitStore(),
 		...standardRateLimitHeaders,
 		keyGenerator: projectPayloadIdentity,
 		skip: req => !isHeavyProjectPayload(req, heavyThresholdBytes),
@@ -131,15 +127,13 @@ export function createHeavyProjectPayloadLimiter(
 	});
 }
 
-export function createStudentPasswordSetupLimiter(
-	options: TunableRateLimitOptions = {}
-): RateLimitRequestHandler {
+export function createStudentPasswordSetupLimiter(options: TunableRateLimitOptions = {}): RateLimitRequestHandler {
 	return rateLimit({
 		windowMs: 15 * 60 * 1000,
 		limit: 10,
+		store: new ExactExpiryRateLimitStore(),
 		...standardRateLimitHeaders,
-		keyGenerator: req => req.session?.studentID
-			?? ipKeyGenerator(req.ip || req.socket.remoteAddress || "unknown"),
+		keyGenerator: req => req.session?.studentID ?? ipKeyGenerator(req.ip || req.socket.remoteAddress || "unknown"),
 		message: {
 			message: "Too many password setup attempts. Please try again later."
 		},
@@ -147,17 +141,13 @@ export function createStudentPasswordSetupLimiter(
 	});
 }
 
-export function createStudentOAuthLimiter(
-	options: TunableRateLimitOptions = {}
-): RateLimitRequestHandler {
+export function createStudentOAuthLimiter(options: TunableRateLimitOptions = {}): RateLimitRequestHandler {
 	return rateLimit({
-		windowMs: positiveIntegerFromEnv(
-			"OAUTH_RATE_WINDOW_MS",
-			15 * 60 * 1000
-		),
+		windowMs: positiveIntegerAtMostFromEnv("OAUTH_RATE_WINDOW_MS", 15 * 60 * 1000, 15 * 60 * 1000),
 		// Each provider round trip makes two requests. This accommodates a
 		// classroom behind one address while still bounding automated churn.
 		limit: positiveIntegerFromEnv("OAUTH_RATE_MAX", 120),
+		store: new ExactExpiryRateLimitStore(),
 		...standardRateLimitHeaders,
 		message: {
 			message: "Too many sign-in attempts. Please try again later."
@@ -167,18 +157,17 @@ export function createStudentOAuthLimiter(
 }
 
 /**
- * Classroom usage events are anonymous. The default in-memory rate-limit store
- * uses a client address only for a short abuse-prevention window; it is never
- * written to MongoDB or included in the analytics aggregate.
+ * Classroom usage events are anonymous. The exact-expiry in-memory store uses
+ * a client address only for this five-minute abuse-prevention window; it is
+ * never written to MongoDB or included in the analytics aggregate.
  */
-export function createClassroomUsageLimiter(
-	options: TunableRateLimitOptions = {}
-): RateLimitRequestHandler {
+export function createClassroomUsageLimiter(options: TunableRateLimitOptions = {}): RateLimitRequestHandler {
 	return rateLimit({
 		windowMs: 5 * 60 * 1000,
 		// Shared school networks need room for a full class opening courses and
 		// the IDE together while still bounding automated event floods.
 		limit: 600,
+		store: new ExactExpiryRateLimitStore(),
 		...standardRateLimitHeaders,
 		message: {
 			message: "Too many classroom activity updates. Please try again shortly."
@@ -187,12 +176,11 @@ export function createClassroomUsageLimiter(
 	});
 }
 
-export function createTeacherVerificationLimiter(
-	options: TunableRateLimitOptions = {}
-): RateLimitRequestHandler {
+export function createTeacherVerificationLimiter(options: TunableRateLimitOptions = {}): RateLimitRequestHandler {
 	return rateLimit({
 		windowMs: 15 * 60 * 1000,
 		limit: 10,
+		store: new ExactExpiryRateLimitStore(),
 		...standardRateLimitHeaders,
 		skipSuccessfulRequests: true,
 		requestWasSuccessful: (_req, res) => res.statusCode !== 403,
@@ -201,23 +189,21 @@ export function createTeacherVerificationLimiter(
 	});
 }
 
-export function createUserCourseAccessLimiter(
-	options: TunableRateLimitOptions = {}
-): RateLimitRequestHandler {
+export function createUserCourseAccessLimiter(options: TunableRateLimitOptions = {}): RateLimitRequestHandler {
 	return rateLimit({
 		windowMs: 15 * 60 * 1000,
 		limit: 100,
+		store: new ExactExpiryRateLimitStore(),
 		...standardRateLimitHeaders,
 		...options
 	});
 }
 
-export function createAdminMailLimiter(
-	options: TunableRateLimitOptions = {}
-): RateLimitRequestHandler {
+export function createAdminMailLimiter(options: TunableRateLimitOptions = {}): RateLimitRequestHandler {
 	return rateLimit({
 		windowMs: Number(env.RATE_WINDOW_MS || 60000),
 		limit: Number(env.RATE_MAX || 20),
+		store: new ExactExpiryRateLimitStore(),
 		...standardRateLimitHeaders,
 		message: { message: "Too many requests, slow down." },
 		...options

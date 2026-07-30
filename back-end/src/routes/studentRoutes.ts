@@ -30,90 +30,109 @@ import {
 	createStudentPasswordSetupLimiter,
 	createStudentProjectWriteLimiter
 } from "../middleware/rateLimiters.js";
+import {
+	requireStudentDataWriteLease
+} from "../security/studentDataWriteBarrier.js";
 
-const router = Router();
-const studentLoginIpLimiter = createStudentLoginIpLimiter();
-const studentCredentialLimiter = createStudentCredentialLimiter();
-const studentOAuthLimiter = createStudentOAuthLimiter();
-const studentPasswordSetupLimiter = createStudentPasswordSetupLimiter();
-const studentProjectWriteLimiter = createStudentProjectWriteLimiter();
-const parseAppleOAuthCallback = urlencoded({
-	extended: false,
-	limit: "16kb",
-	parameterLimit: 10
-});
+export interface StudentRouteOptions {
+	oauthEnabled: boolean;
+}
 
-router.get("/oauth/providers", getStudentOAuthProviders);
-router.get(
-	"/oauth/:provider/start",
-	studentLoginIpLimiter,
-	studentOAuthLimiter,
-	startStudentOAuthSignIn
-);
-router.post(
-	"/oauth/:provider/connect",
-	studentLoginIpLimiter,
-	studentOAuthLimiter,
-	validStudentSetup,
-	connectStudentOAuthProvider
-);
-router.get(
-	"/oauth/:provider/callback",
-	studentOAuthLimiter,
-	finishStudentOAuth
-);
-router.post(
-	"/oauth/:provider/callback",
-	(req, res, next) => {
-		if (req.params.provider !== "apple") {
-			res.sendStatus(404);
-			return;
-		}
-		next();
-	},
-	studentOAuthLimiter,
-	parseAppleOAuthCallback,
-	finishStudentOAuth
-);
+export function createStudentRoutes(options: StudentRouteOptions) {
+	const router = Router();
+	const studentLoginIpLimiter = createStudentLoginIpLimiter();
+	const studentCredentialLimiter = createStudentCredentialLimiter();
+	const studentPasswordSetupLimiter = createStudentPasswordSetupLimiter();
+	const studentProjectWriteLimiter = createStudentProjectWriteLimiter();
 
-router.post(
-	"/session",
-	studentLoginIpLimiter,
-	studentCredentialLimiter,
-	createStudentSession
-);
-router.get("/session", getStudentSession);
-router.put(
-	"/session/password",
-	studentPasswordSetupLimiter,
-	setStudentPassword
-);
-router.delete("/session", deleteStudentSession);
+	if (options.oauthEnabled) {
+		const studentOAuthLimiter = createStudentOAuthLimiter();
+		const parseAppleOAuthCallback = urlencoded({
+			extended: false,
+			limit: "16kb",
+			parameterLimit: 10
+		});
+		router.get("/oauth/providers", getStudentOAuthProviders);
+		router.get(
+			"/oauth/:provider/start",
+			studentLoginIpLimiter,
+			studentOAuthLimiter,
+			startStudentOAuthSignIn
+		);
+		router.post(
+			"/oauth/:provider/connect",
+			studentLoginIpLimiter,
+			studentOAuthLimiter,
+			validStudentSetup,
+			requireStudentDataWriteLease,
+			connectStudentOAuthProvider
+		);
+		router.get(
+			"/oauth/:provider/callback",
+			studentOAuthLimiter,
+			finishStudentOAuth
+		);
+		router.post(
+			"/oauth/:provider/callback",
+			(req, res, next) => {
+				if (req.params.provider !== "apple") {
+					res.sendStatus(404);
+					return;
+				}
+				next();
+			},
+			studentOAuthLimiter,
+			parseAppleOAuthCallback,
+			finishStudentOAuth
+		);
+	}
 
-router.use(
-	["/projects", "/project-reviews"],
-	validStudent,
-	requireStudentContext
-);
-router.get("/projects", listPythonProjects);
-router.post(
-	"/projects",
-	studentProjectWriteLimiter,
-	createPythonProject
-);
-router.put(
-	"/projects/:projectID",
-	studentProjectWriteLimiter,
-	updatePythonProject
-);
-router.delete(
-	"/projects/:projectID",
-	studentProjectWriteLimiter,
-	deletePythonProject
-);
-router.get(
-	"/project-reviews",
-	listVisiblePythonProjectReviews
-);
+	router.post(
+		"/session",
+		studentLoginIpLimiter,
+		studentCredentialLimiter,
+		createStudentSession
+	);
+	router.get("/session", getStudentSession);
+	router.put(
+		"/session/password",
+		studentPasswordSetupLimiter,
+		setStudentPassword
+	);
+	router.delete("/session", deleteStudentSession);
 
-export const studentRoutes = router;
+	router.use(
+		["/projects", "/project-reviews"],
+		validStudent,
+		requireStudentContext
+	);
+	router.get("/projects", listPythonProjects);
+	router.post(
+		"/projects",
+		requireStudentDataWriteLease,
+		studentProjectWriteLimiter,
+		createPythonProject
+	);
+	router.put(
+		"/projects/:projectID",
+		requireStudentDataWriteLease,
+		studentProjectWriteLimiter,
+		updatePythonProject
+	);
+	router.delete(
+		"/projects/:projectID",
+		requireStudentDataWriteLease,
+		studentProjectWriteLimiter,
+		deletePythonProject
+	);
+	router.get(
+		"/project-reviews",
+		listVisiblePythonProjectReviews
+	);
+
+	return router;
+}
+
+// Complete fixture used by focused OAuth route tests. Production mounts the
+// privacy-gated instance through mountRuntimeAccountRoutes.
+export const studentRoutes = createStudentRoutes({ oauthEnabled: true });
