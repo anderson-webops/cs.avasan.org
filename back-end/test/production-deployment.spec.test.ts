@@ -68,11 +68,14 @@ describe("versioned full-stack production deployment", () => {
 		expect(proxy).toContain("absolute_redirect off;");
 		expect(proxy).not.toContain(" combined");
 		expect(proxy.match(/add_header Strict-Transport-Security/g)).toHaveLength(3);
+		expect(proxy.match(/add_header Content-Security-Policy/g)).toHaveLength(3);
 		expect(proxy.match(/add_header X-Content-Type-Options/g)).toHaveLength(3);
 		expect(proxy.match(/add_header Referrer-Policy/g)).toHaveLength(3);
 		expect(proxy.match(/add_header Permissions-Policy/g)).toHaveLength(3);
 		expect(proxy.match(/add_header X-Frame-Options/g)).toHaveLength(3);
 		expect(proxy).toContain("proxy_set_header X-Forwarded-For $http_x_forwarded_for;");
+		expect(proxy).toContain("script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: https:");
+		expect(proxy).toContain("worker-src 'self' blob:");
 		expect(proxy).toContain("try_files $uri $uri/ =404;");
 		expect(proxy).not.toContain("try_files $uri $uri/ /index.html;");
 		expect(hostProxy).toContain("proxy_set_header X-Forwarded-For $remote_addr;");
@@ -122,6 +125,10 @@ describe("versioned full-stack production deployment", () => {
 		expect(productionSmoke).toContain('releaseMetadata("/release.json")');
 		expect(productionSmoke).toContain('releaseMetadata("/api/release")');
 		expect(productionSmoke).toContain("const sourceRevisionPattern = /^[0-9a-f]{40}$/;");
+		expect(productionSmoke).toContain("CS_EXPECT_STUDENT_ACCOUNTS_ENABLED");
+		expect(productionSmoke).toContain("CS_EXPECT_STUDENT_OAUTH_ENABLED");
+		expect(productionSmoke).toContain("CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED");
+		expect(productionSmoke).toContain('event: "__deployment-probe-invalid"');
 		expect(productionSmoke).toContain('adminRedirect.headers.get("location") === "/admin/"');
 		expect(productionSmoke).toContain("The public site and API report different release identities.");
 		expect(productionSmoke).not.toContain("fetch(");
@@ -133,6 +140,9 @@ describe("versioned full-stack production deployment", () => {
 		expect(postDeployWorkflow).toContain("workflow_dispatch:");
 		expect(postDeployWorkflow).toContain("expected_release:");
 		expect(postDeployWorkflow).toContain("expected_revision:");
+		expect(postDeployWorkflow).toContain("student_accounts_enabled:");
+		expect(postDeployWorkflow).toContain("student_oauth_enabled:");
+		expect(postDeployWorkflow).toContain("classroom_analytics_collection_enabled:");
 		expect(postDeployWorkflow).toContain("npm run verify:production");
 	});
 
@@ -181,6 +191,9 @@ describe("versioned full-stack production deployment", () => {
 		expect(netlify).toContain('VITE_STUDENT_ACCOUNTS_ENABLED = "false"');
 		expect(netlify).toContain('VITE_STUDENT_RECORD_RETENTION_DAYS = ""');
 		expect(netlify).toContain('for = "/*"');
+		expect(netlify).toContain('Content-Security-Policy = "default-src');
+		expect(netlify).toContain("script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: https:");
+		expect(netlify).toContain("worker-src 'self' blob:");
 		expect(netlify).toContain('X-Frame-Options = "DENY"');
 		expect(netlify).toContain('NODE_VERSION = "24.18.0"');
 	});

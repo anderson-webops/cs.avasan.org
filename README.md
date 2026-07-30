@@ -335,6 +335,9 @@ checkout:
 ```bash
 CS_EXPECTED_RELEASE="${CS_RELEASE_VERSION}" \
 CS_EXPECTED_REVISION="${SOURCE_REVISION}" \
+CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED="${CLASSROOM_ANALYTICS_COLLECTION_ENABLED:-false}" \
+CS_EXPECT_STUDENT_ACCOUNTS_ENABLED="${STUDENT_ACCOUNTS_ENABLED:-false}" \
+CS_EXPECT_STUDENT_OAUTH_ENABLED="${STUDENT_OAUTH_ENABLED:-false}" \
 CS_SITE_ORIGIN=https://cs.avasan.org \
   npm run verify:production
 ```
@@ -344,11 +347,14 @@ the exact matching revision at `/release.json` and `/api/release`, `no-store`
 on both endpoints, known anonymous routes, the relative `/admin` directory
 redirect, a real 404 for a synthetic unknown path, API health and readiness,
 the Graph Sketcher bundle, and the current fail-closed student and
-aggregate-usage boundaries. The manual **Verify production deployment** GitHub
-workflow runs the same gate from an independent external runner and should
-follow each production promotion. Also run `git diff --check`. If the
-privacy-approved features are intentionally enabled in a future rollout,
-update the external smoke expectations in the same reviewed change. The
+aggregate-usage boundaries. When an approved feature is enabled, the same
+command verifies the enabled route instead: an anonymous student-session read
+must return the minimal signed-out response, OAuth must report at least one
+configured Apple or Google provider, and the analytics probe uses a deliberately
+invalid event that proves the route is mounted without writing an aggregate.
+The manual **Verify production deployment** GitHub workflow exposes matching
+boolean inputs, runs the same gate from an independent external runner, and
+should follow each production promotion. Also run `git diff --check`. The
 frontend build packages the reviewed Python IDE asset manifest; the backend
 does not stream an upstream asset archive at runtime.
 
