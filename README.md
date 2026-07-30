@@ -202,9 +202,10 @@ offline-access scopes. The production proxy must preserve callback `Set-Cookie`
 headers and must not record callback query strings or request bodies in access
 logs; they can contain short-lived authorization codes and state values.
 
-The static frontend can still be deployed by itself for anonymous classroom
-use, but Julio's Admin, optional student sync, and aggregate counts require the
-Express API and exact same-origin `/api/*` mapping.
+A frontend-only static build may be used for local or private-preview review of
+anonymous classroom pages. It must not be promoted to `cs.avasan.org`; Julio's
+Admin and the site's production health, readiness, and release contracts
+require the full-stack Compose handoff and exact same-origin `/api/*` mapping.
 
 ## Reproducible Production Deployment
 
@@ -228,11 +229,12 @@ configuration:
 Every frontend build also writes `/release.json`. The full-stack container
 serves that file and `/api/release` with `Cache-Control: no-store`; both expose
 only the semantic `version` and `revision`. They must agree because the
-frontend and API are built from the same checkout. Local and existing automatic
-deployments remain reproducible when no revision is supplied: both report
-`"revision": "unknown"` instead of guessing from ambient Git state. A
-production deployment can make its exact identity publicly verifiable without
-changing application secrets:
+frontend and API are built from the same checkout. The authoritative
+`compose.production.yml` handoff refuses to build unless `SOURCE_REVISION` is
+the exact full commit SHA being deployed. Direct Dockerfile and static-preview
+builds may still report `"revision": "unknown"` when no revision is supplied;
+that fallback is not permitted by the production Compose path. Inject the
+deployment identity without changing application secrets:
 
 ```bash
 export CS_RELEASE_VERSION=1.0.0
@@ -240,21 +242,18 @@ export SOURCE_REVISION="$(git rev-parse HEAD)"
 docker compose --env-file deploy/cs.env -f compose.production.yml build
 ```
 
-`SOURCE_REVISION`, when supplied, must be the full lowercase 40-character Git
-SHA or the build fails. Netlify uses its built-in full `COMMIT_REF` when
+`SOURCE_REVISION` must be the full lowercase 40-character Git SHA or production
+Compose fails before building. Netlify uses its built-in full `COMMIT_REF` when
 `SOURCE_REVISION` is absent. Neither release endpoint reports classroom flags,
-student state, credentials, or infrastructure data. After the normal
-five-minute deployment completes, run the manual **Verify production
-deployment** workflow with the expected version and revision. It compares both
-release endpoints and checks known routes, strict 404 behavior, API readiness,
-the Graph Sketcher bundle, and the current fail-closed student and aggregate
-usage boundaries.
+student state, credentials, or infrastructure data.
 
 To prepare a deployment:
 
 ```bash
 install -m 600 deploy/cs.env.example deploy/cs.env
 # Fill secrets, keep all optional features false until the privacy gate is met.
+export CS_RELEASE_VERSION=1.0.0
+export SOURCE_REVISION="$(git rev-parse HEAD)"
 ./scripts/verify-deploy-env-permissions.sh
 docker compose --env-file deploy/cs.env -f compose.production.yml build
 docker compose --env-file deploy/cs.env -f compose.production.yml up -d mongo
@@ -288,16 +287,37 @@ silently falls back to the environment URI. A remote production Vault origin
 must use HTTPS.
 Adapt [`deploy/host-nginx.conf.example`](deploy/host-nginx.conf.example) to the
 existing TLS host; it replaces forwarding headers and proxies only to the
-loopback container port.
+loopback container port. This proxy-only vhost and `compose.production.yml`
+are the single supported production handoff for `cs.avasan.org`. Do not serve
+a copied frontend build, add a host-side `root` or `try_files`, or duplicate
+route and cache policy outside the immutable web image. The container
+configuration is the sole owner of strict unknown-route 404 responses,
+relative directory redirects, release headers, and same-origin `/api/*`
+routing.
 
-After deployment, run `npm run verify:production` to verify `/`,
-`/python-ide`, and `/graph-sketcher` anonymously, compare `/release.json` with
-`/api/release`, check `/api/healthz` and `/api/readyz`, and confirm the current
-fail-closed student and usage routes. Also verify `/admin` and
-`git diff --check`. If the privacy-approved features are intentionally enabled
-in a future rollout, update the external smoke expectations in the same
-reviewed change. The frontend build packages the reviewed Python IDE asset
-manifest; the backend does not stream an upstream asset archive at runtime.
+Once the new stack is reachable through the proxy, but before the deployment
+timer records success, run the mandatory production gate from that exact
+checkout:
+
+```bash
+CS_EXPECTED_RELEASE="${CS_RELEASE_VERSION}" \
+CS_EXPECTED_REVISION="${SOURCE_REVISION}" \
+CS_SITE_ORIGIN=https://cs.avasan.org \
+  npm run verify:production
+```
+
+The deployment must fail without recording success unless that command verifies
+the exact matching revision at `/release.json` and `/api/release`, `no-store`
+on both endpoints, known anonymous routes, a real 404 for a synthetic unknown
+path, API health and readiness, the Graph Sketcher bundle, and the current
+fail-closed student and aggregate-usage boundaries. The manual **Verify
+production deployment** GitHub workflow runs the same gate from an independent
+external runner and should follow each production promotion. Also verify
+`/admin` and `git diff --check`. If the privacy-approved features are
+intentionally enabled in a future rollout, update the external smoke
+expectations in the same reviewed change. The frontend build packages the
+reviewed Python IDE asset manifest; the backend does not stream an upstream
+asset archive at runtime.
 
 Project quota counters are rebuilt from non-deleted projects before the API
 starts listening. Project and counter writes remain separate MongoDB

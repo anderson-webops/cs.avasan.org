@@ -80,6 +80,8 @@ describe("versioned full-stack production deployment", () => {
 		expect(hostProxy).toContain("proxy_set_header X-Forwarded-For $remote_addr;");
 		expect(hostProxy.match(/access_log off;/g)).toHaveLength(2);
 		expect(hostProxy).not.toContain(" combined");
+		expect(hostProxy).toContain("proxy_pass http://127.0.0.1:8080;");
+		expect(hostProxy).not.toMatch(/^\s*(?:root|alias|try_files)\b/m);
 		expect(hostProxy).toContain("listen 80;");
 		expect(hostProxy).toContain("return 301 https://cs.avasan.org$request_uri;");
 		expect(hostProxy).toContain("proxy_request_buffering off;");
@@ -109,8 +111,9 @@ describe("versioned full-stack production deployment", () => {
 		expect(rootPackage.version).toBe("1.0.0");
 		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-1[.]0[.]0\}/g))
 			.toHaveLength(2);
-		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:-unknown\}/g))
+		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g))
 			.toHaveLength(2);
+		expect(compose).not.toContain("SOURCE_REVISION:-unknown");
 		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
 		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=1.0.0");
 		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
@@ -212,6 +215,7 @@ describe("versioned full-stack production deployment", () => {
 		expect(continuousIntegration).toContain("down --volumes --remove-orphans");
 		expect(continuousIntegration).toContain('"${origin}/api/readyz"');
 		expect(continuousIntegration).toContain("SOURCE_REVISION: ${{ github.sha }}");
+		expect(continuousIntegration).toContain("env -u SOURCE_REVISION docker compose");
 		expect(continuousIntegration).toContain("CS_EXPECTED_REVISION=\"${SOURCE_REVISION}\"");
 		expect(continuousIntegration).toContain("npm run verify:production");
 		expect(continuousIntegration).toContain('"${origin}/__cs-avasan-deployment-probe-missing"');
@@ -221,6 +225,10 @@ describe("versioned full-stack production deployment", () => {
 		expect(readme).toContain("run --rm admin-tools npm run -w back-end create-admin-ts");
 		expect(readme).toContain("install -m 600 deploy/cs.env.example deploy/cs.env");
 		expect(readme).toContain("uses TypeScript source in the isolated tools image");
+		expect(readme).toContain("must not be promoted to `cs.avasan.org`");
+		expect(readme).toContain('CS_EXPECTED_REVISION="${SOURCE_REVISION}"');
+		expect(readme).toMatch(/before the deployment\s+timer records success/);
+		expect(readme).toContain("must fail without recording success");
 		expect(environmentVerifier).toContain("permissions must be 600");
 		expect(mongoInit).toContain('{ role: "readWrite", db: applicationDatabaseName }');
 		expect(mongoInit).not.toContain('role: "dbAdmin"');
