@@ -245,6 +245,13 @@ jobs:
                   chmod 600 deploy/cs.env
                   ./scripts/verify-deploy-env-permissions.sh
 
+            - name: Reject missing production revision
+              run: |
+                  if env -u SOURCE_REVISION docker compose --env-file deploy/cs.env --profile tools -f compose.production.yml config --quiet; then
+                    echo "Production Compose accepted a missing SOURCE_REVISION." >&2
+                    exit 1
+                  fi
+
             - name: Validate production Compose
               run: docker compose --env-file deploy/cs.env --profile tools -f compose.production.yml config --quiet
 

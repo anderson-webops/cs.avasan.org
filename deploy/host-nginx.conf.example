@@ -19,6 +19,9 @@ server {
 	access_log off;
 	client_max_body_size 80m;
 
+	# Keep this host proxy-only. The immutable web image owns static routes,
+	# strict 404 handling, release headers, redirects, and the /api boundary.
+	# Do not add a host root, alias, try_files, or a second static deployment.
 	location / {
 		proxy_pass http://127.0.0.1:8080;
 		proxy_http_version 1.1;

@@ -7,7 +7,7 @@ services:
             dockerfile: Dockerfile
             args:
                 CS_RELEASE_VERSION: ${CS_RELEASE_VERSION:-1.0.0}
-                SOURCE_REVISION: ${SOURCE_REVISION:-unknown}
+                SOURCE_REVISION: ${SOURCE_REVISION:?set SOURCE_REVISION}
                 VITE_CLASSROOM_PRIVACY_APPROVED: ${VITE_CLASSROOM_PRIVACY_APPROVED:-false}
                 VITE_CLASSROOM_USAGE_ENABLED: ${VITE_CLASSROOM_USAGE_ENABLED:-false}
                 VITE_SCHOOL_PRIVACY_CONTACT: ${VITE_SCHOOL_PRIVACY_CONTACT:-}
@@ -45,7 +45,7 @@ services:
             dockerfile: back-end/Dockerfile
             args:
                 CS_RELEASE_VERSION: ${CS_RELEASE_VERSION:-1.0.0}
-                SOURCE_REVISION: ${SOURCE_REVISION:-unknown}
+                SOURCE_REVISION: ${SOURCE_REVISION:?set SOURCE_REVISION}
         depends_on:
             mongo:
                 condition: service_healthy
