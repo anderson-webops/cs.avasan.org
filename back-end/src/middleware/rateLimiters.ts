@@ -109,6 +109,29 @@ export function createStudentProjectWriteLimiter(options: TunableRateLimitOption
 	return applyOnce;
 }
 
+/**
+ * Bounds authenticated project reads as well as writes before an authentication
+ * middleware performs its first student or Admin lookup. Authenticated sessions
+ * receive independent buckets; unauthenticated traffic falls back to the
+ * short-lived client-address bucket and is never persisted.
+ */
+export function createProjectDataAccessLimiter(options: TunableRateLimitOptions = {}): RateLimitRequestHandler {
+	return rateLimit({
+		windowMs: 15 * 60 * 1000,
+		limit: 600,
+		store: new ExactExpiryRateLimitStore(),
+		...standardRateLimitHeaders,
+		keyGenerator: req =>
+			req.session?.studentID
+			?? req.session?.adminID
+			?? ipKeyGenerator(req.ip || req.socket.remoteAddress || "unknown"),
+		message: {
+			message: "Too many project requests. Please try again shortly."
+		},
+		...options
+	});
+}
+
 export function createHeavyProjectPayloadLimiter(options: HeavyProjectRateLimitOptions = {}): RateLimitRequestHandler {
 	const { heavyThresholdBytes = HEAVY_PROJECT_PAYLOAD_THRESHOLD_BYTES, ...rateOptions } = options;
 	return rateLimit({

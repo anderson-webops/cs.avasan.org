@@ -21,6 +21,12 @@ import {
 	getPythonIdeModeLabel,
 	pythonIdeModeForCourseId
 } from "@/modules/pythonIde";
+import {
+	externalDatasetResourceLabel,
+	externalMediaResourceLabel,
+	isGitHubRepositoryUrl,
+	isScratchProjectUrl
+} from "@/modules/resourceUrls";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
 import {
@@ -597,11 +603,11 @@ function projectLabel(item: CourseModuleItem, url: string) {
 		return "Capstone repo";
 	}
 
-	if (normalizedUrl.includes("scratch.mit.edu")) {
+	if (isScratchProjectUrl(url)) {
 		return "Scratch project";
 	}
 
-	if (normalizedUrl.includes("github.com")) {
+	if (isGitHubRepositoryUrl(url)) {
 		return "Project repo";
 	}
 
@@ -618,11 +624,11 @@ function solutionLabel(url: string) {
 		return "Rubric / answer key";
 	}
 
-	if (normalizedUrl.includes("scratch.mit.edu")) {
+	if (isScratchProjectUrl(url)) {
 		return "Scratch solution";
 	}
 
-	if (normalizedUrl.includes("github.com")) {
+	if (isGitHubRepositoryUrl(url)) {
 		return "Solution repo";
 	}
 
@@ -767,69 +773,14 @@ function datasetLabel(url: string) {
 		return "Course asset";
 	}
 
-	if (normalizedUrl.includes("periodictable")) {
-		return "ACS periodic table";
-	}
-
-	if (normalizedUrl.includes("middle-and-high-school-chemistry")) {
-		return "ACS chemistry guidelines";
-	}
-
-	if (normalizedUrl.includes("acs.org")) {
-		return "ACS chemistry reference";
-	}
-
-	if (normalizedUrl.includes("nist.gov")) {
-		return "NIST SI units";
-	}
-
-	if (normalizedUrl.includes("nextgenscience.org")) {
-		return "NGSS appendices";
-	}
-
-	if (normalizedUrl.includes("openstax.org")) {
-		return "OpenStax reference";
-	}
-
-	if (normalizedUrl.includes("pubchem.ncbi.nlm.nih.gov")) {
-		return "Chemistry database";
-	}
-
-	if (
-		normalizedUrl.includes("nasa.gov") ||
-		normalizedUrl.includes("noaa.gov") ||
-		normalizedUrl.includes("usgs.gov") ||
-		normalizedUrl.includes("biointeractive.org")
-	) {
-		return "Science resource";
-	}
+	const externalLabel = externalDatasetResourceLabel(url);
+	if (externalLabel) return externalLabel;
 
 	return "Dataset";
 }
 
 function mediaLabel(url: string) {
-	const normalizedUrl = url.toLowerCase();
-
-	if (normalizedUrl.includes("phet.colorado.edu/en/simulations/filter")) {
-		return "Simulation collection";
-	}
-
-	if (normalizedUrl.includes("phet.colorado.edu")) {
-		return "PhET simulation";
-	}
-
-	if (
-		normalizedUrl.includes("youtube.com") ||
-		normalizedUrl.includes("youtu.be")
-	) {
-		return "Demo video";
-	}
-
-	if (normalizedUrl.includes("javalab.org")) {
-		return "Interactive simulation";
-	}
-
-	return "Media resource";
+	return externalMediaResourceLabel(url) ?? "Media resource";
 }
 
 function resourceLinks(item: CourseModuleItem): ResourceLink[] {

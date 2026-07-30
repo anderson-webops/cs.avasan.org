@@ -2620,7 +2620,6 @@ function neutralizeStudentFacingText(text: string) {
 				.replace(/\bAsk what\b/g, "Analyze what")
 				.replace(/\bAsk why\b/g, "Analyze why")
 				.replace(/\bAsk how\b/g, "Analyze how")
-				.replace(/\bConsider why\b/g, "Consider why")
 				.replace(/\bAsk the student\b/g, "Consider")
 				.replace(
 					/\bIf the struggles with\b/g,
@@ -2745,7 +2744,6 @@ function neutralizeStudentFacingText(text: string) {
 				)
 				.replace(/\bConsider why\b/g, "Explain why")
 				.replace(/\bask students why\b/g, "explain why")
-				.replace(/\bConsider what\b/g, "Consider what")
 				.replace(/\bask students what\b/g, "consider what")
 				.replace(/\bthen ask them to\b/gi, "then add")
 				.replace(/\bthen ask them\b/gi, "then include")
@@ -2763,17 +2761,12 @@ function neutralizeStudentFacingText(text: string) {
 				)
 				.replace(/\blet the student ([a-z])/g, keepMatchedFirstLetter)
 				.replace(/\bThe student should be able to\b/g, "Be able to")
-				.replace(/\bBe able to\b/g, "Be able to")
 				.replace(/\bthe student should be able to\b/g, "be able to")
 				.replace(/\bBe able to\b/g, "be able to")
 				.replace(/\bThe student should explain\b/g, "Explain")
-				.replace(/\bExplain\b/g, "Explain")
 				.replace(/\bthe student should explain\b/g, "explain")
-				.replace(/\bExplain\b/g, "Explain")
 				.replace(/\bThe student should identify\b/g, "Identify")
-				.replace(/\bIdentify\b/g, "Identify")
 				.replace(/\bthe student should identify\b/g, "identify")
-				.replace(/\bIdentify\b/g, "Identify")
 				.replace(
 					/\bThey should not re-enter\b/g,
 					"Keep these materials out of"

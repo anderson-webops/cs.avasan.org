@@ -7,6 +7,7 @@ import type {
 import { defineStore } from "pinia";
 
 import { computed } from "vue";
+import { isInstructionMaterialResourceUrl } from "@/modules/resourceUrls";
 import { useAppStore } from "./app";
 import {
 	archivedCourseCatalog,
@@ -320,11 +321,7 @@ function extractLeadingResourceLink(title: string, content: string) {
 	}
 
 	const isInstructionMaterialLink =
-		normalizedUrl.includes("github.com/instruction-material/") ||
-		normalizedUrl.includes("scratch.mit.edu/projects/") ||
-		normalizedUrl.includes("static.junilearning.com/") ||
-		normalizedUrl.includes("static.cs.avasan.org/") ||
-		normalizedUrl.includes("static.classes.jacobdanderson.net/");
+		isInstructionMaterialResourceUrl(normalizedUrl);
 	const isReferenceLead = REFERENCE_LEAD_LABEL_RE.test(label);
 
 	if (

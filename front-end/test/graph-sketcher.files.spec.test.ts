@@ -297,6 +297,37 @@ describe("Graph Sketcher file compatibility", () => {
 		).rejects.toThrow(/DOCTYPE or ENTITY/i);
 	});
 
+	it("rejects foreign HTML or SVG elements in legacy XML", async () => {
+		const foreignSvg = legacyGraphWith(
+			'<svg xmlns="http://www.w3.org/2000/svg"><script>alert("no")</script></svg>'
+		);
+		const foreignHtml = legacyGraphWith(
+			'<label><text><p><div xmlns="http://www.w3.org/1999/xhtml">Unsafe</div></p></text></label>'
+		);
+
+		await expect(
+			importLegacyGraphSketcherDocument(foreignSvg)
+		).rejects.toThrow(/outside the original GraphSketcher namespace/i);
+		await expect(
+			importLegacyGraphSketcherDocument(foreignHtml)
+		).rejects.toThrow(/outside the original GraphSketcher namespace/i);
+	});
+
+	it("copies legacy label markup as inert text and escapes SVG output", async () => {
+		const result = await importLegacyGraphSketcherDocument(
+			legacyGraphWith(
+				'<label id="note" x="1" y="2"><text><p><lit>&lt;img src=x onerror=alert(1)&gt;</lit></p></text></label>'
+			)
+		);
+		const svg = graphDocumentToSvg(result.document);
+
+		expect(result.document.annotations[0]?.text).toBe(
+			"<img src=x onerror=alert(1)>"
+		);
+		expect(svg).toContain("&lt;img src=x onerror=alert(1)&gt;");
+		expect(svg).not.toContain("<img");
+	});
+
 	it("bounds legacy elements, vertices, labels, and line series", async () => {
 		await expect(
 			importLegacyGraphSketcherDocument(

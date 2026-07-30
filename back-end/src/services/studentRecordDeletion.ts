@@ -346,9 +346,6 @@ export async function deleteStudentRecordSet(
 			// primary deletion for operator reconciliation.
 			receiptStatus = "in-progress";
 		}
-		console.info(
-			`student-record-delete completed reason=${deletionReason} operation=${operationID} oauthAttempts=${deletedRecords.oauthAttempts} projects=${deletedRecords.projects} reviews=${deletedRecords.reviews}`
-		);
 		return {
 			completedAt,
 			deleted: true,
