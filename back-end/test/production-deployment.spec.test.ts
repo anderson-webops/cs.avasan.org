@@ -67,6 +67,7 @@ describe("versioned full-stack production deployment", () => {
 		expect(proxy).toContain("proxy_pass http://api:3008/;");
 		expect(proxy).toContain("proxy_buffering off;");
 		expect(proxy).toContain("access_log off;");
+		expect(proxy).toContain("absolute_redirect off;");
 		expect(proxy).not.toContain(" combined");
 		expect(proxy.match(/add_header Strict-Transport-Security/g)).toHaveLength(3);
 		expect(proxy.match(/add_header X-Content-Type-Options/g)).toHaveLength(3);
