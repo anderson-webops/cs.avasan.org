@@ -130,6 +130,8 @@ describe("versioned full-stack production deployment", () => {
 		expect(productionSmoke).toContain("CS_EXPECT_STUDENT_OAUTH_ENABLED");
 		expect(productionSmoke).toContain("CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED");
 		expect(productionSmoke).toContain('event: "__deployment-probe-invalid"');
+		expect(productionSmoke).toContain("response details were not logged");
+		expect(productionSmoke).not.toContain("smokeErrorMessage");
 		expect(productionSmoke).toContain('adminRedirect.headers.get("location") === "/admin/"');
 		expect(productionSmoke).toContain("The public site and API report different release identities.");
 		expect(productionSmoke).not.toContain("fetch(");
