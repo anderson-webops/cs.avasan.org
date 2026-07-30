@@ -425,7 +425,9 @@ function legacyNumber(
 	fallback: number
 ) {
 	if (!element) return fallback;
-	const value = Number(element.getAttribute(attribute));
+	const rawValue = element.getAttribute(attribute);
+	if (rawValue === null || rawValue.trim() === "") return fallback;
+	const value = Number(rawValue);
 	return Number.isFinite(value) ? value : fallback;
 }
 

@@ -264,6 +264,31 @@ describe("Graph Sketcher file compatibility", () => {
 		).rejects.toThrow(/exactly one contents\.xml/i);
 	});
 
+	it.each([
+		["omitted", "", "", "", ""],
+		["blank", ' a="  "', ' width="  "', ' font-size="  "', ' log-base="  "']
+	])(
+		"uses declared numeric defaults when legacy attributes are %s",
+		async (_, alphaAttribute, widthAttribute, fontSizeAttribute, logBaseAttribute) => {
+			const result = await importLegacyGraphSketcherDocument(
+				legacyGraphWith(
+					`<axis dimension="x" scale="logarithmic" min="1" max="100"${logBaseAttribute}/>` +
+						`<label id="note" x="2" y="3"${fontSizeAttribute}><text><p><lit>Default label</lit></p></text></label>` +
+						`<vertex id="v1" x="1" y="2"><color r="0.1" g="0.2" b="0.9"${alphaAttribute}/></vertex>` +
+						`<vertex id="v2" x="2" y="4"><color r="0.1" g="0.2" b="0.9"${alphaAttribute}/></vertex>` +
+						`<line id="line-1"${widthAttribute}><vertices ids="v1 v2"/></line>`
+				)
+			);
+
+			expect(result.document.series[0]).toMatchObject({
+				color: "#1a33e6",
+				strokeWidth: 2
+			});
+			expect(result.document.annotations[0]?.fontSize).toBe(14);
+			expect(result.document.xAxis.logarithmBase).toBe(10);
+		}
+	);
+
 	it("cancels archived imports without applying worker output", async () => {
 		const archive = zipSync({
 			"Project/contents.xml": new TextEncoder().encode(legacyDocument)
