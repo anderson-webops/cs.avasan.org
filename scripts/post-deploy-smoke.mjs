@@ -94,6 +94,20 @@ async function verifyPublicRoutes() {
 		assertion(response.ok, `${path} returned HTTP ${response.status}`);
 	}
 
+	const adminRedirect = await request("/admin", {
+		redirect: "manual"
+	});
+	assertion(
+		adminRedirect.status === 301,
+		`/admin returned HTTP ${adminRedirect.status} instead of a directory redirect.`
+	);
+	assertion(
+		adminRedirect.headers.get("location") === "/admin/",
+		`/admin returned an unexpected Location header: ${
+			adminRedirect.headers.get("location") ?? "(missing)"
+		}.`
+	);
+
 	const unknown = await request("/__cs-avasan-deployment-probe-missing", {
 		redirect: "manual"
 	});

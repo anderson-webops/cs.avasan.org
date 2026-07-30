@@ -308,16 +308,16 @@ CS_SITE_ORIGIN=https://cs.avasan.org \
 
 The deployment must fail without recording success unless that command verifies
 the exact matching revision at `/release.json` and `/api/release`, `no-store`
-on both endpoints, known anonymous routes, a real 404 for a synthetic unknown
-path, API health and readiness, the Graph Sketcher bundle, and the current
-fail-closed student and aggregate-usage boundaries. The manual **Verify
-production deployment** GitHub workflow runs the same gate from an independent
-external runner and should follow each production promotion. Also verify
-`/admin` and `git diff --check`. If the privacy-approved features are
-intentionally enabled in a future rollout, update the external smoke
-expectations in the same reviewed change. The frontend build packages the
-reviewed Python IDE asset manifest; the backend does not stream an upstream
-asset archive at runtime.
+on both endpoints, known anonymous routes, the relative `/admin` directory
+redirect, a real 404 for a synthetic unknown path, API health and readiness,
+the Graph Sketcher bundle, and the current fail-closed student and
+aggregate-usage boundaries. The manual **Verify production deployment** GitHub
+workflow runs the same gate from an independent external runner and should
+follow each production promotion. Also run `git diff --check`. If the
+privacy-approved features are intentionally enabled in a future rollout,
+update the external smoke expectations in the same reviewed change. The
+frontend build packages the reviewed Python IDE asset manifest; the backend
+does not stream an upstream asset archive at runtime.
 
 Project quota counters are rebuilt from non-deleted projects before the API
 starts listening. Project and counter writes remain separate MongoDB
