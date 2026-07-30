@@ -17,6 +17,7 @@ function composeService(compose: string, serviceName: string) {
 describe("versioned full-stack production deployment", () => {
 	it("pins every GitHub Action to an immutable reviewed commit", () => {
 		const workflowDirectory = resolve(__dirname, "../../.github/workflows");
+		const codeqlWorkflow = repositoryFile(".github/workflows/codeql-analysis.yml");
 		const actionReferences = readdirSync(workflowDirectory)
 			.filter(filename => filename.endsWith(".yml") || filename.endsWith(".yaml"))
 			.flatMap(filename =>
@@ -32,6 +33,7 @@ describe("versioned full-stack production deployment", () => {
 				/^-?\s*uses:\s+[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+(?:\/[A-Za-z0-9_.-]+)?@[a-f0-9]{40}\s+#\s+\S+$/
 			);
 		}
+		expect(codeqlWorkflow).toMatch(/\non:\n\s+workflow_dispatch:\n\s+push:/);
 	});
 
 	it("publishes only the classroom proxy on loopback", () => {
@@ -44,6 +46,10 @@ describe("versioned full-stack production deployment", () => {
 		expect(api).toContain('\n        expose:\n            - "3008"');
 		expect(api).not.toContain("\n        ports:");
 		expect(mongo).not.toContain("\n        ports:");
+		expect(mongo).toContain(
+			'- >-\n                    mongosh --quiet --username "$$MONGO_INITDB_ROOT_USERNAME"'
+		);
+		expect(mongo).toContain('--eval "quit(db.adminCommand(\'ping\').ok ? 0 : 2)"');
 		expect(compose).toContain("data:\n        internal: true");
 		expect(compose.match(/no-new-privileges:true/g)).toHaveLength(3);
 		expect(compose.match(/\n        cap_drop:\n            - ALL/g)).toHaveLength(3);
@@ -121,10 +127,11 @@ describe("versioned full-stack production deployment", () => {
 		expect(dockerIgnore).toContain("**/.env.*");
 		expect(frontendDockerfile).toContain("COPY deploy/nginx.conf /etc/nginx/conf.d/default.conf");
 		expect(frontendDockerfile).toContain("ARG VITE_CLASSROOM_PRIVACY_APPROVED=false");
-		expect(frontendDockerfile).toContain("npm install --global npm@11.12.0");
+		expect(frontendDockerfile).toContain("npm install --global npm@11.11.1");
 		expect(frontendDockerfile).toMatch(/FROM nginxinc\/nginx-unprivileged:stable-alpine@sha256:[a-f0-9]{64}/);
 		expect(frontendDockerfile).toMatch(/FROM node:22[.]22[.]2-alpine3[.]22@sha256:[a-f0-9]{64}/);
-		expect(apiDockerfile).toContain("npm install --global npm@11.12.0");
+		expect(apiDockerfile).toContain("npm install --global npm@11.11.1");
+		expect(continuousIntegration.match(/npm i -g npm@11[.]11[.]1/g)).toHaveLength(8);
 		expect(apiDockerfile).toMatch(/FROM node:22[.]22[.]2-alpine3[.]22@sha256:[a-f0-9]{64}/);
 		expect(apiDockerfile).toContain("npm run -w back-end build");
 		expect(apiDockerfile).toContain('CMD ["node", "back-end/dist/server.js"]');
