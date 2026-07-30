@@ -26,59 +26,12 @@ import {
 	suspendStudentSessionHandoff
 } from "@/modules/studentSessionHandoff";
 
-type Displayable =
-	| string
-	| number
-	| boolean
-	| null
-	| undefined
-	| string[]
-	| CourseStatusMap
-	| CourseProgress[]
-	| Tutor[]
-	| (string | Tutor)[];
-
-export type CourseAccessStatus = "current" | "past" | "available";
-export type CourseStatusMap = Record<string, CourseAccessStatus>;
+type Displayable = string | number | boolean | null | undefined | string[];
 
 /* ------------------------------------------------------------------ */
 /*  TypeScript interfaces                                             */
 /* ------------------------------------------------------------------ */
-export interface Tutor {
-	_id: string;
-	name: string;
-	email: string;
-	age: number;
-	state: string;
-	usersOfTutorLength: number;
-	coursePermissions?: string[];
-	editTutors: boolean;
-	saveEdit: string;
-	[key: string]: Displayable;
-}
-
-export interface User extends StudentAccount {
-	name?: string;
-	email?: string;
-	age?: number;
-	state?: string;
-	recipientName?: string;
-	tutors?: (string | Tutor)[];
-	courseAccess?: string[];
-	courseStatus?: CourseStatusMap;
-	courseProgress?: CourseProgress[];
-	editUsers?: boolean;
-	saveEdit?: string;
-}
-
-export interface CourseProgress {
-	courseId: string;
-	completedModuleIds: string[];
-	completedItemIds: string[];
-	updatedAt?: string;
-	updatedBy?: string;
-	updatedByRole?: "admin" | "tutor";
-}
+export type User = StudentAccount;
 
 export interface Admin {
 	_id: string;
@@ -95,12 +48,7 @@ export interface Admin {
 /* ------------------------------------------------------------------ */
 export const useAppStore = defineStore("app", {
 	state: () => ({
-		users: [] as User[],
-		tutors: [] as Tutor[],
-		admins: [] as Admin[],
-
 		currentUser: null as User | null,
-		currentTutor: null as Tutor | null,
 		currentAdmin: null as Admin | null,
 		adminSessionRevalidating: false,
 		adminSessionValidatedAt: 0,
@@ -109,9 +57,6 @@ export const useAppStore = defineStore("app", {
 		studentSessionValidatedAt: 0,
 		sessionBootstrapStatus: "pending" as "failed" | "pending" | "ready",
 		sessionRevision: 0,
-
-		signupBlock: false,
-		showUsers: false,
 
 		error: null as string | null
 	}),
@@ -191,21 +136,11 @@ export const useAppStore = defineStore("app", {
 		},
 
 		/* ---------- setters ---------- */
-		setUsers(u: User[]) {
-			this.users = u;
-		},
-		setTutors(t: Tutor[]) {
-			this.tutors = t;
-		},
-		/*		setAdmins(a: Admin[]) {
-			this.admins = a;
-		}, */
 		setCurrentUser(u: User | null) {
 			this.sessionRevision += 1;
 			this.currentUser = u;
 			if (u) {
 				this.currentAdmin = null;
-				this.currentTutor = null;
 				this.studentSessionRevalidating = false;
 				this.studentSessionValidatedAt = Date.now();
 			} else {
@@ -214,10 +149,6 @@ export const useAppStore = defineStore("app", {
 					this.studentSessionValidatedAt = 0;
 			}
 		},
-		setCurrentTutor(t: Tutor | null) {
-			this.sessionRevision += 1;
-			this.currentTutor = t;
-		},
 		setCurrentAdmin(a: Admin | null) {
 			this.sessionRevision += 1;
 			this.currentAdmin = a;
@@ -225,7 +156,6 @@ export const useAppStore = defineStore("app", {
 			this.adminSessionValidatedAt = a ? Date.now() : 0;
 			if (a) {
 				this.currentUser = null;
-				this.currentTutor = null;
 				this.studentRequiresPasswordSetup = false;
 				this.studentSessionRevalidating = false;
 				this.studentSessionValidatedAt = 0;
@@ -248,21 +178,11 @@ export const useAppStore = defineStore("app", {
 			this.setCurrentUser(session.student);
 			this.studentRequiresPasswordSetup = session.requiresPasswordSetup;
 		},
-		setSignupBlock(v: boolean) {
-			this.signupBlock = v;
-		},
-		/*		setShowUsers(v: boolean) {
-			this.showUsers = v;
-		}, */
 		setError(e: string | null) {
 			this.error = e;
 		},
 		clearSession() {
 			this.sessionRevision += 1;
-			this.users = [];
-			this.tutors = [];
-			this.admins = [];
-			this.currentTutor = null;
 			this.currentUser = null;
 			this.currentAdmin = null;
 			this.adminSessionRevalidating = false;
@@ -270,25 +190,17 @@ export const useAppStore = defineStore("app", {
 			this.studentRequiresPasswordSetup = false;
 			this.studentSessionRevalidating = false;
 			this.studentSessionValidatedAt = 0;
-			this.signupBlock = false;
-			this.showUsers = false;
 			this.error = null;
 		},
 		hideAdminSession(expectedAdminID?: string | null) {
 			const adminID = this.currentAdmin?._id ?? expectedAdminID ?? null;
 			if (!adminID) return null;
 			this.sessionRevision += 1;
-			this.users = [];
-			this.tutors = [];
-			this.admins = [];
-			this.currentTutor = null;
 			this.currentUser = null;
 			this.currentAdmin = null;
 			this.adminSessionRevalidating = true;
 			this.adminSessionValidatedAt = 0;
 			this.studentRequiresPasswordSetup = false;
-			this.signupBlock = false;
-			this.showUsers = false;
 			this.error = null;
 			return adminID;
 		},
@@ -309,7 +221,6 @@ export const useAppStore = defineStore("app", {
 			}
 			this.sessionRevision += 1;
 			this.currentUser = null;
-			this.currentTutor = null;
 			this.studentRequiresPasswordSetup = false;
 			this.studentSessionRevalidating = true;
 			this.studentSessionValidatedAt = 0;
@@ -379,37 +290,6 @@ export const useAppStore = defineStore("app", {
 				return false;
 			}
 		},
-
-		/* ---------- data fetchers ---------- */
-		async fetchUsers() {
-			try {
-				const { data } = await api.get<User[]>("/users/all");
-				this.setUsers(data);
-			} catch (e) {
-				console.error(e);
-			}
-		},
-
-		async fetchTutors() {
-			try {
-				const { data } = await api.get<Tutor[]>("/tutors");
-				this.setTutors(data);
-			} catch (e) {
-				console.error(e);
-			}
-		},
-
-		/*		async getUsersOfTutor() {
-			if (!this.currentTutor) return;
-			try {
-				const { data } = await api.get<User[]>(
-					`/users/oftutor/${this.currentTutor._id}`
-				);
-				this.setUsers(data);
-			} catch (e) {
-				console.error(e);
-			}
-		}, */
 
 		/* ---------- session helpers ---------- */
 		async logout() {
@@ -599,17 +479,6 @@ export const useAppStore = defineStore("app", {
 				this.setStudentSession(session);
 			} catch {
 				this.setCurrentUser(null);
-			}
-		},
-
-		async refreshCurrentTutor() {
-			try {
-				const { data } = await api.get<{ currentTutor: Tutor }>(
-					"/tutors/loggedin"
-				);
-				this.setCurrentTutor(data.currentTutor);
-			} catch {
-				this.setCurrentTutor(null);
 			}
 		},
 

@@ -45,7 +45,7 @@ useHead({
 			<h1 class="page-title">Courses</h1>
 		</header>
 
-		<CourseExplorer public-catalog />
+		<CourseExplorer />
 	</section>
 </template>
 

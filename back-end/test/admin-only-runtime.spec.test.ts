@@ -1,5 +1,5 @@
 import type { Server } from "node:http";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import express from "express";
 import { Types } from "mongoose";
@@ -132,6 +132,20 @@ describe("Admin-only account runtime", () => {
 	});
 
 	it("keeps all legacy account and tutoring services unmounted", async () => {
+		const removedLegacySources = [
+			"../src/controllers/common/quoteProxy.ts",
+			"../src/routes/adminMailRoutes.ts",
+			"../src/routes/tutorRoutes.ts",
+			"../src/routes/userRoutes.ts",
+			"../src/models/schemas/Tutor.ts",
+			"../src/models/schemas/User.ts",
+			"../src/models/schemas/ScheduledSession.ts",
+			"../src/models/schemas/SessionNote.ts"
+		];
+		expect(
+			removedLegacySources.filter(path => existsSync(resolve(__dirname, path)))
+		).toEqual([]);
+
 		await withRuntime({}, async (baseUrl) => {
 			const mutationHeaders = { "X-Classroom-Request": "1" };
 			const attempts = [

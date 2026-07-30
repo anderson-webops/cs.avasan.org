@@ -1,93 +1,8 @@
 import type { RawCourse } from "./types";
 import {
-	pendingStaticMediaNotice,
 	staticMediaFilename,
-	staticMediaUrl,
 	withPendingStaticMediaNotice
 } from "./staticMedia";
-
-const PYTHON_LEVEL_2_PENDING_SOURCE_ASSETS = [
-	"ps10_field_day.gif",
-	"ps10_field_day_ii.gif",
-	"ps10_todo_list.gif",
-	"ps10_us_capitals_quiz.gif",
-	"ps11_bank_account.gif",
-	"ps11_calculator.gif",
-	"ps11_juni_world.gif",
-	"ps12_review_sentiment.gif",
-	"ps12_type_racer.mp4",
-	"ps13_advanced_typewriter_monkeys.gif",
-	"ps13_typewriter_monkeys.gif",
-	"ps13_wordsmith.gif",
-	"ps14_advanced_blackjack.gif",
-	"ps14_blackjack.gif",
-	"ps14_game_of_war.gif",
-	"ps1_index_picker.mp4",
-	"ps1_mad_libs.gif",
-	"ps1_relay_race.gif",
-	"ps1_space_mountain.gif",
-	"ps1_tip_calculator.gif",
-	"ps2_calendar_machine.gif",
-	"ps2_change_machine.gif",
-	"ps2_crazy_nametags.gif",
-	"ps2_debugging_loops.gif",
-	"ps2_double_or_nothing.gif",
-	"ps2_for_loop_fun.gif",
-	"ps2_interest_aggregator.gif",
-	"ps2_juni_archery.gif",
-	"ps2_multiplication_tables.gif",
-	"ps2_password_guesser.gif",
-	"ps3_ascii_art.gif",
-	"ps3_caesar_cipher.gif",
-	"ps3_nested_boxes.gif",
-	"ps3_password_cracker.gif",
-	"ps3_simple_cipher.gif",
-	"ps3_uppercase_to_lowercase.gif",
-	"ps4_carnival_strength_tester.gif",
-	"ps4_credit_card_validator.gif",
-	"ps4_debugging_conditionals.gif",
-	"ps4_fizzbuzz.gif",
-	"ps4_joes_donuts.gif",
-	"ps4_number_guesser.gif",
-	"ps4_relay_race_statistics.gif",
-	"ps4_rock_paper_scissors.gif",
-	"ps4_test_statistics.gif",
-	"ps5_coin_flipper.gif",
-	"ps5_debugging_functions.gif",
-	"ps5_dice_roller.gif",
-	"ps5_functions_practice.gif",
-	"ps5_juni_latin.gif",
-	"ps5_number_games.gif",
-	"ps6_basketball_stars.gif",
-	"ps6_card_shuffler.mp4",
-	"ps6_debugging_lists.gif",
-	"ps6_dog_breeds.gif",
-	"ps6_lists_practice.gif",
-	"ps6_song_generator.gif",
-	"ps6_stock_trader.gif",
-	"ps6_tower_of_terror.gif",
-	"ps7_birthday_converter.gif",
-	"ps7_coffee_shop.gif",
-	"ps7_debugging_dictionaries.gif",
-	"ps7_dictionaries_practice.gif",
-	"ps7_dictionary_indexing.gif",
-	"ps7_song_generator_2.gif",
-	"ps7_test_scores.gif",
-	"ps8_morse_code.gif",
-	"ps9_class_registration.gif",
-	"ps9_class_registration_ii.gif",
-	"ps9_debugging_sets.gif",
-	"ps9_favorite_foods.gif",
-	"ps9_sets_practice.gif",
-	"ps9_soccer_nationalities.gif",
-	"ps_12_evil_hangman.mp4",
-	"ps_14_mastermind.mp4",
-	"ps_15_master_project.mp4",
-	"ps_9_wheel_of_fortune.mp4",
-	"python_level_2_check_in_questions.png",
-	"python_level_2_concept.png",
-	"python_level_2_project.png"
-];
 
 function conceptBrief({
 	evidence,
@@ -2432,23 +2347,6 @@ export const pythonLevel2Course: RawCourse = {
 						evidence:
 							"The next step follows from demonstrated strengths and gaps, not only from completing the last module."
 					})
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			kind: "appendix",
-			title: "Pending Static Assets",
-			curriculum: [
-				{
-					title: "Pending Python Level 2 Assets",
-					content: [
-						"This course lists pending assets below. Each entry keeps a stable static media URL so the matching file can be added without changing course links.",
-						...PYTHON_LEVEL_2_PENDING_SOURCE_ASSETS.map(
-							filename =>
-								`- ${staticMediaUrl(filename)}\n\n${pendingStaticMediaNotice(filename)}`
-						)
-					].join("\n\n")
 				}
 			],
 			supplementalProjects: []

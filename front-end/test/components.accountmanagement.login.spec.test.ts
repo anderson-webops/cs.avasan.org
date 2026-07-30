@@ -112,7 +112,6 @@ describe("AccountManagement teacher login", () => {
 		);
 		expect(app.currentAdmin).toEqual(julio);
 		expect(app.currentUser).toBeNull();
-		expect(app.currentTutor).toBeNull();
 		expect(wrapper.get("#admin-password").element).toHaveProperty("value", "");
 		wrapper.unmount();
 	});

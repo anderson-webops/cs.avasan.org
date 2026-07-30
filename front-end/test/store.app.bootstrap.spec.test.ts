@@ -59,7 +59,6 @@ describe("app store bootstrapSession()", () => {
 		expect(apiMod.api.get).toHaveBeenNthCalledWith(2, "/admins/loggedin");
 		expect(app.currentAdmin?._id).toBe("julio");
 		expect(app.currentUser).toBeNull();
-		expect(app.currentTutor).toBeNull();
 	});
 
 	it("hydrates a student session without creating a teacher session", async () => {
@@ -84,7 +83,6 @@ describe("app store bootstrapSession()", () => {
 		expect(app.currentUser?.username).toBe("maria-7");
 		expect(app.studentRequiresPasswordSetup).toBe(true);
 		expect(app.currentAdmin).toBeNull();
-		expect(app.currentTutor).toBeNull();
 	});
 
 	it("keeps a visitor logged out when no student session exists", async () => {
@@ -112,12 +110,11 @@ describe("app store bootstrapSession()", () => {
 		await app.bootstrapSession();
 
 		expect(app.currentAdmin).toBeNull();
-		expect(app.currentTutor).toBeNull();
 		expect(app.currentUser).toBeNull();
 		expect(app.studentRequiresPasswordSetup).toBe(false);
 	});
 
-	it("clears cached Admin data when a later bootstrap probe fails", async () => {
+	it("clears the cached Admin identity when a later bootstrap probe fails", async () => {
 		const app = useAppStore();
 		app.setCurrentAdmin({
 			_id: "julio",
@@ -126,9 +123,6 @@ describe("app store bootstrapSession()", () => {
 			editAdmins: false,
 			saveEdit: "Save"
 		});
-		app.setUsers([
-			{ _id: "student-private", username: "maria-7", active: true }
-		]);
 		(apiMod.api.get as any).mockRejectedValueOnce(
 			new Error("session probe unavailable")
 		);
@@ -136,7 +130,7 @@ describe("app store bootstrapSession()", () => {
 		await app.bootstrapSession();
 
 		expect(app.currentAdmin).toBeNull();
-		expect(app.users).toEqual([]);
+		expect(app.sessionBootstrapStatus).toBe("failed");
 	});
 
 	it("does not let a delayed bootstrap overwrite an interactive login", async () => {
@@ -212,7 +206,7 @@ describe("app store bootstrapSession()", () => {
 		expect(app.studentRequiresPasswordSetup).toBe(false);
 	});
 
-	it("retains Admin data after rejected logout only when Julio is confirmed", async () => {
+	it("retains the Admin identity after rejected logout only when Julio is confirmed", async () => {
 		const julio = {
 			_id: "julio",
 			name: "Julio",
@@ -228,13 +222,6 @@ describe("app store bootstrapSession()", () => {
 			.mockResolvedValueOnce({ data: { currentAdmin: julio } });
 		const app = useAppStore();
 		app.setCurrentAdmin(julio);
-		app.setUsers([
-			{
-				_id: "student-private",
-				username: "maria-7",
-				active: true
-			}
-		]);
 
 		await app.logout();
 
@@ -244,7 +231,6 @@ describe("app store bootstrapSession()", () => {
 			"/admins/loggedin"
 		);
 		expect(app.currentAdmin?._id).toBe(julio._id);
-		expect(app.users).toHaveLength(1);
 		expect(broadcastStudentSessionEnded).not.toHaveBeenCalled();
 	});
 
@@ -264,18 +250,10 @@ describe("app store bootstrapSession()", () => {
 		});
 		const app = useAppStore();
 		app.setCurrentAdmin(julio);
-		app.setUsers([
-			{
-				_id: "student-private",
-				username: "maria-7",
-				active: true
-			}
-		]);
 
 		await app.logout();
 
 		expect(app.currentAdmin).toBeNull();
-		expect(app.users).toEqual([]);
 		expect(broadcastStudentSessionEnded).toHaveBeenCalledOnce();
 	});
 });

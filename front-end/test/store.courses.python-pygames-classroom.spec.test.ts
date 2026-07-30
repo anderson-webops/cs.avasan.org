@@ -4,6 +4,7 @@ import {
 	courseCatalog,
 	loadRawCourse
 } from "@/stores/courses/index";
+import { KNOWN_PENDING_STATIC_MEDIA_FILENAMES } from "@/stores/courses/staticMedia";
 import type {
 	RawCourse,
 	RawCourseModule,
@@ -256,5 +257,67 @@ describe("Julio's Python Level 2 and PyGames classroom editions", () => {
 		).toBe(
 			"https://github.com/instruction-material/PyGames/blob/main/PyG1-Bouncing-Alien.py"
 		);
+	});
+
+	it("loads the authored PyGames starters for Check-Ins 2 and 3", async () => {
+		const course = await requireCourse("pygames");
+		const expectations = [
+			{
+				filename: "Check-in-2-Starter.py",
+				moduleTitle: "Check-In #2: Gravity, Friction, Platforms"
+			},
+			{
+				filename: "Check-in-3-Starter.py",
+				moduleTitle:
+					"Check-In #3: System Control, Projectiles, Enemy AI"
+			}
+		];
+
+		for (const expectation of expectations) {
+			const module = course.modules.find(
+				candidate => candidate.title === expectation.moduleTitle
+			);
+			expect(module, expectation.moduleTitle).toBeDefined();
+
+			const item = module?.curriculum.find(candidate => {
+				if (!candidate.projectLink?.startsWith("/python-ide?"))
+					return false;
+				return (
+					new URL(
+						candidate.projectLink,
+						"https://cs.avasan.org"
+					).searchParams.get("starterUrl") ===
+					`https://github.com/instruction-material/PyGames/blob/main/${expectation.filename}`
+				);
+			});
+			expect(item, `${expectation.moduleTitle} starter`).toBeDefined();
+			expect(
+				module!.curriculum.some(candidate =>
+					candidate.content.includes(expectation.filename)
+				)
+			).toBe(true);
+
+			const starterUrl = new URL(
+				item!.projectLink!,
+				"https://cs.avasan.org"
+			).searchParams.get("starterUrl");
+			expect(starterUrl).toBe(
+				`https://github.com/instruction-material/PyGames/blob/main/${expectation.filename}`
+			);
+		}
+	});
+
+	it("has no pending-media registry or reservation appendix in current courses", async () => {
+		expect(KNOWN_PENDING_STATIC_MEDIA_FILENAMES).toEqual([]);
+
+		const courses = await Promise.all(
+			courseCatalog.map(({ id }) => requireCourse(id))
+		);
+		const moduleTitles = courses.flatMap(course =>
+			course.modules.map(module => module.title)
+		);
+
+		expect(moduleTitles).not.toContain("Pending Static Assets");
+		expect(moduleTitles).not.toContain("Demo Media Status");
 	});
 });

@@ -188,24 +188,3 @@ export function createTeacherVerificationLimiter(options: TunableRateLimitOption
 		...options
 	});
 }
-
-export function createUserCourseAccessLimiter(options: TunableRateLimitOptions = {}): RateLimitRequestHandler {
-	return rateLimit({
-		windowMs: 15 * 60 * 1000,
-		limit: 100,
-		store: new ExactExpiryRateLimitStore(),
-		...standardRateLimitHeaders,
-		...options
-	});
-}
-
-export function createAdminMailLimiter(options: TunableRateLimitOptions = {}): RateLimitRequestHandler {
-	return rateLimit({
-		windowMs: Number(env.RATE_WINDOW_MS || 60000),
-		limit: Number(env.RATE_MAX || 20),
-		store: new ExactExpiryRateLimitStore(),
-		...standardRateLimitHeaders,
-		message: { message: "Too many requests, slow down." },
-		...options
-	});
-}
