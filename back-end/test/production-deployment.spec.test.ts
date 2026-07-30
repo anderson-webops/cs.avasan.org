@@ -74,6 +74,8 @@ describe("versioned full-stack production deployment", () => {
 		expect(proxy.match(/add_header Permissions-Policy/g)).toHaveLength(3);
 		expect(proxy.match(/add_header X-Frame-Options/g)).toHaveLength(3);
 		expect(proxy).toContain("proxy_set_header X-Forwarded-For $http_x_forwarded_for;");
+		expect(proxy).toContain("try_files $uri $uri/ =404;");
+		expect(proxy).not.toContain("try_files $uri $uri/ /index.html;");
 		expect(hostProxy).toContain("proxy_set_header X-Forwarded-For $remote_addr;");
 		expect(hostProxy.match(/access_log off;/g)).toHaveLength(2);
 		expect(hostProxy).not.toContain(" combined");
@@ -108,10 +110,11 @@ describe("versioned full-stack production deployment", () => {
 		expect(environment).toContain("MONGO_APP_PASSWORD=");
 		expect(netlify).toContain('from = "/api/*"');
 		expect(netlify).toContain("status = 404");
+		expect(netlify).not.toContain('to = "/index.html"');
 		expect(netlify).toContain('VITE_STUDENT_ACCOUNTS_ENABLED = "false"');
 		expect(netlify).toContain('for = "/*"');
 		expect(netlify).toContain('X-Frame-Options = "DENY"');
-		expect(netlify).toContain('NODE_VERSION = "22.22.2"');
+		expect(netlify).toContain('NODE_VERSION = "24.18.0"');
 	});
 
 	it("builds separate immutable frontend and API images from this source", () => {
@@ -127,12 +130,12 @@ describe("versioned full-stack production deployment", () => {
 		expect(dockerIgnore).toContain("**/.env.*");
 		expect(frontendDockerfile).toContain("COPY deploy/nginx.conf /etc/nginx/conf.d/default.conf");
 		expect(frontendDockerfile).toContain("ARG VITE_CLASSROOM_PRIVACY_APPROVED=false");
-		expect(frontendDockerfile).toContain("npm install --global npm@11.11.1");
+		expect(frontendDockerfile).toContain("npm install --global npm@11.16.0");
 		expect(frontendDockerfile).toMatch(/FROM nginxinc\/nginx-unprivileged:stable-alpine@sha256:[a-f0-9]{64}/);
-		expect(frontendDockerfile).toMatch(/FROM node:22[.]22[.]2-alpine3[.]22@sha256:[a-f0-9]{64}/);
-		expect(apiDockerfile).toContain("npm install --global npm@11.11.1");
-		expect(continuousIntegration.match(/npm i -g npm@11[.]11[.]1/g)).toHaveLength(8);
-		expect(apiDockerfile).toMatch(/FROM node:22[.]22[.]2-alpine3[.]22@sha256:[a-f0-9]{64}/);
+		expect(frontendDockerfile).toMatch(/FROM node:24[.]18[.]0-alpine@sha256:[a-f0-9]{64}/);
+		expect(apiDockerfile).toContain("npm install --global npm@11.16.0");
+		expect(continuousIntegration.match(/npm i -g npm@11[.]16[.]0/g)).toHaveLength(8);
+		expect(apiDockerfile).toMatch(/FROM node:24[.]18[.]0-alpine@sha256:[a-f0-9]{64}/);
 		expect(apiDockerfile).toContain("npm run -w back-end build");
 		expect(apiDockerfile).toContain('CMD ["node", "back-end/dist/server.js"]');
 		expect(apiDockerfile).toContain("FROM npm-stage AS admin-stage");
@@ -146,6 +149,8 @@ describe("versioned full-stack production deployment", () => {
 		expect(continuousIntegration).toContain("up --detach --wait --no-build web");
 		expect(continuousIntegration).toContain("down --volumes --remove-orphans");
 		expect(continuousIntegration).toContain('"${origin}/api/readyz"');
+		expect(continuousIntegration).toContain('"${origin}/__cs-avasan-deployment-probe-missing"');
+		expect(continuousIntegration).toContain('unknown_status}" = "404"');
 		expect(continuousIntegration).toContain('student_status}" = "404"');
 		expect(continuousIntegration).toContain("deprecationwarning|unhandledrejection|uncaughtexception");
 		expect(readme).toContain("run --rm admin-tools npm run -w back-end create-admin-ts");

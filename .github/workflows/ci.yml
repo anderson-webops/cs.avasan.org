@@ -18,14 +18,14 @@ jobs:
 
             - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
               with:
-                  node-version: 22.22.2
+                  node-version: 24.18.0
                   cache: npm
                   cache-dependency-path: back-end/package-lock.json
 
             - name: Pin npm version
               run: |
                   npm -v
-                  npm i -g npm@11.11.1
+                  npm i -g npm@11.16.0
                   npm -v
 
             - name: Install backend deps with backend lockfile
@@ -39,14 +39,14 @@ jobs:
 
             - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
               with:
-                  node-version: 22.22.2
+                  node-version: 24.18.0
                   cache: npm
 
             # Make runner's npm match packageManager in package.json
             - name: Pin npm version
               run: |
                   npm -v
-                  npm i -g npm@11.11.1
+                  npm i -g npm@11.16.0
                   npm -v
 
             - name: Install deps
@@ -63,12 +63,12 @@ jobs:
 
             - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
               with:
-                  node-version: 22.22.2
+                  node-version: 24.18.0
                   cache: npm
 
             - name: Pin npm version
               run: |
-                  npm i -g npm@11.11.1
+                  npm i -g npm@11.16.0
                   npm -v
 
             - name: Install deps
@@ -81,7 +81,7 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                node-version: [22.22.2]
+                node-version: [24.18.0]
                 os: [ubuntu-latest]
             fail-fast: false
 
@@ -98,7 +98,7 @@ jobs:
               run: |
                   # optional guard:
                   if [ $(node -v | cut -d. -f1 | sed 's/v//') -ge 20 ]; then
-                    npm i -g npm@11.11.1
+                    npm i -g npm@11.16.0
                   fi
                   npm -v
 
@@ -125,12 +125,12 @@ jobs:
 
             - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
               with:
-                  node-version: 22.22.2
+                  node-version: 24.18.0
                   cache: npm
 
             - name: Pin npm version
               run: |
-                  npm i -g npm@11.11.1
+                  npm i -g npm@11.16.0
                   npm -v
 
             - name: Install deps
@@ -147,12 +147,12 @@ jobs:
 
             - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
               with:
-                  node-version: 22.22.2
+                  node-version: 24.18.0
                   cache: npm
 
             - name: Pin npm version
               run: |
-                  npm i -g npm@11.11.1
+                  npm i -g npm@11.16.0
                   npm -v
 
             - name: Install deps
@@ -169,13 +169,13 @@ jobs:
 
             - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
               with:
-                  node-version: 22.22.2
+                  node-version: 24.18.0
                   cache: npm
                   registry-url: https://registry.npmjs.org/
 
             - name: Pin npm version
               run: |
-                  npm i -g npm@11.11.1
+                  npm i -g npm@11.16.0
                   npm -v
 
             - name: Install deps
@@ -205,12 +205,12 @@ jobs:
 
             - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
               with:
-                  node-version: 22.22.2
+                  node-version: 24.18.0
                   cache: npm
 
             - name: Pin npm version
               run: |
-                  npm i -g npm@11.11.1
+                  npm i -g npm@11.16.0
                   npm -v
 
             - name: Install deps
@@ -256,6 +256,10 @@ jobs:
                   curl --fail --silent --show-error "${origin}/graph-sketcher" >/dev/null
                   curl --fail --silent --show-error "${origin}/api/healthz" >/dev/null
                   curl --fail --silent --show-error "${origin}/api/readyz" >/dev/null
+
+                  unknown_status=$(curl --silent --output /dev/null --write-out '%{http_code}' \
+                    "${origin}/__cs-avasan-deployment-probe-missing")
+                  test "${unknown_status}" = "404"
 
                   student_status=$(curl --silent --output /dev/null --write-out '%{http_code}' "${origin}/api/students/session")
                   test "${student_status}" = "404"
