@@ -120,9 +120,6 @@ describe("Admin session lifecycle", () => {
 	it("hides a stale Admin workspace before probing and restores only Julio", async () => {
 		const app = useAppStore();
 		app.setCurrentAdmin(julio);
-		app.setUsers([
-			{ _id: "student-private", username: "maria-7", active: true }
-		]);
 		const now =
 			app.adminSessionValidatedAt + ADMIN_SESSION_VALIDATION_LEASE_MS + 1;
 		stopLifecycle = startAdminSessionLifecycle(app, { now: () => now });
@@ -133,7 +130,6 @@ describe("Admin session lifecycle", () => {
 		window.dispatchEvent(new Event("focus"));
 
 		expect(app.currentAdmin).toBeNull();
-		expect(app.users).toEqual([]);
 		expect(app.adminSessionRevalidating).toBe(true);
 
 		await flushPromises();
@@ -149,9 +145,6 @@ describe("Admin session lifecycle", () => {
 		vi.setSystemTime(new Date("2026-07-29T10:00:00.000Z"));
 		const app = useAppStore();
 		app.setCurrentAdmin(julio);
-		app.setUsers([
-			{ _id: "student-private", username: "maria-7", active: true }
-		]);
 		let resolveMarker:
 			| ((value: { data: { adminID: string } }) => void)
 			| undefined;
@@ -168,7 +161,6 @@ describe("Admin session lifecycle", () => {
 		vi.advanceTimersByTime(ADMIN_SESSION_VALIDATION_LEASE_MS);
 
 		expect(app.currentAdmin).toBeNull();
-		expect(app.users).toEqual([]);
 		expect(app.adminSessionRevalidating).toBe(true);
 		resolveMarker?.({ data: { adminID: julio._id } });
 		await flushPromises();
@@ -178,15 +170,11 @@ describe("Admin session lifecycle", () => {
 	it("hides on pagehide and requires a fresh exact match after BFCache restore", async () => {
 		const app = useAppStore();
 		app.setCurrentAdmin(julio);
-		app.setUsers([
-			{ _id: "student-private", username: "maria-7", active: true }
-		]);
 		stopLifecycle = startAdminSessionLifecycle(app);
 
 		window.dispatchEvent(new Event("pagehide"));
 
 		expect(app.currentAdmin).toBeNull();
-		expect(app.users).toEqual([]);
 		expect(app.adminSessionRevalidating).toBe(true);
 
 		vi.mocked(api.get)
@@ -203,9 +191,6 @@ describe("Admin session lifecycle", () => {
 	it("hides Admin data immediately when a current tab becomes hidden", () => {
 		const app = useAppStore();
 		app.setCurrentAdmin(julio);
-		app.setUsers([
-			{ _id: "student-private", username: "maria-7", active: true }
-		]);
 		stopLifecycle = startAdminSessionLifecycle(app, {
 			now: () => app.adminSessionValidatedAt + 1
 		});
@@ -217,7 +202,6 @@ describe("Admin session lifecycle", () => {
 		document.dispatchEvent(new Event("visibilitychange"));
 
 		expect(app.currentAdmin).toBeNull();
-		expect(app.users).toEqual([]);
 		expect(app.adminSessionRevalidating).toBe(true);
 		expect(api.get).not.toHaveBeenCalled();
 	});

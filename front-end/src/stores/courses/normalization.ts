@@ -8581,7 +8581,11 @@ function pyGamesClassroomSourceUrl(
 				: `Check-in-${checkInNumber}-Additional-Practice-Solution.py`;
 		return `${INSTRUCTION_MATERIAL_BASE}/PyGames/blob/main/${fileName}`;
 	}
-	return `${INSTRUCTION_MATERIAL_BASE}/PyGames/blob/main/Check-in-${checkInNumber}-Solution.py`;
+	const fileName =
+		checkInNumber === "1"
+			? "Check-in-1-Solution.py"
+			: `Check-in-${checkInNumber}-Starter.py`;
+	return `${INSTRUCTION_MATERIAL_BASE}/PyGames/blob/main/${fileName}`;
 }
 
 function pythonLevel2ClassroomSourceUrl(module: RawCourseModule) {

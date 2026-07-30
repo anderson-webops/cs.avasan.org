@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import type { CodePreviewResource } from "@/modules/codePreview";
 import type { CourseAssetResource } from "@/modules/courseAssetPreview";
-import type { CourseProgress, User } from "@/stores/app";
 import type {
 	CourseDefinition,
 	CourseModule,
@@ -16,12 +15,7 @@ import {
 	shallowRef,
 	watch
 } from "vue";
-import { api } from "@/api";
 import { reportClassroomUsage } from "@/modules/classroomUsage";
-import {
-	groupCoursesByLearnerStatus,
-	orderedCoursesByLearnerStatus
-} from "@/modules/courseAccess";
 import { courseAssetViewerUrl } from "@/modules/courseAssetPreview";
 import {
 	getPythonIdeModeLabel,
@@ -38,15 +32,6 @@ import {
 import CodePreview from "./CodePreview.vue";
 import CourseAssetPreview from "./CourseAssetPreview.vue";
 import LazyMarkdownContent from "./LazyMarkdownContent.vue";
-
-const props = withDefaults(
-	defineProps<{
-		publicCatalog?: boolean;
-	}>(),
-	{
-		publicCatalog: false
-	}
-);
 
 interface VisibleModule extends CourseModule {
 	position: number;
@@ -74,8 +59,6 @@ const SOURCE_REPOSITORY_ROOT_RE =
 	/^https:\/\/github\.com\/instruction-material\/[^/]+\/tree\/main$/i;
 const REPOSITORY_ARCHIVE_RE =
 	/\b(?:reference archive|full repo|repo bank|problem bank|workspace archive|source archive)\b/i;
-const LEARNER_SELECTION_STORAGE_KEY =
-	"classes:course-explorer:selected-learner";
 const COURSE_SELECTION_STORAGE_KEY = "classes:course-explorer:selected-course";
 const MODULE_SELECTION_STORAGE_KEY_PREFIX =
 	"classes:course-explorer:active-module:";
@@ -84,108 +67,33 @@ const coursesStore = useCoursesStore();
 const { courses } = storeToRefs(coursesStore);
 
 const appStore = useAppStore();
-const { currentTutor, currentAdmin, currentUser, users } =
-	storeToRefs(appStore);
+const { currentAdmin } = storeToRefs(appStore);
 
 const searchQuery = ref("");
 const selectedCourseId = ref("");
-const selectedLearnerId = ref("");
 const activeModuleId = ref("");
 const selectedCourse = shallowRef<CourseDefinition | null>(null);
 const courseLoadError = ref("");
 const isCourseLoading = ref(false);
 const unavailableStaticMediaUrls = ref<string[]>([]);
-const managedLearnersLoading = ref(false);
-const managedLearnersError = ref("");
-const progressSaveStatus = ref<
-	"idle" | "unsaved" | "saving" | "saved" | "error"
->("idle");
-const progressSaveError = ref("");
-const progressDrafts = ref<Record<string, CourseProgress>>({});
 const isStorageReady = ref(false);
-const hasRestoredStoredLearner = ref(false);
 const currentHashAnchor = ref(readCurrentHashAnchor());
 const prefersReducedMotion = ref(false);
 let reducedMotionQuery: MediaQueryList | null = null;
-let progressSaveTimer: ReturnType<typeof setTimeout> | null = null;
-let pendingProgressSave: {
-	courseId: string;
-	progress: CourseProgress;
-	userID: string;
-} | null = null;
 
 const allCourses = computed(() => courses.value ?? []);
 
-const canViewSolutions = computed(
-	() => !!currentTutor.value || !!currentAdmin.value
+const canViewSolutions = computed(() => !!currentAdmin.value);
+const courseList = computed(() => allCourses.value);
+const courseGroups = computed(() =>
+	[
+		{
+			key: "current" as const,
+			label: "Current courses",
+			courses: allCourses.value
+		}
+	].filter(group => group.courses.length > 0)
 );
-
-const isStaffContext = computed(
-	() => !props.publicCatalog && (!!currentTutor.value || !!currentAdmin.value)
-);
-
-const managedLearners = computed(() =>
-	isStaffContext.value ? users.value : []
-);
-
-const selectedLearner = computed(
-	() =>
-		managedLearners.value.find(
-			user => user._id === selectedLearnerId.value
-		) ?? null
-);
-
-const progressOwner = computed<User | null>(() => {
-	if (isStaffContext.value) return selectedLearner.value;
-	return currentUser.value;
-});
-
-const permittedCourseIds = computed(() => {
-	if (isStaffContext.value) {
-		return selectedLearner.value?.courseAccess ?? [];
-	}
-	if (currentTutor.value) return currentTutor.value.coursePermissions ?? [];
-	if (currentUser.value) return currentUser.value.courseAccess ?? [];
-	return [];
-});
-
-const courseGroupingOwner = computed<User | null>(() => {
-	if (isStaffContext.value) return selectedLearner.value;
-	return currentUser.value;
-});
-
-const courseList = computed(() => {
-	if (props.publicCatalog) {
-		return allCourses.value;
-	}
-	const allowed = new Set(permittedCourseIds.value);
-	return orderedCoursesByLearnerStatus(
-		allCourses.value.filter(course => allowed.has(course.id)),
-		courseGroupingOwner.value
-	);
-});
-
-const courseGroups = computed(() => {
-	if (props.publicCatalog) {
-		return [
-			{
-				key: "current" as const,
-				label: "Current courses",
-				courses: allCourses.value
-			}
-		].filter(group => group.courses.length > 0);
-	}
-
-	return groupCoursesByLearnerStatus(
-		courseList.value,
-		courseGroupingOwner.value
-	);
-});
-
-const hasCourseAccess = computed(() => {
-	if (props.publicCatalog) return courseList.value.length > 0;
-	return isStaffContext.value || courseList.value.length > 0;
-});
 
 const pythonIdeCourseMode = computed(() =>
 	pythonIdeModeForCourseId(selectedCourse.value?.id)
@@ -214,134 +122,7 @@ const pythonIdeCourseLabel = computed(() =>
 		: ""
 );
 
-const emptyTitle = computed(() =>
-	props.publicCatalog
-		? "No courses are available right now."
-		: isStaffContext.value
-			? "Choose a learner to open their courses."
-			: "You don't have any courses assigned yet."
-);
-
-const emptyHint = computed(() =>
-	props.publicCatalog
-		? "Check back soon for updates to the course library."
-		: isStaffContext.value
-			? "If a learner has no courses, update their access from Admin > People and access."
-			: "Email if access should already be enabled."
-);
-
-const canEditProgress = computed(
-	() =>
-		isStaffContext.value &&
-		!!selectedLearner.value &&
-		!!selectedCourseId.value
-);
-
-const progressSaveStatusText = computed(() => {
-	switch (progressSaveStatus.value) {
-		case "unsaved":
-			return "Unsaved changes";
-		case "saving":
-			return "Saving...";
-		case "saved":
-			return "Saved";
-		case "error":
-			return progressSaveError.value || "Couldn't save progress";
-		default:
-			return selectedLearner.value
-				? "Progress ready"
-				: "Select a learner";
-	}
-});
-
 const normalizedQuery = computed(() => normalizeSearch(searchQuery.value));
-
-watch(
-	[
-		isStaffContext,
-		() => currentAdmin.value?._id,
-		() => currentTutor.value?._id
-	],
-	async ([staffContext]) => {
-		if (!staffContext) {
-			selectedLearnerId.value = "";
-			managedLearnersError.value = "";
-			return;
-		}
-
-		await loadManagedLearners();
-	},
-	{ immediate: true }
-);
-
-watch(
-	[managedLearners, isStorageReady, currentHashAnchor],
-	([value, storageReady]) => {
-		if (!isStaffContext.value) return;
-
-		if (value.length === 0) {
-			selectedLearnerId.value = "";
-			return;
-		}
-
-		if (!storageReady) return;
-
-		const selectedStillValid = value.some(
-			user => user._id === selectedLearnerId.value
-		);
-		const hashCourseId = courseIdFromHash(
-			allCourses.value.map(course => course.id)
-		);
-		const learnerForHash = preferredLearnerIdForCourse(value, hashCourseId);
-		const storedLearnerId = readStoredValue(LEARNER_SELECTION_STORAGE_KEY);
-		const storedLearner = value.find(user => user._id === storedLearnerId);
-
-		if (!hasRestoredStoredLearner.value) {
-			hasRestoredStoredLearner.value = true;
-
-			if (
-				storedLearner &&
-				(!hashCourseId ||
-					learnerCanAccessCourse(storedLearner, hashCourseId))
-			) {
-				selectedLearnerId.value = storedLearner._id;
-				return;
-			}
-
-			if (learnerForHash) {
-				selectedLearnerId.value = learnerForHash;
-				return;
-			}
-
-			if (storedLearner) {
-				selectedLearnerId.value = storedLearner._id;
-				return;
-			}
-		}
-
-		if (
-			selectedStillValid &&
-			(!hashCourseId ||
-				learnerCanAccessCourse(selectedLearner.value, hashCourseId))
-		) {
-			return;
-		}
-
-		if (learnerForHash) {
-			selectedLearnerId.value = learnerForHash;
-			return;
-		}
-
-		if (!selectedStillValid) {
-			selectedLearnerId.value = value[0]._id;
-		}
-	},
-	{ immediate: true }
-);
-
-watch([selectedLearnerId, selectedCourseId], () => {
-	void flushPendingProgressSave();
-});
 
 watch(
 	[courseList, isStorageReady, currentHashAnchor],
@@ -353,13 +134,9 @@ watch(
 
 		const availableCourseIds = availableCourses.map(course => course.id);
 		if (!storageReady) {
-			// The public catalog has no identity-dependent choice. Select its
-			// first real course during SSG so no-JavaScript readers and crawlers
-			// receive course content instead of a false empty-state message.
-			if (
-				props.publicCatalog &&
-				!availableCourseIds.includes(selectedCourseId.value)
-			) {
+			// Select a real course during SSG so no-JavaScript readers and
+			// crawlers receive course content instead of an empty shell.
+			if (!availableCourseIds.includes(selectedCourseId.value)) {
 				selectedCourseId.value = availableCourses[0].id;
 			}
 			return;
@@ -421,28 +198,9 @@ watch(
 );
 
 watch([selectedCourse, isStorageReady], ([course, storageReady]) => {
-	if (!props.publicCatalog || !storageReady || !course) return;
+	if (!storageReady || !course) return;
 	void reportClassroomUsage("course-open", course.id);
 });
-
-const selectedCourseProgress = computed(() => {
-	const courseId = selectedCourseId.value;
-	const owner = progressOwner.value;
-	if (!courseId || !owner) return null;
-	return progressFor(owner, courseId);
-});
-
-const hasProgressTracking = computed(
-	() => !props.publicCatalog && !!progressOwner.value
-);
-
-const completedModuleIdSet = computed(
-	() => new Set(selectedCourseProgress.value?.completedModuleIds ?? [])
-);
-
-const completedItemIdSet = computed(
-	() => new Set(selectedCourseProgress.value?.completedItemIds ?? [])
-);
 
 const courseModules = computed(() => selectedCourse.value?.modules ?? []);
 const coreCourseModules = computed(() =>
@@ -572,13 +330,6 @@ const activeModule = computed(
 		) ?? null
 );
 
-const canEditActiveModuleProgress = computed(
-	() =>
-		canEditProgress.value &&
-		!!activeModule.value &&
-		isCoreModule(activeModule.value)
-);
-
 const activeCurriculumSectionLabel = computed(() =>
 	activeModule.value?.kind === "appendix" ? "Reference" : "Core path"
 );
@@ -687,27 +438,6 @@ function courseIdFromHash(courseIds: string[]) {
 	);
 }
 
-function learnerCanAccessCourse(
-	learner: Pick<User, "courseAccess"> | null | undefined,
-	courseId: string
-) {
-	return !!learner && (learner.courseAccess ?? []).includes(courseId);
-}
-
-function preferredLearnerIdForCourse(learners: User[], courseId: string) {
-	if (!courseId) return "";
-	return (
-		learners.find(learner => learnerCanAccessCourse(learner, courseId))
-			?._id ?? ""
-	);
-}
-
-function learnerOptionLabel(learner: User, index: number) {
-	const name = learner.name?.trim() || `Learner ${index + 1}`;
-	const courseCount = learner.courseAccess?.length ?? 0;
-	return `${name} · ${courseCount} ${courseCount === 1 ? "course" : "courses"}`;
-}
-
 function moduleIdFromHash(modules: VisibleModule[]) {
 	const anchor = currentHashAnchor.value;
 	if (!anchor) return "";
@@ -740,18 +470,6 @@ function itemMatches(item: CourseModuleItem, query: string) {
 	);
 }
 
-function progressIds(entity: { aliases?: string[]; id: string }) {
-	return [entity.id, ...(entity.aliases ?? [])];
-}
-
-function isModuleComplete(module: CourseModule) {
-	return progressIds(module).some(id => completedModuleIdSet.value.has(id));
-}
-
-function isItemComplete(item: CourseModuleItem) {
-	return progressIds(item).some(id => completedItemIdSet.value.has(id));
-}
-
 function selectCourse(id: string) {
 	selectedCourseId.value = id;
 }
@@ -762,198 +480,6 @@ function selectModule(id: string) {
 
 function clearSearch() {
 	searchQuery.value = "";
-}
-
-async function loadManagedLearners() {
-	if (!isStaffContext.value) return;
-
-	managedLearnersLoading.value = true;
-	managedLearnersError.value = "";
-
-	try {
-		if (currentAdmin.value) {
-			await appStore.fetchUsers();
-			return;
-		}
-
-		if (currentTutor.value) {
-			const { data } = await api.get<User[]>(
-				`/users/oftutor/${currentTutor.value._id}`
-			);
-			appStore.setUsers(data);
-		}
-	} catch (error: any) {
-		managedLearnersError.value =
-			error.response?.data?.message ??
-			error.message ??
-			"Unable to load learners.";
-	} finally {
-		managedLearnersLoading.value = false;
-	}
-}
-
-function progressKey(userID: string, courseId: string) {
-	return `${userID}:${courseId}`;
-}
-
-function cleanProgress(progress: CourseProgress): CourseProgress {
-	return {
-		courseId: progress.courseId,
-		completedModuleIds: unique(progress.completedModuleIds ?? []),
-		completedItemIds: unique(progress.completedItemIds ?? []),
-		...(progress.updatedAt ? { updatedAt: progress.updatedAt } : {}),
-		...(progress.updatedBy ? { updatedBy: progress.updatedBy } : {}),
-		...(progress.updatedByRole
-			? { updatedByRole: progress.updatedByRole }
-			: {})
-	};
-}
-
-function progressFor(owner: User, courseId: string): CourseProgress {
-	const key = progressKey(owner._id, courseId);
-	const draft = progressDrafts.value[key];
-	if (draft) return draft;
-
-	const saved = owner.courseProgress?.find(
-		progress => progress.courseId === courseId
-	);
-
-	return cleanProgress(
-		saved ?? {
-			courseId,
-			completedModuleIds: [],
-			completedItemIds: []
-		}
-	);
-}
-
-function updateProgressDraft(
-	userID: string,
-	courseId: string,
-	updater: (progress: CourseProgress) => CourseProgress
-) {
-	const owner = progressOwner.value;
-	if (!owner || owner._id !== userID) return;
-
-	const next = cleanProgress(updater(progressFor(owner, courseId)));
-	progressDrafts.value = {
-		...progressDrafts.value,
-		[progressKey(userID, courseId)]: next
-	};
-	queueProgressSave(userID, courseId, next);
-}
-
-function toggleModuleProgress(module: CourseModule, checked: boolean) {
-	const learner = selectedLearner.value;
-	const courseId = selectedCourseId.value;
-	if (!canEditProgress.value || !learner || !courseId) return;
-
-	updateProgressDraft(learner._id, courseId, progress => ({
-		...progress,
-		completedModuleIds: checked
-			? unique([...progress.completedModuleIds, module.id])
-			: progress.completedModuleIds.filter(
-					id => !progressIds(module).includes(id)
-				)
-	}));
-}
-
-function toggleItemProgress(item: CourseModuleItem, checked: boolean) {
-	const learner = selectedLearner.value;
-	const courseId = selectedCourseId.value;
-	if (!canEditProgress.value || !learner || !courseId) return;
-
-	updateProgressDraft(learner._id, courseId, progress => ({
-		...progress,
-		completedItemIds: checked
-			? unique([...progress.completedItemIds, item.id])
-			: progress.completedItemIds.filter(
-					id => !progressIds(item).includes(id)
-				)
-	}));
-}
-
-function unique(values: string[]) {
-	return [...new Set(values.map(value => value.trim()).filter(Boolean))];
-}
-
-function queueProgressSave(
-	userID: string,
-	courseId: string,
-	progress: CourseProgress
-) {
-	if (progressSaveTimer) clearTimeout(progressSaveTimer);
-
-	pendingProgressSave = {
-		userID,
-		courseId,
-		progress: cleanProgress(progress)
-	};
-	progressSaveStatus.value = "unsaved";
-	progressSaveError.value = "";
-
-	progressSaveTimer = setTimeout(() => {
-		void flushPendingProgressSave();
-	}, 700);
-}
-
-async function flushPendingProgressSave() {
-	if (!pendingProgressSave) return;
-	if (progressSaveTimer) {
-		clearTimeout(progressSaveTimer);
-		progressSaveTimer = null;
-	}
-
-	const pending = pendingProgressSave;
-	progressSaveStatus.value = "saving";
-	progressSaveError.value = "";
-
-	try {
-		await api.put(`/users/${pending.userID}/course-progress`, {
-			courseId: pending.courseId,
-			completedModuleIds: pending.progress.completedModuleIds,
-			completedItemIds: pending.progress.completedItemIds
-		});
-
-		updateStoredUserProgress(
-			pending.userID,
-			cleanProgress(pending.progress)
-		);
-		pendingProgressSave = null;
-		progressSaveStatus.value = "saved";
-	} catch (error: any) {
-		progressSaveStatus.value = "error";
-		progressSaveError.value =
-			error.response?.data?.message ??
-			error.message ??
-			"Couldn't save progress.";
-	}
-}
-
-function retryProgressSave() {
-	void flushPendingProgressSave();
-}
-
-function updateStoredUserProgress(userID: string, progress: CourseProgress) {
-	const updateUser = (user: User): User => {
-		if (user._id !== userID) return user;
-
-		const existing = user.courseProgress ?? [];
-		const nextProgress = [
-			...existing.filter(item => item.courseId !== progress.courseId),
-			progress
-		];
-
-		return {
-			...user,
-			courseProgress: nextProgress
-		};
-	};
-
-	appStore.setUsers(users.value.map(updateUser));
-	if (currentUser.value?._id === userID) {
-		appStore.setCurrentUser(updateUser(currentUser.value));
-	}
 }
 
 function itemAnchorId(moduleId: string, itemId: string) {
@@ -1428,11 +954,6 @@ watch(selectedCourseId, value => {
 	writeStoredValue(COURSE_SELECTION_STORAGE_KEY, value);
 });
 
-watch(selectedLearnerId, value => {
-	if (!isStorageReady.value || !isStaffContext.value) return;
-	writeStoredValue(LEARNER_SELECTION_STORAGE_KEY, value);
-});
-
 watch([activeModuleId, selectedCourseId], ([moduleId, courseId]) => {
 	if (!isStorageReady.value || !courseId) return;
 	writeStoredValue(moduleSelectionStorageKey(courseId), moduleId);
@@ -1460,42 +981,21 @@ onMounted(() => {
 		);
 	}
 
-	if (typeof document !== "undefined") {
-		document.addEventListener("visibilitychange", handleVisibilityChange);
-	}
-
 	if (typeof window !== "undefined") {
 		window.addEventListener("hashchange", syncHashAnchor);
 	}
 });
 
 onBeforeUnmount(() => {
-	if (progressSaveTimer) {
-		clearTimeout(progressSaveTimer);
-		progressSaveTimer = null;
-	}
-	void flushPendingProgressSave();
 	reducedMotionQuery?.removeEventListener(
 		"change",
 		syncReducedMotionPreference
 	);
 	reducedMotionQuery = null;
-	if (typeof document !== "undefined") {
-		document.removeEventListener(
-			"visibilitychange",
-			handleVisibilityChange
-		);
-	}
 	if (typeof window !== "undefined") {
 		window.removeEventListener("hashchange", syncHashAnchor);
 	}
 });
-
-function handleVisibilityChange() {
-	if (document.visibilityState === "hidden") {
-		void flushPendingProgressSave();
-	}
-}
 
 function moduleSelectionStorageKey(courseId: string) {
 	return `${MODULE_SELECTION_STORAGE_KEY_PREFIX}${courseId}`;
@@ -1528,7 +1028,7 @@ function writeStoredValue(key: string, value: string) {
 <template>
 	<section class="course-explorer">
 		<p class="sr-only" aria-live="polite">{{ courseReaderStatus }}</p>
-		<div v-if="hasCourseAccess" class="course-shell">
+		<div class="course-shell">
 			<header v-if="selectedCourse" class="course-hero">
 				<div class="course-hero-copy">
 					<h2>{{ selectedCourse.name }}</h2>
@@ -1543,64 +1043,6 @@ function writeStoredValue(key: string, value: string) {
 				</div>
 			</header>
 
-			<div v-if="isStaffContext" class="staff-context-bar">
-				<label class="control-block" for="learner-select">
-					<span class="control-label">Learner context</span>
-					<select
-						id="learner-select"
-						v-model="selectedLearnerId"
-						class="course-select"
-						:disabled="
-							managedLearnersLoading ||
-							managedLearners.length === 0
-						"
-					>
-						<option disabled value="">
-							{{
-								managedLearnersLoading
-									? "Loading learners..."
-									: "Select a learner"
-							}}
-						</option>
-						<option
-							v-for="(learner, index) in managedLearners"
-							:key="learner._id"
-							:value="learner._id"
-						>
-							{{ learnerOptionLabel(learner, index) }}
-						</option>
-					</select>
-				</label>
-
-				<div class="staff-context-status">
-					<p
-						class="progress-save-status"
-						:class="`is-${progressSaveStatus}`"
-						:role="
-							progressSaveStatus === 'error' ? 'alert' : 'status'
-						"
-						aria-live="polite"
-					>
-						{{ progressSaveStatusText }}
-					</p>
-					<p
-						v-if="managedLearnersError"
-						class="progress-save-status is-error"
-						role="alert"
-					>
-						{{ managedLearnersError }}
-					</p>
-					<button
-						v-if="progressSaveStatus === 'error'"
-						class="retry-save"
-						type="button"
-						@click="retryProgressSave"
-					>
-						Retry save
-					</button>
-				</div>
-			</div>
-
 			<div class="course-toolbar">
 				<label class="control-block" for="course-select">
 					<span class="control-label">Course</span>
@@ -1608,16 +1050,8 @@ function writeStoredValue(key: string, value: string) {
 						id="course-select"
 						v-model="selectedCourseId"
 						class="course-select"
-						:disabled="courseList.length === 0"
 						@change="selectCourse(selectedCourseId)"
 					>
-						<option
-							v-if="courseList.length === 0"
-							disabled
-							value=""
-						>
-							No assigned courses
-						</option>
 						<optgroup
 							v-for="group in courseGroups"
 							:key="group.key"
@@ -1684,10 +1118,6 @@ function writeStoredValue(key: string, value: string) {
 								:aria-label="`Show ${moduleKindLabel(module).toLowerCase()} ${module.position}: ${module.title}`"
 								class="outline-button"
 								:class="{
-									'is-complete':
-										hasProgressTracking &&
-										isCoreModule(module) &&
-										isModuleComplete(module),
 									'is-reference': isAppendixModule(module)
 								}"
 								type="button"
@@ -1708,16 +1138,6 @@ function writeStoredValue(key: string, value: string) {
 										<span v-if="module.isFiltered">
 											visible out of
 											{{ module.totalItemCount }}
-										</span>
-										<span
-											v-if="
-												hasProgressTracking &&
-												isCoreModule(module) &&
-												isModuleComplete(module)
-											"
-											class="complete-pill"
-										>
-											Complete
 										</span>
 									</small>
 								</span>
@@ -1753,41 +1173,6 @@ function writeStoredValue(key: string, value: string) {
 								{{ activeModule.position }}
 							</p>
 							<h3>{{ activeModule.title }}</h3>
-							<label
-								v-if="canEditActiveModuleProgress"
-								class="progress-toggle is-module"
-							>
-								<input
-									:checked="isModuleComplete(activeModule)"
-									type="checkbox"
-									@change="
-										toggleModuleProgress(
-											activeModule,
-											($event.target as HTMLInputElement)
-												.checked
-										)
-									"
-								/>
-								<span>
-									Mark
-									{{
-										moduleKindLabel(
-											activeModule
-										).toLowerCase()
-									}}
-									complete
-								</span>
-							</label>
-							<p
-								v-if="
-									hasProgressTracking &&
-									isCoreModule(activeModule) &&
-									isModuleComplete(activeModule)
-								"
-								class="module-complete-note"
-							>
-								Completed
-							</p>
 						</div>
 
 						<div
@@ -1872,34 +1257,6 @@ function writeStoredValue(key: string, value: string) {
 											<p class="lesson-kicker">Lesson</p>
 											<h5>{{ item.title }}</h5>
 										</div>
-										<span
-											v-if="
-												hasProgressTracking &&
-												isCoreModule(activeModule) &&
-												isItemComplete(item)
-											"
-											class="item-complete-badge"
-										>
-											Done
-										</span>
-										<label
-											v-if="canEditActiveModuleProgress"
-											class="progress-toggle is-item"
-										>
-											<input
-												:checked="isItemComplete(item)"
-												type="checkbox"
-												@change="
-													toggleItemProgress(
-														item,
-														(
-															$event.target as HTMLInputElement
-														).checked
-													)
-												"
-											/>
-											<span>Done</span>
-										</label>
 									</header>
 
 									<LazyMarkdownContent
@@ -2107,34 +1464,6 @@ function writeStoredValue(key: string, value: string) {
 											</p>
 											<h5>{{ item.title }}</h5>
 										</div>
-										<span
-											v-if="
-												hasProgressTracking &&
-												isCoreModule(activeModule) &&
-												isItemComplete(item)
-											"
-											class="item-complete-badge"
-										>
-											Done
-										</span>
-										<label
-											v-if="canEditActiveModuleProgress"
-											class="progress-toggle is-item"
-										>
-											<input
-												:checked="isItemComplete(item)"
-												type="checkbox"
-												@change="
-													toggleItemProgress(
-														item,
-														(
-															$event.target as HTMLInputElement
-														).checked
-													)
-												"
-											/>
-											<span>Done</span>
-										</label>
 									</header>
 
 									<LazyMarkdownContent
@@ -2311,10 +1640,7 @@ function writeStoredValue(key: string, value: string) {
 				</div>
 			</div>
 
-			<div
-				v-else-if="isCourseLoading && !publicCatalog"
-				class="reader-empty"
-			>
+			<div v-else-if="isCourseLoading" class="reader-empty">
 				<h3>Loading course</h3>
 				<p>Opening the selected course.</p>
 			</div>
@@ -2323,23 +1649,12 @@ function writeStoredValue(key: string, value: string) {
 				<h3>Unable to open this course</h3>
 				<p>{{ courseLoadError }}</p>
 			</div>
-
-			<div v-else-if="!publicCatalog" class="reader-empty">
-				<h3>{{ emptyTitle }}</h3>
-				<p>{{ emptyHint }}</p>
-			</div>
-		</div>
-
-		<div v-else-if="!publicCatalog" class="course-empty">
-			<p>{{ emptyTitle }}</p>
-			<p class="hint">{{ emptyHint }}</p>
 		</div>
 	</section>
 </template>
 
 <style scoped>
 .course-explorer {
-	--course-border: rgba(15, 23, 42, 0.08);
 	--course-border-strong: rgba(30, 41, 59, 0.12);
 	--course-text: #0f172a;
 	--course-text-soft: #475569;
@@ -2347,7 +1662,6 @@ function writeStoredValue(key: string, value: string) {
 	--course-panel-soft: #f8fafc;
 	--course-accent: #0f766e;
 	--course-accent-soft: rgba(15, 118, 110, 0.12);
-	--course-shadow: 0 20px 42px -32px rgba(15, 23, 42, 0.24);
 	width: 100%;
 	margin: 0;
 	display: flex;
@@ -2385,7 +1699,7 @@ function writeStoredValue(key: string, value: string) {
 	width: 100%;
 	box-sizing: border-box;
 	display: grid;
-	grid-template-columns: minmax(0, 1fr) minmax(24rem, 31rem);
+	grid-template-columns: minmax(0, 1fr);
 	align-items: center;
 	gap: 1rem 1.5rem;
 	padding: 0.2rem 0.15rem 0.05rem;
@@ -2399,7 +1713,6 @@ function writeStoredValue(key: string, value: string) {
 	min-width: 0;
 }
 
-.course-eyebrow,
 .outline-eyebrow,
 .reader-eyebrow,
 .section-eyebrow,
@@ -2425,18 +1738,12 @@ function writeStoredValue(key: string, value: string) {
 	line-height: 1.08;
 }
 
-.course-description,
 .outline-header p,
 .reader-copy p,
 .reader-empty p {
 	margin: 0;
 	line-height: 1.7;
 	color: var(--course-text-soft);
-}
-
-.course-description {
-	max-width: 46rem;
-	font-size: 0.98rem;
 }
 
 .course-ide-action {
@@ -2454,63 +1761,6 @@ function writeStoredValue(key: string, value: string) {
 	flex: 0 0 auto;
 }
 
-.course-stats {
-	width: 100%;
-	max-width: 31rem;
-	min-width: 0;
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(6.8rem, 1fr));
-	gap: 0;
-	margin: 0;
-	border-radius: 16px;
-	overflow: hidden;
-	background: rgba(255, 255, 255, 0.72);
-	border: 1px solid rgba(148, 163, 184, 0.22);
-	box-shadow: 0 18px 32px -28px rgba(15, 23, 42, 0.18);
-}
-
-.stat {
-	padding: 1rem 1.15rem 1.15rem;
-	background: transparent;
-	border-right: 1px solid rgba(148, 163, 184, 0.18);
-	min-height: 100%;
-	min-width: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-}
-
-.stat:last-child {
-	border-right: none;
-}
-
-.stat.is-progress {
-	background: rgba(236, 253, 245, 0.72);
-}
-
-.stat dt {
-	margin: 0;
-	font-size: clamp(0.68rem, 0.78vw, 0.8rem);
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
-	color: #0f766e;
-}
-
-.stat dd {
-	margin: 0.45rem 0 0;
-	font-size: clamp(1.3rem, 3vw, 1.8rem);
-	font-weight: 700;
-	color: var(--course-text);
-}
-
-.stat small {
-	display: block;
-	margin-top: 0.35rem;
-	line-height: 1.35;
-	color: var(--course-text-soft);
-}
-
 .course-toolbar {
 	width: 100%;
 	box-sizing: border-box;
@@ -2522,58 +1772,6 @@ function writeStoredValue(key: string, value: string) {
 	border-radius: 20px;
 	background: rgba(255, 255, 255, 0.72);
 	border: 1px solid rgba(148, 163, 184, 0.18);
-}
-
-.staff-context-bar {
-	width: 100%;
-	box-sizing: border-box;
-	display: grid;
-	grid-template-columns: minmax(16rem, 25rem) minmax(0, 1fr);
-	gap: 1rem 1.25rem;
-	align-items: end;
-	padding: 1.1rem 1.15rem;
-	border-radius: 20px;
-	background: rgba(236, 253, 245, 0.72);
-	border: 1px solid rgba(15, 118, 110, 0.18);
-}
-
-.staff-context-status {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: flex-end;
-	align-items: center;
-	gap: 0.65rem;
-	min-width: 0;
-}
-
-.progress-save-status {
-	margin: 0;
-	padding: 0.65rem 0.85rem;
-	border-radius: 999px;
-	background: rgba(255, 255, 255, 0.76);
-	color: #134e4a;
-	font-weight: 800;
-	line-height: 1.2;
-}
-
-.progress-save-status.is-error {
-	background: rgba(254, 226, 226, 0.9);
-	color: #991b1b;
-}
-
-.progress-save-status.is-saving,
-.progress-save-status.is-unsaved {
-	background: rgba(254, 243, 199, 0.9);
-	color: #78350f;
-}
-
-.retry-save {
-	border: 1px solid rgba(153, 27, 27, 0.22);
-	border-radius: 999px;
-	padding: 0.65rem 0.9rem;
-	background: rgba(255, 255, 255, 0.84);
-	color: #991b1b;
-	font-weight: 800;
 }
 
 .control-block {
@@ -2661,9 +1859,7 @@ function writeStoredValue(key: string, value: string) {
 .outline-reset:focus-visible,
 .outline-button:focus-visible,
 .resource-link:focus-visible,
-.jump-link:focus-visible,
-.retry-save:focus-visible,
-.progress-toggle:focus-within {
+.jump-link:focus-visible {
 	outline: 2px solid var(--focus-ring-color);
 	outline-offset: 3px;
 }
@@ -2785,11 +1981,6 @@ function writeStoredValue(key: string, value: string) {
 	box-shadow: 0 16px 28px -24px rgba(15, 118, 110, 0.22);
 }
 
-.outline-button.is-complete {
-	border-color: rgba(22, 163, 74, 0.2);
-	background: rgba(240, 253, 244, 0.78);
-}
-
 .outline-button.is-reference {
 	border-color: rgba(100, 116, 139, 0.12);
 	background: rgba(248, 250, 252, 0.62);
@@ -2845,29 +2036,6 @@ function writeStoredValue(key: string, value: string) {
 	align-items: center;
 	color: var(--course-text-soft);
 	line-height: 1.5;
-}
-
-.complete-pill,
-.module-complete-note,
-.item-complete-badge {
-	display: inline-flex;
-	align-items: center;
-	width: fit-content;
-	border-radius: 999px;
-	background: rgba(22, 163, 74, 0.12);
-	color: #166534;
-	font-weight: 700;
-}
-
-.complete-pill {
-	padding: 0.1rem 0.45rem;
-	font-size: 0.72rem;
-}
-
-.module-complete-note {
-	padding: 0.35rem 0.65rem;
-	font-size: 0.82rem;
-	line-height: 1.2;
 }
 
 .outline-empty,
@@ -3104,46 +2272,6 @@ function writeStoredValue(key: string, value: string) {
 	max-width: 100%;
 }
 
-.item-complete-badge {
-	margin-left: auto;
-	padding: 0.4rem 0.65rem;
-	font-size: 0.78rem;
-	line-height: 1.2;
-	flex: 0 0 auto;
-}
-
-.progress-toggle {
-	display: inline-flex;
-	align-items: center;
-	gap: 0.45rem;
-	width: fit-content;
-	border: 1px solid rgba(15, 118, 110, 0.16);
-	border-radius: 999px;
-	background: rgba(236, 253, 245, 0.75);
-	color: #134e4a;
-	font-weight: 800;
-	line-height: 1.2;
-}
-
-.progress-toggle.is-module {
-	padding: 0.45rem 0.7rem;
-	font-size: 0.86rem;
-}
-
-.progress-toggle.is-item {
-	margin-left: auto;
-	padding: 0.4rem 0.65rem;
-	font-size: 0.78rem;
-	flex: 0 0 auto;
-}
-
-.progress-toggle input {
-	width: 1rem;
-	height: 1rem;
-	margin: 0;
-	accent-color: var(--course-accent);
-}
-
 .lesson-index.is-supplemental {
 	background: rgba(245, 158, 11, 0.14);
 	color: #b45309;
@@ -3322,24 +2450,6 @@ function writeStoredValue(key: string, value: string) {
 	font-weight: 800;
 }
 
-.course-empty {
-	padding: 2rem;
-	border-radius: 20px;
-	background: linear-gradient(180deg, #f8fafc, #ffffff);
-	border: 1px solid var(--course-border);
-	text-align: center;
-	box-shadow: var(--course-shadow);
-}
-
-.course-empty p {
-	margin: 0;
-}
-
-.course-empty .hint {
-	margin-top: 0.55rem;
-	color: var(--course-text-soft);
-}
-
 @media (max-width: 1080px) {
 	.course-workspace {
 		grid-template-columns: 1fr;
@@ -3360,20 +2470,13 @@ function writeStoredValue(key: string, value: string) {
 
 @media (max-width: 1500px) {
 	.course-hero,
-	.course-toolbar,
-	.staff-context-bar {
+	.course-toolbar {
 		display: grid;
 		grid-template-columns: 1fr;
 	}
 
-	.course-toolbar,
-	.staff-context-bar {
+	.course-toolbar {
 		gap: 0.9rem;
-	}
-
-	.course-stats {
-		width: 100%;
-		max-width: none;
 	}
 }
 
@@ -3382,14 +2485,9 @@ function writeStoredValue(key: string, value: string) {
 		overflow: visible;
 	}
 
-	.course-stats {
-		grid-template-columns: 1fr;
-	}
-
 	.search-shell,
 	.lesson-header,
-	.section-header,
-	.staff-context-status {
+	.section-header {
 		flex-direction: column;
 		align-items: stretch;
 	}
@@ -3398,14 +2496,6 @@ function writeStoredValue(key: string, value: string) {
 	.jump-link {
 		width: 100%;
 		justify-content: space-between;
-	}
-
-	.item-complete-badge {
-		margin-left: 0;
-	}
-
-	.progress-toggle.is-item {
-		margin-left: 0;
 	}
 
 	.outline-button {

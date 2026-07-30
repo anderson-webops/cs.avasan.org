@@ -533,9 +533,7 @@ export const useCoursesStore = defineStore("courses", () => {
 	const archivedCourses = computed(() => archivedCourseSummaries);
 	const appStore = useAppStore();
 
-	const canViewSolutions = computed(
-		() => !!appStore.currentTutor || !!appStore.currentAdmin
-	);
+	const canViewSolutions = computed(() => !!appStore.currentAdmin);
 
 	function getCourseById(id: string) {
 		return courseCacheFor(canViewSolutions.value).get(id) ?? null;

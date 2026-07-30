@@ -1,51 +1,10 @@
 import type { RawCourse, RawCourseModuleItem } from "./types";
 import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
-import { pendingStaticMediaNotice, staticMediaUrl } from "./staticMedia";
 import { buildSupportSectionGuidance } from "./supportSectionGuidance";
 
 const PYGAMES_REPO_ROOT =
 	"https://github.com/instruction-material/PyGames/tree/main";
-
-const PYGAMES_AVAILABLE_ORIGINAL_ASSETS = [
-	"pyg_1_bouncing_alien.mp4",
-	"pyg_1_rainbow_fill.mp4",
-	"pyg_1_wandering_ball.mp4",
-	"pyg_2_100_meter_dash.mp4",
-	"pyg_2_apple_collector.mp4",
-	"pyg_2_arrow_point.mp4",
-	"pyg_2_art_box.mp4",
-	"pyg_2_odd_square_out.mp4",
-	"pyg_3_beach_ball_chase.mp4",
-	"pyg_4_bouncy_ball_room.mp4",
-	"pyg_4_falling_squares.mp4",
-	"pyg_4_jewel_catch.mp4",
-	"pyg_5_ball_pit.mp4",
-	"pyg_5_golf.mp4",
-	"pyg_5_keep_up.mp4",
-	"pyg_6_falling_jump.mp4",
-	"pyg_6_platformer_game.mp4",
-	"pyg_6_stay_on_the_platform.mp4",
-	"pyg_7_alien_catch.mp4",
-	"pyg_7_diamond_chase.mp4",
-	"pyg_7_number_count.mp4",
-	"pyg_8_asteroid_shoot.mp4",
-	"pyg_8_target_shoot.mp4",
-	"pyg_9_shark_chase.mp4",
-	"pyg_9_space_battle.mp4",
-	"pyg_10_alien_vs_ninja.mp4",
-	"pyg_11_space_invaders.mp4"
-] as const;
-
-const PYGAMES_PENDING_ORIGINAL_ASSETS = [
-	"check_in_2_starter.py",
-	"check_in_3_starter.py",
-	"pyg_3_asteroid_dodge.mp4",
-	"pyg_3_light_control.mp4",
-	"pyg_3_zrect_art.mp4",
-	"pyg_7_beach_ball_dodge.mp4",
-	"pyg6_platformer_game.py"
-] as const;
 
 function hideBroadPyGamesRootPair(item: RawCourseModuleItem) {
 	if (
@@ -929,7 +888,7 @@ export const pyGamesCourse: RawCourse = hideBroadPyGamesRootPairs({
 				{
 					title: "Check-In #2: Gravity (Bigfoot Game)",
 					content:
-						"Gravity-setup: Start from the Bigfoot starter game (check_in_2_starter.py) and inspect the code so the movement logic is clear before adding gravity. Gravity-1: Identify the global variables and dynamic attributes needed to add gravity, such as a global gravity value and a yspeed attribute on Bigfoot; xspeed is optional. Gravity-2: Add these variables to the game. Gravity-3: In update(), apply gravity to Bigfoot by increasing yspeed and updating his y position. Gravity-4: Add code to stop Bigfoot at the floor instead of letting him fall through. Gravity-5: Add an event listener so pressing the up arrow makes Bigfoot jump."
+						"Gravity-setup: Start from the Bigfoot game in Check-in-2-Starter.py and inspect the code so the movement logic is clear before adding gravity. Gravity-1: Identify the global variables and dynamic attributes needed to add gravity, such as a global gravity value and a yspeed attribute on Bigfoot; xspeed is optional. Gravity-2: Add these variables to the game. Gravity-3: In update(), apply gravity to Bigfoot by increasing yspeed and updating his y position. Gravity-4: Add code to stop Bigfoot at the floor instead of letting him fall through. Gravity-5: Add an event listener so pressing the up arrow makes Bigfoot jump."
 				},
 				{
 					title: "Check-In #2: Friction (Shuffleboard Game)",
@@ -1400,7 +1359,7 @@ export const pyGamesCourse: RawCourse = hideBroadPyGamesRootPairs({
 				{
 					title: "Check-In #3: System Control",
 					content:
-						"Start from the rocket-and-targets starter code (check_in_3_starter.py) where the rocket moves left and right with arrow keys. Steps 1/2 add a start screen so the game only begins when Enter is pressed; before that, draw a start message and ignore normal game updates. Step 3 identifies the tool used to schedule future events, such as PyGame Zero's clock or timers. Steps 4/5 use a scheduled event to move the targets to new random positions every 5 seconds. Step 6 adds logic that can cancel or stop this repeating movement when needed, such as after a win condition."
+						"Start from the rocket-and-targets code in Check-in-3-Starter.py, where the rocket moves left and right with arrow keys. Steps 1/2 add a start screen so the game only begins when Enter is pressed; before that, draw a start message and ignore normal game updates. Step 3 identifies the tool used to schedule future events, such as PyGame Zero's clock or timers. Steps 4/5 use a scheduled event to move the targets to new random positions every 5 seconds. Step 6 adds logic that can cancel or stop this repeating movement when needed, such as after a win condition."
 				},
 				{
 					title: "Check-In #3: Projectiles and Enemy AI",
@@ -1796,28 +1755,6 @@ export const pyGamesCourse: RawCourse = hideBroadPyGamesRootPairs({
 						"https://github.com/instruction-material/PyGames/tree/main/PG-34-applied-studio-17-images-supplemental-3/solution"
 				}
 			]
-		},
-		{
-			kind: "appendix",
-			title: "Demo Media Status",
-			curriculum: [
-				{
-					title: "PyGame Media Status",
-					content: [
-						"This course uses the student-facing assets below. Hosted entries are ready as static media links; pending entries keep stable static media URLs until the matching files are added.",
-						"**Hosted assets:**",
-						...PYGAMES_AVAILABLE_ORIGINAL_ASSETS.map(
-							filename => `- ${staticMediaUrl(filename)}`
-						),
-						"**Pending assets:**",
-						...PYGAMES_PENDING_ORIGINAL_ASSETS.map(
-							filename =>
-								`- ${staticMediaUrl(filename)}\n\n${pendingStaticMediaNotice(filename)}`
-						)
-					].join("\n\n")
-				}
-			],
-			supplementalProjects: []
 		}
 	]
 });

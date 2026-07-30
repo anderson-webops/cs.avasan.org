@@ -234,7 +234,7 @@ async function main() {
 	});
 
 	// Students have an optional, teacher-provisioned project-saving account.
-	// Tutor, self-signup, scheduler, and admin-mail routes remain unmounted.
+	// Tutor, self-signup, scheduler, and admin-mail routes are unavailable.
 	mountClassroomAnalyticsRoutes(app, {
 		collectionEnabled: classroomPrivacy.analyticsCollectionEnabled,
 		retentionDays: classroomAnalyticsRetentionDays

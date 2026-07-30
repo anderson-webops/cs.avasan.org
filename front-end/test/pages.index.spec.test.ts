@@ -7,22 +7,13 @@ vi.mock("@unhead/vue", () => ({
 }));
 
 describe("public home page", () => {
-	it("opens the course explorer as a public catalog", async () => {
+	it("opens the focused public course explorer", async () => {
 		const wrapper = mount(HomePage, {
 			global: {
 				stubs: {
 					CourseExplorer: {
-						props: {
-							publicCatalog: Boolean
-						},
-						template: `
-							<div
-								data-testid="course-explorer"
-								:data-public-catalog="String(publicCatalog)"
-							>
-								Course explorer
-							</div>
-						`
+						template:
+							'<div data-testid="course-explorer">Course explorer</div>'
 					}
 				}
 			}
@@ -32,11 +23,9 @@ describe("public home page", () => {
 
 		expect(wrapper.get("h1").text()).toBe("Courses");
 		expect(wrapper.text()).not.toContain("No student account is needed.");
-		expect(
-			wrapper
-				.get('[data-testid="course-explorer"]')
-				.attributes("data-public-catalog")
-		).toBe("true");
+		expect(wrapper.get('[data-testid="course-explorer"]').text()).toBe(
+			"Course explorer"
+		);
 	});
 
 	it("does not present account or scheduler gates", async () => {

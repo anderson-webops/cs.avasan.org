@@ -1,16 +1,11 @@
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { flushPromises, mount } from "@vue/test-utils";
 import { createPinia, setActivePinia } from "pinia";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import CourseExplorer from "@/components/CourseExplorer.vue";
 import { reportClassroomUsage } from "@/modules/classroomUsage";
 import { useCoursesStore } from "@/stores/courses";
-
-vi.mock("@/api", () => ({
-	api: {
-		get: vi.fn(),
-		put: vi.fn()
-	}
-}));
 
 vi.mock("@/modules/classroomUsage", () => ({
 	reportClassroomUsage: vi.fn()
@@ -94,7 +89,6 @@ describe("CourseExplorer public catalog", () => {
 			});
 
 		const wrapper = mount(CourseExplorer, {
-			props: { publicCatalog: true },
 			global: {
 				plugins: [pinia],
 				stubs: {
@@ -156,4 +150,41 @@ describe("CourseExplorer public catalog", () => {
 		expect(wrapper.text()).not.toContain("Use the browser workspace");
 	});
 
+	it("searches the visible public course content without an account", async () => {
+		const { wrapper } = await mountPublicCatalog();
+
+		await wrapper.get("#course-search").setValue("not in this course");
+		await flushPromises();
+
+		expect(wrapper.text()).toContain("No matches yet");
+		expect(wrapper.text()).not.toContain(
+			"Build a small project and test what happens."
+		);
+
+		await wrapper.get(".clear-search").trigger("click");
+		await flushPromises();
+
+		expect(wrapper.text()).toContain(
+			"Build a small project and test what happens."
+		);
+	});
+
+	it("contains no retired tutor or legacy-user service calls", () => {
+		const source = [
+			"../src/components/CourseExplorer.vue",
+			"../src/stores/app.ts",
+			"../src/stores/courses.ts"
+		]
+			.map(file =>
+				readFileSync(resolve(import.meta.dirname, file), "utf8")
+			)
+			.join("\n");
+
+		expect(source).not.toMatch(/\/tutors(?:\/|["'`])/);
+		expect(source).not.toMatch(/\/users(?:\/|["'`])/);
+		expect(source).not.toContain("currentTutor");
+		expect(source).not.toContain("courseProgress");
+		expect(source).toContain("currentUser");
+		expect(source).toContain("currentAdmin");
+	});
 });

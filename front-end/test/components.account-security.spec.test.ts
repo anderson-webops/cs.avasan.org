@@ -369,13 +369,6 @@ describe("AccountSecurity", () => {
 		};
 		const app = useAppStore();
 		app.setCurrentAdmin(julio);
-		app.setUsers([
-			{
-				_id: "student-private",
-				username: "maria-7",
-				active: true
-			}
-		]);
 		vi.mocked(api.post).mockRejectedValueOnce(
 			new Error("password response lost")
 		);
@@ -404,7 +397,6 @@ describe("AccountSecurity", () => {
 		await flushPromises();
 
 		expect(app.currentAdmin).toBeNull();
-		expect(app.users).toEqual([]);
 		expect(broadcastStudentSessionEnded).toHaveBeenCalledOnce();
 	});
 });

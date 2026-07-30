@@ -46,6 +46,7 @@ const ignoredPathParts = new Set([
 	"playwright-report",
 	"test-results"
 ]);
+const courseSourceRoot = "front-end/src/stores/courses/";
 const textFileExtensions = new Set([
 	".css",
 	".env",
@@ -83,6 +84,11 @@ function isScannableStaticAssetUrl(url) {
 }
 
 function shouldSkipPath(path) {
+	const sourcePath = relative(process.cwd(), path).replaceAll("\\", "/");
+	// Course media is audited through the five-entry published catalog above.
+	// Dormant upstream course files are not part of this fork's asset contract.
+	if (sourcePath.startsWith(courseSourceRoot)) return true;
+
 	return path
 		.split("/")
 		.some(part => ignoredPathParts.has(part)) ||
@@ -255,13 +261,9 @@ const auditFile = join(tempDir, "audit.ts");
 try {
 	await writeFile(auditFile, auditSource);
 
-	const child = spawn(
-		"npm",
-		["exec", "-w", "front-end", "--", "vite-node", auditFile],
-		{
-			stdio: "inherit"
-		}
-	);
+	const child = spawn("npm", ["exec", "-w", "front-end", "--", "vite-node", auditFile], {
+		stdio: "inherit"
+	});
 
 	const exitCode = await new Promise((resolve, reject) => {
 		child.once("error", reject);
