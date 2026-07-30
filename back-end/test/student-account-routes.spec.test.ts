@@ -393,7 +393,8 @@ describe("teacher-provisioned student accounts", () => {
 							}
 						}
 					}
-				]
+				],
+				{ updatePipeline: true }
 			);
 		});
 	});
@@ -856,7 +857,8 @@ describe("teacher-provisioned student accounts", () => {
 							}
 						}
 					}
-				]
+				],
+				{ updatePipeline: true }
 			);
 			const updatePipeline = modelMocks.studentUpdateOne.mock.calls[0]?.[1];
 			const lockedUntil = updatePipeline[0].$set.lockedUntil.$cond[1];

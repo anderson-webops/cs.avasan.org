@@ -302,7 +302,8 @@ async function recordStudentLoginFailure(student: IStudent): Promise<void> {
 					}
 				}
 			}
-		]
+		],
+		{ updatePipeline: true }
 	);
 }
 
