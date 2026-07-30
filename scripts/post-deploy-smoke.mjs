@@ -18,6 +18,32 @@ function assertion(condition, message) {
 	if (!condition) throw new Error(message);
 }
 
+export function parseExpectedBoolean(value, name) {
+	const normalized = (value ?? "false").trim().toLowerCase();
+	assertion(
+		normalized === "true" || normalized === "false",
+		`${name} must be either true or false.`
+	);
+	return normalized === "true";
+}
+
+const expectedStudentAccountsEnabled = parseExpectedBoolean(
+	process.env.CS_EXPECT_STUDENT_ACCOUNTS_ENABLED,
+	"CS_EXPECT_STUDENT_ACCOUNTS_ENABLED"
+);
+const expectedStudentOAuthEnabled = parseExpectedBoolean(
+	process.env.CS_EXPECT_STUDENT_OAUTH_ENABLED,
+	"CS_EXPECT_STUDENT_OAUTH_ENABLED"
+);
+const expectedClassroomAnalyticsEnabled = parseExpectedBoolean(
+	process.env.CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED,
+	"CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED"
+);
+assertion(
+	!expectedStudentOAuthEnabled || expectedStudentAccountsEnabled,
+	"CS_EXPECT_STUDENT_OAUTH_ENABLED=true requires CS_EXPECT_STUDENT_ACCOUNTS_ENABLED=true."
+);
+
 async function request(path, init = {}) {
 	const url = new URL(path, productionOrigin);
 	return await smokeRequest(url, {
@@ -135,18 +161,71 @@ async function verifyApiReadiness() {
 	);
 }
 
-async function verifyFailClosedPrivacy() {
+async function verifyPrivacyFeatureBoundaries() {
 	const student = await request("/api/students/session", {
 		redirect: "manual"
 	});
 	assertion(
-		student.status === 404,
-		`Disabled student session endpoint returned HTTP ${student.status} instead of 404.`
+		student.status === (expectedStudentAccountsEnabled ? 200 : 404),
+		`Student session endpoint returned HTTP ${student.status}; expected ${
+			expectedStudentAccountsEnabled ? 200 : 404
+		}.`
 	);
+	assertion(
+		student.headers.get("cache-control")?.includes("no-store"),
+		"Student session endpoint must not be cached."
+	);
+	assertion(
+		student.headers.get("set-cookie") === null,
+		"Unauthenticated student session probe unexpectedly set a cookie."
+	);
+	if (expectedStudentAccountsEnabled) {
+		const session = await student.json();
+		assertion(
+			session
+			&& typeof session === "object"
+			&& !Array.isArray(session)
+			&& Object.keys(session).sort().join(",") === "requiresPasswordSetup,student"
+			&& session.student === null
+			&& session.requiresPasswordSetup === false,
+			"Enabled student session endpoint returned an unexpected anonymous-session body."
+		);
+	}
+
+	const oauth = await request("/api/students/oauth/providers", {
+		redirect: "manual"
+	});
+	assertion(
+		oauth.status === (expectedStudentOAuthEnabled ? 200 : 404),
+		`Student OAuth provider endpoint returned HTTP ${oauth.status}; expected ${
+			expectedStudentOAuthEnabled ? 200 : 404
+		}.`
+	);
+	assertion(
+		oauth.headers.get("cache-control")?.includes("no-store"),
+		"Student OAuth provider endpoint must not be cached."
+	);
+	assertion(
+		oauth.headers.get("set-cookie") === null,
+		"Student OAuth provider probe unexpectedly set a cookie."
+	);
+	if (expectedStudentOAuthEnabled) {
+		const providers = await oauth.json();
+		assertion(
+			providers
+			&& typeof providers === "object"
+			&& !Array.isArray(providers)
+			&& Object.keys(providers).sort().join(",") === "apple,google"
+			&& typeof providers.apple === "boolean"
+			&& typeof providers.google === "boolean"
+			&& (providers.apple || providers.google),
+			"Enabled student OAuth endpoint did not report a configured Apple or Google provider."
+		);
+	}
 
 	const usage = await request("/api/classroom-usage", {
 		body: JSON.stringify({
-			event: "ide-open",
+			event: "__deployment-probe-invalid",
 			siteID: "cs"
 		}),
 		headers: {
@@ -158,8 +237,18 @@ async function verifyFailClosedPrivacy() {
 		redirect: "manual"
 	});
 	assertion(
-		usage.status === 404,
-		`Disabled classroom usage endpoint returned HTTP ${usage.status} instead of 404.`
+		usage.status === (expectedClassroomAnalyticsEnabled ? 400 : 404),
+		`Classroom usage endpoint returned HTTP ${usage.status}; expected ${
+			expectedClassroomAnalyticsEnabled ? 400 : 404
+		}.`
+	);
+	assertion(
+		usage.headers.get("cache-control")?.includes("no-store"),
+		"Classroom usage endpoint must not be cached."
+	);
+	assertion(
+		usage.headers.get("set-cookie") === null,
+		"Anonymous classroom usage probe unexpectedly set a cookie."
 	);
 
 	const admin = await request("/api/admins/loggedin", {
@@ -175,7 +264,7 @@ export async function runProductionSmoke() {
 	await verifyReleaseIdentity();
 	await verifyPublicRoutes();
 	await verifyApiReadiness();
-	await verifyFailClosedPrivacy();
+	await verifyPrivacyFeatureBoundaries();
 	await runProductionGraphSketcherSmoke();
 	console.log(
 		`OK: ${productionOrigin} reports one matching release across the public site and API.`

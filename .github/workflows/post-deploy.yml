@@ -11,6 +11,21 @@ on:
                 description: Full Git commit SHA embedded in both deployed services
                 required: true
                 type: string
+            student_accounts_enabled:
+                description: Expect the reviewed student account routes to be enabled
+                required: true
+                default: false
+                type: boolean
+            student_oauth_enabled:
+                description: Expect at least one configured Apple or Google provider
+                required: true
+                default: false
+                type: boolean
+            classroom_analytics_collection_enabled:
+                description: Expect anonymous aggregate classroom usage collection
+                required: true
+                default: false
+                type: boolean
 
 permissions:
     contents: read
@@ -34,7 +49,10 @@ jobs:
 
             - name: Verify CS production
               env:
+                  CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED: ${{ inputs.classroom_analytics_collection_enabled }}
                   CS_EXPECTED_RELEASE: ${{ inputs.expected_release }}
                   CS_EXPECTED_REVISION: ${{ inputs.expected_revision }}
                   CS_SITE_ORIGIN: https://cs.avasan.org
+                  CS_EXPECT_STUDENT_ACCOUNTS_ENABLED: ${{ inputs.student_accounts_enabled }}
+                  CS_EXPECT_STUDENT_OAUTH_ENABLED: ${{ inputs.student_oauth_enabled }}
               run: npm run verify:production
