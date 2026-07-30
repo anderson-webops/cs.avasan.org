@@ -148,12 +148,16 @@ push downstream changes to the upstream repository.
 ## Common Commands
 
 ```bash
+nvm use
 npm run dev
 npm run server
 npm run typecheck
 npm run lint
 npm run build
 ```
+
+`.nvmrc` and `.node-version` pin Node 24.18.0 LTS. Use its bundled
+npm 11.16.0 release, which matches the root `packageManager` field.
 
 The normal build downloads the reviewed Python/PyGames asset archive from
 [`static.cs.avasan.org`](https://static.cs.avasan.org). For an

@@ -1,4 +1,6 @@
 .gitattributes text eol=lf
+.node-version text eol=lf
+.nvmrc text eol=lf
 .dockerignore text eol=lf
 .gitignore text eol=lf
 Dockerfile text eol=lf

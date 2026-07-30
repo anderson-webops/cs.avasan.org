@@ -3,10 +3,10 @@
 	"type": "module",
 	"version": "1.0.0",
 	"private": true,
-	"packageManager": "npm@11.11.1",
+	"packageManager": "npm@11.16.0",
 	"engines": {
-		"node": ">=22.22.2 <23",
-		"npm": ">=11.11.1 <12"
+		"node": ">=24.18.0 <25",
+		"npm": ">=11.16.0 <12"
 	},
 	"description": "Public computer science courses for Julio's grade-school students",
 	"author": "Classes with Julio",
@@ -86,13 +86,13 @@
 		}
 	},
 	"allowScripts": {
-		"argon2@0.44.0": true,
-		"cypress@15.16.0": true,
-		"esbuild@0.28.1": true,
-		"fsevents@2.3.3": true,
-		"puppeteer@24.43.1": true,
-		"simple-git-hooks@2.13.1": true,
-		"vue-demi@0.14.10": true
+		"argon2": true,
+		"cypress": true,
+		"esbuild": true,
+		"fsevents": true,
+		"puppeteer": true,
+		"simple-git-hooks": true,
+		"vue-demi": true
 	},
 	"devDependencies": {
 		"@antfu/eslint-config": "^8.2.0",

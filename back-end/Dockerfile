@@ -1,6 +1,6 @@
-FROM node:22.22.2-alpine3.22@sha256:b77017c37f430e4466ff497058948a2f16e8b59779600d53711eeb7b999b0f4e AS npm-stage
+FROM node:24.18.0-alpine@sha256:a0b9bf06e4e6193cf7a0f58816cc935ff8c2a908f81e6f1a95432d679c54fbfd AS npm-stage
 
-RUN npm install --global npm@11.11.1
+RUN npm install --global npm@11.16.0
 
 FROM npm-stage AS build-stage
 
