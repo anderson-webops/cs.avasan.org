@@ -1,12 +1,32 @@
 import { mount } from "@vue/test-utils";
 import { createPinia, setActivePinia } from "pinia";
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import AdminPage from "@/pages/admin.vue";
 import { useAppStore } from "@/stores/app";
 
+const route = vi.hoisted(() => ({
+	path: "/admin",
+	query: {} as Record<string, string>
+}));
+
+vi.mock("vue-router", () => ({
+	useRoute: () => route
+}));
+
 describe("Teacher admin page", () => {
 	beforeEach(() => {
+		route.query = {};
+		vi.stubEnv("VITE_CLASSROOM_PRIVACY_APPROVED", "true");
+		vi.stubEnv(
+			"VITE_SCHOOL_PRIVACY_CONTACT",
+			"School privacy office, 555-0100"
+		);
+		vi.stubEnv("VITE_STUDENT_ACCOUNTS_ENABLED", "true");
 		setActivePinia(createPinia());
+	});
+
+	afterEach(() => {
+		vi.unstubAllEnvs();
 	});
 
 	function mountAdmin() {
@@ -20,6 +40,10 @@ describe("Teacher admin page", () => {
 						props: ["entityId"],
 						template:
 							'<div data-testid="account-settings">Password</div>'
+					},
+					ClassroomAnalytics: {
+						template:
+							'<section id="analytics" data-testid="classroom-analytics"><h2 tabindex="-1">Classroom activity</h2></section>'
 					},
 					StudentManagement: {
 						template:
@@ -69,7 +93,30 @@ describe("Teacher admin page", () => {
 		expect(wrapper.get('[data-testid="student-management"]').text()).toBe(
 			"Students"
 		);
+		expect(wrapper.get('[data-testid="classroom-analytics"]').text()).toBe(
+			"Classroom activity"
+		);
 		expect(wrapper.find("a").exists()).toBe(false);
+	});
+
+	it("keeps the analytics handoff at the stable Admin section URL", async () => {
+		route.query = { section: "analytics" };
+		HTMLElement.prototype.scrollIntoView = vi.fn();
+		const app = useAppStore();
+		app.setCurrentAdmin({
+			_id: "julio",
+			name: "Julio",
+			email: "julio@example.com",
+			editAdmins: false,
+			saveEdit: "Save"
+		});
+
+		const wrapper = mountAdmin();
+		await wrapper.vm.$nextTick();
+
+		expect(wrapper.get("#analytics").exists()).toBe(true);
+		expect(wrapper.get("#analytics h2").attributes("tabindex")).toBe("-1");
+		expect(HTMLElement.prototype.scrollIntoView).toHaveBeenCalled();
 	});
 
 	it("shows no privileged controls while Admin access is being checked", () => {

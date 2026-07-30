@@ -1,8 +1,14 @@
 import type { Express } from "express";
 import { requireClassroomRequest } from "../middleware/classroomRequest.js";
 import { createAccountRoutes } from "./accountRoutes.js";
-import { adminRoutes } from "./adminRoutes.js";
-import { studentRoutes } from "./studentRoutes.js";
+import { createAdminRoutes } from "./adminRoutes.js";
+import { createStudentRoutes } from "./studentRoutes.js";
+
+export interface RuntimeAccountRouteOptions {
+	analyticsRetentionDays: number;
+	studentAccountsEnabled: boolean;
+	studentOAuthEnabled: boolean;
+}
 
 /**
  * Mount the complete authenticated surface for this downstream application.
@@ -10,7 +16,10 @@ import { studentRoutes } from "./studentRoutes.js";
  * Keeping this small registry shared by the server and route tests makes it
  * difficult to accidentally restore public student, tutor, or admin creation.
  */
-export function mountRuntimeAccountRoutes(app: Express): void {
+export function mountRuntimeAccountRoutes(
+	app: Express,
+	options: RuntimeAccountRouteOptions
+): void {
 	app.use(
 		["/accounts", "/students", "/admins"],
 		(_req, res, next) => {
@@ -19,7 +28,14 @@ export function mountRuntimeAccountRoutes(app: Express): void {
 		},
 		requireClassroomRequest
 	);
-	app.use("/admins", adminRoutes);
-	app.use("/students", studentRoutes);
+	app.use("/admins", createAdminRoutes({
+		analyticsRetentionDays: options.analyticsRetentionDays,
+		studentAccountsEnabled: options.studentAccountsEnabled
+	}));
+	if (options.studentAccountsEnabled) {
+		app.use("/students", createStudentRoutes({
+			oauthEnabled: options.studentOAuthEnabled
+		}));
+	}
 	app.use("/accounts", createAccountRoutes());
 }

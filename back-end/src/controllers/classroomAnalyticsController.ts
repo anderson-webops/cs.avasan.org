@@ -1,16 +1,10 @@
 import type { RequestHandler } from "express";
-import type {
-	ClassroomCourseID,
-	ClassroomSiteID
-} from "../types/entities/IClassroomUsageDaily.js";
+import type { ClassroomCourseID, ClassroomSiteID } from "../types/entities/IClassroomUsageDaily.js";
 import { z } from "zod";
 import { ClassroomUsageDaily } from "../models/schemas/ClassroomUsageDaily.js";
 import { PythonProject } from "../models/schemas/PythonProject.js";
 import { Student } from "../models/schemas/Student.js";
-import {
-	CS_CLASSROOM_COURSES,
-	MATH_CLASSROOM_COURSES
-} from "../types/entities/IClassroomUsageDaily.js";
+import { CS_CLASSROOM_COURSES, MATH_CLASSROOM_COURSES } from "../types/entities/IClassroomUsageDaily.js";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const DEFAULT_SUMMARY_DAYS = 30;
@@ -58,6 +52,10 @@ function dateKey(date: Date): string {
 	return date.toISOString().slice(0, 10);
 }
 
+function usageExpiry(day: Date, retentionDays: number): Date {
+	return new Date(day.getTime() + retentionDays * DAY_MS);
+}
+
 function summaryDays(value: unknown): number | null {
 	if (value === undefined) return DEFAULT_SUMMARY_DAYS;
 	if (typeof value !== "string" || !/^\d{1,2}$/.test(value)) return null;
@@ -78,18 +76,13 @@ export function recordClassroomUsage(retentionDays: number): RequestHandler {
 
 		const now = new Date();
 		const day = utcDay(now);
-		const courseID = "courseId" in parsed.data
-			? parsed.data.courseId
-			: undefined;
+		const courseID = "courseId" in parsed.data ? parsed.data.courseId : undefined;
 		const filter = {
 			day,
 			event: parsed.data.event,
 			...(parsed.data.siteID === "cs"
 				? {
-						$or: [
-							{ siteID: "cs" as const },
-							{ siteID: { $exists: false } }
-						]
+						$or: [{ siteID: "cs" as const }, { siteID: { $exists: false } }]
 					}
 				: { siteID: "math" as const }),
 			...(courseID ? { courseID } : { courseID: { $exists: false } })
@@ -98,7 +91,6 @@ export function recordClassroomUsage(retentionDays: number): RequestHandler {
 			day,
 			siteID: parsed.data.siteID,
 			event: parsed.data.event,
-			expiresAt: new Date(now.getTime() + retentionDays * DAY_MS),
 			...(courseID ? { courseID } : {})
 		};
 
@@ -107,6 +99,9 @@ export function recordClassroomUsage(retentionDays: number): RequestHandler {
 				filter,
 				{
 					$inc: { count: 1 },
+					// Reapply the configured upper bound on every write so a
+					// shortened retention period also affects existing rows.
+					$set: { expiresAt: usageExpiry(day, retentionDays) },
 					$setOnInsert: insertFields
 				},
 				{
@@ -123,6 +118,49 @@ export function recordClassroomUsage(retentionDays: number): RequestHandler {
 			});
 		}
 	};
+}
+
+/**
+ * Cap existing rows when the configured retention period is shortened.
+ * MongoDB's TTL monitor is asynchronous, so summary reads also exclude rows
+ * whose logical expiry has already passed.
+ */
+export async function enforceClassroomAnalyticsRetention(retentionDays: number): Promise<void> {
+	await ClassroomUsageDaily.updateMany(
+		{
+			$or: [
+				{ expiresAt: { $exists: false } },
+				{
+					$expr: {
+						$gt: [
+							"$expiresAt",
+							{
+								$dateAdd: {
+									amount: retentionDays,
+									startDate: "$day",
+									unit: "day"
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		[
+			{
+				$set: {
+					expiresAt: {
+						$dateAdd: {
+							amount: retentionDays,
+							startDate: "$day",
+							unit: "day"
+						}
+					}
+				}
+			}
+		],
+		{ updatePipeline: true }
+	).exec();
 }
 
 interface UsageAggregate {
@@ -174,14 +212,15 @@ export function getClassroomAnalyticsSummary(retentionDays: number): RequestHand
 			const [
 				usageRows,
 				activeAccounts,
-				recentSignIns,
+				accountsWithRecentSignIn,
 				activeProjects,
 				recentlyUpdatedProjects,
 				projectStudentCount,
 				recentProjectStudentCount
 			] = await Promise.all([
 				ClassroomUsageDaily.find({
-					day: { $gte: startDay, $lte: endDay }
+					day: { $gte: startDay, $lte: endDay },
+					expiresAt: { $gt: generatedAt }
 				})
 					.select("day siteID event courseID count -_id")
 					.lean()
@@ -197,23 +236,17 @@ export function getClassroomAnalyticsSummary(retentionDays: number): RequestHand
 				distinctProjectStudentCount(recentProjectFilter)
 			]);
 
-			const makeDailyRows = () => Array.from(
-				{ length: days },
-				(_, index) => ({
+			const makeDailyRows = () =>
+				Array.from({ length: days }, (_, index) => ({
 					date: dateKey(new Date(startDay.getTime() + index * DAY_MS)),
 					courseOpens: 0,
 					ideOpens: 0,
 					graphOpens: 0
-				})
-			);
+				}));
 			const csDaily = makeDailyRows();
 			const mathDaily = makeDailyRows();
-			const csDailyByDate = new Map(
-				csDaily.map(row => [row.date, row])
-			);
-			const mathDailyByDate = new Map(
-				mathDaily.map(row => [row.date, row])
-			);
+			const csDailyByDate = new Map(csDaily.map(row => [row.date, row]));
+			const mathDailyByDate = new Map(mathDaily.map(row => [row.date, row]));
 			const csCourseOpenCounts = new Map<ClassroomCourseID, number>(
 				CS_CLASSROOM_COURSES.map(course => [course.id, 0] as const)
 			);
@@ -233,23 +266,14 @@ export function getClassroomAnalyticsSummary(retentionDays: number): RequestHand
 
 			for (const row of usageRows) {
 				const count = Number.isSafeInteger(row.count) && row.count > 0 ? row.count : 0;
-				const siteID = row.siteID === undefined
-					? "cs"
-					: row.siteID;
+				const siteID = row.siteID === undefined ? "cs" : row.siteID;
 
 				if (siteID === "cs") {
 					const dayRow = csDailyByDate.get(dateKey(row.day));
-					if (
-						row.event === "course-open"
-						&& row.courseID
-						&& csCourseOpenCounts.has(row.courseID)
-					) {
+					if (row.event === "course-open" && row.courseID && csCourseOpenCounts.has(row.courseID)) {
 						csTotals.courseOpens += count;
 						if (dayRow) dayRow.courseOpens += count;
-						csCourseOpenCounts.set(
-							row.courseID,
-							(csCourseOpenCounts.get(row.courseID) ?? 0) + count
-						);
+						csCourseOpenCounts.set(row.courseID, (csCourseOpenCounts.get(row.courseID) ?? 0) + count);
 					}
 					else if (row.event === "ide-open") {
 						csTotals.ideOpens += count;
@@ -258,17 +282,10 @@ export function getClassroomAnalyticsSummary(retentionDays: number): RequestHand
 				}
 				else if (siteID === "math") {
 					const dayRow = mathDailyByDate.get(dateKey(row.day));
-					if (
-						row.event === "course-open"
-						&& row.courseID
-						&& mathCourseOpenCounts.has(row.courseID)
-					) {
+					if (row.event === "course-open" && row.courseID && mathCourseOpenCounts.has(row.courseID)) {
 						mathTotals.courseOpens += count;
 						if (dayRow) dayRow.courseOpens += count;
-						mathCourseOpenCounts.set(
-							row.courseID,
-							(mathCourseOpenCounts.get(row.courseID) ?? 0) + count
-						);
+						mathCourseOpenCounts.set(row.courseID, (mathCourseOpenCounts.get(row.courseID) ?? 0) + count);
 					}
 					else if (row.event === "graph-open") {
 						mathTotals.graphOpens += count;
@@ -308,7 +325,7 @@ export function getClassroomAnalyticsSummary(retentionDays: number): RequestHand
 				studentWork: {
 					recentWindowDays: STUDENT_WORK_RECENT_DAYS,
 					activeAccounts,
-					recentSignIns,
+					accountsWithRecentSignIn,
 					studentsWithProjects: projectStudentCount[0]?.count ?? 0,
 					studentsWithRecentProjectUpdates: recentProjectStudentCount[0]?.count ?? 0,
 					activeProjects,

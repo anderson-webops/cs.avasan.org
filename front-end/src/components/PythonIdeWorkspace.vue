@@ -29,6 +29,7 @@ import { reportClassroomUsage } from "@/modules/classroomUsage";
 import {
 	acknowledgeLocalPythonProjectRecovery,
 	addPythonIdeClassroomSections,
+	anonymousPythonWorkspaceWasClearedSinceLoad,
 	applyPythonIdeRecoveryPlan,
 	claimAnonymousPythonProjectForStudent,
 	clearLocalPythonIdeEditorState,
@@ -54,7 +55,9 @@ import {
 	normalizePythonFileName,
 	plainPythonIdeProjectsSnapshot,
 	purgeAllStudentPythonProjectRecovery,
+	purgeAnonymousPythonWorkspace,
 	pythonIdeAllowedFileExtensions,
+	pythonIdeAnonymousClearSignalStorageKey,
 	pythonIdeEditorViewStateStoragePrefix,
 	pythonIdeFileUploadAccept,
 	pythonIdeImportID,
@@ -513,6 +516,9 @@ const activeStorageOwnerID = ref<string | null>(studentProjectOwnerID.value);
 const pendingAnonymousProjects = ref<PythonIdeProject[]>([]);
 const isImportingAnonymousProjects = ref(false);
 const anonymousImportError = ref("");
+const isClearingAnonymousWorkspace = ref(false);
+const showAnonymousWorkspaceClearConfirmation = ref(false);
+const anonymousWorkspaceClearError = ref("");
 const pythonIdePageRef = ref<HTMLElement | null>(null);
 const codeEditorHostRef = ref<HTMLDivElement | null>(null);
 const canvasRef = ref<HTMLCanvasElement | null>(null);
@@ -1572,10 +1578,7 @@ async function importAnonymousProjects() {
 			for (const project of [...pendingAnonymousProjects.value]) {
 				if (!projectOwnerContextIsCurrent(ownerContext)) return;
 				const claimedProject =
-					await claimAnonymousPythonProjectForStudent(
-						project,
-						studentID
-					);
+					await claimAnonymousPythonProjectForStudent(project);
 				if (!projectOwnerContextIsCurrent(ownerContext)) {
 					if (volatileSuspendedOwnerID === studentID) {
 						retainVolatileStudentProject(studentID, claimedProject);
@@ -1654,6 +1657,90 @@ async function importAnonymousProjects() {
 function keepAnonymousProjectsSeparate() {
 	pendingAnonymousProjects.value = [];
 	anonymousImportError.value = "";
+}
+
+async function resetAnonymousWorkspaceForNextStudent({
+	broadcast,
+	persistBlank
+}: {
+	broadcast: boolean;
+	persistBlank: boolean;
+}) {
+	// A cross-tab clear signal must never affect a signed-in student's
+	// account-backed workspace.
+	if (currentStudent.value || activeStorageOwnerID.value) return;
+	if (isClearingAnonymousWorkspace.value) return;
+
+	isClearingAnonymousWorkspace.value = true;
+	anonymousWorkspaceClearError.value = "";
+	hideWorkspaceForOwnerTransition(null);
+
+	try {
+		await projectOwnerSwitchQueue;
+		await waitForOwnerBoundMutations();
+		if (localSnapshotInFlight) await localSnapshotInFlight;
+		if (saveInFlight) await saveInFlight;
+
+		// A sign-in that completed while old local writes drained owns the page
+		// now; leave its workspace to the normal owner-transition path.
+		if (currentStudent.value || activeStorageOwnerID.value) return;
+
+		await purgeAnonymousPythonWorkspace({ broadcast });
+		pendingSaveProjectIDs.clear();
+		unsyncedProjectIDs.clear();
+		saveQueued = false;
+		localSnapshotQueued = false;
+		const blankProject = createPythonIdeProject(requestedStarterMode.value);
+		setProjects([blankProject]);
+		if (persistBlank) {
+			await saveLocalPythonProjectsAsync([blankProject], null);
+		}
+		showAnonymousWorkspaceClearConfirmation.value = false;
+		saveMessage.value = "Browser projects cleared for the next student";
+		runMessage.value = "Ready";
+		await nextTick();
+		resetActiveCanvas();
+	} catch (error) {
+		projects.value = [];
+		selectedProjectID.value = "";
+		anonymousWorkspaceClearError.value =
+			error instanceof Error
+				? error.message
+				: "Could not clear every browser project. Try again.";
+		saveMessage.value = "Browser projects were not fully cleared";
+	} finally {
+		suppressAutoSave = false;
+		isLoading.value = false;
+		isClearingAnonymousWorkspace.value = false;
+	}
+}
+
+function clearAnonymousWorkspaceForNextStudent() {
+	return resetAnonymousWorkspaceForNextStudent({
+		broadcast: true,
+		persistBlank: true
+	});
+}
+
+function handleAnonymousWorkspaceClearSignal(event: StorageEvent) {
+	if (
+		event.key !== pythonIdeAnonymousClearSignalStorageKey ||
+		(event.storageArea && event.storageArea !== window.localStorage)
+	) {
+		return;
+	}
+	void resetAnonymousWorkspaceForNextStudent({
+		broadcast: false,
+		persistBlank: false
+	});
+}
+
+function handleAnonymousWorkspacePageShow() {
+	if (!anonymousPythonWorkspaceWasClearedSinceLoad()) return;
+	void resetAnonymousWorkspaceForNextStudent({
+		broadcast: false,
+		persistBlank: false
+	});
 }
 
 async function loadProjects() {
@@ -5528,6 +5615,8 @@ onMounted(() => {
 	void refreshPythonIdeStoragePersistenceStatus();
 	void loadProjects();
 	window.addEventListener("pagehide", flushPendingProjectSave);
+	window.addEventListener("pageshow", handleAnonymousWorkspacePageShow);
+	window.addEventListener("storage", handleAnonymousWorkspaceClearSignal);
 	document.addEventListener(
 		"visibilitychange",
 		flushPendingProjectSaveOnVisibilityChange
@@ -5557,6 +5646,8 @@ onBeforeUnmount(() => {
 	saveCodeEditorViewState();
 	codeEditorView?.destroy();
 	window.removeEventListener("pagehide", flushPendingProjectSave);
+	window.removeEventListener("pageshow", handleAnonymousWorkspacePageShow);
+	window.removeEventListener("storage", handleAnonymousWorkspaceClearSignal);
 	document.removeEventListener(
 		"visibilitychange",
 		flushPendingProjectSaveOnVisibilityChange
@@ -5583,6 +5674,71 @@ onBeforeUnmount(() => {
 				<strong>{{ runMessage }}</strong>
 			</div>
 		</div>
+
+		<section
+			v-if="!currentStudent"
+			class="shared-computer-clear site-surface"
+			aria-labelledby="shared-computer-clear-title"
+		>
+			<div>
+				<h2 id="shared-computer-clear-title">
+					Using a shared computer?
+				</h2>
+				<p>
+					When you finish, remove the anonymous projects and editor
+					state saved in this browser before the next student begins.
+				</p>
+				<p
+					v-if="anonymousWorkspaceClearError"
+					class="shared-computer-clear__error"
+					role="alert"
+				>
+					{{ anonymousWorkspaceClearError }}
+				</p>
+			</div>
+			<div
+				v-if="showAnonymousWorkspaceClearConfirmation"
+				class="shared-computer-clear__confirmation"
+				role="group"
+				aria-label="Confirm clearing browser projects"
+			>
+				<strong>Delete every anonymous Python project here?</strong>
+				<p>
+					This cannot be undone. Projects already saved to a signed-in
+					account are not changed.
+				</p>
+				<div class="shared-computer-clear__actions">
+					<button
+						class="site-button site-button--secondary"
+						:disabled="isClearingAnonymousWorkspace"
+						type="button"
+						@click="showAnonymousWorkspaceClearConfirmation = false"
+					>
+						Cancel
+					</button>
+					<button
+						class="site-button shared-computer-clear__final"
+						:disabled="isClearingAnonymousWorkspace"
+						type="button"
+						@click="clearAnonymousWorkspaceForNextStudent"
+					>
+						{{
+							isClearingAnonymousWorkspace
+								? "Clearing…"
+								: "Clear all browser projects"
+						}}
+					</button>
+				</div>
+			</div>
+			<button
+				v-else
+				class="site-button site-button--secondary shared-computer-clear__trigger"
+				type="button"
+				@click="showAnonymousWorkspaceClearConfirmation = true"
+			>
+				Clear browser projects for next student
+			</button>
+		</section>
 
 		<section
 			v-if="pendingAnonymousProjects.length && currentStudent"
@@ -6357,6 +6513,78 @@ html.dark .python-ide-status {
 
 html.dark .python-ide-status strong {
 	color: #f8fbff;
+}
+
+.shared-computer-clear {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	gap: 1rem;
+	align-items: center;
+	padding: 1rem 1.1rem;
+	border-color: rgba(180, 83, 9, 0.32);
+	background: rgba(255, 251, 235, 0.92);
+}
+
+.shared-computer-clear h2 {
+	color: var(--color-ink-strong);
+	font-size: 1rem;
+}
+
+.shared-computer-clear p {
+	margin-top: 0.25rem;
+	color: var(--color-ink-soft);
+	line-height: 1.5;
+}
+
+.shared-computer-clear__confirmation {
+	min-width: min(30rem, 100%);
+	display: grid;
+	gap: 0.45rem;
+	padding: 0.8rem;
+	border: 1px solid rgba(185, 28, 28, 0.3);
+	border-radius: 14px;
+	background: rgba(254, 242, 242, 0.96);
+	color: #7f1d1d;
+}
+
+.shared-computer-clear__confirmation p {
+	color: #991b1b;
+	font-size: 0.82rem;
+}
+
+.shared-computer-clear__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.55rem;
+}
+
+.shared-computer-clear__final {
+	border: 1px solid rgba(185, 28, 28, 0.58);
+	background: #b91c1c;
+	color: #ffffff;
+}
+
+.shared-computer-clear__error {
+	color: var(--color-error-text) !important;
+}
+
+.shared-computer-clear__trigger {
+	white-space: nowrap;
+}
+
+html.dark .shared-computer-clear {
+	border-color: rgba(251, 191, 36, 0.28);
+	background: rgba(69, 45, 10, 0.68);
+}
+
+html.dark .shared-computer-clear__confirmation {
+	border-color: rgba(248, 113, 113, 0.38);
+	background: rgba(69, 10, 10, 0.86);
+	color: #fecaca;
+}
+
+html.dark .shared-computer-clear__confirmation p {
+	color: #fecaca;
 }
 
 .browser-project-import {
@@ -7565,6 +7793,15 @@ html.dark .editor-shortcuts ul {
 	.browser-project-import {
 		align-items: stretch;
 		flex-direction: column;
+	}
+
+	.shared-computer-clear {
+		grid-template-columns: 1fr;
+	}
+
+	.shared-computer-clear__trigger {
+		justify-self: start;
+		white-space: normal;
 	}
 
 	.browser-project-import__actions {

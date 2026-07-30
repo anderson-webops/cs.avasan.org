@@ -2,6 +2,7 @@
 import type { StudentAccount, StudentSession } from "@/modules/studentAccounts";
 import { defineStore } from "pinia";
 import { api } from "@/api";
+import { studentAccountsAreEnabled } from "@/modules/classroomFeatures";
 import {
 	clearAllStudentPythonProjectRecoveryFromLocalStorage,
 	purgeAllStudentPythonProjectRecovery,
@@ -152,6 +153,15 @@ export const useAppStore = defineStore("app", {
 						return;
 					}
 					this.setCurrentAdmin(adminData.currentAdmin);
+					this.sessionBootstrapStatus = "ready";
+					return;
+				}
+
+				if (!studentAccountsAreEnabled()) {
+					this.setStudentSession({
+						student: null,
+						requiresPasswordSetup: false
+					});
 					this.sessionBootstrapStatus = "ready";
 					return;
 				}

@@ -55,19 +55,21 @@ describe("student Python project sync boundaries", () => {
 
 	it("binds every student project request to the expected student", async () => {
 		const remote = project("remote-a", "2026-07-29T12:00:00.000Z");
-		vi.mocked(api.get).mockResolvedValueOnce({ data: { projects: [remote] } });
+		vi.mocked(api.get).mockResolvedValueOnce({
+			data: { projects: [remote] }
+		});
 		vi.mocked(api.get).mockResolvedValueOnce({ data: { reviews: [] } });
-		vi.mocked(api.post).mockResolvedValueOnce({ data: { project: remote } });
+		vi.mocked(api.post).mockResolvedValueOnce({
+			data: { project: remote }
+		});
 		vi.mocked(api.put).mockResolvedValueOnce({ data: { project: remote } });
 		vi.mocked(api.delete).mockResolvedValueOnce({ data: undefined });
 
 		await fetchPythonIdeProjects("student-a");
 		await fetchVisiblePythonIdeProjectReviews("student-a");
-		await createRemotePythonIdeProject(
-			{ title: "Imported" },
-			"student-a",
-			{ importID: "local-import-a" }
-		);
+		await createRemotePythonIdeProject({ title: "Imported" }, "student-a", {
+			importID: "local-import-a"
+		});
 		await updateRemotePythonIdeProject(
 			remote._id,
 			{ title: "Changed" },
@@ -79,7 +81,11 @@ describe("student Python project sync boundaries", () => {
 		});
 
 		const headers = { headers: { "X-Student-ID": "student-a" } };
-		expect(api.get).toHaveBeenNthCalledWith(1, "/students/projects", headers);
+		expect(api.get).toHaveBeenNthCalledWith(
+			1,
+			"/students/projects",
+			headers
+		);
 		expect(api.get).toHaveBeenNthCalledWith(
 			2,
 			"/students/project-reviews",
@@ -128,12 +134,7 @@ describe("student Python project sync boundaries", () => {
 		vi.mocked(api.delete).mockRejectedValueOnce(responseLost);
 		vi.mocked(api.get).mockResolvedValueOnce({
 			data: {
-				projects: [
-					project(
-						"project-a",
-						"2026-07-29T12:00:00.000Z"
-					)
-				]
+				projects: [project("project-a", "2026-07-29T12:00:00.000Z")]
 			}
 		});
 
@@ -162,11 +163,7 @@ describe("student Python project sync boundaries", () => {
 			serverUpdatedAt: "2026-07-29T12:00:00.000Z"
 		};
 		const localSame = {
-			...project(
-				"shared-a",
-				"2026-07-29T11:00:00.000Z",
-				"same content"
-			),
+			...project("shared-a", "2026-07-29T11:00:00.000Z", "same content"),
 			serverUpdatedAt: "2026-07-29T10:00:00.000Z"
 		};
 		const remoteBaseline = {
@@ -181,10 +178,7 @@ describe("student Python project sync boundaries", () => {
 			"local-new-project",
 			"2026-07-29T13:30:00.000Z"
 		);
-		const remoteOnly = project(
-			"remote-only",
-			"2026-07-29T09:00:00.000Z"
-		);
+		const remoteOnly = project("remote-only", "2026-07-29T09:00:00.000Z");
 
 		const plan = reconcilePythonIdeRecoveryProjects(
 			[localSame, localBasedOnRemote, localNew],
@@ -247,17 +241,11 @@ describe("student Python project sync boundaries", () => {
 			plan.projects.find(project => project._id === "shared-lost-put")
 				?.files[0]?.content
 		).toBe("server version two");
-		expect(recoveredProject?.files[0]?.content).toBe(
-			"local version three"
-		);
-		expect(recoveredProject?.title).toBe(
-			"shared-lost-put (recovered)"
-		);
+		expect(recoveredProject?.files[0]?.content).toBe("local version three");
+		expect(recoveredProject?.title).toBe("shared-lost-put (recovered)");
 		expect(plan.writes).toEqual([
 			expect.objectContaining({
-				importID: expect.stringContaining(
-					"shared-lost-put:recovered:"
-				),
+				importID: expect.stringContaining("shared-lost-put:recovered:"),
 				kind: "create",
 				project: expect.objectContaining({
 					files: [
@@ -274,10 +262,9 @@ describe("student Python project sync boundaries", () => {
 		if (!recoveredWrite || recoveredWrite.kind !== "create") {
 			throw new Error("Expected a recovered create write");
 		}
-		const retryPlan = reconcilePythonIdeRecoveryProjects(
-			plan.projects,
-			[remoteVersionTwo]
-		);
+		const retryPlan = reconcilePythonIdeRecoveryProjects(plan.projects, [
+			remoteVersionTwo
+		]);
 		const retriedRecoveredWrite = retryPlan.writes.find(
 			write =>
 				write.kind === "create" &&
@@ -327,10 +314,7 @@ describe("student Python project sync boundaries", () => {
 	});
 
 	it("deduplicates an acknowledged idempotent create retry", async () => {
-		const localProject = project(
-			"local-retry",
-			"2026-07-29T13:00:00.000Z"
-		);
+		const localProject = project("local-retry", "2026-07-29T13:00:00.000Z");
 		const existingRemote = {
 			...localProject,
 			_id: "remote-retry",
@@ -408,9 +392,7 @@ describe("student Python project sync boundaries", () => {
 			"/students/projects/remote-lost-create",
 			expect.objectContaining({
 				expectedUpdatedAt: createdAt,
-				files: [
-					expect.objectContaining({ content: "version two" })
-				]
+				files: [expect.objectContaining({ content: "version two" })]
 			}),
 			{ headers: { "X-Student-ID": "student-a" } }
 		);
@@ -624,58 +606,60 @@ describe("student Python project sync boundaries", () => {
 			objectStoreNames: { contains: () => true },
 			onversionchange: null,
 			close: vi.fn(),
-			transaction: vi.fn((_storeName: string, mode: IDBTransactionMode) => {
-				const transaction = {
-					error: null as Error | null,
-					onabort: null as (() => void) | null,
-					oncomplete: null as (() => void) | null,
-					onerror: null as (() => void) | null,
-					abort: vi.fn(),
-					objectStore: null as unknown as () => IDBObjectStore
-				};
-				let putCount = 0;
-				const request = <T>(
-					result: T,
-					completeTransaction = false
-				) => {
-					const pendingRequest = {
-						error: null,
-						result,
+			transaction: vi.fn(
+				(_storeName: string, mode: IDBTransactionMode) => {
+					const transaction = {
+						error: null as Error | null,
+						onabort: null as (() => void) | null,
+						oncomplete: null as (() => void) | null,
 						onerror: null as (() => void) | null,
-						onsuccess: null as (() => void) | null
+						abort: vi.fn(),
+						objectStore: null as unknown as () => IDBObjectStore
 					};
-					window.setTimeout(() => {
-						pendingRequest.onsuccess?.();
-						if (completeTransaction) {
-							window.setTimeout(
-								() => transaction.oncomplete?.(),
-								0
-							);
-						}
-					}, 0);
-					return pendingRequest as unknown as IDBRequest<T>;
-				};
-				const store = {
-					getAll: () => request([], true),
-					get: () => request(undefined),
-					put: () => {
-						putCount += 1;
-						if (putCount === 2) {
-							window.setTimeout(() => {
-								transaction.error = new Error(
-									"claim transaction failed"
+					let putCount = 0;
+					const request = <T>(
+						result: T,
+						completeTransaction = false
+					) => {
+						const pendingRequest = {
+							error: null,
+							result,
+							onerror: null as (() => void) | null,
+							onsuccess: null as (() => void) | null
+						};
+						window.setTimeout(() => {
+							pendingRequest.onsuccess?.();
+							if (completeTransaction) {
+								window.setTimeout(
+									() => transaction.oncomplete?.(),
+									0
 								);
-								transaction.onerror?.();
-							}, 0);
+							}
+						}, 0);
+						return pendingRequest as unknown as IDBRequest<T>;
+					};
+					const store = {
+						getAll: () => request([], true),
+						get: () => request(undefined),
+						put: () => {
+							putCount += 1;
+							if (putCount === 2) {
+								window.setTimeout(() => {
+									transaction.error = new Error(
+										"claim transaction failed"
+									);
+									transaction.onerror?.();
+								}, 0);
+							}
+							return {} as IDBRequest;
 						}
-						return {} as IDBRequest;
-					}
-				};
-				transaction.objectStore = () =>
-					store as unknown as IDBObjectStore;
-				if (mode === "readonly") putCount = -100;
-				return transaction as unknown as IDBTransaction;
-			})
+					};
+					transaction.objectStore = () =>
+						store as unknown as IDBObjectStore;
+					if (mode === "readonly") putCount = -100;
+					return transaction as unknown as IDBTransaction;
+				}
+			)
 		};
 		const openRequest = {
 			error: null,
@@ -696,10 +680,7 @@ describe("student Python project sync boundaries", () => {
 		});
 
 		await expect(
-			claimAnonymousPythonProjectForStudent(
-				anonymousProject,
-				"student-a"
-			)
+			claimAnonymousPythonProjectForStudent(anonymousProject)
 		).rejects.toThrow("claim transaction failed");
 
 		expect(loadLocalPythonProjects(null)).toEqual([anonymousProject]);
@@ -762,9 +743,7 @@ describe("student Python project sync boundaries", () => {
 			source.indexOf("function keepAnonymousProjectsSeparate")
 		);
 		expect(
-			importSource.indexOf(
-				"await claimAnonymousPythonProjectForStudent("
-			)
+			importSource.indexOf("await claimAnonymousPythonProjectForStudent(")
 		).toBeLessThan(
 			importSource.indexOf(
 				"const importedProject = await createRemotePythonIdeProject"
@@ -781,9 +760,7 @@ describe("student Python project sync boundaries", () => {
 			)
 		);
 		expect(
-			importSource.indexOf(
-				"unsyncedProjectIDs.add(claimedProject._id)"
-			)
+			importSource.indexOf("unsyncedProjectIDs.add(claimedProject._id)")
 		).toBeLessThan(
 			importSource.indexOf(
 				"const importedProject = await createRemotePythonIdeProject"
@@ -804,15 +781,43 @@ describe("student Python project sync boundaries", () => {
 				"volatileStudentPythonProjectRecovery.replace("
 			)
 		).toBeLessThan(
-			handoffSource.indexOf(
-				"hideWorkspaceForOwnerTransition(studentID);"
-			)
+			handoffSource.indexOf("hideWorkspaceForOwnerTransition(studentID);")
 		);
 		expect(handoffSource).not.toContain(
 			"preserveStudentPythonProjectsForSessionEnd"
 		);
 		expect(handoffSource).toContain(
 			"volatileStudentProjectRecovery.discard(studentID)"
+		);
+	});
+
+	it("provides a confirmed cross-tab clear for anonymous shared-computer work", async () => {
+		const source = await readFile(workspacePath, "utf8");
+		const clearHandler = source.slice(
+			source.indexOf(
+				"async function resetAnonymousWorkspaceForNextStudent"
+			),
+			source.indexOf("async function loadProjects")
+		);
+
+		expect(source).toContain("Clear browser projects for next student");
+		expect(source).toContain("Clear all browser projects");
+		expect(source).toContain('v-if="!currentStudent"');
+		expect(clearHandler).toContain(
+			"if (currentStudent.value || activeStorageOwnerID.value) return;"
+		);
+		expect(clearHandler).toContain(
+			"await purgeAnonymousPythonWorkspace({ broadcast });"
+		);
+		expect(clearHandler).toContain("createPythonIdeProject(");
+		expect(source).toContain(
+			'window.addEventListener("storage", handleAnonymousWorkspaceClearSignal);'
+		);
+		expect(source).toContain(
+			'window.addEventListener("pageshow", handleAnonymousWorkspacePageShow);'
+		);
+		expect(source).toContain(
+			'window.removeEventListener("storage", handleAnonymousWorkspaceClearSignal);'
 		);
 	});
 });

@@ -17,8 +17,8 @@
 		"up": "npm exec --yes -- taze major -I",
 		"lint": "eslint \"src/**/*.{js,ts}\"",
 		"lint-fix": "eslint \"src/**/*.{js,ts}\" --fix",
-		"create-admin": "node dist/create-admin-user.js",
-		"create-admin-ts": "tsx -r dotenv/config src/create-admin-user.ts"
+		"create-admin-ts": "tsx -r dotenv/config src/create-admin-user.ts",
+		"purge-classroom-analytics-ts": "tsx -r dotenv/config src/purge-classroom-analytics.ts"
 	},
 	"keywords": [],
 	"author": "Classes with Julio",

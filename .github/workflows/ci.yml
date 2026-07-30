@@ -7,15 +7,18 @@ on:
     pull_request:
         branches: [main]
 
+permissions:
+    contents: read
+
 jobs:
     backend-install:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v7
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-            - uses: actions/setup-node@v7
+            - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
               with:
-                  node-version: 22.x
+                  node-version: 22.22.2
                   cache: npm
                   cache-dependency-path: back-end/package-lock.json
 
@@ -32,11 +35,11 @@ jobs:
     lint:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v7
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-            - uses: actions/setup-node@v7
+            - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
               with:
-                  node-version: 22.x
+                  node-version: 22.22.2
                   cache: npm
 
             # Make runner's npm match packageManager in package.json
@@ -56,11 +59,11 @@ jobs:
     typecheck:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v7
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-            - uses: actions/setup-node@v7
+            - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
               with:
-                  node-version: 22.x
+                  node-version: 22.22.2
                   cache: npm
 
             - name: Pin npm version
@@ -78,13 +81,13 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                node-version: [22.x]
+                node-version: [22.22.2]
                 os: [ubuntu-latest]
             fail-fast: false
 
         steps:
-            - uses: actions/checkout@v7
-            - uses: actions/setup-node@v7
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+            - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
               with:
                   node-version: ${{ matrix['node-version'] }}
                   cache: npm
@@ -118,11 +121,11 @@ jobs:
         runs-on: ubuntu-latest
         timeout-minutes: 15
         steps:
-            - uses: actions/checkout@v7
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-            - uses: actions/setup-node@v7
+            - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
               with:
-                  node-version: 22.x
+                  node-version: 22.22.2
                   cache: npm
 
             - name: Pin npm version
@@ -140,11 +143,11 @@ jobs:
         runs-on: ubuntu-latest
         timeout-minutes: 10
         steps:
-            - uses: actions/checkout@v7
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-            - uses: actions/setup-node@v7
+            - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
               with:
-                  node-version: 22.x
+                  node-version: 22.22.2
                   cache: npm
 
             - name: Pin npm version
@@ -162,11 +165,11 @@ jobs:
         runs-on: ubuntu-latest
         timeout-minutes: 15
         steps:
-            - uses: actions/checkout@v7
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-            - uses: actions/setup-node@v7
+            - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
               with:
-                  node-version: 22.x
+                  node-version: 22.22.2
                   cache: npm
                   registry-url: https://registry.npmjs.org/
 
@@ -178,7 +181,7 @@ jobs:
             - name: Install deps
               run: npm ci
 
-            - uses: actions/cache@v6
+            - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
               with:
                   path: ~/.cache/Cypress
                   key: cypress-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
@@ -187,7 +190,7 @@ jobs:
               run: npm run -w front-end build
 
             - name: Cypress
-              uses: cypress-io/github-action@v7.4.1
+              uses: cypress-io/github-action@fa4a118725a8f001170d49631ea89e5d66fee626 # v7.4.1
               with:
                   install: false
                   working-directory: front-end
@@ -198,11 +201,11 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v7
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-            - uses: actions/setup-node@v7
+            - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
               with:
-                  node-version: 22.x
+                  node-version: 22.22.2
                   cache: npm
 
             - name: Pin npm version
@@ -215,3 +218,72 @@ jobs:
 
             - name: Build
               run: npm run build
+
+    container-stack:
+        runs-on: ubuntu-latest
+        timeout-minutes: 30
+        env:
+            CS_AVASAN_LISTEN_PORT: "18080"
+            INTERNAL_DIAGNOSTICS_KEY: ci-only-internal-diagnostics-key
+            MONGO_APP_PASSWORD: ci-only-application-password
+            MONGO_APP_USERNAME: ci_app
+            MONGO_ROOT_PASSWORD: ci-only-url-safe-password
+            MONGO_ROOT_USERNAME: ci
+            SESSION_SECRET: ci-only-session-secret-at-least-thirty-two-bytes
+        steps:
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+            - name: Prepare fail-closed environment
+              run: |
+                  cp deploy/cs.env.example deploy/cs.env
+                  chmod 600 deploy/cs.env
+                  ./scripts/verify-deploy-env-permissions.sh
+
+            - name: Validate production Compose
+              run: docker compose --env-file deploy/cs.env --profile tools -f compose.production.yml config --quiet
+
+            - name: Build production images
+              run: docker compose --env-file deploy/cs.env --profile tools -f compose.production.yml build
+
+            - name: Start fail-closed production stack
+              run: docker compose --env-file deploy/cs.env --profile tools -f compose.production.yml up --detach --wait --no-build web
+
+            - name: Smoke production proxy and rollout gates
+              run: |
+                  origin=http://127.0.0.1:${CS_AVASAN_LISTEN_PORT}
+                  curl --fail --silent --show-error "${origin}/" >/dev/null
+                  curl --fail --silent --show-error "${origin}/python-ide" >/dev/null
+                  curl --fail --silent --show-error "${origin}/graph-sketcher" >/dev/null
+                  curl --fail --silent --show-error "${origin}/api/healthz" >/dev/null
+                  curl --fail --silent --show-error "${origin}/api/readyz" >/dev/null
+
+                  student_status=$(curl --silent --output /dev/null --write-out '%{http_code}' "${origin}/api/students/session")
+                  test "${student_status}" = "404"
+
+                  analytics_status=$(curl --silent --output /dev/null --write-out '%{http_code}' \
+                    --request POST \
+                    --header 'Content-Type: application/json' \
+                    --header 'X-Classroom-Request: 1' \
+                    --header 'Origin: https://cs.avasan.org' \
+                    --data '{"siteID":"cs","event":"ide-open"}' \
+                    "${origin}/api/classroom-usage")
+                  test "${analytics_status}" = "404"
+
+                  admin_status=$(curl --silent --output /dev/null --write-out '%{http_code}' "${origin}/api/admins/loggedin")
+                  test "${admin_status}" = "403"
+
+            - name: Reject backend exceptions and deprecation warnings
+              run: |
+                  docker compose --env-file deploy/cs.env --profile tools -f compose.production.yml logs --no-color api > /tmp/cs-avasan-api.log
+                  if grep -Eiq 'deprecationwarning|unhandledrejection|uncaughtexception|(^|[^a-z])exception([^a-z]|$)|(^|[^a-z])error:' /tmp/cs-avasan-api.log; then
+                    sed -n '1,240p' /tmp/cs-avasan-api.log
+                    exit 1
+                  fi
+
+            - name: Show container diagnostics after failure
+              if: failure()
+              run: docker compose --env-file deploy/cs.env --profile tools -f compose.production.yml logs --no-color
+
+            - name: Remove production test stack
+              if: always()
+              run: docker compose --env-file deploy/cs.env --profile tools -f compose.production.yml down --volumes --remove-orphans

@@ -60,6 +60,15 @@ password or Google/Apple connection. There is no shared class code, universal
 recovery code, student email, provider-email matching, or self-service
 registration.
 
+Julio can also export retained account and educational records for one student
+and permanently delete that student's account, provider binding, pending
+provider setup attempts, projects, and review copies. Temporary sign-in proof
+records are counted in the export inventory but excluded from the downloaded
+file. Both operations require Julio to re-enter his password; deletion also
+requires the exact username and returns an operation ID for the school or
+district's required backup follow-up. See
+[`docs/privacy-operations.md`](docs/privacy-operations.md).
+
 Julio's name and email are fixed by code provisioning. The runtime exposes no
 profile or email mutation, and his browser cookie is nonpersistent with an
 eight-hour absolute session cap.
@@ -78,13 +87,21 @@ fields and credentials and never receives usernames, access codes, project
 names, source code, graph contents, expressions, coordinates, referrers, or
 device identifiers.
 
-The teacher analytics summary separates CS and Math activity while retaining
-only aggregate optional-account and Python-project counts under student work.
-Rows written before the Math site was connected remain part of the CS totals.
-Collection stays off unless both backend
-`CLASSROOM_ANALYTICS_COLLECTION_ENABLED` and frontend
-`VITE_CLASSROOM_USAGE_ENABLED` are explicitly set to `true`; browser Do Not
-Track and Global Privacy Control signals are honored.
+The Admin activity panel at `/admin?section=analytics` separates CS and Math
+activity while retaining only aggregate optional-account and Python-project
+counts under student work. It uses Julio's existing Admin session; there is no
+external summary API or analytics service key. Rows written before the Math
+site was connected remain part of the CS totals.
+
+Collection stays off unless school/district approval, a direct privacy contact,
+the backend `CLASSROOM_ANALYTICS_COLLECTION_ENABLED`, and the frontend
+`VITE_CLASSROOM_USAGE_ENABLED` are all explicitly configured. Browser Do Not
+Track and Global Privacy Control signals are honored. Reports are marked only
+as attempted before the request and are never retried in that tab after an
+error or ambiguous response. This prefers undercounting to a duplicate count
+without adding an identifier for server-side deduplication. These
+client-supplied totals remain low-stakes directional signals rather than
+attendance or grading evidence.
 
 ### Provision Julio
 
@@ -98,6 +115,12 @@ npm run -w back-end create-admin-ts
 The setup prompts for Julio's email and password, fixes the display name to
 `Julio`, requires a password of at least 14 characters, and refuses to create a
 second teacher account. Never reuse the upstream site's database.
+
+Optional accounts, provider sign-in, and anonymous counts fail closed. Before
+enabling any of them, complete the approval, contact, record-management, and
+end-of-service checklist in
+[`docs/privacy-operations.md`](docs/privacy-operations.md). The checked-in
+backend and frontend templates keep every optional feature off.
 
 ## Downstream Policy
 
@@ -150,6 +173,13 @@ Set `CLASSROOM_ORIGIN=http://127.0.0.1:3333` for the local Vite classroom and
 `CLASSROOM_ORIGIN=https://cs.avasan.org` in production. `CROSS_SITE` must remain
 false: browser sessions are served through the same-origin `/api` route.
 
+Set `CLASSROOM_PRIVACY_APPROVED=true`, `SCHOOL_PRIVACY_CONTACT`, and
+`STUDENT_ACCOUNTS_ENABLED=true` in the backend only after the rollout checklist
+is complete. The frontend build independently requires
+`VITE_CLASSROOM_PRIVACY_APPROVED=true`, `VITE_SCHOOL_PRIVACY_CONTACT`, and
+`VITE_STUDENT_ACCOUNTS_ENABLED=true`. A missing approval or contact keeps the
+student routes and UI unavailable without affecting anonymous classroom use.
+
 Google and Apple buttons appear only when `STUDENT_OAUTH_ENABLED=true` and the
 provider's complete credentials are configured. Keep the feature disabled
 until the school or district has approved it, supplied the required direct
@@ -168,16 +198,89 @@ offline-access scopes. The production proxy must preserve callback `Set-Cookie`
 headers and must not record callback query strings or request bodies in access
 logs; they can contain short-lived authorization codes and state values.
 
-The static front-end is deployable independently, but teacher and student
-sessions and cloud project sync require the Express API and an `/api/*` route
-to that service. The frontend build packages the reviewed Python IDE asset
-manifest; the backend does not stream an upstream asset archive at runtime.
+The static frontend can still be deployed by itself for anonymous classroom
+use, but Julio's Admin, optional student sync, and aggregate counts require the
+Express API and exact same-origin `/api/*` mapping.
+
+## Reproducible Production Deployment
+
+[`compose.production.yml`](compose.production.yml) builds this repository's
+frontend proxy and Express API, keeps the API and authenticated MongoDB off
+host ports, publishes only the frontend proxy on loopback, pins every base
+image by digest, and runs the frontend and API with read-only filesystems,
+dropped capabilities, and bounded temporary storage. The container Nginx
+configuration:
+
+- strips `/api` exactly once and preserves same-origin session cookies;
+- streams API requests and responses without writing student project or export
+  payloads to proxy temporary files;
+- replaces the trusted proxy boundary documented by `TRUST_PROXY_HOPS=1`;
+- disables application and example host access logs so student network and
+  request metadata are not retained;
+- applies browser security headers; and
+- serves the generated public site with an SPA fallback while returning API
+  errors as API responses.
+
+To prepare a deployment:
+
+```bash
+install -m 600 deploy/cs.env.example deploy/cs.env
+# Fill secrets, keep all optional features false until the privacy gate is met.
+./scripts/verify-deploy-env-permissions.sh
+docker compose --env-file deploy/cs.env -f compose.production.yml build
+docker compose --env-file deploy/cs.env -f compose.production.yml up -d mongo
+# This is idempotent and is required for an existing Mongo volume because
+# /docker-entrypoint-initdb.d runs automatically only on the first initialization.
+docker compose --env-file deploy/cs.env -f compose.production.yml exec -T mongo sh -lc 'mongosh --quiet --username "$MONGO_INITDB_ROOT_USERNAME" --password "$MONGO_INITDB_ROOT_PASSWORD" --authenticationDatabase admin /docker-entrypoint-initdb.d/01-create-app-user.js'
+docker compose --env-file deploy/cs.env -f compose.production.yml --profile tools run --rm admin-tools npm run -w back-end create-admin-ts
+docker compose --env-file deploy/cs.env -f compose.production.yml up -d
+```
+
+Generate `MONGO_ROOT_PASSWORD`, `MONGO_APP_PASSWORD`, `SESSION_SECRET`, and
+`INTERNAL_DIAGNOSTICS_KEY` as separate random values. Hexadecimal Mongo
+passwords avoid URI-encoding ambiguity. `deploy/cs.env` is ignored by Git and
+the verifier refuses permissions other than `0600`. Mongo root is available
+only to the database container for initialization and maintenance. The API and
+the isolated Admin tools image receive only the dedicated
+`cs-avasan-org` application credential, whose only database role is
+`readWrite`. In MongoDB 8 that role already includes the collection and index
+operations required by the application's Mongoose startup; do not add
+`dbAdmin` to the runtime credential.
+
+The one-off Admin command uses TypeScript source in the isolated tools image,
+prompts for Julio's credentials, and refuses to create a second Admin; omit
+that step when the database already contains his provisioned account. If an
+existing deployment rotates `MONGO_APP_PASSWORD`, run the idempotent
+`mongosh` initialization command above before restarting the API. A Vault
+secret, when enabled, must contain the same least-privilege application URI,
+never a Mongo root URI. An explicit Vault address or AppRole setup fails
+closed on incomplete configuration, authentication, or read errors; it never
+silently falls back to the environment URI. A remote production Vault origin
+must use HTTPS.
+Adapt [`deploy/host-nginx.conf.example`](deploy/host-nginx.conf.example) to the
+existing TLS host; it replaces forwarding headers and proxies only to the
+loopback container port.
+
+After deployment, verify `/`, `/python-ide`, and `/graph-sketcher` anonymously,
+`/api/healthz`, `/api/readyz`, `/admin`, the absence or presence of student UI
+according to the approved flags, and `git diff --check`. If counts are enabled,
+verify both CS and Math POSTs and the protected Admin activity panel. The
+frontend build packages the reviewed Python IDE asset manifest; the backend
+does not stream an upstream asset archive at runtime.
 
 Project quota counters are rebuilt from non-deleted projects before the API
 starts listening. Project and counter writes remain separate MongoDB
 operations, so an abrupt process or database failure can temporarily leave the
 ledger over-counted; the next successful startup reconciliation repairs that
 drift before accepting traffic.
+
+Student record deletion uses an in-process operation gate to drain project,
+review, export, account-management, and provider-link work before its database
+sweep. The supplied Compose deployment therefore fixes the API to one named
+container and intentionally cannot be scaled with `docker compose --scale`.
+Do not remove that single-process boundary or run another API instance against
+this database unless the operation gate is first replaced with a tested
+database-distributed implementation.
 
 Authenticated project writes use a dedicated 80 MB JSON ceiling before the
 global 1 MB parser. This covers worst-case JSON escaping at the editor's

@@ -30,7 +30,14 @@ async function withRuntime<T>(
 		baseUrl: string,
 		currentSession: TestSession,
 		sessionOptions: { expires?: Date; maxAge?: number }
-	) => Promise<T>
+	) => Promise<T>,
+	features: {
+		studentAccountsEnabled: boolean;
+		studentOAuthEnabled: boolean;
+	} = {
+		studentAccountsEnabled: true,
+		studentOAuthEnabled: true
+	}
 ): Promise<T> {
 	const app = express();
 	const currentSession = {
@@ -61,7 +68,10 @@ async function withRuntime<T>(
 		(req as any).sessionOptions = sessionOptions;
 		next();
 	});
-	mountRuntimeAccountRoutes(app);
+	mountRuntimeAccountRoutes(app, {
+		analyticsRetentionDays: 90,
+		...features
+	});
 
 	const server = await new Promise<Server>((resolve) => {
 		const instance = app.listen(0, "127.0.0.1", () => resolve(instance));
@@ -173,6 +183,45 @@ describe("Admin-only account runtime", () => {
 		await withRuntime({}, async (baseUrl) => {
 			const response = await fetch(`${baseUrl}/python-assets/assets.zip`);
 			expect(response.status).toBe(404);
+		});
+	});
+
+	it("does not mount optional student or OAuth routes until enabled", async () => {
+		await withRuntime(
+			{},
+			async (baseUrl) => {
+				const responses = await Promise.all([
+					fetch(`${baseUrl}/students/session`),
+					fetch(`${baseUrl}/students/oauth/providers`),
+					fetch(`${baseUrl}/admins/students`)
+				]);
+				expect(responses.map(response => response.status)).toEqual([
+					404,
+					404,
+					404
+				]);
+			},
+			{
+				studentAccountsEnabled: false,
+				studentOAuthEnabled: false
+			}
+		);
+	});
+
+	it("keeps the classroom summary inside Julio's Admin session", async () => {
+		await withRuntime({}, async (baseUrl) => {
+			const protectedSummary = await fetch(
+				`${baseUrl}/admins/classroom-analytics/summary`
+			);
+			const retiredServiceSummary = await fetch(
+				`${baseUrl}/classroom-analytics/summary`
+			);
+
+			expect(protectedSummary.status).toBe(403);
+			expect(protectedSummary.headers.get("cache-control")).toBe(
+				"no-store"
+			);
+			expect(retiredServiceSummary.status).toBe(404);
 		});
 	});
 

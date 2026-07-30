@@ -9,6 +9,7 @@
 
 # local env files
 **/.env
+deploy/cs.env
 .env.local
 .env.*.local
 

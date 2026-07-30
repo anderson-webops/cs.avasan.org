@@ -1,0 +1,152 @@
+name: cs-avasan-org
+
+services:
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                VITE_CLASSROOM_PRIVACY_APPROVED: ${VITE_CLASSROOM_PRIVACY_APPROVED:-false}
+                VITE_CLASSROOM_USAGE_ENABLED: ${VITE_CLASSROOM_USAGE_ENABLED:-false}
+                VITE_SCHOOL_PRIVACY_CONTACT: ${VITE_SCHOOL_PRIVACY_CONTACT:-}
+                VITE_STUDENT_ACCOUNTS_ENABLED: ${VITE_STUDENT_ACCOUNTS_ENABLED:-false}
+                VITE_STUDENT_OAUTH_ENABLED: ${VITE_STUDENT_OAUTH_ENABLED:-false}
+        depends_on:
+            api:
+                condition: service_healthy
+        ports:
+            - "127.0.0.1:${CS_AVASAN_LISTEN_PORT:-8080}:8080"
+        restart: unless-stopped
+        read_only: true
+        cap_drop:
+            - ALL
+        security_opt:
+            - no-new-privileges:true
+        tmpfs:
+            - /tmp:rw,noexec,nosuid,size=32m
+        networks:
+            - edge
+        healthcheck:
+            test: ["CMD", "wget", "-q", "-O", "-", "http://127.0.0.1:8080/"]
+            interval: 30s
+            timeout: 5s
+            retries: 3
+            start_period: 10s
+
+    api:
+        # The student-deletion operation gate is intentionally process-local.
+        # A fixed container name makes Docker Compose reject attempts to scale
+        # this service beyond the one reviewed API process.
+        container_name: cs-avasan-org-api
+        build:
+            context: .
+            dockerfile: back-end/Dockerfile
+        depends_on:
+            mongo:
+                condition: service_healthy
+        environment:
+            APPLE_OAUTH_CLIENT_ID: ${APPLE_OAUTH_CLIENT_ID:-}
+            APPLE_OAUTH_KEY_ID: ${APPLE_OAUTH_KEY_ID:-}
+            APPLE_OAUTH_PRIVATE_KEY_BASE64: ${APPLE_OAUTH_PRIVATE_KEY_BASE64:-}
+            APPLE_OAUTH_TEAM_ID: ${APPLE_OAUTH_TEAM_ID:-}
+            BACKEND_HOST: 0.0.0.0
+            CLASSROOM_ANALYTICS_COLLECTION_ENABLED: ${CLASSROOM_ANALYTICS_COLLECTION_ENABLED:-false}
+            CLASSROOM_ANALYTICS_RETENTION_DAYS: ${CLASSROOM_ANALYTICS_RETENTION_DAYS:-90}
+            CLASSROOM_ORIGIN: https://cs.avasan.org
+            CLASSROOM_PRIVACY_APPROVED: ${CLASSROOM_PRIVACY_APPROVED:-false}
+            CROSS_SITE: "false"
+            GOOGLE_OAUTH_CLIENT_ID: ${GOOGLE_OAUTH_CLIENT_ID:-}
+            GOOGLE_OAUTH_CLIENT_SECRET: ${GOOGLE_OAUTH_CLIENT_SECRET:-}
+            HOST: 0.0.0.0
+            INTERNAL_DIAGNOSTICS_KEY: ${INTERNAL_DIAGNOSTICS_KEY:?set INTERNAL_DIAGNOSTICS_KEY}
+            MONGODB_URI: mongodb://${MONGO_APP_USERNAME:?set MONGO_APP_USERNAME}:${MONGO_APP_PASSWORD:?set MONGO_APP_PASSWORD}@mongo:27017/cs-avasan-org?authSource=cs-avasan-org
+            NODE_ENV: production
+            OAUTH_RATE_MAX: ${OAUTH_RATE_MAX:-120}
+            OAUTH_RATE_WINDOW_MS: ${OAUTH_RATE_WINDOW_MS:-900000}
+            PORT: "3008"
+            PYTHON_IDE_PROJECT_BODY_LIMIT: ${PYTHON_IDE_PROJECT_BODY_LIMIT:-80mb}
+            SCHOOL_PRIVACY_CONTACT: ${SCHOOL_PRIVACY_CONTACT:-}
+            SESSION_SECRET: ${SESSION_SECRET:?set SESSION_SECRET}
+            STUDENT_ACCOUNTS_ENABLED: ${STUDENT_ACCOUNTS_ENABLED:-false}
+            STUDENT_OAUTH_ENABLED: ${STUDENT_OAUTH_ENABLED:-false}
+            TRUST_PROXY_HOPS: "1"
+            VAULT_ADDR: ${VAULT_ADDR:-}
+            VAULT_MONGODB_SECRET_PATH: ${VAULT_MONGODB_SECRET_PATH:-secret/data/cs.avasan.org/mongodb}
+            VAULT_ROLE_ID: ${VAULT_ROLE_ID:-}
+            VAULT_SECRET_ID: ${VAULT_SECRET_ID:-}
+        expose:
+            - "3008"
+        restart: unless-stopped
+        read_only: true
+        cap_drop:
+            - ALL
+        security_opt:
+            - no-new-privileges:true
+        tmpfs:
+            - /tmp:rw,noexec,nosuid,size=32m
+        networks:
+            - edge
+            - data
+        healthcheck:
+            test:
+                - CMD
+                - node
+                - -e
+                - fetch('http://127.0.0.1:3008/readyz').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))
+            interval: 30s
+            timeout: 5s
+            retries: 5
+            start_period: 30s
+
+    admin-tools:
+        profiles:
+            - tools
+        build:
+            context: .
+            dockerfile: back-end/Dockerfile
+            target: admin-stage
+        depends_on:
+            mongo:
+                condition: service_healthy
+        environment:
+            MONGODB_URI: mongodb://${MONGO_APP_USERNAME:?set MONGO_APP_USERNAME}:${MONGO_APP_PASSWORD:?set MONGO_APP_PASSWORD}@mongo:27017/cs-avasan-org?authSource=cs-avasan-org
+            NODE_ENV: production
+        read_only: true
+        cap_drop:
+            - ALL
+        security_opt:
+            - no-new-privileges:true
+        tmpfs:
+            - /tmp:rw,noexec,nosuid,size=32m
+        networks:
+            - data
+
+    mongo:
+        image: mongo:8.0.12-noble@sha256:258ab0a4c63cc4c9ae1bbc65d7e3a431cfe9794d8a5c6d6e050bb85f7e2e63ae
+        environment:
+            MONGO_APP_PASSWORD: ${MONGO_APP_PASSWORD:?set MONGO_APP_PASSWORD}
+            MONGO_APP_USERNAME: ${MONGO_APP_USERNAME:?set MONGO_APP_USERNAME}
+            MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:?set MONGO_ROOT_PASSWORD}
+            MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME:?set MONGO_ROOT_USERNAME}
+        restart: unless-stopped
+        networks:
+            - data
+        volumes:
+            - cs-avasan-mongo:/data/db
+            - ./deploy/mongo-init/01-create-app-user.js:/docker-entrypoint-initdb.d/01-create-app-user.js:ro
+        healthcheck:
+            test:
+                - CMD-SHELL
+                - mongosh --quiet --username "$$MONGO_INITDB_ROOT_USERNAME" --password "$$MONGO_INITDB_ROOT_PASSWORD" --authenticationDatabase admin --eval "quit(db.adminCommand('ping').ok ? 0: 2)"
+            interval: 30s
+            timeout: 5s
+            retries: 5
+            start_period: 30s
+
+networks:
+    edge:
+    data:
+        internal: true
+
+volumes:
+    cs-avasan-mongo:

@@ -1,18 +1,12 @@
-import type {
-	Request as ExpressRequest,
-	RequestHandler,
-	Response
-} from "express";
+import type { Request as ExpressRequest, RequestHandler, Response } from "express";
 import type { ExternalIdentityProvider } from "../../types/entities/IExternalIdentity.js";
 import type { CustomSession } from "../../types/session/CustomSession.js";
 import { Buffer } from "node:buffer";
 import { createHash, randomBytes, timingSafeEqual } from "node:crypto";
 import { OAuthLoginAttempt } from "../../models/schemas/OAuthLoginAttempt.js";
 import { Student } from "../../models/schemas/Student.js";
-import {
-	createOAuthAuthorizationRequest,
-	exchangeOAuthAuthorizationCode
-} from "../../utils/oauthClient.js";
+import { acquireStudentDataWriteLease } from "../../security/studentDataWriteBarrier.js";
+import { createOAuthAuthorizationRequest, exchangeOAuthAuthorizationCode } from "../../utils/oauthClient.js";
 import {
 	enabledOAuthProviders,
 	normalizeOAuthReturnTo,
@@ -27,10 +21,7 @@ import {
 	STUDENT_OAUTH_ATTEMPT_LIFETIME_MS,
 	studentOAuthBrowserBindingFromRequest
 } from "../../utils/studentOAuthCookies.js";
-import {
-	hasLiveAuthenticatedIdentity,
-	setStudentIdentity
-} from "./studentController.js";
+import { hasLiveAuthenticatedIdentity, setStudentIdentity } from "./studentController.js";
 
 const OAUTH_TOKEN_PATTERN = /^[\w~-]{32,256}$/u;
 const OAUTH_SUBJECT_MAX_LENGTH = 255;
@@ -52,24 +43,17 @@ function hashSecret(value: string) {
 	return createHash("sha256").update(value).digest("hex");
 }
 
-function externalSubjectHash(
-	provider: ExternalIdentityProvider,
-	subject: string
-) {
+function externalSubjectHash(provider: ExternalIdentityProvider, subject: string) {
 	return hashSecret(`${provider}\0${subject}`);
 }
 
 function secureHashMatch(candidate: string, expectedHash: string) {
-	if (
-		!OAUTH_TOKEN_PATTERN.test(candidate)
-		|| !/^[a-f\d]{64}$/iu.test(expectedHash)
-	) {
+	if (!OAUTH_TOKEN_PATTERN.test(candidate) || !/^[a-f\d]{64}$/iu.test(expectedHash)) {
 		return false;
 	}
 	const candidateHash = Buffer.from(hashSecret(candidate), "hex");
 	const expected = Buffer.from(expectedHash, "hex");
-	return candidateHash.length === expected.length
-		&& timingSafeEqual(candidateHash, expected);
+	return candidateHash.length === expected.length && timingSafeEqual(candidateHash, expected);
 }
 
 function requestParameter(req: ExpressRequest, key: string) {
@@ -77,10 +61,7 @@ function requestParameter(req: ExpressRequest, key: string) {
 	return typeof value === "string" ? value : null;
 }
 
-function callbackRequest(
-	provider: ExternalIdentityProvider,
-	req: ExpressRequest
-): globalThis.Request | URL {
+function callbackRequest(provider: ExternalIdentityProvider, req: ExpressRequest): globalThis.Request | URL {
 	if (req.method !== "POST") {
 		const callbackUrl = new URL(oauthCallbackUrl(provider));
 		for (const key of ["code", "error", "error_description", "state"]) {
@@ -102,11 +83,7 @@ function callbackRequest(
 	});
 }
 
-function withOAuthResult(
-	returnTo: string,
-	key: "studentOAuthError" | "studentOAuthStatus",
-	value: string
-) {
+function withOAuthResult(returnTo: string, key: "studentOAuthError" | "studentOAuthStatus", value: string) {
 	const destination = new URL(returnTo, oauthAuthOrigin());
 	destination.searchParams.delete("studentOAuthError");
 	destination.searchParams.delete("studentOAuthStatus");
@@ -114,29 +91,19 @@ function withOAuthResult(
 	return `${destination.pathname}${destination.search}${destination.hash}`;
 }
 
-function redirectWithError(
-	res: Response,
-	returnTo: string,
-	errorCode: OAuthErrorCode
-) {
-	return res.redirect(
-		303,
-		withOAuthResult(returnTo, "studentOAuthError", errorCode)
-	);
+function redirectWithError(res: Response, returnTo: string, errorCode: OAuthErrorCode) {
+	return res.redirect(303, withOAuthResult(returnTo, "studentOAuthError", errorCode));
 }
 
 function logOAuthFailure(provider: ExternalIdentityProvider, error: unknown) {
 	const category = error instanceof Error ? error.name : "UnknownError";
-	console.error(
-		`Student OAuth ${provider} sign-in failed (${category}).`
-	);
+	console.error(`Student OAuth ${provider} sign-in failed (${category}).`);
 }
 
 function duplicateKeyError(error: unknown) {
-	return typeof error === "object"
-		&& error !== null
-		&& "code" in error
-		&& (error as { code?: unknown }).code === 11000;
+	return (
+		typeof error === "object" && error !== null && "code" in error && (error as { code?: unknown }).code === 11000
+	);
 }
 
 async function createAttempt(
@@ -154,17 +121,11 @@ async function createAttempt(
 	clearStudentOAuthBrowserBindings(res);
 
 	try {
-		const authorization = await createOAuthAuthorizationRequest(
-			provider,
-			state,
-			nonce
-		);
+		const authorization = await createOAuthAuthorizationRequest(provider, state, nonce);
 		await OAuthLoginAttempt.create({
 			browserBindingHash: hashSecret(browserBinding),
 			codeVerifier: authorization.codeVerifier,
-			expiresAt: new Date(
-				Date.now() + STUDENT_OAUTH_ATTEMPT_LIFETIME_MS
-			),
+			expiresAt: new Date(Date.now() + STUDENT_OAUTH_ATTEMPT_LIFETIME_MS),
 			mode: linkProof ? "link" : "signin",
 			nonce,
 			provider,
@@ -179,7 +140,9 @@ async function createAttempt(
 		await OAuthLoginAttempt.deleteOne({
 			provider,
 			stateHash: hashSecret(state)
-		}).exec().catch(() => undefined);
+		})
+			.exec()
+			.catch(() => undefined);
 		clearStudentOAuthBrowserBinding(res, provider);
 		throw error;
 	}
@@ -281,11 +244,7 @@ export const finishStudentOAuth: RequestHandler = async (req, res) => {
 	if (!isProvider(provider) || !oauthProviderCredentials(provider)) {
 		return redirectWithError(res, "/", "provider_unavailable");
 	}
-	if (
-		provider === "apple"
-		&& req.method === "POST"
-		&& !req.is("application/x-www-form-urlencoded")
-	) {
+	if (provider === "apple" && req.method === "POST" && !req.is("application/x-www-form-urlencoded")) {
 		return res.sendStatus(415);
 	}
 
@@ -300,77 +259,53 @@ export const finishStudentOAuth: RequestHandler = async (req, res) => {
 		provider,
 		stateHash: hashSecret(state)
 	})
-		.select(
-			"+browserBindingHash +codeVerifier +nonce +stateHash"
-			+ " +studentID +studentSessionVersion"
-		)
+		.select("+browserBindingHash +codeVerifier +nonce +stateHash" + " +studentID +studentSessionVersion")
 		.exec();
 	const returnTo = normalizeOAuthReturnTo(attempt?.returnTo);
-	const browserBinding = studentOAuthBrowserBindingFromRequest(
-		req,
-		provider
-	);
-	if (
-		!attempt
-		|| !browserBinding
-		|| !secureHashMatch(browserBinding, attempt.browserBindingHash)
-	) {
+	const browserBinding = studentOAuthBrowserBindingFromRequest(req, provider);
+	if (!attempt || !browserBinding || !secureHashMatch(browserBinding, attempt.browserBindingHash)) {
 		clearStudentOAuthBrowserBinding(res, provider);
-		return redirectWithError(
-			res,
-			returnTo,
-			attempt?.mode === "link" ? "link_expired" : "provider_error"
-		);
+		return redirectWithError(res, returnTo, attempt?.mode === "link" ? "link_expired" : "provider_error");
 	}
 
 	const consumedAttempt = await OAuthLoginAttempt.findOneAndDelete({
 		_id: attempt._id,
 		expiresAt: { $gt: new Date() }
 	})
-		.select(
-			"+browserBindingHash +codeVerifier +nonce +stateHash"
-			+ " +studentID +studentSessionVersion"
-		)
+		.select("+browserBindingHash +codeVerifier +nonce +stateHash" + " +studentID +studentSessionVersion")
 		.exec();
 	clearStudentOAuthBrowserBindings(res);
 	if (!consumedAttempt) {
-		return redirectWithError(
-			res,
-			returnTo,
-			attempt.mode === "link" ? "link_expired" : "provider_error"
-		);
+		return redirectWithError(res, returnTo, attempt.mode === "link" ? "link_expired" : "provider_error");
 	}
 
 	const providerError = requestParameter(req, "error");
 	if (providerError) {
-		const cancelled = providerError === "access_denied"
-			|| providerError === "user_cancelled_authorize";
-		return redirectWithError(
-			res,
-			returnTo,
-			cancelled ? "cancelled" : "provider_error"
-		);
+		const cancelled = providerError === "access_denied" || providerError === "user_cancelled_authorize";
+		return redirectWithError(res, returnTo, cancelled ? "cancelled" : "provider_error");
 	}
-	if (
-		consumedAttempt.mode === "signin"
-		&& await hasLiveAuthenticatedIdentity(req)
-	) {
+	if (consumedAttempt.mode === "signin" && (await hasLiveAuthenticatedIdentity(req))) {
 		return redirectWithError(res, returnTo, "already_signed_in");
 	}
 
+	let releaseLinkWriteLease: (() => void) | null = null;
+	if (consumedAttempt.mode === "link") {
+		if (!consumedAttempt.studentID || !Number.isSafeInteger(consumedAttempt.studentSessionVersion)) {
+			return redirectWithError(res, returnTo, "link_expired");
+		}
+		releaseLinkWriteLease = acquireStudentDataWriteLease(consumedAttempt.studentID.toString().toLowerCase());
+		if (!releaseLinkWriteLease) {
+			return redirectWithError(res, returnTo, "link_expired");
+		}
+	}
+
 	try {
-		const claims = await exchangeOAuthAuthorizationCode(
-			provider,
-			callbackRequest(provider, req),
-			{
-				codeVerifier: consumedAttempt.codeVerifier,
-				nonce: consumedAttempt.nonce,
-				state
-			}
-		);
-		const subject = typeof claims.sub === "string"
-			? claims.sub.trim()
-			: "";
+		const claims = await exchangeOAuthAuthorizationCode(provider, callbackRequest(provider, req), {
+			codeVerifier: consumedAttempt.codeVerifier,
+			nonce: consumedAttempt.nonce,
+			state
+		});
+		const subject = typeof claims.sub === "string" ? claims.sub.trim() : "";
 		if (!subject || subject.length > OAUTH_SUBJECT_MAX_LENGTH) {
 			return redirectWithError(res, returnTo, "provider_error");
 		}
@@ -379,14 +314,6 @@ export const finishStudentOAuth: RequestHandler = async (req, res) => {
 
 		let authenticatedStudent;
 		if (consumedAttempt.mode === "link") {
-			if (
-				!consumedAttempt.studentID
-				|| !Number.isSafeInteger(
-					consumedAttempt.studentSessionVersion
-				)
-			) {
-				return redirectWithError(res, returnTo, "link_expired");
-			}
 			try {
 				authenticatedStudent = await Student.findOneAndUpdate(
 					{
@@ -396,8 +323,7 @@ export const finishStudentOAuth: RequestHandler = async (req, res) => {
 						externalAuthProvider: { $exists: false },
 						externalAuthSubjectHash: { $exists: false },
 						pendingSetupCodeHash: { $exists: true },
-						sessionVersion:
-							consumedAttempt.studentSessionVersion
+						sessionVersion: consumedAttempt.studentSessionVersion
 					},
 					{
 						$inc: { sessionVersion: 1 },
@@ -422,11 +348,7 @@ export const finishStudentOAuth: RequestHandler = async (req, res) => {
 			}
 			catch (error) {
 				if (duplicateKeyError(error)) {
-					return redirectWithError(
-						res,
-						returnTo,
-						"identity_conflict"
-					);
+					return redirectWithError(res, returnTo, "identity_conflict");
 				}
 				throw error;
 			}
@@ -461,15 +383,14 @@ export const finishStudentOAuth: RequestHandler = async (req, res) => {
 		}
 		return res.redirect(
 			303,
-			withOAuthResult(
-				returnTo,
-				"studentOAuthStatus",
-				consumedAttempt.mode === "link" ? "linked" : "success"
-			)
+			withOAuthResult(returnTo, "studentOAuthStatus", consumedAttempt.mode === "link" ? "linked" : "success")
 		);
 	}
 	catch (error) {
 		logOAuthFailure(provider, error);
 		return redirectWithError(res, returnTo, "provider_error");
+	}
+	finally {
+		releaseLinkWriteLease?.();
 	}
 };

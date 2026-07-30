@@ -3,12 +3,32 @@ publish = "front-end/dist"
 command = "npm run build"
 
 [build.environment]
-NODE_VERSION = "20"
+NODE_VERSION = "22.22.2"
+VITE_CLASSROOM_PRIVACY_APPROVED = "false"
+VITE_CLASSROOM_USAGE_ENABLED = "false"
+VITE_STUDENT_ACCOUNTS_ENABLED = "false"
+VITE_STUDENT_OAUTH_ENABLED = "false"
+
+[[redirects]]
+from = "/api/*"
+to = "/api-unavailable"
+status = 404
+force = true
 
 [[redirects]]
 from = "/*"
 to = "/index.html"
 status = 200
+
+[[headers]]
+for = "/*"
+
+[headers.values]
+Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "no-referrer"
+Permissions-Policy = "camera=(), geolocation=(), microphone=()"
+X-Frame-Options = "DENY"
 
 [[headers]]
 for = "/site.webmanifest"

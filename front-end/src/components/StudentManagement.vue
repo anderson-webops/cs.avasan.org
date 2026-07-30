@@ -1,13 +1,17 @@
 <script lang="ts" setup>
 import type {
 	StudentAccessCode,
-	StudentAccount
+	StudentAccount,
+	StudentDeletionReceipt
 } from "@/modules/studentAccounts";
 import { computed, onMounted, ref } from "vue";
 import StudentProjectReview from "@/components/StudentProjectReview.vue";
 import { clearAdminSessionOnAuthorizationError } from "@/modules/adminSession";
 import {
 	createAdminStudent,
+	deleteAdminStudentRecords,
+	exportAdminStudentRecords,
+	fetchAdminStudentDeletionReceipts,
 	fetchAdminStudents,
 	resetAdminStudentAccess,
 	setAdminStudentActive
@@ -16,6 +20,8 @@ import { useAppStore } from "@/stores/app";
 
 const app = useAppStore();
 const students = ref<StudentAccount[]>([]);
+const deletionReceipts = ref<StudentDeletionReceipt[]>([]);
+const deletionReceiptRetentionDays = ref(90);
 const loading = ref(true);
 const busyStudentID = ref("");
 const creating = ref(false);
@@ -23,6 +29,10 @@ const username = ref("");
 const createTeacherPassword = ref("");
 const resetCandidateID = ref("");
 const resetTeacherPassword = ref("");
+const recordCandidateID = ref("");
+const recordAction = ref<"delete" | "export" | "">("");
+const recordTeacherPassword = ref("");
+const deleteConfirmation = ref("");
 const error = ref("");
 const status = ref("");
 const revealedAccess = ref<StudentAccessCode | null>(null);
@@ -128,10 +138,15 @@ function dismissAccessCode() {
 
 function clearSensitiveManagementState() {
 	students.value = [];
+	deletionReceipts.value = [];
 	dismissAccessCode();
 	createTeacherPassword.value = "";
 	resetTeacherPassword.value = "";
 	resetCandidateID.value = "";
+	recordCandidateID.value = "";
+	recordAction.value = "";
+	recordTeacherPassword.value = "";
+	deleteConfirmation.value = "";
 	busyStudentID.value = "";
 }
 
@@ -149,7 +164,13 @@ async function loadStudents() {
 	loading.value = true;
 	error.value = "";
 	try {
-		students.value = await fetchAdminStudents();
+		const [loadedStudents, loadedReceipts] = await Promise.all([
+			fetchAdminStudents(),
+			fetchAdminStudentDeletionReceipts()
+		]);
+		students.value = loadedStudents;
+		deletionReceipts.value = loadedReceipts.receipts;
+		deletionReceiptRetentionDays.value = loadedReceipts.retentionDays;
 	} catch (caught: unknown) {
 		handleManagementError(caught, "Couldn’t load the student roster.");
 	} finally {
@@ -188,6 +209,7 @@ function startReset(studentID: string) {
 	error.value = "";
 	status.value = "";
 	dismissAccessCode();
+	cancelRecordAction();
 	resetTeacherPassword.value = "";
 	resetCandidateID.value = studentID;
 }
@@ -195,6 +217,134 @@ function startReset(studentID: string) {
 function cancelReset() {
 	resetTeacherPassword.value = "";
 	resetCandidateID.value = "";
+}
+
+function startRecordAction(studentID: string, action: "delete" | "export") {
+	error.value = "";
+	status.value = "";
+	dismissAccessCode();
+	cancelReset();
+	recordCandidateID.value = studentID;
+	recordAction.value = action;
+	recordTeacherPassword.value = "";
+	deleteConfirmation.value = "";
+}
+
+function cancelRecordAction() {
+	recordCandidateID.value = "";
+	recordAction.value = "";
+	recordTeacherPassword.value = "";
+	deleteConfirmation.value = "";
+}
+
+function downloadJsonFile(filename: string, value: unknown) {
+	const blob = new Blob([`${JSON.stringify(value, null, 2)}\n`], {
+		type: "application/json"
+	});
+	downloadBlobFile(filename, blob);
+}
+
+function downloadBlobFile(filename: string, blob: Blob) {
+	const href = URL.createObjectURL(blob);
+	const anchor = document.createElement("a");
+	anchor.href = href;
+	anchor.download = filename;
+	anchor.rel = "noopener";
+	anchor.click();
+	URL.revokeObjectURL(href);
+}
+
+function downloadStudentExport(
+	student: StudentAccount,
+	exportDownload: Awaited<ReturnType<typeof exportAdminStudentRecords>>
+) {
+	downloadBlobFile(
+		`${student.username}-classroom-records.json`,
+		exportDownload.blob
+	);
+}
+
+function downloadDeletionReceipt(receipt: StudentDeletionReceipt) {
+	downloadJsonFile(
+		`${receipt.subject.username}-deletion-receipt-${receipt.operationID}.json`,
+		receipt
+	);
+}
+
+async function exportRecords(student: StudentAccount) {
+	if (
+		busyStudentID.value ||
+		recordCandidateID.value !== student._id ||
+		recordAction.value !== "export" ||
+		!recordTeacherPassword.value
+	) {
+		return;
+	}
+
+	busyStudentID.value = student._id;
+	error.value = "";
+	status.value = "";
+	try {
+		const exportDownload = await exportAdminStudentRecords(
+			student._id,
+			recordTeacherPassword.value
+		);
+		downloadStudentExport(student, exportDownload);
+		status.value = `Exported ${student.username}.`;
+		cancelRecordAction();
+	} catch (caught: unknown) {
+		handleManagementError(
+			caught,
+			"Couldn’t export this student’s records."
+		);
+	} finally {
+		recordTeacherPassword.value = "";
+		busyStudentID.value = "";
+	}
+}
+
+async function deleteRecords(student: StudentAccount) {
+	if (
+		busyStudentID.value ||
+		recordCandidateID.value !== student._id ||
+		recordAction.value !== "delete" ||
+		!recordTeacherPassword.value ||
+		deleteConfirmation.value.trim().toLowerCase() !==
+			student.username.toLowerCase()
+	) {
+		return;
+	}
+
+	busyStudentID.value = student._id;
+	error.value = "";
+	status.value = "";
+	try {
+		const result = await deleteAdminStudentRecords(
+			student._id,
+			deleteConfirmation.value,
+			recordTeacherPassword.value
+		);
+		students.value = students.value.filter(
+			candidate => candidate._id !== student._id
+		);
+		deletionReceipts.value = [
+			result.receipt,
+			...deletionReceipts.value.filter(
+				receipt => receipt.operationID !== result.receipt.operationID
+			)
+		];
+		downloadDeletionReceipt(result.receipt);
+		status.value = `Deleted ${student.username} and ${result.deletedRecords.projects} project records. The short-lived deletion receipt was downloaded. Operation ${result.operation.id}. Complete the documented backup follow-up.`;
+		cancelRecordAction();
+	} catch (caught: unknown) {
+		handleManagementError(
+			caught,
+			"Couldn’t delete this student’s records."
+		);
+	} finally {
+		recordTeacherPassword.value = "";
+		busyStudentID.value = "";
+	}
 }
 
 async function resetAccess(student: StudentAccount) {
@@ -286,6 +436,7 @@ onMounted(loadStudents);
 				<input
 					id="new-student-username"
 					v-model="username"
+					aria-describedby="new-student-username-hint"
 					autocomplete="off"
 					autocapitalize="none"
 					maxlength="24"
@@ -294,6 +445,12 @@ onMounted(loadStudents);
 					spellcheck="false"
 					type="text"
 				/>
+				<small id="new-student-username-hint">
+					Use a school-approved alias such as river-7. Do not use a
+					full name, email, birthdate, student number, or other direct
+					identifier. Keep the alias-to-roster mapping only in the
+					school’s approved system.
+				</small>
 			</div>
 			<div class="student-management__field">
 				<label for="create-student-teacher-password">
@@ -464,6 +621,22 @@ onMounted(loadStudents);
 								student.active === false ? "Enable" : "Disable"
 							}}
 						</button>
+						<button
+							class="site-button site-button--secondary student-management__button"
+							:disabled="!!busyStudentID"
+							type="button"
+							@click="startRecordAction(student._id, 'export')"
+						>
+							Export records
+						</button>
+						<button
+							class="site-button site-button--secondary student-management__button student-management__disable"
+							:disabled="!!busyStudentID"
+							type="button"
+							@click="startRecordAction(student._id, 'delete')"
+						>
+							Delete records
+						</button>
 					</div>
 				</div>
 
@@ -512,12 +685,189 @@ onMounted(loadStudents);
 					</div>
 				</form>
 
+				<form
+					v-if="
+						recordCandidateID === student._id &&
+						recordAction === 'export'
+					"
+					class="student-management__record-action"
+					@submit.prevent="exportRecords(student)"
+				>
+					<div>
+						<h4>Export account and educational records</h4>
+						<p>
+							Downloads safe account metadata, projects, and
+							Julio’s review copies as JSON. The inventory counts
+							temporary provider attempts, but their credential
+							and proof values are excluded.
+						</p>
+					</div>
+					<div class="student-management__field">
+						<label :for="`export-teacher-password-${student._id}`">
+							Julio’s password
+						</label>
+						<input
+							:id="`export-teacher-password-${student._id}`"
+							v-model="recordTeacherPassword"
+							autocomplete="current-password"
+							required
+							type="password"
+						/>
+					</div>
+					<div class="student-management__reset-actions">
+						<button
+							class="site-button site-button--primary student-management__button"
+							:disabled="busyStudentID === student._id"
+							type="submit"
+						>
+							{{
+								busyStudentID === student._id
+									? "Preparing…"
+									: "Download JSON"
+							}}
+						</button>
+						<button
+							class="site-button site-button--secondary student-management__button"
+							:disabled="busyStudentID === student._id"
+							type="button"
+							@click="cancelRecordAction"
+						>
+							Cancel
+						</button>
+					</div>
+				</form>
+
+				<form
+					v-if="
+						recordCandidateID === student._id &&
+						recordAction === 'delete'
+					"
+					class="student-management__record-action student-management__record-action--delete"
+					@submit.prevent="deleteRecords(student)"
+				>
+					<div>
+						<h4>Permanently delete student records</h4>
+						<p>
+							This revokes every signed session and permanently
+							removes the account, password or provider
+							connection, pending provider attempts, Python
+							projects, and Julio’s review copies. Download an
+							export first if the school needs one. Afterward, a
+							short-lived subject-linked deletion receipt is
+							downloaded and remains available below so Julio can
+							complete the school’s approved deletion process for
+							any retained backup copy.
+						</p>
+					</div>
+					<div class="student-management__field">
+						<label :for="`delete-confirmation-${student._id}`">
+							Type {{ student.username }} to confirm
+						</label>
+						<input
+							:id="`delete-confirmation-${student._id}`"
+							v-model="deleteConfirmation"
+							autocomplete="off"
+							:pattern="student.username"
+							required
+							spellcheck="false"
+							type="text"
+						/>
+					</div>
+					<div class="student-management__field">
+						<label :for="`delete-teacher-password-${student._id}`">
+							Julio’s password
+						</label>
+						<input
+							:id="`delete-teacher-password-${student._id}`"
+							v-model="recordTeacherPassword"
+							autocomplete="current-password"
+							required
+							type="password"
+						/>
+					</div>
+					<div class="student-management__reset-actions">
+						<button
+							class="site-button site-button--primary student-management__button student-management__delete-button"
+							:disabled="
+								busyStudentID === student._id ||
+								deleteConfirmation.trim().toLowerCase() !==
+									student.username.toLowerCase()
+							"
+							type="submit"
+						>
+							{{
+								busyStudentID === student._id
+									? "Deleting…"
+									: "Permanently delete"
+							}}
+						</button>
+						<button
+							class="site-button site-button--secondary student-management__button"
+							:disabled="busyStudentID === student._id"
+							type="button"
+							@click="cancelRecordAction"
+						>
+							Cancel
+						</button>
+					</div>
+				</form>
+
 				<StudentProjectReview
 					:student-id="student._id"
 					:username="student.username"
 				/>
 			</article>
 		</div>
+
+		<section
+			v-if="deletionReceipts.length"
+			class="student-management__receipts"
+			aria-labelledby="student-deletion-receipts-title"
+		>
+			<div>
+				<h3 id="student-deletion-receipts-title">
+					Recent deletion receipts
+				</h3>
+				<p>
+					These subject-linked receipts are available for up to
+					{{ deletionReceiptRetentionDays }} days so Julio can finish
+					the school’s approved backup-deletion follow-up. Download
+					only into that approved system.
+				</p>
+			</div>
+			<ul>
+				<li
+					v-for="receipt in deletionReceipts"
+					:key="receipt.operationID"
+				>
+					<div>
+						<strong>{{ receipt.subject.username }}</strong>
+						<span
+							class="student-management__receipt-state"
+							:class="{
+								'is-warning': receipt.status !== 'completed'
+							}"
+						>
+							{{ receipt.status }}
+						</span>
+						<code>{{ receipt.operationID }}</code>
+						<small>
+							Requested
+							{{ formatRosterDate(receipt.requestedAt) }};
+							available through
+							{{ formatRosterDate(receipt.expiresAt) }}
+						</small>
+					</div>
+					<button
+						class="site-button site-button--secondary student-management__button"
+						type="button"
+						@click="downloadDeletionReceipt(receipt)"
+					>
+						Download receipt
+					</button>
+				</li>
+			</ul>
+		</section>
 	</section>
 </template>
 
@@ -549,7 +899,9 @@ onMounted(loadStudents);
 .student-management__verification,
 .student-management__empty,
 .student-management__reset p,
-.student-management__access-code p {
+.student-management__record-action p,
+.student-management__access-code p,
+.student-management__receipts p {
 	color: var(--color-ink-soft);
 	line-height: 1.55;
 }
@@ -733,7 +1085,99 @@ onMounted(loadStudents);
 	background: var(--color-error-surface);
 }
 
-.student-management__reset .student-management__field {
+.student-management__record-action {
+	display: grid;
+	gap: 0.75rem;
+	padding: 0.9rem;
+	border: 1px solid var(--color-border-strong);
+	border-radius: 14px;
+	background: var(--color-surface-strong);
+}
+
+.student-management__record-action--delete {
+	border-color: var(--color-error-border);
+	background: var(--color-error-surface);
+}
+
+.student-management__record-action h4 {
+	margin: 0 0 0.25rem;
+	font-size: 1rem;
+	font-weight: 900;
+}
+
+.student-management__receipts {
+	display: grid;
+	gap: 0.75rem;
+	padding: 1rem;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+	background: var(--color-surface-muted);
+}
+
+.student-management__receipts > div {
+	display: grid;
+	gap: 0.25rem;
+}
+
+.student-management__receipts h3 {
+	font-size: 1.05rem;
+}
+
+.student-management__receipts ul {
+	display: grid;
+	gap: 0.6rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.student-management__receipts li {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+	padding: 0.75rem;
+	border: 1px solid var(--color-border);
+	border-radius: 12px;
+	background: var(--color-surface-strong);
+}
+
+.student-management__receipts li > div {
+	display: grid;
+	gap: 0.25rem;
+	min-width: 0;
+}
+
+.student-management__receipts code {
+	overflow-wrap: anywhere;
+	color: var(--color-ink-soft);
+	font-size: 0.78rem;
+}
+
+.student-management__receipts small {
+	color: var(--color-ink-soft);
+}
+
+.student-management__receipt-state {
+	width: fit-content;
+	color: var(--color-success-text);
+	font-size: 0.75rem;
+	font-weight: 800;
+	text-transform: capitalize;
+}
+
+.student-management__receipt-state.is-warning {
+	color: var(--color-error-text);
+}
+
+.student-management__delete-button {
+	border-color: #9f1239;
+	background: #9f1239;
+	color: white;
+}
+
+.student-management__reset .student-management__field,
+.student-management__record-action .student-management__field {
 	max-width: 24rem;
 }
 
@@ -744,6 +1188,11 @@ onMounted(loadStudents);
 	}
 
 	.student-management__student-heading {
+		align-items: flex-start;
+		flex-direction: column;
+	}
+
+	.student-management__receipts li {
 		align-items: flex-start;
 		flex-direction: column;
 	}
