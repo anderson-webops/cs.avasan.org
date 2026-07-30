@@ -25,6 +25,7 @@ declare module 'vue' {
     StudentAccess: typeof import('./components/StudentAccess.vue')['default']
     StudentManagement: typeof import('./components/StudentManagement.vue')['default']
     StudentProjectReview: typeof import('./components/StudentProjectReview.vue')['default']
+    TheFooter: typeof import('./components/TheFooter.vue')['default']
     TheHeader: typeof import('./components/TheHeader.vue')['default']
   }
 }
