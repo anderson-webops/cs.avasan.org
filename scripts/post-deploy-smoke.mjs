@@ -1,5 +1,9 @@
 import process from "node:process";
 import { pathToFileURL } from "node:url";
+import {
+	smokeErrorMessage,
+	smokeRequest
+} from "./http-smoke-client.mjs";
 import { runProductionGraphSketcherSmoke } from "./production-graph-sketcher-smoke.mjs";
 
 const productionOrigin = process.env.CS_SITE_ORIGIN || "https://cs.avasan.org";
@@ -16,19 +20,10 @@ function assertion(condition, message) {
 
 async function request(path, init = {}) {
 	const url = new URL(path, productionOrigin);
-	const controller = new AbortController();
-	const timeout = setTimeout(() => controller.abort(), timeoutMs);
-
-	try {
-		return await fetch(url, {
-			...init,
-			cache: "no-store",
-			signal: controller.signal
-		});
-	}
-	finally {
-		clearTimeout(timeout);
-	}
+	return await smokeRequest(url, {
+		...init,
+		timeoutMs
+	});
 }
 
 function validateReleaseMetadata(metadata, path) {
@@ -176,7 +171,7 @@ export async function runProductionSmoke() {
 const invokedUrl = process.argv[1] ? pathToFileURL(process.argv[1]).href : "";
 if (import.meta.url === invokedUrl) {
 	runProductionSmoke().catch((error) => {
-		console.error(error instanceof Error ? error.message : error);
+		console.error(smokeErrorMessage(error));
 		process.exitCode = 1;
 	});
 }

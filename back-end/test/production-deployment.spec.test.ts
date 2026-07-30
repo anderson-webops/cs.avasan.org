@@ -99,6 +99,7 @@ describe("versioned full-stack production deployment", () => {
 		const postDeployWorkflow = repositoryFile(
 			".github/workflows/post-deploy.yml"
 		);
+		const httpSmokeClient = repositoryFile("scripts/http-smoke-client.mjs");
 		const productionSmoke = repositoryFile("scripts/post-deploy-smoke.mjs");
 		const rootPackage = JSON.parse(repositoryFile("package.json")) as {
 			version: string;
@@ -131,6 +132,14 @@ describe("versioned full-stack production deployment", () => {
 		expect(productionSmoke).toContain(
 			"The public site and API report different release identities."
 		);
+		expect(productionSmoke).not.toContain("fetch(");
+		expect(httpSmokeClient).toContain('import http from "node:http"');
+		expect(httpSmokeClient).toContain('import https from "node:https"');
+		expect(httpSmokeClient).toContain("MAX_SAME_ORIGIN_REDIRECTS = 5");
+		expect(httpSmokeClient).toContain(
+			"Refused cross-origin smoke-test redirect"
+		);
+		expect(httpSmokeClient).toContain("Caused by:");
 		expect(postDeployWorkflow).toContain("workflow_dispatch:");
 		expect(postDeployWorkflow).toContain("expected_release:");
 		expect(postDeployWorkflow).toContain("expected_revision:");
