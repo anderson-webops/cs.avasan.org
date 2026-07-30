@@ -52,6 +52,15 @@ async function request(path, init = {}) {
 	});
 }
 
+export async function readSmokeJson(response, path) {
+	try {
+		return await response.json();
+	}
+	catch {
+		throw new Error(`${path} returned invalid JSON.`);
+	}
+}
+
 function validateReleaseMetadata(metadata, path) {
 	assertion(
 		metadata
@@ -76,7 +85,7 @@ async function releaseMetadata(path) {
 		response.headers.get("set-cookie") === null,
 		`${path} unexpectedly set a cookie.`
 	);
-	return validateReleaseMetadata(await response.json(), path);
+	return validateReleaseMetadata(await readSmokeJson(response, path), path);
 }
 
 async function verifyReleaseIdentity() {
@@ -149,14 +158,16 @@ async function verifyPublicRoutes() {
 
 async function verifyApiReadiness() {
 	const healthResponse = await request("/api/healthz");
+	const health = await readSmokeJson(healthResponse, "/api/healthz");
 	assertion(
-		healthResponse.ok && (await healthResponse.json()).ok === true,
+		healthResponse.ok && health.ok === true,
 		`/api/healthz returned HTTP ${healthResponse.status} or an invalid body.`
 	);
 
 	const readyResponse = await request("/api/readyz");
+	const readiness = await readSmokeJson(readyResponse, "/api/readyz");
 	assertion(
-		readyResponse.ok && (await readyResponse.json()).ready === true,
+		readyResponse.ok && readiness.ready === true,
 		`/api/readyz returned HTTP ${readyResponse.status} or an invalid body.`
 	);
 }
@@ -180,7 +191,7 @@ async function verifyPrivacyFeatureBoundaries() {
 		"Unauthenticated student session probe unexpectedly set a cookie."
 	);
 	if (expectedStudentAccountsEnabled) {
-		const session = await student.json();
+		const session = await readSmokeJson(student, "/api/students/session");
 		assertion(
 			session
 			&& typeof session === "object"
@@ -210,7 +221,10 @@ async function verifyPrivacyFeatureBoundaries() {
 		"Student OAuth provider probe unexpectedly set a cookie."
 	);
 	if (expectedStudentOAuthEnabled) {
-		const providers = await oauth.json();
+		const providers = await readSmokeJson(
+			oauth,
+			"/api/students/oauth/providers"
+		);
 		assertion(
 			providers
 			&& typeof providers === "object"
