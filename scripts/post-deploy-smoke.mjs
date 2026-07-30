@@ -1,9 +1,6 @@
 import process from "node:process";
 import { pathToFileURL } from "node:url";
-import {
-	smokeErrorMessage,
-	smokeRequest
-} from "./http-smoke-client.mjs";
+import { smokeRequest } from "./http-smoke-client.mjs";
 import { runProductionGraphSketcherSmoke } from "./production-graph-sketcher-smoke.mjs";
 
 const productionOrigin = process.env.CS_SITE_ORIGIN || "https://cs.avasan.org";
@@ -287,8 +284,13 @@ export async function runProductionSmoke() {
 
 const invokedUrl = process.argv[1] ? pathToFileURL(process.argv[1]).href : "";
 if (import.meta.url === invokedUrl) {
-	runProductionSmoke().catch((error) => {
-		console.error(smokeErrorMessage(error));
+	runProductionSmoke().catch(() => {
+		// HTTP and OAuth responses are deliberately excluded from logs. The
+		// failed workflow step identifies the gate, while a local rerun can be
+		// used for scoped diagnostics without retaining response data.
+		console.error(
+			"CS production verification failed; response details were not logged."
+		);
 		process.exitCode = 1;
 	});
 }
