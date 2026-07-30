@@ -519,6 +519,7 @@ const anonymousImportError = ref("");
 const isClearingAnonymousWorkspace = ref(false);
 const showAnonymousWorkspaceClearConfirmation = ref(false);
 const anonymousWorkspaceClearError = ref("");
+const sharedComputerCleanupPanelIsVisible = false;
 const pythonIdePageRef = ref<HTMLElement | null>(null);
 const codeEditorHostRef = ref<HTMLDivElement | null>(null);
 const canvasRef = ref<HTMLCanvasElement | null>(null);
@@ -5676,7 +5677,7 @@ onBeforeUnmount(() => {
 		</div>
 
 		<section
-			v-if="!currentStudent"
+			v-if="sharedComputerCleanupPanelIsVisible && !currentStudent"
 			class="shared-computer-clear site-surface"
 			aria-labelledby="shared-computer-clear-title"
 		>

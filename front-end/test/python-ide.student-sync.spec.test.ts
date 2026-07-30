@@ -791,7 +791,7 @@ describe("student Python project sync boundaries", () => {
 		);
 	});
 
-	it("provides a confirmed cross-tab clear for anonymous shared-computer work", async () => {
+	it("keeps the confirmed cross-tab clear implementation while its panel is hidden", async () => {
 		const source = await readFile(workspacePath, "utf8");
 		const clearHandler = source.slice(
 			source.indexOf(
@@ -802,7 +802,12 @@ describe("student Python project sync boundaries", () => {
 
 		expect(source).toContain("Clear browser projects for next student");
 		expect(source).toContain("Clear all browser projects");
-		expect(source).toContain('v-if="!currentStudent"');
+		expect(source).toContain(
+			"const sharedComputerCleanupPanelIsVisible = false;"
+		);
+		expect(source).toContain(
+			'v-if="sharedComputerCleanupPanelIsVisible && !currentStudent"'
+		);
 		expect(clearHandler).toContain(
 			"if (currentStudent.value || activeStorageOwnerID.value) return;"
 		);
