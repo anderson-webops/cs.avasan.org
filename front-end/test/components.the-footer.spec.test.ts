@@ -17,7 +17,10 @@ describe("TheFooter.vue", () => {
 
 		const privacyLink = wrapper.get(".site-footer__link");
 
-		expect(privacyLink.text()).toBe("Student privacy");
+		expect(privacyLink.text()).toBe(
+			"Student privacy and record requests"
+		);
 		expect(privacyLink.attributes("href")).toBe("/student-privacy");
+		expect(privacyLink.classes()).toContain("site-footer__link");
 	});
 });

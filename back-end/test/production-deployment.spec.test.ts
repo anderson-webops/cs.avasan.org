@@ -46,10 +46,8 @@ describe("versioned full-stack production deployment", () => {
 		expect(api).toContain('\n        expose:\n            - "3008"');
 		expect(api).not.toContain("\n        ports:");
 		expect(mongo).not.toContain("\n        ports:");
-		expect(mongo).toContain(
-			'- >-\n                    mongosh --quiet --username "$$MONGO_INITDB_ROOT_USERNAME"'
-		);
-		expect(mongo).toContain('--eval "quit(db.adminCommand(\'ping\').ok ? 0 : 2)"');
+		expect(mongo).toContain('- >-\n                    mongosh --quiet --username "$$MONGO_INITDB_ROOT_USERNAME"');
+		expect(mongo).toContain("--eval \"quit(db.adminCommand('ping').ok ? 0 : 2)\"");
 		expect(compose).toContain("data:\n        internal: true");
 		expect(compose.match(/no-new-privileges:true/g)).toHaveLength(3);
 		expect(compose.match(/\n        cap_drop:\n            - ALL/g)).toHaveLength(3);
@@ -93,15 +91,11 @@ describe("versioned full-stack production deployment", () => {
 		const api = composeService(compose, "api");
 		const frontendDockerfile = repositoryFile("Dockerfile");
 		const apiDockerfile = repositoryFile("back-end/Dockerfile");
-		const frontendReleaseWriter = repositoryFile(
-			"front-end/scripts/write-release-metadata.mjs"
-		);
+		const frontendReleaseWriter = repositoryFile("front-end/scripts/write-release-metadata.mjs");
 		const netlify = repositoryFile("netlify.toml");
 		const proxy = repositoryFile("deploy/nginx.conf");
 		const server = repositoryFile("back-end/src/server.ts");
-		const postDeployWorkflow = repositoryFile(
-			".github/workflows/post-deploy.yml"
-		);
+		const postDeployWorkflow = repositoryFile(".github/workflows/post-deploy.yml");
 		const httpSmokeClient = repositoryFile("scripts/http-smoke-client.mjs");
 		const productionSmoke = repositoryFile("scripts/post-deploy-smoke.mjs");
 		const rootPackage = JSON.parse(repositoryFile("package.json")) as {
@@ -109,22 +103,16 @@ describe("versioned full-stack production deployment", () => {
 		};
 
 		expect(rootPackage.version).toBe("1.0.0");
-		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-1[.]0[.]0\}/g))
-			.toHaveLength(2);
-		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g))
-			.toHaveLength(2);
+		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-1[.]0[.]0\}/g)).toHaveLength(2);
+		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g)).toHaveLength(2);
 		expect(compose).not.toContain("SOURCE_REVISION:-unknown");
 		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
 		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=1.0.0");
 		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
 		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=1.0.0");
 		expect(apiDockerfile).toContain("ARG SOURCE_REVISION=unknown");
-		expect(frontendReleaseWriter).toContain(
-			'environment.COMMIT_REF?.trim()'
-		);
-		expect(frontendReleaseWriter).toContain(
-			"const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;"
-		);
+		expect(frontendReleaseWriter).toContain("environment.COMMIT_REF?.trim()");
+		expect(frontendReleaseWriter).toContain("const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;");
 		expect(proxy).toContain('/release.json "no-store";');
 		expect(proxy).toContain("location = /release.json");
 		expect(netlify).toContain('for = "/release.json"');
@@ -134,16 +122,12 @@ describe("versioned full-stack production deployment", () => {
 		expect(productionSmoke).toContain('releaseMetadata("/release.json")');
 		expect(productionSmoke).toContain('releaseMetadata("/api/release")');
 		expect(productionSmoke).toContain('adminRedirect.headers.get("location") === "/admin/"');
-		expect(productionSmoke).toContain(
-			"The public site and API report different release identities."
-		);
+		expect(productionSmoke).toContain("The public site and API report different release identities.");
 		expect(productionSmoke).not.toContain("fetch(");
 		expect(httpSmokeClient).toContain('import http from "node:http"');
 		expect(httpSmokeClient).toContain('import https from "node:https"');
 		expect(httpSmokeClient).toContain("MAX_SAME_ORIGIN_REDIRECTS = 5");
-		expect(httpSmokeClient).toContain(
-			"Refused cross-origin smoke-test redirect"
-		);
+		expect(httpSmokeClient).toContain("Refused cross-origin smoke-test redirect");
 		expect(httpSmokeClient).toContain("Caused by:");
 		expect(postDeployWorkflow).toContain("workflow_dispatch:");
 		expect(postDeployWorkflow).toContain("expected_release:");
@@ -159,14 +143,30 @@ describe("versioned full-stack production deployment", () => {
 		const netlify = repositoryFile("netlify.toml");
 
 		expect(environment).toContain("CLASSROOM_PRIVACY_APPROVED=false");
+		expect(environment).toContain("CLASSROOM_PRIVACY_OPERATOR_NOTICE=");
+		expect(environment).toContain("CLASSROOM_SERVICE_PROVIDER_NOTICE=");
 		expect(environment).toContain("STUDENT_ACCOUNTS_ENABLED=false");
 		expect(environment).toContain("STUDENT_OAUTH_ENABLED=false");
+		expect(environment).toContain("STUDENT_RECORD_RETENTION_DAYS=");
 		expect(environment).toContain("CLASSROOM_ANALYTICS_COLLECTION_ENABLED=false");
-		expect(environment).toContain("VITE_CLASSROOM_PRIVACY_APPROVED=false");
-		expect(environment).toContain("VITE_CLASSROOM_USAGE_ENABLED=false");
+		expect(environment).not.toContain("VITE_CLASSROOM_PRIVACY_APPROVED=");
+		expect(environment).not.toContain("VITE_STUDENT_ACCOUNTS_ENABLED=");
+		expect(environment).not.toContain("VITE_STUDENT_OAUTH_ENABLED=");
+		expect(environment).not.toContain("VITE_CLASSROOM_USAGE_ENABLED=");
 		expect(environment).not.toContain("CLASSROOM_ANALYTICS_SERVICE_KEY");
 		expect(compose).toContain('TRUST_PROXY_HOPS: "1"');
 		expect(compose).toContain("CLASSROOM_ORIGIN: https://cs.avasan.org");
+		expect(compose).toContain("VITE_STUDENT_RECORD_RETENTION_DAYS: ${STUDENT_RECORD_RETENTION_DAYS:-}");
+		expect(compose).toContain("VITE_CLASSROOM_PRIVACY_APPROVED: ${CLASSROOM_PRIVACY_APPROVED:-false}");
+		expect(compose).toContain("VITE_STUDENT_ACCOUNTS_ENABLED: ${STUDENT_ACCOUNTS_ENABLED:-false}");
+		expect(compose).toContain("VITE_STUDENT_OAUTH_ENABLED: ${STUDENT_OAUTH_ENABLED:-false}");
+		expect(compose).toContain("VITE_CLASSROOM_USAGE_ENABLED: ${CLASSROOM_ANALYTICS_COLLECTION_ENABLED:-false}");
+		expect(compose).not.toContain("VITE_CLASSROOM_PRIVACY_APPROVED: ${VITE_CLASSROOM_PRIVACY_APPROVED");
+		expect(compose).not.toContain("VITE_STUDENT_ACCOUNTS_ENABLED: ${VITE_STUDENT_ACCOUNTS_ENABLED");
+		expect(compose).not.toContain("VITE_STUDENT_OAUTH_ENABLED: ${VITE_STUDENT_OAUTH_ENABLED");
+		expect(compose).not.toContain("VITE_CLASSROOM_USAGE_ENABLED: ${VITE_CLASSROOM_USAGE_ENABLED");
+		expect(compose).toContain("VITE_CLASSROOM_PRIVACY_OPERATOR_NOTICE: ${CLASSROOM_PRIVACY_OPERATOR_NOTICE:-}");
+		expect(compose).toContain("VITE_CLASSROOM_SERVICE_PROVIDER_NOTICE: ${CLASSROOM_SERVICE_PROVIDER_NOTICE:-}");
 		expect(compose).toContain(
 			"MONGODB_URI: mongodb://${MONGO_APP_USERNAME:?set MONGO_APP_USERNAME}:${MONGO_APP_PASSWORD:?set MONGO_APP_PASSWORD}@mongo:27017/cs-avasan-org?authSource=cs-avasan-org"
 		);
@@ -178,6 +178,7 @@ describe("versioned full-stack production deployment", () => {
 		expect(netlify).toContain("status = 404");
 		expect(netlify).not.toContain('to = "/index.html"');
 		expect(netlify).toContain('VITE_STUDENT_ACCOUNTS_ENABLED = "false"');
+		expect(netlify).toContain('VITE_STUDENT_RECORD_RETENTION_DAYS = ""');
 		expect(netlify).toContain('for = "/*"');
 		expect(netlify).toContain('X-Frame-Options = "DENY"');
 		expect(netlify).toContain('NODE_VERSION = "24.18.0"');
@@ -196,6 +197,9 @@ describe("versioned full-stack production deployment", () => {
 		expect(dockerIgnore).toContain("**/.env.*");
 		expect(frontendDockerfile).toContain("COPY deploy/nginx.conf /etc/nginx/conf.d/default.conf");
 		expect(frontendDockerfile).toContain("ARG VITE_CLASSROOM_PRIVACY_APPROVED=false");
+		expect(frontendDockerfile).toContain("ARG VITE_CLASSROOM_PRIVACY_OPERATOR_NOTICE=");
+		expect(frontendDockerfile).toContain("ARG VITE_CLASSROOM_SERVICE_PROVIDER_NOTICE=");
+		expect(frontendDockerfile).toContain("ARG VITE_STUDENT_RECORD_RETENTION_DAYS=");
 		expect(frontendDockerfile).toContain("npm install --global npm@11.16.0");
 		expect(frontendDockerfile).toMatch(/FROM nginxinc\/nginx-unprivileged:stable-alpine@sha256:[a-f0-9]{64}/);
 		expect(frontendDockerfile).toMatch(/FROM node:24[.]18[.]0-alpine@sha256:[a-f0-9]{64}/);
@@ -217,7 +221,7 @@ describe("versioned full-stack production deployment", () => {
 		expect(continuousIntegration).toContain('"${origin}/api/readyz"');
 		expect(continuousIntegration).toContain("SOURCE_REVISION: ${{ github.sha }}");
 		expect(continuousIntegration).toContain("env -u SOURCE_REVISION docker compose");
-		expect(continuousIntegration).toContain("CS_EXPECTED_REVISION=\"${SOURCE_REVISION}\"");
+		expect(continuousIntegration).toContain('CS_EXPECTED_REVISION="${SOURCE_REVISION}"');
 		expect(continuousIntegration).toContain("npm run verify:production");
 		expect(continuousIntegration).toContain('"${origin}/__cs-avasan-deployment-probe-missing"');
 		expect(continuousIntegration).toContain('unknown_status}" = "404"');

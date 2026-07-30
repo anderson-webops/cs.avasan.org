@@ -6,6 +6,7 @@ import { createHash, randomBytes, timingSafeEqual } from "node:crypto";
 import { OAuthLoginAttempt } from "../../models/schemas/OAuthLoginAttempt.js";
 import { Student } from "../../models/schemas/Student.js";
 import { acquireStudentDataWriteLease } from "../../security/studentDataWriteBarrier.js";
+import { studentRecordRetentionFieldsForRequest } from "../../security/studentRecordRetention.js";
 import { createOAuthAuthorizationRequest, exchangeOAuthAuthorizationCode } from "../../utils/oauthClient.js";
 import {
 	enabledOAuthProviders,
@@ -323,6 +324,7 @@ export const finishStudentOAuth: RequestHandler = async (req, res) => {
 						externalAuthProvider: { $exists: false },
 						externalAuthSubjectHash: { $exists: false },
 						pendingSetupCodeHash: { $exists: true },
+						retentionExpiresAt: { $gt: authenticatedAt },
 						sessionVersion: consumedAttempt.studentSessionVersion
 					},
 					{
@@ -331,7 +333,8 @@ export const finishStudentOAuth: RequestHandler = async (req, res) => {
 							externalAuthProvider: provider,
 							externalAuthSubjectHash: subjectHash,
 							failedLoginAttempts: 0,
-							lastLoginAt: authenticatedAt
+							lastLoginAt: authenticatedAt,
+							...studentRecordRetentionFieldsForRequest(req, authenticatedAt)
 						},
 						$unset: {
 							accessCodeHash: 1,
@@ -361,13 +364,15 @@ export const finishStudentOAuth: RequestHandler = async (req, res) => {
 				{
 					active: true,
 					externalAuthProvider: provider,
-					externalAuthSubjectHash: subjectHash
+					externalAuthSubjectHash: subjectHash,
+					retentionExpiresAt: { $gt: authenticatedAt }
 				},
 				{
 					$inc: { sessionVersion: 1 },
 					$set: {
 						failedLoginAttempts: 0,
-						lastLoginAt: authenticatedAt
+						lastLoginAt: authenticatedAt,
+						...studentRecordRetentionFieldsForRequest(req, authenticatedAt)
 					},
 					$unset: { lockedUntil: 1 }
 				},

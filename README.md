@@ -46,8 +46,11 @@ expiring setup code Julio provides. The first successful exchange irreversibly
 consumes that code and opens a short setup session. The student then either
 creates a password or connects one Google or Apple account. Later sign-ins use
 the chosen method. Google and Apple connection uses only the provider's opaque
-account identifier: this site does not request or store the student's provider
-email, name, profile, avatar, or access tokens. The browser can continue an
+account identifier: this site does not request the student's provider email,
+name, profile, or avatar. Its authorization-code exchange may transiently
+receive a provider token response to validate the sign-in, but only the
+one-way-hashed opaque subject is persisted; provider tokens are not retained.
+The browser can continue an
 interrupted password setup only when its setup session was saved and it
 presents the exact strong request ID from its password submission; otherwise
 Julio must issue a new code.
@@ -61,13 +64,32 @@ recovery code, student email, provider-email matching, or self-service
 registration.
 
 Julio can also export retained account and educational records for one student
-and permanently delete that student's account, provider binding, pending
-provider setup attempts, projects, and review copies. Temporary sign-in proof
-records are counted in the export inventory but excluded from the downloaded
-file. Both operations require Julio to re-enter his password; deletion also
-requires the exact username and returns an operation ID for the school or
-district's required backup follow-up. See
+and correct a mistyped school-approved alias without disconnecting the
+student's projects. He can permanently delete that student's account, provider
+binding, pending provider setup attempts, projects, and review copies.
+Temporary sign-in proof records are counted in the export inventory but
+excluded from the downloaded file. These sensitive operations require Julio to
+re-enter his password; deletion also requires the exact username and returns
+an operation ID for the school or district's required backup follow-up. See
 [`docs/privacy-operations.md`](docs/privacy-operations.md).
+
+The school-selected 30–365-day account-retention period begins at account
+creation and renews only after a successful student sign-in. Rows created
+before the deadline field existed, and rows carrying a different prior policy,
+receive one full current period when the policy is applied, avoiding immediate
+retroactive deletion during either an increase or decrease. The API
+sweeps once before startup and hourly thereafter using the same complete
+deletion path as Julio. An incomplete deletion leaves the account disabled and
+visible to Julio as needing retry. Pending retries preserve and reuse the same
+operation ID, receipt, and original deletion reason. To correct an alias, Julio
+uses **Correct username** in Admin and re-enters his password; the same account
+and projects are retained while existing student sessions are revoked.
+
+After public student sign-in is turned off, keep the approved retention period
+configured until all student rows and still-available deletion receipts are
+gone. Julio's private Admin then remains in record-maintenance mode while
+automatic cleanup continues; startup refuses to strand those records without a
+retention setting.
 
 Julio's name and email are fixed by code provisioning. The runtime exposes no
 profile or email mutation, and his browser cookie is nonpersistent with an
@@ -177,12 +199,23 @@ Set `CLASSROOM_ORIGIN=http://127.0.0.1:3333` for the local Vite classroom and
 `CLASSROOM_ORIGIN=https://cs.avasan.org` in production. `CROSS_SITE` must remain
 false: browser sessions are served through the same-origin `/api` route.
 
-Set `CLASSROOM_PRIVACY_APPROVED=true`, `SCHOOL_PRIVACY_CONTACT`, and
-`STUDENT_ACCOUNTS_ENABLED=true` in the backend only after the rollout checklist
-is complete. The frontend build independently requires
-`VITE_CLASSROOM_PRIVACY_APPROVED=true`, `VITE_SCHOOL_PRIVACY_CONTACT`, and
-`VITE_STUDENT_ACCOUNTS_ENABLED=true`. A missing approval or contact keeps the
-student routes and UI unavailable without affecting anonymous classroom use.
+Set `CLASSROOM_PRIVACY_APPROVED=true`, `SCHOOL_PRIVACY_CONTACT`,
+`CLASSROOM_PRIVACY_OPERATOR_NOTICE`, `CLASSROOM_SERVICE_PROVIDER_NOTICE`,
+`STUDENT_ACCOUNTS_ENABLED=true`, and a reviewed 30–365-day
+`STUDENT_RECORD_RETENTION_DAYS` only after the rollout checklist is complete.
+Production Compose derives the frontend approval and feature switches directly
+from those canonical backend values and maps the same contact, notices, and
+retention setting into the build. This prevents a live API with hidden controls
+or visible controls with a disabled API. Missing or invalid prerequisites keep
+the student routes and visible sign-in UI unavailable without affecting
+anonymous classroom use.
+
+All checked-in account, provider-sign-in, and classroom-count flags remain
+`false`. Do not turn them on until the school or district has approved the
+feature, supplied the real contact and notices, selected the account-retention
+period, approved every named infrastructure/identity provider, and completed
+the operational checklist. No operator, contact, or provider identity is
+assumed by this repository.
 
 Google and Apple buttons appear only when `STUDENT_OAUTH_ENABLED=true` and the
 provider's complete credentials are configured. Keep the feature disabled

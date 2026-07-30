@@ -21,7 +21,16 @@ describe("Teacher admin page", () => {
 			"VITE_SCHOOL_PRIVACY_CONTACT",
 			"School privacy office, 555-0100"
 		);
+		vi.stubEnv(
+			"VITE_CLASSROOM_PRIVACY_OPERATOR_NOTICE",
+			"Test operator contact"
+		);
+		vi.stubEnv(
+			"VITE_CLASSROOM_SERVICE_PROVIDER_NOTICE",
+			"Test approved provider notice"
+		);
 		vi.stubEnv("VITE_STUDENT_ACCOUNTS_ENABLED", "true");
+		vi.stubEnv("VITE_STUDENT_RECORD_RETENTION_DAYS", "90");
 		setActivePinia(createPinia());
 	});
 
@@ -46,8 +55,9 @@ describe("Teacher admin page", () => {
 							'<section id="analytics" data-testid="classroom-analytics"><h2 tabindex="-1">Classroom activity</h2></section>'
 					},
 					StudentManagement: {
+						props: ["maintenanceOnly"],
 						template:
-							'<div data-testid="student-management">Students</div>'
+							'<div data-testid="student-management">{{ maintenanceOnly ? "Student record maintenance" : "Students" }}</div>'
 					}
 				}
 			}
@@ -97,6 +107,43 @@ describe("Teacher admin page", () => {
 			"Classroom activity"
 		);
 		expect(wrapper.find("a").exists()).toBe(false);
+	});
+
+	it("keeps record maintenance visible when public student accounts are disabled", () => {
+		vi.stubEnv("VITE_STUDENT_ACCOUNTS_ENABLED", "false");
+		const app = useAppStore();
+		app.setCurrentAdmin({
+			_id: "julio",
+			name: "Julio",
+			email: "julio@example.com",
+			editAdmins: false,
+			saveEdit: "Save"
+		});
+
+		const wrapper = mountAdmin();
+
+		expect(wrapper.get('[data-testid="student-management"]').text()).toBe(
+			"Student record maintenance"
+		);
+	});
+
+	it("hides record management when no valid retention period is configured", () => {
+		vi.stubEnv("VITE_STUDENT_ACCOUNTS_ENABLED", "false");
+		vi.stubEnv("VITE_STUDENT_RECORD_RETENTION_DAYS", "");
+		const app = useAppStore();
+		app.setCurrentAdmin({
+			_id: "julio",
+			name: "Julio",
+			email: "julio@example.com",
+			editAdmins: false,
+			saveEdit: "Save"
+		});
+
+		const wrapper = mountAdmin();
+
+		expect(
+			wrapper.find('[data-testid="student-management"]').exists()
+		).toBe(false);
 	});
 
 	it("keeps the analytics handoff at the stable Admin section URL", async () => {

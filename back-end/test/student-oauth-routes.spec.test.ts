@@ -154,6 +154,7 @@ async function withRuntime<T>(
 	run: (baseUrl: string, session: TestSession) => Promise<T>
 ): Promise<T> {
 	const app = express();
+	app.locals.studentRecordRetentionDays = 90;
 	const session = { ...initialSession };
 	app.use(express.json());
 	app.use((req: any, _res, next) => {
@@ -313,10 +314,15 @@ describe("code-bound student OAuth", () => {
 			{
 				active: true,
 				externalAuthProvider: "google",
-				externalAuthSubjectHash: expectedSubjectHash
+				externalAuthSubjectHash: expectedSubjectHash,
+				retentionExpiresAt: { $gt: expect.any(Date) }
 			},
 			expect.objectContaining({
-				$inc: { sessionVersion: 1 }
+				$inc: { sessionVersion: 1 },
+				$set: expect.objectContaining({
+					retentionExpiresAt: expect.any(Date),
+					retentionPolicyDays: 90
+				})
 			}),
 			{ new: true }
 		);
@@ -398,6 +404,7 @@ describe("code-bound student OAuth", () => {
 			externalAuthProvider: { $exists: false },
 			externalAuthSubjectHash: { $exists: false },
 			pendingSetupCodeHash: { $exists: true },
+			retentionExpiresAt: { $gt: expect.any(Date) },
 			sessionVersion: 7
 		});
 		expect(update).toMatchObject({
@@ -406,7 +413,9 @@ describe("code-bound student OAuth", () => {
 				externalAuthProvider: "apple",
 				externalAuthSubjectHash: hash("apple\0provider-subject"),
 				failedLoginAttempts: 0,
-				lastLoginAt: expect.any(Date)
+				lastLoginAt: expect.any(Date),
+				retentionExpiresAt: expect.any(Date),
+				retentionPolicyDays: 90
 			},
 			$unset: {
 				accessCodeHash: 1,

@@ -313,6 +313,12 @@ function startVite() {
 				VITE_API_PROXY_TARGET: `http://127.0.0.1:${apiPort}`,
 				VITE_CLASSROOM_PRIVACY_APPROVED:
 					process.env.VITE_CLASSROOM_PRIVACY_APPROVED ?? "true",
+				VITE_CLASSROOM_PRIVACY_OPERATOR_NOTICE:
+					process.env.VITE_CLASSROOM_PRIVACY_OPERATOR_NOTICE
+					?? "Test operator, 1 Test Way, Test City, CA 90000; 555-0100; privacy@example.test",
+				VITE_CLASSROOM_SERVICE_PROVIDER_NOTICE:
+					process.env.VITE_CLASSROOM_SERVICE_PROVIDER_NOTICE
+					?? "Test hosting provider stores the approved classroom database solely to operate account and project sync.",
 				VITE_SCHOOL_PRIVACY_CONTACT:
 					process.env.VITE_SCHOOL_PRIVACY_CONTACT
 					?? "Julio via the school office",
@@ -320,6 +326,8 @@ function startVite() {
 					process.env.VITE_STUDENT_ACCOUNTS_ENABLED ?? "true",
 				VITE_STUDENT_OAUTH_ENABLED:
 					process.env.VITE_STUDENT_OAUTH_ENABLED ?? "true",
+				VITE_STUDENT_RECORD_RETENTION_DAYS:
+					process.env.VITE_STUDENT_RECORD_RETENTION_DAYS ?? "90",
 				VITE_CLASSROOM_USAGE_ENABLED:
 					process.env.VITE_CLASSROOM_USAGE_ENABLED ?? "false"
 			},

@@ -23,6 +23,7 @@ import {
 	studentAccessCodeExpiry,
 	verifyStudentCredential
 } from "../../security/studentCredentials.js";
+import { studentRecordRetentionFieldsForRequest } from "../../security/studentRecordRetention.js";
 import { clearStudentOAuthBrowserBindings } from "../../utils/studentOAuthCookies.js";
 
 const INVALID_STUDENT_CREDENTIALS = {
@@ -45,6 +46,7 @@ export function serializeStudent(student: IStudent) {
 		active: student.active,
 		passwordSetAt: student.passwordSetAt ?? null,
 		lastLoginAt: student.lastLoginAt ?? null,
+		retentionExpiresAt: student.retentionExpiresAt ?? null,
 		createdAt: student.createdAt,
 		updatedAt: student.updatedAt
 	};
@@ -81,6 +83,7 @@ export function serializeManagedStudent(student: IStudent, now = Date.now()) {
 	return {
 		...serializeStudent(student),
 		credentialState,
+		deletionPending: Boolean(student.dataDeletionPendingAt),
 		accessCodeExpiresAt: student.accessCodeExpiresAt ?? null,
 		socialProviders: studentSocialProviders(student)
 	};
@@ -296,18 +299,21 @@ export const createStudentSession: RequestHandler = async (req, res) => {
 	}
 
 	if (student.passwordHash && credentialMatches) {
+		const authenticatedAt = new Date();
 		const authenticated = await Student.findOneAndUpdate(
 			{
 				_id: student._id,
 				active: true,
 				passwordHash: student.passwordHash,
+				retentionExpiresAt: { $gt: authenticatedAt },
 				sessionVersion: student.sessionVersion
 			},
 			{
 				$inc: { sessionVersion: 1 },
 				$set: {
 					failedLoginAttempts: 0,
-					lastLoginAt: new Date()
+					lastLoginAt: authenticatedAt,
+					...studentRecordRetentionFieldsForRequest(req, authenticatedAt)
 				},
 				$unset: { lockedUntil: 1 }
 			},
@@ -347,6 +353,7 @@ export const createStudentSession: RequestHandler = async (req, res) => {
 			active: true,
 			accessCodeHash: student.accessCodeHash,
 			accessCodeExpiresAt: { $gt: setupStartedAt },
+			retentionExpiresAt: { $gt: setupStartedAt },
 			sessionVersion: student.sessionVersion
 		},
 		{
@@ -355,7 +362,8 @@ export const createStudentSession: RequestHandler = async (req, res) => {
 				accessCodeExpiresAt: setupExpiresAt,
 				failedLoginAttempts: 0,
 				lastLoginAt: setupStartedAt,
-				pendingSetupCodeHash: student.accessCodeHash
+				pendingSetupCodeHash: student.accessCodeHash,
+				...studentRecordRetentionFieldsForRequest(req, setupStartedAt)
 			},
 			$unset: {
 				accessCodeHash: 1,
@@ -543,6 +551,7 @@ export const setStudentPassword: RequestHandler = async (req, res) => {
 			_id: currentStudent._id,
 			active: true,
 			pendingSetupCodeHash: currentStudent.pendingSetupCodeHash,
+			retentionExpiresAt: { $gt: passwordSetAt },
 			sessionVersion: currentStudent.sessionVersion
 		},
 		{
@@ -552,7 +561,8 @@ export const setStudentPassword: RequestHandler = async (req, res) => {
 				lastLoginAt: passwordSetAt,
 				lastPasswordSetupRequestID: requestID,
 				passwordHash,
-				passwordSetAt
+				passwordSetAt,
+				...studentRecordRetentionFieldsForRequest(req, passwordSetAt)
 			},
 			$unset: {
 				accessCodeHash: 1,
@@ -633,10 +643,11 @@ export const deleteStudentSession: RequestHandler = async (req, res) => {
 export const listStudents: RequestHandler = async (_req, res) => {
 	const students = await Student.find({})
 		.select(
-			"+passwordHash +accessCodeHash +pendingSetupCodeHash" + " +externalAuthProvider +externalAuthSubjectHash"
+			"+passwordHash +accessCodeHash +pendingSetupCodeHash"
+			+ " +externalAuthProvider +externalAuthSubjectHash"
+			+ " +dataDeletionPendingAt"
 		)
-		.sort({ username: 1 })
-		.limit(500);
+		.sort({ username: 1 });
 	const projectActivity: StudentProjectActivity[] = [];
 	if (students.length) {
 		projectActivity.push(
@@ -688,12 +699,14 @@ export const createStudent: RequestHandler = async (req, res) => {
 	const normalizedUsername = normalizeStudentUsername(username);
 	const accessCode = generateStudentAccessCode();
 	const accessCodeHash = await hashStudentCredential(normalizeStudentAccessCode(accessCode));
+	const createdAt = new Date();
 	try {
 		const student = await Student.create({
 			username: normalizedUsername,
 			accessCodeHash,
 			accessCodeExpiresAt: studentAccessCodeExpiry(),
 			active: true,
+			...studentRecordRetentionFieldsForRequest(req, createdAt),
 			sessionVersion: 0
 		});
 		return res.status(201).json({
@@ -722,13 +735,18 @@ export const setStudentActive: RequestHandler = async (req, res) => {
 	const existingStudent = await Student.findById(studentID).select(
 		"+passwordHash +accessCodeHash"
 		+ " +externalAuthProvider +externalAuthSubjectHash"
-		+ " +dataDeletionPendingAt"
+		+ " +dataDeletionPendingAt +sessionVersion"
 	);
 	if (!existingStudent) return res.sendStatus(404);
 	if (existingStudent.dataDeletionPendingAt) {
 		return res.status(409).json({
-			message:
-				"Permanent deletion is pending. Retry deletion instead of changing this account."
+			message: "Permanent deletion is pending. Retry deletion instead of changing this account."
+		});
+	}
+	const retentionCheckedAt = new Date();
+	if (active && (!existingStudent.retentionExpiresAt || existingStudent.retentionExpiresAt <= retentionCheckedAt)) {
+		return res.status(409).json({
+			message: "The account retention period has expired. Delete the records instead of reactivating the account."
 		});
 	}
 	const hasCurrentAccessCode
@@ -760,11 +778,79 @@ export const setStudentActive: RequestHandler = async (req, res) => {
 					})
 		}
 	};
-	const student = await Student.findByIdAndUpdate(studentID, update, { new: true }).select(
-		"+passwordHash +accessCodeHash" + " +externalAuthProvider +externalAuthSubjectHash"
-	);
-	if (!student) return res.sendStatus(404);
+	const student = await Student.findOneAndUpdate(
+		{
+			_id: studentID,
+			dataDeletionPendingAt: { $exists: false },
+			sessionVersion: existingStudent.sessionVersion,
+			...(active ? { retentionExpiresAt: { $gt: retentionCheckedAt } } : {})
+		},
+		update,
+		{ new: true }
+	).select("+passwordHash +accessCodeHash" + " +externalAuthProvider +externalAuthSubjectHash");
+	if (!student) {
+		return res.status(409).json({
+			message: "The account changed or its retention period expired. Reload before trying again."
+		});
+	}
 	return res.json({ student: serializeManagedStudent(student) });
+};
+
+/**
+ * Correct only the school-approved alias associated with an existing record.
+ * The student ID, projects, credentials, and provider link remain unchanged.
+ * Rotating the session version prevents an already-open browser from
+ * continuing to display the previous alias.
+ */
+export const correctStudentUsername: RequestHandler = async (req, res) => {
+	if (!bodyHasOnlyKeys(req.body, ["teacherPassword", "username"])) {
+		return res.status(400).json({
+			message: "Only username and teacher password are accepted."
+		});
+	}
+	if (!(await teacherPasswordVerified(req, res))) return;
+
+	const studentID = studentIdParam(req, res);
+	if (!studentID) return;
+	const { username } = req.body as { username?: unknown };
+	if (!isValidStudentUsername(username)) {
+		return res.status(400).json({
+			message: "Username must be 3 to 24 lowercase letters, numbers, or hyphens and start with a letter."
+		});
+	}
+	const normalizedUsername = normalizeStudentUsername(username);
+
+	try {
+		const student = await Student.findOneAndUpdate(
+			{
+				_id: studentID,
+				dataDeletionPendingAt: { $exists: false }
+			},
+			{
+				$inc: { sessionVersion: 1 },
+				$set: { username: normalizedUsername }
+			},
+			{ new: true }
+		).select(
+			"+passwordHash +accessCodeHash +pendingSetupCodeHash" + " +externalAuthProvider +externalAuthSubjectHash"
+		);
+		if (!student) {
+			const existing = await Student.findById(studentID).select("+dataDeletionPendingAt");
+			if (!existing) return res.sendStatus(404);
+			return res.status(409).json({
+				message: "Permanent deletion is pending. Retry deletion instead of correcting this account."
+			});
+		}
+		return res.json({ student: serializeManagedStudent(student) });
+	}
+	catch (error) {
+		if (isDuplicateKeyError(error)) {
+			return res.status(409).json({ message: "Username is already in use." });
+		}
+		return res.status(500).json({
+			message: "The student username could not be corrected."
+		});
+	}
 };
 
 export const resetStudentAccessCode: RequestHandler = async (req, res) => {
@@ -777,22 +863,34 @@ export const resetStudentAccessCode: RequestHandler = async (req, res) => {
 
 	const studentID = studentIdParam(req, res);
 	if (!studentID) return;
-	const existingStudent = await Student.findById(studentID)
-		.select("+dataDeletionPendingAt");
+	const existingStudent = await Student.findById(studentID).select(
+		"+dataDeletionPendingAt +sessionVersion"
+	);
 	if (!existingStudent) {
 		return res.sendStatus(404);
 	}
 	if (existingStudent.dataDeletionPendingAt) {
 		return res.status(409).json({
+			message: "Permanent deletion is pending. Retry deletion instead of resetting access."
+		});
+	}
+	const retentionCheckedAt = new Date();
+	if (!existingStudent.retentionExpiresAt || existingStudent.retentionExpiresAt <= retentionCheckedAt) {
+		return res.status(409).json({
 			message:
-				"Permanent deletion is pending. Retry deletion instead of resetting access."
+				"The account retention period has expired. Delete the records instead of issuing a new access code."
 		});
 	}
 
 	const accessCode = generateStudentAccessCode();
 	const accessCodeHash = await hashStudentCredential(normalizeStudentAccessCode(accessCode));
-	const student = await Student.findByIdAndUpdate(
-		studentID,
+	const student = await Student.findOneAndUpdate(
+		{
+			_id: studentID,
+			dataDeletionPendingAt: { $exists: false },
+			retentionExpiresAt: { $gt: retentionCheckedAt },
+			sessionVersion: existingStudent.sessionVersion
+		},
 		{
 			$inc: { sessionVersion: 1 },
 			$set: {
@@ -813,7 +911,11 @@ export const resetStudentAccessCode: RequestHandler = async (req, res) => {
 		},
 		{ new: true }
 	).select("+passwordHash +accessCodeHash" + " +externalAuthProvider +externalAuthSubjectHash");
-	if (!student) return res.sendStatus(404);
+	if (!student) {
+		return res.status(409).json({
+			message: "The account changed or its retention period expired. Reload before trying again."
+		});
+	}
 	return res.json({
 		student: serializeManagedStudent(student),
 		accessCode

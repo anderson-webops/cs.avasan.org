@@ -6,7 +6,11 @@ import { Types } from "mongoose";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Admin } from "../src/models/schemas/Admin.js";
 import { Student } from "../src/models/schemas/Student.js";
-import { mountRuntimeAccountRoutes } from "../src/routes/runtimeAccountRoutes.js";
+import {
+	assertRetainedStudentDataHasRetentionPeriod,
+	mountRuntimeAccountRoutes,
+	retainedStudentDeletionReceiptFilter
+} from "../src/routes/runtimeAccountRoutes.js";
 import { ADMIN_SINGLETON_ID } from "../src/security/adminIdentity.js";
 
 interface TestSession {
@@ -34,6 +38,7 @@ async function withRuntime<T>(
 	features: {
 		studentAccountsEnabled: boolean;
 		studentOAuthEnabled: boolean;
+		studentRecordRetentionDays?: number | null;
 	} = {
 		studentAccountsEnabled: true,
 		studentOAuthEnabled: true
@@ -42,24 +47,19 @@ async function withRuntime<T>(
 	const app = express();
 	const currentSession = {
 		...session,
-		adminExpiresAt: session.adminID
-			? session.adminExpiresAt ?? Date.now() + 8 * 60 * 60 * 1000
-			: undefined,
-		adminLastActivityAt: session.adminID
-			? session.adminLastActivityAt ?? Date.now()
-			: undefined,
-		adminSessionVersion: session.adminID
-			? session.adminSessionVersion ?? 0
-			: undefined,
-		studentExpiresAt: session.studentAuthLevel === "full"
-			? session.studentExpiresAt ?? Date.now() + 8 * 60 * 60 * 1000
-			: undefined,
-		studentLastActivityAt: session.studentAuthLevel === "full"
-			? session.studentLastActivityAt ?? Date.now()
-			: undefined,
-		studentSetupExpiresAt: session.studentAuthLevel === "setup"
-			? session.studentSetupExpiresAt ?? Date.now() + 30 * 60 * 1000
-			: undefined
+		adminExpiresAt: session.adminID ? (session.adminExpiresAt ?? Date.now() + 8 * 60 * 60 * 1000) : undefined,
+		adminLastActivityAt: session.adminID ? (session.adminLastActivityAt ?? Date.now()) : undefined,
+		adminSessionVersion: session.adminID ? (session.adminSessionVersion ?? 0) : undefined,
+		studentExpiresAt:
+			session.studentAuthLevel === "full"
+				? (session.studentExpiresAt ?? Date.now() + 8 * 60 * 60 * 1000)
+				: undefined,
+		studentLastActivityAt:
+			session.studentAuthLevel === "full" ? (session.studentLastActivityAt ?? Date.now()) : undefined,
+		studentSetupExpiresAt:
+			session.studentAuthLevel === "setup"
+				? (session.studentSetupExpiresAt ?? Date.now() + 30 * 60 * 1000)
+				: undefined
 	};
 	const sessionOptions: { expires?: Date; maxAge?: number } = {};
 	app.use(express.json());
@@ -70,10 +70,17 @@ async function withRuntime<T>(
 	});
 	mountRuntimeAccountRoutes(app, {
 		analyticsRetentionDays: 90,
-		...features
+		studentRecordRetentionDays:
+			features.studentRecordRetentionDays === undefined
+				? features.studentAccountsEnabled
+					? 90
+					: null
+				: features.studentRecordRetentionDays,
+		studentAccountsEnabled: features.studentAccountsEnabled,
+		studentOAuthEnabled: features.studentOAuthEnabled
 	});
 
-	const server = await new Promise<Server>((resolve) => {
+	const server = await new Promise<Server>(resolve => {
 		const instance = app.listen(0, "127.0.0.1", () => resolve(instance));
 	});
 	const address = server.address();
@@ -82,15 +89,10 @@ async function withRuntime<T>(
 	}
 
 	try {
-		return await run(
-			`http://127.0.0.1:${address.port}`,
-			currentSession,
-			sessionOptions
-		);
-	}
-	finally {
+		return await run(`http://127.0.0.1:${address.port}`, currentSession, sessionOptions);
+	} finally {
 		await new Promise<void>((resolve, reject) => {
-			server.close((error) => {
+			server.close(error => {
 				if (error) {
 					reject(error);
 					return;
@@ -105,12 +107,9 @@ function queryWith<T>(result: T) {
 	const query = {
 		exec: vi.fn().mockResolvedValue(result),
 		select: vi.fn(() => query),
-		then: (
-			resolve: (value: T) => unknown,
-			reject: (reason: unknown) => unknown
-		) => Promise.resolve(result).then(resolve, reject),
-		catch: (reject: (reason: unknown) => unknown) =>
-			Promise.resolve(result).catch(reject)
+		then: (resolve: (value: T) => unknown, reject: (reason: unknown) => unknown) =>
+			Promise.resolve(result).then(resolve, reject),
+		catch: (reject: (reason: unknown) => unknown) => Promise.resolve(result).catch(reject)
 	};
 	return query;
 }
@@ -142,11 +141,9 @@ describe("Admin-only account runtime", () => {
 			"../src/models/schemas/ScheduledSession.ts",
 			"../src/models/schemas/SessionNote.ts"
 		];
-		expect(
-			removedLegacySources.filter(path => existsSync(resolve(__dirname, path)))
-		).toEqual([]);
+		expect(removedLegacySources.filter(path => existsSync(resolve(__dirname, path)))).toEqual([]);
 
-		await withRuntime({}, async (baseUrl) => {
+		await withRuntime({}, async baseUrl => {
 			const mutationHeaders = { "X-Classroom-Request": "1" };
 			const attempts = [
 				fetch(`${baseUrl}/admins`, { method: "POST", headers: mutationHeaders }),
@@ -173,28 +170,16 @@ describe("Admin-only account runtime", () => {
 			const responses = await Promise.all(attempts);
 
 			expect(responses.map(response => response.status)).toEqual([
-				404,
-				404,
-				404,
-				404,
-				404,
-				404,
-				404,
-				404,
-				404,
-				404
+				404, 404, 404, 404, 404, 404, 404, 404, 404, 404
 			]);
 		});
 	});
 
 	it("does not mount a backend Python asset-streaming route", async () => {
-		const serverSource = readFileSync(
-			resolve(__dirname, "../src/server.ts"),
-			"utf8"
-		);
+		const serverSource = readFileSync(resolve(__dirname, "../src/server.ts"), "utf8");
 		expect(serverSource).not.toMatch(/pythonIdeAssetsProxy|\/python-assets/);
 
-		await withRuntime({}, async (baseUrl) => {
+		await withRuntime({}, async baseUrl => {
 			const response = await fetch(`${baseUrl}/python-assets/assets.zip`);
 			expect(response.status).toBe(404);
 		});
@@ -203,17 +188,13 @@ describe("Admin-only account runtime", () => {
 	it("does not mount optional student or OAuth routes until enabled", async () => {
 		await withRuntime(
 			{},
-			async (baseUrl) => {
+			async baseUrl => {
 				const responses = await Promise.all([
 					fetch(`${baseUrl}/students/session`),
 					fetch(`${baseUrl}/students/oauth/providers`),
 					fetch(`${baseUrl}/admins/students`)
 				]);
-				expect(responses.map(response => response.status)).toEqual([
-					404,
-					404,
-					404
-				]);
+				expect(responses.map(response => response.status)).toEqual([404, 404, 404]);
 			},
 			{
 				studentAccountsEnabled: false,
@@ -222,19 +203,133 @@ describe("Admin-only account runtime", () => {
 		);
 	});
 
+	it("keeps only Julio's record-request tools in retention maintenance mode", async () => {
+		const studentID = new Types.ObjectId().toString();
+		const mutationHeaders = { "X-Classroom-Request": "1" };
+
+		await withRuntime(
+			{},
+			async baseUrl => {
+				const maintained = await Promise.all([
+					fetch(`${baseUrl}/admins/students`),
+					fetch(`${baseUrl}/admins/student-deletion-receipts`),
+					fetch(`${baseUrl}/admins/students/${studentID}/username`, {
+						body: JSON.stringify({ username: "river-8" }),
+						headers: {
+							"Content-Type": "application/json",
+							...mutationHeaders
+						},
+						method: "PATCH"
+					}),
+					postJson(baseUrl, `/admins/students/${studentID}/export`, {}),
+					fetch(`${baseUrl}/admins/students/${studentID}`, {
+						headers: mutationHeaders,
+						method: "DELETE"
+					})
+				]);
+				expect(maintained.map(response => response.status)).toEqual([403, 403, 403, 403, 403]);
+
+				const unavailable = await Promise.all([
+					fetch(`${baseUrl}/students/session`),
+					fetch(`${baseUrl}/students/session`, {
+						method: "POST"
+					}),
+					fetch(`${baseUrl}/students/oauth/providers`),
+					postJson(baseUrl, "/admins/students", {
+						username: "river-8"
+					}),
+					fetch(`${baseUrl}/admins/students/${studentID}`, {
+						body: JSON.stringify({ active: true }),
+						headers: {
+							"Content-Type": "application/json",
+							...mutationHeaders
+						},
+						method: "PATCH"
+					}),
+					postJson(baseUrl, `/admins/students/${studentID}/access-code`, {}),
+					fetch(`${baseUrl}/admins/students/${studentID}/projects`),
+					postJson(baseUrl, `/admins/students/${studentID}/projects/project-1/review`, {})
+				]);
+				expect(unavailable.map(response => response.status)).toEqual([404, 404, 404, 404, 404, 404, 404, 404]);
+			},
+			{
+				studentAccountsEnabled: false,
+				studentOAuthEnabled: false,
+				studentRecordRetentionDays: 90
+			}
+		);
+	});
+
+	it("refuses to strand retained student data without a retention period", () => {
+		expect(() =>
+			assertRetainedStudentDataHasRetentionPeriod(null, {
+				deletionReceiptsExist: false,
+				studentRecordsExist: true
+			})
+		).toThrow(/Student records or deletion receipts remain.*STUDENT_RECORD_RETENTION_DAYS/s);
+		expect(() =>
+			assertRetainedStudentDataHasRetentionPeriod(null, {
+				deletionReceiptsExist: true,
+				studentRecordsExist: false
+			})
+		).toThrow(/Student records or deletion receipts remain.*STUDENT_RECORD_RETENTION_DAYS/s);
+		expect(() =>
+			assertRetainedStudentDataHasRetentionPeriod(null, {
+				deletionReceiptsExist: false,
+				studentRecordsExist: false
+			})
+		).not.toThrow();
+		expect(() =>
+			assertRetainedStudentDataHasRetentionPeriod(90, {
+				deletionReceiptsExist: true,
+				studentRecordsExist: true
+			})
+		).not.toThrow();
+		expect(retainedStudentDeletionReceiptFilter(new Date("2026-07-30T12:00:00.000Z"))).toEqual({
+			$or: [
+				{ status: { $in: ["in-progress", "needs-retry"] } },
+				{
+					expiresAt: {
+						$gt: new Date("2026-07-30T12:00:00.000Z")
+					},
+					status: "completed"
+				}
+			]
+		});
+	});
+
+	it("starts record retention independently from the public account flag", () => {
+		const serverSource = readFileSync(resolve(__dirname, "../src/server.ts"), "utf8");
+		const connectIndex = serverSource.indexOf("await mongoose.connect(mongoUri)");
+		const strandedDataCheckIndex = serverSource.indexOf("assertRetainedStudentDataHasRetentionPeriod(");
+		const initialRetentionIndex = serverSource.indexOf("await enforceStudentRecordRetention(");
+		const sweeperIndex = serverSource.indexOf("? startStudentRecordRetentionSweeper(");
+
+		expect(connectIndex).toBeGreaterThanOrEqual(0);
+		expect(strandedDataCheckIndex).toBeGreaterThan(connectIndex);
+		expect(serverSource.slice(connectIndex, strandedDataCheckIndex)).toContain(
+			"StudentDataDeletionReceipt.exists("
+		);
+		expect(serverSource.slice(connectIndex, strandedDataCheckIndex)).toContain(
+			"retainedStudentDeletionReceiptFilter(new Date())"
+		);
+		expect(initialRetentionIndex).toBeGreaterThan(strandedDataCheckIndex);
+		expect(sweeperIndex).toBeGreaterThan(initialRetentionIndex);
+		expect(
+			serverSource.slice(
+				serverSource.lastIndexOf("const stopStudentRecordRetentionSweeper", sweeperIndex),
+				sweeperIndex
+			)
+		).not.toContain("studentAccountsEnabled");
+	});
+
 	it("keeps the classroom summary inside Julio's Admin session", async () => {
-		await withRuntime({}, async (baseUrl) => {
-			const protectedSummary = await fetch(
-				`${baseUrl}/admins/classroom-analytics/summary`
-			);
-			const retiredServiceSummary = await fetch(
-				`${baseUrl}/classroom-analytics/summary`
-			);
+		await withRuntime({}, async baseUrl => {
+			const protectedSummary = await fetch(`${baseUrl}/admins/classroom-analytics/summary`);
+			const retiredServiceSummary = await fetch(`${baseUrl}/classroom-analytics/summary`);
 
 			expect(protectedSummary.status).toBe(403);
-			expect(protectedSummary.headers.get("cache-control")).toBe(
-				"no-store"
-			);
+			expect(protectedSummary.headers.get("cache-control")).toBe("no-store");
 			expect(retiredServiceSummary.status).toBe(404);
 		});
 	});
@@ -246,7 +341,7 @@ describe("Admin-only account runtime", () => {
 				tutorID: "legacy-tutor",
 				userID: "legacy-user"
 			},
-			async (baseUrl) => {
+			async baseUrl => {
 				const response = await fetch(`${baseUrl}/accounts/me`);
 
 				expect(response.status).toBe(200);
@@ -258,30 +353,22 @@ describe("Admin-only account runtime", () => {
 	});
 
 	it("does not mount Admin email checks or mutation and keeps password change private", async () => {
-		const accountRoutesSource = readFileSync(
-			resolve(__dirname, "../src/routes/accountRoutes.ts"),
-			"utf8"
-		);
+		const accountRoutesSource = readFileSync(resolve(__dirname, "../src/routes/accountRoutes.ts"), "utf8");
 		const authControllerSource = readFileSync(
 			resolve(__dirname, "../src/controllers/auth/authController.ts"),
 			"utf8"
 		);
-		const adminRoutesSource = readFileSync(
-			resolve(__dirname, "../src/routes/adminRoutes.ts"),
-			"utf8"
-		);
+		const adminRoutesSource = readFileSync(resolve(__dirname, "../src/routes/adminRoutes.ts"), "utf8");
 		const adminControllerSource = readFileSync(
 			resolve(__dirname, "../src/controllers/users/adminController.ts"),
 			"utf8"
 		);
 		expect(accountRoutesSource).not.toMatch(/checkEmail|changeEmail/);
-		expect(authControllerSource).not.toMatch(
-			/export const (?:checkEmail|changeEmail)/
-		);
+		expect(authControllerSource).not.toMatch(/export const (?:checkEmail|changeEmail)/);
 		expect(adminRoutesSource).not.toMatch(/router\.put\("\/:adminID"|updateAdmin/);
 		expect(adminControllerSource).not.toMatch(/export const updateAdmin/);
 
-		await withRuntime({}, async (baseUrl) => {
+		await withRuntime({}, async baseUrl => {
 			const responses = await Promise.all([
 				postJson(baseUrl, "/accounts/checkEmail", { email: "julio@example.org" }),
 				postJson(baseUrl, `/accounts/changeEmail/${ADMIN_SINGLETON_ID}`, {
@@ -310,18 +397,14 @@ describe("Admin-only account runtime", () => {
 			sessionVersion: 0,
 			passwordChangedAt
 		});
-		const comparePassword = vi
-			.spyOn(admin, "comparePassword")
-			.mockResolvedValue(true);
+		const comparePassword = vi.spyOn(admin, "comparePassword").mockResolvedValue(true);
 		const exec = vi.fn().mockResolvedValue(admin);
 		const findOne = vi.spyOn(Admin, "findOne").mockReturnValue({ exec } as any);
 		const authenticated = new Admin({
 			...admin.toObject(),
 			sessionVersion: 1
 		});
-		const rotate = vi
-			.spyOn(Admin, "findOneAndUpdate")
-			.mockReturnValue(queryWith(authenticated) as any);
+		const rotate = vi.spyOn(Admin, "findOneAndUpdate").mockReturnValue(queryWith(authenticated) as any);
 
 		await withRuntime({}, async (baseUrl, session, sessionOptions) => {
 			const beforeLogin = Date.now();
@@ -338,10 +421,7 @@ describe("Admin-only account runtime", () => {
 			expect(rotate).toHaveBeenCalledWith(
 				expect.objectContaining({
 					_id: ADMIN_SINGLETON_ID,
-					$or: [
-						{ sessionVersion: 0 },
-						{ sessionVersion: { $exists: false } }
-					]
+					$or: [{ sessionVersion: 0 }, { sessionVersion: { $exists: false } }]
 				}),
 				{ $inc: { sessionVersion: 1 } },
 				{ new: true }
@@ -356,15 +436,9 @@ describe("Admin-only account runtime", () => {
 			});
 			expect(body.currentAdmin).not.toHaveProperty("password");
 			expect(body.currentAdmin).not.toHaveProperty("sessionVersion");
-			expect(session.adminExpiresAt).toBeGreaterThanOrEqual(
-				beforeLogin + 8 * 60 * 60 * 1000
-			);
-			expect(session.adminExpiresAt).toBeLessThanOrEqual(
-				Date.now() + 8 * 60 * 60 * 1000
-			);
-			expect(session.adminLastActivityAt).toBeGreaterThanOrEqual(
-				beforeLogin
-			);
+			expect(session.adminExpiresAt).toBeGreaterThanOrEqual(beforeLogin + 8 * 60 * 60 * 1000);
+			expect(session.adminExpiresAt).toBeLessThanOrEqual(Date.now() + 8 * 60 * 60 * 1000);
+			expect(session.adminLastActivityAt).toBeGreaterThanOrEqual(beforeLogin);
 			expect(session.adminLastActivityAt).toBeLessThanOrEqual(Date.now());
 			expect(sessionOptions.maxAge).toBeUndefined();
 			expect(sessionOptions.expires).toBeUndefined();
@@ -379,9 +453,7 @@ describe("Admin-only account runtime", () => {
 			password: "stored password hash",
 			sessionVersion: 0
 		});
-		const comparePassword = vi
-			.spyOn(admin, "comparePassword")
-			.mockResolvedValue(false);
+		const comparePassword = vi.spyOn(admin, "comparePassword").mockResolvedValue(false);
 		vi.spyOn(Admin, "findOne").mockReturnValue({
 			exec: vi.fn().mockResolvedValue(admin)
 		} as any);
@@ -426,9 +498,7 @@ describe("Admin-only account runtime", () => {
 			password: "stored password hash",
 			sessionVersion: 0
 		});
-		const comparePassword = vi
-			.spyOn(admin, "comparePassword")
-			.mockResolvedValue(true);
+		const comparePassword = vi.spyOn(admin, "comparePassword").mockResolvedValue(true);
 		vi.spyOn(Admin, "findOne").mockReturnValue({
 			exec: vi.fn().mockResolvedValue(admin)
 		} as any);
@@ -436,9 +506,7 @@ describe("Admin-only account runtime", () => {
 			...admin.toObject(),
 			sessionVersion: 1
 		});
-		vi.spyOn(Admin, "findOneAndUpdate").mockReturnValue(
-			queryWith(authenticated) as any
-		);
+		vi.spyOn(Admin, "findOneAndUpdate").mockReturnValue(queryWith(authenticated) as any);
 		const revokeStudent = vi
 			.spyOn(Student, "updateOne")
 			.mockResolvedValue({ acknowledged: true, modifiedCount: 1 } as any);
@@ -490,14 +558,14 @@ describe("Admin-only account runtime", () => {
 			exec: vi.fn().mockResolvedValue(admin)
 		} as any);
 		vi.spyOn(Admin, "findOneAndUpdate").mockReturnValue(
-			queryWith(new Admin({
-				...admin.toObject(),
-				sessionVersion: 1
-			})) as any
+			queryWith(
+				new Admin({
+					...admin.toObject(),
+					sessionVersion: 1
+				})
+			) as any
 		);
-		vi.spyOn(Student, "updateOne").mockRejectedValue(
-			new Error("database unavailable")
-		);
+		vi.spyOn(Student, "updateOne").mockRejectedValue(new Error("database unavailable"));
 
 		await withRuntime(
 			{
@@ -542,9 +610,7 @@ describe("Admin-only account runtime", () => {
 			password: "legacy-password-hash",
 			sessionVersion: 1
 		});
-		const rotate = vi
-			.spyOn(Admin, "findOneAndUpdate")
-			.mockReturnValue(queryWith(authenticated) as any);
+		const rotate = vi.spyOn(Admin, "findOneAndUpdate").mockReturnValue(queryWith(authenticated) as any);
 
 		await withRuntime({}, async (baseUrl, session) => {
 			const response = await postJson(baseUrl, "/accounts/login", {
@@ -556,10 +622,7 @@ describe("Admin-only account runtime", () => {
 			expect(session.adminSessionVersion).toBe(1);
 			expect(rotate).toHaveBeenCalledWith(
 				expect.objectContaining({
-					$or: [
-						{ sessionVersion: 0 },
-						{ sessionVersion: { $exists: false } }
-					]
+					$or: [{ sessionVersion: 0 }, { sessionVersion: { $exists: false } }]
 				}),
 				{ $inc: { sessionVersion: 1 } },
 				{ new: true }
@@ -568,7 +631,7 @@ describe("Admin-only account runtime", () => {
 	});
 
 	it("throttles repeated teacher login attempts", async () => {
-		await withRuntime({}, async (baseUrl) => {
+		await withRuntime({}, async baseUrl => {
 			const responses: Response[] = [];
 			for (let attempt = 0; attempt < 11; attempt += 1) {
 				responses.push(await postJson(baseUrl, "/accounts/login", {}));
@@ -580,23 +643,19 @@ describe("Admin-only account runtime", () => {
 	});
 
 	it("rejects a short replacement teacher password", async () => {
-			const admin = {
-				_id: { toString: () => ADMIN_SINGLETON_ID },
-				sessionVersion: 0,
-				comparePassword: vi.fn(),
-				save: vi.fn()
-			};
-			vi.spyOn(Admin, "findById").mockReturnValue(queryWith(admin) as any);
+		const admin = {
+			_id: { toString: () => ADMIN_SINGLETON_ID },
+			sessionVersion: 0,
+			comparePassword: vi.fn(),
+			save: vi.fn()
+		};
+		vi.spyOn(Admin, "findById").mockReturnValue(queryWith(admin) as any);
 
-		await withRuntime({ adminID: ADMIN_SINGLETON_ID }, async (baseUrl) => {
-			const response = await postJson(
-				baseUrl,
-				`/accounts/changePassword/${ADMIN_SINGLETON_ID}`,
-				{
-					currentPassword: "old password",
-					newPassword: "too short"
-				}
-			);
+		await withRuntime({ adminID: ADMIN_SINGLETON_ID }, async baseUrl => {
+			const response = await postJson(baseUrl, `/accounts/changePassword/${ADMIN_SINGLETON_ID}`, {
+				currentPassword: "old password",
+				newPassword: "too short"
+			});
 
 			expect(response.status).toBe(400);
 			await expect(response.json()).resolves.toEqual({
@@ -615,21 +674,15 @@ describe("Admin-only account runtime", () => {
 			password: "stored password hash",
 			sessionVersion: 0
 		});
-		const comparePassword = vi
-			.spyOn(admin, "comparePassword")
-			.mockResolvedValue(false);
+		const comparePassword = vi.spyOn(admin, "comparePassword").mockResolvedValue(false);
 		vi.spyOn(Admin, "findById").mockReturnValue(queryWith(admin) as any);
 
 		await withRuntime({}, async (baseUrl, session) => {
 			const passwordChange = () =>
-				postJson(
-					baseUrl,
-					`/accounts/changePassword/${ADMIN_SINGLETON_ID}`,
-					{
-						currentPassword: "incorrect teacher password",
-						newPassword: "a secure classroom passphrase"
-					}
-				);
+				postJson(baseUrl, `/accounts/changePassword/${ADMIN_SINGLETON_ID}`, {
+					currentPassword: "incorrect teacher password",
+					newPassword: "a secure classroom passphrase"
+				});
 
 			for (let attempt = 0; attempt < 11; attempt += 1) {
 				const response = await passwordChange();
@@ -666,9 +719,7 @@ describe("Admin-only account runtime", () => {
 			role: "admin",
 			sessionVersion: 0
 		});
-		const comparePassword = vi
-			.spyOn(admin, "comparePassword")
-			.mockResolvedValue(true);
+		const comparePassword = vi.spyOn(admin, "comparePassword").mockResolvedValue(true);
 		vi.spyOn(Admin, "findById").mockReturnValue(queryWith(admin) as any);
 		const updated = new Admin({
 			...admin.toObject(),
@@ -676,19 +727,13 @@ describe("Admin-only account runtime", () => {
 			passwordChangedAt: new Date(),
 			sessionVersion: 1
 		});
-		const update = vi
-			.spyOn(Admin, "findOneAndUpdate")
-			.mockReturnValue(queryWith(updated) as any);
+		const update = vi.spyOn(Admin, "findOneAndUpdate").mockReturnValue(queryWith(updated) as any);
 
 		await withRuntime({ adminID: ADMIN_SINGLETON_ID }, async (baseUrl, session) => {
-			const response = await postJson(
-				baseUrl,
-				`/accounts/changePassword/${ADMIN_SINGLETON_ID}`,
-				{
-					currentPassword: "old password",
-					newPassword: "a secure classroom passphrase"
-				}
-			);
+			const response = await postJson(baseUrl, `/accounts/changePassword/${ADMIN_SINGLETON_ID}`, {
+				currentPassword: "old password",
+				newPassword: "a secure classroom passphrase"
+			});
 
 			expect(response.status).toBe(200);
 			expect(comparePassword).toHaveBeenCalledWith("old password");
@@ -733,31 +778,24 @@ describe("Admin-only account runtime", () => {
 		vi.spyOn(Admin, "findById").mockReturnValue(queryWith(admin) as any);
 		vi.spyOn(Admin, "findOneAndUpdate").mockReturnValue(queryWith(null) as any);
 
-		await withRuntime(
-			{ adminID: ADMIN_SINGLETON_ID, adminSessionVersion: 0 },
-			async (baseUrl, session) => {
-				const response = await postJson(
-					baseUrl,
-					`/accounts/changePassword/${ADMIN_SINGLETON_ID}`,
-					{
-						currentPassword: "old password",
-						newPassword: "a secure classroom passphrase"
-					}
-				);
+		await withRuntime({ adminID: ADMIN_SINGLETON_ID, adminSessionVersion: 0 }, async (baseUrl, session) => {
+			const response = await postJson(baseUrl, `/accounts/changePassword/${ADMIN_SINGLETON_ID}`, {
+				currentPassword: "old password",
+				newPassword: "a secure classroom passphrase"
+			});
 
-				expect(response.status).toBe(409);
-				expect(session.adminID).toBeUndefined();
-				expect(session.adminExpiresAt).toBeUndefined();
-				expect(session.adminLastActivityAt).toBeUndefined();
-				expect(session.adminSessionVersion).toBeUndefined();
-			}
-		);
+			expect(response.status).toBe(409);
+			expect(session.adminID).toBeUndefined();
+			expect(session.adminExpiresAt).toBeUndefined();
+			expect(session.adminLastActivityAt).toBeUndefined();
+			expect(session.adminSessionVersion).toBeUndefined();
+		});
 	});
 
 	it("rejects a non-singleton Admin session before querying the database", async () => {
 		const findById = vi.spyOn(Admin, "findById");
 
-		await withRuntime({ adminID: "legacy-admin" }, async (baseUrl) => {
+		await withRuntime({ adminID: "legacy-admin" }, async baseUrl => {
 			const response = await fetch(`${baseUrl}/admins/loggedin`);
 
 			expect(response.status).toBe(403);
@@ -773,16 +811,13 @@ describe("Admin-only account runtime", () => {
 		};
 		vi.spyOn(Admin, "findById").mockReturnValue(queryWith(admin) as any);
 
-		await withRuntime(
-			{ adminID: ADMIN_SINGLETON_ID, adminSessionVersion: 1 },
-			async (baseUrl, session) => {
-				const response = await fetch(`${baseUrl}/admins/loggedin`);
+		await withRuntime({ adminID: ADMIN_SINGLETON_ID, adminSessionVersion: 1 }, async (baseUrl, session) => {
+			const response = await fetch(`${baseUrl}/admins/loggedin`);
 
-				expect(response.status).toBe(403);
-				expect(session.adminID).toBeUndefined();
-				expect(session.adminSessionVersion).toBeUndefined();
-			}
-		);
+			expect(response.status).toBe(403);
+			expect(session.adminID).toBeUndefined();
+			expect(session.adminSessionVersion).toBeUndefined();
+		});
 	});
 
 	it("clears an expired absolute Admin session without querying the account", async () => {
@@ -831,28 +866,23 @@ describe("Admin-only account runtime", () => {
 	});
 
 	it("revokes copied Admin cookies when Julio signs out", async () => {
-		const revoke = vi
-			.spyOn(Admin, "updateOne")
-			.mockResolvedValue({ modifiedCount: 1 } as any);
+		const revoke = vi.spyOn(Admin, "updateOne").mockResolvedValue({ modifiedCount: 1 } as any);
 
-		await withRuntime(
-			{ adminID: ADMIN_SINGLETON_ID, adminSessionVersion: 3 },
-			async baseUrl => {
-				const response = await fetch(`${baseUrl}/accounts/logout`, {
-					method: "DELETE",
-					headers: { "X-Classroom-Request": "1" }
-				});
+		await withRuntime({ adminID: ADMIN_SINGLETON_ID, adminSessionVersion: 3 }, async baseUrl => {
+			const response = await fetch(`${baseUrl}/accounts/logout`, {
+				method: "DELETE",
+				headers: { "X-Classroom-Request": "1" }
+			});
 
-				expect(response.status).toBe(200);
-				expect(revoke).toHaveBeenCalledWith(
-					{
-						_id: ADMIN_SINGLETON_ID,
-						sessionVersion: 3
-					},
-					{ $inc: { sessionVersion: 1 } }
-				);
-			}
-		);
+			expect(response.status).toBe(200);
+			expect(revoke).toHaveBeenCalledWith(
+				{
+					_id: ADMIN_SINGLETON_ID,
+					sessionVersion: 3
+				},
+				{ $inc: { sessionVersion: 1 } }
+			);
+		});
 	});
 
 	it("serializes the Admin password-change timestamp without credentials or session state", () => {
@@ -914,7 +944,7 @@ describe("Admin-only account runtime", () => {
 	});
 
 	it("rejects unsafe account requests without the classroom header", async () => {
-		await withRuntime({}, async (baseUrl) => {
+		await withRuntime({}, async baseUrl => {
 			const missingHeader = await fetch(`${baseUrl}/accounts/login`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
@@ -943,7 +973,7 @@ describe("Admin-only account runtime", () => {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					"Origin": "https://attacker.example",
+					Origin: "https://attacker.example",
 					"X-Classroom-Request": "1"
 				},
 				body: JSON.stringify({})

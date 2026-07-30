@@ -2,7 +2,7 @@
 	<footer class="site-footer">
 		<div class="site-shell site-shell--wide site-footer__inner">
 			<RouterLink class="site-footer__link" to="/student-privacy">
-				Student privacy
+				Student privacy and record requests
 			</RouterLink>
 		</div>
 	</footer>
@@ -19,10 +19,13 @@
 }
 
 .site-footer__link {
-	color: var(--color-ink-soft);
-	font-size: 0.78rem;
-	line-height: 1.3;
-	text-decoration: none;
+	color: var(--color-ink);
+	font-size: 0.95rem;
+	font-weight: 750;
+	line-height: 1.45;
+	text-decoration: underline;
+	text-decoration-thickness: 0.08em;
+	text-underline-offset: 0.2em;
 }
 
 .site-footer__link:hover {

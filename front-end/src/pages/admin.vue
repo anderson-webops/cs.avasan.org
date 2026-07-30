@@ -6,7 +6,10 @@ import AccountManagement from "@/components/AccountManagement.vue";
 import AccountSecurity from "@/components/AccountSecurity.vue";
 import ClassroomAnalytics from "@/components/ClassroomAnalytics.vue";
 import StudentManagement from "@/components/StudentManagement.vue";
-import { studentAccountsAreEnabled } from "@/modules/classroomFeatures";
+import {
+	studentAccountsAreEnabled,
+	studentRecordMaintenanceIsEnabled
+} from "@/modules/classroomFeatures";
 import { useAppStore } from "@/stores/app";
 
 defineOptions({ name: "AdminPage" });
@@ -15,6 +18,9 @@ const app = useAppStore();
 const route = useRoute();
 const { adminSessionRevalidating, currentAdmin } = storeToRefs(app);
 const analyticsPanel = ref<HTMLElement | null>(null);
+const studentAccountsEnabled = studentAccountsAreEnabled();
+const studentRecordManagementEnabled =
+	studentAccountsEnabled || studentRecordMaintenanceIsEnabled();
 
 async function focusRequestedSection() {
 	if (
@@ -64,10 +70,12 @@ watch([() => route.query.section, currentAdmin], focusRequestedSection);
 					<AccountSecurity :entity-id="currentAdmin._id" />
 				</section>
 				<section
-					v-if="studentAccountsAreEnabled()"
+					v-if="studentRecordManagementEnabled"
 					class="admin-panel site-surface"
 				>
-					<StudentManagement />
+					<StudentManagement
+						:maintenance-only="!studentAccountsEnabled"
+					/>
 				</section>
 			</div>
 		</div>

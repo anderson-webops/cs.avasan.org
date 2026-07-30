@@ -17,6 +17,8 @@ export interface StudentAccount {
 	createdAt?: string;
 	updatedAt?: string;
 	lastLoginAt?: string | null;
+	retentionExpiresAt?: string | null;
+	deletionPending?: boolean;
 	projectCount?: number;
 	lastProjectSavedAt?: string | null;
 }
@@ -42,6 +44,7 @@ export interface StudentRecordDownload {
 
 export interface StudentDeletionReceipt {
 	operationID: string;
+	reason: "julio-request" | "retention-expiry";
 	status: "completed" | "in-progress" | "needs-retry";
 	subject: {
 		studentID: string;
@@ -49,7 +52,7 @@ export interface StudentDeletionReceipt {
 	};
 	requestedAt: string;
 	completedAt: string | null;
-	expiresAt: string;
+	expiresAt: string | null;
 	deletedRecords: {
 		oauthAttempts: number;
 		projects: number;
@@ -132,6 +135,18 @@ export async function setAdminStudentActive(
 	const { data } = await api.patch<{ student: StudentAccount }>(
 		`/admins/students/${studentID}`,
 		{ active }
+	);
+	return data.student;
+}
+
+export async function correctAdminStudentUsername(
+	studentID: string,
+	username: string,
+	teacherPassword: string
+) {
+	const { data } = await api.patch<{ student: StudentAccount }>(
+		`/admins/students/${studentID}/username`,
+		{ teacherPassword, username }
 	);
 	return data.student;
 }

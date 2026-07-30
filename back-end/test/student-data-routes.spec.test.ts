@@ -7,12 +7,15 @@ const modelMocks = vi.hoisted(() => ({
 	heldProjectWrite: vi.fn(),
 	oauthCountDocuments: vi.fn(),
 	oauthDeleteMany: vi.fn(),
+	projectCountDocuments: vi.fn(),
 	projectDeleteMany: vi.fn(),
 	projectFind: vi.fn(),
+	reviewCountDocuments: vi.fn(),
 	reviewDeleteMany: vi.fn(),
 	reviewFind: vi.fn(),
-	receiptCreate: vi.fn(),
 	receiptFind: vi.fn(),
+	receiptFindOne: vi.fn(),
+	receiptFindOneAndUpdate: vi.fn(),
 	receiptUpdateOne: vi.fn(),
 	studentDeleteOne: vi.fn(),
 	studentFindById: vi.fn(),
@@ -27,12 +30,14 @@ vi.mock("../src/models/schemas/OAuthLoginAttempt.js", () => ({
 }));
 vi.mock("../src/models/schemas/PythonProject.js", () => ({
 	PythonProject: {
+		countDocuments: modelMocks.projectCountDocuments,
 		deleteMany: modelMocks.projectDeleteMany,
 		find: modelMocks.projectFind
 	}
 }));
 vi.mock("../src/models/schemas/PythonProjectReview.js", () => ({
 	PythonProjectReview: {
+		countDocuments: modelMocks.reviewCountDocuments,
 		deleteMany: modelMocks.reviewDeleteMany,
 		find: modelMocks.reviewFind
 	}
@@ -40,8 +45,9 @@ vi.mock("../src/models/schemas/PythonProjectReview.js", () => ({
 vi.mock("../src/models/schemas/StudentDataDeletionReceipt.js", () => ({
 	STUDENT_DELETION_RECEIPT_RETENTION_DAYS: 90,
 	StudentDataDeletionReceipt: {
-		create: modelMocks.receiptCreate,
 		find: modelMocks.receiptFind,
+		findOne: modelMocks.receiptFindOne,
+		findOneAndUpdate: modelMocks.receiptFindOneAndUpdate,
 		updateOne: modelMocks.receiptUpdateOne
 	}
 }));
@@ -176,11 +182,28 @@ describe("student record export and deletion", () => {
 			])
 		);
 		modelMocks.oauthCountDocuments.mockReturnValue(queryWith(1));
+		modelMocks.projectCountDocuments.mockReturnValue(queryWith(1));
+		modelMocks.reviewCountDocuments.mockReturnValue(queryWith(1));
 		modelMocks.oauthDeleteMany.mockReturnValue(queryWith({ deletedCount: 1 }));
 		modelMocks.projectDeleteMany.mockReturnValue(queryWith({ deletedCount: 1 }));
 		modelMocks.reviewDeleteMany.mockReturnValue(queryWith({ deletedCount: 1 }));
-		modelMocks.receiptCreate.mockResolvedValue({});
 		modelMocks.receiptFind.mockReturnValue(queryWith([]));
+		modelMocks.receiptFindOne.mockReturnValue(queryWith(null));
+		modelMocks.receiptFindOneAndUpdate.mockImplementation(
+			(_filter, update) =>
+				queryWith({
+					_id: new Types.ObjectId(),
+					createdAt,
+					operationID: update.$setOnInsert.operationID,
+					reason: update.$setOnInsert.reason,
+					recordInventory: update.$set.recordInventory,
+					requestedAt: update.$setOnInsert.requestedAt,
+					status: "in-progress",
+					studentID: update.$setOnInsert.studentID,
+					updatedAt: createdAt,
+					username: update.$setOnInsert.username
+				})
+		);
 		modelMocks.receiptUpdateOne.mockReturnValue(queryWith({ acknowledged: true, matchedCount: 1 }));
 		modelMocks.studentFindOneAndUpdate
 			.mockReturnValueOnce(queryWith(studentRecord({ active: false, sessionVersion: 5 })))
@@ -277,13 +300,26 @@ describe("student record export and deletion", () => {
 					}
 				}
 			});
-			expect(modelMocks.receiptCreate).toHaveBeenCalledWith(
+			expect(
+				new Date(body.receipt.expiresAt).getTime()
+				- new Date(body.receipt.completedAt).getTime()
+			).toBe(90 * 24 * 60 * 60 * 1000);
+			expect(modelMocks.receiptFindOneAndUpdate).toHaveBeenCalledWith(
 				expect.objectContaining({
 					operationID: expect.any(String),
-					studentID,
-					username: "student-one",
-					status: "in-progress"
-				})
+					recordInventory: { $exists: false }
+				}),
+				expect.objectContaining({
+					$set: expect.objectContaining({
+						recordInventory: body.deletedRecords,
+						status: "in-progress"
+					}),
+					$setOnInsert: expect.objectContaining({
+						studentID,
+						username: "student-one"
+					})
+				}),
+				expect.objectContaining({ new: true, upsert: true })
 			);
 			expect(modelMocks.receiptUpdateOne).toHaveBeenCalledWith(
 				{ operationID: body.operation.id },
@@ -299,22 +335,31 @@ describe("student record export and deletion", () => {
 				{ _id: studentID, sessionVersion: 4 },
 				{
 					$inc: { sessionVersion: 1 },
-					$set: {
+					$set: expect.objectContaining({
 						active: false,
-						dataDeletionPendingAt: expect.any(Date)
-					}
+						dataDeletionOperationID: body.operation.id,
+						dataDeletionPendingAt: expect.any(Date),
+						dataDeletionReason: "julio-request",
+						dataDeletionRequestedAt: expect.any(Date)
+					})
 				},
 				{ new: true }
 			);
 			expect(modelMocks.studentFindOneAndUpdate).toHaveBeenNthCalledWith(
 				2,
-				{ _id: studentID },
+				{
+					_id: studentID,
+					dataDeletionOperationID: body.operation.id,
+					sessionVersion: 5
+				},
 				{
 					$inc: { sessionVersion: 1 },
-					$set: {
+					$set: expect.objectContaining({
 						active: false,
-						dataDeletionPendingAt: expect.any(Date)
-					}
+						dataDeletionOperationID: body.operation.id,
+						dataDeletionPendingAt: expect.any(Date),
+						dataDeletionReason: "julio-request"
+					})
 				},
 				{ new: true }
 			);
@@ -335,7 +380,116 @@ describe("student record export and deletion", () => {
 			expect(modelMocks.studentDeleteOne).toHaveBeenCalledWith({
 				_id: studentID,
 				active: false,
+				dataDeletionOperationID: body.operation.id,
 				sessionVersion: 6
+			});
+		});
+	});
+
+	it("resumes legacy pending metadata from the same durable receipt", async () => {
+		const operationID = "11111111-1111-4111-8111-111111111111";
+		const requestedAt = new Date("2026-07-29T12:30:00.000Z");
+		const pendingAt = new Date("2026-07-29T12:45:00.000Z");
+		const inventory = {
+			oauthAttempts: 1,
+			projects: 1,
+			reviews: 1,
+			students: 1
+		};
+		modelMocks.studentFindById.mockReturnValue(
+			queryWith(
+				studentRecord({
+					active: false,
+					dataDeletionOperationID: operationID,
+					dataDeletionPendingAt: pendingAt
+				})
+			)
+		);
+		modelMocks.receiptFindOne.mockReturnValue(
+			queryWith({
+				_id: new Types.ObjectId(),
+				createdAt: requestedAt,
+				expiresAt: new Date("2026-10-27T12:30:00.000Z"),
+				operationID,
+				reason: "retention-expiry",
+				recordInventory: inventory,
+				requestedAt,
+				status: "needs-retry",
+				studentID,
+				updatedAt: pendingAt,
+				username: "student-one"
+			})
+		);
+
+		await withRuntime(async baseUrl => {
+			const response = await request(baseUrl, `/students/${studentID}`, "DELETE", {
+				confirmUsername: "student-one",
+				teacherPassword: "teacher-passphrase"
+			});
+			const body = await response.json();
+
+			expect(response.status).toBe(200);
+			expect(body).toMatchObject({
+				deletedRecords: inventory,
+				operation: {
+					id: operationID,
+					performedAt: requestedAt.toISOString()
+				},
+				receipt: {
+					reason: "retention-expiry"
+				}
+			});
+			expect(modelMocks.studentFindOneAndUpdate).toHaveBeenNthCalledWith(
+				1,
+				expect.objectContaining({
+					_id: studentID,
+					dataDeletionOperationID: operationID,
+					sessionVersion: 4
+				}),
+				expect.any(Object),
+				{ new: true }
+			);
+			expect(modelMocks.studentFindOneAndUpdate).toHaveBeenNthCalledWith(
+				2,
+				expect.objectContaining({
+					_id: studentID,
+					dataDeletionOperationID: operationID
+				}),
+				expect.objectContaining({
+					$set: expect.objectContaining({
+						dataDeletionOperationID: operationID,
+						dataDeletionReason: "retention-expiry",
+						dataDeletionRequestedAt: requestedAt
+					})
+				}),
+				{ new: true }
+			);
+			expect(modelMocks.receiptFindOneAndUpdate).not.toHaveBeenCalled();
+		});
+	});
+
+	it("does not present receipt inventory as deleted before receipt completion", async () => {
+		modelMocks.receiptUpdateOne.mockRejectedValueOnce(
+			new Error("receipt completion unavailable")
+		);
+
+		await withRuntime(async baseUrl => {
+			const response = await request(baseUrl, `/students/${studentID}`, "DELETE", {
+				confirmUsername: "student-one",
+				teacherPassword: "teacher-passphrase"
+			});
+			const body = await response.json();
+
+			expect(response.status).toBe(200);
+			expect(body.deletedRecords).toEqual({
+				oauthAttempts: 1,
+				projects: 1,
+				reviews: 1,
+				students: 1
+			});
+			expect(body.receipt).toMatchObject({
+				deletedRecords: null,
+				status: "in-progress"
 			});
 		});
 	});
@@ -451,6 +605,21 @@ describe("student record export and deletion", () => {
 						reviews: 1,
 						students: 1
 					}
+				},
+				{
+					operationID: "22222222-2222-4222-8222-222222222222",
+					studentID,
+					username: "student-one",
+					status: "in-progress",
+					requestedAt: new Date("2026-07-29T11:00:00.000Z"),
+					// Even a stale legacy value must not be presented as a
+					// completed deletion count.
+					deletedRecords: {
+						oauthAttempts: 9,
+						projects: 9,
+						reviews: 9,
+						students: 1
+					}
 				}
 			])
 		);
@@ -460,22 +629,28 @@ describe("student record export and deletion", () => {
 			const body = await response.json();
 
 			expect(response.status).toBe(200);
-			expect(body).toMatchObject({
-				retentionDays: 90,
-				receipts: [
+			expect(body.retentionDays).toBe(90);
+			expect(body.receipts[0]).toMatchObject({
+				operationID: "47b3ce74-5bcc-4a04-8dd4-c362e5f43886",
+				status: "completed",
+				subject: {
+					studentID: studentID.toString(),
+					username: "student-one"
+				}
+			});
+			expect(modelMocks.receiptFind).toHaveBeenCalledWith({
+				$or: [
 					{
-						operationID: "47b3ce74-5bcc-4a04-8dd4-c362e5f43886",
-						status: "completed",
-						subject: {
-							studentID: studentID.toString(),
-							username: "student-one"
-						}
+						status: { $in: ["in-progress", "needs-retry"] }
+					},
+					{
+						expiresAt: { $gt: expect.any(Date) },
+						status: "completed"
 					}
 				]
 			});
-			expect(modelMocks.receiptFind).toHaveBeenCalledWith({
-				expiresAt: { $gt: expect.any(Date) }
-			});
+			expect(body.receipts[1].deletedRecords).toBeNull();
+			expect(body.receipts[1].expiresAt).toBeNull();
 		});
 	});
 });

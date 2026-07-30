@@ -70,6 +70,7 @@ const oauthProviders = ref({
 const oauthProvidersLoaded = ref(false);
 const passwordSetupRequestID = ref("");
 const passwordSetupRequestStudentID = ref("");
+const triggerButton = ref<HTMLButtonElement | null>(null);
 const usernameInput = ref<HTMLInputElement | null>(null);
 const newPasswordInput = ref<HTMLInputElement | null>(null);
 let inactivityTimer: ReturnType<typeof window.setTimeout> | null = null;
@@ -204,15 +205,25 @@ async function openSignIn() {
 	usernameInput.value?.focus();
 }
 
-function closePanel() {
+async function closePanel() {
 	if (studentRequiresPasswordSetup.value || isSubmitting.value) return;
 	error.value = "";
 	clearSecrets();
 	isOpen.value = false;
+	await nextTick();
+	triggerButton.value?.focus();
 }
 
 function closeOnEscape() {
-	closePanel();
+	void closePanel();
+}
+
+function toggleSignInPanel() {
+	if (panelIsOpen.value) {
+		void closePanel();
+		return;
+	}
+	void openSignIn();
 }
 
 async function acceptStudentSignIn(
@@ -752,11 +763,12 @@ onBeforeUnmount(() => {
 		</div>
 		<div v-else-if="!currentUser" class="student-access__closed">
 			<button
+				ref="triggerButton"
 				class="site-button site-button--secondary student-access__trigger"
 				:aria-expanded="panelIsOpen"
 				aria-controls="student-access-panel"
 				type="button"
-				@click="panelIsOpen ? closePanel() : openSignIn()"
+				@click="toggleSignInPanel"
 			>
 				Student sign in
 			</button>
@@ -796,7 +808,7 @@ onBeforeUnmount(() => {
 						aria-label="Close student sign in"
 						class="student-access__close"
 						type="button"
-						@click="closePanel"
+						@click="closePanel()"
 					>
 						Close
 					</button>
@@ -860,7 +872,7 @@ onBeforeUnmount(() => {
 				/>
 
 				<a class="student-access__privacy" href="/student-privacy">
-					How student information is used
+					Student privacy and record requests
 				</a>
 
 				<p v-if="error" class="student-access__error" role="alert">
@@ -948,7 +960,7 @@ onBeforeUnmount(() => {
 				/>
 
 				<a class="student-access__privacy" href="/student-privacy">
-					How student information is used
+					Student privacy and record requests
 				</a>
 
 				<p v-if="error" class="student-access__error" role="alert">
