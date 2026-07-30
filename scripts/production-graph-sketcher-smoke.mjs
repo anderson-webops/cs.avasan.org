@@ -1,6 +1,10 @@
+import process from "node:process";
 import { pathToFileURL } from "node:url";
 
-const origin = process.env.CLASSES_SITE_ORIGIN || "https://cs.avasan.org";
+const origin
+	= process.env.CS_SITE_ORIGIN
+		|| process.env.CLASSES_SITE_ORIGIN
+		|| "https://cs.avasan.org";
 const timeoutMs = Number(process.env.CLASSES_SITE_SMOKE_TIMEOUT_MS || 15000);
 const smokePath = "/graph-sketcher";
 
@@ -19,7 +23,8 @@ async function fetchText(url) {
 			throw new Error(`${url} returned HTTP ${response.status}`);
 		}
 		return await response.text();
-	} finally {
+	}
+	finally {
 		clearTimeout(timeout);
 	}
 }
@@ -42,16 +47,16 @@ export function pageAssetUrls(html, pageUrl = graphSketcherSmokePageUrl()) {
 
 export function containsGraphSketcherRuntimeMarkers(source) {
 	return (
-		source.includes("Graph Sketcher") &&
-		source.includes("Math workspace") &&
-		source.includes("Download project") &&
-		source.includes("Plot function") &&
-		source.includes(".graphsketch") &&
-		source.includes(".ograph") &&
-		source.includes("cs-avasan-graph-sketcher-session-v1") &&
-		source.includes("All rendering, imports, and") &&
-		source.includes("exports run in this browser.") &&
-		source.includes("https://github.com/Jacoba1100254352/GraphSketcher.Linux")
+		source.includes("Graph Sketcher")
+		&& source.includes("Math workspace")
+		&& source.includes("Download project")
+		&& source.includes("Plot function")
+		&& source.includes(".graphsketch")
+		&& source.includes(".ograph")
+		&& source.includes("cs-avasan-graph-sketcher-session-v1")
+		&& source.includes("All rendering, imports, and")
+		&& source.includes("exports run in this browser.")
+		&& source.includes("https://github.com/Jacoba1100254352/GraphSketcher.Linux")
 	);
 }
 
@@ -67,9 +72,9 @@ export function graphSketcherWorkerAssetUrls(source, pageUrl = graphSketcherSmok
 
 export function containsGraphSketcherWorkerMarkers(source) {
 	return (
-		source.includes("contents.xml") &&
-		source.includes("The .ograph archive must contain exactly one contents.xml file.") &&
-		source.includes("The .ograph archive could not be opened.")
+		source.includes("contents.xml")
+		&& source.includes("The .ograph archive must contain exactly one contents.xml file.")
+		&& source.includes("The .ograph archive could not be opened.")
 	);
 }
 
@@ -109,7 +114,7 @@ export async function runProductionGraphSketcherSmoke() {
 
 const invokedUrl = process.argv[1] ? pathToFileURL(process.argv[1]).href : "";
 if (import.meta.url === invokedUrl) {
-	runProductionGraphSketcherSmoke().catch(error => {
+	runProductionGraphSketcherSmoke().catch((error) => {
 		console.error(error instanceof Error ? error.message : error);
 		process.exitCode = 1;
 	});

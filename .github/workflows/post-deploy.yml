@@ -1,0 +1,40 @@
+name: Verify production deployment
+
+on:
+    workflow_dispatch:
+        inputs:
+            expected_release:
+                description: Released semantic version, such as v1.0.0
+                required: true
+                type: string
+            expected_revision:
+                description: Full Git commit SHA embedded in both deployed services
+                required: true
+                type: string
+
+permissions:
+    contents: read
+
+jobs:
+    production-smoke:
+        runs-on: ubuntu-latest
+        timeout-minutes: 20
+
+        steps:
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+            - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+              with:
+                  node-version: 24.18.0
+
+            - name: Verify pinned toolchain
+              run: |
+                  test "$(node --version)" = "v24.18.0"
+                  test "$(npm --version)" = "11.16.0"
+
+            - name: Verify CS production
+              env:
+                  CS_EXPECTED_RELEASE: ${{ inputs.expected_release }}
+                  CS_EXPECTED_REVISION: ${{ inputs.expected_revision }}
+                  CS_SITE_ORIGIN: https://cs.avasan.org
+              run: npm run verify:production

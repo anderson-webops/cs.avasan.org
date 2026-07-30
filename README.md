@@ -222,8 +222,33 @@ configuration:
 - disables application and example host access logs so student network and
   request metadata are not retained;
 - applies browser security headers; and
-- serves the generated public site with an SPA fallback while returning API
-  errors as API responses.
+- serves only generated public routes and returns real 404 responses for
+  unknown paths.
+
+Every frontend build also writes `/release.json`. The full-stack container
+serves that file and `/api/release` with `Cache-Control: no-store`; both expose
+only the semantic `version` and `revision`. They must agree because the
+frontend and API are built from the same checkout. Local and existing automatic
+deployments remain reproducible when no revision is supplied: both report
+`"revision": "unknown"` instead of guessing from ambient Git state. A
+production deployment can make its exact identity publicly verifiable without
+changing application secrets:
+
+```bash
+export CS_RELEASE_VERSION=1.0.0
+export SOURCE_REVISION="$(git rev-parse HEAD)"
+docker compose --env-file deploy/cs.env -f compose.production.yml build
+```
+
+`SOURCE_REVISION`, when supplied, must be the full lowercase 40-character Git
+SHA or the build fails. Netlify uses its built-in full `COMMIT_REF` when
+`SOURCE_REVISION` is absent. Neither release endpoint reports classroom flags,
+student state, credentials, or infrastructure data. After the normal
+five-minute deployment completes, run the manual **Verify production
+deployment** workflow with the expected version and revision. It compares both
+release endpoints and checks known routes, strict 404 behavior, API readiness,
+the Graph Sketcher bundle, and the current fail-closed student and aggregate
+usage boundaries.
 
 To prepare a deployment:
 
@@ -265,12 +290,14 @@ Adapt [`deploy/host-nginx.conf.example`](deploy/host-nginx.conf.example) to the
 existing TLS host; it replaces forwarding headers and proxies only to the
 loopback container port.
 
-After deployment, verify `/`, `/python-ide`, and `/graph-sketcher` anonymously,
-`/api/healthz`, `/api/readyz`, `/admin`, the absence or presence of student UI
-according to the approved flags, and `git diff --check`. If counts are enabled,
-verify both CS and Math POSTs and the protected Admin activity panel. The
-frontend build packages the reviewed Python IDE asset manifest; the backend
-does not stream an upstream asset archive at runtime.
+After deployment, run `npm run verify:production` to verify `/`,
+`/python-ide`, and `/graph-sketcher` anonymously, compare `/release.json` with
+`/api/release`, check `/api/healthz` and `/api/readyz`, and confirm the current
+fail-closed student and usage routes. Also verify `/admin` and
+`git diff --check`. If the privacy-approved features are intentionally enabled
+in a future rollout, update the external smoke expectations in the same
+reviewed change. The frontend build packages the reviewed Python IDE asset
+manifest; the backend does not stream an upstream asset archive at runtime.
 
 Project quota counters are rebuilt from non-deleted projects before the API
 starts listening. Project and counter writes remain separate MongoDB

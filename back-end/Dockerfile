@@ -32,7 +32,11 @@ CMD ["npm", "run", "-w", "back-end", "create-admin-ts"]
 
 FROM npm-stage AS production-stage
 
+ARG CS_RELEASE_VERSION=1.0.0
+ARG SOURCE_REVISION=unknown
+ENV CS_RELEASE_VERSION=$CS_RELEASE_VERSION
 ENV NODE_ENV=production
+ENV SOURCE_REVISION=$SOURCE_REVISION
 WORKDIR /app
 COPY package.json package-lock.json ./
 COPY front-end/package.json ./front-end/package.json
