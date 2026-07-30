@@ -85,6 +85,58 @@ describe("versioned full-stack production deployment", () => {
 		expect(hostProxy).toContain("proxy_buffering off;");
 	});
 
+	it("publishes one non-cacheable release identity for the site and API", () => {
+		const compose = repositoryFile("compose.production.yml");
+		const api = composeService(compose, "api");
+		const frontendDockerfile = repositoryFile("Dockerfile");
+		const apiDockerfile = repositoryFile("back-end/Dockerfile");
+		const frontendReleaseWriter = repositoryFile(
+			"front-end/scripts/write-release-metadata.mjs"
+		);
+		const netlify = repositoryFile("netlify.toml");
+		const proxy = repositoryFile("deploy/nginx.conf");
+		const server = repositoryFile("back-end/src/server.ts");
+		const postDeployWorkflow = repositoryFile(
+			".github/workflows/post-deploy.yml"
+		);
+		const productionSmoke = repositoryFile("scripts/post-deploy-smoke.mjs");
+		const rootPackage = JSON.parse(repositoryFile("package.json")) as {
+			version: string;
+		};
+
+		expect(rootPackage.version).toBe("1.0.0");
+		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-1[.]0[.]0\}/g))
+			.toHaveLength(2);
+		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:-unknown\}/g))
+			.toHaveLength(2);
+		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
+		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=1.0.0");
+		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
+		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=1.0.0");
+		expect(apiDockerfile).toContain("ARG SOURCE_REVISION=unknown");
+		expect(frontendReleaseWriter).toContain(
+			'environment.COMMIT_REF?.trim()'
+		);
+		expect(frontendReleaseWriter).toContain(
+			"const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;"
+		);
+		expect(proxy).toContain('/release.json "no-store";');
+		expect(proxy).toContain("location = /release.json");
+		expect(netlify).toContain('for = "/release.json"');
+		expect(netlify).toContain('Cache-Control = "no-store"');
+		expect(server).toContain('app.get("/release"');
+		expect(server).toContain('res.set("Cache-Control", "no-store")');
+		expect(productionSmoke).toContain('releaseMetadata("/release.json")');
+		expect(productionSmoke).toContain('releaseMetadata("/api/release")');
+		expect(productionSmoke).toContain(
+			"The public site and API report different release identities."
+		);
+		expect(postDeployWorkflow).toContain("workflow_dispatch:");
+		expect(postDeployWorkflow).toContain("expected_release:");
+		expect(postDeployWorkflow).toContain("expected_revision:");
+		expect(postDeployWorkflow).toContain("npm run verify:production");
+	});
+
 	it("keeps privacy features off in the checked-in deployment template", () => {
 		const environment = repositoryFile("deploy/cs.env.example");
 		const compose = repositoryFile("compose.production.yml");
@@ -149,6 +201,9 @@ describe("versioned full-stack production deployment", () => {
 		expect(continuousIntegration).toContain("up --detach --wait --no-build web");
 		expect(continuousIntegration).toContain("down --volumes --remove-orphans");
 		expect(continuousIntegration).toContain('"${origin}/api/readyz"');
+		expect(continuousIntegration).toContain("SOURCE_REVISION: ${{ github.sha }}");
+		expect(continuousIntegration).toContain("CS_EXPECTED_REVISION=\"${SOURCE_REVISION}\"");
+		expect(continuousIntegration).toContain("npm run verify:production");
 		expect(continuousIntegration).toContain('"${origin}/__cs-avasan-deployment-probe-missing"');
 		expect(continuousIntegration).toContain('unknown_status}" = "404"');
 		expect(continuousIntegration).toContain('student_status}" = "404"');

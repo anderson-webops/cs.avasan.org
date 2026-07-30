@@ -230,8 +230,14 @@ jobs:
             MONGO_ROOT_PASSWORD: ci-only-url-safe-password
             MONGO_ROOT_USERNAME: ci
             SESSION_SECRET: ci-only-session-secret-at-least-thirty-two-bytes
+            CS_RELEASE_VERSION: "1.0.0"
+            SOURCE_REVISION: ${{ github.sha }}
         steps:
             - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+            - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+              with:
+                  node-version: 24.18.0
 
             - name: Prepare fail-closed environment
               run: |
@@ -275,6 +281,11 @@ jobs:
 
                   admin_status=$(curl --silent --output /dev/null --write-out '%{http_code}' "${origin}/api/admins/loggedin")
                   test "${admin_status}" = "403"
+
+                  CS_EXPECTED_RELEASE="${CS_RELEASE_VERSION}" \
+                  CS_EXPECTED_REVISION="${SOURCE_REVISION}" \
+                  CS_SITE_ORIGIN="${origin}" \
+                    npm run verify:production
 
             - name: Reject backend exceptions and deprecation warnings
               run: |

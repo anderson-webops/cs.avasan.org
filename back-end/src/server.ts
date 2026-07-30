@@ -27,6 +27,7 @@ import { readClassroomAnalyticsRetentionDays } from "./security/classroomAnalyti
 import { readClassroomPrivacySettings } from "./security/classroomPrivacy.js";
 import { readBooleanSetting, readClassroomOrigin, readSessionSecret } from "./security/environment.js";
 import { selectMongoConnection } from "./security/mongoConnection.js";
+import { readReleaseMetadata } from "./security/releaseMetadata.js";
 import { readTrustProxySetting } from "./security/trustProxy.js";
 import { reconcilePythonProjectQuotas } from "./services/pythonProjectQuotaReconciliation.js";
 import { enabledOAuthProviders } from "./utils/oauthProviderConfig.js";
@@ -38,6 +39,7 @@ async function main() {
 	const internalDiagnosticsKey = env.INTERNAL_DIAGNOSTICS_KEY;
 	const classroomAnalyticsRetentionDays = readClassroomAnalyticsRetentionDays(env.CLASSROOM_ANALYTICS_RETENTION_DAYS);
 	const classroomPrivacy = readClassroomPrivacySettings(env);
+	const releaseMetadata = readReleaseMetadata(env);
 	if (classroomPrivacy.studentOAuthEnabled) {
 		enabledOAuthProviders();
 	}
@@ -47,6 +49,10 @@ async function main() {
 	app.get("/healthz", (_req, res) => {
 		res.set("Cache-Control", "no-store");
 		res.json({ ok: true });
+	});
+	app.get("/release", (_req, res) => {
+		res.set("Cache-Control", "no-store");
+		res.json(releaseMetadata);
 	});
 
 	app.set("trust proxy", readTrustProxySetting(env.TRUST_PROXY_HOPS));
