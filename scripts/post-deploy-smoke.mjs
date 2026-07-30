@@ -12,7 +12,7 @@ const expectedRevision = process.env.CS_EXPECTED_REVISION;
 const timeoutMs = Number(process.env.CS_SITE_SMOKE_TIMEOUT_MS || 15_000);
 const releaseVersionPattern
 	= /^(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-[0-9a-z.-]+)?$/i;
-const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;
+const sourceRevisionPattern = /^[0-9a-f]{40}$/;
 
 function assertion(condition, message) {
 	if (!condition) throw new Error(message);

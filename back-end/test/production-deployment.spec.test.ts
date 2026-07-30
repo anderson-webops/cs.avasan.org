@@ -121,6 +121,7 @@ describe("versioned full-stack production deployment", () => {
 		expect(server).toContain('res.set("Cache-Control", "no-store")');
 		expect(productionSmoke).toContain('releaseMetadata("/release.json")');
 		expect(productionSmoke).toContain('releaseMetadata("/api/release")');
+		expect(productionSmoke).toContain("const sourceRevisionPattern = /^[0-9a-f]{40}$/;");
 		expect(productionSmoke).toContain('adminRedirect.headers.get("location") === "/admin/"');
 		expect(productionSmoke).toContain("The public site and API report different release identities.");
 		expect(productionSmoke).not.toContain("fetch(");
