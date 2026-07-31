@@ -3,7 +3,8 @@ import { env } from "node:process";
 
 export const DEFAULT_MONGODB_SECRET_PATH = "secret/data/cs.avasan.org/mongodb";
 const VAULT_REQUEST_TIMEOUT_MS = 10_000;
-const LOOPBACK_VAULT_HOSTS = new Set(["127.0.0.1", "::1", "localhost"]);
+const MAX_VAULT_RESPONSE_BYTES = 1024 * 1024;
+const LOOPBACK_VAULT_HOSTS = new Set(["127.0.0.1", "[::1]", "localhost"]);
 
 export function vaultAddress(value = env.VAULT_ADDR, nodeEnvironment = env.NODE_ENV): string {
 	const configured = value?.trim() || "http://127.0.0.1:8200";
@@ -50,9 +51,46 @@ export function mongodbSecretPath(): string {
 	return normalized;
 }
 
+export async function readBoundedVaultJson(response: Response, responseName: string): Promise<unknown> {
+	if (!response.body) {
+		throw new Error(`${responseName} response did not include a body.`);
+	}
+
+	const reader = response.body.getReader();
+	const decoder = new TextDecoder();
+	let responseBytes = 0;
+	let responseText = "";
+	try {
+		while (true) {
+			const { done, value } = await reader.read();
+			if (done) break;
+			responseBytes += value.byteLength;
+			if (responseBytes > MAX_VAULT_RESPONSE_BYTES) {
+				await reader.cancel();
+				throw new Error(`${responseName} response exceeded the safe size limit.`);
+			}
+			responseText += decoder.decode(value, { stream: true });
+		}
+		responseText += decoder.decode();
+	}
+	catch (error) {
+		if (error instanceof Error && error.message === `${responseName} response exceeded the safe size limit.`) {
+			throw error;
+		}
+		throw new Error(`${responseName} response could not be read.`);
+	}
+
+	try {
+		return JSON.parse(responseText) as unknown;
+	}
+	catch {
+		throw new Error(`${responseName} response was not valid JSON.`);
+	}
+}
+
 async function vaultLogin(): Promise<string> {
-	const roleId = env.VAULT_ROLE_ID;
-	const secretId = env.VAULT_SECRET_ID;
+	const roleId = env.VAULT_ROLE_ID?.trim();
+	const secretId = env.VAULT_SECRET_ID?.trim();
 	if (!roleId || !secretId) {
 		throw new Error("Vault AppRole credentials are not configured");
 	}
@@ -61,37 +99,39 @@ async function vaultLogin(): Promise<string> {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify({ role_id: roleId, secret_id: secretId }),
+		redirect: "error",
 		signal: AbortSignal.timeout(VAULT_REQUEST_TIMEOUT_MS)
 	});
 	if (!response.ok) {
 		throw new Error(`Vault login failed with status ${response.status}`);
 	}
 
-	const data = (await response.json()) as {
+	const data = (await readBoundedVaultJson(response, "Vault login")) as {
 		auth?: { client_token?: unknown };
 	};
-	if (typeof data.auth?.client_token !== "string" || !data.auth.client_token) {
+	if (typeof data.auth?.client_token !== "string" || !data.auth.client_token.trim()) {
 		throw new Error("Vault login response did not include a token");
 	}
-	return data.auth.client_token;
+	return data.auth.client_token.trim();
 }
 
 export async function readMongoSecret(): Promise<{ uri: string }> {
 	const token = await vaultLogin();
 	const response = await fetch(`${vaultAddress()}/v1/${mongodbSecretPath()}`, {
 		headers: { "X-Vault-Token": token },
+		redirect: "error",
 		signal: AbortSignal.timeout(VAULT_REQUEST_TIMEOUT_MS)
 	});
 	if (!response.ok) {
 		throw new Error(`Vault read failed with status ${response.status}`);
 	}
 
-	const data = (await response.json()) as {
+	const data = (await readBoundedVaultJson(response, "Vault secret")) as {
 		data?: { data?: { uri?: unknown } };
 	};
 	const uri = data.data?.data?.uri;
-	if (typeof uri !== "string" || !uri) {
+	if (typeof uri !== "string" || !uri.trim()) {
 		throw new Error("Vault MongoDB secret did not include a URI");
 	}
-	return { uri };
+	return { uri: uri.trim() };
 }

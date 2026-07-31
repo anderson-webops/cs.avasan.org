@@ -9,7 +9,9 @@ import {
 	claimAnonymousPythonProjectForStudent,
 	createRemotePythonIdeProject,
 	deleteRemotePythonIdeProject,
+	fetchPythonIdeProject,
 	fetchPythonIdeProjects,
+	fetchVisiblePythonIdeProjectReview,
 	fetchVisiblePythonIdeProjectReviews,
 	loadLocalPythonProjects,
 	plainPythonIdeProjectsSnapshot,
@@ -59,14 +61,36 @@ describe("student Python project sync boundaries", () => {
 			data: { projects: [remote] }
 		});
 		vi.mocked(api.get).mockResolvedValueOnce({ data: { reviews: [] } });
+		vi.mocked(api.get).mockResolvedValueOnce({
+			data: { project: remote }
+		});
+		vi.mocked(api.get).mockResolvedValueOnce({
+			data: {
+				review: {
+					_id: "review-a",
+					sourceProject: remote._id,
+					title: remote.title,
+					mode: remote.mode,
+					files: remote.files,
+					activeFileName: remote.activeFileName,
+					reviewerRole: "admin",
+					visibleToStudent: true
+				}
+			}
+		});
 		vi.mocked(api.post).mockResolvedValueOnce({
 			data: { project: remote }
 		});
 		vi.mocked(api.put).mockResolvedValueOnce({ data: { project: remote } });
 		vi.mocked(api.delete).mockResolvedValueOnce({ data: undefined });
 
-		await fetchPythonIdeProjects("student-a");
+		const projectIndex = await fetchPythonIdeProjects("student-a");
 		await fetchVisiblePythonIdeProjectReviews("student-a");
+		const projectDetail = await fetchPythonIdeProject(
+			remote._id,
+			"student-a"
+		);
+		await fetchVisiblePythonIdeProjectReview("review-a", "student-a");
 		await createRemotePythonIdeProject({ title: "Imported" }, "student-a", {
 			importID: "local-import-a"
 		});
@@ -81,14 +105,36 @@ describe("student Python project sync boundaries", () => {
 		});
 
 		const headers = { headers: { "X-Student-ID": "student-a" } };
-		expect(api.get).toHaveBeenNthCalledWith(
-			1,
-			"/students/projects",
-			headers
-		);
+		expect(projectIndex[0]).toMatchObject({
+			_id: remote._id,
+			files: [],
+			remoteContentLoaded: false
+		});
+		expect(projectDetail).toMatchObject({
+			_id: remote._id,
+			files: remote.files,
+			remoteContentLoaded: true
+		});
+		expect(api.get).toHaveBeenNthCalledWith(1, "/students/projects", {
+			...headers,
+			params: { page: 1, pageSize: 10 }
+		});
 		expect(api.get).toHaveBeenNthCalledWith(
 			2,
 			"/students/project-reviews",
+			{
+				...headers,
+				params: { page: 1, pageSize: 10 }
+			}
+		);
+		expect(api.get).toHaveBeenNthCalledWith(
+			3,
+			`/students/projects/${remote._id}`,
+			headers
+		);
+		expect(api.get).toHaveBeenNthCalledWith(
+			4,
+			"/students/project-reviews/review-a",
 			headers
 		);
 		expect(api.post).toHaveBeenCalledWith(
@@ -125,7 +171,8 @@ describe("student Python project sync boundaries", () => {
 		).resolves.toBeUndefined();
 
 		expect(api.get).toHaveBeenCalledWith("/students/projects", {
-			headers: { "X-Student-ID": "student-a" }
+			headers: { "X-Student-ID": "student-a" },
+			params: { page: 1, pageSize: 10 }
 		});
 	});
 

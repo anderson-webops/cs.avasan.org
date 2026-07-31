@@ -38,6 +38,23 @@ function toolButtonWithText(wrapper: ReturnType<typeof mount>, label: string) {
 	return button!;
 }
 
+function setCanvasBounds(canvas: Element) {
+	Object.defineProperty(canvas, "getBoundingClientRect", {
+		configurable: true,
+		value: () => ({
+			bottom: 600,
+			height: 600,
+			left: 0,
+			right: 900,
+			top: 0,
+			width: 900,
+			x: 0,
+			y: 0,
+			toJSON: () => ({})
+		})
+	});
+}
+
 enableAutoUnmount(afterEach);
 
 describe("GraphSketcherWorkspace.vue", () => {
@@ -157,6 +174,77 @@ describe("GraphSketcherWorkspace.vue", () => {
 		});
 		canvas.element.dispatchEvent(event);
 		expect(event.defaultPrevented).toBe(true);
+	});
+
+	it("keeps wheel zoom and drag gestures inside the canvas surface", async () => {
+		const wrapper = mount(GraphSketcherWorkspace);
+		const canvas = wrapper.get("svg[role='img']");
+		setCanvasBounds(canvas.element);
+
+		const parentWheel = vi.fn();
+		const parentPointerDown = vi.fn();
+		const parentPointerMove = vi.fn();
+		wrapper.element.addEventListener("wheel", parentWheel);
+		wrapper.element.addEventListener("pointerdown", parentPointerDown);
+		wrapper.element.addEventListener("pointermove", parentPointerMove);
+
+		const wheel = new WheelEvent("wheel", {
+			bubbles: true,
+			cancelable: true,
+			clientX: 450,
+			clientY: 300,
+			deltaY: -100
+		});
+		canvas.element.dispatchEvent(wheel);
+		await wrapper.vm.$nextTick();
+
+		expect(wheel.defaultPrevented).toBe(true);
+		expect(parentWheel).not.toHaveBeenCalled();
+		expect(wrapper.text()).toContain("Zoomed in.");
+
+		const shellWheel = new WheelEvent("wheel", {
+			bubbles: true,
+			cancelable: true,
+			clientX: 5,
+			clientY: 5,
+			deltaY: 100
+		});
+		wrapper.get(".graph-canvas-shell").element.dispatchEvent(shellWheel);
+		expect(shellWheel.defaultPrevented).toBe(true);
+		expect(parentWheel).not.toHaveBeenCalled();
+
+		await toolButtonWithText(wrapper, "Pan").trigger("click");
+		Object.defineProperties(canvas.element, {
+			hasPointerCapture: {
+				configurable: true,
+				value: () => false
+			},
+			setPointerCapture: {
+				configurable: true,
+				value: vi.fn()
+			}
+		});
+		const pointerDown = new MouseEvent("pointerdown", {
+			bubbles: true,
+			cancelable: true,
+			clientX: 450,
+			clientY: 300
+		});
+		canvas.element.dispatchEvent(pointerDown);
+
+		expect(pointerDown.defaultPrevented).toBe(true);
+		expect(parentPointerDown).not.toHaveBeenCalled();
+
+		const pointerMove = new MouseEvent("pointermove", {
+			bubbles: true,
+			cancelable: true,
+			clientX: 500,
+			clientY: 325
+		});
+		canvas.element.dispatchEvent(pointerMove);
+
+		expect(pointerMove.defaultPrevented).toBe(true);
+		expect(parentPointerMove).not.toHaveBeenCalled();
 	});
 
 	it("creates an editable point series when a generated curve is active", async () => {
@@ -311,6 +399,7 @@ describe("GraphSketcherWorkspace.vue", () => {
 		importedDocument.title = "Previous student's private graph";
 
 		const wrapper = mount(GraphSketcherWorkspace);
+		await wrapper.vm.$nextTick();
 		const input = wrapper.get(
 			"input[aria-label='Open or import a graph project']"
 		);
@@ -398,6 +487,77 @@ describe("GraphSketcherWorkspace.vue", () => {
 		expect(arrayBuffer).not.toHaveBeenCalled();
 		expect(wrapper.text()).toContain(
 			"The graph file is larger than the 8 MB browser limit."
+		);
+	});
+
+	it("renders every marker while sampling only large-graph editing handles", async () => {
+		const document = createBlankGraphDocument();
+		document.title = "Large marker-only graph";
+		document.series[0].lineStyle = "none";
+		document.series[0].markerShape = "circle";
+		document.series[0].points = Array.from(
+			{ length: 5_001 },
+			(_, index) => ({
+				x: (index % 100) / 5 - 10,
+				y: (Math.floor(index / 100) % 100) / 5 - 10
+			})
+		);
+		window.sessionStorage.setItem(
+			GRAPH_SKETCHER_SESSION_STORAGE_KEY,
+			graphDocumentToJson(document)
+		);
+
+		const wrapper = mount(GraphSketcherWorkspace);
+		await wrapper.vm.$nextTick();
+
+		expect(wrapper.findAll(".graph-point")).toHaveLength(5_000);
+		const markerPath = wrapper.get(".graph-series__markers");
+		expect(markerPath.attributes("d").match(/\bM /g)).toHaveLength(5_001);
+		expect(wrapper.text()).toContain(
+			"Lines, markers, and error bars still use all 5,001 points"
+		);
+	});
+
+	it("does not let a delayed file import overwrite newer graph edits", async () => {
+		let resolveText: ((value: string) => void) | undefined;
+		const delayedText = new Promise<string>(resolve => {
+			resolveText = resolve;
+		});
+		const importedDocument = createBlankGraphDocument();
+		importedDocument.title = "Stale imported graph";
+
+		const wrapper = mount(GraphSketcherWorkspace);
+		await wrapper.vm.$nextTick();
+		const input = wrapper.get(
+			"input[aria-label='Open or import a graph project']"
+		);
+		Object.defineProperty(input.element, "files", {
+			configurable: true,
+			value: [
+				{
+					arrayBuffer: vi.fn(),
+					name: "stale.graphsketch",
+					size: 100,
+					text: () => delayedText
+				}
+			]
+		});
+
+		await input.trigger("change");
+		await buttonWithText(wrapper, "Add").trigger("click");
+		resolveText?.(graphDocumentToJson(importedDocument));
+		await delayedText;
+		await new Promise(resolve => setTimeout(resolve, 0));
+		await wrapper.vm.$nextTick();
+
+		await vi.waitFor(() =>
+			expect(wrapper.text()).toContain(
+				"The graph changed while the file was opening, so the import was not applied."
+			)
+		);
+		expect(wrapper.text()).not.toContain("Stale imported graph");
+		expect(wrapper.get("svg[role='img']").attributes("aria-label")).toContain(
+			"3 series"
 		);
 	});
 });

@@ -122,6 +122,10 @@ services:
         environment:
             MONGODB_URI: mongodb://${MONGO_APP_USERNAME:?set MONGO_APP_USERNAME}:${MONGO_APP_PASSWORD:?set MONGO_APP_PASSWORD}@mongo:27017/cs-avasan-org?authSource=cs-avasan-org
             NODE_ENV: production
+            VAULT_ADDR: ${VAULT_ADDR:-}
+            VAULT_MONGODB_SECRET_PATH: ${VAULT_MONGODB_SECRET_PATH:-secret/data/cs.avasan.org/mongodb}
+            VAULT_ROLE_ID: ${VAULT_ROLE_ID:-}
+            VAULT_SECRET_ID: ${VAULT_SECRET_ID:-}
         read_only: true
         cap_drop:
             - ALL
@@ -130,6 +134,7 @@ services:
         tmpfs:
             - /tmp:rw,noexec,nosuid,size=32m
         networks:
+            - edge
             - data
 
     mongo:

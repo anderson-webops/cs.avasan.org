@@ -4,10 +4,9 @@ import * as readlineSync from "readline-sync";
 
 import { Admin } from "./models/schemas/Admin.js";
 import { ADMIN_SINGLETON_ID } from "./security/adminIdentity.js";
-import {
-	isValidTeacherPassword,
-	MIN_TEACHER_PASSWORD_LENGTH
-} from "./security/passwordPolicy.js";
+import { selectMongoConnection } from "./security/mongoConnection.js";
+import { isValidTeacherPassword, MIN_TEACHER_PASSWORD_LENGTH } from "./security/passwordPolicy.js";
+import { readMongoSecret } from "./vaultClient.js";
 import "dotenv/config";
 
 const TEACHER_NAME = "Julio";
@@ -17,15 +16,9 @@ function normalizeEmail(email: string): string {
 }
 
 async function main(): Promise<void> {
-	const mongoUri = env.MONGODB_URI?.trim();
-	if (!mongoUri) {
-		console.error("MONGODB_URI is required.");
-		process.exitCode = 1;
-		return;
-	}
-
 	try {
-		await mongoose.connect(mongoUri);
+		const mongoConnection = await selectMongoConnection(env, readMongoSecret);
+		await mongoose.connect(mongoConnection.uri);
 
 		const existingAdminCount = await Admin.countDocuments({}).exec();
 		if (existingAdminCount > 0) {

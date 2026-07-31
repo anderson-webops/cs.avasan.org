@@ -205,10 +205,12 @@ describe("versioned full-stack production deployment", () => {
 		const dockerIgnore = repositoryFile(".dockerignore");
 		const frontendDockerfile = repositoryFile("Dockerfile");
 		const apiDockerfile = repositoryFile("back-end/Dockerfile");
+		const compose = repositoryFile("compose.production.yml");
 		const continuousIntegration = repositoryFile(".github/workflows/ci.yml");
 		const readme = repositoryFile("README.md");
 		const mongoInit = repositoryFile("deploy/mongo-init/01-create-app-user.js");
 		const environmentVerifier = repositoryFile("scripts/verify-deploy-env-permissions.sh");
+		const adminProvisioner = repositoryFile("back-end/src/create-admin-user.ts");
 
 		expect(dockerIgnore).toContain("deploy/cs.env");
 		expect(dockerIgnore).toContain("**/.env.*");
@@ -227,6 +229,11 @@ describe("versioned full-stack production deployment", () => {
 		expect(apiDockerfile).toContain('CMD ["node", "back-end/dist/server.js"]');
 		expect(apiDockerfile).toContain("FROM npm-stage AS admin-stage");
 		expect(apiDockerfile).toContain('CMD ["npm", "run", "-w", "back-end", "create-admin-ts"]');
+		expect(adminProvisioner).toContain("selectMongoConnection(");
+		expect(adminProvisioner).toContain("readMongoSecret");
+		expect(compose).toMatch(
+			/admin-tools:[\s\S]*VAULT_ADDR: \$\{VAULT_ADDR:-\}[\s\S]*VAULT_ROLE_ID: \$\{VAULT_ROLE_ID:-\}/
+		);
 		expect(continuousIntegration).toContain(
 			"docker compose --env-file deploy/cs.env --profile tools -f compose.production.yml config --quiet"
 		);

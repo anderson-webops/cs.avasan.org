@@ -53,22 +53,14 @@ interface DurableDeletionReceipt {
 }
 
 export function studentDeletionReceiptExpiry(completedAt: Date): Date {
-	return new Date(
-		completedAt.getTime()
-		+ STUDENT_DELETION_RECEIPT_RETENTION_DAYS * DAY_MS
-	);
+	return new Date(completedAt.getTime() + STUDENT_DELETION_RECEIPT_RETENTION_DAYS * DAY_MS);
 }
 
 function receiptQuery(operationID: string) {
-	return StudentDataDeletionReceipt.findOne({ operationID })
-		.select("+recordInventory")
-		.lean()
-		.exec();
+	return StudentDataDeletionReceipt.findOne({ operationID }).select("+recordInventory").lean().exec();
 }
 
-async function countStudentRecordInventory(
-	studentID: string | Types.ObjectId
-): Promise<StudentDeletionCounts> {
+async function countStudentRecordInventory(studentID: string | Types.ObjectId): Promise<StudentDeletionCounts> {
 	const [oauthAttempts, projects, reviews] = await Promise.all([
 		OAuthLoginAttempt.countDocuments({ studentID }).exec(),
 		PythonProject.countDocuments({ user: studentID }).exec(),
@@ -99,16 +91,14 @@ async function setReceiptInProgress(operationID: string): Promise<void> {
 	}
 }
 
-async function ensureDurableDeletionReceipt(
-	options: {
-		existingReceipt: Awaited<ReturnType<typeof receiptQuery>> | null;
-		operationID: string;
-		reason: StudentRecordDeletionReason;
-		requestedAt: Date;
-		studentID: Types.ObjectId;
-		username: string;
-	}
-): Promise<DurableDeletionReceipt> {
+async function ensureDurableDeletionReceipt(options: {
+	existingReceipt: Awaited<ReturnType<typeof receiptQuery>> | null;
+	operationID: string;
+	reason: StudentRecordDeletionReason;
+	requestedAt: Date;
+	studentID: Types.ObjectId;
+	username: string;
+}): Promise<DurableDeletionReceipt> {
 	const existingReceipt = options.existingReceipt;
 	const existingInventory = existingReceipt?.recordInventory;
 	if (existingReceipt && existingInventory) {
@@ -177,17 +167,17 @@ async function ensureDurableDeletionReceipt(
 	};
 }
 
-export async function deleteStudentChildRecords(
-	studentID: string | Types.ObjectId
-): Promise<void> {
+export async function deleteStudentChildRecords(studentID: string | Types.ObjectId): Promise<void> {
 	const outcomes = await Promise.allSettled([
 		OAuthLoginAttempt.deleteMany({ studentID }).exec(),
 		PythonProjectReview.deleteMany({ user: studentID }).exec(),
 		PythonProject.deleteMany({ user: studentID }).exec()
 	]);
-	const failures = outcomes
-		.filter((outcome): outcome is PromiseRejectedResult => outcome.status === "rejected")
-		.map(outcome => outcome.reason);
+	const failures = outcomes.flatMap((outcome) => {
+		if (outcome.status === "rejected") return [outcome.reason];
+		if (outcome.value.acknowledged === true) return [];
+		return [new Error("A student child-record deletion was not acknowledged.")];
+	});
 	if (failures.length) {
 		throw new AggregateError(failures, "One or more student record collections could not be deleted.");
 	}
@@ -255,12 +245,8 @@ export async function deleteStudentRecordSet(
 		// row behind older pending work instead of starving rows past the batch
 		// limit. The second fence below replaces legacy fallback metadata with
 		// the durable receipt values when they are available.
-		existingReceipt = options.resumeOperation
-			? await receiptQuery(operationID)
-			: null;
-		requestedAt = existingReceipt?.requestedAt
-			?? options.resumeOperation?.requestedAt
-			?? deletionPendingAt;
+		existingReceipt = options.resumeOperation ? await receiptQuery(operationID) : null;
+		requestedAt = existingReceipt?.requestedAt ?? options.resumeOperation?.requestedAt ?? deletionPendingAt;
 		deletionReason = existingReceipt?.reason ?? options.reason;
 
 		await closeStudentDataWritesAndWait(options.studentID);
@@ -322,8 +308,7 @@ export async function deleteStudentRecordSet(
 
 		const deletedRecords = durableReceipt.recordInventory;
 		const completedAt = new Date();
-		const completedReceiptExpiresAt
-			= studentDeletionReceiptExpiry(completedAt);
+		const completedReceiptExpiresAt = studentDeletionReceiptExpiry(completedAt);
 		let receiptStatus: "completed" | "in-progress" = "completed";
 		try {
 			const receiptUpdate = await StudentDataDeletionReceipt.updateOne(
@@ -352,10 +337,7 @@ export async function deleteStudentRecordSet(
 			deletedRecords,
 			operationID,
 			reason: deletionReason,
-			receiptExpiresAt:
-				receiptStatus === "completed"
-					? completedReceiptExpiresAt
-					: null,
+			receiptExpiresAt: receiptStatus === "completed" ? completedReceiptExpiresAt : null,
 			receiptStatus,
 			requestedAt
 		};

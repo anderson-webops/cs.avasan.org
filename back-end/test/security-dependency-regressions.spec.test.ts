@@ -4,7 +4,11 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import express from "express";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { requireInternalDiagnostics } from "../src/middleware/internalDiagnostics.js";
+import {
+	MIN_INTERNAL_DIAGNOSTICS_KEY_BYTES,
+	readInternalDiagnosticsKey,
+	requireInternalDiagnostics
+} from "../src/middleware/internalDiagnostics.js";
 import {
 	DEFAULT_CLASSROOM_ANALYTICS_RETENTION_DAYS,
 	readClassroomAnalyticsRetentionDays
@@ -184,19 +188,22 @@ describe("security dependency regressions", () => {
 	});
 
 	it("rate limits project data access before route work can run", async () => {
-		await withServer(createProjectDataAccessLimiter({
-			limit: 1,
-			windowMs: 60_000
-		}), async baseUrl => {
-			const first = await requestLimitedEndpoint(baseUrl);
-			const second = await requestLimitedEndpoint(baseUrl);
+		await withServer(
+			createProjectDataAccessLimiter({
+				limit: 1,
+				windowMs: 60_000
+			}),
+			async baseUrl => {
+				const first = await requestLimitedEndpoint(baseUrl);
+				const second = await requestLimitedEndpoint(baseUrl);
 
-			expect(first.status).toBe(200);
-			expect(second.status).toBe(429);
-			await expect(second.json()).resolves.toEqual({
-				message: "Too many project requests. Please try again shortly."
-			});
-		});
+				expect(first.status).toBe(200);
+				expect(second.status).toBe(429);
+				await expect(second.json()).resolves.toEqual({
+					message: "Too many project requests. Please try again shortly."
+				});
+			}
+		);
 	});
 
 	it("keeps sensitive deletion receipt details out of application logs", () => {
@@ -210,23 +217,11 @@ describe("security dependency regressions", () => {
 	});
 
 	it("guards cookie routes and project database access in security-first order", () => {
-		const server = readFileSync(
-			fileURLToPath(new URL("../src/server.ts", import.meta.url)),
-			"utf8"
-		);
-		const requestGuard = server.indexOf(
-			"app.use(classroomRequestPaths, requireClassroomRequest);"
-		);
-		const cookieMiddleware = server.indexOf(
-			"app.use(cookieSession(cookieOptions));"
-		);
-		const studentDataLimiter = server.indexOf(
-			"studentProjectDataAccessLimiter,"
-		);
-		const studentDatabaseAuth = server.indexOf(
-			"validStudent,",
-			studentDataLimiter
-		);
+		const server = readFileSync(fileURLToPath(new URL("../src/server.ts", import.meta.url)), "utf8");
+		const requestGuard = server.indexOf("app.use(classroomRequestPaths, requireClassroomRequest);");
+		const cookieMiddleware = server.indexOf("app.use(cookieSession(cookieOptions));");
+		const studentDataLimiter = server.indexOf("studentProjectDataAccessLimiter,");
+		const studentDatabaseAuth = server.indexOf("validStudent,", studentDataLimiter);
 
 		expect(requestGuard).toBeGreaterThan(-1);
 		expect(requestGuard).toBeLessThan(cookieMiddleware);
@@ -264,4 +259,24 @@ describe("security dependency regressions", () => {
 		});
 	});
 
+	it("requires at least 32 UTF-8 bytes when an internal diagnostics key is configured", () => {
+		expect(readInternalDiagnosticsKey(undefined)).toBeUndefined();
+		expect(readInternalDiagnosticsKey("")).toBeUndefined();
+		expect(readInternalDiagnosticsKey("x".repeat(32))).toBe("x".repeat(32));
+		expect(readInternalDiagnosticsKey("é".repeat(16))).toBe("é".repeat(16));
+		expect(() => readInternalDiagnosticsKey("x".repeat(31))).toThrow(
+			`INTERNAL_DIAGNOSTICS_KEY must be at least ${MIN_INTERNAL_DIAGNOSTICS_KEY_BYTES} UTF-8 bytes when configured`
+		);
+		expect(() => readInternalDiagnosticsKey(" ".repeat(32))).toThrow(
+			"INTERNAL_DIAGNOSTICS_KEY cannot contain only whitespace"
+		);
+	});
+
+	it("does not log database identity or raw startup failures", () => {
+		const server = readFileSync(fileURLToPath(new URL("../src/server.ts", import.meta.url)), "utf8");
+
+		expect(server).not.toContain("Mongo connected: db=");
+		expect(server).toContain("Server startup failed. Check the private service logs and configuration.");
+		expect(server).not.toMatch(/main\(\)\.catch\(\([^)]*\)\s*=>\s*\{\s*console\.error\(\s*(?:err|error)/u);
+	});
 });

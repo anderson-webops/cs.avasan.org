@@ -9,6 +9,13 @@ export function estimatedGraphSnapshotBytes(snapshot: string) {
 	return snapshot.length * 2;
 }
 
+export function graphHistorySnapshotFits(snapshot: string) {
+	return (
+		estimatedGraphSnapshotBytes(snapshot) <=
+		MAX_GRAPH_HISTORY_ESTIMATED_BYTES
+	);
+}
+
 function historyBytes(...stacks: readonly string[][]) {
 	return stacks.reduce(
 		(total, stack) =>
@@ -28,10 +35,12 @@ export function pushBoundedGraphHistorySnapshot(
 	snapshot: string
 ) {
 	if (target.at(-1) === snapshot) return false;
-	if (
-		estimatedGraphSnapshotBytes(snapshot) >
-		MAX_GRAPH_HISTORY_ESTIMATED_BYTES
-	) {
+	if (!graphHistorySnapshotFits(snapshot)) {
+		// Older entries are no longer adjacent to the current graph when its
+		// immediate predecessor cannot be retained. Clearing both stacks keeps
+		// Undo from jumping past the edit that exceeded the memory budget.
+		target.splice(0);
+		other.splice(0);
 		return false;
 	}
 
@@ -44,7 +53,8 @@ export function pushBoundedGraphHistorySnapshot(
 		} else if (other.length) {
 			other.shift();
 		} else {
-			target.pop();
+			target.splice(0);
+			other.splice(0);
 			return false;
 		}
 	}

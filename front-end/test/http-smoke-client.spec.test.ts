@@ -10,7 +10,7 @@ let server: ReturnType<typeof createServer> | undefined;
 afterEach(async () => {
 	if (!server) return;
 	await new Promise<void>((resolve, reject) => {
-		server!.close((error) => {
+		server!.close(error => {
 			if (error) reject(error);
 			else resolve();
 		});
@@ -38,15 +38,42 @@ async function localOrigin() {
 			response.end();
 			return;
 		}
+		if (request.url === "/slow-drip") {
+			response.setHeader("Content-Type", "text/plain");
+			const timer = setInterval(() => {
+				response.write(".");
+			}, 20);
+			response.on("close", () => clearInterval(timer));
+			return;
+		}
+		if (request.url?.startsWith("/slow-redirect/")) {
+			const step = Number(request.url.split("/").at(-1));
+			setTimeout(() => {
+				if (step < 4) {
+					response.statusCode = 302;
+					response.setHeader(
+						"Location",
+						`/slow-redirect/${step + 1}`
+					);
+					response.end();
+					return;
+				}
+				response.setHeader("Content-Type", "application/json");
+				response.end(JSON.stringify({ ok: true }));
+			}, 30);
+			return;
+		}
 		response.setHeader("Cache-Control", "no-store");
 		response.setHeader("Content-Type", "application/json");
-		response.end(JSON.stringify({
-			method: request.method,
-			revision: "a".repeat(40),
-			version: "1.0.0"
-		}));
+		response.end(
+			JSON.stringify({
+				method: request.method,
+				revision: "a".repeat(40),
+				version: "1.0.0"
+			})
+		);
 	});
-	await new Promise<void>((resolve) => {
+	await new Promise<void>(resolve => {
 		server!.listen(0, "127.0.0.1", resolve);
 	});
 	const address = server.address();
@@ -58,7 +85,9 @@ async function localOrigin() {
 
 describe("HTTP smoke client", () => {
 	it("reads local HTTP responses without browser fetch semantics", async () => {
-		const response = await smokeRequest(`${await localOrigin()}/release.json`);
+		const response = await smokeRequest(
+			`${await localOrigin()}/release.json`
+		);
 
 		expect(response.ok).toBe(true);
 		expect(response.status).toBe(200);
@@ -99,6 +128,22 @@ describe("HTTP smoke client", () => {
 		await expect(
 			smokeRequest(`${await localOrigin()}/loop`)
 		).rejects.toThrow("redirect limit of 5 exceeded");
+	});
+
+	it("uses a wall-clock deadline even while response bytes keep arriving", async () => {
+		await expect(
+			smokeRequest(`${await localOrigin()}/slow-drip`, {
+				timeoutMs: 90
+			})
+		).rejects.toThrow("timed out after 90 ms");
+	});
+
+	it("shares one deadline across the entire redirect chain", async () => {
+		await expect(
+			smokeRequest(`${await localOrigin()}/slow-redirect/1`, {
+				timeoutMs: 75
+			})
+		).rejects.toThrow("timed out after 75 ms");
 	});
 
 	it("reports the exact URL and underlying connection failure", async () => {

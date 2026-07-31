@@ -155,22 +155,21 @@ describe("student record retention", () => {
 				)
 			);
 		modelMocks.closeWrites.mockResolvedValue(undefined);
-		modelMocks.receiptFindOneAndUpdate.mockImplementation(
-			(_filter, update) =>
-				queryWith(
-					deletionReceipt({
-						operationID: update.$setOnInsert.operationID,
-						reason: update.$setOnInsert.reason,
-						recordInventory: update.$set.recordInventory,
-						requestedAt: update.$setOnInsert.requestedAt,
-						studentID: update.$setOnInsert.studentID,
-						username: update.$setOnInsert.username
-					})
-				)
+		modelMocks.receiptFindOneAndUpdate.mockImplementation((_filter, update) =>
+			queryWith(
+				deletionReceipt({
+					operationID: update.$setOnInsert.operationID,
+					reason: update.$setOnInsert.reason,
+					recordInventory: update.$set.recordInventory,
+					requestedAt: update.$setOnInsert.requestedAt,
+					studentID: update.$setOnInsert.studentID,
+					username: update.$setOnInsert.username
+				})
+			)
 		);
-		modelMocks.oauthDeleteMany.mockReturnValue(queryWith({ deletedCount: 1 }));
-		modelMocks.reviewDeleteMany.mockReturnValue(queryWith({ deletedCount: 2 }));
-		modelMocks.projectDeleteMany.mockReturnValue(queryWith({ deletedCount: 3 }));
+		modelMocks.oauthDeleteMany.mockReturnValue(queryWith({ acknowledged: true, deletedCount: 1 }));
+		modelMocks.reviewDeleteMany.mockReturnValue(queryWith({ acknowledged: true, deletedCount: 2 }));
+		modelMocks.projectDeleteMany.mockReturnValue(queryWith({ acknowledged: true, deletedCount: 3 }));
 		modelMocks.studentDeleteOne.mockReturnValue(queryWith({ deletedCount: 1 }));
 		modelMocks.receiptUpdateOne.mockReturnValue(queryWith({ acknowledged: true, matchedCount: 1 }));
 	});
@@ -254,7 +253,7 @@ describe("student record retention", () => {
 		});
 		modelMocks.oauthDeleteMany.mockImplementation(() => {
 			order.push("cascade");
-			return queryWith({ deletedCount: 1 });
+			return queryWith({ acknowledged: true, deletedCount: 1 });
 		});
 
 		const result = await enforceStudentRecordRetention(90, now);
@@ -377,6 +376,26 @@ describe("student record retention", () => {
 		);
 	});
 
+	it("does not remove the student when a child-record deletion is unacknowledged", async () => {
+		queueFreshExpired();
+		modelMocks.projectDeleteMany.mockReturnValue(queryWith({ acknowledged: false, deletedCount: 3 }));
+
+		const result = await enforceStudentRecordRetention(90, now);
+
+		expect(result).toEqual({
+			reconciled: 0,
+			deleted: 0,
+			needsRetry: 1
+		});
+		expect(modelMocks.studentDeleteOne).not.toHaveBeenCalled();
+		expect(modelMocks.receiptUpdateOne).toHaveBeenCalledWith(
+			expect.objectContaining({ operationID: expect.any(String) }),
+			expect.objectContaining({
+				$set: { status: "needs-retry" }
+			})
+		);
+	});
+
 	it("retries a pre-receipt failure with the same stable operation", async () => {
 		queueFreshExpired();
 		modelMocks.receiptFindOneAndUpdate.mockImplementationOnce(() => {
@@ -463,8 +482,8 @@ describe("student record retention", () => {
 			exec: vi.fn().mockRejectedValue(new Error("projects unavailable"))
 		});
 		let releaseReview!: () => void;
-		const reviewFinished = new Promise<{ deletedCount: number }>(resolve => {
-			releaseReview = () => resolve({ deletedCount: 2 });
+		const reviewFinished = new Promise<{ acknowledged: true; deletedCount: number }>(resolve => {
+			releaseReview = () => resolve({ acknowledged: true, deletedCount: 2 });
 		});
 		modelMocks.reviewDeleteMany.mockReturnValue({
 			exec: vi.fn(() => reviewFinished)
@@ -523,8 +542,8 @@ describe("student record retention", () => {
 				})
 			)
 		);
-		modelMocks.projectDeleteMany.mockReturnValue(queryWith({ deletedCount: 3 }));
-		modelMocks.reviewDeleteMany.mockReturnValue(queryWith({ deletedCount: 2 }));
+		modelMocks.projectDeleteMany.mockReturnValue(queryWith({ acknowledged: true, deletedCount: 3 }));
+		modelMocks.reviewDeleteMany.mockReturnValue(queryWith({ acknowledged: true, deletedCount: 2 }));
 		const countCallsBeforeRetry = {
 			oauth: modelMocks.oauthCountDocuments.mock.calls.length,
 			projects: modelMocks.projectCountDocuments.mock.calls.length,
@@ -557,8 +576,8 @@ describe("student record retention", () => {
 		modelMocks.receiptUpdateOne.mockRejectedValueOnce(new Error("receipt update unavailable"));
 
 		const first = await enforceStudentRecordRetention(90, now);
-		const operationID
-			= modelMocks.studentFindOneAndUpdate.mock.calls[0]?.[1].$set.dataDeletionOperationID as string;
+		const operationID = modelMocks.studentFindOneAndUpdate.mock.calls[0]?.[1].$set
+			.dataDeletionOperationID as string;
 
 		expect(first.deleted).toBe(1);
 		modelMocks.receiptFind.mockReturnValue(
@@ -735,8 +754,7 @@ describe("student record retention", () => {
 				}
 			}
 		);
-		const completionUpdate
-			= modelMocks.receiptUpdateOne.mock.calls.at(-1)?.[1].$set;
+		const completionUpdate = modelMocks.receiptUpdateOne.mock.calls.at(-1)?.[1].$set;
 		expect(completionUpdate.expiresAt.getTime() - completionUpdate.completedAt.getTime()).toBe(
 			90 * 24 * 60 * 60 * 1000
 		);

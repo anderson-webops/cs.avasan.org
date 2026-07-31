@@ -36,7 +36,9 @@ import {
 	createPythonIdeProject,
 	createRemotePythonIdeProject,
 	deleteRemotePythonIdeProject,
+	fetchPythonIdeProject,
 	fetchPythonIdeProjects,
+	fetchVisiblePythonIdeProjectReview,
 	fetchVisiblePythonIdeProjectReviews,
 	getPythonIdeAssetDataUrl,
 	getPythonIdeDefaultFileContent,
@@ -53,6 +55,7 @@ import {
 	normalizeClassroomPythonIdeMode,
 	normalizeImportedPythonIdeFileName,
 	normalizePythonFileName,
+	plainPythonIdeProjectSnapshot,
 	plainPythonIdeProjectsSnapshot,
 	purgeAllStudentPythonProjectRecovery,
 	purgeAnonymousPythonWorkspace,
@@ -486,6 +489,7 @@ const studentProjectOwnerID = computed(() =>
 const projects = ref<PythonIdeProject[]>([]);
 const visibleProjectReviews = ref<PythonIdeProjectReview[]>([]);
 const selectedProjectID = ref("");
+const projectDetailLoadErrorID = ref("");
 const selectedReviewFileName = ref("");
 const newFileName = ref("");
 const inputText = ref("");
@@ -537,6 +541,15 @@ const gameSoundAudio = new Map<string, Set<HTMLAudioElement>>();
 const gameToneAudio = new Map<number, GameToneHandle>();
 const codeEditorViewStates = new Map<string, CodeEditorViewState>();
 const codeEditorStateSnapshots = new Map<string, CodeEditorState>();
+const remoteProjectMetadata = new Map<string, PythonIdeProject>();
+const remoteReviewMetadata = new Map<string, PythonIdeProjectReview>();
+const remoteProjectDetailLoads = new Map<string, Promise<PythonIdeProject>>();
+const remoteReviewDetailLoads = new Map<
+	string,
+	Promise<PythonIdeProjectReview>
+>();
+const remoteProjectDetailLru: string[] = [];
+const maxCachedRemoteProjectDetails = 3;
 
 let saveTimer: ReturnType<typeof window.setTimeout> | null = null;
 let localSnapshotTimer: ReturnType<typeof window.setTimeout> | null = null;
@@ -890,6 +903,9 @@ const selectedProject = computed(
 		) ??
 		projects.value[0] ??
 		null
+);
+const selectedProjectContentLoaded = computed(
+	() => selectedProject.value?.remoteContentLoaded !== false
 );
 
 const activeFile = computed(() => {
@@ -1348,6 +1364,12 @@ async function saveNewProject(
 			} else {
 				projects.value.unshift(remoteProject);
 			}
+			remoteProjectMetadata.set(
+				remoteProject._id,
+				projectMetadataSnapshot(remoteProject)
+			);
+			markRemoteProjectDetailUsed(remoteProject._id);
+			trimRemoteProjectDetailCache(remoteProject._id);
 			selectedProjectID.value = remoteProject._id;
 			unsyncedProjectIDs.delete(project._id);
 			unsyncedProjectIDs.delete(remoteProject._id);
@@ -1405,14 +1427,279 @@ async function createInitialProject() {
 	return createPythonIdeProject(requestedStarterMode.value);
 }
 
+function projectMetadataSnapshot(project: PythonIdeProject): PythonIdeProject {
+	return {
+		...project,
+		files: [],
+		remoteContentLoaded: false
+	};
+}
+
+function reviewMetadataSnapshot(
+	review: PythonIdeProjectReview
+): PythonIdeProjectReview {
+	return {
+		...review,
+		files: [],
+		note: undefined,
+		remoteContentLoaded: false
+	};
+}
+
+function markRemoteProjectDetailUsed(projectID: string) {
+	const previousIndex = remoteProjectDetailLru.indexOf(projectID);
+	if (previousIndex >= 0) remoteProjectDetailLru.splice(previousIndex, 1);
+	remoteProjectDetailLru.push(projectID);
+}
+
+function trimRemoteProjectDetailCache(keepProjectID: string) {
+	const cachedIDs = remoteProjectDetailLru.filter(projectID =>
+		projects.value.some(
+			project =>
+				project._id === projectID &&
+				project.remoteContentLoaded === true
+		)
+	);
+	remoteProjectDetailLru.splice(
+		0,
+		remoteProjectDetailLru.length,
+		...cachedIDs
+	);
+
+	while (remoteProjectDetailLru.length > maxCachedRemoteProjectDetails) {
+		const candidateIndex = remoteProjectDetailLru.findIndex(
+			projectID =>
+				projectID !== keepProjectID &&
+				!pendingSaveProjectIDs.has(projectID) &&
+				!unsyncedProjectIDs.has(projectID)
+		);
+		if (candidateIndex < 0) return;
+		const [candidateID] = remoteProjectDetailLru.splice(candidateIndex, 1);
+		const metadata = candidateID
+			? remoteProjectMetadata.get(candidateID)
+			: undefined;
+		if (!candidateID || !metadata) continue;
+		const projectIndex = projects.value.findIndex(
+			project => project._id === candidateID
+		);
+		if (projectIndex >= 0) {
+			projects.value.splice(
+				projectIndex,
+				1,
+				plainPythonIdeProjectSnapshot(metadata)
+			);
+		}
+	}
+}
+
+async function ensureRemoteProjectLoaded(
+	projectID: string,
+	studentID: string,
+	loadRunID?: number,
+	options: { trimCache?: boolean } = {}
+) {
+	const existing = projects.value.find(project => project._id === projectID);
+	if (!existing || existing._id.startsWith("local-")) return existing ?? null;
+	if (existing.remoteContentLoaded === true) {
+		markRemoteProjectDetailUsed(projectID);
+		if (options.trimCache !== false) {
+			trimRemoteProjectDetailCache(projectID);
+		}
+		return existing;
+	}
+
+	let detailLoad = remoteProjectDetailLoads.get(projectID);
+	if (!detailLoad) {
+		detailLoad = fetchPythonIdeProject(projectID, studentID);
+		remoteProjectDetailLoads.set(projectID, detailLoad);
+		void detailLoad.then(
+			() => {
+				if (remoteProjectDetailLoads.get(projectID) === detailLoad) {
+					remoteProjectDetailLoads.delete(projectID);
+				}
+			},
+			() => {
+				if (remoteProjectDetailLoads.get(projectID) === detailLoad) {
+					remoteProjectDetailLoads.delete(projectID);
+				}
+			}
+		);
+	}
+	const detail = await detailLoad;
+	if (
+		!projectLoadIsCurrent(loadRunID) ||
+		activeStorageOwnerID.value !== studentID ||
+		desiredProjectOwnerID !== studentID ||
+		(options.trimCache !== false && selectedProjectID.value !== projectID)
+	) {
+		return null;
+	}
+
+	const projectIndex = projects.value.findIndex(
+		project => project._id === projectID
+	);
+	if (projectIndex < 0) return null;
+	remoteProjectMetadata.set(projectID, projectMetadataSnapshot(detail));
+	projects.value.splice(projectIndex, 1, detail);
+	markRemoteProjectDetailUsed(projectID);
+	if (options.trimCache !== false) {
+		trimRemoteProjectDetailCache(projectID);
+	}
+	return detail;
+}
+
+async function ensureVisibleReviewLoaded(
+	projectID: string,
+	studentID: string,
+	loadRunID?: number
+) {
+	const existing = visibleProjectReviews.value.find(
+		review => review.sourceProject === projectID
+	);
+	if (!existing || existing.remoteContentLoaded === true)
+		return existing ?? null;
+
+	let detailLoad = remoteReviewDetailLoads.get(existing._id);
+	if (!detailLoad) {
+		detailLoad = fetchVisiblePythonIdeProjectReview(
+			existing._id,
+			studentID
+		);
+		remoteReviewDetailLoads.set(existing._id, detailLoad);
+		void detailLoad.then(
+			() => {
+				if (remoteReviewDetailLoads.get(existing._id) === detailLoad) {
+					remoteReviewDetailLoads.delete(existing._id);
+				}
+			},
+			() => {
+				if (remoteReviewDetailLoads.get(existing._id) === detailLoad) {
+					remoteReviewDetailLoads.delete(existing._id);
+				}
+			}
+		);
+	}
+	const detail = await detailLoad;
+	if (
+		!projectLoadIsCurrent(loadRunID) ||
+		activeStorageOwnerID.value !== studentID ||
+		desiredProjectOwnerID !== studentID ||
+		selectedProjectID.value !== projectID
+	) {
+		return null;
+	}
+
+	const reviewIndex = visibleProjectReviews.value.findIndex(
+		review => review._id === existing._id
+	);
+	if (reviewIndex < 0) return null;
+	remoteReviewMetadata.set(detail._id, reviewMetadataSnapshot(detail));
+	visibleProjectReviews.value.splice(reviewIndex, 1, detail);
+	for (
+		let index = 0;
+		index < visibleProjectReviews.value.length;
+		index += 1
+	) {
+		const review = visibleProjectReviews.value[index];
+		if (
+			!review ||
+			review._id === detail._id ||
+			review.remoteContentLoaded !== true
+		) {
+			continue;
+		}
+		const metadata = remoteReviewMetadata.get(review._id);
+		if (metadata) {
+			visibleProjectReviews.value.splice(index, 1, {
+				...metadata,
+				files: []
+			});
+		}
+	}
+	return detail;
+}
+
+async function hydrateRemoteSelection(
+	projectID: string,
+	studentID: string,
+	loadRunID?: number
+) {
+	const project = await ensureRemoteProjectLoaded(
+		projectID,
+		studentID,
+		loadRunID
+	);
+	if (!project) return false;
+	await ensureVisibleReviewLoaded(projectID, studentID, loadRunID).catch(
+		() => null
+	);
+	return projectLoadIsCurrent(loadRunID);
+}
+
+async function retrySelectedProjectLoad() {
+	const projectID = selectedProjectID.value;
+	const studentID = activeStorageOwnerID.value;
+	if (!projectID || !studentID) return;
+
+	projectDetailLoadErrorID.value = "";
+	const selectionLoadRunID = projectLoadRunID;
+	try {
+		const loaded = await hydrateRemoteSelection(
+			projectID,
+			studentID,
+			selectionLoadRunID
+		);
+		if (
+			loaded &&
+			selectedProjectID.value === projectID &&
+			projectLoadIsCurrent(selectionLoadRunID)
+		) {
+			await nextTick(resetCodeEditor);
+		}
+	} catch (error) {
+		if (
+			selectedProjectID.value !== projectID ||
+			!projectLoadIsCurrent(selectionLoadRunID)
+		) {
+			return;
+		}
+		projectDetailLoadErrorID.value = projectID;
+		appendOutput(
+			"system",
+			error instanceof Error
+				? error.message
+				: "Could not load this saved project."
+		);
+	}
+}
+
 function setProjects(nextProjects: PythonIdeProject[]) {
 	projects.value = nextProjects.map(project => ({
 		...project,
-		activeFileName: resolvePythonIdeActiveFileName(
-			project.files,
-			project.activeFileName
-		)
+		activeFileName:
+			project.remoteContentLoaded === false
+				? project.activeFileName
+				: resolvePythonIdeActiveFileName(
+						project.files,
+						project.activeFileName
+					)
 	}));
+	remoteProjectMetadata.clear();
+	remoteProjectDetailLru.splice(0, remoteProjectDetailLru.length);
+	for (const project of projects.value) {
+		if (project.remoteContentLoaded === false) {
+			remoteProjectMetadata.set(
+				project._id,
+				plainPythonIdeProjectSnapshot(project)
+			);
+		} else if (!project._id.startsWith("local-")) {
+			remoteProjectMetadata.set(
+				project._id,
+				projectMetadataSnapshot(project)
+			);
+			markRemoteProjectDetailUsed(project._id);
+		}
+	}
 	selectedProjectID.value =
 		projectForRoute(projects.value)?._id ?? projects.value[0]?._id ?? "";
 }
@@ -1420,7 +1707,10 @@ function setProjects(nextProjects: PythonIdeProject[]) {
 function refreshVolatileStudentProjectRecovery() {
 	const studentID = activeStorageOwnerID.value;
 	if (!studentID || !projects.value.length) return;
-	volatileStudentProjectRecovery.replace(studentID, projects.value);
+	volatileStudentProjectRecovery.replace(
+		studentID,
+		projects.value.filter(project => project.remoteContentLoaded !== false)
+	);
 }
 
 function retainVolatileStudentProject(
@@ -1744,6 +2034,45 @@ function handleAnonymousWorkspacePageShow() {
 	});
 }
 
+async function loadRemoteProjectBodiesNeededForRecovery(
+	remoteProjects: PythonIdeProject[],
+	localProjects: PythonIdeProject[],
+	studentID: string,
+	loadRunID: number
+) {
+	const localRemoteIDs = new Set(
+		localProjects
+			.map(project => project._id)
+			.filter(projectID => !projectID.startsWith("local-"))
+	);
+	const localImportIDs = new Set(
+		localProjects
+			.map(project => project.importID)
+			.filter((value): value is string => Boolean(value))
+	);
+	const hydrated: PythonIdeProject[] = [];
+
+	for (const remoteProject of remoteProjects) {
+		if (
+			remoteProject.remoteContentLoaded !== false ||
+			(!localRemoteIDs.has(remoteProject._id) &&
+				(!remoteProject.importID ||
+					!localImportIDs.has(remoteProject.importID)))
+		) {
+			hydrated.push(remoteProject);
+			continue;
+		}
+		const detail = await fetchPythonIdeProject(
+			remoteProject._id,
+			studentID
+		);
+		if (!projectLoadIsCurrent(loadRunID)) return remoteProjects;
+		hydrated.push(detail);
+	}
+
+	return hydrated;
+}
+
 async function loadProjects() {
 	if (activeStorageOwnerID.value !== desiredProjectOwnerID) return;
 	const loadRunID = ++projectLoadRunID;
@@ -1757,12 +2086,19 @@ async function loadProjects() {
 			const studentID = activeStorageOwnerID.value;
 			if (!studentID)
 				throw new Error("Student project session is not ready.");
-			const remoteProjects = await fetchPythonIdeProjects(studentID);
+			let remoteProjects = await fetchPythonIdeProjects(studentID);
 			if (!projectLoadIsCurrent(loadRunID)) return;
 			visibleProjectReviews.value =
 				await fetchVisiblePythonIdeProjectReviews(studentID).catch(
 					() => []
 				);
+			remoteReviewMetadata.clear();
+			for (const review of visibleProjectReviews.value) {
+				remoteReviewMetadata.set(
+					review._id,
+					reviewMetadataSnapshot(review)
+				);
+			}
 			if (!projectLoadIsCurrent(loadRunID)) return;
 			const anonymousProjects = await loadLocalPythonProjectsAsync(null);
 			if (!projectLoadIsCurrent(loadRunID)) return;
@@ -1773,6 +2109,13 @@ async function loadProjects() {
 				volatileStudentProjectRecovery.forStudent(studentID);
 			if (!projectLoadIsCurrent(loadRunID)) return;
 			if (localProjects.length) {
+				remoteProjects = await loadRemoteProjectBodiesNeededForRecovery(
+					remoteProjects,
+					localProjects,
+					studentID,
+					loadRunID
+				);
+				if (!projectLoadIsCurrent(loadRunID)) return;
 				const recoveryPlan = reconcilePythonIdeRecoveryProjects(
 					localProjects,
 					remoteProjects
@@ -1788,6 +2131,12 @@ async function loadProjects() {
 					await purgeAllStudentPythonProjectRecovery();
 					if (!projectLoadIsCurrent(loadRunID)) return;
 					await openRequestedCourseProjectIfNeeded(false, loadRunID);
+					if (!projectLoadIsCurrent(loadRunID)) return;
+					await hydrateRemoteSelection(
+						selectedProjectID.value,
+						studentID,
+						loadRunID
+					);
 					if (!projectLoadIsCurrent(loadRunID)) return;
 					saveMessage.value = "Synced recovered local edits";
 					return;
@@ -1809,6 +2158,12 @@ async function loadProjects() {
 
 				await openRequestedCourseProjectIfNeeded(false, loadRunID);
 				if (!projectLoadIsCurrent(loadRunID)) return;
+				await hydrateRemoteSelection(
+					selectedProjectID.value,
+					studentID,
+					loadRunID
+				);
+				if (!projectLoadIsCurrent(loadRunID)) return;
 				saveMessage.value = "Recovered local edits";
 				return;
 			}
@@ -1816,6 +2171,12 @@ async function loadProjects() {
 			if (remoteProjects.length) {
 				setProjects(remoteProjects);
 				await openRequestedCourseProjectIfNeeded(false, loadRunID);
+				if (!projectLoadIsCurrent(loadRunID)) return;
+				await hydrateRemoteSelection(
+					selectedProjectID.value,
+					studentID,
+					loadRunID
+				);
 				if (!projectLoadIsCurrent(loadRunID)) return;
 				saveMessage.value = "Synced to account";
 				return;
@@ -1900,6 +2261,7 @@ async function saveProjectOnce(
 	);
 	const project = index >= 0 ? projects.value[index] : null;
 	if (!project || (suppressAutoSave && !options.force)) return true;
+	if (project.remoteContentLoaded === false) return true;
 
 	const startedProjectID = project._id;
 	const startedUpdatedAt = project.updatedAt ?? "";
@@ -1942,6 +2304,10 @@ async function saveProjectOnce(
 		const currentProject =
 			currentIndex >= 0 ? projects.value[currentIndex] : null;
 		if (!currentProject) return true;
+		remoteProjectMetadata.set(
+			savedProject._id,
+			projectMetadataSnapshot(savedProject)
+		);
 
 		const projectChangedDuringSave =
 			currentProject.updatedAt !== startedUpdatedAt;
@@ -1949,6 +2315,7 @@ async function saveProjectOnce(
 		if (projectChangedDuringSave) {
 			currentProject.serverUpdatedAt =
 				savedProject.serverUpdatedAt ?? savedProject.updatedAt;
+			currentProject.remoteContentLoaded = true;
 			if (startedProjectID.startsWith("local-")) {
 				migrateCodeEditorViewStates(startedProjectID, savedProject._id);
 				currentProject._id = savedProject._id;
@@ -1965,6 +2332,8 @@ async function saveProjectOnce(
 			unsyncedProjectIDs.delete(startedProjectID);
 			unsyncedProjectIDs.delete(savedProject._id);
 			pendingSaveProjectIDs.add(currentProject._id);
+			markRemoteProjectDetailUsed(savedProject._id);
+			trimRemoteProjectDetailCache(savedProject._id);
 			await saveLocalPythonProjectsAsync(
 				projects.value,
 				storageUserID.value
@@ -1984,6 +2353,8 @@ async function saveProjectOnce(
 				selectedProjectID.value = savedProject._id;
 			}
 		}
+		markRemoteProjectDetailUsed(savedProject._id);
+		trimRemoteProjectDetailCache(savedProject._id);
 		unsyncedProjectIDs.delete(startedProjectID);
 		unsyncedProjectIDs.delete(savedProject._id);
 		return true;
@@ -1996,7 +2367,9 @@ async function saveProjectOnce(
 		) {
 			volatileStudentProjectRecovery.replace(
 				startedOwnerID,
-				projects.value
+				projects.value.filter(
+					project => project.remoteContentLoaded !== false
+				)
 			);
 		} else if (startedOwnerID) {
 			volatileStudentProjectRecovery.discard(startedOwnerID);
@@ -2253,7 +2626,7 @@ async function deleteProject(project: PythonIdeProject) {
 }
 
 function updateProjectTitle(event: Event) {
-	if (!selectedProject.value) return;
+	if (!selectedProject.value || !selectedProjectContentLoaded.value) return;
 	const input = event.target as HTMLInputElement;
 	selectedProject.value.title = input.value;
 	touchSelectedProject();
@@ -2481,7 +2854,7 @@ function syncCodeEditorContent(content: string) {
 }
 
 function selectFile(fileName: string) {
-	if (!selectedProject.value) return;
+	if (!selectedProject.value || !selectedProjectContentLoaded.value) return;
 	selectedProject.value.activeFileName = fileName;
 	editorCursorCount.value = 1;
 	touchSelectedProject();
@@ -2489,7 +2862,7 @@ function selectFile(fileName: string) {
 }
 
 function addFile() {
-	if (!selectedProject.value) return;
+	if (!selectedProject.value || !selectedProjectContentLoaded.value) return;
 	const fileName = normalizePythonFileName(newFileName.value);
 	if (!isValidPythonFileName(fileName)) {
 		appendOutput(
@@ -2560,7 +2933,8 @@ async function importProjectFiles(event: Event) {
 	const project = selectedProject.value;
 	const input = event.target as HTMLInputElement;
 	const files = [...(input.files ?? [])];
-	if (!project || !files.length) return;
+	if (!project || !selectedProjectContentLoaded.value || !files.length)
+		return;
 
 	const skippedFiles: string[] = [];
 	let importedCount = 0;
@@ -2636,7 +3010,7 @@ async function importProjectFiles(event: Event) {
 
 function deleteFile(file: PythonIdeFile) {
 	const project = selectedProject.value;
-	if (!project) return;
+	if (!project || !selectedProjectContentLoaded.value) return;
 	const pythonFileCount = project.files.filter(file =>
 		isPythonIdePythonFile(file.name)
 	).length;
@@ -2661,7 +3035,7 @@ function deleteFile(file: PythonIdeFile) {
 
 function canDeleteFile(file: PythonIdeFile) {
 	const project = selectedProject.value;
-	if (!project) return false;
+	if (!project || !selectedProjectContentLoaded.value) return false;
 	if (project.files.length <= 1) return false;
 	const pythonFileCount = project.files.filter(candidate =>
 		isPythonIdePythonFile(candidate.name)
@@ -5344,6 +5718,11 @@ function hideWorkspaceForOwnerTransition(previousOwnerID: string | null) {
 	activeCodeEditorViewStateKey = "";
 	codeEditorViewStates.clear();
 	codeEditorStateSnapshots.clear();
+	remoteProjectMetadata.clear();
+	remoteReviewMetadata.clear();
+	remoteProjectDetailLoads.clear();
+	remoteReviewDetailLoads.clear();
+	remoteProjectDetailLru.splice(0, remoteProjectDetailLru.length);
 	editorCursorCount.value = 1;
 	gameImageCache.clear();
 	inputText.value = "";
@@ -5361,6 +5740,7 @@ function hideWorkspaceForOwnerTransition(previousOwnerID: string | null) {
 	projects.value = [];
 	visibleProjectReviews.value = [];
 	selectedProjectID.value = "";
+	projectDetailLoadErrorID.value = "";
 	selectedReviewFileName.value = "";
 }
 
@@ -5407,13 +5787,19 @@ async function handleStudentSessionHandoff({
 
 	if (mode === "suspend") {
 		if (projects.value.length) {
-			volatileStudentProjectRecovery.replace(studentID, projects.value, {
-				unsynced:
-					!!saveInFlight ||
-					!!pendingSaveProjectIDs.size ||
-					saveQueued ||
-					!!unsyncedProjectIDs.size
-			});
+			volatileStudentProjectRecovery.replace(
+				studentID,
+				projects.value.filter(
+					project => project.remoteContentLoaded !== false
+				),
+				{
+					unsynced:
+						!!saveInFlight ||
+						!!pendingSaveProjectIDs.size ||
+						saveQueued ||
+						!!unsyncedProjectIDs.size
+				}
+			);
 		}
 		volatileSuspendedOwnerID = studentID;
 		preparedOwnerExitID = studentID;
@@ -5555,6 +5941,7 @@ watch(
 );
 
 watch(selectedProjectID, (projectID, previousProjectID) => {
+	projectDetailLoadErrorID.value = "";
 	const expectedMigration = expectedSelectedProjectIDMigration;
 	expectedSelectedProjectIDMigration = null;
 	if (
@@ -5573,6 +5960,35 @@ watch(selectedProjectID, (projectID, previousProjectID) => {
 	if (!hadPythonRunInFlight) {
 		releaseIdlePythonRuntimeCallbacks();
 		stopRequested.value = false;
+	}
+	const studentID = activeStorageOwnerID.value;
+	if (studentID && projectID) {
+		const selectionLoadRunID = projectLoadRunID;
+		void hydrateRemoteSelection(projectID, studentID, selectionLoadRunID)
+			.then(loaded => {
+				if (
+					loaded &&
+					selectedProjectID.value === projectID &&
+					projectLoadIsCurrent(selectionLoadRunID)
+				) {
+					projectDetailLoadErrorID.value = "";
+					void nextTick(resetCodeEditor);
+				}
+			})
+			.catch(error => {
+				if (
+					selectedProjectID.value === projectID &&
+					projectLoadIsCurrent(selectionLoadRunID)
+				) {
+					projectDetailLoadErrorID.value = projectID;
+					appendOutput(
+						"system",
+						error instanceof Error
+							? error.message
+							: "Could not load this saved project."
+					);
+				}
+			});
 	}
 	void nextTick(resetActiveCanvas);
 });
@@ -6000,7 +6416,10 @@ onBeforeUnmount(() => {
 					</div>
 				</div>
 
-				<div v-if="selectedProject" class="sidebar-block">
+				<div
+					v-if="selectedProject && selectedProjectContentLoaded"
+					class="sidebar-block"
+				>
 					<div class="sidebar-heading">
 						<span>Files</span>
 					</div>
@@ -6088,7 +6507,10 @@ onBeforeUnmount(() => {
 				</div>
 			</aside>
 
-			<main v-if="selectedProject" class="python-ide-main">
+			<main
+				v-if="selectedProject && selectedProjectContentLoaded"
+				class="python-ide-main"
+			>
 				<div class="editor-toolbar">
 					<label>
 						<span>Project name</span>
@@ -6385,6 +6807,26 @@ onBeforeUnmount(() => {
 						</div>
 					</section>
 				</div>
+			</main>
+			<main
+				v-else-if="selectedProject"
+				class="python-ide-main python-ide-project-loading"
+			>
+				<p role="status">
+					{{
+						projectDetailLoadErrorID === selectedProject._id
+							? "This project could not be loaded."
+							: "Loading selected project…"
+					}}
+				</p>
+				<button
+					v-if="projectDetailLoadErrorID === selectedProject._id"
+					class="site-button site-button--secondary compact-button"
+					type="button"
+					@click="retrySelectedProjectLoad"
+				>
+					Try again
+				</button>
 			</main>
 		</div>
 	</section>
@@ -7197,6 +7639,12 @@ html.dark .file-delete:disabled::after {
 	display: grid;
 	gap: 1rem;
 	padding: 1rem;
+}
+
+.python-ide-project-loading {
+	min-height: 24rem;
+	place-items: center;
+	color: var(--color-ink-soft);
 }
 
 .editor-toolbar {

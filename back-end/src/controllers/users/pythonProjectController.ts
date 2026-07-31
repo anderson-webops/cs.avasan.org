@@ -1,9 +1,6 @@
 import type { RequestHandler } from "express";
 import type { IPythonProject, PythonProjectFile, PythonProjectMode } from "../../types/entities/IPythonProject.js";
-import type {
-	IPythonProjectReview,
-	PythonProjectReviewRole
-} from "../../types/entities/IPythonProjectReview.js";
+import type { IPythonProjectReview, PythonProjectReviewRole } from "../../types/entities/IPythonProjectReview.js";
 import { Buffer } from "node:buffer";
 import { Types } from "mongoose";
 import { z } from "zod";
@@ -37,6 +34,8 @@ const MAX_FILE_LENGTH = 3_000_000;
 const MAX_PROJECT_LENGTH = 12_000_000;
 const MAX_ACTIVE_PROJECTS = 25;
 const MAX_ACTIVE_PROJECT_BYTES = 32 * 1024 * 1024;
+const DEFAULT_PROJECT_PAGE_SIZE = 10;
+const MAX_PROJECT_PAGE_SIZE = 25;
 const APPROVED_STARTER_URL_HOSTS = new Set([
 	"cs.avasan.org",
 	"static.cs.avasan.org",
@@ -83,8 +82,7 @@ function isSafeProjectFileName(value: string) {
 function isApprovedStarterUrl(value: string) {
 	try {
 		const url = new URL(value);
-		return url.protocol === "https:"
-			&& APPROVED_STARTER_URL_HOSTS.has(url.hostname.toLowerCase());
+		return url.protocol === "https:" && APPROVED_STARTER_URL_HOSTS.has(url.hostname.toLowerCase());
 	}
 	catch {
 		return false;
@@ -118,41 +116,42 @@ const projectFilesSchema = z
 		"Project must include at least one Python file"
 	);
 
-const projectPayloadSchema = z.object({
-	title: z.string().trim().min(1).max(120).optional(),
-	mode: projectModeSchema.optional(),
-	files: projectFilesSchema.optional(),
-	activeFileName: z.string().trim().min(1).max(80).optional(),
-	courseID: z.string().trim().min(1).max(120).optional(),
-	courseProjectKey: z.string().trim().min(1).max(240).optional(),
-	courseProjectTitle: z.string().trim().min(1).max(160).optional(),
-	starterLabel: z.string().trim().min(1).max(80).optional(),
-	starterUrl: z
-		.string()
-		.trim()
-		.url()
-		.max(500)
-		.refine(
-			isApprovedStarterUrl,
-			"Starter URL must use HTTPS on an approved classroom source host"
-		)
-		.optional(),
-	importID: z
-		.string()
-		.trim()
-		.min(3)
-		.max(128)
-		.regex(/^[\w.:-]+$/)
-}).strict();
+const projectPayloadSchema = z
+	.object({
+		title: z.string().trim().min(1).max(120).optional(),
+		mode: projectModeSchema.optional(),
+		files: projectFilesSchema.optional(),
+		activeFileName: z.string().trim().min(1).max(80).optional(),
+		courseID: z.string().trim().min(1).max(120).optional(),
+		courseProjectKey: z.string().trim().min(1).max(240).optional(),
+		courseProjectTitle: z.string().trim().min(1).max(160).optional(),
+		starterLabel: z.string().trim().min(1).max(80).optional(),
+		starterUrl: z
+			.string()
+			.trim()
+			.url()
+			.max(500)
+			.refine(isApprovedStarterUrl, "Starter URL must use HTTPS on an approved classroom source host")
+			.optional(),
+		importID: z
+			.string()
+			.trim()
+			.min(3)
+			.max(128)
+			.regex(/^[\w.:-]+$/)
+	})
+	.strict();
 const projectUpdatePayloadSchema = projectPayloadSchema
 	.omit({ importID: true })
 	.extend({
 		expectedUpdatedAt: z.string().datetime({ offset: true })
 	})
 	.strict();
-const projectDeletePayloadSchema = z.object({
-	expectedUpdatedAt: z.string().datetime({ offset: true })
-}).strict();
+const projectDeletePayloadSchema = z
+	.object({
+		expectedUpdatedAt: z.string().datetime({ offset: true })
+	})
+	.strict();
 const projectReviewPayloadSchema = z.object({
 	files: projectFilesSchema.optional(),
 	activeFileName: z.string().trim().min(1).max(80).optional(),
@@ -179,6 +178,24 @@ function serializePythonProject(project: IPythonProject) {
 	};
 }
 
+function serializePythonProjectMetadata(project: IPythonProject) {
+	return {
+		_id: project._id.toString(),
+		title: project.title,
+		mode: project.mode,
+		activeFileName: project.activeFileName,
+		courseID: project.courseID,
+		courseProjectKey: project.courseProjectKey,
+		courseProjectTitle: project.courseProjectTitle,
+		starterLabel: project.starterLabel,
+		starterUrl: project.starterUrl,
+		importID: project.importID,
+		byteCount: Number.isSafeInteger(project.byteCount) && project.byteCount >= 0 ? project.byteCount : undefined,
+		createdAt: project.createdAt,
+		updatedAt: project.updatedAt
+	};
+}
+
 function serializePythonProjectReview(review: IPythonProjectReview) {
 	return {
 		_id: review._id.toString(),
@@ -199,6 +216,64 @@ function serializePythonProjectReview(review: IPythonProjectReview) {
 		sourceUpdatedAt: review.sourceUpdatedAt,
 		createdAt: review.createdAt,
 		updatedAt: review.updatedAt
+	};
+}
+
+function serializePythonProjectReviewMetadata(review: IPythonProjectReview) {
+	return {
+		_id: review._id.toString(),
+		sourceProject: review.sourceProject.toString(),
+		title: review.title,
+		mode: review.mode,
+		activeFileName: review.activeFileName,
+		courseID: review.courseID,
+		courseProjectKey: review.courseProjectKey,
+		courseProjectTitle: review.courseProjectTitle,
+		reviewerRole: review.reviewerRole,
+		reviewerName: review.reviewerName,
+		lastEditedByRole: review.lastEditedByRole,
+		lastEditedByName: review.lastEditedByName,
+		visibleToStudent: review.visibleToStudent,
+		sourceUpdatedAt: review.sourceUpdatedAt,
+		createdAt: review.createdAt,
+		updatedAt: review.updatedAt
+	};
+}
+
+function paginationFromRequest(req: Parameters<RequestHandler>[0], res: Parameters<RequestHandler>[1]) {
+	const pageValue = Array.isArray(req.query.page) ? req.query.page[0] : req.query.page;
+	const pageSizeValue = Array.isArray(req.query.pageSize) ? req.query.pageSize[0] : req.query.pageSize;
+	const page = pageValue === undefined ? 1 : Number(pageValue);
+	const pageSize = pageSizeValue === undefined ? DEFAULT_PROJECT_PAGE_SIZE : Number(pageSizeValue);
+
+	if (
+		!Number.isSafeInteger(page)
+		|| page < 1
+		|| page > MAX_ACTIVE_PROJECTS
+		|| !Number.isSafeInteger(pageSize)
+		|| pageSize < 1
+		|| pageSize > MAX_PROJECT_PAGE_SIZE
+	) {
+		res.status(400).json({
+			message: `Pagination requires page from 1 to ${MAX_ACTIVE_PROJECTS} and pageSize from 1 to ${MAX_PROJECT_PAGE_SIZE}.`
+		});
+		return null;
+	}
+
+	return {
+		page,
+		pageSize,
+		skip: (page - 1) * pageSize
+	};
+}
+
+function paginatedResult<T>(items: T[], pagination: { page: number; pageSize: number }) {
+	const hasMore = items.length > pagination.pageSize;
+	return {
+		hasMore,
+		page: pagination.page,
+		pageSize: pagination.pageSize,
+		items: hasMore ? items.slice(0, pagination.pageSize) : items
 	};
 }
 
@@ -229,9 +304,7 @@ function normalizeActiveFileName(activeFileName: string | undefined, files: Pyth
 
 function calculateProjectByteCount(files: PythonProjectFile[]): number {
 	return files.reduce(
-		(total, file) => total
-			+ Buffer.byteLength(file.name, "utf8")
-			+ Buffer.byteLength(file.content, "utf8"),
+		(total, file) => total + Buffer.byteLength(file.name, "utf8") + Buffer.byteLength(file.content, "utf8"),
 		0
 	);
 }
@@ -243,10 +316,9 @@ function storedProjectByteCount(project: IPythonProject): number {
 }
 
 function isDuplicateKeyError(error: unknown): boolean {
-	return typeof error === "object"
-		&& error !== null
-		&& "code" in error
-		&& (error as { code?: unknown }).code === 11000;
+	return (
+		typeof error === "object" && error !== null && "code" in error && (error as { code?: unknown }).code === 11000
+	);
 }
 
 async function reserveStudentProjectQuota(
@@ -263,10 +335,7 @@ async function reserveStudentProjectQuota(
 					{
 						$lte: [
 							{
-								$add: [
-									{ $ifNull: ["$activeProjectCount", 0] },
-									projectDelta
-								]
+								$add: [{ $ifNull: ["$activeProjectCount", 0] }, projectDelta]
 							},
 							MAX_ACTIVE_PROJECTS
 						]
@@ -274,10 +343,7 @@ async function reserveStudentProjectQuota(
 					{
 						$lte: [
 							{
-								$add: [
-									{ $ifNull: ["$activeProjectBytes", 0] },
-									byteDelta
-								]
+								$add: [{ $ifNull: ["$activeProjectBytes", 0] }, byteDelta]
 							},
 							MAX_ACTIVE_PROJECT_BYTES
 						]
@@ -397,11 +463,7 @@ function updateMatched(result: { matchedCount?: number; modifiedCount?: number }
 	return result.matchedCount === 1 || result.modifiedCount === 1;
 }
 
-async function restoreDeleteTombstones(
-	project: IPythonProject,
-	review: IPythonProjectReview | null,
-	deletedAt: Date
-) {
+async function restoreDeleteTombstones(project: IPythonProject, review: IPythonProjectReview | null, deletedAt: Date) {
 	const restoreOperations: Array<Promise<boolean>> = [
 		PythonProject.updateOne(
 			{
@@ -430,9 +492,7 @@ async function restoreDeleteTombstones(
 	}
 
 	const restored = await Promise.allSettled(restoreOperations);
-	return restored.every(
-		result => result.status === "fulfilled" && result.value
-	);
+	return restored.every(result => result.status === "fulfilled" && result.value);
 }
 
 function getProjectIDParam(req: Parameters<RequestHandler>[0], res: Parameters<RequestHandler>[1]) {
@@ -471,13 +531,11 @@ function getReviewIDParam(req: Parameters<RequestHandler>[0], res: Parameters<Re
 	return reviewID;
 }
 
-function actingReviewer(req: Parameters<RequestHandler>[0]):
-	| {
-		id: Types.ObjectId;
-		name: string;
-		role: PythonProjectReviewRole;
-	}
-	| null {
+function actingReviewer(req: Parameters<RequestHandler>[0]): {
+	id: Types.ObjectId;
+	name: string;
+	role: PythonProjectReviewRole;
+} | null {
 	if (req.currentAdmin) {
 		return {
 			id: req.currentAdmin._id,
@@ -489,15 +547,11 @@ function actingReviewer(req: Parameters<RequestHandler>[0]):
 	return null;
 }
 
-async function findManagedPythonProjectStudent(
-	req: Parameters<RequestHandler>[0],
-	res: Parameters<RequestHandler>[1]
-) {
+async function findManagedPythonProjectStudent(req: Parameters<RequestHandler>[0], res: Parameters<RequestHandler>[1]) {
 	const studentID = getStudentIDParam(req, res);
 	if (!studentID) return null;
 
-	const student = await Student.findById(studentID)
-		.select("+dataDeletionPendingAt");
+	const student = await Student.findById(studentID).select("+dataDeletionPendingAt");
 	if (!student) {
 		res.sendStatus(404);
 		return null;
@@ -541,57 +595,147 @@ async function findOwnedProject(req: Parameters<RequestHandler>[0], res: Paramet
 export const listPythonProjects: RequestHandler = async (req, res) => {
 	const studentID = req.currentStudent?._id;
 	if (!studentID) return res.status(403).json({ message: "Student session required" });
+	const pagination = paginationFromRequest(req, res);
+	if (!pagination) return;
 
 	const projects = await PythonProject.find({
 		deletedAt: { $exists: false },
 		user: studentID
-	}).sort({ updatedAt: -1 }).limit(MAX_ACTIVE_PROJECTS);
+	})
+		.select("-files")
+		.sort({ updatedAt: -1, _id: -1 })
+		.skip(pagination.skip)
+		.limit(pagination.pageSize + 1);
+	const page = paginatedResult(projects, pagination);
 
-	res.json({ projects: projects.map(serializePythonProject) });
+	res.json({
+		hasMore: page.hasMore,
+		page: page.page,
+		pageSize: page.pageSize,
+		projects: page.items.map(serializePythonProjectMetadata)
+	});
+};
+
+export const getPythonProject: RequestHandler = async (req, res) => {
+	const project = await findOwnedProject(req, res);
+	if (!project) return;
+	res.json({ project: serializePythonProject(project) });
 };
 
 export const listVisiblePythonProjectReviews: RequestHandler = async (req, res) => {
 	const studentID = req.currentStudent?._id;
 	if (!studentID) return res.status(403).json({ message: "Student session required" });
+	const pagination = paginationFromRequest(req, res);
+	if (!pagination) return;
 
 	const activeProjects = await PythonProject.find({
 		deletedAt: { $exists: false },
 		user: studentID
-	}).select("_id").limit(MAX_ACTIVE_PROJECTS);
+	})
+		.select("_id")
+		.limit(MAX_ACTIVE_PROJECTS);
 	const reviews = await PythonProjectReview.find({
 		deletedAt: { $exists: false },
 		sourceProject: { $in: activeProjects.map(project => project._id) },
 		user: studentID,
 		visibleToStudent: true
 	})
-		.sort({ updatedAt: -1 })
-		.limit(100);
+		.select("-files -note")
+		.sort({ updatedAt: -1, _id: -1 })
+		.skip(pagination.skip)
+		.limit(pagination.pageSize + 1);
+	const page = paginatedResult(reviews, pagination);
 
-	res.json({ reviews: reviews.map(serializePythonProjectReview) });
+	res.json({
+		hasMore: page.hasMore,
+		page: page.page,
+		pageSize: page.pageSize,
+		reviews: page.items.map(serializePythonProjectReviewMetadata)
+	});
+};
+
+export const getVisiblePythonProjectReview: RequestHandler = async (req, res) => {
+	const studentID = req.currentStudent?._id;
+	if (!studentID) return res.status(403).json({ message: "Student session required" });
+	const reviewID = getReviewIDParam(req, res);
+	if (!reviewID) return;
+
+	const review = await PythonProjectReview.findOne({
+		_id: new Types.ObjectId(reviewID),
+		deletedAt: { $exists: false },
+		user: studentID,
+		visibleToStudent: true
+	});
+	if (!review) return res.sendStatus(404);
+	const projectExists = await PythonProject.exists({
+		_id: review.sourceProject,
+		deletedAt: { $exists: false },
+		user: studentID
+	});
+	if (!projectExists) return res.sendStatus(404);
+
+	res.json({ review: serializePythonProjectReview(review) });
 };
 
 export const listManagedPythonProjects: RequestHandler = async (req, res) => {
 	const student = await findManagedPythonProjectStudent(req, res);
 	if (!student) return;
+	const pagination = paginationFromRequest(req, res);
+	if (!pagination) return;
 
 	const projects = await PythonProject.find({
 		deletedAt: { $exists: false },
 		user: student._id
-	}).sort({ updatedAt: -1 }).limit(MAX_ACTIVE_PROJECTS);
+	})
+		.select("-files")
+		.sort({ updatedAt: -1, _id: -1 })
+		.skip(pagination.skip)
+		.limit(pagination.pageSize + 1);
+	const page = paginatedResult(projects, pagination);
 	const reviews = await PythonProjectReview.find({
 		deletedAt: { $exists: false },
-		sourceProject: { $in: projects.map(project => project._id) },
+		sourceProject: { $in: page.items.map(project => project._id) },
 		user: student._id
-	}).sort({ updatedAt: -1 }).limit(100);
+	})
+		.select("-files -note")
+		.sort({ updatedAt: -1, _id: -1 })
+		.limit(page.pageSize);
 	const reviewsByProject = new Map(
-		reviews.map(review => [review.sourceProject.toString(), serializePythonProjectReview(review)])
+		reviews.map(review => [review.sourceProject.toString(), serializePythonProjectReviewMetadata(review)])
 	);
 
 	res.json({
-		projects: projects.map(project => ({
-			project: serializePythonProject(project),
+		hasMore: page.hasMore,
+		page: page.page,
+		pageSize: page.pageSize,
+		projects: page.items.map(project => ({
+			project: serializePythonProjectMetadata(project),
 			review: reviewsByProject.get(project._id.toString()) ?? null
 		}))
+	});
+};
+
+export const getManagedPythonProject: RequestHandler = async (req, res) => {
+	const student = await findManagedPythonProjectStudent(req, res);
+	if (!student) return;
+	const projectID = getProjectIDParam(req, res);
+	if (!projectID) return;
+
+	const project = await PythonProject.findOne({
+		_id: new Types.ObjectId(projectID),
+		deletedAt: { $exists: false },
+		user: student._id
+	});
+	if (!project) return res.sendStatus(404);
+	const review = await PythonProjectReview.findOne({
+		deletedAt: { $exists: false },
+		sourceProject: project._id,
+		user: student._id
+	});
+
+	res.json({
+		project: serializePythonProject(project),
+		review: review ? serializePythonProjectReview(review) : null
 	});
 };
 
@@ -756,11 +900,7 @@ export const updatePythonProject: RequestHandler = async (req, res) => {
 
 	try {
 		if (positiveByteDelta > 0) {
-			quotaReserved = await reserveStudentProjectQuota(
-				project.user,
-				0,
-				positiveByteDelta
-			);
+			quotaReserved = await reserveStudentProjectQuota(project.user, 0, positiveByteDelta);
 			if (!quotaReserved) return sendQuotaConflict(res);
 		}
 
@@ -802,10 +942,7 @@ export const updatePythonProject: RequestHandler = async (req, res) => {
 			}
 		);
 		if (!updated) {
-			if (
-				quotaReserved
-				&& !(await releaseStudentProjectQuota(project.user, 0, positiveByteDelta))
-			) {
+			if (quotaReserved && !(await releaseStudentProjectQuota(project.user, 0, positiveByteDelta))) {
 				return res.status(500).json({
 					message: "Project quota could not be recovered after the save conflicted."
 				});
@@ -814,10 +951,7 @@ export const updatePythonProject: RequestHandler = async (req, res) => {
 		}
 		updateApplied = true;
 
-		if (
-			byteDelta < 0
-			&& !(await releaseStudentProjectQuota(project.user, 0, -byteDelta))
-		) {
+		if (byteDelta < 0 && !(await releaseStudentProjectQuota(project.user, 0, -byteDelta))) {
 			return res.status(500).json({
 				message: "Project was saved, but its quota could not be reconciled."
 			});

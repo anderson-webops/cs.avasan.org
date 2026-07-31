@@ -17,6 +17,7 @@ import {
 import { getLoggedInAdmin } from "../controllers/users/adminController.js";
 import {
 	createPythonProjectReview,
+	getManagedPythonProject,
 	listManagedPythonProjects,
 	updatePythonProjectReview
 } from "../controllers/users/pythonProjectController.js";
@@ -44,10 +45,7 @@ export function createAdminRoutes(options: AdminRouteOptions) {
 		getClassroomAnalyticsSummary(options.analyticsRetentionDays)
 	);
 
-	if (
-		!options.studentAccountsEnabled
-		&& !options.studentRecordMaintenanceEnabled
-	) {
+	if (!options.studentAccountsEnabled && !options.studentRecordMaintenanceEnabled) {
 		return configuredRouter;
 	}
 
@@ -83,6 +81,7 @@ export function createAdminRoutes(options: AdminRouteOptions) {
 		resetStudentAccessCode
 	);
 	configuredRouter.get("/students/:studentID/projects", validAdmin, listManagedPythonProjects);
+	configuredRouter.get("/students/:studentID/projects/:projectID", validAdmin, getManagedPythonProject);
 	configuredRouter.post(
 		"/students/:studentID/projects/:projectID/review",
 		validAdmin,
