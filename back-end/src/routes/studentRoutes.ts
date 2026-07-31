@@ -14,15 +14,13 @@ import {
 import {
 	createPythonProject,
 	deletePythonProject,
+	getPythonProject,
+	getVisiblePythonProjectReview,
 	listPythonProjects,
 	listVisiblePythonProjectReviews,
 	updatePythonProject
 } from "../controllers/users/pythonProjectController.js";
-import {
-	requireStudentContext,
-	validStudent,
-	validStudentSetup
-} from "../middleware/auth.js";
+import { requireStudentContext, validStudent, validStudentSetup } from "../middleware/auth.js";
 import {
 	createStudentCredentialLimiter,
 	createStudentLoginIpLimiter,
@@ -30,9 +28,7 @@ import {
 	createStudentPasswordSetupLimiter,
 	createStudentProjectWriteLimiter
 } from "../middleware/rateLimiters.js";
-import {
-	requireStudentDataWriteLease
-} from "../security/studentDataWriteBarrier.js";
+import { requireStudentDataWriteLease } from "../security/studentDataWriteBarrier.js";
 
 export interface StudentRouteOptions {
 	oauthEnabled: boolean;
@@ -53,12 +49,7 @@ export function createStudentRoutes(options: StudentRouteOptions) {
 			parameterLimit: 10
 		});
 		router.get("/oauth/providers", getStudentOAuthProviders);
-		router.get(
-			"/oauth/:provider/start",
-			studentLoginIpLimiter,
-			studentOAuthLimiter,
-			startStudentOAuthSignIn
-		);
+		router.get("/oauth/:provider/start", studentLoginIpLimiter, studentOAuthLimiter, startStudentOAuthSignIn);
 		router.post(
 			"/oauth/:provider/connect",
 			studentLoginIpLimiter,
@@ -67,11 +58,7 @@ export function createStudentRoutes(options: StudentRouteOptions) {
 			requireStudentDataWriteLease,
 			connectStudentOAuthProvider
 		);
-		router.get(
-			"/oauth/:provider/callback",
-			studentOAuthLimiter,
-			finishStudentOAuth
-		);
+		router.get("/oauth/:provider/callback", studentOAuthLimiter, finishStudentOAuth);
 		router.post(
 			"/oauth/:provider/callback",
 			(req, res, next) => {
@@ -87,48 +74,24 @@ export function createStudentRoutes(options: StudentRouteOptions) {
 		);
 	}
 
-	router.post(
-		"/session",
-		studentLoginIpLimiter,
-		studentCredentialLimiter,
-		createStudentSession
-	);
+	router.post("/session", studentLoginIpLimiter, studentCredentialLimiter, createStudentSession);
 	router.get("/session", getStudentSession);
-	router.put(
-		"/session/password",
-		studentPasswordSetupLimiter,
-		setStudentPassword
-	);
+	router.put("/session/password", studentPasswordSetupLimiter, setStudentPassword);
 	router.delete("/session", deleteStudentSession);
 
-	router.use(
-		["/projects", "/project-reviews"],
-		validStudent,
-		requireStudentContext
-	);
+	router.use(["/projects", "/project-reviews"], validStudent, requireStudentContext);
 	router.get("/projects", listPythonProjects);
-	router.post(
-		"/projects",
-		requireStudentDataWriteLease,
-		studentProjectWriteLimiter,
-		createPythonProject
-	);
-	router.put(
-		"/projects/:projectID",
-		requireStudentDataWriteLease,
-		studentProjectWriteLimiter,
-		updatePythonProject
-	);
+	router.get("/projects/:projectID", getPythonProject);
+	router.post("/projects", requireStudentDataWriteLease, studentProjectWriteLimiter, createPythonProject);
+	router.put("/projects/:projectID", requireStudentDataWriteLease, studentProjectWriteLimiter, updatePythonProject);
 	router.delete(
 		"/projects/:projectID",
 		requireStudentDataWriteLease,
 		studentProjectWriteLimiter,
 		deletePythonProject
 	);
-	router.get(
-		"/project-reviews",
-		listVisiblePythonProjectReviews
-	);
+	router.get("/project-reviews", listVisiblePythonProjectReviews);
+	router.get("/project-reviews/:reviewID", getVisiblePythonProjectReview);
 
 	return router;
 }

@@ -195,6 +195,8 @@ reuse it for any other service or commit it.
 Leave `TRUST_PROXY_HOPS` unset unless the API is exclusively behind a known
 proxy chain that replaces incoming forwarding headers. Database diagnostics
 always require `INTERNAL_DIAGNOSTICS_KEY`, including during local development.
+When configured, that key must contain at least 32 UTF-8 bytes; leaving it
+blank disables the diagnostics endpoint.
 Set `CLASSROOM_ORIGIN=http://127.0.0.1:3333` for the local Vite classroom and
 `CLASSROOM_ORIGIN=https://cs.avasan.org` in production. `CROSS_SITE` must remain
 false: browser sessions are served through the same-origin `/api` route.
@@ -298,7 +300,8 @@ docker compose --env-file deploy/cs.env -f compose.production.yml up -d
 ```
 
 Generate `MONGO_ROOT_PASSWORD`, `MONGO_APP_PASSWORD`, `SESSION_SECRET`, and
-`INTERNAL_DIAGNOSTICS_KEY` as separate random values. Hexadecimal Mongo
+`INTERNAL_DIAGNOSTICS_KEY` as separate random values of at least 32 UTF-8
+bytes each. Hexadecimal Mongo
 passwords avoid URI-encoding ambiguity. `deploy/cs.env` is ignored by Git and
 the verifier refuses permissions other than `0600`. Mongo root is available
 only to the database container for initialization and maintenance. The API and
@@ -310,14 +313,17 @@ operations required by the application's Mongoose startup; do not add
 
 The one-off Admin command uses TypeScript source in the isolated tools image,
 prompts for Julio's credentials, and refuses to create a second Admin; omit
-that step when the database already contains his provisioned account. If an
+that step when the database already contains his provisioned account. It uses
+the same fail-closed Mongo credential selection as the API, including an
+explicitly configured Vault AppRole. If an
 existing deployment rotates `MONGO_APP_PASSWORD`, run the idempotent
 `mongosh` initialization command above before restarting the API. A Vault
 secret, when enabled, must contain the same least-privilege application URI,
 never a Mongo root URI. An explicit Vault address or AppRole setup fails
 closed on incomplete configuration, authentication, or read errors; it never
 silently falls back to the environment URI. A remote production Vault origin
-must use HTTPS.
+must use HTTPS. Vault redirects are refused, and login and secret responses are
+bounded before JSON parsing.
 Adapt [`deploy/host-nginx.conf.example`](deploy/host-nginx.conf.example) to the
 existing TLS host; it replaces forwarding headers and proxies only to the
 loopback container port. This proxy-only vhost and `compose.production.yml`

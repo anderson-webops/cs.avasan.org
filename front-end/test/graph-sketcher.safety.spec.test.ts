@@ -3,6 +3,7 @@ import {
 	estimatedGraphSnapshotBytes,
 	evenlySampleIndexes,
 	evenlySampleSeriesIndexes,
+	graphHistorySnapshotFits,
 	graphPngDimensions,
 	GRAPH_SKETCHER_SESSION_STORAGE_KEY,
 	MAX_GRAPH_HISTORY_ENTRIES,
@@ -68,13 +69,19 @@ describe("Graph Sketcher browser safety limits", () => {
 		expect(retainedBytes).toBeLessThanOrEqual(
 			MAX_GRAPH_HISTORY_ESTIMATED_BYTES
 		);
+		const oversizedSnapshot = "x".repeat(
+			MAX_GRAPH_HISTORY_ESTIMATED_BYTES
+		);
+		expect(graphHistorySnapshotFits(oversizedSnapshot)).toBe(false);
 		expect(
 			pushBoundedGraphHistorySnapshot(
 				undo,
 				redo,
-				"x".repeat(MAX_GRAPH_HISTORY_ESTIMATED_BYTES)
+				oversizedSnapshot
 			)
 		).toBe(false);
+		expect(undo).toEqual([]);
+		expect(redo).toEqual([]);
 	});
 
 	it("reduces PNG scale to keep the canvas within the pixel budget", () => {

@@ -83,6 +83,7 @@ export interface PythonIdeProject {
 	createdAt?: string;
 	updatedAt?: string;
 	serverUpdatedAt?: string;
+	remoteContentLoaded?: boolean;
 }
 
 export type PythonIdeProjectReviewRole = "admin";
@@ -106,6 +107,7 @@ export interface PythonIdeProjectReview {
 	sourceUpdatedAt?: string;
 	createdAt?: string;
 	updatedAt?: string;
+	remoteContentLoaded?: boolean;
 }
 
 export interface ManagedPythonIdeProject {
@@ -2940,7 +2942,50 @@ function normalizeRemotePythonIdeProject(
 	const snapshot = plainPythonIdeProjectSnapshot(project);
 	return {
 		...snapshot,
+		remoteContentLoaded: true,
 		serverUpdatedAt: snapshot.serverUpdatedAt ?? snapshot.updatedAt
+	};
+}
+
+type RemotePythonIdeProjectMetadata = Omit<
+	PythonIdeProject,
+	"files" | "remoteContentLoaded" | "serverUpdatedAt"
+>;
+
+type RemotePythonIdeProjectReviewMetadata = Omit<
+	PythonIdeProjectReview,
+	"files" | "note" | "remoteContentLoaded"
+>;
+
+function normalizeRemotePythonIdeProjectMetadata(
+	project: RemotePythonIdeProjectMetadata
+): PythonIdeProject {
+	return {
+		...project,
+		files: [],
+		remoteContentLoaded: false,
+		serverUpdatedAt: project.updatedAt
+	};
+}
+
+function normalizeRemotePythonIdeProjectReviewMetadata(
+	review: RemotePythonIdeProjectReviewMetadata
+): PythonIdeProjectReview {
+	return {
+		...review,
+		files: [],
+		note: undefined,
+		remoteContentLoaded: false
+	};
+}
+
+function normalizeRemotePythonIdeProjectReview(
+	review: PythonIdeProjectReview
+): PythonIdeProjectReview {
+	return {
+		...review,
+		files: review.files.map(file => ({ ...file })),
+		remoteContentLoaded: true
 	};
 }
 
@@ -3245,27 +3290,129 @@ export async function syncStoredStudentPythonProjects(studentID: string) {
 	return [];
 }
 
+interface PaginatedProjectResponse<T> {
+	hasMore?: boolean;
+	page?: number;
+	pageSize?: number;
+	projects: T[];
+}
+
+interface PaginatedReviewResponse<T> {
+	hasMore?: boolean;
+	page?: number;
+	pageSize?: number;
+	reviews: T[];
+}
+
+const REMOTE_PROJECT_INDEX_PAGE_SIZE = 10;
+const MAX_REMOTE_PROJECT_INDEX_PAGES = 3;
+
 export async function fetchPythonIdeProjects(studentID: string) {
-	const { data } = await api.get<{ projects: PythonIdeProject[] }>(
-		"/students/projects",
+	const projects: PythonIdeProject[] = [];
+	for (let page = 1; page <= MAX_REMOTE_PROJECT_INDEX_PAGES; page += 1) {
+		const { data } = await api.get<
+			PaginatedProjectResponse<RemotePythonIdeProjectMetadata>
+		>("/students/projects", {
+			headers: { "X-Student-ID": studentID },
+			params: {
+				page,
+				pageSize: REMOTE_PROJECT_INDEX_PAGE_SIZE
+			}
+		});
+		projects.push(
+			...data.projects.map(normalizeRemotePythonIdeProjectMetadata)
+		);
+		if (!data.hasMore) return projects;
+	}
+	throw new Error("The project index exceeded the safe page limit.");
+}
+
+export async function fetchPythonIdeProject(
+	projectID: string,
+	studentID: string
+) {
+	const { data } = await api.get<{ project: PythonIdeProject }>(
+		`/students/projects/${projectID}`,
 		{ headers: { "X-Student-ID": studentID } }
 	);
-	return data.projects.map(normalizeRemotePythonIdeProject);
+	return normalizeRemotePythonIdeProject(data.project);
 }
 
 export async function fetchVisiblePythonIdeProjectReviews(studentID: string) {
-	const { data } = await api.get<{ reviews: PythonIdeProjectReview[] }>(
-		"/students/project-reviews",
+	const reviews: PythonIdeProjectReview[] = [];
+	for (let page = 1; page <= MAX_REMOTE_PROJECT_INDEX_PAGES; page += 1) {
+		const { data } = await api.get<
+			PaginatedReviewResponse<RemotePythonIdeProjectReviewMetadata>
+		>("/students/project-reviews", {
+			headers: { "X-Student-ID": studentID },
+			params: {
+				page,
+				pageSize: REMOTE_PROJECT_INDEX_PAGE_SIZE
+			}
+		});
+		reviews.push(
+			...data.reviews.map(normalizeRemotePythonIdeProjectReviewMetadata)
+		);
+		if (!data.hasMore) return reviews;
+	}
+	throw new Error("The review index exceeded the safe page limit.");
+}
+
+export async function fetchVisiblePythonIdeProjectReview(
+	reviewID: string,
+	studentID: string
+) {
+	const { data } = await api.get<{ review: PythonIdeProjectReview }>(
+		`/students/project-reviews/${reviewID}`,
 		{ headers: { "X-Student-ID": studentID } }
 	);
-	return data.reviews;
+	return normalizeRemotePythonIdeProjectReview(data.review);
 }
 
 export async function fetchManagedPythonIdeProjects(studentID: string) {
-	const { data } = await api.get<{ projects: ManagedPythonIdeProject[] }>(
-		`/admins/students/${studentID}/projects`
+	const projects: ManagedPythonIdeProject[] = [];
+	for (let page = 1; page <= MAX_REMOTE_PROJECT_INDEX_PAGES; page += 1) {
+		const { data } = await api.get<
+			PaginatedProjectResponse<{
+				project: RemotePythonIdeProjectMetadata;
+				review: RemotePythonIdeProjectReviewMetadata | null;
+			}>
+		>(`/admins/students/${studentID}/projects`, {
+			params: {
+				page,
+				pageSize: REMOTE_PROJECT_INDEX_PAGE_SIZE
+			}
+		});
+		projects.push(
+			...data.projects.map(record => ({
+				project: normalizeRemotePythonIdeProjectMetadata(
+					record.project
+				),
+				review: record.review
+					? normalizeRemotePythonIdeProjectReviewMetadata(
+							record.review
+						)
+					: null
+			}))
+		);
+		if (!data.hasMore) return projects;
+	}
+	throw new Error("The managed project index exceeded the safe page limit.");
+}
+
+export async function fetchManagedPythonIdeProject(
+	studentID: string,
+	projectID: string
+) {
+	const { data } = await api.get<ManagedPythonIdeProject>(
+		`/admins/students/${studentID}/projects/${projectID}`
 	);
-	return data.projects;
+	return {
+		project: normalizeRemotePythonIdeProject(data.project),
+		review: data.review
+			? normalizeRemotePythonIdeProjectReview(data.review)
+			: null
+	};
 }
 
 export async function createRemotePythonIdeProject(
@@ -3356,7 +3503,10 @@ export async function createPythonIdeProjectReview(
 		project: PythonIdeProject;
 		review: PythonIdeProjectReview;
 	}>(`/admins/students/${studentID}/projects/${projectID}/review`, {});
-	return data;
+	return {
+		project: normalizeRemotePythonIdeProject(data.project),
+		review: normalizeRemotePythonIdeProjectReview(data.review)
+	};
 }
 
 export async function updatePythonIdeProjectReview(
@@ -3377,7 +3527,10 @@ export async function updatePythonIdeProjectReview(
 		`/admins/students/${studentID}/projects/${projectID}/review/${reviewID}`,
 		payload
 	);
-	return data;
+	return {
+		project: normalizeRemotePythonIdeProject(data.project),
+		review: normalizeRemotePythonIdeProjectReview(data.review)
+	};
 }
 
 export async function updateRemotePythonIdeProject(

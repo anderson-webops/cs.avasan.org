@@ -7,6 +7,7 @@ import { ADMIN_SINGLETON_ID } from "../src/security/adminIdentity.js";
 const modelMocks = vi.hoisted(() => ({
 	adminFindById: vi.fn(),
 	studentFindById: vi.fn(),
+	pythonProjectExists: vi.fn(),
 	pythonProjectFind: vi.fn(),
 	pythonProjectFindOne: vi.fn(),
 	pythonProjectReviewFind: vi.fn(),
@@ -28,6 +29,7 @@ vi.mock("../src/models/schemas/Student.js", () => ({
 
 vi.mock("../src/models/schemas/PythonProject.js", () => ({
 	PythonProject: {
+		exists: modelMocks.pythonProjectExists,
 		find: modelMocks.pythonProjectFind,
 		findOne: modelMocks.pythonProjectFindOne
 	}
@@ -54,6 +56,7 @@ function queryWith<T>(result: T) {
 		select: vi.fn(() => query),
 		sort: vi.fn(() => query),
 		limit: vi.fn(() => query),
+		skip: vi.fn(() => query),
 		exec: vi.fn().mockResolvedValue(result),
 		then: (resolve: (value: T) => unknown, reject: (reason: unknown) => unknown) =>
 			Promise.resolve(result).then(resolve, reject),
@@ -206,6 +209,7 @@ describe("student and Julio project routes", () => {
 				: queryWith(null)
 		);
 		modelMocks.studentFindById.mockReturnValue(queryWith(makeStudent()));
+		modelMocks.pythonProjectExists.mockReturnValue(queryWith({ _id: projectID }));
 		modelMocks.pythonProjectFind.mockReturnValue(queryWith([makeProject()]));
 		modelMocks.pythonProjectFindOne.mockResolvedValue(makeProject());
 		modelMocks.pythonProjectReviewFind.mockReturnValue(queryWith([makeReview()]));
@@ -213,9 +217,9 @@ describe("student and Julio project routes", () => {
 		modelMocks.pythonProjectReviewCreate.mockImplementation(async payload => makeReview(payload));
 	});
 
-	it("lets a full student session list only active owned projects", async () => {
+	it("lets a full student session page through owned project metadata", async () => {
 		await withRuntime(async baseUrl => {
-			const response = await fetch(`${baseUrl}/students/projects`, {
+			const response = await fetch(`${baseUrl}/students/projects?page=1&pageSize=5`, {
 				headers: { "x-student-id": studentID.toString() }
 			});
 			const body = await response.json();
@@ -226,7 +230,34 @@ describe("student and Julio project routes", () => {
 				user: studentID
 			});
 			expect(body.projects).toHaveLength(1);
-			expect(body.projects[0].files[0].content).toBe("print('student')\n");
+			expect(modelMocks.pythonProjectFind.mock.results[0]?.value.select).toHaveBeenCalledWith("-files");
+			expect(body).toMatchObject({
+				hasMore: false,
+				page: 1,
+				pageSize: 5
+			});
+			expect(body.projects[0]).not.toHaveProperty("files");
+			expect(body.projects[0]).toMatchObject({
+				_id: projectID.toString(),
+				title: "Loops practice"
+			});
+		});
+	});
+
+	it("loads one owned project body only through its authenticated detail route", async () => {
+		await withRuntime(async baseUrl => {
+			const response = await fetch(`${baseUrl}/students/projects/${projectID}`, {
+				headers: { "x-student-id": studentID.toString() }
+			});
+			const body = await response.json();
+
+			expect(response.status).toBe(200);
+			expect(modelMocks.pythonProjectFindOne).toHaveBeenCalledWith({
+				_id: projectID,
+				deletedAt: { $exists: false },
+				user: studentID
+			});
+			expect(body.project.files[0].content).toBe("print('student')\n");
 		});
 	});
 
@@ -248,7 +279,7 @@ describe("student and Julio project routes", () => {
 		});
 	});
 
-	it("lets Julio list active student projects with review copies", async () => {
+	it("lets Julio page through project and review metadata without code bodies", async () => {
 		await withRuntime(async baseUrl => {
 			const response = await fetch(`${baseUrl}/admins/students/${studentID}/projects`, {
 				headers: { "x-admin-id": ADMIN_SINGLETON_ID }
@@ -265,7 +296,25 @@ describe("student and Julio project routes", () => {
 				sourceProject: { $in: [projectID] },
 				user: studentID
 			});
-			expect(body.projects[0].project.files[0].content).toBe("print('student')\n");
+			expect(body.projects[0].project).not.toHaveProperty("files");
+			expect(body.projects[0].review).not.toHaveProperty("files");
+			expect(body.projects[0].review).not.toHaveProperty("note");
+			expect(modelMocks.pythonProjectReviewFind.mock.results[0]?.value.select).toHaveBeenCalledWith(
+				"-files -note"
+			);
+		});
+	});
+
+	it("loads one student project and review body only through Julio's detail route", async () => {
+		await withRuntime(async baseUrl => {
+			const response = await fetch(`${baseUrl}/admins/students/${studentID}/projects/${projectID}`, {
+				headers: { "x-admin-id": ADMIN_SINGLETON_ID }
+			});
+			const body = await response.json();
+
+			expect(response.status).toBe(200);
+			expect(body.project.files[0].content).toBe("print('student')\n");
+			expect(body.review.files[0].content).toContain("review");
 		});
 	});
 
@@ -383,6 +432,36 @@ describe("student and Julio project routes", () => {
 				visibleToStudent: true
 			});
 			expect(body.reviews).toHaveLength(1);
+			expect(body.reviews[0]).not.toHaveProperty("files");
+			expect(body.reviews[0]).not.toHaveProperty("note");
+			expect(modelMocks.pythonProjectReviewFind.mock.results[0]?.value.select).toHaveBeenCalledWith(
+				"-files -note"
+			);
+		});
+	});
+
+	it("loads one visible review body only through its authenticated detail route", async () => {
+		modelMocks.pythonProjectReviewFindOne.mockResolvedValue(
+			makeReview({
+				visibleToStudent: true,
+				note: "Julio's comments are in the code."
+			})
+		);
+
+		await withRuntime(async baseUrl => {
+			const response = await fetch(`${baseUrl}/students/project-reviews/${reviewID}`, {
+				headers: { "x-student-id": studentID.toString() }
+			});
+			const body = await response.json();
+
+			expect(response.status).toBe(200);
+			expect(modelMocks.pythonProjectExists).toHaveBeenCalledWith({
+				_id: projectID,
+				deletedAt: { $exists: false },
+				user: studentID
+			});
+			expect(body.review.files[0].content).toContain("review");
+			expect(body.review.note).toContain("Julio");
 		});
 	});
 });

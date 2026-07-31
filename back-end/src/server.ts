@@ -9,7 +9,7 @@ import mongoose from "mongoose";
 import { enforceClassroomAnalyticsRetention } from "./controllers/classroomAnalyticsController.js";
 import { requireStudentContext, validAdmin, validStudent } from "./middleware/auth.js";
 import { requireClassroomRequest } from "./middleware/classroomRequest.js";
-import { requireInternalDiagnostics } from "./middleware/internalDiagnostics.js";
+import { readInternalDiagnosticsKey, requireInternalDiagnostics } from "./middleware/internalDiagnostics.js";
 import { createProjectJsonParser, createProjectPayloadConcurrencyGuard } from "./middleware/projectPayload.js";
 import {
 	createHeavyProjectPayloadLimiter,
@@ -46,7 +46,7 @@ import "dotenv/config";
 
 async function main() {
 	const app = express();
-	const internalDiagnosticsKey = env.INTERNAL_DIAGNOSTICS_KEY;
+	const internalDiagnosticsKey = readInternalDiagnosticsKey(env.INTERNAL_DIAGNOSTICS_KEY);
 	const classroomAnalyticsRetentionDays = readClassroomAnalyticsRetentionDays(env.CLASSROOM_ANALYTICS_RETENTION_DAYS);
 	const classroomPrivacy = readClassroomPrivacySettings(env);
 	const releaseMetadata = readReleaseMetadata(env);
@@ -260,7 +260,6 @@ async function main() {
 	}
 	console.log("Connected to MongoDB");
 	const c = mongoose.connection;
-	console.log(`Mongo connected: db=${c.db?.databaseName} host=${c.host} name=${c.name}`);
 	app.get("/_dbinfo", requireInternalDiagnostics(internalDiagnosticsKey), (_req, res) => {
 		res.set("Cache-Control", "no-store").json({
 			databaseName: c.db?.databaseName ?? null,
@@ -336,7 +335,9 @@ async function main() {
 	});
 }
 
-main().catch((err) => {
-	console.error(err);
+main().catch(() => {
+	// Startup errors can include credentials, hostnames, database names, or
+	// provider responses. Keep the process log independent of the caught value.
+	console.error("Server startup failed. Check the private service logs and configuration.");
 	exit(1);
 });

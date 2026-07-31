@@ -184,25 +184,24 @@ describe("student record export and deletion", () => {
 		modelMocks.oauthCountDocuments.mockReturnValue(queryWith(1));
 		modelMocks.projectCountDocuments.mockReturnValue(queryWith(1));
 		modelMocks.reviewCountDocuments.mockReturnValue(queryWith(1));
-		modelMocks.oauthDeleteMany.mockReturnValue(queryWith({ deletedCount: 1 }));
-		modelMocks.projectDeleteMany.mockReturnValue(queryWith({ deletedCount: 1 }));
-		modelMocks.reviewDeleteMany.mockReturnValue(queryWith({ deletedCount: 1 }));
+		modelMocks.oauthDeleteMany.mockReturnValue(queryWith({ acknowledged: true, deletedCount: 1 }));
+		modelMocks.projectDeleteMany.mockReturnValue(queryWith({ acknowledged: true, deletedCount: 1 }));
+		modelMocks.reviewDeleteMany.mockReturnValue(queryWith({ acknowledged: true, deletedCount: 1 }));
 		modelMocks.receiptFind.mockReturnValue(queryWith([]));
 		modelMocks.receiptFindOne.mockReturnValue(queryWith(null));
-		modelMocks.receiptFindOneAndUpdate.mockImplementation(
-			(_filter, update) =>
-				queryWith({
-					_id: new Types.ObjectId(),
-					createdAt,
-					operationID: update.$setOnInsert.operationID,
-					reason: update.$setOnInsert.reason,
-					recordInventory: update.$set.recordInventory,
-					requestedAt: update.$setOnInsert.requestedAt,
-					status: "in-progress",
-					studentID: update.$setOnInsert.studentID,
-					updatedAt: createdAt,
-					username: update.$setOnInsert.username
-				})
+		modelMocks.receiptFindOneAndUpdate.mockImplementation((_filter, update) =>
+			queryWith({
+				_id: new Types.ObjectId(),
+				createdAt,
+				operationID: update.$setOnInsert.operationID,
+				reason: update.$setOnInsert.reason,
+				recordInventory: update.$set.recordInventory,
+				requestedAt: update.$setOnInsert.requestedAt,
+				status: "in-progress",
+				studentID: update.$setOnInsert.studentID,
+				updatedAt: createdAt,
+				username: update.$setOnInsert.username
+			})
 		);
 		modelMocks.receiptUpdateOne.mockReturnValue(queryWith({ acknowledged: true, matchedCount: 1 }));
 		modelMocks.studentFindOneAndUpdate
@@ -300,10 +299,9 @@ describe("student record export and deletion", () => {
 					}
 				}
 			});
-			expect(
-				new Date(body.receipt.expiresAt).getTime()
-				- new Date(body.receipt.completedAt).getTime()
-			).toBe(90 * 24 * 60 * 60 * 1000);
+			expect(new Date(body.receipt.expiresAt).getTime() - new Date(body.receipt.completedAt).getTime()).toBe(
+				90 * 24 * 60 * 60 * 1000
+			);
 			expect(modelMocks.receiptFindOneAndUpdate).toHaveBeenCalledWith(
 				expect.objectContaining({
 					operationID: expect.any(String),
@@ -469,9 +467,7 @@ describe("student record export and deletion", () => {
 	});
 
 	it("does not present receipt inventory as deleted before receipt completion", async () => {
-		modelMocks.receiptUpdateOne.mockRejectedValueOnce(
-			new Error("receipt completion unavailable")
-		);
+		modelMocks.receiptUpdateOne.mockRejectedValueOnce(new Error("receipt completion unavailable"));
 
 		await withRuntime(async baseUrl => {
 			const response = await request(baseUrl, `/students/${studentID}`, "DELETE", {

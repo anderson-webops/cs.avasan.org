@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import StudentProjectReview from "@/components/StudentProjectReview.vue";
 import {
 	createPythonIdeProjectReview,
+	fetchManagedPythonIdeProject,
 	fetchManagedPythonIdeProjects,
 	updatePythonIdeProjectReview
 } from "@/modules/pythonIde";
@@ -11,6 +12,7 @@ import { useAppStore } from "@/stores/app";
 
 vi.mock("@/modules/pythonIde", () => ({
 	createPythonIdeProjectReview: vi.fn(),
+	fetchManagedPythonIdeProject: vi.fn(),
 	fetchManagedPythonIdeProjects: vi.fn(),
 	isPythonIdeBinaryAssetFile: vi.fn(() => false),
 	updatePythonIdeProjectReview: vi.fn()
@@ -44,8 +46,19 @@ describe("StudentProjectReview", () => {
 		setActivePinia(createPinia());
 		vi.clearAllMocks();
 		vi.mocked(fetchManagedPythonIdeProjects).mockResolvedValue([
-			{ project, review: null }
+			{
+				project: {
+					...project,
+					files: [],
+					remoteContentLoaded: false
+				},
+				review: null
+			}
 		]);
+		vi.mocked(fetchManagedPythonIdeProject).mockResolvedValue({
+			project: { ...project, remoteContentLoaded: true },
+			review: null
+		});
 	});
 
 	it("edits a teacher copy without overwriting the student original", async () => {
@@ -75,6 +88,10 @@ describe("StudentProjectReview", () => {
 		await flushPromises();
 
 		expect(fetchManagedPythonIdeProjects).toHaveBeenCalledWith("student-1");
+		expect(fetchManagedPythonIdeProject).toHaveBeenCalledWith(
+			"student-1",
+			project._id
+		);
 		expect(wrapper.text()).toContain('print("student")');
 		await wrapper
 			.findAll("button")
@@ -119,8 +136,24 @@ describe("StudentProjectReview", () => {
 			saveEdit: "Save"
 		});
 		vi.mocked(fetchManagedPythonIdeProjects).mockResolvedValueOnce([
-			{ project, review }
+			{
+				project: {
+					...project,
+					files: [],
+					remoteContentLoaded: false
+				},
+				review: {
+					...review,
+					files: [],
+					note: undefined,
+					remoteContentLoaded: false
+				}
+			}
 		]);
+		vi.mocked(fetchManagedPythonIdeProject).mockResolvedValueOnce({
+			project: { ...project, remoteContentLoaded: true },
+			review: { ...review, remoteContentLoaded: true }
+		});
 		vi.mocked(updatePythonIdeProjectReview).mockRejectedValueOnce({
 			response: {
 				status: 403,
@@ -147,5 +180,128 @@ describe("StudentProjectReview", () => {
 
 		expect(app.currentAdmin).toBeNull();
 		expect(wrapper.text()).not.toContain('print("student")');
+	});
+
+	it("loads only the selected project body and evicts the previous body", async () => {
+		const secondProject = {
+			...project,
+			_id: "project-2",
+			title: "Functions",
+			files: [{ name: "main.py", content: 'print("second")' }]
+		};
+		vi.mocked(fetchManagedPythonIdeProjects).mockResolvedValueOnce([
+			{
+				project: {
+					...project,
+					files: [],
+					remoteContentLoaded: false
+				},
+				review: null
+			},
+			{
+				project: {
+					...secondProject,
+					files: [],
+					remoteContentLoaded: false
+				},
+				review: null
+			}
+		]);
+		vi.mocked(fetchManagedPythonIdeProject)
+			.mockResolvedValueOnce({
+				project: { ...project, remoteContentLoaded: true },
+				review: null
+			})
+			.mockResolvedValueOnce({
+				project: {
+					...secondProject,
+					remoteContentLoaded: true
+				},
+				review: null
+			});
+		const wrapper = mount(StudentProjectReview, {
+			props: {
+				studentId: "student-1",
+				username: "maria-7"
+			}
+		});
+
+		const details = wrapper.get("details");
+		(details.element as HTMLDetailsElement).open = true;
+		await details.trigger("toggle");
+		await flushPromises();
+		expect(wrapper.text()).toContain('print("student")');
+		expect(wrapper.text()).not.toContain('print("second")');
+
+		await wrapper.get("select").setValue("project-2");
+		await flushPromises();
+
+		expect(fetchManagedPythonIdeProject).toHaveBeenLastCalledWith(
+			"student-1",
+			"project-2"
+		);
+		expect(wrapper.text()).toContain('print("second")');
+		expect(wrapper.text()).not.toContain('print("student")');
+	});
+
+	it("does not reveal a previous student’s project after the component changes students", async () => {
+		vi.mocked(fetchManagedPythonIdeProjects).mockImplementation(
+			async studentID =>
+				studentID === "student-1"
+					? [
+							{
+								project: {
+									...project,
+									files: [],
+									remoteContentLoaded: false
+								},
+								review: null
+							}
+						]
+					: []
+		);
+		let resolveOldStudentDetail:
+			| ((value: {
+					project: typeof project & { remoteContentLoaded: true };
+					review: null;
+			  }) => void)
+			| undefined;
+		vi.mocked(fetchManagedPythonIdeProject).mockImplementationOnce(
+			() =>
+				new Promise(resolve => {
+					resolveOldStudentDetail = resolve;
+				})
+		);
+		const wrapper = mount(StudentProjectReview, {
+			props: {
+				studentId: "student-1",
+				username: "maria-7"
+			}
+		});
+
+		const details = wrapper.get("details");
+		(details.element as HTMLDetailsElement).open = true;
+		await details.trigger("toggle");
+		await vi.waitFor(() => {
+			expect(fetchManagedPythonIdeProject).toHaveBeenCalledWith(
+				"student-1",
+				project._id
+			);
+		});
+		expect(fetchManagedPythonIdeProject).toHaveBeenCalledTimes(1);
+
+		await wrapper.setProps({
+			studentId: "student-2",
+			username: "devon-4"
+		});
+		resolveOldStudentDetail?.({
+			project: { ...project, remoteContentLoaded: true },
+			review: null
+		});
+		await flushPromises();
+
+		expect(fetchManagedPythonIdeProject).toHaveBeenCalledTimes(1);
+		expect(wrapper.text()).not.toContain('print("student")');
+		expect(wrapper.text()).not.toContain("Loops");
 	});
 });

@@ -1,6 +1,11 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { selectMongoConnection } from "../src/security/mongoConnection.js";
-import { vaultAddress } from "../src/vaultClient.js";
+import { readBoundedVaultJson, readMongoSecret, vaultAddress } from "../src/vaultClient.js";
+
+afterEach(() => {
+	vi.unstubAllEnvs();
+	vi.unstubAllGlobals();
+});
 
 describe("Mongo credential source selection", () => {
 	it("uses the dedicated environment URI when Vault is not requested", async () => {
@@ -74,6 +79,7 @@ describe("Vault transport boundary", () => {
 	it("allows plaintext only for an explicit loopback Vault", () => {
 		expect(vaultAddress("http://127.0.0.1:8200", "production")).toBe("http://127.0.0.1:8200");
 		expect(vaultAddress("http://localhost:8200", "production")).toBe("http://localhost:8200");
+		expect(vaultAddress("http://[::1]:8200", "production")).toBe("http://[::1]:8200");
 	});
 
 	it("rejects credentials, paths, query strings, and fragments", () => {
@@ -85,5 +91,68 @@ describe("Vault transport boundary", () => {
 		]) {
 			expect(() => vaultAddress(value, "production")).toThrow("only an HTTP(S) origin");
 		}
+	});
+});
+
+describe("Vault response boundary", () => {
+	it("rejects oversized and malformed JSON without including response content", async () => {
+		await expect(
+			readBoundedVaultJson(new Response("sensitive=".concat("x".repeat(1024 * 1024))), "Vault test")
+		).rejects.toThrow("response exceeded the safe size limit");
+		await expect(readBoundedVaultJson(new Response("{credential:secret}"), "Vault test")).rejects.toThrow(
+			"response was not valid JSON"
+		);
+	});
+
+	it("trims AppRole credentials and the returned URI while refusing redirects", async () => {
+		vi.stubEnv("VAULT_ADDR", " https://vault.school.example ");
+		vi.stubEnv("VAULT_ROLE_ID", " role-id ");
+		vi.stubEnv("VAULT_SECRET_ID", " secret-id ");
+		const fetchMock = vi
+			.fn()
+			.mockResolvedValueOnce(
+				new Response(
+					JSON.stringify({
+						auth: { client_token: " token-value " }
+					}),
+					{ status: 200 }
+				)
+			)
+			.mockResolvedValueOnce(
+				new Response(
+					JSON.stringify({
+						data: {
+							data: {
+								uri: " mongodb://classroom-user@mongo/cs-avasan-org "
+							}
+						}
+					}),
+					{ status: 200 }
+				)
+			);
+		vi.stubGlobal("fetch", fetchMock);
+
+		await expect(readMongoSecret()).resolves.toEqual({
+			uri: "mongodb://classroom-user@mongo/cs-avasan-org"
+		});
+		expect(fetchMock).toHaveBeenNthCalledWith(
+			1,
+			"https://vault.school.example/v1/auth/approle/login",
+			expect.objectContaining({
+				body: JSON.stringify({
+					role_id: "role-id",
+					secret_id: "secret-id"
+				}),
+				redirect: "error"
+			})
+		);
+		expect(fetchMock).toHaveBeenNthCalledWith(
+			2,
+			expect.any(String),
+			expect.objectContaining({
+				headers: { "X-Vault-Token": "token-value" },
+				redirect: "error"
+			})
+		);
 	});
 });

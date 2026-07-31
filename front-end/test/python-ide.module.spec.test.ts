@@ -3150,11 +3150,8 @@ screen.listen()
 		expect(setProjectsSource).toContain(
 			"projects.value = nextProjects.map"
 		);
-		expect(setProjectsSource).toContain(
-			"activeFileName: resolvePythonIdeActiveFileName("
-		);
-		expect(setProjectsSource).toContain(
-			"project.files,\n\t\t\tproject.activeFileName"
+		expect(setProjectsSource).toMatch(
+			/activeFileName:\s*project\.remoteContentLoaded === false\s*\?\s*project\.activeFileName\s*:\s*resolvePythonIdeActiveFileName\(\s*project\.files,\s*project\.activeFileName\s*\)/
 		);
 		expect(setProjectsSource).toContain("projectForRoute(projects.value)");
 		expect(pageSource).toContain(

@@ -14,10 +14,14 @@ import {
 	graphPointToCanvas,
 	graphProjectFileName,
 	linearRegression,
+	MAX_GRAPH_ANNOTATIONS,
 	MAX_GRAPH_EXPRESSION_DEPTH,
 	MAX_GRAPH_EXPRESSION_LENGTH,
 	MAX_GRAPH_EXPRESSION_TOKENS,
+	MAX_GRAPH_POINTS,
+	MAX_GRAPH_SERIES,
 	normalizeGraphDocument,
+	refreshDerivedGraphSeries,
 	sampleGraphExpression,
 	zoomGraphAxis
 } from "@/modules/graphSketcher";
@@ -61,6 +65,75 @@ describe("Graph Sketcher document model", () => {
 		expect(normalized.xAxis.minimum).toBeLessThan(normalized.xAxis.maximum);
 		expect(normalized.yAxis.minimum).toBeGreaterThan(0);
 		expect(normalized.series).toHaveLength(1);
+	});
+
+	it("rejects over-limit JSON projects instead of silently truncating them", () => {
+		const document = {
+			schemaVersion: 1,
+			series: [],
+			annotations: []
+		};
+
+		expect(() =>
+			graphDocumentFromJson(
+				JSON.stringify({
+					...document,
+					series: Array.from(
+						{ length: MAX_GRAPH_SERIES + 1 },
+						() => ({ points: [] })
+					)
+				})
+			)
+		).toThrow(/limited to 128 series/i);
+		expect(() =>
+			graphDocumentFromJson(
+				JSON.stringify({
+					...document,
+					series: [
+						{
+							points: Array.from(
+								{ length: MAX_GRAPH_POINTS + 1 },
+								() => null
+							)
+						}
+					]
+				})
+			)
+		).toThrow(/100,000 total points/i);
+		expect(() =>
+			graphDocumentFromJson(
+				JSON.stringify({
+					...document,
+					annotations: Array.from(
+						{ length: MAX_GRAPH_ANNOTATIONS + 1 },
+						() => null
+					)
+				})
+			)
+		).toThrow(/2,000 annotations/i);
+	});
+
+	it("preserves empty trailing series after the point budget is filled", () => {
+		const document = createBlankGraphDocument();
+		document.series[0].points = Array.from(
+			{ length: MAX_GRAPH_POINTS },
+			(_, index) => ({ x: index, y: index })
+		);
+		document.series.push({
+			...document.series[0],
+			id: "empty-trailing-series",
+			name: "Empty trailing series",
+			points: []
+		});
+
+		const restored = graphDocumentFromJson(JSON.stringify(document));
+
+		expect(restored.series).toHaveLength(2);
+		expect(restored.series[1]).toMatchObject({
+			id: "empty-trailing-series",
+			name: "Empty trailing series",
+			points: []
+		});
 	});
 
 	it("maps graph and canvas coordinates in both directions", () => {
@@ -202,5 +275,48 @@ describe("Graph Sketcher document model", () => {
 		expect(document.xAxis.maximum - document.xAxis.minimum).toBeCloseTo(
 			previousRange * 0.5
 		);
+	});
+
+	it("keeps derived refreshes within the total graph point budget", () => {
+		const document = createBlankGraphDocument();
+		document.xAxis.minimum = 0;
+		document.xAxis.maximum = 10;
+		document.series[0].points = Array.from(
+			{ length: MAX_GRAPH_POINTS - 10 },
+			(_, index) => ({ x: index, y: index })
+		);
+		const generated = {
+			...createBlankGraphDocument().series[0],
+			id: "bounded-function",
+			name: "y = 1 / (x - 5)",
+			sourceKind: "function" as const,
+			sourceExpression: "1 / (x - 5)",
+			points: []
+		};
+		document.series.push(generated);
+
+		refreshDerivedGraphSeries(document);
+
+		expect(
+			document.series.reduce(
+				(total, series) => total + series.points.length,
+				0
+			)
+		).toBe(MAX_GRAPH_POINTS);
+		expect(generated.points).toHaveLength(10);
+		expect(generated.points[0].x).toBe(document.xAxis.minimum);
+		expect(generated.points.at(-1)?.x).toBe(document.xAxis.maximum);
+		expect(generated.points.some(point => point.breakBefore)).toBe(true);
+	});
+
+	it("fits and regresses graphs at the supported point ceiling", () => {
+		const document = createBlankGraphDocument();
+		document.series[0].points = Array.from(
+			{ length: MAX_GRAPH_POINTS },
+			(_, index) => ({ x: index, y: index * 2 + 1 })
+		);
+
+		expect(fitGraphAxesToData(document)).toBe(true);
+		expect(createBestFitSeries(document.series[0])?.points).toHaveLength(2);
 	});
 });

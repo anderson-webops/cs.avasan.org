@@ -9,6 +9,7 @@ import { computed, ref, watch } from "vue";
 import { clearAdminSessionOnAuthorizationError } from "@/modules/adminSession";
 import {
 	createPythonIdeProjectReview,
+	fetchManagedPythonIdeProject,
 	fetchManagedPythonIdeProjects,
 	isPythonIdeBinaryAssetFile,
 	updatePythonIdeProjectReview
@@ -32,6 +33,15 @@ const selectedFileName = ref("");
 const editFileContent = ref("");
 const noteDraft = ref("");
 const visibleDraft = ref(false);
+const recordMetadata = new Map<string, ManagedPythonIdeProject>();
+let projectListLoadID = 0;
+let detailLoadID = 0;
+let saveOperationID = 0;
+let activeDetailLoad: {
+	projectID: string;
+	studentID: string;
+	promise: Promise<void>;
+} | null = null;
 
 const selectedRecord = computed(
 	() =>
@@ -43,6 +53,9 @@ const selectedRecord = computed(
 );
 const selectedProject = computed(() => selectedRecord.value?.project ?? null);
 const selectedReview = computed(() => selectedRecord.value?.review ?? null);
+const selectedRecordLoaded = computed(
+	() => selectedProject.value?.remoteContentLoaded === true
+);
 const selectedStudentFile = computed(() =>
 	selectedProject.value?.files.find(
 		file => file.name === selectedFileName.value
@@ -93,6 +106,11 @@ function errorMessage(caught: unknown, fallback: string) {
 }
 
 function clearSensitiveProjectState() {
+	projectListLoadID += 1;
+	detailLoadID += 1;
+	saveOperationID += 1;
+	activeDetailLoad = null;
+	recordMetadata.clear();
 	records.value = [];
 	selectedProjectID.value = "";
 	selectedFileName.value = "";
@@ -140,9 +158,123 @@ function replaceRecord(
 	project: PythonIdeProject,
 	review: PythonIdeProjectReview
 ) {
+	const loadedRecord = {
+		project: {
+			...project,
+			remoteContentLoaded: true
+		},
+		review: {
+			...review,
+			remoteContentLoaded: true
+		}
+	};
 	records.value = records.value.map(record =>
-		record.project._id === project._id ? { project, review } : record
+		record.project._id === project._id ? loadedRecord : record
 	);
+	recordMetadata.set(project._id, metadataRecord(loadedRecord));
+	trimProjectDetailCache(project._id);
+}
+
+function metadataRecord(
+	record: ManagedPythonIdeProject
+): ManagedPythonIdeProject {
+	const {
+		files: _projectFiles,
+		remoteContentLoaded: _projectContentLoaded,
+		...projectMetadata
+	} = record.project;
+	const reviewMetadata = record.review
+		? (() => {
+				const {
+					files: _reviewFiles,
+					note: _reviewNote,
+					remoteContentLoaded: _reviewContentLoaded,
+					...metadata
+				} = record.review;
+				return {
+					...metadata,
+					files: [],
+					remoteContentLoaded: false
+				};
+			})()
+		: null;
+	return {
+		project: {
+			...projectMetadata,
+			files: [],
+			remoteContentLoaded: false
+		},
+		review: reviewMetadata
+	};
+}
+
+function trimProjectDetailCache(keepProjectID: string) {
+	records.value = records.value.map(record => {
+		if (
+			record.project._id === keepProjectID ||
+			record.project.remoteContentLoaded !== true
+		) {
+			return record;
+		}
+		return recordMetadata.get(record.project._id) ?? metadataRecord(record);
+	});
+}
+
+async function loadProjectDetails(projectID: string) {
+	if (!props.studentId || !projectID) return;
+	if (
+		activeDetailLoad?.projectID === projectID &&
+		activeDetailLoad.studentID === props.studentId
+	) {
+		return activeDetailLoad.promise;
+	}
+	const existing = records.value.find(
+		record => record.project._id === projectID
+	);
+	if (existing?.project.remoteContentLoaded === true) {
+		trimProjectDetailCache(projectID);
+		return;
+	}
+
+	const requestID = ++detailLoadID;
+	const studentID = props.studentId;
+	const detailPromise = (async () => {
+		try {
+			const record = await fetchManagedPythonIdeProject(
+				studentID,
+				projectID
+			);
+			if (
+				requestID !== detailLoadID ||
+				props.studentId !== studentID ||
+				selectedProjectID.value !== projectID
+			) {
+				return;
+			}
+			records.value = records.value.map(candidate =>
+				candidate.project._id === projectID ? record : candidate
+			);
+			recordMetadata.set(projectID, metadataRecord(record));
+			trimProjectDetailCache(projectID);
+			selectDefaultFile(record);
+			syncDrafts();
+		} catch (caught: unknown) {
+			if (requestID !== detailLoadID) return;
+			handleProjectManagementError(caught, "Couldn’t load this project.");
+		}
+	})();
+	activeDetailLoad = {
+		projectID,
+		studentID,
+		promise: detailPromise
+	};
+	try {
+		await detailPromise;
+	} finally {
+		if (activeDetailLoad?.promise === detailPromise) {
+			activeDetailLoad = null;
+		}
+	}
 }
 
 function selectDefaultFile(record: ManagedPythonIdeProject | null) {
@@ -165,11 +297,21 @@ function syncDrafts() {
 async function loadProjects() {
 	if (!props.studentId || loading.value) return;
 
+	const requestID = ++projectListLoadID;
+	const studentID = props.studentId;
 	loading.value = true;
 	error.value = "";
 	status.value = "";
 	try {
-		records.value = await fetchManagedPythonIdeProjects(props.studentId);
+		const projectRecords = await fetchManagedPythonIdeProjects(studentID);
+		if (requestID !== projectListLoadID || props.studentId !== studentID) {
+			return;
+		}
+		records.value = projectRecords;
+		recordMetadata.clear();
+		for (const record of records.value) {
+			recordMetadata.set(record.project._id, metadataRecord(record));
+		}
 		if (
 			!selectedProjectID.value ||
 			!records.value.some(
@@ -177,17 +319,24 @@ async function loadProjects() {
 			)
 		) {
 			selectedProjectID.value = records.value[0]?.project._id ?? "";
-			selectDefaultFile(selectedRecord.value);
 		}
-		loaded.value = true;
+		await loadProjectDetails(selectedProjectID.value);
+		if (requestID === projectListLoadID && props.studentId === studentID) {
+			loaded.value = true;
+		}
 	} catch (caught: unknown) {
+		if (requestID !== projectListLoadID || props.studentId !== studentID) {
+			return;
+		}
 		handleProjectManagementError(
 			caught,
 			"Couldn’t load this student’s Python projects."
 		);
 		records.value = [];
 	} finally {
-		loading.value = false;
+		if (requestID === projectListLoadID) {
+			loading.value = false;
+		}
 	}
 }
 
@@ -198,25 +347,35 @@ async function onToggle(event: Event) {
 
 async function createTeacherCopy() {
 	const project = selectedProject.value;
-	if (!project || saving.value) return;
+	if (!project || !selectedRecordLoaded.value || saving.value) return;
 
+	const operationID = ++saveOperationID;
+	const studentID = props.studentId;
 	saving.value = true;
 	error.value = "";
 	status.value = "";
 	try {
 		const { project: savedProject, review } =
-			await createPythonIdeProjectReview(props.studentId, project._id);
+			await createPythonIdeProjectReview(studentID, project._id);
+		if (operationID !== saveOperationID || props.studentId !== studentID) {
+			return;
+		}
 		replaceRecord(savedProject, review);
 		selectedProjectID.value = savedProject._id;
 		selectedFileName.value = review.activeFileName;
 		status.value = "Teacher copy created.";
 	} catch (caught: unknown) {
+		if (operationID !== saveOperationID || props.studentId !== studentID) {
+			return;
+		}
 		handleProjectManagementError(
 			caught,
 			"Couldn’t create the teacher copy."
 		);
 	} finally {
-		saving.value = false;
+		if (operationID === saveOperationID) {
+			saving.value = false;
+		}
 	}
 }
 
@@ -250,13 +409,15 @@ async function saveTeacherCopy() {
 	const review = selectedReview.value;
 	if (!project || !review || saving.value) return;
 
+	const operationID = ++saveOperationID;
+	const studentID = props.studentId;
 	saving.value = true;
 	error.value = "";
 	status.value = "";
 	try {
 		const { project: savedProject, review: savedReview } =
 			await updatePythonIdeProjectReview(
-				props.studentId,
+				studentID,
 				project._id,
 				review._id,
 				{
@@ -267,14 +428,22 @@ async function saveTeacherCopy() {
 					visibleToStudent: visibleDraft.value
 				}
 			);
+		if (operationID !== saveOperationID || props.studentId !== studentID) {
+			return;
+		}
 		replaceRecord(savedProject, savedReview);
 		status.value = savedReview.visibleToStudent
 			? "Teacher copy saved and shared with the student."
 			: "Teacher copy saved.";
 	} catch (caught: unknown) {
+		if (operationID !== saveOperationID || props.studentId !== studentID) {
+			return;
+		}
 		handleProjectManagementError(caught, "Couldn’t save the teacher copy.");
 	} finally {
-		saving.value = false;
+		if (operationID === saveOperationID) {
+			saving.value = false;
+		}
 	}
 }
 
@@ -282,9 +451,22 @@ function resetFileFromStudent() {
 	editFileContent.value = filePreview(selectedStudentFile.value);
 }
 
-watch(selectedProjectID, () => {
+watch(selectedProjectID, projectID => {
 	selectDefaultFile(selectedRecord.value);
+	void loadProjectDetails(projectID);
 });
+
+watch(
+	() => props.studentId,
+	() => {
+		clearSensitiveProjectState();
+		loading.value = false;
+		saving.value = false;
+		error.value = "";
+		status.value = "";
+	},
+	{ flush: "sync" }
+);
 
 watch([selectedReview, selectedFileName], syncDrafts, { immediate: true });
 </script>
@@ -323,8 +505,43 @@ watch([selectedReview, selectedFileName], syncDrafts, { immediate: true });
 			>
 				No synced Python projects yet.
 			</p>
+			<div
+				v-else-if="selectedProject && !selectedRecordLoaded"
+				class="project-review__muted"
+			>
+				<label>
+					Project
+					<select v-model="selectedProjectID">
+						<option
+							v-for="record in records"
+							:key="record.project._id"
+							:value="record.project._id"
+						>
+							{{ projectLabel(record.project) }}
+						</option>
+					</select>
+				</label>
+				<p>
+					{{
+						error
+							? "Selected project details are unavailable."
+							: "Loading selected project…"
+					}}
+				</p>
+				<button
+					v-if="error"
+					class="site-button project-review__button"
+					type="button"
+					@click="loadProjectDetails(selectedProjectID)"
+				>
+					Try again
+				</button>
+			</div>
 
-			<div v-else-if="selectedProject" class="project-review__workspace">
+			<div
+				v-else-if="selectedProject && selectedRecordLoaded"
+				class="project-review__workspace"
+			>
 				<div class="project-review__controls">
 					<label>
 						Project
