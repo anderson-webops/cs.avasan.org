@@ -10,9 +10,94 @@ const timeoutMs = Number(process.env.CS_SITE_SMOKE_TIMEOUT_MS || 15_000);
 const releaseVersionPattern
 	= /^(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-[0-9a-z.-]+)?$/i;
 const sourceRevisionPattern = /^[0-9a-f]{40}$/;
+let currentSmokePhase = "initialization";
+const securityHeaders = Object.freeze({
+	"permissions-policy": "camera=(), geolocation=(), microphone=()",
+	"referrer-policy": "no-referrer",
+	"strict-transport-security": "max-age=31536000; includeSubDomains",
+	"x-content-type-options": "nosniff",
+	"x-frame-options": "DENY"
+});
+const standardContentSecurityPolicy = Object.freeze({
+	"base-uri": ["'self'"],
+	"connect-src": ["'self'"],
+	"default-src": ["'self'"],
+	"font-src": ["'self'", "data:"],
+	"form-action": ["'self'"],
+	"frame-ancestors": ["'none'"],
+	"frame-src": ["'self'"],
+	"img-src": ["'self'", "blob:", "data:"],
+	"manifest-src": ["'self'"],
+	"media-src": ["'self'", "blob:", "data:"],
+	"object-src": ["'none'"],
+	"script-src": ["'self'", "'unsafe-inline'"],
+	"style-src": ["'self'", "'unsafe-inline'"],
+	"worker-src": ["'self'", "blob:"]
+});
+const pythonIdeContentSecurityPolicy = Object.freeze({
+	...standardContentSecurityPolicy,
+	"connect-src": [
+		"'self'",
+		"https://cdn.jsdelivr.net",
+		"https://files.pythonhosted.org",
+		"https://pypi.org"
+	],
+	"script-src": [
+		"'self'",
+		"'unsafe-eval'",
+		"'unsafe-inline'",
+		"'wasm-unsafe-eval'",
+		"https://cdn.jsdelivr.net",
+		"https://cdn.plot.ly"
+	]
+});
 
 function assertion(condition, message) {
 	if (!condition) throw new Error(message);
+}
+
+function normalizedSources(sources) {
+	return [...sources].sort().join(" ");
+}
+
+export function validateContentSecurityPolicy(value, policyName) {
+	assertion(
+		policyName === "standard" || policyName === "python-ide",
+		"Unknown Content-Security-Policy profile."
+	);
+	assertion(
+		typeof value === "string" && value.trim(),
+		`${policyName} response is missing Content-Security-Policy.`
+	);
+
+	const actual = new Map();
+	for (const directiveText of value.split(";")) {
+		const tokens = directiveText.trim().split(/\s+/u).filter(Boolean);
+		if (!tokens.length) continue;
+		const [directive, ...sources] = tokens;
+		assertion(
+			!actual.has(directive),
+			`${policyName} Content-Security-Policy repeats ${directive}.`
+		);
+		actual.set(directive, sources);
+	}
+
+	const expected = policyName === "python-ide"
+		? pythonIdeContentSecurityPolicy
+		: standardContentSecurityPolicy;
+	assertion(
+		actual.size === Object.keys(expected).length,
+		`${policyName} Content-Security-Policy has an unexpected directive set.`
+	);
+	for (const [directive, expectedSources] of Object.entries(expected)) {
+		const actualSources = actual.get(directive);
+		assertion(
+			actualSources
+			&& normalizedSources(actualSources) === normalizedSources(expectedSources),
+			`${policyName} Content-Security-Policy has unexpected ${directive} sources.`
+		);
+	}
+	return true;
 }
 
 export function parseExpectedBoolean(value, name) {
@@ -117,6 +202,26 @@ async function verifyReleaseIdentity() {
 			publicRelease.revision === expectedRevision,
 			`Expected revision ${expectedRevision}, received ${publicRelease.revision}.`
 		);
+	}
+}
+
+async function verifySecurityHeaders() {
+	for (const [path, policyName] of [
+		["/", "standard"],
+		["/python-ide/", "python-ide"]
+	]) {
+		const response = await request(path);
+		assertion(response.ok, `${path} returned HTTP ${response.status}`);
+		validateContentSecurityPolicy(
+			response.headers.get("content-security-policy"),
+			policyName
+		);
+		for (const [header, expectedValue] of Object.entries(securityHeaders)) {
+			assertion(
+				response.headers.get(header) === expectedValue,
+				`${path} returned an unexpected ${header} header.`
+			);
+		}
 	}
 }
 
@@ -272,11 +377,19 @@ async function verifyPrivacyFeatureBoundaries() {
 }
 
 export async function runProductionSmoke() {
+	currentSmokePhase = "release identity";
 	await verifyReleaseIdentity();
+	currentSmokePhase = "security headers";
+	await verifySecurityHeaders();
+	currentSmokePhase = "public routes";
 	await verifyPublicRoutes();
+	currentSmokePhase = "API readiness";
 	await verifyApiReadiness();
+	currentSmokePhase = "privacy feature boundaries";
 	await verifyPrivacyFeatureBoundaries();
+	currentSmokePhase = "Graph Sketcher";
 	await runProductionGraphSketcherSmoke();
+	currentSmokePhase = "complete";
 	console.log(
 		`OK: ${productionOrigin} reports one matching release across the public site and API.`
 	);
@@ -286,10 +399,9 @@ const invokedUrl = process.argv[1] ? pathToFileURL(process.argv[1]).href : "";
 if (import.meta.url === invokedUrl) {
 	runProductionSmoke().catch(() => {
 		// HTTP and OAuth responses are deliberately excluded from logs. The
-		// failed workflow step identifies the gate, while a local rerun can be
-		// used for scoped diagnostics without retaining response data.
+		// phase identifies the failed gate without retaining response data.
 		console.error(
-			"CS production verification failed; response details were not logged."
+			`CS production verification failed during ${currentSmokePhase}; response details were not logged.`
 		);
 		process.exitCode = 1;
 	});

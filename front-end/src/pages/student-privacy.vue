@@ -3,7 +3,6 @@ import {
 	classroomPrivacyOperatorNotice,
 	classroomServiceProviderNotice,
 	schoolPrivacyContact as configuredSchoolPrivacyContact,
-	studentAccountsAreEnabled,
 	studentRecordRetentionDays
 } from "@/modules/classroomFeatures";
 
@@ -11,9 +10,7 @@ defineOptions({ name: "StudentPrivacyPage" });
 const schoolPrivacyContact = configuredSchoolPrivacyContact();
 const operatorNotice = classroomPrivacyOperatorNotice();
 const serviceProviderNotice = classroomServiceProviderNotice();
-const accountRetentionDays = studentAccountsAreEnabled()
-	? studentRecordRetentionDays()
-	: null;
+const accountRetentionDays = studentRecordRetentionDays();
 </script>
 
 <template>
