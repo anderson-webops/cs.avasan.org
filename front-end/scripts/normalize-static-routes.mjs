@@ -14,7 +14,7 @@ export async function normalizeStaticRoutes(targetDistDir = distDir) {
 		}
 
 		const routeName = entry.name.slice(0, -".html".length);
-		if (routeName === "index") {
+		if (routeName === "index" || routeName === "404") {
 			continue;
 		}
 

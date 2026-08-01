@@ -1,6 +1,7 @@
 export const SITE_URL = "https://cs.avasan.org";
 
 export const SITEMAP_EXCLUDED_ROUTES = [
+	"/404",
 	"/admin",
 	"/course-resource",
 	"/python-ide"

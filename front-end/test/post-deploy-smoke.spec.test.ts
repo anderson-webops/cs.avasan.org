@@ -4,12 +4,17 @@ import { describe, expect, it } from "vitest";
 import {
 	parseExpectedBoolean,
 	readSmokeJson,
-	validateContentSecurityPolicy
+	validateContentSecurityPolicy,
+	verifyBrandedNotFound
 } from "../../scripts/post-deploy-smoke.mjs";
 
 const repositoryRoot = resolve(import.meta.dirname, "../..");
 const nginxSource = readFileSync(
 	resolve(repositoryRoot, "deploy/nginx.conf"),
+	"utf8"
+);
+const hostNginxSource = readFileSync(
+	resolve(repositoryRoot, "deploy/host-nginx.conf.example"),
 	"utf8"
 );
 const netlifySource = readFileSync(
@@ -86,6 +91,39 @@ describe("production smoke feature expectations", () => {
 		);
 	});
 
+	it("packages and serves a branded 404 without exposing it as a public page", async () => {
+		expect(nginxSource).toContain("error_page 404 =404 /404.html;");
+		expect(nginxSource).toMatch(
+			/location = \/404[.]html \{\n\t\tinternal;\n\t\ttry_files \$uri =404;\n\t\}/u
+		);
+		expect(netlifySource).toMatch(
+			/\[\[redirects\]\]\nfrom = "\/\*"\nto = "\/404[.]html"\nstatus = 404/u
+		);
+		expect(hostNginxSource).toContain("proxy_intercept_errors off;");
+		expect(hostNginxSource).not.toMatch(/\n\s*(?:error_page|root|try_files)\b/u);
+
+		await expect(
+			verifyBrandedNotFound(
+				new Response(
+					'<main data-site-error-page="not-found"><h1>Page not found</h1><a>View courses</a></main>',
+					{
+						headers: {
+							"Content-Security-Policy": standardPolicy,
+							"Content-Type": "text/html; charset=utf-8",
+							"Permissions-Policy": "camera=(), geolocation=(), microphone=()",
+							"Referrer-Policy": "no-referrer",
+							"Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+							"X-Content-Type-Options": "nosniff",
+							"X-Frame-Options": "DENY"
+						},
+						status: 404
+					}
+				),
+				"/login"
+			)
+		).resolves.toBeUndefined();
+	});
+
 	it("keeps every former CS Graph Sketcher route explicitly retired", () => {
 		for (const aliasPattern of ["/graph-sketcher", "/graph-sketcher[.]html"]) {
 			const nginxAlias = nginxSource.match(
@@ -111,7 +149,7 @@ describe("production smoke feature expectations", () => {
 		]) {
 			expect(netlifySource).toMatch(
 				new RegExp(
-					`\\[\\[redirects\\]\\]\\nfrom = "${aliasPattern}"\\nto = "/graph-sketcher-unavailable"\\nstatus = 404\\nforce = true`,
+					`\\[\\[redirects\\]\\]\\nfrom = "${aliasPattern}"\\nto = "/404[.]html"\\nstatus = 404\\nforce = true`,
 					"u"
 				)
 			);

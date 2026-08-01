@@ -21,6 +21,7 @@ const routeScenarios = [
 		routes: runFullMatrix
 			? [
 					"/",
+					"/login",
 					"/python-ide",
 					courseResourceRoute,
 					"/admin"

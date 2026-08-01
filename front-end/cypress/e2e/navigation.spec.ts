@@ -72,9 +72,16 @@ context("Public classroom navigation", () => {
 	});
 
 	it("treats removed presentation pages as missing", () => {
-		for (const path of ["/about", "/courses", "/profile", "/graph-sketcher"]) {
+		for (const path of [
+			"/about",
+			"/courses",
+			"/login",
+			"/profile",
+			"/graph-sketcher"
+		]) {
 			cy.visit(path);
 			cy.contains("h1", "Page not found").should("be.visible");
+			cy.contains("a", "View courses").should("be.visible");
 		}
 	});
 });
