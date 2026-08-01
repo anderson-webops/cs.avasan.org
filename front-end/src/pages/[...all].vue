@@ -1,5 +1,8 @@
 <template>
-	<section class="page-shell page-shell--narrow not-found-page">
+	<section
+		class="page-shell page-shell--narrow not-found-page"
+		data-site-error-page="not-found"
+	>
 		<div class="not-found-card site-surface">
 			<h1 class="page-title">Page not found</h1>
 			<RouterLink class="site-button site-button--primary" to="/">

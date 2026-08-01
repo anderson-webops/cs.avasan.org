@@ -15,6 +15,7 @@ import { VueRouterAutoImports } from "vue-router/unplugin";
 import VueRouter from "vue-router/vite";
 import { generateProductionSitemap } from "./scripts/sitemap.mts";
 import { rewriteStaticHead } from "./scripts/static-head.mts";
+import { includedStaticRoutes } from "./scripts/static-route-selection.mts";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const pythonIdePreloadChunkRE = /(?:^|\/)python-ide-runtime-[^/]+\.js$/;
@@ -87,6 +88,7 @@ export default defineConfig(({ command }) => ({
 	ssgOptions: {
 		script: "defer",
 		formatting: "minify",
+		includedRoutes: includedStaticRoutes,
 		beastiesOptions: {
 			reduceInlineStyles: false
 		},

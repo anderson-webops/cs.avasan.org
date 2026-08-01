@@ -256,8 +256,8 @@ configuration:
 - disables application and example host access logs so student network and
   request metadata are not retained;
 - applies browser security headers; and
-- serves only generated public routes and returns real 404 responses for
-  unknown paths.
+- serves only generated public routes and returns the branded classroom error
+  page with a real 404 response for unknown paths.
 
 Every frontend build also writes `/release.json`. The full-stack container
 serves that file and `/api/release` with `Cache-Control: no-store`; both expose
@@ -270,7 +270,7 @@ that fallback is not permitted by the production Compose path. Inject the
 deployment identity without changing application secrets:
 
 ```bash
-export CS_RELEASE_VERSION=2.7.99
+export CS_RELEASE_VERSION=2.7.100
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 docker compose --env-file deploy/cs.env -f compose.production.yml build
 ```
@@ -285,7 +285,7 @@ To prepare a deployment:
 ```bash
 install -m 600 deploy/cs.env.example deploy/cs.env
 # Fill secrets, keep all optional features false until the privacy gate is met.
-export CS_RELEASE_VERSION=2.7.99
+export CS_RELEASE_VERSION=2.7.100
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 ./scripts/verify-deploy-env-permissions.sh
 docker compose --env-file deploy/cs.env -f compose.production.yml build
@@ -328,7 +328,7 @@ loopback container port. This proxy-only vhost and `compose.production.yml`
 are the single supported production handoff for `cs.avasan.org`. Do not serve
 a copied frontend build, add a host-side `root` or `try_files`, or duplicate
 route and cache policy outside the immutable web image. The container
-configuration is the sole owner of strict unknown-route 404 responses,
+configuration is the sole owner of branded, strict unknown-route 404 responses,
 relative directory redirects, release headers, and same-origin `/api/*`
 routing; the outer proxy explicitly leaves upstream redirects unchanged.
 
@@ -350,9 +350,10 @@ The deployment must fail without recording success unless that command verifies
 the exact matching revision at `/release.json` and `/api/release`, `no-store`
 on both endpoints, the exact standard and Python-IDE-specific content security
 policies, the remaining browser security headers, known anonymous routes, the
-relative `/admin` directory redirect, real 404 responses for the retired Graph
-Sketcher aliases and a synthetic unknown path, API health and readiness, and
-the current fail-closed student and aggregate-usage boundaries. Failures name
+relative `/admin` directory redirect, branded real-404 pages for `/login` and
+a synthetic unknown path, real 404 responses for the retired Graph Sketcher
+aliases, API health and readiness, and the current fail-closed student and
+aggregate-usage boundaries. Failures name
 only the affected gate;
 response contents are not written to workflow logs. When an approved feature is
 enabled, the same command verifies the enabled route instead: an anonymous
@@ -383,6 +384,7 @@ the public edge before changing application code:
 curl --silent --show-error --head http://127.0.0.1:8080/
 curl --silent --show-error --head http://127.0.0.1:8080/python-ide/
 curl --silent --show-error --head http://127.0.0.1:8080/admin
+curl --silent --show-error --include http://127.0.0.1:8080/login
 ```
 
 If loopback is stale, rebuild and recreate only the `web` service from the

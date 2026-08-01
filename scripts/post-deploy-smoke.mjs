@@ -99,6 +99,19 @@ export function validateContentSecurityPolicy(value, policyName) {
 	return true;
 }
 
+function validateSecurityHeaders(response, path, policyName) {
+	validateContentSecurityPolicy(
+		response.headers.get("content-security-policy"),
+		policyName
+	);
+	for (const [header, expectedValue] of Object.entries(securityHeaders)) {
+		assertion(
+			response.headers.get(header) === expectedValue,
+			`${path} returned an unexpected ${header} header.`
+		);
+	}
+}
+
 export function parseExpectedBoolean(value, name) {
 	const normalized = (value ?? "false").trim().toLowerCase();
 	assertion(
@@ -140,6 +153,34 @@ export async function readSmokeJson(response, path) {
 	catch {
 		throw new Error(`${path} returned invalid JSON.`);
 	}
+}
+
+export async function verifyBrandedNotFound(response, path) {
+	assertion(
+		response.status === 404,
+		`${path} returned HTTP ${response.status} instead of 404.`
+	);
+	assertion(
+		response.headers.get("content-type")?.includes("text/html"),
+		`${path} did not return an HTML error page.`
+	);
+	assertion(
+		response.headers.get("set-cookie") === null,
+		`${path} unexpectedly set a cookie.`
+	);
+	validateSecurityHeaders(response, path, "standard");
+
+	const body = await response.text();
+	assertion(
+		body.includes('data-site-error-page="not-found"')
+			&& body.includes("Page not found")
+			&& body.includes("View courses"),
+		`${path} did not return the classroom's branded error page.`
+	);
+	assertion(
+		!body.includes("<center><h1>404 Not Found</h1></center>"),
+		`${path} returned the stock Nginx error page.`
+	);
 }
 
 function validateReleaseMetadata(metadata, path) {
@@ -211,16 +252,7 @@ async function verifySecurityHeaders() {
 	]) {
 		const response = await request(path);
 		assertion(response.ok, `${path} returned HTTP ${response.status}`);
-		validateContentSecurityPolicy(
-			response.headers.get("content-security-policy"),
-			policyName
-		);
-		for (const [header, expectedValue] of Object.entries(securityHeaders)) {
-			assertion(
-				response.headers.get(header) === expectedValue,
-				`${path} returned an unexpected ${header} header.`
-			);
-		}
+		validateSecurityHeaders(response, path, policyName);
 	}
 }
 
@@ -280,17 +312,15 @@ async function verifyPublicRoutes() {
 		}.`
 	);
 
-	const unknown = await request("/__cs-avasan-deployment-probe-missing", {
-		redirect: "manual"
-	});
-	assertion(
-		unknown.status === 404,
-		`The unknown-route probe returned HTTP ${unknown.status} instead of 404.`
-	);
-	assertion(
-		unknown.headers.get("set-cookie") === null,
-		"The unknown-route probe unexpectedly set a cookie."
-	);
+	for (const path of [
+		"/login",
+		"/__cs-avasan-deployment-probe-missing"
+	]) {
+		await verifyBrandedNotFound(
+			await request(path, { redirect: "manual" }),
+			path
+		);
+	}
 }
 
 async function verifyApiReadiness() {

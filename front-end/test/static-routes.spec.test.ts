@@ -9,6 +9,10 @@ import {
 	sitemapOptions
 } from "../scripts/sitemap.mts";
 import { rewriteStaticHead } from "../scripts/static-head.mts";
+import {
+	NOT_FOUND_ROUTE,
+	includedStaticRoutes
+} from "../scripts/static-route-selection.mts";
 
 const tempDirs: string[] = [];
 
@@ -35,6 +39,10 @@ describe("static route normalization", () => {
 			"<main>Course Resource</main>"
 		);
 		await writeFile(join(tempDir, "admin.html"), "<main>Admin</main>");
+		await writeFile(
+			join(tempDir, "404.html"),
+			"<main>Page not found</main>"
+		);
 
 		await normalizeStaticRoutes(tempDir);
 
@@ -47,9 +55,32 @@ describe("static route normalization", () => {
 		await expect(
 			stat(join(tempDir, "index", "index.html"))
 		).rejects.toThrow();
+		await expect(
+			stat(join(tempDir, "404", "index.html"))
+		).rejects.toThrow();
+		await expect(readFile(join(tempDir, "404.html"), "utf8")).resolves.toBe(
+			"<main>Page not found</main>"
+		);
+	});
+
+	it("adds one static error document without rendering dynamic route patterns", () => {
+		expect(
+			includedStaticRoutes([
+				"/",
+				"/admin",
+				"/:all(.*)*",
+				NOT_FOUND_ROUTE
+			])
+		).toEqual(["/", "/admin", NOT_FOUND_ROUTE]);
 	});
 
 	it.each([
+		[
+			"/404",
+			"Page Not Found | Classes with Julio",
+			"noindex,nofollow",
+			"https://cs.avasan.org/404"
+		],
 		[
 			"/",
 			"Classes with Julio",
@@ -129,6 +160,7 @@ describe("static route normalization", () => {
 		expect(options.generateRobotsTxt).toBe(false);
 		expect(options.exclude).toEqual(SITEMAP_EXCLUDED_ROUTES);
 		expect(options.exclude).toEqual([
+			"/404",
 			"/admin",
 			"/course-resource",
 			"/python-ide"
