@@ -195,23 +195,23 @@ onMounted(loadSummary);
 						</dd>
 					</div>
 					<div>
-						<dt>Students with projects</dt>
+						<dt>Active students with projects</dt>
 						<dd>
 							{{ summary.studentWork.studentsWithProjects }}
 						</dd>
 					</div>
 					<div>
-						<dt>Active projects</dt>
+						<dt>Projects in active accounts</dt>
 						<dd>{{ summary.studentWork.activeProjects }}</dd>
 					</div>
 					<div>
-						<dt>Recently saved projects</dt>
+						<dt>Recently saved projects in active accounts</dt>
 						<dd>
 							{{ summary.studentWork.recentlyUpdatedProjects }}
 						</dd>
 					</div>
 					<div>
-						<dt>Students who saved recently</dt>
+						<dt>Active students who saved recently</dt>
 						<dd>
 							{{
 								summary.studentWork

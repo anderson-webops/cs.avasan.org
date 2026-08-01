@@ -1,7 +1,7 @@
 {
 	"name": "classes-monorepo",
 	"type": "module",
-	"version": "1.0.0",
+	"version": "2.7.96",
 	"private": true,
 	"packageManager": "npm@11.16.0",
 	"engines": {
@@ -17,7 +17,10 @@
 		"back-end"
 	],
 	"scripts": {
-		"audit": "npm audit --workspaces",
+		"audit": "npm run audit:full",
+		"audit:full": "npm audit --workspaces --audit-level=low",
+		"audit:production": "npm audit --workspaces --omit=dev --audit-level=low",
+		"audit:signatures": "npm audit signatures",
 		"audit:static-media": "node scripts/audit-static-course-media.mjs",
 		"audit-fix": "npm audit fix --workspaces",
 		"build": "npm run -w front-end build && npm run -w back-end build",
@@ -32,7 +35,10 @@
 		"lint-fix": "npm run -w front-end lint-fix && npm run -w back-end lint-fix",
 		"typecheck": "npm run -w front-end typecheck && npm run -w back-end typecheck",
 		"verify:production": "node scripts/post-deploy-smoke.mjs",
-		"clean": "sudo rm -rf node_modules dist package-lock.json **/node_modules **/dist **/package-lock.json",
+		"verify:dependency-tree": "npm ls --all && npm ls --all --omit=dev",
+		"clean": "node scripts/clean-generated.mjs",
+		"test:clean": "node --test test/clean-generated.test.mjs",
+		"test:ci-security": "node --test test/ci-supply-chain.test.mjs",
 		"up": "npm exec --yes -- taze major -I && npm run -w front-end up && npm run -w back-end up"
 	},
 	"overrides": {
@@ -87,13 +93,13 @@
 		}
 	},
 	"allowScripts": {
-		"argon2": true,
-		"cypress": true,
-		"esbuild": true,
-		"fsevents": true,
-		"puppeteer": true,
-		"simple-git-hooks": true,
-		"vue-demi": true
+		"argon2@0.45.1": true,
+		"cypress@15.19.0": true,
+		"esbuild@0.28.1": true,
+		"fsevents@2.3.3": true,
+		"puppeteer@24.43.1": true,
+		"simple-git-hooks@2.13.1": true,
+		"vue-demi@0.14.10": true
 	},
 	"devDependencies": {
 		"@antfu/eslint-config": "^8.2.0",

@@ -362,6 +362,14 @@ describe("Graph Sketcher file compatibility", () => {
 
 		await expect(
 			importLegacyGraphSketcherDocument(
+				legacyGraphWith(
+					`<?budget note="'?><group>${"<item/>".repeat(50_000)}</group>`
+				)
+			)
+		).rejects.toThrow(/50,000 XML elements/i);
+
+		await expect(
+			importLegacyGraphSketcherDocument(
 				legacyGraphWith("<vertex/>".repeat(20_001))
 			)
 		).rejects.toThrow(/20,000 vertices/i);
@@ -381,6 +389,45 @@ describe("Graph Sketcher file compatibility", () => {
 				)
 			)
 		).rejects.toThrow(/128 line and fill series/i);
+	});
+
+	it("walks large accepted legacy sibling sets without stalling", async () => {
+		const result = await importLegacyGraphSketcherDocument(
+			legacyGraphWith(
+				"<metadata/>".repeat(10_000) +
+					'<vertex id="v1" x="0" y="1"/><vertex id="v2" x="1" y="2"/><line v1="v1" v2="v2"/>'
+			)
+		);
+
+		expect(result.document.series).toHaveLength(1);
+		expect(result.document.series[0].points).toHaveLength(2);
+	});
+
+	it("does not count tag-like text toward legacy XML budgets", async () => {
+		const ignoredElements = "<item/>".repeat(50_001);
+		const ignoredSeries = "<line/><fill/>".repeat(129);
+		const result = await importLegacyGraphSketcherDocument(
+			legacyGraphWith(
+				`<!--${ignoredSeries}--><metadata><![CDATA[${ignoredElements}]]></metadata>` +
+					'<vertex id="v1" x="0" y="1"/><vertex id="v2" x="1" y="2"/><line v1="v1" v2="v2"/>'
+			)
+		);
+
+		expect(result.document.series).toHaveLength(1);
+		expect(result.document.series[0].points).toHaveLength(2);
+	});
+
+	it("applies object limits only to direct graph children", async () => {
+		const nestedTickLabels = "<label/>".repeat(10_001);
+		const result = await importLegacyGraphSketcherDocument(
+			legacyGraphWith(
+				`<axis dimension="x"><tick-labels><user-labels>${nestedTickLabels}</user-labels></tick-labels></axis>` +
+					'<vertex id="v1" x="0" y="1"/><vertex id="v2" x="1" y="2"/><line v1="v1" v2="v2"/>'
+			)
+		);
+
+		expect(result.document.series).toHaveLength(1);
+		expect(result.document.series[0].points).toHaveLength(2);
 	});
 
 	it("caps legacy import warnings with an omission notice", async () => {

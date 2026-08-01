@@ -408,11 +408,20 @@ export function graphDocumentToCsv(document: GraphDocument) {
 }
 
 function legacyChildren(element: Element, localName: string) {
-	return Array.from(element.children).filter(
-		child =>
+	const children: Element[] = [];
+	for (
+		let child = element.firstElementChild;
+		child;
+		child = child.nextElementSibling
+	) {
+		if (
 			child.namespaceURI === LEGACY_GRAPH_NAMESPACE &&
 			child.localName === localName
-	);
+		) {
+			children.push(child);
+		}
+	}
+	return children;
 }
 
 function legacyChild(element: Element, localName: string) {
@@ -779,12 +788,88 @@ async function decodeLegacyGraphSource(
 	return decodeLegacyGraphArchive(data, signal);
 }
 
+function legacyXmlTagEnd(xml: string, start: number) {
+	let quote: '"' | "'" | undefined;
+	for (let index = start; index < xml.length; index += 1) {
+		const character = xml[index];
+		if (quote) {
+			if (character === quote) quote = undefined;
+			continue;
+		}
+		if (character === '"' || character === "'") {
+			quote = character;
+		} else if (character === ">") {
+			return index;
+		}
+	}
+	return xml.length;
+}
+
+function assertLegacyGraphXmlElementLimit(xml: string) {
+	let elementCount = 0;
+
+	for (let index = 0; index < xml.length;) {
+		const tagStart = xml.indexOf("<", index);
+		if (tagStart < 0) break;
+
+		const skippedSection = [
+			["<!--", "-->"],
+			["<![CDATA[", "]]>"]
+		] as const;
+		const section = skippedSection.find(([prefix]) =>
+			xml.startsWith(prefix, tagStart)
+		);
+		if (section) {
+			const sectionEnd = xml.indexOf(
+				section[1],
+				tagStart + section[0].length
+			);
+			index =
+				sectionEnd < 0 ? xml.length : sectionEnd + section[1].length;
+			continue;
+		}
+
+		const marker = xml[tagStart + 1];
+		if (marker === "?") {
+			const instructionEnd = xml.indexOf("?>", tagStart + 2);
+			index = instructionEnd < 0 ? xml.length : instructionEnd + 2;
+			continue;
+		}
+		if (!marker || marker === "/" || marker === "!") {
+			const tagEnd = xml.indexOf(">", tagStart + 1);
+			index = tagEnd < 0 ? xml.length : tagEnd + 1;
+			continue;
+		}
+
+		const nameStart = tagStart + 1;
+		let nameEnd = nameStart;
+		while (nameEnd < xml.length && !/[\s/>]/.test(xml[nameEnd])) {
+			nameEnd += 1;
+		}
+		if (nameEnd === nameStart) {
+			index = nameStart;
+			continue;
+		}
+
+		elementCount += 1;
+		if (elementCount > MAX_LEGACY_ELEMENTS) {
+			throw new Error(
+				`Legacy graph imports are limited to ${MAX_LEGACY_ELEMENTS.toLocaleString()} XML elements.`
+			);
+		}
+
+		const tagEnd = legacyXmlTagEnd(xml, nameEnd);
+		index = tagEnd < xml.length ? tagEnd + 1 : xml.length;
+	}
+}
+
 function parseLegacyGraphXml(xml: string) {
 	if (/<!\s*(?:DOCTYPE|ENTITY)\b/i.test(xml)) {
 		throw new Error(
 			"Legacy graph imports cannot contain DOCTYPE or ENTITY declarations."
 		);
 	}
+	assertLegacyGraphXmlElementLimit(xml);
 
 	/*
 	 * Security boundary: this parses untrusted input as a detached XML document,

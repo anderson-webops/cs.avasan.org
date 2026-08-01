@@ -8,7 +8,8 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 COPY front-end/package.json ./front-end/package.json
 COPY back-end/package.json ./back-end/package.json
-RUN npm ci
+RUN CYPRESS_INSTALL_BINARY=0 PUPPETEER_SKIP_DOWNLOAD=true \
+	npm ci --include=optional --strict-allow-scripts
 
 COPY tsconfig.base.json ./
 COPY back-end/tsconfig.json ./back-end/tsconfig.json
@@ -21,7 +22,8 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 COPY front-end/package.json ./front-end/package.json
 COPY back-end/package.json ./back-end/package.json
-RUN npm ci
+RUN CYPRESS_INSTALL_BINARY=0 PUPPETEER_SKIP_DOWNLOAD=true \
+	npm ci --include=optional --strict-allow-scripts
 
 ENV NODE_ENV=production
 COPY tsconfig.base.json ./
@@ -32,7 +34,7 @@ CMD ["npm", "run", "-w", "back-end", "create-admin-ts"]
 
 FROM npm-stage AS production-stage
 
-ARG CS_RELEASE_VERSION=1.0.0
+ARG CS_RELEASE_VERSION=2.7.96
 ARG SOURCE_REVISION=unknown
 ENV CS_RELEASE_VERSION=$CS_RELEASE_VERSION
 ENV NODE_ENV=production
@@ -42,6 +44,7 @@ COPY package.json package-lock.json ./
 COPY front-end/package.json ./front-end/package.json
 COPY back-end/package.json ./back-end/package.json
 RUN npm ci --omit=dev --workspace back-end --include-workspace-root=false \
+	--include=optional --strict-allow-scripts \
 	&& npm cache clean --force
 
 COPY --from=build-stage /app/back-end/dist ./back-end/dist
