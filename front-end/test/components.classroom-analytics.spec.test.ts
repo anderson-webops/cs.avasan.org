@@ -81,6 +81,12 @@ describe("ClassroomAnalytics", () => {
 		);
 		expect(wrapper.text()).toContain("Algebra 1A");
 		expect(wrapper.text()).toContain("Active accounts");
+		expect(wrapper.text()).toContain("Active students with projects");
+		expect(wrapper.text()).toContain("Projects in active accounts");
+		expect(wrapper.text()).toContain(
+			"Recently saved projects in active accounts"
+		);
+		expect(wrapper.text()).toContain("Active students who saved recently");
 		expect(wrapper.text()).toContain("12");
 		expect(wrapper.text()).toContain("not attendance, grades");
 	});

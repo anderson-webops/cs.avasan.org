@@ -4,7 +4,6 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const modelMocks = vi.hoisted(() => ({
 	projectAggregate: vi.fn(),
-	projectCountDocuments: vi.fn(),
 	studentCountDocuments: vi.fn(),
 	usageFind: vi.fn(),
 	usageUpdateMany: vi.fn(),
@@ -36,14 +35,14 @@ vi.mock("../src/models/schemas/ClassroomUsageDaily.js", () => ({
 
 vi.mock("../src/models/schemas/Student.js", () => ({
 	Student: {
+		collection: { name: "students" },
 		countDocuments: modelMocks.studentCountDocuments
 	}
 }));
 
 vi.mock("../src/models/schemas/PythonProject.js", () => ({
 	PythonProject: {
-		aggregate: modelMocks.projectAggregate,
-		countDocuments: modelMocks.projectCountDocuments
+		aggregate: modelMocks.projectAggregate
 	}
 }));
 
@@ -110,11 +109,14 @@ describe("privacy-preserving classroom analytics routes", () => {
 		modelMocks.usageUpdateMany.mockReturnValue(resultQuery({ modifiedCount: 1 }));
 		modelMocks.usageFind.mockReturnValue(usageFindQuery([]));
 		modelMocks.studentCountDocuments.mockImplementation(filter => resultQuery("lastLoginAt" in filter ? 3 : 12));
-		modelMocks.projectCountDocuments.mockImplementation(filter => resultQuery("updatedAt" in filter ? 4 : 20));
-		modelMocks.projectAggregate.mockImplementation(pipeline => {
-			const filter = pipeline[0]?.$match ?? {};
-			return Promise.resolve([{ count: "updatedAt" in filter ? 1 : 2 }]);
-		});
+		modelMocks.projectAggregate.mockResolvedValue([
+			{
+				activeProjects: [{ count: 20 }],
+				recentlyUpdatedProjects: [{ count: 4 }],
+				studentsWithProjects: [{ count: 2 }],
+				studentsWithRecentProjectUpdates: [{ count: 1 }]
+			}
+		]);
 	});
 
 	it("accepts only constrained anonymous events and stores no request identity", async () => {
@@ -470,6 +472,55 @@ describe("privacy-preserving classroom analytics routes", () => {
 				},
 				expiresAt: { $gt: expect.any(Date) }
 			});
+			expect(modelMocks.studentCountDocuments).toHaveBeenNthCalledWith(1, {
+				active: true,
+				dataDeletionPendingAt: { $exists: false },
+				retentionExpiresAt: { $gt: expect.any(Date) }
+			});
+			expect(modelMocks.studentCountDocuments).toHaveBeenNthCalledWith(2, {
+				active: true,
+				dataDeletionPendingAt: { $exists: false },
+				lastLoginAt: { $gte: expect.any(Date) },
+				retentionExpiresAt: { $gt: expect.any(Date) }
+			});
+			expect(modelMocks.projectAggregate).toHaveBeenCalledWith([
+				{ $match: { deletedAt: { $exists: false } } },
+				{ $project: { updatedAt: 1, user: 1 } },
+				{
+					$lookup: {
+						as: "activeStudent",
+						foreignField: "_id",
+						from: "students",
+						localField: "user",
+						pipeline: [
+							{
+								$match: {
+									active: true,
+									dataDeletionPendingAt: { $exists: false },
+									retentionExpiresAt: { $gt: expect.any(Date) }
+								}
+							},
+							{ $project: { _id: 1 } }
+						]
+					}
+				},
+				{ $match: { "activeStudent.0": { $exists: true } } },
+				{
+					$facet: {
+						activeProjects: [{ $count: "count" }],
+						recentlyUpdatedProjects: [
+							{ $match: { updatedAt: { $gte: expect.any(Date) } } },
+							{ $count: "count" }
+						],
+						studentsWithProjects: [{ $group: { _id: "$user" } }, { $count: "count" }],
+						studentsWithRecentProjectUpdates: [
+							{ $match: { updatedAt: { $gte: expect.any(Date) } } },
+							{ $group: { _id: "$user" } },
+							{ $count: "count" }
+						]
+					}
+				}
+			]);
 		});
 	});
 

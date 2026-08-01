@@ -19,17 +19,24 @@
 }
 
 .site-footer__link {
-	color: var(--color-ink);
-	font-size: 0.95rem;
-	font-weight: 750;
+	color: var(--color-footer-link);
+	font-size: 0.75rem;
+	font-weight: 500;
 	line-height: 1.45;
-	text-decoration: underline;
+	text-decoration: none;
 	text-decoration-thickness: 0.08em;
 	text-underline-offset: 0.2em;
 }
 
-.site-footer__link:hover {
-	color: var(--color-ink);
+.site-footer__link:hover,
+.site-footer__link:focus-visible {
+	color: var(--color-ink-soft);
 	text-decoration: underline;
+}
+
+.site-footer__link:focus-visible {
+	border-radius: 0.2rem;
+	outline: 2px solid var(--focus-ring-color);
+	outline-offset: 0.2rem;
 }
 </style>

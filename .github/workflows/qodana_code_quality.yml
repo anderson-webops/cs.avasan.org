@@ -20,6 +20,7 @@ jobs:
         if: env.QODANA_TOKEN != ''
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Qodana Scan
         if: env.QODANA_TOKEN != ''

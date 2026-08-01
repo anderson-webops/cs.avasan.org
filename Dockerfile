@@ -6,10 +6,11 @@ RUN npm install --global npm@11.16.0
 COPY package.json package-lock.json ./
 COPY front-end/package.json ./front-end/package.json
 COPY back-end/package.json ./back-end/package.json
-RUN npm ci
+RUN CYPRESS_INSTALL_BINARY=0 PUPPETEER_SKIP_DOWNLOAD=true \
+	npm ci --include=optional --strict-allow-scripts
 
 COPY . .
-ARG CS_RELEASE_VERSION=1.0.0
+ARG CS_RELEASE_VERSION=2.7.96
 ARG SOURCE_REVISION=unknown
 ARG VITE_CLASSROOM_PRIVACY_APPROVED=false
 ARG VITE_CLASSROOM_PRIVACY_OPERATOR_NOTICE=

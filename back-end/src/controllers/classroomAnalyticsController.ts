@@ -171,15 +171,44 @@ interface UsageAggregate {
 	count: number;
 }
 
-interface DistinctCountAggregate {
+interface CountAggregate {
 	count: number;
 }
 
-function distinctProjectStudentCount(filter: Record<string, unknown>) {
-	return PythonProject.aggregate<DistinctCountAggregate>([
-		{ $match: filter },
-		{ $group: { _id: "$user" } },
-		{ $count: "count" }
+interface StudentProjectActivityAggregate {
+	activeProjects: CountAggregate[];
+	recentlyUpdatedProjects: CountAggregate[];
+	studentsWithProjects: CountAggregate[];
+	studentsWithRecentProjectUpdates: CountAggregate[];
+}
+
+function activeStudentProjectActivity(activeStudentFilter: Record<string, unknown>, recentStart: Date) {
+	return PythonProject.aggregate<StudentProjectActivityAggregate>([
+		{ $match: { deletedAt: { $exists: false } } },
+		// Project contents are not needed for these coarse teacher-facing counts.
+		{ $project: { updatedAt: 1, user: 1 } },
+		{
+			$lookup: {
+				as: "activeStudent",
+				foreignField: "_id",
+				from: Student.collection.name,
+				localField: "user",
+				pipeline: [{ $match: activeStudentFilter }, { $project: { _id: 1 } }]
+			}
+		},
+		{ $match: { "activeStudent.0": { $exists: true } } },
+		{
+			$facet: {
+				activeProjects: [{ $count: "count" }],
+				recentlyUpdatedProjects: [{ $match: { updatedAt: { $gte: recentStart } } }, { $count: "count" }],
+				studentsWithProjects: [{ $group: { _id: "$user" } }, { $count: "count" }],
+				studentsWithRecentProjectUpdates: [
+					{ $match: { updatedAt: { $gte: recentStart } } },
+					{ $group: { _id: "$user" } },
+					{ $count: "count" }
+				]
+			}
+		}
 	]);
 }
 
@@ -202,22 +231,17 @@ export function getClassroomAnalyticsSummary(retentionDays: number): RequestHand
 		const endDay = utcDay(generatedAt);
 		const startDay = new Date(endDay.getTime() - (days - 1) * DAY_MS);
 		const recentStart = new Date(endDay.getTime() - (STUDENT_WORK_RECENT_DAYS - 1) * DAY_MS);
-		const activeProjectFilter = { deletedAt: { $exists: false } };
-		const recentProjectFilter = {
-			...activeProjectFilter,
-			updatedAt: { $gte: recentStart }
+		// This is a read-only reporting boundary. Disabled, deletion-pending, and
+		// expired accounts remain available to the retention/deletion machinery,
+		// but stop contributing to teacher-facing activity immediately.
+		const activeStudentFilter = {
+			active: true,
+			dataDeletionPendingAt: { $exists: false },
+			retentionExpiresAt: { $gt: generatedAt }
 		};
 
 		try {
-			const [
-				usageRows,
-				activeAccounts,
-				accountsWithRecentSignIn,
-				activeProjects,
-				recentlyUpdatedProjects,
-				projectStudentCount,
-				recentProjectStudentCount
-			] = await Promise.all([
+			const [usageRows, activeAccounts, accountsWithRecentSignIn, studentProjectActivity] = await Promise.all([
 				ClassroomUsageDaily.find({
 					day: { $gte: startDay, $lte: endDay },
 					expiresAt: { $gt: generatedAt }
@@ -225,16 +249,14 @@ export function getClassroomAnalyticsSummary(retentionDays: number): RequestHand
 					.select("day siteID event courseID count -_id")
 					.lean()
 					.exec() as Promise<UsageAggregate[]>,
-				Student.countDocuments({ active: true }).exec(),
+				Student.countDocuments(activeStudentFilter).exec(),
 				Student.countDocuments({
-					active: true,
+					...activeStudentFilter,
 					lastLoginAt: { $gte: recentStart }
 				}).exec(),
-				PythonProject.countDocuments(activeProjectFilter).exec(),
-				PythonProject.countDocuments(recentProjectFilter).exec(),
-				distinctProjectStudentCount(activeProjectFilter),
-				distinctProjectStudentCount(recentProjectFilter)
+				activeStudentProjectActivity(activeStudentFilter, recentStart)
 			]);
+			const projectActivity = studentProjectActivity[0];
 
 			const makeDailyRows = () =>
 				Array.from({ length: days }, (_, index) => ({
@@ -326,10 +348,10 @@ export function getClassroomAnalyticsSummary(retentionDays: number): RequestHand
 					recentWindowDays: STUDENT_WORK_RECENT_DAYS,
 					activeAccounts,
 					accountsWithRecentSignIn,
-					studentsWithProjects: projectStudentCount[0]?.count ?? 0,
-					studentsWithRecentProjectUpdates: recentProjectStudentCount[0]?.count ?? 0,
-					activeProjects,
-					recentlyUpdatedProjects
+					studentsWithProjects: projectActivity?.studentsWithProjects[0]?.count ?? 0,
+					studentsWithRecentProjectUpdates: projectActivity?.studentsWithRecentProjectUpdates[0]?.count ?? 0,
+					activeProjects: projectActivity?.activeProjects[0]?.count ?? 0,
+					recentlyUpdatedProjects: projectActivity?.recentlyUpdatedProjects[0]?.count ?? 0
 				}
 			});
 		}
