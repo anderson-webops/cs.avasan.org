@@ -16,6 +16,10 @@ const netlifySource = readFileSync(
 	resolve(repositoryRoot, "netlify.toml"),
 	"utf8"
 );
+const productionSmokeSource = readFileSync(
+	resolve(repositoryRoot, "scripts/post-deploy-smoke.mjs"),
+	"utf8"
+);
 const nginxPolicies = [
 	...nginxSource.matchAll(/add_header Content-Security-Policy "([^"]+)"/gu)
 ].map(match => match[1]);
@@ -62,6 +66,65 @@ describe("production smoke feature expectations", () => {
 		expect(
 			validateContentSecurityPolicy(pythonIdePolicy, "python-ide")
 		).toBe(true);
+	});
+
+	it("redirects Python IDE aliases to the profiled directory route", () => {
+		for (const aliasPattern of ["/python-ide", "/python-ide[.]html"]) {
+			const nginxAlias = nginxSource.match(
+				new RegExp(`location = ${aliasPattern} \\{([\\s\\S]*?)\\n\\t\\}`, "u")
+			)?.[1];
+
+			expect(nginxAlias?.trim()).toBe(
+				"return 301 /python-ide/$is_args$args;"
+			);
+		}
+		expect(netlifySource).toMatch(
+			/\[\[redirects\]\]\nfrom = "\/python-ide"\nto = "\/python-ide\/"\nstatus = 301\nforce = true/u
+		);
+		expect(netlifySource).toMatch(
+			/\[\[redirects\]\]\nfrom = "\/python-ide[.]html"\nto = "\/python-ide\/"\nstatus = 301\nforce = true/u
+		);
+	});
+
+	it("keeps every former CS Graph Sketcher route explicitly retired", () => {
+		for (const aliasPattern of ["/graph-sketcher", "/graph-sketcher[.]html"]) {
+			const nginxAlias = nginxSource.match(
+				new RegExp(`location = ${aliasPattern} \\{([\\s\\S]*?)\\n\\t\\}`, "u")
+			)?.[1];
+			expect(nginxAlias?.trim()).toBe("return 404;");
+		}
+		expect(nginxSource).toMatch(
+			/location \^~ \/graph-sketcher\/ \{\n\t\treturn 404;\n\t\}/u
+		);
+		expect(nginxSource).toMatch(
+			/location = \/licenses\/graphsketcher-omni-source-license[.]txt \{\n\t\treturn 404;\n\t\}/u
+		);
+		expect(nginxSource).toMatch(
+			/location ~\* \^\/assets\/\[\^\/\]\*graph-\?sketcher\[\^\/\]\*\$ \{\n\t\treturn 404;\n\t\}/u
+		);
+
+		for (const aliasPattern of [
+			"/graph-sketcher",
+			"/graph-sketcher/",
+			"/graph-sketcher/[*]",
+			"/graph-sketcher[.]html"
+		]) {
+			expect(netlifySource).toMatch(
+				new RegExp(
+					`\\[\\[redirects\\]\\]\\nfrom = "${aliasPattern}"\\nto = "/graph-sketcher-unavailable"\\nstatus = 404\\nforce = true`,
+					"u"
+				)
+			);
+		}
+
+		for (const retiredArtifact of [
+			"/assets/GraphSketcherWorkspace-retired.js",
+			"/assets/graphSketcherArchive.worker-retired.js",
+			"/assets/graph-sketcher-retired.js",
+			"/licenses/graphsketcher-omni-source-license.txt"
+		]) {
+			expect(productionSmokeSource).toContain(`"${retiredArtifact}"`);
+		}
 	});
 
 	it("rejects the former globally permissive security policy", () => {

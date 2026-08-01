@@ -43,9 +43,9 @@ enable a feature merely because this implementation minimizes data.
 
 ## Fail-closed rollout gate
 
-Courses, the Python IDE, browser saves, and Graph Sketcher remain available
-without these features. Do not enable any student-data feature until all of the
-following are complete:
+CS courses, the Python IDE, browser saves, and Math's browser-local Graph
+Sketcher remain available without these features. Do not enable any
+student-data feature until all of the following are complete:
 
 1. The school or district has approved the feature and its intended classroom
    use.
@@ -124,7 +124,7 @@ hours, whichever comes first.
 Rotating or deleting the student's session version invalidates every existing
 copy. Each abuse-prevention key uses an exact-expiry in-process store, is
 deleted when its own window ends, and is never written to MongoDB or analytics.
-Anonymous graph projects never enter this inventory.
+Math's anonymous graph projects never enter this inventory.
 
 The browser keeps the matching random password-setup request marker in that
 tab's `sessionStorage` only while it may need to finish or safely retry setup.
@@ -157,8 +157,8 @@ version so existing student sessions must sign in again. Do not implement an
 alias correction by deleting and recreating the account. Export, disable, or
 permanently delete the record when that is the authorized action. A parent or
 guardian may refuse future optional account collection or use through the
-school process; anonymous courses, browser-local Python saves, and Graph
-Sketcher remain available.
+school process; anonymous courses and browser-local Python saves remain
+available on CS, while Graph Sketcher remains available on Math.
 
 ## Export
 
@@ -310,5 +310,5 @@ When the classroom use ends:
     record, complete any separately approved backup deletion, and retire the
     provider credentials. Do not add an HTTP purge endpoint.
 
-7. Verify the public anonymous courses, IDE, browser saves, and Graph Sketcher
-   still work.
+7. Verify the public anonymous CS courses, IDE, and browser saves still work;
+   verify Graph Sketcher separately on `math.avasan.org`.
