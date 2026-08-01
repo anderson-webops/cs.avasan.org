@@ -6,7 +6,7 @@ services:
             context: .
             dockerfile: Dockerfile
             args:
-                CS_RELEASE_VERSION: ${CS_RELEASE_VERSION:-2.7.98}
+                CS_RELEASE_VERSION: ${CS_RELEASE_VERSION:-2.7.99}
                 SOURCE_REVISION: ${SOURCE_REVISION:?set SOURCE_REVISION}
                 VITE_CLASSROOM_PRIVACY_APPROVED: ${CLASSROOM_PRIVACY_APPROVED:-false}
                 VITE_CLASSROOM_PRIVACY_OPERATOR_NOTICE: ${CLASSROOM_PRIVACY_OPERATOR_NOTICE:-}
@@ -47,7 +47,7 @@ services:
             context: .
             dockerfile: back-end/Dockerfile
             args:
-                CS_RELEASE_VERSION: ${CS_RELEASE_VERSION:-2.7.98}
+                CS_RELEASE_VERSION: ${CS_RELEASE_VERSION:-2.7.99}
                 SOURCE_REVISION: ${SOURCE_REVISION:?set SOURCE_REVISION}
         depends_on:
             mongo:
