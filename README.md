@@ -270,7 +270,7 @@ that fallback is not permitted by the production Compose path. Inject the
 deployment identity without changing application secrets:
 
 ```bash
-export CS_RELEASE_VERSION=2.7.98
+export CS_RELEASE_VERSION=2.7.99
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 docker compose --env-file deploy/cs.env -f compose.production.yml build
 ```
@@ -285,7 +285,7 @@ To prepare a deployment:
 ```bash
 install -m 600 deploy/cs.env.example deploy/cs.env
 # Fill secrets, keep all optional features false until the privacy gate is met.
-export CS_RELEASE_VERSION=2.7.98
+export CS_RELEASE_VERSION=2.7.99
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 ./scripts/verify-deploy-env-permissions.sh
 docker compose --env-file deploy/cs.env -f compose.production.yml build

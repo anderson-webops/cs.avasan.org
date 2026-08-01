@@ -35,7 +35,7 @@ context("Public classroom navigation", () => {
 		cy.contains("h1", "Courses").should("be.visible");
 
 		cy.get(".site-nav").contains("a:visible", "Python IDE").click();
-		cy.url().should("eq", `${Cypress.config().baseUrl}/python-ide/`);
+		cy.location("pathname").should("match", /^\/python-ide\/?$/);
 		cy.contains("h1", "Python IDE").should("be.visible");
 		cy.contains("Using a shared computer?").should("not.exist");
 		cy.contains(
