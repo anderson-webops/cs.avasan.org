@@ -137,13 +137,13 @@ describe("student privacy page", () => {
 		expect(text).not.toContain("No default is assumed");
 	});
 
-	it("does not describe account retention as active from a retention value alone", () => {
+	it("discloses active retention while accounts are in maintenance mode", () => {
 		vi.stubEnv("VITE_STUDENT_RECORD_RETENTION_DAYS", "90");
 
 		const text = mount(StudentPrivacyPage).text();
 
-		expect(text).toContain("Accounts remain disabled");
-		expect(text).toContain("No default is assumed");
-		expect(text).not.toContain("The initial deadline is 90 days");
+		expect(text).toContain("The initial deadline is 90 days");
+		expect(text).toContain("automatically deleted after 90 days");
+		expect(text).not.toContain("No default is assumed");
 	});
 });

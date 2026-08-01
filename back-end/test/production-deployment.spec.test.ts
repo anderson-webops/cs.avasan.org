@@ -112,14 +112,14 @@ describe("versioned full-stack production deployment", () => {
 			version: string;
 		};
 
-		expect(rootPackage.version).toBe("2.7.96");
-		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]96\}/g)).toHaveLength(2);
+		expect(rootPackage.version).toBe("2.7.97");
+		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]97\}/g)).toHaveLength(2);
 		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g)).toHaveLength(2);
 		expect(compose).not.toContain("SOURCE_REVISION:-unknown");
 		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
-		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.96");
+		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.97");
 		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
-		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.96");
+		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.97");
 		expect(apiDockerfile).toContain("ARG SOURCE_REVISION=unknown");
 		expect(frontendReleaseWriter).toContain("environment.COMMIT_REF?.trim()");
 		expect(frontendReleaseWriter).toContain("const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;");
@@ -137,8 +137,12 @@ describe("versioned full-stack production deployment", () => {
 		expect(productionSmoke).toContain("CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED");
 		expect(productionSmoke).toContain('event: "__deployment-probe-invalid"');
 		expect(productionSmoke).toContain("response details were not logged");
+		expect(productionSmoke).toContain('currentSmokePhase = "security headers"');
 		expect(productionSmoke).not.toContain("smokeErrorMessage");
 		expect(productionSmoke).toContain('adminRedirect.headers.get("location") === "/admin/"');
+		expect(productionSmoke).toContain("verifySecurityHeaders");
+		expect(productionSmoke).toContain('validateContentSecurityPolicy(');
+		expect(productionSmoke).toContain('["/python-ide/", "python-ide"]');
 		expect(productionSmoke).toContain("The public site and API report different release identities.");
 		expect(productionSmoke).not.toContain("fetch(");
 		expect(httpSmokeClient).toContain('import http from "node:http"');
@@ -270,6 +274,9 @@ describe("versioned full-stack production deployment", () => {
 		expect(readme).toContain('CS_EXPECTED_REVISION="${SOURCE_REVISION}"');
 		expect(readme).toMatch(/before the deployment\s+timer records success/);
 		expect(readme).toContain("must fail without recording success");
+		expect(readme).toContain("http://127.0.0.1:8080/python-ide/");
+		expect(readme).toContain("remove any host-side static");
+		expect(readme).toMatch(/do not record the\s+deployment as successful/);
 		expect(environmentVerifier).toContain("permissions must be 600");
 		expect(mongoInit).toContain('{ role: "readWrite", db: applicationDatabaseName }');
 		expect(mongoInit).not.toContain('role: "dbAdmin"');

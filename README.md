@@ -272,7 +272,7 @@ that fallback is not permitted by the production Compose path. Inject the
 deployment identity without changing application secrets:
 
 ```bash
-export CS_RELEASE_VERSION=2.7.96
+export CS_RELEASE_VERSION=2.7.97
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 docker compose --env-file deploy/cs.env -f compose.production.yml build
 ```
@@ -287,7 +287,7 @@ To prepare a deployment:
 ```bash
 install -m 600 deploy/cs.env.example deploy/cs.env
 # Fill secrets, keep all optional features false until the privacy gate is met.
-export CS_RELEASE_VERSION=2.7.96
+export CS_RELEASE_VERSION=2.7.97
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 ./scripts/verify-deploy-env-permissions.sh
 docker compose --env-file deploy/cs.env -f compose.production.yml build
@@ -350,19 +350,39 @@ CS_SITE_ORIGIN=https://cs.avasan.org \
 
 The deployment must fail without recording success unless that command verifies
 the exact matching revision at `/release.json` and `/api/release`, `no-store`
-on both endpoints, known anonymous routes, the relative `/admin` directory
-redirect, a real 404 for a synthetic unknown path, API health and readiness,
-the Graph Sketcher bundle, and the current fail-closed student and
-aggregate-usage boundaries. When an approved feature is enabled, the same
-command verifies the enabled route instead: an anonymous student-session read
-must return the minimal signed-out response, OAuth must report at least one
-configured Apple or Google provider, and the analytics probe uses a deliberately
-invalid event that proves the route is mounted without writing an aggregate.
+on both endpoints, the exact standard and Python-IDE-specific content security
+policies, the remaining browser security headers, known anonymous routes, the
+relative `/admin` directory redirect, a real 404 for a synthetic unknown path,
+API health and readiness, the Graph Sketcher bundle, and the current fail-closed
+student and aggregate-usage boundaries. Failures name only the affected gate;
+response contents are not written to workflow logs. When an approved feature is
+enabled, the same command verifies the enabled route instead: an anonymous
+student-session read must return the minimal signed-out response, OAuth must
+report at least one configured Apple or Google provider, and the analytics probe
+uses a deliberately invalid event that proves the route is mounted without
+writing an aggregate.
 The manual **Verify production deployment** GitHub workflow exposes matching
 boolean inputs, runs the same gate from an independent external runner, and
 should follow each production promotion. Also run `git diff --check`. The
 frontend build packages the reviewed Python IDE asset manifest; the backend
 does not stream an upstream asset archive at runtime.
+
+If the external gate reports a security-header or public-route failure while
+the release identities already match, compare the loopback web container with
+the public edge before changing application code:
+
+```bash
+curl --silent --show-error --head http://127.0.0.1:8080/
+curl --silent --show-error --head http://127.0.0.1:8080/python-ide/
+curl --silent --show-error --head http://127.0.0.1:8080/admin
+```
+
+If loopback is stale, rebuild and recreate only the `web` service from the
+exact release checkout. If loopback is correct, remove any host-side static
+root, CSP override, redirect rewriting, or hidden upstream security header and
+replace the outer vhost with the proxy-only example. Validate and reload the
+host Nginx configuration, then rerun the full external gate; do not record the
+deployment as successful based only on matching release metadata.
 
 Project quota counters are rebuilt from non-deleted projects before the API
 starts listening. Project and counter writes remain separate MongoDB
