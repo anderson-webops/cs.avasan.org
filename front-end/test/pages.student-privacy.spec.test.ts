@@ -27,9 +27,11 @@ describe("student privacy page", () => {
 		expect(text).toContain("marks a count as attempted before sending");
 		expect(text).toContain("does not retry after an error");
 		expect(text).toContain("prevents an uncertain response");
-		expect(text).toContain("Graph work saved in browser tabs");
+		expect(text).toContain("Math graph work saved in browser tabs");
 		expect(text).toContain("when a tab is duplicated");
-		expect(text).toContain("every open or duplicated Graph Sketcher tab");
+		expect(text).toContain(
+			"every open or duplicated Math Graph Sketcher tab"
+		);
 		expect(text).toContain("Clear for next student");
 		expect(text).toContain("Python work saved in a shared browser");
 		expect(text).toContain("follow Julio’s instructions");
@@ -81,7 +83,9 @@ describe("student privacy page", () => {
 		expect(text).toContain("Deleted-account write gate");
 		expect(text).toContain("process-lifetime tombstone");
 		expect(text).toContain("Anonymous classroom totals");
-		expect(text).toContain("Browser-local Graph and anonymous Python work");
+		expect(text).toContain(
+			"Browser-local Math Graph and anonymous Python work"
+		);
 		expect(text).toContain("does not include a password");
 		expect(text).toContain("internal student account ID");
 		expect(text).toContain("up to 15 minutes");
@@ -94,7 +98,7 @@ describe("student privacy page", () => {
 		expect(text).toContain("access, correct, export, or delete");
 		expect(text).toContain("refuse further account collection or use");
 		expect(text).toContain(
-			"still use public courses, browser-local Python saves, and Graph Sketcher"
+			"still use public courses, browser-local Python saves, and Math's Graph Sketcher"
 		);
 		expect(text).toContain("identify every operator");
 		expect(text).toContain("name each approved infrastructure");

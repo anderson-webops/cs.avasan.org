@@ -18,39 +18,37 @@ deliberately simplified downstream adaptation of
 - The current course catalog contains only Scratch Levels 1 and 2, Python
   Level 1: Classroom Edition, Python Level 2: Classroom Edition, and PyGames:
   Classroom Edition.
-- The upstream browser Graph Sketcher remains available as a separate,
-  anonymous tool. It uses browser tab storage and lets students download a
-  separate project copy; browsers may copy tab storage when a tab is
-  duplicated.
+- Within the Avasan sites, Graph Sketcher is hosted only by
+  `math.avasan.org`; this CS site does not publish its route, runtime, worker,
+  license, or project artifacts. The upstream Classes platform keeps its own
+  grapher independently.
 - The site does not provide tutoring-business, freelance, tuition, booking,
   scheduler, or Zoom workflows.
 
 ## Repository Layout
 
-- `front-end/` contains the Vue 3 and Vite SSG course site, browser-based
-  Python IDE, and Graph Sketcher.
+- `front-end/` contains the Vue 3 and Vite SSG course site and browser-based
+  Python IDE.
 - `back-end/` contains the small Express and MongoDB service used for Julio's
   private account and optional student project sync.
 - `HEALTHCHECKS.md` documents service health and readiness endpoints.
 
 ## Access Model
 
-The five current courses are public at `/`, the browser IDE is public at
-`/python-ide`, and Graph Sketcher is public at `/graph-sketcher`. Graph
-Sketcher runs entirely in the browser and keeps its recovery copy in browser
-tab storage; a duplicated tab may receive its own browser-managed copy. Graph
-projects and graph contents are not sent to the backend or analytics.
-Anonymous IDE projects stay in the browser unless a signed-in student
-explicitly imports them. A student first signs in with the username and unique,
-expiring setup code Julio provides. The first successful exchange irreversibly
-consumes that code and opens a short setup session. The student then either
-creates a password or connects one Google or Apple account. Later sign-ins use
-the chosen method. Google and Apple connection uses only the provider's opaque
-account identifier: this site does not request the student's provider email,
-name, profile, or avatar. Its authorization-code exchange may transiently
-receive a provider token response to validate the sign-in, but only the
-one-way-hashed opaque subject is persisted; provider tokens are not retained.
-The browser can continue an
+The five current courses are public at `/`, and the browser IDE is public at
+`/python-ide`. `/graph-sketcher`, the entire `/graph-sketcher/` namespace, and
+`/graph-sketcher.html` are retired CS routes and must return `404`; graphing is
+available only on `math.avasan.org`. Anonymous IDE projects stay in the browser
+unless a signed-in student explicitly imports them. A student first signs in
+with the username and unique, expiring setup code Julio provides. The first
+successful exchange irreversibly consumes that code and opens a short setup
+session. The student then either creates a password or connects one Google or
+Apple account. Later sign-ins use the chosen method. Google and Apple connection
+uses only the provider's opaque account identifier: this site does not request
+the student's provider email, name, profile, or avatar. Its authorization-code
+exchange may transiently receive a provider token response to validate the
+sign-in, but only the one-way-hashed opaque subject is persisted; provider
+tokens are not retained. The browser can continue an
 interrupted password setup only when its setup session was saved and it
 presents the exact strong request ID from its password submission; otherwise
 Julio must issue a new code.
@@ -160,8 +158,8 @@ When adopting upstream work:
 1. Fetch and inspect the desired upstream commits.
 2. Replay or adapt only the changes that fit this site's narrow course and
    access model.
-3. Validate the public catalog, anonymous IDE, optional student sync, and
-   Julio-only Admin boundary.
+3. Validate the public catalog, anonymous IDE, optional student sync,
+   Math-only Graph boundary, and Julio-only Admin boundary.
 4. Push downstream work only to `origin`.
 
 Do not blindly reset or merge the downstream branch to upstream, and do not
@@ -272,7 +270,7 @@ that fallback is not permitted by the production Compose path. Inject the
 deployment identity without changing application secrets:
 
 ```bash
-export CS_RELEASE_VERSION=2.7.97
+export CS_RELEASE_VERSION=2.7.98
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 docker compose --env-file deploy/cs.env -f compose.production.yml build
 ```
@@ -287,7 +285,7 @@ To prepare a deployment:
 ```bash
 install -m 600 deploy/cs.env.example deploy/cs.env
 # Fill secrets, keep all optional features false until the privacy gate is met.
-export CS_RELEASE_VERSION=2.7.97
+export CS_RELEASE_VERSION=2.7.98
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 ./scripts/verify-deploy-env-permissions.sh
 docker compose --env-file deploy/cs.env -f compose.production.yml build
@@ -352,15 +350,25 @@ The deployment must fail without recording success unless that command verifies
 the exact matching revision at `/release.json` and `/api/release`, `no-store`
 on both endpoints, the exact standard and Python-IDE-specific content security
 policies, the remaining browser security headers, known anonymous routes, the
-relative `/admin` directory redirect, a real 404 for a synthetic unknown path,
-API health and readiness, the Graph Sketcher bundle, and the current fail-closed
-student and aggregate-usage boundaries. Failures name only the affected gate;
+relative `/admin` directory redirect, real 404 responses for the retired Graph
+Sketcher aliases and a synthetic unknown path, API health and readiness, and
+the current fail-closed student and aggregate-usage boundaries. Failures name
+only the affected gate;
 response contents are not written to workflow logs. When an approved feature is
 enabled, the same command verifies the enabled route instead: an anonymous
 student-session read must return the minimal signed-out response, OAuth must
 report at least one configured Apple or Google provider, and the analytics probe
 uses a deliberately invalid event that proves the route is mounted without
 writing an aggregate.
+
+A content security policy belongs to the HTML document that received it; Vue
+route changes cannot replace that policy. Navigation into or out of the Python
+IDE therefore performs a full document load, while ordinary-site and same-IDE
+navigation remains client-side. Both `/python-ide` and the generated
+`/python-ide.html` alias redirect to `/python-ide/` with their query strings
+preserved so every IDE entry point receives the narrow IDE policy before its
+browser-local runtime starts.
+
 The manual **Verify production deployment** GitHub workflow exposes matching
 boolean inputs, runs the same gate from an independent external runner, and
 should follow each production promotion. Also run `git diff --check`. The

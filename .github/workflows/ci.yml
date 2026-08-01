@@ -335,9 +335,22 @@ jobs:
                   origin=http://127.0.0.1:${CS_AVASAN_LISTEN_PORT}
                   curl --fail --silent --show-error "${origin}/" >/dev/null
                   curl --fail --silent --show-error "${origin}/python-ide" >/dev/null
-                  curl --fail --silent --show-error "${origin}/graph-sketcher" >/dev/null
                   curl --fail --silent --show-error "${origin}/api/healthz" >/dev/null
                   curl --fail --silent --show-error "${origin}/api/readyz" >/dev/null
+
+                  for retired_graph_path in \
+                    /graph-sketcher \
+                    /graph-sketcher/ \
+                    /graph-sketcher/index.html \
+                    /graph-sketcher.html \
+                    /assets/GraphSketcherWorkspace-retired.js \
+                    /assets/graphSketcherArchive.worker-retired.js \
+                    /assets/graph-sketcher-retired.js \
+                    /licenses/graphsketcher-omni-source-license.txt; do
+                    retired_graph_status=$(curl --silent --output /dev/null --write-out '%{http_code}' \
+                      "${origin}${retired_graph_path}")
+                    test "${retired_graph_status}" = "404"
+                  done
 
                   unknown_status=$(curl --silent --output /dev/null --write-out '%{http_code}' \
                     "${origin}/__cs-avasan-deployment-probe-missing")

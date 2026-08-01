@@ -35,7 +35,7 @@ context("Public classroom navigation", () => {
 		cy.contains("h1", "Courses").should("be.visible");
 
 		cy.get(".site-nav").contains("a:visible", "Python IDE").click();
-		cy.url().should("eq", `${Cypress.config().baseUrl}/python-ide`);
+		cy.url().should("eq", `${Cypress.config().baseUrl}/python-ide/`);
 		cy.contains("h1", "Python IDE").should("be.visible");
 		cy.contains("Using a shared computer?").should("not.exist");
 		cy.contains(
@@ -43,9 +43,7 @@ context("Public classroom navigation", () => {
 			"Clear browser projects for next student"
 		).should("not.exist");
 
-		cy.get(".site-nav").contains("a:visible", "Graphing").click();
-		cy.url().should("eq", `${Cypress.config().baseUrl}/graph-sketcher`);
-		cy.contains("h1", "Graph Sketcher").should("be.visible");
+		cy.get(".site-nav").should("not.contain", "Graphing");
 		cy.get(".site-nav").should("not.contain", "About");
 		cy.get(".site-nav").should("not.contain", "Home");
 	});
@@ -74,7 +72,7 @@ context("Public classroom navigation", () => {
 	});
 
 	it("treats removed presentation pages as missing", () => {
-		for (const path of ["/about", "/courses", "/profile"]) {
+		for (const path of ["/about", "/courses", "/profile", "/graph-sketcher"]) {
 			cy.visit(path);
 			cy.contains("h1", "Page not found").should("be.visible");
 		}

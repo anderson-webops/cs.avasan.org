@@ -11,8 +11,7 @@ const { currentAdmin } = storeToRefs(app);
 
 const primaryLinks = [
 	{ label: "Courses", to: "/" },
-	{ label: "Python IDE", to: "/python-ide" },
-	{ label: "Graphing", to: "/graph-sketcher" }
+	{ label: "Python IDE", to: "/python-ide" }
 ];
 
 function isLinkActive(to: string) {

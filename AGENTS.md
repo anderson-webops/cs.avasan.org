@@ -15,11 +15,14 @@ Keep these constraints intact:
 - The original Python Level 2 and PyGames curricula may remain visible in a
   separate archived-reference group for Julio. Archived entries are not
   current course offerings and must not be added to student course access.
-- Keep the upstream-derived Graph Sketcher available at `/graph-sketcher` as
-  an anonymous, browser-local tool. It is not a catalog course, and graph
-  projects or contents must not be sent to the backend or analytics.
-- Students browse courses and use the browser IDE and Graph Sketcher
-  anonymously. An optional student account may sync Python IDE projects, but
+- Within the Avasan sites, Graph Sketcher is hosted only by
+  `math.avasan.org`. CS must return `404` for `/graph-sketcher`, the entire
+  `/graph-sketcher/` namespace (including stale direct artifacts), and
+  `/graph-sketcher.html`, and must not ship its page, runtime, worker, license,
+  or project artifacts. The shared aggregate service may retain Math
+  `graph-open` counts, but never graph projects or contents.
+- Students browse courses and use the browser IDE anonymously. An optional
+  student account may sync Python IDE projects, but
   it must never gate course access or anonymous browser saves.
 - Student accounts have a username but no email. Julio creates them and issues
   unique, expiring setup codes; students cannot register or recover accounts
@@ -58,8 +61,7 @@ uncommitted unless the user asks you to.
 
 ## Repository Shape
 
-- `front-end/`: Vue 3/Vite SSG public course site, browser IDE, and Graph
-  Sketcher.
+- `front-end/`: Vue 3/Vite SSG public course site and browser IDE.
 - `back-end/`: Express/Mongoose service for Julio's private Admin session.
 - `front-end/test/` and `back-end/test/`: Vitest suites.
 - Root configuration controls shared TypeScript, ESLint, workspaces, and builds.
@@ -101,6 +103,7 @@ documentation-only work, at minimum review the rendered text, confirm repository
 facts against the live checkout, and run `git diff --check`.
 
 Validation must specifically confirm that the five current public courses,
-separate archived references, anonymous course/IDE/Graph Sketcher access,
-browser-local graph projects, optional student project sync, and Julio-only
-Admin boundary remain intact.
+separate archived references, anonymous course/IDE access, optional student
+project sync, Julio-only Admin boundary, retained Math-only aggregate Graph
+counts, and the absence of every CS Graph Sketcher route and runtime remain
+intact.

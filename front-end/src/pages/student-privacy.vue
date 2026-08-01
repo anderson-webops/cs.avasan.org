@@ -21,8 +21,8 @@ const accountRetentionDays = studentRecordRetentionDays();
 			<p>
 				This classroom uses only the information needed to teach and to
 				operate the features students choose to use. Optional accounts
-				can sync Python work; Graph Sketcher work stays in the student's
-				current browser tab.
+				can sync Python work; Math's Graph Sketcher work stays in the
+				student's current browser tab.
 			</p>
 		</header>
 
@@ -62,18 +62,18 @@ const accountRetentionDays = studentRecordRetentionDays();
 		</section>
 
 		<section class="site-surface privacy-page__section">
-			<h2>Graph work saved in browser tabs</h2>
+			<h2>Math graph work saved in browser tabs</h2>
 			<p>
-				Graph Sketcher keeps a recovery copy in the current browser tab
-				so it can survive a reload. Some browsers also copy this
-				tab-only storage when a tab is duplicated. Graph projects and
-				graph contents are not sent to the classroom server, student
+				Math's Graph Sketcher keeps a recovery copy in the current
+				browser tab so it can survive a reload. Some browsers also copy
+				this tab-only storage when a tab is duplicated. Graph projects
+				and graph contents are not sent to the classroom server, student
 				accounts, or analytics.
 			</p>
 			<p>
 				On a shared computer, a student should download work they want
 				to keep, then use <strong>Clear for next student</strong> in
-				every open or duplicated Graph Sketcher tab and close those
+				every open or duplicated Math Graph Sketcher tab and close those
 				tabs. Work left in a tab may be visible to the next person who
 				uses it.
 			</p>
@@ -306,7 +306,7 @@ const accountRetentionDays = studentRecordRetentionDays();
 					</dd>
 				</div>
 				<div>
-					<dt>Browser-local Graph and anonymous Python work</dt>
+					<dt>Browser-local Math Graph and anonymous Python work</dt>
 					<dd>
 						Kept in that browser only so a reload does not lose
 						work; remains until the student clears it, the browser
@@ -370,7 +370,7 @@ const accountRetentionDays = studentRecordRetentionDays();
 				parent or guardian may refuse further account collection or use
 				by asking the school to disable and delete the optional account;
 				the student can still use public courses, browser-local Python
-				saves, and Graph Sketcher without signing in.
+				saves, and Math's Graph Sketcher without signing in.
 			</p>
 			<p v-if="schoolPrivacyContact" class="privacy-page__contact">
 				<strong>School or district contact:</strong>

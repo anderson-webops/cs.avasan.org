@@ -112,14 +112,14 @@ describe("versioned full-stack production deployment", () => {
 			version: string;
 		};
 
-		expect(rootPackage.version).toBe("2.7.97");
-		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]97\}/g)).toHaveLength(2);
+		expect(rootPackage.version).toBe("2.7.98");
+		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]98\}/g)).toHaveLength(2);
 		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g)).toHaveLength(2);
 		expect(compose).not.toContain("SOURCE_REVISION:-unknown");
 		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
-		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.97");
+		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.98");
 		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
-		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.97");
+		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.98");
 		expect(apiDockerfile).toContain("ARG SOURCE_REVISION=unknown");
 		expect(frontendReleaseWriter).toContain("environment.COMMIT_REF?.trim()");
 		expect(frontendReleaseWriter).toContain("const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;");
@@ -140,9 +140,20 @@ describe("versioned full-stack production deployment", () => {
 		expect(productionSmoke).toContain('currentSmokePhase = "security headers"');
 		expect(productionSmoke).not.toContain("smokeErrorMessage");
 		expect(productionSmoke).toContain('adminRedirect.headers.get("location") === "/admin/"');
+		expect(productionSmoke).toContain('"/python-ide?course=python-1"');
+		expect(productionSmoke).toContain('"/python-ide.html?course=python-1"');
+		expect(productionSmoke).toContain('"/python-ide/?course=python-1"');
 		expect(productionSmoke).toContain("verifySecurityHeaders");
 		expect(productionSmoke).toContain('validateContentSecurityPolicy(');
 		expect(productionSmoke).toContain('["/python-ide/", "python-ide"]');
+		expect(productionSmoke).toContain('"/graph-sketcher"');
+		expect(productionSmoke).toContain('"/graph-sketcher/"');
+		expect(productionSmoke).toContain('"/graph-sketcher/index.html"');
+		expect(productionSmoke).toContain('"/graph-sketcher.html"');
+		expect(productionSmoke).toContain(
+			'"/licenses/graphsketcher-omni-source-license.txt"'
+		);
+		expect(productionSmoke).not.toContain("runProductionGraphSketcherSmoke");
 		expect(productionSmoke).toContain("The public site and API report different release identities.");
 		expect(productionSmoke).not.toContain("fetch(");
 		expect(httpSmokeClient).toContain('import http from "node:http"');

@@ -22,11 +22,10 @@ const routeScenarios = [
 			? [
 					"/",
 					"/python-ide",
-					"/graph-sketcher",
 					courseResourceRoute,
 					"/admin"
 				]
-			: ["/", "/graph-sketcher", "/admin"]
+			: ["/", "/admin"]
 	},
 	{
 		name: "teacher",

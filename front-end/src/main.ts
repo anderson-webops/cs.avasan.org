@@ -34,6 +34,7 @@ export const createApp = ViteSSG(
 			import.meta.glob<UserModule>(
 				[
 					"./modules/admin-guard.ts",
+					"./modules/cspNavigation.ts",
 					"./modules/i18n.ts",
 					"./modules/nprogress.ts",
 					"./modules/pinia.ts"

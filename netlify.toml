@@ -19,6 +19,42 @@ to = "/api-unavailable"
 status = 404
 force = true
 
+[[redirects]]
+from = "/python-ide"
+to = "/python-ide/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/python-ide.html"
+to = "/python-ide/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/graph-sketcher"
+to = "/graph-sketcher-unavailable"
+status = 404
+force = true
+
+[[redirects]]
+from = "/graph-sketcher/"
+to = "/graph-sketcher-unavailable"
+status = 404
+force = true
+
+[[redirects]]
+from = "/graph-sketcher/*"
+to = "/graph-sketcher-unavailable"
+status = 404
+force = true
+
+[[redirects]]
+from = "/graph-sketcher.html"
+to = "/graph-sketcher-unavailable"
+status = 404
+force = true
+
 [[headers]]
 for = "/*"
 

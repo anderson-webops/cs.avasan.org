@@ -1,7 +1,6 @@
 import process from "node:process";
 import { pathToFileURL } from "node:url";
 import { smokeRequest } from "./http-smoke-client.mjs";
-import { runProductionGraphSketcherSmoke } from "./production-graph-sketcher-smoke.mjs";
 
 const productionOrigin = process.env.CS_SITE_ORIGIN || "https://cs.avasan.org";
 const expectedRelease = process.env.CS_EXPECTED_RELEASE?.replace(/^v/, "");
@@ -226,9 +225,45 @@ async function verifySecurityHeaders() {
 }
 
 async function verifyPublicRoutes() {
-	for (const path of ["/", "/python-ide", "/graph-sketcher"]) {
+	for (const path of ["/", "/python-ide"]) {
 		const response = await request(path);
 		assertion(response.ok, `${path} returned HTTP ${response.status}`);
+	}
+
+	for (const [alias, canonical] of [
+		["/python-ide?course=python-1", "/python-ide/?course=python-1"],
+		["/python-ide.html?course=python-1", "/python-ide/?course=python-1"]
+	]) {
+		const response = await request(alias, { redirect: "manual" });
+		assertion(
+			response.status === 301,
+			`${alias} returned HTTP ${response.status} instead of a canonical redirect.`
+		);
+		assertion(
+			response.headers.get("location") === canonical,
+			`${alias} did not preserve its query in the canonical redirect.`
+		);
+	}
+
+	for (const path of [
+		"/graph-sketcher",
+		"/graph-sketcher/",
+		"/graph-sketcher/index.html",
+		"/graph-sketcher.html",
+		"/assets/GraphSketcherWorkspace-retired.js",
+		"/assets/graphSketcherArchive.worker-retired.js",
+		"/assets/graph-sketcher-retired.js",
+		"/licenses/graphsketcher-omni-source-license.txt"
+	]) {
+		const response = await request(path, { redirect: "manual" });
+		assertion(
+			response.status === 404,
+			`${path} returned HTTP ${response.status} instead of 404.`
+		);
+		assertion(
+			response.headers.get("set-cookie") === null,
+			`${path} unexpectedly set a cookie.`
+		);
 	}
 
 	const adminRedirect = await request("/admin", {
@@ -387,8 +422,6 @@ export async function runProductionSmoke() {
 	await verifyApiReadiness();
 	currentSmokePhase = "privacy feature boundaries";
 	await verifyPrivacyFeatureBoundaries();
-	currentSmokePhase = "Graph Sketcher";
-	await runProductionGraphSketcherSmoke();
 	currentSmokePhase = "complete";
 	console.log(
 		`OK: ${productionOrigin} reports one matching release across the public site and API.`

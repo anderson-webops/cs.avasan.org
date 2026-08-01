@@ -9,7 +9,6 @@ export const NOINDEX_ROBOTS = "noindex,nofollow";
 const ROUTE_TITLES = new Map([
 	["/", SITE_TITLE],
 	["/course-resource", "Course Resource"],
-	["/graph-sketcher", "Graph Sketcher"],
 	["/python-ide", "Python IDE"],
 	["/student-privacy", "Student Privacy"],
 	["/admin", "Teacher Admin"]
@@ -31,9 +30,7 @@ export function pageTitleForPath(path: string) {
 }
 
 export function pageRobotsForPath(path: string) {
-	return ["/", "/graph-sketcher", "/student-privacy"].includes(
-		normalizePagePath(path)
-	)
+	return ["/", "/student-privacy"].includes(normalizePagePath(path))
 		? INDEX_ROBOTS
 		: NOINDEX_ROBOTS;
 }
