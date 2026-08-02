@@ -67,14 +67,14 @@ describe("versioned full-stack production deployment", () => {
 		expect(proxy).toContain("access_log off;");
 		expect(proxy).toContain("absolute_redirect off;");
 		expect(proxy).not.toContain(" combined");
-		expect(proxy.match(/add_header Strict-Transport-Security/g)).toHaveLength(5);
-		expect(proxy.match(/add_header Content-Security-Policy/g)).toHaveLength(5);
-		expect(proxy.match(/add_header X-Content-Type-Options/g)).toHaveLength(5);
-		expect(proxy.match(/add_header Referrer-Policy/g)).toHaveLength(5);
-		expect(proxy.match(/add_header Permissions-Policy/g)).toHaveLength(5);
-		expect(proxy.match(/add_header X-Frame-Options/g)).toHaveLength(5);
-		expect(proxy.match(/add_header Cross-Origin-Opener-Policy/g)).toHaveLength(5);
-		expect(proxy.match(/add_header Cross-Origin-Resource-Policy/g)).toHaveLength(5);
+		expect(proxy.match(/add_header Strict-Transport-Security/g)).toHaveLength(6);
+		expect(proxy.match(/add_header Content-Security-Policy/g)).toHaveLength(6);
+		expect(proxy.match(/add_header X-Content-Type-Options/g)).toHaveLength(6);
+		expect(proxy.match(/add_header Referrer-Policy/g)).toHaveLength(6);
+		expect(proxy.match(/add_header Permissions-Policy/g)).toHaveLength(6);
+		expect(proxy.match(/add_header X-Frame-Options/g)).toHaveLength(6);
+		expect(proxy.match(/add_header Cross-Origin-Opener-Policy/g)).toHaveLength(6);
+		expect(proxy.match(/add_header Cross-Origin-Resource-Policy/g)).toHaveLength(6);
 		expect(proxy).toContain("proxy_set_header X-Forwarded-For $http_x_forwarded_for;");
 		expect(proxy).toContain("proxy_hide_header Content-Security-Policy;");
 		expect(proxy).toContain("proxy_hide_header X-Frame-Options;");
@@ -90,7 +90,9 @@ describe("versioned full-stack production deployment", () => {
 		expect(proxy).toContain("try_files $uri $uri/ =404;");
 		expect(proxy).not.toContain("try_files $uri $uri/ /index.html;");
 		expect(proxy).toContain("location ~ ^(.+)/index[.]html$");
-		expect(proxy).toContain("return 301 $1/$is_args$args;");
+		expect(proxy).toContain("if ($request_uri ~ ^(.+)/index[.]html(?:[?]|$))");
+		expect(proxy).toContain("if ($request_uri ~ ^/index[.]html(?:[?]|$))");
+		expect(proxy).toContain("if ($request_uri ~ ^/ide/index[.]html(?:[?]|$))");
 		expect(hostProxy).toContain("proxy_set_header X-Forwarded-For $remote_addr;");
 		expect(hostProxy.match(/access_log off;/g)).toHaveLength(2);
 		expect(hostProxy).not.toContain(" combined");
@@ -160,7 +162,9 @@ describe("versioned full-stack production deployment", () => {
 		expect(nativeProxy.match(/access_log off;/g)).toHaveLength(2);
 		expect(nativeProxy).not.toContain("try_files $uri $uri/ /index.html;");
 		expect(nativeProxy).toContain("location ~ ^(.+)/index[.]html$");
-		expect(nativeProxy).toContain("return 301 $1/$is_args$args;");
+		expect(nativeProxy).toContain("if ($request_uri ~ ^(.+)/index[.]html(?:[?]|$))");
+		expect(nativeProxy).toContain("if ($request_uri ~ ^/index[.]html(?:[?]|$))");
+		expect(nativeProxy).toContain("if ($request_uri ~ ^/ide/index[.]html(?:[?]|$))");
 
 		expect(deployScript).toContain("git -C \"$cs_source_dir\" archive \"$cs_revision\"");
 		expect(deployScript).toContain('npm --prefix "$cs_build_source" ci --include=optional --strict-allow-scripts');

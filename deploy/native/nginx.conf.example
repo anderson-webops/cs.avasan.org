@@ -99,7 +99,12 @@ server {
 	location = /index.html {
 		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
 		add_header Cache-Control "no-cache, no-store, must-revalidate" always;
-		return 301 /$is_args$args;
+		# The index module internally resolves / to /index.html. Redirect only
+		# when the browser actually requested the generated document.
+		if ($request_uri ~ ^/index[.]html(?:[?]|$)) {
+			return 301 /$is_args$args;
+		}
+		try_files $uri =404;
 	}
 
 	location = /release.json {
@@ -133,9 +138,12 @@ server {
 		return 301 /ide/$is_args$args;
 	}
 	location = /ide/index.html {
-		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
+		include /etc/nginx/snippets/cs-avasan-ide-security-headers.conf;
 		add_header Cache-Control "no-store" always;
-		return 301 /ide/$is_args$args;
+		if ($request_uri ~ ^/ide/index[.]html(?:[?]|$)) {
+			return 301 /ide/$is_args$args;
+		}
+		try_files $uri =404;
 	}
 	location ^~ /ide/ {
 		include /etc/nginx/snippets/cs-avasan-ide-security-headers.conf;
@@ -177,7 +185,10 @@ server {
 	location ~ ^(.+)/index[.]html$ {
 		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
 		add_header Cache-Control "no-store" always;
-		return 301 $1/$is_args$args;
+		if ($request_uri ~ ^(.+)/index[.]html(?:[?]|$)) {
+			return 301 $1/$is_args$args;
+		}
+		try_files $uri =404;
 	}
 
 	location ~* \.(?:css|gif|ico|jpe?g|js|mjs|png|svg|webp|woff2?)$ {
