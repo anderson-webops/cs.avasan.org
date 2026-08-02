@@ -59,7 +59,7 @@ describe("production smoke feature expectations", () => {
 	it("builds a secret-free native public configuration", () => {
 		const manifest = nativeReleaseManifest({
 			CLASSROOM_PRIVACY_APPROVED: "false",
-			CS_RELEASE_VERSION: "2.7.106",
+			CS_RELEASE_VERSION: "2.7.107",
 			MONGODB_URI: "mongodb://secret-value",
 			SESSION_SECRET: "secret-value",
 			SOURCE_REVISION: "a".repeat(40),
@@ -144,6 +144,26 @@ describe("production smoke feature expectations", () => {
 		expect(netlifySource).toMatch(
 			/\[\[redirects\]\]\nfrom = "\/python-ide\/"\nto = "\/ide\/"\nstatus = 301\nforce = true/u
 		);
+	});
+
+	it("canonicalizes generated index documents and rejects raw route documents", () => {
+		for (const source of [nginxSource, nativeNginxSource]) {
+			expect(source).toContain("location ~ ^(.+)/index[.]html$");
+			expect(source).toContain("return 301 $1/$is_args$args;");
+			expect(source).toContain("location = /ide/index.html");
+		}
+		for (const legacyPath of [
+			"/admin.html",
+			"/course-resource.html",
+			"/student-privacy.html",
+			"/games.html",
+			"/games/comet-hopper.html",
+			"/games/crosswalk-critters.html",
+			"/games/machine-workshop.html",
+			"/games/pond-paddlers.html"
+		]) {
+			expect(productionSmokeSource).toContain(`"${legacyPath}"`);
+		}
 	});
 
 	it("packages and serves a branded 404 without exposing it as a public page", async () => {

@@ -99,7 +99,7 @@ server {
 	location = /index.html {
 		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
 		add_header Cache-Control "no-cache, no-store, must-revalidate" always;
-		try_files $uri =404;
+		return 301 /$is_args$args;
 	}
 
 	location = /release.json {
@@ -130,6 +130,11 @@ server {
 	}
 	location = /ide.html {
 		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
+		return 301 /ide/$is_args$args;
+	}
+	location = /ide/index.html {
+		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
+		add_header Cache-Control "no-store" always;
 		return 301 /ide/$is_args$args;
 	}
 	location ^~ /ide/ {
@@ -164,6 +169,15 @@ server {
 	location = /bluej/ {
 		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
 		return 301 /ide/?$cs_avasan_bluej_redirect_args;
+	}
+
+	# Canonical clean routes own the public page. Direct generated index
+	# documents redirect instead of bypassing route policy or creating a second
+	# crawlable URL.
+	location ~ ^(.+)/index[.]html$ {
+		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
+		add_header Cache-Control "no-store" always;
+		return 301 $1/$is_args$args;
 	}
 
 	location ~* \.(?:css|gif|ico|jpe?g|js|mjs|png|svg|webp|woff2?)$ {
