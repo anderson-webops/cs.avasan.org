@@ -289,7 +289,7 @@ jobs:
                   node-version: 24.18.0
 
             - name: Validate native deployment shell
-              run: bash -n scripts/deploy-native-release.sh scripts/rollback-native-release.sh scripts/purge-native-classroom-analytics.sh
+              run: bash -n scripts/deploy-native-release.sh scripts/rollback-native-release.sh scripts/purge-native-classroom-analytics.sh scripts/verify-native-source.sh
 
             - name: Enforce native deployment authority
               run: node --test test/native-deployment-authority.test.mjs

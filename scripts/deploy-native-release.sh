@@ -2,6 +2,8 @@
 set -euo pipefail
 
 umask 022
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export PATH
 
 cs_source_dir="$(pwd -P)"
 cs_api_env="/etc/cs.avasan.org/api.env"
@@ -42,29 +44,32 @@ trap cleanup EXIT
 [[ ${EUID:-$(id -u)} -eq 0 ]] || { printf '%s\n' "Run this deployment as root." >&2; exit 1; }
 [[ "$cs_release_root" == /* && "$cs_release_root" != "/" && "$cs_release_root" != "/srv" ]] \
 	|| { printf '%s\n' "--release-root must be a narrow absolute directory." >&2; exit 1; }
+[[ "$cs_api_service" =~ ^[a-zA-Z0-9_.@-]+[.]service$ \
+	&& "$cs_nginx_service" =~ ^[a-zA-Z0-9_.@-]+[.]service$ ]] \
+	|| { printf '%s\n' "Service unit names are invalid." >&2; exit 1; }
 [[ -d "$cs_source_dir/.git" || -f "$cs_source_dir/.git" ]] \
 	|| { printf '%s\n' "--source must be a Git checkout." >&2; exit 1; }
-[[ -f "$cs_api_env" ]] || { printf '%s\n' "Missing API environment file." >&2; exit 1; }
+[[ -f "$cs_api_env" && ! -L "$cs_api_env" ]] \
+	|| { printf '%s\n' "Missing regular API environment file." >&2; exit 1; }
 [[ "$(stat -c '%a' "$cs_api_env")" == "600" && "$(stat -c '%u' "$cs_api_env")" == "0" ]] \
 	|| { printf '%s\n' "The API environment file must be root-owned with mode 0600." >&2; exit 1; }
 id cs-avasan >/dev/null 2>&1 || { printf '%s\n' "Missing cs-avasan service user." >&2; exit 1; }
-for cs_command in cmp curl git nginx node npm runuser systemctl tar; do
+for cs_command in chmod chown cmp curl env git id install ln mktemp mv nginx node npm readlink realpath rm runuser sleep stat systemctl tar; do
 	command -v "$cs_command" >/dev/null 2>&1 \
 		|| { printf '%s\n' "Missing required command: $cs_command" >&2; exit 1; }
 done
 
-[[ -z "$(git -C "$cs_source_dir" status --porcelain --untracked-files=normal)" ]] \
-	|| { printf '%s\n' "Refusing to deploy a dirty checkout." >&2; exit 1; }
-cs_revision="$(git -C "$cs_source_dir" rev-parse HEAD)"
-[[ "$cs_revision" =~ ^[0-9a-f]{40}$ ]] \
-	|| { printf '%s\n' "Git did not return a full lowercase revision." >&2; exit 1; }
+cs_source_dir="$(realpath "$cs_source_dir")"
 cs_version="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).version" "$cs_source_dir/package.json")"
 [[ "$cs_version" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?$ ]] \
 	|| { printf '%s\n' "package.json does not contain a semantic release version." >&2; exit 1; }
-[[ "$(git -C "$cs_source_dir" cat-file -t "v$cs_version" 2>/dev/null || true)" == "tag" ]] \
-	|| { printf '%s\n' "The release version must have an annotated downstream tag." >&2; exit 1; }
-[[ "$(git -C "$cs_source_dir" rev-parse "v$cs_version^{}")" == "$cs_revision" ]] \
-	|| { printf '%s\n' "The downstream release tag does not point to HEAD." >&2; exit 1; }
+cs_release_tag="v$cs_version"
+"$cs_source_dir/scripts/verify-native-source.sh" \
+	"$cs_source_dir" \
+	"$cs_release_tag"
+cs_revision="$(git -C "$cs_source_dir" rev-parse --verify 'HEAD^{commit}')"
+[[ "$cs_revision" =~ ^[0-9a-f]{40}$ ]] \
+	|| { printf '%s\n' "Git did not return a full lowercase revision." >&2; exit 1; }
 node -e 'const [a,b]=process.versions.node.split(".").map(Number); process.exit(a === 24 && b >= 18 ? 0 : 1)' \
 	|| { printf '%s\n' "Native releases require system Node 24.18 or newer within major 24." >&2; exit 1; }
 [[ "$(npm --version)" == "11.16.0" ]] \
@@ -77,9 +82,36 @@ for cs_artifact_pair in \
 	"deploy/native/cs-avasan-api.service:/etc/systemd/system/cs-avasan-api.service"; do
 	cs_source_artifact="$cs_source_dir/${cs_artifact_pair%%:*}"
 	cs_installed_artifact="${cs_artifact_pair#*:}"
+	[[ -f "$cs_source_artifact" && ! -L "$cs_source_artifact" \
+		&& -f "$cs_installed_artifact" && ! -L "$cs_installed_artifact" \
+		&& "$(stat -c '%u:%a' "$cs_installed_artifact")" == "0:644" ]] \
+		|| { printf '%s\n' "Native service artifacts must be regular files installed root-owned at mode 0644." >&2; exit 1; }
 	cmp --silent "$cs_source_artifact" "$cs_installed_artifact" \
 		|| { printf '%s\n' "Install the reviewed native service artifacts from this release before deploying." >&2; exit 1; }
 done
+
+[[ -d "$cs_release_root" && ! -L "$cs_release_root" ]] \
+	|| { printf '%s\n' "The real native release root is missing." >&2; exit 1; }
+cs_release_root="$(realpath "$cs_release_root")"
+[[ -d "$cs_release_root/releases" && ! -L "$cs_release_root/releases" ]] \
+	|| { printf '%s\n' "The real managed releases directory is missing." >&2; exit 1; }
+cs_current_link="$cs_release_root/current"
+cs_previous_link="$cs_release_root/previous"
+[[ -L "$cs_current_link" ]] \
+	|| { printf '%s\n' "Deployment requires an existing current release symlink for rollback." >&2; exit 1; }
+[[ ! -e "$cs_previous_link" || -L "$cs_previous_link" ]] \
+	|| { printf '%s\n' "Previous release path must be absent or a symlink." >&2; exit 1; }
+cs_previous_target="$(readlink -- "$cs_current_link")"
+[[ "$cs_previous_target" == /* ]] \
+	|| { printf '%s\n' "Current release symlink must use an absolute immutable target." >&2; exit 1; }
+node "$cs_source_dir/scripts/verify-native-release-target.mjs" \
+	"$cs_previous_target" \
+	"$cs_release_root"
+cs_previous_version="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).version" "$cs_previous_target/native-release.json")"
+cs_previous_revision="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).revision" "$cs_previous_target/native-release.json")"
+cs_previous_student_accounts_enabled="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).buildConfig.STUDENT_ACCOUNTS_ENABLED" "$cs_previous_target/native-release.json")"
+cs_previous_student_oauth_enabled="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).buildConfig.STUDENT_OAUTH_ENABLED" "$cs_previous_target/native-release.json")"
+cs_previous_classroom_analytics_enabled="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).buildConfig.CLASSROOM_ANALYTICS_COLLECTION_ENABLED" "$cs_previous_target/native-release.json")"
 
 # api.env is a root-owned deployment input and is deliberately shared with
 # systemd. Export it only inside this process, then force the fixed production
@@ -148,10 +180,9 @@ export STUDENT_ACCOUNTS_ENABLED="${STUDENT_ACCOUNTS_ENABLED:-false}"
 export STUDENT_OAUTH_ENABLED="${STUDENT_OAUTH_ENABLED:-false}"
 export STUDENT_RECORD_RETENTION_DAYS="${STUDENT_RECORD_RETENTION_DAYS:-}"
 
-install -d -o root -g root -m 0755 "$cs_release_root" "$cs_release_root/releases"
 cs_final_release="$cs_release_root/releases/$cs_release_suffix"
 
-if [[ ! -d "$cs_final_release" ]]; then
+if [[ ! -e "$cs_final_release" && ! -L "$cs_final_release" ]]; then
 	cs_build_root="$(mktemp -d /var/tmp/cs-avasan-native.XXXXXX)"
 	cs_build_source="$cs_build_root/source"
 	install -d -m 0755 "$cs_build_source"
@@ -210,9 +241,12 @@ if [[ ! -d "$cs_final_release" ]]; then
 		export CS_RELEASE_VERSION="$cs_version" SOURCE_REVISION="$cs_revision"
 		node "$cs_staging_release/scripts/verify-native-runtime-config.mjs" "$cs_staging_release"
 	)
-	mv -- "$cs_staging_release" "$cs_final_release"
+	mv -T -- "$cs_staging_release" "$cs_final_release"
 	cs_staging_release=""
 else
+	node "$cs_source_dir/scripts/verify-native-release-target.mjs" \
+		"$cs_final_release" \
+		"$cs_release_root"
 	(
 		set -a
 		# shellcheck disable=SC1090
@@ -223,82 +257,184 @@ else
 	)
 fi
 
-cs_current_link="$cs_release_root/current"
-cs_previous_link="$cs_release_root/previous"
-cs_previous_target="$(readlink -f "$cs_current_link" 2>/dev/null || true)"
-if [[ -n "$cs_previous_target" && "$cs_previous_target" != "$cs_release_root/releases/"* ]]; then
-	printf '%s\n' "Current release points outside the managed release directory." >&2
-	exit 1
-fi
+node "$cs_source_dir/scripts/verify-native-release-target.mjs" \
+	"$cs_final_release" \
+	"$cs_release_root"
+
+# The build can take several minutes. Re-prove both the tagged source and the
+# exact rollback target immediately before changing any live symlink.
+"$cs_source_dir/scripts/verify-native-source.sh" \
+	"$cs_source_dir" \
+	"$cs_release_tag"
+[[ "$(git -C "$cs_source_dir" rev-parse --verify 'HEAD^{commit}')" == "$cs_revision" ]] \
+	|| { printf '%s\n' "Native source revision changed while the candidate was prepared." >&2; exit 1; }
+[[ -L "$cs_current_link" && "$(readlink -- "$cs_current_link")" == "$cs_previous_target" ]] \
+	|| { printf '%s\n' "Current release changed while the candidate was prepared." >&2; exit 1; }
+node "$cs_source_dir/scripts/verify-native-release-target.mjs" \
+	"$cs_previous_target" \
+	"$cs_release_root"
 
 atomic_link() {
 	local cs_link_target="$1"
 	local cs_link_name="$2"
 	local cs_next_link="${cs_link_name}.next.$$"
-	ln -s -- "$cs_link_target" "$cs_next_link"
-	mv -Tf -- "$cs_next_link" "$cs_link_name"
+	local cs_link_status=0
+	ln -s -- "$cs_link_target" "$cs_next_link" || cs_link_status=$?
+	if (( cs_link_status != 0 )); then
+		return "$cs_link_status"
+	fi
+	mv -Tf -- "$cs_next_link" "$cs_link_name" || cs_link_status=$?
+	if (( cs_link_status != 0 )); then
+		rm -f -- "$cs_next_link"
+		return "$cs_link_status"
+	fi
+}
+
+wait_for_api_readiness() {
+	local cs_readiness_status=1
+	local cs_attempt
+	for cs_attempt in {1..30}; do
+		cs_readiness_status=0
+		curl --fail --silent --show-error --max-time 2 \
+			http://127.0.0.1:3008/readyz >/dev/null \
+			|| cs_readiness_status=$?
+		if (( cs_readiness_status == 0 )); then
+			return 0
+		fi
+		if (( cs_attempt < 30 )); then
+			sleep 1 || return $?
+		fi
+	done
+	printf '%s\n' "API readiness did not recover after 30 attempts." >&2
+	return "$cs_readiness_status"
+}
+
+verify_release_health() {
+	local cs_health_release="$1"
+	local cs_expected_version="$2"
+	local cs_expected_revision="$3"
+	local cs_expected_student_accounts="$4"
+	local cs_expected_student_oauth="$5"
+	local cs_expected_classroom_analytics="$6"
+	local cs_health_status=0
+
+	wait_for_api_readiness || cs_health_status=$?
+	if (( cs_health_status != 0 )); then
+		return "$cs_health_status"
+	fi
+	env -i PATH=/usr/bin:/bin \
+		CS_SITE_ORIGIN=http://127.0.0.1:8080 \
+		CS_EXPECTED_RELEASE="$cs_expected_version" \
+		CS_EXPECTED_REVISION="$cs_expected_revision" \
+		CS_EXPECT_STUDENT_ACCOUNTS_ENABLED="$cs_expected_student_accounts" \
+		CS_EXPECT_STUDENT_OAUTH_ENABLED="$cs_expected_student_oauth" \
+		CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED="$cs_expected_classroom_analytics" \
+		/usr/bin/node "$cs_health_release/scripts/post-deploy-smoke.mjs" \
+		|| cs_health_status=$?
+	return "$cs_health_status"
 }
 
 restore_previous() {
-	if [[ -n "$cs_previous_target" ]]; then
-		atomic_link "$cs_previous_target" "$cs_current_link" || return 1
-		systemctl restart "$cs_api_service" || return 1
-	else
-		[[ -L "$cs_current_link" ]] && unlink "$cs_current_link"
-		systemctl stop "$cs_api_service" || return 1
+	local cs_rollback_status=0
+	node "$cs_source_dir/scripts/verify-native-release-target.mjs" \
+		"$cs_previous_target" \
+		"$cs_release_root" \
+		|| cs_rollback_status=$?
+	if (( cs_rollback_status != 0 )); then
+		printf '%s\n' "Automatic rollback target verification failed with status $cs_rollback_status." >&2
+		return "$cs_rollback_status"
 	fi
-	systemctl reload "$cs_nginx_service" || return 1
+	atomic_link "$cs_previous_target" "$cs_current_link" || cs_rollback_status=$?
+	if (( cs_rollback_status != 0 )); then
+		printf '%s\n' "Automatic rollback symlink restoration failed with status $cs_rollback_status." >&2
+		return "$cs_rollback_status"
+	fi
+	systemctl daemon-reload || cs_rollback_status=$?
+	if (( cs_rollback_status != 0 )); then
+		printf '%s\n' "Automatic rollback systemd reload failed with status $cs_rollback_status." >&2
+		return "$cs_rollback_status"
+	fi
+	systemctl restart "$cs_api_service" || cs_rollback_status=$?
+	if (( cs_rollback_status != 0 )); then
+		printf '%s\n' "Automatic rollback API restart failed with status $cs_rollback_status." >&2
+		return "$cs_rollback_status"
+	fi
+	systemctl reload "$cs_nginx_service" || cs_rollback_status=$?
+	if (( cs_rollback_status != 0 )); then
+		printf '%s\n' "Automatic rollback Nginx reload failed with status $cs_rollback_status." >&2
+		return "$cs_rollback_status"
+	fi
+	verify_release_health \
+		"$cs_previous_target" \
+		"$cs_previous_version" \
+		"$cs_previous_revision" \
+		"$cs_previous_student_accounts_enabled" \
+		"$cs_previous_student_oauth_enabled" \
+		"$cs_previous_classroom_analytics_enabled" \
+		|| cs_rollback_status=$?
+	if (( cs_rollback_status != 0 )); then
+		printf '%s\n' "Automatic rollback prior-release health verification failed with status $cs_rollback_status." >&2
+		return "$cs_rollback_status"
+	fi
+	[[ -L "$cs_current_link" && "$(readlink -- "$cs_current_link")" == "$cs_previous_target" ]] \
+		|| cs_rollback_status=$?
+	if (( cs_rollback_status != 0 )); then
+		printf '%s\n' "Automatic rollback current-link verification failed with status $cs_rollback_status." >&2
+		return "$cs_rollback_status"
+	fi
 }
 
 fail_activation() {
 	local cs_failure_reason="$1"
-	if restore_previous >/dev/null 2>&1; then
-		if [[ -n "$cs_previous_target" ]]; then
-			printf '%s\n' "$cs_failure_reason; the previous release was restored." >&2
-		else
-			printf '%s\n' "$cs_failure_reason; the incomplete first activation was removed." >&2
-		fi
+	local cs_activation_status="$2"
+	local cs_rollback_status=0
+	restore_previous || cs_rollback_status=$?
+	if (( cs_rollback_status == 0 )); then
+		printf '%s\n' "$cs_failure_reason (status $cs_activation_status); the previous release runtime was restored and verified." >&2
 	else
-		printf '%s\n' "$cs_failure_reason; automatic rollback also failed and requires operator recovery." >&2
+		printf '%s\n' "$cs_failure_reason (status $cs_activation_status); automatic rollback separately failed with status $cs_rollback_status and requires operator recovery." >&2
 	fi
 	exit 1
 }
 
-nginx -t
-atomic_link "$cs_final_release" "$cs_current_link"
-systemctl daemon-reload
-if ! systemctl restart "$cs_api_service"; then
-	fail_activation "API restart failed"
+cs_activation_status=0
+nginx -t || cs_activation_status=$?
+if (( cs_activation_status != 0 )); then
+	printf '%s\n' "Nginx configuration validation failed with status $cs_activation_status; the current release was not changed." >&2
+	exit 1
 fi
-if ! systemctl reload "$cs_nginx_service"; then
-	fail_activation "Nginx reload failed"
+atomic_link "$cs_final_release" "$cs_current_link" || cs_activation_status=$?
+if (( cs_activation_status != 0 )); then
+	fail_activation "Candidate symlink activation failed" "$cs_activation_status"
+fi
+systemctl daemon-reload || cs_activation_status=$?
+if (( cs_activation_status != 0 )); then
+	fail_activation "systemd daemon reload failed" "$cs_activation_status"
+fi
+systemctl restart "$cs_api_service" || cs_activation_status=$?
+if (( cs_activation_status != 0 )); then
+	fail_activation "API restart failed" "$cs_activation_status"
+fi
+systemctl reload "$cs_nginx_service" || cs_activation_status=$?
+if (( cs_activation_status != 0 )); then
+	fail_activation "Nginx reload failed" "$cs_activation_status"
+fi
+verify_release_health \
+	"$cs_final_release" \
+	"$cs_version" \
+	"$cs_revision" \
+	"${STUDENT_ACCOUNTS_ENABLED:-false}" \
+	"${STUDENT_OAUTH_ENABLED:-false}" \
+	"${CLASSROOM_ANALYTICS_COLLECTION_ENABLED:-false}" \
+	|| cs_activation_status=$?
+if (( cs_activation_status != 0 )); then
+	fail_activation "Native release readiness or smoke gate failed" "$cs_activation_status"
 fi
 
-cs_ready=false
-for _cs_attempt in {1..30}; do
-	if curl --fail --silent --show-error --max-time 2 \
-		http://127.0.0.1:3008/readyz >/dev/null; then
-		cs_ready=true
-		break
+if [[ "$cs_previous_target" != "$cs_final_release" ]]; then
+	atomic_link "$cs_previous_target" "$cs_previous_link" || cs_activation_status=$?
+	if (( cs_activation_status != 0 )); then
+		fail_activation "Preserving the previous release failed" "$cs_activation_status"
 	fi
-	sleep 1
-done
-if [[ "$cs_ready" != true ]]; then
-	fail_activation "API readiness failed"
-fi
-
-if ! env -i PATH=/usr/bin:/bin \
-	CS_SITE_ORIGIN=http://127.0.0.1:8080 \
-	CS_EXPECTED_RELEASE="$cs_version" \
-	CS_EXPECTED_REVISION="$cs_revision" \
-	CS_EXPECT_STUDENT_ACCOUNTS_ENABLED="${STUDENT_ACCOUNTS_ENABLED:-false}" \
-	CS_EXPECT_STUDENT_OAUTH_ENABLED="${STUDENT_OAUTH_ENABLED:-false}" \
-	CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED="${CLASSROOM_ANALYTICS_COLLECTION_ENABLED:-false}" \
-	/usr/bin/node "$cs_final_release/scripts/post-deploy-smoke.mjs"; then
-	fail_activation "Native release smoke gate failed"
-fi
-
-if [[ -n "$cs_previous_target" && "$cs_previous_target" != "$cs_final_release" ]]; then
-	atomic_link "$cs_previous_target" "$cs_previous_link"
 fi
 printf 'Activated cs.avasan.org %s at %s.\n' "$cs_version" "$cs_revision"
