@@ -147,7 +147,7 @@ context("Public classroom navigation", () => {
 			"/profile",
 			"/graph-sketcher"
 		]) {
-			cy.visit(path);
+			cy.visit(path, { failOnStatusCode: false });
 			cy.contains("h1", "Page not found").should("be.visible");
 			cy.contains("a", "View courses").should("be.visible");
 		}
