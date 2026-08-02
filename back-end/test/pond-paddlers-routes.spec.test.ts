@@ -298,7 +298,11 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 		expect(Object.keys(body.question).sort()).toEqual(["prompt", "questionID"]);
 		expect(Object.keys(body.state).sort()).toEqual(["finishAt", "players", "status"]);
 		expect(Object.keys(body.state.players[0]).sort()).toEqual(["alias", "progress"]);
-		expect(rawBody).not.toMatch(/student|account|email|answer|token|cookie|ip/i);
+		// Inspect field names, not opaque random values. A generated question ID
+		// can legitimately contain a short sequence such as "ip".
+		expect(rawBody).not.toMatch(
+			/"[^"]*(?:student|account|email|answer|token|cookie|ip)[^"]*"\s*:/i
+		);
 
 		const resumed = await joinRoom(runtime, room.roomCode, header);
 		expect(resumed.response.status).toBe(200);

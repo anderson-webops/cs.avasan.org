@@ -73,7 +73,11 @@ describe("versioned full-stack production deployment", () => {
 		expect(proxy.match(/add_header Referrer-Policy/g)).toHaveLength(5);
 		expect(proxy.match(/add_header Permissions-Policy/g)).toHaveLength(5);
 		expect(proxy.match(/add_header X-Frame-Options/g)).toHaveLength(5);
+		expect(proxy.match(/add_header Cross-Origin-Opener-Policy/g)).toHaveLength(5);
+		expect(proxy.match(/add_header Cross-Origin-Resource-Policy/g)).toHaveLength(5);
 		expect(proxy).toContain("proxy_set_header X-Forwarded-For $http_x_forwarded_for;");
+		expect(proxy).toContain("proxy_hide_header Content-Security-Policy;");
+		expect(proxy).toContain("proxy_hide_header X-Frame-Options;");
 		expect(proxy).toContain("location ^~ /ide/");
 		expect(proxy).toContain("location ^~ /python-ide/assets/");
 		expect(proxy).toContain("script-src 'self' 'unsafe-inline'; connect-src 'self';");
@@ -88,6 +92,7 @@ describe("versioned full-stack production deployment", () => {
 		expect(hostProxy).toContain("proxy_set_header X-Forwarded-For $remote_addr;");
 		expect(hostProxy.match(/access_log off;/g)).toHaveLength(2);
 		expect(hostProxy).not.toContain(" combined");
+		expect(hostProxy).not.toContain("add_header");
 		expect(hostProxy).toContain("proxy_pass http://127.0.0.1:8080;");
 		expect(hostProxy).toContain("proxy_redirect off;");
 		expect(hostProxy).not.toMatch(/^\s*(?:root|alias|try_files)\b/m);
@@ -95,6 +100,84 @@ describe("versioned full-stack production deployment", () => {
 		expect(hostProxy).toContain("return 301 https://cs.avasan.org$request_uri;");
 		expect(hostProxy).toContain("proxy_request_buffering off;");
 		expect(hostProxy).toContain("proxy_buffering off;");
+	});
+
+	it("provides an atomic, single-process native production handoff", () => {
+		const environment = repositoryFile("deploy/native/api.env.example");
+		const service = repositoryFile("deploy/native/cs-avasan-api.service");
+		const nativeProxy = repositoryFile("deploy/native/nginx.conf.example");
+		const nativeStandardHeaders = repositoryFile("deploy/native/cs-avasan-security-headers.conf");
+		const nativeIdeHeaders = repositoryFile("deploy/native/cs-avasan-ide-security-headers.conf");
+		const deployScript = repositoryFile("scripts/deploy-native-release.sh");
+		const rollbackScript = repositoryFile("scripts/rollback-native-release.sh");
+		const runtimePreflight = repositoryFile("scripts/verify-native-runtime-config.mjs");
+		const documentation = repositoryFile("docs/native-production-deployment.md");
+
+		expect(environment).toContain("MONGODB_URI=");
+		expect(environment).toContain(
+			"VAULT_MONGODB_SECRET_PATH=secret/data/cs.avasan.org/mongodb"
+		);
+		expect(environment).not.toContain("MONGO_ROOT_");
+		expect(environment).not.toContain("VITE_");
+		expect(environment).toContain("CLASSROOM_PRIVACY_APPROVED=false");
+		expect(environment).toContain("STUDENT_ACCOUNTS_ENABLED=false");
+		expect(environment).toContain("STUDENT_OAUTH_ENABLED=false");
+
+		expect(service).toContain("User=cs-avasan");
+		expect(service.match(/^ExecStart=/gmu)).toHaveLength(1);
+		expect(service).toContain("EnvironmentFile=/etc/cs.avasan.org/api.env");
+		expect(service).toContain("EnvironmentFile=/srv/cs.avasan.org/current/public-config.env");
+		expect(service).toContain("ProtectSystem=strict");
+		expect(service).toContain("NoNewPrivileges=true");
+		expect(service).toContain("HOST=127.0.0.1");
+		expect(service).toContain("PORT=3008");
+
+		expect(nativeProxy).toContain("root /srv/cs.avasan.org/current/public;");
+		expect(nativeProxy).toContain("listen 127.0.0.1:8080;");
+		expect(nativeProxy).toContain("listen 443 quic;");
+		expect(nativeProxy).toContain("listen [::]:443 quic;");
+		expect(nativeProxy).toContain("http2 on;");
+		expect(nativeProxy).toContain("http3 on;");
+		expect(nativeProxy).toContain("quic_retry on;");
+		expect(nativeStandardHeaders).toContain("add_header Alt-Svc 'h3=\":443\"; ma=86400' always;");
+		expect(nativeIdeHeaders).toContain("add_header Alt-Svc 'h3=\":443\"; ma=86400' always;");
+		expect(nativeStandardHeaders).toContain('add_header Cross-Origin-Opener-Policy "same-origin" always;');
+		expect(nativeStandardHeaders).toContain('add_header Cross-Origin-Resource-Policy "same-origin" always;');
+		expect(nativeIdeHeaders).toContain('add_header Cross-Origin-Opener-Policy "same-origin" always;');
+		expect(nativeIdeHeaders).toContain('add_header Cross-Origin-Resource-Policy "same-origin" always;');
+		expect(nativeProxy).toContain("proxy_pass http://127.0.0.1:3008/;");
+		expect(nativeProxy).toContain("proxy_set_header X-Forwarded-For $remote_addr;");
+		expect(nativeProxy).toContain("proxy_hide_header Content-Security-Policy;");
+		expect(nativeProxy).toContain("proxy_hide_header X-Frame-Options;");
+		expect(nativeProxy).toContain("@cs_avasan_api_not_found");
+		expect(nativeProxy).toContain("'{\"message\":\"Not found\"}'");
+		expect(nativeProxy).toContain("error_page 404 =404 /404.html;");
+		expect(nativeProxy.match(/access_log off;/g)).toHaveLength(2);
+		expect(nativeProxy).not.toContain("try_files $uri $uri/ /index.html;");
+
+		expect(deployScript).toContain("git -C \"$cs_source_dir\" archive \"$cs_revision\"");
+		expect(deployScript).toContain('npm --prefix "$cs_build_source" ci --include=optional --strict-allow-scripts');
+		expect(deployScript.match(/runuser --user cs-avasan -- env/g)).toHaveLength(3);
+		expect(deployScript).toContain('npm_config_cache="$cs_build_root/npm-cache"');
+		expect(deployScript).toContain('export -n "$cs_env_name"');
+		expect(deployScript).toContain('export CLASSROOM_PRIVACY_APPROVED="${CLASSROOM_PRIVACY_APPROVED:-false}"');
+		expect(deployScript).toContain('export STUDENT_ACCOUNTS_ENABLED="${STUDENT_ACCOUNTS_ENABLED:-false}"');
+		expect(deployScript).toContain('export STUDENT_RECORD_RETENTION_DAYS="${STUDENT_RECORD_RETENTION_DAYS:-}"');
+		expect(deployScript).toContain("never Mongo, session, OAuth, Vault, or diagnostics");
+		expect(deployScript).toContain('cat-file -t "v$cs_version"');
+		expect(deployScript).toContain('[[ "$(npm --version)" == "11.16.0" ]]');
+		expect(deployScript).toContain("cmp --silent \"$cs_source_artifact\" \"$cs_installed_artifact\"");
+		expect(deployScript).toContain("mv -Tf -- \"$cs_next_link\" \"$cs_link_name\"");
+		expect(deployScript).toContain("CS_SITE_ORIGIN=http://127.0.0.1:8080");
+		expect(deployScript).toContain("restore_previous");
+		expect(rollbackScript).toContain("restore_current");
+		expect(rollbackScript).toContain("buildConfig.STUDENT_ACCOUNTS_ENABLED");
+		expect(rollbackScript).toContain("CS_SITE_ORIGIN=http://127.0.0.1:8080");
+		expect(runtimePreflight).toContain('parsed.pathname !== "/cs-avasan-org"');
+		expect(runtimePreflight).toContain('parsed.searchParams.get("authSource") !== "cs-avasan-org"');
+		expect(runtimePreflight).toContain("changed without a frontend rebuild");
+		expect(documentation).toContain("do not run native and Compose CS stacks together.");
+		expect(documentation).toContain("30–365-day");
 	});
 
 	it("publishes one non-cacheable release identity for the site and API", () => {
@@ -113,14 +196,14 @@ describe("versioned full-stack production deployment", () => {
 			version: string;
 		};
 
-		expect(rootPackage.version).toBe("2.7.103");
-		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]103\}/g)).toHaveLength(2);
+		expect(rootPackage.version).toBe("2.7.104");
+		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]104\}/g)).toHaveLength(2);
 		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g)).toHaveLength(2);
 		expect(compose).not.toContain("SOURCE_REVISION:-unknown");
 		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
-		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.103");
+		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.104");
 		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
-		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.103");
+		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.104");
 		expect(apiDockerfile).toContain("ARG SOURCE_REVISION=unknown");
 		expect(frontendReleaseWriter).toContain("environment.COMMIT_REF?.trim()");
 		expect(frontendReleaseWriter).toContain("const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;");
@@ -129,6 +212,8 @@ describe("versioned full-stack production deployment", () => {
 		expect(netlify).toContain('for = "/release.json"');
 		expect(netlify).toContain('Cache-Control = "no-store"');
 		expect(server).toContain('app.get("/release"');
+		expect(server).toContain("app.use(apiNotFound);");
+		expect(server).toContain('mongoose.connection.db?.databaseName !== "cs-avasan-org"');
 		expect(server).toContain('res.set("Cache-Control", "no-store")');
 		expect(productionSmoke).toContain('releaseMetadata("/release.json")');
 		expect(productionSmoke).toContain('releaseMetadata("/api/release")');
@@ -142,6 +227,8 @@ describe("versioned full-stack production deployment", () => {
 		expect(productionSmoke).toContain('event: "__deployment-probe-invalid"');
 		expect(productionSmoke).toContain("response details were not logged");
 		expect(productionSmoke).toContain('currentSmokePhase = "security headers"');
+		expect(productionSmoke).toContain("verifyApiNotFound");
+		expect(productionSmoke).toContain("duplicate Content-Security-Policy headers");
 		expect(productionSmoke).not.toContain("smokeErrorMessage");
 		expect(productionSmoke).toContain('adminRedirect.headers.get("location") === "/admin/"');
 		expect(productionSmoke).toContain('"/games/pond-paddlers"');

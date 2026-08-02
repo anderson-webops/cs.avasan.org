@@ -1,0 +1,165 @@
+map $args $cs_avasan_bluej_redirect_args {
+	"" "mode=bluej";
+	~(^|&)mode= $args;
+	default "mode=bluej&$args";
+}
+
+server {
+	listen 80;
+	listen [::]:80;
+	server_name cs.avasan.org;
+	access_log off;
+	return 301 https://cs.avasan.org$request_uri;
+}
+
+server {
+	listen 443 ssl;
+	listen [::]:443 ssl;
+	# HTTP/2 shares the TLS listener. HTTP/3 uses the server's existing QUIC
+	# socket; another dual-stack vhost may own the one reuseport declaration.
+	listen 443 quic;
+	listen [::]:443 quic;
+	http2 on;
+	http3 on;
+	quic_retry on;
+	# This loopback listener lets the release gate exercise the complete Nginx
+	# and API boundary without relying on DNS hairpin routing.
+	listen 127.0.0.1:8080;
+	server_name cs.avasan.org;
+
+	ssl_certificate /etc/letsencrypt/live/cs.avasan.org/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/cs.avasan.org/privkey.pem;
+
+	root /srv/cs.avasan.org/current/public;
+	index index.html;
+	absolute_redirect off;
+	server_tokens off;
+	access_log off;
+	client_max_body_size 80m;
+	error_page 404 =404 /404.html;
+
+	location = /api {
+		error_page 404 = @cs_avasan_api_not_found;
+		return 404;
+	}
+
+	location @cs_avasan_api_not_found {
+		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
+		add_header Cache-Control "no-store" always;
+		default_type application/json;
+		return 404 '{"message":"Not found"}';
+	}
+
+	location /api/ {
+		proxy_pass http://127.0.0.1:3008/;
+		proxy_http_version 1.1;
+		proxy_intercept_errors off;
+		proxy_buffering off;
+		proxy_request_buffering off;
+		proxy_read_timeout 120s;
+		proxy_send_timeout 120s;
+		proxy_set_header Connection "";
+		proxy_set_header Host cs.avasan.org;
+		proxy_set_header X-Forwarded-For $remote_addr;
+		proxy_set_header X-Forwarded-Host cs.avasan.org;
+		proxy_set_header X-Forwarded-Proto https;
+
+		# Helmet protects the private Node listener. Nginx owns the one public
+		# header profile, so none of Helmet's overlapping headers are forwarded.
+		proxy_hide_header Content-Security-Policy;
+		proxy_hide_header Cross-Origin-Opener-Policy;
+		proxy_hide_header Cross-Origin-Resource-Policy;
+		proxy_hide_header Origin-Agent-Cluster;
+		proxy_hide_header Referrer-Policy;
+		proxy_hide_header Strict-Transport-Security;
+		proxy_hide_header X-Content-Type-Options;
+		proxy_hide_header X-DNS-Prefetch-Control;
+		proxy_hide_header X-Download-Options;
+		proxy_hide_header X-Frame-Options;
+		proxy_hide_header X-Permitted-Cross-Domain-Policies;
+		proxy_hide_header X-Powered-By;
+		proxy_hide_header X-XSS-Protection;
+		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
+	}
+
+	location = /index.html {
+		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
+		add_header Cache-Control "no-cache, no-store, must-revalidate" always;
+		try_files $uri =404;
+	}
+
+	location = /release.json {
+		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
+		add_header Cache-Control "no-store" always;
+		default_type application/json;
+		try_files $uri =404;
+	}
+
+	location = /404.html {
+		internal;
+		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
+		add_header Cache-Control "no-cache, no-store, must-revalidate" always;
+		try_files $uri =404;
+	}
+
+	# Graph Sketcher belongs only to math.avasan.org, even if a stale artifact
+	# is accidentally copied into a release.
+	location = /graph-sketcher { return 404; }
+	location ^~ /graph-sketcher/ { return 404; }
+	location = /graph-sketcher.html { return 404; }
+	location = /licenses/graphsketcher-omni-source-license.txt { return 404; }
+	location ~* ^/assets/[^/]*graph-?sketcher[^/]*$ { return 404; }
+
+	location = /ide {
+		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
+		return 301 /ide/$is_args$args;
+	}
+	location = /ide.html {
+		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
+		return 301 /ide/$is_args$args;
+	}
+	location ^~ /ide/ {
+		include /etc/nginx/snippets/cs-avasan-ide-security-headers.conf;
+		try_files $uri $uri/ =404;
+	}
+
+	location ^~ /python-ide/assets/ {
+		include /etc/nginx/snippets/cs-avasan-ide-security-headers.conf;
+		try_files $uri =404;
+	}
+	location = /python-ide {
+		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
+		return 301 /ide/$is_args$args;
+	}
+	location = /python-ide.html {
+		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
+		return 301 /ide/$is_args$args;
+	}
+	location = /python-ide/ {
+		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
+		return 301 /ide/$is_args$args;
+	}
+	location = /bluej {
+		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
+		return 301 /ide/?$cs_avasan_bluej_redirect_args;
+	}
+	location = /bluej.html {
+		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
+		return 301 /ide/?$cs_avasan_bluej_redirect_args;
+	}
+	location = /bluej/ {
+		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
+		return 301 /ide/?$cs_avasan_bluej_redirect_args;
+	}
+
+	location ~* \.(?:css|gif|ico|jpe?g|js|mjs|png|svg|webp|woff2?)$ {
+		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
+		add_header Cache-Control "public, max-age=31536000, immutable" always;
+		try_files $uri =404;
+	}
+
+	location / {
+		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
+		try_files $uri $uri/ =404;
+	}
+}

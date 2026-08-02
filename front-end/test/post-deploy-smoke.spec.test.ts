@@ -5,8 +5,13 @@ import {
 	parseExpectedBoolean,
 	readSmokeJson,
 	validateContentSecurityPolicy,
+	verifyApiNotFound,
 	verifyBrandedNotFound
 } from "../../scripts/post-deploy-smoke.mjs";
+import {
+	nativePublicEnvironment,
+	nativeReleaseManifest
+} from "../../scripts/write-native-release-manifest.mjs";
 
 const repositoryRoot = resolve(import.meta.dirname, "../..");
 const nginxSource = readFileSync(
@@ -47,6 +52,28 @@ const codeIdePolicy = requiredPolicy(
 );
 
 describe("production smoke feature expectations", () => {
+	it("builds a secret-free native public configuration", () => {
+		const manifest = nativeReleaseManifest({
+			CLASSROOM_PRIVACY_APPROVED: "false",
+			CS_RELEASE_VERSION: "2.7.104",
+			MONGODB_URI: "mongodb://secret-value",
+			SESSION_SECRET: "secret-value",
+			SOURCE_REVISION: "a".repeat(40),
+			STUDENT_ACCOUNTS_ENABLED: "false"
+		});
+		const environment = nativePublicEnvironment(manifest);
+
+		expect(environment).toContain('CLASSROOM_PRIVACY_APPROVED="false"');
+		expect(environment).toContain('STUDENT_ACCOUNTS_ENABLED="false"');
+		expect(environment).not.toContain("MONGODB_URI");
+		expect(environment).not.toContain("SESSION_SECRET");
+		expect(environment).not.toContain("secret-value");
+		expect(() => nativePublicEnvironment({
+			...manifest,
+			buildConfig: { ...manifest.buildConfig, SCHOOL_PRIVACY_CONTACT: "line one\nline two" }
+		})).toThrow("must stay on one line");
+	});
+
 	it("defaults omitted feature expectations to disabled", () => {
 		expect(parseExpectedBoolean(undefined, "FEATURE")).toBe(false);
 	});
@@ -131,9 +158,11 @@ describe("production smoke feature expectations", () => {
 				new Response(
 					'<main data-site-error-page="not-found"><h1>Page not found</h1><a>View courses</a></main>',
 					{
-						headers: {
+							headers: {
 							"Content-Security-Policy": standardPolicy,
 							"Content-Type": "text/html; charset=utf-8",
+							"Cross-Origin-Opener-Policy": "same-origin",
+							"Cross-Origin-Resource-Policy": "same-origin",
 							"Permissions-Policy": "camera=(), geolocation=(), microphone=()",
 							"Referrer-Policy": "no-referrer",
 							"Strict-Transport-Security": "max-age=31536000; includeSubDomains",
@@ -146,6 +175,49 @@ describe("production smoke feature expectations", () => {
 				"/login"
 			)
 		).resolves.toBeUndefined();
+	});
+
+	it("requires unknown API paths to return JSON and rejects duplicate headers", async () => {
+		const response = (duplicateHeader: string[] = [standardPolicy]) => ({
+			headers: {
+				get: (name: string) => {
+					const values: Record<string, string | null> = {
+						"cache-control": "no-store",
+						"content-security-policy": duplicateHeader.join(", "),
+						"content-type": "application/json; charset=utf-8",
+						"cross-origin-opener-policy": "same-origin",
+						"cross-origin-resource-policy": "same-origin",
+						"permissions-policy": "camera=(), geolocation=(), microphone=()",
+						"referrer-policy": "no-referrer",
+						"strict-transport-security": "max-age=31536000; includeSubDomains",
+						"x-content-type-options": "nosniff",
+						"x-frame-options": "DENY"
+					};
+					return values[name.toLowerCase()] ?? null;
+				},
+				getAll: (name: string) => name.toLowerCase() === "content-security-policy"
+					? duplicateHeader
+					: []
+			},
+			json: async () => ({ message: "Not found" }),
+			status: 404
+		});
+
+		// Populate single-value arrays for every required non-CSP header.
+		const valid = response();
+		const originalGetAll = valid.headers.getAll;
+		valid.headers.getAll = (name: string) => {
+			const value = valid.headers.get(name);
+			return name.toLowerCase() === "content-security-policy"
+				? originalGetAll(name)
+				: (value === null ? [] : [value]);
+		};
+		await expect(verifyApiNotFound(valid, "/api/missing"))
+			.resolves.toBeUndefined();
+
+		const duplicated = response([standardPolicy, standardPolicy]);
+		await expect(verifyApiNotFound(duplicated, "/api/missing"))
+			.rejects.toThrow("duplicate Content-Security-Policy");
 	});
 
 	it("keeps every former CS Graph Sketcher route explicitly retired", () => {

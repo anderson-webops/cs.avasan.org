@@ -10,6 +10,7 @@ import { enforceClassroomAnalyticsRetention } from "./controllers/classroomAnaly
 import { requireStudentContext, validAdmin, validStudent } from "./middleware/auth.js";
 import { requireClassroomRequest } from "./middleware/classroomRequest.js";
 import { readInternalDiagnosticsKey, requireInternalDiagnostics } from "./middleware/internalDiagnostics.js";
+import { apiNotFound } from "./middleware/notFound.js";
 import { createProjectJsonParser, createProjectPayloadConcurrencyGuard } from "./middleware/projectPayload.js";
 import {
 	createHeavyProjectPayloadLimiter,
@@ -235,6 +236,9 @@ async function main() {
 	const mongoUri = mongoConnection.uri;
 
 	await mongoose.connect(mongoUri);
+	if (mongoose.connection.db?.databaseName !== "cs-avasan-org") {
+		throw new Error("The classroom API requires its fork-specific database.");
+	}
 	await Promise.all([
 		Admin.init(),
 		ClassroomUsageDaily.init(),
@@ -290,6 +294,10 @@ async function main() {
 		studentOAuthEnabled: classroomPrivacy.studentOAuthEnabled,
 		studentRecordRetentionDays: classroomPrivacy.studentRecordRetentionDays
 	});
+
+	// Do not fall through to Express's stock HTML error document. Public page
+	// misses are branded by Nginx, but the same-origin API always speaks JSON.
+	app.use(apiNotFound);
 
 	const PORT = Number(env.PORT || 3008);
 	const HOST = env.HOST || env.BACKEND_HOST || "127.0.0.1";
