@@ -18,6 +18,16 @@ including:
   purpose; the operator still remains responsible for its own COPPA duties and
   must give the school the required direct notice, review, deletion, and
   stop-collection controls;
+- the FTC's current
+  [COPPA compliance plan](https://www.ftc.gov/business-guidance/resources/childrens-online-privacy-protection-rule-six-step-compliance-plan-your-business).
+  The authorized reviewer must confirm that the public notice identifies every
+  operator and its contact information, explains the collection and use, states
+  the purpose, business need, and deletion timeframe for each retained category,
+  and describes the applicable review and deletion rights. The operator must
+  also maintain the required written information-security and
+  retention-and-deletion programs and obtain the required written assurances
+  from service providers or other third parties that receive covered
+  information;
 - the U.S. Department of Education's
   [online classroom tool guidance](https://studentprivacy.ed.gov/faq/i-want-use-online-tool-or-application-part-my-course-however-i-am-worried-it-violation-ferpa)
   and [FERPA school-official criteria](https://studentprivacy.ed.gov/faq/who-school-official-under-ferpa).
@@ -56,13 +66,21 @@ student-data feature until all of the following are complete:
    the provider notice naming each approved infrastructure or identity
    provider, its limited purpose, and the student information it handles. Do
    not invent either notice.
-4. The public `/student-privacy` page has been built with the contact and both
-   notices and reviewed in the deployed site.
-5. For accounts, the authorized reviewer has selected a whole-number record
+4. The operator has documented the applicable written information-security and
+   retention-and-deletion programs. The retention program states the purpose,
+   business need, and deletion timeframe for each retained category, and those
+   details have been reviewed against the public notice.
+5. The operator has obtained and retained the required written confidentiality,
+   security, and integrity assurances from every approved service provider or
+   other third party that receives covered student information.
+6. The public `/student-privacy` page has been built with the contact and both
+   notices, accurately states the approved purposes and deletion timeframes,
+   and has been reviewed in the deployed site.
+7. For accounts, the authorized reviewer has selected a whole-number record
    retention period from 30 through 365 days. There is no application default.
-6. The school or district has supplied its record-access, correction, export,
+8. The school or district has supplied its record-access, correction, export,
    deletion, backup, security-log, and end-of-service retention process.
-7. Julio understands that anonymous totals are directional signals, not
+9. Julio understands that anonymous totals are directional signals, not
    attendance, grades, or evidence about an individual student.
 
 The backend requires `CLASSROOM_PRIVACY_APPROVED=true`,
