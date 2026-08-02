@@ -427,7 +427,8 @@ describe("versioned full-stack production deployment", () => {
 		expect(readme).toMatch(/before the deployment\s+timer records success/);
 		expect(readme).toContain("must fail without recording success");
 		expect(readme).toContain("http://127.0.0.1:8080/ide/");
-		expect(readme).toContain("remove any host-side static");
+		expect(readme).toContain("Use the proxy-only example for Compose");
+		expect(readme).toContain("same-release native Nginx artifacts");
 		expect(readme).toMatch(/do not record the\s+deployment as successful/);
 		expect(environmentVerifier).toContain("permissions must be 600");
 		expect(mongoInit).toContain('{ role: "readWrite", db: applicationDatabaseName }');

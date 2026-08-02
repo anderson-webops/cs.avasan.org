@@ -36,6 +36,20 @@ deliberately simplified downstream adaptation of
   private account and optional student project sync.
 - `HEALTHCHECKS.md` documents service health and readiness endpoints.
 
+## Production Deployment Authority
+
+Native Nginx and systemd are the canonical automatic production path for this
+repository. A server poller must explicitly invoke `npm run deploy:native` from
+a clean checkout at the exact annotated release tag; it must not choose a
+deployment mode merely because Dockerfiles or `compose.production.yml` exist.
+That command builds and preflights the candidate before atomically activating
+it, runs the full loopback production gate, and restores the last healthy
+release on failure.
+
+Compose remains available only when an operator deliberately selects the
+container-isolated fallback. It is also exercised as a full-stack CI fixture.
+Do not run the native and Compose stacks at the same time.
+
 ## Access Model
 
 The five current courses are public at `/`, and the browser IDE is public at
@@ -216,7 +230,7 @@ Set `CLASSROOM_PRIVACY_APPROVED=true`, `SCHOOL_PRIVACY_CONTACT`,
 `CLASSROOM_PRIVACY_OPERATOR_NOTICE`, `CLASSROOM_SERVICE_PROVIDER_NOTICE`,
 `STUDENT_ACCOUNTS_ENABLED=true`, and a reviewed 30–365-day
 `STUDENT_RECORD_RETENTION_DAYS` only after the rollout checklist is complete.
-Production Compose derives the frontend approval and feature switches directly
+The Compose fallback derives the frontend approval and feature switches directly
 from those canonical backend values and maps the same contact, notices, and
 retention setting into the build. This prevents a live API with hidden controls
 or visible controls with a disabled API. Missing or invalid prerequisites keep
@@ -263,7 +277,7 @@ game service is required.
 
 ## Reproducible Production Deployment
 
-The preferred non-Docker handoff is documented in
+The canonical automatic non-Docker handoff is documented in
 [`docs/native-production-deployment.md`](docs/native-production-deployment.md).
 It builds immutable frontend/backend releases, runs one hardened systemd API,
 serves the public site and custom 404 directly from Nginx, verifies the full
@@ -272,7 +286,8 @@ on failure. Its API environment remains fork-specific and never gives the web
 service Mongo root credentials. The native runtime preflight also prevents
 privacy or feature flags from drifting away from the frontend build.
 
-The Compose handoff below remains a supported container-isolated alternative.
+The Compose handoff below remains a manually selected container-isolated
+fallback and a production-shaped CI fixture.
 Do not run the native and Compose stacks at the same time.
 
 [`compose.production.yml`](compose.production.yml) builds this repository's
@@ -292,15 +307,15 @@ configuration:
 - serves only generated public routes and returns the branded classroom error
   page with a real 404 response for unknown paths.
 
-Every frontend build also writes `/release.json`. The full-stack container
-serves that file and `/api/release` with `Cache-Control: no-store`; both expose
-only the semantic `version` and `revision`. They must agree because the
-frontend and API are built from the same checkout. The authoritative
-`compose.production.yml` handoff refuses to build unless `SOURCE_REVISION` is
+Every frontend build also writes `/release.json`. The fallback full-stack
+container serves that file and `/api/release` with `Cache-Control: no-store`;
+both expose only the semantic `version` and `revision`. They must agree because
+the frontend and API are built from the same checkout. When Compose is explicitly
+selected, `compose.production.yml` refuses to build unless `SOURCE_REVISION` is
 the exact full commit SHA being deployed. Direct Dockerfile and static-preview
 builds may still report `"revision": "unknown"` when no revision is supplied;
-that fallback is not permitted by the production Compose path. Inject the
-deployment identity without changing application secrets:
+that identity fallback is not permitted by the production Compose path. Inject
+the deployment identity without changing application secrets:
 
 ```bash
 export CS_RELEASE_VERSION=2.7.106
@@ -313,7 +328,7 @@ Compose fails before building. Netlify uses its built-in full `COMMIT_REF` when
 `SOURCE_REVISION` is absent. Neither release endpoint reports classroom flags,
 student state, credentials, or infrastructure data.
 
-To prepare a deployment:
+To exercise or prepare the manually selected Compose fallback:
 
 ```bash
 install -m 600 deploy/cs.env.example deploy/cs.env
@@ -356,14 +371,16 @@ silently falls back to the environment URI. A remote production Vault origin
 must use HTTPS. Vault redirects are refused, and login and secret responses are
 bounded before JSON parsing.
 Adapt [`deploy/host-nginx.conf.example`](deploy/host-nginx.conf.example) to the
-existing TLS host; it replaces forwarding headers and proxies only to the
-loopback container port. This proxy-only vhost and `compose.production.yml`
-are the single supported production handoff for `cs.avasan.org`. Do not serve
-a copied frontend build, add a host-side `root` or `try_files`, or duplicate
-route and cache policy outside the immutable web image. The container
-configuration is the sole owner of branded, strict unknown-route 404 responses,
-relative directory redirects, release headers, and same-origin `/api/*`
-routing; the outer proxy explicitly leaves upstream redirects unchanged.
+existing TLS host only when Compose has been deliberately selected; it replaces
+forwarding headers and proxies only to the loopback container port. In that
+fallback mode, this proxy-only vhost and `compose.production.yml` form the
+complete handoff. Do not serve a copied frontend build, add a host-side `root`
+or `try_files`, or duplicate route and cache policy outside the immutable web
+image. The container configuration then owns branded, strict unknown-route 404
+responses, relative directory redirects, release headers, and same-origin
+`/api/*` routing; the outer proxy explicitly leaves upstream redirects
+unchanged. The canonical native path instead uses the same-release artifacts
+under `deploy/native/` and the native runbook.
 
 Once the new stack is reachable through the proxy, but before the deployment
 timer records success, run the mandatory production gate from that exact
@@ -412,8 +429,8 @@ frontend build packages the reviewed IDE asset manifest; the backend
 does not stream an upstream asset archive at runtime.
 
 If the external gate reports a security-header or public-route failure while
-the release identities already match, compare the loopback web container with
-the public edge before changing application code:
+the release identities already match, compare the selected handoff's loopback
+listener with the public edge before changing application code:
 
 ```bash
 curl --silent --show-error --head http://127.0.0.1:8080/
@@ -422,11 +439,14 @@ curl --silent --show-error --head http://127.0.0.1:8080/admin
 curl --silent --show-error --include http://127.0.0.1:8080/login
 ```
 
-If loopback is stale, rebuild and recreate only the `web` service from the
-exact release checkout. If loopback is correct, remove any host-side static
-root, CSP override, redirect rewriting, or hidden upstream security header and
-replace the outer vhost with the proxy-only example. Validate and reload the
-host Nginx configuration, then rerun the full external gate; do not record the
+For the Compose fallback, a stale loopback means rebuilding and recreating only
+the `web` service from the exact release checkout. For native production, rerun
+`npm run deploy:native` from the exact tagged checkout and let its atomic
+rollback preserve the prior release. If loopback is correct, remove any
+conflicting host-side static root, CSP override, redirect rewriting, or hidden
+upstream security header. Use the proxy-only example for Compose or the
+same-release native Nginx artifacts for native production. Validate and reload
+the host Nginx configuration, then rerun the full external gate; do not record the
 deployment as successful based only on matching release metadata.
 
 Project quota counters are rebuilt from non-deleted projects before the API
@@ -437,11 +457,11 @@ drift before accepting traffic.
 
 Student record deletion uses an in-process operation gate to drain project,
 review, export, account-management, and provider-link work before its database
-sweep. The supplied Compose deployment therefore fixes the API to one named
-container and intentionally cannot be scaled with `docker compose --scale`.
-Do not remove that single-process boundary or run another API instance against
-this database unless the operation gate is first replaced with a tested
-database-distributed implementation.
+sweep. Native production therefore runs one systemd API process. The Compose
+fallback likewise fixes the API to one named container and intentionally cannot
+be scaled with `docker compose --scale`. Do not remove that single-process
+boundary or run another API instance against this database unless the operation
+gate is first replaced with a tested database-distributed implementation.
 
 Authenticated project writes use a dedicated 80 MB JSON ceiling before the
 global 1 MB parser. This covers worst-case JSON escaping at the editor's
