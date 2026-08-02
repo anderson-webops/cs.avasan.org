@@ -3,7 +3,8 @@ import {
 	answerPondPaddlersQuestion,
 	connectPondPaddlersEvents,
 	joinPondPaddlersRoom,
-	parsePondPaddlersEvent
+	parsePondPaddlersEvent,
+	resumePondPaddlersRoom
 } from "@/modules/pondPaddlers";
 
 class FakeEventSource {
@@ -76,6 +77,71 @@ describe("Pond Paddlers client", () => {
 				cache: "no-store",
 				credentials: "same-origin",
 				method: "POST"
+			})
+		);
+	});
+
+	it("accepts a waiting-room join without exposing a question", async () => {
+		vi.stubGlobal(
+			"fetch",
+			vi.fn().mockResolvedValue(
+				new Response(
+					JSON.stringify({
+						alias: "Sunny Mallard",
+						calmMode: true,
+						expiresAt: "2026-08-02T00:00:00.000Z",
+						question: null,
+						resumed: false,
+						state: {
+							finishAt: 10,
+							players: [
+								{ alias: "Sunny Mallard", progress: 0 }
+							],
+							status: "waiting"
+						}
+					}),
+					{ status: 201 }
+				)
+			)
+		);
+
+		await expect(joinPondPaddlersRoom("ABCD2345")).resolves.toMatchObject({
+			question: null,
+			state: { status: "waiting" }
+		});
+	});
+
+	it("resumes only an existing private seat through the read-only handoff", async () => {
+		const fetchMock = vi.fn().mockResolvedValue(
+			new Response(
+				JSON.stringify({
+					alias: "Sunny Mallard",
+					calmMode: true,
+					expiresAt: "2026-08-02T00:00:00.000Z",
+					question: { prompt: "8 ÷ 2", questionID: "question-start" },
+					resumed: true,
+					state: {
+						finishAt: 10,
+						players: [{ alias: "Sunny Mallard", progress: 0 }],
+						status: "racing"
+					}
+				}),
+				{ status: 200 }
+			)
+		);
+		vi.stubGlobal("fetch", fetchMock);
+
+		await expect(resumePondPaddlersRoom(" abcd2345 ")).resolves.toMatchObject({
+			question: { questionID: "question-start" },
+			resumed: true,
+			roomCode: "ABCD2345"
+		});
+		expect(fetchMock).toHaveBeenCalledWith(
+			"/api/pond-paddlers/rooms/ABCD2345/resume",
+			expect.objectContaining({
+				cache: "no-store",
+				credentials: "same-origin",
+				method: "GET"
 			})
 		);
 	});

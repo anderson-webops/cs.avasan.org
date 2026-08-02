@@ -5,7 +5,8 @@ import PondPaddlersAdmin from "@/components/PondPaddlersAdmin.vue";
 import {
 	closePondPaddlersRoom,
 	createPondPaddlersRoom,
-	listPondPaddlersRooms
+	listPondPaddlersRooms,
+	startPondPaddlersRoom
 } from "@/modules/pondPaddlersAdmin";
 
 vi.mock("@/modules/pondPaddlersAdmin", async importOriginal => {
@@ -16,7 +17,8 @@ vi.mock("@/modules/pondPaddlersAdmin", async importOriginal => {
 		...original,
 		closePondPaddlersRoom: vi.fn(),
 		createPondPaddlersRoom: vi.fn(),
-		listPondPaddlersRooms: vi.fn()
+		listPondPaddlersRooms: vi.fn(),
+		startPondPaddlersRoom: vi.fn()
 	};
 });
 
@@ -45,6 +47,7 @@ describe("PondPaddlersAdmin", () => {
 		vi.mocked(listPondPaddlersRooms).mockResolvedValue([room]);
 		vi.mocked(createPondPaddlersRoom).mockResolvedValue(room);
 		vi.mocked(closePondPaddlersRoom).mockResolvedValue(undefined);
+		vi.mocked(startPondPaddlersRoom).mockResolvedValue(room);
 		Object.defineProperty(navigator, "clipboard", {
 			configurable: true,
 			value: { writeText: vi.fn().mockResolvedValue(undefined) }
@@ -78,6 +81,90 @@ describe("PondPaddlersAdmin", () => {
 			operations: ["add", "subtract", "multiply", "divide"]
 		});
 		expect(wrapper.text()).toContain("Room ABCD2345 is ready.");
+	});
+
+	it("keeps Start available and surfaces the fixed no-paddlers response", async () => {
+		vi.mocked(listPondPaddlersRooms).mockResolvedValue([
+			{ ...room, playerCount: 0, status: "waiting" }
+		]);
+		vi.mocked(startPondPaddlersRoom).mockRejectedValue({
+			response: {
+				data: {
+					message:
+						"At least one paddler must join before the race starts."
+				},
+				status: 409
+			}
+		});
+		const wrapper = mount(PondPaddlersAdmin);
+		await flushPromises();
+
+		const startButton = wrapper.get('[aria-label="Start race ABCD2345"]');
+		expect(startButton.attributes("disabled")).toBeUndefined();
+		expect(wrapper.text()).toContain("Lobby open");
+		expect(wrapper.text()).toContain("0 paddlers");
+		await startButton.trigger("click");
+		await flushPromises();
+		expect(startPondPaddlersRoom).toHaveBeenCalledWith("ABCD2345");
+		expect(wrapper.get('[role="alert"]').text()).toBe(
+			"At least one paddler must join before the race starts."
+		);
+	});
+
+	it("starts a newly created room after an external join without Refresh", async () => {
+		const createdRoom = {
+			...room,
+			playerCount: 0,
+			status: "waiting" as const
+		};
+		vi.mocked(listPondPaddlersRooms).mockResolvedValue([]);
+		vi.mocked(createPondPaddlersRoom).mockResolvedValue(createdRoom);
+		vi.mocked(startPondPaddlersRoom).mockResolvedValue({
+			...room,
+			playerCount: 1
+		});
+		const wrapper = mount(PondPaddlersAdmin);
+		await flushPromises();
+
+		await wrapper.get("form").trigger("submit");
+		await flushPromises();
+		const startButton = wrapper.get('[aria-label="Start race ABCD2345"]');
+		expect(startButton.attributes("disabled")).toBeUndefined();
+
+		await startButton.trigger("click");
+		await flushPromises();
+		expect(listPondPaddlersRooms).toHaveBeenCalledTimes(1);
+		expect(startPondPaddlersRoom).toHaveBeenCalledWith("ABCD2345");
+		expect(wrapper.text()).toContain("1 paddler");
+		expect(wrapper.text()).toContain("Race in progress");
+	});
+
+	it("starts a waiting room and moves focus to the live notice", async () => {
+		const waitingRoom = { ...room, status: "waiting" as const };
+		vi.mocked(listPondPaddlersRooms).mockResolvedValue([waitingRoom]);
+		vi.mocked(startPondPaddlersRoom).mockResolvedValue(room);
+		const wrapper = mount(PondPaddlersAdmin, { attachTo: document.body });
+		await flushPromises();
+
+		try {
+			const startButton = wrapper.get(
+				'[aria-label="Start race ABCD2345"]'
+			);
+			expect(startButton.attributes("aria-describedby")).toBe(
+				"pond-room-details-ABCD2345"
+			);
+			await startButton.trigger("click");
+			await flushPromises();
+
+			expect(startPondPaddlersRoom).toHaveBeenCalledWith("ABCD2345");
+			expect(wrapper.text()).toContain("Race ABCD2345 has started.");
+			expect(wrapper.text()).toContain("Race in progress");
+			expect(document.activeElement).toBe(
+				wrapper.get(".pond-admin__notice").element
+			);
+		} finally {
+			wrapper.unmount();
+		}
 	});
 
 	it("requires a second action before closing an active room", async () => {
