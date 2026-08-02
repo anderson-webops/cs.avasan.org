@@ -3,7 +3,8 @@ import { api } from "@/api";
 import {
 	closePondPaddlersRoom,
 	createPondPaddlersRoom,
-	listPondPaddlersRooms
+	listPondPaddlersRooms,
+	startPondPaddlersRoom
 } from "@/modules/pondPaddlersAdmin";
 
 vi.mock("@/api", () => ({
@@ -59,6 +60,24 @@ describe("Pond Paddlers Admin API", () => {
 			...settings,
 			operations: ["add", "subtract"]
 		});
+	});
+
+	it("starts a room through Julio's Admin API", async () => {
+		vi.mocked(api.post).mockResolvedValueOnce({
+			data: {
+				room: { ...room, playerCount: 3, status: "racing" },
+				started: true
+			}
+		});
+
+		await expect(startPondPaddlersRoom("ABCD/2345")).resolves.toMatchObject({
+			playerCount: 3,
+			status: "racing"
+		});
+		expect(api.post).toHaveBeenCalledWith(
+			"/pond-paddlers/rooms/ABCD%2F2345/start",
+			{}
+		);
 	});
 
 	it("encodes the room code when Julio closes it", async () => {

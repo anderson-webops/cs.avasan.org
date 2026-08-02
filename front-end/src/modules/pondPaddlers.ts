@@ -21,7 +21,7 @@ export interface PondPaddlersJoinResult {
 	alias: string;
 	calmMode: boolean;
 	expiresAt: string;
-	question: PondPaddlersQuestion;
+	question: PondPaddlersQuestion | null;
 	resumed: boolean;
 	roomCode: string;
 	state: PondPaddlersPublicState;
@@ -151,6 +151,27 @@ function requestHeaders(): HeadersInit {
 	};
 }
 
+function normalizeJoinResult(
+	payload: unknown,
+	roomCode: string
+): PondPaddlersJoinResult {
+	if (!isRecord(payload))
+		throw new Error("Pond Paddlers returned an invalid room.");
+
+	return {
+		alias: requiredString(payload.alias, "alias"),
+		calmMode: payload.calmMode === true,
+		expiresAt: requiredString(payload.expiresAt, "expiresAt"),
+		question:
+			payload.question === null
+				? null
+				: normalizeQuestion(payload.question),
+		resumed: payload.resumed === true,
+		roomCode,
+		state: normalizeState(payload.state)
+	};
+}
+
 export async function joinPondPaddlersRoom(
 	roomCode: string,
 	signal?: AbortSignal
@@ -168,19 +189,27 @@ export async function joinPondPaddlersRoom(
 	);
 	if (!response.ok) throw await errorForResponse(response);
 
-	const payload = (await response.json()) as unknown;
-	if (!isRecord(payload))
-		throw new Error("Pond Paddlers returned an invalid room.");
+	return normalizeJoinResult((await response.json()) as unknown, code);
+}
 
-	return {
-		alias: requiredString(payload.alias, "alias"),
-		calmMode: payload.calmMode === true,
-		expiresAt: requiredString(payload.expiresAt, "expiresAt"),
-		question: normalizeQuestion(payload.question),
-		resumed: payload.resumed === true,
-		roomCode: code,
-		state: normalizeState(payload.state)
-	};
+export async function resumePondPaddlersRoom(
+	roomCode: string,
+	signal?: AbortSignal
+): Promise<PondPaddlersJoinResult> {
+	const code = normalizedRoomCode(roomCode);
+	const response = await globalThis.fetch(
+		`/api/pond-paddlers/rooms/${encodeURIComponent(code)}/resume`,
+		{
+			cache: "no-store",
+			credentials: "same-origin",
+			headers: { "X-Classroom-Request": "1" },
+			method: "GET",
+			signal
+		}
+	);
+	if (!response.ok) throw await errorForResponse(response);
+
+	return normalizeJoinResult((await response.json()) as unknown, code);
 }
 
 export async function answerPondPaddlersQuestion(

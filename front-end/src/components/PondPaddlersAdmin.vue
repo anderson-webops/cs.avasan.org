@@ -9,7 +9,8 @@ import {
 	closePondPaddlersRoom,
 	createPondPaddlersRoom,
 	listPondPaddlersRooms,
-	POND_PADDLERS_OPERATIONS
+	POND_PADDLERS_OPERATIONS,
+	startPondPaddlersRoom
 } from "@/modules/pondPaddlersAdmin";
 import { useAppStore } from "@/stores/app";
 
@@ -25,12 +26,15 @@ const calmMode = ref(true);
 const loading = ref(true);
 const creating = ref(false);
 const closingRoomCode = ref("");
+const startingRoomCode = ref("");
 const confirmingClose = ref("");
 const error = ref("");
 const notice = ref("");
 const adminSection = ref<HTMLElement | null>(null);
 const closeTriggerRoomCode = ref("");
 const noticeElement = ref<HTMLElement | null>(null);
+const noPaddlersMessage =
+	"At least one paddler must join before the race starts.";
 
 const canCreate = computed(
 	() => operations.value.length > 0 && !creating.value
@@ -45,6 +49,24 @@ const operationLabels: Record<PondPaddlersOperation, string> = {
 
 function friendlyError(caught: unknown) {
 	if (clearAdminSessionOnAuthorizationError(caught, app)) return "";
+	if (
+		caught &&
+		typeof caught === "object" &&
+		"response" in caught &&
+		caught.response &&
+		typeof caught.response === "object"
+	) {
+		const response = caught.response as {
+			data?: { message?: unknown };
+			status?: unknown;
+		};
+		if (
+			response.status === 409 &&
+			response.data?.message === noPaddlersMessage
+		) {
+			return noPaddlersMessage;
+		}
+	}
 	return "Couldn’t update Pond Paddlers rooms. Please try again.";
 }
 
@@ -59,7 +81,7 @@ function formatTime(value: string) {
 }
 
 function statusLabel(status: PondPaddlersAdminRoom["status"]) {
-	if (status === "waiting") return "Waiting for paddlers";
+	if (status === "waiting") return "Lobby open";
 	if (status === "finished") return "Race finished";
 	return "Race in progress";
 }
@@ -108,6 +130,29 @@ async function copyRoomCode(roomCode: string) {
 		notice.value = `Copied room ${roomCode}.`;
 	} catch {
 		notice.value = `Room code: ${roomCode}`;
+	}
+}
+
+async function startRoom(roomCode: string) {
+	const room = rooms.value.find(candidate => candidate.roomCode === roomCode);
+	if (startingRoomCode.value || !room || room.status !== "waiting") {
+		return;
+	}
+	startingRoomCode.value = roomCode;
+	error.value = "";
+	notice.value = "";
+	try {
+		const updatedRoom = await startPondPaddlersRoom(roomCode);
+		rooms.value = rooms.value.map(room =>
+			room.roomCode === roomCode ? updatedRoom : room
+		);
+		notice.value = `Race ${roomCode} has started.`;
+		await nextTick();
+		noticeElement.value?.focus();
+	} catch (caught) {
+		error.value = friendlyError(caught);
+	} finally {
+		startingRoomCode.value = "";
 	}
 }
 
@@ -166,6 +211,7 @@ onMounted(loadRooms);
 				<h2 id="pond-admin-title">Pond Paddlers rooms</h2>
 				<p>
 					Create a private arithmetic race and give students its code.
+					Refresh the rooms to see how many are ready, then start.
 				</p>
 			</div>
 			<button
@@ -276,7 +322,10 @@ onMounted(loadRooms);
 					<span>Room code</span>
 					<strong>{{ room.roomCode }}</strong>
 				</div>
-				<div class="pond-admin__room-details">
+				<div
+					:id="`pond-room-details-${room.roomCode}`"
+					class="pond-admin__room-details"
+				>
 					<strong>{{ statusLabel(room.status) }}</strong>
 					<span>
 						{{ room.playerCount }} paddler<span
@@ -287,6 +336,20 @@ onMounted(loadRooms);
 					</span>
 				</div>
 				<div class="pond-admin__room-actions">
+					<button
+						v-if="room.status === 'waiting'"
+						:aria-describedby="`pond-room-details-${room.roomCode}`"
+						:aria-label="`Start race ${room.roomCode}`"
+						:disabled="Boolean(startingRoomCode)"
+						type="button"
+						@click="startRoom(room.roomCode)"
+					>
+						{{
+							startingRoomCode === room.roomCode
+								? "Starting…"
+								: "Start race"
+						}}
+					</button>
 					<button type="button" @click="copyRoomCode(room.roomCode)">
 						Copy code
 					</button>

@@ -11,13 +11,14 @@ import { validAdmin } from "../middleware/auth.js";
 import { requireClassroomRequest } from "../middleware/classroomRequest.js";
 import { ExactExpiryRateLimitStore } from "../security/exactExpiryRateLimitStore.js";
 import {
+	normalizePondPaddlersRoomCode,
 	POND_PADDLERS_OPERATIONS,
 	PondPaddlersError,
 	pondPaddlersSeatTokenDigest
 } from "../services/pondPaddlersRooms.js";
 
-export const POND_PADDLERS_PRODUCTION_SEAT_COOKIE = "__Host-pond-paddlers-seat";
-export const POND_PADDLERS_DEVELOPMENT_SEAT_COOKIE = "pond-paddlers-seat";
+export const POND_PADDLERS_PRODUCTION_SEAT_COOKIE_PREFIX = "__Host-pond-paddlers-seat-";
+export const POND_PADDLERS_DEVELOPMENT_SEAT_COOKIE_PREFIX = "pond-paddlers-seat-";
 const POND_PADDLERS_BODY_LIMIT = "4kb";
 const DEFAULT_ROOM_SETTINGS: PondPaddlersRoomSettings = {
 	calmMode: true,
@@ -38,6 +39,8 @@ const OPERATION_SET = new Set<string>(POND_PADDLERS_OPERATIONS);
 
 interface PondPaddlersRouteOptions {
 	heartbeatMs?: number;
+	resumeAddressLimit?: number;
+	resumeSeatLimit?: number;
 	secureCookies?: boolean;
 }
 
@@ -107,7 +110,7 @@ function parseAnswer(value: unknown): { answer: number; questionID: string } | n
 	};
 }
 
-function isEmptyJoinBody(value: unknown): boolean {
+function isEmptyRequestBody(value: unknown): boolean {
 	return value === undefined || (isRecord(value) && Object.keys(value).length === 0);
 }
 
@@ -144,19 +147,64 @@ function createJoinLimiter() {
 	});
 }
 
-function createAnswerSeatLimiter(cookieName: string) {
+export function pondPaddlersSeatCookieName(
+	roomCodeValue: unknown,
+	secure: boolean
+): string | null {
+	const roomCode = normalizePondPaddlersRoomCode(roomCodeValue);
+	if (!roomCode) return null;
+	return `${
+		secure
+			? POND_PADDLERS_PRODUCTION_SEAT_COOKIE_PREFIX
+			: POND_PADDLERS_DEVELOPMENT_SEAT_COOKIE_PREFIX
+	}${roomCode}`;
+}
+
+function seatDigestForRequest(req: Request, secureCookies: boolean) {
+	const cookieName = pondPaddlersSeatCookieName(
+		req.params.roomCode,
+		secureCookies
+	);
+	return cookieName
+		? pondPaddlersSeatTokenDigest(
+				readPondPaddlersSeatCookie(req, cookieName)
+			)
+		: null;
+}
+
+function createSeatLimiter(
+	secureCookies: boolean,
+	limit: number,
+	message: string
+) {
 	return rateLimit({
 		keyGenerator: (req) => {
-			const seatDigest = pondPaddlersSeatTokenDigest(readPondPaddlersSeatCookie(req, cookieName));
+			const seatDigest = seatDigestForRequest(req, secureCookies);
 			return seatDigest ? `seat:${seatDigest}` : `client:${clientAddress(req)}`;
 		},
 		legacyHeaders: false,
-		limit: 120,
-		message: { message: "Answer limit reached. Please wait and try again." },
+		limit,
+		message: { message },
 		standardHeaders: true,
 		store: new ExactExpiryRateLimitStore(),
 		windowMs: 60_000
 	});
+}
+
+function createAnswerSeatLimiter(secureCookies: boolean) {
+	return createSeatLimiter(
+		secureCookies,
+		120,
+		"Answer limit reached. Please wait and try again."
+	);
+}
+
+function createResumeSeatLimiter(secureCookies: boolean, limit: number) {
+	return createSeatLimiter(
+		secureCookies,
+		limit,
+		"Race seat refresh limit reached. Please wait and try again."
+	);
 }
 
 function createAnswerAddressLimiter() {
@@ -173,13 +221,29 @@ function createAnswerAddressLimiter() {
 	});
 }
 
+function createResumeAddressLimiter(limit: number) {
+	return rateLimit({
+		keyGenerator: clientAddress,
+		legacyHeaders: false,
+		// A classroom can refresh every private seat at once when Julio starts.
+		// This ceiling only bounds forged-cookie traffic from one address.
+		limit,
+		message: { message: "Race seat refresh limit reached. Please wait and try again." },
+		standardHeaders: true,
+		store: new ExactExpiryRateLimitStore(),
+		windowMs: 5 * 60 * 1000
+	});
+}
+
 function setSeatCookie(
 	res: Response,
-	cookieName: string,
+	roomCode: unknown,
 	seatToken: string,
 	expiresAt: string,
 	secure: boolean
 ): void {
+	const cookieName = pondPaddlersSeatCookieName(roomCode, secure);
+	if (!cookieName) throw new Error("Cannot set a seat cookie for an invalid room code.");
 	res.cookie(cookieName, seatToken, {
 		expires: new Date(expiresAt),
 		httpOnly: true,
@@ -209,6 +273,12 @@ function sendPondPaddlersError(error: unknown, res: Response): void {
 		case "invalid-settings":
 			res.status(400).json({ message: "Invalid race settings." });
 			return;
+		case "no-paddlers":
+			res.status(409).json({ message: "At least one paddler must join before the race starts." });
+			return;
+		case "not-started":
+			res.status(409).json({ message: "This race has not started yet." });
+			return;
 		case "question-changed":
 			res.status(409).json({ message: "The current question has changed." });
 			return;
@@ -217,6 +287,9 @@ function sendPondPaddlersError(error: unknown, res: Response): void {
 			return;
 		case "too-many-streams":
 			res.status(429).json({ message: "Too many race windows are open." });
+			return;
+		case "started":
+			res.status(409).json({ message: "This race has already started." });
 			return;
 		case "finished":
 		case "not-found":
@@ -243,12 +316,16 @@ export function createPondPaddlersRoutes(
 	const router = express.Router();
 	const heartbeatMs = options.heartbeatMs ?? 15_000;
 	const secureCookies = options.secureCookies ?? false;
-	const seatCookieName = secureCookies
-		? POND_PADDLERS_PRODUCTION_SEAT_COOKIE
-		: POND_PADDLERS_DEVELOPMENT_SEAT_COOKIE;
 	const joinLimiter = createJoinLimiter();
-	const answerSeatLimiter = createAnswerSeatLimiter(seatCookieName);
+	const answerSeatLimiter = createAnswerSeatLimiter(secureCookies);
 	const answerAddressLimiter = createAnswerAddressLimiter();
+	const resumeSeatLimiter = createResumeSeatLimiter(
+		secureCookies,
+		options.resumeSeatLimit ?? 30
+	);
+	const resumeAddressLimiter = createResumeAddressLimiter(
+		options.resumeAddressLimit ?? 3_000
+	);
 
 	router.use((_req, res, next) => {
 		res.setHeader("Cache-Control", "no-store");
@@ -276,6 +353,23 @@ export function createPondPaddlersRoutes(
 		res.json({ rooms: store.listRooms() });
 	});
 
+	router.post("/rooms/:roomCode/start", validAdmin, (req, res) => {
+		if (!isEmptyRequestBody(req.body)) {
+			res.status(400).json({ message: "Race starts do not accept additional settings." });
+			return;
+		}
+		try {
+			res.json(store.startRoom(req.params.roomCode));
+		}
+		catch (error) {
+			if (error instanceof PondPaddlersError && error.code === "finished") {
+				res.status(409).json({ message: "This race has already finished." });
+				return;
+			}
+			sendPondPaddlersError(error, res);
+		}
+	});
+
 	router.delete("/rooms/:roomCode", validAdmin, (req, res) => {
 		if (!store.closeRoom(req.params.roomCode)) {
 			res.status(404).json({ message: "Race unavailable." });
@@ -285,16 +379,28 @@ export function createPondPaddlersRoutes(
 	});
 
 	router.post("/rooms/:roomCode/join", joinLimiter, (req, res) => {
-		if (!isEmptyJoinBody(req.body)) {
+		if (!isEmptyRequestBody(req.body)) {
 			res.status(400).json({ message: "Race joins do not accept names or other text." });
 			return;
 		}
 		try {
+			const cookieName = pondPaddlersSeatCookieName(
+				req.params.roomCode,
+				secureCookies
+			);
 			const joined = store.joinRoom(
 				req.params.roomCode,
-				readPondPaddlersSeatCookie(req, seatCookieName)
+				cookieName
+					? readPondPaddlersSeatCookie(req, cookieName)
+					: null
 			);
-			setSeatCookie(res, seatCookieName, joined.seatToken, joined.expiresAt, secureCookies);
+			setSeatCookie(
+				res,
+				req.params.roomCode,
+				joined.seatToken,
+				joined.expiresAt,
+				secureCookies
+			);
 			const { seatToken: _seatToken, ...response } = joined;
 			res.status(joined.resumed ? 200 : 201).json(response);
 		}
@@ -302,6 +408,31 @@ export function createPondPaddlersRoutes(
 			sendPondPaddlersError(error, res);
 		}
 	});
+
+	router.get(
+		"/rooms/:roomCode/resume",
+		resumeAddressLimiter,
+		resumeSeatLimiter,
+		(req, res) => {
+			try {
+				const cookieName = pondPaddlersSeatCookieName(
+					req.params.roomCode,
+					secureCookies
+				);
+				const resumed = store.resumeRoom(
+					req.params.roomCode,
+					cookieName
+						? readPondPaddlersSeatCookie(req, cookieName)
+						: null
+				);
+				const { seatToken: _seatToken, ...response } = resumed;
+				res.json(response);
+			}
+			catch (error) {
+				sendPondPaddlersError(error, res);
+			}
+		}
+	);
 
 	router.get("/rooms/:roomCode/events", (req, res) => {
 		let unsubscribe: (() => void) | null = null;
@@ -313,9 +444,15 @@ export function createPondPaddlersRoutes(
 		};
 
 		try {
+			const cookieName = pondPaddlersSeatCookieName(
+				req.params.roomCode,
+				secureCookies
+			);
 			const subscription = store.subscribe(
 				req.params.roomCode,
-				readPondPaddlersSeatCookie(req, seatCookieName),
+				cookieName
+					? readPondPaddlersSeatCookie(req, cookieName)
+					: null,
 				subscriber
 			);
 			unsubscribe = subscription.unsubscribe;
@@ -360,9 +497,15 @@ export function createPondPaddlersRoutes(
 				return;
 			}
 			try {
+				const cookieName = pondPaddlersSeatCookieName(
+					req.params.roomCode,
+					secureCookies
+				);
 				res.json(store.answerQuestion(
 					req.params.roomCode,
-					readPondPaddlersSeatCookie(req, seatCookieName),
+					cookieName
+						? readPondPaddlersSeatCookie(req, cookieName)
+						: null,
 					answer.questionID,
 					answer.answer
 				));

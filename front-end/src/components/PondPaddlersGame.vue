@@ -11,7 +11,8 @@ import {
 	answerPondPaddlersQuestion,
 	connectPondPaddlersEvents,
 	joinPondPaddlersRoom,
-	PondPaddlersRequestError
+	PondPaddlersRequestError,
+	resumePondPaddlersRoom
 } from "@/modules/pondPaddlers";
 
 defineOptions({ name: "PondPaddlersGame" });
@@ -37,10 +38,14 @@ const finishAt = ref(1);
 const raceStatus = ref<PondPaddlersRoomStatus>("waiting");
 const answerInput = ref<HTMLInputElement | null>(null);
 const paddlers = ref<PondPaddler[]>([]);
+const handoffFailed = ref(false);
+const lobbyPanel = ref<HTMLElement | null>(null);
+const retryButton = ref<HTMLButtonElement | null>(null);
 
 let eventConnection: PondPaddlersEventConnection | null = null;
 let joinController: AbortController | null = null;
 let answerController: AbortController | null = null;
+let startQuestionController: AbortController | null = null;
 let raceGeneration = 0;
 
 const normalizedRoomCodeInput = computed(() =>
@@ -74,6 +79,12 @@ const sortedPaddlers = computed(() =>
 	})
 );
 const roomClosed = computed(() => raceStatus.value === "closed");
+const statusOrder: Record<PondPaddlersRoomStatus, number> = {
+	waiting: 0,
+	racing: 1,
+	finished: 2,
+	closed: 3
+};
 
 function friendlyError(error: unknown): string {
 	if (error instanceof PondPaddlersRequestError) return error.message;
@@ -100,13 +111,33 @@ function paddlerProgressText(paddler: PondPaddler): string {
 	return `${paddler.progress} of ${finishAt.value} questions`;
 }
 
-function applyRaceState(state: PondPaddlersPublicState) {
+function mergeSameStatusPlayers(
+	currentPlayers: PondPaddler[],
+	incomingPlayers: PondPaddler[]
+): PondPaddler[] {
+	const mergedPlayers = new Map(
+		currentPlayers.map(player => [player.alias, { ...player }])
+	);
+	for (const player of incomingPlayers) {
+		const current = mergedPlayers.get(player.alias);
+		mergedPlayers.set(player.alias, {
+			alias: player.alias,
+			progress: Math.max(current?.progress ?? 0, player.progress)
+		});
+	}
+	return [...mergedPlayers.values()];
+}
+
+function applyRaceState(state: PondPaddlersPublicState): boolean {
+	if (statusOrder[state.status] < statusOrder[raceStatus.value]) return false;
+	const nextPlayers =
+		state.status === raceStatus.value
+			? mergeSameStatusPlayers(paddlers.value, state.players)
+			: state.players;
 	finishAt.value = state.finishAt;
 	raceStatus.value = state.status;
-	paddlers.value = state.players;
-	const ownPaddler = state.players.find(
-		player => player.alias === alias.value
-	);
+	paddlers.value = nextPlayers;
+	const ownPaddler = nextPlayers.find(player => player.alias === alias.value);
 	if (ownPaddler) progress.value = ownPaddler.progress;
 	finished.value = Boolean(
 		ownPaddler && ownPaddler.progress >= state.finishAt
@@ -118,19 +149,55 @@ function applyRaceState(state: PondPaddlersPublicState) {
 		eventConnection?.close();
 		eventConnection = null;
 	}
+	if (state.status === "finished" || state.status === "closed") {
+		startQuestionController?.abort();
+		startQuestionController = null;
+		handoffFailed.value = false;
+		if (state.status === "finished") answerFeedback.value = "";
+	}
+	if (
+		state.status === "racing" &&
+		phase.value === "race" &&
+		!question.value
+	) {
+		void loadStartedQuestion();
+	}
+	return true;
 }
 
 function startEventConnection() {
 	eventConnection?.close();
 	connectionState.value = "connecting";
+	const generation = raceGeneration;
+	const activeRoomCode = roomCode.value;
 	eventConnection = connectPondPaddlersEvents(roomCode.value, {
 		onError: () => {
+			if (
+				generation !== raceGeneration ||
+				activeRoomCode !== roomCode.value
+			) {
+				return;
+			}
 			connectionState.value = "reconnecting";
 		},
 		onOpen: () => {
+			if (
+				generation !== raceGeneration ||
+				activeRoomCode !== roomCode.value
+			) {
+				return;
+			}
 			connectionState.value = "live";
 		},
-		onState: applyRaceState
+		onState: state => {
+			if (
+				generation !== raceGeneration ||
+				activeRoomCode !== roomCode.value
+			) {
+				return;
+			}
+			applyRaceState(state);
+		}
 	});
 }
 
@@ -150,6 +217,68 @@ function addOwnPaddler() {
 	paddlers.value = next;
 }
 
+async function loadStartedQuestion() {
+	if (startQuestionController || phase.value !== "race" || question.value) {
+		return;
+	}
+	const controller = new AbortController();
+	startQuestionController = controller;
+	handoffFailed.value = false;
+	const generation = raceGeneration;
+	const activeRoomCode = roomCode.value;
+	answerFeedback.value = "The race has started! Getting your first question…";
+	try {
+		const resumed = await resumePondPaddlersRoom(
+			activeRoomCode,
+			controller.signal
+		);
+		if (
+			controller.signal.aborted ||
+			generation !== raceGeneration ||
+			phase.value !== "race" ||
+			roomCode.value !== activeRoomCode
+		) {
+			return;
+		}
+		if (!applyRaceState(resumed.state)) return;
+		if (resumed.state.status !== "racing") return;
+		if (!resumed.question) {
+			await showHandoffFailure();
+			return;
+		}
+		question.value = resumed.question;
+		handoffFailed.value = false;
+		answerFeedback.value =
+			"The race has started! Solve your first question.";
+		await nextTick();
+		answerInput.value?.focus();
+	} catch (error) {
+		if (
+			generation === raceGeneration &&
+			!controller.signal.aborted &&
+			!(error instanceof DOMException && error.name === "AbortError")
+		) {
+			await showHandoffFailure();
+		}
+	} finally {
+		if (startQuestionController === controller) {
+			startQuestionController = null;
+		}
+	}
+}
+
+async function showHandoffFailure() {
+	handoffFailed.value = true;
+	answerFeedback.value = "Your question did not load. Please try again.";
+	await nextTick();
+	retryButton.value?.focus();
+}
+
+function retryStartedQuestion() {
+	if (raceStatus.value !== "racing" || question.value) return;
+	void loadStartedQuestion();
+}
+
 async function joinRoom() {
 	if (!canJoin.value) return;
 	joining.value = true;
@@ -157,6 +286,9 @@ async function joinRoom() {
 	joinController?.abort();
 	answerController?.abort();
 	answerController = null;
+	startQuestionController?.abort();
+	startQuestionController = null;
+	handoffFailed.value = false;
 	const controller = new AbortController();
 	joinController = controller;
 	const generation = ++raceGeneration;
@@ -174,13 +306,25 @@ async function joinRoom() {
 		calmMode.value = joined.calmMode;
 		applyRaceState(joined.state);
 		answer.value = "";
-		answerFeedback.value = joined.resumed
-			? "Welcome back! Your paddler is right where you left it."
-			: "You are in! Solve the first question to paddle.";
+		answerFeedback.value =
+			joined.state.status === "waiting"
+				? joined.resumed
+					? "Welcome back! Wait here for Julio to start the race."
+					: "You are in! Wait here for Julio to start the race."
+				: joined.resumed
+					? "Welcome back! Your paddler is right where you left it."
+					: "You are in! Solve the first question to paddle.";
 		phase.value = "race";
 		startEventConnection();
+		if (joined.state.status === "racing" && !joined.question) {
+			void loadStartedQuestion();
+		}
 		await nextTick();
-		answerInput.value?.focus();
+		if (joined.state.status === "waiting") {
+			lobbyPanel.value?.focus();
+		} else {
+			answerInput.value?.focus();
+		}
 	} catch (error) {
 		if (
 			generation === raceGeneration &&
@@ -203,7 +347,8 @@ async function submitAnswer() {
 		!currentQuestion ||
 		!submittedAnswer ||
 		answering.value ||
-		finished.value
+		finished.value ||
+		raceStatus.value !== "racing"
 	) {
 		return;
 	}
@@ -252,7 +397,7 @@ async function submitAnswer() {
 		answer.value = "";
 		question.value = result.nextQuestion;
 		answerFeedback.value = result.finished
-			? "You reached the finish! Nice paddling."
+			? "You won the race! Nice paddling."
 			: "Correct! Your paddler moved forward.";
 		await nextTick();
 		answerInput.value?.focus();
@@ -278,6 +423,9 @@ function leaveRoom() {
 	joinController = null;
 	answerController?.abort();
 	answerController = null;
+	startQuestionController?.abort();
+	startQuestionController = null;
+	handoffFailed.value = false;
 	eventConnection?.close();
 	eventConnection = null;
 	joining.value = false;
@@ -303,6 +451,8 @@ onBeforeUnmount(() => {
 	joinController = null;
 	answerController?.abort();
 	answerController = null;
+	startQuestionController?.abort();
+	startQuestionController = null;
 	eventConnection?.close();
 });
 </script>
@@ -416,8 +566,8 @@ onBeforeUnmount(() => {
 
 				<div v-if="finished" class="finish-panel" role="status">
 					<p class="finish-panel__stars" aria-hidden="true">★ ★ ★</p>
-					<h3>You made it across!</h3>
-					<p>Watch the pond while the other paddlers finish.</p>
+					<h3>You won the race!</h3>
+					<p>You were the first paddler across the pond.</p>
 				</div>
 
 				<div v-else-if="roomClosed" class="restart-panel">
@@ -438,6 +588,59 @@ onBeforeUnmount(() => {
 				<div v-else-if="raceStatus === 'finished'" class="finish-panel">
 					<h3>The race is finished</h3>
 					<p>Nice work! You answered {{ progress }} questions.</p>
+				</div>
+
+				<div
+					v-else-if="raceStatus === 'waiting'"
+					ref="lobbyPanel"
+					aria-atomic="true"
+					aria-live="polite"
+					class="lobby-panel"
+					role="status"
+					tabindex="-1"
+				>
+					<h3>Waiting for Julio to start the race</h3>
+					<p>
+						{{ sortedPaddlers.length }} paddler<span
+							v-if="sortedPaddlers.length !== 1"
+							>s</span
+						>
+						ready. Keep this page open.
+					</p>
+				</div>
+
+				<div
+					v-else-if="raceStatus === 'racing' && !question"
+					ref="lobbyPanel"
+					aria-atomic="true"
+					aria-live="polite"
+					class="lobby-panel"
+					role="status"
+					tabindex="-1"
+				>
+					<h3>
+						{{
+							handoffFailed
+								? "Question not loaded"
+								: "The race is starting"
+						}}
+					</h3>
+					<p>
+						{{
+							handoffFailed
+								? "Use Retry to get your private question."
+								: "Getting your first question…"
+						}}
+					</p>
+					<button
+						v-if="handoffFailed"
+						ref="retryButton"
+						class="site-button site-button--secondary"
+						type="button"
+						@click="retryStartedQuestion"
+					>
+						Retry question
+					</button>
 				</div>
 
 				<form
@@ -784,7 +987,8 @@ onBeforeUnmount(() => {
 
 .question-panel,
 .finish-panel,
-.restart-panel {
+.restart-panel,
+.lobby-panel {
 	display: grid;
 	gap: 0.7rem;
 	padding: clamp(1rem, 3vw, 1.35rem);
