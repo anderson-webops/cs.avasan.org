@@ -80,6 +80,40 @@ const accountRetentionDays = studentRecordRetentionDays();
 		</section>
 
 		<section class="site-surface privacy-page__section">
+			<h2>Classroom games</h2>
+			<p>
+				Crosswalk Critters, Machine Workshop, and Comet Hopper run in
+				the current browser. They do not save game play, send answers or
+				scores to the classroom server, or add events to classroom
+				analytics.
+			</p>
+			<p>
+				For a Pond Paddlers class race, Julio creates a private room and
+				students enter its short room code. The server assigns each
+				browser a random preset animal alias and a separate secret seat
+				cookie. During that room, it keeps only the alias, current
+				arithmetic question, and progress needed to run the race. A
+				student’s submitted answer is checked and then discarded. There
+				is no student name, account link, chat, public lobby, permanent
+				score, or game analytics.
+			</p>
+			<p>
+				A Pond Paddlers room and its seat records stay only in the
+				running server’s memory. Julio can close the room sooner;
+				otherwise it ends within two hours or when the game service
+				restarts. The browser seat cookie is unusable after the room
+				ends.
+			</p>
+			<p>
+				To prevent automated flooding, temporary game counters may keep
+				a network address in server memory for up to five minutes and a
+				one-way seat-cookie hash for up to one minute. Each counter is
+				deleted when its window ends and is not added to a student
+				record or analytics.
+			</p>
+		</section>
+
+		<section class="site-surface privacy-page__section">
 			<h2>Python work saved in a shared browser</h2>
 			<p>
 				Without an account, the Python IDE saves projects and editor
@@ -303,6 +337,23 @@ const accountRetentionDays = studentRecordRetentionDays();
 						credential, project, or code. It prevents a request that
 						authenticated before deletion from arriving late and
 						recreating deleted work.
+					</dd>
+				</div>
+				<div>
+					<dt>Pond Paddlers room and seat</dt>
+					<dd>
+						Needed only to run Julio’s private class race; kept in
+						server memory until Julio closes the room, two hours
+						pass, or the game service restarts. It is not retained
+						as a student record or classroom analytics.
+					</dd>
+				</div>
+				<div>
+					<dt>Pond Paddlers security counters</dt>
+					<dd>
+						Needed to limit automated joining and answer flooding;
+						network-address counters expire within five minutes and
+						a seat-hash answer counter expires within one minute.
 					</dd>
 				</div>
 				<div>

@@ -18,6 +18,9 @@ deliberately simplified downstream adaptation of
 - The current course catalog contains only Scratch Levels 1 and 2, Python
   Level 1: Classroom Edition, Python Level 2: Classroom Edition, and PyGames:
   Classroom Edition.
+- `/games` contains four original classroom activities outside the course
+  catalog. Three run entirely in the browser. Pond Paddlers uses short-lived,
+  private rooms created by Julio and does not create student records.
 - Within the Avasan sites, Graph Sketcher is hosted only by
   `math.avasan.org`; this CS site does not publish its route, runtime, worker,
   license, or project artifacts. The upstream Classes platform keeps its own
@@ -28,7 +31,7 @@ deliberately simplified downstream adaptation of
 ## Repository Layout
 
 - `front-end/` contains the Vue 3 and Vite SSG course site and browser-based
-  Python IDE.
+  Python IDE plus the classroom games.
 - `back-end/` contains the small Express and MongoDB service used for Julio's
   private account and optional student project sync.
 - `HEALTHCHECKS.md` documents service health and readiness endpoints.
@@ -60,6 +63,16 @@ new per-student code, signs the student out everywhere, and removes the old
 password or Google/Apple connection. There is no shared class code, universal
 recovery code, student email, provider-email matching, or self-service
 registration.
+
+The separate `/games` area does not change the five-course catalog or require
+a student account. Crosswalk Critters, Machine Workshop, and Comet Hopper keep
+their game state only in the current page. Julio creates and closes private
+Pond Paddlers rooms in Admin. A room code lets a browser ask to join but is not
+the browser's seat credential: the server separately issues a random preset
+alias and a high-entropy, secure, HTTP-only seat cookie. Rooms have no names,
+free text, chat, public lobby, spectators, permanent scores, account links, or
+analytics. Room state stays only in API-process memory for no longer than two
+hours and is also erased by a service restart.
 
 Julio can also export retained account and educational records for one student
 and correct a mistyped school-approved alias without disconnecting the
@@ -240,6 +253,14 @@ anonymous classroom pages. It must not be promoted to `cs.avasan.org`; Julio's
 Admin and the site's production health, readiness, and release contracts
 require the full-stack Compose handoff and exact same-origin `/api/*` mapping.
 
+Pond Paddlers rooms are intentionally process-local. Keep exactly one CS API
+instance; a deploy or API restart closes every active room. The existing
+same-origin `/api/` proxy must preserve `Set-Cookie` and stream
+`/api/pond-paddlers/rooms/*/events` over HTTP/1.1 without response buffering,
+cache, or compression. The API sends a heartbeat every 15 seconds, so every
+proxy read timeout must exceed that interval. No WebSocket route or separate
+game service is required.
+
 ## Reproducible Production Deployment
 
 [`compose.production.yml`](compose.production.yml) builds this repository's
@@ -270,7 +291,7 @@ that fallback is not permitted by the production Compose path. Inject the
 deployment identity without changing application secrets:
 
 ```bash
-export CS_RELEASE_VERSION=2.7.100
+export CS_RELEASE_VERSION=2.7.101
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 docker compose --env-file deploy/cs.env -f compose.production.yml build
 ```
@@ -285,7 +306,7 @@ To prepare a deployment:
 ```bash
 install -m 600 deploy/cs.env.example deploy/cs.env
 # Fill secrets, keep all optional features false until the privacy gate is met.
-export CS_RELEASE_VERSION=2.7.100
+export CS_RELEASE_VERSION=2.7.101
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 ./scripts/verify-deploy-env-permissions.sh
 docker compose --env-file deploy/cs.env -f compose.production.yml build
@@ -352,9 +373,11 @@ on both endpoints, the exact standard and Python-IDE-specific content security
 policies, the remaining browser security headers, known anonymous routes, the
 relative `/admin` directory redirect, branded real-404 pages for `/login` and
 a synthetic unknown path, real 404 responses for the retired Graph Sketcher
-aliases, API health and readiness, and the current fail-closed student and
-aggregate-usage boundaries. Failures name
-only the affected gate;
+aliases, all four game documents, API health and readiness, invalid Admin
+credentials returning `403 Bad credentials` rather than a server error, the
+generic missing-room response without a seat cookie, the private Admin room
+list, and the current fail-closed student and aggregate-usage boundaries.
+Failures name only the affected gate;
 response contents are not written to workflow logs. When an approved feature is
 enabled, the same command verifies the enabled route instead: an anonymous
 student-session read must return the minimal signed-out response, OAuth must

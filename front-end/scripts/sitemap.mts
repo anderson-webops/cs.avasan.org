@@ -4,7 +4,12 @@ export const SITEMAP_EXCLUDED_ROUTES = [
 	"/404",
 	"/admin",
 	"/course-resource",
-	"/python-ide"
+	"/python-ide",
+	"/games",
+	"/games/pond-paddlers",
+	"/games/crosswalk-critters",
+	"/games/machine-workshop",
+	"/games/comet-hopper"
 ];
 
 type SitemapOptions = {

@@ -23,6 +23,11 @@ const routeScenarios = [
 					"/",
 					"/login",
 					"/python-ide",
+					"/games",
+					"/games/pond-paddlers",
+					"/games/crosswalk-critters",
+					"/games/machine-workshop",
+					"/games/comet-hopper",
 					courseResourceRoute,
 					"/admin"
 				]
@@ -254,6 +259,17 @@ function createMockApiServer() {
 							}
 						}
 					: {},
+				activeRole === "teacher" ? 200 : 403
+			);
+			return;
+		}
+		if (
+			url.pathname === "/pond-paddlers/rooms"
+			&& req.method === "GET"
+		) {
+			sendJson(
+				res,
+				activeRole === "teacher" ? { rooms: [] } : {},
 				activeRole === "teacher" ? 200 : 403
 			);
 			return;

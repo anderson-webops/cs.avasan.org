@@ -43,6 +43,18 @@ context("Public classroom navigation", () => {
 			"Clear browser projects for next student"
 		).should("not.exist");
 
+		cy.get(".site-nav").contains("a:visible", "Games").click();
+		cy.location("pathname").should("match", /^\/games\/?$/);
+		cy.contains("h1", "Games").should("be.visible");
+		for (const game of [
+			"Pond Paddlers",
+			"Crosswalk Critters",
+			"Machine Workshop",
+			"Comet Hopper"
+		]) {
+			cy.contains("a", game).should("be.visible");
+		}
+
 		cy.get(".site-nav").should("not.contain", "Graphing");
 		cy.get(".site-nav").should("not.contain", "About");
 		cy.get(".site-nav").should("not.contain", "Home");

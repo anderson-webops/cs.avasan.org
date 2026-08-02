@@ -54,6 +54,10 @@ describe("Teacher admin page", () => {
 						template:
 							'<section id="analytics" data-testid="classroom-analytics"><h2 tabindex="-1">Classroom activity</h2></section>'
 					},
+					PondPaddlersAdmin: {
+						template:
+							'<div data-testid="pond-paddlers-admin">Pond Paddlers rooms</div>'
+					},
 					StudentManagement: {
 						props: ["maintenanceOnly"],
 						template:
@@ -105,6 +109,9 @@ describe("Teacher admin page", () => {
 		);
 		expect(wrapper.get('[data-testid="classroom-analytics"]').text()).toBe(
 			"Classroom activity"
+		);
+		expect(wrapper.get('[data-testid="pond-paddlers-admin"]').text()).toBe(
+			"Pond Paddlers rooms"
 		);
 		expect(wrapper.find("a").exists()).toBe(false);
 	});
