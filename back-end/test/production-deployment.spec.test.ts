@@ -67,14 +67,14 @@ describe("versioned full-stack production deployment", () => {
 		expect(proxy).toContain("access_log off;");
 		expect(proxy).toContain("absolute_redirect off;");
 		expect(proxy).not.toContain(" combined");
-		expect(proxy.match(/add_header Strict-Transport-Security/g)).toHaveLength(5);
-		expect(proxy.match(/add_header Content-Security-Policy/g)).toHaveLength(5);
-		expect(proxy.match(/add_header X-Content-Type-Options/g)).toHaveLength(5);
-		expect(proxy.match(/add_header Referrer-Policy/g)).toHaveLength(5);
-		expect(proxy.match(/add_header Permissions-Policy/g)).toHaveLength(5);
-		expect(proxy.match(/add_header X-Frame-Options/g)).toHaveLength(5);
-		expect(proxy.match(/add_header Cross-Origin-Opener-Policy/g)).toHaveLength(5);
-		expect(proxy.match(/add_header Cross-Origin-Resource-Policy/g)).toHaveLength(5);
+		expect(proxy.match(/add_header Strict-Transport-Security/g)).toHaveLength(6);
+		expect(proxy.match(/add_header Content-Security-Policy/g)).toHaveLength(6);
+		expect(proxy.match(/add_header X-Content-Type-Options/g)).toHaveLength(6);
+		expect(proxy.match(/add_header Referrer-Policy/g)).toHaveLength(6);
+		expect(proxy.match(/add_header Permissions-Policy/g)).toHaveLength(6);
+		expect(proxy.match(/add_header X-Frame-Options/g)).toHaveLength(6);
+		expect(proxy.match(/add_header Cross-Origin-Opener-Policy/g)).toHaveLength(6);
+		expect(proxy.match(/add_header Cross-Origin-Resource-Policy/g)).toHaveLength(6);
 		expect(proxy).toContain("proxy_set_header X-Forwarded-For $http_x_forwarded_for;");
 		expect(proxy).toContain("proxy_hide_header Content-Security-Policy;");
 		expect(proxy).toContain("proxy_hide_header X-Frame-Options;");
@@ -89,6 +89,10 @@ describe("versioned full-stack production deployment", () => {
 		expect(proxy).toContain("worker-src 'self' blob:");
 		expect(proxy).toContain("try_files $uri $uri/ =404;");
 		expect(proxy).not.toContain("try_files $uri $uri/ /index.html;");
+		expect(proxy).toContain("location ~ ^(.+)/index[.]html$");
+		expect(proxy).toContain("if ($request_uri ~ ^(.+)/index[.]html(?:[?]|$))");
+		expect(proxy).toContain("if ($request_uri ~ ^/index[.]html(?:[?]|$))");
+		expect(proxy).toContain("if ($request_uri ~ ^/ide/index[.]html(?:[?]|$))");
 		expect(hostProxy).toContain("proxy_set_header X-Forwarded-For $remote_addr;");
 		expect(hostProxy.match(/access_log off;/g)).toHaveLength(2);
 		expect(hostProxy).not.toContain(" combined");
@@ -157,6 +161,10 @@ describe("versioned full-stack production deployment", () => {
 		expect(nativeProxy).toContain("error_page 404 =404 /404.html;");
 		expect(nativeProxy.match(/access_log off;/g)).toHaveLength(2);
 		expect(nativeProxy).not.toContain("try_files $uri $uri/ /index.html;");
+		expect(nativeProxy).toContain("location ~ ^(.+)/index[.]html$");
+		expect(nativeProxy).toContain("if ($request_uri ~ ^(.+)/index[.]html(?:[?]|$))");
+		expect(nativeProxy).toContain("if ($request_uri ~ ^/index[.]html(?:[?]|$))");
+		expect(nativeProxy).toContain("if ($request_uri ~ ^/ide/index[.]html(?:[?]|$))");
 
 		expect(deployScript).toContain("git -C \"$cs_source_dir\" archive \"$cs_revision\"");
 		expect(deployScript).toContain('npm --prefix "$cs_build_source" ci --include=optional --strict-allow-scripts');
@@ -217,14 +225,14 @@ describe("versioned full-stack production deployment", () => {
 			version: string;
 		};
 
-		expect(rootPackage.version).toBe("2.7.106");
-		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]106\}/g)).toHaveLength(2);
+		expect(rootPackage.version).toBe("2.7.107");
+		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]107\}/g)).toHaveLength(2);
 		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g)).toHaveLength(2);
 		expect(compose).not.toContain("SOURCE_REVISION:-unknown");
 		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
-		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.106");
+		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.107");
 		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
-		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.106");
+		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.107");
 		expect(apiDockerfile).toContain("ARG SOURCE_REVISION=unknown");
 		expect(frontendReleaseWriter).toContain("environment.COMMIT_REF?.trim()");
 		expect(frontendReleaseWriter).toContain("const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;");
@@ -252,6 +260,12 @@ describe("versioned full-stack production deployment", () => {
 		expect(productionSmoke).toContain("duplicate Content-Security-Policy headers");
 		expect(productionSmoke).not.toContain("smokeErrorMessage");
 		expect(productionSmoke).toContain('adminRedirect.headers.get("location") === "/admin/"');
+		expect(productionSmoke).toContain('["/admin/index.html", "/admin/"]');
+		expect(productionSmoke).toContain('"/admin.html"');
+		expect(productionSmoke).toContain('"/student-privacy.html"');
+		expect(productionSmoke).toContain(
+			'["/ide/index.html?course=python-1", "/ide/?course=python-1"]'
+		);
 		expect(productionSmoke).toContain('"/games/pond-paddlers"');
 		expect(productionSmoke).toContain('"/games/crosswalk-critters"');
 		expect(productionSmoke).toContain('"/games/machine-workshop"');
@@ -427,7 +441,8 @@ describe("versioned full-stack production deployment", () => {
 		expect(readme).toMatch(/before the deployment\s+timer records success/);
 		expect(readme).toContain("must fail without recording success");
 		expect(readme).toContain("http://127.0.0.1:8080/ide/");
-		expect(readme).toContain("remove any host-side static");
+		expect(readme).toContain("Use the proxy-only example for Compose");
+		expect(readme).toContain("same-release native Nginx artifacts");
 		expect(readme).toMatch(/do not record the\s+deployment as successful/);
 		expect(environmentVerifier).toContain("permissions must be 600");
 		expect(mongoInit).toContain('{ role: "readWrite", db: applicationDatabaseName }');

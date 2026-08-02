@@ -18,6 +18,16 @@ including:
   purpose; the operator still remains responsible for its own COPPA duties and
   must give the school the required direct notice, review, deletion, and
   stop-collection controls;
+- the FTC's current
+  [COPPA compliance plan](https://www.ftc.gov/business-guidance/resources/childrens-online-privacy-protection-rule-six-step-compliance-plan-your-business).
+  The authorized reviewer must confirm that the public notice identifies every
+  operator and its contact information, explains the collection and use, states
+  the purpose, business need, and deletion timeframe for each retained category,
+  and describes the applicable review and deletion rights. The operator must
+  also maintain the required written information-security and
+  retention-and-deletion programs and obtain the required written assurances
+  from service providers or other third parties that receive covered
+  information;
 - the U.S. Department of Education's
   [online classroom tool guidance](https://studentprivacy.ed.gov/faq/i-want-use-online-tool-or-application-part-my-course-however-i-am-worried-it-violation-ferpa)
   and [FERPA school-official criteria](https://studentprivacy.ed.gov/faq/who-school-official-under-ferpa).
@@ -56,30 +66,39 @@ student-data feature until all of the following are complete:
    the provider notice naming each approved infrastructure or identity
    provider, its limited purpose, and the student information it handles. Do
    not invent either notice.
-4. The public `/student-privacy` page has been built with the contact and both
-   notices and reviewed in the deployed site.
-5. For accounts, the authorized reviewer has selected a whole-number record
+4. The operator has documented the applicable written information-security and
+   retention-and-deletion programs. The retention program states the purpose,
+   business need, and deletion timeframe for each retained category, and those
+   details have been reviewed against the public notice.
+5. The operator has obtained and retained the required written confidentiality,
+   security, and integrity assurances from every approved service provider or
+   other third party that receives covered student information.
+6. The public `/student-privacy` page has been built with the contact and both
+   notices, accurately states the approved purposes and deletion timeframes,
+   and has been reviewed in the deployed site.
+7. For accounts, the authorized reviewer has selected a whole-number record
    retention period from 30 through 365 days. There is no application default.
-6. The school or district has supplied its record-access, correction, export,
+8. The school or district has supplied its record-access, correction, export,
    deletion, backup, security-log, and end-of-service retention process.
-7. Julio understands that anonymous totals are directional signals, not
+9. Julio understands that anonymous totals are directional signals, not
    attendance, grades, or evidence about an individual student.
 
 The backend requires `CLASSROOM_PRIVACY_APPROVED=true`,
 `SCHOOL_PRIVACY_CONTACT`, `CLASSROOM_PRIVACY_OPERATOR_NOTICE`,
 `CLASSROOM_SERVICE_PROVIDER_NOTICE`, and the desired feature flag. Accounts
 additionally require a whole-number `STUDENT_RECORD_RETENTION_DAYS` value from
-30 through 365. Production Compose derives the frontend approval and feature
-switches directly from those canonical backend values and maps the same
-contact, notices, and retention value into the frontend build. There is no
-second production set of `VITE_` feature switches to drift. Missing or invalid
-configuration fails closed.
+30 through 365. The canonical native deployer and the manually selected
+Compose fallback both derive the frontend approval and feature switches
+directly from those canonical backend values and map the same contact, notices,
+and retention value into the frontend build. There is no second production set
+of `VITE_` feature switches to drift. Missing or invalid configuration fails
+closed.
 
 | Feature                                   | Backend                                                                                      | Frontend build                                               |
 | ----------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| Optional student accounts and Python sync | `STUDENT_ACCOUNTS_ENABLED=true` and `STUDENT_RECORD_RETENTION_DAYS=30..365`                  | Derived by production Compose from the same canonical values |
-| Apple or Google sign-in                   | `STUDENT_OAUTH_ENABLED=true` plus account flag, retention, and complete provider credentials | Derived by production Compose from the same canonical values |
-| Anonymous CS and Math counts              | `CLASSROOM_ANALYTICS_COLLECTION_ENABLED=true`                                                | Derived by production Compose from the same canonical value  |
+| Optional student accounts and Python sync | `STUDENT_ACCOUNTS_ENABLED=true` and `STUDENT_RECORD_RETENTION_DAYS=30..365`                  | Derived by the selected deployer from the same canonical values |
+| Apple or Google sign-in                   | `STUDENT_OAUTH_ENABLED=true` plus account flag, retention, and complete provider credentials | Derived by the selected deployer from the same canonical values |
+| Anonymous CS and Math counts              | `CLASSROOM_ANALYTICS_COLLECTION_ENABLED=true`                                                | Derived by the selected deployer from the same canonical value  |
 
 OAuth is unavailable unless accounts are enabled. Provider apps must request
 only the OpenID identity needed for an opaque subject. Do not add email,
@@ -258,11 +277,12 @@ follow-up is complete. Do not restore a deleted student record from backup
 except through an authorized incident-recovery process that also reapplies the
 deletion.
 
-The operation gate is process-local. The reviewed production Compose file
-intentionally fixes the API to one named container, which prevents
-`docker compose --scale` from creating a second API process. Do not run another
-API process against this database unless the gate is replaced with a tested
-database-distributed design.
+The operation gate is process-local. Canonical native production runs exactly
+one systemd API process. The manually selected Compose fallback likewise fixes
+the API to one named container and prevents `docker compose --scale` from
+creating a second API process. Do not run another API process against this
+database unless the gate is replaced with a tested database-distributed
+design.
 
 ## Retention and reporting
 
@@ -307,7 +327,7 @@ unrecorded request from a recorded request whose response was lost. These
 client-supplied counts can still undercount or be manipulated; use them only as
 a broad engagement indicator.
 
-The production container and supplied host proxy disable access logs. If a
+Both reviewed production handoffs disable classroom access logs. If a
 school-authorized infrastructure layer separately retains narrowly scoped
 security logs, it remains outside the application database and must use the
 approved short retention and deletion process.
@@ -343,7 +363,7 @@ When the classroom use ends:
     docker compose --env-file deploy/cs.env -f compose.production.yml --profile tools run --rm admin-tools npm run -w back-end purge-classroom-analytics-ts -- --confirm-delete-all-classroom-analytics
     ```
 
-   For the preferred native deployment, use the wrapper from the active
+   For the canonical native deployment, use the wrapper from the active
    immutable release:
 
     ```bash
