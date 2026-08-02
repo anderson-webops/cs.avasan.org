@@ -121,6 +121,7 @@ async function nativeReleaseFixture(t) {
 		"../runtime-package/tool.js",
 		join(candidate, "node_modules/.bin/runtime-tool")
 	);
+	await chmod(candidate, 0o755);
 	return {
 		candidate: await realpath(candidate),
 		releaseRoot: await realpath(releaseRoot)
@@ -154,6 +155,7 @@ test("native systemd and Nginx are the explicit automatic production authority",
 	const privacyRunbook = read("docs/privacy-operations.md");
 	const packageManifest = JSON.parse(read("package.json"));
 	const workflow = read(".github/workflows/ci.yml");
+	const deployScript = read("scripts/deploy-native-release.sh");
 
 	assert.match(agents, /Native Nginx and systemd are the canonical automatic production path/u);
 	assert.match(agents, /Do not infer a container deployment from the root/u);
@@ -168,6 +170,41 @@ test("native systemd and Nginx are the explicit automatic production authority",
 		packageManifest.scripts["deploy:native"],
 		"bash scripts/deploy-native-release.sh --source ."
 	);
+
+	const stagingCreation = deployScript.indexOf(
+		'cs_staging_release="$(mktemp -d'
+	);
+	const rootOwnership = deployScript.indexOf(
+		'chown -R root:root "$cs_staging_release"',
+		stagingCreation
+	);
+	const writeHardening = deployScript.indexOf(
+		'chmod -R go-w "$cs_staging_release"',
+		rootOwnership
+	);
+	const completedReleaseMode = deployScript.indexOf(
+		'chmod 0755 -- "$cs_staging_release"',
+		writeHardening
+	);
+	const runtimePreflight = deployScript.indexOf(
+		'node "$cs_staging_release/scripts/verify-native-runtime-config.mjs" "$cs_staging_release"',
+		completedReleaseMode
+	);
+	const immutableActivation = deployScript.indexOf(
+		'mv -T -- "$cs_staging_release" "$cs_final_release"',
+		runtimePreflight
+	);
+	assert.notEqual(stagingCreation, -1, "missing private staging creation");
+	assert.notEqual(rootOwnership, -1, "missing root ownership hardening");
+	assert.notEqual(writeHardening, -1, "missing write-mode hardening");
+	assert.notEqual(completedReleaseMode, -1, "missing traversable release mode");
+	assert.notEqual(runtimePreflight, -1, "missing native runtime preflight");
+	assert.notEqual(immutableActivation, -1, "missing immutable release activation");
+	assert.ok(stagingCreation < rootOwnership);
+	assert.ok(rootOwnership < writeHardening);
+	assert.ok(writeHardening < completedReleaseMode);
+	assert.ok(completedReleaseMode < runtimePreflight);
+	assert.ok(runtimePreflight < immutableActivation);
 
 	const nativeContract = workflowJob(workflow, "native-contract");
 	assert.match(nativeContract, /name: Canonical native deployment contract/u);
@@ -229,6 +266,17 @@ test("native release target accepts an immutable internal workspace tree", async
 
 test("native release target rejects symlink, identity, mode, and containment manipulation", async (t) => {
 	const expectedOwner = process.getuid?.() ?? 0;
+
+	const inaccessibleRootFixture = await nativeReleaseFixture(t);
+	await chmod(inaccessibleRootFixture.candidate, 0o700);
+	await assert.rejects(
+		verifyNativeReleaseTarget(
+			inaccessibleRootFixture.candidate,
+			inaccessibleRootFixture.releaseRoot,
+			{ expectedOwner }
+		),
+		/release target must use mode 0755/u
+	);
 
 	const symlinkFixture = await nativeReleaseFixture(t);
 	const alias = join(symlinkFixture.releaseRoot, "releases", "alias");
