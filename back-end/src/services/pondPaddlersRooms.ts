@@ -45,10 +45,15 @@ export interface PondPaddlersJoinResult {
 	alias: string;
 	calmMode: boolean;
 	expiresAt: string;
-	question: PondPaddlersQuestion;
+	question: PondPaddlersQuestion | null;
 	resumed: boolean;
 	seatToken: string;
 	state: PondPaddlersPublicState;
+}
+
+export interface PondPaddlersStartResult {
+	room: PondPaddlersAdminRoom;
+	started: boolean;
 }
 
 export interface PondPaddlersAnswerResult {
@@ -63,9 +68,12 @@ export type PondPaddlersErrorCode
 		| "finished"
 		| "full"
 		| "invalid-settings"
+		| "no-paddlers"
 		| "not-found"
+		| "not-started"
 		| "question-changed"
 		| "seat-required"
+		| "started"
 		| "too-many-streams";
 
 export class PondPaddlersError extends Error {
@@ -345,24 +353,40 @@ export class PondPaddlersRoomStore {
 		return true;
 	}
 
+	startRoom(roomCodeValue: unknown): PondPaddlersStartResult {
+		const room = this.requireRoom(roomCodeValue);
+		if (room.status === "finished") throw new PondPaddlersError("finished");
+		if (room.players.size === 0) throw new PondPaddlersError("no-paddlers");
+		if (room.status === "racing") {
+			return { room: adminRoom(room), started: false };
+		}
+
+		room.status = "racing";
+		this.broadcast(room);
+		return { room: adminRoom(room), started: true };
+	}
+
+	resumeRoom(
+		roomCodeValue: unknown,
+		seatToken: string | null | undefined
+	): PondPaddlersJoinResult {
+		const room = this.requireRoom(roomCodeValue);
+		if (!isSeatToken(seatToken)) throw new PondPaddlersError("seat-required");
+		const player = this.requirePlayer(room, seatToken);
+		return this.joinResult(room, player, seatToken, true);
+	}
+
 	joinRoom(roomCodeValue: unknown, currentSeatToken?: string | null): PondPaddlersJoinResult {
 		const room = this.requireRoom(roomCodeValue);
 		if (isSeatToken(currentSeatToken)) {
 			const existingPlayer = playerForSeat(room, currentSeatToken);
 			if (existingPlayer) {
-				return {
-					alias: existingPlayer.alias,
-					calmMode: room.calmMode,
-					expiresAt: new Date(room.expiresAt).toISOString(),
-					question: existingPlayer.question.publicQuestion,
-					resumed: true,
-					seatToken: currentSeatToken,
-					state: publicState(room)
-				};
+				return this.joinResult(room, existingPlayer, currentSeatToken, true);
 			}
 		}
 
 		if (room.status === "finished") throw new PondPaddlersError("finished");
+		if (room.status === "racing") throw new PondPaddlersError("started");
 		if (room.players.size >= MAX_POND_PADDLERS_PLAYERS) {
 			throw new PondPaddlersError("full");
 		}
@@ -375,17 +399,8 @@ export class PondPaddlersRoomStore {
 			subscribers: new Set()
 		};
 		room.players.set(seatDigest(seatToken), player);
-		room.status = "racing";
 		this.broadcast(room);
-		return {
-			alias: player.alias,
-			calmMode: room.calmMode,
-			expiresAt: new Date(room.expiresAt).toISOString(),
-			question: player.question.publicQuestion,
-			resumed: false,
-			seatToken,
-			state: publicState(room)
-		};
+		return this.joinResult(room, player, seatToken, false);
 	}
 
 	answerQuestion(
@@ -396,6 +411,7 @@ export class PondPaddlersRoomStore {
 	): PondPaddlersAnswerResult {
 		const room = this.requireRoom(roomCodeValue);
 		const player = this.requirePlayer(room, seatToken);
+		if (room.status === "waiting") throw new PondPaddlersError("not-started");
 		if (room.status === "finished") throw new PondPaddlersError("finished");
 		if (player.question.publicQuestion.questionID !== questionID) {
 			throw new PondPaddlersError("question-changed");
@@ -477,6 +493,24 @@ export class PondPaddlersRoomStore {
 		for (const room of this.rooms.values()) {
 			if (room.expiresAt <= now) this.closeRoom(room.roomCode);
 		}
+	}
+
+	private joinResult(
+		room: PondPaddlersRoom,
+		player: PondPaddlersPlayer,
+		seatToken: string,
+		resumed: boolean
+	): PondPaddlersJoinResult {
+		return {
+			alias: player.alias,
+			calmMode: room.calmMode,
+			expiresAt: new Date(room.expiresAt).toISOString(),
+			question:
+				room.status === "racing" ? player.question.publicQuestion : null,
+			resumed,
+			seatToken,
+			state: publicState(room)
+		};
 	}
 
 	private requireRoom(roomCodeValue: unknown): PondPaddlersRoom {

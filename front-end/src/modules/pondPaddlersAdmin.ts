@@ -47,6 +47,14 @@ export async function createPondPaddlersRoom(
 	return data.room;
 }
 
+export async function startPondPaddlersRoom(roomCode: string) {
+	const { data } = await api.post<{
+		room: PondPaddlersAdminRoom;
+		started: boolean;
+	}>(`/pond-paddlers/rooms/${encodeURIComponent(roomCode)}/start`, {});
+	return data.room;
+}
+
 export async function closePondPaddlersRoom(roomCode: string) {
 	await api.delete(`/pond-paddlers/rooms/${encodeURIComponent(roomCode)}`);
 }
