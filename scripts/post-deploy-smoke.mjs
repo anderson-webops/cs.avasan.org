@@ -389,6 +389,9 @@ async function verifyPublicRoutes() {
 
 	for (const path of [
 		"/login",
+		"/.env",
+		"/.git/config",
+		"/.vite/ssr-manifest.json",
 		"/__cs-avasan-deployment-probe-missing"
 	]) {
 		await verifyBrandedNotFound(
@@ -618,12 +621,15 @@ async function verifyPrivacyFeatureBoundaries() {
 		`Unauthenticated Admin session endpoint returned HTTP ${admin.status} instead of 403.`
 	);
 
-	await verifyApiNotFound(
-		await request("/api/__cs-avasan-deployment-probe-missing", {
-			redirect: "manual"
-		}),
+	for (const path of [
+		"/api/.env",
 		"/api/__cs-avasan-deployment-probe-missing"
-	);
+	]) {
+		await verifyApiNotFound(
+			await request(path, { redirect: "manual" }),
+			path
+		);
+	}
 }
 
 export async function runProductionSmoke() {

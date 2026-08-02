@@ -1,7 +1,7 @@
 {
 	"name": "classes-monorepo",
 	"type": "module",
-	"version": "2.7.104",
+	"version": "2.7.105",
 	"private": true,
 	"packageManager": "npm@11.16.0",
 	"engines": {

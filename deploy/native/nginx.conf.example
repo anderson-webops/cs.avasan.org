@@ -9,7 +9,15 @@ server {
 	listen [::]:80;
 	server_name cs.avasan.org;
 	access_log off;
-	return 301 https://cs.avasan.org$request_uri;
+
+	location ^~ /.well-known/acme-challenge/ {
+		root /var/www/acme;
+		try_files $uri =404;
+	}
+
+	location / {
+		return 301 https://cs.avasan.org$request_uri;
+	}
 }
 
 server {
@@ -38,6 +46,12 @@ server {
 	client_max_body_size 80m;
 	error_page 404 =404 /404.html;
 
+	# Never publish dotfiles or build-system metadata, even if an unexpected
+	# hidden artifact reaches an immutable release.
+	location ~ (^|/)\. {
+		return 404;
+	}
+
 	location = /api {
 		error_page 404 = @cs_avasan_api_not_found;
 		return 404;
@@ -50,7 +64,7 @@ server {
 		return 404 '{"message":"Not found"}';
 	}
 
-	location /api/ {
+	location ^~ /api/ {
 		proxy_pass http://127.0.0.1:3008/;
 		proxy_http_version 1.1;
 		proxy_intercept_errors off;

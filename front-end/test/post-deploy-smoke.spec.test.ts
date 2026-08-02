@@ -22,6 +22,10 @@ const hostNginxSource = readFileSync(
 	resolve(repositoryRoot, "deploy/host-nginx.conf.example"),
 	"utf8"
 );
+const nativeNginxSource = readFileSync(
+	resolve(repositoryRoot, "deploy/native/nginx.conf.example"),
+	"utf8"
+);
 const netlifySource = readFileSync(
 	resolve(repositoryRoot, "netlify.toml"),
 	"utf8"
@@ -55,7 +59,7 @@ describe("production smoke feature expectations", () => {
 	it("builds a secret-free native public configuration", () => {
 		const manifest = nativeReleaseManifest({
 			CLASSROOM_PRIVACY_APPROVED: "false",
-			CS_RELEASE_VERSION: "2.7.104",
+			CS_RELEASE_VERSION: "2.7.105",
 			MONGODB_URI: "mongodb://secret-value",
 			SESSION_SECRET: "secret-value",
 			SOURCE_REVISION: "a".repeat(40),
@@ -175,6 +179,26 @@ describe("production smoke feature expectations", () => {
 				"/login"
 			)
 		).resolves.toBeUndefined();
+	});
+
+	it("removes internal build metadata and blocks hidden paths at both edges", () => {
+		const hiddenPathLocation = "location ~ (^|/)\\. {\n\t\treturn 404;\n\t}";
+
+		expect(nginxSource).toContain(hiddenPathLocation);
+		expect(nativeNginxSource).toContain(hiddenPathLocation);
+		expect(nginxSource).toContain("location ^~ /api/");
+		expect(nativeNginxSource).toContain("location ^~ /api/");
+		expect(nativeNginxSource).toContain(
+			"location ^~ /.well-known/acme-challenge/"
+		);
+		for (const hiddenPath of [
+			"/.env",
+			"/.git/config",
+			"/.vite/ssr-manifest.json",
+			"/api/.env"
+		]) {
+			expect(productionSmokeSource).toContain(`"${hiddenPath}"`);
+		}
 	});
 
 	it("requires unknown API paths to return JSON and rejects duplicate headers", async () => {

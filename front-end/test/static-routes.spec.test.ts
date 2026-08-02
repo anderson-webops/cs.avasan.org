@@ -62,6 +62,11 @@ describe("static route normalization", () => {
 			join(tempDir, "course-assets", "reference", "example.html"),
 			"<main>Downloadable course asset</main>"
 		);
+		await mkdir(join(tempDir, ".vite"), { recursive: true });
+		await writeFile(
+			join(tempDir, ".vite", "ssr-manifest.json"),
+			'{"internal":"build metadata"}'
+		);
 		await writeFile(
 			join(tempDir, "404.html"),
 			"<main>Page not found</main>"
@@ -104,6 +109,7 @@ describe("static route normalization", () => {
 		await expect(readFile(join(tempDir, "404.html"), "utf8")).resolves.toBe(
 			"<main>Page not found</main>"
 		);
+		await expect(stat(join(tempDir, ".vite"))).rejects.toThrow();
 	});
 
 	it("adds one static error document without rendering dynamic route patterns", () => {
