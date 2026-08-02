@@ -108,11 +108,13 @@ The deployer is not an initial-cutover tool. Before it runs, `current` must be
 an existing symlink to a complete, root-owned, non-group/world-writable release
 directly beneath `releases/`. Its directory name, native manifest, public
 release identity, public configuration, and release environment must agree;
-required executable and public files must be regular files. Workspace package
-symlinks are accepted only inside `node_modules` and only when they resolve
-inside the same immutable release. A separately reviewed first-install
-procedure must establish and verify that rollback target before automatic
-deployments are enabled.
+the immutable release directory must use mode `0755` so the unprivileged API and
+Nginx workers can traverse it, and required executable and public files must be
+regular files.
+Workspace package symlinks are accepted only inside `node_modules` and only when
+they resolve inside the same immutable release. A separately reviewed
+first-install procedure must establish and verify that rollback target before
+automatic deployments are enabled.
 
 The config digest contains no secret values. It prevents a frontend built with
 one privacy/feature decision from being reused after `api.env` changes. The

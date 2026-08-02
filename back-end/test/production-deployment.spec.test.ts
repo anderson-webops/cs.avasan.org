@@ -208,6 +208,10 @@ describe("versioned full-stack production deployment", () => {
 		expect(deployScript).toContain(
 			'"$(stat -c \'%u:%a\' "$cs_installed_artifact")" == "0:644"'
 		);
+		expect(deployScript).toContain('chmod 0755 -- "$cs_staging_release"');
+		expect(releaseTargetVerifier).toContain(
+			"release target must use mode 0755"
+		);
 		expect(deployScript).toContain('mv -T -- "$cs_staging_release" "$cs_final_release"');
 		expect(deployScript).toContain("mv -Tf -- \"$cs_next_link\" \"$cs_link_name\"");
 		expect(deployScript).toContain("CS_SITE_ORIGIN=http://127.0.0.1:8080");
@@ -281,14 +285,14 @@ describe("versioned full-stack production deployment", () => {
 			version: string;
 		};
 
-		expect(rootPackage.version).toBe("2.7.109");
-		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]109\}/g)).toHaveLength(2);
+		expect(rootPackage.version).toBe("2.7.110");
+		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]110\}/g)).toHaveLength(2);
 		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g)).toHaveLength(2);
 		expect(compose).not.toContain("SOURCE_REVISION:-unknown");
 		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
-		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.109");
+		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.110");
 		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
-		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.109");
+		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.110");
 		expect(apiDockerfile).toContain("ARG SOURCE_REVISION=unknown");
 		expect(frontendReleaseWriter).toContain("environment.COMMIT_REF?.trim()");
 		expect(frontendReleaseWriter).toContain("const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;");

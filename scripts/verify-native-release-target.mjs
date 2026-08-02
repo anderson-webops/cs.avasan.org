@@ -218,6 +218,9 @@ export async function verifyNativeReleaseTarget(
 	if (!candidateStats.isDirectory() || candidateStats.isSymbolicLink()) {
 		fail("release target must be a real directory, not a symlink");
 	}
+	if ((candidateStats.mode & 0o777) !== 0o755) {
+		fail("release target must use mode 0755");
+	}
 	if (!releaseRootStats.isDirectory() || releaseRootStats.isSymbolicLink()) {
 		fail("release root must be a real directory, not a symlink");
 	}

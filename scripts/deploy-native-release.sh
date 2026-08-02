@@ -233,6 +233,10 @@ if [[ ! -e "$cs_final_release" && ! -L "$cs_final_release" ]]; then
 		"$cs_staging_release/public-config.env"
 	chown -R root:root "$cs_staging_release"
 	chmod -R go-w "$cs_staging_release"
+	# mktemp creates the staging root at 0700. Keep it private while it is
+	# assembled, then make the completed release traversable by the systemd
+	# service user before it can become an immutable activation target.
+	chmod 0755 -- "$cs_staging_release"
 	(
 		set -a
 		# shellcheck disable=SC1090
