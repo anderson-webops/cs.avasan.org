@@ -36,6 +36,21 @@ describe("student privacy page", () => {
 		expect(text).toContain("Python work saved in a shared browser");
 		expect(text).toContain("follow Julio’s instructions");
 		expect(text).toContain("Close every Python IDE tab");
+		expect(text).toContain("Classroom games");
+		expect(text).toContain(
+			"do not save game play, send answers or scores"
+		);
+		expect(text).toContain("random preset animal alias");
+		expect(text).toContain("submitted answer is checked and then discarded");
+		expect(text).toContain("There is no student name, account link, chat");
+		expect(text).toContain("stay only in the running server’s memory");
+		expect(text).toContain("ends within two hours");
+		expect(text).toContain(
+			"network address in server memory for up to five minutes"
+		);
+		expect(text).toContain("one-way seat-cookie hash for up to one minute");
+		expect(text).toContain("Pond Paddlers room and seat");
+		expect(text).toContain("Pond Paddlers security counters");
 		expect(text).toContain(
 			"Projects already saved to a signed-in account are not part of the browser-local workspace"
 		);

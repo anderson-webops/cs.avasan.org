@@ -1,4 +1,11 @@
-import { mkdtemp, readFile, rm, stat, writeFile } from "node:fs/promises";
+import {
+	mkdir,
+	mkdtemp,
+	readFile,
+	rm,
+	stat,
+	writeFile
+} from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
@@ -40,6 +47,22 @@ describe("static route normalization", () => {
 		);
 		await writeFile(join(tempDir, "admin.html"), "<main>Admin</main>");
 		await writeFile(
+			join(tempDir, "games.html"),
+			"<main>Classroom games</main>"
+		);
+		await mkdir(join(tempDir, "games"), { recursive: true });
+		await writeFile(
+			join(tempDir, "games", "pond-paddlers.html"),
+			"<main>Pond Paddlers</main>"
+		);
+		await mkdir(join(tempDir, "course-assets", "reference"), {
+			recursive: true
+		});
+		await writeFile(
+			join(tempDir, "course-assets", "reference", "example.html"),
+			"<main>Downloadable course asset</main>"
+		);
+		await writeFile(
 			join(tempDir, "404.html"),
 			"<main>Page not found</main>"
 		);
@@ -53,10 +76,30 @@ describe("static route normalization", () => {
 			readFile(join(tempDir, "admin", "index.html"), "utf8")
 		).resolves.toBe("<main>Admin</main>");
 		await expect(
+			readFile(join(tempDir, "games", "index.html"), "utf8")
+		).resolves.toBe("<main>Classroom games</main>");
+		await expect(
+			readFile(
+				join(tempDir, "games", "pond-paddlers", "index.html"),
+				"utf8"
+			)
+		).resolves.toBe("<main>Pond Paddlers</main>");
+		await expect(
 			stat(join(tempDir, "index", "index.html"))
 		).rejects.toThrow();
 		await expect(
 			stat(join(tempDir, "404", "index.html"))
+		).rejects.toThrow();
+		await expect(
+			stat(
+				join(
+					tempDir,
+					"course-assets",
+					"reference",
+					"example",
+					"index.html"
+				)
+			)
 		).rejects.toThrow();
 		await expect(readFile(join(tempDir, "404.html"), "utf8")).resolves.toBe(
 			"<main>Page not found</main>"
@@ -163,7 +206,12 @@ describe("static route normalization", () => {
 			"/404",
 			"/admin",
 			"/course-resource",
-			"/python-ide"
+			"/python-ide",
+			"/games",
+			"/games/pond-paddlers",
+			"/games/crosswalk-critters",
+			"/games/machine-workshop",
+			"/games/comet-hopper"
 		]);
 		expect(calls).toEqual([options]);
 	});

@@ -24,6 +24,7 @@ import { PythonProjectReview } from "./models/schemas/PythonProjectReview.js";
 import { Student } from "./models/schemas/Student.js";
 import { StudentDataDeletionReceipt } from "./models/schemas/StudentDataDeletionReceipt.js";
 import { mountClassroomAnalyticsRoutes } from "./routes/classroomAnalyticsRoutes.js";
+import { mountPondPaddlersRoutes } from "./routes/pondPaddlersRoutes.js";
 import {
 	assertRetainedStudentDataHasRetentionPeriod,
 	mountRuntimeAccountRoutes,
@@ -35,6 +36,7 @@ import { readBooleanSetting, readClassroomOrigin, readSessionSecret } from "./se
 import { selectMongoConnection } from "./security/mongoConnection.js";
 import { readReleaseMetadata } from "./security/releaseMetadata.js";
 import { readTrustProxySetting } from "./security/trustProxy.js";
+import { PondPaddlersRoomStore } from "./services/pondPaddlersRooms.js";
 import { reconcilePythonProjectQuotas } from "./services/pythonProjectQuotaReconciliation.js";
 import {
 	enforceStudentRecordRetention,
@@ -46,6 +48,7 @@ import "dotenv/config";
 
 async function main() {
 	const app = express();
+	const pondPaddlersRooms = new PondPaddlersRoomStore();
 	const internalDiagnosticsKey = readInternalDiagnosticsKey(env.INTERNAL_DIAGNOSTICS_KEY);
 	const classroomAnalyticsRetentionDays = readClassroomAnalyticsRetentionDays(env.CLASSROOM_ANALYTICS_RETENTION_DAYS);
 	const classroomPrivacy = readClassroomPrivacySettings(env);
@@ -166,6 +169,11 @@ async function main() {
 			parseProjectMutation
 		);
 	}
+
+	// Race requests receive their own small parser before the global API parser.
+	// Rooms and seat-token hashes stay only in this process and expire within
+	// the teacher-selected room lifetime.
+	mountPondPaddlersRoutes(app, pondPaddlersRooms, { secureCookies: isProd });
 
 	app.use(bodyParser.json({ limit: "1mb" }));
 
@@ -300,6 +308,9 @@ async function main() {
 		console.log(`${signal} received, shutting down gracefully...`);
 
 		try {
+			// Closing in-memory races also ends their SSE connections so the HTTP
+			// server can complete a bounded graceful shutdown.
+			pondPaddlersRooms.dispose();
 			if (server.listening) {
 				await new Promise<void>((resolve, reject) => {
 					server.close((error) => {

@@ -248,6 +248,7 @@ async function verifyReleaseIdentity() {
 async function verifySecurityHeaders() {
 	for (const [path, policyName] of [
 		["/", "standard"],
+		["/games/pond-paddlers/", "standard"],
 		["/python-ide/", "python-ide"]
 	]) {
 		const response = await request(path);
@@ -257,7 +258,15 @@ async function verifySecurityHeaders() {
 }
 
 async function verifyPublicRoutes() {
-	for (const path of ["/", "/python-ide"]) {
+	for (const path of [
+		"/",
+		"/python-ide",
+		"/games",
+		"/games/pond-paddlers",
+		"/games/crosswalk-critters",
+		"/games/machine-workshop",
+		"/games/comet-hopper"
+	]) {
 		const response = await request(path);
 		assertion(response.ok, `${path} returned HTTP ${response.status}`);
 	}
@@ -336,6 +345,100 @@ async function verifyApiReadiness() {
 	assertion(
 		readyResponse.ok && readiness.ready === true,
 		`/api/readyz returned HTTP ${readyResponse.status} or an invalid body.`
+	);
+}
+
+async function verifyInvalidAdminLogin() {
+	const path = "/api/accounts/login";
+	const response = await request(path, {
+		body: JSON.stringify({
+			email: "deployment-probe-invalid@example.invalid",
+			password: "deployment-probe-invalid-password"
+		}),
+		headers: {
+			"Content-Type": "application/json",
+			"Origin": new URL(productionOrigin).origin,
+			"X-Classroom-Request": "1"
+		},
+		method: "POST",
+		redirect: "manual"
+	});
+	assertion(
+		response.status === 403,
+		`${path} returned HTTP ${response.status} for invalid credentials instead of 403.`
+	);
+	assertion(
+		response.headers.get("cache-control")?.includes("no-store"),
+		"Invalid Admin login responses must not be cached."
+	);
+	assertion(
+		response.headers.get("set-cookie") === null,
+		"Invalid Admin login unexpectedly set a session cookie."
+	);
+	const body = await readSmokeJson(response, path);
+	assertion(
+		body
+		&& typeof body === "object"
+		&& !Array.isArray(body)
+		&& Object.keys(body).join(",") === "message"
+		&& body.message === "Bad credentials",
+		"Invalid Admin login did not return the generic credentials response."
+	);
+}
+
+async function verifyPondPaddlersBoundary() {
+	const missingRoom = await request(
+		"/api/pond-paddlers/rooms/INVALID0/join",
+		{
+			body: "{}",
+			headers: {
+				"Content-Type": "application/json",
+				"Origin": new URL(productionOrigin).origin,
+				"X-Classroom-Request": "1"
+			},
+			method: "POST",
+			redirect: "manual"
+		}
+	);
+	assertion(
+		missingRoom.status === 404,
+		`Pond Paddlers missing-room probe returned HTTP ${missingRoom.status} instead of 404.`
+	);
+	assertion(
+		missingRoom.headers.get("cache-control")?.includes("no-store"),
+		"Pond Paddlers missing-room responses must not be cached."
+	);
+	assertion(
+		missingRoom.headers.get("set-cookie") === null,
+		"Pond Paddlers missing-room probe unexpectedly received a seat cookie."
+	);
+	const missingBody = await readSmokeJson(
+		missingRoom,
+		"/api/pond-paddlers/rooms/INVALID0/join"
+	);
+	assertion(
+		missingBody
+		&& typeof missingBody === "object"
+		&& !Array.isArray(missingBody)
+		&& Object.keys(missingBody).join(",") === "message"
+		&& missingBody.message === "Race unavailable.",
+		"Pond Paddlers missing-room response did not use the generic contract."
+	);
+
+	const privateRooms = await request("/api/pond-paddlers/rooms", {
+		redirect: "manual"
+	});
+	assertion(
+		privateRooms.status === 403,
+		`Unauthenticated Pond Paddlers room list returned HTTP ${privateRooms.status} instead of 403.`
+	);
+	assertion(
+		privateRooms.headers.get("cache-control")?.includes("no-store"),
+		"Pond Paddlers Admin room responses must not be cached."
+	);
+	assertion(
+		privateRooms.headers.get("set-cookie") === null,
+		"Unauthenticated Pond Paddlers Admin probe unexpectedly set a cookie."
 	);
 }
 
@@ -450,6 +553,10 @@ export async function runProductionSmoke() {
 	await verifyPublicRoutes();
 	currentSmokePhase = "API readiness";
 	await verifyApiReadiness();
+	currentSmokePhase = "invalid Admin login";
+	await verifyInvalidAdminLogin();
+	currentSmokePhase = "Pond Paddlers boundary";
+	await verifyPondPaddlersBoundary();
 	currentSmokePhase = "privacy feature boundaries";
 	await verifyPrivacyFeatureBoundaries();
 	currentSmokePhase = "complete";

@@ -60,7 +60,8 @@ describe("TheHeader.vue", () => {
 		expect(wrapper.text()).toContain("Classes with Julio");
 		expect(links).toEqual([
 			["Courses", "/"],
-			["Python IDE", "/python-ide"]
+			["Python IDE", "/python-ide"],
+			["Games", "/games"]
 		]);
 		expect(wrapper.text()).not.toContain("Graphing");
 		expect(wrapper.text()).not.toContain("Student privacy");

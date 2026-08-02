@@ -59,6 +59,41 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/games/': RouteRecordInfo<
+      '/games/',
+      '/games',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/games/comet-hopper': RouteRecordInfo<
+      '/games/comet-hopper',
+      '/games/comet-hopper',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/games/crosswalk-critters': RouteRecordInfo<
+      '/games/crosswalk-critters',
+      '/games/crosswalk-critters',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/games/machine-workshop': RouteRecordInfo<
+      '/games/machine-workshop',
+      '/games/machine-workshop',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/games/pond-paddlers': RouteRecordInfo<
+      '/games/pond-paddlers',
+      '/games/pond-paddlers',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/python-ide': RouteRecordInfo<
       '/python-ide',
       '/python-ide',
@@ -113,6 +148,46 @@ declare module 'vue-router/auto-routes' {
     'src/pages/course-resource.vue': {
       routes:
         | '/course-resource'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/games/index.vue': {
+      routes:
+        | '/games/'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/games/comet-hopper.vue': {
+      routes:
+        | '/games/comet-hopper'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/games/crosswalk-critters.vue': {
+      routes:
+        | '/games/crosswalk-critters'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/games/machine-workshop.vue': {
+      routes:
+        | '/games/machine-workshop'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/games/pond-paddlers.vue': {
+      routes:
+        | '/games/pond-paddlers'
       views:
         | never
       pathParamNames:

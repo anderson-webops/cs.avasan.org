@@ -112,14 +112,14 @@ describe("versioned full-stack production deployment", () => {
 			version: string;
 		};
 
-		expect(rootPackage.version).toBe("2.7.100");
-		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]100\}/g)).toHaveLength(2);
+		expect(rootPackage.version).toBe("2.7.101");
+		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]101\}/g)).toHaveLength(2);
 		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g)).toHaveLength(2);
 		expect(compose).not.toContain("SOURCE_REVISION:-unknown");
 		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
-		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.100");
+		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.101");
 		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
-		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.100");
+		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.101");
 		expect(apiDockerfile).toContain("ARG SOURCE_REVISION=unknown");
 		expect(frontendReleaseWriter).toContain("environment.COMMIT_REF?.trim()");
 		expect(frontendReleaseWriter).toContain("const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;");
@@ -140,6 +140,22 @@ describe("versioned full-stack production deployment", () => {
 		expect(productionSmoke).toContain('currentSmokePhase = "security headers"');
 		expect(productionSmoke).not.toContain("smokeErrorMessage");
 		expect(productionSmoke).toContain('adminRedirect.headers.get("location") === "/admin/"');
+		expect(productionSmoke).toContain('"/games/pond-paddlers"');
+		expect(productionSmoke).toContain('"/games/crosswalk-critters"');
+		expect(productionSmoke).toContain('"/games/machine-workshop"');
+		expect(productionSmoke).toContain('"/games/comet-hopper"');
+		expect(productionSmoke).toContain('const path = "/api/accounts/login";');
+		expect(productionSmoke).toContain('body.message === "Bad credentials"');
+		expect(productionSmoke).toContain(
+			'currentSmokePhase = "invalid Admin login";'
+		);
+		expect(productionSmoke).toContain("verifyPondPaddlersBoundary");
+		expect(productionSmoke).toContain(
+			'"/api/pond-paddlers/rooms/INVALID0/join"'
+		);
+		expect(productionSmoke).toContain(
+			'missingBody.message === "Race unavailable."'
+		);
 		expect(productionSmoke).toContain('"/python-ide?course=python-1"');
 		expect(productionSmoke).toContain('"/python-ide.html?course=python-1"');
 		expect(productionSmoke).toContain('"/python-ide/?course=python-1"');

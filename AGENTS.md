@@ -15,6 +15,12 @@ Keep these constraints intact:
 - The original Python Level 2 and PyGames curricula may remain visible in a
   separate archived-reference group for Julio. Archived entries are not
   current course offerings and must not be added to student course access.
+- Keep the four original activities under `/games` separate from the course
+  catalog. Crosswalk Critters, Machine Workshop, and Comet Hopper are
+  browser-local and untracked. Pond Paddlers uses only private, Julio-created,
+  memory-only rooms lasting no more than two hours, random preset aliases, and
+  separate high-entropy seat cookies. Do not add names, free text, chat, public
+  lobbies, spectators, persistent scores, account links, or game analytics.
 - Within the Avasan sites, Graph Sketcher is hosted only by
   `math.avasan.org`. CS must return `404` for `/graph-sketcher`, the entire
   `/graph-sketcher/` namespace (including stale direct artifacts), and
@@ -61,7 +67,7 @@ uncommitted unless the user asks you to.
 
 ## Repository Shape
 
-- `front-end/`: Vue 3/Vite SSG public course site and browser IDE.
+- `front-end/`: Vue 3/Vite SSG public course site, browser IDE, and games.
 - `back-end/`: Express/Mongoose service for Julio's private Admin session.
 - `front-end/test/` and `back-end/test/`: Vitest suites.
 - Root configuration controls shared TypeScript, ESLint, workspaces, and builds.

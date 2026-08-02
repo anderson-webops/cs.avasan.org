@@ -10,6 +10,11 @@ const ROUTE_TITLES = new Map([
 	["/", SITE_TITLE],
 	["/course-resource", "Course Resource"],
 	["/python-ide", "Python IDE"],
+	["/games", "Games"],
+	["/games/pond-paddlers", "Pond Paddlers"],
+	["/games/crosswalk-critters", "Crosswalk Critters"],
+	["/games/machine-workshop", "Machine Workshop"],
+	["/games/comet-hopper", "Comet Hopper"],
 	["/student-privacy", "Student Privacy"],
 	["/admin", "Teacher Admin"]
 ]);

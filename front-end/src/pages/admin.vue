@@ -5,6 +5,7 @@ import { useRoute } from "vue-router";
 import AccountManagement from "@/components/AccountManagement.vue";
 import AccountSecurity from "@/components/AccountSecurity.vue";
 import ClassroomAnalytics from "@/components/ClassroomAnalytics.vue";
+import PondPaddlersAdmin from "@/components/PondPaddlersAdmin.vue";
 import StudentManagement from "@/components/StudentManagement.vue";
 import {
 	studentAccountsAreEnabled,
@@ -62,6 +63,9 @@ watch([() => route.query.section, currentAdmin], focusRequestedSection);
 		</section>
 
 		<div v-else class="admin-sections">
+			<section class="admin-panel site-surface">
+				<PondPaddlersAdmin />
+			</section>
 			<section ref="analyticsPanel" class="admin-panel site-surface">
 				<ClassroomAnalytics />
 			</section>

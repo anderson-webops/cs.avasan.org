@@ -142,6 +142,24 @@ The anonymous count system owns only UTC day, fixed site, fixed event, optional
 allowlisted course ID, total count, and expiry. It has no account key or
 student-level join.
 
+Three solo classroom games run entirely in the current browser and create no
+server record or analytics event. A Pond Paddlers room exists only in the
+running API process for no more than two hours. It contains the private room
+configuration and each seat's random preset alias, secret-token hash, current
+arithmetic question and correct answer, and progress count. A submitted answer
+is checked and then discarded; it is not added to the room. The room code is
+not a seat credential. The secret seat token is sent
+only in a secure, HTTP-only, same-site cookie; it is unusable when the room is
+closed, expires, or is erased by an API restart. Rooms have no student name,
+account link, roster mapping, free text, chat, public lobby, spectators,
+persistent scores, or analytics.
+
+Game abuse prevention holds a normalized network-address key in an exact-expiry
+in-process counter for no more than five minutes and an answer counter keyed by
+the one-way seat-token hash for no more than one minute. These counters are not
+written to MongoDB, student records, or analytics. The room's own seat-token
+hash remains only until that room closes, expires, or the process restarts.
+
 ## Access and correction
 
 Parents, guardians, students, the school, or the district use the exact
