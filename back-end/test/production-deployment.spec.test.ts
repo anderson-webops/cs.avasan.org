@@ -61,7 +61,7 @@ describe("versioned full-stack production deployment", () => {
 		const hostProxy = repositoryFile("deploy/host-nginx.conf.example");
 
 		expect(proxy).toContain("location = /api");
-		expect(proxy).toContain("location /api/");
+		expect(proxy).toContain("location ^~ /api/");
 		expect(proxy).toContain("proxy_pass http://api:3008/;");
 		expect(proxy).toContain("proxy_buffering off;");
 		expect(proxy).toContain("access_log off;");
@@ -196,14 +196,14 @@ describe("versioned full-stack production deployment", () => {
 			version: string;
 		};
 
-		expect(rootPackage.version).toBe("2.7.104");
-		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]104\}/g)).toHaveLength(2);
+		expect(rootPackage.version).toBe("2.7.105");
+		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]105\}/g)).toHaveLength(2);
 		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g)).toHaveLength(2);
 		expect(compose).not.toContain("SOURCE_REVISION:-unknown");
 		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
-		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.104");
+		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.105");
 		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
-		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.104");
+		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.105");
 		expect(apiDockerfile).toContain("ARG SOURCE_REVISION=unknown");
 		expect(frontendReleaseWriter).toContain("environment.COMMIT_REF?.trim()");
 		expect(frontendReleaseWriter).toContain("const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;");
