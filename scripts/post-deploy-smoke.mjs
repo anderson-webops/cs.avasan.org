@@ -14,6 +14,8 @@ const releaseVersionPattern
 const sourceRevisionPattern = /^[0-9a-f]{40}$/;
 let currentSmokePhase = "initialization";
 const securityHeaders = Object.freeze({
+	"cross-origin-opener-policy": "same-origin",
+	"cross-origin-resource-policy": "same-origin",
 	"permissions-policy": "camera=(), geolocation=(), microphone=()",
 	"referrer-policy": "no-referrer",
 	"strict-transport-security": "max-age=31536000; includeSubDomains",
@@ -105,16 +107,56 @@ export function validateContentSecurityPolicy(value, policyName) {
 }
 
 function validateSecurityHeaders(response, path, policyName) {
+	const headerValues = name => typeof response.headers.getAll === "function"
+		? response.headers.getAll(name)
+		: (response.headers.get(name) === null ? [] : [response.headers.get(name)]);
+	assertion(
+		headerValues("content-security-policy").length === 1,
+		`${path} returned duplicate Content-Security-Policy headers.`
+	);
 	validateContentSecurityPolicy(
 		response.headers.get("content-security-policy"),
 		policyName
 	);
 	for (const [header, expectedValue] of Object.entries(securityHeaders)) {
 		assertion(
+			headerValues(header).length === 1,
+			`${path} returned duplicate ${header} headers.`
+		);
+		assertion(
 			response.headers.get(header) === expectedValue,
 			`${path} returned an unexpected ${header} header.`
 		);
 	}
+}
+
+export async function verifyApiNotFound(response, path) {
+	assertion(
+		response.status === 404,
+		`${path} returned HTTP ${response.status} instead of 404.`
+	);
+	assertion(
+		response.headers.get("content-type")?.includes("application/json"),
+		`${path} did not return JSON.`
+	);
+	assertion(
+		response.headers.get("cache-control")?.includes("no-store"),
+		`${path} must not be cached.`
+	);
+	assertion(
+		response.headers.get("set-cookie") === null,
+		`${path} unexpectedly set a cookie.`
+	);
+	validateSecurityHeaders(response, path, "standard");
+	const body = await readSmokeJson(response, path);
+	assertion(
+		body
+		&& typeof body === "object"
+		&& !Array.isArray(body)
+		&& Object.keys(body).join(",") === "message"
+		&& body.message === "Not found",
+		`${path} did not return the generic API not-found contract.`
+	);
 }
 
 export function parseExpectedBoolean(value, name) {
@@ -255,7 +297,9 @@ async function verifySecurityHeaders() {
 		["/", "standard"],
 		["/games/pond-paddlers/", "standard"],
 		["/ide/", "code-ide"],
-		["/python-ide/assets/manifest.json", "code-ide"]
+		["/python-ide/assets/manifest.json", "code-ide"],
+		["/api/release", "standard"],
+		["/api/healthz", "standard"]
 	]) {
 		const response = await request(path);
 		assertion(response.ok, `${path} returned HTTP ${response.status}`);
@@ -494,6 +538,9 @@ async function verifyPrivacyFeatureBoundaries() {
 			"Enabled student session endpoint returned an unexpected anonymous-session body."
 		);
 	}
+	else {
+		await verifyApiNotFound(student, "/api/students/session");
+	}
 
 	const oauth = await request("/api/students/oauth/providers", {
 		redirect: "manual"
@@ -528,6 +575,9 @@ async function verifyPrivacyFeatureBoundaries() {
 			"Enabled student OAuth endpoint did not report a configured Apple or Google provider."
 		);
 	}
+	else {
+		await verifyApiNotFound(oauth, "/api/students/oauth/providers");
+	}
 
 	const usage = await request("/api/classroom-usage", {
 		body: JSON.stringify({
@@ -548,6 +598,9 @@ async function verifyPrivacyFeatureBoundaries() {
 			expectedClassroomAnalyticsEnabled ? 400 : 404
 		}.`
 	);
+	if (!expectedClassroomAnalyticsEnabled) {
+		await verifyApiNotFound(usage, "/api/classroom-usage");
+	}
 	assertion(
 		usage.headers.get("cache-control")?.includes("no-store"),
 		"Classroom usage endpoint must not be cached."
@@ -563,6 +616,13 @@ async function verifyPrivacyFeatureBoundaries() {
 	assertion(
 		admin.status === 403,
 		`Unauthenticated Admin session endpoint returned HTTP ${admin.status} instead of 403.`
+	);
+
+	await verifyApiNotFound(
+		await request("/api/__cs-avasan-deployment-probe-missing", {
+			redirect: "manual"
+		}),
+		"/api/__cs-avasan-deployment-probe-missing"
 	);
 }
 

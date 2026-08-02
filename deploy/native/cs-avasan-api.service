@@ -1,0 +1,59 @@
+[Unit]
+Description=cs.avasan.org classroom API
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=cs-avasan
+Group=cs-avasan
+WorkingDirectory=/srv/cs.avasan.org/current
+EnvironmentFile=/etc/cs.avasan.org/api.env
+EnvironmentFile=/srv/cs.avasan.org/current/release.env
+# The active release overrides only the intentional public build decisions.
+# This keeps an atomic rollback coherent without copying runtime secrets.
+EnvironmentFile=/srv/cs.avasan.org/current/public-config.env
+Environment=NODE_ENV=production
+Environment=HOST=127.0.0.1
+Environment=BACKEND_HOST=127.0.0.1
+Environment=PORT=3008
+Environment=CLASSROOM_ORIGIN=https://cs.avasan.org
+Environment=CROSS_SITE=false
+Environment=TRUST_PROXY_HOPS=1
+ExecStartPre=/usr/bin/node /srv/cs.avasan.org/current/scripts/verify-native-runtime-config.mjs /srv/cs.avasan.org/current
+ExecStart=/usr/bin/node /srv/cs.avasan.org/current/back-end/dist/server.js
+Restart=on-failure
+RestartSec=5
+KillSignal=SIGTERM
+TimeoutStopSec=45
+UMask=0077
+
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectClock=true
+ProtectControlGroups=true
+ProtectHome=true
+ProtectHostname=true
+ProtectKernelLogs=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectProc=invisible
+ProtectSystem=strict
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+LockPersonality=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+SystemCallArchitectures=native
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=cs-avasan-api
+
+[Install]
+WantedBy=multi-user.target

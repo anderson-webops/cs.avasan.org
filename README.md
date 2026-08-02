@@ -251,7 +251,7 @@ logs; they can contain short-lived authorization codes and state values.
 A frontend-only static build may be used for local or private-preview review of
 anonymous classroom pages. It must not be promoted to `cs.avasan.org`; Julio's
 Admin and the site's production health, readiness, and release contracts
-require the full-stack Compose handoff and exact same-origin `/api/*` mapping.
+require a reviewed full-stack handoff and exact same-origin `/api/*` mapping.
 
 Pond Paddlers rooms are intentionally process-local. Keep exactly one CS API
 instance; a deploy or API restart closes every active room. The existing
@@ -262,6 +262,18 @@ proxy read timeout must exceed that interval. No WebSocket route or separate
 game service is required.
 
 ## Reproducible Production Deployment
+
+The preferred non-Docker handoff is documented in
+[`docs/native-production-deployment.md`](docs/native-production-deployment.md).
+It builds immutable frontend/backend releases, runs one hardened systemd API,
+serves the public site and custom 404 directly from Nginx, verifies the full
+stack over a loopback-only listener, and atomically restores the prior release
+on failure. Its API environment remains fork-specific and never gives the web
+service Mongo root credentials. The native runtime preflight also prevents
+privacy or feature flags from drifting away from the frontend build.
+
+The Compose handoff below remains a supported container-isolated alternative.
+Do not run the native and Compose stacks at the same time.
 
 [`compose.production.yml`](compose.production.yml) builds this repository's
 frontend proxy and Express API, keeps the API and authenticated MongoDB off
@@ -291,7 +303,7 @@ that fallback is not permitted by the production Compose path. Inject the
 deployment identity without changing application secrets:
 
 ```bash
-export CS_RELEASE_VERSION=2.7.103
+export CS_RELEASE_VERSION=2.7.104
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 docker compose --env-file deploy/cs.env -f compose.production.yml build
 ```
@@ -306,7 +318,7 @@ To prepare a deployment:
 ```bash
 install -m 600 deploy/cs.env.example deploy/cs.env
 # Fill secrets, keep all optional features false until the privacy gate is met.
-export CS_RELEASE_VERSION=2.7.103
+export CS_RELEASE_VERSION=2.7.104
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 ./scripts/verify-deploy-env-permissions.sh
 docker compose --env-file deploy/cs.env -f compose.production.yml build

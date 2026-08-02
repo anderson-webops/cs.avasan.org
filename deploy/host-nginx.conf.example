@@ -18,6 +18,8 @@ server {
 
 	access_log off;
 	client_max_body_size 80m;
+	# The inner proxy owns the one public security-header profile. Do not add a
+	# second CSP, HSTS, framing, or referrer header set in this outer vhost.
 
 	# Keep this host proxy-only. The immutable web image owns static routes,
 	# strict 404 handling, release headers, redirects, and the /api boundary.
