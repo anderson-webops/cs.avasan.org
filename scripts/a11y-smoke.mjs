@@ -22,7 +22,7 @@ const routeScenarios = [
 			? [
 					"/",
 					"/login",
-					"/python-ide",
+					"/ide",
 					"/games",
 					"/games/pond-paddlers",
 					"/games/crosswalk-critters",
@@ -53,7 +53,7 @@ const routeScenarios = [
 	{
 		name: "student",
 		role: "student",
-		routes: ["/", "/python-ide"]
+		routes: ["/", "/ide"]
 	}
 ];
 const viewportScenarios = runFullMatrix
@@ -402,6 +402,17 @@ async function stopChild(child) {
 const transientNavigationError =
 	/Execution context was destroyed|Cannot find context with specified id|Navigating frame was detached/i;
 
+function isTransientNavigationFailure(error) {
+	const visited = new Set();
+	let current = error;
+	while (current instanceof Error && !visited.has(current)) {
+		if (transientNavigationError.test(current.message)) return true;
+		visited.add(current);
+		current = current.cause;
+	}
+	return false;
+}
+
 async function runAxeAudit(page, url, interaction) {
 	for (let attempt = 1; attempt <= 3; attempt += 1) {
 		try {
@@ -463,7 +474,7 @@ async function runAxeAudit(page, url, interaction) {
 				});
 			});
 		} catch (error) {
-			if (attempt === 3 || !(error instanceof Error) || !transientNavigationError.test(error.message)) {
+			if (attempt === 3 || !isTransientNavigationFailure(error)) {
 				throw error;
 			}
 

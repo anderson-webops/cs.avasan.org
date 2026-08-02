@@ -11,7 +11,7 @@ const { currentAdmin } = storeToRefs(app);
 
 const primaryLinks = [
 	{ label: "Courses", to: "/" },
-	{ label: "Python IDE", to: "/python-ide" },
+	{ label: "IDE", to: "/ide" },
 	{ label: "Games", to: "/games" }
 ];
 

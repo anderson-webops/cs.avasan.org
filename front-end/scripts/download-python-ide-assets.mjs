@@ -40,6 +40,13 @@ const assetsOutputDir = path.join(
 	"assets"
 );
 const manifestPath = path.join(assetsOutputDir, "manifest.json");
+const ideManifestPath = path.join(
+	frontEndDir,
+	"public",
+	"ide",
+	"assets",
+	"manifest.json"
+);
 const stalePublicZipPath = path.join(
 	frontEndDir,
 	"public",
@@ -62,6 +69,7 @@ async function stagePythonIdeAssets() {
 	await rm(stalePublicZipPath, { force: true });
 
 	if (skipDownload) {
+		await mirrorIdeManifest();
 		console.log(
 			"[python-ide-assets] skipped by PYTHON_IDE_ASSETS_DOWNLOAD=skip"
 		);
@@ -79,6 +87,7 @@ async function stagePythonIdeAssets() {
 	]);
 
 	if (!forceRefresh && isCurrent(localInfo, remoteInfo)) {
+		await mirrorIdeManifest();
 		console.log(
 			`[python-ide-assets] using extracted ${relativeManifestPath()}`
 		);
@@ -135,6 +144,7 @@ async function stagePythonIdeAssets() {
 			localInfo.exists &&
 			localInfo.cache?.sha256 === REVIEWED_ASSETS_ZIP_SHA256
 		) {
+			await mirrorIdeManifest();
 			console.warn(
 				`[python-ide-assets] download failed, using existing ${relativeManifestPath()}: ${formatError(error)}`
 			);
@@ -186,7 +196,21 @@ async function extractAssets(zipBytes) {
 		version: 1
 	};
 	await writeFile(manifestPath, `${JSON.stringify(manifest, null, "\t")}\n`);
+	await writeIdeManifest(manifest);
 	return manifest;
+}
+
+async function mirrorIdeManifest() {
+	const manifest = await readJson(manifestPath).catch(() => null);
+	if (manifest) await writeIdeManifest(manifest);
+}
+
+async function writeIdeManifest(manifest) {
+	await mkdir(path.dirname(ideManifestPath), { recursive: true });
+	await writeFile(
+		ideManifestPath,
+		`${JSON.stringify(manifest, null, "\t")}\n`
+	);
 }
 
 async function localAssetInfo() {

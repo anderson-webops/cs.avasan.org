@@ -135,7 +135,7 @@ onMounted(loadSummary);
 							</dd>
 						</div>
 						<div v-if="site === 'cs'">
-							<dt>Python IDE</dt>
+							<dt>IDE</dt>
 							<dd>
 								{{ summary.siteActivity.cs.totals.ideOpens }}
 							</dd>
@@ -230,7 +230,7 @@ onMounted(loadSummary);
 							<tr>
 								<th scope="col">Date</th>
 								<th scope="col">CS courses</th>
-								<th scope="col">Python IDE</th>
+								<th scope="col">IDE</th>
 								<th scope="col">Math courses</th>
 								<th scope="col">Grapher</th>
 							</tr>

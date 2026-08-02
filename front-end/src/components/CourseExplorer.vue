@@ -120,7 +120,7 @@ const pythonIdeCourseHref = computed(() => {
 		params.set("starterTitle", `${selectedCourse.value.name} Starter`);
 		params.set("starterLabel", "Course starter");
 	}
-	return `/python-ide?${params.toString()}`;
+	return `/ide?${params.toString()}`;
 });
 const pythonIdeCourseLabel = computed(() =>
 	pythonIdeCourseMode.value
@@ -885,7 +885,7 @@ function pythonIdeStarterHref(item: CourseModuleItem, resource: ResourceLink) {
 		starterTitle: item.title,
 		starterLabel: resource.label
 	});
-	return `/python-ide?${params.toString()}`;
+	return `/ide?${params.toString()}`;
 }
 
 function courseAssetPreviewResources(

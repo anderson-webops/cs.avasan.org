@@ -8646,7 +8646,7 @@ function classroomIdeLink(
 	if (starterUrl?.startsWith("https://github.com/")) {
 		params.set("starterUrl", starterUrl);
 	}
-	return `/python-ide?${params.toString()}`;
+	return `/ide?${params.toString()}`;
 }
 
 function replaceBeginnerLabel(value: string) {

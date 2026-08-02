@@ -32,7 +32,7 @@ vi.mock("@/api", () => ({
 
 const workspacePath = resolve(
 	__dirname,
-	"../src/components/PythonIdeWorkspace.vue"
+	"../src/components/CodeIdeWorkspace.vue"
 );
 
 function project(

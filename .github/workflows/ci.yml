@@ -334,7 +334,8 @@ jobs:
               run: |
                   origin=http://127.0.0.1:${CS_AVASAN_LISTEN_PORT}
                   curl --fail --silent --show-error "${origin}/" >/dev/null
-                  curl --fail --silent --show-error "${origin}/python-ide" >/dev/null
+                  curl --fail --silent --show-error "${origin}/ide" >/dev/null
+                  curl --fail --silent --show-error "${origin}/python-ide/assets/manifest.json" >/dev/null
                   curl --fail --silent --show-error "${origin}/api/healthz" >/dev/null
                   curl --fail --silent --show-error "${origin}/api/readyz" >/dev/null
 

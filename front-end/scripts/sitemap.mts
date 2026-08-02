@@ -3,7 +3,9 @@ export const SITE_URL = "https://cs.avasan.org";
 export const SITEMAP_EXCLUDED_ROUTES = [
 	"/404",
 	"/admin",
+	"/bluej",
 	"/course-resource",
+	"/ide",
 	"/python-ide",
 	"/games",
 	"/games/pond-paddlers",

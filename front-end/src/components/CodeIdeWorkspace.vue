@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { EditorState as CodeEditorState } from "@codemirror/state";
 import type { EditorView as CodeEditorView } from "@codemirror/view";
+import type { KarelWallSide, KarelWorldState } from "@/modules/javaIdeRuntime";
 import type { PythonCodeMirrorAssetCompletionNames } from "@/modules/pythonCodeMirror";
 import type {
 	PythonIdeFile,
@@ -15,6 +16,8 @@ import type {
 	RuntimeArtifact,
 	TurtleBridge
 } from "@/modules/pythonIdeRuntime";
+import { faGear } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { storeToRefs } from "pinia";
 import {
 	computed,
@@ -26,6 +29,8 @@ import {
 } from "vue";
 import { useRoute } from "vue-router";
 import { reportClassroomUsage } from "@/modules/classroomUsage";
+import { runJavaIdeProject } from "@/modules/javaIdeRuntime";
+import { createKarelWorldPlaybackController } from "@/modules/karelWorldPlayback";
 import {
 	acknowledgeLocalPythonProjectRecovery,
 	addPythonIdeClassroomSections,
@@ -43,18 +48,20 @@ import {
 	getPythonIdeAssetDataUrl,
 	getPythonIdeDefaultFileContent,
 	getPythonIdeFileKindLabel,
-	getPythonIdeModeLabel,
+	getPythonIdeProjectKindLabel,
 	getPythonIdeRunnableFile,
 	isPythonIdeBinaryAssetFile,
-	isPythonIdePythonFile,
+	isPythonIdeBlueJProject,
+	isPythonIdeJavaFile,
+	isPythonIdeRunnableFile,
 	isPythonIdeTextFile,
 	isValidPythonFileName,
 	loadCurrentTabPythonProjectRecoverySnapshot,
 	loadLocalPythonProjectsAsync,
 	loadPythonIdeStarterFilesFromGitHub,
-	normalizeClassroomPythonIdeMode,
 	normalizeImportedPythonIdeFileName,
 	normalizePythonFileName,
+	normalizePythonIdeMode,
 	plainPythonIdeProjectSnapshot,
 	plainPythonIdeProjectsSnapshot,
 	purgeAllStudentPythonProjectRecovery,
@@ -111,6 +118,15 @@ interface RuntimeArtifactView {
 	text?: string;
 }
 
+interface KarelWorldCell {
+	avenue: number;
+	beeperCount: number;
+	key: string;
+	paintColor: string;
+	street: number;
+	walls: Record<KarelWallSide, boolean>;
+}
+
 interface TurtleState {
 	x: number;
 	y: number;
@@ -122,6 +138,12 @@ interface TurtleState {
 	background: string;
 	shape: TurtleShapeName;
 	speed: number;
+	stretchLength: number;
+	stretchWidth: number;
+	outlineWidth: number;
+	shearFactor: number;
+	shapeTransform: [number, number, number, number];
+	tilt: number;
 	visible: boolean;
 }
 
@@ -136,10 +158,28 @@ interface TurtlePose {
 	y: number;
 	heading: number;
 	penColor: string;
+	fillColor: string;
 	shape: TurtleShapeName;
 	speed: number;
+	stretchLength: number;
+	stretchWidth: number;
+	outlineWidth: number;
+	shearFactor: number;
+	shapeTransform: [number, number, number, number];
+	tilt: number;
 	visible: boolean;
 }
+
+interface TurtleShapeComponent {
+	fill: string;
+	outline: string;
+	points: Array<[number, number]>;
+}
+
+type TurtleShapeDefinition =
+	| { kind: "compound"; components: TurtleShapeComponent[] }
+	| { kind: "image"; name: string }
+	| { kind: "polygon"; points: Array<[number, number]> };
 
 type CanvasCoordinateMapper = (
 	x: number,
@@ -177,15 +217,14 @@ type TurtleRenderCommand =
 			y: number;
 	  }
 	| {
-			color: string;
-			heading: number;
 			kind: "stamp";
-			shape: TurtleShapeName;
-			x: number;
-			y: number;
+			pose: TurtlePose;
+			stampID: number;
 	  }
 	| {
+			align: CanvasTextAlign;
 			color: string;
+			font: string;
 			kind: "text";
 			text: string;
 			x: number;
@@ -259,7 +298,21 @@ interface GameToneHandle {
 }
 
 type PythonIdeAssetFolder = "images" | "music" | "sounds";
-type TurtleShapeName =
+type CodeIdeWorkspacePresetID = PythonIdeMode | "bluej";
+
+interface CodeIdeWorkspacePreset {
+	id: CodeIdeWorkspacePresetID;
+	label: string;
+	mode: PythonIdeMode;
+	template: PythonIdeProjectTemplate;
+}
+
+interface CodeIdeWorkspacePresetGroup {
+	label: string;
+	presets: CodeIdeWorkspacePreset[];
+}
+
+type BuiltinTurtleShapeName =
 	| "arrow"
 	| "blank"
 	| "circle"
@@ -268,6 +321,7 @@ type TurtleShapeName =
 	| "square"
 	| "triangle"
 	| "turtle";
+type TurtleShapeName = string;
 
 const imageAssetExtensions = [".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"];
 const audioAssetExtensions = [".wav", ".mp3", ".ogg"];
@@ -278,7 +332,7 @@ const assetCompletionExtensionMap = {
 } satisfies Record<PythonIdeAssetFolder, string[]>;
 const defaultTurtleID = "default";
 const defaultTurtleShape: TurtleShapeName = "classic";
-const supportedTurtleShapes = new Set<TurtleShapeName>([
+const supportedTurtleShapes = new Set<BuiltinTurtleShapeName>([
 	"arrow",
 	"blank",
 	"circle",
@@ -360,12 +414,13 @@ const turtleOriginalShapePolygons = {
 		[2, 14]
 	]
 } satisfies Record<
-	Exclude<TurtleShapeName, "blank" | "fancy">,
+	Exclude<BuiltinTurtleShapeName, "blank" | "fancy">,
 	Array<[number, number]>
 >;
 const maxPythonIdeProjectFiles = 40;
 const maxImportedTextFileBytes = 512 * 1024;
 const maxImportedBinaryFileBytes = 2 * 1024 * 1024;
+const maxImportedBlueJArchiveBytes = 4 * 1024 * 1024;
 const maxOutputLines = 500;
 const maxOutputTextLength = 12000;
 const maxRuntimeArtifacts = 12;
@@ -375,6 +430,76 @@ const runtimeArtifactContentSecurityPolicy =
 	"default-src 'none'; base-uri 'none'; connect-src 'none'; font-src data:; form-action 'none'; frame-src 'none'; img-src data: blob:; media-src data: blob:; object-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' https://cdn.plot.ly; style-src 'unsafe-inline'; worker-src 'none'";
 const maxCodeEditorViewStates = 120;
 const pythonIdeAutoSaveStorageKey = "classes-python-ide-autosave";
+const pythonIdeCodeRecommendationsStorageKey =
+	"classes-python-ide-code-recommendations";
+const pythonIdeEditorLineWrapStorageKey = "classes-python-ide-editor-line-wrap";
+const pythonIdeExpandedWorkspaceStorageKey =
+	"classes-python-ide-expanded-workspace";
+const pythonIdeSplitPercentStorageKey = "classes-python-ide-split-percent";
+const blueJProjectArchiveUploadAccept =
+	".zip,application/zip,application/x-zip-compressed";
+const blueJHomeUrl = "https://www.bluej.org/";
+const blueJSourceUrl = "https://github.com/k-pet-group/BlueJ-Greenfoot";
+const codeIdeWorkspacePresetGroups: CodeIdeWorkspacePresetGroup[] = [
+	{
+		label: "Browser IDE",
+		presets: [
+			{
+				id: "python",
+				label: "Python",
+				mode: "python",
+				template: "blank"
+			},
+			{
+				id: "turtle",
+				label: "Python Turtle",
+				mode: "turtle",
+				template: "blank"
+			},
+			{
+				id: "pgzero",
+				label: "PyGame Zero",
+				mode: "pgzero",
+				template: "blank"
+			},
+			{
+				id: "data",
+				label: "Data / AI",
+				mode: "data",
+				template: "blank"
+			},
+			{ id: "java", label: "Java", mode: "java", template: "blank" },
+			{
+				id: "karel",
+				label: "Karel Java",
+				mode: "karel",
+				template: "blank"
+			}
+		]
+	},
+	{
+		label: "BlueJ integration",
+		presets: [
+			{
+				id: "bluej",
+				label: "BlueJ Java",
+				mode: "java",
+				template: "bluej"
+			}
+		]
+	}
+];
+const codeIdeWorkspacePresets = codeIdeWorkspacePresetGroups.flatMap(
+	group => group.presets
+);
+const blueJClassNameRegex =
+	/\b(?:public\s+)?(?:abstract\s+|final\s+)?class\s+([A-Z_$][\w$]*)/;
+const blueJMainMethodRegex =
+	/\bmain\s*\(\s*(?:\w+\s*\[\s*\]\s+\w+|\w+\s+\w+\s*\[\s*\]|\w+\s*\.\.\.\s+\w+)/;
+const defaultCodeSplitPercent = 54;
+const defaultDrawingCodeSplitPercent = 42;
+const minCodeSplitPercent = 28;
+const maxCodeSplitPercent = 72;
 const turtleAnimationInitialFrameCreditMs = 16;
 const turtleInstantStepMaxDurationMs = 16;
 const turtleTurnStepDurationMs = turtleInstantStepMaxDurationMs;
@@ -386,6 +511,7 @@ const turtleInstantFrameStepBudget = 24;
 const turtleBacklogFastForwardStepThreshold = 18;
 const turtleBacklogFrameDistanceBudget = 420;
 const turtleBacklogFrameStepBudget = 140;
+const karelPlaybackFrameDelayMs = 650;
 const turtleMarkerHaloLineWidth = 4;
 const turtleMarkerStrokeLineWidth = 1.2;
 const outputEntryTruncatedMessage =
@@ -495,8 +621,10 @@ const newFileName = ref("");
 const inputText = ref("");
 const outputLines = ref<OutputLine[]>([]);
 const runtimeArtifacts = ref<RuntimeArtifactView[]>([]);
+const karelWorld = ref<KarelWorldState | null>(null);
 const isLoading = ref(true);
 const isSaving = ref(false);
+const isDownloading = ref(false);
 const isRunning = ref(false);
 const isGameLoopActive = ref(false);
 const activeTurtleTimerCount = ref(0);
@@ -505,7 +633,15 @@ const activeTurtleEventHandlerCount = ref(0);
 const showProjectMenu = ref(false);
 const showFileTools = ref(false);
 const showIdeSettings = ref(false);
+const newWorkspacePresetID = ref<CodeIdeWorkspacePresetID>("turtle");
 const autoSaveEnabled = ref(loadPythonIdeAutoSavePreference());
+const codeRecommendationsEnabled = ref(
+	loadPythonIdeCodeRecommendationsPreference()
+);
+const editorLineWrapEnabled = ref(loadPythonIdeEditorLineWrapPreference());
+const ideExpanded = ref(loadPythonIdeExpandedWorkspacePreference());
+const ideSplitPercent = ref(loadPythonIdeSplitPercentPreference());
+const isResizingIdeSplit = ref(false);
 const deleteCandidateProjectID = ref("");
 const deleteConfirmText = ref("");
 const sidebarCollapsed = ref(false);
@@ -526,13 +662,33 @@ const anonymousWorkspaceClearError = ref("");
 const sharedComputerCleanupPanelIsVisible = false;
 const pythonIdePageRef = ref<HTMLElement | null>(null);
 const codeEditorHostRef = ref<HTMLDivElement | null>(null);
+const ideGridRef = ref<HTMLDivElement | null>(null);
+const ideSettingsRef = ref<HTMLDivElement | null>(null);
+const blueJArchiveInputRef = ref<HTMLInputElement | null>(null);
 const canvasRef = ref<HTMLCanvasElement | null>(null);
+const karelWorldRef = ref<HTMLDivElement | null>(null);
+const turtleCanvasWidth = ref(640);
+const turtleCanvasHeight = ref(480);
 const editorCursorCount = ref(1);
 const artifactCounter = ref(0);
 const outputCounter = ref(0);
-const keyHandlers = new Map<string, () => void>();
+const turtleKeyPressHandlers = new Map<string, () => void>();
+const turtleKeyReleaseHandlers = new Map<string, () => void>();
 const turtleClickHandlers = new Map<string, (x: number, y: number) => void>();
+const turtleReleaseHandlers = new Map<string, (x: number, y: number) => void>();
 const turtleDragHandlers = new Map<string, (x: number, y: number) => void>();
+const turtleObjectClickHandlers = new Map<
+	string,
+	(x: number, y: number) => void
+>();
+const turtleObjectReleaseHandlers = new Map<
+	string,
+	(x: number, y: number) => void
+>();
+const turtleObjectDragHandlers = new Map<
+	string,
+	(x: number, y: number) => void
+>();
 const turtleTimerHandles = new Set<ReturnType<typeof window.setTimeout>>();
 const gameKeysDown = new Set<string>();
 const gameEvents: GameInputEvent[] = [];
@@ -550,6 +706,13 @@ const remoteReviewDetailLoads = new Map<
 >();
 const remoteProjectDetailLru: string[] = [];
 const maxCachedRemoteProjectDetails = 3;
+const karelWorldPlaybackController = createKarelWorldPlaybackController({
+	delayMs: karelPlaybackFrameDelayMs,
+	showStep(step, stepNumber, stepCount) {
+		karelWorld.value = step;
+		runMessage.value = `Karel step ${stepNumber} of ${stepCount}`;
+	}
+});
 
 let saveTimer: ReturnType<typeof window.setTimeout> | null = null;
 let localSnapshotTimer: ReturnType<typeof window.setTimeout> | null = null;
@@ -591,6 +754,7 @@ let gameToneCounter = 0;
 let gameAudioPlaybackBlockedNoticeShown = false;
 let codeEditorView: CodeEditorView | null = null;
 let syncingCodeMirrorContent = false;
+let useFreshCodeEditorStateOnNextReset = false;
 let gameCourseAssetPack: PythonIdeCourseAssetPack | null = null;
 let gameCourseAssetPackLoadFailed = false;
 let gameCourseAssetPackSilentLoadFailed = false;
@@ -598,6 +762,9 @@ let turtleStampCounter = 0;
 let turtleCompletedCommands: TurtleCompletedCommand[] = [];
 let turtleQueuedSteps: TurtleAnimationStep[] = [];
 let turtleVisiblePoses = new Map<string, TurtlePose>();
+let turtleWorldCoordinates: [number, number, number, number] | null = null;
+let turtleBackgroundImage: CachedGameImage | null = null;
+const turtleRegisteredShapes = new Map<string, TurtleShapeDefinition>();
 let codeEditorModulesPromise: Promise<PythonCodeEditorModules> | null = null;
 let pythonRuntimeModulePromise: Promise<PythonRuntimeModule> | null = null;
 let loadedPythonRuntimeModule: PythonRuntimeModule | null = null;
@@ -648,6 +815,7 @@ async function waitForOwnerBoundMutations() {
 		await Promise.allSettled([...ownerBoundMutations]);
 	}
 }
+let ideSplitPointerID: number | null = null;
 
 function loadPythonCodeEditorModules() {
 	codeEditorModulesPromise ??= Promise.all([
@@ -678,6 +846,72 @@ function persistPythonIdeAutoSavePreference(enabled: boolean) {
 	window.localStorage.setItem(
 		pythonIdeAutoSaveStorageKey,
 		enabled ? "on" : "off"
+	);
+}
+
+function loadPythonIdeCodeRecommendationsPreference() {
+	if (typeof window === "undefined") return true;
+	return (
+		window.localStorage.getItem(pythonIdeCodeRecommendationsStorageKey) !==
+		"off"
+	);
+}
+
+function persistPythonIdeCodeRecommendationsPreference(enabled: boolean) {
+	if (typeof window === "undefined") return;
+	window.localStorage.setItem(
+		pythonIdeCodeRecommendationsStorageKey,
+		enabled ? "on" : "off"
+	);
+}
+
+function loadPythonIdeEditorLineWrapPreference() {
+	if (typeof window === "undefined") return true;
+	return (
+		window.localStorage.getItem(pythonIdeEditorLineWrapStorageKey) !== "off"
+	);
+}
+
+function persistPythonIdeEditorLineWrapPreference(enabled: boolean) {
+	if (typeof window === "undefined") return;
+	window.localStorage.setItem(
+		pythonIdeEditorLineWrapStorageKey,
+		enabled ? "on" : "off"
+	);
+}
+
+function loadPythonIdeExpandedWorkspacePreference() {
+	if (typeof window === "undefined") return false;
+	return (
+		window.localStorage.getItem(pythonIdeExpandedWorkspaceStorageKey) ===
+		"on"
+	);
+}
+
+function persistPythonIdeExpandedWorkspacePreference(enabled: boolean) {
+	if (typeof window === "undefined") return;
+	window.localStorage.setItem(
+		pythonIdeExpandedWorkspaceStorageKey,
+		enabled ? "on" : "off"
+	);
+}
+
+function loadPythonIdeSplitPercentPreference() {
+	if (typeof window === "undefined") return null;
+	const storedValue = window.localStorage.getItem(
+		pythonIdeSplitPercentStorageKey
+	);
+	if (!storedValue?.trim()) return null;
+	const value = Number(storedValue);
+	if (!Number.isFinite(value)) return null;
+	return clampIdeSplitPercent(value);
+}
+
+function persistPythonIdeSplitPercentPreference(value: number) {
+	if (typeof window === "undefined") return;
+	window.localStorage.setItem(
+		pythonIdeSplitPercentStorageKey,
+		String(Math.round(value))
 	);
 }
 
@@ -805,7 +1039,7 @@ function persistCodeEditorViewStates(userID: string | null) {
 			JSON.stringify([...codeEditorViewStates])
 		);
 	} catch (error) {
-		console.warn("Could not persist Python IDE editor view state.", error);
+		console.warn("Could not persist IDE editor view state.", error);
 	}
 }
 
@@ -869,10 +1103,16 @@ function createDefaultTurtleState(background = "#ffffff"): TurtleState {
 		penDown: true,
 		penColor: "#000000",
 		fillColor: "#000000",
-		lineWidth: 3,
+		lineWidth: 1,
 		background,
 		shape: defaultTurtleShape,
 		speed: 3,
+		stretchLength: 1,
+		stretchWidth: 1,
+		outlineWidth: 1,
+		shearFactor: 0,
+		shapeTransform: [1, 0, 0, 1],
+		tilt: 0,
 		visible: true
 	};
 }
@@ -882,6 +1122,7 @@ let turtleStates = new Map<string, TurtleState>([
 	[defaultTurtleID, turtleState]
 ]);
 let turtleTracerEnabled = true;
+let turtleScreenDelayMs = 10;
 
 const turtleFillState: TurtleFillState = {
 	active: false,
@@ -896,14 +1137,13 @@ const gameState: GameCanvasState = {
 	backgroundGradient: null
 };
 
-const selectedProject = computed(
-	() =>
-		projects.value.find(
-			project => project._id === selectedProjectID.value
-		) ??
-		projects.value[0] ??
-		null
-);
+const selectedProject = computed(() => {
+	const selected = projects.value.find(
+		project => project._id === selectedProjectID.value
+	);
+	if (selected) return selected;
+	return selectedProjectID.value ? null : (projects.value[0] ?? null);
+});
 const selectedProjectContentLoaded = computed(
 	() => selectedProject.value?.remoteContentLoaded !== false
 );
@@ -975,6 +1215,16 @@ const activeVisibleReviewFileContent = computed(() => {
 const canSyncToAccount = computed(() => !!activeStorageOwnerID.value);
 const storageUserID = computed(() => activeStorageOwnerID.value);
 const sortedProjects = computed(() => [...projects.value]);
+
+type StudentSyncMode = Exclude<PythonIdeMode, "java" | "karel">;
+
+function isStudentSyncMode(mode: PythonIdeMode): mode is StudentSyncMode {
+	return mode !== "java" && mode !== "karel";
+}
+
+function projectUsesStudentSync(project: Pick<PythonIdeProject, "mode">) {
+	return isStudentSyncMode(project.mode);
+}
 const runControlIsStop = computed(
 	() =>
 		isRunning.value ||
@@ -985,22 +1235,129 @@ const runControlIsStop = computed(
 );
 const selectedModeLabel = computed(() =>
 	selectedProject.value
-		? getPythonIdeModeLabel(selectedProject.value.mode)
-		: "Python"
+		? getPythonIdeProjectKindLabel(selectedProject.value)
+		: "Code"
 );
+const newFileNamePlaceholder = computed(() => {
+	if (selectedProject.value?.mode === "karel")
+		return "MyProgram.java, helpers/Helper.java, or world.txt";
+	if (selectedProject.value?.mode === "java")
+		return "Main.java or src/main/java/Helper.java";
+	return "helper.py, helpers/math_tools.py, or data.csv";
+});
 const usesDrawingCanvas = computed(
 	() =>
 		selectedProject.value?.mode === "turtle" ||
 		selectedProject.value?.mode === "pgzero"
 );
 const usesGameCanvas = computed(() => selectedProject.value?.mode === "pgzero");
+const usesKarelWorld = computed(() => selectedProject.value?.mode === "karel");
+const usesVisualOutput = computed(
+	() => usesDrawingCanvas.value || usesKarelWorld.value
+);
+const activeIdeSplitPercent = computed(
+	() =>
+		ideSplitPercent.value ??
+		(usesVisualOutput.value
+			? defaultDrawingCodeSplitPercent
+			: defaultCodeSplitPercent)
+);
+const ideGridStyle = computed(() => ({
+	"--code-ide-code-column": `${activeIdeSplitPercent.value}%`
+}));
 const drawingCanvasStyle = computed(() => {
-	if (!usesGameCanvas.value) return {};
+	if (!usesGameCanvas.value) {
+		return {
+			"--python-turtle-aspect": `${turtleCanvasWidth.value} / ${turtleCanvasHeight.value}`,
+			"--python-turtle-max-width": `${Math.min(80, Math.max(20, (turtleCanvasWidth.value / turtleCanvasHeight.value) * 36))}rem`
+		};
+	}
 	const aspect = gameState.width / gameState.height;
 	return {
 		"--python-game-aspect": `${gameState.width} / ${gameState.height}`,
 		"--python-game-max-width": `${Math.min(68, Math.max(18, aspect * 34))}rem`
 	};
+});
+const karelWorldStyle = computed(() => ({
+	"--karel-cols": `${karelWorld.value?.cols ?? 10}`,
+	"--karel-rows": `${karelWorld.value?.rows ?? 10}`
+}));
+const karelRobotStyle = computed(() => {
+	const world = karelWorld.value;
+	const robot = world?.robot;
+	if (!world || !robot) return {};
+
+	const insetRatio = 0.21;
+	const sizeRatio = 0.58;
+	const leftPercent = ((robot.avenue - 1 + insetRatio) / world.cols) * 100;
+	const topPercent =
+		((world.rows - robot.street + insetRatio) / world.rows) * 100;
+
+	return {
+		height: `${(sizeRatio / world.rows) * 100}%`,
+		left: `${leftPercent}%`,
+		top: `${topPercent}%`,
+		width: `${(sizeRatio / world.cols) * 100}%`
+	};
+});
+const karelRobotDirectionClass = computed(() => {
+	const direction =
+		karelWorld.value?.robot?.direction.toLowerCase() ?? "east";
+	return `karel-robot--${direction}`;
+});
+function karelCellStyle(cell: KarelWorldCell) {
+	if (!cell.paintColor) return undefined;
+	return { "--karel-cell-color": cell.paintColor };
+}
+function karelCellAriaLabel(cell: KarelWorldCell) {
+	const label = `Street ${cell.street}, avenue ${cell.avenue}`;
+	return cell.paintColor ? `${label}, painted ${cell.paintColor}` : label;
+}
+const karelWorldCells = computed<KarelWorldCell[]>(() => {
+	const world = karelWorld.value;
+	if (!world) return [];
+
+	const beepers = new Map(
+		world.beepers.map(beeper => [
+			karelCellKey(beeper.street, beeper.avenue),
+			beeper.count
+		])
+	);
+	const paints = new Map(
+		(world.paints ?? []).map(paint => [
+			karelCellKey(paint.street, paint.avenue),
+			paint.color
+		])
+	);
+	const wallMap = new Map<string, Set<KarelWallSide>>();
+	for (const wall of world.walls) {
+		const key = karelCellKey(wall.street, wall.avenue);
+		const walls = wallMap.get(key) ?? new Set<KarelWallSide>();
+		walls.add(wall.side);
+		wallMap.set(key, walls);
+	}
+
+	const cells: KarelWorldCell[] = [];
+	for (let street = world.rows; street >= 1; street -= 1) {
+		for (let avenue = 1; avenue <= world.cols; avenue += 1) {
+			const key = karelCellKey(street, avenue);
+			const walls = wallMap.get(key) ?? new Set<KarelWallSide>();
+			cells.push({
+				avenue,
+				beeperCount: beepers.get(key) ?? 0,
+				key,
+				paintColor: paints.get(key) ?? "",
+				street,
+				walls: {
+					east: walls.has("east"),
+					north: walls.has("north"),
+					south: walls.has("south"),
+					west: walls.has("west")
+				}
+			});
+		}
+	}
+	return cells;
 });
 const requestedCourseId = computed(() =>
 	typeof route.query.course === "string" ? route.query.course : ""
@@ -1008,9 +1365,25 @@ const requestedCourseId = computed(() =>
 const requestedCourseProjectKey = computed(() =>
 	typeof route.query.projectKey === "string" ? route.query.projectKey : ""
 );
-const requestedStarterUrl = computed(() =>
-	typeof route.query.starterUrl === "string" ? route.query.starterUrl : ""
+const requestedClassroomSource = computed(() =>
+	typeof route.query.classroomSource === "string"
+		? route.query.classroomSource
+		: ""
 );
+const requestedStarterUrl = computed(() => {
+	if (typeof route.query.starterUrl === "string")
+		return route.query.starterUrl;
+
+	const classroomSource = requestedClassroomSource.value;
+	if (
+		!classroomSource ||
+		classroomSource.includes("..") ||
+		!/^[\w./-]+$/.test(classroomSource)
+	) {
+		return "";
+	}
+	return `https://github.com/instruction-material/${classroomSource}`;
+});
 const requestedStarterTitle = computed(() =>
 	typeof route.query.starterTitle === "string" ? route.query.starterTitle : ""
 );
@@ -1026,12 +1399,19 @@ const requestedClassroomProject = computed(
 const requestedTemplate = computed<PythonIdeProjectTemplate>(() => {
 	const rawTemplate =
 		typeof route.query.template === "string" ? route.query.template : "";
+	const rawMode =
+		typeof route.query.mode === "string" ? route.query.mode : "";
+	if (rawTemplate === "bluej" || rawMode === "bluej") return "bluej";
 	if (rawTemplate === "circle-art") return "circle-art";
 	if (rawTemplate === "classroom-project") return "classroom-project";
+	if (rawTemplate === "course" && requestedCourseStarter.value)
+		return "course";
+	if (rawTemplate === "demo") return "demo";
 	if (rawTemplate === "firework-festival") return "firework-festival";
 	if (rawTemplate === "flower-garden") return "flower-garden";
 	if (rawTemplate === "maze-explorer") return "maze-explorer";
 	if (rawTemplate === "neon-trail") return "neon-trail";
+	if (rawTemplate === "outline") return "outline";
 	if (rawTemplate === "picasso") return "picasso";
 	if (rawTemplate === "spiral-galaxy") return "spiral-galaxy";
 	if (rawTemplate === "turtle-race") return "turtle-race";
@@ -1043,8 +1423,81 @@ const requestedStarterMode = computed(() => {
 	const rawMode =
 		typeof route.query.mode === "string" ? route.query.mode : "";
 	const courseMode = pythonIdeModeForCourseId(requestedCourseId.value);
-	return normalizeClassroomPythonIdeMode(rawMode, courseMode ?? "turtle");
+	return normalizePythonIdeMode(rawMode, courseMode ?? "turtle");
 });
+const selectedProjectCanExportToBlueJ = computed(() =>
+	selectedProject.value ? selectedProject.value.mode === "java" : false
+);
+const selectedProjectCanShowBlueJIntegration = computed(() =>
+	selectedProject.value
+		? selectedProject.value.mode === "java" ||
+			selectedProject.value.mode === "karel"
+		: false
+);
+const selectedProjectIsBlueJ = computed(() =>
+	selectedProject.value
+		? isPythonIdeBlueJProject(selectedProject.value)
+		: false
+);
+const selectedProjectBlueJDescription = computed(() => {
+	if (selectedProjectIsBlueJ.value) {
+		return "This project is BlueJ-ready: download a ZIP with package.bluej for desktop object-bench work, then import the ZIP back here after class.";
+	}
+	if (selectedProjectCanExportToBlueJ.value) {
+		return "Export this Java project as a BlueJ-ready ZIP with package.bluej, source files, and README notes.";
+	}
+	return "Practice Karel in the browser, or open a BlueJ desktop starter for object-bench inspection.";
+});
+const selectedBlueJClassTargets = computed(() => {
+	const project = selectedProject.value;
+	if (!project) return [];
+
+	return project.files
+		.filter(file => isPythonIdeJavaFile(file.name))
+		.map(file => {
+			const fallbackName =
+				file.name
+					.split("/")
+					.filter(Boolean)
+					.at(-1)
+					?.replace(/\.java$/i, "") || file.name;
+			return {
+				fileName: file.name,
+				hasMainMethod: blueJMainMethodRegex.test(file.content),
+				name:
+					file.content.match(blueJClassNameRegex)?.[1] ?? fallbackName
+			};
+		})
+		.slice(0, 8);
+});
+const codeIdeHeroContent = {
+	eyebrow: "IDE",
+	title: "IDE",
+	description:
+		"Build multi-file Python and Java projects, use the Turtle canvas for drawing and " +
+		"keyboard-driven lessons, explore PyGame Zero games and data/AI notebooks with " +
+		"rendered charts, preview Java console programs or Karel robot worlds, and use " +
+		"BlueJ integration for desktop object-bench projects, ZIP import, and package.bluej export."
+};
+
+function karelCellKey(street: number, avenue: number) {
+	return `${street}:${avenue}`;
+}
+
+function clearKarelWorldPlayback() {
+	karelWorldPlaybackController.clear();
+}
+
+function playKarelWorldSteps(
+	steps: KarelWorldState[] | undefined,
+	shouldContinue: () => boolean
+) {
+	return karelWorldPlaybackController.play(steps, shouldContinue);
+}
+
+function isJavaIdeMode(mode: PythonIdeMode): mode is "java" | "karel" {
+	return mode === "java" || mode === "karel";
+}
 
 function appendOutput(kind: OutputLine["kind"], text: string) {
 	if (!text) return;
@@ -1275,7 +1728,9 @@ function requestedCourseProject() {
 	};
 }
 
-function projectForRoute(projectList: PythonIdeProject[]) {
+type PythonIdeProjectListItem = PythonIdeProject;
+
+function projectForRoute(projectList: PythonIdeProjectListItem[]) {
 	const request = requestedCourseProject();
 	if (!request) return null;
 	return (
@@ -1283,6 +1738,70 @@ function projectForRoute(projectList: PythonIdeProject[]) {
 			project => project.courseProjectKey === request.courseProjectKey
 		) ?? null
 	);
+}
+
+function requestedStandaloneProjectKey() {
+	if (requestedCourseProjectKey.value) return "";
+	const template = requestedTemplate.value;
+	if (template === "bluej") return "ide-template:bluej";
+	if (
+		template === "circle-art" ||
+		template === "classroom-project" ||
+		template === "demo" ||
+		template === "firework-festival" ||
+		template === "flower-garden" ||
+		template === "maze-explorer" ||
+		template === "neon-trail" ||
+		template === "outline" ||
+		template === "picasso" ||
+		template === "spiral-galaxy" ||
+		template === "turtle-race" ||
+		template === "triangle-motion"
+	) {
+		return `ide-template:${requestedStarterMode.value}:${template}`;
+	}
+	return "";
+}
+
+function standaloneProjectForRoute(projectList: PythonIdeProjectListItem[]) {
+	const key = requestedStandaloneProjectKey();
+	if (!key) return null;
+	return (
+		projectList.find(project => project.courseProjectKey === key) ?? null
+	);
+}
+
+function standaloneProjectStarterLabel(template: PythonIdeProjectTemplate) {
+	if (template === "bluej") return "BlueJ starter";
+	if (
+		template === "circle-art" ||
+		template === "classroom-project" ||
+		template === "firework-festival" ||
+		template === "flower-garden" ||
+		template === "maze-explorer" ||
+		template === "neon-trail" ||
+		template === "picasso" ||
+		template === "spiral-galaxy" ||
+		template === "turtle-race" ||
+		template === "triangle-motion"
+	) {
+		return "Guided Turtle project";
+	}
+	if (template === "demo") return "Demo project";
+	if (template === "outline") return "Template project";
+	return undefined;
+}
+
+function applyStandaloneRouteMetadata(project: PythonIdeProject) {
+	const key = requestedStandaloneProjectKey();
+	if (!key) return project;
+
+	project.courseProjectKey = key;
+	project.courseProjectTitle = project.title;
+	project.starterLabel = standaloneProjectStarterLabel(
+		requestedTemplate.value
+	);
+	return project;
 }
 
 async function createRequestedCourseProject() {
@@ -1321,6 +1840,24 @@ async function createRequestedCourseProject() {
 	});
 }
 
+async function openRemoteRequestedProjectsForLoad(loadRunID: number) {
+	// prettier-ignore
+	const openedCourseProject = await openRequestedCourseProjectIfNeeded(false, loadRunID);
+	if (!projectLoadIsCurrent(loadRunID) || openedCourseProject) {
+		return openedCourseProject;
+	}
+	return openRequestedStandaloneProjectIfNeeded(false, loadRunID);
+}
+
+async function openLocalRequestedProjectsForLoad(loadRunID: number) {
+	// prettier-ignore
+	const openedCourseProject = await openRequestedCourseProjectIfNeeded(true, loadRunID);
+	if (!projectLoadIsCurrent(loadRunID) || openedCourseProject) {
+		return openedCourseProject;
+	}
+	return openRequestedStandaloneProjectIfNeeded(true, loadRunID);
+}
+
 function projectLoadIsCurrent(loadRunID?: number) {
 	return loadRunID === undefined || loadRunID === projectLoadRunID;
 }
@@ -1334,7 +1871,11 @@ async function saveNewProject(
 	return runOwnerBoundMutation(async () => {
 		if (!projectOwnerContextIsCurrent(ownerContext)) return false;
 
-		if (ownerContext.ownerID && !localOnly) {
+		if (
+			ownerContext.ownerID &&
+			!localOnly &&
+			projectUsesStudentSync(project)
+		) {
 			const studentID = ownerContext.ownerID;
 			if (
 				!projects.value.some(candidate => candidate._id === project._id)
@@ -1387,16 +1928,20 @@ async function saveNewProject(
 		if (!projectOwnerContextIsCurrent(ownerContext)) return false;
 		projects.value.unshift(project);
 		selectedProjectID.value = project._id;
-		if (ownerContext.ownerID) {
+		if (ownerContext.ownerID && projectUsesStudentSync(project)) {
 			unsyncedProjectIDs.add(project._id);
 			refreshVolatileStudentProjectRecovery();
 			saveMessage.value = "Waiting to sync to account";
 			return true;
 		}
-		const snapshot = plainPythonIdeProjectsSnapshot(projects.value);
-		await saveLocalPythonProjectsAsync(snapshot, ownerContext.ownerID);
+		await saveLocalPythonProjectsAsync(
+			browserProjectPersistenceSnapshot(),
+			null
+		);
 		if (!projectOwnerContextIsCurrent(ownerContext)) return false;
-		saveMessage.value = "Saved locally";
+		saveMessage.value = ownerContext.ownerID
+			? "Saved in this browser"
+			: "Saved locally";
 		return true;
 	});
 }
@@ -1407,9 +1952,22 @@ async function openRequestedCourseProjectIfNeeded(
 ) {
 	if (!projectLoadIsCurrent(loadRunID)) return false;
 
-	const existingProject = projectForRoute(projects.value);
+	const availableProjects = projects.value;
+	const existingProject = projectForRoute(availableProjects);
 	if (existingProject) {
 		selectedProjectID.value = existingProject._id;
+		const studentID = activeStorageOwnerID.value;
+		if (
+			studentID &&
+			!localOnly &&
+			existingProject.remoteContentLoaded === false
+		) {
+			await hydrateRemoteSelection(
+				existingProject._id,
+				studentID,
+				loadRunID
+			);
+		}
 		return true;
 	}
 
@@ -1421,10 +1979,53 @@ async function openRequestedCourseProjectIfNeeded(
 	return projectLoadIsCurrent(loadRunID);
 }
 
+async function openRequestedStandaloneProjectIfNeeded(
+	localOnly = false,
+	loadRunID?: number
+) {
+	if (!projectLoadIsCurrent(loadRunID)) return false;
+
+	const key = requestedStandaloneProjectKey();
+	if (!key) return false;
+
+	const availableProjects = projects.value;
+	const existingProject = standaloneProjectForRoute(availableProjects);
+	if (existingProject) {
+		selectedProjectID.value = existingProject._id;
+		const studentID = activeStorageOwnerID.value;
+		if (
+			studentID &&
+			!localOnly &&
+			existingProject.remoteContentLoaded === false
+		) {
+			await hydrateRemoteSelection(
+				existingProject._id,
+				studentID,
+				loadRunID
+			);
+		}
+		return true;
+	}
+
+	const project = applyStandaloneRouteMetadata(
+		createPythonIdeProject(requestedStarterMode.value, {
+			courseProjectKey: key,
+			template: requestedTemplate.value
+		})
+	);
+	await saveNewProject(project, localOnly, loadRunID);
+	return projectLoadIsCurrent(loadRunID);
+}
+
 async function createInitialProject() {
 	const requestedProject = await createRequestedCourseProject();
 	if (requestedProject) return requestedProject;
-	return createPythonIdeProject(requestedStarterMode.value);
+	return applyStandaloneRouteMetadata(
+		createPythonIdeProject(requestedStarterMode.value, {
+			courseProjectKey: requestedStandaloneProjectKey() || undefined,
+			template: requestedTemplate.value
+		})
+	);
 }
 
 function projectMetadataSnapshot(project: PythonIdeProject): PythonIdeProject {
@@ -1500,6 +2101,7 @@ async function ensureRemoteProjectLoaded(
 ) {
 	const existing = projects.value.find(project => project._id === projectID);
 	if (!existing || existing._id.startsWith("local-")) return existing ?? null;
+	if (!projectUsesStudentSync(existing)) return existing;
 	if (existing.remoteContentLoaded === true) {
 		markRemoteProjectDetailUsed(projectID);
 		if (options.trimCache !== false) {
@@ -1553,6 +2155,10 @@ async function ensureVisibleReviewLoaded(
 	studentID: string,
 	loadRunID?: number
 ) {
+	const project = projects.value.find(
+		candidate => candidate._id === projectID
+	);
+	if (!project || !projectUsesStudentSync(project)) return null;
 	const existing = visibleProjectReviews.value.find(
 		review => review.sourceProject === projectID
 	);
@@ -1624,6 +2230,8 @@ async function hydrateRemoteSelection(
 	studentID: string,
 	loadRunID?: number
 ) {
+	const candidate = projects.value.find(project => project._id === projectID);
+	if (!candidate || !projectUsesStudentSync(candidate)) return false;
 	const project = await ensureRemoteProjectLoaded(
 		projectID,
 		studentID,
@@ -1639,7 +2247,17 @@ async function hydrateRemoteSelection(
 async function retrySelectedProjectLoad() {
 	const projectID = selectedProjectID.value;
 	const studentID = activeStorageOwnerID.value;
-	if (!projectID || !studentID) return;
+	const project = projects.value.find(
+		candidate => candidate._id === projectID
+	);
+	if (
+		!projectID ||
+		!studentID ||
+		!project ||
+		!projectUsesStudentSync(project)
+	) {
+		return;
+	}
 
 	projectDetailLoadErrorID.value = "";
 	const selectionLoadRunID = projectLoadRunID;
@@ -1663,6 +2281,42 @@ async function retrySelectedProjectLoad() {
 		) {
 			return;
 		}
+		projectDetailLoadErrorID.value = projectID;
+		appendOutput(
+			"system",
+			error instanceof Error
+				? error.message
+				: "Could not load this saved project."
+		);
+	}
+}
+
+async function selectCatalogProject(projectID: string) {
+	const project = projects.value.find(
+		candidate => candidate._id === projectID
+	);
+	if (!project) return;
+	selectedProjectID.value = projectID;
+	projectDetailLoadErrorID.value = "";
+
+	const studentID = activeStorageOwnerID.value;
+	if (
+		!studentID ||
+		!projectUsesStudentSync(project) ||
+		project._id.startsWith("local-") ||
+		project.remoteContentLoaded !== false
+	) {
+		await nextTick(resetCodeEditor);
+		return;
+	}
+
+	try {
+		const loadRunID = projectLoadRunID;
+		if (await hydrateRemoteSelection(projectID, studentID, loadRunID)) {
+			await nextTick(resetCodeEditor);
+		}
+	} catch (error) {
+		if (selectedProjectID.value !== projectID) return;
 		projectDetailLoadErrorID.value = projectID;
 		appendOutput(
 			"system",
@@ -1701,7 +2355,93 @@ function setProjects(nextProjects: PythonIdeProject[]) {
 		}
 	}
 	selectedProjectID.value =
-		projectForRoute(projects.value)?._id ?? projects.value[0]?._id ?? "";
+		projectForRoute(projects.value)?._id ??
+		standaloneProjectForRoute(projects.value)?._id ??
+		projects.value[0]?._id ??
+		"";
+}
+
+function locallyPersistableProjects() {
+	return storageUserID.value
+		? projects.value.filter(
+				project =>
+					!projectUsesStudentSync(project) &&
+					project.remoteContentLoaded !== false
+			)
+		: projects.value.filter(
+				project => project.remoteContentLoaded !== false
+			);
+}
+
+function browserProjectPersistenceSnapshot() {
+	const sourceProjects = storageUserID.value
+		? [...pendingAnonymousProjects.value, ...locallyPersistableProjects()]
+		: locallyPersistableProjects();
+	const seen = new Set<string>();
+	return plainPythonIdeProjectsSnapshot(sourceProjects).filter(project => {
+		if (seen.has(project._id)) return false;
+		seen.add(project._id);
+		return true;
+	});
+}
+
+function deduplicateProjectSnapshots(projectsToKeep: PythonIdeProject[]) {
+	const seen = new Set<string>();
+	return plainPythonIdeProjectsSnapshot(projectsToKeep).filter(project => {
+		if (seen.has(project._id)) return false;
+		seen.add(project._id);
+		return true;
+	});
+}
+
+async function persistBrowserProjectsBeforeOwnerTransition(
+	previousOwnerID: string | null,
+	previousProjects: PythonIdeProject[]
+) {
+	if (!previousOwnerID) {
+		await saveLocalPythonProjectsAsync(
+			deduplicateProjectSnapshots(previousProjects),
+			null
+		);
+		return;
+	}
+
+	// Signed-in Python-family projects belong only to the account service.
+	// Preserve the existing anonymous Python import queue, but keep Java and
+	// Karel in the shared browser store so signing in, signing out, or changing
+	// students never associates those browser-only projects with an account.
+	const storedAnonymousProjects = await loadLocalPythonProjectsAsync(null);
+	const anonymousPythonProjects = [
+		...pendingAnonymousProjects.value,
+		...storedAnonymousProjects
+	].filter(projectUsesStudentSync);
+	const browserOnlyProjects = previousProjects.filter(
+		project => !projectUsesStudentSync(project)
+	);
+	await saveLocalPythonProjectsAsync(
+		deduplicateProjectSnapshots([
+			...anonymousPythonProjects,
+			...browserOnlyProjects
+		]),
+		null
+	);
+}
+
+async function persistBrowserProjectsBeforeOwnerTransitionBestEffort(
+	previousOwnerID: string | null,
+	previousProjects: PythonIdeProject[]
+) {
+	try {
+		await persistBrowserProjectsBeforeOwnerTransition(
+			previousOwnerID,
+			previousProjects
+		);
+	} catch (error) {
+		console.warn(
+			"Could not preserve browser-only IDE projects during the account transition.",
+			error
+		);
+	}
 }
 
 function refreshVolatileStudentProjectRecovery() {
@@ -1709,7 +2449,11 @@ function refreshVolatileStudentProjectRecovery() {
 	if (!studentID || !projects.value.length) return;
 	volatileStudentProjectRecovery.replace(
 		studentID,
-		projects.value.filter(project => project.remoteContentLoaded !== false)
+		projects.value.filter(
+			project =>
+				projectUsesStudentSync(project) &&
+				project.remoteContentLoaded !== false
+		)
 	);
 }
 
@@ -1717,6 +2461,7 @@ function retainVolatileStudentProject(
 	studentID: string,
 	project: PythonIdeProject
 ) {
+	if (!projectUsesStudentSync(project)) return;
 	const existingProjects =
 		volatileStudentProjectRecovery.forStudent(studentID);
 	volatileStudentProjectRecovery.replace(studentID, [
@@ -1729,9 +2474,11 @@ async function persistLocalProjects(
 	options: { message?: string; quiet?: boolean } = {}
 ) {
 	refreshVolatileStudentProjectRecovery();
-	if (storageUserID.value) return;
 	try {
-		await saveLocalPythonProjectsAsync(projects.value, storageUserID.value);
+		await saveLocalPythonProjectsAsync(
+			browserProjectPersistenceSnapshot(),
+			null
+		);
 		if (!options.quiet) {
 			saveMessage.value =
 				options.message ??
@@ -1751,18 +2498,16 @@ async function persistLocalProjects(
 function saveLocalProjectSnapshot() {
 	if (!projects.value.length) return;
 	refreshVolatileStudentProjectRecovery();
-	if (storageUserID.value) return;
 	try {
-		saveLocalPythonProjects(projects.value, storageUserID.value);
+		saveLocalPythonProjects(browserProjectPersistenceSnapshot(), null);
 	} catch (error) {
-		console.warn("Could not write Python IDE local snapshot.", error);
+		console.warn("Could not write IDE local snapshot.", error);
 	}
 }
 
 async function persistLocalProjectSnapshot() {
 	if (!projects.value.length) return;
 	refreshVolatileStudentProjectRecovery();
-	if (storageUserID.value) return;
 	if (localSnapshotInFlight) {
 		localSnapshotQueued = true;
 		return localSnapshotInFlight;
@@ -1772,8 +2517,8 @@ async function persistLocalProjectSnapshot() {
 		do {
 			localSnapshotQueued = false;
 			await saveLocalPythonProjectsAsync(
-				projects.value,
-				storageUserID.value
+				browserProjectPersistenceSnapshot(),
+				null
 			);
 		} while (localSnapshotQueued);
 	})();
@@ -1781,7 +2526,7 @@ async function persistLocalProjectSnapshot() {
 	try {
 		await localSnapshotInFlight;
 	} catch (error) {
-		console.warn("Could not write Python IDE local snapshot.", error);
+		console.warn("Could not write IDE local snapshot.", error);
 	} finally {
 		localSnapshotInFlight = null;
 	}
@@ -1840,7 +2585,7 @@ function projectContainsSavedWork(project: PythonIdeProject) {
 		!!project.courseID ||
 		!!project.courseProjectKey ||
 		project.files.length > 1 ||
-		project.title !== "Untitled Python Project" ||
+		project.title !== "Untitled Code Project" ||
 		project.files.some(file => file.content.trim().length > 0)
 	);
 }
@@ -1868,6 +2613,7 @@ async function importAnonymousProjects() {
 			// idempotent server upload succeeds.
 			for (const project of [...pendingAnonymousProjects.value]) {
 				if (!projectOwnerContextIsCurrent(ownerContext)) return;
+				if (!projectUsesStudentSync(project)) continue;
 				const claimedProject =
 					await claimAnonymousPythonProjectForStudent(project);
 				if (!projectOwnerContextIsCurrent(ownerContext)) {
@@ -2042,17 +2788,23 @@ async function loadRemoteProjectBodiesNeededForRecovery(
 ) {
 	const localRemoteIDs = new Set(
 		localProjects
+			.filter(projectUsesStudentSync)
 			.map(project => project._id)
 			.filter(projectID => !projectID.startsWith("local-"))
 	);
 	const localImportIDs = new Set(
 		localProjects
+			.filter(projectUsesStudentSync)
 			.map(project => project.importID)
 			.filter((value): value is string => Boolean(value))
 	);
 	const hydrated: PythonIdeProject[] = [];
 
 	for (const remoteProject of remoteProjects) {
+		if (!projectUsesStudentSync(remoteProject)) {
+			hydrated.push(remoteProject);
+			continue;
+		}
 		if (
 			remoteProject.remoteContentLoaded !== false ||
 			(!localRemoteIDs.has(remoteProject._id) &&
@@ -2081,12 +2833,24 @@ async function loadProjects() {
 	pendingAnonymousProjects.value = [];
 	anonymousImportError.value = "";
 	loadPersistedCodeEditorViewStates(storageUserID.value);
+	let browserOnlyProjects: PythonIdeProject[] = [];
 	try {
 		if (canSyncToAccount.value) {
 			const studentID = activeStorageOwnerID.value;
 			if (!studentID)
 				throw new Error("Student project session is not ready.");
+			const anonymousProjects = await loadLocalPythonProjectsAsync(null);
+			if (!projectLoadIsCurrent(loadRunID)) return;
+			browserOnlyProjects = anonymousProjects.filter(
+				project => !projectUsesStudentSync(project)
+			);
+			pendingAnonymousProjects.value = anonymousProjects.filter(
+				project =>
+					projectUsesStudentSync(project) &&
+					projectContainsSavedWork(project)
+			);
 			let remoteProjects = await fetchPythonIdeProjects(studentID);
+			remoteProjects = remoteProjects.filter(projectUsesStudentSync);
 			if (!projectLoadIsCurrent(loadRunID)) return;
 			visibleProjectReviews.value =
 				await fetchVisiblePythonIdeProjectReviews(studentID).catch(
@@ -2100,11 +2864,6 @@ async function loadProjects() {
 				);
 			}
 			if (!projectLoadIsCurrent(loadRunID)) return;
-			const anonymousProjects = await loadLocalPythonProjectsAsync(null);
-			if (!projectLoadIsCurrent(loadRunID)) return;
-			pendingAnonymousProjects.value = anonymousProjects.filter(
-				projectContainsSavedWork
-			);
 			const localProjects =
 				volatileStudentProjectRecovery.forStudent(studentID);
 			if (!projectLoadIsCurrent(loadRunID)) return;
@@ -2126,11 +2885,11 @@ async function loadProjects() {
 						studentID
 					);
 					if (!projectLoadIsCurrent(loadRunID)) return;
-					setProjects(syncedProjects);
+					setProjects([...syncedProjects, ...browserOnlyProjects]);
 					volatileStudentProjectRecovery.acknowledge(studentID);
 					await purgeAllStudentPythonProjectRecovery();
 					if (!projectLoadIsCurrent(loadRunID)) return;
-					await openRequestedCourseProjectIfNeeded(false, loadRunID);
+					await openRemoteRequestedProjectsForLoad(loadRunID);
 					if (!projectLoadIsCurrent(loadRunID)) return;
 					await hydrateRemoteSelection(
 						selectedProjectID.value,
@@ -2142,7 +2901,10 @@ async function loadProjects() {
 					return;
 				} catch (error) {
 					if (!projectLoadIsCurrent(loadRunID)) return;
-					setProjects(recoveryPlan.projects);
+					setProjects([
+						...recoveryPlan.projects,
+						...browserOnlyProjects
+					]);
 					for (const write of recoveryPlan.writes) {
 						pendingSaveProjectIDs.add(write.project._id);
 						unsyncedProjectIDs.add(write.project._id);
@@ -2156,7 +2918,7 @@ async function loadProjects() {
 					);
 				}
 
-				await openRequestedCourseProjectIfNeeded(false, loadRunID);
+				await openRemoteRequestedProjectsForLoad(loadRunID);
 				if (!projectLoadIsCurrent(loadRunID)) return;
 				await hydrateRemoteSelection(
 					selectedProjectID.value,
@@ -2169,8 +2931,8 @@ async function loadProjects() {
 			}
 
 			if (remoteProjects.length) {
-				setProjects(remoteProjects);
-				await openRequestedCourseProjectIfNeeded(false, loadRunID);
+				setProjects([...remoteProjects, ...browserOnlyProjects]);
+				await openRemoteRequestedProjectsForLoad(loadRunID);
 				if (!projectLoadIsCurrent(loadRunID)) return;
 				await hydrateRemoteSelection(
 					selectedProjectID.value,
@@ -2179,6 +2941,16 @@ async function loadProjects() {
 				);
 				if (!projectLoadIsCurrent(loadRunID)) return;
 				saveMessage.value = "Synced to account";
+				return;
+			}
+
+			setProjects(browserOnlyProjects);
+			const openedRouteProject =
+				await openRemoteRequestedProjectsForLoad(loadRunID);
+			if (!projectLoadIsCurrent(loadRunID)) return;
+			if (openedRouteProject) return;
+			if (browserOnlyProjects.length) {
+				saveMessage.value = "Browser projects ready";
 				return;
 			}
 
@@ -2195,30 +2967,39 @@ async function loadProjects() {
 			storageUserID.value
 		);
 		if (!projectLoadIsCurrent(loadRunID)) return;
-		setProjects(
-			localProjects.length
-				? localProjects
-				: [await createInitialProject()]
-		);
+		if (localProjects.length) {
+			setProjects(localProjects);
+			await openRemoteRequestedProjectsForLoad(loadRunID);
+			if (!projectLoadIsCurrent(loadRunID)) return;
+			await persistLocalProjects();
+			return;
+		}
+
+		setProjects([]);
+		const openedRouteProject =
+			await openRemoteRequestedProjectsForLoad(loadRunID);
 		if (!projectLoadIsCurrent(loadRunID)) return;
-		await openRequestedCourseProjectIfNeeded(false, loadRunID);
+		if (openedRouteProject) return;
+
+		const initialProject = await createInitialProject();
 		if (!projectLoadIsCurrent(loadRunID)) return;
-		await persistLocalProjects();
+		await saveNewProject(initialProject, false, loadRunID);
 	} catch (error) {
 		const studentID = activeStorageOwnerID.value;
 		if (studentID) {
 			const volatileProjects =
 				volatileStudentProjectRecovery.forStudent(studentID);
 			if (!projectLoadIsCurrent(loadRunID)) return;
-			setProjects(
-				volatileProjects.length
-					? volatileProjects
-					: [await createInitialProject()]
-			);
+			setProjects([...volatileProjects, ...browserOnlyProjects]);
+			if (!projects.value.length) {
+				setProjects([await createInitialProject()]);
+			}
 			if (!projectLoadIsCurrent(loadRunID)) return;
-			await openRequestedCourseProjectIfNeeded(true, loadRunID);
+			await openLocalRequestedProjectsForLoad(loadRunID);
 			if (!projectLoadIsCurrent(loadRunID)) return;
-			for (const project of projects.value) {
+			for (const project of projects.value.filter(
+				projectUsesStudentSync
+			)) {
 				pendingSaveProjectIDs.add(project._id);
 				unsyncedProjectIDs.add(project._id);
 			}
@@ -2232,7 +3013,7 @@ async function loadProjects() {
 					: [await createInitialProject()]
 			);
 			if (!projectLoadIsCurrent(loadRunID)) return;
-			await openRequestedCourseProjectIfNeeded(true, loadRunID);
+			await openLocalRequestedProjectsForLoad(loadRunID);
 			if (!projectLoadIsCurrent(loadRunID)) return;
 		}
 		saveMessage.value =
@@ -2269,6 +3050,15 @@ async function saveProjectOnce(
 	const startedWorkspaceSnapshot = plainPythonIdeProjectsSnapshot(
 		projects.value
 	);
+	if (!projectUsesStudentSync(project)) {
+		await persistLocalProjects({
+			message: "Saved in this browser",
+			quiet: false
+		});
+		pendingSaveProjectIDs.delete(startedProjectID);
+		unsyncedProjectIDs.delete(startedProjectID);
+		return true;
+	}
 	const payload = pythonIdeProjectToPayload(project);
 
 	try {
@@ -2334,10 +3124,7 @@ async function saveProjectOnce(
 			pendingSaveProjectIDs.add(currentProject._id);
 			markRemoteProjectDetailUsed(savedProject._id);
 			trimRemoteProjectDetailCache(savedProject._id);
-			await saveLocalPythonProjectsAsync(
-				projects.value,
-				storageUserID.value
-			);
+			await persistLocalProjects({ quiet: true });
 			return true;
 		}
 
@@ -2368,7 +3155,9 @@ async function saveProjectOnce(
 			volatileStudentProjectRecovery.replace(
 				startedOwnerID,
 				projects.value.filter(
-					project => project.remoteContentLoaded !== false
+					project =>
+						projectUsesStudentSync(project) &&
+						project.remoteContentLoaded !== false
 				)
 			);
 		} else if (startedOwnerID) {
@@ -2420,7 +3209,11 @@ async function savePendingProjects(options: SaveProjectOptions = {}) {
 			!unsyncedProjectIDs.size
 		) {
 			await discardLocalProjectSnapshot();
-			saveMessage.value = "Synced to account";
+			saveMessage.value =
+				selectedProject.value &&
+				!projectUsesStudentSync(selectedProject.value)
+					? "Saved in this browser"
+					: "Synced to account";
 		}
 	})();
 
@@ -2455,9 +3248,12 @@ function scheduleSave() {
 	}
 
 	scheduleLocalProjectSnapshot();
-	saveMessage.value = canSyncToAccount.value
-		? "Autosaving to account"
-		: "Autosaving locally";
+	saveMessage.value =
+		canSyncToAccount.value &&
+		selectedProject.value &&
+		projectUsesStudentSync(selectedProject.value)
+			? "Autosaving to account"
+			: "Autosaving locally";
 	if (saveTimer) window.clearTimeout(saveTimer);
 	saveTimer = window.setTimeout(() => {
 		saveTimer = null;
@@ -2502,9 +3298,118 @@ function updateAutoSavePreference(event: Event) {
 	flushPendingProjectSave();
 }
 
+function updateCodeRecommendationsPreference(event: Event) {
+	const enabled = (event.target as HTMLInputElement).checked;
+	codeRecommendationsEnabled.value = enabled;
+	persistPythonIdeCodeRecommendationsPreference(enabled);
+	useFreshCodeEditorStateOnNextReset = true;
+	void nextTick(resetCodeEditor);
+}
+
+function updateEditorLineWrapPreference(event: Event) {
+	const enabled = (event.target as HTMLInputElement).checked;
+	editorLineWrapEnabled.value = enabled;
+	persistPythonIdeEditorLineWrapPreference(enabled);
+	useFreshCodeEditorStateOnNextReset = true;
+	void nextTick(resetCodeEditor);
+}
+
+function updateExpandedIdePreference(event: Event) {
+	const enabled = (event.target as HTMLInputElement).checked;
+	ideExpanded.value = enabled;
+	persistPythonIdeExpandedWorkspacePreference(enabled);
+	void nextTick(refreshResizableIdeLayout);
+}
+
+function handleIdeSettingsOutsidePointerDown(event: PointerEvent) {
+	if (!showIdeSettings.value) return;
+
+	const target = event.target;
+	if (target instanceof Node && ideSettingsRef.value?.contains(target)) {
+		return;
+	}
+
+	showIdeSettings.value = false;
+}
+
+function clampIdeSplitPercent(value: number) {
+	return Math.min(maxCodeSplitPercent, Math.max(minCodeSplitPercent, value));
+}
+
+function refreshResizableIdeLayout() {
+	codeEditorView?.requestMeasure();
+	redrawActiveCanvas();
+}
+
+function setIdeSplitPercent(value: number) {
+	ideSplitPercent.value = clampIdeSplitPercent(value);
+	persistPythonIdeSplitPercentPreference(ideSplitPercent.value);
+	void nextTick(refreshResizableIdeLayout);
+}
+
+function updateIdeSplitFromClientX(clientX: number) {
+	const grid = ideGridRef.value;
+	if (!grid) return;
+	const rect = grid.getBoundingClientRect();
+	if (!rect.width) return;
+	setIdeSplitPercent(((clientX - rect.left) / rect.width) * 100);
+}
+
+function startIdeSplitResize(event: PointerEvent) {
+	if (!ideGridRef.value) return;
+	event.preventDefault();
+	ideSplitPointerID = event.pointerId;
+	isResizingIdeSplit.value = true;
+	(event.currentTarget as HTMLElement).setPointerCapture?.(event.pointerId);
+	updateIdeSplitFromClientX(event.clientX);
+	window.addEventListener("pointermove", handleIdeSplitPointerMove);
+	window.addEventListener("pointerup", stopIdeSplitResize);
+	window.addEventListener("pointercancel", stopIdeSplitResize);
+}
+
+function handleIdeSplitPointerMove(event: PointerEvent) {
+	if (
+		!isResizingIdeSplit.value ||
+		(ideSplitPointerID !== null && event.pointerId !== ideSplitPointerID)
+	) {
+		return;
+	}
+	updateIdeSplitFromClientX(event.clientX);
+}
+
+function stopIdeSplitResize() {
+	if (!isResizingIdeSplit.value) return;
+	isResizingIdeSplit.value = false;
+	ideSplitPointerID = null;
+	window.removeEventListener("pointermove", handleIdeSplitPointerMove);
+	window.removeEventListener("pointerup", stopIdeSplitResize);
+	window.removeEventListener("pointercancel", stopIdeSplitResize);
+	void nextTick(refreshResizableIdeLayout);
+}
+
+function handleIdeSplitKeydown(event: KeyboardEvent) {
+	const wideStep = event.shiftKey ? 8 : 3;
+	if (event.key === "ArrowLeft") {
+		event.preventDefault();
+		setIdeSplitPercent(activeIdeSplitPercent.value - wideStep);
+	}
+	if (event.key === "ArrowRight") {
+		event.preventDefault();
+		setIdeSplitPercent(activeIdeSplitPercent.value + wideStep);
+	}
+	if (event.key === "Home") {
+		event.preventDefault();
+		setIdeSplitPercent(minCodeSplitPercent);
+	}
+	if (event.key === "End") {
+		event.preventDefault();
+		setIdeSplitPercent(maxCodeSplitPercent);
+	}
+}
+
 async function createProject(
 	mode: PythonIdeMode,
-	template: "blank" | "demo" = "blank"
+	template: PythonIdeProjectTemplate = "blank"
 ) {
 	const starter = createPythonIdeProject(mode, { template });
 	const ownerContext = captureProjectOwnerContext();
@@ -2515,10 +3420,15 @@ async function createProject(
 		if (!projectOwnerContextIsCurrent(ownerContext)) return;
 		projects.value.unshift(starter);
 		selectedProjectID.value = starter._id;
-		await saveLocalPythonProjectsAsync(
-			plainPythonIdeProjectsSnapshot(projects.value),
-			ownerContext.ownerID
-		);
+		if (ownerContext.ownerID && projectUsesStudentSync(starter)) {
+			unsyncedProjectIDs.add(starter._id);
+			refreshVolatileStudentProjectRecovery();
+		} else {
+			await saveLocalPythonProjectsAsync(
+				browserProjectPersistenceSnapshot(),
+				null
+			);
+		}
 		if (!projectOwnerContextIsCurrent(ownerContext)) return;
 		appendOutput(
 			"system",
@@ -2533,24 +3443,203 @@ async function createProject(
 	}
 }
 
+async function createSelectedWorkspaceProject() {
+	const preset = codeIdeWorkspacePresets.find(
+		candidate => candidate.id === newWorkspacePresetID.value
+	);
+	if (!preset) return;
+	await createProject(preset.mode, preset.template);
+}
+
 async function createProjectFromMenu(
 	mode: PythonIdeMode,
-	template: "blank" | "demo" = "blank"
+	template: PythonIdeProjectTemplate = "blank"
 ) {
 	showProjectMenu.value = false;
 	await createProject(mode, template);
 }
 
-function projectLabel(project: PythonIdeProject) {
+function openBlueJArchiveImporterFromMenu() {
+	showProjectMenu.value = false;
+	openBlueJArchiveImporter();
+}
+
+function bytesToArrayBuffer(bytes: Uint8Array) {
+	const copy = new Uint8Array(bytes.byteLength);
+	copy.set(bytes);
+	return copy.buffer;
+}
+
+function downloadZipArchive(archiveBytes: Uint8Array, archiveName: string) {
+	const archiveUrl = URL.createObjectURL(
+		new Blob([bytesToArrayBuffer(archiveBytes)], {
+			type: "application/zip"
+		})
+	);
+	const link = document.createElement("a");
+	link.href = archiveUrl;
+	link.download = archiveName;
+	link.rel = "noopener";
+	document.body.append(link);
+	link.click();
+	link.remove();
+	window.setTimeout(() => URL.revokeObjectURL(archiveUrl), 1000);
+}
+
+async function downloadSelectedProject() {
+	const project = selectedProject.value;
+	if (!project || isDownloading.value) return;
+
+	isDownloading.value = true;
+	try {
+		const { createProjectArchive, projectArchiveName } =
+			await import("@/modules/projectArchive");
+		const archiveBytes = createProjectArchive(project);
+		const archiveName = projectArchiveName(project);
+		downloadZipArchive(archiveBytes, archiveName);
+		appendOutput(
+			"system",
+			`Downloaded ${archiveName} with ${project.files.length} file${project.files.length === 1 ? "" : "s"}.`
+		);
+	} catch (error) {
+		appendOutput(
+			"stderr",
+			error instanceof Error
+				? error.message
+				: "Could not download the project."
+		);
+	} finally {
+		isDownloading.value = false;
+	}
+}
+
+async function downloadSelectedProjectForBlueJ() {
+	const project = selectedProject.value;
+	if (!project) return;
+	if (project.mode !== "java") {
+		appendOutput("system", "BlueJ export is available for Java projects.");
+		return;
+	}
+
+	try {
+		const { blueJProjectArchiveName, createBlueJProjectArchive } =
+			await import("@/modules/blueJProjectExport");
+		const archiveBytes = createBlueJProjectArchive(project);
+		downloadZipArchive(archiveBytes, blueJProjectArchiveName(project));
+		appendOutput(
+			"system",
+			"Downloaded a BlueJ project ZIP for this Java project."
+		);
+	} catch (error) {
+		appendOutput(
+			"stderr",
+			error instanceof Error
+				? error.message
+				: "Could not download the BlueJ project."
+		);
+	}
+}
+
+function openBlueJArchiveImporter() {
+	blueJArchiveInputRef.value?.click();
+}
+
+async function importBlueJProjectArchiveFromInput(event: Event) {
+	const input = event.target as HTMLInputElement;
+	const file = input.files?.[0];
+	input.value = "";
+	if (!file) return;
+
+	if (!/\.zip$/i.test(file.name)) {
+		appendOutput("stderr", "Choose a BlueJ project ZIP file.");
+		return;
+	}
+	if (file.size > maxImportedBlueJArchiveBytes) {
+		appendOutput(
+			"stderr",
+			`BlueJ ZIP is larger than ${formatFileSize(maxImportedBlueJArchiveBytes)}.`
+		);
+		return;
+	}
+
+	try {
+		const { blueJProjectTitleFromArchiveName, importBlueJProjectArchive } =
+			await import("@/modules/blueJProjectExport");
+		const result = importBlueJProjectArchive(
+			new Uint8Array(await file.arrayBuffer()),
+			{
+				maxArchiveBytes: maxImportedBlueJArchiveBytes,
+				maxFiles: maxPythonIdeProjectFiles,
+				maxTextFileBytes: maxImportedTextFileBytes
+			}
+		);
+		if (
+			!result.files.some(projectFile =>
+				isPythonIdeJavaFile(projectFile.name)
+			)
+		) {
+			throw new Error(
+				"No safe Java source files were found in that BlueJ ZIP."
+			);
+		}
+
+		const importedProject = createPythonIdeProject("java", {
+			courseProjectTitle: "Imported BlueJ Project",
+			files: result.files,
+			starterLabel: result.hasBlueJPackage
+				? "Imported BlueJ ZIP"
+				: "Imported Java ZIP",
+			title: blueJProjectTitleFromArchiveName(file.name)
+		});
+
+		suppressAutoSave = true;
+		try {
+			await saveNewProject(importedProject);
+		} catch (error) {
+			projects.value.unshift(importedProject);
+			selectedProjectID.value = importedProject._id;
+			await persistLocalProjects();
+			appendOutput(
+				"system",
+				error instanceof Error
+					? error.message
+					: "Imported BlueJ project saved locally."
+			);
+		} finally {
+			suppressAutoSave = false;
+			await nextTick();
+			resetActiveCanvas();
+		}
+
+		appendOutput(
+			"system",
+			`Imported ${result.files.length} file${result.files.length === 1 ? "" : "s"} from ${result.hasBlueJPackage ? "a BlueJ project ZIP" : "a Java ZIP"}.`
+		);
+		if (result.skippedFiles.length) {
+			appendOutput(
+				"stderr",
+				`Skipped unsupported BlueJ archive file${result.skippedFiles.length === 1 ? "" : "s"}: ${result.skippedFiles.join(", ")}.`
+			);
+		}
+	} catch (error) {
+		appendOutput(
+			"stderr",
+			error instanceof Error
+				? error.message
+				: "Could not import the BlueJ project ZIP."
+		);
+	}
+}
+
+function projectLabel(project: PythonIdeProjectListItem) {
 	return project.title || "Untitled Project";
 }
 
-function requestProjectDelete(project: PythonIdeProject) {
-	if (projects.value.length <= 1) {
+function requestProjectDelete(project: PythonIdeProjectListItem) {
+	if (sortedProjects.value.length <= 1) {
 		appendOutput("system", "Keep at least one project in the workspace.");
 		return;
 	}
-	selectedProjectID.value = project._id;
 	deleteCandidateProjectID.value = project._id;
 	deleteConfirmText.value = "";
 }
@@ -2560,15 +3649,15 @@ function cancelProjectDelete() {
 	deleteConfirmText.value = "";
 }
 
-async function confirmProjectDelete(project: PythonIdeProject) {
+async function confirmProjectDelete(project: PythonIdeProjectListItem) {
 	if (deleteConfirmText.value.trim().toLowerCase() !== "confirm") return;
 	const ownerContext = captureProjectOwnerContext();
 	await deleteProject(project);
 	if (projectOwnerContextIsCurrent(ownerContext)) cancelProjectDelete();
 }
 
-async function deleteProject(project: PythonIdeProject) {
-	if (projects.value.length <= 1) {
+async function deleteProject(project: PythonIdeProjectListItem) {
+	if (sortedProjects.value.length <= 1) {
 		appendOutput("system", "Keep at least one project in the workspace.");
 		return;
 	}
@@ -2578,7 +3667,9 @@ async function deleteProject(project: PythonIdeProject) {
 		await runOwnerBoundMutation(async () => {
 			if (!projectOwnerContextIsCurrent(ownerContext)) return;
 			const isRemoteProject =
-				!!ownerContext.ownerID && !project._id.startsWith("local-");
+				!!ownerContext.ownerID &&
+				projectUsesStudentSync(project) &&
+				!project._id.startsWith("local-");
 			if (isRemoteProject) {
 				const expectedUpdatedAt =
 					project.serverUpdatedAt ?? project.updatedAt;
@@ -2609,11 +3700,13 @@ async function deleteProject(project: PythonIdeProject) {
 				saveMessage.value = "Synced to account";
 			} else {
 				await saveLocalPythonProjectsAsync(
-					plainPythonIdeProjectsSnapshot(projects.value),
-					ownerContext.ownerID
+					browserProjectPersistenceSnapshot(),
+					null
 				);
 				if (!projectOwnerContextIsCurrent(ownerContext)) return;
-				saveMessage.value = "Saved locally";
+				saveMessage.value = ownerContext.ownerID
+					? "Saved in this browser"
+					: "Saved locally";
 			}
 		});
 	} catch (error) {
@@ -2790,11 +3883,14 @@ async function resetCodeEditor() {
 		? codeEditorStateSnapshots.get(viewStateKey)
 		: null;
 	const restoredState =
+		!useFreshCodeEditorStateOnNextReset &&
 		savedState?.doc.toString() === activeFileContent.value
 			? savedState
 			: null;
+	useFreshCodeEditorStateOnNextReset = false;
 	const extensions = createPythonCodeMirrorExtensions({
 		assetCompletions: loadPythonCodeMirrorAssetCompletions,
+		lineWrappingEnabled: editorLineWrapEnabled.value,
 		mode: selectedProject.value?.mode ?? "python",
 		onChange(content) {
 			syncingCodeMirrorContent = true;
@@ -2809,7 +3905,8 @@ async function resetCodeEditor() {
 		onRun: activateRunControl,
 		onSave: () => {
 			void saveSelectedProject({ force: true });
-		}
+		},
+		recommendationsEnabled: codeRecommendationsEnabled.value
 	});
 	codeEditorView = restoredState
 		? new EditorView({
@@ -2863,7 +3960,10 @@ function selectFile(fileName: string) {
 
 function addFile() {
 	if (!selectedProject.value || !selectedProjectContentLoaded.value) return;
-	const fileName = normalizePythonFileName(newFileName.value);
+	const fileName = normalizePythonFileName(
+		newFileName.value,
+		isJavaIdeMode(selectedProject.value.mode) ? ".java" : ".py"
+	);
 	if (!isValidPythonFileName(fileName)) {
 		appendOutput(
 			"stderr",
@@ -3011,13 +4111,16 @@ async function importProjectFiles(event: Event) {
 function deleteFile(file: PythonIdeFile) {
 	const project = selectedProject.value;
 	if (!project || !selectedProjectContentLoaded.value) return;
-	const pythonFileCount = project.files.filter(file =>
-		isPythonIdePythonFile(file.name)
+	const runnableFileCount = project.files.filter(candidate =>
+		isPythonIdeRunnableFile(candidate.name, project.mode)
 	).length;
-	if (isPythonIdePythonFile(file.name) && pythonFileCount <= 1) {
+	if (
+		isPythonIdeRunnableFile(file.name, project.mode) &&
+		runnableFileCount <= 1
+	) {
 		appendOutput(
 			"system",
-			"Keep at least one Python file so the project can run."
+			`Keep at least one ${isJavaIdeMode(project.mode) ? "Java" : "Python"} file so the project can run.`
 		);
 		return;
 	}
@@ -3037,24 +4140,47 @@ function canDeleteFile(file: PythonIdeFile) {
 	const project = selectedProject.value;
 	if (!project || !selectedProjectContentLoaded.value) return false;
 	if (project.files.length <= 1) return false;
-	const pythonFileCount = project.files.filter(candidate =>
-		isPythonIdePythonFile(candidate.name)
+	const runnableFileCount = project.files.filter(candidate =>
+		isPythonIdeRunnableFile(candidate.name, project.mode)
 	).length;
-	return !(isPythonIdePythonFile(file.name) && pythonFileCount <= 1);
+	return !(
+		isPythonIdeRunnableFile(file.name, project.mode) &&
+		runnableFileCount <= 1
+	);
 }
 
 function clearOutput() {
+	clearKarelWorldPlayback();
 	outputLines.value = [];
 	runtimeArtifacts.value = [];
+	karelWorld.value = null;
 	gameAudioPlaybackBlockedNoticeShown = false;
+	resetActiveCanvas();
 }
 
 function refreshActiveTurtleEventHandlerCount() {
 	activeTurtleEventHandlerCount.value =
-		keyHandlers.size + turtleClickHandlers.size + turtleDragHandlers.size;
+		turtleKeyPressHandlers.size +
+		turtleKeyReleaseHandlers.size +
+		turtleClickHandlers.size +
+		turtleReleaseHandlers.size +
+		turtleDragHandlers.size +
+		turtleObjectClickHandlers.size +
+		turtleObjectReleaseHandlers.size +
+		turtleObjectDragHandlers.size;
 }
 
 function createCanvasCoordinateMapper(rect: DOMRect): CanvasCoordinateMapper {
+	if (turtleWorldCoordinates) {
+		const [left, bottom, right, top] = turtleWorldCoordinates;
+		const width = right - left;
+		const height = top - bottom;
+		return (x: number, y: number) => ({
+			x: ((x - left) / width) * rect.width,
+			y: rect.height - ((y - bottom) / height) * rect.height
+		});
+	}
+
 	return (x: number, y: number) => ({
 		x: rect.width / 2 + x,
 		y: rect.height / 2 - y
@@ -3097,8 +4223,15 @@ function currentTurtlePose(): TurtlePose {
 		y: turtleState.y,
 		heading: turtleState.heading,
 		penColor: turtleState.penColor,
+		fillColor: turtleState.fillColor,
 		shape: turtleState.shape,
 		speed: turtleState.speed,
+		stretchLength: turtleState.stretchLength,
+		stretchWidth: turtleState.stretchWidth,
+		outlineWidth: turtleState.outlineWidth,
+		shearFactor: turtleState.shearFactor,
+		shapeTransform: [...turtleState.shapeTransform],
+		tilt: turtleState.tilt,
 		visible: turtleState.visible
 	};
 }
@@ -3141,7 +4274,16 @@ function turtlePoseChanged(fromPose: TurtlePose, toPose: TurtlePose) {
 		fromPose.y !== toPose.y ||
 		fromPose.heading !== toPose.heading ||
 		fromPose.penColor !== toPose.penColor ||
+		fromPose.fillColor !== toPose.fillColor ||
 		fromPose.shape !== toPose.shape ||
+		fromPose.stretchLength !== toPose.stretchLength ||
+		fromPose.stretchWidth !== toPose.stretchWidth ||
+		fromPose.outlineWidth !== toPose.outlineWidth ||
+		fromPose.shearFactor !== toPose.shearFactor ||
+		fromPose.shapeTransform.some(
+			(value, index) => value !== toPose.shapeTransform[index]
+		) ||
+		fromPose.tilt !== toPose.tilt ||
 		fromPose.visible !== toPose.visible
 	);
 }
@@ -3160,17 +4302,39 @@ function interpolateTurtlePose(
 		y: lerp(fromPose.y, toPose.y, progress),
 		heading: lerp(fromPose.heading, toPose.heading, progress),
 		penColor: progress < 1 ? fromPose.penColor : toPose.penColor,
+		fillColor: progress < 1 ? fromPose.fillColor : toPose.fillColor,
 		shape: progress < 1 ? fromPose.shape : toPose.shape,
 		speed: progress < 1 ? fromPose.speed : toPose.speed,
+		stretchLength: lerp(
+			fromPose.stretchLength,
+			toPose.stretchLength,
+			progress
+		),
+		stretchWidth: lerp(
+			fromPose.stretchWidth,
+			toPose.stretchWidth,
+			progress
+		),
+		outlineWidth: lerp(
+			fromPose.outlineWidth,
+			toPose.outlineWidth,
+			progress
+		),
+		shearFactor: lerp(fromPose.shearFactor, toPose.shearFactor, progress),
+		shapeTransform: fromPose.shapeTransform.map((value, index) =>
+			lerp(value, toPose.shapeTransform[index] ?? value, progress)
+		) as [number, number, number, number],
+		tilt: lerp(fromPose.tilt, toPose.tilt, progress),
 		visible: progress < 1 ? fromPose.visible : toPose.visible
 	};
 }
 
 function turtleMovementDuration(fromPose: TurtlePose, toPose: TurtlePose) {
-	if (!turtleTracerEnabled || fromPose.speed === 0)
-		return turtleInstantStepMaxDurationMs;
+	if (!turtleTracerEnabled || fromPose.speed === 0) return 0;
 
 	const speedScale = turtleAnimationSpeedScale(fromPose.speed);
+	const delayScale = Math.max(0, turtleScreenDelayMs) / 10;
+	if (delayScale === 0) return 0;
 	const distance = Math.hypot(toPose.x - fromPose.x, toPose.y - fromPose.y);
 	const headingDelta = Math.abs(toPose.heading - fromPose.heading);
 	if (distance > 0) {
@@ -3180,7 +4344,8 @@ function turtleMovementDuration(fromPose: TurtlePose, toPose: TurtlePose) {
 				1,
 				distance *
 					turtleDistanceDurationMsPerPixelAtDefaultSpeed *
-					speedScale
+					speedScale *
+					delayScale
 			)
 		);
 	}
@@ -3197,8 +4362,9 @@ function turtleAnimationSpeedScale(speed: number) {
 }
 
 function normalizeTurtleShape(shape: string): TurtleShapeName {
-	return supportedTurtleShapes.has(shape as TurtleShapeName)
-		? (shape as TurtleShapeName)
+	return supportedTurtleShapes.has(shape as BuiltinTurtleShapeName) ||
+		turtleRegisteredShapes.has(shape)
+		? shape
 		: defaultTurtleShape;
 }
 
@@ -3210,16 +4376,53 @@ function drawTurtleMarker(
 	if (!pose.visible) return;
 
 	const point = toCanvas(pose.x, pose.y);
+	const customShape = turtleRegisteredShapes.get(pose.shape);
+	if (customShape?.kind === "image") {
+		const asset = resolveGameAsset(
+			"images",
+			customShape.name,
+			imageAssetExtensions
+		);
+		const image = asset ? getGameImageEntry(asset) : null;
+		if (image?.loaded && !image.failed) {
+			const width = image.element.naturalWidth * pose.stretchLength;
+			const height = image.element.naturalHeight * pose.stretchWidth;
+			context.drawImage(
+				image.element,
+				point.x - width / 2,
+				point.y - height / 2,
+				width,
+				height
+			);
+		} else if (image && !image.failed) {
+			image.element.addEventListener("load", () => renderTurtleScene(), {
+				once: true
+			});
+		}
+		return;
+	}
+
 	const radians = (pose.heading * Math.PI) / 180;
 
 	context.save();
 	context.translate(point.x, point.y);
 	context.rotate(-radians);
+	context.rotate((-pose.tilt * Math.PI) / 180);
+	const [t11, t12, t21, t22] = pose.shapeTransform;
+	context.transform(t22, t12, t21, t11, 0, 0);
+	context.transform(1, 0, pose.shearFactor, 1, 0, 0);
+	context.scale(pose.stretchLength, pose.stretchWidth);
 	context.lineCap = "round";
 	context.lineJoin = "round";
-	context.lineWidth = 1.5;
+	context.lineWidth = Math.max(0.5, pose.outlineWidth);
 	context.strokeStyle = pose.penColor;
-	context.fillStyle = pose.penColor;
+	context.fillStyle = pose.fillColor;
+
+	if (customShape) {
+		drawCustomTurtleShape(context, customShape, pose);
+		context.restore();
+		return;
+	}
 
 	switch (pose.shape) {
 		case "arrow":
@@ -3249,6 +4452,36 @@ function drawTurtleMarker(
 	}
 
 	context.restore();
+}
+
+function drawCustomTurtleShape(
+	context: CanvasRenderingContext2D,
+	shape: Exclude<TurtleShapeDefinition, { kind: "image" }>,
+	pose: TurtlePose
+) {
+	const components: TurtleShapeComponent[] =
+		shape.kind === "polygon"
+			? [
+					{
+						fill: pose.fillColor,
+						outline: pose.penColor,
+						points: shape.points
+					}
+				]
+			: shape.components;
+
+	for (const component of components) {
+		const [firstPoint, ...remainingPoints] = component.points;
+		if (!firstPoint) continue;
+		context.beginPath();
+		context.moveTo(firstPoint[1], firstPoint[0]);
+		for (const [x, y] of remainingPoints) context.lineTo(y, x);
+		context.closePath();
+		context.fillStyle = component.fill;
+		context.strokeStyle = component.outline;
+		context.fill();
+		context.stroke();
+	}
 }
 
 function drawClassicTurtleShape(context: CanvasRenderingContext2D) {
@@ -3432,25 +4665,14 @@ function renderTurtleCommand(
 	}
 
 	if (command.kind === "stamp") {
-		drawTurtleMarker(
-			context,
-			{
-				x: command.x,
-				y: command.y,
-				heading: command.heading,
-				penColor: command.color,
-				shape: command.shape,
-				speed: 0,
-				visible: true
-			},
-			toCanvas
-		);
+		drawTurtleMarker(context, command.pose, toCanvas);
 		return;
 	}
 
 	const point = toCanvas(command.x, command.y);
 	context.fillStyle = command.color;
-	context.font = "16px Avenir Next, Segoe UI, sans-serif";
+	context.font = command.font;
+	context.textAlign = command.align;
 	context.fillText(command.text, point.x, point.y);
 }
 
@@ -3466,6 +4688,15 @@ function renderTurtleScene(
 	const toCanvas = createCanvasCoordinateMapper(rect);
 	context.fillStyle = turtleState.background;
 	context.fillRect(0, 0, rect.width, rect.height);
+	if (turtleBackgroundImage?.loaded && !turtleBackgroundImage.failed) {
+		context.drawImage(
+			turtleBackgroundImage.element,
+			0,
+			0,
+			rect.width,
+			rect.height
+		);
+	}
 	for (const { command } of turtleCompletedCommands)
 		renderTurtleCommand(context, command, toCanvas);
 	if (activeCommand) {
@@ -3497,8 +4728,9 @@ function turtleAnimationBacklogStepCount(turtleID: string) {
 
 function shouldFastForwardTurtleBacklog(step: TurtleAnimationStep) {
 	return (
+		!isVisibleTurtleTrailStep(step) &&
 		turtleAnimationBacklogStepCount(step.turtleID) >=
-		turtleBacklogFastForwardStepThreshold
+			turtleBacklogFastForwardStepThreshold
 	);
 }
 
@@ -3516,6 +4748,23 @@ function cancelTurtleAnimation() {
 	activeTurtleAnimationStep = null;
 	turtleAnimationStepStartedAt = 0;
 	turtleQueuedSteps = [];
+	resolveActiveTurtleAnimation();
+}
+
+function flushTurtleAnimation() {
+	if (turtleAnimationFrame !== null) {
+		cancelAnimationFrame(turtleAnimationFrame);
+		turtleAnimationFrame = null;
+	}
+	const pendingSteps = [
+		...(activeTurtleAnimationStep ? [activeTurtleAnimationStep] : []),
+		...turtleQueuedSteps
+	];
+	activeTurtleAnimationStep = null;
+	turtleAnimationStepStartedAt = 0;
+	turtleQueuedSteps = [];
+	for (const step of pendingSteps) completeTurtleAnimationStep(step);
+	renderTurtleScene();
 	resolveActiveTurtleAnimation();
 }
 
@@ -3576,6 +4825,8 @@ function runTurtleAnimationFrame(timestamp: number) {
 }
 
 function isInstantTurtleAnimationStep(step: TurtleAnimationStep) {
+	if (step.durationMs <= 0) return true;
+
 	return (
 		!isVisibleTurtleTrailStep(step) &&
 		step.durationMs <= turtleInstantStepMaxDurationMs &&
@@ -3652,6 +4903,7 @@ function flushBackloggedTurtleAnimationSteps(timestamp: number) {
 	while (
 		activeTurtleAnimationStep &&
 		activeTurtleAnimationStep.turtleID === synchronizedTurtleID &&
+		shouldFastForwardTurtleBacklog(activeTurtleAnimationStep) &&
 		consumedSteps < turtleBacklogFrameStepBudget &&
 		(consumedDistance < turtleBacklogFrameDistanceBudget ||
 			consumedSteps === 0)
@@ -3716,7 +4968,7 @@ function setTurtleState(
 	turtleState.penDown = penDown;
 	turtleState.penColor = penColor;
 	turtleState.fillColor = fillColor;
-	turtleState.lineWidth = Math.max(1, lineWidth);
+	turtleState.lineWidth = Math.max(0.1, lineWidth);
 	const toPose = currentTurtlePose();
 	if (turtlePoseChanged(fromPose, toPose)) {
 		queueTurtleStep({
@@ -3730,18 +4982,28 @@ function setTurtleState(
 function resetTurtleCanvas() {
 	cancelTurtleAnimation();
 	clearTurtleTimers();
-	keyHandlers.clear();
+	turtleKeyPressHandlers.clear();
+	turtleKeyReleaseHandlers.clear();
 	turtleClickHandlers.clear();
+	turtleReleaseHandlers.clear();
 	turtleDragHandlers.clear();
+	turtleObjectClickHandlers.clear();
+	turtleObjectReleaseHandlers.clear();
+	turtleObjectDragHandlers.clear();
 	refreshActiveTurtleEventHandlerCount();
 	activeTurtleDragButton = null;
 	turtleStampCounter = 0;
 	turtleCompletedCommands = [];
 	turtleQueuedSteps = [];
+	turtleCanvasWidth.value = 640;
+	turtleCanvasHeight.value = 480;
+	turtleWorldCoordinates = null;
+	turtleBackgroundImage = null;
+	turtleRegisteredShapes.clear();
 	activeTurtleID = defaultTurtleID;
 	turtleTracerEnabled = true;
-	const background = turtleState.background;
-	turtleState = createDefaultTurtleState(background);
+	turtleScreenDelayMs = 10;
+	turtleState = createDefaultTurtleState();
 	turtleStates = new Map<string, TurtleState>([
 		[defaultTurtleID, turtleState]
 	]);
@@ -3838,6 +5100,25 @@ function trackTurtleFillPoint(x: number, y: number) {
 	turtleFillState.points.push({ x, y });
 }
 
+function teleportTurtle(x: number, y: number, fillGap = false) {
+	const fromPose = currentTurtlePose();
+	const wasFilling = turtleFillState.active;
+	if (wasFilling && !fillGap) endTurtleFill();
+
+	turtleState.x = x;
+	turtleState.y = y;
+	if (wasFilling && fillGap) trackTurtleFillPoint(x, y);
+
+	const toPose = currentTurtlePose();
+	queueTurtleStep({
+		durationMs: 0,
+		fromPose,
+		toPose
+	});
+
+	if (wasFilling && !fillGap) beginTurtleFill();
+}
+
 function beginTurtleFill() {
 	turtleFillState.active = true;
 	turtleFillState.color = turtleState.fillColor;
@@ -3924,28 +5205,85 @@ function drawDot(size: number, color?: string) {
 
 function stampTurtle() {
 	const pose = currentTurtlePose();
+	const stampID = ++turtleStampCounter;
 	queueTurtleStep({
 		command: {
-			color: turtleState.penColor,
-			heading: turtleState.heading,
 			kind: "stamp",
-			shape: turtleState.shape,
-			x: turtleState.x,
-			y: turtleState.y
+			pose: {
+				...pose,
+				shapeTransform: [...pose.shapeTransform],
+				speed: 0
+			},
+			stampID
 		},
 		durationMs: 90,
 		fromPose: pose,
 		toPose: pose
 	});
 
-	return ++turtleStampCounter;
+	return stampID;
 }
 
-function drawText(text: string) {
+function removeTurtleStampCommands(stampID: number) {
+	const commandMatchesStamp = (command: TurtleRenderCommand) =>
+		command.kind === "stamp" && command.stampID === stampID;
+	let removed = false;
+	const completedCount = turtleCompletedCommands.length;
+	turtleCompletedCommands = turtleCompletedCommands.filter(
+		completed => !commandMatchesStamp(completed.command)
+	);
+	removed ||= completedCount !== turtleCompletedCommands.length;
+	const queuedCount = turtleQueuedSteps.length;
+	turtleQueuedSteps = turtleQueuedSteps.filter(
+		step => !step.command || !commandMatchesStamp(step.command)
+	);
+	removed ||= queuedCount !== turtleQueuedSteps.length;
+	if (
+		activeTurtleAnimationStep?.command &&
+		commandMatchesStamp(activeTurtleAnimationStep.command)
+	) {
+		activeTurtleAnimationStep = null;
+		turtleAnimationStepStartedAt = 0;
+		removed = true;
+	}
+	return removed;
+}
+
+function clearTurtleStamp(stampID: number) {
+	if (!removeTurtleStampCommands(stampID)) return;
+	renderTurtleScene();
+	if (activeTurtleAnimationStep || turtleQueuedSteps.length > 0)
+		void scheduleTurtleAnimation();
+}
+
+function turtleTextFont(fontName: string, fontSize: number, fontStyle: string) {
+	const normalizedStyle = fontStyle.toLowerCase();
+	const weight = normalizedStyle.includes("bold") ? "bold" : "normal";
+	const style = normalizedStyle.includes("italic") ? "italic" : "normal";
+	const family = fontName.trim() || "Arial";
+	return `${style} ${weight} ${Math.max(1, fontSize)}px ${JSON.stringify(family)}`;
+}
+
+function drawText(
+	text: string,
+	align = "left",
+	fontName = "Arial",
+	fontSize = 8,
+	fontStyle = "normal"
+) {
 	const pose = currentTurtlePose();
+	const font = turtleTextFont(fontName, fontSize, fontStyle);
+	const canvasTextAlign: CanvasTextAlign =
+		align === "center" ? "center" : align === "right" ? "right" : "left";
+	const context = getCanvasContext();
+	if (context) context.font = font;
+	const width =
+		context?.measureText(text).width ?? text.length * fontSize * 0.6;
 	queueTurtleStep({
 		command: {
+			align: canvasTextAlign,
 			color: turtleState.penColor,
+			font,
 			kind: "text",
 			text,
 			x: turtleState.x,
@@ -3955,6 +5293,243 @@ function drawText(text: string) {
 		fromPose: pose,
 		toPose: pose
 	});
+	return width;
+}
+
+function setTurtleScreenSize(width: number, height: number) {
+	if (Number.isFinite(width) && width > 0)
+		turtleCanvasWidth.value = Math.max(1, Math.round(width));
+	if (Number.isFinite(height) && height > 0)
+		turtleCanvasHeight.value = Math.max(1, Math.round(height));
+	void nextTick(renderTurtleScene);
+}
+
+function setTurtleWorldCoordinates(
+	left: number,
+	bottom: number,
+	right: number,
+	top: number
+) {
+	if (![left, bottom, right, top].every(Number.isFinite)) return;
+	if (right === left || top === bottom) return;
+	turtleWorldCoordinates = [left, bottom, right, top];
+	renderTurtleScene();
+}
+
+function resetTurtleWorldCoordinates() {
+	turtleWorldCoordinates = null;
+	renderTurtleScene();
+}
+
+function setTurtleBackgroundImage(name: string) {
+	const normalizedName = name.trim();
+	if (!normalizedName || normalizedName.toLowerCase() === "nopic") {
+		turtleBackgroundImage = null;
+		renderTurtleScene();
+		return;
+	}
+
+	const asset = resolveGameAsset(
+		"images",
+		normalizedName,
+		imageAssetExtensions
+	);
+	if (!asset) {
+		turtleBackgroundImage = null;
+		appendOutput(
+			"system",
+			`Missing Turtle background image: ${normalizedName}`
+		);
+		renderTurtleScene();
+		return;
+	}
+
+	turtleBackgroundImage = getGameImageEntry(asset);
+	if (!turtleBackgroundImage) return;
+	if (turtleBackgroundImage.loaded) {
+		renderTurtleScene();
+		return;
+	}
+	turtleBackgroundImage.element.addEventListener(
+		"load",
+		() => renderTurtleScene(),
+		{ once: true }
+	);
+}
+
+function registerTurtleShape(name: string, definitionJson: string) {
+	try {
+		const definition = JSON.parse(definitionJson) as TurtleShapeDefinition;
+		if (
+			definition.kind !== "compound" &&
+			definition.kind !== "image" &&
+			definition.kind !== "polygon"
+		) {
+			return;
+		}
+		turtleRegisteredShapes.set(name, definition);
+	} catch {
+		appendOutput("stderr", `Could not register Turtle shape: ${name}`);
+	}
+}
+
+function setTurtleShapeTransform(
+	stretchWidth: number,
+	stretchLength: number,
+	outlineWidth: number,
+	shearFactor: number,
+	tilt: number,
+	t11: number,
+	t12: number,
+	t21: number,
+	t22: number
+) {
+	const fromPose = currentTurtlePose();
+	turtleState.stretchWidth = stretchWidth;
+	turtleState.stretchLength = stretchLength;
+	turtleState.outlineWidth = outlineWidth;
+	turtleState.shearFactor = shearFactor;
+	turtleState.tilt = tilt;
+	turtleState.shapeTransform = [t11, t12, t21, t22];
+	const toPose = currentTurtlePose();
+	if (!turtlePoseChanged(fromPose, toPose)) return;
+	queueTurtleStep({
+		durationMs: turtleInstantStepMaxDurationMs,
+		fromPose,
+		toPose
+	});
+}
+
+function undoTurtleDrawing(count = 1) {
+	let remaining = Math.max(0, Math.trunc(count));
+	for (
+		let index = turtleQueuedSteps.length - 1;
+		index >= 0 && remaining;
+		index -= 1
+	) {
+		if (turtleQueuedSteps[index]?.turtleID !== activeTurtleID) continue;
+		if (!turtleQueuedSteps[index]?.command) continue;
+		turtleQueuedSteps.splice(index, 1);
+		remaining -= 1;
+	}
+
+	for (
+		let index = turtleCompletedCommands.length - 1;
+		index >= 0 && remaining;
+		index -= 1
+	) {
+		if (turtleCompletedCommands[index]?.turtleID !== activeTurtleID)
+			continue;
+		turtleCompletedCommands.splice(index, 1);
+		remaining -= 1;
+	}
+	renderTurtleScene();
+}
+
+function turtlePostScriptColor(color: string) {
+	const context = getCanvasContext();
+	if (!context) return [0, 0, 0] as const;
+	context.fillStyle = "#000000";
+	context.fillStyle = color;
+	const normalized = context.fillStyle;
+	const match = normalized.match(/^#([\dA-F]{2})([\dA-F]{2})([\dA-F]{2})$/i);
+	if (!match) return [0, 0, 0] as const;
+	return [
+		Number.parseInt(match[1] ?? "0", 16) / 255,
+		Number.parseInt(match[2] ?? "0", 16) / 255,
+		Number.parseInt(match[3] ?? "0", 16) / 255
+	] as const;
+}
+
+function turtlePostScriptPoint(x: number, y: number) {
+	if (turtleWorldCoordinates) {
+		const [left, bottom, right, top] = turtleWorldCoordinates;
+		return {
+			x: ((x - left) / (right - left)) * turtleCanvasWidth.value,
+			y: ((y - bottom) / (top - bottom)) * turtleCanvasHeight.value
+		};
+	}
+	return {
+		x: turtleCanvasWidth.value / 2 + x,
+		y: turtleCanvasHeight.value / 2 + y
+	};
+}
+
+function escapePostScriptText(text: string) {
+	return text
+		.replaceAll("\\", "\\\\")
+		.replaceAll("(", "\\(")
+		.replaceAll(")", "\\)");
+}
+
+function exportTurtlePostScript() {
+	const lines = [
+		"%!PS-Adobe-3.0 EPSF-3.0",
+		`%%BoundingBox: 0 0 ${turtleCanvasWidth.value} ${turtleCanvasHeight.value}`,
+		"%%Creator: IDE",
+		"1 setlinejoin 1 setlinecap"
+	];
+	const commands = [
+		...turtleCompletedCommands.map(entry => entry.command),
+		...turtleQueuedSteps.flatMap(step =>
+			step.command ? [step.command] : []
+		)
+	];
+
+	for (const command of commands) {
+		if (command.kind === "line") {
+			const from = turtlePostScriptPoint(command.from.x, command.from.y);
+			const to = turtlePostScriptPoint(command.to.x, command.to.y);
+			const [red, green, blue] = turtlePostScriptColor(command.color);
+			lines.push(
+				`${red} ${green} ${blue} setrgbcolor`,
+				`${command.width} setlinewidth`,
+				`newpath ${from.x} ${from.y} moveto ${to.x} ${to.y} lineto stroke`
+			);
+			continue;
+		}
+		if (command.kind === "dot" || command.kind === "circle") {
+			const point = turtlePostScriptPoint(command.x, command.y);
+			const [red, green, blue] = turtlePostScriptColor(command.color);
+			const radius =
+				command.kind === "dot"
+					? Math.max(1, command.size) / 2
+					: Math.abs(command.radius);
+			lines.push(
+				`${red} ${green} ${blue} setrgbcolor`,
+				`newpath ${point.x} ${point.y} ${radius} 0 360 arc ${command.kind === "dot" ? "fill" : "stroke"}`
+			);
+			continue;
+		}
+		if (command.kind === "fill") {
+			const [first, ...rest] = command.points;
+			if (!first) continue;
+			const start = turtlePostScriptPoint(first.x, first.y);
+			const [red, green, blue] = turtlePostScriptColor(command.fillColor);
+			lines.push(
+				`${red} ${green} ${blue} setrgbcolor`,
+				`newpath ${start.x} ${start.y} moveto`
+			);
+			for (const point of rest) {
+				const mapped = turtlePostScriptPoint(point.x, point.y);
+				lines.push(`${mapped.x} ${mapped.y} lineto`);
+			}
+			lines.push("closepath fill");
+			continue;
+		}
+		if (command.kind === "text") {
+			const point = turtlePostScriptPoint(command.x, command.y);
+			const [red, green, blue] = turtlePostScriptColor(command.color);
+			lines.push(
+				`${red} ${green} ${blue} setrgbcolor`,
+				"/Helvetica findfont 12 scalefont setfont",
+				`${point.x} ${point.y} moveto (${escapePostScriptText(command.text)}) show`
+			);
+		}
+	}
+
+	lines.push("showpage", "%%EOF");
+	return `${lines.join("\n")}\n`;
 }
 
 function setGameCanvasTransform() {
@@ -4003,7 +5578,8 @@ function clearGameCanvas(
 
 function resetGameCanvas(width = 640, height = 400) {
 	stopGameLoop();
-	keyHandlers.clear();
+	turtleKeyPressHandlers.clear();
+	turtleKeyReleaseHandlers.clear();
 	refreshActiveTurtleEventHandlerCount();
 	gameKeysDown.clear();
 	gameEvents.length = 0;
@@ -4743,9 +6319,11 @@ function drawGameCircle(
 
 function normalizeKey(key: string | null | undefined) {
 	if (!key) return "";
-	const normalized = key
-		.toLowerCase()
-		.replace(keyboardKeyWhitespaceRegex, "");
+	const lowercaseKey = key.toLowerCase();
+	const directAlias = keyboardKeyAliasMap[lowercaseKey];
+	if (directAlias) return directAlias;
+
+	const normalized = lowercaseKey.replace(keyboardKeyWhitespaceRegex, "");
 	return keyboardKeyAliasMap[normalized] ?? normalized;
 }
 
@@ -4797,6 +6375,15 @@ const turtleBridge: TurtleBridge = {
 		for (const state of turtleStates.values()) state.background = color;
 		renderTurtleScene();
 	},
+	bgpic: setTurtleBackgroundImage,
+	setScreenSize: setTurtleScreenSize,
+	setDelay(delayMs: number) {
+		turtleScreenDelayMs = Number.isFinite(delayMs)
+			? Math.max(0, delayMs)
+			: 10;
+	},
+	setWorldCoordinates: setTurtleWorldCoordinates,
+	resetWorldCoordinates: resetTurtleWorldCoordinates,
 	beginFill: beginTurtleFill,
 	endFill: endTurtleFill,
 	forward: drawForward,
@@ -4871,9 +6458,28 @@ const turtleBridge: TurtleBridge = {
 			toPose
 		});
 	},
+	teleport: teleportTurtle,
 	home() {
-		this.goto(0, 0);
+		const fromPose = currentTurtlePose();
+		turtleState.x = 0;
+		turtleState.y = 0;
 		turtleState.heading = 0;
+		const toPose = currentTurtlePose();
+		trackTurtleFillPoint(0, 0);
+		queueTurtleStep({
+			command: turtleState.penDown
+				? {
+						color: turtleState.penColor,
+						from: { x: fromPose.x, y: fromPose.y },
+						kind: "line",
+						to: { x: toPose.x, y: toPose.y },
+						width: turtleState.lineWidth
+					}
+				: undefined,
+			durationMs: turtleMovementDuration(fromPose, toPose),
+			fromPose,
+			toPose
+		});
 	},
 	penup() {
 		turtleState.penDown = false;
@@ -4883,7 +6489,7 @@ const turtleBridge: TurtleBridge = {
 	},
 	isdown: () => turtleState.penDown,
 	pensize(width: number) {
-		turtleState.lineWidth = Math.max(1, width);
+		turtleState.lineWidth = Math.max(0.1, width);
 	},
 	pencolor(color: string) {
 		turtleState.penColor = color;
@@ -4898,14 +6504,24 @@ const turtleBridge: TurtleBridge = {
 	circle: drawCircle,
 	dot: drawDot,
 	stamp: stampTurtle,
+	clearStamp: clearTurtleStamp,
+	undo: undoTurtleDrawing,
 	write: drawText,
-	registerKey(key: string, callback: (() => void) | null) {
+	registerKey(
+		key: string,
+		callback: (() => void) | null,
+		eventType: "press" | "release" = "release"
+	) {
+		const handlers =
+			eventType === "press"
+				? turtleKeyPressHandlers
+				: turtleKeyReleaseHandlers;
 		if (!callback) {
-			keyHandlers.delete(normalizeKey(key));
+			handlers.delete(normalizeKey(key));
 			refreshActiveTurtleEventHandlerCount();
 			return;
 		}
-		keyHandlers.set(normalizeKey(key), callback);
+		handlers.set(normalizeKey(key), callback);
 		refreshActiveTurtleEventHandlerCount();
 	},
 	registerClick(
@@ -4918,6 +6534,52 @@ const turtleBridge: TurtleBridge = {
 			return;
 		}
 		turtleClickHandlers.set(button, callback);
+		refreshActiveTurtleEventHandlerCount();
+	},
+	registerRelease(
+		button: string,
+		callback: ((x: number, y: number) => void) | null
+	) {
+		if (!callback) {
+			turtleReleaseHandlers.delete(button);
+			refreshActiveTurtleEventHandlerCount();
+			return;
+		}
+		turtleReleaseHandlers.set(button, callback);
+		refreshActiveTurtleEventHandlerCount();
+	},
+	registerTurtleClick(
+		turtleID: string,
+		button: string,
+		callback: ((x: number, y: number) => void) | null
+	) {
+		const key = `${turtleID}:${button}`;
+		if (callback) turtleObjectClickHandlers.set(key, callback);
+		else turtleObjectClickHandlers.delete(key);
+		refreshActiveTurtleEventHandlerCount();
+	},
+	registerTurtleRelease(
+		turtleID: string,
+		button: string,
+		callback: ((x: number, y: number) => void) | null
+	) {
+		const key = `${turtleID}:${button}`;
+		if (callback) turtleObjectReleaseHandlers.set(key, callback);
+		else turtleObjectReleaseHandlers.delete(key);
+		refreshActiveTurtleEventHandlerCount();
+	},
+	registerTurtleDrag(
+		turtleID: string,
+		button: string,
+		callback: ((x: number, y: number) => void) | null
+	) {
+		const key = `${turtleID}:${button}`;
+		if (callback) {
+			turtleObjectDragHandlers.set(key, callback);
+		} else {
+			turtleObjectDragHandlers.delete(key);
+			if (activeTurtleDragButton === key) activeTurtleDragButton = null;
+		}
 		refreshActiveTurtleEventHandlerCount();
 	},
 	registerDrag(
@@ -4959,8 +6621,9 @@ const turtleBridge: TurtleBridge = {
 		activeTurtleTimerCount.value = turtleTimerHandles.size;
 	},
 	listen() {
-		canvasRef.value?.focus();
+		canvasRef.value?.focus({ preventScroll: true });
 	},
+	registerShape: registerTurtleShape,
 	setShape(shape: string) {
 		const fromPose = currentTurtlePose();
 		turtleState.shape = normalizeTurtleShape(shape);
@@ -4973,6 +6636,7 @@ const turtleBridge: TurtleBridge = {
 			});
 		}
 	},
+	setShapeTransform: setTurtleShapeTransform,
 	setSpeed(speed: number) {
 		turtleState.speed = Number.isFinite(speed)
 			? Math.max(0, Math.min(10, speed))
@@ -4993,9 +6657,8 @@ const turtleBridge: TurtleBridge = {
 			});
 		}
 	},
-	update() {
-		renderTurtleScene();
-	}
+	update: flushTurtleAnimation,
+	exportPostScript: exportTurtlePostScript
 };
 
 function invalidateTurtleBridgeRuns() {
@@ -5024,6 +6687,27 @@ function createGuardedTurtleBridgeRun(): TurtleBridge {
 		},
 		bgcolor(color: string) {
 			if (isActiveRun()) turtleBridge.bgcolor(color);
+		},
+		bgpic(name: string) {
+			if (isActiveRun()) turtleBridge.bgpic(name);
+		},
+		setScreenSize(width: number, height: number) {
+			if (isActiveRun()) turtleBridge.setScreenSize(width, height);
+		},
+		setDelay(delayMs: number) {
+			if (isActiveRun()) turtleBridge.setDelay(delayMs);
+		},
+		setWorldCoordinates(
+			left: number,
+			bottom: number,
+			right: number,
+			top: number
+		) {
+			if (isActiveRun())
+				turtleBridge.setWorldCoordinates(left, bottom, right, top);
+		},
+		resetWorldCoordinates() {
+			if (isActiveRun()) turtleBridge.resetWorldCoordinates();
 		},
 		beginFill() {
 			if (isActiveRun()) turtleBridge.beginFill();
@@ -5058,6 +6742,9 @@ function createGuardedTurtleBridgeRun(): TurtleBridge {
 		goto(x: number, y: number) {
 			if (isActiveRun()) turtleBridge.goto(x, y);
 		},
+		teleport(x: number, y: number, fillGap?: boolean) {
+			if (isActiveRun()) turtleBridge.teleport(x, y, fillGap);
+		},
 		home() {
 			if (isActiveRun()) turtleBridge.home();
 		},
@@ -5091,17 +6778,54 @@ function createGuardedTurtleBridgeRun(): TurtleBridge {
 		stamp() {
 			return isActiveRun() ? turtleBridge.stamp() : 0;
 		},
-		write(text: string) {
-			if (isActiveRun()) turtleBridge.write(text);
+		clearStamp(stampID: number) {
+			if (isActiveRun()) turtleBridge.clearStamp(stampID);
 		},
-		registerKey(key: string, callback: (() => void) | null) {
-			if (isActiveRun()) turtleBridge.registerKey(key, callback);
+		undo(count?: number) {
+			if (isActiveRun()) turtleBridge.undo(count);
+		},
+		write(
+			text: string,
+			align?: string,
+			fontName?: string,
+			fontSize?: number,
+			fontStyle?: string
+		) {
+			return isActiveRun()
+				? turtleBridge.write(text, align, fontName, fontSize, fontStyle)
+				: 0;
+		},
+		registerKey(
+			key: string,
+			callback: (() => void) | null,
+			eventType?: "press" | "release"
+		) {
+			if (isActiveRun())
+				turtleBridge.registerKey(key, callback, eventType);
 		},
 		registerClick(
 			button: string,
 			callback: ((x: number, y: number) => void) | null
 		) {
 			if (isActiveRun()) turtleBridge.registerClick(button, callback);
+		},
+		registerRelease(
+			button: string,
+			callback: ((x: number, y: number) => void) | null
+		) {
+			if (isActiveRun()) turtleBridge.registerRelease(button, callback);
+		},
+		registerTurtleClick(turtleID, button, callback) {
+			if (isActiveRun())
+				turtleBridge.registerTurtleClick(turtleID, button, callback);
+		},
+		registerTurtleRelease(turtleID, button, callback) {
+			if (isActiveRun())
+				turtleBridge.registerTurtleRelease(turtleID, button, callback);
+		},
+		registerTurtleDrag(turtleID, button, callback) {
+			if (isActiveRun())
+				turtleBridge.registerTurtleDrag(turtleID, button, callback);
 		},
 		registerDrag(
 			button: string,
@@ -5119,8 +6843,14 @@ function createGuardedTurtleBridgeRun(): TurtleBridge {
 		listen() {
 			if (isActiveRun()) turtleBridge.listen();
 		},
+		registerShape(name: string, definitionJson: string) {
+			if (isActiveRun()) turtleBridge.registerShape(name, definitionJson);
+		},
 		setShape(shape: string) {
 			if (isActiveRun()) turtleBridge.setShape(shape);
+		},
+		setShapeTransform(...args) {
+			if (isActiveRun()) turtleBridge.setShapeTransform(...args);
 		},
 		setSpeed(speed: number) {
 			if (isActiveRun()) turtleBridge.setSpeed(speed);
@@ -5133,6 +6863,9 @@ function createGuardedTurtleBridgeRun(): TurtleBridge {
 		},
 		update() {
 			if (isActiveRun()) turtleBridge.update();
+		},
+		exportPostScript() {
+			return isActiveRun() ? turtleBridge.exportPostScript() : "";
 		}
 	};
 }
@@ -5341,17 +7074,59 @@ async function runCurrentProject() {
 	clearOutput();
 	const runnableFile = getPythonIdeRunnableFile(project);
 	if (!runnableFile) {
-		runMessage.value = "No Python file";
-		appendOutput("stderr", "Add a .py file before running this project.");
+		const fileType = isJavaIdeMode(project.mode) ? "Java" : "Python";
+		runMessage.value = `No ${fileType} file`;
+		appendOutput(
+			"stderr",
+			`Add a ${isJavaIdeMode(project.mode) ? ".java" : ".py"} file before running this project.`
+		);
 		return;
 	}
 
 	isRunning.value = true;
-	runMessage.value = "Starting Python";
+	runMessage.value = isJavaIdeMode(project.mode)
+		? "Starting Java"
+		: "Starting Python";
 	appendOutput("system", `Running ${runnableFile.name}`);
 	clearPythonRuntimeDiagnosticInEditor();
 
 	try {
+		if (isJavaIdeMode(project.mode)) {
+			const result = runJavaIdeProject({
+				activeFileName: runnableFile.name,
+				files: project.files,
+				inputText: inputText.value,
+				mode: project.mode
+			});
+			for (const line of result.stdout) appendOutput("stdout", line);
+			for (const line of result.stderr) appendOutput("stderr", line);
+			if (project.mode === "karel" && result.karelWorldSteps?.length) {
+				runMessage.value = "Animating Karel world";
+				const completedPlayback = await playKarelWorldSteps(
+					result.karelWorldSteps,
+					() => !shouldStopPythonIdeRun(runID, project._id)
+				);
+				if (
+					!completedPlayback &&
+					shouldStopPythonIdeRun(runID, project._id)
+				) {
+					return;
+				}
+				if (!completedPlayback) {
+					karelWorld.value = result.karelWorld ?? null;
+				}
+			} else {
+				karelWorld.value = result.karelWorld ?? null;
+			}
+			if (shouldStopPythonIdeRun(runID, project._id)) return;
+			runMessage.value = result.stderr.length
+				? "Run finished with issues"
+				: project.mode === "karel"
+					? "Karel world ready"
+					: "Run complete";
+			return;
+		}
+
 		if (project.mode === "pgzero") {
 			runMessage.value = "Loading assets";
 			await ensureGameCourseAssetsLoaded();
@@ -5412,19 +7187,19 @@ async function runCurrentProject() {
 
 function stopCurrentProject() {
 	if (!runControlIsStop.value) return;
-	const hadPythonRunInFlight = isRunning.value;
+	const hadRunInFlight = isRunning.value;
 	stopRequested.value = true;
 	stopActiveRuntimeSurfaces();
 	runMessage.value = "Stopped";
 	appendOutput(
 		"system",
-		hadPythonRunInFlight
+		hadRunInFlight
 			? selectedProject.value?.mode === "python"
 				? "Stop requested. Plain Python worker is being terminated."
-				: "Stop requested. Python will halt at the next runtime checkpoint."
+				: "Stop requested. The current run will halt at the next runtime checkpoint."
 			: "Stopped active canvas handlers."
 	);
-	if (!hadPythonRunInFlight) {
+	if (!hadRunInFlight) {
 		releaseIdlePythonRuntimeCallbacks();
 		stopRequested.value = false;
 	}
@@ -5433,6 +7208,7 @@ function stopCurrentProject() {
 function stopActiveRuntimeSurfaces() {
 	invalidatePythonIdeRuns();
 	isRunning.value = false;
+	clearKarelWorldPlayback();
 	invalidateTurtleBridgeRuns();
 	invalidateGameBridgeRuns();
 	stopLoadedPythonRuntimeRun();
@@ -5440,13 +7216,42 @@ function stopActiveRuntimeSurfaces() {
 	cancelTurtleAnimation();
 	stopGameLoop();
 	stopAllGameAudio();
-	keyHandlers.clear();
+	turtleKeyPressHandlers.clear();
+	turtleKeyReleaseHandlers.clear();
 	gameKeysDown.clear();
 	gameEvents.length = 0;
 	turtleClickHandlers.clear();
+	turtleReleaseHandlers.clear();
 	turtleDragHandlers.clear();
+	turtleObjectClickHandlers.clear();
+	turtleObjectReleaseHandlers.clear();
+	turtleObjectDragHandlers.clear();
 	refreshActiveTurtleEventHandlerCount();
 	activeTurtleDragButton = null;
+}
+
+function focusVisualOutputForRun() {
+	const projectMode = selectedProject.value?.mode;
+	const visualOutput =
+		projectMode === "karel" ? karelWorldRef.value : canvasRef.value;
+	if (
+		projectMode !== "turtle" &&
+		projectMode !== "pgzero" &&
+		projectMode !== "karel"
+	) {
+		return;
+	}
+
+	visualOutput?.focus({ preventScroll: true });
+	window.requestAnimationFrame(() =>
+		visualOutput?.focus({ preventScroll: true })
+	);
+}
+
+function focusKarelWorldOutput(event: PointerEvent) {
+	const output = event.currentTarget;
+	if (!(output instanceof HTMLElement)) return;
+	output.focus({ preventScroll: true });
 }
 
 function activateRunControl() {
@@ -5454,24 +7259,52 @@ function activateRunControl() {
 		stopCurrentProject();
 		return;
 	}
-	void runCurrentProject();
+	focusVisualOutputForRun();
+	void runCurrentProject().finally(focusVisualOutputForRun);
 }
 
 function canvasOwnsKeyboardEvent(event: KeyboardEvent) {
 	const canvas = canvasRef.value;
-	return Boolean(
+	const karelWorld = karelWorldRef.value;
+	const canvasOwnsEvent = Boolean(
 		canvas && (event.target === canvas || document.activeElement === canvas)
 	);
+	const karelWorldOwnsEvent =
+		Boolean(karelWorld) &&
+		(event.target === karelWorld || document.activeElement === karelWorld);
+	return canvasOwnsEvent || karelWorldOwnsEvent;
 }
 
-function handleKeyDown(event: KeyboardEvent) {
-	if (!canvasOwnsKeyboardEvent(event)) return;
+function isCanvasScrollKey(key: string) {
+	return [
+		"down",
+		"end",
+		"home",
+		"left",
+		"pagedown",
+		"pageup",
+		"right",
+		"space",
+		"up"
+	].includes(key);
+}
 
-	const handler = keyHandlers.get(normalizeKey(event.key));
-	if (handler) {
-		event.preventDefault();
+function dispatchTurtleKeyHandlers(
+	handlers: Map<string, () => void>,
+	key: string,
+	event: KeyboardEvent
+) {
+	const callbacks = new Set(
+		[handlers.get(key), handlers.get("")].filter(
+			(callback): callback is () => void => Boolean(callback)
+		)
+	);
+	if (!callbacks.size) return false;
+
+	event.preventDefault();
+	for (const callback of callbacks) {
 		try {
-			handler();
+			callback();
 		} catch (error) {
 			appendOutput(
 				"stderr",
@@ -5480,6 +7313,36 @@ function handleKeyDown(event: KeyboardEvent) {
 					: "Turtle key handler failed."
 			);
 		}
+	}
+	return true;
+}
+
+function handleKeyDown(event: KeyboardEvent) {
+	if (!canvasOwnsKeyboardEvent(event)) return;
+
+	const normalizedTurtleKey = normalizeKey(event.key);
+	if (
+		selectedProject.value?.mode === "karel" &&
+		isCanvasScrollKey(normalizedTurtleKey)
+	) {
+		event.preventDefault();
+		return;
+	}
+
+	if (
+		selectedProject.value?.mode === "turtle" &&
+		isCanvasScrollKey(normalizedTurtleKey)
+	) {
+		event.preventDefault();
+	}
+
+	if (
+		dispatchTurtleKeyHandlers(
+			turtleKeyPressHandlers,
+			normalizedTurtleKey,
+			event
+		)
+	) {
 		return;
 	}
 
@@ -5505,6 +7368,16 @@ function handleKeyDown(event: KeyboardEvent) {
 
 function handleKeyUp(event: KeyboardEvent) {
 	if (!canvasOwnsKeyboardEvent(event)) return;
+	const normalizedTurtleKey = normalizeKey(event.key);
+	if (
+		dispatchTurtleKeyHandlers(
+			turtleKeyReleaseHandlers,
+			normalizedTurtleKey,
+			event
+		)
+	) {
+		return;
+	}
 	if (selectedProject.value?.mode !== "pgzero") return;
 
 	const normalizedKey = normalizeKey(pythonGameKeyFromEvent(event));
@@ -5553,10 +7426,45 @@ function turtlePointerPosition(event: MouseEvent) {
 	if (!canvas) return { x: 0, y: 0 };
 
 	const rect = canvas.getBoundingClientRect();
+	if (turtleWorldCoordinates) {
+		const [left, bottom, right, top] = turtleWorldCoordinates;
+		return {
+			x:
+				left +
+				((event.clientX - rect.left) / rect.width) * (right - left),
+			y: top - ((event.clientY - rect.top) / rect.height) * (top - bottom)
+		};
+	}
 	return {
 		x: event.clientX - rect.left - rect.width / 2,
 		y: rect.height / 2 - (event.clientY - rect.top)
 	};
+}
+
+function turtleObjectAtPoint(point: { x: number; y: number }) {
+	const entries = [...turtleStates.entries()].reverse();
+	for (const [turtleID, state] of entries) {
+		if (!state.visible) continue;
+		const [t11, t12, t21, t22] = state.shapeTransform;
+		const matrixScale = Math.max(
+			Math.hypot(t11, t21),
+			Math.hypot(t12, t22)
+		);
+		const hitRadius =
+			Math.max(
+				12,
+				14 *
+					Math.max(
+						state.stretchLength,
+						state.stretchWidth,
+						matrixScale
+					)
+			) +
+			Math.abs(state.shearFactor) * 6;
+		if (Math.hypot(point.x - state.x, point.y - state.y) <= hitRadius)
+			return turtleID;
+	}
+	return "";
 }
 
 function queueGamePointerEvent(
@@ -5630,13 +7538,37 @@ function dispatchCanvasPointerEvent(
 	if (selectedProject.value?.mode !== "turtle") return;
 
 	if (type === "mouseup") {
+		const button = turtleMouseButton(event);
+		const releaseHandler = turtleReleaseHandlers.get(button);
+		const point = turtlePointerPosition(event);
+		const turtleID = turtleObjectAtPoint(point);
+		const objectReleaseHandler = turtleID
+			? turtleObjectReleaseHandlers.get(`${turtleID}:${button}`)
+			: null;
+		if (releaseHandler) {
+			callTurtlePointerHandler(
+				releaseHandler,
+				event,
+				"Turtle release handler failed."
+			);
+			event.preventDefault();
+		}
+		if (objectReleaseHandler) {
+			callTurtlePointerHandler(
+				objectReleaseHandler,
+				event,
+				"Turtle release handler failed."
+			);
+			event.preventDefault();
+		}
 		activeTurtleDragButton = null;
 		return;
 	}
 
 	if (type === "mousemove") {
 		const dragHandler = activeTurtleDragButton
-			? turtleDragHandlers.get(activeTurtleDragButton)
+			? (turtleObjectDragHandlers.get(activeTurtleDragButton) ??
+				turtleDragHandlers.get(activeTurtleDragButton))
 			: null;
 		if (!dragHandler) return;
 		callTurtlePointerHandler(
@@ -5652,14 +7584,29 @@ function dispatchCanvasPointerEvent(
 
 	const button = turtleMouseButton(event);
 	const clickHandler = turtleClickHandlers.get(button);
-	const dragHandler = turtleDragHandlers.get(button);
+	const point = turtlePointerPosition(event);
+	const turtleID = turtleObjectAtPoint(point);
+	const objectKey = turtleID ? `${turtleID}:${button}` : "";
+	const objectClickHandler = objectKey
+		? turtleObjectClickHandlers.get(objectKey)
+		: null;
+	const dragHandler = objectKey
+		? turtleObjectDragHandlers.get(objectKey)
+		: turtleDragHandlers.get(button);
 
-	if (!clickHandler && !dragHandler) return;
-	activeTurtleDragButton = dragHandler ? button : null;
+	if (!clickHandler && !objectClickHandler && !dragHandler) return;
+	activeTurtleDragButton = dragHandler ? objectKey || button : null;
 
 	if (clickHandler) {
 		callTurtlePointerHandler(
 			clickHandler,
+			event,
+			"Turtle click handler failed."
+		);
+	}
+	if (objectClickHandler) {
+		callTurtlePointerHandler(
+			objectClickHandler,
 			event,
 			"Turtle click handler failed."
 		);
@@ -5777,6 +7724,10 @@ async function handleStudentSessionHandoff({
 			await purgeAllStudentPythonProjectRecovery();
 			return;
 		}
+		await persistBrowserProjectsBeforeOwnerTransitionBestEffort(
+			studentID,
+			projects.value
+		);
 		preparedOwnerExitID = studentID;
 		hideWorkspaceForOwnerTransition(studentID);
 		await purgeAllStudentPythonProjectRecovery();
@@ -5786,11 +7737,17 @@ async function handleStudentSessionHandoff({
 	if (studentID !== activeStorageOwnerID.value) return;
 
 	if (mode === "suspend") {
+		await persistBrowserProjectsBeforeOwnerTransitionBestEffort(
+			studentID,
+			projects.value
+		);
 		if (projects.value.length) {
 			volatileStudentProjectRecovery.replace(
 				studentID,
 				projects.value.filter(
-					project => project.remoteContentLoaded !== false
+					project =>
+						projectUsesStudentSync(project) &&
+						project.remoteContentLoaded !== false
 				),
 				{
 					unsynced:
@@ -5822,7 +7779,11 @@ async function handleStudentSessionHandoff({
 		await waitForOwnerBoundMutations();
 		if (localSnapshotInFlight) await localSnapshotInFlight;
 		if (saveInFlight) await saveInFlight;
-		for (const project of projects.value) {
+		await persistBrowserProjectsBeforeOwnerTransition(
+			studentID,
+			projects.value
+		);
+		for (const project of projects.value.filter(projectUsesStudentSync)) {
 			if (
 				project._id.startsWith("local-") ||
 				unsyncedProjectIDs.has(project._id)
@@ -5862,9 +7823,10 @@ async function switchProjectOwner(
 		if (localSnapshotInFlight) await localSnapshotInFlight;
 		if (saveInFlight) await saveInFlight;
 		if (!wasPrepared && previousProjects.length) {
-			if (!previousOwnerID) {
-				await saveLocalPythonProjectsAsync(previousProjects, null);
-			}
+			await persistBrowserProjectsBeforeOwnerTransition(
+				previousOwnerID,
+				previousProjects
+			);
 		}
 	} catch (error) {
 		transitionError = error;
@@ -5918,7 +7880,7 @@ watch(studentProjectOwnerID, nextOwnerID => {
 			saveMessage.value =
 				error instanceof Error
 					? error.message
-					: "Could not load the next Python workspace.";
+					: "Could not load the next IDE workspace.";
 		});
 });
 
@@ -5927,6 +7889,7 @@ watch(
 		[
 			route.query.course,
 			route.query.classroom,
+			route.path,
 			route.query.mode,
 			route.query.projectKey,
 			route.query.starter,
@@ -5938,6 +7901,17 @@ watch(
 	() => {
 		void loadProjects();
 	}
+);
+
+watch(
+	selectedProject,
+	project => {
+		if (!project) return;
+		newWorkspacePresetID.value = isPythonIdeBlueJProject(project)
+			? "bluej"
+			: project.mode;
+	},
+	{ immediate: true }
 );
 
 watch(selectedProjectID, (projectID, previousProjectID) => {
@@ -5953,11 +7927,12 @@ watch(selectedProjectID, (projectID, previousProjectID) => {
 		return;
 	}
 
-	const hadPythonRunInFlight = isRunning.value;
+	const hadRunInFlight = isRunning.value;
 	stopRequested.value = true;
 	stopActiveRuntimeSurfaces();
+	karelWorld.value = null;
 	runMessage.value = "Ready";
-	if (!hadPythonRunInFlight) {
+	if (!hadRunInFlight) {
 		releaseIdlePythonRuntimeCallbacks();
 		stopRequested.value = false;
 	}
@@ -6038,9 +8013,13 @@ onMounted(() => {
 		"visibilitychange",
 		flushPendingProjectSaveOnVisibilityChange
 	);
-	window.addEventListener("keydown", handleKeyDown);
-	window.addEventListener("keyup", handleKeyUp);
+	window.addEventListener("keydown", handleKeyDown, true);
+	window.addEventListener("keyup", handleKeyUp, true);
 	window.addEventListener("mouseup", clearTurtleDrag);
+	document.addEventListener(
+		"pointerdown",
+		handleIdeSettingsOutsidePointerDown
+	);
 
 	if (canvasRef.value) {
 		resizeObserver = new ResizeObserver(() => redrawActiveCanvas());
@@ -6062,6 +8041,7 @@ onBeforeUnmount(() => {
 	flushPendingProjectSave();
 	saveCodeEditorViewState();
 	codeEditorView?.destroy();
+	stopIdeSplitResize();
 	window.removeEventListener("pagehide", flushPendingProjectSave);
 	window.removeEventListener("pageshow", handleAnonymousWorkspacePageShow);
 	window.removeEventListener("storage", handleAnonymousWorkspaceClearSignal);
@@ -6069,9 +8049,13 @@ onBeforeUnmount(() => {
 		"visibilitychange",
 		flushPendingProjectSaveOnVisibilityChange
 	);
-	window.removeEventListener("keydown", handleKeyDown);
-	window.removeEventListener("keyup", handleKeyUp);
+	window.removeEventListener("keydown", handleKeyDown, true);
+	window.removeEventListener("keyup", handleKeyUp, true);
 	window.removeEventListener("mouseup", clearTurtleDrag);
+	document.removeEventListener(
+		"pointerdown",
+		handleIdeSettingsOutsidePointerDown
+	);
 	stopRequested.value = true;
 	stopActiveRuntimeSurfaces();
 	releaseLoadedPythonRuntimeCallbacks();
@@ -6082,13 +8066,28 @@ onBeforeUnmount(() => {
 <template>
 	<section
 		ref="pythonIdePageRef"
-		class="python-ide-page page-shell page-shell--wide"
+		class="code-ide-page page-shell page-shell--wide"
+		:class="{ 'code-ide-page--expanded': ideExpanded }"
 	>
-		<div class="python-ide-hero">
-			<h1>Python IDE</h1>
-			<div class="python-ide-status" aria-live="polite">
-				<span>{{ saveMessage }}</span>
-				<strong>{{ runMessage }}</strong>
+		<input
+			ref="blueJArchiveInputRef"
+			:accept="blueJProjectArchiveUploadAccept"
+			aria-label="Import BlueJ project ZIP"
+			class="sr-only"
+			type="file"
+			@change="importBlueJProjectArchiveFromInput"
+		/>
+		<div class="code-ide-hero">
+			<div>
+				<p class="code-ide-eyebrow">{{ codeIdeHeroContent.eyebrow }}</p>
+				<h1>{{ codeIdeHeroContent.title }}</h1>
+				<p>{{ codeIdeHeroContent.description }}</p>
+			</div>
+			<div class="code-ide-status">
+				<div aria-live="polite">
+					<span>{{ saveMessage }}</span>
+					<strong>{{ runMessage }}</strong>
+				</div>
 			</div>
 		</div>
 
@@ -6119,7 +8118,7 @@ onBeforeUnmount(() => {
 				role="group"
 				aria-label="Confirm clearing browser projects"
 			>
-				<strong>Delete every anonymous Python project here?</strong>
+				<strong>Delete every anonymous IDE project here?</strong>
 				<p>
 					This cannot be undone. Projects already saved to a signed-in
 					account are not changed.
@@ -6203,20 +8202,20 @@ onBeforeUnmount(() => {
 			</div>
 		</section>
 
-		<div v-if="isLoading" class="python-ide-loading site-surface">
-			Loading Python workspace...
+		<div v-if="isLoading" class="code-ide-loading site-surface">
+			Loading IDE workspace...
 		</div>
 
 		<div
 			v-else
-			class="python-ide-workspace"
+			class="code-ide-workspace"
 			:class="{ 'is-sidebar-collapsed': sidebarCollapsed }"
 		>
 			<button
 				v-if="sidebarCollapsed"
 				:aria-expanded="!sidebarCollapsed"
 				aria-label="Expand project sidebar"
-				aria-controls="python-ide-sidebar"
+				aria-controls="code-ide-sidebar"
 				class="sidebar-collapse-toggle sidebar-collapse-toggle--rail"
 				title="Expand project sidebar"
 				type="button"
@@ -6226,9 +8225,9 @@ onBeforeUnmount(() => {
 			</button>
 			<aside
 				v-else
-				id="python-ide-sidebar"
-				class="python-ide-sidebar"
-				aria-label="Python projects and files"
+				id="code-ide-sidebar"
+				class="code-ide-sidebar"
+				aria-label="Code projects and files"
 			>
 				<div class="sidebar-block">
 					<div class="sidebar-heading">
@@ -6237,7 +8236,7 @@ onBeforeUnmount(() => {
 							<button
 								:aria-expanded="!sidebarCollapsed"
 								aria-label="Collapse project sidebar"
-								aria-controls="python-ide-sidebar"
+								aria-controls="code-ide-sidebar"
 								class="sidebar-collapse-toggle sidebar-collapse-toggle--inline"
 								title="Collapse project sidebar"
 								type="button"
@@ -6252,9 +8251,9 @@ onBeforeUnmount(() => {
 								<button
 									:aria-expanded="showProjectMenu"
 									aria-haspopup="menu"
-									aria-label="Create new project"
+									aria-label="More project options"
 									class="icon-action icon-action--add"
-									title="Create new project"
+									title="More project options"
 									type="button"
 									@click="showProjectMenu = !showProjectMenu"
 								>
@@ -6265,27 +8264,197 @@ onBeforeUnmount(() => {
 									class="project-create-menu"
 									role="menu"
 								>
-									<span>New project</span>
+									<span>Import project</span>
 									<button
 										type="button"
 										role="menuitem"
-										@click="createProjectFromMenu('python')"
+										@click="
+											openBlueJArchiveImporterFromMenu
+										"
 									>
-										Python
+										Import BlueJ ZIP
+									</button>
+									<span>Classroom projects</span>
+									<button
+										type="button"
+										role="menuitem"
+										@click="
+											createProjectFromMenu(
+												'turtle',
+												'circle-art'
+											)
+										"
+									>
+										Color Circle Art
 									</button>
 									<button
 										type="button"
 										role="menuitem"
-										@click="createProjectFromMenu('turtle')"
+										@click="
+											createProjectFromMenu(
+												'turtle',
+												'picasso'
+											)
+										"
 									>
-										Python Turtle
+										Picasso Keyboard Painter
 									</button>
 									<button
 										type="button"
 										role="menuitem"
-										@click="createProjectFromMenu('pgzero')"
+										@click="
+											createProjectFromMenu(
+												'turtle',
+												'triangle-motion'
+											)
+										"
 									>
-										PyGame Zero
+										Triangle Motion Starter
+									</button>
+									<button
+										type="button"
+										role="menuitem"
+										@click="
+											createProjectFromMenu(
+												'turtle',
+												'neon-trail'
+											)
+										"
+									>
+										Neon Trail Painter
+									</button>
+									<button
+										type="button"
+										role="menuitem"
+										@click="
+											createProjectFromMenu(
+												'turtle',
+												'firework-festival'
+											)
+										"
+									>
+										Firework Festival
+									</button>
+									<button
+										type="button"
+										role="menuitem"
+										@click="
+											createProjectFromMenu(
+												'turtle',
+												'spiral-galaxy'
+											)
+										"
+									>
+										Spiral Galaxy
+									</button>
+									<button
+										type="button"
+										role="menuitem"
+										@click="
+											createProjectFromMenu(
+												'turtle',
+												'turtle-race'
+											)
+										"
+									>
+										Turtle Race Day
+									</button>
+									<button
+										type="button"
+										role="menuitem"
+										@click="
+											createProjectFromMenu(
+												'turtle',
+												'flower-garden'
+											)
+										"
+									>
+										Flower Garden Clicker
+									</button>
+									<button
+										type="button"
+										role="menuitem"
+										@click="
+											createProjectFromMenu(
+												'turtle',
+												'maze-explorer'
+											)
+										"
+									>
+										Maze Explorer
+									</button>
+									<button
+										type="button"
+										role="menuitem"
+										@click="
+											createProjectFromMenu(
+												'turtle',
+												'classroom-project'
+											)
+										"
+									>
+										Classroom Turtle Studio
+									</button>
+									<span>Template project</span>
+									<button
+										type="button"
+										role="menuitem"
+										@click="
+											createProjectFromMenu(
+												'turtle',
+												'outline'
+											)
+										"
+									>
+										Python Level 1 Outline
+									</button>
+									<button
+										type="button"
+										role="menuitem"
+										@click="
+											createProjectFromMenu(
+												'pgzero',
+												'outline'
+											)
+										"
+									>
+										PyGame Zero Outline
+									</button>
+									<button
+										type="button"
+										role="menuitem"
+										@click="
+											createProjectFromMenu(
+												'java',
+												'outline'
+											)
+										"
+									>
+										Java Outline
+									</button>
+									<button
+										type="button"
+										role="menuitem"
+										@click="
+											createProjectFromMenu(
+												'java',
+												'bluej'
+											)
+										"
+									>
+										BlueJ Java Project
+									</button>
+									<button
+										type="button"
+										role="menuitem"
+										@click="
+											createProjectFromMenu(
+												'karel',
+												'outline'
+											)
+										"
+									>
+										Karel Java Outline
 									</button>
 									<span>Demo project</span>
 									<button
@@ -6324,9 +8493,77 @@ onBeforeUnmount(() => {
 									>
 										Demo PyGame Zero
 									</button>
+									<button
+										type="button"
+										role="menuitem"
+										@click="
+											createProjectFromMenu(
+												'data',
+												'demo'
+											)
+										"
+									>
+										Demo Data / AI
+									</button>
+									<button
+										type="button"
+										role="menuitem"
+										@click="
+											createProjectFromMenu(
+												'java',
+												'demo'
+											)
+										"
+									>
+										Demo Java
+									</button>
+									<button
+										type="button"
+										role="menuitem"
+										@click="
+											createProjectFromMenu(
+												'karel',
+												'demo'
+											)
+										"
+									>
+										Demo Karel Java
+									</button>
 								</div>
 							</div>
 						</div>
+					</div>
+
+					<div
+						class="workspace-type-control"
+						aria-label="IDE and language selector"
+						role="group"
+					>
+						<label class="workspace-type-label">
+							<span>Workspace type</span>
+							<select v-model="newWorkspacePresetID">
+								<optgroup
+									v-for="group in codeIdeWorkspacePresetGroups"
+									:key="group.label"
+									:label="group.label"
+								>
+									<option
+										v-for="preset in group.presets"
+										:key="preset.id"
+										:value="preset.id"
+									>
+										{{ preset.label }}
+									</option>
+								</optgroup>
+							</select>
+						</label>
+						<button
+							class="site-button site-button--secondary compact-button workspace-type-create"
+							type="button"
+							@click="createSelectedWorkspaceProject"
+						>
+							New project
+						</button>
 					</div>
 
 					<div class="project-list">
@@ -6344,25 +8581,26 @@ onBeforeUnmount(() => {
 									class="project-button"
 									:class="{
 										'is-active':
-											project._id === selectedProject?._id
+											project._id === selectedProjectID
 									}"
 									type="button"
-									@click="selectedProjectID = project._id"
+									@click="selectCatalogProject(project._id)"
 								>
 									<span>{{ projectLabel(project) }}</span>
 									<small>{{
-										getPythonIdeModeLabel(project.mode)
+										getPythonIdeProjectKindLabel(project)
 									}}</small>
 								</button>
 								<button
 									:aria-label="`Delete project ${projectLabel(project)}`"
 									class="file-delete project-delete-trigger"
 									:class="{
-										'is-disabled': projects.length <= 1
+										'is-disabled':
+											sortedProjects.length <= 1
 									}"
-									:disabled="projects.length <= 1"
+									:disabled="sortedProjects.length <= 1"
 									:title="
-										projects.length <= 1
+										sortedProjects.length <= 1
 											? 'Keep at least one project'
 											: `Delete project ${projectLabel(project)}`
 									"
@@ -6373,10 +8611,7 @@ onBeforeUnmount(() => {
 								</button>
 							</div>
 							<div
-								v-if="
-									project._id === selectedProject?._id &&
-									project._id === deleteCandidateProjectID
-								"
+								v-if="project._id === deleteCandidateProjectID"
 								class="project-delete-confirm"
 							>
 								<strong>
@@ -6460,7 +8695,7 @@ onBeforeUnmount(() => {
 					<div class="file-tools-footer">
 						<button
 							:aria-expanded="showFileTools"
-							aria-controls="python-ide-file-tools-panel"
+							aria-controls="code-ide-file-tools-panel"
 							aria-label="Add or import project files"
 							class="file-tool-toggle"
 							title="Add or import project files"
@@ -6475,14 +8710,14 @@ onBeforeUnmount(() => {
 					</div>
 					<div
 						v-if="showFileTools"
-						id="python-ide-file-tools-panel"
+						id="code-ide-file-tools-panel"
 						class="file-tools-panel"
 					>
 						<div class="new-file-row">
 							<input
 								v-model="newFileName"
 								aria-label="New project file name"
-								placeholder="helper.py, helpers/math_tools.py, or data.csv"
+								:placeholder="newFileNamePlaceholder"
 								type="text"
 								@keyup.enter="addFile"
 							/>
@@ -6503,42 +8738,79 @@ onBeforeUnmount(() => {
 								@change="importProjectFiles"
 							/>
 						</label>
+						<div
+							v-if="selectedProjectCanExportToBlueJ"
+							class="file-export-row"
+						>
+							<button
+								class="site-button site-button--secondary compact-button"
+								type="button"
+								@click="downloadSelectedProjectForBlueJ"
+							>
+								Download BlueJ ZIP
+							</button>
+							<a
+								:href="blueJHomeUrl"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								BlueJ
+							</a>
+							<a
+								:href="blueJSourceUrl"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Source
+							</a>
+						</div>
 					</div>
 				</div>
 			</aside>
 
 			<main
 				v-if="selectedProject && selectedProjectContentLoaded"
-				class="python-ide-main"
+				class="code-ide-main"
 			>
 				<div class="editor-toolbar">
-					<label>
-						<span>Project name</span>
+					<div class="project-title-field">
+						<label
+							class="project-title-label"
+							for="code-ide-project-title"
+						>
+							Project name
+						</label>
 						<input
+							id="code-ide-project-title"
+							class="project-title-input"
 							:value="selectedProject.title"
 							type="text"
 							@input="updateProjectTitle"
 						/>
-					</label>
+					</div>
 					<div class="editor-actions">
-						<div class="ide-settings">
+						<div ref="ideSettingsRef" class="ide-settings">
 							<button
 								:aria-expanded="showIdeSettings"
-								aria-controls="python-ide-settings-panel"
-								aria-label="Python IDE settings"
+								aria-controls="code-ide-settings-panel"
+								aria-label="IDE settings"
 								class="ide-settings-trigger"
-								title="Python IDE settings"
+								title="IDE settings"
 								type="button"
 								@click="showIdeSettings = !showIdeSettings"
 							>
-								<span aria-hidden="true">⚙</span>
+								<FontAwesomeIcon
+									:icon="faGear"
+									class="ide-settings-icon"
+									aria-hidden="true"
+								/>
 							</button>
 							<div
 								v-if="showIdeSettings"
-								id="python-ide-settings-panel"
+								id="code-ide-settings-panel"
 								class="ide-settings-panel"
 								role="dialog"
-								aria-label="Python IDE settings"
+								aria-label="IDE settings"
 							>
 								<label class="ide-setting-toggle">
 									<input
@@ -6546,10 +8818,61 @@ onBeforeUnmount(() => {
 										type="checkbox"
 										@change="updateAutoSavePreference"
 									/>
-									<span>
-										<strong>Autosave projects</strong>
-										<small>
-											Save projects on this device.
+									<span class="ide-setting-copy">
+										<span class="ide-setting-title">
+											Autosave projects
+										</span>
+										<small class="ide-setting-description">
+											Save projects on this device and
+											sync when possible.
+										</small>
+									</span>
+								</label>
+								<label class="ide-setting-toggle">
+									<input
+										:checked="codeRecommendationsEnabled"
+										type="checkbox"
+										@change="
+											updateCodeRecommendationsPreference
+										"
+									/>
+									<span class="ide-setting-copy">
+										<span class="ide-setting-title">
+											Suggestions
+										</span>
+										<small class="ide-setting-description">
+											Show code suggestions while typing.
+										</small>
+									</span>
+								</label>
+								<label class="ide-setting-toggle">
+									<input
+										:checked="editorLineWrapEnabled"
+										type="checkbox"
+										@change="updateEditorLineWrapPreference"
+									/>
+									<span class="ide-setting-copy">
+										<span class="ide-setting-title">
+											Line wrap
+										</span>
+										<small class="ide-setting-description">
+											Wrap long lines in the editor.
+										</small>
+									</span>
+								</label>
+								<label class="ide-setting-toggle">
+									<input
+										:checked="ideExpanded"
+										type="checkbox"
+										@change="updateExpandedIdePreference"
+									/>
+									<span class="ide-setting-copy">
+										<span class="ide-setting-title">
+											Expanded layout
+										</span>
+										<small class="ide-setting-description">
+											Use more space for editor and
+											output.
 										</small>
 									</span>
 								</label>
@@ -6579,6 +8902,16 @@ onBeforeUnmount(() => {
 							</div>
 						</div>
 						<button
+							aria-label="Download project ZIP"
+							class="site-button site-button--secondary"
+							:disabled="isDownloading"
+							title="Download project ZIP"
+							type="button"
+							@click="downloadSelectedProject"
+						>
+							{{ isDownloading ? "Preparing" : "Download ZIP" }}
+						</button>
+						<button
 							class="site-button site-button--secondary"
 							:disabled="isSaving"
 							type="button"
@@ -6597,6 +8930,84 @@ onBeforeUnmount(() => {
 						</button>
 					</div>
 				</div>
+
+				<section
+					v-if="selectedProjectCanShowBlueJIntegration"
+					class="bluej-integration-panel"
+					aria-label="BlueJ integration"
+				>
+					<div>
+						<p class="bluej-integration-eyebrow">BlueJ</p>
+						<h2>BlueJ Desktop Integration</h2>
+						<p>{{ selectedProjectBlueJDescription }}</p>
+					</div>
+					<div
+						v-if="selectedBlueJClassTargets.length"
+						class="bluej-class-map"
+						aria-label="BlueJ class diagram preview"
+					>
+						<span class="bluej-class-map-label">
+							Class diagram preview
+						</span>
+						<div class="bluej-class-targets">
+							<div
+								v-for="target in selectedBlueJClassTargets"
+								:key="target.fileName"
+								class="bluej-class-target"
+							>
+								<strong>{{ target.name }}</strong>
+								<small>{{
+									target.hasMainMethod
+										? "Runs main"
+										: "Object bench class"
+								}}</small>
+							</div>
+						</div>
+					</div>
+					<div class="bluej-integration-actions">
+						<button
+							class="site-button site-button--secondary compact-button"
+							type="button"
+							@click="createProject('java', 'bluej')"
+						>
+							New BlueJ project
+						</button>
+						<button
+							class="site-button site-button--secondary compact-button"
+							type="button"
+							@click="openBlueJArchiveImporter"
+						>
+							Import BlueJ ZIP
+						</button>
+						<button
+							v-if="selectedProjectCanExportToBlueJ"
+							class="site-button site-button--secondary compact-button"
+							type="button"
+							@click="downloadSelectedProjectForBlueJ"
+						>
+							Download BlueJ ZIP
+						</button>
+						<small v-else class="bluej-integration-note">
+							Standard Java project required for ZIP export.
+						</small>
+						<a
+							class="bluej-integration-link"
+							:href="blueJHomeUrl"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							BlueJ
+						</a>
+						<a
+							class="bluej-integration-link"
+							:href="blueJSourceUrl"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							BlueJ source
+						</a>
+					</div>
+				</section>
 
 				<section
 					v-if="selectedVisibleReview"
@@ -6633,8 +9044,13 @@ onBeforeUnmount(() => {
 				</section>
 
 				<div
+					ref="ideGridRef"
 					class="ide-grid"
-					:class="{ 'ide-grid--drawing': usesDrawingCanvas }"
+					:class="{
+						'ide-grid--drawing': usesVisualOutput,
+						'is-resizing': isResizingIdeSplit
+					}"
+					:style="ideGridStyle"
 				>
 					<section class="code-panel" aria-label="Code editor">
 						<div class="panel-header">
@@ -6646,9 +9062,43 @@ onBeforeUnmount(() => {
 								<details class="editor-shortcuts">
 									<summary>Shortcuts</summary>
 									<ul>
-										<li>Cmd/Ctrl+Enter: Run</li>
-										<li>Cmd/Ctrl+S: Save</li>
-										<li>Cmd/Ctrl+F: Find</li>
+										<li>Cmd/Ctrl+F opens search.</li>
+										<li>
+											Cmd/Ctrl+Enter runs the project.
+										</li>
+										<li>Cmd/Ctrl+S saves the project.</li>
+										<li>
+											Cmd/Ctrl+/ toggles comments for the
+											line or selection.
+										</li>
+										<li>
+											Ctrl+Space opens completions; Enter
+											accepts the highlighted option.
+										</li>
+										<li>
+											Course snippets include main_guard,
+											turtle_screen, ontimer_loop,
+											onkey_handler, draw, update, actor,
+											data_setup, scatter_plot, and
+											decision_tree.
+										</li>
+										<li>
+											Cmd/Ctrl+Alt+Up/Down adds cursors
+											above or below.
+										</li>
+										<li>Tab indents; Shift+Tab dedents.</li>
+										<li>
+											Alt/Option+Up/Down moves lines; add
+											Shift to copy them.
+										</li>
+										<li>
+											Shift+Cmd/Ctrl+\ jumps to the
+											matching bracket.
+										</li>
+										<li>
+											Alt/Option-drag creates a
+											rectangular selection.
+										</li>
 										<li>
 											Tab / Shift+Tab: Indent / outdent
 										</li>
@@ -6684,12 +9134,28 @@ onBeforeUnmount(() => {
 						</div>
 					</section>
 
-					<section class="result-panel" aria-label="Python output">
+					<button
+						class="ide-splitter"
+						type="button"
+						role="separator"
+						aria-label="Resize code and output panels"
+						aria-orientation="vertical"
+						:aria-valuemin="minCodeSplitPercent"
+						:aria-valuemax="maxCodeSplitPercent"
+						:aria-valuenow="Math.round(activeIdeSplitPercent)"
+						title="Drag to resize code and output panels"
+						@keydown="handleIdeSplitKeydown"
+						@pointerdown="startIdeSplitResize"
+					/>
+
+					<section class="result-panel" aria-label="Code output">
 						<div class="panel-header">
 							<span>{{
-								usesDrawingCanvas
-									? `${selectedModeLabel} canvas`
-									: "Runtime"
+								usesKarelWorld
+									? "Karel world"
+									: usesDrawingCanvas
+										? `${selectedModeLabel} canvas`
+										: "Runtime"
 							}}</span>
 							<button
 								class="panel-link"
@@ -6698,6 +9164,54 @@ onBeforeUnmount(() => {
 							>
 								Clear output
 							</button>
+						</div>
+
+						<div
+							v-show="usesKarelWorld"
+							ref="karelWorldRef"
+							class="karel-shell"
+							aria-label="Karel world"
+							tabindex="0"
+							@pointerdown="focusKarelWorldOutput"
+						>
+							<div
+								v-if="karelWorld"
+								class="karel-world"
+								:style="karelWorldStyle"
+							>
+								<div
+									v-for="cell in karelWorldCells"
+									:key="cell.key"
+									class="karel-cell"
+									:class="{
+										'has-paint': Boolean(cell.paintColor),
+										'has-wall-east': cell.walls.east,
+										'has-wall-north': cell.walls.north,
+										'has-wall-south': cell.walls.south,
+										'has-wall-west': cell.walls.west
+									}"
+									:style="karelCellStyle(cell)"
+									:aria-label="karelCellAriaLabel(cell)"
+								>
+									<span
+										v-if="cell.beeperCount"
+										class="karel-beeper"
+										aria-label="Beeper"
+									>
+										{{ cell.beeperCount }}
+									</span>
+								</div>
+								<span
+									v-if="karelWorld.robot"
+									class="karel-robot"
+									:class="karelRobotDirectionClass"
+									:style="karelRobotStyle"
+									aria-label="Karel robot"
+								/>
+							</div>
+							<div v-else class="karel-empty">
+								Run Karel code to render the world.
+							</div>
 						</div>
 
 						<div
@@ -6787,7 +9301,7 @@ onBeforeUnmount(() => {
 								<span>Input</span>
 								<textarea
 									v-model="inputText"
-									placeholder="One input() value per line"
+									placeholder="One input or Scanner value per line"
 								/>
 							</label>
 
@@ -6810,7 +9324,7 @@ onBeforeUnmount(() => {
 			</main>
 			<main
 				v-else-if="selectedProject"
-				class="python-ide-main python-ide-project-loading"
+				class="code-ide-main code-ide-project-loading"
 			>
 				<p role="status">
 					{{
@@ -6833,9 +9347,12 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
-.python-ide-page {
+.code-ide-page {
 	width: min(1680px, calc(100% - clamp(2rem, 4vw, 4rem)));
 	gap: 1.25rem;
+	--code-ide-toolbar-control-size: 3.5rem;
+	--code-ide-toolbar-button-width: 6.75rem;
+	--code-ide-toolbar-control-radius: 16px;
 	--python-code-bg: #f8fafc;
 	--python-code-ink: #1e293b;
 	--python-code-muted: #64748b;
@@ -6866,16 +9383,33 @@ onBeforeUnmount(() => {
 	--syntax-bracket-pair-6: #0891b2;
 }
 
-.python-ide-page {
+.code-ide-page {
 	letter-spacing: 0;
 }
 
-.python-ide-page :is(section, p, label, input, textarea, select, button) {
+.code-ide-page--expanded {
+	width: min(100% - 0.75rem, 100vw);
+	gap: 0.75rem;
+}
+
+.code-ide-page--expanded .code-ide-hero {
+	display: none;
+}
+
+.code-ide-page--expanded .code-ide-workspace {
+	min-height: calc(100vh - 1.5rem);
+}
+
+.code-ide-page--expanded .code-ide-main {
+	padding: 0.75rem;
+}
+
+.code-ide-page :is(section, p, label, input, textarea, select, button) {
 	margin: 0;
 	letter-spacing: 0;
 }
 
-.python-ide-hero {
+.code-ide-hero {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) auto;
 	gap: 1.25rem;
@@ -6891,10 +9425,10 @@ onBeforeUnmount(() => {
 	box-shadow: var(--shadow-soft);
 }
 
-.python-ide-eyebrow,
+.code-ide-eyebrow,
 .sidebar-heading,
 .panel-header,
-.editor-toolbar span,
+.editor-toolbar > span,
 .stdin-panel span {
 	font-size: 0.75rem;
 	font-weight: 800;
@@ -6903,13 +9437,13 @@ onBeforeUnmount(() => {
 	color: #0f766e;
 }
 
-.python-ide-hero h1 {
+.code-ide-hero h1 {
 	margin-top: 0.35rem;
 	font-size: clamp(2.4rem, 4vw, 4.5rem);
 	color: var(--color-ink-strong);
 }
 
-.python-ide-hero p:not(.python-ide-eyebrow) {
+.code-ide-hero p:not(.code-ide-eyebrow) {
 	max-width: 58rem;
 	margin-top: 0.75rem;
 	color: var(--color-ink-soft);
@@ -6917,10 +9451,10 @@ onBeforeUnmount(() => {
 	line-height: 1.7;
 }
 
-.python-ide-status {
+.code-ide-status {
 	min-width: 14rem;
 	display: grid;
-	gap: 0.35rem;
+	gap: 0.75rem;
 	padding: 1rem;
 	border: 1px solid var(--color-border);
 	border-radius: 18px;
@@ -6928,12 +9462,17 @@ onBeforeUnmount(() => {
 	color: var(--color-ink-soft);
 }
 
-.python-ide-status strong {
+.code-ide-status > div {
+	display: grid;
+	gap: 0.35rem;
+}
+
+.code-ide-status strong {
 	color: var(--color-ink-strong);
 	font-size: 1.1rem;
 }
 
-html.dark .python-ide-hero {
+html.dark .code-ide-hero {
 	background: linear-gradient(
 		135deg,
 		rgba(8, 32, 43, 0.98),
@@ -6941,20 +9480,20 @@ html.dark .python-ide-hero {
 	);
 }
 
-html.dark .python-ide-hero h1 {
+html.dark .code-ide-hero h1 {
 	color: #f8fbff;
 }
 
-html.dark .python-ide-hero p:not(.python-ide-eyebrow) {
+html.dark .code-ide-hero p:not(.code-ide-eyebrow) {
 	color: #c8dce6;
 }
 
-html.dark .python-ide-status {
+html.dark .code-ide-status {
 	background: rgba(8, 17, 31, 0.8);
 	color: #c8dce6;
 }
 
-html.dark .python-ide-status strong {
+html.dark .code-ide-status strong {
 	color: #f8fbff;
 }
 
@@ -7063,12 +9602,13 @@ html.dark .shared-computer-clear__confirmation p {
 }
 
 html.dark
-	.python-ide-page
+	.code-ide-page
 	:is(
-		.python-ide-eyebrow,
+		.code-ide-eyebrow,
 		.sidebar-heading,
 		.panel-header,
 		.editor-toolbar span,
+		.project-title-label,
 		.stdin-panel span
 	) {
 	color: #5eead4;
@@ -7076,11 +9616,18 @@ html.dark
 
 html.dark .ide-settings-trigger,
 html.dark .ide-settings-panel {
-	background: rgba(8, 17, 31, 0.94);
 	color: #f8fbff;
 }
 
-html.dark .ide-setting-toggle strong {
+html.dark .ide-settings-trigger {
+	background: rgba(8, 17, 31, 0.94);
+}
+
+html.dark .ide-settings-panel {
+	background: #08111f;
+}
+
+html.dark .ide-setting-title {
 	color: #f8fbff;
 }
 
@@ -7098,7 +9645,7 @@ html.dark .ide-setting-storage small {
 	color: #c8dce6;
 }
 
-html.dark .python-ide-page {
+html.dark .code-ide-page {
 	--python-code-bg: #07111f;
 	--python-code-ink: #d7fbe8;
 	--python-code-muted: #94a3b8;
@@ -7129,30 +9676,38 @@ html.dark .python-ide-page {
 	--syntax-bracket-pair-6: hsl(105 95% 74%);
 }
 
-.python-ide-loading,
-.python-ide-workspace {
+html.dark .karel-shell {
+	background: #0f172a;
+}
+
+html.dark .karel-empty {
+	color: #c8dce6;
+}
+
+.code-ide-loading,
+.code-ide-workspace {
 	min-height: 42rem;
 }
 
-.python-ide-loading {
+.code-ide-loading {
 	display: grid;
 	place-items: center;
 	color: var(--color-ink-soft);
 }
 
-.python-ide-workspace {
+.code-ide-workspace {
 	display: grid;
 	grid-template-columns: minmax(18rem, 24rem) minmax(0, 1fr);
 	gap: 1rem;
 	align-items: stretch;
 }
 
-.python-ide-workspace.is-sidebar-collapsed {
+.code-ide-workspace.is-sidebar-collapsed {
 	grid-template-columns: auto minmax(0, 1fr);
 }
 
-.python-ide-sidebar,
-.python-ide-main,
+.code-ide-sidebar,
+.code-ide-main,
 .code-panel,
 .result-panel {
 	border: 1px solid var(--color-border);
@@ -7161,7 +9716,7 @@ html.dark .python-ide-page {
 	box-shadow: var(--shadow-soft);
 }
 
-.python-ide-sidebar {
+.code-ide-sidebar {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
@@ -7209,7 +9764,7 @@ html.dark .python-ide-page {
 	content: "";
 }
 
-.python-ide-workspace.is-sidebar-collapsed .sidebar-collapse-icon::before {
+.code-ide-workspace.is-sidebar-collapsed .sidebar-collapse-icon::before {
 	right: 0.22rem;
 	left: auto;
 }
@@ -7234,6 +9789,44 @@ html.dark .python-ide-page {
 
 .project-create {
 	position: relative;
+}
+
+.workspace-type-control {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	gap: 0.5rem;
+	align-items: end;
+}
+
+.workspace-type-label {
+	min-width: 0;
+	display: grid;
+	gap: 0.35rem;
+}
+
+.workspace-type-label span {
+	color: var(--color-ink-soft);
+	font-size: 0.72rem;
+	font-weight: 800;
+}
+
+.workspace-type-label select {
+	width: 100%;
+	min-width: 0;
+	height: 2.55rem;
+	padding: 0 2rem 0 0.7rem;
+	border: 1px solid var(--color-border);
+	border-radius: 8px;
+	background: rgba(255, 255, 255, 0.84);
+	color: var(--color-ink);
+	font: inherit;
+	font-size: 0.82rem;
+	font-weight: 700;
+}
+
+.workspace-type-create {
+	min-height: 2.55rem;
+	white-space: nowrap;
 }
 
 .icon-action {
@@ -7386,6 +9979,62 @@ html.dark .project-create-menu button {
 html.dark .project-create-menu button:hover,
 html.dark .project-create-menu button:focus-visible {
 	background: #164e4b;
+}
+
+html.dark .workspace-type-label select {
+	border-color: rgba(94, 234, 212, 0.22);
+	background: #0f1b2a;
+	color: #f8fafc;
+}
+
+html.dark .bluej-integration-panel {
+	border-color: rgba(94, 234, 212, 0.24);
+	background: rgba(15, 23, 42, 0.52);
+}
+
+html.dark .bluej-integration-panel h2 {
+	color: #f8fafc;
+}
+
+html.dark .bluej-integration-panel p:not(.bluej-integration-eyebrow) {
+	color: #cbd5e1;
+}
+
+html.dark .bluej-integration-note {
+	color: #94a3b8;
+}
+
+html.dark .bluej-integration-eyebrow,
+html.dark .bluej-integration-link {
+	color: #5eead4;
+}
+
+html.dark .bluej-class-map-label {
+	color: #5eead4;
+}
+
+html.dark .bluej-class-target {
+	border-color: rgba(94, 234, 212, 0.32);
+	background: rgba(8, 17, 31, 0.74);
+}
+
+html.dark .bluej-class-target strong {
+	color: #f8fafc;
+}
+
+html.dark .bluej-class-target small {
+	color: #c8dce6;
+}
+
+html.dark .bluej-integration-link {
+	border-color: rgba(94, 234, 212, 0.2);
+	background: rgba(15, 23, 42, 0.28);
+}
+
+html.dark .bluej-integration-link:hover,
+html.dark .bluej-integration-link:focus-visible {
+	border-color: rgba(94, 234, 212, 0.45);
+	background: rgba(20, 78, 75, 0.52);
 }
 
 html.dark .icon-action,
@@ -7593,9 +10242,30 @@ html.dark .file-delete:disabled::after {
 	font-weight: 600;
 }
 
+.file-export-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.45rem;
+	align-items: center;
+	padding-top: 0.45rem;
+	border-top: 1px solid var(--color-border);
+}
+
+.file-export-row a {
+	color: #0f766e;
+	font-size: 0.78rem;
+	font-weight: 800;
+	text-decoration: none;
+}
+
+.file-export-row a:hover,
+.file-export-row a:focus-visible {
+	text-decoration: underline;
+}
+
 .new-file-row input,
 .project-delete-confirm input,
-.editor-toolbar > label input,
+.project-title-input,
 .stdin-panel textarea {
 	width: 100%;
 	border: 1px solid var(--color-border);
@@ -7606,7 +10276,7 @@ html.dark .file-delete:disabled::after {
 
 .new-file-row input,
 .project-delete-confirm input,
-.editor-toolbar > label input {
+.project-title-input {
 	min-height: 2.8rem;
 	padding: 0.55rem 0.75rem;
 }
@@ -7618,7 +10288,7 @@ html.dark .file-delete:disabled::after {
 }
 
 .run-control {
-	width: 5rem;
+	width: var(--code-ide-toolbar-button-width);
 	justify-content: center;
 	text-align: center;
 }
@@ -7634,17 +10304,11 @@ html.dark .file-delete:disabled::after {
 	background: #991b1b;
 }
 
-.python-ide-main {
+.code-ide-main {
 	min-width: 0;
 	display: grid;
 	gap: 1rem;
 	padding: 1rem;
-}
-
-.python-ide-project-loading {
-	min-height: 24rem;
-	place-items: center;
-	color: var(--color-ink-soft);
 }
 
 .editor-toolbar {
@@ -7654,26 +10318,178 @@ html.dark .file-delete:disabled::after {
 	align-items: end;
 }
 
-.editor-toolbar > label,
 .stdin-panel {
 	display: grid;
 	gap: 0.35rem;
 }
 
-.editor-toolbar > label {
-	padding: 0.2rem;
-	border: 1px solid transparent;
-	border-radius: 14px;
-	transition:
-		border-color 150ms ease,
-		box-shadow 150ms ease;
+.project-title-field {
+	min-width: 0;
+	display: grid;
+	gap: 0.5rem;
+}
+
+.project-title-label {
+	min-width: 0;
+	color: #0f766e;
+	font-size: 0.75rem;
+	font-weight: 800;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	line-height: 1;
+}
+
+.project-title-input {
+	min-width: 0;
 }
 
 .editor-actions {
 	position: relative;
+	grid-column: 2;
+	align-self: end;
 	display: flex;
 	gap: 0.65rem;
-	align-items: end;
+	align-items: stretch;
+	justify-content: flex-end;
+	height: var(--code-ide-toolbar-control-size);
+}
+
+.project-title-input,
+.editor-actions > .site-button,
+.ide-settings-trigger {
+	box-sizing: border-box;
+	height: var(--code-ide-toolbar-control-size);
+	min-height: var(--code-ide-toolbar-control-size);
+	border-radius: var(--code-ide-toolbar-control-radius);
+}
+
+.editor-actions > .site-button {
+	width: var(--code-ide-toolbar-button-width);
+	padding: 0 1.2rem;
+	line-height: 1;
+}
+
+.bluej-integration-panel {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1rem;
+	align-items: stretch;
+	padding: 0.85rem 1rem;
+	border: 1px solid rgba(20, 184, 166, 0.28);
+	border-radius: 14px;
+	background: rgba(240, 253, 250, 0.68);
+}
+
+.bluej-integration-panel h2,
+.bluej-integration-panel p {
+	margin: 0;
+}
+
+.bluej-integration-panel h2 {
+	margin-top: 0.12rem;
+	color: var(--color-ink-strong);
+	font-size: 1rem;
+	letter-spacing: 0;
+	line-height: 1.25;
+}
+
+.bluej-integration-panel p:not(.bluej-integration-eyebrow) {
+	margin-top: 0.28rem;
+	color: var(--color-ink);
+	font-size: 0.86rem;
+	line-height: 1.45;
+}
+
+.bluej-class-map {
+	display: grid;
+	gap: 0.55rem;
+	min-width: min(100%, 20rem);
+}
+
+.bluej-class-map-label {
+	color: #0f766e;
+	font-size: 0.68rem;
+	font-weight: 900;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+.bluej-class-targets {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.bluej-class-target {
+	min-width: 7.25rem;
+	display: grid;
+	gap: 0.15rem;
+	place-items: center;
+	padding: 0.65rem 0.75rem;
+	border: 1px solid rgba(15, 118, 110, 0.22);
+	border-radius: 10px;
+	background: rgba(236, 253, 245, 0.74);
+	text-align: center;
+}
+
+.bluej-class-target strong,
+.bluej-class-target small {
+	display: block;
+}
+
+.bluej-class-target strong {
+	color: var(--color-ink-strong);
+	font-size: 0.88rem;
+}
+
+.bluej-class-target small {
+	color: var(--color-ink-soft);
+	font-size: 0.72rem;
+	font-weight: 700;
+}
+
+.bluej-integration-eyebrow {
+	color: #0f766e;
+	font-size: 0.72rem;
+	font-weight: 900;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+
+.bluej-integration-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.bluej-integration-note {
+	max-width: 12rem;
+	color: var(--color-ink-muted);
+	font-size: 0.8rem;
+	font-weight: 700;
+	line-height: 1.35;
+	text-align: right;
+}
+
+.bluej-integration-link {
+	min-height: 2.8rem;
+	display: inline-flex;
+	align-items: center;
+	padding: 0.55rem 0.75rem;
+	border: 1px solid rgba(15, 118, 110, 0.22);
+	border-radius: 12px;
+	color: #0f766e;
+	font-weight: 800;
+	text-decoration: none;
+}
+
+.bluej-integration-link:hover,
+.bluej-integration-link:focus-visible {
+	border-color: rgba(15, 118, 110, 0.42);
+	background: rgba(204, 251, 241, 0.45);
+	text-decoration: none;
 }
 
 .visible-review-panel {
@@ -7753,47 +10569,116 @@ html.dark .file-delete:disabled::after {
 
 .ide-settings {
 	position: relative;
+	display: flex;
+	align-items: stretch;
+	height: 100%;
 }
 
 .ide-settings-trigger {
-	width: 2.8rem;
-	height: 2.8rem;
-	display: grid;
-	place-items: center;
+	width: var(--code-ide-toolbar-control-size);
+	height: var(--code-ide-toolbar-control-size);
+	flex: 0 0 var(--code-ide-toolbar-control-size);
+	padding: 0;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	border: 1px solid var(--color-border);
-	border-radius: 14px;
 	background: rgba(255, 255, 255, 0.84);
-	color: var(--color-ink-strong);
-	font-size: 1.15rem;
+	color: #0f766e;
 	font-weight: 900;
+	line-height: 1;
+}
+
+.ide-settings-icon {
+	width: 1.35rem;
+	height: 1.35rem;
+	display: block;
+	color: currentColor;
 }
 
 .ide-settings-panel {
 	position: absolute;
-	z-index: 8;
-	top: calc(100% + 0.55rem);
+	z-index: 18;
+	top: calc(100% + 0.6rem);
 	right: 0;
-	width: min(20rem, calc(100vw - 2rem));
-	padding: 0.85rem;
+	width: min(26rem, calc(100vw - 2rem));
+	max-height: min(36rem, calc(100vh - 8rem));
+	display: grid;
+	gap: 0.45rem;
+	overflow: auto;
+	overscroll-behavior: contain;
+	padding: 0.8rem;
 	border: 1px solid var(--color-border);
-	border-radius: 16px;
-	background: rgba(255, 255, 255, 0.96);
+	border-radius: 12px;
+	background: #fff;
 	box-shadow: var(--shadow-soft);
+	font-family: var(--font-sans);
+	font-size: 0.84rem;
+	line-height: 1.42;
+	font-variant: normal;
+	font-weight: 400;
+	text-align: left;
+	text-transform: none;
+	letter-spacing: normal;
+	overflow-wrap: normal;
+	word-break: normal;
+}
+
+.ide-settings-panel,
+.ide-settings-panel :where(*) {
+	color: inherit;
+	font-family: var(--font-sans);
+	font-variant: normal;
+	letter-spacing: normal !important;
+	text-transform: none !important;
+	overflow-wrap: normal;
+	word-break: normal;
+}
+
+.ide-settings-panel :is(label, span, small, button),
+.ide-settings-panel .ide-setting-copy,
+.ide-settings-panel .ide-setting-title,
+.ide-settings-panel .ide-setting-description {
+	font-variant: normal;
+	letter-spacing: normal !important;
+	text-transform: none !important;
 }
 
 .ide-setting-toggle {
 	display: grid;
-	grid-template-columns: auto minmax(0, 1fr);
-	gap: 0.7rem;
+	grid-template-columns: 1rem minmax(0, 1fr);
+	column-gap: 0.65rem;
+	row-gap: 0.16rem;
 	align-items: start;
+	padding: 0.62rem 0.7rem;
+	border-radius: 8px;
 	color: var(--color-ink);
+	cursor: pointer;
+	font-size: 0.84rem;
+	font-weight: 400;
+	line-height: 1.42;
+	text-align: left;
+	text-transform: none;
+	letter-spacing: normal;
+}
+
+.ide-setting-toggle + .ide-setting-toggle {
+	margin-top: 0.15rem;
+	border-top: 1px solid var(--color-border);
+}
+
+.ide-setting-note {
+	color: var(--color-muted);
+	font-size: 0.72rem;
+	font-weight: 500;
+	line-height: 1.38;
 }
 
 .ide-setting-storage {
 	display: grid;
-	gap: 0.45rem;
-	margin-top: 0.8rem;
-	padding-top: 0.8rem;
+	gap: 0.42rem;
+	margin-top: 0.15rem;
+	padding: 0.52rem 0.7rem 0;
 	border-top: 1px solid var(--color-border);
 }
 
@@ -7805,8 +10690,8 @@ html.dark .file-delete:disabled::after {
 	background: rgba(15, 118, 110, 0.1);
 	color: #0f766e;
 	font-size: 0.78rem;
-	font-weight: 900;
-	letter-spacing: 0.02em;
+	font-weight: 600;
+	letter-spacing: normal;
 }
 
 .ide-setting-action:disabled {
@@ -7814,47 +10699,75 @@ html.dark .file-delete:disabled::after {
 	opacity: 0.65;
 }
 
-.ide-setting-toggle input {
-	width: 1.1rem;
-	height: 1.1rem;
-	margin-top: 0.2rem;
+.ide-setting-toggle input[type="checkbox"] {
+	width: 1rem;
+	height: 1rem;
+	margin: 0;
+	margin-top: 0.07rem;
 	accent-color: #0f766e;
+	transform: none;
 }
 
-.ide-setting-toggle strong,
-.ide-setting-toggle small {
+.ide-setting-copy {
+	min-width: 0;
+	display: grid;
+	gap: 0.18rem;
+}
+
+.ide-settings-panel .ide-setting-title {
 	display: block;
-}
-
-.ide-setting-toggle strong {
 	color: var(--color-ink-strong);
-	font-size: 0.95rem;
+	font-size: 0.86rem;
+	font-weight: 550;
+	letter-spacing: normal !important;
+	line-height: 1.28;
+	font-variant: normal;
+	text-transform: none !important;
 }
 
-.ide-setting-toggle small {
-	margin-top: 0.2rem;
+.ide-settings-panel .ide-setting-description {
+	display: block;
 	color: var(--color-ink-soft);
-	font-size: 0.78rem;
-	line-height: 1.45;
+	font-size: 0.76rem;
+	font-weight: 400;
+	letter-spacing: normal !important;
+	line-height: 1.36;
+	font-variant: normal;
+	text-transform: none !important;
 }
 
 .ide-setting-storage small {
 	color: var(--color-ink-soft);
-	font-size: 0.76rem;
+	font-size: 0.74rem;
 	line-height: 1.4;
 }
 
 .ide-grid {
+	--code-ide-splitter-width: 0.55rem;
 	min-height: 38rem;
 	height: clamp(38rem, 76vh, 54rem);
 	display: grid;
-	grid-template-columns: minmax(0, 1.08fr) minmax(24rem, 0.92fr);
-	gap: 1rem;
+	grid-template-columns:
+		minmax(18rem, var(--code-ide-code-column, 54%))
+		var(--code-ide-splitter-width) minmax(24rem, 1fr);
+	column-gap: 0.3rem;
 }
 
 .ide-grid--drawing {
 	height: clamp(40rem, 78vh, 56rem);
-	grid-template-columns: minmax(0, 0.82fr) minmax(28rem, 1.18fr);
+	grid-template-columns:
+		minmax(16rem, var(--code-ide-code-column, 42%))
+		var(--code-ide-splitter-width) minmax(28rem, 1fr);
+}
+
+.code-ide-page--expanded .ide-grid,
+.code-ide-page--expanded .ide-grid--drawing {
+	height: clamp(42rem, calc(100vh - 7.5rem), 72rem);
+}
+
+.ide-grid.is-resizing {
+	cursor: col-resize;
+	user-select: none;
 }
 
 .code-panel,
@@ -7868,6 +10781,41 @@ html.dark .file-delete:disabled::after {
 
 .code-panel {
 	overflow: hidden;
+}
+
+.ide-splitter {
+	width: var(--code-ide-splitter-width);
+	min-width: var(--code-ide-splitter-width);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	align-self: stretch;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	cursor: col-resize;
+	touch-action: none;
+}
+
+.ide-splitter::before {
+	width: 2px;
+	height: 100%;
+	border-radius: 999px;
+	background: rgba(15, 118, 110, 0.46);
+	content: "";
+	pointer-events: none;
+}
+
+.ide-splitter:hover,
+.ide-splitter:focus-visible,
+.ide-grid.is-resizing .ide-splitter {
+	background: transparent;
+	box-shadow: none;
+	outline: 0;
+}
+
+html.dark .ide-splitter::before {
+	background: rgba(94, 234, 212, 0.52);
 }
 
 .panel-header {
@@ -7985,8 +10933,9 @@ html.dark .editor-shortcuts ul {
 
 .code-editor-shell:focus-within,
 .canvas-shell:focus-within,
+.karel-shell:focus-visible,
 .stdin-panel:focus-within,
-.editor-toolbar > label:focus-within {
+.project-title-input:focus-visible {
 	border-color: var(--python-focus-ring);
 	box-shadow:
 		0 0 0 3px var(--python-focus-glow),
@@ -8067,8 +11016,9 @@ html.dark .editor-shortcuts ul {
 
 .turtle-canvas {
 	display: block;
-	width: 100%;
-	height: 23rem;
+	width: min(100%, var(--python-turtle-max-width, 48rem));
+	height: auto;
+	aspect-ratio: var(--python-turtle-aspect, 640 / 480);
 	border: 1px solid var(--color-border);
 	border-radius: 14px;
 	background: #fff;
@@ -8078,6 +11028,128 @@ html.dark .editor-shortcuts ul {
 .turtle-canvas--game {
 	width: 100%;
 	height: 100%;
+}
+
+.karel-shell {
+	display: grid;
+	place-items: center;
+	min-height: 26rem;
+	padding: 1rem;
+	border: 1px solid transparent;
+	border-bottom: 1px solid var(--color-border);
+	background: #f8fafc;
+	outline: none;
+	transition:
+		border-color 150ms ease,
+		box-shadow 150ms ease;
+}
+
+.karel-world {
+	position: relative;
+	display: grid;
+	grid-template-columns: repeat(var(--karel-cols), minmax(0, 1fr));
+	width: min(100%, 34rem);
+	aspect-ratio: var(--karel-cols) / var(--karel-rows);
+	border: 3px solid #111827;
+	background: #fff;
+	box-shadow: 0 18px 34px rgba(15, 23, 42, 0.14);
+}
+
+.karel-cell {
+	position: relative;
+	min-width: 0;
+	min-height: 0;
+	border-right: 1px solid #ef4444;
+	border-bottom: 1px solid #ef4444;
+}
+
+.karel-cell.has-paint {
+	background: var(--karel-cell-color);
+}
+
+.karel-cell.has-wall-east {
+	border-right: 4px solid #111827;
+}
+
+.karel-cell.has-wall-north {
+	border-top: 4px solid #111827;
+}
+
+.karel-cell.has-wall-south {
+	border-bottom: 4px solid #111827;
+}
+
+.karel-cell.has-wall-west {
+	border-left: 4px solid #111827;
+}
+
+.karel-robot {
+	position: absolute;
+	z-index: 3;
+	border: 2px solid #1d4ed8;
+	border-radius: 5px;
+	background: #fde047;
+	box-shadow: 0 2px 0 #111827;
+	transition:
+		left 240ms ease,
+		top 240ms ease,
+		transform 180ms ease;
+	will-change: left, top, transform;
+}
+
+.karel-robot::after {
+	position: absolute;
+	top: 50%;
+	right: -0.42rem;
+	width: 0;
+	height: 0;
+	border-top: 0.35rem solid transparent;
+	border-bottom: 0.35rem solid transparent;
+	border-left: 0.55rem solid #111827;
+	content: "";
+	transform: translateY(-50%);
+}
+
+.karel-robot--north {
+	transform: rotate(-90deg);
+}
+
+.karel-robot--south {
+	transform: rotate(90deg);
+}
+
+.karel-robot--west {
+	transform: rotate(180deg);
+}
+
+.karel-beeper {
+	position: absolute;
+	z-index: 2;
+	top: 50%;
+	left: 50%;
+	display: grid;
+	width: 1.25rem;
+	height: 1.25rem;
+	place-items: center;
+	border-radius: 999px;
+	background: #111827;
+	color: #fff;
+	font-size: 0.68rem;
+	font-weight: 800;
+	transform: translate(-50%, -50%);
+}
+
+.karel-empty {
+	display: grid;
+	width: min(100%, 34rem);
+	min-height: 20rem;
+	place-items: center;
+	border: 1px dashed var(--color-border);
+	border-radius: 14px;
+	color: #64748b;
+	font-family:
+		"SFMono-Regular", "Cascadia Code", "Liberation Mono", monospace;
+	font-size: 0.9rem;
 }
 
 .artifact-list {
@@ -8195,7 +11267,7 @@ html.dark .editor-shortcuts ul {
 }
 
 @media (max-width: 1180px) {
-	.python-ide-workspace,
+	.code-ide-workspace,
 	.ide-grid {
 		grid-template-columns: 1fr;
 	}
@@ -8203,6 +11275,10 @@ html.dark .editor-shortcuts ul {
 	.ide-grid,
 	.ide-grid--drawing {
 		height: auto;
+	}
+
+	.ide-splitter {
+		display: none;
 	}
 
 	.code-panel {
@@ -8213,11 +11289,11 @@ html.dark .editor-shortcuts ul {
 		height: clamp(30rem, 68vh, 42rem);
 	}
 
-	.python-ide-workspace.is-sidebar-collapsed {
+	.code-ide-workspace.is-sidebar-collapsed {
 		grid-template-columns: auto minmax(0, 1fr);
 	}
 
-	.python-ide-sidebar {
+	.code-ide-sidebar {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		align-items: start;
@@ -8225,17 +11301,46 @@ html.dark .editor-shortcuts ul {
 }
 
 @media (max-width: 820px) {
-	.python-ide-page {
+	.code-ide-page {
 		width: min(100% - 1.25rem, 1680px);
 	}
 
-	.python-ide-hero,
+	.code-ide-hero,
 	.editor-toolbar,
-	.python-ide-sidebar {
+	.code-ide-sidebar {
 		grid-template-columns: 1fr;
 	}
 
-	.python-ide-status {
+	.editor-toolbar {
+		grid-template-rows: auto;
+		align-items: stretch;
+	}
+
+	.bluej-integration-panel {
+		grid-template-columns: 1fr;
+		align-items: stretch;
+	}
+
+	.bluej-integration-actions {
+		justify-content: flex-start;
+	}
+
+	.project-title-field,
+	.editor-actions {
+		grid-column: 1;
+		grid-row: auto;
+	}
+
+	.editor-actions {
+		align-self: stretch;
+		justify-content: stretch;
+	}
+
+	.editor-actions > .site-button {
+		flex: 1 1 0;
+	}
+
+	.code-ide-status {
 		min-width: 0;
 	}
 
@@ -8261,8 +11366,14 @@ html.dark .editor-shortcuts ul {
 		flex: 1 1 12rem;
 	}
 
+	.ide-settings-panel {
+		right: auto;
+		left: 0;
+		width: min(26rem, calc(100vw - 2rem));
+	}
+
 	.turtle-canvas:not(.turtle-canvas--game) {
-		height: 18rem;
+		width: 100%;
 	}
 }
 </style>

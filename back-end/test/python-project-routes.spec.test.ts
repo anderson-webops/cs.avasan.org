@@ -210,6 +210,38 @@ describe("Python project routes", () => {
 		});
 	});
 
+	it("accepts Turtle PostScript exports in a synced Python project", async () => {
+		await withPythonProjectRoute(async baseUrl => {
+			const response = await projectJson(baseUrl, "POST", {
+				activeFileName: "main.py",
+				files: [
+					{ content: "import turtle\n", name: "main.py" },
+					{
+						content: "%!PS-Adobe-3.0\n%%EOF\n",
+						name: "drawing.ps"
+					},
+					{
+						content: "%!PS-Adobe-3.0 EPSF-3.0\n%%EOF\n",
+						name: "drawing.eps"
+					}
+				],
+				importID: "browser-import:turtle-export",
+				mode: "turtle",
+				title: "Turtle export"
+			});
+
+			expect(response.status).toBe(201);
+			expect(modelMocks.pythonProjectCreate).toHaveBeenCalledWith(
+				expect.objectContaining({
+					files: expect.arrayContaining([
+						expect.objectContaining({ name: "drawing.ps" }),
+						expect.objectContaining({ name: "drawing.eps" })
+					])
+				})
+			);
+		});
+	});
+
 	it("accepts the editor's 40-file limit and a 2 MB base64 asset", async () => {
 		const files: Array<{
 			content: string;

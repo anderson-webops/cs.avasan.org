@@ -43,7 +43,7 @@ enable a feature merely because this implementation minimizes data.
 
 ## Fail-closed rollout gate
 
-CS courses, the Python IDE, browser saves, and Math's browser-local Graph
+CS courses, the IDE, browser saves, and Math's browser-local Graph
 Sketcher remain available without these features. Do not enable any
 student-data feature until all of the following are complete:
 

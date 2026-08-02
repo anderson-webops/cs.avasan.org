@@ -116,10 +116,798 @@ interface SandboxWorkerScope {
 	window?: SandboxWorkerScope;
 }
 
+interface TurtlePostScriptRecorder {
+	exportPostScript: () => string;
+	record: (method: string, args: unknown[]) => void;
+}
+
+interface TurtlePostScriptState {
+	fillActive: boolean;
+	fillColorAtStart: string;
+	fillPoints: Array<{ x: number; y: number }>;
+	fillColor: string;
+	heading: number;
+	lineWidth: number;
+	outlineWidth: number;
+	penColor: string;
+	penDown: boolean;
+	shape: string;
+	shapeTransform: [number, number, number, number];
+	shearFactor: number;
+	stretchLength: number;
+	stretchWidth: number;
+	tilt: number;
+	visible: boolean;
+	x: number;
+	y: number;
+}
+
+interface TurtlePostScriptCommand {
+	color?: string;
+	fillColor?: string;
+	fontName?: string;
+	fontSize?: number;
+	fontStyle?: string;
+	from?: { x: number; y: number };
+	kind: "circle" | "dot" | "fill" | "line" | "stamp" | "text";
+	points?: Array<{ x: number; y: number }>;
+	pose?: TurtlePostScriptState;
+	radius?: number;
+	size?: number;
+	stampID?: number;
+	text?: string;
+	textAlign?: string;
+	to?: { x: number; y: number };
+	turtleID: string;
+	width?: number;
+	x?: number;
+	y?: number;
+}
+
+/**
+ * Creates a DOM-free vector mirror for the opaque Python worker. The recorder
+ * receives only the already-sanitized Turtle bridge primitives and can return
+ * PostScript synchronously to Pyodide without opening a page, storage, or
+ * network channel.
+ */
+export function createTurtlePostScriptRecorder(): TurtlePostScriptRecorder {
+	const maxCommands = 20_000;
+	const maxDocumentCharacters = 480_000;
+	const maxFillPoints = 4_096;
+	const maxRecordedPayloadCharacters = 500_000;
+	const maxTurtleStates = 128;
+	const defaultTurtleID = "default";
+	const commands: TurtlePostScriptCommand[] = [];
+	const states = new Map<string, TurtlePostScriptState>();
+	const truncatedTurtleIDs = new Set<string>();
+	let activeTurtleID = defaultTurtleID;
+	let backgroundColor = "white";
+	let backgroundImage = "nopic";
+	let canvasHeight = 480;
+	let canvasWidth = 640;
+	let globalHistoryTruncated = false;
+	let recordedPayloadCharacters = 0;
+	let worldCoordinates: [number, number, number, number] | null = null;
+	const hasHistoryTruncation = () =>
+		globalHistoryTruncated || truncatedTurtleIDs.size > 0;
+	const markTurtleHistoryTruncated = (turtleID = activeTurtleID) => {
+		truncatedTurtleIDs.add(turtleID);
+	};
+
+	const finite = (value: unknown, fallback = 0) =>
+		typeof value === "number" && Number.isFinite(value) ? value : fallback;
+	const stringValue = (value: unknown, fallback = "") =>
+		typeof value === "string" ? value : fallback;
+	const defaultState = (): TurtlePostScriptState => ({
+		fillActive: false,
+		fillColorAtStart: "black",
+		fillPoints: [],
+		fillColor: "black",
+		heading: 0,
+		lineWidth: 1,
+		outlineWidth: 1,
+		penColor: "black",
+		penDown: true,
+		shape: "classic",
+		shapeTransform: [1, 0, 0, 1],
+		shearFactor: 0,
+		stretchLength: 1,
+		stretchWidth: 1,
+		tilt: 0,
+		visible: true,
+		x: 0,
+		y: 0
+	});
+	const state = () => {
+		let current = states.get(activeTurtleID);
+		if (!current) {
+			current = defaultState();
+			states.set(activeTurtleID, current);
+		}
+		return current;
+	};
+	const cloneState = (value: TurtlePostScriptState) => ({
+		...value,
+		fillPoints: value.fillPoints.map(point => ({ ...point })),
+		shapeTransform: [...value.shapeTransform] as [
+			number,
+			number,
+			number,
+			number
+		]
+	});
+	const appendCommand = (command: TurtlePostScriptCommand) => {
+		const commandCharacters = JSON.stringify(command).length;
+		if (
+			commands.length >= maxCommands ||
+			recordedPayloadCharacters + commandCharacters >
+				maxRecordedPayloadCharacters
+		) {
+			markTurtleHistoryTruncated(command.turtleID);
+			return;
+		}
+		commands.push(command);
+		recordedPayloadCharacters += commandCharacters;
+	};
+	const removeCommand = (index: number) => {
+		const [removed] = commands.splice(index, 1);
+		if (!removed) return;
+		recordedPayloadCharacters = Math.max(
+			0,
+			recordedPayloadCharacters - JSON.stringify(removed).length
+		);
+	};
+	const releaseFillPoints = (current: TurtlePostScriptState) => {
+		for (const fillPoint of current.fillPoints) {
+			recordedPayloadCharacters = Math.max(
+				0,
+				recordedPayloadCharacters - JSON.stringify(fillPoint).length
+			);
+		}
+		current.fillPoints = [];
+	};
+	const appendFillPoint = (current: TurtlePostScriptState) => {
+		if (!current.fillActive) return;
+		const previous = current.fillPoints.at(-1);
+		if (previous?.x === current.x && previous.y === current.y) return;
+		const fillPoint = { x: current.x, y: current.y };
+		const fillPointCharacters = JSON.stringify(fillPoint).length;
+		if (
+			current.fillPoints.length >= maxFillPoints ||
+			recordedPayloadCharacters + fillPointCharacters >
+				maxRecordedPayloadCharacters
+		) {
+			current.fillActive = false;
+			releaseFillPoints(current);
+			markTurtleHistoryTruncated();
+			return;
+		}
+		current.fillPoints.push(fillPoint);
+		recordedPayloadCharacters += fillPointCharacters;
+	};
+	const finishFill = (current: TurtlePostScriptState) => {
+		const points = current.fillPoints.map(point => ({ ...point }));
+		current.fillActive = false;
+		releaseFillPoints(current);
+		if (points.length < 3) return;
+		appendCommand({
+			color: current.penColor,
+			fillColor: current.fillColorAtStart,
+			kind: "fill",
+			points,
+			turtleID: activeTurtleID,
+			width: current.lineWidth
+		});
+	};
+	const recordMove = (
+		current: TurtlePostScriptState,
+		x: number,
+		y: number
+	) => {
+		const from = { x: current.x, y: current.y };
+		current.x = x;
+		current.y = y;
+		appendFillPoint(current);
+		if (hasHistoryTruncation()) return;
+		if (!current.penDown) return;
+		appendCommand({
+			color: current.penColor,
+			from,
+			kind: "line",
+			to: { x, y },
+			turtleID: activeTurtleID,
+			width: current.lineWidth
+		});
+	};
+	const resetAll = () => {
+		commands.length = 0;
+		states.clear();
+		truncatedTurtleIDs.clear();
+		activeTurtleID = defaultTurtleID;
+		backgroundColor = "white";
+		backgroundImage = "nopic";
+		canvasHeight = 480;
+		canvasWidth = 640;
+		globalHistoryTruncated = false;
+		recordedPayloadCharacters = 0;
+		worldCoordinates = null;
+	};
+	const clearActive = () => {
+		for (let index = commands.length - 1; index >= 0; index -= 1) {
+			if (commands[index]?.turtleID === activeTurtleID)
+				removeCommand(index);
+		}
+		const current = state();
+		current.fillActive = false;
+		releaseFillPoints(current);
+		truncatedTurtleIDs.delete(activeTurtleID);
+	};
+	const resetActive = () => {
+		clearActive();
+		states.set(activeTurtleID, defaultState());
+	};
+
+	const record = (method: string, args: unknown[]) => {
+		if (method === "reset" || method === "clear") {
+			resetAll();
+			return;
+		}
+		if (method === "activate") {
+			const nextTurtleID =
+				stringValue(args[0], defaultTurtleID).slice(0, 128) ||
+				defaultTurtleID;
+			if (!states.has(nextTurtleID) && states.size >= maxTurtleStates) {
+				globalHistoryTruncated = true;
+				return;
+			}
+			activeTurtleID = nextTurtleID;
+			state();
+			return;
+		}
+		if (method === "resetTurtle") {
+			resetActive();
+			return;
+		}
+		if (method === "clearTurtle") {
+			clearActive();
+			return;
+		}
+		if (method === "clearStamp") {
+			const stampID = Math.trunc(finite(args[0]));
+			for (let index = commands.length - 1; index >= 0; index -= 1) {
+				if (
+					commands[index]?.kind === "stamp" &&
+					commands[index]?.stampID === stampID
+				) {
+					removeCommand(index);
+				}
+			}
+			return;
+		}
+		if (method === "undo") {
+			let remaining = Math.max(0, Math.trunc(finite(args[0], 1)));
+			for (
+				let index = commands.length - 1;
+				index >= 0 && remaining;
+				index -= 1
+			) {
+				if (commands[index]?.turtleID !== activeTurtleID) continue;
+				removeCommand(index);
+				remaining -= 1;
+			}
+			return;
+		}
+		if (hasHistoryTruncation()) {
+			if (
+				method === "bgcolor" ||
+				method === "bgpic" ||
+				method === "setScreenSize" ||
+				method === "setWorldCoordinates" ||
+				method === "resetWorldCoordinates"
+			) {
+				globalHistoryTruncated = true;
+			} else {
+				markTurtleHistoryTruncated();
+			}
+			return;
+		}
+		if (method === "bgcolor") {
+			backgroundColor = stringValue(args[0], "white").slice(0, 128);
+			return;
+		}
+		if (method === "bgpic") {
+			backgroundImage = stringValue(args[0], "nopic").slice(0, 512);
+			return;
+		}
+		if (method === "setScreenSize") {
+			canvasWidth = Math.max(1, Math.round(finite(args[0], canvasWidth)));
+			canvasHeight = Math.max(
+				1,
+				Math.round(finite(args[1], canvasHeight))
+			);
+			return;
+		}
+		if (method === "setWorldCoordinates") {
+			const next = args.slice(0, 4).map(value => finite(value));
+			if (
+				next.length === 4 &&
+				next[0] !== next[2] &&
+				next[1] !== next[3]
+			) {
+				worldCoordinates = next as [number, number, number, number];
+			}
+			return;
+		}
+		if (method === "resetWorldCoordinates") {
+			worldCoordinates = null;
+			return;
+		}
+
+		const current = state();
+		if (method === "setState") {
+			current.x = finite(args[0], current.x);
+			current.y = finite(args[1], current.y);
+			current.heading = finite(args[2], current.heading);
+			current.penDown = Boolean(args[3]);
+			current.penColor = stringValue(args[4], current.penColor).slice(
+				0,
+				128
+			);
+			current.fillColor = stringValue(args[5], current.fillColor).slice(
+				0,
+				128
+			);
+			current.lineWidth = Math.max(
+				0.1,
+				finite(args[6], current.lineWidth)
+			);
+			return;
+		}
+		if (method === "setShape") {
+			current.shape = stringValue(args[0], "classic").slice(0, 128);
+			return;
+		}
+		if (method === "setShapeTransform") {
+			current.stretchWidth = finite(args[0], 1);
+			current.stretchLength = finite(args[1], 1);
+			current.outlineWidth = Math.max(0.1, finite(args[2], 1));
+			current.shearFactor = finite(args[3]);
+			current.tilt = finite(args[4]);
+			current.shapeTransform = [
+				finite(args[5], 1),
+				finite(args[6]),
+				finite(args[7]),
+				finite(args[8], 1)
+			];
+			return;
+		}
+		if (method === "setVisible") {
+			current.visible = Boolean(args[0]);
+			return;
+		}
+		if (method === "penup") {
+			current.penDown = false;
+			return;
+		}
+		if (method === "pendown") {
+			current.penDown = true;
+			return;
+		}
+		if (method === "pensize") {
+			current.lineWidth = Math.max(
+				0.1,
+				finite(args[0], current.lineWidth)
+			);
+			return;
+		}
+		if (method === "pencolor") {
+			current.penColor = stringValue(args[0], current.penColor).slice(
+				0,
+				128
+			);
+			return;
+		}
+		if (method === "fillcolor") {
+			current.fillColor = stringValue(args[0], current.fillColor).slice(
+				0,
+				128
+			);
+			return;
+		}
+		if (method === "color") {
+			current.penColor = stringValue(args[0], current.penColor).slice(
+				0,
+				128
+			);
+			current.fillColor = stringValue(args[1], current.penColor).slice(
+				0,
+				128
+			);
+			return;
+		}
+		if (method === "beginFill") {
+			releaseFillPoints(current);
+			current.fillActive = true;
+			current.fillColorAtStart = current.fillColor;
+			appendFillPoint(current);
+			return;
+		}
+		if (method === "endFill") {
+			finishFill(current);
+			return;
+		}
+		if (method === "goto") {
+			recordMove(current, finite(args[0]), finite(args[1]));
+			return;
+		}
+		if (method === "forward") {
+			const amount = finite(args[0]);
+			const radians = (current.heading * Math.PI) / 180;
+			recordMove(
+				current,
+				current.x + Math.cos(radians) * amount,
+				current.y + Math.sin(radians) * amount
+			);
+			return;
+		}
+		if (method === "right" || method === "left") {
+			const degrees = finite(args[0]);
+			current.heading += method === "left" ? degrees : -degrees;
+			return;
+		}
+		if (method === "setheading") {
+			current.heading = finite(args[0]);
+			return;
+		}
+		if (method === "home") {
+			recordMove(current, 0, 0);
+			current.heading = 0;
+			return;
+		}
+		if (method === "teleport") {
+			const wasFilling = current.fillActive;
+			const fillGap = Boolean(args[2]);
+			if (wasFilling && !fillGap) finishFill(current);
+			if (hasHistoryTruncation()) return;
+			current.x = finite(args[0]);
+			current.y = finite(args[1]);
+			if (wasFilling && fillGap) appendFillPoint(current);
+			if (hasHistoryTruncation()) return;
+			if (wasFilling && !fillGap) {
+				current.fillActive = true;
+				current.fillColorAtStart = current.fillColor;
+				appendFillPoint(current);
+			}
+			return;
+		}
+		if (method === "circle") {
+			appendCommand({
+				color: current.penColor,
+				kind: "circle",
+				radius: finite(args[0]),
+				turtleID: activeTurtleID,
+				width: current.lineWidth,
+				x: current.x,
+				y: current.y
+			});
+			return;
+		}
+		if (method === "dot") {
+			appendCommand({
+				color: stringValue(args[1], current.penColor).slice(0, 128),
+				kind: "dot",
+				size: Math.max(1, finite(args[0], 1)),
+				turtleID: activeTurtleID,
+				x: current.x,
+				y: current.y
+			});
+			return;
+		}
+		if (method === "stamp") {
+			appendCommand({
+				kind: "stamp",
+				pose: cloneState(current),
+				stampID: Math.trunc(finite(args[0])),
+				turtleID: activeTurtleID
+			});
+			return;
+		}
+		if (method === "write") {
+			appendCommand({
+				color: current.penColor,
+				fontName: stringValue(args[2], "Arial").slice(0, 128),
+				fontSize: Math.max(1, finite(args[3], 8)),
+				fontStyle: stringValue(args[4], "normal").slice(0, 32),
+				kind: "text",
+				text: stringValue(args[0]).slice(0, 12_000),
+				textAlign: stringValue(args[1], "left").slice(0, 16),
+				turtleID: activeTurtleID,
+				x: current.x,
+				y: current.y
+			});
+		}
+	};
+
+	const formatNumber = (value: number) => {
+		const rounded = Math.round(value * 1_000_000) / 1_000_000;
+		return Object.is(rounded, -0) ? "0" : String(rounded);
+	};
+	const point = (x: number, y: number) => {
+		if (worldCoordinates) {
+			const [left, bottom, right, top] = worldCoordinates;
+			return {
+				x: ((x - left) / (right - left)) * canvasWidth,
+				y: ((y - bottom) / (top - bottom)) * canvasHeight
+			};
+		}
+		return { x: canvasWidth / 2 + x, y: canvasHeight / 2 + y };
+	};
+	const color = (value: string) => {
+		const named: Record<string, [number, number, number]> = {
+			aqua: [0, 255, 255],
+			black: [0, 0, 0],
+			blue: [0, 0, 255],
+			brown: [165, 42, 42],
+			cyan: [0, 255, 255],
+			fuchsia: [255, 0, 255],
+			gold: [255, 215, 0],
+			gray: [128, 128, 128],
+			green: [0, 128, 0],
+			grey: [128, 128, 128],
+			lime: [0, 255, 0],
+			magenta: [255, 0, 255],
+			maroon: [128, 0, 0],
+			navy: [0, 0, 128],
+			olive: [128, 128, 0],
+			orange: [255, 165, 0],
+			pink: [255, 192, 203],
+			purple: [128, 0, 128],
+			red: [255, 0, 0],
+			silver: [192, 192, 192],
+			teal: [0, 128, 128],
+			transparent: [255, 255, 255],
+			violet: [238, 130, 238],
+			white: [255, 255, 255],
+			yellow: [255, 255, 0]
+		};
+		const normalized = value.trim().toLowerCase();
+		let channels = named[normalized];
+		const hex = normalized.match(/^#([\da-f]{3}|[\da-f]{6}|[\da-f]{8})$/i);
+		if (hex?.[1]) {
+			const digits = hex[1];
+			channels =
+				digits.length === 3
+					? ([...digits].map(digit =>
+							Number.parseInt(digit + digit, 16)
+						) as [number, number, number])
+					: ([0, 2, 4].map(index =>
+							Number.parseInt(digits.slice(index, index + 2), 16)
+						) as [number, number, number]);
+		}
+		const rgbStart =
+			normalized.startsWith("rgb(") || normalized.startsWith("rgba(");
+		const rgbValues = rgbStart
+			? normalized
+					.slice(normalized.indexOf("(") + 1, normalized.indexOf(")"))
+					.split(/[,\s]+/)
+					.filter(Boolean)
+			: [];
+		if (rgbValues.length >= 3) {
+			const percent = normalized.includes("%");
+			channels = [0, 1, 2].map(index =>
+				Math.max(
+					0,
+					Math.min(
+						255,
+						Number(rgbValues[index]?.replace("%", "") ?? 0) *
+							(percent ? 2.55 : 1)
+					)
+				)
+			) as [number, number, number];
+		}
+		const [red, green, blue] = channels ?? [0, 0, 0];
+		return `${formatNumber(red / 255)} ${formatNumber(green / 255)} ${formatNumber(blue / 255)} setrgbcolor`;
+	};
+	const escapedText = (value: string) => {
+		const bytes = new TextEncoder().encode(value);
+		let result = "";
+		for (const byte of bytes) {
+			if (byte === 40 || byte === 41 || byte === 92) {
+				result += `\\${String.fromCharCode(byte)}`;
+			} else if (byte >= 32 && byte <= 126) {
+				result += String.fromCharCode(byte);
+			} else {
+				result += `\\${byte.toString(8).padStart(3, "0")}`;
+			}
+		}
+		return result;
+	};
+	const serialize = () => {
+		let documentTruncated = false;
+		const lines = [
+			"%!PS-Adobe-3.0 EPSF-3.0",
+			`%%BoundingBox: 0 0 ${Math.ceil(canvasWidth)} ${Math.ceil(canvasHeight)}`,
+			"%%Creator: IDE",
+			"%%Pages: 1",
+			"1 setlinejoin 1 setlinecap",
+			color(backgroundColor),
+			`newpath 0 0 moveto ${formatNumber(canvasWidth)} 0 lineto ${formatNumber(canvasWidth)} ${formatNumber(canvasHeight)} lineto 0 ${formatNumber(canvasHeight)} lineto closepath fill`
+		];
+		if (backgroundImage && backgroundImage.toLowerCase() !== "nopic") {
+			lines.push(`%%BackgroundImage: ${escapedText(backgroundImage)}`);
+		}
+		const warningLine =
+			"%%IDEWarning: drawing truncated at the safe export limit";
+		const trailerLines = ["showpage", "%%EOF"];
+		const reservedCharacters = [...trailerLines, warningLine].reduce(
+			(total, line) => total + line.length + 1,
+			0
+		);
+		let documentCharacters = lines.reduce(
+			(total, line) => total + line.length + 1,
+			0
+		);
+		const append = (...nextLines: string[]) => {
+			const nextCharacters = nextLines.reduce(
+				(total, line) => total + line.length + 1,
+				0
+			);
+			if (
+				documentCharacters + nextCharacters + reservedCharacters >
+				maxDocumentCharacters
+			) {
+				documentTruncated = true;
+				return false;
+			}
+			lines.push(...nextLines);
+			documentCharacters += nextCharacters;
+			return true;
+		};
+
+		for (const command of commands) {
+			if (command.kind === "line" && command.from && command.to) {
+				const from = point(command.from.x, command.from.y);
+				const to = point(command.to.x, command.to.y);
+				if (
+					!append(
+						color(command.color ?? "black"),
+						`${formatNumber(command.width ?? 1)} setlinewidth`,
+						`newpath ${formatNumber(from.x)} ${formatNumber(from.y)} moveto ${formatNumber(to.x)} ${formatNumber(to.y)} lineto stroke`
+					)
+				) {
+					break;
+				}
+				continue;
+			}
+			if (
+				(command.kind === "circle" || command.kind === "dot") &&
+				command.x !== undefined &&
+				command.y !== undefined
+			) {
+				const radius =
+					command.kind === "dot"
+						? Math.max(1, command.size ?? 1) / 2
+						: Math.abs(command.radius ?? 0);
+				const center = point(
+					command.x,
+					command.kind === "circle"
+						? command.y + (command.radius ?? 0)
+						: command.y
+				);
+				if (
+					!append(
+						color(command.color ?? "black"),
+						`${formatNumber(command.width ?? 1)} setlinewidth`,
+						`newpath ${formatNumber(center.x)} ${formatNumber(center.y)} ${formatNumber(radius)} 0 360 arc ${command.kind === "dot" ? "fill" : "stroke"}`
+					)
+				) {
+					break;
+				}
+				continue;
+			}
+			if (command.kind === "fill" && command.points?.length) {
+				const [first, ...rest] = command.points;
+				if (!first) continue;
+				const start = point(first.x, first.y);
+				const path = [
+					`newpath ${formatNumber(start.x)} ${formatNumber(start.y)} moveto`,
+					...rest.map(value => {
+						const mapped = point(value.x, value.y);
+						return `${formatNumber(mapped.x)} ${formatNumber(mapped.y)} lineto`;
+					}),
+					"closepath"
+				].join(" ");
+				if (
+					!append(
+						"gsave",
+						color(command.fillColor ?? "black"),
+						`${path} fill`,
+						"grestore",
+						color(command.color ?? "black"),
+						`${formatNumber(command.width ?? 1)} setlinewidth`,
+						`${path} stroke`
+					)
+				) {
+					break;
+				}
+				continue;
+			}
+			if (
+				command.kind === "text" &&
+				command.x !== undefined &&
+				command.y !== undefined
+			) {
+				const mapped = point(command.x, command.y);
+				const style = (command.fontStyle ?? "").toLowerCase();
+				const font =
+					style.includes("bold") && style.includes("italic")
+						? "Helvetica-BoldOblique"
+						: style.includes("bold")
+							? "Helvetica-Bold"
+							: style.includes("italic")
+								? "Helvetica-Oblique"
+								: "Helvetica";
+				const text = `(${escapedText(command.text ?? "")})`;
+				const alignment =
+					command.textAlign === "center"
+						? "dup stringwidth pop 2 div neg 0 rmoveto"
+						: command.textAlign === "right"
+							? "dup stringwidth pop neg 0 rmoveto"
+							: "";
+				if (
+					!append(
+						color(command.color ?? "black"),
+						`/${font} findfont ${formatNumber(command.fontSize ?? 8)} scalefont setfont`,
+						`${formatNumber(mapped.x)} ${formatNumber(mapped.y)} moveto ${text} ${alignment} show`
+					)
+				) {
+					break;
+				}
+				continue;
+			}
+			if (command.kind === "stamp" && command.pose) {
+				const pose = command.pose;
+				const mapped = point(pose.x, pose.y);
+				const radius = Math.max(
+					4,
+					8 *
+						Math.max(
+							Math.abs(pose.stretchLength),
+							Math.abs(pose.stretchWidth)
+						)
+				);
+				if (
+					!append(
+						color(pose.fillColor),
+						`newpath ${formatNumber(mapped.x)} ${formatNumber(mapped.y)} ${formatNumber(radius)} 0 360 arc fill`,
+						color(pose.penColor),
+						`${formatNumber(pose.outlineWidth)} setlinewidth`,
+						`newpath ${formatNumber(mapped.x)} ${formatNumber(mapped.y)} ${formatNumber(radius)} 0 360 arc stroke`
+					)
+				) {
+					break;
+				}
+			}
+		}
+
+		if (hasHistoryTruncation() || documentTruncated) {
+			lines.push(warningLine);
+		}
+		lines.push(...trailerLines);
+		return `${lines.join("\n")}\n`;
+	};
+
+	return { exportPostScript: serialize, record };
+}
+
 let activeSandbox: ActiveSandbox | null = null;
 
-function pythonIdeSandboxWorkerMain(config: SandboxWorkerConfig) {
+function pythonIdeSandboxWorkerMain(
+	config: SandboxWorkerConfig,
+	createPostScriptRecorder: () => TurtlePostScriptRecorder
+) {
 	const scope = globalThis as unknown as SandboxWorkerScope;
+	const turtlePostScriptRecorder = createPostScriptRecorder();
 	const callbackRegistry = new Map<number, (...args: unknown[]) => unknown>();
 	const oneShotCallbackIDs = new Set<number>();
 	const messageEncoder = new TextEncoder();
@@ -207,7 +995,9 @@ function pythonIdeSandboxWorkerMain(config: SandboxWorkerConfig) {
 		typeof value === "number" && Number.isFinite(value) ? value : fallback;
 	const boundedString = (value: unknown, limit = 4096) =>
 		String(value ?? "").slice(0, limit);
-	const bridge = (bridgeName: string, method: string, args: unknown[]) =>
+	const bridge = (bridgeName: string, method: string, args: unknown[]) => {
+		if (bridgeName === "turtle")
+			turtlePostScriptRecorder.record(method, args);
 		send({
 			kind: "bridge",
 			bridge: bridgeName,
@@ -218,6 +1008,7 @@ function pythonIdeSandboxWorkerMain(config: SandboxWorkerConfig) {
 					: value
 			)
 		});
+	};
 	const callbackID = (callback: unknown, oneShot = false) => {
 		if (typeof callback !== "function") return null;
 		if (callbackRegistry.size >= 2048) {
@@ -240,6 +1031,23 @@ function pythonIdeSandboxWorkerMain(config: SandboxWorkerConfig) {
 		clearTurtle: () => bridge("turtle", "clearTurtle", []),
 		bgcolor: (color: unknown) =>
 			bridge("turtle", "bgcolor", [boundedString(color, 128)]),
+		bgpic: (name: unknown) =>
+			bridge("turtle", "bgpic", [boundedString(name, 512)]),
+		setScreenSize: (width: unknown, height: unknown) =>
+			bridge("turtle", "setScreenSize", [
+				finiteNumber(width),
+				finiteNumber(height)
+			]),
+		setDelay: (delayMs: unknown) =>
+			bridge("turtle", "setDelay", [Math.max(0, finiteNumber(delayMs))]),
+		setWorldCoordinates: (...args: unknown[]) =>
+			bridge(
+				"turtle",
+				"setWorldCoordinates",
+				args.slice(0, 4).map(value => finiteNumber(value))
+			),
+		resetWorldCoordinates: () =>
+			bridge("turtle", "resetWorldCoordinates", []),
 		beginFill: () => bridge("turtle", "beginFill", []),
 		endFill: () => bridge("turtle", "endFill", []),
 		forward: (distance: unknown) =>
@@ -267,6 +1075,12 @@ function pythonIdeSandboxWorkerMain(config: SandboxWorkerConfig) {
 		ycor: () => 0,
 		goto: (x: unknown, y: unknown) =>
 			bridge("turtle", "goto", [finiteNumber(x), finiteNumber(y)]),
+		teleport: (x: unknown, y: unknown, fillGap?: unknown) =>
+			bridge("turtle", "teleport", [
+				finiteNumber(x),
+				finiteNumber(y),
+				Boolean(fillGap)
+			]),
 		home: () => bridge("turtle", "home", []),
 		penup: () => bridge("turtle", "penup", []),
 		pendown: () => bridge("turtle", "pendown", []),
@@ -296,15 +1110,71 @@ function pythonIdeSandboxWorkerMain(config: SandboxWorkerConfig) {
 			bridge("turtle", "stamp", [id]);
 			return id;
 		},
-		write: (text: unknown) =>
-			bridge("turtle", "write", [boundedString(text, 12000)]),
-		registerKey: (key: unknown, callback: unknown) =>
+		clearStamp: (stampID: unknown) =>
+			bridge("turtle", "clearStamp", [finiteNumber(stampID)]),
+		undo: (count?: unknown) =>
+			bridge("turtle", "undo", [Math.max(0, finiteNumber(count))]),
+		write: (
+			text: unknown,
+			align?: unknown,
+			fontName?: unknown,
+			fontSize?: unknown,
+			fontStyle?: unknown
+		) => {
+			const boundedText = boundedString(text, 12000);
+			const normalizedFontSize = Math.max(1, finiteNumber(fontSize, 8));
+			bridge("turtle", "write", [
+				boundedText,
+				boundedString(align, 16),
+				boundedString(fontName, 128),
+				normalizedFontSize,
+				boundedString(fontStyle, 32)
+			]);
+			return boundedText.length * normalizedFontSize * 0.6;
+		},
+		registerKey: (key: unknown, callback: unknown, eventType?: unknown) =>
 			bridge("turtle", "registerKey", [
 				boundedString(key, 64),
-				callbackID(callback)
+				callbackID(callback),
+				eventType === "release" ? "release" : "press"
 			]),
 		registerClick: (button: unknown, callback: unknown) =>
 			bridge("turtle", "registerClick", [
+				boundedString(button, 32),
+				callbackID(callback)
+			]),
+		registerRelease: (button: unknown, callback: unknown) =>
+			bridge("turtle", "registerRelease", [
+				boundedString(button, 32),
+				callbackID(callback)
+			]),
+		registerTurtleClick: (
+			turtleID: unknown,
+			button: unknown,
+			callback: unknown
+		) =>
+			bridge("turtle", "registerTurtleClick", [
+				boundedString(turtleID, 128),
+				boundedString(button, 32),
+				callbackID(callback)
+			]),
+		registerTurtleRelease: (
+			turtleID: unknown,
+			button: unknown,
+			callback: unknown
+		) =>
+			bridge("turtle", "registerTurtleRelease", [
+				boundedString(turtleID, 128),
+				boundedString(button, 32),
+				callbackID(callback)
+			]),
+		registerTurtleDrag: (
+			turtleID: unknown,
+			button: unknown,
+			callback: unknown
+		) =>
+			bridge("turtle", "registerTurtleDrag", [
+				boundedString(turtleID, 128),
 				boundedString(button, 32),
 				callbackID(callback)
 			]),
@@ -319,15 +1189,29 @@ function pythonIdeSandboxWorkerMain(config: SandboxWorkerConfig) {
 				callbackID(callback, true)
 			]),
 		listen: () => bridge("turtle", "listen", []),
+		registerShape: (name: unknown, definitionJson: unknown) =>
+			bridge("turtle", "registerShape", [
+				boundedString(name, 128),
+				boundedString(definitionJson, 1_500_000)
+			]),
 		setShape: (shape: unknown) =>
 			bridge("turtle", "setShape", [boundedString(shape, 64)]),
+		setShapeTransform: (...args: unknown[]) =>
+			bridge(
+				"turtle",
+				"setShapeTransform",
+				args.slice(0, 9).map(value => finiteNumber(value))
+			),
 		setSpeed: (speed: unknown) =>
 			bridge("turtle", "setSpeed", [finiteNumber(speed)]),
 		setTracer: (value: unknown) =>
 			bridge("turtle", "setTracer", [finiteNumber(value)]),
 		setVisible: (visible: unknown) =>
 			bridge("turtle", "setVisible", [Boolean(visible)]),
-		update: () => bridge("turtle", "update", [])
+		update: () => bridge("turtle", "update", []),
+		exportPostScript: () => {
+			return turtlePostScriptRecorder.exportPostScript();
+		}
 	};
 
 	const gameBridge = {
@@ -629,7 +1513,7 @@ def __classes_valid_snapshot_name(__classes_name):
     if __classes_lower.endswith(".py"):
         return __classes_segments[0].lower() not in {"images", "music", "sounds"}
     if len(__classes_segments) == 1:
-        return bool(re.fullmatch(r"[A-Za-z0-9_][A-Za-z0-9_.-]*\\.(?:csv|json|md|txt)", __classes_name, re.IGNORECASE))
+        return bool(re.fullmatch(r"[A-Za-z0-9_][A-Za-z0-9_.-]*\\.(?:csv|eps|json|md|ps|txt)", __classes_name, re.IGNORECASE))
     return (
         len(__classes_segments) == 2
         and __classes_segments[0].lower() == "images"
@@ -643,7 +1527,7 @@ for __classes_path in sorted(__classes_root.rglob("*")):
     __classes_scanned_entries += 1
     if __classes_scanned_entries > 2048:
         raise RuntimeError("Project produced too many files to save safely.")
-    if __classes_path.is_symlink() or not __classes_path.is_file() or __classes_path.suffix.lower() not in {".csv", ".json", ".md", ".py", ".svg", ".txt"}:
+    if __classes_path.is_symlink() or not __classes_path.is_file() or __classes_path.suffix.lower() not in {".csv", ".eps", ".json", ".md", ".ps", ".py", ".svg", ".txt"}:
         continue
     __classes_name = str(__classes_path.relative_to(__classes_root))
     if __classes_name in __classes_excluded_names or not __classes_valid_snapshot_name(__classes_name):
@@ -1198,7 +2082,7 @@ function sandboxFrameSource(token: string) {
 		indexUrl: PYODIDE_INDEX_URL,
 		scriptSrc: PYODIDE_SCRIPT_SRC
 	};
-	const workerSource = `(${pythonIdeSandboxWorkerMain.toString()})(${escapedInlineJson(config)});`;
+	const workerSource = `(${pythonIdeSandboxWorkerMain.toString()})(${escapedInlineJson(config)},(${createTurtlePostScriptRecorder.toString()}));`;
 	const frameScript = `(${pythonIdeSandboxFrameMain.toString()})(${escapedInlineJson(config)},${escapedInlineJson(workerSource)},${escapedInlineJson(token)});`;
 	return `<!doctype html>
 <html>
@@ -1391,10 +2275,13 @@ function createSandboxSession(
 		};
 		const dispatchTurtle = (method: string, args: unknown[]) => {
 			if (method === "registerKey") {
-				const [key, callbackID] = args;
+				const [key, callbackID, eventType] = args;
 				if (
 					!safeString(key, 64) ||
-					!(callbackID === null || Number.isSafeInteger(callbackID))
+					!(
+						callbackID === null || Number.isSafeInteger(callbackID)
+					) ||
+					!(eventType === "press" || eventType === "release")
 				) {
 					return;
 				}
@@ -1403,11 +2290,19 @@ function createSandboxSession(
 					callbackID === null
 						? null
 						: (...callbackArgs: unknown[]) =>
-								sendCallback(callbackID as number, callbackArgs)
+								sendCallback(
+									callbackID as number,
+									callbackArgs
+								),
+					eventType
 				);
 				return;
 			}
-			if (method === "registerClick" || method === "registerDrag") {
+			if (
+				method === "registerClick" ||
+				method === "registerRelease" ||
+				method === "registerDrag"
+			) {
 				const [button, callbackID] = args;
 				if (
 					!safeString(button, 32) ||
@@ -1425,8 +2320,52 @@ function createSandboxSession(
 						button as string,
 						callback
 					);
+				} else if (method === "registerRelease") {
+					context.turtleBridge.registerRelease(
+						button as string,
+						callback
+					);
 				} else {
 					context.turtleBridge.registerDrag(
+						button as string,
+						callback
+					);
+				}
+				return;
+			}
+			if (
+				method === "registerTurtleClick" ||
+				method === "registerTurtleRelease" ||
+				method === "registerTurtleDrag"
+			) {
+				const [turtleID, button, callbackID] = args;
+				if (
+					!safeString(turtleID, 128) ||
+					!safeString(button, 32) ||
+					!(callbackID === null || Number.isSafeInteger(callbackID))
+				) {
+					return;
+				}
+				const callback =
+					callbackID === null
+						? null
+						: (x: number, y: number) =>
+								sendCallback(callbackID as number, [x, y]);
+				if (method === "registerTurtleClick") {
+					context.turtleBridge.registerTurtleClick(
+						turtleID as string,
+						button as string,
+						callback
+					);
+				} else if (method === "registerTurtleRelease") {
+					context.turtleBridge.registerTurtleRelease(
+						turtleID as string,
+						button as string,
+						callback
+					);
+				} else {
+					context.turtleBridge.registerTurtleDrag(
+						turtleID as string,
 						button as string,
 						callback
 					);
@@ -1456,6 +2395,11 @@ function createSandboxSession(
 				"resetTurtle",
 				"clearTurtle",
 				"bgcolor",
+				"bgpic",
+				"setScreenSize",
+				"setDelay",
+				"setWorldCoordinates",
+				"resetWorldCoordinates",
 				"beginFill",
 				"endFill",
 				"forward",
@@ -1464,6 +2408,7 @@ function createSandboxSession(
 				"setheading",
 				"setState",
 				"goto",
+				"teleport",
 				"home",
 				"penup",
 				"pendown",
@@ -1474,9 +2419,13 @@ function createSandboxSession(
 				"circle",
 				"dot",
 				"stamp",
+				"clearStamp",
+				"undo",
 				"write",
 				"listen",
+				"registerShape",
 				"setShape",
+				"setShapeTransform",
 				"setSpeed",
 				"setTracer",
 				"setVisible",

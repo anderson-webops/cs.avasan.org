@@ -9,7 +9,7 @@ import { PythonProjectReview } from "../../models/schemas/PythonProjectReview.js
 import { Student } from "../../models/schemas/Student.js";
 
 const SAFE_FILE_SEGMENT_RE = /^\w[\w.-]*$/;
-const ROOT_TEXT_FILE_RE = /^\w[\w.-]*\.(?:csv|json|md|py|txt)$/i;
+const ROOT_TEXT_FILE_RE = /^\w[\w.-]*\.(?:csv|eps|json|md|ps|py|txt)$/i;
 const IMAGE_FILE_RE = /^images\/\w[\w.-]*\.(?:gif|jpe?g|png|svg|webp)$/i;
 const AUDIO_FILE_RE = /^(?:music|sounds)\/\w[\w.-]*\.(?:mp3|ogg|wav)$/i;
 const PYTHON_FILE_NAME_RE = /\.py$/i;
@@ -98,7 +98,7 @@ const projectFileSchema = z.object({
 		.max(80)
 		.refine(
 			isSafeProjectFileName,
-			"Use a safe .py file, root data/text file, or images/, sounds/, or music/ asset file that does not use a runtime-reserved module name"
+			"Use a safe .py file, root data/text/export file, or images/, sounds/, or music/ asset file that does not use a runtime-reserved module name"
 		),
 	content: z.string().max(MAX_FILE_LENGTH),
 	encoding: z.enum(["text", "base64"]).optional()

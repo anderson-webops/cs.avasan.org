@@ -14,7 +14,9 @@ describe("page head helpers", () => {
 			"/course-resource?asset=/course-assets/python/reference.md",
 			"Course Resource | Classes with Julio"
 		],
-		["/python-ide", "Python IDE | Classes with Julio"],
+		["/ide", "IDE | Classes with Julio"],
+		["/python-ide", "IDE | Classes with Julio"],
+		["/bluej", "IDE | Classes with Julio"],
 		["/games", "Games | Classes with Julio"],
 		[
 			"/games/pond-paddlers",
@@ -61,6 +63,7 @@ describe("page head helpers", () => {
 			"/graph-sketcher",
 			"/games",
 			"/games/pond-paddlers",
+			"/ide",
 			"/python-ide",
 			"/not-a-real-page"
 		]) {
@@ -70,8 +73,8 @@ describe("page head helpers", () => {
 
 	it("builds stable canonical URLs without query strings or trailing slashes", () => {
 		expect(canonicalUrlForPath("/")).toBe("https://cs.avasan.org/");
-		expect(canonicalUrlForPath("/python-ide/")).toBe(
-			"https://cs.avasan.org/python-ide"
+		expect(canonicalUrlForPath("/ide/")).toBe(
+			"https://cs.avasan.org/ide"
 		);
 		expect(
 			canonicalUrlForPath(

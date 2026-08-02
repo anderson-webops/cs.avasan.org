@@ -28,7 +28,6 @@ import {
 	isPythonIdeRuntimeReservedPath,
 	isPythonIdeTextFile,
 	isValidPythonFileName,
-	normalizeClassroomPythonIdeMode,
 	normalizeImportedPythonIdeFileName,
 	normalizePythonIdeMode,
 	loadPythonIdeStarterFilesFromGitHub,
@@ -94,7 +93,7 @@ function pythonEditorState(doc: string) {
 	});
 }
 
-describe("python IDE project helpers", () => {
+describe("IDE project helpers", () => {
 	beforeEach(() => {
 		resetPythonIdeCourseAssetPackCache();
 		resetCodePreviewCaches();
@@ -172,7 +171,7 @@ describe("python IDE project helpers", () => {
 		});
 		expect(dataProject.files[0]?.content).toContain("pandas");
 		expect(dataProject.files[0]?.content).toContain(
-			'read_csv("scores.csv")'
+			"pd.read_csv(DATA_FILE)"
 		);
 		expect(dataProject.files[0]?.content).toContain("plt.bar");
 
@@ -243,8 +242,8 @@ screen.listen()
 		const project = createPythonIdeProject("python", {
 			template: "classroom-project"
 		});
-		expect(project.files[0]?.content).toContain("###   NORMAL SECTION");
-		expect(project.files[0]?.content).toContain("###   HARD SECTION");
+		expect(project.files[0]?.content).toContain("###   CONSTANTS   ###");
+		expect(project.files[0]?.content).toContain("###   EVENT LISTENERS   ###");
 	});
 
 	it("creates all Python Level 1 classroom Turtle frameworks", () => {
@@ -676,7 +675,7 @@ screen.listen()
 		project.title = "   ";
 
 		expect(pythonIdeProjectToPayload(project).title).toBe(
-			"Untitled Python Project"
+			"Untitled Code Project"
 		);
 	});
 
@@ -1011,18 +1010,11 @@ screen.listen()
 		expect(pythonIdeModeForCourseId("scratch-level-1")).toBeNull();
 		expect(normalizePythonIdeMode("pgzero", "turtle")).toBe("pgzero");
 		expect(normalizePythonIdeMode("unknown", "turtle")).toBe("turtle");
-		expect(normalizeClassroomPythonIdeMode("data", "turtle")).toBe(
-			"python"
-		);
-		expect(normalizeClassroomPythonIdeMode("", "data")).toBe("python");
-		expect(normalizeClassroomPythonIdeMode("pgzero", "turtle")).toBe(
-			"pgzero"
-		);
 	});
 
 	it("loads completed classroom starters through the client-side IDE route", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -1034,6 +1026,9 @@ screen.listen()
 			'route.query.template === "classroom-project"'
 		);
 		expect(pageSource).toContain("route.query.starterUrl");
+		expect(pageSource).toContain(
+			"normalizePythonIdeMode(rawMode, courseMode ?? \"turtle\")"
+		);
 		for (const template of [
 			"circle-art",
 			"firework-festival",
@@ -1058,7 +1053,7 @@ screen.listen()
 			"utf8"
 		);
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -1081,7 +1076,7 @@ screen.listen()
 			"utf8"
 		);
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -1110,7 +1105,7 @@ screen.listen()
 
 	it("keeps the Run control stable while Turtle callbacks or handlers remain active", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const runControlStart = pageSource.indexOf(
@@ -1120,17 +1115,17 @@ screen.listen()
 			runControlStart,
 			pageSource.indexOf("const selectedModeLabel", runControlStart)
 		);
-		const registerStart = pageSource.indexOf("registerKey(key: string");
+		const registerStart = pageSource.indexOf("registerKey(");
 		const registerSource = pageSource.slice(
 			registerStart,
-			pageSource.indexOf("listen()", registerStart)
+			pageSource.indexOf("registerClick(", registerStart)
 		);
 		const stopStart = pageSource.indexOf(
 			"function stopActiveRuntimeSurfaces"
 		);
 		const stopSource = pageSource.slice(
 			stopStart,
-			pageSource.indexOf("function activateRunControl", stopStart)
+			pageSource.indexOf("function focusVisualOutputForRun", stopStart)
 		);
 
 		expect(pageSource).toContain(
@@ -1158,7 +1153,8 @@ screen.listen()
 		expect(registerSource).toContain(
 			"refreshActiveTurtleEventHandlerCount();"
 		);
-		expect(stopSource).toContain("keyHandlers.clear();");
+		expect(stopSource).toContain("turtleKeyPressHandlers.clear();");
+		expect(stopSource).toContain("turtleKeyReleaseHandlers.clear();");
 		expect(stopSource).toContain("turtleClickHandlers.clear();");
 		expect(stopSource).toContain("turtleDragHandlers.clear();");
 		expect(stopSource).toContain("refreshActiveTurtleEventHandlerCount();");
@@ -1166,7 +1162,7 @@ screen.listen()
 
 	it("keeps Turtle runs animated with a visible cursor marker", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -1182,7 +1178,7 @@ screen.listen()
 
 	it("keeps Turtle trail drawing synchronized to the visible cursor pose", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const runtimeSource = readFileSync(
@@ -1258,25 +1254,28 @@ screen.listen()
 		const circleSource = runtimeSource.slice(
 			circleStart,
 			runtimeSource.indexOf(
-				"    def dot(self, size=8, color=None):",
+				"    def dot(self, size=None, *color):",
 				circleStart
 			)
 		);
 
 		expect(circleSource).toContain("if extent is None:");
-		expect(circleSource).toContain("extent = 360.0");
+		expect(circleSource).toContain("extent_degrees = 360.0");
+		expect(circleSource).toContain(
+			"extent_degrees = self._angle_to_degrees(extent)"
+		);
 		expect(circleSource).toContain("steps = 1 + int(");
-		expect(circleSource).toContain("turn = extent / steps");
+		expect(circleSource).toContain("turn = extent_degrees / steps");
 		expect(circleSource).toContain("half_turn = turn * 0.5");
 		expect(circleSource).toContain(
 			"side_length = 2.0 * radius * math.sin(math.radians(half_turn))"
 		);
 		expect(circleSource).toContain("if radius < 0:");
-		expect(circleSource).toContain("self.left(half_turn)");
+		expect(circleSource).toContain("self._turn_left_degrees(half_turn)");
 		expect(circleSource).toContain("for _ in range(steps):");
 		expect(circleSource).toContain("self.forward(side_length)");
-		expect(circleSource).toContain("self.left(turn)");
-		expect(circleSource).toContain("self.left(-half_turn)");
+		expect(circleSource).toContain("self._turn_left_degrees(turn)");
+		expect(circleSource).toContain("self._turn_left_degrees(-half_turn)");
 		expect(circleSource).not.toContain("_bridge.circle(float(radius))");
 	});
 
@@ -1312,13 +1311,13 @@ screen.listen()
 			"_bridge.dot(float(dot_size), str(dot_color))"
 		);
 		expect(runtimeSource).toContain(
-			"def dot(size=None, *color): _default.dot(size, *color)"
+			"def dot(size=None, *color): _get_default().dot(size, *color)"
 		);
 	});
 
 	it("renders the original Turtle built-in shapes with classic as default", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const runtimeSource = readFileSync(
@@ -1366,7 +1365,7 @@ screen.listen()
 		expect(runtimeSource).toContain("def showturtle(self):");
 		expect(runtimeSource).toContain("def isvisible(self):");
 		expect(runtimeSource).toContain(
-			"def hideturtle(): return _default.hideturtle()"
+			"def hideturtle(): return _get_default().hideturtle()"
 		);
 	});
 
@@ -1376,7 +1375,7 @@ screen.listen()
 			"utf8"
 		);
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -1385,7 +1384,7 @@ screen.listen()
 			"const PYTHON_IDE_RUNTIME_BOOTSTRAP_VERSION"
 		);
 		expect(runtimeSource).toContain("__classes_runtime_bootstrap_version");
-		expect(runtimeSource).toContain("2026-06-19-stale-import-hook-reset");
+		expect(runtimeSource).toContain("2026-07-09-python-314-turtle-parity");
 		expect(runtimeSource).toContain("const WHILE_LOOP_ITERATION_LIMIT");
 		expect(runtimeSource).toContain(
 			"const TURTLE_COOPERATIVE_WHILE_LOOP_ITERATION_LIMIT"
@@ -1448,7 +1447,7 @@ screen.listen()
 
 	it("keeps tiny Turtle animation steps responsive for continuous movement", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -1505,7 +1504,7 @@ screen.listen()
 
 	it("keeps repeated Turtle turn controls off the slow animation queue", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -1519,7 +1518,7 @@ screen.listen()
 
 	it("supports Turtle speed and tracer animation controls", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const runtimeSource = readFileSync(
@@ -1531,16 +1530,21 @@ screen.listen()
 		expect(pageSource).toContain(
 			"if (!turtleTracerEnabled || fromPose.speed === 0)"
 		);
+		expect(pageSource).toContain("return 0;");
 		expect(pageSource).toContain(
 			"const speedScale = turtleAnimationSpeedScale"
 		);
+		expect(pageSource).toContain("if (step.durationMs <= 0)");
 		expect(pageSource).toContain("Math.max(1, Math.min(10, speed))");
 		expect(pageSource).toContain("setSpeed(speed: number)");
 		expect(pageSource).toContain("setTracer(value: number)");
+		expect(pageSource).toContain("setDelay(delayMs: number)");
+		expect(pageSource).toContain("const delayScale =");
+		expect(pageSource).toContain("update: flushTurtleAnimation");
 		expect(runtimeSource).toContain("def _normalize_turtle_speed(value):");
 		expect(runtimeSource).toContain('"fastest": 0.0');
 		expect(runtimeSource).toContain(
-			"def tracer(*args): return _screen.tracer(*args)"
+			"def tracer(n=None, delay=None): return _screen.tracer(n, delay)"
 		);
 		expect(runtimeSource).toContain(
 			"def update(): return _screen.update()"
@@ -1553,7 +1557,7 @@ screen.listen()
 
 	it("keeps the Turtle cursor drawn directly above its trail", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const markerStart = pageSource.indexOf("function drawTurtleMarker");
@@ -1587,7 +1591,7 @@ screen.listen()
 
 	it("keeps visible Turtle trail steps out of instant batching", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const instantStart = pageSource.indexOf(
@@ -1629,7 +1633,7 @@ screen.listen()
 
 	it("keeps separate browser poses for independent Turtle instances", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const runtimeSource = readFileSync(
@@ -1667,7 +1671,7 @@ screen.listen()
 
 	it("keeps Turtle clear and reset scoped to the active Turtle", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const runtimeSource = readFileSync(
@@ -1676,7 +1680,7 @@ screen.listen()
 		);
 		const turtleClearStart = runtimeSource.indexOf(
 			"    def clear(self):",
-			runtimeSource.indexOf("class Turtle")
+			runtimeSource.indexOf("class Turtle:")
 		);
 		const turtleClearSource = runtimeSource.slice(
 			turtleClearStart,
@@ -1714,7 +1718,7 @@ screen.listen()
 
 	it("keeps visible Turtle trail movement on the synchronized animation path", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const instantStart = pageSource.indexOf(
@@ -1747,7 +1751,7 @@ screen.listen()
 
 	it("fast-forwards stale Turtle animation backlog without making every line instant", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const backlogStart = pageSource.indexOf(
@@ -1809,7 +1813,7 @@ screen.listen()
 
 	it("redraws Turtle canvas resizes without resetting active drawings", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const resizeCanvasStart = pageSource.indexOf(
@@ -1845,7 +1849,7 @@ screen.listen()
 
 	it("maps Turtle coordinates without repeated layout reads per command", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const coordinateMapperStart = pageSource.indexOf(
@@ -1892,7 +1896,7 @@ screen.listen()
 
 	it("bounds output rendering so print-heavy runs stay responsive", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -1909,7 +1913,7 @@ screen.listen()
 
 	it("bounds runtime artifacts so chart-heavy runs stay responsive", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -1936,7 +1940,7 @@ screen.listen()
 
 	it("keeps rendered HTML artifacts isolated from the IDE page", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const iframeStart = pageSource.indexOf("<iframe");
@@ -1959,7 +1963,7 @@ screen.listen()
 
 	it("bounds imported project files before local storage writes", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -1995,7 +1999,7 @@ screen.listen()
 			"utf8"
 		);
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		expect(runtimeSource).toContain("shouldStop?: () => boolean;");
@@ -2011,7 +2015,7 @@ screen.listen()
 			"shouldStop: () => shouldStopPythonIdeRun(runID, project._id)"
 		);
 		expect(pageSource).toContain(
-			"Python will halt at the next runtime checkpoint."
+			"The current run will halt at the next runtime checkpoint."
 		);
 		expect(pageSource).toContain("function stopActiveRuntimeSurfaces");
 		expect(pageSource).toContain("invalidatePythonIdeRuns();");
@@ -2028,7 +2032,7 @@ screen.listen()
 
 	it("prevents stale async IDE runs from reviving after stop or project switch", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const runStart = pageSource.indexOf("async function runCurrentProject");
@@ -2124,7 +2128,7 @@ screen.listen()
 
 	it("guards PyGame Zero bridge calls to the active run", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const guardStart = pageSource.indexOf(
@@ -2156,7 +2160,7 @@ screen.listen()
 
 	it("guards PyGame Zero loop ticks from stale async completions", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const startGameLoopStart = pageSource.indexOf("function startGameLoop");
@@ -2213,7 +2217,7 @@ screen.listen()
 
 	it("guards Turtle bridge calls to the active run", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const guardStart = pageSource.indexOf(
@@ -2246,7 +2250,7 @@ screen.listen()
 
 	it("stops active IDE runtime surfaces when the selected project changes", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const projectSwitchStart = pageSource.indexOf(
@@ -2265,7 +2269,7 @@ screen.listen()
 		);
 
 		expect(projectSwitchSource).toContain(
-			"const hadPythonRunInFlight = isRunning.value;"
+			"const hadRunInFlight = isRunning.value;"
 		);
 		expect(projectSwitchSource).toContain("stopRequested.value = true;");
 		expect(projectSwitchSource).toContain("stopActiveRuntimeSurfaces();");
@@ -2282,7 +2286,7 @@ screen.listen()
 
 	it("allows local-to-remote project ID sync without cancelling the current IDE run", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const saveStart = pageSource.indexOf("async function saveProjectOnce");
@@ -2299,7 +2303,7 @@ screen.listen()
 		);
 		const migrationReturnIndex = projectSwitchSource.indexOf("return;");
 		const runtimeStopIndex = projectSwitchSource.indexOf(
-			"const hadPythonRunInFlight = isRunning.value;"
+			"const hadRunInFlight = isRunning.value;"
 		);
 
 		expect(pageSource).toContain(
@@ -2323,7 +2327,7 @@ screen.listen()
 
 	it("keeps PyGame Zero image cache entries reusable across canvas resets", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const resetGameCanvasStart = pageSource.indexOf(
@@ -2364,7 +2368,7 @@ screen.listen()
 			"utf8"
 		);
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -2410,7 +2414,7 @@ screen.listen()
 
 	it("preserves PyGame Zero canvas aspect ratio instead of stretching", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -2430,7 +2434,7 @@ screen.listen()
 		);
 		const gameCanvasSource = pageSource.slice(
 			gameCanvasStart,
-			pageSource.indexOf(".artifact-list", gameCanvasStart)
+			pageSource.indexOf(".karel-shell", gameCanvasStart)
 		);
 
 		expect(gameFrameSource).toContain(
@@ -2449,7 +2453,7 @@ screen.listen()
 
 	it("bounds the IDE editor grid so long files scroll inside CodeMirror", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const gridStart = pageSource.indexOf(".ide-grid {");
@@ -2500,7 +2504,7 @@ screen.listen()
 
 	it("keeps PyGame Zero actor angles anticlockwise like Pygame Zero", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const actorStart = pageSource.indexOf("function drawGameActor");
@@ -2850,7 +2854,7 @@ screen.listen()
 			"utf8"
 		);
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const sandboxSource = readFileSync(
@@ -2889,7 +2893,7 @@ screen.listen()
 
 	it("uses the current selected project after forced save before running", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const runStart = pageSource.indexOf("async function runCurrentProject");
@@ -2918,7 +2922,7 @@ screen.listen()
 
 	it("clears stale local account fallback after successful remote syncs", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -2940,9 +2944,9 @@ screen.listen()
 		expect(pageSource).toContain("const isRemoteProject =");
 	});
 
-	it("autosaves Python IDE projects by default with a settings toggle", () => {
+	it("autosaves IDE projects by default with a settings toggle", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -2953,12 +2957,12 @@ screen.listen()
 			"const autoSaveEnabled = ref(loadPythonIdeAutoSavePreference());"
 		);
 		expect(pageSource).toContain("function updateAutoSavePreference");
-		expect(pageSource).toContain("Autosave projects");
-		expect(pageSource).toContain('aria-label="Python IDE settings"');
+		expect(pageSource).toContain("Autosave");
+		expect(pageSource).toContain('aria-label="IDE settings"');
 		expect(pageSource).toContain(
-			'aria-controls="python-ide-settings-panel"'
+			'aria-controls="code-ide-settings-panel"'
 		);
-		expect(pageSource).toContain('id="python-ide-settings-panel"');
+		expect(pageSource).toContain('id="code-ide-settings-panel"');
 		expect(pageSource).toContain("Protect local saves");
 		expect(pageSource).toContain("function storageManagerWithPersistence");
 		expect(pageSource).toContain("navigator.storage?.persist");
@@ -3026,7 +3030,7 @@ screen.listen()
 
 	it("persists CodeMirror view state across reloads and project ID migration", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -3060,9 +3064,9 @@ screen.listen()
 		);
 	});
 
-	it("keeps the IDE shortcut help to the four essential commands", () => {
+	it("keeps the full IDE shortcut help visible and scroll-contained", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const codeMirrorSource = readFileSync(
@@ -3083,17 +3087,17 @@ screen.listen()
 		expect(helpTextSource).toContain(".code-panel { overflow: hidden;");
 		expect(helpTextSource).toContain("max-height: min(24rem, 44vh);");
 		expect(helpTextSource).toContain("overscroll-behavior: contain;");
-		expect(helpTextSource).toContain("Cmd/Ctrl+Enter: Run");
-		expect(helpTextSource).toContain("Cmd/Ctrl+S: Save");
-		expect(helpTextSource).toContain("Cmd/Ctrl+F: Find");
-		expect(helpTextSource).toContain("Tab / Shift+Tab: Indent / outdent");
-		expect(helpTextSource).not.toContain("Course snippets include");
-		expect(helpTextSource).not.toContain("rectangular selection");
+		expect(helpTextSource).toContain("Cmd/Ctrl+Enter runs the project.");
+		expect(helpTextSource).toContain("Cmd/Ctrl+S saves the project.");
+		expect(helpTextSource).toContain("Cmd/Ctrl+F opens search.");
+		expect(helpTextSource).toContain("Tab indents; Shift+Tab dedents.");
+		expect(helpTextSource).toContain("Course snippets include");
+		expect(helpTextSource).toContain("rectangular selection");
 	});
 
 	it("ignores stale async project loads before mutating the workspace", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -3116,7 +3120,7 @@ screen.listen()
 
 	it("suppresses CodeMirror-originated echo updates through the Vue flush", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const onChangeStart = pageSource.indexOf("onChange(content) {");
@@ -3135,7 +3139,7 @@ screen.listen()
 
 	it("normalizes loaded project active files before rendering or saving", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const setProjectsStart = pageSource.indexOf("function setProjects");
@@ -3161,7 +3165,7 @@ screen.listen()
 
 	it("serializes saves and protects newer edits from stale remote responses", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -3192,7 +3196,7 @@ screen.listen()
 
 	it("keeps canvas keyboard handlers separate from editor and input focus", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -3224,7 +3228,7 @@ screen.listen()
 			"utf8"
 		);
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -3248,7 +3252,7 @@ screen.listen()
 
 	it("tracks overlapping PyGame Zero sound instances for cleanup", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -3267,7 +3271,7 @@ screen.listen()
 
 	it("cleans up PyGame Zero tone timers and suspends idle audio context", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 		const stopAllGameAudioStart = pageSource.indexOf(
@@ -3351,7 +3355,7 @@ screen.listen()
 			'"items"'
 		);
 		expect(getPythonIdeDefaultFileContent("main.py")).toContain(
-			"Python code"
+			"GREETING_MESSAGE"
 		);
 		expect(isPythonIdePythonFile("main.py")).toBe(true);
 		expect(isPythonIdePythonFile("scores.csv")).toBe(false);
@@ -3722,7 +3726,7 @@ screen.listen()
 			"utf8"
 		);
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -4040,9 +4044,9 @@ screen.listen()
 		expect(getPythonIdeRunnableFile(project)?.name).toBe("main.py");
 	});
 
-	it("names repeated Python IDE file controls by the affected file", () => {
+	it("names repeated IDE file controls by the affected file", () => {
 		const pageSource = readFileSync(
-			resolve(__dirname, "../src/components/PythonIdeWorkspace.vue"),
+			resolve(__dirname, "../src/components/CodeIdeWorkspace.vue"),
 			"utf8"
 		);
 
@@ -4052,8 +4056,8 @@ screen.listen()
 		expect(pageSource).toContain(':title="`Delete ${file.name}`"');
 		expect(pageSource).not.toContain('aria-label="Delete file"');
 		expect(pageSource).toContain(
-			'aria-controls="python-ide-file-tools-panel"'
+			'aria-controls="code-ide-file-tools-panel"'
 		);
-		expect(pageSource).toContain('id="python-ide-file-tools-panel"');
+		expect(pageSource).toContain('id="code-ide-file-tools-panel"');
 	});
 });

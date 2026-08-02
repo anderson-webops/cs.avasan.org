@@ -131,10 +131,10 @@ describe("static route normalization", () => {
 			"https://cs.avasan.org/"
 		],
 		[
-			"/python-ide",
-			"Python IDE | Classes with Julio",
+			"/ide",
+			"IDE | Classes with Julio",
 			"noindex,nofollow",
-			"https://cs.avasan.org/python-ide"
+			"https://cs.avasan.org/ide"
 		],
 		[
 			"/course-resource",
@@ -205,7 +205,9 @@ describe("static route normalization", () => {
 		expect(options.exclude).toEqual([
 			"/404",
 			"/admin",
+			"/bluej",
 			"/course-resource",
+			"/ide",
 			"/python-ide",
 			"/games",
 			"/games/pond-paddlers",

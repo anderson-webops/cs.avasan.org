@@ -41,9 +41,9 @@ const standardPolicy = requiredPolicy(
 	nginxPolicies.find(policy => !policy.includes("unsafe-eval")),
 	"standard"
 );
-const pythonIdePolicy = requiredPolicy(
+const codeIdePolicy = requiredPolicy(
 	nginxPolicies.find(policy => policy.includes("unsafe-eval")),
-	"Python IDE"
+	"IDE"
 );
 
 describe("production smoke feature expectations", () => {
@@ -62,32 +62,56 @@ describe("production smoke feature expectations", () => {
 		);
 	});
 
-	it("accepts only the exact standard and Python IDE security policies", () => {
-		expect(nginxPolicies).toHaveLength(4);
+	it("accepts only the exact standard and IDE security policies", () => {
+		expect(nginxPolicies).toHaveLength(5);
 		expect(new Set(nginxPolicies).size).toBe(2);
-		expect(netlifyPolicies).toHaveLength(2);
+		expect(netlifyPolicies).toHaveLength(3);
 		expect(new Set(netlifyPolicies)).toEqual(new Set(nginxPolicies));
 		expect(validateContentSecurityPolicy(standardPolicy, "standard")).toBe(true);
 		expect(
-			validateContentSecurityPolicy(pythonIdePolicy, "python-ide")
+			validateContentSecurityPolicy(codeIdePolicy, "code-ide")
 		).toBe(true);
 	});
 
-	it("redirects Python IDE aliases to the profiled directory route", () => {
-		for (const aliasPattern of ["/python-ide", "/python-ide[.]html"]) {
+	it("redirects IDE aliases to the primary profiled directory route", () => {
+		for (const aliasPattern of ["/ide", "/ide[.]html"]) {
 			const nginxAlias = nginxSource.match(
 				new RegExp(`location = ${aliasPattern} \\{([\\s\\S]*?)\\n\\t\\}`, "u")
 			)?.[1];
 
-			expect(nginxAlias?.trim()).toBe(
-				"return 301 /python-ide/$is_args$args;"
-			);
+			expect(nginxAlias?.trim()).toBe("return 301 /ide/$is_args$args;");
 		}
-		expect(netlifySource).toMatch(
-			/\[\[redirects\]\]\nfrom = "\/python-ide"\nto = "\/python-ide\/"\nstatus = 301\nforce = true/u
+		for (const legacyAliasPattern of [
+			"/python-ide",
+			"/python-ide[.]html",
+			"/python-ide/"
+		]) {
+			const nginxAlias = nginxSource.match(
+				new RegExp(
+					`location = ${legacyAliasPattern} \\{([\\s\\S]*?)\\n\\t\\}`,
+					"u"
+				)
+			)?.[1];
+
+			expect(nginxAlias?.trim()).toBe("return 301 /ide/$is_args$args;");
+		}
+		expect(nginxSource).toContain("location ^~ /python-ide/assets/");
+		expect(nginxSource).toContain("map $args $bluej_redirect_args");
+		expect(nginxSource).toContain("~(^|&)mode= $args;");
+		expect(nginxSource).toContain(
+			"return 301 /ide/?$bluej_redirect_args;"
 		);
 		expect(netlifySource).toMatch(
-			/\[\[redirects\]\]\nfrom = "\/python-ide[.]html"\nto = "\/python-ide\/"\nstatus = 301\nforce = true/u
+			/\[\[redirects\]\]\nfrom = "\/ide"\nto = "\/ide\/"\nstatus = 301\nforce = true/u
+		);
+		expect(netlifySource).toMatch(
+			/\[\[redirects\]\]\nfrom = "\/python-ide"\nto = "\/ide\/"\nstatus = 301\nforce = true/u
+		);
+		expect(netlifySource).toMatch(
+			/\[\[redirects\]\]\nfrom = "\/python-ide[.]html"\nto = "\/ide\/"\nstatus = 301\nforce = true/u
+		);
+		expect(netlifySource).toMatch(
+			/\[\[redirects\]\]\nfrom = "\/python-ide\/"\nto = "\/ide\/"\nstatus = 301\nforce = true/u
 		);
 	});
 
