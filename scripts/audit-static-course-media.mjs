@@ -1,9 +1,15 @@
 #!/usr/bin/env node
 
+import { spawn } from "node:child_process";
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { spawn } from "node:child_process";
+import process from "node:process";
+
+const staticMediaRequestModuleUrl = new URL(
+	"./static-media-request.mjs",
+	import.meta.url
+).href;
 
 const auditSource = String.raw`
 import {
@@ -28,6 +34,7 @@ import {
 	staticMediaFilename,
 	staticMediaUrlsFromText
 } from "@/stores/courses/staticMedia";
+import { requestStaticMedia } from ${JSON.stringify(staticMediaRequestModuleUrl)};
 
 const knownPending = new Set(KNOWN_PENDING_STATIC_MEDIA_FILENAMES);
 const urls = new Map();
@@ -189,13 +196,7 @@ for (const [url, references] of [...urls].sort(([left], [right]) =>
 	let error = "";
 
 	try {
-		let response = await fetch(url, { method: "HEAD" });
-		if (response.status === 405 || response.status === 403) {
-			response = await fetch(url, {
-				headers: { Range: "bytes=0-0" },
-				method: "GET"
-			});
-		}
+		const response = await requestStaticMedia(url);
 		status = response.status;
 		ok = response.ok || response.status === 206;
 	} catch (err) {
@@ -271,6 +272,7 @@ try {
 	});
 
 	process.exitCode = exitCode;
-} finally {
+}
+finally {
 	await rm(tempDir, { force: true, recursive: true });
 }
