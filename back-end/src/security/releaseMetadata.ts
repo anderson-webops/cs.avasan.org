@@ -2,7 +2,7 @@ const releaseVersionPattern
 	= /^(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-[0-9a-z.-]+)?$/i;
 const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;
 
-export const DEFAULT_CS_RELEASE_VERSION = "2.7.101";
+export const DEFAULT_CS_RELEASE_VERSION = "2.7.102";
 
 export interface ReleaseMetadata {
 	revision: string;

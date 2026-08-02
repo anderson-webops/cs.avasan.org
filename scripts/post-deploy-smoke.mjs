@@ -3,6 +3,9 @@ import { pathToFileURL } from "node:url";
 import { smokeRequest } from "./http-smoke-client.mjs";
 
 const productionOrigin = process.env.CS_SITE_ORIGIN || "https://cs.avasan.org";
+// The smoke target may be a loopback proxy in CI, but cookie-authenticated
+// mutations must still prove that the production classroom Origin is accepted.
+const classroomOrigin = "https://cs.avasan.org";
 const expectedRelease = process.env.CS_EXPECTED_RELEASE?.replace(/^v/, "");
 const expectedRevision = process.env.CS_EXPECTED_REVISION;
 const timeoutMs = Number(process.env.CS_SITE_SMOKE_TIMEOUT_MS || 15_000);
@@ -357,7 +360,7 @@ async function verifyInvalidAdminLogin() {
 		}),
 		headers: {
 			"Content-Type": "application/json",
-			"Origin": new URL(productionOrigin).origin,
+			"Origin": classroomOrigin,
 			"X-Classroom-Request": "1"
 		},
 		method: "POST",
@@ -393,7 +396,7 @@ async function verifyPondPaddlersBoundary() {
 			body: "{}",
 			headers: {
 				"Content-Type": "application/json",
-				"Origin": new URL(productionOrigin).origin,
+				"Origin": classroomOrigin,
 				"X-Classroom-Request": "1"
 			},
 			method: "POST",
@@ -514,7 +517,7 @@ async function verifyPrivacyFeatureBoundaries() {
 		}),
 		headers: {
 			"Content-Type": "application/json",
-			"Origin": "https://cs.avasan.org",
+			"Origin": classroomOrigin,
 			"X-Classroom-Request": "1"
 		},
 		method: "POST",
