@@ -33,9 +33,9 @@ describe("student privacy page", () => {
 			"every open or duplicated Math Graph Sketcher tab"
 		);
 		expect(text).toContain("Clear for next student");
-		expect(text).toContain("Python work saved in a shared browser");
+		expect(text).toContain("IDE work saved in a shared browser");
 		expect(text).toContain("follow Julio’s instructions");
-		expect(text).toContain("Close every Python IDE tab");
+		expect(text).toContain("Close every IDE tab");
 		expect(text).toContain("Classroom games");
 		expect(text).toContain(
 			"do not save game play, send answers or scores"
@@ -52,7 +52,10 @@ describe("student privacy page", () => {
 		expect(text).toContain("Pond Paddlers room and seat");
 		expect(text).toContain("Pond Paddlers security counters");
 		expect(text).toContain(
-			"Projects already saved to a signed-in account are not part of the browser-local workspace"
+			"Python-family projects already saved to a signed-in account are not part of the browser-local workspace"
+		);
+		expect(text).toContain(
+			"Java, Karel, and BlueJ projects always remain in browser storage"
 		);
 		expect(text).not.toContain("Clear browser projects for next student");
 		expect(text).toContain(
@@ -99,7 +102,7 @@ describe("student privacy page", () => {
 		expect(text).toContain("process-lifetime tombstone");
 		expect(text).toContain("Anonymous classroom totals");
 		expect(text).toContain(
-			"Browser-local Math Graph and anonymous Python work"
+			"Browser-local Math Graph and anonymous IDE work"
 		);
 		expect(text).toContain("does not include a password");
 		expect(text).toContain("internal student account ID");
@@ -113,7 +116,7 @@ describe("student privacy page", () => {
 		expect(text).toContain("access, correct, export, or delete");
 		expect(text).toContain("refuse further account collection or use");
 		expect(text).toContain(
-			"still use public courses, browser-local Python saves, and Math's Graph Sketcher"
+			"still use public courses, browser-local IDE saves, and Math's Graph Sketcher"
 		);
 		expect(text).toContain("identify every operator");
 		expect(text).toContain("name each approved infrastructure");

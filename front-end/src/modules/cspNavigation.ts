@@ -1,6 +1,6 @@
 import type { UserModule } from "@/types";
 
-export type DocumentCspProfile = "python-ide" | "standard";
+export type DocumentCspProfile = "code-ide" | "standard";
 
 const urlParsingBase = "https://cs.avasan.invalid/";
 
@@ -10,11 +10,25 @@ function parsedUrl(value: string | URL, base = urlParsingBase) {
 
 export function documentCspProfile(value: string | URL): DocumentCspProfile {
 	const { pathname } = parsedUrl(value);
-	return pathname === "/python-ide" ||
-		pathname === "/python-ide.html" ||
-		pathname.startsWith("/python-ide/")
-		? "python-ide"
+	return /^\/(?:bluej|ide|python-ide)(?:\.html)?(?:\/|$)/u.test(pathname)
+		? "code-ide"
 		: "standard";
+}
+
+function canonicalCodeIdeAliasTarget(target: URL) {
+	const normalizedPath = target.pathname.replace(/\/+$/u, "");
+	const aliasPath = normalizedPath.replace(/\.html$/u, "");
+	if (!["/bluej", "/ide", "/python-ide"].includes(aliasPath)) {
+		return null;
+	}
+
+	if (aliasPath !== "/bluej" || target.searchParams.has("mode")) {
+		return `/ide/${target.search}${target.hash}`;
+	}
+
+	const search = new URLSearchParams(target.search);
+	search.set("mode", "bluej");
+	return `/ide/?${search.toString()}${target.hash}`;
 }
 
 export function cspDocumentNavigationTarget(
@@ -31,12 +45,10 @@ export function cspDocumentNavigationTarget(
 		return null;
 	}
 
-	const isPythonIdeAlias =
-		target.pathname === "/python-ide" ||
-		target.pathname === "/python-ide.html";
-	const targetPath = isPythonIdeAlias ? "/python-ide/" : target.pathname;
-	const navigationTarget = `${targetPath}${target.search}${target.hash}`;
-	if (isPythonIdeAlias) return navigationTarget;
+	const canonicalCodeIdeTarget = canonicalCodeIdeAliasTarget(target);
+	if (canonicalCodeIdeTarget) return canonicalCodeIdeTarget;
+
+	const navigationTarget = `${target.pathname}${target.search}${target.hash}`;
 
 	if (
 		navigationTarget ===
@@ -59,7 +71,7 @@ export const install: UserModule = ({ isClient, router }) => {
 		if (!target) return;
 
 		// CSP belongs to the current HTML document. Crossing between the
-		// standard site and Python IDE therefore requires a fresh response.
+		// standard site and the IDE therefore requires a fresh response.
 		window.location.assign(target);
 		return false;
 	});

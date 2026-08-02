@@ -17,7 +17,7 @@ vi.mock("@/api", () => ({
 describe("student OAuth API", () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
-		window.history.replaceState({}, "", "/python-ide");
+		window.history.replaceState({}, "", "/ide");
 	});
 
 	it("normalizes provider availability to booleans", async () => {
@@ -36,7 +36,7 @@ describe("student OAuth API", () => {
 		window.history.replaceState(
 			{},
 			"",
-			"/python-ide?studentOAuthStatus=success&tab=files#editor"
+			"/ide?studentOAuthStatus=success&tab=files#editor"
 		);
 
 		const href = studentOAuthSignInHref("google");
@@ -44,7 +44,7 @@ describe("student OAuth API", () => {
 
 		expect(target.pathname).toBe("/api/students/oauth/google/start");
 		expect(target.searchParams.get("returnTo")).toBe(
-			"/python-ide?tab=files#editor"
+			"/ide?tab=files#editor"
 		);
 		expect(target.searchParams.has("username")).toBe(false);
 		expect(target.searchParams.has("accessCode")).toBe(false);

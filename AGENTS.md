@@ -28,7 +28,7 @@ Keep these constraints intact:
   or project artifacts. The shared aggregate service may retain Math
   `graph-open` counts, but never graph projects or contents.
 - Students browse courses and use the browser IDE anonymously. An optional
-  student account may sync Python IDE projects, but
+  student account may sync Python-family IDE projects, but
   it must never gate course access or anonymous browser saves.
 - Student accounts have a username but no email. Julio creates them and issues
   unique, expiring setup codes; students cannot register or recover accounts

@@ -36,7 +36,7 @@ describe("published course implementation artifacts", () => {
 					links.every(
 						link =>
 							link.startsWith("https://") ||
-							link.startsWith("/python-ide?") ||
+							link.startsWith("/ide?") ||
 							link.startsWith("/course-assets/") ||
 							link.startsWith("/static/")
 					),
@@ -52,7 +52,7 @@ describe("published course implementation artifacts", () => {
 		const starters = items
 			.map(item => item.projectLink)
 			.filter((link): link is string =>
-				Boolean(link?.startsWith("/python-ide?"))
+				Boolean(link?.startsWith("/ide?"))
 			)
 			.map(link => new URL(link, "https://cs.avasan.org"))
 			.filter(url => url.searchParams.has("starterUrl"));
@@ -78,7 +78,7 @@ describe("published course implementation artifacts", () => {
 			const starters = items
 				.map(item => item.projectLink)
 				.filter((link): link is string =>
-					Boolean(link?.startsWith("/python-ide?"))
+					Boolean(link?.startsWith("/ide?"))
 				)
 				.map(link => new URL(link, "https://cs.avasan.org"))
 				.filter(url => url.searchParams.has("starterUrl"));

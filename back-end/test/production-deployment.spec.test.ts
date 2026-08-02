@@ -67,17 +67,18 @@ describe("versioned full-stack production deployment", () => {
 		expect(proxy).toContain("access_log off;");
 		expect(proxy).toContain("absolute_redirect off;");
 		expect(proxy).not.toContain(" combined");
-		expect(proxy.match(/add_header Strict-Transport-Security/g)).toHaveLength(4);
-		expect(proxy.match(/add_header Content-Security-Policy/g)).toHaveLength(4);
-		expect(proxy.match(/add_header X-Content-Type-Options/g)).toHaveLength(4);
-		expect(proxy.match(/add_header Referrer-Policy/g)).toHaveLength(4);
-		expect(proxy.match(/add_header Permissions-Policy/g)).toHaveLength(4);
-		expect(proxy.match(/add_header X-Frame-Options/g)).toHaveLength(4);
+		expect(proxy.match(/add_header Strict-Transport-Security/g)).toHaveLength(5);
+		expect(proxy.match(/add_header Content-Security-Policy/g)).toHaveLength(5);
+		expect(proxy.match(/add_header X-Content-Type-Options/g)).toHaveLength(5);
+		expect(proxy.match(/add_header Referrer-Policy/g)).toHaveLength(5);
+		expect(proxy.match(/add_header Permissions-Policy/g)).toHaveLength(5);
+		expect(proxy.match(/add_header X-Frame-Options/g)).toHaveLength(5);
 		expect(proxy).toContain("proxy_set_header X-Forwarded-For $http_x_forwarded_for;");
-		expect(proxy).toContain("location ^~ /python-ide/");
+		expect(proxy).toContain("location ^~ /ide/");
+		expect(proxy).toContain("location ^~ /python-ide/assets/");
 		expect(proxy).toContain("script-src 'self' 'unsafe-inline'; connect-src 'self';");
 		expect(proxy).toContain("script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://cdn.jsdelivr.net https://cdn.plot.ly;");
-		expect(proxy).toContain("connect-src 'self' https://cdn.jsdelivr.net https://pypi.org https://files.pythonhosted.org;");
+		expect(proxy).toContain("connect-src 'self' https://api.github.com https://raw.githubusercontent.com https://cdn.jsdelivr.net https://pypi.org https://files.pythonhosted.org;");
 		expect(proxy).not.toContain("wss:");
 		expect(proxy).not.toContain("ws:");
 		expect(proxy).not.toContain("blob: https:");
@@ -112,14 +113,14 @@ describe("versioned full-stack production deployment", () => {
 			version: string;
 		};
 
-		expect(rootPackage.version).toBe("2.7.102");
-		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]102\}/g)).toHaveLength(2);
+		expect(rootPackage.version).toBe("2.7.103");
+		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]103\}/g)).toHaveLength(2);
 		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g)).toHaveLength(2);
 		expect(compose).not.toContain("SOURCE_REVISION:-unknown");
 		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
-		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.102");
+		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.103");
 		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
-		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.102");
+		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.103");
 		expect(apiDockerfile).toContain("ARG SOURCE_REVISION=unknown");
 		expect(frontendReleaseWriter).toContain("environment.COMMIT_REF?.trim()");
 		expect(frontendReleaseWriter).toContain("const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;");
@@ -162,9 +163,18 @@ describe("versioned full-stack production deployment", () => {
 		expect(productionSmoke).toContain('"/python-ide?course=python-1"');
 		expect(productionSmoke).toContain('"/python-ide.html?course=python-1"');
 		expect(productionSmoke).toContain('"/python-ide/?course=python-1"');
+		expect(productionSmoke).toContain(
+			'"/bluej?mode=java&course=python-1"'
+		);
+		expect(productionSmoke).toContain(
+			'"/ide/?mode=java&course=python-1"'
+		);
 		expect(productionSmoke).toContain("verifySecurityHeaders");
 		expect(productionSmoke).toContain('validateContentSecurityPolicy(');
-		expect(productionSmoke).toContain('["/python-ide/", "python-ide"]');
+		expect(productionSmoke).toContain('["/ide/", "code-ide"]');
+		expect(productionSmoke).toContain(
+			'["/python-ide/assets/manifest.json", "code-ide"]'
+		);
 		expect(productionSmoke).toContain('"/graph-sketcher"');
 		expect(productionSmoke).toContain('"/graph-sketcher/"');
 		expect(productionSmoke).toContain('"/graph-sketcher/index.html"');
@@ -235,10 +245,11 @@ describe("versioned full-stack production deployment", () => {
 		expect(netlify).toContain('VITE_STUDENT_RECORD_RETENTION_DAYS = ""');
 		expect(netlify).toContain('for = "/*"');
 		expect(netlify).toContain('Content-Security-Policy = "default-src');
-		expect(netlify).toContain('for = "/python-ide/*"');
+		expect(netlify).toContain('for = "/ide/*"');
+		expect(netlify).toContain('for = "/python-ide/assets/*"');
 		expect(netlify).toContain("script-src 'self' 'unsafe-inline'; connect-src 'self';");
 		expect(netlify).toContain("script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://cdn.jsdelivr.net https://cdn.plot.ly;");
-		expect(netlify).toContain("connect-src 'self' https://cdn.jsdelivr.net https://pypi.org https://files.pythonhosted.org;");
+		expect(netlify).toContain("connect-src 'self' https://api.github.com https://raw.githubusercontent.com https://cdn.jsdelivr.net https://pypi.org https://files.pythonhosted.org;");
 		expect(netlify).not.toContain("wss:");
 		expect(netlify).not.toContain("ws:");
 		expect(netlify).not.toContain("blob: https:");
@@ -304,7 +315,7 @@ describe("versioned full-stack production deployment", () => {
 		expect(readme).toContain('CS_EXPECTED_REVISION="${SOURCE_REVISION}"');
 		expect(readme).toMatch(/before the deployment\s+timer records success/);
 		expect(readme).toContain("must fail without recording success");
-		expect(readme).toContain("http://127.0.0.1:8080/python-ide/");
+		expect(readme).toContain("http://127.0.0.1:8080/ide/");
 		expect(readme).toContain("remove any host-side static");
 		expect(readme).toMatch(/do not record the\s+deployment as successful/);
 		expect(environmentVerifier).toContain("permissions must be 600");

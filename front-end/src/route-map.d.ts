@@ -52,6 +52,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/bluej': RouteRecordInfo<
+      '/bluej',
+      '/bluej',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/course-resource': RouteRecordInfo<
       '/course-resource',
       '/course-resource',
@@ -90,6 +97,13 @@ declare module 'vue-router/auto-routes' {
     '/games/pond-paddlers': RouteRecordInfo<
       '/games/pond-paddlers',
       '/games/pond-paddlers',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/ide': RouteRecordInfo<
+      '/ide',
+      '/ide',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -145,6 +159,14 @@ declare module 'vue-router/auto-routes' {
       pathParamNames:
         | never
     }
+    'src/pages/bluej.vue': {
+      routes:
+        | '/bluej'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
     'src/pages/course-resource.vue': {
       routes:
         | '/course-resource'
@@ -188,6 +210,14 @@ declare module 'vue-router/auto-routes' {
     'src/pages/games/pond-paddlers.vue': {
       routes:
         | '/games/pond-paddlers'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/ide.vue': {
+      routes:
+        | '/ide'
       views:
         | never
       pathParamNames:

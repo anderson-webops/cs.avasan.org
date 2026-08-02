@@ -7,9 +7,11 @@ import {
 
 const WHITESPACE_RE = /\s+/g;
 const FILE_EXTENSION_RE = /\.[\dA-Z]+$/i;
+const JAVA_EXTENSION_RE = /\.java$/i;
 const PYTHON_EXTENSION_RE = /\.py$/i;
+const CODE_EXTENSION_RE = /\.(?:java|py)$/i;
 const SAFE_FILE_SEGMENT_RE = /^\w[\w.-]*$/;
-const ROOT_TEXT_FILE_RE = /^\w[\w.-]*\.(?:csv|json|md|py|txt)$/i;
+const ROOT_TEXT_FILE_RE = /^\w[\w.-]*\.(?:csv|eps|java|json|md|ps|py|txt)$/i;
 const IMAGE_FILE_RE = /^images\/\w[\w.-]*\.(?:gif|jpe?g|png|svg|webp)$/i;
 const AUDIO_FILE_RE = /^(?:music|sounds)\/\w[\w.-]*\.(?:mp3|ogg|wav)$/i;
 const ASSET_DIRECTORY_NAMES = new Set(["images", "music", "sounds"]);
@@ -32,7 +34,7 @@ const PYTHON_IDE_RUNTIME_RESERVED_ROOTS = new Set([
 	"pgzero",
 	"tensorflow"
 ]);
-const TEXT_FILE_RE = /\.(?:csv|json|md|py|txt|svg)$/i;
+const TEXT_FILE_RE = /\.(?:csv|eps|java|json|md|ps|py|txt|svg)$/i;
 const IMAGE_EXTENSION_RE = /\.(?:gif|jpe?g|png|svg|webp)$/i;
 const SOUND_EXTENSION_RE = /\.wav$/i;
 const MUSIC_EXTENSION_RE = /\.(?:mp3|ogg)$/i;
@@ -42,12 +44,19 @@ const PYTHON_IDE_INDEXED_DB_VERSION = 1;
 const PYTHON_IDE_PROJECT_STORE = "projectStores";
 const MAX_REMOTE_PROJECT_TITLE_LENGTH = 120;
 const MAX_REMOTE_IMPORT_ID_LENGTH = 128;
+const JAVA_ENTRY_POINT_IGNORED_TEXT_RE =
+	/"""[\s\S]*?"""|\/\*[\s\S]*?\*\/|\/\/[^\n\r]*|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'/g;
+const JAVA_MAIN_METHOD_RE =
+	/\bmain\s*\(\s*(?:\w+\s*\[\s*\]\s+\w+|\w+\s+\w+\s*\[\s*\]|\w+\s*\.\.\.\s+\w+)\s*\)/;
+const KAREL_RUN_METHOD_RE = /\brun\s*\(\s*\)/;
 
 export type PythonIdeFileEncoding = "text" | "base64";
 
-export type PythonIdeMode = "data" | "pgzero" | "python" | "turtle";
+export type PythonIdeMode =
+	"data" | "java" | "karel" | "pgzero" | "python" | "turtle";
 export type PythonIdeProjectTemplate =
 	| "blank"
+	| "bluej"
 	| "circle-art"
 	| "classroom-project"
 	| "course"
@@ -56,6 +65,7 @@ export type PythonIdeProjectTemplate =
 	| "flower-garden"
 	| "maze-explorer"
 	| "neon-trail"
+	| "outline"
 	| "picasso"
 	| "spiral-galaxy"
 	| "turtle-race"
@@ -80,11 +90,28 @@ export interface PythonIdeProject {
 	starterUrl?: string;
 	importID?: string;
 	byteCount?: number;
+	shared?: boolean;
+	shareID?: string;
+	shareCreatedAt?: string;
+	sharedSourceID?: string;
 	createdAt?: string;
 	updatedAt?: string;
 	serverUpdatedAt?: string;
 	remoteContentLoaded?: boolean;
 }
+
+export type SharedPythonIdeProject = Pick<
+	PythonIdeProject,
+	| "activeFileName"
+	| "courseID"
+	| "courseProjectKey"
+	| "courseProjectTitle"
+	| "files"
+	| "mode"
+	| "starterLabel"
+	| "starterUrl"
+	| "title"
+>;
 
 export type PythonIdeProjectReviewRole = "admin";
 
@@ -113,6 +140,17 @@ export interface PythonIdeProjectReview {
 export interface ManagedPythonIdeProject {
 	project: PythonIdeProject;
 	review: PythonIdeProjectReview | null;
+}
+
+export type PythonIdeProjectMetadata = Omit<PythonIdeProject, "files">;
+export type PythonIdeProjectReviewMetadata = Omit<
+	PythonIdeProjectReview,
+	"files"
+>;
+
+export interface ManagedPythonIdeProjectMetadata {
+	project: PythonIdeProjectMetadata;
+	review: PythonIdeProjectReviewMetadata | null;
 }
 
 export interface PythonIdeProjectPayload {
@@ -207,10 +245,13 @@ const pythonIdeRecoveryTabID =
 		: crypto.randomUUID();
 export const pythonIdeAllowedFileExtensions = [
 	".py",
+	".java",
 	".csv",
 	".json",
 	".txt",
 	".md",
+	".ps",
+	".eps",
 	".png",
 	".jpg",
 	".jpeg",
@@ -230,7 +271,13 @@ let observedAnonymousClearSignalStorage: Storage | null = null;
 
 const pythonIdeCourseModes: Record<string, PythonIdeMode> = {
 	"ai-level-1": "data",
+	"ap-computer-science-a": "java",
 	"data-science-in-python": "data",
+	"design-patterns-in-java": "java",
+	"design-patterns-in-java-part-2": "java",
+	"java-level-1": "karel",
+	"java-level-2": "java",
+	"java-level-3": "java",
 	"machine-learning": "data",
 	pygames: "pgzero",
 	"pygames-archive": "pgzero",
@@ -249,71 +296,192 @@ export function normalizePythonIdeMode(
 	value: string | null | undefined,
 	fallback: PythonIdeMode = "python"
 ): PythonIdeMode {
-	if (value === "data" || value === "pgzero" || value === "turtle")
+	if (value === "bluej") return "java";
+	if (
+		value === "data" ||
+		value === "java" ||
+		value === "karel" ||
+		value === "pgzero" ||
+		value === "turtle"
+	) {
 		return value;
+	}
 	if (value === "python") return "python";
 	return fallback;
-}
-
-export function normalizeClassroomPythonIdeMode(
-	value: string | null | undefined,
-	fallback: PythonIdeMode = "python"
-): Exclude<PythonIdeMode, "data"> {
-	const mode = normalizePythonIdeMode(value, fallback);
-	return mode === "data" ? "python" : mode;
 }
 
 export function pythonIdeModeForCourseId(courseId: string | null | undefined) {
 	return courseId ? (pythonIdeCourseModes[courseId] ?? null) : null;
 }
 
-export const pythonStarterCode = `print("Hello, Python!")
+export const pythonStarterCode = `#####################
+###   CONSTANTS   ###
+#####################
+GREETING_MESSAGE = "Hello, Python!"
+NAME_PROMPT = "What is your name? "
 
-name = input("What is your name? ")
-print(f"Nice to meet you, {name}.")
+
+#####################
+###   MAIN CODE   ###
+#####################
+# Store reusable text in named variables before printing
+print(GREETING_MESSAGE)
+
+# Collect one user value and use the name clearly
+student_name = input(NAME_PROMPT)
+print(f"Nice to meet you, {student_name}.")
 `;
 
 export const turtleStarterCode = `import turtle
 
+#####################
+###   CONSTANTS   ###
+#####################
+BACKGROUND_COLOR = "white"
+PEN_COLOR = "teal"
+PEN_SIZE = 3
+FORWARD_STEP = 30
+TURN_ANGLE = 20
+ANIMATION_STEP = 2
+ANIMATION_DELAY_MS = 16
+DOT_SIZE = 18
+DOT_COLOR = "coral"
+
+
+#####################
+###   VARIABLES   ###
+#####################
 screen = turtle.Screen()
-screen.bgcolor("white")
+screen.bgcolor(BACKGROUND_COLOR)
 
 pen = turtle.Turtle()
-pen.color("teal")
-pen.pensize(3)
+pen.color(PEN_COLOR)
+pen.pensize(PEN_SIZE)
 is_moving = True
 
+
+#####################
+###   FUNCTIONS   ###
+#####################
+# Move the turtle by one visible step
 def move_forward():
-\tpen.forward(30)
+    pen.forward(FORWARD_STEP)
 
+# Turn the turtle by one visible amount
 def turn_left():
-\tpen.left(20)
+    pen.left(TURN_ANGLE)
 
+# Switch the animation loop between moving and paused
 def toggle_motion():
-\tglobal is_moving
-\tis_moving = not is_moving
+    global is_moving
+    is_moving = not is_moving
 
+# Advance the animation frame when motion is enabled
 def animate():
-\tif is_moving:
-\t\tpen.forward(2)
-\tscreen.ontimer(animate, 16)
+    # Move only while the project is in its active motion state
+    if is_moving:
+        pen.forward(ANIMATION_STEP)
+    screen.ontimer(animate, ANIMATION_DELAY_MS)
 
+# Draw a dot where the user clicks
 def draw_dot(x, y):
-\tpen.penup()
-\tpen.goto(x, y)
-\tpen.pendown()
-\tpen.dot(18, "coral")
+    pen.penup()
+    pen.goto(x, y)
+    pen.pendown()
+    pen.dot(DOT_SIZE, DOT_COLOR)
 
+# Move the pen while the turtle is dragged
 def drag_pen(x, y):
-\tpen.goto(x, y)
+    pen.goto(x, y)
 
+
+###########################
+###   EVENT LISTENERS   ###
+###########################
 screen.onkey(move_forward, "Up")
 screen.onkey(turn_left, "Left")
 screen.onkey(toggle_motion, "space")
 screen.onclick(draw_dot)
 pen.ondrag(drag_pen)
-screen.ontimer(animate, 16)
+screen.ontimer(animate, ANIMATION_DELAY_MS)
 screen.listen()
+`;
+
+export const pythonLevel1OutlineStarterCode = `import turtle
+import random
+
+#####################
+###   CONSTANTS   ###
+#####################
+NUM_TURTLES = 0
+MOVE_DISTANCE = 1
+
+
+#####################
+###   FUNCTIONS   ###
+#####################
+# Configure one turtle before the main program starts
+def setup_turtle(current_turtle, color_name):
+    pass
+
+# Run the first keyboard or mouse action
+def action_one():
+    pass
+
+# Run the second keyboard or mouse action
+def action_two():
+    pass
+
+
+#####################
+###   VARIABLES   ###
+#####################
+main_turtle = turtle.Turtle()
+# Turtle attributes here
+
+# Create Screen
+screen = turtle.Screen()
+
+###   MORE VARIABLES HERE AS NEEDED   ###
+
+# List of Turtles
+turtle_list = []
+
+# Build each extra turtle before the animation loop starts
+for turtle_index in range(NUM_TURTLES):
+    new_turtle = turtle.Turtle()
+    # Turtle attributes here
+    turtle_list.append(new_turtle)
+
+
+###########################
+###   EVENT LISTENERS   ###
+###########################
+screen.onkey(action_one, "KEY_HERE")
+screen.onkey(action_two, "KEY_HERE")
+# Add any other event listeners here
+
+screen.listen()
+
+
+#####################
+###   MAIN CODE   ###
+#####################
+condition = True
+
+# Keep the main animation running while the condition is true
+while condition:
+    main_turtle.forward(MOVE_DISTANCE)
+
+    # Conditions and additional actions here
+    # Example if main_turtle.ycor() < -200
+
+    # Update each extra turtle in the list
+    for current_turtle in turtle_list:
+        current_turtle.forward(MOVE_DISTANCE)
+
+        # Conditions and additional actions here
+        # Example if current_turtle.xcor() > 3
 `;
 
 export const turtleCircleArtStarterCode = `import random
@@ -1248,34 +1416,594 @@ goal.dot(GOAL_SIZE, GOAL_COLOR)
 screen.update()
 `;
 
+export const turtleClassroomProjectStarterCode = `import turtle
+
+#####################
+###   CONSTANTS   ###
+#####################
+BACKGROUND_COLOR = "midnight blue"
+SCENE_COLORS = ["cyan", "gold", "hot pink", "lime"]
+STAR_SIZE = 42
+STAR_POINTS = 5
+STAR_TURN = 144
+SCENE_POSITIONS = [(-170, 70), (0, -20), (170, 70)]
+
+
+#####################
+###   VARIABLES   ###
+#####################
+screen = turtle.Screen()
+screen.bgcolor(BACKGROUND_COLOR)
+screen.title("Classroom Turtle Studio")
+screen.tracer(0)
+
+artist = turtle.Turtle()
+artist.hideturtle()
+artist.speed(0)
+artist.pensize(3)
+
+
+########################
+###   NORMAL SECTION  ###
+########################
+# Complete the Normal task from the course project card
+# The completed scene below still runs while this function is empty
+def normal_addition():
+    pass
+
+
+######################
+###   HARD SECTION  ###
+######################
+# Complete the Hard task after the Normal version works
+# This section can remain empty without breaking the project
+def hard_addition():
+    pass
+
+
+#####################
+###   FUNCTIONS   ###
+#####################
+# Move without leaving a connecting line
+def move_to(x_position, y_position):
+    artist.penup()
+    artist.goto(x_position, y_position)
+    artist.pendown()
+
+# Draw one filled star from the completed framework
+def draw_star(x_position, y_position, color_name):
+    move_to(x_position, y_position)
+    artist.color(color_name)
+    artist.begin_fill()
+
+    for _ in range(STAR_POINTS):
+        artist.forward(STAR_SIZE)
+        artist.right(STAR_TURN)
+
+    artist.end_fill()
+
+# Draw the completed scene before student additions
+def draw_finished_scene():
+    for scene_index in range(len(SCENE_POSITIONS)):
+        x_position, y_position = SCENE_POSITIONS[scene_index]
+        color_name = SCENE_COLORS[scene_index % len(SCENE_COLORS)]
+        draw_star(x_position, y_position, color_name)
+
+
+#####################
+###   MAIN CODE   ###
+#####################
+# Keep the finished framework working at every challenge level
+draw_finished_scene()
+normal_addition()
+hard_addition()
+screen.update()
+`;
+
 export const pgzeroStarterCode = `import pgzrun
 
+#####################
+###   CONSTANTS   ###
+#####################
 WIDTH = 640
 HEIGHT = 400
+PLAYER_SIZE = 72
+PLAYER_SPEED = 4
+INSTRUCTION_POSITION = (24, 24)
+INSTRUCTION_SIZE = 28
+INSTRUCTION_COLOR = "white"
 
+
+#####################
+###   VARIABLES   ###
+#####################
 player = Actor("student", (WIDTH / 2, HEIGHT / 2))
-player.width = 72
-player.height = 72
+player.width = PLAYER_SIZE
+player.height = PLAYER_SIZE
 
+
+#####################
+###   FUNCTIONS   ###
+#####################
+# Draw the current frame
 def draw():
-\tscreen.clear()
-\tscreen.draw.text("Use the arrow keys to move.", (24, 24), color="white", fontsize=28)
-\tplayer.draw()
+    screen.clear()
+    screen.draw.text(
+        "Use the arrow keys to move",
+        INSTRUCTION_POSITION,
+        color=INSTRUCTION_COLOR,
+        fontsize=INSTRUCTION_SIZE
+    )
+    player.draw()
 
+# Update player movement from held keys
 def update():
-\tif keyboard.left:
-\t\tplayer.x -= 4
-\tif keyboard.right:
-\t\tplayer.x += 4
-\tif keyboard.up:
-\t\tplayer.y -= 4
-\tif keyboard.down:
-\t\tplayer.y += 4
+    # Move left while the left arrow key is held
+    if keyboard.left:
+        player.x -= PLAYER_SPEED
+
+    # Move right while the right arrow key is held
+    if keyboard.right:
+        player.x += PLAYER_SPEED
+
+    # Move up while the up arrow key is held
+    if keyboard.up:
+        player.y -= PLAYER_SPEED
+
+    # Move down while the down arrow key is held
+    if keyboard.down:
+        player.y += PLAYER_SPEED
 
 pgzrun.go()
 `;
 
-export const pgzeroCourseStarterCode = `WIDTH = 640
+export const javaStarterCode = `/**
+ * @brief Demonstrate the minimal Java console project shape
+ */
+public class Main {
+/*****************
+*   CONSTANTS   *
+*****************/
+
+    private static final String GREETING_MESSAGE = "Hello, Java!";
+
+
+/*****************
+*   FUNCTIONS   *
+*****************/
+
+    /**
+     * @brief Run the starter console program
+     *
+     * @param args Command-line arguments
+     */
+    public static void main(String[] args) {
+        System.out.println(GREETING_MESSAGE);
+    }
+}
+`;
+
+export const javaOutlineStarterCode = `import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ * @brief Organize an introductory Java console project with helpers and lists
+ */
+public class Main {
+/*****************
+*   CONSTANTS   *
+*****************/
+
+    private static final int STARTING_SCORE = 0;
+    private static final String STARTING_STUDENT_NAME = "Student";
+
+
+/*****************
+*   FUNCTIONS   *
+*****************/
+
+    /**
+     * @brief Run the starter console program
+     *
+     * @param args Command-line arguments
+     */
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        int score = STARTING_SCORE;
+        String student_name = STARTING_STUDENT_NAME;
+        ArrayList<String> notes = new ArrayList<>();
+
+        // Prompt, update variables, and call helper methods here
+        // String answer = input.nextLine();
+        notes.add(make_note(student_name, score));
+
+        // Print each saved note on its own line
+        for (String note : notes) {
+            System.out.println(note);
+        }
+    }
+
+    /**
+     * @brief Build a readable note from a student name and score
+     *
+     * @param student_name Name to show in the note
+     *
+     * @param score Current score value
+     *
+     * @return Formatted note text
+     */
+    static String make_note(String student_name, int score) {
+        return student_name + ": " + score;
+    }
+
+    /**
+     * @brief Run the first custom action
+     */
+    static void action_one() {
+        // Add an action here
+    }
+
+    /**
+     * @brief Run the second custom action
+     */
+    static void action_two() {
+        // Add another action here
+    }
+}
+`;
+
+export const blueJMainStarterCode = `import java.util.ArrayList;
+
+/**
+ * @brief Demonstrate a small BlueJ object-oriented project
+ */
+public class Main {
+/*****************
+*   CONSTANTS   *
+*****************/
+
+    private static final String STUDENT_NAME = "Ada";
+    private static final int GRADE_LEVEL = 9;
+    private static final int FIRST_SCORE = 88;
+    private static final int SECOND_SCORE = 94;
+
+
+/*****************
+*   FUNCTIONS   *
+*****************/
+
+    /**
+     * @brief Build and preview a small object-oriented BlueJ project
+     *
+     * @param args Command-line arguments
+     */
+    public static void main(String[] args) {
+        ArrayList<Integer> scores = new ArrayList<>();
+        scores.add(FIRST_SCORE);
+        scores.add(SECOND_SCORE);
+
+        // Open this project in BlueJ to inspect the Student object directly
+        Student student = new Student(STUDENT_NAME, GRADE_LEVEL);
+        student.add_score(scores.get(0));
+        student.add_score(scores.get(1));
+        student.print_summary();
+
+        // Mirror the same state with console-friendly browser output
+        System.out.println(STUDENT_NAME + " is in grade " + GRADE_LEVEL);
+        System.out.println("Average: " + average_score(scores));
+    }
+
+    /**
+     * @brief Calculate the average score for a list of grades
+     *
+     * @param scores Scores to average
+     *
+     * @return Average score or 0 when the list is empty
+     */
+    static double average_score(ArrayList<Integer> scores) {
+        // Avoid dividing by zero when no scores have been recorded
+        if (scores.isEmpty()) {
+            return 0;
+        }
+
+        int total = 0;
+
+        // Add each score into the running total
+        for (int score : scores) {
+            total += score;
+        }
+
+        return (double) total / scores.size();
+    }
+}
+`;
+
+export const blueJStudentStarterCode = `import java.util.ArrayList;
+
+/**
+ * @brief Store one student's grade level and score history
+ */
+public class Student {
+/*****************
+*   VARIABLES   *
+*****************/
+
+    private final String name;
+    private final int grade_level;
+    private final ArrayList<Integer> scores;
+
+
+/*****************
+*   FUNCTIONS   *
+*****************/
+
+    /**
+     * @brief Create a student with an empty score list
+     *
+     * @param name Student name
+     *
+     * @param grade_level Student grade level
+     */
+    public Student(String name, int grade_level) {
+        this.name = name;
+        this.grade_level = grade_level;
+        this.scores = new ArrayList<>();
+    }
+
+    /**
+     * @brief Add one score to the student record
+     *
+     * @param score Score to add
+     */
+    public void add_score(int score) {
+        scores.add(score);
+    }
+
+    /**
+     * @brief Calculate the student's average score
+     *
+     * @return Average score or 0 when the list is empty
+     */
+    public double average_score() {
+        // Avoid dividing by zero when no scores have been recorded
+        if (scores.isEmpty()) {
+            return 0;
+        }
+
+        int total = 0;
+
+        // Add each score into the running total
+        for (int score : scores) {
+            total += score;
+        }
+
+        return (double) total / scores.size();
+    }
+
+    /**
+     * @brief Print the student summary to the console
+     */
+    public void print_summary() {
+        System.out.println(name + " is in grade " + grade_level);
+        System.out.println("Average: " + average_score());
+    }
+}
+`;
+
+export const blueJReadmeStarterText = `BlueJ Java Project
+
+This folder is ready to open in BlueJ after downloading it from the IDE.
+
+Start with Main.java, then inspect Student.java to see the object's fields and methods.
+The browser Run button previews the same state with console-friendly code in Main.java.
+
+BlueJ: https://www.bluej.org/
+BlueJ source: https://github.com/k-pet-group/BlueJ-Greenfoot
+`;
+
+export const karelStarterCode = `import kareltherobot.UrRobot;
+import kareltherobot.World;
+import kareltherobot.Directions;
+
+/**
+ * @brief Demonstrate a Karel robot program with a loaded world file
+ */
+public class Algo implements Directions {
+/*****************
+*   CONSTANTS   *
+*****************/
+
+    private static final int START_STREET = 6;
+    private static final int START_AVENUE = 7;
+    private static final int START_BEEPERS = 0;
+    private static final int MOVE_COUNT = 3;
+
+
+/*****************
+*   FUNCTIONS   *
+*****************/
+
+    /**
+     * @brief Move one robot through the sample world
+     *
+     * @param args Command-line arguments
+     */
+    public static void main(String[] args) {
+        // Start Sam at street 6 avenue 7 facing east with no beepers
+        UrRobot sam = new UrRobot(START_STREET, START_AVENUE, East, START_BEEPERS);
+
+        // Turn Sam around before moving west
+        sam.turnLeft();
+        sam.turnLeft();
+
+        // Move Sam across the world using the named move count
+        for (int move_index = 0; move_index < MOVE_COUNT; move_index++) {
+            sam.move();
+        }
+    }
+
+    // Load the Karel world before the robot program runs
+    static {
+        World.setVisible(true);
+        World.readWorld("world.txt");
+    }
+}
+`;
+
+export const karelStarterWorld = `rows=10
+cols=10
+wall 4 4 east
+wall 4 5 south
+wall 5 7 east
+wall 7 4 north
+wall 7 4 east
+wall 7 5 north
+wall 7 6 north
+wall 7 7 north
+wall 6 7 east
+wall 5 4 east
+wall 5 5 south
+wall 5 6 south
+wall 5 7 south
+beeper 6 9 1
+`;
+
+export const karelOutlineStarterCode = `/**
+ * @brief Organize a CodeHS-style Karel program with helper methods
+ */
+public class MyProgram extends SuperKarel {
+/*****************
+*   FUNCTIONS   *
+*****************/
+
+    /**
+     * @brief Run the main Karel command sequence
+     */
+    public void run() {
+        // Move once when the path is open and this corner has no balls
+        if (frontIsClear() && noBallsPresent()) {
+            move();
+        }
+
+        // Continue moving until Karel reaches a blocked edge
+        while (frontIsClear()) {
+            move();
+        }
+
+        // Face the opposite direction before the program ends
+        turnAround();
+    }
+
+    /**
+     * @brief Rotate Karel right using three left turns
+     */
+    private void turnRight() {
+        turnLeft();
+        turnLeft();
+        turnLeft();
+    }
+
+    /**
+     * @brief Rotate Karel to face the opposite direction
+     */
+    private void turnAround() {
+        turnLeft();
+        turnLeft();
+    }
+}
+`;
+
+export const karelOutlineWorld = `rows=5
+cols=5
+beeper 1 4 1
+`;
+
+export const pgzeroOutlineStarterCode = `#####################
+###   CONSTANTS   ###
+#####################
+WIDTH = 640
+HEIGHT = 400
+PLAYER_SPEED = 4
+ENEMY_SPEED = 2
+TITLE_POSITION = (24, 24)
+TITLE_SIZE = 32
+TITLE_COLOR = "white"
+
+
+#####################
+###   FUNCTIONS   ###
+#####################
+# Draw the current game frame
+def draw():
+    screen.clear()
+    screen.draw.text(
+        "Game title here",
+        TITLE_POSITION,
+        color=TITLE_COLOR,
+        fontsize=TITLE_SIZE
+    )
+    player.draw()
+
+    # Draw other actors and UI here
+
+# Update player, enemies, score, and game state
+def update():
+    pass
+
+# Run the first input action
+def action_one():
+    pass
+
+# Run the second input action
+def action_two():
+    pass
+
+# Restore the game to its starting state
+def reset_game():
+    pass
+
+
+#####################
+###   VARIABLES   ###
+#####################
+# Global Variables
+player = Actor("student", (WIDTH / 2, HEIGHT / 2))
+score = 0
+game_over = False
+
+###   MORE VARIABLES HERE AS NEEDED   ###
+
+# List of Actors
+actors = []
+# Create each extra actor before the game loop starts
+for actor_index in range(0):
+    new_actor = Actor("student", (WIDTH / 2, HEIGHT / 2))
+    # Actor attributes here
+    actors.append(new_actor)
+
+
+###########################
+###   EVENT HANDLERS   ###
+###########################
+def on_key_down(key):
+    # Route space and return keys to named actions
+    if key == keys.SPACE:
+        action_one()
+
+    # Route return to the second named action
+    elif key == keys.RETURN:
+        action_two()
+
+# Add other handlers here, such as on_mouse_down(pos)
+`;
+
+export const pgzeroCourseStarterCode = `# Pygame Zero reads WIDTH and HEIGHT when the game starts
+
+#####################
+###   CONSTANTS   ###
+#####################
+WIDTH = 640
 HEIGHT = 400
 `;
 
@@ -1295,18 +2023,30 @@ Dev,80,90
 `;
 
 export const dataScienceStarterCode = `import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 
-scores = pd.read_csv("scores.csv")
+#####################
+###   CONSTANTS   ###
+#####################
+DATA_FILE = "scores.csv"
+FIGURE_SIZE = (7, 4)
+BAR_COLOR = "#0f766e"
 
+
+#####################
+###   MAIN CODE   ###
+#####################
+scores = pd.read_csv(DATA_FILE)
+
+# Store the growth calculation in a named column for reuse
 scores["growth"] = scores["post"] - scores["pre"]
 print(scores)
 print()
 print("Average growth:", round(scores["growth"].mean(), 2))
 
-plt.figure(figsize=(7, 4))
-plt.bar(scores["student"], scores["growth"], color="#0f766e")
+# Build the chart from named configuration values
+plt.figure(figsize=FIGURE_SIZE)
+plt.bar(scores["student"], scores["growth"], color=BAR_COLOR)
 plt.title("Growth from pre-check to post-check")
 plt.xlabel("Student")
 plt.ylabel("Point growth")
@@ -1315,13 +2055,50 @@ plt.tight_layout()
 
 export function getPythonIdeModeLabel(mode: PythonIdeMode) {
 	if (mode === "data") return "Data / AI";
+	if (mode === "java") return "Java";
+	if (mode === "karel") return "Karel Java";
 	if (mode === "pgzero") return "PyGame Zero";
 	if (mode === "turtle") return "Turtle";
 	return "Python";
 }
 
+export function isPythonIdeBlueJProject(
+	project: Pick<
+		PythonIdeProject,
+		"courseProjectKey" | "mode" | "starterLabel" | "title"
+	> &
+		Partial<Pick<PythonIdeProject, "files">>
+) {
+	if (project.mode !== "java") return false;
+
+	const starterLabel = project.starterLabel?.toLowerCase() ?? "";
+	const title = project.title.toLowerCase();
+	return (
+		project.courseProjectKey === "ide-template:bluej" ||
+		starterLabel.includes("bluej") ||
+		title.includes("bluej") ||
+		project.files?.some(
+			file => file.name.toLowerCase() === "package.bluej"
+		) === true
+	);
+}
+
+export function getPythonIdeProjectKindLabel(
+	project: Pick<
+		PythonIdeProject,
+		"courseProjectKey" | "mode" | "starterLabel" | "title"
+	> &
+		Partial<Pick<PythonIdeProject, "files">>
+) {
+	return isPythonIdeBlueJProject(project)
+		? "BlueJ Java"
+		: getPythonIdeModeLabel(project.mode);
+}
+
 function getDemoStarterCode(mode: PythonIdeMode) {
 	if (mode === "data") return dataScienceStarterCode;
+	if (mode === "java") return javaStarterCode;
+	if (mode === "karel") return karelStarterCode;
 	if (mode === "pgzero") return pgzeroStarterCode;
 	if (mode === "turtle") return turtleStarterCode;
 	return pythonStarterCode;
@@ -1337,6 +2114,15 @@ function clonePythonIdeFiles(files: PythonIdeFile[]) {
 
 function getBlankStarterFiles(mode: PythonIdeMode): PythonIdeFile[] {
 	if (mode === "pgzero") return getCourseStarterFiles(mode);
+	if (mode === "java") {
+		return [
+			{
+				name: "Main.java",
+				content: ""
+			}
+		];
+	}
+	if (mode === "karel") return getCourseStarterFiles(mode);
 
 	return [
 		{
@@ -1347,6 +2133,28 @@ function getBlankStarterFiles(mode: PythonIdeMode): PythonIdeFile[] {
 }
 
 function getCourseStarterFiles(mode: PythonIdeMode): PythonIdeFile[] {
+	if (mode === "java") {
+		return [
+			{
+				name: "Main.java",
+				content: javaStarterCode
+			}
+		];
+	}
+
+	if (mode === "karel") {
+		return [
+			{
+				name: "Algo.java",
+				content: karelStarterCode
+			},
+			{
+				name: "world.txt",
+				content: karelStarterWorld
+			}
+		];
+	}
+
 	if (mode === "pgzero") {
 		return [
 			{
@@ -1360,6 +2168,8 @@ function getCourseStarterFiles(mode: PythonIdeMode): PythonIdeFile[] {
 }
 
 function getDemoStarterFiles(mode: PythonIdeMode): PythonIdeFile[] {
+	if (mode === "java" || mode === "karel") return getCourseStarterFiles(mode);
+
 	const files = [
 		{
 			name: "main.py",
@@ -1384,11 +2194,73 @@ function getDemoStarterFiles(mode: PythonIdeMode): PythonIdeFile[] {
 	return files;
 }
 
+function getOutlineStarterFiles(mode: PythonIdeMode): PythonIdeFile[] {
+	if (mode === "java") {
+		return [
+			{
+				name: "Main.java",
+				content: javaOutlineStarterCode
+			}
+		];
+	}
+
+	if (mode === "karel") {
+		return [
+			{
+				name: "MyProgram.java",
+				content: karelOutlineStarterCode
+			},
+			{
+				name: "world.txt",
+				content: karelOutlineWorld
+			}
+		];
+	}
+
+	const files = [
+		{
+			name: "main.py",
+			content:
+				mode === "pgzero"
+					? pgzeroOutlineStarterCode
+					: pythonLevel1OutlineStarterCode
+		}
+	];
+
+	if (mode === "pgzero") {
+		files.push({
+			name: "images/student.svg",
+			content: pgzeroStudentSvg
+		});
+	}
+
+	return files;
+}
+
+function getBlueJStarterFiles(mode: PythonIdeMode): PythonIdeFile[] {
+	if (mode !== "java") return getOutlineStarterFiles(mode);
+
+	return [
+		{
+			name: "Main.java",
+			content: blueJMainStarterCode
+		},
+		{
+			name: "Student.java",
+			content: blueJStudentStarterCode
+		},
+		{
+			name: "README.TXT",
+			content: blueJReadmeStarterText
+		}
+	];
+}
+
 function getGuidedTurtleStarterFiles(
 	mode: PythonIdeMode,
 	starterCode: string
 ): PythonIdeFile[] {
-	if (mode !== "turtle") return getBlankStarterFiles(mode);
+	if (mode !== "turtle") return getOutlineStarterFiles(mode);
 
 	return [
 		{
@@ -1493,8 +2365,15 @@ function getStarterFilesForTemplate(
 	mode: PythonIdeMode,
 	template: PythonIdeProjectTemplate
 ) {
+	if (template === "bluej") return getBlueJStarterFiles(mode);
 	if (template === "circle-art") {
 		return getGuidedTurtleStarterFiles(mode, turtleCircleArtStarterCode);
+	}
+	if (template === "classroom-project") {
+		return getGuidedTurtleStarterFiles(
+			mode,
+			turtleClassroomProjectStarterCode
+		);
 	}
 	if (template === "demo") return getDemoStarterFiles(mode);
 	if (template === "firework-festival") {
@@ -1512,6 +2391,7 @@ function getStarterFilesForTemplate(
 	if (template === "neon-trail") {
 		return getGuidedTurtleStarterFiles(mode, turtleNeonTrailStarterCode);
 	}
+	if (template === "outline") return getOutlineStarterFiles(mode);
 	if (template === "picasso") {
 		return getGuidedTurtleStarterFiles(mode, turtlePicassoStarterCode);
 	}
@@ -1527,9 +2407,6 @@ function getStarterFilesForTemplate(
 			turtleTriangleMotionStarterCode
 		);
 	}
-	if (template === "classroom-project") {
-		return addPythonIdeClassroomSections(getCourseStarterFiles(mode));
-	}
 	if (template === "course") return getCourseStarterFiles(mode);
 	return getBlankStarterFiles(mode);
 }
@@ -1540,7 +2417,10 @@ export function resolvePythonIdeActiveFileName(
 ) {
 	return (
 		files.find(file => file.name === preferredFileName)?.name ??
+		files.find(file => file.name === "Main.java")?.name ??
+		files.find(file => file.name === "Algo.java")?.name ??
 		files.find(file => file.name === "main.py")?.name ??
+		files.find(file => isPythonIdeJavaFile(file.name))?.name ??
 		files.find(file => isPythonIdePythonFile(file.name))?.name ??
 		files[0]?.name ??
 		"main.py"
@@ -1551,8 +2431,11 @@ function projectTitleForMode(
 	mode: PythonIdeMode,
 	template: PythonIdeProjectTemplate = "blank"
 ) {
+	if (template === "bluej" && mode === "java") return "BlueJ Java Project";
 	if (template === "circle-art" && mode === "turtle")
 		return "Color Circle Art";
+	if (template === "classroom-project" && mode === "turtle")
+		return "Classroom Turtle Studio";
 	if (template === "firework-festival" && mode === "turtle")
 		return "Firework Festival";
 	if (template === "flower-garden" && mode === "turtle")
@@ -1570,13 +2453,23 @@ function projectTitleForMode(
 	if (template === "triangle-motion" && mode === "turtle")
 		return "Triangle Motion Starter";
 
+	if (template === "outline") {
+		if (mode === "turtle") return "Python Level 1 Outline";
+		if (mode === "pgzero") return "PyGame Zero Outline";
+		return `${getPythonIdeModeLabel(mode)} Outline`;
+	}
+
 	return mode === "data"
 		? "Data / AI Notebook"
-		: mode === "pgzero"
-			? "PyGame Zero Game"
-			: mode === "turtle"
-				? "Turtle Drawing"
-				: "Python Practice";
+		: mode === "java"
+			? "Java Practice"
+			: mode === "karel"
+				? "Karel Java World"
+				: mode === "pgzero"
+					? "PyGame Zero Game"
+					: mode === "turtle"
+						? "Turtle Drawing"
+						: "Python Practice";
 }
 
 export function createPythonIdeProject(
@@ -1599,6 +2492,7 @@ export function createPythonIdeProject(
 		courseProjectTitle: options.courseProjectTitle,
 		starterLabel: options.starterLabel,
 		starterUrl: options.starterUrl,
+		shared: false,
 		createdAt: now,
 		updatedAt: now
 	};
@@ -1607,8 +2501,8 @@ export function createPythonIdeProject(
 export function pythonIdeProjectToPayload(
 	project: PythonIdeProject
 ): PythonIdeProjectPayload {
-	return {
-		title: project.title.trim() || "Untitled Python Project",
+	const payload: PythonIdeProjectPayload = {
+		title: project.title.trim() || "Untitled Code Project",
 		mode: project.mode,
 		files: project.files,
 		activeFileName: resolvePythonIdeActiveFileName(
@@ -1621,6 +2515,7 @@ export function pythonIdeProjectToPayload(
 		starterLabel: project.starterLabel,
 		starterUrl: project.starterUrl
 	};
+	return payload;
 }
 
 export function plainPythonIdeProjectSnapshot(
@@ -1787,7 +2682,10 @@ function recordMatchesAnonymousWorkspaceGeneration(
 		: record.anonymousGeneration === generation;
 }
 
-export function normalizePythonFileName(value: string) {
+export function normalizePythonFileName(
+	value: string,
+	defaultExtension = ".py"
+) {
 	const cleaned = value
 		.trim()
 		.replaceAll("\\", "/")
@@ -1801,7 +2699,7 @@ export function normalizePythonFileName(value: string) {
 	if (!segments.length) return "";
 	const fileName = segments[segments.length - 1] ?? "";
 	const extensionMatch = fileName.match(FILE_EXTENSION_RE);
-	if (!extensionMatch) return `${segments.join("/")}.py`;
+	if (!extensionMatch) return `${segments.join("/")}${defaultExtension}`;
 	const extension = extensionMatch[0].toLowerCase();
 	const stem = fileName.slice(0, -extensionMatch[0].length);
 	segments[segments.length - 1] = `${stem}${extension}`;
@@ -1837,7 +2735,7 @@ export function isValidPythonFileName(value: string) {
 
 	if (isPythonIdeRuntimeReservedPath(value)) return false;
 
-	if (PYTHON_EXTENSION_RE.test(value)) {
+	if (CODE_EXTENSION_RE.test(value)) {
 		const rootDirectory = segments[0]?.toLowerCase();
 		return !rootDirectory || !ASSET_DIRECTORY_NAMES.has(rootDirectory);
 	}
@@ -1849,6 +2747,19 @@ export function isValidPythonFileName(value: string) {
 
 export function isPythonIdePythonFile(value: string) {
 	return PYTHON_EXTENSION_RE.test(value);
+}
+
+export function isPythonIdeJavaFile(value: string) {
+	return JAVA_EXTENSION_RE.test(value);
+}
+
+export function isPythonIdeRunnableFile(
+	value: string,
+	mode: PythonIdeMode = "python"
+) {
+	return mode === "java" || mode === "karel"
+		? isPythonIdeJavaFile(value)
+		: isPythonIdePythonFile(value);
 }
 
 export function isPythonIdeTextFile(value: string) {
@@ -1897,6 +2808,7 @@ export function getPythonIdeAssetDataUrl(file: PythonIdeFile) {
 export function getPythonIdeFileKindLabel(value: string) {
 	const extension = value.match(FILE_EXTENSION_RE)?.[0]?.toLowerCase();
 	if (extension === ".csv") return "CSV";
+	if (extension === ".java") return "Java";
 	if (extension === ".json") return "JSON";
 	if (extension === ".md") return "Markdown";
 	if (extension === ".txt") return "Text";
@@ -1909,10 +2821,12 @@ export function getPythonIdeFileKindLabel(value: string) {
 export function getPythonIdeDefaultFileContent(fileName: string) {
 	const extension = fileName.match(FILE_EXTENSION_RE)?.[0]?.toLowerCase();
 	if (extension === ".csv") return "name,value\nsample,1\n";
+	if (extension === ".java")
+		return '/**\n * @brief Write a small Java console program\n */\npublic class Main {\n/*****************\n*   CONSTANTS   *\n*****************/\n\n    private static final String GREETING_MESSAGE = "Hello, Java!";\n\n\n/*****************\n*   FUNCTIONS   *\n*****************/\n\n    /**\n     * @brief Run the Java program\n     *\n     * @param args Command-line arguments\n     */\n    public static void main(String[] args) {\n        System.out.println(GREETING_MESSAGE);\n    }\n}\n';
 	if (extension === ".json") return '{\n\t"items": []\n}\n';
 	if (extension === ".md") return "# Notes\n\n";
 	if (extension === ".txt") return "";
-	return "# Add your Python code here.\n";
+	return '#####################\n###   CONSTANTS   ###\n#####################\nGREETING_MESSAGE = "Hello, Python!"\n\n\n#####################\n###   MAIN CODE   ###\n#####################\n# Store reusable text in a named constant before printing\nprint(GREETING_MESSAGE)\n';
 }
 
 function baseName(path: string) {
@@ -1986,7 +2900,7 @@ export async function loadPythonIdeStarterFilesFromGitHub(
 	}
 
 	const runnableFileIndex = starterFiles.findIndex(file =>
-		isPythonIdePythonFile(file.name)
+		CODE_EXTENSION_RE.test(file.name)
 	);
 	if (runnableFileIndex <= 0) return starterFiles;
 
@@ -1996,17 +2910,88 @@ export async function loadPythonIdeStarterFilesFromGitHub(
 }
 
 export function getPythonIdeRunnableFile(
-	project: Pick<PythonIdeProject, "activeFileName" | "files">
+	project: Pick<PythonIdeProject, "activeFileName" | "files"> &
+		Partial<Pick<PythonIdeProject, "mode">>
 ) {
+	const mode = project.mode ?? "python";
+	if (mode === "java") return getJavaIdeRunnableFile(project);
+	if (mode === "karel") return getKarelIdeRunnableFile(project);
+
 	return (
 		project.files.find(
 			file =>
 				file.name === project.activeFileName &&
-				isPythonIdePythonFile(file.name)
+				isPythonIdeRunnableFile(file.name, mode)
 		) ??
-		project.files.find(file => isPythonIdePythonFile(file.name)) ??
+		project.files.find(file => isPythonIdeRunnableFile(file.name, mode)) ??
 		null
 	);
+}
+
+function getJavaIdeRunnableFile(
+	project: Pick<PythonIdeProject, "activeFileName" | "files">
+) {
+	const javaFiles = project.files.filter(file =>
+		isPythonIdeJavaFile(file.name)
+	);
+	const activeFile = javaFiles.find(
+		file => file.name === project.activeFileName
+	);
+	const mainFile = javaFiles.find(file => file.name === "Main.java");
+
+	return (
+		(activeFile && hasJavaMainMethod(activeFile)
+			? activeFile
+			: undefined) ||
+		mainFile ||
+		javaFiles.find(hasJavaMainMethod) ||
+		activeFile ||
+		javaFiles[0] ||
+		null
+	);
+}
+
+function getKarelIdeRunnableFile(
+	project: Pick<PythonIdeProject, "activeFileName" | "files">
+) {
+	const javaFiles = project.files.filter(file =>
+		isPythonIdeJavaFile(file.name)
+	);
+	const activeFile = javaFiles.find(
+		file => file.name === project.activeFileName
+	);
+	const myProgramFile = javaFiles.find(
+		file => file.name === "MyProgram.java"
+	);
+	const algoFile = javaFiles.find(file => file.name === "Algo.java");
+
+	return (
+		(activeFile && isLikelyKarelEntryFile(activeFile)
+			? activeFile
+			: undefined) ||
+		myProgramFile ||
+		algoFile ||
+		javaFiles.find(isLikelyKarelEntryFile) ||
+		activeFile ||
+		javaFiles[0] ||
+		null
+	);
+}
+
+function hasJavaMainMethod(file: Pick<PythonIdeFile, "content">) {
+	return JAVA_MAIN_METHOD_RE.test(javaEntryPointSearchText(file));
+}
+
+function isLikelyKarelEntryFile(file: Pick<PythonIdeFile, "content">) {
+	const searchText = javaEntryPointSearchText(file);
+	return (
+		JAVA_MAIN_METHOD_RE.test(searchText) ||
+		KAREL_RUN_METHOD_RE.test(searchText)
+	);
+}
+
+function javaEntryPointSearchText(file: Pick<PythonIdeFile, "content">) {
+	return file.content.replace(JAVA_ENTRY_POINT_IGNORED_TEXT_RE, " ");
 }
 
 function pythonIdeProjectSetUpdatedAt(projects: PythonIdeProject[]) {
@@ -2376,7 +3361,7 @@ export async function saveLocalPythonProjectsAsync(
 			writeLocalPythonProjectRecord(record, userID);
 		} catch {
 			throw new Error(
-				`Could not save Python IDE projects locally. Browser project storage may be full or unavailable. (${formatStorageError(indexedDbError)})`
+				`Could not save IDE projects locally. Browser project storage may be full or unavailable. (${formatStorageError(indexedDbError)})`
 			);
 		}
 	}
@@ -2638,7 +3623,7 @@ export async function clearLocalPythonProjectsAsync(userID?: string | null) {
 
 	if (indexedDbError || localStorageError) {
 		throw new Error(
-			`Could not remove the local Python IDE project copy. (${formatStorageError(indexedDbError ?? localStorageError)})`
+			`Could not remove the local IDE project copy. (${formatStorageError(indexedDbError ?? localStorageError)})`
 		);
 	}
 }
@@ -2664,7 +3649,7 @@ export async function clearCurrentTabLocalPythonProjectsAsync(
 	}
 	if (indexedDbError || localStorageError) {
 		throw new Error(
-			`Could not remove the current Python IDE recovery copy. (${formatStorageError(indexedDbError ?? localStorageError)})`
+			`Could not remove the current IDE recovery copy. (${formatStorageError(indexedDbError ?? localStorageError)})`
 		);
 	}
 }
@@ -2886,9 +3871,7 @@ function openPythonIdeStorageDb() {
 				reject(request.error ?? new Error("Could not open IndexedDB."));
 			request.onblocked = () =>
 				reject(
-					new Error(
-						"Python IDE project storage is blocked by another tab."
-					)
+					new Error("IDE project storage is blocked by another tab.")
 				);
 		}
 	).catch(error => {
@@ -3027,7 +4010,7 @@ function canonicalPythonIdeProjectPayload(payload: PythonIdeProjectPayload) {
 		mode: payload.mode ?? "python",
 		starterLabel: optionalValue(payload.starterLabel),
 		starterUrl: optionalValue(payload.starterUrl),
-		title: payload.title?.trim() || "Untitled Python Project"
+		title: payload.title?.trim() || "Untitled Code Project"
 	};
 }
 
@@ -3095,7 +4078,7 @@ function recoveredPythonIdeImportID(
 
 function recoveredPythonIdeTitle(title: string | undefined) {
 	const suffix = " (recovered)";
-	const baseTitle = (title?.trim() || "Untitled Python Project").replace(
+	const baseTitle = (title?.trim() || "Untitled Code Project").replace(
 		/\s+\(recovered\)$/i,
 		""
 	);
@@ -3517,6 +4500,7 @@ export async function updatePythonIdeProjectReview(
 		activeFileName?: string;
 		files?: PythonIdeFile[];
 		note?: string;
+		refreshFromSource?: boolean;
 		visibleToStudent?: boolean;
 	}
 ) {

@@ -11,4 +11,5 @@ cypress/downloads
 /.cache/
 /public/python-ide/assets/
 /public/python-ide/assets.zip
+/public/ide/assets/
 #public/assets/fonts

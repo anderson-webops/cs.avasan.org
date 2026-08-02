@@ -36,13 +36,15 @@ const standardContentSecurityPolicy = Object.freeze({
 	"style-src": ["'self'", "'unsafe-inline'"],
 	"worker-src": ["'self'", "blob:"]
 });
-const pythonIdeContentSecurityPolicy = Object.freeze({
+const codeIdeContentSecurityPolicy = Object.freeze({
 	...standardContentSecurityPolicy,
 	"connect-src": [
 		"'self'",
+		"https://api.github.com",
 		"https://cdn.jsdelivr.net",
 		"https://files.pythonhosted.org",
-		"https://pypi.org"
+		"https://pypi.org",
+		"https://raw.githubusercontent.com"
 	],
 	"script-src": [
 		"'self'",
@@ -64,7 +66,7 @@ function normalizedSources(sources) {
 
 export function validateContentSecurityPolicy(value, policyName) {
 	assertion(
-		policyName === "standard" || policyName === "python-ide",
+		policyName === "standard" || policyName === "code-ide",
 		"Unknown Content-Security-Policy profile."
 	);
 	assertion(
@@ -84,8 +86,8 @@ export function validateContentSecurityPolicy(value, policyName) {
 		actual.set(directive, sources);
 	}
 
-	const expected = policyName === "python-ide"
-		? pythonIdeContentSecurityPolicy
+	const expected = policyName === "code-ide"
+		? codeIdeContentSecurityPolicy
 		: standardContentSecurityPolicy;
 	assertion(
 		actual.size === Object.keys(expected).length,
@@ -252,7 +254,8 @@ async function verifySecurityHeaders() {
 	for (const [path, policyName] of [
 		["/", "standard"],
 		["/games/pond-paddlers/", "standard"],
-		["/python-ide/", "python-ide"]
+		["/ide/", "code-ide"],
+		["/python-ide/assets/manifest.json", "code-ide"]
 	]) {
 		const response = await request(path);
 		assertion(response.ok, `${path} returned HTTP ${response.status}`);
@@ -263,7 +266,9 @@ async function verifySecurityHeaders() {
 async function verifyPublicRoutes() {
 	for (const path of [
 		"/",
+		"/ide",
 		"/python-ide",
+		"/bluej",
 		"/games",
 		"/games/pond-paddlers",
 		"/games/crosswalk-critters",
@@ -275,8 +280,22 @@ async function verifyPublicRoutes() {
 	}
 
 	for (const [alias, canonical] of [
-		["/python-ide?course=python-1", "/python-ide/?course=python-1"],
-		["/python-ide.html?course=python-1", "/python-ide/?course=python-1"]
+		["/ide?course=python-1", "/ide/?course=python-1"],
+		["/ide.html?course=python-1", "/ide/?course=python-1"],
+		["/python-ide?course=python-1", "/ide/?course=python-1"],
+		["/python-ide.html?course=python-1", "/ide/?course=python-1"],
+		["/python-ide/?course=python-1", "/ide/?course=python-1"],
+		["/bluej", "/ide/?mode=bluej"],
+		["/bluej.html", "/ide/?mode=bluej"],
+		["/bluej/", "/ide/?mode=bluej"],
+		[
+			"/bluej?course=python-1",
+			"/ide/?mode=bluej&course=python-1"
+		],
+		[
+			"/bluej?mode=java&course=python-1",
+			"/ide/?mode=java&course=python-1"
+		]
 	]) {
 		const response = await request(alias, { redirect: "manual" });
 		assertion(

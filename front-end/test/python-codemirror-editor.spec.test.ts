@@ -30,7 +30,7 @@ function completionMatchBefore(doc: string, pos: number, expression: RegExp) {
 	};
 }
 
-describe("python IDE CodeMirror editor", () => {
+describe("IDE CodeMirror editor", () => {
 	it("does not eager-import IDE feature modules through the app plugin loader", () => {
 		const mainSource = sourceFile("../src/main.ts");
 
@@ -45,14 +45,22 @@ describe("python IDE CodeMirror editor", () => {
 	});
 
 	it("keeps the route page as a lightweight async workspace wrapper", () => {
-		const routeSource = sourceFile("../src/pages/python-ide.vue");
+		const routeSource = sourceFile("../src/pages/ide.vue");
+		const legacyRouteSource = sourceFile("../src/pages/python-ide.vue");
 
 		expect(routeSource).toContain("defineAsyncComponent");
 		expect(routeSource).toContain(
-			'() => import("@/components/PythonIdeWorkspace.vue")'
+			'() => import("@/components/CodeIdeWorkspace.vue")'
 		);
 		expect(routeSource).not.toContain("new EditorView");
 		expect(routeSource).not.toContain("loadPythonIdeRuntime");
+		expect(legacyRouteSource).toContain(
+			'() => import("@/components/CodeIdeWorkspace.vue")'
+		);
+		expect(legacyRouteSource).toContain("router.replace({");
+		expect(legacyRouteSource).toContain('path: "/ide"');
+		expect(legacyRouteSource).toContain("hash: route.hash");
+		expect(legacyRouteSource).toContain("query: route.query");
 	});
 
 	it("does not force CodeMirror through a fragile manual editor chunk", () => {
@@ -67,7 +75,7 @@ describe("python IDE CodeMirror editor", () => {
 
 	it("does not import the heavy Pyodide runtime before running code", () => {
 		const pageSource = sourceFile(
-			"../src/components/PythonIdeWorkspace.vue"
+			"../src/components/CodeIdeWorkspace.vue"
 		);
 		const runtimeSource = sourceFile("../src/modules/pythonIdeRuntime.ts");
 		const hintSource = sourceFile(
@@ -100,7 +108,7 @@ describe("python IDE CodeMirror editor", () => {
 
 	it("mounts CodeMirror instead of the old textarea highlight overlay", () => {
 		const pageSource = sourceFile(
-			"../src/components/PythonIdeWorkspace.vue"
+			"../src/components/CodeIdeWorkspace.vue"
 		);
 
 		expect(pageSource).toContain("createPythonCodeMirrorExtensions");
@@ -114,7 +122,7 @@ describe("python IDE CodeMirror editor", () => {
 
 	it("preserves CodeMirror state, cursor, scroll, and history per IDE file", () => {
 		const pageSource = sourceFile(
-			"../src/components/PythonIdeWorkspace.vue"
+			"../src/components/CodeIdeWorkspace.vue"
 		);
 		const resetStart = pageSource.indexOf("async function resetCodeEditor");
 		const resetSource = pageSource.slice(
@@ -160,13 +168,14 @@ describe("python IDE CodeMirror editor", () => {
 	it("enables Python parsing and typical IDE editing behavior", () => {
 		const editorSource = sourceFile("../src/modules/pythonCodeMirror.ts");
 		const pageSource = sourceFile(
-			"../src/components/PythonIdeWorkspace.vue"
+			"../src/components/CodeIdeWorkspace.vue"
 		);
 
 		expect(editorSource).toContain("pythonEditorBaseSetup");
 		expect(editorSource).toContain("lineNumbers()");
 		expect(editorSource).toContain("history()");
-		expect(editorSource).toContain("autocompletion()");
+		expect(editorSource).toContain("autocompletion({");
+		expect(editorSource).toContain("activateOnTyping: recommendationsEnabled");
 		expect(editorSource).toContain("snippetCompletion");
 		expect(editorSource).toContain("highlightSelectionMatches()");
 		expect(editorSource).not.toContain('from "codemirror"');
@@ -223,23 +232,27 @@ describe("python IDE CodeMirror editor", () => {
 		expect(state.tabSize).toBe(4);
 	});
 
-	it("surfaces only the essential editor shortcuts in the IDE chrome", () => {
+	it("surfaces the complete editor shortcut help in the IDE chrome", () => {
 		const pageSource = sourceFile(
-			"../src/components/PythonIdeWorkspace.vue"
+			"../src/components/CodeIdeWorkspace.vue"
 		);
 
 		expect(pageSource).toContain('class="editor-shortcuts"');
-		expect(pageSource).toContain("Cmd/Ctrl+Enter: Run");
-		expect(pageSource).toContain("Cmd/Ctrl+S: Save");
-		expect(pageSource).toContain("Cmd/Ctrl+F: Find");
-		expect(pageSource).toContain("Tab / Shift+Tab: Indent / outdent");
-		expect(pageSource).not.toContain("Course snippets include");
-		expect(pageSource).not.toContain("rectangular selection");
+		expect(pageSource).toContain("Cmd/Ctrl+Enter runs the project.");
+		expect(pageSource).toContain("Cmd/Ctrl+S saves the project.");
+		expect(pageSource).toContain("Cmd/Ctrl+F opens search.");
+		expect(pageSource).toContain("Tab indents; Shift+Tab dedents.");
+		expect(pageSource).toContain("Course snippets include");
+		expect(pageSource).toContain("rectangular selection");
 	});
 
-	it("offers only the classroom project modes while keeping runtime completions", () => {
+	it("offers the complete IDE workspace and starter menus while keeping runtime completions", () => {
 		const pageSource = sourceFile(
-			"../src/components/PythonIdeWorkspace.vue"
+			"../src/components/CodeIdeWorkspace.vue"
+		);
+		const presetSource = pageSource.slice(
+			pageSource.indexOf("const codeIdeWorkspacePresetGroups"),
+			pageSource.indexOf("const codeIdeWorkspacePresets")
 		);
 		const toolbarSource =
 			pageSource.match(
@@ -252,11 +265,33 @@ describe("python IDE CodeMirror editor", () => {
 
 		expect(toolbarSource).not.toContain("<select");
 		expect(toolbarSource).not.toContain("selectedProject.mode");
-		expect(createMenuSource).toContain("createProjectFromMenu('python')");
-		expect(createMenuSource).not.toContain("createProjectFromMenu('data')");
-		expect(createMenuSource).not.toContain("Data / AI");
-		expect(createMenuSource).toContain("createProjectFromMenu('turtle')");
-		expect(createMenuSource).toContain("createProjectFromMenu('pgzero')");
+		for (const workspaceLabel of [
+			"Python",
+			"Python Turtle",
+			"PyGame Zero",
+			"Data / AI",
+			"Java",
+			"Karel Java",
+			"BlueJ Java"
+		]) {
+			expect(presetSource).toContain(`label: "${workspaceLabel}"`);
+		}
+		for (const starterLabel of [
+			"Import BlueJ ZIP",
+			"Python Level 1 Outline",
+			"PyGame Zero Outline",
+			"Java Outline",
+			"BlueJ Java Project",
+			"Karel Java Outline",
+			"Demo Python",
+			"Demo Python Turtle",
+			"Demo PyGame Zero",
+			"Demo Data / AI",
+			"Demo Java",
+			"Demo Karel Java"
+		]) {
+			expect(createMenuSource).toContain(starterLabel);
+		}
 
 		expect(
 			pythonIdeCompletionsForMode("pgzero").map(option => option.label)

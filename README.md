@@ -30,8 +30,8 @@ deliberately simplified downstream adaptation of
 
 ## Repository Layout
 
-- `front-end/` contains the Vue 3 and Vite SSG course site and browser-based
-  Python IDE plus the classroom games.
+- `front-end/` contains the Vue 3 and Vite SSG course site, browser-based IDE,
+  and classroom games.
 - `back-end/` contains the small Express and MongoDB service used for Julio's
   private account and optional student project sync.
 - `HEALTHCHECKS.md` documents service health and readiness endpoints.
@@ -39,7 +39,7 @@ deliberately simplified downstream adaptation of
 ## Access Model
 
 The five current courses are public at `/`, and the browser IDE is public at
-`/python-ide`. `/graph-sketcher`, the entire `/graph-sketcher/` namespace, and
+`/ide`. `/graph-sketcher`, the entire `/graph-sketcher/` namespace, and
 `/graph-sketcher.html` are retired CS routes and must return `404`; graphing is
 available only on `math.avasan.org`. Anonymous IDE projects stay in the browser
 unless a signed-in student explicitly imports them. A student first signs in
@@ -113,8 +113,8 @@ product decision.
 
 When explicitly enabled, the same privacy-limited aggregate service accepts
 anonymous counts from `cs.avasan.org` and `math.avasan.org`. Each request must
-use the fixed `cs` or `math` site ID and one supported event: CS course or
-Python IDE opens, or Math course or Graph Sketcher opens. Course events accept
+use the fixed `cs` or `math` site ID and one supported event: CS course or IDE
+opens, or Math course or Graph Sketcher opens. Course events accept
 only the corresponding public catalog IDs. The service rejects arbitrary
 fields and credentials and never receives usernames, access codes, project
 names, source code, graph contents, expressions, coordinates, referrers, or
@@ -291,7 +291,7 @@ that fallback is not permitted by the production Compose path. Inject the
 deployment identity without changing application secrets:
 
 ```bash
-export CS_RELEASE_VERSION=2.7.102
+export CS_RELEASE_VERSION=2.7.103
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 docker compose --env-file deploy/cs.env -f compose.production.yml build
 ```
@@ -306,7 +306,7 @@ To prepare a deployment:
 ```bash
 install -m 600 deploy/cs.env.example deploy/cs.env
 # Fill secrets, keep all optional features false until the privacy gate is met.
-export CS_RELEASE_VERSION=2.7.102
+export CS_RELEASE_VERSION=2.7.103
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 ./scripts/verify-deploy-env-permissions.sh
 docker compose --env-file deploy/cs.env -f compose.production.yml build
@@ -369,7 +369,7 @@ CS_SITE_ORIGIN=https://cs.avasan.org \
 
 The deployment must fail without recording success unless that command verifies
 the exact matching revision at `/release.json` and `/api/release`, `no-store`
-on both endpoints, the exact standard and Python-IDE-specific content security
+on both endpoints, the exact standard and IDE-specific content security
 policies, the remaining browser security headers, known anonymous routes, the
 relative `/admin` directory redirect, branded real-404 pages for `/login` and
 a synthetic unknown path, real 404 responses for the retired Graph Sketcher
@@ -386,17 +386,17 @@ uses a deliberately invalid event that proves the route is mounted without
 writing an aggregate.
 
 A content security policy belongs to the HTML document that received it; Vue
-route changes cannot replace that policy. Navigation into or out of the Python
-IDE therefore performs a full document load, while ordinary-site and same-IDE
-navigation remains client-side. Both `/python-ide` and the generated
-`/python-ide.html` alias redirect to `/python-ide/` with their query strings
-preserved so every IDE entry point receives the narrow IDE policy before its
-browser-local runtime starts.
+route changes cannot replace that policy. Navigation into or out of the IDE
+therefore performs a full document load, while ordinary-site and same-IDE
+navigation remains client-side. `/ide` is canonical; `/python-ide` and
+`/bluej`, including their generated HTML aliases, redirect to `/ide/` with
+their query strings preserved so every IDE entry point receives the narrow IDE
+policy before its browser-local runtime starts.
 
 The manual **Verify production deployment** GitHub workflow exposes matching
 boolean inputs, runs the same gate from an independent external runner, and
 should follow each production promotion. Also run `git diff --check`. The
-frontend build packages the reviewed Python IDE asset manifest; the backend
+frontend build packages the reviewed IDE asset manifest; the backend
 does not stream an upstream asset archive at runtime.
 
 If the external gate reports a security-header or public-route failure while
@@ -405,7 +405,7 @@ the public edge before changing application code:
 
 ```bash
 curl --silent --show-error --head http://127.0.0.1:8080/
-curl --silent --show-error --head http://127.0.0.1:8080/python-ide/
+curl --silent --show-error --head http://127.0.0.1:8080/ide/
 curl --silent --show-error --head http://127.0.0.1:8080/admin
 curl --silent --show-error --include http://127.0.0.1:8080/login
 ```

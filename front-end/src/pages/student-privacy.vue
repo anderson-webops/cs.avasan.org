@@ -21,8 +21,8 @@ const accountRetentionDays = studentRecordRetentionDays();
 			<p>
 				This classroom uses only the information needed to teach and to
 				operate the features students choose to use. Optional accounts
-				can sync Python work; Math's Graph Sketcher work stays in the
-				student's current browser tab.
+				can sync Python-family IDE work; Math's Graph Sketcher work
+				stays in the student's current browser tab.
 			</p>
 		</header>
 
@@ -31,12 +31,12 @@ const accountRetentionDays = studentRecordRetentionDays();
 			<p>
 				When school-authorized classroom counts are enabled, the CS and
 				Math sites may count a course opening once per selected course,
-				a Python IDE opening on the CS site, and a Graph Sketcher
-				opening on the Math site, once per browser tab each day. These
-				are anonymous daily totals. They logically expire and are
-				excluded from reports after the approved 7-to-90-day period.
-				Database cleanup is asynchronous, so physical removal may happen
-				briefly later.
+				an IDE opening on the CS site, and a Graph Sketcher opening on
+				the Math site, once per browser tab each day. These are
+				anonymous daily totals. They logically expire and are excluded
+				from reports after the approved 7-to-90-day period. Database
+				cleanup is asynchronous, so physical removal may happen briefly
+				later.
 			</p>
 			<p>
 				These counts do not include a username, account or access code,
@@ -114,19 +114,20 @@ const accountRetentionDays = studentRecordRetentionDays();
 		</section>
 
 		<section class="site-surface privacy-page__section">
-			<h2>Python work saved in a shared browser</h2>
+			<h2>IDE work saved in a shared browser</h2>
 			<p>
-				Without an account, the Python IDE saves projects and editor
-				state in browser storage on that computer. Anyone who later uses
-				the same browser profile could otherwise see or change work left
-				there.
+				Without an account, the IDE saves projects and editor state in
+				browser storage on that computer. Anyone who later uses the same
+				browser profile could otherwise see or change work left there.
 			</p>
 			<p>
 				On a shared computer, download anything that should be kept and
 				follow Julio’s instructions for ending the browser session
-				before the next student begins. Close every Python IDE tab when
-				finished. Projects already saved to a signed-in account are not
-				part of the browser-local workspace.
+				before the next student begins. Close every IDE tab when
+				finished. Python-family projects already saved to a signed-in
+				account are not part of the browser-local workspace. Java,
+				Karel, and BlueJ projects always remain in browser storage
+				unless a student downloads them.
 			</p>
 		</section>
 
@@ -135,10 +136,10 @@ const accountRetentionDays = studentRecordRetentionDays();
 			<p>
 				Courses and browser saves work without an account. Julio may
 				create an optional account with a username and no email, so a
-				student can save Python projects across devices. The username
-				must be a school-approved alias, not a full name, birthdate,
-				student number, or other direct identifier; any roster mapping
-				stays in the school’s approved system.
+				student can save Python-family projects across devices. The
+				username must be a school-approved alias, not a full name,
+				birthdate, student number, or other direct identifier; any
+				roster mapping stays in the school’s approved system.
 			</p>
 			<p>
 				For signed-in students, the classroom keeps the username, login
@@ -357,7 +358,7 @@ const accountRetentionDays = studentRecordRetentionDays();
 					</dd>
 				</div>
 				<div>
-					<dt>Browser-local Math Graph and anonymous Python work</dt>
+					<dt>Browser-local Math Graph and anonymous IDE work</dt>
 					<dd>
 						Kept in that browser only so a reload does not lose
 						work; remains until the student clears it, the browser
@@ -420,7 +421,7 @@ const accountRetentionDays = studentRecordRetentionDays();
 				access, or permanently delete the complete account record. A
 				parent or guardian may refuse further account collection or use
 				by asking the school to disable and delete the optional account;
-				the student can still use public courses, browser-local Python
+				the student can still use public courses, browser-local IDE
 				saves, and Math's Graph Sketcher without signing in.
 			</p>
 			<p v-if="schoolPrivacyContact" class="privacy-page__contact">

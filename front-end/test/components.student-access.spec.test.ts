@@ -242,7 +242,7 @@ describe("StudentAccess", () => {
 		window.history.replaceState(
 			{},
 			"",
-			"/python-ide?studentOAuthStatus=success&tab=files"
+			"/ide?studentOAuthStatus=success&tab=files"
 		);
 		vi.mocked(fetchStudentSession).mockResolvedValueOnce({
 			student,
@@ -255,7 +255,7 @@ describe("StudentAccess", () => {
 		expect(fetchStudentSession).toHaveBeenCalledOnce();
 		expect(app.currentUser?._id).toBe(student._id);
 		expect(app.studentRequiresPasswordSetup).toBe(false);
-		expect(window.location.pathname).toBe("/python-ide");
+		expect(window.location.pathname).toBe("/ide");
 		expect(window.location.search).toBe("?tab=files");
 		expect(wrapper.text()).toContain("maria-7");
 	});

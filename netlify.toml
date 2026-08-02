@@ -20,14 +20,50 @@ status = 404
 force = true
 
 [[redirects]]
+from = "/ide"
+to = "/ide/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/ide.html"
+to = "/ide/"
+status = 301
+force = true
+
+[[redirects]]
 from = "/python-ide"
-to = "/python-ide/"
+to = "/ide/"
 status = 301
 force = true
 
 [[redirects]]
 from = "/python-ide.html"
-to = "/python-ide/"
+to = "/ide/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/python-ide/"
+to = "/ide/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/bluej"
+to = "/ide/?mode=bluej"
+status = 301
+force = true
+
+[[redirects]]
+from = "/bluej.html"
+to = "/ide/?mode=bluej"
+status = 301
+force = true
+
+[[redirects]]
+from = "/bluej/"
+to = "/ide/?mode=bluej"
 status = 301
 force = true
 
@@ -72,10 +108,16 @@ Permissions-Policy = "camera=(), geolocation=(), microphone=()"
 X-Frame-Options = "DENY"
 
 [[headers]]
-for = "/python-ide/*"
+for = "/ide/*"
 
 [headers.values]
-Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: blob:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://cdn.jsdelivr.net https://cdn.plot.ly; connect-src 'self' https://cdn.jsdelivr.net https://pypi.org https://files.pythonhosted.org; frame-src 'self'; media-src 'self' data: blob:; worker-src 'self' blob:; manifest-src 'self'"
+Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: blob:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://cdn.jsdelivr.net https://cdn.plot.ly; connect-src 'self' https://api.github.com https://raw.githubusercontent.com https://cdn.jsdelivr.net https://pypi.org https://files.pythonhosted.org; frame-src 'self'; media-src 'self' data: blob:; worker-src 'self' blob:; manifest-src 'self'"
+
+[[headers]]
+for = "/python-ide/assets/*"
+
+[headers.values]
+Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: blob:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://cdn.jsdelivr.net https://cdn.plot.ly; connect-src 'self' https://api.github.com https://raw.githubusercontent.com https://cdn.jsdelivr.net https://pypi.org https://files.pythonhosted.org; frame-src 'self'; media-src 'self' data: blob:; worker-src 'self' blob:; manifest-src 'self'"
 
 [[headers]]
 for = "/site.webmanifest"

@@ -12,7 +12,10 @@ onBeforeMount(() => {
 	router.replace({
 		hash: route.hash,
 		path: "/ide",
-		query: route.query
+		query: {
+			...route.query,
+			mode: route.query.mode ?? "bluej"
+		}
 	});
 });
 </script>

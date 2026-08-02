@@ -34,9 +34,9 @@ context("Public classroom navigation", () => {
 		cy.url().should("eq", `${Cypress.config().baseUrl}/`);
 		cy.contains("h1", "Courses").should("be.visible");
 
-		cy.get(".site-nav").contains("a:visible", "Python IDE").click();
-		cy.location("pathname").should("match", /^\/python-ide\/?$/);
-		cy.contains("h1", "Python IDE").should("be.visible");
+		cy.get(".site-nav").contains("a:visible", "IDE").click();
+		cy.location("pathname").should("match", /^\/ide\/?$/);
+		cy.contains("h1", "IDE").should("be.visible");
 		cy.contains("Using a shared computer?").should("not.exist");
 		cy.contains(
 			"button",
@@ -58,6 +58,62 @@ context("Public classroom navigation", () => {
 		cy.get(".site-nav").should("not.contain", "Graphing");
 		cy.get(".site-nav").should("not.contain", "About");
 		cy.get(".site-nav").should("not.contain", "Home");
+	});
+
+	it("offers the complete IDE workspace and starter library", () => {
+		cy.visit("/ide");
+		cy.get(".workspace-type-control select option").then(options => {
+			expect(
+				[...options].map(option => option.textContent?.trim())
+			).to.deep.equal([
+				"Python",
+				"Python Turtle",
+				"PyGame Zero",
+				"Data / AI",
+				"Java",
+				"Karel Java",
+				"BlueJ Java"
+			]);
+		});
+
+		cy.get('button[aria-label="More project options"]').click();
+		cy.get(".project-create-menu button").then(buttons => {
+			expect(
+				[...buttons].map(button => button.textContent?.trim())
+			).to.deep.equal([
+				"Import BlueJ ZIP",
+				"Color Circle Art",
+				"Picasso Keyboard Painter",
+				"Triangle Motion Starter",
+				"Neon Trail Painter",
+				"Firework Festival",
+				"Spiral Galaxy",
+				"Turtle Race Day",
+				"Flower Garden Clicker",
+				"Maze Explorer",
+				"Classroom Turtle Studio",
+				"Python Level 1 Outline",
+				"PyGame Zero Outline",
+				"Java Outline",
+				"BlueJ Java Project",
+				"Karel Java Outline",
+				"Demo Python",
+				"Demo Python Turtle",
+				"Demo PyGame Zero",
+				"Demo Data / AI",
+				"Demo Java",
+				"Demo Karel Java"
+			]);
+		});
+	});
+
+	it("opens a directly linked Data / AI demo in its requested workspace", () => {
+		cy.visit("/ide/?mode=data&template=demo");
+		cy.get(".workspace-type-control select").should("have.value", "data");
+		cy.get(".project-button.is-active").should(
+			"contain.text",
+			"Data / AI Notebook"
+		);
 	});
 
 	it("publishes only Scratch, Python 1-2, and PyGames", () => {

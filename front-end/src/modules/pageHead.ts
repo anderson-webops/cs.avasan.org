@@ -9,7 +9,12 @@ export const NOINDEX_ROBOTS = "noindex,nofollow";
 const ROUTE_TITLES = new Map([
 	["/", SITE_TITLE],
 	["/course-resource", "Course Resource"],
-	["/python-ide", "Python IDE"],
+	["/bluej", "IDE"],
+	["/bluej.html", "IDE"],
+	["/ide", "IDE"],
+	["/ide.html", "IDE"],
+	["/python-ide", "IDE"],
+	["/python-ide.html", "IDE"],
 	["/games", "Games"],
 	["/games/pond-paddlers", "Pond Paddlers"],
 	["/games/crosswalk-critters", "Crosswalk Critters"],

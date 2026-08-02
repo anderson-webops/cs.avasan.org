@@ -17,6 +17,7 @@ import {
 	historyKeymap,
 	indentWithTab
 } from "@codemirror/commands";
+import { java, javaLanguage } from "@codemirror/lang-java";
 import { python, pythonLanguage } from "@codemirror/lang-python";
 import {
 	bracketMatching,
@@ -60,9 +61,11 @@ interface PythonCodeMirrorOptions {
 	onChange: (content: string) => void;
 	onCursorCountChange: (count: number) => void;
 	assetCompletions?: PythonCodeMirrorAssetCompletionProvider;
+	lineWrappingEnabled?: boolean;
 	mode?: PythonIdeMode;
 	onRun?: () => void;
 	onSave?: () => void;
+	recommendationsEnabled?: boolean;
 }
 
 interface PythonIdeCompletionContext {
@@ -114,18 +117,38 @@ const lineLeadingWhitespaceRegex = /^[\t ]*/;
 const pythonCompletionTokenRegex = /(?:[A-Z_]\w*\.){0,2}[A-Z_]\w*$/i;
 const pythonCompletionGlobalValidForRegex = /^[A-Z_]\w*$/i;
 const pythonCompletionMemberValidForRegex = /^\w*$/;
+const javaCompletionGlobalValidForRegex = /^[\w.]*$/;
+const javaCompletionMemberValidForRegex = /^\w*$/;
+const javaIdentifierRegex = /^[A-Z_]\w*$/i;
+const javaImportPackagePattern =
+	"(?:java\\.util(?:\\.(?:stream|function))?|java\\.io|java\\.awt|kareltherobot)";
+const javaImportCompletionRegex = new RegExp(
+	`import\\s+${javaImportPackagePattern}\\.\\w*$`,
+	"i"
+);
+const javaImportPackagePrefixRegex = new RegExp(
+	`^import\\s+(${javaImportPackagePattern}\\.)`,
+	"i"
+);
 const pythonAssetStringCompletionValidForRegex = /^[\w.-]*$/;
 const pythonTurtleShapeStringCompletionValidForRegex = /^[A-Z_]*$/i;
+const pythonTurtleColorStringCompletionValidForRegex = /^[A-Z_ ]*$/i;
+const karelColorStringCompletionValidForRegex = /^[A-Z_ ]*$/i;
 const pythonIdentifierRegex = /^[A-Z_]\w*$/i;
 const closingBrackets = new Set(Object.values(openingBracketToClosingBracket));
 const pythonCompletionBlockedNodeNames = new Set([
+	"BlockComment",
+	"CharacterLiteral",
 	"Comment",
 	"FormatString",
-	"String"
+	"LineComment",
+	"String",
+	"StringLiteral",
+	"TextBlock"
 ]);
-const pythonBracketPairIgnoredNodeNames = new Set(
-	pythonCompletionBlockedNodeNames
-);
+const pythonBracketPairIgnoredNodeNames = new Set([
+	...pythonCompletionBlockedNodeNames
+]);
 const pgzeroAssetStringCompletionPatterns: Array<{
 	folder: PythonIdeAssetCompletionFolder;
 	pattern: RegExp;
@@ -141,6 +164,18 @@ const pgzeroAssetStringCompletionPatterns: Array<{
 ];
 const turtleShapeStringCompletionPattern =
 	/\b(?:shape|[A-Z_]\w*\.shape)\s*\(\s*["']([^"'\n]*)$/i;
+const turtleColorStringCompletionPattern = new RegExp(
+	String.raw`\b(?:bgcolor|pencolor|fillcolor|color|dot|` +
+		String.raw`[A-Z_]\w*\.(?:bgcolor|pencolor|fillcolor|color|dot))` +
+		String.raw`\s*\((?:[^"'\n]|["'][^"'\n]*["'])*["']([^"'\n]*)$`,
+	"i"
+);
+const karelColorStringCompletionPattern = new RegExp(
+	String.raw`\b(?:[A-Z_]\w*\.)?` +
+		String.raw`(?:paint|paintCorner|colorIs|colorIsNot|` +
+		String.raw`cornerColorIs|cornerColorIsNot)\s*\(\s*["']([^"'\n]*)$`,
+	"i"
+);
 const turtleShapeCompletions = [
 	"classic",
 	"arrow",
@@ -151,6 +186,169 @@ const turtleShapeCompletions = [
 	"triangle",
 	"fancy"
 ].map(shape => completion(shape, "constant", "Turtle shape", 80));
+const trinketTurtleColorNames = [
+	"white",
+	"white smoke",
+	"gainsboro",
+	"light gray",
+	"silver",
+	"dark gray",
+	"gray",
+	"dim gray",
+	"black",
+	"light slate gray",
+	"slate gray",
+	"alice blue",
+	"light steel blue",
+	"cornflower blue",
+	"royal blue",
+	"blue",
+	"medium blue",
+	"navy",
+	"dark blue",
+	"midnight blue",
+	"light blue",
+	"deep sky blue",
+	"dodger blue",
+	"powder blue",
+	"sky blue",
+	"light sky blue",
+	"steel blue",
+	"azure",
+	"light cyan",
+	"cyan",
+	"pale turquoise",
+	"dark turquoise",
+	"turquoise",
+	"medium turquoise",
+	"light sea green",
+	"cadet blue",
+	"dark cyan",
+	"teal",
+	"dark slate gray",
+	"mint cream",
+	"aquamarine",
+	"medium aquamarine",
+	"dark sea green",
+	"medium sea green",
+	"sea green",
+	"honeydew",
+	"pale green",
+	"light green",
+	"medium spring green",
+	"spring green",
+	"lime green",
+	"green",
+	"forest green",
+	"dark green",
+	"green yellow",
+	"chartreuse",
+	"lawn green",
+	"lime",
+	"yellow green",
+	"olive drab",
+	"beige",
+	"dark khaki",
+	"olive",
+	"dark olive green",
+	"pale goldenrod",
+	"khaki",
+	"ivory",
+	"light yellow",
+	"light goldenrod yellow",
+	"cornsilk",
+	"lemon chiffon",
+	"yellow",
+	"gold",
+	"goldenrod",
+	"dark goldenrod",
+	"wheat",
+	"tan",
+	"burlywood",
+	"peru",
+	"sienna",
+	"saddle brown",
+	"floral white",
+	"old lace",
+	"navajo white",
+	"moccasin",
+	"sandy brown",
+	"orange",
+	"dark orange",
+	"chocolate",
+	"firebrick",
+	"brown",
+	"dark red",
+	"maroon",
+	"antique white",
+	"papaya whip",
+	"blanched almond",
+	"bisque",
+	"peach puff",
+	"light salmon",
+	"coral",
+	"tomato",
+	"orange red",
+	"red",
+	"crimson",
+	"dark salmon",
+	"salmon",
+	"light coral",
+	"indian red",
+	"rosy brown",
+	"linen",
+	"seashell",
+	"misty rose",
+	"pink",
+	"light pink",
+	"hot pink",
+	"deep pink",
+	"snow",
+	"lavender blush",
+	"pale violet red",
+	"violet red",
+	"medium violet red",
+	"purple",
+	"dark magenta",
+	"violet",
+	"magenta",
+	"thistle",
+	"plum",
+	"orchid",
+	"medium orchid",
+	"dark orchid",
+	"dark violet",
+	"blue violet",
+	"medium purple",
+	"rebecca purple",
+	"indigo",
+	"ghost white",
+	"lavender",
+	"light slate blue",
+	"medium slate blue",
+	"slate blue",
+	"dark slate blue"
+];
+const turtleColorCompletions = trinketTurtleColorNames.map(color =>
+	completion(color, "constant", "Turtle color", 75)
+);
+const karelColorStringCompletions = [
+	"black",
+	"blue",
+	"cyan",
+	"dark gray",
+	"gray",
+	"green",
+	"light gray",
+	"magenta",
+	"orange",
+	"pink",
+	"purple",
+	"red",
+	"white",
+	"yellow",
+	"random()"
+].map(color => completion(color, "constant", "Karel color", 75));
 const bracketPairDecorations = [
 	bracketDecorationForIndex(0),
 	bracketDecorationForIndex(1),
@@ -617,6 +815,8 @@ const pythonEditorNativeSelectionStyle = {
 	backgroundColor: "var(--python-code-selection) !important",
 	color: "var(--python-code-selection-ink) !important"
 };
+const javaSyntaxErrorMessage =
+	"Java syntax error. Check this line before running the project.";
 const pythonSyntaxErrorMessage =
 	"Python syntax error. Check this line before running the project.";
 const pythonRuntimeErrorSource = "Python runtime";
@@ -760,6 +960,26 @@ export function pythonSyntaxDiagnostics(state: EditorState): Diagnostic[] {
 			),
 			severity: "error",
 			message: pythonSyntaxErrorMessage
+		});
+	} while (cursor.next());
+
+	return diagnostics;
+}
+
+export function javaSyntaxDiagnostics(state: EditorState): Diagnostic[] {
+	const diagnostics: Diagnostic[] = [];
+	const cursor = syntaxTree(state).cursor();
+
+	do {
+		if (!cursor.type.isError) continue;
+		diagnostics.push({
+			from: cursor.from,
+			to: Math.max(
+				cursor.to,
+				Math.min(cursor.from + 1, state.doc.length)
+			),
+			severity: "error",
+			message: javaSyntaxErrorMessage
 		});
 	} while (cursor.next());
 
@@ -1138,6 +1358,14 @@ function memberCompletionMapForMode(mode: PythonIdeMode = "python") {
 	return sharedMemberCompletions;
 }
 
+function isPythonCodeMirrorMode(mode: PythonIdeMode = "python") {
+	return mode !== "java" && mode !== "karel";
+}
+
+function isJavaCodeMirrorMode(mode: PythonIdeMode = "python") {
+	return mode === "java" || mode === "karel";
+}
+
 export function pythonIdeCompletionsForMode(
 	mode: PythonIdeMode = "python",
 	receiver?: string,
@@ -1280,6 +1508,1214 @@ export function pythonIdeCompletionSource(
 	};
 }
 
+const javaKeywordCompletions = [
+	"abstract",
+	"assert",
+	"break",
+	"case",
+	"catch",
+	"class",
+	"continue",
+	"default",
+	"do",
+	"else",
+	"enum",
+	"extends",
+	"false",
+	"final",
+	"finally",
+	"for",
+	"if",
+	"implements",
+	"import",
+	"instanceof",
+	"interface",
+	"new",
+	"null",
+	"private",
+	"protected",
+	"public",
+	"return",
+	"static",
+	"super",
+	"switch",
+	"this",
+	"throw",
+	"throws",
+	"true",
+	"try",
+	"void",
+	"while",
+	"boolean",
+	"char",
+	"double",
+	"float",
+	"int",
+	"long",
+	"String",
+	"Integer",
+	"Double",
+	"Boolean",
+	"main",
+	"Scanner",
+	"Arrays",
+	"Collections",
+	"ArrayList",
+	"List",
+	"Set",
+	"Random",
+	"HashSet",
+	"TreeSet",
+	"Queue",
+	"PriorityQueue",
+	"HashMap",
+	"TreeMap",
+	"Map",
+	"Map.Entry",
+	"Stream",
+	"Collectors",
+	"Predicate",
+	"Function",
+	"Consumer",
+	"Supplier",
+	"Comparable",
+	"Comparator",
+	"Override",
+	"record",
+	"File",
+	"FileReader",
+	"FileWriter",
+	"BufferedReader",
+	"PrintWriter",
+	"Optional",
+	"Exception",
+	"RuntimeException",
+	"IllegalArgumentException",
+	"IOException",
+	"FileNotFoundException",
+	"Math",
+	"import java.util.Arrays",
+	"import java.util.Collections",
+	"import java.util.ArrayList",
+	"import java.util.List",
+	"import java.util.Set",
+	"import java.util.Random",
+	"import java.util.HashSet",
+	"import java.util.TreeSet",
+	"import java.util.Queue",
+	"import java.util.PriorityQueue",
+	"import java.util.HashMap",
+	"import java.util.TreeMap",
+	"import java.util.Map",
+	"import java.util.Optional",
+	"import java.util.Comparator",
+	"import java.util.stream.Stream",
+	"import java.util.stream.Collectors",
+	"import java.util.function.Predicate",
+	"import java.util.function.Function",
+	"import java.util.function.Consumer",
+	"import java.util.function.Supplier",
+	"import java.awt.Color",
+	"import java.io.BufferedReader",
+	"import java.io.File",
+	"import java.io.FileReader",
+	"import java.io.FileWriter",
+	"import java.io.IOException",
+	"import java.io.FileNotFoundException",
+	"import java.io.PrintWriter",
+	"System.out.print",
+	"System.out.println"
+].map(label => completion(label, "keyword", "Java", 70));
+
+const javaMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
+	Math: [
+		completion("PI", "constant", "circle constant", 78),
+		completion("E", "constant", "Euler's number", 76),
+		completion("abs", "method", "absolute value", 70),
+		completion("ceil", "method", "round up", 70),
+		completion("floor", "method", "round down", 70),
+		completion("max", "method", "larger value", 70),
+		completion("min", "method", "smaller value", 70),
+		completion("pow", "method", "power", 70),
+		completion("random", "method", "random double from 0 to 1", 75),
+		completion("round", "method", "nearest integer", 70),
+		completion("sqrt", "method", "square root", 70)
+	],
+	Arrays: [
+		completion("toString", "method", "array string representation", 85),
+		completion(
+			"deepToString",
+			"method",
+			"nested array string representation",
+			84
+		),
+		completion("sort", "method", "sort an array", 70),
+		completion("copyOf", "method", "copy an array", 65)
+	],
+	Collections: [
+		completion("sort", "method", "sort a List", 78),
+		completion("reverse", "method", "reverse a List", 70),
+		completion("shuffle", "method", "shuffle a List", 68),
+		completion("min", "method", "smallest collection item", 66),
+		completion("max", "method", "largest collection item", 66),
+		completion("frequency", "method", "count matching items", 64),
+		completion("reverseOrder", "method", "reverse comparator", 64)
+	],
+	Optional: [
+		completion("of", "method", "create a present Optional", 76),
+		completion(
+			"ofNullable",
+			"method",
+			"create an Optional that may be empty",
+			76
+		),
+		completion("empty", "method", "create an empty Optional", 72)
+	],
+	Comparator: [
+		completion("comparing", "method", "compare by extracted key", 78),
+		completion("comparingInt", "method", "compare by int key", 76),
+		completion("comparingDouble", "method", "compare by double key", 74),
+		completion("naturalOrder", "method", "natural ordering", 70),
+		completion("reverseOrder", "method", "reverse ordering", 70)
+	],
+	Stream: [
+		completion("of", "method", "create a stream from values", 76),
+		completion("empty", "method", "create an empty stream", 72),
+		completion("generate", "method", "create a generated stream", 68),
+		completion("iterate", "method", "create an iterative stream", 68)
+	],
+	Collectors: [
+		completion("toList", "method", "collect into a List", 78),
+		completion("toSet", "method", "collect into a Set", 76),
+		completion("joining", "method", "join strings", 74),
+		completion("groupingBy", "method", "group items by key", 72),
+		completion("counting", "method", "count grouped items", 70),
+		completion("mapping", "method", "map before collecting", 68)
+	],
+	"System.out": [
+		completion("print", "method", "print without newline", 90),
+		completion("println", "method", "print with newline", 95),
+		completion("printf", "method", "formatted print", 70),
+		completion("format", "method", "formatted print", 68)
+	],
+	String: [completion("format", "method", "formatted string", 72)]
+};
+
+const javaRandomMemberCompletions = [
+	completion("nextInt", "method", "random int, optionally bounded", 78),
+	completion("nextDouble", "method", "random double from 0 to 1", 76),
+	completion("nextBoolean", "method", "random boolean", 74),
+	completion("nextLong", "method", "random long", 70),
+	completion("nextFloat", "method", "random float from 0 to 1", 68),
+	completion("setSeed", "method", "reset the random sequence", 64)
+];
+
+const javaScannerMemberCompletions = [
+	completion("next", "method", "read the next Scanner token", 78),
+	completion("nextLine", "method", "read the current Scanner line", 78),
+	completion("nextInt", "method", "read the next Scanner int", 78),
+	completion("nextDouble", "method", "read the next Scanner double", 78),
+	completion("nextBoolean", "method", "read the next Scanner boolean", 78),
+	completion("hasNext", "method", "whether Scanner has another token", 74),
+	completion("hasNextLine", "method", "whether Scanner has another line", 74),
+	completion("hasNextInt", "method", "whether Scanner has an int token", 74),
+	completion(
+		"hasNextDouble",
+		"method",
+		"whether Scanner has a double token",
+		74
+	),
+	completion(
+		"hasNextBoolean",
+		"method",
+		"whether Scanner has a boolean token",
+		74
+	)
+];
+
+const javaStringInstanceMemberCompletions = [
+	completion("length", "method", "string length", 78),
+	completion("charAt", "method", "character at an index", 78),
+	completion("substring", "method", "string slice", 78),
+	completion("equals", "method", "string equality", 78),
+	completion("equalsIgnoreCase", "method", "case-insensitive equality", 76),
+	completion("compareTo", "method", "string ordering", 76),
+	completion("indexOf", "method", "find text position", 74),
+	completion("toLowerCase", "method", "lowercase string", 72),
+	completion("toUpperCase", "method", "uppercase string", 72),
+	completion("trim", "method", "remove outside spaces", 70)
+];
+
+const javaArrayMemberCompletions = [
+	completion("length", "property", "array length", 78),
+	completion("clone", "method", "copy the array", 64)
+];
+
+const javaCollectionMemberCompletions = [
+	completion("add", "method", "append or insert an item", 78),
+	completion("remove", "method", "remove an item", 76),
+	completion("contains", "method", "whether an item is present", 76),
+	completion("containsAll", "method", "whether all items are present", 70),
+	completion(
+		"addAll",
+		"method",
+		"add every item from another collection",
+		70
+	),
+	completion("removeAll", "method", "remove matching collection items", 68),
+	completion("retainAll", "method", "keep matching collection items", 68),
+	completion("clear", "method", "remove all items", 70),
+	completion("iterator", "method", "collection iterator", 66),
+	completion("toArray", "method", "copy items into an array", 66),
+	completion("stream", "method", "create a Stream view", 68),
+	completion("size", "method", "item count", 76),
+	completion("isEmpty", "method", "whether the collection is empty", 76)
+];
+
+const javaListMemberCompletions = [
+	completion("get", "method", "read an item by index", 82),
+	completion("set", "method", "replace an item by index", 80),
+	...javaCollectionMemberCompletions
+];
+
+const javaSetMemberCompletions = javaCollectionMemberCompletions;
+
+const javaQueueMemberCompletions = [
+	completion("offer", "method", "add a queue item", 82),
+	completion("poll", "method", "remove and return the next queue item", 82),
+	completion("peek", "method", "read the next queue item", 80),
+	completion("element", "method", "read the next queue item", 76),
+	...javaCollectionMemberCompletions
+];
+
+const javaMapMemberCompletions = [
+	completion("put", "method", "add or replace a map value", 82),
+	completion("putIfAbsent", "method", "add a map value only if missing", 80),
+	completion("get", "method", "read a map value", 80),
+	completion("getOrDefault", "method", "read a value or fallback", 78),
+	completion("remove", "method", "remove a map key", 76),
+	completion("containsKey", "method", "whether the map has a key", 76),
+	completion("keySet", "method", "all map keys", 74),
+	completion("values", "method", "all map values", 74),
+	completion("entrySet", "method", "all map entries", 74),
+	completion("clear", "method", "remove all map entries", 70),
+	completion("size", "method", "map entry count", 76),
+	completion("isEmpty", "method", "whether the map is empty", 76)
+];
+
+const javaMapEntryMemberCompletions = [
+	completion("getKey", "method", "map entry key", 82),
+	completion("getValue", "method", "map entry value", 82)
+];
+
+const javaOptionalMemberCompletions = [
+	completion("isPresent", "method", "whether a value is present", 82),
+	completion("isEmpty", "method", "whether no value is present", 80),
+	completion("orElse", "method", "fallback value", 78),
+	completion("orElseGet", "method", "fallback supplier", 76),
+	completion("map", "method", "transform a present value", 74),
+	completion("filter", "method", "keep a matching value", 72),
+	completion("ifPresent", "method", "run code for a present value", 72)
+];
+
+const javaStreamMemberCompletions = [
+	completion("filter", "method", "keep matching stream items", 82),
+	completion("map", "method", "transform stream items", 82),
+	completion("sorted", "method", "sort stream items", 78),
+	completion("collect", "method", "collect stream items", 78),
+	completion("toList", "method", "collect stream items into a List", 76),
+	completion("forEach", "method", "visit each stream item", 76),
+	completion("count", "method", "count stream items", 74),
+	completion("anyMatch", "method", "whether any item matches", 72),
+	completion("allMatch", "method", "whether every item matches", 72),
+	completion("noneMatch", "method", "whether no item matches", 70),
+	completion("findFirst", "method", "get the first stream item", 70),
+	completion("limit", "method", "keep a maximum number of items", 68)
+];
+
+const javaVariableMemberCompletions = [
+	completion("length", "property", "array or string length", 70),
+	completion("charAt", "method", "character at an index", 70),
+	completion("substring", "method", "string slice", 70),
+	completion("equals", "method", "string equality", 70),
+	completion("equalsIgnoreCase", "method", "case-insensitive equality", 70),
+	completion("compareTo", "method", "string ordering", 70),
+	completion("indexOf", "method", "find text position", 70),
+	completion("toLowerCase", "method", "lowercase string", 70),
+	completion("toUpperCase", "method", "uppercase string", 70),
+	completion("trim", "method", "remove outside spaces", 70),
+	completion("next", "method", "read the next Scanner token", 70),
+	completion("nextLine", "method", "read the current Scanner line", 70),
+	completion("nextInt", "method", "read the next Scanner int", 70),
+	completion("nextDouble", "method", "read the next Scanner double", 70),
+	completion("nextBoolean", "method", "read the next Scanner boolean", 70),
+	completion("hasNext", "method", "whether Scanner has another token", 70),
+	completion("hasNextLine", "method", "whether Scanner has another line", 70),
+	completion("hasNextInt", "method", "whether Scanner has an int token", 70),
+	completion(
+		"hasNextDouble",
+		"method",
+		"whether Scanner has a double token",
+		70
+	),
+	completion(
+		"hasNextBoolean",
+		"method",
+		"whether Scanner has a boolean token",
+		70
+	),
+	completion("add", "method", "append or insert an ArrayList item", 70),
+	completion("offer", "method", "add a queue item", 70),
+	completion("poll", "method", "remove and return the next queue item", 70),
+	completion("peek", "method", "read the next queue item", 70),
+	completion("element", "method", "read the next queue item", 68),
+	completion("get", "method", "read an ArrayList item or map value", 70),
+	completion("set", "method", "replace an ArrayList item", 70),
+	completion("put", "method", "add or replace a map value", 70),
+	completion("putIfAbsent", "method", "add a map value only if missing", 70),
+	completion("remove", "method", "remove a collection item or map key", 70),
+	completion("contains", "method", "whether the ArrayList has an item", 70),
+	completion("containsAll", "method", "whether all items are present", 66),
+	completion("containsKey", "method", "whether the map has a key", 70),
+	completion(
+		"addAll",
+		"method",
+		"add every item from another collection",
+		66
+	),
+	completion("removeAll", "method", "remove matching collection items", 66),
+	completion("retainAll", "method", "keep matching collection items", 66),
+	completion("stream", "method", "create a Stream view", 66),
+	completion("keySet", "method", "all map keys", 70),
+	completion("values", "method", "all map values", 70),
+	completion("entrySet", "method", "all map entries", 70),
+	completion("getOrDefault", "method", "read a value or fallback", 70),
+	completion("getKey", "method", "map entry key", 70),
+	completion("getValue", "method", "map entry value", 70),
+	completion("clear", "method", "remove all collection items", 70),
+	completion("iterator", "method", "collection iterator", 64),
+	completion("toArray", "method", "copy collection items into an array", 64),
+	completion("size", "method", "collection item count", 70),
+	completion("isEmpty", "method", "whether the collection is empty", 70),
+	...javaOptionalMemberCompletions,
+	...javaStreamMemberCompletions,
+	completion("compare", "method", "comparator comparison", 66),
+	completion("hashCode", "method", "hash code for maps and sets", 64),
+	completion("toString", "method", "readable object summary", 64)
+];
+
+const javaSnippetCompletions = [
+	pythonSnippet(
+		"main",
+		"Java main method",
+		snippetLines(
+			"public static void main(String[] args) {",
+			`    ${snippetField("body")}`,
+			"}",
+			snippetEnd
+		),
+		95
+	),
+	pythonSnippet(
+		"class_main",
+		"Java class with main",
+		snippetLines(
+			`public class ${snippetField("ClassName")} {`,
+			"    public static void main(String[] args) {",
+			`        ${snippetField("body")}`,
+			"    }",
+			"}",
+			snippetEnd
+		),
+		90
+	),
+	pythonSnippet(
+		"sout",
+		"System.out.println",
+		`System.out.println(${snippetField("value")});${snippetEnd}`,
+		90
+	),
+	pythonSnippet(
+		"scanner",
+		"Scanner setup",
+		snippetLines(
+			"Scanner input = new Scanner(System.in);",
+			`${snippetField("type")} ${snippetField("name")} = ` +
+				`input.next${snippetField("Method")}();`,
+			snippetEnd
+		),
+		75
+	),
+	pythonSnippet(
+		"fori",
+		"counting for loop",
+		snippetLines(
+			`for (int ${snippetField("i")} = 0; ` +
+				`${snippetField("i")} < ${snippetField("limit")}; ` +
+				`${snippetField("i")}++) {`,
+			`    ${snippetField("body")}`,
+			"}",
+			snippetEnd
+		),
+		80
+	),
+	pythonSnippet(
+		"foreach",
+		"enhanced for loop",
+		snippetLines(
+			`for (${snippetField("type")} ${snippetField("item")} : ${snippetField("collection")}) {`,
+			`    ${snippetField("body")}`,
+			"}",
+			snippetEnd
+		),
+		82
+	),
+	pythonSnippet(
+		"while",
+		"while loop",
+		snippetLines(
+			`while (${snippetField("condition")}) {`,
+			`    ${snippetField("body")}`,
+			"}",
+			snippetEnd
+		),
+		78
+	),
+	pythonSnippet(
+		"array",
+		"fixed-size array",
+		`${snippetField("type")}[] ${snippetField("name")} = new ${snippetField("type")}[${snippetField("size")}];${snippetEnd}`,
+		78
+	),
+	pythonSnippet(
+		"array_values",
+		"array with initial values",
+		`${snippetField("type")}[] ${snippetField("name")} = {${snippetField("values")}};${snippetEnd}`,
+		77
+	),
+	pythonSnippet(
+		"array2d",
+		"two-dimensional array",
+		`${snippetField("type")}[][] ${snippetField("name")} = new ${snippetField("type")}[${snippetField("rows")}][${snippetField("cols")}];${snippetEnd}`,
+		77
+	),
+	pythonSnippet(
+		"array2d_values",
+		"two-dimensional array with initial values",
+		`${snippetField("type")}[][] ${snippetField("name")} = {{${snippetField("row1")}}, {${snippetField("row2")}}};${snippetEnd}`,
+		76
+	),
+	pythonSnippet(
+		"arraylist",
+		"ArrayList declaration",
+		`ArrayList<${snippetField("Type")}> ${snippetField("name")} = new ArrayList<>();${snippetEnd}`,
+		77
+	),
+	pythonSnippet(
+		"random_generator",
+		"java.util.Random declaration",
+		`Random ${snippetField("random")} = new Random();${snippetEnd}`,
+		77
+	),
+	pythonSnippet(
+		"hashset",
+		"HashSet declaration",
+		`HashSet<${snippetField("Type")}> ${snippetField("name")} = new HashSet<>();${snippetEnd}`,
+		76
+	),
+	pythonSnippet(
+		"priority_queue",
+		"PriorityQueue declaration",
+		`PriorityQueue<${snippetField("Type")}> ${snippetField("name")} = new PriorityQueue<>();${snippetEnd}`,
+		76
+	),
+	pythonSnippet(
+		"hashmap",
+		"HashMap declaration",
+		`HashMap<${snippetField("KeyType")}, ${snippetField("ValueType")}> ${snippetField("name")} = new HashMap<>();${snippetEnd}`,
+		76
+	),
+	pythonSnippet(
+		"treemap",
+		"TreeMap declaration",
+		`TreeMap<${snippetField("KeyType")}, ${snippetField("ValueType")}> ${snippetField("name")} = new TreeMap<>();${snippetEnd}`,
+		75
+	),
+	pythonSnippet(
+		"array_to_string",
+		"Arrays.toString call",
+		`Arrays.toString(${snippetField("array")})${snippetEnd}`,
+		76
+	),
+	pythonSnippet(
+		"array_deep_to_string",
+		"Arrays.deepToString call",
+		`Arrays.deepToString(${snippetField("array")})${snippetEnd}`,
+		75
+	),
+	pythonSnippet(
+		"method",
+		"static helper method",
+		snippetLines(
+			`public static ${snippetField("returnType")} ${snippetField("methodName")}(${snippetField("parameters")}) {`,
+			`    ${snippetField("body")}`,
+			"}",
+			snippetEnd
+		),
+		75
+	),
+	pythonSnippet(
+		"constructor",
+		"constructor skeleton",
+		snippetLines(
+			`public ${snippetField("ClassName")}(${snippetField("parameters")}) {`,
+			`    ${snippetField("body")}`,
+			"}",
+			snippetEnd
+		),
+		74
+	),
+	pythonSnippet(
+		"getter",
+		"getter method",
+		snippetLines(
+			`public ${snippetField("Type")} get${snippetField("Name")}() {`,
+			`    return ${snippetField("field")};`,
+			"}",
+			snippetEnd
+		),
+		73
+	),
+	pythonSnippet(
+		"setter",
+		"setter method",
+		snippetLines(
+			`public void set${snippetField("Name")}(${snippetField("Type")} ${snippetField("field")}) {`,
+			`    this.${snippetField("field")} = ${snippetField("field")};`,
+			"}",
+			snippetEnd
+		),
+		73
+	),
+	pythonSnippet(
+		"to_string",
+		"toString override",
+		snippetLines(
+			"@Override",
+			"public String toString() {",
+			`    return ${snippetField("summary")};`,
+			"}",
+			snippetEnd
+		),
+		73
+	),
+	pythonSnippet(
+		"comparable_class",
+		"Comparable class skeleton",
+		snippetLines(
+			`public class ${snippetField("ClassName")} implements Comparable<${snippetField("ClassName")}> {`,
+			"    @Override",
+			`    public int compareTo(${snippetField("ClassName")} other) {`,
+			`        return ${snippetField("comparison")};`,
+			"    }",
+			"}",
+			snippetEnd
+		),
+		72
+	),
+	pythonSnippet(
+		"comparator",
+		"Comparator lambda",
+		`Comparator<${snippetField("Type")}> ${snippetField("name")} = (${snippetField("left")}, ${snippetField("right")}) -> ${snippetField("comparison")};${snippetEnd}`,
+		72
+	),
+	pythonSnippet(
+		"lambda_expression",
+		"lambda expression",
+		`(${snippetField("parameters")}) -> ${snippetField("expression")}${snippetEnd}`,
+		72
+	),
+	pythonSnippet(
+		"predicate",
+		"Predicate lambda",
+		`Predicate<${snippetField("Type")}> ${snippetField("name")} = ${snippetField("item")} -> ${snippetField("condition")};${snippetEnd}`,
+		72
+	),
+	pythonSnippet(
+		"optional_value",
+		"Optional.ofNullable value",
+		`Optional<${snippetField("Type")}> ${snippetField("name")} = Optional.ofNullable(${snippetField("value")});${snippetEnd}`,
+		72
+	),
+	pythonSnippet(
+		"stream_pipeline",
+		"stream pipeline",
+		snippetLines(
+			`List<${snippetField("Type")}> ${snippetField("result")} = ${snippetField("collection")}.stream()`,
+			`    .filter(${snippetField("item")} -> ${snippetField("condition")})`,
+			`    .map(${snippetField("item")} -> ${snippetField("mapping")})`,
+			"    .toList();",
+			snippetEnd
+		),
+		72
+	),
+	pythonSnippet(
+		"grouping_by",
+		"Collectors.groupingBy pipeline",
+		snippetLines(
+			`Map<${snippetField("KeyType")}, List<${snippetField("ItemType")}>> ${snippetField("groups")} = ${snippetField("collection")}.stream()`,
+			`    .collect(Collectors.groupingBy(${snippetField("item")} -> ${snippetField("key")}));`,
+			snippetEnd
+		),
+		71
+	),
+	pythonSnippet(
+		"interface_type",
+		"interface skeleton",
+		snippetLines(
+			`public interface ${snippetField("Name")} {`,
+			`    ${snippetField("returnType")} ${snippetField("methodName")}(${snippetField("parameters")});`,
+			"}",
+			snippetEnd
+		),
+		71
+	),
+	pythonSnippet(
+		"record_type",
+		"record skeleton",
+		`public record ${snippetField("Name")}(${snippetField("components")}) {${snippetEnd}}`,
+		71
+	),
+	pythonSnippet(
+		"enum_type",
+		"enum skeleton",
+		snippetLines(
+			`public enum ${snippetField("Name")} {`,
+			`    ${snippetField("VALUE")}`,
+			"}",
+			snippetEnd
+		),
+		70
+	),
+	pythonSnippet(
+		"switch_statement",
+		"switch statement",
+		snippetLines(
+			`switch (${snippetField("expression")}) {`,
+			`    case ${snippetField("value")}:`,
+			`        ${snippetField("body")}`,
+			"        break;",
+			"    default:",
+			`        ${snippetField("defaultBody")}`,
+			"}",
+			snippetEnd
+		),
+		70
+	),
+	pythonSnippet(
+		"switch_expression",
+		"switch expression",
+		snippetLines(
+			`${snippetField("Type")} ${snippetField("result")} = switch (${snippetField("expression")}) {`,
+			`    case ${snippetField("value")} -> ${snippetField("caseResult")};`,
+			`    default -> ${snippetField("defaultResult")};`,
+			"};",
+			snippetEnd
+		),
+		70
+	),
+	pythonSnippet(
+		"throw_exception",
+		"throw an exception",
+		`throw new IllegalArgumentException("${snippetField("message")}");${snippetEnd}`,
+		70
+	),
+	pythonSnippet(
+		"try_catch",
+		"try/catch block",
+		snippetLines(
+			"try {",
+			`    ${snippetField("body")}`,
+			`} catch (${snippetField("Exception")} ${snippetField("error")}) {`,
+			`    ${snippetField("handler")}`,
+			"}",
+			snippetEnd
+		),
+		70
+	),
+	pythonSnippet(
+		"try_with_resources",
+		"try-with-resources block",
+		snippetLines(
+			`try (${snippetField("ResourceType")} ${snippetField("resource")} = ${snippetField("resourceExpression")}) {`,
+			`    ${snippetField("body")}`,
+			`} catch (${snippetField("Exception")} ${snippetField("error")}) {`,
+			`    ${snippetField("handler")}`,
+			"}",
+			snippetEnd
+		),
+		70
+	),
+	pythonSnippet(
+		"file_scanner",
+		"Scanner over a file",
+		snippetLines(
+			`try (Scanner ${snippetField("scanner")} = new Scanner(new File("${snippetField("file")}.txt"))) {`,
+			`    while (${snippetField("scanner")}.hasNextLine()) {`,
+			`        String ${snippetField("line")} = ${snippetField("scanner")}.nextLine();`,
+			`        ${snippetField("body")}`,
+			"    }",
+			"} catch (IOException error) {",
+			'    System.out.println("Could not read file: " + error.getMessage());',
+			"}",
+			snippetEnd
+		),
+		69
+	),
+	pythonSnippet(
+		"file_writer",
+		"FileWriter output",
+		snippetLines(
+			`try (FileWriter ${snippetField("writer")} = new FileWriter("${snippetField("file")}.txt")) {`,
+			`    ${snippetField("writer")}.write("${snippetField("text")}");`,
+			"} catch (IOException error) {",
+			'    System.out.println("Could not write file: " + error.getMessage());',
+			"}",
+			snippetEnd
+		),
+		69
+	)
+];
+
+const karelKeywordCompletions = [
+	"UrRobot",
+	"World",
+	"Directions",
+	"North",
+	"East",
+	"South",
+	"West",
+	"move",
+	"turnLeft",
+	"turnRight",
+	"turnAround",
+	"putBeeper",
+	"pickBeeper",
+	"putBall",
+	"takeBall",
+	"paint",
+	"paintCorner",
+	"colorIs",
+	"colorIsNot",
+	"cornerColorIs",
+	"cornerColorIsNot",
+	"SuperKarel",
+	"frontIsClear",
+	"frontIsBlocked",
+	"leftIsClear",
+	"leftIsBlocked",
+	"rightIsClear",
+	"rightIsBlocked",
+	"ballsPresent",
+	"noBallsPresent",
+	"beepersPresent",
+	"noBeepersPresent",
+	"facingNorth",
+	"facingSouth",
+	"facingEast",
+	"facingWest",
+	"notFacingNorth",
+	"notFacingSouth",
+	"notFacingEast",
+	"notFacingWest",
+	"import kareltherobot.UrRobot",
+	"import kareltherobot.World",
+	"import kareltherobot.Directions"
+].map(label => completion(label, "keyword", "Karel", 80));
+
+const karelRobotMemberCompletions = [
+	completion("move", "method", "move forward one square", 95),
+	completion("turnLeft", "method", "turn 90 degrees left", 95),
+	completion("turnRight", "method", "turn 90 degrees right", 90),
+	completion("turnAround", "method", "turn 180 degrees", 90),
+	completion("putBeeper", "method", "place one beeper", 90),
+	completion("pickBeeper", "method", "pick up one beeper", 90),
+	completion("putBall", "method", "CodeHS alias for placing one ball", 82),
+	completion("takeBall", "method", "CodeHS alias for taking one ball", 82),
+	completion("paint", "method", "paint the current Karel square", 82),
+	completion(
+		"paintCorner",
+		"method",
+		"CodeHS alias for painting a corner",
+		82
+	)
+];
+const karelDirectionMemberCompletions = [
+	completion("North", "constant", "Karel north direction", 90),
+	completion("East", "constant", "Karel east direction", 90),
+	completion("South", "constant", "Karel south direction", 90),
+	completion("West", "constant", "Karel west direction", 90)
+];
+const javaColorMemberCompletions = [
+	completion("BLACK", "constant", "java.awt.Color black", 70),
+	completion("BLUE", "constant", "java.awt.Color blue", 70),
+	completion("CYAN", "constant", "java.awt.Color cyan", 70),
+	completion("DARK_GRAY", "constant", "java.awt.Color dark gray", 70),
+	completion("GRAY", "constant", "java.awt.Color gray", 70),
+	completion("GREEN", "constant", "java.awt.Color green", 70),
+	completion("LIGHT_GRAY", "constant", "java.awt.Color light gray", 70),
+	completion("MAGENTA", "constant", "java.awt.Color magenta", 70),
+	completion("ORANGE", "constant", "java.awt.Color orange", 70),
+	completion("PINK", "constant", "java.awt.Color pink", 70),
+	completion("RED", "constant", "java.awt.Color red", 70),
+	completion("WHITE", "constant", "java.awt.Color white", 70),
+	completion("YELLOW", "constant", "java.awt.Color yellow", 70),
+	completion("black", "constant", "java.awt.Color black", 68),
+	completion("blue", "constant", "java.awt.Color blue", 68),
+	completion("cyan", "constant", "java.awt.Color cyan", 68),
+	completion("darkGray", "constant", "java.awt.Color dark gray", 68),
+	completion("gray", "constant", "java.awt.Color gray", 68),
+	completion("green", "constant", "java.awt.Color green", 68),
+	completion("lightGray", "constant", "java.awt.Color light gray", 68),
+	completion("magenta", "constant", "java.awt.Color magenta", 68),
+	completion("orange", "constant", "java.awt.Color orange", 68),
+	completion("pink", "constant", "java.awt.Color pink", 68),
+	completion("red", "constant", "java.awt.Color red", 68),
+	completion("white", "constant", "java.awt.Color white", 68),
+	completion("yellow", "constant", "java.awt.Color yellow", 68),
+	completion("purple", "constant", "CodeHS Karel purple", 62),
+	completion("random()", "method", "CodeHS Karel random color", 62)
+];
+const karelMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
+	Color: javaColorMemberCompletions,
+	Directions: karelDirectionMemberCompletions,
+	World: [completion("readWorld", "method", "load a Karel world file", 90)]
+};
+const javaStaticMemberCompletionAliases: Record<string, string> = {
+	"java.awt.Color": "Color",
+	"java.lang.Math": "Math",
+	"java.lang.String": "String",
+	"java.lang.System.out": "System.out",
+	"java.util.Arrays": "Arrays",
+	"java.util.Collections": "Collections",
+	"java.util.Comparator": "Comparator",
+	"java.util.Optional": "Optional",
+	"java.util.stream.Collectors": "Collectors",
+	"java.util.stream.Stream": "Stream",
+	"kareltherobot.Directions": "Directions",
+	"kareltherobot.World": "World"
+};
+
+const karelSnippetCompletions = [
+	pythonSnippet(
+		"karel_setup",
+		"Karel imports and world setup",
+		snippetLines(
+			"import kareltherobot.UrRobot;",
+			"import kareltherobot.World;",
+			"import kareltherobot.Directions;",
+			"",
+			`public class ${snippetField("Algo")} implements Directions {`,
+			"    public static void main(String[] args) {",
+			`        UrRobot ${snippetField("robot")} = new UrRobot(` +
+				`${snippetField("street")}, ${snippetField("avenue")}, ` +
+				`${snippetField("East")}, ${snippetField("beepers")});`,
+			`        ${snippetField("body")}`,
+			"    }",
+			"}",
+			snippetEnd
+		),
+		95
+	),
+	pythonSnippet(
+		"turnRight",
+		"Karel turnRight helper",
+		snippetLines(
+			"static void turnRight(UrRobot robot) {",
+			"    robot.turnLeft();",
+			"    robot.turnLeft();",
+			"    robot.turnLeft();",
+			"}",
+			snippetEnd
+		),
+		88
+	),
+	pythonSnippet(
+		"codehs_run",
+		"CodeHS-style Karel run method",
+		snippetLines(
+			`public class ${snippetField("MyProgram")} extends SuperKarel {`,
+			"    public void run() {",
+			`        ${snippetField("body")}`,
+			"    }",
+			"}",
+			snippetEnd
+		),
+		86
+	),
+	pythonSnippet(
+		"codehs_turnRight",
+		"CodeHS-style turnRight helper",
+		snippetLines(
+			"private void turnRight() {",
+			"    turnLeft();",
+			"    turnLeft();",
+			"    turnLeft();",
+			"}",
+			snippetEnd
+		),
+		84
+	),
+	pythonSnippet(
+		"while_front_clear",
+		"Karel while front is clear",
+		snippetLines(
+			"while (frontIsClear()) {",
+			`    ${snippetField("body")}`,
+			"}",
+			snippetEnd
+		),
+		83
+	),
+	pythonSnippet(
+		"if_front_clear",
+		"Karel if front is clear",
+		snippetLines(
+			"if (frontIsClear()) {",
+			`    ${snippetField("body")}`,
+			"}",
+			snippetEnd
+		),
+		82
+	),
+	pythonSnippet(
+		"if_balls_present",
+		"Karel if balls are present",
+		snippetLines(
+			"if (ballsPresent()) {",
+			`    ${snippetField("body")}`,
+			"} else {",
+			`    ${snippetField("fallback")}`,
+			"}",
+			snippetEnd
+		),
+		82
+	),
+	pythonSnippet(
+		"robot_method",
+		"Karel helper method",
+		snippetLines(
+			`static void ${snippetField("methodName")}(UrRobot robot) {`,
+			`    ${snippetField("body")}`,
+			"}",
+			snippetEnd
+		),
+		82
+	)
+];
+
+export function javaIdeCompletionsForMode(
+	mode: PythonIdeMode = "java",
+	receiver?: string
+) {
+	if (receiver) {
+		const normalizedReceiver =
+			javaStaticMemberCompletionAliases[receiver] ?? receiver;
+		const specificOptions =
+			javaMemberCompletions[normalizedReceiver] ??
+			karelMemberCompletions[normalizedReceiver];
+		if (specificOptions) return specificOptions;
+		if (mode === "java" && isLikelyJavaRandomReceiver(receiver))
+			return javaRandomMemberCompletions;
+		if (mode === "karel" && /^[A-Z_]\w*$/i.test(receiver))
+			return karelRobotMemberCompletions;
+		return /^[A-Z_]\w*$/i.test(receiver)
+			? javaVariableMemberCompletions
+			: [];
+	}
+	const baseCompletions = [
+		...javaKeywordCompletions,
+		...javaSnippetCompletions
+	];
+	return mode === "karel"
+		? [
+				...baseCompletions,
+				...karelKeywordCompletions,
+				...karelSnippetCompletions
+			]
+		: baseCompletions;
+}
+
+function javaIdeCompletionSource(mode: PythonIdeMode = "java") {
+	return (context: PythonIdeCompletionContext) => {
+		const stringCompletion = javaIdeStringCompletionContext(
+			context.state,
+			context.pos,
+			mode
+		);
+		if (stringCompletion) {
+			return {
+				from: stringCompletion.from,
+				options: stringCompletion.options,
+				validFor: stringCompletion.validFor
+			};
+		}
+
+		const node = syntaxTree(context.state).resolveInner(context.pos, -1);
+		if (pythonCompletionBlockedNodeNames.has(node.name)) return null;
+
+		const word = context.matchBefore(/(?:[A-Z_]\w*\.){0,3}[A-Z_]\w*\.?$/i);
+		const javaCompletions = javaIdeCompletionsForMode(mode);
+		const importWord = context.matchBefore(javaImportCompletionRegex);
+		if (importWord) {
+			const importPackageMatch = importWord.text.match(
+				javaImportPackagePrefixRegex
+			);
+			const importPackagePrefix = importPackageMatch?.[1]?.toLowerCase();
+			const importOptions = javaCompletions.filter(
+				option =>
+					option.label.startsWith("import ") &&
+					(!importPackagePrefix ||
+						option.label
+							.toLowerCase()
+							.startsWith(`import ${importPackagePrefix}`))
+			);
+			if (!importOptions.length) return null;
+
+			return {
+				from: importWord.from,
+				options: importOptions,
+				validFor: javaImportCompletionRegex
+			};
+		}
+		if (!word) {
+			if (!context.explicit) return null;
+			return {
+				from: context.pos,
+				options: javaCompletions,
+				validFor: javaCompletionGlobalValidForRegex
+			};
+		}
+		if (word.from === word.to && !context.explicit) return null;
+
+		const parts = word.text.split(".");
+		if (parts.length > 1) {
+			const memberPrefix = parts.at(-1) ?? "";
+			const receiver = parts.slice(0, -1).join(".");
+			const options =
+				javaDeclaredReceiverCompletions(
+					context.state,
+					mode,
+					receiver
+				) ?? javaIdeCompletionsForMode(mode, receiver);
+			if (!options.length) return null;
+
+			return {
+				from: word.to - memberPrefix.length,
+				options,
+				validFor: javaCompletionMemberValidForRegex
+			};
+		}
+
+		return {
+			from: word.from,
+			options: javaCompletions,
+			validFor: javaCompletionGlobalValidForRegex
+		};
+	};
+}
+
+function javaIdeStringCompletionContext(
+	state: EditorState,
+	position: number,
+	mode: PythonIdeMode
+): PythonIdeStringCompletionContext | null {
+	if (mode !== "karel") return null;
+
+	const line = state.doc.lineAt(position);
+	const lineBeforeCursor = line.text.slice(0, position - line.from);
+	const colorMatch = lineBeforeCursor.match(
+		karelColorStringCompletionPattern
+	);
+	if (!colorMatch) return null;
+
+	const partial = colorMatch[1] ?? "";
+	return {
+		from: position - partial.length,
+		options: karelColorStringCompletions,
+		validFor: karelColorStringCompletionValidForRegex
+	};
+}
+
+function javaDeclaredReceiverCompletions(
+	state: EditorState,
+	mode: PythonIdeMode,
+	receiver: string
+) {
+	if (!isJavaCodeMirrorMode(mode) || !javaIdentifierRegex.test(receiver))
+		return null;
+	const escapedReceiver = escapeRegExpText(receiver);
+	const randomDeclarationPattern = new RegExp(
+		`\\b(?:java\\.util\\.)?Random\\s+${escapedReceiver}\\b`
+	);
+	const scannerDeclarationPattern = new RegExp(
+		`\\b(?:java\\.util\\.)?Scanner\\s+${escapedReceiver}\\b`
+	);
+	const stringDeclarationPattern = new RegExp(
+		`\\bString\\s+${escapedReceiver}\\b`
+	);
+	const arrayDeclarationPattern = new RegExp(
+		`\\b[A-Z_]\\w*(?:\\s*<[^;>{}]+>)?\\s*\\[\\s*\\]\\s+${escapedReceiver}\\b`,
+		"i"
+	);
+	const listDeclarationPattern = new RegExp(
+		`\\b(?:java\\.util\\.)?(?:ArrayList|List|LinkedList)\\s*(?:<[^;>{}]+>)?\\s+${escapedReceiver}\\b`
+	);
+	const setDeclarationPattern = new RegExp(
+		`\\b(?:java\\.util\\.)?(?:HashSet|TreeSet|Set)\\s*(?:<[^;>{}]+>)?\\s+${escapedReceiver}\\b`
+	);
+	const queueDeclarationPattern = new RegExp(
+		`\\b(?:java\\.util\\.)?(?:PriorityQueue|Queue)\\s*(?:<[^;>{}]+>)?\\s+${escapedReceiver}\\b`
+	);
+	const mapDeclarationPattern = new RegExp(
+		`\\b(?:java\\.util\\.)?(?:HashMap|TreeMap|Map)\\s*(?:<[^;>{}]+>)?\\s+${escapedReceiver}\\b`
+	);
+	const mapEntryDeclarationPattern = new RegExp(
+		`\\b(?:java\\.util\\.)?Map\\.Entry\\s*(?:<[^;>{}]+>)?\\s+${escapedReceiver}\\b`
+	);
+	const optionalDeclarationPattern = new RegExp(
+		`\\b(?:java\\.util\\.)?Optional\\s*(?:<[^;>{}]+>)?\\s+${escapedReceiver}\\b`
+	);
+	const streamDeclarationPattern = new RegExp(
+		`\\b(?:java\\.util\\.stream\\.)?Stream\\s*(?:<[^;>{}]+>)?\\s+${escapedReceiver}\\b`
+	);
+	const doc = state.doc.toString();
+	if (randomDeclarationPattern.test(doc)) return javaRandomMemberCompletions;
+	if (scannerDeclarationPattern.test(doc))
+		return javaScannerMemberCompletions;
+	if (stringDeclarationPattern.test(doc))
+		return javaStringInstanceMemberCompletions;
+	if (arrayDeclarationPattern.test(doc)) return javaArrayMemberCompletions;
+	if (listDeclarationPattern.test(doc)) return javaListMemberCompletions;
+	if (setDeclarationPattern.test(doc)) return javaSetMemberCompletions;
+	if (queueDeclarationPattern.test(doc)) return javaQueueMemberCompletions;
+	if (mapEntryDeclarationPattern.test(doc))
+		return javaMapEntryMemberCompletions;
+	if (mapDeclarationPattern.test(doc)) return javaMapMemberCompletions;
+	if (optionalDeclarationPattern.test(doc))
+		return javaOptionalMemberCompletions;
+	if (streamDeclarationPattern.test(doc)) return javaStreamMemberCompletions;
+	return null;
+}
+
+function isLikelyJavaRandomReceiver(receiver: string) {
+	return /(?:^|_)(?:rand|rng|random)(?:$|[A-Z_])/i.test(receiver);
+}
+
+function escapeRegExpText(value: string) {
+	return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 function withPythonAssetCompletions<T>(
 	provider: PythonCodeMirrorAssetCompletionProvider | undefined,
 	createResult: (completions: PythonCodeMirrorAssetCompletionNames) => T
@@ -1310,12 +2746,24 @@ function pythonIdeStringCompletionContext(
 	const shapeMatch = lineBeforeCursor.match(
 		turtleShapeStringCompletionPattern
 	);
-	if (!shapeMatch) return null;
-	const partial = shapeMatch[1] ?? "";
+	if (shapeMatch) {
+		const partial = shapeMatch[1] ?? "";
+		return {
+			from: position - partial.length,
+			options: turtleShapeCompletions,
+			validFor: pythonTurtleShapeStringCompletionValidForRegex
+		};
+	}
+
+	const colorMatch = lineBeforeCursor.match(
+		turtleColorStringCompletionPattern
+	);
+	if (!colorMatch) return null;
+	const partial = colorMatch[1] ?? "";
 	return {
 		from: position - partial.length,
-		options: turtleShapeCompletions,
-		validFor: pythonTurtleShapeStringCompletionValidForRegex
+		options: turtleColorCompletions,
+		validFor: pythonTurtleColorStringCompletionValidForRegex
 	};
 }
 
@@ -1418,18 +2866,6 @@ const pythonEditorBaseSetup: Extension[] = [
 	syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
 	bracketMatching(),
 	closeBrackets(),
-	autocompletion(),
-	linter(view => pythonSyntaxDiagnostics(view.state)),
-	pythonRuntimeDiagnosticsField,
-	linter(view => view.state.field(pythonRuntimeDiagnosticsField), {
-		needsRefresh(update) {
-			return update.transactions.some(transaction =>
-				transaction.effects.some(effect =>
-					effect.is(pythonRuntimeDiagnosticEffect)
-				)
-			);
-		}
-	}),
 	rectangularSelection(),
 	crosshairCursor(),
 	highlightActiveLine(),
@@ -1445,17 +2881,57 @@ const pythonEditorBaseSetup: Extension[] = [
 	])
 ];
 
+const pythonEditorDiagnosticsSetup: Extension[] = [
+	linter(view => pythonSyntaxDiagnostics(view.state)),
+	pythonRuntimeDiagnosticsField,
+	linter(view => view.state.field(pythonRuntimeDiagnosticsField), {
+		needsRefresh(update) {
+			return update.transactions.some(transaction =>
+				transaction.effects.some(effect =>
+					effect.is(pythonRuntimeDiagnosticEffect)
+				)
+			);
+		}
+	})
+];
+const javaEditorDiagnosticsSetup: Extension[] = [
+	linter(view => javaSyntaxDiagnostics(view.state))
+];
+
 export function createPythonCodeMirrorExtensions(
 	options: PythonCodeMirrorOptions
 ): Extension[] {
+	const mode = options.mode ?? "python";
+	const isPythonMode = isPythonCodeMirrorMode(mode);
+	const isJavaMode = isJavaCodeMirrorMode(mode);
+	const lineWrappingEnabled = options.lineWrappingEnabled ?? true;
+	const recommendationsEnabled = options.recommendationsEnabled ?? true;
+
 	return [
 		pythonEditorBaseSetup,
-		python(),
-		pythonLanguage.data.of({
-			autocomplete: pythonIdeCompletionSource(
-				options.mode,
-				options.assetCompletions
-			)
+		isPythonMode ? pythonEditorDiagnosticsSetup : [],
+		isJavaMode ? javaEditorDiagnosticsSetup : [],
+		isPythonMode
+			? [
+					python(),
+					pythonLanguage.data.of({
+						autocomplete: pythonIdeCompletionSource(
+							mode,
+							options.assetCompletions
+						)
+					})
+				]
+			: [],
+		isJavaMode
+			? [
+					java(),
+					javaLanguage.data.of({
+						autocomplete: javaIdeCompletionSource(mode)
+					})
+				]
+			: [],
+		autocompletion({
+			activateOnTyping: recommendationsEnabled
 		}),
 		EditorState.tabSize.of(4),
 		indentUnit.of(pythonIndentText),
@@ -1468,7 +2944,7 @@ export function createPythonCodeMirrorExtensions(
 		Prec.highest(pythonEditorActionKeymap(options)),
 		Prec.highest(keymap.of([indentWithTab])),
 		Prec.high(wrapSelectionKeymap),
-		EditorView.lineWrapping,
+		lineWrappingEnabled ? EditorView.lineWrapping : [],
 		EditorView.contentAttributes.of({
 			"aria-label": "Code editor",
 			autocapitalize: "off",

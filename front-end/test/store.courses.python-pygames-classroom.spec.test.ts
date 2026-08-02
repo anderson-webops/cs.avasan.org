@@ -195,7 +195,7 @@ describe("Julio's Python Level 2 and PyGames classroom editions", () => {
 				const label = `${module.title} / ${item.title}`;
 				expect(item.content, label).toContain("**Normal:**");
 				expect(item.content, label).toContain("**Hard:**");
-				expect(item.projectLink, label).toMatch(/^\/python-ide\?/);
+				expect(item.projectLink, label).toMatch(/^\/ide\?/);
 
 				const projectUrl = new URL(
 					item.projectLink!,
@@ -280,7 +280,7 @@ describe("Julio's Python Level 2 and PyGames classroom editions", () => {
 			expect(module, expectation.moduleTitle).toBeDefined();
 
 			const item = module?.curriculum.find(candidate => {
-				if (!candidate.projectLink?.startsWith("/python-ide?"))
+				if (!candidate.projectLink?.startsWith("/ide?"))
 					return false;
 				return (
 					new URL(
