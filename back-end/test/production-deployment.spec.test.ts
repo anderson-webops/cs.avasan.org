@@ -117,6 +117,10 @@ describe("versioned full-stack production deployment", () => {
 			"scripts/purge-native-classroom-analytics.sh"
 		);
 		const rollbackScript = repositoryFile("scripts/rollback-native-release.sh");
+		const sourceVerifier = repositoryFile("scripts/verify-native-source.sh");
+		const releaseTargetVerifier = repositoryFile(
+			"scripts/verify-native-release-target.mjs"
+		);
 		const runtimePreflight = repositoryFile("scripts/verify-native-runtime-config.mjs");
 		const documentation = repositoryFile("docs/native-production-deployment.md");
 
@@ -175,12 +179,50 @@ describe("versioned full-stack production deployment", () => {
 		expect(deployScript).toContain('export STUDENT_ACCOUNTS_ENABLED="${STUDENT_ACCOUNTS_ENABLED:-false}"');
 		expect(deployScript).toContain('export STUDENT_RECORD_RETENTION_DAYS="${STUDENT_RECORD_RETENTION_DAYS:-}"');
 		expect(deployScript).toContain("never Mongo, session, OAuth, Vault, or diagnostics");
-		expect(deployScript).toContain('cat-file -t "v$cs_version"');
+		expect(deployScript.match(/verify-native-source[.]sh/g)).toHaveLength(2);
+		expect(deployScript).toContain(
+			"Deployment requires an existing current release symlink for rollback."
+		);
+		expect(deployScript).toContain(
+			"Current release changed while the candidate was prepared."
+		);
+		expect(deployScript).toContain('fail_activation "systemd daemon reload failed"');
+		expect(deployScript).not.toContain("incomplete first activation");
+		expect(deployScript).not.toContain('unlink "$cs_current_link"');
+		expect(sourceVerifier).toContain("anderson-webops/cs.avasan.org");
+		expect(sourceVerifier).toContain("refs/remotes/origin/main^{commit}");
+		expect(sourceVerifier).toContain('cat-file -t "refs/tags/$cs_tag"');
+		expect(sourceVerifier).not.toMatch(/git[^\n]*fetch/);
+		expect(releaseTargetVerifier).toContain(
+			"release target must be a real directory, not a symlink"
+		);
+		expect(releaseTargetVerifier).toContain(
+			"release directory name does not match its immutable identity"
+		);
 		expect(deployScript).toContain('[[ "$(npm --version)" == "11.16.0" ]]');
+		expect(deployScript).toContain(
+			"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+		);
+		expect(deployScript).toContain("Service unit names are invalid.");
 		expect(deployScript).toContain("cmp --silent \"$cs_source_artifact\" \"$cs_installed_artifact\"");
+		expect(deployScript).toContain(
+			'"$(stat -c \'%u:%a\' "$cs_installed_artifact")" == "0:644"'
+		);
+		expect(deployScript).toContain('mv -T -- "$cs_staging_release" "$cs_final_release"');
 		expect(deployScript).toContain("mv -Tf -- \"$cs_next_link\" \"$cs_link_name\"");
 		expect(deployScript).toContain("CS_SITE_ORIGIN=http://127.0.0.1:8080");
 		expect(deployScript).toContain("restore_previous");
+		expect(deployScript).toContain('CS_EXPECTED_RELEASE="$cs_expected_version"');
+		expect(deployScript).toContain('CS_EXPECTED_REVISION="$cs_expected_revision"');
+		expect(deployScript).toContain('"$cs_previous_version"');
+		expect(deployScript).toContain('"$cs_previous_revision"');
+		expect(deployScript).toContain(
+			"the previous release runtime was restored and verified."
+		);
+		expect(deployScript).toContain(
+			"automatic rollback separately failed with status"
+		);
+		expect(deployScript).not.toContain("restore_previous >/dev/null 2>&1");
 		expect(deployScript).toContain(
 			'"$cs_build_source/scripts/purge-native-classroom-analytics.sh"'
 		);
@@ -200,8 +242,22 @@ describe("versioned full-stack production deployment", () => {
 			'back-end/dist/purge-classroom-analytics.js'
 		);
 		expect(rollbackScript).toContain("restore_current");
+		expect(rollbackScript).toContain(
+			"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+		);
+		expect(rollbackScript).toContain("Service unit names are invalid.");
+		expect(rollbackScript.match(/verify-native-release-target[.]mjs/g)).toHaveLength(2);
+		expect(rollbackScript).toContain(
+			"Rollback requires current and previous release symlinks."
+		);
 		expect(rollbackScript).toContain("buildConfig.STUDENT_ACCOUNTS_ENABLED");
 		expect(rollbackScript).toContain("CS_SITE_ORIGIN=http://127.0.0.1:8080");
+		expect(rollbackScript).toContain('"$cs_current_manifest_version"');
+		expect(rollbackScript).toContain('"$cs_current_manifest_revision"');
+		expect(rollbackScript).toContain(
+			"the original release runtime was restored and verified."
+		);
+		expect(rollbackScript).not.toContain("restore_current >/dev/null 2>&1");
 		expect(runtimePreflight).toContain('parsed.pathname !== "/cs-avasan-org"');
 		expect(runtimePreflight).toContain('parsed.searchParams.get("authSource") !== "cs-avasan-org"');
 		expect(runtimePreflight).toContain("changed without a frontend rebuild");
