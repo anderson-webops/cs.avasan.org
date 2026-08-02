@@ -25,7 +25,8 @@ export interface ClassroomUsagePurgeReceipt {
 /**
  * Permanently remove the anonymous aggregate collection and verify the primary
  * database is empty. This intentionally has no HTTP route; it is called only
- * by the authenticated deployment operator through the isolated tools image.
+ * by the authenticated deployment operator through an isolated Compose tools
+ * process or the active native release's root-controlled operator wrapper.
  */
 export async function purgeClassroomAnalyticsRecords(
 	model: ClassroomUsagePurgeModel = ClassroomUsageDaily as unknown as ClassroomUsagePurgeModel

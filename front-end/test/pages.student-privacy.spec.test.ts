@@ -113,7 +113,22 @@ describe("student privacy page", () => {
 		expect(text).toContain("session replay");
 		expect(text).toContain("keystroke tracking");
 		expect(text).toContain("are not public");
-		expect(text).toContain("access, correct, export, or delete");
+		expect(text).toContain(
+			"access or export retained account and project records"
+		);
+		expect(text).toContain(
+			"correct the school-approved username alias associated with them"
+		);
+		expect(text).toContain(
+			"signed-in student can edit that student’s own saved project titles, code, and files"
+		);
+		expect(text).toContain(
+			"Admin correction tool changes only the approved alias"
+		);
+		expect(text).toContain(
+			"does not rewrite a student’s project content or review copies"
+		);
+		expect(text).not.toContain("access, correct, export, or delete");
 		expect(text).toContain("refuse further account collection or use");
 		expect(text).toContain(
 			"still use public courses, browser-local IDE saves, and Math's Graph Sketcher"
@@ -166,6 +181,18 @@ describe("student privacy page", () => {
 
 		expect(text).toContain("The initial deadline is 90 days");
 		expect(text).toContain("automatically deleted after 90 days");
+		expect(text).toContain(
+			"If student account routes are later disabled while records remain in retention maintenance"
+		);
+		expect(text).toContain(
+			"alias correction, export, and permanent deletion remain available to Julio"
+		);
+		expect(text).toContain(
+			"Student sign-in, project editing, and project-review tools do not"
+		);
+		expect(text).toContain(
+			"Julio does not rewrite retained student code in Admin"
+		);
 		expect(text).not.toContain("No default is assumed");
 	});
 });

@@ -77,6 +77,10 @@ async function validateStudentSession(
 
 	try {
 		const student = await Student.findById(session.studentID)
+			.where({
+				dataDeletionPendingAt: { $exists: false },
+				retentionExpiresAt: { $gt: new Date(now) }
+			})
 			.select(requiredLevel === "setup"
 				? "+sessionVersion +pendingSetupCodeHash"
 				: "+sessionVersion");

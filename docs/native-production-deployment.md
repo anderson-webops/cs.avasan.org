@@ -143,6 +143,26 @@ service user:
 sudo bash -c 'set -a; source /etc/cs.avasan.org/api.env; source /srv/cs.avasan.org/current/release.env; set +a; runuser --preserve-environment --user cs-avasan -- /usr/bin/node /srv/cs.avasan.org/current/back-end/dist/create-admin-user.js'
 ```
 
+After classroom analytics collection has been explicitly disabled in
+`/etc/cs.avasan.org/api.env` and a coherent release with that setting has been
+deployed, permanently purge the anonymous aggregate rows with exactly:
+
+```bash
+sudo /srv/cs.avasan.org/current/scripts/purge-native-classroom-analytics.sh --confirm-delete-all-classroom-analytics
+```
+
+The wrapper refuses every other argument shape, requires the API environment to
+be a regular root-owned mode-`0600` file, resolves `current` only within the
+managed immutable release directory, loads and verifies the release identity,
+and runs the native runtime-config preflight before connecting. The compiled
+CLI uses the API's same fail-closed Vault-or-environment credential selector,
+checks the actual connected database name is exactly `cs-avasan-org`, and
+performs a second primary-database count that must report zero remaining rows.
+Only the Mongo/Vault variables, explicit collection flag, and release identity
+reach the unprivileged one-shot process; session, OAuth, and diagnostics secrets
+are removed from its environment. Preserve the successful command output in
+the approved closure record and never add an HTTP purge endpoint.
+
 Do not activate student accounts until the school or district has supplied and
 approved the operator notice, provider notice, direct contact, and a 30–365-day
 retention period. Before first activation, verify whether the fork-specific

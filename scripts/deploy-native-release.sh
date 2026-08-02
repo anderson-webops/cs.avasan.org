@@ -181,6 +181,9 @@ if [[ ! -d "$cs_final_release" ]]; then
 		"$cs_build_source/scripts/post-deploy-smoke.mjs" \
 		"$cs_build_source/scripts/verify-native-runtime-config.mjs" \
 		"$cs_staging_release/scripts/"
+	install -m 0755 \
+		"$cs_build_source/scripts/purge-native-classroom-analytics.sh" \
+		"$cs_staging_release/scripts/"
 	chown -R cs-avasan:cs-avasan "$cs_staging_release"
 	runuser --user cs-avasan -- env \
 		CYPRESS_INSTALL_BINARY=0 \

@@ -408,10 +408,14 @@ const accountRetentionDays = studentRecordRetentionDays();
 			<h2>Questions and student record requests</h2>
 			<p>
 				A parent, guardian, student, school, or district may ask to
-				access, correct, export, or delete account and project records
-				through Julio and the school or district channel. Julio can
-				correct a school-approved username alias in Admin without
-				changing the student’s saved projects.
+				access or export retained account and project records, delete
+				them, or correct the school-approved username alias associated
+				with them through Julio and the school or district channel.
+				While an account is active, the signed-in student can edit that
+				student’s own saved project titles, code, and files in the IDE.
+				Julio’s Admin correction tool changes only the approved alias;
+				it does not rewrite a student’s project content or review
+				copies.
 			</p>
 			<p>
 				Use the contact below, identify the school-approved alias and
@@ -423,6 +427,14 @@ const accountRetentionDays = studentRecordRetentionDays();
 				by asking the school to disable and delete the optional account;
 				the student can still use public courses, browser-local IDE
 				saves, and Math's Graph Sketcher without signing in.
+			</p>
+			<p>
+				If student account routes are later disabled while records
+				remain in retention maintenance, alias correction, export, and
+				permanent deletion remain available to Julio. Student sign-in,
+				project editing, and project-review tools do not. Any other
+				requested change must follow the school or district’s approved
+				process; Julio does not rewrite retained student code in Admin.
 			</p>
 			<p v-if="schoolPrivacyContact" class="privacy-page__contact">
 				<strong>School or district contact:</strong>

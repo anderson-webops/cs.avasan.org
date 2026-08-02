@@ -95,6 +95,7 @@ function queryWith<T>(result: T) {
 		select: vi.fn(() => query),
 		sort: vi.fn(() => query),
 		limit: vi.fn(() => query),
+		where: vi.fn(() => query),
 		exec: vi.fn().mockResolvedValue(result),
 		then: (resolve: (value: T) => unknown, reject: (reason: unknown) => unknown) =>
 			Promise.resolve(result).then(resolve, reject),
@@ -261,9 +262,11 @@ describe("code-bound student OAuth", () => {
 			_id: studentID.toString(),
 			accessCodeExpiresAt: { $gt: expect.any(Date) },
 			active: true,
+			dataDeletionPendingAt: { $exists: false },
 			externalAuthProvider: { $exists: false },
 			externalAuthSubjectHash: { $exists: false },
 			pendingSetupCodeHash: { $exists: true },
+			retentionExpiresAt: { $gt: expect.any(Date) },
 			sessionVersion: 7
 		});
 		const storedAttempt = modelMocks.attemptCreate.mock.calls[0]?.[0];
@@ -313,6 +316,7 @@ describe("code-bound student OAuth", () => {
 		expect(modelMocks.studentFindOneAndUpdate).toHaveBeenCalledWith(
 			{
 				active: true,
+				dataDeletionPendingAt: { $exists: false },
 				externalAuthProvider: "google",
 				externalAuthSubjectHash: expectedSubjectHash,
 				retentionExpiresAt: { $gt: expect.any(Date) }
@@ -401,6 +405,7 @@ describe("code-bound student OAuth", () => {
 			_id: studentID,
 			accessCodeExpiresAt: { $gt: expect.any(Date) },
 			active: true,
+			dataDeletionPendingAt: { $exists: false },
 			externalAuthProvider: { $exists: false },
 			externalAuthSubjectHash: { $exists: false },
 			pendingSetupCodeHash: { $exists: true },

@@ -129,10 +129,11 @@ function studentSessionTimingIsCurrent(session: CustomSession, now = Date.now())
 export async function hasLiveAuthenticatedIdentity(req: Request): Promise<boolean> {
 	const session = studentSession(req);
 	if (!session) return false;
+	const sessionCheckedAt = Date.now();
 
 	if (
 		session.adminID === ADMIN_SINGLETON_ID
-		&& adminSessionTimingIsCurrent(session)
+		&& adminSessionTimingIsCurrent(session, sessionCheckedAt)
 		&& Number.isSafeInteger(session.adminSessionVersion)
 	) {
 		const admin = await Admin.findById(ADMIN_SINGLETON_ID).select("+sessionVersion");
@@ -148,9 +149,14 @@ export async function hasLiveAuthenticatedIdentity(req: Request): Promise<boolea
 	if (
 		session.studentID
 		&& Number.isSafeInteger(session.studentSessionVersion)
-		&& studentSessionTimingIsCurrent(session)
+		&& studentSessionTimingIsCurrent(session, sessionCheckedAt)
 	) {
-		const student = await Student.findById(session.studentID).select("+sessionVersion");
+		const student = await Student.findById(session.studentID)
+			.where({
+				dataDeletionPendingAt: { $exists: false },
+				retentionExpiresAt: { $gt: new Date(sessionCheckedAt) }
+			})
+			.select("+sessionVersion");
 		if (student && student.active && student.sessionVersion === session.studentSessionVersion) {
 			return true;
 		}
@@ -281,7 +287,12 @@ export const createStudentSession: RequestHandler = async (req, res) => {
 	}
 
 	const normalizedUsername = normalizeStudentUsername(username);
-	const student = await Student.findOne({ username: normalizedUsername })
+	const credentialCheckedAt = new Date();
+	const student = await Student.findOne({
+		dataDeletionPendingAt: { $exists: false },
+		retentionExpiresAt: { $gt: credentialCheckedAt },
+		username: normalizedUsername
+	})
 		.select("+passwordHash +accessCodeHash +sessionVersion" + " +failedLoginAttempts +lockedUntil")
 		.exec();
 
@@ -304,6 +315,7 @@ export const createStudentSession: RequestHandler = async (req, res) => {
 			{
 				_id: student._id,
 				active: true,
+				dataDeletionPendingAt: { $exists: false },
 				passwordHash: student.passwordHash,
 				retentionExpiresAt: { $gt: authenticatedAt },
 				sessionVersion: student.sessionVersion
@@ -353,6 +365,7 @@ export const createStudentSession: RequestHandler = async (req, res) => {
 			active: true,
 			accessCodeHash: student.accessCodeHash,
 			accessCodeExpiresAt: { $gt: setupStartedAt },
+			dataDeletionPendingAt: { $exists: false },
 			retentionExpiresAt: { $gt: setupStartedAt },
 			sessionVersion: student.sessionVersion
 		},
@@ -404,9 +417,12 @@ export const getStudentSession: RequestHandler = async (req, res) => {
 		return res.json({ student: null, requiresPasswordSetup: false });
 	}
 
-	const student = await Student.findById(session.studentID).select(
-		"+sessionVersion +passwordHash +lastPasswordSetupRequestID"
-	);
+	const student = await Student.findById(session.studentID)
+		.where({
+			dataDeletionPendingAt: { $exists: false },
+			retentionExpiresAt: { $gt: new Date(now) }
+		})
+		.select("+sessionVersion +passwordHash +lastPasswordSetupRequestID");
 	if (!student || !student.active) {
 		clearStudentIdentity(session);
 		return res.json({ student: null, requiresPasswordSetup: false });
@@ -469,19 +485,23 @@ export const setStudentPassword: RequestHandler = async (req, res) => {
 		});
 	}
 	const session = studentSession(req);
+	const sessionCheckedAt = Date.now();
 	if (
 		!session?.studentID
 		|| !Number.isSafeInteger(session.studentSessionVersion)
 		|| (session.studentAuthLevel !== "setup" && session.studentAuthLevel !== "full")
-		|| !studentSessionTimingIsCurrent(session)
+		|| !studentSessionTimingIsCurrent(session, sessionCheckedAt)
 	) {
 		clearStudentIdentity(session);
 		return res.status(403).json({ message: "Student setup session required." });
 	}
 
-	let currentStudent = await Student.findById(session.studentID).select(
-		"+sessionVersion +passwordHash +pendingSetupCodeHash +lastPasswordSetupRequestID"
-	);
+	let currentStudent = await Student.findById(session.studentID)
+		.where({
+			dataDeletionPendingAt: { $exists: false },
+			retentionExpiresAt: { $gt: new Date(sessionCheckedAt) }
+		})
+		.select("+sessionVersion +passwordHash +pendingSetupCodeHash +lastPasswordSetupRequestID");
 	if (!currentStudent || !currentStudent.active) {
 		clearStudentIdentity(session);
 		return res.status(403).json({ message: "Student setup session expired." });
@@ -550,6 +570,7 @@ export const setStudentPassword: RequestHandler = async (req, res) => {
 		{
 			_id: currentStudent._id,
 			active: true,
+			dataDeletionPendingAt: { $exists: false },
 			pendingSetupCodeHash: currentStudent.pendingSetupCodeHash,
 			retentionExpiresAt: { $gt: passwordSetAt },
 			sessionVersion: currentStudent.sessionVersion
@@ -574,9 +595,13 @@ export const setStudentPassword: RequestHandler = async (req, res) => {
 		{ new: true }
 	).select("+sessionVersion +lastPasswordSetupRequestID");
 	if (!updated) {
-		currentStudent = await Student.findById(session.studentID).select(
-			"+sessionVersion +passwordHash +pendingSetupCodeHash +lastPasswordSetupRequestID"
-		);
+		const reloadedAt = new Date();
+		currentStudent = await Student.findById(session.studentID)
+			.where({
+				dataDeletionPendingAt: { $exists: false },
+				retentionExpiresAt: { $gt: reloadedAt }
+			})
+			.select("+sessionVersion +passwordHash +pendingSetupCodeHash +lastPasswordSetupRequestID");
 		if (
 			currentStudent
 			&& currentStudent.active
