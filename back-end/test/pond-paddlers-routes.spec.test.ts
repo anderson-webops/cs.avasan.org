@@ -4,9 +4,10 @@ import { resolve } from "node:path";
 import express from "express";
 import { afterEach, describe, expect, it } from "vitest";
 import {
-	POND_PADDLERS_DEVELOPMENT_SEAT_COOKIE,
-	POND_PADDLERS_PRODUCTION_SEAT_COOKIE,
-	createPondPaddlersRoutes
+	POND_PADDLERS_DEVELOPMENT_SEAT_COOKIE_PREFIX,
+	POND_PADDLERS_PRODUCTION_SEAT_COOKIE_PREFIX,
+	createPondPaddlersRoutes,
+	pondPaddlersSeatCookieName
 } from "../src/routes/pondPaddlersRoutes.js";
 import {
 	PondPaddlersRoomStore,
@@ -17,15 +18,21 @@ import {
 interface TestRuntime {
 	baseUrl: string;
 	close: () => Promise<void>;
-	cookieName: string;
+	secureCookies: boolean;
 	store: PondPaddlersRoomStore;
+}
+
+interface RuntimeOptions {
+	resumeAddressLimit?: number;
+	resumeSeatLimit?: number;
+	secureCookies?: boolean;
 }
 
 interface JoinedRace {
 	alias: string;
 	calmMode: boolean;
 	expiresAt: string;
-	question: PondPaddlersQuestion;
+	question: PondPaddlersQuestion | null;
 	resumed: boolean;
 	state: {
 		finishAt: number;
@@ -36,7 +43,11 @@ interface JoinedRace {
 
 const runtimes: TestRuntime[] = [];
 
-async function createRuntime(secureCookies = true): Promise<TestRuntime> {
+async function createRuntime(options: RuntimeOptions | boolean = {}): Promise<TestRuntime> {
+	const normalizedOptions: RuntimeOptions = typeof options === "boolean"
+		? { secureCookies: options }
+		: options;
+	const secureCookies = normalizedOptions.secureCookies ?? true;
 	const store = new PondPaddlersRoomStore();
 	const app = express();
 	app.set("trust proxy", false);
@@ -48,6 +59,12 @@ async function createRuntime(secureCookies = true): Promise<TestRuntime> {
 	});
 	app.use("/pond-paddlers", createPondPaddlersRoutes(store, {
 		heartbeatMs: 10,
+		...(typeof normalizedOptions.resumeAddressLimit === "number"
+			? { resumeAddressLimit: normalizedOptions.resumeAddressLimit }
+			: {}),
+		...(typeof normalizedOptions.resumeSeatLimit === "number"
+			? { resumeSeatLimit: normalizedOptions.resumeSeatLimit }
+			: {}),
 		secureCookies
 	}));
 
@@ -67,9 +84,7 @@ async function createRuntime(secureCookies = true): Promise<TestRuntime> {
 				server.close(error => error ? reject(error) : resolveClose());
 			});
 		},
-		cookieName: secureCookies
-			? POND_PADDLERS_PRODUCTION_SEAT_COOKIE
-			: POND_PADDLERS_DEVELOPMENT_SEAT_COOKIE,
+		secureCookies,
 		store
 	};
 	runtimes.push(runtime);
@@ -133,13 +148,57 @@ async function joinRoom(
 		method: "POST"
 	});
 	expect([200, 201]).toContain(response.status);
-	const parsedCookie = seatCookie(response, runtime.cookieName);
+	const expectedCookieName = pondPaddlersSeatCookieName(
+		roomCode,
+		runtime.secureCookies
+	);
+	expect(expectedCookieName).toBeTruthy();
+	const parsedCookie = seatCookie(response, expectedCookieName as string);
 	return {
 		body: await response.json() as JoinedRace,
 		cookie: parsedCookie.header,
 		response,
 		token: parsedCookie.token
 	};
+}
+
+async function resumeRoom(
+	runtime: TestRuntime,
+	roomCode: string,
+	cookie?: string
+): Promise<{ body: JoinedRace; response: Response }> {
+	const response = await fetch(`${runtime.baseUrl}/rooms/${roomCode}/resume`, {
+		headers: {
+			"X-Classroom-Request": "1",
+			...(cookie ? { Cookie: cookie } : {})
+		}
+	});
+	expect(response.status).toBe(200);
+	return { body: await response.json() as JoinedRace, response };
+}
+
+function startRoom(runtime: TestRuntime, roomCode: string): Promise<Response> {
+	return fetch(`${runtime.baseUrl}/rooms/${roomCode}/start`, {
+		body: "{}",
+		headers: adminHeaders,
+		method: "POST"
+	});
+}
+
+function requiredQuestion(joined: JoinedRace): PondPaddlersQuestion {
+	expect(joined.question).not.toBeNull();
+	return joined.question as PondPaddlersQuestion;
+}
+
+async function startAndResume(
+	runtime: TestRuntime,
+	roomCode: string,
+	joined: { cookie: string }
+) {
+	const started = await startRoom(runtime, roomCode);
+	expect(started.status).toBe(200);
+	const resumed = await resumeRoom(runtime, roomCode, joined.cookie);
+	return { ...resumed, cookie: joined.cookie };
 }
 
 function answerForPrompt(prompt: string): number {
@@ -234,6 +293,100 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 		expect(closed.status).toBe(204);
 	});
 
+	it("holds private seats in a lobby until Julio starts an idempotent race", async () => {
+		const runtime = await createRuntime();
+		const room = await createRoom(runtime, { operations: ["add"] });
+
+		const anonymousStart = await fetch(
+			`${runtime.baseUrl}/rooms/${room.roomCode}/start`,
+			{
+				body: "{}",
+				headers: classroomHeaders,
+				method: "POST"
+			}
+		);
+		expect(anonymousStart.status).toBe(403);
+
+		const startWithSettings = await fetch(
+			`${runtime.baseUrl}/rooms/${room.roomCode}/start`,
+			{
+				body: JSON.stringify({ countdown: 3 }),
+				headers: adminHeaders,
+				method: "POST"
+			}
+		);
+		expect(startWithSettings.status).toBe(400);
+
+		const oversizedStart = await fetch(
+			`${runtime.baseUrl}/rooms/${room.roomCode}/start`,
+			{
+				body: JSON.stringify({ extra: "x".repeat(5_000) }),
+				headers: adminHeaders,
+				method: "POST"
+			}
+		);
+		expect(oversizedStart.status).toBe(413);
+
+		const emptyStart = await startRoom(runtime, room.roomCode);
+		expect(emptyStart.status).toBe(409);
+		expect(await emptyStart.json()).toEqual({
+			message: "At least one paddler must join before the race starts."
+		});
+
+		const joined = await joinRoom(runtime, room.roomCode);
+		expect(joined.body.question).toBeNull();
+		expect(joined.body.state).toMatchObject({
+			players: [{ alias: joined.body.alias, progress: 0 }],
+			status: "waiting"
+		});
+
+		const beforeStart = await postAnswer(
+			runtime,
+			room.roomCode,
+			joined.cookie,
+			"A".repeat(16),
+			0
+		);
+		expect(beforeStart.status).toBe(409);
+		expect(await beforeStart.json()).toEqual({
+			message: "This race has not started yet."
+		});
+
+		const started = await startRoom(runtime, room.roomCode);
+		expect(started.status).toBe(200);
+		expect(await started.json()).toMatchObject({
+			room: { playerCount: 1, status: "racing" },
+			started: true
+		});
+
+		const repeatedStart = await startRoom(runtime, room.roomCode);
+		expect(repeatedStart.status).toBe(200);
+		expect(await repeatedStart.json()).toMatchObject({
+			room: { playerCount: 1, status: "racing" },
+			started: false
+		});
+
+		const resumed = await resumeRoom(runtime, room.roomCode, joined.cookie);
+		expect(resumed.response.status).toBe(200);
+		expect(resumed.response.headers.get("set-cookie")).toBeNull();
+		expect(resumed.body.alias).toBe(joined.body.alias);
+		expect(resumed.body.state.status).toBe("racing");
+		expect(requiredQuestion(resumed.body).questionID).toMatch(/^[\w-]{16}$/);
+
+		const lateJoin = await fetch(
+			`${runtime.baseUrl}/rooms/${room.roomCode}/join`,
+			{
+				body: "{}",
+				headers: classroomHeaders,
+				method: "POST"
+			}
+		);
+		expect(lateJoin.status).toBe(409);
+		expect(await lateJoin.json()).toEqual({
+			message: "This race has already started."
+		});
+	});
+
 	it("strictly bounds teacher settings and every race request body", async () => {
 		const runtime = await createRuntime();
 		const invalidBodies = [
@@ -286,20 +439,30 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 		expect(response.status).toBe(201);
 		const rawBody = await response.text();
 		const body = JSON.parse(rawBody) as JoinedRace;
-		const { header, token } = seatCookie(response, runtime.cookieName);
+		const cookieName = pondPaddlersSeatCookieName(
+			room.roomCode,
+			runtime.secureCookies
+		) as string;
+		const { header, token } = seatCookie(response, cookieName);
 		expect(token).toMatch(/^[\w-]{43}$/);
 		expect(rawBody).not.toContain(token);
 		expect(response.headers.get("set-cookie")).toContain("HttpOnly");
 		expect(response.headers.get("set-cookie")).toContain("Secure");
 		expect(response.headers.get("set-cookie")).toContain("SameSite=Strict");
 		expect(response.headers.get("set-cookie")).toContain("Path=/");
+		const cookieExpiry = /Expires=([^;]+)/.exec(
+			response.headers.get("set-cookie") as string
+		)?.[1];
+		expect(cookieExpiry).toBeTruthy();
+		expect(
+			Math.abs(Date.parse(cookieExpiry as string) - Date.parse(body.expiresAt))
+		).toBeLessThan(1_000);
 		expect(body.resumed).toBe(false);
 		expect(body.alias).toMatch(/^[A-Za-z]+ (Duck|Mallard|Pintail|Teal)$/);
-		expect(Object.keys(body.question).sort()).toEqual(["prompt", "questionID"]);
+		expect(body.question).toBeNull();
+		expect(body.state.status).toBe("waiting");
 		expect(Object.keys(body.state).sort()).toEqual(["finishAt", "players", "status"]);
 		expect(Object.keys(body.state.players[0]).sort()).toEqual(["alias", "progress"]);
-		// Inspect field names, not opaque random values. A generated question ID
-		// can legitimately contain a short sequence such as "ip".
 		expect(rawBody).not.toMatch(
 			/"[^"]*(?:student|account|email|answer|token|cookie|ip)[^"]*"\s*:/i
 		);
@@ -308,12 +471,13 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 		expect(resumed.response.status).toBe(200);
 		expect(resumed.body.resumed).toBe(true);
 		expect(resumed.body.alias).toBe(body.alias);
+		expect(resumed.body.question).toBeNull();
 		expect(resumed.body.state.players).toHaveLength(1);
 
 		const wrongCookieName = await joinRoom(
 			runtime,
 			room.roomCode,
-			`${POND_PADDLERS_DEVELOPMENT_SEAT_COOKIE}=${token}`
+			`${POND_PADDLERS_DEVELOPMENT_SEAT_COOKIE_PREFIX}${room.roomCode}=${token}`
 		);
 		expect(wrongCookieName.response.status).toBe(201);
 		expect(wrongCookieName.body.alias).not.toBe(body.alias);
@@ -324,7 +488,9 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 		const room = await createRoom(runtime);
 		const joined = await joinRoom(runtime, room.roomCode);
 		const setCookie = joined.response.headers.get("set-cookie") as string;
-		expect(setCookie).toContain(`${POND_PADDLERS_DEVELOPMENT_SEAT_COOKIE}=`);
+		expect(setCookie).toContain(
+			`${POND_PADDLERS_DEVELOPMENT_SEAT_COOKIE_PREFIX}${room.roomCode}=`
+		);
 		expect(setCookie).not.toContain("Secure");
 		expect(setCookie).toContain("HttpOnly");
 		expect(setCookie).toContain("SameSite=Strict");
@@ -332,14 +498,72 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 		const wrongName = await joinRoom(
 			runtime,
 			room.roomCode,
-			`${POND_PADDLERS_PRODUCTION_SEAT_COOKIE}=${joined.token}`
+			`${POND_PADDLERS_PRODUCTION_SEAT_COOKIE_PREFIX}${room.roomCode}=${joined.token}`
 		);
 		expect(wrongName.response.status).toBe(201);
 		expect(wrongName.body.alias).not.toBe(joined.body.alias);
 
-		const resumed = await joinRoom(runtime, room.roomCode, joined.cookie);
+		const resumed = await resumeRoom(runtime, room.roomCode, joined.cookie);
 		expect(resumed.response.status).toBe(200);
 		expect(resumed.body.alias).toBe(joined.body.alias);
+	});
+
+	it("isolates private seat cookies by normalized room without creating seats on resume", async () => {
+		const runtime = await createRuntime();
+		const firstRoom = await createRoom(runtime, { operations: ["add"] });
+		const secondRoom = await createRoom(runtime, { operations: ["subtract"] });
+
+		expect(
+			pondPaddlersSeatCookieName(firstRoom.roomCode.toLowerCase(), true)
+		).toBe(
+			`${POND_PADDLERS_PRODUCTION_SEAT_COOKIE_PREFIX}${firstRoom.roomCode}`
+		);
+
+		const missingSeat = await fetch(
+			`${runtime.baseUrl}/rooms/${firstRoom.roomCode}/resume`,
+			{ headers: { "X-Classroom-Request": "1" } }
+		);
+		expect(missingSeat.status).toBe(403);
+		const unchangedRooms = await fetch(`${runtime.baseUrl}/rooms`, {
+			headers: { "X-Test-Admin": "1" }
+		});
+		expect(
+			(await unchangedRooms.json() as { rooms: Array<{ playerCount: number }> })
+				.rooms.map(room => room.playerCount)
+		).toEqual([0, 0]);
+
+		const firstSeat = await joinRoom(runtime, firstRoom.roomCode);
+		const secondSeat = await joinRoom(
+			runtime,
+			secondRoom.roomCode,
+			firstSeat.cookie
+		);
+		expect(firstSeat.cookie.split("=", 1)[0]).not.toBe(
+			secondSeat.cookie.split("=", 1)[0]
+		);
+		const combinedCookies = `${firstSeat.cookie}; ${secondSeat.cookie}`;
+
+		expect((await startRoom(runtime, firstRoom.roomCode)).status).toBe(200);
+		expect((await startRoom(runtime, secondRoom.roomCode)).status).toBe(200);
+		const [firstResumed, secondResumed] = await Promise.all([
+			resumeRoom(runtime, firstRoom.roomCode, combinedCookies),
+			resumeRoom(runtime, secondRoom.roomCode, combinedCookies)
+		]);
+		expect(firstResumed.body.alias).toBe(firstSeat.body.alias);
+		expect(secondResumed.body.alias).toBe(secondSeat.body.alias);
+		expect(requiredQuestion(firstResumed.body).prompt).toContain(" + ");
+		expect(requiredQuestion(secondResumed.body).prompt).toContain(" − ");
+
+		const wrongRoomCookie = await fetch(
+			`${runtime.baseUrl}/rooms/${firstRoom.roomCode}/resume`,
+			{
+				headers: {
+					Cookie: secondSeat.cookie,
+					"X-Classroom-Request": "1"
+				}
+			}
+		);
+		expect(wrongRoomCookie.status).toBe(403);
 	});
 
 	it("caps a room at 32 unlinkable seats with unique safe aliases", async () => {
@@ -370,12 +594,14 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 	("generates safe server-authoritative %s questions", async (operation, symbol) => {
 		const runtime = await createRuntime();
 		const room = await createRoom(runtime, { maxOperand: 10, operations: [operation] });
-		const joined = await joinRoom(runtime, room.roomCode);
-		expect(joined.body.question.prompt).toContain(` ${symbol} `);
-		const operands = joined.body.question.prompt.match(/\d+/g)?.map(Number) ?? [];
+		const waiting = await joinRoom(runtime, room.roomCode);
+		const joined = await startAndResume(runtime, room.roomCode, waiting);
+		const question = requiredQuestion(joined.body);
+		expect(question.prompt).toContain(` ${symbol} `);
+		const operands = question.prompt.match(/\d+/g)?.map(Number) ?? [];
 		expect(operands).toHaveLength(2);
 		expect(Math.max(...operands)).toBeLessThanOrEqual(10);
-		const correctAnswer = answerForPrompt(joined.body.question.prompt);
+		const correctAnswer = answerForPrompt(question.prompt);
 		expect(Number.isInteger(correctAnswer)).toBe(true);
 		expect(correctAnswer).toBeGreaterThanOrEqual(0);
 		if (operation === "divide") expect(operands[0] % operands[1]).toBe(0);
@@ -384,7 +610,7 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 			runtime,
 			room.roomCode,
 			joined.cookie,
-			joined.body.question.questionID,
+			question.questionID,
 			correctAnswer
 		);
 		expect(result.status).toBe(200);
@@ -398,14 +624,16 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 	it("does not treat the shared room code as a seat credential and rejects stale questions", async () => {
 		const runtime = await createRuntime();
 		const room = await createRoom(runtime);
-		const joined = await joinRoom(runtime, room.roomCode);
-		const answer = answerForPrompt(joined.body.question.prompt);
+		const waiting = await joinRoom(runtime, room.roomCode);
+		const joined = await startAndResume(runtime, room.roomCode, waiting);
+		const question = requiredQuestion(joined.body);
+		const answer = answerForPrompt(question.prompt);
 
 		const noSeat = await postAnswer(
 			runtime,
 			room.roomCode,
 			undefined,
-			joined.body.question.questionID,
+			question.questionID,
 			answer
 		);
 		expect(noSeat.status).toBe(403);
@@ -413,8 +641,11 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 		const forgedSeat = await postAnswer(
 			runtime,
 			room.roomCode,
-			`${runtime.cookieName}=${"A".repeat(43)}`,
-			joined.body.question.questionID,
+			`${pondPaddlersSeatCookieName(
+				room.roomCode,
+				runtime.secureCookies
+			)}=${"A".repeat(43)}`,
+			question.questionID,
 			answer
 		);
 		expect(forgedSeat.status).toBe(403);
@@ -432,8 +663,9 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 	it("advances the race only on a correct current answer and stops at finishAt", async () => {
 		const runtime = await createRuntime();
 		const room = await createRoom(runtime, { finishAt: 5, operations: ["add"] });
-		const joined = await joinRoom(runtime, room.roomCode);
-		let question = joined.body.question;
+		const waiting = await joinRoom(runtime, room.roomCode);
+		const joined = await startAndResume(runtime, room.roomCode, waiting);
+		let question = requiredQuestion(joined.body);
 
 		const wrong = await postAnswer(
 			runtime,
@@ -478,6 +710,19 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 				});
 			}
 		}
+
+		const finishedStart = await startRoom(runtime, room.roomCode);
+		expect(finishedStart.status).toBe(409);
+		expect(await finishedStart.json()).toEqual({
+			message: "This race has already finished."
+		});
+		const finishedResume = await resumeRoom(
+			runtime,
+			room.roomCode,
+			joined.cookie
+		);
+		expect(finishedResume.body.state.status).toBe("finished");
+		expect(finishedResume.body.question).toBeNull();
 	});
 
 	it("streams only safe race state with proxy-safe headers and heartbeats", async () => {
@@ -501,18 +746,22 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 			const chunk = await reader?.read();
 			if (chunk?.value) streamText += new TextDecoder().decode(chunk.value);
 		}
+		const started = await startRoom(runtime, room.roomCode);
+		expect(started.status).toBe(200);
+		const resumed = await resumeRoom(runtime, room.roomCode, joined.cookie);
+		const question = requiredQuestion(resumed.body);
 
 		const answer = await postAnswer(
 			runtime,
 			room.roomCode,
 			joined.cookie,
-			joined.body.question.questionID,
-			answerForPrompt(joined.body.question.prompt)
+			question.questionID,
+			answerForPrompt(question.prompt)
 		);
 		expect(answer.status).toBe(200);
 		for (
 			let reads = 0;
-			reads < 5 && streamText.split("\n").filter(line => line.startsWith("data: ")).length < 2;
+			reads < 5 && streamText.split("\n").filter(line => line.startsWith("data: ")).length < 3;
 			reads += 1
 		) {
 			const chunk = await reader?.read();
@@ -523,7 +772,13 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 			if (chunk?.value) streamText += new TextDecoder().decode(chunk.value);
 		}
 		const dataLines = streamText.split("\n").filter(line => line.startsWith("data: "));
-		expect(dataLines).toHaveLength(2);
+		expect(dataLines).toHaveLength(3);
+		const states = dataLines.map(line => JSON.parse(line.slice(6)));
+		expect(states.map(state => state.status)).toEqual([
+			"waiting",
+			"racing",
+			"racing"
+		]);
 		const state = JSON.parse(dataLines.at(-1)?.slice(6) ?? "null");
 		expect(Object.keys(state).sort()).toEqual(["finishAt", "players", "status"]);
 		expect(Object.keys(state.players[0]).sort()).toEqual(["alias", "progress"]);
@@ -537,14 +792,16 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 	it("rate-limits answers by the private seat without persisting an identifier", async () => {
 		const runtime = await createRuntime();
 		const room = await createRoom(runtime, { operations: ["add"] });
-		const joined = await joinRoom(runtime, room.roomCode);
-		const wrongAnswer = answerForPrompt(joined.body.question.prompt) + 1;
+		const waiting = await joinRoom(runtime, room.roomCode);
+		const joined = await startAndResume(runtime, room.roomCode, waiting);
+		const question = requiredQuestion(joined.body);
+		const wrongAnswer = answerForPrompt(question.prompt) + 1;
 		for (let attempt = 0; attempt < 120; attempt += 1) {
 			const response = await postAnswer(
 				runtime,
 				room.roomCode,
 				joined.cookie,
-				joined.body.question.questionID,
+				question.questionID,
 				wrongAnswer
 			);
 			expect(response.status).toBe(200);
@@ -553,10 +810,50 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 			runtime,
 			room.roomCode,
 			joined.cookie,
-			joined.body.question.questionID,
+			question.questionID,
 			wrongAnswer
 		);
 		expect(limited.status).toBe(429);
+	});
+
+	it("lets a full shared-address class hand off without one seat starving peers", async () => {
+		const runtime = await createRuntime({
+			resumeAddressLimit: 100,
+			resumeSeatLimit: 2
+		});
+		const room = await createRoom(runtime);
+		const joinedSeats: Array<Awaited<ReturnType<typeof joinRoom>>> = [];
+		for (let seat = 0; seat < 32; seat += 1) {
+			joinedSeats.push(await joinRoom(runtime, room.roomCode));
+		}
+		expect((await startRoom(runtime, room.roomCode)).status).toBe(200);
+
+		for (const joined of joinedSeats) {
+			expect(
+				(await resumeRoom(runtime, room.roomCode, joined.cookie)).response
+					.status
+			).toBe(200);
+		}
+		const [limitedSeat, peerSeat] = joinedSeats;
+		if (!limitedSeat || !peerSeat) throw new Error("Expected a full classroom");
+		expect(
+			(await resumeRoom(runtime, room.roomCode, limitedSeat.cookie)).response
+				.status
+		).toBe(200);
+		const limited = await fetch(
+			`${runtime.baseUrl}/rooms/${room.roomCode}/resume`,
+			{
+				headers: {
+					Cookie: limitedSeat.cookie,
+					"X-Classroom-Request": "1"
+				}
+			}
+		);
+		expect(limited.status).toBe(429);
+		expect(
+			(await resumeRoom(runtime, room.roomCode, peerSeat.cookie)).response
+				.status
+		).toBe(200);
 	});
 
 	it("rate-limits repeated anonymous join traffic in memory", async () => {
@@ -634,11 +931,14 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 		store.subscribe(room.roomCode, joined.seatToken, () => {
 			throw new Error("simulated disconnected stream");
 		});
+		store.startRoom(room.roomCode);
+		const resumed = store.resumeRoom(room.roomCode, joined.seatToken);
+		const question = requiredQuestion(resumed);
 		expect(() => store.answerQuestion(
 			room.roomCode,
 			joined.seatToken,
-			joined.question.questionID,
-			answerForPrompt(joined.question.prompt)
+			question.questionID,
+			answerForPrompt(question.prompt)
 		)).not.toThrow();
 		store.dispose();
 	});
