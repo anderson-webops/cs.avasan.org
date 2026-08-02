@@ -24,6 +24,7 @@ test("native systemd and Nginx are the explicit automatic production authority",
 	const agents = read("AGENTS.md");
 	const readme = read("README.md");
 	const nativeRunbook = read("docs/native-production-deployment.md");
+	const privacyRunbook = read("docs/privacy-operations.md");
 	const packageManifest = JSON.parse(read("package.json"));
 	const workflow = read(".github/workflows/ci.yml");
 
@@ -32,6 +33,10 @@ test("native systemd and Nginx are the explicit automatic production authority",
 	assert.match(readme, /Native Nginx and systemd are the canonical automatic production path/u);
 	assert.doesNotMatch(readme, /single supported production handoff/u);
 	assert.match(nativeRunbook, /The server must classify this repository explicitly as native/u);
+	assert.match(privacyRunbook, /Canonical native production runs exactly/u);
+	assert.match(privacyRunbook, /Derived by the selected deployer/u);
+	assert.doesNotMatch(privacyRunbook, /Production Compose derives/u);
+	assert.doesNotMatch(privacyRunbook, /preferred native deployment/u);
 	assert.equal(
 		packageManifest.scripts["deploy:native"],
 		"bash scripts/deploy-native-release.sh --source ."
@@ -39,8 +44,8 @@ test("native systemd and Nginx are the explicit automatic production authority",
 
 	const nativeContract = workflowJob(workflow, "native-contract");
 	assert.match(nativeContract, /name: Canonical native deployment contract/u);
-	assert.match(nativeContract, /bash -n scripts\/deploy-native-release[.]sh/u);
-	assert.match(nativeContract, /node --test test\/native-deployment-authority[.]test[.]mjs/u);
+	assert.match(nativeContract, /bash -n scripts\/deploy-native-release\.sh/u);
+	assert.match(nativeContract, /node --test test\/native-deployment-authority\.test\.mjs/u);
 
 	const composeFallback = workflowJob(workflow, "container-stack");
 	assert.match(composeFallback, /name: Compose fallback full-stack fixture/u);

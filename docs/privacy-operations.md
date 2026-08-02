@@ -69,17 +69,18 @@ The backend requires `CLASSROOM_PRIVACY_APPROVED=true`,
 `SCHOOL_PRIVACY_CONTACT`, `CLASSROOM_PRIVACY_OPERATOR_NOTICE`,
 `CLASSROOM_SERVICE_PROVIDER_NOTICE`, and the desired feature flag. Accounts
 additionally require a whole-number `STUDENT_RECORD_RETENTION_DAYS` value from
-30 through 365. Production Compose derives the frontend approval and feature
-switches directly from those canonical backend values and maps the same
-contact, notices, and retention value into the frontend build. There is no
-second production set of `VITE_` feature switches to drift. Missing or invalid
-configuration fails closed.
+30 through 365. The canonical native deployer and the manually selected
+Compose fallback both derive the frontend approval and feature switches
+directly from those canonical backend values and map the same contact, notices,
+and retention value into the frontend build. There is no second production set
+of `VITE_` feature switches to drift. Missing or invalid configuration fails
+closed.
 
 | Feature                                   | Backend                                                                                      | Frontend build                                               |
 | ----------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| Optional student accounts and Python sync | `STUDENT_ACCOUNTS_ENABLED=true` and `STUDENT_RECORD_RETENTION_DAYS=30..365`                  | Derived by production Compose from the same canonical values |
-| Apple or Google sign-in                   | `STUDENT_OAUTH_ENABLED=true` plus account flag, retention, and complete provider credentials | Derived by production Compose from the same canonical values |
-| Anonymous CS and Math counts              | `CLASSROOM_ANALYTICS_COLLECTION_ENABLED=true`                                                | Derived by production Compose from the same canonical value  |
+| Optional student accounts and Python sync | `STUDENT_ACCOUNTS_ENABLED=true` and `STUDENT_RECORD_RETENTION_DAYS=30..365`                  | Derived by the selected deployer from the same canonical values |
+| Apple or Google sign-in                   | `STUDENT_OAUTH_ENABLED=true` plus account flag, retention, and complete provider credentials | Derived by the selected deployer from the same canonical values |
+| Anonymous CS and Math counts              | `CLASSROOM_ANALYTICS_COLLECTION_ENABLED=true`                                                | Derived by the selected deployer from the same canonical value  |
 
 OAuth is unavailable unless accounts are enabled. Provider apps must request
 only the OpenID identity needed for an opaque subject. Do not add email,
@@ -258,11 +259,12 @@ follow-up is complete. Do not restore a deleted student record from backup
 except through an authorized incident-recovery process that also reapplies the
 deletion.
 
-The operation gate is process-local. The reviewed production Compose file
-intentionally fixes the API to one named container, which prevents
-`docker compose --scale` from creating a second API process. Do not run another
-API process against this database unless the gate is replaced with a tested
-database-distributed design.
+The operation gate is process-local. Canonical native production runs exactly
+one systemd API process. The manually selected Compose fallback likewise fixes
+the API to one named container and prevents `docker compose --scale` from
+creating a second API process. Do not run another API process against this
+database unless the gate is replaced with a tested database-distributed
+design.
 
 ## Retention and reporting
 
@@ -307,7 +309,7 @@ unrecorded request from a recorded request whose response was lost. These
 client-supplied counts can still undercount or be manipulated; use them only as
 a broad engagement indicator.
 
-The production container and supplied host proxy disable access logs. If a
+Both reviewed production handoffs disable classroom access logs. If a
 school-authorized infrastructure layer separately retains narrowly scoped
 security logs, it remains outside the application database and must use the
 approved short retention and deletion process.
@@ -343,7 +345,7 @@ When the classroom use ends:
     docker compose --env-file deploy/cs.env -f compose.production.yml --profile tools run --rm admin-tools npm run -w back-end purge-classroom-analytics-ts -- --confirm-delete-all-classroom-analytics
     ```
 
-   For the preferred native deployment, use the wrapper from the active
+   For the canonical native deployment, use the wrapper from the active
    immutable release:
 
     ```bash
