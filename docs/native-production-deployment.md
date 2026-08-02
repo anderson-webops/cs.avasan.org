@@ -10,14 +10,18 @@ isolation-focused fallback and as a full-stack CI fixture.
 
 The server must classify this repository explicitly as native and invoke
 `npm run deploy:native` from a clean checkout at the exact annotated release
-tag. The root Dockerfiles and `compose.production.yml` do not authorize a
-file-presence detector to choose Compose. Compose requires an intentional
-operator decision, and native and Compose CS stacks must never run together.
+tag. That checkout must use the canonical `anderson-webops/cs.avasan.org`
+`origin`, and its already-fetched `origin/main` must resolve to exactly `HEAD`;
+the deployer never fetches or mutates Git refs. The root Dockerfiles and
+`compose.production.yml` do not authorize a file-presence detector to choose
+Compose. Compose requires an intentional operator decision, and native and
+Compose CS stacks must never run together.
 
 Install the native Nginx, systemd, and header artifacts from that same release
-before invoking the deployer. The deployer builds and preflights the candidate
-before activation, switches releases atomically, and restores the previous
-healthy release if readiness or the production smoke gate fails.
+before invoking the deployer as regular, root-owned mode-`0644` files. The
+deployer uses a fixed system executable path, builds and preflights the
+candidate before activation, switches releases atomically, and restores the
+previous healthy release if readiness or the production smoke gate fails.
 
 The native path does not change DNS, TLS records, student-data policy, or
 feature approval. Student accounts, provider sign-in, and aggregate classroom
@@ -100,6 +104,16 @@ dependencies, and creates an immutable release at:
 /srv/cs.avasan.org/releases/<commit>-<public-config-digest>
 ```
 
+The deployer is not an initial-cutover tool. Before it runs, `current` must be
+an existing symlink to a complete, root-owned, non-group/world-writable release
+directly beneath `releases/`. Its directory name, native manifest, public
+release identity, public configuration, and release environment must agree;
+required executable and public files must be regular files. Workspace package
+symlinks are accepted only inside `node_modules` and only when they resolve
+inside the same immutable release. A separately reviewed first-install
+procedure must establish and verify that rollback target before automatic
+deployments are enabled.
+
 The config digest contains no secret values. It prevents a frontend built with
 one privacy/feature decision from being reused after `api.env` changes. The
 root deployer strips runtime credentials before invoking any child process;
@@ -116,8 +130,13 @@ smoke suite through `http://127.0.0.1:8080`. The gate checks release identity,
 real branded page 404s, JSON API 404s, one non-conflicting security-header set,
 Admin login behavior, private games, Math-only Graph Sketcher retirement, and
 the configured privacy-feature boundaries. Any failure restores the former
-symlink and services. The successful former target is retained as `previous`;
-releases are not automatically deleted.
+symlink and services. Recovery is not reported from the symlink alone: the
+deployer restarts and reloads the restored stack, waits for API readiness, then
+runs the full route and security smoke suite against the former manifest's
+exact version, revision, and privacy-feature values. The activation failure and
+any separate rollback failure retain their own status and diagnostics. The
+successful former target is retained as `previous`; releases are not
+automatically deleted.
 
 Each immutable release carries a non-secret `public-config.env` generated from
 the same canonical values as its frontend. It overrides only those public
@@ -133,6 +152,14 @@ and commit, `/api/readyz` is ready, unknown page paths use the classroom 404,
 and unknown API paths return the small JSON contract. Same-network hairpin
 failure is not deployment evidence; use an external probe or the loopback gate.
 
+Source provenance and the unchanged rollback target are verified again after
+the candidate build and immediately before activation. Reused and newly built
+release directories are structurally verified before any release-owned code is
+executed. A systemd reload, API restart, Nginx reload, readiness, smoke, or
+previous-link preservation failure initiates restoration of the verified
+former release. Restoration succeeds only when that prior runtime passes
+readiness and the full loopback smoke suite under its own manifest identity.
+
 ## Rollback
 
 The deployer rolls back automatically when activation or verification fails.
@@ -144,7 +171,12 @@ sudo ./scripts/rollback-native-release.sh
 
 Rollback atomically swaps `current` and `previous`, restarts the API, reloads
 Nginx, and must pass the same loopback smoke suite. If that gate fails, the
-original release is restored.
+original release is restored, restarted, reloaded, and rechecked for readiness
+and full route behavior under its own version and revision before restoration
+is reported. Both links must remain absolute symlinks to
+distinct, structurally verified immutable releases throughout preflight;
+rollback refuses dangling, aliased, writable, identity-inconsistent, or
+out-of-tree targets.
 
 ## Admin and retention operations
 
