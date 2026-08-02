@@ -172,8 +172,21 @@ For an alias typo, choose **Correct username**, re-enter Julio's password, and
 enter the corrected school-approved alias. This preserves the same account,
 credentials, synced projects, and review copies while rotating the session
 version so existing student sessions must sign in again. Do not implement an
-alias correction by deleting and recreating the account. Export, disable, or
-permanently delete the record when that is the authorized action. A parent or
+alias correction by deleting and recreating the account.
+
+Alias correction is the only Admin correction operation. While student account
+routes are enabled and the account is active, the signed-in student can edit
+that student's own saved project titles, code, and files in the IDE. Julio may
+view a project and maintain a separate review copy, but Admin does not rewrite
+the student's source project. If account routes are disabled while retained
+records remain in maintenance, student sign-in, project editing, and project
+review are unavailable; Julio retains only the roster, alias-correction, export,
+deletion-receipt, and permanent-deletion tools needed to service authorized
+record requests. Do not promise a generic Admin project-correction workflow.
+
+Export, disable, or permanently delete the record when that is the authorized
+action. For any other requested change, follow the school or district's approved
+process rather than altering retained student code in Admin. A parent or
 guardian may refuse future optional account collection or use through the
 school process; anonymous courses and browser-local Python saves remain
 available on CS, while Graph Sketcher remains available on Math.
@@ -315,14 +328,34 @@ When the classroom use ends:
 5. Confirm student and OAuth HTTP routes return `404` and the header has no
    student sign-in control.
 6. While anonymous collection remains disabled, permanently remove its
-   database rows with the non-HTTP operator command below. It refuses to run
-   without the exact confirmation flag, reports the deletion count, and exits
-   unsuccessfully unless a second primary-database count verifies zero rows:
+   database rows with the non-HTTP operator command for the active deployment.
+   Both paths refuse a missing or additional confirmation argument, require
+   `CLASSROOM_ANALYTICS_COLLECTION_ENABLED=false`, select the configured
+   application Mongo credential through the same fail-closed environment/Vault
+   path as the API, require the actual connected database to be exactly
+   `cs-avasan-org`, report the deletion count, and exit unsuccessfully unless a
+   second primary-database count verifies zero rows.
+
+   For the Compose fallback:
 
     ```bash
     ./scripts/verify-deploy-env-permissions.sh
     docker compose --env-file deploy/cs.env -f compose.production.yml --profile tools run --rm admin-tools npm run -w back-end purge-classroom-analytics-ts -- --confirm-delete-all-classroom-analytics
     ```
+
+   For the preferred native deployment, use the wrapper from the active
+   immutable release:
+
+    ```bash
+    sudo /srv/cs.avasan.org/current/scripts/purge-native-classroom-analytics.sh --confirm-delete-all-classroom-analytics
+    ```
+
+   The native wrapper also requires the canonical API environment to be a
+   regular root-owned mode-`0600` file, verifies the active release identity and
+   public-policy configuration, and runs only the compiled active-release CLI
+   as the unprivileged `cs-avasan` service user. If `api.env` was changed to
+   disable collection after the current release was built, deploy a coherent
+   release before purging; the wrapper intentionally rejects that drift.
 
     Record the command output in the school or district's approved closure
     record, complete any separately approved backup deletion, and retire the

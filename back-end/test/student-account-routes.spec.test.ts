@@ -80,14 +80,35 @@ function makeStudent(overrides: Record<string, unknown> = {}) {
 }
 
 function queryWith<T>(result: T) {
+	let resolvedResult: T | null = result;
 	const query = {
 		select: vi.fn(() => query),
 		sort: vi.fn(() => query),
 		limit: vi.fn(() => query),
-		exec: vi.fn().mockResolvedValue(result),
+		where: vi.fn((filter: Record<string, any>) => {
+			if (resolvedResult && !Array.isArray(resolvedResult) && typeof resolvedResult === "object") {
+				const record = resolvedResult as Record<string, any>;
+				if (
+					filter.dataDeletionPendingAt?.$exists === false
+					&& record.dataDeletionPendingAt !== undefined
+				) {
+					resolvedResult = null;
+				}
+				const retentionDeadline = filter.retentionExpiresAt?.$gt;
+				if (
+					resolvedResult
+					&& retentionDeadline instanceof Date
+					&& (!(record.retentionExpiresAt instanceof Date) || record.retentionExpiresAt <= retentionDeadline)
+				) {
+					resolvedResult = null;
+				}
+			}
+			return query;
+		}),
+		exec: vi.fn(() => Promise.resolve(resolvedResult)),
 		then: (resolve: (value: T) => unknown, reject: (reason: unknown) => unknown) =>
-			Promise.resolve(result).then(resolve, reject),
-		catch: (reject: (reason: unknown) => unknown) => Promise.resolve(result).catch(reject)
+			Promise.resolve(resolvedResult as T).then(resolve, reject),
+		catch: (reject: (reason: unknown) => unknown) => Promise.resolve(resolvedResult).catch(reject)
 	};
 	return query;
 }
@@ -1341,6 +1362,41 @@ describe("teacher-provisioned student accounts", () => {
 				expect(session.studentID).toBeUndefined();
 				expect(session.studentExpiresAt).toBeUndefined();
 				expect(modelMocks.studentFindById).not.toHaveBeenCalled();
+			}
+		);
+	});
+
+	it.each([
+		{
+			label: "its record-retention deadline has passed",
+			student: makeStudent({ retentionExpiresAt: new Date(Date.now() - 1) })
+		},
+		{
+			label: "permanent deletion is pending",
+			student: makeStudent({ dataDeletionPendingAt: new Date() })
+		}
+	])("blocks project access immediately when $label", async ({ student }) => {
+		const lookup = queryWith(student);
+		modelMocks.studentFindById.mockReturnValue(lookup);
+
+		await withRuntime(
+			{
+				studentID: studentID.toString(),
+				studentSessionVersion: 4,
+				studentAuthLevel: "full"
+			},
+			async (baseUrl, session) => {
+				const response = await fetch(`${baseUrl}/students/projects`, {
+					headers: { "X-Student-ID": studentID.toString() }
+				});
+
+				expect(response.status).toBe(403);
+				await expect(response.json()).resolves.toEqual({ message: "Student session expired" });
+				expect(session.studentID).toBeUndefined();
+				expect(lookup.where).toHaveBeenCalledWith({
+					dataDeletionPendingAt: { $exists: false },
+					retentionExpiresAt: { $gt: expect.any(Date) }
+				});
 			}
 		);
 	});

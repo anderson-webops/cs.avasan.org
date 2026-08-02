@@ -1,33 +1,40 @@
 import process, { argv, env } from "node:process";
 import mongoose from "mongoose";
 
+import {
+	ClassroomAnalyticsPurgeRefusal,
+	requireClassroomAnalyticsDatabase,
+	selectClassroomAnalyticsPurgeConnection
+} from "./security/classroomAnalyticsPurge.js";
 import { purgeClassroomAnalyticsRecords } from "./services/classroomAnalyticsPurge.js";
+import { readMongoSecret } from "./vaultClient.js";
 import "dotenv/config";
 
-const REQUIRED_CONFIRMATION = "--confirm-delete-all-classroom-analytics";
-
 async function main(): Promise<void> {
-	if (!argv.slice(2).includes(REQUIRED_CONFIRMATION)) {
-		console.error(`Refusing permanent deletion without ${REQUIRED_CONFIRMATION}.`);
-		process.exitCode = 1;
-		return;
-	}
-
-	const mongoUri = env.MONGODB_URI?.trim();
-	if (!mongoUri) {
-		console.error("MONGODB_URI is required.");
-		process.exitCode = 1;
-		return;
-	}
-
 	try {
-		await mongoose.connect(mongoUri);
+		const mongoConnection = await selectClassroomAnalyticsPurgeConnection(
+			argv.slice(2),
+			env,
+			readMongoSecret
+		);
+		await mongoose.connect(mongoConnection.uri);
+		requireClassroomAnalyticsDatabase(
+			mongoose.connection.db?.databaseName
+		);
 		const receipt = await purgeClassroomAnalyticsRecords();
+		if (receipt.recordsRemaining !== 0) {
+			throw new Error("Classroom analytics purge did not verify zero records.");
+		}
 		console.log(
 			`Deleted ${receipt.deletedCount} anonymous aggregate rows; verified ${receipt.recordsRemaining} remain.`
 		);
 	}
-	catch {
+	catch (error) {
+		if (error instanceof ClassroomAnalyticsPurgeRefusal) {
+			console.error(error.message);
+			process.exitCode = 1;
+			return;
+		}
 		// Connection errors can include credentials, so keep operator output
 		// deliberately generic.
 		console.error(

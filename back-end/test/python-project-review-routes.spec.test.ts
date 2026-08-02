@@ -57,6 +57,7 @@ function queryWith<T>(result: T) {
 		sort: vi.fn(() => query),
 		limit: vi.fn(() => query),
 		skip: vi.fn(() => query),
+		where: vi.fn(() => query),
 		exec: vi.fn().mockResolvedValue(result),
 		then: (resolve: (value: T) => unknown, reject: (reason: unknown) => unknown) =>
 			Promise.resolve(result).then(resolve, reject),

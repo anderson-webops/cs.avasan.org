@@ -197,12 +197,13 @@ export const connectStudentOAuthProvider: RequestHandler = async (req, res) => {
 	}
 
 	const session = req.session as CustomSession | undefined;
+	const sessionCheckedAt = new Date();
 	if (
 		!session?.studentID
 		|| session.studentAuthLevel !== "setup"
 		|| !Number.isSafeInteger(session.studentSessionVersion)
 		|| !Number.isSafeInteger(session.studentSetupExpiresAt)
-		|| (session.studentSetupExpiresAt ?? 0) <= Date.now()
+		|| (session.studentSetupExpiresAt ?? 0) <= sessionCheckedAt.getTime()
 	) {
 		clearStudentOAuthBrowserBindings(res);
 		return res.status(403).json({
@@ -212,11 +213,13 @@ export const connectStudentOAuthProvider: RequestHandler = async (req, res) => {
 
 	const student = await Student.findOne({
 		_id: session.studentID,
-		accessCodeExpiresAt: { $gt: new Date() },
+		accessCodeExpiresAt: { $gt: sessionCheckedAt },
 		active: true,
+		dataDeletionPendingAt: { $exists: false },
 		externalAuthProvider: { $exists: false },
 		externalAuthSubjectHash: { $exists: false },
 		pendingSetupCodeHash: { $exists: true },
+		retentionExpiresAt: { $gt: sessionCheckedAt },
 		sessionVersion: session.studentSessionVersion
 	})
 		.select("+sessionVersion +pendingSetupCodeHash")
@@ -324,6 +327,7 @@ export const finishStudentOAuth: RequestHandler = async (req, res) => {
 						_id: consumedAttempt.studentID,
 						accessCodeExpiresAt: { $gt: authenticatedAt },
 						active: true,
+						dataDeletionPendingAt: { $exists: false },
 						externalAuthProvider: { $exists: false },
 						externalAuthSubjectHash: { $exists: false },
 						pendingSetupCodeHash: { $exists: true },
@@ -366,6 +370,7 @@ export const finishStudentOAuth: RequestHandler = async (req, res) => {
 			authenticatedStudent = await Student.findOneAndUpdate(
 				{
 					active: true,
+					dataDeletionPendingAt: { $exists: false },
 					externalAuthProvider: provider,
 					externalAuthSubjectHash: subjectHash,
 					retentionExpiresAt: { $gt: authenticatedAt }

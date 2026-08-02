@@ -109,6 +109,9 @@ describe("versioned full-stack production deployment", () => {
 		const nativeStandardHeaders = repositoryFile("deploy/native/cs-avasan-security-headers.conf");
 		const nativeIdeHeaders = repositoryFile("deploy/native/cs-avasan-ide-security-headers.conf");
 		const deployScript = repositoryFile("scripts/deploy-native-release.sh");
+		const nativeAnalyticsPurge = repositoryFile(
+			"scripts/purge-native-classroom-analytics.sh"
+		);
 		const rollbackScript = repositoryFile("scripts/rollback-native-release.sh");
 		const runtimePreflight = repositoryFile("scripts/verify-native-runtime-config.mjs");
 		const documentation = repositoryFile("docs/native-production-deployment.md");
@@ -170,6 +173,24 @@ describe("versioned full-stack production deployment", () => {
 		expect(deployScript).toContain("mv -Tf -- \"$cs_next_link\" \"$cs_link_name\"");
 		expect(deployScript).toContain("CS_SITE_ORIGIN=http://127.0.0.1:8080");
 		expect(deployScript).toContain("restore_previous");
+		expect(deployScript).toContain(
+			'"$cs_build_source/scripts/purge-native-classroom-analytics.sh"'
+		);
+		expect(nativeAnalyticsPurge).toContain(
+			'cs_confirmation="--confirm-delete-all-classroom-analytics"'
+		);
+		expect(nativeAnalyticsPurge).toContain(
+			'[[ "$(stat -c \'%u:%a\' "$cs_api_env")" == "0:600" ]]'
+		);
+		expect(nativeAnalyticsPurge).toContain(
+			'"$cs_release_dir/scripts/verify-native-runtime-config.mjs"'
+		);
+		expect(nativeAnalyticsPurge).toContain(
+			'CLASSROOM_ANALYTICS_COLLECTION_ENABLED must be explicitly false'
+		);
+		expect(nativeAnalyticsPurge).toContain(
+			'back-end/dist/purge-classroom-analytics.js'
+		);
 		expect(rollbackScript).toContain("restore_current");
 		expect(rollbackScript).toContain("buildConfig.STUDENT_ACCOUNTS_ENABLED");
 		expect(rollbackScript).toContain("CS_SITE_ORIGIN=http://127.0.0.1:8080");
@@ -196,14 +217,14 @@ describe("versioned full-stack production deployment", () => {
 			version: string;
 		};
 
-		expect(rootPackage.version).toBe("2.7.105");
-		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]105\}/g)).toHaveLength(2);
+		expect(rootPackage.version).toBe("2.7.106");
+		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]106\}/g)).toHaveLength(2);
 		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g)).toHaveLength(2);
 		expect(compose).not.toContain("SOURCE_REVISION:-unknown");
 		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
-		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.105");
+		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.106");
 		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
-		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.105");
+		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.106");
 		expect(apiDockerfile).toContain("ARG SOURCE_REVISION=unknown");
 		expect(frontendReleaseWriter).toContain("environment.COMMIT_REF?.trim()");
 		expect(frontendReleaseWriter).toContain("const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;");
@@ -323,6 +344,9 @@ describe("versioned full-stack production deployment", () => {
 		);
 		expect(api).not.toContain("MONGO_ROOT_");
 		expect(adminTools).not.toContain("MONGO_ROOT_");
+		expect(adminTools).toContain(
+			"CLASSROOM_ANALYTICS_COLLECTION_ENABLED: ${CLASSROOM_ANALYTICS_COLLECTION_ENABLED:-false}"
+		);
 		expect(environment).toContain("MONGO_APP_USERNAME=cs_avasan_app");
 		expect(environment).toContain("MONGO_APP_PASSWORD=");
 		expect(netlify).toContain('from = "/api/*"');
@@ -415,11 +439,20 @@ describe("versioned full-stack production deployment", () => {
 		const packageManifest = repositoryFile("back-end/package.json");
 		const purgeCommand = repositoryFile("back-end/src/purge-classroom-analytics.ts");
 		const runbook = repositoryFile("docs/privacy-operations.md");
+		const nativeRunbook = repositoryFile("docs/native-production-deployment.md");
 		const server = repositoryFile("back-end/src/server.ts");
 
 		expect(packageManifest).toContain('"purge-classroom-analytics-ts"');
-		expect(purgeCommand).toContain("--confirm-delete-all-classroom-analytics");
+		expect(purgeCommand).toContain("selectClassroomAnalyticsPurgeConnection");
+		expect(purgeCommand).toContain("readMongoSecret");
+		expect(purgeCommand).toContain("mongoose.connection.db?.databaseName");
 		expect(runbook).toContain("purge-classroom-analytics-ts -- --confirm-delete-all-classroom-analytics");
+		expect(runbook).toContain(
+			"/srv/cs.avasan.org/current/scripts/purge-native-classroom-analytics.sh --confirm-delete-all-classroom-analytics"
+		);
+		expect(nativeRunbook).toContain(
+			"/srv/cs.avasan.org/current/scripts/purge-native-classroom-analytics.sh --confirm-delete-all-classroom-analytics"
+		);
 		expect(server).not.toContain("purgeClassroomAnalyticsRecords");
 	});
 
