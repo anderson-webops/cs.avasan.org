@@ -75,8 +75,12 @@ export async function normalizeStaticRoutes(targetDistDir = distDir) {
 			path.join(targetDistDir, relativeSourcePath),
 			targetIndexPath
 		);
+		// Keep exactly one public document for each clean route. Leaving the SSG
+		// source beside it exposes an ungoverned `/route.html` alias that bypasses
+		// canonical routing and route-specific response policy.
+		await fs.rm(path.join(targetDistDir, relativeSourcePath));
 		console.log(
-			`[normalize-static-routes] wrote ${path.relative(targetDistDir, targetIndexPath)}`
+			`[normalize-static-routes] moved ${relativeSourcePath} to ${path.relative(targetDistDir, targetIndexPath)}`
 		);
 	}
 }

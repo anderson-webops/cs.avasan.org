@@ -1,7 +1,7 @@
 {
 	"name": "classes-monorepo",
 	"type": "module",
-	"version": "2.7.106",
+	"version": "2.7.107",
 	"private": true,
 	"packageManager": "npm@11.16.0",
 	"engines": {
@@ -24,6 +24,7 @@
 		"audit:static-media": "node scripts/audit-static-course-media.mjs",
 		"audit-fix": "npm audit fix --workspaces",
 		"build": "npm run -w front-end build && npm run -w back-end build",
+		"deploy:native": "bash scripts/deploy-native-release.sh --source .",
 		"dev": "npm run -w front-end dev",
 		"server": "npm run -w back-end server",
 		"server:once": "npm run -w back-end server:once",
@@ -39,6 +40,7 @@
 		"clean": "node scripts/clean-generated.mjs",
 		"test:clean": "node --test test/clean-generated.test.mjs",
 		"test:ci-security": "node --test test/ci-supply-chain.test.mjs",
+		"test:deployment-authority": "node --test test/native-deployment-authority.test.mjs",
 		"up": "npm exec --yes -- taze major -I && npm run -w front-end up && npm run -w back-end up"
 	},
 	"overrides": {

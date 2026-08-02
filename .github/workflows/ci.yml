@@ -273,7 +273,27 @@ jobs:
             - name: Build
               run: npm run build
 
+    native-contract:
+        name: Canonical native deployment contract
+        runs-on: ubuntu-latest
+        timeout-minutes: 5
+        steps:
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+              with:
+                  persist-credentials: false
+
+            - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+              with:
+                  node-version: 24.18.0
+
+            - name: Validate native deployment shell
+              run: bash -n scripts/deploy-native-release.sh scripts/rollback-native-release.sh scripts/purge-native-classroom-analytics.sh
+
+            - name: Enforce native deployment authority
+              run: node --test test/native-deployment-authority.test.mjs
+
     container-stack:
+        name: Compose fallback full-stack fixture
         runs-on: ubuntu-latest
         timeout-minutes: 30
         env:
@@ -317,7 +337,7 @@ jobs:
             - name: Reject missing production revision
               run: |
                   if env -u SOURCE_REVISION docker compose --env-file deploy/cs.env --profile tools -f compose.production.yml config --quiet; then
-                    echo "Production Compose accepted a missing SOURCE_REVISION." >&2
+                    echo "Compose fallback accepted a missing SOURCE_REVISION." >&2
                     exit 1
                   fi
 

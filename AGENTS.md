@@ -80,6 +80,23 @@ a student explicitly chooses to import them. Use the fork-specific
 `cs-avasan-org` database, environment variables or the configured Vault path
 for secrets, and never reuse or commit upstream credentials or data.
 
+## Production Deployment Authority
+
+- Native Nginx and systemd are the canonical automatic production path for
+  `cs.avasan.org`. Deployment automation must explicitly run
+  `scripts/deploy-native-release.sh` from a clean checkout at the exact
+  annotated release tag after installing the same release's native artifacts.
+- Do not infer a container deployment from the root `Dockerfile`,
+  `back-end/Dockerfile`, or `compose.production.yml`. Those files support the
+  intentionally selected Compose fallback and its full-stack CI fixture; they
+  are not the default production classifier.
+- Compose may be selected manually when container isolation is specifically
+  required. Never run the native and Compose stacks at the same time.
+- Build and preflight a candidate before changing the live release. Activation
+  must remain atomic, smoke-gated, and rollback-safe so a failed candidate does
+  not replace the last healthy public release or create an avoidable `502`
+  window.
+
 ## Dependency and Lockfile Discipline
 
 - Use the repository's pinned npm toolchain; do not mix package managers.

@@ -1,9 +1,23 @@
 # Native production deployment
 
-This is the preferred non-Docker production handoff for `cs.avasan.org`. It
+This is the canonical automatic production handoff for `cs.avasan.org`. It
 serves immutable frontend files directly from Nginx, runs exactly one compiled
 Node API under systemd, and uses a dedicated `cs-avasan-org` MongoDB credential.
-The existing Compose handoff remains supported as an isolation-focused fallback.
+The existing Compose handoff remains supported only as a manually selected,
+isolation-focused fallback and as a full-stack CI fixture.
+
+## Automation contract
+
+The server must classify this repository explicitly as native and invoke
+`npm run deploy:native` from a clean checkout at the exact annotated release
+tag. The root Dockerfiles and `compose.production.yml` do not authorize a
+file-presence detector to choose Compose. Compose requires an intentional
+operator decision, and native and Compose CS stacks must never run together.
+
+Install the native Nginx, systemd, and header artifacts from that same release
+before invoking the deployer. The deployer builds and preflights the candidate
+before activation, switches releases atomically, and restores the previous
+healthy release if readiness or the production smoke gate fails.
 
 The native path does not change DNS, TLS records, student-data policy, or
 feature approval. Student accounts, provider sign-in, and aggregate classroom

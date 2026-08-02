@@ -324,8 +324,14 @@ async function verifyPublicRoutes() {
 	}
 
 	for (const [alias, canonical] of [
+		["/index.html?source=legacy", "/?source=legacy"],
+		["/admin/index.html", "/admin/"],
+		["/student-privacy/index.html", "/student-privacy/"],
+		["/games/index.html", "/games/"],
+		["/games/pond-paddlers/index.html", "/games/pond-paddlers/"],
 		["/ide?course=python-1", "/ide/?course=python-1"],
 		["/ide.html?course=python-1", "/ide/?course=python-1"],
+		["/ide/index.html?course=python-1", "/ide/?course=python-1"],
 		["/python-ide?course=python-1", "/ide/?course=python-1"],
 		["/python-ide.html?course=python-1", "/ide/?course=python-1"],
 		["/python-ide/?course=python-1", "/ide/?course=python-1"],
@@ -389,6 +395,14 @@ async function verifyPublicRoutes() {
 
 	for (const path of [
 		"/login",
+		"/admin.html",
+		"/course-resource.html",
+		"/student-privacy.html",
+		"/games.html",
+		"/games/comet-hopper.html",
+		"/games/crosswalk-critters.html",
+		"/games/machine-workshop.html",
+		"/games/pond-paddlers.html",
 		"/.env",
 		"/.git/config",
 		"/.vite/ssr-manifest.json",

@@ -73,6 +73,7 @@ describe("static route normalization", () => {
 		);
 
 		await normalizeStaticRoutes(tempDir);
+		await normalizeStaticRoutes(tempDir);
 
 		await expect(
 			readFile(join(tempDir, "course-resource", "index.html"), "utf8")
@@ -89,6 +90,14 @@ describe("static route normalization", () => {
 				"utf8"
 			)
 		).resolves.toBe("<main>Pond Paddlers</main>");
+		for (const legacyDocument of [
+			"admin.html",
+			"course-resource.html",
+			"games.html",
+			join("games", "pond-paddlers.html")
+		]) {
+			await expect(stat(join(tempDir, legacyDocument))).rejects.toThrow();
+		}
 		await expect(
 			stat(join(tempDir, "index", "index.html"))
 		).rejects.toThrow();
