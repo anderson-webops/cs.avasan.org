@@ -189,7 +189,9 @@ jobs:
               run: npm ci --include=optional --strict-allow-scripts
 
             - name: Audit static course media
-              run: npm run audit:static-media
+              run: |
+                  npm run test:static-media-request
+                  npm run audit:static-media
 
     test-e2e:
         runs-on: ubuntu-latest

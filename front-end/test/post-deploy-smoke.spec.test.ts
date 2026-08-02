@@ -59,7 +59,7 @@ describe("production smoke feature expectations", () => {
 	it("builds a secret-free native public configuration", () => {
 		const manifest = nativeReleaseManifest({
 			CLASSROOM_PRIVACY_APPROVED: "false",
-			CS_RELEASE_VERSION: "2.7.107",
+			CS_RELEASE_VERSION: "2.7.108",
 			MONGODB_URI: "mongodb://secret-value",
 			SESSION_SECRET: "secret-value",
 			SOURCE_REVISION: "a".repeat(40),

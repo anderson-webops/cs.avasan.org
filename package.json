@@ -1,7 +1,7 @@
 {
 	"name": "classes-monorepo",
 	"type": "module",
-	"version": "2.7.107",
+	"version": "2.7.108",
 	"private": true,
 	"packageManager": "npm@11.16.0",
 	"engines": {
@@ -41,6 +41,7 @@
 		"test:clean": "node --test test/clean-generated.test.mjs",
 		"test:ci-security": "node --test test/ci-supply-chain.test.mjs",
 		"test:deployment-authority": "node --test test/native-deployment-authority.test.mjs",
+		"test:static-media-request": "node --test test/static-media-request.test.mjs",
 		"up": "npm exec --yes -- taze major -I && npm run -w front-end up && npm run -w back-end up"
 	},
 	"overrides": {
