@@ -28,11 +28,21 @@ function expectedInstallScriptPins(lockfile) {
 		.sort();
 }
 
-function assertPinnedAllowScripts(packageJson, lockfile) {
-	const actualPins = Object.keys(packageJson.allowScripts).sort();
+function assertPinnedAllowScriptEntries(actualPins, lockfile) {
 	assert.deepEqual(actualPins, expectedInstallScriptPins(lockfile));
 	assert.equal(actualPins.every(pin => /@\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$/u.test(pin)), true);
+}
+
+function assertPinnedAllowScripts(packageJson, lockfile) {
+	const actualPins = Object.keys(packageJson.allowScripts).sort();
+	assertPinnedAllowScriptEntries(actualPins, lockfile);
 	assert.equal(Object.values(packageJson.allowScripts).every(value => value === true), true);
+}
+
+function npmrcAllowScripts(npmrc) {
+	const matches = [...npmrc.matchAll(/^allow-scripts=(.+)$/gmu)];
+	assert.equal(matches.length, 1);
+	return matches[0][1].split(",").map(value => value.trim()).filter(Boolean).sort();
 }
 
 function workflowJob(source, name) {
@@ -46,9 +56,15 @@ function workflowJob(source, name) {
 
 test("install-script approvals are exact pins derived from each lockfile", () => {
 	assertPinnedAllowScripts(readJson("package.json"), readJson("package-lock.json"));
-	assertPinnedAllowScripts(readJson("back-end/package.json"), readJson("back-end/package-lock.json"));
+	const backendPackage = readJson("back-end/package.json");
+	const backendNpmrc = read("back-end/.npmrc");
+	assert.equal(Object.hasOwn(backendPackage, "allowScripts"), false);
+	assertPinnedAllowScriptEntries(
+		npmrcAllowScripts(backendNpmrc),
+		readJson("back-end/package-lock.json")
+	);
 
-	for (const npmrc of [read(".npmrc"), read("back-end/.npmrc")]) {
+	for (const npmrc of [read(".npmrc"), backendNpmrc]) {
 		assert.match(npmrc, /^include=optional$/mu);
 		assert.match(npmrc, /^strict-allow-scripts=true$/mu);
 	}
