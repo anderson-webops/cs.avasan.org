@@ -112,14 +112,14 @@ describe("versioned full-stack production deployment", () => {
 			version: string;
 		};
 
-		expect(rootPackage.version).toBe("2.7.101");
-		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]101\}/g)).toHaveLength(2);
+		expect(rootPackage.version).toBe("2.7.102");
+		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]102\}/g)).toHaveLength(2);
 		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g)).toHaveLength(2);
 		expect(compose).not.toContain("SOURCE_REVISION:-unknown");
 		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
-		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.101");
+		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.102");
 		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
-		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.101");
+		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.102");
 		expect(apiDockerfile).toContain("ARG SOURCE_REVISION=unknown");
 		expect(frontendReleaseWriter).toContain("environment.COMMIT_REF?.trim()");
 		expect(frontendReleaseWriter).toContain("const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;");
@@ -135,6 +135,9 @@ describe("versioned full-stack production deployment", () => {
 		expect(productionSmoke).toContain("CS_EXPECT_STUDENT_ACCOUNTS_ENABLED");
 		expect(productionSmoke).toContain("CS_EXPECT_STUDENT_OAUTH_ENABLED");
 		expect(productionSmoke).toContain("CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED");
+		expect(productionSmoke).toContain(
+			'const classroomOrigin = "https://cs.avasan.org";'
+		);
 		expect(productionSmoke).toContain('event: "__deployment-probe-invalid"');
 		expect(productionSmoke).toContain("response details were not logged");
 		expect(productionSmoke).toContain('currentSmokePhase = "security headers"');

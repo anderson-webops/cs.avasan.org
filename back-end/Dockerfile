@@ -34,7 +34,7 @@ CMD ["npm", "run", "-w", "back-end", "create-admin-ts"]
 
 FROM npm-stage AS production-stage
 
-ARG CS_RELEASE_VERSION=2.7.101
+ARG CS_RELEASE_VERSION=2.7.102
 ARG SOURCE_REVISION=unknown
 ENV CS_RELEASE_VERSION=$CS_RELEASE_VERSION
 ENV NODE_ENV=production
