@@ -1,6 +1,7 @@
 import type { Server } from "node:http";
 import type { Response } from "express";
 import express from "express";
+import { rateLimit } from "express-rate-limit";
 import { Types } from "mongoose";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -110,6 +111,12 @@ function studentRecord(overrides: Record<string, unknown> = {}) {
 
 async function withRuntime<T>(run: (baseUrl: string) => Promise<T>): Promise<T> {
 	const app = express();
+	const testRouteLimiter = rateLimit({
+		legacyHeaders: false,
+		limit: 10_000,
+		standardHeaders: false,
+		windowMs: 60_000
+	});
 	app.use(express.json());
 	app.use((req, _res, next) => {
 		req.currentAdmin = {
@@ -119,12 +126,18 @@ async function withRuntime<T>(run: (baseUrl: string) => Promise<T>): Promise<T> 
 	});
 	app.post(
 		"/students/:studentID/export",
+		testRouteLimiter,
 		withStudentDataWriteLease(exportStudentData)
 	);
-	app.delete("/students/:studentID", deleteStudentData);
-	app.get("/student-deletion-receipts", listStudentDeletionReceipts);
+	app.delete("/students/:studentID", testRouteLimiter, deleteStudentData);
+	app.get(
+		"/student-deletion-receipts",
+		testRouteLimiter,
+		listStudentDeletionReceipts
+	);
 	app.post(
 		"/students/:studentID/held-project-write",
+		testRouteLimiter,
 		withStudentDataWriteLease(async (_req, res) => {
 			await modelMocks.heldProjectWrite(res);
 			res.sendStatus(204);

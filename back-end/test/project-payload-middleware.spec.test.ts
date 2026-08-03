@@ -2,6 +2,7 @@ import type { Server } from "node:http";
 import { request } from "node:http";
 import { gzipSync } from "node:zlib";
 import express from "express";
+import { rateLimit } from "express-rate-limit";
 import { describe, expect, it, vi } from "vitest";
 import {
 	claimProjectPayloadReservation,
@@ -81,23 +82,32 @@ async function withPayloadApp<T>(
 		releasePreGuard = resolve;
 	});
 	app.set("trust proxy", 1);
-	app.use("/students/projects", async (req, res, next) => {
-		const studentID = req.get("X-Test-Student-ID") ?? "student-one";
-		req.currentStudent = {
-			_id: { toString: () => studentID }
-		} as typeof req.currentStudent;
-		authenticated();
-		if (req.get("X-Hold-Pre-Guard") === "1") {
-			req.once("aborted", aborted.mark);
-			res.once("close", closed.mark);
-			preGuard.mark();
-			await preGuardRelease;
+	app.use(
+		"/students/projects",
+		rateLimit({
+			legacyHeaders: false,
+			limit: 10_000,
+			standardHeaders: false,
+			windowMs: 60_000
+		}),
+		async (req, res, next) => {
+			const studentID = req.get("X-Test-Student-ID") ?? "student-one";
+			req.currentStudent = {
+				_id: { toString: () => studentID }
+			} as typeof req.currentStudent;
+			authenticated();
+			if (req.get("X-Hold-Pre-Guard") === "1") {
+				req.once("aborted", aborted.mark);
+				res.once("close", closed.mark);
+				preGuard.mark();
+				await preGuardRelease;
+				next();
+				preGuardContinued.mark();
+				return;
+			}
 			next();
-			preGuardContinued.mark();
-			return;
 		}
-		next();
-	});
+	);
 	app.use(
 		"/students/projects",
 		(_req, _res, next) => {
