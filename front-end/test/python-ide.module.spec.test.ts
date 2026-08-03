@@ -3507,6 +3507,13 @@ screen.listen()
 		const pack = parsePythonIdeCourseAssetManifest({
 			assets: [
 				{
+					height: 1,
+					mimeType: "image/png",
+					name: "images/1.png",
+					url: "/python-ide/assets/images/1.png",
+					width: 1
+				},
+				{
 					height: 18,
 					mimeType: "image/png",
 					name: "images/alien.png",
@@ -3529,6 +3536,13 @@ screen.listen()
 					name: "images/alien-left.png",
 					url: "/python-ide/assets/images/alien-left.png",
 					width: 20
+				},
+				{
+					height: 24,
+					mimeType: "image/png",
+					name: "images/seaweed-publicdomainvectors.org/seaweed.png",
+					url: "/python-ide/assets/images/seaweed-publicdomainvectors.org/seaweed.png",
+					width: 12
 				}
 			]
 		});
@@ -3541,7 +3555,16 @@ screen.listen()
 			pythonIdeAssetCandidateNames("images", "alien_left", [".png"])
 		);
 
-		expect(pack.assets.size).toBe(4);
+		expect(pack.assets.size).toBe(6);
+		expect(pack.assets.get("images/1.png")?.url).toBe(
+			"/python-ide/assets/images/1.png"
+		);
+		expect(
+			pack.assets.get("images/seaweed-publicdomainvectors.org/seaweed.png")
+				?.url
+		).toBe(
+			"/python-ide/assets/images/seaweed-publicdomainvectors.org/seaweed.png"
+		);
 		expect(alien?.url).toBe("/python-ide/assets/images/alien.png");
 		expect(alien?.width).toBe(20);
 		expect(alien?.height).toBe(18);
