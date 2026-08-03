@@ -2,6 +2,21 @@ import type { Model } from "mongoose";
 import type { IStudent } from "../../types/entities/IStudent.js";
 import mongoose, { Schema } from "mongoose";
 
+const studentRecordPreservationEventSchema = new Schema(
+	{
+		action: {
+			type: String,
+			enum: ["placed", "released"],
+			required: true
+		},
+		at: {
+			type: Date,
+			required: true
+		}
+	},
+	{ _id: false }
+);
+
 const studentSchema = new Schema<IStudent>(
 	{
 		username: {
@@ -104,6 +119,27 @@ const studentSchema = new Schema<IStudent>(
 			min: 1,
 			select: false
 		},
+		recordPreservationHoldActive: {
+			type: Boolean,
+			default: false,
+			required: true,
+			select: false
+		},
+		recordPreservationHoldPlacedAt: {
+			type: Date,
+			default: undefined,
+			select: false
+		},
+		recordPreservationHoldReleasedAt: {
+			type: Date,
+			default: undefined,
+			select: false
+		},
+		recordPreservationEvents: {
+			type: [studentRecordPreservationEventSchema],
+			default: [],
+			select: false
+		},
 		lastPasswordSetupRequestID: {
 			type: String,
 			default: undefined,
@@ -168,6 +204,10 @@ studentSchema.set("toJSON", {
 		delete clean.failedLoginAttempts;
 		delete clean.lockedUntil;
 		delete clean.retentionPolicyDays;
+		delete clean.recordPreservationHoldActive;
+		delete clean.recordPreservationHoldPlacedAt;
+		delete clean.recordPreservationHoldReleasedAt;
+		delete clean.recordPreservationEvents;
 		delete clean.lastPasswordSetupRequestID;
 		delete clean.dataDeletionPendingAt;
 		delete clean.dataDeletionOperationID;

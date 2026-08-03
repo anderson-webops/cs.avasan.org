@@ -24,6 +24,7 @@ export interface IPythonProject {
 	importID: string;
 	byteCount: number;
 	deletedAt?: Date;
+	purgeAt?: Date;
 	createdAt: Date;
 	updatedAt: Date;
 }

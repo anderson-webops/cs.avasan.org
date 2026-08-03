@@ -985,6 +985,12 @@ onBeforeUnmount(() => {
 					</button>
 				</div>
 			</form>
+
+			<p class="student-access__project-privacy">
+				When saving to an account, keep real names, contact details,
+				locations, student numbers, passwords, and access codes out of
+				project names, file names, code, and assets.
+			</p>
 		</div>
 
 		<p
@@ -1138,6 +1144,13 @@ onBeforeUnmount(() => {
 	color: var(--color-link);
 	font-size: 0.82rem;
 	font-weight: 700;
+}
+
+.student-access__project-privacy {
+	margin-top: 0.75rem;
+	color: var(--color-ink-soft);
+	font-size: 0.76rem;
+	line-height: 1.45;
 }
 
 .student-access__form input {

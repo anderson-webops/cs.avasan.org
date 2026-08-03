@@ -334,6 +334,18 @@ describe("Python project routes", () => {
 			resolve(__dirname, "../src/middleware/projectPayload.ts"),
 			"utf8"
 		);
+		const runtimeRoutesSource = readFileSync(
+			resolve(__dirname, "../src/routes/runtimeAccountRoutes.ts"),
+			"utf8"
+		);
+		const studentRoutesSource = readFileSync(
+			resolve(__dirname, "../src/routes/studentRoutes.ts"),
+			"utf8"
+		);
+		const adminRoutesSource = readFileSync(
+			resolve(__dirname, "../src/routes/adminRoutes.ts"),
+			"utf8"
+		);
 
 		expect(serverSource).toContain("createProjectJsonParser()");
 		expect(projectPayloadSource).toContain("PYTHON_IDE_PROJECT_BODY_LIMIT");
@@ -348,6 +360,23 @@ describe("Python project routes", () => {
 			/validAdmin,\s*limitProjectMutation\(teacherProjectWriteLimiter\),\s*limitProjectMutation\(heavyProjectPayloadLimiter\),\s*limitProjectMutation\(projectPayloadConcurrencyGuard\),\s*parseProjectMutation/
 		);
 		expect(serverSource).toContain("validAdmin,");
+		expect(serverSource).toContain(
+			'"/admins/students/:studentID/projects"'
+		);
+		expect(serverSource).not.toContain(
+			"/^\\/admins\\/students\\/[a-f\\d]{24}"
+		);
+		expect(serverSource).toContain("projectRequestsPreauthorized: true");
+		expect(runtimeRoutesSource).toContain(
+			"options.projectRequestsPreauthorized ?? false"
+		);
+		expect(studentRoutesSource).toContain("validStudent,");
+		expect(studentRoutesSource).toContain("requireStudentContext");
+		expect(studentRoutesSource).toContain("projectWriteLimiters");
+		expect(adminRoutesSource).toContain(
+			"options.projectRequestsPreauthorized"
+		);
+		expect(adminRoutesSource).toContain("validAdmin,");
 		expect(serverSource).toContain('bodyParser.json({ limit: "1mb" })');
 		expect(serverSource).not.toContain("bodyParser.urlencoded");
 		expect(serverSource).not.toContain("maxAge:");
@@ -356,6 +385,87 @@ describe("Python project routes", () => {
 			"CROSS_SITE=true is not supported; classroom sessions must stay same-origin."
 		);
 		expect(serverSource).not.toContain('sameSite = "none"');
+
+		const compactServer = serverSource.replace(/\s+/g, " ");
+		const studentAuth = compactServer.indexOf(
+			'app.use( ["/students/projects", "/students/project-reviews"], studentProjectDataAccessLimiter, validStudent, requireStudentContext )'
+		);
+		const studentLimiter = compactServer.indexOf(
+			"limitProjectMutation(studentProjectWriteLimiter)",
+			studentAuth
+		);
+		const studentHeavy = compactServer.indexOf(
+			"limitProjectMutation(heavyProjectPayloadLimiter)",
+			studentLimiter
+		);
+		const studentGuard = compactServer.indexOf(
+			"limitProjectMutation(projectPayloadConcurrencyGuard)",
+			studentHeavy
+		);
+		const studentParser = compactServer.indexOf(
+			"parseProjectMutation",
+			studentGuard
+		);
+		const studentClaim = compactServer.indexOf(
+			"limitProjectMutation(claimProjectPayloadReservation)",
+			studentParser
+		);
+		expect(studentAuth).toBeGreaterThan(-1);
+		expect(studentLimiter).toBeGreaterThan(studentAuth);
+		expect(studentHeavy).toBeGreaterThan(studentLimiter);
+		expect(studentGuard).toBeGreaterThan(studentHeavy);
+		expect(studentParser).toBeGreaterThan(studentGuard);
+		expect(studentClaim).toBeGreaterThan(studentParser);
+
+		const adminMount = compactServer.indexOf(
+			'app.use( "/admins/students/:studentID/projects", teacherProjectDataAccessLimiter, validAdmin,'
+		);
+		const adminLimiter = compactServer.indexOf(
+			"limitProjectMutation(teacherProjectWriteLimiter)",
+			adminMount
+		);
+		const adminHeavy = compactServer.indexOf(
+			"limitProjectMutation(heavyProjectPayloadLimiter)",
+			adminLimiter
+		);
+		const adminGuard = compactServer.indexOf(
+			"limitProjectMutation(projectPayloadConcurrencyGuard)",
+			adminHeavy
+		);
+		const adminParser = compactServer.indexOf(
+			"parseProjectMutation",
+			adminGuard
+		);
+		const adminClaim = compactServer.indexOf(
+			"limitProjectMutation(claimProjectPayloadReservation)",
+			adminParser
+		);
+		expect(adminMount).toBeGreaterThan(studentClaim);
+		expect(adminLimiter).toBeGreaterThan(adminMount);
+		expect(adminHeavy).toBeGreaterThan(adminLimiter);
+		expect(adminGuard).toBeGreaterThan(adminHeavy);
+		expect(adminParser).toBeGreaterThan(adminGuard);
+		expect(adminClaim).toBeGreaterThan(adminParser);
+
+		const compactStudentRoutes = studentRoutesSource.replace(/\s+/g, " ");
+		expect(compactStudentRoutes).toContain(
+			'router.use( ["/projects", "/project-reviews"], validStudent, requireStudentContext )'
+		);
+		for (const route of [
+			'router.post( "/projects", ...projectWriteLimiters, withProjectPayloadReservation( withStudentDataWriteLease( withStudentRecordMutationLease(createPythonProject) ) ) )',
+			'router.put( "/projects/:projectID", ...projectWriteLimiters, withProjectPayloadReservation( withStudentDataWriteLease( withStudentRecordMutationLease(updatePythonProject) ) ) )',
+			'router.delete( "/projects/:projectID", ...projectWriteLimiters, withProjectPayloadReservation( withStudentDataWriteLease( withStudentRecordMutationLease(deletePythonProject) ) ) )'
+		]) {
+			expect(compactStudentRoutes).toContain(route);
+		}
+
+		const compactAdminRoutes = adminRoutesSource.replace(/\s+/g, " ");
+		for (const route of [
+			'configuredRouter.post( "/students/:studentID/projects/:projectID/review", validAdmin, ...projectWriteLimiters, withProjectPayloadReservation( withStudentDataWriteLease( withStudentRecordMutationLease(createPythonProjectReview) ) ) )',
+			'configuredRouter.put( "/students/:studentID/projects/:projectID/review/:reviewID", validAdmin, ...projectWriteLimiters, withProjectPayloadReservation( withStudentDataWriteLease( withStudentRecordMutationLease(updatePythonProjectReview) ) ) )'
+		]) {
+			expect(compactAdminRoutes).toContain(route);
+		}
 	});
 
 	it("rejects a create when either atomic quota cap would be exceeded", async () => {
@@ -559,8 +669,48 @@ describe("Python project routes", () => {
 					runValidators: true,
 					timestamps: false
 				}
+		);
+	});
+
+	});
+
+	it("matches malformed admin project IDs at the preauthorization boundary", async () => {
+		const app = express();
+		const controller = vi.fn((_req, res) => res.sendStatus(204));
+		app.use(
+			"/admins/students/:studentID/projects",
+			(_req, res) => res.sendStatus(403)
+		);
+		app.post(
+			"/admins/students/:studentID/projects/:projectID/review",
+			controller
+		);
+
+		const server = await new Promise<Server>(resolve => {
+			const instance = app.listen(
+				0,
+				"127.0.0.1",
+				() => resolve(instance)
 			);
 		});
+		const address = server.address();
+		if (!address || typeof address === "string") {
+			throw new TypeError("Test server did not bind to an IPv4 port");
+		}
+
+		try {
+			const response = await fetch(
+				`http://127.0.0.1:${address.port}/admins/students/not-an-object-id/projects/not-an-object-id/review`,
+				{ method: "POST" }
+			);
+			expect(response.status).toBe(403);
+			expect(controller).not.toHaveBeenCalled();
+		}
+		finally {
+			await new Promise<void>((resolve, reject) => {
+				server.close(error => error ? reject(error) : resolve());
+			});
+		}
 	});
 
 	it("requires exactly the expected server timestamp on deletes", async () => {
@@ -648,6 +798,9 @@ describe("Python project routes", () => {
 			expect(response.status).toBe(204);
 			const tombstoneAt =
 				modelMocks.pythonProjectFindOneAndUpdate.mock.calls[0]?.[1].$set.deletedAt;
+			const purgeAt =
+				modelMocks.pythonProjectFindOneAndUpdate.mock.calls[0]?.[1].$set.purgeAt;
+			expect(purgeAt.getTime() - tombstoneAt.getTime()).toBe(60 * 60 * 1000);
 			expect(modelMocks.pythonProjectFindOneAndUpdate).toHaveBeenCalledWith(
 				{
 					_id: projectID,
@@ -662,6 +815,7 @@ describe("Python project routes", () => {
 						deletedAt: tombstoneAt,
 						files: [],
 						mode: "python",
+						purgeAt,
 						title: "Deleted project",
 						updatedAt: tombstoneAt
 					},
@@ -686,6 +840,7 @@ describe("Python project routes", () => {
 						deletedAt: tombstoneAt,
 						files: [],
 						note: "",
+						purgeAt,
 						visibleToStudent: false
 					})
 				}),
@@ -762,7 +917,10 @@ describe("Python project routes", () => {
 						starterLabel: "Loops",
 						updatedAt
 					}),
-					$unset: expect.objectContaining({ deletedAt: 1 })
+					$unset: expect.objectContaining({
+						deletedAt: 1,
+						purgeAt: 1
+					})
 				}),
 				{ timestamps: false }
 			);
@@ -780,7 +938,10 @@ describe("Python project routes", () => {
 						note: review.note,
 						updatedAt
 					}),
-					$unset: expect.objectContaining({ deletedAt: 1 })
+					$unset: expect.objectContaining({
+						deletedAt: 1,
+						purgeAt: 1
+					})
 				}),
 				{ timestamps: false }
 			);
@@ -818,7 +979,7 @@ describe("Python project routes", () => {
 		});
 	});
 
-	it("leaves only scrubbed TTL tombstones when a final hard purge fails", async () => {
+	it("leaves only scrubbed tombstones scheduled for app-owned cleanup when a final hard purge fails", async () => {
 		modelMocks.pythonProjectFindOne.mockResolvedValue(makeProject());
 		modelMocks.pythonProjectFindOneAndUpdate.mockImplementation(
 			async (_filter, update) => makeProject({
@@ -848,6 +1009,14 @@ describe("Python project routes", () => {
 			expect(
 				modelMocks.pythonProjectReviewFindOneAndUpdate.mock.calls[0]?.[1].$set.files
 			).toEqual([]);
+			expect(
+				modelMocks.pythonProjectFindOneAndUpdate.mock.calls[0]?.[1].$set.purgeAt
+			).toEqual(expect.any(Date));
+			expect(
+				modelMocks.pythonProjectReviewFindOneAndUpdate.mock.calls[0]?.[1].$set.purgeAt
+			).toEqual(
+				modelMocks.pythonProjectFindOneAndUpdate.mock.calls[0]?.[1].$set.purgeAt
+			);
 		});
 	});
 });

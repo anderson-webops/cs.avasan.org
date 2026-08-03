@@ -7,6 +7,7 @@ import { z } from "zod";
 import { PythonProject } from "../../models/schemas/PythonProject.js";
 import { PythonProjectReview } from "../../models/schemas/PythonProjectReview.js";
 import { Student } from "../../models/schemas/Student.js";
+import { pythonProjectTombstonePurgeAt } from "../../services/pythonProjectTombstoneLifecycle.js";
 
 const SAFE_FILE_SEGMENT_RE = /^\w[\w.-]*$/;
 const ROOT_TEXT_FILE_RE = /^\w[\w.-]*\.(?:csv|eps|json|md|ps|py|txt)$/i;
@@ -438,7 +439,7 @@ function projectRestoreUpdate(project: IPythonProject) {
 		title: project.title,
 		updatedAt: project.updatedAt
 	};
-	const $unset: Record<string, 1> = { deletedAt: 1 };
+	const $unset: Record<string, 1> = { deletedAt: 1, purgeAt: 1 };
 	restoreOptionalFields(project, PROJECT_OPTIONAL_FIELDS, $set, $unset);
 	return { $set, $unset };
 }
@@ -454,7 +455,7 @@ function reviewRestoreUpdate(review: IPythonProjectReview) {
 		updatedAt: review.updatedAt,
 		visibleToStudent: review.visibleToStudent
 	};
-	const $unset: Record<string, 1> = { deletedAt: 1 };
+	const $unset: Record<string, 1> = { deletedAt: 1, purgeAt: 1 };
 	restoreOptionalFields(review, REVIEW_OPTIONAL_FIELDS, $set, $unset);
 	return { $set, $unset };
 }
@@ -1039,6 +1040,7 @@ export const deletePythonProject: RequestHandler = async (req, res) => {
 	}
 
 	const deletedAt = new Date(Math.max(Date.now(), expectedUpdatedAt.getTime() + 1));
+	const purgeAt = pythonProjectTombstonePurgeAt(deletedAt);
 	const byteCount = storedProjectByteCount(project);
 	try {
 		const tombstone = await PythonProject.findOneAndUpdate(
@@ -1055,6 +1057,7 @@ export const deletePythonProject: RequestHandler = async (req, res) => {
 					deletedAt,
 					files: [],
 					mode: "python",
+					purgeAt,
 					title: "Deleted project",
 					updatedAt: deletedAt
 				},
@@ -1085,6 +1088,7 @@ export const deletePythonProject: RequestHandler = async (req, res) => {
 						files: [],
 						mode: "python",
 						note: "",
+						purgeAt,
 						sourceUpdatedAt: deletedAt,
 						title: "Deleted project review",
 						updatedAt: deletedAt,

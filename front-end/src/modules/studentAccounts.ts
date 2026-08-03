@@ -1,5 +1,18 @@
 import { api } from "@/api";
 
+export interface StudentRecordPreservationEvent {
+	action: "placed" | "released";
+	at: string;
+}
+
+export interface StudentRecordPreservation {
+	active: boolean;
+	purpose: "ferpa-inspection-review";
+	placedAt: string | null;
+	releasedAt: string | null;
+	events: StudentRecordPreservationEvent[];
+}
+
 export interface StudentAccount {
 	_id: string;
 	username: string;
@@ -19,6 +32,7 @@ export interface StudentAccount {
 	lastLoginAt?: string | null;
 	retentionExpiresAt?: string | null;
 	deletionPending?: boolean;
+	recordPreservation?: StudentRecordPreservation;
 	projectCount?: number;
 	lastProjectSavedAt?: string | null;
 }
@@ -160,6 +174,20 @@ export async function resetAdminStudentAccess(
 		{ teacherPassword }
 	);
 	return data;
+}
+
+export async function setAdminStudentRecordPreservation(
+	studentID: string,
+	active: boolean,
+	teacherPassword: string
+) {
+	const { data } = await api.put<{
+		recordPreservation: StudentRecordPreservation;
+	}>(`/admins/students/${studentID}/record-preservation`, {
+		active,
+		teacherPassword
+	});
+	return data.recordPreservation;
 }
 
 export async function exportAdminStudentRecords(

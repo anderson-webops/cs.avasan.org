@@ -51,6 +51,35 @@ school purpose, and assign responsibility for parent/student notices, record
 requests, security incidents, backups, and end-of-service deletion. Do not
 enable a feature merely because this implementation minimizes data.
 
+### Direct notice and affirmative authorization record
+
+The public page is not the operator's direct notice to the school. Before any
+child information is collected, the operator must issue a complete, dated,
+versioned notice directly to the identified school or district decision-maker
+through the school's approved channel. Preserve the exact notice delivered,
+its version and effective date, delivery date and method, the recipient's name,
+title, and school or district, and any attachments. The notice must describe
+each field, purpose, disclosure, provider, retention period, security measure,
+review/deletion method, and the public notice URL. It must be written clearly,
+contain no unrelated or contradictory material, and remain reproducible after
+a later public-page edit.
+
+Keep a separate affirmative authorization record. It must identify the
+authorized school or district official by name, title, and organization; the
+date and approved school use; the exact notice version accepted; the specific
+features approved; the selected retention periods; the approved providers;
+the legal basis selected by the school; and the authorization method. Silence,
+Julio's classroom role, deployment of the site, or use by a student is not
+authorization. Do not put the official's identity or the authorization record
+in a student account or this application database.
+
+Issue a new notice and obtain renewed affirmative authorization before a
+material change, including a new information category, use, disclosure,
+provider, identity flow, retention period, analytics event, or materially
+different security or deletion practice. Preserve both versions and the
+supersession date. The operator remains responsible for any direct parental
+notice or consent that the school's selected basis does not cover.
+
 ## Fail-closed rollout gate
 
 CS courses, the IDE, browser saves, and Math's browser-local Graph
@@ -73,26 +102,34 @@ student-data feature until all of the following are complete:
 5. The operator has obtained and retained the required written confidentiality,
    security, and integrity assurances from every approved service provider or
    other third party that receives covered student information.
-6. The public `/student-privacy` page has been built with the contact and both
-   notices, accurately states the approved purposes and deletion timeframes,
-   and has been reviewed in the deployed site.
+6. The public `/student-privacy` page has been built with the contact, both
+   notices, the exact reviewed policy version, and its real `YYYY-MM-DD`
+   effective date; it accurately states the approved purposes and deletion
+   timeframes and has been reviewed in the deployed site.
 7. For accounts, the authorized reviewer has selected a whole-number record
    retention period from 30 through 365 days. There is no application default.
 8. The school or district has supplied its record-access, correction, export,
    deletion, backup, security-log, and end-of-service retention process.
 9. Julio understands that anonymous totals are directional signals, not
    attendance, grades, or evidence about an individual student.
+10. The operator-issued direct notice, identified affirmative school
+    authorization, current security-program evidence, provider contracts, and
+    material-change review described in this runbook are stored in the
+    school's approved compliance system.
 
 The backend requires `CLASSROOM_PRIVACY_APPROVED=true`,
 `SCHOOL_PRIVACY_CONTACT`, `CLASSROOM_PRIVACY_OPERATOR_NOTICE`,
-`CLASSROOM_SERVICE_PROVIDER_NOTICE`, and the desired feature flag. Accounts
-additionally require a whole-number `STUDENT_RECORD_RETENTION_DAYS` value from
-30 through 365. The canonical native deployer and the manually selected
-Compose fallback both derive the frontend approval and feature switches
-directly from those canonical backend values and map the same contact, notices,
-and retention value into the frontend build. There is no second production set
-of `VITE_` feature switches to drift. Missing or invalid configuration fails
-closed.
+`CLASSROOM_SERVICE_PROVIDER_NOTICE`, `CLASSROOM_PRIVACY_POLICY_VERSION`,
+`CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE`, and the desired feature flag. The
+version is a 1-to-64-character token and the effective date must be a real,
+current-or-past `YYYY-MM-DD` calendar date. Accounts additionally require a
+whole-number `STUDENT_RECORD_RETENTION_DAYS` value from 30 through 365. The
+canonical native deployer and the manually selected Compose fallback both
+derive the frontend approval and feature switches directly from those
+canonical backend values and map the same contact, notices, policy metadata,
+and retention value into the
+frontend build. There is no second production set of `VITE_` feature switches
+to drift. Missing or invalid configuration fails closed.
 
 | Feature                                   | Backend                                                                                      | Frontend build                                               |
 | ----------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
@@ -107,6 +144,53 @@ exchange transiently receives the provider token response needed to validate
 the ID token. Only the one-way hash of the verified opaque subject is
 persisted; provider tokens are not retained.
 
+Account approval does not automatically approve OAuth. Before setting
+`STUDENT_OAUTH_ENABLED=true`, the authorized reviewer must separately classify
+Google and Apple for this use (for example, as an operator, contracted service
+provider, or other recipient), document the applicable disclosure basis, and
+approve the provider terms, scopes, callback flow, data locations, retention,
+incident process, and contract or written assurances. Never infer a
+school-official relationship from the availability of a managed Google or
+Apple account. The direct and public notices must name or specifically
+categorize the approved identity providers and explain the limited disclosure.
+
+### Written security-program evidence
+
+The operator's written program required by current
+[16 CFR 312.8](https://www.ecfr.gov/current/title-16/chapter-I/subchapter-C/part-312/section-312.8)
+must be evidence, not a checkbox. Before activation and at least annually,
+retain the designated coordinator, dated internal and external risk
+assessment, inventory and sensitivity classification, safeguards mapped to
+identified risks, test and monitoring results, remediation owners and dates,
+and the annual evaluation or update. Repeat the assessment after a material
+system or threat change. For every other operator, service provider, or third
+party handling covered information, retain the capability review, written
+confidentiality/security/integrity assurance, contract, and current oversight
+evidence. Track access control, encryption and secret handling, dependency and
+patch review, backup scope, incident response, deletion verification, and
+least-privilege production access without copying student content into the
+compliance file.
+
+For California K-12 covered information, review the current
+[Business and Professions Code section 22584](https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?article=&chapter=22.2.&division=8.&lawCode=BPC&part=&title=).
+A service-provider contract must limit use to the contracted service, prohibit
+subsequent disclosure, and require reasonable security. The approved deletion
+workflow must cover a school or local educational agency request and the
+statute's separate request path for CCPA-excluded information from a parent,
+guardian, or qualifying former pupil age 18 or older after at least 60 days out
+of enrollment, including required proof of non-enrollment and the statutory
+record exceptions. Route those requests through authorized school/legal review;
+the application must not decide eligibility from a student's assertion.
+
+CalOPPA is a separate conditional analysis. If the operator and service meet
+the commercial-site and California-consumer definitions in
+[Business and Professions Code sections 22575 and 22577](https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=BPC&sectionNum=22575.),
+the public policy must be conspicuously available and include the collected
+categories, sharing categories, review/change process, material-change notice
+process, effective date, browser-signal response, and whether other parties
+collect activity across sites. Record counsel's applicability decision; do not
+assume that COPPA, FERPA, or a school authorization resolves CalOPPA.
+
 ## Data inventory
 
 Julio must create each username as a school-approved, non-identifying alias
@@ -115,13 +199,22 @@ student number, or other direct identifier. Any alias-to-roster mapping belongs
 only in the school or district's approved record system, not this classroom
 application.
 
+Give students an age-appropriate reminder before account sync: do not put a
+real name, email, phone number, home address, precise location, student number,
+password, or access code in a project title, file name, code, or asset. Do not
+content-scan student code or copy code into application, security, analytics, or
+compliance logs as a substitute for that instruction. Anonymous IDE use must
+remain available without an account.
+
 The optional account system owns:
 
 - the username, account status, creation and successful-login timestamps,
   record-deletion deadline, password and one-time-code hashes, session-version
   counter, failed-login count, temporary account lockout, and the last random
   password-setup request marker used to recognize an interrupted or retried
-  password submission;
+  password submission; and, when an inspection or review request is open, the
+  fixed preservation purpose, active status, latest placed/released times, and
+  at most the last 32 fixed `placed`/`released` timestamp events;
 - a provider name and hash of an opaque Apple or Google subject, when chosen;
 - pending provider attempts, containing short-lived verifier, nonce, state,
   browser-binding proof, sign-in or connection mode, expiry, and, while
@@ -199,9 +292,11 @@ that student's own saved project titles, code, and files in the IDE. Julio may
 view a project and maintain a separate review copy, but Admin does not rewrite
 the student's source project. If account routes are disabled while retained
 records remain in maintenance, student sign-in, project editing, and project
-review are unavailable; Julio retains only the roster, alias-correction, export,
-deletion-receipt, and permanent-deletion tools needed to service authorized
-record requests. Do not promise a generic Admin project-correction workflow.
+review are unavailable; Julio retains only the roster, preservation,
+alias-correction, export, deletion-receipt, and permanent-deletion tools needed
+to service authorized record requests. Julio uses the JSON export, not an
+in-app project viewer, to inspect maintenance or held records. Do not promise a
+generic Admin project-correction workflow.
 
 Export, disable, or permanently delete the record when that is the authorized
 action. For any other requested change, follow the school or district's approved
@@ -210,11 +305,106 @@ guardian may refuse future optional account collection or use through the
 school process; anonymous courses and browser-local Python saves remain
 available on CS, while Graph Sketcher remains available on Math.
 
+## Outstanding inspection or review request
+
+[34 CFR 99.10(e)](https://www.ecfr.gov/current/title-34/subtitle-A/part-99/subpart-B/section-99.10)
+prohibits destruction of education records while an inspection and review
+request is outstanding. As soon as the school confirms an applicable request,
+Julio must open the student in Admin and choose **Preserve records** before
+review, correction, retention cleanup, or deletion continues. Re-enter Julio's
+password to place the hold. Keep requester identity, authority evidence,
+scope, correspondence, and deadlines only in the school's approved request
+system; there is intentionally no requester or free-text field in this app.
+
+The hold is preservation, not fulfillment. Under 34 CFR 99.10(b)-(d), the
+school must provide access within a reasonable period and no later than 45 days
+after receiving the request, respond to reasonable requests for explanations
+and interpretations, and make copies or other arrangements when circumstances
+effectively prevent inspection. Track the receipt date, deadline, required
+explanations, access arrangements, copies, and completion in the school's
+approved request system, not in this application.
+
+Placement first closes the per-student mutation gate and waits for every
+earlier username, project-content, review-content, or deletion mutation to
+finish. If an earlier deletion fully removed the student row, a later hold
+cannot restore it. If that deletion failed partway and left the row marked for
+retry, placement preserves whatever account, project, and review records still
+remain and pauses the next retry. It then atomically stores the durable hold on
+the student record. Every later education-record content mutation and every
+automatic retention candidate checks that database flag after acquiring the
+same gate, so a restart or hold-status database outage fails read-only. The
+hold records only the fixed purpose `ferpa-inspection-review`, active status,
+latest placed/released timestamps, and a bounded trail of the last 32 fixed
+`placed` or `released` timestamp events. It does not record a requester, reason
+narrative, case number, or student name beyond the existing school-approved
+alias.
+
+A project deletion first scrubs its project and review rows and assigns a
+fallback cleanup deadline, then attempts to remove both rows immediately after
+quota reconciliation succeeds. Normally no tombstone remains. If an
+interrupted or incomplete final removal leaves either scrubbed row, its
+application-owned fallback schedule—not a MongoDB TTL index—controls cleanup.
+Placing an active preservation hold suspends that schedule. Releasing the hold
+schedules every still-unscheduled tombstone for a fresh one-hour grace period;
+the application's periodic cleanup may physically remove an eligible row after
+that period. Startup removes legacy MongoDB TTL indexes before listening,
+reconciles schedules under the same verified per-student mutation lease, and
+does not physically delete whenever the student or hold state is ambiguous.
+
+The durable application flag controls only records in the canonical classroom
+Mongo database. For every request, identify any approved backup, replica,
+export, warehouse, incident copy, or other system that holds the subject's
+record; issue the corresponding operational or legal preservation instruction
+to each responsible owner and record confirmation in the school's approved
+system. Do not assume the application flag freezes, extends, or deletes an
+independent copy.
+
+While held, the retained record set is temporarily read-only. An existing
+authorized student session may read and list that student's projects and
+visible reviews while account routes remain enabled and retention is current.
+Julio uses the JSON export to inspect the records through the approved request
+process; the Admin project/review editor stays hidden. Project creation,
+editing, and deletion are blocked. Julio cannot
+correct the alias, create or edit a review, or delete the account, and automatic
+retention deletion skips the record. Only while account routes are enabled,
+retention is current, and deletion has not begun do security and access
+controls remain usable: student sign-in and sign-out,
+password and provider setup, Julio's disable/enable control, and access-code
+reset may update credential hashes, provider association, login security
+fields, retention deadline, or session version. A hold placed after partial
+deletion does not reactivate the disabled account or restore sign-in, password,
+provider, access-code, or active-state controls; Julio may export only the
+remnants that still exist. Maintenance-only and expired rows
+likewise do not regain student security controls because a hold is placed. Safe
+account metadata in the export
+reflects the current state; secret hashes, access-code values, and opaque
+provider-subject proofs are excluded. These controls must not be used to
+rewrite project or review content. Anonymous course/IDE use and browser-local
+saves remain available.
+
+The JSON export includes the hold state and its bounded event trail. Keep the
+application hold active until the school marks the inspection/review request
+closed and confirms that required access, explanation, copies, appeal handling,
+and follow-up have been completed. If the school separately authorizes an alias
+correction, preserve the original outside this application when required,
+close the inspection/review request, then choose **Review preservation hold**,
+re-enter Julio's password, and choose **Release hold**. Only after release may
+Julio perform the separately approved alias correction; this application does
+not amend a held record. Release is itself
+recorded before the mutation gate reopens. If a deletion was already pending,
+release also recloses the deletion lease gate and allows that partial deletion
+to resume on Julio's next retry or the next retention sweep; records already
+removed cannot be recovered. The hold itself does not extend an already-expired
+retention deadline, although an allowed successful sign-in may renew it under
+the normal policy. Once released, the next retention sweep may delete an
+expired record. Export first if the approved process requires a copy.
+
 ## Export
 
 At `/admin`, choose **Export records** for the student and re-enter Julio's
-password. The JSON export includes every retained active or soft-deleted Python
-project and review copy plus safe account metadata and a record inventory. It
+password. The JSON export includes every still-present active or soft-deleted
+Python project and review copy plus safe account metadata and a record
+inventory. It
 reports the count of pending provider attempts but does not export those
 temporary attempt records. The server reads projects and reviews from the
 database one record at a time and streams the JSON response, rather than
@@ -226,7 +416,14 @@ proofs rather than useful educational records. The export includes an
 operation ID and timestamp. Store or transmit the downloaded file only through
 the school or district's approved channel. The Admin browser treats the
 response as a download Blob instead of parsing and re-serializing the complete
-record as JavaScript objects.
+record as JavaScript objects. Export schema version 2 includes the fixed-purpose
+preservation state and its bounded placed/released event trail.
+
+If deletion already began, the export contains only account, project, and
+review records that remain. It does not embed the unfinished subject-linked
+deletion receipt. Download that matching receipt separately from **Recent
+deletion receipts** and retain both artifacts through the approved request and
+backup-follow-up process.
 
 ## Permanent deletion
 
@@ -299,6 +496,14 @@ retroactive deletion when a policy is first enabled, increased, or decreased.
 The API completes one retention sweep before it begins listening and then runs
 a non-overlapping sweep hourly. Expired rows use the same two-fence,
 write-drain, receipt, and collection-deletion path as Julio's manual deletion.
+A preservation-held row, including a row left pending by a partial earlier
+deletion, is excluded from candidate queries. Each selected row must also
+acquire the verified per-student mutation lease before the first deletion
+fence. The gate gives the operations one order: a hold that closes it first
+blocks a later retention deletion, while a retention deletion that leases it
+first finishes before hold placement can continue. A hold does not preempt an
+already-leased deletion and cannot restore rows that deletion already removed.
+A hold-status lookup outage skips deletion and is counted for retry.
 A concurrent successful sign-in wins only by atomically renewing the deadline
 before the first deletion fence. After that fence succeeds, failed cleanup
 leaves a disabled, deletion-pending row visible to Julio for retry. A failure

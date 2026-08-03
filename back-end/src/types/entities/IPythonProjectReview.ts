@@ -24,6 +24,7 @@ export interface IPythonProjectReview {
 	note?: string;
 	sourceUpdatedAt: Date;
 	deletedAt?: Date;
+	purgeAt?: Date;
 	createdAt: Date;
 	updatedAt: Date;
 }
