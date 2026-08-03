@@ -87,8 +87,8 @@ wait_for_api_readiness() {
 	local cs_attempt
 	for cs_attempt in {1..30}; do
 		cs_readiness_status=0
-		curl --fail --silent --show-error --max-time 2 \
-			http://127.0.0.1:3008/readyz >/dev/null \
+		curl --fail --silent --max-time 2 \
+			http://127.0.0.1:3008/readyz >/dev/null 2>&1 \
 			|| cs_readiness_status=$?
 		if (( cs_readiness_status == 0 )); then
 			return 0

@@ -228,6 +228,7 @@ false: browser sessions are served through the same-origin `/api` route.
 
 Set `CLASSROOM_PRIVACY_APPROVED=true`, `SCHOOL_PRIVACY_CONTACT`,
 `CLASSROOM_PRIVACY_OPERATOR_NOTICE`, `CLASSROOM_SERVICE_PROVIDER_NOTICE`,
+`CLASSROOM_PRIVACY_POLICY_VERSION`, `CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE`,
 `STUDENT_ACCOUNTS_ENABLED=true`, and a reviewed 30–365-day
 `STUDENT_RECORD_RETENTION_DAYS` only after the rollout checklist is complete.
 The Compose fallback derives the frontend approval and feature switches directly
@@ -235,7 +236,10 @@ from those canonical backend values and maps the same contact, notices, and
 retention setting into the build. This prevents a live API with hidden controls
 or visible controls with a disabled API. Missing or invalid prerequisites keep
 the student routes and visible sign-in UI unavailable without affecting
-anonymous classroom use.
+anonymous classroom use. The policy version is a reviewed 1-to-64-character
+token using letters, numbers, periods, underscores, or hyphens; the effective
+date must be a real, current-or-past California date written exactly as
+`YYYY-MM-DD`. Do not invent either production value.
 
 All checked-in account, provider-sign-in, and classroom-count flags remain
 `false`. Do not turn them on until the school or district has approved the
@@ -318,7 +322,7 @@ that identity fallback is not permitted by the production Compose path. Inject
 the deployment identity without changing application secrets:
 
 ```bash
-export CS_RELEASE_VERSION=2.7.111
+export CS_RELEASE_VERSION=2.7.112
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 docker compose --env-file deploy/cs.env -f compose.production.yml build
 ```
@@ -333,7 +337,7 @@ To exercise or prepare the manually selected Compose fallback:
 ```bash
 install -m 600 deploy/cs.env.example deploy/cs.env
 # Fill secrets, keep all optional features false until the privacy gate is met.
-export CS_RELEASE_VERSION=2.7.111
+export CS_RELEASE_VERSION=2.7.112
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 ./scripts/verify-deploy-env-permissions.sh
 docker compose --env-file deploy/cs.env -f compose.production.yml build

@@ -15,7 +15,8 @@ import {
 	fetchAdminStudentDeletionReceipts,
 	fetchAdminStudents,
 	resetAdminStudentAccess,
-	setAdminStudentActive
+	setAdminStudentActive,
+	setAdminStudentRecordPreservation
 } from "@/modules/studentAccounts";
 import { useAppStore } from "@/stores/app";
 
@@ -46,6 +47,8 @@ const recordCandidateID = ref("");
 const recordAction = ref<"delete" | "export" | "">("");
 const recordTeacherPassword = ref("");
 const deleteConfirmation = ref("");
+const preservationCandidateID = ref("");
+const preservationTeacherPassword = ref("");
 const error = ref("");
 const status = ref("");
 const revealedAccess = ref<StudentAccessCode | null>(null);
@@ -77,6 +80,16 @@ function formatRosterDate(value: string | null | undefined) {
 	}).format(date);
 }
 
+function formatPreservationTimestamp(value: string | null | undefined) {
+	if (!value) return "Not recorded";
+	const date = new Date(value);
+	if (Number.isNaN(date.getTime())) return "Not recorded";
+	return new Intl.DateTimeFormat("en-US", {
+		dateStyle: "medium",
+		timeStyle: "short"
+	}).format(date);
+}
+
 function rosterProjectCount(student: StudentAccount) {
 	const count = student.projectCount;
 	if (typeof count !== "number" || !Number.isFinite(count) || count < 0) {
@@ -89,6 +102,14 @@ function retentionIsExpired(student: StudentAccount) {
 	if (!student.retentionExpiresAt) return false;
 	const expiresAt = new Date(student.retentionExpiresAt).getTime();
 	return Number.isFinite(expiresAt) && expiresAt <= Date.now();
+}
+
+function studentSecurityControlsAreAvailable(student: StudentAccount) {
+	return (
+		!props.maintenanceOnly &&
+		!student.deletionPending &&
+		!retentionIsExpired(student)
+	);
 }
 
 function credentialStatus(student: StudentAccount) {
@@ -172,6 +193,8 @@ function clearSensitiveManagementState() {
 	recordAction.value = "";
 	recordTeacherPassword.value = "";
 	deleteConfirmation.value = "";
+	preservationCandidateID.value = "";
+	preservationTeacherPassword.value = "";
 	busyStudentID.value = "";
 }
 
@@ -238,6 +261,7 @@ function startReset(studentID: string) {
 	dismissAccessCode();
 	cancelCorrection();
 	cancelRecordAction();
+	cancelPreservationAction();
 	resetTeacherPassword.value = "";
 	resetCandidateID.value = studentID;
 }
@@ -248,11 +272,13 @@ function cancelReset() {
 }
 
 function startCorrection(student: StudentAccount) {
+	if (student.recordPreservation?.active) return;
 	error.value = "";
 	status.value = "";
 	dismissAccessCode();
 	cancelReset();
 	cancelRecordAction();
+	cancelPreservationAction();
 	correctionCandidateID.value = student._id;
 	correctedUsername.value = student.username;
 	correctionTeacherPassword.value = "";
@@ -270,10 +296,27 @@ function startRecordAction(studentID: string, action: "delete" | "export") {
 	dismissAccessCode();
 	cancelReset();
 	cancelCorrection();
+	cancelPreservationAction();
 	recordCandidateID.value = studentID;
 	recordAction.value = action;
 	recordTeacherPassword.value = "";
 	deleteConfirmation.value = "";
+}
+
+function startPreservationAction(studentID: string) {
+	error.value = "";
+	status.value = "";
+	dismissAccessCode();
+	cancelReset();
+	cancelCorrection();
+	cancelRecordAction();
+	preservationCandidateID.value = studentID;
+	preservationTeacherPassword.value = "";
+}
+
+function cancelPreservationAction() {
+	preservationCandidateID.value = "";
+	preservationTeacherPassword.value = "";
 }
 
 function cancelRecordAction() {
@@ -390,7 +433,8 @@ async function deleteRecords(student: StudentAccount) {
 		recordAction.value !== "delete" ||
 		!recordTeacherPassword.value ||
 		deleteConfirmation.value.trim().toLowerCase() !==
-			student.username.toLowerCase()
+			student.username.toLowerCase() ||
+		student.recordPreservation?.active
 	) {
 		return;
 	}
@@ -423,6 +467,45 @@ async function deleteRecords(student: StudentAccount) {
 		);
 	} finally {
 		recordTeacherPassword.value = "";
+		busyStudentID.value = "";
+	}
+}
+
+async function updateRecordPreservation(student: StudentAccount) {
+	if (
+		busyStudentID.value ||
+		preservationCandidateID.value !== student._id ||
+		!preservationTeacherPassword.value
+	) {
+		return;
+	}
+
+	const active = !student.recordPreservation?.active;
+	busyStudentID.value = student._id;
+	error.value = "";
+	status.value = "";
+	try {
+		const recordPreservation = await setAdminStudentRecordPreservation(
+			student._id,
+			active,
+			preservationTeacherPassword.value
+		);
+		replaceStudent({ ...student, recordPreservation });
+		status.value = active
+			? student.deletionPending
+				? `Placed a record-preservation hold for ${student.username}. Any records that remain after the earlier deletion attempt are preserved, but already-removed records cannot be restored.`
+				: `Placed a record-preservation hold for ${student.username}. Project and review content, alias correction, and deletion are paused.`
+			: student.deletionPending
+				? `Released the record-preservation hold for ${student.username}. The pending deletion may resume on the next retry or retention sweep, and records already removed cannot be recovered.`
+				: `Released the record-preservation hold for ${student.username}. Normal retention and deletion rules apply again.`;
+		cancelPreservationAction();
+	} catch (caught: unknown) {
+		handleManagementError(
+			caught,
+			"Couldn’t update this student’s record-preservation hold."
+		);
+	} finally {
+		preservationTeacherPassword.value = "";
 		busyStudentID.value = "";
 	}
 }
@@ -507,7 +590,7 @@ onMounted(loadStudents);
 					{{ maintenanceOnly ? "Student records" : "Students" }}
 				</h2>
 				<p v-if="maintenanceOnly">
-					Review, correct, export, or delete records retained under
+					Preserve, review, correct, export, or delete records under
 					the school’s configured retention period.
 				</p>
 				<p v-else>Create access and review saved Python projects.</p>
@@ -538,7 +621,10 @@ onMounted(loadStudents);
 					Use a school-approved alias such as river-7. Do not use a
 					full name, email, birthdate, student number, or other direct
 					identifier. Keep the alias-to-roster mapping only in the
-					school’s approved system.
+					school’s approved system. See
+					<a href="/student-privacy">
+						student privacy and record requests </a
+					>.
 				</small>
 			</div>
 			<div class="student-management__field">
@@ -678,6 +764,12 @@ onMounted(loadStudents);
 						>
 							{{ credentialStatus(student) }}
 						</span>
+						<span
+							v-if="student.recordPreservation?.active"
+							class="student-management__preservation-state"
+						>
+							Records preserved for inspection or review
+						</span>
 						<dl class="student-management__activity">
 							<div>
 								<dt>Projects</dt>
@@ -716,8 +808,26 @@ onMounted(loadStudents);
 					<div class="student-management__student-actions">
 						<button
 							class="site-button site-button--secondary student-management__button"
+							:class="{
+								'student-management__preservation-button':
+									student.recordPreservation?.active
+							}"
+							:disabled="!!busyStudentID"
+							type="button"
+							@click="startPreservationAction(student._id)"
+						>
+							{{
+								student.recordPreservation?.active
+									? "Review preservation hold"
+									: "Preserve records"
+							}}
+						</button>
+						<button
+							class="site-button site-button--secondary student-management__button"
 							:disabled="
-								!!busyStudentID || student.deletionPending
+								!!busyStudentID ||
+								student.deletionPending ||
+								student.recordPreservation?.active
 							"
 							type="button"
 							@click="startCorrection(student)"
@@ -760,7 +870,9 @@ onMounted(loadStudents);
 						<button
 							class="site-button site-button--secondary student-management__button"
 							:disabled="
-								!!busyStudentID || student.deletionPending
+								!!busyStudentID ||
+								(student.deletionPending &&
+									!student.recordPreservation?.active)
 							"
 							type="button"
 							@click="startRecordAction(student._id, 'export')"
@@ -769,7 +881,10 @@ onMounted(loadStudents);
 						</button>
 						<button
 							class="site-button site-button--secondary student-management__button student-management__disable"
-							:disabled="!!busyStudentID"
+							:disabled="
+								!!busyStudentID ||
+								student.recordPreservation?.active
+							"
 							type="button"
 							@click="startRecordAction(student._id, 'delete')"
 						>
@@ -799,6 +914,7 @@ onMounted(loadStudents);
 						<input
 							:id="`correct-username-${student._id}`"
 							v-model="correctedUsername"
+							:aria-describedby="`correct-username-hint-${student._id}`"
 							autocomplete="off"
 							autocapitalize="none"
 							maxlength="24"
@@ -807,6 +923,12 @@ onMounted(loadStudents);
 							spellcheck="false"
 							type="text"
 						/>
+						<small :id="`correct-username-hint-${student._id}`">
+							Use only a school-approved alias. See
+							<a href="/student-privacy">
+								student privacy and record requests </a
+							>.
+						</small>
 					</div>
 					<div class="student-management__field">
 						<label :for="`correct-teacher-password-${student._id}`">
@@ -837,6 +959,145 @@ onMounted(loadStudents);
 							:disabled="busyStudentID === student._id"
 							type="button"
 							@click="cancelCorrection"
+						>
+							Cancel
+						</button>
+					</div>
+				</form>
+
+				<form
+					v-if="preservationCandidateID === student._id"
+					class="student-management__record-action student-management__record-preservation"
+					@submit.prevent="updateRecordPreservation(student)"
+				>
+					<div>
+						<h4>
+							{{
+								student.recordPreservation?.active
+									? "Release record-preservation hold"
+									: "Preserve records for inspection or review"
+							}}
+						</h4>
+						<p>
+							This fixed-purpose hold is only for an open FERPA
+							inspection or review request. While active, project
+							and review changes, alias correction, and manual or
+							automatic deletion are blocked. Release the hold
+							only after the request is closed.
+							<template
+								v-if="
+									studentSecurityControlsAreAvailable(student)
+								"
+							>
+								Password, provider, access-code, active-state,
+								login, and logout security controls remain
+								available.
+							</template>
+							<template v-else-if="student.deletionPending">
+								Because deletion already began, this hold does
+								not reactivate the account or restore sign-in,
+								password, provider, access-code, or active-state
+								controls.
+							</template>
+							<template
+								v-else-if="student.recordPreservation?.active"
+							>
+								Student sign-in, password or provider setup,
+								access-code reset, and active-state controls are
+								unavailable because this is a retained
+								maintenance record or its retention deadline has
+								passed. Preservation review and export remain
+								available. Alias correction and approved
+								deletion remain blocked until the request closes
+								and the hold is released.
+							</template>
+							<template v-else>
+								Student sign-in, password or provider setup,
+								access-code reset, and active-state controls are
+								unavailable because this is a retained
+								maintenance record or its retention deadline has
+								passed. Preservation, alias correction, export,
+								and approved deletion are available now; placing
+								the hold will pause correction and deletion
+								until the request closes.
+							</template>
+						</p>
+						<p v-if="student.recordPreservation?.active">
+							Placed
+							{{
+								formatPreservationTimestamp(
+									student.recordPreservation.placedAt
+								)
+							}}.
+						</p>
+						<p v-if="student.deletionPending">
+							A deletion attempt already began. A hold preserves
+							only the records that still remain; it cannot
+							restore records that were already removed.
+							<template v-if="student.recordPreservation?.active">
+								Releasing this hold allows the pending deletion
+								retry to resume; already-removed records cannot
+								be recovered.
+							</template>
+							<template v-else>
+								Placing the hold stops the next deletion retry
+								while the request remains open.
+							</template>
+						</p>
+					</div>
+					<details
+						v-if="student.recordPreservation?.events.length"
+						class="student-management__preservation-events"
+					>
+						<summary>Preservation audit history</summary>
+						<ol>
+							<li
+								v-for="(event, eventIndex) in student
+									.recordPreservation.events"
+								:key="`${event.action}-${event.at}-${eventIndex}`"
+							>
+								{{
+									event.action === "placed"
+										? "Placed"
+										: "Released"
+								}}
+								{{ formatPreservationTimestamp(event.at) }}
+							</li>
+						</ol>
+					</details>
+					<div class="student-management__field">
+						<label
+							:for="`preservation-teacher-password-${student._id}`"
+						>
+							Julio’s password
+						</label>
+						<input
+							:id="`preservation-teacher-password-${student._id}`"
+							v-model="preservationTeacherPassword"
+							autocomplete="current-password"
+							required
+							type="password"
+						/>
+					</div>
+					<div class="student-management__reset-actions">
+						<button
+							class="site-button site-button--primary student-management__button"
+							:disabled="busyStudentID === student._id"
+							type="submit"
+						>
+							{{
+								busyStudentID === student._id
+									? "Saving…"
+									: student.recordPreservation?.active
+										? "Release hold"
+										: "Place hold"
+							}}
+						</button>
+						<button
+							class="site-button site-button--secondary student-management__button"
+							:disabled="busyStudentID === student._id"
+							type="button"
+							@click="cancelPreservationAction"
 						>
 							Cancel
 						</button>
@@ -897,12 +1158,21 @@ onMounted(loadStudents);
 					@submit.prevent="exportRecords(student)"
 				>
 					<div>
-						<h4>Export account and educational records</h4>
+						<h4>
+							Export remaining account and educational records
+						</h4>
 						<p>
-							Downloads safe account metadata, projects, and
-							Julio’s review copies as JSON. The inventory counts
-							temporary provider attempts, but their credential
-							and proof values are excluded.
+							Downloads the safe account metadata, projects, and
+							Julio’s review copies that are still present as
+							JSON. The inventory counts temporary provider
+							attempts, but their credential and proof values are
+							excluded.
+						</p>
+						<p v-if="student.deletionPending">
+							Deletion already began, so this export contains only
+							the account, project, and review records that
+							remain. Download the matching deletion receipt
+							separately from Recent deletion receipts.
 						</p>
 					</div>
 					<div class="student-management__field">
@@ -961,6 +1231,10 @@ onMounted(loadStudents);
 							complete the school’s approved deletion process for
 							any retained backup copy.
 						</p>
+						<p v-if="student.recordPreservation?.active">
+							Deletion is unavailable while the
+							record-preservation hold is active.
+						</p>
 					</div>
 					<div class="student-management__field">
 						<label :for="`delete-confirmation-${student._id}`">
@@ -993,6 +1267,7 @@ onMounted(loadStudents);
 							class="site-button site-button--primary student-management__button student-management__delete-button"
 							:disabled="
 								busyStudentID === student._id ||
+								student.recordPreservation?.active ||
 								deleteConfirmation.trim().toLowerCase() !==
 									student.username.toLowerCase()
 							"
@@ -1016,7 +1291,11 @@ onMounted(loadStudents);
 				</form>
 
 				<StudentProjectReview
-					v-if="!maintenanceOnly && !student.deletionPending"
+					v-if="
+						!maintenanceOnly &&
+						!student.deletionPending &&
+						!student.recordPreservation?.active
+					"
 					:student-id="student._id"
 					:username="student.username"
 				/>
@@ -1260,6 +1539,21 @@ onMounted(loadStudents);
 	color: var(--color-error-text);
 }
 
+.student-management__preservation-state {
+	width: fit-content;
+	padding: 0.2rem 0.5rem;
+	border-radius: var(--radius-pill);
+	background: #fffbeb;
+	color: #92400e;
+	font-size: 0.78rem;
+	font-weight: 800;
+}
+
+.student-management__preservation-button {
+	border-color: #d97706;
+	color: #92400e;
+}
+
 .student-management__activity {
 	display: flex;
 	flex-wrap: wrap;
@@ -1314,6 +1608,26 @@ onMounted(loadStudents);
 .student-management__record-action--delete {
 	border-color: var(--color-error-border);
 	background: var(--color-error-surface);
+}
+
+.student-management__record-preservation {
+	border-color: #f59e0b;
+	background: #fffbeb;
+}
+
+.student-management__preservation-events {
+	color: var(--color-ink-soft);
+	font-size: 0.85rem;
+}
+
+.student-management__preservation-events summary {
+	cursor: pointer;
+	font-weight: 800;
+}
+
+.student-management__preservation-events ol {
+	margin: 0.5rem 0 0;
+	padding-left: 1.25rem;
 }
 
 .student-management__record-action h4 {

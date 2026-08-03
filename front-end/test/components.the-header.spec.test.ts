@@ -11,6 +11,11 @@ vi.mock("vue-router", () => ({
 describe("TheHeader.vue", () => {
 	beforeEach(() => {
 		vi.stubEnv("VITE_CLASSROOM_PRIVACY_APPROVED", "true");
+		vi.stubEnv("VITE_CLASSROOM_PRIVACY_POLICY_VERSION", "test-policy-1");
+		vi.stubEnv(
+			"VITE_CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE",
+			"2026-08-02"
+		);
 		vi.stubEnv(
 			"VITE_SCHOOL_PRIVACY_CONTACT",
 			"School privacy office, 555-0100"

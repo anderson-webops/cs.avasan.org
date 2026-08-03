@@ -59,7 +59,7 @@ describe("production smoke feature expectations", () => {
 	it("builds a secret-free native public configuration", () => {
 		const manifest = nativeReleaseManifest({
 			CLASSROOM_PRIVACY_APPROVED: "false",
-			CS_RELEASE_VERSION: "2.7.111",
+			CS_RELEASE_VERSION: "2.7.112",
 			MONGODB_URI: "mongodb://secret-value",
 			SESSION_SECRET: "secret-value",
 			SOURCE_REVISION: "a".repeat(40),
@@ -68,6 +68,10 @@ describe("production smoke feature expectations", () => {
 		const environment = nativePublicEnvironment(manifest);
 
 		expect(environment).toContain('CLASSROOM_PRIVACY_APPROVED="false"');
+		expect(environment).toContain('CLASSROOM_PRIVACY_POLICY_VERSION=""');
+		expect(environment).toContain(
+			'CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE=""'
+		);
 		expect(environment).toContain('STUDENT_ACCOUNTS_ENABLED="false"');
 		expect(environment).not.toContain("MONGODB_URI");
 		expect(environment).not.toContain("SESSION_SECRET");

@@ -217,7 +217,8 @@ export async function deleteStudentRecordSet(
 		const revoked = await Student.findOneAndUpdate(
 			{
 				_id: options.studentID,
-				...options.initialFilter
+				...options.initialFilter,
+				recordPreservationHoldActive: { $ne: true }
 			},
 			{
 				$inc: { sessionVersion: 1 },

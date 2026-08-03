@@ -94,6 +94,11 @@ describe("StudentAccess", () => {
 			"VITE_CLASSROOM_SERVICE_PROVIDER_NOTICE",
 			"Test approved provider notice"
 		);
+		vi.stubEnv("VITE_CLASSROOM_PRIVACY_POLICY_VERSION", "2026-08-02.1");
+		vi.stubEnv(
+			"VITE_CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE",
+			"2026-08-02"
+		);
 		vi.stubEnv("VITE_STUDENT_ACCOUNTS_ENABLED", "true");
 		vi.stubEnv("VITE_STUDENT_OAUTH_ENABLED", "true");
 		vi.stubEnv("VITE_STUDENT_RECORD_RETENTION_DAYS", "90");
@@ -132,6 +137,9 @@ describe("StudentAccess", () => {
 		const wrapper = mountAccess();
 
 		await wrapper.get("button").trigger("click");
+		expect(wrapper.text()).toContain(
+			"keep real names, contact details, locations, student numbers, passwords, and access codes out of project names, file names, code, and assets"
+		);
 		expect(wrapper.get("form").attributes("autocomplete")).toBe("off");
 		expect(
 			wrapper.get("#student-username").attributes("autocomplete")

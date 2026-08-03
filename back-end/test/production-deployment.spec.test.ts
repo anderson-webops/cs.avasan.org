@@ -131,6 +131,8 @@ describe("versioned full-stack production deployment", () => {
 		expect(environment).not.toContain("MONGO_ROOT_");
 		expect(environment).not.toContain("VITE_");
 		expect(environment).toContain("CLASSROOM_PRIVACY_APPROVED=false");
+		expect(environment).toContain("CLASSROOM_PRIVACY_POLICY_VERSION=");
+		expect(environment).toContain("CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE=");
 		expect(environment).toContain("STUDENT_ACCOUNTS_ENABLED=false");
 		expect(environment).toContain("STUDENT_OAUTH_ENABLED=false");
 
@@ -176,6 +178,8 @@ describe("versioned full-stack production deployment", () => {
 		expect(deployScript).toContain('npm_config_cache="$cs_build_root/npm-cache"');
 		expect(deployScript).toContain('export -n "$cs_env_name"');
 		expect(deployScript).toContain('export CLASSROOM_PRIVACY_APPROVED="${CLASSROOM_PRIVACY_APPROVED:-false}"');
+		expect(deployScript).toContain('export CLASSROOM_PRIVACY_POLICY_VERSION="${CLASSROOM_PRIVACY_POLICY_VERSION:-}"');
+		expect(deployScript).toContain('export CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE="${CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE:-}"');
 		expect(deployScript).toContain('export STUDENT_ACCOUNTS_ENABLED="${STUDENT_ACCOUNTS_ENABLED:-false}"');
 		expect(deployScript).toContain('export STUDENT_RECORD_RETENTION_DAYS="${STUDENT_RECORD_RETENTION_DAYS:-}"');
 		expect(deployScript).toContain("never Mongo, session, OAuth, Vault, or diagnostics");
@@ -285,14 +289,14 @@ describe("versioned full-stack production deployment", () => {
 			version: string;
 		};
 
-		expect(rootPackage.version).toBe("2.7.111");
-		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]111\}/g)).toHaveLength(2);
+		expect(rootPackage.version).toBe("2.7.112");
+		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]112\}/g)).toHaveLength(2);
 		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g)).toHaveLength(2);
 		expect(compose).not.toContain("SOURCE_REVISION:-unknown");
 		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
-		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.111");
+		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.112");
 		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
-		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.111");
+		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.112");
 		expect(apiDockerfile).toContain("ARG SOURCE_REVISION=unknown");
 		expect(frontendReleaseWriter).toContain("environment.COMMIT_REF?.trim()");
 		expect(frontendReleaseWriter).toContain("const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;");
@@ -390,6 +394,8 @@ describe("versioned full-stack production deployment", () => {
 
 		expect(environment).toContain("CLASSROOM_PRIVACY_APPROVED=false");
 		expect(environment).toContain("CLASSROOM_PRIVACY_OPERATOR_NOTICE=");
+		expect(environment).toContain("CLASSROOM_PRIVACY_POLICY_VERSION=");
+		expect(environment).toContain("CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE=");
 		expect(environment).toContain("CLASSROOM_SERVICE_PROVIDER_NOTICE=");
 		expect(environment).toContain("STUDENT_ACCOUNTS_ENABLED=false");
 		expect(environment).toContain("STUDENT_OAUTH_ENABLED=false");
@@ -404,6 +410,10 @@ describe("versioned full-stack production deployment", () => {
 		expect(compose).toContain("CLASSROOM_ORIGIN: https://cs.avasan.org");
 		expect(compose).toContain("VITE_STUDENT_RECORD_RETENTION_DAYS: ${STUDENT_RECORD_RETENTION_DAYS:-}");
 		expect(compose).toContain("VITE_CLASSROOM_PRIVACY_APPROVED: ${CLASSROOM_PRIVACY_APPROVED:-false}");
+		expect(compose).toContain("VITE_CLASSROOM_PRIVACY_POLICY_VERSION: ${CLASSROOM_PRIVACY_POLICY_VERSION:-}");
+		expect(compose).toContain("VITE_CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE: ${CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE:-}");
+		expect(api).toContain("CLASSROOM_PRIVACY_POLICY_VERSION: ${CLASSROOM_PRIVACY_POLICY_VERSION:-}");
+		expect(api).toContain("CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE: ${CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE:-}");
 		expect(compose).toContain("VITE_STUDENT_ACCOUNTS_ENABLED: ${STUDENT_ACCOUNTS_ENABLED:-false}");
 		expect(compose).toContain("VITE_STUDENT_OAUTH_ENABLED: ${STUDENT_OAUTH_ENABLED:-false}");
 		expect(compose).toContain("VITE_CLASSROOM_USAGE_ENABLED: ${CLASSROOM_ANALYTICS_COLLECTION_ENABLED:-false}");
@@ -427,6 +437,8 @@ describe("versioned full-stack production deployment", () => {
 		expect(netlify).toContain("status = 404");
 		expect(netlify).not.toContain('to = "/index.html"');
 		expect(netlify).toContain('VITE_STUDENT_ACCOUNTS_ENABLED = "false"');
+		expect(netlify).toContain('VITE_CLASSROOM_PRIVACY_POLICY_VERSION = ""');
+		expect(netlify).toContain('VITE_CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE = ""');
 		expect(netlify).toContain('VITE_STUDENT_RECORD_RETENTION_DAYS = ""');
 		expect(netlify).toContain('for = "/*"');
 		expect(netlify).toContain('Content-Security-Policy = "default-src');
@@ -459,6 +471,10 @@ describe("versioned full-stack production deployment", () => {
 		expect(frontendDockerfile).toContain("COPY deploy/nginx.conf /etc/nginx/conf.d/default.conf");
 		expect(frontendDockerfile).toContain("ARG VITE_CLASSROOM_PRIVACY_APPROVED=false");
 		expect(frontendDockerfile).toContain("ARG VITE_CLASSROOM_PRIVACY_OPERATOR_NOTICE=");
+		expect(frontendDockerfile).toContain("ARG VITE_CLASSROOM_PRIVACY_POLICY_VERSION=");
+		expect(frontendDockerfile).toContain("ARG VITE_CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE=");
+		expect(frontendDockerfile).toContain("ENV VITE_CLASSROOM_PRIVACY_POLICY_VERSION=$VITE_CLASSROOM_PRIVACY_POLICY_VERSION");
+		expect(frontendDockerfile).toContain("ENV VITE_CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE=$VITE_CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE");
 		expect(frontendDockerfile).toContain("ARG VITE_CLASSROOM_SERVICE_PROVIDER_NOTICE=");
 		expect(frontendDockerfile).toContain("ARG VITE_STUDENT_RECORD_RETENTION_DAYS=");
 		expect(frontendDockerfile).toContain("npm install --global npm@11.16.0");

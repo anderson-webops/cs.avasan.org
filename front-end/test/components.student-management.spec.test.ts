@@ -10,7 +10,8 @@ import {
 	fetchAdminStudentDeletionReceipts,
 	fetchAdminStudents,
 	resetAdminStudentAccess,
-	setAdminStudentActive
+	setAdminStudentActive,
+	setAdminStudentRecordPreservation
 } from "@/modules/studentAccounts";
 import { useAppStore } from "@/stores/app";
 
@@ -22,7 +23,8 @@ vi.mock("@/modules/studentAccounts", () => ({
 	fetchAdminStudentDeletionReceipts: vi.fn(),
 	fetchAdminStudents: vi.fn(),
 	resetAdminStudentAccess: vi.fn(),
-	setAdminStudentActive: vi.fn()
+	setAdminStudentActive: vi.fn(),
+	setAdminStudentRecordPreservation: vi.fn()
 }));
 
 const student = {
@@ -99,6 +101,7 @@ describe("StudentManagement", () => {
 		expect(wrapper.find("#new-student-username").exists()).toBe(false);
 		expect(wrapper.text()).not.toContain("Password set");
 		expect(labels).toEqual([
+			"Preserve records",
 			"Correct username",
 			"Export records",
 			"Delete records"
@@ -109,6 +112,42 @@ describe("StudentManagement", () => {
 		expect(createAdminStudent).not.toHaveBeenCalled();
 		expect(resetAdminStudentAccess).not.toHaveBeenCalled();
 		expect(setAdminStudentActive).not.toHaveBeenCalled();
+	});
+
+	it("describes held maintenance records without promising student security controls", async () => {
+		vi.mocked(fetchAdminStudents).mockResolvedValueOnce([
+			{
+				...student,
+				recordPreservation: {
+					active: true,
+					events: [],
+					placedAt: "2026-08-02T15:00:00.000Z",
+					purpose: "ferpa-inspection-review",
+					releasedAt: null
+				},
+				retentionExpiresAt: "2026-10-27T12:00:00.000Z"
+			}
+		]);
+		const wrapper = mountManagement(true);
+		await flushPromises();
+
+		await wrapper
+			.findAll("button")
+			.find(button => button.text() === "Review preservation hold")
+			?.trigger("click");
+
+		expect(wrapper.text()).toContain(
+			"Student sign-in, password or provider setup, access-code reset, and active-state controls are unavailable"
+		);
+		expect(wrapper.text()).toContain(
+			"Preservation review and export remain available"
+		);
+		expect(wrapper.text()).toContain(
+			"Alias correction and approved deletion remain blocked"
+		);
+		expect(wrapper.text()).not.toContain(
+			"login, and logout security controls remain available"
+		);
 	});
 
 	it("requires Julio's password and shows a new access code only transiently", async () => {
@@ -236,6 +275,16 @@ describe("StudentManagement", () => {
 		await wrapper
 			.get(`#correct-username-${student._id}`)
 			.setValue("River-8");
+		expect(
+			wrapper
+				.get(`#correct-username-${student._id}`)
+				.attributes("aria-describedby")
+		).toBe(`correct-username-hint-${student._id}`);
+		expect(
+			wrapper
+				.get(`#correct-username-hint-${student._id} a`)
+				.attributes("href")
+		).toBe("/student-privacy");
 		await wrapper
 			.get(`#correct-teacher-password-${student._id}`)
 			.setValue("julio-password");
@@ -258,7 +307,80 @@ describe("StudentManagement", () => {
 		);
 	});
 
-	it("exports a complete record after Julio re-verifies", async () => {
+	it("preserves retained content while leaving current-account security controls available", async () => {
+		const placedAt = "2026-08-02T15:00:00.000Z";
+		vi.mocked(fetchAdminStudents).mockResolvedValueOnce([
+			{
+				...student,
+				recordPreservation: {
+					active: true,
+					events: [{ action: "placed", at: placedAt }],
+					placedAt,
+					purpose: "ferpa-inspection-review",
+					releasedAt: null
+				}
+			}
+		]);
+		vi.mocked(setAdminStudentRecordPreservation).mockResolvedValueOnce({
+			active: false,
+			events: [
+				{ action: "placed", at: placedAt },
+				{ action: "released", at: "2026-08-02T16:00:00.000Z" }
+			],
+			placedAt,
+			purpose: "ferpa-inspection-review",
+			releasedAt: "2026-08-02T16:00:00.000Z"
+		});
+		const wrapper = mountManagement();
+		await flushPromises();
+		const button = (label: string) =>
+			wrapper
+				.findAll("button")
+				.find(candidate => candidate.text() === label);
+
+		expect(wrapper.text()).toContain(
+			"Records preserved for inspection or review"
+		);
+		expect(button("Correct username")?.attributes("disabled")).toBeDefined();
+		expect(button("Delete records")?.attributes("disabled")).toBeDefined();
+		expect(button("Reset access")?.attributes("disabled")).toBeUndefined();
+		expect(button("Disable")?.attributes("disabled")).toBeUndefined();
+		expect(wrapper.find('[data-testid="project-review"]').exists()).toBe(
+			false
+		);
+
+		await button("Review preservation hold")?.trigger("click");
+		expect(wrapper.text()).toContain(
+			"open FERPA inspection or review request"
+		);
+		expect(wrapper.text()).toContain(
+			"login, and logout security controls remain available"
+		);
+		expect(wrapper.text()).toContain("Preservation audit history");
+		expect(wrapper.text()).not.toContain("Requester");
+		await wrapper
+			.get(`#preservation-teacher-password-${student._id}`)
+			.setValue("julio-password");
+		await wrapper
+			.findAll("form")
+			.find(form => form.text().includes("Release hold"))
+			?.trigger("submit.prevent");
+		await flushPromises();
+
+		expect(setAdminStudentRecordPreservation).toHaveBeenCalledWith(
+			student._id,
+			false,
+			"julio-password"
+		);
+		expect(wrapper.text()).toContain(
+			"Released the record-preservation hold for maria-7"
+		);
+		expect(wrapper.find('[data-testid="project-review"]').exists()).toBe(
+			true
+		);
+	});
+
+	it("exports the remaining record after Julio re-verifies", async () => {
 		vi.mocked(fetchAdminStudents).mockResolvedValueOnce([student]);
 		vi.mocked(exportAdminStudentRecords).mockResolvedValueOnce({
 			blob: new Blob(["streamed export"], {
@@ -518,6 +640,12 @@ describe("StudentManagement", () => {
 		expect(
 			wrapper
 				.findAll("button")
+				.find(button => button.text() === "Preserve records")
+				?.attributes("disabled")
+		).toBeUndefined();
+		expect(
+			wrapper
+				.findAll("button")
 				.find(button => button.text() === "Delete records")
 				?.attributes("disabled")
 		).toBeUndefined();
@@ -529,6 +657,88 @@ describe("StudentManagement", () => {
 		).toBeDefined();
 		expect(wrapper.find('[data-testid="project-review"]').exists()).toBe(
 			false
+		);
+	});
+
+	it("preserves records remaining after a partial deletion", async () => {
+		const placedAt = "2026-08-02T15:00:00.000Z";
+		vi.mocked(fetchAdminStudents).mockResolvedValueOnce([
+			{
+				...student,
+				active: false,
+				deletionPending: true
+			}
+		]);
+		vi.mocked(setAdminStudentRecordPreservation).mockResolvedValueOnce({
+			active: true,
+			events: [{ action: "placed", at: placedAt }],
+			placedAt,
+			purpose: "ferpa-inspection-review",
+			releasedAt: null
+		});
+		const wrapper = mountManagement();
+		await flushPromises();
+
+		await wrapper
+			.findAll("button")
+			.find(button => button.text() === "Preserve records")
+			?.trigger("click");
+		expect(wrapper.text()).toContain(
+			"preserves only the records that still remain"
+		);
+		expect(wrapper.text()).toContain(
+			"cannot restore records that were already removed"
+		);
+		await wrapper
+			.get(`#preservation-teacher-password-${student._id}`)
+			.setValue("julio-password");
+		await wrapper
+			.findAll("form")
+			.find(form => form.text().includes("Place hold"))
+			?.trigger("submit.prevent");
+		await flushPromises();
+
+		expect(setAdminStudentRecordPreservation).toHaveBeenCalledWith(
+			student._id,
+			true,
+			"julio-password"
+		);
+		expect(wrapper.text()).toContain(
+			"Any records that remain after the earlier deletion attempt are preserved"
+		);
+		expect(
+			wrapper
+				.findAll("button")
+				.find(button => button.text() === "Export records")
+				?.attributes("disabled")
+		).toBeUndefined();
+		expect(
+			wrapper
+				.findAll("button")
+				.find(button => button.text() === "Delete records")
+				?.attributes("disabled")
+		).toBeDefined();
+
+		await wrapper
+			.findAll("button")
+			.find(button => button.text() === "Export records")
+			?.trigger("click");
+		expect(wrapper.text()).toContain(
+			"this export contains only the account, project, and review records that remain"
+		);
+		expect(wrapper.text()).toContain(
+			"Download the matching deletion receipt separately"
+		);
+
+		await wrapper
+			.findAll("button")
+			.find(button => button.text() === "Review preservation hold")
+			?.trigger("click");
+		expect(wrapper.text()).toContain(
+			"Releasing this hold allows the pending deletion retry to resume"
+		);
+		expect(wrapper.text()).toContain(
+			"does not reactivate the account or restore sign-in"
 		);
 	});
 
@@ -561,6 +771,36 @@ describe("StudentManagement", () => {
 		expect(
 			button("Delete records")?.attributes("disabled")
 		).toBeUndefined();
+	});
+
+	it("does not promise security controls for a held expired record", async () => {
+		vi.mocked(fetchAdminStudents).mockResolvedValueOnce([
+			{
+				...student,
+				recordPreservation: {
+					active: true,
+					events: [],
+					placedAt: "2026-08-02T15:00:00.000Z",
+					purpose: "ferpa-inspection-review",
+					releasedAt: null
+				},
+				retentionExpiresAt: new Date(Date.now() - 60_000).toISOString()
+			}
+		]);
+		const wrapper = mountManagement();
+		await flushPromises();
+
+		await wrapper
+			.findAll("button")
+			.find(button => button.text() === "Review preservation hold")
+			?.trigger("click");
+
+		expect(wrapper.text()).toContain(
+			"retained maintenance record or its retention deadline has passed"
+		);
+		expect(wrapper.text()).not.toContain(
+			"login, and logout security controls remain available"
+		);
 	});
 
 	it("labels automatic retention receipts separately", async () => {

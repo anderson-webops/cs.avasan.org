@@ -9,6 +9,7 @@ import { createStudentRoutes } from "./studentRoutes.js";
 
 export interface RuntimeAccountRouteOptions {
 	analyticsRetentionDays: number;
+	projectRequestsPreauthorized?: boolean;
 	studentAccountsEnabled: boolean;
 	studentOAuthEnabled: boolean;
 	studentRecordRetentionDays: number | null;
@@ -72,6 +73,8 @@ export function mountRuntimeAccountRoutes(app: Express, options: RuntimeAccountR
 		"/admins",
 		createAdminRoutes({
 			analyticsRetentionDays: options.analyticsRetentionDays,
+			projectRequestsPreauthorized:
+				options.projectRequestsPreauthorized ?? false,
 			studentAccountsEnabled: options.studentAccountsEnabled,
 			studentRecordMaintenanceEnabled
 		})
@@ -80,7 +83,9 @@ export function mountRuntimeAccountRoutes(app: Express, options: RuntimeAccountR
 		app.use(
 			"/students",
 			createStudentRoutes({
-				oauthEnabled: options.studentOAuthEnabled
+				oauthEnabled: options.studentOAuthEnabled,
+				projectRequestsPreauthorized:
+					options.projectRequestsPreauthorized ?? false
 			})
 		);
 	}

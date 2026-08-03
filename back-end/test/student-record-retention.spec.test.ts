@@ -65,6 +65,11 @@ vi.mock("../src/security/studentDataWriteBarrier.js", () => ({
 
 const { enforceStudentRecordRetention, startStudentRecordRetentionSweeper } =
 	await import("../src/services/studentRecordRetention.js");
+const {
+	holdStudentRecordMutationsAndWait,
+	releaseStudentRecordMutationHold,
+	resetStudentRecordMutationBarriersForTests
+} = await import("../src/security/studentRecordMutationBarrier.js");
 
 function queryWith<T>(result: T) {
 	const query = {
@@ -129,9 +134,16 @@ function queuePending(student: ReturnType<typeof expiredStudent>) {
 describe("student record retention", () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
+		resetStudentRecordMutationBarriersForTests();
 		modelMocks.studentUpdateMany.mockReturnValue(queryWith({ modifiedCount: 0 }));
 		modelMocks.studentFind.mockReturnValue(queryWith([]));
-		modelMocks.studentExists.mockReturnValue(queryWith({ _id: studentID }));
+		modelMocks.studentExists.mockImplementation(filter =>
+			queryWith(
+				filter.recordPreservationHoldActive === true
+					? null
+					: { _id: studentID }
+			)
+		);
 		modelMocks.receiptFind.mockReturnValue(queryWith([]));
 		modelMocks.receiptFindOne.mockReturnValue(queryWith(null));
 		modelMocks.oauthCountDocuments.mockReturnValue(queryWith(1));
@@ -175,6 +187,7 @@ describe("student record retention", () => {
 	});
 
 	afterEach(() => {
+		resetStudentRecordMutationBarriersForTests();
 		vi.useRealTimers();
 	});
 
@@ -269,6 +282,7 @@ describe("student record retention", () => {
 			{
 				_id: studentID,
 				dataDeletionPendingAt: { $exists: false },
+				recordPreservationHoldActive: { $ne: true },
 				retentionExpiresAt: { $lte: now },
 				retentionPolicyDays: 90,
 				sessionVersion: 4
@@ -333,6 +347,101 @@ describe("student record retention", () => {
 			dataDeletionOperationID: operationID,
 			sessionVersion: 6
 		});
+		expect(modelMocks.studentFind).toHaveBeenNthCalledWith(1, {
+			dataDeletionPendingAt: { $exists: true },
+			recordPreservationHoldActive: { $ne: true }
+		});
+		expect(modelMocks.studentFind).toHaveBeenNthCalledWith(2, {
+			dataDeletionPendingAt: { $exists: false },
+			recordPreservationHoldActive: { $ne: true },
+			retentionExpiresAt: { $lte: now },
+			retentionPolicyDays: 90
+		});
+	});
+
+	it("skips preserved partial-deletion remnants and fails closed on hold lookup", async () => {
+		queuePending(expiredStudent({
+			active: false,
+			dataDeletionOperationID: "11111111-1111-4111-8111-111111111111",
+			dataDeletionPendingAt: now,
+			dataDeletionReason: "retention-expiry",
+			dataDeletionRequestedAt: now
+		}));
+		modelMocks.studentExists.mockImplementation(filter => {
+			if (filter.recordPreservationHoldActive === true) {
+				return queryWith({ _id: studentID });
+			}
+			return queryWith({ _id: studentID });
+		});
+
+		await expect(enforceStudentRecordRetention(90, now)).resolves.toEqual({
+			deleted: 0,
+			needsRetry: 0,
+			reconciled: 0
+		});
+		expect(modelMocks.studentFindOneAndUpdate).not.toHaveBeenCalled();
+
+		resetStudentRecordMutationBarriersForTests();
+		queueFreshExpired();
+		modelMocks.studentExists.mockImplementation(filter => {
+			if (filter.recordPreservationHoldActive === true) {
+				throw new Error("hold lookup unavailable");
+			}
+			return queryWith({ _id: studentID });
+		});
+		await expect(enforceStudentRecordRetention(90, now)).resolves.toEqual({
+			deleted: 0,
+			needsRetry: 1,
+			reconciled: 0
+		});
+		expect(modelMocks.studentFindOneAndUpdate).not.toHaveBeenCalled();
+	});
+
+	it("makes a concurrent hold wait for an already-leased retention deletion", async () => {
+		queueFreshExpired();
+		let firstFenceEntered!: () => void;
+		const entered = new Promise<void>((resolve) => {
+			firstFenceEntered = resolve;
+		});
+		let resolveFirstFence!: (value: ReturnType<typeof expiredStudent>) => void;
+		const firstFence = new Promise<ReturnType<typeof expiredStudent>>(
+			(resolve) => {
+				resolveFirstFence = resolve;
+			}
+		);
+		const deferredQuery = {
+			select: vi.fn(() => deferredQuery),
+			then: (
+				resolve: (value: ReturnType<typeof expiredStudent>) => unknown,
+				reject: (reason: unknown) => unknown
+			) => firstFence.then(resolve, reject)
+		};
+		modelMocks.studentFindOneAndUpdate.mockReset();
+		modelMocks.studentFindOneAndUpdate
+			.mockImplementationOnce(() => {
+				firstFenceEntered();
+				return deferredQuery;
+			})
+			.mockReturnValue(
+				queryWith(expiredStudent({ active: false, sessionVersion: 6 }))
+			);
+
+		const sweep = enforceStudentRecordRetention(90, now);
+		await entered;
+		let holdFinished = false;
+		const hold = holdStudentRecordMutationsAndWait(
+			studentID.toString()
+		).then(() => {
+			holdFinished = true;
+		});
+		await Promise.resolve();
+		expect(holdFinished).toBe(false);
+
+		resolveFirstFence(expiredStudent({ active: false, sessionVersion: 5 }));
+		await expect(sweep).resolves.toMatchObject({ deleted: 1 });
+		await hold;
+		expect(holdFinished).toBe(true);
+		releaseStudentRecordMutationHold(studentID.toString());
 	});
 
 	it("loses safely to a successful sign-in that renews the deadline", async () => {

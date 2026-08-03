@@ -8091,6 +8091,12 @@ onBeforeUnmount(() => {
 			</div>
 		</div>
 
+		<p v-if="currentStudent" class="account-sync-privacy-notice">
+			Account projects sync to the classroom server. Keep real names,
+			contact details, locations, student numbers, passwords, and access
+			codes out of project names, file names, code, and assets.
+		</p>
+
 		<section
 			v-if="sharedComputerCleanupPanelIsVisible && !currentStudent"
 			class="shared-computer-clear site-surface"
@@ -9495,6 +9501,13 @@ html.dark .code-ide-status {
 
 html.dark .code-ide-status strong {
 	color: #f8fbff;
+}
+
+.account-sync-privacy-notice {
+	margin: -0.25rem 0 0;
+	color: var(--color-ink-soft);
+	font-size: 0.8rem;
+	line-height: 1.5;
 }
 
 .shared-computer-clear {

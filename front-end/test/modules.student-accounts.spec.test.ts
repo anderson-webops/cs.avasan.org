@@ -6,6 +6,7 @@ import {
 	refreshStudentSessionActivity,
 	resetAdminStudentAccess,
 	setAdminStudentActive,
+	setAdminStudentRecordPreservation,
 	setStudentPassword,
 	signInStudent
 } from "@/modules/studentAccounts";
@@ -130,5 +131,33 @@ describe("student account API", () => {
 			{ active: false }
 		);
 		expect(api.delete).not.toHaveBeenCalled();
+	});
+
+	it("uses Julio's password to place a fixed-purpose preservation hold", async () => {
+		const recordPreservation = {
+			active: true,
+			events: [
+				{ action: "placed" as const, at: "2026-08-02T15:00:00.000Z" }
+			],
+			placedAt: "2026-08-02T15:00:00.000Z",
+			purpose: "ferpa-inspection-review" as const,
+			releasedAt: null
+		};
+		vi.mocked(api.put).mockResolvedValueOnce({
+			data: { recordPreservation }
+		});
+
+		await expect(
+			setAdminStudentRecordPreservation(
+				student._id,
+				true,
+				"julio-password"
+			)
+		).resolves.toEqual(recordPreservation);
+
+		expect(api.put).toHaveBeenCalledWith(
+			`/admins/students/${student._id}/record-preservation`,
+			{ active: true, teacherPassword: "julio-password" }
+		);
 	});
 });
