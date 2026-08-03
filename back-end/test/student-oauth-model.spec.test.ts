@@ -62,4 +62,39 @@ describe("student external sign-in model", () => {
 		expect(serialized).not.toHaveProperty("externalAuthProvider");
 		expect(serialized).not.toHaveProperty("externalAuthSubjectHash");
 	});
+
+	it("keeps preservation state private with a fixed bounded event shape", async () => {
+		const placedAt = new Date("2026-08-02T12:00:00.000Z");
+		const student = studentDocument({
+			recordPreservationEvents: [{ action: "placed", at: placedAt }],
+			recordPreservationHoldActive: true,
+			recordPreservationHoldPlacedAt: placedAt
+		});
+		await expect(student.validate()).resolves.toBeUndefined();
+
+		for (const path of [
+			"recordPreservationEvents",
+			"recordPreservationHoldActive",
+			"recordPreservationHoldPlacedAt",
+			"recordPreservationHoldReleasedAt"
+		]) {
+			expect(Student.schema.path(path).options.select).toBe(false);
+			expect(student.toJSON()).not.toHaveProperty(path);
+		}
+		expect(student.recordPreservationEvents).toMatchObject([
+			{ action: "placed", at: placedAt }
+		]);
+
+		await expect(
+			studentDocument({
+				recordPreservationEvents: [
+					{ action: "requested by parent", at: placedAt }
+				]
+			}).validate()
+		).rejects.toMatchObject({
+			errors: {
+				"recordPreservationEvents.0.action": expect.any(Object)
+			}
+		});
+	});
 });

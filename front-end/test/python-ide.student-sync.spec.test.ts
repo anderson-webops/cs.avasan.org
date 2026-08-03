@@ -751,6 +751,9 @@ describe("student Python project sync boundaries", () => {
 		expect(hideIndex).toBeGreaterThan(0);
 		expect(queueIndex).toBeGreaterThan(hideIndex);
 		expect(source).toContain("Only add them if they are yours.");
+		expect(source).toContain(
+			"Account projects sync to the classroom server. Keep real names"
+		);
 		expect(source).toContain("Save to my account");
 		expect(source).toContain("Keep separate");
 		expect(source).toContain("importID: pythonIdeImportID(project)");

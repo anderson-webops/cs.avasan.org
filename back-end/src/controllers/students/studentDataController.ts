@@ -188,9 +188,22 @@ export const exportStudentData: RequestHandler = async (req, res) => {
 
 	try {
 		const student = await Student.findById(studentID).select(
-			"+passwordHash +accessCodeHash +pendingSetupCodeHash" + " +externalAuthProvider +externalAuthSubjectHash"
+			"+passwordHash +accessCodeHash +pendingSetupCodeHash"
+			+ " +externalAuthProvider +externalAuthSubjectHash"
+			+ " +dataDeletionPendingAt"
+			+ " +recordPreservationHoldActive +recordPreservationHoldPlacedAt"
+			+ " +recordPreservationHoldReleasedAt +recordPreservationEvents"
 		);
 		if (!student) return res.sendStatus(404);
+		if (
+			student.dataDeletionPendingAt
+			&& !student.recordPreservationHoldActive
+		) {
+			return res.status(409).json({
+				message:
+					"Permanent deletion is pending. Preserve the remaining records before exporting them."
+			});
+		}
 
 		const pendingOAuthAttempts = await OAuthLoginAttempt.countDocuments({
 			studentID: student._id
@@ -211,7 +224,7 @@ export const exportStudentData: RequestHandler = async (req, res) => {
 		});
 		await writeResponseChunk(
 			res,
-			`{"schemaVersion":1,"operation":${JSON.stringify(operation)},"student":${JSON.stringify({
+			`{"schemaVersion":2,"operation":${JSON.stringify(operation)},"student":${JSON.stringify({
 				...account,
 				credentialState: account.credentialState,
 				connectedProvider: account.socialProviders[0] ?? null
@@ -249,7 +262,7 @@ export const exportStudentData: RequestHandler = async (req, res) => {
 			})},"notes":${JSON.stringify([
 				"Credential hashes and temporary OAuth verifier, nonce, state, and browser-binding values are intentionally excluded.",
 				"Signed sessions are stored in browser cookies rather than a server-side session collection.",
-				"Deleted project and review rows are included while they remain in the database awaiting TTL cleanup."
+				"A successful project deletion removes its rows immediately. Any row still retained after an interrupted or incomplete final removal is included as a scrubbed tombstone. The application owns its fallback cleanup schedule: an active preservation hold suspends cleanup, release schedules a fresh one-hour grace period, and physical cleanup may occur after eligibility."
 			])}}`
 		);
 		console.info(
@@ -293,8 +306,15 @@ export const deleteStudentData: RequestHandler = async (req, res) => {
 		const existing = await Student.findById(studentID).select(
 			"+dataDeletionPendingAt +dataDeletionOperationID"
 			+ " +dataDeletionRequestedAt +dataDeletionReason +sessionVersion"
+			+ " +recordPreservationHoldActive"
 		);
 		if (!existing) return res.sendStatus(404);
+		if (existing.recordPreservationHoldActive) {
+			return res.status(409).json({
+				message:
+					"Student records are preserved for an open inspection or review request. Release the hold only after that request is closed."
+			});
+		}
 		if (normalizeStudentUsername(confirmUsername) !== existing.username) {
 			return res.status(409).json({
 				message: "The confirmation username does not match."
@@ -314,6 +334,7 @@ export const deleteStudentData: RequestHandler = async (req, res) => {
 		const result = await deleteStudentRecordSet({
 			initialFilter: {
 				_id: existing._id,
+				recordPreservationHoldActive: { $ne: true },
 				sessionVersion: existing.sessionVersion,
 				...(resumeOperation
 					? {

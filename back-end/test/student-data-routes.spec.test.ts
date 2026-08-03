@@ -1,5 +1,7 @@
 import type { Server } from "node:http";
+import type { Response } from "express";
 import express from "express";
+import { rateLimit } from "express-rate-limit";
 import { Types } from "mongoose";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -61,7 +63,7 @@ vi.mock("../src/models/schemas/Student.js", () => ({
 
 const { deleteStudentData, exportStudentData, listStudentDeletionReceipts } =
 	await import("../src/controllers/students/studentDataController.js");
-const { requireStudentDataWriteLease, resetStudentDataWriteBarriersForTests } =
+const { resetStudentDataWriteBarriersForTests, withStudentDataWriteLease } =
 	await import("../src/security/studentDataWriteBarrier.js");
 
 function queryWith<T>(result: T) {
@@ -109,6 +111,12 @@ function studentRecord(overrides: Record<string, unknown> = {}) {
 
 async function withRuntime<T>(run: (baseUrl: string) => Promise<T>): Promise<T> {
 	const app = express();
+	const testRouteLimiter = rateLimit({
+		legacyHeaders: false,
+		limit: 10_000,
+		standardHeaders: false,
+		windowMs: 60_000
+	});
 	app.use(express.json());
 	app.use((req, _res, next) => {
 		req.currentAdmin = {
@@ -116,13 +124,25 @@ async function withRuntime<T>(run: (baseUrl: string) => Promise<T>): Promise<T> 
 		} as any;
 		next();
 	});
-	app.post("/students/:studentID/export", requireStudentDataWriteLease, exportStudentData);
-	app.delete("/students/:studentID", deleteStudentData);
-	app.get("/student-deletion-receipts", listStudentDeletionReceipts);
-	app.post("/students/:studentID/held-project-write", requireStudentDataWriteLease, async (_req, res) => {
-		await modelMocks.heldProjectWrite();
-		res.sendStatus(204);
-	});
+	app.post(
+		"/students/:studentID/export",
+		testRouteLimiter,
+		withStudentDataWriteLease(exportStudentData)
+	);
+	app.delete("/students/:studentID", testRouteLimiter, deleteStudentData);
+	app.get(
+		"/student-deletion-receipts",
+		testRouteLimiter,
+		listStudentDeletionReceipts
+	);
+	app.post(
+		"/students/:studentID/held-project-write",
+		testRouteLimiter,
+		withStudentDataWriteLease(async (_req, res) => {
+			await modelMocks.heldProjectWrite(res);
+			res.sendStatus(204);
+		})
+	);
 
 	const server = await new Promise<Server>(resolve => {
 		const instance = app.listen(0, "127.0.0.1", () => resolve(instance));
@@ -220,6 +240,7 @@ describe("student record export and deletion", () => {
 			expect(response.status).toBe(200);
 			expect(response.headers.get("content-disposition")).toContain("student-one-classroom-records.json");
 			expect(body).toMatchObject({
+				schemaVersion: 2,
 				operation: {
 					kind: "student-record-export",
 					performedBy: "Julio"
@@ -231,6 +252,11 @@ describe("student record export and deletion", () => {
 				},
 				student: {
 					connectedProvider: "google",
+					recordPreservation: {
+						active: false,
+						events: [],
+						purpose: "ferpa-inspection-review"
+					},
 					username: "student-one"
 				}
 			});
@@ -243,6 +269,53 @@ describe("student record export and deletion", () => {
 			expect(modelMocks.reviewFind.mock.results[0]?.value.cursor).toHaveBeenCalledOnce();
 			expect(modelMocks.projectFind.mock.results[0]?.value.exec).not.toHaveBeenCalled();
 			expect(modelMocks.reviewFind.mock.results[0]?.value.exec).not.toHaveBeenCalled();
+		});
+	});
+
+	it("exports only remaining records for a held deletion-pending row", async () => {
+		const deletionPendingAt = new Date("2026-08-02T14:00:00.000Z");
+		modelMocks.studentFindById.mockReturnValue(
+			queryWith(studentRecord({
+				dataDeletionPendingAt: deletionPendingAt,
+				recordPreservationHoldActive: false
+			}))
+		);
+
+		await withRuntime(async baseUrl => {
+			const denied = await request(
+				baseUrl,
+				`/students/${studentID}/export`,
+				"POST",
+				{ teacherPassword: "teacher-passphrase" }
+			);
+			expect(denied.status).toBe(409);
+			await expect(denied.json()).resolves.toMatchObject({
+				message: expect.stringContaining("Preserve the remaining records")
+			});
+			expect(modelMocks.projectFind).not.toHaveBeenCalled();
+			expect(
+				modelMocks.studentFindById.mock.results[0]?.value.select
+			).toHaveBeenCalledWith(
+				expect.stringContaining("+dataDeletionPendingAt")
+			);
+
+				modelMocks.studentFindById.mockReturnValue(
+					queryWith(studentRecord({
+						dataDeletionPendingAt: deletionPendingAt,
+						recordPreservationHoldActive: true
+					}))
+			);
+			const preserved = await request(
+				baseUrl,
+				`/students/${studentID}/export`,
+				"POST",
+				{ teacherPassword: "teacher-passphrase" }
+			);
+			const body = await preserved.json();
+			expect(preserved.status).toBe(200);
+			expect(body.student.recordPreservation.active).toBe(true);
+			expect(body).not.toHaveProperty("receipt");
+			expect(modelMocks.receiptFindOne).not.toHaveBeenCalled();
 		});
 	});
 
@@ -263,6 +336,28 @@ describe("student record export and deletion", () => {
 				teacherPassword: "teacher-passphrase"
 			});
 			expect(response.status).toBe(409);
+			expect(modelMocks.studentFindOneAndUpdate).not.toHaveBeenCalled();
+		});
+	});
+
+	it("blocks manual deletion while an inspection or review hold is active", async () => {
+		modelMocks.studentFindById.mockReturnValue(
+			queryWith(studentRecord({ recordPreservationHoldActive: true }))
+		);
+		await withRuntime(async baseUrl => {
+			const response = await request(
+				baseUrl,
+				`/students/${studentID}`,
+				"DELETE",
+				{
+					confirmUsername: "student-one",
+					teacherPassword: "teacher-passphrase"
+				}
+			);
+			expect(response.status).toBe(409);
+			await expect(response.json()).resolves.toMatchObject({
+				message: expect.stringContaining("open inspection or review")
+			});
 			expect(modelMocks.studentFindOneAndUpdate).not.toHaveBeenCalled();
 		});
 	});
@@ -330,7 +425,11 @@ describe("student record export and deletion", () => {
 			);
 			expect(modelMocks.studentFindOneAndUpdate).toHaveBeenNthCalledWith(
 				1,
-				{ _id: studentID, sessionVersion: 4 },
+				{
+					_id: studentID,
+					recordPreservationHoldActive: { $ne: true },
+					sessionVersion: 4
+				},
 				{
 					$inc: { sessionVersion: 1 },
 					$set: expect.objectContaining({
@@ -527,6 +626,64 @@ describe("student record export and deletion", () => {
 			const lateWrite = await fetch(`${baseUrl}/students/${studentID}/held-project-write`, { method: "POST" });
 			expect(lateWrite.status).toBe(409);
 			expect(modelMocks.heldProjectWrite).toHaveBeenCalledOnce();
+		});
+	});
+
+	it("keeps an aborted project write leased until its controller settles", async () => {
+		let responseClosed!: () => void;
+		let releaseWrite!: () => void;
+		let writeStarted!: () => void;
+		const closed = new Promise<void>(resolve => {
+			responseClosed = resolve;
+		});
+		const started = new Promise<void>(resolve => {
+			writeStarted = resolve;
+		});
+		const held = new Promise<void>(resolve => {
+			releaseWrite = resolve;
+		});
+		modelMocks.heldProjectWrite.mockImplementation(async (response: Response) => {
+			response.once("close", responseClosed);
+			writeStarted();
+			await held;
+		});
+
+		await withRuntime(async baseUrl => {
+			const abortController = new AbortController();
+			const abortedWrite = fetch(
+				`${baseUrl}/students/${studentID}/held-project-write`,
+				{ method: "POST", signal: abortController.signal }
+			).catch(error => error);
+			await started;
+			abortController.abort();
+			await abortedWrite;
+			await closed;
+
+			let deletionSettled = false;
+			const deletionResponse = request(
+				baseUrl,
+				`/students/${studentID}`,
+				"DELETE",
+				{
+					confirmUsername: "student-one",
+					teacherPassword: "teacher-passphrase"
+				}
+			).then(response => {
+				deletionSettled = true;
+				return response;
+			});
+			await vi.waitFor(() => {
+				expect(modelMocks.studentFindOneAndUpdate).toHaveBeenCalledOnce();
+			});
+			await new Promise(resolve => setTimeout(resolve, 25));
+			expect(deletionSettled).toBe(false);
+			expect(modelMocks.projectDeleteMany).not.toHaveBeenCalled();
+
+			releaseWrite();
+			expect((await deletionResponse).status).toBe(200);
+			expect(modelMocks.projectDeleteMany).toHaveBeenCalledWith({
+				user: studentID
+			});
 		});
 	});
 

@@ -1,14 +1,20 @@
 import { createHash } from "node:crypto";
-import { mkdir, readFile, rename, rm, stat, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rename, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { strFromU8, unzipSync } from "fflate";
+import {
+	assetHttpStatusError,
+	runAssetNetworkRequest
+} from "./asset-network-retry.mjs";
+import { readReviewedAssetArchiveFile } from "./reviewed-asset-archive.mjs";
 
 const DEFAULT_ASSETS_ZIP_URL = "https://static.cs.avasan.org/assets.zip";
 const REVIEWED_ASSETS_ZIP_BYTES = 14_676_489;
 const REVIEWED_ASSETS_ZIP_SHA256 =
 	"6ab65a710032ca71cf957bfd56f8b60579d66c94395bbc34fc433be4bb0f92a1";
 const ASSET_REQUEST_TIMEOUT_MS = 60_000;
+const ASSET_RETRY_DELAYS_MS = [1_000, 3_000];
 const ZIP_HEADER = [0x50, 0x4b];
 const ASSET_PATH_RE = /^(?:images|music|sounds)\/(?:[^/]+\/)*[^/]+\.[\dA-Z]+$/i;
 const IGNORED_ZIP_PATH_RE =
@@ -69,40 +75,36 @@ async function stagePythonIdeAssets() {
 	await rm(stalePublicZipPath, { force: true });
 
 	if (skipDownload) {
-		await mirrorIdeManifest();
+		await Promise.all([
+			rm(assetsOutputDir, { force: true, recursive: true }),
+			rm(ideManifestPath, { force: true })
+		]);
 		console.log(
-			"[python-ide-assets] skipped by PYTHON_IDE_ASSETS_DOWNLOAD=skip"
+			"[python-ide-assets] omitted by PYTHON_IDE_ASSETS_DOWNLOAD=skip"
 		);
 		return;
 	}
 
-	const [localInfo, remoteInfo] = await Promise.all([
-		localAssetInfo(),
-		remoteAssetInfo().catch(error => {
-			console.warn(
-				`[python-ide-assets] could not read remote metadata: ${formatError(error)}`
-			);
-			return null;
-		})
-	]);
+	const localInfo = await localAssetInfo();
 
-	if (!forceRefresh && isCurrent(localInfo, remoteInfo)) {
-		await mirrorIdeManifest();
+	if (!forceRefresh && isCurrent(localInfo)) {
+		await extractAssets(
+			localInfo.archive.bytes,
+			localInfo.archive.sourceUrl
+		);
 		console.log(
-			`[python-ide-assets] using extracted ${relativeManifestPath()}`
+			`[python-ide-assets] rebuilt ${relativeManifestPath()} from the verified cached archive`
 		);
 		return;
 	}
 
 	try {
-		const { bytes, response } = await withAssetNetworkTimeout(
+		const { bytes, response } = await withAssetNetworkRetry(
 			"asset download",
 			async signal => {
 				const response = await fetch(sourceUrl, { signal });
 				if (!response.ok) {
-					throw new Error(
-						`download failed with status ${response.status}`
-					);
+					throw assetHttpStatusError("download", response.status);
 				}
 				return {
 					bytes: await readReviewedAssetArchive(response),
@@ -140,13 +142,13 @@ async function stagePythonIdeAssets() {
 			`[python-ide-assets] extracted ${manifest.assets.length} files from ${formatBytes(bytes.byteLength)} into ${relativeAssetsPath()}`
 		);
 	} catch (error) {
-		if (
-			localInfo.exists &&
-			localInfo.cache?.sha256 === REVIEWED_ASSETS_ZIP_SHA256
-		) {
-			await mirrorIdeManifest();
+		if (localInfo.archive) {
+			await extractAssets(
+				localInfo.archive.bytes,
+				localInfo.archive.sourceUrl
+			);
 			console.warn(
-				`[python-ide-assets] download failed, using existing ${relativeManifestPath()}: ${formatError(error)}`
+				`[python-ide-assets] download failed, rebuilt ${relativeManifestPath()} from the verified cached archive: ${formatError(error)}`
 			);
 			return;
 		}
@@ -155,7 +157,7 @@ async function stagePythonIdeAssets() {
 	}
 }
 
-async function extractAssets(zipBytes) {
+async function extractAssets(zipBytes, manifestSourceUrl = sourceUrl) {
 	const files = unzipSync(zipBytes);
 	const assets = [];
 
@@ -192,17 +194,12 @@ async function extractAssets(zipBytes) {
 	const manifest = {
 		assets,
 		generatedAt: new Date().toISOString(),
-		sourceUrl,
+		sourceUrl: manifestSourceUrl,
 		version: 1
 	};
 	await writeFile(manifestPath, `${JSON.stringify(manifest, null, "\t")}\n`);
 	await writeIdeManifest(manifest);
 	return manifest;
-}
-
-async function mirrorIdeManifest() {
-	const manifest = await readJson(manifestPath).catch(() => null);
-	if (manifest) await writeIdeManifest(manifest);
 }
 
 async function writeIdeManifest(manifest) {
@@ -214,79 +211,54 @@ async function writeIdeManifest(manifest) {
 }
 
 async function localAssetInfo() {
-	const [fileStat, cache] = await Promise.all([
-		stat(manifestPath).catch(() => null),
+	const [archiveBytes, cache] = await Promise.all([
+		readReviewedCachedArchive().catch(() => null),
 		readJson(cachePath).catch(() => null)
 	]);
+	const archive =
+		archiveBytes && cache?.sha256 === REVIEWED_ASSETS_ZIP_SHA256
+			? {
+					bytes: archiveBytes,
+					sourceUrl: cachedSourceUrl(cache)
+				}
+			: null;
 
-	return {
-		cache,
-		exists: Boolean(fileStat)
-	};
+	return { archive };
 }
 
-async function remoteAssetInfo() {
-	const response = await withAssetNetworkTimeout(
-		"asset metadata request",
-		async signal => {
-			const response = await fetch(sourceUrl, {
-				method: "HEAD",
-				signal
-			});
-			if (!response.ok) {
-				throw new Error(
-					`metadata request failed with status ${response.status}`
-				);
-			}
-			return response;
-		}
-	);
-
-	return {
-		contentLength: response.headers.get("content-length"),
-		etag: response.headers.get("etag"),
-		lastModified: response.headers.get("last-modified"),
-		sourceUrl
-	};
-}
-
-async function withAssetNetworkTimeout(label, operation) {
-	const controller = new AbortController();
-	const timeout = setTimeout(
-		() => controller.abort(),
-		ASSET_REQUEST_TIMEOUT_MS
-	);
-	try {
-		return await operation(controller.signal);
-	} catch (error) {
-		if (controller.signal.aborted) {
-			throw new Error(
-				`${label} timed out after ${ASSET_REQUEST_TIMEOUT_MS} ms`,
-				{ cause: error }
+async function withAssetNetworkRetry(label, operation) {
+	return await runAssetNetworkRequest(label, operation, {
+		onRetry: ({ attempt, delayMs, error, maximumAttempts }) => {
+			console.warn(
+				`[python-ide-assets] ${label} attempt ${attempt}/${maximumAttempts} failed; retrying in ${delayMs} ms: ${formatError(error)}`
 			);
-		}
-		throw error;
-	} finally {
-		clearTimeout(timeout);
-	}
+		},
+		retryDelaysMs: ASSET_RETRY_DELAYS_MS,
+		timeoutMs: ASSET_REQUEST_TIMEOUT_MS
+	});
 }
 
 async function readJson(filePath) {
 	return JSON.parse(await readFile(filePath, "utf8"));
 }
 
-function isCurrent(localInfo, remoteInfo) {
-	if (!localInfo.exists || !remoteInfo) return false;
-
+function isCurrent(localInfo) {
 	return (
-		localInfo.cache?.sha256 === REVIEWED_ASSETS_ZIP_SHA256 &&
-		localInfo.cache?.sourceUrl === remoteInfo.sourceUrl &&
-		(!remoteInfo.contentLength ||
-			localInfo.cache?.contentLength === remoteInfo.contentLength) &&
-		(!remoteInfo.etag || localInfo.cache?.etag === remoteInfo.etag) &&
-		(!remoteInfo.lastModified ||
-			localInfo.cache?.lastModified === remoteInfo.lastModified)
+		Boolean(localInfo.archive) && localInfo.archive.sourceUrl === sourceUrl
 	);
+}
+
+function cachedSourceUrl(cache) {
+	return typeof cache?.sourceUrl === "string" && cache.sourceUrl
+		? cache.sourceUrl
+		: "verified cached Python IDE asset archive";
+}
+
+async function readReviewedCachedArchive() {
+	return await readReviewedAssetArchiveFile(cacheZipPath, {
+		expectedBytes: REVIEWED_ASSETS_ZIP_BYTES,
+		expectedSha256: REVIEWED_ASSETS_ZIP_SHA256
+	});
 }
 
 async function readReviewedAssetArchive(response) {

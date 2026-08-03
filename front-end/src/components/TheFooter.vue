@@ -1,7 +1,23 @@
+<script lang="ts" setup>
+import {
+	classroomUsageIsEnabled,
+	studentAccountsAreEnabled
+} from "@/modules/classroomFeatures";
+
+const privacyLinkIsProminent =
+	studentAccountsAreEnabled() || classroomUsageIsEnabled();
+</script>
+
 <template>
 	<footer class="site-footer">
 		<div class="site-shell site-shell--wide site-footer__inner">
-			<RouterLink class="site-footer__link" to="/student-privacy">
+			<RouterLink
+				class="site-footer__link"
+				:class="{
+					'site-footer__link--prominent': privacyLinkIsProminent
+				}"
+				to="/student-privacy"
+			>
 				Student privacy and record requests
 			</RouterLink>
 		</div>
@@ -38,5 +54,16 @@
 	border-radius: 0.2rem;
 	outline: 2px solid var(--focus-ring-color);
 	outline-offset: 0.2rem;
+}
+
+.site-footer__link--prominent {
+	padding: 0.55rem 0.75rem;
+	border: 1px solid var(--color-border-strong);
+	border-radius: var(--radius-pill);
+	background: var(--color-surface-strong);
+	color: var(--color-ink);
+	font-size: 0.9rem;
+	font-weight: 800;
+	text-decoration: underline;
 }
 </style>

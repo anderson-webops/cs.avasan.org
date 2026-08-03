@@ -64,6 +64,9 @@ describe("student privacy page", () => {
 		expect(text).toContain("username and no email");
 		expect(text).toContain("school-approved alias");
 		expect(text).toContain("roster mapping stays");
+		expect(text).toContain("fixed preservation purpose and status");
+		expect(text).toContain("last 32 fixed");
+		expect(text).toContain("does not keep a requester name or request notes");
 		expect(text).toContain(
 			"one-time code before creating a password or connecting"
 		);
@@ -77,6 +80,13 @@ describe("student privacy page", () => {
 			"file names, source code or encoded project assets"
 		);
 		expect(text).toContain("separate review copy");
+		expect(text).toContain(
+			"Do not put a real name, email, phone number, home address, precise location, student number, password, or access code"
+		);
+		expect(text).toContain(
+			"does not scan project contents for personal information"
+		);
+		expect(text).toContain("does not copy code into logs or analytics");
 		expect(text).toContain("failed-login counter");
 		expect(text).toContain("random password-setup request marker");
 		expect(text).toContain("tab’s session storage");
@@ -97,7 +107,18 @@ describe("student privacy page", () => {
 		expect(text).toContain("After deletion completes");
 		expect(text).toContain("Accounts remain disabled");
 		expect(text).toContain("No default is assumed");
-		expect(text).toContain("deletion tombstone");
+			expect(text).toContain(
+				"A successful project deletion removes its project and review rows immediately"
+			);
+			expect(text).toContain("scrubbed tombstone");
+			expect(text).toContain("owns its fallback cleanup schedule");
+			expect(text).toContain(
+				"active preservation hold suspends that cleanup"
+			);
+			expect(text).toContain("fresh one-hour grace period");
+			expect(text).toContain(
+				"fallback tombstone becomes eligible one hour after deletion"
+			);
 		expect(text).toContain("Deleted-account write gate");
 		expect(text).toContain("process-lifetime tombstone");
 		expect(text).toContain("Anonymous classroom totals");
@@ -128,6 +149,55 @@ describe("student privacy page", () => {
 		expect(text).toContain(
 			"does not rewrite a student’s project content or review copies"
 		);
+		expect(text).toContain(
+			"project and review changes, alias correction, and manual or automatic deletion"
+		);
+		expect(text).toContain(
+			"sign-in, sign-out, password or provider setup, access reset"
+		);
+		expect(text).toContain(
+			"only when account routes are enabled, the retention deadline is current, and deletion has not begun"
+		);
+		expect(text).toContain(
+			"does not reactivate a maintenance-only, expired, or deletion-pending record"
+		);
+		expect(text).toContain(
+			"application hold controls only the canonical classroom database"
+		);
+		expect(text).toContain("no later than 45 days");
+		expect(text).toContain(
+			"hold preserves records; it does not by itself fulfill the request"
+		);
+		expect(text).toContain(
+			"preserve the original outside this application if required"
+		);
+		expect(text).toContain(
+			"releases the hold and then performs the separately approved alias correction"
+		);
+		expect(text).toContain("does not amend a held record");
+		expect(text).toContain(
+			"cannot restore removed records or reactivate the account"
+		);
+		expect(text).toContain("pending deletion retry to resume");
+		expect(text).toContain(
+			"JSON export contains only the account, project, and review records that still exist"
+		);
+		expect(text).toContain(
+			"unfinished deletion receipt is a separate Admin download"
+		);
+		expect(text).toContain(
+			"California Business and Professions Code section 22584(d)(3)"
+		);
+		expect(text).toContain("former pupil who is at least 18");
+		expect(text).toContain("unenrolled from the local educational agency");
+		expect(text).toContain("at least 60 days");
+		expect(text).toContain("documentation of non-enrollment");
+		expect(text).toContain(
+			"direct path does not replace the ordinary school-channel request"
+		);
+		expect(text).toContain(
+			"operator notice provides the direct operator contact"
+		);
 		expect(text).not.toContain("access, correct, export, or delete");
 		expect(text).toContain("refuse further account collection or use");
 		expect(text).toContain(
@@ -138,6 +208,15 @@ describe("student privacy page", () => {
 		expect(text).toContain(
 			"school or district contact information provided with student access"
 		);
+		expect(text).toContain("Policy version: Not configured");
+		expect(text).toContain("Effective date: Not yet effective");
+		expect(text).toContain(
+			"send a new direct notice through the school’s approved channel"
+		);
+		expect(text).toContain(
+			"obtain renewed school or district authorization"
+		);
+		expect(text).toContain("missing, invalid, or not yet effective");
 		expect(text).not.toMatch(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i);
 	});
 
@@ -156,6 +235,11 @@ describe("student privacy page", () => {
 			"VITE_SCHOOL_PRIVACY_CONTACT",
 			"Reviewed school request channel"
 		);
+		vi.stubEnv("VITE_CLASSROOM_PRIVACY_POLICY_VERSION", "2026-08-02.1");
+		vi.stubEnv(
+			"VITE_CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE",
+			"2026-08-02"
+		);
 		vi.stubEnv("VITE_STUDENT_RECORD_RETENTION_DAYS", "90");
 
 		const text = mount(StudentPrivacyPage).text();
@@ -163,6 +247,7 @@ describe("student privacy page", () => {
 		expect(text).toContain(
 			"Reviewed operator name, postal address, phone, and email"
 		);
+		expect(text).toContain("Operator contact for that direct request");
 		expect(text).toContain(
 			"Reviewed provider, purpose, and data categories"
 		);
@@ -171,6 +256,8 @@ describe("student privacy page", () => {
 		expect(text).toContain("Startup and hourly cleanup");
 		expect(text).toContain("receives one full 90-day period");
 		expect(text).toContain("does not delete a record immediately");
+		expect(text).toContain("Policy version: 2026-08-02.1");
+		expect(text).toContain("Effective date: 2026-08-02");
 		expect(text).not.toContain("No default is assumed");
 	});
 
@@ -185,10 +272,13 @@ describe("student privacy page", () => {
 			"If student account routes are later disabled while records remain in retention maintenance"
 		);
 		expect(text).toContain(
-			"alias correction, export, and permanent deletion remain available to Julio"
+			"preservation review, alias correction, export, deletion-receipt access, and permanent deletion remain available to Julio"
 		);
 		expect(text).toContain(
 			"Student sign-in, project editing, and project-review tools do not"
+		);
+		expect(text).toContain(
+			"uses the JSON export, not an in-app project viewer"
 		);
 		expect(text).toContain(
 			"Julio does not rewrite retained student code in Admin"

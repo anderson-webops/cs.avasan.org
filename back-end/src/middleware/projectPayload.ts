@@ -24,6 +24,28 @@ interface ProjectPayloadConcurrencyOptions {
 	perIdentityLimit?: number;
 }
 
+interface ProjectPayloadReservation {
+	claim: () => boolean;
+	takeOwnership: () => (() => void) | null;
+}
+
+const projectPayloadReservations = new WeakMap<
+	Request,
+	ProjectPayloadReservation
+>();
+
+function projectPayloadTransportClosed(
+	req: Request,
+	res: Parameters<RequestHandler>[1]
+): boolean {
+	return (
+		req.aborted
+		|| req.destroyed
+		|| res.destroyed
+		|| res.writableEnded
+	);
+}
+
 export function isHeavyProjectPayload(
 	req: Request,
 	thresholdBytes = HEAVY_PROJECT_PAYLOAD_THRESHOLD_BYTES
@@ -68,6 +90,44 @@ export function createProjectJsonParser(
 }
 
 /**
+ * Claim a successfully parsed, preauthorized mutation immediately before
+ * route dispatch. The transport fallback stays armed so unmatched routes and
+ * disconnects before terminal ownership cannot leak the slot.
+ */
+export const claimProjectPayloadReservation: RequestHandler
+	= (req, _res, next) => {
+		const reservation = projectPayloadReservations.get(req);
+		if (!reservation || reservation.claim()) next();
+	};
+
+/**
+ * Await the terminal project mutation while it owns the admitted payload slot.
+ * The terminal path takes exclusive ownership and removes the fallback before
+ * persistence. A request released during parsing/auth cannot mutate later.
+ */
+export function withProjectPayloadReservation(
+	handler: RequestHandler
+): RequestHandler {
+	return async (req, res, next) => {
+		const reservation = projectPayloadReservations.get(req);
+		if (!reservation) {
+			await handler(req, res, next);
+			return;
+		}
+
+		const release = reservation.takeOwnership();
+		if (!release) return;
+
+		try {
+			await handler(req, res, next);
+		}
+		finally {
+			release();
+		}
+	};
+}
+
+/**
  * Admit one heavy body process-wide. Small bodies retain a wider classroom
  * tier, but one identity cannot create an unbounded sub-threshold allocation
  * burst. A slot remains held through the response because the parsed body
@@ -94,6 +154,7 @@ export function createProjectPayloadConcurrencyGuard(
 	let activeNormalTotal = 0;
 
 	return (req, res, next) => {
+		if (projectPayloadTransportClosed(req, res)) return;
 		const isHeavy = isHeavyProjectPayload(req, heavyThresholdBytes);
 		const identity = projectPayloadIdentity(req);
 		const activeForIdentity = activeByIdentity.get(identity)
@@ -128,10 +189,10 @@ export function createProjectPayloadConcurrencyGuard(
 			activeForIdentity.normal += 1;
 		}
 		activeByIdentity.set(identity, activeForIdentity);
-		let released = false;
-		const release = () => {
-			if (released) return;
-			released = true;
+		let slotReleased = false;
+		const releaseSlot = () => {
+			if (slotReleased) return;
+			slotReleased = true;
 			const current = activeByIdentity.get(identity);
 			if (isHeavy) {
 				activeHeavyTotal -= 1;
@@ -148,15 +209,61 @@ export function createProjectPayloadConcurrencyGuard(
 				activeByIdentity.set(identity, current);
 			}
 		};
-		req.once("aborted", release);
-		res.once("close", release);
-		res.once("finish", release);
+
+		let reservationState: "available" | "claimed" | "owned" | "released"
+			= "available";
+		const removeFallbackListeners = () => {
+			req.removeListener("aborted", releaseBeforeOwnership);
+			res.removeListener("close", releaseBeforeOwnership);
+			res.removeListener("finish", releaseBeforeOwnership);
+		};
+		function releaseBeforeOwnership() {
+			if (
+				reservationState !== "available"
+				&& reservationState !== "claimed"
+			) {
+				return;
+			}
+			reservationState = "released";
+			removeFallbackListeners();
+			releaseSlot();
+		}
+		const reservation: ProjectPayloadReservation = {
+			claim: () => {
+				if (projectPayloadTransportClosed(req, res)) {
+					releaseBeforeOwnership();
+					return false;
+				}
+				if (reservationState !== "available") return false;
+				reservationState = "claimed";
+				return true;
+			},
+			takeOwnership: () => {
+				if (projectPayloadTransportClosed(req, res)) {
+					releaseBeforeOwnership();
+					return null;
+				}
+				if (reservationState !== "claimed") return null;
+				reservationState = "owned";
+				removeFallbackListeners();
+				return () => {
+					if (reservationState !== "owned") return;
+					reservationState = "released";
+					projectPayloadReservations.delete(req);
+					releaseSlot();
+				};
+			}
+		};
+		projectPayloadReservations.set(req, reservation);
+		req.once("aborted", releaseBeforeOwnership);
+		res.once("close", releaseBeforeOwnership);
+		res.once("finish", releaseBeforeOwnership);
 
 		try {
 			next();
 		}
 		catch (error) {
-			release();
+			releaseBeforeOwnership();
 			throw error;
 		}
 	};

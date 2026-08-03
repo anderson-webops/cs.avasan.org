@@ -31,26 +31,42 @@ describe("Python project persistence", () => {
 		expect(importIDIndex?.[1]).not.toHaveProperty("sparse");
 	});
 
-	it("bounds scrubbed project and review tombstones with short TTL indexes", () => {
-		const projectTTL = findIndex(
+	it("indexes explicit purge dates without granting MongoDB an out-of-band TTL writer", () => {
+		const projectPurgeIndex = findIndex(
 			PythonProject.schema.indexes(),
-			{ deletedAt: 1 }
+			{ purgeAt: 1 }
 		);
-		const reviewTTL = findIndex(
+		const reviewPurgeIndex = findIndex(
 			PythonProjectReview.schema.indexes(),
-			{ deletedAt: 1 }
+			{ purgeAt: 1 }
 		);
 
-		expect(projectTTL?.[1]).toMatchObject({ expireAfterSeconds: 60 * 60 });
-		expect(reviewTTL?.[1]).toMatchObject({ expireAfterSeconds: 60 * 60 });
+		expect(projectPurgeIndex?.[1]).not.toHaveProperty("expireAfterSeconds");
+		expect(reviewPurgeIndex?.[1]).not.toHaveProperty("expireAfterSeconds");
+		expect(findIndex(PythonProject.schema.indexes(), { deletedAt: 1 }))
+			.toBeUndefined();
+		expect(findIndex(PythonProjectReview.schema.indexes(), { deletedAt: 1 }))
+			.toBeUndefined();
+		expect(PythonProject.schema.options.autoIndex).toBe(false);
+		expect(PythonProjectReview.schema.options.autoIndex).toBe(false);
 	});
 
-	it("reconciles the former sparse project index during startup", () => {
+	it("reconciles tombstones and indexes before the service listens", () => {
 		const serverSource = readFileSync(
 			resolve(__dirname, "../src/server.ts"),
 			"utf8"
 		);
+		const preparation = serverSource.indexOf(
+			"await preparePythonProjectTombstoneLifecycle()"
+		);
+		const listen = serverSource.indexOf("app.listen(PORT, HOST");
 
-		expect(serverSource).toContain("PythonProject.syncIndexes()");
+		expect(preparation).toBeGreaterThan(
+			serverSource.indexOf("await mongoose.connect(mongoUri)")
+		);
+		expect(listen).toBeGreaterThan(preparation);
+		expect(serverSource).toContain(
+			"startPythonProjectTombstoneReconciler()"
+		);
 	});
 });

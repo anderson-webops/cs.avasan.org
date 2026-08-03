@@ -62,6 +62,8 @@ const buildConfig = Object.freeze({
 	CLASSROOM_ANALYTICS_COLLECTION_ENABLED: "false",
 	CLASSROOM_PRIVACY_APPROVED: "false",
 	CLASSROOM_PRIVACY_OPERATOR_NOTICE: "",
+	CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE: "",
+	CLASSROOM_PRIVACY_POLICY_VERSION: "",
 	CLASSROOM_SERVICE_PROVIDER_NOTICE: "",
 	SCHOOL_PRIVACY_CONTACT: "",
 	STUDENT_ACCOUNTS_ENABLED: "false",
@@ -379,9 +381,12 @@ test("native activation failures prove the selected runtime after every recovery
 	assert.doesNotMatch(failRollback, />\/dev\/null 2>&1/u);
 
 	for (const script of [deploy, rollback]) {
+		const readiness = shellFunction(script, "wait_for_api_readiness");
 		assert.match(script, /CS_EXPECTED_RELEASE="\$cs_expected_version"/u);
 		assert.match(script, /CS_EXPECTED_REVISION="\$cs_expected_revision"/u);
 		assert.match(script, /wait_for_api_readiness \|\| cs_health_status=\$\?/u);
+		assert.match(readiness, /readyz >\/dev\/null 2>&1/u);
+		assert.doesNotMatch(readiness, /--show-error/u);
 		assert.doesNotMatch(script, /if\s+!\s*\(/u);
 	}
 });

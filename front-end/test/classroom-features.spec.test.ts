@@ -1,5 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
+	classroomPrivacyPolicyEffectiveDate,
+	classroomPrivacyPolicyVersion,
 	classroomUsageIsEnabled,
 	studentAccountsAreEnabled,
 	studentOAuthIsEnabled,
@@ -12,6 +14,8 @@ describe("frontend classroom privacy gates", () => {
 	});
 
 	it("fails closed by default", () => {
+		expect(classroomPrivacyPolicyVersion()).toBe("");
+		expect(classroomPrivacyPolicyEffectiveDate()).toBe("");
 		expect(studentAccountsAreEnabled()).toBe(false);
 		expect(studentOAuthIsEnabled()).toBe(false);
 		expect(studentRecordMaintenanceIsEnabled()).toBe(false);
@@ -41,6 +45,17 @@ describe("frontend classroom privacy gates", () => {
 			"VITE_CLASSROOM_SERVICE_PROVIDER_NOTICE",
 			"Test approved provider notice"
 		);
+		expect(classroomUsageIsEnabled()).toBe(false);
+		expect(studentAccountsAreEnabled()).toBe(false);
+
+		vi.stubEnv("VITE_CLASSROOM_PRIVACY_POLICY_VERSION", "2026-08-02.1");
+		expect(classroomUsageIsEnabled()).toBe(false);
+		vi.stubEnv(
+			"VITE_CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE",
+			"2026-08-02"
+		);
+		expect(classroomPrivacyPolicyVersion()).toBe("2026-08-02.1");
+		expect(classroomPrivacyPolicyEffectiveDate()).toBe("2026-08-02");
 		expect(classroomUsageIsEnabled()).toBe(true);
 		expect(studentAccountsAreEnabled()).toBe(false);
 
@@ -49,6 +64,51 @@ describe("frontend classroom privacy gates", () => {
 		expect(studentAccountsAreEnabled()).toBe(true);
 		expect(studentOAuthIsEnabled()).toBe(true);
 		expect(classroomUsageIsEnabled()).toBe(true);
+	});
+
+	it.each([
+		["unsafe version", "policy/1", "2026-08-02"],
+		["overlong version", `v${"1".repeat(64)}`, "2026-08-02"],
+		["bad date shape", "policy-1", "2026-8-2"],
+		["impossible date", "policy-1", "2025-02-29"],
+		["year zero", "policy-1", "0000-01-01"]
+	])("fails closed for %s", (_label, version, effectiveDate) => {
+		vi.stubEnv("VITE_CLASSROOM_PRIVACY_APPROVED", "true");
+		vi.stubEnv("VITE_CLASSROOM_USAGE_ENABLED", "true");
+		vi.stubEnv("VITE_SCHOOL_PRIVACY_CONTACT", "School privacy contact");
+		vi.stubEnv("VITE_CLASSROOM_PRIVACY_OPERATOR_NOTICE", "Operator notice");
+		vi.stubEnv(
+			"VITE_CLASSROOM_SERVICE_PROVIDER_NOTICE",
+			"Service-provider notice"
+		);
+		vi.stubEnv("VITE_CLASSROOM_PRIVACY_POLICY_VERSION", version);
+		vi.stubEnv(
+			"VITE_CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE",
+			effectiveDate
+		);
+
+		expect(classroomUsageIsEnabled()).toBe(false);
+	});
+
+	it("keeps optional features hidden before the policy effective date", () => {
+		vi.stubEnv("VITE_CLASSROOM_PRIVACY_APPROVED", "true");
+		vi.stubEnv("VITE_CLASSROOM_USAGE_ENABLED", "true");
+		vi.stubEnv("VITE_STUDENT_ACCOUNTS_ENABLED", "true");
+		vi.stubEnv("VITE_STUDENT_RECORD_RETENTION_DAYS", "90");
+		vi.stubEnv("VITE_SCHOOL_PRIVACY_CONTACT", "School privacy contact");
+		vi.stubEnv("VITE_CLASSROOM_PRIVACY_OPERATOR_NOTICE", "Operator notice");
+		vi.stubEnv(
+			"VITE_CLASSROOM_SERVICE_PROVIDER_NOTICE",
+			"Service-provider notice"
+		);
+		vi.stubEnv("VITE_CLASSROOM_PRIVACY_POLICY_VERSION", "policy-1");
+		vi.stubEnv(
+			"VITE_CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE",
+			"2999-01-01"
+		);
+
+		expect(studentAccountsAreEnabled()).toBe(false);
+		expect(classroomUsageIsEnabled()).toBe(false);
 	});
 
 	it("never enables OAuth without optional accounts", () => {
@@ -64,6 +124,11 @@ describe("frontend classroom privacy gates", () => {
 		vi.stubEnv(
 			"VITE_CLASSROOM_SERVICE_PROVIDER_NOTICE",
 			"Test approved provider notice"
+		);
+		vi.stubEnv("VITE_CLASSROOM_PRIVACY_POLICY_VERSION", "2026-08-02.1");
+		vi.stubEnv(
+			"VITE_CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE",
+			"2026-08-02"
 		);
 		vi.stubEnv("VITE_STUDENT_RECORD_RETENTION_DAYS", "90");
 		vi.stubEnv("VITE_STUDENT_ACCOUNTS_ENABLED", "false");

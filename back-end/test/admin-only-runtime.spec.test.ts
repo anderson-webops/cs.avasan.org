@@ -222,12 +222,28 @@ describe("Admin-only account runtime", () => {
 						method: "PATCH"
 					}),
 					postJson(baseUrl, `/admins/students/${studentID}/export`, {}),
+					fetch(
+						`${baseUrl}/admins/students/${studentID}/record-preservation`,
+						{
+							body: JSON.stringify({
+								active: true,
+								teacherPassword: "not-an-admin"
+							}),
+							headers: {
+								"Content-Type": "application/json",
+								...mutationHeaders
+							},
+							method: "PUT"
+						}
+					),
 					fetch(`${baseUrl}/admins/students/${studentID}`, {
 						headers: mutationHeaders,
 						method: "DELETE"
 					})
 				]);
-				expect(maintained.map(response => response.status)).toEqual([403, 403, 403, 403, 403]);
+				expect(maintained.map(response => response.status)).toEqual([
+					403, 403, 403, 403, 403, 403
+				]);
 
 				const unavailable = await Promise.all([
 					fetch(`${baseUrl}/students/session`),

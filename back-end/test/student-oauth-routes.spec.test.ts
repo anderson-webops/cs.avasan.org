@@ -226,10 +226,11 @@ describe("code-bound student OAuth", () => {
 		}
 	});
 
-	it("starts association only from a current setup session and stores no access code", async () => {
+	it("starts association during a hold only from a current setup session", async () => {
 		const setupStudent = makeStudent({
 			accessCodeExpiresAt: new Date(Date.now() + 60_000),
-			pendingSetupCodeHash: "pending-code-hash"
+			pendingSetupCodeHash: "pending-code-hash",
+			recordPreservationHoldActive: true
 		});
 		modelMocks.studentFindById.mockReturnValue(queryWith(setupStudent));
 		modelMocks.studentFindOne.mockReturnValue(queryWith(setupStudent));
@@ -269,6 +270,9 @@ describe("code-bound student OAuth", () => {
 			retentionExpiresAt: { $gt: expect.any(Date) },
 			sessionVersion: 7
 		});
+		expect(modelMocks.studentFindOne.mock.calls[0]?.[0]).not.toHaveProperty(
+			"recordPreservationHoldActive"
+		);
 		const storedAttempt = modelMocks.attemptCreate.mock.calls[0]?.[0];
 		expect(storedAttempt).toMatchObject({
 			mode: "link",
@@ -282,11 +286,14 @@ describe("code-bound student OAuth", () => {
 		expect(storedAttempt).not.toHaveProperty("pendingSetupCodeHash");
 	});
 
-	it("signs in only by a hashed provider subject and never creates an account", async () => {
+	it("signs in during a hold only by a hashed provider subject", async () => {
 		const state = "s".repeat(43);
 		const binding = "b".repeat(43);
 		const attempt = makeAttempt("google", "signin", state, binding);
-		const authenticated = makeStudent({ sessionVersion: 8 });
+		const authenticated = makeStudent({
+			recordPreservationHoldActive: true,
+			sessionVersion: 8
+		});
 		modelMocks.attemptFindOne.mockReturnValue(queryWith(attempt));
 		modelMocks.attemptFindOneAndDelete.mockReturnValue(queryWith(attempt));
 		modelMocks.studentFindOneAndUpdate.mockReturnValue(queryWith(authenticated));
@@ -331,6 +338,7 @@ describe("code-bound student OAuth", () => {
 			{ new: true }
 		);
 		const lookup = modelMocks.studentFindOneAndUpdate.mock.calls[0]?.[0];
+		expect(lookup).not.toHaveProperty("recordPreservationHoldActive");
 		expect(JSON.stringify(lookup)).not.toContain("provider-subject");
 		expect(lookup).not.toHaveProperty("email");
 		expect(lookup).not.toHaveProperty("username");
@@ -361,7 +369,7 @@ describe("code-bound student OAuth", () => {
 		expect(modelMocks.studentCreate).not.toHaveBeenCalled();
 	});
 
-	it("links with one atomic update requiring the live setup proof", async () => {
+	it("links during a hold with one atomic update requiring live setup proof", async () => {
 		const state = "l".repeat(43);
 		const binding = "d".repeat(43);
 		const attempt = makeAttempt("apple", "link", state, binding, {
@@ -370,7 +378,10 @@ describe("code-bound student OAuth", () => {
 		});
 		modelMocks.attemptFindOne.mockReturnValue(queryWith(attempt));
 		modelMocks.attemptFindOneAndDelete.mockReturnValue(queryWith(attempt));
-		modelMocks.studentFindOneAndUpdate.mockReturnValue(queryWith(makeStudent({ sessionVersion: 8 })));
+		modelMocks.studentFindOneAndUpdate.mockReturnValue(queryWith(makeStudent({
+			recordPreservationHoldActive: true,
+			sessionVersion: 8
+		})));
 
 		await withRuntime(
 			{
@@ -433,6 +444,7 @@ describe("code-bound student OAuth", () => {
 			}
 		});
 		expect(options).toEqual({ new: true });
+		expect(conditions).not.toHaveProperty("recordPreservationHoldActive");
 	});
 
 	it("does not finish a provider link after permanent deletion closes the student gate", async () => {
@@ -463,7 +475,7 @@ describe("code-bound student OAuth", () => {
 		expect(modelMocks.studentFindOneAndUpdate).not.toHaveBeenCalled();
 	});
 
-	it("fails closed when any atomic setup-link predicate is stale", async () => {
+	it("rejects a provider link when permanent deletion makes its predicate stale", async () => {
 		const state = "e".repeat(43);
 		const binding = "f".repeat(43);
 		const attempt = makeAttempt("google", "link", state, binding, {
@@ -472,7 +484,17 @@ describe("code-bound student OAuth", () => {
 		});
 		modelMocks.attemptFindOne.mockReturnValue(queryWith(attempt));
 		modelMocks.attemptFindOneAndDelete.mockReturnValue(queryWith(attempt));
-		modelMocks.studentFindOneAndUpdate.mockReturnValue(queryWith(null));
+		const pendingStudent = {
+			...makeStudent(),
+			dataDeletionPendingAt: new Date("2026-08-02T14:00:00.000Z")
+		};
+		modelMocks.studentFindOneAndUpdate.mockImplementation((conditions) => {
+			expect(pendingStudent.dataDeletionPendingAt).toBeInstanceOf(Date);
+			expect(conditions).toMatchObject({
+				dataDeletionPendingAt: { $exists: false }
+			});
+			return queryWith(null);
+		});
 
 		await withRuntime({}, async (baseUrl, session) => {
 			const response = await fetch(

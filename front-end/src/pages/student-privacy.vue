@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import {
 	classroomPrivacyOperatorNotice,
+	classroomPrivacyPolicyEffectiveDate,
+	classroomPrivacyPolicyVersion,
 	classroomServiceProviderNotice,
 	schoolPrivacyContact as configuredSchoolPrivacyContact,
 	studentRecordRetentionDays
@@ -11,6 +13,8 @@ const schoolPrivacyContact = configuredSchoolPrivacyContact();
 const operatorNotice = classroomPrivacyOperatorNotice();
 const serviceProviderNotice = classroomServiceProviderNotice();
 const accountRetentionDays = studentRecordRetentionDays();
+const policyVersion = classroomPrivacyPolicyVersion();
+const policyEffectiveDate = classroomPrivacyPolicyEffectiveDate();
 </script>
 
 <template>
@@ -152,15 +156,28 @@ const accountRetentionDays = studentRecordRetentionDays();
 				after setup or sign-out and otherwise ends with the tab session.
 				The account copy is replaced or cleared during later access
 				setup and is deleted with the account. It is not a password or
-				access code. A saved Python project includes its title, mode,
-				file names, source code or encoded project assets, selected
-				file, course/starter metadata, size, import identifier, and
-				creation and update times. Julio can view those projects to
-				teach and may create a separate review copy containing the
-				copied files, visibility setting, and a teacher note. A student
-				uses Julio’s one-time code before creating a password or
-				connecting one Google or Apple sign-in. Access codes are never
-				used as analytics identifiers.
+				access code. During an open inspection or review request, the
+				account also keeps a fixed preservation purpose and status, the
+				latest placed and released times, and at most the last 32 fixed
+				placed or released timestamp events. It does not keep a
+				requester name or request notes. A saved Python project includes
+				its title, mode, file names, source code or encoded project
+				assets, selected file, course/starter metadata, size, import
+				identifier, and creation and update times. Julio can view those
+				projects to teach and may create a separate review copy
+				containing the copied files, visibility setting, and a teacher
+				note. A student uses Julio’s one-time code before creating a
+				password or connecting one Google or Apple sign-in. Access codes
+				are never used as analytics identifiers.
+			</p>
+			<p>
+				Students should keep personal information out of synced work. Do
+				not put a real name, email, phone number, home address, precise
+				location, student number, password, or access code in a project
+				title, file name, code, or asset. The classroom does not scan
+				project contents for personal information and does not copy code
+				into logs or analytics. A student can always keep using the IDE
+				without signing in.
 			</p>
 			<p>
 				If a student connects Google or Apple, the classroom stores the
@@ -235,6 +252,13 @@ const accountRetentionDays = studentRecordRetentionDays();
 				password, access code, provider identifier, project, or code.
 			</p>
 			<p>
+				If deletion stops partway, the JSON export contains only the
+				account, project, and review records that still exist. The
+				matching unfinished deletion receipt is a separate Admin
+				download and must be kept with the request record through the
+				school’s approved process.
+			</p>
+			<p>
 				To protect account and project endpoints from automated misuse,
 				temporary security counters may hold a network address,
 				normalized username, or internal student account ID in server
@@ -278,6 +302,32 @@ const accountRetentionDays = studentRecordRetentionDays();
 					</dd>
 				</div>
 				<div>
+					<dt>Open inspection or review preservation hold</dt>
+					<dd>
+						Needed only while the school has an outstanding request
+						to inspect or review the student’s records. The hold
+						makes project and review content and the approved alias
+						read-only and pauses manual and automatic deletion.
+						Julio can export the retained records for inspection
+						through the school’s approved process. Student security
+						controls remain available only while account routes are
+						enabled, the retention deadline is current, and deletion
+						has not begun. Maintenance-only, expired, and
+						deletion-pending records do not regain student access
+						because a hold is placed. The hold remains until Julio
+						releases it after the school closes the request and
+						keeps only the fixed purpose, status, latest times, and
+						up to 32 fixed timestamp events. Request details stay in
+						the school’s approved system. If deletion already failed
+						partway, the hold preserves only records that remain and
+						pauses the next retry; it cannot restore records already
+						removed or reactivate the account and its access
+						controls. Releasing the hold allows that pending
+						deletion retry to resume, and removed records cannot be
+						recovered.
+					</dd>
+				</div>
+				<div>
 					<dt>Provider sign-in attempt</dt>
 					<dd>
 						Needed to validate one Google or Apple response; expires
@@ -288,11 +338,15 @@ const accountRetentionDays = studentRecordRetentionDays();
 				<div>
 					<dt>Deleted project or review row</dt>
 					<dd>
-						Kept as a deletion tombstone for up to one hour so an
-						interrupted or retried deletion stays consistent. It
-						becomes eligible for asynchronous database deletion
-						after that hour, so physical removal may happen later.
-						Whole-account deletion removes these rows directly.
+						A successful project deletion removes its project and
+						review rows immediately. If an interrupted or incomplete
+						final removal leaves a scrubbed tombstone, the
+						application owns its fallback cleanup schedule. An
+						active preservation hold suspends that cleanup;
+						releasing the hold schedules a fresh one-hour grace
+						period. Without a hold, the fallback tombstone becomes
+						eligible one hour after deletion. Whole-account deletion
+						removes these rows directly.
 					</dd>
 				</div>
 				<div>
@@ -418,6 +472,44 @@ const accountRetentionDays = studentRecordRetentionDays();
 				copies.
 			</p>
 			<p>
+				Once the school confirms an applicable inspection or review
+				request, Julio can place a fixed-purpose preservation hold. The
+				hold waits for content changes already in progress, then blocks
+				project and review changes, alias correction, and manual or
+				automatic deletion. Julio’s JSON export remains available for
+				inspection. Security controls such as sign-in, sign-out,
+				password or provider setup, access reset, and disabling an
+				account remain available only when account routes are enabled,
+				the retention deadline is current, and deletion has not begun. A
+				hold does not reactivate a maintenance-only, expired, or
+				deletion-pending record. Requester and case details stay in the
+				school’s approved system, not this site. Julio releases the hold
+				only after the school closes the request. If a deletion attempt
+				already removed some records, the hold preserves only what
+				remains and pauses the next retry; it cannot restore removed
+				records or reactivate the account and its access controls.
+				Releasing the hold allows a pending deletion retry to resume,
+				and already-removed records cannot be recovered.
+			</p>
+			<p>
+				The application hold controls only the canonical classroom
+				database. The school must separately identify and preserve any
+				approved backup, replica, export, or other system that contains
+				the record. The school must provide access within a reasonable
+				period and no later than 45 days, with explanations or an
+				alternative such as copies when effective inspection cannot
+				otherwise be provided. The hold preserves records; it does not
+				by itself fulfill the request.
+			</p>
+			<p>
+				If the school later authorizes an alias correction, complete the
+				inspection or review first and preserve the original outside
+				this application if required. After the school closes that
+				request, Julio releases the hold and then performs the
+				separately approved alias correction. The application does not
+				amend a held record.
+			</p>
+			<p>
 				Use the contact below, identify the school-approved alias and
 				the requested action, and follow the school’s
 				identity-verification process. After authorization, Julio can
@@ -429,12 +521,37 @@ const accountRetentionDays = studentRecordRetentionDays();
 				saves, and Math's Graph Sketcher without signing in.
 			</p>
 			<p>
+				California Business and Professions Code section 22584(d)(3)
+				also provides a direct operator deletion path for CCPA-excluded
+				covered information. A parent or guardian, or a former pupil who
+				is at least 18, may use the configured operator contact after
+				the pupil has been unenrolled from the local educational agency
+				for at least 60 days. The operator must require documentation of
+				non-enrollment before deletion. Statutory exclusions include
+				mandatory permanent pupil records and certain official pupil
+				records, including the categories described in that section; the
+				authorized school or legal process decides whether an exclusion
+				applies. This direct path does not replace the ordinary
+				school-channel request process above.
+			</p>
+			<p v-if="operatorNotice" class="privacy-page__contact">
+				<strong>Operator contact for that direct request:</strong>
+				{{ operatorNotice }}
+			</p>
+			<p v-else class="privacy-page__contact">
+				Optional student accounts remain disabled until the reviewed
+				operator notice provides the direct operator contact.
+			</p>
+			<p>
 				If student account routes are later disabled while records
-				remain in retention maintenance, alias correction, export, and
-				permanent deletion remain available to Julio. Student sign-in,
-				project editing, and project-review tools do not. Any other
-				requested change must follow the school or district’s approved
-				process; Julio does not rewrite retained student code in Admin.
+				remain in retention maintenance, preservation review, alias
+				correction, export, deletion-receipt access, and permanent
+				deletion remain available to Julio. Student sign-in, project
+				editing, and project-review tools do not. Julio uses the JSON
+				export, not an in-app project viewer, to inspect maintenance or
+				held records. Any other requested change must follow the school
+				or district’s approved process; Julio does not rewrite retained
+				student code in Admin.
 			</p>
 			<p v-if="schoolPrivacyContact" class="privacy-page__contact">
 				<strong>School or district contact:</strong>
@@ -445,6 +562,25 @@ const accountRetentionDays = studentRecordRetentionDays();
 				student access. Before account-linked classroom use or anonymous
 				activity counts are enabled in production, the direct privacy
 				notice must include the current school or district contact.
+			</p>
+		</section>
+
+		<section class="site-surface privacy-page__section">
+			<h2>Notice version and changes</h2>
+			<p>Policy version: {{ policyVersion || "Not configured" }}.</p>
+			<p>
+				Effective date:
+				{{ policyEffectiveDate || "Not yet effective" }}.
+			</p>
+			<p>
+				Before a material change to the information collected, its use
+				or disclosure, an approved provider, a retention period, or a
+				security or deletion practice, the operator will send a new
+				direct notice through the school’s approved channel and obtain
+				renewed school or district authorization. This page will then
+				show the new version and effective date. Optional student-data
+				features remain disabled when either value is missing, invalid,
+				or not yet effective.
 			</p>
 		</section>
 	</article>

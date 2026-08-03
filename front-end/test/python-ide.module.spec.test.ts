@@ -3588,20 +3588,41 @@ screen.listen()
 			'response.headers.get("content-length")'
 		);
 		expect(downloadSource).toContain(
-			"localInfo.cache?.sha256 === REVIEWED_ASSETS_ZIP_SHA256"
+			"cache?.sha256 === REVIEWED_ASSETS_ZIP_SHA256"
+		);
+		expect(downloadSource).toContain(
+			"readReviewedAssetArchiveFile(cacheZipPath"
+		);
+		expect(downloadSource).toContain(
+			"expectedBytes: REVIEWED_ASSETS_ZIP_BYTES"
+		);
+		expect(downloadSource).toMatch(
+			/await extractAssets\(\s*localInfo\.archive\.bytes,\s*localInfo\.archive\.sourceUrl/
 		);
 		expect(downloadSource).toContain("sha256: REVIEWED_ASSETS_ZIP_SHA256");
 		expect(downloadSource).toContain(
 			"const ASSET_REQUEST_TIMEOUT_MS = 60_000;"
 		);
 		expect(downloadSource).toContain(
-			'withAssetNetworkTimeout(\n\t\t\t"asset download"'
+			"const ASSET_RETRY_DELAYS_MS = [1_000, 3_000];"
 		);
 		expect(downloadSource).toContain(
-			'withAssetNetworkTimeout(\n\t\t"asset metadata request"'
+			"rm(assetsOutputDir, { force: true, recursive: true })"
+		);
+		expect(downloadSource).toContain(
+			"rm(ideManifestPath, { force: true })"
+		);
+		expect(downloadSource).toContain(
+			'withAssetNetworkRetry(\n\t\t\t"asset download"'
+		);
+		expect(downloadSource).toContain(
+			"runAssetNetworkRequest(label, operation"
+		);
+		expect(downloadSource).toContain(
+			"retryDelaysMs: ASSET_RETRY_DELAYS_MS"
 		);
 		expect(downloadSource).toContain("fetch(sourceUrl, { signal })");
-		expect(downloadSource).toContain('method: "HEAD",');
+		expect(downloadSource).not.toContain('method: "HEAD",');
 	});
 
 	it("loads the extracted asset manifest without a runtime archive request", async () => {
