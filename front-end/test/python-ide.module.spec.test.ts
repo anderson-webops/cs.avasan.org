@@ -3595,10 +3595,19 @@ screen.listen()
 			"const ASSET_REQUEST_TIMEOUT_MS = 60_000;"
 		);
 		expect(downloadSource).toContain(
-			'withAssetNetworkTimeout(\n\t\t\t"asset download"'
+			"const ASSET_RETRY_DELAYS_MS = [1_000, 3_000];"
 		);
 		expect(downloadSource).toContain(
-			'withAssetNetworkTimeout(\n\t\t"asset metadata request"'
+			'withAssetNetworkRetry(\n\t\t\t"asset download"'
+		);
+		expect(downloadSource).toContain(
+			'withAssetNetworkRetry(\n\t\t"asset metadata request"'
+		);
+		expect(downloadSource).toContain(
+			"runAssetNetworkRequest(label, operation"
+		);
+		expect(downloadSource).toContain(
+			"retryDelaysMs: ASSET_RETRY_DELAYS_MS"
 		);
 		expect(downloadSource).toContain("fetch(sourceUrl, { signal })");
 		expect(downloadSource).toContain('method: "HEAD",');

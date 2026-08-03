@@ -3,12 +3,17 @@ import { mkdir, readFile, rename, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { strFromU8, unzipSync } from "fflate";
+import {
+	assetHttpStatusError,
+	runAssetNetworkRequest
+} from "./asset-network-retry.mjs";
 
 const DEFAULT_ASSETS_ZIP_URL = "https://static.cs.avasan.org/assets.zip";
 const REVIEWED_ASSETS_ZIP_BYTES = 14_676_489;
 const REVIEWED_ASSETS_ZIP_SHA256 =
 	"6ab65a710032ca71cf957bfd56f8b60579d66c94395bbc34fc433be4bb0f92a1";
 const ASSET_REQUEST_TIMEOUT_MS = 60_000;
+const ASSET_RETRY_DELAYS_MS = [1_000, 3_000];
 const ZIP_HEADER = [0x50, 0x4b];
 const ASSET_PATH_RE = /^(?:images|music|sounds)\/(?:[^/]+\/)*[^/]+\.[\dA-Z]+$/i;
 const IGNORED_ZIP_PATH_RE =
@@ -95,14 +100,12 @@ async function stagePythonIdeAssets() {
 	}
 
 	try {
-		const { bytes, response } = await withAssetNetworkTimeout(
+		const { bytes, response } = await withAssetNetworkRetry(
 			"asset download",
 			async signal => {
 				const response = await fetch(sourceUrl, { signal });
 				if (!response.ok) {
-					throw new Error(
-						`download failed with status ${response.status}`
-					);
+					throw assetHttpStatusError("download", response.status);
 				}
 				return {
 					bytes: await readReviewedAssetArchive(response),
@@ -226,7 +229,7 @@ async function localAssetInfo() {
 }
 
 async function remoteAssetInfo() {
-	const response = await withAssetNetworkTimeout(
+	const response = await withAssetNetworkRetry(
 		"asset metadata request",
 		async signal => {
 			const response = await fetch(sourceUrl, {
@@ -234,9 +237,7 @@ async function remoteAssetInfo() {
 				signal
 			});
 			if (!response.ok) {
-				throw new Error(
-					`metadata request failed with status ${response.status}`
-				);
+				throw assetHttpStatusError("metadata request", response.status);
 			}
 			return response;
 		}
@@ -250,25 +251,16 @@ async function remoteAssetInfo() {
 	};
 }
 
-async function withAssetNetworkTimeout(label, operation) {
-	const controller = new AbortController();
-	const timeout = setTimeout(
-		() => controller.abort(),
-		ASSET_REQUEST_TIMEOUT_MS
-	);
-	try {
-		return await operation(controller.signal);
-	} catch (error) {
-		if (controller.signal.aborted) {
-			throw new Error(
-				`${label} timed out after ${ASSET_REQUEST_TIMEOUT_MS} ms`,
-				{ cause: error }
+async function withAssetNetworkRetry(label, operation) {
+	return await runAssetNetworkRequest(label, operation, {
+		onRetry: ({ attempt, delayMs, error, maximumAttempts }) => {
+			console.warn(
+				`[python-ide-assets] ${label} attempt ${attempt}/${maximumAttempts} failed; retrying in ${delayMs} ms: ${formatError(error)}`
 			);
-		}
-		throw error;
-	} finally {
-		clearTimeout(timeout);
-	}
+		},
+		retryDelaysMs: ASSET_RETRY_DELAYS_MS,
+		timeoutMs: ASSET_REQUEST_TIMEOUT_MS
+	});
 }
 
 async function readJson(filePath) {
