@@ -3,7 +3,7 @@ import { getPythonIdeFileMimeType } from "@/modules/pythonIde";
 export const pythonIdeCourseAssetsManifestUrl =
 	"/python-ide/assets/manifest.json";
 
-const ASSET_PATH_RE = /^(?:images|music|sounds)\/[^/].+\.[\dA-Z]+$/i;
+const ASSET_PATH_RE = /^(?:images|music|sounds)\/(?:[^/]+\/)*[^/]+\.[\dA-Z]+$/i;
 const ASSET_PATH_EXTENSION_RE = /\.[\dA-Z]+$/i;
 const ASSET_LOOKUP_SEPARATOR_RE = /[^\dA-Z]+/gi;
 const IGNORED_ZIP_PATH_RE =
