@@ -25,8 +25,9 @@ previous healthy release if readiness or the production smoke gate fails.
 
 The native path does not change DNS, TLS records, student-data policy, or
 feature approval. Student accounts, provider sign-in, and aggregate classroom
-counts stay fail-closed unless the same canonical settings pass the existing
-privacy gates during both the frontend build and API startup.
+counts stay fail-closed unless the same canonical settings, including the
+reviewed privacy-policy version and real `YYYY-MM-DD` effective date, pass the
+existing privacy gates during both the frontend build and API startup.
 
 ## One-time server preparation
 

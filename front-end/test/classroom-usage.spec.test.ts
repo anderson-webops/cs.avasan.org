@@ -19,6 +19,11 @@ describe("privacy-first classroom usage", () => {
 		vi.useFakeTimers();
 		vi.setSystemTime(new Date("2026-07-29T20:15:00.000Z"));
 		vi.stubEnv("VITE_CLASSROOM_PRIVACY_APPROVED", "true");
+		vi.stubEnv("VITE_CLASSROOM_PRIVACY_POLICY_VERSION", "test-policy-1");
+		vi.stubEnv(
+			"VITE_CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE",
+			"2026-07-29"
+		);
 		vi.stubEnv("VITE_CLASSROOM_USAGE_ENABLED", "true");
 		vi.stubEnv(
 			"VITE_SCHOOL_PRIVACY_CONTACT",

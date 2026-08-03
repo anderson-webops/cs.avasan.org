@@ -2,12 +2,15 @@ import { readBooleanSetting } from "./environment.js";
 
 const MAX_PRIVACY_CONTACT_LENGTH = 500;
 const MAX_PUBLIC_NOTICE_LENGTH = 2_000;
+export const MAX_CLASSROOM_PRIVACY_POLICY_VERSION_LENGTH = 64;
 export const MIN_STUDENT_RECORD_RETENTION_DAYS = 30;
 export const MAX_STUDENT_RECORD_RETENTION_DAYS = 365;
 
 export interface ClassroomPrivacySettings {
 	analyticsCollectionEnabled: boolean;
 	operatorNotice: string | null;
+	privacyPolicyEffectiveDate: string | null;
+	privacyPolicyVersion: string | null;
 	schoolPrivacyContact: string | null;
 	serviceProviderNotice: string | null;
 	studentAccountsEnabled: boolean;
@@ -19,11 +22,78 @@ export interface ClassroomPrivacyEnvironment {
 	CLASSROOM_ANALYTICS_COLLECTION_ENABLED?: string;
 	CLASSROOM_PRIVACY_OPERATOR_NOTICE?: string;
 	CLASSROOM_PRIVACY_APPROVED?: string;
+	CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE?: string;
+	CLASSROOM_PRIVACY_POLICY_VERSION?: string;
 	CLASSROOM_SERVICE_PROVIDER_NOTICE?: string;
 	SCHOOL_PRIVACY_CONTACT?: string;
 	STUDENT_ACCOUNTS_ENABLED?: string;
 	STUDENT_OAUTH_ENABLED?: string;
 	STUDENT_RECORD_RETENTION_DAYS?: string;
+}
+
+function currentCaliforniaDate(now = new Date()): string {
+	const parts = new Intl.DateTimeFormat("en-US", {
+		day: "2-digit",
+		month: "2-digit",
+		timeZone: "America/Los_Angeles",
+		year: "numeric"
+	}).formatToParts(now);
+	const value = (type: "day" | "month" | "year") =>
+		parts.find(part => part.type === type)?.value ?? "";
+	return `${value("year")}-${value("month")}-${value("day")}`;
+}
+
+export function classroomPrivacyPolicyVersion(
+	value: string | undefined
+): string | null {
+	const version = value?.trim() ?? "";
+	if (!version) return null;
+	if (
+		version.length > MAX_CLASSROOM_PRIVACY_POLICY_VERSION_LENGTH
+		|| !/^[a-z\d][\w.-]*$/i.test(version)
+	) {
+		throw new Error(
+			`CLASSROOM_PRIVACY_POLICY_VERSION must be a 1-to-${MAX_CLASSROOM_PRIVACY_POLICY_VERSION_LENGTH}-character token using only letters, numbers, periods, underscores, or hyphens.`
+		);
+	}
+	return version;
+}
+
+export function classroomPrivacyPolicyEffectiveDate(
+	value: string | undefined
+): string | null {
+	const effectiveDate = value?.trim() ?? "";
+	if (!effectiveDate) return null;
+	const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(effectiveDate);
+	if (!match) {
+		throw new Error(
+			"CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE must be a real date in YYYY-MM-DD format."
+		);
+	}
+	const year = Number(match[1]);
+	const month = Number(match[2]);
+	const day = Number(match[3]);
+	const leapYear = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+	const daysInMonth = [
+		31,
+		leapYear ? 29 : 28,
+		31,
+		30,
+		31,
+		30,
+		31,
+		31,
+		30,
+		31,
+		30,
+		31
+	];
+	if (year === 0 || month < 1 || month > 12 || day < 1 || day > (daysInMonth[month - 1] ?? 0)) {
+		throw new Error(
+			"CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE must be a real date in YYYY-MM-DD format."
+		);
+	}
+	return effectiveDate;
 }
 
 function privacyContact(value: string | undefined): string | null {
@@ -86,7 +156,8 @@ function studentRecordRetentionDays(
  * Resolve the three optional student-data features as a single fail-closed
  * rollout decision. A bare feature flag is insufficient: the school/district
  * approval flag, direct privacy contact, reviewed operator/provider notices,
- * and, for accounts, an explicit bounded retention period must also be present.
+ * bounded policy version, real policy effective date, and, for accounts, an
+ * explicit bounded retention period must also be present.
  */
 export function readClassroomPrivacySettings(
 	environment: ClassroomPrivacyEnvironment
@@ -118,6 +189,12 @@ export function readClassroomPrivacySettings(
 		environment.CLASSROOM_SERVICE_PROVIDER_NOTICE,
 		"CLASSROOM_SERVICE_PROVIDER_NOTICE"
 	);
+	const policyVersion = classroomPrivacyPolicyVersion(
+		environment.CLASSROOM_PRIVACY_POLICY_VERSION
+	);
+	const policyEffectiveDate = classroomPrivacyPolicyEffectiveDate(
+		environment.CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE
+	);
 	const anyStudentDataFeatureRequested = studentAccountsRequested
 		|| studentOAuthRequested
 		|| analyticsCollectionRequested;
@@ -147,6 +224,25 @@ export function readClassroomPrivacySettings(
 			"CLASSROOM_SERVICE_PROVIDER_NOTICE is required before student accounts, OAuth, or classroom analytics can be enabled."
 		);
 	}
+	if (anyStudentDataFeatureRequested && !policyVersion) {
+		throw new Error(
+			"CLASSROOM_PRIVACY_POLICY_VERSION is required before student accounts, OAuth, or classroom analytics can be enabled."
+		);
+	}
+	if (anyStudentDataFeatureRequested && !policyEffectiveDate) {
+		throw new Error(
+			"CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE is required before student accounts, OAuth, or classroom analytics can be enabled."
+		);
+	}
+	if (
+		anyStudentDataFeatureRequested
+		&& policyEffectiveDate
+		&& policyEffectiveDate > currentCaliforniaDate()
+	) {
+		throw new Error(
+			"CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE cannot be in the future when student accounts, OAuth, or classroom analytics are enabled."
+		);
+	}
 	const recordRetentionDays = studentRecordRetentionDays(
 		environment.STUDENT_RECORD_RETENTION_DAYS,
 		studentAccountsRequested
@@ -156,6 +252,8 @@ export function readClassroomPrivacySettings(
 		analyticsCollectionEnabled:
 			privacyApproved && analyticsCollectionRequested,
 		operatorNotice,
+		privacyPolicyEffectiveDate: policyEffectiveDate,
+		privacyPolicyVersion: policyVersion,
 		schoolPrivacyContact,
 		serviceProviderNotice,
 		studentAccountsEnabled:

@@ -32,6 +32,10 @@ const INVALID_STUDENT_CREDENTIALS = {
 const STUDENT_LOGIN_FAILURE_THRESHOLD = 5;
 const STUDENT_LOGIN_COOLDOWN_MS = 2 * 60 * 1000;
 const PASSWORD_SETUP_REQUEST_ID_RE = /^[\w-]{32,128}$/;
+export const STUDENT_RECORD_PRESERVATION_PURPOSE = "ferpa-inspection-review" as const;
+const STUDENT_RECORD_PRESERVATION_SELECT
+	= " +recordPreservationHoldActive +recordPreservationHoldPlacedAt"
+		+ " +recordPreservationHoldReleasedAt +recordPreservationEvents";
 
 interface StudentProjectActivity {
 	_id: Types.ObjectId;
@@ -49,6 +53,19 @@ export function serializeStudent(student: IStudent) {
 		retentionExpiresAt: student.retentionExpiresAt ?? null,
 		createdAt: student.createdAt,
 		updatedAt: student.updatedAt
+	};
+}
+
+export function serializeStudentRecordPreservation(student: IStudent) {
+	return {
+		active: Boolean(student.recordPreservationHoldActive),
+		purpose: STUDENT_RECORD_PRESERVATION_PURPOSE,
+		placedAt: student.recordPreservationHoldPlacedAt ?? null,
+		releasedAt: student.recordPreservationHoldReleasedAt ?? null,
+		events: (student.recordPreservationEvents ?? []).map(event => ({
+			action: event.action,
+			at: event.at
+		}))
 	};
 }
 
@@ -84,6 +101,7 @@ export function serializeManagedStudent(student: IStudent, now = Date.now()) {
 		...serializeStudent(student),
 		credentialState,
 		deletionPending: Boolean(student.dataDeletionPendingAt),
+		recordPreservation: serializeStudentRecordPreservation(student),
 		accessCodeExpiresAt: student.accessCodeExpiresAt ?? null,
 		socialProviders: studentSocialProviders(student)
 	};
@@ -668,9 +686,7 @@ export const deleteStudentSession: RequestHandler = async (req, res) => {
 export const listStudents: RequestHandler = async (_req, res) => {
 	const students = await Student.find({})
 		.select(
-			"+passwordHash +accessCodeHash +pendingSetupCodeHash"
-			+ " +externalAuthProvider +externalAuthSubjectHash"
-			+ " +dataDeletionPendingAt"
+			`+passwordHash +accessCodeHash +pendingSetupCodeHash +externalAuthProvider +externalAuthSubjectHash +dataDeletionPendingAt${STUDENT_RECORD_PRESERVATION_SELECT}`
 		)
 		.sort({ username: 1 });
 	const projectActivity: StudentProjectActivity[] = [];
@@ -812,7 +828,9 @@ export const setStudentActive: RequestHandler = async (req, res) => {
 		},
 		update,
 		{ new: true }
-	).select("+passwordHash +accessCodeHash" + " +externalAuthProvider +externalAuthSubjectHash");
+	).select(
+		`+passwordHash +accessCodeHash +externalAuthProvider +externalAuthSubjectHash${STUDENT_RECORD_PRESERVATION_SELECT}`
+	);
 	if (!student) {
 		return res.status(409).json({
 			message: "The account changed or its retention period expired. Reload before trying again."
@@ -857,7 +875,7 @@ export const correctStudentUsername: RequestHandler = async (req, res) => {
 			},
 			{ new: true }
 		).select(
-			"+passwordHash +accessCodeHash +pendingSetupCodeHash" + " +externalAuthProvider +externalAuthSubjectHash"
+			`+passwordHash +accessCodeHash +pendingSetupCodeHash +externalAuthProvider +externalAuthSubjectHash${STUDENT_RECORD_PRESERVATION_SELECT}`
 		);
 		if (!student) {
 			const existing = await Student.findById(studentID).select("+dataDeletionPendingAt");
@@ -935,7 +953,9 @@ export const resetStudentAccessCode: RequestHandler = async (req, res) => {
 			}
 		},
 		{ new: true }
-	).select("+passwordHash +accessCodeHash" + " +externalAuthProvider +externalAuthSubjectHash");
+	).select(
+		`+passwordHash +accessCodeHash +externalAuthProvider +externalAuthSubjectHash${STUDENT_RECORD_PRESERVATION_SELECT}`
+	);
 	if (!student) {
 		return res.status(409).json({
 			message: "The account changed or its retention period expired. Reload before trying again."

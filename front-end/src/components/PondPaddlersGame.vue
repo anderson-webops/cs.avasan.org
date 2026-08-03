@@ -486,7 +486,7 @@ onBeforeUnmount(() => {
 					<input
 						id="pond-room-code"
 						v-model="roomCodeEntry"
-						aria-describedby="pond-room-code-help"
+						aria-describedby="pond-room-code-help pond-room-privacy"
 						autocapitalize="characters"
 						autocomplete="off"
 						inputmode="text"
@@ -508,6 +508,14 @@ onBeforeUnmount(() => {
 				</div>
 				<p id="pond-room-code-help" class="join-form__help">
 					Use all eight letters and numbers from Julio's code.
+				</p>
+				<p id="pond-room-privacy" class="join-form__privacy">
+					Joining gives this browser a random animal name and a
+					temporary pass for this private race. It is not linked to a
+					student account.
+					<RouterLink to="/student-privacy"
+						>Student privacy</RouterLink
+					>
 				</p>
 				<p
 					v-if="joinError"
@@ -1017,6 +1025,19 @@ onBeforeUnmount(() => {
 .question-panel__help {
 	color: var(--color-ink-muted);
 	font-size: 0.82rem;
+}
+
+.join-form__privacy {
+	color: var(--color-ink-soft);
+	font-size: 0.84rem;
+	line-height: 1.5;
+}
+
+.join-form__privacy a {
+	color: var(--color-link);
+	font-weight: 800;
+	text-decoration: underline;
+	text-underline-offset: 0.18em;
 }
 
 .answer-feedback {

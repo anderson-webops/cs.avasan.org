@@ -70,7 +70,13 @@ describe("PondPaddlersGame", () => {
 
 		expect(wrapper.get("h1").text()).toBe("Pond Paddlers");
 		expect(wrapper.find('input[name="name"]').exists()).toBe(false);
-		expect(wrapper.text()).not.toMatch(/chat|email|student account/i);
+		expect(wrapper.text()).not.toMatch(/chat|email/i);
+		expect(wrapper.get(".join-form__privacy").text()).toContain(
+			"not linked to a student account"
+		);
+		expect(wrapper.get("#pond-room-code").attributes("aria-describedby")).toContain(
+			"pond-room-privacy"
+		);
 		expect(wrapper.get("#pond-room-code").attributes("maxlength")).toBe(
 			"8"
 		);

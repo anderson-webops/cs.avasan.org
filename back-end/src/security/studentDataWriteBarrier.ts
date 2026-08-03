@@ -6,7 +6,6 @@ interface StudentDataWriteState {
 	waiters: Set<() => void>;
 }
 
-const STUDENT_DATA_WRITE_LEASE = Symbol("cs.avasan.org.student-data-write-lease");
 const writeStates = new Map<string, StudentDataWriteState>();
 
 function stateFor(studentID: string): StudentDataWriteState {
@@ -58,6 +57,24 @@ export async function closeStudentDataWritesAndWait(studentID: string): Promise<
 	});
 }
 
+/**
+ * A durable preservation hold may be placed after a partial deletion leaves
+ * the student row pending. Reopen this process-local lease gate only after the
+ * preservation mutation gate is closed and the durable hold is confirmed.
+ * Protected project/review writes still fail at that separate hold gate, while
+ * Julio can export the remaining record set. Release closes this gate again
+ * before the preservation mutation gate reopens.
+ */
+export function reopenStudentDataLeaseGateForPreservation(
+	studentID: string
+): void {
+	const state = stateFor(studentID);
+	state.closed = false;
+	if (state.activeLeases === 0 && writeStates.get(studentID) === state) {
+		writeStates.delete(studentID);
+	}
+}
+
 function studentIDForWriteRequest(req: Parameters<RequestHandler>[0]): string | null {
 	const authenticatedStudentID = req.currentStudent?._id?.toString();
 	if (authenticatedStudentID) return authenticatedStudentID.toLowerCase();
@@ -68,42 +85,37 @@ function studentIDForWriteRequest(req: Parameters<RequestHandler>[0]): string | 
 }
 
 /**
- * Hold a write lease until Express finishes or closes the response. Deletion
- * closes the gate before its collection sweeps, then waits for these leases.
+ * Wrap a terminal route handler so deletion cannot pass this request while
+ * its controller is still running. A client disconnect is not completion:
+ * the lease is released only after the returned controller promise settles.
+ * Authentication and rate limiting belong outside this terminal wrapper.
  */
-export const requireStudentDataWriteLease: RequestHandler = (req, res, next) => {
-	const leasedRequest = req as typeof req & {
-		[STUDENT_DATA_WRITE_LEASE]?: true;
+export function withStudentDataWriteLease(
+	handler: RequestHandler
+): RequestHandler {
+	return async (req, res, next) => {
+		const studentID = studentIDForWriteRequest(req);
+		if (!studentID) {
+			res.status(403).json({ message: "Student context required." });
+			return;
+		}
+
+		const release = acquireStudentDataWriteLease(studentID);
+		if (!release) {
+			res.status(409).json({
+				message: "Student records are being permanently deleted."
+			});
+			return;
+		}
+
+		try {
+			await handler(req, res, next);
+		}
+		finally {
+			release();
+		}
 	};
-	if (leasedRequest[STUDENT_DATA_WRITE_LEASE]) {
-		next();
-		return;
-	}
-
-	const studentID = studentIDForWriteRequest(req);
-	if (!studentID) {
-		res.status(403).json({ message: "Student context required." });
-		return;
-	}
-
-	const release = acquireStudentDataWriteLease(studentID);
-	if (!release) {
-		res.status(409).json({
-			message: "Student records are being permanently deleted."
-		});
-		return;
-	}
-
-	leasedRequest[STUDENT_DATA_WRITE_LEASE] = true;
-	const releaseOnce = () => {
-		res.off("finish", releaseOnce);
-		res.off("close", releaseOnce);
-		release();
-	};
-	res.once("finish", releaseOnce);
-	res.once("close", releaseOnce);
-	next();
-};
+}
 
 export function resetStudentDataWriteBarriersForTests(): void {
 	for (const state of writeStates.values()) {

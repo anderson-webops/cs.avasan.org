@@ -6,6 +6,7 @@ import { ADMIN_SINGLETON_ID } from "../src/security/adminIdentity.js";
 
 const modelMocks = vi.hoisted(() => ({
 	adminFindById: vi.fn(),
+	studentExists: vi.fn(),
 	studentFindById: vi.fn(),
 	pythonProjectExists: vi.fn(),
 	pythonProjectFind: vi.fn(),
@@ -23,6 +24,7 @@ vi.mock("../src/models/schemas/Admin.js", () => ({
 
 vi.mock("../src/models/schemas/Student.js", () => ({
 	Student: {
+		exists: modelMocks.studentExists,
 		findById: modelMocks.studentFindById
 	}
 }));
@@ -209,6 +211,7 @@ describe("student and Julio project routes", () => {
 					})
 				: queryWith(null)
 		);
+		modelMocks.studentExists.mockReturnValue(queryWith(null));
 		modelMocks.studentFindById.mockReturnValue(queryWith(makeStudent()));
 		modelMocks.pythonProjectExists.mockReturnValue(queryWith({ _id: projectID }));
 		modelMocks.pythonProjectFind.mockReturnValue(queryWith([makeProject()]));
@@ -406,6 +409,52 @@ describe("student and Julio project routes", () => {
 			expect(body.project.files[0].content).toBe("print('student')\n");
 			expect(body.review.files[0].content).toContain("Nice decomposition");
 			expect(body.review.visibleToStudent).toBe(true);
+		});
+	});
+
+	it("fails closed before review writes when preservation verification is unavailable", async () => {
+		modelMocks.studentExists.mockImplementation(() => {
+			throw new Error("database unavailable");
+		});
+
+		await withRuntime(async baseUrl => {
+			const create = await fetch(
+				`${baseUrl}/admins/students/${studentID}/projects/${projectID}/review`,
+				{
+					body: "{}",
+					headers: mutationHeaders({
+						"x-admin-id": ADMIN_SINGLETON_ID
+					}),
+					method: "POST"
+				}
+			);
+			const update = await fetch(
+				`${baseUrl}/admins/students/${studentID}/projects/${projectID}/review/${reviewID}`,
+				{
+					body: JSON.stringify({
+						activeFileName: "main.py",
+						files: [{ content: "print('reviewed')\n", name: "main.py" }],
+						note: "",
+						visibleToStudent: false
+					}),
+					headers: mutationHeaders({
+						"x-admin-id": ADMIN_SINGLETON_ID
+					}),
+					method: "PUT"
+				}
+			);
+
+			expect(create.status).toBe(503);
+			expect(update.status).toBe(503);
+			await expect(create.json()).resolves.toMatchObject({
+				message: "Record-preservation status could not be verified."
+			});
+			await expect(update.json()).resolves.toMatchObject({
+				message: "Record-preservation status could not be verified."
+			});
+			expect(modelMocks.studentExists).toHaveBeenCalledTimes(2);
+			expect(modelMocks.pythonProjectReviewCreate).not.toHaveBeenCalled();
+			expect(modelMocks.pythonProjectReviewFindOne).not.toHaveBeenCalled();
 		});
 	});
 

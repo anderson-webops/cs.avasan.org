@@ -1,5 +1,6 @@
 import { Student } from "../models/schemas/Student.js";
 import { StudentDataDeletionReceipt } from "../models/schemas/StudentDataDeletionReceipt.js";
+import { acquireVerifiedStudentRecordMutationLease } from "../security/studentRecordMutationBarrier.js";
 import {
 	deleteStudentChildRecords,
 	deleteStudentRecordSet,
@@ -143,7 +144,8 @@ export async function enforceStudentRecordRetention(
 			+ " +dataDeletionRequestedAt +dataDeletionReason"
 			+ " +sessionVersion _id username";
 	const pending = await Student.find({
-		dataDeletionPendingAt: { $exists: true }
+		dataDeletionPendingAt: { $exists: true },
+		recordPreservationHoldActive: { $ne: true }
 	})
 		.select(selectDeletionState)
 		.sort({ dataDeletionPendingAt: 1, _id: 1 })
@@ -152,6 +154,7 @@ export async function enforceStudentRecordRetention(
 		.exec();
 	const expired = await Student.find({
 		dataDeletionPendingAt: { $exists: false },
+		recordPreservationHoldActive: { $ne: true },
 		retentionExpiresAt: { $lte: now },
 		retentionPolicyDays: retentionDays
 	})
@@ -164,49 +167,71 @@ export async function enforceStudentRecordRetention(
 	let deleted = 0;
 	let needsRetry = orphanedReceiptRetries;
 	for (const student of [...pending, ...expired]) {
-		const deletionWasPending = Boolean(student.dataDeletionPendingAt);
-		const deletionReason = deletionWasPending
-			? (student.dataDeletionReason ?? "julio-request")
-			: "retention-expiry";
-		const resumeOperation
-			= deletionWasPending && student.dataDeletionOperationID
-				? {
-						operationID: student.dataDeletionOperationID,
-						requestedAt:
-							student.dataDeletionRequestedAt
-							?? student.dataDeletionPendingAt
-					}
-				: undefined;
-		const result = await deleteStudentRecordSet({
-			initialFilter: {
-				_id: student._id,
-				sessionVersion: student.sessionVersion,
-				...(deletionWasPending
+		let releaseMutationLease: (() => void) | null = null;
+		try {
+			releaseMutationLease
+				= await acquireVerifiedStudentRecordMutationLease(
+					student._id.toString()
+				);
+		}
+		catch {
+			// A hold-status outage must never become permission to delete.
+			needsRetry += 1;
+			continue;
+		}
+		if (!releaseMutationLease) continue;
+
+		try {
+			const deletionWasPending = Boolean(student.dataDeletionPendingAt);
+			const deletionReason = deletionWasPending
+				? (student.dataDeletionReason ?? "julio-request")
+				: "retention-expiry";
+			const resumeOperation
+				= deletionWasPending && student.dataDeletionOperationID
 					? {
-							dataDeletionPendingAt: { $exists: true },
-							...(resumeOperation
-								? {
-										dataDeletionOperationID: resumeOperation.operationID
-									}
-								: {
-										dataDeletionOperationID: {
-											$exists: false
-										}
-									})
+							operationID: student.dataDeletionOperationID,
+							requestedAt:
+								student.dataDeletionRequestedAt
+								?? student.dataDeletionPendingAt
 						}
-					: {
-							dataDeletionPendingAt: { $exists: false },
-							retentionExpiresAt: { $lte: now },
-							retentionPolicyDays: retentionDays
-						})
-			},
-			reason: deletionReason,
-			...(resumeOperation ? { resumeOperation } : {}),
-			studentID: student._id.toString(),
-			username: student.username
-		});
-		if (result.deleted) deleted += 1;
-		if (!result.deleted && result.reason === "needs-retry") needsRetry += 1;
+					: undefined;
+			const result = await deleteStudentRecordSet({
+				initialFilter: {
+					_id: student._id,
+					recordPreservationHoldActive: { $ne: true },
+					sessionVersion: student.sessionVersion,
+					...(deletionWasPending
+						? {
+								dataDeletionPendingAt: { $exists: true },
+								...(resumeOperation
+									? {
+											dataDeletionOperationID: resumeOperation.operationID
+										}
+									: {
+											dataDeletionOperationID: {
+												$exists: false
+											}
+										})
+							}
+						: {
+								dataDeletionPendingAt: { $exists: false },
+								retentionExpiresAt: { $lte: now },
+								retentionPolicyDays: retentionDays
+							})
+				},
+				reason: deletionReason,
+				...(resumeOperation ? { resumeOperation } : {}),
+				studentID: student._id.toString(),
+				username: student.username
+			});
+			if (result.deleted) deleted += 1;
+			if (!result.deleted && result.reason === "needs-retry") {
+				needsRetry += 1;
+			}
+		}
+		finally {
+			releaseMutationLease();
+		}
 	}
 	return { reconciled, deleted, needsRetry };
 }

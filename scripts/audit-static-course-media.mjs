@@ -257,14 +257,28 @@ if (unknownMissing.length > 0 || unnotedPending.length > 0) {
 `;
 
 const tempDir = await mkdtemp(join(tmpdir(), "classes-static-media-"));
-const auditFile = join(tempDir, "audit.ts");
+const auditFile = join(tempDir, "audit.mts");
 
 try {
 	await writeFile(auditFile, auditSource);
 
-	const child = spawn("npm", ["exec", "-w", "front-end", "--", "vite-node", auditFile], {
-		stdio: "inherit"
-	});
+	const tsxCli = join(
+		process.cwd(),
+		"node_modules",
+		"tsx",
+		"dist",
+		"cli.mjs"
+	);
+	const child = spawn(
+		process.execPath,
+		[
+			tsxCli,
+			"--tsconfig",
+			join(process.cwd(), "front-end", "tsconfig.json"),
+			auditFile
+		],
+		{ stdio: "inherit" }
+	);
 
 	const exitCode = await new Promise((resolve, reject) => {
 		child.once("error", reject);

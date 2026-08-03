@@ -53,13 +53,14 @@ const pythonProjectSchema: Schema<IPythonProject> = new Schema(
 			required: true,
 			min: 0
 		},
-		deletedAt: { type: Date, default: undefined }
+		deletedAt: { type: Date, default: undefined },
+		purgeAt: { type: Date, default: undefined }
 	},
-	{ timestamps: true, optimisticConcurrency: true }
+	{ autoIndex: false, timestamps: true, optimisticConcurrency: true }
 );
 
 pythonProjectSchema.index({ user: 1, deletedAt: 1, updatedAt: -1 });
-pythonProjectSchema.index({ deletedAt: 1 }, { expireAfterSeconds: 60 * 60 });
+pythonProjectSchema.index({ purgeAt: 1 });
 pythonProjectSchema.index(
 	{ user: 1, courseProjectKey: 1 },
 	{ sparse: true }

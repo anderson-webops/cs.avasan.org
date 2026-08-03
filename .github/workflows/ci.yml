@@ -29,6 +29,10 @@ jobs:
                   npm -v
                   npm i -g npm@11.16.0
                   npm -v
+                  test "$(npm --version)" = "11.16.0"
+
+            - name: Verify standalone backend install policy
+              run: node --test test/ci-supply-chain.test.mjs
 
             - name: Install backend deps with backend lockfile
               working-directory: back-end
@@ -37,6 +41,10 @@ jobs:
             - name: Verify standalone backend dependency tree
               working-directory: back-end
               run: npm ls --all --workspaces=false
+
+            - name: Audit standalone backend dependency tree
+              working-directory: back-end
+              run: npm audit --include=optional --workspaces=false
 
     lint:
         runs-on: ubuntu-latest
@@ -56,6 +64,7 @@ jobs:
                   npm -v
                   npm i -g npm@11.16.0
                   npm -v
+                  test "$(npm --version)" = "11.16.0"
 
             - name: Install deps
               env:
@@ -83,6 +92,7 @@ jobs:
               run: |
                   npm i -g npm@11.16.0
                   npm -v
+                  test "$(npm --version)" = "11.16.0"
 
             - name: Install deps
               env:
@@ -111,14 +121,11 @@ jobs:
                   cache: npm
                   registry-url: https://registry.npmjs.org/
 
-            # Only pin npm if compatible
-            - name: Pin npm version (if supported)
+            - name: Pin npm version
               run: |
-                  # optional guard:
-                  if [ $(node -v | cut -d. -f1 | sed 's/v//') -ge 20 ]; then
-                    npm i -g npm@11.16.0
-                  fi
+                  npm i -g npm@11.16.0
                   npm -v
+                  test "$(npm --version)" = "11.16.0"
 
             - name: Install deps
               env:
@@ -155,6 +162,7 @@ jobs:
               run: |
                   npm i -g npm@11.16.0
                   npm -v
+                  test "$(npm --version)" = "11.16.0"
 
             - name: Install deps
               env:
@@ -181,6 +189,7 @@ jobs:
               run: |
                   npm i -g npm@11.16.0
                   npm -v
+                  test "$(npm --version)" = "11.16.0"
 
             - name: Install deps
               env:
@@ -211,6 +220,7 @@ jobs:
               run: |
                   npm i -g npm@11.16.0
                   npm -v
+                  test "$(npm --version)" = "11.16.0"
 
             - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
               with:
@@ -250,6 +260,7 @@ jobs:
               run: |
                   npm i -g npm@11.16.0
                   npm -v
+                  test "$(npm --version)" = "11.16.0"
 
             - name: Install deps
               env:

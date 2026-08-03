@@ -2183,17 +2183,29 @@ cols=3`
 	});
 
 	it("keeps backend health and project APIs separate from Java execution", () => {
+		const studentRoutesSource = sourceFile(
+			"../../back-end/src/routes/studentRoutes.ts"
+		);
 		const backendSource = [
 			sourceFile("../../back-end/src/server.ts"),
-			sourceFile("../../back-end/src/routes/studentRoutes.ts"),
+			studentRoutesSource,
 			sourceFile(
 				"../../back-end/src/controllers/users/pythonProjectController.ts"
 			)
 		].join("\n");
+		const compactStudentRoutes = studentRoutesSource.replace(/\s+/g, " ");
 
 		expect(backendSource).toContain('app.get("/healthz"');
-		expect(backendSource).toContain('router.post("/projects"');
-		expect(backendSource).toContain('router.put("/projects/:projectID"');
+		expect(compactStudentRoutes).toContain(
+			'router.use( ["/projects", "/project-reviews"], validStudent, requireStudentContext )'
+		);
+		for (const route of [
+			'router.post( "/projects", ...projectWriteLimiters, withProjectPayloadReservation( withStudentDataWriteLease( withStudentRecordMutationLease(createPythonProject) ) ) )',
+			'router.put( "/projects/:projectID", ...projectWriteLimiters, withProjectPayloadReservation( withStudentDataWriteLease( withStudentRecordMutationLease(updatePythonProject) ) ) )',
+			'router.delete( "/projects/:projectID", ...projectWriteLimiters, withProjectPayloadReservation( withStudentDataWriteLease( withStudentRecordMutationLease(deletePythonProject) ) ) )'
+		]) {
+			expect(compactStudentRoutes).toContain(route);
+		}
 		expect(backendSource).toContain(
 			'const projectModeSchema = z.enum(["data", "pgzero", "python", "turtle"])'
 		);

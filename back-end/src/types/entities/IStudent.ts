@@ -1,5 +1,12 @@
 import type { Types } from "mongoose";
 
+export type StudentRecordPreservationAction = "placed" | "released";
+
+export interface StudentRecordPreservationEvent {
+	action: StudentRecordPreservationAction;
+	at: Date;
+}
+
 export interface IStudent {
 	_id: Types.ObjectId;
 	username: string;
@@ -19,6 +26,10 @@ export interface IStudent {
 	lastLoginAt?: Date;
 	retentionExpiresAt?: Date;
 	retentionPolicyDays?: number;
+	recordPreservationHoldActive?: boolean;
+	recordPreservationHoldPlacedAt?: Date;
+	recordPreservationHoldReleasedAt?: Date;
+	recordPreservationEvents?: StudentRecordPreservationEvent[];
 	lastPasswordSetupRequestID?: string;
 	dataDeletionPendingAt?: Date;
 	dataDeletionOperationID?: string;

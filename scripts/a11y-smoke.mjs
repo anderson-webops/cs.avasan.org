@@ -332,6 +332,12 @@ function startVite() {
 				VITE_CLASSROOM_PRIVACY_OPERATOR_NOTICE:
 					process.env.VITE_CLASSROOM_PRIVACY_OPERATOR_NOTICE
 					?? "Test operator, 1 Test Way, Test City, CA 90000; 555-0100; privacy@example.test",
+				VITE_CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE:
+					process.env.VITE_CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE
+					?? "2026-08-02",
+				VITE_CLASSROOM_PRIVACY_POLICY_VERSION:
+					process.env.VITE_CLASSROOM_PRIVACY_POLICY_VERSION
+					?? "accessibility-test-1",
 				VITE_CLASSROOM_SERVICE_PROVIDER_NOTICE:
 					process.env.VITE_CLASSROOM_SERVICE_PROVIDER_NOTICE
 					?? "Test hosting provider stores the approved classroom database solely to operate account and project sync.",

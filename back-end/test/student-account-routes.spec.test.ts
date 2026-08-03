@@ -15,6 +15,7 @@ const modelMocks = vi.hoisted(() => ({
 	adminFindById: vi.fn(),
 	adminFindOne: vi.fn(),
 	studentCreate: vi.fn(),
+	studentExists: vi.fn(),
 	studentFind: vi.fn(),
 	studentFindById: vi.fn(),
 	studentFindByIdAndUpdate: vi.fn(),
@@ -34,6 +35,7 @@ vi.mock("../src/models/schemas/Admin.js", () => ({
 vi.mock("../src/models/schemas/Student.js", () => ({
 	Student: {
 		create: modelMocks.studentCreate,
+		exists: modelMocks.studentExists,
 		find: modelMocks.studentFind,
 		findById: modelMocks.studentFindById,
 		findByIdAndUpdate: modelMocks.studentFindByIdAndUpdate,
@@ -242,6 +244,7 @@ describe("teacher-provisioned student accounts", () => {
 		);
 		modelMocks.studentFind.mockReturnValue(queryWith([makeStudent()]));
 		modelMocks.studentFindById.mockReturnValue(queryWith(makeStudent()));
+		modelMocks.studentExists.mockReturnValue(queryWith(null));
 		modelMocks.studentUpdateOne.mockResolvedValue({ modifiedCount: 1 });
 		modelMocks.pythonProjectAggregate.mockResolvedValue([]);
 	});
@@ -296,10 +299,19 @@ describe("teacher-provisioned student accounts", () => {
 	});
 
 	it("corrects only the student alias after Julio re-verifies", async () => {
+		const placedAt = new Date("2026-08-02T12:00:00.000Z");
+		const releasedAt = new Date("2026-08-02T13:00:00.000Z");
 		modelMocks.studentFindOneAndUpdate.mockReturnValue(
 			queryWith(
 				makeStudent({
 					passwordHash: "password-hash",
+					recordPreservationEvents: [
+						{ action: "placed", at: placedAt },
+						{ action: "released", at: releasedAt }
+					],
+					recordPreservationHoldActive: false,
+					recordPreservationHoldPlacedAt: placedAt,
+					recordPreservationHoldReleasedAt: releasedAt,
 					sessionVersion: 5,
 					username: "river-8"
 				})
@@ -323,6 +335,15 @@ describe("teacher-provisioned student accounts", () => {
 			expect(response.status).toBe(200);
 			expect(body.student).toMatchObject({
 				_id: studentID.toString(),
+				recordPreservation: {
+					active: false,
+					events: [
+						{ action: "placed", at: placedAt.toISOString() },
+						{ action: "released", at: releasedAt.toISOString() }
+					],
+					placedAt: placedAt.toISOString(),
+					releasedAt: releasedAt.toISOString()
+				},
 				username: "river-8"
 			});
 			expect(modelMocks.studentFindOneAndUpdate).toHaveBeenCalledWith(
@@ -335,6 +356,11 @@ describe("teacher-provisioned student accounts", () => {
 					$set: { username: "river-8" }
 				},
 				{ new: true }
+			);
+			expect(
+				modelMocks.studentFindOneAndUpdate.mock.results[0]?.value.select
+			).toHaveBeenCalledWith(
+				expect.stringContaining("+recordPreservationEvents")
 			);
 		});
 	});
@@ -490,14 +516,15 @@ describe("teacher-provisioned student accounts", () => {
 		});
 	});
 
-	it("signs in with the student password and clears failed-login state", async () => {
+	it("signs in with a password during a hold and clears failed-login state", async () => {
 		const passwordHash = await hashStudentCredential("three calm words");
 		modelMocks.studentFindOne.mockReturnValue(
 			queryWith(
 				makeStudent({
 					passwordHash,
 					passwordSetAt: now,
-					failedLoginAttempts: 2
+					failedLoginAttempts: 2,
+					recordPreservationHoldActive: true
 				})
 			)
 		);
@@ -506,7 +533,8 @@ describe("teacher-provisioned student accounts", () => {
 				makeStudent({
 					sessionVersion: 5,
 					passwordSetAt: now,
-					lastLoginAt: now
+					lastLoginAt: now,
+					recordPreservationHoldActive: true
 				})
 			)
 		);
@@ -546,9 +574,44 @@ describe("teacher-provisioned student accounts", () => {
 				{ new: true }
 			);
 			const loginUpdate = modelMocks.studentFindOneAndUpdate.mock.calls[0]?.[1];
+			expect(modelMocks.studentFindOne.mock.calls[0]?.[0]).not.toHaveProperty(
+				"recordPreservationHoldActive"
+			);
+			expect(modelMocks.studentFindOneAndUpdate.mock.calls[0]?.[0]).not.toHaveProperty(
+				"recordPreservationHoldActive"
+			);
 			expect(loginUpdate.$set.retentionExpiresAt.getTime() - loginUpdate.$set.lastLoginAt.getTime()).toBe(
 				90 * 24 * 60 * 60 * 1000
 			);
+		});
+	});
+
+	it("rejects password login when permanent deletion is pending", async () => {
+		const pendingStudent = makeStudent({
+			dataDeletionPendingAt: new Date("2026-08-02T14:00:00.000Z"),
+			passwordHash: await hashStudentCredential("three calm words"),
+			passwordSetAt: now
+		});
+		modelMocks.studentFindOne.mockImplementation((conditions) => {
+			expect(pendingStudent.dataDeletionPendingAt).toBeInstanceOf(Date);
+			expect(conditions).toMatchObject({
+				dataDeletionPendingAt: { $exists: false },
+				username: "student-one"
+			});
+			return queryWith(null);
+		});
+
+		await withRuntime({}, async baseUrl => {
+			const response = await postJson(baseUrl, "/students/session", {
+				username: "student-one",
+				secret: "three calm words"
+			});
+
+			expect(response.status).toBe(403);
+			await expect(response.json()).resolves.toEqual({
+				message: "Invalid username or credential."
+			});
+			expect(modelMocks.studentFindOneAndUpdate).not.toHaveBeenCalled();
 		});
 	});
 
@@ -579,11 +642,12 @@ describe("teacher-provisioned student accounts", () => {
 		expect(modelMocks.studentFindOne).not.toHaveBeenCalled();
 	});
 
-	it("requires a distinct nonblank password before project access", async () => {
+	it("allows password setup during a hold with a distinct nonblank password", async () => {
 		const accessCode = "ABCD-EFGH-JKMP-QRST-UVWX";
 		const pendingSetupCodeHash = await hashStudentCredential(normalizeStudentAccessCode(accessCode));
 		const setupStudent = makeStudent({
 			pendingSetupCodeHash,
+			recordPreservationHoldActive: true,
 			sessionVersion: 5
 		});
 		modelMocks.studentFindById.mockReturnValue(queryWith(setupStudent));
@@ -592,7 +656,8 @@ describe("teacher-provisioned student accounts", () => {
 				makeStudent({
 					sessionVersion: 6,
 					passwordSetAt: now,
-					lastLoginAt: now
+					lastLoginAt: now,
+					recordPreservationHoldActive: true
 				})
 			)
 		);
@@ -643,11 +708,47 @@ describe("teacher-provisioned student accounts", () => {
 				expect(session.studentSetupExpiresAt).toBeUndefined();
 				expect(responseBody.passwordSetupRequestID).toBe(passwordSetupRequestID);
 				const update = modelMocks.studentFindOneAndUpdate.mock.calls.at(-1)?.[1];
+				expect(
+					modelMocks.studentFindOneAndUpdate.mock.calls.at(-1)?.[0]
+				).not.toHaveProperty("recordPreservationHoldActive");
 				expect(update.$set.passwordHash).toEqual(expect.any(String));
 				expect(update.$set.lastPasswordSetupRequestID).toBe(passwordSetupRequestID);
 				expect(update.$unset.pendingSetupCodeHash).toBe(1);
 				expect(update.$unset.accessCodeExpiresAt).toBe(1);
 				expect(JSON.stringify(responseBody)).not.toContain(update.$set.passwordHash);
+			}
+		);
+	});
+
+	it("rejects password setup when permanent deletion is pending", async () => {
+		const pendingSetupCodeHash = await hashStudentCredential(
+			normalizeStudentAccessCode("ABCD-EFGH-JKMP-QRST-UVWX")
+		);
+		modelMocks.studentFindById.mockReturnValue(
+			queryWith(makeStudent({
+				dataDeletionPendingAt: new Date("2026-08-02T14:00:00.000Z"),
+				pendingSetupCodeHash,
+				sessionVersion: 5
+			}))
+		);
+
+		await withRuntime(
+			{
+				studentID: studentID.toString(),
+				studentSessionVersion: 5,
+				studentAuthLevel: "setup"
+			},
+			async baseUrl => {
+				const response = await putJson(baseUrl, "/students/session/password", {
+					password: "three calm words",
+					requestID: passwordSetupRequestID
+				});
+
+				expect(response.status).toBe(403);
+				await expect(response.json()).resolves.toEqual({
+					message: "Student setup session expired."
+				});
+				expect(modelMocks.studentFindOneAndUpdate).not.toHaveBeenCalled();
 			}
 		);
 	});
@@ -927,6 +1028,7 @@ describe("teacher-provisioned student accounts", () => {
 					active: true,
 					externalAuthProvider: "google",
 					externalAuthSubjectHash: "a".repeat(64),
+					recordPreservationHoldActive: true,
 					sessionVersion: 8
 				})
 			)
@@ -946,6 +1048,7 @@ describe("teacher-provisioned student accounts", () => {
 			expect(body.accessCode).toEqual(expect.any(String));
 			expect(body.student.active).toBe(true);
 			expect(body.student.credentialState).toBe("access-code");
+			expect(body.student.recordPreservation.active).toBe(true);
 			expect(modelMocks.studentFindOneAndUpdate).toHaveBeenCalledWith(
 				{
 					_id: studentID.toString(),
@@ -966,6 +1069,11 @@ describe("teacher-provisioned student accounts", () => {
 					})
 				}),
 				{ new: true }
+			);
+			expect(
+				modelMocks.studentFindOneAndUpdate.mock.results[0]?.value.select
+			).toHaveBeenCalledWith(
+				expect.stringContaining("+recordPreservationHoldActive")
 			);
 		});
 	});
@@ -1027,6 +1135,7 @@ describe("teacher-provisioned student accounts", () => {
 			queryWith(
 				makeStudent({
 					active: false,
+					recordPreservationHoldActive: true,
 					sessionVersion: 5
 				})
 			)
@@ -1047,8 +1156,10 @@ describe("teacher-provisioned student accounts", () => {
 					},
 					body: JSON.stringify({ active: false })
 				});
+				const body = await response.json();
 
 				expect(response.status).toBe(200);
+				expect(body.student.recordPreservation.active).toBe(true);
 				expect(session.adminLastActivityAt).toBe(lastActivityAt);
 				expect(modelMocks.studentFindOneAndUpdate).toHaveBeenCalledWith(
 					{
@@ -1066,6 +1177,11 @@ describe("teacher-provisioned student accounts", () => {
 						})
 					}),
 					{ new: true }
+				);
+				expect(
+					modelMocks.studentFindOneAndUpdate.mock.results[0]?.value.select
+				).toHaveBeenCalledWith(
+					expect.stringContaining("+recordPreservationHoldActive")
 				);
 			}
 		);
@@ -1401,7 +1517,20 @@ describe("teacher-provisioned student accounts", () => {
 		);
 	});
 
-	it("revokes copied student cookies when the student signs out", async () => {
+	it("revokes copied student cookies when the student signs out, including during a hold", async () => {
+		const heldStudent = makeStudent({ recordPreservationHoldActive: true });
+		modelMocks.studentUpdateOne.mockImplementation(async (filter, update) => {
+			expect(heldStudent.recordPreservationHoldActive).toBe(true);
+			expect(filter).not.toHaveProperty("recordPreservationHoldActive");
+			if (
+				filter._id === heldStudent._id.toString()
+				&& filter.sessionVersion === heldStudent.sessionVersion
+				&& update.$inc?.sessionVersion === 1
+			) {
+				heldStudent.sessionVersion += 1;
+			}
+			return { acknowledged: true, modifiedCount: 1 };
+		});
 		await withRuntime(
 			{
 				studentID: studentID.toString(),
@@ -1424,6 +1553,8 @@ describe("teacher-provisioned student accounts", () => {
 				);
 			}
 		);
+		expect(heldStudent.recordPreservationHoldActive).toBe(true);
+		expect(heldStudent.sessionVersion).toBe(5);
 	});
 
 	it("does not let repeated session or protected reads extend student inactivity", async () => {

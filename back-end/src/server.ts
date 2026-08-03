@@ -11,7 +11,11 @@ import { requireStudentContext, validAdmin, validStudent } from "./middleware/au
 import { requireClassroomRequest } from "./middleware/classroomRequest.js";
 import { readInternalDiagnosticsKey, requireInternalDiagnostics } from "./middleware/internalDiagnostics.js";
 import { apiNotFound } from "./middleware/notFound.js";
-import { createProjectJsonParser, createProjectPayloadConcurrencyGuard } from "./middleware/projectPayload.js";
+import {
+	claimProjectPayloadReservation,
+	createProjectJsonParser,
+	createProjectPayloadConcurrencyGuard
+} from "./middleware/projectPayload.js";
 import {
 	createHeavyProjectPayloadLimiter,
 	createProjectDataAccessLimiter,
@@ -20,8 +24,6 @@ import {
 import { Admin } from "./models/schemas/Admin.js";
 import { ClassroomUsageDaily } from "./models/schemas/ClassroomUsageDaily.js";
 import { OAuthLoginAttempt } from "./models/schemas/OAuthLoginAttempt.js";
-import { PythonProject } from "./models/schemas/PythonProject.js";
-import { PythonProjectReview } from "./models/schemas/PythonProjectReview.js";
 import { Student } from "./models/schemas/Student.js";
 import { StudentDataDeletionReceipt } from "./models/schemas/StudentDataDeletionReceipt.js";
 import { mountClassroomAnalyticsRoutes } from "./routes/classroomAnalyticsRoutes.js";
@@ -39,6 +41,10 @@ import { readReleaseMetadata } from "./security/releaseMetadata.js";
 import { readTrustProxySetting } from "./security/trustProxy.js";
 import { PondPaddlersRoomStore } from "./services/pondPaddlersRooms.js";
 import { reconcilePythonProjectQuotas } from "./services/pythonProjectQuotaReconciliation.js";
+import {
+	preparePythonProjectTombstoneLifecycle,
+	startPythonProjectTombstoneReconciler
+} from "./services/pythonProjectTombstoneLifecycle.js";
 import {
 	enforceStudentRecordRetention,
 	startStudentRecordRetentionSweeper
@@ -158,16 +164,18 @@ async function main() {
 			limitProjectMutation(studentProjectWriteLimiter),
 			limitProjectMutation(heavyProjectPayloadLimiter),
 			limitProjectMutation(projectPayloadConcurrencyGuard),
-			parseProjectMutation
+			parseProjectMutation,
+			limitProjectMutation(claimProjectPayloadReservation)
 		);
 		app.use(
-			/^\/admins\/students\/[a-f\d]{24}\/projects(?:\/|$)/i,
+			"/admins/students/:studentID/projects",
 			teacherProjectDataAccessLimiter,
 			validAdmin,
 			limitProjectMutation(teacherProjectWriteLimiter),
 			limitProjectMutation(heavyProjectPayloadLimiter),
 			limitProjectMutation(projectPayloadConcurrencyGuard),
-			parseProjectMutation
+			parseProjectMutation,
+			limitProjectMutation(claimProjectPayloadReservation)
 		);
 	}
 
@@ -239,17 +247,17 @@ async function main() {
 	if (mongoose.connection.db?.databaseName !== "cs-avasan-org") {
 		throw new Error("The classroom API requires its fork-specific database.");
 	}
+	// Remove every legacy/current MongoDB TTL writer, then reconcile and purge
+	// through the application-owned lifecycle under the preservation mutation
+	// lease. Only then build normal purge-date indexes. A failure aborts startup
+	// before the API can listen.
+	await preparePythonProjectTombstoneLifecycle();
 	await Promise.all([
 		Admin.init(),
 		ClassroomUsageDaily.init(),
 		OAuthLoginAttempt.init(),
 		Student.init(),
-		StudentDataDeletionReceipt.init(),
-		// Reconcile the former sparse import-ID index with the partial index.
-		// Legacy projects without an import ID remain readable while every new
-		// project is required to have a stable idempotency key.
-		PythonProject.syncIndexes(),
-		PythonProjectReview.init()
+		StudentDataDeletionReceipt.init()
 	]);
 	const retainedStudentData
 		= classroomPrivacy.studentRecordRetentionDays === null
@@ -290,6 +298,7 @@ async function main() {
 	});
 	mountRuntimeAccountRoutes(app, {
 		analyticsRetentionDays: classroomAnalyticsRetentionDays,
+		projectRequestsPreauthorized: true,
 		studentAccountsEnabled: classroomPrivacy.studentAccountsEnabled,
 		studentOAuthEnabled: classroomPrivacy.studentOAuthEnabled,
 		studentRecordRetentionDays: classroomPrivacy.studentRecordRetentionDays
@@ -302,6 +311,8 @@ async function main() {
 	const PORT = Number(env.PORT || 3008);
 	const HOST = env.HOST || env.BACKEND_HOST || "127.0.0.1";
 	const server = app.listen(PORT, HOST, () => console.log(`Server listening on http://${HOST}:${PORT}!`));
+	const stopPythonProjectTombstoneReconciler
+		= startPythonProjectTombstoneReconciler();
 	const stopStudentRecordRetentionSweeper = classroomPrivacy.studentRecordRetentionDays
 		? startStudentRecordRetentionSweeper(classroomPrivacy.studentRecordRetentionDays)
 		: null;
@@ -333,6 +344,7 @@ async function main() {
 			}
 
 			await stopStudentRecordRetentionSweeper?.();
+			await stopPythonProjectTombstoneReconciler();
 			if (mongoose.connection.readyState !== 0) {
 				await mongoose.disconnect();
 			}
