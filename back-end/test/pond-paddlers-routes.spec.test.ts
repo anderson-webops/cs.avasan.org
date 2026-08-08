@@ -33,6 +33,7 @@ interface JoinedRace {
 	calmMode: boolean;
 	expiresAt: string;
 	question: PondPaddlersQuestion | null;
+	raceFormat: "individual" | "team-device";
 	resumed: boolean;
 	state: {
 		finishAt: number;
@@ -104,6 +105,15 @@ const classroomHeaders = {
 	"Content-Type": "application/json",
 	"X-Classroom-Request": "1"
 };
+const publicSeatResponseKeys = [
+	"alias",
+	"calmMode",
+	"expiresAt",
+	"question",
+	"raceFormat",
+	"resumed",
+	"state"
+];
 
 async function createRoom(
 	runtime: TestRuntime,
@@ -116,6 +126,7 @@ async function createRoom(
 			finishAt: 5,
 			maxOperand: 20,
 			operations: ["add", "subtract", "multiply", "divide"],
+			raceFormat: "individual",
 			...overrides
 		}),
 		headers: adminHeaders,
@@ -154,8 +165,11 @@ async function joinRoom(
 	);
 	expect(expectedCookieName).toBeTruthy();
 	const parsedCookie = seatCookie(response, expectedCookieName as string);
+	const body = await response.json() as JoinedRace;
+	expect(Object.keys(body).sort()).toEqual(publicSeatResponseKeys);
+	expect(Object.hasOwn(body, "seatToken")).toBe(false);
 	return {
-		body: await response.json() as JoinedRace,
+		body,
 		cookie: parsedCookie.header,
 		response,
 		token: parsedCookie.token
@@ -174,7 +188,10 @@ async function resumeRoom(
 		}
 	});
 	expect(response.status).toBe(200);
-	return { body: await response.json() as JoinedRace, response };
+	const body = await response.json() as JoinedRace;
+	expect(Object.keys(body).sort()).toEqual(publicSeatResponseKeys);
+	expect(Object.hasOwn(body, "seatToken")).toBe(false);
+	return { body, response };
 }
 
 function startRoom(runtime: TestRuntime, roomCode: string): Promise<Response> {
@@ -253,7 +270,8 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 			durationMinutes: 120,
 			finishAt: 30,
 			maxOperand: 100,
-			operations: ["divide", "subtract"]
+			operations: ["divide", "subtract"],
+			raceFormat: "team-device"
 		});
 		expect(room).toMatchObject({
 			calmMode: false,
@@ -262,6 +280,7 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 			maxOperand: 100,
 			operations: ["divide", "subtract"],
 			playerCount: 0,
+			raceFormat: "team-device",
 			status: "waiting"
 		});
 		expect(room.roomCode).toMatch(/^[A-HJ-NP-Z2-9]{8}$/);
@@ -399,6 +418,7 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 			{ finishAt: 31 },
 			{ durationMinutes: 121 },
 			{ calmMode: "yes" },
+			{ raceFormat: "named-teams" },
 			{ displayName: "Class 4" }
 		];
 		for (const body of invalidBodies) {
@@ -458,6 +478,7 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 			Math.abs(Date.parse(cookieExpiry as string) - Date.parse(body.expiresAt))
 		).toBeLessThan(1_000);
 		expect(body.resumed).toBe(false);
+		expect(body.raceFormat).toBe("individual");
 		expect(body.alias).toMatch(/^[A-Za-z]+ (Duck|Mallard|Pintail|Teal)$/);
 		expect(body.question).toBeNull();
 		expect(body.state.status).toBe("waiting");
@@ -481,6 +502,60 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 		);
 		expect(wrongCookieName.response.status).toBe(201);
 		expect(wrongCookieName.body.alias).not.toBe(body.alias);
+	});
+
+	it("uses team relay only as a memory-only one-device room format", async () => {
+		const runtime = await createRuntime();
+		const room = await createRoom(runtime, { raceFormat: "team-device" });
+		const joined = await joinRoom(runtime, room.roomCode);
+		expect(joined.body.raceFormat).toBe("team-device");
+		expect(joined.body.state).toEqual({
+			finishAt: 5,
+			players: [{ alias: joined.body.alias, progress: 0 }],
+			status: "waiting"
+		});
+		expect(JSON.stringify(joined.body)).not.toMatch(
+			/teamName|studentName|roster|account|analytics/i
+		);
+
+		expect((await startRoom(runtime, room.roomCode)).status).toBe(200);
+		const resumed = await resumeRoom(
+			runtime,
+			room.roomCode,
+			joined.cookie
+		);
+		expect(resumed.body.raceFormat).toBe("team-device");
+		expect(resumed.body.alias).toBe(joined.body.alias);
+		let question = requiredQuestion(resumed.body);
+		for (let progress = 1; progress <= 5; progress += 1) {
+			const answer = await postAnswer(
+				runtime,
+				room.roomCode,
+				joined.cookie,
+				question.questionID,
+				answerForPrompt(question.prompt)
+			);
+			expect(answer.status).toBe(200);
+			const result = await answer.json() as {
+				correct: boolean;
+				finished: boolean;
+				nextQuestion: PondPaddlersQuestion | null;
+				progress: number;
+			};
+			expect(result).toMatchObject({ correct: true, progress });
+			if (progress < 5) {
+				expect(result.finished).toBe(false);
+				question = result.nextQuestion as PondPaddlersQuestion;
+			}
+			else {
+				expect(result).toEqual({
+					correct: true,
+					finished: true,
+					nextQuestion: null,
+					progress: 5
+				});
+			}
+		}
 	});
 
 	it("uses a non-Secure local-only cookie over HTTP and accepts only the active cookie name", async () => {
@@ -925,7 +1000,8 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 			durationMinutes: 5,
 			finishAt: 5,
 			maxOperand: 10,
-			operations: ["add"]
+			operations: ["add"],
+			raceFormat: "individual"
 		});
 		const joined = store.joinRoom(room.roomCode);
 		store.subscribe(room.roomCode, joined.seatToken, () => {

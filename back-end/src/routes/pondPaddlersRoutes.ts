@@ -24,15 +24,17 @@ const DEFAULT_ROOM_SETTINGS: PondPaddlersRoomSettings = {
 	calmMode: true,
 	durationMinutes: 60,
 	finishAt: 10,
-	maxOperand: 20,
-	operations: [...POND_PADDLERS_OPERATIONS]
+	maxOperand: 10,
+	operations: [...POND_PADDLERS_OPERATIONS],
+	raceFormat: "individual"
 };
 const ALLOWED_CREATE_KEYS = new Set([
 	"calmMode",
 	"durationMinutes",
 	"finishAt",
 	"maxOperand",
-	"operations"
+	"operations",
+	"raceFormat"
 ]);
 const ALLOWED_ANSWER_KEYS = new Set(["answer", "questionID"]);
 const OPERATION_SET = new Set<string>(POND_PADDLERS_OPERATIONS);
@@ -71,6 +73,7 @@ function parseRoomSettings(value: unknown): PondPaddlersRoomSettings | null {
 	const finishAt = value.finishAt ?? DEFAULT_ROOM_SETTINGS.finishAt;
 	const durationMinutes = value.durationMinutes ?? DEFAULT_ROOM_SETTINGS.durationMinutes;
 	const calmMode = value.calmMode ?? DEFAULT_ROOM_SETTINGS.calmMode;
+	const raceFormat = value.raceFormat ?? DEFAULT_ROOM_SETTINGS.raceFormat;
 	if (
 		!Number.isSafeInteger(maxOperand)
 		|| (maxOperand as number) < 10
@@ -82,6 +85,7 @@ function parseRoomSettings(value: unknown): PondPaddlersRoomSettings | null {
 		|| (durationMinutes as number) < 5
 		|| (durationMinutes as number) > 120
 		|| typeof calmMode !== "boolean"
+		|| (raceFormat !== "individual" && raceFormat !== "team-device")
 	) {
 		return null;
 	}
@@ -91,7 +95,8 @@ function parseRoomSettings(value: unknown): PondPaddlersRoomSettings | null {
 		durationMinutes: durationMinutes as number,
 		finishAt: finishAt as number,
 		maxOperand: maxOperand as number,
-		operations: operationsValue as PondPaddlersOperation[]
+		operations: operationsValue as PondPaddlersOperation[],
+		raceFormat
 	};
 }
 

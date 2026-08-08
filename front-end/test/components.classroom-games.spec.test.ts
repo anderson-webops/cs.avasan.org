@@ -111,12 +111,14 @@ describe("browser-local classroom games", () => {
 		wrapper.unmount();
 	});
 
-	it("keeps Machine Workshop open-ended and exposes every station", async () => {
+	it("runs Machine Workshop repair missions and exposes every station", async () => {
 		const wrapper = mountGame(MachineWorkshopGame);
 
 		expect(wrapper.get("h1").text()).toBe("Machine Workshop");
 		expect(wrapper.text()).toContain("No timer · No wrong answers");
 		expect(wrapper.find("form").exists()).toBe(false);
+		expect(wrapper.findAll(".mission-picker button")).toHaveLength(3);
+		expect(wrapper.get("progress").attributes("value")).toBe("0");
 		expect(wrapper.findAll(".station-controls button")).toHaveLength(4);
 
 		await wrapper
@@ -126,6 +128,7 @@ describe("browser-local classroom games", () => {
 		expect(wrapper.text()).toContain(
 			"large gear turns the smaller gear in the opposite direction"
 		);
+		expect(wrapper.get("progress").attributes("value")).toBe("1");
 
 		await wrapper.get(".machine-workshop").trigger("keydown", { key: "4" });
 		expect(wrapper.text()).toContain("memory lights changed their pattern");

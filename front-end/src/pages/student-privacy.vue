@@ -97,9 +97,11 @@ const policyEffectiveDate = classroomPrivacyPolicyEffectiveDate();
 				browser a random preset animal alias and a separate secret seat
 				cookie. During that room, it keeps only the alias, current
 				arithmetic question, and progress needed to run the race. A
-				student’s submitted answer is checked and then discarded. There
-				is no student name, account link, chat, public lobby, permanent
-				score, or game analytics.
+				student’s submitted answer is checked and then discarded. In
+				team relay, one team shares one browser; the site does not store
+				a team name or membership list. There is no student name,
+				account link, chat, public lobby, permanent score, or game
+				analytics.
 			</p>
 			<p>
 				A Pond Paddlers room and its seat records stay only in the

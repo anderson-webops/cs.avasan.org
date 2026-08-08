@@ -20,7 +20,8 @@ deliberately simplified downstream adaptation of
   Classroom Edition.
 - `/games` contains four original classroom activities outside the course
   catalog. Three run entirely in the browser. Pond Paddlers uses short-lived,
-  private rooms created by Julio and does not create student records.
+  private rooms created by Julio, supports one student or one shared-device
+  team per paddler, and does not create student records.
 - Within the Avasan sites, Graph Sketcher is hosted only by
   `math.avasan.org`; this CS site does not publish its route, runtime, worker,
   license, or project artifacts. The upstream Classes platform keeps its own
@@ -79,14 +80,17 @@ recovery code, student email, provider-email matching, or self-service
 registration.
 
 The separate `/games` area does not change the five-course catalog or require
-a student account. Crosswalk Critters, Machine Workshop, and Comet Hopper keep
-their game state only in the current page. Julio creates and closes private
-Pond Paddlers rooms in Admin. A room code lets a browser ask to join but is not
-the browser's seat credential: the server separately issues a random preset
-alias and a high-entropy, secure, HTTP-only seat cookie. Rooms have no names,
-free text, chat, public lobby, spectators, permanent scores, account links, or
-analytics. Room state stays only in API-process memory for no longer than two
-hours and is also erased by a service restart.
+a student account. Crosswalk Critters offers three-stage Simple, Middle, and
+Advanced challenges; Machine Workshop uses ordered repair missions; and Comet
+Hopper remains a quick score chase. These three games keep all state only in
+the current page. Julio creates and closes private Pond Paddlers rooms in
+Admin. Each paddler may represent one student or a team sharing one device and
+taking turns. A room code lets a browser ask to join but is not the browser's
+seat credential: the server separately issues a random preset alias and a
+high-entropy, secure, HTTP-only seat cookie. Rooms have no names, free text,
+chat, public lobby, spectators, permanent scores, account links, or analytics.
+Room state stays only in API-process memory for no longer than two hours and is
+also erased by a service restart.
 
 Julio can also export retained account and educational records for one student
 and correct a mistyped school-approved alias without disconnecting the
@@ -322,7 +326,7 @@ that identity fallback is not permitted by the production Compose path. Inject
 the deployment identity without changing application secrets:
 
 ```bash
-export CS_RELEASE_VERSION=2.7.113
+export CS_RELEASE_VERSION=2.7.114
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 docker compose --env-file deploy/cs.env -f compose.production.yml build
 ```
@@ -337,7 +341,7 @@ To exercise or prepare the manually selected Compose fallback:
 ```bash
 install -m 600 deploy/cs.env.example deploy/cs.env
 # Fill secrets, keep all optional features false until the privacy gate is met.
-export CS_RELEASE_VERSION=2.7.113
+export CS_RELEASE_VERSION=2.7.114
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 ./scripts/verify-deploy-env-permissions.sh
 docker compose --env-file deploy/cs.env -f compose.production.yml build

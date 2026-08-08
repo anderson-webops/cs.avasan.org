@@ -46,6 +46,7 @@ describe("Pond Paddlers client", () => {
 					calmMode: false,
 					expiresAt: "2026-08-02T00:00:00.000Z",
 					question: { prompt: "3 + 4", questionID: "question-1" },
+					raceFormat: "individual",
 					resumed: false,
 					state: {
 						finishAt: 10,
@@ -63,6 +64,7 @@ describe("Pond Paddlers client", () => {
 			calmMode: false,
 			expiresAt: "2026-08-02T00:00:00.000Z",
 			question: { prompt: "3 + 4", questionID: "question-1" },
+			raceFormat: "individual",
 			resumed: false,
 			roomCode: "ABCD2345",
 			state: {
@@ -91,6 +93,7 @@ describe("Pond Paddlers client", () => {
 						calmMode: true,
 						expiresAt: "2026-08-02T00:00:00.000Z",
 						question: null,
+						raceFormat: "team-device",
 						resumed: false,
 						state: {
 							finishAt: 10,
@@ -107,6 +110,7 @@ describe("Pond Paddlers client", () => {
 
 		await expect(joinPondPaddlersRoom("ABCD2345")).resolves.toMatchObject({
 			question: null,
+			raceFormat: "team-device",
 			state: { status: "waiting" }
 		});
 	});
@@ -119,6 +123,7 @@ describe("Pond Paddlers client", () => {
 					calmMode: true,
 					expiresAt: "2026-08-02T00:00:00.000Z",
 					question: { prompt: "8 ÷ 2", questionID: "question-start" },
+					raceFormat: "individual",
 					resumed: true,
 					state: {
 						finishAt: 10,
@@ -190,6 +195,36 @@ describe("Pond Paddlers client", () => {
 		);
 		await expect(joinPondPaddlersRoom("ABCD2345")).rejects.not.toThrow(
 			/private|database/i
+		);
+	});
+
+	it("rejects an unknown race format instead of inventing team behavior", async () => {
+		vi.stubGlobal(
+			"fetch",
+			vi.fn().mockResolvedValue(
+				new Response(
+					JSON.stringify({
+						alias: "Sunny Mallard",
+						calmMode: true,
+						expiresAt: "2026-08-02T00:00:00.000Z",
+						question: null,
+						raceFormat: "named-team",
+						resumed: false,
+						state: {
+							finishAt: 10,
+							players: [
+								{ alias: "Sunny Mallard", progress: 0 }
+							],
+							status: "waiting"
+						}
+					}),
+					{ status: 200 }
+				)
+			)
+		);
+
+		await expect(joinPondPaddlersRoom("ABCD2345")).rejects.toThrow(
+			"invalid race format"
 		);
 	});
 

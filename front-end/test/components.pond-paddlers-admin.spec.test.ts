@@ -36,6 +36,7 @@ const room = {
 		"divide"
 	] as Array<"add" | "subtract" | "multiply" | "divide">,
 	playerCount: 3,
+	raceFormat: "individual" as const,
 	roomCode: "ABCD2345",
 	status: "racing" as const
 };
@@ -77,10 +78,152 @@ describe("PondPaddlersAdmin", () => {
 			calmMode: true,
 			durationMinutes: 60,
 			finishAt: 10,
-			maxOperand: 20,
-			operations: ["add", "subtract", "multiply", "divide"]
+			maxOperand: 10,
+			operations: ["add", "subtract", "multiply", "divide"],
+			raceFormat: "individual"
 		});
 		expect(wrapper.text()).toContain("Room ABCD2345 is ready.");
+	});
+
+	it.each([
+		{
+			finishAt: 5,
+			maxOperand: 10,
+			operations: ["add", "subtract"],
+			preset: "starter"
+		},
+		{
+			finishAt: 10,
+			maxOperand: 10,
+			operations: ["add", "subtract", "multiply", "divide"],
+			preset: "mixed"
+		},
+		{
+			finishAt: 15,
+			maxOperand: 20,
+			operations: ["add", "subtract", "multiply", "divide"],
+			preset: "challenge"
+		}
+	] as const)("applies the $preset question preset", async preset => {
+		vi.mocked(listPondPaddlersRooms).mockResolvedValue([]);
+		const wrapper = mount(PondPaddlersAdmin);
+		await flushPromises();
+
+		await wrapper
+			.get("[data-pond-question-preset]")
+			.setValue(preset.preset);
+		await wrapper.get("form").trigger("submit");
+		await flushPromises();
+
+		expect(createPondPaddlersRoom).toHaveBeenLastCalledWith({
+			calmMode: true,
+			durationMinutes: 60,
+			finishAt: preset.finishAt,
+			maxOperand: preset.maxOperand,
+			operations: [...preset.operations],
+			raceFormat: "individual"
+		});
+	});
+
+	it("creates and explains a privacy-safe one-device-per-team relay", async () => {
+		const teamRoom = { ...room, raceFormat: "team-device" as const };
+		vi.mocked(listPondPaddlersRooms).mockResolvedValue([teamRoom]);
+		vi.mocked(createPondPaddlersRoom).mockResolvedValue(teamRoom);
+		const wrapper = mount(PondPaddlersAdmin);
+		await flushPromises();
+
+		await wrapper.get("[data-pond-race-format]").setValue("team-device");
+		await wrapper.get("form").trigger("submit");
+		await flushPromises();
+		expect(createPondPaddlersRoom).toHaveBeenLastCalledWith(
+			expect.objectContaining({ raceFormat: "team-device" })
+		);
+
+		await wrapper.get("[data-pond-copy-instructions]").trigger("click");
+		await flushPromises();
+		expect(navigator.clipboard.writeText).toHaveBeenLastCalledWith(
+			expect.stringContaining(
+				"Use one device per team and take turns after every correct answer."
+			)
+		);
+		expect(wrapper.find('input[name="teamName"]').exists()).toBe(false);
+		expect(wrapper.find('input[name="studentName"]').exists()).toBe(false);
+	});
+
+	it("refreshes racing and finished rooms until the server removes them", async () => {
+		vi.useFakeTimers();
+		vi.mocked(listPondPaddlersRooms)
+			.mockResolvedValueOnce([{ ...room, status: "racing" as const }])
+			.mockResolvedValueOnce([{ ...room, status: "finished" as const }])
+			.mockResolvedValueOnce([]);
+		const wrapper = mount(PondPaddlersAdmin);
+		try {
+			await flushPromises();
+			expect(listPondPaddlersRooms).toHaveBeenCalledTimes(1);
+
+			await vi.advanceTimersByTimeAsync(5_000);
+			await flushPromises();
+			expect(listPondPaddlersRooms).toHaveBeenCalledTimes(2);
+			expect(wrapper.text()).toContain("Race finished");
+
+			await vi.advanceTimersByTimeAsync(5_000);
+			await flushPromises();
+			expect(listPondPaddlersRooms).toHaveBeenCalledTimes(3);
+			expect(wrapper.text()).toContain("No rooms are open.");
+
+			await vi.advanceTimersByTimeAsync(5_000);
+			expect(listPondPaddlersRooms).toHaveBeenCalledTimes(3);
+		} finally {
+			wrapper.unmount();
+			vi.useRealTimers();
+		}
+	});
+
+	it("keeps action errors unchanged during successful and failed quiet refreshes", async () => {
+		vi.useFakeTimers();
+		const waitingRoom = {
+			...room,
+			playerCount: 0,
+			status: "waiting" as const
+		};
+		vi.mocked(listPondPaddlersRooms)
+			.mockResolvedValueOnce([waitingRoom])
+			.mockResolvedValueOnce([waitingRoom])
+			.mockRejectedValueOnce(new Error("background refresh failed"));
+		vi.mocked(startPondPaddlersRoom).mockRejectedValue({
+			response: {
+				data: {
+					message:
+						"At least one paddler must join before the race starts."
+				},
+				status: 409
+			}
+		});
+		const wrapper = mount(PondPaddlersAdmin);
+		try {
+			await flushPromises();
+			await wrapper
+				.get('[aria-label="Start race ABCD2345"]')
+				.trigger("click");
+			await flushPromises();
+			const actionError =
+				"At least one paddler must join before the race starts.";
+			expect(wrapper.get('[role="alert"]').text()).toBe(actionError);
+
+			await vi.advanceTimersByTimeAsync(5_000);
+			await flushPromises();
+			expect(wrapper.get('[role="alert"]').text()).toBe(actionError);
+
+			await vi.advanceTimersByTimeAsync(5_000);
+			await flushPromises();
+			expect(wrapper.get('[role="alert"]').text()).toBe(actionError);
+			expect(wrapper.text()).not.toContain(
+				"Couldn’t update Pond Paddlers rooms."
+			);
+		} finally {
+			wrapper.unmount();
+			vi.useRealTimers();
+		}
 	});
 
 	it("keeps Start available and surfaces the fixed no-paddlers response", async () => {
@@ -221,14 +364,33 @@ describe("PondPaddlersAdmin", () => {
 		}
 	});
 
-	it("copies only the short room code", async () => {
+	it("copies both complete student directions and the bare short code", async () => {
 		const wrapper = mount(PondPaddlersAdmin);
 		await flushPromises();
 
-		await wrapper.get(".pond-admin__room-actions button").trigger("click");
+		expect(wrapper.text()).toContain(
+			"https://cs.avasan.org/games/pond-paddlers"
+		);
+		const copyInstructions = wrapper.get(
+			"[data-pond-copy-instructions]"
+		);
+		expect(copyInstructions.attributes("aria-label")).toBe(
+			"Copy student instructions for room ABCD2345"
+		);
+		await copyInstructions.trigger("click");
+		await flushPromises();
+		expect(navigator.clipboard.writeText).toHaveBeenLastCalledWith(
+			"Open https://cs.avasan.org/games/pond-paddlers and enter room code ABCD2345. Keep the page open until Julio starts the race."
+		);
+
+		const copyCode = wrapper.get("[data-pond-copy-code]");
+		expect(copyCode.attributes("aria-label")).toBe(
+			"Copy code for room ABCD2345"
+		);
+		await copyCode.trigger("click");
 		await flushPromises();
 
-		expect(navigator.clipboard.writeText).toHaveBeenCalledWith("ABCD2345");
+		expect(navigator.clipboard.writeText).toHaveBeenLastCalledWith("ABCD2345");
 		expect(wrapper.text()).toContain("Copied room ABCD2345.");
 	});
 });

@@ -24,6 +24,7 @@ const room = {
 	maxOperand: 20,
 	operations: ["add"],
 	playerCount: 0,
+	raceFormat: "individual" as const,
 	roomCode: "ABCD2345",
 	status: "waiting"
 };
@@ -47,7 +48,8 @@ describe("Pond Paddlers Admin API", () => {
 			durationMinutes: 60,
 			finishAt: 10,
 			maxOperand: 20,
-			operations: ["add", "subtract"] as const
+			operations: ["add", "subtract"] as const,
+			raceFormat: "team-device" as const
 		};
 
 		await expect(
@@ -56,9 +58,10 @@ describe("Pond Paddlers Admin API", () => {
 				operations: [...settings.operations]
 			})
 		).resolves.toEqual(room);
-		expect(api.post).toHaveBeenCalledWith("/pond-paddlers/rooms", {
+			expect(api.post).toHaveBeenCalledWith("/pond-paddlers/rooms", {
 			...settings,
-			operations: ["add", "subtract"]
+			operations: ["add", "subtract"],
+			raceFormat: "team-device"
 		});
 	});
 
