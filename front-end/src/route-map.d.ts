@@ -101,6 +101,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/games/t-rex-runner': RouteRecordInfo<
+      '/games/t-rex-runner',
+      '/games/t-rex-runner',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/ide': RouteRecordInfo<
       '/ide',
       '/ide',
@@ -210,6 +217,14 @@ declare module 'vue-router/auto-routes' {
     'src/pages/games/pond-paddlers.vue': {
       routes:
         | '/games/pond-paddlers'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/games/t-rex-runner.vue': {
+      routes:
+        | '/games/t-rex-runner'
       views:
         | never
       pathParamNames:

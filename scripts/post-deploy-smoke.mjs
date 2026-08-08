@@ -504,6 +504,8 @@ async function verifySecurityHeaders() {
 	for (const [path, policyName] of [
 		["/", "standard"],
 		["/games/pond-paddlers/", "standard"],
+		["/games/t-rex-runner/", "standard"],
+		["/licenses/chromium-bsd-license.txt", "standard"],
 		["/ide/", "code-ide"],
 		["/python-ide/assets/manifest.json", "code-ide"],
 		["/api/release", "standard"],
@@ -526,11 +528,27 @@ async function verifyPublicRoutes() {
 		"/games/pond-paddlers",
 		"/games/crosswalk-critters",
 		"/games/machine-workshop",
-		"/games/comet-hopper"
+		"/games/comet-hopper",
+		"/games/t-rex-runner"
 	]) {
 		const response = await request(path);
 		assertion(response.ok, `${path} returned HTTP ${response.status}`);
 	}
+
+	const chromiumLicenseResponse = await request(
+		"/licenses/chromium-bsd-license.txt"
+	);
+	assertion(
+		chromiumLicenseResponse.ok,
+		`/licenses/chromium-bsd-license.txt returned HTTP ${chromiumLicenseResponse.status}`
+	);
+	const chromiumLicense = await chromiumLicenseResponse.text();
+	assertion(
+		chromiumLicense.includes("Copyright") &&
+			chromiumLicense.includes("Redistribution and use in source and binary forms") &&
+			chromiumLicense.includes("THIS SOFTWARE IS PROVIDED"),
+		"The public Chromium BSD license is incomplete."
+	);
 
 	for (const [alias, canonical] of [
 		["/index.html?source=legacy", "/?source=legacy"],
@@ -538,6 +556,7 @@ async function verifyPublicRoutes() {
 		["/student-privacy/index.html", "/student-privacy/"],
 		["/games/index.html", "/games/"],
 		["/games/pond-paddlers/index.html", "/games/pond-paddlers/"],
+		["/games/t-rex-runner/index.html", "/games/t-rex-runner/"],
 		["/ide?course=python-1", "/ide/?course=python-1"],
 		["/ide.html?course=python-1", "/ide/?course=python-1"],
 		["/ide/index.html?course=python-1", "/ide/?course=python-1"],
@@ -612,6 +631,7 @@ async function verifyPublicRoutes() {
 		"/games/crosswalk-critters.html",
 		"/games/machine-workshop.html",
 		"/games/pond-paddlers.html",
+		"/games/t-rex-runner.html",
 		"/.env",
 		"/.git/config",
 		"/.vite/ssr-manifest.json",

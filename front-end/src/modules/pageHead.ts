@@ -20,6 +20,7 @@ const ROUTE_TITLES = new Map([
 	["/games/crosswalk-critters", "Crosswalk Critters"],
 	["/games/machine-workshop", "Machine Workshop"],
 	["/games/comet-hopper", "Comet Hopper"],
+	["/games/t-rex-runner", "T-Rex Runner"],
 	["/student-privacy", "Student Privacy"],
 	["/admin", "Teacher Admin"]
 ]);

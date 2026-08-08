@@ -11,7 +11,8 @@ export const SITEMAP_EXCLUDED_ROUTES = [
 	"/games/pond-paddlers",
 	"/games/crosswalk-critters",
 	"/games/machine-workshop",
-	"/games/comet-hopper"
+	"/games/comet-hopper",
+	"/games/t-rex-runner"
 ];
 
 type SitemapOptions = {

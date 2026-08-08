@@ -93,9 +93,12 @@ const policyEffectiveDate = classroomPrivacyPolicyEffectiveDate();
 		<section class="site-surface privacy-page__section">
 			<h2>Classroom games</h2>
 			<p>
-				Crosswalk Critters, Machine Workshop, and Comet Hopper run in
-				the current browser. They do not save game play, send answers or
-				scores to the classroom server, or add events to classroom
+				Crosswalk Critters, Machine Workshop, Comet Hopper, and T-Rex
+				Runner run in the current browser. T-Rex Runner uses locally
+				hosted Chromium game code, art, and sound inside an isolated
+				game frame. These games do not save game play, send answers or
+				scores to the classroom server, make third-party game requests,
+				connect to student accounts, or add events to classroom
 				analytics.
 			</p>
 			<p>

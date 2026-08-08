@@ -15,12 +15,16 @@ Keep these constraints intact:
 - The original Python Level 2 and PyGames curricula may remain visible in a
   separate archived-reference group for Julio. Archived entries are not
   current course offerings and must not be added to student course access.
-- Keep the four original activities under `/games` separate from the course
-  catalog. Crosswalk Critters, Machine Workshop, and Comet Hopper are
-  browser-local and untracked. Pond Paddlers uses only private, Julio-created,
-  memory-only rooms lasting no more than two hours, random preset aliases, and
-  separate high-entropy seat cookies. Do not add names, free text, chat, public
-  lobbies, spectators, persistent scores, account links, or game analytics.
+- Keep the four original activities and the separately attributed Chromium
+  T-Rex Runner under `/games` separate from the course catalog. Crosswalk
+  Critters, Machine Workshop, Comet Hopper, and T-Rex Runner are browser-local
+  and untracked. T-Rex Runner must remain pinned to its reviewed Chromium
+  source, locally hosted, sandboxed away from accounts, and covered by the
+  shipped Chromium license and provenance notice. Pond Paddlers uses only
+  private, Julio-created, memory-only rooms lasting no more than two hours,
+  random preset aliases, and separate high-entropy seat cookies. Do not add
+  names, free text, chat, public lobbies, spectators, persistent scores,
+  account links, external game requests, or game analytics.
 - Within the Avasan sites, Graph Sketcher is hosted only by
   `math.avasan.org`. CS must return `404` for `/graph-sketcher`, the entire
   `/graph-sketcher/` namespace (including stale direct artifacts), and

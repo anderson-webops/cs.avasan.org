@@ -31,6 +31,7 @@ describe("page head helpers", () => {
 			"Machine Workshop | Classes with Julio"
 		],
 		["/games/comet-hopper", "Comet Hopper | Classes with Julio"],
+		["/games/t-rex-runner", "T-Rex Runner | Classes with Julio"],
 		["/student-privacy", "Student Privacy | Classes with Julio"],
 		["/admin", "Teacher Admin | Classes with Julio"],
 		["/not-a-real-page", "Page Not Found | Classes with Julio"]
@@ -63,6 +64,7 @@ describe("page head helpers", () => {
 			"/graph-sketcher",
 			"/games",
 			"/games/pond-paddlers",
+			"/games/t-rex-runner",
 			"/ide",
 			"/python-ide",
 			"/not-a-real-page"

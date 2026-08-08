@@ -299,14 +299,14 @@ describe("versioned full-stack production deployment", () => {
 			version: string;
 		};
 
-		expect(rootPackage.version).toBe("2.7.115");
-		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]115\}/g)).toHaveLength(2);
+		expect(rootPackage.version).toBe("2.7.116");
+		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]116\}/g)).toHaveLength(2);
 		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g)).toHaveLength(2);
 		expect(compose).not.toContain("SOURCE_REVISION:-unknown");
 		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
-		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.115");
+		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.116");
 		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
-		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.115");
+		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.116");
 		expect(apiDockerfile).toContain("ARG SOURCE_REVISION=unknown");
 		expect(frontendReleaseWriter).toContain("environment.COMMIT_REF?.trim()");
 		expect(frontendReleaseWriter).toContain("const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;");
@@ -347,6 +347,11 @@ describe("versioned full-stack production deployment", () => {
 		expect(productionSmoke).toContain('"/games/crosswalk-critters"');
 		expect(productionSmoke).toContain('"/games/machine-workshop"');
 		expect(productionSmoke).toContain('"/games/comet-hopper"');
+		expect(productionSmoke).toContain('"/games/t-rex-runner"');
+		expect(productionSmoke).toContain('"/licenses/chromium-bsd-license.txt"');
+		expect(productionSmoke).toContain(
+			"The public Chromium BSD license is incomplete."
+		);
 		expect(productionSmoke).toContain('const path = "/api/accounts/login";');
 		expect(productionSmoke).toContain('body.message === "Bad credentials"');
 		expect(productionSmoke).toContain(

@@ -162,13 +162,17 @@ describe("browser-local classroom games", () => {
 		const wrapper = mountGame(GamesPage);
 		const thumbnails = wrapper.findAll(".game-thumbnail");
 
-		expect(thumbnails).toHaveLength(4);
+		expect(thumbnails).toHaveLength(5);
 		thumbnails.forEach(thumbnail => {
 			expect(thumbnail.element.tagName.toLowerCase()).toBe("svg");
 			expect(thumbnail.attributes("aria-hidden")).toBe("true");
 			expect(thumbnail.attributes("focusable")).toBe("false");
 		});
 		expect(wrapper.text()).not.toMatch(/[🦆🐿⚙☄]/u);
+		expect(wrapper.text()).toContain("T-Rex Runner");
+		expect(wrapper.get('a[href="/games/t-rex-runner"]').text()).toContain(
+			"Chromium's classic offline dinosaur runner"
+		);
 		wrapper.unmount();
 	});
 

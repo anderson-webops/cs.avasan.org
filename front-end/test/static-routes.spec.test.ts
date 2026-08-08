@@ -228,7 +228,8 @@ describe("static route normalization", () => {
 			"/games/pond-paddlers",
 			"/games/crosswalk-critters",
 			"/games/machine-workshop",
-			"/games/comet-hopper"
+			"/games/comet-hopper",
+			"/games/t-rex-runner"
 		]);
 		expect(calls).toEqual([options]);
 	});

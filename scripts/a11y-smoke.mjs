@@ -29,6 +29,7 @@ const routeScenarios = [
 					"/games/crosswalk-critters",
 					"/games/machine-workshop",
 					"/games/comet-hopper",
+					"/games/t-rex-runner",
 					courseResourceRoute,
 					"/admin"
 				]

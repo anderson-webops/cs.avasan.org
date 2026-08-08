@@ -259,9 +259,12 @@ The anonymous count system owns only UTC day, fixed site, fixed event, optional
 allowlisted course ID, total count, and expiry. It has no account key or
 student-level join.
 
-Three solo classroom games run entirely in the current browser and create no
-server record or analytics event. A Pond Paddlers room exists only in the
-running API process for no more than two hours. It contains the private room
+Four solo classroom games run entirely in the current browser and create no
+server record or analytics event. T-Rex Runner is a locally hosted, sandboxed
+port of Chromium's open-source offline game; it makes no external request,
+keeps its score only in the current frame, and is not connected to accounts or
+analytics. A Pond Paddlers room exists only in the running API process for no
+more than two hours. It contains the private room
 configuration, including whether each paddler is one student or a team sharing
 one device, and each seat's random preset alias, secret-token hash, current
 arithmetic question and correct answer, and progress count. A submitted answer
