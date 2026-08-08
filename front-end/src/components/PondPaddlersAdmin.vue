@@ -208,7 +208,7 @@ function studentInstructions(room: PondPaddlersAdminRoom) {
 		`Open ${POND_PADDLERS_STUDENT_URL} and enter room code ${room.roomCode}. ` +
 		"Keep the page open until Julio starts the race.";
 	return room.raceFormat === "team-device"
-		? `${directions} Use one device per team and take turns after every correct answer.`
+		? `Julio will form teams in the classroom. Each team should open ${POND_PADDLERS_STUDENT_URL} on one shared device and enter the same room code ${room.roomCode}. Each device will receive a random paddler. Keep the page open until Julio starts the race, and take turns after every correct answer.`
 		: directions;
 }
 
@@ -442,9 +442,10 @@ onBeforeUnmount(() => {
 				v-if="raceFormat === 'team-device'"
 				class="pond-admin__team-help"
 			>
-				Each team shares one device and one random paddler. Students
-				take turns after every correct answer; no team names or rosters
-				are stored.
+				Julio forms teams in the classroom. Each team opens Pond
+				Paddlers on one shared device, enters the same room code, and
+				receives a random paddler. Students take turns after every
+				correct answer; no team names or rosters are entered or stored.
 			</p>
 
 			<p v-if="operations.length === 0" class="pond-admin__field-error">
@@ -502,8 +503,8 @@ onBeforeUnmount(() => {
 						v-if="room.raceFormat === 'team-device'"
 						class="pond-admin__room-team"
 					>
-						One device per team · take turns after each correct
-						answer
+						Give this same code to every team. Each team uses one
+						shared device and receives a random paddler.
 					</p>
 				</div>
 				<div

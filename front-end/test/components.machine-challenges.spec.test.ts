@@ -131,6 +131,33 @@ describe("Machine Workshop repair missions", () => {
 		vi.unstubAllGlobals();
 	});
 
+	it("frames every difficulty as a guided, self-paced repair mission", () => {
+		const wrapper = mountWorkshop();
+		const introduction = wrapper.get(".workshop-intro p").text();
+		const missionCopy = Object.fromEntries(
+			wrapper
+				.findAll(".mission-picker button")
+				.map(button => [
+					button.get("strong").text(),
+					button.get("span").text()
+				])
+		);
+
+		expect(introduction).toContain(
+			"Simple, Middle, and Advanced add more repair steps"
+		);
+		expect(introduction).toContain(
+			"self-paced missions, not head-to-head competition"
+		);
+		expect(missionCopy).toEqual({
+			Advanced:
+				"A guided eight-step master repair with a longer pattern.",
+			Middle: "A guided six-step rebuild with two stations repeated.",
+			Simple: "A guided four-step tune-up with each station once."
+		});
+		wrapper.unmount();
+	});
+
 	it("runs the Simple repair in order while every station still responds", async () => {
 		const storageSpy = vi.spyOn(Storage.prototype, "setItem");
 		const networkSpy = vi.fn();
