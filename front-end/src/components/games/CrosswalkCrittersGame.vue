@@ -67,7 +67,7 @@ const TRAFFIC_TEMPLATES: readonly TrafficCar[] = [
 const CHALLENGE_ORDER: readonly Challenge[] = ["simple", "middle", "advanced"];
 const CHALLENGE_CONFIGS: Record<Challenge, ChallengeConfig> = {
 	advanced: {
-		description: "2 tries · fastest traffic",
+		description: "2 tries · fastest traffic · 3× score",
 		label: "Advanced",
 		pointMultiplier: 3,
 		speedMultipliers: [1.2, 1.4, 1.6],
@@ -79,7 +79,7 @@ const CHALLENGE_CONFIGS: Record<Challenge, ChallengeConfig> = {
 		]
 	},
 	middle: {
-		description: "3 tries · busy traffic",
+		description: "3 tries · busy traffic · 2× score",
 		label: "Middle",
 		pointMultiplier: 2,
 		speedMultipliers: [1, 1.15, 1.3],
@@ -91,7 +91,7 @@ const CHALLENGE_CONFIGS: Record<Challenge, ChallengeConfig> = {
 		]
 	},
 	simple: {
-		description: "5 tries · gentler traffic",
+		description: "5 tries · gentler traffic · 1× score",
 		label: "Simple",
 		pointMultiplier: 1,
 		speedMultipliers: [0.7, 0.85, 1],
