@@ -25,6 +25,8 @@ import {
 import { validAdmin } from "../middleware/auth.js";
 import { withProjectPayloadReservation } from "../middleware/projectPayload.js";
 import {
+	createClassroomAnalyticsSummaryLimiter,
+	createClassroomAnalyticsSummaryPreAuthLimiter,
 	createStudentProjectWriteLimiter,
 	createTeacherVerificationLimiter
 } from "../middleware/rateLimiters.js";
@@ -40,6 +42,8 @@ export interface AdminRouteOptions {
 
 export function createAdminRoutes(options: AdminRouteOptions) {
 	const configuredRouter = express.Router();
+	const classroomAnalyticsSummaryPreAuthLimiter = createClassroomAnalyticsSummaryPreAuthLimiter();
+	const classroomAnalyticsSummaryLimiter = createClassroomAnalyticsSummaryLimiter();
 	const teacherVerificationLimiter = createTeacherVerificationLimiter();
 	const teacherProjectWriteLimiter = createStudentProjectWriteLimiter();
 	const projectWriteLimiters = options.projectRequestsPreauthorized
@@ -51,7 +55,9 @@ export function createAdminRoutes(options: AdminRouteOptions) {
 	configuredRouter.get("/loggedin", validAdmin, getLoggedInAdmin);
 	configuredRouter.get(
 		"/classroom-analytics/summary",
+		classroomAnalyticsSummaryPreAuthLimiter,
 		validAdmin,
+		classroomAnalyticsSummaryLimiter,
 		getClassroomAnalyticsSummary(options.analyticsRetentionDays)
 	);
 

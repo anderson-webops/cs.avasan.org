@@ -48,11 +48,16 @@ vi.mock("../src/models/schemas/PythonProject.js", () => ({
 
 const { enforceClassroomAnalyticsRetention, getClassroomAnalyticsSummary } =
 	await import("../src/controllers/classroomAnalyticsController.js");
+const {
+	createClassroomAnalyticsSummaryLimiter,
+	createClassroomAnalyticsSummaryPreAuthLimiter
+} = await import("../src/middleware/rateLimiters.js");
 const { mountClassroomAnalyticsRoutes } = await import("../src/routes/classroomAnalyticsRoutes.js");
 
 interface RuntimeOptions {
 	collectionEnabled?: boolean;
 	retentionDays?: number | null;
+	summaryLimit?: number;
 }
 
 async function withRuntime<T>(options: RuntimeOptions, run: (baseUrl: string) => Promise<T>): Promise<T> {
@@ -67,8 +72,23 @@ async function withRuntime<T>(options: RuntimeOptions, run: (baseUrl: string) =>
 		retentionDays
 	});
 	// Controller harness; production exposes this handler only inside the
-	// validAdmin-protected /admins router.
-	app.get("/test-admin-summary", getClassroomAnalyticsSummary(retentionDays));
+	// two-tier rate-limited, validAdmin-protected /admins router. This test-only
+	// marker represents the identity validAdmin has already loaded from MongoDB.
+	app.get(
+		"/test-admin-summary",
+		createClassroomAnalyticsSummaryPreAuthLimiter({ windowMs: 60_000 }),
+		(req, _res, next) => {
+			req.currentAdmin = {
+				_id: "validated-test-admin"
+			} as NonNullable<typeof req.currentAdmin>;
+			next();
+		},
+		createClassroomAnalyticsSummaryLimiter({
+			...(options.summaryLimit === undefined ? {} : { limit: options.summaryLimit }),
+			windowMs: 60_000
+		}),
+		getClassroomAnalyticsSummary(retentionDays)
+	);
 
 	const server = await new Promise<Server>(resolve => {
 		const instance = app.listen(0, "127.0.0.1", () => resolve(instance));
@@ -533,6 +553,23 @@ describe("privacy-preserving classroom analytics routes", () => {
 				}
 			]);
 		});
+	});
+
+	it("rate-limits the teacher summary before repeated aggregate queries run", async () => {
+		await withRuntime({ summaryLimit: 1 }, async baseUrl => {
+			const first = await fetch(`${baseUrl}/test-admin-summary?days=7`);
+			const limited = await fetch(`${baseUrl}/test-admin-summary?days=7`);
+
+			expect(first.status).toBe(200);
+			expect(limited.status).toBe(429);
+			await expect(limited.json()).resolves.toEqual({
+				message: "Too many classroom summary requests. Please try again shortly."
+			});
+		});
+
+		expect(modelMocks.usageFind).toHaveBeenCalledTimes(1);
+		expect(modelMocks.studentCountDocuments).toHaveBeenCalledTimes(2);
+		expect(modelMocks.projectAggregate).toHaveBeenCalledTimes(1);
 	});
 
 	it("reports an unconfigured Admin retention period as null", async () => {

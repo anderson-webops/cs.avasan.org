@@ -252,6 +252,125 @@ export function validateStudentPrivacyRetention(
 	return true;
 }
 
+// This scanner is only for a fail-closed deployment assertion; it does not
+// sanitize or render HTML. Generated pages with malformed markup fail the gate.
+function htmlTagAt(source, start) {
+	let quote = null;
+	let end = start + 1;
+	for (; end < source.length; end += 1) {
+		const character = source[end];
+		if (quote !== null) {
+			if (character === quote) quote = null;
+			continue;
+		}
+		if (character === "\"" || character === "'") {
+			quote = character;
+			continue;
+		}
+		if (character === ">") break;
+	}
+	assertion(end < source.length, "Student Privacy returned malformed HTML.");
+
+	let cursor = start + 1;
+	const closing = source[cursor] === "/";
+	if (closing) cursor += 1;
+	const nameStart = cursor;
+	while (/[a-z0-9:-]/iu.test(source[cursor] ?? "")) cursor += 1;
+	const name = source.slice(nameStart, cursor).toLowerCase();
+	return { closing, end, name: name || null };
+}
+
+function rawTextClosingTagAt(source, start, expectedName) {
+	let cursor = start + 1;
+	if (source[cursor] !== "/") return null;
+	cursor += 1;
+	const nameStart = cursor;
+	while (/[a-z0-9:-]/iu.test(source[cursor] ?? "")) cursor += 1;
+	if (source.slice(nameStart, cursor).toLowerCase() !== expectedName) return null;
+	if (!/[\s/>]/u.test(source[cursor] ?? "")) return null;
+	return htmlTagAt(source, start);
+}
+
+const nonRenderedElementNames = new Set([
+	"head",
+	"noscript",
+	"script",
+	"style",
+	"template"
+]);
+
+function skipHtmlComment(source, start) {
+	const commentEnd = source.indexOf("-->", start + 4);
+	assertion(commentEnd !== -1, "Student Privacy returned malformed HTML.");
+	return commentEnd + 3;
+}
+
+function skipRawTextElement(source, start, name) {
+	let cursor = start;
+	for (;;) {
+		const possibleClose = source.indexOf("<", cursor);
+		assertion(
+			possibleClose !== -1,
+			"Student Privacy returned malformed HTML."
+		);
+		const closingTag = rawTextClosingTagAt(source, possibleClose, name);
+		if (closingTag) return closingTag.end + 1;
+		cursor = possibleClose + 1;
+	}
+}
+
+function skipNonRenderedElement(source, start, name) {
+	if (name === "script" || name === "style") {
+		return skipRawTextElement(source, start, name);
+	}
+
+	let cursor = start;
+	for (;;) {
+		const possibleTag = source.indexOf("<", cursor);
+		assertion(
+			possibleTag !== -1,
+			"Student Privacy returned malformed HTML."
+		);
+		if (source.startsWith("<!--", possibleTag)) {
+			cursor = skipHtmlComment(source, possibleTag);
+			continue;
+		}
+
+		const tag = htmlTagAt(source, possibleTag);
+		cursor = tag.end + 1;
+		if (tag.closing && tag.name === name) return cursor;
+		if (!tag.closing && nonRenderedElementNames.has(tag.name)) {
+			cursor = skipNonRenderedElement(source, cursor, tag.name);
+		}
+	}
+}
+
+export function visibleTextFromHtml(source) {
+	assertion(typeof source === "string", "Student Privacy returned invalid HTML.");
+	let cursor = 0;
+	let visibleText = "";
+	while (cursor < source.length) {
+		if (source[cursor] !== "<") {
+			visibleText += source[cursor];
+			cursor += 1;
+			continue;
+		}
+		if (source.startsWith("<!--", cursor)) {
+			visibleText += " ";
+			cursor = skipHtmlComment(source, cursor);
+			continue;
+		}
+
+		const tag = htmlTagAt(source, cursor);
+		visibleText += " ";
+		cursor = tag.end + 1;
+		if (!tag.closing && nonRenderedElementNames.has(tag.name)) {
+			cursor = skipNonRenderedElement(source, cursor, tag.name);
+		}
+	}
+	return visibleText.replace(/\s+/gu, " ").trim();
+}
+
 const expectedStudentAccountsEnabled = parseExpectedBoolean(
 	process.env.CS_EXPECT_STUDENT_ACCOUNTS_ENABLED,
 	"CS_EXPECT_STUDENT_ACCOUNTS_ENABLED"
@@ -530,11 +649,7 @@ async function verifyStudentPrivacyRetention() {
 	const path = "/student-privacy/";
 	const response = await request(path);
 	assertion(response.ok, `${path} returned HTTP ${response.status}`);
-	const visibleText = (await response.text())
-		.replace(/<(?:script|style)\b[^>]*>[\s\S]*?<\/(?:script|style)>/giu, " ")
-		.replace(/<[^>]*>/gu, " ")
-		.replace(/\s+/gu, " ")
-		.trim();
+	const visibleText = visibleTextFromHtml(await response.text());
 	validateStudentPrivacyRetention(
 		visibleText,
 		expectedClassroomAnalyticsRetentionDays
