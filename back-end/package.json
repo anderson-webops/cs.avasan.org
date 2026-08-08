@@ -57,10 +57,10 @@
 	},
 	"overrides": {
 		"body-parser": "$body-parser",
-		"brace-expansion": "5.0.8",
+		"brace-expansion": "5.0.9",
 		"esbuild": "$esbuild",
-		"js-yaml": "4.3.0",
-		"postcss": "8.5.24",
+		"js-yaml": "4.3.1",
+		"postcss": "8.5.26",
 		"qs": "6.15.3",
 		"vite": "8.1.5"
 	}
