@@ -3,6 +3,7 @@ import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 
 type GamePhase = "finished" | "idle" | "paused" | "playing";
 type ObstacleKind = "moon-rock" | "orbiting-seed";
+type TrailAction = "duck" | "hop";
 
 interface TrailObstacle {
 	height: number;
@@ -39,6 +40,7 @@ let lastFrame = 0;
 let distance = 0;
 let spawnClock = 1.4;
 let obstacleNumber = 0;
+let motionPreference: MediaQueryList | null = null;
 
 const phaseLabel = computed(() => {
 	if (reducedMotion.value && phase.value === "playing") return "Your turn";
@@ -75,35 +77,40 @@ function resetTrail() {
 }
 
 function startTrail() {
+	stopAnimation();
 	resetTrail();
 	phase.value = "playing";
 	if (reducedMotion.value) {
 		addObstacle(CANVAS_WIDTH - 120);
-		announcement.value =
-			"The trail moves one step each time you choose Hop or Duck.";
+		announcement.value = `The trail moves one step each time you choose Hop or Duck. ${reducedGuidanceText()}`;
 	} else {
 		announcement.value =
 			"The comet trail has started. Hop or duck when you need to.";
 	}
 	draw();
+	startAnimation();
 }
 
 function toggleGame() {
-	if (reducedMotion.value) {
-		startTrail();
-		return;
-	}
 	if (phase.value === "playing") {
+		if (reducedMotion.value) {
+			startTrail();
+			return;
+		}
 		phase.value = "paused";
 		ducking.value = false;
 		announcement.value = "Trail paused.";
+		stopAnimation();
 		draw();
 		return;
 	}
 	if (phase.value === "paused") {
 		phase.value = "playing";
-		announcement.value = "Trail resumed.";
+		announcement.value = reducedMotion.value
+			? `Trail resumed one step at a time. ${reducedGuidanceText()}`
+			: "Trail resumed.";
 		draw();
+		startAnimation();
 		return;
 	}
 	startTrail();
@@ -167,20 +174,85 @@ function addObstacle(x = CANVAS_WIDTH + 40) {
 	});
 }
 
-function reducedActionCollides(
-	obstacle: TrailObstacle,
-	action: "duck" | "hop"
-) {
+function obstacleName(kind: ObstacleKind) {
+	return kind === "moon-rock" ? "Moon rock" : "Orbiting seed";
+}
+
+function safeAction(kind: ObstacleKind): TrailAction {
+	return kind === "moon-rock" ? "hop" : "duck";
+}
+
+function horizontallyOverlaps(obstacle: TrailObstacle) {
 	const cometLeft = COMET_X + 7;
 	const cometRight = COMET_X + 48 - 7;
-	const overlaps =
+	return (
 		cometRight > obstacle.x + 5 &&
-		cometLeft < obstacle.x + obstacle.width - 5;
-	if (!overlaps) return false;
+		cometLeft < obstacle.x + obstacle.width - 5
+	);
+}
+
+function reducedStepsUntilObstacle(obstacle: TrailObstacle) {
+	for (let steps = 1; steps <= 24; steps += 1) {
+		if (
+			horizontallyOverlaps({
+				...obstacle,
+				x: obstacle.x - REDUCED_STEP_DISTANCE * steps
+			})
+		) {
+			return steps;
+		}
+	}
+	return null;
+}
+
+function nextReducedObstacle() {
+	let next:
+		| {
+				kind: ObstacleKind;
+				steps: number;
+		  }
+		| undefined;
+	for (const obstacle of obstacles) {
+		const steps = reducedStepsUntilObstacle(obstacle);
+		if (steps !== null && (!next || steps < next.steps)) {
+			next = { kind: obstacle.kind, steps };
+		}
+	}
+	return next;
+}
+
+function reducedGuidanceText() {
+	const next = nextReducedObstacle();
+	if (!next) return "No obstacle is close yet. Either move is safe.";
+	const label = obstacleName(next.kind);
+	const action = safeAction(next.kind);
+	const actionLabel = action === "hop" ? "Hop" : "Duck";
+	if (next.steps === 1) {
+		return `${label} reaches the comet on the next move. Choose ${actionLabel}.`;
+	}
+	return `${label} ahead in ${next.steps} moves. Choose ${actionLabel} when it reaches the comet.`;
+}
+
+function actionControlLabel(action: TrailAction) {
+	const base =
+		action === "hop" ? "Make the comet hop" : "Make the comet duck";
+	if (!reducedMotion.value || phase.value !== "playing") return base;
+	const next = nextReducedObstacle();
+	if (!next) return `${base} — either move is safe`;
+	const label = obstacleName(next.kind).toLowerCase();
+	const correctAction = safeAction(next.kind);
+	if (next.steps === 1) {
+		return `${base} — ${action === correctAction ? "safe now" : "not safe now"}; ${label} arrives on this move`;
+	}
+	return `${base} — moves the trail one step; ${label} in ${next.steps} moves; safe action ${correctAction}`;
+}
+
+function reducedActionCollides(obstacle: TrailObstacle, action: TrailAction) {
+	if (!horizontallyOverlaps(obstacle)) return false;
 	return obstacle.kind === "moon-rock" ? action !== "hop" : action !== "duck";
 }
 
-function advanceReducedTrail(action: "duck" | "hop") {
+function advanceReducedTrail(action: TrailAction) {
 	if (phase.value !== "playing") return;
 	reducedPose.value = action;
 	distance += REDUCED_STEP_DISTANCE;
@@ -190,7 +262,7 @@ function advanceReducedTrail(action: "duck" | "hop") {
 		const obstacle = obstacles[index];
 		obstacle.x -= REDUCED_STEP_DISTANCE;
 		if (reducedActionCollides(obstacle, action)) {
-			finishTrail();
+			finishTrail(obstacle.kind);
 			break;
 		}
 		if (obstacle.x + obstacle.width < -30) obstacles.splice(index, 1);
@@ -201,10 +273,8 @@ function advanceReducedTrail(action: "duck" | "hop") {
 		if (!lastObstacle || lastObstacle.x < CANVAS_WIDTH - 340) {
 			addObstacle(CANVAS_WIDTH + 20);
 		}
-		announcement.value =
-			action === "hop"
-				? "Hop complete. The trail moved one step."
-				: "Duck complete. The trail moved one step.";
+		const actionLabel = action === "hop" ? "Hop" : "Duck";
+		announcement.value = `${actionLabel} complete. ${reducedGuidanceText()}`;
 	}
 	draw();
 }
@@ -224,11 +294,34 @@ function collides(obstacle: TrailObstacle) {
 	);
 }
 
-function finishTrail() {
+function stopAnimation() {
+	if (animationFrame) window.cancelAnimationFrame(animationFrame);
+	animationFrame = 0;
+	lastFrame = 0;
+}
+
+function startAnimation() {
+	if (
+		animationFrame ||
+		phase.value !== "playing" ||
+		reducedMotion.value ||
+		document.hidden
+	) {
+		return;
+	}
+	lastFrame = 0;
+	animationFrame = window.requestAnimationFrame(update);
+}
+
+function finishTrail(obstacleKind?: ObstacleKind) {
 	phase.value = "finished";
 	ducking.value = false;
 	sessionBest.value = Math.max(sessionBest.value, score.value);
-	announcement.value = `Trail complete! You traveled ${score.value} star steps.`;
+	stopAnimation();
+	const ending = obstacleKind
+		? `A ${obstacleName(obstacleKind).toLowerCase()} ended this run.`
+		: "The trail ended.";
+	announcement.value = `${ending} You traveled ${score.value} star steps.`;
 }
 
 function drawStars(context: CanvasRenderingContext2D, shift: number) {
@@ -376,41 +469,45 @@ function draw() {
 }
 
 function update(timestamp: number) {
+	animationFrame = 0;
+	if (phase.value !== "playing" || reducedMotion.value || document.hidden) {
+		return;
+	}
 	if (!lastFrame) lastFrame = timestamp;
 	const elapsed = Math.min(0.036, (timestamp - lastFrame) / 1000);
 	lastFrame = timestamp;
 
-	if (phase.value === "playing") {
-		const trailSpeed = Math.min(470, 270 + distance * 0.008);
-		distance += trailSpeed * elapsed;
-		score.value = Math.floor(distance / 32);
+	const trailSpeed = Math.min(470, 270 + distance * 0.008);
+	distance += trailSpeed * elapsed;
+	score.value = Math.floor(distance / 32);
 
-		verticalSpeed += 1850 * elapsed;
-		cometBottom += verticalSpeed * elapsed;
-		if (cometBottom >= GROUND_Y) {
-			cometBottom = GROUND_Y;
-			verticalSpeed = 0;
-		}
+	verticalSpeed += 1850 * elapsed;
+	cometBottom += verticalSpeed * elapsed;
+	if (cometBottom >= GROUND_Y) {
+		cometBottom = GROUND_Y;
+		verticalSpeed = 0;
+	}
 
-		spawnClock -= elapsed;
-		if (spawnClock <= 0) {
-			addObstacle();
-			spawnClock = 1.25 + (obstacleNumber % 4) * 0.16;
-		}
+	spawnClock -= elapsed;
+	if (spawnClock <= 0) {
+		addObstacle();
+		spawnClock = 1.25 + (obstacleNumber % 4) * 0.16;
+	}
 
-		for (let index = obstacles.length - 1; index >= 0; index -= 1) {
-			const obstacle = obstacles[index];
-			obstacle.x -= trailSpeed * elapsed;
-			if (collides(obstacle)) {
-				finishTrail();
-				break;
-			}
-			if (obstacle.x + obstacle.width < -30) obstacles.splice(index, 1);
+	for (let index = obstacles.length - 1; index >= 0; index -= 1) {
+		const obstacle = obstacles[index];
+		obstacle.x -= trailSpeed * elapsed;
+		if (collides(obstacle)) {
+			finishTrail(obstacle.kind);
+			break;
 		}
+		if (obstacle.x + obstacle.width < -30) obstacles.splice(index, 1);
 	}
 
 	draw();
-	animationFrame = window.requestAnimationFrame(update);
+	if (phase.value === "playing") {
+		animationFrame = window.requestAnimationFrame(update);
+	}
 }
 
 function handleKeydown(event: KeyboardEvent) {
@@ -456,27 +553,52 @@ function handleKeyup(event: KeyboardEvent) {
 }
 
 function handleVisibilityChange() {
-	if (document.hidden && phase.value === "playing" && !reducedMotion.value) {
+	if (document.hidden && phase.value === "playing") {
 		phase.value = "paused";
 		ducking.value = false;
 		announcement.value = "Trail paused while this tab was away.";
+		stopAnimation();
+		draw();
 	}
-	lastFrame = 0;
+}
+
+function handleMotionPreferenceChange(event: MediaQueryListEvent) {
+	reducedMotion.value = event.matches;
+	ducking.value = false;
+	cometBottom = GROUND_Y;
+	verticalSpeed = 0;
+	reducedPose.value = "stand";
+	if (event.matches) {
+		stopAnimation();
+		if (phase.value === "playing") {
+			if (!nextReducedObstacle()) addObstacle(CANVAS_WIDTH - 120);
+			announcement.value = `Step-by-step motion is on. ${reducedGuidanceText()}`;
+		}
+	} else {
+		if (phase.value === "playing") {
+			announcement.value =
+				"Continuous motion is on. Hop over rocks and duck under orbiting seeds.";
+		}
+		startAnimation();
+	}
+	draw();
 }
 
 onMounted(() => {
-	reducedMotion.value =
-		window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ??
-		false;
+	motionPreference =
+		window.matchMedia?.("(prefers-reduced-motion: reduce)") ?? null;
+	reducedMotion.value = motionPreference?.matches ?? false;
+	motionPreference?.addEventListener("change", handleMotionPreferenceChange);
 	document.addEventListener("visibilitychange", handleVisibilityChange);
 	draw();
-	if (!reducedMotion.value) {
-		animationFrame = window.requestAnimationFrame(update);
-	}
 });
 
 onBeforeUnmount(() => {
-	window.cancelAnimationFrame(animationFrame);
+	stopAnimation();
+	motionPreference?.removeEventListener(
+		"change",
+		handleMotionPreferenceChange
+	);
 	document.removeEventListener("visibilitychange", handleVisibilityChange);
 });
 </script>
@@ -494,7 +616,8 @@ onBeforeUnmount(() => {
 				<p>
 					Guide a cheerful comet along a tiny moon trail. Hop over
 					rocks, duck under orbiting seeds, and see how many star
-					steps you can go.
+					steps you can go. The trail speeds up as you travel, and
+					your session best lasts only for this page visit.
 				</p>
 			</div>
 			<RouterLink class="back-link" to="/games">All games</RouterLink>
@@ -516,16 +639,28 @@ onBeforeUnmount(() => {
 				:width="CANVAS_WIDTH"
 				:aria-label="
 					reducedMotion
-						? 'Step-by-step comet trail. Choose Hop or Duck to move the trail one step.'
+						? `Step-by-step comet trail. ${phase === 'playing' ? reducedGuidanceText() : 'Choose Start trail, then use Hop or Duck to move one step.'}`
 						: 'Comet trail game. Press Space or Up to hop. Hold Down to duck.'
 				"
+				aria-describedby="comet-instructions comet-step-guidance comet-announcement"
 				class="trail-canvas"
 				role="img"
 				tabindex="0"
-				@pointerdown="hop"
 			></canvas>
 
-			<p class="trail-announcement" aria-live="polite">
+			<p
+				v-show="reducedMotion && phase === 'playing'"
+				id="comet-step-guidance"
+				class="trail-guidance"
+			>
+				<strong>Next obstacle:</strong> {{ reducedGuidanceText() }}
+			</p>
+
+			<p
+				id="comet-announcement"
+				class="trail-announcement"
+				aria-live="polite"
+			>
 				{{ announcement }}
 			</p>
 
@@ -538,26 +673,36 @@ onBeforeUnmount(() => {
 					{{ primaryActionLabel }}
 				</button>
 				<button
-					aria-label="Make the comet hop"
+					:aria-label="actionControlLabel('hop')"
 					class="move-button"
+					:disabled="phase !== 'playing'"
 					type="button"
 					@click="hop"
 				>
 					Hop ↑
 				</button>
 				<button
+					:aria-label="
+						reducedMotion
+							? actionControlLabel('duck')
+							: ducking
+								? 'Make the comet stand'
+								: 'Make the comet duck'
+					"
 					:aria-pressed="reducedMotion ? undefined : ducking"
 					class="move-button"
+					:disabled="phase !== 'playing'"
 					type="button"
 					@click="toggleDuck"
 				>
 					{{ reducedMotion ? "Duck" : ducking ? "Stand" : "Duck" }} ↓
 				</button>
-				<p v-if="reducedMotion">
+				<p v-if="reducedMotion" id="comet-instructions">
 					Choose Hop or Duck to move the trail one step. Nothing moves
-					between choices.
+					between choices. The next-obstacle message tells you which
+					move is safe when it reaches the comet.
 				</p>
-				<p v-else>
+				<p v-else id="comet-instructions">
 					Keyboard: Space or ↑ to hop; hold ↓ to duck. Enter starts.
 				</p>
 			</div>
@@ -639,14 +784,21 @@ onBeforeUnmount(() => {
 	border-radius: 19px;
 	background: #101436;
 	box-shadow: 0 18px 36px -28px rgba(15, 23, 42, 0.7);
-	cursor: pointer;
-	touch-action: manipulation;
+	touch-action: pan-y pinch-zoom;
 }
 
+.trail-guidance,
 .trail-announcement {
 	min-height: 1.6rem;
 	font-weight: 700;
 	color: #4c3b75;
+}
+
+.trail-guidance {
+	padding: 0.7rem 0.85rem;
+	border: 1px solid #c4b5fd;
+	border-radius: 14px;
+	background: #f3efff;
 }
 
 .trail-actions {
@@ -682,12 +834,23 @@ onBeforeUnmount(() => {
 	color: #4c3b75;
 }
 
+.move-button:disabled {
+	cursor: not-allowed;
+	opacity: 0.55;
+}
+
 :global(html.dark .comet-hopper) {
 	--game-heading-color: #f0eaff;
 }
 
-:global(html.dark .comet-hopper .trail-announcement) {
+:global(html.dark .comet-hopper .trail-announcement),
+:global(html.dark .comet-hopper .trail-guidance) {
 	color: #ded3ff;
+}
+
+:global(html.dark .comet-hopper .trail-guidance) {
+	border-color: rgba(196, 181, 253, 0.34);
+	background: #211a38;
 }
 
 :global(html.dark .comet-hopper .trail-panel) {

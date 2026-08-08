@@ -59,19 +59,19 @@ const stations: WorkshopStation[] = [
 
 const missions: readonly WorkshopMission[] = [
 	{
-		description: "A four-step tune-up with each station once.",
+		description: "A guided four-step tune-up with each station once.",
 		id: "simple",
 		label: "Simple",
 		sequence: ["gears", "lights", "sorter", "energy"]
 	},
 	{
-		description: "A six-step rebuild with two stations repeated.",
+		description: "A guided six-step rebuild with two stations repeated.",
 		id: "middle",
 		label: "Middle",
 		sequence: ["energy", "sorter", "gears", "lights", "sorter", "energy"]
 	},
 	{
-		description: "An eight-step master repair with a longer pattern.",
+		description: "A guided eight-step master repair with a longer pattern.",
 		id: "advanced",
 		label: "Advanced",
 		sequence: [
@@ -568,7 +568,9 @@ onBeforeUnmount(() => {
 			<div>
 				<h1>Machine Workshop</h1>
 				<p>
-					Choose a repair mission, then operate the stations in order.
+					Choose a guided repair mission, then operate the stations in
+					order. Simple, Middle, and Advanced add more repair steps;
+					they are self-paced missions, not head-to-head competition.
 					Every tap changes the machine, and a different station can
 					still be explored without losing progress.
 				</p>

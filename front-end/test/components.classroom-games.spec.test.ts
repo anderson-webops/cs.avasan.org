@@ -242,7 +242,9 @@ describe("browser-local classroom games", () => {
 		expect(crosswalk.text()).toContain("Traffic moves only after Pip moves");
 		await comet.get(".primary-button").trigger("click");
 		expect(comet.text()).toContain("Status: Your turn");
-		await comet.get('[aria-label="Make the comet hop"]').trigger("click");
+		await comet
+			.get('[aria-label^="Make the comet hop"]')
+			.trigger("click");
 		expect(comet.text()).toContain("Hop complete");
 		expect(comet.text()).toContain("Star steps: 1");
 		expect(window.requestAnimationFrame).not.toHaveBeenCalled();

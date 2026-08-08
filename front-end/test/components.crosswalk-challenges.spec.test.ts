@@ -150,6 +150,25 @@ describe("Crosswalk Critters challenge stages", () => {
 		vi.unstubAllGlobals();
 	});
 
+	it("shows each challenge's score multiplier before play", () => {
+		const wrapper = mountGame();
+		const optionCopy = Object.fromEntries(
+			wrapper
+				.findAll(".challenge-picker .challenge-option")
+				.map(option => [
+					option.get("strong").text(),
+					option.get("small").text()
+				])
+		);
+
+		expect(optionCopy).toEqual({
+			Advanced: "2 tries · fastest traffic · 3× score",
+			Middle: "3 tries · busy traffic · 2× score",
+			Simple: "5 tries · gentler traffic · 1× score"
+		});
+		wrapper.unmount();
+	});
+
 	it("offers deterministic challenges and immediate continuous collisions", async () => {
 		const wrapper = mountGame();
 		const game = wrapper.get(".crosswalk-game");

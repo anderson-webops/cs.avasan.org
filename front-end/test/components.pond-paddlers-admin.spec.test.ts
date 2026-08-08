@@ -133,6 +133,12 @@ describe("PondPaddlersAdmin", () => {
 		await flushPromises();
 
 		await wrapper.get("[data-pond-race-format]").setValue("team-device");
+		expect(wrapper.text()).toContain(
+			"Julio forms teams in the classroom. Each team opens Pond Paddlers on one shared device, enters the same room code, and receives a random paddler."
+		);
+		expect(wrapper.text()).toContain(
+			"no team names or rosters are entered or stored."
+		);
 		await wrapper.get("form").trigger("submit");
 		await flushPromises();
 		expect(createPondPaddlersRoom).toHaveBeenLastCalledWith(
@@ -142,9 +148,10 @@ describe("PondPaddlersAdmin", () => {
 		await wrapper.get("[data-pond-copy-instructions]").trigger("click");
 		await flushPromises();
 		expect(navigator.clipboard.writeText).toHaveBeenLastCalledWith(
-			expect.stringContaining(
-				"Use one device per team and take turns after every correct answer."
-			)
+			"Julio will form teams in the classroom. Each team should open https://cs.avasan.org/games/pond-paddlers on one shared device and enter the same room code ABCD2345. Each device will receive a random paddler. Keep the page open until Julio starts the race, and take turns after every correct answer."
+		);
+		expect(wrapper.text()).toContain(
+			"Give this same code to every team. Each team uses one shared device and receives a random paddler."
 		);
 		expect(wrapper.find('input[name="teamName"]').exists()).toBe(false);
 		expect(wrapper.find('input[name="studentName"]').exists()).toBe(false);
