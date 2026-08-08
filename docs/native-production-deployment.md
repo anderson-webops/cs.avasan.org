@@ -117,8 +117,9 @@ they resolve inside the same immutable release. A separately reviewed
 first-install procedure must establish and verify that rollback target before
 automatic deployments are enabled.
 
-The config digest contains no secret values. It prevents a frontend built with
-one privacy/feature decision from being reused after `api.env` changes. The
+The config digest contains no secret values, including the exact approved
+analytics retention period when one is configured. It prevents a frontend built
+with one privacy/feature decision from being reused after `api.env` changes. The
 root deployer strips runtime credentials before invoking any child process;
 dependency lifecycle scripts and builds run as the unprivileged `cs-avasan`
 identity inside a disposable directory.
@@ -132,11 +133,15 @@ reloads Nginx, waits for Mongo-backed readiness, and runs the full production
 smoke suite through `http://127.0.0.1:8080`. The gate checks release identity,
 real branded page 404s, JSON API 404s, one non-conflicting security-header set,
 Admin login behavior, private games, Math-only Graph Sketcher retirement, and
-the configured privacy-feature boundaries. Any failure restores the former
+the configured privacy-feature boundaries. It compares the exact analytics
+collection and retention settings reported by the API with the exact period in
+Student Privacy; enabled collection without an explicit 7–90-day period fails
+before activation. Any failure restores the former
 symlink and services. Recovery is not reported from the symlink alone: the
 deployer restarts and reloads the restored stack, waits for API readiness, then
 runs the full route and security smoke suite against the former manifest's
-exact version, revision, and privacy-feature values. The activation failure and
+exact version, revision, privacy-feature values, and analytics retention period.
+The activation failure and
 any separate rollback failure retain their own status and diagnostics. The
 successful former target is retained as `previous`; releases are not
 automatically deleted.
@@ -219,3 +224,9 @@ database already holds student records or deletion receipts. After activation,
 exercise one disposable account through creation, setup, project save,
 correction, export, and deletion before classroom use. Database backups and
 restores must preserve the same retention and deletion obligations.
+
+Do not activate classroom analytics until the same reviewer has selected and
+approved an exact whole-number `CLASSROOM_ANALYTICS_RETENTION_DAYS` value from 7
+through 90. Keep that value in `api.env` while any anonymous rows remain
+physically stored, including logically expired rows awaiting cleanup, so a later
+disabled release continues to disclose and enforce the approved period.

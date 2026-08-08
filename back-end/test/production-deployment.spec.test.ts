@@ -135,6 +135,8 @@ describe("versioned full-stack production deployment", () => {
 		expect(environment).toContain("CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE=");
 		expect(environment).toContain("STUDENT_ACCOUNTS_ENABLED=false");
 		expect(environment).toContain("STUDENT_OAUTH_ENABLED=false");
+		expect(environment).toContain("CLASSROOM_ANALYTICS_COLLECTION_ENABLED=false");
+		expect(environment).toContain("CLASSROOM_ANALYTICS_RETENTION_DAYS=");
 
 		expect(service).toContain("User=cs-avasan");
 		expect(service.match(/^ExecStart=/gmu)).toHaveLength(1);
@@ -182,6 +184,8 @@ describe("versioned full-stack production deployment", () => {
 		expect(deployScript).toContain('export CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE="${CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE:-}"');
 		expect(deployScript).toContain('export STUDENT_ACCOUNTS_ENABLED="${STUDENT_ACCOUNTS_ENABLED:-false}"');
 		expect(deployScript).toContain('export STUDENT_RECORD_RETENTION_DAYS="${STUDENT_RECORD_RETENTION_DAYS:-}"');
+		expect(deployScript).toContain('export CLASSROOM_ANALYTICS_RETENTION_DAYS="${CLASSROOM_ANALYTICS_RETENTION_DAYS:-}"');
+		expect(deployScript).toContain('export VITE_CLASSROOM_ANALYTICS_RETENTION_DAYS="${CLASSROOM_ANALYTICS_RETENTION_DAYS:-}"');
 		expect(deployScript).toContain("never Mongo, session, OAuth, Vault, or diagnostics");
 		expect(deployScript.match(/verify-native-source[.]sh/g)).toHaveLength(2);
 		expect(deployScript).toContain(
@@ -222,6 +226,7 @@ describe("versioned full-stack production deployment", () => {
 		expect(deployScript).toContain("restore_previous");
 		expect(deployScript).toContain('CS_EXPECTED_RELEASE="$cs_expected_version"');
 		expect(deployScript).toContain('CS_EXPECTED_REVISION="$cs_expected_revision"');
+		expect(deployScript).toContain('CS_EXPECT_CLASSROOM_ANALYTICS_RETENTION_DAYS="$cs_expected_classroom_analytics_retention_days"');
 		expect(deployScript).toContain('"$cs_previous_version"');
 		expect(deployScript).toContain('"$cs_previous_revision"');
 		expect(deployScript).toContain(
@@ -259,6 +264,8 @@ describe("versioned full-stack production deployment", () => {
 			"Rollback requires current and previous release symlinks."
 		);
 		expect(rollbackScript).toContain("buildConfig.STUDENT_ACCOUNTS_ENABLED");
+		expect(rollbackScript).toContain("buildConfig.CLASSROOM_ANALYTICS_RETENTION_DAYS");
+		expect(rollbackScript).toContain('CS_EXPECT_CLASSROOM_ANALYTICS_RETENTION_DAYS="$cs_expected_classroom_analytics_retention_days"');
 		expect(rollbackScript).toContain("CS_SITE_ORIGIN=http://127.0.0.1:8080");
 		expect(rollbackScript).toContain('"$cs_current_manifest_version"');
 		expect(rollbackScript).toContain('"$cs_current_manifest_revision"');
@@ -269,8 +276,11 @@ describe("versioned full-stack production deployment", () => {
 		expect(runtimePreflight).toContain('parsed.pathname !== "/cs-avasan-org"');
 		expect(runtimePreflight).toContain('parsed.searchParams.get("authSource") !== "cs-avasan-org"');
 		expect(runtimePreflight).toContain("changed without a frontend rebuild");
+		expect(releaseTargetVerifier).toContain("explicit-retention contract");
+		expect(releaseTargetVerifier).toContain("analytics collection was disabled");
 		expect(documentation).toContain("do not run native and Compose CS stacks together.");
 		expect(documentation).toContain("30–365-day");
+		expect(documentation).toContain("explicit 7–90-day period");
 	});
 
 	it("publishes one non-cacheable release identity for the site and API", () => {
@@ -289,14 +299,14 @@ describe("versioned full-stack production deployment", () => {
 			version: string;
 		};
 
-		expect(rootPackage.version).toBe("2.7.114");
-		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]114\}/g)).toHaveLength(2);
+		expect(rootPackage.version).toBe("2.7.115");
+		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]115\}/g)).toHaveLength(2);
 		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g)).toHaveLength(2);
 		expect(compose).not.toContain("SOURCE_REVISION:-unknown");
 		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
-		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.114");
+		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.115");
 		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
-		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.114");
+		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.115");
 		expect(apiDockerfile).toContain("ARG SOURCE_REVISION=unknown");
 		expect(frontendReleaseWriter).toContain("environment.COMMIT_REF?.trim()");
 		expect(frontendReleaseWriter).toContain("const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;");
@@ -314,6 +324,9 @@ describe("versioned full-stack production deployment", () => {
 		expect(productionSmoke).toContain("CS_EXPECT_STUDENT_ACCOUNTS_ENABLED");
 		expect(productionSmoke).toContain("CS_EXPECT_STUDENT_OAUTH_ENABLED");
 		expect(productionSmoke).toContain("CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED");
+		expect(productionSmoke).toContain("CS_EXPECT_CLASSROOM_ANALYTICS_RETENTION_DAYS");
+		expect(productionSmoke).toContain("verifyStudentPrivacyRetention");
+		expect(productionSmoke).toContain("health.classroomAnalytics.retentionDays");
 		expect(productionSmoke).toContain(
 			'const classroomOrigin = "https://cs.avasan.org";'
 		);
@@ -382,6 +395,8 @@ describe("versioned full-stack production deployment", () => {
 		expect(postDeployWorkflow).toContain("student_accounts_enabled:");
 		expect(postDeployWorkflow).toContain("student_oauth_enabled:");
 		expect(postDeployWorkflow).toContain("classroom_analytics_collection_enabled:");
+		expect(postDeployWorkflow).toContain("classroom_analytics_retention_days:");
+		expect(postDeployWorkflow).toContain("CS_EXPECT_CLASSROOM_ANALYTICS_RETENTION_DAYS");
 		expect(postDeployWorkflow).toContain("npm run verify:production");
 	});
 
@@ -401,6 +416,7 @@ describe("versioned full-stack production deployment", () => {
 		expect(environment).toContain("STUDENT_OAUTH_ENABLED=false");
 		expect(environment).toContain("STUDENT_RECORD_RETENTION_DAYS=");
 		expect(environment).toContain("CLASSROOM_ANALYTICS_COLLECTION_ENABLED=false");
+		expect(environment).toMatch(/^CLASSROOM_ANALYTICS_RETENTION_DAYS=$/mu);
 		expect(environment).not.toContain("VITE_CLASSROOM_PRIVACY_APPROVED=");
 		expect(environment).not.toContain("VITE_STUDENT_ACCOUNTS_ENABLED=");
 		expect(environment).not.toContain("VITE_STUDENT_OAUTH_ENABLED=");
@@ -417,6 +433,9 @@ describe("versioned full-stack production deployment", () => {
 		expect(compose).toContain("VITE_STUDENT_ACCOUNTS_ENABLED: ${STUDENT_ACCOUNTS_ENABLED:-false}");
 		expect(compose).toContain("VITE_STUDENT_OAUTH_ENABLED: ${STUDENT_OAUTH_ENABLED:-false}");
 		expect(compose).toContain("VITE_CLASSROOM_USAGE_ENABLED: ${CLASSROOM_ANALYTICS_COLLECTION_ENABLED:-false}");
+		expect(compose).toContain("VITE_CLASSROOM_ANALYTICS_RETENTION_DAYS: ${CLASSROOM_ANALYTICS_RETENTION_DAYS:-}");
+		expect(api).toContain("CLASSROOM_ANALYTICS_RETENTION_DAYS: ${CLASSROOM_ANALYTICS_RETENTION_DAYS:-}");
+		expect(compose).not.toContain("CLASSROOM_ANALYTICS_RETENTION_DAYS: ${CLASSROOM_ANALYTICS_RETENTION_DAYS:-90}");
 		expect(compose).not.toContain("VITE_CLASSROOM_PRIVACY_APPROVED: ${VITE_CLASSROOM_PRIVACY_APPROVED");
 		expect(compose).not.toContain("VITE_STUDENT_ACCOUNTS_ENABLED: ${VITE_STUDENT_ACCOUNTS_ENABLED");
 		expect(compose).not.toContain("VITE_STUDENT_OAUTH_ENABLED: ${VITE_STUDENT_OAUTH_ENABLED");
@@ -440,6 +459,7 @@ describe("versioned full-stack production deployment", () => {
 		expect(netlify).toContain('VITE_CLASSROOM_PRIVACY_POLICY_VERSION = ""');
 		expect(netlify).toContain('VITE_CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE = ""');
 		expect(netlify).toContain('VITE_STUDENT_RECORD_RETENTION_DAYS = ""');
+		expect(netlify).toContain('VITE_CLASSROOM_ANALYTICS_RETENTION_DAYS = ""');
 		expect(netlify).toContain('for = "/*"');
 		expect(netlify).toContain('Content-Security-Policy = "default-src');
 		expect(netlify).toContain('for = "/ide/*"');
@@ -476,6 +496,8 @@ describe("versioned full-stack production deployment", () => {
 		expect(frontendDockerfile).toContain("ENV VITE_CLASSROOM_PRIVACY_POLICY_VERSION=$VITE_CLASSROOM_PRIVACY_POLICY_VERSION");
 		expect(frontendDockerfile).toContain("ENV VITE_CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE=$VITE_CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE");
 		expect(frontendDockerfile).toContain("ARG VITE_CLASSROOM_SERVICE_PROVIDER_NOTICE=");
+		expect(frontendDockerfile).toContain("ARG VITE_CLASSROOM_ANALYTICS_RETENTION_DAYS=");
+		expect(frontendDockerfile).toContain("ENV VITE_CLASSROOM_ANALYTICS_RETENTION_DAYS=$VITE_CLASSROOM_ANALYTICS_RETENTION_DAYS");
 		expect(frontendDockerfile).toContain("ARG VITE_STUDENT_RECORD_RETENTION_DAYS=");
 		expect(frontendDockerfile).toContain("npm install --global npm@11.16.0");
 		expect(frontendDockerfile).toMatch(/FROM nginxinc\/nginx-unprivileged:stable-alpine@sha256:[a-f0-9]{64}/);
@@ -504,6 +526,7 @@ describe("versioned full-stack production deployment", () => {
 		expect(continuousIntegration).toContain("SOURCE_REVISION: ${{ github.sha }}");
 		expect(continuousIntegration).toContain("env -u SOURCE_REVISION docker compose");
 		expect(continuousIntegration).toContain('CS_EXPECTED_REVISION="${SOURCE_REVISION}"');
+		expect(continuousIntegration).toContain('CS_EXPECT_CLASSROOM_ANALYTICS_RETENTION_DAYS=""');
 		expect(continuousIntegration).toContain("npm run verify:production");
 		expect(continuousIntegration).toContain('"${origin}/__cs-avasan-deployment-probe-missing"');
 		expect(continuousIntegration).toContain('unknown_status}" = "404"');
@@ -514,6 +537,7 @@ describe("versioned full-stack production deployment", () => {
 		expect(readme).toContain("uses TypeScript source in the isolated tools image");
 		expect(readme).toContain("must not be promoted to `cs.avasan.org`");
 		expect(readme).toContain('CS_EXPECTED_REVISION="${SOURCE_REVISION}"');
+		expect(readme).toContain('CS_EXPECT_CLASSROOM_ANALYTICS_RETENTION_DAYS="${CLASSROOM_ANALYTICS_RETENTION_DAYS:-}"');
 		expect(readme).toMatch(/before the deployment\s+timer records success/);
 		expect(readme).toContain("must fail without recording success");
 		expect(readme).toContain("http://127.0.0.1:8080/ide/");

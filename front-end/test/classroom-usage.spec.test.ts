@@ -25,6 +25,7 @@ describe("privacy-first classroom usage", () => {
 			"2026-07-29"
 		);
 		vi.stubEnv("VITE_CLASSROOM_USAGE_ENABLED", "true");
+		vi.stubEnv("VITE_CLASSROOM_ANALYTICS_RETENTION_DAYS", "45");
 		vi.stubEnv(
 			"VITE_SCHOOL_PRIVACY_CONTACT",
 			"School privacy office, 555-0100"

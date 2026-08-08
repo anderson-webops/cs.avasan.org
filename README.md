@@ -146,13 +146,22 @@ site was connected remain part of the CS totals.
 
 Collection stays off unless school/district approval, a direct privacy contact,
 the backend `CLASSROOM_ANALYTICS_COLLECTION_ENABLED`, and the frontend
-`VITE_CLASSROOM_USAGE_ENABLED` are all explicitly configured. Browser Do Not
-Track and Global Privacy Control signals are honored. Reports are marked only
+`VITE_CLASSROOM_USAGE_ENABLED` are all explicitly configured and the same
+approved `CLASSROOM_ANALYTICS_RETENTION_DAYS` whole number from 7 through 90 is
+built into the frontend as `VITE_CLASSROOM_ANALYTICS_RETENTION_DAYS`. There is
+no collection retention default. Browser Do Not Track and Global Privacy
+Control signals are honored. Reports are marked only
 as attempted before the request and are never retried in that tab after an
 error or ambiguous response. This prefers undercounting to a duplicate count
 without adding an identifier for server-side deduplication. These
 client-supplied totals remain low-stakes directional signals rather than
 attendance or grading evidence.
+
+After collection is disabled, keep the approved period configured until every
+anonymous row has been physically removed by cleanup or purged. Logical expiry
+alone is not enough: API startup refuses any physically retained analytics row
+when that period is missing, so disabling collection cannot silently place
+stored data outside the approved policy.
 
 ### Provision Julio
 
@@ -326,7 +335,7 @@ that identity fallback is not permitted by the production Compose path. Inject
 the deployment identity without changing application secrets:
 
 ```bash
-export CS_RELEASE_VERSION=2.7.114
+export CS_RELEASE_VERSION=2.7.115
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 docker compose --env-file deploy/cs.env -f compose.production.yml build
 ```
@@ -341,7 +350,7 @@ To exercise or prepare the manually selected Compose fallback:
 ```bash
 install -m 600 deploy/cs.env.example deploy/cs.env
 # Fill secrets, keep all optional features false until the privacy gate is met.
-export CS_RELEASE_VERSION=2.7.114
+export CS_RELEASE_VERSION=2.7.115
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 ./scripts/verify-deploy-env-permissions.sh
 docker compose --env-file deploy/cs.env -f compose.production.yml build
@@ -398,6 +407,7 @@ checkout:
 CS_EXPECTED_RELEASE="${CS_RELEASE_VERSION}" \
 CS_EXPECTED_REVISION="${SOURCE_REVISION}" \
 CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED="${CLASSROOM_ANALYTICS_COLLECTION_ENABLED:-false}" \
+CS_EXPECT_CLASSROOM_ANALYTICS_RETENTION_DAYS="${CLASSROOM_ANALYTICS_RETENTION_DAYS:-}" \
 CS_EXPECT_STUDENT_ACCOUNTS_ENABLED="${STUDENT_ACCOUNTS_ENABLED:-false}" \
 CS_EXPECT_STUDENT_OAUTH_ENABLED="${STUDENT_OAUTH_ENABLED:-false}" \
 CS_SITE_ORIGIN=https://cs.avasan.org \
@@ -413,7 +423,9 @@ a synthetic unknown path, real 404 responses for the retired Graph Sketcher
 aliases, all four game documents, API health and readiness, invalid Admin
 credentials returning `403 Bad credentials` rather than a server error, the
 generic missing-room response without a seat cookie, the private Admin room
-list, and the current fail-closed student and aggregate-usage boundaries.
+list, the exact backend analytics collection/retention settings, the matching
+period rendered on Student Privacy, and the current fail-closed student and
+aggregate-usage boundaries.
 Failures name only the affected gate;
 response contents are not written to workflow logs. When an approved feature is
 enabled, the same command verifies the enabled route instead: an anonymous

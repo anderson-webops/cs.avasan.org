@@ -20,6 +20,7 @@ describe("classroom privacy rollout configuration", () => {
 	it("fails closed when no optional student-data features are configured", () => {
 		expect(readClassroomPrivacySettings({})).toEqual({
 			analyticsCollectionEnabled: false,
+			analyticsRetentionDays: null,
 			operatorNotice: null,
 			privacyPolicyEffectiveDate: null,
 			privacyPolicyVersion: null,
@@ -159,7 +160,7 @@ describe("classroom privacy rollout configuration", () => {
 		).toThrow(/cannot be in the future/);
 	});
 
-	it("requires an explicit bounded retention period only for accounts", () => {
+	it("requires the approved bounded retention period for each retained feature", () => {
 		const approvedNotices = approvedPublicPolicy;
 		expect(() =>
 			readClassroomPrivacySettings({
@@ -174,23 +175,41 @@ describe("classroom privacy rollout configuration", () => {
 				STUDENT_RECORD_RETENTION_DAYS: "366"
 			})
 		).toThrow(/30 to 365/);
-		expect(
+		expect(() =>
 			readClassroomPrivacySettings({
 				...approvedNotices,
 				CLASSROOM_ANALYTICS_COLLECTION_ENABLED: "true"
-			}).studentRecordRetentionDays
-		).toBeNull();
+			})
+		).toThrow(/CLASSROOM_ANALYTICS_RETENTION_DAYS/);
+		expect(() =>
+			readClassroomPrivacySettings({
+				...approvedNotices,
+				CLASSROOM_ANALYTICS_COLLECTION_ENABLED: "true",
+				CLASSROOM_ANALYTICS_RETENTION_DAYS: "91"
+			})
+		).toThrow(/7 to 90/);
+		expect(readClassroomPrivacySettings({
+			...approvedNotices,
+			CLASSROOM_ANALYTICS_COLLECTION_ENABLED: "true",
+			CLASSROOM_ANALYTICS_RETENTION_DAYS: "45"
+		})).toMatchObject({
+			analyticsCollectionEnabled: true,
+			analyticsRetentionDays: 45,
+			studentRecordRetentionDays: null
+		});
 	});
 
 	it("enables only the explicitly approved feature set", () => {
 		expect(readClassroomPrivacySettings({
 			CLASSROOM_ANALYTICS_COLLECTION_ENABLED: "true",
+			CLASSROOM_ANALYTICS_RETENTION_DAYS: "45",
 			...approvedPublicPolicy,
 			STUDENT_ACCOUNTS_ENABLED: "true",
 			STUDENT_OAUTH_ENABLED: "false",
 			STUDENT_RECORD_RETENTION_DAYS: "90"
 		})).toEqual({
 			analyticsCollectionEnabled: true,
+			analyticsRetentionDays: 45,
 			operatorNotice: "Operator, address, phone, and email.",
 			privacyPolicyEffectiveDate: "2026-08-02",
 			privacyPolicyVersion: "2026-08-02.1",

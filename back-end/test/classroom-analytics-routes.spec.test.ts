@@ -52,20 +52,23 @@ const { mountClassroomAnalyticsRoutes } = await import("../src/routes/classroomA
 
 interface RuntimeOptions {
 	collectionEnabled?: boolean;
-	retentionDays?: number;
+	retentionDays?: number | null;
 }
 
 async function withRuntime<T>(options: RuntimeOptions, run: (baseUrl: string) => Promise<T>): Promise<T> {
 	const app = express();
+	const retentionDays = options.retentionDays === undefined
+		? 90
+		: options.retentionDays;
 	app.set("trust proxy", false);
 	app.use(express.json());
 	mountClassroomAnalyticsRoutes(app, {
 		collectionEnabled: options.collectionEnabled ?? true,
-		retentionDays: options.retentionDays ?? 90
+		retentionDays
 	});
 	// Controller harness; production exposes this handler only inside the
 	// validAdmin-protected /admins router.
-	app.get("/test-admin-summary", getClassroomAnalyticsSummary(options.retentionDays ?? 90));
+	app.get("/test-admin-summary", getClassroomAnalyticsSummary(retentionDays));
 
 	const server = await new Promise<Server>(resolve => {
 		const instance = app.listen(0, "127.0.0.1", () => resolve(instance));
@@ -335,6 +338,14 @@ describe("privacy-preserving classroom analytics routes", () => {
 		});
 	});
 
+	it("refuses an enabled collection route without a retention period", () => {
+		const app = express();
+		expect(() => mountClassroomAnalyticsRoutes(app, {
+			collectionEnabled: true,
+			retentionDays: null
+		})).toThrow("requires a configured retention period");
+	});
+
 	it("returns only zero-filled aggregate activity and coarse work counts", async () => {
 		const today = new Date();
 		today.setUTCHours(0, 0, 0, 0);
@@ -521,6 +532,19 @@ describe("privacy-preserving classroom analytics routes", () => {
 					}
 				}
 			]);
+		});
+	});
+
+	it("reports an unconfigured Admin retention period as null", async () => {
+		await withRuntime({
+			collectionEnabled: false,
+			retentionDays: null
+		}, async baseUrl => {
+			const response = await fetch(`${baseUrl}/test-admin-summary?days=7`);
+			const body = await response.json();
+
+			expect(response.status).toBe(200);
+			expect(body.retentionDays).toBeNull();
 		});
 	});
 

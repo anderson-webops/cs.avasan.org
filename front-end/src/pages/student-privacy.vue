@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import {
+	classroomAnalyticsRetentionDays,
 	classroomPrivacyOperatorNotice,
 	classroomPrivacyPolicyEffectiveDate,
 	classroomPrivacyPolicyVersion,
@@ -10,6 +11,7 @@ import {
 
 defineOptions({ name: "StudentPrivacyPage" });
 const schoolPrivacyContact = configuredSchoolPrivacyContact();
+const analyticsRetentionDays = classroomAnalyticsRetentionDays();
 const operatorNotice = classroomPrivacyOperatorNotice();
 const serviceProviderNotice = classroomServiceProviderNotice();
 const accountRetentionDays = studentRecordRetentionDays();
@@ -32,15 +34,20 @@ const policyEffectiveDate = classroomPrivacyPolicyEffectiveDate();
 
 		<section class="site-surface privacy-page__section">
 			<h2>Anonymous classroom counts</h2>
-			<p>
+			<p v-if="analyticsRetentionDays">
 				When school-authorized classroom counts are enabled, the CS and
 				Math sites may count a course opening once per selected course,
 				an IDE opening on the CS site, and a Graph Sketcher opening on
 				the Math site, once per browser tab each day. These are
 				anonymous daily totals. They logically expire and are excluded
-				from reports after the approved 7-to-90-day period. Database
+				from reports after {{ analyticsRetentionDays }} days. Database
 				cleanup is asynchronous, so physical removal may happen briefly
 				later.
+			</p>
+			<p v-else>
+				Anonymous classroom counts remain disabled until the school or
+				district approves a specific whole-number period from 7 through
+				90 days. No analytics retention default is assumed.
 			</p>
 			<p>
 				These counts do not include a username, account or access code,
@@ -362,12 +369,17 @@ const policyEffectiveDate = classroomPrivacyPolicyEffectiveDate();
 				</div>
 				<div>
 					<dt>Anonymous classroom totals</dt>
-					<dd>
+					<dd v-if="analyticsRetentionDays">
 						Needed only for Julio’s coarse classroom-usage view. The
-						row logically expires and is excluded after the approved
-						7-to-90-day period. It then becomes eligible for
-						asynchronous database deletion, so physical removal may
-						happen briefly later.
+						row logically expires and is excluded after
+						{{ analyticsRetentionDays }} days. It then becomes
+						eligible for asynchronous database deletion, so physical
+						removal may happen briefly later.
+					</dd>
+					<dd v-else>
+						Collection remains disabled until the school or district
+						selects a specific whole-number period from 7 through 90
+						days. No analytics retention default is assumed.
 					</dd>
 				</div>
 				<div>

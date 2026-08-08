@@ -112,6 +112,7 @@ cs_previous_revision="$(node -p "JSON.parse(require('node:fs').readFileSync(proc
 cs_previous_student_accounts_enabled="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).buildConfig.STUDENT_ACCOUNTS_ENABLED" "$cs_previous_target/native-release.json")"
 cs_previous_student_oauth_enabled="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).buildConfig.STUDENT_OAUTH_ENABLED" "$cs_previous_target/native-release.json")"
 cs_previous_classroom_analytics_enabled="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).buildConfig.CLASSROOM_ANALYTICS_COLLECTION_ENABLED" "$cs_previous_target/native-release.json")"
+cs_previous_classroom_analytics_retention_days="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).buildConfig.CLASSROOM_ANALYTICS_RETENTION_DAYS || ''" "$cs_previous_target/native-release.json")"
 
 # api.env is a root-owned deployment input and is deliberately shared with
 # systemd. Export it only inside this process, then force the fixed production
@@ -156,6 +157,7 @@ export VITE_CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE="${CLASSROOM_PRIVACY_POLICY_
 export VITE_CLASSROOM_PRIVACY_POLICY_VERSION="${CLASSROOM_PRIVACY_POLICY_VERSION:-}"
 export VITE_CLASSROOM_SERVICE_PROVIDER_NOTICE="${CLASSROOM_SERVICE_PROVIDER_NOTICE:-}"
 export VITE_CLASSROOM_USAGE_ENABLED="${CLASSROOM_ANALYTICS_COLLECTION_ENABLED:-false}"
+export VITE_CLASSROOM_ANALYTICS_RETENTION_DAYS="${CLASSROOM_ANALYTICS_RETENTION_DAYS:-}"
 export VITE_SCHOOL_PRIVACY_CONTACT="${SCHOOL_PRIVACY_CONTACT:-}"
 export VITE_STUDENT_ACCOUNTS_ENABLED="${STUDENT_ACCOUNTS_ENABLED:-false}"
 export VITE_STUDENT_OAUTH_ENABLED="${STUDENT_OAUTH_ENABLED:-false}"
@@ -175,6 +177,7 @@ done
 # child-process environment; credentials and runtime-only settings remain local
 # shell variables and cannot reach npm, Vite, or the release metadata writer.
 export CLASSROOM_ANALYTICS_COLLECTION_ENABLED="${CLASSROOM_ANALYTICS_COLLECTION_ENABLED:-false}"
+export CLASSROOM_ANALYTICS_RETENTION_DAYS="${CLASSROOM_ANALYTICS_RETENTION_DAYS:-}"
 export CLASSROOM_PRIVACY_APPROVED="${CLASSROOM_PRIVACY_APPROVED:-false}"
 export CLASSROOM_PRIVACY_OPERATOR_NOTICE="${CLASSROOM_PRIVACY_OPERATOR_NOTICE:-}"
 export CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE="${CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE:-}"
@@ -325,6 +328,7 @@ verify_release_health() {
 	local cs_expected_student_accounts="$4"
 	local cs_expected_student_oauth="$5"
 	local cs_expected_classroom_analytics="$6"
+	local cs_expected_classroom_analytics_retention_days="$7"
 	local cs_health_status=0
 
 	wait_for_api_readiness || cs_health_status=$?
@@ -338,6 +342,7 @@ verify_release_health() {
 		CS_EXPECT_STUDENT_ACCOUNTS_ENABLED="$cs_expected_student_accounts" \
 		CS_EXPECT_STUDENT_OAUTH_ENABLED="$cs_expected_student_oauth" \
 		CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED="$cs_expected_classroom_analytics" \
+		CS_EXPECT_CLASSROOM_ANALYTICS_RETENTION_DAYS="$cs_expected_classroom_analytics_retention_days" \
 		/usr/bin/node "$cs_health_release/scripts/post-deploy-smoke.mjs" \
 		|| cs_health_status=$?
 	return "$cs_health_status"
@@ -380,6 +385,7 @@ restore_previous() {
 		"$cs_previous_student_accounts_enabled" \
 		"$cs_previous_student_oauth_enabled" \
 		"$cs_previous_classroom_analytics_enabled" \
+		"$cs_previous_classroom_analytics_retention_days" \
 		|| cs_rollback_status=$?
 	if (( cs_rollback_status != 0 )); then
 		printf '%s\n' "Automatic rollback prior-release health verification failed with status $cs_rollback_status." >&2
@@ -435,6 +441,7 @@ verify_release_health \
 	"${STUDENT_ACCOUNTS_ENABLED:-false}" \
 	"${STUDENT_OAUTH_ENABLED:-false}" \
 	"${CLASSROOM_ANALYTICS_COLLECTION_ENABLED:-false}" \
+	"${CLASSROOM_ANALYTICS_RETENTION_DAYS:-}" \
 	|| cs_activation_status=$?
 if (( cs_activation_status != 0 )); then
 	fail_activation "Native release readiness or smoke gate failed" "$cs_activation_status"

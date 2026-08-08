@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
+	classroomAnalyticsRetentionDays,
 	classroomPrivacyPolicyEffectiveDate,
 	classroomPrivacyPolicyVersion,
 	classroomUsageIsEnabled,
@@ -14,6 +15,7 @@ describe("frontend classroom privacy gates", () => {
 	});
 
 	it("fails closed by default", () => {
+		expect(classroomAnalyticsRetentionDays()).toBeNull();
 		expect(classroomPrivacyPolicyVersion()).toBe("");
 		expect(classroomPrivacyPolicyEffectiveDate()).toBe("");
 		expect(studentAccountsAreEnabled()).toBe(false);
@@ -56,9 +58,12 @@ describe("frontend classroom privacy gates", () => {
 		);
 		expect(classroomPrivacyPolicyVersion()).toBe("2026-08-02.1");
 		expect(classroomPrivacyPolicyEffectiveDate()).toBe("2026-08-02");
-		expect(classroomUsageIsEnabled()).toBe(true);
+		expect(classroomUsageIsEnabled()).toBe(false);
 		expect(studentAccountsAreEnabled()).toBe(false);
 
+		vi.stubEnv("VITE_CLASSROOM_ANALYTICS_RETENTION_DAYS", "45");
+		expect(classroomAnalyticsRetentionDays()).toBe(45);
+		expect(classroomUsageIsEnabled()).toBe(true);
 		vi.stubEnv("VITE_STUDENT_RECORD_RETENTION_DAYS", "90");
 		expect(studentRecordMaintenanceIsEnabled()).toBe(true);
 		expect(studentAccountsAreEnabled()).toBe(true);
@@ -75,6 +80,7 @@ describe("frontend classroom privacy gates", () => {
 	])("fails closed for %s", (_label, version, effectiveDate) => {
 		vi.stubEnv("VITE_CLASSROOM_PRIVACY_APPROVED", "true");
 		vi.stubEnv("VITE_CLASSROOM_USAGE_ENABLED", "true");
+		vi.stubEnv("VITE_CLASSROOM_ANALYTICS_RETENTION_DAYS", "45");
 		vi.stubEnv("VITE_SCHOOL_PRIVACY_CONTACT", "School privacy contact");
 		vi.stubEnv("VITE_CLASSROOM_PRIVACY_OPERATOR_NOTICE", "Operator notice");
 		vi.stubEnv(
@@ -93,6 +99,7 @@ describe("frontend classroom privacy gates", () => {
 	it("keeps optional features hidden before the policy effective date", () => {
 		vi.stubEnv("VITE_CLASSROOM_PRIVACY_APPROVED", "true");
 		vi.stubEnv("VITE_CLASSROOM_USAGE_ENABLED", "true");
+		vi.stubEnv("VITE_CLASSROOM_ANALYTICS_RETENTION_DAYS", "45");
 		vi.stubEnv("VITE_STUDENT_ACCOUNTS_ENABLED", "true");
 		vi.stubEnv("VITE_STUDENT_RECORD_RETENTION_DAYS", "90");
 		vi.stubEnv("VITE_SCHOOL_PRIVACY_CONTACT", "School privacy contact");
@@ -109,6 +116,17 @@ describe("frontend classroom privacy gates", () => {
 
 		expect(studentAccountsAreEnabled()).toBe(false);
 		expect(classroomUsageIsEnabled()).toBe(false);
+	});
+
+	it("accepts only a canonical whole-number analytics retention period from 7 through 90", () => {
+		for (const value of ["7", "45", "90"]) {
+			vi.stubEnv("VITE_CLASSROOM_ANALYTICS_RETENTION_DAYS", value);
+			expect(classroomAnalyticsRetentionDays()).toBe(Number(value));
+		}
+		for (const value of ["6", "07", "90.0", "9e1", "+45", "91"]) {
+			vi.stubEnv("VITE_CLASSROOM_ANALYTICS_RETENTION_DAYS", value);
+			expect(classroomAnalyticsRetentionDays()).toBeNull();
+		}
 	});
 
 	it("never enables OAuth without optional accounts", () => {

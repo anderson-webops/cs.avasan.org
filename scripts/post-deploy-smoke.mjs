@@ -168,6 +168,90 @@ export function parseExpectedBoolean(value, name) {
 	return normalized === "true";
 }
 
+export function parseExpectedAnalyticsRetentionDays(value, collectionEnabled) {
+	const clean = value?.trim() ?? "";
+	if (!clean) {
+		assertion(
+			!collectionEnabled,
+			"CS_EXPECT_CLASSROOM_ANALYTICS_RETENTION_DAYS is required when classroom analytics are expected to be enabled."
+		);
+		return null;
+	}
+	assertion(
+		/^(?:[7-9]|[1-8]\d|90)$/.test(clean),
+		"CS_EXPECT_CLASSROOM_ANALYTICS_RETENTION_DAYS must be an integer from 7 to 90."
+	);
+	return Number(clean);
+}
+
+export function validateClassroomAnalyticsHealth(
+	health,
+	expectedCollectionEnabled,
+	expectedRetentionDays
+) {
+	assertion(
+		health
+		&& typeof health === "object"
+		&& !Array.isArray(health)
+		&& health.ok === true
+		&& health.classroomAnalytics
+		&& typeof health.classroomAnalytics === "object"
+		&& !Array.isArray(health.classroomAnalytics)
+		&& Object.keys(health.classroomAnalytics).sort().join(",")
+			=== "collectionEnabled,retentionDays"
+		&& health.classroomAnalytics.collectionEnabled
+			=== expectedCollectionEnabled
+		&& health.classroomAnalytics.retentionDays === expectedRetentionDays,
+		"The API health response did not report the exact analytics configuration."
+	);
+	return true;
+}
+
+export function validateStudentPrivacyRetention(
+	visibleText,
+	expectedRetentionDays
+) {
+	const narrativeClaims = [
+		...visibleText.matchAll(
+			/anonymous daily totals[.] They logically expire and are excluded from reports after (\d+) days[.]/gu
+		)
+	].map(match => Number(match[1]));
+	const tableClaims = [
+		...visibleText.matchAll(
+			/The row logically expires and is excluded after (\d+) days[.]/gu
+		)
+	].map(match => Number(match[1]));
+	if (expectedRetentionDays === null) {
+		assertion(
+			visibleText.includes(
+				"Anonymous classroom counts remain disabled until the school or district approves a specific whole-number period from 7 through 90 days. No analytics retention default is assumed."
+			)
+			&& visibleText.includes(
+				"Collection remains disabled until the school or district selects a specific whole-number period from 7 through 90 days. No analytics retention default is assumed."
+			)
+			&& narrativeClaims.length === 0
+			&& tableClaims.length === 0,
+			"Student Privacy did not disclose that analytics retention remains unconfigured and collection remains disabled."
+		);
+		return true;
+	}
+	assertion(
+		visibleText.includes(
+			`anonymous daily totals. They logically expire and are excluded from reports after ${expectedRetentionDays} days.`
+		)
+		&& visibleText.includes(
+			`The row logically expires and is excluded after ${expectedRetentionDays} days.`
+		)
+		&& narrativeClaims.length === 1
+		&& narrativeClaims[0] === expectedRetentionDays
+		&& tableClaims.length === 1
+		&& tableClaims[0] === expectedRetentionDays
+		&& !visibleText.includes("No analytics retention default is assumed."),
+		"Student Privacy did not disclose the exact configured analytics retention period."
+	);
+	return true;
+}
+
 const expectedStudentAccountsEnabled = parseExpectedBoolean(
 	process.env.CS_EXPECT_STUDENT_ACCOUNTS_ENABLED,
 	"CS_EXPECT_STUDENT_ACCOUNTS_ENABLED"
@@ -180,6 +264,11 @@ const expectedClassroomAnalyticsEnabled = parseExpectedBoolean(
 	process.env.CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED,
 	"CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED"
 );
+const expectedClassroomAnalyticsRetentionDays
+	= parseExpectedAnalyticsRetentionDays(
+		process.env.CS_EXPECT_CLASSROOM_ANALYTICS_RETENTION_DAYS,
+		expectedClassroomAnalyticsEnabled
+	);
 assertion(
 	!expectedStudentOAuthEnabled || expectedStudentAccountsEnabled,
 	"CS_EXPECT_STUDENT_OAUTH_ENABLED=true requires CS_EXPECT_STUDENT_ACCOUNTS_ENABLED=true."
@@ -310,6 +399,7 @@ async function verifySecurityHeaders() {
 async function verifyPublicRoutes() {
 	for (const path of [
 		"/",
+		"/student-privacy",
 		"/ide",
 		"/python-ide",
 		"/bluej",
@@ -419,8 +509,13 @@ async function verifyApiReadiness() {
 	const healthResponse = await request("/api/healthz");
 	const health = await readSmokeJson(healthResponse, "/api/healthz");
 	assertion(
-		healthResponse.ok && health.ok === true,
-		`/api/healthz returned HTTP ${healthResponse.status} or an invalid body.`
+		healthResponse.ok,
+		`/api/healthz returned HTTP ${healthResponse.status}.`
+	);
+	validateClassroomAnalyticsHealth(
+		health,
+		expectedClassroomAnalyticsEnabled,
+		expectedClassroomAnalyticsRetentionDays
 	);
 
 	const readyResponse = await request("/api/readyz");
@@ -428,6 +523,21 @@ async function verifyApiReadiness() {
 	assertion(
 		readyResponse.ok && readiness.ready === true,
 		`/api/readyz returned HTTP ${readyResponse.status} or an invalid body.`
+	);
+}
+
+async function verifyStudentPrivacyRetention() {
+	const path = "/student-privacy/";
+	const response = await request(path);
+	assertion(response.ok, `${path} returned HTTP ${response.status}`);
+	const visibleText = (await response.text())
+		.replace(/<(?:script|style)\b[^>]*>[\s\S]*?<\/(?:script|style)>/giu, " ")
+		.replace(/<[^>]*>/gu, " ")
+		.replace(/\s+/gu, " ")
+		.trim();
+	validateStudentPrivacyRetention(
+		visibleText,
+		expectedClassroomAnalyticsRetentionDays
 	);
 }
 
@@ -655,6 +765,8 @@ export async function runProductionSmoke() {
 	await verifyPublicRoutes();
 	currentSmokePhase = "API readiness";
 	await verifyApiReadiness();
+	currentSmokePhase = "student privacy retention";
+	await verifyStudentPrivacyRetention();
 	currentSmokePhase = "invalid Admin login";
 	await verifyInvalidAdminLogin();
 	currentSmokePhase = "Pond Paddlers boundary";

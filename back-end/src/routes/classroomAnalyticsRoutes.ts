@@ -6,7 +6,7 @@ import { createClassroomUsageLimiter } from "../middleware/rateLimiters.js";
 
 interface ClassroomAnalyticsRouteOptions {
 	collectionEnabled: boolean;
-	retentionDays: number;
+	retentionDays: number | null;
 }
 
 export function mountClassroomAnalyticsRoutes(app: Express, options: ClassroomAnalyticsRouteOptions): void {
@@ -17,6 +17,11 @@ export function mountClassroomAnalyticsRoutes(app: Express, options: ClassroomAn
 		next();
 	});
 	if (options.collectionEnabled) {
+		if (options.retentionDays === null) {
+			throw new Error(
+				"Classroom analytics collection requires a configured retention period."
+			);
+		}
 		const usageLimiter = createClassroomUsageLimiter();
 		router.post(
 			"/classroom-usage",

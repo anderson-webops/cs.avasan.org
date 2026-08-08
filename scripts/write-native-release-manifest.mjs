@@ -5,6 +5,7 @@ import { pathToFileURL } from "node:url";
 
 const configKeys = [
 	"CLASSROOM_ANALYTICS_COLLECTION_ENABLED",
+	"CLASSROOM_ANALYTICS_RETENTION_DAYS",
 	"CLASSROOM_PRIVACY_APPROVED",
 	"CLASSROOM_PRIVACY_OPERATOR_NOTICE",
 	"CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE",
@@ -17,6 +18,30 @@ const configKeys = [
 ];
 const versionPattern = /^(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-[0-9a-z.-]+)?$/i;
 const revisionPattern = /^[0-9a-f]{40}$/;
+
+function analyticsCollectionIsEnabled(value) {
+	return ["1", "true", "yes"].includes(value.trim().toLowerCase());
+}
+
+function validateAnalyticsRetention(buildConfig) {
+	const value = buildConfig.CLASSROOM_ANALYTICS_RETENTION_DAYS;
+	if (!value) {
+		if (analyticsCollectionIsEnabled(
+			buildConfig.CLASSROOM_ANALYTICS_COLLECTION_ENABLED
+		)) {
+			throw new Error(
+				"CLASSROOM_ANALYTICS_RETENTION_DAYS is required before classroom analytics can be enabled."
+			);
+		}
+		return;
+	}
+	const days = Number(value);
+	if (!/^(?:[7-9]|[1-8]\d|90)$/.test(value) || !Number.isSafeInteger(days) || days < 7 || days > 90) {
+		throw new Error(
+			"CLASSROOM_ANALYTICS_RETENTION_DAYS must be an integer from 7 to 90."
+		);
+	}
+}
 
 export function nativeReleaseManifest(environment = process.env) {
 	const version = environment.CS_RELEASE_VERSION?.replace(/^v/, "").trim();
@@ -31,6 +56,7 @@ export function nativeReleaseManifest(environment = process.env) {
 	const buildConfig = Object.fromEntries(
 		configKeys.map(key => [key, environment[key]?.trim() ?? ""])
 	);
+	validateAnalyticsRetention(buildConfig);
 	const configDigest = createHash("sha256")
 		.update(JSON.stringify(buildConfig))
 		.digest("hex");

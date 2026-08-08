@@ -26,6 +26,11 @@ on:
                 required: true
                 default: false
                 type: boolean
+            classroom_analytics_retention_days:
+                description: Exact approved analytics retention days (required when collection is enabled)
+                required: false
+                default: ""
+                type: string
 
 permissions:
     contents: read
@@ -52,6 +57,7 @@ jobs:
             - name: Verify CS production
               env:
                   CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED: ${{ inputs.classroom_analytics_collection_enabled }}
+                  CS_EXPECT_CLASSROOM_ANALYTICS_RETENTION_DAYS: ${{ inputs.classroom_analytics_retention_days }}
                   CS_EXPECTED_RELEASE: ${{ inputs.expected_release }}
                   CS_EXPECTED_REVISION: ${{ inputs.expected_revision }}
                   CS_SITE_ORIGIN: https://cs.avasan.org

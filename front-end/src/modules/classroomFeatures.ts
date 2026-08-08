@@ -4,6 +4,8 @@ function enabled(value: string | undefined) {
 
 const MAX_PUBLIC_NOTICE_LENGTH = 2_000;
 const MAX_PRIVACY_POLICY_VERSION_LENGTH = 64;
+const MIN_CLASSROOM_ANALYTICS_RETENTION_DAYS = 7;
+const MAX_CLASSROOM_ANALYTICS_RETENTION_DAYS = 90;
 const MIN_STUDENT_RECORD_RETENTION_DAYS = 30;
 const MAX_STUDENT_RECORD_RETENTION_DAYS = 365;
 
@@ -101,6 +103,19 @@ export function studentRecordRetentionDays() {
 		: null;
 }
 
+export function classroomAnalyticsRetentionDays() {
+	const value = (
+		import.meta.env.VITE_CLASSROOM_ANALYTICS_RETENTION_DAYS ?? ""
+	).trim();
+	if (!/^(?:[7-9]|[1-8]\d|90)$/.test(value)) return null;
+	const days = Number(value);
+	return Number.isSafeInteger(days) &&
+		days >= MIN_CLASSROOM_ANALYTICS_RETENTION_DAYS &&
+		days <= MAX_CLASSROOM_ANALYTICS_RETENTION_DAYS
+		? days
+		: null;
+}
+
 function privacyIsApproved() {
 	return enabled(import.meta.env.VITE_CLASSROOM_PRIVACY_APPROVED);
 }
@@ -121,7 +136,8 @@ function publicNoticeIsComplete() {
  * Frontend features fail closed independently from the API. Production must
  * set approval, the reviewed public notices and policy metadata, and each
  * desired feature flag in both the frontend build and backend runtime.
- * Accounts additionally require the school-selected bounded retention period.
+ * Accounts and classroom analytics additionally require their respective
+ * school-selected bounded retention periods.
  */
 export function studentAccountsAreEnabled() {
 	return (
@@ -153,6 +169,7 @@ export function classroomUsageIsEnabled() {
 	return (
 		privacyIsApproved() &&
 		publicNoticeIsComplete() &&
+		classroomAnalyticsRetentionDays() !== null &&
 		enabled(import.meta.env.VITE_CLASSROOM_USAGE_ENABLED)
 	);
 }

@@ -33,7 +33,7 @@ import {
 	mountRuntimeAccountRoutes,
 	retainedStudentDeletionReceiptFilter
 } from "./routes/runtimeAccountRoutes.js";
-import { readClassroomAnalyticsRetentionDays } from "./security/classroomAnalytics.js";
+import { assertRetainedClassroomAnalyticsHasRetentionPeriod } from "./security/classroomAnalytics.js";
 import { readClassroomPrivacySettings } from "./security/classroomPrivacy.js";
 import { readBooleanSetting, readClassroomOrigin, readSessionSecret } from "./security/environment.js";
 import { selectMongoConnection } from "./security/mongoConnection.js";
@@ -57,8 +57,10 @@ async function main() {
 	const app = express();
 	const pondPaddlersRooms = new PondPaddlersRoomStore();
 	const internalDiagnosticsKey = readInternalDiagnosticsKey(env.INTERNAL_DIAGNOSTICS_KEY);
-	const classroomAnalyticsRetentionDays = readClassroomAnalyticsRetentionDays(env.CLASSROOM_ANALYTICS_RETENTION_DAYS);
 	const classroomPrivacy = readClassroomPrivacySettings(env);
+	const classroomAnalyticsRetentionDays = classroomPrivacy.analyticsRetentionDays;
+	const classroomAnalyticsRetentionConfigured
+		= classroomAnalyticsRetentionDays !== null;
 	const releaseMetadata = readReleaseMetadata(env);
 	if (classroomPrivacy.studentOAuthEnabled) {
 		enabledOAuthProviders();
@@ -68,7 +70,13 @@ async function main() {
 	// health
 	app.get("/healthz", (_req, res) => {
 		res.set("Cache-Control", "no-store");
-		res.json({ ok: true });
+		res.json({
+			classroomAnalytics: {
+				collectionEnabled: classroomPrivacy.analyticsCollectionEnabled,
+				retentionDays: classroomAnalyticsRetentionDays
+			},
+			ok: true
+		});
 	});
 	app.get("/release", (_req, res) => {
 		res.set("Cache-Control", "no-store");
@@ -273,7 +281,16 @@ async function main() {
 					studentRecordsExist: false
 				};
 	assertRetainedStudentDataHasRetentionPeriod(classroomPrivacy.studentRecordRetentionDays, retainedStudentData);
-	await enforceClassroomAnalyticsRetention(classroomAnalyticsRetentionDays);
+	const retainedClassroomAnalyticsRowsExist = classroomAnalyticsRetentionConfigured
+		? false
+		: Boolean(await ClassroomUsageDaily.exists({}));
+	assertRetainedClassroomAnalyticsHasRetentionPeriod(
+		classroomAnalyticsRetentionDays,
+		retainedClassroomAnalyticsRowsExist
+	);
+	if (classroomAnalyticsRetentionDays !== null) {
+		await enforceClassroomAnalyticsRetention(classroomAnalyticsRetentionDays);
+	}
 	await reconcilePythonProjectQuotas();
 	if (classroomPrivacy.studentRecordRetentionDays) {
 		await enforceStudentRecordRetention(classroomPrivacy.studentRecordRetentionDays);

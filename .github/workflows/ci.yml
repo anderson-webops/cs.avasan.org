@@ -408,6 +408,7 @@ jobs:
                   CS_EXPECTED_RELEASE="${CS_RELEASE_VERSION}" \
                   CS_EXPECTED_REVISION="${SOURCE_REVISION}" \
                   CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED=false \
+                  CS_EXPECT_CLASSROOM_ANALYTICS_RETENTION_DAYS="" \
                   CS_EXPECT_STUDENT_ACCOUNTS_ENABLED=false \
                   CS_EXPECT_STUDENT_OAUTH_ENABLED=false \
                   CS_SITE_ORIGIN="${origin}" \

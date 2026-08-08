@@ -32,7 +32,7 @@ import { withStudentDataWriteLease } from "../security/studentDataWriteBarrier.j
 import { withStudentRecordMutationLease } from "../security/studentRecordMutationBarrier.js";
 
 export interface AdminRouteOptions {
-	analyticsRetentionDays: number;
+	analyticsRetentionDays: number | null;
 	projectRequestsPreauthorized?: boolean;
 	studentAccountsEnabled: boolean;
 	studentRecordMaintenanceEnabled: boolean;
