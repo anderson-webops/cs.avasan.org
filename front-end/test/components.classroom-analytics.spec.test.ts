@@ -100,4 +100,18 @@ describe("ClassroomAnalytics", () => {
 
 		expect(fetchAdminClassroomAnalytics).toHaveBeenLastCalledWith(7);
 	});
+
+	it("does not invent a retention period when analytics are unconfigured", async () => {
+		vi.mocked(fetchAdminClassroomAnalytics).mockResolvedValue({
+			...summary,
+			retentionDays: null
+		} as any);
+		const wrapper = mount(ClassroomAnalytics);
+		await flushPromises();
+
+		expect(wrapper.text()).toContain(
+			"Anonymous collection is disabled, and no retention period is configured."
+		);
+		expect(wrapper.text()).not.toContain("expire within 30 days");
+	});
 });

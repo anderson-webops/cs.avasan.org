@@ -108,11 +108,14 @@ student-data feature until all of the following are complete:
    timeframes and has been reviewed in the deployed site.
 7. For accounts, the authorized reviewer has selected a whole-number record
    retention period from 30 through 365 days. There is no application default.
-8. The school or district has supplied its record-access, correction, export,
+8. For anonymous classroom totals, the authorized reviewer has selected a
+   whole-number retention period from 7 through 90 days. There is no collection
+   retention default.
+9. The school or district has supplied its record-access, correction, export,
    deletion, backup, security-log, and end-of-service retention process.
-9. Julio understands that anonymous totals are directional signals, not
+10. Julio understands that anonymous totals are directional signals, not
    attendance, grades, or evidence about an individual student.
-10. The operator-issued direct notice, identified affirmative school
+11. The operator-issued direct notice, identified affirmative school
     authorization, current security-program evidence, provider contracts, and
     material-change review described in this runbook are stored in the
     school's approved compliance system.
@@ -124,7 +127,9 @@ The backend requires `CLASSROOM_PRIVACY_APPROVED=true`,
 version is a 1-to-64-character token and the effective date must be a real,
 current-or-past `YYYY-MM-DD` calendar date. Accounts additionally require a
 whole-number `STUDENT_RECORD_RETENTION_DAYS` value from 30 through 365. The
-canonical native deployer and the manually selected Compose fallback both
+analytics feature additionally requires a whole-number
+`CLASSROOM_ANALYTICS_RETENTION_DAYS` value from 7 through 90. The canonical
+native deployer and the manually selected Compose fallback both
 derive the frontend approval and feature switches directly from those
 canonical backend values and map the same contact, notices, policy metadata,
 and retention value into the
@@ -135,7 +140,7 @@ to drift. Missing or invalid configuration fails closed.
 | ----------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
 | Optional student accounts and Python sync | `STUDENT_ACCOUNTS_ENABLED=true` and `STUDENT_RECORD_RETENTION_DAYS=30..365`                  | Derived by the selected deployer from the same canonical values |
 | Apple or Google sign-in                   | `STUDENT_OAUTH_ENABLED=true` plus account flag, retention, and complete provider credentials | Derived by the selected deployer from the same canonical values |
-| Anonymous CS and Math counts              | `CLASSROOM_ANALYTICS_COLLECTION_ENABLED=true`                                                | Derived by the selected deployer from the same canonical value  |
+| Anonymous CS and Math counts              | `CLASSROOM_ANALYTICS_COLLECTION_ENABLED=true` and `CLASSROOM_ANALYTICS_RETENTION_DAYS=7..90` | Derived by the selected deployer from the same canonical values |
 
 OAuth is unavailable unless accounts are enabled. Provider apps must request
 only the OpenID identity needed for an opaque subject. Do not add email,
@@ -519,10 +524,14 @@ and reuses the same receipt. Legacy pending rows without that metadata are
 treated as Julio-requested deletions and receive stable metadata on their first
 retry.
 
-Anonymous daily rows are capped to the configured 7–90 day window at startup,
-on each write, and on summary reads. MongoDB TTL cleanup is asynchronous, so
-expired rows are excluded before physical cleanup and may remain physically
-present briefly afterward.
+Anonymous daily rows are capped to the exact configured 7–90-day period at
+startup, on each write, and on summary reads. MongoDB TTL cleanup is
+asynchronous, so expired rows are excluded before physical cleanup and may
+remain physically present briefly afterward.
+If collection is disabled while any row remains physically stored, including a
+logically expired row awaiting cleanup, startup still requires that exact
+period; it refuses to place retained analytics outside an active approved
+policy.
 
 Browsers make at most one reporting attempt per tab, fixed event, fixed course,
 and UTC day. The tab-local attempt marker is written before the request and is
@@ -550,7 +559,10 @@ When the classroom use ends:
 4. Set `STUDENT_ACCOUNTS_ENABLED`, `STUDENT_OAUTH_ENABLED`, and
    `CLASSROOM_ANALYTICS_COLLECTION_ENABLED` to `false`, while retaining the
    approved `STUDENT_RECORD_RETENTION_DAYS` until all account records and
-   still-available deletion receipts are gone, then rebuild the frontend.
+   still-available deletion receipts are gone and retaining the approved
+   `CLASSROOM_ANALYTICS_RETENTION_DAYS` until every anonymous row is physically
+   removed by cleanup or purged; logical expiry alone is not enough. Then
+   rebuild the frontend.
 5. Confirm student and OAuth HTTP routes return `404` and the header has no
    student sign-in control.
 6. While anonymous collection remains disabled, permanently remove its

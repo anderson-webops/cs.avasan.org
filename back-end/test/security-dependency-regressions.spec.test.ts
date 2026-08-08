@@ -10,7 +10,7 @@ import {
 	requireInternalDiagnostics
 } from "../src/middleware/internalDiagnostics.js";
 import {
-	DEFAULT_CLASSROOM_ANALYTICS_RETENTION_DAYS,
+	assertRetainedClassroomAnalyticsHasRetentionPeriod,
 	readClassroomAnalyticsRetentionDays
 } from "../src/security/classroomAnalytics.js";
 import {
@@ -96,12 +96,34 @@ describe("security dependency regressions", () => {
 		expect(readSessionSecret("x".repeat(32), true)).toBe("x".repeat(32));
 	});
 
-	it("bounds anonymous analytics retention", () => {
-		expect(readClassroomAnalyticsRetentionDays(undefined)).toBe(DEFAULT_CLASSROOM_ANALYTICS_RETENTION_DAYS);
+	it("requires an explicit canonical analytics retention period when collection is enabled", () => {
+		expect(readClassroomAnalyticsRetentionDays(undefined)).toBeNull();
+		expect(() => readClassroomAnalyticsRetentionDays(undefined, true)).toThrow(
+			"is required before classroom analytics can be enabled"
+		);
+		expect(() => readClassroomAnalyticsRetentionDays("   ", true)).toThrow(
+			"is required before classroom analytics can be enabled"
+		);
 		expect(readClassroomAnalyticsRetentionDays("7")).toBe(7);
+		expect(readClassroomAnalyticsRetentionDays(" 45 ", true)).toBe(45);
 		expect(readClassroomAnalyticsRetentionDays("90")).toBe(90);
-		expect(() => readClassroomAnalyticsRetentionDays("6")).toThrow("must be an integer from 7 to 90");
-		expect(() => readClassroomAnalyticsRetentionDays("91")).toThrow("must be an integer from 7 to 90");
+		for (const value of ["6", "07", "90.0", "9e1", "+45", "91"]) {
+			expect(() => readClassroomAnalyticsRetentionDays(value, true)).toThrow(
+				"must be an integer from 7 to 90"
+			);
+		}
+	});
+
+	it("refuses to strand retained analytics after the approved period is removed", () => {
+		expect(() =>
+			assertRetainedClassroomAnalyticsHasRetentionPeriod(null, true)
+		).toThrow("retained analytics outside an approved retention policy");
+		expect(() =>
+			assertRetainedClassroomAnalyticsHasRetentionPeriod(45, true)
+		).not.toThrow();
+		expect(() =>
+			assertRetainedClassroomAnalyticsHasRetentionPeriod(null, false)
+		).not.toThrow();
 	});
 
 	it("does not trust forwarded client addresses unless proxy hops are explicitly configured", () => {

@@ -8,7 +8,7 @@ import { createAdminRoutes } from "./adminRoutes.js";
 import { createStudentRoutes } from "./studentRoutes.js";
 
 export interface RuntimeAccountRouteOptions {
-	analyticsRetentionDays: number;
+	analyticsRetentionDays: number | null;
 	projectRequestsPreauthorized?: boolean;
 	studentAccountsEnabled: boolean;
 	studentOAuthEnabled: boolean;

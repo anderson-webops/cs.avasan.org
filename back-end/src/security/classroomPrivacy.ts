@@ -1,3 +1,4 @@
+import { readClassroomAnalyticsRetentionDays } from "./classroomAnalytics.js";
 import { readBooleanSetting } from "./environment.js";
 
 const MAX_PRIVACY_CONTACT_LENGTH = 500;
@@ -8,6 +9,7 @@ export const MAX_STUDENT_RECORD_RETENTION_DAYS = 365;
 
 export interface ClassroomPrivacySettings {
 	analyticsCollectionEnabled: boolean;
+	analyticsRetentionDays: number | null;
 	operatorNotice: string | null;
 	privacyPolicyEffectiveDate: string | null;
 	privacyPolicyVersion: string | null;
@@ -20,6 +22,7 @@ export interface ClassroomPrivacySettings {
 
 export interface ClassroomPrivacyEnvironment {
 	CLASSROOM_ANALYTICS_COLLECTION_ENABLED?: string;
+	CLASSROOM_ANALYTICS_RETENTION_DAYS?: string;
 	CLASSROOM_PRIVACY_OPERATOR_NOTICE?: string;
 	CLASSROOM_PRIVACY_APPROVED?: string;
 	CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE?: string;
@@ -156,7 +159,7 @@ function studentRecordRetentionDays(
  * Resolve the three optional student-data features as a single fail-closed
  * rollout decision. A bare feature flag is insufficient: the school/district
  * approval flag, direct privacy contact, reviewed operator/provider notices,
- * bounded policy version, real policy effective date, and, for accounts, an
+ * bounded policy version, real policy effective date, and the feature's
  * explicit bounded retention period must also be present.
  */
 export function readClassroomPrivacySettings(
@@ -247,10 +250,15 @@ export function readClassroomPrivacySettings(
 		environment.STUDENT_RECORD_RETENTION_DAYS,
 		studentAccountsRequested
 	);
+	const analyticsRetentionDays = readClassroomAnalyticsRetentionDays(
+		environment.CLASSROOM_ANALYTICS_RETENTION_DAYS,
+		analyticsCollectionRequested
+	);
 
 	return {
 		analyticsCollectionEnabled:
 			privacyApproved && analyticsCollectionRequested,
+		analyticsRetentionDays,
 		operatorNotice,
 		privacyPolicyEffectiveDate: policyEffectiveDate,
 		privacyPolicyVersion: policyVersion,

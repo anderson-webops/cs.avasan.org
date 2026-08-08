@@ -21,6 +21,7 @@ const routeScenarios = [
 		routes: runFullMatrix
 			? [
 					"/",
+					"/student-privacy",
 					"/login",
 					"/ide",
 					"/games",
@@ -31,7 +32,7 @@ const routeScenarios = [
 					courseResourceRoute,
 					"/admin"
 				]
-			: ["/", "/admin"]
+			: ["/", "/student-privacy", "/admin"]
 	},
 	{
 		name: "teacher",
@@ -243,7 +244,7 @@ function createMockApiServer() {
 								startDate: "2026-06-30",
 								endDate: "2026-07-29"
 							},
-							retentionDays: 90,
+							retentionDays: 45,
 							siteActivity: {
 								cs: structuredClone(siteActivity),
 								math: structuredClone(siteActivity)
@@ -351,7 +352,9 @@ function startVite() {
 				VITE_STUDENT_RECORD_RETENTION_DAYS:
 					process.env.VITE_STUDENT_RECORD_RETENTION_DAYS ?? "90",
 				VITE_CLASSROOM_USAGE_ENABLED:
-					process.env.VITE_CLASSROOM_USAGE_ENABLED ?? "false"
+					process.env.VITE_CLASSROOM_USAGE_ENABLED ?? "false",
+				VITE_CLASSROOM_ANALYTICS_RETENTION_DAYS:
+					process.env.VITE_CLASSROOM_ANALYTICS_RETENTION_DAYS ?? "45"
 			},
 			stdio: ["ignore", "pipe", "pipe"]
 		}
@@ -403,6 +406,32 @@ async function stopChild(child) {
 
 	killChild(child, "SIGKILL");
 	await Promise.race([waitForChildExit(child), new Promise(resolve => setTimeout(resolve, 2_000))]);
+}
+
+async function stopBrowser(browserInstance) {
+	const browserProcess = browserInstance.process();
+	const closed = await Promise.race([
+		browserInstance.close().then(() => true, () => false),
+		new Promise(resolve => setTimeout(() => resolve(false), 5_000))
+	]);
+	if (closed || !browserProcess) return;
+
+	// A wedged DevTools close can keep Puppeteer's pipe handles alive even
+	// after Chrome exits. Disconnect before terminating the owned browser so
+	// the validation process can finish deterministically.
+	browserInstance.disconnect();
+	browserProcess.kill("SIGTERM");
+	const exited = await Promise.race([
+		waitForChildExit(browserProcess).then(() => true),
+		new Promise(resolve => setTimeout(() => resolve(false), 3_000))
+	]);
+	if (exited) return;
+
+	browserProcess.kill("SIGKILL");
+	await Promise.race([
+		waitForChildExit(browserProcess),
+		new Promise(resolve => setTimeout(resolve, 2_000))
+	]);
 }
 
 const transientNavigationError =
@@ -571,7 +600,7 @@ try {
 		process.exitCode = 1;
 	}
 } finally {
-	if (browser) await browser.close();
+	if (browser) await stopBrowser(browser);
 	await stopChild(viteProcess);
 	apiServer.closeAllConnections?.();
 	await closeServer(apiServer);

@@ -30,7 +30,7 @@ export interface ClassroomAnalyticsSummary {
 		startDate: string;
 		endDate: string;
 	};
-	retentionDays: number;
+	retentionDays: number | null;
 	siteActivity: {
 		cs: ClassroomSiteActivity;
 		math: ClassroomSiteActivity;

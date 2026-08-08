@@ -60,6 +60,7 @@ function runSourceVerifier(directory) {
 
 const buildConfig = Object.freeze({
 	CLASSROOM_ANALYTICS_COLLECTION_ENABLED: "false",
+	CLASSROOM_ANALYTICS_RETENTION_DAYS: "",
 	CLASSROOM_PRIVACY_APPROVED: "false",
 	CLASSROOM_PRIVACY_OPERATOR_NOTICE: "",
 	CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE: "",
@@ -70,20 +71,29 @@ const buildConfig = Object.freeze({
 	STUDENT_OAUTH_ENABLED: "false",
 	STUDENT_RECORD_RETENTION_DAYS: ""
 });
+const legacyDisabledBuildConfig = Object.freeze(Object.fromEntries(
+	Object.entries(buildConfig).filter(
+		([name]) => name !== "CLASSROOM_ANALYTICS_RETENTION_DAYS"
+	)
+));
 
-function publicEnvironment() {
-	return `${Object.entries(buildConfig)
+function publicEnvironment(selectedBuildConfig = buildConfig) {
+	return `${Object.entries(selectedBuildConfig)
 		.map(([name, value]) => `${name}="${value}"`)
 		.join("\n")}\n`;
 }
 
-async function nativeReleaseFixture(t) {
+async function nativeReleaseFixture(
+	t,
+	selectedBuildConfig = buildConfig,
+	version = "2.7.999"
+) {
 	const temporaryRoot = await mkdtemp(join(tmpdir(), "cs-native-target-"));
 	t.after(async () => rm(temporaryRoot, { force: true, recursive: true }));
 	const releaseRoot = join(temporaryRoot, "cs.avasan.org");
 	const revision = "a".repeat(40);
 	const configDigest = createHash("sha256")
-		.update(JSON.stringify(buildConfig))
+		.update(JSON.stringify(selectedBuildConfig))
 		.digest("hex");
 	const candidate = join(releaseRoot, "releases", `${revision}-${configDigest}`);
 	for (const directory of [
@@ -100,19 +110,19 @@ async function nativeReleaseFixture(t) {
 		"back-end/dist/server.js": "export {};\n",
 		"front-end/package.json": "{\"name\":\"front-end\",\"private\":true}\n",
 		"native-release.json": `${JSON.stringify({
-			buildConfig,
+			buildConfig: selectedBuildConfig,
 			configDigest,
 			revision,
-			version: "2.7.999"
+			version
 		}, null, 2)}\n`,
 		"node_modules/runtime-package/tool.js": "export {};\n",
 		"package-lock.json": "{\"name\":\"cs-avasan-org\",\"lockfileVersion\":3}\n",
-		"package.json": "{\"name\":\"cs-avasan-org\",\"version\":\"2.7.999\"}\n",
+		"package.json": `${JSON.stringify({ name: "cs-avasan-org", version })}\n`,
 		"public/404.html": "<h1>Page not found</h1>\n",
 		"public/index.html": "<h1>Computer Science with Julio</h1>\n",
-		"public/release.json": `${JSON.stringify({ revision, version: "2.7.999" }, null, 2)}\n`,
-		"public-config.env": publicEnvironment(),
-		"release.env": `CS_RELEASE_VERSION=2.7.999\nSOURCE_REVISION=${revision}\n`,
+		"public/release.json": `${JSON.stringify({ revision, version }, null, 2)}\n`,
+		"public-config.env": publicEnvironment(selectedBuildConfig),
+		"release.env": `CS_RELEASE_VERSION=${version}\nSOURCE_REVISION=${revision}\n`,
 		"scripts/post-deploy-smoke.mjs": "export {};\n",
 		"scripts/verify-native-runtime-config.mjs": "export {};\n"
 	};
@@ -264,6 +274,53 @@ test("native release target accepts an immutable internal workspace tree", async
 
 	assert.equal(result.candidate, await realpath(fixture.candidate));
 	assert.equal(result.manifest.version, "2.7.999");
+});
+
+test("native release target accepts only disabled pre-retention rollback manifests", async (t) => {
+	const expectedOwner = process.getuid?.() ?? 0;
+	for (const version of ["2.7.113", "2.7.114"]) {
+		const disabledFixture = await nativeReleaseFixture(
+			t,
+			legacyDisabledBuildConfig,
+			version
+		);
+		await assert.doesNotReject(
+			verifyNativeReleaseTarget(
+				disabledFixture.candidate,
+				disabledFixture.releaseRoot,
+				{ expectedOwner }
+			)
+		);
+	}
+
+	for (const version of ["2.7.115", "2.7.999"]) {
+		const currentFixture = await nativeReleaseFixture(
+			t,
+			legacyDisabledBuildConfig,
+			version
+		);
+		await assert.rejects(
+			verifyNativeReleaseTarget(
+				currentFixture.candidate,
+				currentFixture.releaseRoot,
+				{ expectedOwner }
+			),
+			/unexpected build configuration/u
+		);
+	}
+
+	const enabledFixture = await nativeReleaseFixture(t, {
+		...legacyDisabledBuildConfig,
+		CLASSROOM_ANALYTICS_COLLECTION_ENABLED: "true"
+	}, "2.7.114");
+	await assert.rejects(
+		verifyNativeReleaseTarget(
+			enabledFixture.candidate,
+			enabledFixture.releaseRoot,
+			{ expectedOwner }
+		),
+		/unexpected build configuration/u
+	);
 });
 
 test("native release target rejects symlink, identity, mode, and containment manipulation", async (t) => {

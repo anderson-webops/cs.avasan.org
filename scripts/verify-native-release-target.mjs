@@ -8,6 +8,7 @@ import { pathToFileURL } from "node:url";
 
 const configKeys = Object.freeze([
 	"CLASSROOM_ANALYTICS_COLLECTION_ENABLED",
+	"CLASSROOM_ANALYTICS_RETENTION_DAYS",
 	"CLASSROOM_PRIVACY_APPROVED",
 	"CLASSROOM_PRIVACY_OPERATOR_NOTICE",
 	"CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE",
@@ -18,6 +19,9 @@ const configKeys = Object.freeze([
 	"STUDENT_OAUTH_ENABLED",
 	"STUDENT_RECORD_RETENTION_DAYS"
 ]);
+const legacyConfigKeys = Object.freeze(
+	configKeys.filter(name => name !== "CLASSROOM_ANALYTICS_RETENTION_DAYS")
+);
 const allowedTopLevelEntries = new Set([
 	"back-end",
 	"front-end",
@@ -55,6 +59,7 @@ const requiredFiles = Object.freeze([
 const versionPattern = /^(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-[0-9A-Za-z.-]+)?$/u;
 const revisionPattern = /^[0-9a-f]{40}$/u;
 const digestPattern = /^[0-9a-f]{64}$/u;
+const lastPreRetentionContractVersion = Object.freeze([2, 7, 114]);
 
 function fail(message) {
 	throw new Error(`Native release target verification failed: ${message}`);
@@ -62,6 +67,20 @@ function fail(message) {
 
 function isPlainObject(value) {
 	return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+function isPreRetentionContractVersion(version) {
+	const versionParts = version
+		.split("-", 1)[0]
+		.split(".")
+		.map(Number);
+	for (let index = 0; index < lastPreRetentionContractVersion.length; index += 1) {
+		const difference
+			= (versionParts[index] ?? 0)
+				- (lastPreRetentionContractVersion[index] ?? 0);
+		if (difference !== 0) return difference < 0;
+	}
+	return true;
 }
 
 async function lstatOrFail(target, description) {
@@ -87,8 +106,8 @@ async function requireFile(candidate, relativePath) {
 	return absolutePath;
 }
 
-function publicEnvironment(buildConfig) {
-	return `${configKeys
+function publicEnvironment(buildConfig, selectedConfigKeys) {
+	return `${selectedConfigKeys
 		.map((name) => {
 			const value = buildConfig[name];
 			if (/[\r\n]/u.test(value)) {
@@ -98,6 +117,23 @@ function publicEnvironment(buildConfig) {
 			return `${name}="${quoted}"`;
 		})
 		.join("\n")}\n`;
+}
+
+function verifyAnalyticsRetention(buildConfig) {
+	const collectionEnabled = ["1", "true", "yes"].includes(
+		buildConfig.CLASSROOM_ANALYTICS_COLLECTION_ENABLED.trim().toLowerCase()
+	);
+	const value = buildConfig.CLASSROOM_ANALYTICS_RETENTION_DAYS;
+	if (!value) {
+		if (collectionEnabled) {
+			fail("classroom analytics are enabled without an explicit retention period");
+		}
+		return;
+	}
+	const days = Number(value);
+	if (!/^(?:[7-9]|[1-8]\d|90)$/.test(value) || !Number.isSafeInteger(days) || days < 7 || days > 90) {
+		fail("classroom analytics retention must be an integer from 7 to 90");
+	}
 }
 
 async function verifyIdentity(candidate) {
@@ -127,15 +163,35 @@ async function verifyIdentity(candidate) {
 		fail("native-release.json is missing its build configuration");
 	}
 	const actualConfigKeys = Object.keys(manifest.buildConfig).sort();
-	const expectedConfigKeys = [...configKeys].sort();
-	if (JSON.stringify(actualConfigKeys) !== JSON.stringify(expectedConfigKeys)) {
+	const currentConfigKeys = [...configKeys].sort();
+	const oldConfigKeys = [...legacyConfigKeys].sort();
+	const legacyAnalyticsSetting
+		= manifest.buildConfig.CLASSROOM_ANALYTICS_COLLECTION_ENABLED;
+	let selectedConfigKeys;
+	if (JSON.stringify(actualConfigKeys) === JSON.stringify(currentConfigKeys)) {
+		selectedConfigKeys = configKeys;
+	}
+	else if (
+		JSON.stringify(actualConfigKeys) === JSON.stringify(oldConfigKeys)
+		&& isPreRetentionContractVersion(manifest.version)
+		&& typeof legacyAnalyticsSetting === "string"
+		&& !["1", "true", "yes"].includes(
+			legacyAnalyticsSetting.trim().toLowerCase()
+		)
+	) {
+		// Releases built before the explicit-retention contract remain valid
+		// rollback targets only when analytics collection was disabled.
+		selectedConfigKeys = legacyConfigKeys;
+	}
+	else {
 		fail("native-release.json has an unexpected build configuration");
 	}
-	for (const name of configKeys) {
+	for (const name of selectedConfigKeys) {
 		if (typeof manifest.buildConfig[name] !== "string") {
 			fail(`build configuration ${name} is not a string`);
 		}
 	}
+	verifyAnalyticsRetention(manifest.buildConfig);
 	const configDigest = createHash("sha256")
 		.update(JSON.stringify(manifest.buildConfig))
 		.digest("hex");
@@ -154,7 +210,10 @@ async function verifyIdentity(candidate) {
 	if (releaseEnvironment !== expectedReleaseEnvironment) {
 		fail("release.env does not match native-release.json");
 	}
-	if (actualPublicEnvironment !== publicEnvironment(manifest.buildConfig)) {
+	if (actualPublicEnvironment !== publicEnvironment(
+		manifest.buildConfig,
+		selectedConfigKeys
+	)) {
 		fail("public-config.env does not match native-release.json");
 	}
 

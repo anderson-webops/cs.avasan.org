@@ -212,7 +212,7 @@ function activeStudentProjectActivity(activeStudentFilter: Record<string, unknow
 	]);
 }
 
-export function getClassroomAnalyticsSummary(retentionDays: number): RequestHandler {
+export function getClassroomAnalyticsSummary(retentionDays: number | null): RequestHandler {
 	return async (req, res) => {
 		res.set("Cache-Control", "no-store");
 		if (Object.keys(req.query).some(key => key !== "days")) {

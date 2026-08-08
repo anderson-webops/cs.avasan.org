@@ -2,9 +2,12 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
+	parseExpectedAnalyticsRetentionDays,
 	parseExpectedBoolean,
 	readSmokeJson,
+	validateClassroomAnalyticsHealth,
 	validateContentSecurityPolicy,
+	validateStudentPrivacyRetention,
 	verifyApiNotFound,
 	verifyBrandedNotFound
 } from "../../scripts/post-deploy-smoke.mjs";
@@ -59,7 +62,7 @@ describe("production smoke feature expectations", () => {
 	it("builds a secret-free native public configuration", () => {
 		const manifest = nativeReleaseManifest({
 			CLASSROOM_PRIVACY_APPROVED: "false",
-			CS_RELEASE_VERSION: "2.7.114",
+			CS_RELEASE_VERSION: "2.7.115",
 			MONGODB_URI: "mongodb://secret-value",
 			SESSION_SECRET: "secret-value",
 			SOURCE_REVISION: "a".repeat(40),
@@ -73,6 +76,7 @@ describe("production smoke feature expectations", () => {
 			'CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE=""'
 		);
 		expect(environment).toContain('STUDENT_ACCOUNTS_ENABLED="false"');
+		expect(environment).toContain('CLASSROOM_ANALYTICS_RETENTION_DAYS=""');
 		expect(environment).not.toContain("MONGODB_URI");
 		expect(environment).not.toContain("SESSION_SECRET");
 		expect(environment).not.toContain("secret-value");
@@ -80,6 +84,27 @@ describe("production smoke feature expectations", () => {
 			...manifest,
 			buildConfig: { ...manifest.buildConfig, SCHOOL_PRIVACY_CONTACT: "line one\nline two" }
 		})).toThrow("must stay on one line");
+	});
+
+	it("refuses native analytics collection without one explicit retention period", () => {
+		const identity = {
+			CLASSROOM_ANALYTICS_COLLECTION_ENABLED: "true",
+			CS_RELEASE_VERSION: "2.7.115",
+			SOURCE_REVISION: "a".repeat(40)
+		};
+		expect(() => nativeReleaseManifest(identity)).toThrow(
+			"CLASSROOM_ANALYTICS_RETENTION_DAYS is required"
+		);
+		for (const value of ["6", "07", "90.0", "9e1", "+45", "91"]) {
+			expect(() => nativeReleaseManifest({
+				...identity,
+				CLASSROOM_ANALYTICS_RETENTION_DAYS: value
+			})).toThrow("must be an integer from 7 to 90");
+		}
+		expect(nativeReleaseManifest({
+			...identity,
+			CLASSROOM_ANALYTICS_RETENTION_DAYS: "45"
+		}).buildConfig.CLASSROOM_ANALYTICS_RETENTION_DAYS).toBe("45");
 	});
 
 	it("defaults omitted feature expectations to disabled", () => {
@@ -95,6 +120,59 @@ describe("production smoke feature expectations", () => {
 		expect(() => parseExpectedBoolean("1", "FEATURE")).toThrow(
 			"FEATURE must be either true or false."
 		);
+	});
+
+	it("requires the exact analytics retention expectation when collection is enabled", () => {
+		expect(parseExpectedAnalyticsRetentionDays(undefined, false)).toBeNull();
+		expect(parseExpectedAnalyticsRetentionDays(" 45 ", true)).toBe(45);
+		expect(() => parseExpectedAnalyticsRetentionDays(undefined, true)).toThrow(
+			"is required when classroom analytics are expected to be enabled"
+		);
+		for (const value of ["6", "07", "90.0", "9e1", "+45", "91"]) {
+			expect(() => parseExpectedAnalyticsRetentionDays(value, false)).toThrow(
+				"must be an integer from 7 to 90"
+			);
+		}
+	});
+
+	it("compares the backend and Student Privacy with the exact retention expectation", () => {
+		expect(validateClassroomAnalyticsHealth({
+			classroomAnalytics: {
+				collectionEnabled: true,
+				retentionDays: 45
+			},
+			ok: true
+		}, true, 45)).toBe(true);
+		expect(() => validateClassroomAnalyticsHealth({
+			classroomAnalytics: {
+				collectionEnabled: true,
+				retentionDays: 90
+			},
+			ok: true
+		}, true, 45)).toThrow("exact analytics configuration");
+
+		const configuredNotice = [
+			"These are anonymous daily totals. They logically expire and are excluded from reports after 45 days.",
+			"The row logically expires and is excluded after 45 days."
+		].join(" ");
+		expect(validateStudentPrivacyRetention(configuredNotice, 45)).toBe(true);
+		expect(() => validateStudentPrivacyRetention(configuredNotice, 30)).toThrow(
+			"exact configured analytics retention period"
+		);
+		const staleNotice = configuredNotice.replaceAll("45 days", "90 days");
+		expect(() => validateStudentPrivacyRetention(
+			`${configuredNotice} ${staleNotice}`,
+			45
+		)).toThrow("exact configured analytics retention period");
+		const disabledNotice = [
+			"Anonymous classroom counts remain disabled until the school or district approves a specific whole-number period from 7 through 90 days. No analytics retention default is assumed.",
+			"Collection remains disabled until the school or district selects a specific whole-number period from 7 through 90 days. No analytics retention default is assumed."
+		].join(" ");
+		expect(validateStudentPrivacyRetention(disabledNotice, null)).toBe(true);
+		expect(() => validateStudentPrivacyRetention(
+			`${disabledNotice} ${configuredNotice}`,
+			null
+		)).toThrow("retention remains unconfigured");
 	});
 
 	it("accepts only the exact standard and IDE security policies", () => {

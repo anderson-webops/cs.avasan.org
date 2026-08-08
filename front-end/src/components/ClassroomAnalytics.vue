@@ -249,8 +249,15 @@ onMounted(loadSummary);
 			</details>
 
 			<p class="classroom-analytics__meta">
-				Generated {{ formatGeneratedAt(summary.generatedAt) }}. Daily
-				anonymous rows expire within {{ summary.retentionDays }} days.
+				Generated {{ formatGeneratedAt(summary.generatedAt) }}.
+				<template v-if="summary.retentionDays !== null">
+					Daily anonymous rows expire within
+					{{ summary.retentionDays }} days.
+				</template>
+				<template v-else>
+					Anonymous collection is disabled, and no retention period is
+					configured.
+				</template>
 			</p>
 		</template>
 	</section>

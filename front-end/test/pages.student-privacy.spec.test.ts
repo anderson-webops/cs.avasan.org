@@ -8,6 +8,7 @@ describe("student privacy page", () => {
 	});
 
 	it("explains the classroom's minimal collection in plain language", () => {
+		vi.stubEnv("VITE_CLASSROOM_ANALYTICS_RETENTION_DAYS", "45");
 		const wrapper = mount(StudentPrivacyPage);
 		const text = wrapper.text();
 
@@ -18,6 +19,9 @@ describe("student privacy page", () => {
 		expect(text).toContain("logically expire");
 		expect(text).toContain("excluded from reports");
 		expect(text).toContain("physical removal may happen briefly later");
+		expect(text).toContain("excluded from reports after 45 days");
+		expect(text).toContain("row logically expires and is excluded after 45 days");
+		expect(text).not.toContain("No analytics retention default is assumed");
 		expect(text).toContain("up to five minutes");
 		expect(text).toContain("deleted when that five-minute window ends");
 		expect(text).toContain("not added to classroom analytics");
@@ -219,6 +223,19 @@ describe("student privacy page", () => {
 		);
 		expect(text).toContain("missing, invalid, or not yet effective");
 		expect(text).not.toMatch(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i);
+	});
+
+	it("keeps analytics disabled and assumes no retention period when none is approved", () => {
+		const text = mount(StudentPrivacyPage).text();
+
+		expect(text).toContain(
+			"Anonymous classroom counts remain disabled until the school or district approves a specific whole-number period from 7 through 90 days"
+		);
+		expect(text).toContain(
+			"Collection remains disabled until the school or district selects a specific whole-number period from 7 through 90 days"
+		);
+		expect(text.match(/No analytics retention default is assumed/g)).toHaveLength(2);
+		expect(text).not.toContain("approved 7-to-90-day period");
 	});
 
 	it("renders only the reviewed operator, provider, contact, and retention values", () => {
