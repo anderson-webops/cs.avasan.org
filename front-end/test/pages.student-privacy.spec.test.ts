@@ -41,6 +41,9 @@ describe("student privacy page", () => {
 		expect(text).toContain("follow Julio’s instructions");
 		expect(text).toContain("Close every IDE tab");
 		expect(text).toContain("Classroom games");
+		expect(text).toContain("T-Rex Runner uses locally hosted Chromium");
+		expect(text).toContain("make third-party game requests");
+		expect(text).toContain("connect to student accounts");
 		expect(text).toContain(
 			"do not save game play, send answers or scores"
 		);

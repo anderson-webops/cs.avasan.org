@@ -32,5 +32,6 @@ declare module 'vue' {
     StudentProjectReview: typeof import('./components/StudentProjectReview.vue')['default']
     TheFooter: typeof import('./components/TheFooter.vue')['default']
     TheHeader: typeof import('./components/TheHeader.vue')['default']
+    TRexRunnerGame: typeof import('./components/games/TRexRunnerGame.vue')['default']
   }
 }

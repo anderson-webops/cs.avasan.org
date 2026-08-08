@@ -1,0 +1,4 @@
+// Avasan standalone entrypoint. This file is not part of Chromium.
+import {Runner} from 'chromium://dino/offline.js';
+
+Runner.initializeInstance('#main-content');

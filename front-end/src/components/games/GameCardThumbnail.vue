@@ -1,5 +1,6 @@
 <script setup lang="ts">
-type GameCardThumbnailKind = "comet" | "crosswalk" | "machine" | "pond";
+type GameCardThumbnailKind =
+	"comet" | "crosswalk" | "machine" | "pond" | "trex";
 
 defineOptions({ name: "GameCardThumbnail" });
 
@@ -99,6 +100,23 @@ defineProps<{ kind: GameCardThumbnailKind }>();
 			</g>
 			<circle cx="151" cy="26" r="7" fill="#fde047" />
 			<circle cx="151" cy="45" r="7" fill="#60a5fa" />
+		</template>
+
+		<template v-else-if="kind === 'trex'">
+			<rect width="180" height="108" rx="18" fill="#f7f7f2" />
+			<path d="M0 87h180" stroke="#53565a" stroke-width="3" />
+			<path
+				d="M49 80V52h8V39h9V31h30v7h10v8h-8v7H80v8h9v19H76V68h-9v12Zm31-42h6v6h-6Z"
+				fill="#53565a"
+			/>
+			<path
+				d="M121 80V57h6v-8h5v8h6v23Zm4-31V39m8 18V44"
+				fill="#53565a"
+				stroke="#53565a"
+				stroke-linecap="square"
+				stroke-width="4"
+			/>
+			<path d="M21 87h17m111 0h15" stroke="#53565a" stroke-width="3" />
 		</template>
 
 		<template v-else>

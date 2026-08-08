@@ -50,10 +50,21 @@ context("Public classroom navigation", () => {
 			"Pond Paddlers",
 			"Crosswalk Critters",
 			"Machine Workshop",
-			"Comet Hopper"
+			"Comet Hopper",
+			"T-Rex Runner"
 		]) {
 			cy.contains("a", game).should("be.visible");
 		}
+
+		cy.contains("a", "T-Rex Runner").click();
+		cy.location("pathname").should("match", /^\/games\/t-rex-runner\/?$/);
+		cy.contains("h1", "T-Rex Runner").should("be.visible");
+		cy.get('iframe[title="T-Rex Runner game"]')
+			.should("be.visible")
+			.and("have.attr", "sandbox", "allow-scripts");
+		cy.contains("button", "Stop game").should("be.visible");
+		cy.contains("a", "All games").click();
+		cy.contains("h1", "Games").should("be.visible");
 
 		cy.get(".site-nav").should("not.contain", "Graphing");
 		cy.get(".site-nav").should("not.contain", "About");

@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import GameCardThumbnail from "@/components/games/GameCardThumbnail.vue";
 
-type GameCardThumbnailKind = "comet" | "crosswalk" | "machine" | "pond";
+type GameCardThumbnailKind =
+	"comet" | "crosswalk" | "machine" | "pond" | "trex";
 
 const games = [
 	{
@@ -31,6 +32,13 @@ const games = [
 		thumbnail: "comet",
 		title: "Comet Hopper",
 		to: "/games/comet-hopper"
+	},
+	{
+		description:
+			"Play Chromium's classic offline dinosaur runner, loaded privately from this site.",
+		thumbnail: "trex",
+		title: "T-Rex Runner",
+		to: "/games/t-rex-runner"
 	}
 ] satisfies Array<{
 	description: string;
