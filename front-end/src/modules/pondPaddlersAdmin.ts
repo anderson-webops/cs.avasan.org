@@ -8,6 +8,7 @@ export const POND_PADDLERS_OPERATIONS = [
 ] as const;
 
 export type PondPaddlersOperation = (typeof POND_PADDLERS_OPERATIONS)[number];
+export type PondPaddlersRaceFormat = "individual" | "team-device";
 
 export interface PondPaddlersAdminRoom {
 	calmMode: boolean;
@@ -18,6 +19,7 @@ export interface PondPaddlersAdminRoom {
 	maxOperand: number;
 	operations: PondPaddlersOperation[];
 	playerCount: number;
+	raceFormat: PondPaddlersRaceFormat;
 	roomCode: string;
 	status: "waiting" | "racing" | "finished";
 }
@@ -28,6 +30,7 @@ export interface CreatePondPaddlersRoomInput {
 	finishAt: number;
 	maxOperand: number;
 	operations: PondPaddlersOperation[];
+	raceFormat: PondPaddlersRaceFormat;
 }
 
 export async function listPondPaddlersRooms() {

@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import type {
 	PondPaddlersAdminRoom,
-	PondPaddlersOperation
+	PondPaddlersOperation,
+	PondPaddlersRaceFormat
 } from "@/modules/pondPaddlersAdmin";
-import { computed, nextTick, onMounted, ref } from "vue";
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 import { clearAdminSessionOnAuthorizationError } from "@/modules/adminSession";
 import {
 	closePondPaddlersRoom,
@@ -16,13 +17,44 @@ import { useAppStore } from "@/stores/app";
 
 defineOptions({ name: "PondPaddlersAdmin" });
 
+type QuestionPreset = "challenge" | "custom" | "mixed" | "starter";
+
+const POND_PADDLERS_STUDENT_URL = "https://cs.avasan.org/games/pond-paddlers";
+const LOBBY_REFRESH_INTERVAL_MS = 5_000;
+const QUESTION_PRESETS: Record<
+	Exclude<QuestionPreset, "custom">,
+	{
+		finishAt: number;
+		maxOperand: number;
+		operations: PondPaddlersOperation[];
+	}
+> = {
+	challenge: {
+		finishAt: 15,
+		maxOperand: 20,
+		operations: [...POND_PADDLERS_OPERATIONS]
+	},
+	mixed: {
+		finishAt: 10,
+		maxOperand: 10,
+		operations: [...POND_PADDLERS_OPERATIONS]
+	},
+	starter: {
+		finishAt: 5,
+		maxOperand: 10,
+		operations: ["add", "subtract"]
+	}
+};
+
 const app = useAppStore();
 const rooms = ref<PondPaddlersAdminRoom[]>([]);
 const operations = ref<PondPaddlersOperation[]>([...POND_PADDLERS_OPERATIONS]);
-const maxOperand = ref(20);
+const maxOperand = ref(10);
 const finishAt = ref(10);
 const durationMinutes = ref(60);
 const calmMode = ref(true);
+const raceFormat = ref<PondPaddlersRaceFormat>("individual");
+const questionPreset = ref<QuestionPreset>("mixed");
 const loading = ref(true);
 const creating = ref(false);
 const closingRoomCode = ref("");
@@ -33,6 +65,9 @@ const notice = ref("");
 const adminSection = ref<HTMLElement | null>(null);
 const closeTriggerRoomCode = ref("");
 const noticeElement = ref<HTMLElement | null>(null);
+let roomRefreshInFlight = false;
+let roomMutationRevision = 0;
+let lobbyRefreshTimer: ReturnType<typeof setInterval> | null = null;
 const noPaddlersMessage =
 	"At least one paddler must join before the race starts.";
 
@@ -46,6 +81,23 @@ const operationLabels: Record<PondPaddlersOperation, string> = {
 	multiply: "Multiplication",
 	subtract: "Subtraction"
 };
+
+const raceFormatLabels: Record<PondPaddlersRaceFormat, string> = {
+	individual: "One student per device",
+	"team-device": "One team per device"
+};
+
+function applyQuestionPreset() {
+	if (questionPreset.value === "custom") return;
+	const preset = QUESTION_PRESETS[questionPreset.value];
+	operations.value = [...preset.operations];
+	maxOperand.value = preset.maxOperand;
+	finishAt.value = preset.finishAt;
+}
+
+function markQuestionsCustom() {
+	questionPreset.value = "custom";
+}
 
 function friendlyError(caught: unknown) {
 	if (clearAdminSessionOnAuthorizationError(caught, app)) return "";
@@ -86,16 +138,44 @@ function statusLabel(status: PondPaddlersAdminRoom["status"]) {
 	return "Race in progress";
 }
 
-async function loadRooms() {
-	loading.value = true;
-	error.value = "";
+async function loadRooms(quiet = false) {
+	if (roomRefreshInFlight) return;
+	roomRefreshInFlight = true;
+	if (!quiet) loading.value = true;
+	if (!quiet) error.value = "";
+	const mutationRevisionAtRequestStart = roomMutationRevision;
 	try {
-		rooms.value = await listPondPaddlersRooms();
+		const listedRooms = await listPondPaddlersRooms();
+		if (mutationRevisionAtRequestStart === roomMutationRevision) {
+			rooms.value = listedRooms;
+		}
 	} catch (caught) {
-		error.value = friendlyError(caught);
+		const message = friendlyError(caught);
+		if (!quiet) error.value = message;
 	} finally {
-		loading.value = false;
+		roomRefreshInFlight = false;
+		if (!quiet) loading.value = false;
 	}
+}
+
+function roomSettings() {
+	return {
+		calmMode: calmMode.value,
+		durationMinutes: durationMinutes.value,
+		finishAt: finishAt.value,
+		maxOperand: maxOperand.value,
+		operations: [...operations.value],
+		raceFormat: raceFormat.value
+	};
+}
+
+function addCreatedRoom(room: PondPaddlersAdminRoom) {
+	roomMutationRevision += 1;
+	rooms.value = [
+		room,
+		...rooms.value.filter(item => item.roomCode !== room.roomCode)
+	];
+	notice.value = `Room ${room.roomCode} is ready.`;
 }
 
 async function createRoom() {
@@ -104,18 +184,8 @@ async function createRoom() {
 	error.value = "";
 	notice.value = "";
 	try {
-		const room = await createPondPaddlersRoom({
-			calmMode: calmMode.value,
-			durationMinutes: durationMinutes.value,
-			finishAt: finishAt.value,
-			maxOperand: maxOperand.value,
-			operations: [...operations.value]
-		});
-		rooms.value = [
-			room,
-			...rooms.value.filter(item => item.roomCode !== room.roomCode)
-		];
-		notice.value = `Room ${room.roomCode} is ready.`;
+		const room = await createPondPaddlersRoom(roomSettings());
+		addCreatedRoom(room);
 	} catch (caught) {
 		error.value = friendlyError(caught);
 	} finally {
@@ -133,6 +203,25 @@ async function copyRoomCode(roomCode: string) {
 	}
 }
 
+function studentInstructions(room: PondPaddlersAdminRoom) {
+	const directions =
+		`Open ${POND_PADDLERS_STUDENT_URL} and enter room code ${room.roomCode}. ` +
+		"Keep the page open until Julio starts the race.";
+	return room.raceFormat === "team-device"
+		? `${directions} Use one device per team and take turns after every correct answer.`
+		: directions;
+}
+
+async function copyStudentInstructions(room: PondPaddlersAdminRoom) {
+	notice.value = "";
+	try {
+		await navigator.clipboard.writeText(studentInstructions(room));
+		notice.value = `Copied student instructions for room ${room.roomCode}.`;
+	} catch {
+		notice.value = studentInstructions(room);
+	}
+}
+
 async function startRoom(roomCode: string) {
 	const room = rooms.value.find(candidate => candidate.roomCode === roomCode);
 	if (startingRoomCode.value || !room || room.status !== "waiting") {
@@ -143,6 +232,7 @@ async function startRoom(roomCode: string) {
 	notice.value = "";
 	try {
 		const updatedRoom = await startPondPaddlersRoom(roomCode);
+		roomMutationRevision += 1;
 		rooms.value = rooms.value.map(room =>
 			room.roomCode === roomCode ? updatedRoom : room
 		);
@@ -183,6 +273,7 @@ async function closeRoom(roomCode: string) {
 	notice.value = "";
 	try {
 		await closePondPaddlersRoom(roomCode);
+		roomMutationRevision += 1;
 		rooms.value = rooms.value.filter(room => room.roomCode !== roomCode);
 		confirmingClose.value = "";
 		notice.value = `Room ${roomCode} is closed.`;
@@ -196,7 +287,19 @@ async function closeRoom(roomCode: string) {
 	}
 }
 
-onMounted(loadRooms);
+onMounted(() => {
+	void loadRooms();
+	lobbyRefreshTimer = setInterval(() => {
+		if (rooms.value.length > 0) {
+			void loadRooms(true);
+		}
+	}, LOBBY_REFRESH_INTERVAL_MS);
+});
+
+onBeforeUnmount(() => {
+	if (lobbyRefreshTimer) clearInterval(lobbyRefreshTimer);
+	lobbyRefreshTimer = null;
+});
 </script>
 
 <template>
@@ -210,21 +313,65 @@ onMounted(loadRooms);
 				<p class="pond-admin__eyebrow">Class game</p>
 				<h2 id="pond-admin-title">Pond Paddlers rooms</h2>
 				<p>
-					Create a private arithmetic race and give students its code.
-					Refresh the rooms to see how many are ready, then start.
+					Create a private arithmetic race, share its code, and start
+					when the class is ready. Room status refreshes
+					automatically.
 				</p>
 			</div>
 			<button
 				class="site-button site-button--secondary"
 				:disabled="loading"
 				type="button"
-				@click="loadRooms"
+				@click="loadRooms()"
 			>
 				{{ loading ? "Refreshing…" : "Refresh rooms" }}
 			</button>
 		</div>
 
 		<form class="pond-admin__form" @submit.prevent="createRoom">
+			<div class="pond-admin__settings pond-admin__settings--primary">
+				<label>
+					Race format
+					<select v-model="raceFormat" data-pond-race-format>
+						<option value="individual">
+							One student per device
+						</option>
+						<option value="team-device">One team per device</option>
+					</select>
+				</label>
+				<label>
+					Question set
+					<select
+						v-model="questionPreset"
+						data-pond-question-preset
+						@change="applyQuestionPreset"
+					>
+						<option value="starter">Starter</option>
+						<option value="mixed">Mixed</option>
+						<option value="challenge">Challenge</option>
+						<option value="custom">Custom</option>
+					</select>
+				</label>
+			</div>
+
+			<p class="pond-admin__preset-help">
+				<template v-if="questionPreset === 'starter'">
+					Starter uses addition and subtraction with operands through
+					10; first to 5 correct wins.
+				</template>
+				<template v-else-if="questionPreset === 'mixed'">
+					Mixed uses all four operations with operands through 10;
+					first to 10 correct wins.
+				</template>
+				<template v-else-if="questionPreset === 'challenge'">
+					Challenge uses all four operations with operands through 20;
+					first to 15 correct wins.
+				</template>
+				<template v-else>
+					Custom lets you choose each arithmetic setting below.
+				</template>
+			</p>
+
 			<fieldset>
 				<legend>Questions</legend>
 				<div class="pond-admin__checks">
@@ -237,6 +384,7 @@ onMounted(loadRooms);
 							:name="`pond-operation-${operation}`"
 							type="checkbox"
 							:value="operation"
+							@change="markQuestionsCustom"
 						/>
 						{{ operationLabels[operation] }}
 					</label>
@@ -245,8 +393,12 @@ onMounted(loadRooms);
 
 			<div class="pond-admin__settings">
 				<label>
-					Largest number
-					<select v-model="maxOperand">
+					Largest operand
+					<select
+						v-model="maxOperand"
+						data-pond-max-operand
+						@change="markQuestionsCustom"
+					>
 						<option :value="10">10</option>
 						<option :value="20">20</option>
 						<option :value="50">50</option>
@@ -255,7 +407,11 @@ onMounted(loadRooms);
 				</label>
 				<label>
 					Questions to finish
-					<select v-model="finishAt">
+					<select
+						v-model="finishAt"
+						data-pond-finish-at
+						@change="markQuestionsCustom"
+					>
 						<option :value="5">5</option>
 						<option :value="10">10</option>
 						<option :value="15">15</option>
@@ -281,6 +437,15 @@ onMounted(loadRooms);
 					Keep the race animation gentle.
 				</span>
 			</label>
+
+			<p
+				v-if="raceFormat === 'team-device'"
+				class="pond-admin__team-help"
+			>
+				Each team shares one device and one random paddler. Students
+				take turns after every correct answer; no team names or rosters
+				are stored.
+			</p>
 
 			<p v-if="operations.length === 0" class="pond-admin__field-error">
 				Choose at least one kind of question.
@@ -318,9 +483,28 @@ onMounted(loadRooms);
 			aria-label="Open Pond Paddlers rooms"
 		>
 			<li v-for="room in rooms" :key="room.roomCode">
-				<div class="pond-admin__room-code">
-					<span>Room code</span>
-					<strong>{{ room.roomCode }}</strong>
+				<div class="pond-admin__room-share">
+					<p class="pond-admin__room-url">
+						Students open
+						<a
+							:href="POND_PADDLERS_STUDENT_URL"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{{ POND_PADDLERS_STUDENT_URL }}
+						</a>
+					</p>
+					<div class="pond-admin__room-code">
+						<span>Room code</span>
+						<strong>{{ room.roomCode }}</strong>
+					</div>
+					<p
+						v-if="room.raceFormat === 'team-device'"
+						class="pond-admin__room-team"
+					>
+						One device per team · take turns after each correct
+						answer
+					</p>
 				</div>
 				<div
 					:id="`pond-room-details-${room.roomCode}`"
@@ -328,11 +512,14 @@ onMounted(loadRooms);
 				>
 					<strong>{{ statusLabel(room.status) }}</strong>
 					<span>
-						{{ room.playerCount }} paddler<span
-							v-if="room.playerCount !== 1"
-							>s</span
-						>
-						· closes at {{ formatTime(room.expiresAt) }}
+						{{ room.playerCount }}
+						{{
+							room.raceFormat === "team-device"
+								? "team"
+								: "paddler"
+						}}<span v-if="room.playerCount !== 1">s</span> ·
+						{{ raceFormatLabels[room.raceFormat] }} · closes at
+						{{ formatTime(room.expiresAt) }}
 					</span>
 				</div>
 				<div class="pond-admin__room-actions">
@@ -350,7 +537,20 @@ onMounted(loadRooms);
 								: "Start race"
 						}}
 					</button>
-					<button type="button" @click="copyRoomCode(room.roomCode)">
+					<button
+						:aria-label="`Copy student instructions for room ${room.roomCode}`"
+						data-pond-copy-instructions
+						type="button"
+						@click="copyStudentInstructions(room)"
+					>
+						Copy student instructions
+					</button>
+					<button
+						:aria-label="`Copy code for room ${room.roomCode}`"
+						data-pond-copy-code
+						type="button"
+						@click="copyRoomCode(room.roomCode)"
+					>
 						Copy code
 					</button>
 					<div
@@ -422,7 +622,11 @@ onMounted(loadRooms);
 
 .pond-admin__heading p:last-child,
 .pond-admin__room-details span,
-.pond-admin__empty {
+.pond-admin__empty,
+.pond-admin__preset-help,
+.pond-admin__room-url,
+.pond-admin__room-team,
+.pond-admin__team-help {
 	color: var(--color-ink-soft);
 }
 
@@ -451,6 +655,20 @@ onMounted(loadRooms);
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.75rem 1rem;
+}
+
+.pond-admin__settings--primary {
+	padding-bottom: 1rem;
+	border-bottom: 1px solid var(--color-border);
+}
+
+.pond-admin__preset-help,
+.pond-admin__team-help {
+	margin: 0;
+}
+
+.pond-admin__team-help {
+	max-width: 54rem;
 }
 
 .pond-admin__checks label,
@@ -513,12 +731,26 @@ onMounted(loadRooms);
 
 .pond-admin__rooms li {
 	display: grid;
-	grid-template-columns: auto minmax(10rem, 1fr) auto;
+	grid-template-columns: minmax(18rem, 1.4fr) minmax(12rem, 1fr);
 	align-items: center;
 	gap: 1rem;
-	padding: 0.9rem;
+	padding: 1rem;
 	border: 1px solid var(--color-border);
 	border-radius: var(--radius-sm);
+}
+
+.pond-admin__room-share {
+	display: grid;
+	gap: 0.55rem;
+}
+
+.pond-admin__room-url,
+.pond-admin__room-team {
+	margin: 0;
+}
+
+.pond-admin__room-url a {
+	overflow-wrap: anywhere;
 }
 
 .pond-admin__room-code,
@@ -537,11 +769,12 @@ onMounted(loadRooms);
 
 .pond-admin__room-code strong {
 	font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-	font-size: 1.35rem;
+	font-size: clamp(1.55rem, 4vw, 2.25rem);
 	letter-spacing: 0.08em;
 }
 
 .pond-admin__room-actions {
+	grid-column: 1 / -1;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-end;
@@ -577,6 +810,10 @@ onMounted(loadRooms);
 	.pond-admin__rooms li {
 		align-items: stretch;
 		grid-template-columns: 1fr;
+	}
+
+	.pond-admin__room-actions {
+		grid-column: auto;
 	}
 
 	.pond-admin__heading {
