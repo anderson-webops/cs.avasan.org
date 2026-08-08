@@ -42,6 +42,7 @@ describe("student privacy page", () => {
 		);
 		expect(text).toContain("random preset animal alias");
 		expect(text).toContain("submitted answer is checked and then discarded");
+		expect(text).toContain("does not store a team name or membership list");
 		expect(text).toContain("There is no student name, account link, chat");
 		expect(text).toContain("stay only in the running server’s memory");
 		expect(text).toContain("ends within two hours");

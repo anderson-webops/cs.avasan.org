@@ -4,6 +4,7 @@ import type {
 	PondPaddlersEventConnection,
 	PondPaddlersPublicState,
 	PondPaddlersQuestion,
+	PondPaddlersRaceFormat,
 	PondPaddlersRoomStatus
 } from "@/modules/pondPaddlers";
 import { computed, nextTick, onBeforeUnmount, ref } from "vue";
@@ -14,8 +15,11 @@ import {
 	PondPaddlersRequestError,
 	resumePondPaddlersRoom
 } from "@/modules/pondPaddlers";
+import { useAppStore } from "@/stores/app";
 
 defineOptions({ name: "PondPaddlersGame" });
+
+const app = useAppStore();
 
 type GamePhase = "join" | "race";
 type ConnectionState = "closed" | "connecting" | "live" | "reconnecting";
@@ -34,6 +38,7 @@ const joinError = ref("");
 const answerFeedback = ref("");
 const connectionState = ref<ConnectionState>("connecting");
 const calmMode = ref(false);
+const raceFormat = ref<PondPaddlersRaceFormat>("individual");
 const finishAt = ref(1);
 const raceStatus = ref<PondPaddlersRoomStatus>("waiting");
 const answerInput = ref<HTMLInputElement | null>(null);
@@ -79,6 +84,10 @@ const sortedPaddlers = computed(() =>
 	})
 );
 const roomClosed = computed(() => raceStatus.value === "closed");
+const teamDeviceRace = computed(() => raceFormat.value === "team-device");
+const participantNoun = computed(() =>
+	teamDeviceRace.value ? "team" : "paddler"
+);
 const statusOrder: Record<PondPaddlersRoomStatus, number> = {
 	waiting: 0,
 	racing: 1,
@@ -240,6 +249,7 @@ async function loadStartedQuestion() {
 		) {
 			return;
 		}
+		raceFormat.value = resumed.raceFormat;
 		if (!applyRaceState(resumed.state)) return;
 		if (resumed.state.status !== "racing") return;
 		if (!resumed.question) {
@@ -304,6 +314,7 @@ async function joinRoom() {
 		alias.value = joined.alias;
 		question.value = joined.question;
 		calmMode.value = joined.calmMode;
+		raceFormat.value = joined.raceFormat;
 		applyRaceState(joined.state);
 		answer.value = "";
 		answerFeedback.value =
@@ -312,8 +323,12 @@ async function joinRoom() {
 					? "Welcome back! Wait here for Julio to start the race."
 					: "You are in! Wait here for Julio to start the race."
 				: joined.resumed
-					? "Welcome back! Your paddler is right where you left it."
-					: "You are in! Solve the first question to paddle.";
+					? teamDeviceRace.value
+						? "Welcome back! Your team is right where it left off."
+						: "Welcome back! Your paddler is right where you left it."
+					: teamDeviceRace.value
+						? "Your team is in! Take turns solving questions to paddle."
+						: "You are in! Solve the first question to paddle.";
 		phase.value = "race";
 		startEventConnection();
 		if (joined.state.status === "racing" && !joined.question) {
@@ -397,8 +412,12 @@ async function submitAnswer() {
 		answer.value = "";
 		question.value = result.nextQuestion;
 		answerFeedback.value = result.finished
-			? "You won the race! Nice paddling."
-			: "Correct! Your paddler moved forward.";
+			? teamDeviceRace.value
+				? "Your team won the race! Nice paddling."
+				: "You won the race! Nice paddling."
+			: teamDeviceRace.value
+				? "Correct! Your team moved forward. Pass the device to the next teammate."
+				: "Correct! Your paddler moved forward.";
 		await nextTick();
 		answerInput.value?.focus();
 	} catch (error) {
@@ -439,6 +458,7 @@ function leaveRoom() {
 	progress.value = 0;
 	finished.value = false;
 	calmMode.value = false;
+	raceFormat.value = "individual";
 	finishAt.value = 1;
 	raceStatus.value = "waiting";
 	answerFeedback.value = "";
@@ -463,6 +483,13 @@ onBeforeUnmount(() => {
 			<RouterLink class="pond-hero__back" to="/games"
 				>← All games</RouterLink
 			>
+			<RouterLink
+				v-if="app.currentAdmin"
+				class="pond-hero__teacher"
+				to="/admin#pond-paddlers"
+			>
+				Teacher controls
+			</RouterLink>
 			<h1>Pond Paddlers</h1>
 			<p class="pond-hero__intro">
 				Solve quick math questions to help your paddler glide across the
@@ -550,7 +577,10 @@ onBeforeUnmount(() => {
 				<header class="race-card__header">
 					<div>
 						<p class="race-card__room">Room {{ roomCode }}</p>
-						<h2 id="race-heading">Paddler {{ alias }}</h2>
+						<h2 id="race-heading">
+							{{ teamDeviceRace ? "Team" : "Paddler" }}
+							{{ alias }}
+						</h2>
 					</div>
 					<div class="race-card__actions">
 						<span
@@ -574,8 +604,20 @@ onBeforeUnmount(() => {
 
 				<div v-if="finished" class="finish-panel" role="status">
 					<p class="finish-panel__stars" aria-hidden="true">★ ★ ★</p>
-					<h3>You won the race!</h3>
-					<p>You were the first paddler across the pond.</p>
+					<h3>
+						{{
+							teamDeviceRace
+								? "Your team won the race!"
+								: "You won the race!"
+						}}
+					</h3>
+					<p>
+						{{
+							teamDeviceRace
+								? "Your team was the first across the pond."
+								: "You were the first paddler across the pond."
+						}}
+					</p>
 				</div>
 
 				<div v-else-if="roomClosed" class="restart-panel">
@@ -609,11 +651,13 @@ onBeforeUnmount(() => {
 				>
 					<h3>Waiting for Julio to start the race</h3>
 					<p>
-						{{ sortedPaddlers.length }} paddler<span
-							v-if="sortedPaddlers.length !== 1"
-							>s</span
-						>
+						{{ sortedPaddlers.length }} {{ participantNoun
+						}}<span v-if="sortedPaddlers.length !== 1">s</span>
 						ready. Keep this page open.
+					</p>
+					<p v-if="teamDeviceRace">
+						This paddler belongs to your team. Take turns after
+						every correct answer.
 					</p>
 				</div>
 
@@ -682,7 +726,11 @@ onBeforeUnmount(() => {
 						</button>
 					</div>
 					<p id="pond-answer-help" class="question-panel__help">
-						Press Enter or tap Paddle.
+						<template v-if="teamDeviceRace">
+							Press Enter or tap Paddle, then pass the device
+							after a correct answer.
+						</template>
+						<template v-else>Press Enter or tap Paddle.</template>
 					</p>
 				</form>
 
@@ -706,10 +754,8 @@ onBeforeUnmount(() => {
 						<h2 id="pond-heading">Across the pond</h2>
 					</div>
 					<p>
-						{{ sortedPaddlers.length }} paddler<span
-							v-if="sortedPaddlers.length !== 1"
-							>s</span
-						>
+						{{ sortedPaddlers.length }} {{ participantNoun
+						}}<span v-if="sortedPaddlers.length !== 1">s</span>
 					</p>
 				</header>
 
@@ -725,9 +771,9 @@ onBeforeUnmount(() => {
 						<div class="paddler-lane__label">
 							<strong>
 								{{ paddler.alias
-								}}<span v-if="paddler.alias === alias">
-									(you)</span
-								>
+								}}<span v-if="paddler.alias === alias">{{
+									teamDeviceRace ? " (your team)" : " (you)"
+								}}</span>
 							</strong>
 							<span>{{ paddlerProgressText(paddler) }}</span>
 						</div>
@@ -772,11 +818,16 @@ onBeforeUnmount(() => {
 	gap: 0.35rem;
 }
 
-.pond-hero__back {
+.pond-hero__back,
+.pond-hero__teacher {
 	margin-bottom: 0.35rem;
 	color: var(--color-link);
 	font-size: 0.9rem;
 	font-weight: 750;
+}
+
+.pond-hero__teacher {
+	margin-top: -0.25rem;
 }
 
 .race-card__room,

@@ -9,6 +9,7 @@ export const POND_PADDLERS_OPERATIONS = [
 ] as const;
 
 export type PondPaddlersOperation = typeof POND_PADDLERS_OPERATIONS[number];
+export type PondPaddlersRaceFormat = "individual" | "team-device";
 export type PondPaddlersRoomStatus = "waiting" | "racing" | "finished" | "closed";
 
 export interface PondPaddlersQuestion {
@@ -31,6 +32,7 @@ export interface PondPaddlersRoomSettings {
 	finishAt: number;
 	maxOperand: number;
 	operations: PondPaddlersOperation[];
+	raceFormat: PondPaddlersRaceFormat;
 }
 
 export interface PondPaddlersAdminRoom extends PondPaddlersRoomSettings {
@@ -46,6 +48,7 @@ export interface PondPaddlersJoinResult {
 	calmMode: boolean;
 	expiresAt: string;
 	question: PondPaddlersQuestion | null;
+	raceFormat: PondPaddlersRaceFormat;
 	resumed: boolean;
 	seatToken: string;
 	state: PondPaddlersPublicState;
@@ -106,6 +109,7 @@ interface PondPaddlersRoom {
 	maxOperand: number;
 	operations: PondPaddlersOperation[];
 	players: Map<string, PondPaddlersPlayer>;
+	raceFormat: PondPaddlersRaceFormat;
 	roomCode: string;
 	status: Exclude<PondPaddlersRoomStatus, "closed">;
 }
@@ -175,7 +179,8 @@ function settingsAreBounded(settings: PondPaddlersRoomSettings): boolean {
 		&& settings.operations.length >= 1
 		&& settings.operations.length <= POND_PADDLERS_OPERATIONS.length
 		&& new Set(settings.operations).size === settings.operations.length
-		&& settings.operations.every(operation => POND_PADDLERS_OPERATIONS.includes(operation));
+		&& settings.operations.every(operation => POND_PADDLERS_OPERATIONS.includes(operation))
+		&& (settings.raceFormat === "individual" || settings.raceFormat === "team-device");
 }
 
 function publicQuestion(prompt: string): StoredQuestion["publicQuestion"] {
@@ -254,6 +259,7 @@ function adminRoom(room: PondPaddlersRoom): PondPaddlersAdminRoom {
 		maxOperand: room.maxOperand,
 		operations: [...room.operations],
 		playerCount: room.players.size,
+		raceFormat: room.raceFormat,
 		roomCode: room.roomCode,
 		status: room.status
 	};
@@ -507,6 +513,7 @@ export class PondPaddlersRoomStore {
 			expiresAt: new Date(room.expiresAt).toISOString(),
 			question:
 				room.status === "racing" ? player.question.publicQuestion : null,
+			raceFormat: room.raceFormat,
 			resumed,
 			seatToken,
 			state: publicState(room)

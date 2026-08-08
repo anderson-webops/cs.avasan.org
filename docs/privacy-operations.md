@@ -257,7 +257,8 @@ student-level join.
 Three solo classroom games run entirely in the current browser and create no
 server record or analytics event. A Pond Paddlers room exists only in the
 running API process for no more than two hours. It contains the private room
-configuration and each seat's random preset alias, secret-token hash, current
+configuration, including whether each paddler is one student or a team sharing
+one device, and each seat's random preset alias, secret-token hash, current
 arithmetic question and correct answer, and progress count. A submitted answer
 is checked and then discarded; it is not added to the room. The room code is
 not a seat credential. The secret seat token is sent

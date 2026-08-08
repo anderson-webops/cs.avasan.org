@@ -1,4 +1,5 @@
 import { flushPromises, mount } from "@vue/test-utils";
+import { createPinia, setActivePinia } from "pinia";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import PondPaddlersGame from "@/components/PondPaddlersGame.vue";
 import {
@@ -7,6 +8,7 @@ import {
 	joinPondPaddlersRoom,
 	resumePondPaddlersRoom
 } from "@/modules/pondPaddlers";
+import { useAppStore } from "@/stores/app";
 
 vi.mock("@/modules/pondPaddlers", () => ({
 	answerPondPaddlersQuestion: vi.fn(),
@@ -20,12 +22,14 @@ describe("PondPaddlersGame", () => {
 	let eventHandlers: Parameters<typeof connectPondPaddlersEvents>[1];
 
 	beforeEach(() => {
+		setActivePinia(createPinia());
 		vi.clearAllMocks();
 		vi.mocked(joinPondPaddlersRoom).mockResolvedValue({
 			alias: "Sunny Mallard",
 			calmMode: false,
 			expiresAt: "2026-08-02T00:00:00.000Z",
 			question: { prompt: "3 + 4", questionID: "question-1" },
+			raceFormat: "individual",
 			resumed: false,
 			roomCode: "ABCD2345",
 			state: {
@@ -45,6 +49,7 @@ describe("PondPaddlersGame", () => {
 			calmMode: false,
 			expiresAt: "2026-08-02T00:00:00.000Z",
 			question: { prompt: "8 ÷ 2", questionID: "question-start" },
+			raceFormat: "individual",
 			resumed: true,
 			roomCode: "ABCD2345",
 			state: {
@@ -55,9 +60,22 @@ describe("PondPaddlersGame", () => {
 		});
 	});
 
-	function mountGame() {
+	function mountGame(options: { admin?: boolean; attachTo?: HTMLElement } = {}) {
+		const pinia = createPinia();
+		setActivePinia(pinia);
+		if (options.admin) {
+			useAppStore().setCurrentAdmin({
+				_id: "julio",
+				name: "Julio",
+				email: "julio@example.test",
+				editAdmins: false,
+				saveEdit: "Save"
+			});
+		}
 		return mount(PondPaddlersGame, {
+			...(options.attachTo ? { attachTo: options.attachTo } : {}),
 			global: {
+				plugins: [pinia],
 				stubs: {
 					RouterLink: { template: "<a><slot /></a>" }
 				}
@@ -102,12 +120,120 @@ describe("PondPaddlersGame", () => {
 		);
 	});
 
+	it("shows Teacher controls only to an authenticated Admin", () => {
+		const anonymous = mountGame();
+		expect(anonymous.text()).not.toContain("Teacher controls");
+		anonymous.unmount();
+
+		const admin = mountGame({ admin: true });
+		expect(admin.text()).toContain("Teacher controls");
+		admin.unmount();
+	});
+
+	it("runs a team relay from lobby through pass-device feedback and a win", async () => {
+		vi.mocked(joinPondPaddlersRoom).mockResolvedValueOnce({
+			alias: "Sunny Mallard",
+			calmMode: true,
+			expiresAt: "2026-08-02T00:00:00.000Z",
+			question: null,
+			raceFormat: "team-device",
+			resumed: false,
+			roomCode: "ABCD2345",
+			state: {
+				finishAt: 10,
+				players: [{ alias: "Sunny Mallard", progress: 0 }],
+				status: "waiting"
+			}
+		});
+		vi.mocked(resumePondPaddlersRoom).mockResolvedValueOnce({
+			alias: "Sunny Mallard",
+			calmMode: true,
+			expiresAt: "2026-08-02T00:00:00.000Z",
+			question: { prompt: "4 + 5", questionID: "team-question-1" },
+			raceFormat: "team-device",
+			resumed: true,
+			roomCode: "ABCD2345",
+			state: {
+				finishAt: 10,
+				players: [{ alias: "Sunny Mallard", progress: 0 }],
+				status: "racing"
+			}
+		});
+		vi.mocked(answerPondPaddlersQuestion)
+			.mockResolvedValueOnce({
+				correct: true,
+				finished: false,
+				nextQuestion: {
+					prompt: "8 ÷ 2",
+					questionID: "team-question-2"
+				},
+				progress: 1
+			})
+			.mockResolvedValueOnce({
+				correct: true,
+				finished: true,
+				nextQuestion: null,
+				progress: 10
+			});
+		const wrapper = mountGame();
+		await wrapper.get("#pond-room-code").setValue("ABCD2345");
+		await wrapper.get("form").trigger("submit.prevent");
+		await flushPromises();
+
+		expect(wrapper.text()).toContain("Team Sunny Mallard");
+		expect(wrapper.text()).toContain(
+			"This paddler belongs to your team. Take turns after every correct answer."
+		);
+		expect(wrapper.text()).toContain("1 team ready");
+		expect(wrapper.find('input[name="teamName"]').exists()).toBe(false);
+		expect(wrapper.find('input[name="studentName"]').exists()).toBe(false);
+
+		eventHandlers.onState({
+			finishAt: 10,
+			players: [{ alias: "Sunny Mallard", progress: 0 }],
+			status: "racing"
+		});
+		await flushPromises();
+		expect(resumePondPaddlersRoom).toHaveBeenCalledWith(
+			"ABCD2345",
+			expect.any(AbortSignal)
+		);
+		expect(wrapper.text()).toContain("4 + 5");
+		expect(wrapper.text()).toContain(
+			"pass the device after a correct answer"
+		);
+
+		await wrapper.get("#pond-answer").setValue("9");
+		await wrapper.get(".question-panel").trigger("submit.prevent");
+		await flushPromises();
+		expect(wrapper.text()).toContain(
+			"Correct! Your team moved forward. Pass the device to the next teammate."
+		);
+		expect(wrapper.text()).toContain("8 ÷ 2");
+
+		await wrapper.get("#pond-answer").setValue("4");
+		await wrapper.get(".question-panel").trigger("submit.prevent");
+		await flushPromises();
+		expect(answerPondPaddlersQuestion).toHaveBeenNthCalledWith(
+			2,
+			"ABCD2345",
+			"team-question-2",
+			4,
+			expect.any(AbortSignal)
+		);
+		expect(wrapper.text()).toContain("Your team won the race!");
+		expect(wrapper.text()).toContain(
+			"Your team was the first across the pond."
+		);
+	});
+
 	it("waits in the lobby and loads the private question only after Julio starts", async () => {
 		vi.mocked(joinPondPaddlersRoom).mockResolvedValueOnce({
 			alias: "Sunny Mallard",
 			calmMode: true,
 			expiresAt: "2026-08-02T00:00:00.000Z",
 			question: null,
+			raceFormat: "individual",
 			resumed: false,
 			roomCode: "ABCD2345",
 			state: {
@@ -121,6 +247,7 @@ describe("PondPaddlersGame", () => {
 			calmMode: true,
 			expiresAt: "2026-08-02T00:00:00.000Z",
 			question: { prompt: "8 ÷ 2", questionID: "question-start" },
+			raceFormat: "individual",
 			resumed: true,
 			roomCode: "ABCD2345",
 			state: {
@@ -129,14 +256,7 @@ describe("PondPaddlersGame", () => {
 				status: "racing"
 			}
 		});
-		const wrapper = mount(PondPaddlersGame, {
-			attachTo: document.body,
-			global: {
-				stubs: {
-					RouterLink: { template: "<a><slot /></a>" }
-				}
-			}
-		});
+		const wrapper = mountGame({ attachTo: document.body });
 
 		try {
 			await wrapper.get("#pond-room-code").setValue("ABCD2345");
@@ -184,6 +304,7 @@ describe("PondPaddlersGame", () => {
 			calmMode: true,
 			expiresAt: "2026-08-02T00:00:00.000Z",
 			question: null,
+			raceFormat: "individual",
 			resumed: false,
 			roomCode: "ABCD2345",
 			state: {
@@ -199,6 +320,7 @@ describe("PondPaddlersGame", () => {
 				calmMode: true,
 				expiresAt: "2026-08-02T00:00:00.000Z",
 				question: { prompt: "8 ÷ 2", questionID: "question-retry" },
+				raceFormat: "individual",
 				resumed: true,
 				roomCode: "ABCD2345",
 				state: {
@@ -207,12 +329,7 @@ describe("PondPaddlersGame", () => {
 					status: "racing"
 				}
 			});
-		const wrapper = mount(PondPaddlersGame, {
-			attachTo: document.body,
-			global: {
-				stubs: { RouterLink: { template: "<a><slot /></a>" } }
-			}
-		});
+		const wrapper = mountGame({ attachTo: document.body });
 
 		try {
 			await wrapper.get("#pond-room-code").setValue("ABCD2345");
@@ -255,6 +372,7 @@ describe("PondPaddlersGame", () => {
 			calmMode: true,
 			expiresAt: "2026-08-02T00:00:00.000Z",
 			question: null,
+			raceFormat: "individual",
 			resumed: false,
 			roomCode: "ABCD2345",
 			state: {
@@ -294,6 +412,7 @@ describe("PondPaddlersGame", () => {
 			calmMode: true,
 			expiresAt: "2026-08-02T00:00:00.000Z",
 			question: { prompt: "9 + 9", questionID: "delayed-question" },
+			raceFormat: "individual",
 			resumed: true,
 			roomCode: "ABCD2345",
 			state: {
@@ -326,6 +445,7 @@ describe("PondPaddlersGame", () => {
 				calmMode: true,
 				expiresAt: "2026-08-02T00:00:00.000Z",
 				question: null,
+				raceFormat: "individual",
 				resumed: false,
 				roomCode: "ABCD2345",
 				state: {
@@ -365,6 +485,7 @@ describe("PondPaddlersGame", () => {
 				calmMode: true,
 				expiresAt: "2026-08-02T00:00:00.000Z",
 				question: { prompt: "9 + 9", questionID: "stale-question" },
+				raceFormat: "individual",
 				resumed: true,
 				roomCode: "ABCD2345",
 				state: {
@@ -392,6 +513,7 @@ describe("PondPaddlersGame", () => {
 			calmMode: true,
 			expiresAt: "2026-08-02T00:00:00.000Z",
 			question: null,
+			raceFormat: "individual",
 			resumed: false,
 			roomCode: "ABCD2345",
 			state: {
@@ -405,6 +527,7 @@ describe("PondPaddlersGame", () => {
 			calmMode: true,
 			expiresAt: "2026-08-02T00:00:00.000Z",
 			question: null,
+			raceFormat: "individual",
 			resumed: true,
 			roomCode: "ABCD2345",
 			state: {
@@ -581,6 +704,7 @@ describe("PondPaddlersGame", () => {
 			calmMode: true,
 			expiresAt: "2026-08-02T01:00:00.000Z",
 			question: { prompt: "9 + 9", questionID: "question-new" },
+			raceFormat: "individual",
 			resumed: false,
 			roomCode: "WXYZ6789",
 			state: {

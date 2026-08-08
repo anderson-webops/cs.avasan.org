@@ -5,6 +5,7 @@ export interface PondPaddlersQuestion {
 
 export type PondPaddlersRoomStatus =
 	"closed" | "finished" | "racing" | "waiting";
+export type PondPaddlersRaceFormat = "individual" | "team-device";
 
 export interface PondPaddler {
 	alias: string;
@@ -22,6 +23,7 @@ export interface PondPaddlersJoinResult {
 	calmMode: boolean;
 	expiresAt: string;
 	question: PondPaddlersQuestion | null;
+	raceFormat: PondPaddlersRaceFormat;
 	resumed: boolean;
 	roomCode: string;
 	state: PondPaddlersPublicState;
@@ -104,6 +106,13 @@ function normalizeStatus(value: unknown): PondPaddlersRoomStatus {
 	return value;
 }
 
+function normalizeRaceFormat(value: unknown): PondPaddlersRaceFormat {
+	if (value !== "individual" && value !== "team-device") {
+		throw new Error("Pond Paddlers response has an invalid race format.");
+	}
+	return value;
+}
+
 function normalizePlayer(value: unknown): PondPaddler {
 	if (!isRecord(value)) {
 		throw new Error("Pond Paddlers response has an invalid paddler.");
@@ -166,6 +175,7 @@ function normalizeJoinResult(
 			payload.question === null
 				? null
 				: normalizeQuestion(payload.question),
+		raceFormat: normalizeRaceFormat(payload.raceFormat),
 		resumed: payload.resumed === true,
 		roomCode,
 		state: normalizeState(payload.state)

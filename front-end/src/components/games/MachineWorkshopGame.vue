@@ -2,6 +2,7 @@
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 
 type StationId = "energy" | "gears" | "lights" | "sorter";
+type MissionLevel = "advanced" | "middle" | "simple";
 
 interface WorkshopStation {
 	color: string;
@@ -10,6 +11,13 @@ interface WorkshopStation {
 	label: string;
 	x: number;
 	y: number;
+}
+
+interface WorkshopMission {
+	description: string;
+	id: MissionLevel;
+	label: string;
+	sequence: readonly StationId[];
 }
 
 const CANVAS_WIDTH = 840;
@@ -49,23 +57,85 @@ const stations: WorkshopStation[] = [
 	}
 ];
 
+const missions: readonly WorkshopMission[] = [
+	{
+		description: "A four-step tune-up with each station once.",
+		id: "simple",
+		label: "Simple",
+		sequence: ["gears", "lights", "sorter", "energy"]
+	},
+	{
+		description: "A six-step rebuild with two stations repeated.",
+		id: "middle",
+		label: "Middle",
+		sequence: ["energy", "sorter", "gears", "lights", "sorter", "energy"]
+	},
+	{
+		description: "An eight-step master repair with a longer pattern.",
+		id: "advanced",
+		label: "Advanced",
+		sequence: [
+			"lights",
+			"gears",
+			"energy",
+			"sorter",
+			"gears",
+			"lights",
+			"sorter",
+			"energy"
+		]
+	}
+];
+
 const canvas = ref<HTMLCanvasElement | null>(null);
-const selected = ref<StationId>("energy");
-const energyLevel = ref(1);
+const selectedLevel = ref<MissionLevel>("simple");
+const missionStep = ref(0);
+const selected = ref<StationId>("gears");
+const energyLevel = ref(0);
 const gearTurns = ref(0);
 const sortedSignals = ref(0);
 const lightStep = ref(0);
 const reducedMotion = ref(false);
-const announcement = ref(
-	"The workshop is ready. Pick any station and see what changes."
-);
+const announcement = ref("Simple repair ready. Start with the Gear train.");
 
 let animationFrame = 0;
-let lastTimestamp = 0;
+let previousFrameTimestamp: number | null = null;
+let energyRotation = 0;
+let gearRotation = 0;
+let sorterMotionOffset = 0;
+let motionPreference: MediaQueryList | null = null;
 
 const selectedStation = computed(
 	() => stations.find(station => station.id === selected.value) ?? stations[0]
 );
+const currentMission = computed(
+	() =>
+		missions.find(mission => mission.id === selectedLevel.value) ??
+		missions[0]
+);
+const missionComplete = computed(
+	() => missionStep.value >= currentMission.value.sequence.length
+);
+const nextStation = computed(() => {
+	const stationId = currentMission.value.sequence[missionStep.value];
+	return stations.find(station => station.id === stationId) ?? null;
+});
+const progressPercent = computed(() =>
+	Math.round((missionStep.value / currentMission.value.sequence.length) * 100)
+);
+
+function stationStatus(stationId: StationId) {
+	if (stationId === "energy") return `Charge ${energyLevel.value} / 5`;
+	if (stationId === "gears") return `Turns ${gearTurns.value}`;
+	if (stationId === "sorter") return `Signals ${sortedSignals.value}`;
+	return `Lights ${lightStep.value} / 8`;
+}
+
+function stationLabel(stationId: StationId) {
+	return (
+		stations.find(station => station.id === stationId)?.label ?? "Station"
+	);
+}
 
 function roundedRect(
 	context: CanvasRenderingContext2D,
@@ -126,14 +196,11 @@ function drawGear(
 
 function drawEnergyStation(
 	context: CanvasRenderingContext2D,
-	station: WorkshopStation,
-	clock: number
+	station: WorkshopStation
 ) {
 	const centerX = station.x + 165;
 	const centerY = station.y + 108;
-	const angle = reducedMotion.value
-		? energyLevel.value * 0.35
-		: clock * 0.001;
+	const angle = energyLevel.value * 0.5 + energyRotation;
 	context.save();
 	context.translate(centerX, centerY);
 	context.rotate(angle);
@@ -171,12 +238,9 @@ function drawEnergyStation(
 
 function drawGearStation(
 	context: CanvasRenderingContext2D,
-	station: WorkshopStation,
-	clock: number
+	station: WorkshopStation
 ) {
-	const movement = reducedMotion.value
-		? gearTurns.value * 0.2
-		: clock * 0.0008;
+	const movement = gearTurns.value * 0.55 + gearRotation;
 	drawGear(
 		context,
 		station.x + 132,
@@ -203,15 +267,12 @@ function drawGearStation(
 
 function drawSorterStation(
 	context: CanvasRenderingContext2D,
-	station: WorkshopStation,
-	clock: number
+	station: WorkshopStation
 ) {
 	context.fillStyle = "#1e3a5f";
 	roundedRect(context, station.x + 52, station.y + 100, 260, 26, 10);
 	context.fill();
-	const offset = reducedMotion.value
-		? sortedSignals.value * 24
-		: (clock * 0.08) % 90;
+	const offset = sortedSignals.value * 24 + sorterMotionOffset;
 	const colors = ["#fb7185", "#fde047", "#38bdf8", "#4ade80"];
 	colors.forEach((color, index) => {
 		context.fillStyle = color;
@@ -238,7 +299,7 @@ function drawLightStation(
 	context: CanvasRenderingContext2D,
 	station: WorkshopStation
 ) {
-	const activeCount = (lightStep.value % 8) + 1;
+	const activeCount = lightStep.value;
 	for (let light = 0; light < 8; light += 1) {
 		const column = light % 4;
 		const row = Math.floor(light / 4);
@@ -258,8 +319,7 @@ function drawLightStation(
 	context.shadowBlur = 0;
 }
 
-function draw(clock = 0) {
-	lastTimestamp = clock;
+function draw() {
 	const context = canvas.value?.getContext("2d");
 	if (!context) return;
 
@@ -305,49 +365,119 @@ function draw(clock = 0) {
 		);
 	});
 
-	drawEnergyStation(context, stations[0], clock);
-	drawGearStation(context, stations[1], clock);
-	drawSorterStation(context, stations[2], clock);
+	drawEnergyStation(context, stations[0]);
+	drawGearStation(context, stations[1]);
+	drawSorterStation(context, stations[2]);
 	drawLightStation(context, stations[3]);
 }
 
+function hasMovingStation() {
+	return (
+		energyLevel.value > 0 || gearTurns.value > 0 || sortedSignals.value > 0
+	);
+}
+
 function animate(timestamp: number) {
-	draw(timestamp);
+	animationFrame = 0;
+	if (document.hidden || reducedMotion.value || !hasMovingStation()) {
+		previousFrameTimestamp = null;
+		draw();
+		return;
+	}
+
+	if (previousFrameTimestamp !== null) {
+		const elapsed = Math.min(
+			50,
+			Math.max(0, timestamp - previousFrameTimestamp)
+		);
+		energyRotation += elapsed * 0.0002 * energyLevel.value;
+		gearRotation += elapsed * 0.00012 * Math.min(gearTurns.value, 4);
+		sorterMotionOffset =
+			(sorterMotionOffset +
+				elapsed * 0.025 * Math.min(sortedSignals.value, 4)) %
+			90;
+	}
+	previousFrameTimestamp = timestamp;
+	draw();
 	animationFrame = window.requestAnimationFrame(animate);
+}
+
+function startAnimation() {
+	if (
+		reducedMotion.value ||
+		document.hidden ||
+		animationFrame ||
+		!hasMovingStation()
+	) {
+		return;
+	}
+	animationFrame = window.requestAnimationFrame(animate);
+}
+
+function stopAnimation() {
+	if (animationFrame) window.cancelAnimationFrame(animationFrame);
+	animationFrame = 0;
+	previousFrameTimestamp = null;
 }
 
 function activate(stationId: StationId) {
 	selected.value = stationId;
+	let actionMessage = "";
 	if (stationId === "energy") {
 		energyLevel.value = (energyLevel.value % 5) + 1;
-		announcement.value = `The energy wheel sent ${energyLevel.value} bright pulses through the workshop.`;
+		actionMessage = `The energy wheel sent ${energyLevel.value} bright ${energyLevel.value === 1 ? "pulse" : "pulses"} through the workshop.`;
 	}
 	if (stationId === "gears") {
 		gearTurns.value += 1;
-		announcement.value =
+		actionMessage =
 			"The large gear turns the smaller gear in the opposite direction.";
 	}
 	if (stationId === "sorter") {
 		sortedSignals.value += 1;
-		announcement.value =
+		actionMessage =
 			"The signal sorter guided colorful messages along the blue path.";
 	}
 	if (stationId === "lights") {
-		lightStep.value += 1;
-		announcement.value =
+		lightStep.value = (lightStep.value % 8) + 1;
+		actionMessage =
 			"The memory lights changed their pattern and kept it on the panel.";
 	}
-	draw(lastTimestamp);
+
+	if (missionComplete.value) {
+		announcement.value = `${actionMessage} The ${currentMission.value.label} repair is already complete. Keep experimenting or choose another mission.`;
+	} else if (nextStation.value?.id === stationId) {
+		missionStep.value += 1;
+		if (missionComplete.value) {
+			announcement.value = `${actionMessage} ${currentMission.value.label} repair complete! Every station is running in the right order.`;
+		} else {
+			announcement.value = `${actionMessage} Step ${missionStep.value} complete. Next: ${nextStation.value?.label}.`;
+		}
+	} else {
+		announcement.value = `${actionMessage} The mission pattern still needs ${nextStation.value?.label} next.`;
+	}
+	draw();
+	if (hasMovingStation()) startAnimation();
 }
 
 function resetWorkshop() {
-	selected.value = "energy";
-	energyLevel.value = 1;
+	stopAnimation();
+	missionStep.value = 0;
+	selected.value = currentMission.value.sequence[0] ?? "energy";
+	energyLevel.value = 0;
 	gearTurns.value = 0;
 	sortedSignals.value = 0;
 	lightStep.value = 0;
-	announcement.value = "The workshop is reset and ready for more exploring.";
-	draw(lastTimestamp);
+	energyRotation = 0;
+	gearRotation = 0;
+	sorterMotionOffset = 0;
+	announcement.value = `${currentMission.value.label} repair ready. Start with the ${nextStation.value?.label}.`;
+	draw();
+}
+
+function selectMission(level: MissionLevel) {
+	if (level === selectedLevel.value) return;
+	selectedLevel.value = level;
+	resetWorkshop();
 }
 
 function handleKeydown(event: KeyboardEvent) {
@@ -387,17 +517,44 @@ function handleCanvasPointer(event: PointerEvent) {
 	if (station) activate(station.id);
 }
 
-onMounted(() => {
-	reducedMotion.value =
-		window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ??
-		false;
+function handleVisibilityChange() {
+	if (document.hidden) {
+		stopAnimation();
+		return;
+	}
+	if (hasMovingStation()) startAnimation();
+}
+
+function handleMotionPreferenceChange(event: MediaQueryListEvent) {
+	reducedMotion.value = event.matches;
+	if (event.matches) {
+		stopAnimation();
+		announcement.value =
+			"Step-by-step motion is on. The machine stays still between choices.";
+	} else {
+		announcement.value =
+			"Continuous motion is on. The active stations are running again.";
+		if (hasMovingStation()) startAnimation();
+	}
 	draw();
-	if (!reducedMotion.value)
-		animationFrame = window.requestAnimationFrame(animate);
+}
+
+onMounted(() => {
+	motionPreference =
+		window.matchMedia?.("(prefers-reduced-motion: reduce)") ?? null;
+	reducedMotion.value = motionPreference?.matches ?? false;
+	motionPreference?.addEventListener("change", handleMotionPreferenceChange);
+	document.addEventListener("visibilitychange", handleVisibilityChange);
+	draw();
 });
 
 onBeforeUnmount(() => {
-	window.cancelAnimationFrame(animationFrame);
+	stopAnimation();
+	motionPreference?.removeEventListener(
+		"change",
+		handleMotionPreferenceChange
+	);
+	document.removeEventListener("visibilitychange", handleVisibilityChange);
 });
 </script>
 
@@ -411,19 +568,84 @@ onBeforeUnmount(() => {
 			<div>
 				<h1>Machine Workshop</h1>
 				<p>
-					Tap, click, or use the number keys to wake up each part of
-					the machine. Explore in any order and notice how the parts
-					connect.
+					Choose a repair mission, then operate the stations in order.
+					Every tap changes the machine, and a different station can
+					still be explored without losing progress.
 				</p>
 			</div>
 			<RouterLink class="back-link" to="/games">All games</RouterLink>
 		</header>
 
 		<div class="workshop-panel">
+			<div
+				class="mission-picker"
+				aria-label="Repair mission difficulty"
+				role="group"
+			>
+				<button
+					v-for="mission in missions"
+					:key="mission.id"
+					:aria-pressed="selectedLevel === mission.id"
+					:class="{ active: selectedLevel === mission.id }"
+					type="button"
+					@click="selectMission(mission.id)"
+				>
+					<strong>{{ mission.label }}</strong>
+					<span>{{ mission.description }}</span>
+				</button>
+			</div>
+
+			<section
+				class="mission-card"
+				:data-mission-complete="missionComplete ? 'true' : 'false'"
+			>
+				<div class="mission-summary">
+					<p>{{ currentMission.label }} repair mission</p>
+					<h2 v-if="missionComplete">Repair complete!</h2>
+					<h2 v-else>Next: {{ nextStation?.label }}</h2>
+				</div>
+				<div class="mission-progress">
+					<span id="machine-mission-progress-label">
+						Progress: {{ missionStep }} of
+						{{ currentMission.sequence.length }}
+					</span>
+					<progress
+						:max="currentMission.sequence.length"
+						:value="missionStep"
+						aria-labelledby="machine-mission-progress-label"
+					>
+						{{ progressPercent }}%
+					</progress>
+				</div>
+				<ol class="mission-steps" aria-label="Ordered repair steps">
+					<li
+						v-for="(stationId, index) in currentMission.sequence"
+						:key="`${index}-${stationId}`"
+						:class="{
+							current: !missionComplete && index === missionStep,
+							done: index < missionStep
+						}"
+					>
+						<span aria-hidden="true">{{ index + 1 }}</span>
+						<strong>{{ stationLabel(stationId) }}</strong>
+						<small v-if="index < missionStep">Done</small>
+						<small
+							v-else-if="
+								index === missionStep && !missionComplete
+							"
+							>Next</small
+						>
+					</li>
+				</ol>
+			</section>
+
 			<div class="workshop-badges" aria-label="Workshop information">
 				<span
 					><strong>Selected:</strong>
 					{{ selectedStation.label }}</span
+				>
+				<span
+					><strong>Mission:</strong> {{ currentMission.label }}</span
 				>
 				<span>No timer · No wrong answers</span>
 				<span v-if="reducedMotion"
@@ -435,33 +657,54 @@ onBeforeUnmount(() => {
 				ref="canvas"
 				:height="CANVAS_HEIGHT"
 				:width="CANVAS_WIDTH"
-				aria-label="Interactive machine with an energy wheel, gear train, signal sorter, and memory lights."
+				:aria-label="`Interactive repair machine. ${missionStep} of ${currentMission.sequence.length} mission steps complete.`"
+				aria-describedby="machine-workshop-instructions machine-workshop-announcement"
 				class="workshop-canvas"
+				:data-energy-level="energyLevel"
+				:data-gear-turns="gearTurns"
+				:data-light-step="lightStep"
+				:data-sorted-signals="sortedSignals"
 				role="img"
-				tabindex="0"
 				@pointerdown="handleCanvasPointer"
 			></canvas>
 
-			<p class="workshop-announcement" aria-live="polite">
+			<p
+				id="machine-workshop-announcement"
+				class="workshop-announcement"
+				aria-live="polite"
+			>
 				{{ announcement }}
 			</p>
 
-			<div class="station-controls" aria-label="Machine station controls">
+			<div
+				class="station-controls"
+				aria-label="Machine station controls"
+				role="group"
+			>
 				<button
 					v-for="station in stations"
 					:key="station.id"
 					:aria-pressed="selected === station.id"
-					:class="{ active: selected === station.id }"
+					:class="{
+						active: selected === station.id,
+						expected:
+							!missionComplete && nextStation?.id === station.id
+					}"
 					type="button"
 					@click="activate(station.id)"
 				>
-					<span aria-hidden="true">{{ station.key }}</span>
-					{{ station.label }}
+					<span class="station-key" aria-hidden="true">{{
+						station.key
+					}}</span>
+					<span class="station-control-copy">
+						<strong>{{ station.label }}</strong>
+						<small>{{ stationStatus(station.id) }}</small>
+					</span>
 				</button>
 			</div>
 
 			<div class="workshop-footer">
-				<p>
+				<p id="machine-workshop-instructions">
 					Keyboard: 1–4 or E, G, S, L. Press R to reset the workshop.
 				</p>
 				<button
@@ -530,6 +773,147 @@ onBeforeUnmount(() => {
 	gap: 1rem;
 }
 
+.mission-picker {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 0.65rem;
+}
+
+.mission-picker button {
+	min-height: 4.5rem;
+	padding: 0.75rem;
+	border: 1px solid rgba(41, 67, 95, 0.2);
+	border-radius: 15px;
+	background: #fff;
+	color: #29435f;
+	cursor: pointer;
+	display: grid;
+	gap: 0.2rem;
+	text-align: left;
+}
+
+.mission-picker button strong {
+	font-size: 1rem;
+}
+
+.mission-picker button span {
+	color: #526b70;
+	font-size: 0.82rem;
+	line-height: 1.3;
+}
+
+.mission-picker button.active {
+	border-color: #2563eb;
+	background: #e9f2ff;
+	box-shadow: inset 0 0 0 1px #2563eb;
+}
+
+.mission-card {
+	padding: 0.9rem;
+	border: 1px solid #c4d8f4;
+	border-radius: 18px;
+	background: #edf5ff;
+	display: grid;
+	gap: 0.8rem;
+}
+
+.mission-card[data-mission-complete="true"] {
+	border-color: #34a36f;
+	background: #e8f8ef;
+}
+
+.mission-summary {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 0.35rem 1rem;
+}
+
+.mission-summary p {
+	color: #526b70;
+	font-size: 0.84rem;
+	font-weight: 800;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+.mission-summary h2 {
+	color: #243b63;
+	font-size: clamp(1.2rem, 3vw, 1.65rem);
+}
+
+.mission-progress {
+	display: grid;
+	grid-template-columns: auto minmax(8rem, 1fr);
+	align-items: center;
+	gap: 0.65rem;
+	color: #29435f;
+	font-size: 0.88rem;
+	font-weight: 800;
+}
+
+.mission-progress progress {
+	width: 100%;
+	height: 0.8rem;
+	accent-color: #2563eb;
+}
+
+.mission-steps {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+	gap: 0.45rem;
+	padding: 0;
+	list-style: none;
+}
+
+.mission-steps li {
+	min-height: 2.6rem;
+	padding: 0.45rem;
+	border: 1px solid #c7d4e6;
+	border-radius: 12px;
+	background: rgba(255, 255, 255, 0.78);
+	color: #526b70;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-items: center;
+	gap: 0.15rem 0.4rem;
+	font-size: 0.78rem;
+}
+
+.mission-steps li > span {
+	grid-row: 1 / span 2;
+	display: grid;
+	width: 1.5rem;
+	height: 1.5rem;
+	place-items: center;
+	border-radius: 50%;
+	background: #dce8f8;
+	font-weight: 900;
+}
+
+.mission-steps li strong {
+	color: #29435f;
+}
+
+.mission-steps li small {
+	font-weight: 800;
+}
+
+.mission-steps li.current {
+	border-color: #f59e0b;
+	background: #fff8df;
+}
+
+.mission-steps li.done {
+	border-color: #34a36f;
+	background: #edf9f2;
+}
+
+.mission-steps li.done > span {
+	background: #c8efd8;
+}
+
 .workshop-badges {
 	display: flex;
 	flex-wrap: wrap;
@@ -585,7 +969,7 @@ onBeforeUnmount(() => {
 	padding: 0.65rem;
 }
 
-.station-controls button span {
+.station-controls button .station-key {
 	display: grid;
 	width: 1.6rem;
 	height: 1.6rem;
@@ -594,10 +978,27 @@ onBeforeUnmount(() => {
 	background: #e7e8fa;
 }
 
+.station-control-copy {
+	display: grid;
+	gap: 0.08rem;
+	text-align: left;
+}
+
+.station-control-copy small {
+	color: #526b70;
+	font-size: 0.75rem;
+	font-weight: 700;
+}
+
 .station-controls button.active {
 	border-color: #7c3aed;
 	background: #f2eafe;
 	box-shadow: inset 0 0 0 1px #7c3aed;
+}
+
+.station-controls button.expected {
+	border-color: #f59e0b;
+	box-shadow: inset 0 0 0 2px #f59e0b;
 }
 
 .workshop-footer {
@@ -629,6 +1030,57 @@ onBeforeUnmount(() => {
 	background: #0b1527;
 }
 
+:global(html.dark .machine-workshop .mission-picker button) {
+	border-color: rgba(148, 213, 235, 0.28);
+	background: #15243b;
+	color: #edf6ff;
+}
+
+:global(html.dark .machine-workshop .mission-picker button span),
+:global(html.dark .machine-workshop .mission-summary p),
+:global(html.dark .machine-workshop .station-control-copy small) {
+	color: #bdd1da;
+}
+
+:global(html.dark .machine-workshop .mission-picker button.active) {
+	border-color: #60a5fa;
+	background: #1d3559;
+}
+
+:global(html.dark .machine-workshop .mission-card) {
+	border-color: #31537e;
+	background: #12233d;
+}
+
+:global(
+	html.dark .machine-workshop .mission-card[data-mission-complete="true"]
+) {
+	border-color: #4ade80;
+	background: #123326;
+}
+
+:global(html.dark .machine-workshop .mission-summary h2),
+:global(html.dark .machine-workshop .mission-progress),
+:global(html.dark .machine-workshop .mission-steps li strong) {
+	color: #edf6ff;
+}
+
+:global(html.dark .machine-workshop .mission-steps li) {
+	border-color: #31537e;
+	background: #172b49;
+	color: #bdd1da;
+}
+
+:global(html.dark .machine-workshop .mission-steps li.current) {
+	border-color: #fbbf24;
+	background: #3a3017;
+}
+
+:global(html.dark .machine-workshop .mission-steps li.done) {
+	border-color: #4ade80;
+	background: #153626;
+}
+
 :global(html.dark .machine-workshop .workshop-badges span) {
 	background: #192e52;
 	color: #edf6ff;
@@ -646,6 +1098,11 @@ onBeforeUnmount(() => {
 	background: #31214a;
 }
 
+:global(html.dark .machine-workshop .station-controls button.expected) {
+	border-color: #fbbf24;
+	box-shadow: inset 0 0 0 2px #fbbf24;
+}
+
 :global(html.dark .machine-workshop .workshop-footer p) {
 	color: #bdd1da;
 }
@@ -657,6 +1114,10 @@ onBeforeUnmount(() => {
 
 	.station-controls {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.mission-picker {
+		grid-template-columns: 1fr;
 	}
 }
 

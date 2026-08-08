@@ -118,6 +118,7 @@ describe("Teacher admin page", () => {
 		expect(wrapper.get('[data-testid="pond-paddlers-admin"]').text()).toBe(
 			"Pond Paddlers rooms"
 		);
+		expect(wrapper.get("#pond-paddlers").exists()).toBe(true);
 		expect(wrapper.find("a").exists()).toBe(false);
 	});
 

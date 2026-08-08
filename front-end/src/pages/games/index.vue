@@ -6,28 +6,28 @@ type GameCardThumbnailKind = "comet" | "crosswalk" | "machine" | "pond";
 const games = [
 	{
 		description:
-			"Answer friendly arithmetic questions and paddle toward the finish with your class.",
+			"Race through arithmetic in a private room, one student or one team per device.",
 		thumbnail: "pond",
 		title: "Pond Paddlers",
 		to: "/games/pond-paddlers"
 	},
 	{
 		description:
-			"Guide a woodland friend across a busy park using careful timing.",
+			"Choose Simple, Middle, or Advanced and clear three increasingly busy crossings.",
 		thumbnail: "crosswalk",
 		title: "Crosswalk Critters",
 		to: "/games/crosswalk-critters"
 	},
 	{
 		description:
-			"Explore a playful machine and see how its parts work together.",
+			"Repair a playful machine by activating its stations in the right order.",
 		thumbnail: "machine",
 		title: "Machine Workshop",
 		to: "/games/machine-workshop"
 	},
 	{
 		description:
-			"Jump and duck through a bright space trail for a quick brain break.",
+			"Jump and duck through a bright space trail and chase a session high score.",
 		thumbnail: "comet",
 		title: "Comet Hopper",
 		to: "/games/comet-hopper"

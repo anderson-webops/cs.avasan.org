@@ -63,7 +63,7 @@ watch([() => route.query.section, currentAdmin], focusRequestedSection);
 		</section>
 
 		<div v-else class="admin-sections">
-			<section class="admin-panel site-surface">
+			<section id="pond-paddlers" class="admin-panel site-surface">
 				<PondPaddlersAdmin />
 			</section>
 			<section ref="analyticsPanel" class="admin-panel site-surface">
