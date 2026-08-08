@@ -1,5 +1,6 @@
 import type { Server } from "node:http";
 import type { RequestHandler } from "express";
+import type { CustomSession } from "../src/types/session/CustomSession.js";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import express from "express";
@@ -13,7 +14,14 @@ import {
 	assertRetainedClassroomAnalyticsHasRetentionPeriod,
 	readClassroomAnalyticsRetentionDays
 } from "../src/security/classroomAnalytics.js";
+import { ADMIN_SINGLETON_ID } from "../src/security/adminIdentity.js";
 import {
+	ADMIN_ABSOLUTE_SESSION_MS,
+	ADMIN_INACTIVITY_TIMEOUT_MS
+} from "../src/security/adminSession.js";
+import {
+	createClassroomAnalyticsSummaryLimiter,
+	createClassroomAnalyticsSummaryPreAuthLimiter,
 	createLoginLimiter,
 	createProjectDataAccessLimiter,
 	createStudentOAuthLimiter,
@@ -226,6 +234,198 @@ describe("security dependency regressions", () => {
 				});
 			}
 		);
+	});
+
+	it("keeps anonymous shared-IP traffic out of a structurally current Admin session bucket", async () => {
+		const now = Date.now();
+		const currentAdminSession: CustomSession = {
+			adminExpiresAt: now + ADMIN_ABSOLUTE_SESSION_MS,
+			adminID: ADMIN_SINGLETON_ID,
+			adminLastActivityAt: now,
+			adminSessionVersion: 8
+		};
+		const preliminaryLimiter = createClassroomAnalyticsSummaryPreAuthLimiter({
+			limit: 1,
+			windowMs: 60_000
+		});
+		const attachSessionAndLimit: RequestHandler = (req, res, next) => {
+			req.session = req.get("X-Test-Admin-Session") === "current"
+				? currentAdminSession
+				: null;
+			preliminaryLimiter(req, res, next);
+		};
+
+		await withServer(attachSessionAndLimit, async baseUrl => {
+			const anonymous = await requestLimitedEndpoint(baseUrl);
+			const anonymousLimited = await requestLimitedEndpoint(baseUrl);
+			const currentJulio = await requestLimitedEndpoint(baseUrl, {
+				"X-Test-Admin-Session": "current"
+			});
+			const currentJulioLimited = await requestLimitedEndpoint(baseUrl, {
+				"X-Test-Admin-Session": "current"
+			});
+
+			expect(anonymous.status).toBe(200);
+			expect(anonymousLimited.status).toBe(429);
+			expect(currentJulio.status).toBe(200);
+			expect(currentJulioLimited.status).toBe(429);
+		});
+	});
+
+	it("separates structurally current historical Admin versions and timing tuples", async () => {
+		const now = Date.now();
+		const sessions: Record<string, CustomSession> = {
+			current: {
+				adminExpiresAt: now + ADMIN_ABSOLUTE_SESSION_MS,
+				adminID: ADMIN_SINGLETON_ID,
+				adminLastActivityAt: now,
+				adminSessionVersion: 8
+			},
+			historicalVersion: {
+				adminExpiresAt: now + ADMIN_ABSOLUTE_SESSION_MS,
+				adminID: ADMIN_SINGLETON_ID,
+				adminLastActivityAt: now,
+				adminSessionVersion: 7
+			},
+			historicalTiming: {
+				adminExpiresAt: now + ADMIN_ABSOLUTE_SESSION_MS,
+				adminID: ADMIN_SINGLETON_ID,
+				adminLastActivityAt: now - 60_000,
+				adminSessionVersion: 8
+			}
+		};
+		const preliminaryLimiter = createClassroomAnalyticsSummaryPreAuthLimiter({
+			limit: 1,
+			windowMs: 60_000
+		});
+		const attachSessionAndLimit: RequestHandler = (req, res, next) => {
+			req.session = sessions[req.get("X-Test-Admin-Session") ?? ""] ?? null;
+			preliminaryLimiter(req, res, next);
+		};
+
+		await withServer(attachSessionAndLimit, async baseUrl => {
+			const current = await requestLimitedEndpoint(baseUrl, {
+				"X-Test-Admin-Session": "current"
+			});
+			const currentLimited = await requestLimitedEndpoint(baseUrl, {
+				"X-Test-Admin-Session": "current"
+			});
+			const historicalVersion = await requestLimitedEndpoint(baseUrl, {
+				"X-Test-Admin-Session": "historicalVersion"
+			});
+			const historicalTiming = await requestLimitedEndpoint(baseUrl, {
+				"X-Test-Admin-Session": "historicalTiming"
+			});
+
+			expect(current.status).toBe(200);
+			expect(currentLimited.status).toBe(429);
+			expect(historicalVersion.status).toBe(200);
+			expect(historicalTiming.status).toBe(200);
+		});
+	});
+
+	it("falls back to the shared-IP bucket for malformed and expired Admin sessions", async () => {
+		const now = Date.now();
+		const sessions: Record<string, CustomSession> = {
+			expired: {
+				adminExpiresAt: now - 1,
+				adminID: ADMIN_SINGLETON_ID,
+				adminLastActivityAt: now,
+				adminSessionVersion: 8
+			},
+			inactive: {
+				adminExpiresAt: now + ADMIN_ABSOLUTE_SESSION_MS,
+				adminID: ADMIN_SINGLETON_ID,
+				adminLastActivityAt: now - ADMIN_INACTIVITY_TIMEOUT_MS - 1,
+				adminSessionVersion: 8
+			},
+			malformed: {
+				adminExpiresAt: now + ADMIN_ABSOLUTE_SESSION_MS,
+				adminID: ADMIN_SINGLETON_ID,
+				adminLastActivityAt: now,
+				adminSessionVersion: "not-a-number" as unknown as number
+			}
+		};
+		const preliminaryLimiter = createClassroomAnalyticsSummaryPreAuthLimiter({
+			limit: 1,
+			windowMs: 60_000
+		});
+		const attachSessionAndLimit: RequestHandler = (req, res, next) => {
+			req.session = sessions[req.get("X-Test-Admin-Session") ?? ""] ?? null;
+			preliminaryLimiter(req, res, next);
+		};
+
+		await withServer(attachSessionAndLimit, async baseUrl => {
+			const anonymous = await requestLimitedEndpoint(baseUrl);
+			const malformed = await requestLimitedEndpoint(baseUrl, {
+				"X-Test-Admin-Session": "malformed"
+			});
+			const expired = await requestLimitedEndpoint(baseUrl, {
+				"X-Test-Admin-Session": "expired"
+			});
+			const inactive = await requestLimitedEndpoint(baseUrl, {
+				"X-Test-Admin-Session": "inactive"
+			});
+
+			expect(anonymous.status).toBe(200);
+			expect(malformed.status).toBe(429);
+			expect(expired.status).toBe(429);
+			expect(inactive.status).toBe(429);
+		});
+	});
+
+	it("keys aggregate limits only after Admin validation", async () => {
+		const validatedAdminLimiter = createClassroomAnalyticsSummaryLimiter({
+			limit: 1,
+			windowMs: 60_000
+		});
+		const attachValidationResultAndLimit: RequestHandler = (req, res, next) => {
+			if (req.get("X-Test-Validated-Admin") === "julio") {
+				req.currentAdmin = {
+					_id: ADMIN_SINGLETON_ID
+				} as NonNullable<typeof req.currentAdmin>;
+			}
+			validatedAdminLimiter(req, res, next);
+		};
+
+		await withServer(attachValidationResultAndLimit, async baseUrl => {
+			const unvalidated = await requestLimitedEndpoint(baseUrl);
+			const unvalidatedLimited = await requestLimitedEndpoint(baseUrl);
+			const validatedJulio = await requestLimitedEndpoint(baseUrl, {
+				"X-Test-Validated-Admin": "julio"
+			});
+			const validatedJulioLimited = await requestLimitedEndpoint(baseUrl, {
+				"X-Test-Validated-Admin": "julio"
+			});
+
+			expect(unvalidated.status).toBe(200);
+			expect(unvalidatedLimited.status).toBe(429);
+			expect(validatedJulio.status).toBe(200);
+			expect(validatedJulioLimited.status).toBe(429);
+		});
+	});
+
+	it("wires both classroom summary limits around production Admin validation", () => {
+		const adminRoutes = readFileSync(
+			fileURLToPath(new URL("../src/routes/adminRoutes.ts", import.meta.url)),
+			"utf8"
+		);
+		const routeStart = adminRoutes.indexOf(
+			'configuredRouter.get(\n\t\t"/classroom-analytics/summary"'
+		);
+		const routeEnd = adminRoutes.indexOf("\n\t);", routeStart);
+		const summaryRoute = adminRoutes.slice(routeStart, routeEnd);
+		const preAuthLimitIndex = summaryRoute.indexOf("classroomAnalyticsSummaryPreAuthLimiter,");
+		const validAdminIndex = summaryRoute.indexOf("validAdmin,");
+		const aggregateLimitIndex = summaryRoute.indexOf("classroomAnalyticsSummaryLimiter,");
+		const summaryHandlerIndex = summaryRoute.indexOf("getClassroomAnalyticsSummary(");
+
+		expect(routeStart).toBeGreaterThanOrEqual(0);
+		expect(routeEnd).toBeGreaterThan(routeStart);
+		expect(preAuthLimitIndex).toBeGreaterThanOrEqual(0);
+		expect(validAdminIndex).toBeGreaterThan(preAuthLimitIndex);
+		expect(aggregateLimitIndex).toBeGreaterThan(validAdminIndex);
+		expect(summaryHandlerIndex).toBeGreaterThan(aggregateLimitIndex);
 	});
 
 	it("keeps sensitive deletion receipt details out of application logs", () => {

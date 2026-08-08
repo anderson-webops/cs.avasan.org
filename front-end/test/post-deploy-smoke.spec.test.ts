@@ -8,6 +8,7 @@ import {
 	validateClassroomAnalyticsHealth,
 	validateContentSecurityPolicy,
 	validateStudentPrivacyRetention,
+	visibleTextFromHtml,
 	verifyApiNotFound,
 	verifyBrandedNotFound
 } from "../../scripts/post-deploy-smoke.mjs";
@@ -173,6 +174,72 @@ describe("production smoke feature expectations", () => {
 			`${disabledNotice} ${configuredNotice}`,
 			null
 		)).toThrow("retention remains unconfigured");
+	});
+
+	it("extracts visible privacy text without script or style content", () => {
+		expect(visibleTextFromHtml(`
+			<main data-example=">">
+				Visible <strong>privacy</strong> text.
+				<script data-example="</script>">hidden <\" script claim</script >
+				<script>hidden parser-error claim</script foo="bar">
+				<script/>hidden self-closing claim</script>
+				<STYLE data-example='>'>hidden style claim</STYLE\t>
+				<!-- hidden comment claim -->
+			</main>
+		`)).toBe("Visible privacy text.");
+	});
+
+	it.each(["head", "template", "noscript"])(
+		"does not accept a privacy disclosure rendered only inside <%s>",
+		tag => {
+			const hiddenDisclosure = [
+				"These are anonymous daily totals. They logically expire and are excluded from reports after 45 days.",
+				"The row logically expires and is excluded after 45 days."
+			].join(" ");
+			const visibleText = visibleTextFromHtml(`
+				<html>
+					<${tag}><p>${hiddenDisclosure}</p></${tag}>
+					<body><main>Visible page text.</main></body>
+				</html>
+			`);
+
+			expect(visibleText).toBe("Visible page text.");
+			expect(() => validateStudentPrivacyRetention(visibleText, 45))
+				.toThrow("exact configured analytics retention period");
+		}
+	);
+
+	it.each([
+		["template", "< /template>"],
+		["template", "</ template>"],
+		["script", "</ script>"]
+	])(
+		"keeps disclosure after malformed %s pseudo-close %s hidden",
+		(tag, pseudoClose) => {
+			const hiddenDisclosure = [
+				"These are anonymous daily totals. They logically expire and are excluded from reports after 45 days.",
+				"The row logically expires and is excluded after 45 days."
+			].join(" ");
+			const visibleText = visibleTextFromHtml(`
+				<${tag}>
+					hidden start ${pseudoClose} ${hiddenDisclosure}
+				</${tag}>
+				<main>Visible page text.</main>
+			`);
+
+			expect(visibleText).toBe("Visible page text.");
+			expect(() => validateStudentPrivacyRetention(visibleText, 45))
+				.toThrow("exact configured analytics retention period");
+		}
+	);
+
+	it("rejects unterminated hidden HTML content", () => {
+		for (const tag of ["head", "template", "noscript", "script", "style"]) {
+			expect(() => visibleTextFromHtml(`<main>Visible<${tag}>hidden`))
+				.toThrow("Student Privacy returned malformed HTML.");
+		}
+		expect(() => visibleTextFromHtml("<main>Visible<!-- hidden"))
+			.toThrow("Student Privacy returned malformed HTML.");
 	});
 
 	it("accepts only the exact standard and IDE security policies", () => {

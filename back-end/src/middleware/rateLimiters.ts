@@ -1,6 +1,9 @@
 import type { RateLimitRequestHandler } from "express-rate-limit";
+import type { CustomSession } from "../types/session/CustomSession.js";
 import { env } from "node:process";
 import rateLimit, { ipKeyGenerator } from "express-rate-limit";
+import { ADMIN_SINGLETON_ID } from "../security/adminIdentity.js";
+import { adminSessionTimingIsCurrent } from "../security/adminSession.js";
 import { ExactExpiryRateLimitStore } from "../security/exactExpiryRateLimitStore.js";
 import { normalizeStudentUsername } from "../security/studentCredentials.js";
 import {
@@ -23,6 +26,32 @@ const standardRateLimitHeaders = {
 	legacyHeaders: false
 } as const;
 const PROJECT_WRITE_LIMIT_APPLIED = Symbol.for("cs.avasan.org.project-write-limit-applied");
+
+function preliminaryClassroomSummaryKey(
+	req: Parameters<RateLimitRequestHandler>[0]
+): string {
+	const session = req.session as CustomSession | null | undefined;
+	const sessionVersion = session?.adminSessionVersion;
+	if (
+		session?.adminID === ADMIN_SINGLETON_ID
+		&& Number.isSafeInteger(sessionVersion)
+		&& (sessionVersion ?? -1) >= 0
+		&& adminSessionTimingIsCurrent(session)
+	) {
+		// The tuple is stable between explicit Admin activity heartbeats. Including
+		// every revocation and timing field keeps historical signed cookies from
+		// consuming the bucket used by Julio's current browser session.
+		return [
+			"admin-session",
+			session.adminID,
+			sessionVersion,
+			session.adminExpiresAt,
+			session.adminLastActivityAt
+		].join(":");
+	}
+
+	return `client:${ipKeyGenerator(req.ip || req.socket.remoteAddress || "unknown")}`;
+}
 
 function positiveIntegerFromEnv(name: string, fallback: number): number {
 	const value = Number(env[name]);
@@ -194,6 +223,58 @@ export function createClassroomUsageLimiter(options: TunableRateLimitOptions = {
 		...standardRateLimitHeaders,
 		message: {
 			message: "Too many classroom activity updates. Please try again shortly."
+		},
+		...options
+	});
+}
+
+/**
+ * Bounds authentication work for the teacher-only classroom summary. By this
+ * point cookie-session has signature-verified req.session, but this preliminary
+ * key remains separate from the post-database validated Admin bucket. A
+ * structurally current singleton tuple gets an isolated allowance so anonymous
+ * classroom traffic cannot lock Julio out; malformed and expired sessions use
+ * the short-lived client-address fallback.
+ */
+export function createClassroomAnalyticsSummaryPreAuthLimiter(
+	options: TunableRateLimitOptions = {}
+): RateLimitRequestHandler {
+	return rateLimit({
+		windowMs: 15 * 60 * 1000,
+		// A classroom may share one public address. Keep this gate high enough for
+		// normal school traffic while bounding automated authentication churn.
+		limit: 600,
+		store: new ExactExpiryRateLimitStore(),
+		...standardRateLimitHeaders,
+		keyGenerator: preliminaryClassroomSummaryKey,
+		message: {
+			message: "Too many classroom summary requests. Please try again shortly."
+		},
+		...options
+	});
+}
+
+/**
+ * Bounds aggregate queries only after validAdmin has loaded and validated the
+ * sole Admin record. The fallback client bucket is defensive; the production
+ * route-order contract keeps unvalidated requests from reaching this limiter.
+ */
+export function createClassroomAnalyticsSummaryLimiter(
+	options: TunableRateLimitOptions = {}
+): RateLimitRequestHandler {
+	return rateLimit({
+		windowMs: 15 * 60 * 1000,
+		limit: 120,
+		store: new ExactExpiryRateLimitStore(),
+		...standardRateLimitHeaders,
+		keyGenerator: (req) => {
+			const validatedAdminID = req.currentAdmin?._id?.toString();
+			return validatedAdminID
+				? `admin:${validatedAdminID}`
+				: `unvalidated-client:${ipKeyGenerator(req.ip || req.socket.remoteAddress || "unknown")}`;
+		},
+		message: {
+			message: "Too many classroom summary requests. Please try again shortly."
 		},
 		...options
 	});
