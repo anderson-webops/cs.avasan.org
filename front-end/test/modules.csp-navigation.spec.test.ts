@@ -18,7 +18,9 @@ describe("document CSP navigation boundary", () => {
 			"https://cs.avasan.org/python-ide/assets/manifest.json",
 			"code-ide"
 		],
-		["/", "standard"],
+		["/", "course-scratch"],
+		["/?course=scratch-1#lesson", "course-scratch"],
+		["/index.html", "course-scratch"],
 		["/student-privacy", "standard"],
 		["/ideology", "standard"],
 		["/courses/ide", "standard"],
@@ -49,6 +51,16 @@ describe("document CSP navigation boundary", () => {
 			"/student-privacy?from=ide#questions"
 		],
 		[
+			"https://cs.avasan.org/",
+			"/student-privacy?from=course#questions",
+			"/student-privacy?from=course#questions"
+		],
+		[
+			"https://cs.avasan.org/student-privacy",
+			"/?course=scratch-1#lesson",
+			"/?course=scratch-1#lesson"
+		],
+		[
 			"https://cs.avasan.org/admin/",
 			"/ide.html?course=python-2#files",
 			"/ide/?course=python-2#files"
@@ -63,7 +75,10 @@ describe("document CSP navigation boundary", () => {
 	);
 
 	it.each([
-		["https://cs.avasan.org/", "/student-privacy"],
+		[
+			"https://cs.avasan.org/?course=scratch-1",
+			"/#lesson"
+		],
 		[
 			"https://cs.avasan.org/ide?course=python-1",
 			"/ide/?course=python-2#editor"

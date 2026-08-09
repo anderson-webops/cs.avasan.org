@@ -4,7 +4,9 @@ import {
 	externalMediaResourceLabel,
 	isGitHubRepositoryUrl,
 	isInstructionMaterialResourceUrl,
-	isScratchProjectUrl
+	isScratchProjectEmbedUrl,
+	isScratchProjectUrl,
+	scratchProjectEmbedUrl
 } from "@/modules/resourceUrls";
 
 describe("resource URL classification", () => {
@@ -61,6 +63,41 @@ describe("resource URL classification", () => {
 		"http://scratch.mit.edu/projects/214828609/"
 	])("rejects a Scratch lookalike or non-project URL: %s", url => {
 		expect(isScratchProjectUrl(url)).toBe(false);
+	});
+
+	it("creates only canonical Scratch project embed URLs", () => {
+		expect(
+			scratchProjectEmbedUrl(
+				"https://scratch.mit.edu/projects/214828609/"
+			)
+		).toBe("https://scratch.mit.edu/projects/214828609/embed");
+		expect(
+			isScratchProjectEmbedUrl(
+				"https://scratch.mit.edu/projects/214828609/embed"
+			)
+		).toBe(true);
+	});
+
+	it.each([
+		"https://scratch.mit.edu/projects/214828609/embed",
+		"https://scratch.mit.edu/projects/214828609/?x=1",
+		"https://scratch.mit.edu/projects/214828609/#inside",
+		"https://scratch.mit.edu.evil.example/projects/214828609/"
+	])("does not convert a non-canonical Scratch project URL: %s", url => {
+		expect(scratchProjectEmbedUrl(url)).toBeNull();
+	});
+
+	it("keeps broad Scratch classification separate from embed eligibility", () => {
+		expect(
+			isScratchProjectUrl(
+				"https://scratch.mit.edu/projects/214828609/embed"
+			)
+		).toBe(true);
+		expect(
+			isScratchProjectEmbedUrl(
+				"https://scratch.mit.edu/projects/214828609/embed?x=1"
+			)
+		).toBe(false);
 	});
 
 	it.each([

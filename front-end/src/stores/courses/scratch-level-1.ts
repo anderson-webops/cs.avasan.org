@@ -29,8 +29,7 @@ export const scratchLevel1Course: RawCourse = {
 6. Create a timer variable that decreases as the game runs.
 
 **Completion check:** The player moves in four directions, collects objects, gains points, and has a visible countdown that changes during play.`,
-					projectLink: "https://scratch.mit.edu/projects/304003593/",
-					solutionLink: "https://scratch.mit.edu/projects/313184786/"
+					projectLink: "https://scratch.mit.edu/projects/304003593/"
 				},
 				{
 					title: "Starting in Scratch: Planning and Architecture",
@@ -57,8 +56,7 @@ export const scratchLevel1Course: RawCourse = {
 						moduleTitle: "Starting in Scratch",
 						section: "extension"
 					}),
-					projectLink: "https://scratch.mit.edu/projects/304003593/",
-					solutionLink: "https://scratch.mit.edu/projects/313184786/"
+					projectLink: "https://scratch.mit.edu/projects/304003593/"
 				},
 				{
 					title: "Starting in Scratch: Fluency Drill",
@@ -594,7 +592,7 @@ E-D-C, E-D-C, C-C-C-C, D-D-D-D, E-D-C.
 
 **Completion check:** Different answers produce different fortunes, and unexpected answers do not break the project.`,
 					projectLink: "https://scratch.mit.edu/projects/295333590/",
-					solutionLink: "https://scratch.mit.edu/projects/294540150/"
+					solutionLink: "https://scratch.mit.edu/projects/297735619/"
 				},
 				{
 					title: "Project 3 – Number Guesser",
@@ -610,7 +608,7 @@ E-D-C, E-D-C, C-C-C-C, D-D-D-D, E-D-C.
 
 **Completion check:** A wrong guess keeps the game running, and a correct guess ends the loop with clear feedback.`,
 					projectLink: "https://scratch.mit.edu/projects/295335247/",
-					solutionLink: "https://scratch.mit.edu/projects/294541979/"
+					solutionLink: "https://scratch.mit.edu/projects/294561252/"
 				}
 			],
 			supplementalProjects: [
@@ -627,7 +625,7 @@ E-D-C, E-D-C, C-C-C-C, D-D-D-D, E-D-C.
 
 **Completion check:** Each major choice leads to a different visible event and updates any related variables correctly.`,
 					projectLink: "https://scratch.mit.edu/projects/330320360/",
-					solutionLink: "https://scratch.mit.edu/projects/330316142/"
+					solutionLink: "https://scratch.mit.edu/projects/328310531/"
 				},
 				{
 					title: "GS7 Supplemental Project 2 – Space Cadets",
@@ -681,7 +679,7 @@ E-D-C, E-D-C, C-C-C-C, D-D-D-D, E-D-C.
 
 **Completion check:** Clicking different stage locations moves the mantis accurately, and touching a bug updates the game state once per catch.`,
 					projectLink: "https://scratch.mit.edu/projects/302997680/",
-					solutionLink: "https://scratch.mit.edu/projects/302865707/"
+					solutionLink: "https://scratch.mit.edu/projects/297828061/"
 				},
 				{
 					title: "Project 2 – Cake Chaser",
@@ -700,7 +698,7 @@ E-D-C, E-D-C, C-C-C-C, D-D-D-D, E-D-C.
 
 		**Completion check:** The cake relocates after every catch, and the timer produces a clear end state.`,
 					projectLink: "https://scratch.mit.edu/projects/302998723/",
-					solutionLink: "https://scratch.mit.edu/projects/302865909/"
+					solutionLink: "https://scratch.mit.edu/projects/297843021/"
 				},
 				{
 					title: "Project 3 – Talent Show",
@@ -729,7 +727,7 @@ E-D-C, E-D-C, C-C-C-C, D-D-D-D, E-D-C.
 
 **Completion check:** The displayed quadrant message matches the sprite's current X/Y position.`,
 					projectLink: "https://scratch.mit.edu/projects/330290958/",
-					solutionLink: "https://scratch.mit.edu/projects/330287678/"
+					solutionLink: "https://scratch.mit.edu/projects/329283944/"
 				},
 				{
 					title: "GS8 Supplemental Project 2 – Coordinate Drawings",
@@ -780,7 +778,7 @@ E-D-C, E-D-C, C-C-C-C, D-D-D-D, E-D-C.
 
 **Completion check:** The score increases only from target clicks, and the timer reliably stops the game at zero.`,
 					projectLink: "https://scratch.mit.edu/projects/302996579/",
-					solutionLink: "https://scratch.mit.edu/projects/302864606/"
+					solutionLink: "https://scratch.mit.edu/projects/299311602/"
 				},
 				{
 					title: "Project 2 – Spider Smash",
@@ -794,7 +792,7 @@ E-D-C, E-D-C, C-C-C-C, D-D-D-D, E-D-C.
 
 **Completion check:** Each spider click counts once, and the game ends cleanly when the timer expires.`,
 					projectLink: "https://scratch.mit.edu/projects/302996964/",
-					solutionLink: "https://scratch.mit.edu/projects/302865093/"
+					solutionLink: "https://scratch.mit.edu/projects/299094220/"
 				},
 				{
 					title: "Variables: Verification and Reflection",
@@ -818,7 +816,7 @@ E-D-C, E-D-C, C-C-C-C, D-D-D-D, E-D-C.
 
 **Completion check:** The steps variable increases only when movement happens, not when unrelated keys or events occur.`,
 					projectLink: "https://scratch.mit.edu/projects/330293454/",
-					solutionLink: "https://scratch.mit.edu/projects/330289893/"
+					solutionLink: "https://scratch.mit.edu/projects/327634746/"
 				},
 				{
 					title: "GS9 Supplemental Project 2 – Hungry Crab",
@@ -832,7 +830,7 @@ E-D-C, E-D-C, C-C-C-C, D-D-D-D, E-D-C.
 
 **Completion check:** The food count increases only when the crab collects food, and the timer creates a clear end state.`,
 					projectLink: "https://scratch.mit.edu/projects/330294193/",
-					solutionLink: "https://scratch.mit.edu/projects/330290622/"
+					solutionLink: "https://scratch.mit.edu/projects/327610727/"
 				},
 				{
 					title: "GS9 Supplemental Project 3 – Lunch Money",
@@ -847,7 +845,7 @@ E-D-C, E-D-C, C-C-C-C, D-D-D-D, E-D-C.
 
 **Completion check:** Affordable purchases reduce the money variable correctly, while unaffordable purchases do not make the total go negative.`,
 					projectLink: "https://scratch.mit.edu/projects/330294909/",
-					solutionLink: "https://scratch.mit.edu/projects/330291357/"
+					solutionLink: "https://scratch.mit.edu/projects/327607840/"
 				}
 			]
 		},

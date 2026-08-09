@@ -275,6 +275,17 @@ closed, expires, or is erased by an API restart. Rooms have no student name,
 account link, roster mapping, free text, chat, public lobby, spectators,
 persistent scores, or analytics.
 
+Optional Scratch activities are a separate, on-demand third-party feature.
+This includes CS playable Scratch course solutions and Math's optional
+coordinate activity. No Scratch frame is created until a learner chooses to
+play. At that point the browser connects directly to the exact
+`scratch.mit.edu` project embed and necessarily discloses ordinary network and
+browser connection information to Scratch and its service providers under
+their policies. The classroom intentionally sends no username, internal
+account ID, access code, saved project, source code, or analytics identifier,
+and records no play event. Closing the dialog destroys the frame. Non-Scratch
+solution references remain available only in Julio's teacher session.
+
 Game abuse prevention holds a normalized network-address key in an exact-expiry
 in-process counter for no more than five minutes and an answer counter keyed by
 the one-way seat-token hash for no more than one minute. These counters are not

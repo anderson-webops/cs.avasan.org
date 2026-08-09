@@ -16,6 +16,13 @@ This checklist complements the automated `npm run a11y` axe smoke suite. Run it 
 - Verify visible focus on the skip link, header navigation, `/admin` sign-in form, course selector, course outline buttons, resource links, and IDE controls.
 - Confirm the public course library never requires an account prompt and does not expose a signup control.
 - Confirm no hidden control receives focus and no keyboard trap occurs in the teacher sign-in form, course reader, or IDE.
+- On a Scratch lesson, confirm **Play solution** opens one dialog without
+	loading a frame beforehand. Verify focus moves into the dialog, the close
+	controls appear before and after the cross-origin player, Tab can leave the
+	player for the final close control, backdrop click closes it, focus returns
+	to the launch button, and the player frame is removed after close. Escape
+	closes while focus remains in the classroom dialog; Scratch owns keystrokes
+	while focus is inside its player. Repeat at a narrow mobile width.
 
 ## Contrast And Motion Pass
 
