@@ -9,6 +9,98 @@ export const scratchLevel1Course: RawCourse = {
 	name: "Scratch Level 1",
 	modules: [
 		{
+			title: "GS0 Play, Notice, and Change",
+			estimatedTime: "30–40 minutes",
+			keyBlocks: [
+				"when green flag clicked",
+				"when key pressed",
+				"move 10 steps",
+				"touching",
+				"change score by 1",
+				"play sound",
+				"forever"
+			],
+			curriculum: [
+				{
+					title: "Play first – Bouncy Ball Room",
+					learningPath: "core",
+					content: `**Project goal:** Play a working project, enjoy it, and notice how several events create different visible or audible responses.
+
+**First 10 minutes:**
+1. Select **Play solution** and start the game with the green flag.
+2. Press Space to move and bounce the ball.
+3. Press Right Arrow to change the backdrop, then press Up Arrow and Down Arrow to change the ball's size.
+4. Click the ball to hear a sound and change its color.
+5. Pick one response that makes the project fun and one response that could become more interesting.
+
+**Completion checks:**
+- The project starts and responds to Space, Right Arrow, Up Arrow, Down Arrow, and a click on the ball.
+- One player action can be matched to the response it causes.
+- Playing and noticing is a complete first step.`,
+					solutionLink: "https://scratch.mit.edu/projects/287922077/"
+				},
+				{
+					title: "Make one small change",
+					learningPath: "core",
+					content: `**Project goal:** Make one safe, visible change to a game that already works.
+
+Open the Hungry Hippo project and run it once before changing any blocks. Then choose **one** small change:
+
+- choose a different sound for a cheesy puff;
+- change one **move 10 steps** block to **move 15 steps**;
+- choose a different costume for the hippo;
+- choose a different backdrop.
+
+Run the project again and compare the result with the original.
+
+**Completion checks:**
+- The four-arrow controls still work.
+- One change can be seen or heard.
+- One working change completes this activity; extra changes are optional.`,
+					projectLink: "https://scratch.mit.edu/projects/304003593/"
+				},
+				{
+					title: "Find blocks by category and color",
+					learningPath: "core",
+					content: `**Concept path:** Use the category name and color together when finding a block.
+
+- **Events — yellow:** **when green flag clicked**, **when [key] key pressed**, and **when this sprite clicked** start scripts.
+- **Motion — blue:** **move**, **turn**, **go to**, **glide**, and **if on edge, bounce** change a sprite's movement or position.
+- **Looks — purple:** **say**, costumes, size, and color effects change what students see.
+- **Sound — pink:** **start sound** and **play sound until done** control what students hear.
+- **Control — orange:** **wait**, **repeat**, **forever**, and **if** control when blocks run.
+- **Sensing — light blue:** **ask and wait**, **answer**, **key [ ] pressed?**, and **touching [ ]?** report input or contact; they do not start scripts.
+- **Variables — dark orange:** **set [variable] to** and **change [variable] by** store values such as score and time.
+
+Scratch comments can hold short directions beside a script. To add one, right-click an empty white area of the Code workspace and choose **Add Comment**. Type the direction, then drag the comment onto a block to attach it. A comment can explain what a group of blocks does and why it is needed.`
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Choice – Add one more reaction",
+					learningPath: "choice",
+					content: `**Project goal:** Add one more reaction to Hungry Hippo after the one-change activity works.
+
+Choose a small reaction, such as a message when a cheesy puff is collected, a sound when Hard mode starts, or a backdrop change from a key.
+
+**Completion checks:**
+- The original controls, score, and timer still work.
+- The new reaction happens only from its chosen event or condition.`
+				},
+				{
+					title: "Challenge – Explain and reorder a script",
+					learningPath: "challenge",
+					content: `**Project goal:** Explain how the order of blocks changes a script's behavior.
+
+Choose one short script and detach its blocks. Put the blocks back in a working order. Right-click an empty white area of the Code workspace, choose **Add Comment**, type an explanation, and drag the comment onto the first block of the rebuilt script so it attaches.
+
+**Completion checks:**
+- The rebuilt script produces the same result it produced before.
+- The comment names the event, action, and visible or audible response.`
+				}
+			]
+		},
+		{
 			title: "GS1 Starting in Scratch",
 			curriculum: [
 				{
@@ -667,17 +759,43 @@ E-D-C, E-D-C, C-C-C-C, D-D-D-D, E-D-C.
 						'The Scratch stage uses an X and Y coordinate plane. The X-axis moves left and right, and the Y-axis moves up and down. The "go to x: ___ y: ___" and "glide ___ secs to x: ___ y: ___" blocks place sprites at specific coordinates or move them smoothly to a target point.'
 				},
 				{
+					title: "Guided warm-up – Coordinate Catcher",
+					learningPath: "core",
+					content: `**Project goal:** Move a frog to typed X and Y coordinates, then make a collectible react when the frog catches it.
+
+Before building, select **Play solution** on Project 1 – Bug Eater below. Notice how movement and touching a collectible create immediate feedback.
+
+**Build a working slice:**
+1. Add a frog and a collectible such as a crab, bug, or fruit.
+2. Under **when green flag clicked**, send the frog to X 0, Y 0 and make it say, “Press X or Y to move.”
+3. Under **when X key pressed**, use **ask and wait** to request an X position, then **set x to answer**. Repeat the control message after moving.
+4. Under **when Y key pressed**, ask for a Y position, then **set y to answer**. Repeat the control message again.
+5. Select the collectible. Under its green-flag event, place a **touching frog?** check inside **if** and **forever** blocks.
+6. When the collectible touches the frog, play one of the collectible's sounds and send it to a random position.
+7. Test at least three coordinate pairs and catch the collectible once.
+
+**Set and change are different:** **set x to 5** moves directly to X 5. **change x by 5** adds 5 to the current X position.
+
+**Block finder:** **ask and wait** and **answer** are light-blue Sensing blocks. **say** is a purple Looks block. **if** and **forever** are orange Control blocks.
+
+**Sound check:** Scratch sounds belong to the selected sprite. Select the collectible before adding or choosing its catch sound.
+
+**Success paths:** Coordinate movement is the core result. The collectible and sound are the next choice. A score, timer, or another event is an optional challenge.`
+				},
+				{
 					title: "Project 1 – Bug Eater",
-					content: `**Project goal:** Build a click-to-move collection game using X and Y coordinates.
+					content: `**Project goal:** Move a frog to typed X and Y coordinates and make a collectible react when the frog catches it.
 
 **Build steps:**
-1. The green flag places the praying mantis at a random position.
-2. A mouse click makes the mantis glide to the mouse pointer's X and Y position.
-3. When the mantis touches a bug, a broadcast makes the bug disappear and increases the score.
-4. Score and timer variables track game progress.
-5. The game ends when the timer runs out and displays the final score.
+1. Under **when green flag clicked**, add a **forever** loop for the frog's coordinate questions.
+2. Ask, “What X should I go to?” and use **set x to answer**.
+3. Ask, “What Y should I go to?” and use **set y to answer**.
+4. Add a ladybug, bug, fruit, or other collectible sprite.
+5. Select the collectible, open its Sounds tab, and add or choose a sound such as Chomp.
+6. Under the collectible's green-flag event, repeatedly check **if touching Frog?**.
+7. When the collectible touches the frog, send it to a random position and play the sound selected for that sprite.
 
-**Completion check:** Clicking different stage locations moves the mantis accurately, and touching a bug updates the game state once per catch.`,
+**Completion check:** The frog repeatedly accepts X and Y positions, moves to the typed coordinates, and triggers the collectible's movement and sound when the two sprites touch.`,
 					projectLink: "https://scratch.mit.edu/projects/297831461/",
 					solutionLink: "https://scratch.mit.edu/projects/297828061/"
 				},

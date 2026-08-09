@@ -114,6 +114,31 @@ describe("LazyMarkdownContent.vue", () => {
 		);
 	});
 
+	it("keeps bold category labels inside their list items", async () => {
+		const wrapper = mount(LazyMarkdownContent, {
+			props: {
+				content: [
+					"- **Events — yellow:** when green flag clicked starts a script.",
+					"- **Sensing — light blue:** touching reports contact."
+				].join("\n")
+			}
+		});
+
+		await flushPromises();
+		await vi.waitFor(() => {
+			expect(wrapper.findAll("ul li")).toHaveLength(2);
+		});
+
+		expect(wrapper.findAll("ul li").map(item => item.text())).toEqual([
+			"Events — yellow: when green flag clicked starts a script.",
+			"Sensing — light blue: touching reports contact."
+		]);
+		expect(wrapper.find("h2").exists()).toBe(false);
+		expect(wrapper.findAll("ul li").every(item => item.text().trim())).toBe(
+			true
+		);
+	});
+
 	it("does not rewrite fenced code blocks while formatting compact course text", async () => {
 		const wrapper = mount(LazyMarkdownContent, {
 			props: {
