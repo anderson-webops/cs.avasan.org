@@ -66,7 +66,27 @@ function normalizeInlineCourseMarkdown(content: string) {
 			}
 
 			let normalized = line
-				.replace(/(\S)\s+(\*\*[^*\n]{1,80}:\*\*)/g, "$1\n\n$2")
+				.replace(
+					/(\S)\s+(\*\*[^*\n]{1,80}:\*\*)/g,
+					(
+						match,
+						prefix: string,
+						label: string,
+						offset: number,
+						source: string
+					) => {
+						const lineStart = source.lastIndexOf("\n", offset) + 1;
+						const textBeforeLabel = source
+							.slice(lineStart, offset + prefix.length)
+							.trim();
+
+						if (/^(?:[-*+]|\d+\.)$/u.test(textBeforeLabel)) {
+							return match;
+						}
+
+						return `${prefix}\n\n${label}`;
+					}
+				)
 				.replace(
 					/(\*\*[^*\n]{1,80}:\*\*)\s+(?=(?:\d+\.|[-*])\s)/g,
 					"$1\n"
