@@ -25,6 +25,7 @@ import {
 	externalDatasetResourceLabel,
 	externalMediaResourceLabel,
 	isGitHubRepositoryUrl,
+	isScratchProjectEmbedUrl,
 	isScratchProjectUrl
 } from "@/modules/resourceUrls";
 import { useAppStore } from "@/stores/app";
@@ -38,6 +39,7 @@ import {
 import CodePreview from "./CodePreview.vue";
 import CourseAssetPreview from "./CourseAssetPreview.vue";
 import LazyMarkdownContent from "./LazyMarkdownContent.vue";
+import ScratchSolutionDialog from "./ScratchSolutionDialog.vue";
 
 interface VisibleModule extends CourseModule {
 	position: number;
@@ -85,6 +87,10 @@ const unavailableStaticMediaUrls = ref<string[]>([]);
 const isStorageReady = ref(false);
 const currentHashAnchor = ref(readCurrentHashAnchor());
 const prefersReducedMotion = ref(false);
+const activeScratchSolution = ref<{
+	embedUrl: string;
+	title: string;
+} | null>(null);
 let reducedMotionQuery: MediaQueryList | null = null;
 
 const allCourses = computed(() => courses.value ?? []);
@@ -847,6 +853,26 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 	return links;
 }
 
+function hasPlayableScratchSolution(item: CourseModuleItem) {
+	return Boolean(
+		item.playableSolutionEmbedUrl &&
+		isScratchProjectEmbedUrl(item.playableSolutionEmbedUrl)
+	);
+}
+
+function openScratchSolution(item: CourseModuleItem) {
+	if (!hasPlayableScratchSolution(item) || !item.playableSolutionEmbedUrl)
+		return;
+	activeScratchSolution.value = {
+		embedUrl: item.playableSolutionEmbedUrl,
+		title: item.title
+	};
+}
+
+function closeScratchSolution() {
+	activeScratchSolution.value = null;
+}
+
 function codePreviewResources(item: CourseModuleItem): CodePreviewResource[] {
 	return resourceLinks(item)
 		.filter(
@@ -901,6 +927,7 @@ function resourceOpenUrl(resource: ResourceLink) {
 }
 
 watch(selectedCourseId, value => {
+	closeScratchSolution();
 	if (!isStorageReady.value) return;
 	writeStoredValue(COURSE_SELECTION_STORAGE_KEY, value);
 });
@@ -1216,7 +1243,10 @@ function writeStoredValue(key: string, value: string) {
 									/>
 
 									<div
-										v-if="resourceLinks(item).length > 0"
+										v-if="
+											resourceLinks(item).length > 0 ||
+											hasPlayableScratchSolution(item)
+										"
 										class="resource-list"
 									>
 										<template
@@ -1275,6 +1305,21 @@ function writeStoredValue(key: string, value: string) {
 												</small>
 											</a>
 										</template>
+										<button
+											v-if="
+												hasPlayableScratchSolution(item)
+											"
+											class="resource-link is-playable-solution"
+											type="button"
+											@click="openScratchSolution(item)"
+										>
+											<span class="resource-link-label"
+												>Play solution</span
+											>
+											<small class="resource-link-host"
+												>Scratch player</small
+											>
+										</button>
 									</div>
 
 									<CourseAssetPreview
@@ -1423,7 +1468,10 @@ function writeStoredValue(key: string, value: string) {
 									/>
 
 									<div
-										v-if="resourceLinks(item).length > 0"
+										v-if="
+											resourceLinks(item).length > 0 ||
+											hasPlayableScratchSolution(item)
+										"
 										class="resource-list"
 									>
 										<template
@@ -1482,6 +1530,21 @@ function writeStoredValue(key: string, value: string) {
 												</small>
 											</a>
 										</template>
+										<button
+											v-if="
+												hasPlayableScratchSolution(item)
+											"
+											class="resource-link is-playable-solution"
+											type="button"
+											@click="openScratchSolution(item)"
+										>
+											<span class="resource-link-label"
+												>Play solution</span
+											>
+											<small class="resource-link-host"
+												>Scratch player</small
+											>
+										</button>
 									</div>
 
 									<CourseAssetPreview
@@ -1601,6 +1664,13 @@ function writeStoredValue(key: string, value: string) {
 				<p>{{ courseLoadError }}</p>
 			</div>
 		</div>
+
+		<ScratchSolutionDialog
+			:open="Boolean(activeScratchSolution)"
+			:embed-url="activeScratchSolution?.embedUrl ?? ''"
+			:title="activeScratchSolution?.title ?? 'Scratch solution'"
+			@close="closeScratchSolution"
+		/>
 	</section>
 </template>
 
@@ -2250,6 +2320,7 @@ function writeStoredValue(key: string, value: string) {
 }
 
 .resource-link {
+	display: flex;
 	min-width: 0;
 	flex-direction: column;
 	align-items: flex-start;
@@ -2259,6 +2330,9 @@ function writeStoredValue(key: string, value: string) {
 	background: var(--course-resource-bg, rgba(255, 255, 255, 0.94));
 	color: var(--course-resource-text, var(--course-text));
 	box-shadow: 0 12px 22px -22px rgba(15, 23, 42, 0.18);
+	font: inherit;
+	text-align: left;
+	text-decoration: none;
 }
 
 .resource-link:hover {
@@ -2309,6 +2383,15 @@ function writeStoredValue(key: string, value: string) {
 	);
 	--course-resource-text: var(--course-solution-resource-text, #1e3a8a);
 	--course-resource-host: var(--course-solution-resource-host, #486a9c);
+}
+
+.resource-link.is-playable-solution {
+	--course-resource-bg: rgba(245, 243, 255, 0.96);
+	--course-resource-bg-hover: rgba(237, 233, 254, 0.98);
+	--course-resource-text: #4c1d95;
+	--course-resource-host: #6d5a9c;
+	border: 0;
+	cursor: pointer;
 }
 
 .resource-link.is-dataset {

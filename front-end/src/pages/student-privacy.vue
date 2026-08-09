@@ -148,6 +148,25 @@ const policyEffectiveDate = classroomPrivacyPolicyEffectiveDate();
 		</section>
 
 		<section class="site-surface privacy-page__section">
+			<h2>Optional Scratch activities</h2>
+			<p>
+				CS playable Scratch course solutions and Math's optional
+				coordinate activity are not loaded when a student opens a site
+				or course. If a student chooses to play one, the browser
+				connects directly to the external Scratch website and its
+				service providers. They receive ordinary connection information,
+				such as the network address and browser details, under their own
+				privacy practices.
+			</p>
+			<p>
+				The classroom does not intentionally send Scratch a classroom
+				username, account ID, saved code, project content, access code,
+				or game result. Playing an activity is not added to classroom
+				analytics. Closing the player removes it from the page.
+			</p>
+		</section>
+
+		<section class="site-surface privacy-page__section">
 			<h2>Optional student accounts</h2>
 			<p>
 				Courses and browser saves work without an account. Julio may
@@ -466,12 +485,12 @@ const policyEffectiveDate = classroomPrivacyPolicyEffectiveDate();
 		<section class="site-surface privacy-page__section">
 			<h2>What this classroom does not do</h2>
 			<p>
-				There are no ads, sales of student information, cross-site
-				tracking, location tracking, device fingerprinting, session
-				replay, keystroke tracking, or collection of code content as
-				analytics. Student accounts, projects, reviews, and deletion
-				receipts are not public. A signed-in student sees only that
-				student’s records; Julio is the only teacher/Admin.
+				There are no ads, sales of student information, operator-run
+				cross-site tracking, location tracking, device fingerprinting,
+				session replay, keystroke tracking, or collection of code
+				content as analytics. Student accounts, projects, reviews, and
+				deletion receipts are not public. A signed-in student sees only
+				that student’s records; Julio is the only teacher/Admin.
 			</p>
 		</section>
 

@@ -55,11 +55,57 @@ export function isGitHubRepositoryUrl(value: string) {
 export function isScratchProjectUrl(value: string) {
 	const parsed = parsePublicHttpsUrl(value);
 	if (parsed?.hostname !== "scratch.mit.edu") return false;
-
 	const segments = pathSegments(parsed);
 	return (
 		segments[0] === "projects" &&
 		SCRATCH_PROJECT_ID_RE.test(segments[1] ?? "")
+	);
+}
+
+function exactScratchProjectId(value: string) {
+	const parsed = parsePublicHttpsUrl(value);
+	if (
+		parsed?.hostname !== "scratch.mit.edu" ||
+		parsed.search ||
+		parsed.hash
+	) {
+		return null;
+	}
+
+	const segments = pathSegments(parsed);
+	if (
+		segments.length !== 2 ||
+		segments[0] !== "projects" ||
+		!SCRATCH_PROJECT_ID_RE.test(segments[1] ?? "")
+	) {
+		return null;
+	}
+
+	return segments[1];
+}
+
+export function scratchProjectEmbedUrl(value: string) {
+	const projectId = exactScratchProjectId(value);
+	return projectId
+		? `https://scratch.mit.edu/projects/${projectId}/embed`
+		: null;
+}
+
+export function isScratchProjectEmbedUrl(value: string) {
+	const parsed = parsePublicHttpsUrl(value);
+	if (
+		parsed?.hostname !== "scratch.mit.edu" ||
+		parsed.search ||
+		parsed.hash
+	) {
+		return false;
+	}
+	const segments = pathSegments(parsed);
+	return (
+		segments.length === 3 &&
+		segments[0] === "projects" &&
+		SCRATCH_PROJECT_ID_RE.test(segments[1] ?? "") &&
+		segments[2] === "embed"
 	);
 }
 

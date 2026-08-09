@@ -43,7 +43,11 @@ function courseDefinition(id: string, name: string) {
 					{
 						id: `${id}-lesson`,
 						title: "Try one idea",
-						content: "Build a small project and test what happens."
+						content: "Build a small project and test what happens.",
+						playableSolutionEmbedUrl:
+							id === "scratch-level-1"
+								? "https://scratch.mit.edu/projects/297735619/embed"
+								: undefined
 					}
 				],
 				supplementalProjects: [
@@ -92,6 +96,7 @@ describe("CourseExplorer public catalog", () => {
 			global: {
 				plugins: [pinia],
 				stubs: {
+					teleport: true,
 					CodePreview: true,
 					CourseAssetPreview: true,
 					LazyMarkdownContent: {
@@ -148,6 +153,28 @@ describe("CourseExplorer public catalog", () => {
 		);
 		expect(wrapper.text()).not.toContain("Course preview");
 		expect(wrapper.text()).not.toContain("Use the browser workspace");
+	});
+
+	it("loads a playable Scratch solution only after the learner asks", async () => {
+		const { wrapper } = await mountPublicCatalog();
+
+		expect(wrapper.find("iframe").exists()).toBe(false);
+		expect(wrapper.find('a[href*="scratch.mit.edu"]').exists()).toBe(false);
+		await wrapper.get(".is-playable-solution").trigger("click");
+		await flushPromises();
+
+		const frame = wrapper.get("iframe");
+		expect(frame.attributes("src")).toBe(
+			"https://scratch.mit.edu/projects/297735619/embed"
+		);
+		expect(frame.attributes("referrerpolicy")).toBe("no-referrer");
+		expect(frame.attributes("sandbox")).toBe(
+			"allow-scripts allow-same-origin"
+		);
+
+		await wrapper.get(".dialog-close").trigger("click");
+		await flushPromises();
+		expect(wrapper.find("iframe").exists()).toBe(false);
 	});
 
 	it("searches the visible public course content without an account", async () => {
