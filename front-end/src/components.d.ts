@@ -11,6 +11,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AccessibleDialog: typeof import('./components/AccessibleDialog.vue')['default']
     AccountManagement: typeof import('./components/AccountManagement.vue')['default']
     AccountSecurity: typeof import('./components/AccountSecurity.vue')['default']
     ClassroomAnalytics: typeof import('./components/ClassroomAnalytics.vue')['default']
@@ -27,6 +28,7 @@ declare module 'vue' {
     PondPaddlersGame: typeof import('./components/PondPaddlersGame.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ScratchSolutionDialog: typeof import('./components/ScratchSolutionDialog.vue')['default']
     StudentAccess: typeof import('./components/StudentAccess.vue')['default']
     StudentManagement: typeof import('./components/StudentManagement.vue')['default']
     StudentProjectReview: typeof import('./components/StudentProjectReview.vue')['default']

@@ -7,7 +7,10 @@ import type {
 import { defineStore } from "pinia";
 
 import { computed } from "vue";
-import { isInstructionMaterialResourceUrl } from "@/modules/resourceUrls";
+import {
+	isInstructionMaterialResourceUrl,
+	scratchProjectEmbedUrl
+} from "@/modules/resourceUrls";
 import { useAppStore } from "./app";
 import {
 	archivedCourseCatalog,
@@ -405,19 +408,20 @@ function normalizeCourse(
 								DEDICATED_SOLUTION_SEGMENT_RE.test(
 									explicitProjectLink ?? ""
 								);
-							const legacySolutionLink =
-								projectLinkIsSolution &&
-								options.includeSolutions
-									? explicitProjectLink
-									: undefined;
+							const legacySolutionLink = projectLinkIsSolution
+								? explicitProjectLink
+								: undefined;
 							const extractedSolutionLink =
-								extractedLink?.isSolutionLink &&
-								options.includeSolutions
+								extractedLink?.isSolutionLink
 									? extractedLink.url
 									: undefined;
 							const normalizedContent = normalizeContent(
 								extractedLink?.content ?? item.content
 							);
+							const resolvedSolutionLink =
+								normalizedSolutionLink ??
+								legacySolutionLink ??
+								extractedSolutionLink;
 
 							return {
 								stableAliases: item.aliases,
@@ -449,10 +453,13 @@ function normalizeCourse(
 										? normalizedSolutionLink
 										: undefined;
 								})(),
+								playableSolutionEmbedUrl: resolvedSolutionLink
+									? (scratchProjectEmbedUrl(
+											resolvedSolutionLink
+										) ?? undefined)
+									: undefined,
 								solutionLink: options.includeSolutions
-									? (normalizedSolutionLink ??
-										legacySolutionLink ??
-										extractedSolutionLink)
+									? resolvedSolutionLink
 									: undefined,
 								datasetLink: item.datasetLink,
 								mediaLink: item.mediaLink

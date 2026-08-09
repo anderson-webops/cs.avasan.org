@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
 import { courseCatalog } from "@/stores/courses/index";
+import { isScratchProjectEmbedUrl } from "@/modules/resourceUrls";
 
 const SOLUTION_PATH_RE =
 	/(?:^|\/)solutions?(?:\/|$)|(?:^|[-_])solutions?(?:[-_]|$)/i;
@@ -65,9 +66,7 @@ describe("course solution visibility", () => {
 			editAdmins: false,
 			saveEdit: "Save"
 		});
-		const course = await useCoursesStore().loadCourseById(
-			"python-level-1"
-		);
+		const course = await useCoursesStore().loadCourseById("python-level-1");
 		const solutionLinks = items(course!)
 			.map(item => item.solutionLink)
 			.filter(Boolean);
@@ -77,5 +76,32 @@ describe("course solution visibility", () => {
 		expect(solutionLinks.some(link => SOLUTION_PATH_RE.test(link!))).toBe(
 			true
 		);
+	});
+
+	it("exposes only canonical Scratch players to anonymous learners", async () => {
+		const coursesStore = useCoursesStore();
+		const scratchCourse =
+			await coursesStore.loadCourseById("scratch-level-1");
+		const pythonCourse =
+			await coursesStore.loadCourseById("python-level-1");
+		const scratchEmbeds = items(scratchCourse!)
+			.map(item => item.playableSolutionEmbedUrl)
+			.filter((url): url is string => Boolean(url));
+		const hungryHippoItems = items(scratchCourse!).filter(item =>
+			/Hungry Hippo/i.test(item.title)
+		);
+
+		expect(scratchEmbeds.length).toBeGreaterThan(0);
+		expect(scratchEmbeds.every(isScratchProjectEmbedUrl)).toBe(true);
+		expect(
+			items(pythonCourse!).some(item => item.playableSolutionEmbedUrl)
+		).toBe(false);
+		expect(items(scratchCourse!).some(item => item.solutionLink)).toBe(
+			false
+		);
+		expect(hungryHippoItems.length).toBeGreaterThan(0);
+		expect(
+			hungryHippoItems.every(item => !item.playableSolutionEmbedUrl)
+		).toBe(true);
 	});
 });

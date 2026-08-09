@@ -34,6 +34,11 @@ Keep these constraints intact:
 - Students browse courses and use the browser IDE anonymously. An optional
   student account may sync Python-family IDE projects, but
   it must never gate course access or anonymous browser saves.
+- Learners may play a course solution only when its source is an exact public
+  Scratch project URL. Keep the external player lazy, sandboxed, and confined
+  to an accessible dialog that is destroyed on close. Never expose a visible
+  external solution link to learners, and keep every non-Scratch solution
+  teacher-only. Math-specific graphing interactives belong only on Math.
 - Student accounts have a username but no email. Julio creates them and issues
   unique, expiring setup codes; students cannot register or recover accounts
   themselves. After consuming the code, a student may choose a password or
