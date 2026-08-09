@@ -68,7 +68,7 @@ describe("production smoke feature expectations", () => {
 	it("builds a secret-free native public configuration", () => {
 		const manifest = nativeReleaseManifest({
 			CLASSROOM_PRIVACY_APPROVED: "false",
-			CS_RELEASE_VERSION: "2.7.117",
+			CS_RELEASE_VERSION: "2.7.118",
 			MONGODB_URI: "mongodb://secret-value",
 			SESSION_SECRET: "secret-value",
 			SOURCE_REVISION: "a".repeat(40),
@@ -95,7 +95,7 @@ describe("production smoke feature expectations", () => {
 	it("refuses native analytics collection without one explicit retention period", () => {
 		const identity = {
 			CLASSROOM_ANALYTICS_COLLECTION_ENABLED: "true",
-			CS_RELEASE_VERSION: "2.7.117",
+			CS_RELEASE_VERSION: "2.7.118",
 			SOURCE_REVISION: "a".repeat(40)
 		};
 		expect(() => nativeReleaseManifest(identity)).toThrow(

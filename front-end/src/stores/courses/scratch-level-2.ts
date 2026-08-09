@@ -993,7 +993,8 @@ export const scratchLevel2Course: RawCourse = {
 					title: "GM9 Project 1: Fish Food",
 					content:
 						"Plan Fish Food around the fish controls, food movement, scoring, hazards or missed-food behavior, and the condition that ends or resets the game.\nCreate a blank Scratch project and add a project comment that lists the implementation steps. Build Fish Food with custom sprites and backdrops as preparation for the master project.\nTest that food appears predictably, score changes only when intended, and the game can be replayed from a clean state.",
-					projectLink: "https://scratch.mit.edu/projects/468227197"
+					projectLink: "https://scratch.mit.edu/projects/315901981",
+					solutionLink: "https://scratch.mit.edu/projects/468227197"
 				},
 				{
 					title: "Fish Food: Debugging and Failure Modes",
