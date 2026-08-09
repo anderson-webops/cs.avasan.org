@@ -49,6 +49,7 @@ export interface CourseSummary {
 export interface CourseModuleItem extends RawCourseModuleItem {
 	id: string;
 	aliases?: string[];
+	playableSolutionEmbedUrl?: string;
 }
 
 export interface CourseModule {

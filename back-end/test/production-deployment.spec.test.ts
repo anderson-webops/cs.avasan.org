@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
+import { parse as parseYaml } from "yaml";
 
 function repositoryFile(path: string) {
 	return readFileSync(resolve(__dirname, `../../${path}`), "utf8");
@@ -15,6 +16,11 @@ function composeService(compose: string, serviceName: string) {
 }
 
 describe("versioned full-stack production deployment", () => {
+	it("keeps the manual Compose fallback valid YAML", () => {
+		const compose = repositoryFile("compose.production.yml");
+		expect(() => parseYaml(compose)).not.toThrow();
+	});
+
 	it("pins every GitHub Action to an immutable reviewed commit", () => {
 		const workflowDirectory = resolve(__dirname, "../../.github/workflows");
 		const codeqlWorkflow = repositoryFile(".github/workflows/codeql-analysis.yml");
@@ -87,6 +93,10 @@ describe("versioned full-stack production deployment", () => {
 		expect(proxy).not.toContain("ws:");
 		expect(proxy).not.toContain("blob: https:");
 		expect(proxy).toContain("worker-src 'self' blob:");
+		expect(proxy.match(/https:\/\/scratch[.]mit[.]edu/g)).toHaveLength(1);
+		expect(proxy).toMatch(
+			/location = \/index[.]html \{[\s\S]*?frame-src 'self' https:\/\/scratch[.]mit[.]edu;/u
+		);
 		expect(proxy).toContain("try_files $uri $uri/ =404;");
 		expect(proxy).not.toContain("try_files $uri $uri/ /index.html;");
 		expect(proxy).toContain("location ~ ^(.+)/index[.]html$");
@@ -155,6 +165,11 @@ describe("versioned full-stack production deployment", () => {
 		expect(nativeProxy).toContain("http3 on;");
 		expect(nativeProxy).toContain("quic_retry on;");
 		expect(nativeStandardHeaders).toContain("add_header Alt-Svc 'h3=\":443\"; ma=86400' always;");
+		expect(nativeStandardHeaders).not.toContain("scratch.mit.edu");
+		expect(nativeProxy.match(/https:\/\/scratch[.]mit[.]edu/g)).toHaveLength(1);
+		expect(nativeProxy).toMatch(
+			/location = \/index[.]html \{[\s\S]*?frame-src 'self' https:\/\/scratch[.]mit[.]edu;/u
+		);
 		expect(nativeIdeHeaders).toContain("add_header Alt-Svc 'h3=\":443\"; ma=86400' always;");
 		expect(nativeStandardHeaders).toContain('add_header Cross-Origin-Opener-Policy "same-origin" always;');
 		expect(nativeStandardHeaders).toContain('add_header Cross-Origin-Resource-Policy "same-origin" always;');
@@ -299,14 +314,14 @@ describe("versioned full-stack production deployment", () => {
 			version: string;
 		};
 
-		expect(rootPackage.version).toBe("2.7.116");
-		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]116\}/g)).toHaveLength(2);
+		expect(rootPackage.version).toBe("2.7.117");
+		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]117\}/g)).toHaveLength(2);
 		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g)).toHaveLength(2);
 		expect(compose).not.toContain("SOURCE_REVISION:-unknown");
 		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
-		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.116");
+		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.117");
 		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
-		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.116");
+		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.117");
 		expect(apiDockerfile).toContain("ARG SOURCE_REVISION=unknown");
 		expect(frontendReleaseWriter).toContain("environment.COMMIT_REF?.trim()");
 		expect(frontendReleaseWriter).toContain("const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;");

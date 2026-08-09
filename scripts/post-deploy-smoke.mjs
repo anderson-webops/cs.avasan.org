@@ -38,6 +38,10 @@ const standardContentSecurityPolicy = Object.freeze({
 	"style-src": ["'self'", "'unsafe-inline'"],
 	"worker-src": ["'self'", "blob:"]
 });
+const courseContentSecurityPolicy = Object.freeze({
+	...standardContentSecurityPolicy,
+	"frame-src": ["'self'", "https://scratch.mit.edu"]
+});
 const codeIdeContentSecurityPolicy = Object.freeze({
 	...standardContentSecurityPolicy,
 	"connect-src": [
@@ -55,7 +59,8 @@ const codeIdeContentSecurityPolicy = Object.freeze({
 		"'wasm-unsafe-eval'",
 		"https://cdn.jsdelivr.net",
 		"https://cdn.plot.ly"
-	]
+	],
+	"frame-src": ["'self'"]
 });
 
 function assertion(condition, message) {
@@ -68,7 +73,9 @@ function normalizedSources(sources) {
 
 export function validateContentSecurityPolicy(value, policyName) {
 	assertion(
-		policyName === "standard" || policyName === "code-ide",
+		policyName === "standard" ||
+			policyName === "course" ||
+			policyName === "code-ide",
 		"Unknown Content-Security-Policy profile."
 	);
 	assertion(
@@ -90,7 +97,9 @@ export function validateContentSecurityPolicy(value, policyName) {
 
 	const expected = policyName === "code-ide"
 		? codeIdeContentSecurityPolicy
-		: standardContentSecurityPolicy;
+		: policyName === "course"
+			? courseContentSecurityPolicy
+			: standardContentSecurityPolicy;
 	assertion(
 		actual.size === Object.keys(expected).length,
 		`${policyName} Content-Security-Policy has an unexpected directive set.`
@@ -502,7 +511,7 @@ async function verifyReleaseIdentity() {
 
 async function verifySecurityHeaders() {
 	for (const [path, policyName] of [
-		["/", "standard"],
+		["/", "course"],
 		["/games/pond-paddlers/", "standard"],
 		["/games/t-rex-runner/", "standard"],
 		["/licenses/chromium-bsd-license.txt", "standard"],

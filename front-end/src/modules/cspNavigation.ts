@@ -1,6 +1,6 @@
 import type { UserModule } from "@/types";
 
-export type DocumentCspProfile = "code-ide" | "standard";
+export type DocumentCspProfile = "code-ide" | "course-scratch" | "standard";
 
 const urlParsingBase = "https://cs.avasan.invalid/";
 
@@ -10,6 +10,9 @@ function parsedUrl(value: string | URL, base = urlParsingBase) {
 
 export function documentCspProfile(value: string | URL): DocumentCspProfile {
 	const { pathname } = parsedUrl(value);
+	if (/^\/(?:index\.html)?$/u.test(pathname)) {
+		return "course-scratch";
+	}
 	return /^\/(?:bluej|ide|python-ide)(?:\.html)?(?:\/|$)/u.test(pathname)
 		? "code-ide"
 		: "standard";
@@ -71,7 +74,7 @@ export const install: UserModule = ({ isClient, router }) => {
 		if (!target) return;
 
 		// CSP belongs to the current HTML document. Crossing between the
-		// standard site and the IDE therefore requires a fresh response.
+		// course root, standard site, and IDE therefore requires a fresh response.
 		window.location.assign(target);
 		return false;
 	});

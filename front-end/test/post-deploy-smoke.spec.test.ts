@@ -41,29 +41,34 @@ const productionSmokeSource = readFileSync(
 const nginxPolicies = [
 	...nginxSource.matchAll(/add_header Content-Security-Policy "([^"]+)"/gu)
 ].map(match => match[1]);
+const uniqueNginxPolicies = [...new Set(nginxPolicies)];
 const netlifyPolicies = [
 	...netlifySource.matchAll(/Content-Security-Policy = "([^"]+)"/gu)
 ].map(match => match[1]);
 
-function requiredPolicy(policy: string | undefined, profile: string) {
-	if (!policy) throw new Error(`Missing ${profile} policy fixture.`);
-	return policy;
+function policyForProfile(profile: "code-ide" | "course" | "standard") {
+	const matches = uniqueNginxPolicies.filter(policy => {
+		try {
+			return validateContentSecurityPolicy(policy, profile);
+		} catch {
+			return false;
+		}
+	});
+	if (matches.length !== 1) {
+		throw new Error(`Expected one exact ${profile} policy fixture.`);
+	}
+	return matches[0];
 }
 
-const standardPolicy = requiredPolicy(
-	nginxPolicies.find(policy => !policy.includes("unsafe-eval")),
-	"standard"
-);
-const codeIdePolicy = requiredPolicy(
-	nginxPolicies.find(policy => policy.includes("unsafe-eval")),
-	"IDE"
-);
+const standardPolicy = policyForProfile("standard");
+const coursePolicy = policyForProfile("course");
+const codeIdePolicy = policyForProfile("code-ide");
 
 describe("production smoke feature expectations", () => {
 	it("builds a secret-free native public configuration", () => {
 		const manifest = nativeReleaseManifest({
 			CLASSROOM_PRIVACY_APPROVED: "false",
-			CS_RELEASE_VERSION: "2.7.116",
+			CS_RELEASE_VERSION: "2.7.117",
 			MONGODB_URI: "mongodb://secret-value",
 			SESSION_SECRET: "secret-value",
 			SOURCE_REVISION: "a".repeat(40),
@@ -90,7 +95,7 @@ describe("production smoke feature expectations", () => {
 	it("refuses native analytics collection without one explicit retention period", () => {
 		const identity = {
 			CLASSROOM_ANALYTICS_COLLECTION_ENABLED: "true",
-			CS_RELEASE_VERSION: "2.7.116",
+			CS_RELEASE_VERSION: "2.7.117",
 			SOURCE_REVISION: "a".repeat(40)
 		};
 		expect(() => nativeReleaseManifest(identity)).toThrow(
@@ -242,15 +247,20 @@ describe("production smoke feature expectations", () => {
 			.toThrow("Student Privacy returned malformed HTML.");
 	});
 
-	it("accepts only the exact standard and IDE security policies", () => {
+	it("accepts only the exact standard, course, and IDE security policies", () => {
 		expect(nginxPolicies).toHaveLength(6);
-		expect(new Set(nginxPolicies).size).toBe(2);
-		expect(netlifyPolicies).toHaveLength(3);
+		expect(new Set(nginxPolicies).size).toBe(3);
+		expect(netlifyPolicies).toHaveLength(5);
 		expect(new Set(netlifyPolicies)).toEqual(new Set(nginxPolicies));
 		expect(validateContentSecurityPolicy(standardPolicy, "standard")).toBe(true);
+		expect(validateContentSecurityPolicy(coursePolicy, "course")).toBe(true);
 		expect(
 			validateContentSecurityPolicy(codeIdePolicy, "code-ide")
 		).toBe(true);
+		expect(standardPolicy).not.toContain("scratch.mit.edu");
+		expect(coursePolicy).toContain(
+			"frame-src 'self' https://scratch.mit.edu"
+		);
 	});
 
 	it("redirects IDE aliases to the primary profiled directory route", () => {
