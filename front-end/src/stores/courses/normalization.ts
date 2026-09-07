@@ -1,5 +1,6 @@
 import type { RawCourse, RawCourseModule, RawCourseModuleItem } from "./types";
 import { applyCourseImplementationArtifacts } from "./course-implementation-artifacts";
+import { isJuniScratchProjectTitle } from "./juniScratchProjects";
 import { buildProjectGuidance } from "./projectGuidance";
 import { applyResearchBackedExpansions } from "./research-expansions";
 import {
@@ -45,6 +46,55 @@ function cloneCourse(course: RawCourse): RawCourse {
 		...course,
 		modules: course.modules.map(cloneModule)
 	};
+}
+
+function preserveScratchProjectInstructions(
+	courseId: string,
+	course: RawCourse
+) {
+	return course.modules.flatMap(module =>
+		[...module.curriculum, ...module.supplementalProjects]
+			.filter(item => isJuniScratchProjectTitle(courseId, item.title))
+			.map(item => ({
+				content: item.content,
+				item,
+				itemId: item.id,
+				itemTitle: item.title,
+				module,
+				moduleId: module.id,
+				moduleTitle: module.title
+			}))
+	);
+}
+
+function restoreScratchProjectInstructions(
+	course: RawCourse,
+	preserved: ReturnType<typeof preserveScratchProjectInstructions>
+) {
+	for (const snapshot of preserved) {
+		const module = course.modules.find(
+			candidate =>
+				candidate === snapshot.module ||
+				(snapshot.moduleId && candidate.id === snapshot.moduleId) ||
+				(snapshot.moduleId &&
+					candidate.aliases?.includes(snapshot.moduleId)) ||
+				candidate.title === snapshot.moduleTitle
+		);
+		const item =
+			module &&
+			[...module.curriculum, ...module.supplementalProjects].find(
+				candidate =>
+					candidate === snapshot.item ||
+					(snapshot.itemId && candidate.id === snapshot.itemId) ||
+					(snapshot.itemId &&
+						candidate.aliases?.includes(snapshot.itemId)) ||
+					candidate.title === snapshot.itemTitle
+			);
+		if (item) {
+			item.content = snapshot.content;
+			if (!snapshot.itemId) item.title = snapshot.itemTitle;
+		}
+	}
 }
 
 function orderedModules(course: RawCourse, titles: string[]) {
@@ -9170,6 +9220,10 @@ const normalizers: Record<string, (course: RawCourse) => void> = {
 
 export function normalizeRawCourse(id: string, rawCourse: RawCourse) {
 	const course = cloneCourse(rawCourse);
+	const preservedScratchInstructions = preserveScratchProjectInstructions(
+		id,
+		course
+	);
 	normalizers[id]?.(course);
 	normalizeDisplayTitles(course);
 	rewritePlaceholderCourseText(course, id);
@@ -9196,5 +9250,6 @@ export function normalizeRawCourse(id: string, rawCourse: RawCourse) {
 		adaptClassroomCourse(course, id);
 		applyCourseLearningPaths(course);
 	}
+	restoreScratchProjectInstructions(course, preservedScratchInstructions);
 	return course;
 }

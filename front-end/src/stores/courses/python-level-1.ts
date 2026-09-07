@@ -4,6 +4,7 @@ import type {
 	RawCourseModule,
 	RawCourseModuleItem
 } from "./types";
+import { isCoreProjectTitle } from "./projectGrouping";
 
 const TURTLE_REFERENCE = "/course-assets/python/turtle-project-reference.md";
 const TURTLE_COMMAND_REFERENCE = `${TURTLE_REFERENCE}#turtle-command-reference`;
@@ -1362,9 +1363,17 @@ function configurePythonLevel1Module(
 	module.id ??= legacyModuleId;
 	preservePythonLevel1Ids(module, legacyModuleId);
 
-	const choiceTitles = new Set(config.choiceCurriculumTitles ?? []);
-	const challengeTitles = new Set(config.challengeCurriculumTitles ?? []);
-	const movedItems = module.curriculum.filter(
+	const choiceTitles = new Set(
+		(config.choiceCurriculumTitles ?? []).filter(
+			title => !isCoreProjectTitle(title)
+		)
+	);
+	const challengeTitles = new Set(
+		(config.challengeCurriculumTitles ?? []).filter(
+			title => !isCoreProjectTitle(title)
+		)
+	);
+	const movedPractice = module.curriculum.filter(
 		item => choiceTitles.has(item.title) || challengeTitles.has(item.title)
 	);
 	module.curriculum = module.curriculum.filter(
@@ -1375,7 +1384,7 @@ function configurePythonLevel1Module(
 	for (const item of module.curriculum) {
 		item.learningPath = "core";
 	}
-	for (const item of movedItems) {
+	for (const item of movedPractice) {
 		item.learningPath = challengeTitles.has(item.title)
 			? "challenge"
 			: "choice";
@@ -1383,9 +1392,8 @@ function configurePythonLevel1Module(
 	for (const item of module.supplementalProjects) {
 		item.learningPath = pythonLevel1SupplementalPath(item);
 	}
-
 	module.supplementalProjects = [
-		...movedItems,
+		...movedPractice,
 		...module.supplementalProjects
 	];
 	module.estimatedTime = config.estimatedTime;

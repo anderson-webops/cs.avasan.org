@@ -130,6 +130,17 @@ describe("CourseExplorer public catalog", () => {
 			/assigned courses|learner context|log in|sign up/i
 		);
 		expect(wrapper.text()).not.toContain("Done");
+		expect(
+			wrapper
+				.get(".lesson-card:not(.is-supplemental) .lesson-kicker")
+				.text()
+		).toBe("Core");
+		expect(
+			wrapper.get(".lesson-card.is-supplemental .lesson-kicker").text()
+		).toBe("Practice");
+		expect(
+			wrapper.findAll(".section-eyebrow").map(label => label.text())
+		).toEqual(["Core", "Practice"]);
 		expect(loadCourse).toHaveBeenCalledWith("scratch-level-1");
 		expect(reportClassroomUsage).toHaveBeenCalledWith(
 			"course-open",

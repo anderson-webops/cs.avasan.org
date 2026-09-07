@@ -343,19 +343,15 @@ const activeModule = computed(
 );
 
 const activeCurriculumSectionLabel = computed(() =>
-	activeModule.value?.kind === "appendix" ? "Reference" : "Core path"
+	activeModule.value?.kind === "appendix" ? "Reference" : "Core"
 );
 
 const activeCurriculumHeading = computed(() =>
-	activeModule.value?.kind === "appendix"
-		? "Reference Materials"
-		: "Curriculum"
+	activeModule.value?.kind === "appendix" ? "Reference Materials" : "Projects"
 );
 
 const activeSupplementalSectionLabel = computed(() =>
-	activeModule.value?.kind === "appendix"
-		? "Reference practice"
-		: "Extra practice"
+	activeModule.value?.kind === "appendix" ? "Reference practice" : "Practice"
 );
 
 const activeSupplementalHeading = computed(() =>
@@ -365,11 +361,13 @@ const activeSupplementalHeading = computed(() =>
 );
 
 const activeCurriculumJumpHeading = computed(() =>
-	activeModule.value?.kind === "appendix" ? "References:" : "Lessons:"
+	activeModule.value?.kind === "appendix" ? "References:" : "Core projects:"
 );
 
 const activeSupplementalJumpHeading = computed(() =>
-	activeModule.value?.kind === "appendix" ? "Activities:" : "Supplemental:"
+	activeModule.value?.kind === "appendix"
+		? "Activities:"
+		: "Practice projects:"
 );
 
 const courseReaderStatus = computed(() => {
@@ -1232,7 +1230,14 @@ function writeStoredValue(key: string, value: string) {
 											{{ index + 1 }}
 										</span>
 										<div class="lesson-title-group">
-											<p class="lesson-kicker">Lesson</p>
+											<p class="lesson-kicker">
+												{{
+													activeModule.kind ===
+													"appendix"
+														? "Reference"
+														: "Core"
+												}}
+											</p>
 											<h5>{{ item.title }}</h5>
 										</div>
 									</header>
@@ -1456,7 +1461,7 @@ function writeStoredValue(key: string, value: string) {
 										</span>
 										<div class="lesson-title-group">
 											<p class="lesson-kicker">
-												Supplemental project
+												Practice
 											</p>
 											<h5>{{ item.title }}</h5>
 										</div>

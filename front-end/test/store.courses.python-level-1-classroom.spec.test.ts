@@ -1,10 +1,7 @@
 import { createPinia, setActivePinia } from "pinia";
 import { beforeEach, describe, expect, it } from "vitest";
 import { useCoursesStore } from "@/stores/courses";
-import {
-	getCourseCatalogEntry,
-	loadRawCourse
-} from "@/stores/courses/index";
+import { getCourseCatalogEntry, loadRawCourse } from "@/stores/courses/index";
 import type {
 	RawCourse,
 	RawCourseModule,
@@ -65,18 +62,15 @@ describe("Julio's Python Level 1 classroom edition", () => {
 		expect(course.modules[0]?.title).toBe(
 			"Classroom Launch: Normal and Hard Projects"
 		);
-		expect(
-			getCourseCatalogEntry("python-level-1-classroom")
-		).toBeNull();
+		expect(getCourseCatalogEntry("python-level-1-classroom")).toBeNull();
 	});
 
-	it("provides all nine classroom launch projects in leveled paths", async () => {
+	it("keeps all nine classroom launch projects in Core", async () => {
 		const course = await requireCurrentCourse();
 		const launchModule = course.modules[0]!;
-		const launchProjects = [
-			...launchModule.curriculum,
-			...launchModule.supplementalProjects
-		].filter(item => /^Launch Project \d+:/.test(item.title));
+		const launchProjects = launchModule.curriculum.filter(item =>
+			/^Launch Project \d+:/.test(item.title)
+		);
 
 		expect(launchProjects.map(item => item.title)).toEqual([
 			"Launch Project 1: Color Circle Art",
@@ -93,20 +87,18 @@ describe("Julio's Python Level 1 classroom edition", () => {
 			"2–3 sessions · 45–60 minutes each"
 		);
 		expect(
-			launchModule.curriculum.every(
-				item => item.learningPath === "core"
-			)
+			launchModule.curriculum.every(item => item.learningPath === "core")
 		).toBe(true);
 		expect(
 			launchModule.supplementalProjects.filter(
 				item => item.learningPath === "choice"
 			)
-		).toHaveLength(5);
+		).toHaveLength(1);
 		expect(
 			launchModule.supplementalProjects.filter(
 				item => item.learningPath === "challenge"
 			)
-		).toHaveLength(4);
+		).toHaveLength(1);
 	});
 
 	it("opens every project in the downstream classroom IDE contract", async () => {
@@ -171,15 +163,13 @@ describe("Julio's Python Level 1 classroom edition", () => {
 		);
 	});
 
-	it("preserves progress IDs when launch projects become optional", async () => {
-		const course =
-			await useCoursesStore().loadCourseById("python-level-1");
+	it("preserves progress IDs when launch projects return to Core", async () => {
+		const course = await useCoursesStore().loadCourseById("python-level-1");
 		const launchModule = course?.modules.find(
 			module =>
-				module.title ===
-				"Classroom Launch: Normal and Hard Projects"
+				module.title === "Classroom Launch: Normal and Hard Projects"
 		);
-		const triangle = launchModule?.supplementalProjects.find(
+		const triangle = launchModule?.curriculum.find(
 			item => item.title === "Launch Project 3: Triangle Motion"
 		);
 
@@ -187,7 +177,7 @@ describe("Julio's Python Level 1 classroom edition", () => {
 			"python-level-1-classroom-classroom-launch-normal-and-hard-projects-curriculum-launch-project-3-triangle-motion"
 		);
 		expect(triangle?.aliases).toContain(
-			"python-level-1-classroom-launch-normal-and-hard-projects-supplemental-launch-project-3-triangle-motion"
+			"python-level-1-classroom-launch-normal-and-hard-projects-curriculum-launch-project-3-triangle-motion"
 		);
 	});
 });

@@ -116,7 +116,7 @@ describe("Scratch Level 1 classroom launch", () => {
 		expect(catcher?.solutionLink).toBeUndefined();
 
 		const bugEater = coordinates?.curriculum.find(
-			item => item.title === "Project 1 – Bug Eater"
+			item => item.title === "Bug Eater: Classroom walkthrough"
 		);
 		for (const expected of [
 			"What X should I go to?",
