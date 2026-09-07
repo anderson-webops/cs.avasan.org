@@ -136,6 +136,58 @@ context("Public classroom navigation", () => {
 		});
 	});
 
+	it("renders curated course video and image media", () => {
+		cy.visit("/#pygames");
+		cy.get(
+			'button[aria-label="Show module 3: PyG1 Object-Oriented Programming: Actors"]'
+		).click();
+		cy.contains("h5", "PyG1 Project 1: Rainbow Fill")
+			.closest("article")
+			.within(() => {
+				cy.get(
+					'video[aria-label="Demo video for PyG1 Project 1: Rainbow Fill"]',
+					{ timeout: 15_000 }
+				)
+					.should("be.visible")
+					.should(video => {
+						const element = video[0] as HTMLVideoElement;
+						expect(element.error).to.equal(null);
+						expect(element.readyState).to.be.greaterThan(0);
+						expect(element.videoWidth).to.be.greaterThan(0);
+					});
+				cy.get(
+					'video[aria-label="Demo video for PyG1 Project 1: Rainbow Fill"] source'
+				).should(
+					"have.attr",
+					"src",
+					"https://static.cs.avasan.org/pyg_1_rainbow_fill.mp4"
+				);
+				cy.contains("Static asset pending").should("not.exist");
+			});
+
+		cy.visit("/#python-level-2");
+		cy.get(
+			'button[aria-label="Show module 2: PS1 Variables, Strings, and Input"]'
+		).click();
+		cy.contains("h5", "PS1 Project 1: Mad Libs")
+			.closest("article")
+			.within(() => {
+				cy.get(
+					'img[src="https://static.cs.avasan.org/ps1_mad_libs.gif"]',
+					{ timeout: 15_000 }
+				)
+					.scrollIntoView()
+					.should(image => {
+						const element = image[0] as HTMLImageElement;
+						expect(element.complete).to.equal(true);
+						expect(element.naturalWidth).to.be.greaterThan(0);
+						expect(element.naturalHeight).to.be.greaterThan(0);
+					})
+					.should("be.visible");
+				cy.contains("Static asset pending").should("not.exist");
+			});
+	});
+
 	it("keeps teacher login off public navigation and available at /admin", () => {
 		cy.get(".site-nav").should("not.contain", "Teacher log in");
 		cy.visit("/admin");

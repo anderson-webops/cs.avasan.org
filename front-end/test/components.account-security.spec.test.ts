@@ -66,6 +66,82 @@ describe("AccountSecurity", () => {
 		expect(first.text()).not.toMatch(/Student|Tutor|whenever you need/i);
 	});
 
+	it("submits the password form once from Enter while a request is pending", async () => {
+		const changedJulio = {
+			_id: "julio-primary",
+			name: "Julio",
+			email: "julio@example.com",
+			passwordChangedAt: "2026-07-29T11:00:00.000Z",
+			editAdmins: false,
+			saveEdit: "Save"
+		};
+		let resolvePasswordChange:
+			| ((value: {
+					data: {
+						currentAdmin: typeof changedJulio;
+						message: string;
+					};
+			  }) => void)
+			| undefined;
+		vi.mocked(api.post).mockImplementationOnce(
+			() =>
+				new Promise(resolve => {
+					resolvePasswordChange = resolve;
+				})
+		);
+		const wrapper = mount(AccountSecurity, {
+			props: { entityId: changedJulio._id }
+		});
+		const form = wrapper.get("form");
+		const inputs = wrapper.findAll('input[type="password"]');
+		expect(inputs.map(input => input.attributes("autocomplete"))).toEqual([
+			"current-password",
+			"new-password",
+			"new-password"
+		]);
+		await inputs[0]!.setValue("old-teacher-password");
+		await inputs[1]!.setValue("new-teacher-password");
+		await inputs[2]!.setValue("new-teacher-password");
+
+		(form.element as HTMLFormElement).requestSubmit();
+		(form.element as HTMLFormElement).requestSubmit();
+		await flushPromises();
+
+		expect(api.post).toHaveBeenCalledOnce();
+		expect(api.post).toHaveBeenCalledWith(
+			"/accounts/changePassword/julio-primary",
+			{
+				currentPassword: "old-teacher-password",
+				newPassword: "new-teacher-password"
+			},
+			{ timeout: 30_000 }
+		);
+		expect(form.attributes("aria-busy")).toBe("true");
+		expect(wrapper.get('button[type="submit"]').attributes()).toHaveProperty(
+			"disabled"
+		);
+		expect(wrapper.get('button[type="submit"]').text()).toBe("Updating…");
+		for (const input of inputs) {
+			expect(input.attributes()).toHaveProperty("disabled");
+		}
+
+		resolvePasswordChange?.({
+			data: {
+				currentAdmin: changedJulio,
+				message: "Password updated successfully."
+			}
+		});
+		await flushPromises();
+
+		expect(form.attributes("aria-busy")).toBe("false");
+		expect(
+			wrapper.get('button[type="submit"]').attributes()
+		).not.toHaveProperty("disabled");
+		expect(wrapper.get('button[type="submit"]').text()).toBe(
+			"Update password"
+		);
+	});
+
 	it("notifies every tab after Julio changes his password", async () => {
 		const changedJulio = {
 			_id: "julio-primary",
@@ -96,10 +172,7 @@ describe("AccountSecurity", () => {
 		await wrapper
 			.get("#account-security-admin-julio-primary-confirm-password")
 			.setValue("new-teacher-password");
-		await wrapper
-			.findAll("button")
-			.find(button => button.text() === "Update password")
-			?.trigger("click");
+		await wrapper.get("form").trigger("submit");
 		await flushPromises();
 
 		expect(api.post).toHaveBeenCalledWith(
@@ -148,7 +221,7 @@ describe("AccountSecurity", () => {
 		await inputs[1]!.setValue("new-teacher-password");
 		await inputs[2]!.setValue("new-teacher-password");
 
-		await wrapper.get("button").trigger("click");
+		await wrapper.get("form").trigger("submit");
 		await flushPromises();
 
 		expect(api.post).toHaveBeenCalledWith(
@@ -208,10 +281,7 @@ describe("AccountSecurity", () => {
 		await wrapper
 			.get("#account-security-admin-julio-primary-confirm-password")
 			.setValue("new-teacher-password");
-		await wrapper
-			.findAll("button")
-			.find(button => button.text() === "Update password")
-			?.trigger("click");
+		await wrapper.get("form").trigger("submit");
 		await flushPromises();
 
 		expect(api.get).toHaveBeenCalledWith("/admins/loggedin");
@@ -252,10 +322,7 @@ describe("AccountSecurity", () => {
 		await wrapper
 			.get("#account-security-admin-julio-primary-confirm-password")
 			.setValue("new-teacher-password");
-		await wrapper
-			.findAll("button")
-			.find(button => button.text() === "Update password")
-			?.trigger("click");
+		await wrapper.get("form").trigger("submit");
 		await flushPromises();
 
 		expect(app.currentAdmin?._id).toBe(julio._id);
@@ -289,7 +356,7 @@ describe("AccountSecurity", () => {
 		await inputs[1]!.setValue("new-teacher-password");
 		await inputs[2]!.setValue("new-teacher-password");
 
-		await wrapper.get("button").trigger("click");
+		await wrapper.get("form").trigger("submit");
 		await flushPromises();
 
 		expect(wrapper.get('[role="alert"]').text()).toBe(
@@ -308,7 +375,7 @@ describe("AccountSecurity", () => {
 		const inputs = wrapper.findAll('input[type="password"]');
 		await inputs[0]!.setValue("old-teacher-password");
 
-		await wrapper.get("button").trigger("click");
+		await wrapper.get("form").trigger("submit");
 		await wrapper.vm.$nextTick();
 
 		expect(wrapper.get('[role="alert"]').text()).toBe(
@@ -322,7 +389,7 @@ describe("AccountSecurity", () => {
 		await inputs[1]!.setValue("new-teacher-password");
 		await inputs[2]!.setValue("different-teacher-password");
 
-		await wrapper.get("button").trigger("click");
+		await wrapper.get("form").trigger("submit");
 		await wrapper.vm.$nextTick();
 
 		expect(wrapper.get('[role="alert"]').text()).toBe(
@@ -390,10 +457,7 @@ describe("AccountSecurity", () => {
 		await wrapper
 			.get("#account-security-admin-julio-primary-confirm-password")
 			.setValue("new-teacher-password");
-		await wrapper
-			.findAll("button")
-			.find(button => button.text() === "Update password")
-			?.trigger("click");
+		await wrapper.get("form").trigger("submit");
 		await flushPromises();
 
 		expect(app.currentAdmin).toBeNull();

@@ -101,11 +101,18 @@ describe("versioned full-stack production deployment", () => {
 		expect(proxy).toContain("connect-src 'self' https://api.github.com https://raw.githubusercontent.com https://cdn.jsdelivr.net https://pypi.org https://files.pythonhosted.org;");
 		expect(proxy).not.toContain("wss:");
 		expect(proxy).not.toContain("ws:");
-		expect(proxy).not.toContain("blob: https:");
+		expect(proxy).not.toMatch(/(?:^|[;\s])https:(?=[;\s"]|$)/u);
 		expect(proxy).toContain("worker-src 'self' blob:");
 		expect(proxy.match(/https:\/\/scratch[.]mit[.]edu/g)).toHaveLength(1);
+		expect(proxy.match(/https:\/\/static[.]cs[.]avasan[.]org/g)).toHaveLength(2);
 		expect(proxy).toMatch(
 			/location = \/index[.]html \{[\s\S]*?frame-src 'self' https:\/\/scratch[.]mit[.]edu;/u
+		);
+		expect(proxy).toMatch(
+			/location = \/index[.]html \{[\s\S]*?img-src 'self' data: blob: https:\/\/static[.]cs[.]avasan[.]org;/u
+		);
+		expect(proxy).toMatch(
+			/location = \/index[.]html \{[\s\S]*?media-src 'self' data: blob: https:\/\/static[.]cs[.]avasan[.]org;/u
 		);
 		expect(proxy).toContain("try_files $uri $uri/ =404;");
 		expect(proxy).not.toContain("try_files $uri $uri/ /index.html;");
@@ -208,10 +215,19 @@ describe("versioned full-stack production deployment", () => {
 		expect(nativeProxy).toContain("quic_retry on;");
 		expect(nativeStandardHeaders).toContain("add_header Alt-Svc 'h3=\":443\"; ma=86400' always;");
 		expect(nativeStandardHeaders).not.toContain("scratch.mit.edu");
+		expect(nativeStandardHeaders).not.toContain("static.cs.avasan.org");
 		expect(nativeProxy.match(/https:\/\/scratch[.]mit[.]edu/g)).toHaveLength(1);
+		expect(nativeProxy.match(/https:\/\/static[.]cs[.]avasan[.]org/g)).toHaveLength(2);
 		expect(nativeProxy).toMatch(
 			/location = \/index[.]html \{[\s\S]*?frame-src 'self' https:\/\/scratch[.]mit[.]edu;/u
 		);
+		expect(nativeProxy).toMatch(
+			/location = \/index[.]html \{[\s\S]*?img-src 'self' data: blob: https:\/\/static[.]cs[.]avasan[.]org;/u
+		);
+		expect(nativeProxy).toMatch(
+			/location = \/index[.]html \{[\s\S]*?media-src 'self' data: blob: https:\/\/static[.]cs[.]avasan[.]org;/u
+		);
+		expect(nativeIdeHeaders).not.toContain("static.cs.avasan.org");
 		expect(nativeIdeHeaders).toContain("add_header Alt-Svc 'h3=\":443\"; ma=86400' always;");
 		expect(nativeStandardHeaders).toContain('add_header Cross-Origin-Opener-Policy "same-origin" always;');
 		expect(nativeStandardHeaders).toContain('add_header Cross-Origin-Resource-Policy "same-origin" always;');
@@ -356,14 +372,14 @@ describe("versioned full-stack production deployment", () => {
 			version: string;
 		};
 
-		expect(rootPackage.version).toBe("2.7.121");
-		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]121\}/g)).toHaveLength(2);
+		expect(rootPackage.version).toBe("2.7.122");
+		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]122\}/g)).toHaveLength(2);
 		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g)).toHaveLength(2);
 		expect(compose).not.toContain("SOURCE_REVISION:-unknown");
 		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
-		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.121");
+		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.122");
 		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
-		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.121");
+		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.122");
 		expect(apiDockerfile).toContain("ARG SOURCE_REVISION=unknown");
 		expect(frontendReleaseWriter).toContain("environment.COMMIT_REF?.trim()");
 		expect(frontendReleaseWriter).toContain("const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;");
@@ -553,7 +569,7 @@ describe("versioned full-stack production deployment", () => {
 		expect(netlify).toContain("connect-src 'self' https://api.github.com https://raw.githubusercontent.com https://cdn.jsdelivr.net https://pypi.org https://files.pythonhosted.org;");
 		expect(netlify).not.toContain("wss:");
 		expect(netlify).not.toContain("ws:");
-		expect(netlify).not.toContain("blob: https:");
+		expect(netlify).not.toMatch(/(?:^|[;\s])https:(?=[;\s"]|$)/u);
 		expect(netlify).toContain("worker-src 'self' blob:");
 		expect(netlify).toContain('X-Frame-Options = "DENY"');
 		expect(netlify).toContain('NODE_VERSION = "24.18.0"');
