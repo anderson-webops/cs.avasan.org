@@ -500,12 +500,13 @@ ART_COLORS = [
     "blueviolet",
     "hotpink"
 ]
-CIRCLE_COUNT = 24
+CIRCLE_COUNT = 4
 CIRCLE_RADIUS = 55
+CIRCLE_STEPS = 12
 TURN_ANGLE = 360 / CIRCLE_COUNT
 PEN_SIZE = 2
-DRAWING_SPEED = 8
-ART_POSITIONS = [(-170, 40), (0, -35), (170, 40)]
+DRAWING_SPEED = 0
+ART_POSITIONS = [(-120, 0), (120, 0)]
 
 
 ########################
@@ -538,7 +539,7 @@ def move_to(x_position, y_position):
 def draw_filled_circle(radius, color_name):
     artist.color(color_name)
     artist.begin_fill()
-    artist.circle(radius)
+    artist.circle(radius, steps=CIRCLE_STEPS)
     artist.end_fill()
 
 # Build one burst from repeated circles and turns
@@ -561,6 +562,7 @@ def draw_circle_burst(x_position, y_position):
 screen = turtle.Screen()
 screen.bgcolor(BACKGROUND_COLOR)
 screen.title("Color Circle Art")
+screen.tracer(0)
 
 artist = turtle.Turtle()
 artist.pensize(PEN_SIZE)
@@ -575,6 +577,7 @@ for art_position in ART_POSITIONS:
     draw_circle_burst(art_position[0], art_position[1])
 
 artist.hideturtle()
+screen.update()
 `;
 
 export const turtlePicassoStarterCode = `from random import choice
@@ -906,7 +909,7 @@ export const turtleSpiralGalaxyStarterCode = `import turtle
 BACKGROUND_COLOR = "black"
 STAR_COLORS = ["white", "cyan", "gold", "violet", "deep sky blue"]
 DEFAULT_STAR_COLOR = "white"
-SPIRAL_STEPS = 105
+SPIRAL_STEPS = 72
 START_DISTANCE = 2
 DISTANCE_GROWTH = 0.34
 TURN_ANGLE = 91
