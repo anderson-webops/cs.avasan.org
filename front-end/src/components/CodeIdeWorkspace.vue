@@ -11421,4 +11421,26 @@ html.dark .editor-shortcuts ul {
 		width: 100%;
 	}
 }
+
+@media (max-width: 480px) {
+	.editor-actions {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		height: auto;
+	}
+
+	.ide-settings {
+		min-width: 0;
+		height: var(--code-ide-toolbar-control-size);
+	}
+
+	.ide-settings-trigger,
+	.editor-actions > .site-button {
+		width: 100%;
+	}
+
+	.ide-settings-trigger {
+		flex: 1 1 auto;
+	}
+}
 </style>
