@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
-type StarterKind
-	= "canvas" | "data" | "java" | "karel" | "python" | "readiness";
+type StarterKind =
+	"canvas" | "data" | "java" | "karel" | "python" | "readiness";
 
 interface StarterScenario {
 	button: string;
@@ -137,8 +137,8 @@ function selectedStarterScenarios(filters: Record<string, unknown>) {
 		.filter(Boolean);
 	const selected = starterScenarios.filter(
 		scenario =>
-			(!requestedStarter || scenario.button === requestedStarter)
-			&& (!requestedKinds.length || requestedKinds.includes(scenario.kind))
+			(!requestedStarter || scenario.button === requestedStarter) &&
+			(!requestedKinds.length || requestedKinds.includes(scenario.kind))
 	);
 	if (!selected.length) {
 		throw new Error(
@@ -149,7 +149,7 @@ function selectedStarterScenarios(filters: Record<string, unknown>) {
 }
 
 function delay(milliseconds: number) {
-	return new Cypress.Promise<void>((resolve) => {
+	return new Cypress.Promise<void>(resolve => {
 		window.setTimeout(resolve, milliseconds);
 	});
 }
@@ -199,7 +199,7 @@ function canvasSnapshot(document: Document) {
 
 async function clickStarterButton(document: Document, label: string) {
 	const menuToggle = document.querySelector<HTMLButtonElement>(
-		"button[aria-label=\"More project options\"]"
+		'button[aria-label="More project options"]'
 	);
 	if (!menuToggle)
 		throw new Error("The project starter menu is unavailable.");
@@ -265,7 +265,7 @@ async function runStarterScenario(
 			() =>
 				elementText(
 					document.querySelector(
-						".code-editor-host [contenteditable=\"true\"]"
+						'.code-editor-host [contenteditable="true"]'
 					)
 				).includes("import turtle"),
 			"the guided outline source to finish loading",
@@ -281,7 +281,7 @@ async function runStarterScenario(
 
 	if (scenario.kind === "python") {
 		const input = document.querySelector<HTMLTextAreaElement>(
-			"textarea[placeholder*=\"Scanner value\"]"
+			'textarea[placeholder*="Scanner value"]'
 		);
 		if (!input) throw new Error("The IDE input field is unavailable.");
 		input.value = "Ada";
@@ -289,8 +289,8 @@ async function runStarterScenario(
 		input.dispatchEvent(new InputEvent("input", { bubbles: true }));
 	}
 
-	const initialCanvas
-		= scenario.kind === "canvas" ? canvasSnapshot(document) : "";
+	const initialCanvas =
+		scenario.kind === "canvas" ? canvasSnapshot(document) : "";
 	if (scenario.button === "Demo PyGame Zero" && assetRequests.length) {
 		throw new Error(
 			"PyGame course media loaded before the explicit Run action."
@@ -298,26 +298,31 @@ async function runStarterScenario(
 	}
 
 	button.click();
-	const expectedStatus
-		= scenario.kind === "canvas"
+	const expectedStatus =
+		scenario.kind === "canvas"
 			? /^(?:Drawing ready|Game running)$/
 			: scenario.kind === "karel"
 				? /^Karel world ready$/
 				: scenario.kind === "data"
 					? /^Analysis ready$/
 					: /^Run complete$/;
-	await waitFor(
-		() => expectedStatus.test(runtimeStatus(document)),
-		`${scenario.title} to finish running`
-	);
+	await waitFor(() => {
+		const status = runtimeStatus(document);
+		if (status === "Run failed") {
+			throw new Error(
+				`Runtime failed: ${outputText(document) || "no diagnostic was shown"}.`
+			);
+		}
+		return expectedStatus.test(status);
+	}, `${scenario.title} to finish running`);
 
 	const stderr = document.querySelectorAll(".output-line--stderr");
 	if (stderr.length) {
 		throw new Error(`Runtime stderr: ${elementText(stderr[0])}`);
 	}
 	if (
-		scenario.expectedOutput
-		&& !outputText(document).includes(scenario.expectedOutput)
+		scenario.expectedOutput &&
+		!outputText(document).includes(scenario.expectedOutput)
 	) {
 		throw new Error(
 			`Expected output ${JSON.stringify(scenario.expectedOutput)} was absent.`
@@ -332,14 +337,14 @@ async function runStarterScenario(
 	}
 	if (scenario.kind === "karel") {
 		const robot = document.querySelector(
-			".karel-world [aria-label=\"Karel robot\"]"
+			'.karel-world [aria-label="Karel robot"]'
 		);
 		if (!robot)
 			throw new Error("The Karel world did not render its robot.");
 	}
 	if (
-		scenario.kind === "data"
-		&& !document.querySelector(".artifact-list img")
+		scenario.kind === "data" &&
+		!document.querySelector(".artifact-list img")
 	) {
 		throw new Error("The Data / AI starter did not render its chart.");
 	}
@@ -381,7 +386,7 @@ context("IDE starter runtime matrix", { testIsolation: false }, () => {
 				body: {},
 				statusCode: 204
 			});
-			cy.intercept("GET", "/python-ide/assets/**", (request) => {
+			cy.intercept("GET", "/python-ide/assets/**", request => {
 				assetRequests.push(request.url);
 			});
 			cy.visit("/ide", {
@@ -396,8 +401,8 @@ context("IDE starter runtime matrix", { testIsolation: false }, () => {
 				}
 			});
 			cy.get(".code-ide-workspace").should("be.visible");
-			cy.env(["IDE_STARTER", "IDE_STARTER_KINDS"]).then((filters) => {
-				cy.document().then({ timeout: 720_000 }, async (document) => {
+			cy.env(["IDE_STARTER", "IDE_STARTER_KINDS"]).then(filters => {
+				cy.document().then({ timeout: 720_000 }, async document => {
 					for (const scenario of selectedStarterScenarios(filters)) {
 						const errorsBefore = browserErrors.length;
 						try {
@@ -417,15 +422,16 @@ context("IDE starter runtime matrix", { testIsolation: false }, () => {
 								name: scenario.button,
 								passed: true
 							});
-						}
-						catch (error) {
-							const button = runButton(document);
-							if (elementText(button) === "Stop") button?.click();
+						} catch (error) {
+							const failureDetail =
+								error instanceof Error
+									? error.message
+									: String(error);
+							const statusDetail = runtimeStatus(document);
+							const outputDetail = outputText(document);
+							await stopAndVerifyFrozen(document);
 							results.push({
-								detail:
-									error instanceof Error
-										? error.message
-										: String(error),
+								detail: `${failureDetail} Status: ${statusDetail || "missing"}. Output: ${outputDetail || "empty"}.`,
 								name: scenario.button,
 								passed: false
 							});

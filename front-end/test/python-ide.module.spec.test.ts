@@ -243,7 +243,9 @@ screen.listen()
 			template: "classroom-project"
 		});
 		expect(project.files[0]?.content).toContain("###   CONSTANTS   ###");
-		expect(project.files[0]?.content).toContain("###   EVENT LISTENERS   ###");
+		expect(project.files[0]?.content).toContain(
+			"###   EVENT LISTENERS   ###"
+		);
 	});
 
 	it("creates all Python Level 1 classroom Turtle frameworks", () => {
@@ -316,6 +318,12 @@ screen.listen()
 			expect(source, template).toContain(frameworkMarker);
 			expect(source, template).toMatch(/def \w+\([^)]*\):\n    pass/);
 		}
+		expect(turtleCircleArtStarterCode).toContain("DRAWING_SPEED = 0");
+		expect(turtleCircleArtStarterCode).toContain("CIRCLE_COUNT = 4");
+		expect(turtleCircleArtStarterCode).toContain("CIRCLE_STEPS = 12");
+		expect(turtleCircleArtStarterCode).toContain("screen.tracer(0)");
+		expect(turtleCircleArtStarterCode).toContain("screen.update()");
+		expect(turtleSpiralGalaxyStarterCode).toContain("SPIRAL_STEPS = 72");
 	});
 
 	it("colors visible bracket pairs using document-wide nesting context", () => {
@@ -1027,7 +1035,7 @@ screen.listen()
 		);
 		expect(pageSource).toContain("route.query.starterUrl");
 		expect(pageSource).toContain(
-			"normalizePythonIdeMode(rawMode, courseMode ?? \"turtle\")"
+			'normalizePythonIdeMode(rawMode, courseMode ?? "turtle")'
 		);
 		for (const template of [
 			"circle-art",
@@ -2959,9 +2967,7 @@ screen.listen()
 		expect(pageSource).toContain("function updateAutoSavePreference");
 		expect(pageSource).toContain("Autosave");
 		expect(pageSource).toContain('aria-label="IDE settings"');
-		expect(pageSource).toContain(
-			'aria-controls="code-ide-settings-panel"'
-		);
+		expect(pageSource).toContain('aria-controls="code-ide-settings-panel"');
 		expect(pageSource).toContain('id="code-ide-settings-panel"');
 		expect(pageSource).toContain("Protect local saves");
 		expect(pageSource).toContain("function storageManagerWithPersistence");
@@ -3569,8 +3575,9 @@ screen.listen()
 			"/python-ide/assets/images/1.png"
 		);
 		expect(
-			pack.assets.get("images/seaweed-publicdomainvectors.org/seaweed.png")
-				?.url
+			pack.assets.get(
+				"images/seaweed-publicdomainvectors.org/seaweed.png"
+			)?.url
 		).toBe(
 			"/python-ide/assets/images/seaweed-publicdomainvectors.org/seaweed.png"
 		);
@@ -3736,9 +3743,9 @@ screen.listen()
 			};
 		});
 
-		await expect(
-			loadPythonIdeCourseAssetPack({ fetcher })
-		).rejects.toThrow("temporary network failure");
+		await expect(loadPythonIdeCourseAssetPack({ fetcher })).rejects.toThrow(
+			"temporary network failure"
+		);
 		const pack = await loadPythonIdeCourseAssetPack({ fetcher });
 
 		expect(fetcher).toHaveBeenCalledTimes(2);
