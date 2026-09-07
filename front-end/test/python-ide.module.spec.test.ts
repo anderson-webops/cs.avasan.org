@@ -3215,6 +3215,15 @@ screen.listen()
 		expect(pageSource).toContain("mod: gameKeyModifierMask(event)");
 		expect(pageSource).toContain("unicode: gameKeyUnicode(event)");
 		expect(pageSource).toContain('@blur="clearCanvasKeyboardState"');
+		expect(pageSource).toContain(
+			'window.addEventListener("mouseup", handleWindowMouseUp);'
+		);
+		expect(pageSource).toContain(
+			'window.removeEventListener("mouseup", handleWindowMouseUp);'
+		);
+		expect(pageSource).toContain(
+			'dispatchCanvasPointerEvent(event, "mouseup");'
+		);
 		expect(pageSource).toContain("canvasRef.value?.focus();");
 		expect(pageSource).toContain("--python-focus-ring");
 		expect(pageSource).toContain(".code-editor-shell:focus-within");
@@ -3704,6 +3713,38 @@ screen.listen()
 		expect(assetSource).not.toContain("/api/python-assets/assets.zip");
 	});
 
+	it("retries a transient course asset manifest failure", async () => {
+		let attempts = 0;
+		const fetcher = vi.fn(async () => {
+			attempts += 1;
+			if (attempts === 1) throw new Error("temporary network failure");
+			return {
+				arrayBuffer: async () => new ArrayBuffer(0),
+				json: async () => ({
+					assets: [
+						{
+							height: 18,
+							mimeType: "image/png",
+							name: "images/alien.png",
+							url: "/python-ide/assets/images/alien.png",
+							width: 20
+						}
+					]
+				}),
+				ok: true,
+				status: 200
+			};
+		});
+
+		await expect(
+			loadPythonIdeCourseAssetPack({ fetcher })
+		).rejects.toThrow("temporary network failure");
+		const pack = await loadPythonIdeCourseAssetPack({ fetcher });
+
+		expect(fetcher).toHaveBeenCalledTimes(2);
+		expect(pack.assets.has("images/alien.png")).toBe(true);
+	});
+
 	it("accepts an explicitly supplied archive source for module callers", async () => {
 		const zipBytes = zipSync({
 			"images/alien.png": oneByOnePngBytes
@@ -4015,10 +4056,19 @@ screen.listen()
 		expect(runtimeSource).toContain("_run_animations(now)");
 		expect(pageSource).toContain("await ensureGameCourseAssetsLoaded()");
 		expect(pageSource).toContain(
+			"prepareGameAssetsForExplicitRun();\n\t\t\tawait ensureGameCourseAssetsLoaded();"
+		);
+		expect(pageSource).toContain(
+			"if (entry.failed) gameImageCache.delete(key);"
+		);
+		expect(pageSource).not.toContain(
+			"if (gameCourseAssetPack || gameCourseAssetPackLoadFailed) return;"
+		);
+		expect(pageSource).toContain(
 			"let gameCourseAssetPackSilentLoadFailed = false;"
 		);
 		expect(pageSource).toContain(
-			"if (!announce && gameCourseAssetPackSilentLoadFailed) return;"
+			"(gameCourseAssetPackSilentLoadFailed || gameCourseAssetPackLoadFailed)"
 		);
 		expect(pageSource).toContain(
 			"gameCourseAssetPackSilentLoadFailed = true;"

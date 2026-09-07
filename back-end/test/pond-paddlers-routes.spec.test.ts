@@ -888,6 +888,69 @@ describe("Pond Paddlers privacy-minimal race API", () => {
 		await reader?.cancel().catch(() => undefined);
 	});
 
+	it("closes live and reconnected event streams when a race finishes", async () => {
+		const runtime = await createRuntime();
+		const room = await createRoom(runtime, {
+			finishAt: 5,
+			operations: ["add"]
+		});
+		const waiting = await joinRoom(runtime, room.roomCode);
+		const response = await fetch(
+			`${runtime.baseUrl}/rooms/${room.roomCode}/events`,
+			{
+				headers: { Cookie: waiting.cookie },
+				signal: AbortSignal.timeout(3_000)
+			}
+		);
+		expect(response.status).toBe(200);
+		const streamTextPromise = response.text();
+		const joined = await startAndResume(runtime, room.roomCode, waiting);
+		let question = requiredQuestion(joined.body);
+		for (let progress = 1; progress <= 5; progress += 1) {
+			const answer = await postAnswer(
+				runtime,
+				room.roomCode,
+				waiting.cookie,
+				question.questionID,
+				answerForPrompt(question.prompt)
+			);
+			expect(answer.status).toBe(200);
+			const result = await answer.json() as {
+				finished: boolean;
+				nextQuestion: PondPaddlersQuestion | null;
+				progress: number;
+			};
+			expect(result).toMatchObject({
+				finished: progress === 5,
+				progress
+			});
+			if (result.nextQuestion) question = result.nextQuestion;
+		}
+
+		const streamText = await streamTextPromise;
+		const states = streamText
+			.split("\n")
+			.filter(line => line.startsWith("data: "))
+			.map(line => JSON.parse(line.slice(6)) as { status: string });
+		expect(states).toHaveLength(7);
+		expect(states[0]?.status).toBe("waiting");
+		expect(states.at(-1)?.status).toBe("finished");
+		expect(
+			states.slice(1, -1).every(state => state.status === "racing")
+		).toBe(true);
+
+		const reconnected = await fetch(
+			`${runtime.baseUrl}/rooms/${room.roomCode}/events`,
+			{
+				headers: { Cookie: waiting.cookie },
+				signal: AbortSignal.timeout(3_000)
+			}
+		);
+		expect(reconnected.status).toBe(200);
+		const terminalText = await reconnected.text();
+		expect(terminalText).toContain('"status":"finished"');
+	});
+
 	it("rate-limits answers by the private seat without persisting an identifier", async () => {
 		const runtime = await createRuntime();
 		const room = await createRoom(runtime, { operations: ["add"] });

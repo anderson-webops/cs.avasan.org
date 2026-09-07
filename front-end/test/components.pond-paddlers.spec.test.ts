@@ -668,6 +668,89 @@ describe("PondPaddlersGame", () => {
 		expect(wrapper.text()).toContain("You answered 4 questions");
 		expect(wrapper.find("#pond-answer").exists()).toBe(false);
 		expect(answerPondPaddlersQuestion).not.toHaveBeenCalled();
+		expect(wrapper.text()).toContain("Race finished");
+		expect(close).toHaveBeenCalledOnce();
+	});
+
+	it("aborts and ignores an in-flight answer when another paddler finishes", async () => {
+		let answerSignal: AbortSignal | undefined;
+		let resolveAnswer:
+			| ((
+					result: Awaited<
+						ReturnType<typeof answerPondPaddlersQuestion>
+					>
+			  ) => void)
+			| undefined;
+		vi.mocked(answerPondPaddlersQuestion).mockImplementationOnce(
+			(_roomCode, _questionID, _answer, signal) => {
+				answerSignal = signal;
+				return new Promise(resolve => {
+					resolveAnswer = resolve;
+				});
+			}
+		);
+		const wrapper = mountGame();
+		await wrapper.get("#pond-room-code").setValue("ABCD2345");
+		await wrapper.get("form").trigger("submit.prevent");
+		await flushPromises();
+		await wrapper.get("#pond-answer").setValue("7");
+		await wrapper.get(".question-panel").trigger("submit.prevent");
+		await flushPromises();
+
+		expect(answerSignal?.aborted).toBe(false);
+		eventHandlers.onState({
+			finishAt: 10,
+			players: [
+				{ alias: "Sunny Mallard", progress: 4 },
+				{ alias: "Blue Heron", progress: 10 }
+			],
+			status: "finished"
+		});
+		await flushPromises();
+
+		expect(answerSignal?.aborted).toBe(true);
+		expect(close).toHaveBeenCalledOnce();
+		expect(wrapper.text()).toContain("Race finished");
+		expect(wrapper.text()).toContain("You answered 4 questions");
+
+		resolveAnswer?.({
+			correct: true,
+			finished: true,
+			nextQuestion: null,
+			progress: 10
+		});
+		await flushPromises();
+
+		expect(wrapper.text()).not.toContain("You won the race");
+		expect(wrapper.text()).toContain("You answered 4 questions");
+	});
+
+	it("does not reconnect to an already finished race", async () => {
+		vi.mocked(joinPondPaddlersRoom).mockResolvedValueOnce({
+			alias: "Sunny Mallard",
+			calmMode: false,
+			expiresAt: "2026-08-02T00:00:00.000Z",
+			question: null,
+			raceFormat: "individual",
+			resumed: true,
+			roomCode: "ABCD2345",
+			state: {
+				finishAt: 10,
+				players: [
+					{ alias: "Sunny Mallard", progress: 4 },
+					{ alias: "Blue Heron", progress: 10 }
+				],
+				status: "finished"
+			}
+		});
+		const wrapper = mountGame();
+		await wrapper.get("#pond-room-code").setValue("ABCD2345");
+		await wrapper.get("form").trigger("submit.prevent");
+		await flushPromises();
+
+		expect(wrapper.text()).toContain("Race finished");
+		expect(wrapper.text()).toContain("The race is finished");
+		expect(connectPondPaddlersEvents).not.toHaveBeenCalled();
 	});
 
 	it("aborts and ignores a late answer after leaving for another room", async () => {
