@@ -693,6 +693,7 @@ const turtleTimerHandles = new Set<ReturnType<typeof window.setTimeout>>();
 const gameKeysDown = new Set<string>();
 const gameEvents: GameInputEvent[] = [];
 const gameImageCache = new Map<string, CachedGameImage>();
+const activeGameMouseButtons = new Set<number>();
 const gameSoundAudio = new Map<string, Set<HTMLAudioElement>>();
 const gameToneAudio = new Map<number, GameToneHandle>();
 const codeEditorViewStates = new Map<string, CodeEditorViewState>();
@@ -5583,6 +5584,8 @@ function resetGameCanvas(width = 640, height = 400) {
 	refreshActiveTurtleEventHandlerCount();
 	gameKeysDown.clear();
 	gameEvents.length = 0;
+	activeGameMouseButtons.clear();
+	lastGamePointerPoint = null;
 	gameLoopRequested = false;
 	gameLoopContinuous = false;
 	gameTickInFlight = false;
@@ -5628,14 +5631,20 @@ function stopAllGameAudio() {
 async function ensureGameCourseAssetsLoaded(
 	options: { announce?: boolean } = {}
 ) {
-	if (gameCourseAssetPack || gameCourseAssetPackLoadFailed) return;
+	if (gameCourseAssetPack) return;
 	const announce = options.announce ?? true;
-	if (!announce && gameCourseAssetPackSilentLoadFailed) return;
+	if (
+		!announce &&
+		(gameCourseAssetPackSilentLoadFailed || gameCourseAssetPackLoadFailed)
+	) {
+		return;
+	}
 
 	if (announce) appendOutput("system", "Loading shared PyGame Zero assets.");
 
 	try {
 		gameCourseAssetPack = await loadPythonIdeCourseAssetPack();
+		gameCourseAssetPackLoadFailed = false;
 		gameCourseAssetPackSilentLoadFailed = false;
 		if (announce) {
 			appendOutput(
@@ -5656,6 +5665,14 @@ async function ensureGameCourseAssetsLoaded(
 				? `Could not load shared PyGame Zero assets: ${error.message}`
 				: "Could not load shared PyGame Zero assets."
 		);
+	}
+}
+
+function prepareGameAssetsForExplicitRun() {
+	gameCourseAssetPackLoadFailed = false;
+	gameCourseAssetPackSilentLoadFailed = false;
+	for (const [key, entry] of gameImageCache) {
+		if (entry.failed) gameImageCache.delete(key);
 	}
 }
 
@@ -7129,6 +7146,7 @@ async function runCurrentProject() {
 
 		if (project.mode === "pgzero") {
 			runMessage.value = "Loading assets";
+			prepareGameAssetsForExplicitRun();
 			await ensureGameCourseAssetsLoaded();
 			if (shouldStopPythonIdeRun(runID, project._id)) return;
 		}
@@ -7220,6 +7238,8 @@ function stopActiveRuntimeSurfaces() {
 	turtleKeyReleaseHandlers.clear();
 	gameKeysDown.clear();
 	gameEvents.length = 0;
+	activeGameMouseButtons.clear();
+	lastGamePointerPoint = null;
 	turtleClickHandlers.clear();
 	turtleReleaseHandlers.clear();
 	turtleDragHandlers.clear();
@@ -7531,6 +7551,8 @@ function dispatchCanvasPointerEvent(
 	if (type === "mousedown") canvasRef.value?.focus();
 
 	if (selectedProject.value?.mode === "pgzero") {
+		if (type === "mousedown") activeGameMouseButtons.add(event.button);
+		if (type === "mouseup") activeGameMouseButtons.delete(event.button);
 		queueGamePointerEvent(event, type);
 		return;
 	}
@@ -7617,6 +7639,16 @@ function dispatchCanvasPointerEvent(
 
 function clearTurtleDrag() {
 	activeTurtleDragButton = null;
+}
+
+function handleWindowMouseUp(event: MouseEvent) {
+	if (
+		selectedProject.value?.mode === "pgzero" &&
+		activeGameMouseButtons.has(event.button)
+	) {
+		dispatchCanvasPointerEvent(event, "mouseup");
+	}
+	clearTurtleDrag();
 }
 
 function clearCanvasKeyboardState() {
@@ -8015,7 +8047,7 @@ onMounted(() => {
 	);
 	window.addEventListener("keydown", handleKeyDown, true);
 	window.addEventListener("keyup", handleKeyUp, true);
-	window.addEventListener("mouseup", clearTurtleDrag);
+	window.addEventListener("mouseup", handleWindowMouseUp);
 	document.addEventListener(
 		"pointerdown",
 		handleIdeSettingsOutsidePointerDown
@@ -8051,7 +8083,7 @@ onBeforeUnmount(() => {
 	);
 	window.removeEventListener("keydown", handleKeyDown, true);
 	window.removeEventListener("keyup", handleKeyUp, true);
-	window.removeEventListener("mouseup", clearTurtleDrag);
+	window.removeEventListener("mouseup", handleWindowMouseUp);
 	document.removeEventListener(
 		"pointerdown",
 		handleIdeSettingsOutsidePointerDown

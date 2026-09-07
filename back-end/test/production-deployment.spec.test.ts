@@ -70,7 +70,7 @@ describe("versioned full-stack production deployment", () => {
 		expect(proxy).toContain("location = /api/classroom-analytics/summary");
 		expect(proxy).toContain("location @cs_avasan_api_not_found");
 		expect(proxy.match(/error_page 404 = @cs_avasan_api_not_found;/gu)).toHaveLength(3);
-		expect(proxy).toContain("/api/classroom-analytics/summary \"no-store\";");
+		expect(proxy).toContain('~*^/api(?:/|$) "no-store";');
 		expect(proxy).toContain(
 			"~*^/api/classroom-analytics/summary(?:/|$) 1;"
 		);
