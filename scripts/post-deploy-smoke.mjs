@@ -3,6 +3,8 @@ import { pathToFileURL } from "node:url";
 import { smokeRequest } from "./http-smoke-client.mjs";
 
 const productionOrigin = process.env.CS_SITE_ORIGIN || "https://cs.avasan.org";
+const classroomAnalyticsInternalOrigin
+	= process.env.CS_CLASSROOM_ANALYTICS_INTERNAL_ORIGIN?.trim() || null;
 // The smoke target may be a loopback proxy in CI, but cookie-authenticated
 // mutations must still prove that the production classroom Origin is accepted.
 const classroomOrigin = "https://cs.avasan.org";
@@ -392,6 +394,10 @@ const expectedClassroomAnalyticsEnabled = parseExpectedBoolean(
 	process.env.CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED,
 	"CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED"
 );
+const expectedClassroomAnalyticsServiceEnabled = parseExpectedBoolean(
+	process.env.CS_EXPECT_CLASSROOM_ANALYTICS_SERVICE_ENABLED,
+	"CS_EXPECT_CLASSROOM_ANALYTICS_SERVICE_ENABLED"
+);
 const expectedClassroomAnalyticsRetentionDays
 	= parseExpectedAnalyticsRetentionDays(
 		process.env.CS_EXPECT_CLASSROOM_ANALYTICS_RETENTION_DAYS,
@@ -408,6 +414,17 @@ async function request(path, init = {}) {
 		...init,
 		timeoutMs
 	});
+}
+
+async function internalClassroomAnalyticsRequest(path, init = {}) {
+	assertion(
+		classroomAnalyticsInternalOrigin === "http://127.0.0.1:3008",
+		"CS_CLASSROOM_ANALYTICS_INTERNAL_ORIGIN must be exact CS API loopback."
+	);
+	return await smokeRequest(
+		new URL(path, classroomAnalyticsInternalOrigin),
+		{ ...init, timeoutMs }
+	);
 }
 
 export async function readSmokeJson(response, path) {
@@ -900,6 +917,62 @@ async function verifyPrivacyFeatureBoundaries() {
 	}
 }
 
+async function verifyClassroomAnalyticsServiceBoundary() {
+	const publicPaths = [
+		"/api/classroom-analytics/summary?days=7",
+		"/api/classroom-analytics/summary/?days=7",
+		"/api/Classroom-Analytics/Summary?days=7",
+		"/api/classroom-analytics%2Fsummary?days=7",
+		"/api/classroom-analytics//summary?days=7"
+	];
+	for (const publicPath of publicPaths) {
+		await verifyApiNotFound(
+			await request(publicPath, { redirect: "manual" }),
+			publicPath
+		);
+	}
+	if (classroomAnalyticsInternalOrigin === null) return;
+
+	const internalPath = "/classroom-analytics/summary?days=7";
+	const response = await internalClassroomAnalyticsRequest(internalPath, {
+		redirect: "manual"
+	});
+	const expectedStatus = expectedClassroomAnalyticsServiceEnabled ? 403 : 404;
+	assertion(
+		response.status === expectedStatus,
+		`Internal classroom analytics companion endpoint returned HTTP ${response.status}; expected ${expectedStatus}.`
+	);
+	assertion(
+		response.headers.get("cache-control")?.includes("no-store"),
+		"Internal classroom analytics companion responses must not be cached."
+	);
+	assertion(
+		response.headers.get("set-cookie") === null,
+		"Internal classroom analytics companion probe unexpectedly set a cookie."
+	);
+	if (!expectedClassroomAnalyticsServiceEnabled) {
+		const body = await readSmokeJson(response, internalPath);
+		assertion(
+			body
+			&& typeof body === "object"
+			&& !Array.isArray(body)
+			&& Object.keys(body).join(",") === "message"
+			&& body.message === "Not found",
+			"Disabled internal classroom analytics companion did not return JSON 404."
+		);
+		return;
+	}
+	const body = await readSmokeJson(response, internalPath);
+	assertion(
+		body
+		&& typeof body === "object"
+		&& !Array.isArray(body)
+		&& Object.keys(body).join(",") === "message"
+		&& body.message === "Forbidden",
+		"Internal classroom analytics companion did not fail closed without its service key."
+	);
+}
+
 export async function runProductionSmoke() {
 	currentSmokePhase = "release identity";
 	await verifyReleaseIdentity();
@@ -917,6 +990,8 @@ export async function runProductionSmoke() {
 	await verifyPondPaddlersBoundary();
 	currentSmokePhase = "privacy feature boundaries";
 	await verifyPrivacyFeatureBoundaries();
+	currentSmokePhase = "classroom analytics companion boundary";
+	await verifyClassroomAnalyticsServiceBoundary();
 	currentSmokePhase = "complete";
 	console.log(
 		`OK: ${productionOrigin} reports one matching release across the public site and API.`

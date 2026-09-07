@@ -33,7 +33,6 @@ const isOpen = computed(() => props.open && Boolean(verifiedEmbedUrl.value));
 				referrerpolicy="no-referrer"
 				sandbox="allow-scripts allow-same-origin"
 				allow="fullscreen"
-				allowfullscreen
 			/>
 		</div>
 		<p class="scratch-player-exit-help">

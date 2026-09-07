@@ -4,6 +4,11 @@ map $args $cs_avasan_bluej_redirect_args {
 	default "mode=bluej&$args";
 }
 
+map $uri $cs_avasan_analytics_service_public_path {
+	default 0;
+	~*^/api/classroom-analytics/summary(?:/|$) 1;
+}
+
 server {
 	listen 80;
 	listen [::]:80;
@@ -57,6 +62,13 @@ server {
 		return 404;
 	}
 
+	# The Analytics companion reaches Express directly over host loopback. Never
+	# expose its secret-bearing service route through the public proxy.
+	location = /api/classroom-analytics/summary {
+		error_page 404 = @cs_avasan_api_not_found;
+		return 404;
+	}
+
 	location @cs_avasan_api_not_found {
 		include /etc/nginx/snippets/cs-avasan-security-headers.conf;
 		add_header Cache-Control "no-store" always;
@@ -65,6 +77,8 @@ server {
 	}
 
 	location ^~ /api/ {
+		error_page 404 = @cs_avasan_api_not_found;
+		if ($cs_avasan_analytics_service_public_path) { return 404; }
 		proxy_pass http://127.0.0.1:3008/;
 		proxy_http_version 1.1;
 		proxy_intercept_errors off;

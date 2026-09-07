@@ -113,6 +113,7 @@ cs_previous_student_accounts_enabled="$(node -p "JSON.parse(require('node:fs').r
 cs_previous_student_oauth_enabled="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).buildConfig.STUDENT_OAUTH_ENABLED" "$cs_previous_target/native-release.json")"
 cs_previous_classroom_analytics_enabled="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).buildConfig.CLASSROOM_ANALYTICS_COLLECTION_ENABLED" "$cs_previous_target/native-release.json")"
 cs_previous_classroom_analytics_retention_days="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).buildConfig.CLASSROOM_ANALYTICS_RETENTION_DAYS || ''" "$cs_previous_target/native-release.json")"
+cs_previous_classroom_analytics_service_enabled="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).runtimeConfig?.classroomAnalyticsServiceEnabled === true ? 'true' : 'false'" "$cs_previous_target/native-release.json")"
 
 # api.env is a root-owned deployment input and is deliberately shared with
 # systemd. Export it only inside this process, then force the fixed production
@@ -125,7 +126,8 @@ while IFS= read -r cs_env_line || [[ -n "$cs_env_line" ]]; do
 	cs_env_name="${BASH_REMATCH[1]}"
 	case "$cs_env_name" in
 		MONGODB_URI|VAULT_ADDR|VAULT_ROLE_ID|VAULT_SECRET_ID|VAULT_MONGODB_SECRET_PATH|\
-		SESSION_SECRET|INTERNAL_DIAGNOSTICS_KEY|CLASSROOM_PRIVACY_APPROVED|\
+		SESSION_SECRET|INTERNAL_DIAGNOSTICS_KEY|CLASSROOM_ANALYTICS_SERVICE_KEY|\
+		CLASSROOM_PRIVACY_APPROVED|\
 		SCHOOL_PRIVACY_CONTACT|CLASSROOM_PRIVACY_OPERATOR_NOTICE|\
 		CLASSROOM_PRIVACY_POLICY_EFFECTIVE_DATE|CLASSROOM_PRIVACY_POLICY_VERSION|\
 		CLASSROOM_SERVICE_PROVIDER_NOTICE|STUDENT_ACCOUNTS_ENABLED|\
@@ -162,10 +164,12 @@ export VITE_SCHOOL_PRIVACY_CONTACT="${SCHOOL_PRIVACY_CONTACT:-}"
 export VITE_STUDENT_ACCOUNTS_ENABLED="${STUDENT_ACCOUNTS_ENABLED:-false}"
 export VITE_STUDENT_OAUTH_ENABLED="${STUDENT_OAUTH_ENABLED:-false}"
 export VITE_STUDENT_RECORD_RETENTION_DAYS="${STUDENT_RECORD_RETENTION_DAYS:-}"
+if [[ -n "${CLASSROOM_ANALYTICS_SERVICE_KEY:-}" ]]; then
+	export CLASSROOM_ANALYTICS_SERVICE_ENABLED=true
+else
+	export CLASSROOM_ANALYTICS_SERVICE_ENABLED=false
+fi
 
-cs_release_suffix="$(node "$cs_source_dir/scripts/write-native-release-manifest.mjs" --print-release-suffix)"
-[[ "$cs_release_suffix" =~ ^[0-9a-f]{40}-[0-9a-f]{64}$ ]] \
-	|| { printf '%s\n' "Native release suffix validation failed." >&2; exit 1; }
 # Build dependencies and Vite receive only release identity and the intentional
 # public VITE values above, never Mongo, session, OAuth, Vault, or diagnostics
 # secrets from api.env.
@@ -187,6 +191,10 @@ export SCHOOL_PRIVACY_CONTACT="${SCHOOL_PRIVACY_CONTACT:-}"
 export STUDENT_ACCOUNTS_ENABLED="${STUDENT_ACCOUNTS_ENABLED:-false}"
 export STUDENT_OAUTH_ENABLED="${STUDENT_OAUTH_ENABLED:-false}"
 export STUDENT_RECORD_RETENTION_DAYS="${STUDENT_RECORD_RETENTION_DAYS:-}"
+
+cs_release_suffix="$(node "$cs_source_dir/scripts/write-native-release-manifest.mjs" --print-release-suffix)"
+[[ "$cs_release_suffix" =~ ^[0-9a-f]{40}-[0-9a-f]{64}$ ]] \
+	|| { printf '%s\n' "Native release suffix validation failed." >&2; exit 1; }
 
 cs_final_release="$cs_release_root/releases/$cs_release_suffix"
 
@@ -329,6 +337,7 @@ verify_release_health() {
 	local cs_expected_student_oauth="$5"
 	local cs_expected_classroom_analytics="$6"
 	local cs_expected_classroom_analytics_retention_days="$7"
+	local cs_expected_classroom_analytics_service_enabled="$8"
 	local cs_health_status=0
 
 	wait_for_api_readiness || cs_health_status=$?
@@ -337,12 +346,14 @@ verify_release_health() {
 	fi
 	env -i PATH=/usr/bin:/bin \
 		CS_SITE_ORIGIN=http://127.0.0.1:8080 \
+		CS_CLASSROOM_ANALYTICS_INTERNAL_ORIGIN=http://127.0.0.1:3008 \
 		CS_EXPECTED_RELEASE="$cs_expected_version" \
 		CS_EXPECTED_REVISION="$cs_expected_revision" \
 		CS_EXPECT_STUDENT_ACCOUNTS_ENABLED="$cs_expected_student_accounts" \
 		CS_EXPECT_STUDENT_OAUTH_ENABLED="$cs_expected_student_oauth" \
 		CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED="$cs_expected_classroom_analytics" \
 		CS_EXPECT_CLASSROOM_ANALYTICS_RETENTION_DAYS="$cs_expected_classroom_analytics_retention_days" \
+		CS_EXPECT_CLASSROOM_ANALYTICS_SERVICE_ENABLED="$cs_expected_classroom_analytics_service_enabled" \
 		/usr/bin/node "$cs_health_release/scripts/post-deploy-smoke.mjs" \
 		|| cs_health_status=$?
 	return "$cs_health_status"
@@ -386,6 +397,7 @@ restore_previous() {
 		"$cs_previous_student_oauth_enabled" \
 		"$cs_previous_classroom_analytics_enabled" \
 		"$cs_previous_classroom_analytics_retention_days" \
+		"$cs_previous_classroom_analytics_service_enabled" \
 		|| cs_rollback_status=$?
 	if (( cs_rollback_status != 0 )); then
 		printf '%s\n' "Automatic rollback prior-release health verification failed with status $cs_rollback_status." >&2
@@ -442,6 +454,7 @@ verify_release_health \
 	"${STUDENT_OAUTH_ENABLED:-false}" \
 	"${CLASSROOM_ANALYTICS_COLLECTION_ENABLED:-false}" \
 	"${CLASSROOM_ANALYTICS_RETENTION_DAYS:-}" \
+	"${CLASSROOM_ANALYTICS_SERVICE_ENABLED:-false}" \
 	|| cs_activation_status=$?
 if (( cs_activation_status != 0 )); then
 	fail_activation "Native release readiness or smoke gate failed" "$cs_activation_status"

@@ -29,6 +29,15 @@ for (const [name, builtValue] of Object.entries(manifest.buildConfig ?? {})) {
 	}
 }
 
+const classroomAnalyticsServiceEnabled
+	= Boolean(process.env.CLASSROOM_ANALYTICS_SERVICE_KEY?.trim());
+if (
+	manifest.runtimeConfig?.classroomAnalyticsServiceEnabled
+		!== classroomAnalyticsServiceEnabled
+) {
+	fail("the classroom analytics companion service setting changed without a release rebuild");
+}
+
 const vaultRequested = ["VAULT_ADDR", "VAULT_ROLE_ID", "VAULT_SECRET_ID"]
 	.some(name => Boolean(process.env[name]?.trim()));
 if (vaultRequested) {

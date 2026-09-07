@@ -67,6 +67,16 @@ describe("versioned full-stack production deployment", () => {
 		const hostProxy = repositoryFile("deploy/host-nginx.conf.example");
 
 		expect(proxy).toContain("location = /api");
+		expect(proxy).toContain("location = /api/classroom-analytics/summary");
+		expect(proxy).toContain("location @cs_avasan_api_not_found");
+		expect(proxy.match(/error_page 404 = @cs_avasan_api_not_found;/gu)).toHaveLength(3);
+		expect(proxy).toContain("/api/classroom-analytics/summary \"no-store\";");
+		expect(proxy).toContain(
+			"~*^/api/classroom-analytics/summary(?:/|$) 1;"
+		);
+		expect(proxy).toContain(
+			"if ($classroom_analytics_service_public_path) { return 404; }"
+		);
 		expect(proxy).toContain("location ^~ /api/");
 		expect(proxy).toContain("proxy_pass http://api:3008/;");
 		expect(proxy).toContain("proxy_buffering off;");
@@ -116,6 +126,28 @@ describe("versioned full-stack production deployment", () => {
 		expect(hostProxy).toContain("proxy_buffering off;");
 	});
 
+	it("mounts and authenticates the private summary before shared middleware", () => {
+		const server = repositoryFile("back-end/src/server.ts");
+		const routes = repositoryFile(
+			"back-end/src/routes/classroomAnalyticsRoutes.ts"
+		);
+		const serviceMount = server.indexOf(
+			"mountClassroomAnalyticsServiceRoute(app"
+		);
+
+		expect(serviceMount).toBeGreaterThan(server.indexOf('app.set("trust proxy"'));
+		expect(serviceMount).toBeLessThan(server.indexOf("app.use(cookieSession"));
+		expect(serviceMount).toBeLessThan(
+			server.indexOf('app.use(bodyParser.json({ limit: "1mb" }))')
+		);
+		expect(routes.indexOf("requireExactClassroomAnalyticsServiceTarget()"))
+			.toBeLessThan(routes.indexOf("requireClassroomAnalyticsService(options.serviceKey)"));
+		expect(routes.indexOf("requireClassroomAnalyticsService(options.serviceKey)"))
+			.toBeLessThan(routes.indexOf("globalLimiter,"));
+		expect(routes.indexOf("globalLimiter,"))
+			.toBeLessThan(routes.indexOf("getClassroomAnalyticsSummary(options.retentionDays)"));
+	});
+
 	it("provides an atomic, single-process native production handoff", () => {
 		const environment = repositoryFile("deploy/native/api.env.example");
 		const service = repositoryFile("deploy/native/cs-avasan-api.service");
@@ -147,6 +179,16 @@ describe("versioned full-stack production deployment", () => {
 		expect(environment).toContain("STUDENT_OAUTH_ENABLED=false");
 		expect(environment).toContain("CLASSROOM_ANALYTICS_COLLECTION_ENABLED=false");
 		expect(environment).toContain("CLASSROOM_ANALYTICS_RETENTION_DAYS=");
+		expect(environment).toContain("CLASSROOM_ANALYTICS_SERVICE_KEY=");
+		expect(nativeProxy).toContain(
+			"location = /api/classroom-analytics/summary"
+		);
+		expect(nativeProxy).toContain(
+			"error_page 404 = @cs_avasan_api_not_found;"
+		);
+		expect(nativeProxy).toContain(
+			"if ($cs_avasan_analytics_service_public_path) { return 404; }"
+		);
 
 		expect(service).toContain("User=cs-avasan");
 		expect(service.match(/^ExecStart=/gmu)).toHaveLength(1);
@@ -314,14 +356,14 @@ describe("versioned full-stack production deployment", () => {
 			version: string;
 		};
 
-		expect(rootPackage.version).toBe("2.7.119");
-		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]119\}/g)).toHaveLength(2);
+		expect(rootPackage.version).toBe("2.7.120");
+		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]120\}/g)).toHaveLength(2);
 		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g)).toHaveLength(2);
 		expect(compose).not.toContain("SOURCE_REVISION:-unknown");
 		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
-		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.119");
+		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.120");
 		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
-		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.119");
+		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.120");
 		expect(apiDockerfile).toContain("ARG SOURCE_REVISION=unknown");
 		expect(frontendReleaseWriter).toContain("environment.COMMIT_REF?.trim()");
 		expect(frontendReleaseWriter).toContain("const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;");
@@ -417,11 +459,21 @@ describe("versioned full-stack production deployment", () => {
 		expect(postDeployWorkflow).toContain("classroom_analytics_collection_enabled:");
 		expect(postDeployWorkflow).toContain("classroom_analytics_retention_days:");
 		expect(postDeployWorkflow).toContain("CS_EXPECT_CLASSROOM_ANALYTICS_RETENTION_DAYS");
+		expect(productionSmoke).toContain(
+			"CS_CLASSROOM_ANALYTICS_INTERNAL_ORIGIN"
+		);
+		expect(productionSmoke).toContain(
+			'"/api/classroom-analytics/summary?days=7"'
+		);
+		expect(productionSmoke).toContain(
+			'const internalPath = "/classroom-analytics/summary?days=7"'
+		);
 		expect(postDeployWorkflow).toContain("npm run verify:production");
 	});
 
 	it("keeps privacy features off in the checked-in deployment template", () => {
 		const environment = repositoryFile("deploy/cs.env.example");
+		const backendEnvironment = repositoryFile("back-end/.env.EXAMPLE");
 		const compose = repositoryFile("compose.production.yml");
 		const api = composeService(compose, "api");
 		const adminTools = composeService(compose, "admin-tools");
@@ -437,6 +489,13 @@ describe("versioned full-stack production deployment", () => {
 		expect(environment).toContain("STUDENT_RECORD_RETENTION_DAYS=");
 		expect(environment).toContain("CLASSROOM_ANALYTICS_COLLECTION_ENABLED=false");
 		expect(environment).toMatch(/^CLASSROOM_ANALYTICS_RETENTION_DAYS=$/mu);
+		expect(backendEnvironment).toMatch(
+			/^CLASSROOM_ANALYTICS_RETENTION_DAYS=$/mu
+		);
+		expect(backendEnvironment).toContain("There is\n# no default");
+		expect(backendEnvironment).not.toContain(
+			"CLASSROOM_ANALYTICS_RETENTION_DAYS=90"
+		);
 		expect(environment).not.toContain("VITE_CLASSROOM_PRIVACY_APPROVED=");
 		expect(environment).not.toContain("VITE_STUDENT_ACCOUNTS_ENABLED=");
 		expect(environment).not.toContain("VITE_STUDENT_OAUTH_ENABLED=");
@@ -455,6 +514,11 @@ describe("versioned full-stack production deployment", () => {
 		expect(compose).toContain("VITE_CLASSROOM_USAGE_ENABLED: ${CLASSROOM_ANALYTICS_COLLECTION_ENABLED:-false}");
 		expect(compose).toContain("VITE_CLASSROOM_ANALYTICS_RETENTION_DAYS: ${CLASSROOM_ANALYTICS_RETENTION_DAYS:-}");
 		expect(api).toContain("CLASSROOM_ANALYTICS_RETENTION_DAYS: ${CLASSROOM_ANALYTICS_RETENTION_DAYS:-}");
+		expect(api).not.toContain("CLASSROOM_ANALYTICS_SERVICE_KEY");
+		expect(adminTools).not.toContain("CLASSROOM_ANALYTICS_SERVICE_KEY");
+		expect(composeService(compose, "web")).not.toContain(
+			"CLASSROOM_ANALYTICS_SERVICE_KEY"
+		);
 		expect(compose).not.toContain("CLASSROOM_ANALYTICS_RETENTION_DAYS: ${CLASSROOM_ANALYTICS_RETENTION_DAYS:-90}");
 		expect(compose).not.toContain("VITE_CLASSROOM_PRIVACY_APPROVED: ${VITE_CLASSROOM_PRIVACY_APPROVED");
 		expect(compose).not.toContain("VITE_STUDENT_ACCOUNTS_ENABLED: ${VITE_STUDENT_ACCOUNTS_ENABLED");

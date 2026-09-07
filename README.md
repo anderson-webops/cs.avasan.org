@@ -146,9 +146,17 @@ device identifiers.
 
 The Admin activity panel at `/admin?section=analytics` separates CS and Math
 activity while retaining only aggregate optional-account and Python-project
-counts under student work. It uses Julio's existing Admin session; there is no
-external summary API or analytics service key. Rows written before the Math
-site was connected remain part of the CS totals.
+counts under student work. It uses Julio's existing Admin session. The private
+`analytics.avasan.org` companion may read that exact aggregate through
+`GET http://127.0.0.1:3008/classroom-analytics/summary?days=7|30|90` only when an independent
+`CLASSROOM_ANALYTICS_SERVICE_KEY` is configured on CS and its matching secret
+is configured on Analytics. Nginx always denies the corresponding public API
+path with JSON 404. The loopback route is otherwise absent, rejects browser
+cookies and authorization headers, and never exposes student-level records.
+This companion is available only on the canonical native deployment. The
+manual Compose fallback deliberately leaves it unavailable rather than
+publishing an additional API port or trusting a container bridge address.
+Rows written before the Math site was connected remain part of the CS totals.
 
 Collection stays off unless school/district approval, a direct privacy contact,
 the backend `CLASSROOM_ANALYTICS_COLLECTION_ENABLED`, and the frontend
@@ -341,7 +349,7 @@ that identity fallback is not permitted by the production Compose path. Inject
 the deployment identity without changing application secrets:
 
 ```bash
-export CS_RELEASE_VERSION=2.7.119
+export CS_RELEASE_VERSION=2.7.120
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 docker compose --env-file deploy/cs.env -f compose.production.yml build
 ```
@@ -356,7 +364,7 @@ To exercise or prepare the manually selected Compose fallback:
 ```bash
 install -m 600 deploy/cs.env.example deploy/cs.env
 # Fill secrets, keep all optional features false until the privacy gate is met.
-export CS_RELEASE_VERSION=2.7.119
+export CS_RELEASE_VERSION=2.7.120
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 ./scripts/verify-deploy-env-permissions.sh
 docker compose --env-file deploy/cs.env -f compose.production.yml build

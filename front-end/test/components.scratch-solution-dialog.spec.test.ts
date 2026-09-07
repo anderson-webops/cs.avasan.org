@@ -24,6 +24,8 @@ describe("ScratchSolutionDialog", () => {
 		expect(frame.attributes("sandbox")).toBe(
 			"allow-scripts allow-same-origin"
 		);
+		expect(frame.attributes("allow")).toBe("fullscreen");
+		expect(frame.attributes()).not.toHaveProperty("allowfullscreen");
 		const footerClose = wrapper.get(".scratch-player-close");
 		expect(footerClose.text()).toBe("Close playable solution");
 		expect(

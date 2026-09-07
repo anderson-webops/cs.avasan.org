@@ -246,6 +246,54 @@ describe("Machine Workshop repair missions", () => {
 		wrapper.unmount();
 	});
 
+	it.each([
+		{
+			label: "Middle",
+			sequence: [
+				"Energy wheel",
+				"Signal sorter",
+				"Gear train",
+				"Memory lights",
+				"Signal sorter",
+				"Energy wheel"
+			]
+		},
+		{
+			label: "Advanced",
+			sequence: [
+				"Memory lights",
+				"Gear train",
+				"Energy wheel",
+				"Signal sorter",
+				"Gear train",
+				"Memory lights",
+				"Signal sorter",
+				"Energy wheel"
+			]
+		}
+	])("completes the $label mission through every ordered step", async mission => {
+		const wrapper = mountWorkshop();
+		await buttonNamed(wrapper, mission.label).trigger("click");
+
+		for (const station of mission.sequence) {
+			await buttonNamed(wrapper, station).trigger("click");
+		}
+
+		expect(
+			wrapper.get(".mission-card").attributes("data-mission-complete")
+		).toBe("true");
+		expect(wrapper.get(".mission-summary h2").text()).toBe(
+			"Repair complete!"
+		);
+		expect(wrapper.get("progress").attributes("value")).toBe(
+			String(mission.sequence.length)
+		);
+		expect(wrapper.findAll(".mission-steps li.done")).toHaveLength(
+			mission.sequence.length
+		);
+		wrapper.unmount();
+	});
+
 	it("labels its mission controls and keeps the canvas out of keyboard order", () => {
 		const wrapper = mountWorkshop();
 

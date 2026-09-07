@@ -61,12 +61,14 @@ cs_student_accounts_enabled="$(node -p "JSON.parse(require('node:fs').readFileSy
 cs_student_oauth_enabled="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).buildConfig.STUDENT_OAUTH_ENABLED || 'false'" "$cs_previous_target/native-release.json")"
 cs_classroom_analytics_enabled="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).buildConfig.CLASSROOM_ANALYTICS_COLLECTION_ENABLED || 'false'" "$cs_previous_target/native-release.json")"
 cs_classroom_analytics_retention_days="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).buildConfig.CLASSROOM_ANALYTICS_RETENTION_DAYS || ''" "$cs_previous_target/native-release.json")"
+cs_classroom_analytics_service_enabled="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).runtimeConfig?.classroomAnalyticsServiceEnabled === true ? 'true' : 'false'" "$cs_previous_target/native-release.json")"
 cs_current_manifest_version="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).version" "$cs_current_target/native-release.json")"
 cs_current_manifest_revision="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).revision" "$cs_current_target/native-release.json")"
 cs_current_student_accounts_enabled="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).buildConfig.STUDENT_ACCOUNTS_ENABLED || 'false'" "$cs_current_target/native-release.json")"
 cs_current_student_oauth_enabled="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).buildConfig.STUDENT_OAUTH_ENABLED || 'false'" "$cs_current_target/native-release.json")"
 cs_current_classroom_analytics_enabled="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).buildConfig.CLASSROOM_ANALYTICS_COLLECTION_ENABLED || 'false'" "$cs_current_target/native-release.json")"
 cs_current_classroom_analytics_retention_days="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).buildConfig.CLASSROOM_ANALYTICS_RETENTION_DAYS || ''" "$cs_current_target/native-release.json")"
+cs_current_classroom_analytics_service_enabled="$(node -p "JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')).runtimeConfig?.classroomAnalyticsServiceEnabled === true ? 'true' : 'false'" "$cs_current_target/native-release.json")"
 
 atomic_link() {
 	local cs_link_target="$1"
@@ -111,6 +113,7 @@ verify_release_health() {
 	local cs_expected_student_oauth="$5"
 	local cs_expected_classroom_analytics="$6"
 	local cs_expected_classroom_analytics_retention_days="$7"
+	local cs_expected_classroom_analytics_service_enabled="$8"
 	local cs_health_status=0
 
 	wait_for_api_readiness || cs_health_status=$?
@@ -119,12 +122,14 @@ verify_release_health() {
 	fi
 	env -i PATH=/usr/bin:/bin \
 		CS_SITE_ORIGIN=http://127.0.0.1:8080 \
+		CS_CLASSROOM_ANALYTICS_INTERNAL_ORIGIN=http://127.0.0.1:3008 \
 		CS_EXPECTED_RELEASE="$cs_expected_version" \
 		CS_EXPECTED_REVISION="$cs_expected_revision" \
 		CS_EXPECT_STUDENT_ACCOUNTS_ENABLED="$cs_expected_student_accounts" \
 		CS_EXPECT_STUDENT_OAUTH_ENABLED="$cs_expected_student_oauth" \
 		CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED="$cs_expected_classroom_analytics" \
 		CS_EXPECT_CLASSROOM_ANALYTICS_RETENTION_DAYS="$cs_expected_classroom_analytics_retention_days" \
+		CS_EXPECT_CLASSROOM_ANALYTICS_SERVICE_ENABLED="$cs_expected_classroom_analytics_service_enabled" \
 		/usr/bin/node "$cs_health_release/scripts/post-deploy-smoke.mjs" \
 		|| cs_health_status=$?
 	return "$cs_health_status"
@@ -168,6 +173,7 @@ restore_current() {
 		"$cs_current_student_oauth_enabled" \
 		"$cs_current_classroom_analytics_enabled" \
 		"$cs_current_classroom_analytics_retention_days" \
+		"$cs_current_classroom_analytics_service_enabled" \
 		|| cs_restore_status=$?
 	if (( cs_restore_status != 0 )); then
 		printf '%s\n' "Original release health verification failed with status $cs_restore_status." >&2
@@ -223,6 +229,7 @@ verify_release_health \
 	"$cs_student_oauth_enabled" \
 	"$cs_classroom_analytics_enabled" \
 	"$cs_classroom_analytics_retention_days" \
+	"$cs_classroom_analytics_service_enabled" \
 	|| cs_rollback_status=$?
 if (( cs_rollback_status != 0 )); then
 	fail_rollback "Rollback readiness or smoke gate failed" "$cs_rollback_status"

@@ -142,6 +142,24 @@ to drift. Missing or invalid configuration fails closed.
 | Apple or Google sign-in                   | `STUDENT_OAUTH_ENABLED=true` plus account flag, retention, and complete provider credentials | Derived by the selected deployer from the same canonical values |
 | Anonymous CS and Math counts              | `CLASSROOM_ANALYTICS_COLLECTION_ENABLED=true` and `CLASSROOM_ANALYTICS_RETENTION_DAYS=7..90` | Derived by the selected deployer from the same canonical values |
 
+The private Analytics companion uses a separate runtime-only
+`CLASSROOM_ANALYTICS_SERVICE_KEY` of at least 32 bytes. That key authorizes only
+the same coarse summary already available to Julio in CS Admin; it does not
+enable collection, accounts, OAuth, or any record mutation. CS exposes the
+service route only while the key is configured, rejects cookies,
+`Authorization`, request bodies, unexpected methods, and query fields, and
+authenticates before any database aggregation. It binds to the API's existing
+host-loopback listener; public Nginx always returns JSON 404 for the analogous
+`/api/classroom-analytics/summary` path. The release manifest and digest
+record only a configured boolean and never the key. Configure the matching
+Analytics secret and rotate both values together without placing either value
+in a URL, browser build, repository, command, issue, or log.
+
+This companion is a native-production capability. The manual Compose fallback
+does not receive the key, exposes no direct API port, and returns public JSON
+404 for the service path. Analytics must fail closed while that fallback is in
+use.
+
 OAuth is unavailable unless accounts are enabled. Provider apps must request
 only the OpenID identity needed for an opaque subject. Do not add email,
 profile, name, avatar, or offline-access scopes. The authorization-code
@@ -555,6 +573,16 @@ anonymous request has no identifier with which the server could distinguish an
 unrecorded request from a recorded request whose response was lost. These
 client-supplied counts can still undercount or be manipulated; use them only as
 a broad engagement indicator.
+
+The Analytics companion accepts only `days=7`, `30`, or `90` and receives the
+strict aggregate response: generated period, configured retention or `null`,
+CS/Math daily and course totals, and coarse active-account/project counts. It
+never receives usernames, access codes, provider subjects, project names,
+project contents, or deletion/preservation records. Disabling collection or
+accounts prevents new affected activity but does not conceal coarse values from
+records that remain under an approved retention period. Removing the service
+key returns the route to 404 without changing collection, account, deletion, or
+retention policy.
 
 Both reviewed production handoffs disable classroom access logs. If a
 school-authorized infrastructure layer separately retains narrowly scoped
