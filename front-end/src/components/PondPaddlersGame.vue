@@ -22,7 +22,8 @@ defineOptions({ name: "PondPaddlersGame" });
 const app = useAppStore();
 
 type GamePhase = "join" | "race";
-type ConnectionState = "closed" | "connecting" | "live" | "reconnecting";
+type ConnectionState =
+	"closed" | "connecting" | "finished" | "live" | "reconnecting";
 
 const phase = ref<GamePhase>("join");
 const roomCodeInput = ref("");
@@ -72,6 +73,7 @@ const canJoin = computed(
 );
 const connectionLabel = computed(() => {
 	if (connectionState.value === "closed") return "Room closed";
+	if (connectionState.value === "finished") return "Race finished";
 	if (connectionState.value === "live") return "Race connected";
 	if (connectionState.value === "reconnecting") return "Reconnecting to race";
 	return "Connecting to race";
@@ -120,6 +122,18 @@ function paddlerProgressText(paddler: PondPaddler): string {
 	return `${paddler.progress} of ${finishAt.value} questions`;
 }
 
+function stopTerminalRaceActivity(status: "closed" | "finished") {
+	answerController?.abort();
+	answerController = null;
+	answering.value = false;
+	startQuestionController?.abort();
+	startQuestionController = null;
+	handoffFailed.value = false;
+	eventConnection?.close();
+	eventConnection = null;
+	connectionState.value = status;
+}
+
 function mergeSameStatusPlayers(
 	currentPlayers: PondPaddler[],
 	incomingPlayers: PondPaddler[]
@@ -154,14 +168,10 @@ function applyRaceState(state: PondPaddlersPublicState): boolean {
 	if (state.status === "closed") {
 		answerFeedback.value =
 			"This room has closed. Ask Julio for a new room code.";
-		connectionState.value = "closed";
-		eventConnection?.close();
-		eventConnection = null;
 	}
 	if (state.status === "finished" || state.status === "closed") {
-		startQuestionController?.abort();
-		startQuestionController = null;
-		handoffFailed.value = false;
+		stopTerminalRaceActivity(state.status);
+		question.value = null;
 		if (state.status === "finished") answerFeedback.value = "";
 	}
 	if (
@@ -183,7 +193,9 @@ function startEventConnection() {
 		onError: () => {
 			if (
 				generation !== raceGeneration ||
-				activeRoomCode !== roomCode.value
+				activeRoomCode !== roomCode.value ||
+				raceStatus.value === "finished" ||
+				raceStatus.value === "closed"
 			) {
 				return;
 			}
@@ -192,7 +204,9 @@ function startEventConnection() {
 		onOpen: () => {
 			if (
 				generation !== raceGeneration ||
-				activeRoomCode !== roomCode.value
+				activeRoomCode !== roomCode.value ||
+				raceStatus.value === "finished" ||
+				raceStatus.value === "closed"
 			) {
 				return;
 			}
@@ -330,7 +344,12 @@ async function joinRoom() {
 						? "Your team is in! Take turns solving questions to paddle."
 						: "You are in! Solve the first question to paddle.";
 		phase.value = "race";
-		startEventConnection();
+		if (
+			joined.state.status === "waiting" ||
+			joined.state.status === "racing"
+		) {
+			startEventConnection();
+		}
 		if (joined.state.status === "racing" && !joined.question) {
 			void loadStartedQuestion();
 		}
@@ -394,6 +413,7 @@ async function submitAnswer() {
 			generation !== raceGeneration ||
 			phase.value !== "race" ||
 			roomCode.value !== activeRoomCode ||
+			raceStatus.value !== "racing" ||
 			question.value?.questionID !== currentQuestion.questionID
 		) {
 			return;
@@ -401,6 +421,10 @@ async function submitAnswer() {
 		progress.value = Math.max(0, result.progress);
 		finished.value = result.finished;
 		addOwnPaddler();
+		if (result.finished) {
+			raceStatus.value = "finished";
+			stopTerminalRaceActivity("finished");
+		}
 
 		if (!result.correct) {
 			answerFeedback.value = "Not quite. Try that question again.";

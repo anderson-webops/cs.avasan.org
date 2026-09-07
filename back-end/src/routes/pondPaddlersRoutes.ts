@@ -470,11 +470,22 @@ export function createPondPaddlersRoutes(
 			});
 			res.flushHeaders();
 			res.write("retry: 3000\n\n");
-			sendSseState(res, subscription.state);
-			heartbeat = setInterval(() => {
-				if (!res.destroyed && !res.writableEnded && !res.write(": heartbeat\n\n")) res.end();
-			}, heartbeatMs);
-			heartbeat.unref?.();
+			const accepted = sendSseState(res, subscription.state);
+			if (!accepted || subscription.state.status === "finished") {
+				res.end();
+			}
+			else {
+				heartbeat = setInterval(() => {
+					if (
+						!res.destroyed
+						&& !res.writableEnded
+						&& !res.write(": heartbeat\n\n")
+					) {
+						res.end();
+					}
+				}, heartbeatMs);
+				heartbeat.unref?.();
+			}
 		}
 		catch (error) {
 			sendPondPaddlersError(error, res);
@@ -489,6 +500,7 @@ export function createPondPaddlersRoutes(
 		};
 		req.once("close", cleanup);
 		res.once("close", cleanup);
+		if (res.writableEnded) cleanup();
 	});
 
 	router.post(

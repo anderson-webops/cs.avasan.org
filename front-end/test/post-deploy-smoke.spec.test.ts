@@ -70,7 +70,7 @@ describe("production smoke feature expectations", () => {
 			CLASSROOM_ANALYTICS_SERVICE_ENABLED: "true",
 			CLASSROOM_ANALYTICS_SERVICE_KEY: "must-not-enter-release-artifacts",
 			CLASSROOM_PRIVACY_APPROVED: "false",
-			CS_RELEASE_VERSION: "2.7.120",
+			CS_RELEASE_VERSION: "2.7.123",
 			MONGODB_URI: "mongodb://secret-value",
 			SESSION_SECRET: "secret-value",
 			SOURCE_REVISION: "a".repeat(40),
@@ -104,7 +104,7 @@ describe("production smoke feature expectations", () => {
 	it("refuses native analytics collection without one explicit retention period", () => {
 		const identity = {
 			CLASSROOM_ANALYTICS_COLLECTION_ENABLED: "true",
-			CS_RELEASE_VERSION: "2.7.120",
+			CS_RELEASE_VERSION: "2.7.123",
 			SOURCE_REVISION: "a".repeat(40)
 		};
 		expect(() => nativeReleaseManifest(identity)).toThrow(
@@ -139,7 +139,7 @@ describe("production smoke feature expectations", () => {
 
 	it("records only the companion service boolean in native release identity", () => {
 		const common = {
-			CS_RELEASE_VERSION: "2.7.120",
+			CS_RELEASE_VERSION: "2.7.123",
 			SOURCE_REVISION: "a".repeat(40)
 		};
 		const disabled = nativeReleaseManifest(common);
@@ -289,6 +289,15 @@ describe("production smoke feature expectations", () => {
 		expect(coursePolicy).toContain(
 			"frame-src 'self' https://scratch.mit.edu"
 		);
+		expect(coursePolicy).toContain(
+			"img-src 'self' data: blob: https://static.cs.avasan.org"
+		);
+		expect(coursePolicy).toContain(
+			"media-src 'self' data: blob: https://static.cs.avasan.org"
+		);
+		for (const policy of [standardPolicy, codeIdePolicy]) {
+			expect(policy).not.toContain("static.cs.avasan.org");
+		}
 	});
 
 	it("redirects IDE aliases to the primary profiled directory route", () => {
@@ -501,6 +510,19 @@ describe("production smoke feature expectations", () => {
 		expect(() =>
 			validateContentSecurityPolicy(broadPolicy, "standard")
 		).toThrow("unexpected script-src sources");
+	});
+
+	it("rejects lookalike course-media hosts", () => {
+		for (const directive of ["img-src", "media-src"]) {
+			const lookalikePolicy = coursePolicy.replace(
+				`${directive} 'self' data: blob: https://static.cs.avasan.org`,
+				`${directive} 'self' data: blob: https://static.cs.avasan.org.evil.example`
+			);
+
+			expect(() =>
+				validateContentSecurityPolicy(lookalikePolicy, "course")
+			).toThrow(`unexpected ${directive} sources`);
+		}
 	});
 
 	it("rejects missing, duplicate, or unknown policy profiles", () => {

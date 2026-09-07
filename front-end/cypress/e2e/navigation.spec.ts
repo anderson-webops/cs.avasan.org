@@ -118,6 +118,38 @@ context("Public classroom navigation", () => {
 		});
 	});
 
+	it("keeps IDE controls usable across phone and tablet viewports", () => {
+		cy.visit("/ide");
+		for (const width of [320, 360, 390, 768]) {
+			cy.viewport(width, 800);
+			cy.get(".editor-actions").should(actions => {
+				const viewportWidth =
+					actions[0].ownerDocument.defaultView?.innerWidth;
+				expect(viewportWidth).to.equal(width);
+				for (const control of actions[0].querySelectorAll("button")) {
+					const box = control.getBoundingClientRect();
+					expect(box.left).to.be.at.least(0);
+					expect(box.right).to.be.at.most(viewportWidth ?? 0);
+					expect(box.width).to.be.at.least(44);
+					expect(box.height).to.be.at.least(44);
+				}
+			});
+			cy.document().should(document => {
+				expect(document.documentElement.scrollWidth).to.be.at.most(
+					document.documentElement.clientWidth
+				);
+			});
+		}
+
+		cy.viewport(320, 800);
+		cy.get('button[aria-label="IDE settings"]').click();
+		cy.get("#code-ide-settings-panel").should(panel => {
+			const box = panel[0].getBoundingClientRect();
+			expect(box.left).to.be.at.least(0);
+			expect(box.right).to.be.at.most(320);
+		});
+	});
+
 	it("opens a directly linked Data / AI demo in its requested workspace", () => {
 		cy.visit("/ide/?mode=data&template=demo");
 		cy.get(".workspace-type-control select").should("have.value", "data");
@@ -134,6 +166,58 @@ context("Public classroom navigation", () => {
 				[...options].map(option => option.textContent?.trim())
 			).to.deep.equal(publicCourses);
 		});
+	});
+
+	it("renders curated course video and image media", () => {
+		cy.visit("/#pygames");
+		cy.get(
+			'button[aria-label="Show module 3: PyG1 Object-Oriented Programming: Actors"]'
+		).click();
+		cy.contains("h5", "PyG1 Project 1: Rainbow Fill")
+			.closest("article")
+			.within(() => {
+				cy.get(
+					'video[aria-label="Demo video for PyG1 Project 1: Rainbow Fill"]',
+					{ timeout: 15_000 }
+				)
+					.should("be.visible")
+					.should(video => {
+						const element = video[0] as HTMLVideoElement;
+						expect(element.error).to.equal(null);
+						expect(element.readyState).to.be.greaterThan(0);
+						expect(element.videoWidth).to.be.greaterThan(0);
+					});
+				cy.get(
+					'video[aria-label="Demo video for PyG1 Project 1: Rainbow Fill"] source'
+				).should(
+					"have.attr",
+					"src",
+					"https://static.cs.avasan.org/pyg_1_rainbow_fill.mp4"
+				);
+				cy.contains("Static asset pending").should("not.exist");
+			});
+
+		cy.visit("/#python-level-2");
+		cy.get(
+			'button[aria-label="Show module 2: PS1 Variables, Strings, and Input"]'
+		).click();
+		cy.contains("h5", "PS1 Project 1: Mad Libs")
+			.closest("article")
+			.within(() => {
+				cy.get(
+					'img[src="https://static.cs.avasan.org/ps1_mad_libs.gif"]',
+					{ timeout: 15_000 }
+				)
+					.scrollIntoView()
+					.should(image => {
+						const element = image[0] as HTMLImageElement;
+						expect(element.complete).to.equal(true);
+						expect(element.naturalWidth).to.be.greaterThan(0);
+						expect(element.naturalHeight).to.be.greaterThan(0);
+					})
+					.should("be.visible");
+				cy.contains("Static asset pending").should("not.exist");
+			});
 	});
 
 	it("keeps teacher login off public navigation and available at /admin", () => {

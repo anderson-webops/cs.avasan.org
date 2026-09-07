@@ -243,7 +243,9 @@ screen.listen()
 			template: "classroom-project"
 		});
 		expect(project.files[0]?.content).toContain("###   CONSTANTS   ###");
-		expect(project.files[0]?.content).toContain("###   EVENT LISTENERS   ###");
+		expect(project.files[0]?.content).toContain(
+			"###   EVENT LISTENERS   ###"
+		);
 	});
 
 	it("creates all Python Level 1 classroom Turtle frameworks", () => {
@@ -316,6 +318,12 @@ screen.listen()
 			expect(source, template).toContain(frameworkMarker);
 			expect(source, template).toMatch(/def \w+\([^)]*\):\n    pass/);
 		}
+		expect(turtleCircleArtStarterCode).toContain("DRAWING_SPEED = 0");
+		expect(turtleCircleArtStarterCode).toContain("CIRCLE_COUNT = 4");
+		expect(turtleCircleArtStarterCode).toContain("CIRCLE_STEPS = 12");
+		expect(turtleCircleArtStarterCode).toContain("screen.tracer(0)");
+		expect(turtleCircleArtStarterCode).toContain("screen.update()");
+		expect(turtleSpiralGalaxyStarterCode).toContain("SPIRAL_STEPS = 72");
 	});
 
 	it("colors visible bracket pairs using document-wide nesting context", () => {
@@ -1027,7 +1035,7 @@ screen.listen()
 		);
 		expect(pageSource).toContain("route.query.starterUrl");
 		expect(pageSource).toContain(
-			"normalizePythonIdeMode(rawMode, courseMode ?? \"turtle\")"
+			'normalizePythonIdeMode(rawMode, courseMode ?? "turtle")'
 		);
 		for (const template of [
 			"circle-art",
@@ -2959,9 +2967,7 @@ screen.listen()
 		expect(pageSource).toContain("function updateAutoSavePreference");
 		expect(pageSource).toContain("Autosave");
 		expect(pageSource).toContain('aria-label="IDE settings"');
-		expect(pageSource).toContain(
-			'aria-controls="code-ide-settings-panel"'
-		);
+		expect(pageSource).toContain('aria-controls="code-ide-settings-panel"');
 		expect(pageSource).toContain('id="code-ide-settings-panel"');
 		expect(pageSource).toContain("Protect local saves");
 		expect(pageSource).toContain("function storageManagerWithPersistence");
@@ -3215,6 +3221,15 @@ screen.listen()
 		expect(pageSource).toContain("mod: gameKeyModifierMask(event)");
 		expect(pageSource).toContain("unicode: gameKeyUnicode(event)");
 		expect(pageSource).toContain('@blur="clearCanvasKeyboardState"');
+		expect(pageSource).toContain(
+			'window.addEventListener("mouseup", handleWindowMouseUp);'
+		);
+		expect(pageSource).toContain(
+			'window.removeEventListener("mouseup", handleWindowMouseUp);'
+		);
+		expect(pageSource).toContain(
+			'dispatchCanvasPointerEvent(event, "mouseup");'
+		);
 		expect(pageSource).toContain("canvasRef.value?.focus();");
 		expect(pageSource).toContain("--python-focus-ring");
 		expect(pageSource).toContain(".code-editor-shell:focus-within");
@@ -3560,8 +3575,9 @@ screen.listen()
 			"/python-ide/assets/images/1.png"
 		);
 		expect(
-			pack.assets.get("images/seaweed-publicdomainvectors.org/seaweed.png")
-				?.url
+			pack.assets.get(
+				"images/seaweed-publicdomainvectors.org/seaweed.png"
+			)?.url
 		).toBe(
 			"/python-ide/assets/images/seaweed-publicdomainvectors.org/seaweed.png"
 		);
@@ -3702,6 +3718,38 @@ screen.listen()
 			"utf8"
 		);
 		expect(assetSource).not.toContain("/api/python-assets/assets.zip");
+	});
+
+	it("retries a transient course asset manifest failure", async () => {
+		let attempts = 0;
+		const fetcher = vi.fn(async () => {
+			attempts += 1;
+			if (attempts === 1) throw new Error("temporary network failure");
+			return {
+				arrayBuffer: async () => new ArrayBuffer(0),
+				json: async () => ({
+					assets: [
+						{
+							height: 18,
+							mimeType: "image/png",
+							name: "images/alien.png",
+							url: "/python-ide/assets/images/alien.png",
+							width: 20
+						}
+					]
+				}),
+				ok: true,
+				status: 200
+			};
+		});
+
+		await expect(loadPythonIdeCourseAssetPack({ fetcher })).rejects.toThrow(
+			"temporary network failure"
+		);
+		const pack = await loadPythonIdeCourseAssetPack({ fetcher });
+
+		expect(fetcher).toHaveBeenCalledTimes(2);
+		expect(pack.assets.has("images/alien.png")).toBe(true);
 	});
 
 	it("accepts an explicitly supplied archive source for module callers", async () => {
@@ -4015,10 +4063,19 @@ screen.listen()
 		expect(runtimeSource).toContain("_run_animations(now)");
 		expect(pageSource).toContain("await ensureGameCourseAssetsLoaded()");
 		expect(pageSource).toContain(
+			"prepareGameAssetsForExplicitRun();\n\t\t\tawait ensureGameCourseAssetsLoaded();"
+		);
+		expect(pageSource).toContain(
+			"if (entry.failed) gameImageCache.delete(key);"
+		);
+		expect(pageSource).not.toContain(
+			"if (gameCourseAssetPack || gameCourseAssetPackLoadFailed) return;"
+		);
+		expect(pageSource).toContain(
 			"let gameCourseAssetPackSilentLoadFailed = false;"
 		);
 		expect(pageSource).toContain(
-			"if (!announce && gameCourseAssetPackSilentLoadFailed) return;"
+			"(gameCourseAssetPackSilentLoadFailed || gameCourseAssetPackLoadFailed)"
 		);
 		expect(pageSource).toContain(
 			"gameCourseAssetPackSilentLoadFailed = true;"

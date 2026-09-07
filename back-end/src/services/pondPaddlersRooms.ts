@@ -454,12 +454,19 @@ export class PondPaddlersRoomStore {
 	} {
 		const room = this.requireRoom(roomCodeValue);
 		const player = this.requirePlayer(room, seatToken);
+		const state = publicState(room);
+		if (state.status === "finished") {
+			return {
+				state,
+				unsubscribe: () => undefined
+			};
+		}
 		if (player.subscribers.size >= MAX_STREAMS_PER_SEAT) {
 			throw new PondPaddlersError("too-many-streams");
 		}
 		player.subscribers.add(subscriber);
 		return {
-			state: publicState(room),
+			state,
 			unsubscribe: () => {
 				player.subscribers.delete(subscriber);
 			}
@@ -474,8 +481,10 @@ export class PondPaddlersRoomStore {
 
 	private broadcast(room: PondPaddlersRoom): void {
 		const state = publicState(room);
+		const terminal = state.status === "finished";
 		for (const player of room.players.values()) {
-			this.notifySubscribers(player, state, false);
+			this.notifySubscribers(player, state, terminal);
+			if (terminal) player.subscribers.clear();
 		}
 	}
 

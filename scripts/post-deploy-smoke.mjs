@@ -42,7 +42,19 @@ const standardContentSecurityPolicy = Object.freeze({
 });
 const courseContentSecurityPolicy = Object.freeze({
 	...standardContentSecurityPolicy,
-	"frame-src": ["'self'", "https://scratch.mit.edu"]
+	"frame-src": ["'self'", "https://scratch.mit.edu"],
+	"img-src": [
+		"'self'",
+		"blob:",
+		"data:",
+		"https://static.cs.avasan.org"
+	],
+	"media-src": [
+		"'self'",
+		"blob:",
+		"data:",
+		"https://static.cs.avasan.org"
+	]
 });
 const codeIdeContentSecurityPolicy = Object.freeze({
 	...standardContentSecurityPolicy,
