@@ -70,7 +70,7 @@ describe("production smoke feature expectations", () => {
 			CLASSROOM_ANALYTICS_SERVICE_ENABLED: "true",
 			CLASSROOM_ANALYTICS_SERVICE_KEY: "must-not-enter-release-artifacts",
 			CLASSROOM_PRIVACY_APPROVED: "false",
-			CS_RELEASE_VERSION: "2.7.123",
+			CS_RELEASE_VERSION: "2.7.124",
 			MONGODB_URI: "mongodb://secret-value",
 			SESSION_SECRET: "secret-value",
 			SOURCE_REVISION: "a".repeat(40),
@@ -104,7 +104,7 @@ describe("production smoke feature expectations", () => {
 	it("refuses native analytics collection without one explicit retention period", () => {
 		const identity = {
 			CLASSROOM_ANALYTICS_COLLECTION_ENABLED: "true",
-			CS_RELEASE_VERSION: "2.7.123",
+			CS_RELEASE_VERSION: "2.7.124",
 			SOURCE_REVISION: "a".repeat(40)
 		};
 		expect(() => nativeReleaseManifest(identity)).toThrow(
@@ -139,7 +139,7 @@ describe("production smoke feature expectations", () => {
 
 	it("records only the companion service boolean in native release identity", () => {
 		const common = {
-			CS_RELEASE_VERSION: "2.7.123",
+			CS_RELEASE_VERSION: "2.7.124",
 			SOURCE_REVISION: "a".repeat(40)
 		};
 		const disabled = nativeReleaseManifest(common);
