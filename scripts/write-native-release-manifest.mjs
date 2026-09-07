@@ -23,6 +23,14 @@ function analyticsCollectionIsEnabled(value) {
 	return ["1", "true", "yes"].includes(value.trim().toLowerCase());
 }
 
+function explicitBoolean(value, name) {
+	const normalized = (value ?? "false").trim().toLowerCase();
+	if (normalized !== "true" && normalized !== "false") {
+		throw new Error(`${name} must be either true or false.`);
+	}
+	return normalized === "true";
+}
+
 function validateAnalyticsRetention(buildConfig) {
 	const value = buildConfig.CLASSROOM_ANALYTICS_RETENTION_DAYS;
 	if (!value) {
@@ -56,11 +64,17 @@ export function nativeReleaseManifest(environment = process.env) {
 	const buildConfig = Object.fromEntries(
 		configKeys.map(key => [key, environment[key]?.trim() ?? ""])
 	);
+	const runtimeConfig = {
+		classroomAnalyticsServiceEnabled: explicitBoolean(
+			environment.CLASSROOM_ANALYTICS_SERVICE_ENABLED,
+			"CLASSROOM_ANALYTICS_SERVICE_ENABLED"
+		)
+	};
 	validateAnalyticsRetention(buildConfig);
 	const configDigest = createHash("sha256")
-		.update(JSON.stringify(buildConfig))
+		.update(JSON.stringify({ buildConfig, runtimeConfig }))
 		.digest("hex");
-	return { buildConfig, configDigest, revision, version };
+	return { buildConfig, configDigest, revision, runtimeConfig, version };
 }
 
 export function nativePublicEnvironment(manifest) {

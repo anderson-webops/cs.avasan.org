@@ -46,6 +46,23 @@ Fill `/etc/cs.avasan.org/api.env`. It is the only canonical input for settings
 that affect both the public build and API. Do not add `VITE_*`, release identity,
 host, port, origin, or proxy variables to it.
 
+Set `CLASSROOM_ANALYTICS_SERVICE_KEY` to an independent URL-safe random value
+containing at least 32 bytes when the private `analytics.avasan.org` companion
+is ready. Configure the same value there as its shared classroom secret. This
+runtime-only key is never copied into the frontend, public environment, release
+manifest, configuration digest, command line, or logs. The native manifest
+records only whether the companion endpoint was configured, and deployment
+refuses configuration drift. Analytics must use the exact loopback URL
+`http://127.0.0.1:3008/classroom-analytics/summary`; public Nginx always returns
+JSON 404 for `/api/classroom-analytics/summary`. Leaving the key blank keeps the
+loopback endpoint at 404 too.
+
+The manual Compose fallback has no host-published API listener and must not
+receive this service key. Its public proxy returns the same exact JSON 404, so
+Analytics is intentionally unavailable until canonical native production is
+restored. Do not add another published port or trust Docker bridge addresses to
+make the companion reachable.
+
 Use exactly one Mongo credential source:
 
 - Direct MongoDB: set `MONGODB_URI` to a URI for the dedicated `readWrite` user
@@ -230,3 +247,13 @@ approved an exact whole-number `CLASSROOM_ANALYTICS_RETENTION_DAYS` value from 7
 through 90. Keep that value in `api.env` while any anonymous rows remain
 physically stored, including logically expired rows awaiting cleanup, so a later
 disabled release continues to disclose and enforce the approved period.
+
+The companion summary key does not enable collection, accounts, or retention.
+It may be configured while collection and student accounts remain disabled.
+The authenticated response still reports any coarse aggregate rows and active
+account/project counts that remain under an already approved retention period;
+feature shutdown never acts as an implicit deletion or masking request. When no
+such records remain, the activity and work counts are zero and `retentionDays`
+may be `null`. Rotate the CS and Analytics values together. A missing or
+mismatched key must leave Analytics unavailable rather than falling back to a
+public or cookie-authenticated summary.

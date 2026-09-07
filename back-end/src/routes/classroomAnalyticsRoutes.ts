@@ -1,12 +1,28 @@
 import type { Express } from "express";
 import { Router } from "express";
-import { recordClassroomUsage } from "../controllers/classroomAnalyticsController.js";
+import {
+	getClassroomAnalyticsSummary,
+	recordClassroomUsage
+} from "../controllers/classroomAnalyticsController.js";
 import { requireAnonymousClassroomUsageRequest } from "../middleware/classroomRequest.js";
-import { createClassroomUsageLimiter } from "../middleware/rateLimiters.js";
+import {
+	createClassroomAnalyticsServiceClientLimiter,
+	createClassroomAnalyticsServiceGlobalLimiter,
+	createClassroomUsageLimiter
+} from "../middleware/rateLimiters.js";
+import {
+	requireClassroomAnalyticsService,
+	requireExactClassroomAnalyticsServiceTarget
+} from "../security/classroomAnalyticsService.js";
 
 interface ClassroomAnalyticsRouteOptions {
 	collectionEnabled: boolean;
 	retentionDays: number | null;
+}
+
+interface ClassroomAnalyticsServiceRouteOptions {
+	retentionDays: number | null;
+	serviceKey: string | null;
 }
 
 export function mountClassroomAnalyticsRoutes(app: Express, options: ClassroomAnalyticsRouteOptions): void {
@@ -31,4 +47,27 @@ export function mountClassroomAnalyticsRoutes(app: Express, options: ClassroomAn
 		);
 	}
 	app.use(router);
+}
+
+/**
+ * Mount the loopback-only companion before session and body-parser middleware.
+ * Only a request that passes the exact-target and service-key gates can spend
+ * the authenticated companion's rate-limit budget or reach MongoDB.
+ */
+export function mountClassroomAnalyticsServiceRoute(
+	app: Express,
+	options: ClassroomAnalyticsServiceRouteOptions
+): void {
+	if (!options.serviceKey) return;
+
+	const globalLimiter = createClassroomAnalyticsServiceGlobalLimiter();
+	const clientLimiter = createClassroomAnalyticsServiceClientLimiter();
+	app.all(
+		"/classroom-analytics/summary",
+		requireExactClassroomAnalyticsServiceTarget(),
+		requireClassroomAnalyticsService(options.serviceKey),
+		globalLimiter,
+		clientLimiter,
+		getClassroomAnalyticsSummary(options.retentionDays)
+	);
 }

@@ -2,7 +2,7 @@ import type { Server } from "node:http";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import express from "express";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import {
 	POND_PADDLERS_DEVELOPMENT_SEAT_COOKIE_PREFIX,
 	POND_PADDLERS_PRODUCTION_SEAT_COOKIE_PREFIX,
@@ -250,6 +250,30 @@ function postAnswer(
 }
 
 describe("Pond Paddlers privacy-minimal race API", () => {
+	it("automatically removes a room at its bounded in-memory expiry", () => {
+		vi.useFakeTimers();
+		vi.setSystemTime(new Date("2026-09-07T12:00:00.000Z"));
+		const store = new PondPaddlersRoomStore();
+		try {
+			store.createRoom({
+				calmMode: true,
+				durationMinutes: 5,
+				finishAt: 5,
+				maxOperand: 10,
+				operations: ["add"],
+				raceFormat: "individual"
+			});
+			expect(store.listRooms()).toHaveLength(1);
+
+			vi.advanceTimersByTime(5 * 60 * 1000);
+			expect(store.listRooms()).toEqual([]);
+		}
+		finally {
+			store.dispose();
+			vi.useRealTimers();
+		}
+	});
+
 	it("keeps room management behind Julio's existing Admin session and same-origin guard", async () => {
 		const runtime = await createRuntime();
 		const anonymousList = await fetch(`${runtime.baseUrl}/rooms`);

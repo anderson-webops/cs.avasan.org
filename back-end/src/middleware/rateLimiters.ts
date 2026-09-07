@@ -229,6 +229,61 @@ export function createClassroomUsageLimiter(options: TunableRateLimitOptions = {
 }
 
 /**
+ * A process-wide ceiling prevents a client from evading the per-client service
+ * limiter by varying forwarding headers. The production proxy replaces those
+ * headers and the API listens only on loopback, while this first gate remains
+ * independent of all request identity.
+ */
+export function createClassroomAnalyticsServiceGlobalLimiter(
+	options: TunableRateLimitOptions = {}
+): RateLimitRequestHandler {
+	return rateLimit({
+		windowMs: 15 * 60 * 1000,
+		limit: 600,
+		store: new ExactExpiryRateLimitStore(),
+		...standardRateLimitHeaders,
+		keyGenerator: () => "classroom-analytics-service-global",
+		message: {
+			message: "Too many classroom summary requests. Please try again shortly."
+		},
+		handler: (_req, res, _next, rateLimitOptions) => {
+			res
+				.set("Cache-Control", "no-store")
+				.status(rateLimitOptions.statusCode)
+				.send(rateLimitOptions.message);
+		},
+		...options
+	});
+}
+
+export function createClassroomAnalyticsServiceClientLimiter(
+	options: TunableRateLimitOptions = {}
+): RateLimitRequestHandler {
+	return rateLimit({
+		windowMs: 15 * 60 * 1000,
+		limit: 120,
+		store: new ExactExpiryRateLimitStore(),
+		...standardRateLimitHeaders,
+		// Use the direct socket peer, not forwarding headers. The canonical
+		// companion connects over loopback and the process-wide limiter remains a
+		// second ceiling if the route is ever miswired.
+		keyGenerator: req => ipKeyGenerator(
+			req.socket.remoteAddress || "unknown"
+		),
+		message: {
+			message: "Too many classroom summary requests. Please try again shortly."
+		},
+		handler: (_req, res, _next, rateLimitOptions) => {
+			res
+				.set("Cache-Control", "no-store")
+				.status(rateLimitOptions.statusCode)
+				.send(rateLimitOptions.message);
+		},
+		...options
+	});
+}
+
+/**
  * Bounds authentication work for the teacher-only classroom summary. By this
  * point cookie-session has signature-verified req.session, but this preliminary
  * key remains separate from the post-database validated Admin bucket. A

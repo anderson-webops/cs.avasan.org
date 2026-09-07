@@ -67,8 +67,10 @@ const codeIdePolicy = policyForProfile("code-ide");
 describe("production smoke feature expectations", () => {
 	it("builds a secret-free native public configuration", () => {
 		const manifest = nativeReleaseManifest({
+			CLASSROOM_ANALYTICS_SERVICE_ENABLED: "true",
+			CLASSROOM_ANALYTICS_SERVICE_KEY: "must-not-enter-release-artifacts",
 			CLASSROOM_PRIVACY_APPROVED: "false",
-			CS_RELEASE_VERSION: "2.7.119",
+			CS_RELEASE_VERSION: "2.7.120",
 			MONGODB_URI: "mongodb://secret-value",
 			SESSION_SECRET: "secret-value",
 			SOURCE_REVISION: "a".repeat(40),
@@ -85,7 +87,14 @@ describe("production smoke feature expectations", () => {
 		expect(environment).toContain('CLASSROOM_ANALYTICS_RETENTION_DAYS=""');
 		expect(environment).not.toContain("MONGODB_URI");
 		expect(environment).not.toContain("SESSION_SECRET");
+		expect(environment).not.toContain("CLASSROOM_ANALYTICS_SERVICE");
 		expect(environment).not.toContain("secret-value");
+		expect(JSON.stringify(manifest)).not.toContain(
+			"must-not-enter-release-artifacts"
+		);
+		expect(manifest.runtimeConfig).toEqual({
+			classroomAnalyticsServiceEnabled: true
+		});
 		expect(() => nativePublicEnvironment({
 			...manifest,
 			buildConfig: { ...manifest.buildConfig, SCHOOL_PRIVACY_CONTACT: "line one\nline two" }
@@ -95,7 +104,7 @@ describe("production smoke feature expectations", () => {
 	it("refuses native analytics collection without one explicit retention period", () => {
 		const identity = {
 			CLASSROOM_ANALYTICS_COLLECTION_ENABLED: "true",
-			CS_RELEASE_VERSION: "2.7.119",
+			CS_RELEASE_VERSION: "2.7.120",
 			SOURCE_REVISION: "a".repeat(40)
 		};
 		expect(() => nativeReleaseManifest(identity)).toThrow(
@@ -126,6 +135,25 @@ describe("production smoke feature expectations", () => {
 		expect(() => parseExpectedBoolean("1", "FEATURE")).toThrow(
 			"FEATURE must be either true or false."
 		);
+	});
+
+	it("records only the companion service boolean in native release identity", () => {
+		const common = {
+			CS_RELEASE_VERSION: "2.7.120",
+			SOURCE_REVISION: "a".repeat(40)
+		};
+		const disabled = nativeReleaseManifest(common);
+		const enabled = nativeReleaseManifest({
+			...common,
+			CLASSROOM_ANALYTICS_SERVICE_ENABLED: "true"
+		});
+		expect(disabled.runtimeConfig.classroomAnalyticsServiceEnabled).toBe(false);
+		expect(enabled.runtimeConfig.classroomAnalyticsServiceEnabled).toBe(true);
+		expect(enabled.configDigest).not.toBe(disabled.configDigest);
+		expect(() => nativeReleaseManifest({
+			...common,
+			CLASSROOM_ANALYTICS_SERVICE_ENABLED: "1"
+		})).toThrow("must be either true or false");
 	});
 
 	it("requires the exact analytics retention expectation when collection is enabled", () => {

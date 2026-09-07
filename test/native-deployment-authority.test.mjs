@@ -92,8 +92,23 @@ async function nativeReleaseFixture(
 	t.after(async () => rm(temporaryRoot, { force: true, recursive: true }));
 	const releaseRoot = join(temporaryRoot, "cs.avasan.org");
 	const revision = "a".repeat(40);
+	const versionParts = version.split("-", 1)[0].split(".").map(Number);
+	const usesServiceContract
+		= (versionParts[0] ?? 0) > 2
+			|| ((versionParts[0] ?? 0) === 2 && (versionParts[1] ?? 0) > 7)
+			|| (
+				(versionParts[0] ?? 0) === 2
+				&& (versionParts[1] ?? 0) === 7
+				&& (versionParts[2] ?? 0) > 119
+			);
+	const runtimeConfig = usesServiceContract
+		? { classroomAnalyticsServiceEnabled: false }
+		: undefined;
 	const configDigest = createHash("sha256")
-		.update(JSON.stringify(selectedBuildConfig))
+		.update(JSON.stringify(usesServiceContract
+			? { buildConfig: selectedBuildConfig, runtimeConfig }
+			: selectedBuildConfig
+		))
 		.digest("hex");
 	const candidate = join(releaseRoot, "releases", `${revision}-${configDigest}`);
 	for (const directory of [
@@ -113,6 +128,7 @@ async function nativeReleaseFixture(
 			buildConfig: selectedBuildConfig,
 			configDigest,
 			revision,
+			...(runtimeConfig ? { runtimeConfig } : {}),
 			version
 		}, null, 2)}\n`,
 		"node_modules/runtime-package/tool.js": "export {};\n",

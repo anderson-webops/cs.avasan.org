@@ -1,7 +1,7 @@
 {
 	"name": "classes-monorepo",
 	"type": "module",
-	"version": "2.7.119",
+	"version": "2.7.120",
 	"private": true,
 	"packageManager": "npm@11.16.0",
 	"engines": {
@@ -90,9 +90,10 @@
 		"vue-router": "^5.0.4",
 		"undici": "7.29.0",
 		"follow-redirects": "1.16.0",
+		"qs": "6.16.0",
 		"@cypress/request": {
 			"uuid": "14.0.0",
-			"qs": "6.15.2"
+			"qs": "6.16.0"
 		}
 	},
 	"allowScripts": {
@@ -100,7 +101,7 @@
 		"cypress@15.19.0": true,
 		"esbuild@0.28.1": true,
 		"fsevents@2.3.3": true,
-		"puppeteer@24.43.1": true,
+		"puppeteer@25.10.0": true,
 		"simple-git-hooks@2.13.1": true,
 		"vue-demi@0.14.10": true
 	},
@@ -116,7 +117,7 @@
 		"eslint-plugin-vue": "^10.8.0",
 		"globals": "^17.5.0",
 		"prettier": "^3.8.3",
-		"puppeteer": "^24.43.1",
+		"puppeteer": "^25.10.0",
 		"taze": "^19.11.0",
 		"typescript": "^6.0.3"
 	}

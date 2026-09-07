@@ -239,6 +239,35 @@ describe("Crosswalk Critters challenge stages", () => {
 		wrapper.unmount();
 	});
 
+	it.each([
+		{ challenge: "middle", label: "Middle", score: 675, tries: 3 },
+		{ challenge: "advanced", label: "Advanced", score: 950, tries: 2 }
+	])(
+		"completes all three $label stages in deterministic step mode",
+		async ({ challenge, label, score, tries }) => {
+			const wrapper = mountGame();
+
+			await wrapper.get(`input[value="${challenge}"]`).setValue();
+			await wrapper.get('input[value="step"]').setValue();
+			await wrapper.get(".primary-button").trigger("click");
+			expect(wrapper.text()).toContain(`Tries: ${tries}`);
+
+			await finishCurrentStageSafely(wrapper);
+			expect(wrapper.text()).toContain("Stage: 2 of 3");
+			await finishCurrentStageSafely(wrapper);
+			expect(wrapper.text()).toContain("Stage: 3 of 3");
+			await finishCurrentStageSafely(wrapper);
+
+			expect(wrapper.text()).toContain("Status: Meadow champion");
+			expect(wrapper.text()).toContain("Crossings: 3");
+			expect(wrapper.text()).toContain(`Score: ${score}`);
+			expect(wrapper.get(".game-announcement").text()).toContain(
+				`all three ${label.toLowerCase()} stages`
+			);
+			wrapper.unmount();
+		}
+	);
+
 	it("runs controllable frames and pauses safely for visibility and motion changes", async () => {
 		const wrapper = mountGame();
 

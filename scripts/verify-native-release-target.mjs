@@ -60,6 +60,7 @@ const versionPattern = /^(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-[0-9A
 const revisionPattern = /^[0-9a-f]{40}$/u;
 const digestPattern = /^[0-9a-f]{64}$/u;
 const lastPreRetentionContractVersion = Object.freeze([2, 7, 114]);
+const lastPreAnalyticsServiceContractVersion = Object.freeze([2, 7, 119]);
 
 function fail(message) {
 	throw new Error(`Native release target verification failed: ${message}`);
@@ -70,14 +71,18 @@ function isPlainObject(value) {
 }
 
 function isPreRetentionContractVersion(version) {
+	return versionIsAtMost(version, lastPreRetentionContractVersion);
+}
+
+function versionIsAtMost(version, ceiling) {
 	const versionParts = version
 		.split("-", 1)[0]
 		.split(".")
 		.map(Number);
-	for (let index = 0; index < lastPreRetentionContractVersion.length; index += 1) {
+	for (let index = 0; index < ceiling.length; index += 1) {
 		const difference
 			= (versionParts[index] ?? 0)
-				- (lastPreRetentionContractVersion[index] ?? 0);
+				- (ceiling[index] ?? 0);
 		if (difference !== 0) return difference < 0;
 	}
 	return true;
@@ -192,8 +197,33 @@ async function verifyIdentity(candidate) {
 		}
 	}
 	verifyAnalyticsRetention(manifest.buildConfig);
+	const legacyServiceContract = versionIsAtMost(
+		manifest.version,
+		lastPreAnalyticsServiceContractVersion
+	);
+	if (legacyServiceContract) {
+		if (manifest.runtimeConfig !== undefined) {
+			fail("pre-service native-release.json has unexpected runtime configuration");
+		}
+	}
+	else if (
+		!isPlainObject(manifest.runtimeConfig)
+		|| Object.keys(manifest.runtimeConfig).join(",")
+			!== "classroomAnalyticsServiceEnabled"
+		|| typeof manifest.runtimeConfig.classroomAnalyticsServiceEnabled
+			!== "boolean"
+	) {
+		fail("native-release.json has an invalid runtime configuration");
+	}
 	const configDigest = createHash("sha256")
-		.update(JSON.stringify(manifest.buildConfig))
+		.update(JSON.stringify(
+			legacyServiceContract
+				? manifest.buildConfig
+				: {
+						buildConfig: manifest.buildConfig,
+						runtimeConfig: manifest.runtimeConfig
+					}
+		))
 		.digest("hex");
 	if (manifest.configDigest !== configDigest) {
 		fail("native-release.json has an inconsistent configuration digest");

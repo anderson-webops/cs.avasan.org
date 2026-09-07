@@ -1,4 +1,5 @@
 import type { Server } from "node:http";
+import { request as httpRequest } from "node:http";
 import express from "express";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -52,11 +53,17 @@ const {
 	createClassroomAnalyticsSummaryLimiter,
 	createClassroomAnalyticsSummaryPreAuthLimiter
 } = await import("../src/middleware/rateLimiters.js");
-const { mountClassroomAnalyticsRoutes } = await import("../src/routes/classroomAnalyticsRoutes.js");
+const { apiNotFound } = await import("../src/middleware/notFound.js");
+const {
+	mountClassroomAnalyticsRoutes,
+	mountClassroomAnalyticsServiceRoute
+} = await import("../src/routes/classroomAnalyticsRoutes.js");
 
 interface RuntimeOptions {
 	collectionEnabled?: boolean;
+	postServiceMiddleware?: express.RequestHandler;
 	retentionDays?: number | null;
+	serviceKey?: string | null;
 	summaryLimit?: number;
 }
 
@@ -66,6 +73,13 @@ async function withRuntime<T>(options: RuntimeOptions, run: (baseUrl: string) =>
 		? 90
 		: options.retentionDays;
 	app.set("trust proxy", false);
+	mountClassroomAnalyticsServiceRoute(app, {
+		retentionDays,
+		serviceKey: options.serviceKey ?? null
+	});
+	if (options.postServiceMiddleware) {
+		app.use(options.postServiceMiddleware);
+	}
 	app.use(express.json());
 	mountClassroomAnalyticsRoutes(app, {
 		collectionEnabled: options.collectionEnabled ?? true,
@@ -89,6 +103,7 @@ async function withRuntime<T>(options: RuntimeOptions, run: (baseUrl: string) =>
 		}),
 		getClassroomAnalyticsSummary(retentionDays)
 	);
+	app.use(apiNotFound);
 
 	const server = await new Promise<Server>(resolve => {
 		const instance = app.listen(0, "127.0.0.1", () => resolve(instance));
@@ -122,6 +137,61 @@ function postUsage(baseUrl: string, body: object, headers = {}) {
 			...headers
 		},
 		method: "POST"
+	});
+}
+
+function getWithBody(url: string, body: string): Promise<{
+	body: string;
+	status: number;
+}> {
+	return new Promise((resolve, reject) => {
+		const request = httpRequest(url, {
+			headers: {
+				"Content-Length": Buffer.byteLength(body),
+				"Content-Type": "application/json",
+				"X-Classroom-Analytics-Key": "s".repeat(32)
+			},
+			method: "GET"
+		}, (response) => {
+			let responseBody = "";
+			response.setEncoding("utf8");
+			response.on("data", chunk => responseBody += chunk);
+			response.on("end", () => resolve({
+				body: responseBody,
+				status: response.statusCode ?? 0
+			}));
+		});
+		request.on("error", reject);
+		request.end(body);
+	});
+}
+
+function getWithHost(url: string, host: string): Promise<{
+	body: string;
+	cacheControl: string | undefined;
+	status: number;
+}> {
+	return new Promise((resolve, reject) => {
+		const request = httpRequest(url, {
+			headers: {
+				Host: host,
+				"X-Classroom-Analytics-Key": "s".repeat(32)
+			},
+			method: "GET"
+		}, (response) => {
+			let responseBody = "";
+			response.setEncoding("utf8");
+			response.on("data", chunk => responseBody += chunk);
+			response.on("end", () => resolve({
+				body: responseBody,
+				cacheControl: typeof response.headers["cache-control"] === "string"
+					? response.headers["cache-control"]
+					: undefined,
+				status: response.statusCode ?? 0
+			}));
+		});
+		request.on("error", reject);
+		request.end();
 	});
 }
 
@@ -351,11 +421,210 @@ describe("privacy-preserving classroom analytics routes", () => {
 		expect(modelMocks.usageUpdateOne).not.toHaveBeenCalled();
 	});
 
-	it("does not expose the retired service-key summary route", async () => {
+	it("keeps the companion summary route absent until its service key is configured", async () => {
 		await withRuntime({}, async baseUrl => {
-			const response = await fetch(`${baseUrl}/classroom-analytics/summary`);
+			const response = await fetch(`${baseUrl}/classroom-analytics/summary?days=7`, {
+				headers: { "X-Classroom-Analytics-Key": "s".repeat(32) }
+			});
 			expect(response.status).toBe(404);
 		});
+	});
+
+	it("serves the same exact aggregate to an authenticated companion", async () => {
+		await withRuntime({
+			collectionEnabled: false,
+			retentionDays: null,
+			serviceKey: "s".repeat(32)
+		}, async baseUrl => {
+			for (const headers of [
+				{},
+				{ "X-Classroom-Analytics-Key": "wrong".repeat(8) }
+			]) {
+				const denied = await fetch(
+					`${baseUrl}/classroom-analytics/summary?days=7`,
+					{ headers }
+				);
+				expect(denied.status).toBe(403);
+				expect(denied.headers.get("cache-control")).toBe("no-store");
+				expect(denied.headers.get("set-cookie")).toBeNull();
+				await expect(denied.json()).resolves.toEqual({ message: "Forbidden" });
+			}
+
+			const response = await fetch(
+				`${baseUrl}/classroom-analytics/summary?days=7`,
+				{ headers: { "X-Classroom-Analytics-Key": "s".repeat(32) } }
+			);
+			const body = await response.json();
+			expect(response.status).toBe(200);
+			expect(response.headers.get("cache-control")).toBe("no-store");
+			expect(response.headers.get("set-cookie")).toBeNull();
+			expect(body.retentionDays).toBeNull();
+			expect(body.siteActivity.cs.daily).toHaveLength(7);
+			expect(body.siteActivity.math.daily).toHaveLength(7);
+			expect(body.siteActivity.cs.totals).toEqual({
+				courseOpens: 0,
+				graphOpens: 0,
+				ideOpens: 0
+			});
+			expect(body.siteActivity.math.totals).toEqual({
+				courseOpens: 0,
+				graphOpens: 0,
+				ideOpens: 0
+			});
+			expect(body.studentWork).toEqual({
+				accountsWithRecentSignIn: 3,
+				activeAccounts: 12,
+				activeProjects: 20,
+				recentWindowDays: 7,
+				recentlyUpdatedProjects: 4,
+				studentsWithProjects: 2,
+				studentsWithRecentProjectUpdates: 1
+			});
+			expect(Object.keys(body.studentWork).sort()).toEqual([
+				"accountsWithRecentSignIn",
+				"activeAccounts",
+				"activeProjects",
+				"recentWindowDays",
+				"recentlyUpdatedProjects",
+				"studentsWithProjects",
+				"studentsWithRecentProjectUpdates"
+			]);
+		});
+
+		expect(modelMocks.usageFind).toHaveBeenCalledTimes(1);
+		expect(modelMocks.studentCountDocuments).toHaveBeenCalledTimes(2);
+		expect(modelMocks.projectAggregate).toHaveBeenCalledTimes(1);
+	});
+
+	it("does not let wrong keys spend the authenticated service budget", async () => {
+		const postServiceMiddleware = vi.fn<express.RequestHandler>(
+			(_req, _res, next) => next()
+		);
+		await withRuntime({
+			collectionEnabled: false,
+			postServiceMiddleware,
+			serviceKey: "s".repeat(32)
+		}, async baseUrl => {
+			for (let attempt = 0; attempt < 125; attempt += 1) {
+				const denied = await fetch(
+					`${baseUrl}/classroom-analytics/summary?days=7`,
+					{ headers: { "X-Classroom-Analytics-Key": "wrong".repeat(8) } }
+				);
+				expect(denied.status).toBe(403);
+			}
+
+			expect(postServiceMiddleware).not.toHaveBeenCalled();
+			expect(modelMocks.usageFind).not.toHaveBeenCalled();
+			expect(modelMocks.studentCountDocuments).not.toHaveBeenCalled();
+			expect(modelMocks.projectAggregate).not.toHaveBeenCalled();
+
+			const allowed = await fetch(
+				`${baseUrl}/classroom-analytics/summary?days=7`,
+				{ headers: { "X-Classroom-Analytics-Key": "s".repeat(32) } }
+			);
+			expect(allowed.status).toBe(200);
+			expect(allowed.headers.get("cache-control")).toBe("no-store");
+			expect(postServiceMiddleware).not.toHaveBeenCalled();
+		});
+
+		expect(modelMocks.usageFind).toHaveBeenCalledTimes(1);
+	});
+
+	it("rejects browser credentials, bodies, methods, and extra query keys before aggregation", async () => {
+		await withRuntime({ serviceKey: "s".repeat(32) }, async baseUrl => {
+			const authenticatedHeaders = {
+				"X-Classroom-Analytics-Key": "s".repeat(32)
+			};
+			for (const headers of [
+				{ ...authenticatedHeaders, Authorization: "Bearer browser-token" },
+				{ ...authenticatedHeaders, Cookie: "session=browser-session" }
+			]) {
+				const response = await fetch(
+					`${baseUrl}/classroom-analytics/summary?days=7`,
+					{ headers }
+				);
+				expect(response.status).toBe(400);
+				await expect(response.json()).resolves.toEqual({ message: "Invalid request" });
+			}
+
+			const method = await fetch(
+				`${baseUrl}/classroom-analytics/summary?days=7`,
+				{
+					body: "{}",
+					headers: {
+						...authenticatedHeaders,
+						"Content-Type": "application/json"
+					},
+					method: "POST"
+				}
+			);
+			expect(method.status).toBe(405);
+			expect(method.headers.get("allow")).toBe("GET");
+			expect(method.headers.get("cache-control")).toBe("no-store");
+
+			const body = await getWithBody(
+				`${baseUrl}/classroom-analytics/summary?days=7`,
+				"{}"
+			);
+			expect(body.status).toBe(400);
+			expect(JSON.parse(body.body)).toEqual({ message: "Invalid request" });
+
+			const duplicateHeaders = new Headers();
+			duplicateHeaders.append("X-Classroom-Analytics-Key", "s".repeat(32));
+			duplicateHeaders.append("X-Classroom-Analytics-Key", "s".repeat(32));
+			const duplicate = await fetch(
+				`${baseUrl}/classroom-analytics/summary?days=7`,
+				{ headers: duplicateHeaders }
+			);
+			expect(duplicate.status).toBe(403);
+			await expect(duplicate.json()).resolves.toEqual({ message: "Forbidden" });
+
+			const query = await fetch(
+				`${baseUrl}/classroom-analytics/summary?days=7&student=one`,
+				{ headers: authenticatedHeaders }
+			);
+			expect(query.status).toBe(400);
+			await expect(query.json()).resolves.toEqual({
+				message: "Only the days query is accepted."
+			});
+		});
+
+		expect(modelMocks.usageFind).not.toHaveBeenCalled();
+		expect(modelMocks.studentCountDocuments).not.toHaveBeenCalled();
+		expect(modelMocks.projectAggregate).not.toHaveBeenCalled();
+	});
+
+	it("hides every non-canonical path and public-proxy Host before authentication", async () => {
+		await withRuntime({ serviceKey: "s".repeat(32) }, async baseUrl => {
+			const variants = [
+				"/classroom-analytics/summary/?days=7",
+				"/Classroom-Analytics/Summary?days=7",
+				"/classroom-analytics%2Fsummary?days=7",
+				"/classroom-analytics//summary?days=7"
+			];
+			for (const path of variants) {
+				const response = await fetch(`${baseUrl}${path}`, {
+					headers: { "X-Classroom-Analytics-Key": "s".repeat(32) }
+				});
+				expect(response.status, path).toBe(404);
+				expect(response.headers.get("cache-control"), path).toBe("no-store");
+				await expect(response.json(), path).resolves.toEqual({
+					message: "Not found"
+				});
+			}
+
+			const proxied = await getWithHost(
+				`${baseUrl}/classroom-analytics/summary?days=7`,
+				"cs.avasan.org"
+			);
+			expect(proxied.status).toBe(404);
+			expect(proxied.cacheControl).toBe("no-store");
+			expect(JSON.parse(proxied.body)).toEqual({ message: "Not found" });
+		});
+
+		expect(modelMocks.usageFind).not.toHaveBeenCalled();
+		expect(modelMocks.studentCountDocuments).not.toHaveBeenCalled();
+		expect(modelMocks.projectAggregate).not.toHaveBeenCalled();
 	});
 
 	it("refuses an enabled collection route without a retention period", () => {

@@ -26,7 +26,10 @@ import { ClassroomUsageDaily } from "./models/schemas/ClassroomUsageDaily.js";
 import { OAuthLoginAttempt } from "./models/schemas/OAuthLoginAttempt.js";
 import { Student } from "./models/schemas/Student.js";
 import { StudentDataDeletionReceipt } from "./models/schemas/StudentDataDeletionReceipt.js";
-import { mountClassroomAnalyticsRoutes } from "./routes/classroomAnalyticsRoutes.js";
+import {
+	mountClassroomAnalyticsRoutes,
+	mountClassroomAnalyticsServiceRoute
+} from "./routes/classroomAnalyticsRoutes.js";
 import { mountPondPaddlersRoutes } from "./routes/pondPaddlersRoutes.js";
 import {
 	assertRetainedStudentDataHasRetentionPeriod,
@@ -34,6 +37,7 @@ import {
 	retainedStudentDeletionReceiptFilter
 } from "./routes/runtimeAccountRoutes.js";
 import { assertRetainedClassroomAnalyticsHasRetentionPeriod } from "./security/classroomAnalytics.js";
+import { readClassroomAnalyticsServiceKey } from "./security/classroomAnalyticsService.js";
 import { readClassroomPrivacySettings } from "./security/classroomPrivacy.js";
 import { readBooleanSetting, readClassroomOrigin, readSessionSecret } from "./security/environment.js";
 import { selectMongoConnection } from "./security/mongoConnection.js";
@@ -61,6 +65,9 @@ async function main() {
 	const classroomAnalyticsRetentionDays = classroomPrivacy.analyticsRetentionDays;
 	const classroomAnalyticsRetentionConfigured
 		= classroomAnalyticsRetentionDays !== null;
+	const classroomAnalyticsServiceKey = readClassroomAnalyticsServiceKey(
+		env.CLASSROOM_ANALYTICS_SERVICE_KEY
+	);
 	const releaseMetadata = readReleaseMetadata(env);
 	if (classroomPrivacy.studentOAuthEnabled) {
 		enabledOAuthProviders();
@@ -84,6 +91,10 @@ async function main() {
 	});
 
 	app.set("trust proxy", readTrustProxySetting(env.TRUST_PROXY_HOPS));
+	mountClassroomAnalyticsServiceRoute(app, {
+		retentionDays: classroomAnalyticsRetentionDays,
+		serviceKey: classroomAnalyticsServiceKey
+	});
 
 	// Sessions precede parsers so large project payloads can be authenticated
 	// before the server accepts them.
