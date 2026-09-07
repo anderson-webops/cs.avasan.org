@@ -25,7 +25,7 @@ function launchProject(
 const classroomLaunchModule = createClassroomLaunchModule({
 	courseId: "python-level-2-classroom",
 	courseFlow:
-		"Build Mad Libs Studio and Change Machine together as the shared launch. Select the remaining projects by the concept the class needs next; Wordsmith and Blackjack are the harder integrated systems.",
+		"Build Mad Libs Studio and Change Machine together as the shared launch, then continue through the remaining projects by concept. Wordsmith and Blackjack are the harder integrated systems; the remixes remain supplemental practice.",
 	coreItems: [
 		{
 			title: "Classroom Workflow: Run, Normal, Hard",
@@ -55,14 +55,6 @@ During a class share, show one representative input, one boundary or invalid inp
 			"PS2-Change-Machine",
 			"choice"
 		),
-		{
-			title: "Classroom Debugging and Showcase Routine",
-			content: `When a change fails, stop at the first useful error or incorrect output. Record the input, expected result, actual result, and named line or state involved. Make one repair and rerun the same case before trying a different case.
-
-For a showcase, demonstrate the working Normal result first. If Hard is complete, show it second and identify the reused function, collection, or control-flow rule. End with one test that originally failed and the specific repair that made it pass.`
-		}
-	],
-	optionalItems: [
 		launchProject(
 			"Launch Project 3: Caesar Cipher Lab",
 			`The framework already encodes and decodes text with a shift and wraparound behavior.
@@ -123,6 +115,14 @@ For a showcase, demonstrate the working Normal result first. If Hard is complete
 			"PS14-Advanced-Blackjack",
 			"challenge"
 		),
+		{
+			title: "Classroom Debugging and Showcase Routine",
+			content: `When a change fails, stop at the first useful error or incorrect output. Record the input, expected result, actual result, and named line or state involved. Make one repair and rerun the same case before trying a different case.
+
+For a showcase, demonstrate the working Normal result first. If Hard is complete, show it second and identify the reused function, collection, or control-flow rule. End with one test that originally failed and the specific repair that made it pass.`
+		}
+	],
+	supplementalItems: [
 		{
 			title: "Launch Remix: Data Structure Swap",
 			content: `Choose a launch project that uses a list, dictionary, or set.

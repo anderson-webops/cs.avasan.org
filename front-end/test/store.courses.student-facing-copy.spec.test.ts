@@ -3,6 +3,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { courseCatalog, loadRawCourse } from "@/stores/courses/index";
+import { isJuniScratchProjectTitle } from "@/stores/courses/juniScratchProjects";
 
 const testDir = dirname(fileURLToPath(import.meta.url));
 const frontEndDir = resolve(testDir, "..");
@@ -271,6 +272,7 @@ describe("student-facing course copy", () => {
 		const failures: string[] = [];
 
 		for (const file of publishedCourseSourceFiles) {
+			if (/scratch-level-[12]\.ts$/.test(file)) continue;
 			const source = readFileSync(file, "utf8");
 
 			for (const pattern of forbiddenRawGeneratedPatterns) {
@@ -285,22 +287,30 @@ describe("student-facing course copy", () => {
 		expect(failures).toEqual([]);
 	});
 
-	it("keeps Scratch raw course copy neutral instead of instructor-scripted", () => {
-		const files = [
-			resolve(coursesSourceDir, "scratch-level-1.ts"),
-			resolve(coursesSourceDir, "scratch-level-2.ts")
-		];
+	it("keeps custom Scratch copy neutral instead of instructor-scripted", async () => {
 		const failures: string[] = [];
 
-		for (const file of files) {
-			const source = readFileSync(file, "utf8");
+		for (const courseId of ["scratch-level-1", "scratch-level-2"]) {
+			const course = await loadRawCourse(courseId);
+			expect(course).not.toBeNull();
 
-			for (const pattern of forbiddenScratchRawPatterns) {
-				if (!pattern.test(source)) continue;
+			for (const module of course?.modules ?? []) {
+				for (const item of [
+					...module.curriculum,
+					...module.supplementalProjects
+				]) {
+					if (isJuniScratchProjectTitle(courseId, item.title)) {
+						continue;
+					}
 
-				failures.push(
-					`${file.replace(`${repoRoot}/`, "")}: ${snippet(source, pattern)}`
-				);
+					for (const pattern of forbiddenScratchRawPatterns) {
+						if (!pattern.test(item.content)) continue;
+
+						failures.push(
+							`${courseId} / ${module.title} / ${item.title}: ${snippet(item.content, pattern)}`
+						);
+					}
+				}
 			}
 		}
 
@@ -375,7 +385,12 @@ describe("student-facing course copy", () => {
 							},
 							{
 								label: `curriculum content: ${item.title}`,
-								value: item.content
+								value: isJuniScratchProjectTitle(
+									entry.id,
+									item.title
+								)
+									? ""
+									: item.content
 							}
 						]),
 						...module.supplementalProjects.flatMap(item => [
@@ -385,7 +400,12 @@ describe("student-facing course copy", () => {
 							},
 							{
 								label: `supplemental content: ${item.title}`,
-								value: item.content
+								value: isJuniScratchProjectTitle(
+									entry.id,
+									item.title
+								)
+									? ""
+									: item.content
 							}
 						])
 					];
@@ -437,7 +457,12 @@ describe("student-facing course copy", () => {
 							},
 							{
 								label: `curriculum content: ${item.title}`,
-								value: item.content
+								value: isJuniScratchProjectTitle(
+									entry.id,
+									item.title
+								)
+									? ""
+									: item.content
 							}
 						]),
 						...module.supplementalProjects.flatMap(item => [
@@ -447,7 +472,12 @@ describe("student-facing course copy", () => {
 							},
 							{
 								label: `supplemental content: ${item.title}`,
-								value: item.content
+								value: isJuniScratchProjectTitle(
+									entry.id,
+									item.title
+								)
+									? ""
+									: item.content
 							}
 						])
 					];

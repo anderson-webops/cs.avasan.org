@@ -1,0 +1,622 @@
+{
+	"sourceRef": "bd194492e388688371088fc3a9ac937c182d84c8",
+	"contentNormalization": "Leading and trailing whitespace only",
+	"projects": [
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS1 Starting in Scratch",
+			"title": "Project 1 – Hungry Hippo",
+			"section": "curriculum",
+			"sha256": "726eb0bb07c895010d3efce79b862171f3d0e2e2d7d2fb1114423be063b55430"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS2 Event Listeners",
+			"title": "Project 1 – Spinner",
+			"section": "curriculum",
+			"sha256": "9d2edeb79422c214e9e457721faef82dde08d9ba7b6b90b5781ee918e6e43007"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS2 Event Listeners",
+			"title": "Project 2 – Bouncy Ball Room",
+			"section": "curriculum",
+			"sha256": "bc5580e27c4bc3a36c5849f452f5dab38e567b5d6231046817c91720aa831901"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS2 Event Listeners",
+			"title": "Project 3 – Dragonfly Events",
+			"section": "curriculum",
+			"sha256": "5f96c9fed154dfc26cc452233e3d030facb35be26cde9bff45158cf487f5d0f0"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS3 Pen with Event Listeners",
+			"title": "Project 1 – Bouncy Ball with Pen",
+			"section": "curriculum",
+			"sha256": "d36b1641e791eb8b055d3cbbb03f4de46f08e2c783e107cf458ecb22ba2758f9"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS3 Pen with Event Listeners",
+			"title": "Project 2 – Stencil Pencil",
+			"section": "curriculum",
+			"sha256": "f123bc5d9e1277933bdda3bf048ab721289268fefacaace5132fc1ded6feb3ce"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS3 Pen with Event Listeners",
+			"title": "Project 3 – Beetle Artist",
+			"section": "curriculum",
+			"sha256": "5952f23021f9ca5688244e1ae0a4eb8be21d8326408d908221ebecd0da65a05f"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS4 Loops",
+			"title": "Project 1 – Elephant Effects",
+			"section": "curriculum",
+			"sha256": "2d2ff2668bcf405a23228bf7129429b26e1241e07b5276e992dffc9577ced9f1"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS4 Loops",
+			"title": "Project 2 – Hot Cross Buns",
+			"section": "curriculum",
+			"sha256": "48ca997c5268e6b3b10ebb4b63ebade727c26fab253b51916d86284ac974eeac"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS4 Loops",
+			"title": "Project 3 – Drawing Mouse",
+			"section": "curriculum",
+			"sha256": "94df96f782c4bd08d801d0cfb0ce16d7986a4cceafeeac0871483cf365024bd5"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS4 Loops",
+			"title": "GS4 Supplemental Project 1 – Shapify",
+			"section": "supplementalProjects",
+			"sha256": "356b332741e70c358a556a6e35622cdf19777f93d4c30ccbc8af90c884f831bc"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS5 Basic Conditionals",
+			"title": "Project 1 – Dino's Colors",
+			"section": "curriculum",
+			"sha256": "e830c0091e7b3ce8a8c4a5fd300be94d7a699840c0e0ccd473bbffa2be818e22"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS5 Basic Conditionals",
+			"title": "Project 2 – Noisy Reactions",
+			"section": "curriculum",
+			"sha256": "5b30b25340a459a087cddaec2665c9af0aad8e2850147e145c53dabb5f1669c6"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS5 Basic Conditionals",
+			"title": "Project 3 – Magic Wand",
+			"section": "curriculum",
+			"sha256": "cdb1ea77cad2a4d570adf6dbe454d3cffd8de7ff395e26a39584cda2ae9b36f6"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS5 Basic Conditionals",
+			"title": "GS5 Supplemental Project 1 – Camouflaging Octopus",
+			"section": "supplementalProjects",
+			"sha256": "6d175a29fed59f0103f4a28e08cb621719084dc951b9744e71b0ad33cd8425e4"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS5 Basic Conditionals",
+			"title": "GS5 Supplemental Project 2 – Playing Catch",
+			"section": "supplementalProjects",
+			"sha256": "7ac39b614345dd9a95493c43eb24c543e77d8a136906bf9ea25f6e3ae14877dc"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS6 Advanced Conditionals",
+			"title": "Project 1 – Dino's Colors II",
+			"section": "curriculum",
+			"sha256": "bfe8f8fd718a933f8d386188823ae9b2ddd58af99042799e737171937dd55b58"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS6 Advanced Conditionals",
+			"title": "Project 2 – Hungry Dinosaur",
+			"section": "curriculum",
+			"sha256": "e34d6d3fcef69e8b1ed47cf9675b0640ae36a027d795329b681450e1c3707104"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS6 Advanced Conditionals",
+			"title": "GS6 Supplemental Project 1 – Blast Off Rocketship",
+			"section": "supplementalProjects",
+			"sha256": "a82791bb113f3f8960ae0dfa359e87d33d578d6ed0b6d1c41ee97aeeac772bf6"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS6 Advanced Conditionals",
+			"title": "GS6 Supplemental Project 2 – Baby Fish",
+			"section": "supplementalProjects",
+			"sha256": "d44e6a3c34df714dd51b99e7462e3a74cb12d4aedaac21cc90076200759263f7"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS7 User Input",
+			"title": "Project 1 – Math Facts",
+			"section": "curriculum",
+			"sha256": "69d7b89bcf512ca75651e4b50f0119d32b07d5c905a383e214ce453663332bbf"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS7 User Input",
+			"title": "Project 2 – Fortune Teller",
+			"section": "curriculum",
+			"sha256": "1d22348d99a8202af2ecaf57d50814b23bee55b1464089a60cb4748dee263c51"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS7 User Input",
+			"title": "Project 3 – Number Guesser",
+			"section": "curriculum",
+			"sha256": "2383a99d5196abfe41c08ffbb98e7efa655579785292c808e8c04cbdf2e99de1"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS7 User Input",
+			"title": "GS7 Supplemental Project 1 – Animal Crossing",
+			"section": "supplementalProjects",
+			"sha256": "5fe7ed1f01bc2ceced3939d80a29e017e6b14f449624dc68cf7ca9a235dd1b24"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS7 User Input",
+			"title": "GS7 Supplemental Project 2 – Space Cadets",
+			"section": "supplementalProjects",
+			"sha256": "e7051efdaba34e980e33fe3655ec5a007756a5dfb63f092b2d6da90d00f92122"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS8 X & Y Coordinates",
+			"title": "Project 1 – Bug Eater",
+			"section": "curriculum",
+			"sha256": "14f12acb5f2d1ea3fb1dc17438a4b5b5661642197b6a9832e3bbcd0a0419ea77"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS8 X & Y Coordinates",
+			"title": "Project 2 – Cake Chaser",
+			"section": "curriculum",
+			"sha256": "e6de897b8d56f1e865f1ca5d84d8cac129c4e630cb921a0cf9cfb984bfc7a666"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS8 X & Y Coordinates",
+			"title": "Project 3 – Talent Show",
+			"section": "curriculum",
+			"sha256": "4a87b79804527c28a1cb77aecaaa3233ebfe5e4815cd79e82724406c78329de7"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS8 X & Y Coordinates",
+			"title": "GS8 Supplemental Project 1 – Quadrant Practice",
+			"section": "supplementalProjects",
+			"sha256": "b0e98ac2156c5b09bae179671f2d297e03612cc0f881392d140d4bdc4a42360b"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS8 X & Y Coordinates",
+			"title": "GS8 Supplemental Project 2 – Coordinate Drawings",
+			"section": "supplementalProjects",
+			"sha256": "61080d36adf0d0b3049e4e0e425f719fdf7eac92ba021043ff325e937bac063c"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS9 Variables",
+			"title": "Project 1 – Speed Click",
+			"section": "curriculum",
+			"sha256": "21e9364efeae175d8f919fe3a58c6d53aea6baad6f499f02b4aedc3a430cc213"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS9 Variables",
+			"title": "Project 2 – Spider Smash",
+			"section": "curriculum",
+			"sha256": "0bca820a9af1d0b23d0cfeee15ecd5ee031895d5d28b32cd5c592bbcd4091d47"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS9 Variables",
+			"title": "GS9 Supplemental Project 1 – Counting Steps",
+			"section": "supplementalProjects",
+			"sha256": "1c993af3a6ee59b54095fc1b164322e4fb41ee8df2c3f10727db16014181323f"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS9 Variables",
+			"title": "GS9 Supplemental Project 2 – Hungry Crab",
+			"section": "supplementalProjects",
+			"sha256": "cf78095187f06ad43333dc943585b3094053328a9a14dd9da87100cf7d3ebacb"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS9 Variables",
+			"title": "GS9 Supplemental Project 3 – Lunch Money",
+			"section": "supplementalProjects",
+			"sha256": "e4cc1d276ffe06436686b280553dcee393c324aaeed1f6d81377730f07a46bd3"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS10 Message Broadcasting",
+			"title": "GS10 Project 1 – Dance Off",
+			"section": "curriculum",
+			"sha256": "1bb5de3c75cbbcd04e6d39daa49669151f49c5226830c46b98a63dee71792320"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS10 Message Broadcasting",
+			"title": "GS10 Project 2 – Bowl Fill",
+			"section": "curriculum",
+			"sha256": "c1dc867cf94fc049ef8f8ed5c1ee39c0aa877404a4d88cbccf1cd1bd258ccfb9"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS10 Message Broadcasting",
+			"title": "GS10 Supplemental Project 1 – Magical Quest",
+			"section": "supplementalProjects",
+			"sha256": "3b99bbbea8571d2f0400100996dd341f8fbf5f2899cf9d6cd002dd6aeaf84e22"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS10 Message Broadcasting",
+			"title": "GS10 Supplemental Project 2 – Cartoon Crash",
+			"section": "supplementalProjects",
+			"sha256": "4c17fecf01c72ecbb836eb558f4bf24f622b0e8e6a492205a02bcc6d4a742c8a"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS11 Hedgehog Race",
+			"title": "GS11 Project 1 – Hedgehog Race",
+			"section": "curriculum",
+			"sha256": "6b6413cdc413b43a3220009665857b214ab4e9651cf241d6312ecb8e82121c50"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS11 Hedgehog Race",
+			"title": "GS11 Supplemental Project 1 – Save the Wizard",
+			"section": "supplementalProjects",
+			"sha256": "a11bc4ed7cd37b022bd7058c717f3e09987505640ff4a1e1ba3c0ef10a7672af"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS12 Asteroid Dodge",
+			"title": "GS12 Project 1 – Asteroid Dodge",
+			"section": "curriculum",
+			"sha256": "72fd07b1c54d8233fef57f2102516482a234a8b2c95bdee8da9e700e1281efb8"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS13 Master Project",
+			"title": "GS13 Project 1 – Master Project",
+			"section": "curriculum",
+			"sha256": "3b703a62f7189568648d0786777758b759fe5c3abfb54f933f025638514cfab0"
+		},
+		{
+			"courseId": "scratch-level-1",
+			"moduleTitle": "GS13 Master Project",
+			"title": "Master Project Presentation",
+			"section": "curriculum",
+			"sha256": "505e4135eee9a1d7d10e85edddb258b2986c58a9b403f257106ab82d181aab8f"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "Check-in #1",
+			"title": "Check-in #1: Additional Practice Project",
+			"section": "curriculum",
+			"sha256": "348e15fa98ecdf38a91513c355a101c49f045b7ce24523003b2cdcbac66786ca"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "Check-in #2",
+			"title": "Check-in #2: Additional Practice Project",
+			"section": "curriculum",
+			"sha256": "05de058dfb211c927d2cc7f24a6facd92c2b033af2c69619b1821f43663d2a43"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM1 Review: Events, Loops, Conditionals, & Broadcasting",
+			"title": "GM1 Project 1: Dragonfly Events",
+			"section": "curriculum",
+			"sha256": "8b48bf128461d858b8acaee1c3a452b61572839073b2c22519f5e61ef384c281"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM1 Review: Events, Loops, Conditionals, & Broadcasting",
+			"title": "GM1 Project 2: Drawing Mouse",
+			"section": "curriculum",
+			"sha256": "31393febe216f31c74f6e1bfeb49cdaa32fd6d8578bb4ed452030db2d1e78e7d"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM1 Review: Events, Loops, Conditionals, & Broadcasting",
+			"title": "GM1 Project 3: Math Facts",
+			"section": "curriculum",
+			"sha256": "9e0e6ca4401b80c09b7cbc3cffab7c05b13f0d8a42be0da1481390c21841efa1"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM1 Review: Events, Loops, Conditionals, & Broadcasting",
+			"title": "GM1 Project 4: Speed Click",
+			"section": "curriculum",
+			"sha256": "bce722b6f300c37741ddc66a5dba881ac6dcad462652e50eed28dc85ae05f38d"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM1 Review: Events, Loops, Conditionals, & Broadcasting",
+			"title": "GM1 Project 5: Dance Off",
+			"section": "curriculum",
+			"sha256": "ade31d11b98e15946efe2eb222af488c910ab92fa30478c0375b23c65e6dd5cb"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM1 Review: Events, Loops, Conditionals, & Broadcasting",
+			"title": "GM1 Project 6: Hedgehog Race",
+			"section": "curriculum",
+			"sha256": "221129808354f5828ad908f90098cd9dafbd9f21c4fba0c089aed4c0b6cfe298"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM1 Review: Events, Loops, Conditionals, & Broadcasting",
+			"title": "GM1 Project 7: Asteroid Dodge",
+			"section": "curriculum",
+			"sha256": "5e18d882967b04134c17de2d919160b2cc638c598d8ef7a6d6945c977b1f76ca"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM2 Nested Loops",
+			"title": "GM2 Project 1: Square Inception",
+			"section": "curriculum",
+			"sha256": "4ccbd7e90cf04108a23296615ba0e2f0ef5a5dc4c69ef6693a4d4a7fe100ea54"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM2 Nested Loops",
+			"title": "GM2 Project 2: Pyramid",
+			"section": "curriculum",
+			"sha256": "2430a760c74b32f25f4bc060db5b988e60456910f374169549cc83afd78415e9"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM2 Nested Loops",
+			"title": "GM2 Supplemental Project 1: Playing Baseball",
+			"section": "supplementalProjects",
+			"sha256": "02586b0f888c84b7f2ae818fbff2b60c414f03445252888b886c9ad7bbbf9634"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM2 Nested Loops",
+			"title": "GM2 Supplemental Project 2: Grid",
+			"section": "supplementalProjects",
+			"sha256": "87a82ab4e077ae09321183f783dd78be67e7280896341b1a326b8b86868a8dd1"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM2 Nested Loops",
+			"title": "GM2 Supplemental Project 3: Rainbow Flower",
+			"section": "supplementalProjects",
+			"sha256": "45ecf208549022fa7d54b5bea8f4a9489b6353cfcacbf7accfb5eb36904cc0e4"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM3 Complex Conditionals",
+			"title": "GM3 Project 1: Color Spotter",
+			"section": "curriculum",
+			"sha256": "43846b082d565da59537fc7d148167c818c5a1cfe55c7291dbecae9f2932a901"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM3 Complex Conditionals",
+			"title": "GM3 Project 2: Strength Tester",
+			"section": "curriculum",
+			"sha256": "45edc2fd5b1152e36b1bfd65b97b0f709c9a00eadf438daf75787a616b86d0c5"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM3 Complex Conditionals",
+			"title": "GM3 Supplemental Project 1: Baby Chick",
+			"section": "supplementalProjects",
+			"sha256": "e314feb5e91d61c4226984a5b5f4bb6e842e556f49346725a6e7fb0a58debf20"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM3 Complex Conditionals",
+			"title": "GM3 Supplemental Project 2: Save the Butterfly",
+			"section": "supplementalProjects",
+			"sha256": "0ec5d3a3941afd879ac06a2ad1cab76f929d76bb28a785c11b953a7f61f0c5f6"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM4 Cloning",
+			"title": "GM4 Project 1: Jackson Pollock Clones",
+			"section": "curriculum",
+			"sha256": "69761e0d472f0dc4bcc60097c1baf7b58b95d6731adc103c6b1431beb038464b"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM4 Cloning",
+			"title": "GM4 Project 2: Rainy Day",
+			"section": "curriculum",
+			"sha256": "4700335b2172289a036f21dc516414c99145d4a21824f2f33ab784bc00d6d92f"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM4 Cloning",
+			"title": "GM4 Supplemental Project 1: Fruity Fest",
+			"section": "supplementalProjects",
+			"sha256": "d45d244154b27ea7ec8614f5b8f429de550a1f460ab4a0e8f87e1bcfb562337a"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM5 Strings",
+			"title": "GM5 Project 1: Security Bot",
+			"section": "curriculum",
+			"sha256": "cdd0ca0bce5d682df4d7bc91644e6272a7c8d65e37dae3275a1f3f31f2bbcd16"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM5 Strings",
+			"title": "GM5 Project 2: Spelling Bee",
+			"section": "curriculum",
+			"sha256": "c06bc3b9223a6fe5c8e650432dd1661f9bc028af6563e8fd01957556ae4183a2"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM5 Strings",
+			"title": "GM5 Supplemental Project 1: Crazy Country",
+			"section": "supplementalProjects",
+			"sha256": "bdd2ba98963fb90d767b9df03734e876fa8c5a6ada2c1de614ac4c52a920b69e"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM5 Strings",
+			"title": "GM5 Supplemental Project 2: Beary Spelly",
+			"section": "supplementalProjects",
+			"sha256": "484482199ba5e281acf0c0781e5f51d1fb178d49af5445daeae9fd24d06b2319"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM6 Mathematical Operators",
+			"title": "GM6 Project 1: Calculator",
+			"section": "curriculum",
+			"sha256": "7386402efd0b71d9c355a0c0de35ef1179999d1aeafb7a4fbfde7dcae655fc63"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM6 Mathematical Operators",
+			"title": "GM6 Project 2: FizzBuzz",
+			"section": "curriculum",
+			"sha256": "d16f545b43640d1d5d0289d719cc87c5fc525a46c1bb901d0b4bbc00cd6e5da0"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM6 Mathematical Operators",
+			"title": "GM6 Supplemental Project 1: Times Tables",
+			"section": "supplementalProjects",
+			"sha256": "6b7b81e7f8f28559b2383eb65929731d7398eadd57e7467cdb31e998618ac022"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM6 Mathematical Operators",
+			"title": "GM6 Supplemental Project 2: Stamping with Dotty",
+			"section": "supplementalProjects",
+			"sha256": "ea650811bc6a341550d1900a300d06912ae6803369a82058f1afbc6cfd4d30d3"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM7 Lists",
+			"title": "GM7 Project 1: Bucket List",
+			"section": "curriculum",
+			"sha256": "31cd42cce42a7d9691ddd694c075a344df4f42be04460904be1949370627ec80"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM7 Lists",
+			"title": "GM7 Project 2: List Practice",
+			"section": "curriculum",
+			"sha256": "952319acd98ef7201af1763f2ab4477a428dbd86008cb03546f0b9974b56709e"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM7 Lists",
+			"title": "GM7 Project 3: Music Memory",
+			"section": "curriculum",
+			"sha256": "35f2352e7a53d62c7f531a157a7a02135f66f6deef4d564022d3b41dcbed6523"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM7 Lists",
+			"title": "GM7 Supplemental Project 1: Multiple Magic",
+			"section": "supplementalProjects",
+			"sha256": "f2daadb8c7479a4903d48ef6bde2e2303703d27cebf8d0e0fe949f62ceaa6e17"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM7 Lists",
+			"title": "GM7 Supplemental Project 2: Wheel of Fortune",
+			"section": "supplementalProjects",
+			"sha256": "c37431d6a9a45435c537027a7bd30b100b0dc04353f287f88c46f3126f2b4575"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM8 Functions",
+			"title": "GM8 Project 1: My First Functions",
+			"section": "curriculum",
+			"sha256": "d78f60ffb812774025acb0eb26eafd6877db7774f0672fe9b36d3c95a6a9fc2e"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM8 Functions",
+			"title": "GM8 Project 2: Talent Show II",
+			"section": "curriculum",
+			"sha256": "3c525872cd78b28d7c80ff8e876593122492df547fad60a33ecc45dfe42b3f50"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM8 Functions",
+			"title": "GM8 Supplemental Project 1: Extra Functions",
+			"section": "supplementalProjects",
+			"sha256": "bf976ca2a8e1f048f12c1ed014a0cffe6afdf3b5dba042ce930fbcdbc2d22c5e"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM8 Functions",
+			"title": "GM8 Supplemental Project 2: Rock Paper Scissors",
+			"section": "supplementalProjects",
+			"sha256": "444453d2d818fd19e034bd5c85b91a097f1c6902222ec77bd3a0b912300a2eb3"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM9 Fish Food",
+			"title": "GM9 Project 1: Fish Food",
+			"section": "curriculum",
+			"sha256": "0777e78cd0d516becb1e9dc22bf5f3946e3bee0d1faf93e24b5bde07163934d9"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM9 Fish Food",
+			"title": "GM9 Supplemental Project 1: Platformer Pal",
+			"section": "supplementalProjects",
+			"sha256": "2524b26a692d87470a40e97ca29aea34f43cd21a8da617cb24e4fde29294a630"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM10 Treasure Cave",
+			"title": "GM10 Project 1: Treasure Cave",
+			"section": "curriculum",
+			"sha256": "8047d30546d80678801631eab5fedd2ae9227fca1c7f6754e87b357c810d7e06"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM10 Treasure Cave",
+			"title": "GM10 Supplemental Project 1: Fruit Ninja",
+			"section": "supplementalProjects",
+			"sha256": "0481c32bddfbd84194ecb0a7058e71cbf830f27f55d38145a1ff51ec383d7769"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM11 Master Project",
+			"title": "GM11 Project 1: Master Project",
+			"section": "curriculum",
+			"sha256": "9d40dabe7664ce938249d0c963feea434f978d5385986f2f27e2a57ea8202210"
+		},
+		{
+			"courseId": "scratch-level-2",
+			"moduleTitle": "GM11 Master Project",
+			"title": "Master Project Presentation",
+			"section": "curriculum",
+			"sha256": "274cbb0ecf95271397b70e01dce4a5394bdcca9725dd9a4ccda04ad37f7952fd"
+		}
+	]
+}

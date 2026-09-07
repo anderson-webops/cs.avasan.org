@@ -27,7 +27,7 @@ const classroomLaunchModule = createClassroomLaunchModule({
 	title: "Classroom Launch: Play, Extend, Explain",
 	estimatedTime: "4–6 sessions · 45–60 minutes each",
 	courseFlow:
-		"Build Bouncing Alien and Apple Collector together as the shared launch. Choose later games by system: collections, physics, platforms, levels, projectiles, or enemy behavior. Platformer, Space Battle, and Space Invaders are the harder integrated builds.",
+		"Build Bouncing Alien and Apple Collector together as the shared launch, then continue through later games by system: collections, physics, platforms, levels, projectiles, or enemy behavior. Platformer, Space Battle, and Space Invaders are the harder integrated builds; the remixes remain supplemental practice.",
 	keyBlocks: [
 		"run the playable framework",
 		"Normal section",
@@ -64,14 +64,6 @@ During a class share, demonstrate the controls, goal, feedback, and reset or end
 			"PyG2-Apple-Collector.py",
 			"choice"
 		),
-		{
-			title: "Classroom Playtest and Showcase Routine",
-			content: `When a change fails, reproduce it with the same controls and record the state immediately before and after the failure. Check one responsibility at a time: input, update, collision, draw order, score, state transition, or reset.
-
-For a showcase, play the Normal version first and explain the changed function or state variable. Show Hard second only if it remains reliably playable. End with one bug reproduction, one repair, and one next system that can be added without rewriting the framework.`
-		}
-	],
-	optionalItems: [
 		launchProject(
 			"Launch Project 3: Asteroid Dodge",
 			`The framework supplies a player, falling obstacles, movement, collision, and survival state.
@@ -152,6 +144,14 @@ For a showcase, play the Normal version first and explain the changed function o
 			"PyG11-Space-Invaders.py",
 			"challenge"
 		),
+		{
+			title: "Classroom Playtest and Showcase Routine",
+			content: `When a change fails, reproduce it with the same controls and record the state immediately before and after the failure. Check one responsibility at a time: input, update, collision, draw order, score, state transition, or reset.
+
+For a showcase, play the Normal version first and explain the changed function or state variable. Show Hard second only if it remains reliably playable. End with one bug reproduction, one repair, and one next system that can be added without rewriting the framework.`
+		}
+	],
+	supplementalItems: [
 		{
 			title: "Launch Remix: Controls and Feedback",
 			content: `Choose one playable launch game and trace a control from input through state change to visible feedback.

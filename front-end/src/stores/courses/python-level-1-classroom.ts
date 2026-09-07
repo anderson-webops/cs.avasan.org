@@ -138,23 +138,10 @@ For a project share, demonstrate the Normal result first. If the Hard section is
 	]
 };
 
-const CLASSROOM_LAUNCH_CORE_TITLES = new Set([
-	"Classroom Workflow: Run, Normal, Hard",
-	"Launch Project 1: Color Circle Art",
-	"Launch Project 2: Picasso Keyboard Painter",
-	"Classroom Debugging and Showcase Routine"
-]);
 const CLASSROOM_LAUNCH_CHOICE_TITLES = new Set([
-	"Launch Project 3: Triangle Motion",
-	"Launch Project 4: Neon Trail Painter",
-	"Launch Project 5: Firework Festival",
-	"Launch Project 6: Spiral Galaxy",
 	"Launch Remix: Palette and Theme"
 ]);
 const CLASSROOM_LAUNCH_CHALLENGE_TITLES = new Set([
-	"Launch Project 7: Turtle Race Day",
-	"Launch Project 8: Flower Garden Clicker",
-	"Launch Project 9: Maze Explorer",
 	"Launch Remix: Controls and Feedback"
 ]);
 const CLASSROOM_SLUG_COMBINING_MARKS_RE = /[\u0300-\u036F]/g;
@@ -189,26 +176,8 @@ function configureClassroomLaunch(module: RawCourseModule) {
 		);
 	}
 
-	const movedProjects = module.curriculum.filter(
-		item => !CLASSROOM_LAUNCH_CORE_TITLES.has(item.title)
-	);
-	module.curriculum = module.curriculum.filter(item =>
-		CLASSROOM_LAUNCH_CORE_TITLES.has(item.title)
-	);
-
 	for (const item of module.curriculum) {
 		item.learningPath = "core";
-	}
-	for (const item of movedProjects) {
-		if (CLASSROOM_LAUNCH_CHALLENGE_TITLES.has(item.title)) {
-			item.learningPath = "challenge";
-		} else if (CLASSROOM_LAUNCH_CHOICE_TITLES.has(item.title)) {
-			item.learningPath = "choice";
-		} else {
-			throw new Error(
-				`Classroom launch project is missing a path: ${item.title}.`
-			);
-		}
 	}
 	for (const item of module.supplementalProjects) {
 		if (CLASSROOM_LAUNCH_CHALLENGE_TITLES.has(item.title)) {
@@ -222,10 +191,6 @@ function configureClassroomLaunch(module: RawCourseModule) {
 		}
 	}
 
-	module.supplementalProjects = [
-		...movedProjects,
-		...module.supplementalProjects
-	];
 	module.estimatedTime = "2–3 sessions · 45–60 minutes each";
 	module.keyBlocks = [
 		"run before editing",
@@ -239,7 +204,7 @@ function configureClassroomLaunch(module: RawCourseModule) {
 	if (workflow) {
 		workflow.content = [
 			workflow.content,
-			"**Course flow:** Complete Color Circle Art and Picasso Keyboard Painter as the shared launch. Choose the remaining showcase projects by concept or interest; Turtle Race, Flower Garden, and Maze Explorer are the harder systems challenges."
+			"**Course flow:** Complete Color Circle Art and Picasso Keyboard Painter as the shared launch, then continue through the remaining showcase projects by concept. Turtle Race, Flower Garden, and Maze Explorer are the harder systems builds; the remixes remain supplemental practice."
 		].join("\n\n");
 	}
 }

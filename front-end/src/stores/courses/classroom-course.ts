@@ -11,7 +11,7 @@ interface ClassroomLaunchModuleOptions {
 	courseId: string;
 	estimatedTime?: string;
 	keyBlocks?: string[];
-	optionalItems: RawCourseModuleItem[];
+	supplementalItems: RawCourseModuleItem[];
 	title?: string;
 }
 
@@ -68,7 +68,7 @@ export function createClassroomLaunchModule({
 		"save a working checkpoint",
 		"predict, test, repair, explain"
 	],
-	optionalItems,
+	supplementalItems,
 	title = "Classroom Launch: Build, Extend, Explain"
 }: ClassroomLaunchModuleOptions): RawCourseModule {
 	const moduleId = classroomSlugify(`${courseId}-${title}`);
@@ -78,7 +78,7 @@ export function createClassroomLaunchModule({
 		"curriculum"
 	);
 	const supplementalProjects = configureLaunchItems(
-		optionalItems,
+		supplementalItems,
 		moduleId,
 		"supplemental"
 	);
