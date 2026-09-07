@@ -19,6 +19,7 @@ const newPasswordInput = ref<HTMLInputElement | null>(null);
 const confirmPasswordInput = ref<HTMLInputElement | null>(null);
 const passwordStatus = ref("");
 const passwordError = ref("");
+const isSubmitting = ref(false);
 const adminAuthRequestTimeoutMs = 30_000;
 const idPrefix = computed(
 	() => `account-security-admin-${props.entityId.replace(/[^\w-]/g, "-")}`
@@ -62,6 +63,7 @@ function passwordChangeConfirmed(
 }
 
 async function updatePassword() {
+	if (isSubmitting.value) return;
 	passwordStatus.value = "";
 	passwordError.value = "";
 	if (!newPassword.value) {
@@ -77,6 +79,7 @@ async function updatePassword() {
 
 	const previousPasswordChangedAt =
 		app.currentAdmin?.passwordChangedAt ?? null;
+	isSubmitting.value = true;
 	try {
 		const { data } = await submitPasswordChange();
 		if (data.currentAdmin?._id !== props.entityId) {
@@ -137,6 +140,7 @@ async function updatePassword() {
 			broadcastStudentSessionEnded();
 		}
 	} finally {
+		isSubmitting.value = false;
 		clearPasswordInputs();
 	}
 }
@@ -157,7 +161,11 @@ onBeforeUnmount(clearPasswordInputs);
 	<section class="security-card" :aria-labelledby="`${idPrefix}-title`">
 		<h2 :id="`${idPrefix}-title`">Change password</h2>
 
-		<div class="security-section">
+		<form
+			:aria-busy="isSubmitting ? 'true' : 'false'"
+			class="security-section"
+			@submit.prevent="updatePassword"
+		>
 			<div class="field">
 				<label :for="`${idPrefix}-current-password`"
 					>Current password</label
@@ -167,6 +175,7 @@ onBeforeUnmount(clearPasswordInputs);
 					ref="currentPasswordInput"
 					v-model="currentPassword"
 					autocomplete="current-password"
+					:disabled="isSubmitting"
 					name="current-password"
 					type="password"
 				/>
@@ -178,6 +187,7 @@ onBeforeUnmount(clearPasswordInputs);
 					ref="newPasswordInput"
 					v-model="newPassword"
 					autocomplete="new-password"
+					:disabled="isSubmitting"
 					name="new-password"
 					type="password"
 				/>
@@ -191,16 +201,17 @@ onBeforeUnmount(clearPasswordInputs);
 					ref="confirmPasswordInput"
 					v-model="confirmPassword"
 					autocomplete="new-password"
+					:disabled="isSubmitting"
 					name="confirm-password"
 					type="password"
 				/>
 			</div>
 			<button
 				class="btn-primary btn"
-				type="button"
-				@click="updatePassword"
+				:disabled="isSubmitting"
+				type="submit"
 			>
-				Update password
+				{{ isSubmitting ? "Updating…" : "Update password" }}
 			</button>
 			<p
 				v-if="passwordStatus"
@@ -213,7 +224,7 @@ onBeforeUnmount(clearPasswordInputs);
 			<p v-if="passwordError" class="error" role="alert">
 				{{ passwordError }}
 			</p>
-		</div>
+		</form>
 	</section>
 </template>
 
