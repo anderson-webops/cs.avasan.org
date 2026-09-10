@@ -58,6 +58,9 @@ const {
 	mountClassroomAnalyticsRoutes,
 	mountClassroomAnalyticsServiceRoute
 } = await import("../src/routes/classroomAnalyticsRoutes.js");
+const { CLASSROOM_ANALYTICS_SERVICE_HOST } = await import(
+	"../src/security/classroomAnalyticsService.js"
+);
 
 interface RuntimeOptions {
 	collectionEnabled?: boolean;
@@ -73,6 +76,20 @@ async function withRuntime<T>(options: RuntimeOptions, run: (baseUrl: string) =>
 		? 90
 		: options.retentionDays;
 	app.set("trust proxy", false);
+	// macOS does not bind arbitrary 127/8 aliases by default. Model the Linux
+	// production socket and Host exactly while the test transport remains on
+	// 127.0.0.1; the middleware unit test separately proves the old Classes
+	// listener and other Host values are rejected.
+	app.use((req, _res, next) => {
+		Object.defineProperty(req.socket, "localAddress", {
+			configurable: true,
+			value: CLASSROOM_ANALYTICS_SERVICE_HOST
+		});
+		if (req.headers.host?.startsWith("127.0.0.1:")) {
+			req.headers.host = `${CLASSROOM_ANALYTICS_SERVICE_HOST}:${req.socket.localPort}`;
+		}
+		next();
+	});
 	mountClassroomAnalyticsServiceRoute(app, {
 		retentionDays,
 		serviceKey: options.serviceKey ?? null

@@ -17,7 +17,7 @@ Use these endpoints for monitoring. They do not require auth and do not redirect
 Use `/healthz` and `/readyz` for monitors. Do not use `/`, login pages, or `/_dbinfo`.
 
 The private loopback-only
-`GET http://127.0.0.1:3008/classroom-analytics/summary?days=7|30|90` route is
+`GET http://127.0.0.2:3008/classroom-analytics/summary?days=7|30|90` route is
 not a health check. It returns 404 when no companion service key is configured
 and 403 without the exact key when configured; monitoring must never possess
 that key. Public `/api/classroom-analytics/summary` always returns JSON 404.

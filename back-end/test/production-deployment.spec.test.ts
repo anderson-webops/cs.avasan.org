@@ -135,6 +135,7 @@ describe("versioned full-stack production deployment", () => {
 
 	it("mounts and authenticates the private summary before shared middleware", () => {
 		const server = repositoryFile("back-end/src/server.ts");
+		const localEnvironment = repositoryFile("back-end/.env.EXAMPLE");
 		const routes = repositoryFile(
 			"back-end/src/routes/classroomAnalyticsRoutes.ts"
 		);
@@ -153,6 +154,8 @@ describe("versioned full-stack production deployment", () => {
 			.toBeLessThan(routes.indexOf("globalLimiter,"));
 		expect(routes.indexOf("globalLimiter,"))
 			.toBeLessThan(routes.indexOf("getClassroomAnalyticsSummary(options.retentionDays)"));
+		expect(server).toContain('env.HOST || env.BACKEND_HOST || "127.0.0.2"');
+		expect(localEnvironment).toMatch(/^HOST=127[.]0[.]0[.]2$/mu);
 	});
 
 	it("provides an atomic, single-process native production handoff", () => {
@@ -171,6 +174,9 @@ describe("versioned full-stack production deployment", () => {
 			"scripts/verify-native-release-target.mjs"
 		);
 		const runtimePreflight = repositoryFile("scripts/verify-native-runtime-config.mjs");
+		const runtimeCompatibility = repositoryFile(
+			"scripts/configure-native-runtime-compatibility.mjs"
+		);
 		const documentation = repositoryFile("docs/native-production-deployment.md");
 
 		expect(environment).toContain("MONGODB_URI=");
@@ -203,7 +209,8 @@ describe("versioned full-stack production deployment", () => {
 		expect(service).toContain("EnvironmentFile=/srv/cs.avasan.org/current/public-config.env");
 		expect(service).toContain("ProtectSystem=strict");
 		expect(service).toContain("NoNewPrivileges=true");
-		expect(service).toContain("HOST=127.0.0.1");
+		expect(service).toContain("HOST=127.0.0.2");
+		expect(service).toContain("BACKEND_HOST=127.0.0.2");
 		expect(service).toContain("PORT=3008");
 
 		expect(nativeProxy).toContain("root /srv/cs.avasan.org/current/public;");
@@ -233,7 +240,7 @@ describe("versioned full-stack production deployment", () => {
 		expect(nativeStandardHeaders).toContain('add_header Cross-Origin-Resource-Policy "same-origin" always;');
 		expect(nativeIdeHeaders).toContain('add_header Cross-Origin-Opener-Policy "same-origin" always;');
 		expect(nativeIdeHeaders).toContain('add_header Cross-Origin-Resource-Policy "same-origin" always;');
-		expect(nativeProxy).toContain("proxy_pass http://127.0.0.1:3008/;");
+		expect(nativeProxy).toContain("proxy_pass http://127.0.0.2:3008/;");
 		expect(nativeProxy).toContain("proxy_set_header X-Forwarded-For $remote_addr;");
 		expect(nativeProxy).toContain("proxy_hide_header Content-Security-Policy;");
 		expect(nativeProxy).toContain("proxy_hide_header X-Frame-Options;");
@@ -296,7 +303,25 @@ describe("versioned full-stack production deployment", () => {
 		expect(deployScript).toContain('mv -T -- "$cs_staging_release" "$cs_final_release"');
 		expect(deployScript).toContain("mv -Tf -- \"$cs_next_link\" \"$cs_link_name\"");
 		expect(deployScript).toContain("CS_SITE_ORIGIN=http://127.0.0.1:8080");
+		expect(deployScript).toContain("export HOST=127.0.0.2");
+		expect(deployScript).toContain(
+			"CS_CLASSROOM_ANALYTICS_INTERNAL_ORIGIN=http://127.0.0.2:3008"
+		);
+		expect(rollbackScript).toContain(
+			"CS_CLASSROOM_ANALYTICS_INTERNAL_ORIGIN=http://127.0.0.2:3008"
+		);
 		expect(deployScript).toContain("restore_previous");
+		expect(deployScript).toContain("configure-native-runtime-compatibility.mjs");
+		expect(rollbackScript).toContain("configure-native-runtime-compatibility.mjs");
+		expect(deployScript).toContain('cs_legacy_listener_version="2.7.124"');
+		expect(deployScript).toContain(
+			'cs_legacy_listener_revision="8e3fd9eb953ec6b78a985a0ef0e8bf479c2ef245"'
+		);
+		expect(runtimeCompatibility).toContain(
+			"Environment=CLASSROOM_ANALYTICS_SERVICE_KEY="
+		);
+		expect(runtimeCompatibility).not.toContain("127.0.0.1:3008");
+		expect(runtimeCompatibility).not.toContain("127.0.0.2:3008");
 		expect(deployScript).toContain('CS_EXPECTED_RELEASE="$cs_expected_version"');
 		expect(deployScript).toContain('CS_EXPECTED_REVISION="$cs_expected_revision"');
 		expect(deployScript).toContain('CS_EXPECT_CLASSROOM_ANALYTICS_RETENTION_DAYS="$cs_expected_classroom_analytics_retention_days"');
@@ -372,14 +397,14 @@ describe("versioned full-stack production deployment", () => {
 			version: string;
 		};
 
-		expect(rootPackage.version).toBe("2.7.124");
-		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]124\}/g)).toHaveLength(2);
+		expect(rootPackage.version).toBe("2.7.125");
+		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]7[.]125\}/g)).toHaveLength(2);
 		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g)).toHaveLength(2);
 		expect(compose).not.toContain("SOURCE_REVISION:-unknown");
 		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
-		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.124");
+		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.125");
 		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
-		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.124");
+		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.7.125");
 		expect(apiDockerfile).toContain("ARG SOURCE_REVISION=unknown");
 		expect(frontendReleaseWriter).toContain("environment.COMMIT_REF?.trim()");
 		expect(frontendReleaseWriter).toContain("const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;");

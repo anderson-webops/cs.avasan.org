@@ -148,7 +148,7 @@ The Admin activity panel at `/admin?section=analytics` separates CS and Math
 activity while retaining only aggregate optional-account and Python-project
 counts under student work. It uses Julio's existing Admin session. The private
 `analytics.avasan.org` companion may read that exact aggregate through
-`GET http://127.0.0.1:3008/classroom-analytics/summary?days=7|30|90` only when an independent
+`GET http://127.0.0.2:3008/classroom-analytics/summary?days=7|30|90` only when an independent
 `CLASSROOM_ANALYTICS_SERVICE_KEY` is configured on CS and its matching secret
 is configured on Analytics. Nginx always denies the corresponding public API
 path with JSON 404. The loopback route is otherwise absent, rejects browser
@@ -349,7 +349,7 @@ that identity fallback is not permitted by the production Compose path. Inject
 the deployment identity without changing application secrets:
 
 ```bash
-export CS_RELEASE_VERSION=2.7.124
+export CS_RELEASE_VERSION=2.7.125
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 docker compose --env-file deploy/cs.env -f compose.production.yml build
 ```
@@ -364,7 +364,7 @@ To exercise or prepare the manually selected Compose fallback:
 ```bash
 install -m 600 deploy/cs.env.example deploy/cs.env
 # Fill secrets, keep all optional features false until the privacy gate is met.
-export CS_RELEASE_VERSION=2.7.124
+export CS_RELEASE_VERSION=2.7.125
 export SOURCE_REVISION="$(git rev-parse HEAD)"
 ./scripts/verify-deploy-env-permissions.sh
 docker compose --env-file deploy/cs.env -f compose.production.yml build

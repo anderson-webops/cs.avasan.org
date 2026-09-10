@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { execFileSync, spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync, statSync } from "node:fs";
 import { chmod, mkdir, mkdtemp, realpath, rename, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
@@ -9,6 +9,11 @@ import process from "node:process";
 // This executable root-level configuration test intentionally uses Node's test runner.
 // eslint-disable-next-line test/no-import-node-test
 import test from "node:test";
+import {
+	configureNativeRuntimeCompatibility,
+	DISABLED_CLASSROOM_ANALYTICS_SERVICE_OVERRIDE,
+	RUNTIME_COMPATIBILITY_DROP_IN
+} from "../scripts/configure-native-runtime-compatibility.mjs";
 import { verifyNativeReleaseTarget } from "../scripts/verify-native-release-target.mjs";
 
 const repositoryRoot = resolve(import.meta.dirname, "..");
@@ -432,6 +437,10 @@ test("native activation failures prove the selected runtime after every recovery
 	const failRollback = shellFunction(rollback, "fail_rollback");
 
 	assert.match(restorePrevious, /systemctl restart "\$cs_api_service"/u);
+	assert.match(
+		restorePrevious,
+		/configure_runtime_compatibility "\$cs_previous_classroom_analytics_service_enabled"[\s\S]*systemctl daemon-reload/u
+	);
 	assert.match(restorePrevious, /systemctl reload "\$cs_nginx_service"/u);
 	assert.match(restorePrevious, /verify_release_health/u);
 	assert.match(restorePrevious, /"\$cs_previous_version"/u);
@@ -443,6 +452,10 @@ test("native activation failures prove the selected runtime after every recovery
 	assert.doesNotMatch(failActivation, />\/dev\/null 2>&1/u);
 
 	assert.match(restoreCurrent, /systemctl restart "\$cs_api_service"/u);
+	assert.match(
+		restoreCurrent,
+		/configure_runtime_compatibility "\$cs_current_classroom_analytics_service_enabled"[\s\S]*systemctl daemon-reload/u
+	);
 	assert.match(restoreCurrent, /systemctl reload "\$cs_nginx_service"/u);
 	assert.match(restoreCurrent, /verify_release_health/u);
 	assert.match(restoreCurrent, /"\$cs_current_manifest_version"/u);
@@ -452,14 +465,87 @@ test("native activation failures prove the selected runtime after every recovery
 	assert.match(failRollback, /cs_rollback_status/u);
 	assert.match(failRollback, /separately failed with status/u);
 	assert.doesNotMatch(failRollback, />\/dev\/null 2>&1/u);
+	assert.match(
+		deploy,
+		/atomic_link "\$cs_final_release" "\$cs_current_link"[\s\S]*configure_runtime_compatibility "\$\{CLASSROOM_ANALYTICS_SERVICE_ENABLED:-false\}"[\s\S]*systemctl daemon-reload/u
+	);
+	assert.match(
+		rollback,
+		/atomic_link "\$cs_previous_target" "\$cs_current_link"[\s\S]*configure_runtime_compatibility "\$cs_classroom_analytics_service_enabled"[\s\S]*systemctl daemon-reload/u
+	);
 
 	for (const script of [deploy, rollback]) {
 		const readiness = shellFunction(script, "wait_for_api_readiness");
+		const releaseHealth = shellFunction(script, "verify_release_health");
 		assert.match(script, /CS_EXPECTED_RELEASE="\$cs_expected_version"/u);
 		assert.match(script, /CS_EXPECTED_REVISION="\$cs_expected_revision"/u);
 		assert.match(script, /wait_for_api_readiness \|\| cs_health_status=\$\?/u);
 		assert.match(readiness, /readyz >\/dev\/null 2>&1/u);
+		assert.match(
+			releaseHealth,
+			/CS_CLASSROOM_ANALYTICS_INTERNAL_ORIGIN=http:\/\/127[.]0[.]0[.]2:3008/u
+		);
+		assert.match(releaseHealth, /cs_legacy_listener_version/u);
+		assert.match(releaseHealth, /cs_legacy_listener_revision/u);
+		assert.doesNotMatch(releaseHealth, /127[.]0[.]0[.]1:3008/u);
 		assert.doesNotMatch(readiness, /--show-error/u);
 		assert.doesNotMatch(script, /if\s+!\s*\(/u);
 	}
+});
+
+test("native runtime compatibility blanks only the disabled companion key", async (t) => {
+	const systemdRoot = await mkdtemp(join(tmpdir(), "cs-systemd-root-"));
+	t.after(async () => rm(systemdRoot, { force: true, recursive: true }));
+	const expectedUid = process.getuid();
+	const expectedGid = process.getgid();
+	const serviceName = "cs-avasan-api.service";
+	const overridePath = join(
+		systemdRoot,
+		`${serviceName}.d`,
+		RUNTIME_COMPATIBILITY_DROP_IN
+	);
+
+	const disabled = configureNativeRuntimeCompatibility({
+		enabled: false,
+		expectedGid,
+		expectedUid,
+		serviceName,
+		systemdRoot
+	});
+	assert.equal(disabled.changed, true);
+	assert.equal(readFileSync(overridePath, "utf8"), DISABLED_CLASSROOM_ANALYTICS_SERVICE_OVERRIDE);
+	assert.equal(statSync(overridePath).mode & 0o777, 0o644);
+	assert.equal(
+		configureNativeRuntimeCompatibility({
+			enabled: false,
+			expectedGid,
+			expectedUid,
+			serviceName,
+			systemdRoot
+		}).changed,
+		false
+	);
+	assert.equal(
+		configureNativeRuntimeCompatibility({
+			enabled: true,
+			expectedGid,
+			expectedUid,
+			serviceName,
+			systemdRoot
+		}).changed,
+		true
+	);
+	assert.equal(existsSync(overridePath), false);
+
+	await writeFile(overridePath, "[Service]\nEnvironment=UNREVIEWED=value\n");
+	assert.throws(
+		() => configureNativeRuntimeCompatibility({
+			enabled: false,
+			expectedGid,
+			expectedUid,
+			serviceName,
+			systemdRoot
+		}),
+		/Refusing to replace an unrecognized runtime compatibility override/u
+	);
 });

@@ -12,6 +12,8 @@ cs_api_service="cs-avasan-api.service"
 cs_nginx_service="nginx.service"
 cs_build_root=""
 cs_staging_release=""
+readonly cs_legacy_listener_version="2.7.124"
+readonly cs_legacy_listener_revision="8e3fd9eb953ec6b78a985a0ef0e8bf479c2ef245"
 
 usage() {
 	printf '%s\n' \
@@ -147,8 +149,8 @@ set +a
 export CS_RELEASE_VERSION="$cs_version"
 export SOURCE_REVISION="$cs_revision"
 export NODE_ENV=production
-export HOST=127.0.0.1
-export BACKEND_HOST=127.0.0.1
+export HOST=127.0.0.2
+export BACKEND_HOST=127.0.0.2
 export PORT=3008
 export CLASSROOM_ORIGIN=https://cs.avasan.org
 export CROSS_SITE=false
@@ -225,6 +227,7 @@ if [[ ! -e "$cs_final_release" && ! -L "$cs_final_release" ]]; then
 	install -m 0644 "$cs_build_source/back-end/package.json" "$cs_staging_release/back-end/package.json"
 	install -m 0644 \
 		"$cs_build_source/scripts/http-smoke-client.mjs" \
+		"$cs_build_source/scripts/configure-native-runtime-compatibility.mjs" \
 		"$cs_build_source/scripts/post-deploy-smoke.mjs" \
 		"$cs_build_source/scripts/verify-native-runtime-config.mjs" \
 		"$cs_staging_release/scripts/"
@@ -316,7 +319,7 @@ wait_for_api_readiness() {
 	for cs_attempt in {1..30}; do
 		cs_readiness_status=0
 		curl --fail --silent --max-time 2 \
-			http://127.0.0.1:3008/readyz >/dev/null 2>&1 \
+			http://127.0.0.2:3008/readyz >/dev/null 2>&1 \
 			|| cs_readiness_status=$?
 		if (( cs_readiness_status == 0 )); then
 			return 0
@@ -329,6 +332,31 @@ wait_for_api_readiness() {
 	return "$cs_readiness_status"
 }
 
+assert_release_listener_compatibility() {
+	local cs_release_version="$1"
+	local cs_release_revision="$2"
+	local cs_service_enabled="$3"
+	if [[ "$cs_release_version" == "$cs_legacy_listener_version" \
+		&& "$cs_release_revision" == "$cs_legacy_listener_revision" \
+		&& "$cs_service_enabled" != "false" ]]; then
+		printf '%s\n' "The exact legacy CS rollback release cannot enable the Analytics companion on the dedicated listener." >&2
+		return 1
+	fi
+}
+
+configure_runtime_compatibility() {
+	local cs_service_enabled="$1"
+	local cs_compatibility_mode
+	case "$cs_service_enabled" in
+		true) cs_compatibility_mode="enabled" ;;
+		false) cs_compatibility_mode="disabled" ;;
+		*) printf '%s\n' "The classroom Analytics companion state is invalid." >&2; return 1 ;;
+	esac
+	node "$cs_source_dir/scripts/configure-native-runtime-compatibility.mjs" \
+		"$cs_api_service" \
+		"$cs_compatibility_mode"
+}
+
 verify_release_health() {
 	local cs_health_release="$1"
 	local cs_expected_version="$2"
@@ -339,21 +367,35 @@ verify_release_health() {
 	local cs_expected_classroom_analytics_retention_days="$7"
 	local cs_expected_classroom_analytics_service_enabled="$8"
 	local cs_health_status=0
+	local -a cs_smoke_environment=(
+		PATH=/usr/bin:/bin
+		CS_SITE_ORIGIN=http://127.0.0.1:8080
+		CS_EXPECTED_RELEASE="$cs_expected_version"
+		CS_EXPECTED_REVISION="$cs_expected_revision"
+		CS_EXPECT_STUDENT_ACCOUNTS_ENABLED="$cs_expected_student_accounts"
+		CS_EXPECT_STUDENT_OAUTH_ENABLED="$cs_expected_student_oauth"
+		CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED="$cs_expected_classroom_analytics"
+		CS_EXPECT_CLASSROOM_ANALYTICS_RETENTION_DAYS="$cs_expected_classroom_analytics_retention_days"
+		CS_EXPECT_CLASSROOM_ANALYTICS_SERVICE_ENABLED="$cs_expected_classroom_analytics_service_enabled"
+	)
+
+	assert_release_listener_compatibility \
+		"$cs_expected_version" \
+		"$cs_expected_revision" \
+		"$cs_expected_classroom_analytics_service_enabled" \
+		|| return $?
+	if [[ "$cs_expected_version" != "$cs_legacy_listener_version" \
+		|| "$cs_expected_revision" != "$cs_legacy_listener_revision" ]]; then
+		cs_smoke_environment+=(
+			CS_CLASSROOM_ANALYTICS_INTERNAL_ORIGIN=http://127.0.0.2:3008
+		)
+	fi
 
 	wait_for_api_readiness || cs_health_status=$?
 	if (( cs_health_status != 0 )); then
 		return "$cs_health_status"
 	fi
-	env -i PATH=/usr/bin:/bin \
-		CS_SITE_ORIGIN=http://127.0.0.1:8080 \
-		CS_CLASSROOM_ANALYTICS_INTERNAL_ORIGIN=http://127.0.0.1:3008 \
-		CS_EXPECTED_RELEASE="$cs_expected_version" \
-		CS_EXPECTED_REVISION="$cs_expected_revision" \
-		CS_EXPECT_STUDENT_ACCOUNTS_ENABLED="$cs_expected_student_accounts" \
-		CS_EXPECT_STUDENT_OAUTH_ENABLED="$cs_expected_student_oauth" \
-		CS_EXPECT_CLASSROOM_ANALYTICS_COLLECTION_ENABLED="$cs_expected_classroom_analytics" \
-		CS_EXPECT_CLASSROOM_ANALYTICS_RETENTION_DAYS="$cs_expected_classroom_analytics_retention_days" \
-		CS_EXPECT_CLASSROOM_ANALYTICS_SERVICE_ENABLED="$cs_expected_classroom_analytics_service_enabled" \
+	env -i "${cs_smoke_environment[@]}" \
 		/usr/bin/node "$cs_health_release/scripts/post-deploy-smoke.mjs" \
 		|| cs_health_status=$?
 	return "$cs_health_status"
@@ -372,6 +414,12 @@ restore_previous() {
 	atomic_link "$cs_previous_target" "$cs_current_link" || cs_rollback_status=$?
 	if (( cs_rollback_status != 0 )); then
 		printf '%s\n' "Automatic rollback symlink restoration failed with status $cs_rollback_status." >&2
+		return "$cs_rollback_status"
+	fi
+	configure_runtime_compatibility "$cs_previous_classroom_analytics_service_enabled" \
+		|| cs_rollback_status=$?
+	if (( cs_rollback_status != 0 )); then
+		printf '%s\n' "Automatic rollback runtime compatibility failed with status $cs_rollback_status." >&2
 		return "$cs_rollback_status"
 	fi
 	systemctl daemon-reload || cs_rollback_status=$?
@@ -425,6 +473,11 @@ fail_activation() {
 }
 
 cs_activation_status=0
+assert_release_listener_compatibility \
+	"$cs_previous_version" \
+	"$cs_previous_revision" \
+	"$cs_previous_classroom_analytics_service_enabled" \
+	|| { printf '%s\n' "The rollback target is incompatible with the dedicated listener transition." >&2; exit 1; }
 nginx -t || cs_activation_status=$?
 if (( cs_activation_status != 0 )); then
 	printf '%s\n' "Nginx configuration validation failed with status $cs_activation_status; the current release was not changed." >&2
@@ -433,6 +486,11 @@ fi
 atomic_link "$cs_final_release" "$cs_current_link" || cs_activation_status=$?
 if (( cs_activation_status != 0 )); then
 	fail_activation "Candidate symlink activation failed" "$cs_activation_status"
+fi
+configure_runtime_compatibility "${CLASSROOM_ANALYTICS_SERVICE_ENABLED:-false}" \
+	|| cs_activation_status=$?
+if (( cs_activation_status != 0 )); then
+	fail_activation "Candidate runtime compatibility failed" "$cs_activation_status"
 fi
 systemctl daemon-reload || cs_activation_status=$?
 if (( cs_activation_status != 0 )); then

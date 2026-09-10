@@ -337,7 +337,7 @@ async function main() {
 	app.use(apiNotFound);
 
 	const PORT = Number(env.PORT || 3008);
-	const HOST = env.HOST || env.BACKEND_HOST || "127.0.0.1";
+	const HOST = env.HOST || env.BACKEND_HOST || "127.0.0.2";
 	const server = app.listen(PORT, HOST, () => console.log(`Server listening on http://${HOST}:${PORT}!`));
 	const stopPythonProjectTombstoneReconciler
 		= startPythonProjectTombstoneReconciler();

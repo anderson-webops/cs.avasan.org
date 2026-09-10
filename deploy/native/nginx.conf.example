@@ -79,7 +79,7 @@ server {
 	location ^~ /api/ {
 		error_page 404 = @cs_avasan_api_not_found;
 		if ($cs_avasan_analytics_service_public_path) { return 404; }
-		proxy_pass http://127.0.0.1:3008/;
+		proxy_pass http://127.0.0.2:3008/;
 		proxy_http_version 1.1;
 		proxy_intercept_errors off;
 		proxy_buffering off;

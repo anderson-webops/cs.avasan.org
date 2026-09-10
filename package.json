@@ -1,7 +1,7 @@
 {
 	"name": "classes-monorepo",
 	"type": "module",
-	"version": "2.7.124",
+	"version": "2.7.125",
 	"private": true,
 	"packageManager": "npm@11.16.0",
 	"engines": {
@@ -45,6 +45,7 @@
 		"up": "npm exec --yes -- taze major -I && npm run -w front-end up && npm run -w back-end up"
 	},
 	"overrides": {
+		"@vitest/mocker": "4.1.11",
 		"defu": "6.1.6",
 		"eslint-plugin-import": {
 			"minimatch": "^3.1.5"
@@ -91,6 +92,7 @@
 		"undici": "7.29.0",
 		"follow-redirects": "1.16.0",
 		"qs": "6.16.0",
+		"vitest": "4.1.11",
 		"@cypress/request": {
 			"uuid": "14.0.0",
 			"qs": "6.16.0"

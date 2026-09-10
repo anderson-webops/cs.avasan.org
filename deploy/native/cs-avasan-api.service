@@ -16,8 +16,8 @@ EnvironmentFile=/srv/cs.avasan.org/current/release.env
 # This keeps an atomic rollback coherent without copying runtime secrets.
 EnvironmentFile=/srv/cs.avasan.org/current/public-config.env
 Environment=NODE_ENV=production
-Environment=HOST=127.0.0.1
-Environment=BACKEND_HOST=127.0.0.1
+Environment=HOST=127.0.0.2
+Environment=BACKEND_HOST=127.0.0.2
 Environment=PORT=3008
 Environment=CLASSROOM_ORIGIN=https://cs.avasan.org
 Environment=CROSS_SITE=false

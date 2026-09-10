@@ -53,7 +53,7 @@ runtime-only key is never copied into the frontend, public environment, release
 manifest, configuration digest, command line, or logs. The native manifest
 records only whether the companion endpoint was configured, and deployment
 refuses configuration drift. Analytics must use the exact loopback URL
-`http://127.0.0.1:3008/classroom-analytics/summary`; public Nginx always returns
+`http://127.0.0.2:3008/classroom-analytics/summary`; public Nginx always returns
 JSON 404 for `/api/classroom-analytics/summary`. Leaving the key blank keeps the
 loopback endpoint at 404 too.
 
@@ -106,10 +106,11 @@ vhost already owns it rather than adding a second one here. It also opens
 loopback port 8080 only for the full release gate. Remove or stop the former CS container listener before
 activating this vhost; do not run native and Compose CS stacks together.
 
-Keep access logs disabled. The API binds only to `127.0.0.1:3008`; MongoDB and
+Keep access logs disabled. The API binds only to `127.0.0.2:3008`; MongoDB and
 the API must never be published directly to the Internet. The systemd unit is
 intentionally one process because deletion fencing and Pond Paddlers rooms are
-process-local.
+process-local. Do not bind CS to `127.0.0.1:3008`; that separate listener belongs
+to Classes and is not an Analytics fallback.
 
 ## Deploying a release
 
@@ -171,6 +172,15 @@ secrets. The API service verifies that coherence on every restart. Editing
 `api.env` alone does not activate a public feature; run the deployment script
 again after every approved privacy/feature change.
 
+The deployer also owns one narrowly named, non-secret systemd drop-in:
+`/etc/systemd/system/cs-avasan-api.service.d/90-cs-release-runtime-compatibility.conf`.
+It exists only to blank `CLASSROOM_ANALYTICS_SERVICE_KEY` while a release whose
+manifest has the companion disabled is active, and is removed when the selected
+release has the companion enabled. The scripts refuse to replace or remove an
+unrecognized file at that path. This keeps an automatic rollback coherent after
+the protected environment gains the key without copying, reading, or logging
+the value.
+
 After activation, run the public A and AAAA production workflow or equivalent
 external probes. Confirm `/release.json` and `/api/release` match the exact tag
 and commit, `/api/readyz` is ready, unknown page paths use the classroom 404,
@@ -202,6 +212,13 @@ is reported. Both links must remain absolute symlinks to
 distinct, structurally verified immutable releases throughout preflight;
 rollback refuses dangling, aliased, writable, identity-inconsistent, or
 out-of-tree targets.
+
+The listener transition recognizes only v2.7.124 at
+`8e3fd9eb953ec6b78a985a0ef0e8bf479c2ef245` as the legacy rollback contract.
+That release must have the companion disabled. Its smoke gate omits the private
+summary probe so it never sends a request or credential to the separate Classes
+listener on `127.0.0.1:3008`; all newer releases probe the dedicated CS listener
+on `127.0.0.2:3008`.
 
 ## Admin and retention operations
 

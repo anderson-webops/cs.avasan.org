@@ -6,6 +6,7 @@ export const CLASSROOM_ANALYTICS_SERVICE_HEADER
 	= "x-classroom-analytics-key";
 export const MIN_CLASSROOM_ANALYTICS_SERVICE_KEY_BYTES = 32;
 export const MAX_CLASSROOM_ANALYTICS_SERVICE_KEY_BYTES = 256;
+export const CLASSROOM_ANALYTICS_SERVICE_HOST = "127.0.0.2";
 const CLASSROOM_ANALYTICS_SERVICE_PATH = "/classroom-analytics/summary";
 
 function secretDigest(value: string): Buffer {
@@ -52,13 +53,13 @@ function isLoopbackAddress(value: string | undefined): boolean {
 
 function directLoopbackHost(req: Parameters<RequestHandler>[0]): string | null {
 	if (
-		req.socket.localAddress !== "127.0.0.1"
+		req.socket.localAddress !== CLASSROOM_ANALYTICS_SERVICE_HOST
 		|| !Number.isSafeInteger(req.socket.localPort)
 		|| (req.socket.localPort ?? 0) <= 0
 	) {
 		return null;
 	}
-	return `127.0.0.1:${req.socket.localPort}`;
+	return `${CLASSROOM_ANALYTICS_SERVICE_HOST}:${req.socket.localPort}`;
 }
 
 /**

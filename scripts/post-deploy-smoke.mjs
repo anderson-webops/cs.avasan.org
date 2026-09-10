@@ -430,7 +430,7 @@ async function request(path, init = {}) {
 
 async function internalClassroomAnalyticsRequest(path, init = {}) {
 	assertion(
-		classroomAnalyticsInternalOrigin === "http://127.0.0.1:3008",
+		classroomAnalyticsInternalOrigin === "http://127.0.0.2:3008",
 		"CS_CLASSROOM_ANALYTICS_INTERNAL_ORIGIN must be exact CS API loopback."
 	);
 	return await smokeRequest(

@@ -148,8 +148,10 @@ the same coarse summary already available to Julio in CS Admin; it does not
 enable collection, accounts, OAuth, or any record mutation. CS exposes the
 service route only while the key is configured, rejects cookies,
 `Authorization`, request bodies, unexpected methods, and query fields, and
-authenticates before any database aggregation. It binds to the API's existing
-host-loopback listener; public Nginx always returns JSON 404 for the analogous
+authenticates before any database aggregation. It binds to the dedicated CS
+loopback listener at `127.0.0.2:3008`; the separate Classes listener at
+`127.0.0.1:3008` is never a fallback. Public Nginx always returns JSON 404 for
+the analogous
 `/api/classroom-analytics/summary` path. The release manifest and digest
 record only a configured boolean and never the key. Configure the matching
 Analytics secret and rotate both values together without placing either value

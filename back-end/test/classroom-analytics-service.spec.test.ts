@@ -1,14 +1,36 @@
 import type { Server } from "node:http";
 import express from "express";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import {
 	createClassroomAnalyticsServiceClientLimiter,
 	createClassroomAnalyticsServiceGlobalLimiter
 } from "../src/middleware/rateLimiters.js";
 import {
+	CLASSROOM_ANALYTICS_SERVICE_HOST,
 	readClassroomAnalyticsServiceKey,
-	requireClassroomAnalyticsService
+	requireClassroomAnalyticsService,
+	requireExactClassroomAnalyticsServiceTarget
 } from "../src/security/classroomAnalyticsService.js";
+
+function checkExactTarget(localAddress: string, host: string) {
+	const next = vi.fn();
+	const response = {
+		json: vi.fn(),
+		set: vi.fn(),
+		status: vi.fn()
+	};
+	response.status.mockReturnValue(response);
+	requireExactClassroomAnalyticsServiceTarget()(
+		{
+			headers: { host },
+			originalUrl: "/classroom-analytics/summary?days=7",
+			socket: { localAddress, localPort: 3008 }
+		} as never,
+		response as never,
+		next
+	);
+	return { next, response };
+}
 
 async function withServer(
 	middleware: express.RequestHandler[],
@@ -35,6 +57,25 @@ async function withServer(
 }
 
 describe("classroom analytics companion authentication", () => {
+	it("accepts only the dedicated CS listener and its exact Host", () => {
+		const accepted = checkExactTarget(
+			CLASSROOM_ANALYTICS_SERVICE_HOST,
+			`${CLASSROOM_ANALYTICS_SERVICE_HOST}:3008`
+		);
+		expect(accepted.next).toHaveBeenCalledOnce();
+
+		for (const [localAddress, host] of [
+			["127.0.0.1", "127.0.0.1:3008"],
+			[CLASSROOM_ANALYTICS_SERVICE_HOST, "127.0.0.1:3008"],
+			[CLASSROOM_ANALYTICS_SERVICE_HOST, "cs.avasan.org"]
+		] as const) {
+			const denied = checkExactTarget(localAddress, host);
+			expect(denied.next).not.toHaveBeenCalled();
+			expect(denied.response.status).toHaveBeenCalledWith(404);
+			expect(denied.response.json).toHaveBeenCalledWith({ message: "Not found" });
+		}
+	});
+
 	it("accepts only a bounded explicit service key", () => {
 		expect(readClassroomAnalyticsServiceKey(undefined)).toBeNull();
 		expect(readClassroomAnalyticsServiceKey("")).toBeNull();
