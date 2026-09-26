@@ -10,7 +10,7 @@ const expectedCatalog: Array<{
 	loadedName?: string;
 	name: string;
 }> = [
-	{ id: "scratch-level-1", name: "Scratch Level 1" },
+	{ id: "scratch-level-1", name: "Scratch Level 1: Classroom Edition" },
 	{ id: "scratch-level-2", name: "Scratch Level 2" },
 	{
 		id: "python-level-1",

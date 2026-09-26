@@ -5,6 +5,7 @@ import process from "node:process";
 import { fileURLToPath } from "node:url";
 import { unheadVueComposablesImports } from "@unhead/vue";
 import Vue from "@vitejs/plugin-vue";
+import { scratchEditorPlugin } from "./scripts/scratch/plugin.mts";
 
 import Unocss from "unocss/vite";
 import AutoImport from "unplugin-auto-import/vite";
@@ -36,9 +37,14 @@ function buildIdentity() {
 		}
 	};
 	const revision =
-		process.env.CLASSES_BUILD_REVISION || process.env.SOURCE_REVISION || git(["rev-parse", "HEAD"]);
+		process.env.CLASSES_BUILD_REVISION ||
+		process.env.SOURCE_REVISION ||
+		git(["rev-parse", "HEAD"]);
 	const release =
-		process.env.CLASSES_BUILD_RELEASE || (process.env.CS_RELEASE_VERSION ? `v${process.env.CS_RELEASE_VERSION}` : "") ||
+		process.env.CLASSES_BUILD_RELEASE ||
+		(process.env.CS_RELEASE_VERSION
+			? `v${process.env.CS_RELEASE_VERSION}`
+			: "") ||
 		(git(["status", "--porcelain", "--untracked-files=no"])
 			? "unreleased"
 			: git(["describe", "--exact-match", "--tags", "HEAD"]));
@@ -58,6 +64,7 @@ export default defineConfig(({ command }) => ({
 	},
 
 	plugins: [
+		scratchEditorPlugin(),
 		/* 1️⃣  Router (must run before macros/layouts) */
 		VueRouter({
 			extensions: [".vue"],

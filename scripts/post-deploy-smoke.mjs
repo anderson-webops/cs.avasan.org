@@ -58,9 +58,11 @@ const courseContentSecurityPolicy = Object.freeze({
 });
 const codeIdeContentSecurityPolicy = Object.freeze({
 	...standardContentSecurityPolicy,
+	"img-src": ["'self'", "blob:", "data:", "https://assets.scratch.mit.edu"],
 	"connect-src": [
 		"'self'",
 		"https://api.github.com",
+		"https://assets.scratch.mit.edu",
 		"https://cdn.jsdelivr.net",
 		"https://files.pythonhosted.org",
 		"https://pypi.org",

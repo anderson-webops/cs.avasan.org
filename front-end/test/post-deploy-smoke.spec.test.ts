@@ -276,7 +276,7 @@ describe("production smoke feature expectations", () => {
 	});
 
 	it("accepts only the exact standard, course, and IDE security policies", () => {
-		expect(nginxPolicies).toHaveLength(6);
+		expect(nginxPolicies).toHaveLength(7);
 		expect(new Set(nginxPolicies).size).toBe(3);
 		expect(netlifyPolicies).toHaveLength(5);
 		expect(new Set(netlifyPolicies)).toEqual(new Set(nginxPolicies));

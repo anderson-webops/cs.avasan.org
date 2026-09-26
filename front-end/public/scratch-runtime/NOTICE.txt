@@ -1,0 +1,31 @@
+Scratch classroom editor
+
+This site serves the @scratch/scratch-gui 15.1.1 standalone distribution.
+The reproducible preparation script changes only its two webpack asset bases
+from / to /scratch-runtime/vendor/ for this site. The patch and adapter source
+are included in the site source repository linked below.
+Scratch GUI and the Scratch editor monorepo are licensed AGPL-3.0-only.
+The local adapter (editor.js), frame host, and classroom generator are original
+site work, available in this site's source repository under the same AGPL-3.0
+license for this integration. Other parts of the site retain their own licenses.
+
+Matching upstream corresponding source, build instructions and dependency locks:
+https://github.com/scratchfoundation/scratch-editor/tree/99e4c3faa72b29b67b5e35d75ea72260737b5f6b
+https://github.com/scratchfoundation/scratch-editor/archive/99e4c3faa72b29b67b5e35d75ea72260737b5f6b.tar.gz
+
+Exact distributed package (includes GUI source and build metadata):
+https://registry.npmjs.org/@scratch/scratch-gui/-/scratch-gui-15.1.1.tgz
+SHA256: b00073c1321daef2beb9f8d9bf0750654f85811f57b6f9203221d1dbd9ec1258
+
+The runtime/vendor/LICENSE, TRADEMARK and *.LICENSE.txt files are retained
+alongside the distribution. See vendor/LICENSE relative to this document.
+
+Site integration source:
+https://github.com/anderson-webops/classes.jacobdanderson.net
+Paths: front-end/scripts/scratch, front-end/public/scratch-runtime/editor.js,
+front-end/src/modules/scratch, front-end/src/components/ScratchIdeWorkspace.vue.
+
+Scratch is a project of the Scratch Foundation. This independent classroom
+integration is not affiliated with, sponsored by, or endorsed by the Foundation.
+Classroom robot/accessory/backdrop artwork and .sb3 starter projects are original.
+No third-party student work, transcripts, or proprietary Juni projects are included.

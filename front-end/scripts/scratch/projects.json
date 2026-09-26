@@ -1,0 +1,110 @@
+[
+	{
+		"id": "two-arrows",
+		"name": "Two Arrows",
+		"unit": "Events and movement",
+		"concept": "An event starts one action.",
+		"normal": "Run the four-block example. Predict what each arrow does, then change the distance from 10 to 20.",
+		"hard": "Make left and right move different distances and explain the result.",
+		"check": "Press each arrow separately and explain the event and action blocks."
+	},
+	{
+		"id": "third-direction",
+		"name": "Add a Third Direction",
+		"unit": "Events and movement",
+		"concept": "Reuse a familiar pattern for a new input.",
+		"normal": "Left and right already work. Add an up-arrow event that changes y by 10.",
+		"hard": "Add down movement and a Space event that returns the sprite to the center.",
+		"check": "Left and right change x; up and down change y."
+	},
+	{
+		"id": "click-reactions",
+		"name": "Click Reactions",
+		"unit": "Events and movement",
+		"concept": "Different events can control different sprites.",
+		"normal": "Click the blue robot to see its color change. Give the orange robot its own click reaction.",
+		"hard": "Add a key event that changes size, then a green-flag script that resets size and effects.",
+		"check": "Each robot reacts to its own click without changing the other robot."
+	},
+	{
+		"id": "dress-up",
+		"name": "Robot Dress-Up",
+		"unit": "Position and reset",
+		"concept": "A reset restores the starting scene.",
+		"normal": "The hat is a worked example. Complete the badge's green-flag reset and click-to-glide scripts. Drag it first, read x and y, then add the motion block.",
+		"hard": "Complete the boots too. Use front/back layers deliberately and compare go to with glide.",
+		"check": "Dress the robot, press the flag, and confirm every accessory returns to its starting position."
+	},
+	{
+		"id": "animate-word",
+		"name": "Animate a Word",
+		"unit": "Position and reset",
+		"concept": "Events let each letter respond independently.",
+		"normal": "Click C to see an example. Add a click animation to O while keeping its green-flag reset.",
+		"hard": "Animate D and E differently, or draw your own word using costumes.",
+		"check": "Each completed letter responds to a click and returns to its original direction on reset."
+	},
+	{
+		"id": "scene-switch",
+		"name": "Day and Night",
+		"unit": "Dialogue and scenes",
+		"concept": "The stage can respond to events too.",
+		"normal": "Space already changes the backdrop. Add a green-flag event that switches to Day.",
+		"hard": "Make a sprite react when Night starts, using the backdrop event.",
+		"check": "Change the scene several times, then restart. Day should always be first."
+	},
+	{
+		"id": "conversation",
+		"name": "Robot Conversation",
+		"unit": "Dialogue and scenes",
+		"concept": "Broadcast messages connect separate scripts.",
+		"normal": "The blue robot introduces itself and broadcasts reply. Add a receive-reply script to the orange robot and make it say a response.",
+		"hard": "Send another message for a third turn without overlapping speech.",
+		"check": "The second robot answers only after the first robot finishes."
+	},
+	{
+		"id": "dance-loop",
+		"name": "Repeat Dance",
+		"unit": "Loops and animation",
+		"concept": "Repeat groups a fixed number of actions.",
+		"normal": "The blue robot already dances with a repeat loop. Give the orange robot its own repeat dance.",
+		"hard": "Add costume changes and test how wait changes the rhythm.",
+		"check": "Count the turns and predict the final direction before running."
+	},
+	{
+		"id": "patrol",
+		"name": "Edge Patrol",
+		"unit": "Loops and animation",
+		"concept": "Forever keeps a behavior running until Stop.",
+		"normal": "A robot already moves and bounces. Add a short wait inside its forever loop so its patrol is easier to watch.",
+		"hard": "Add a second patrolling robot or switch costumes inside the loop.",
+		"check": "Use Stop to end the patrol, and the flag to restart from the center."
+	},
+	{
+		"id": "maze-reset",
+		"name": "Maze Checkpoint",
+		"unit": "Conditions and decisions",
+		"concept": "If tests whether a condition is true.",
+		"normal": "The arrows and wall check work. Add a green-flag go-to script returning the robot to (-180, -120). Reach the gold goal.",
+		"hard": "Add a touching-Goal condition that says a success message. Combine two conditions with and or or.",
+		"check": "Touch the purple wall to return to the start; restarting must return there too."
+	},
+	{
+		"id": "click-score",
+		"name": "Click and Count",
+		"unit": "Variables and games",
+		"concept": "A variable remembers a changing value.",
+		"normal": "Blue adds one point when clicked. Make orange add one point too, using the same Score variable.",
+		"hard": "Make one sprite worth two points and explain why Score resets to zero on the flag.",
+		"check": "Press the flag, click blue twice and orange once, and check your predicted score."
+	},
+	{
+		"id": "collect-game",
+		"name": "Build Your Collection Game",
+		"unit": "Variables and games",
+		"concept": "Combine events, repetition, conditions, and variables.",
+		"normal": "The player moves and Score resets. Inside the token's touching-Player condition, add change Score by 1 before it goes to a random position.",
+		"hard": "Add a win condition, a second item, or another scene. Sketch the rule first and keep a working checkpoint.",
+		"check": "Collect three tokens, check the score, then restart and confirm the player and score reset."
+	}
+]

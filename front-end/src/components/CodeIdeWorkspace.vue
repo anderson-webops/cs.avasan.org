@@ -8304,6 +8304,7 @@ onBeforeUnmount(() => {
 	releaseLoadedPythonRuntimeCallbacks();
 	resizeObserver?.disconnect();
 });
+defineExpose({ stop: stopCurrentProject });
 </script>
 
 <template>
