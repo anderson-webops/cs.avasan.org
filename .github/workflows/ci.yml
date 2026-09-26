@@ -235,6 +235,18 @@ jobs:
             - name: Build front-end
               run: npm run -w front-end build
 
+            - name: Verify Pygame surfaces in the browser IDE
+              run: node --test test/pygame-browser-runtime.test.mjs
+
+            - name: Verify private IDE diagnostics in the browser
+              run: node --test test/ide-diagnostics-browser.test.mjs
+
+            - name: Verify console scrolling and editor argument warnings
+              run: node --test test/ide-console-browser.test.mjs
+
+            - name: Verify Turtle manual updates and editor search contrast
+              run: node --test test/turtle-tracer-browser.test.mjs
+
             - name: Cypress
               uses: cypress-io/github-action@fa4a118725a8f001170d49631ea89e5d66fee626 # v7.4.1
               with:

@@ -1,3 +1,5 @@
+import { CompletionContext } from "@codemirror/autocomplete";
+import type { PythonIdeMode } from "../src/modules/pythonIde";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { EditorSelection, EditorState } from "@codemirror/state";
@@ -17,6 +19,43 @@ import {
 
 function sourceFile(path: string) {
 	return readFileSync(resolve(__dirname, path), "utf8");
+}
+
+it("suggests Pygame surfaces and their drawing methods in game projects", async () => {
+	expect(await autocompleteLabelsForDoc("pgzero", "pygame.Su")).toContain(
+		"Surface"
+	);
+	expect(
+		await autocompleteLabelsForDoc("pgzero", "pygame.draw.re")
+	).toContain("rect");
+	expect(
+		await autocompleteLabelsForDoc(
+			"pgzero",
+			"card = pygame.Surface((40, 20))\ncard.fi"
+		)
+	).toContain("fill");
+	expect(
+		await autocompleteLabelsForDoc(
+			"pgzero",
+			"card = pygame.Surface((40, 20))\ncard.bl"
+		)
+	).toContain("blit");
+	expect(
+		pythonIdeCompletionsForMode("pgzero", "pygame").map(
+			option => option.label
+		)
+	).not.toContain("display");
+});
+
+async function autocompleteLabelsForDoc(mode: PythonIdeMode, doc: string) {
+	const state = EditorState.create({
+		doc,
+		extensions: createPythonCodeMirrorExtensions({ mode })
+	});
+	const result = await pythonIdeCompletionSource(mode)(
+		new CompletionContext(state, doc.length, true)
+	);
+	return result?.options.map(option => option.label) ?? [];
 }
 
 function completionMatchBefore(doc: string, pos: number, expression: RegExp) {
@@ -74,9 +113,7 @@ describe("IDE CodeMirror editor", () => {
 	});
 
 	it("does not import the heavy Pyodide runtime before running code", () => {
-		const pageSource = sourceFile(
-			"../src/components/CodeIdeWorkspace.vue"
-		);
+		const pageSource = sourceFile("../src/components/CodeIdeWorkspace.vue");
 		const runtimeSource = sourceFile("../src/modules/pythonIdeRuntime.ts");
 		const hintSource = sourceFile(
 			"../src/modules/pythonIdeRuntimeHints.ts"
@@ -107,9 +144,7 @@ describe("IDE CodeMirror editor", () => {
 	});
 
 	it("mounts CodeMirror instead of the old textarea highlight overlay", () => {
-		const pageSource = sourceFile(
-			"../src/components/CodeIdeWorkspace.vue"
-		);
+		const pageSource = sourceFile("../src/components/CodeIdeWorkspace.vue");
 
 		expect(pageSource).toContain("createPythonCodeMirrorExtensions");
 		expect(pageSource).toContain("new EditorView");
@@ -121,9 +156,7 @@ describe("IDE CodeMirror editor", () => {
 	});
 
 	it("preserves CodeMirror state, cursor, scroll, and history per IDE file", () => {
-		const pageSource = sourceFile(
-			"../src/components/CodeIdeWorkspace.vue"
-		);
+		const pageSource = sourceFile("../src/components/CodeIdeWorkspace.vue");
 		const resetStart = pageSource.indexOf("async function resetCodeEditor");
 		const resetSource = pageSource.slice(
 			resetStart,
@@ -143,16 +176,18 @@ describe("IDE CodeMirror editor", () => {
 		expect(pageSource).toContain("function restoreCodeEditorViewState");
 		expect(pageSource).toContain("function restoreCodeEditorScroll");
 		expect(pageSource).toContain("function deleteCodeEditorStateForFile");
-		expect(pageSource).toContain("function deleteCodeEditorStateForProject");
+		expect(pageSource).toContain(
+			"function deleteCodeEditorStateForProject"
+		);
 		expect(pageSource).toContain("codeEditorView.scrollDOM.scrollTop");
-		expect(pageSource).toContain("view.scrollDOM.scrollTop = state.scrollTop");
+		expect(pageSource).toContain(
+			"view.scrollDOM.scrollTop = state.scrollTop"
+		);
 		expect(pageSource).toContain("clampCodeEditorPosition");
 		expect(pageSource).toContain(
 			"codeEditorViewStates.set(nextKey, state);"
 		);
-		expect(pageSource).toContain(
-			"activeCodeEditorViewStateKey = nextKey;"
-		);
+		expect(pageSource).toContain("activeCodeEditorViewStateKey = nextKey;");
 		expect(pageSource).toContain('import("@codemirror/state")');
 		expect(pageSource).toContain(
 			"savedState?.doc.toString() === activeFileContent.value"
@@ -161,21 +196,23 @@ describe("IDE CodeMirror editor", () => {
 		expect(pageSource).toContain("restoreCodeEditorScroll(");
 		expect(resetSource).toContain("saveCodeEditorViewState();");
 		expect(resetSource).toContain("codeEditorView?.destroy();");
-		expect(resetSource).toContain("const viewStateKey = codeEditorViewStateKey();");
+		expect(resetSource).toContain(
+			"const viewStateKey = codeEditorViewStateKey();"
+		);
 		expect(resetSource).toContain("restoreCodeEditorViewState(");
 	});
 
 	it("enables Python parsing and typical IDE editing behavior", () => {
 		const editorSource = sourceFile("../src/modules/pythonCodeMirror.ts");
-		const pageSource = sourceFile(
-			"../src/components/CodeIdeWorkspace.vue"
-		);
+		const pageSource = sourceFile("../src/components/CodeIdeWorkspace.vue");
 
 		expect(editorSource).toContain("pythonEditorBaseSetup");
 		expect(editorSource).toContain("lineNumbers()");
 		expect(editorSource).toContain("history()");
 		expect(editorSource).toContain("autocompletion({");
-		expect(editorSource).toContain("activateOnTyping: recommendationsEnabled");
+		expect(editorSource).toContain(
+			"activateOnTyping: recommendationsEnabled"
+		);
 		expect(editorSource).toContain("snippetCompletion");
 		expect(editorSource).toContain("highlightSelectionMatches()");
 		expect(editorSource).not.toContain('from "codemirror"');
@@ -214,9 +251,15 @@ describe("IDE CodeMirror editor", () => {
 
 		expect(editorSource).toContain("cm-bracket-pair-1");
 		expect(editorSource).toContain("syntax-bracket-pair-6");
-		expect(editorSource).not.toContain('tag: tags.bracket, color: "var(--syntax-bracket)", fontWeight');
-		expect(editorSource).not.toContain("tag: tags.angleBracket,\n\t\tcolor: \"var(--syntax-bracket)\",\n\t\tfontWeight");
-		expect(editorSource).not.toContain('".cm-bracket-pair": {\n\t\t\tfontWeight');
+		expect(editorSource).not.toContain(
+			'tag: tags.bracket, color: "var(--syntax-bracket)", fontWeight'
+		);
+		expect(editorSource).not.toContain(
+			'tag: tags.angleBracket,\n\t\tcolor: "var(--syntax-bracket)",\n\t\tfontWeight'
+		);
+		expect(editorSource).not.toContain(
+			'".cm-bracket-pair": {\n\t\t\tfontWeight'
+		);
 	});
 
 	it("configures CodeMirror's native indentation unit to four spaces", () => {
@@ -233,12 +276,12 @@ describe("IDE CodeMirror editor", () => {
 	});
 
 	it("surfaces the complete editor shortcut help in the IDE chrome", () => {
-		const pageSource = sourceFile(
-			"../src/components/CodeIdeWorkspace.vue"
-		);
+		const pageSource = sourceFile("../src/components/CodeIdeWorkspace.vue");
 
 		expect(pageSource).toContain('class="editor-shortcuts"');
-		expect(pageSource).toContain("Cmd/Ctrl+Enter runs the project.");
+		expect(pageSource.replace(/\s+/g, " ")).toContain(
+			"Cmd/Ctrl+Enter or F5 runs or stops the project."
+		);
 		expect(pageSource).toContain("Cmd/Ctrl+S saves the project.");
 		expect(pageSource).toContain("Cmd/Ctrl+F opens search.");
 		expect(pageSource).toContain("Tab indents; Shift+Tab dedents.");
@@ -247,9 +290,7 @@ describe("IDE CodeMirror editor", () => {
 	});
 
 	it("offers the complete IDE workspace and starter menus while keeping runtime completions", () => {
-		const pageSource = sourceFile(
-			"../src/components/CodeIdeWorkspace.vue"
-		);
+		const pageSource = sourceFile("../src/components/CodeIdeWorkspace.vue");
 		const presetSource = pageSource.slice(
 			pageSource.indexOf("const codeIdeWorkspacePresetGroups"),
 			pageSource.indexOf("const codeIdeWorkspacePresets")
@@ -463,7 +504,7 @@ describe("IDE CodeMirror editor", () => {
 		const findSnippet = (label: string, completions = pythonCompletions) =>
 			completions.find(
 				option => option.label === label && option.type === "snippet"
-		);
+			);
 
 		expect(pythonCompletions.map(option => option.label)).toEqual(
 			expect.arrayContaining(["main_guard"])
@@ -734,12 +775,12 @@ describe("IDE CodeMirror editor", () => {
 		expect(isPythonBracketPairIgnoredAt(state, doc.indexOf("["))).toBe(
 			true
 		);
-		expect(
-			isPythonBracketPairIgnoredAt(state, doc.lastIndexOf("["))
-		).toBe(false);
-		expect(
-			isPythonBracketPairIgnoredAt(state, doc.lastIndexOf("]"))
-		).toBe(false);
+		expect(isPythonBracketPairIgnoredAt(state, doc.lastIndexOf("["))).toBe(
+			false
+		);
+		expect(isPythonBracketPairIgnoredAt(state, doc.lastIndexOf("]"))).toBe(
+			false
+		);
 	});
 
 	it("skips existing auto-inserted closing tokens instead of duplicating them", () => {

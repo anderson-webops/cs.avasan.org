@@ -1,6 +1,6 @@
 import type { Completion } from "@codemirror/autocomplete";
 import type { Diagnostic } from "@codemirror/lint";
-import type { Extension } from "@codemirror/state";
+import type { Extension, StateCommand } from "@codemirror/state";
 import type { DecorationSet, ViewUpdate } from "@codemirror/view";
 import type { PythonIdeMode } from "@/modules/pythonIde";
 import {
@@ -15,6 +15,7 @@ import {
 	defaultKeymap,
 	history,
 	historyKeymap,
+	indentMore,
 	indentWithTab
 } from "@codemirror/commands";
 import { java, javaLanguage } from "@codemirror/lang-java";
@@ -56,6 +57,7 @@ import {
 	ViewPlugin
 } from "@codemirror/view";
 import { tags } from "@lezer/highlight";
+import { codeArgumentDiagnostics } from "@/modules/codeArgumentDiagnostics";
 
 interface PythonCodeMirrorOptions {
 	onChange: (content: string) => void;
@@ -420,6 +422,7 @@ const turtleRuntimeCompletions = [
 ];
 
 const pgzeroRuntimeCompletions = [
+	completion("pygame", "namespace", "Surface, Rect and drawing helpers", 60),
 	completion("pgzrun", "namespace", "run a PyGame Zero project", 60),
 	completion("Actor", "class", "sprite with image, position, and collision"),
 	completion("Animation", "class", "running animation handle"),
@@ -625,6 +628,54 @@ const turtleMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
 };
 
 const pgzeroMemberCompletions: Record<string, PythonIdeCompletionOption[]> = {
+	pygame: [
+		completion(
+			"Surface",
+			"class",
+			"Surface((width, height), flags=0): create an image"
+		),
+		completion("SRCALPHA", "constant", "enable per-pixel transparency"),
+		completion("Rect", "class", "rectangle for collision and layout"),
+		completion("draw", "namespace", "draw shapes onto a Surface"),
+		completion("transform", "namespace", "scale or flip a Surface")
+	],
+	"pygame.Surface": [
+		...imageSurfaceMemberCompletions,
+		...[
+			["fill", "fill(color, rect=None): paint the surface"],
+			["blit", "blit(source, dest, area=None): draw another Surface"],
+			["blits", "draw several Surfaces"],
+			["copy", "make an independent copy"],
+			["convert", "copy without pixel transparency"],
+			["convert_alpha", "copy with pixel transparency"],
+			["set_alpha", "set overall opacity from 0 to 255"],
+			["get_alpha", "read overall opacity"],
+			["set_colorkey", "choose a transparent color"],
+			["get_colorkey", "read the transparent color"],
+			["set_clip", "limit the drawing area"],
+			["get_clip", "read the drawing area"],
+			["set_at", "set one pixel's color"],
+			["get_at", "read one pixel's RGBA color"]
+		].map(([label, detail]) => completion(label!, "method", detail!))
+	],
+	"pygame.draw": [
+		"rect",
+		"circle",
+		"ellipse",
+		"line",
+		"lines",
+		"polygon"
+	].map(label =>
+		completion(
+			label,
+			"method",
+			`${label}(surface, color, ...): draw onto a Surface`
+		)
+	),
+	"pygame.transform": [
+		completion("scale", "method", "scale(surface, (width, height))"),
+		completion("flip", "method", "flip(surface, flip_x, flip_y)")
+	],
 	actor: actorMemberCompletions(),
 	bounds: rectMemberCompletions(),
 	enemy: actorMemberCompletions(),
@@ -916,6 +967,9 @@ const pythonEditorTheme = EditorView.theme({
 		padding: "0.35rem 0.55rem"
 	},
 	".cm-panel.cm-search button": {
+		// CodeMirror's default light gradient otherwise covers our theme color.
+		backgroundImage: "none",
+		textShadow: "none",
 		minHeight: "2rem",
 		border: "1px solid var(--color-border)",
 		borderRadius: "0.65rem",
@@ -1070,6 +1124,14 @@ function pythonEditorActionKeymap(options: PythonCodeMirrorOptions) {
 		},
 		{
 			key: "Mod-Enter",
+			preventDefault: true,
+			run() {
+				options.onRun?.();
+				return true;
+			}
+		},
+		{
+			key: "F5",
 			preventDefault: true,
 			run() {
 				options.onRun?.();
@@ -1491,7 +1553,21 @@ export function pythonIdeCompletionSource(
 				);
 			}
 
-			const options = pythonIdeCompletionsForMode(mode, receiver);
+			// Recognize named surfaces, including a pygame import alias, for call tips.
+			const sourceBeforeCursor = context.state.doc.sliceString(
+				0,
+				word.from
+			);
+			const surfaceAssignment =
+				mode === "pgzero" &&
+				pythonIdentifierRegex.test(receiver) &&
+				new RegExp(
+					String.raw`(?:^|\n)\s*${receiver}\s*=\s*(?:\w+\.)?Surface\s*\(`
+				).test(sourceBeforeCursor);
+			const options = pythonIdeCompletionsForMode(
+				mode,
+				surfaceAssignment ? "pygame.Surface" : receiver
+			);
 			if (!options.length) return null;
 			return {
 				from: completionFrom,
@@ -2883,6 +2959,7 @@ const pythonEditorBaseSetup: Extension[] = [
 
 const pythonEditorDiagnosticsSetup: Extension[] = [
 	linter(view => pythonSyntaxDiagnostics(view.state)),
+	linter(view => codeArgumentDiagnostics(view.state, "python")),
 	pythonRuntimeDiagnosticsField,
 	linter(view => view.state.field(pythonRuntimeDiagnosticsField), {
 		needsRefresh(update) {
@@ -2895,8 +2972,29 @@ const pythonEditorDiagnosticsSetup: Extension[] = [
 	})
 ];
 const javaEditorDiagnosticsSetup: Extension[] = [
-	linter(view => javaSyntaxDiagnostics(view.state))
+	linter(view => javaSyntaxDiagnostics(view.state)),
+	linter(view => codeArgumentDiagnostics(view.state, "java"))
 ];
+
+// Match ordinary typing when there is only a caret. Use the configured
+// indentation text so Python code does not acquire mixed tabs and spaces.
+export const insertEditorIndent: StateCommand = ({ state, dispatch }) => {
+	if (state.selection.ranges.some(range => !range.empty))
+		return indentMore({ state, dispatch });
+	if (state.readOnly) return false;
+	dispatch(
+		state.update(state.replaceSelection(state.facet(indentUnit)), {
+			scrollIntoView: true,
+			userEvent: "input"
+		})
+	);
+	return true;
+};
+
+export const codeEditorTabBinding = {
+	...indentWithTab,
+	run: insertEditorIndent
+};
 
 export function createPythonCodeMirrorExtensions(
 	options: PythonCodeMirrorOptions
@@ -2942,7 +3040,7 @@ export function createPythonCodeMirrorExtensions(
 		Prec.highest(closingTokenSkipKeymap),
 		Prec.highest(pythonNewlineKeymap),
 		Prec.highest(pythonEditorActionKeymap(options)),
-		Prec.highest(keymap.of([indentWithTab])),
+		Prec.highest(keymap.of([codeEditorTabBinding])),
 		Prec.high(wrapSelectionKeymap),
 		lineWrappingEnabled ? EditorView.lineWrapping : [],
 		EditorView.contentAttributes.of({

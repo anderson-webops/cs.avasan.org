@@ -22,6 +22,8 @@ declare module 'vue' {
     CourseExplorer: typeof import('./components/CourseExplorer.vue')['default']
     CrosswalkCrittersGame: typeof import('./components/games/CrosswalkCrittersGame.vue')['default']
     GameCardThumbnail: typeof import('./components/games/GameCardThumbnail.vue')['default']
+    IdeDiagnosticsControls: typeof import('./components/IdeDiagnosticsControls.vue')['default']
+    IdeReportInbox: typeof import('./components/IdeReportInbox.vue')['default']
     LazyMarkdownContent: typeof import('./components/LazyMarkdownContent.vue')['default']
     MachineWorkshopGame: typeof import('./components/games/MachineWorkshopGame.vue')['default']
     PondPaddlersAdmin: typeof import('./components/PondPaddlersAdmin.vue')['default']

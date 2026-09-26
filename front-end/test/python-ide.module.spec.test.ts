@@ -1586,7 +1586,7 @@ screen.listen()
 		expect(pageSource).toContain("const turtleMarkerHaloLineWidth = 4");
 		expect(pageSource).toContain("const turtleMarkerStrokeLineWidth = 1.2");
 		expect(pageSource).toContain(
-			"context.strokeStyle = turtleState.background"
+			"turtleManualFrame?.background ?? turtleState.background"
 		);
 		expect(pageSource).toContain(
 			"context.lineWidth = turtleMarkerHaloLineWidth"
@@ -1892,10 +1892,10 @@ screen.listen()
 		);
 		expect(renderCommandSource).not.toContain("getBoundingClientRect()");
 		expect(renderSceneSource).toContain(
-			"const toCanvas = createCanvasCoordinateMapper(rect);"
+			"frame ? frame.worldCoordinates : turtleWorldCoordinates"
 		);
 		expect(renderSceneSource).toContain(
-			"renderTurtleCommand(context, command, toCanvas);"
+			"renderTurtleCommand(context, command, toCanvas, 1, undefined, shapes);"
 		);
 		expect(renderSceneSource).toContain(
 			"drawTurtleMarker(context, markerPose, toCanvas);"
@@ -1960,9 +1960,7 @@ screen.listen()
 		expect(pageSource).toContain("form-action 'none';");
 		expect(pageSource).toContain('http-equiv="Content-Security-Policy"');
 		expect(iframeSource).toContain('v-else-if="artifact.srcdoc"');
-		expect(iframeSource).toContain(
-			':csp="runtimeArtifactContentSecurityPolicy"'
-		);
+		expect(iframeSource).toMatch(/:csp="\s*runtimeArtifactContentSecurityPolicy\s*"/);
 		expect(iframeSource).toContain("credentialless");
 		expect(iframeSource).toContain('referrerpolicy="no-referrer"');
 		expect(iframeSource).toContain('sandbox="allow-scripts"');
@@ -2446,8 +2444,9 @@ screen.listen()
 		);
 
 		expect(gameFrameSource).toContain(
-			"width: min(100%, var(--python-game-max-width, 54rem));"
+			"var(--python-game-max-width, 54rem)"
 		);
+		expect(gameFrameSource).toContain("100cqh - 2.5rem - 2px");
 		expect(gameFrameSource).toContain(
 			"aspect-ratio: var(--python-game-aspect, 640 / 400);"
 		);
@@ -3088,12 +3087,12 @@ screen.listen()
 			"EditorState.allowMultipleSelections.of(true)"
 		);
 		expect(codeMirrorSource).toContain(
-			"Prec.highest(keymap.of([indentWithTab]))"
+			"Prec.highest(keymap.of([codeEditorTabBinding]))"
 		);
 		expect(helpTextSource).toContain(".code-panel { overflow: hidden;");
 		expect(helpTextSource).toContain("max-height: min(24rem, 44vh);");
 		expect(helpTextSource).toContain("overscroll-behavior: contain;");
-		expect(helpTextSource).toContain("Cmd/Ctrl+Enter runs the project.");
+		expect(helpTextSource).toContain("Cmd/Ctrl+Enter or F5 runs or stops the project.");
 		expect(helpTextSource).toContain("Cmd/Ctrl+S saves the project.");
 		expect(helpTextSource).toContain("Cmd/Ctrl+F opens search.");
 		expect(helpTextSource).toContain("Tab indents; Shift+Tab dedents.");

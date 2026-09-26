@@ -483,6 +483,28 @@ const policyEffectiveDate = classroomPrivacyPolicyEffectiveDate();
 		</section>
 
 		<section class="site-surface privacy-page__section">
+			<h2>Optional IDE problem reports</h2>
+			<p>
+				Copy diagnostics stays on your device. Report a problem lets you
+				preview the exact details and confirm before sending anything.
+				No reports are sent automatically.
+			</p>
+			<p>
+				A report includes a random reference ID, site and runtime
+				versions, browser family/version, execution stage, error
+				category, and optional sanitized numeric stack locations. Code,
+				console output, private values, account identifiers, and IP
+				addresses are not included in the report. Keep names and other
+				personal information out of the optional description.
+			</p>
+			<p>
+				Only Julio can read reports. Reports expire after 90 days. You
+				can share the reference ID with Julio to request earlier
+				deletion. Ordinary programming errors do not generate outage
+				alerts.
+			</p>
+		</section>
+		<section class="site-surface privacy-page__section">
 			<h2>What this classroom does not do</h2>
 			<p>
 				There are no ads, sales of student information, operator-run

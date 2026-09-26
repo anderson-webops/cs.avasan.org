@@ -1,3 +1,4 @@
+import type { IdeStage } from "@/modules/ideDiagnostics";
 import type { PythonIdeFile, PythonIdeMode } from "@/modules/pythonIde";
 import {
 	getPythonIdeRunnableFile,
@@ -5,6 +6,7 @@ import {
 	isPythonIdeTextFile,
 	isValidPythonFileName
 } from "@/modules/pythonIde";
+import { pygameShim } from "@/modules/pythonIdePygame";
 import { warmPythonRuntimeResources } from "@/modules/pythonIdeRuntimeHints";
 import {
 	releasePythonIdeSandboxCallbacks,
@@ -49,6 +51,19 @@ export interface RuntimeArtifact {
 }
 
 export interface GameBridge {
+	makeSurfaceOpaque: (canvas: HTMLCanvasElement) => void;
+	applySurfaceColorKey: (
+		canvas: HTMLCanvasElement,
+		red: number,
+		green: number,
+		blue: number
+	) => void;
+	blitSurface: (
+		canvas: HTMLCanvasElement,
+		x: number,
+		y: number,
+		alpha: number
+	) => void;
 	reset: (width?: number, height?: number) => void;
 	clear: () => void;
 	fill: (color: string, gcolor?: string) => void;
@@ -237,6 +252,8 @@ export interface TurtleBridge {
 }
 
 export interface RunPythonProjectOptions {
+	onStage?: (stage: IdeStage) => void;
+	onPythonVersion?: (version: string) => void;
 	files: PythonIdeFile[];
 	activeFileName: string;
 	inputText: string;
@@ -3606,6 +3623,17 @@ class _Screen:
         self.draw = _ScreenDraw()
 
     def blit(self, image, pos, **kwargs):
+        from pygame import Surface
+        if isinstance(image, Surface):
+            if kwargs:
+                raise TypeError("screen.blit(surface, pos) does not accept additional options.")
+            drawable = image._drawable()
+            _bridge.blitSurface(
+                drawable._canvas,
+                float(pos[0]), float(pos[1]),
+                1.0 if image.get_alpha() is None else image.get_alpha() / 255,
+            )
+            return
         width, height = _asset_size(image)
         angle = _number(kwargs.get("angle", 0), 0)
         _bridge.drawImage(
@@ -4814,7 +4842,7 @@ function pythonIdeSandboxRuntimeFiles(): PythonIdeFile[] {
 		},
 		{
 			name: "pygame.py",
-			content: "from _classes_pgzero import Rect\n",
+			content: pygameShim,
 			encoding: "text"
 		},
 		{
