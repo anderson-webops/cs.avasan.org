@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 const publicCourses = [
-	"Scratch Level 1",
+	"Scratch Level 1: Classroom Edition",
 	"Scratch Level 2",
 	"Python Level 1: Classroom Edition",
 	"Python Level 2: Classroom Edition",
@@ -38,10 +38,9 @@ context("Public classroom navigation", () => {
 		cy.location("pathname").should("match", /^\/ide\/?$/);
 		cy.contains("h1", "IDE").should("be.visible");
 		cy.contains("Using a shared computer?").should("not.exist");
-		cy.contains(
-			"button",
-			"Clear browser projects for next student"
-		).should("not.exist");
+		cy.contains("button", "Clear browser projects for next student").should(
+			"not.exist"
+		);
 
 		cy.get(".site-nav").contains("a:visible", "Games").click();
 		cy.location("pathname").should("match", /^\/games\/?$/);
