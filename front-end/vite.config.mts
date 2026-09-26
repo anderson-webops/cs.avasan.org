@@ -1,4 +1,5 @@
 // vite.config.ts
+import { execFileSync } from "node:child_process";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
@@ -20,7 +21,35 @@ import { includedStaticRoutes } from "./scripts/static-route-selection.mts";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const pythonIdePreloadChunkRE = /(?:^|\/)python-ide-runtime-[^/]+\.js$/;
 
+// Build-time identity only: no public release API and no runtime subprocess.
+function buildIdentity() {
+	const git = (args: string[]) => {
+		try {
+			return execFileSync("git", args, {
+				cwd: __dirname,
+				encoding: "utf8",
+				stdio: ["ignore", "pipe", "ignore"],
+				timeout: 2000
+			}).trim();
+		} catch {
+			return "";
+		}
+	};
+	const revision =
+		process.env.CLASSES_BUILD_REVISION || process.env.SOURCE_REVISION || git(["rev-parse", "HEAD"]);
+	const release =
+		process.env.CLASSES_BUILD_RELEASE || (process.env.CS_RELEASE_VERSION ? `v${process.env.CS_RELEASE_VERSION}` : "") ||
+		(git(["status", "--porcelain", "--untracked-files=no"])
+			? "unreleased"
+			: git(["describe", "--exact-match", "--tags", "HEAD"]));
+	return {
+		revision: /^[a-f0-9]{40}$/.test(revision) ? revision : "unknown",
+		release: /^v2\.[0-9]+\.[0-9]+$/.test(release) ? release : "unreleased"
+	};
+}
+
 export default defineConfig(({ command }) => ({
+	define: { __CLASSES_BUILD__: JSON.stringify(buildIdentity()) },
 	resolve: {
 		alias: {
 			"~": `${path.resolve(__dirname, "src")}/`,

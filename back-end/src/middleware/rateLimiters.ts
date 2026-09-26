@@ -347,3 +347,14 @@ export function createTeacherVerificationLimiter(options: TunableRateLimitOption
 		...options
 	});
 }
+
+export function createIdeReportLimiter(options: TunableRateLimitOptions = {}): RateLimitRequestHandler {
+	return rateLimit({
+		windowMs: 60 * 60 * 1000,
+		limit: 60,
+		store: new ExactExpiryRateLimitStore(),
+		...standardRateLimitHeaders,
+		message: { message: "Too many reports from this network. Copy diagnostics and try again later." },
+		...options
+	});
+}

@@ -87,6 +87,8 @@ interface SandboxSessionContext {
 	gameBridge: GameBridge;
 	onArtifact: (artifact: RuntimeArtifact) => void;
 	onOutput: RunPythonProjectOptions["onOutput"];
+	onStage?: RunPythonProjectOptions["onStage"];
+	onPythonVersion?: RunPythonProjectOptions["onPythonVersion"];
 	turtleBridge: TurtleBridge;
 }
 
@@ -955,7 +957,7 @@ function pythonIdeSandboxWorkerMain(
 			throw new Error("Python runtime safety budget was exceeded.");
 		if (!postToHost)
 			throw new Error("Python runtime control channel is unavailable.");
-		const packet = { channel: config.channel, ...message };
+		const packet: RuntimeMessage = { channel: config.channel, ...message };
 		const now = monotonicNow();
 		if (now - windowStartedAt >= 1000) {
 			windowStartedAt = now;
@@ -964,7 +966,10 @@ function pythonIdeSandboxWorkerMain(
 		}
 		let messageBytes: number;
 		try {
-			messageBytes = encodeMessage(serializeMessage(packet)).byteLength;
+			messageBytes =
+				packet.kind === "surface" && packet.image instanceof ImageData
+					? packet.image.data.byteLength + 256
+					: encodeMessage(serializeMessage(packet)).byteLength;
 		} catch {
 			return failBudget(
 				"Python runtime produced an unreadable browser message."
@@ -1214,7 +1219,71 @@ function pythonIdeSandboxWorkerMain(
 		}
 	};
 
+	const surfaceColorContext = new OffscreenCanvas(1, 1).getContext("2d")!;
 	const gameBridge = {
+		isValidColor(value: unknown) {
+			if (typeof value !== "string" || value.length > 128) return false;
+			surfaceColorContext.fillStyle = "#010203";
+			surfaceColorContext.fillStyle = value;
+			const first = surfaceColorContext.fillStyle;
+			surfaceColorContext.fillStyle = "#040506";
+			surfaceColorContext.fillStyle = value;
+			return first === surfaceColorContext.fillStyle;
+		},
+		makeSurfaceOpaque(canvas: OffscreenCanvas) {
+			if (!canvas.width || !canvas.height) return;
+			const context = canvas.getContext("2d")!;
+			const image = context.getImageData(
+				0,
+				0,
+				canvas.width,
+				canvas.height
+			);
+			for (let i = 3; i < image.data.length; i += 4) image.data[i] = 255;
+			context.putImageData(image, 0, 0);
+		},
+		applySurfaceColorKey(
+			canvas: OffscreenCanvas,
+			red: number,
+			green: number,
+			blue: number
+		) {
+			if (!canvas.width || !canvas.height) return;
+			const context = canvas.getContext("2d")!;
+			const image = context.getImageData(
+				0,
+				0,
+				canvas.width,
+				canvas.height
+			);
+			for (let i = 0; i < image.data.length; i += 4) {
+				if (
+					image.data[i] === red &&
+					image.data[i + 1] === green &&
+					image.data[i + 2] === blue
+				) {
+					image.data[i + 3] = 0;
+				}
+			}
+			context.putImageData(image, 0, 0);
+		},
+		blitSurface(
+			canvas: OffscreenCanvas,
+			x: number,
+			y: number,
+			alpha: number
+		) {
+			if (!canvas.width || !canvas.height) return;
+			send({
+				kind: "surface",
+				image: canvas
+					.getContext("2d")!
+					.getImageData(0, 0, canvas.width, canvas.height),
+				x,
+				y,
+				alpha
+			});
+		},
 		reset: (width?: unknown, height?: unknown) =>
 			bridge("game", "reset", [
 				finiteNumber(width, 640),
@@ -1628,7 +1697,15 @@ await micropip.install(__import__("json").loads(${escapePython(JSON.stringify(mi
 		resetOperationBudget();
 		activePacket = packet;
 		gameLoopRequested = false;
+		send({ kind: "stage", stage: "loading-runtime" });
 		const pyodide = await loadRuntime();
+		send({
+			kind: "stage",
+			stage: "preparing",
+			pythonVersion: String(
+				pyodide.runPython('__import__("sys").version.split()[0]')
+			)
+		});
 		pyodide.setStdout?.({
 			batched: text =>
 				send({
@@ -1650,7 +1727,9 @@ await micropip.install(__import__("json").loads(${escapePython(JSON.stringify(mi
 			writeFile(pyodide, packet.projectRoot, file);
 		for (const file of packet.runtimeFiles)
 			writeFile(pyodide, packet.projectRoot, file);
+		send({ kind: "stage", stage: "loading-packages" });
 		await loadPackages(pyodide, packet);
+		send({ kind: "stage", stage: "executing" });
 		if (packet.mode === "python") {
 			await pyodide.runPythonAsync(plainBootstrap(packet));
 		} else {
@@ -1709,6 +1788,7 @@ _classes_pgzero.__classes_pgzero_start(__main__.__dict__)
 `);
 			}
 		}
+		send({ kind: "stage", stage: "rendering" });
 		const continuous = gameLoopRequested;
 		gameLoopRequested = false;
 		return {
@@ -1902,6 +1982,33 @@ function pythonIdeSandboxFrameMain(
 			typeof message.kind !== "string"
 		) {
 			return false;
+		}
+		if (message.kind === "surface") {
+			return (
+				message.image instanceof ImageData &&
+				message.image.width <= 4096 &&
+				message.image.height <= 4096 &&
+				message.image.data.byteLength <= 32 * 1024 * 1024 &&
+				[message.x, message.y, message.alpha].every(
+					value => typeof value === "number" && Number.isFinite(value)
+				)
+			);
+		}
+		if (message.kind === "stage") {
+			return (
+				[
+					"loading-runtime",
+					"preparing",
+					"loading-packages",
+					"executing",
+					"rendering"
+				].includes(String(message.stage)) &&
+				(message.pythonVersion === undefined ||
+					(typeof message.pythonVersion === "string" &&
+						/^\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(
+							message.pythonVersion
+						)))
+			);
 		}
 		if (message.kind === "bridge") {
 			return (
@@ -2542,6 +2649,58 @@ function createSandboxSession(
 				}
 				return;
 			}
+			if (message.kind === "surface") {
+				if (!(
+					message.image instanceof ImageData &&
+					message.image.width <= 4096 &&
+					message.image.height <= 4096 &&
+					message.image.data.byteLength <= 32 * 1024 * 1024 &&
+					[message.x, message.y, message.alpha].every(
+						value =>
+							typeof value === "number" && Number.isFinite(value)
+					)
+				)) {
+					return;
+				}
+				const image = message.image as ImageData;
+				const canvas = document.createElement("canvas");
+				canvas.width = image.width;
+				canvas.height = image.height;
+				canvas.getContext("2d")!.putImageData(image, 0, 0);
+				context.gameBridge.blitSurface(
+					canvas,
+					message.x as number,
+					message.y as number,
+					message.alpha as number
+				);
+				canvas.width = canvas.height = 0;
+				return;
+			}
+			if (message.kind === "stage") {
+				if (
+					![
+						"loading-runtime",
+						"preparing",
+						"loading-packages",
+						"executing",
+						"rendering"
+					].includes(String(message.stage))
+				) {
+					return;
+				}
+				context.onStage?.(
+					message.stage as Parameters<
+						NonNullable<RunPythonProjectOptions["onStage"]>
+					>[0]
+				);
+				if (
+					typeof message.pythonVersion === "string" &&
+					/^\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(message.pythonVersion)
+				) {
+					context.onPythonVersion?.(message.pythonVersion);
+				}
+				return;
+			}
 			if (message.kind === "bridge") {
 				if (
 					!safeString(message.bridge, 16) ||
@@ -2743,6 +2902,8 @@ export async function runPythonProjectInSandbox(
 		gameBridge: options.gameBridge,
 		onArtifact: options.onArtifact,
 		onOutput: options.onOutput,
+		onStage: options.onStage,
+		onPythonVersion: options.onPythonVersion,
 		turtleBridge: options.turtleBridge
 	});
 	if (options.shouldStop?.()) {

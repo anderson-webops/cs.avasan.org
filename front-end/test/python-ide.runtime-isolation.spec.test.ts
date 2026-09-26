@@ -108,8 +108,8 @@ describe("IDE browser-runtime isolation", () => {
 		expect(sandboxSource).not.toContain("eval(message");
 		expect(sandboxSource).not.toContain("fetch(message");
 		expect(workspaceSource).toContain("connect-src 'none';");
-		expect(workspaceSource).toContain(
-			':csp="runtimeArtifactContentSecurityPolicy"'
+		expect(workspaceSource).toMatch(
+			/:csp="\s*runtimeArtifactContentSecurityPolicy\s*"/
 		);
 		expect(workspaceSource).toContain("credentialless");
 	});

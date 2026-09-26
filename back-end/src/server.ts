@@ -23,6 +23,7 @@ import {
 } from "./middleware/rateLimiters.js";
 import { Admin } from "./models/schemas/Admin.js";
 import { ClassroomUsageDaily } from "./models/schemas/ClassroomUsageDaily.js";
+import { IdeProblemReport } from "./models/schemas/IdeProblemReport.js";
 import { OAuthLoginAttempt } from "./models/schemas/OAuthLoginAttempt.js";
 import { Student } from "./models/schemas/Student.js";
 import { StudentDataDeletionReceipt } from "./models/schemas/StudentDataDeletionReceipt.js";
@@ -30,6 +31,7 @@ import {
 	mountClassroomAnalyticsRoutes,
 	mountClassroomAnalyticsServiceRoute
 } from "./routes/classroomAnalyticsRoutes.js";
+import { ideReportRoutes } from "./routes/ideReportRoutes.js";
 import { mountPondPaddlersRoutes } from "./routes/pondPaddlersRoutes.js";
 import {
 	assertRetainedStudentDataHasRetentionPeriod,
@@ -111,8 +113,8 @@ async function main() {
 	// Reject unsafe cross-origin requests before cookie-backed identity is made
 	// available to downstream route handlers.
 	const classroomRequestPaths = classroomPrivacy.studentAccountsEnabled
-		? ["/accounts", "/students", "/admins"]
-		: ["/accounts", "/admins"];
+		? ["/accounts", "/students", "/admins", "/ide-reports"]
+		: ["/accounts", "/admins", "/ide-reports"];
 	app.use(classroomRequestPaths, requireClassroomRequest);
 
 	const cookieOptions: CookieSessionOpts = {
@@ -203,6 +205,7 @@ async function main() {
 	// the teacher-selected room lifetime.
 	mountPondPaddlersRoutes(app, pondPaddlersRooms, { secureCookies: isProd });
 
+	app.use("/ide-reports", ideReportRoutes);
 	app.use(bodyParser.json({ limit: "1mb" }));
 
 	// Authentication and student data must never be stored by intermediaries.
@@ -273,6 +276,7 @@ async function main() {
 	await preparePythonProjectTombstoneLifecycle();
 	await Promise.all([
 		Admin.init(),
+		IdeProblemReport.init(),
 		ClassroomUsageDaily.init(),
 		OAuthLoginAttempt.init(),
 		Student.init(),
