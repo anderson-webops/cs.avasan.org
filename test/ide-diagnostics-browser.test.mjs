@@ -19,6 +19,26 @@ test(
 			process.chdir(root);
 			server = await createServer({
 				root,
+				// Prebundle lazy IDE imports before a test can start a program.
+				// Otherwise Vite reloads the page on a cold CI cache, aborting the run.
+				optimizeDeps: {
+					include: [
+						"@codemirror/state",
+						"@codemirror/view",
+						"@codemirror/autocomplete",
+						"@codemirror/commands",
+						"@codemirror/lang-java",
+						"@codemirror/lang-python",
+						"@codemirror/language",
+						"@codemirror/lint",
+						"@codemirror/search",
+						"@lezer/highlight",
+						"@fortawesome/fontawesome-svg-core",
+						"@fortawesome/free-brands-svg-icons",
+						"@fortawesome/free-solid-svg-icons",
+						"@fortawesome/vue-fontawesome"
+					]
+				},
 				server: { host: "127.0.0.1", port: 0, strictPort: true }
 			});
 			await server.listen();
