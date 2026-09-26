@@ -30,6 +30,7 @@ declare module 'vue' {
     PondPaddlersGame: typeof import('./components/PondPaddlersGame.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ScratchIdeWorkspace: typeof import('./components/ScratchIdeWorkspace.vue')['default']
     ScratchSolutionDialog: typeof import('./components/ScratchSolutionDialog.vue')['default']
     StudentAccess: typeof import('./components/StudentAccess.vue')['default']
     StudentManagement: typeof import('./components/StudentManagement.vue')['default']

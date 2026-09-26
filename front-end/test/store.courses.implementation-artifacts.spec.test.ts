@@ -91,9 +91,7 @@ describe("published course implementation artifacts", () => {
 				starters.every(url =>
 					url.searchParams
 						.get("starterUrl")
-						?.startsWith(
-							"https://github.com/instruction-material/"
-						)
+						?.startsWith("https://github.com/instruction-material/")
 				),
 				id
 			).toBe(true);
@@ -103,15 +101,17 @@ describe("published course implementation artifacts", () => {
 	);
 
 	it.each(["scratch-level-1", "scratch-level-2"])(
-		"keeps %s linked to playable Scratch projects",
+		"keeps %s linked to a usable local or public Scratch project",
 		async id => {
 			const links = courseItems(await publishedCourse(id))
 				.flatMap(item => [item.projectLink, item.solutionLink])
 				.filter((link): link is string => Boolean(link));
 
 			expect(
-				links.some(link =>
-					link.startsWith("https://scratch.mit.edu/projects/")
+				links.some(
+					link =>
+						link.startsWith("https://scratch.mit.edu/projects/") ||
+						link.startsWith("/ide?mode=scratch&starter=")
 				),
 				id
 			).toBe(true);

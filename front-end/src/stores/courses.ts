@@ -90,7 +90,7 @@ const BOILERPLATE_SENTENCE_REWRITES: Array<{
 	}
 ];
 const STRUCTURED_COURSE_SUPPORT_RE =
-	/\*\*(?:Project goal|Teaching flow|Learning sequence|Diagnostic guidance|Readiness check|Misconception check|Common pitfalls|Exit check|Mastery check|Remote investigation|Science explanation|Studio focus|AP connection):?\*\*/i;
+	/\*\*(?:Normal|Hard|Concept focus|Project goal|Teaching flow|Learning sequence|Diagnostic guidance|Readiness check|Misconception check|Common pitfalls|Exit check|Mastery check|Remote investigation|Science explanation|Studio focus|AP connection):?\*\*/i;
 const MARKDOWN_LIST_BLOCK_RE = /(?:^|\n)\s*(?:[-*]|\d+\.)\s+\S/;
 
 interface NormalizeCourseOptions {

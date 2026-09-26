@@ -235,6 +235,9 @@ jobs:
             - name: Build front-end
               run: npm run -w front-end build
 
+            - name: Verify isolated Scratch classroom projects
+              run: node --test test/scratch-projects.test.mjs test/scratch-browser.test.mjs
+
             - name: Verify Pygame surfaces in the browser IDE
               run: node --test test/pygame-browser-runtime.test.mjs
 

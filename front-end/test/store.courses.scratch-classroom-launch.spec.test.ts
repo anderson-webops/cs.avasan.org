@@ -13,11 +13,13 @@ describe("Scratch Level 1 classroom launch", () => {
 
 		expect(launch?.title).toBe("GS0 Play, Notice, and Change");
 		expect(launch?.estimatedTime).toBe("30–40 minutes");
-		expect(launch?.keyBlocks).toEqual(expect.arrayContaining([
-			"when green flag clicked",
-			"play sound",
-			"forever"
-		]));
+		expect(launch?.keyBlocks).toEqual(
+			expect.arrayContaining([
+				"when green flag clicked",
+				"play sound",
+				"forever"
+			])
+		);
 
 		const playFirst = launch?.curriculum.find(
 			item => item.title === "Play first – Bouncy Ball Room"
@@ -33,7 +35,9 @@ describe("Scratch Level 1 classroom launch", () => {
 		);
 
 		expect(
-			launch?.curriculum.find(item => item.title === "Make one small change")
+			launch?.curriculum.find(
+				item => item.title === "Make one small change"
+			)
 		).toMatchObject({
 			learningPath: "core",
 			projectLink: "https://scratch.mit.edu/projects/304003593/",
@@ -53,38 +57,20 @@ describe("Scratch Level 1 classroom launch", () => {
 		);
 	});
 
-	it("keeps the anonymous launch concise while exposing only the lazy player", async () => {
-		const course = await useCoursesStore().loadCourseById("scratch-level-1");
-		const launch = course?.modules.find(
-			module => module.title === "GS0 Play, Notice, and Change"
+	it("opens the first local classroom starter without an account", async () => {
+		const course =
+			await useCoursesStore().loadCourseById("scratch-level-1");
+		const launch = course?.modules[0];
+		expect(launch?.title).toBe("1. Events and movement");
+		const first = launch?.curriculum.find(
+			item => item.title === "Two Arrows"
 		);
-		const playFirst = launch?.curriculum.find(
-			item => item.title === "Play first – Bouncy Ball Room"
-		);
-		const makeOneChange = launch?.curriculum.find(
-			item => item.title === "Make one small change"
-		);
-		const visibleLaunchText = [
-			...(launch?.curriculum ?? []),
-			...(launch?.supplementalProjects ?? [])
-		]
-			.map(item => item.content)
-			.join("\n");
-
-		expect(playFirst).toMatchObject({
-			playableSolutionEmbedUrl:
-				"https://scratch.mit.edu/projects/287922077/embed"
-		});
-		expect(playFirst?.solutionLink).toBeUndefined();
-		expect(playFirst?.projectLink).toBeUndefined();
-		expect(makeOneChange).toMatchObject({
-			projectLink: "https://scratch.mit.edu/projects/304003593/"
-		});
-		expect(makeOneChange?.solutionLink).toBeUndefined();
-		expect(makeOneChange?.playableSolutionEmbedUrl).toBeUndefined();
-		expect(visibleLaunchText).not.toContain("Scratch game design:");
-		expect(visibleLaunchText).not.toContain("**Focus:**");
-		expect(visibleLaunchText).not.toContain("**Failure modes:**");
+		expect(first?.projectLink).toBe("/ide?mode=scratch&starter=two-arrows");
+		expect(first?.content).toContain("/scratch-projects/two-arrows.sb3");
+		expect(first?.content).toContain("**Normal:**");
+		expect(first?.content).toContain("**Hard:**");
+		expect(first?.solutionLink).toBeUndefined();
+		expect(first?.playableSolutionEmbedUrl).toBeUndefined();
 	});
 
 	it("provides the transcript-guided coordinate catcher progression", () => {

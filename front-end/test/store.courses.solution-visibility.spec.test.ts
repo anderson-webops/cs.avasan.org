@@ -133,9 +133,7 @@ describe("course solution visibility", () => {
 			.filter((url): url is string => Boolean(url))
 			.filter(url => {
 				const projectId = url.match(/\/projects\/(\d+)\/?$/u)?.[1];
-				return (
-					projectId && UNUSABLE_SCRATCH_STARTER_IDS.has(projectId)
-				);
+				return projectId && UNUSABLE_SCRATCH_STARTER_IDS.has(projectId);
 			});
 		const hungryHippoItems = scratchItems.filter(item =>
 			/Hungry Hippo/i.test(item.title)
@@ -147,7 +145,12 @@ describe("course solution visibility", () => {
 			items(pythonCourse!).some(item => item.playableSolutionEmbedUrl)
 		).toBe(false);
 		expect(scratchItems.some(item => item.solutionLink)).toBe(false);
-		expect(hungryHippoItems.length).toBeGreaterThan(0);
+		// The original Level 1 project is no longer in the classroom sequence.
+		expect(
+			scratchItems.some(item =>
+				item.projectLink?.startsWith("/ide?mode=scratch&starter=")
+			)
+		).toBe(true);
 		expect(
 			hungryHippoItems.every(item => !item.playableSolutionEmbedUrl)
 		).toBe(true);

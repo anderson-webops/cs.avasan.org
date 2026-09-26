@@ -9,10 +9,12 @@ export interface CourseCatalogEntry extends CourseSummary {
 export const courseCatalog: CourseCatalogEntry[] = [
 	{
 		id: "scratch-level-1",
-		name: "Scratch Level 1",
+		name: "Scratch Level 1: Classroom Edition",
+		normalizeAs: "scratch-level-1-classroom",
 		load: () =>
-			import("./scratch-level-1").then(
-				({ scratchLevel1Course }) => scratchLevel1Course
+			import("./scratch-level-1-classroom").then(
+				({ scratchLevel1ClassroomCourse }) =>
+					scratchLevel1ClassroomCourse
 			)
 	},
 	{
@@ -82,7 +84,21 @@ export function getCourseCatalogEntry(id: string) {
 export async function loadRawCourse(id: string) {
 	const entry = getCourseCatalogEntry(id);
 	const rawCourse = await entry?.load();
-	return rawCourse
-		? normalizeRawCourse(entry?.normalizeAs ?? id, rawCourse)
-		: null;
+	if (!rawCourse) return null;
+	const course = normalizeRawCourse(entry?.normalizeAs ?? id, rawCourse);
+	if (id === "scratch-level-1") {
+		// Keep the previous curriculum available outside the new classroom path.
+		const { scratchLevel1Course } = await import("./scratch-level-1");
+		const reference = normalizeRawCourse(
+			"scratch-level-1",
+			scratchLevel1Course
+		);
+		course.modules.push(
+			...reference.modules.map(module => ({
+				...module,
+				kind: "appendix" as const
+			}))
+		);
+	}
+	return course;
 }

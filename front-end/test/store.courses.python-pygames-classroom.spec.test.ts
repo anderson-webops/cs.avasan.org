@@ -103,7 +103,10 @@ async function requireCourse(courseId: string) {
 describe("Julio's Python Level 2 and PyGames classroom editions", () => {
 	it("keeps exactly five current courses and separates archived originals", () => {
 		expect(courseCatalog.map(({ id, name }) => ({ id, name }))).toEqual([
-			{ id: "scratch-level-1", name: "Scratch Level 1" },
+			{
+				id: "scratch-level-1",
+				name: "Scratch Level 1: Classroom Edition"
+			},
 			{ id: "scratch-level-2", name: "Scratch Level 2" },
 			{
 				id: "python-level-1",
@@ -280,8 +283,7 @@ describe("Julio's Python Level 2 and PyGames classroom editions", () => {
 			expect(module, expectation.moduleTitle).toBeDefined();
 
 			const item = module?.curriculum.find(candidate => {
-				if (!candidate.projectLink?.startsWith("/ide?"))
-					return false;
+				if (!candidate.projectLink?.startsWith("/ide?")) return false;
 				return (
 					new URL(
 						candidate.projectLink,

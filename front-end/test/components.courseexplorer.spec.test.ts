@@ -12,7 +12,7 @@ vi.mock("@/modules/classroomUsage", () => ({
 }));
 
 const expectedCourses = [
-	["scratch-level-1", "Scratch Level 1"],
+	["scratch-level-1", "Scratch Level 1: Classroom Edition"],
 	["scratch-level-2", "Scratch Level 2"],
 	["python-level-1", "Python Level 1: Classroom Edition"],
 	["python-level-2", "Python Level 2: Classroom Edition"],
