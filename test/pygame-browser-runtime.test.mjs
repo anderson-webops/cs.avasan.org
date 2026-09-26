@@ -183,7 +183,7 @@ test(
 			await page.waitForSelector("button.run-control:not([disabled])");
 			await page.setRequestInterception(false);
 			for (let run = 0; run < 2; run += 1) {
-				await page.click("button.run-control");
+				await page.locator("button.run-control").click();
 				try {
 					await page.waitForFunction(
 						() =>
