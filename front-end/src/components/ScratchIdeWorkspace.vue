@@ -21,7 +21,15 @@ const expanded = ref(false);
 let channel = "";
 let timer: ReturnType<typeof setTimeout> | undefined;
 const selected = computed(() =>
-	catalog.find(item => item.id === starter.value)
+	starter.value === "blank"
+		? {
+				id: "blank",
+				name: "Independent Mini-Game",
+				normal: "",
+				hard: "",
+				check: ""
+			}
+		: catalog.find(item => item.id === starter.value)
 );
 function send(type: string, extra = {}) {
 	frame.value?.contentWindow?.postMessage(
@@ -41,6 +49,10 @@ function confirmReplace() {
 onBeforeRouteLeave(() => confirmReplace());
 async function openStarter() {
 	if (!ready.value || !selected.value || !confirmReplace()) return;
+	await loadSelectedStarter();
+}
+async function loadSelectedStarter() {
+	if (!selected.value) return;
 	busy.value = true;
 	status.value = "Opening project…";
 	try {
@@ -57,6 +69,11 @@ async function openStarter() {
 			"The starter could not be opened. Download it from the course and use Open .sb3.";
 		busy.value = false;
 	}
+}
+async function newProject() {
+	if (!ready.value || busy.value || !confirmReplace()) return;
+	starter.value = "blank";
+	await loadSelectedStarter();
 }
 async function openFile(event: Event) {
 	const input = event.target as HTMLInputElement;
@@ -130,7 +147,7 @@ watch(
 	value => {
 		if (
 			typeof value === "string" &&
-			catalog.some(item => item.id === value)
+			(value === "blank" || catalog.some(item => item.id === value))
 		) {
 			starter.value = value;
 			if (ready.value) void openStarter();
@@ -140,8 +157,12 @@ watch(
 onMounted(() => {
 	channel = crypto.randomUUID();
 	const query = route.query.starter;
-	if (typeof query === "string" && catalog.some(item => item.id === query))
+	if (
+		typeof query === "string" &&
+		(query === "blank" || catalog.some(item => item.id === query))
+	) {
 		starter.value = query;
+	}
 	window.addEventListener("message", receive);
 	window.addEventListener("beforeunload", beforeUnload);
 	source.value = scratchFrameDocument(window.location.origin, channel);
@@ -179,6 +200,9 @@ defineExpose({ stop: () => send("stop") });
 					:disabled="!ready || busy"
 					@change="openFile"
 			/></label>
+			<button :disabled="!ready || busy" @click="newProject">
+				New project
+			</button>
 			<button :disabled="!ready || busy" @click="send('download')">
 				Download project
 			</button>
@@ -191,6 +215,7 @@ defineExpose({ stop: () => send("stop") });
 				>Classroom starter
 				<select v-model="starter">
 					<option value="">Choose a project</option>
+					<option value="blank">Blank independent project</option>
 					<option
 						v-for="item in catalog"
 						:key="item.id"
@@ -227,7 +252,7 @@ defineExpose({ stop: () => send("stop") });
 				is required. Your Scratch work is not saved to your site
 				account.
 			</p>
-			<p v-if="selected">
+			<p v-if="selected && starter !== 'blank'">
 				<strong>Normal:</strong> {{ selected.normal }}
 				<strong>Hard:</strong> {{ selected.hard }}
 				<strong>Check:</strong> {{ selected.check }}

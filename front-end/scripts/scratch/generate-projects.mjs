@@ -77,7 +77,9 @@ const ifBlock = (condition, blocks) =>
 	block("control_if", { CONDITION: condition }, {}, { SUBSTACK: blocks });
 
 export function createProject(id, solution = false) {
-	const lesson = lessons.find(item => item.id === id);
+	const lesson = id === "blank"
+		? { name: "Independent Mini-Game", normal: "Plan your own player, goal and controls; write your own scripts.", hard: "Extend your own working game.", check: "Test movement, your rule, an ending and restarting." }
+		: lessons.find(item => item.id === id);
 	if (!lesson) throw new Error("Unknown Scratch lesson");
 	const assets = {};
 	let nextId = 0;
@@ -520,6 +522,7 @@ export function createProject(id, solution = false) {
 export async function generateProjects(output, teachers) {
 	await mkdir(output, { recursive: true });
 	if (teachers) await mkdir(teachers, { recursive: true });
+	await writeFile(path.join(output, "blank.sb3"), createProject("blank").archive);
 	for (const lesson of lessons) {
 		await writeFile(
 			path.join(output, `${lesson.id}.sb3`),

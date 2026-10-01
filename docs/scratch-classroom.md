@@ -1,6 +1,6 @@
 # Scratch classroom sequence
 
-The September 26 planning decisions are implemented as a small-to-large classroom sequence: a four-block first project, one additional direction, sprite clicks, a dress-up worked example with two incomplete accessories, coordinates and reset, independent letter animation, scenes and dialogue, loops, conditions, and a scored game. Projects are Core; optional remixes are Practice. Normal is the shared task and Hard extends the same working project.
+The September 26 growth sequence is refined by September 30: begin with Animate Your Name and one individual sprite-click reaction, retaining adjacent examples while learners add one action. Sound, size, color effects, turning, dialogue and backdrops are choices; loops and broadcasts are not required in this first project. Then explore keyboard movement, a dress-up worked example with two incomplete accessories, coordinates and reset, scenes and dialogue, loops, conditions, variables and a scored game. Finish by planning and building an independent mini-game from a blank workspace. Projects are Core; optional remixes are Practice. Normal is the shared task and Hard extends the same working project.
 
 ## Teacher workflow
 
@@ -10,7 +10,7 @@ The September 26 planning decisions are implemented as a small-to-large classroo
 4. Offer Hard or original costume/backdrop art once Normal works. Keep a working checkpoint. Discuss bitmap/vector art and real transparency.
 5. Download each student's `.sb3`, reopen it, and finish with a short demonstration (5 minutes). School-approved tools may import the same files. No claim of institutional approval is implied.
 
-The generation script creates twelve original, self-contained starters and optional teacher reference completions. Reference completions are for Normal; Hard intentionally allows multiple designs. Teacher files remain in the local teaching pack and are not published with student downloads.
+The generation script creates twelve original, self-contained starters and optional teacher reference completions. Reference completions are for Normal; Hard intentionally allows multiple designs. Teacher files remain in the local teaching pack and are not published with student downloads. The separate blank independent-project download contains a backdrop and sprite but no scripts or solution; it is available through Start in IDE and the host New project button. Download existing work before replacing it.
 
 ```sh
 node front-end/scripts/scratch/generate-projects.mjs /path/to/Starters /path/to/Teacher-Solutions
