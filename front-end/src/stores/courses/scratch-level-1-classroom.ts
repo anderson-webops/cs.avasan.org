@@ -4,7 +4,7 @@ import projects from "../../../scripts/scratch/projects.json";
 const units = [...new Set(projects.map(project => project.unit))];
 const introductions: Record<string, string> = {
 	"Events and movement":
-		"Start with Animate Your Name: click one letter, identify its event and action, then add one reaction to your own name. Keep a working example beside your addition. Sound, size, turning, dialogue, backdrops and color are choices, not a checklist to complete at once. No loops or broadcasts are needed yet. Explore keyboard movement only after these individual click events work.",
+		"Click one letter in Animate Your Name, identify its event and action, then add one reaction to your own name. Keep a working example beside your addition. Sound, size, turning, dialogue, backdrops and color are choices, not a checklist to complete at once. No loops or broadcasts are needed yet. Explore keyboard movement only after these individual click events work.",
 	"Position and reset":
 		"Drag a sprite to the place you want it, read x and y, and only then choose a motion block. Use the green flag to restore the starting scene and a click event to act. Compare an immediate go to with a timed glide. A layer block changes overlap, not position.",
 	"Dialogue and scenes":
