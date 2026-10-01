@@ -4,7 +4,7 @@ import projects from "../../../scripts/scratch/projects.json";
 const units = [...new Set(projects.map(project => project.unit))];
 const introductions: Record<string, string> = {
 	"Events and movement":
-		"The first example contains just four blocks. An event is the trigger; the block beneath it is the action. Predict, press a key, then change one value. Keep the original working script beside your addition.",
+		"Start with Animate Your Name: click one letter, identify its event and action, then add one reaction to your own name. Keep a working example beside your addition. Sound, size, turning, dialogue, backdrops and color are choices, not a checklist to complete at once. No loops or broadcasts are needed yet. Explore keyboard movement only after these individual click events work.",
 	"Position and reset":
 		"Drag a sprite to the place you want it, read x and y, and only then choose a motion block. Use the green flag to restore the starting scene and a click event to act. Compare an immediate go to with a timed glide. A layer block changes overlap, not position.",
 	"Dialogue and scenes":
@@ -38,8 +38,24 @@ export const scratchLevel1ClassroomCourse: RawCourse = {
 					title: project.name,
 					learningPath: "core" as const,
 					projectLink: `/ide?mode=scratch&starter=${project.id}`,
-					content: `**Concept:** ${project.concept}\n\n[Download the starter (.sb3)](/scratch-projects/${project.id}.sb3). Open it with **Open .sb3**, or import it into a Scratch-compatible classroom editor.\n\n**Normal:** ${project.normal}\n\n**Hard:** ${project.hard}\n\n**Check:** ${project.check}\n\n**Explain:** Point to the blocks you changed. Predict what would happen if one value or event changed, then test your prediction. Keep the supplied working scripts as examples rather than replacing the whole project.`
-				}))
+					content: `**Concept:** ${project.concept}\n\n${project.id === "animate-word" ? "**Block guide:** Events supplies when this sprite clicked. Motion turns a letter; its rotation style controls how it appears, not whether it turns. Looks changes size, says dialogue, changes a color effect, or switches the backdrop. Change size by is cumulative; set size to restores a chosen value. Color effects do not recolor the costume itself. Next backdrop cycles through the list; switch backdrop to chooses a named one. Sound: start sound continues immediately; play sound until done waits before the next block. Add a sound from the Sounds tab to use in your own letter. The supplied example uses an original short chime. Green-flag scripts restore this starter's scene; other projects may deliberately run actions on the flag.\n\n" : ""}[Download the starter (.sb3)](/scratch-projects/${project.id}.sb3). Open it with **Open .sb3**, or import it into a Scratch-compatible classroom editor.\n\n**Normal:** ${project.normal}\n\n**Hard:** ${project.hard}\n\n**Check:** ${project.check}\n\n**Explain:** Point to the blocks you changed. Predict what would happen if one value or event changed, then test your prediction. Keep the supplied working scripts as examples rather than replacing the whole project.`
+				})),
+			...(unit === "Variables and games"
+				? [
+						{
+							id: "scratch-classroom-independent-game",
+							title: "Independent Mini-Game",
+							learningPath: "core" as const,
+							content: `After the collection game's check works, create your own small game in a new project. Keep your completed starter as a reference and save a separate file.
+
+**Plan:** Choose a player, a goal, controls, a backdrop, and one rule for earning points or reaching an ending. List the sprites, events, repeated actions, conditions, and variables your rule needs.
+
+**Build:** Write the scripts yourself, one working behavior at a time. Use the earlier examples when stuck, then explain how your version differs. Include a green-flag reset and a clear instruction for the player.
+
+**Check:** Ask a partner to play using only your directions. Verify movement, the scoring or ending rule, and restarting. Explain one event, loop, condition, and variable you used, then repair one confusing behavior.`
+						}
+					]
+				: [])
 		],
 		supplementalProjects: [
 			{

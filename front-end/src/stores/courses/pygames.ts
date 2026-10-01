@@ -888,7 +888,7 @@ export const pyGamesCourse: RawCourse = hideBroadPyGamesRootPairs({
 				{
 					title: "Check-In #2: Gravity (Bigfoot Game)",
 					content:
-						"Gravity-setup: Start from the Bigfoot game in Check-in-2-Starter.py and inspect the code so the movement logic is clear before adding gravity. Gravity-1: Identify the global variables and dynamic attributes needed to add gravity, such as a global gravity value and a yspeed attribute on Bigfoot; xspeed is optional. Gravity-2: Add these variables to the game. Gravity-3: In update(), apply gravity to Bigfoot by increasing yspeed and updating his y position. Gravity-4: Add code to stop Bigfoot at the floor instead of letting him fall through. Gravity-5: Add an event listener so pressing the up arrow makes Bigfoot jump."
+						"Gravity-setup: Start from the Bigfoot game in `Check-in-2-Starter.py` and inspect the code so the movement logic is clear before adding gravity. Gravity-1: Identify the global variables and dynamic attributes needed to add gravity, such as a global gravity value and a yspeed attribute on Bigfoot; xspeed is optional. Gravity-2: Add these variables to the game. Gravity-3: In update(), apply gravity to Bigfoot by increasing yspeed and updating his y position. Gravity-4: Add code to stop Bigfoot at the floor instead of letting him fall through. Gravity-5: Add an event listener so pressing the up arrow makes Bigfoot jump."
 				},
 				{
 					title: "Check-In #2: Friction (Shuffleboard Game)",
@@ -1359,7 +1359,7 @@ export const pyGamesCourse: RawCourse = hideBroadPyGamesRootPairs({
 				{
 					title: "Check-In #3: System Control",
 					content:
-						"Start from the rocket-and-targets code in Check-in-3-Starter.py, where the rocket moves left and right with arrow keys. Steps 1/2 add a start screen so the game only begins when Enter is pressed; before that, draw a start message and ignore normal game updates. Step 3 identifies the tool used to schedule future events, such as PyGame Zero's clock or timers. Steps 4/5 use a scheduled event to move the targets to new random positions every 5 seconds. Step 6 adds logic that can cancel or stop this repeating movement when needed, such as after a win condition."
+						"Start from the rocket-and-targets code in `Check-in-3-Starter.py`, where the rocket moves left and right with arrow keys. Steps 1/2 add a start screen so the game only begins when Enter is pressed; before that, draw a start message and ignore normal game updates. Step 3 identifies the tool used to schedule future events, such as PyGame Zero's clock or timers. Steps 4/5 use a scheduled event to move the targets to new random positions every 5 seconds. Step 6 adds logic that can cancel or stop this repeating movement when needed, such as after a win condition."
 				},
 				{
 					title: "Check-In #3: Projectiles and Enemy AI",

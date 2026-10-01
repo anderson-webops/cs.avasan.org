@@ -280,6 +280,45 @@ export function createProject(id, solution = false) {
 	}
 	if (id === "animate-word") {
 		targets.splice(1);
+		stage.costumes.push(
+			costume(
+				"Night",
+				'<path fill="#162547" d="M0 0h480v360H0z"/>',
+				480,
+				360
+			)
+		);
+		stack(stage, [
+			flag(),
+			block("looks_switchbackdropto", { BACKDROP: text("Day") })
+		]);
+		// Original short PCM chime; package the sound so offline imports remain self-contained.
+		const rate = 22050,
+			samples = 3308;
+		const wav = Buffer.alloc(44 + samples * 2);
+		wav.write("RIFF");
+		wav.writeUInt32LE(wav.length - 8, 4);
+		wav.write("WAVEfmt ", 8);
+		wav.writeUInt32LE(16, 16);
+		wav.writeUInt16LE(1, 20);
+		wav.writeUInt16LE(1, 22);
+		wav.writeUInt32LE(rate, 24);
+		wav.writeUInt32LE(rate * 2, 28);
+		wav.writeUInt16LE(2, 32);
+		wav.writeUInt16LE(16, 34);
+		wav.write("data", 36);
+		wav.writeUInt32LE(samples * 2, 40);
+		for (let n = 0; n < samples; n++)
+			wav.writeInt16LE(
+				Math.round(
+					6000 *
+						Math.sin((2 * Math.PI * 440 * n) / rate) *
+						Math.sin((Math.PI * n) / samples)
+				),
+				44 + n * 2
+			);
+		const soundId = createHash("md5").update(wav).digest("hex");
+		assets[`${soundId}.wav`] = wav;
 		for (const [i, letter] of [..."CODE"].entries()) {
 			const s = target(letter, false, -135 + i * 90, 0, [
 				costume(
@@ -290,10 +329,37 @@ export function createProject(id, solution = false) {
 			targets.push(s);
 			stack(s, [
 				flag(),
-				block("motion_pointindirection", { DIRECTION: number(90) })
+				go(s.x, s.y),
+				block("motion_pointindirection", { DIRECTION: number(90) }),
+				block("looks_setsizeto", { SIZE: number(70) }),
+				block("looks_cleargraphiceffects"),
+				block("looks_say", { MESSAGE: text("") })
 			]);
-			if (i === 0 || solution)
-				stack(s, [click(), turn(30), wait(0.3), turn(-30)]);
+			if (i === 0)
+				stack(s, [click(), turn(30), color(), wait(0.3), turn(-30)]);
+			if (i === 1 && solution)
+				stack(s, [click(), say("This is my letter!")]);
+			if (i === 2) {
+				s.sounds.push({
+					name: "Chime",
+					assetId: soundId,
+					dataFormat: "wav",
+					md5ext: `${soundId}.wav`,
+					rate,
+					sampleCount: samples
+				});
+				stack(s, [
+					click(),
+					block("sound_playuntildone", { SOUND_MENU: text("Chime") }),
+					say("Hello!")
+				]);
+			}
+			if (i === 3)
+				stack(s, [
+					click(),
+					block("looks_changesizeby", { CHANGE: number(10) }),
+					block("looks_nextbackdrop")
+				]);
 		}
 	}
 	if (id === "scene-switch") {

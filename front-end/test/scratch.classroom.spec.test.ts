@@ -28,7 +28,7 @@ describe("Scratch classroom", () => {
 			module.curriculum.filter(item => item.projectLink)
 		);
 		expect(projects).toHaveLength(12);
-		expect(projects[0].title).toBe("Two Arrows");
+		expect(projects[0].title).toBe("Animate Your Name");
 		expect(projects.at(-1)?.title).toBe("Build Your Collection Game");
 		for (const project of projects) {
 			expect(project.learningPath).toBe("core");

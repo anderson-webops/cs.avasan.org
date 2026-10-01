@@ -575,7 +575,9 @@ Before building, select **Play solution** on Project 1 – Bug Eater below. Noti
 				{
 					title: "Bug Eater: Classroom walkthrough",
 					learningPath: "core",
-					content: `**Project goal:** Move a frog to typed X and Y coordinates and make a collectible react when the frog catches it.
+					content: `**Earlier teaching stage — sequential questions:** This version asks for X and then Y in a loop. For the later classroom target, use **Guided warm-up – Coordinate Catcher** above: reset to the origin on the green flag, move with separate X and Y key events, and restore the control message after each move. The linked Juni Bug Eater preview uses mouse-controlled movement; it demonstrates collection feedback, not the frog's X/Y keyboard controls.
+
+**Project goal:** Move a frog to typed X and Y coordinates and make a collectible react when the frog catches it.
 
 **Build steps:**
 1. Under **when green flag clicked**, add a **forever** loop for the frog's coordinate questions.

@@ -688,12 +688,26 @@ def move_left_and_draw():
     artist.goto(artist.xcor() - MOVE_DISTANCE, artist.ycor())
     redraw_triangle()
 
+# Move up without drawing a connecting line
+def move_up_and_draw():
+    artist.penup()
+    artist.goto(artist.xcor(), artist.ycor() + MOVE_DISTANCE)
+    redraw_triangle()
+
+# Move down without drawing a connecting line
+def move_down_and_draw():
+    artist.penup()
+    artist.goto(artist.xcor(), artist.ycor() - MOVE_DISTANCE)
+    redraw_triangle()
+
 
 ###########################
 ###   EVENT LISTENERS   ###
 ###########################
 screen.onkey(move_right_and_draw, "Right")
 screen.onkey(move_left_and_draw, "Left")
+screen.onkey(move_up_and_draw, "Up")
+screen.onkey(move_down_and_draw, "Down")
 screen.listen()
 
 

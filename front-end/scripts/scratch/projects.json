@@ -1,5 +1,14 @@
 [
 	{
+		"id": "animate-word",
+		"name": "Animate Your Name",
+		"unit": "Events and movement",
+		"concept": "Clicking one letter starts its own action; the green flag restores the starting scene.",
+		"normal": "Click C, D, and E to explore the working examples. Add one sprite-click reaction to O, using an adjacent script as your example. Then draw or choose letters for your own name and keep one working reaction per letter. No loops are needed.",
+		"hard": "Choose another reaction: sound, size, turning, dialogue, a backdrop, or a color effect. Add one effect at a time; a single working addition is enough before trying another.",
+		"check": "Click one letter at a time and explain its event and action. Click E twice: its size grows each time. Press the flag: positions, direction, size, color effects, dialogue and the Day backdrop return to their starting state. Test your own name the same way."
+	},
+	{
 		"id": "two-arrows",
 		"name": "Two Arrows",
 		"unit": "Events and movement",
@@ -34,15 +43,6 @@
 		"normal": "The hat is a worked example. Complete the badge's green-flag reset and click-to-glide scripts. Drag it first, read x and y, then add the motion block.",
 		"hard": "Complete the boots too. Use front/back layers deliberately and compare go to with glide.",
 		"check": "Dress the robot, press the flag, and confirm every accessory returns to its starting position."
-	},
-	{
-		"id": "animate-word",
-		"name": "Animate a Word",
-		"unit": "Position and reset",
-		"concept": "Events let each letter respond independently.",
-		"normal": "Click C to see an example. Add a click animation to O while keeping its green-flag reset.",
-		"hard": "Animate D and E differently, or draw your own word using costumes.",
-		"check": "Each completed letter responds to a click and returns to its original direction on reset."
 	},
 	{
 		"id": "scene-switch",

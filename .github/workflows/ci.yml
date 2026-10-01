@@ -140,6 +140,9 @@ jobs:
                   ulimit -n 4096 || true
                   npm run -w front-end test:unit
 
+            - name: Scratch first-lesson event and archive regressions
+              run: node --test test/scratch-name-events.test.mjs
+
             - name: Backend tests
               env:
                   VITEST_WATCH: "false"
