@@ -170,6 +170,73 @@ test(
 					).uploadFile(filename);
 					await loaded();
 				}
+			// September 30 first lesson: sprite clicks are local, size changes
+			// accumulate, and the documented green-flag reset restores the scene.
+			await page.select(".scratch-starters select", "animate-word");
+			await page.locator(".scratch-starters button").click();
+			await loaded();
+			const stageCanvas = await frame.$("canvas");
+			const stageBox = await stageCanvas.boundingBox();
+			assert.ok(stageBox);
+			const clickLetterE = () =>
+				page.mouse.click(
+					stageBox.x + stageBox.width * (0.5 + 135 / 480),
+					stageBox.y + stageBox.height / 2
+				);
+			const nameFile = path.join(files, "Animate Your Name.sb3");
+			async function exportName() {
+				await rm(nameFile, { force: true });
+				await page
+					.locator(".scratch-toolbar button")
+					.filter(button =>
+						button.textContent.includes("Download project")
+					)
+					.click();
+				for (let n = 0; n < 50 && !existsSync(nameFile); n++)
+					await new Promise(resolve => setTimeout(resolve, 100));
+				return JSON.parse(
+					strFromU8(
+						unzipSync(new Uint8Array(await readFile(nameFile)))[
+							"project.json"
+						]
+					)
+				);
+			}
+			await clickLetterE();
+			await new Promise(resolve => setTimeout(resolve, 250));
+			let nameProject = await exportName();
+			assert.equal(
+				nameProject.targets.find(target => target.name === "E").size,
+				80
+			);
+			assert.equal(
+				nameProject.targets.find(target => target.name === "C").size,
+				70
+			);
+			assert.equal(
+				nameProject.targets.find(target => target.isStage)
+					.currentCostume,
+				1
+			);
+			await clickLetterE();
+			await new Promise(resolve => setTimeout(resolve, 250));
+			nameProject = await exportName();
+			assert.equal(
+				nameProject.targets.find(target => target.name === "E").size,
+				90
+			);
+			await frame.locator('[title="Go"]').click();
+			await new Promise(resolve => setTimeout(resolve, 250));
+			nameProject = await exportName();
+			assert.equal(
+				nameProject.targets.find(target => target.name === "E").size,
+				70
+			);
+			assert.equal(
+				nameProject.targets.find(target => target.isStage)
+					.currentCostume,
+				0
+			);
 			await page.select(".scratch-starters select", "dress-up");
 			await page.locator(".scratch-starters button").click();
 			await loaded();

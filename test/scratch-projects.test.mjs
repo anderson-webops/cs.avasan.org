@@ -42,7 +42,7 @@ for (const lesson of lessons)
 			}
 		});
 	}
-test("first project is four blocks; dress-up retains an example and two student areas", () => {
+test("keyboard warmup is four blocks; dress-up retains an example and two student areas", () => {
 	assert.equal(
 		Object.keys(createProject("two-arrows").project.targets[1].blocks)
 			.length,
