@@ -45,8 +45,9 @@ export const scratchLevel1ClassroomCourse: RawCourse = {
 						{
 							id: "scratch-classroom-independent-game",
 							title: "Independent Mini-Game",
+							projectLink: "/ide?mode=scratch&starter=blank",
 							learningPath: "core" as const,
-							content: `After the collection game's check works, create your own small game in a new project. Keep your completed starter as a reference and save a separate file.
+							content: `After the collection game's check works, create your own small game in a new project. Use **Start in IDE** to open a blank project with a backdrop and a sprite but no scripts, or [download the blank project (.sb3)](/scratch-projects/blank.sb3) for your approved classroom editor. In the website editor, **New project** opens the same blank workspace. Download your completed starter first to keep it as a reference, then save your independent game as a separate file.
 
 **Plan:** Choose a player, a goal, controls, a backdrop, and one rule for earning points or reaching an ending. List the sprites, events, repeated actions, conditions, and variables your rule needs.
 

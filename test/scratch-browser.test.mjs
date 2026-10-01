@@ -131,11 +131,23 @@ test(
 					document.querySelector('input[placeholder="x"]')?.value ===
 					"10"
 			);
-			await page
-				.locator(".scratch-toolbar button")
-				.filter(button =>
-					button.textContent.includes("Download project")
-				)
+			// Editing a sprite position is unsaved student work; cancelling
+			// replacement must preserve it.
+			await frame.locator('input[placeholder="x"]').fill("20");
+			await page.keyboard.press("Enter");
+			await frame.click("canvas");
+			await page.waitForFunction(() => document.querySelector(".scratch-starters [role=status]")?.textContent.includes("Unsaved changes"));
+			page.removeAllListeners("dialog");
+			const cancelledReplacement = new Promise(resolve => page.once("dialog", async dialog => {
+				await dialog.dismiss();
+				resolve();
+			}));
+			await page.locator("::-p-text(New project)").click();
+			await cancelledReplacement;
+			assert.equal(await page.$eval(".scratch-starters select", select => select.value), "two-arrows");
+			assert.equal(await frame.$eval('input[placeholder="x"]', input => input.value), "20");
+			page.on("dialog", dialog => dialog.accept());
+			await page.locator("::-p-text(Download project)")
 				.click();
 			await page.waitForFunction(() =>
 				document
@@ -152,7 +164,7 @@ test(
 					]
 				)
 			);
-			assert.equal(project.targets.find(t => t.name === "Player").x, 10);
+			assert.equal(project.targets.find(t => t.name === "Player").x, 20);
 			// The official editor validator, not just our own schema checks, opens
 			// every starter and every teacher reference completion.
 			for (const lesson of lessons)
@@ -186,11 +198,7 @@ test(
 			const nameFile = path.join(files, "Animate Your Name.sb3");
 			async function exportName() {
 				await rm(nameFile, { force: true });
-				await page
-					.locator(".scratch-toolbar button")
-					.filter(button =>
-						button.textContent.includes("Download project")
-					)
+				await page.locator("::-p-text(Download project)")
 					.click();
 				for (let n = 0; n < 50 && !existsSync(nameFile); n++)
 					await new Promise(resolve => setTimeout(resolve, 100));
@@ -240,8 +248,26 @@ test(
 			await page.select(".scratch-starters select", "dress-up");
 			await page.locator(".scratch-starters button").click();
 			await loaded();
-			await frame.locator("::-p-text(Costumes)").click();
-			await frame.waitForSelector("canvas");
+			// Independent work opens a fresh workspace through the host, even
+			// though the embedded upstream New menu is intentionally disabled.
+			await page.locator("::-p-text(New project)").click();
+			await loaded();
+			const blankFile = path.join(files, "Independent Mini-Game.sb3");
+			await page.locator("::-p-text(Download project)").click();
+			for (let n = 0; n < 50 && !existsSync(blankFile); n++)
+				await new Promise(resolve => setTimeout(resolve, 100));
+			const blankProject = JSON.parse(strFromU8(unzipSync(new Uint8Array(await readFile(blankFile)))["project.json"]));
+			assert.equal(blankProject.targets.length, 2);
+			for (const target of blankProject.targets) assert.deepEqual(target.blocks, {});
+			await (await page.$(".file-control input")).uploadFile(blankFile);
+			await loaded();
+			// The course's direct launch opens the same code-free project.
+			await page.goto("http://127.0.0.1:5198/ide?mode=scratch&starter=blank", { waitUntil: "networkidle2" });
+			await loaded();
+			assert.equal(await page.$eval('.scratch-toolbar input', input => input.value), "Independent Mini-Game");
+			const blankFrame = page.frames().find(f => f !== page.mainFrame());
+			await blankFrame.locator("::-p-text(Costumes)").click();
+			await blankFrame.waitForSelector("canvas");
 			await page.screenshot({
 				path: "/tmp/scratch-classroom-editor.png"
 			});

@@ -48,11 +48,11 @@ During a class share, show the finished result, point to the section you changed
 		},
 		{
 			title: "Launch Project 3: Triangle Motion",
-			content: `The completed framework manages the yellow canvas, redraw cycle, horizontal movement, arrow-key listeners, and screen updates.
+			content: `The completed framework manages the yellow canvas, redraw cycle, four-direction movement, arrow-key listeners, and screen updates.
 
 **Normal:** Complete \`draw_triangle()\` with three equal sides and the provided turn angle. Add a fill only after the outline closes correctly.
 
-**Hard:** Complete \`add_triangle_detail()\` with an interior pattern, face, border, or second shape that moves with the triangle. Verify both arrow keys still redraw cleanly.`,
+**Hard:** Complete \`add_triangle_detail()\` with an interior pattern, face, border, or second shape that moves with the triangle. Verify Left, Right, Up and Down still redraw cleanly without travel lines.`,
 			projectLink: "/ide?mode=turtle&template=triangle-motion"
 		},
 		{

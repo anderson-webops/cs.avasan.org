@@ -25,7 +25,7 @@ describe("Scratch classroom", () => {
 	});
 	it("keeps a small, ordered core sequence and separate practice", () => {
 		const projects = scratchLevel1ClassroomCourse.modules.flatMap(module =>
-			module.curriculum.filter(item => item.projectLink)
+			module.curriculum.filter(item => item.projectLink && item.id !== "scratch-classroom-independent-game")
 		);
 		expect(projects).toHaveLength(12);
 		expect(projects[0].title).toBe("Animate Your Name");
@@ -39,6 +39,13 @@ describe("Scratch classroom", () => {
 				/^\/ide\?mode=scratch&starter=[a-z-]+$/
 			);
 		}
+	});
+	it("launches independent work without starter scripts or a solution", () => {
+		const independent = scratchLevel1ClassroomCourse.modules.flatMap(module => module.curriculum)
+			.find(item => item.id === "scratch-classroom-independent-game");
+		expect(independent?.projectLink).toBe("/ide?mode=scratch&starter=blank");
+		expect(independent?.content).toContain("/scratch-projects/blank.sb3");
+		expect(independent?.solutionLink).toBeUndefined();
 	});
 	it("limits frame resources to the editor and public Scratch assets", () => {
 		const frame = scratchFrameDocument("https://example.test", "channel");
