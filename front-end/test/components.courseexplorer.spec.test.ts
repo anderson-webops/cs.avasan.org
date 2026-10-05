@@ -76,7 +76,7 @@ describe("CourseExplorer public catalog", () => {
 		vi.restoreAllMocks();
 	});
 
-	async function mountPublicCatalog() {
+	async function mountPublicCatalog(attach = false) {
 		const pinia = createPinia();
 		setActivePinia(pinia);
 		const coursesStore = useCoursesStore();
@@ -93,6 +93,7 @@ describe("CourseExplorer public catalog", () => {
 			});
 
 		const wrapper = mount(CourseExplorer, {
+			attachTo: attach ? document.body : undefined,
 			global: {
 				plugins: [pinia],
 				stubs: {
@@ -110,6 +111,40 @@ describe("CourseExplorer public catalog", () => {
 		return { loadCourse, wrapper };
 	}
 
+	it("keeps course controls closed while the lesson is available", async () => {
+		const { wrapper } = await mountPublicCatalog(true);
+		expect(
+			wrapper.get(".course-toolbar-disclosure").attributes("open")
+		).toBeUndefined();
+		expect(wrapper.get("#course-reader-panel").text()).toContain(
+			"Try one idea"
+		);
+		expect(wrapper.get(".outline-toggle").attributes("aria-expanded")).toBe(
+			"false"
+		);
+		await wrapper.get(".outline-toggle").trigger("click");
+		expect(wrapper.get(".outline-toggle").attributes("aria-expanded")).toBe(
+			"true"
+		);
+		await wrapper.get(".outline-button").trigger("click");
+		await flushPromises();
+		expect(wrapper.get(".outline-toggle").attributes("aria-expanded")).toBe(
+			"false"
+		);
+		expect(document.activeElement).toBe(
+			wrapper.get("#course-reader-panel").element
+		);
+		wrapper.unmount();
+	});
+	it("opens lesson navigation for search results", async () => {
+		const { wrapper } = await mountPublicCatalog();
+		await wrapper.get("#course-search").setValue("Try one idea");
+		expect(wrapper.get(".outline-toggle").attributes("aria-expanded")).toBe(
+			"true"
+		);
+		expect(wrapper.get(".course-outline").classes()).toContain("is-open");
+		wrapper.unmount();
+	});
 	it("offers exactly the five public classroom courses", async () => {
 		const { loadCourse, wrapper } = await mountPublicCatalog();
 		const options = wrapper

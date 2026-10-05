@@ -1500,15 +1500,6 @@ const selectedBlueJClassTargets = computed(() => {
 		})
 		.slice(0, 8);
 });
-const codeIdeHeroContent = {
-	eyebrow: "IDE",
-	title: "IDE",
-	description:
-		"Build multi-file Python and Java projects, use the Turtle canvas for drawing and " +
-		"keyboard-driven lessons, explore PyGame Zero games and data/AI notebooks with " +
-		"rendered charts, preview Java console programs or Karel robot worlds, and use " +
-		"BlueJ integration for desktop object-bench projects, ZIP import, and package.bluej export."
-};
 
 function karelCellKey(street: number, avenue: number) {
 	return `${street}:${avenue}`;
@@ -8322,15 +8313,13 @@ defineExpose({ stop: stopCurrentProject });
 			@change="importBlueJProjectArchiveFromInput"
 		/>
 		<div class="code-ide-hero">
-			<div>
-				<p class="code-ide-eyebrow">{{ codeIdeHeroContent.eyebrow }}</p>
-				<h1>{{ codeIdeHeroContent.title }}</h1>
-				<p>{{ codeIdeHeroContent.description }}</p>
-			</div>
+			<h1>IDE</h1>
 			<div class="code-ide-status">
 				<div aria-live="polite">
 					<span>{{ saveMessage }}</span>
-					<strong>{{ runMessage }}</strong>
+					<strong role="status" data-testid="ide-run-status">{{
+						runMessage
+					}}</strong>
 				</div>
 			</div>
 		</div>
@@ -11760,5 +11749,78 @@ html.dark .editor-shortcuts ul {
 	.ide-settings-trigger {
 		flex: 1 1 auto;
 	}
+}
+
+.code-ide-page {
+	width: min(1680px, calc(100% - 2rem));
+}
+.code-ide-main {
+	padding: 0.65rem;
+	gap: 0.5rem;
+	border-radius: 10px;
+}
+.code-ide-sidebar {
+	padding: 0.65rem;
+	border-radius: 10px;
+}
+.editor-toolbar {
+	gap: 0.5rem;
+}
+.project-title-label {
+	font-size: 0.8rem;
+	text-transform: none;
+	letter-spacing: 0;
+	font-weight: 600;
+}
+.panel-header {
+	padding: 0.5rem 0.65rem;
+	font-size: 0.8rem;
+	letter-spacing: 0;
+	text-transform: none;
+}
+.code-panel,
+.result-panel {
+	border-radius: 8px;
+}
+
+.code-ide-page {
+	--code-ide-toolbar-control-size: 2.75rem;
+	--code-ide-toolbar-control-radius: 8px;
+}
+.code-ide-hero {
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	background: transparent;
+}
+html.dark .code-ide-hero {
+	background: transparent;
+}
+.code-ide-hero h1 {
+	margin: 0;
+	font-size: 1.4rem;
+}
+.code-ide-status {
+	display: block;
+	min-width: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	font-size: 0.85rem;
+}
+html.dark .code-ide-status {
+	background: transparent;
+}
+.code-ide-status > div {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem 0.75rem;
+}
+.code-ide-status strong {
+	font-size: 0.85rem;
 }
 </style>

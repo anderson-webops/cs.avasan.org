@@ -1060,3 +1060,58 @@ html.dark body .course-explorer :is(.resource-link, .resource-link-label, .resou
 		scroll-behavior: auto !important;
 	}
 }
+
+/* Content pages use a quiet frame; the home page keeps its original presentation. */
+.site-frame.site-frame--content .page-shell {
+	padding-block: 1rem 2rem;
+	gap: 1.25rem;
+}
+.site-frame.site-frame--content .page-title {
+	font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+	line-height: 1.15;
+}
+.site-frame.site-frame--content .section-title {
+	font-size: clamp(1.3rem, 2vw, 1.6rem);
+}
+.site-frame.site-frame--content .page-hero {
+	gap: 1.25rem;
+}
+.site-frame.site-frame--content .page-copy {
+	font-size: 1rem;
+	line-height: 1.65;
+}
+.site-frame.site-frame--content .site-action-row {
+	gap: 0.5rem;
+}
+.site-frame.site-frame--content .site-button {
+	min-height: 2.75rem;
+	padding: 0.5rem 0.8rem;
+	border-radius: 8px;
+	font-size: 0.9rem;
+	box-shadow: none;
+}
+.site-frame.site-frame--content .site-surface {
+	box-shadow: none;
+}
+.site-frame.site-frame--content .site-main > .page-shell {
+	margin-inline: auto;
+}
+.site-frame.site-frame--content .site-footer {
+	margin-top: 0;
+}
+
+/* Remove nested dark fills from navigation/chrome without changing the home. */
+.site-frame.site-frame--content
+	:is(.site-nav__inner, .course-toolbar, .profile-card, .workspace-sheet) {
+	background: transparent !important;
+	box-shadow: none;
+}
+.site-frame.site-frame--content .course-explorer :is(.stat, .stat.is-progress) {
+	background: transparent !important;
+}
+.site-frame.site-frame--content
+	.course-explorer
+	.outline-button:not([aria-current="true"]) {
+	background: transparent !important;
+	border-color: transparent !important;
+}

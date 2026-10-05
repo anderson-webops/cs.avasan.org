@@ -4,12 +4,12 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import TheHeader from "@/components/TheHeader.vue";
 import { useAppStore } from "@/stores/app";
 
-vi.mock("vue-router", () => ({
-	useRoute: () => ({ path: "/" })
-}));
+const route = vi.hoisted(() => ({ path: "/" }));
+vi.mock("vue-router", () => ({ useRoute: () => route }));
 
 describe("TheHeader.vue", () => {
 	beforeEach(() => {
+		route.path = "/";
 		vi.stubEnv("VITE_CLASSROOM_PRIVACY_APPROVED", "true");
 		vi.stubEnv("VITE_CLASSROOM_PRIVACY_POLICY_VERSION", "test-policy-1");
 		vi.stubEnv(
@@ -56,6 +56,16 @@ describe("TheHeader.vue", () => {
 		});
 	}
 
+	it("uses compact chrome away from the home page", () => {
+		route.path = "/ide";
+		const compact = mountHeader();
+		expect(compact.classes()).toContain("site-header--compact");
+		compact.unmount();
+		route.path = "/";
+		const home = mountHeader();
+		expect(home.classes()).not.toContain("site-header--compact");
+		home.unmount();
+	});
 	it("shows only public classroom navigation when logged out", () => {
 		const wrapper = mountHeader();
 		const links = wrapper

@@ -25,7 +25,10 @@ async function logout() {
 </script>
 
 <template>
-	<header class="site-header">
+	<header
+		class="site-header"
+		:class="{ 'site-header--compact': route.path !== '/' }"
+	>
 		<div class="site-shell site-shell--wide">
 			<nav
 				class="navbar navbar-expand-lg site-nav"
@@ -253,5 +256,37 @@ async function logout() {
 	.site-nav__action {
 		width: 100%;
 	}
+}
+
+.site-header.site-header--compact {
+	padding-top: 0.35rem;
+}
+.site-header--compact .site-nav__inner {
+	padding: 0.25rem 0.5rem;
+	gap: 0.35rem 0.75rem;
+	background: transparent;
+	box-shadow: none;
+	border-radius: 8px;
+}
+.site-header--compact .site-brand {
+	gap: 0.5rem;
+}
+.site-header--compact .site-brand__mark {
+	width: 2rem;
+	height: 2rem;
+	border-radius: 8px;
+}
+.site-header--compact .site-brand__title {
+	font-size: 1.15rem;
+}
+.site-header--compact .site-nav__link {
+	min-height: 2.75rem;
+	padding: 0.35rem 0.6rem;
+	font-size: 0.9rem;
+}
+.site-header--compact .site-nav__action {
+	min-height: 2.75rem;
+	padding: 0.35rem 0.65rem;
+	font-size: 0.9rem;
 }
 </style>

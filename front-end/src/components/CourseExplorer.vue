@@ -9,6 +9,7 @@ import type {
 import { storeToRefs } from "pinia";
 import {
 	computed,
+	nextTick,
 	onBeforeUnmount,
 	onMounted,
 	ref,
@@ -78,6 +79,7 @@ const appStore = useAppStore();
 const { currentAdmin } = storeToRefs(appStore);
 
 const searchQuery = ref("");
+const outlineOpen = ref(false);
 const selectedCourseId = ref("");
 const activeModuleId = ref("");
 const selectedCourse = shallowRef<CourseDefinition | null>(null);
@@ -135,6 +137,9 @@ const pythonIdeCourseLabel = computed(() =>
 );
 
 const normalizedQuery = computed(() => normalizeSearch(searchQuery.value));
+watch(normalizedQuery, query => {
+	if (query) outlineOpen.value = true;
+});
 
 watch(
 	[courseList, isStorageReady, currentHashAnchor],
@@ -484,8 +489,11 @@ function selectCourse(id: string) {
 	selectedCourseId.value = id;
 }
 
-function selectModule(id: string) {
+async function selectModule(id: string) {
 	activeModuleId.value = id;
+	outlineOpen.value = false;
+	await nextTick();
+	document.getElementById("course-reader-panel")?.focus();
 }
 
 function clearSearch() {
@@ -1019,56 +1027,77 @@ function writeStoredValue(key: string, value: string) {
 				</div>
 			</header>
 
-			<div class="course-toolbar">
-				<label class="control-block" for="course-select">
-					<span class="control-label">Course</span>
-					<select
-						id="course-select"
-						v-model="selectedCourseId"
-						class="course-select"
-						@change="selectCourse(selectedCourseId)"
-					>
-						<optgroup
-							v-for="group in courseGroups"
-							:key="group.key"
-							:label="group.label"
-						>
-							<option
-								v-for="course in group.courses"
-								:key="course.id"
-								:value="course.id"
+			<div class="course-navigation-controls">
+				<button
+					class="site-button site-button--secondary outline-toggle"
+					type="button"
+					:aria-expanded="outlineOpen"
+					aria-controls="course-outline"
+					@click="outlineOpen = !outlineOpen"
+				>
+					Lessons
+				</button>
+				<details class="course-toolbar-disclosure">
+					<summary>Course and search</summary>
+					<div class="course-toolbar">
+						<label class="control-block" for="course-select">
+							<span class="control-label">Course</span>
+							<select
+								id="course-select"
+								v-model="selectedCourseId"
+								class="course-select"
+								@change="selectCourse(selectedCourseId)"
 							>
-								{{ course.name }}
-							</option>
-						</optgroup>
-					</select>
-				</label>
+								<optgroup
+									v-for="group in courseGroups"
+									:key="group.key"
+									:label="group.label"
+								>
+									<option
+										v-for="course in group.courses"
+										:key="course.id"
+										:value="course.id"
+									>
+										{{ course.name }}
+									</option>
+								</optgroup>
+							</select>
+						</label>
 
-				<label class="control-block search-block" for="course-search">
-					<span class="control-label">Search lessons</span>
-					<div class="search-shell">
-						<input
-							id="course-search"
-							v-model="searchQuery"
-							class="course-search"
-							name="course-search"
-							placeholder="Search module titles, lessons, or keywords"
-							type="search"
-						/>
-						<button
-							v-if="searchQuery"
-							class="clear-search"
-							type="button"
-							@click="clearSearch"
+						<label
+							class="control-block search-block"
+							for="course-search"
 						>
-							Clear
-						</button>
+							<span class="control-label">Search lessons</span>
+							<div class="search-shell">
+								<input
+									id="course-search"
+									v-model="searchQuery"
+									class="course-search"
+									name="course-search"
+									placeholder="Search module titles, lessons, or keywords"
+									type="search"
+								/>
+								<button
+									v-if="searchQuery"
+									class="clear-search"
+									type="button"
+									@click="clearSearch"
+								>
+									Clear
+								</button>
+							</div>
+						</label>
 					</div>
-				</label>
+				</details>
 			</div>
 
 			<div v-if="selectedCourse" class="course-workspace">
-				<aside class="course-outline">
+				<aside
+					id="course-outline"
+					class="course-outline"
+					:class="{ 'is-open': outlineOpen }"
+				>
 					<div class="outline-header">
 						<h3>Sections</h3>
 					</div>
@@ -1140,6 +1169,7 @@ function writeStoredValue(key: string, value: string) {
 				<div
 					v-if="activeModule"
 					id="course-reader-panel"
+					tabindex="-1"
 					class="course-reader"
 				>
 					<header class="reader-header">
@@ -1151,13 +1181,14 @@ function writeStoredValue(key: string, value: string) {
 							<h3>{{ activeModule.title }}</h3>
 						</div>
 
-						<div
+						<details
 							v-if="
 								activeModuleProjectLinks.length > 0 ||
 								activeModuleSupplementalLinks.length > 0
 							"
 							class="reader-link-groups"
 						>
+							<summary>Jump to project</summary>
 							<div
 								v-if="activeModuleProjectLinks.length > 0"
 								class="reader-link-group"
@@ -1201,7 +1232,7 @@ function writeStoredValue(key: string, value: string) {
 									</a>
 								</nav>
 							</div>
-						</div>
+						</details>
 					</header>
 
 					<section class="reader-section">
@@ -2551,5 +2582,308 @@ function writeStoredValue(key: string, value: string) {
 	.lesson-card.is-supplemental {
 		padding-left: 0.85rem;
 	}
+}
+/* Keep the lesson above the fold. Secondary navigation opens on demand. */
+.course-shell {
+	gap: 0.75rem;
+	overflow: visible;
+}
+.course-hero {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1rem;
+	padding: 0;
+}
+.course-hero-copy {
+	flex: 1 1 auto;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.75rem;
+}
+.course-hero h2 {
+	font-size: 1.35rem;
+}
+.course-ide-action {
+	margin: 0;
+}
+.course-summary {
+	position: relative;
+	font-size: 0.9rem;
+}
+.course-summary summary {
+	min-height: 2.75rem;
+	display: list-item;
+	align-content: center;
+	cursor: pointer;
+}
+.course-stats {
+	position: absolute;
+	z-index: 5;
+	right: 0;
+	width: min(28rem, 85vw);
+	max-width: none;
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0.75rem;
+	gap: 0.65rem 1rem;
+	background: var(--course-panel);
+	box-shadow: var(--course-shadow);
+}
+.stat {
+	padding: 0;
+	border: 0;
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+	gap: 0.4rem;
+	background: transparent;
+}
+.stat.is-progress {
+	background: transparent;
+}
+.stat dt {
+	text-transform: none;
+	letter-spacing: 0;
+	color: var(--course-text-soft);
+	font-size: 0.9rem;
+}
+.stat dd {
+	margin: 0;
+	font-size: 1rem;
+}
+.stat small {
+	display: inline;
+	margin: 0 0 0 0.4rem;
+	font-size: 0.8rem;
+}
+.course-navigation-controls {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.5rem;
+}
+.course-toolbar-disclosure {
+	flex: 1;
+	min-width: 0;
+}
+.course-toolbar-disclosure > summary {
+	min-height: 2.75rem;
+	align-content: center;
+	cursor: pointer;
+	color: var(--course-text-soft);
+	font-size: 0.85rem;
+}
+.course-toolbar-disclosure[open] .course-toolbar {
+	margin-top: 0.5rem;
+}
+.course-toolbar {
+	display: grid;
+	grid-template-columns: minmax(12rem, 1fr) minmax(12rem, 1fr);
+	gap: 0.75rem;
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+}
+.course-toolbar.has-learner {
+	grid-template-columns: minmax(12rem, 0.8fr) minmax(14rem, 1.2fr) minmax(
+			12rem,
+			1fr
+		);
+}
+.control-block {
+	gap: 0.25rem;
+}
+.control-label {
+	font-size: 0.8rem;
+	text-transform: none;
+	letter-spacing: 0;
+}
+.course-select,
+.course-search {
+	min-height: 2.75rem;
+	padding: 0.5rem 0.75rem;
+	border-radius: 8px;
+	font-size: 0.9rem;
+	box-shadow: none;
+}
+.course-select {
+	padding-right: 2.5rem;
+}
+.staff-context-status {
+	justify-content: flex-start;
+	flex-direction: row;
+}
+.progress-save-status {
+	padding: 0.25rem 0.5rem;
+	font-size: 0.85rem;
+	font-weight: 500;
+}
+.course-workspace {
+	grid-template-columns: minmax(12rem, 15rem) minmax(0, 1fr);
+	border-radius: 10px;
+	box-shadow: none;
+}
+.course-outline {
+	position: static;
+	padding: 0.75rem;
+	gap: 0.65rem;
+	background: transparent;
+	max-height: none;
+}
+.outline-header {
+	padding: 0;
+}
+.outline-header h3 {
+	font-family: inherit;
+	font-size: 0.95rem;
+}
+.outline-button {
+	padding: 0.5rem;
+	gap: 0.5rem;
+	border-radius: 6px;
+}
+.outline-copy strong {
+	font-size: 0.85rem;
+}
+.outline-copy small {
+	font-size: 0.75rem;
+}
+.outline-position {
+	width: 1.5rem;
+	height: 1.5rem;
+	font-size: 0.75rem;
+}
+.course-reader {
+	padding: 1rem 1.25rem;
+	gap: 1rem;
+}
+.reader-header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	flex-direction: row;
+	gap: 0.5rem 1rem;
+	padding: 0 0 0.75rem;
+}
+.reader-copy {
+	flex: 1 1 18rem;
+	gap: 0.35rem;
+}
+.reader-header h3 {
+	font-size: clamp(1.25rem, 2vw, 1.6rem);
+}
+.reader-tools {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: start;
+	gap: 0.25rem 1rem;
+	max-width: 100%;
+}
+.reader-link-groups {
+	display: block;
+	margin: 0;
+	max-width: 100%;
+}
+.reader-link-groups summary,
+.module-guide-disclosure summary {
+	min-height: 2.75rem;
+	align-content: center;
+	cursor: pointer;
+	color: var(--course-text-soft);
+	font-size: 0.85rem;
+}
+.reader-link-group {
+	margin-top: 0.75rem;
+}
+.module-guide {
+	margin-top: 0.5rem;
+}
+.progress-toggle.is-module {
+	margin-top: 0.35rem;
+	font-size: 0.85rem;
+}
+.section-header {
+	gap: 0.5rem;
+}
+.section-header > div {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 0.5rem;
+}
+.section-header .section-eyebrow {
+	margin: 0;
+}
+.section-header h4 {
+	font-size: 1.2rem;
+}
+.lesson-card {
+	padding: 1rem;
+	border-radius: 8px;
+	box-shadow: none;
+}
+.lesson-header {
+	gap: 0.65rem;
+}
+.outline-toggle {
+	display: none;
+}
+@media (max-width: 800px) {
+	.course-workspace {
+		grid-template-columns: 1fr;
+	}
+	.course-toolbar.has-learner {
+		grid-template-columns: 1fr 1fr;
+	}
+	.course-toolbar.has-learner .search-block {
+		grid-column: 1 / -1;
+	}
+	.outline-toggle {
+		display: inline-flex;
+		align-self: flex-start;
+	}
+	.course-outline {
+		display: none;
+		border-right: 0;
+	}
+	.course-outline.is-open {
+		display: flex;
+		max-height: min(45vh, 24rem);
+		overflow: auto;
+	}
+	.course-reader {
+		padding: 0.85rem;
+	}
+	.course-hero-copy {
+		flex-wrap: wrap;
+	}
+}
+@media (max-width: 480px) {
+	.course-toolbar,
+	.course-toolbar.has-learner {
+		grid-template-columns: 1fr;
+	}
+	.course-toolbar.has-learner .search-block {
+		grid-column: auto;
+	}
+	.course-summary {
+		margin-left: auto;
+	}
+	.lesson-header {
+		flex-direction: row;
+		align-items: center;
+	}
+	.section-header {
+		flex-direction: row;
+		align-items: center;
+	}
+	.search-shell {
+		flex-direction: row;
+	}
+}
+
+.course-outline .outline-button:not([aria-current="true"]) {
+	background: transparent !important;
+	border-color: transparent !important;
 }
 </style>

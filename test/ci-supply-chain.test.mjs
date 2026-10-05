@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { Buffer } from "node:buffer";
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 // This executable root-level configuration test intentionally uses Node's test runner.
@@ -54,7 +55,39 @@ function expectedRegistryTarball(name, version) {
 	return `https://registry.npmjs.org/${name}/-/${tarballName}-${version}.tgz`;
 }
 
+const reviewedBraces = Object.freeze({
+	name: "@classes/braces",
+	version: "3.0.3-classes.1",
+	resolved: "file:vendor/classes-braces-3.0.3-classes.1.tgz",
+	integrity:
+		"sha512-CvnqWaCXetG3nKnHDvxhuL4r8NbU+x+9aw3DqOCQBY9wZzbwK7iVdSkTl20Ddmgu12wIF004obCkseb4ORkVZQ=="
+});
+
+function assertReviewedBracesOccurrence(location, metadata) {
+	assert.equal(location, "node_modules/braces");
+	for (const [field, expected] of Object.entries(reviewedBraces)) {
+		assert.equal(metadata[field], expected, `unreviewed braces ${field}`);
+	}
+	assert.notEqual(metadata.link, true);
+	assert.notEqual(metadata.inBundle, true);
+	assert.notEqual(metadata.hasInstallScript, true);
+	const manifest = readJson("package.json");
+	assert.equal(manifest.devDependencies.braces, reviewedBraces.resolved);
+	assert.equal(manifest.overrides.braces, "$braces");
+	const bytes = readFileSync(
+		join(repositoryRoot, reviewedBraces.resolved.slice(5))
+	);
+	assert.equal(
+		`sha512-${createHash("sha512").update(bytes).digest("base64")}`,
+		reviewedBraces.integrity
+	);
+}
+
 function assertCanonicalRegistryOccurrence(location, metadata) {
+	if (metadata.name === reviewedBraces.name) {
+		assertReviewedBracesOccurrence(location, metadata);
+		return;
+	}
 	const name = packageNameFromLockPath(location);
 	const identity = `${name}@${metadata.version}`;
 	assert.equal(
@@ -158,6 +191,30 @@ test("both lockfiles pin every installed package to canonical npm provenance", (
 		for (const [location, metadata] of occurrences) {
 			assertCanonicalRegistryOccurrence(location, metadata);
 		}
+	}
+});
+
+test("only the exact reviewed bounded braces archive is accepted", () => {
+	const metadata =
+		readJson("package-lock.json").packages["node_modules/braces"];
+	assertReviewedBracesOccurrence("node_modules/braces", metadata);
+	assert.throws(() =>
+		assertReviewedBracesOccurrence("node_modules/other", metadata)
+	);
+	for (const [field, value] of Object.entries({
+		name: "braces",
+		version: "3.0.3",
+		resolved: "file:vendor/unreviewed.tgz",
+		integrity: "sha512-unreviewed",
+		link: true,
+		hasInstallScript: true
+	})) {
+		assert.throws(() =>
+			assertReviewedBracesOccurrence("node_modules/braces", {
+				...metadata,
+				[field]: value
+			})
+		);
 	}
 });
 

@@ -289,6 +289,9 @@ jobs:
             - name: Verify CI supply-chain configuration
               run: npm run test:ci-security
 
+            - name: Verify bounded glob compatibility
+              run: npm run test:braces-security
+
             - name: Audit all dependencies
               run: npm run audit:full
 

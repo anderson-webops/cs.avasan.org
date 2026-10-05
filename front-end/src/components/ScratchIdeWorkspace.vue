@@ -192,49 +192,56 @@ defineExpose({ stop: () => send("stop") });
 			<label
 				>Project name <input v-model="title" maxlength="120"
 			/></label>
-			<label class="file-control"
-				>Open .sb3
-				<input
-					type="file"
-					accept=".sb3"
-					:disabled="!ready || busy"
-					@change="openFile"
-			/></label>
-			<button :disabled="!ready || busy" @click="newProject">
-				New project
-			</button>
 			<button :disabled="!ready || busy" @click="send('download')">
 				Download project
 			</button>
 			<button :aria-pressed="expanded" @click="expanded = !expanded">
 				{{ expanded ? "Exit expanded view" : "Expand editor" }}
 			</button>
-		</div>
-		<div class="scratch-starters">
-			<label
-				>Classroom starter
-				<select v-model="starter">
-					<option value="">Choose a project</option>
-					<option value="blank">Blank independent project</option>
-					<option
-						v-for="item in catalog"
-						:key="item.id"
-						:value="item.id"
+			<details class="scratch-project-menu">
+				<summary>New or open</summary>
+				<div class="scratch-project-menu__content">
+					<button :disabled="!ready || busy" @click="newProject">
+						New project
+					</button>
+					<label class="file-control"
+						>Open .sb3
+						<input
+							type="file"
+							accept=".sb3"
+							:disabled="!ready || busy"
+							@change="openFile"
+						/>
+					</label>
+					<label
+						>Classroom starter
+						<select v-model="starter">
+							<option value="">Choose a project</option>
+							<option value="blank">
+								Blank independent project
+							</option>
+							<option
+								v-for="item in catalog"
+								:key="item.id"
+								:value="item.id"
+							>
+								{{ item.name }}
+							</option>
+						</select>
+					</label>
+					<button
+						:disabled="!selected || !ready || busy"
+						@click="openStarter"
 					>
-						{{ item.name }}
-					</option>
-				</select></label
-			>
-			<button
-				:disabled="!selected || !ready || busy"
-				@click="openStarter"
-			>
-				Open starter
-			</button>
-			<span role="status"
-				>{{ status }}{{ dirty ? " Unsaved changes." : "" }}</span
-			>
+						Open starter
+					</button>
+				</div>
+			</details>
 		</div>
+		<span class="scratch-status" role="status"
+			>{{ status }}{{ dirty ? " Unsaved changes." : "" }}</span
+		>
+
 		<iframe
 			v-if="source"
 			ref="frame"
@@ -361,5 +368,47 @@ defineExpose({ stop: () => send("stop") });
 	.scratch-workspace iframe {
 		min-width: 760px;
 	}
+}
+
+.scratch-workspace {
+	padding: 0.5rem;
+	gap: 0.4rem;
+}
+.scratch-toolbar {
+	gap: 0.4rem;
+}
+.scratch-status {
+	font-size: 0.85rem;
+}
+.scratch-project-menu {
+	position: relative;
+}
+.scratch-project-menu summary {
+	min-height: 2.75rem;
+	align-content: center;
+	cursor: pointer;
+}
+.scratch-project-menu__content {
+	position: absolute;
+	right: 0;
+	z-index: 5;
+	display: grid;
+	gap: 0.65rem;
+	width: min(26rem, 85vw);
+	padding: 0.75rem;
+	border: 1px solid var(--color-border);
+	border-radius: 8px;
+	background: var(--color-surface-strong);
+	box-shadow: var(--shadow-soft);
+}
+.scratch-project-menu__content label {
+	flex-wrap: wrap;
+}
+.scratch-project-menu__content input {
+	width: 100%;
+}
+.scratch-project-menu__content select {
+	min-width: 0;
+	width: 100%;
 }
 </style>

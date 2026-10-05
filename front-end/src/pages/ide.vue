@@ -38,7 +38,7 @@ function choose(event: Event) {
 <template>
 	<div class="integrated-ide">
 		<label class="ide-environment"
-			>Editor
+			><span class="sr-only">Editor</span>
 			<select :value="scratch ? 'scratch' : 'code'" @change="choose">
 				<option value="code">Python or Java</option>
 				<option value="scratch">Scratch blocks</option>
@@ -66,7 +66,7 @@ function choose(event: Event) {
 	display: flex;
 	align-items: center;
 	gap: 0.7rem;
-	margin: 0.5rem 1rem;
+	margin: 0.35rem 1rem;
 	font: inherit;
 	color: var(--color-ink);
 	text-transform: none;
