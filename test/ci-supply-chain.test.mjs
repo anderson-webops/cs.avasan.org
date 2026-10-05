@@ -350,3 +350,16 @@ test("Dependabot covers the root lock, standalone backend lock, and actions", ()
 	assert.match(dependabot, /package-ecosystem: github-actions\n\s+directory: \/\n/u);
 	assert.equal((dependabot.match(/interval: weekly/gu) ?? []).length, 3);
 });
+
+
+test("existing fallback stages include the reviewed archive before installation", () => {
+	for (const path of ["Dockerfile", "back-end/Dockerfile"]) {
+		const stages = read(path).split(/^FROM /mu).slice(1);
+		for (const stage of stages) {
+			const install = stage.indexOf("npm ci");
+			if (install === -1) continue;
+			const copy = stage.indexOf("COPY vendor/classes-braces-3.0.3-classes.1.tgz ./vendor/classes-braces-3.0.3-classes.1.tgz");
+			assert.ok(copy >= 0 && copy < install, `${path}: archive must precede root lock installation`);
+		}
+	}
+});

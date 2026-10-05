@@ -31,3 +31,6 @@ Dockerfile text eol=lf
 
 # Keep the reviewed asset manifest readable in fresh autocrlf checkouts.
 front-end/src/vendor/chromium-t-rex/UPSTREAM_SHA256SUMS text eol=lf
+
+# Preserve exact reviewed archive/source license bytes on every platform.
+vendor/braces/LICENSE text eol=lf

@@ -8,6 +8,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 COPY front-end/package.json ./front-end/package.json
 COPY back-end/package.json ./back-end/package.json
+COPY vendor/classes-braces-3.0.3-classes.1.tgz ./vendor/classes-braces-3.0.3-classes.1.tgz
 RUN CYPRESS_INSTALL_BINARY=0 PUPPETEER_SKIP_DOWNLOAD=true \
 	npm ci --include=optional --strict-allow-scripts
 
@@ -22,6 +23,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 COPY front-end/package.json ./front-end/package.json
 COPY back-end/package.json ./back-end/package.json
+COPY vendor/classes-braces-3.0.3-classes.1.tgz ./vendor/classes-braces-3.0.3-classes.1.tgz
 RUN CYPRESS_INSTALL_BINARY=0 PUPPETEER_SKIP_DOWNLOAD=true \
 	npm ci --include=optional --strict-allow-scripts
 
@@ -43,6 +45,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 COPY front-end/package.json ./front-end/package.json
 COPY back-end/package.json ./back-end/package.json
+COPY vendor/classes-braces-3.0.3-classes.1.tgz ./vendor/classes-braces-3.0.3-classes.1.tgz
 RUN npm ci --omit=dev --workspace back-end --include-workspace-root=false \
 	--include=optional --strict-allow-scripts \
 	&& npm cache clean --force
