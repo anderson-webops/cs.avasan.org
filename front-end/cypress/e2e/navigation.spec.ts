@@ -26,6 +26,7 @@ context("Public classroom navigation", () => {
 		cy.contains("h1", "Courses").should("be.visible");
 		cy.contains("No student account is needed.").should("not.exist");
 		cy.contains("button", "Student sign in").should("not.exist");
+		cy.get(".course-toolbar-disclosure summary").click();
 		cy.get("#course-select").should("be.visible");
 	});
 
@@ -36,7 +37,8 @@ context("Public classroom navigation", () => {
 
 		cy.get(".site-nav").contains("a:visible", "IDE").click();
 		cy.location("pathname").should("match", /^\/ide\/?$/);
-		cy.contains("h1", "IDE").should("be.visible");
+		cy.contains("h1", "IDE").should("exist");
+		cy.get(".code-ide-workspace").should("be.visible");
 		cy.contains("Using a shared computer?").should("not.exist");
 		cy.contains("button", "Clear browser projects for next student").should(
 			"not.exist"
@@ -55,7 +57,8 @@ context("Public classroom navigation", () => {
 			cy.contains("a", game).should("be.visible");
 		}
 
-		cy.contains("a", "T-Rex Runner").click();
+		cy.get("#app[data-v-app]").should("exist");
+		cy.get('a[href="/games/t-rex-runner"]').click();
 		cy.location("pathname").should("match", /^\/games\/t-rex-runner\/?$/);
 		cy.contains("h1", "T-Rex Runner").should("be.visible");
 		cy.get('iframe[title="T-Rex Runner game"]')

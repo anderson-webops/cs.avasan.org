@@ -95,11 +95,16 @@ test(
 				"http://127.0.0.1:5198/ide?mode=scratch&starter=two-arrows",
 				{ waitUntil: "networkidle2" }
 			);
+			async function openProjectMenu() {
+				if (!(await page.$eval(".scratch-project-menu", element => element.open))) {
+					await page.locator(".scratch-project-menu summary").click();
+				}
+			}
 			const loaded = () =>
 				page.waitForFunction(
 					() =>
 						document
-							.querySelector(".scratch-starters [role=status]")
+							.querySelector(".scratch-status[role=status]")
 							?.textContent.includes("Project open"),
 					{ timeout: 20000 }
 				);
@@ -136,22 +141,23 @@ test(
 			await frame.locator('input[placeholder="x"]').fill("20");
 			await page.keyboard.press("Enter");
 			await frame.click("canvas");
-			await page.waitForFunction(() => document.querySelector(".scratch-starters [role=status]")?.textContent.includes("Unsaved changes"));
+			await page.waitForFunction(() => document.querySelector(".scratch-status[role=status]")?.textContent.includes("Unsaved changes"));
 			page.removeAllListeners("dialog");
 			const cancelledReplacement = new Promise(resolve => page.once("dialog", async dialog => {
 				await dialog.dismiss();
 				resolve();
 			}));
+			await openProjectMenu();
 			await page.locator("::-p-text(New project)").click();
 			await cancelledReplacement;
-			assert.equal(await page.$eval(".scratch-starters select", select => select.value), "two-arrows");
+			assert.equal(await page.$eval(".scratch-project-menu select", select => select.value), "two-arrows");
 			assert.equal(await frame.$eval('input[placeholder="x"]', input => input.value), "20");
 			page.on("dialog", dialog => dialog.accept());
 			await page.locator("::-p-text(Download project)")
 				.click();
 			await page.waitForFunction(() =>
 				document
-					.querySelector(".scratch-starters [role=status]")
+					.querySelector(".scratch-status[role=status]")
 					?.textContent.includes("Downloaded")
 			);
 			const exported = path.join(files, "Two Arrows.sb3");
@@ -177,6 +183,7 @@ test(
 						filename,
 						createProject(lesson.id, solution).archive
 					);
+					await openProjectMenu();
 					await (
 						await page.$(".file-control input")
 					).uploadFile(filename);
@@ -184,8 +191,9 @@ test(
 				}
 			// September 30 first lesson: sprite clicks are local, size changes
 			// accumulate, and the documented green-flag reset restores the scene.
-			await page.select(".scratch-starters select", "animate-word");
-			await page.locator(".scratch-starters button").click();
+			await openProjectMenu();
+			await page.select(".scratch-project-menu select", "animate-word");
+			await page.locator("::-p-text(Open starter)").click();
 			await loaded();
 			const stageCanvas = await frame.$("canvas");
 			const stageBox = await stageCanvas.boundingBox();
@@ -245,11 +253,13 @@ test(
 					.currentCostume,
 				0
 			);
-			await page.select(".scratch-starters select", "dress-up");
-			await page.locator(".scratch-starters button").click();
+			await openProjectMenu();
+			await page.select(".scratch-project-menu select", "dress-up");
+			await page.locator("::-p-text(Open starter)").click();
 			await loaded();
 			// Independent work opens a fresh workspace through the host, even
 			// though the embedded upstream New menu is intentionally disabled.
+			await openProjectMenu();
 			await page.locator("::-p-text(New project)").click();
 			await loaded();
 			const blankFile = path.join(files, "Independent Mini-Game.sb3");
@@ -259,6 +269,7 @@ test(
 			const blankProject = JSON.parse(strFromU8(unzipSync(new Uint8Array(await readFile(blankFile)))["project.json"]));
 			assert.equal(blankProject.targets.length, 2);
 			for (const target of blankProject.targets) assert.deepEqual(target.blocks, {});
+			await openProjectMenu();
 			await (await page.$(".file-control input")).uploadFile(blankFile);
 			await loaded();
 			// The course's direct launch opens the same code-free project.
