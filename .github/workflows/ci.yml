@@ -292,6 +292,9 @@ jobs:
             - name: Verify bounded glob compatibility
               run: npm run test:braces-security
 
+            - name: Verify dependency advisory compatibility
+              run: node --test --test-timeout=10000 test/dependency-advisory-regressions.test.mjs
+
             - name: Audit all dependencies
               run: npm run audit:full
 
