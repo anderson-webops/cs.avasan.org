@@ -28,6 +28,31 @@ context("Public classroom navigation", () => {
 		cy.contains("button", "Student sign in").should("not.exist");
 		cy.get(".course-toolbar-disclosure summary").click();
 		cy.get("#course-select").should("be.visible");
+		cy.contains("Jump to a Project").should("not.exist");
+		cy.get(".reader-link-groups, .section-count").should("not.exist");
+	});
+
+	it("marks links that open a new tab", () => {
+		cy.visit("/games/t-rex-runner");
+		cy.get('a[target="_blank"]:visible')
+			.first()
+			.should(link => {
+				const style =
+					link[0].ownerDocument.defaultView!.getComputedStyle(
+						link[0],
+						"::after"
+					);
+				expect(style.content).to.equal('""');
+				expect(style.maskImage).not.to.equal("none");
+				expect(parseFloat(style.width)).to.be.greaterThan(0);
+			});
+		cy.get(".site-brand").should(link => {
+			const style = link[0].ownerDocument.defaultView!.getComputedStyle(
+				link[0],
+				"::after"
+			);
+			expect(style.maskImage).to.equal("none");
+		});
 	});
 
 	it("keeps only the essential public navigation", () => {

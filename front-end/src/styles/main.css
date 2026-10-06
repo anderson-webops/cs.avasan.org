@@ -1115,3 +1115,17 @@ html.dark body .course-explorer :is(.resource-link, .resource-link-label, .resou
 	background: transparent !important;
 	border-color: transparent !important;
 }
+
+/* Follow the actual link target, including links rendered from course Markdown. */
+a[target="_blank"]:not(.resource-link)::after,
+a.resource-link[target="_blank"] .resource-link-label::after {
+	content: "";
+	display: inline-block;
+	width: 0.8em;
+	height: 0.8em;
+	margin-inline-start: 0.4em;
+	flex-shrink: 0;
+	vertical-align: baseline;
+	background: currentColor;
+	mask: url("../assets/icons/new-tab.svg") center / contain no-repeat;
+}

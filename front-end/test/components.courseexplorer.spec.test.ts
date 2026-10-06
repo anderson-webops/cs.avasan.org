@@ -113,6 +113,9 @@ describe("CourseExplorer public catalog", () => {
 
 	it("keeps course controls closed while the lesson is available", async () => {
 		const { wrapper } = await mountPublicCatalog(true);
+		expect(wrapper.find(".reader-link-groups").exists()).toBe(false);
+		expect(wrapper.find(".section-count").exists()).toBe(false);
+		expect(wrapper.text()).not.toContain("Jump to project");
 		expect(
 			wrapper.get(".course-toolbar-disclosure").attributes("open")
 		).toBeUndefined();
