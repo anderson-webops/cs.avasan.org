@@ -1,6 +1,7 @@
 import { mount } from "@vue/test-utils";
 import { createPinia, setActivePinia } from "pinia";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { nextTick } from "vue";
 import TheHeader from "@/components/TheHeader.vue";
 import { useAppStore } from "@/stores/app";
 
@@ -37,8 +38,9 @@ describe("TheHeader.vue", () => {
 		vi.unstubAllEnvs();
 	});
 
-	function mountHeader(pinia = createPinia()) {
+	function mountHeader(pinia = createPinia(), resolved = true) {
 		setActivePinia(pinia);
+		useAppStore().sessionBootstrapStatus = resolved ? "ready" : "pending";
 		return mount(TheHeader, {
 			global: {
 				plugins: [pinia],
@@ -55,6 +57,37 @@ describe("TheHeader.vue", () => {
 			}
 		});
 	}
+
+	it("keeps student sign-in hidden during teacher bootstrap and revalidation", async () => {
+		const pinia = createPinia();
+		const wrapper = mountHeader(pinia, false);
+		document.body.appendChild(wrapper.element);
+		// Open the collapsed menu so visibility reflects the session gate.
+		wrapper.get("#siteNavbar").element.classList.add("show");
+		const app = useAppStore(pinia);
+		expect(wrapper.get('[data-testid="student-access"]').isVisible()).toBe(
+			false
+		);
+		app.sessionBootstrapStatus = "ready";
+		await nextTick();
+		expect(app.isSessionResolved).toBe(true);
+		expect(wrapper.get('[data-testid="student-access"]').isVisible()).toBe(
+			true
+		);
+		app.adminSessionRevalidating = true;
+		await nextTick();
+		expect(wrapper.get('[data-testid="student-access"]').isVisible()).toBe(
+			false
+		);
+		app.adminSessionRevalidating = false;
+		app.sessionBootstrapStatus = "failed";
+		await nextTick();
+		expect(wrapper.get('[data-testid="student-access"]').isVisible()).toBe(
+			true
+		);
+		wrapper.unmount();
+		wrapper.element.remove();
+	});
 
 	it("uses compact chrome away from the home page", () => {
 		route.path = "/ide";

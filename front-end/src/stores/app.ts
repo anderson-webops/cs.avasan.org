@@ -66,6 +66,15 @@ export const useAppStore = defineStore("app", {
 
 		isAdmin: state => !!state.currentAdmin,
 
+		isSessionResolved(): boolean {
+			return (
+				this.isLoggedIn ||
+				(this.sessionBootstrapStatus !== "pending" &&
+					!this.adminSessionRevalidating &&
+					!this.studentSessionRevalidating)
+			);
+		},
+
 		isStudent: state => !!state.currentUser,
 
 		currentStudent: state => state.currentUser,

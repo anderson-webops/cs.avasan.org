@@ -99,7 +99,7 @@ async function logout() {
 							</div>
 							<StudentAccess
 								v-if="studentAccountsAreEnabled()"
-								v-show="!currentAdmin"
+								v-show="app.isSessionResolved && !currentAdmin"
 							/>
 						</div>
 					</div>
