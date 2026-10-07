@@ -89,14 +89,14 @@ describe("TheHeader.vue", () => {
 		wrapper.element.remove();
 	});
 
-	it("uses compact chrome away from the home page", () => {
+	it("uses compact chrome on the catalog and IDE", () => {
 		route.path = "/ide";
 		const compact = mountHeader();
 		expect(compact.classes()).toContain("site-header--compact");
 		compact.unmount();
 		route.path = "/";
 		const home = mountHeader();
-		expect(home.classes()).not.toContain("site-header--compact");
+		expect(home.classes()).toContain("site-header--compact");
 		home.unmount();
 	});
 	it("shows only public classroom navigation when logged out", () => {

@@ -19,6 +19,7 @@ declare module 'vue' {
     CodePreview: typeof import('./components/CodePreview.vue')['default']
     CometHopperGame: typeof import('./components/games/CometHopperGame.vue')['default']
     CourseAssetPreview: typeof import('./components/CourseAssetPreview.vue')['default']
+    CourseAssignmentContent: typeof import('./components/CourseAssignmentContent.vue')['default']
     CourseExplorer: typeof import('./components/CourseExplorer.vue')['default']
     CrosswalkCrittersGame: typeof import('./components/games/CrosswalkCrittersGame.vue')['default']
     GameCardThumbnail: typeof import('./components/games/GameCardThumbnail.vue')['default']
@@ -39,5 +40,6 @@ declare module 'vue' {
     TheFooter: typeof import('./components/TheFooter.vue')['default']
     TheHeader: typeof import('./components/TheHeader.vue')['default']
     TRexRunnerGame: typeof import('./components/games/TRexRunnerGame.vue')['default']
+    WorkspaceViewToggle: typeof import('./components/WorkspaceViewToggle.vue')['default']
   }
 }

@@ -43,7 +43,8 @@ function courseDefinition(id: string, name: string) {
 					{
 						id: `${id}-lesson`,
 						title: "Try one idea",
-						content: "Build a small project and test what happens.",
+						content:
+							"**Objective:** Understand events. **Assignment:** Build a small project and test what happens. **Optional:** Add sound.",
 						playableSolutionEmbedUrl:
 							id === "scratch-level-1"
 								? "https://scratch.mit.edu/projects/297735619/embed"
@@ -63,6 +64,41 @@ function courseDefinition(id: string, name: string) {
 }
 
 describe("CourseExplorer public catalog", () => {
+	it("separates assignments, supplemental projects and learning context", async () => {
+		const { wrapper } = await mountPublicCatalog();
+		const view = (label: string) =>
+			wrapper
+				.findAll(".lesson-view-toggle button")
+				.find(button => button.text() === label)!;
+		expect(view("Projects").attributes("aria-pressed")).toBe("true");
+		expect(wrapper.find(".reader-link-groups").exists()).toBe(false);
+		expect(wrapper.get(".assignment-content").text()).toContain(
+			"Build a small project"
+		);
+		expect(wrapper.get(".assignment-content").text()).not.toContain(
+			"Understand events"
+		);
+		expect(wrapper.get(".assignment-aside.is-optional").text()).toContain(
+			"Add sound"
+		);
+		expect(wrapper.find(".lesson-card.is-supplemental").exists()).toBe(
+			false
+		);
+		await view("Supplemental Projects").trigger("click");
+		expect(wrapper.get(".lesson-card.is-supplemental").text()).toContain(
+			"Make it yours"
+		);
+		expect(wrapper.get("#lesson-view-content").text()).not.toContain(
+			"Try one idea"
+		);
+		await view("Learn").trigger("click");
+		expect(wrapper.get(".learning-card").text()).toContain(
+			"Understand events"
+		);
+		expect(wrapper.find(".assignment-content").exists()).toBe(false);
+		wrapper.unmount();
+	});
+
 	beforeEach(() => {
 		vi.clearAllMocks();
 		installLocalStorageStub();
@@ -167,17 +203,6 @@ describe("CourseExplorer public catalog", () => {
 			/assigned courses|learner context|log in|sign up/i
 		);
 		expect(wrapper.text()).not.toContain("Done");
-		expect(
-			wrapper
-				.get(".lesson-card:not(.is-supplemental) .lesson-kicker")
-				.text()
-		).toBe("Core");
-		expect(
-			wrapper.get(".lesson-card.is-supplemental .lesson-kicker").text()
-		).toBe("Practice");
-		expect(
-			wrapper.findAll(".section-eyebrow").map(label => label.text())
-		).toEqual(["Core", "Practice"]);
 		expect(loadCourse).toHaveBeenCalledWith("scratch-level-1");
 		expect(reportClassroomUsage).toHaveBeenCalledWith(
 			"course-open",

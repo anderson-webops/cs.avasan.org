@@ -47,6 +47,10 @@ describe("Teacher admin page", () => {
 		return mount(AdminPage, {
 			global: {
 				stubs: {
+					IdeReportInbox: {
+						template:
+							'<div data-testid="ide-reports">IDE reports</div>'
+					},
 					AccountManagement: {
 						template: '<form data-testid="admin-login-form" />'
 					},
@@ -87,10 +91,12 @@ describe("Teacher admin page", () => {
 			wrapper.find('[data-testid="student-management"]').exists()
 		).toBe(false);
 		expect(wrapper.find("a").exists()).toBe(false);
-		expect(wrapper.text()).not.toMatch(/Student|Tutor|private|account-free/i);
+		expect(wrapper.text()).not.toMatch(
+			/Student|Tutor|private|account-free/i
+		);
 	});
 
-	it("shows Julio's settings and student management when he is logged in", () => {
+	it("shows one teacher workspace at a time with students first", async () => {
 		const app = useAppStore();
 		app.setCurrentAdmin({
 			_id: "julio",
@@ -103,8 +109,8 @@ describe("Teacher admin page", () => {
 		const wrapper = mountAdmin();
 
 		expect(wrapper.get("h1").text()).toBe("Admin");
-		expect(wrapper.get('[data-testid="account-settings"]').text()).toBe(
-			"Password"
+		expect(wrapper.find('[data-testid="account-settings"]').exists()).toBe(
+			false
 		);
 		expect(wrapper.find('[data-testid="admin-login-form"]').exists()).toBe(
 			false
@@ -112,13 +118,26 @@ describe("Teacher admin page", () => {
 		expect(wrapper.get('[data-testid="student-management"]').text()).toBe(
 			"Students"
 		);
+		await wrapper.get('input[value="analytics"]').setValue(true);
+		expect(
+			wrapper.find('[data-testid="student-management"]').exists()
+		).toBe(false);
 		expect(wrapper.get('[data-testid="classroom-analytics"]').text()).toBe(
 			"Classroom activity"
 		);
+		await wrapper.get('input[value="activities"]').setValue(true);
 		expect(wrapper.get('[data-testid="pond-paddlers-admin"]').text()).toBe(
 			"Pond Paddlers rooms"
 		);
 		expect(wrapper.get("#pond-paddlers").exists()).toBe(true);
+		await wrapper.get('input[value="reports"]').setValue(true);
+		expect(wrapper.get('[data-testid="ide-reports"]').text()).toBe(
+			"IDE reports"
+		);
+		await wrapper.get('input[value="settings"]').setValue(true);
+		expect(wrapper.get('[data-testid="account-settings"]').text()).toBe(
+			"Password"
+		);
 		expect(wrapper.find("a").exists()).toBe(false);
 	});
 

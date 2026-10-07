@@ -4,7 +4,7 @@ import type {
 	StudentAccount,
 	StudentDeletionReceipt
 } from "@/modules/studentAccounts";
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import StudentProjectReview from "@/components/StudentProjectReview.vue";
 import { clearAdminSessionOnAuthorizationError } from "@/modules/adminSession";
 import {
@@ -31,6 +31,7 @@ const props = withDefaults(
 
 const app = useAppStore();
 const students = ref<StudentAccount[]>([]);
+const selectedStudentID = ref("");
 const deletionReceipts = ref<StudentDeletionReceipt[]>([]);
 const deletionReceiptRetentionDays = ref(90);
 const loading = ref(true);
@@ -60,6 +61,27 @@ const sortedStudents = computed(() =>
 		})
 	)
 );
+
+const visibleStudents = computed(() =>
+	sortedStudents.value.filter(
+		student => student._id === selectedStudentID.value
+	)
+);
+watch(
+	sortedStudents,
+	list => {
+		if (!list.some(student => student._id === selectedStudentID.value))
+			selectedStudentID.value = list[0]?._id ?? "";
+	},
+	{ immediate: true }
+);
+function selectStudent() {
+	cancelReset();
+	cancelCorrection();
+	cancelRecordAction();
+	cancelPreservationAction();
+	dismissAccessCode();
+}
 
 function formatAccessCodeExpiry(value: string | null | undefined) {
 	if (!value) return "";
@@ -598,59 +620,65 @@ onMounted(loadStudents);
 			<span class="site-chip">{{ students.length }}</span>
 		</div>
 
-		<form
+		<details
 			v-if="!maintenanceOnly"
-			class="student-management__create"
-			@submit.prevent="createStudent"
+			class="student-management__create-disclosure"
 		>
-			<div class="student-management__field">
-				<label for="new-student-username">Username</label>
-				<input
-					id="new-student-username"
-					v-model="username"
-					aria-describedby="new-student-username-hint"
-					autocomplete="off"
-					autocapitalize="none"
-					maxlength="24"
-					pattern="[A-Za-z][A-Za-z0-9-]{2,23}"
-					required
-					spellcheck="false"
-					type="text"
-				/>
-				<small id="new-student-username-hint">
-					Use a school-approved alias such as river-7. Do not use a
-					full name, email, birthdate, student number, or other direct
-					identifier. Keep the alias-to-roster mapping only in the
-					school’s approved system. See
-					<a href="/student-privacy">
-						student privacy and record requests </a
-					>.
-				</small>
-			</div>
-			<div class="student-management__field">
-				<label for="create-student-teacher-password">
-					Julio’s password
-				</label>
-				<input
-					id="create-student-teacher-password"
-					v-model="createTeacherPassword"
-					autocomplete="current-password"
-					required
-					type="password"
-				/>
-			</div>
-			<button
-				class="site-button site-button--primary student-management__button"
-				:disabled="creating"
-				type="submit"
+			<summary>Add student</summary>
+			<form
+				v-if="!maintenanceOnly"
+				class="student-management__create"
+				@submit.prevent="createStudent"
 			>
-				{{ creating ? "Creating…" : "Create student" }}
-			</button>
-			<p class="student-management__verification">
-				Julio’s password verifies him before a new student credential is
-				shown.
-			</p>
-		</form>
+				<div class="student-management__field">
+					<label for="new-student-username">Username</label>
+					<input
+						id="new-student-username"
+						v-model="username"
+						aria-describedby="new-student-username-hint"
+						autocomplete="off"
+						autocapitalize="none"
+						maxlength="24"
+						pattern="[A-Za-z][A-Za-z0-9-]{2,23}"
+						required
+						spellcheck="false"
+						type="text"
+					/>
+					<small id="new-student-username-hint">
+						Use a school-approved alias such as river-7. Do not use
+						a full name, email, birthdate, student number, or other
+						direct identifier. Keep the alias-to-roster mapping only
+						in the school’s approved system. See
+						<a href="/student-privacy">
+							student privacy and record requests </a
+						>.
+					</small>
+				</div>
+				<div class="student-management__field">
+					<label for="create-student-teacher-password">
+						Julio’s password
+					</label>
+					<input
+						id="create-student-teacher-password"
+						v-model="createTeacherPassword"
+						autocomplete="current-password"
+						required
+						type="password"
+					/>
+				</div>
+				<button
+					class="site-button site-button--primary student-management__button"
+					:disabled="creating"
+					type="submit"
+				>
+					{{ creating ? "Creating…" : "Create student" }}
+				</button>
+				<p class="student-management__verification">
+					Julio’s password verifies him before a new student
+					credential is shown.
+				</p>
+			</form>
+		</details>
 
 		<section
 			v-if="!maintenanceOnly && revealedAccess"
@@ -722,8 +750,25 @@ onMounted(loadStudents);
 		</p>
 
 		<div v-else class="student-management__list">
+			<label class="student-management__selector">
+				<span class="sr-only">Student</span>
+				<select
+					v-model="selectedStudentID"
+					:disabled="!!busyStudentID || creating"
+					aria-label="Student"
+					@change="selectStudent"
+				>
+					<option
+						v-for="student in sortedStudents"
+						:key="student._id"
+						:value="student._id"
+					>
+						{{ student.username }}
+					</option>
+				</select>
+			</label>
 			<article
-				v-for="student in sortedStudents"
+				v-for="student in visibleStudents"
 				:key="student._id"
 				class="student-management__student"
 			>
@@ -1736,5 +1781,35 @@ onMounted(loadStudents);
 	.student-management__button {
 		width: 100%;
 	}
+}
+
+.student-management__selector select {
+	width: min(100%, 26rem);
+	min-height: 2.75rem;
+	padding: 0.5rem 0.75rem;
+	border: 1px solid var(--color-border-strong);
+	border-radius: 6px;
+	background: var(--color-surface);
+	color: var(--color-ink);
+}
+.student-management__create-disclosure > summary {
+	cursor: pointer;
+	padding: 0.5rem 0;
+	color: var(--color-ink-soft);
+}
+.student-management__create-disclosure[open] .student-management__create {
+	margin-top: 0.75rem;
+}
+.student-management__student {
+	padding: 1rem;
+	border-radius: 8px;
+}
+.student-management__student-actions {
+	gap: 0.35rem;
+}
+.student-management__button {
+	min-height: 2.5rem;
+	padding: 0.45rem 0.65rem;
+	font-size: 0.85rem;
 }
 </style>

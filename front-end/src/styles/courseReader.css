@@ -1,0 +1,187 @@
+.course-explorer .course-shell {
+	gap: 0.75rem;
+	overflow: visible;
+}
+.course-explorer .course-navigation-controls {
+	display: flex;
+	gap: 0.5rem;
+	align-items: start;
+}
+.course-explorer .course-toolbar {
+	flex: 1;
+	min-width: 0;
+	display: grid;
+	grid-template-columns: minmax(12rem, 1fr) minmax(12rem, 1fr);
+	align-items: end;
+	gap: 0.75rem;
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+}
+.course-explorer .control-block {
+	gap: 0.25rem;
+	min-width: 0;
+}
+.course-explorer .control-label {
+	font-size: 0.8rem;
+	letter-spacing: 0;
+	text-transform: none;
+}
+.course-explorer .course-select,
+.course-explorer .course-search {
+	box-sizing: border-box;
+	min-height: 2.75rem;
+	padding: 0.5rem 0.75rem;
+	border-radius: 8px;
+	font-size: 0.9rem;
+	box-shadow: none;
+}
+.course-explorer .course-select {
+	padding-right: 2.5rem;
+}
+.course-explorer .course-workspace {
+	grid-template-columns: minmax(12rem, 15rem) minmax(0, 1fr);
+	border-radius: 10px;
+	box-shadow: none;
+}
+.course-explorer .course-outline {
+	position: static;
+	padding: 0.75rem;
+	gap: 0.65rem;
+	background: transparent;
+	max-height: none;
+}
+.course-explorer .outline-header {
+	padding: 0;
+}
+.course-explorer .outline-header h3 {
+	font-family: inherit;
+	font-size: 0.95rem;
+}
+.course-explorer .outline-button {
+	padding: 0.5rem;
+	gap: 0.5rem;
+	border-radius: 6px;
+}
+.course-explorer .outline-copy strong {
+	font-size: 0.85rem;
+}
+.course-explorer .outline-position {
+	width: 1.5rem;
+	height: 1.5rem;
+	font-size: 0.75rem;
+}
+.course-explorer .course-reader {
+	padding: 1rem 1.25rem;
+	gap: 1rem;
+}
+.course-explorer .reader-header {
+	padding: 0 0 0.75rem;
+	gap: 0.5rem;
+}
+.course-explorer .reader-header h3 {
+	font-size: clamp(1.25rem, 2vw, 1.6rem);
+}
+.course-explorer .lesson-card,
+.course-explorer .learning-card {
+	padding: 1.25rem;
+	border: 1px solid var(--course-border-strong);
+	border-radius: 8px;
+	background: var(--course-panel);
+	box-shadow: none;
+}
+.course-explorer .lesson-header {
+	gap: 0.65rem;
+	margin-bottom: 1rem;
+}
+.course-explorer .lesson-header h5,
+.course-explorer .learning-card h5 {
+	margin: 0;
+	font: 600 1.15rem var(--font-sans);
+	line-height: 1.4;
+	color: var(--course-text);
+}
+.course-explorer .learning-overview {
+	display: grid;
+	gap: 1rem;
+}
+.course-explorer .learning-card h6 {
+	margin: 1rem 0 0.5rem;
+	font: 600 1rem var(--font-sans);
+}
+.course-explorer .key-block-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem;
+}
+.course-explorer .key-block-list span {
+	padding: 0.3rem 0.5rem;
+	border: 1px solid var(--course-border-strong);
+	border-radius: 5px;
+	font-size: 0.85rem;
+}
+.course-explorer .lesson-view-toggle {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.25rem;
+}
+.course-explorer .lesson-view-toggle button {
+	min-height: 2.75rem;
+	padding: 0.5rem 0.75rem;
+	border: 1px solid transparent;
+	border-radius: 6px;
+	background: transparent;
+	color: var(--course-text-soft);
+	font: 500 0.9rem var(--font-sans);
+}
+.course-explorer .lesson-view-toggle button[aria-pressed="true"] {
+	background: var(--course-panel-soft);
+	border-color: var(--course-border-strong);
+	color: var(--course-text);
+}
+.course-explorer .lesson-view-toggle button:focus-visible {
+	outline: 2px solid var(--course-accent);
+	outline-offset: 2px;
+}
+.course-explorer .lesson-view-empty {
+	margin: 0;
+	color: var(--course-text-soft);
+}
+.course-explorer .outline-toggle {
+	display: none;
+}
+@media (max-width: 800px) {
+	.course-explorer .course-workspace {
+		grid-template-columns: 1fr;
+	}
+	.course-explorer .outline-toggle {
+		display: inline-flex;
+		flex: 0 0 auto;
+	}
+	.course-explorer .course-outline {
+		display: none;
+		border-right: 0;
+	}
+	.course-explorer .course-outline.is-open {
+		display: flex;
+		max-height: min(45vh, 24rem);
+		overflow: auto;
+	}
+	.course-explorer .course-reader {
+		padding: 0.85rem;
+	}
+}
+@media (max-width: 480px) {
+	.course-explorer .course-toolbar {
+		grid-template-columns: 1fr;
+	}
+	.course-explorer .lesson-header {
+		flex-direction: row;
+		align-items: center;
+	}
+	.course-explorer .lesson-card,
+	.course-explorer .learning-card {
+		padding: 0.85rem;
+	}
+}

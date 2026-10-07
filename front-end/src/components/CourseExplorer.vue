@@ -18,6 +18,7 @@ import {
 } from "vue";
 import { reportClassroomUsage } from "@/modules/classroomUsage";
 import { courseAssetViewerUrl } from "@/modules/courseAssetPreview";
+import { lessonContentSections } from "@/modules/courseLessonPresentation";
 import {
 	getPythonIdeModeLabel,
 	pythonIdeModeForCourseId
@@ -29,6 +30,7 @@ import {
 	isScratchProjectEmbedUrl,
 	isScratchProjectUrl
 } from "@/modules/resourceUrls";
+import { useLessonViews } from "@/modules/useLessonViews";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
 import {
@@ -39,6 +41,7 @@ import {
 } from "@/stores/courses/staticMedia";
 import CodePreview from "./CodePreview.vue";
 import CourseAssetPreview from "./CourseAssetPreview.vue";
+import CourseAssignmentContent from "./CourseAssignmentContent.vue";
 import LazyMarkdownContent from "./LazyMarkdownContent.vue";
 import ScratchSolutionDialog from "./ScratchSolutionDialog.vue";
 
@@ -346,23 +349,13 @@ const activeModule = computed(
 		) ?? null
 );
 
-const activeCurriculumSectionLabel = computed(() =>
-	activeModule.value?.kind === "appendix" ? "Reference" : "Core"
-);
-
-const activeCurriculumHeading = computed(() =>
-	activeModule.value?.kind === "appendix" ? "Reference Materials" : "Projects"
-);
-
-const activeSupplementalSectionLabel = computed(() =>
-	activeModule.value?.kind === "appendix" ? "Reference practice" : "Practice"
-);
-
-const activeSupplementalHeading = computed(() =>
-	activeModule.value?.kind === "appendix"
-		? "Reference Activities"
-		: "Supplemental Projects"
-);
+const {
+	lessonView,
+	lessonViews,
+	activeLessonItems,
+	learningTopics,
+	lessonViewLabel
+} = useLessonViews(activeModule, currentHashAnchor, normalizedQuery);
 
 const courseReaderStatus = computed(() => {
 	if (!selectedCourse.value || !activeModule.value) return "";
@@ -1127,266 +1120,109 @@ function writeStoredValue(key: string, value: string) {
 						</div>
 					</header>
 
-					<section class="reader-section">
-						<div class="section-header">
-							<div>
-								<p class="section-eyebrow">
-									{{ activeCurriculumSectionLabel }}
+					<div
+						class="lesson-view-toggle"
+						role="group"
+						aria-label="Lesson view"
+					>
+						<button
+							v-for="view in lessonViews"
+							:key="view.id"
+							type="button"
+							:aria-pressed="lessonView === view.id"
+							aria-controls="lesson-view-content"
+							@click="lessonView = view.id"
+						>
+							{{ view.label }}
+						</button>
+					</div>
+					<section
+						id="lesson-view-content"
+						class="reader-section"
+						:aria-label="lessonViewLabel"
+					>
+						<div
+							v-if="lessonView === 'learn'"
+							class="learning-overview"
+						>
+							<section
+								v-if="activeModule.keyBlocks?.length"
+								class="key-blocks"
+							>
+								<h4>Key words</h4>
+								<div class="key-block-list">
+									<span
+										v-for="block in activeModule.keyBlocks"
+										:key="block"
+										>{{ block }}</span
+									>
+								</div>
+								<p
+									v-if="
+										!activeLessonItems.length &&
+										(lessonView !== 'learn' ||
+											(!learningTopics.length &&
+												!activeModule.keyBlocks
+													?.length))
+									"
+									class="lesson-view-empty"
+								>
+									No {{ lessonViewLabel.toLowerCase() }} in
+									this section.
 								</p>
-								<h4>{{ activeCurriculumHeading }}</h4>
-							</div>
+							</section>
+							<article
+								v-for="topic in learningTopics"
+								:key="topic.item.id"
+								class="learning-card"
+							>
+								<h5>{{ topic.item.title }}</h5>
+								<section
+									v-for="(section, index) in topic.sections"
+									:key="index"
+								>
+									<h6>{{ section.label }}</h6>
+									<LazyMarkdownContent
+										:content="section.content"
+									/>
+								</section>
+							</article>
 						</div>
-
-						<ol class="lesson-list">
+						<ol v-if="activeLessonItems.length" class="lesson-list">
 							<li
-								v-for="(item, index) in activeModule.curriculum"
+								v-for="(item, index) in activeLessonItems"
 								:id="itemAnchorId(activeModule.id, item.id)"
 								:key="item.id"
 								class="lesson-item"
 							>
-								<article class="lesson-card">
+								<article
+									class="lesson-card"
+									:class="{
+										'is-supplemental':
+											lessonView === 'supplemental'
+									}"
+								>
 									<header class="lesson-header">
 										<span class="lesson-index">
 											{{ index + 1 }}
 										</span>
 										<div class="lesson-title-group">
-											<p class="lesson-kicker">
-												{{
-													activeModule.kind ===
-													"appendix"
-														? "Reference"
-														: "Core"
-												}}
-											</p>
 											<h5>{{ item.title }}</h5>
 										</div>
 									</header>
 
 									<LazyMarkdownContent
-										v-if="item.content"
+										v-if="
+											item.content &&
+											lessonView === 'learn'
+										"
 										:content="item.content"
 									/>
-
-									<div
-										v-if="
-											resourceLinks(item).length > 0 ||
-											hasPlayableScratchSolution(item)
+									<CourseAssignmentContent
+										v-else-if="item.content"
+										:sections="
+											lessonContentSections(item.content)
 										"
-										class="resource-list"
-									>
-										<template
-											v-for="resource in resourceLinks(
-												item
-											)"
-											:key="`${item.id}-${resource.kind}`"
-										>
-											<a
-												class="resource-link"
-												:class="[`is-${resource.kind}`]"
-												:href="
-													resourceOpenUrl(resource)
-												"
-												rel="noopener noreferrer"
-												target="_blank"
-											>
-												<span
-													class="resource-link-label"
-												>
-													{{ resource.label }}
-													<span class="sr-only">
-														(opens in a new tab)
-													</span>
-												</span>
-												<small
-													class="resource-link-host"
-												>
-													{{ resource.host }}
-												</small>
-											</a>
-											<a
-												v-if="
-													pythonIdeStarterHref(
-														item,
-														resource
-													)
-												"
-												class="resource-link is-ide-starter"
-												:href="
-													pythonIdeStarterHref(
-														item,
-														resource
-													)
-												"
-											>
-												<span
-													class="resource-link-label"
-												>
-													Start in IDE
-												</span>
-												<small
-													class="resource-link-host"
-												>
-													Browser workspace
-												</small>
-											</a>
-										</template>
-										<button
-											v-if="
-												hasPlayableScratchSolution(item)
-											"
-											class="resource-link is-playable-solution"
-											type="button"
-											@click="openScratchSolution(item)"
-										>
-											<span class="resource-link-label"
-												>Play solution</span
-											>
-											<small class="resource-link-host"
-												>Scratch player</small
-											>
-										</button>
-									</div>
-
-									<CourseAssetPreview
-										v-if="
-											courseAssetPreviewResources(item)
-												.length > 0
-										"
-										:resources="
-											courseAssetPreviewResources(item)
-										"
-									/>
-
-									<CodePreview
-										v-if="
-											codePreviewResources(item).length >
-											0
-										"
-										:resources="codePreviewResources(item)"
-									/>
-
-									<div
-										v-if="
-											item.mediaLink &&
-											isEmbeddedMedia(item.mediaLink) &&
-											!isItemStaticMediaUnavailable(item)
-										"
-										class="item-media"
-									>
-										<video
-											v-if="isVideo(item.mediaLink)"
-											class="item-media-video"
-											:autoplay="!prefersReducedMotion"
-											:controls="prefersReducedMotion"
-											:loop="!prefersReducedMotion"
-											muted
-											playsinline
-											:preload="
-												prefersReducedMotion
-													? 'metadata'
-													: 'auto'
-											"
-											:aria-label="`Demo video for ${item.title}`"
-											@error="
-												markStaticMediaUnavailable(
-													item.mediaLink
-												)
-											"
-										>
-											<source
-												:src="item.mediaLink"
-												@error="
-													markStaticMediaUnavailable(
-														item.mediaLink
-													)
-												"
-											/>
-										</video>
-										<img
-											v-else-if="isImage(item.mediaLink)"
-											:src="item.mediaLink"
-											:alt="`Project demo media for ${item.title}`"
-											class="item-media-image"
-											loading="lazy"
-											@error="
-												markStaticMediaUnavailable(
-													item.mediaLink
-												)
-											"
-										/>
-									</div>
-									<div
-										v-else-if="
-											item.mediaLink &&
-											isEmbeddedMedia(item.mediaLink) &&
-											isItemStaticMediaUnavailable(item)
-										"
-										class="item-media item-media-placeholder"
-										role="note"
-									>
-										<p class="item-media-placeholder-label">
-											Static asset pending
-										</p>
-										<p>
-											Pending static asset:
-											<strong>
-												{{
-													staticAssetName(
-														item.mediaLink
-													)
-												}}</strong
-											>.
-										</p>
-										<p>
-											This classroom preview will appear
-											once the media file is available.
-										</p>
-									</div>
-								</article>
-							</li>
-						</ol>
-					</section>
-
-					<section
-						v-if="activeModule.supplementalProjects.length > 0"
-						class="reader-section"
-					>
-						<div class="section-header">
-							<div>
-								<p class="section-eyebrow">
-									{{ activeSupplementalSectionLabel }}
-								</p>
-								<h4>{{ activeSupplementalHeading }}</h4>
-							</div>
-						</div>
-
-						<ol class="lesson-list">
-							<li
-								v-for="(
-									item, index
-								) in activeModule.supplementalProjects"
-								:id="itemAnchorId(activeModule.id, item.id)"
-								:key="item.id"
-								class="lesson-item"
-							>
-								<article class="lesson-card is-supplemental">
-									<header class="lesson-header">
-										<span
-											class="lesson-index is-supplemental"
-										>
-											{{ index + 1 }}
-										</span>
-										<div class="lesson-title-group">
-											<p class="lesson-kicker">
-												Practice
-											</p>
-											<h5>{{ item.title }}</h5>
-										</div>
-									</header>
-
-									<LazyMarkdownContent
-										v-if="item.content"
-										:content="item.content"
 									/>
 
 									<div
@@ -2681,3 +2517,5 @@ function writeStoredValue(key: string, value: string) {
 	}
 }
 </style>
+
+<style src="@/styles/courseReader.css"></style>

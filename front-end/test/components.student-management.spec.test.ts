@@ -52,6 +52,35 @@ const deletionReceipt = {
 };
 
 describe("StudentManagement", () => {
+	it("shows one student and clears sensitive controls on selection changes", async () => {
+		vi.mocked(fetchAdminStudents).mockResolvedValueOnce([
+			student,
+			{ ...student, _id: "student-2", username: "river-8" }
+		]);
+		const wrapper = mountManagement();
+		await flushPromises();
+		expect(wrapper.findAll(".student-management__student")).toHaveLength(1);
+		await wrapper
+			.findAll("button")
+			.find(button => button.text() === "Reset access")!
+			.trigger("click");
+		await wrapper
+			.get("#reset-teacher-password-student-1")
+			.setValue("synthetic-password");
+		await wrapper.get("select[aria-label='Student']").setValue("student-2");
+		expect(wrapper.findAll(".student-management__student")).toHaveLength(1);
+		expect(wrapper.get(".student-management__student h3").text()).toBe(
+			"river-8"
+		);
+		expect(wrapper.find("#reset-teacher-password-student-1").exists()).toBe(
+			false
+		);
+		expect(wrapper.find("#reset-teacher-password-student-2").exists()).toBe(
+			false
+		);
+		expect(resetAdminStudentAccess).not.toHaveBeenCalled();
+		wrapper.unmount();
+	});
 	beforeEach(() => {
 		setActivePinia(createPinia());
 		vi.clearAllMocks();
@@ -341,7 +370,9 @@ describe("StudentManagement", () => {
 		expect(wrapper.text()).toContain(
 			"Records preserved for inspection or review"
 		);
-		expect(button("Correct username")?.attributes("disabled")).toBeDefined();
+		expect(
+			button("Correct username")?.attributes("disabled")
+		).toBeDefined();
 		expect(button("Delete records")?.attributes("disabled")).toBeDefined();
 		expect(button("Reset access")?.attributes("disabled")).toBeUndefined();
 		expect(button("Disable")?.attributes("disabled")).toBeUndefined();
@@ -577,14 +608,22 @@ describe("StudentManagement", () => {
 		const wrapper = mountManagement();
 		await flushPromises();
 
-		expect(wrapper.text()).toContain("Password set");
-		expect(wrapper.text()).toContain("Access code expired — reset access");
-		expect(wrapper.text()).toContain("Needs access reset");
-		expect(wrapper.text()).toContain(
-			"Password setup in progress — expires"
-		);
-		expect(wrapper.text()).toContain("Google connected");
-		expect(wrapper.text()).toContain("Apple connected");
+		for (const [id, label] of [
+			["student-1", "Password set"],
+			["student-2", "Access code expired — reset access"],
+			["student-3", "Needs access reset"],
+			["student-5", "Google connected"],
+			["student-6", "Apple connected"],
+			["student-4", "Password setup in progress — expires"]
+		]) {
+			await wrapper.get("select[aria-label='Student']").setValue(id);
+			expect(
+				wrapper.get(".student-management__credential").text()
+			).toContain(label);
+			expect(
+				wrapper.findAll(".student-management__credential")
+			).toHaveLength(1);
+		}
 		expect(
 			wrapper
 				.findAll(".student-management__credential")
