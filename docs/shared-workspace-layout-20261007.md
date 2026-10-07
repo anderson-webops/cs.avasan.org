@@ -44,6 +44,11 @@ Graph Sketcher stays absent from all CS pages and generated artifacts.
 - Generated build checks retain the five current courses, archived references,
   anonymous IDE access, exact Scratch solution policy, and no-Graph boundary.
 - Local desktop/phone previews check visible course content and compact chrome.
+- The starter smoke check now uses the upstream bounded first-frame wait:
+  "Game running" establishes runtime readiness, not that the browser has
+  painted yet. It still fails if the canvas never changes and still verifies
+  that Stop freezes further drawing. No fixture or runtime isolation contract
+  from another account model is imported into this fork.
 - Dependencies and both lockfiles are unchanged; existing matching dependency
   trees were reused. Hosted CI provides the clean-install gate.
 - No production activation, emails, database writes, credential changes, or

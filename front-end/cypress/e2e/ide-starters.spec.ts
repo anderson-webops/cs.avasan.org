@@ -330,9 +330,11 @@ async function runStarterScenario(
 	}
 
 	if (scenario.kind === "canvas") {
-		if (canvasSnapshot(document) === initialCanvas) {
-			throw new Error("The canvas did not render a changed frame.");
-		}
+		await waitFor(
+			() => canvasSnapshot(document) !== initialCanvas,
+			`${scenario.title} to paint its first changed canvas frame`,
+			10_000
+		);
 		await stopAndVerifyFrozen(document);
 	}
 	if (scenario.kind === "karel") {
