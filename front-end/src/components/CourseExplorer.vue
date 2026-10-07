@@ -982,20 +982,6 @@ function writeStoredValue(key: string, value: string) {
 	<section class="course-explorer">
 		<p class="sr-only" aria-live="polite">{{ courseReaderStatus }}</p>
 		<div class="course-shell">
-			<header v-if="selectedCourse" class="course-hero">
-				<div class="course-hero-copy">
-					<h2>{{ selectedCourse.name }}</h2>
-					<div v-if="pythonIdeCourseHref" class="course-ide-action">
-						<a
-							class="site-button site-button--secondary course-ide-link"
-							:href="pythonIdeCourseHref"
-						>
-							{{ pythonIdeCourseLabel }}
-						</a>
-					</div>
-				</div>
-			</header>
-
 			<div class="course-navigation-controls">
 				<button
 					class="site-button site-button--secondary outline-toggle"
@@ -1006,59 +992,56 @@ function writeStoredValue(key: string, value: string) {
 				>
 					Lessons
 				</button>
-				<details class="course-toolbar-disclosure">
-					<summary>Course and search</summary>
-					<div class="course-toolbar">
-						<label class="control-block" for="course-select">
-							<span class="control-label">Course</span>
-							<select
-								id="course-select"
-								v-model="selectedCourseId"
-								class="course-select"
-								@change="selectCourse(selectedCourseId)"
-							>
-								<optgroup
-									v-for="group in courseGroups"
-									:key="group.key"
-									:label="group.label"
-								>
-									<option
-										v-for="course in group.courses"
-										:key="course.id"
-										:value="course.id"
-									>
-										{{ course.name }}
-									</option>
-								</optgroup>
-							</select>
-						</label>
-
-						<label
-							class="control-block search-block"
-							for="course-search"
+				<div class="course-toolbar">
+					<label class="control-block" for="course-select">
+						<span class="sr-only">Course</span>
+						<select
+							id="course-select"
+							v-model="selectedCourseId"
+							class="course-select"
+							@change="selectCourse(selectedCourseId)"
 						>
-							<span class="control-label">Search lessons</span>
-							<div class="search-shell">
-								<input
-									id="course-search"
-									v-model="searchQuery"
-									class="course-search"
-									name="course-search"
-									placeholder="Search module titles, lessons, or keywords"
-									type="search"
-								/>
-								<button
-									v-if="searchQuery"
-									class="clear-search"
-									type="button"
-									@click="clearSearch"
+							<optgroup
+								v-for="group in courseGroups"
+								:key="group.key"
+								:label="group.label"
+							>
+								<option
+									v-for="course in group.courses"
+									:key="course.id"
+									:value="course.id"
 								>
-									Clear
-								</button>
-							</div>
-						</label>
-					</div>
-				</details>
+									{{ course.name }}
+								</option>
+							</optgroup>
+						</select>
+					</label>
+
+					<label
+						class="control-block search-block"
+						for="course-search"
+					>
+						<span class="control-label">Search lessons</span>
+						<div class="search-shell">
+							<input
+								id="course-search"
+								v-model="searchQuery"
+								class="course-search"
+								name="course-search"
+								placeholder="Search module titles, lessons, or keywords"
+								type="search"
+							/>
+							<button
+								v-if="searchQuery"
+								class="clear-search"
+								type="button"
+								@click="clearSearch"
+							>
+								Clear
+							</button>
+						</div>
+					</label>
+				</div>
 			</div>
 
 			<div v-if="selectedCourse" class="course-workspace">
@@ -1069,6 +1052,11 @@ function writeStoredValue(key: string, value: string) {
 				>
 					<div class="outline-header">
 						<h3>Sections</h3>
+						<a
+							v-if="pythonIdeCourseHref"
+							:href="pythonIdeCourseHref"
+							>{{ pythonIdeCourseLabel }}</a
+						>
 					</div>
 
 					<div v-if="visibleModules.length > 0" class="outline-list">
@@ -2658,5 +2646,38 @@ function writeStoredValue(key: string, value: string) {
 .course-outline .outline-button:not([aria-current="true"]) {
 	background: transparent !important;
 	border-color: transparent !important;
+}
+.course-explorer .course-navigation-controls {
+	display: flex;
+	align-items: end;
+	gap: 0.6rem;
+	margin-bottom: 0.5rem;
+}
+.course-explorer .course-toolbar {
+	display: grid;
+	grid-template-columns: minmax(12rem, 22rem) minmax(10rem, 1fr);
+	gap: 0.65rem;
+	flex: 1;
+}
+.course-explorer .control-label {
+	font-size: 0.8rem;
+}
+.course-explorer .course-select,
+.course-explorer .course-search {
+	min-height: 2.65rem;
+	height: 2.65rem;
+	padding: 0.4rem 0.65rem;
+	border-radius: 6px;
+}
+.course-explorer .outline-header a {
+	font-size: 0.85rem;
+}
+@media (max-width: 600px) {
+	.course-explorer .course-toolbar {
+		grid-template-columns: minmax(0, 1fr);
+	}
+	.course-explorer .course-navigation-controls {
+		align-items: start;
+	}
 }
 </style>

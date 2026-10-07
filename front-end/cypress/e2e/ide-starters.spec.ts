@@ -401,6 +401,7 @@ context("IDE starter runtime matrix", { testIsolation: false }, () => {
 				}
 			});
 			cy.get(".code-ide-workspace").should("be.visible");
+			cy.get('[aria-label="Expand project sidebar"]').click();
 			cy.env(["IDE_STARTER", "IDE_STARTER_KINDS"]).then(filters => {
 				cy.document().then({ timeout: 720_000 }, async document => {
 					for (const scenario of selectedStarterScenarios(filters)) {

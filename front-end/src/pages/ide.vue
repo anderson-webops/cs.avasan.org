@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, defineAsyncComponent, ref, watch } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 
 const CodeIdeWorkspace = defineAsyncComponent(
 	() => import("@/components/CodeIdeWorkspace.vue")
@@ -9,7 +9,6 @@ const ScratchIdeWorkspace = defineAsyncComponent(
 	() => import("@/components/ScratchIdeWorkspace.vue")
 );
 const route = useRoute();
-const router = useRouter();
 const scratch = computed(() => route.query.mode === "scratch");
 const scratchVisited = ref(scratch.value);
 const codeVisited = ref(!scratch.value);
@@ -24,26 +23,10 @@ watch(scratch, value => {
 		scratchWorkspace.value?.stop();
 	}
 });
-function choose(event: Event) {
-	const selected = (event.target as HTMLSelectElement).value;
-	const query = { ...route.query };
-	delete query.starter;
-	delete query.template;
-	if (selected === "scratch") query.mode = "scratch";
-	else delete query.mode;
-	void router.replace({ path: "/ide", query });
-}
 </script>
 
 <template>
 	<div class="integrated-ide">
-		<label class="ide-environment"
-			><span class="sr-only">Editor</span>
-			<select :value="scratch ? 'scratch' : 'code'" @change="choose">
-				<option value="code">Python or Java</option>
-				<option value="scratch">Scratch blocks</option>
-			</select>
-		</label>
 		<CodeIdeWorkspace
 			v-if="codeVisited"
 			v-show="!scratch"
@@ -64,15 +47,18 @@ function choose(event: Event) {
 }
 .ide-environment {
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 	gap: 0.7rem;
-	margin: 0.35rem 1rem;
+	margin: 0.5rem 1rem 0;
 	font: inherit;
 	color: var(--color-ink);
 	text-transform: none;
 	letter-spacing: normal;
 }
 .ide-environment select {
+	min-width: 0;
+	max-width: 100%;
 	font: inherit;
 	padding: 0.4rem 0.7rem;
 	border-radius: 0.5rem;

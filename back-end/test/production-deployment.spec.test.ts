@@ -398,16 +398,16 @@ describe("versioned full-stack production deployment", () => {
 			version: string;
 		};
 
-		expect(rootPackage.version).toBe("2.8.3");
+		expect(rootPackage.version).toBe("2.8.4");
 		expect(DEFAULT_CS_RELEASE_VERSION).toBe(rootPackage.version);
 		expect(repositoryFile("README.md").match(/export CS_RELEASE_VERSION=[^\n]+/g)).toEqual([`export CS_RELEASE_VERSION=${rootPackage.version}`, `export CS_RELEASE_VERSION=${rootPackage.version}`]);
-		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]8[.]3\}/g)).toHaveLength(2);
+		expect(compose.match(/CS_RELEASE_VERSION: \$\{CS_RELEASE_VERSION:-2[.]8[.]4\}/g)).toHaveLength(2);
 		expect(compose.match(/SOURCE_REVISION: \$\{SOURCE_REVISION:\?set SOURCE_REVISION\}/g)).toHaveLength(2);
 		expect(compose).not.toContain("SOURCE_REVISION:-unknown");
 		expect(api).not.toContain("\n        environment:\n            SOURCE_REVISION:");
-		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.8.3");
+		expect(frontendDockerfile).toContain("ARG CS_RELEASE_VERSION=2.8.4");
 		expect(frontendDockerfile).toContain("ARG SOURCE_REVISION=unknown");
-		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.8.3");
+		expect(apiDockerfile).toContain("ARG CS_RELEASE_VERSION=2.8.4");
 		expect(apiDockerfile).toContain("ARG SOURCE_REVISION=unknown");
 		expect(frontendReleaseWriter).toContain("environment.COMMIT_REF?.trim()");
 		expect(frontendReleaseWriter).toContain("const sourceRevisionPattern = /^(?:[0-9a-f]{40}|unknown)$/;");

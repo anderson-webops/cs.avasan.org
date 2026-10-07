@@ -207,6 +207,8 @@ test(
 						{ timeout: 60000 }
 					);
 				} catch (error) {
+					await page.click('button[aria-label="IDE settings"]');
+					await page.locator(".ide-diagnostics-settings > summary").click();
 					await page.click(
 						".ide-diagnostics-controls > button:nth-child(2)"
 					);
@@ -226,6 +228,8 @@ test(
 				await page.setOfflineMode(false);
 				await page.setRequestInterception(true);
 				const count = reports.length;
+				await page.click('button[aria-label="IDE settings"]');
+				await page.locator(".ide-diagnostics-settings > summary").click();
 				await page.click(
 					".ide-diagnostics-controls > button:nth-child(2)"
 				);

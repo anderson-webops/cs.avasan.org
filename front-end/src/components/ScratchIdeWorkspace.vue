@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { onBeforeRouteLeave, useRoute } from "vue-router";
+import IdeEnvironmentSelect from "@/components/IdeEnvironmentSelect.vue";
 import {
 	scratchDownloadName,
 	scratchFrameDocument,
@@ -188,6 +189,10 @@ defineExpose({ stop: () => send("stop") });
 		:class="{ expanded }"
 		aria-label="Scratch workspace"
 	>
+		<div class="scratch-workspace-title">
+			<h1>Scratch workspace</h1>
+			<IdeEnvironmentSelect />
+		</div>
 		<div class="scratch-toolbar">
 			<label
 				>Project name <input v-model="title" maxlength="120"
@@ -410,5 +415,16 @@ defineExpose({ stop: () => send("stop") });
 .scratch-project-menu__content select {
 	min-width: 0;
 	width: 100%;
+}
+.scratch-workspace-title {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.65rem;
+	margin-bottom: 0.5rem;
+}
+.scratch-workspace-title h1 {
+	font-size: 1.3rem;
+	margin: 0;
 }
 </style>

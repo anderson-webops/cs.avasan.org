@@ -26,7 +26,7 @@ context("Public classroom navigation", () => {
 		cy.contains("h1", "Courses").should("be.visible");
 		cy.contains("No student account is needed.").should("not.exist");
 		cy.contains("button", "Student sign in").should("not.exist");
-		cy.get(".course-toolbar-disclosure summary").click();
+		cy.get(".course-toolbar-disclosure").should("not.exist");
 		cy.get("#course-select").should("be.visible");
 		cy.contains("Jump to a Project").should("not.exist");
 		cy.get(".reader-link-groups, .section-count").should("not.exist");
@@ -62,7 +62,7 @@ context("Public classroom navigation", () => {
 
 		cy.get(".site-nav").contains("a:visible", "IDE").click();
 		cy.location("pathname").should("match", /^\/ide\/?$/);
-		cy.contains("h1", "IDE").should("exist");
+		cy.contains("h1", "Code workspace").should("exist");
 		cy.get(".code-ide-workspace").should("be.visible");
 		cy.contains("Using a shared computer?").should("not.exist");
 		cy.contains("button", "Clear browser projects for next student").should(
@@ -100,6 +100,7 @@ context("Public classroom navigation", () => {
 
 	it("offers the complete IDE workspace and starter library", () => {
 		cy.visit("/ide");
+		cy.get('[aria-label="Expand project sidebar"]').click();
 		cy.get(".workspace-type-control select option").then(options => {
 			expect(
 				[...options].map(option => option.textContent?.trim())
@@ -179,6 +180,7 @@ context("Public classroom navigation", () => {
 
 	it("opens a directly linked Data / AI demo in its requested workspace", () => {
 		cy.visit("/ide/?mode=data&template=demo");
+		cy.get('[aria-label="Expand project sidebar"]').click();
 		cy.get(".workspace-type-control select").should("have.value", "data");
 		cy.get(".project-button.is-active").should(
 			"contain.text",

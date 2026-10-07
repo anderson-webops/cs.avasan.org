@@ -111,14 +111,13 @@ describe("CourseExplorer public catalog", () => {
 		return { loadCourse, wrapper };
 	}
 
-	it("keeps course controls closed while the lesson is available", async () => {
+	it("keeps compact course controls visible while the lesson is available", async () => {
 		const { wrapper } = await mountPublicCatalog(true);
 		expect(wrapper.find(".reader-link-groups").exists()).toBe(false);
 		expect(wrapper.find(".section-count").exists()).toBe(false);
 		expect(wrapper.text()).not.toContain("Jump to project");
-		expect(
-			wrapper.get(".course-toolbar-disclosure").attributes("open")
-		).toBeUndefined();
+		expect(wrapper.find(".course-toolbar-disclosure").exists()).toBe(false);
+		expect(wrapper.get("#course-select").isVisible()).toBe(true);
 		expect(wrapper.get("#course-reader-panel").text()).toContain(
 			"Try one idea"
 		);
@@ -193,7 +192,7 @@ describe("CourseExplorer public catalog", () => {
 		await flushPromises();
 
 		expect(loadCourse).toHaveBeenCalledWith("pygames");
-		expect(wrapper.get(".course-hero h2").text()).toBe(
+		expect(wrapper.get("#course-select option:checked").text()).toBe(
 			"PyGames: Classroom Edition"
 		);
 		expect(reportClassroomUsage).toHaveBeenCalledWith(

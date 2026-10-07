@@ -2968,14 +2968,15 @@ screen.listen()
 		expect(pageSource).toContain('aria-label="IDE settings"');
 		expect(pageSource).toContain('aria-controls="code-ide-settings-panel"');
 		expect(pageSource).toContain('id="code-ide-settings-panel"');
-		expect(pageSource).toContain("Protect local saves");
+		expect(pageSource).not.toContain("Protect local saves");
+		expect(pageSource).toContain('aria-label="Download project ZIP"');
 		expect(pageSource).toContain("function storageManagerWithPersistence");
 		expect(pageSource).toContain("navigator.storage?.persist");
 		expect(pageSource).toContain("navigator.storage.persisted");
 		expect(pageSource).toContain(
 			"async function refreshPythonIdeStoragePersistenceStatus"
 		);
-		expect(pageSource).toContain(
+		expect(pageSource).not.toContain(
 			"async function requestPythonIdeStoragePersistence"
 		);
 		expect(pageSource).toContain(
