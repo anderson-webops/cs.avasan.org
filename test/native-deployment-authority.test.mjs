@@ -285,6 +285,63 @@ test("native source provenance requires the canonical fetched main and annotated
 	assert.doesNotMatch(read("scripts/verify-native-source.sh"), /git[^\n]*fetch/u);
 });
 
+test("native deployment requires the enabled CS vhost to select the reviewed artifact", async (t) => {
+	const deploy = read("scripts/deploy-native-release.sh");
+	const guard = shellFunction(deploy, "verify_enabled_nginx_site");
+	const enabledSiteCall = deploy.indexOf(
+		'verify_enabled_nginx_site \\\n\t"/etc/nginx/sites-enabled/cs.avasan.org" \\\n\t"/etc/nginx/sites-available/cs.avasan.org"'
+	);
+	assert.notEqual(enabledSiteCall, -1, "missing canonical enabled-site check");
+	assert.ok(enabledSiteCall < deploy.indexOf('cs_build_root="$(mktemp -d'));
+	assert.ok(enabledSiteCall < deploy.indexOf('atomic_link "$cs_final_release" "$cs_current_link"'));
+
+	const directory = await realpath(await mkdtemp(join(tmpdir(), "cs-native-vhost-")));
+	t.after(async () => rm(directory, { force: true, recursive: true }));
+	const availableDirectory = join(directory, "sites-available");
+	const enabledDirectory = join(directory, "sites-enabled");
+	await mkdir(availableDirectory);
+	await mkdir(enabledDirectory);
+	const reviewedSite = join(availableDirectory, "cs.avasan.org");
+	const enabledSite = join(enabledDirectory, "cs.avasan.org");
+	const staleSite = join(availableDirectory, "stale-cs.avasan.org");
+	await writeFile(reviewedSite, "reviewed vhost\n");
+	await writeFile(staleSite, "old vhost\n");
+	const runGuard = () => spawnSync(
+		"bash",
+		[
+			"-c",
+			`set -euo pipefail\n${guard}\nverify_enabled_nginx_site "$1" "$2"`,
+			"native-vhost-fixture",
+			enabledSite,
+			reviewedSite
+		],
+		{ encoding: "utf8" }
+	);
+	const reject = () => {
+		const result = runGuard();
+		assert.equal(result.status, 1);
+		assert.match(result.stderr, /Enabled CS Nginx site must link to/u);
+	};
+
+	reject();
+	await writeFile(enabledSite, "reviewed vhost\n");
+	reject();
+	await rm(enabledSite);
+	await symlink(staleSite, enabledSite);
+	reject();
+	await rm(enabledSite);
+	await symlink(join(availableDirectory, "missing"), enabledSite);
+	reject();
+	await rm(enabledSite);
+	await symlink(reviewedSite, enabledSite);
+	assert.equal(runGuard().status, 0);
+	await rm(enabledSite);
+	await symlink("../sites-available/cs.avasan.org", enabledSite);
+	assert.equal(runGuard().status, 0);
+	await rm(reviewedSite);
+	reject();
+});
+
 test("native release target accepts an immutable internal workspace tree", async (t) => {
 	const fixture = await nativeReleaseFixture(t);
 	const result = await verifyNativeReleaseTarget(

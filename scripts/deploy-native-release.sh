@@ -15,6 +15,14 @@ cs_staging_release=""
 readonly cs_legacy_listener_version="2.7.124"
 readonly cs_legacy_listener_revision="8e3fd9eb953ec6b78a985a0ef0e8bf479c2ef245"
 
+verify_enabled_nginx_site() {
+	local cs_enabled_site="$1"
+	local cs_reviewed_site="$2"
+	[[ -L "$cs_enabled_site" && -f "$cs_reviewed_site" && ! -L "$cs_reviewed_site" \
+		&& "$(realpath -- "$cs_enabled_site" 2>/dev/null || true)" == "$cs_reviewed_site" ]] \
+		|| { printf 'Enabled CS Nginx site must link to %s.\n' "$cs_reviewed_site" >&2; return 1; }
+}
+
 usage() {
 	printf '%s\n' \
 		"Usage: $0 [--source DIR] [--env-file FILE] [--release-root DIR]" \
@@ -91,6 +99,10 @@ for cs_artifact_pair in \
 	cmp --silent "$cs_source_artifact" "$cs_installed_artifact" \
 		|| { printf '%s\n' "Install the reviewed native service artifacts from this release before deploying." >&2; exit 1; }
 done
+
+verify_enabled_nginx_site \
+	"/etc/nginx/sites-enabled/cs.avasan.org" \
+	"/etc/nginx/sites-available/cs.avasan.org"
 
 [[ -d "$cs_release_root" && ! -L "$cs_release_root" ]] \
 	|| { printf '%s\n' "The real native release root is missing." >&2; exit 1; }

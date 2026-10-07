@@ -79,6 +79,25 @@ const codeIdeContentSecurityPolicy = Object.freeze({
 	"frame-src": ["'self'"]
 });
 
+const scratchRuntimeResources = Object.freeze({
+	"/scratch-runtime/isolation.js": {
+		contentType: /^(?:application|text)\/javascript(?:;|$)/iu,
+		marker: "Object.defineProperty(document, \"cookie\""
+	},
+	"/scratch-runtime/editor.js": {
+		contentType: /^(?:application|text)\/javascript(?:;|$)/iu,
+		marker: "new GUI.ScratchStorage()"
+	},
+	"/scratch-runtime/vendor/scratch-gui-standalone.js": {
+		contentType: /^(?:application|text)\/javascript(?:;|$)/iu,
+		marker: ".p=new URL(\"/scratch-runtime/vendor/\",document.baseURI).href"
+	},
+	"/scratch-runtime/NOTICE.txt": {
+		contentType: /^text\/plain(?:;|$)/iu,
+		marker: "Scratch GUI and the Scratch editor monorepo are licensed AGPL-3.0-only."
+	}
+});
+
 function assertion(condition, message) {
 	if (!condition) throw new Error(message);
 }
@@ -131,12 +150,17 @@ export function validateContentSecurityPolicy(value, policyName) {
 	return true;
 }
 
-function validateSecurityHeaders(response, path, policyName) {
-	const headerValues = name => typeof response.headers.getAll === "function"
+function responseHeaderValues(response, name) {
+	return typeof response.headers.getAll === "function"
 		? response.headers.getAll(name)
-		: (response.headers.get(name) === null ? [] : [response.headers.get(name)]);
+		: response.headers.get(name) === null
+			? []
+			: [response.headers.get(name)];
+}
+
+export function validateSecurityHeaders(response, path, policyName) {
 	assertion(
-		headerValues("content-security-policy").length === 1,
+		responseHeaderValues(response, "content-security-policy").length === 1,
 		`${path} returned duplicate Content-Security-Policy headers.`
 	);
 	validateContentSecurityPolicy(
@@ -145,7 +169,7 @@ function validateSecurityHeaders(response, path, policyName) {
 	);
 	for (const [header, expectedValue] of Object.entries(securityHeaders)) {
 		assertion(
-			headerValues(header).length === 1,
+			responseHeaderValues(response, header).length === 1,
 			`${path} returned duplicate ${header} headers.`
 		);
 		assertion(
@@ -153,6 +177,61 @@ function validateSecurityHeaders(response, path, policyName) {
 			`${path} returned an unexpected ${header} header.`
 		);
 	}
+	for (const header of [
+		"access-control-allow-origin",
+		"access-control-allow-credentials"
+	]) {
+		assertion(
+			responseHeaderValues(response, header).length === 0,
+			`${path} unexpectedly permits cross-origin access through ${header}.`
+		);
+	}
+}
+
+export async function verifyScratchRuntimeResponse(response, path) {
+	const resource = scratchRuntimeResources[path];
+	assertion(resource, "Unknown Scratch runtime resource.");
+	assertion(
+		response.status === 200,
+		`${path} returned HTTP ${response.status} instead of 200.`
+	);
+	for (const [header, expectedValue] of [
+		["access-control-allow-origin", "*"],
+		["cross-origin-resource-policy", "cross-origin"],
+		["x-content-type-options", "nosniff"]
+	]) {
+		assertion(
+			responseHeaderValues(response, header).length === 1
+			&& response.headers.get(header) === expectedValue,
+			`${path} did not return one exact ${header}: ${expectedValue} header.`
+		);
+	}
+	for (const header of ["access-control-allow-credentials", "set-cookie"]) {
+		assertion(
+			responseHeaderValues(response, header).length === 0,
+			`${path} unexpectedly returned ${header}.`
+		);
+	}
+	assertion(
+		responseHeaderValues(response, "content-type").length === 1
+		&& resource.contentType.test(
+			response.headers.get("content-type") ?? ""
+		),
+		`${path} returned an unexpected content type.`
+	);
+	const cacheControl = response.headers.get("cache-control") ?? "";
+	assertion(
+		responseHeaderValues(response, "cache-control").length === 1
+		&& /(?:^|,)\s*no-(?:cache|store)\s*(?:,|$)/iu.test(cacheControl)
+		&& !/(?:^|,)\s*immutable\s*(?:,|$)/iu.test(cacheControl),
+		`${path} must revalidate its unversioned runtime content.`
+	);
+	const body = await response.text();
+	assertion(
+		body.includes(resource.marker)
+		&& !/^\s*(?:<!doctype|<html)/iu.test(body),
+		`${path} did not return the expected Scratch runtime content.`
+	);
 }
 
 export async function verifyApiNotFound(response, path) {
@@ -551,9 +630,21 @@ async function verifySecurityHeaders() {
 		["/api/release", "standard"],
 		["/api/healthz", "standard"]
 	]) {
-		const response = await request(path);
+		const response = await request(path, { headers: { Origin: "null" } });
 		assertion(response.ok, `${path} returned HTTP ${response.status}`);
 		validateSecurityHeaders(response, path, policyName);
+	}
+}
+
+export async function verifyScratchRuntime(requestResource = request) {
+	for (const path of Object.keys(scratchRuntimeResources)) {
+		// The sandbox has an opaque origin and must fetch public runtime assets
+		// without account cookies. Check the deployed edge rather than Vite.
+		const response = await requestResource(path, {
+			headers: { Origin: "null" },
+			redirect: "manual"
+		});
+		await verifyScratchRuntimeResponse(response, path);
 	}
 }
 
@@ -992,6 +1083,8 @@ export async function runProductionSmoke() {
 	await verifyReleaseIdentity();
 	currentSmokePhase = "security headers";
 	await verifySecurityHeaders();
+	currentSmokePhase = "Scratch runtime";
+	await verifyScratchRuntime();
 	currentSmokePhase = "public routes";
 	await verifyPublicRoutes();
 	currentSmokePhase = "API readiness";
