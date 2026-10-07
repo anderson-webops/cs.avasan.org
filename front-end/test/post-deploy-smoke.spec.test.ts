@@ -7,10 +7,13 @@ import {
 	readSmokeJson,
 	validateClassroomAnalyticsHealth,
 	validateContentSecurityPolicy,
+	validateSecurityHeaders,
 	validateStudentPrivacyRetention,
 	visibleTextFromHtml,
 	verifyApiNotFound,
-	verifyBrandedNotFound
+	verifyBrandedNotFound,
+	verifyScratchRuntime,
+	verifyScratchRuntimeResponse
 } from "../../scripts/post-deploy-smoke.mjs";
 import {
 	nativePublicEnvironment,
@@ -63,6 +66,177 @@ function policyForProfile(profile: "code-ide" | "course" | "standard") {
 const standardPolicy = policyForProfile("standard");
 const coursePolicy = policyForProfile("course");
 const codeIdePolicy = policyForProfile("code-ide");
+
+const scratchRuntimePaths = [
+	"/scratch-runtime/isolation.js",
+	"/scratch-runtime/editor.js",
+	"/scratch-runtime/vendor/scratch-gui-standalone.js",
+	"/scratch-runtime/NOTICE.txt"
+];
+
+function scratchRuntimeResponse(path = scratchRuntimePaths[0]) {
+	const body = path.endsWith("scratch-gui-standalone.js")
+		? ".p=new URL(\"/scratch-runtime/vendor/\",document.baseURI).href;"
+		: readFileSync(
+				resolve(repositoryRoot, `front-end/public${path}`),
+				"utf8"
+			);
+	return new Response(body, {
+		headers: {
+			"Access-Control-Allow-Origin": "*",
+			"Cache-Control": "no-cache",
+			"Content-Type": path.endsWith(".txt")
+				? "text/plain; charset=utf-8"
+				: "application/javascript; charset=utf-8",
+			"Cross-Origin-Resource-Policy": "cross-origin",
+			"X-Content-Type-Options": "nosniff"
+		}
+	});
+}
+
+describe("production Scratch runtime boundary", () => {
+	it("checks each opaque-frame bootstrap script and public runtime asset", async () => {
+		const requests: Array<{ path: string; init: RequestInit }> = [];
+		await verifyScratchRuntime(async (path: string, init: RequestInit) => {
+			requests.push({ path, init });
+			return scratchRuntimeResponse(path);
+		});
+		expect(requests.map(({ path }) => path)).toEqual(scratchRuntimePaths);
+		for (const { init } of requests) {
+			expect(init).toEqual({
+				headers: { Origin: "null" },
+				redirect: "manual"
+			});
+		}
+	});
+
+	it("rejects the deployed HTTP-200 scripts that cannot load in an opaque frame", async () => {
+		const response = scratchRuntimeResponse();
+		response.headers.delete("Access-Control-Allow-Origin");
+		response.headers.set("Cross-Origin-Resource-Policy", "same-origin");
+		await expect(
+			verifyScratchRuntimeResponse(response, scratchRuntimePaths[0])
+		).rejects.toThrow("access-control-allow-origin: *");
+		const blocked = scratchRuntimeResponse();
+		blocked.headers.set("Cross-Origin-Resource-Policy", "same-origin");
+		await expect(
+			verifyScratchRuntimeResponse(blocked, scratchRuntimePaths[0])
+		).rejects.toThrow("cross-origin-resource-policy: cross-origin");
+	});
+
+	it("rejects origin reflection, account cookies, credential CORS and immutable runtime caching", async () => {
+		for (const [header, value, message] of [
+			[
+				"Access-Control-Allow-Origin",
+				"null",
+				"access-control-allow-origin"
+			],
+			[
+				"Access-Control-Allow-Credentials",
+				"true",
+				"access-control-allow-credentials"
+			],
+			[
+				"Access-Control-Allow-Credentials",
+				"false",
+				"access-control-allow-credentials"
+			],
+			["Set-Cookie", "session=unexpected", "set-cookie"],
+			[
+				"Cache-Control",
+				"public, max-age=31536000, immutable",
+				"must revalidate"
+			],
+			["Cache-Control", "no-cache, immutable", "must revalidate"],
+			["Cache-Control", "public, max-age=3600", "must revalidate"]
+		]) {
+			const response = scratchRuntimeResponse();
+			response.headers.set(header, value);
+			await expect(
+				verifyScratchRuntimeResponse(response, scratchRuntimePaths[0])
+			).rejects.toThrow(message);
+		}
+	});
+
+	it("rejects duplicate CORS and resource-policy headers", async () => {
+		for (const duplicate of [
+			"access-control-allow-origin",
+			"cross-origin-resource-policy"
+		]) {
+			const response = scratchRuntimeResponse();
+			const fixture = {
+				headers: {
+					get: (name: string) => response.headers.get(name),
+					getAll: (name: string) => {
+						const value = response.headers.get(name);
+						return value === null
+							? []
+							: name === duplicate
+								? [value, value]
+								: [value];
+					}
+				},
+				status: 200,
+				text: () => response.text()
+			};
+			await expect(
+				verifyScratchRuntimeResponse(fixture, scratchRuntimePaths[0])
+			).rejects.toThrow(`one exact ${duplicate}`);
+		}
+	});
+
+	it("rejects HTML fallbacks and incorrect script content even when the headers look valid", async () => {
+		const wrongMime = scratchRuntimeResponse();
+		wrongMime.headers.set("Content-Type", "text/html; charset=utf-8");
+		await expect(
+			verifyScratchRuntimeResponse(wrongMime, scratchRuntimePaths[0])
+		).rejects.toThrow("unexpected content type");
+		for (const body of [
+			"<!doctype html><html>Page not found</html>",
+			"console.log('wrong script');"
+		]) {
+			const fixture = scratchRuntimeResponse();
+			const response = new Response(body, { headers: fixture.headers });
+			await expect(
+				verifyScratchRuntimeResponse(response, scratchRuntimePaths[0])
+			).rejects.toThrow("expected Scratch runtime content");
+		}
+	});
+
+	it("keeps wildcard CORS confined to Scratch public runtime assets", () => {
+		for (const [path, profile, policy] of [
+			["/", "course", coursePolicy],
+			["/api/healthz", "standard", standardPolicy]
+		]) {
+			const response = new Response("", {
+				headers: {
+					"Content-Security-Policy": policy,
+					"Cross-Origin-Opener-Policy": "same-origin",
+					"Cross-Origin-Resource-Policy": "same-origin",
+					"Permissions-Policy":
+						"camera=(), geolocation=(), microphone=()",
+					"Referrer-Policy": "no-referrer",
+					"Strict-Transport-Security":
+						"max-age=31536000; includeSubDomains",
+					"X-Content-Type-Options": "nosniff",
+					"X-Frame-Options": "DENY"
+				}
+			});
+			expect(() =>
+				validateSecurityHeaders(response, path, profile)
+			).not.toThrow();
+			response.headers.set("Access-Control-Allow-Origin", "*");
+			expect(() =>
+				validateSecurityHeaders(response, path, profile)
+			).toThrow("unexpectedly permits cross-origin access");
+			response.headers.delete("Access-Control-Allow-Origin");
+			response.headers.set("Access-Control-Allow-Credentials", "true");
+			expect(() =>
+				validateSecurityHeaders(response, path, profile)
+			).toThrow("unexpectedly permits cross-origin access");
+		}
+	});
+});
 
 describe("production smoke feature expectations", () => {
 	it("builds a secret-free native public configuration", () => {
