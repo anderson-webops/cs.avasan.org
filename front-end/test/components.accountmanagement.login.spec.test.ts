@@ -50,6 +50,21 @@ describe("AccountManagement teacher login", () => {
 		return { app, wrapper };
 	}
 
+	it("explains private operator recovery without adding a public reset request", async () => {
+		const { wrapper } = mountLogin();
+		const help = wrapper.get("details.recovery-help");
+
+		expect(help.get("summary").text()).toBe("Forgot your password?");
+		expect(help.text()).toContain("site operator");
+		expect(help.text()).toContain("does not send reset emails");
+		expect(help.find("input").exists()).toBe(false);
+		expect(help.find("button").exists()).toBe(false);
+		await help.get("summary").trigger("click");
+		expect(api.post).not.toHaveBeenCalled();
+		expect(api.put).not.toHaveBeenCalled();
+		wrapper.unmount();
+	});
+
 	it("withholds teacher login until the shared session is confirmed", async () => {
 		const app = useAppStore();
 		const wrapper = mount(AccountManagement, {
@@ -112,7 +127,10 @@ describe("AccountManagement teacher login", () => {
 		);
 		expect(app.currentAdmin).toEqual(julio);
 		expect(app.currentUser).toBeNull();
-		expect(wrapper.get("#admin-password").element).toHaveProperty("value", "");
+		expect(wrapper.get("#admin-password").element).toHaveProperty(
+			"value",
+			""
+		);
 		wrapper.unmount();
 	});
 
@@ -135,9 +153,7 @@ describe("AccountManagement teacher login", () => {
 		);
 		const { wrapper } = mountLogin();
 		await wrapper.get("#admin-email").setValue(julio.email);
-		await wrapper
-			.get("#admin-password")
-			.setValue("teacher-login-secret");
+		await wrapper.get("#admin-password").setValue("teacher-login-secret");
 
 		await wrapper.get("form").trigger("submit.prevent");
 		await flushPromises();
@@ -242,7 +258,9 @@ describe("AccountManagement teacher login", () => {
 		const { wrapper } = mountLogin();
 
 		expect(wrapper.get('label[for="admin-email"]').text()).toBe("Email");
-		expect(wrapper.get('label[for="admin-password"]').text()).toBe("Password");
+		expect(wrapper.get('label[for="admin-password"]').text()).toBe(
+			"Password"
+		);
 		expect(wrapper.find('input[name="remember"]').exists()).toBe(false);
 		expect(wrapper.get('button[type="submit"]').text()).toBe("Log in");
 		expect(wrapper.find('[role="dialog"]').exists()).toBe(false);

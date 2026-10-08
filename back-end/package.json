@@ -23,6 +23,8 @@
 		"lint": "eslint \"src/**/*.{js,ts}\"",
 		"lint-fix": "eslint \"src/**/*.{js,ts}\" --fix",
 		"create-admin-ts": "tsx -r dotenv/config src/create-admin-user.ts",
+		"reset-admin-password": "node dist/reset-admin-password.js",
+		"reset-admin-password-ts": "tsx -r dotenv/config src/reset-admin-password.ts",
 		"purge-classroom-analytics-ts": "tsx -r dotenv/config src/purge-classroom-analytics.ts"
 	},
 	"keywords": [],
