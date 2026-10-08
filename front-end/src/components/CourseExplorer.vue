@@ -30,6 +30,7 @@ import {
 	isScratchProjectEmbedUrl,
 	isScratchProjectUrl
 } from "@/modules/resourceUrls";
+import { publicCatalogStarterSharePath } from "@/modules/starterShareLink";
 import { useLessonViews } from "@/modules/useLessonViews";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
@@ -94,6 +95,11 @@ const prefersReducedMotion = ref(false);
 const activeScratchSolution = ref<{
 	embedUrl: string;
 	title: string;
+} | null>(null);
+const starterLinkResult = ref<{
+	itemID: string;
+	message: string;
+	manualUrl: string;
 } | null>(null);
 let reducedMotionQuery: MediaQueryList | null = null;
 
@@ -894,13 +900,47 @@ function resourceOpenUrl(resource: ResourceLink) {
 	return courseAssetViewerUrl(resource.url, resource.label);
 }
 
+function starterSharePath(item: CourseModuleItem) {
+	return publicCatalogStarterSharePath(selectedCourse.value, item);
+}
+
+async function copyStarterLink(item: CourseModuleItem) {
+	const path = starterSharePath(item);
+	if (!path) return;
+	const url = new URL(path, window.location.origin).href;
+	try {
+		if (!navigator.clipboard?.writeText)
+			throw new Error("Clipboard unavailable");
+		await navigator.clipboard.writeText(url);
+		starterLinkResult.value = {
+			itemID: item.id,
+			message:
+				"Starter link copied. This shares the original starter, not edited work.",
+			manualUrl: ""
+		};
+	} catch {
+		starterLinkResult.value = {
+			itemID: item.id,
+			message:
+				"Copy the starter link below. This shares the original starter, not edited work.",
+			manualUrl: url
+		};
+	}
+}
+
+function selectStarterLink(event: FocusEvent) {
+	(event.target as HTMLInputElement).select();
+}
+
 watch(selectedCourseId, value => {
 	closeScratchSolution();
+	starterLinkResult.value = null;
 	if (!isStorageReady.value) return;
 	writeStoredValue(COURSE_SELECTION_STORAGE_KEY, value);
 });
 
 watch([activeModuleId, selectedCourseId], ([moduleId, courseId]) => {
+	starterLinkResult.value = null;
 	if (!isStorageReady.value || !courseId) return;
 	writeStoredValue(moduleSelectionStorageKey(courseId), moduleId);
 });
@@ -1289,6 +1329,21 @@ function writeStoredValue(key: string, value: string) {
 											</a>
 										</template>
 										<button
+											v-if="starterSharePath(item)"
+											class="resource-link is-starter-share"
+											type="button"
+											:aria-label="`Copy starter link for ${item.title}`"
+											title="Share the original classroom starter, not edited work"
+											@click="copyStarterLink(item)"
+										>
+											<span class="resource-link-label"
+												>Copy starter link</span
+											>
+											<small class="resource-link-host"
+												>Original starter</small
+											>
+										</button>
+										<button
 											v-if="
 												hasPlayableScratchSolution(item)
 											"
@@ -1303,6 +1358,32 @@ function writeStoredValue(key: string, value: string) {
 												>Scratch player</small
 											>
 										</button>
+									</div>
+									<div
+										v-if="
+											starterLinkResult?.itemID ===
+											item.id
+										"
+										class="starter-share-result"
+									>
+										<p role="status">
+											{{ starterLinkResult.message }}
+										</p>
+										<label
+											v-if="starterLinkResult.manualUrl"
+										>
+											<span class="sr-only"
+												>Starter link for
+												{{ item.title }}</span
+											>
+											<input
+												readonly
+												:value="
+													starterLinkResult.manualUrl
+												"
+												@focus="selectStarterLink"
+											/>
+										</label>
 									</div>
 
 									<CourseAssetPreview
@@ -1538,6 +1619,23 @@ function writeStoredValue(key: string, value: string) {
 
 .course-ide-link {
 	flex: 0 0 auto;
+}
+
+.starter-share-result {
+	font-size: 0.85rem;
+	color: var(--course-text-soft);
+}
+.starter-share-result p {
+	margin: 0.35rem 0;
+}
+.starter-share-result input {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0.5rem;
+	border: 1px solid var(--course-border-strong);
+	border-radius: 6px;
+	color: var(--course-text);
+	background: var(--course-panel);
 }
 
 .course-toolbar {

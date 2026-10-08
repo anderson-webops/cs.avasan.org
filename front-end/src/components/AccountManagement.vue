@@ -219,6 +219,15 @@ onBeforeUnmount(clearTeacherPassword);
 		<button class="button" :disabled="isSubmitting" type="submit">
 			{{ isSubmitting ? "Logging in…" : "Log in" }}
 		</button>
+
+		<details class="recovery-help">
+			<summary>Forgot your password?</summary>
+			<p>
+				Ask the site operator to reset Julio’s existing Admin password.
+				Recovery is handled privately; this page does not send reset
+				emails.
+			</p>
+		</details>
 	</form>
 </template>
 
@@ -267,5 +276,19 @@ onBeforeUnmount(clearTeacherPassword);
 
 .session-status {
 	margin: 0;
+}
+
+.recovery-help {
+	color: var(--color-ink-soft);
+	font-size: 0.9rem;
+}
+
+.recovery-help summary {
+	width: fit-content;
+	cursor: pointer;
+}
+
+.recovery-help p {
+	margin-top: 0.5rem;
 }
 </style>

@@ -38,6 +38,10 @@ deliberately simplified downstream adaptation of
   private account and optional student project sync.
 - `HEALTHCHECKS.md` documents service health and readiness endpoints.
 
+The remaining classroom promises, their implemented alternatives, and the
+specific permissions or materials needed for later work are tracked in
+[`docs/julio-promise-followups.md`](docs/julio-promise-followups.md).
+
 ## Production Deployment Authority
 
 Native Nginx and systemd are the canonical automatic production path for this
@@ -189,6 +193,18 @@ npm run -w back-end create-admin-ts
 The setup prompts for Julio's email and password, fixes the display name to
 `Julio`, requires a password of at least 14 characters, and refuses to create a
 second teacher account. Never reuse the upstream site's database.
+
+If Julio forgets his password, an authorized site operator can reset the
+existing sole Admin through the non-HTTP recovery tool. It does not create an
+account or send email, and it invalidates existing Admin sessions. See
+[`docs/admin-recovery.md`](docs/admin-recovery.md) for the interactive command
+and safeguards. Never pass a password on a command line or put it in a server-AI
+prompt.
+
+Public classroom starters can be shared with **Copy starter link** on the
+lesson card. The link identifies the original published starter and never
+includes the sender's edits. Edited work stays in the existing download/import
+workflow; see [`docs/starter-sharing.md`](docs/starter-sharing.md).
 
 Optional accounts, provider sign-in, and anonymous counts fail closed. Before
 enabling any of them, complete the approval, contact, record-management, and
