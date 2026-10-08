@@ -52,14 +52,15 @@ describe("AccountManagement teacher login", () => {
 
 	it("explains private operator recovery without adding a public reset request", async () => {
 		const { wrapper } = mountLogin();
-		const help = wrapper.get("details.recovery-help");
+		const help = wrapper.get(".recovery-help");
 
-		expect(help.get("summary").text()).toBe("Forgot your password?");
+		expect(help.get("button").text()).toContain("Forgot your password?");
 		expect(help.text()).toContain("site operator");
 		expect(help.text()).toContain("does not send reset emails");
 		expect(help.find("input").exists()).toBe(false);
-		expect(help.find("button").exists()).toBe(false);
-		await help.get("summary").trigger("click");
+		expect(help.findAll("button")).toHaveLength(1);
+		await help.get("button").trigger("click");
+		expect(help.get("button").attributes("aria-expanded")).toBe("true");
 		expect(api.post).not.toHaveBeenCalled();
 		expect(api.put).not.toHaveBeenCalled();
 		wrapper.unmount();
@@ -264,7 +265,10 @@ describe("AccountManagement teacher login", () => {
 		expect(wrapper.find('input[name="remember"]').exists()).toBe(false);
 		expect(wrapper.get('button[type="submit"]').text()).toBe("Log in");
 		expect(wrapper.find('[role="dialog"]').exists()).toBe(false);
-		expect(wrapper.find('button[type="button"]').exists()).toBe(false);
+		expect(wrapper.findAll('button[type="button"]')).toHaveLength(1);
+		expect(wrapper.get('button[type="button"]').text()).toContain(
+			"Forgot your password?"
+		);
 		expect(wrapper.text()).not.toMatch(
 			/Student|Tutor|Sign up|Create account|Cancel/i
 		);

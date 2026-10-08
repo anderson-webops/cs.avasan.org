@@ -6,6 +6,7 @@ import type {
 	PythonIdeProjectReview
 } from "@/modules/pythonIde";
 import { computed, ref, watch } from "vue";
+import WorkspaceDisclosure from "@/components/WorkspaceDisclosure.vue";
 import { clearAdminSessionOnAuthorizationError } from "@/modules/adminSession";
 import {
 	createPythonIdeProjectReview,
@@ -340,8 +341,8 @@ async function loadProjects() {
 	}
 }
 
-async function onToggle(event: Event) {
-	if (!(event.target as HTMLDetailsElement).open) return;
+async function onToggle(open: boolean) {
+	if (!open) return;
 	if (!loaded.value) await loadProjects();
 }
 
@@ -472,8 +473,12 @@ watch([selectedReview, selectedFileName], syncDrafts, { immediate: true });
 </script>
 
 <template>
-	<details class="project-review" @toggle="onToggle">
-		<summary class="project-review__summary">
+	<WorkspaceDisclosure
+		class="project-review"
+		trigger-class="project-review__summary"
+		@toggle="onToggle"
+	>
+		<template #label>
 			<span>
 				<strong>Projects</strong>
 				<small>{{ username }}</small>
@@ -481,7 +486,7 @@ watch([selectedReview, selectedFileName], syncDrafts, { immediate: true });
 			<span v-if="loaded" class="project-review__count">
 				{{ records.length }}
 			</span>
-		</summary>
+		</template>
 
 		<div class="project-review__body">
 			<p v-if="loading" class="project-review__muted">
@@ -670,7 +675,7 @@ watch([selectedReview, selectedFileName], syncDrafts, { immediate: true });
 				</div>
 			</div>
 		</div>
-	</details>
+	</WorkspaceDisclosure>
 </template>
 
 <style scoped>
@@ -680,7 +685,7 @@ watch([selectedReview, selectedFileName], syncDrafts, { immediate: true });
 	background: var(--color-surface-muted);
 }
 
-.project-review__summary {
+:deep(.project-review__summary) {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -689,17 +694,12 @@ watch([selectedReview, selectedFileName], syncDrafts, { immediate: true });
 	cursor: pointer;
 	list-style: none;
 }
-
-.project-review__summary::-webkit-details-marker {
-	display: none;
-}
-
-.project-review__summary > span:first-child {
+:deep(.project-review__summary) > span:first-child {
 	display: grid;
 	gap: 0.1rem;
 }
 
-.project-review__summary small,
+:deep(.project-review__summary) small,
 .project-review__count,
 .project-review__muted,
 .project-review__meta,

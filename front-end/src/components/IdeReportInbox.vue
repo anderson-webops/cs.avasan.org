@@ -2,6 +2,7 @@
 import type { IdeDiagnostics } from "@/modules/ideDiagnostics";
 import { onMounted, ref } from "vue";
 import { api } from "@/api";
+import WorkspaceDisclosure from "@/components/WorkspaceDisclosure.vue";
 import { ideCategoryLabels } from "@/modules/ideDiagnostics";
 
 interface Report {
@@ -114,10 +115,10 @@ onMounted(() => load());
 				<p class="report-description">
 					{{ report.description || "No additional description." }}
 				</p>
-				<details>
-					<summary>Diagnostics and sanitized stack</summary>
+				<WorkspaceDisclosure>
+					<template #label>Diagnostics and sanitized stack</template>
 					<pre>{{ JSON.stringify(report.diagnostics, null, 2) }}</pre>
-				</details>
+				</WorkspaceDisclosure>
 				<div class="report-actions">
 					<button
 						v-for="status in [
@@ -165,7 +166,7 @@ onMounted(() => load());
 	color: inherit;
 }
 .report-inbox p,
-.report-inbox summary {
+.report-inbox :deep(.workspace-disclosure__trigger) {
 	color: inherit;
 }
 .report-description,

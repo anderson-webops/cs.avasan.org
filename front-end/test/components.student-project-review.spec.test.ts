@@ -82,9 +82,9 @@ describe("StudentProjectReview", () => {
 			}
 		});
 
-		const details = wrapper.get("details");
-		(details.element as HTMLDetailsElement).open = true;
-		await details.trigger("toggle");
+		await wrapper
+			.get(".project-review > .workspace-disclosure__trigger")
+			.trigger("click");
 		await flushPromises();
 
 		expect(fetchManagedPythonIdeProjects).toHaveBeenCalledWith("student-1");
@@ -166,9 +166,9 @@ describe("StudentProjectReview", () => {
 				username: "maria-7"
 			}
 		});
-		const details = wrapper.get("details");
-		(details.element as HTMLDetailsElement).open = true;
-		await details.trigger("toggle");
+		await wrapper
+			.get(".project-review > .workspace-disclosure__trigger")
+			.trigger("click");
 		await flushPromises();
 		expect(wrapper.text()).toContain('print("student")');
 
@@ -226,9 +226,9 @@ describe("StudentProjectReview", () => {
 			}
 		});
 
-		const details = wrapper.get("details");
-		(details.element as HTMLDetailsElement).open = true;
-		await details.trigger("toggle");
+		await wrapper
+			.get(".project-review > .workspace-disclosure__trigger")
+			.trigger("click");
 		await flushPromises();
 		expect(wrapper.text()).toContain('print("student")');
 		expect(wrapper.text()).not.toContain('print("second")');
@@ -279,9 +279,9 @@ describe("StudentProjectReview", () => {
 			}
 		});
 
-		const details = wrapper.get("details");
-		(details.element as HTMLDetailsElement).open = true;
-		await details.trigger("toggle");
+		await wrapper
+			.get(".project-review > .workspace-disclosure__trigger")
+			.trigger("click");
 		await vi.waitFor(() => {
 			expect(fetchManagedPythonIdeProject).toHaveBeenCalledWith(
 				"student-1",

@@ -98,11 +98,11 @@ test(
 			async function openProjectMenu() {
 				if (
 					!(await page.$eval(
-						".scratch-project-menu",
-						element => element.open
+						".scratch-project-menu > .workspace-disclosure__trigger",
+						element => element.getAttribute("aria-expanded") === "true"
 					))
 				) {
-					await page.locator(".scratch-project-menu summary").click();
+					await page.locator(".scratch-project-menu > .workspace-disclosure__trigger").click();
 				}
 			}
 			const loaded = () =>

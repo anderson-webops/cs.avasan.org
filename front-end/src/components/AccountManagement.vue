@@ -4,6 +4,7 @@ import type { Admin } from "@/stores/app";
 import { storeToRefs } from "pinia";
 import { onBeforeUnmount, ref, watch } from "vue";
 import { api } from "@/api";
+import WorkspaceDisclosure from "@/components/WorkspaceDisclosure.vue";
 import { fetchStudentSession } from "@/modules/studentAccounts";
 import { useAppStore } from "@/stores/app";
 
@@ -220,14 +221,14 @@ onBeforeUnmount(clearTeacherPassword);
 			{{ isSubmitting ? "Logging in…" : "Log in" }}
 		</button>
 
-		<details class="recovery-help">
-			<summary>Forgot your password?</summary>
+		<WorkspaceDisclosure class="recovery-help">
+			<template #label>Forgot your password?</template>
 			<p>
 				Ask the site operator to reset Julio’s existing Admin password.
 				Recovery is handled privately; this page does not send reset
 				emails.
 			</p>
-		</details>
+		</WorkspaceDisclosure>
 	</form>
 </template>
 
@@ -283,7 +284,7 @@ onBeforeUnmount(clearTeacherPassword);
 	font-size: 0.9rem;
 }
 
-.recovery-help summary {
+.recovery-help :deep(.workspace-disclosure__trigger) {
 	width: fit-content;
 	cursor: pointer;
 }

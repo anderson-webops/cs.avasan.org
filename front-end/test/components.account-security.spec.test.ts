@@ -28,15 +28,34 @@ describe("AccountSecurity", () => {
 		vi.clearAllMocks();
 	});
 
+	it("keeps account details read-only until Edit and cancels without a request", async () => {
+		const wrapper = mount(AccountSecurity, {
+			props: { entityId: "julio-primary" }
+		});
+		expect(wrapper.find("input").exists()).toBe(false);
+		await wrapper.get(".security-heading button").trigger("click");
+		await wrapper.get('[name="new-password"]').setValue("synthetic-only");
+		await wrapper.get(".security-heading button").trigger("click");
+		expect(wrapper.find("input").exists()).toBe(false);
+		expect(api.post).not.toHaveBeenCalled();
+		await wrapper.get(".security-heading button").trigger("click");
+		expect(
+			wrapper.get<HTMLInputElement>('[name="new-password"]').element.value
+		).toBe("");
+		wrapper.unmount();
+	});
+
 	it("uses entity-specific password control ids without email mutation", () => {
 		const first = mount(AccountSecurity, {
 			props: {
-				entityId: "julio-primary"
+				entityId: "julio-primary",
+				editing: true
 			}
 		});
 		const second = mount(AccountSecurity, {
 			props: {
-				entityId: "julio-backup"
+				entityId: "julio-backup",
+				editing: true
 			}
 		});
 
@@ -48,19 +67,15 @@ describe("AccountSecurity", () => {
 		);
 		expect(
 			first
-				.find(
-					"#account-security-admin-julio-primary-current-password"
-				)
+				.find("#account-security-admin-julio-primary-current-password")
 				.exists()
 		).toBe(true);
 		expect(
 			second
-				.find(
-					"#account-security-admin-julio-backup-current-password"
-				)
+				.find("#account-security-admin-julio-backup-current-password")
 				.exists()
 		).toBe(true);
-		expect(first.get("h2").text()).toBe("Change password");
+		expect(first.get("h2").text()).toBe("Profile");
 		expect(first.text()).not.toMatch(/Email|Update email/i);
 		expect(api.post).not.toHaveBeenCalled();
 		expect(first.text()).not.toMatch(/Student|Tutor|whenever you need/i);
@@ -90,7 +105,7 @@ describe("AccountSecurity", () => {
 				})
 		);
 		const wrapper = mount(AccountSecurity, {
-			props: { entityId: changedJulio._id }
+			props: { entityId: changedJulio._id, editing: true }
 		});
 		const form = wrapper.get("form");
 		const inputs = wrapper.findAll('input[type="password"]');
@@ -117,9 +132,9 @@ describe("AccountSecurity", () => {
 			{ timeout: 30_000 }
 		);
 		expect(form.attributes("aria-busy")).toBe("true");
-		expect(wrapper.get('button[type="submit"]').attributes()).toHaveProperty(
-			"disabled"
-		);
+		expect(
+			wrapper.get('button[type="submit"]').attributes()
+		).toHaveProperty("disabled");
 		expect(wrapper.get('button[type="submit"]').text()).toBe("Updating…");
 		for (const input of inputs) {
 			expect(input.attributes()).toHaveProperty("disabled");
@@ -133,13 +148,8 @@ describe("AccountSecurity", () => {
 		});
 		await flushPromises();
 
-		expect(form.attributes("aria-busy")).toBe("false");
-		expect(
-			wrapper.get('button[type="submit"]').attributes()
-		).not.toHaveProperty("disabled");
-		expect(wrapper.get('button[type="submit"]').text()).toBe(
-			"Update password"
-		);
+		expect(wrapper.find("form").exists()).toBe(false);
+		expect(wrapper.text()).toContain("Password updated successfully.");
 	});
 
 	it("notifies every tab after Julio changes his password", async () => {
@@ -159,7 +169,8 @@ describe("AccountSecurity", () => {
 		});
 		const wrapper = mount(AccountSecurity, {
 			props: {
-				entityId: "julio-primary"
+				entityId: "julio-primary",
+				editing: true
 			}
 		});
 
@@ -214,7 +225,7 @@ describe("AccountSecurity", () => {
 				})
 		);
 		const wrapper = mount(AccountSecurity, {
-			props: { entityId: changedJulio._id }
+			props: { entityId: changedJulio._id, editing: true }
 		});
 		const inputs = wrapper.findAll('input[type="password"]');
 		await inputs[0]!.setValue("old-teacher-password");
@@ -268,7 +279,8 @@ describe("AccountSecurity", () => {
 		});
 		const wrapper = mount(AccountSecurity, {
 			props: {
-				entityId: julio._id
+				entityId: julio._id,
+				editing: true
 			}
 		});
 
@@ -309,7 +321,8 @@ describe("AccountSecurity", () => {
 		});
 		const wrapper = mount(AccountSecurity, {
 			props: {
-				entityId: julio._id
+				entityId: julio._id,
+				editing: true
 			}
 		});
 
@@ -349,7 +362,7 @@ describe("AccountSecurity", () => {
 			}
 		});
 		const wrapper = mount(AccountSecurity, {
-			props: { entityId: "julio-primary" }
+			props: { entityId: "julio-primary", editing: true }
 		});
 		const inputs = wrapper.findAll('input[type="password"]');
 		await inputs[0]!.setValue("old-teacher-password");
@@ -370,7 +383,7 @@ describe("AccountSecurity", () => {
 
 	it("clears every password after local password validation fails", async () => {
 		const wrapper = mount(AccountSecurity, {
-			props: { entityId: "julio-primary" }
+			props: { entityId: "julio-primary", editing: true }
 		});
 		const inputs = wrapper.findAll('input[type="password"]');
 		await inputs[0]!.setValue("old-teacher-password");
@@ -411,7 +424,7 @@ describe("AccountSecurity", () => {
 			saveEdit: "Save"
 		});
 		const wrapper = mount(AccountSecurity, {
-			props: { entityId: "julio-primary" }
+			props: { entityId: "julio-primary", editing: true }
 		});
 		const inputs = wrapper.findAll('input[type="password"]');
 		for (const input of inputs) {
@@ -444,7 +457,8 @@ describe("AccountSecurity", () => {
 		);
 		const wrapper = mount(AccountSecurity, {
 			props: {
-				entityId: julio._id
+				entityId: julio._id,
+				editing: true
 			}
 		});
 

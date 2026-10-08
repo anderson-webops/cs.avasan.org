@@ -2,6 +2,7 @@
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { onBeforeRouteLeave, useRoute } from "vue-router";
 import IdeEnvironmentSelect from "@/components/IdeEnvironmentSelect.vue";
+import WorkspaceDisclosure from "@/components/WorkspaceDisclosure.vue";
 import {
 	scratchDownloadName,
 	scratchFrameDocument,
@@ -203,8 +204,8 @@ defineExpose({ stop: () => send("stop") });
 			<button :aria-pressed="expanded" @click="expanded = !expanded">
 				{{ expanded ? "Exit expanded view" : "Expand editor" }}
 			</button>
-			<details class="scratch-project-menu">
-				<summary>New or open</summary>
+			<WorkspaceDisclosure class="scratch-project-menu" popover>
+				<template #label>New or open</template>
 				<div class="scratch-project-menu__content">
 					<button :disabled="!ready || busy" @click="newProject">
 						New project
@@ -241,7 +242,7 @@ defineExpose({ stop: () => send("stop") });
 						Open starter
 					</button>
 				</div>
-			</details>
+			</WorkspaceDisclosure>
 		</div>
 		<span class="scratch-status" role="status"
 			>{{ status }}{{ dirty ? " Unsaved changes." : "" }}</span
@@ -255,8 +256,8 @@ defineExpose({ stop: () => send("stop") });
 			allow="camera 'none'; microphone 'none'; geolocation 'none'"
 			title="Scratch block editor and stage"
 		/>
-		<details class="scratch-help">
-			<summary>Saving, classroom tasks and credits</summary>
+		<WorkspaceDisclosure class="scratch-help">
+			<template #label>Saving, classroom tasks and credits</template>
 			<p>
 				Projects run in this browser. Use Download project to save an
 				.sb3 file, then Open .sb3 to continue here or import it into
@@ -292,7 +293,7 @@ defineExpose({ stop: () => send("stop") });
 				>. Scratch is a project of the Scratch Foundation, which does
 				not sponsor or endorse this site.
 			</p>
-		</details>
+		</WorkspaceDisclosure>
 	</section>
 </template>
 
@@ -388,23 +389,15 @@ defineExpose({ stop: () => send("stop") });
 .scratch-project-menu {
 	position: relative;
 }
-.scratch-project-menu summary {
+.scratch-project-menu :deep(.workspace-disclosure__trigger) {
 	min-height: 2.75rem;
 	align-content: center;
 	cursor: pointer;
 }
 .scratch-project-menu__content {
-	position: absolute;
-	right: 0;
-	z-index: 5;
 	display: grid;
 	gap: 0.65rem;
 	width: min(26rem, 85vw);
-	padding: 0.75rem;
-	border: 1px solid var(--color-border);
-	border-radius: 8px;
-	background: var(--color-surface-strong);
-	box-shadow: var(--shadow-soft);
 }
 .scratch-project-menu__content label {
 	flex-wrap: wrap;

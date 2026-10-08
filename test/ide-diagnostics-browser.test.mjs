@@ -208,7 +208,7 @@ test(
 					);
 				} catch (error) {
 					await page.click('button[aria-label="IDE settings"]');
-					await page.locator(".ide-diagnostics-settings > summary").click();
+					await page.locator(".ide-diagnostics-settings > .workspace-disclosure__trigger").click();
 					await page.click(
 						".ide-diagnostics-controls > button:nth-child(2)"
 					);
@@ -229,7 +229,7 @@ test(
 				await page.setRequestInterception(true);
 				const count = reports.length;
 				await page.click('button[aria-label="IDE settings"]');
-				await page.locator(".ide-diagnostics-settings > summary").click();
+				await page.locator(".ide-diagnostics-settings > .workspace-disclosure__trigger").click();
 				await page.click(
 					".ide-diagnostics-controls > button:nth-child(2)"
 				);

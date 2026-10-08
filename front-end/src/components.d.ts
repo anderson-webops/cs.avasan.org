@@ -40,6 +40,7 @@ declare module 'vue' {
     TheFooter: typeof import('./components/TheFooter.vue')['default']
     TheHeader: typeof import('./components/TheHeader.vue')['default']
     TRexRunnerGame: typeof import('./components/games/TRexRunnerGame.vue')['default']
+    WorkspaceDisclosure: typeof import('./components/WorkspaceDisclosure.vue')['default']
     WorkspaceViewToggle: typeof import('./components/WorkspaceViewToggle.vue')['default']
   }
 }

@@ -6,6 +6,7 @@ import type {
 } from "@/modules/studentAccounts";
 import { computed, onMounted, ref, watch } from "vue";
 import StudentProjectReview from "@/components/StudentProjectReview.vue";
+import WorkspaceDisclosure from "@/components/WorkspaceDisclosure.vue";
 import { clearAdminSessionOnAuthorizationError } from "@/modules/adminSession";
 import {
 	correctAdminStudentUsername,
@@ -620,11 +621,11 @@ onMounted(loadStudents);
 			<span class="site-chip">{{ students.length }}</span>
 		</div>
 
-		<details
+		<WorkspaceDisclosure
 			v-if="!maintenanceOnly"
 			class="student-management__create-disclosure"
 		>
-			<summary>Add student</summary>
+			<template #label>Add student</template>
 			<form
 				v-if="!maintenanceOnly"
 				class="student-management__create"
@@ -678,7 +679,7 @@ onMounted(loadStudents);
 					credential is shown.
 				</p>
 			</form>
-		</details>
+		</WorkspaceDisclosure>
 
 		<section
 			v-if="!maintenanceOnly && revealedAccess"
@@ -1090,11 +1091,11 @@ onMounted(loadStudents);
 							</template>
 						</p>
 					</div>
-					<details
+					<WorkspaceDisclosure
 						v-if="student.recordPreservation?.events.length"
 						class="student-management__preservation-events"
 					>
-						<summary>Preservation audit history</summary>
+						<template #label>Preservation audit history</template>
 						<ol>
 							<li
 								v-for="(event, eventIndex) in student
@@ -1109,7 +1110,7 @@ onMounted(loadStudents);
 								{{ formatPreservationTimestamp(event.at) }}
 							</li>
 						</ol>
-					</details>
+					</WorkspaceDisclosure>
 					<div class="student-management__field">
 						<label
 							:for="`preservation-teacher-password-${student._id}`"
@@ -1665,7 +1666,7 @@ onMounted(loadStudents);
 	font-size: 0.85rem;
 }
 
-.student-management__preservation-events summary {
+.student-management__preservation-events :deep(.workspace-disclosure__trigger) {
 	cursor: pointer;
 	font-weight: 800;
 }
@@ -1792,12 +1793,12 @@ onMounted(loadStudents);
 	background: var(--color-surface);
 	color: var(--color-ink);
 }
-.student-management__create-disclosure > summary {
+.student-management__create-disclosure > :deep(.workspace-disclosure__trigger) {
 	cursor: pointer;
 	padding: 0.5rem 0;
 	color: var(--color-ink-soft);
 }
-.student-management__create-disclosure[open] .student-management__create {
+.student-management__create-disclosure.is-open .student-management__create {
 	margin-top: 0.75rem;
 }
 .student-management__student {

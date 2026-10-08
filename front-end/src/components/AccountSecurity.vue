@@ -8,6 +8,7 @@ import { broadcastStudentSessionEnded } from "@/modules/studentSessionBroadcast"
 import { useAppStore } from "@/stores/app";
 
 const props = defineProps<{ entityId: string }>();
+const editing = defineModel<boolean>("editing", { default: false });
 
 const app = useAppStore();
 
@@ -33,6 +34,11 @@ function clearPasswordInputs() {
 	if (newPasswordInput.value) newPasswordInput.value.value = "";
 	if (confirmPasswordInput.value) confirmPasswordInput.value.value = "";
 }
+
+watch(editing, () => {
+	clearPasswordInputs();
+	passwordError.value = "";
+});
 
 function submitPasswordChange() {
 	const submittedCurrentPassword = currentPassword.value;
@@ -90,6 +96,7 @@ async function updatePassword() {
 		}
 		app.setCurrentAdmin(data.currentAdmin);
 		passwordStatus.value = "Password updated successfully.";
+		editing.value = false;
 		clearPasswordInputs();
 		broadcastStudentSessionEnded();
 	} catch (caught: unknown) {
@@ -129,6 +136,7 @@ async function updatePassword() {
 				)
 			) {
 				passwordStatus.value = "Password updated successfully.";
+				editing.value = false;
 				broadcastStudentSessionEnded();
 			} else {
 				passwordError.value =
@@ -150,6 +158,7 @@ watch(
 	([entityID, adminID], [previousEntityID, previousAdminID]) => {
 		if (entityID !== previousEntityID || adminID !== previousAdminID) {
 			clearPasswordInputs();
+			editing.value = false;
 		}
 	}
 );
@@ -159,9 +168,36 @@ onBeforeUnmount(clearPasswordInputs);
 
 <template>
 	<section class="security-card" :aria-labelledby="`${idPrefix}-title`">
-		<h2 :id="`${idPrefix}-title`">Change password</h2>
+		<header class="security-heading">
+			<h2 :id="`${idPrefix}-title`">Profile</h2>
+			<button
+				type="button"
+				class="site-button site-button--secondary"
+				:disabled="isSubmitting"
+				@click="editing = !editing"
+			>
+				{{ editing ? "Cancel" : "Edit" }}
+			</button>
+		</header>
+		<dl v-if="!editing" class="security-values">
+			<template v-if="app.currentAdmin?._id === entityId">
+				<div>
+					<dt>Name</dt>
+					<dd>{{ app.currentAdmin.name }}</dd>
+				</div>
+				<div>
+					<dt>Email</dt>
+					<dd>{{ app.currentAdmin.email }}</dd>
+				</div>
+			</template>
+			<div>
+				<dt>Password</dt>
+				<dd aria-label="Password is set">••••••••</dd>
+			</div>
+		</dl>
 
 		<form
+			v-if="editing"
 			:aria-busy="isSubmitting ? 'true' : 'false'"
 			class="security-section"
 			@submit.prevent="updatePassword"
@@ -213,18 +249,18 @@ onBeforeUnmount(clearPasswordInputs);
 			>
 				{{ isSubmitting ? "Updating…" : "Update password" }}
 			</button>
-			<p
-				v-if="passwordStatus"
-				class="status"
-				role="status"
-				aria-live="polite"
-			>
-				{{ passwordStatus }}
-			</p>
 			<p v-if="passwordError" class="error" role="alert">
 				{{ passwordError }}
 			</p>
 		</form>
+		<p
+			v-if="passwordStatus"
+			class="status"
+			role="status"
+			aria-live="polite"
+		>
+			{{ passwordStatus }}
+		</p>
 	</section>
 </template>
 
@@ -233,6 +269,29 @@ onBeforeUnmount(clearPasswordInputs);
 	display: grid;
 	gap: 1.5rem;
 	text-align: left;
+}
+
+.security-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+}
+.security-heading h2 {
+	margin: 0;
+}
+.security-values {
+	margin: 0;
+}
+.security-values > div {
+	display: grid;
+	grid-template-columns: 6rem minmax(0, 1fr);
+	gap: 0.75rem;
+	padding-block: 0.4rem;
+}
+.security-values dd {
+	margin: 0;
+	overflow-wrap: anywhere;
 }
 
 .security-section {

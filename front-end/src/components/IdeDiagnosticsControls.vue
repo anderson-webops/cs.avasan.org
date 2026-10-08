@@ -2,6 +2,7 @@
 import type { IdeDiagnostics } from "@/modules/ideDiagnostics";
 import { computed, nextTick, ref } from "vue";
 import { api } from "@/api";
+import WorkspaceDisclosure from "@/components/WorkspaceDisclosure.vue";
 import { ideCategoryLabels } from "@/modules/ideDiagnostics";
 
 const props = defineProps<{ capture: () => IdeDiagnostics }>();
@@ -133,10 +134,10 @@ async function submit() {
 						Include sanitized stack locations (no source text or
 						file names)</label
 					>
-					<details open>
-						<summary>Exact submission preview</summary>
+					<WorkspaceDisclosure :open="true">
+						<template #label>Exact submission preview</template>
 						<pre tabindex="0">{{ preview }}</pre>
-					</details>
+					</WorkspaceDisclosure>
 					<label class="ide-report-check"
 						><input v-model="reviewed" type="checkbox" /> I reviewed
 						this preview and want to send it.</label
@@ -213,7 +214,7 @@ dialog::backdrop {
 	color: inherit;
 	line-height: 1.5;
 }
-.ide-report-body :is(label, summary) {
+.ide-report-body :is(label, :deep(.workspace-disclosure__trigger)) {
 	color: inherit;
 	font-size: 1rem;
 	font-weight: 400;

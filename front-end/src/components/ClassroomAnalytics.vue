@@ -4,6 +4,7 @@ import type {
 	ClassroomSiteActivity
 } from "@/modules/classroomAnalytics";
 import { computed, onMounted, ref } from "vue";
+import WorkspaceDisclosure from "@/components/WorkspaceDisclosure.vue";
 import { clearAdminSessionOnAuthorizationError } from "@/modules/adminSession";
 import { fetchAdminClassroomAnalytics } from "@/modules/classroomAnalytics";
 import { useAppStore } from "@/stores/app";
@@ -222,8 +223,8 @@ onMounted(loadSummary);
 				</dl>
 			</section>
 
-			<details class="classroom-analytics__daily">
-				<summary>Daily totals</summary>
+			<WorkspaceDisclosure class="classroom-analytics__daily">
+				<template #label>Daily totals</template>
 				<div class="classroom-analytics__table-wrap">
 					<table>
 						<thead>
@@ -246,7 +247,7 @@ onMounted(loadSummary);
 						</tbody>
 					</table>
 				</div>
-			</details>
+			</WorkspaceDisclosure>
 
 			<p class="classroom-analytics__meta">
 				Generated {{ formatGeneratedAt(summary.generatedAt) }}.
@@ -382,7 +383,7 @@ onMounted(loadSummary);
 	text-align: right;
 }
 
-.classroom-analytics__daily summary {
+.classroom-analytics__daily :deep(.workspace-disclosure__trigger) {
 	cursor: pointer;
 	font-weight: 900;
 }
