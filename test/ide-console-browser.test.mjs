@@ -150,7 +150,14 @@ test(
 				const editorModifier = await page.evaluate(() =>
 					/Mac/.test(navigator.platform) ? "Meta" : "Control"
 				);
-				await page.click(".cm-content");
+				await page.focus(".cm-content");
+				assert.equal(
+					await page.$eval(".cm-content", element =>
+						element.contains(document.activeElement)
+					),
+					true,
+					`${mode}: code replacement must focus the editor`
+				);
 				await page.keyboard.down(editorModifier);
 				await page.keyboard.press("a");
 				await page.keyboard.up(editorModifier);
@@ -159,6 +166,16 @@ test(
 					? "class Main { static void move(int distance) {} static void run() { move(1); } }"
 					: "class OrbitSim:\n    def move(self, distance): pass\norb = OrbitSim()\norb.move(1)";
 				await page.keyboard.sendCharacter(correctedCode);
+				assert.equal(
+					await page.$eval(".cm-content", element =>
+						Array.from(
+							element.querySelectorAll(".cm-line"),
+							line => line.textContent
+						).join("\n")
+					),
+					correctedCode,
+					`${mode}: replace the fixture before checking diagnostics`
+				);
 				await page.waitForFunction(
 					() => !document.querySelector(".cm-lintRange-warning")
 				);
