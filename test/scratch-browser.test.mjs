@@ -96,7 +96,12 @@ test(
 				{ waitUntil: "networkidle2" }
 			);
 			async function openProjectMenu() {
-				if (!(await page.$eval(".scratch-project-menu", element => element.open))) {
+				if (
+					!(await page.$eval(
+						".scratch-project-menu",
+						element => element.open
+					))
+				) {
 					await page.locator(".scratch-project-menu summary").click();
 				}
 			}
@@ -127,10 +132,44 @@ test(
 				}),
 				true
 			);
-			await frame.click('input[placeholder="x"]');
-			// Leave numeric inputs and focus the actual stage before a game key.
-			await frame.click("canvas");
+			const stageSelector = '[class*="stage_stage_"] > div > canvas';
+			// Enter directly from the host, without priming focus in a child
+			// input. Scratch cancels the stage's native mouse focus transfer.
+			await page.focus('.scratch-toolbar input[maxlength="120"]');
+			await frame.click(stageSelector);
 			await page.keyboard.press("ArrowRight");
+			await frame.waitForFunction(
+				() =>
+					document.querySelector('input[placeholder="x"]')?.value ===
+					"10"
+			);
+			assert.equal(
+				await page.evaluate(() => document.activeElement.tagName),
+				"IFRAME"
+			);
+			// Editor fields must retain their own arrow-key behavior.
+			await frame.click('input[placeholder="x"]');
+			await page.keyboard.press("ArrowRight");
+			assert.equal(
+				await frame.$eval(
+					'input[placeholder="x"]',
+					input => input.value
+				),
+				"10"
+			);
+			// Returning after a host-toolbar action must work repeatedly.
+			await page.focus('.scratch-toolbar input[maxlength="120"]');
+			await frame.click(stageSelector);
+			await page.keyboard.press("ArrowRight");
+			await frame.waitForFunction(
+				() =>
+					document.querySelector('input[placeholder="x"]')?.value ===
+					"20"
+			);
+			// Green flag entry also leaves keyboard events in the editor.
+			await page.focus('.scratch-toolbar input[maxlength="120"]');
+			await frame.locator('[title="Go"]').click();
+			await page.keyboard.press("ArrowLeft");
 			await frame.waitForFunction(
 				() =>
 					document.querySelector('input[placeholder="x"]')?.value ===
@@ -141,20 +180,37 @@ test(
 			await frame.locator('input[placeholder="x"]').fill("20");
 			await page.keyboard.press("Enter");
 			await frame.click("canvas");
-			await page.waitForFunction(() => document.querySelector(".scratch-status[role=status]")?.textContent.includes("Unsaved changes"));
+			await page.waitForFunction(() =>
+				document
+					.querySelector(".scratch-status[role=status]")
+					?.textContent.includes("Unsaved changes")
+			);
 			page.removeAllListeners("dialog");
-			const cancelledReplacement = new Promise(resolve => page.once("dialog", async dialog => {
-				await dialog.dismiss();
-				resolve();
-			}));
+			const cancelledReplacement = new Promise(resolve =>
+				page.once("dialog", async dialog => {
+					await dialog.dismiss();
+					resolve();
+				})
+			);
 			await openProjectMenu();
 			await page.locator("::-p-text(New project)").click();
 			await cancelledReplacement;
-			assert.equal(await page.$eval(".scratch-project-menu select", select => select.value), "two-arrows");
-			assert.equal(await frame.$eval('input[placeholder="x"]', input => input.value), "20");
+			assert.equal(
+				await page.$eval(
+					".scratch-project-menu select",
+					select => select.value
+				),
+				"two-arrows"
+			);
+			assert.equal(
+				await frame.$eval(
+					'input[placeholder="x"]',
+					input => input.value
+				),
+				"20"
+			);
 			page.on("dialog", dialog => dialog.accept());
-			await page.locator("::-p-text(Download project)")
-				.click();
+			await page.locator("::-p-text(Download project)").click();
 			await page.waitForFunction(() =>
 				document
 					.querySelector(".scratch-status[role=status]")
@@ -206,8 +262,7 @@ test(
 			const nameFile = path.join(files, "Animate Your Name.sb3");
 			async function exportName() {
 				await rm(nameFile, { force: true });
-				await page.locator("::-p-text(Download project)")
-					.click();
+				await page.locator("::-p-text(Download project)").click();
 				for (let n = 0; n < 50 && !existsSync(nameFile); n++)
 					await new Promise(resolve => setTimeout(resolve, 100));
 				return JSON.parse(
@@ -266,16 +321,32 @@ test(
 			await page.locator("::-p-text(Download project)").click();
 			for (let n = 0; n < 50 && !existsSync(blankFile); n++)
 				await new Promise(resolve => setTimeout(resolve, 100));
-			const blankProject = JSON.parse(strFromU8(unzipSync(new Uint8Array(await readFile(blankFile)))["project.json"]));
+			const blankProject = JSON.parse(
+				strFromU8(
+					unzipSync(new Uint8Array(await readFile(blankFile)))[
+						"project.json"
+					]
+				)
+			);
 			assert.equal(blankProject.targets.length, 2);
-			for (const target of blankProject.targets) assert.deepEqual(target.blocks, {});
+			for (const target of blankProject.targets)
+				assert.deepEqual(target.blocks, {});
 			await openProjectMenu();
 			await (await page.$(".file-control input")).uploadFile(blankFile);
 			await loaded();
 			// The course's direct launch opens the same code-free project.
-			await page.goto("http://127.0.0.1:5198/ide?mode=scratch&starter=blank", { waitUntil: "networkidle2" });
+			await page.goto(
+				"http://127.0.0.1:5198/ide?mode=scratch&starter=blank",
+				{ waitUntil: "networkidle2" }
+			);
 			await loaded();
-			assert.equal(await page.$eval('.scratch-toolbar input', input => input.value), "Independent Mini-Game");
+			assert.equal(
+				await page.$eval(
+					".scratch-toolbar input",
+					input => input.value
+				),
+				"Independent Mini-Game"
+			);
 			const blankFrame = page.frames().find(f => f !== page.mainFrame());
 			await blankFrame.locator("::-p-text(Costumes)").click();
 			await blankFrame.waitForSelector("canvas");

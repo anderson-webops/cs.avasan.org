@@ -12,6 +12,56 @@
 	let busy = false;
 	let pending;
 	let changed = false;
+	const pressedKeys = new Map();
+	const keyData = event => ({
+		key: event.key && event.key !== "Dead" ? event.key : event.keyCode
+	});
+	// One physical key can produce multiple logical keys while Shift changes.
+	// Retain each value that Scratch accepted until its keyup or cleanup.
+	const keyIdentity = event => String(keyData(event).key).toUpperCase();
+	function releaseKeys() {
+		for (const key of pressedKeys.values())
+			vm?.postIOData("keyboard", { ...key, isDown: false });
+		pressedKeys.clear();
+	}
+	function focusStage(event) {
+		// Scratch prevents the stage's default mouse focus transfer. Focus
+		// this opaque frame, not its canvas: the GUI expects keys on body.
+		if (vm?.renderer?.canvas && event.target === vm.renderer.canvas)
+			window.focus();
+	}
+	document.addEventListener("mousedown", focusStage, true);
+	document.addEventListener("touchstart", focusStage, {
+		capture: true,
+		passive: true
+	});
+	document.addEventListener(
+		"keydown",
+		event => {
+			// Observe only keys accepted by Scratch's own keyboard handler.
+			// Do not forward or consume editor fields, shortcuts or parent keys.
+			if (
+				!vm ||
+				(event.target !== document &&
+					event.target !== document.body &&
+					!(event.target instanceof SVGElement))
+			)
+				return;
+			pressedKeys.set(keyIdentity(event), keyData(event));
+		},
+		true
+	);
+	document.addEventListener(
+		"keyup",
+		event => {
+			pressedKeys.delete(keyIdentity(event));
+		},
+		true
+	);
+	window.addEventListener("blur", releaseKeys);
+	document.addEventListener("visibilitychange", () => {
+		if (document.hidden) releaseKeys();
+	});
 	const limit = 20 * 1024 * 1024;
 	const error = () =>
 		send("error", {
@@ -63,6 +113,7 @@
 		GUI.setAppElement(container);
 		const editor = GUI.createStandaloneRoot(state, container);
 		async function load(bytes) {
+			releaseKeys();
 			if (!vm || busy) {
 				pending = bytes;
 				return;
@@ -95,6 +146,7 @@
 			basePath: new URL("vendor/", new URL("/scratch-runtime/", origin))
 				.href,
 			onVmInit(value) {
+				releaseKeys();
 				vm = value;
 			},
 			onProjectLoaded() {
@@ -128,7 +180,10 @@
 				data.bytes.byteLength <= limit
 			)
 				await load(data.bytes);
-			if (data.type === "stop") vm?.stopAll();
+			if (data.type === "stop") {
+				releaseKeys();
+				vm?.stopAll();
+			}
 			if (data.type === "download" && vm && !busy) {
 				try {
 					const blob = await vm.saveProjectSb3();
@@ -141,6 +196,7 @@
 			}
 		});
 		window.addEventListener("pagehide", () => {
+			releaseKeys();
 			vm?.stopAll();
 			editor.unmount();
 		});
