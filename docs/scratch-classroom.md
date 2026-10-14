@@ -18,7 +18,14 @@ node front-end/scripts/scratch/generate-projects.mjs /path/to/Starters /path/to/
 
 ## References and authorship
 
-The conceptual progression and coordinate-first dress-up teaching pattern were informed by [SFUSD MyCS Unit 1.4: Dress Up](https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-4), with its events/initialization sequence followed by loops, conditions and variables in later units. The MyCS pages identify a CC BY-NC-SA 4.0 license and inspiration from Harvey Mudd's MyCS curriculum. This implementation uses original lesson wording, block arrangements and robot artwork. It does not redistribute their student projects, images or lesson text, or relabel proprietary Juni projects.
+The conceptual progression and coordinate-first dress-up teaching pattern were informed by [SFUSD MyCS Unit 1.4: Dress Up](https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-4), with its events/initialization sequence followed by loops, conditions and variables in later units. The MyCS pages identify a CC BY-NC-SA 4.0 license and inspiration from Harvey Mudd's MyCS curriculum. The original starters use original lesson wording, block arrangements and robot artwork. They do not redistribute the source's student projects or images, or relabel proprietary Juni projects.
+
+The existing Robot Dress-Up lesson now also includes a separately marked,
+shortened and rewritten MyCS teaching guide, with learner-visible source credit
+and CC BY-NC-SA 4.0 licensing for that guide only. Other content and original
+starter assets retain their existing licenses. The complete source site has
+not been imported. See [the precise source inventory](mycs-source-inventory.md)
+for the selected page, adaptation boundary, exclusions and outstanding files.
 
 Existing Scratch courses remain available in Classes. The school fork uses this sequence for its existing `scratch-level-1` course ID, retaining its five-course catalog and separate archived Python/Pygame references. Its previous Scratch Level 1 curriculum remains in Reference Materials below the new classroom sequence.
 

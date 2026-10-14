@@ -122,11 +122,20 @@ shared/universal recovery code. Until then, use the operator tool.
 
 ## To do later: the complete reference-teacher resource collection
 
-**Required input:** the precise pages/projects/files Julio wants reproduced,
-the originals where they are not publicly downloadable, and asset-specific
-reuse terms or permission, including required credits. Confirm the intended
-publication on both Julio's and Jacob's sites. Do not assume one curriculum's
-license covers another source or proprietary Juni material.
+**Partially delivered, October 14:** the exact SFUSD MyCS Unit 1.4 teacher
+page is now identified and publicly reviewed. The existing Robot Dress-Up
+lesson includes a bounded, rewritten teaching guide with visible credit and
+CC BY-NC-SA 4.0 terms. The original twelve starters were already available;
+neither those files nor this guide constitute a complete site import. See the
+[source inventory](mycs-source-inventory.md).
+
+**Remaining input:** select additional pages/projects/files, provide authorized
+originals for inaccessible student pages/handouts, and review asset-specific
+reuse terms for external projects, images and videos. The class discussion
+included both sites; this update is limited to Julio's noncommercial classroom.
+Jacob-site publication requires a compatible noncommercial use or separate
+permission. Do not assume the teacher-page license covers linked third-party
+assets, another source, or proprietary Juni material.
 
 **Then:** ingest only the approved scope, retain authorship and provenance,
 apply the required attribution and reuse terms, adapt the classroom structure,

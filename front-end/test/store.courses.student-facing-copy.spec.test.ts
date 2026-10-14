@@ -267,7 +267,35 @@ function escapeRegExp(value: string) {
 	return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+function visibleStudentCopy(value: string) {
+	// Inline link destinations are not visible instructions; retain their labels.
+	return value.replace(/\[([^\]\n]+)\]\(https?:\/\/[^\s)]+\)/g, "$1");
+}
+
 describe("student-facing course copy", () => {
+	it("checks visible source-link labels without treating URL paths as instructions", () => {
+		const sourceUrl =
+			"https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-4";
+		const visible = visibleStudentCopy(`[SFUSD MyCS](${sourceUrl})`);
+		expect(visible).toBe("SFUSD MyCS");
+		expect(
+			forbiddenStudentFacingPatterns.some(pattern =>
+				pattern.test(visible)
+			)
+		).toBe(false);
+		for (const text of [
+			`[Teacher notes](${sourceUrl})`,
+			`Ask students to read [SFUSD MyCS](${sourceUrl}).`,
+			"Teacher notes without a link"
+		]) {
+			expect(
+				forbiddenStudentFacingPatterns.some(pattern =>
+					pattern.test(visibleStudentCopy(text))
+				)
+			).toBe(true);
+		}
+	});
+
 	it("keeps generated boilerplate and recovery notes out of raw course source", () => {
 		const failures: string[] = [];
 
@@ -411,11 +439,12 @@ describe("student-facing course copy", () => {
 					];
 
 					for (const field of fields) {
+						const visibleValue = visibleStudentCopy(field.value);
 						for (const pattern of forbiddenStudentFacingPatterns) {
-							if (!pattern.test(field.value)) continue;
+							if (!pattern.test(visibleValue)) continue;
 
 							failures.push(
-								`${entry.id} / ${module.title} / ${field.label}: ${snippet(field.value, pattern)}`
+								`${entry.id} / ${module.title} / ${field.label}: ${snippet(visibleValue, pattern)}`
 							);
 						}
 					}

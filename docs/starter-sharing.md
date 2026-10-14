@@ -47,6 +47,10 @@ public project publication.
 The organized Scratch sequence, original starters and original artwork are
 already present. They are an adaptation, not a complete copy of the reference
 teacher's website; see [Scratch classroom authorship](scratch-classroom.md).
+The identified MyCS Unit 1.4 page now also has a bounded, visibly credited
+teaching-guide adaptation in Robot Dress-Up. See the
+[source inventory](mycs-source-inventory.md) for its separate license and the
+linked resources that have not been imported.
 Before fulfilling a request to copy particular resources onto both sites,
 provide:
 
