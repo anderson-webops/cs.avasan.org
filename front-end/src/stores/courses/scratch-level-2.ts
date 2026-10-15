@@ -1,11 +1,12 @@
 import type { RawCourse } from "./types";
+import { withMyCsClassroomChoices } from "./mycs-classroom";
 import {
 	buildScratchFluencyDrill,
 	buildScratchOpenEndedVariant
 } from "./scratchProjectGuidance";
 import { buildSupportSectionGuidance } from "./supportSectionGuidance";
 
-export const scratchLevel2Course: RawCourse = {
+const scratchLevel2BaseCourse: RawCourse = {
 	name: "Scratch Level 2",
 	modules: [
 		{
@@ -1103,3 +1104,8 @@ Scratch Level 2 already uses larger designs, lists, functions, and coordinated g
 		}
 	]
 };
+
+export const scratchLevel2Course = withMyCsClassroomChoices(
+	scratchLevel2BaseCourse,
+	"scratch-level-2"
+);

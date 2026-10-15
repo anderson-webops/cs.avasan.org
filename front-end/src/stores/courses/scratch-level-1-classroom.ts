@@ -1,5 +1,6 @@
 import type { RawCourse } from "./types";
 import projects from "../../../scripts/scratch/projects.json";
+import { withMyCsClassroomChoices } from "./mycs-classroom";
 import { myCsDressUpGuide } from "./scratch-mycs-dress-up";
 
 const units = [...new Set(projects.map(project => project.unit))];
@@ -18,7 +19,7 @@ const introductions: Record<string, string> = {
 		"A variable remembers a value between events. Choose a meaningful name, reset it on the flag, and change it at exactly the event that earns a point. Combine earlier skills into a game whose rules you can explain to a partner."
 };
 
-export const scratchLevel1ClassroomCourse: RawCourse = {
+const scratchLevel1ClassroomBaseCourse: RawCourse = {
 	name: "Scratch Level 1: Classroom Edition",
 	modules: units.map((unit, index) => ({
 		id: `scratch-classroom-${index + 1}`,
@@ -69,3 +70,8 @@ export const scratchLevel1ClassroomCourse: RawCourse = {
 		]
 	}))
 };
+
+export const scratchLevel1ClassroomCourse = withMyCsClassroomChoices(
+	scratchLevel1ClassroomBaseCourse,
+	"scratch-level-1"
+);
