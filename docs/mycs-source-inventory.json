@@ -1,0 +1,5739 @@
+{
+	"schemaVersion": 1,
+	"reviewedOn": "2026-10-14",
+	"teacherRoot": "https://sites.google.com/a/sfusd.edu/mycs-teacher",
+	"studentRoot": "https://sites.google.com/a/sfusd.edu/mycs",
+	"scope": "Full public teacher site and the directly linked public student curriculum, including relevant legacy navigation pages. Existing Julio classroom courses only.",
+	"license": {
+		"curriculum": "CC BY-NC-SA 4.0",
+		"url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+		"attribution": "SFUSD computer science team, inspired by Harvey Mudd College MyCS",
+		"adaptationScope": "Marked rewritten teaching guides only; not software, existing original starters, or linked third-party assets."
+	},
+	"scratchRightsReview": {
+		"source": "https://mitscratch.freshdesk.com/en/support/solutions/articles/4000219182-scratch-terms-of-service",
+		"reviewedTermsDate": "2026-01-22",
+		"conclusion": "No blanket off-platform copying grant assumed for current project versions. Historical CC grants may remain valid but need matching evidence. No original external project source archives or assets were ingested."
+	},
+	"summary": {
+		"newGuides": 80,
+		"teacherPages": 103,
+		"teacherIntegrated": 80,
+		"studentUrls": 103,
+		"studentAccessible": 82,
+		"studentUnavailable": 21,
+		"uniqueSourceProjects": 85,
+		"reviewedPublicDocuments": 130
+	},
+	"teacherPages": [
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-4",
+			"title": "MyCS - 1.4 Reset",
+			"status": 200,
+			"sha256": "c3cef38eafd0734edf6a0c3a7bb853510e5df8abfeb78859e8bd179aef13b5e9",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"dress-up"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher",
+			"title": "MyCS",
+			"status": 200,
+			"sha256": "833cb44448e956688b6135b427bc10e9d2d3c7bcd9e27f2febbe56a32133aa4a",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed unit overview; concepts appear in the existing course and related activities."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit0",
+			"title": "MyCS",
+			"status": 200,
+			"sha256": "04e18127193169b7fb333903e63623398acdb46d80ba9feb2503d1968eff2887",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed unit overview; concepts appear in the existing course and related activities."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit0/0-1",
+			"title": "MyCS - 0.1 Why CS Matters",
+			"status": 200,
+			"sha256": "80b035deefbe8977cea329a39656e161ded8e9ac92cd58567bd8e6bd4a8cf391",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-why-cs"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit0/0-2",
+			"title": "MyCS - 0.2 What is a Computer Program",
+			"status": 200,
+			"sha256": "502931106127e2d4a446121f5394e17e329eb909784389f47d23ca4996df20ed",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-cup-code"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit0/0-4",
+			"title": "MyCS - 0-3 Pair Programming",
+			"status": 200,
+			"sha256": "c5de6c23db5355d423fb8e7fb4a06fa86508d3714cc734beb2142b085e749972",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-pair-programming"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit0/0-3",
+			"title": "MyCS - 0.4 Growth Mindset",
+			"status": 200,
+			"sha256": "dcfd51b5a5f578bbdaa8f326bf8a1742a9784c85300995b0d7490b345ba5948b",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-growth-mindset"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit0/0-5",
+			"title": "MyCS - 0.5 Scratch Housekeeping",
+			"status": 200,
+			"sha256": "771eb130a83bd9678ee71fb8e4df529ae077c41c184ea7301dd2a24529389595",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-scratch-housekeeping"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1",
+			"title": "MyCS - 1. Events",
+			"status": 200,
+			"sha256": "78731227a496ddea009d6a9e3c2a9bc50de1d383861bfefe689790800acff432",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed unit overview; concepts appear in the existing course and related activities."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-1",
+			"title": "MyCS - 1-1 Events Unplugged",
+			"status": 200,
+			"sha256": "24dedd0c40f774e1c39db757106c6999ca5cd198482bf9500795c00d62c46f87",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-events-unplugged"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-2",
+			"title": "MyCS - 1.2 Animate a Name",
+			"status": 200,
+			"sha256": "e28297f35d07f650b7689a1c2063d3fc1642b1eb29abfbf72846f2c6eda5c9f1",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-animate-word"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-3",
+			"title": "MyCS - 1.3 XY Grid",
+			"status": 200,
+			"sha256": "74a1c0c9e191e33871888784063313b84fbd62ca838add91fbfb2d891f1e4aa5",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-xy-grid"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-5",
+			"title": "MyCS - 1-5 Assessments",
+			"status": 200,
+			"sha256": "bb16a4adad38c68f3687a35f412ca0a741d9bd8df6947fb9686f1d343080be4d",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-events-reset-checkpoint"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/page",
+			"title": "MyCS - -",
+			"status": 200,
+			"sha256": "cfbd087b04637769b3a983ae740722e167e77b2bddc1a2bca6977bb1947e92ec",
+			"coverage": {
+				"kind": "divider",
+				"reason": "Navigation divider; no independent teaching activity."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-7",
+			"title": "MyCS - 1.7 Dance Party",
+			"status": 200,
+			"sha256": "96df5eb6247fba447b46bb2abce8bf402fd6ad5d66a20521ca3e7bec36d07e31",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-broadcast-dance"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-8",
+			"title": "MyCS - 1.8 Virtual Pet",
+			"status": 200,
+			"sha256": "7f38fee0bd1e2467afbe8f89a57291dbe3a33b387d69fed2c83d3bc64f3582a8",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-virtual-pet"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-9-virtual-pet",
+			"title": "MyCS - 1.9 Virtual Pet",
+			"status": 200,
+			"sha256": "40c7dd6c14b7a51ccc2894eb2ec0b6bf852da80720136ead754a0ba875ec7416",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-virtual-pet-extension"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-10-assessments",
+			"title": "MyCS - 1-10 Assessments",
+			"status": 200,
+			"sha256": "bde8acf1850569d9a29fcc57c3ed826de6e2d211c787d089becc0cb7e2332626",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-messages-checkpoint"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2",
+			"title": "MyCS - 2: Loops",
+			"status": 200,
+			"sha256": "4d7f8f7a4169494c03a31f761b2b51e327ed04591f83bc3fe0103d0534bcffba",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed unit overview; concepts appear in the existing course and related activities."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-1",
+			"title": "MyCS - 2.1 Unplugged",
+			"status": 200,
+			"sha256": "9cbac66f7df806e97c69df17e6fc1c67c0f0783bdca28c7139e9da09b143a339",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-loop-dance"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-2-draw-sprite",
+			"title": "MyCS - 2.2 Draw sprite",
+			"status": 200,
+			"sha256": "0a8dc9b581b5a892614b939245321caa2f1bd91ee057b20e27fb88db714bec04",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-five-costumes"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-3",
+			"title": "MyCS - 2.3 Animate a sprite",
+			"status": 200,
+			"sha256": "c2de889ee85ad3bc766eb4ae371062cad13d28b097d7c921056ef17856729eba",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-animation-effects"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-4",
+			"title": "MyCS - 2.4 Vector or Bitmap",
+			"status": 200,
+			"sha256": "412e777419eedc3f70461ab1545ffdf93968e2bdc3696bc179bc57691235d2ce",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-vector-bitmap"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-5-assessments",
+			"title": "MyCS - 2-5 Assessments",
+			"status": 200,
+			"sha256": "bdb0270f0bed7e323f54df288ad4ff6b4d35769648a58ace36e8ae806e1cbbd9",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-costumes-checkpoint"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/page",
+			"title": "MyCS - -",
+			"status": 200,
+			"sha256": "36845152d7334c270a3add93a76e0034b526d4c3d0fa5a561feb39d3b571fb5d",
+			"coverage": {
+				"kind": "divider",
+				"reason": "Navigation divider; no independent teaching activity."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-8",
+			"title": "MyCS - 2.6 Fish Choir",
+			"status": 200,
+			"sha256": "4410af1224bcdb1cce9eb8d6bb1e2e40192ca734960a54c09be1f1499ff91550",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-fish-choir"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-9",
+			"title": "MyCS - 2.7 Sound Party",
+			"status": 200,
+			"sha256": "6ff5e4d530f8a464b2db1866c7d2ffa95e02e7e376f81db7663bb0a331cfbdc0",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-sound-party"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-11",
+			"title": "MyCS - 2-8 Music Video",
+			"status": 200,
+			"sha256": "f43a8de3a4c5b6eaa44b2879b5e27594f58e1bffe10dc32797a17eed668178d7",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-music-animation-plan"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-12",
+			"title": "MyCS - 2-9 Music Video",
+			"status": 200,
+			"sha256": "ec7841338a4d763c1330c1e2726d35a5f8718c72761e8f77e81075fa76251a7b",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-music-animation-finish"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-10-assessments",
+			"title": "MyCS - 2-10 Assessments",
+			"status": 200,
+			"sha256": "87997608f2d8cc07b581151397f6195ee653e6701e4a970d24ffba0d30d4b543",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-animation-review"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3",
+			"title": "MyCS - 3. Conditions",
+			"status": 200,
+			"sha256": "7cefb393a131925a2c0037fb1f9bd6655b92d61bd9205ddade9a09685bad5097",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed unit overview; concepts appear in the existing course and related activities."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-1",
+			"title": "MyCS - 3-1 Unplugged",
+			"status": 200,
+			"sha256": "c2d74e4d4c857e36017a04950ee638138ccc338ec514c6c0d865ba1599f39d87",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-conditional-cards"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-2",
+			"title": "MyCS - 3.2 Race to Finish",
+			"status": 200,
+			"sha256": "0224ae950621d10233f5d3f60812a58c0506ac321f83eff286b3f101fdd1df7b",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-race-to-finish"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-3",
+			"title": "MyCS - 3.3 Race to Finish",
+			"status": 200,
+			"sha256": "4b2cb66fa427a27b7cf7300843f0c1e3271f41b1a0381187767f92da49f3e2f7",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-race-to-finish"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-4",
+			"title": "MyCS - 3.4 Reactions",
+			"status": 200,
+			"sha256": "0c87e851859363c17fa4cd71dbf4039000afb088f5c82bc6f7eec99352796d75",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-hover-reactions"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-5-assessments",
+			"title": "MyCS - 3-5 Assessments",
+			"status": 200,
+			"sha256": "7f1152003695d02f7c947dd7a04e707bb331a37f67b0f69ab5506a2f11440cad",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-conditions-checkpoint-one"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/page",
+			"title": "MyCS - -",
+			"status": 200,
+			"sha256": "a37736e9caf2b76690fdbb82f85421c538985c7aea6702cf3c8284529a12d58c",
+			"coverage": {
+				"kind": "divider",
+				"reason": "Navigation divider; no independent teaching activity."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-7",
+			"title": "MyCS - 3.7 IF-ELSE",
+			"status": 200,
+			"sha256": "8a6ae7e05756d4f62cdd64f4a1445665639a196ad0692717b6d67f2533553291",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-branching-stage"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-8",
+			"title": "MyCS - 3.8 Line follower",
+			"status": 200,
+			"sha256": "188d4ae24cdc4a2881afd3414c0775061e110bfc6e35422af5d5490d612cc2a3",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-line-follower"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-9",
+			"title": "MyCS - 3.9 Slideshow",
+			"status": 200,
+			"sha256": "7aec5145efa7077356685b81cc93e038ca611272b65f62e97fc8ffa58b8f0c6b",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-five-slide-story"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-10-assessments",
+			"title": "MyCS - 3-10 Assessments",
+			"status": 200,
+			"sha256": "16b9789d094d589db7aa0b79229aa16041f81fb69f37de01c949fbd88ac467f2",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-conditions-checkpoint-two"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze",
+			"title": "MyCS - Maze",
+			"status": 200,
+			"sha256": "bafe0797313446cd84d2192c85b7073543ad75a6a5661ad5476f734003226288",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed unit overview; concepts appear in the existing course and related activities."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-1",
+			"title": "MyCS - Maze Controls 1",
+			"status": 200,
+			"sha256": "cd8abab1694750278de82c82d96d078bafa994cb9629b78fe30c956cdd1ff0a2",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-maze-planning"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-2",
+			"title": "MyCS - Maze Conditionals 2",
+			"status": 200,
+			"sha256": "c3eefd028d099aaadf7ee5790f8f5767661331f4387bbaf0a08e3e1b1af1a211",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-maze-collision"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-3",
+			"title": "MyCS - Maze Incentives 3",
+			"status": 200,
+			"sha256": "6c0c78f57977976a359ed25e8bc75e4e84bc65c37a4427f5e66eae399a6aca37",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-maze-treasure"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-4",
+			"title": "MyCS - Maze Challenges 4",
+			"status": 200,
+			"sha256": "dbdd35c4bb0d6e1b1515525139912bca02e9f7d37c0d4be953176015d98aa895",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-maze-challenges"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-5",
+			"title": "MyCS - Maze Assessments",
+			"status": 200,
+			"sha256": "2315dcefbcaeabd369d7f63abb713cdcdbce2a3f973766a46bde712a2efc8ce4",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-maze-checkpoint"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit4",
+			"title": "MyCS - 4. Booleans",
+			"status": 200,
+			"sha256": "824b5806f4d2370c9cdbfc16263bf1f44114bb480b1b9bc58f3ccb983b28cedc",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed unit overview; concepts appear in the existing course and related activities."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit4/4-1",
+			"title": "MyCS - 4-1 Unplugged",
+			"status": 200,
+			"sha256": "8f92b692621510288fcb226b6c1ab504ae093e52ffb311eaef724f37cebf4ed6",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-boolean-cards"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit4/4-2-rocket-ship",
+			"title": "MyCS - 4.2 Rocket Ship",
+			"status": 200,
+			"sha256": "e0e3545a3c3835ed1486904723099670903e4f2a4184a466fc9cefa597543b28",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-rocket-safety"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit4/4-3-lets-chat",
+			"title": "MyCS - 4.3 Let's Chat",
+			"status": 200,
+			"sha256": "7e0a875255a091439aac62f5e26247499fbc5aefb7560fd91dfcb449f86ee5ac",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-scripted-chat"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit4/4-4-translator",
+			"title": "MyCS - 4.4 Translator",
+			"status": 200,
+			"sha256": "28eafbdfa4b496a61332ab748bbdf3ead05e2b59b8bcddd80ee1b84f8c8923f0",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-local-phrase-lookup"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit4/4-5-assessments",
+			"title": "MyCS - 4.5 Assessments",
+			"status": 200,
+			"sha256": "ce0bc52c7a232048ea8de47683ad89ddc45ffd549e7d8a0ece51c8cf69b6a71f",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-booleans-checkpoint"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5",
+			"title": "MyCS - 5. Variables",
+			"status": 200,
+			"sha256": "092f275bcf1f3509beadc0377c463e36ab055466069e56f281f5d4a9a6c70a95",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed unit overview; concepts appear in the existing course and related activities."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-1",
+			"title": "MyCS - 5-1 Unplugged",
+			"status": 200,
+			"sha256": "38ea5f87ab6094fc94f4c1977e918f56858cf30802e9ad7f0b62c7c4fa174b14",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-variable-envelopes"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-2",
+			"title": "MyCS - 5.2 Mad Libs",
+			"status": 200,
+			"sha256": "ea51957bb0feaf7cd92453258625260ecbda0a7a5d8564127eba35bb3bde673b",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-original-word-story"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-3",
+			"title": "MyCS - 5.3 Games Choices",
+			"status": 200,
+			"sha256": "df0dea4f5d50d36b48a513b9424d5a6c7d4f3d97ad28968ee3ae68e09b99e497",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-game-variable-choice"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-4",
+			"title": "MyCS - 5.4 Math Game",
+			"status": 200,
+			"sha256": "1a64527aec30026a2f7d8ec470867ed3563dab4123e05f72b81ab50867429212",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-multiplication-game"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-5",
+			"title": "MyCS - 5.5 Assessment",
+			"status": 200,
+			"sha256": "280207717031ec63434d127f34d4507021b6af5bfad4e3a6b9466531f49c0d0b",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-variables-checkpoint-one"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/page",
+			"title": "MyCS - -",
+			"status": 200,
+			"sha256": "c1e29816b6ff255566d9c33363496039047faa55d1e8d4f0d67bc7d743446a54",
+			"coverage": {
+				"kind": "divider",
+				"reason": "Navigation divider; no independent teaching activity."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-6",
+			"title": "MyCS - 5.6 Flappy Cat Part 1",
+			"status": 200,
+			"sha256": "e3548c0dd83de8ec52125c51d034479b431a7260a5f7db24a73f6fbe71503155",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-scrolling-flight"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-7",
+			"title": "MyCS - 5.7 Flappy Cat Part2",
+			"status": 200,
+			"sha256": "d36bf4847041910da6c2b8a4d2ba08a28177578d94497e8bed8f24ec1c8dd9eb",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-scrolling-flight"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-8",
+			"title": "MyCS - 5.8 Lists",
+			"status": 200,
+			"sha256": "84996dd3c15f472b21c47302307188beec760f05458b2d8b6a078c89f69c90cc",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-shopping-list"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-9",
+			"title": "MyCS - 5.9 Quiz",
+			"status": 200,
+			"sha256": "284701af6e452d1e3b361f2a3f0ba30e1ea0e5fcd30ea19e043c01e3fe8e2abe",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-paired-list-quiz"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-10",
+			"title": "MyCS - 5.10 Assessment",
+			"status": 200,
+			"sha256": "57277c7d3d336667b47c2f3f24ec2e1c3aba8a762210fdf027df458ea8f7469a",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-lists-checkpoint"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6",
+			"title": "MyCS - 6. Procedures",
+			"status": 200,
+			"sha256": "18a38f4f3929ffc03c3a292e6367959e7408e07f83a935bc2c6c004345bb2eb5",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed unit overview; concepts appear in the existing course and related activities."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-1",
+			"title": "MyCS - 6-1 unplugged",
+			"status": 200,
+			"sha256": "a3c17213973fa330b0c8586b0a3e45cab3e29c4c393e89a8270070cee089dd24",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-procedure-recipes"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-2",
+			"title": "MyCS - 6.2 Stamp",
+			"status": 200,
+			"sha256": "26554dd4816a7d8de64e12206d2640b726ca44b39c3edc8677aaff1356aed3da",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-stamp-art"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-3",
+			"title": "MyCS - 6.3 Animation Cycles",
+			"status": 200,
+			"sha256": "6df88fe9662bf317efa8b9095fe6809a6d54f477ea42b0c85eaebed59db8edcc",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-animation-procedures"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-4",
+			"title": "MyCS - 6.4 Animation Cycles",
+			"status": 200,
+			"sha256": "e42013990f0be67b2bb273ae3bda4def186ec6b829c87224be2ab6d7b4333ef1",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-animation-procedures"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-5",
+			"title": "MyCS - 6.5 Assessment",
+			"status": 200,
+			"sha256": "4351159a7d3cf460b5f7f286ebc694ef628f06970fa324216562be6a9cbcc3fd",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-procedures-checkpoint-one"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/page",
+			"title": "MyCS - -",
+			"status": 200,
+			"sha256": "1b8bf1ac0f7fd55ceb3b6845cccbd6c87076b941086fbc431e969e872b1d3d6a",
+			"coverage": {
+				"kind": "divider",
+				"reason": "Navigation divider; no independent teaching activity."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-6",
+			"title": "MyCS - 6.6 Pen Art",
+			"status": 200,
+			"sha256": "d02b41e0e24023cbc711e38f7b6454b44c548dd0c9dd64912587691e36e4ea91",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-pen-procedure-art"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-7",
+			"title": "MyCS - 6.7 Shape Maker",
+			"status": 200,
+			"sha256": "2793bd00eb965a93512216ecd56277b96f2967e7afa0761c1a355a11fd6f2f5e",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-parameter-shape-maker"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-8",
+			"title": "MyCS - 6.8 Shape Maker",
+			"status": 200,
+			"sha256": "2067cb87eaf732a072b2ec55396eda1a095e28bf9330d9efd9a6e3c0fc5d3ad1",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-parameter-shape-maker"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-9",
+			"title": "MyCS - 6.9 Generative Art",
+			"status": 200,
+			"sha256": "53f7903a90b9ce9225f667cb8d6d5431a6a6bc52d7bff8d1bb9ad5af36a9e02f",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-generative-art"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-10",
+			"title": "MyCS - 6.10 Assessment",
+			"status": 200,
+			"sha256": "2f3838335c0bcf4ef0b03c67410eba1529a4b4d57a48109061a2588a0342762f",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-procedures-checkpoint-two"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/midtermfinal-projects",
+			"title": "MyCS - Midterm/Final Projects",
+			"status": 200,
+			"sha256": "4f78e55f11a243e27194210039441d661eeb50763df5424fbed14a674fdd7d39",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed unit overview; concepts appear in the existing course and related activities."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/midtermfinal-projects/research-your-issue",
+			"title": "MyCS - Research your Issue",
+			"status": 200,
+			"sha256": "a73c1ee0b087df7ecee3e90d9d1b01b18f0d002d59b9a645573010a754cff90c",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-research-issue"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/midtermfinal-projects/final-project",
+			"title": "MyCS - final project",
+			"status": 200,
+			"sha256": "ab6030b7be38f4a46f17fadb708ca546ca7832b26af0e26a4ff215f7b386d97c",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-final-project"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/midtermfinal-projects/midterm-project",
+			"title": "MyCS - midterm project",
+			"status": 200,
+			"sha256": "29ecdffb32d5cdcc12d162abeeb103037a88341c462974ce7573db28107fe856",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-midterm-planning"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions",
+			"title": "MyCS - Intersessions",
+			"status": 200,
+			"sha256": "c13c23982f83a6857d5161d9436e75444d755ffbddaa4b43c9225bb11fdd6cfa",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed unit overview; concepts appear in the existing course and related activities."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/what-is-a-computer",
+			"title": "MyCS - What is a Computer",
+			"status": 200,
+			"sha256": "a1d913dcd834a1570141900d61f3b6b53b608fa96e7b68008665bf3c79c1c849",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed unit overview; concepts appear in the existing course and related activities."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/what-is-a-computer/a-1",
+			"title": "MyCS - A-1 What is a computer?",
+			"status": 200,
+			"sha256": "d9e065ca8b9d0373fd119c9eb63e64d9eb853c041833fa20f2cc676fee084222",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-computer-definition"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/what-is-a-computer/a-2",
+			"title": "MyCS - A-2 What's inside a computer?",
+			"status": 200,
+			"sha256": "6a7096bc757b5312107acadf9209f546881424d2fb81a052d81570a4d003a794",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-computer-components"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/what-is-a-computer/a-3",
+			"title": "MyCS - A-3 The history of computers",
+			"status": 200,
+			"sha256": "4c9fc7f2fb8112ca774e42adbdf5108d1a58d17b2b4a61e7120703557c2e5210",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-computer-history"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/binary",
+			"title": "MyCS - Binary",
+			"status": 200,
+			"sha256": "b36719e457e41d46ecc0d4eb578f642fd89fdfc8a98406697d18b926ffe13008",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed unit overview; concepts appear in the existing course and related activities."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/binary/b-1",
+			"title": "MyCS - B-1 Encoding & Decoding",
+			"status": 200,
+			"sha256": "422141f7d2408467f2dddc5aff358d73e5005884b60c7f7a7924e82b780579cd",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-encoding-decoding"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/binary/b-2",
+			"title": "MyCS - B-2 Binary Counting",
+			"status": 200,
+			"sha256": "0eb4c361776c5d1cc73408f81808d5b303458d425f59d474eba1622987525348",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-binary-counting"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/binary/b-3",
+			"title": "MyCS - B-3 Binary Coding",
+			"status": 200,
+			"sha256": "ac6caaa98518615187f306b73b314c429bf707d99c267c0a6e3313e65fdf959f",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-binary-media"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/the-internet",
+			"title": "MyCS - The internet",
+			"status": 200,
+			"sha256": "c16d3225942a528feaa7cbe5d1d2f6782d2f473e8707aec207b40367b730216c",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed unit overview; concepts appear in the existing course and related activities."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/the-internet/c-1",
+			"title": "MyCS - C-1 What is the Internet?",
+			"status": 200,
+			"sha256": "ceda5984e196ae1ed398107277894f48daf6d593ba4da568c85d72eb7c3ff643",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-internet-messages"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/the-internet/c-2",
+			"title": "MyCS - C-2 How to search the internet?",
+			"status": 200,
+			"sha256": "ad6eaca85dfa0750dccf6e1c4fc8b04864d6efe6dfecdde5fe1325bf943a271a",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-search-strategy"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/makey-makey",
+			"title": "MyCS - Makey Makey",
+			"status": 200,
+			"sha256": "ecae68860cdb0464c4baa0e9b4596bc10243316419ffe9992a01aa856c224f39",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed unit overview; concepts appear in the existing course and related activities."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/makey-makey/e-1",
+			"title": "MyCS - E-1 Exploration",
+			"status": 200,
+			"sha256": "3b8347541b7eac3d816248d42821f0558f7466ec0ca00fda3e0b0bdfdce4893f",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-makey-exploration"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/makey-makey/e-2",
+			"title": "MyCS - E-2 With Scratch",
+			"status": 200,
+			"sha256": "5e89b513b3a7d39f3ee4d79b023209c2856a4320a7adda60326819a027312185",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-makey-scratch"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/microbit",
+			"title": "MyCS - Micro:bit",
+			"status": 200,
+			"sha256": "42d3d049851fc74381e19cefede8c7f3d6de41e8ddd1081b347838ff345ad110",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed unit overview; concepts appear in the existing course and related activities."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/microbit/f-1-microbits",
+			"title": "MyCS - F-1 Exploration",
+			"status": 200,
+			"sha256": "1901ab17ddb98734bbbcac4cc8888a945dee7b987d025eef619bfdb887d232c1",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-microbit-exploration"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/microbit/f-2-microbits",
+			"title": "MyCS - F-2 Pet",
+			"status": 200,
+			"sha256": "c371c6052103939891463be6b4862e622fde5aa9ea6c10972065812e1ece6d26",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-microbit-pet"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/microbit/f-3-microbits",
+			"title": "MyCS - F-3 Fidget Cube",
+			"status": 200,
+			"sha256": "6f88223aebe470918a8321ffb7c89f83826110286a6aef01628d05bbef0d1a71",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-microbit-fidget"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/microbit/f-4-microbits",
+			"title": "MyCS - F-4 Magic 8 Ball",
+			"status": 200,
+			"sha256": "33807936d017bb30018ab39b206d7017d9740e2c30a3be43b072545ef8a97dff",
+			"coverage": {
+				"kind": "integrated",
+				"lessonIds": [
+					"mycs-microbit-random"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/page",
+			"title": "MyCS - -",
+			"status": 200,
+			"sha256": "3065f94e3360b949d5c303d3072dbb11934b1e877657b6a2cb3b06179c31a330",
+			"coverage": {
+				"kind": "divider",
+				"reason": "Navigation divider; no independent teaching activity."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/resources",
+			"title": "MyCS - Resources",
+			"status": 200,
+			"sha256": "69d9bb5d8668d245565ad2a550e2c00b65d48553e4eb1d111e3bb5c1877c3dfe",
+			"coverage": {
+				"kind": "resources",
+				"reason": "Reviewed linked public curriculum directory; raw keys, student work and media are not published."
+			}
+		}
+	],
+	"studentPages": [
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-4",
+			"title": "MyCS - student - 1-4 Reset",
+			"status": 200,
+			"sha256": "9f62660efd250797b40b6338f23abc088cbda74b6b5f5e50d0da09fe5ec1012d",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"dress-up"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs",
+			"title": "MyCS - student",
+			"status": 200,
+			"sha256": "7acffbd9810c5256e8fcb570d6ec391c529d6ab7ae076da2d4721005cb0452df",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed overview; not a separate project or local course."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/1-3-1",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit0/0-1",
+			"title": "MyCS - student - 0-1 Why CS Matters.",
+			"status": 200,
+			"sha256": "a18dcb78347c83d688858a4bfeaea3982f3a1f8b7263f9fbd261fc1941a33843",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-why-cs"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit0/0-2",
+			"title": "MyCS - student - 0-2 What is CS?",
+			"status": 200,
+			"sha256": "135acfcc26a232dc03d5e2745be165e3b98711bf09fcd2dfc46835a485c8005b",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-cup-code"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit0/0-4",
+			"title": "MyCS - student - 0-4 Growth Mindset",
+			"status": 200,
+			"sha256": "f750328a5ab458b8ee5e1fb887bc440960ec4c86fcf20578df4fcf69359694b7",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-pair-programming"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit0/0-3",
+			"title": "MyCS - student - 0-3 Pair Programming",
+			"status": 200,
+			"sha256": "96f7a60075cf52feec00d70d79148cdd16272e79c6a45901beccc8e171a4d366",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-growth-mindset"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit0/0-5",
+			"title": "MyCS - student - 0-5 Scratch Tinkering Day",
+			"status": 200,
+			"sha256": "66627cf59c3ed9e8ba2d579c4670cc71e50c5263cb5b6c5f940f5eee1824fc5b",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-scratch-housekeeping"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-2",
+			"title": "MyCS - student - 1-2 Animate Name",
+			"status": 200,
+			"sha256": "422c8ba58e1ba07fdff0785023ebb15cd12f6fa55907ae4d6c5c2dad4e976c63",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-animate-word"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-3",
+			"title": "MyCS - student - 1-3 X-Y Grid",
+			"status": 200,
+			"sha256": "fbdc7760aa1a5338e468f566fcc4a3ef9740bb4b09ed559e8679f33dda8d5581",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-xy-grid"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-7",
+			"title": "MyCS - student - 1-7 Dance Party",
+			"status": 200,
+			"sha256": "a533f769057a73b74e3c605ae4dfcf124a46831641f21dace94c970f69ba3408",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-broadcast-dance"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/1-7",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-8",
+			"title": "MyCS - student - 1-8 Virtual Pet Day1",
+			"status": 200,
+			"sha256": "85f274185dc0c9be680c93f5ecf2408c0f0fe89c9f5777705872e05f606a1534",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-virtual-pet"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-9",
+			"title": "MyCS - student - 1-9 Virtual Pet Day2",
+			"status": 200,
+			"sha256": "7f79f4155276d95960e333772f43fcb971523c2c4f7b84bef38740877d9022ca",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-virtual-pet-extension"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-2",
+			"title": "MyCS - student - 2-2 Draw a Sprite",
+			"status": 200,
+			"sha256": "7a61dab61e3b9f7565f3a15cddf9bbab8955eafff4b9edb00f6530a1eadf02fc",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-five-costumes",
+					"mycs-stamp-art",
+					"mycs-animation-procedures"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-3",
+			"title": "MyCS - student - 2-3 Animate a sprite",
+			"status": 200,
+			"sha256": "20dfca22953d40c4dfcf1bcf3a8e1bfdeae1ae994f7f1120e14ea1c44d3e77dc",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-animation-effects"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-4",
+			"title": "MyCS - student - 2-4 Vector Animation",
+			"status": 200,
+			"sha256": "985842c2d3b76b4453f6860348173625f6e34293adb41548c2e769358b694b6a",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-vector-bitmap"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-6",
+			"title": "MyCS - student - 2-6 Starfish choir",
+			"status": 200,
+			"sha256": "2ec139b510c9812586a1d410ded0b9960bb7d8ba17b52a639cf9e9fd02188bf9",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-fish-choir"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-7",
+			"title": "MyCS - student - 2-7 Sound Party",
+			"status": 200,
+			"sha256": "ae8b359e3bbacbb80f7c7436f388581d5e2cd96d1af51a3dbe4bd0d55550b18a",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-sound-party"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-8",
+			"title": "MyCS - student - 2-8 Music Video Day1",
+			"status": 200,
+			"sha256": "c381650cd1dc37a83d347acd2cde4bdfa7e8c571df07032ca019744e837d1012",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-music-animation-plan"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-9",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-2",
+			"title": "MyCS - student - 3-2 Race to the Finish Day1",
+			"status": 200,
+			"sha256": "fe220a7811e5a4b866a913a359c102999c14b6b86a24a1e4df2e08a856418005",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-race-to-finish"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-3",
+			"title": "MyCS - student - 3-3 Race to the Finish Day 2",
+			"status": 200,
+			"sha256": "a0b71020feaa0092dadd8a3e2f2c045f876019be3078e560aa536da7cf563271",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-race-to-finish"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-4",
+			"title": "MyCS - student - 3-4 Reactions",
+			"status": 200,
+			"sha256": "b725ee760246a893a2ecf60657c04b15beeb1b3d0d8e6d372e01d425b2c8ac48",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-hover-reactions"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-7",
+			"title": "MyCS - student - 3-7 If-ELSE",
+			"status": 200,
+			"sha256": "59e6fda04f3a7ab8686e77dbfa63e89e0666ef5e34c54007aef06ec105f1fdb1",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-branching-stage"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-8",
+			"title": "MyCS - student - 3-8 Line Follower",
+			"status": 200,
+			"sha256": "88d3289b6aa4a013fc55a03092b472c3d37c0dab33f2f43dd7c9e934d4eb47ae",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-line-follower"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-9",
+			"title": "MyCS - student - 3-9 Slide Show",
+			"status": 200,
+			"sha256": "a76d030663f9d74ba4af009bff5d69423a2fee490b91c83ecb26ac24da2b35f2",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-five-slide-story"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit-4/m-1",
+			"title": "MyCS - student - 1-Maze",
+			"status": 200,
+			"sha256": "95b39bd2d483081acb2cf167bb22ed5b07850412f5d135707bdb8d72b95c72fc",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-maze-planning"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit-4/m-2",
+			"title": "MyCS - student - 2-Maze",
+			"status": 200,
+			"sha256": "5d152179b8fc9bf999c7fe473f5435db45ff284bd1d02ac2f2f06c67cd027bdc",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-maze-collision"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit-4/m-3",
+			"title": "MyCS - student - 3-Maze",
+			"status": 200,
+			"sha256": "99538f9c1e7963b64f07ac68baf611ea3cf12d71eee18a6136b5c68100669f84",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-maze-treasure"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit-4/m-4",
+			"title": "MyCS - student - 4-Maze",
+			"status": 200,
+			"sha256": "a5e0588edcd26e667f5265d8b41b8052c1e5faa922d72c77e3d9c6d72264b541",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-maze-challenges"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit-4/4-2",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit4/4-2",
+			"title": "MyCS - student - 4-2 Rocketship",
+			"status": 200,
+			"sha256": "3803e8bfa794e919f95cb9ab096f0b9f9b1c18c017a8a4e9b5225af3659c25e5",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-rocket-safety"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit4/4-3",
+			"title": "MyCS - student - 4-3 Let's Chat",
+			"status": 200,
+			"sha256": "a12f16d506559e9372ded3d84a97230604a375b0c57d1574241f0f6267bb5e73",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-scripted-chat"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit4/4-4",
+			"title": "MyCS - student - 4-4 Translator",
+			"status": 200,
+			"sha256": "43eb8caa596bfbaee95b3ecd60c035184291d48fc68d191099a510e426398220",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-local-phrase-lookup"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-2",
+			"title": "MyCS - student - 5-2 Madlibs",
+			"status": 200,
+			"sha256": "c596db8f3e98287b959a0d781e97a306758e9b283b82c83cc473e15778fb5f7c",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-original-word-story"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-3",
+			"title": "MyCS - student - 5-3 Game Choice",
+			"status": 200,
+			"sha256": "837119b2e09aa0c403a7b18c992fbfa5443db1c687b8c0a7837aeb7d59e81c8e",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-game-variable-choice"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-4",
+			"title": "MyCS - student - 5-4 Math Game",
+			"status": 200,
+			"sha256": "2ada6aca60074778874f0b3202e4b9b1a23a045bcc3a7d367c76870845c4ddcb",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-multiplication-game"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/5-7",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-6",
+			"title": "MyCS - student - 5-6 Flappy Bird Part1",
+			"status": 200,
+			"sha256": "5dbbe9d27cc4db5d85340becf4ce63fd2a78758495a45a826174d98a062b2d9a",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-scrolling-flight"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/4-7",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-7",
+			"title": "MyCS - student - 5-7 FlappyBird Part 2",
+			"status": 200,
+			"sha256": "4dc18b15cd906382b09c5aaecb88390c4fc6d7f4e3b3e5ed816303fbd298ae6e",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-scrolling-flight"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-8",
+			"title": "MyCS - student - 5-8 Top Five List",
+			"status": 200,
+			"sha256": "14f2e0eabb401e88ca65b7b73a1f525d4ab4fe91073fe77dfd9f4253b372e26a",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-top-five-list",
+					"mycs-shopping-list"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-9",
+			"title": "MyCS - student - 5-9 Quiz",
+			"status": 200,
+			"sha256": "47b5349bf3d12e8c08cb2983d3f8909f76ba873d13e73bcded14965ee1e8b2ff",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-paired-list-quiz"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/6-2",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-3",
+			"title": "MyCS - student - 6-3 Animation Cycles",
+			"status": 200,
+			"sha256": "42dd8aa9ad6712bb8200e2ce7f638929e3023f8ecab885ea862957e5294030b1",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-animation-procedures"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/6-4",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-6",
+			"title": "MyCS - student - 6-6 Pen Art",
+			"status": 200,
+			"sha256": "9b17c7a0d1299b4706fea61deaf29dc9413df8dc9afe159e3714d762a90b6659",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-pen-procedure-art"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-7",
+			"title": "MyCS - student - 6-7 Making Shapes Day1",
+			"status": 200,
+			"sha256": "013eff9f529d641704be1e9ae2e0aedd0e343477befc6e9d1cbfcd919bd38565",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-parameter-shape-maker"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-8",
+			"title": "MyCS - student - 6-8 Making Shapes Day2",
+			"status": 200,
+			"sha256": "0446eaf15906706e42dd68b55f44b344b3526062bd86024ec027440c19892688",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-parameter-shape-maker"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/6-9",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-9",
+			"title": "MyCS - student - 6-9 Generative Art",
+			"status": 200,
+			"sha256": "456af0922f85852a53218a95a2b0cf14accff70ee8ee95d7525d6d39e339d28b",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-generative-art"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/final-project",
+			"title": "MyCS - student - Final Project",
+			"status": 200,
+			"sha256": "4baf78d9a6fbb779e7879950056c9f079cda9a70a441bd789f99849acd2f7517",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-final-project"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/midterm-project",
+			"title": "MyCS - student - Midterm Project",
+			"status": 200,
+			"sha256": "8a30cdc8a58fa2fb95d197233fba0ffad65b1a353f5d9aec543a0280db4e73c0",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-midterm-planning"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/a-1",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/a-2",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/a-3",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/b-1",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/c-1",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/c-2",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/e-1",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/e-2",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/f-1",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/f-2",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/f-3",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/f-4",
+			"title": null,
+			"status": 404,
+			"sha256": null,
+			"coverage": {
+				"kind": "unavailable",
+				"reason": "Anonymous request returned the recorded status; no login or access bypass."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit0",
+			"title": "MyCS - student",
+			"status": 200,
+			"sha256": "f885f28d1880301e53113f1112910e22ce541f841a78dd2a81bdb14ca3f30e01",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed overview; not a separate project or local course."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit1",
+			"title": "MyCS - student - Events",
+			"status": 200,
+			"sha256": "59f22185ab63814c2f3ba37c26d72b1b9679ad2a7a8b9bcb1c009e8a406e7978",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed overview; not a separate project or local course."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-5",
+			"title": "MyCS - student - 1-5 Recap Events",
+			"status": 200,
+			"sha256": "b75f46af78310c8e18d4ed3c839d173e5ec9c025c234cca222e79a4f87fd03bb",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-events-reset-checkpoint"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-6",
+			"title": "MyCS - student - ----",
+			"status": 200,
+			"sha256": "ff77797bf70b8433a0c071932cd5d74ac89579013574e7c171902c451abd32b5",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-maze-route"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-10-recap-events",
+			"title": "MyCS - student - 1-10 Recap Events",
+			"status": 200,
+			"sha256": "b8a240ce36978c4d8608a40ed21bd9f83cd6fcfc612560cdb90149c51d0abd4a",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-messages-checkpoint"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit2",
+			"title": "MyCS - student - Animation & Sound",
+			"status": 200,
+			"sha256": "99beced6893ccd861371c4575053c9299d7ab77215426a59a84c48852f2992bf",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed overview; not a separate project or local course."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-5",
+			"title": "MyCS - student - 2-5 Recap Loops",
+			"status": 200,
+			"sha256": "ef558261bc02733115f2cccbc0b40d7f0a93b4e0219f6b134d094fa0649c0b7b",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-costumes-checkpoint"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-1",
+			"title": "MyCS - student - -----",
+			"status": 200,
+			"sha256": "2972fe0b113aaa012785177f472ada603deb6dad7560588b0c88a4f7bdb6cad6",
+			"coverage": {
+				"kind": "divider",
+				"reason": "Reviewed navigation separator or duplicate unit label."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-9-music-video-day2",
+			"title": "MyCS - student - 2-9 Music Video Day2",
+			"status": 200,
+			"sha256": "684c128d8ca2d9440562e037a26c588c9b67406f0ffb9499051b82c06eb57c9e",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-music-animation-finish"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-10-recap-loops",
+			"title": "MyCS - student - 2-10 Recap Loops",
+			"status": 200,
+			"sha256": "57e6deb0d8493d34ce07b378c33b2e375d6ca2eb2983c095a87504a898576056",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-animation-review"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit3",
+			"title": "MyCS - student - Games",
+			"status": 200,
+			"sha256": "e0dea61177884a7d72674e98eba79ff1eb6791b2232624aa4e6715fb93469516",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed overview; not a separate project or local course."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-5",
+			"title": "MyCS - student - 3-5 Recap Conditionals",
+			"status": 200,
+			"sha256": "c1388b0a2188639bfc2f21c06f5433097db1cac6d0e1199124cfdf6b0527e922",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-booleans-checkpoint"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit3/page",
+			"title": "MyCS - student - -----",
+			"status": 200,
+			"sha256": "cbfe6a7e078785a6b0ff2c5e5b6b925ce366723c15038e8e8dbf6085f76ef6a2",
+			"coverage": {
+				"kind": "divider",
+				"reason": "Reviewed navigation separator or duplicate unit label."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-10-recap-conditionals",
+			"title": "MyCS - student - 3-10 Recap Conditionals",
+			"status": 200,
+			"sha256": "985c8780e1003bfca773e10b8b3bb3bdda87e98a8504863b409512eac53fcc27",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-conditions-checkpoint-two"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit-4",
+			"title": "MyCS - student - Maze",
+			"status": 200,
+			"sha256": "c11b09ec2bac314ca31b4adf7fa237fe36f8c705c3026c0d0da71bb631f47eba",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed overview; not a separate project or local course."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit-4/m-5",
+			"title": "MyCS - student - 5-Maze",
+			"status": 200,
+			"sha256": "f69b8a6cb233cab798652a385abba4510468d0c014a1812b7f880ec4f97a4ae6",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-maze-checkpoint"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit4",
+			"title": "MyCS - student - User Input",
+			"status": 200,
+			"sha256": "43df6cca8bf3c8eb925fc9d937cd34e6d91fd42f2e71e5345d5af687f324cf31",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed overview; not a separate project or local course."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit4/4-5",
+			"title": "MyCS - student - 4-5 Recap",
+			"status": 200,
+			"sha256": "d2844ce3303261360daedbd25c4c7bb5580501ffd658dd2aeff83d924acab5d6",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-booleans-checkpoint"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit5",
+			"title": "MyCS - student - Variables",
+			"status": 200,
+			"sha256": "78bd8cade8095b98a6dc45deef9e1ab9127ed5477cafbc9b2761deb960e28222",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed overview; not a separate project or local course."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-5_1",
+			"title": "MyCS - student - 5-5",
+			"status": 200,
+			"sha256": "1d110cd074408d10c6f7ef2cb1f1da7e444065f0f1e4ac2a0d08d0cc12f415af",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-variables-checkpoint-one"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-b",
+			"title": "MyCS - student - -----",
+			"status": 200,
+			"sha256": "c70b8f7c3317277630ac2334b98557259a586066c21a32d586c87ba7414c775a",
+			"coverage": {
+				"kind": "divider",
+				"reason": "Reviewed navigation separator or duplicate unit label."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-5",
+			"title": "MyCS - student - 5-10 Recap wip",
+			"status": 200,
+			"sha256": "2818057eb0a2840a79c6df84c184573c4a00962581a36321f8fa1c52d65f7649",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-lists-checkpoint"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit-6",
+			"title": "MyCS - student - Procedures",
+			"status": 200,
+			"sha256": "9796fb1262b18a6abcc98f60f231ae7e1e7a463f3f1940faa5352b624a08c485",
+			"coverage": {
+				"kind": "overview",
+				"reason": "Reviewed overview; not a separate project or local course."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-2",
+			"title": "MyCS - student - 6-2",
+			"status": 200,
+			"sha256": "08ab2ab0b49d9d9cc5f0748decda63d4f6eb9de421430055c2c2d3af07fe6519",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-stamp-art"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-4",
+			"title": "MyCS - student - 6-4 Animation Cycles",
+			"status": 200,
+			"sha256": "d5d87dbf902857d990519d10154a00f257578ac9c80a35713c63e9a1078805ac",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-animation-procedures"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-5",
+			"title": "MyCS - student - 6-5 Recap",
+			"status": 200,
+			"sha256": "a5cef9990da8c2c533a96c7a5ac3037955f8a8054d3b15264ae76518a144ae86",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-procedures-checkpoint-one"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-0",
+			"title": "MyCS - student - ----",
+			"status": 200,
+			"sha256": "437c01047c8f19b65def6d3f3e6d2bc03405bfb6d373c55bada839a15af82e5a",
+			"coverage": {
+				"kind": "divider",
+				"reason": "Reviewed navigation separator or duplicate unit label."
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-10",
+			"title": "MyCS - student - 6-10 Recap wip",
+			"status": 200,
+			"sha256": "79961e7818edd060cf5c46172a7d1f799d5bcd3f794ccba7752cbf342d431da4",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-procedures-checkpoint-two"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-1",
+			"title": "MyCS - student - 1-1",
+			"status": 200,
+			"sha256": "5ad64ec880ed347343eac14ed18bb5aa9b63e2cc9ed36d04e3816fc931931878",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-events-unplugged"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-3b",
+			"title": "MyCS - student - 1-3b",
+			"status": 200,
+			"sha256": "b7b426442af3c7b29ecbc3a54c83424e6f72ed0d36cca886fd389562e335aa57",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-sprite-interactions"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-1",
+			"title": "MyCS - student - 3-1",
+			"status": 200,
+			"sha256": "ede256b2b020f912306fef467f36645766eebb01caa1419425f37100ce3d670f",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-conditional-cards"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-1",
+			"title": "MyCS - student - 5-1",
+			"status": 200,
+			"sha256": "d5afa711daa58f4a89ebf4c4b094d41423ecea0a99e23f3cf75ee555b0da255a",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-variable-envelopes"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-2-old",
+			"title": "MyCS - student - 5-2 old",
+			"status": 200,
+			"sha256": "f3a2f35e6cd57a12db432e72f9d7d4115aa98edda13304eaa507e0cafd5b8e2d",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-original-word-story"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/intersessions/g-1",
+			"title": "MyCS - student - G-1",
+			"status": 200,
+			"sha256": "bb193ca26f5721042f9ff23df8a209b127c647f7f70b0cc0d9718d5c565e1629",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-local-sound-selector"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit5/g-2",
+			"title": "MyCS - student - 5-4",
+			"status": 200,
+			"sha256": "fd55d85dba46e8c0ed351684e5bfb0edf3898908fa7959438c644315f71e0f32",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-local-sound-playlist"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-3-1",
+			"title": "MyCS - student - 6-3 Shape Maker",
+			"status": 200,
+			"sha256": "f6165fd2f79776845aca80a5695373bf4e2528aad5113ec6fa0dc6a6a1b0e873",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-pen-procedure-art"
+				]
+			}
+		},
+		{
+			"url": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-7bb",
+			"title": "MyCS - student - 6-7 Shape Maker",
+			"status": 200,
+			"sha256": "0a3377bb6715a3d431a46276101e05d2a42eab0ef786cf2763d9628da0460551",
+			"coverage": {
+				"kind": "covered",
+				"lessonIds": [
+					"mycs-parameter-shape-maker"
+				]
+			}
+		}
+	],
+	"sourceProjects": [
+		{
+			"id": "10015060",
+			"url": "https://scratch.mit.edu/projects/10015060/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/final-project",
+					"label": "The Pico Show"
+				}
+			]
+		},
+		{
+			"id": "40258896",
+			"url": "https://scratch.mit.edu/projects/40258896/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/final-project",
+					"label": "Math Maze"
+				}
+			]
+		},
+		{
+			"id": "44292514",
+			"url": "https://scratch.mit.edu/projects/44292514/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/final-project",
+					"label": "Healthy Food"
+				}
+			]
+		},
+		{
+			"id": "82920634",
+			"url": "https://scratch.mit.edu/projects/82920634/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/final-project",
+					"label": "Dungeon Role Playing Game"
+				}
+			]
+		},
+		{
+			"id": "87277746",
+			"url": "https://scratch.mit.edu/projects/87277746/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/final-project",
+					"label": "Help the Homeless"
+				}
+			]
+		},
+		{
+			"id": "87279802",
+			"url": "https://scratch.mit.edu/projects/87279802/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/final-project",
+					"label": "Don’t Text and Drive"
+				}
+			]
+		},
+		{
+			"id": "106120225",
+			"url": "https://scratch.mit.edu/projects/106120225/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/final-project",
+					"label": "Global Warming Simulation"
+				}
+			]
+		},
+		{
+			"id": "107281832",
+			"url": "https://scratch.mit.edu/projects/107281832/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/final-project",
+					"label": "Recycle, Compost, or Waste Sort"
+				}
+			]
+		},
+		{
+			"id": "132143274",
+			"url": "https://scratch.mit.edu/projects/132143274/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-9",
+					"label": "Scratch Broadcast Example"
+				}
+			]
+		},
+		{
+			"id": "139830894",
+			"url": "https://scratch.mit.edu/projects/139830894/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-2-draw-sprite",
+					"label": "demo"
+				}
+			]
+		},
+		{
+			"id": "143818134",
+			"url": "https://scratch.mit.edu/projects/143818134/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-2",
+					"label": "Scratch project"
+				}
+			]
+		},
+		{
+			"id": "147482118",
+			"url": "https://scratch.mit.edu/projects/147482118/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-4",
+					"label": "DEMO PROJECT"
+				}
+			]
+		},
+		{
+			"id": "154525593",
+			"url": "https://scratch.mit.edu/projects/154525593/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-3",
+					"label": "Demo:"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-3",
+					"label": "Maze with Score"
+				}
+			]
+		},
+		{
+			"id": "154525728",
+			"url": "https://scratch.mit.edu/projects/154525728/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-4",
+					"label": "Demo"
+				}
+			]
+		},
+		{
+			"id": "155581511",
+			"url": "https://scratch.mit.edu/projects/155581511/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-1",
+					"label": "completed maze"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-2",
+					"label": "Demo"
+				}
+			]
+		},
+		{
+			"id": "155911572",
+			"url": "https://scratch.mit.edu/projects/155911572/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-3",
+					"label": "Maze without variables"
+				}
+			]
+		},
+		{
+			"id": "158835477",
+			"url": "https://scratch.mit.edu/projects/158835477/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-1",
+					"label": "Playground 1"
+				}
+			]
+		},
+		{
+			"id": "158835605",
+			"url": "https://scratch.mit.edu/projects/158835605/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-1",
+					"label": "Playground 3"
+				}
+			]
+		},
+		{
+			"id": "158835623",
+			"url": "https://scratch.mit.edu/projects/158835623/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-1",
+					"label": "Playground 5"
+				}
+			]
+		},
+		{
+			"id": "162107941",
+			"url": "https://scratch.mit.edu/projects/162107941/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-2",
+					"label": "project1"
+				}
+			]
+		},
+		{
+			"id": "168711138",
+			"url": "https://scratch.mit.edu/projects/168711138/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-8",
+					"label": "Demo: If-Else"
+				}
+			]
+		},
+		{
+			"id": "168732027",
+			"url": "https://scratch.mit.edu/projects/168732027/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-8",
+					"label": "DEMO PROJECT"
+				}
+			]
+		},
+		{
+			"id": "168733039",
+			"url": "https://scratch.mit.edu/projects/168733039/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-1",
+					"label": "Dice roll"
+				}
+			]
+		},
+		{
+			"id": "168869855",
+			"url": "https://scratch.mit.edu/projects/168869855/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-7",
+					"label": "Starter project."
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-7",
+					"label": "Starter project"
+				}
+			]
+		},
+		{
+			"id": "168888257",
+			"url": "https://scratch.mit.edu/projects/168888257/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-7",
+					"label": "Demo"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-7",
+					"label": "Finished Project"
+				}
+			]
+		},
+		{
+			"id": "168898717",
+			"url": "https://scratch.mit.edu/projects/168898717/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-7",
+					"label": "NOT Operator Starter Project"
+				}
+			]
+		},
+		{
+			"id": "169184303",
+			"url": "https://scratch.mit.edu/projects/169184303/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-7",
+					"label": "DEMO PROJECT"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-7",
+					"label": "final Project"
+				}
+			]
+		},
+		{
+			"id": "169186423",
+			"url": "https://scratch.mit.edu/projects/169186423/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-8",
+					"label": "finished version"
+				}
+			]
+		},
+		{
+			"id": "169364555",
+			"url": "https://scratch.mit.edu/projects/169364555/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-6",
+					"label": "completed project"
+				}
+			]
+		},
+		{
+			"id": "169381720",
+			"url": "https://scratch.mit.edu/projects/169381720/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-7",
+					"label": "Demo"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-8",
+					"label": "Demo"
+				}
+			]
+		},
+		{
+			"id": "171780578",
+			"url": "https://scratch.mit.edu/projects/171780578/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-2-draw-sprite",
+					"label": "Example2"
+				}
+			]
+		},
+		{
+			"id": "171780772",
+			"url": "https://scratch.mit.edu/projects/171780772/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-2-draw-sprite",
+					"label": "Example1"
+				}
+			]
+		},
+		{
+			"id": "171781146",
+			"url": "https://scratch.mit.edu/projects/171781146/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-2-draw-sprite",
+					"label": "Example3"
+				}
+			]
+		},
+		{
+			"id": "175165854",
+			"url": "https://scratch.mit.edu/projects/175165854/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-8",
+					"label": "starter project"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-6",
+					"label": "Starter Project"
+				}
+			]
+		},
+		{
+			"id": "175368610",
+			"url": "https://scratch.mit.edu/projects/175368610/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-9",
+					"label": "DEMO PROJECT"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-9",
+					"label": "example project."
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-11",
+					"label": "starter project"
+				}
+			]
+		},
+		{
+			"id": "176171644",
+			"url": "https://scratch.mit.edu/projects/176171644/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-4",
+					"label": "Demo"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-4",
+					"label": "Demo Game."
+				}
+			]
+		},
+		{
+			"id": "177336991",
+			"url": "https://scratch.mit.edu/projects/177336991/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-9",
+					"label": "Demo"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-9",
+					"label": "demo project"
+				}
+			]
+		},
+		{
+			"id": "177432288",
+			"url": "https://scratch.mit.edu/projects/177432288/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-4",
+					"label": "Demo"
+				}
+			]
+		},
+		{
+			"id": "180799165",
+			"url": "https://scratch.mit.edu/projects/180799165/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-8",
+					"label": "tarter Project"
+				}
+			]
+		},
+		{
+			"id": "181264707",
+			"url": "https://scratch.mit.edu/projects/181264707/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-9",
+					"label": "starter project"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-9",
+					"label": "Embedded project reference"
+				}
+			]
+		},
+		{
+			"id": "192205406",
+			"url": "https://scratch.mit.edu/projects/192205406/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-6",
+					"label": "Demo"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-7",
+					"label": "Demo"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-7",
+					"label": "Day1 starter"
+				}
+			]
+		},
+		{
+			"id": "198929042",
+			"url": "https://scratch.mit.edu/projects/198929042/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-2",
+					"label": "Demo"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-2",
+					"label": "Madlib Project"
+				}
+			]
+		},
+		{
+			"id": "199060798",
+			"url": "https://scratch.mit.edu/projects/199060798/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-8",
+					"label": "Demo: If"
+				}
+			]
+		},
+		{
+			"id": "200774879",
+			"url": "https://scratch.mit.edu/projects/200774879/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-9",
+					"label": "Spicy Starter"
+				}
+			]
+		},
+		{
+			"id": "201169716",
+			"url": "https://scratch.mit.edu/projects/201169716/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-4",
+					"label": "Starter project"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-4",
+					"label": "starter project"
+				}
+			]
+		},
+		{
+			"id": "202928030",
+			"url": "https://scratch.mit.edu/projects/202928030/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-2",
+					"label": "project2"
+				}
+			]
+		},
+		{
+			"id": "203198764",
+			"url": "https://scratch.mit.edu/projects/203198764/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-3",
+					"label": "Demo"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-3",
+					"label": "demo project"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-4",
+					"label": "Demo Project"
+				}
+			]
+		},
+		{
+			"id": "277394741",
+			"url": "https://scratch.mit.edu/projects/277394741/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-4",
+					"label": "odelOnly"
+				}
+			]
+		},
+		{
+			"id": "277395003",
+			"url": "https://scratch.mit.edu/projects/277395003/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-4",
+					"label": "DEMO PROJECT"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-4",
+					"label": "Black Knight"
+				}
+			]
+		},
+		{
+			"id": "277395587",
+			"url": "https://scratch.mit.edu/projects/277395587/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-4",
+					"label": "CodeStart"
+				}
+			]
+		},
+		{
+			"id": "277396319",
+			"url": "https://scratch.mit.edu/projects/277396319/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-4",
+					"label": "Dani"
+				}
+			]
+		},
+		{
+			"id": "277396527",
+			"url": "https://scratch.mit.edu/projects/277396527/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-4",
+					"label": "CodeStart"
+				}
+			]
+		},
+		{
+			"id": "277396607",
+			"url": "https://scratch.mit.edu/projects/277396607/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-4",
+					"label": "ModelOnly"
+				}
+			]
+		},
+		{
+			"id": "277396802",
+			"url": "https://scratch.mit.edu/projects/277396802/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-4",
+					"label": "CodeStart"
+				}
+			]
+		},
+		{
+			"id": "277396991",
+			"url": "https://scratch.mit.edu/projects/277396991/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-4",
+					"label": "ModelOnly"
+				}
+			]
+		},
+		{
+			"id": "277404020",
+			"url": "https://scratch.mit.edu/projects/277404020/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-4",
+					"label": "Harper"
+				}
+			]
+		},
+		{
+			"id": "278091656",
+			"url": "https://scratch.mit.edu/projects/278091656/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-2",
+					"label": "Demo Project"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit4/4-2-rocket-ship",
+					"label": "rubric"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit4/4-4-translator",
+					"label": "rubric"
+				}
+			]
+		},
+		{
+			"id": "285809067",
+			"url": "https://scratch.mit.edu/projects/285809067/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-3",
+					"label": "Demo"
+				}
+			]
+		},
+		{
+			"id": "289443181",
+			"url": "https://scratch.mit.edu/projects/289443181/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-2",
+					"label": "Demo"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-3",
+					"label": "Demo"
+				}
+			]
+		},
+		{
+			"id": "494766511",
+			"url": "https://scratch.mit.edu/projects/494766511/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-11",
+					"label": "DEMO PROJECT"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-12",
+					"label": "DEMO PROJECT"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-8",
+					"label": "starter project"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-9-music-video-day2",
+					"label": "starter project"
+				}
+			]
+		},
+		{
+			"id": "519211605",
+			"url": "https://scratch.mit.edu/projects/519211605/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit4/4-3-lets-chat",
+					"label": "Project to generate ideas"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit4/4-3",
+					"label": "Demo"
+				}
+			]
+		},
+		{
+			"id": "533066329",
+			"url": "https://scratch.mit.edu/projects/533066329/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-3",
+					"label": "Starter."
+				}
+			]
+		},
+		{
+			"id": "533108639",
+			"url": "https://scratch.mit.edu/projects/533108639/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-3",
+					"label": "Starter"
+				}
+			]
+		},
+		{
+			"id": "533112091",
+			"url": "https://scratch.mit.edu/projects/533112091/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-3",
+					"label": "Starter"
+				}
+			]
+		},
+		{
+			"id": "537935418",
+			"url": "https://scratch.mit.edu/projects/537935418/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-8",
+					"label": "Garbage Sort"
+				}
+			]
+		},
+		{
+			"id": "537978682",
+			"url": "https://scratch.mit.edu/projects/537978682/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-8",
+					"label": "Chatbot Lists"
+				}
+			]
+		},
+		{
+			"id": "538172588",
+			"url": "https://scratch.mit.edu/projects/538172588/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-8",
+					"label": "Top 5 lists."
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-8",
+					"label": "TopFive: Remix for fun!"
+				}
+			]
+		},
+		{
+			"id": "540220965",
+			"url": "https://scratch.mit.edu/projects/540220965/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-8",
+					"label": "Demo"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-8",
+					"label": "Preview today's project."
+				}
+			]
+		},
+		{
+			"id": "541578272",
+			"url": "https://scratch.mit.edu/projects/541578272/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-8",
+					"label": "Starter"
+				}
+			]
+		},
+		{
+			"id": "554466170",
+			"url": "https://scratch.mit.edu/projects/554466170/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-8",
+					"label": "DEMO PROJECT"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-9-virtual-pet",
+					"label": "DEMO PROJECT"
+				}
+			]
+		},
+		{
+			"id": "571838551",
+			"url": "https://scratch.mit.edu/projects/571838551/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit4/4-2-rocket-ship",
+					"label": "Demo"
+				}
+			]
+		},
+		{
+			"id": "571843764",
+			"url": "https://scratch.mit.edu/projects/571843764/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit4/4-2-rocket-ship",
+					"label": "starter project"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit4/4-2",
+					"label": "starter project"
+				}
+			]
+		},
+		{
+			"id": "572780139",
+			"url": "https://scratch.mit.edu/projects/572780139/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit4/4-4-translator",
+					"label": "Demo"
+				}
+			]
+		},
+		{
+			"id": "573813075",
+			"url": "https://scratch.mit.edu/projects/573813075/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-9",
+					"label": "Wrap around Slides"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-9",
+					"label": "Starter code"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-9",
+					"label": "Embedded project reference"
+				}
+			]
+		},
+		{
+			"id": "587686512",
+			"url": "https://scratch.mit.edu/projects/587686512/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit4/4-4",
+					"label": "starter"
+				}
+			]
+		},
+		{
+			"id": "599934518",
+			"url": "https://scratch.mit.edu/projects/599934518/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-3",
+					"label": "Pong"
+				}
+			]
+		},
+		{
+			"id": "599934992",
+			"url": "https://scratch.mit.edu/projects/599934992/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-3",
+					"label": "Catch"
+				}
+			]
+		},
+		{
+			"id": "599935342",
+			"url": "https://scratch.mit.edu/projects/599935342/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-3",
+					"label": "Maze"
+				}
+			]
+		},
+		{
+			"id": "599935588",
+			"url": "https://scratch.mit.edu/projects/599935588/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-3",
+					"label": "Jump"
+				}
+			]
+		},
+		{
+			"id": "599937510",
+			"url": "https://scratch.mit.edu/projects/599937510/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-3",
+					"label": "Whack-a-Gobo"
+				}
+			]
+		},
+		{
+			"id": "599942995",
+			"url": "https://scratch.mit.edu/projects/599942995/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-3",
+					"label": "PongSpeed"
+				}
+			]
+		},
+		{
+			"id": "633172397",
+			"url": "https://scratch.mit.edu/projects/633172397/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-3",
+					"label": "Starter."
+				}
+			]
+		},
+		{
+			"id": "638676961",
+			"url": "https://scratch.mit.edu/projects/638676961/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit4/4-3",
+					"label": "Starter"
+				}
+			]
+		},
+		{
+			"id": "638694988",
+			"url": "https://scratch.mit.edu/projects/638694988/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit4/4-3-lets-chat",
+					"label": "Demo"
+				}
+			]
+		},
+		{
+			"id": "755323373",
+			"url": "https://scratch.mit.edu/projects/755323373/",
+			"importStatus": "not-imported",
+			"requiredInput": "Exact source archive with asset credits and off-platform reuse permission, or matching project/version-specific prior license evidence.",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-9",
+					"label": "Starter"
+				}
+			]
+		}
+	],
+	"curriculumDocuments": [
+		{
+			"id": "1sTSZF2SNG3DK3fIIRXCtqusVkWnyL_kmEIZCMEechU0",
+			"title": "UN Global Goals Scavenger Hunt",
+			"status": 200,
+			"sha256": "286680f31d31f72544014dda7245038b4ba66dcec8c4eb96cc137f46e7815f30",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1sTSZF2SNG3DK3fIIRXCtqusVkWnyL_kmEIZCMEechU0/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/midtermfinal-projects/research-your-issue",
+					"label": "scavenger hunt"
+				}
+			]
+		},
+		{
+			"id": "1Ds0PovT-66sdGlVHrhWMH8zr8RXDHf_8vFn80zoM22A",
+			"title": "UN Global Goals Inventions  slides                                  Name(s)____________________________________________",
+			"status": 200,
+			"sha256": "51b7f119f330a57ea7c4e3db1fe478c82238fe17e5ae1644a11a10c210f58afc",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1Ds0PovT-66sdGlVHrhWMH8zr8RXDHf_8vFn80zoM22A/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/midtermfinal-projects/research-your-issue",
+					"label": "Handout"
+				}
+			]
+		},
+		{
+			"id": "19qGwhXGnx9uQg93Ld_YJEM_-VGbhUeVLEaxODTI9grA",
+			"title": "Research on Issue",
+			"status": 200,
+			"sha256": "0caf1deb6a9d13e62fd439f88aeaf7091bedefc84321243a8e05cb3dc8a062e7",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/19qGwhXGnx9uQg93Ld_YJEM_-VGbhUeVLEaxODTI9grA/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/midtermfinal-projects/research-your-issue",
+					"label": "Map Issue"
+				}
+			]
+		},
+		{
+			"id": "1h8--sRlPemixycxIGWNGrkzX1yLMgQHloI7x0IpeRqY",
+			"title": "MyCS Final Project",
+			"status": 200,
+			"sha256": "9c3bafe080f3206be7498d83d23594ce014f737f982a143c1644bf14ea38294a",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1h8--sRlPemixycxIGWNGrkzX1yLMgQHloI7x0IpeRqY/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/midtermfinal-projects/research-your-issue",
+					"label": "MyCS Final Project"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/midtermfinal-projects/research-your-issue",
+					"label": "Guide"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/midtermfinal-projects/final-project",
+					"label": "Final Project Guide"
+				}
+			]
+		},
+		{
+			"id": "1BQlvMcyl_YLqBaVMGVOE3m7-dfbCxkqiIXsunRmD6ps",
+			"title": "Final Project Proposal",
+			"status": 200,
+			"sha256": "9bf5102b65db8304a617a48ab938abaa0fb48969fc246507ed9fd553edbdf079",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1BQlvMcyl_YLqBaVMGVOE3m7-dfbCxkqiIXsunRmD6ps/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/midtermfinal-projects/research-your-issue",
+					"label": "project proposal"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/midtermfinal-projects/final-project",
+					"label": "Project Proposal"
+				}
+			]
+		},
+		{
+			"id": "1d7OHB2C30GT6qHXJZ95EQBq5qSh11x47biC7zFbXvXI",
+			"title": "MyCS Midterm Project",
+			"status": 200,
+			"sha256": "41d213565977705fc07b65f55ddf9def9273db07d1e33951c7979676da90b3b7",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1d7OHB2C30GT6qHXJZ95EQBq5qSh11x47biC7zFbXvXI/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/midtermfinal-projects/midterm-project",
+					"label": "Midterm Project Guide"
+				}
+			]
+		},
+		{
+			"id": "1Y3mTOWQrLIC9plrpyS-tX7voXlMg_G_fU1gqmJtThfg",
+			"title": "“I Have a Dream”: Customizations",
+			"status": 200,
+			"sha256": "9fbe9b479ae773fc911ee41fb731fa150e75fbec944e9078c0fd9e888f3abe31",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1Y3mTOWQrLIC9plrpyS-tX7voXlMg_G_fU1gqmJtThfg/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/what-is-a-computer/a-3",
+					"label": "Timeline of Computer History Scavenger Hunt"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/what-is-a-computer/a-3",
+					"label": "scavenger hunt"
+				}
+			]
+		},
+		{
+			"id": "1BRKz2817aJSs2I805wCPpt1HwySJaFkhwO4ZfDzqJE4",
+			"title": "“I Have a Dream”: Customizations",
+			"status": 200,
+			"sha256": "33a3916404e068265b7452a6a753053293be5d401d66f013b076a71b2205adea",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1BRKz2817aJSs2I805wCPpt1HwySJaFkhwO4ZfDzqJE4/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/what-is-a-computer/a-3",
+					"label": "here"
+				}
+			]
+		},
+		{
+			"id": "1QF0fi9fT1h1pjU-5kR1EsJVVterI9O08nKSEKNLjCNY",
+			"title": "Unit B-2: Binary Codes     Name(s)___________________   Period________",
+			"status": 200,
+			"sha256": "80c8e256ad74dc6a14794d1c82f3ff42c02d0dd58d000f28f87b943a38a6528a",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1QF0fi9fT1h1pjU-5kR1EsJVVterI9O08nKSEKNLjCNY/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/binary/b-2",
+					"label": "Student worksheet"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/binary/b-2",
+					"label": "."
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/binary/b-3",
+					"label": "Student worksheet"
+				}
+			]
+		},
+		{
+			"id": "1piNHE-7afiQfOYs4QJ7wc2VLoCdTQHDAg22XZUwuoHE",
+			"title": "Decimal    (Base 10)",
+			"status": 200,
+			"sha256": "f144a2e56c75457f4b85a71327bfaf24e3a001507938c04ce49db524fa3190ab",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1piNHE-7afiQfOYs4QJ7wc2VLoCdTQHDAg22XZUwuoHE/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/binary/b-2",
+					"label": "Teacher Key"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/binary/b-2",
+					"label": "Teacher Version."
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/binary/b-3",
+					"label": "Teacher Key"
+				}
+			]
+		},
+		{
+			"id": "19UoiesImStX9ZLXD05DeYoTKQTv0P3xtr5WMk6UPv58",
+			"title": "Algorithm example:        Convert the decimal 10 to binary.",
+			"status": 200,
+			"sha256": "fed057b4583b953db3fad76bc62c7804bfabd533a2427f1029284179ea3b89c1",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/19UoiesImStX9ZLXD05DeYoTKQTv0P3xtr5WMk6UPv58/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/binary/b-2",
+					"label": "Algorithm"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/binary/b-2",
+					"label": "algorithm"
+				}
+			]
+		},
+		{
+			"id": "14hXhXrWf5xO05BAftZB8XXIM9XYn-yEEmEQRZbIxLnY",
+			"title": "B-3:  Decode song into Binary",
+			"status": 200,
+			"sha256": "c1f48b9b0538cf43b3693ecc7889c71798e180fae6fa5e6484d65b9276e6b6ab",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/14hXhXrWf5xO05BAftZB8XXIM9XYn-yEEmEQRZbIxLnY/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/binary/b-3",
+					"label": "Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/binary/b-3",
+					"label": "Student Handout"
+				}
+			]
+		},
+		{
+			"id": "1JJxX97a0W7rJYtbcugHJqHmjMbpKB-q0ctW7D5Kq2A0",
+			"title": "Binary",
+			"status": 200,
+			"sha256": "8ac4457086acc31f7a8b2e268294c6074bbccfa3257e16965d01917fb1c962a1",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1JJxX97a0W7rJYtbcugHJqHmjMbpKB-q0ctW7D5Kq2A0/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/binary/b-3",
+					"label": "Key"
+				}
+			]
+		},
+		{
+			"id": "1txCqUi4vE_p3KYUJqKFL53hnOed-4pW5GaNgD09arS4",
+			"title": "Binary",
+			"status": 200,
+			"sha256": "fa86327c318d89a3d80698e43933f45482127429d8fa47a8b456a330a54c4584",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1txCqUi4vE_p3KYUJqKFL53hnOed-4pW5GaNgD09arS4/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/binary/b-3",
+					"label": "Teacher Key"
+				}
+			]
+		},
+		{
+			"id": "1avUKhQI7jZyd2J86DFzWkHjcwmPt5z9xlgmOCgkS4VY",
+			"title": "MicroBits: Ideal Pet:  When we design, we create real things for real people.",
+			"status": 200,
+			"sha256": "69300cdded8ebaec1d9d9be662a27651538606ef5aa94842bb775e25e679cb3e",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1avUKhQI7jZyd2J86DFzWkHjcwmPt5z9xlgmOCgkS4VY/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/microbit/f-2-microbits",
+					"label": "Student Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/microbit/f-2-microbits",
+					"label": "Student handout."
+				}
+			]
+		},
+		{
+			"id": "1he9vH6Suc0UN7kSPbnUFo3kHb9p5tQWBHlXJODnn6NY",
+			"title": "Ideal Pet ideas                                  microbit.org  ->Let’s Code ->Let’s Code",
+			"status": 200,
+			"sha256": "2b6e545737c2ed157a925e2db89c88f5e062e818536eb493aa43e2a2b659900d",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1he9vH6Suc0UN7kSPbnUFo3kHb9p5tQWBHlXJODnn6NY/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/microbit/f-2-microbits",
+					"label": "code handout"
+				}
+			]
+		},
+		{
+			"id": "18Yoiv34Sfo4tq5lpam5s792GmXKFpR2ZgTGZwUk6lDA",
+			"title": "Fidget Cube                                     microbit.org  ->Let’s Code ->Let’s Code",
+			"status": 200,
+			"sha256": "479f41afce9bd2a301cf79a2faec77d54902e8970434cae7de9cd43027d07ce8",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/18Yoiv34Sfo4tq5lpam5s792GmXKFpR2ZgTGZwUk6lDA/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/microbit/f-3-microbits",
+					"label": "Student Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/microbit/f-3-microbits",
+					"label": "student handout"
+				}
+			]
+		},
+		{
+			"id": "1tY4ZqgSsh8-3OH1HQieF9Ba6ClTYRvIky-CTNFTLvYQ",
+			"title": "Fidget Cube: Rubric                              MyCS F3 - based on microbit course csintro",
+			"status": 200,
+			"sha256": "8b44e5d74204942c2a7d45e00cbb10d06809a32da8e4339774156d97c263ad57",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1tY4ZqgSsh8-3OH1HQieF9Ba6ClTYRvIky-CTNFTLvYQ/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/microbit/f-3-microbits",
+					"label": "Rubric"
+				}
+			]
+		},
+		{
+			"id": "18MdHpR00DmURgVCzW6gf8UEVk3Ox7-lS8Z21sOO1Cb0",
+			"title": "Magic 8 Ball    microbit.org  ->Let’s Code ->Let’s Code.",
+			"status": 200,
+			"sha256": "79f1f98123be9a131660475082769c3cafc3d435d5b25598b998d35af8901645",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/18MdHpR00DmURgVCzW6gf8UEVk3Ox7-lS8Z21sOO1Cb0/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/microbit/f-4-microbits",
+					"label": "Student Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/microbit/f-4-microbits",
+					"label": "student handout"
+				}
+			]
+		},
+		{
+			"id": "17SRK_LGm-MJbaF0n-yhb11P7-pcvNW9x7Gp7ybp5zWQ",
+			"title": "MyCS Overview:                Slides,     Doc (Extra Information)    Movie (Slides with Voiceover 3.21 minutes)",
+			"status": 200,
+			"sha256": "4908c0d110f775647641cbc756ba5359603e3d2883edc479829d2c37d91bc91e",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/17SRK_LGm-MJbaF0n-yhb11P7-pcvNW9x7Gp7ybp5zWQ/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/intersessions/resources",
+					"label": "MyCS Resources"
+				}
+			]
+		},
+		{
+			"id": "10XIXdh4CsbkG5H6QUfz7LUhAq49WO-Zvsm_7iKdFpi0",
+			"title": "SFUSD CS1:  MyCS : Effective 6th Grade Curriculum",
+			"status": 200,
+			"sha256": "a88e3e212255da73d91dd692498d758d290bc05bc9e86e3c806f8b9630c4e8e7",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/10XIXdh4CsbkG5H6QUfz7LUhAq49WO-Zvsm_7iKdFpi0/edit",
+			"references": []
+		},
+		{
+			"id": "1R1p8FdZuLRqYzJF6ClirkN3-fv0-6D1HDwIXM2aoAH4",
+			"title": "MyCS Pacing Guides                            2021 SFUSD Calendar",
+			"status": 200,
+			"sha256": "45281db59aa8a7d8f82053f7058f2ea03b0548eb5395bb549d99c8d84c9dbb7b",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1R1p8FdZuLRqYzJF6ClirkN3-fv0-6D1HDwIXM2aoAH4/edit",
+			"references": []
+		},
+		{
+			"id": "14XI1ZiRT7sL3-sFa17TY3ox78pPb5xMMNOTWHoAV-dY",
+			"title": "CS for All in SFUSD Banner Logo.png",
+			"status": 200,
+			"sha256": "1b59fc8683f3723ba5086f395e3f6f82a7b2d2874e276bff3afd9f80336e1e3f",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/14XI1ZiRT7sL3-sFa17TY3ox78pPb5xMMNOTWHoAV-dY/edit",
+			"references": []
+		},
+		{
+			"id": "1ZkOIXhnhfpOB8H6rd7geMSwInxGxzNdtRMdlHwTI2lo",
+			"title": "Computer Science 1, SFUSD:                Rubrics                                              Date:  05/18     Screen Shot 2017-08-04 at 10.12.43 AM.png",
+			"status": 200,
+			"sha256": "0a2dd37fc269a9782d9a6849bdbba484e07efa0f2b1b44ea6d9e00384bc0f4f1",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1ZkOIXhnhfpOB8H6rd7geMSwInxGxzNdtRMdlHwTI2lo/edit",
+			"references": []
+		},
+		{
+			"id": "1F93piFhbb6yNUM1NDrrOaFO0zCGtCgl02Byv0Zv-d_4",
+			"title": "Computer Science 1, SFUSD:                CS1 Vocabulary                   Date:  05/18     Screen Shot 2017-08-04 at 10.12.43 AM.png",
+			"status": 200,
+			"sha256": "67d6e37bd595114c5d692c6b4b8d72a688ed44221b510b85549590476ae3e0a7",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1F93piFhbb6yNUM1NDrrOaFO0zCGtCgl02Byv0Zv-d_4/edit",
+			"references": []
+		},
+		{
+			"id": "113iQTLaeXPi86M8bQ4GjHaYbZ88SAiEO7H6tJQW6QHc",
+			"title": "CS1 SFUSD: Introduction to Computer Science",
+			"status": 200,
+			"sha256": "26e88fa59f60dee020920023d41b0813d1303e25b55fb3e328d3ccbf551332ff",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/113iQTLaeXPi86M8bQ4GjHaYbZ88SAiEO7H6tJQW6QHc/edit",
+			"references": []
+		},
+		{
+			"id": "1qbFccRfTeeSRCncCVHoQcGN_R8MjCJd9vsCwVNI-o-c",
+			"title": "Unit 1.4:  Reset",
+			"status": 200,
+			"sha256": "7ec71c1bc002e0944f809120e1b587d8602a14d968b7877e01a569fc4288645f",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1qbFccRfTeeSRCncCVHoQcGN_R8MjCJd9vsCwVNI-o-c/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-4",
+					"label": "student handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-4",
+					"label": "handout - eng"
+				}
+			]
+		},
+		{
+			"id": "166GibBGkCcxS6QJ_RlSKVjVtUlOmgsPk8Tcs-ONa15Q",
+			"title": "Picture This Instructions",
+			"status": 200,
+			"sha256": "c44e26f46e69f7cb2cce777da0b4e9f0e7e1bda000d386ebd95865207226b9fe",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/166GibBGkCcxS6QJ_RlSKVjVtUlOmgsPk8Tcs-ONa15Q/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit0/0-1",
+					"label": "Unplugged Activity: Picture This!"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit0/0-1",
+					"label": "\"Picture This\""
+				}
+			]
+		},
+		{
+			"id": "10zHzenCgry4QVl7us-Z00TrMpQBB--1Ko2LYGja7Go8",
+			"title": "Pair Programming Coding Challenge",
+			"status": 200,
+			"sha256": "9a31b744e87c0798339cfe71671d61d01dab688e81cdb713e612dcb94578079d",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/10zHzenCgry4QVl7us-Z00TrMpQBB--1Ko2LYGja7Go8/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit0/0-4",
+					"label": "Choice Board"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit0/0-4",
+					"label": "Pair Programming Choice Board"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit0/0-4",
+					"label": "pair programming choice board"
+				}
+			]
+		},
+		{
+			"id": "16cPuPyklyWStGUbHdBF_mNqpWpP9o4U8CjZ5xpZG9UM",
+			"title": "PAIR PROGRAMMING    Name: _________________________ Partner: ______________________ Date: __________ Period: _____",
+			"status": 200,
+			"sha256": "b621e81bd7aa1ff46b4acb247dfdb0fd60287ca01a121a71f585010de8b63878",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/16cPuPyklyWStGUbHdBF_mNqpWpP9o4U8CjZ5xpZG9UM/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit0/0-4",
+					"label": "Reflection"
+				}
+			]
+		},
+		{
+			"id": "1vFBTCH-zX5Kx_CO3yC-nja8lnOU9JOWAcu9BFiAb7po",
+			"title": "Growth Mindset Challenge",
+			"status": 200,
+			"sha256": "01432c5719830956e1b3c63e7eea982be95d04c4fa5f85439cd809bfa8c1ef9a",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1vFBTCH-zX5Kx_CO3yC-nja8lnOU9JOWAcu9BFiAb7po/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit0/0-3",
+					"label": "Growth Mindset Challenges"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit0/0-3",
+					"label": "Growth Mindset Challenge Choice Board"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit0/0-3",
+					"label": "choice board"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit0/0-3",
+					"label": "Growth Mindset Choice Board"
+				}
+			]
+		},
+		{
+			"id": "1lVQi9gvhd0Yxh1QXmAzVSQDJwGy8eCRS2fHiUm4vGBQ",
+			"title": "How to start a new Scratch project:",
+			"status": 200,
+			"sha256": "ecafdbefdb94cd258fae1e9e5756ce1d75de803ba471c0a942dda64d2ee8cbfd",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1lVQi9gvhd0Yxh1QXmAzVSQDJwGy8eCRS2fHiUm4vGBQ/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit0/0-5",
+					"label": "handout."
+				}
+			]
+		},
+		{
+			"id": "1A4TqKnlLKucj4BS0J53-67F_VMbueKRr9MIm8pM1pxE",
+			"title": "Unit 1.1 Theater Class                 Corny Joke Sketch                                         Screen Shot 2017-08-30 at 1.03.28 PM.png",
+			"status": 200,
+			"sha256": "dedb1d10d3118a301972cf033fe6ec8132de9a2db755f886ee86f940a65e8251",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1A4TqKnlLKucj4BS0J53-67F_VMbueKRr9MIm8pM1pxE/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-1",
+					"label": "Theater class."
+				}
+			]
+		},
+		{
+			"id": "1-2XICltRIXGs4sM95gv2Sh_y83kWDWTaYdlO7irOu64",
+			"title": "Name(s): ________________________________________                        Period: ________",
+			"status": 200,
+			"sha256": "4a1fab6c17e8fc0713767f88869b4eb5d1e0219e77bbe72b5493073dfeb6c27e",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1-2XICltRIXGs4sM95gv2Sh_y83kWDWTaYdlO7irOu64/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-3",
+					"label": "RUBRIC"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-3",
+					"label": "RUBRIC"
+				}
+			]
+		},
+		{
+			"id": "1ZCPK8uPWWjM8EBgm0sHRW1aVvRxsTJwScAdGbLUqGLA",
+			"title": "Unit 1.2  Exploring the Coordinate Grid in Scratch",
+			"status": 200,
+			"sha256": "f6a08b7485febaea34df1a2379730a14ff2cdde14c485c9c57cd2b8ab8146d6c",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1ZCPK8uPWWjM8EBgm0sHRW1aVvRxsTJwScAdGbLUqGLA/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-3",
+					"label": "student handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-3",
+					"label": "Student handout"
+				}
+			]
+		},
+		{
+			"id": "1oUkrBJarDSS_bXziUOiYbklZxUH82aYKZJFnulhUR4M",
+			"title": "Unit 1.5: Debugging misconceptions with Events and Initialization.    Studio",
+			"status": 200,
+			"sha256": "9bd718fdf18d0c3247e7295bd082d8c84140786183d92de7a4374a26363c6037",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1oUkrBJarDSS_bXziUOiYbklZxUH82aYKZJFnulhUR4M/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-5",
+					"label": "Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-5",
+					"label": "Student Handout"
+				}
+			]
+		},
+		{
+			"id": "1Fob0CoNTbmFa0_Me1yMX-FBv4WkAG140K4EnxnVfVNU",
+			"title": "MyCS: Unit 1.5 Check for Understanding",
+			"status": 200,
+			"sha256": "1010dd3d0b25eedeabb6f44253f8c8b3ff26b8b8455db932601e51ca6f703f15",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1Fob0CoNTbmFa0_Me1yMX-FBv4WkAG140K4EnxnVfVNU/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-5",
+					"label": "Student handout"
+				}
+			]
+		},
+		{
+			"id": "1TWOcsfsZmV2xjpN-Nd65Mm6iHBOS2q_jQCp88NxfgZs",
+			"title": "Broadcast and Receive Game",
+			"status": 200,
+			"sha256": "25184f80aa1401033aa97631e43898d6791a22c18c5dcbbba07b6dbe912fc4d7",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1TWOcsfsZmV2xjpN-Nd65Mm6iHBOS2q_jQCp88NxfgZs/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-7",
+					"label": "Broadcast and Receive Game"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-7",
+					"label": "Broadcast and Receive game"
+				}
+			]
+		},
+		{
+			"id": "16tDpRA_ZetrNVHr_R-OORKaaWMqyL6SwC2viSKXXdGo",
+			"title": "CS1: 1.7 Dance Party",
+			"status": 200,
+			"sha256": "c7511d5af4cd3014b53da6bee5775394123033d4b8dee96c3e132153a3b49458",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/16tDpRA_ZetrNVHr_R-OORKaaWMqyL6SwC2viSKXXdGo/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-7",
+					"label": "RUBRIC"
+				}
+			]
+		},
+		{
+			"id": "1gjzEVLXy5jb_qDGRH9-a1-2jTuRSyIwdOnmdyCRNLNc",
+			"title": "Give all students an index card with “When I receive…..” on one side. What to do on the other. Like above pic.",
+			"status": 200,
+			"sha256": "07d57c14cdc02de8678c7cce25a4a500bf292db39cae6335b237b2b8b69f56e4",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1gjzEVLXy5jb_qDGRH9-a1-2jTuRSyIwdOnmdyCRNLNc/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-7",
+					"label": "index cards."
+				}
+			]
+		},
+		{
+			"id": "11-tF-N9HlCIUsJ2rYpsdgWFTV4Zfe1dfZ9aiDeGLfsM",
+			"title": "Unit 1.7:   Dance Party",
+			"status": 200,
+			"sha256": "961467424fded162d36732ce8fcd860c5387da9ad1c53a2b50fd5f001e0cd208",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/11-tF-N9HlCIUsJ2rYpsdgWFTV4Zfe1dfZ9aiDeGLfsM/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-7",
+					"label": "student handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-7",
+					"label": "handout - eng"
+				}
+			]
+		},
+		{
+			"id": "1Ypdc7WFg5Rd3Z5-eXAjTKE3j3Z1ERpymxFOJHewngWk",
+			"title": "1.8 & 1.9",
+			"status": 200,
+			"sha256": "945aef2eec269072c9c10a7c1f9dabf1ef2289d50ee186595c2c5daa7f7329fb",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1Ypdc7WFg5Rd3Z5-eXAjTKE3j3Z1ERpymxFOJHewngWk/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-8",
+					"label": "RUBRIC"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-9-virtual-pet",
+					"label": "RUBRIC"
+				}
+			]
+		},
+		{
+			"id": "1GR_DDI83cTPUa34UjRrjQeWwbqDYiVawyq_aHw9Sakc",
+			"title": "Unit 1.10: Debugging misconceptions with Events and Initialization.",
+			"status": 200,
+			"sha256": "5c79b991bfed57142cae59f191af40ec6f2b9635c9b52550efa01976d14b7048",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1GR_DDI83cTPUa34UjRrjQeWwbqDYiVawyq_aHw9Sakc/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-10-assessments",
+					"label": "Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-10-recap-events",
+					"label": "Five Debug Challenges"
+				}
+			]
+		},
+		{
+			"id": "171UhgCwHeBu8aEDuD7Eak99iu60HCIyXChiX3PxatUg",
+			"title": "MyCS: Unit 1.10 Check for Understanding",
+			"status": 200,
+			"sha256": "ee8a8089447fa3ddd1f5aab06abecddf7aef068ba162603ea661129eb0125425",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/171UhgCwHeBu8aEDuD7Eak99iu60HCIyXChiX3PxatUg/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-10-assessments",
+					"label": "Student"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit1/1-10-assessments",
+					"label": "handout"
+				}
+			]
+		},
+		{
+			"id": "1ZBzG9UBXpJ0rxCZeARqlmMbkXqp95KEKl1T12_jWuBQ",
+			"title": "Unit 2.1",
+			"status": 200,
+			"sha256": "52b40e082163d7e1b16712cc516919ae70dbaa336421515675599b9c0f7cf2f4",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1ZBzG9UBXpJ0rxCZeARqlmMbkXqp95KEKl1T12_jWuBQ/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-1",
+					"label": "Dance Algorithm"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-1",
+					"label": "Dance algorithm handout."
+				}
+			]
+		},
+		{
+			"id": "1fBFD_Mliu5_vY_697REeW_TG_KySoEnk9g900ly4TCU",
+			"title": "90°",
+			"status": 200,
+			"sha256": "6a017bced810619b53a074e7b29216df0f298086655ceda46b1635270d337b55",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1fBFD_Mliu5_vY_697REeW_TG_KySoEnk9g900ly4TCU/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-1",
+					"label": "Direction wall signs"
+				}
+			]
+		},
+		{
+			"id": "1VsfznIyFQJlMJjSJFMFuxkqjBNNUlY3-BQds3_DVKQI",
+			"title": "Unit 2.2    Loop Code Tracing                                                                      Name:__________________       Grade_________",
+			"status": 200,
+			"sha256": "4643eaa508fe16e226eea52c1b65983e39c261e85fcaf693e1f47ffaf63a196c",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1VsfznIyFQJlMJjSJFMFuxkqjBNNUlY3-BQds3_DVKQI/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-2-draw-sprite",
+					"label": "Extension"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-3",
+					"label": "Code Tracing Loops"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-8",
+					"label": "SLIDES"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-9",
+					"label": "SLIDES"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-11",
+					"label": "SLIDES"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-12",
+					"label": "SLIDES"
+				}
+			]
+		},
+		{
+			"id": "1KS9EqOz9M-HMJuXOwZBw89HpRpQSWYeVY0r5GR1Sx00",
+			"title": "Name(s): ________________________________________                        Period: ________",
+			"status": 200,
+			"sha256": "ff4b5b8411afa1433e3f2e81ac5e22195511dc0a843e0cbd81f5a3f01abcae31",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1KS9EqOz9M-HMJuXOwZBw89HpRpQSWYeVY0r5GR1Sx00/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-4",
+					"label": "RUBRIC"
+				}
+			]
+		},
+		{
+			"id": "1LylNk2xpAONS82UZEuqXMZ1NXl4sDMrzyKyUcckdUDc",
+			"title": "Unit 2.5: Debugging: Loops                                                scratch.mit.edu/studios/3830264",
+			"status": 200,
+			"sha256": "3021b4631b421e1e0021b7d3dfa3da3f0c9545fefdbb59f6deba0c78bced69f8",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1LylNk2xpAONS82UZEuqXMZ1NXl4sDMrzyKyUcckdUDc/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-5-assessments",
+					"label": "Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-5",
+					"label": "Five Debug Challenges"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-10-recap-loops",
+					"label": "Five Debug Challenges"
+				}
+			]
+		},
+		{
+			"id": "1o04RHt5-OwjiGtlhkNPSUoBXYxtnVlsxr-8S4X6ljDE",
+			"title": "MyCS: Unit 2.5 Check for Understanding",
+			"status": 200,
+			"sha256": "d19aab1701dd256deeb687769c72b2d1eb42ba3a1e06634c75d8058fd41b66ef",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1o04RHt5-OwjiGtlhkNPSUoBXYxtnVlsxr-8S4X6ljDE/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-5-assessments",
+					"label": "Student handout"
+				}
+			]
+		},
+		{
+			"id": "1Zzh7Oh0-B1oliX5TtCSp4z9iEKqttk1-4vsnNze6ihg",
+			"title": "Name(s): ________________________________________                        Period: ________",
+			"status": 200,
+			"sha256": "486e35468f427201ee5f4f83aeea8f8cff7737b2772b7b8a9239da5070a26423",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1Zzh7Oh0-B1oliX5TtCSp4z9iEKqttk1-4vsnNze6ihg/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-8",
+					"label": "RUBRIC"
+				}
+			]
+		},
+		{
+			"id": "1dnvBR-kq_DLZfP0nNF3klHD_AxBNKbWDfed0bIsByJ0",
+			"title": "Unit 2.8:   StarFish Choir (student reference sheet)",
+			"status": 200,
+			"sha256": "021320e8eaf2f825dd3d541c84c10c77a56f276585e0b800beb7dd72f6ded5e5",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1dnvBR-kq_DLZfP0nNF3klHD_AxBNKbWDfed0bIsByJ0/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-8",
+					"label": "handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-6",
+					"label": "handout - eng"
+				}
+			]
+		},
+		{
+			"id": "1RRQ6r6nNslFnihR3AuO0go5p505zQxwDENhNC00JUNU",
+			"title": "Name(s): ________________________________________                        Period: ________",
+			"status": 200,
+			"sha256": "7a11c1f06677a7cb529151e666620d84f734d08a00bde065fd3647267debefcb",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1RRQ6r6nNslFnihR3AuO0go5p505zQxwDENhNC00JUNU/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-9",
+					"label": "RUBRIC"
+				}
+			]
+		},
+		{
+			"id": "1y0ANsY6Rso74M1MPhW8tpphdfACN2-do7hg7hxWYTsU",
+			"title": "Name(s): ________________________________________                        Period: _____________        Date__________",
+			"status": 200,
+			"sha256": "1bac79296c028884fcf165c3b671156cf68200c51a34c39c0981522854cf5686",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1y0ANsY6Rso74M1MPhW8tpphdfACN2-do7hg7hxWYTsU/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-11",
+					"label": "Planner"
+				}
+			]
+		},
+		{
+			"id": "1JuLkwcCwwlz3PKiySYuhwX7BAXfqk_v42N0H3mq4oGg",
+			"title": "Name(s): ________________________________________                        Period: _____________        Date__________",
+			"status": 200,
+			"sha256": "0482900db1e5732816f77343f100fabdd224ae679c8be82c02a5dd244128bab2",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1JuLkwcCwwlz3PKiySYuhwX7BAXfqk_v42N0H3mq4oGg/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-11",
+					"label": "RUBRIC"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-12",
+					"label": "RUBRIC"
+				}
+			]
+		},
+		{
+			"id": "1c83BZ61OSdfxxYmtyXaNsDMNkUYNvcbvvvc4As0ezAg",
+			"title": "Name(s): ________________________________________                        Period: _____________        Date__________",
+			"status": 200,
+			"sha256": "f961b89e3e221622a53bb5dcd7f41ff427db55a02c5991c5288a9e370b416244",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1c83BZ61OSdfxxYmtyXaNsDMNkUYNvcbvvvc4As0ezAg/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-12",
+					"label": "Critique"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-12",
+					"label": "Paper"
+				}
+			]
+		},
+		{
+			"id": "1NGdHntjdp753qhx2IZTEnoZOR1p28jaTd8B6CEDOEqA",
+			"title": "Unit 2.10: Debugging: Sounds                                                https://scratch.mit.edu/studios/30189593",
+			"status": 200,
+			"sha256": "5181cfae355d8298294762f8b49c3f3d432b98545211044480969904be028bab",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1NGdHntjdp753qhx2IZTEnoZOR1p28jaTd8B6CEDOEqA/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-10-assessments",
+					"label": "Handout"
+				}
+			]
+		},
+		{
+			"id": "1_kxbOWNbMf0eSn719GODfk9l9Jkc8MflxeK14emC_98",
+			"title": "MyCS: Unit 2.10 Check for Understanding",
+			"status": 200,
+			"sha256": "3ebdecb0c0dc899f70f82a5d5bcb715f1b6b6c44d51ac99615e5ad04f38c409d",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1_kxbOWNbMf0eSn719GODfk9l9Jkc8MflxeK14emC_98/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit-2/2-10-assessments",
+					"label": "Student handout"
+				}
+			]
+		},
+		{
+			"id": "1vQ6Qf2x_O0pJ4BZrPkiA1WAyv_DFYKC7JdWXNQnXOMY",
+			"title": "How to start a new Scratch project:",
+			"status": 200,
+			"sha256": "360196cd47a4e8b528a1db636a3f2795e2647cca5e0f5b3630218676b1617dd8",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1vQ6Qf2x_O0pJ4BZrPkiA1WAyv_DFYKC7JdWXNQnXOMY/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit0/0-5",
+					"label": "handout -eng"
+				}
+			]
+		},
+		{
+			"id": "1sLhjKiKsCMAvPu9kL0_5qJJQyhLSwUazt_-pCCCpozI",
+			"title": "1.2  Animate Letters",
+			"status": 200,
+			"sha256": "607166ef67011ef9d4aa11c32b37a7535d4fb1f23835e65be484c9a94eb45953",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1sLhjKiKsCMAvPu9kL0_5qJJQyhLSwUazt_-pCCCpozI/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-2",
+					"label": "student handout"
+				}
+			]
+		},
+		{
+			"id": "138scfqKxvwuxGm7GWoeXOZu2MxXpxOKLCkbTLLZLea0",
+			"title": "Unit 2.2:   Animation. (student reference sheet)     video",
+			"status": 200,
+			"sha256": "86af1af91bb7f6823f0151f80fbdef166fc94f98053267c3f4f61e1bfb392744",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/138scfqKxvwuxGm7GWoeXOZu2MxXpxOKLCkbTLLZLea0/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-2",
+					"label": "Handout- eng"
+				}
+			]
+		},
+		{
+			"id": "1AxkSBUJUNl4JpBbbAyv3WHE2d8rUbYD2-07GmWVYoX8",
+			"title": "Unidad 2.2:   Animación. (hoja de referencia del estudiante)     video",
+			"status": 200,
+			"sha256": "cf486fd89880c9b8e8ec5438a5ebb35f23979b29bffed2fe713714caa2184e8d",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1AxkSBUJUNl4JpBbbAyv3WHE2d8rUbYD2-07GmWVYoX8/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-2",
+					"label": "Handout -sp"
+				}
+			]
+		},
+		{
+			"id": "1HkF9jt6T9mj7HhJHmShbfjpxGIdA2O72oNvErYWIk2c",
+			"title": "Unit 2.9:  Sound Party (student reference sheet)",
+			"status": 200,
+			"sha256": "c9a9d5157e11f7a0303a6ccbccc0cf1683c33219ed2886f256ec13739dde44f9",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1HkF9jt6T9mj7HhJHmShbfjpxGIdA2O72oNvErYWIk2c/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-7",
+					"label": "handout - eng"
+				}
+			]
+		},
+		{
+			"id": "1iV1bPVWQjH8gOnZTdcSi0T36kNdvi5BemcIK2S96baw",
+			"title": "Unit 2.11:  Music Video                  Computers are tools for Expression.",
+			"status": 200,
+			"sha256": "9261c3345e6392578540759590735c6c327ff139a499dc7fc2a79e0016a87b1e",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1iV1bPVWQjH8gOnZTdcSi0T36kNdvi5BemcIK2S96baw/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-8",
+					"label": "handout - eng"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit2/2-9-music-video-day2",
+					"label": "handout - eng"
+				}
+			]
+		},
+		{
+			"id": "1Fg_ZAwbajxGKPGeVFazFRmhSFzjz2Q2iuHPQMWyN_Go",
+			"title": "Space Exploration! - Day 2",
+			"status": 200,
+			"sha256": "2b8d79629b9b4f6b8d7b4db47a568d08320e9f8bc44995b13ef5cc9fb3d3bb6d",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1Fg_ZAwbajxGKPGeVFazFRmhSFzjz2Q2iuHPQMWyN_Go/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit1/1-3b",
+					"label": "Student Handout"
+				}
+			]
+		},
+		{
+			"id": "1c8x4NKfrN0-tQAYIYGBTyzJ1mopombmpK5ONM0PQP84",
+			"title": "Unit 3 Race to the Finish   Name(s)_______________________________________",
+			"status": 200,
+			"sha256": "4346a416cd426efa8869fa5c4e3445e1e6ff42bb35af46ed5b07fb0a72d7a03e",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1c8x4NKfrN0-tQAYIYGBTyzJ1mopombmpK5ONM0PQP84/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-2",
+					"label": "Pseudocode Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-2",
+					"label": "student handout."
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-2",
+					"label": "student handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-2",
+					"label": "handout - eng"
+				}
+			]
+		},
+		{
+			"id": "1fA_5zGAIZTVo9lu4e_a8Bb7Kl0bYZelM1tdro9cWd7Y",
+			"title": "CS1: 3.2 : 3.3 Race to the Finish",
+			"status": 200,
+			"sha256": "3c5244c47931677c8cafe673a2cb9af4c8a18123f0dcdf724bfb2abe0fb12e1d",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1fA_5zGAIZTVo9lu4e_a8Bb7Kl0bYZelM1tdro9cWd7Y/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-2",
+					"label": "RUBRIC"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-3",
+					"label": "RUBRIC"
+				}
+			]
+		},
+		{
+			"id": "1q7a06f5ybhE2KhZzJg4YB1Rh01AEpqPP6cw6BMQESu0",
+			"title": "MyCS 3.3 Race to the Finish: Day2:",
+			"status": 200,
+			"sha256": "bdc1d982644e7383a3038b35b7a29d8d5992f338931b60db012b2a8ca92879a6",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1q7a06f5ybhE2KhZzJg4YB1Rh01AEpqPP6cw6BMQESu0/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-3",
+					"label": "Flow Chart Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-3",
+					"label": "student handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-3",
+					"label": "Handout-Eng"
+				}
+			]
+		},
+		{
+			"id": "11hwrDy9cQWfrqtva9_fkA6zLHd8czg4Ua_qhLL92PXY",
+			"title": "CS1: 3.4  Reaction Games",
+			"status": 200,
+			"sha256": "8fb841568af97d07eb3a0137525ed711e92c245e897f7409fbf3acedf4ade31c",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/11hwrDy9cQWfrqtva9_fkA6zLHd8czg4Ua_qhLL92PXY/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-4",
+					"label": "RUBRIC"
+				}
+			]
+		},
+		{
+			"id": "1MNwXd6YhnhD2cbjnVW63eK6y7y_3IMsVAGltrOFAECs",
+			"title": "Unit 3.4:   Reactions Game. (student reference sheet)",
+			"status": 200,
+			"sha256": "70133eaffd4b60cd0975899c6d3487d3d729e38e6b9bdd2270f6387e575e6870",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1MNwXd6YhnhD2cbjnVW63eK6y7y_3IMsVAGltrOFAECs/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-4",
+					"label": "Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-4",
+					"label": "handout -eng"
+				}
+			]
+		},
+		{
+			"id": "117UCft2WO6onLeyGzzqxQVBiziRAsF0vkcWJC4ilcac",
+			"title": "Student Debug Unit 3.5:                         Misconceptions Debugged. If, Grid, Broadcast.",
+			"status": 200,
+			"sha256": "640185b469a72aac3a9db72fca789f9791d9ead96bf49163402dd2450246667d",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/117UCft2WO6onLeyGzzqxQVBiziRAsF0vkcWJC4ilcac/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-5-assessments",
+					"label": "Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-5",
+					"label": "Five debug challenges"
+				}
+			]
+		},
+		{
+			"id": "116NVx-KWPhM8je_pPFq5mBY4-ZjGGRG3Am14WLcgeTk",
+			"title": "MyCS: Unit 3.5 Check for Understanding",
+			"status": 200,
+			"sha256": "3e8e89dd5dfc0c290bfd96c1de20009b967c5d9449129519c2946c9d42a796ae",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/116NVx-KWPhM8je_pPFq5mBY4-ZjGGRG3Am14WLcgeTk/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-5-assessments",
+					"label": "Student handout"
+				}
+			]
+		},
+		{
+			"id": "1zj0EIgl5LuJ4pXNy7iC0ODDEDfTctCsOyEJgTbEmxaM",
+			"title": "Unit 3.7 MyCS",
+			"status": 200,
+			"sha256": "50e32bf5eb486876055e4f7134d80adfccf87af4c093a000c7f9206a6d43280e",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1zj0EIgl5LuJ4pXNy7iC0ODDEDfTctCsOyEJgTbEmxaM/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-7",
+					"label": "Scavenger Hunt"
+				}
+			]
+		},
+		{
+			"id": "1tr9Kjh_ckIlG4MlMiGm0QnF9XAqzHe_cGsiU6HZR-uA",
+			"title": "Unit 3-7  Conditional Statements.",
+			"status": 200,
+			"sha256": "9d7a209a8ca8915e57c48eaefc7f82ceaeb08acfa48b6de309bc1a002f950b06",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1tr9Kjh_ckIlG4MlMiGm0QnF9XAqzHe_cGsiU6HZR-uA/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-7",
+					"label": "Compare IF and IF-ELSE"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-7",
+					"label": "Student Document"
+				}
+			]
+		},
+		{
+			"id": "15oT0n46K2pr6FeP1r9l8q12NFDoENf7ODu2AkCommeA",
+			"title": "Name(s): ________________________________________                        Period: ________",
+			"status": 200,
+			"sha256": "0ac6204ac4c6a1eab9a375cfadcec09223aafa3ab2b12353ca82ad15bab13213",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/15oT0n46K2pr6FeP1r9l8q12NFDoENf7ODu2AkCommeA/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-7",
+					"label": "RUBRIC"
+				}
+			]
+		},
+		{
+			"id": "1EjbEE3T_P7B3zdqMDzBQiND32LK0daSs3urwEsCz9qk",
+			"title": "Unit 3.8                                       Why is If-Else better on corners?",
+			"status": 200,
+			"sha256": "88d940ba5261648848c7e338d53c3bc6a84f2c0b729210ae7561ce48878bac88",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1EjbEE3T_P7B3zdqMDzBQiND32LK0daSs3urwEsCz9qk/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-8",
+					"label": "Reflection"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-8",
+					"label": "Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-8",
+					"label": "spicy handout."
+				}
+			]
+		},
+		{
+			"id": "1cKcDuW_hqbWigP6a3El0RtLJ3FThOh8YhlTlLoEY6RQ",
+			"title": "Name(s): ________________________________________                        Period: ________",
+			"status": 200,
+			"sha256": "afa08c2d927e5b1cdad9757e730a54a420eaa0ea45b9060189c1ebc87a206b04",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1cKcDuW_hqbWigP6a3El0RtLJ3FThOh8YhlTlLoEY6RQ/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-8",
+					"label": "RUBRIC"
+				}
+			]
+		},
+		{
+			"id": "1UbmnhvZk5W5QozeG9fNb4stb4mnv9vkrfrf6HKKrYMY",
+			"title": "CS1: 3.9 SlideShow",
+			"status": 200,
+			"sha256": "b19147ce58dca08b9e7146de07568fde0be8dc0c49830b761a5454eec1be2e3b",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1UbmnhvZk5W5QozeG9fNb4stb4mnv9vkrfrf6HKKrYMY/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-9",
+					"label": "RUBRIC"
+				}
+			]
+		},
+		{
+			"id": "1Fs1x2NiADnE0NWUcUUnp4NElcUX6kD1oApWdyolXWec",
+			"title": "Unit 3.9   If-Else Slideshow starter project Screen Shot 2017-10-23 at 10.21.09 AM.png",
+			"status": 200,
+			"sha256": "7b23cc4ae201d9367bfd81dc341cf3862b3b9de23e54cd4ef2f57fba5862c5c5",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1Fs1x2NiADnE0NWUcUUnp4NElcUX6kD1oApWdyolXWec/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-9",
+					"label": "student document"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-9",
+					"label": "Student handout"
+				}
+			]
+		},
+		{
+			"id": "1j-ES5Hcdee5KUd89T8VrQHfAk_HocJ-m0J1CkkHDljI",
+			"title": "Unit 3.10: Debugging: Conditionals                              https://scratch.mit.edu/studios/30323829",
+			"status": 200,
+			"sha256": "a932606c1254fdd91b3de582a3c60048fbe3c58bfc49fce7295fc806d480972a",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1j-ES5Hcdee5KUd89T8VrQHfAk_HocJ-m0J1CkkHDljI/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-10-assessments",
+					"label": "Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-10-recap-conditionals",
+					"label": "Five Debug Challenges"
+				}
+			]
+		},
+		{
+			"id": "14hPYzBLdg_62tDLzj8U6XxSpPfB-aAgrk5vZFJ-7bQ0",
+			"title": "MyCS: Unit 3.10? Check for Understanding",
+			"status": 200,
+			"sha256": "4a43707affbc58a47ffa22d7ac728a06b1da8fe47b1e7bfa77785743746100ab",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/14hPYzBLdg_62tDLzj8U6XxSpPfB-aAgrk5vZFJ-7bQ0/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit3/3-10-assessments",
+					"label": "Student handout"
+				}
+			]
+		},
+		{
+			"id": "1FgqiPQPmXPbB0TnD4sBIBKu-faDMjog52iP-v1GlS5A",
+			"title": "THE AMAZING MAZE !",
+			"status": 200,
+			"sha256": "d8c7fdb5f5926bc1a3ddbec591334128025b0c64dac742de514ea5a3d223f22a",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1FgqiPQPmXPbB0TnD4sBIBKu-faDMjog52iP-v1GlS5A/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-1",
+					"label": "Project Planner"
+				}
+			]
+		},
+		{
+			"id": "1DlwyTjlnMnyxrUn_YfOQjjfTUr-8S1G0fq8_fdj5X_M",
+			"title": "PseudoCode Maze",
+			"status": 200,
+			"sha256": "be78c8814ea6a7bb3ccb4213afeb17ef69f988a58180892f765a3ade00799885",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1DlwyTjlnMnyxrUn_YfOQjjfTUr-8S1G0fq8_fdj5X_M/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-1",
+					"label": "PseudoCode Scaffold"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit-4/m-1",
+					"label": "Planner - Eng"
+				}
+			]
+		},
+		{
+			"id": "1YNqyzh5LRBsdX_FgPialU3FlBbLvRs-B19NSr2Zi3V0",
+			"title": "Unit 4.1:   Controllers for a scratch maze game. (student reference sheet)",
+			"status": 200,
+			"sha256": "efa084cb08d2e38ee288fdfd69abf3d0ea70a90a5b5834c7bcd262607676bf35",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1YNqyzh5LRBsdX_FgPialU3FlBbLvRs-B19NSr2Zi3V0/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-1",
+					"label": "student handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit-4/m-1",
+					"label": "Handout - Eng"
+				}
+			]
+		},
+		{
+			"id": "1LvX4F0A7Cix1AKxnsvD5Z9xbX1tXHKJfRxFTOC-FAbA",
+			"title": "Unit 4.1  Spicy Challenges:  Smooth Controllers. (student reference sheet)",
+			"status": 200,
+			"sha256": "a943b2730e65fa38e19cf897ecec211837d95ee1facf69ad40624e459f0be191",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1LvX4F0A7Cix1AKxnsvD5Z9xbX1tXHKJfRxFTOC-FAbA/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-1",
+					"label": "student: Spicy Challenges"
+				}
+			]
+		},
+		{
+			"id": "1x1p_fdfe3Njyvf5SX79Xyk9o-7VecYQKhDTNZ75uzy8",
+			"title": "Name(s): _____________________________________________________________________                Period: _________",
+			"status": 200,
+			"sha256": "5a3253cb11c3256f9318bbfcaa063eaac1fcf67717a0e857fb694c0ca15213ec",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1x1p_fdfe3Njyvf5SX79Xyk9o-7VecYQKhDTNZ75uzy8/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-2",
+					"label": "RUBRIC"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-3",
+					"label": "RUBRIC"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-4",
+					"label": "RUBRIC"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit4/4-1",
+					"label": "RUBRIC"
+				}
+			]
+		},
+		{
+			"id": "12zRZm7b9AatEqtkm8fkT79Z9Biwy2C0i5OUprE_UBOc",
+			"title": "Maze.2:   Sensing in a scratch maze game. (student reference sheet)",
+			"status": 200,
+			"sha256": "8047dcb7a7b40f82f523fc5f9cf2a484142d80860515a51f102be1fa7405edda",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/12zRZm7b9AatEqtkm8fkT79Z9Biwy2C0i5OUprE_UBOc/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-2",
+					"label": "student handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit-4/m-2",
+					"label": "handout - Eng"
+				}
+			]
+		},
+		{
+			"id": "17uMJ7_yUyg8XOGuzZuJ5aYUXH3R4itqgaCgE6NIuSas",
+			"title": "Coding decisions",
+			"status": 200,
+			"sha256": "5a38e98d38c9c595ec9ddd90bccc4670fd517a09cc2ae3b98b8b42f3a98bc783",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/17uMJ7_yUyg8XOGuzZuJ5aYUXH3R4itqgaCgE6NIuSas/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-2",
+					"label": "here"
+				}
+			]
+		},
+		{
+			"id": "1NXNdibKfiVc_6-43SAn-TPgNugbSW7S4xlY7atYeHWM",
+			"title": "Unit 4.3:   Collecting treasure in maze. (student reference sheet)",
+			"status": 200,
+			"sha256": "a7815adcb59d030451284dbeb6eea23a5e12d6fc7ebd6029b38d4fead4082529",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1NXNdibKfiVc_6-43SAn-TPgNugbSW7S4xlY7atYeHWM/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-3",
+					"label": "student handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit-4/m-3",
+					"label": "handout -eng"
+				}
+			]
+		},
+		{
+			"id": "1AaYQfwHE6eD_iDlRswbHOIT_FKw0PRji5KnRJLAEkOU",
+			"title": "Unit 4.5: Debugging: Maze                                                /scratch.mit.edu/studios/3771549/",
+			"status": 200,
+			"sha256": "a0e8ed94c0f90aa20b346ba87376c579007a30e6319d4fc1cd33ce2efe6e5262",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1AaYQfwHE6eD_iDlRswbHOIT_FKw0PRji5KnRJLAEkOU/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-5",
+					"label": "Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit-4/m-5",
+					"label": "Five debug challenges"
+				}
+			]
+		},
+		{
+			"id": "1pqGcZYkS2yAGdXPIVfe-hr2ZZWT37XF9K71eOfPrbEk",
+			"title": "MyCS: Unit M.5 Check for Understanding:",
+			"status": 200,
+			"sha256": "c16440a467c796c1fac50d046e187ba2ec1c8ac9e5d6b070c13ddd901d8e2d74",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1pqGcZYkS2yAGdXPIVfe-hr2ZZWT37XF9K71eOfPrbEk/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/maze/4-5",
+					"label": "Student handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit4/4-5-assessments",
+					"label": "Student handout"
+				}
+			]
+		},
+		{
+			"id": "1U7-aTm7VISKWqhgJyOjHabnq3-r8DN9mFcXMwRB5oTU",
+			"title": "Name(s):                                                                                                          Date:",
+			"status": 200,
+			"sha256": "466fbd87fc0061d44d24adc8e46b91124e3f10e1cf7b17b0b0f5e02dbd4f0cbf",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1U7-aTm7VISKWqhgJyOjHabnq3-r8DN9mFcXMwRB5oTU/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit4/4-1",
+					"label": "CardsWorksheet"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit4/4-1",
+					"label": "worksheet"
+				}
+			]
+		},
+		{
+			"id": "1Hu_FP5gMZzQupz4Zk02uXqkKVShBVkLwBwKGmqrUR5w",
+			"title": "4.4 TRANSLATOR",
+			"status": 200,
+			"sha256": "451836794e7a0063584f5e70f246133b16bb9c51f110210b14338546564d0146",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1Hu_FP5gMZzQupz4Zk02uXqkKVShBVkLwBwKGmqrUR5w/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit4/4-4-translator",
+					"label": "student handout."
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit4/4-4-translator",
+					"label": "student handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit4/4-4",
+					"label": "handout -eng"
+				}
+			]
+		},
+		{
+			"id": "1w0XE2Ij79RROywYPcxHgxvpsTcPrTbq1mXpnugc_074",
+			"title": "Unit 4.5: Debugging: Booleans                                                        Scratch Studio",
+			"status": 200,
+			"sha256": "0482a52c562119ac14b02f3cfdc3dbfcc4268e664fb007bc48c7abf1cce041b2",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1w0XE2Ij79RROywYPcxHgxvpsTcPrTbq1mXpnugc_074/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit4/4-5-assessments",
+					"label": "Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit4/4-5",
+					"label": "Five debug challenges"
+				}
+			]
+		},
+		{
+			"id": "1k3jpQz6IaktsxgAQY8ifn-RdBEoKW2TiJUHkUABRQp0",
+			"title": "Scratch Mad Libs",
+			"status": 200,
+			"sha256": "f7e706efbe5bd1c9aa2764de9fd3e8e40a1288b55a92cc16637d1d1eff9e4e9f",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1k3jpQz6IaktsxgAQY8ifn-RdBEoKW2TiJUHkUABRQp0/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-1",
+					"label": "Student handout 5.2"
+				}
+			]
+		},
+		{
+			"id": "1f8xgRqBg2tXYPPV791oSmGP043sPGkVy8dmoDKypmUs",
+			"title": "CS1: 5.2 Mad Libs",
+			"status": 200,
+			"sha256": "d76fe64152d97374f0c99a0ed500ef78165feb47815e869f54aa0db75f3130fa",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1f8xgRqBg2tXYPPV791oSmGP043sPGkVy8dmoDKypmUs/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-2",
+					"label": "RUBRIC"
+				}
+			]
+		},
+		{
+			"id": "1ZH2t9YV3DouHkmkv74av4rZ2k764W26BXQJVMR6Dmp8",
+			"title": "Mad Libs",
+			"status": 200,
+			"sha256": "2c04818bf3f345e935510acc65246e4ab6fd4ff0299e172fdf36b5f461e006bc",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1ZH2t9YV3DouHkmkv74av4rZ2k764W26BXQJVMR6Dmp8/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-2",
+					"label": "story handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-2",
+					"label": "Planner"
+				}
+			]
+		},
+		{
+			"id": "1aXNC-6xB2NuYxRi2QL-_t4xxA6KlnTn2poS2leUZ6jw",
+			"title": "Unit 5.3:   Variable Score (student reference sheet)    Make your games more competitive!",
+			"status": 200,
+			"sha256": "5d220395a986da4cface359f7784e6b0584be33ca607efc77ede1104507b3580",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1aXNC-6xB2NuYxRi2QL-_t4xxA6KlnTn2poS2leUZ6jw/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-3",
+					"label": "Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-3",
+					"label": "Handout Page 1-2"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-3",
+					"label": "Handout Page 3"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-3",
+					"label": "handout - eng"
+				}
+			]
+		},
+		{
+			"id": "1IndE7HV_OyosVXBKzNXueV9yqDqcnoWktAFZuGvPikI",
+			"title": "Unit 5.7:   Multiplication Game",
+			"status": 200,
+			"sha256": "0e9ed225ab50929b5c55c30567ca2b620aba42aff35b82cfc3253d8e9de7b7da",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1IndE7HV_OyosVXBKzNXueV9yqDqcnoWktAFZuGvPikI/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-4",
+					"label": "Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-4",
+					"label": "student handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-4",
+					"label": "handout - eng"
+				}
+			]
+		},
+		{
+			"id": "1jAKqrBzHCyaSXRn9VHNh2GI-4TuWX5B2z1zmSmBwIo0",
+			"title": "CS1: 5.4 Multiplication Game",
+			"status": 200,
+			"sha256": "b2d3b2b6c028d4092e9070f79514c79b9440b3dc4610924b1e0d7a4214e9530c",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1jAKqrBzHCyaSXRn9VHNh2GI-4TuWX5B2z1zmSmBwIo0/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-4",
+					"label": "RUBRIC"
+				}
+			]
+		},
+		{
+			"id": "1XM2ATLDbnVtcqpq6n4NX_63feUsDSrDzLo1mYuU6VCc",
+			"title": "Unit 5.5: Debugging misconceptions with Variables and Lists.",
+			"status": 200,
+			"sha256": "0d12ad8821db2f89337b0fe19e8ddcb74eda488ffc9015756ad9491e2f12f906",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1XM2ATLDbnVtcqpq6n4NX_63feUsDSrDzLo1mYuU6VCc/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-5",
+					"label": "Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-5_1",
+					"label": "Five debug challenges"
+				}
+			]
+		},
+		{
+			"id": "1J8I92rMs-wCCzdN6TQ4T419ROQ0d0deNLNqk6AHttUM",
+			"title": "MyCS: Unit 5.5 Check for Understanding",
+			"status": 200,
+			"sha256": "d075e5ec1515edad010aa40bb9df02aaef3d6cf8b32a03b9aef9b2b045085ad4",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1J8I92rMs-wCCzdN6TQ4T419ROQ0d0deNLNqk6AHttUM/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-5",
+					"label": "Student handout"
+				}
+			]
+		},
+		{
+			"id": "15zUHbElB2LZZqtRr3i8wu3HPGdNliwvwghBDNCZBoI0",
+			"title": "Unit 5.6/5.7   Flappy Cat (student reference sheet)",
+			"status": 200,
+			"sha256": "b6078cbf82cc5d8d743fa58942c7a65c7d47d67c916e8833376dadd1a5e24f74",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/15zUHbElB2LZZqtRr3i8wu3HPGdNliwvwghBDNCZBoI0/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-6",
+					"label": "Student handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-6",
+					"label": "student handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-7",
+					"label": "Student Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-7",
+					"label": "student handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-6",
+					"label": "handout-eng"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-7",
+					"label": "handout - eng"
+				}
+			]
+		},
+		{
+			"id": "1mYREkQRvdhBY8cxvw61tzHXcjquf0HN6u9onbAPQ0FQ",
+			"title": "CS1: 5.6 / 5.7 Flappy Cat",
+			"status": 200,
+			"sha256": "fcba72a17e1c61b744f69fbcc062140b8694b262a99e90ab3a72208056cf7f0f",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1mYREkQRvdhBY8cxvw61tzHXcjquf0HN6u9onbAPQ0FQ/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-6",
+					"label": "RUBRIC"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-7",
+					"label": "RUBRIC"
+				}
+			]
+		},
+		{
+			"id": "1xLg5qV-ydnj4VErN3Y9qget3pxV0kX2tc8vnOJV9T2A",
+			"title": "Unit 5.10: Debugging: Lists                                               scratch.mit.edu/projects/537978682",
+			"status": 200,
+			"sha256": "37d10f21b42e8fd860fdabe17a32c8336cd76fcc285eb8b4d187742cf75929d6",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1xLg5qV-ydnj4VErN3Y9qget3pxV0kX2tc8vnOJV9T2A/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-10",
+					"label": "Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-5",
+					"label": "5.10 Five debug challenges"
+				}
+			]
+		},
+		{
+			"id": "1AILesZBOjZfVUozmmn3r34qybGeLNmh1VzeH3U7_Auk",
+			"title": "MyCS: Unit 5.10 Check for Understanding:",
+			"status": 200,
+			"sha256": "fa2680535ec8208bf57a092097535cead3e87a85dd27b5d09c24b6c17dd356e4",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1AILesZBOjZfVUozmmn3r34qybGeLNmh1VzeH3U7_Auk/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit5/5-10",
+					"label": "Student handout"
+				}
+			]
+		},
+		{
+			"id": "1upo-i8SrtqLb6E_3vYYT7jXCL5zS3T5k5Nr5zITHmF0",
+			"title": "Name(s): ________________________________________                        Period: ________",
+			"status": 200,
+			"sha256": "37bf2e783a827be52c3ba910b991edb2dd2b14d381d41804b4c972f2122b260e",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1upo-i8SrtqLb6E_3vYYT7jXCL5zS3T5k5Nr5zITHmF0/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-2",
+					"label": "Rubric"
+				}
+			]
+		},
+		{
+			"id": "1Oq00jrbYpOLSRNcK1Wwdzinie6fCaIp8mL0bMKI-tC4",
+			"title": "Name(s): ________________________________________                        Period: ________",
+			"status": 200,
+			"sha256": "83bc2d1f7b376ff8412963c303773b5c0b55d7ee2295c384a1286dd46770639c",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1Oq00jrbYpOLSRNcK1Wwdzinie6fCaIp8mL0bMKI-tC4/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-3",
+					"label": "RUBRIC"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-4",
+					"label": "Rubric 6.4"
+				}
+			]
+		},
+		{
+			"id": "1CdjFGD2v9hUcOGIVQ6p7v9nbo1l56-3MehLsEx66f8k",
+			"title": "Unit 6.3:   Make-a-block (two day project)            starter project.",
+			"status": 200,
+			"sha256": "5397ea73729825c50002150e1be5664e71704776feef276a240b39f9d1d942f7",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1CdjFGD2v9hUcOGIVQ6p7v9nbo1l56-3MehLsEx66f8k/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-4",
+					"label": "Student handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-3",
+					"label": "handout-eng"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-4",
+					"label": "student handout"
+				}
+			]
+		},
+		{
+			"id": "1BYPLblPUnLFLR_jZQE2snSgQO9xKcBqNuvvVaGNkzbg",
+			"title": "6.4 Flow of control: Make-a-block.",
+			"status": 200,
+			"sha256": "3a60408800fe933ba38ca5236f86926003e31045154e87fbfac4e1d87096a66e",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1BYPLblPUnLFLR_jZQE2snSgQO9xKcBqNuvvVaGNkzbg/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-4",
+					"label": "Flow of control"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-4",
+					"label": ""
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-4",
+					"label": "student handout"
+				}
+			]
+		},
+		{
+			"id": "1cnCju3S-sM-Yo21ERDy1Xr75oM4-mxfru99evwS8bHY",
+			"title": "Unit 6.5: Debugging misconceptions with Pen tool and Procedures",
+			"status": 200,
+			"sha256": "19d7af914fabf72f05e52d58bd6b6d24dba3f681dfd04d5d6fa32ef3b1c64243",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1cnCju3S-sM-Yo21ERDy1Xr75oM4-mxfru99evwS8bHY/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-5",
+					"label": "Handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-5",
+					"label": "6.5 Five debug challenges"
+				}
+			]
+		},
+		{
+			"id": "12waKVQ-LPt36bUu-71aQNMhF-Mji0gPi-JMxnwylmVI",
+			"title": "MyCS: Unit 6.5 Check for Understanding",
+			"status": 200,
+			"sha256": "e4beb42610d87a3df2796086e40593a1436de1e314730bfb12bf7357689d213a",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/12waKVQ-LPt36bUu-71aQNMhF-Mji0gPi-JMxnwylmVI/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-5",
+					"label": "Student handout"
+				}
+			]
+		},
+		{
+			"id": "1zR-BZ9ALxJjIjGDz2Lqg8_4sMf-dMd3tSV0YAFKL0Cw",
+			"title": "Name(s): ________________________________________                        Period: ________",
+			"status": 200,
+			"sha256": "6377d826ab4f8417cca3b5bb09373a425e08099fb7cc4e4206bd35a76167f9c7",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1zR-BZ9ALxJjIjGDz2Lqg8_4sMf-dMd3tSV0YAFKL0Cw/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-6",
+					"label": "RUBRIC"
+				}
+			]
+		},
+		{
+			"id": "1eKbW-za7odqu0w4k3mqLIuF379kByq5uk1dOc79QYu0",
+			"title": "Unit 6.6 Pen Art",
+			"status": 200,
+			"sha256": "6839869b223e207e65d4e0e444695f3d02887392da9ebb0aca90fcf9749920d7",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1eKbW-za7odqu0w4k3mqLIuF379kByq5uk1dOc79QYu0/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-6",
+					"label": "student handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-6",
+					"label": "handout"
+				}
+			]
+		},
+		{
+			"id": "1IKLCYMFcMm_sHWnOa2Cbs3xTllWWL6K_pxjBNYU0iwE",
+			"title": "Name(s): ________________________________________                        Period: ________",
+			"status": 200,
+			"sha256": "ac4206b24c4eb89f041eba462b69c865d9b3f9708fbe122c4e2748bd23763f45",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1IKLCYMFcMm_sHWnOa2Cbs3xTllWWL6K_pxjBNYU0iwE/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-7",
+					"label": "RUBRIC"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-8",
+					"label": "RUBRIC"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-9",
+					"label": "RUBRIC"
+				}
+			]
+		},
+		{
+			"id": "1Nycc1PwzjrmxU_AvyuBvDOxaIYPThLAtG6sMEmILudk",
+			"title": "Unit 6.7    Shape Maker",
+			"status": 200,
+			"sha256": "5476365748f83286dfac3c7d1e5291069906f9e1273a4093ddb4fc3aa8de68b2",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1Nycc1PwzjrmxU_AvyuBvDOxaIYPThLAtG6sMEmILudk/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-7",
+					"label": "handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-7",
+					"label": "ha"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-7",
+					"label": "ndout"
+				}
+			]
+		},
+		{
+			"id": "1wuV_farALjlanR8yS2zJtEgInzFeI0EGDQBkvIaNNzY",
+			"title": "6.8 CALLING A BLOCK  Make-a-block.",
+			"status": 200,
+			"sha256": "cee2662d6020435e68b47f2c93640e5bf1cbd7d648768774b516407399a80ab4",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1wuV_farALjlanR8yS2zJtEgInzFeI0EGDQBkvIaNNzY/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-8",
+					"label": "handout on lesson Concepts"
+				}
+			]
+		},
+		{
+			"id": "1PRsALX9D2rRj0CtZzcSSJN4piACZOvb2xq1m8iyAoyg",
+			"title": "Unit 6.8    Shape Maker  Part 2",
+			"status": 200,
+			"sha256": "d29055906624445332c8d736cf28d371e058aa312980418829ecfd6f751c74f1",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1PRsALX9D2rRj0CtZzcSSJN4piACZOvb2xq1m8iyAoyg/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-8",
+					"label": "student handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-8",
+					"label": "handout"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-8",
+					"label": "recap concepts"
+				},
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit-6/6-9",
+					"label": "recap concepts"
+				}
+			]
+		},
+		{
+			"id": "1bYUW4kkDbsg3ZsQ3QAGnMBvYmmx3E4cOu7pAkn1H--0",
+			"title": "Unit 6.10: Debugging: Functions                                        scratch.mit.edu/studios/31449694",
+			"status": 200,
+			"sha256": "515e621e8e6defd9795da557e54c37e0fb521da65ec385dbbb769e62b07af514",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1bYUW4kkDbsg3ZsQ3QAGnMBvYmmx3E4cOu7pAkn1H--0/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-10",
+					"label": "Handout"
+				}
+			]
+		},
+		{
+			"id": "1yBzcZO-9NfybYS04Toeg4mrsh8QumkG6I_8SaKT4oBY",
+			"title": "MyCS: Unit 6.10 Check for Understanding",
+			"status": 200,
+			"sha256": "c155783523093996353b80175fcfe9403b9cbf4662ae987ea59a64812234def3",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1yBzcZO-9NfybYS04Toeg4mrsh8QumkG6I_8SaKT4oBY/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs-teacher/unit6/6-10",
+					"label": "Student handout"
+				}
+			]
+		},
+		{
+			"id": "1ZLjT0l5iRFSgbQ3wacra9acXA814EH4yu4cbegExe84",
+			"title": "3.8  Line Follower                                Pseudocode:        1. If off course, adjust rotation.",
+			"status": 200,
+			"sha256": "b1fc994592492916768f19e4fca96130288b3d3d753c5c250e25a2f4a6f5d642",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1ZLjT0l5iRFSgbQ3wacra9acXA814EH4yu4cbegExe84/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit3/3-8",
+					"label": "handout - eng"
+				}
+			]
+		},
+		{
+			"id": "1KaXhBKGoMjlS0saJtKAUEIZ2tfdKsk2poQdqZ7MbStQ",
+			"title": "Maze.2:   Detección en un juego de laberinto de rasca y gana. (hoja de referencia del estudiante)",
+			"status": 200,
+			"sha256": "e7159cda287e250fe4b12ee82bc810da1779621a4471f489046c564f8d74e522",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1KaXhBKGoMjlS0saJtKAUEIZ2tfdKsk2poQdqZ7MbStQ/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit-4/m-2",
+					"label": "handout-Sp"
+				}
+			]
+		},
+		{
+			"id": "10jzyzSEgX07CkwTiis9LTmiJeyFYgZcBtXiFY35UYrw",
+			"title": "Student Unit 4.4 Bonus:   Maze Villains!",
+			"status": 200,
+			"sha256": "fa65e9374ccd7c2fb9c2471eed4da371c10f79379abbd001f99f0d77b8867f68",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/10jzyzSEgX07CkwTiis9LTmiJeyFYgZcBtXiFY35UYrw/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit-4/m-4",
+					"label": "handout -eng"
+				}
+			]
+		},
+		{
+			"id": "1-UfgFGGiWbZZBWEwUxHOnrETm0UJcq4dlEmdfqWSIXE",
+			"title": "Unit 4.2:  Rocket Ship Booleans (student reference sheet)",
+			"status": 200,
+			"sha256": "bd058be3f4d8a713514086a41cc0f1c819681ffb7f29eadca819b2623f2c3ad6",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1-UfgFGGiWbZZBWEwUxHOnrETm0UJcq4dlEmdfqWSIXE/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit4/4-2",
+					"label": "handout"
+				}
+			]
+		},
+		{
+			"id": "1ZsM1eW6HaWe3LuoxRpEJhA75fMvBcj8XeZPA6DVtRi8",
+			"title": "Unit 4.3:  Let’s Chat    Demo    Video",
+			"status": 200,
+			"sha256": "d105c108ee15e80949a895aebf086719efed02e057a1a6d3c3d263073c49bf2b",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1ZsM1eW6HaWe3LuoxRpEJhA75fMvBcj8XeZPA6DVtRi8/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit4/4-3",
+					"label": "handout-eng"
+				}
+			]
+		},
+		{
+			"id": "1JilJZz6QNhz9wdFV853qiq5eLx-da5eygxYeFhVkAIo",
+			"title": "Repeat Until",
+			"status": 200,
+			"sha256": "95df62836a8348c50729403189e7eabd1ef8a285d25d7b738e25a189f99e7151",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1JilJZz6QNhz9wdFV853qiq5eLx-da5eygxYeFhVkAIo/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit4/4-3",
+					"label": "example"
+				}
+			]
+		},
+		{
+			"id": "1kpr1gY1vZpzu-owkRO0I-ueM-0OrvJAcTaQiF-kh3YA",
+			"title": "4.4 TRADUCTOR",
+			"status": 200,
+			"sha256": "8b3f7733eeb1550e27eee9fbd52e28bbc69c97b3202bb8703c5ba385cba83d58",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1kpr1gY1vZpzu-owkRO0I-ueM-0OrvJAcTaQiF-kh3YA/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit4/4-4",
+					"label": "handout -sp"
+				}
+			]
+		},
+		{
+			"id": "1rlkOQwd1DNA_NC84Y-P-9llPrDx3pjt5szH_5XgcoCI",
+			"title": "Unit 5.2:   Mad Libs (student reference sheet)",
+			"status": 200,
+			"sha256": "b69b7f8988d009ff59a643be5bbfa014d3e5f2db3c1b5eeaf937c75400578aa8",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/1rlkOQwd1DNA_NC84Y-P-9llPrDx3pjt5szH_5XgcoCI/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-2",
+					"label": "handout-eng"
+				}
+			]
+		},
+		{
+			"id": "15SoHHZ0liNMq1AbHVL7uznX8TtEImd10JkuoFs8jU8Y",
+			"title": "Unit 5.8:  Checkout List.  Remix Starter project",
+			"status": 200,
+			"sha256": "a2f19a12611a7f15076a8b7dff17731969a98075355760a9bf80f087debd8024",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/15SoHHZ0liNMq1AbHVL7uznX8TtEImd10JkuoFs8jU8Y/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-8",
+					"label": "handout - Eng"
+				}
+			]
+		},
+		{
+			"id": "10Ad6lao6FTf83HaJiBX8JjXHzeHWxtyXW17FjEm_2aw",
+			"title": "Unit 5.9: Quiz.   quiz starter project.             Spicy starter using Broadcasts",
+			"status": 200,
+			"sha256": "3aeeb991814b64e86e186d092459c890a7b859595aec0a59f25b7b3caf4f8735",
+			"publication": "Reviewed for curriculum adaptation; original file not republished.",
+			"sourceUrl": "https://docs.google.com/document/d/10Ad6lao6FTf83HaJiBX8JjXHzeHWxtyXW17FjEm_2aw/edit",
+			"references": [
+				{
+					"page": "https://sites.google.com/a/sfusd.edu/mycs/unit5/5-9",
+					"label": "handout- eng"
+				}
+			]
+		}
+	],
+	"excludedDocumentOutcomes": {
+		"excluded-before-fetch": 29,
+		"excluded-after-content-review": 4,
+		"unavailable-as-anonymous-text-export": 2,
+		"already-collected-no-repeat-request": 1
+	},
+	"deferred": [
+		{
+			"item": "Original external Scratch project files",
+			"requiredInput": "The sourceProjects entries list exact IDs and source pages; supply cleared source archives or matching prior license evidence before local import/download publication."
+		},
+		{
+			"item": "Third-party music, videos, images and student Example Work",
+			"requiredInput": "Asset-specific author/rights information and school-safe permission. No music folders or student submissions copied."
+		},
+		{
+			"item": "Translate/Text-to-Speech and Spotify ScratchX service variants",
+			"requiredInput": "Separate approved product/privacy/network design. Current guides explicitly use local alternatives without those services."
+		},
+		{
+			"item": "Physical computing execution",
+			"requiredInput": "Required Makey Makey/micro:bit hardware, supervised setup, and approved external device toolchain. Optional in-course instructions are present, not a claimed local runtime."
+		},
+		{
+			"item": "Unavailable or stale legacy source URLs/folders",
+			"requiredInput": "Public corrected URL or authorized original file. Observed 404/401 is not proof of deletion."
+		}
+	]
+}

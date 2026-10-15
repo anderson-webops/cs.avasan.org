@@ -120,28 +120,54 @@ recovery flow, including session revocation and a no-enumeration response.
 Never create an Admin through HTTP, add student self-recovery, or introduce a
 shared/universal recovery code. Until then, use the operator tool.
 
-## To do later: the complete reference-teacher resource collection
+## Whole-source MyCS follow-through and remaining originals
 
-**Partially delivered, October 14:** the exact SFUSD MyCS Unit 1.4 teacher
-page is now identified and publicly reviewed. The existing Robot Dress-Up
-lesson includes a bounded, rewritten teaching guide with visible credit and
-CC BY-NC-SA 4.0 terms. The original twelve starters were already available;
-neither those files nor this guide constitute a complete site import. See the
-[source inventory](mycs-source-inventory.md).
+**Expanded implementation, October 14:** the user explicitly confirmed the
+whole teaching site, not only Unit 1.4. The source now includes 80 additional
+credited activities inside existing Scratch Level 1/2 modules. All 80
+instructional teacher pages are covered; 23 other teacher pages are reviewed
+indexes/dividers/resources. The review also follows 103 student URLs (82 public
+pages, 21 stale/unavailable) and 130 public curriculum documents. Existing
+Dress-Up, all twelve original core starters, course IDs and catalog remain
+intact. No new site, class or course is created. See the [full source inventory](mycs-source-inventory.md)
+and its machine-readable page/project/document ledger. Source implementation
+still needs the required final checks and release promotion before live claims.
 
-**Remaining input:** select additional pages/projects/files, provide authorized
-originals for inaccessible student pages/handouts, and review asset-specific
-reuse terms for external projects, images and videos. The class discussion
-included both sites; this update is limited to Julio's noncommercial classroom.
-Jacob-site publication requires a compatible noncommercial use or separate
-permission. Do not assume the teacher-page license covers linked third-party
-assets, another source, or proprietary Juni material.
+**Specifically to do later: original external Scratch files.** The ledger lists
+85 distinct linked project IDs and their actual source labels. Obtain cleared
+`.sb3`/`.sb2` originals, author/asset credits, and off-platform hosting/editing/
+download permission or matching historical license evidence. Priority
+CodeStart files are Dani `277396527`, Harper `277396802`, and Black Knight
+`277395587`. They are not the same IDs as the teacher's finished demos.
+Current Scratch terms do not establish a blanket off-platform grant for current
+files; a genuine prior CC grant needs version-specific evidence, not an
+assumption. No independently licensed publisher archive was located in the
+reviewed public collection. Once supplied, inspect every asset, import without
+account/cloud requirements, and test local opening, behavior, restart and
+download before publishing those exact files.
 
-**Then:** ingest only the approved scope, retain authorship and provenance,
-apply the required attribution and reuse terms, adapt the classroom structure,
-and verify every copied project/download on both destinations. Do not claim a
-complete mirror of a changing external website when only an original
-teaching adaptation has been supplied.
+**Specifically to do later: unavailable source material.** Supply corrected
+public URLs or authorized originals for remaining unavailable legacy pages/
+folders and the two 401 worksheet exports named in the source inventory.
+Do not describe all student pages or handouts as unavailable: most were
+successfully recovered, and the malformed Maze 4.4 link was repaired through
+the public student reference.
+
+**Specifically to do later: hardware, external services and media.** Physical
+activities need the named Makey Makey/micro:bit equipment, supervised setup
+and approved toolchain. Translate/Text-to-Speech and Spotify ScratchX variants
+need an explicit approved product/privacy/network design; current local phrase
+and sound activities are adaptations, not those services. Third-party images,
+videos, music and student Example Work need asset-specific rights and safety
+review. No answer keys, forms/responses, personal prompts or commercial music
+are republished.
+
+The class discussion included both sites, but this delivery remains limited to
+Julio's noncommercial classroom. Jacob-site reuse still requires a compatible
+noncommercial use or separate permission. Never propagate these marked
+noncommercial guides into the general upstream software license or claim a
+complete media/project mirror when the imported source consists of reviewed
+curriculum adaptations.
 
 ## Production handoff
 

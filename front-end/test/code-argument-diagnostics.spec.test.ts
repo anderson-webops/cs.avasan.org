@@ -1,17 +1,26 @@
 import { java } from "@codemirror/lang-java";
 import { python } from "@codemirror/lang-python";
+import {
+	ensureSyntaxTree,
+	syntaxTree,
+	syntaxTreeAvailable
+} from "@codemirror/language";
 import { EditorState } from "@codemirror/state";
 import { describe, expect, it } from "vitest";
 import { codeArgumentDiagnostics } from "../src/modules/codeArgumentDiagnostics";
 
 function diagnostics(code: string, language: "python" | "java" = "python") {
-	return codeArgumentDiagnostics(
-		EditorState.create({
-			doc: code,
-			extensions: [language === "python" ? python() : java()]
-		}),
-		language
-	);
+	let state = EditorState.create({
+		doc: code,
+		extensions: [language === "python" ? python() : java()]
+	});
+	// Initial parsing is time-sliced. Test diagnostics against a complete tree,
+	// then publish that parser context into the immutable editor state.
+	expect(ensureSyntaxTree(state, state.doc.length, 1000)).not.toBeNull();
+	state = state.update({}).state;
+	expect(syntaxTreeAvailable(state, state.doc.length)).toBe(true);
+	expect(syntaxTree(state).length).toBe(state.doc.length);
+	return codeArgumentDiagnostics(state, language);
 }
 
 describe("required arguments before execution", () => {
@@ -193,10 +202,11 @@ draw()
 		).toEqual([]);
 	});
 	it("bounds work for oversized documents", () => {
-		expect(
-			diagnostics(
-				`${"# filler\n".repeat(25000)}def draw(x): pass\ndraw()`
-			)
-		).toEqual([]);
+		const state = EditorState.create({
+			doc: `${"# filler\n".repeat(25000)}def draw(x): pass\ndraw()`,
+			extensions: [python()]
+		});
+		// Exercise the size guard without forcing the expensive parse it avoids.
+		expect(codeArgumentDiagnostics(state, "python")).toEqual([]);
 	});
 });

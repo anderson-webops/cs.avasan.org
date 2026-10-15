@@ -6,6 +6,7 @@ import { createPinia, setActivePinia } from "pinia";
 import { describe, expect, it } from "vitest";
 import { publicCatalogStarterSharePath } from "@/modules/starterShareLink";
 import { useCoursesStore } from "@/stores/courses";
+import scratchStarters from "../scripts/scratch/projects.json";
 
 function catalogItem(projectLink?: string, courseID = "scratch-level-1") {
 	const item: CourseModuleItem = {
@@ -118,11 +119,12 @@ describe("public classroom starter sharing", () => {
 		}
 	});
 
-	it("supports the actual thirteen Scratch launches and current Python-family templates", async () => {
+	it("supports thirteen original Scratch starters and current Python-family templates", async () => {
 		setActivePinia(createPinia());
 		const store = useCoursesStore();
 		for (const courseID of [
 			"scratch-level-1",
+			"scratch-level-2",
 			"python-level-1",
 			"python-level-2",
 			"pygames"
@@ -136,7 +138,19 @@ describe("public classroom starter sharing", () => {
 				])
 				.filter(item => item.projectLink?.startsWith("/ide?"));
 			expect(items.length).toBeGreaterThan(0);
-			if (courseID === "scratch-level-1") expect(items).toHaveLength(13);
+			if (courseID === "scratch-level-1") {
+				// Supplemental guides may reuse a starter, not add new originals.
+				expect(
+					items.filter(item => item.learningPath === "core")
+				).toHaveLength(13);
+				expect(
+					[...new Set(items.map(item => item.projectLink))].sort()
+				).toEqual(
+					["blank", ...scratchStarters.map(starter => starter.id)]
+						.map(starter => `/ide?mode=scratch&starter=${starter}`)
+						.sort()
+				);
+			}
 			for (const item of items) {
 				expect(
 					publicCatalogStarterSharePath(course, item),
