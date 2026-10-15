@@ -39,14 +39,19 @@ context("MyCS choices in the existing public classroom courses", () => {
 			cy.viewport(width, 900);
 			for (const guide of guideScenarios) {
 				cy.visit(`/#${guide.courseId}`);
+					cy.get("#app[data-v-app]").should("exist");
 				cy.get("#course-select").should("have.value", guide.courseId);
 				cy.get("#course-select option").should("have.length", 5);
 				if (width === 390) {
 					cy.get("button.outline-toggle")
 						.should("be.visible")
 						.should("have.attr", "aria-expanded", "false")
-						.click()
-						.should("have.attr", "aria-expanded", "true");
+						.click();
+					cy.get("button.outline-toggle").should(
+						"have.attr",
+						"aria-expanded",
+						"true"
+					);
 				}
 				cy.contains(".outline-button", guide.moduleTitle)
 					.scrollIntoView()
@@ -65,7 +70,9 @@ context("MyCS choices in the existing public classroom courses", () => {
 				}
 				cy.get(".lesson-view-toggle")
 					.contains("button", "Supplemental Projects")
-					.click()
+					.click();
+				cy.get(".lesson-view-toggle")
+					.contains("button", "Supplemental Projects")
 					.should("have.attr", "aria-pressed", "true");
 
 				cy.contains(".lesson-card h5", guide.title)
