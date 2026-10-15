@@ -1,4 +1,6 @@
 import { readFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import starters from "../scripts/scratch/projects.json";
 import {
@@ -22,7 +24,10 @@ interface SourcePage {
 }
 const inventory = JSON.parse(
 	readFileSync(
-		new URL("../../docs/mycs-source-inventory.json", import.meta.url),
+		resolve(
+			dirname(fileURLToPath(import.meta.url)),
+			"../../docs/mycs-source-inventory.json"
+		),
 		"utf8"
 	)
 ) as {

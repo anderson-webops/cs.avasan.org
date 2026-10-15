@@ -149,7 +149,7 @@ In this optional physical activity with Julio, explore a Makey Makey acting as a
 Predict which supplied objects will act as controls. With Julio supervising setup, test each object, record the result, and explain how completing the circuit triggers an input. Follow the device's safety guidance.
 
 ### Hard
-Design a simple controller that someone else can use comfortably. Have them test it and suggest an improvement.
+Design a simple controller that someone else can use comfortably. Invite a partner to test it and suggest an improvement.
 
 ### Check
 Separate the physical input from the program's response. This activity needs equipment and setup with Julio; it is not a project the classroom editor can supply by itself.`

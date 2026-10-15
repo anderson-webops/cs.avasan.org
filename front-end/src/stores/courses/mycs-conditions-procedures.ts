@@ -214,7 +214,7 @@ export const myCsConditionsProcedures: MyCsLesson[] = [
 		starter: "blank",
 		content: `**Model:** Write two short original fictional sentences and replace two words with general labels such as Animal and Action. Do not copy a published story, song lyric or commercial activity sheet.
 
-**Build:** Ask for one pretend word, immediately store answer in a named variable, then ask for the second word and store it separately. Use join blocks to tell the completed story.
+**Build:** Ask for one pretend word and immediately store answer in a named variable. Prompt for the second word and store it separately. Use join blocks to tell the completed story.
 
 **Hard:** Add a third blank or offer preset word choices. Keep each stored value separate from the answer reporter, which changes after every question.
 
