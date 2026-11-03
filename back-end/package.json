@@ -43,7 +43,7 @@
 		"mongoose": "^9.8.1",
 		"openid-client": "^6.8.4",
 		"readline-sync": "^1.4.10",
-		"zod": "^4.3.6"
+		"zod": "^4.6.6"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^2.0.3",
