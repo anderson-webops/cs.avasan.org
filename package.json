@@ -59,7 +59,7 @@
 		"postcss": "8.5.26",
 		"shell-quote": "1.10.0",
 		"svgo": "4.0.2",
-		"systeminformation": "5.33.1",
+		"systeminformation": "5.33.19",
 		"tar": "7.5.22",
 		"valibot": "1.4.2",
 		"@vue/language-core": {
