@@ -40,7 +40,7 @@
 		"express-rate-limit": "^8.6.1",
 		"helmet": "^8.3.0",
 		"jose": "^6.2.4",
-		"mongoose": "^9.8.1",
+		"mongoose": "^9.11.4",
 		"openid-client": "^6.8.4",
 		"readline-sync": "^1.4.10",
 		"zod": "^4.3.6"
